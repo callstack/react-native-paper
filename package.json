@@ -1,0 +1,23 @@
+{
+  "name": "react-native-paper",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "flow": "flow",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahmedlhanafy/react-native-paper.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ahmedlhanafy/react-native-paper/issues"
+  },
+  "homepage": "https://github.com/ahmedlhanafy/react-native-paper#readme",
+  "devDependencies": {
+    "flow-bin": "^0.33.0"
+  }
+}
