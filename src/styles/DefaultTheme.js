@@ -4,7 +4,7 @@ import {
   indigo500,
   indigo700,
   pinkA200
-} from './styles/colors';
+} from './colors';
 
 const DefaultTheme = () => {
     return {
