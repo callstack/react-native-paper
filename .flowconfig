@@ -1,7 +1,7 @@
 [ignore]
 
 # Ignore node_modules folder
-.node_modules
+<PROJECT_ROOT>/node_modules
 <PROJECT_ROOT>/ReactNativePaperExample
 
 [version]
