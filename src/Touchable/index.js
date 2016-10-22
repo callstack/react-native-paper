@@ -1,1 +1,1 @@
-export default from './Touchable';
+export Touchable from './Touchable';
