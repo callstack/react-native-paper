@@ -1,1 +1,1 @@
-export Touchable from './Touchable';
+export {default as Touchable} from './Touchable';

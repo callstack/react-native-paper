@@ -12,25 +12,31 @@ export default class Touchable extends Component{
 
   static propTypes = {
     children: PropTypes.element.isRequired,
+    borderLess: PropTypes.bool,
     onPress: PropTypes.func,
-    rippleColor: PropTypes.string
+    rippleColor: PropTypes.string,
+    contentStyle: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.array,
+    ])
   };
-
-  static contextTypes = {
-    theme: PropTypes.object,
-  };
+  static defaultProps = {
+    borderLess: false,
+  }
 
   render() {
     const {
       children,
       onPress,
-      rippleColor
+      rippleColor,
+      borderLess,
+      contentStyle
      } = this.props;
     return (
         <TouchableNativeFeedback
           onPress={onPress}
-          background={TouchableNativeFeedback.Ripple(rippleColor, true)}>
-          <View>
+          background={TouchableNativeFeedback.Ripple(rippleColor, borderLess)}>
+          <View style={contentStyle}>
             {children}
           </View>
         </TouchableNativeFeedback>
