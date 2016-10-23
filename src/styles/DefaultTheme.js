@@ -7,7 +7,9 @@ import {
 } from './colors';
 
 export default {
-  primaryColor: indigo500,
-  primaryDarkColor: indigo700,
-  accentColor: pinkA200,
+  colors: {
+    primary: indigo500,
+    primaryDark: indigo700,
+    accent: pinkA200,
+  },
 };
