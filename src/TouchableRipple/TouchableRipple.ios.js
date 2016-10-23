@@ -8,17 +8,17 @@ import {
   View,
 } from 'react-native';
 
-export default class Touchable extends Component {
+export default class TouchableRipple extends Component {
 
   static propTypes = {
     children: PropTypes.element.isRequired,
-    borderLess: PropTypes.bool,
+    borderless: PropTypes.bool,
     onPress: PropTypes.func,
     rippleColor: PropTypes.string,
     style: View.propTypes.style,
   };
   static defaultProps = {
-    borderLess: false,
+    borderless: false,
   }
 
   render() {

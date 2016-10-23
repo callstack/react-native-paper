@@ -2,23 +2,24 @@
 import React, {
   Component,
   PropTypes,
+  Platform,
 } from 'react';
 import {
   TouchableNativeFeedback,
   View,
 } from 'react-native';
 
-export default class Touchable extends Component {
+export default class TouchableRipple extends Component {
 
   static propTypes = {
     children: PropTypes.element.isRequired,
-    borderLess: PropTypes.bool,
+    borderless: PropTypes.bool,
     onPress: PropTypes.func,
     rippleColor: PropTypes.string,
     style: View.propTypes.style,
   };
   static defaultProps = {
-    borderLess: false,
+    borderless: false,
   }
 
   render() {
@@ -26,13 +27,15 @@ export default class Touchable extends Component {
       children,
       onPress,
       rippleColor,
-      borderLess,
+      borderless,
       style,
      } = this.props;
     return (
         <TouchableNativeFeedback
           onPress={onPress}
-          background={TouchableNativeFeedback.Ripple(rippleColor, borderLess)}
+          background={Platform.Version >= 21 ?
+            TouchableNativeFeedback.Ripple(rippleColor, borderless) :
+            TouchableNativeFeedback.SelectableBackground()}
         >
           <View style={style}>
             {children}

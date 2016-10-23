@@ -6,19 +6,19 @@ import {
   View,
 } from 'react-native';
 import {
-  Touchable,
+  TouchableRipple,
 } from 'react-native-paper';
 
 class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Touchable
+        <TouchableRipple
           borderLess={false}
           rippleColor='blue'
         >
-          <Text>Touchable</Text>
-        </Touchable>
+          <Text>TouchableRipple</Text>
+        </TouchableRipple>
       </View>
     );
   }
