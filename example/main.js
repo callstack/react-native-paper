@@ -1,27 +1,24 @@
-import Exponent from 'exponent';
-import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+/* @flow */
 
-class App extends React.Component {
+import Exponent from 'exponent';
+import React, { Component } from 'react';
+import {
+  NavigationProvider,
+  StackNavigation,
+} from '@exponent/ex-navigation';
+import { ThemeProvider } from 'react-native-paper';
+import Router from './src/Router';
+
+class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>React Native Paper will rock :D</Text>
-      </View>
+      <ThemeProvider>
+        <NavigationProvider router={Router}>
+          <StackNavigation initialRoute={Router.getRoute('home')} />
+        </NavigationProvider>
+      </ThemeProvider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 24,
-    alignItems: 'center',
-  },
-});
 
 Exponent.registerRootComponent(App);
