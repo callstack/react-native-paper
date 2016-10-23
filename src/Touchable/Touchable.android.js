@@ -1,24 +1,24 @@
 // @flow
 import React, {
   Component,
-  PropTypes
+  PropTypes,
 } from 'react';
 import {
   TouchableNativeFeedback,
-  View
+  View,
 } from 'react-native';
 
-export default class Touchable extends Component{
+export default class Touchable extends Component {
 
   static propTypes = {
     children: PropTypes.element.isRequired,
     borderLess: PropTypes.bool,
     onPress: PropTypes.func,
     rippleColor: PropTypes.string,
-    contentStyle: PropTypes.oneOfType([
+    style: PropTypes.oneOfType([
       PropTypes.object,
       PropTypes.array,
-    ])
+    ]),
   };
   static defaultProps = {
     borderLess: false,
@@ -30,13 +30,14 @@ export default class Touchable extends Component{
       onPress,
       rippleColor,
       borderLess,
-      contentStyle
+      style,
      } = this.props;
     return (
         <TouchableNativeFeedback
           onPress={onPress}
-          background={TouchableNativeFeedback.Ripple(rippleColor, borderLess)}>
-          <View style={contentStyle}>
+          background={TouchableNativeFeedback.Ripple(rippleColor, borderLess)}
+        >
+          <View style={style}>
             {children}
           </View>
         </TouchableNativeFeedback>
