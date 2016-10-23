@@ -1,23 +1,23 @@
 // @flow
 import React, {
   Component,
-  PropTypes
+  PropTypes,
 } from 'react';
 import {
   TouchableHighlight,
 } from 'react-native';
 
-export default class Touchable extends Component{
+export default class Touchable extends Component {
 
   static propTypes = {
     children: PropTypes.element.isRequired,
     borderLess: PropTypes.bool,
     onPress: PropTypes.func,
     rippleColor: PropTypes.string,
-    contentStyle: PropTypes.oneOfType([
+    style: PropTypes.oneOfType([
       PropTypes.object,
       PropTypes.array,
-    ])
+    ]),
   };
   static defaultProps = {
     borderLess: false,
@@ -28,14 +28,14 @@ export default class Touchable extends Component{
       children,
       onPress,
       rippleColor,
-      borderLess,
-      contentStyle
+      style,
      } = this.props;
     return (
         <TouchableHighlight
-          style={contentStyle}
+          style={style}
           underlayColor={rippleColor}
-          onPress={onPress}>
+          onPress={onPress}
+        >
           {children}
         </TouchableHighlight>
     );
