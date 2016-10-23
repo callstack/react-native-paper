@@ -1,24 +1,14 @@
 {
   "name": "react-native-paper-example",
   "version": "0.0.1",
+  "description": "Examble for React Native Paper",
+  "author": "",
   "private": true,
-  "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
-  },
+  "main": "main.js",
   "dependencies": {
-    "react": "15.3.2",
-    "react-native": "0.35.0",
+    "exponent": "^10.0.4",
+    "react": "~15.3.2",
+    "react-native": "github:exponentjs/react-native#sdk-10.1.2",
     "react-native-paper": "file:../"
-  },
-  "devDependencies": {
-    "babel-jest": "16.0.0",
-    "babel-preset-react-native": "1.9.0",
-    "jest": "16.0.2",
-    "jest-react-native": "16.0.0",
-    "react-test-renderer": "15.3.2"
-  },
-  "jest": {
-    "preset": "jest-react-native"
   }
 }
