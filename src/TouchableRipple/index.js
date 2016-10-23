@@ -1,1 +1,1 @@
-export { default as TouchableRipple } from './TouchableRipple';
+export default from './TouchableRipple';

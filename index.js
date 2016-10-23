@@ -1,3 +1,3 @@
 // @flow
 export { default as ThemeProvider } from './src/styles/ThemeProvider';
-export { TouchableRipple } from './src/TouchableRipple';
+export { default as TouchableRipple } from './src/TouchableRipple';
