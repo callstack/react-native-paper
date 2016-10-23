@@ -1,5 +1,5 @@
 {
-  "name": "ReactNativePaperExample",
+  "name": "react-native-paper-example",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -9,10 +9,7 @@
   "dependencies": {
     "react": "15.3.2",
     "react-native": "0.35.0",
-    "react-native-paper": "git+ssh://git@github.com/ahmedlhanafy/react-native-paper.git"
-  },
-  "jest": {
-    "preset": "jest-react-native"
+    "react-native-paper": "file:../"
   },
   "devDependencies": {
     "babel-jest": "16.0.0",
@@ -20,5 +17,8 @@
     "jest": "16.0.2",
     "jest-react-native": "16.0.0",
     "react-test-renderer": "15.3.2"
+  },
+  "jest": {
+    "preset": "jest-react-native"
   }
 }
