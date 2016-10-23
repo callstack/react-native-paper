@@ -5,20 +5,12 @@ import {
   Text,
   View,
 } from 'react-native';
-import {
-  TouchableRipple,
-} from 'react-native-paper';
 
 class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableRipple
-          borderLess={false}
-          rippleColor='blue'
-        >
-          <Text>TouchableRipple</Text>
-        </TouchableRipple>
+        <Text>React Native Paper will rock :D</Text>
       </View>
     );
   }
