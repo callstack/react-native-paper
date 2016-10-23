@@ -2,7 +2,7 @@
 
 import {
   Component,
-  PropTypes
+  PropTypes,
 } from 'react';
 import DefaultTheme from './DefaultTheme';
 
