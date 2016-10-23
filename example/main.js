@@ -10,7 +10,7 @@ class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up main.js to start working on your app!</Text>
+        <Text>React Native Paper will rock :D</Text>
       </View>
     );
   }
@@ -19,9 +19,8 @@ class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    marginTop: 24,
     alignItems: 'center',
-    justifyContent: 'center',
   },
 });
 
