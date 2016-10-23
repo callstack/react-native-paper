@@ -7,6 +7,8 @@ import {
 } from 'react';
 import DefaultTheme from '../styles/DefaultTheme';
 
+export const theme = 'react-native-paper$theme';
+
 export default class ThemeProvider extends Component {
 
   static propTypes = {
@@ -15,12 +17,12 @@ export default class ThemeProvider extends Component {
   };
 
   static childContextTypes = {
-    theme: PropTypes.object,
+    [theme]: PropTypes.object,
   };
 
   getChildContext() {
     return {
-      theme: this.props.theme || DefaultTheme,
+      [theme]: this.props.theme || DefaultTheme,
     };
   }
 
