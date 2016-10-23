@@ -15,10 +15,7 @@ export default class Touchable extends Component {
     borderLess: PropTypes.bool,
     onPress: PropTypes.func,
     rippleColor: PropTypes.string,
-    style: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.array,
-    ]),
+    style: View.propTypes.style,
   };
   static defaultProps = {
     borderLess: false,
