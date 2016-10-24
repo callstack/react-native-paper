@@ -15,7 +15,7 @@ type Props = {
   theme?: any;
 }
 
-export default function withTextProps<T>(fontFamily: string, fontSize: number): ReactClass<T> {
+export default function createStyledText<T>(fontFamily: string, fontSize: number): ReactClass<T> {
 
   return class extends Component<void, Props, void> {
     static propTypes = {

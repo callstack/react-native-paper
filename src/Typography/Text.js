@@ -2,8 +2,8 @@
 
 import withTheme from '../core/withTheme';
 import fonts from '../styles/fonts';
-import withTextProps from './withTextProps';
+import createStyledText from './createStyledText';
 
-const Text = withTextProps(fonts.regular, 16);
+const Text = createStyledText(fonts.regular, 16);
 
 export default withTheme(Text);

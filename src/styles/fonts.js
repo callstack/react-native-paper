@@ -2,13 +2,13 @@ import {
   Platform,
 } from 'react-native';
 
-const isAndroid = Platform.OS === 'android';
+const isIOS = Platform.OS === 'ios';
 
 const fonts = {
-  regular: isAndroid ? 'sans-serif' : 'Helvetica Neue',
-  medium: isAndroid ? 'sans-serif-medium' : 'HelveticaNeue-Medium',
-  light: isAndroid ? 'sans-serif-light' : 'HelveticaNeue-Light',
-  thin: isAndroid ? 'sans-serif-thin' : 'HelveticaNeue-Thin',
+  regular: isIOS ? 'Helvetica Neue' : 'sans-serif',
+  medium: isIOS ? 'HelveticaNeue-Medium' : 'sans-serif-medium',
+  light: isIOS ? 'HelveticaNeue-Light' : 'sans-serif-light',
+  thin: isIOS ? 'HelveticaNeue-Thin' : 'sans-serif-thin',
 };
 
 export default fonts;

@@ -2,8 +2,8 @@
 
 import withTheme from '../core/withTheme';
 import fonts from '../styles/fonts';
-import withTextProps from './withTextProps';
+import createStyledText from './createStyledText';
 
-const Subheading = withTextProps(fonts.medium, 20);
+const Subheading = createStyledText(fonts.medium, 20);
 
 export default withTheme(Subheading);

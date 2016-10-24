@@ -1,4 +1,5 @@
 /* @flow */
+
 import color from 'color';
 import {
   indigo500,
