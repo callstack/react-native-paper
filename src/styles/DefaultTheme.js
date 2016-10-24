@@ -13,8 +13,8 @@ export default {
     primary: indigo500,
     primaryDark: indigo700,
     accent: pinkA200,
-    primaryText: black,
+    text: black,
     secondaryText: color(black).alpha(0.7).rgbaString(),
-    disabledText: color(black).alpha(0.5).rgbaString(),
+    disabled: color(black).alpha(0.5).rgbaString(),
   },
 };

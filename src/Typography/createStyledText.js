@@ -33,7 +33,7 @@ export default function createStyledText<T>(fontFamily: string, fontSize: number
 
       return (
         <Text
-          style={[ { color: theme.primaryText, fontFamily, fontSize }, style ]}
+          style={[ { color: theme.text, fontFamily, fontSize }, style ]}
           {...this.props}
         >
           {children}
