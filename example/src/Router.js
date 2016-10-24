@@ -15,7 +15,7 @@ const routes = Object.keys(examples)
     Screen.route = {
       navigationBar: {
         title: Comp.title,
-      }
+      },
     };
 
     return {

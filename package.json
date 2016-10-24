@@ -35,5 +35,8 @@
     "flow-bin": "^0.32.0",
     "react": "latest",
     "react-native": "latest"
+  },
+  "dependencies": {
+    "color": "^0.11.3"
   }
 }
