@@ -1,6 +1,9 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import React, {
+  Component,
+  PropTypes,
+ } from 'react';
 import {
   View,
   Text,
@@ -8,9 +11,11 @@ import {
 } from 'react-native';
 import { Colors, TouchableRipple } from 'react-native-paper';
 import RipplesExample from './RipplesExample';
+import TextExamples from './TextExamples';
 
 export const examples = {
   ripples: RipplesExample,
+  text: TextExamples,
 };
 
 export default class ExampleList extends Component {
@@ -19,6 +24,10 @@ export default class ExampleList extends Component {
     navigationBar: {
       title: 'Examples',
     },
+  };
+
+  static propTypes = {
+    navigator: PropTypes.object,
   };
 
   render() {
