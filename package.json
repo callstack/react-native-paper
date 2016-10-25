@@ -24,7 +24,7 @@
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
-    "@exponent/vector-icons": "*"
+    "react-native-vector-icons": "*"
   },
   "devDependencies": {
     "babel-eslint": "^7.0.0",
