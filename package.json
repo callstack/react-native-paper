@@ -23,7 +23,8 @@
   "homepage": "https://github.com/ahmedlhanafy/react-native-paper#readme",
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-vector-icons": "*"
   },
   "devDependencies": {
     "babel-eslint": "^7.0.0",
