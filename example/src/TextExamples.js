@@ -11,22 +11,20 @@ import {
   Paragraph,
   Subheading,
   Title,
-  Text,
 } from 'react-native-paper';
 
 export default class TextExamples extends Component {
 
-  static title = 'Text Examples';
+  static title = 'Typography';
 
   render() {
     return (
       <View style={styles.container}>
-        <Caption>Caption</Caption>
-        <Headline>Headline</Headline>
-        <Paragraph>Paragraph</Paragraph>
-        <Subheading>Subheading</Subheading>
-        <Title>Title</Title>
-        <Text>Default Text</Text>
+        <Caption style={styles.text}>Caption</Caption>
+        <Paragraph style={styles.text}>Paragraph</Paragraph>
+        <Subheading style={styles.text}>Subheading</Subheading>
+        <Title style={styles.text}>Title</Title>
+        <Headline style={styles.text}>Headline</Headline>
       </View>
     );
   }
@@ -34,5 +32,8 @@ export default class TextExamples extends Component {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
+  },
+  text: {
+    marginVertical: 4,
   },
 });
