@@ -6,7 +6,7 @@ import {
   NavigationProvider,
   StackNavigation,
 } from '@exponent/ex-navigation';
-import { ThemeProvider } from 'react-native-paper';
+import { Colors, ThemeProvider } from 'react-native-paper';
 import Router from './src/Router';
 
 class App extends Component {
@@ -14,7 +14,16 @@ class App extends Component {
     return (
       <ThemeProvider>
         <NavigationProvider router={Router}>
-          <StackNavigation initialRoute={Router.getRoute('home')} />
+          <StackNavigation
+            defaultRouteConfig={{
+              navigationBar: {
+                title: 'Examples',
+                tintColor: Colors.white,
+                backgroundColor: Colors.indigo500,
+              },
+            }}
+            initialRoute={Router.getRoute('home')}
+          />
         </NavigationProvider>
       </ThemeProvider>
     );
