@@ -11,10 +11,12 @@ import {
 } from 'react-native';
 import { Colors, TouchableRipple } from 'react-native-paper';
 import RipplesExample from './RipplesExample';
+import PaperExample from './PaperExample';
 import TextExamples from './TextExamples';
 
 export const examples = {
   ripples: RipplesExample,
+  paper: PaperExample,
   text: TextExamples,
 };
 
