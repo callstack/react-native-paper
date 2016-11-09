@@ -29,6 +29,8 @@
 .*/example/node_modules/react
 .*/example/node_modules/react-native
 .*/example/node_modules/exponent
+.*/example/node_modules/@exponent
+.*/example/node_modules/fbemitter
 .*/example/\.buckd/
 
 [include]
