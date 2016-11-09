@@ -30,10 +30,11 @@ export default function createStyledText<T>(fontFamily: string, fontSize: number
         children,
         style,
       } = this.props;
+      const color = theme ? theme.text : 'black';
 
       return (
         <Text
-          style={[ { color: theme.text, fontFamily, fontSize }, style ]}
+          style={[ { color, fontFamily, fontSize }, style ]}
           {...this.props}
         >
           {children}
