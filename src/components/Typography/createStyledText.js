@@ -5,8 +5,8 @@ import React, {
   PropTypes,
 } from 'react';
 import {
-    View,
-    Text,
+  View,
+  Text,
 } from 'react-native';
 
 type Props = {
