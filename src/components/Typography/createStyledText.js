@@ -8,6 +8,7 @@ import {
   View,
   Text,
 } from 'react-native';
+import { black } from '../../styles/colors';
 
 type Props = {
   children?: any;
@@ -30,7 +31,7 @@ export default function createStyledText<T>(fontFamily: string, fontSize: number
         children,
         style,
       } = this.props;
-      const color = theme ? theme.text : 'black';
+      const color = theme ? theme.text : black;
 
       return (
         <Text
