@@ -1,9 +1,10 @@
 /* @flow */
 
-import withTheme from '../../core/withTheme';
-import fonts from '../../styles/fonts';
 import createStyledText from './createStyledText';
 
-const Subheading = createStyledText(fonts.regular, 14);
-
-export default withTheme(Subheading);
+export default createStyledText('Paragraph', {
+  fontSize: 14,
+  lineHeight: 20,
+  alpha: 0.87,
+  family: 'regular',
+});
