@@ -1,8 +1,8 @@
 {
-  "name": "react-native-paper-example",
+  "name": "React Native Paper Example",
   "description": "Example for React Native Paper",
   "slug": "react-native-paper-example",
-  "sdkVersion": "10.0.0",
+  "sdkVersion": "11.0.0",
   "version": "1.0.0",
   "orientation": "portrait",
   "primaryColor": "#cccccc",
