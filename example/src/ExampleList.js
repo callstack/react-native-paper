@@ -10,6 +10,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { Colors, TouchableRipple } from 'react-native-paper';
+import CardExample from './CardExample';
 import RippleExample from './RippleExample';
 import PaperExample from './PaperExample';
 import TextExample from './TextExample';
@@ -19,6 +20,7 @@ export const examples = {
   ripple: RippleExample,
   paper: PaperExample,
   text: TextExample,
+  card: CardExample,
   button: ButtonsExample,
 };
 
@@ -54,6 +56,7 @@ export default class ExampleList extends Component {
 const styles = StyleSheet.create({
   item: {
     padding: 16,
+    backgroundColor: Colors.white,
     borderBottomColor: Colors.grey300,
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
