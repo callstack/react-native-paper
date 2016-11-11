@@ -8,6 +8,7 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
+import color from 'color';
 
 type Props = {
   borderless: boolean;
@@ -39,6 +40,7 @@ export default class TouchableRipple extends Component<DefaultProps, Props, void
 
   static defaultProps = {
     borderless: false,
+    rippleColor: 'rgba(0, 0, 0, .32)',
   }
 
   render() {
@@ -55,7 +57,7 @@ export default class TouchableRipple extends Component<DefaultProps, Props, void
     return (
       <TouchableHighlight
         style={style}
-        underlayColor={rippleColor}
+        underlayColor={color(rippleColor).clearer(0.5).rgbaString()}
         delayPressIn={delayPressIn}
         onPress={onPress}
         onPressIn={onPressIn}
