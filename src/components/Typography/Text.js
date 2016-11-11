@@ -19,6 +19,12 @@ class Text extends Component<void, Props, void> {
     style: NativeText.propTypes.style,
   };
 
+  _root: any;
+
+  setNativeProps(...args) {
+    return this._root.setNativeProps(...args);
+  }
+
   render() {
     const {
       style,
@@ -28,6 +34,7 @@ class Text extends Component<void, Props, void> {
     return (
       <NativeText
         {...this.props}
+        ref={c => (this._root = c)}
         style={[ { fontFamily: theme.fonts.regular, color: theme.colors.text }, style ]}
       />
     );

@@ -8,13 +8,25 @@ import { theme } from './ThemeProvider';
 
 export default function withTheme<T>(Comp: ReactClass<T>): ReactClass<T> {
   class ThemedComponent extends Component {
-    static displayName = `Themed${Comp.displayName || Comp.name}`;
+    static displayName = `withTheme(${Comp.displayName || Comp.name})`;
     static contextTypes = {
       [theme]: PropTypes.object,
     };
 
+    _root: any;
+
+    setNativeProps(...args) {
+      return this._root.setNativeProps(...args);
+    }
+
     render() {
-      return <Comp theme={this.context[theme]} {...this.props} />;
+      return (
+        <Comp
+          ref={c => (this._root = c)}
+          theme={this.context[theme]}
+          {...this.props}
+        />
+      );
     }
   }
 

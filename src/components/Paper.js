@@ -28,7 +28,7 @@ export default class Paper extends Component<void, Props, void> {
     const { children, elevation } = this.props;
 
     return (
-      <View {...this.props} style={[ styles.paper, shadow(elevation), this.props.style ]}>
+      <View {...this.props} style={[ styles.paper, elevation && shadow(elevation), this.props.style ]}>
         {children}
       </View>
     );

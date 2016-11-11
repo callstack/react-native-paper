@@ -2,7 +2,7 @@
 
 import { Component } from 'react';
 
-export default class RipplesExample extends Component {
+export default class RippleExample extends Component {
 
   static title = 'Ripples';
 

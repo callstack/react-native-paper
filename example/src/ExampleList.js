@@ -10,14 +10,16 @@ import {
   StyleSheet,
 } from 'react-native';
 import { Colors, TouchableRipple } from 'react-native-paper';
-import RipplesExample from './RipplesExample';
+import RippleExample from './RippleExample';
 import PaperExample from './PaperExample';
-import TextExamples from './TextExamples';
+import TextExample from './TextExample';
+import ButtonsExample from './ButtonsExample';
 
 export const examples = {
-  ripples: RipplesExample,
+  ripple: RippleExample,
   paper: PaperExample,
-  text: TextExamples,
+  text: TextExample,
+  button: ButtonsExample,
 };
 
 export default class ExampleList extends Component {

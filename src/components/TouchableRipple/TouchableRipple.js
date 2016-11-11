@@ -8,10 +8,14 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
+import color from 'color';
 
 type Props = {
   borderless: boolean;
+  delayPressIn?: number;
   onPress?: ?Function;
+  onPressIn?: ?Function;
+  onPressOut?: ?Function;
   rippleColor?: string;
   children?: any;
   style?: any;
@@ -25,7 +29,10 @@ export default class TouchableRipple extends Component<DefaultProps, Props, void
 
   static propTypes = {
     borderless: PropTypes.bool,
+    delayPressIn: PropTypes.number,
     onPress: PropTypes.func,
+    onPressIn: PropTypes.func,
+    onPressOut: PropTypes.func,
     rippleColor: PropTypes.string,
     children: PropTypes.element.isRequired,
     style: View.propTypes.style,
@@ -33,12 +40,16 @@ export default class TouchableRipple extends Component<DefaultProps, Props, void
 
   static defaultProps = {
     borderless: false,
+    rippleColor: 'rgba(0, 0, 0, .32)',
   }
 
   render() {
     const {
       children,
+      delayPressIn,
       onPress,
+      onPressIn,
+      onPressOut,
       rippleColor,
       style,
      } = this.props;
@@ -46,8 +57,11 @@ export default class TouchableRipple extends Component<DefaultProps, Props, void
     return (
       <TouchableHighlight
         style={style}
-        underlayColor={rippleColor}
+        underlayColor={color(rippleColor).clearer(0.5).rgbaString()}
+        delayPressIn={delayPressIn}
         onPress={onPress}
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}
       >
         {children}
       </TouchableHighlight>
