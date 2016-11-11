@@ -13,7 +13,7 @@ import {
   Title,
 } from 'react-native-paper';
 
-export default class TextExamples extends Component {
+export default class TextExample extends Component {
 
   static title = 'Typography';
 
