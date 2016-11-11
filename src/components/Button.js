@@ -26,6 +26,7 @@ type DefaultProps = {
 }
 
 type Props = {
+  disabled?: boolean;
   raised?: boolean;
   primary?: boolean;
   dark?: boolean;
@@ -44,6 +45,7 @@ type State = {
 
 class Button extends Component<DefaultProps, Props, State> {
   static propTypes = {
+    disabled: PropTypes.bool,
     raised: PropTypes.bool,
     primary: PropTypes.bool,
     dark: PropTypes.bool,
@@ -89,6 +91,8 @@ class Button extends Component<DefaultProps, Props, State> {
 
   render() {
     const {
+      disabled,
+      raised,
       primary,
       dark,
       loading,
@@ -100,47 +104,75 @@ class Button extends Component<DefaultProps, Props, State> {
       theme,
     } = this.props;
     const { colors } = theme;
-    const backgroundColor = primary ? colors.primary : white;
     const fontFamily = theme.fonts.medium;
-    const isDark = typeof dark === 'boolean' ? dark : !color(backgroundColor).light();
-    const textColor = isDark ? white : black;
+
+    let backgroundColor, textColor, isDark;
+
+    if (disabled) {
+      backgroundColor = raised ? 'rgba(0, 0, 0, .12)' : 'transparent';
+    } else {
+      if (primary) {
+        backgroundColor = colors.primary;
+      } else {
+        backgroundColor = raised ? white : 'transparent';
+      }
+    }
+
+    if (typeof dark === 'boolean') {
+      isDark = dark;
+    } else {
+      isDark = backgroundColor === 'transparent' ? false : !color(backgroundColor).light();
+    }
+
+    if (disabled) {
+      textColor = 'rgba(0, 0, 0, .26)';
+    } else {
+      textColor = isDark ? white : black;
+    }
+
     const rippleColor = color(textColor).alpha(0.32).rgbaString();
     const buttonStyle = { backgroundColor, borderRadius: roundness };
     const touchableStyle = { borderRadius: roundness };
     const textStyle = { color: textColor, fontFamily };
 
+    const content = (
+      <View style={styles.content}>
+        {icon && loading !== true ?
+          <Icon
+            name={icon}
+            size={16}
+            color={textColor}
+            style={styles.icon}
+          /> : null
+        }
+        {loading ?
+          <ActivityIndicator
+            size='small'
+            color={textColor}
+            style={styles.icon}
+          /> : null
+        }
+        <Text style={[ styles.label, textStyle, { fontFamily } ]}>
+          {children ? children.toUpperCase() : ''}
+        </Text>
+      </View>
+    );
+
     return (
-      <AnimatedPaper elevation={this.state.elevation} style={[ styles.button, buttonStyle, style ]}>
-        <TouchableRipple
-          borderless
-          delayPressIn={0}
-          onPress={onPress}
-          onPressIn={this._handlePressIn}
-          onPressOut={this._handlePressOut}
-          rippleColor={rippleColor}
-          style={touchableStyle}
-        >
-          <View style={styles.content}>
-            {icon && loading !== true ?
-              <Icon
-                name={icon}
-                size={16}
-                color={textColor}
-                style={styles.icon}
-              /> : null
-            }
-            {loading ?
-              <ActivityIndicator
-                size='small'
-                color={textColor}
-                style={styles.icon}
-              /> : null
-            }
-            <Text style={[ styles.label, textStyle, { fontFamily } ]}>
-              {children ? children.toUpperCase() : ''}
-            </Text>
-          </View>
-        </TouchableRipple>
+      <AnimatedPaper elevation={disabled ? 0 : this.state.elevation} style={[ styles.button, buttonStyle, style ]}>
+        {disabled ? content :
+          <TouchableRipple
+            borderless
+            delayPressIn={0}
+            onPress={onPress}
+            onPressIn={this._handlePressIn}
+            onPressOut={this._handlePressOut}
+            rippleColor={rippleColor}
+            style={touchableStyle}
+          >
+            {content}
+          </TouchableRipple>
+        }
       </AnimatedPaper>
     );
   }

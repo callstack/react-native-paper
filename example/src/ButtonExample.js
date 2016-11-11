@@ -54,6 +54,16 @@ export default class ButtonExample extends Component {
             Loading
           </Button>
         </View>
+        <View style={styles.row}>
+          <Button disabled icon='my-location'>Disabled</Button>
+          <Button
+            disabled
+            loading
+            raised
+          >
+            Loading
+          </Button>
+        </View>
       </View>
     );
   }
@@ -61,7 +71,8 @@ export default class ButtonExample extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.white,
+    flex: 1,
+    backgroundColor: Colors.grey200,
     padding: 8,
   },
 
