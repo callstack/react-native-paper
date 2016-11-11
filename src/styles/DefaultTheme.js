@@ -17,6 +17,7 @@ export default {
     text: black,
     secondaryText: color(black).alpha(0.7).rgbaString(),
     disabled: color(black).alpha(0.5).rgbaString(),
+    divider: color(black).alpha(0.12).rgbaString(),
   },
   fonts,
 };

@@ -8,6 +8,7 @@ export type Theme = {
     text: string;
     secondaryText: string;
     disabled: string;
+    divider: string;
   };
   fonts: {
     regular: string;
