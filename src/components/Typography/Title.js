@@ -7,4 +7,5 @@ export default createStyledText('Title', {
   lineHeight: 30,
   alpha: 0.87,
   family: 'medium',
+  marginVertical: 2,
 });

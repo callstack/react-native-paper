@@ -7,4 +7,5 @@ export default createStyledText('Caption', {
   lineHeight: 20,
   alpha: 0.54,
   family: 'regular',
+  marginVertical: 2,
 });

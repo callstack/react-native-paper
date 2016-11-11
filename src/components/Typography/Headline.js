@@ -7,4 +7,5 @@ export default createStyledText('Headline', {
   lineHeight: 32,
   alpha: 0.87,
   family: 'regular',
+  marginVertical: 2,
 });

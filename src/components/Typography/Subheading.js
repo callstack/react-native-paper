@@ -7,4 +7,5 @@ export default createStyledText('Subheading', {
   lineHeight: 24,
   alpha: 0.87,
   family: 'regular',
+  marginVertical: 2,
 });
