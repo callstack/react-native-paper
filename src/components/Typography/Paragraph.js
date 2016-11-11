@@ -7,4 +7,5 @@ export default createStyledText('Paragraph', {
   lineHeight: 20,
   alpha: 0.87,
   family: 'regular',
+  marginVertical: 2,
 });
