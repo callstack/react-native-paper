@@ -6,10 +6,12 @@ import React, {
   PropTypes,
 } from 'react';
 import {
+  ActivityIndicator,
   Animated,
   View,
   StyleSheet,
 } from 'react-native';
+import Icon from './Icon';
 import Paper from './Paper';
 import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple';
@@ -20,8 +22,6 @@ import type { Theme } from '../types/Theme';
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
 type DefaultProps = {
-  raised: boolean;
-  primary: boolean;
   roundness: number;
 }
 
@@ -29,7 +29,9 @@ type Props = {
   raised?: boolean;
   primary?: boolean;
   dark?: boolean;
+  loading?: boolean;
   roundness?: number;
+  icon?: string;
   children?: string;
   onPress?: Function;
   style?: any;
@@ -45,7 +47,9 @@ class Button extends Component<DefaultProps, Props, State> {
     raised: PropTypes.bool,
     primary: PropTypes.bool,
     dark: PropTypes.bool,
+    loading: PropTypes.bool,
     roundness: PropTypes.number,
+    icon: PropTypes.string,
     children: PropTypes.string.isRequired,
     onPress: PropTypes.func,
     style: View.propTypes.style,
@@ -53,8 +57,6 @@ class Button extends Component<DefaultProps, Props, State> {
   };
 
   static defaultProps = {
-    raised: false,
-    primary: false,
     roundness: 2,
   };
 
@@ -89,7 +91,9 @@ class Button extends Component<DefaultProps, Props, State> {
     const {
       primary,
       dark,
+      loading,
       roundness,
+      icon,
       children,
       onPress,
       style,
@@ -103,6 +107,7 @@ class Button extends Component<DefaultProps, Props, State> {
     const rippleColor = color(textColor).alpha(0.32).rgbaString();
     const buttonStyle = { backgroundColor, borderRadius: roundness };
     const touchableStyle = { borderRadius: roundness };
+    const textStyle = { color: textColor, fontFamily };
 
     return (
       <AnimatedPaper elevation={this.state.elevation} style={[ styles.button, buttonStyle, style ]}>
@@ -115,9 +120,26 @@ class Button extends Component<DefaultProps, Props, State> {
           rippleColor={rippleColor}
           style={touchableStyle}
         >
-          <Text style={[ styles.label, { fontFamily, color: textColor } ]}>
-            {children ? children.toUpperCase() : ''}
-          </Text>
+          <View style={styles.content}>
+            {icon && loading !== true ?
+              <Icon
+                name={icon}
+                size={16}
+                color={textColor}
+                style={styles.icon}
+              /> : null
+            }
+            {loading ?
+              <ActivityIndicator
+                size='small'
+                color={textColor}
+                style={styles.icon}
+              /> : null
+            }
+            <Text style={[ styles.label, textStyle, { fontFamily } ]}>
+              {children ? children.toUpperCase() : ''}
+            </Text>
+          </View>
         </TouchableRipple>
       </AnimatedPaper>
     );
@@ -128,6 +150,16 @@ const styles = StyleSheet.create({
   button: {
     margin: 8,
     minWidth: 88,
+  },
+  content: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+  },
+  icon: {
+    width: 16,
+    marginLeft: 12,
+    marginRight: -4,
   },
   label: {
     textAlign: 'center',
