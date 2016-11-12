@@ -65,7 +65,7 @@ class Card extends Component<DefaultProps, Props, State> {
   _handlePressOut = () => {
     Animated.timing(this.state.elevation, {
       toValue: this.props.elevation,
-      duration: 200,
+      duration: 150,
     }).start();
   };
 

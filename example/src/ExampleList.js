@@ -14,11 +14,11 @@ import CardExample from './CardExample';
 import RippleExample from './RippleExample';
 import PaperExample from './PaperExample';
 import TextExample from './TextExample';
-import ButtonsExample from './ButtonsExample';
+import ButtonExample from './ButtonExample';
 import DividerExample from './DividerExample';
 
 export const examples = {
-  button: ButtonsExample,
+  button: ButtonExample,
   card: CardExample,
   divider: DividerExample,
   paper: PaperExample,

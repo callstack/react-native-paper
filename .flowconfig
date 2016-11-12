@@ -29,6 +29,8 @@
 .*/example/node_modules/react
 .*/example/node_modules/react-native
 .*/example/node_modules/exponent
+.*/example/node_modules/@exponent
+.*/example/node_modules/fbemitter
 .*/example/\.buckd/
 
 [include]
@@ -52,6 +54,8 @@ experimental.strict_type_args=true
 munge_underscores=true
 
 module.name_mapper='^exponent$' -> 'emptyObject'
+module.name_mapper='^@exponent/ex-navigation$' -> 'emptyObject'
+module.name_mapper='^react-native-vector-icons/MaterialIcons$' -> 'emptyObject'
 module.name_mapper='^image![a-zA-Z0-9$_-]+$' -> 'GlobalImageStub'
 module.name_mapper='^[./a-zA-Z0-9$_-]+\.\(bmp\|gif\|jpg\|jpeg\|png\|psd\|svg\|webp\|m4v\|mov\|mp4\|mpeg\|mpg\|webm\|aac\|aiff\|caf\|m4a\|mp3\|wav\|html\|pdf\)$' -> 'RelativeImageStub'
 
@@ -64,4 +68,4 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(>=0\\.\\(3[0-2]\\|1[0-9]\\|[1-2
 suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
 
 [version]
-^0.32.0
+^0.33.0

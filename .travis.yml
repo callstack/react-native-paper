@@ -1,9 +1,17 @@
 language: node_js
 cache:
   directories:
+    - $HOME/.npm
+    - $HOME/.yarn-cache
     - node_modules
+    - example/node_modules
 node_js:
   - 'stable'
+before_install:
+  - npm i -g yarn
+install:
+  - yarn
+  - cd example && yarn && cd ..
 script:
-  - npm run flow -- check
   - npm run lint
+  - npm run flow -- check
