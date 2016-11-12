@@ -171,7 +171,7 @@ class Button extends Component<DefaultProps, Props, State> {
             style={styles.icon}
           /> : null
         }
-        <Text style={[ styles.label, textStyle, { fontFamily } ]}>
+        <Text numberOfLines={1} style={[ styles.label, textStyle, { fontFamily } ]}>
           {children ? children.toUpperCase() : ''}
         </Text>
       </View>
