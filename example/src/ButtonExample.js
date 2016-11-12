@@ -24,23 +24,12 @@ export default class ButtonExample extends Component {
         <View style={styles.row}>
           <Button>Simple</Button>
           <Button primary>Primary</Button>
-          <Button
-            dark
-            style={styles.button}
-          >
-            Custom
-          </Button>
+          <Button color={Colors.pink500}>Custom</Button>
         </View>
         <View style={styles.row}>
           <Button raised>Raised</Button>
           <Button raised primary>Primary</Button>
-          <Button
-            raised
-            dark
-            style={styles.button}
-          >
-            Custom
-          </Button>
+          <Button raised color={Colors.pink500}>Custom</Button>
         </View>
         <View style={styles.row}>
           <Button icon='add-a-photo'>Icon</Button>
@@ -80,9 +69,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
-  },
-
-  button: {
-    backgroundColor: Colors.pink500,
   },
 });
