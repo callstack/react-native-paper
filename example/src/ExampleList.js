@@ -14,14 +14,14 @@ import CardExample from './CardExample';
 import RippleExample from './RippleExample';
 import PaperExample from './PaperExample';
 import TextExample from './TextExample';
-import ButtonsExample from './ButtonsExample';
+import ButtonExample from './ButtonExample';
 
 export const examples = {
   ripple: RippleExample,
   paper: PaperExample,
   text: TextExample,
   card: CardExample,
-  button: ButtonsExample,
+  button: ButtonExample,
 };
 
 export default class ExampleList extends Component {
