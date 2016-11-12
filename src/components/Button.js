@@ -84,7 +84,7 @@ class Button extends Component<DefaultProps, Props, State> {
     if (this.props.raised) {
       Animated.timing(this.state.elevation, {
         toValue: 2,
-        duration: 200,
+        duration: 150,
       }).start();
     }
   };
