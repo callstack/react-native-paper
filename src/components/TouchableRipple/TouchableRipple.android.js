@@ -12,7 +12,10 @@ import {
 
 type Props = {
   borderless: boolean;
+  delayPressIn?: number;
   onPress?: ?Function;
+  onPressIn?: ?Function;
+  onPressOut?: ?Function;
   rippleColor?: string;
   children?: any;
   style?: any;
@@ -27,7 +30,10 @@ export default class TouchableRipple extends Component<DefaultProps, Props, void
   static propTypes = {
     children: PropTypes.element.isRequired,
     borderless: PropTypes.bool,
+    delayPressIn: PropTypes.number,
     onPress: PropTypes.func,
+    onPressIn: PropTypes.func,
+    onPressOut: PropTypes.func,
     rippleColor: PropTypes.string,
     style: View.propTypes.style,
   };
@@ -39,7 +45,10 @@ export default class TouchableRipple extends Component<DefaultProps, Props, void
   render() {
     const {
       children,
+      delayPressIn,
       onPress,
+      onPressIn,
+      onPressOut,
       rippleColor,
       borderless,
       style,
@@ -47,7 +56,10 @@ export default class TouchableRipple extends Component<DefaultProps, Props, void
 
     return (
       <TouchableNativeFeedback
+        delayPressIn={delayPressIn}
         onPress={onPress}
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}
         background={Platform.Version >= 21 ?
           TouchableNativeFeedback.Ripple(rippleColor, borderless) :
           TouchableNativeFeedback.SelectableBackground()}
