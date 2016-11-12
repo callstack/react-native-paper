@@ -118,7 +118,11 @@ class Button extends Component<DefaultProps, Props, State> {
         if (buttonColor) {
           backgroundColor = buttonColor;
         } else {
-          backgroundColor = primary ? colors.primary : white;
+          if (primary) {
+            backgroundColor = colors.primary;
+          } else {
+            backgroundColor = dark ? black : white;
+          }
         }
       }
     } else {
