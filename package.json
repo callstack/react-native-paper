@@ -35,7 +35,8 @@
     "eslint-plugin-react-native": "^2.0.0",
     "flow-bin": "^0.33.0",
     "react": "latest",
-    "react-native": "latest"
+    "react-native": "latest",
+    "react-native-vector-icons": "latest"
   },
   "dependencies": {
     "color": "^0.11.4"
