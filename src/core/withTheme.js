@@ -7,19 +7,44 @@ import React, {
 import { theme } from './ThemeProvider';
 
 export default function withTheme<T>(Comp: ReactClass<T>): ReactClass<T> {
-
-  const name = Comp.displayName || Comp.name;
-
-  return class extends Component {
-
-    static displayName = `Themed${name}`;
-
+  class ThemedComponent extends Component {
+    static displayName = `withTheme(${Comp.displayName || Comp.name})`;
     static contextTypes = {
       [theme]: PropTypes.object,
     };
 
-    render() {
-      return <Comp theme={this.context[theme]} {...this.props} />;
+    _root: any;
+
+    setNativeProps(...args) {
+      return this._root.setNativeProps(...args);
     }
-  };
+
+    render() {
+      return (
+        <Comp
+          ref={c => (this._root = c)}
+          theme={this.context[theme]}
+          {...this.props}
+        />
+      );
+    }
+  }
+
+  // This is ugly, but we need to hoist static properties manually
+  for (const prop in Comp) {
+    if (prop !== 'displayName' && prop !== 'contextTypes') {
+      if (prop === 'propTypes') {
+        // Only the underlying component will receive the theme prop
+        // eslint-disable-next-line no-shadow, no-unused-vars
+        const { theme, ...propTypes } = Comp[prop];
+        /* $FlowFixMe */
+        ThemedComponent[prop] = propTypes;
+      } else {
+        /* $FlowFixMe */
+        ThemedComponent[prop] = Comp[prop];
+      }
+    }
+  }
+
+  return ThemedComponent;
 }

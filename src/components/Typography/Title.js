@@ -1,9 +1,11 @@
 /* @flow */
 
-import withTheme from '../../core/withTheme';
-import fonts from '../../styles/fonts';
 import createStyledText from './createStyledText';
 
-const Subheading = createStyledText(fonts.medium, 20);
-
-export default withTheme(Subheading);
+export default createStyledText('Title', {
+  fontSize: 20,
+  lineHeight: 30,
+  alpha: 0.87,
+  family: 'medium',
+  marginVertical: 2,
+});

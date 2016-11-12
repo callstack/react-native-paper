@@ -1,45 +1,49 @@
 /* @flow */
 
+import color from 'color';
 import React, {
   Component,
   PropTypes,
 } from 'react';
-import {
-  View,
-  Text,
-} from 'react-native';
-import { black } from '../../styles/colors';
+import Text from './Text';
+import withTheme from '../../core/withTheme';
+import type { Theme } from '../../types/Theme';
 
 type Props = {
-  children?: any;
   style?: any;
-  theme?: any;
+  theme: Theme;
 }
 
-export default function createStyledText<T>(fontFamily: string, fontSize: number): ReactClass<T> {
+type TextStyle = {
+  fontSize: number;
+  lineHeight: number;
+  alpha: number;
+  family: 'regular' | 'medium' | 'light' | 'thin';
+}
 
-  return class extends Component<void, Props, void> {
+export default function createStyledText<T>(name: string, textStyle: TextStyle): ReactClass<T> {
+  const { alpha, family, ...style } = textStyle;
+
+  class StyledText extends Component<void, Props, void> {
+    static displayName = name;
     static propTypes = {
-      children: PropTypes.element.isRequired,
-      theme: PropTypes.object,
-      style: View.propTypes.style,
+      theme: PropTypes.object.isRequired,
+      style: Text.propTypes.style,
     }
 
     render() {
-      const {
-        theme,
-        children,
-        style,
-      } = this.props;
-      const color = theme ? theme.text : black;
+      const { theme } = this.props;
+      const textColor = color(theme.colors.text).alpha(alpha).rgbaString();
+      const fontFamily = theme.fonts[family];
 
       return (
         <Text
-          style={[ { color, fontFamily, fontSize }, style ]}
           {...this.props}
-        >
-          {children}
-        </Text>);
+          style={[ { color: textColor, fontFamily }, style, this.props.style ]}
+        />
+      );
     }
-  };
+  }
+
+  return withTheme(StyledText);
 }

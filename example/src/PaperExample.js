@@ -17,7 +17,7 @@ export default class RipplesExample extends Component {
 
   render() {
     return (
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView style={styles.container} contentContainerStyle={styles.content}>
         {[ 1, 2, 4, 6, 12 ].map(i => {
           return (
             <Paper
@@ -36,7 +36,11 @@ export default class RipplesExample extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.grey100,
+    flex: 1,
+    backgroundColor: Colors.grey200,
+  },
+
+  content: {
     padding: 24,
     alignItems: 'center',
   },
