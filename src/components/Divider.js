@@ -8,39 +8,35 @@ import {
   View,
 } from 'react-native';
 
-import withTheme from '../core/withTheme';
-import type { Theme } from '../types/Theme';
-
 type Props = {
-  customInset?: number;
-  hasInset?: boolean;
-  theme: Theme;
+  inset?: boolean;
+  style?: any;
 }
 
 const Divider = (props: Props) => {
-  const { hasInset, customInset, theme } = props;
+  const { inset = false, style = null } = props;
   return (
     <View
       {...props}
       style={[
         styles.divider,
-        { backgroundColor: theme.colors.divider },
-        hasInset && { marginLeft: customInset || 72 },
+        { backgroundColor: 'rgba(0, 0, 0, .12)' },
+        inset && { marginLeft: 72 },
+        style,
       ]}
     />
   );
 };
 
 Divider.propTypes = {
-  customInset: PropTypes.number,
-  hasInset: PropTypes.bool,
-  theme: PropTypes.object.isRequired,
+  inset: PropTypes.bool,
+  style: View.propTypes.style,
 };
 
 const styles = StyleSheet.create({
   divider: {
-    height: 1,
+    height: StyleSheet.hairlineWidth,
   },
 });
 
-export default withTheme(Divider);
+export default Divider;
