@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, {
-  Component,
+  PureComponent,
   PropTypes,
 } from 'react';
 import { Text as NativeText } from 'react-native';
@@ -13,7 +13,7 @@ type Props = {
   theme: Theme;
 }
 
-class Text extends Component<void, Props, void> {
+class Text extends PureComponent<void, Props, void> {
   static propTypes = {
     theme: PropTypes.object.isRequired,
     style: NativeText.propTypes.style,

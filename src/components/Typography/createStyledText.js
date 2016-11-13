@@ -2,7 +2,7 @@
 
 import color from 'color';
 import React, {
-  Component,
+  PureComponent,
   PropTypes,
 } from 'react';
 import Text from './Text';
@@ -24,7 +24,7 @@ type TextStyle = {
 export default function createStyledText<T>(name: string, textStyle: TextStyle): ReactClass<T> {
   const { alpha, family, ...style } = textStyle;
 
-  class StyledText extends Component<void, Props, void> {
+  class StyledText extends PureComponent<void, Props, void> {
     static displayName = name;
     static propTypes = {
       theme: PropTypes.object.isRequired,
