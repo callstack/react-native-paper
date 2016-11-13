@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, {
-  Component,
+  PureComponent,
   PropTypes,
 } from 'react';
 import {
@@ -33,7 +33,7 @@ type State = {
   elevation: Animated.Value;
 }
 
-class Card extends Component<DefaultProps, Props, State> {
+class Card extends PureComponent<DefaultProps, Props, State> {
   static propTypes = {
     elevation: PropTypes.number,
     children: PropTypes.node.isRequired,

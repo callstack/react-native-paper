@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, {
-  Component,
+  PureComponent,
   PropTypes,
 } from 'react';
 import {
@@ -17,7 +17,7 @@ type Props = {
   style?: any;
 }
 
-export default class Paper extends Component<void, Props, void> {
+export default class Paper extends PureComponent<void, Props, void> {
   static propTypes = {
     elevation: PropTypes.number.isRequired,
     children: PropTypes.node,

@@ -2,7 +2,7 @@
 
 import color from 'color';
 import React, {
-  Component,
+  PureComponent,
   PropTypes,
 } from 'react';
 import {
@@ -44,7 +44,7 @@ type State = {
   elevation: Animated.Value;
 }
 
-class Button extends Component<DefaultProps, Props, State> {
+class Button extends PureComponent<DefaultProps, Props, State> {
   static propTypes = {
     disabled: PropTypes.bool,
     raised: PropTypes.bool,
@@ -153,7 +153,7 @@ class Button extends Component<DefaultProps, Props, State> {
       }
     }
 
-    const rippleColor = color(textColor).alpha(0.32).rgbaString();
+    const rippleColor = color(textColor).clearer(0.32).rgbaString();
     const buttonStyle = { backgroundColor, borderRadius: roundness };
     const touchableStyle = { borderRadius: roundness };
     const textStyle = { color: textColor, fontFamily };

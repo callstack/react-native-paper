@@ -1,7 +1,7 @@
 /* @flow */
 
 import {
-  Component,
+  PureComponent,
   PropTypes,
   Children,
 } from 'react';
@@ -9,7 +9,7 @@ import DefaultTheme from '../styles/DefaultTheme';
 
 export const theme = 'react-native-paper$theme';
 
-export default class ThemeProvider extends Component {
+export default class ThemeProvider extends PureComponent {
 
   static propTypes = {
     children: PropTypes.node.isRequired,
