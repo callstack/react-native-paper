@@ -23,6 +23,7 @@ type Props = {
 
 type DefaultProps = {
   borderless: boolean;
+  rippleColor: string;
 }
 
 export default class TouchableRipple extends Component<DefaultProps, Props, void> {
