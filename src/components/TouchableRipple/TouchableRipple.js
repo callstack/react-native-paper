@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, {
-  Component,
+  PureComponent,
   PropTypes,
 } from 'react';
 import {
@@ -26,7 +26,7 @@ type DefaultProps = {
   rippleColor: string;
 }
 
-export default class TouchableRipple extends Component<DefaultProps, Props, void> {
+export default class TouchableRipple extends PureComponent<DefaultProps, Props, void> {
 
   static propTypes = {
     borderless: PropTypes.bool,

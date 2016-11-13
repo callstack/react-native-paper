@@ -1,13 +1,13 @@
 /* @flow */
 
 import React, {
-  Component,
+  PureComponent,
   PropTypes,
 } from 'react';
 import { theme } from './ThemeProvider';
 
 export default function withTheme<T>(Comp: ReactClass<T>): ReactClass<T> {
-  class ThemedComponent extends Component {
+  class ThemedComponent extends PureComponent {
     static displayName = `withTheme(${Comp.displayName || Comp.name})`;
     static contextTypes = {
       [theme]: PropTypes.object,
