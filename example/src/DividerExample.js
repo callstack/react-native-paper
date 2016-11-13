@@ -20,14 +20,13 @@ const DividerExample = () => {
       style={styles.container}
       dataSource={dataSource}
       renderRow={(rowData, sectionId, rowId) => (
-          <Subheading
-            key={rowId}
-            style={styles.item}
-          >
-            {rowData}
-          </Subheading>
-        )
-      }
+        <Subheading
+          key={rowId}
+          style={styles.item}
+        >
+          {rowData}
+        </Subheading>
+      )}
       renderSeparator={(sectionId, rowId) => <Divider key={rowId}/>}
     />
   );
@@ -38,7 +37,7 @@ DividerExample.title = 'Divider';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.grey200,
+    backgroundColor: Colors.white,
   },
   item: {
     paddingVertical: 8,
