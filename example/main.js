@@ -6,6 +6,7 @@ import {
   View,
   Text,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 import {
   NavigationProvider,
@@ -14,6 +15,10 @@ import {
 import { Colors, ThemeProvider, Drawer } from 'react-native-paper';
 import { MaterialIcons as Icon } from '@exponent/vector-icons';
 import Router from './src/Router';
+
+const {
+  width: screenWidth,
+} = Dimensions.get('window');
 
 class App extends Component {
   state = {
@@ -30,13 +35,14 @@ class App extends Component {
       <ThemeProvider>
         <NavigationProvider router={Router}>
         <Drawer
+          drawerWidth={(screenWidth * 80) / 100}
           onDrawerClose={this._closeDrawer}
           open={this.state.open}
-          navigationView={<View style={{ backgroundColor: Colors.white, flex: 1 }}>
-            <DrawerItem text='Ahmed' iconName='airplay' />
-            <DrawerItem text='Ahmed' iconName='airplay' active />
-            <DrawerItem text='Ahmed' iconName='airplay' />
-            <DrawerItem text='Ahmed' iconName='airplay' />
+          navigationView={<View style={{ flex: 1 }}>
+            <Drawer.DrawerItem text='Ahmed' icon='airplay' />
+            <Drawer.DrawerItem text='Ahmed' icon='airplay' active />
+            <Drawer.DrawerItem text='Ahmed' icon='airplay' />
+            <Drawer.DrawerItem text='Ahmed' icon='airplay' />
           </View>}
         >
           <StackNavigation
@@ -69,15 +75,4 @@ class App extends Component {
   }
 }
 
-const DrawerItem = ({ iconName, text, active }) => (
-  <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 8, paddingVertical: 8, backgroundColor: active ? Colors.grey300 : 'transparent' }}>
-    <Icon
-      name={iconName}
-      size={24}
-      color={Colors.grey700}
-      style={{ marginRight: 8 }}
-    />
-    <Text style={{ color: Colors.grey700 }}>{text}</Text>
-  </View>
-);
 Exponent.registerRootComponent(App);

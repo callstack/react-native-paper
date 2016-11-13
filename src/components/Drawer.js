@@ -1,74 +1,65 @@
 /* @flow */
 
+import { default as RNDrawer } from 'react-native-drawer';
 import React, {
   Component,
   PropTypes,
 } from 'react';
-import { default as RNDrawer } from 'react-native-drawer';
+import { View, Text } from 'react-native';
+import Icon from './Icon';
+import TouchableRipple from './TouchableRipple';
+import { white, grey300 } from '../styles/colors';
+import withTheme from '../core/withTheme';
+import type { Theme } from '../types/Theme';
 
 type Props = {
-  children: any;
+  children?: any;
+  drawerBackgroundColor?: string;
   drawerPosition?: string;
+  drawerWidth?: number;
+  drawerLockMode?: string;
   navigationView: any;
   onDrawerClose?: Function;
   onDrawerOpen?: Function;
   open?: boolean;
-  style?: any;
+  panOpenMask?: number;
 }
 
 type DefaultProps = {
-  open: false;
+  drawerBackgroundColor: string;
   drawerPosition: string;
+  drawerLockMode: string;
+  open: boolean;
+  panOpenMask: number;
 }
 
-export default class Drawer extends Component<DefaultProps, Props, void> {
+class Drawer extends Component<DefaultProps, Props, void> {
   static propTypes = {
     children: PropTypes.node.isRequired,
-    navigationView: PropTypes.node.isRequired,
+    drawerBackgroundColor: PropTypes.string,
     drawerPosition: PropTypes.oneOf([ 'left', 'right' ]),
+    drawerWidth: PropTypes.number,
+    /*
+    Specifies the lock mode of the drawer. The drawer can be locked in 2 states:
+     - unlocked (default), meaning that the drawer will respond (open/close) to touch gestures
+     - locked, meaning that the drawer won't respond to touch gestures but it can be open by passing prop `open`
+     */
+    drawerLockMode: PropTypes.oneOf([ 'unlocked', 'locked' ]),
+    navigationView: PropTypes.node.isRequired,
     onDrawerClose: PropTypes.func,
     onDrawerOpen: PropTypes.func,
     open: PropTypes.bool,
-    style: PropTypes.object,
+    /* Ratio of screen width that is valid for the start of a pan open action */
+    panOpenMask: PropTypes.number,
   }
 
   static defaultProps = {
+    drawerBackgroundColor: white,
     drawerPosition: 'left',
+    drawerLockMode: 'unlocked',
     open: false,
+    panOpenMask: 0.05,
   }
-
-
-  // static propTypes = {
-  //   acceptDoubleTap: PropTypes.bool,
-  //   acceptPan: PropTypes.bool,
-  //   acceptTap: PropTypes.bool,
-  //   captureGestures: PropTypes.oneOf([ true, false, 'open', 'closed' ]),
-  //   closedDrawerOffset: PropTypes.oneOfType([ PropTypes.number, PropTypes.func ]),
-  //   content: PropTypes.node,
-  //   disabled: PropTypes.bool,
-  //   elevation: PropTypes.number,
-  //   initializeOpen: PropTypes.bool,
-  //   open: PropTypes.bool,
-  //   negotiatePan: PropTypes.bool,
-  //   onClose: PropTypes.func,
-  //   onCloseStart: PropTypes.func,
-  //   onOpen: PropTypes.func,
-  //   onOpenStart: PropTypes.func,
-  //   openDrawerOffset: PropTypes.oneOfType([ PropTypes.number, PropTypes.func ]),
-  //   panThreshold: PropTypes.number,
-  //   panCloseMask: PropTypes.number,
-  //   panOpenMask: PropTypes.number,
-  //   side: PropTypes.oneOf([ 'left', 'right' ]),
-  //   tapToClose: PropTypes.bool,
-  //   tweenDuration: PropTypes.number,
-  //   tweenEasing: PropTypes.string,
-  //   tweenHandler: PropTypes.func,
-  //   useInteractionManager: PropTypes.bool,
-  //
-  //   // deprecated
-  //   panStartCompensation: PropTypes.bool,
-  //   openDrawerThreshold: PropTypes.any,
-  // };
 
   _tweenHandler = ratio => ({
     main: {
@@ -89,13 +80,19 @@ export default class Drawer extends Component<DefaultProps, Props, void> {
       this.props.onDrawerOpen();
     }
   }
-  render() {
+  _calculateOpenDrawerOffset = viewport => this.props.drawerWidth ?
+      (viewport.width - this.props.drawerWidth) :
+      (viewport.width - ((viewport.width * 80) / 100))
+
+  render(): ?React.Element<any> {
     const {
       children,
+      drawerBackgroundColor,
       drawerPosition,
+      drawerLockMode,
       navigationView,
-      style,
       open,
+      panOpenMask,
     } = this.props;
 
     return (
@@ -104,22 +101,58 @@ export default class Drawer extends Component<DefaultProps, Props, void> {
         tapToClose
         captureGestures
         negotiatePan
-        content={navigationView}
-        open={open}
+        acceptPan={drawerLockMode === 'unlocked'}
         type='overlay'
         tweenEasing='easeInQuad'
-        openDrawerOffset={0.2}
-        closedDrawerOffset={0}
-        panCloseMask={0.2}
-        panOpenMask={0.05}
+        content={navigationView}
+        open={open}
+        openDrawerOffset={this._calculateOpenDrawerOffset}
+        panOpenMask={panOpenMask}
         onClose={this._onDrawerClose}
         onOpen={this._onDrawerOpen}
         tweenHandler={this._tweenHandler}
         side={drawerPosition}
-        styles={{ drawer: style }}
+        styles={{ drawer: { backgroundColor: drawerBackgroundColor } }}
       >
         {children}
       </RNDrawer>
     );
   }
 }
+
+type DrawerItemProps = {
+  icon?: string;
+  text?: string;
+  active?: boolean;
+  onPress?: Function;
+  theme: Theme;
+}
+
+const DrawerItem = ({ icon, text, active, onPress, theme }: DrawerItemProps) => {
+  const { colors } = theme;
+  const textColor = active ? colors.primary : colors.text;
+  return (
+    <TouchableRipple onPress={onPress}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 8, paddingVertical: 8, backgroundColor: active ? grey300 : 'transparent' }}>
+        { icon && <Icon
+          name={icon}
+          size={24}
+          color={textColor}
+          style={{ marginRight: 8 }}
+                  />}
+        <Text style={{ color: textColor }}>{text}</Text>
+      </View>
+    </TouchableRipple>
+  );
+};
+
+DrawerItem.propTypes = {
+  icon: PropTypes.string,
+  text: PropTypes.string.isRequired,
+  active: PropTypes.bool,
+  onPress: PropTypes.func,
+  theme: PropTypes.object.isRequired,
+};
+
+Drawer.DrawerItem = withTheme(DrawerItem);
+export default Drawer;
