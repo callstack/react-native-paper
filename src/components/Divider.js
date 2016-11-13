@@ -14,16 +14,11 @@ type Props = {
 }
 
 const Divider = (props: Props) => {
-  const { inset = false, style = null } = props;
+  const { inset, style } = props;
   return (
     <View
       {...props}
-      style={[
-        styles.divider,
-        { backgroundColor: 'rgba(0, 0, 0, .12)' },
-        inset && { marginLeft: 72 },
-        style,
-      ]}
+      style={[ styles.divider, inset && styles.inset, style ]}
     />
   );
 };
@@ -35,7 +30,11 @@ Divider.propTypes = {
 
 const styles = StyleSheet.create({
   divider: {
+    backgroundColor: 'rgba(0, 0, 0, .12)',
     height: StyleSheet.hairlineWidth,
+  },
+  inset: {
+    marginLeft: 72,
   },
 });
 
