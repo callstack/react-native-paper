@@ -9,6 +9,7 @@ export { default as Button } from './src/components/Button';
 export { default as Card } from './src/components/Card';
 export { default as Checkbox } from './src/components/Checkbox';
 export { default as Paper } from './src/components/Paper';
+export { default as RadioButton } from './src/components/RadioButton';
 export { default as TouchableRipple } from './src/components/TouchableRipple';
 
 export { default as Caption } from './src/components/Typography/Caption';

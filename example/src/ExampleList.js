@@ -16,6 +16,7 @@ import CheckboxExample from './CheckboxExample';
 import DividerExample from './DividerExample';
 import PaperExample from './PaperExample';
 import RippleExample from './RippleExample';
+import RadioButtonExample from './RadioButtonExample';
 import TextExample from './TextExample';
 
 export const examples = {
@@ -25,6 +26,7 @@ export const examples = {
   divider: DividerExample,
   paper: PaperExample,
   ripple: RippleExample,
+  radio: RadioButtonExample,
   text: TextExample,
 };
 
