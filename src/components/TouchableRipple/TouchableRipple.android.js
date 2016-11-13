@@ -16,7 +16,7 @@ type Props = {
   onPress?: ?Function;
   onPressIn?: ?Function;
   onPressOut?: ?Function;
-  rippleColor?: string;
+  rippleColor: string;
   children?: any;
   style?: any;
 }
