@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import {
   View,
   Text,
+  TouchableOpacity,
 } from 'react-native';
 import {
   NavigationProvider,
@@ -15,12 +16,23 @@ import { MaterialIcons as Icon } from '@exponent/vector-icons';
 import Router from './src/Router';
 
 class App extends Component {
+  state = {
+    open: false,
+  }
+  _openDrawer = () => {
+    this.setState({ open: true });
+  }
+  _closeDrawer = () => {
+    this.setState({ open: false });
+  }
   render() {
     return (
       <ThemeProvider>
         <NavigationProvider router={Router}>
         <Drawer
-          content={<View style={{ backgroundColor: Colors.white, flex: 1 }}>
+          onDrawerClose={this._closeDrawer}
+          open={this.state.open}
+          navigationView={<View style={{ backgroundColor: Colors.white, flex: 1 }}>
             <DrawerItem text='Ahmed' iconName='airplay' />
             <DrawerItem text='Ahmed' iconName='airplay' active />
             <DrawerItem text='Ahmed' iconName='airplay' />
@@ -33,6 +45,18 @@ class App extends Component {
                 title: 'Examples',
                 tintColor: Colors.white,
                 backgroundColor: Colors.indigo500,
+                renderLeft: () => (
+                  <TouchableOpacity
+                    onPress={this._openDrawer}
+                    style={{ margin: 8 }}
+                  >
+                    <Icon
+                      name='menu'
+                      size={24}
+                      color='white'
+                    />
+                  </TouchableOpacity>
+                  ),
               },
             }}
             initialRoute={Router.getRoute('home')}
