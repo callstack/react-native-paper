@@ -10,16 +10,18 @@ import {
   StyleSheet,
 } from 'react-native';
 import { Colors, TouchableRipple } from 'react-native-paper';
-import CardExample from './CardExample';
-import RippleExample from './RippleExample';
-import PaperExample from './PaperExample';
-import TextExample from './TextExample';
 import ButtonExample from './ButtonExample';
+import CardExample from './CardExample';
+import CheckboxExample from './CheckboxExample';
 import DividerExample from './DividerExample';
+import PaperExample from './PaperExample';
+import RippleExample from './RippleExample';
+import TextExample from './TextExample';
 
 export const examples = {
   button: ButtonExample,
   card: CardExample,
+  checkbox: CheckboxExample,
   divider: DividerExample,
   paper: PaperExample,
   ripple: RippleExample,
