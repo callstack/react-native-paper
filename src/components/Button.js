@@ -33,6 +33,7 @@ type Props = {
   loading?: boolean;
   roundness?: number;
   icon?: string;
+  color?: string;
   children?: string;
   onPress?: Function;
   style?: any;
@@ -52,6 +53,7 @@ class Button extends Component<DefaultProps, Props, State> {
     loading: PropTypes.bool,
     roundness: PropTypes.number,
     icon: PropTypes.string,
+    color: PropTypes.string,
     children: PropTypes.string.isRequired,
     onPress: PropTypes.func,
     style: View.propTypes.style,
@@ -98,6 +100,7 @@ class Button extends Component<DefaultProps, Props, State> {
       loading,
       roundness,
       icon,
+      color: buttonColor,
       children,
       onPress,
       style,
@@ -108,14 +111,22 @@ class Button extends Component<DefaultProps, Props, State> {
 
     let backgroundColor, textColor, isDark;
 
-    if (disabled) {
-      backgroundColor = raised ? 'rgba(0, 0, 0, .12)' : 'transparent';
-    } else {
-      if (primary) {
-        backgroundColor = colors.primary;
+    if (raised) {
+      if (disabled) {
+        backgroundColor = 'rgba(0, 0, 0, .12)';
       } else {
-        backgroundColor = raised ? white : 'transparent';
+        if (buttonColor) {
+          backgroundColor = buttonColor;
+        } else {
+          if (primary) {
+            backgroundColor = colors.primary;
+          } else {
+            backgroundColor = dark ? black : white;
+          }
+        }
       }
+    } else {
+      backgroundColor = 'transparent';
     }
 
     if (typeof dark === 'boolean') {
@@ -127,7 +138,19 @@ class Button extends Component<DefaultProps, Props, State> {
     if (disabled) {
       textColor = 'rgba(0, 0, 0, .26)';
     } else {
-      textColor = isDark ? white : black;
+      if (raised) {
+        textColor = isDark ? white : black;
+      } else {
+        if (buttonColor) {
+          textColor = buttonColor;
+        } else {
+          if (primary) {
+            textColor = colors.primary;
+          } else {
+            textColor = isDark ? white : black;
+          }
+        }
+      }
     }
 
     const rippleColor = color(textColor).alpha(0.32).rgbaString();
@@ -152,7 +175,7 @@ class Button extends Component<DefaultProps, Props, State> {
             style={styles.icon}
           /> : null
         }
-        <Text style={[ styles.label, textStyle, { fontFamily } ]}>
+        <Text numberOfLines={1} style={[ styles.label, textStyle, { fontFamily } ]}>
           {children ? children.toUpperCase() : ''}
         </Text>
       </View>
