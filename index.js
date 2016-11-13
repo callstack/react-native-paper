@@ -17,3 +17,5 @@ export { default as Paragraph } from './src/components/Typography/Paragraph';
 export { default as Subheading } from './src/components/Typography/Subheading';
 export { default as Title } from './src/components/Typography/Title';
 export { default as Text } from './src/components/Typography/Text';
+
+export { default as Divider } from './src/components/Divider';

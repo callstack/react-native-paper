@@ -15,13 +15,15 @@ import RippleExample from './RippleExample';
 import PaperExample from './PaperExample';
 import TextExample from './TextExample';
 import ButtonExample from './ButtonExample';
+import DividerExample from './DividerExample';
 
 export const examples = {
-  ripple: RippleExample,
-  paper: PaperExample,
-  text: TextExample,
-  card: CardExample,
   button: ButtonExample,
+  card: CardExample,
+  divider: DividerExample,
+  paper: PaperExample,
+  ripple: RippleExample,
+  text: TextExample,
 };
 
 export default class ExampleList extends Component {
