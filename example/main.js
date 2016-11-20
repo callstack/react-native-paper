@@ -17,9 +17,18 @@ const {
   width: screenWidth,
 } = Dimensions.get('window');
 
+const DrawerItems = [
+  { label: 'Inbox', icon: 'inbox', key: 0 },
+  { label: 'Starred', icon: 'star', key: 1 },
+  { label: 'Sent mail', icon: 'send', key: 2 },
+  { label: 'A very very long title that should be truncate', icon: 'delete', key: 3 },
+  { label: 'No Icon', key: 4 },
+];
+
 class App extends Component {
   state = {
     open: false,
+    drawerItemIndex: 0,
   }
   _openDrawer = () => {
     this.setState({ open: true });
@@ -27,14 +36,19 @@ class App extends Component {
   _closeDrawer = () => {
     this.setState({ open: false });
   }
+  _setDrawerItem = index => this.setState({ drawerItemIndex: index })
+
   _renderDrawerItems = () => {
     return (
-      <View style={{ flex: 1 }}>
-        <Drawer.Group label='Components'>
-          <Drawer.Item label='Ahmed' icon='airplay' />
-          <Drawer.Item label='Ahmed' icon='airplay' active />
-          <Drawer.Item label='Ahmed' />
-          <Drawer.Item label='Kalam kteeer gedannnnnnn udfgdhsfgjhdsfgjdhsgf sdhfg ds' icon='airplay' />
+      <View style={{ flex: 1, marginTop: 22 }}>
+        <Drawer.Group label='Subheader'>
+          {DrawerItems.map((props, index) => (
+            <Drawer.Item
+              {...props}
+              key={props.key}
+              active={this.state.drawerItemIndex === index}
+              onPress={() => this._setDrawerItem(index)}
+            />))}
         </Drawer.Group>
       </View>
     );

@@ -33,7 +33,7 @@ const DrawerItem = ({ icon, label, active, onPress, theme }: Props) => {
           size={24}
           color={iconColor}
                   />}
-        <Text numberOfLines={1} style={{ color: labelColor, fontFamily, marginLeft: labelMargin }}>{label}</Text>
+        <Text numberOfLines={1} style={{ color: labelColor, fontFamily, marginLeft: labelMargin, marginRight: 16 }}>{label}</Text>
       </View>
     </TouchableRipple>
   );
