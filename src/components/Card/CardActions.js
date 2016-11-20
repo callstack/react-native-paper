@@ -1,20 +1,30 @@
 /* @flow */
 
-import React from 'react';
+import React, { PropTypes, Children } from 'react';
 import {
   StyleSheet,
   View,
 } from 'react-native';
 
 type Props = {
+  children?: any;
   style?: any;
 }
 
 const CardActions = (props: Props) => {
-  return <View {...props} style={[ styles.container, props.style ]} />;
+  return (
+    <View {...props} style={[ styles.container, props.style ]}>
+      {Children.map(props.children, child =>
+        React.cloneElement(child, {
+          shrink: child.props !== false,
+        })
+      )}
+    </View>
+  );
 };
 
 CardActions.propTypes = {
+  children: PropTypes.node.isRequired,
   style: View.propTypes.style,
 };
 

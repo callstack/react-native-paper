@@ -23,6 +23,7 @@ const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
 type Props = {
   disabled?: boolean;
+  shrink?: boolean;
   raised?: boolean;
   primary?: boolean;
   dark?: boolean;
@@ -42,6 +43,7 @@ type State = {
 class Button extends PureComponent<void, Props, State> {
   static propTypes = {
     disabled: PropTypes.bool,
+    shrink: PropTypes.bool,
     raised: PropTypes.bool,
     primary: PropTypes.bool,
     dark: PropTypes.bool,
@@ -84,6 +86,7 @@ class Button extends PureComponent<void, Props, State> {
   render() {
     const {
       disabled,
+      shrink,
       raised,
       primary,
       dark,
@@ -164,14 +167,17 @@ class Button extends PureComponent<void, Props, State> {
             style={styles.icon}
           /> : null
         }
-        <Text numberOfLines={1} style={[ styles.label, textStyle, { fontFamily } ]}>
+        <Text numberOfLines={1} style={[ styles.label, shrink ? null : styles.expandLabel, textStyle, { fontFamily } ]}>
           {children ? children.toUpperCase() : ''}
         </Text>
       </View>
     );
 
     return (
-      <AnimatedPaper elevation={disabled ? 0 : this.state.elevation} style={[ styles.button, buttonStyle, style ]}>
+      <AnimatedPaper
+        elevation={disabled ? 0 : this.state.elevation}
+        style={[ styles.button, shrink ? null : styles.expand, buttonStyle, style ]}
+      >
         {disabled ? content :
           <TouchableRipple
             borderless
@@ -193,6 +199,8 @@ class Button extends PureComponent<void, Props, State> {
 const styles = StyleSheet.create({
   button: {
     margin: 4,
+  },
+  expand: {
     minWidth: 88,
   },
   content: {
@@ -208,6 +216,9 @@ const styles = StyleSheet.create({
   label: {
     textAlign: 'center',
     marginVertical: 9,
+    marginHorizontal: 8,
+  },
+  expandLabel: {
     marginHorizontal: 16,
   },
 });
