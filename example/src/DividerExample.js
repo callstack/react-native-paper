@@ -19,15 +19,12 @@ const DividerExample = () => {
     <ListView
       style={styles.container}
       dataSource={dataSource}
-      renderRow={(rowData, sectionId, rowId) => (
-        <Subheading
-          key={rowId}
-          style={styles.item}
-        >
+      renderRow={rowData => (
+        <Subheading style={styles.item}>
           {rowData}
         </Subheading>
       )}
-      renderSeparator={(sectionId, rowId) => <Divider key={rowId}/>}
+      renderSeparator={(sectionId, rowId) => <Divider key={rowId} />}
     />
   );
 };
