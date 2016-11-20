@@ -39,8 +39,8 @@ class Drawer extends Component<DefaultProps, Props, void> {
     content: PropTypes.node.isRequired,
     /*
     Specifies the lock mode of the drawer. The drawer can be locked in 2 states:
-     - unlocked (default), meaning that the drawer will respond (open/close) to touch gestures
-     - locked, meaning that the drawer won't respond to touch gestures but it can be open by passing prop `open`
+     - false, meaning that the drawer will respond (open/close) to touch gestures
+     - true, meaning that the drawer won't respond to touch gestures but it can be open by passing prop `open`
      */
     locked: PropTypes.bool,
     onClose: PropTypes.func,
@@ -96,6 +96,11 @@ class Drawer extends Component<DefaultProps, Props, void> {
         this._root.close();
       }
     });
+  }
+
+  _handleLayout = (e: any) => {
+    const { width } = e.nativeEvent.layout;
+    global.alert(width);
   }
 
   _calculateOpenDrawerOffset = viewport => this.props.width ?

@@ -4,7 +4,7 @@ import Exponent from 'exponent';
 import React, { Component } from 'react';
 import {
   View,
-  Dimensions,
+  StyleSheet,
 } from 'react-native';
 import {
   NavigationProvider,
@@ -13,9 +13,6 @@ import {
 import { Colors, ThemeProvider, Drawer } from 'react-native-paper';
 import Router from './src/Router';
 
-const {
-  width: screenWidth,
-} = Dimensions.get('window');
 
 const DrawerItems = [
   { label: 'Inbox', icon: 'inbox', key: 0 },
@@ -30,15 +27,16 @@ class App extends Component {
     open: false,
     drawerItemIndex: 0,
   }
-  _openDrawer = () => this.setState({ open: true })
 
-  _closeDrawer = () => this.setState({ open: false })
+  _handleOpenDrawer = () => this.setState({ open: true })
+
+  _handleCloseDrawer = () => this.setState({ open: false })
 
   _setDrawerItem = index => this.setState({ drawerItemIndex: index })
 
   _renderDrawerItems = () => {
     return (
-      <View style={{ flex: 1, marginTop: 22 }}>
+      <View style={styles.drawerContent}>
         <Drawer.Section label='Subheader'>
           {DrawerItems.map((props, index) => (
             <Drawer.Item
@@ -57,9 +55,8 @@ class App extends Component {
       <ThemeProvider>
         <NavigationProvider router={Router}>
           <Drawer
-            width={(screenWidth * 80) / 100}
-            onOpen={this._openDrawer}
-            onClose={this._closeDrawer}
+            onOpen={this._handleOpenDrawer}
+            onClose={this._handleCloseDrawer}
             open={this.state.open}
             content={this._renderDrawerItems()}
           >
@@ -79,4 +76,12 @@ class App extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  drawerContent: {
+    flex: 1,
+    marginTop: 22,
+  },
+});
+
 Exponent.registerRootComponent(App);
