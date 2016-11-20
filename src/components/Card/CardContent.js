@@ -15,7 +15,7 @@ type Props = {
 
 const CardContent = (props: Props) => {
   const { index, total, siblings, style } = props;
-  const cover = 'CardCover';
+  const cover = 'withTheme(CardCover)';
 
   let contentStyle, prev, next;
 

@@ -87,7 +87,7 @@ class Card extends Component<DefaultProps, Props, State> {
 
     const { roundness } = theme;
     const total = Children.count(children);
-    const siblings = Children.map(children, child => child.type.name);
+    const siblings = Children.map(children, child => child.type.displayName);
 
     return (
       <AnimatedPaper elevation={this.state.elevation} style={[ styles.card, { borderRadius: roundness }, style ]}>
