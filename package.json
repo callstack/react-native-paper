@@ -39,6 +39,7 @@
     "react-native-vector-icons": "~3.0.0"
   },
   "dependencies": {
-    "color": "^0.11.4"
+    "color": "^0.11.4",
+    "react-native-drawer": "^2.3.0"
   }
 }
