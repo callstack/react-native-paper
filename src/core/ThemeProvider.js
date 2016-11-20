@@ -6,14 +6,27 @@ import {
   Children,
 } from 'react';
 import DefaultTheme from '../styles/DefaultTheme';
+import type { Theme } from '../types/Theme';
+
+type DefaultProps = {
+  theme: Theme
+}
+
+type Props = {
+  children?: any;
+  theme?: Theme
+}
 
 export const theme = 'react-native-paper$theme';
 
-export default class ThemeProvider extends PureComponent {
-
+export default class ThemeProvider extends PureComponent<DefaultProps, Props, void> {
   static propTypes = {
     children: PropTypes.node.isRequired,
     theme: PropTypes.object,
+  };
+
+  static defaultProps = {
+    theme: DefaultTheme,
   };
 
   static childContextTypes = {
@@ -22,7 +35,7 @@ export default class ThemeProvider extends PureComponent {
 
   getChildContext() {
     return {
-      [theme]: this.props.theme || DefaultTheme,
+      [theme]: this.props.theme,
     };
   }
 
