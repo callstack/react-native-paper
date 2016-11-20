@@ -21,17 +21,12 @@ import type { Theme } from '../types/Theme';
 
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
-type DefaultProps = {
-  roundness: number;
-}
-
 type Props = {
   disabled?: boolean;
   raised?: boolean;
   primary?: boolean;
   dark?: boolean;
   loading?: boolean;
-  roundness?: number;
   icon?: string;
   color?: string;
   children?: string;
@@ -44,24 +39,19 @@ type State = {
   elevation: Animated.Value;
 }
 
-class Button extends PureComponent<DefaultProps, Props, State> {
+class Button extends PureComponent<void, Props, State> {
   static propTypes = {
     disabled: PropTypes.bool,
     raised: PropTypes.bool,
     primary: PropTypes.bool,
     dark: PropTypes.bool,
     loading: PropTypes.bool,
-    roundness: PropTypes.number,
     icon: PropTypes.string,
     color: PropTypes.string,
     children: PropTypes.string.isRequired,
     onPress: PropTypes.func,
     style: View.propTypes.style,
     theme: PropTypes.object.isRequired,
-  };
-
-  static defaultProps = {
-    roundness: 2,
   };
 
   constructor(props: Props) {
@@ -98,7 +88,6 @@ class Button extends PureComponent<DefaultProps, Props, State> {
       primary,
       dark,
       loading,
-      roundness,
       icon,
       color: buttonColor,
       children,
@@ -106,7 +95,7 @@ class Button extends PureComponent<DefaultProps, Props, State> {
       style,
       theme,
     } = this.props;
-    const { colors } = theme;
+    const { colors, roundness } = theme;
     const fontFamily = theme.fonts.medium;
 
     let backgroundColor, textColor, isDark;

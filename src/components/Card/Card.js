@@ -82,13 +82,15 @@ class Card extends Component<DefaultProps, Props, State> {
       children,
       onPress,
       style,
+      theme,
     } = this.props;
 
+    const { roundness } = theme;
     const total = Children.count(children);
     const siblings = Children.map(children, child => child.type.name);
 
     return (
-      <AnimatedPaper elevation={this.state.elevation} style={[ styles.card, style ]}>
+      <AnimatedPaper elevation={this.state.elevation} style={[ styles.card, { borderRadius: roundness }, style ]}>
         <TouchableWithoutFeedback
           delayPressIn={0}
           onPress={onPress}
@@ -114,7 +116,6 @@ class Card extends Component<DefaultProps, Props, State> {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: white,
-    borderRadius: 2,
     margin: 8,
   },
   container: {
