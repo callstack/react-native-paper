@@ -20,3 +20,4 @@ export { default as Title } from './components/Typography/Title';
 export { default as Text } from './components/Typography/Text';
 
 export { default as Divider } from './components/Divider';
+export { default as Drawer } from './components/Drawer';

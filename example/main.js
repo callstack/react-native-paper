@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import {
   View,
   StyleSheet,
+  Platform,
 } from 'react-native';
 import {
   NavigationProvider,
@@ -80,7 +81,7 @@ class App extends Component {
 const styles = StyleSheet.create({
   drawerContent: {
     flex: 1,
-    marginTop: 22,
+    marginTop: Platform.OS === 'android' ? 25 : 22,
   },
 });
 

@@ -17,7 +17,7 @@ type Props = {
   onClose?: Function;
   onOpen?: Function;
   open?: boolean;
-  swipeDistance?: number;
+  swipeRatio?: number;
   style?: any;
   side?: string;
   width?: number;
@@ -26,7 +26,7 @@ type Props = {
 type DefaultProps = {
   locked: boolean;
   open: boolean;
-  swipeDistance: number;
+  swipeRatio: number;
   side: string;
 }
 
@@ -47,7 +47,7 @@ class Drawer extends Component<DefaultProps, Props, void> {
     onOpen: PropTypes.func,
     open: PropTypes.bool,
     /* Ratio of screen width that is valid for the start of a pan open action */
-    swipeDistance: PropTypes.number,
+    swipeRatio: PropTypes.number,
     width: PropTypes.number,
     style: View.propTypes.style,
     side: PropTypes.oneOf([ 'left', 'right' ]),
@@ -57,7 +57,7 @@ class Drawer extends Component<DefaultProps, Props, void> {
     side: 'left',
     locked: false,
     open: false,
-    swipeDistance: 0.05,
+    swipeRatio: 0.05,
   }
 
   _root: any;
@@ -98,11 +98,6 @@ class Drawer extends Component<DefaultProps, Props, void> {
     });
   }
 
-  _handleLayout = (e: any) => {
-    const { width } = e.nativeEvent.layout;
-    global.alert(width);
-  }
-
   _calculateOpenDrawerOffset = viewport => this.props.width ?
       (viewport.width - this.props.width) :
       (viewport.width - ((viewport.width * 80) / 100))
@@ -115,7 +110,7 @@ class Drawer extends Component<DefaultProps, Props, void> {
       side,
       locked,
       open,
-      swipeDistance,
+      swipeRatio,
     } = this.props;
 
     return (
@@ -131,7 +126,7 @@ class Drawer extends Component<DefaultProps, Props, void> {
         content={content}
         open={open}
         openDrawerOffset={this._calculateOpenDrawerOffset}
-        panOpenMask={swipeDistance}
+        panOpenMask={swipeRatio}
         onClose={this._handleClose}
         onOpen={this._handleOpen}
         tweenHandler={this._tweenHandler}
