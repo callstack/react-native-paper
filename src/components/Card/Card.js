@@ -1,7 +1,8 @@
 /* @flow */
 
 import React, {
-  PureComponent,
+  Component,
+  Children,
   PropTypes,
 } from 'react';
 import {
@@ -10,10 +11,13 @@ import {
   TouchableWithoutFeedback,
   StyleSheet,
 } from 'react-native';
-import Paper from './Paper';
-import { white } from '../styles/colors';
-import withTheme from '../core/withTheme';
-import type { Theme } from '../types/Theme';
+import Paper from '../Paper';
+import CardContent from './CardContent';
+import CardCover from './CardCover';
+import CardActions from './CardActions';
+import { white } from '../../styles/colors';
+import withTheme from '../../core/withTheme';
+import type { Theme } from '../../types/Theme';
 
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
@@ -33,7 +37,11 @@ type State = {
   elevation: Animated.Value;
 }
 
-class Card extends PureComponent<DefaultProps, Props, State> {
+class Card extends Component<DefaultProps, Props, State> {
+  static Cover = CardCover;
+  static Content = CardContent;
+  static Actions = CardActions;
+
   static propTypes = {
     elevation: PropTypes.number,
     children: PropTypes.node.isRequired,
@@ -74,10 +82,15 @@ class Card extends PureComponent<DefaultProps, Props, State> {
       children,
       onPress,
       style,
+      theme,
     } = this.props;
 
+    const { roundness } = theme;
+    const total = Children.count(children);
+    const siblings = Children.map(children, child => child.type.name);
+
     return (
-      <AnimatedPaper elevation={this.state.elevation} style={[ styles.card, style ]}>
+      <AnimatedPaper elevation={this.state.elevation} style={[ styles.card, { borderRadius: roundness }, style ]}>
         <TouchableWithoutFeedback
           delayPressIn={0}
           onPress={onPress}
@@ -86,7 +99,13 @@ class Card extends PureComponent<DefaultProps, Props, State> {
           style={styles.container}
         >
           <View style={styles.container}>
-            {children}
+            {Children.map(children, (child, index) =>
+              React.cloneElement(child, {
+                index,
+                total,
+                siblings,
+              })
+            )}
           </View>
         </TouchableWithoutFeedback>
       </AnimatedPaper>
@@ -97,7 +116,6 @@ class Card extends PureComponent<DefaultProps, Props, State> {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: white,
-    borderRadius: 2,
     margin: 8,
   },
   container: {

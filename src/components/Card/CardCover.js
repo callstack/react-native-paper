@@ -1,0 +1,65 @@
+/* @flow */
+
+import React, { PropTypes } from 'react';
+import {
+  StyleSheet,
+  Image,
+} from 'react-native';
+import withTheme from '../../core/withTheme';
+import { grey200 } from '../../styles/colors';
+import type { Theme } from '../../types/Theme';
+
+type Props = {
+  index?: number;
+  total?: number;
+  style?: any;
+  theme: Theme;
+}
+
+const CardCover = (props: Props) => {
+  const { index, total, style, theme } = props;
+  const { roundness } = theme;
+
+  let coverStyle;
+
+  if (index === 0) {
+    if (total === 1) {
+      coverStyle = {
+        borderRadius: roundness,
+      };
+    } else {
+      coverStyle = {
+        borderTopLeftRadius: roundness,
+        borderTopRightRadius: roundness,
+      };
+    }
+  } else {
+    if (typeof total === 'number' && index === (total - 1)) {
+      coverStyle = {
+        borderBottomLeftRadius: roundness,
+      };
+    }
+  }
+
+  return <Image {...props} style={[ styles.container, coverStyle, style ]} />;
+};
+
+CardCover.propTypes = {
+  index: PropTypes.number,
+  total: PropTypes.number,
+  style: Image.propTypes.style,
+  theme: PropTypes.object.isRequired,
+};
+
+const styles = StyleSheet.create({
+  container: {
+    height: 195,
+    width: null,
+    padding: 16,
+    justifyContent: 'flex-end',
+    backgroundColor: grey200,
+    resizeMode: 'cover',
+  },
+});
+
+export default withTheme(CardCover);
