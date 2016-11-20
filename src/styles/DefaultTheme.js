@@ -10,6 +10,7 @@ import {
 import fonts from './fonts';
 
 export default {
+  roundness: 2,
   colors: {
     primary: indigo500,
     primaryDark: indigo700,

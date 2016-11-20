@@ -1,6 +1,7 @@
 /* @flow */
 
 export type Theme = {
+  roundness: number;
   colors: {
     primary: string;
     primaryDark: string;
