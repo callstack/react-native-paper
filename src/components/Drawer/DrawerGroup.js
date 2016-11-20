@@ -1,14 +1,14 @@
 /* @flow */
 
 import color from 'color';
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { View, Text } from 'react-native';
 import Divider from '../Divider';
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types/Theme';
 
 type Props = {
-  children?: any;
+  children: any;
   label?: string;
   theme: Theme;
 }
@@ -27,6 +27,12 @@ const DrawerGroup = ({ children, label, theme }: Props) => {
       <Divider style={{ marginVertical: 4 }} />
     </View>
   );
+};
+
+DrawerGroup.propTypes = {
+  children: PropTypes.node.isRequired,
+  label: PropTypes.string,
+  theme: PropTypes.object.isRequired,
 };
 
 export default withTheme(DrawerGroup);

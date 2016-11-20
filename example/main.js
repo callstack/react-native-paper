@@ -21,7 +21,7 @@ const DrawerItems = [
   { label: 'Inbox', icon: 'inbox', key: 0 },
   { label: 'Starred', icon: 'star', key: 1 },
   { label: 'Sent mail', icon: 'send', key: 2 },
-  { label: 'A very very long title that should be truncate', icon: 'delete', key: 3 },
+  { label: 'A very long title that will be truncated', icon: 'delete', key: 3 },
   { label: 'No Icon', key: 4 },
 ];
 
@@ -30,12 +30,8 @@ class App extends Component {
     open: false,
     drawerItemIndex: 0,
   }
-  _openDrawer = () => {
-    this.setState({ open: true });
-  }
-  _closeDrawer = () => {
-    this.setState({ open: false });
-  }
+  _openDrawer = () => this.setState({ open: true })
+  _closeDrawer = () => this.setState({ open: false })
   _setDrawerItem = index => this.setState({ drawerItemIndex: index })
 
   _renderDrawerItems = () => {

@@ -13,7 +13,7 @@ import type { Theme } from '../../types/Theme';
 
 type Props = {
   icon?: string;
-  label?: string;
+  label: string;
   active?: boolean;
   onPress?: Function;
   theme: Theme;
@@ -24,15 +24,16 @@ const DrawerItem = ({ icon, label, active, onPress, theme }: Props) => {
   const labelColor = active ? colors.primary : color(colors.text).alpha(0.87).rgbaString();
   const iconColor = active ? colors.primary : color(colors.text).alpha(0.54).rgbaString();
   const fontFamily = theme.fonts.medium;
-  const labelMargin = icon ? 16 : 0;
+  const labelMargin = icon ? 32 : 0;
   return (
     <TouchableRipple onPress={onPress}>
       <View style={[ styles.wrapper, { backgroundColor: active ? grey300 : 'transparent' } ]}>
-        { icon && <Icon
-          name={icon}
-          size={24}
-          color={iconColor}
-                  />}
+        { icon &&
+          <Icon
+            name={icon}
+            size={24}
+            color={iconColor}
+          />}
         <Text numberOfLines={1} style={{ color: labelColor, fontFamily, marginLeft: labelMargin, marginRight: 16 }}>{label}</Text>
       </View>
     </TouchableRipple>
