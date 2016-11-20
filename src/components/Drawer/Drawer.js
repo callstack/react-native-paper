@@ -1,65 +1,65 @@
 /* @flow */
 
-import { default as RNDrawer } from 'react-native-drawer';
+import RNDrawer from 'react-native-drawer';
 import React, {
   Component,
   PropTypes,
 } from 'react';
+import { View, StyleSheet } from 'react-native';
 import DrawerItem from './DrawerItem';
-import DrawerGroup from './DrawerGroup';
+import DrawerSection from './DrawerSection';
 import { white } from '../../styles/colors';
 
 type Props = {
   children?: any;
-  drawerBackgroundColor?: string;
-  drawerPosition?: string;
-  drawerWidth?: number;
-  drawerLockMode?: string;
-  navigationView: any;
+  content?: any;
+  locked?: boolean;
   onClose?: Function;
   onOpen?: Function;
   open?: boolean;
-  panOpenMask?: number;
+  swipeDistance?: number;
+  style?: any;
+  side?: string;
+  width?: number;
 }
 
 type DefaultProps = {
-  drawerBackgroundColor: string;
-  drawerPosition: string;
-  drawerLockMode: string;
+  locked: boolean;
   open: boolean;
-  panOpenMask: number;
+  swipeDistance: number;
+  side: string;
 }
 
 class Drawer extends Component<DefaultProps, Props, void> {
   static Item = DrawerItem;
-  static Group = DrawerGroup;
+  static Section = DrawerSection;
 
   static propTypes = {
     children: PropTypes.node.isRequired,
-    drawerBackgroundColor: PropTypes.string,
-    drawerPosition: PropTypes.oneOf([ 'left', 'right' ]),
-    drawerWidth: PropTypes.number,
+    content: PropTypes.node.isRequired,
     /*
     Specifies the lock mode of the drawer. The drawer can be locked in 2 states:
      - unlocked (default), meaning that the drawer will respond (open/close) to touch gestures
      - locked, meaning that the drawer won't respond to touch gestures but it can be open by passing prop `open`
      */
-    drawerLockMode: PropTypes.oneOf([ 'unlocked', 'locked' ]),
-    navigationView: PropTypes.node.isRequired,
+    locked: PropTypes.bool,
     onClose: PropTypes.func,
     onOpen: PropTypes.func,
     open: PropTypes.bool,
     /* Ratio of screen width that is valid for the start of a pan open action */
-    panOpenMask: PropTypes.number,
+    swipeDistance: PropTypes.number,
+    width: PropTypes.number,
+    style: View.propTypes.style,
+    side: PropTypes.oneOf([ 'left', 'right' ]),
   }
 
   static defaultProps = {
-    drawerBackgroundColor: white,
-    drawerPosition: 'left',
-    drawerLockMode: 'unlocked',
+    side: 'left',
+    locked: false,
     open: false,
-    panOpenMask: 0.05,
+    swipeDistance: 0.05,
   }
+
   _root: any;
 
   _tweenHandler = ratio => ({
@@ -70,8 +70,9 @@ class Drawer extends Component<DefaultProps, Props, void> {
       opacity: ratio / 2,
       backgroundColor: 'black',
     },
-  });
-  _onClose = () => {
+  })
+
+  _handleClose = () => {
     if (this.props.onClose) {
       this.props.onClose();
     }
@@ -83,7 +84,8 @@ class Drawer extends Component<DefaultProps, Props, void> {
       }
     });
   }
-  _onOpen = () => {
+
+  _handleOpen = () => {
     if (this.props.onOpen) {
       this.props.onOpen();
     }
@@ -95,19 +97,20 @@ class Drawer extends Component<DefaultProps, Props, void> {
       }
     });
   }
-  _calculateOpenDrawerOffset = viewport => this.props.drawerWidth ?
-      (viewport.width - this.props.drawerWidth) :
+
+  _calculateOpenDrawerOffset = viewport => this.props.width ?
+      (viewport.width - this.props.width) :
       (viewport.width - ((viewport.width * 80) / 100))
 
   render(): ?React.Element<any> {
     const {
       children,
-      drawerBackgroundColor,
-      drawerPosition,
-      drawerLockMode,
-      navigationView,
+      content,
+      style,
+      side,
+      locked,
       open,
-      panOpenMask,
+      swipeDistance,
     } = this.props;
 
     return (
@@ -117,18 +120,18 @@ class Drawer extends Component<DefaultProps, Props, void> {
         tapToClose
         captureGestures
         negotiatePan
-        acceptPan={drawerLockMode === 'unlocked'}
+        acceptPan={!locked}
         type='overlay'
         tweenEasing='easeInQuad'
-        content={navigationView}
+        content={content}
         open={open}
         openDrawerOffset={this._calculateOpenDrawerOffset}
-        panOpenMask={panOpenMask}
-        onClose={this._onClose}
-        onOpen={this._onOpen}
+        panOpenMask={swipeDistance}
+        onClose={this._handleClose}
+        onOpen={this._handleOpen}
         tweenHandler={this._tweenHandler}
-        side={drawerPosition}
-        styles={{ drawer: { backgroundColor: drawerBackgroundColor } }}
+        side={side}
+        styles={{ drawer: StyleSheet.flatten({ backgroundColor: white }, style) }}
       >
         {children}
       </RNDrawer>

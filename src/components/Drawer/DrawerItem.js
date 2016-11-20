@@ -19,14 +19,14 @@ type Props = {
   theme: Theme;
 }
 
-const DrawerItem = ({ icon, label, active, onPress, theme }: Props) => {
+const DrawerItem = ({ icon, label, active, onPress, theme, ...props }: Props) => {
   const { colors } = theme;
   const labelColor = active ? colors.primary : color(colors.text).alpha(0.87).rgbaString();
   const iconColor = active ? colors.primary : color(colors.text).alpha(0.54).rgbaString();
   const fontFamily = theme.fonts.medium;
   const labelMargin = icon ? 32 : 0;
   return (
-    <TouchableRipple onPress={onPress}>
+    <TouchableRipple {...props} onPress={onPress}>
       <View style={[ styles.wrapper, { backgroundColor: active ? grey300 : 'transparent' } ]}>
         { icon &&
           <Icon

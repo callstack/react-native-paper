@@ -13,13 +13,13 @@ type Props = {
   theme: Theme;
 }
 
-const DrawerGroup = ({ children, label, theme }: Props) => {
+const DrawerSection = ({ children, label, theme, ...props }: Props) => {
   const { colors, fonts } = theme;
   const labelColor = color(colors.text).alpha(0.54).rgbaString();
   const fontFamily = fonts.medium;
 
   return (
-    <View>
+    <View {...props}>
       { label &&
       <View style={{ height: 40, justifyContent: 'center' }}>
        <Text numberOfLines={1} style={{ color: labelColor, fontFamily, marginLeft: 16 }}>{label}</Text>
@@ -30,10 +30,10 @@ const DrawerGroup = ({ children, label, theme }: Props) => {
   );
 };
 
-DrawerGroup.propTypes = {
+DrawerSection.propTypes = {
   children: PropTypes.node.isRequired,
   label: PropTypes.string,
   theme: PropTypes.object.isRequired,
 };
 
-export default withTheme(DrawerGroup);
+export default withTheme(DrawerSection);

@@ -31,13 +31,15 @@ class App extends Component {
     drawerItemIndex: 0,
   }
   _openDrawer = () => this.setState({ open: true })
+
   _closeDrawer = () => this.setState({ open: false })
+
   _setDrawerItem = index => this.setState({ drawerItemIndex: index })
 
   _renderDrawerItems = () => {
     return (
       <View style={{ flex: 1, marginTop: 22 }}>
-        <Drawer.Group label='Subheader'>
+        <Drawer.Section label='Subheader'>
           {DrawerItems.map((props, index) => (
             <Drawer.Item
               {...props}
@@ -45,7 +47,7 @@ class App extends Component {
               active={this.state.drawerItemIndex === index}
               onPress={() => this._setDrawerItem(index)}
             />))}
-        </Drawer.Group>
+        </Drawer.Section>
       </View>
     );
   };
@@ -55,11 +57,11 @@ class App extends Component {
       <ThemeProvider>
         <NavigationProvider router={Router}>
           <Drawer
-            drawerWidth={(screenWidth * 80) / 100}
+            width={(screenWidth * 80) / 100}
             onOpen={this._openDrawer}
             onClose={this._closeDrawer}
             open={this.state.open}
-            navigationView={this._renderDrawerItems()}
+            content={this._renderDrawerItems()}
           >
             <StackNavigation
               defaultRouteConfig={{
