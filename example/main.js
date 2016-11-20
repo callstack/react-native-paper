@@ -10,8 +10,7 @@ import {
   NavigationProvider,
   StackNavigation,
 } from '@exponent/ex-navigation';
-import { Colors, ThemeProvider, Drawer, TouchableRipple } from 'react-native-paper';
-import { MaterialIcons as Icon } from '@exponent/vector-icons';
+import { Colors, ThemeProvider, Drawer } from 'react-native-paper';
 import Router from './src/Router';
 
 const {
@@ -31,12 +30,12 @@ class App extends Component {
   _renderDrawerItems = () => {
     return (
       <View style={{ flex: 1 }}>
-        <Drawer.DrawerGroup label='Components'>
-          <Drawer.DrawerItem label='Ahmed' icon='airplay' />
-          <Drawer.DrawerItem label='Ahmed' icon='airplay' active />
-          <Drawer.DrawerItem label='Ahmed' />
-          <Drawer.DrawerItem label='Ahmed' icon='airplay' />
-        </Drawer.DrawerGroup>
+        <Drawer.Group label='Components'>
+          <Drawer.Item label='Ahmed' icon='airplay' />
+          <Drawer.Item label='Ahmed' icon='airplay' active />
+          <Drawer.Item label='Ahmed' />
+          <Drawer.Item label='Kalam kteeer gedannnnnnn udfgdhsfgjhdsfgjdhsgf sdhfg ds' icon='airplay' />
+        </Drawer.Group>
       </View>
     );
   };
@@ -47,7 +46,8 @@ class App extends Component {
         <NavigationProvider router={Router}>
           <Drawer
             drawerWidth={(screenWidth * 80) / 100}
-            onDrawerClose={this._closeDrawer}
+            onOpen={this._openDrawer}
+            onClose={this._closeDrawer}
             open={this.state.open}
             navigationView={this._renderDrawerItems()}
           >
