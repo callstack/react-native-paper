@@ -4,7 +4,7 @@
   "slug": "react-native-paper-example",
   "sdkVersion": "11.0.0",
   "version": "1.0.0",
-  "orientation": "portrait",
+  "orientation": "default",
   "primaryColor": "#cccccc",
   "iconUrl": "https://s3.amazonaws.com/exp-brand-assets/ExponentEmptyManifest_192.png",
   "notification": {
