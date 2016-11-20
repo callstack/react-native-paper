@@ -31,8 +31,8 @@ export default class CardExample extends Component {
             </Paragraph>
           </Card.Content>
           <Card.Actions>
+            <Button primary>Cancel</Button>
             <Button primary>Got it</Button>
-            <Button primary>Scary</Button>
           </Card.Actions>
         </Card>
       </ScrollView>
@@ -44,5 +44,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.grey200,
+    padding: 4,
   },
 });

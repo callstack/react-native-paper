@@ -66,7 +66,7 @@ class Button extends PureComponent<void, Props, State> {
   _handlePressIn = () => {
     if (this.props.raised) {
       Animated.timing(this.state.elevation, {
-        toValue: 6,
+        toValue: 8,
         duration: 200,
       }).start();
     }
@@ -192,7 +192,7 @@ class Button extends PureComponent<void, Props, State> {
 
 const styles = StyleSheet.create({
   button: {
-    margin: 8,
+    margin: 4,
     minWidth: 88,
   },
   content: {
