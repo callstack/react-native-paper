@@ -1,13 +1,14 @@
 /* @flow */
-
+import color from 'color';
 import { default as RNDrawer } from 'react-native-drawer';
 import React, {
   Component,
   PropTypes,
 } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import Icon from './Icon';
 import TouchableRipple from './TouchableRipple';
+import Divider from './Divider';
 import { white, grey300 } from '../styles/colors';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types/Theme';
@@ -122,37 +123,73 @@ class Drawer extends Component<DefaultProps, Props, void> {
 
 type DrawerItemProps = {
   icon?: string;
-  text?: string;
+  label?: string;
   active?: boolean;
   onPress?: Function;
   theme: Theme;
 }
 
-const DrawerItem = ({ icon, text, active, onPress, theme }: DrawerItemProps) => {
+const DrawerItem = ({ icon, label, active, onPress, theme }: DrawerItemProps) => {
   const { colors } = theme;
-  const textColor = active ? colors.primary : colors.text;
+  const labelColor = active ? colors.primary : color(colors.text).alpha(0.87).rgbaString();
+  const iconColor = active ? colors.primary : color(colors.text).alpha(0.54).rgbaString();
+  const fontFamily = theme.fonts.medium;
+  const labelMargin = icon ? 16 : 0;
   return (
     <TouchableRipple onPress={onPress}>
-      <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 8, paddingVertical: 8, backgroundColor: active ? grey300 : 'transparent' }}>
+      <View style={[ drawerItemStyles.wrapper, { backgroundColor: active ? grey300 : 'transparent' } ]}>
         { icon && <Icon
           name={icon}
           size={24}
-          color={textColor}
-          style={{ marginRight: 8 }}
+          color={iconColor}
                   />}
-        <Text style={{ color: textColor }}>{text}</Text>
+        <Text numberOfLines={1} style={{ color: labelColor, fontFamily, marginLeft: labelMargin }}>{label}</Text>
       </View>
     </TouchableRipple>
   );
 };
 
+const drawerItemStyles = StyleSheet.create({
+  wrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+    height: 48,
+  },
+});
+
 DrawerItem.propTypes = {
   icon: PropTypes.string,
-  text: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   active: PropTypes.bool,
   onPress: PropTypes.func,
   theme: PropTypes.object.isRequired,
 };
 
+type DrawerGroupProps = {
+  children?: any;
+  label?: string;
+  theme: Theme;
+}
+
+const DrawerGroup = ({ children, label, theme }: DrawerGroupProps) => {
+  const { colors, fonts } = theme;
+  const labelColor = color(colors.text).alpha(0.54).rgbaString();
+  const fontFamily = fonts.medium;
+
+  return (
+    <View>
+      <View style={{ height: 40, justifyContent: 'center' }}>
+        <Text numberOfLines={1} style={{ color: labelColor, fontFamily, marginLeft: 16 }}>{label}</Text>
+      </View>
+      {children}
+      <Divider style={{ marginVertical: 4 }} />
+    </View>
+  );
+};
+
+Drawer.DrawerGroup = withTheme(DrawerGroup);
 Drawer.DrawerItem = withTheme(DrawerItem);
+
 export default Drawer;
