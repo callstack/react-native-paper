@@ -32,7 +32,7 @@ export default class CardExample extends Component {
           </Card.Content>
           <Card.Actions>
             <Button primary>Cancel</Button>
-            <Button primary>Got it</Button>
+            <Button primary>Ok</Button>
           </Card.Actions>
         </Card>
       </ScrollView>

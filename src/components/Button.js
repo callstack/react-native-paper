@@ -145,7 +145,7 @@ class Button extends PureComponent<void, Props, State> {
       }
     }
 
-    const rippleColor = color(textColor).clearer(0.32).rgbaString();
+    const rippleColor = color(textColor).alpha(0.32).rgbaString();
     const buttonStyle = { backgroundColor, borderRadius: roundness };
     const touchableStyle = { borderRadius: roundness };
     const textStyle = { color: textColor, fontFamily };
@@ -199,6 +199,7 @@ class Button extends PureComponent<void, Props, State> {
 const styles = StyleSheet.create({
   button: {
     margin: 4,
+    minWidth: 64,
   },
   expand: {
     minWidth: 88,
