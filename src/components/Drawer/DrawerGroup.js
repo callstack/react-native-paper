@@ -20,9 +20,10 @@ const DrawerGroup = ({ children, label, theme }: Props) => {
 
   return (
     <View>
+      { label &&
       <View style={{ height: 40, justifyContent: 'center' }}>
-        <Text numberOfLines={1} style={{ color: labelColor, fontFamily, marginLeft: 16 }}>{label}</Text>
-      </View>
+       <Text numberOfLines={1} style={{ color: labelColor, fontFamily, marginLeft: 16 }}>{label}</Text>
+      </View>}
       {children}
       <Divider style={{ marginVertical: 4 }} />
     </View>
