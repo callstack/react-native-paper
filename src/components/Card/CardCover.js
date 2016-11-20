@@ -3,6 +3,7 @@
 import React, { PropTypes } from 'react';
 import {
   StyleSheet,
+  View,
   Image,
 } from 'react-native';
 import withTheme from '../../core/withTheme';
@@ -41,7 +42,11 @@ const CardCover = (props: Props) => {
     }
   }
 
-  return <Image {...props} style={[ styles.container, coverStyle, style ]} />;
+  return (
+    <View style={[ styles.container, coverStyle, style ]}>
+      <Image {...props} style={[ styles.image, coverStyle ]} />
+    </View>
+  );
 };
 
 CardCover.propTypes = {
@@ -54,10 +59,15 @@ CardCover.propTypes = {
 const styles = StyleSheet.create({
   container: {
     height: 195,
+    backgroundColor: grey200,
+    overflow: 'hidden',
+  },
+  image: {
+    flex: 1,
+    height: null,
     width: null,
     padding: 16,
     justifyContent: 'flex-end',
-    backgroundColor: grey200,
     resizeMode: 'cover',
   },
 });

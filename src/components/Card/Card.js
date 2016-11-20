@@ -65,7 +65,7 @@ class Card extends Component<DefaultProps, Props, State> {
 
   _handlePressIn = () => {
     Animated.timing(this.state.elevation, {
-      toValue: 6,
+      toValue: 8,
       duration: 200,
     }).start();
   };
@@ -116,7 +116,7 @@ class Card extends Component<DefaultProps, Props, State> {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: white,
-    margin: 8,
+    margin: 4,
   },
   container: {
     flex: 1,
