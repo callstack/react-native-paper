@@ -5,26 +5,70 @@ import React, {
   PropTypes,
 } from 'react';
 import { theme } from './ThemeProvider';
+import type { Theme } from '../types/Theme';
+
+type State = {
+  theme: Theme
+}
 
 export default function withTheme<T>(Comp: ReactClass<T>): ReactClass<T> {
-  class ThemedComponent extends PureComponent {
+  class ThemedComponent extends PureComponent<void, *, State> {
     static displayName = `withTheme(${Comp.displayName || Comp.name})`;
+
+    static propTypes = {
+      theme: PropTypes.object,
+    };
+
     static contextTypes = {
       [theme]: PropTypes.object,
     };
 
-    _root: any;
+    constructor(props, context) {
+      super(props, context);
+      this.state = {
+        theme: this._merge(context[theme], props.theme),
+      };
+    }
+
+    state: State;
+
+    componentDidMount() {
+      if (typeof this.state.theme !== 'object' || this.state.theme === null) {
+        throw new Error(
+          'Couldn\'t find theme in the context or props. ' +
+          'You need to wrap your component in \'<ThemeProvider />\' or pass a \'theme\' prop'
+        );
+      }
+    }
+
+    componentWillReceiveProps(nextProps, nextContext: any) {
+      if (nextProps.theme !== this.props.theme || nextContext[theme] !== this.context[theme]) {
+        this.setState({
+          theme: this._merge(nextContext[theme], nextProps.theme),
+        });
+      }
+    }
 
     setNativeProps(...args) {
       return this._root.setNativeProps(...args);
     }
 
+    _merge = (a, b) => {
+      if (a && b) {
+        return { ...a, ...b };
+      } else {
+        return a || b;
+      }
+    };
+
+    _root: any;
+
     render() {
       return (
         <Comp
-          ref={c => (this._root = c)}
-          theme={this.context[theme]}
           {...this.props}
+          ref={c => (this._root = c)}
+          theme={this.state.theme}
         />
       );
     }
