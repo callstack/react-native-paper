@@ -14,6 +14,7 @@ import ButtonExample from './ButtonExample';
 import CardExample from './CardExample';
 import CheckboxExample from './CheckboxExample';
 import DividerExample from './DividerExample';
+import GridViewExample from './GridViewExample';
 import PaperExample from './PaperExample';
 import RippleExample from './RippleExample';
 import RadioButtonExample from './RadioButtonExample';
@@ -24,6 +25,7 @@ export const examples = {
   card: CardExample,
   checkbox: CheckboxExample,
   divider: DividerExample,
+  grid: GridViewExample,
   paper: PaperExample,
   ripple: RippleExample,
   radio: RadioButtonExample,
