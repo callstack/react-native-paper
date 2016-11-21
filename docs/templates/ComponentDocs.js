@@ -15,7 +15,6 @@ const name = css({
 });
 
 const propsHeader = css({
-  fontWeight: 600,
   fontSize: '24px',
   color: '#000',
   margin: '36px 0 16px',
@@ -39,7 +38,7 @@ export default function ComponentDocs(props: any) {
     <div {...wrapper}>
       <div {...mono} {...name}>{`<${props.name} />`}</div>
       <div {...body}>{props.info.description}</div>
-      <div {...body} {...propsHeader}>Props</div>
+      <div {...mono} {...propsHeader}>Props</div>
       {Object.keys(props.info.props).map(prop => (
         <div {...propInfo} key={prop}>
           <div {...mono} {...propLabel}>{prop}: {props.info.props[prop].flowType.name}</div>

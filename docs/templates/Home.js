@@ -19,6 +19,7 @@ const inner = css({
 
 const heading = css({
   fontSize: '36px',
+  fontWeight: 'bold',
   margin: '16px 0 16px -24px',
 });
 

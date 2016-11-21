@@ -24,6 +24,13 @@ const content = css({
   overflow: 'auto',
 });
 
+const separator = css({
+  border: 0,
+  backgroundColor: '#ddd',
+  height: '1px',
+  margin: '8px',
+});
+
 const link = css({
   display: 'block',
   margin: '8px',
@@ -48,6 +55,7 @@ export default function Body({ url, pages, children }: any) {
             Home
           </a>
         </Link>
+        <hr {...separator} />
         {pages.map(page =>
           <Link key={page} href={`/${page.toLowerCase()}`}>
             <a {...mono} {...link} {...(url.pathname === '/' + page.toLowerCase() ? active : null)}>
