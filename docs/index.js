@@ -60,6 +60,7 @@ items.forEach(it => {
   fs.writeFileSync(
     path.join(dist, `${it.name.toLowerCase()}.html`),
     ReactDOMServer.renderToString(
+      // eslint-disable-next-line react/jsx-pascal-case
       <HTML
         title={it.name}
         description={it.info.description}
@@ -79,6 +80,7 @@ const { html, css } = renderStatic(
 );
 fs.writeFileSync(path.join(dist, 'index.html'),
   ReactDOMServer.renderToString(
+    // eslint-disable-next-line react/jsx-pascal-case
     <HTML
       title='Home'
       description=''
