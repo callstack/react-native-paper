@@ -1,37 +1,36 @@
 /* @flow */
 
 import React from 'react';
-import css from 'next/css';
-import Link from 'next/link';
+import { style } from 'glamor';
 import mono from './styles/mono';
 
-const wrapper = css({
+const wrapper = style({
   display: 'flex',
   flexDirection: 'row',
   height: '100vh',
 });
 
-const sidebar = css({
+const sidebar = style({
   width: '240px',
   padding: '24px',
   backgroundColor: '#f0f0f0',
   overflow: 'auto',
 });
 
-const content = css({
+const content = style({
   flex: 1,
   height: '100%',
   overflow: 'auto',
 });
 
-const separator = css({
+const separator = style({
   border: 0,
   backgroundColor: '#ddd',
   height: '1px',
   margin: '4px 0',
 });
 
-const link = css({
+const link = style({
   display: 'block',
   padding: '4px 0',
   textDecoration: 'none',
@@ -42,7 +41,7 @@ const link = css({
   },
 });
 
-const active = css({
+const active = style({
   opacity: 1,
 });
 
@@ -50,18 +49,20 @@ export default function Body({ url, pages, children }: any) {
   return (
     <div {...wrapper}>
       <nav {...sidebar}>
-        <Link href='/'>
-          <a {...mono} {...link} {...(url.pathname === '/' ? active : null)}>
-            Home
-          </a>
-        </Link>
+        <a href='index.html' {...mono} {...link} {...(url.pathname === '/' ? active : null)}>
+          Home
+        </a>
         <hr {...separator} />
         {pages.map(page =>
-          <Link key={page} href={`/${page.toLowerCase()}`}>
-            <a {...mono} {...link} {...(url.pathname === '/' + page.toLowerCase() ? active : null)}>
-              {page}
-            </a>
-          </Link>
+          <a
+            key={page}
+            href={`${page.toLowerCase()}.html`}
+            {...mono}
+            {...link}
+            {...(url.pathname === `/${page.toLowerCase()}` ? active : null)}
+          >
+            {page}
+          </a>
         )}
       </nav>
       <div {...content}>

@@ -4,11 +4,18 @@ import path from 'path';
 import fs from 'fs';
 import del from 'del';
 import { parse } from 'react-docgen';
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import { renderStatic } from 'glamor/server';
+import HTML from './templates/HTML';
+import Page from './templates/Page';
+import Home from './templates/Home';
+import ComponentDocs from './templates/ComponentDocs';
 
-const pages = path.join(__dirname, 'pages');
+const dist = path.join(__dirname, 'dist');
 
-del.sync(pages);
-fs.mkdirSync(pages);
+del.sync(dist);
+fs.mkdirSync(dist);
 
 const components = fs.readFileSync(path.join(__dirname, '../src/index.js'))
   .toString()
@@ -28,42 +35,56 @@ const components = fs.readFileSync(path.join(__dirname, '../src/index.js'))
   });
 
 const items = [];
-const index = [];
+const pages = [];
 
 components.forEach(comp => {
   const componentName = comp.split('/').pop().split('.')[0];
   try {
     const componentInfo = parse(fs.readFileSync(comp).toString());
     items.push({ name: componentName, info: componentInfo });
-    index.push(componentName);
+    pages.push(componentName);
   } catch (e) {
     console.log(`${componentName}: ${e.message}`);
   }
 });
 
-index.sort();
+pages.sort();
 items.forEach(it => {
-  fs.writeFileSync(path.join(pages, `${it.name.toLowerCase()}.js`), `
-    import React from 'react';
-    import Page from '../templates/Page';
-    import ComponentDocs from '../templates/ComponentDocs';
-    export default function ${it.name}Doc(props) {
-      return (
-        <Page {...props} pages={${JSON.stringify(index)}}>
-          <ComponentDocs name='${it.name}' info={${JSON.stringify(it.info)}} />
-        </Page>
-      );
-    }
-  `);
+  const { html, css } = renderStatic(
+    () => ReactDOMServer.renderToString(
+      <Page url={{ pathname: `/${it.name.toLowerCase()}` }} pages={pages}>
+        <ComponentDocs name={it.name} info={it.info} />
+      </Page>
+    )
+  );
+  fs.writeFileSync(
+    path.join(dist, `${it.name.toLowerCase()}.html`),
+    ReactDOMServer.renderToString(
+      <HTML
+        title={it.name}
+        description={it.info.description}
+        body={html}
+        css={css}
+      />
+    )
+  );
 });
 
-fs.writeFileSync(path.join(pages, 'index.js'), `
-  import React from 'react';
-  import Home from '../templates/Home';
-  import Page from '../templates/Page';
-  export default (props) => (
-    <Page {...props} pages={${JSON.stringify(index)}}>
+const { html, css } = renderStatic(
+  () => ReactDOMServer.renderToString(
+    <Page url={{ pathname: '/' }} pages={pages}>
       <Home />
     </Page>
-  );
-`);
+  )
+);
+fs.writeFileSync(path.join(dist, 'index.html'),
+  ReactDOMServer.renderToString(
+    <HTML
+      title='Home'
+      description=''
+      body={html}
+      css={css}
+    />
+  )
+);
+
