@@ -46,8 +46,7 @@
     "react-docgen": "^2.12.1",
     "react-dom": "^15.4.0",
     "react-native": "~0.37.0",
-    "react-native-vector-icons": "~3.0.0",
-    "styled-components": "^1.0.11"
+    "react-native-vector-icons": "~3.0.0"
   },
   "dependencies": {
     "color": "^0.11.4",

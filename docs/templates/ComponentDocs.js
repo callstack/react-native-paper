@@ -1,54 +1,48 @@
 /* @flow */
 
 import React from 'react';
-import styled from 'styled-components';
+import css from 'next/css';
 import Mono from './Mono';
 import Body from './Body';
 
-const Wrapper = styled.div`
-  padding: 24px 48px;
-`;
+const wrapper = css({
+  padding: '24px 48px',
+});
 
-const ComponentName = styled(Mono)`
-  font-size: 36px;
-  margin: 16px 0 16px -24px;
-`;
+const name = css({
+  fontSize: '36px',
+  margin: '16px 0 16px -24px',
+});
 
-const ComponentDesc = styled(Body)`
-`;
+const propsHeader = css({
+  fontWeight: '600',
+  fontSize: '24px',
+  color: '#000',
+  margin: '36px 0 16px',
+});
 
-const ComponentPropsHeader = styled(Body)`
-  font-weight: 600;
-  font-size: 24px;
-  color: #000;
-  margin: 36px 0 16px;
-`;
+const propInfo = css({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+});
 
-const ComponentPropInfo = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const ComponentPropLabel = styled(Mono)`
-  margin-right: 16px;
-`;
-
-const ComponentPropDesc = styled(Body)`
-`;
+const propLabel = css({
+  marginRight: '16px',
+});
 
 export default function ComponentDocs(props: any) {
   return (
-    <Wrapper>
-      <ComponentName>{`<${props.name} />`}</ComponentName>
-      <ComponentDesc>{props.info.description}</ComponentDesc>
-      <ComponentPropsHeader>Props</ComponentPropsHeader>
+    <div className={wrapper}>
+      <Mono className={name}>{`<${props.name} />`}</Mono>
+      <Body>{props.info.description}</Body>
+      <Body className={propsHeader}>Props</Body>
       {Object.keys(props.info.props).map(prop => (
-        <ComponentPropInfo key={prop}>
-          <ComponentPropLabel>{prop}: {props.info.props[prop].flowType.name}</ComponentPropLabel>
-          <ComponentPropDesc>{props.info.props[prop].description}</ComponentPropDesc>
-        </ComponentPropInfo>
+        <div className={propInfo} key={prop}>
+          <Mono className={propLabel}>{prop}: {props.info.props[prop].flowType.name}</Mono>
+          <Body>{props.info.props[prop].description}</Body>
+        </div>
       ))}
-    </Wrapper>
+    </div>
   );
 }

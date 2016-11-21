@@ -1,38 +1,38 @@
 /* @flow */
 
 import React from 'react';
-import styled from 'styled-components';
+import css from 'next/css';
 import Mono from './Mono';
 import Body from './Body';
 
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  padding: 24px 48px;
-`;
+const wrapper = css({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  height: '100vh',
+  padding: '24px 48px',
+});
 
-const Inner = styled.div`
-  text-align: center;
-`;
+const inner = css({
+  textAlign: 'center',
+});
 
-const Heading = styled(Mono)`
-  font-size: 36px;
-  margin: 16px 0 16px -24px;
-`;
+const heading = css({
+  fontSize: '36px',
+  margin: '16px 0 16px -24px',
+});
 
-const Description = styled(Body)`
-  font-size: 24px;
-`;
+const description = css({
+  fontSize: '24px',
+});
 
 export default function Home() {
   return (
-    <Wrapper>
-      <Inner>
-        <Heading>React Native Paper</Heading>
-        <Description>Documentation</Description>
-      </Inner>
-    </Wrapper>
+    <div className={wrapper}>
+      <div className={inner}>
+        <Mono className={heading}>React Native Paper</Mono>
+        <Body className={description}>Documentation</Body>
+      </div>
+    </div>
   );
 }

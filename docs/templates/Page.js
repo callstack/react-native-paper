@@ -2,56 +2,66 @@
 
 import React from 'react';
 import Mono from './Mono';
-import styled from 'styled-components';
+import css from 'next/css';
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
-`;
+const wrapper = css({
+  display: 'flex',
+  flexDirection: 'row',
+  height: '100vh',
+});
 
-const Sidebar = styled.div`
-  width: 240px;
-  padding: 16px;
-  background-color: #f9f9f9;
-`;
+const sidebar = css({
+  width: '240px',
+  padding: '16px',
+  backgroundColor: '#f9f9f9',
+  overflow: 'auto',
+});
 
-const Content = styled.div`
-  flex: 1;
-`;
+const content = css({
+  flex: 1,
+  height: '100%',
+  overflow: 'auto',
+});
 
-const Link = styled.a`
-  display: block;
-  margin: 8px;
-  text-decoration: none;
-  opacity: ${props => props.active ? 0.64 : 0.32};
+const link = css({
+  display: 'block',
+  margin: '8px',
+  textDecoration: 'none',
+  opacity: 0.32,
 
-  &:hover {
-    opacity: 1;
-  }
-`;
+  ':hover': {
+    opacity: 1,
+  },
+});
+
+const active = css({
+  opacity: 1,
+});
 
 export default function Body({ pages, children }: any) {
   const pathname = global.location && global.location.pathname;
   return (
-    <Wrapper>
-      <Sidebar>
-        <Link href='/' active={pathname === '/'}>
+    <div className={wrapper}>
+      <div className={sidebar}>
+        <a
+          className={`${link} ${pathname === '/' ? active : ''}`}
+          href='/'
+        >
           <Mono>Home</Mono>
-        </Link>
+        </a>
         {pages.map(page =>
-          <Link
+          <a
             key={page}
+            className={`${link} ${pathname === '/' + page.toLowerCase() ? active : ''}`}
             href={`/${page.toLowerCase()}`}
-            active={pathname === `/${page.toLowerCase()}`}
           >
             <Mono>{page}</Mono>
-          </Link>
+          </a>
         )}
-      </Sidebar>
-      <Content>
+      </div>
+      <div className={content}>
         {children}
-      </Content>
-    </Wrapper>
+      </div>
+    </div>
   );
 }

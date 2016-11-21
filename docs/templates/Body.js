@@ -1,9 +1,9 @@
 /* @flow */
 
-import styled, { injectGlobal } from 'styled-components';
+import React from 'react';
+import css, { insertGlobal } from 'next/css';
 
-// eslint-disable-next-line no-unused-expressions
-injectGlobal`
+insertGlobal(`
   html {
     box-sizing: border-box;
   }
@@ -14,13 +14,15 @@ injectGlobal`
     margin: 0;
     padding: 0;
   }
-`;
+`);
 
-const Body = styled.div`
-  font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 16px;
-  line-height: 1.5;
-  color: #555;
-`;
+const styles = css({
+  fontFamily: '"Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+  fontSize: 16,
+  lineHeight: 1.5,
+  color: '#555',
+});
 
-export default Body;
+export default function Body(props: any) {
+  return <div {...props} className={`${styles} ${props.className || ''}`} />;
+}

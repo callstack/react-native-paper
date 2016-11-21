@@ -1,13 +1,16 @@
 /* @flow */
 
-import styled from 'styled-components';
+import React from 'react';
+import css from 'next/css';
 
-const Mono = styled.div`
-  font-family: "Roboto Mono", "Operator Mono", "Fira Code", "Ubuntu Mono", "Droid Sans Mono", "Liberation Mono", "Source Code Pro", Menlo, Consolas, Courier, monospace;
-  font-weight: bold;
-  font-size: 16px;
-  line-height: 2;
-  color: #000;
-`;
+const styles = css({
+  fontFamily: '"Roboto Mono", "Operator Mono", "Fira Code", "Ubuntu Mono", "Droid Sans Mono", "Liberation Mono", "Source Code Pro", Menlo, Consolas, Courier, monospace',
+  fontWeight: 'bold',
+  fontSize: '16px',
+  lineHeight: 2,
+  color: '#000',
+});
 
-export default Mono;
+export default function Mono(props: any) {
+  return <div {...props} className={`${styles} ${props.className || ''}`} />;
+}
