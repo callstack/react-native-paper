@@ -17,24 +17,39 @@ const components = fs.readFileSync(path.join(__dirname, '../src/index.js'))
   .filter(line => line.startsWith('./components/'))
   .map(line => require.resolve(path.join(__dirname, '../src', line)));
 
+const items = [];
+const index = [];
+
 components.forEach(comp => {
   const componentName = comp.split('/').pop().split('.')[0];
   try {
     const componentInfo = parse(fs.readFileSync(comp).toString());
-
-    fs.writeFileSync(path.join(pages, `${componentName.toLowerCase()}.js`), `
-      import React from 'react';
-      import ComponentDocs from '../templates/ComponentDocs';
-
-      export default function ${componentName}Doc() {
-        return <ComponentDocs name='${componentName}' info={${JSON.stringify(componentInfo)}} />
-      }
-    `);
+    items.push({ name: componentName, info: componentInfo });
+    index.push(componentName);
   } catch (e) {
     console.log(`${componentName}: ${e.message}`);
   }
 });
 
+items.forEach(it => {
+  fs.writeFileSync(path.join(pages, `${it.name.toLowerCase()}.js`), `
+    import React from 'react';
+    import Page from '../templates/Page';
+    import ComponentDocs from '../templates/ComponentDocs';
+
+    export default function ${it.name}Doc() {
+      return (
+        <Page pages={${JSON.stringify(index)}}>
+          <ComponentDocs name='${it.name}' info={${JSON.stringify(it.info)}} />
+        </Page>
+      );
+    }
+  `);
+});
+
 fs.writeFileSync(path.join(pages, 'index.js'), `
-export { default as default } from '../templates/Home';
+  import React from 'react';
+  import Home from '../templates/Home';
+  import Page from '../templates/Page';
+  export default () => <Page pages={${JSON.stringify(index)}}><Home /></Page>;
 `);
