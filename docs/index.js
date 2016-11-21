@@ -2,7 +2,6 @@
 
 import path from 'path';
 import fs from 'fs';
-import del from 'del';
 import { parse } from 'react-docgen';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
@@ -14,8 +13,9 @@ import ComponentDocs from './templates/ComponentDocs';
 
 const dist = path.join(__dirname, 'dist');
 
-del.sync(dist);
-fs.mkdirSync(dist);
+if (!fs.existsSync(dist)) {
+  fs.mkdirSync(dist);
+}
 
 const components = fs.readFileSync(path.join(__dirname, '../src/index.js'))
   .toString()
