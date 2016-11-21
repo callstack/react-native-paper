@@ -15,7 +15,17 @@ const components = fs.readFileSync(path.join(__dirname, '../src/index.js'))
   .split('\n')
   .map(line => line.split(' ').pop().replace(/('|;)/g, ''))
   .filter(line => line.startsWith('./components/'))
-  .map(line => require.resolve(path.join(__dirname, '../src', line)));
+  .map(line => {
+    const file = require.resolve(path.join(__dirname, '../src', line));
+    if (file.endsWith('/index.js')) {
+      const matches = fs.readFileSync(file).toString().match(/export \{ default as default \} from .+/);
+      if (matches && matches.length) {
+        const name = matches[0].split(' ').pop().replace(/('|;)/g, '');
+        return require.resolve(path.join(__dirname, '../src', line, name));
+      }
+    }
+    return file;
+  });
 
 const items = [];
 const index = [];
