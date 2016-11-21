@@ -13,6 +13,9 @@ type Props = {
   theme: Theme;
 }
 
+/**
+ * Text component which follows settings from the theme
+ */
 class Text extends PureComponent<void, Props, void> {
   static propTypes = {
     theme: PropTypes.object.isRequired,

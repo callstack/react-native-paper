@@ -17,8 +17,14 @@ type Props = {
   style?: any;
 }
 
+/**
+ * Paper is a basic container that can give depth to the page
+ */
 export default class Paper extends PureComponent<void, Props, void> {
   static propTypes = {
+    /**
+     * Elevation for the paper
+     */
     elevation: PropTypes.number.isRequired,
     children: PropTypes.node,
     style: View.propTypes.style,

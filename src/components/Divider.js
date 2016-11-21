@@ -13,6 +13,9 @@ type Props = {
   style?: any;
 }
 
+/**
+ * A divider is a thin, lightweight rule that groups content in lists and page layouts
+ */
 const Divider = (props: Props) => {
   const { inset, style } = props;
   return (
@@ -24,6 +27,9 @@ const Divider = (props: Props) => {
 };
 
 Divider.propTypes = {
+  /**
+   *  Whether divider has a left inset
+   */
   inset: PropTypes.bool,
   style: View.propTypes.style,
 };

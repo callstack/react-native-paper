@@ -20,6 +20,9 @@ type Props = {
   theme: Theme;
 }
 
+/**
+ * Radio buttons allow the selection of a single option from a set
+ */
 const RadioButton = (props: Props) => {
   const {
     checked,
@@ -60,9 +63,21 @@ const RadioButton = (props: Props) => {
 };
 
 RadioButton.propTypes = {
+  /**
+   * Whether radio is checked
+   */
   checked: PropTypes.bool.isRequired,
+  /**
+   * Whether radio is disabled
+   */
   disabled: PropTypes.bool,
+  /**
+   * Function to execute on press
+   */
   onPress: PropTypes.func,
+  /**
+   * Custom color for radio
+   */
   color: PropTypes.string,
   theme: PropTypes.object.isRequired,
 };
