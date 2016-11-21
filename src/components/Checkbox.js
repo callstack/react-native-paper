@@ -20,6 +20,9 @@ type Props = {
   theme: Theme;
 }
 
+/**
+ * Checkboxes allow the selection of multiple options from a set
+ */
 const Checkbox = (props: Props) => {
   const {
     checked,
@@ -60,9 +63,21 @@ const Checkbox = (props: Props) => {
 };
 
 Checkbox.propTypes = {
+  /**
+   * Whether checkbox is checked
+   */
   checked: PropTypes.bool.isRequired,
+  /**
+   * Whether checkbox is disabled
+   */
   disabled: PropTypes.bool,
+  /**
+   * Function to execute on press
+   */
   onPress: PropTypes.func,
+  /**
+   * Custom color for checkbox
+   */
   color: PropTypes.string,
   theme: PropTypes.object.isRequired,
 };

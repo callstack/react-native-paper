@@ -40,17 +40,50 @@ type State = {
   elevation: Animated.Value;
 }
 
+/**
+ * Buttons communicate the action that will occur when the user touches them
+ */
 class Button extends PureComponent<void, Props, State> {
   static propTypes = {
+    /**
+     * Disable the button
+     */
     disabled: PropTypes.bool,
+    /**
+     * Shrink the button for a more compact look
+     */
     shrink: PropTypes.bool,
+    /**
+     * Add elevation to button, as opposed to default flat appearance
+     */
     raised: PropTypes.bool,
+    /**
+     * Use to primary color from theme
+     */
     primary: PropTypes.bool,
+    /**
+     * Text color of button, dark button will render ligh text and vice-versa
+     */
     dark: PropTypes.bool,
+    /**
+     * Whether to show a loading indicator
+     */
     loading: PropTypes.bool,
+    /**
+     * Icon name
+     */
     icon: PropTypes.string,
+    /**
+     * Custom text color for flat button or background color for raised button
+     */
     color: PropTypes.string,
+    /**
+     * Button text
+     */
     children: PropTypes.string.isRequired,
+    /**
+     * Function to execute on press
+     */
     onPress: PropTypes.func,
     style: View.propTypes.style,
     theme: PropTypes.object.isRequired,

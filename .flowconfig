@@ -24,7 +24,8 @@
 .*/Libraries/react-native/ReactNative.js
 .*/node_modules/jest-runtime/build/__tests__/.*
 
-# Ignore duplicate modules under example/
+.*/node_modules/glamor/es6/CSSPropertyOperations/
+
 .*/example/node_modules/fbjs
 .*/example/node_modules/react
 .*/example/node_modules/react-native
