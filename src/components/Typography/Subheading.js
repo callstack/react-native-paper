@@ -1,11 +1,30 @@
 /* @flow */
 
-import createStyledText from './createStyledText';
+import React from 'react';
+import {
+  StyleSheet,
+} from 'react-native';
+import StyledText from './StyledText';
 
-export default createStyledText('Subheading', {
-  fontSize: 16,
-  lineHeight: 24,
-  alpha: 0.87,
-  family: 'regular',
-  marginVertical: 2,
+type Props = {
+  style?: any;
+}
+
+const Subheading = (props: Props) => (
+  <StyledText
+    {...props}
+    alpha={0.87}
+    family='regular'
+    style={[ styles.text, props.style ]}
+  />
+);
+
+export default Subheading;
+
+const styles = StyleSheet.create({
+  text: {
+    fontSize: 16,
+    lineHeight: 24,
+    marginVertical: 2,
+  },
 });
