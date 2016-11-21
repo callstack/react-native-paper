@@ -1,8 +1,9 @@
 /* @flow */
 
 import React from 'react';
-import Mono from './Mono';
 import css from 'next/css';
+import Link from 'next/link';
+import Mono from './Mono';
 
 const wrapper = css({
   display: 'flex',
@@ -38,25 +39,21 @@ const active = css({
   opacity: 1,
 });
 
-export default function Body({ pages, children }: any) {
-  const pathname = global.location && global.location.pathname;
+export default function Body({ url, pages, children }: any) {
   return (
     <div className={wrapper}>
       <div className={sidebar}>
-        <a
-          className={`${link} ${pathname === '/' ? active : ''}`}
-          href='/'
-        >
-          <Mono>Home</Mono>
-        </a>
-        {pages.map(page =>
-          <a
-            key={page}
-            className={`${link} ${pathname === '/' + page.toLowerCase() ? active : ''}`}
-            href={`/${page.toLowerCase()}`}
-          >
-            <Mono>{page}</Mono>
+        <Link href='/'>
+          <a className={`${link} ${url.pathname === '/' ? active : ''}`}>
+            <Mono>Home</Mono>
           </a>
+        </Link>
+        {pages.map(page =>
+          <Link key={page} href={`/${page.toLowerCase()}`}>
+            <a className={`${link} ${url.pathname === '/' + page.toLowerCase() ? active : ''}`}>
+              <Mono>{page}</Mono>
+            </a>
+          </Link>
         )}
       </div>
       <div className={content}>

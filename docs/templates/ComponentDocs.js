@@ -15,7 +15,7 @@ const name = css({
 });
 
 const propsHeader = css({
-  fontWeight: '600',
+  fontWeight: 600,
   fontSize: '24px',
   color: '#000',
   margin: '36px 0 16px',

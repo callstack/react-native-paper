@@ -37,9 +37,9 @@ items.forEach(it => {
     import Page from '../templates/Page';
     import ComponentDocs from '../templates/ComponentDocs';
 
-    export default function ${it.name}Doc() {
+    export default function ${it.name}Doc(props) {
       return (
-        <Page pages={${JSON.stringify(index)}}>
+        <Page {...props} pages={${JSON.stringify(index)}}>
           <ComponentDocs name='${it.name}' info={${JSON.stringify(it.info)}} />
         </Page>
       );
@@ -51,5 +51,9 @@ fs.writeFileSync(path.join(pages, 'index.js'), `
   import React from 'react';
   import Home from '../templates/Home';
   import Page from '../templates/Page';
-  export default () => <Page pages={${JSON.stringify(index)}}><Home /></Page>;
+  export default (props) => (
+    <Page {...props} pages={${JSON.stringify(index)}}>
+      <Home />
+    </Page>
+  );
 `);
