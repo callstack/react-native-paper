@@ -36,12 +36,12 @@ const propLabel = css({
 export default function ComponentDocs(props: any) {
   return (
     <div {...wrapper}>
-      <div {...mono} {...name}>{`<${props.name} />`}</div>
-      <div {...body}>{props.info.description}</div>
-      <div {...mono} {...propsHeader}>Props</div>
+      <h1 {...mono} {...name}>{`<${props.name} />`}</h1>
+      <p {...body}>{props.info.description}</p>
+      <h2 {...mono} {...propsHeader}>Props</h2>
       {Object.keys(props.info.props).map(prop => (
         <div {...propInfo} key={prop}>
-          <div {...mono} {...propLabel}>{prop}: {props.info.props[prop].flowType.name}</div>
+          <code {...mono} {...propLabel}>{prop}: {props.info.props[prop].flowType.name}</code>
           <div {...body}>{props.info.props[prop].description}</div>
         </div>
       ))}

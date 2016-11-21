@@ -31,8 +31,8 @@ export default function Home() {
   return (
     <div {...wrapper}>
       <div {...inner}>
-        <div {...mono} {...heading}>React Native Paper</div>
-        <div {...body} {...description}>Documentation</div>
+        <h1 {...mono} {...heading}>React Native Paper</h1>
+        <p {...body} {...description}>Documentation</p>
       </div>
     </div>
   );

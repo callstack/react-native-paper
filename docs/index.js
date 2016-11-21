@@ -36,7 +36,6 @@ items.forEach(it => {
     import React from 'react';
     import Page from '../templates/Page';
     import ComponentDocs from '../templates/ComponentDocs';
-
     export default function ${it.name}Doc(props) {
       return (
         <Page {...props} pages={${JSON.stringify(index)}}>

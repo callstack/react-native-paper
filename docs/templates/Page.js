@@ -49,7 +49,7 @@ const active = css({
 export default function Body({ url, pages, children }: any) {
   return (
     <div {...wrapper}>
-      <div {...sidebar}>
+      <nav {...sidebar}>
         <Link href='/'>
           <a {...mono} {...link} {...(url.pathname === '/' ? active : null)}>
             Home
@@ -63,7 +63,7 @@ export default function Body({ url, pages, children }: any) {
             </a>
           </Link>
         )}
-      </div>
+      </nav>
       <div {...content}>
         {children}
       </div>
