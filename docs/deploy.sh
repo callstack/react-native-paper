@@ -12,7 +12,7 @@ if [ -z "$(git diff --exit-code)" ]; then
 fi
 
 git config user.name "Travis CI"
-git config user.email "nobody@nobody.org"
+git config user.email "bot@travis.org"
 
 git add .
 git commit -m "Deploy documentation: $(git rev-parse --verify HEAD)"
