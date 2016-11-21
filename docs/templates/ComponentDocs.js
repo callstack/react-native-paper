@@ -39,12 +39,15 @@ export default function ComponentDocs(props: any) {
       <h1 {...mono} {...name}>{`<${props.name} />`}</h1>
       <p {...body}>{props.info.description}</p>
       <h2 {...mono} {...propsHeader}>Props</h2>
-      {Object.keys(props.info.props).map(prop => (
-        <div {...propInfo} key={prop}>
-          <code {...mono} {...propLabel}>{prop}: {props.info.props[prop].flowType.name}</code>
-          <div {...body}>{props.info.props[prop].description}</div>
-        </div>
-      ))}
+      {Object.keys(props.info.props).map(prop => {
+        const { flowType } = props.info.props[prop];
+        return (
+          <div {...propInfo} key={prop}>
+            <code {...mono} {...propLabel}>{prop}: {flowType.raw || flowType.name}</code>
+            <div {...body}>{props.info.props[prop].description}</div>
+          </div>
+        );
+      })}
     </div>
   );
 }

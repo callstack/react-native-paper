@@ -20,8 +20,8 @@ type Props = {
   dataSource: ListView.DataSource;
   spacing: number;
   getNumberOfColumns: (width: number) => number;
-  renderSectionHeader?: (...args: any) => ?React.Element<*>;
-  renderRow: (...args: any) => ?React.Element<*>;
+  renderSectionHeader?: (...args: any) => any;
+  renderRow: (...args: any) => any;
   initialLayout: Layout;
   onLayout?: Function;
   contentContainerStyle?: any;
