@@ -13,3 +13,9 @@ install:
 script:
   - npm run lint
   - npm run flow -- check
+deploy:
+  provider: script
+  script: docs/deploy.sh
+  skip_cleanup: true
+  on:
+    branch: master

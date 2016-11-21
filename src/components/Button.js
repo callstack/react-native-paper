@@ -62,7 +62,7 @@ class Button extends PureComponent<void, Props, State> {
      */
     primary: PropTypes.bool,
     /**
-     * Text color of button, dark button will render ligh text and vice-versa
+     * Text color of button, a dark button will render light text and vice-versa
      */
     dark: PropTypes.bool,
     /**
@@ -74,7 +74,7 @@ class Button extends PureComponent<void, Props, State> {
      */
     icon: PropTypes.string,
     /**
-     * Custom text color for flat button or background color for raised button
+     * Custom text color for flat button, or background color for raised button
      */
     color: PropTypes.string,
     /**

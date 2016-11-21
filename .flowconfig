@@ -26,13 +26,18 @@
 
 .*/node_modules/glamor/es6/CSSPropertyOperations/
 
-.*/example/node_modules/fbjs
-.*/example/node_modules/react
-.*/example/node_modules/react-native
-.*/example/node_modules/exponent
-.*/example/node_modules/@exponent
-.*/example/node_modules/fbemitter
+.*/example/node_modules/fbjs/
+.*/example/node_modules/react/
+.*/example/node_modules/react-static-container/
+.*/example/node_modules/react-native/
+.*/example/node_modules/exponent/
+.*/example/node_modules/@exponent/
+.*/example/node_modules/fbemitter/
 .*/example/\.buckd/
+
+.*/docs/node_modules/fbjs/
+.*/docs/node_modules/react/
+.*/docs/node_modules/fbemitter/
 
 [include]
 

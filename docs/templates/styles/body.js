@@ -1,6 +1,6 @@
 /* @flow */
 
-import css, { insertGlobal } from 'next/css';
+import { style, insertGlobal } from 'glamor';
 
 insertGlobal(`
   html {
@@ -16,7 +16,7 @@ insertGlobal(`
   }
 `);
 
-const styles = css({
+const styles = style({
   fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
   lineHeight: 1.5,
 });

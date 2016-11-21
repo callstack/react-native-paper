@@ -1,32 +1,32 @@
 /* @flow */
 
 import React from 'react';
-import css from 'next/css';
+import { style } from 'glamor';
 import mono from './styles/mono';
 import body from './styles/body';
 
-const wrapper = css({
+const wrapper = style({
   padding: '24px 48px',
 });
 
-const name = css({
+const name = style({
   fontSize: '36px',
   margin: '16px 0 16px -24px',
 });
 
-const propsHeader = css({
+const propsHeader = style({
   fontSize: '24px',
   color: '#000',
   margin: '36px 0 16px',
 });
 
-const propInfo = css({
+const propInfo = style({
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
 });
 
-const propLabel = css({
+const propLabel = style({
   backgroundColor: '#f0f0f0',
   borderRadius: '3px',
   padding: '0 8px',
