@@ -41,6 +41,7 @@ components.forEach(comp => {
   }
 });
 
+index.sort();
 items.forEach(it => {
   fs.writeFileSync(path.join(pages, `${it.name.toLowerCase()}.js`), `
     import React from 'react';
