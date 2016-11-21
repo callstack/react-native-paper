@@ -14,7 +14,7 @@ const wrapper = css({
 const sidebar = css({
   width: '240px',
   padding: '16px',
-  backgroundColor: '#f9f9f9',
+  backgroundColor: '#f0f0f0',
   overflow: 'auto',
 });
 

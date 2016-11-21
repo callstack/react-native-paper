@@ -28,7 +28,10 @@ const propInfo = css({
 });
 
 const propLabel = css({
-  marginRight: '16px',
+  backgroundColor: '#f0f0f0',
+  borderRadius: '3px',
+  padding: '0 8px',
+  margin: '8px 16px 8px 0',
 });
 
 export default function ComponentDocs(props: any) {
