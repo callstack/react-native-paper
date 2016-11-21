@@ -13,7 +13,7 @@ const wrapper = css({
 
 const sidebar = css({
   width: '240px',
-  padding: '16px',
+  padding: '24px',
   backgroundColor: '#f0f0f0',
   overflow: 'auto',
 });
@@ -28,12 +28,12 @@ const separator = css({
   border: 0,
   backgroundColor: '#ddd',
   height: '1px',
-  margin: '8px',
+  margin: '4px 0',
 });
 
 const link = css({
   display: 'block',
-  margin: '8px',
+  padding: '4px 0',
   textDecoration: 'none',
   opacity: 0.32,
 
