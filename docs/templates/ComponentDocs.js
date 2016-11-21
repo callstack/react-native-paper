@@ -31,6 +31,7 @@ const propLabel = css({
   borderRadius: '3px',
   padding: '0 8px',
   margin: '8px 16px 8px 0',
+  textDecoration: 'none',
 });
 
 export default function ComponentDocs(props: any) {
@@ -43,8 +44,15 @@ export default function ComponentDocs(props: any) {
         const { flowType } = props.info.props[prop];
         return (
           <div {...propInfo} key={prop}>
-            <code {...mono} {...propLabel}>{prop}: {flowType.raw || flowType.name}</code>
-            <div {...body}>{props.info.props[prop].description}</div>
+            <a
+              {...mono}
+              {...propLabel}
+              name={prop}
+              href={`#${prop}`}
+            >
+              {prop}: {flowType.raw || flowType.name}
+            </a>
+            <span {...body}>{props.info.props[prop].description}</span>
           </div>
         );
       })}
