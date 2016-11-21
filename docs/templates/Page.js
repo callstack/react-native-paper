@@ -3,7 +3,7 @@
 import React from 'react';
 import css from 'next/css';
 import Link from 'next/link';
-import Mono from './Mono';
+import mono from './styles/mono';
 
 const wrapper = css({
   display: 'flex',
@@ -41,22 +41,22 @@ const active = css({
 
 export default function Body({ url, pages, children }: any) {
   return (
-    <div className={wrapper}>
-      <div className={sidebar}>
+    <div {...wrapper}>
+      <div {...sidebar}>
         <Link href='/'>
-          <a className={`${link} ${url.pathname === '/' ? active : ''}`}>
-            <Mono>Home</Mono>
+          <a {...mono} {...link} {...(url.pathname === '/' ? active : null)}>
+            Home
           </a>
         </Link>
         {pages.map(page =>
           <Link key={page} href={`/${page.toLowerCase()}`}>
-            <a className={`${link} ${url.pathname === '/' + page.toLowerCase() ? active : ''}`}>
-              <Mono>{page}</Mono>
+            <a {...mono} {...link} {...(url.pathname === '/' + page.toLowerCase() ? active : null)}>
+              {page}
             </a>
           </Link>
         )}
       </div>
-      <div className={content}>
+      <div {...content}>
         {children}
       </div>
     </div>

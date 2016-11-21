@@ -2,8 +2,8 @@
 
 import React from 'react';
 import css from 'next/css';
-import Mono from './Mono';
-import Body from './Body';
+import mono from './styles/mono';
+import body from './styles/body';
 
 const wrapper = css({
   padding: '24px 48px',
@@ -33,14 +33,14 @@ const propLabel = css({
 
 export default function ComponentDocs(props: any) {
   return (
-    <div className={wrapper}>
-      <Mono className={name}>{`<${props.name} />`}</Mono>
-      <Body>{props.info.description}</Body>
-      <Body className={propsHeader}>Props</Body>
+    <div {...wrapper}>
+      <div {...mono} {...name}>{`<${props.name} />`}</div>
+      <div {...body}>{props.info.description}</div>
+      <div {...body} {...propsHeader}>Props</div>
       {Object.keys(props.info.props).map(prop => (
-        <div className={propInfo} key={prop}>
-          <Mono className={propLabel}>{prop}: {props.info.props[prop].flowType.name}</Mono>
-          <Body>{props.info.props[prop].description}</Body>
+        <div {...propInfo} key={prop}>
+          <div {...mono} {...propLabel}>{prop}: {props.info.props[prop].flowType.name}</div>
+          <div {...body}>{props.info.props[prop].description}</div>
         </div>
       ))}
     </div>

@@ -2,8 +2,8 @@
 
 import React from 'react';
 import css from 'next/css';
-import Mono from './Mono';
-import Body from './Body';
+import mono from './styles/mono';
+import body from './styles/body';
 
 const wrapper = css({
   display: 'flex',
@@ -28,10 +28,10 @@ const description = css({
 
 export default function Home() {
   return (
-    <div className={wrapper}>
-      <div className={inner}>
-        <Mono className={heading}>React Native Paper</Mono>
-        <Body className={description}>Documentation</Body>
+    <div {...wrapper}>
+      <div {...inner}>
+        <div {...mono} {...heading}>React Native Paper</div>
+        <div {...body} {...description}>Documentation</div>
       </div>
     </div>
   );
