@@ -8,6 +8,7 @@ before_install:
   - npm i -g npm@latest
 install:
   - npm install
+  - cd docs && npm install && cd ..
   - cd example && npm install && cd ..
 script:
   - npm run lint

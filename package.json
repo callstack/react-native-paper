@@ -6,9 +6,7 @@
   "scripts": {
     "flow": "flow",
     "lint": "eslint .",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "docs:generate": "babel-node docs/index.js",
-    "docs:dev": "cd docs && next"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "files": [
     "src/"
@@ -29,22 +27,14 @@
     "react-native-vector-icons": "*"
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0",
     "babel-eslint": "^7.1.0",
-    "babel-preset-es2015": "^6.18.0",
-    "babel-preset-react": "^6.16.0",
-    "babel-preset-stage-1": "^6.16.0",
-    "del": "^2.2.2",
     "eslint": "^3.9.1",
     "eslint-plugin-babel": "^3.3.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-react": "^6.6.0",
     "eslint-plugin-react-native": "^2.0.0",
     "flow-bin": "^0.33.0",
-    "next": "^1.1.2",
     "react": "~15.3.2",
-    "react-docgen": "^2.12.1",
-    "react-dom": "^15.4.0",
     "react-native": "~0.37.0",
     "react-native-vector-icons": "~3.0.0"
   },
