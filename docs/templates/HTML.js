@@ -33,9 +33,7 @@ export default function HTML({ title, description, body, css }: Props) {
 
         <style type='text/css' dangerouslySetInnerHTML={{ __html: css }} />
       </head>
-      <body>
-        <div id='root' dangerouslySetInnerHTML={{ __html: body }} />
-      </body>
+      <body dangerouslySetInnerHTML={{ __html: body }} />
     </html>
   );
 }
