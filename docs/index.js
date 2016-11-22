@@ -2,6 +2,7 @@
 
 import path from 'path';
 import fs from 'fs';
+import { server, bundle } from 'quik';
 import { parse } from 'react-docgen';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
@@ -11,6 +12,9 @@ import Page from './templates/Page';
 import Home from './templates/Home';
 import ComponentDocs from './templates/ComponentDocs';
 
+const PORT = 3031;
+
+const task = process.argv[2];
 const dist = path.join(__dirname, 'dist');
 
 if (!fs.existsSync(dist)) {
@@ -49,44 +53,104 @@ components.forEach(comp => {
 });
 
 pages.sort();
-items.forEach(it => {
-  const { html, css } = renderStatic(
+
+function buildHTML({ component, title, description, filename }: any) {
+  const pathname = `/${filename}`;
+  const { html, css, ids } = renderStatic(
     () => ReactDOMServer.renderToString(
-      <Page url={{ pathname: `/${it.name.toLowerCase()}` }} pages={pages}>
-        <ComponentDocs name={it.name} info={it.info} />
+      <Page url={{ pathname }} pages={pages}>
+        {React.createElement(component.type, component.props)}
       </Page>
     )
   );
+
+  let body = `<div id='root'>${html}</div>`;
+
+  if (task === 'build') {
+    body += `
+      <script src='common.bundle.js'></script>
+      <script src='${filename}.bundle.js'></script>
+    `;
+  } else {
+    body += `
+      <script src='${filename}.js'></script>
+    `;
+  }
+
   fs.writeFileSync(
-    path.join(dist, `${it.name.toLowerCase()}.html`),
+    path.join(dist, `${filename}.js`),
+    `
+    import React from 'react';
+    import ReactDOM from 'react-dom';
+    import { rehydrate } from 'glamor';
+    import Page from '../templates/Page';
+    import ${component.type.name} from '../templates/${component.type.name}';
+
+    rehydrate(${JSON.stringify(ids)});
+
+    ReactDOM.render(
+      <Page url={{ pathname: '${pathname}' }} pages={${JSON.stringify(pages)}}>
+        {React.createElement(${component.type.name}, ${JSON.stringify(component.props)})}
+      </Page>,
+      document.getElementById('root')
+    );
+    `,
+  );
+
+  fs.writeFileSync(
+    path.join(dist, `${filename}.html`),
     ReactDOMServer.renderToString(
       // eslint-disable-next-line react/jsx-pascal-case
       <HTML
-        title={it.name}
-        description={it.info.description}
-        body={html}
+        title={title}
+        description={description}
+        body={body}
         css={css}
       />
     )
   );
+}
+
+items.forEach(it => buildHTML({
+  component: {
+    type: ComponentDocs,
+    props: {
+      name: it.name,
+      info: it.info,
+    },
+  },
+  title: it.name,
+  description: it.info.description,
+  filename: it.name.toLowerCase(),
+}));
+
+buildHTML({
+  component: {
+    type: Home,
+    props: {},
+  },
+  title: 'Home',
+  description: '',
+  filename: 'index',
 });
 
-const { html, css } = renderStatic(
-  () => ReactDOMServer.renderToString(
-    <Page url={{ pathname: '/' }} pages={pages}>
-      <Home />
-    </Page>
-  )
-);
-fs.writeFileSync(path.join(dist, 'index.html'),
-  ReactDOMServer.renderToString(
-    // eslint-disable-next-line react/jsx-pascal-case
-    <HTML
-      title='Home'
-      description=''
-      body={html}
-      css={css}
-    />
-  )
-);
+const entry = pages.map(page => `dist/${page.toLowerCase()}.js`).concat('dist/index.js');
+
+if (task !== 'build') {
+  server({
+    root: __dirname,
+    watch: entry,
+  }).listen(PORT);
+
+  console.log(`Open http://localhost:${PORT}/dist/index.html in your browser.\n`);
+} else {
+  bundle({
+    root: __dirname,
+    entry,
+    output: 'dist/[name].bundle.js',
+    common: 'dist/common.bundle.js',
+    sourcemaps: true,
+    production: true,
+  });
+}
 

@@ -4,11 +4,13 @@
   "description": "Documentation for React Native Paper",
   "private": true,
   "scripts": {
-    "build": "babel-node index",
+    "dev": "babel-node index",
+    "build": "babel-node index build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "glamor": "^2.19.0",
+    "quik": "^0.11.1",
     "react": "~15.3.2",
     "react-dom": "~15.3.0"
   },

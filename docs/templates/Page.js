@@ -49,7 +49,7 @@ export default function Body({ url, pages, children }: any) {
   return (
     <div {...wrapper}>
       <nav {...sidebar}>
-        <a href='index.html' {...mono} {...link} {...(url.pathname === '/' ? active : null)}>
+        <a href='index.html' {...mono} {...link} {...(url.pathname === '/index' ? active : null)}>
           Home
         </a>
         <hr {...separator} />
