@@ -15,7 +15,7 @@ type Props = {
 }
 
 type State = {
-  portals: Array;
+  portals: Object;
 }
 
 export default class PortalProvider extends Component<void, Props, State> {
