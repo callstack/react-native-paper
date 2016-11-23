@@ -23,7 +23,7 @@ const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
 type Props = {
   disabled?: boolean;
-  shrink?: boolean;
+  compact?: boolean;
   raised?: boolean;
   primary?: boolean;
   dark?: boolean;
@@ -50,9 +50,9 @@ class Button extends PureComponent<void, Props, State> {
      */
     disabled: PropTypes.bool,
     /**
-     * Shrink the button for a more compact look
+     * Use a compact look, useful for flat buttons in a row
      */
-    shrink: PropTypes.bool,
+    compact: PropTypes.bool,
     /**
      * Add elevation to button, as opposed to default flat appearance
      */
@@ -119,7 +119,7 @@ class Button extends PureComponent<void, Props, State> {
   render() {
     const {
       disabled,
-      shrink,
+      compact,
       raised,
       primary,
       dark,
@@ -200,7 +200,7 @@ class Button extends PureComponent<void, Props, State> {
             style={styles.icon}
           /> : null
         }
-        <Text numberOfLines={1} style={[ styles.label, shrink ? null : styles.expandLabel, textStyle, { fontFamily } ]}>
+        <Text numberOfLines={1} style={[ styles.label, compact && styles.compactLabel, textStyle, { fontFamily } ]}>
           {children ? children.toUpperCase() : ''}
         </Text>
       </View>
@@ -209,7 +209,7 @@ class Button extends PureComponent<void, Props, State> {
     return (
       <AnimatedPaper
         elevation={disabled ? 0 : this.state.elevation}
-        style={[ styles.button, shrink ? null : styles.expand, buttonStyle, style ]}
+        style={[ styles.button, compact && styles.compact, buttonStyle, style ]}
       >
         {disabled ? content :
           <TouchableRipple
@@ -232,10 +232,10 @@ class Button extends PureComponent<void, Props, State> {
 const styles = StyleSheet.create({
   button: {
     margin: 4,
-    minWidth: 64,
-  },
-  expand: {
     minWidth: 88,
+  },
+  compact: {
+    minWidth: 64,
   },
   content: {
     flexDirection: 'row',
@@ -250,10 +250,10 @@ const styles = StyleSheet.create({
   label: {
     textAlign: 'center',
     marginVertical: 9,
-    marginHorizontal: 8,
-  },
-  expandLabel: {
     marginHorizontal: 16,
+  },
+  compactLabel: {
+    marginHorizontal: 8,
   },
 });
 
