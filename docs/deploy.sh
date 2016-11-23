@@ -4,6 +4,8 @@ set -e
 
 git clone https://${GITHUB_TOKEN}@github.com/react-native-paper/react-native-paper.github.io.git docs/dist
 
+rm -rf docs/dist/**
+
 cd docs && npm run build && cd dist
 
 if [ -z "$(git diff --exit-code)" ]; then

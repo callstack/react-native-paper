@@ -3,14 +3,13 @@
 import path from 'path';
 import fs from 'fs';
 import { server, bundle } from 'quik';
+import watch from 'node-watch';
 import { parse } from 'react-docgen';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { renderStatic } from 'glamor/server';
 import HTML from './templates/HTML';
-import Page from './templates/Page';
-import Home from './templates/Home';
-import ComponentDocs from './templates/ComponentDocs';
+import App from './templates/App';
 
 const PORT = 3031;
 
@@ -21,81 +20,112 @@ if (!fs.existsSync(dist)) {
   fs.mkdirSync(dist);
 }
 
-const components = fs.readFileSync(path.join(__dirname, '../src/index.js'))
-  .toString()
-  .split('\n')
-  .map(line => line.split(' ').pop().replace(/('|;)/g, ''))
-  .filter(line => line.startsWith('./components/'))
-  .map(line => {
-    const file = require.resolve(path.join(__dirname, '../src', line));
-    if (file.endsWith('/index.js')) {
-      const matches = fs.readFileSync(file).toString().match(/export \{ default as default \} from .+/);
-      if (matches && matches.length) {
-        const name = matches[0].split(' ').pop().replace(/('|;)/g, '');
-        return require.resolve(path.join(__dirname, '../src', line, name));
+let items = [];
+let pages = [];
+
+function collectInfo() {
+  items = [];
+  pages = [];
+
+  const files = fs.readFileSync(path.join(__dirname, '../src/index.js'))
+    .toString()
+    .split('\n')
+    .map(line => line.split(' ').pop().replace(/('|;)/g, ''))
+    .filter(line => line.startsWith('./components/'))
+    .map(line => {
+      const file = require.resolve(path.join(__dirname, '../src', line));
+      if (file.endsWith('/index.js')) {
+        const matches = fs.readFileSync(file).toString().match(/export \{ default as default \} from .+/);
+        if (matches && matches.length) {
+          const name = matches[0].split(' ').pop().replace(/('|;)/g, '');
+          return require.resolve(path.join(__dirname, '../src', line, name));
+        }
       }
+      return file;
+    });
+
+  files.forEach(comp => {
+    const componentName = comp.split('/').pop().split('.')[0];
+    try {
+      const componentInfo = parse(fs.readFileSync(comp).toString());
+      items.push({ name: componentName, info: componentInfo });
+      pages.push(componentName);
+    } catch (e) {
+      console.log(`${componentName}: ${e.message}`);
     }
-    return file;
   });
 
-const items = [];
-const pages = [];
+  pages.sort();
 
-components.forEach(comp => {
-  const componentName = comp.split('/').pop().split('.')[0];
-  try {
-    const componentInfo = parse(fs.readFileSync(comp).toString());
-    items.push({ name: componentName, info: componentInfo });
-    pages.push(componentName);
-  } catch (e) {
-    console.log(`${componentName}: ${e.message}`);
+  fs.writeFileSync(path.join(dist, 'app.data.json'), JSON.stringify(items));
+}
+
+collectInfo();
+
+fs.writeFileSync(
+  path.join(dist, 'app.src.js'),
+  `
+  import React from 'react';
+  import ReactDOM from 'react-dom';
+  import RedBox from 'redbox-react';
+  import { rehydrate } from 'glamor';
+  import App from '../templates/App';
+  import pages from './app.data.json';
+
+  rehydrate(window.__GLAMOR__);
+
+  const root = document.getElementById('root')
+  const render = () => {
+    try {
+      ReactDOM.render(
+        <App
+          pages={pages}
+          name={window.__INITIAL_PATH__}
+        />,
+        root
+      );
+    } catch (e) {
+      ReactDOM.render(
+        <RedBox error={ error } />,
+        root
+      )
+    }
   }
-});
 
-pages.sort();
+  if (module.hot) {
+    module.hot.accept(() => {
+      setTimeout(render)
+    })
+  }
 
-function buildHTML({ component, title, description, filename }: any) {
-  const pathname = `/${filename}`;
+  render()
+  `,
+);
+
+function buildHTML({ title, description, filename }: any) {
   const { html, css, ids } = renderStatic(
     () => ReactDOMServer.renderToString(
-      <Page url={{ pathname }} pages={pages}>
-        {React.createElement(component.type, component.props)}
-      </Page>
+      <App
+        pages={items}
+        name={filename}
+      />
     )
   );
 
   let body = `<div id='root'>${html}</div>`;
 
+  body += `
+    <script>
+      window.__INITIAL_PATH__ = '${filename}'
+      window.__GLAMOR__ = ${JSON.stringify(ids)}
+    </script>
+  `;
+
   if (task === 'build') {
-    body += `
-      <script src='common.bundle.js'></script>
-      <script src='${filename}.bundle.js'></script>
-    `;
+    body += '<script src=\'app.bundle.js?transpile=false\'></script>';
   } else {
-    body += `
-      <script src='${filename}.js'></script>
-    `;
+    body += '<script src=\'app.src.js\'></script>';
   }
-
-  fs.writeFileSync(
-    path.join(dist, `${filename}.js`),
-    `
-    import React from 'react';
-    import ReactDOM from 'react-dom';
-    import { rehydrate } from 'glamor';
-    import Page from '../templates/Page';
-    import ${component.type.name} from '../templates/${component.type.name}';
-
-    rehydrate(${JSON.stringify(ids)});
-
-    ReactDOM.render(
-      <Page url={{ pathname: '${pathname}' }} pages={${JSON.stringify(pages)}}>
-        {React.createElement(${component.type.name}, ${JSON.stringify(component.props)})}
-      </Page>,
-      document.getElementById('root')
-    );
-    `,
-  );
 
   fs.writeFileSync(
     path.join(dist, `${filename}.html`),
@@ -112,31 +142,25 @@ function buildHTML({ component, title, description, filename }: any) {
 }
 
 items.forEach(it => buildHTML({
-  component: {
-    type: ComponentDocs,
-    props: {
-      name: it.name,
-      info: it.info,
-    },
-  },
   title: it.name,
   description: it.info.description,
   filename: it.name.toLowerCase(),
 }));
 
 buildHTML({
-  component: {
-    type: Home,
-    props: {},
-  },
   title: 'Home',
   description: '',
   filename: 'index',
 });
 
-const entry = pages.map(page => `dist/${page.toLowerCase()}.js`).concat('dist/index.js');
+const entry = [ 'dist/app.src.js' ];
 
 if (task !== 'build') {
+  watch(path.join(__dirname, '../src'), () => {
+    console.log('Files changed. Rebuilding...\n');
+    collectInfo();
+  });
+
   server({
     root: __dirname,
     watch: entry,
@@ -147,8 +171,7 @@ if (task !== 'build') {
   bundle({
     root: __dirname,
     entry,
-    output: 'dist/[name].bundle.js',
-    common: 'dist/common.bundle.js',
+    output: 'dist/app.bundle.js',
     sourcemaps: true,
     production: true,
   });
