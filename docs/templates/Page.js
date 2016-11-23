@@ -3,6 +3,7 @@
 import React from 'react';
 import { style } from 'glamor';
 import mono from './styles/mono';
+import Link from './Link';
 
 const wrapper = style({
   display: 'flex',
@@ -45,24 +46,24 @@ const active = style({
   opacity: 1,
 });
 
-export default function Body({ url, pages, children }: any) {
+export default function Body({ name, pages, children }: any) {
   return (
     <div {...wrapper}>
       <nav {...sidebar}>
-        <a href='index.html' {...mono} {...link} {...(url.pathname === '/index' ? active : null)}>
+        <Link to='index' {...mono} {...link} {...(name === 'index' ? active : null)}>
           Home
-        </a>
+        </Link>
         <hr {...separator} />
         {pages.map(page =>
-          <a
-            key={page}
-            href={`${page.toLowerCase()}.html`}
+          <Link
+            key={page.name}
+            to={page.name.toLowerCase()}
             {...mono}
             {...link}
-            {...(url.pathname === `/${page.toLowerCase()}` ? active : null)}
+            {...(name === page.name.toLowerCase() ? active : null)}
           >
-            {page}
-          </a>
+            {page.name}
+          </Link>
         )}
       </nav>
       <div {...content}>
