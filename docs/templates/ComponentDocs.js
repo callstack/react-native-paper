@@ -65,7 +65,25 @@ const propDetails = style({
   },
 });
 
+const rest = style({
+  color: '#2196F3',
+});
+
 export default function ComponentDocs(props: any) {
+  const restProps = [];
+  const description = props.info.description.split('\n').filter(line => {
+    if (line.startsWith('@extends ')) {
+      const parts = line.split(' ').slice(1);
+      const link = parts.pop();
+      restProps.push({
+        name: parts.join(' '),
+        link,
+      });
+      return false;
+    }
+    return true;
+  }).join('\n');
+
   return (
     <div {...wrapper}>
       <h1 {...mono} {...name}>{`<${props.name} />`}</h1>
@@ -75,27 +93,39 @@ export default function ComponentDocs(props: any) {
         const { flowType, type, required } = props.info.props[prop];
         return (
           <div {...propInfo} key={prop}>
-            <span
-              {...mono}
-              {...propRequired}
-              data-hint='required'
-            >
-              {required ? '*' : ''}
+            <span {...mono}>
+              <span
+                {...propRequired}
+                data-hint='required'
+              >
+                {required ? '*' : ''}
+              </span>
+              <a
+                {...mono}
+                {...propLabel}
+                name={prop}
+                href={`#${prop}`}
+              >
+                {prop}: {flowType.name === 'any' && type ? (type.raw || type.name) : (flowType.raw || flowType.name)}
+              </a>
             </span>
-            <a
-              {...mono}
-              {...propLabel}
-              name={prop}
-              href={`#${prop}`}
-            >
-              {prop}: {flowType.name === 'any' && type ? (type.raw || type.name) : (flowType.raw || flowType.name)}
-            </a>
             <p {...body} {...propDetails}>
               {props.info.props[prop].description}
             </p>
           </div>
         );
       })}
+      {restProps && restProps.length ? restProps.map(prop => (
+        <a
+          {...mono}
+          {...propLabel}
+          {...rest}
+          key={prop.name}
+          href={prop.link}
+        >
+          ...{prop.name}
+        </a>
+      )) : null}
     </div>
   );
 }
