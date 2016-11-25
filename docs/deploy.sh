@@ -16,7 +16,7 @@ fi
 git config user.name "Travis CI"
 git config user.email "bot@travis-ci.org"
 
-git add .
+git add -A .
 git commit -m "Deploy documentation: $(git rev-parse --verify HEAD)"
 
 git push -f -u origin master
