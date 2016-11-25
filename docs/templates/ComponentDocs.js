@@ -11,23 +11,26 @@ const wrapper = style({
 
 const name = style({
   fontSize: '36px',
-  margin: '16px 0 16px -24px',
+  margin: '24px 0 8px -24px',
 });
 
 const propsHeader = style({
   fontSize: '24px',
+  lineHeight: 1,
   color: '#000',
-  margin: '36px 0 16px',
+  margin: '48px 0 16px',
 });
 
 const propInfo = style({
   position: 'relative',
+  margin: '24px 0',
 });
 
 const propRequired = style({
   position: 'absolute',
   left: -24,
-  fontSize: '24px',
+  fontSize: '22px',
+  lineHeight: 1.5,
   color: '#aaa',
 
   '&:hover:after': {
@@ -36,8 +39,8 @@ const propRequired = style({
     position: 'absolute',
     left: 0,
     borderRadius: '3px',
-    bottom: '40px',
-    padding: '0 8px',
+    bottom: '32px',
+    padding: '2px 8px',
     fontSize: '12px',
     color: '#fff',
     background: '#333',
@@ -46,13 +49,20 @@ const propRequired = style({
 });
 
 const propLabel = style({
-  display: 'inline-block',
   backgroundColor: '#f0f0f0',
   borderRadius: '3px',
-  padding: '0 8px',
-  margin: '8px 16px 8px 0',
+  padding: '4px 8px',
+  margin: '4px 16px 4px 0',
   textDecoration: 'none',
   whiteSpace: 'nowrap',
+});
+
+const propDetails = style({
+  margin: '8px 0',
+
+  '@media(min-width: 960px)': {
+    display: 'inline-block',
+  },
 });
 
 export default function ComponentDocs(props: any) {
@@ -80,7 +90,9 @@ export default function ComponentDocs(props: any) {
             >
               {prop}: {flowType.name === 'any' && type ? (type.raw || type.name) : (flowType.raw || flowType.name)}
             </a>
-            <span {...body}>{props.info.props[prop].description}</span>
+            <p {...body} {...propDetails}>
+              {props.info.props[prop].description}
+            </p>
           </div>
         );
       })}

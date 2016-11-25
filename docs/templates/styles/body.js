@@ -12,7 +12,7 @@ insertGlobal(`
   html, body {
     margin: 0;
     padding: 0;
-    color: '#555',
+    color: #555;
   }
 `);
 
