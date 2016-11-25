@@ -6,10 +6,11 @@ import Page from './Page';
 import Home from './Home';
 import ComponentDocs from './ComponentDocs';
 
-export default function App({ pages, name }: any) {
-  const routes = pages.map(it => ({
+export const buildRoutes = (pages: Array<*>) =>
+  pages.map(it => ({
     title: it.name,
     name: it.name.toLowerCase(),
+    description: it.info.description,
     component: props => (
       <Page {...props} pages={pages}>
         <ComponentDocs {...it} />
@@ -18,6 +19,7 @@ export default function App({ pages, name }: any) {
   })).concat({
     title: 'Home',
     name: 'index',
+    description: '',
     component: props => (
       <Page {...props} pages={pages}>
         <Home />
@@ -25,6 +27,8 @@ export default function App({ pages, name }: any) {
     ),
   });
 
+export default function App({ pages, name }: any) {
+  const routes = buildRoutes(pages);
   return (
     <Router
       name={name}

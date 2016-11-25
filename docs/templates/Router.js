@@ -3,11 +3,12 @@
 import React, { Component } from 'react';
 import createHistory from 'history/createBrowserHistory';
 
-type Route = {
+export type Route = {
   title: string;
+  description: string;
   name: string;
   component: any;
-  props: Object;
+  props?: Object;
 }
 
 type Props = {
