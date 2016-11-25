@@ -7,21 +7,56 @@ import Link from './Link';
 
 const wrapper = style({
   display: 'flex',
-  flexDirection: 'row',
   height: '100vh',
+  flexDirection: 'column',
+
+  '@media(min-width: 640px)': {
+    flexDirection: 'row',
+  },
 });
 
 const sidebar = style({
-  width: '240px',
   padding: '24px',
   backgroundColor: '#f0f0f0',
-  overflow: 'auto',
+  display: 'none',
+
+  '@media(min-width: 640px)': {
+    display: 'block',
+    height: '100%',
+    width: '240px',
+    overflow: 'auto',
+  },
 });
 
 const content = style({
   flex: 1,
-  height: '100%',
-  overflow: 'auto',
+
+  '@media(min-width: 640px)': {
+    height: '100%',
+    overflow: 'auto',
+  },
+});
+
+const menuButton = style({
+  display: 'none',
+
+  '&:checked ~ nav': {
+    display: 'block',
+  },
+});
+
+const menuIcon = style({
+  fontSize: '24px',
+  cursor: 'pointer',
+  position: 'absolute',
+  top: 0,
+  right: 0,
+  padding: '24px',
+  zIndex: 10,
+
+  '@media(min-width: 640px)': {
+    display: 'none',
+  },
 });
 
 const separator = style({
@@ -49,6 +84,15 @@ const active = style({
 export default function Body({ name, pages, children }: any) {
   return (
     <div {...wrapper}>
+      <input
+        {...menuButton}
+        id='slide-sidebar'
+        type='checkbox'
+        role='button'
+      />
+      <label htmlFor='slide-sidebar'>
+        <span {...menuIcon}>☰</span>
+      </label>
       <nav {...sidebar}>
         <Link to='index' {...mono} {...link} {...(name === 'index' ? active : null)}>
           Home
