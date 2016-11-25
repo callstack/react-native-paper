@@ -46,6 +46,15 @@ export default class Router extends Component<void, Props, State> {
     );
   }
 
+  componentDidUpdate(prevProps: any, prevState: any) {
+    if (prevState.name) {
+      const route = this.props.routes.find(r => r.name === this.state.name);
+      if (route && route.title) {
+        document.title = route.title;
+      }
+    }
+  }
+
   componentWillUnmount() {
     this._unlisten();
   }

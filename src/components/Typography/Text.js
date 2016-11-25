@@ -15,6 +15,8 @@ type Props = {
 
 /**
  * Text component which follows settings from the theme
+ *
+ * @extends Text props https://facebook.github.io/react-native/docs/text.html#props
  */
 class Text extends PureComponent<void, Props, void> {
   static propTypes = {

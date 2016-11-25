@@ -10,11 +10,14 @@
   },
   "dependencies": {
     "glamor": "^2.19.0",
+    "highlight.js": "^9.8.0",
     "history": "^4.4.0",
     "node-watch": "^0.4.1",
+    "prism": "^1.0.0",
     "quik": "^0.11.1",
     "react": "~15.3.2",
     "react-dom": "~15.3.0",
+    "react-remarkable": "^1.1.1",
     "redbox-react": "^1.3.3"
   },
   "devDependencies": {
