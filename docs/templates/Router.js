@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import createHistory from 'history/createBrowserHistory';
 
 type Route = {
+  title: string;
   name: string;
   component: any;
   props: Object;
@@ -42,6 +43,15 @@ export default class Router extends Component<void, Props, State> {
         name: this._parse(location.pathname),
       })
     );
+  }
+
+  componentDidUpdate(prevProps: any, prevState: any) {
+    if (prevState.name) {
+      const route = this.props.routes.find(r => r.name === this.state.name);
+      if (route && route.title) {
+        document.title = route.title;
+      }
+    }
   }
 
   componentWillUnmount() {

@@ -8,6 +8,7 @@ import ComponentDocs from './ComponentDocs';
 
 export default function App({ pages, name }: any) {
   const routes = pages.map(it => ({
+    title: it.name,
     name: it.name.toLowerCase(),
     component: props => (
       <Page {...props} pages={pages}>
@@ -15,6 +16,7 @@ export default function App({ pages, name }: any) {
       </Page>
     ),
   })).concat({
+    title: 'Home',
     name: 'index',
     component: props => (
       <Page {...props} pages={pages}>
