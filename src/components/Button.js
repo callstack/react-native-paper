@@ -42,6 +42,15 @@ type State = {
 
 /**
  * Buttons communicate the action that will occur when the user touches them
+ *
+ * **Usage:**
+ * ```
+ * const MyComponent = () => (
+ *  <Button raised onPress={() => console.log('Pressed')>}
+ *    Press me
+ *  </Button>
+ * );
+ * ```
  */
 class Button extends PureComponent<void, Props, State> {
   static propTypes = {

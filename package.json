@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "color": "^0.11.4",
+    "highlight.js": "^9.8.0",
     "react-native-drawer": "^2.3.0"
   }
 }
