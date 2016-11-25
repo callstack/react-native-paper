@@ -9,7 +9,7 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { renderStatic } from 'glamor/server';
 import HTML from './templates/HTML';
-import App from './templates/App';
+import App, { buildRoutes } from './templates/App';
 
 const PORT = 3031;
 
@@ -62,52 +62,12 @@ function collectInfo() {
 
 collectInfo();
 
-fs.writeFileSync(
-  path.join(dist, 'app.src.js'),
-  `
-  import React from 'react';
-  import ReactDOM from 'react-dom';
-  import RedBox from 'redbox-react';
-  import { rehydrate } from 'glamor';
-  import App from '../templates/App';
-  import pages from './app.data.json';
-
-  rehydrate(window.__GLAMOR__);
-
-  const root = document.getElementById('root')
-  const render = () => {
-    try {
-      ReactDOM.render(
-        <App
-          pages={pages}
-          name={window.__INITIAL_PATH__}
-        />,
-        root
-      );
-    } catch (e) {
-      ReactDOM.render(
-        <RedBox error={ error } />,
-        root
-      )
-    }
-  }
-
-  if (module.hot) {
-    module.hot.accept(() => {
-      setTimeout(render)
-    })
-  }
-
-  render()
-  `,
-);
-
-function buildHTML({ title, description, filename }: any) {
+function buildHTML({ title, description, name }: any) {
   const { html, css, ids } = renderStatic(
     () => ReactDOMServer.renderToString(
       <App
         pages={items}
-        name={filename}
+        name={name}
       />
     )
   );
@@ -116,19 +76,19 @@ function buildHTML({ title, description, filename }: any) {
 
   body += `
     <script>
-      window.__INITIAL_PATH__ = '${filename}'
+      window.__INITIAL_PATH__ = '${name}'
       window.__GLAMOR__ = ${JSON.stringify(ids)}
     </script>
   `;
 
   if (task === 'build') {
-    body += '<script src=\'app.bundle.js?transpile=false\'></script>';
+    body += '<script src="./app.bundle.js?transpile=false"></script>';
   } else {
-    body += '<script src=\'app.src.js\'></script>';
+    body += '<script src="../app.src.js"></script>';
   }
 
   fs.writeFileSync(
-    path.join(dist, `${filename}.html`),
+    path.join(dist, `${name}.html`),
     ReactDOMServer.renderToString(
       // eslint-disable-next-line react/jsx-pascal-case
       <HTML
@@ -141,19 +101,9 @@ function buildHTML({ title, description, filename }: any) {
   );
 }
 
-items.forEach(it => buildHTML({
-  title: it.name,
-  description: it.info.description,
-  filename: it.name.toLowerCase(),
-}));
+buildRoutes(items).forEach(buildHTML);
 
-buildHTML({
-  title: 'Home',
-  description: '',
-  filename: 'index',
-});
-
-const entry = [ 'dist/app.src.js' ];
+const entry = [ 'app.src.js' ];
 
 if (task !== 'build') {
   watch(path.join(__dirname, '../src'), () => {
