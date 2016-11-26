@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, {
-  Component,
+  PureComponent,
   isValidElement,
   PropTypes,
 } from 'react';
@@ -21,7 +21,7 @@ type State = {
 
 export const manager = 'react-native-paper$portal-manager';
 
-export default class PortalHost extends Component<void, Props, State> {
+export default class PortalHost extends PureComponent<void, Props, State> {
   static propTypes = {
     children: PropTypes.node.isRequired,
     style: View.propTypes.style,
@@ -40,6 +40,7 @@ export default class PortalHost extends Component<void, Props, State> {
       [manager]: {
         mount: this._mountPortal,
         unmount: this._unmountPortal,
+        update: this._updatePortal,
       },
     };
   }
@@ -60,7 +61,7 @@ export default class PortalHost extends Component<void, Props, State> {
     }
 
     return null;
-  }
+  };
 
   _unmountPortal = (key: string) => {
     let { portals } = this.state;
@@ -73,7 +74,20 @@ export default class PortalHost extends Component<void, Props, State> {
         portals,
       });
     }
-  }
+  };
+
+  _updatePortal = (key: string, portal: ?React.Element<*>) => {
+    const { portals } = this.state;
+
+    if (isValidElement(portal)) {
+      this.setState({
+        portals: {
+          ...portals,
+          [key]: portal,
+        },
+      });
+    }
+  };
 
   render() {
     const { portals } = this.state;
