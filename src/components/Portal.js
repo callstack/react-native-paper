@@ -4,30 +4,38 @@ import {
   PureComponent,
   PropTypes,
 } from 'react';
+import { manager } from '../core/PortalHost';
 
 type Props = {
   children?: any;
 }
 
-class Portal extends PureComponent<void, Props, void> {
+export default class Portal extends PureComponent<void, Props, void> {
   static propTypes = {
     children: PropTypes.node.isRequired,
   };
-  componentDidMount() {
-    const { children } = this.props;
 
-    this._key = this.context.portalManager.mount(children);
+  static contextTypes = {
+    [manager]: PropTypes.object,
+  };
+
+  componentDidMount() {
+    if (typeof this.context[manager] !== 'object' || this.context[manager] === null) {
+      throw new Error(
+        'Couldn\'t find portal manager in the context or props. ' +
+        'You need to wrap your root component in \'<PortalHost />\''
+      );
+    }
+    this._key = this.context[manager].mount(this.props.children);
   }
+
   componentWillUnmount() {
-    this.context.portalManager.unmount(this._key);
+    this.context[manager].unmount(this._key);
   }
+
+  _key: ?string;
+
   render() {
     return null;
   }
 }
-
-Portal.contextTypes = {
-  portalManager: PropTypes.object,
-};
-
-export default Portal;
