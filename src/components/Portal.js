@@ -29,6 +29,10 @@ export default class Portal extends PureComponent<void, Props, void> {
     this._key = this.context[manager].mount(this.props.children);
   }
 
+  componentDidUpdate() {
+    this.context[manager].update(this._key, this.props.children);
+  }
+
   componentWillUnmount() {
     this.context[manager].unmount(this._key);
   }
