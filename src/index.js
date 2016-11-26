@@ -1,7 +1,8 @@
 /* @flow */
 
-export { default as ThemeProvider } from './core/ThemeProvider';
 export { default as withTheme } from './core/withTheme';
+export { default as ThemeProvider } from './core/ThemeProvider';
+export { default as PortalHost } from './core/PortalHost';
 
 export * as Colors from './styles/colors';
 
