@@ -13,7 +13,7 @@ import {
   Divider,
 } from 'react-native-paper';
 
-export default class CheckboxExample extends Component {
+export default class BottomSheetExample extends Component {
   static title = 'Bottom sheet';
 
   state = {

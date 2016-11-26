@@ -9,15 +9,19 @@ import {
 import TouchableRipple from '../TouchableRipple';
 import Icon from '../Icon';
 import Text from '../Typography/Text';
-import { black } from '../../styles/colors';
+import withTheme from '../../core/withTheme';
+import type { Theme } from '../../types/Theme';
 
 type Props = {
   icon?: string;
+  image?: number | Object;
   label: string;
   style?: any;
+  theme: Theme;
 }
 
 const BottomSheetListItem = (props: Props) => {
+  const { text } = props.theme.colors;
   return (
     <TouchableRipple {...props}>
       <View style={styles.container}>
@@ -25,7 +29,7 @@ const BottomSheetListItem = (props: Props) => {
           <Icon
             name={props.icon}
             size={24}
-            style={styles.icon}
+            style={[ styles.icon, { color: text } ]}
           /> : null
         }
         {!props.icon && props.image ?
@@ -34,7 +38,9 @@ const BottomSheetListItem = (props: Props) => {
             style={styles.image}
           /> : null
         }
-        <Text style={styles.label}>{props.label}</Text>
+        <Text style={[ styles.label, { color: text } ]}>
+          {props.label}
+        </Text>
       </View>
     </TouchableRipple>
   );
@@ -42,8 +48,10 @@ const BottomSheetListItem = (props: Props) => {
 
 BottomSheetListItem.propTypes = {
   icon: PropTypes.string,
+  image: PropTypes.oneOfType([ PropTypes.object, PropTypes.number ]),
   label: PropTypes.string.isRequired,
   style: View.propTypes.style,
+  theme: PropTypes.object.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -56,7 +64,6 @@ const styles = StyleSheet.create({
   icon: {
     height: 24,
     width: 24,
-    color: black,
     opacity: 0.64,
     marginRight: 32,
   },
@@ -68,8 +75,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    color: black,
   },
 });
 
-export default BottomSheetListItem;
+export default withTheme(BottomSheetListItem);

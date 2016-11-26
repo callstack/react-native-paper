@@ -22,6 +22,7 @@ type Props = {
   visible: boolean;
   onRequestClose: Function;
   children?: any;
+  style?: any;
 }
 
 type State = {
@@ -34,6 +35,32 @@ const INITIAL_POSITION = 64;
 
 /**
  * Bottom sheets slide up from the bottom of the screen to reveal more content
+ *
+ * **Usage:**
+ * ```
+ * export default class MyComponent extends Component {
+ *   state = {
+ *     visible: false,
+ *   };
+ *
+ *   _showSheet = () => this.setState({ visble: true });
+ *   _hideSheet = () => this.setState({ visble: false });
+ *
+ *   render() {
+ *     return (
+ *       <View>
+ *         <Button onPress={this._showSheet}>Show</Button>
+ *         <BottomSheet visible={this.state.visible} onRequestClose={this._hideSheet}>
+ *           <BottomSheet.List title='Create'>
+ *             <BottomSheet.ListItem image={require('./icons/docs.png')} label='Document' />
+ *             <BottomSheet.ListItem icon='folder' label='Folder' />
+ *           </BottomSheet.List>
+ *         </BottomSheet>
+ *       </View>
+ *     );
+ *   }
+ * }
+ * ```
  */
 export default class BottomSheet extends PureComponent<void, Props, State> {
 
@@ -41,9 +68,19 @@ export default class BottomSheet extends PureComponent<void, Props, State> {
   static ListItem = BottomSheetListItem;
 
   static propTypes = {
+    /**
+     * Whether bottom sheet is visible
+     */
     visible: PropTypes.bool.isRequired,
+    /**
+     * Callback is called when the user dismisses the bottom sheet
+     */
     onRequestClose: PropTypes.func.isRequired,
+    /**
+     * Content of the bottom sheet
+     */
     children: PropTypes.node.isRequired,
+    style: Paper.propTypes.style,
   }
 
   constructor(props: Props) {
@@ -98,7 +135,7 @@ export default class BottomSheet extends PureComponent<void, Props, State> {
   _height: 0;
   _panResponder: any;
 
-  _animateSheet = (opacity: number, position: number, cb?: Function) => {
+  _animateSheet = (opacity: number, position: number, cb) => {
     this.state.position.stopAnimation(value => {
       this.state.position.flattenOffset();
       this.state.position.setValue(value);
@@ -204,7 +241,11 @@ export default class BottomSheet extends PureComponent<void, Props, State> {
               {...this._panResponder.panHandlers}
               onLayout={this._handleLayout}
               elevation={12}
-              style={[ styles.sheet, { opacity, transform: [ { translateY: this.state.position } ] } ]}
+              style={[
+                styles.sheet,
+                { opacity, transform: [ { translateY: this.state.position } ] },
+                this.props.style,
+              ]}
             >
               {this.props.children}
             </AnimatedPaper>

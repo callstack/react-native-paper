@@ -6,19 +6,24 @@ import {
   View,
 } from 'react-native';
 import Text from '../Typography/Text';
-import { black } from '../../styles/colors';
+import withTheme from '../../core/withTheme';
+import type { Theme } from '../../types/Theme';
 
 type Props = {
   title?: string;
   children?: any;
   style?: any;
+  theme: Theme;
 }
 
 const BottomSheetList = (props: Props) => {
+  const { text } = props.theme.colors;
   return (
     <View {...props} style={[ styles.container, props.style ]}>
       {typeof props.title === 'string' ?
-        <Text style={styles.title}>{props.title}</Text> : null
+        <Text style={[ styles.title, { color: text } ]}>
+          {props.title}
+        </Text> : null
       }
       {props.children}
     </View>
@@ -37,10 +42,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    color: black,
     opacity: 0.5,
     margin: 16,
   },
 });
 
-export default BottomSheetList;
+export default withTheme(BottomSheetList);
