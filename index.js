@@ -12,6 +12,8 @@ export { default as Paper } from './src/components/Paper';
 export { default as RadioButton } from './src/components/RadioButton';
 export { default as TouchableRipple } from './src/components/TouchableRipple';
 
+export * as Progress from './src/components/Progress';
+
 export { default as Drawer } from './src/components/Drawer';
 export { default as Divider } from './src/components/Divider';
 

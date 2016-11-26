@@ -12,6 +12,8 @@ export { default as Paper } from './components/Paper';
 export { default as RadioButton } from './components/RadioButton';
 export { default as TouchableRipple } from './components/TouchableRipple';
 
+export * as Progress from './components/Progress';
+
 export { default as Caption } from './components/Typography/Caption';
 export { default as Headline } from './components/Typography/Headline';
 export { default as Paragraph } from './components/Typography/Paragraph';
@@ -22,4 +24,3 @@ export { default as Text } from './components/Typography/Text';
 export { default as Divider } from './components/Divider';
 export { default as Drawer } from './components/Drawer';
 export { default as GridView } from './components/GridView';
-
