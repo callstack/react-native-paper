@@ -80,7 +80,7 @@ class Linear extends PureComponent<any, Props, State> {
 
     const progress: number = roundProgress(props.progress);
     const indeterminateWidth: number = roundProgress(props.indeterminateWidth);
-    /* $FlowFixMe */
+
     const defaultBarXPosition = indeterminateWidth / (1 + indeterminateWidth);
 
     this.state = {
