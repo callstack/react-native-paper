@@ -3,6 +3,7 @@
 import React, { PropTypes } from 'react';
 import {
   StyleSheet,
+  Image,
   View,
 } from 'react-native';
 import TouchableRipple from '../TouchableRipple';
@@ -20,11 +21,17 @@ const BottomSheetListItem = (props: Props) => {
   return (
     <TouchableRipple {...props}>
       <View style={styles.container}>
-        {props.icon ?
+        {props.icon && !props.image ?
           <Icon
             name={props.icon}
             size={24}
             style={styles.icon}
+          /> : null
+        }
+        {!props.icon && props.image ?
+          <Image
+            source={props.image}
+            style={styles.image}
           /> : null
         }
         <Text style={styles.label}>{props.label}</Text>
@@ -51,6 +58,12 @@ const styles = StyleSheet.create({
     width: 24,
     color: black,
     opacity: 0.64,
+    marginRight: 32,
+  },
+  image: {
+    height: 24,
+    width: 24,
+    resizeMode: 'contain',
     marginRight: 32,
   },
   label: {
