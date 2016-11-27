@@ -33,7 +33,7 @@ export default class CheckboxExample extends Component {
         <View style={styles.row}>
           <Paragraph>Custom</Paragraph>
           <Checkbox
-            color={Colors.pink500}
+            color={Colors.blue500}
             checked={this.state.checkedCustom}
             onPress={() => this.setState(state => ({ checkedCustom: !state.checkedCustom }))}
           />
