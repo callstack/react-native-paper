@@ -6,10 +6,11 @@ import React, {
 } from 'react';
 import {
   Animated,
-  View,
-  TouchableWithoutFeedback,
-  StyleSheet,
+  BackAndroid,
   PanResponder,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
 } from 'react-native';
 import Paper from '../Paper';
 import ThemedPortal from '../Portal/ThemedPortal';
@@ -135,6 +136,11 @@ export default class BottomSheet extends PureComponent<void, Props, State> {
   _height: 0;
   _panResponder: any;
 
+  _handleBack = () => {
+    this._hideSheet();
+    return true;
+  };
+
   _animateSheet = (opacity: number, position: number, cb) => {
     this.state.position.stopAnimation(value => {
       this.state.position.flattenOffset();
@@ -153,6 +159,7 @@ export default class BottomSheet extends PureComponent<void, Props, State> {
   };
 
   _showSheet = () => {
+    BackAndroid.addEventListener('hardwareBackPress', this._handleBack);
     this.state.position.flattenOffset(0);
     Animated.parallel([
       Animated.timing(this.state.opacity, {
@@ -167,6 +174,7 @@ export default class BottomSheet extends PureComponent<void, Props, State> {
   };
 
   _hideSheet = () => {
+    BackAndroid.removeEventListener('hardwareBackPress', this._handleBack);
     this.state.position.flattenOffset();
     Animated.parallel([
       Animated.timing(this.state.opacity, {
