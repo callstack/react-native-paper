@@ -1,1 +1,5 @@
-export { default as Linear } from './Linear';
+import Linear from './ProgressLinear';
+
+export default {
+  Linear,
+};

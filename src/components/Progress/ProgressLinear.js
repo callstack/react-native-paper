@@ -10,23 +10,29 @@ import {
   Easing,
   View,
 } from 'react-native';
+import color from 'color';
 
-import { blueA200, blue100 } from '../../styles/colors';
+import withTheme from '../../core/withTheme';
 
+import type { Theme } from '../../types/Theme';
+
+/* Rounds progress to match value between 0 and 1. */
 const roundProgress = (progress: ?number): number => Math.min(Math.max((progress || 0), 0), 1);
+const indeterminateWidth = 0.4;
 
 type Props = {
   color: string;
-  emptyColor: string;
   indeterminate: boolean;
-  indeterminateWidth: number;
   progress: number;
+  visible: boolean;
   style?: any;
+  theme: Theme;
 }
 
 type State = {
-  animationValue: Animated.Value;
+  indeterminateAnimationValue: Animated.Value;
   progressAnimationValue: Animated.Value;
+  visibleAnimationValue: Animated.Value;
   defaultBarXPosition: number;
   width: number;
   height: number;
@@ -49,46 +55,43 @@ class Linear extends PureComponent<any, Props, State> {
      */
     color: PropTypes.string,
     /**
-     * Color of incomplete bar.
-     */
-    emptyColor: PropTypes.string,
-    /**
      * Used for visualizing an unspecified wait time.
      */
     indeterminate: PropTypes.bool,
     /**
-     * Width of indeterminate active bar. Rounded to match 0-1 range.
-     */
-    indeterminateWidth: PropTypes.number,
-    /**
      * Progress of loaded content. Rounded to match 0-1 range.
      */
     progress: PropTypes.number,
+    /**
+     * Determines if component is visible.
+     */
+    visible: PropTypes.bool,
     style: View.propTypes.style,
+    theme: PropTypes.object.isRequired,
   };
 
-  static defaultProps: Props = {
-    color: blueA200,
-    emptyColor: blue100,
+  static defaultProps = {
     indeterminate: false,
-    indeterminateWidth: 0.3,
     progress: 0,
+    visible: true,
   };
 
   constructor(props: Props) {
     super(props);
 
     const progress: number = roundProgress(props.progress);
-    const indeterminateWidth: number = roundProgress(props.indeterminateWidth);
 
     const defaultBarXPosition = indeterminateWidth / (1 + indeterminateWidth);
 
+    const { width, height } = StyleSheet.flatten(props.style);
+
     this.state = {
       progressAnimationValue: new Animated.Value(props.indeterminate ? indeterminateWidth : progress),
-      animationValue: new Animated.Value(defaultBarXPosition),
+      indeterminateAnimationValue: new Animated.Value(defaultBarXPosition),
+      visibleAnimationValue: new Animated.Value(0),
       defaultBarXPosition,
-      width: 0,
-      height: 0,
+      width,
+      height,
     };
   }
 
@@ -96,26 +99,38 @@ class Linear extends PureComponent<any, Props, State> {
 
   componentDidMount() {
     if (this.props.indeterminate) {
-      this._startAnimation();
+      this._startIndeterminateAnimation();
     }
+
+    Animated.spring(this.state.visibleAnimationValue, {
+      toValue: this.state.height,
+    }).start();
   }
 
   componentWillReceiveProps(props: Props) {
     const hasIndeterminateChanged = props.indeterminate !== this.props.indeterminate;
     const hasProgressChanged = props.progress !== this.props.progress;
+    const hasVisiblityChanged = props.visible !== this.props.visible;
+
+    if (hasVisiblityChanged) {
+      Animated.spring(this.state.visibleAnimationValue, {
+        toValue: props.visible ? this.state.height : 0,
+        bounciness: 0,
+      }).start();
+    }
 
     if (hasIndeterminateChanged) {
       if (props.indeterminate) {
-        this._startAnimation();
+        this._startIndeterminateAnimation();
       } else {
-        Animated.spring(this.state.animationValue, {
+        Animated.spring(this.state.indeterminateAnimationValue, {
           toValue: this.state.defaultBarXPosition,
         }).start();
       }
     }
 
     if (hasIndeterminateChanged || hasProgressChanged) {
-      const progress = roundProgress(props.indeterminate ? props.indeterminateWidth : props.progress);
+      const progress = roundProgress(props.indeterminate ? indeterminateWidth : props.progress);
 
       Animated.spring(this.state.progressAnimationValue, {
         toValue: progress,
@@ -124,39 +139,31 @@ class Linear extends PureComponent<any, Props, State> {
     }
   }
 
-  _startAnimation = () => {
-    this.state.animationValue.setValue(0);
+  _startIndeterminateAnimation = () => {
+    this.state.indeterminateAnimationValue.setValue(0);
 
-    Animated.timing(this.state.animationValue, {
+    Animated.timing(this.state.indeterminateAnimationValue, {
       toValue: 1,
       duration: 1200,
       easing: Easing.linear,
       isInteraction: false,
     }).start((animationState) => {
       if (animationState.finished) {
-        this._startAnimation();
+        this._startIndeterminateAnimation();
       }
     });
   }
 
-  _setDimensions = (event) => {
-    const { width, height } = event.nativeEvent.layout;
-    this.setState({ width, height });
-  }
-
   render() {
     const {
-      color,
       style,
-      emptyColor,
-      indeterminateWidth,
       ...otherProps
     } = this.props;
-
     const { width, height } = this.state;
 
+    const progressColor = this.props.color || this.props.theme.colors.accent;
     const progressBar = {
-      backgroundColor: color,
+      backgroundColor: progressColor,
       height,
       width: this.state.progressAnimationValue.interpolate({
         inputRange: [ 0, 1 ],
@@ -164,7 +171,7 @@ class Linear extends PureComponent<any, Props, State> {
       }),
       transform: [
         {
-          translateX: this.state.animationValue.interpolate({
+          translateX: this.state.indeterminateAnimationValue.interpolate({
             inputRange: [ 0, 1 ],
             outputRange: [ width * -roundProgress(indeterminateWidth), width ],
           }),
@@ -173,13 +180,17 @@ class Linear extends PureComponent<any, Props, State> {
     };
 
     return (
-      <View
-        onLayout={this._setDimensions}
-        style={[ styles.container, { backgroundColor: emptyColor }, style ]}
+      <Animated.View
+        style={[
+          styles.container,
+          { backgroundColor: color(progressColor).alpha(0.5).rgbaString() },
+          style,
+          { height: this.state.visibleAnimationValue },
+        ]}
         {...otherProps}
       >
         <Animated.View style={progressBar} />
-      </View>
+      </Animated.View>
     );
   }
 }
@@ -190,4 +201,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Linear;
+export default withTheme(Linear);

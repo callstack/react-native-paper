@@ -12,10 +12,9 @@ export { default as Button } from './components/Button';
 export { default as Card } from './components/Card';
 export { default as Checkbox } from './components/Checkbox';
 export { default as Paper } from './components/Paper';
+export { default as Progress } from './components/Progress';
 export { default as RadioButton } from './components/RadioButton';
 export { default as TouchableRipple } from './components/TouchableRipple';
-
-export * as Progress from './components/Progress';
 
 export { default as Caption } from './components/Typography/Caption';
 export { default as Headline } from './components/Typography/Headline';

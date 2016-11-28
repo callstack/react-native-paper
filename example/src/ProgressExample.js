@@ -14,19 +14,22 @@ class ProgressExample extends React.Component {
     super(props);
 
     const interval = setInterval(() => {
-      const progress = this.state.progress < 1 ? this.state.progress + 0.1 : 0;
-      this.setState({ progress });
-    }, 1000);
+      const visible = this.state.progress <= 1;
+      const progress = this.state.progress < 1.2 ? this.state.progress + 0.1 : 0;
+      this.setState({ progress, visible });
+    }, 700);
 
     this.state = {
       interval,
       progress: 0,
+      visible: true,
     };
   }
 
   state = {
     interval: null,
     progress: 0,
+    visible: true,
   }
 
   componentWillUnmount() {
@@ -39,10 +42,18 @@ class ProgressExample extends React.Component {
         <Headline style={styles.text}>Linear</Headline>
 
         <Subheading style={styles.text}>Determinate</Subheading>
-        <Progress.Linear progress={this.state.progress} style={styles.progressBar} />
+        <Progress.Linear
+          progress={this.state.progress}
+          visible={this.state.visible}
+          style={styles.progressBar}
+        />
 
         <Subheading style={styles.text}>Indeterminate</Subheading>
-        <Progress.Linear indeterminate style={styles.progressBar} />
+        <Progress.Linear
+          indeterminate
+          visible={this.state.visible}
+          style={styles.progressBar}
+        />
 
       </View>
     );
