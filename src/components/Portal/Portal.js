@@ -4,14 +4,24 @@ import {
   PureComponent,
   PropTypes,
 } from 'react';
-import { manager } from '../core/PortalHost';
+import { manager } from './PortalHost';
 
-type Props = {
-  children?: any;
+export type PortalProps = {
+   children: any;
+   position: number;
 }
 
+type Props = PortalProps;
+
+/**
+ * Portal allows to render a component at a different place in the parent tree.
+ */
 export default class Portal extends PureComponent<void, Props, void> {
   static propTypes = {
+    /**
+     * Position of the element in the z-axis
+     */
+    position: PropTypes.number,
     children: PropTypes.node.isRequired,
   };
 
@@ -26,11 +36,11 @@ export default class Portal extends PureComponent<void, Props, void> {
         'You need to wrap your root component in \'<PortalHost />\''
       );
     }
-    this._key = this.context[manager].mount(this.props.children);
+    this._key = this.context[manager].mount(this.props);
   }
 
   componentDidUpdate() {
-    this.context[manager].update(this._key, this.props.children);
+    this.context[manager].update(this._key, this.props);
   }
 
   componentWillUnmount() {

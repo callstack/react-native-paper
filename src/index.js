@@ -2,7 +2,7 @@
 
 export { default as withTheme } from './core/withTheme';
 export { default as ThemeProvider } from './core/ThemeProvider';
-export { default as PortalHost } from './core/PortalHost';
+export { default as Provider } from './core/Provider';
 
 export * as Colors from './styles/colors';
 

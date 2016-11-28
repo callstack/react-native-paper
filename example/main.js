@@ -11,7 +11,11 @@ import {
   NavigationProvider,
   StackNavigation,
 } from '@exponent/ex-navigation';
-import { Colors, ThemeProvider, Drawer } from 'react-native-paper';
+import {
+  Colors,
+  Drawer,
+  Provider as PaperProvider,
+} from 'react-native-paper';
 import Router from './src/Router';
 
 
@@ -53,7 +57,7 @@ class App extends Component {
 
   render() {
     return (
-      <ThemeProvider>
+      <PaperProvider>
         <NavigationProvider router={Router}>
           <Drawer
             onOpen={this._handleOpenDrawer}
@@ -73,7 +77,7 @@ class App extends Component {
             />
           </Drawer>
         </NavigationProvider>
-      </ThemeProvider>
+      </PaperProvider>
     );
   }
 }
