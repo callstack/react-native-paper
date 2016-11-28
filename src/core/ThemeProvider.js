@@ -21,7 +21,7 @@ export const theme = 'react-native-paper$theme';
 
 export default class ThemeProvider extends PureComponent<DefaultProps, Props, void> {
   static propTypes = {
-    children: PropTypes.node.isRequired,
+    children: PropTypes.element.isRequired,
     theme: PropTypes.object,
   };
 
