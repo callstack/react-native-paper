@@ -3,6 +3,7 @@
 export { default as withTheme } from './core/withTheme';
 export { default as ThemeProvider } from './core/ThemeProvider';
 export { default as Provider } from './core/Provider';
+export { default as DefaultTheme } from './styles/DefaultTheme';
 
 import * as Colors from './styles/colors';
 export { Colors };

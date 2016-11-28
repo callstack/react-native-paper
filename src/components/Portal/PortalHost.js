@@ -12,6 +12,7 @@ import type { PortalProps } from './Portal';
 
 type Props = {
   children?: any;
+  style?: any;
 }
 
 type State = {
@@ -29,6 +30,7 @@ export const manager = 'react-native-paper$portal-manager';
 export default class Portals extends PureComponent<void, Props, State> {
   static propTypes = {
     children: PropTypes.node.isRequired,
+    style: View.propTypes.style,
   };
 
   static childContextTypes = {
@@ -81,7 +83,7 @@ export default class Portals extends PureComponent<void, Props, State> {
   render() {
     const { portals } = this.state;
     return (
-      <View {...this.props}>
+      <View style={[ styles.container, this.props.style ]} {...this.props}>
         {this.props.children}
         {portals
           .reduce((acc, curr) => {
@@ -113,3 +115,9 @@ export default class Portals extends PureComponent<void, Props, State> {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
