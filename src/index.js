@@ -1,9 +1,12 @@
 /* @flow */
 
-export { default as ThemeProvider } from './core/ThemeProvider';
-export { default as withTheme } from './core/withTheme';
+import * as Colors from './styles/colors';
+export { Colors };
 
-export * as Colors from './styles/colors';
+export { default as withTheme } from './core/withTheme';
+export { default as ThemeProvider } from './core/ThemeProvider';
+export { default as Provider } from './core/Provider';
+export { default as DefaultTheme } from './styles/DefaultTheme';
 
 export { default as Button } from './components/Button';
 export { default as Card } from './components/Card';
