@@ -13,14 +13,13 @@ class ProgressExample extends React.Component {
   constructor(props) {
     super(props);
 
-    const interval = setInterval(() => {
+    this.interval = setInterval(() => {
       const visible = this.state.progress <= 1;
       const progress = this.state.progress < 1.2 ? this.state.progress + 0.1 : 0;
       this.setState({ progress, visible });
     }, 700);
 
     this.state = {
-      interval,
       progress: 0,
       visible: true,
     };
@@ -33,7 +32,7 @@ class ProgressExample extends React.Component {
   }
 
   componentWillUnmount() {
-    clearInterval(this.state.interval);
+    clearInterval(this.interval);
   }
 
   render() {
