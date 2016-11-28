@@ -26,7 +26,6 @@ class ProgressExample extends React.Component {
   }
 
   state = {
-    interval: null,
     progress: 0,
     visible: true,
   }
