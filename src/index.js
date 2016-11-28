@@ -4,7 +4,8 @@ export { default as withTheme } from './core/withTheme';
 export { default as ThemeProvider } from './core/ThemeProvider';
 export { default as Provider } from './core/Provider';
 
-export * as Colors from './styles/colors';
+import * as Colors from './styles/colors';
+export { Colors };
 
 export { default as Button } from './components/Button';
 export { default as Card } from './components/Card';
