@@ -76,7 +76,6 @@ class Linear extends PureComponent<any, Props, State> {
 
   constructor(props: Props) {
     super(props);
-
     const progress: number = roundProgress(props.progress);
     const defaultBarXPosition = indeterminateWidth / (1 + indeterminateWidth);
 

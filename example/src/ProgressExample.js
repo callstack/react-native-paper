@@ -32,14 +32,14 @@ class ProgressExample extends React.Component {
       <View style={styles.container}>
         <Headline style={styles.text}>Linear</Headline>
 
-        <Subheading style={styles.text}>Determinate</Subheading>
+        <Subheading>Determinate</Subheading>
         <Progress.Linear
           progress={this.state.progress}
           visible={this.state.visible}
           style={styles.progressBar}
         />
 
-        <Subheading style={styles.text}>Indeterminate</Subheading>
+        <Subheading>Indeterminate</Subheading>
         <Progress.Linear
           indeterminate
           visible={this.state.visible}
@@ -60,9 +60,6 @@ const styles = StyleSheet.create({
   progressBar: {
     width: 300,
     height: 6,
-  },
-  text: {
-    marginVertical: 4,
   },
 });
 
