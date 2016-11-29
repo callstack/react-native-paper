@@ -83,7 +83,7 @@ export default class Portals extends PureComponent<void, Props, State> {
   render() {
     const { portals } = this.state;
     return (
-      <View style={[ styles.container, this.props.style ]} {...this.props}>
+      <View {...this.props} style={[ styles.container, this.props.style ]}>
         {this.props.children}
         {portals
           .reduce((acc, curr) => {
