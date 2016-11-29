@@ -1,5 +1,6 @@
 /* @flow */
 
+import color from 'color';
 import React, {
   PureComponent,
   PropTypes,
@@ -10,10 +11,7 @@ import {
   Easing,
   View,
 } from 'react-native';
-import color from 'color';
-
 import withTheme from '../../core/withTheme';
-
 import type { Theme } from '../../types/Theme';
 
 /* Rounds progress to match value between 0 and 1. */
@@ -80,18 +78,15 @@ class Linear extends PureComponent<any, Props, State> {
     super(props);
 
     const progress: number = roundProgress(props.progress);
-
     const defaultBarXPosition = indeterminateWidth / (1 + indeterminateWidth);
-
-    const { width, height } = StyleSheet.flatten(props.style);
 
     this.state = {
       progressAnimationValue: new Animated.Value(props.indeterminate ? indeterminateWidth : progress),
       indeterminateAnimationValue: new Animated.Value(defaultBarXPosition),
       visibleAnimationValue: new Animated.Value(0),
       defaultBarXPosition,
-      width,
-      height,
+      width: 0,
+      height: 0,
     };
   }
 
@@ -102,9 +97,11 @@ class Linear extends PureComponent<any, Props, State> {
       this._startIndeterminateAnimation();
     }
 
-    Animated.spring(this.state.visibleAnimationValue, {
-      toValue: this.state.height,
-    }).start();
+    if (this.props.visible) {
+      Animated.spring(this.state.visibleAnimationValue, {
+        toValue: 1,
+      }).start();
+    }
   }
 
   componentWillReceiveProps(props: Props) {
@@ -114,7 +111,7 @@ class Linear extends PureComponent<any, Props, State> {
 
     if (hasVisiblityChanged) {
       Animated.spring(this.state.visibleAnimationValue, {
-        toValue: props.visible ? this.state.height : 0,
+        toValue: props.visible ? 1 : 0,
         bounciness: 0,
       }).start();
     }
@@ -154,14 +151,24 @@ class Linear extends PureComponent<any, Props, State> {
     });
   }
 
+  _setDimensions = (event) => {
+    const { width, height } = event.nativeEvent.layout;
+    this.setState({ width, height });
+  }
+
   render() {
     const {
       style,
+      theme,
       ...otherProps
     } = this.props;
     const { width, height } = this.state;
 
-    const progressColor = this.props.color || this.props.theme.colors.accent;
+    const progressColor = this.props.color || theme.colors.accent;
+    const progressContainer = {
+      backgroundColor: color(progressColor).alpha(0.5).rgbaString(),
+      transform: [ { scaleY: this.state.visibleAnimationValue } ],
+    };
     const progressBar = {
       backgroundColor: progressColor,
       height,
@@ -181,11 +188,11 @@ class Linear extends PureComponent<any, Props, State> {
 
     return (
       <Animated.View
+        onLayout={this._setDimensions}
         style={[
           styles.container,
-          { backgroundColor: color(progressColor).alpha(0.5).rgbaString() },
+          progressContainer,
           style,
-          { height: this.state.visibleAnimationValue },
         ]}
         {...otherProps}
       >

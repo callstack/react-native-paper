@@ -10,24 +10,17 @@ import {
 } from 'react-native-paper';
 
 class ProgressExample extends React.Component {
-  constructor(props) {
-    super(props);
+  state = {
+    progress: 0,
+    visible: true,
+  }
 
+  componentDidMount() {
     this.interval = setInterval(() => {
       const visible = this.state.progress <= 1;
       const progress = this.state.progress < 1.2 ? this.state.progress + 0.1 : 0;
       this.setState({ progress, visible });
     }, 700);
-
-    this.state = {
-      progress: 0,
-      visible: true,
-    };
-  }
-
-  state = {
-    progress: 0,
-    visible: true,
   }
 
   componentWillUnmount() {
