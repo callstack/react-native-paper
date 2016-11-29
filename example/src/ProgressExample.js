@@ -30,7 +30,7 @@ class ProgressExample extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Headline style={styles.text}>Linear</Headline>
+        <Headline>Linear</Headline>
 
         <Subheading>Determinate</Subheading>
         <Progress.Linear
