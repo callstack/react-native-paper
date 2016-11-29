@@ -162,13 +162,13 @@ export default class BottomSheet extends PureComponent<void, Props, State> {
     BackAndroid.addEventListener('hardwareBackPress', this._handleBack);
     this.state.position.flattenOffset(0);
     Animated.parallel([
-      Animated.timing(this.state.opacity, {
+      Animated.spring(this.state.opacity, {
         toValue: 1,
-        duration: 250,
+        bounciness: 0,
       }),
-      Animated.timing(this.state.position, {
+      Animated.spring(this.state.position, {
         toValue: 0,
-        duration: 200,
+        bounciness: 0,
       }),
     ]).start();
   };
@@ -177,13 +177,13 @@ export default class BottomSheet extends PureComponent<void, Props, State> {
     BackAndroid.removeEventListener('hardwareBackPress', this._handleBack);
     this.state.position.flattenOffset();
     Animated.parallel([
-      Animated.timing(this.state.opacity, {
+      Animated.spring(this.state.opacity, {
         toValue: 0,
-        duration: 200,
+        bounciness: 0,
       }),
-      Animated.timing(this.state.position, {
+      Animated.spring(this.state.position, {
         toValue: this._height,
-        duration: 200,
+        bounciness: 0,
       }),
     ]).start(() => {
       this.state.position.setValue(INITIAL_POSITION);
