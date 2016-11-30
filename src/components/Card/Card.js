@@ -98,7 +98,7 @@ class Card extends Component<DefaultProps, Props, State> {
           onPressOut={onPress ? this._handlePressOut : undefined}
           style={styles.container}
         >
-          <View style={styles.container}>
+          <View>
             {Children.map(children, (child, index) =>
               React.cloneElement(child, {
                 index,
