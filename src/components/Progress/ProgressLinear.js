@@ -8,14 +8,11 @@ import React, {
 import {
   StyleSheet,
   Animated,
-  Easing,
   View,
 } from 'react-native';
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types/Theme';
 
-/* Rounds progress to match value between 0 and 1. */
-const roundProgress = (progress: ?number): number => Math.min(Math.max((progress || 0), 0), 1);
 const indeterminateWidth = 0.4;
 
 type Props = {
@@ -28,12 +25,10 @@ type Props = {
 }
 
 type State = {
-  indeterminateAnimationValue: Animated.Value;
-  progressAnimationValue: Animated.Value;
-  visibleAnimationValue: Animated.Value;
-  defaultBarXPosition: number;
+  progress: Animated.Value;
+  visibility: Animated.Value;
+  indeterminate: Animated.Value;
   width: number;
-  height: number;
 }
 
 /**
@@ -74,128 +69,141 @@ class Linear extends PureComponent<any, Props, State> {
     visible: true,
   };
 
-  constructor(props: Props) {
-    super(props);
-    const progress: number = roundProgress(props.progress);
-    const defaultBarXPosition = indeterminateWidth / (1 + indeterminateWidth);
-
-    this.state = {
-      progressAnimationValue: new Animated.Value(props.indeterminate ? indeterminateWidth : progress),
-      indeterminateAnimationValue: new Animated.Value(defaultBarXPosition),
-      visibleAnimationValue: new Animated.Value(0),
-      defaultBarXPosition,
-      width: 0,
-      height: 0,
-    };
-  }
-
-  state: State;
+  state: State = {
+    progress: new Animated.Value(0),
+    visibility: new Animated.Value(0),
+    indeterminate: new Animated.Value(0),
+    width: 0,
+  };
 
   componentDidMount() {
-    if (this.props.indeterminate) {
-      this._startIndeterminateAnimation();
-    }
-
     if (this.props.visible) {
-      Animated.spring(this.state.visibleAnimationValue, {
-        toValue: 1,
-      }).start();
+      this._updateVisibility(true);
+    }
+    if (this.props.indeterminate) {
+      this._updateIndeterminate(true);
     }
   }
 
-  componentWillReceiveProps(props: Props) {
-    const hasIndeterminateChanged = props.indeterminate !== this.props.indeterminate;
-    const hasProgressChanged = props.progress !== this.props.progress;
-    const hasVisiblityChanged = props.visible !== this.props.visible;
+  componentDidUpdate(prevProps: Props) {
+    const hasIndeterminateChanged = prevProps.indeterminate !== this.props.indeterminate;
+    const hasProgressChanged = prevProps.progress !== this.props.progress;
+    const hasVisiblityChanged = prevProps.visible !== this.props.visible;
 
     if (hasVisiblityChanged) {
-      Animated.spring(this.state.visibleAnimationValue, {
-        toValue: props.visible ? 1 : 0,
-        bounciness: 0,
-      }).start();
+      this._updateVisibility(this.props.visible);
     }
 
     if (hasIndeterminateChanged) {
-      if (props.indeterminate) {
-        this._startIndeterminateAnimation();
-      } else {
-        Animated.spring(this.state.indeterminateAnimationValue, {
-          toValue: this.state.defaultBarXPosition,
-        }).start();
-      }
+      this._updateIndeterminate(this.props.indeterminate);
     }
 
-    if (hasIndeterminateChanged || hasProgressChanged) {
-      const progress = roundProgress(props.indeterminate ? indeterminateWidth : props.progress);
+    if (hasProgressChanged) {
+      this._updateProgress(this.props.progress);
+    }
+  }
 
-      Animated.spring(this.state.progressAnimationValue, {
-        toValue: progress,
-        bounciness: 0,
+  _updateIndeterminate = (indeterminate: boolean) => {
+    if (indeterminate) {
+      Animated.parallel([
+        Animated.sequence([
+          Animated.timing(this.state.progress, {
+            toValue: 0.8,
+            duration: 600,
+            isInteraction: false,
+          }),
+          Animated.timing(this.state.progress, {
+            toValue: 0.2,
+            duration: 600,
+            isInteraction: false,
+          }),
+        ]),
+        Animated.timing(this.state.indeterminate, {
+          toValue: 1,
+          duration: 1200,
+          isInteraction: false,
+        }),
+      ]).start(animationState => {
+        if (animationState.finished) {
+          this.state.indeterminate.setValue(-1);
+          this._updateIndeterminate(true);
+        }
+      });
+    } else {
+      Animated.timing(this.state.indeterminate, {
+        toValue: 0,
+        duration: 600,
+        isInteraction: false,
       }).start();
     }
-  }
+  };
 
-  _startIndeterminateAnimation = () => {
-    this.state.indeterminateAnimationValue.setValue(0);
-
-    Animated.timing(this.state.indeterminateAnimationValue, {
-      toValue: 1,
-      duration: 1200,
-      easing: Easing.linear,
+  _updateProgress = (progress: number) => {
+    Animated.spring(this.state.progress, {
+      toValue: progress,
+      bounciness: 0,
       isInteraction: false,
-    }).start((animationState) => {
-      if (animationState.finished) {
-        this._startIndeterminateAnimation();
-      }
-    });
-  }
+    }).start();
+  };
 
-  _setDimensions = (event) => {
-    const { width, height } = event.nativeEvent.layout;
-    this.setState({ width, height });
+  _updateVisibility = (visible: boolean) => {
+    Animated.timing(this.state.visibility, {
+      toValue: visible ? 1 : 0,
+      isInteraction: false,
+    }).start();
+  };
+
+  _handleLayout = (event) => {
+    const { width } = event.nativeEvent.layout;
+    this.setState({ width });
   }
 
   render() {
     const {
       style,
       theme,
-      ...otherProps
+      ...restProps
     } = this.props;
-    const { width, height } = this.state;
+    const { width } = this.state;
 
     const progressColor = this.props.color || theme.colors.accent;
-    const progressContainer = {
-      backgroundColor: color(progressColor).alpha(0.5).rgbaString(),
-      transform: [ { scaleY: this.state.visibleAnimationValue } ],
-    };
-    const progressBar = {
-      backgroundColor: progressColor,
-      height,
-      width: this.state.progressAnimationValue.interpolate({
+    const backgroundColor = color(progressColor).alpha(0.32).rgbaString();
+    const scaleX = Animated.diffClamp(this.state.progress, 0, 1);
+    const opacity = this.state.visibility.interpolate({
+      inputRange: [ 0, 0.1, 1 ],
+      outputRange: [ 0, 1, 1 ],
+    });
+    const translateX = Animated.add(
+      Animated.multiply(this.state.indeterminate, width),
+      scaleX.interpolate({
         inputRange: [ 0, 1 ],
-        outputRange: [ 0, width ],
-      }),
+        outputRange: [ -width / 2, 0 ],
+      })
+    );
+    const barStyle = {
+      backgroundColor,
+      opacity,
+      transform: [ { scaleY: this.state.visibility } ],
+    };
+    const filleStyle = {
+      backgroundColor: progressColor,
       transform: [
-        {
-          translateX: this.state.indeterminateAnimationValue.interpolate({
-            inputRange: [ 0, 1 ],
-            outputRange: [ width * -roundProgress(indeterminateWidth), width ],
-          }),
-        },
+        { translateX },
+        { scaleX },
       ],
     };
 
     return (
       <Animated.View
-        onLayout={this._setDimensions}
+        {...restProps}
+        onLayout={this._handleLayout}
         style={[
           styles.container,
-          progressContainer,
+          barStyle,
           style,
         ]}
-        {...otherProps}
       >
-        <Animated.View style={progressBar} />
+        <Animated.View style={[ styles.fill, filleStyle ]} />
       </Animated.View>
     );
   }
@@ -204,6 +212,11 @@ class Linear extends PureComponent<any, Props, State> {
 const styles = StyleSheet.create({
   container: {
     overflow: 'hidden',
+    height: 4,
+  },
+
+  fill: {
+    flex: 1,
   },
 });
 
