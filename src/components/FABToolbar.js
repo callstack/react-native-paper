@@ -7,7 +7,6 @@ import React, {
 import {
   Animated,
   View,
-  Text,
   StyleSheet
 } from 'react-native';
 import withTheme from '../core/withTheme';
@@ -38,14 +37,17 @@ type Props = {
 }
 
 type State = {
-  elevation: Animated.Value;
+  toolbarCircleScale: Animated.Value;
   pressed: bool;
+  displayToolbarButtons: bool;
 }
 
 class FABToolbar extends Component<DefaultProps, Props, State> {
+  static Direction = FABDirection;
+
   static propTypes = {
-    elevation: PropTypes.number,
     children: PropTypes.node.isRequired,
+    elevation: PropTypes.number,
     direction: PropTypes.string,
     style: View.propTypes.style
   };
@@ -56,54 +58,99 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
 
   constructor(props) {
     super(props);
-    console.log(Dimensions.get('window'));
     this.state = {
-      elevation: new Animated.Value(props.elevation),
       toolbarCircleScale: new Animated.Value(1),
       pressed: false,
       displayToolbarButtons: false
     };
   }
 
-  onPress() {
-    let self = this;
-    this.setState({pressed: true}, () => {
-      // TODO: Sequence this after user's animation.
-      Animated.timing(self.state.toolbarCircleScale, {
-        toValue: 20,
-        duration: 180
-      }).start(() => self.setState({displayToolbarButtons: true}));
+  getToolbarExpandAnim() {
+    return Animated.timing(this.state.toolbarCircleScale, {
+      toValue: 20, // Large enough value
+      duration: 130
     });
   }
 
+  expandToolbar() {
+    // TODO: Sequence this after user's animation.
+    if (this.props.mini) {
+      Animated.sequence([
+        Animated.timing(this.state.toolbarCircleScale, {
+          toValue: FAB_SIZE/FAB_MINI_SIZE,
+          duration: 50
+        }),
+        this.getToolbarExpandAnim()
+      ]).start(
+        () => this.setState({displayToolbarButtons: true})
+      );
+    } else {
+      this.getToolbarExpandAnim().start(
+        () => this.setState({displayToolbarButtons: true})
+      );
+    }
+  }
+
+  onPress() {
+    this.setState({pressed: true}, this.expandToolbar);
+  }
+
   _renderButton() {
-    let containerStyle = this.props.mini ? styles.containerMini : styles.container;
+    const {
+      theme,
+      elevation,
+      mini
+    } = this.props;
+
+    let containerStyle = mini ? styles.containerMini : styles.container;
+    let buttonStyle = mini ? styles.buttonMini : styles.button;
+
     return (
-        <View style={containerStyle}>
-          <TouchableRipple style={styles.button} onPress={this.onPress.bind(this)}>
-            <View style={styles.icon}>
-            </View>
-          </TouchableRipple>
-        </View>
+      <View style={[containerStyle, {elevation}]}>
+        <TouchableRipple onPress={this.onPress.bind(this)}
+          style={[buttonStyle, {backgroundColor: theme.colors.accent}]}>
+          <View style={styles.icon}></View>
+        </TouchableRipple>
+      </View>
     );
   }
 
   _renderToolbar() {
-    var toolbarCircleStyle = {
-      transform: [
-        {scale: this.state.toolbarCircleScale}
-      ]
-    };
+    const {
+      theme,
+      elevation,
+      direction,
+      mini,
+      children
+    } = this.props;
+
+    let toolbarCircleStyle = mini ? styles.buttonMini : styles.button;
+    let toolbarStyle = {position: 'absolute', top: 0};
+
+    switch (direction) {
+    case FABDirection.LEFT:
+      toolbarStyle.left = 0;
+      break;
+    case FABDirection.RIGHT:
+      toolbarStyle.right = 0;
+      break;
+    default:
+      toolbarStyle.left = 0;
+    }
 
     let content;
     if (this.state.displayToolbarButtons) {
-      content = this.props.children;
+      content = children;
     }
 
     return (
-      <View style={styles.toolbarContainer}>
-        <View style={{position: 'absolute'}}>
-          <Animated.View style={[styles.toolbarCircle, toolbarCircleStyle]}>
+      <View style={[styles.toolbarContainer, {elevation}]}>
+        <View style={toolbarStyle}>
+          <Animated.View style={[
+              toolbarCircleStyle,
+              {backgroundColor: theme.colors.accent},
+              {transform: [{scale: this.state.toolbarCircleScale}]}
+          ]}>
           </Animated.View>
         </View>
         {content}
@@ -112,28 +159,20 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
   }
 
   render() {
-    const {
-      children,
-      theme,
-      animateIcon
-    } = this.props;
-
     return this.state.pressed ? this._renderToolbar() : this._renderButton();
   }
 }
 
 var styles = StyleSheet.create({
   container: {
-    elevation: 2,
     height: FAB_SIZE,
     width: FAB_SIZE,
-    borderRadius: FAB_SIZE, // For circular shape
+    borderRadius: FAB_SIZE/2, // For circular shape
   },
   containerMini: {
-    elevation: 2,
     height: FAB_MINI_SIZE,
     width: FAB_MINI_SIZE,
-    borderRadius: FAB_MINI_SIZE
+    borderRadius: FAB_MINI_SIZE/2
   },
   toolbarContainer: {
     height: FAB_SIZE,
@@ -142,22 +181,19 @@ var styles = StyleSheet.create({
     justifyContent: 'center'
   },
   toolbarCircle: {
-    backgroundColor: 'red',
     height: FAB_SIZE,
     width: FAB_SIZE,
-    borderRadius: FAB_SIZE
+    borderRadius: FAB_SIZE/2
   },
   button: {
     height: FAB_SIZE,  // TODO: Figure out how to avoid specifying height/width
     width: FAB_SIZE,
-    borderRadius: FAB_SIZE,
-    backgroundColor: 'red'
+    borderRadius: FAB_SIZE/2
   },
   buttonMini: {
     height: FAB_MINI_SIZE,  // TODO: Figure out how to avoid specifying height/width
     width: FAB_MINI_SIZE,
-    borderRadius: FAB_MINI_SIZE,
-    backgroundColor: 'red'
+    borderRadius: FAB_MINI_SIZE/2
   },
   icon: {
     height: ICON_SIZE,
