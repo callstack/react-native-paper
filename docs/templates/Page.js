@@ -6,7 +6,7 @@ import Link from './Link';
 
 const wrapper = style({
   display: 'flex',
-  height: '100vh',
+  height: '100%',
   flexDirection: 'column',
 
   '@media(min-width: 640px)': {
@@ -16,7 +16,7 @@ const wrapper = style({
 
 const sidebar = style({
   padding: '24px',
-  backgroundColor: '#f0f0f0',
+  backgroundColor: '#262939',
   display: 'none',
 
   '@media(min-width: 640px)': {
@@ -43,6 +43,11 @@ const menuButton = style({
   '&:checked ~ nav': {
     display: 'block',
   },
+
+  '&:checked ~ label': {
+    color: '#fff',
+    opacity: 0.64,
+  },
 });
 
 const menuIcon = style({
@@ -61,24 +66,29 @@ const menuIcon = style({
 
 const separator = style({
   border: 0,
-  backgroundColor: '#ddd',
+  backgroundColor: '#fff',
   height: '1px',
   margin: '8px 0',
+  opacity: 0.04,
 });
 
 const link = style({
   display: 'block',
   padding: '4px 0',
   textDecoration: 'none',
-  opacity: 0.32,
+  opacity: 0.16,
 
   ':hover': {
-    opacity: 1,
+    opacity: 0.64,
+  },
+
+  '& code': {
+    color: '#fff',
   },
 });
 
 const active = style({
-  opacity: 1,
+  opacity: 0.64,
 });
 
 export default function Page({ name, pages, components, children }: any) {

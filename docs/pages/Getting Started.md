@@ -14,7 +14,7 @@ After installation, you'll need to link [react-native-vector-icons](https://gith
 
 ## Usage
 
-Wrap your root component in `Provider` from `react-native-paper`. It's a good idea to wrap the component which is passed to `AppRegsitry.registerComponent`.
+Wrap your root component in `Provider` from `react-native-paper`. It's a good idea to wrap the component which is passed to `AppRegistry.registerComponent`.
 
 Example:
 
@@ -29,7 +29,7 @@ function Main() {
     <PaperProvider>
       <App />
     </PaperProvider>
-  )
+  );
 }
 
 AppRegistry.registerComponent('main', () => Main);
@@ -66,6 +66,6 @@ function Main() {
     <PaperProvider theme={theme}>
       <App />
     </PaperProvider>
-  )
+  );
 }
 ```

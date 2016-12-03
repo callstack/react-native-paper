@@ -36,7 +36,7 @@ const propRequired = style({
   left: -24,
   fontSize: '22px',
   lineHeight: 1.5,
-  color: '#aaa',
+  color: '#C1C2CA',
 
   '&:hover:after': {
     content: 'attr(data-hint)',
@@ -48,18 +48,19 @@ const propRequired = style({
     padding: '2px 8px',
     fontSize: '12px',
     color: '#fff',
-    background: '#333',
+    background: '#262939',
     zIndex: 10,
   },
 });
 
 const propLabel = style({
-  backgroundColor: '#f0f0f0',
+  backgroundColor: '#F3F3F7',
   borderRadius: '3px',
   padding: '4px 8px',
   margin: '4px 16px 4px 0',
   textDecoration: 'none',
   whiteSpace: 'nowrap',
+  border: '1px solid rgba(0, 0, 0, .04)',
 });
 
 const propDetails = style({

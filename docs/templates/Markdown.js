@@ -8,14 +8,25 @@ import { style } from 'glamor';
 const markdown = style({
   '& pre': {
     whitespace: 'nowrap',
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#F3F3F7',
     borderRadius: '3px',
-    padding: '8px 12px',
+    padding: '12px 16px',
     overflowX: 'auto',
+    border: '1px solid rgba(0, 0, 0, .04)',
   },
 
   '& code': {
+    fontWeight: 'bold',
     fontSize: '.9em',
+    backgroundColor: '#F3F3F7',
+    padding: '0 4px',
+    borderRadius: '3px',
+    border: '1px solid rgba(0, 0, 0, .04)',
+  },
+
+  '& pre code': {
+    fontWeight: 'normal',
+    border: 0,
   },
 
   '& .hljs-comment': {
@@ -23,23 +34,23 @@ const markdown = style({
   },
 
   '& .hljs-keyword': {
-    color: '#F26129',
+    color: '#E91E63',
   },
 
   '& .hljs-string, & .hljs-value, & .hljs-inheritance, & .hljs-header, & .hljs-class, & .hljs-attr': {
-    color: '#86B326',
+    color: '#4CAF50',
   },
 
   '& .hljs-function .hljs-title': {
-    color: '#F59D19',
+    color: '#FF5722',
   },
 
   '& .hljs-number, & .hljs-preprocessor, & .hljs-built_in, & .hljs-literal, & .hljs-params, & .hljs-constant': {
-    color: '#A37ACC',
+    color: '#9C27B0',
   },
 
   '& .hljs-variable, & .hljs-attr, & .hljs-tag, & .hljs-regexp, & .hljs-doctype, & .hljs-id, & .hljs-class, & .hljs-pseudo, & .hljs-tag .hljs-name, & .hljs-built_in': {
-    color: '#41A6D9',
+    color: '#3F51B5',
   },
 });
 

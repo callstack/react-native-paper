@@ -19,7 +19,7 @@ insertGlobal(`
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     margin: 0;
     padding: 0;
-    color: #333;
+    color: #000;
     lineHeight: 1.5;
   }
   code {

@@ -7,7 +7,7 @@ const wrapper = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  height: '100vh',
+  height: '100%',
   padding: '24px 48px',
 });
 
