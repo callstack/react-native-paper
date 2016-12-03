@@ -1,6 +1,7 @@
 /* @flow */
 
 import * as Colors from './styles/colors';
+
 export { Colors };
 
 export { default as withTheme } from './core/withTheme';

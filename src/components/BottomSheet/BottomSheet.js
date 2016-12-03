@@ -17,8 +17,6 @@ import ThemedPortal from '../Portal/ThemedPortal';
 import BottomSheetList from './BottomSheetList';
 import BottomSheetListItem from './BottomSheetListItem';
 
-const AnimatedPaper = Animated.createAnimatedComponent(Paper);
-
 type Props = {
   visible: boolean;
   onRequestClose: Function;
@@ -29,10 +27,14 @@ type Props = {
 type State = {
   opacity: Animated.Value;
   position: Animated.Value;
+  maximized: Animated.Value;
   rendered: boolean;
+  screenHeight: number;
+  contentHeight: number;
 }
 
 const INITIAL_POSITION = 64;
+const SWIPE_DISTANCE_THRESHOLD = 80;
 
 /**
  * Bottom sheets slide up from the bottom of the screen to reveal more content
@@ -89,7 +91,10 @@ export default class BottomSheet extends PureComponent<void, Props, State> {
     this.state = {
       opacity: new Animated.Value(0),
       position: new Animated.Value(INITIAL_POSITION),
+      maximized: new Animated.Value(0),
       rendered: props.visible,
+      contentHeight: 0,
+      screenHeight: 0,
     };
   }
 
@@ -133,29 +138,11 @@ export default class BottomSheet extends PureComponent<void, Props, State> {
     }
   }
 
-  _height: 0;
   _panResponder: any;
 
   _handleBack = () => {
     this._hideSheet();
     return true;
-  };
-
-  _animateSheet = (opacity: number, position: number, cb) => {
-    this.state.position.stopAnimation(value => {
-      this.state.position.flattenOffset();
-      this.state.position.setValue(value);
-      Animated.parallel([
-        Animated.timing(this.state.opacity, {
-          toValue: opacity,
-          duration: 250,
-        }),
-        Animated.timing(this.state.position, {
-          toValue: position,
-          duration: 200,
-        }),
-      ]).start(cb);
-    });
   };
 
   _showSheet = () => {
@@ -170,19 +157,27 @@ export default class BottomSheet extends PureComponent<void, Props, State> {
         toValue: 0,
         bounciness: 0,
       }),
+      Animated.spring(this.state.maximized, {
+        toValue: 0,
+        bounciness: 0,
+      }),
     ]).start();
   };
 
   _hideSheet = () => {
     BackAndroid.removeEventListener('hardwareBackPress', this._handleBack);
-    this.state.position.flattenOffset();
+    this.state.position.flattenOffset(0);
     Animated.parallel([
       Animated.spring(this.state.opacity, {
         toValue: 0,
         bounciness: 0,
       }),
       Animated.spring(this.state.position, {
-        toValue: this._height,
+        toValue: this.state.contentHeight,
+        bounciness: 0,
+      }),
+      Animated.spring(this.state.maximized, {
+        toValue: 0,
         bounciness: 0,
       }),
     ]).start(() => {
@@ -202,6 +197,41 @@ export default class BottomSheet extends PureComponent<void, Props, State> {
     });
   };
 
+  _maximizeSheet = () => {
+    Animated.parallel([
+      Animated.spring(this.state.maximized, {
+        toValue: 1,
+        bounciness: 0,
+      }),
+      Animated.spring(this.state.position, {
+        toValue: 0,
+        bounciness: 0,
+      }),
+    ]).start();
+  };
+
+  _unMaximizeSheet = () => {
+    Animated.parallel([
+      Animated.spring(this.state.maximized, {
+        toValue: 0,
+        bounciness: 0,
+      }),
+      Animated.spring(this.state.position, {
+        toValue: 0,
+        bounciness: 0,
+      }),
+    ]).start();
+  };
+
+  _getVisibleHeight = (screenHeight: number, contentHeight: number) => {
+    const maxVisibleHeight = screenHeight * (9 / 16);
+    return Math.min(maxVisibleHeight, contentHeight);
+  };
+
+  _getContentOffset = (screenHeight: number, contentHeight: number) => {
+    return screenHeight - this._getVisibleHeight(screenHeight, contentHeight);
+  };
+
   _canMove = (evt, gestureState) => {
     return (
       Math.abs(gestureState.dy) > Math.abs(gestureState.dx) &&
@@ -217,46 +247,94 @@ export default class BottomSheet extends PureComponent<void, Props, State> {
   };
 
   _respondToGesture = (evt, gestureState) => {
-    if (gestureState.dy >= 0) {
+    if (Math.abs(gestureState.dy) > Math.abs(gestureState.dx)) {
       this.state.position.setValue(gestureState.dy);
     }
   };
 
   _releaseGesture = (evt, gestureState) => {
-    if ((gestureState.dy > 0 && gestureState.vy > 0.75) || gestureState.dy > (this._height - INITIAL_POSITION)) {
-      this._hideSheet();
-    } else {
-      this._showSheet();
-    }
+    const isMovingDown = gestureState.dy > 0;
+    const isFast = gestureState.vy > 0.75 || Math.abs(gestureState.dy) > SWIPE_DISTANCE_THRESHOLD;
+    this.state.maximized.stopAnimation((maximized: number) => {
+      const { screenHeight, contentHeight } = this.state;
+      const canMaximize = contentHeight > screenHeight;
+      if (isMovingDown) {
+        if (maximized) {
+          if (isFast) {
+            this._unMaximizeSheet();
+          }
+        } else {
+          if (isFast) {
+            this._hideSheet();
+          } else {
+            this._showSheet();
+          }
+        }
+      } else {
+        if (canMaximize && !maximized) {
+          this._maximizeSheet();
+        }
+      }
+    });
   };
 
-  _handleLayout = (e) => {
-    this._height = e.nativeEvent.layout.height;
+  _handleContentLayout = (e) => {
+    const contentHeight = e.nativeEvent.layout.height;
+    this.setState({
+      contentHeight,
+    });
+  };
+
+  _handleScreenLayout = (e) => {
+    const screenHeight = e.nativeEvent.layout.height;
+    this.setState({
+      screenHeight,
+    });
   };
 
   render() {
-    if (!this.state.rendered) {
+    const {
+      rendered,
+      opacity,
+      position,
+      maximized,
+      contentHeight,
+      screenHeight,
+    } = this.state;
+    if (!rendered) {
       return null;
     }
-    const { opacity } = this.state;
+    const contentOffset = this._getContentOffset(screenHeight, contentHeight);
+    const contentTranslate = Animated.diffClamp(
+      Animated.add(
+        position,
+        maximized.interpolate({
+          inputRange: [ 0, 1 ],
+          outputRange: [ contentOffset, 0 ],
+        }),
+      ),
+      screenHeight - contentHeight,
+      screenHeight
+    );
+    const contentOpacity = screenHeight && contentHeight ? opacity : 0;
     return (
       <ThemedPortal>
-        <View style={StyleSheet.absoluteFill}>
+        <View onLayout={this._handleScreenLayout} style={StyleSheet.absoluteFill}>
           <TouchableWithoutFeedback style={styles.container} onPress={this._hideSheet}>
             <Animated.View style={[ styles.container, styles.overlay, { opacity } ]} />
           </TouchableWithoutFeedback>
-            <AnimatedPaper
-              {...this._panResponder.panHandlers}
-              onLayout={this._handleLayout}
-              elevation={12}
-              style={[
-                styles.sheet,
-                { opacity, transform: [ { translateY: this.state.position } ] },
-                this.props.style,
-              ]}
-            >
+          <Animated.View
+            {...this._panResponder.panHandlers}
+            onLayout={this._handleContentLayout}
+            style={[
+              styles.sheet,
+              { opacity: contentOpacity, transform: [ { translateY: contentTranslate } ] },
+            ]}
+          >
+            <Paper elevation={12} style={this.props.style}>
               {this.props.children}
-            </AnimatedPaper>
+            </Paper>
+          </Animated.View>
         </View>
       </ThemedPortal>
     );
@@ -272,7 +350,7 @@ const styles = StyleSheet.create({
   },
   sheet: {
     position: 'absolute',
-    bottom: 0,
+    top: 0,
     left: 0,
     right: 0,
   },
