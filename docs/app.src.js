@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import RedBox from 'redbox-react';
 import { rehydrate } from 'glamor';
 import App from './templates/App';
-import pages from './dist/app.data.json'; // eslint-disable-line import/no-unresolved
+import { pages, components } from './dist/app.data.json'; // eslint-disable-line import/no-unresolved
 
 rehydrate(window.__GLAMOR__);
 
@@ -13,6 +13,7 @@ const render = () => {
     ReactDOM.render(
       <App
         pages={pages}
+        components={components}
         name={window.__INITIAL_PATH__}
       />,
       root

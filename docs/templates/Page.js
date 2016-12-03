@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { style } from 'glamor';
-import mono from './styles/mono';
 import Link from './Link';
 
 const wrapper = style({
@@ -30,6 +29,7 @@ const sidebar = style({
 
 const content = style({
   flex: 1,
+  padding: '24px 48px',
 
   '@media(min-width: 640px)': {
     height: '100%',
@@ -63,7 +63,7 @@ const separator = style({
   border: 0,
   backgroundColor: '#ddd',
   height: '1px',
-  margin: '4px 0',
+  margin: '8px 0',
 });
 
 const link = style({
@@ -81,7 +81,7 @@ const active = style({
   opacity: 1,
 });
 
-export default function Body({ name, pages, children }: any) {
+export default function Page({ name, pages, components, children }: any) {
   return (
     <div {...wrapper}>
       <input
@@ -94,19 +94,28 @@ export default function Body({ name, pages, children }: any) {
         <span {...menuIcon}>☰</span>
       </label>
       <nav {...sidebar}>
-        <Link to='index' {...mono} {...link} {...(name === 'index' ? active : null)}>
-          Home
+        <Link to='index' {...link} {...(name === 'index' ? active : null)}>
+          <code>Home</code>
         </Link>
-        <hr {...separator} />
         {pages.map(page =>
           <Link
             key={page.name}
+            to={page.name.toLowerCase().replace(/\s+/g, '-')}
+            {...link}
+            {...(name === page.name.toLowerCase().replace(/\s+/g, '-') ? active : null)}
+          >
+            <code>{page.name}</code>
+          </Link>
+        )}
+        <hr {...separator} />
+        {components.map(page =>
+          <Link
+            key={page.name}
             to={page.name.toLowerCase()}
-            {...mono}
             {...link}
             {...(name === page.name.toLowerCase() ? active : null)}
           >
-            {page.name}
+            <code>{page.name}</code>
           </Link>
         )}
       </nav>

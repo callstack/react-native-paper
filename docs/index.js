@@ -20,12 +20,11 @@ if (!fs.existsSync(dist)) {
   fs.mkdirSync(dist);
 }
 
-let items = [];
+let components = [];
 let pages = [];
 
 function collectInfo() {
-  items = [];
-  pages = [];
+  components = [];
 
   const files = fs.readFileSync(path.join(__dirname, '../src/index.js'))
     .toString()
@@ -48,16 +47,18 @@ function collectInfo() {
     const componentName = comp.split('/').pop().split('.')[0];
     try {
       const componentInfo = parse(fs.readFileSync(comp).toString());
-      items.push({ name: componentName, info: componentInfo });
-      pages.push(componentName);
+      components.push({ name: componentName, info: componentInfo });
     } catch (e) {
       console.log(`${componentName}: ${e.message}`);
     }
   });
 
-  pages.sort();
+  pages = fs.readdirSync(path.join(__dirname, 'pages')).filter(name => name.endsWith('.md')).map(name => ({
+    name: name.replace(/\.md/, ''),
+    text: fs.readFileSync(path.join(__dirname, 'pages', name)).toString(),
+  }));
 
-  fs.writeFileSync(path.join(dist, 'app.data.json'), JSON.stringify(items));
+  fs.writeFileSync(path.join(dist, 'app.data.json'), JSON.stringify({ pages, components }));
 }
 
 collectInfo();
@@ -66,7 +67,8 @@ function buildHTML({ title, description, name }: any) {
   const { html, css, ids } = renderStatic(
     () => ReactDOMServer.renderToString(
       <App
-        pages={items}
+        pages={pages}
+        components={components}
         name={name}
       />
     )
@@ -101,7 +103,7 @@ function buildHTML({ title, description, name }: any) {
   );
 }
 
-buildRoutes(items).forEach(buildHTML);
+buildRoutes(pages, components).forEach(buildHTML);
 
 const entry = [ 'app.src.js' ];
 

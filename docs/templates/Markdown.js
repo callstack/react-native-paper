@@ -14,6 +14,10 @@ const markdown = style({
     overflowX: 'auto',
   },
 
+  '& code': {
+    fontSize: '.9em',
+  },
+
   '& .hljs-comment': {
     color: '#ABB0B6',
   },

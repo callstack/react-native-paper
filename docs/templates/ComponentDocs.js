@@ -2,13 +2,7 @@
 
 import React from 'react';
 import { style, merge } from 'glamor';
-import mono from './styles/mono';
-import body from './styles/body';
 import Markdown from './Markdown';
-
-const wrapper = style({
-  padding: '24px 48px',
-});
 
 const name = style({
   fontSize: '36px',
@@ -77,7 +71,7 @@ const propDetails = style({
 });
 
 const rest = style({
-  color: '#2196F3',
+  color: '#1976D2',
 });
 
 export default function ComponentDocs(props: any) {
@@ -96,36 +90,36 @@ export default function ComponentDocs(props: any) {
   }).join('\n');
 
   return (
-    <div {...wrapper}>
-      <h1 {...mono} {...name}>{`<${props.name} />`}</h1>
+    <div>
+      <h1 {...name}><code>{`<${props.name} />`}</code></h1>
       <Markdown
-        {...body}
         {...markdown}
         source={description} options={{ linkify: true }}
       />
-      <h2 {...mono} {...propsHeader}>Props</h2>
+      <h2 {...propsHeader}>Props</h2>
       {Object.keys(props.info.props).map(prop => {
         const { flowType, type, required } = props.info.props[prop];
         return (
           <div {...propInfo} key={prop}>
-            <span {...mono}>
-              <span
+            <span>
+              <code
                 {...propRequired}
                 data-hint='required'
               >
                 {required ? '*' : ''}
-              </span>
+              </code>
               <a
-                {...mono}
                 {...propLabel}
                 name={prop}
                 href={`#${prop}`}
               >
-                {prop}: {flowType.name === 'any' && type ? (type.raw || type.name) : (flowType.raw || flowType.name)}
+                <code>
+                  {prop}: {flowType.name === 'any' && type ? (type.raw || type.name) : (flowType.raw || flowType.name)}
+                </code>
               </a>
             </span>
             <Markdown
-              {...body} {...propDetails}
+              {...propDetails}
               source={props.info.props[prop].description}
             />
           </div>
@@ -133,13 +127,14 @@ export default function ComponentDocs(props: any) {
       })}
       {restProps && restProps.length ? restProps.map(prop => (
         <a
-          {...mono}
           {...propLabel}
           {...rest}
           key={prop.name}
           href={prop.link}
         >
-          ...{prop.name}
+          <code>
+            ...{prop.name}
+          </code>
         </a>
       )) : null}
     </div>
