@@ -29,11 +29,12 @@ const sidebar = style({
 
 const content = style({
   flex: 1,
-  padding: '24px 48px',
+  padding: '12px 24px',
 
   '@media(min-width: 640px)': {
     height: '100%',
     overflow: 'auto',
+    padding: '24px 48px',
   },
 });
 
@@ -48,15 +49,24 @@ const menuButton = style({
     color: '#fff',
     opacity: 0.64,
   },
+
+  '&:checked ~ label > :first-child': {
+    display: 'none',
+  },
+
+  '&:not(:checked) ~ label > :last-child': {
+    display: 'none',
+  },
 });
 
 const menuIcon = style({
   fontSize: '24px',
+  lineHeight: 1,
   cursor: 'pointer',
   position: 'absolute',
   top: 0,
   right: 0,
-  padding: '24px',
+  padding: '32px 24px',
   zIndex: 10,
 
   '@media(min-width: 640px)': {
@@ -100,8 +110,9 @@ export default function Page({ name, pages, components, children }: any) {
         type='checkbox'
         role='button'
       />
-      <label htmlFor='slide-sidebar'>
-        <span {...menuIcon}>☰</span>
+      <label {...menuIcon} htmlFor='slide-sidebar'>
+        <span>☰</span>
+        <span>✕</span>
       </label>
       <nav {...sidebar}>
         <Link to='index' {...link} {...(name === 'index' ? active : null)}>
