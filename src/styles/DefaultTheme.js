@@ -18,7 +18,7 @@ export default {
     text: black,
     secondaryText: color(black).alpha(0.7).rgbaString(),
     disabled: color(black).alpha(0.5).rgbaString(),
-    hint: color(black).alpha(0.38).rgbaString(),
+    placeholder: color(black).alpha(0.38).rgbaString(),
     icon: color(black).alpha(0.54).rgbaString(),
   },
   fonts,

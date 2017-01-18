@@ -16,70 +16,61 @@ import Paper from './Paper';
 import type { Theme } from '../types/Theme';
 
 type Props = {
-  placeholder: string;
+  placeholder?: string;
   value: string;
-  onChangeSearch: (query: string) => {};
+  onChangeText: (query: string) => {};
   theme: Theme;
 }
 
 /**
- * Search allows users to locate app content quickly
+ * SearchBar is a simple input box where users can type search queries
  */
 class SearchBar extends Component<void, Props, void> {
-  
+
   static propTypes = {
     /**
-     * The string that will be rendered before text input has been entered
+     * Hint text shown when the input is empty
      */
     placeholder: PropTypes.string,
     /**
-     * The value to show for the text input.
+     * The value of the text input
      */
     value: PropTypes.string.isRequired,
     /**
      * Callback that is called when the text input's text changes
      */
-    onChangeSearch: PropTypes.func.isRequired,
+    onChangeText: PropTypes.func.isRequired,
     theme: PropTypes.object.isRequired,
   };
-  
-  constructor(props: Props) {
-    super(props);
-    this._styles = getStyles(this.props.theme);
-  }
-  
-  _styles = {};
-  
+
   _handleClearPress = () => {
-    this.props.onChangeSearch('');
+    this.props.onChangeText('');
   };
-  
+
   render() {
     const {
       placeholder,
       value,
       theme,
     } = this.props;
-    
-    const styles = this._styles;
-    
+
     return (
       <Paper
         elevation={4}
         style={styles.container}
       >
         <Icon
-          style={[ styles.iconWrapper, styles.icon ]}
+          style={[ styles.iconWrapper, { color: theme.colors.icon } ]}
           name='search'
           size={24}
         />
         <TextInput
           style={styles.input}
-          placeholder={placeholder}
+          placeholder={placeholder || ''}
           value={value}
-          placeholderTextColor={theme.colors.hint}
+          placeholderTextColor={theme.colors.placeholder}
           underlineColorAndroid='transparent'
-          onChangeText={this.props.onChangeSearch}
+          onChangeText={this.props.onChangeText}
           returnKeyType='search'
         />
         {value ?
@@ -89,7 +80,7 @@ class SearchBar extends Component<void, Props, void> {
             style={styles.iconWrapper}
           >
             <Icon
-              style={styles.icon}
+              style={{ color: theme.colors.icon }}
               name='close'
               size={24}
             />
@@ -101,19 +92,16 @@ class SearchBar extends Component<void, Props, void> {
   }
 }
 
-const getStyles = (theme: Theme) => StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
     margin: 8,
   },
   input: {
     flex: 1,
     fontSize: 18,
-  },
-  icon: {
-    alignSelf: 'center',
-    color: theme.colors.icon,
   },
   iconWrapper: {
     padding: 16,
