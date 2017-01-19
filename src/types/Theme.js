@@ -10,7 +10,6 @@ export type Theme = {
     secondaryText: string;
     disabled: string;
     placeholder: string;
-    icon: string;
   };
   fonts: {
     regular: string;

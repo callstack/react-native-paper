@@ -8,6 +8,7 @@ import {
   StyleSheet,
   TextInput,
 } from 'react-native';
+import color from 'color';
 
 import withTheme from '../core/withTheme';
 import Icon from './Icon';
@@ -18,7 +19,7 @@ import type { Theme } from '../types/Theme';
 type Props = {
   placeholder?: string;
   value: string;
-  onChangeText: (query: string) => {};
+  onChangeText: (query: string) => void;
   theme: Theme;
 }
 
@@ -60,7 +61,7 @@ class SearchBar extends Component<void, Props, void> {
         style={styles.container}
       >
         <Icon
-          style={[ styles.iconWrapper, { color: theme.colors.icon } ]}
+          style={[ styles.iconWrapper, styles.icon ]}
           name='search'
           size={24}
         />
@@ -80,7 +81,7 @@ class SearchBar extends Component<void, Props, void> {
             style={styles.iconWrapper}
           >
             <Icon
-              style={{ color: theme.colors.icon }}
+              style={styles.icon}
               name='close'
               size={24}
             />
@@ -105,6 +106,9 @@ const styles = StyleSheet.create({
   },
   iconWrapper: {
     padding: 16,
+  },
+  icon: {
+    color: color('black').alpha(0.54).rgbaString(),
   },
 });
 
