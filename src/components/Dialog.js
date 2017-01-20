@@ -141,14 +141,14 @@ export default class Dialog extends PureComponent<DefaultProps, Props, State> {
   }
 
   _handleBack = () => {
-    this._hideDialog();
+    if (this.props.dismissable) {
+      this._hideDialog();
+    }
     return true;
   }
 
   _showDialog = () => {
-    if (this.props.dismissable) {
-      BackAndroid.addEventListener('hardwareBackPress', this._handleBack);
-    }
+    BackAndroid.addEventListener('hardwareBackPress', this._handleBack);
     Animated.timing(
       this.state.opacity,
       {
@@ -160,10 +160,7 @@ export default class Dialog extends PureComponent<DefaultProps, Props, State> {
   }
 
   _hideDialog = () => {
-    const { dismissable, onRequestClose, visible } = this.props;
-    if (dismissable) {
-      BackAndroid.removeEventListener('hardwareBackPress', this._handleBack);
-    }
+    BackAndroid.removeEventListener('hardwareBackPress', this._handleBack);
     Animated.timing(
       this.state.opacity,
       {
@@ -172,11 +169,11 @@ export default class Dialog extends PureComponent<DefaultProps, Props, State> {
         easing: Easing.easing,
       }
     ).start(() => {
-      if (visible && onRequestClose) {
-        onRequestClose();
+      if (this.props.visible && this.props.onRequestClose) {
+        this.props.onRequestClose();
       }
       global.requestAnimationFrame(() => {
-        if (visible) {
+        if (this.props.visible) {
           this._showDialog();
         } else {
           this.setState({
