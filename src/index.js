@@ -7,10 +7,12 @@ export { default as withTheme } from './core/withTheme';
 export { default as ThemeProvider } from './core/ThemeProvider';
 export { default as Provider } from './core/Provider';
 export { default as DefaultTheme } from './styles/DefaultTheme';
+export { default as ThemedPortal } from './components/Portal/ThemedPortal';
 
 export { default as Button } from './components/Button';
 export { default as Card } from './components/Card';
 export { default as Checkbox } from './components/Checkbox';
+export { default as Dialog } from './components/Dialog';
 export { default as Paper } from './components/Paper';
 export { default as RadioButton } from './components/RadioButton';
 export { default as TouchableRipple } from './components/TouchableRipple';
@@ -25,4 +27,3 @@ export { default as Text } from './components/Typography/Text';
 export { default as Divider } from './components/Divider';
 export { default as Drawer } from './components/Drawer';
 export { default as GridView } from './components/GridView';
-
