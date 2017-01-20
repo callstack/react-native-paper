@@ -57,25 +57,25 @@ export default class DialogExample extends Component {
         visible={visible2}
       >
         <View style={styles.checkBoxRow}>
-          <Paragraph>Option 1</Paragraph>
           <RadioButton
             checked={checked === 0}
             onPress={() => this.setState({ checked: 0 })}
           />
+          <Paragraph style={{ marginLeft: 16 }}>Option 1</Paragraph>
         </View>
         <View style={styles.checkBoxRow}>
-          <Paragraph>Option 2</Paragraph>
           <RadioButton
             checked={checked === 1}
             onPress={() => this.setState({ checked: 1 })}
           />
+          <Paragraph style={{ marginLeft: 16 }}>Option 2</Paragraph>
         </View>
         <View style={styles.checkBoxRow}>
-          <Paragraph>Option 3</Paragraph>
           <RadioButton
             checked={checked === 2}
             onPress={() => this.setState({ checked: 2 })}
           />
+          <Paragraph style={{ marginLeft: 16 }}>Option 3</Paragraph>
         </View>
         <Card.Actions>
           <Button primary onPress={() => this.setState({ visible2: false })}>Done</Button>
@@ -115,7 +115,8 @@ export default class DialogExample extends Component {
       >
         <Paragraph>This is an undismissable dialog!!</Paragraph>
         <Card.Actions>
-          <Button primary onPress={() => this.setState({ visible4: false })}>Done</Button>
+          <Button color={Colors.teal500} disabled>Disagree</Button>
+          <Button primary onPress={() => this.setState({ visible4: false })}>Agree</Button>
         </Card.Actions>
       </Dialog>
     );
@@ -133,7 +134,7 @@ export default class DialogExample extends Component {
       >
         <Paragraph style={{ color: Colors.white }}>This is a dialog with custom colors</Paragraph>
         <Card.Actions>
-          <Button color={Colors.teal500} onPress={() => this.setState({ visible5: false })}>Done</Button>
+          <Button color={Colors.teal500} onPress={() => this.setState({ visible5: false })}>OK</Button>
         </Card.Actions>
       </Dialog>
     );
@@ -166,7 +167,6 @@ const styles = StyleSheet.create({
   checkBoxRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 8,
+    height: 56,
   },
 });
