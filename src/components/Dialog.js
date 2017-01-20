@@ -237,12 +237,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   scrollViewContainer: {
-    marginHorizontal: 16,
-    marginBottom: 16,
-    marginTop: 12,
+    marginHorizontal: 24,
+    marginBottom: 24,
   },
   title: {
-    paddingTop: 16,
-    paddingHorizontal: 16,
+    marginBottom: 20,
+    marginTop: 24,
+    marginHorizontal: 24,
+    lineHeight: 24,
   },
 });
