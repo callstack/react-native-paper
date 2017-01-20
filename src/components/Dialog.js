@@ -19,6 +19,7 @@ import ThemedPortal from './Portal/ThemedPortal';
 import { black, white } from '../styles/colors';
 import Paper from './Paper';
 import Title from './Typography/Title';
+import Card from './Card';
 
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
@@ -195,8 +196,8 @@ export default class Dialog extends PureComponent<DefaultProps, Props, State> {
       style,
     } = this.props;
     const childrenArray = Children.toArray(children);
-    const actionBtnsChildren = childrenArray.filter(child => child.type.name === 'CardActions');
-    const restOfChildren = childrenArray.filter(child => child.type.name !== 'CardActions');
+    const actionBtnsChildren = childrenArray.filter(child => child.type === Card.Actions);
+    const restOfChildren = childrenArray.filter(child => child.type !== Card.Actions);
 
     return (
       <ThemedPortal>
