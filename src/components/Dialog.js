@@ -30,18 +30,19 @@ type Props = {
   title?: string;
   titleColor?: string;
   style?: any;
-  visible?: boolean;
+  visible: boolean;
 }
 
 type DefaultProps = {
   dismissable: boolean;
   titleColor: string;
+  visible: boolean;
 };
 
 type State = {
   opacity: Animated.Value;
   rendered: boolean;
-}
+};
 
 const {
     width: deviceWidth,
@@ -111,7 +112,9 @@ export default class Dialog extends PureComponent<DefaultProps, Props, State> {
   static defaultProps = {
     dismissable: true,
     titleColor: black,
+    visible: false,
   }
+
 
   constructor(props: Props) {
     super(props);
@@ -120,6 +123,8 @@ export default class Dialog extends PureComponent<DefaultProps, Props, State> {
       rendered: props.visible,
     };
   }
+
+  state: State;
 
   componentWillReceiveProps({ visible }: Props) {
     if (this.props.visible !== visible) {
