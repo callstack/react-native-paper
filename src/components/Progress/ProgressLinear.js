@@ -13,8 +13,6 @@ import {
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types/Theme';
 
-const indeterminateWidth = 0.4;
-
 type Props = {
   color: string;
   indeterminate: boolean;
