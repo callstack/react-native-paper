@@ -98,7 +98,7 @@ class Card extends Component<DefaultProps, Props, State> {
           onPressOut={onPress ? this._handlePressOut : undefined}
           style={styles.container}
         >
-          <View style={styles.container}>
+          <View style={styles.innerContainer}>
             {Children.map(children, (child, index) =>
               React.cloneElement(child, {
                 index,
@@ -121,6 +121,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  innerContainer: {
+    flexGrow: 1,
+  }
 });
 
 export default withTheme(Card);

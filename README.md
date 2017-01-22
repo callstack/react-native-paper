@@ -1,3 +1,14 @@
-# react-native-paper
+React Native Paper
+==================
 
-# **Disclaimer: This project is still under development and it is not ready for production use**
+Material Design for React Native.
+
+## Features
+
+- Follows material design guidelines
+- Works on both iOS and Android
+- Full theming support
+
+## Note
+
+This project is still a work in progress and lots of components are missing.

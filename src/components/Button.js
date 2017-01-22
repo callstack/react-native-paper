@@ -30,7 +30,7 @@ type Props = {
   loading?: boolean;
   icon?: string;
   color?: string;
-  children?: string;
+  children?: string | Array<string>;
   onPress?: Function;
   style?: any;
   theme: Theme;
@@ -46,9 +46,9 @@ type State = {
  * **Usage:**
  * ```
  * const MyComponent = () => (
- *  <Button raised onPress={() => console.log('Pressed')>}
+ *   <Button raised onPress={() => console.log('Pressed')>}
  *    Press me
- *  </Button>
+ *   </Button>
  * );
  * ```
  */
@@ -89,7 +89,7 @@ class Button extends PureComponent<void, Props, State> {
     /**
      * Button text
      */
-    children: PropTypes.string.isRequired,
+    children: PropTypes.oneOfType([ PropTypes.string, PropTypes.arrayOf(PropTypes.string) ]).isRequired,
     /**
      * Function to execute on press
      */
@@ -210,7 +210,7 @@ class Button extends PureComponent<void, Props, State> {
           /> : null
         }
         <Text numberOfLines={1} style={[ styles.label, compact && styles.compactLabel, textStyle, { fontFamily } ]}>
-          {children ? children.toUpperCase() : ''}
+          {children ? (Array.isArray(children) ? children.join('') : children).toUpperCase() : ''}
         </Text>
       </View>
     );

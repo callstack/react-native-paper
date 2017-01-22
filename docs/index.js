@@ -2,16 +2,7 @@
 
 import path from 'path';
 import fs from 'fs';
-import { server, bundle } from 'quik';
-import watch from 'node-watch';
-import { parse } from 'react-docgen';
-import React from 'react';
-import ReactDOMServer from 'react-dom/server';
-import { renderStatic } from 'glamor/server';
-import HTML from './templates/HTML';
-import App, { buildRoutes } from './templates/App';
-
-const PORT = 3031;
+import { build, serve } from 'component-docs';
 
 const task = process.argv[2];
 const dist = path.join(__dirname, 'dist');
@@ -20,14 +11,8 @@ if (!fs.existsSync(dist)) {
   fs.mkdirSync(dist);
 }
 
-let items = [];
-let pages = [];
-
-function collectInfo() {
-  items = [];
-  pages = [];
-
-  const files = fs.readFileSync(path.join(__dirname, '../src/index.js'))
+function getFiles() {
+  const components = fs.readFileSync(path.join(__dirname, '../src/index.js'))
     .toString()
     .split('\n')
     .map(line => line.split(' ').pop().replace(/('|;)/g, ''))
@@ -42,88 +27,21 @@ function collectInfo() {
         }
       }
       return file;
-    });
-
-  files.forEach(comp => {
-    const componentName = comp.split('/').pop().split('.')[0];
-    try {
-      const componentInfo = parse(fs.readFileSync(comp).toString());
-      items.push({ name: componentName, info: componentInfo });
-      pages.push(componentName);
-    } catch (e) {
-      console.log(`${componentName}: ${e.message}`);
-    }
-  });
-
-  pages.sort();
-
-  fs.writeFileSync(path.join(dist, 'app.data.json'), JSON.stringify(items));
+    })
+    .sort();
+  const pages = fs.readdirSync(path.join(__dirname, 'pages')).map(page => path.join(__dirname, 'pages', page));
+  return [ pages, components ];
 }
-
-collectInfo();
-
-function buildHTML({ title, description, name }: any) {
-  const { html, css, ids } = renderStatic(
-    () => ReactDOMServer.renderToString(
-      <App
-        pages={items}
-        name={name}
-      />
-    )
-  );
-
-  let body = `<div id='root'>${html}</div>`;
-
-  body += `
-    <script>
-      window.__INITIAL_PATH__ = '${name}'
-      window.__GLAMOR__ = ${JSON.stringify(ids)}
-    </script>
-  `;
-
-  if (task === 'build') {
-    body += '<script src="./app.bundle.js?transpile=false"></script>';
-  } else {
-    body += '<script src="../app.src.js"></script>';
-  }
-
-  fs.writeFileSync(
-    path.join(dist, `${name}.html`),
-    ReactDOMServer.renderToString(
-      // eslint-disable-next-line react/jsx-pascal-case
-      <HTML
-        title={title}
-        description={description}
-        body={body}
-        css={css}
-      />
-    )
-  );
-}
-
-buildRoutes(items).forEach(buildHTML);
-
-const entry = [ 'app.src.js' ];
 
 if (task !== 'build') {
-  watch(path.join(__dirname, '../src'), () => {
-    console.log('Files changed. Rebuilding...\n');
-    collectInfo();
+  serve({
+    files: getFiles,
+    output: path.join(__dirname, 'dist'),
   });
-
-  server({
-    root: __dirname,
-    watch: entry,
-  }).listen(PORT);
-
-  console.log(`Open http://localhost:${PORT}/dist/index.html in your browser.\n`);
 } else {
-  bundle({
-    root: __dirname,
-    entry,
-    output: 'dist/app.bundle.js',
-    sourcemaps: true,
-    production: true,
+  build({
+    files: getFiles,
+    output: path.join(__dirname, 'dist'),
   });
 }
 
