@@ -93,7 +93,7 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
   }
 
   moveIn(direction: FABToolbarDirection) {
-    const toValue = direction === ToolbarDirection.RIGHT ? {x: -100, y: 30} : {x: 100, y: 30};
+    const toValue = direction === ToolbarDirection.RIGHT ? {x: -200, y: 10} : {x: 100, y: 10};
     return Animated.timing(this.state.circlePosition, {
       toValue,
       duration: 200
@@ -101,7 +101,7 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
   }
 
   moveOut(direction: FABToolbarDirection) {
-    const toValue = direction === ToolbarDirection.RIGHT ? {x: 100, y: -30} : {x: -100, y: -30};
+    const toValue = direction === ToolbarDirection.RIGHT ? {x: -60, y: 0} : {x: 0, y: 0};
     return Animated.timing(this.state.circlePosition, {
       toValue,
       duration: 200

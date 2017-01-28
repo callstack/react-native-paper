@@ -102,20 +102,22 @@ class FAB extends Component<DefaultProps, Props, State> {
     } = this.props;
 
     return (
-        <AnimatedPaper
-          elevation={elevation}
-          style={[
-            styles.container,
-            {transform: [{scale: this.state.buttonScale}]}
-          ]}
-        >
-          <TouchableRipple onPress={this.onPress.bind(this)}
-            style={[styles.button, {backgroundColor: theme.colors.accent}]}>
-            <View style={styles.icon}>
-              {this.props.buttonIcon}
-            </View>
-          </TouchableRipple>
-        </AnimatedPaper>
+        <View style={styles.container}>
+          <AnimatedPaper
+            elevation={elevation}
+            style={[
+              styles.buttonContainer,
+              {transform: [{scale: this.state.buttonScale}]}
+            ]}
+          >
+            <TouchableRipple onPress={this.onPress.bind(this)}
+              style={[styles.button, {backgroundColor: theme.colors.accent}]}>
+              <View style={styles.icon}>
+                {this.props.buttonIcon}
+              </View>
+            </TouchableRipple>
+          </AnimatedPaper>
+        </View>
     );
   }
 
@@ -143,6 +145,10 @@ class FAB extends Component<DefaultProps, Props, State> {
 
 var styles = StyleSheet.create({
   container: {
+    height: FAB_SIZE * 1.3,
+    width: FAB_SIZE,
+  },
+  buttonContainer: {
     height: FAB_SIZE,
     width: FAB_SIZE,
     borderRadius: FAB_SIZE/2 // For circular shape
