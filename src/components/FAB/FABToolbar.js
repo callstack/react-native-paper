@@ -13,15 +13,17 @@ import {
 import withTheme from '../../core/withTheme';
 import TouchableRipple from '../TouchableRipple';
 
-let SCREEN_HEIGHT = Dimensions.get('window').height;
-let SCREEN_WIDTH = Dimensions.get('window').width;
-let FAB_SIZE = 56;
-let FAB_MINI_SIZE = 40;
-let ICON_SIZE = 24;
-
-let FABDirection = {
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const FAB_SIZE = 56;
+const ICON_SIZE = 24;
+const ToolbarDirection = {
   LEFT: 'LEFT',
   RIGHT: 'RIGHT'
+};
+
+export type FABToolbarDirection = {
+  LEFT: string;
+  RIGHT: string
 };
 
 type DefaultProps = {
@@ -30,37 +32,34 @@ type DefaultProps = {
 
 type Props = {
   direction: string;
-  mini?: string;
-  animateIcon?: bool;
-  open?: bool;
 }
 
 type State = {
   circleScale: Animated.Value;
-  pressed: bool;
-  displayToolbarButtons: bool;
+  circlePosition: Animated.ValueXY;
+  displayActions: bool;
 }
 
 class FABToolbar extends Component<DefaultProps, Props, State> {
-  static Direction = FABDirection;
+  static Direction = ToolbarDirection;
 
   static propTypes = {
     children: PropTypes.node.isRequired,
     elevation: PropTypes.number,
     direction: PropTypes.string,
-    style: View.propTypes.style
+    style: View.propTypes.style,
   };
 
   static defaultProps = {
     elevation: 12
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
+      circlePosition: new Animated.ValueXY(),
       circleScale: new Animated.Value(1),
-      pressed: false,
-      displayToolbarButtons: false
+      displayActions: false
     };
   }
 
@@ -72,16 +71,55 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
     this.closeToolbar();
   }
 
-  openToolbar() {
-    Animated.timing(this.state.circleScale, {
-      toValue: 20, // Large enough value
-      duration: 200
-    }).start(() => this.setState({displayActions: true}));
+  componentWillReceiveProps(nextProps) {
+    nextProps.open ? this.openToolbar() : this.closeToolbar(nextProps.onClose);
   }
 
-  closeToolbar() {
-    // TODO: Animate back to button
-    // https://material.io/guidelines/components/buttons-floating-action-button.html
+  openToolbar() {
+    Animated.stagger(100, [
+      this.moveIn(this.props.direction),
+      this.scaleUp()
+    ]).start(() => this.setState({displayActions: true}));
+  }
+
+  closeToolbar(onComplete: () => {}) {
+    const self = this;
+    this.setState({displayActions: false}, () => {
+      Animated.stagger(100, [
+        self.scaleDown(),
+        self.moveOut(self.props.direction),
+      ]).start(onComplete);
+    });
+  }
+
+  moveIn(direction: FABToolbarDirection) {
+    const toValue = direction === ToolbarDirection.RIGHT ? {x: -100, y: 30} : {x: 100, y: 30};
+    return Animated.timing(this.state.circlePosition, {
+      toValue,
+      duration: 200
+    });
+  }
+
+  moveOut(direction: FABToolbarDirection) {
+    const toValue = direction === ToolbarDirection.RIGHT ? {x: 100, y: -30} : {x: -100, y: -30};
+    return Animated.timing(this.state.circlePosition, {
+      toValue,
+      duration: 200
+    });
+  }
+
+  scaleUp() {
+    return Animated.timing(this.state.circleScale, {
+      toValue: (SCREEN_WIDTH/FAB_SIZE) * 2,
+      duration: 200
+    });
+  }
+
+  scaleDown() {
+    return Animated.timing(this.state.circleScale, {
+      toValue: 1,
+      duration: 200
+    });
   }
 
   render() {
@@ -92,14 +130,12 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
       children
     } = this.props;
 
-    // let toolbarCircleStyle = mini ? styles.buttonMini : styles.button;
     let toolbarStyle = {position: 'absolute', top: 0};
-
     switch (direction) {
-    case FABDirection.LEFT:
+    case ToolbarDirection.LEFT:
       toolbarStyle.left = 0;
       break;
-    case FABDirection.RIGHT:
+    case ToolbarDirection.RIGHT:
       toolbarStyle.right = 0;
       break;
     default:
@@ -110,9 +146,13 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
       <View style={styles.toolbarContainer}>
         <View style={toolbarStyle}>
           <Animated.View style={[
-              styles.button,
-              {backgroundColor: theme.colors.accent},
-              {transform: [{scale: this.state.circleScale}]}
+            styles.button,
+            {
+              backgroundColor: theme.colors.accent,
+              top: this.state.circlePosition.y,
+              left: this.state.circlePosition.x,
+            },
+            {transform: [{scale: this.state.circleScale}]}
           ]}>
           </Animated.View>
         </View>
@@ -123,41 +163,20 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
 }
 
 var styles = StyleSheet.create({
-  container: {
-    height: FAB_SIZE,
-    width: FAB_SIZE,
-    borderRadius: FAB_SIZE/2 // For circular shape
-  },
-  containerMini: {
-    height: FAB_MINI_SIZE,
-    width: FAB_MINI_SIZE,
-    borderRadius: FAB_MINI_SIZE/2
-  },
   toolbarContainer: {
-    height: FAB_SIZE,
+    position: 'relative',
+    height: FAB_SIZE * 1.3,
     width: SCREEN_WIDTH,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'transparent',
     overflow: 'hidden'
   },
-  toolbarCircle: {
+  button: {
+    position: 'absolute',
     height: FAB_SIZE,
     width: FAB_SIZE,
     borderRadius: FAB_SIZE/2
-  },
-  button: {
-    height: FAB_SIZE,  // TODO: Figure out how to avoid specifying height/width
-    width: FAB_SIZE,
-    borderRadius: FAB_SIZE/2
-  },
-  buttonMini: {
-    height: FAB_MINI_SIZE,  // TODO: Figure out how to avoid specifying height/width
-    width: FAB_MINI_SIZE,
-    borderRadius: FAB_MINI_SIZE/2
-  },
-  icon: {
-    height: ICON_SIZE,
-    width: ICON_SIZE
   }
 });
 

@@ -7,17 +7,20 @@ import React, {
 import {
   View,
   StyleSheet,
-  Dimensions
+  Dimensions,
+  Animated
 } from 'react-native';
-import FABToolbar from './FABToolbar';
+import Paper from '../Paper';
 import withTheme from '../../core/withTheme';
 import TouchableRipple from '../TouchableRipple';
+import FABToolbar from './FABToolbar';
 
-let SCREEN_HEIGHT = Dimensions.get('window').height;
-let SCREEN_WIDTH = Dimensions.get('window').width;
-let FAB_SIZE = 56;
-let FAB_MINI_SIZE = 40;
-let ICON_SIZE = 24;
+/**
+ * Size constants according to:
+ * https://material.io/guidelines/components/buttons-floating-action-button.html
+ */
+const FAB_SIZE = 56, ICON_SIZE = 24;
+const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
 type DefaultProps = {
   elevation: number;
@@ -25,19 +28,32 @@ type DefaultProps = {
 
 type Props = {
   children?: any;
-  direction: string;
+  pressed: bool;
 };
 
 type State = {
-  
-};
+  pressed: bool;
+  buttonScale: Animated.Value;
+}
 
-class FAB extends Component<DefaultProps, Props, void> {
+/**
+ * Floating Action Button (FAB) is a circled icon which typically floats
+ * above the UI. On press, it can either:
+ *
+ * 1. Invoke an Action.
+ * 2. Present user with a horizontal full-width strip of Actions.
+ * 3. Fling a set of related Actions in the form of circular buttons.
+ *
+ * https://material.io/guidelines/components/buttons-floating-action-button.html
+ */
+class FAB extends Component<DefaultProps, Props, State> {
   static Toolbar = FABToolbar;
 
   static propTypes = {
-    children: PropTypes.node,
-    direction: PropTypes.string,
+    /**
+     * Action buttons in the case of FAB Toolbar/Speed dial.
+     */
+    children: PropTypes.element,
     style: View.propTypes.style,
     theme: PropTypes.object.isRequired,
   };
@@ -49,11 +65,33 @@ class FAB extends Component<DefaultProps, Props, void> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      pressed: false
+      pressed: false,
+      buttonScale: new Animated.Value(0),
     };
   }
 
+  componentDidMount() {
+    // Note: On Android, the button loads at scale 1 first and THEN, animates
+    // to scale 1. This is because of a bug:
+    // https://github.com/facebook/react-native/issues/6278
+    this.expandButton();
+  }
+
+  componentWillUnmount = () => this.shrinkButton();
+
+  scaleButton(toValue, onComplete) {
+    Animated.timing(this.state.buttonScale, {
+      toValue,
+      duration: 100
+    }).start(onComplete);
+  }
+
+  expandButton = () => this.scaleButton(1);
+
+  shrinkButton = () => this.scaleButton(0);
+
   onPress() {
+    this.props.onPress && this.props.onPress();
     this.setState({pressed: true});
   }
 
@@ -61,36 +99,45 @@ class FAB extends Component<DefaultProps, Props, void> {
     const {
       theme,
       elevation,
-      mini
     } = this.props;
 
-    // let containerStyle = mini ? styles.containerMini : styles.container;
-    // let buttonStyle = mini ? styles.buttonMini : styles.button;
-
     return (
-      <View style={[styles.container, {elevation}]}>
-        <TouchableRipple onPress={this.onPress.bind(this)}
-          style={[styles.button, {backgroundColor: theme.colors.accent}]}>
-          <View style={styles.icon}></View>
-        </TouchableRipple>
-      </View>
+        <AnimatedPaper
+          elevation={elevation}
+          style={[
+            styles.container,
+            {transform: [{scale: this.state.buttonScale}]}
+          ]}
+        >
+          <TouchableRipple onPress={this.onPress.bind(this)}
+            style={[styles.button, {backgroundColor: theme.colors.accent}]}>
+            <View style={styles.icon}>
+              {this.props.buttonIcon}
+            </View>
+          </TouchableRipple>
+        </AnimatedPaper>
     );
   }
 
   _renderContent() {
     if (this.props.children) {
-      return <View>{React.Children.only(this.props.children)}</View>;
+      return this.props.children && React.cloneElement(this.props.children, {
+        /** When child (toolbar/speed dial/sheet) receives props.open=false,
+         *  it will do closing animations, which upon finishing will
+         *  call onClose being passed here.
+         *
+         *  This allows FAB to wait till all animations are complete before
+         *  rendering back the button.
+         */
+        onClose: () => this.setState({pressed: false})
+      });
     }
-    // TODO: Do button onPress
+    // If user doesn't supply any child, FAB is simply a button.
     return this._renderButton();
   }
 
   render() {
-    if (this.state.pressed) {
-      return this._renderContent();
-    } else {
-      return this._renderButton();
-    }
+    return this.state.pressed ? this._renderContent() : this._renderButton();
   }
 }
 
@@ -100,32 +147,10 @@ var styles = StyleSheet.create({
     width: FAB_SIZE,
     borderRadius: FAB_SIZE/2 // For circular shape
   },
-  containerMini: {
-    height: FAB_MINI_SIZE,
-    width: FAB_MINI_SIZE,
-    borderRadius: FAB_MINI_SIZE/2
-  },
-  toolbarContainer: {
-    height: FAB_SIZE,
-    width: SCREEN_WIDTH,
-    alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'hidden'
-  },
-  toolbarCircle: {
-    height: FAB_SIZE,
-    width: FAB_SIZE,
-    borderRadius: FAB_SIZE/2
-  },
   button: {
-    height: FAB_SIZE,  // TODO: Figure out how to avoid specifying height/width
+    height: FAB_SIZE,
     width: FAB_SIZE,
     borderRadius: FAB_SIZE/2
-  },
-  buttonMini: {
-    height: FAB_MINI_SIZE,  // TODO: Figure out how to avoid specifying height/width
-    width: FAB_MINI_SIZE,
-    borderRadius: FAB_MINI_SIZE/2
   },
   icon: {
     height: ICON_SIZE,
