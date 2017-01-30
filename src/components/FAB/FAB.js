@@ -95,14 +95,26 @@ class FAB extends Component<DefaultProps, Props, State> {
     this.setState({pressed: true});
   }
 
+  _renderIcon(source) {
+    if (source) {
+      return (
+          <View>
+            <Image style={styles.icon} source={require(source)} />
+          </View>
+      );
+      return <View style={styles.icon}></View>
+    }
+  }
+
   _renderButton() {
     const {
       theme,
       elevation,
+      style
     } = this.props;
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, style]}>
           <AnimatedPaper
             elevation={elevation}
             style={[
@@ -112,9 +124,7 @@ class FAB extends Component<DefaultProps, Props, State> {
           >
             <TouchableRipple onPress={this.onPress.bind(this)}
               style={[styles.button, {backgroundColor: theme.colors.accent}]}>
-              <View style={styles.icon}>
-                {this.props.buttonIcon}
-              </View>
+              <View>{this.props.buttonIcon}</View>
             </TouchableRipple>
           </AnimatedPaper>
         </View>
@@ -131,6 +141,7 @@ class FAB extends Component<DefaultProps, Props, State> {
          *  This allows FAB to wait till all animations are complete before
          *  rendering back the button.
          */
+        icon: this.props.buttonIcon,
         onClose: () => this.setState({pressed: false})
       });
     }
@@ -156,11 +167,13 @@ var styles = StyleSheet.create({
   button: {
     height: FAB_SIZE,
     width: FAB_SIZE,
-    borderRadius: FAB_SIZE/2
+    borderRadius: FAB_SIZE/2,
+    justifyContent: 'center',
+    alignItems: 'center'    
   },
   icon: {
     height: ICON_SIZE,
-    width: ICON_SIZE
+    width: ICON_SIZE,
   }
 });
 

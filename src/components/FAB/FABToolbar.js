@@ -59,7 +59,8 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
     this.state = {
       circlePosition: new Animated.ValueXY(),
       circleScale: new Animated.Value(1),
-      displayActions: false
+      displayActions: false,
+      displayIcon: true
     };
   }
 
@@ -109,6 +110,7 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
   }
 
   scaleUp() {
+    this.setState({displayIcon: false});
     return Animated.timing(this.state.circleScale, {
       toValue: (SCREEN_WIDTH/FAB_SIZE) * 2,
       duration: 200
@@ -116,6 +118,7 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
   }
 
   scaleDown() {
+    this.setState({displayIcon: true});
     return Animated.timing(this.state.circleScale, {
       toValue: 1,
       duration: 200
@@ -154,6 +157,7 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
             },
             {transform: [{scale: this.state.circleScale}]}
           ]}>
+          {this.state.displayIcon ? this.props.icon : null}
           </Animated.View>
         </View>
         {this.state.displayActions ? children : null}
@@ -167,12 +171,13 @@ var styles = StyleSheet.create({
     position: 'relative',
     height: FAB_SIZE * 1.3,
     width: SCREEN_WIDTH,
-    alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'transparent',
     overflow: 'hidden'
   },
   button: {
+    justifyContent: 'center',
+    alignItems: 'center',
     position: 'absolute',
     height: FAB_SIZE,
     width: FAB_SIZE,
