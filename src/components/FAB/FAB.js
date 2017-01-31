@@ -32,7 +32,7 @@ type Props = {
   elevation?: number;
   theme: Theme;
   buttonIcon?: any;
-  onPress: () => {};
+  onPress: () => undefined;
 };
 
 type State = {

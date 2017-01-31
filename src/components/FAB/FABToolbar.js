@@ -20,12 +20,16 @@ const ToolbarDirection = {
   RIGHT: 'RIGHT',
 };
 
+type DefaultProps = {
+  direction: string;
+};
+
 type Props = {
   direction?: string;
   children?: string | Array<string>;
   style?: any;
   open?: bool;
-  onClose?: () => {};
+  onClose?: () => undefined;
   theme: Theme;
   icon: any;
 }
@@ -37,7 +41,7 @@ type State = {
   displayIcon: bool;
 }
 
-class FABToolbar extends Component<void, Props, State> {
+class FABToolbar extends Component<DefaultProps, Props, State> {
   static Direction = ToolbarDirection;
 
   static propTypes = {
@@ -56,6 +60,10 @@ class FABToolbar extends Component<void, Props, State> {
     onClose: PropTypes.func,
     icon: PropTypes.element,
   };
+
+  static defaultProps = {
+    direction: ToolbarDirection.LEFT,
+  }
 
   constructor(props: Props) {
     super(props);
@@ -147,8 +155,6 @@ class FABToolbar extends Component<void, Props, State> {
     case ToolbarDirection.RIGHT:
       toolbarStyle = { position: 'absolute', top: 0, right: 0 };
       break;
-    default:
-      toolbarStyle = { position: 'absolute', top: 0, left: 0 };
     }
 
     return (
