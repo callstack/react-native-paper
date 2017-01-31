@@ -22,14 +22,15 @@ export default class FABExample extends Component {
     toolbarRightOpen: false,
   };
 
-  dismissToolbar() {
-    this.setState({ toolbarLeftOpen: false, toolbarRightOpen: false, });
+  dismissToolbar = () => {
+    this.setState({ toolbarLeftOpen: false, toolbarRightOpen: false });
   }
 
   render() {
     return (
-        <TouchableHighlight style={styles.bgButton} underlayColor={'transparent'}
-          onPress={this.dismissToolbar.bind(this)}
+        <TouchableHighlight
+          style={styles.bgButton} underlayColor={'transparent'}
+          onPress={this.dismissToolbar}
         >
           <View style={styles.container}>
             <View style={styles.paragraph}>
@@ -37,12 +38,12 @@ export default class FABExample extends Component {
               <Caption style={styles.text}>Simple floating button</Caption>
             </View>
 
-            <Fab style={styles.faButton}
+            <Fab
+              style={styles.faButton}
               buttonIcon={
                 <Image source={require('../assets/help.png')} style={styles.icon} />
               }
-            >
-            </Fab>
+            />
 
             <View style={styles.paragraph}>
               <Title style={styles.text}>FAB Toolbar</Title>
@@ -51,27 +52,33 @@ export default class FABExample extends Component {
               </Caption>
             </View>
 
-            <Fab style={styles.faButton}
+            <Fab
+              style={styles.faButton}
               buttonIcon={
                 <Image source={require('../assets/share.png')} style={styles.icon} />
               }
             >
               <Fab.Toolbar open={this.state.toolbarLeftOpen}>
                 <View style={styles.toolbar}>
-                  <Image source={require('../assets/facebook.png')}
-                   style={styles.icon}
+                  <Image
+                    source={require('../assets/facebook.png')}
+                    style={styles.icon}
                   />
-                  <Image source={require('../assets/twitter.png')}
-                   style={styles.icon}
+                  <Image
+                    source={require('../assets/twitter.png')}
+                    style={styles.icon}
                   />
-                  <Image source={require('../assets/snapchat.png')}
-                   style={styles.icon}
+                  <Image
+                    source={require('../assets/snapchat.png')}
+                    style={styles.icon}
                   />
-                  <Image source={require('../assets/instagram.png')}
-                   style={styles.icon}
+                  <Image
+                    source={require('../assets/instagram.png')}
+                    style={styles.icon}
                   />
-                  <Image source={require('../assets/pinterest.png')}
-                   style={styles.icon}
+                  <Image
+                    source={require('../assets/pinterest.png')}
+                    style={styles.icon}
                   />
                 </View>
               </Fab.Toolbar>
@@ -83,28 +90,36 @@ export default class FABExample extends Component {
               </Caption>
             </View>
 
-            <Fab style={styles.faButtonRight}
+            <Fab
+              style={styles.faButtonRight}
               buttonIcon={
                 <Image source={require('../assets/share.png')} style={styles.icon} />
               }
             >
-              <Fab.Toolbar open={this.state.toolbarRightOpen}
-                direction={Fab.Toolbar.Direction.RIGHT}>
+              <Fab.Toolbar
+                open={this.state.toolbarRightOpen}
+                direction={Fab.Toolbar.Direction.RIGHT}
+              >
                 <View style={styles.toolbar}>
-                  <Image source={require('../assets/facebook.png')}
-                   style={styles.icon}
+                  <Image
+                    source={require('../assets/facebook.png')}
+                    style={styles.icon}
                   />
-                  <Image source={require('../assets/twitter.png')}
-                   style={styles.icon}
+                  <Image
+                    source={require('../assets/twitter.png')}
+                    style={styles.icon}
                   />
-                  <Image source={require('../assets/snapchat.png')}
-                   style={styles.icon}
+                  <Image
+                    source={require('../assets/snapchat.png')}
+                    style={styles.icon}
                   />
-                  <Image source={require('../assets/instagram.png')}
-                   style={styles.icon}
+                  <Image
+                    source={require('../assets/instagram.png')}
+                    style={styles.icon}
                   />
-                  <Image source={require('../assets/pinterest.png')}
-                   style={styles.icon}
+                  <Image
+                    source={require('../assets/pinterest.png')}
+                    style={styles.icon}
                   />
                 </View>
               </Fab.Toolbar>

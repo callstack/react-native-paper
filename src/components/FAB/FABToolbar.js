@@ -29,7 +29,7 @@ type Props = {
   children?: string | Array<string>;
   style?: any;
   open?: bool;
-  onClose?: () => void;
+  onClose?: Function;
   theme: Theme;
   icon: any;
 }
@@ -65,15 +65,13 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
     direction: ToolbarDirection.LEFT,
   }
 
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      circlePosition: new Animated.ValueXY(),
-      circleScale: new Animated.Value(1),
-      displayActions: false,
-      displayIcon: true,
-    };
-  }
+  state: State;
+  state = {
+    circlePosition: new Animated.ValueXY(),
+    circleScale: new Animated.Value(1),
+    displayActions: false,
+    displayIcon: true,
+  };
 
   componentDidMount() {
     this.openToolbar();
@@ -95,7 +93,7 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
     Animated.stagger(100, [
       this.moveIn(this.props.direction),
       this.scaleUp(),
-    ]).start(() => this.setState({displayActions: true}));
+    ]).start(() => this.setState({ displayActions: true }));
   }
 
   closeToolbar(onComplete: () => void) {
@@ -109,7 +107,7 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
   }
 
   moveIn(direction: string) {
-    const toValue = direction === ToolbarDirection.RIGHT ? { x: -200, y: 10, } : { x: 100, y: 10, };
+    const toValue = direction === ToolbarDirection.RIGHT ? { x: -200, y: 10 } : { x: 100, y: 10 };
     return Animated.timing(this.state.circlePosition, {
       toValue,
       duration: 200,
@@ -117,7 +115,7 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
   }
 
   moveOut(direction: string) {
-    const toValue = direction === ToolbarDirection.RIGHT ? { x: -60, y: 0 } : { x: 0, y: 0, };
+    const toValue = direction === ToolbarDirection.RIGHT ? { x: -60, y: 0 } : { x: 0, y: 0 };
     return Animated.timing(this.state.circlePosition, {
       toValue,
       duration: 200,
@@ -127,7 +125,7 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
   scaleUp() {
     this.setState({ displayIcon: false });
     return Animated.timing(this.state.circleScale, {
-      toValue: (SCREEN_WIDTH/FAB_SIZE) * 2,
+      toValue: (SCREEN_WIDTH / FAB_SIZE) * 2,
       duration: 200,
     });
   }
@@ -147,7 +145,7 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
       children,
     } = this.props;
 
-    var toolbarStyle = {};
+    let toolbarStyle = {};
     switch (direction) {
     case ToolbarDirection.LEFT:
       toolbarStyle = { position: 'absolute', top: 0, left: 0 };
@@ -160,15 +158,16 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
     return (
       <View style={styles.toolbarContainer}>
         <View style={toolbarStyle}>
-          <Animated.View style={[
-            styles.button,
-            {
-              backgroundColor: theme.colors.accent,
-              top: this.state.circlePosition.y,
-              left: this.state.circlePosition.x,
-            },
-            {transform: [{scale: this.state.circleScale}]}
-          ]}
+          <Animated.View
+            style={[
+              styles.button,
+              {
+                backgroundColor: theme.colors.accent,
+                top: this.state.circlePosition.y,
+                left: this.state.circlePosition.x,
+              },
+            { transform: [ { scale: this.state.circleScale } ] },
+            ]}
           >
             {this.state.displayIcon ? this.props.icon : null}
           </Animated.View>
@@ -195,7 +194,7 @@ const styles = StyleSheet.create({
     height: FAB_SIZE,
     width: FAB_SIZE,
     borderRadius: FAB_SIZE / 2,
-  }
+  },
 });
 
 export default withTheme(FABToolbar);

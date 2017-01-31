@@ -7,7 +7,7 @@ import React, {
 import {
   View,
   StyleSheet,
-  Animated
+  Animated,
 } from 'react-native';
 import Paper from '../Paper';
 import withTheme from '../../core/withTheme';
@@ -19,7 +19,7 @@ import type { Theme } from '../../types/Theme';
  * Size constants according to:
  * https://material.io/guidelines/components/buttons-floating-action-button.html
  */
-const FAB_SIZE = 56, ICON_SIZE = 24;
+const FAB_SIZE = 56;
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
 type DefaultProps = {
@@ -67,17 +67,15 @@ class FAB extends Component<DefaultProps, Props, State> {
   };
 
   static defaultProps = {
-    elevation: 6
+    elevation: 6,
   };
 
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      pressed: false,
-      buttonScale: new Animated.Value(0),
-      elevation: new Animated.Value(6),
-    };
-  }
+  state: State;
+  state = {
+    pressed: false,
+    buttonScale: new Animated.Value(0),
+    elevation: new Animated.Value(6),
+  };
 
   componentDidMount() {
     /**
@@ -93,7 +91,7 @@ class FAB extends Component<DefaultProps, Props, State> {
   scaleButton(toValue, onComplete) {
     Animated.timing(this.state.buttonScale, {
       toValue,
-      duration: 100
+      duration: 100,
     }).start(onComplete);
   }
 
@@ -115,29 +113,29 @@ class FAB extends Component<DefaultProps, Props, State> {
     }).start();
   };
 
-  onPress() {
-    this.setState({pressed: true});
+  _handlePress = () => {
+    this.setState({ pressed: true });
     return this.props.onPress && this.props.onPress();
   }
 
   _renderButton() {
     const {
       theme,
-      style
+      style,
     } = this.props;
 
     return (
-        <View style={[styles.container, style]}>
+        <View style={[ styles.container, style ]}>
           <AnimatedPaper
             elevation={this.state.elevation}
             style={[
               styles.buttonContainer,
-              {transform: [{scale: this.state.buttonScale}]}
+              { transform: [ { scale: this.state.buttonScale } ] },
             ]}
           >
             <TouchableRipple
-              onPress={this.onPress.bind(this)}
-              style={[styles.button, {backgroundColor: theme.colors.accent}]}
+              onPress={this._handlePress}
+              style={[ styles.button, { backgroundColor: theme.colors.accent } ]}
               onPressIn={this._handlePressIn}
               onPressOut={this._handlePressOut}
             >
@@ -154,7 +152,7 @@ class FAB extends Component<DefaultProps, Props, State> {
        * We're cloning the children (guaranteed to be only child) to pass
        * some additional props.
        */
-     return this.props.children && React.cloneElement(this.props.children, {
+      return this.props.children && React.cloneElement(this.props.children, {
         icon: this.props.buttonIcon,
         /** When child (toolbar/speed dial/sheet) receives props.open=false,
          *  it will do closing animations, which upon finishing will
@@ -163,7 +161,7 @@ class FAB extends Component<DefaultProps, Props, State> {
          *  This allows FAB to wait till all animations are complete before
          *  rendering back the button.
          */
-        onClose: () => this.setState({pressed: false})
+        onClose: () => this.setState({ pressed: false }),
       });
     }
     return this._renderButton();
@@ -174,7 +172,7 @@ class FAB extends Component<DefaultProps, Props, State> {
   }
 }
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     height: FAB_SIZE * 1.3,
     width: FAB_SIZE,
@@ -182,19 +180,15 @@ var styles = StyleSheet.create({
   buttonContainer: {
     height: FAB_SIZE,
     width: FAB_SIZE,
-    borderRadius: FAB_SIZE/2 // For circular shape
+    borderRadius: FAB_SIZE / 2, // For circular shape
   },
   button: {
     height: FAB_SIZE,
     width: FAB_SIZE,
-    borderRadius: FAB_SIZE/2,
+    borderRadius: FAB_SIZE / 2,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
-  icon: {
-    height: ICON_SIZE,
-    width: ICON_SIZE,
-  }
 });
 
 export default withTheme(FAB);
