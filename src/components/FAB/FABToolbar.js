@@ -19,12 +19,13 @@ const ToolbarDirection = {
   RIGHT: 'RIGHT'
 };
 
-type DefaultProps = {
-  elevation: number;
-}
-
 type Props = {
-  direction: string;
+  direction?: string;
+  children?: any;
+  style?: any;
+  open?: bool;
+  onClose: () => {};
+  icon: any;
 }
 
 type State = {
@@ -34,20 +35,23 @@ type State = {
   displayIcon: bool;
 }
 
-class FABToolbar extends Component<DefaultProps, Props, State> {
+class FABToolbar extends Component<void, Props, State> {
   static Direction = ToolbarDirection;
 
   static propTypes = {
     children: PropTypes.node.isRequired,
-    elevation: PropTypes.number,
     direction: PropTypes.string,
     style: View.propTypes.style,
-    onClose: PropTypes.element,
-    icon: PropTypes.element;
-  };
-
-  static defaultProps = {
-    elevation: 12
+    /**
+     * Whether toolbar is open/closed can be controlled externally.
+     */
+    open: PropTypes.bool,
+    /**
+     * onClose will be called after all closing animations are finished. Note
+     *  that this gets called only when closing toolbar using the `open` prop.
+     */
+    onClose: PropTypes.func.isRequired,
+    icon: PropTypes.element
   };
 
   constructor(props: Props) {
@@ -68,7 +72,7 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
     this.closeToolbar(() => {});
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     if (nextProps.open) {
       this.openToolbar();
     } else {

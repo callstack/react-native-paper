@@ -27,7 +27,10 @@ type DefaultProps = {
 
 type Props = {
   children?: any;
-  pressed: bool;
+  style?: any;
+  elevation?: number;
+  buttonIcon?: any;
+  onPress: () => {};
 };
 
 type State = {
@@ -53,10 +56,10 @@ class FAB extends Component<DefaultProps, Props, State> {
      * Action buttons in the case of FAB Toolbar/Speed dial.
      */
     children: PropTypes.element,
+    elevation: PropTypes.number,
+    style: View.propTypes.style,
     onPress: PropTypes.func,
     buttonIcon: PropTypes.element,
-//    style: View.propTypes.style,
-//    theme: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
@@ -98,11 +101,7 @@ class FAB extends Component<DefaultProps, Props, State> {
 
   _renderIcon(source: string) {
     if (source) {
-      return (
-          <View>
-            <Image style={styles.icon} source={require(source)} />
-          </View>
-      );
+      return <View><Image style={styles.icon} source={require(source)} /></View>
     }
     return <View style={styles.icon}></View>;
   }
@@ -135,6 +134,7 @@ class FAB extends Component<DefaultProps, Props, State> {
   _renderContent() {
     if (this.props.children) {
       return this.props.children && React.cloneElement(this.props.children, {
+        icon: this.props.buttonIcon,
         /** When child (toolbar/speed dial/sheet) receives props.open=false,
          *  it will do closing animations, which upon finishing will
          *  call onClose being passed here.
@@ -142,7 +142,6 @@ class FAB extends Component<DefaultProps, Props, State> {
          *  This allows FAB to wait till all animations are complete before
          *  rendering back the button.
          */
-        icon: this.props.buttonIcon,
         onClose: () => this.setState({pressed: false})
       });
     }
