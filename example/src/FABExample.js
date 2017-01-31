@@ -39,14 +39,13 @@ export default class FABExample extends Component {
 
             <Fab style={styles.faButton}
               buttonIcon={
-                <Image source={require('../assets/help.png')} style={styles.icon}
-                  />
+                <Image source={require('../assets/help.png')} style={styles.icon} />
               }
             >
             </Fab>
 
             <View style={styles.paragraph}>
-              <Title style={styles.text}>Fab Toolbar</Title>
+              <Title style={styles.text}>FAB Toolbar</Title>
               <Caption style={styles.text}>
                 Expands from left. Touch outside to dismiss
               </Caption>
@@ -54,8 +53,7 @@ export default class FABExample extends Component {
 
             <Fab style={styles.faButton}
               buttonIcon={
-                <Image source={require('../assets/share.png')} style={styles.icon}
-                />
+                <Image source={require('../assets/share.png')} style={styles.icon} />
               }
             >
               <Fab.Toolbar open={this.state.toolbarLeftOpen}>
@@ -87,8 +85,7 @@ export default class FABExample extends Component {
 
             <Fab style={styles.faButtonRight}
               buttonIcon={
-                <Image source={require('../assets/share.png')} style={styles.icon}
-                />
+                <Image source={require('../assets/share.png')} style={styles.icon} />
               }
             >
               <Fab.Toolbar open={this.state.toolbarRightOpen}
@@ -118,10 +115,8 @@ export default class FABExample extends Component {
   }
 }
 const styles = StyleSheet.create({
-  container: {
-  },
   paragraph: {
-    padding: 16
+    padding: 16,
   },
   bgButton: {
     flex: 1,
@@ -130,18 +125,18 @@ const styles = StyleSheet.create({
     marginVertical: 4,
   },
   faButton: {
-    paddingHorizontal: 16
+    paddingHorizontal: 16,
   },
   faButtonRight: {
     position: 'absolute',
-    right: 16
+    right: 16,
   },
   icon: {
     height: 24,
-    width: 24
+    width: 24,
   },
   toolbar: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-  }
+  },
 });

@@ -13,7 +13,7 @@ import Paper from '../Paper';
 import withTheme from '../../core/withTheme';
 import TouchableRipple from '../TouchableRipple';
 import FABToolbar from './FABToolbar';
-import type { Theme } from '../types/Theme';
+import type { Theme } from '../../types/Theme';
 
 /**
  * Size constants according to:

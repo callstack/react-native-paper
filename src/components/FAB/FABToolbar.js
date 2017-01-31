@@ -11,7 +11,7 @@ import {
   Dimensions,
 } from 'react-native';
 import withTheme from '../../core/withTheme';
-import type { Theme } from '../types/Theme';
+import type { Theme } from '../../types/Theme';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const FAB_SIZE = 56;
