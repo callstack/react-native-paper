@@ -5,12 +5,12 @@ import {
   View,
   StyleSheet,
   TouchableHighlight,
-  Image
+  Image,
 } from 'react-native';
 import {
   Caption,
   Title,
-  FAB as Fab
+  FAB as Fab,
 } from 'react-native-paper';
 
 export default class FABExample extends Component {
@@ -19,11 +19,11 @@ export default class FABExample extends Component {
 
   state = {
     toolbarLeftOpen: false,
-    toolbarRightOpen: false
+    toolbarRightOpen: false,
   };
 
   dismissToolbar() {
-    this.setState({toolbarLeftOpen: false, toolbarRightOpen: false});
+    this.setState({ toolbarLeftOpen: false, toolbarRightOpen: false, });
   }
 
   render() {
@@ -41,8 +41,8 @@ export default class FABExample extends Component {
               buttonIcon={
                 <Image source={require('../assets/help.png')} style={styles.icon}
                   />
-              }>
-            </Fab>
+              }
+            >
 
             <View style={styles.paragraph}>
               <Title style={styles.text}>Fab Toolbar</Title>

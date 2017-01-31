@@ -13,6 +13,7 @@ import Paper from '../Paper';
 import withTheme from '../../core/withTheme';
 import TouchableRipple from '../TouchableRipple';
 import FABToolbar from './FABToolbar';
+import type { Theme } from '../types/Theme';
 
 /**
  * Size constants according to:
@@ -26,9 +27,10 @@ type DefaultProps = {
 };
 
 type Props = {
-  children?: any;
+  children?: string;
   style?: any;
   elevation?: number;
+  theme: Theme;
   buttonIcon?: any;
   onPress: () => {};
 };
@@ -52,6 +54,7 @@ class FAB extends Component<DefaultProps, Props, State> {
   static Toolbar = FABToolbar;
 
   static propTypes = {
+    theme: PropTypes.object.isRequired,
     /**
      * Action buttons in the case of FAB Toolbar/Speed dial.
      */
@@ -101,7 +104,7 @@ class FAB extends Component<DefaultProps, Props, State> {
 
   _renderIcon(source: string) {
     if (source) {
-      return <View><Image style={styles.icon} source={require(source)} /></View>
+      return <View><Image style={styles.icon} source={require(source)} /></View>;
     }
     return <View style={styles.icon}></View>;
   }
@@ -123,7 +126,8 @@ class FAB extends Component<DefaultProps, Props, State> {
             ]}
           >
             <TouchableRipple onPress={this.onPress.bind(this)}
-              style={[styles.button, {backgroundColor: theme.colors.accent}]}>
+              style={[styles.button, {backgroundColor: theme.colors.accent}]}
+            >
               <View>{this.props.buttonIcon}</View>
             </TouchableRipple>
           </AnimatedPaper>
@@ -133,7 +137,11 @@ class FAB extends Component<DefaultProps, Props, State> {
 
   _renderContent() {
     if (this.props.children) {
-      return this.props.children && React.cloneElement(this.props.children, {
+      /** 
+       * We're cloning the children (guaranteed to be only child) to pass
+       * some additional props.
+       */
+     return this.props.children && React.cloneElement(this.props.children, {
         icon: this.props.buttonIcon,
         /** When child (toolbar/speed dial/sheet) receives props.open=false,
          *  it will do closing animations, which upon finishing will
@@ -145,7 +153,6 @@ class FAB extends Component<DefaultProps, Props, State> {
         onClose: () => this.setState({pressed: false})
       });
     }
-    // If user doesn't supply any child, FAB is simply a button.
     return this._renderButton();
   }
 
