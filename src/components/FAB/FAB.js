@@ -7,7 +7,6 @@ import React, {
 import {
   View,
   StyleSheet,
-  Dimensions,
   Animated
 } from 'react-native';
 import Paper from '../Paper';
@@ -54,8 +53,10 @@ class FAB extends Component<DefaultProps, Props, State> {
      * Action buttons in the case of FAB Toolbar/Speed dial.
      */
     children: PropTypes.element,
-    style: View.propTypes.style,
-    theme: PropTypes.object.isRequired,
+    onPress: PropTypes.func,
+    buttonIcon: PropTypes.element,
+//    style: View.propTypes.style,
+//    theme: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
@@ -91,19 +92,19 @@ class FAB extends Component<DefaultProps, Props, State> {
   shrinkButton = () => this.scaleButton(0);
 
   onPress() {
-    this.props.onPress && this.props.onPress();
     this.setState({pressed: true});
+    return this.props.onPress && this.props.onPress();
   }
 
-  _renderIcon(source) {
+  _renderIcon(source: string) {
     if (source) {
       return (
           <View>
             <Image style={styles.icon} source={require(source)} />
           </View>
       );
-      return <View style={styles.icon}></View>
     }
+    return <View style={styles.icon}></View>;
   }
 
   _renderButton() {
@@ -169,7 +170,7 @@ var styles = StyleSheet.create({
     width: FAB_SIZE,
     borderRadius: FAB_SIZE/2,
     justifyContent: 'center',
-    alignItems: 'center'    
+    alignItems: 'center'
   },
   icon: {
     height: ICON_SIZE,

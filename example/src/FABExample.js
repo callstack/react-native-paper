@@ -4,27 +4,23 @@ import React, { Component } from 'react';
 import {
   View,
   StyleSheet,
-  Text,
   TouchableHighlight,
   Image
 } from 'react-native';
 import {
   Caption,
-  Headline,
-  Paragraph,
-  Subheading,
   Title,
-  FAB
+  FAB as Fab
 } from 'react-native-paper';
 
-export default class TextExample extends Component {
+export default class FABExample extends Component {
 
   static title = 'Floating Action Button';
 
-  constructor(props) {
-    super(props);
-    this.state = {toolbarLeftOpen: false, toolbarRightOpen: false};
-  }
+  state = {
+    toolbarLeftOpen: false,
+    toolbarRightOpen: false
+  };
 
   dismissToolbar() {
     this.setState({toolbarLeftOpen: false, toolbarRightOpen: false});
@@ -41,27 +37,27 @@ export default class TextExample extends Component {
               <Caption style={styles.text}>Simple floating button</Caption>
             </View>
 
-            <FAB style={styles.faButton}
+            <Fab style={styles.faButton}
               buttonIcon={
                 <Image source={require('../assets/help.png')} style={styles.icon}
                   />
               }>
-            </FAB>
+            </Fab>
 
             <View style={styles.paragraph}>
-              <Title style={styles.text}>FAB Toolbar</Title>
+              <Title style={styles.text}>Fab Toolbar</Title>
               <Caption style={styles.text}>
                 Expands from left. Touch outside to dismiss
               </Caption>
             </View>
 
-            <FAB style={styles.faButton}
+            <Fab style={styles.faButton}
               buttonIcon={
                 <Image source={require('../assets/share.png')} style={styles.icon}
                 />
               }
             >
-              <FAB.Toolbar open={this.state.toolbarLeftOpen}>
+              <Fab.Toolbar open={this.state.toolbarLeftOpen}>
                 <View style={styles.toolbar}>
                   <Image source={require('../assets/facebook.png')}
                    style={styles.icon}
@@ -79,8 +75,8 @@ export default class TextExample extends Component {
                    style={styles.icon}
                   />
                 </View>
-              </FAB.Toolbar>
-            </FAB>
+              </Fab.Toolbar>
+            </Fab>
 
             <View style={styles.paragraph}>
               <Caption style={styles.text}>
@@ -88,14 +84,14 @@ export default class TextExample extends Component {
               </Caption>
             </View>
 
-            <FAB style={styles.faButtonRight}
+            <Fab style={styles.faButtonRight}
               buttonIcon={
                 <Image source={require('../assets/share.png')} style={styles.icon}
                 />
               }
             >
-              <FAB.Toolbar open={this.state.toolbarRightOpen}
-                direction={FAB.Toolbar.Direction.RIGHT}>
+              <Fab.Toolbar open={this.state.toolbarRightOpen}
+                direction={Fab.Toolbar.Direction.RIGHT}>
                 <View style={styles.toolbar}>
                   <Image source={require('../assets/facebook.png')}
                    style={styles.icon}
@@ -113,8 +109,8 @@ export default class TextExample extends Component {
                    style={styles.icon}
                   />
                 </View>
-              </FAB.Toolbar>
-            </FAB>
+              </Fab.Toolbar>
+            </Fab>
           </View>
         </TouchableHighlight>
     );

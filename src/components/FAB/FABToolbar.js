@@ -11,19 +11,12 @@ import {
   Dimensions
 } from 'react-native';
 import withTheme from '../../core/withTheme';
-import TouchableRipple from '../TouchableRipple';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const FAB_SIZE = 56;
-const ICON_SIZE = 24;
 const ToolbarDirection = {
   LEFT: 'LEFT',
   RIGHT: 'RIGHT'
-};
-
-export type FABToolbarDirection = {
-  LEFT: string;
-  RIGHT: string
 };
 
 type DefaultProps = {
@@ -38,6 +31,7 @@ type State = {
   circleScale: Animated.Value;
   circlePosition: Animated.ValueXY;
   displayActions: bool;
+  displayIcon: bool;
 }
 
 class FABToolbar extends Component<DefaultProps, Props, State> {
@@ -48,6 +42,8 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
     elevation: PropTypes.number,
     direction: PropTypes.string,
     style: View.propTypes.style,
+    onClose: PropTypes.element,
+    icon: PropTypes.element;
   };
 
   static defaultProps = {
@@ -69,11 +65,15 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
   }
 
   componentWillUnmount() {
-    this.closeToolbar();
+    this.closeToolbar(() => {});
   }
 
   componentWillReceiveProps(nextProps) {
-    nextProps.open ? this.openToolbar() : this.closeToolbar(nextProps.onClose);
+    if (nextProps.open) {
+      this.openToolbar();
+    } else {
+      this.closeToolbar(nextProps.onClose);
+    }
   }
 
   openToolbar() {
@@ -93,7 +93,7 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
     });
   }
 
-  moveIn(direction: FABToolbarDirection) {
+  moveIn(direction: string) {
     const toValue = direction === ToolbarDirection.RIGHT ? {x: -200, y: 10} : {x: 100, y: 10};
     return Animated.timing(this.state.circlePosition, {
       toValue,
@@ -101,7 +101,7 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
     });
   }
 
-  moveOut(direction: FABToolbarDirection) {
+  moveOut(direction: string) {
     const toValue = direction === ToolbarDirection.RIGHT ? {x: -60, y: 0} : {x: 0, y: 0};
     return Animated.timing(this.state.circlePosition, {
       toValue,
@@ -128,35 +128,35 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
   render() {
     const {
       theme,
-      elevation,
       direction,
       children
     } = this.props;
 
-    let toolbarStyle = {position: 'absolute', top: 0};
+    var toolbarStyle = {};
     switch (direction) {
     case ToolbarDirection.LEFT:
-      toolbarStyle.left = 0;
+      toolbarStyle = { position: 'absolute', top: 0, left: 0 };
       break;
     case ToolbarDirection.RIGHT:
-      toolbarStyle.right = 0;
+      toolbarStyle = { position: 'absolute', top: 0, right: 0 };
       break;
     default:
-      toolbarStyle.left = 0;
+      toolbarStyle = { position: 'absolute', top: 0, left: 0 };
     }
 
     return (
       <View style={styles.toolbarContainer}>
         <View style={toolbarStyle}>
           <Animated.View style={[
-            styles.button,
-            {
-              backgroundColor: theme.colors.accent,
-              top: this.state.circlePosition.y,
-              left: this.state.circlePosition.x,
-            },
-            {transform: [{scale: this.state.circleScale}]}
-          ]}>
+              styles.button,
+              {
+                backgroundColor: theme.colors.accent,
+                top: this.state.circlePosition.y,
+                left: this.state.circlePosition.x,
+              },
+              {transform: [{scale: this.state.circleScale}]}
+            ]}
+          >
           {this.state.displayIcon ? this.props.icon : null}
           </Animated.View>
         </View>
