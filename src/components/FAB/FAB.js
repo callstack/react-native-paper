@@ -120,13 +120,6 @@ class FAB extends Component<DefaultProps, Props, State> {
     return this.props.onPress && this.props.onPress();
   }
 
-  _renderIcon(source: string) {
-    if (source) {
-      return <View><Image style={styles.icon} source={require(source)} /></View>;
-    }
-    return <View style={styles.icon}></View>;
-  }
-
   _renderButton() {
     const {
       theme,
