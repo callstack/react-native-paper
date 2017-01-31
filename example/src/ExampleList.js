@@ -23,6 +23,7 @@ import PaperExample from './PaperExample';
 import RippleExample from './RippleExample';
 import RadioButtonExample from './RadioButtonExample';
 import TextExample from './TextExample';
+import FABExample from './FABExample';
 
 export const examples = {
   button: ButtonExample,
@@ -34,6 +35,7 @@ export const examples = {
   ripple: RippleExample,
   radio: RadioButtonExample,
   text: TextExample,
+  fab: FABExample
 };
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
