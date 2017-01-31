@@ -39,7 +39,7 @@ type State = {
   pressed: bool;
   buttonScale: Animated.Value;
   elevation: Animated.Value;
-}
+};
 
 /**
  * Floating Action Button (FAB) is a circled icon which typically floats
@@ -141,7 +141,7 @@ class FAB extends Component<DefaultProps, Props, State> {
               onPressIn={this._handlePressIn}
               onPressOut={this._handlePressOut}
             >
-              <View>{this.props.buttonIcon}</View>
+            <View style={styles.icon}>{this.props.buttonIcon}</View>
             </TouchableRipple>
           </AnimatedPaper>
         </View>
@@ -154,7 +154,7 @@ class FAB extends Component<DefaultProps, Props, State> {
        * We're cloning the children (guaranteed to be only child) to pass
        * some additional props.
        */
-     return this.props.children && React.cloneElement(this.props.children, {
+      return React.cloneElement(this.props.children, {
         icon: this.props.buttonIcon,
         /** When child (toolbar/speed dial/sheet) receives props.open=false,
          *  it will do closing animations, which upon finishing will
@@ -163,7 +163,7 @@ class FAB extends Component<DefaultProps, Props, State> {
          *  This allows FAB to wait till all animations are complete before
          *  rendering back the button.
          */
-        onClose: () => this.setState({pressed: false})
+        onClose: () => this.setState({ pressed: false }),
       });
     }
     return this._renderButton();
@@ -174,7 +174,7 @@ class FAB extends Component<DefaultProps, Props, State> {
   }
 }
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     height: FAB_SIZE * 1.3,
     width: FAB_SIZE,
