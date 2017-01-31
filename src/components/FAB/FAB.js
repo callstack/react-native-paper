@@ -38,6 +38,7 @@ type Props = {
 type State = {
   pressed: bool;
   buttonScale: Animated.Value;
+  elevation: Animated.Value;
 }
 
 /**
@@ -66,7 +67,7 @@ class FAB extends Component<DefaultProps, Props, State> {
   };
 
   static defaultProps = {
-    elevation: 12
+    elevation: 6
   };
 
   constructor(props: Props) {
@@ -74,6 +75,7 @@ class FAB extends Component<DefaultProps, Props, State> {
     this.state = {
       pressed: false,
       buttonScale: new Animated.Value(0),
+      elevation: new Animated.Value(6),
     };
   }
 
@@ -97,6 +99,20 @@ class FAB extends Component<DefaultProps, Props, State> {
 
   shrinkButton = () => this.scaleButton(0);
 
+  _handlePressIn = () => {
+    Animated.timing(this.state.elevation, {
+      toValue: 12,
+      duration: 200,
+    }).start();
+  };
+
+  _handlePressOut = () => {
+    Animated.timing(this.state.elevation, {
+      toValue: 6,
+      duration: 150,
+    }).start();
+  };
+
   onPress() {
     this.setState({pressed: true});
     return this.props.onPress && this.props.onPress();
@@ -119,14 +135,17 @@ class FAB extends Component<DefaultProps, Props, State> {
     return (
         <View style={[styles.container, style]}>
           <AnimatedPaper
-            elevation={elevation}
+            elevation={this.state.elevation}
             style={[
               styles.buttonContainer,
               {transform: [{scale: this.state.buttonScale}]}
             ]}
           >
-            <TouchableRipple onPress={this.onPress.bind(this)}
+            <TouchableRipple
+              onPress={this.onPress.bind(this)}
               style={[styles.button, {backgroundColor: theme.colors.accent}]}
+              onPressIn={this._handlePressIn}
+              onPressOut={this._handlePressOut}
             >
               <View>{this.props.buttonIcon}</View>
             </TouchableRipple>
@@ -137,7 +156,7 @@ class FAB extends Component<DefaultProps, Props, State> {
 
   _renderContent() {
     if (this.props.children) {
-      /** 
+      /**
        * We're cloning the children (guaranteed to be only child) to pass
        * some additional props.
        */

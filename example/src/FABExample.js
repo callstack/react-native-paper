@@ -43,6 +43,7 @@ export default class FABExample extends Component {
                   />
               }
             >
+            </Fab>
 
             <View style={styles.paragraph}>
               <Title style={styles.text}>Fab Toolbar</Title>

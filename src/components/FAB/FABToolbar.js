@@ -24,9 +24,9 @@ type Props = {
   direction?: string;
   children?: string | Array<string>;
   style?: any;
-  theme: Theme;
   open?: bool;
-  onClose: () => {};
+  onClose?: () => {};
+  theme: Theme;
   icon: any;
 }
 
@@ -53,7 +53,7 @@ class FABToolbar extends Component<void, Props, State> {
      * onClose will be called after all closing animations are finished. Note
      *  that this gets called only when closing toolbar using the `open` prop.
      */
-    onClose: PropTypes.func.isRequired,
+    onClose: PropTypes.func,
     icon: PropTypes.element,
   };
 
