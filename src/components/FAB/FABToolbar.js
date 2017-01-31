@@ -98,7 +98,7 @@ class FABToolbar extends Component<DefaultProps, Props, State> {
     ]).start(() => this.setState({displayActions: true}));
   }
 
-  closeToolbar(onComplete: () => {}) {
+  closeToolbar(onComplete: () => void) {
     const self = this;
     this.setState({ displayActions: false }, () => {
       Animated.stagger(100, [
