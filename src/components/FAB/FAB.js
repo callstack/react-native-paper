@@ -27,12 +27,12 @@ type DefaultProps = {
 };
 
 type Props = {
-  children?: string;
+  children?: string | Array<string>;
   style?: any;
   elevation?: number;
   theme: Theme;
   buttonIcon?: any;
-  onPress: () => undefined;
+  onPress: () => void;
 };
 
 type State = {
@@ -123,7 +123,6 @@ class FAB extends Component<DefaultProps, Props, State> {
   _renderButton() {
     const {
       theme,
-      elevation,
       style
     } = this.props;
 

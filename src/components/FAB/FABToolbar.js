@@ -29,7 +29,7 @@ type Props = {
   children?: string | Array<string>;
   style?: any;
   open?: bool;
-  onClose?: () => undefined;
+  onClose?: () => void;
   theme: Theme;
   icon: any;
 }
