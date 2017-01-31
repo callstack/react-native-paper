@@ -57,6 +57,7 @@ export default class FABExample extends Component {
               buttonIcon={
                 <Image source={require('../assets/share.png')} style={styles.icon} />
               }
+              onPress={() => this.setState({toolbarLeftOpen: true})}
             >
               <Fab.Toolbar open={this.state.toolbarLeftOpen}>
                 <View style={styles.toolbar}>
@@ -95,6 +96,7 @@ export default class FABExample extends Component {
               buttonIcon={
                 <Image source={require('../assets/share.png')} style={styles.icon} />
               }
+              onPress={() => this.setState({toolbarRightOpen: true})}
             >
               <Fab.Toolbar
                 open={this.state.toolbarRightOpen}
@@ -130,6 +132,7 @@ export default class FABExample extends Component {
   }
 }
 const styles = StyleSheet.create({
+  container: {},
   paragraph: {
     padding: 16,
   },
