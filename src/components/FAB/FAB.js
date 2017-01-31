@@ -80,9 +80,11 @@ class FAB extends Component<DefaultProps, Props, State> {
   }
 
   componentDidMount() {
-    // Note: On Android, the button loads at scale 1 first and THEN, animates
-    // to scale 1. This is because of a bug:
-    // https://github.com/facebook/react-native/issues/6278
+    /**
+     * The button needs to expand from 0x to 1x scale. On Android, scale of 0 is
+     * taken as 1. Hence, it first loads fully at 1x scale and THEN, animates from
+     * 0x to 1x (https://github.com/facebook/react-native#6278).
+     */
     this.expandButton();
   }
 
