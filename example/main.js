@@ -1,6 +1,6 @@
 /* @flow */
 
-import Exponent from 'exponent';
+import Expo from 'expo';
 import React, { Component } from 'react';
 import {
   View,
@@ -10,7 +10,7 @@ import {
 import {
   NavigationProvider,
   StackNavigation,
-} from '@exponent/ex-navigation';
+} from '@expo/ex-navigation';
 import {
   Colors,
   Drawer,
@@ -89,4 +89,4 @@ const styles = StyleSheet.create({
   },
 });
 
-Exponent.registerRootComponent(App);
+Expo.registerRootComponent(App);
