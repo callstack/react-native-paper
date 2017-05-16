@@ -8,15 +8,10 @@ import {
   Platform,
 } from 'react-native';
 import {
-  NavigationProvider,
-  StackNavigation,
-} from '@expo/ex-navigation';
-import {
-  Colors,
   Drawer,
   Provider as PaperProvider,
 } from 'react-native-paper';
-import Router from './src/Router';
+import RootNavigator from './src/RootNavigator';
 
 
 const DrawerItems = [
@@ -58,25 +53,14 @@ class App extends Component {
   render() {
     return (
       <PaperProvider>
-        <NavigationProvider router={Router}>
-          <Drawer
-            onOpen={this._handleOpenDrawer}
-            onClose={this._handleCloseDrawer}
-            open={this.state.open}
-            content={this._renderDrawerItems()}
-          >
-            <StackNavigation
-              defaultRouteConfig={{
-                navigationBar: {
-                  title: 'Examples',
-                  tintColor: Colors.white,
-                  backgroundColor: Colors.indigo500,
-                },
-              }}
-              initialRoute={Router.getRoute('home')}
-            />
-          </Drawer>
-        </NavigationProvider>
+        <Drawer
+          onOpen={this._handleOpenDrawer}
+          onClose={this._handleCloseDrawer}
+          open={this.state.open}
+          content={this._renderDrawerItems()}
+        >
+          <RootNavigator />
+        </Drawer>
       </PaperProvider>
     );
   }
