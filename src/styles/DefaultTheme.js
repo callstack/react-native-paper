@@ -1,12 +1,7 @@
 /* @flow */
 
 import color from 'color';
-import {
-  indigo500,
-  indigo700,
-  pinkA200,
-  black,
-} from './colors';
+import { indigo500, indigo700, pinkA200, black } from './colors';
 import fonts from './fonts';
 
 export default {

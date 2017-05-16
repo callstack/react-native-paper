@@ -1,20 +1,20 @@
 /* @flow */
 
 export type Theme = {
-  roundness: number;
+  roundness: number,
   colors: {
-    primary: string;
-    primaryDark: string;
-    accent: string;
-    text: string;
-    secondaryText: string;
-    disabled: string;
-    placeholder: string;
-  };
+    primary: string,
+    primaryDark: string,
+    accent: string,
+    text: string,
+    secondaryText: string,
+    disabled: string,
+    placeholder: string,
+  },
   fonts: {
-    regular: string;
-    medium: string;
-    light: string;
-    thin: string;
-  }
+    regular: string,
+    medium: string,
+    light: string,
+    thin: string,
+  },
 };

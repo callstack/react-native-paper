@@ -12,7 +12,8 @@ if (!fs.existsSync(dist)) {
 }
 
 function getFiles() {
-  const components = fs.readFileSync(path.join(__dirname, '../src/index.js'))
+  const components = fs
+    .readFileSync(path.join(__dirname, '../src/index.js'))
     .toString()
     .split('\n')
     .map(line => line.split(' ').pop().replace(/('|;)/g, ''))
@@ -20,7 +21,10 @@ function getFiles() {
     .map(line => {
       const file = require.resolve(path.join(__dirname, '../src', line));
       if (file.endsWith('/index.js')) {
-        const matches = fs.readFileSync(file).toString().match(/export \{ default as default \} from .+/);
+        const matches = fs
+          .readFileSync(file)
+          .toString()
+          .match(/export \{ default as default \} from .+/);
         if (matches && matches.length) {
           const name = matches[0].split(' ').pop().replace(/('|;)/g, '');
           return require.resolve(path.join(__dirname, '../src', line, name));
@@ -29,8 +33,10 @@ function getFiles() {
       return file;
     })
     .sort();
-  const pages = fs.readdirSync(path.join(__dirname, 'pages')).map(page => path.join(__dirname, 'pages', page));
-  return [ pages, components ];
+  const pages = fs
+    .readdirSync(path.join(__dirname, 'pages'))
+    .map(page => path.join(__dirname, 'pages', page));
+  return [pages, components];
 }
 
 if (task !== 'build') {
@@ -44,4 +50,3 @@ if (task !== 'build') {
     output: path.join(__dirname, 'dist'),
   });
 }
-

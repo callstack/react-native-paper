@@ -2,17 +2,9 @@
 
 import Expo from 'expo';
 import React, { Component } from 'react';
-import {
-  View,
-  StyleSheet,
-  Platform,
-} from 'react-native';
-import {
-  Drawer,
-  Provider as PaperProvider,
-} from 'react-native-paper';
+import { View, StyleSheet, Platform } from 'react-native';
+import { Drawer, Provider as PaperProvider } from 'react-native-paper';
 import RootNavigator from './src/RootNavigator';
-
 
 const DrawerItems = [
   { label: 'Inbox', icon: 'inbox', key: 0 },
@@ -26,25 +18,26 @@ class App extends Component {
   state = {
     open: false,
     drawerItemIndex: 0,
-  }
+  };
 
-  _handleOpenDrawer = () => this.setState({ open: true })
+  _handleOpenDrawer = () => this.setState({ open: true });
 
-  _handleCloseDrawer = () => this.setState({ open: false })
+  _handleCloseDrawer = () => this.setState({ open: false });
 
-  _setDrawerItem = index => this.setState({ drawerItemIndex: index })
+  _setDrawerItem = index => this.setState({ drawerItemIndex: index });
 
   _renderDrawerItems = () => {
     return (
       <View style={styles.drawerContent}>
-        <Drawer.Section label='Subheader'>
+        <Drawer.Section label="Subheader">
           {DrawerItems.map((props, index) => (
             <Drawer.Item
               {...props}
               key={props.key}
               active={this.state.drawerItemIndex === index}
               onPress={() => this._setDrawerItem(index)}
-            />))}
+            />
+          ))}
         </Drawer.Section>
       </View>
     );

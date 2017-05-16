@@ -1,34 +1,31 @@
 /* @flow */
 
 import RNDrawer from 'react-native-drawer';
-import React, {
-  Component,
-  PropTypes,
-} from 'react';
+import React, { Component, PropTypes } from 'react';
 import { View, StyleSheet } from 'react-native';
 import DrawerItem from './DrawerItem';
 import DrawerSection from './DrawerSection';
 import { white } from '../../styles/colors';
 
 type Props = {
-  children?: any;
-  content?: any;
-  locked?: boolean;
-  onClose?: Function;
-  onOpen?: Function;
-  open?: boolean;
-  swipeRatio?: number;
-  style?: any;
-  side?: string;
-  width?: number;
-}
+  children?: any,
+  content?: any,
+  locked?: boolean,
+  onClose?: Function,
+  onOpen?: Function,
+  open?: boolean,
+  swipeRatio?: number,
+  style?: any,
+  side?: string,
+  width?: number,
+};
 
 type DefaultProps = {
-  locked: boolean;
-  open: boolean;
-  swipeRatio: number;
-  side: string;
-}
+  locked: boolean,
+  open: boolean,
+  swipeRatio: number,
+  side: string,
+};
 
 class Drawer extends Component<DefaultProps, Props, void> {
   static Item = DrawerItem;
@@ -50,15 +47,15 @@ class Drawer extends Component<DefaultProps, Props, void> {
     swipeRatio: PropTypes.number,
     width: PropTypes.number,
     style: View.propTypes.style,
-    side: PropTypes.oneOf([ 'left', 'right' ]),
-  }
+    side: PropTypes.oneOf(['left', 'right']),
+  };
 
   static defaultProps = {
     side: 'left',
     locked: false,
     open: false,
     swipeRatio: 0.05,
-  }
+  };
 
   _root: any;
 
@@ -70,7 +67,7 @@ class Drawer extends Component<DefaultProps, Props, void> {
       opacity: ratio / 2,
       backgroundColor: 'black',
     },
-  })
+  });
 
   _handleClose = () => {
     if (this.props.onClose) {
@@ -83,7 +80,7 @@ class Drawer extends Component<DefaultProps, Props, void> {
         this._root.open();
       }
     });
-  }
+  };
 
   _handleOpen = () => {
     if (this.props.onOpen) {
@@ -96,11 +93,12 @@ class Drawer extends Component<DefaultProps, Props, void> {
         this._root.close();
       }
     });
-  }
+  };
 
-  _calculateOpenDrawerOffset = viewport => this.props.width ?
-      (viewport.width - this.props.width) :
-      (viewport.width - ((viewport.width * 80) / 100))
+  _calculateOpenDrawerOffset = viewport =>
+    this.props.width
+      ? viewport.width - this.props.width
+      : viewport.width - viewport.width * 80 / 100;
 
   render(): ?React.Element<any> {
     const {
@@ -121,8 +119,8 @@ class Drawer extends Component<DefaultProps, Props, void> {
         captureGestures
         negotiatePan
         acceptPan={!locked}
-        type='overlay'
-        tweenEasing='easeInQuad'
+        type="overlay"
+        tweenEasing="easeInQuad"
         content={content}
         open={open}
         openDrawerOffset={this._calculateOpenDrawerOffset}
@@ -131,7 +129,9 @@ class Drawer extends Component<DefaultProps, Props, void> {
         onOpen={this._handleOpen}
         tweenHandler={this._tweenHandler}
         side={side}
-        styles={{ drawer: StyleSheet.flatten({ backgroundColor: white }, style) }}
+        styles={{
+          drawer: StyleSheet.flatten({ backgroundColor: white }, style),
+        }}
       >
         {children}
       </RNDrawer>

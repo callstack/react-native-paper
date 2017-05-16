@@ -1,18 +1,10 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import {
-  View,
-  StyleSheet,
-} from 'react-native';
-import {
-  Paragraph,
-  Checkbox,
-  Colors,
-} from 'react-native-paper';
+import { View, StyleSheet } from 'react-native';
+import { Paragraph, Checkbox, Colors } from 'react-native-paper';
 
 export default class CheckboxExample extends Component {
-
   static title = 'Checkbox';
 
   state = {
@@ -27,7 +19,8 @@ export default class CheckboxExample extends Component {
           <Paragraph>Normal</Paragraph>
           <Checkbox
             checked={this.state.checkedNormal}
-            onPress={() => this.setState(state => ({ checkedNormal: !state.checkedNormal }))}
+            onPress={() =>
+              this.setState(state => ({ checkedNormal: !state.checkedNormal }))}
           />
         </View>
         <View style={styles.row}>
@@ -35,7 +28,8 @@ export default class CheckboxExample extends Component {
           <Checkbox
             color={Colors.blue500}
             checked={this.state.checkedCustom}
-            onPress={() => this.setState(state => ({ checkedCustom: !state.checkedCustom }))}
+            onPress={() =>
+              this.setState(state => ({ checkedCustom: !state.checkedCustom }))}
           />
         </View>
         <View style={styles.row}>

@@ -1,9 +1,7 @@
 /* @flow */
 
 import color from 'color';
-import React, {
-  PropTypes,
-} from 'react';
+import React, { PropTypes } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Icon from '.././Icon';
 import TouchableRipple from '../TouchableRipple';
@@ -12,29 +10,50 @@ import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types/Theme';
 
 type Props = {
-  icon?: string;
-  label: string;
-  active?: boolean;
-  onPress?: Function;
-  theme: Theme;
-}
+  icon?: string,
+  label: string,
+  active?: boolean,
+  onPress?: Function,
+  theme: Theme,
+};
 
-const DrawerItem = ({ icon, label, active, onPress, theme, ...props }: Props) => {
+const DrawerItem = ({
+  icon,
+  label,
+  active,
+  onPress,
+  theme,
+  ...props
+}: Props) => {
   const { colors } = theme;
-  const labelColor = active ? colors.primary : color(colors.text).alpha(0.87).rgbaString();
-  const iconColor = active ? colors.primary : color(colors.text).alpha(0.54).rgbaString();
+  const labelColor = active
+    ? colors.primary
+    : color(colors.text).alpha(0.87).rgbaString();
+  const iconColor = active
+    ? colors.primary
+    : color(colors.text).alpha(0.54).rgbaString();
   const fontFamily = theme.fonts.medium;
   const labelMargin = icon ? 32 : 0;
   return (
     <TouchableRipple {...props} onPress={onPress}>
-      <View style={[ styles.wrapper, { backgroundColor: active ? grey300 : 'transparent' } ]}>
-        { icon &&
-          <Icon
-            name={icon}
-            size={24}
-            color={iconColor}
-          />}
-        <Text numberOfLines={1} style={{ color: labelColor, fontFamily, marginLeft: labelMargin, marginRight: 16 }}>{label}</Text>
+      <View
+        style={[
+          styles.wrapper,
+          { backgroundColor: active ? grey300 : 'transparent' },
+        ]}
+      >
+        {icon && <Icon name={icon} size={24} color={iconColor} />}
+        <Text
+          numberOfLines={1}
+          style={{
+            color: labelColor,
+            fontFamily,
+            marginLeft: labelMargin,
+            marginRight: 16,
+          }}
+        >
+          {label}
+        </Text>
       </View>
     </TouchableRipple>
   );

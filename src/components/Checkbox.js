@@ -1,15 +1,7 @@
 /* @flow */
 
-import React, {
-  Component,
-  PropTypes,
-} from 'react';
-import {
-  Animated,
-  Platform,
-  View,
-  StyleSheet,
-} from 'react-native';
+import React, { Component, PropTypes } from 'react';
+import { Animated, Platform, View, StyleSheet } from 'react-native';
 import color from 'color';
 import Icon from './Icon';
 import TouchableRipple from './TouchableRipple';
@@ -19,22 +11,22 @@ import type { Theme } from '../types/Theme';
 const AnimatedIcon = Animated.createAnimatedComponent(Icon);
 
 type Props = {
-  checked: boolean;
-  disabled?: boolean;
-  onPress?: Function;
-  color?: string;
-  theme: Theme;
-}
+  checked: boolean,
+  disabled?: boolean,
+  onPress?: Function,
+  color?: string,
+  theme: Theme,
+};
 
 type State = {
-  scaleAnim: Animated.Value;
-  checkAnim: Animated.Value;
-}
+  scaleAnim: Animated.Value,
+  checkAnim: Animated.Value,
+};
 
 /**
  * Checkboxes allow the selection of multiple options from a set
  */
-class Checkbox extends Component <void, Props, State> {
+class Checkbox extends Component<void, Props, State> {
   static propTypes = {
     /**
      * Whether checkbox is checked
@@ -88,12 +80,7 @@ class Checkbox extends Component <void, Props, State> {
   }
 
   render() {
-    const {
-      checked,
-      disabled,
-      onPress,
-      theme,
-    } = this.props;
+    const { checked, disabled, onPress, theme } = this.props;
 
     const checkedColor = this.props.color || theme.colors.accent;
     const uncheckedColor = 'rgba(0, 0, 0, .54)';
@@ -109,8 +96,8 @@ class Checkbox extends Component <void, Props, State> {
     }
 
     const borderWidth = this.state.scaleAnim.interpolate({
-      inputRange: [ 0.8, 1 ],
-      outputRange: [ 7, 0 ],
+      inputRange: [0.8, 1],
+      outputRange: [7, 0],
     });
 
     return (
@@ -121,14 +108,14 @@ class Checkbox extends Component <void, Props, State> {
         onPress={disabled ? undefined : onPress}
         style={styles.container}
       >
-        <Animated.View style={{ transform: [ { scale: this.state.scaleAnim } ] }}>
+        <Animated.View style={{ transform: [{ scale: this.state.scaleAnim }] }}>
           <AnimatedIcon
             allowFontScaling={false}
             name={checked ? 'check-box' : 'check-box-outline-blank'}
             size={24}
-            style={[ styles.icon, { color: checkboxColor } ]}
+            style={[styles.icon, { color: checkboxColor }]}
           />
-          <View style={[ StyleSheet.absoluteFill, styles.fillContainer ]}>
+          <View style={[StyleSheet.absoluteFill, styles.fillContainer]}>
             <Animated.View
               style={[
                 styles.fill,

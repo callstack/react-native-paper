@@ -1,10 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import {
-  View,
-  StyleSheet,
-} from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import {
   Caption,
   Headline,
@@ -14,7 +11,6 @@ import {
 } from 'react-native-paper';
 
 export default class TextExample extends Component {
-
   static title = 'Typography';
 
   render() {
