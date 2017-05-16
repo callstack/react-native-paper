@@ -1,6 +1,7 @@
 /* @flow */
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { ListView, Text, StyleSheet } from 'react-native';
 import { Colors, TouchableRipple, Divider } from 'react-native-paper';
 import ButtonExample from './ButtonExample';

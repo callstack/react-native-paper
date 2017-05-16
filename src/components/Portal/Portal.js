@@ -1,6 +1,7 @@
 /* @flow */
 
-import { PureComponent, PropTypes } from 'react';
+import { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { manager } from './PortalHost';
 
 export type PortalProps = {

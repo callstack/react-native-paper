@@ -1,7 +1,8 @@
 /* @flow */
 
 import color from 'color';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { View, Text, StyleSheet } from 'react-native';
 import Icon from '.././Icon';
 import TouchableRipple from '../TouchableRipple';

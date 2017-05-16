@@ -1,7 +1,8 @@
 /* @flow */
 
 import color from 'color';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
 import Divider from '../Divider';
 import withTheme from '../../core/withTheme';

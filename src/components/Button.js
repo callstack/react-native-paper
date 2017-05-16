@@ -1,7 +1,8 @@
 /* @flow */
 
 import color from 'color';
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { ActivityIndicator, Animated, View, StyleSheet } from 'react-native';
 import Icon from './Icon';
 import Paper from './Paper';

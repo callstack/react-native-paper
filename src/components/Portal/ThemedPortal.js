@@ -1,6 +1,7 @@
 /* @flow */
 
-import React, { Component, Children, PropTypes } from 'react';
+import React, { Component, Children } from 'react';
+import PropTypes from 'prop-types';
 import Portal from './Portal';
 import ThemeProvider from '../../core/ThemeProvider';
 import withTheme from '../../core/withTheme';

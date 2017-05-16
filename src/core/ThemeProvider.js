@@ -1,6 +1,7 @@
 /* @flow */
 
-import { PureComponent, PropTypes, Children } from 'react';
+import { PureComponent, Children } from 'react';
+import PropTypes from 'prop-types';
 import DefaultTheme from '../styles/DefaultTheme';
 import type { Theme } from '../types/Theme';
 
