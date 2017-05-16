@@ -43,18 +43,16 @@ const dataSource = ds.cloneWithRows(Object.keys(examples));
 
 export default class ExampleList extends Component {
 
-  static route = {
-    navigationBar: {
-      title: 'Examples',
-    },
+  static navigationOptions = {
+    title: 'Examples',
   };
 
   static propTypes = {
-    navigator: PropTypes.object,
+    navigation: PropTypes.object,
   };
 
   _renderRow = id => (
-    <TouchableRipple style={styles.item} onPress={() => this.props.navigator.push(id)}>
+    <TouchableRipple style={styles.item} onPress={() => this.props.navigation.navigate(id)}>
       <Text style={styles.text}>{examples[id].title}</Text>
     </TouchableRipple>
   );
