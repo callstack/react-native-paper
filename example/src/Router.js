@@ -3,7 +3,7 @@
 import React from 'react';
 import {
   createRouter,
-} from '@exponent/ex-navigation';
+} from '@expo/ex-navigation';
 import ExampleList, { examples } from './ExampleList';
 
 const routes = Object.keys(examples)

@@ -3,44 +3,43 @@
   "version": "0.0.1",
   "description": "",
   "main": "src/index.js",
-  "scripts": {
-    "flow": "flow",
-    "lint": "eslint .",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "files": [
     "src/"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ahmedlhanafy/react-native-paper.git"
+    "url": "git+https://github.com/callstackio/react-native-paper.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ahmedlhanafy/react-native-paper/issues"
+    "url": "https://github.com/callstackio/react-native-paper/issues"
   },
-  "homepage": "https://github.com/ahmedlhanafy/react-native-paper#readme",
+  "homepage": "https://github.com/callstackio/react-native-paper#readme",
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
     "react-native-vector-icons": "*"
   },
   "devDependencies": {
-    "babel-eslint": "^7.1.0",
-    "eslint": "^3.9.1",
-    "eslint-plugin-babel": "^3.3.0",
+    "babel-eslint": "^7.2.3",
+    "eslint": "^3.19.0",
+    "eslint-plugin-babel": "^4.1.1",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-react": "^6.6.0",
-    "eslint-plugin-react-native": "^2.0.0",
-    "flow-bin": "^0.33.0",
-    "react": "~15.3.2",
-    "react-native": "~0.37.0",
-    "react-native-vector-icons": "~3.0.0"
+    "eslint-plugin-react": "^7.0.0",
+    "eslint-plugin-react-native": "^2.3.2",
+    "flow-bin": "~0.40.0",
+    "react": "16.0.0-alpha.6",
+    "react-native": "~0.43.2",
+    "react-native-vector-icons": "~4.1.1"
   },
   "dependencies": {
     "color": "^0.11.4",
-    "highlight.js": "^9.8.0",
     "react-native-drawer": "^2.3.0"
+  },
+  "scripts": {
+    "flow": "flow",
+    "lint": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
