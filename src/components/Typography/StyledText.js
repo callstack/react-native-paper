@@ -1,7 +1,8 @@
 /* @flow */
 
 import color from 'color';
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import Text from './Text';
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types/Theme';

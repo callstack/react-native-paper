@@ -1,6 +1,7 @@
 /* @flow */
 
-import React, { Component, Children, PropTypes } from 'react';
+import React, { Component, Children } from 'react';
+import PropTypes from 'prop-types';
 import {
   Animated,
   View,

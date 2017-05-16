@@ -1,8 +1,9 @@
 /* @flow */
 
-import RNDrawer from 'react-native-drawer';
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
+import RNDrawer from 'react-native-drawer';
 import DrawerItem from './DrawerItem';
 import DrawerSection from './DrawerSection';
 import { white } from '../../styles/colors';

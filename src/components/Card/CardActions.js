@@ -1,6 +1,7 @@
 /* @flow */
 
-import React, { PropTypes, Children } from 'react';
+import React, { Children } from 'react';
+import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
 
 type Props = {

@@ -1,6 +1,7 @@
 /* @flow */
 
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { Text as NativeText } from 'react-native';
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types/Theme';

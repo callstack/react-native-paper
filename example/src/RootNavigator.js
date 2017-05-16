@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Platform } from 'react-native';
-import { Constants } from 'expo';
+import Expo from 'expo';
 import { StackNavigator } from 'react-navigation';
 import { Colors } from 'react-native-paper';
 import ExampleList, { examples } from './ExampleList';
@@ -33,8 +33,9 @@ export default StackNavigator(
       headerTintColor: Colors.white,
       headerStyle: {
         backgroundColor: Colors.indigo500,
-        paddingTop: Constants.statusBarHeight,
-        height: (Platform.OS === 'ios' ? 44 : 56) + Constants.statusBarHeight,
+        paddingTop: Expo.Constants.statusBarHeight,
+        height: (Platform.OS === 'ios' ? 44 : 56) +
+          Expo.Constants.statusBarHeight,
       },
     },
   },

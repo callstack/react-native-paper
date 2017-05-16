@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "color": "^0.11.4",
+    "prop-types": "^15.5.10",
     "react-native-drawer": "^2.3.0"
   },
   "scripts": {

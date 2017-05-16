@@ -1,6 +1,7 @@
 /* @flow */
 
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { Dimensions, ListView, StyleSheet, View } from 'react-native';
 import { grey200 } from '../styles/colors';
 

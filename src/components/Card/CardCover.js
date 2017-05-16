@@ -1,6 +1,7 @@
 /* @flow */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { StyleSheet, View, Image } from 'react-native';
 import withTheme from '../../core/withTheme';
 import { grey200 } from '../../styles/colors';
