@@ -1,4 +1,4 @@
 /* @flow */
 
-export { default as default } from 'react-native-vector-icons/MaterialIcons';
-
+import { MaterialIcons } from '@expo/vector-icons'
+export default MaterialIcons;
