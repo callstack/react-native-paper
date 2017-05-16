@@ -22,12 +22,18 @@
 .*/Libraries/react-native/ReactNative.js
 
 ; Ignore duplicate modules under example/
-.*/example/node_modules/fbjs
-.*/example/node_modules/fbemitter
-.*/example/node_modules/react
-.*/example/node_modules/react-native
-.*/example/node_modules/expo
+.*/example/node_modules/fbjs/.*
+.*/example/node_modules/fbemitter/.*
+.*/example/node_modules/react/.*
+.*/example/node_modules/react-native/.*
+.*/example/node_modules/expo/.*
 .*/example/\.buckd/
+.*/example/node_modules/react-navigation/.*/__tests__/.*
+.*/example/node_modules/react-native-fbads
+
+; Ignore duplicate modules under docs/
+.*/docs/node_modules/fbjs/.*
+.*/docs/node_modules/react/.*
 
 [include]
 
@@ -43,6 +49,8 @@ module.system=haste
 experimental.strict_type_args=true
 
 munge_underscores=true
+
+module.name_mapper='^expo$' -> 'emptyObject'
 
 module.name_mapper='^[./a-zA-Z0-9$_-]+\.\(bmp\|gif\|jpg\|jpeg\|png\|psd\|svg\|webp\|m4v\|mov\|mp4\|mpeg\|mpg\|webm\|aac\|aiff\|caf\|m4a\|mp3\|wav\|html\|pdf\)$' -> 'RelativeImageStub'
 
