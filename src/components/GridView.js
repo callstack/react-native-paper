@@ -1,43 +1,36 @@
 /* @flow */
 
-import React, {
-  PureComponent,
-  PropTypes,
-} from 'react';
-import {
-  Dimensions,
-  ListView,
-  StyleSheet,
-  View,
-} from 'react-native';
+import React, { PureComponent, PropTypes } from 'react';
+import { Dimensions, ListView, StyleSheet, View } from 'react-native';
 import { grey200 } from '../styles/colors';
 
 type Layout = {
-  width: number;
-}
+  width: number,
+};
 
 type Props = {
-  dataSource: ListView.DataSource;
-  spacing: number;
-  getNumberOfColumns: (width: number) => number;
-  renderSectionHeader?: (...args: any) => any;
-  renderRow: (...args: any) => any;
-  initialLayout: Layout;
-  onLayout?: Function;
-  contentContainerStyle?: any;
-}
+  dataSource: ListView.DataSource,
+  spacing: number,
+  getNumberOfColumns: (width: number) => number,
+  renderSectionHeader?: (...args: any) => any,
+  renderRow: (...args: any) => any,
+  initialLayout: Layout,
+  onLayout?: Function,
+  contentContainerStyle?: any,
+};
 
 type DefaultProps = {
-  initialLayout: Layout;
-  getNumberOfColumns: (width: number) => number;
-  spacing: number;
-}
+  initialLayout: Layout,
+  getNumberOfColumns: (width: number) => number,
+  spacing: number,
+};
 
 type State = {
-  layout: Layout;
-}
+  layout: Layout,
+};
 
-export default class GridView extends PureComponent<DefaultProps, Props, State> {
+export default class GridView
+  extends PureComponent<DefaultProps, Props, State> {
   static propTypes = {
     dataSource: PropTypes.instanceOf(ListView.DataSource).isRequired,
     spacing: PropTypes.number.isRequired,
@@ -73,13 +66,15 @@ export default class GridView extends PureComponent<DefaultProps, Props, State> 
   _root: Object;
 
   _renderSectionHeader = (...args) => {
-    const header = this.props.renderSectionHeader ? this.props.renderSectionHeader(...args) : null;
+    const header = this.props.renderSectionHeader
+      ? this.props.renderSectionHeader(...args)
+      : null;
     if (!header) {
       return header;
     }
     const { width } = this.state.layout;
     return React.cloneElement(header, {
-      style: [ header.props.style, { width } ],
+      style: [header.props.style, { width }],
     });
   };
 
@@ -87,7 +82,8 @@ export default class GridView extends PureComponent<DefaultProps, Props, State> 
     const containerWidth = this.state.layout.width;
     const { getNumberOfColumns, spacing } = this.props;
     const style = {
-      width: ((containerWidth - spacing) / getNumberOfColumns(containerWidth)) - spacing,
+      width: (containerWidth - spacing) / getNumberOfColumns(containerWidth) -
+        spacing,
       margin: spacing / 2,
     };
     const row = this.props.renderRow(...args);
@@ -95,7 +91,7 @@ export default class GridView extends PureComponent<DefaultProps, Props, State> 
       return row;
     }
     return React.cloneElement(row, {
-      style: [ row.props.style, style ],
+      style: [row.props.style, style],
     });
   };
 
@@ -125,7 +121,11 @@ export default class GridView extends PureComponent<DefaultProps, Props, State> 
         onLayout={this._handleLayout}
         renderSectionHeader={this._renderSectionHeader}
         renderRow={this._renderRow}
-        contentContainerStyle={[ styles.grid, { padding: this.props.spacing / 2 }, this.props.contentContainerStyle ]}
+        contentContainerStyle={[
+          styles.grid,
+          { padding: this.props.spacing / 2 },
+          this.props.contentContainerStyle,
+        ]}
         ref={this._setRef}
       />
     );

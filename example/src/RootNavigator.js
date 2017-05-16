@@ -23,16 +23,19 @@ const routes = Object.keys(examples)
     };
   }, {});
 
-export default StackNavigator({
-  home: { screen: ExampleList },
-  ...routes,
-}, {
-  navigationOptions: {
-    headerTintColor: Colors.white,
-    headerStyle: {
-      backgroundColor: Colors.indigo500,
-      paddingTop: Constants.statusBarHeight,
-      height: (Platform.OS === 'ios' ? 44 : 56) + Constants.statusBarHeight,
+export default StackNavigator(
+  {
+    home: { screen: ExampleList },
+    ...routes,
+  },
+  {
+    navigationOptions: {
+      headerTintColor: Colors.white,
+      headerStyle: {
+        backgroundColor: Colors.indigo500,
+        paddingTop: Constants.statusBarHeight,
+        height: (Platform.OS === 'ios' ? 44 : 56) + Constants.statusBarHeight,
+      },
     },
   },
-});
+);

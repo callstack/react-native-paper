@@ -1,13 +1,7 @@
 /* @flow */
 
-import React, {
-  Component,
-  PropTypes,
-} from 'react';
-import {
-  StyleSheet,
-  TextInput,
-} from 'react-native';
+import React, { Component, PropTypes } from 'react';
+import { StyleSheet, TextInput } from 'react-native';
 import color from 'color';
 
 import withTheme from '../core/withTheme';
@@ -17,17 +11,16 @@ import Paper from './Paper';
 import type { Theme } from '../types/Theme';
 
 type Props = {
-  placeholder?: string;
-  value: string;
-  onChangeText: (query: string) => void;
-  theme: Theme;
-}
+  placeholder?: string,
+  value: string,
+  onChangeText: (query: string) => void,
+  theme: Theme,
+};
 
 /**
  * SearchBar is a simple input box where users can type search queries
  */
 class SearchBar extends Component<void, Props, void> {
-
   static propTypes = {
     /**
      * Hint text shown when the input is empty
@@ -49,20 +42,13 @@ class SearchBar extends Component<void, Props, void> {
   };
 
   render() {
-    const {
-      placeholder,
-      value,
-      theme,
-    } = this.props;
+    const { placeholder, value, theme } = this.props;
 
     return (
-      <Paper
-        elevation={4}
-        style={styles.container}
-      >
+      <Paper elevation={4} style={styles.container}>
         <Icon
-          style={[ styles.iconWrapper, styles.icon ]}
-          name='search'
+          style={[styles.iconWrapper, styles.icon]}
+          name="search"
           size={24}
         />
         <TextInput
@@ -70,24 +56,19 @@ class SearchBar extends Component<void, Props, void> {
           placeholder={placeholder || ''}
           value={value}
           placeholderTextColor={theme.colors.placeholder}
-          underlineColorAndroid='transparent'
+          underlineColorAndroid="transparent"
           onChangeText={this.props.onChangeText}
-          returnKeyType='search'
+          returnKeyType="search"
         />
-        {value ?
-          <TouchableRipple
-            borderless
-            onPress={this._handleClearPress}
-            style={styles.iconWrapper}
-          >
-            <Icon
-              style={styles.icon}
-              name='close'
-              size={24}
-            />
-          </TouchableRipple> :
-          null
-        }
+        {value
+          ? <TouchableRipple
+              borderless
+              onPress={this._handleClearPress}
+              style={styles.iconWrapper}
+            >
+              <Icon style={styles.icon} name="close" size={24} />
+            </TouchableRipple>
+          : null}
       </Paper>
     );
   }

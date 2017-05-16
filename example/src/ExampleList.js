@@ -1,19 +1,8 @@
 /* @flow */
 
-import React, {
-  Component,
-  PropTypes,
- } from 'react';
-import {
-  ListView,
-  Text,
-  StyleSheet,
-} from 'react-native';
-import {
-  Colors,
-  TouchableRipple,
-  Divider,
-} from 'react-native-paper';
+import React, { Component, PropTypes } from 'react';
+import { ListView, Text, StyleSheet } from 'react-native';
+import { Colors, TouchableRipple, Divider } from 'react-native-paper';
 import ButtonExample from './ButtonExample';
 import CardExample from './CardExample';
 import CheckboxExample from './CheckboxExample';
@@ -42,7 +31,6 @@ const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 const dataSource = ds.cloneWithRows(Object.keys(examples));
 
 export default class ExampleList extends Component {
-
   static navigationOptions = {
     title: 'Examples',
   };
@@ -52,12 +40,15 @@ export default class ExampleList extends Component {
   };
 
   _renderRow = id => (
-    <TouchableRipple style={styles.item} onPress={() => this.props.navigation.navigate(id)}>
+    <TouchableRipple
+      style={styles.item}
+      onPress={() => this.props.navigation.navigate(id)}
+    >
       <Text style={styles.text}>{examples[id].title}</Text>
     </TouchableRipple>
   );
 
-  _renderSeparator = (sectionId, rowId) => <Divider key={rowId}/>;
+  _renderSeparator = (sectionId, rowId) => <Divider key={rowId} />;
 
   render() {
     return (

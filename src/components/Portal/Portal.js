@@ -1,15 +1,12 @@
 /* @flow */
 
-import {
-  PureComponent,
-  PropTypes,
-} from 'react';
+import { PureComponent, PropTypes } from 'react';
 import { manager } from './PortalHost';
 
 export type PortalProps = {
-   children: any;
-   position: number;
-}
+  children: any,
+  position: number,
+};
 
 type Props = PortalProps;
 
@@ -30,10 +27,13 @@ export default class Portal extends PureComponent<void, Props, void> {
   };
 
   componentDidMount() {
-    if (typeof this.context[manager] !== 'object' || this.context[manager] === null) {
+    if (
+      typeof this.context[manager] !== 'object' ||
+      this.context[manager] === null
+    ) {
       throw new Error(
-        'Couldn\'t find portal manager in the context or props. ' +
-        'You need to wrap your root component in \'<PortalHost />\''
+        "Couldn't find portal manager in the context or props. " +
+          "You need to wrap your root component in '<PortalHost />'",
       );
     }
     this._key = this.context[manager].mount(this.props);

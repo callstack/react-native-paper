@@ -1,23 +1,20 @@
 /* @flow */
 
 import React, { PropTypes, Children } from 'react';
-import {
-  StyleSheet,
-  View,
-} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 type Props = {
-  children?: any;
-  style?: any;
-}
+  children?: any,
+  style?: any,
+};
 
 const CardActions = (props: Props) => {
   return (
-    <View {...props} style={[ styles.container, props.style ]}>
+    <View {...props} style={[styles.container, props.style]}>
       {Children.map(props.children, child =>
         React.cloneElement(child, {
           compact: child.props.compact !== false,
-        })
+        }),
       )}
     </View>
   );

@@ -1,33 +1,27 @@
 /* @flow */
 
-import React, {
-  PureComponent,
-  PropTypes,
-} from 'react';
-import {
-  TouchableHighlight,
-  View,
-} from 'react-native';
+import React, { PureComponent, PropTypes } from 'react';
+import { TouchableHighlight, View } from 'react-native';
 import color from 'color';
 
 type Props = {
-  borderless: boolean;
-  delayPressIn?: number;
-  onPress?: ?Function;
-  onPressIn?: ?Function;
-  onPressOut?: ?Function;
-  rippleColor: string;
-  children?: any;
-  style?: any;
-}
+  borderless: boolean,
+  delayPressIn?: number,
+  onPress?: ?Function,
+  onPressIn?: ?Function,
+  onPressOut?: ?Function,
+  rippleColor: string,
+  children?: any,
+  style?: any,
+};
 
 type DefaultProps = {
-  borderless: boolean;
-  rippleColor: string;
-}
+  borderless: boolean,
+  rippleColor: string,
+};
 
-export default class TouchableRipple extends PureComponent<DefaultProps, Props, void> {
-
+export default class TouchableRipple
+  extends PureComponent<DefaultProps, Props, void> {
   static propTypes = {
     borderless: PropTypes.bool,
     delayPressIn: PropTypes.number,
@@ -42,7 +36,7 @@ export default class TouchableRipple extends PureComponent<DefaultProps, Props, 
   static defaultProps = {
     borderless: false,
     rippleColor: 'rgba(0, 0, 0, .32)',
-  }
+  };
 
   render() {
     const {
@@ -53,7 +47,7 @@ export default class TouchableRipple extends PureComponent<DefaultProps, Props, 
       onPressOut,
       rippleColor,
       style,
-     } = this.props;
+    } = this.props;
 
     return (
       <TouchableHighlight

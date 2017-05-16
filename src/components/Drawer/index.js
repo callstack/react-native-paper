@@ -1,3 +1,3 @@
 /* @flow */
 
-export { default as default } from './Drawer';
+export { default } from './Drawer';

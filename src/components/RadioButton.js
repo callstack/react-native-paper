@@ -1,39 +1,31 @@
 /* @flow */
 
-import React, {
-  PropTypes,
-  Component,
-} from 'react';
-import {
-  Animated,
-  View,
-  Platform,
-  StyleSheet,
-} from 'react-native';
+import React, { PropTypes, Component } from 'react';
+import { Animated, View, Platform, StyleSheet } from 'react-native';
 import color from 'color';
 import TouchableRipple from './TouchableRipple';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types/Theme';
 
 type Props = {
-  checked: boolean;
-  disabled?: boolean;
-  onPress?: Function;
-  color?: string;
-  theme: Theme;
-}
+  checked: boolean,
+  disabled?: boolean,
+  onPress?: Function,
+  color?: string,
+  theme: Theme,
+};
 
 type State = {
-  borderAnim: Animated.Value;
-  radioAnim: Animated.Value;
-}
+  borderAnim: Animated.Value,
+  radioAnim: Animated.Value,
+};
 
 const BORDER_WIDTH = 2;
 
 /**
  * Radio buttons allow the selection of a single option from a set
  */
-class RadioButton extends Component <void, Props, State> {
+class RadioButton extends Component<void, Props, State> {
   static propTypes = {
     /**
      * Whether radio is checked
@@ -80,12 +72,7 @@ class RadioButton extends Component <void, Props, State> {
   }
 
   render() {
-    const {
-      disabled,
-      onPress,
-      checked,
-      theme,
-    } = this.props;
+    const { disabled, onPress, checked, theme } = this.props;
 
     const checkedColor = this.props.color || theme.colors.accent;
     const uncheckedColor = 'rgba(0, 0, 0, .54)';
@@ -108,19 +95,25 @@ class RadioButton extends Component <void, Props, State> {
         onPress={disabled ? undefined : onPress}
         style={styles.container}
       >
-        <Animated.View style={[ styles.radio, { borderColor: radioColor, borderWidth: this.state.borderAnim } ]}>
-          {this.props.checked ?
-            <View style={[ StyleSheet.absoluteFill, styles.radioContainer ]}>
-              <Animated.View
-                style={[
-                  styles.dot,
-                  {
-                    backgroundColor: radioColor,
-                    transform: [ { scale: this.state.radioAnim } ],
-                  },
-                ]}
-              />
-            </View> : null}
+        <Animated.View
+          style={[
+            styles.radio,
+            { borderColor: radioColor, borderWidth: this.state.borderAnim },
+          ]}
+        >
+          {this.props.checked
+            ? <View style={[StyleSheet.absoluteFill, styles.radioContainer]}>
+                <Animated.View
+                  style={[
+                    styles.dot,
+                    {
+                      backgroundColor: radioColor,
+                      transform: [{ scale: this.state.radioAnim }],
+                    },
+                  ]}
+                />
+              </View>
+            : null}
         </Animated.View>
       </TouchableRipple>
     );

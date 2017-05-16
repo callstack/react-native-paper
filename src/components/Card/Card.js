@@ -1,10 +1,6 @@
 /* @flow */
 
-import React, {
-  Component,
-  Children,
-  PropTypes,
-} from 'react';
+import React, { Component, Children, PropTypes } from 'react';
 import {
   Animated,
   View,
@@ -22,20 +18,20 @@ import type { Theme } from '../../types/Theme';
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
 type DefaultProps = {
-  elevation: number;
-}
+  elevation: number,
+};
 
 type Props = {
-  elevation?: number;
-  children?: string;
-  onPress?: Function;
-  style?: any;
-  theme: Theme;
-}
+  elevation?: number,
+  children?: string,
+  onPress?: Function,
+  style?: any,
+  theme: Theme,
+};
 
 type State = {
-  elevation: Animated.Value;
-}
+  elevation: Animated.Value,
+};
 
 class Card extends Component<DefaultProps, Props, State> {
   static Cover = CardCover;
@@ -78,19 +74,17 @@ class Card extends Component<DefaultProps, Props, State> {
   };
 
   render() {
-    const {
-      children,
-      onPress,
-      style,
-      theme,
-    } = this.props;
+    const { children, onPress, style, theme } = this.props;
 
     const { roundness } = theme;
     const total = Children.count(children);
     const siblings = Children.map(children, child => child.type.displayName);
 
     return (
-      <AnimatedPaper elevation={this.state.elevation} style={[ styles.card, { borderRadius: roundness }, style ]}>
+      <AnimatedPaper
+        elevation={this.state.elevation}
+        style={[styles.card, { borderRadius: roundness }, style]}
+      >
         <TouchableWithoutFeedback
           delayPressIn={0}
           onPress={onPress}
@@ -104,7 +98,7 @@ class Card extends Component<DefaultProps, Props, State> {
                 index,
                 total,
                 siblings,
-              })
+              }),
             )}
           </View>
         </TouchableWithoutFeedback>
@@ -123,7 +117,7 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     flexGrow: 1,
-  }
+  },
 });
 
 export default withTheme(Card);

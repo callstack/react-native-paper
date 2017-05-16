@@ -1,26 +1,20 @@
 /* @flow */
 
-import React, {
-  PureComponent,
-  PropTypes,
-} from 'react';
-import {
-  View,
-  StyleSheet,
-} from 'react-native';
+import React, { PureComponent, PropTypes } from 'react';
+import { View, StyleSheet } from 'react-native';
 import type { PortalProps } from './Portal';
 
 type Props = {
-  children?: any;
-  style?: any;
-}
+  children?: any,
+  style?: any,
+};
 
 type State = {
   portals: Array<{
-    key: number;
-    props: PortalProps;
-  }>;
-}
+    key: number,
+    props: PortalProps,
+  }>,
+};
 
 export const manager = 'react-native-paper$portal-manager';
 
@@ -83,7 +77,7 @@ export default class Portals extends PureComponent<void, Props, State> {
   render() {
     const { portals } = this.state;
     return (
-      <View {...this.props} style={[ styles.container, this.props.style ]}>
+      <View {...this.props} style={[styles.container, this.props.style]}>
         {this.props.children}
         {portals
           .reduce((acc, curr) => {
@@ -92,7 +86,7 @@ export default class Portals extends PureComponent<void, Props, State> {
             if (group) {
               group = {
                 position,
-                items: group.items.concat([ children ]),
+                items: group.items.concat([children]),
               };
               return acc.map(g => {
                 if (group && g.position === position) {
@@ -101,16 +95,15 @@ export default class Portals extends PureComponent<void, Props, State> {
                 return g;
               });
             } else {
-              group = { position, items: [ children ] };
-              return [ ...acc, group ];
+              group = { position, items: [children] };
+              return [...acc, group];
             }
           }, [])
           .map(({ position, items }) => (
             <View key={position} style={StyleSheet.absoluteFill}>
               {items}
             </View>
-          ))
-        }
+          ))}
       </View>
     );
   }

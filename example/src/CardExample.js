@@ -1,10 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-} from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import {
   Title,
   Caption,
@@ -15,12 +12,14 @@ import {
 } from 'react-native-paper';
 
 export default class CardExample extends Component {
-
   static title = 'Card';
 
   render() {
     return (
-      <ScrollView style={styles.container} contentContainerStyle={styles.content}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.content}
+      >
         <Card>
           <Card.Cover source={require('../assets/wrecked-ship.jpg')} />
           <Card.Content>

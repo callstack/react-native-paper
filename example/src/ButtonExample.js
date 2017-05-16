@@ -1,17 +1,10 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import {
-  View,
-  StyleSheet,
-} from 'react-native';
-import {
-  Colors,
-  Button,
-} from 'react-native-paper';
+import { View, StyleSheet } from 'react-native';
+import { Colors, Button } from 'react-native-paper';
 
 export default class ButtonExample extends Component {
-
   static title = 'Button';
 
   state = {
@@ -32,24 +25,21 @@ export default class ButtonExample extends Component {
           <Button raised color={Colors.pink500}>Custom</Button>
         </View>
         <View style={styles.row}>
-          <Button icon='add-a-photo'>Icon</Button>
+          <Button icon="add-a-photo">Icon</Button>
           <Button
             raised
             primary
-            icon='file-download'
+            icon="file-download"
             loading={this.state.loading}
-            onPress={() => this.setState(state => ({ loading: !state.loading }))}
+            onPress={() =>
+              this.setState(state => ({ loading: !state.loading }))}
           >
             Loading
           </Button>
         </View>
         <View style={styles.row}>
-          <Button disabled icon='my-location'>Disabled</Button>
-          <Button
-            disabled
-            loading
-            raised
-          >
+          <Button disabled icon="my-location">Disabled</Button>
+          <Button disabled loading raised>
             Loading
           </Button>
         </View>

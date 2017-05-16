@@ -1,21 +1,17 @@
 /* @flow */
 
 import React, { PropTypes } from 'react';
-import {
-  StyleSheet,
-  View,
-  Image,
-} from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import withTheme from '../../core/withTheme';
 import { grey200 } from '../../styles/colors';
 import type { Theme } from '../../types/Theme';
 
 type Props = {
-  index?: number;
-  total?: number;
-  style?: any;
-  theme: Theme;
-}
+  index?: number,
+  total?: number,
+  style?: any,
+  theme: Theme,
+};
 
 const CardCover = (props: Props) => {
   const { index, total, style, theme } = props;
@@ -35,7 +31,7 @@ const CardCover = (props: Props) => {
       };
     }
   } else {
-    if (typeof total === 'number' && index === (total - 1)) {
+    if (typeof total === 'number' && index === total - 1) {
       coverStyle = {
         borderBottomLeftRadius: roundness,
       };
@@ -43,8 +39,8 @@ const CardCover = (props: Props) => {
   }
 
   return (
-    <View style={[ styles.container, coverStyle, style ]}>
-      <Image {...props} style={[ styles.image, coverStyle ]} />
+    <View style={[styles.container, coverStyle, style]}>
+      <Image {...props} style={[styles.image, coverStyle]} />
     </View>
   );
 };

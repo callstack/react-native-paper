@@ -1,25 +1,22 @@
 /* @flow */
 
-import {
-  PureComponent,
-  PropTypes,
-  Children,
-} from 'react';
+import { PureComponent, PropTypes, Children } from 'react';
 import DefaultTheme from '../styles/DefaultTheme';
 import type { Theme } from '../types/Theme';
 
 type DefaultProps = {
-  theme: Theme
-}
+  theme: Theme,
+};
 
 type Props = {
-  children?: any;
-  theme?: Theme
-}
+  children?: any,
+  theme?: Theme,
+};
 
 export const theme = 'react-native-paper$theme';
 
-export default class ThemeProvider extends PureComponent<DefaultProps, Props, void> {
+export default class ThemeProvider
+  extends PureComponent<DefaultProps, Props, void> {
   static propTypes = {
     children: PropTypes.element.isRequired,
     theme: PropTypes.object,
@@ -43,4 +40,3 @@ export default class ThemeProvider extends PureComponent<DefaultProps, Props, vo
     return Children.only(this.props.children);
   }
 }
-

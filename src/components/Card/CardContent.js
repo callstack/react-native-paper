@@ -1,17 +1,14 @@
 /* @flow */
 
 import React, { PropTypes } from 'react';
-import {
-  StyleSheet,
-  View,
-} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 type Props = {
-  index?: number;
-  total?: number;
-  siblings?: Array<string>;
-  style?: any;
-}
+  index?: number,
+  total?: number,
+  siblings?: Array<string>,
+  style?: any,
+};
 
 const CardContent = (props: Props) => {
   const { index, total, siblings, style } = props;
@@ -24,7 +21,7 @@ const CardContent = (props: Props) => {
     next = siblings[index + 1];
   }
 
-  if (prev === cover && next === cover || total === 1) {
+  if ((prev === cover && next === cover) || total === 1) {
     contentStyle = styles.only;
   } else {
     if (index === 0) {
@@ -33,7 +30,7 @@ const CardContent = (props: Props) => {
       } else {
         contentStyle = styles.first;
       }
-    } else if (typeof total === 'number' && index === (total - 1)) {
+    } else if (typeof total === 'number' && index === total - 1) {
       if (prev === cover) {
         contentStyle = styles.only;
       } else {
@@ -48,7 +45,7 @@ const CardContent = (props: Props) => {
     }
   }
 
-  return <View {...props} style={[ styles.container, contentStyle, style ]} />;
+  return <View {...props} style={[styles.container, contentStyle, style]} />;
 };
 
 CardContent.propTypes = {
