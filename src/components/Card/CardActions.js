@@ -15,7 +15,7 @@ const CardActions = (props: Props) => {
       {Children.map(props.children, child =>
         React.cloneElement(child, {
           compact: child.props.compact !== false,
-        }),
+        })
       )}
     </View>
   );

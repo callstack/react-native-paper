@@ -38,5 +38,5 @@ export default StackNavigator(
           Expo.Constants.statusBarHeight,
       },
     },
-  },
+  }
 );

@@ -99,7 +99,7 @@ class Card extends Component<DefaultProps, Props, State> {
                 index,
                 total,
                 siblings,
-              }),
+              })
             )}
           </View>
         </TouchableWithoutFeedback>

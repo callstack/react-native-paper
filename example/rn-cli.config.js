@@ -18,13 +18,12 @@ module.exports = {
     ];
   },
   getBlacklistRE() {
-    /* eslint-disable prettier/prettier */
     return blacklist([
       new RegExp(
-        `^${escape(path.resolve(__dirname, '..', 'node_modules'))}\\/.*$`,
+        `^${escape(path.resolve(__dirname, '..', 'node_modules'))}\\/.*$`
       ),
       new RegExp(
-        `^${escape(path.resolve(__dirname, '..', 'docs', 'node_modules'))}\\/.*$`,
+        `^${escape(path.resolve(__dirname, '..', 'docs', 'node_modules'))}\\/.*$`
       ),
     ]);
   },
