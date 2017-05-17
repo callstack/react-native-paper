@@ -34,7 +34,7 @@ export default class Portal extends PureComponent<void, Props, void> {
     ) {
       throw new Error(
         "Couldn't find portal manager in the context or props. " +
-          "You need to wrap your root component in '<PortalHost />'",
+          "You need to wrap your root component in '<PortalHost />'"
       );
     }
     this._key = this.context[manager].mount(this.props);

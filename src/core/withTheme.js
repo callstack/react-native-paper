@@ -34,7 +34,7 @@ export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
       if (typeof this.state.theme !== 'object' || this.state.theme === null) {
         throw new Error(
           "Couldn't find theme in the context or props. " +
-            "You need to wrap your component in '<ThemeProvider />' or pass a 'theme' prop",
+            "You need to wrap your component in '<ThemeProvider />' or pass a 'theme' prop"
         );
       }
     }
