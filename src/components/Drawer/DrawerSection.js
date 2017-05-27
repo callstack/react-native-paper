@@ -1,17 +1,18 @@
 /* @flow */
 
 import color from 'color';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
 import Divider from '../Divider';
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types/Theme';
 
 type Props = {
-  children: any;
-  label?: string;
-  theme: Theme;
-}
+  children: any,
+  label?: string,
+  theme: Theme,
+};
 
 const DrawerSection = ({ children, label, theme, ...props }: Props) => {
   const { colors, fonts } = theme;
@@ -20,10 +21,15 @@ const DrawerSection = ({ children, label, theme, ...props }: Props) => {
 
   return (
     <View {...props}>
-      { label &&
-      <View style={{ height: 40, justifyContent: 'center' }}>
-       <Text numberOfLines={1} style={{ color: labelColor, fontFamily, marginLeft: 16 }}>{label}</Text>
-      </View>}
+      {label &&
+        <View style={{ height: 40, justifyContent: 'center' }}>
+          <Text
+            numberOfLines={1}
+            style={{ color: labelColor, fontFamily, marginLeft: 16 }}
+          >
+            {label}
+          </Text>
+        </View>}
       {children}
       <Divider style={{ marginVertical: 4 }} />
     </View>

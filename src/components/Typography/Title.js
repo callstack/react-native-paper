@@ -1,21 +1,19 @@
 /* @flow */
 
 import React from 'react';
-import {
-  StyleSheet,
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 import StyledText from './StyledText';
 
 type Props = {
-  style?: any;
-}
+  style?: any,
+};
 
 const Title = (props: Props) => (
   <StyledText
     {...props}
     alpha={0.87}
-    family='medium'
-    style={[ styles.text, props.style ]}
+    family="medium"
+    style={[styles.text, props.style]}
   />
 );
 

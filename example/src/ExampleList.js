@@ -1,19 +1,9 @@
 /* @flow */
 
-import React, {
-  Component,
-  PropTypes,
- } from 'react';
-import {
-  ListView,
-  Text,
-  StyleSheet,
-} from 'react-native';
-import {
-  Colors,
-  TouchableRipple,
-  Divider,
-} from 'react-native-paper';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { ListView, Text, StyleSheet } from 'react-native';
+import { Colors, TouchableRipple, Divider } from 'react-native-paper';
 import ButtonExample from './ButtonExample';
 import CardExample from './CardExample';
 import CheckboxExample from './CheckboxExample';
@@ -24,6 +14,7 @@ import PaperExample from './PaperExample';
 import RippleExample from './RippleExample';
 import RadioButtonExample from './RadioButtonExample';
 import TextExample from './TextExample';
+import SearchExample from './SearchExample';
 
 export const examples = {
   button: ButtonExample,
@@ -36,30 +27,31 @@ export const examples = {
   ripple: RippleExample,
   radio: RadioButtonExample,
   text: TextExample,
+  search: SearchExample,
 };
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 const dataSource = ds.cloneWithRows(Object.keys(examples));
 
 export default class ExampleList extends Component {
-
-  static route = {
-    navigationBar: {
-      title: 'Examples',
-    },
+  static navigationOptions = {
+    title: 'Examples',
   };
 
   static propTypes = {
-    navigator: PropTypes.object,
+    navigation: PropTypes.object,
   };
 
   _renderRow = id => (
-    <TouchableRipple style={styles.item} onPress={() => this.props.navigator.push(id)}>
+    <TouchableRipple
+      style={styles.item}
+      onPress={() => this.props.navigation.navigate(id)}
+    >
       <Text style={styles.text}>{examples[id].title}</Text>
     </TouchableRipple>
   );
 
-  _renderSeparator = (sectionId, rowId) => <Divider key={rowId}/>;
+  _renderSeparator = (sectionId, rowId) => <Divider key={rowId} />;
 
   render() {
     return (

@@ -1,23 +1,10 @@
 /* @flow */
 
-import Exponent from 'exponent';
+import Expo from 'expo';
 import React, { Component } from 'react';
-import {
-  View,
-  StyleSheet,
-  Platform,
-} from 'react-native';
-import {
-  NavigationProvider,
-  StackNavigation,
-} from '@exponent/ex-navigation';
-import {
-  Colors,
-  Drawer,
-  Provider as PaperProvider,
-} from 'react-native-paper';
-import Router from './src/Router';
-
+import { View, StyleSheet, Platform } from 'react-native';
+import { Drawer, Provider as PaperProvider } from 'react-native-paper';
+import RootNavigator from './src/RootNavigator';
 
 const DrawerItems = [
   { label: 'Inbox', icon: 'inbox', key: 0 },
@@ -31,25 +18,26 @@ class App extends Component {
   state = {
     open: false,
     drawerItemIndex: 0,
-  }
+  };
 
-  _handleOpenDrawer = () => this.setState({ open: true })
+  _handleOpenDrawer = () => this.setState({ open: true });
 
-  _handleCloseDrawer = () => this.setState({ open: false })
+  _handleCloseDrawer = () => this.setState({ open: false });
 
-  _setDrawerItem = index => this.setState({ drawerItemIndex: index })
+  _setDrawerItem = index => this.setState({ drawerItemIndex: index });
 
   _renderDrawerItems = () => {
     return (
       <View style={styles.drawerContent}>
-        <Drawer.Section label='Subheader'>
+        <Drawer.Section label="Subheader">
           {DrawerItems.map((props, index) => (
             <Drawer.Item
               {...props}
               key={props.key}
               active={this.state.drawerItemIndex === index}
               onPress={() => this._setDrawerItem(index)}
-            />))}
+            />
+          ))}
         </Drawer.Section>
       </View>
     );
@@ -58,25 +46,14 @@ class App extends Component {
   render() {
     return (
       <PaperProvider>
-        <NavigationProvider router={Router}>
-          <Drawer
-            onOpen={this._handleOpenDrawer}
-            onClose={this._handleCloseDrawer}
-            open={this.state.open}
-            content={this._renderDrawerItems()}
-          >
-            <StackNavigation
-              defaultRouteConfig={{
-                navigationBar: {
-                  title: 'Examples',
-                  tintColor: Colors.white,
-                  backgroundColor: Colors.indigo500,
-                },
-              }}
-              initialRoute={Router.getRoute('home')}
-            />
-          </Drawer>
-        </NavigationProvider>
+        <Drawer
+          onOpen={this._handleOpenDrawer}
+          onClose={this._handleCloseDrawer}
+          open={this.state.open}
+          content={this._renderDrawerItems()}
+        >
+          <RootNavigator />
+        </Drawer>
       </PaperProvider>
     );
   }
@@ -89,4 +66,4 @@ const styles = StyleSheet.create({
   },
 });
 
-Exponent.registerRootComponent(App);
+Expo.registerRootComponent(App);

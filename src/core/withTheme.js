@@ -1,17 +1,15 @@
 /* @flow */
 
-import React, {
-  PureComponent,
-  PropTypes,
-} from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { theme } from './ThemeProvider';
 import type { Theme } from '../types/Theme';
 
 type State = {
-  theme: Theme
-}
+  theme: Theme,
+};
 
-export default function withTheme<T>(Comp: ReactClass<T>): ReactClass<T> {
+export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
   class ThemedComponent extends PureComponent<void, *, State> {
     static displayName = `withTheme(${Comp.displayName || Comp.name})`;
 
@@ -35,14 +33,17 @@ export default function withTheme<T>(Comp: ReactClass<T>): ReactClass<T> {
     componentDidMount() {
       if (typeof this.state.theme !== 'object' || this.state.theme === null) {
         throw new Error(
-          'Couldn\'t find theme in the context or props. ' +
-          'You need to wrap your component in \'<ThemeProvider />\' or pass a \'theme\' prop'
+          "Couldn't find theme in the context or props. " +
+            "You need to wrap your component in '<ThemeProvider />' or pass a 'theme' prop"
         );
       }
     }
 
     componentWillReceiveProps(nextProps, nextContext: any) {
-      if (nextProps.theme !== this.props.theme || nextContext[theme] !== this.context[theme]) {
+      if (
+        nextProps.theme !== this.props.theme ||
+        nextContext[theme] !== this.context[theme]
+      ) {
         this.setState({
           theme: this._merge(nextContext[theme], nextProps.theme),
         });

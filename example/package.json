@@ -6,12 +6,18 @@
   "private": true,
   "main": "main.js",
   "dependencies": {
-    "@exponent/ex-navigation": "^2.0.0",
-    "@exponent/vector-icons": "^2.0.3",
-    "exponent": "^11.0.2",
-    "react": "~15.3.2",
-    "react-native": "github:exponentjs/react-native#sdk-11.0.3",
-    "react-native-paper": "file:../",
-    "react-native-vector-icons": "git+https://github.com/exponentjs/react-native-vector-icons.git"
+    "@expo/vector-icons": "^4.0.0",
+    "color": "^0.11.4",
+    "escape-string-regexp": "^1.0.5",
+    "expo": "~16.0.0",
+    "prop-types": "^15.5.10",
+    "react": "16.0.0-alpha.6",
+    "react-native": "git+https://github.com/expo/react-native.git#sdk-16.0.0",
+    "react-native-drawer": "^2.3.0",
+    "react-navigation": "^1.0.0-beta.9"
+  },
+  "devDependencies": {
+    "babel-plugin-module-resolver": "^2.7.0",
+    "babel-preset-expo": "^1.0.0"
   }
 }

@@ -1,18 +1,18 @@
 /* @flow */
 
 import React from 'react';
-import {
-  ListView,
-  StyleSheet,
-} from 'react-native';
-import {
-  Divider,
-  Subheading,
-  Colors,
-} from 'react-native-paper';
+import { ListView, StyleSheet } from 'react-native';
+import { Divider, Subheading, Colors } from 'react-native-paper';
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-const dataSource = ds.cloneWithRows([ 'Apple', 'Banana', 'Coconut', 'Lemon', 'Mango', 'Peach' ]);
+const dataSource = ds.cloneWithRows([
+  'Apple',
+  'Banana',
+  'Coconut',
+  'Lemon',
+  'Mango',
+  'Peach',
+]);
 
 const DividerExample = () => {
   return (

@@ -1,24 +1,21 @@
 /* @flow */
 
-import React, {
-  Component,
-  Children,
-  PropTypes,
-} from 'react';
+import React, { Component, Children } from 'react';
+import PropTypes from 'prop-types';
 import Portal from './Portal';
 import ThemeProvider from '../../core/ThemeProvider';
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types/Theme';
 
 type Props = {
-  children?: any;
-  theme: Theme;
-}
+  children?: any,
+  theme: Theme,
+};
 
 /**
  * Themed portal is a special portal which preserves the theme in the context.
  */
-class ThemedPortal extends Component <void, Props, void> {
+class ThemedPortal extends Component<void, Props, void> {
   static propTypes = {
     children: PropTypes.element.isRequired,
     theme: PropTypes.object.isRequired,

@@ -1,33 +1,27 @@
 /* @flow */
 
-import React, {
-  PureComponent,
-  PropTypes,
-} from 'react';
-import {
-  TouchableNativeFeedback,
-  View,
-  Platform,
-} from 'react-native';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { TouchableNativeFeedback, View, Platform } from 'react-native';
 
 type Props = {
-  borderless: boolean;
-  delayPressIn?: number;
-  onPress?: ?Function;
-  onPressIn?: ?Function;
-  onPressOut?: ?Function;
-  rippleColor: string;
-  children?: any;
-  style?: any;
-}
+  borderless: boolean,
+  delayPressIn?: number,
+  onPress?: ?Function,
+  onPressIn?: ?Function,
+  onPressOut?: ?Function,
+  rippleColor: string,
+  children?: any,
+  style?: any,
+};
 
 type DefaultProps = {
-  borderless: boolean;
-  rippleColor: string;
-}
+  borderless: boolean,
+  rippleColor: string,
+};
 
-export default class TouchableRipple extends PureComponent<DefaultProps, Props, void> {
-
+export default class TouchableRipple
+  extends PureComponent<DefaultProps, Props, void> {
   static propTypes = {
     children: PropTypes.element.isRequired,
     borderless: PropTypes.bool,
@@ -42,7 +36,7 @@ export default class TouchableRipple extends PureComponent<DefaultProps, Props, 
   static defaultProps = {
     borderless: false,
     rippleColor: 'rgba(0, 0, 0, .32)',
-  }
+  };
 
   render() {
     const {
@@ -54,7 +48,7 @@ export default class TouchableRipple extends PureComponent<DefaultProps, Props, 
       rippleColor,
       borderless,
       style,
-     } = this.props;
+    } = this.props;
 
     return (
       <TouchableNativeFeedback
@@ -62,9 +56,11 @@ export default class TouchableRipple extends PureComponent<DefaultProps, Props, 
         onPress={onPress}
         onPressIn={onPressIn}
         onPressOut={onPressOut}
-        background={Platform.Version >= 21 ?
-          TouchableNativeFeedback.Ripple(rippleColor, borderless) :
-          TouchableNativeFeedback.SelectableBackground()}
+        background={
+          Platform.Version >= 21
+            ? TouchableNativeFeedback.Ripple(rippleColor, borderless)
+            : TouchableNativeFeedback.SelectableBackground()
+        }
       >
         <View style={style}>
           {children}

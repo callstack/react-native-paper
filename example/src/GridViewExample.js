@@ -1,21 +1,12 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import {
-  View,
-  StyleSheet,
-} from 'react-native';
-import {
-  Colors,
-  Card,
-  Text,
-  GridView,
-} from 'react-native-paper';
+import { View, StyleSheet } from 'react-native';
+import { Colors, Card, Text, GridView } from 'react-native-paper';
 
 const CARD_SIZE = 160;
 
 export default class GridViewExample extends Component {
-
   static title = 'GridView';
 
   state = {
@@ -47,7 +38,7 @@ export default class GridViewExample extends Component {
     });
   };
 
-  _renderRow = (index) => {
+  _renderRow = index => {
     return (
       <Card style={styles.tile}>
         <View style={styles.inner}>

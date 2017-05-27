@@ -1,17 +1,13 @@
 /* @flow */
 
-import React, {
-  PropTypes,
-} from 'react';
-import {
-  StyleSheet,
-  View,
-} from 'react-native';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { StyleSheet, View } from 'react-native';
 
 type Props = {
-  inset?: boolean;
-  style?: any;
-}
+  inset?: boolean,
+  style?: any,
+};
 
 /**
  * A divider is a thin, lightweight rule that groups content in lists and page layouts
@@ -19,10 +15,7 @@ type Props = {
 const Divider = (props: Props) => {
   const { inset, style } = props;
   return (
-    <View
-      {...props}
-      style={[ styles.divider, inset && styles.inset, style ]}
-    />
+    <View {...props} style={[styles.divider, inset && styles.inset, style]} />
   );
 };
 

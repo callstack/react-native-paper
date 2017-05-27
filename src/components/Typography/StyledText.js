@@ -1,20 +1,18 @@
 /* @flow */
 
 import color from 'color';
-import React, {
-  PureComponent,
-  PropTypes,
-} from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import Text from './Text';
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types/Theme';
 
 type Props = {
-  alpha: number;
-  family: 'regular' | 'medium' | 'light' | 'thin';
-  style?: any;
-  theme: Theme;
-}
+  alpha: number,
+  family: 'regular' | 'medium' | 'light' | 'thin',
+  style?: any,
+  theme: Theme,
+};
 
 class StyledText extends PureComponent<void, Props, void> {
   static propTypes = {
@@ -22,7 +20,7 @@ class StyledText extends PureComponent<void, Props, void> {
     family: PropTypes.string.isRequired,
     theme: PropTypes.object.isRequired,
     style: Text.propTypes.style,
-  }
+  };
 
   render() {
     const { theme, alpha, family, style, ...rest } = this.props;
@@ -32,7 +30,7 @@ class StyledText extends PureComponent<void, Props, void> {
     return (
       <Text
         {...rest}
-        style={[ { color: textColor, fontFamily }, style, this.props.style ]}
+        style={[{ color: textColor, fontFamily }, style, this.props.style]}
       />
     );
   }

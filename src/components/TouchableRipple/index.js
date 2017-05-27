@@ -1,3 +1,3 @@
 /* @flow */
 
-export { default as default } from './TouchableRipple';
+export { default } from './TouchableRipple';

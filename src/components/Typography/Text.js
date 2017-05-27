@@ -1,17 +1,15 @@
 /* @flow */
 
-import React, {
-  PureComponent,
-  PropTypes,
-} from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { Text as NativeText } from 'react-native';
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types/Theme';
 
 type Props = {
-  style?: any;
-  theme: Theme;
-}
+  style?: any,
+  theme: Theme,
+};
 
 /**
  * Text component which follows settings from the theme
@@ -31,16 +29,16 @@ class Text extends PureComponent<void, Props, void> {
   }
 
   render() {
-    const {
-      style,
-      theme,
-    } = this.props;
+    const { style, theme } = this.props;
 
     return (
       <NativeText
         {...this.props}
         ref={c => (this._root = c)}
-        style={[ { fontFamily: theme.fonts.regular, color: theme.colors.text }, style ]}
+        style={[
+          { fontFamily: theme.fonts.regular, color: theme.colors.text },
+          style,
+        ]}
       />
     );
   }

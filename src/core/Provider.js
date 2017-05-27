@@ -1,18 +1,15 @@
 /* @flow */
 
-import React, {
-  PureComponent,
-  PropTypes,
-  Children,
-} from 'react';
+import React, { PureComponent, Children } from 'react';
+import PropTypes from 'prop-types';
 import ThemeProvider from './ThemeProvider';
 import PortalHost from '../components/Portal/PortalHost';
 import type { Theme } from '../types/Theme';
 
 type Props = {
-  children?: any;
-  theme?: Theme
-}
+  children?: any,
+  theme?: Theme,
+};
 
 export default class Provider extends PureComponent<void, Props, void> {
   static propTypes = {
