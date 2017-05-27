@@ -1,10 +1,6 @@
 /* @flow */
 
-import React, {
-  PureComponent,
-  PropTypes,
-  Children,
-} from 'react';
+import React, { PureComponent, Children } from 'react';
 import {
   Animated,
   View,
@@ -15,6 +11,7 @@ import {
   BackAndroid,
   ScrollView,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import ThemedPortal from './Portal/ThemedPortal';
 import { black, white } from '../styles/colors';
 import Paper from './Paper';
@@ -24,30 +21,27 @@ import Card from './Card';
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
 type Props = {
-  children?: any;
-  dismissable?: boolean;
-  onRequestClose?: Function;
-  title?: string;
-  titleColor?: string;
-  style?: any;
-  visible: boolean;
-}
+  children?: any,
+  dismissable?: boolean,
+  onRequestClose?: Function,
+  title?: string,
+  titleColor?: string,
+  style?: any,
+  visible: boolean,
+};
 
 type DefaultProps = {
-  dismissable: boolean;
-  titleColor: string;
-  visible: boolean;
+  dismissable: boolean,
+  titleColor: string,
+  visible: boolean,
 };
 
 type State = {
-  opacity: Animated.Value;
-  rendered: boolean;
+  opacity: Animated.Value,
+  rendered: boolean,
 };
 
-const {
-    width: deviceWidth,
-    height: deviceHeight,
-} = Dimensions.get('window');
+const { width: deviceWidth, height: deviceHeight } = Dimensions.get('window');
 
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
@@ -83,7 +77,6 @@ const {
  */
 
 export default class Dialog extends PureComponent<DefaultProps, Props, State> {
-
   static propTypes = {
     children: PropTypes.node.isRequired,
     /**
@@ -113,8 +106,7 @@ export default class Dialog extends PureComponent<DefaultProps, Props, State> {
     dismissable: true,
     titleColor: black,
     visible: false,
-  }
-
+  };
 
   constructor(props: Props) {
     super(props);
@@ -151,30 +143,24 @@ export default class Dialog extends PureComponent<DefaultProps, Props, State> {
       this._hideDialog();
     }
     return true;
-  }
+  };
 
   _showDialog = () => {
     BackAndroid.addEventListener('hardwareBackPress', this._handleBack);
-    Animated.timing(
-      this.state.opacity,
-      {
-        toValue: 1,
-        duration: 300,
-        easing: Easing.easing,
-      }
-    ).start();
-  }
+    Animated.timing(this.state.opacity, {
+      toValue: 1,
+      duration: 300,
+      easing: Easing.easing,
+    }).start();
+  };
 
   _hideDialog = () => {
     BackAndroid.removeEventListener('hardwareBackPress', this._handleBack);
-    Animated.timing(
-      this.state.opacity,
-      {
-        toValue: 0,
-        duration: 300,
-        easing: Easing.easing,
-      }
-    ).start(() => {
+    Animated.timing(this.state.opacity, {
+      toValue: 0,
+      duration: 300,
+      easing: Easing.easing,
+    }).start(() => {
       if (this.props.visible && this.props.onRequestClose) {
         this.props.onRequestClose();
       }
@@ -193,34 +179,44 @@ export default class Dialog extends PureComponent<DefaultProps, Props, State> {
   render() {
     if (!this.state.rendered) return null;
 
-    const {
-      children,
-      dismissable,
-      title,
-      titleColor,
-      style,
-    } = this.props;
+    const { children, dismissable, title, titleColor, style } = this.props;
     const childrenArray = Children.toArray(children);
-    const actionBtnsChildren = childrenArray.filter(child => child.type === Card.Actions);
-    const restOfChildren = childrenArray.filter(child => child.type !== Card.Actions);
+    const actionBtnsChildren = childrenArray.filter(
+      child => child.type === Card.Actions
+    );
+    const restOfChildren = childrenArray.filter(
+      child => child.type !== Card.Actions
+    );
 
     return (
       <ThemedPortal>
         <Animated.View
-          style={[ { opacity: this.state.opacity }, styles.wrapper ]}
+          style={[{ opacity: this.state.opacity }, styles.wrapper]}
         >
-          <View style={[ StyleSheet.absoluteFill, { backgroundColor: 'rgba(0, 0, 0, .5)' } ]}/>
-          {dismissable && <TouchableWithoutFeedback onPress={this._hideDialog}>
-              <View style={StyleSheet.absoluteFill}/>
-          </TouchableWithoutFeedback>}
-          <AnimatedPaper elevation={24} style={[ { opacity: this.state.opacity }, styles.container, style ]}>
-              {title && <Title style={[ styles.title, { color: titleColor } ]}>{title}</Title>}
-              <ScrollView style={styles.scrollViewContainer}>
-                <View>
-                  {restOfChildren}
-                </View>
-              </ScrollView>
-              <View>{actionBtnsChildren}</View>
+          <View
+            style={[
+              StyleSheet.absoluteFill,
+              { backgroundColor: 'rgba(0, 0, 0, .5)' },
+            ]}
+          />
+          {dismissable &&
+            <TouchableWithoutFeedback onPress={this._hideDialog}>
+              <View style={StyleSheet.absoluteFill} />
+            </TouchableWithoutFeedback>}
+          <AnimatedPaper
+            elevation={24}
+            style={[{ opacity: this.state.opacity }, styles.container, style]}
+          >
+            {title &&
+              <Title style={[styles.title, { color: titleColor }]}>
+                {title}
+              </Title>}
+            <ScrollView style={styles.scrollViewContainer}>
+              <View>
+                {restOfChildren}
+              </View>
+            </ScrollView>
+            <View>{actionBtnsChildren}</View>
           </AnimatedPaper>
         </Animated.View>
       </ThemedPortal>
