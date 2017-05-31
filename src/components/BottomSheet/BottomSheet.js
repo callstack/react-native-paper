@@ -143,6 +143,7 @@ export default class BottomSheet extends PureComponent<void, Props, State> {
   };
 
   _showSheet = () => {
+    BackAndroid.removeEventListener('hardwareBackPress', this._handleBack);
     BackAndroid.addEventListener('hardwareBackPress', this._handleBack);
     Animated.parallel([
       Animated.spring(this.state.opacity, {
@@ -180,14 +181,9 @@ export default class BottomSheet extends PureComponent<void, Props, State> {
       if (this.props.visible) {
         this.props.onRequestClose();
       }
-      global.requestAnimationFrame(() => {
-        if (this.props.visible) {
-          this._showSheet();
-        } else {
-          this.setState({
-            rendered: false,
-          });
-        }
+
+      this.setState({
+        rendered: false,
       });
     });
   };
@@ -259,10 +255,8 @@ export default class BottomSheet extends PureComponent<void, Props, State> {
       const canMaximize = contentHeight > screenHeight;
 
       if (isMovingDown) {
-        if (maximized) {
-          if (isFast) {
-            this._unMaximizeSheet();
-          }
+        if (maximized && isFast) {
+          this._unMaximizeSheet();
         } else {
           if (isFast) {
             this._hideSheet();
