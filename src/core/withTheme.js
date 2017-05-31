@@ -9,7 +9,7 @@ type State = {
   theme: Theme,
 };
 
-export default function withThemeName<T: *>(
+export default function withTheme<T: *>(
   Comp: ReactClass<T>
 ): ReactClass<T> {
   class ThemedComponent extends PureComponent<void, *, State> {
@@ -81,7 +81,7 @@ export default function withThemeName<T: *>(
       }
     };
 
-    _subscription: Object;
+    _subscription: { remove: Function };
     _root: any;
 
     render() {
