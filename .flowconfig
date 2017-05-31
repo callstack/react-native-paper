@@ -35,6 +35,10 @@
 .*/docs/node_modules/fbjs/.*
 .*/docs/node_modules/react/.*
 
+; Ignore some modules we don't need to parse
+.*/node_modules/prettier/.*
+.*/node_modules/eslint.*
+
 [include]
 
 [libs]
