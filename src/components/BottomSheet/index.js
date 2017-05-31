@@ -1,3 +1,3 @@
 /* @flow */
 
-export { default as default } from './BottomSheet';
+export { default } from './BottomSheet';

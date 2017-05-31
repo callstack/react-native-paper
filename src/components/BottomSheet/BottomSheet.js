@@ -1,9 +1,7 @@
 /* @flow */
 
-import React, {
-  PropTypes,
-  PureComponent,
-} from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import {
   Animated,
   BackAndroid,
@@ -18,20 +16,20 @@ import BottomSheetList from './BottomSheetList';
 import BottomSheetListItem from './BottomSheetListItem';
 
 type Props = {
-  visible: boolean;
-  onRequestClose: Function;
-  children?: any;
-  style?: any;
-}
+  visible: boolean,
+  onRequestClose: Function,
+  children?: any,
+  style?: any,
+};
 
 type State = {
-  opacity: Animated.Value;
-  position: Animated.Value;
-  maximized: Animated.Value;
-  rendered: boolean;
-  screenHeight: number;
-  contentHeight: number;
-}
+  opacity: Animated.Value,
+  position: Animated.Value,
+  maximized: Animated.Value,
+  rendered: boolean,
+  screenHeight: number,
+  contentHeight: number,
+};
 
 const INITIAL_POSITION = 64;
 const SWIPE_DISTANCE_THRESHOLD = 80;
@@ -66,7 +64,6 @@ const SWIPE_DISTANCE_THRESHOLD = 80;
  * ```
  */
 export default class BottomSheet extends PureComponent<void, Props, State> {
-
   static List = BottomSheetList;
   static ListItem = BottomSheetListItem;
 
@@ -84,7 +81,7 @@ export default class BottomSheet extends PureComponent<void, Props, State> {
      */
     children: PropTypes.node.isRequired,
     style: Paper.propTypes.style,
-  }
+  };
 
   constructor(props: Props) {
     super(props);
@@ -254,7 +251,9 @@ export default class BottomSheet extends PureComponent<void, Props, State> {
 
   _releaseGesture = (evt, gestureState) => {
     const isMovingDown = gestureState.dy > 0;
-    const isFast = gestureState.vy > 0.75 || Math.abs(gestureState.dy) > SWIPE_DISTANCE_THRESHOLD;
+    const isFast =
+      gestureState.vy > 0.75 ||
+      Math.abs(gestureState.dy) > SWIPE_DISTANCE_THRESHOLD;
     this.state.maximized.stopAnimation((maximized: number) => {
       const { screenHeight, contentHeight } = this.state;
       const canMaximize = contentHeight > screenHeight;
@@ -278,14 +277,14 @@ export default class BottomSheet extends PureComponent<void, Props, State> {
     });
   };
 
-  _handleContentLayout = (e) => {
+  _handleContentLayout = e => {
     const contentHeight = e.nativeEvent.layout.height;
     this.setState({
       contentHeight,
     });
   };
 
-  _handleScreenLayout = (e) => {
+  _handleScreenLayout = e => {
     const screenHeight = e.nativeEvent.layout.height;
     this.setState({
       screenHeight,
@@ -309,9 +308,9 @@ export default class BottomSheet extends PureComponent<void, Props, State> {
       Animated.add(
         position,
         maximized.interpolate({
-          inputRange: [ 0, 1 ],
-          outputRange: [ contentOffset, 0 ],
-        }),
+          inputRange: [0, 1],
+          outputRange: [contentOffset, 0],
+        })
       ),
       screenHeight - contentHeight,
       screenHeight
@@ -319,16 +318,27 @@ export default class BottomSheet extends PureComponent<void, Props, State> {
     const contentOpacity = screenHeight && contentHeight ? opacity : 0;
     return (
       <ThemedPortal>
-        <View onLayout={this._handleScreenLayout} style={StyleSheet.absoluteFill}>
-          <TouchableWithoutFeedback style={styles.container} onPress={this._hideSheet}>
-            <Animated.View style={[ styles.container, styles.overlay, { opacity } ]} />
+        <View
+          onLayout={this._handleScreenLayout}
+          style={StyleSheet.absoluteFill}
+        >
+          <TouchableWithoutFeedback
+            style={styles.container}
+            onPress={this._hideSheet}
+          >
+            <Animated.View
+              style={[styles.container, styles.overlay, { opacity }]}
+            />
           </TouchableWithoutFeedback>
           <Animated.View
             {...this._panResponder.panHandlers}
             onLayout={this._handleContentLayout}
             style={[
               styles.sheet,
-              { opacity: contentOpacity, transform: [ { translateY: contentTranslate } ] },
+              {
+                opacity: contentOpacity,
+                transform: [{ translateY: contentTranslate }],
+              },
             ]}
           >
             <Paper elevation={12} style={this.props.style}>
@@ -355,4 +365,3 @@ const styles = StyleSheet.create({
     right: 0,
   },
 });
-
