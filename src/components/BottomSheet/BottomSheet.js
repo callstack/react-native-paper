@@ -144,7 +144,6 @@ export default class BottomSheet extends PureComponent<void, Props, State> {
 
   _showSheet = () => {
     BackAndroid.addEventListener('hardwareBackPress', this._handleBack);
-    this.state.position.flattenOffset(0);
     Animated.parallel([
       Animated.spring(this.state.opacity, {
         toValue: 1,
@@ -163,7 +162,6 @@ export default class BottomSheet extends PureComponent<void, Props, State> {
 
   _hideSheet = () => {
     BackAndroid.removeEventListener('hardwareBackPress', this._handleBack);
-    this.state.position.flattenOffset(0);
     Animated.parallel([
       Animated.spring(this.state.opacity, {
         toValue: 0,
@@ -254,9 +252,12 @@ export default class BottomSheet extends PureComponent<void, Props, State> {
     const isFast =
       gestureState.vy > 0.75 ||
       Math.abs(gestureState.dy) > SWIPE_DISTANCE_THRESHOLD;
+
+    this.state.position.flattenOffset();
     this.state.maximized.stopAnimation((maximized: number) => {
       const { screenHeight, contentHeight } = this.state;
       const canMaximize = contentHeight > screenHeight;
+
       if (isMovingDown) {
         if (maximized) {
           if (isFast) {
