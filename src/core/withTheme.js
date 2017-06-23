@@ -2,14 +2,16 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { theme } from './ThemeProvider';
+import { channel } from './ThemeProvider';
 import type { Theme } from '../types/Theme';
 
 type State = {
   theme: Theme,
 };
 
-export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
+export default function withTheme<T: *>(
+  Comp: ReactClass<T>
+): ReactClass<T> {
   class ThemedComponent extends PureComponent<void, *, State> {
     static displayName = `withTheme(${Comp.displayName || Comp.name})`;
 
@@ -18,36 +20,53 @@ export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
     };
 
     static contextTypes = {
-      [theme]: PropTypes.object,
+      [channel]: PropTypes.object,
     };
 
     constructor(props, context) {
       super(props, context);
+
+      const theme = this.context[channel] && this.context[channel].get();
+
+      if (typeof theme !== 'object' && typeof this.props.theme !== 'object') {
+        throw new Error(
+          `Couldn't find theme in the context or props. ` +
+            `You need to wrap your component in '<ThemeProvider />' or pass a 'theme' prop`
+        );
+      }
+
       this.state = {
-        theme: this._merge(context[theme], props.theme),
+        theme: this._merge(theme, this.props.theme),
       };
     }
 
     state: State;
 
     componentDidMount() {
-      if (typeof this.state.theme !== 'object' || this.state.theme === null) {
-        throw new Error(
-          "Couldn't find theme in the context or props. " +
-            "You need to wrap your component in '<ThemeProvider />' or pass a 'theme' prop"
+      this._subscription =
+        this.context[channel] &&
+        this.context[channel].subscribe(theme =>
+          this.setState({ theme: this._merge(theme, this.props.theme) })
         );
+    }
+
+    componentWillReceiveProps(nextProps: *) {
+      if (this.props.theme !== nextProps.theme) {
+        this.setState({
+          theme: this._merge(
+            this.context[channel] && this.context[channel].get(),
+            nextProps.theme
+          ),
+        });
       }
     }
 
-    componentWillReceiveProps(nextProps, nextContext: any) {
-      if (
-        nextProps.theme !== this.props.theme ||
-        nextContext[theme] !== this.context[theme]
-      ) {
-        this.setState({
-          theme: this._merge(nextContext[theme], nextProps.theme),
-        });
-      }
+    componentWillUnmount() {
+      this._subscription && this._subscription.remove();
+    }
+
+    getWrappedInstance() {
+      return this._root;
     }
 
     setNativeProps(...args) {
@@ -62,6 +81,7 @@ export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
       }
     };
 
+    _subscription: { remove: Function };
     _root: any;
 
     render() {

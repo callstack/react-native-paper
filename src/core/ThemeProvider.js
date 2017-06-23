@@ -14,7 +14,7 @@ type Props = {
   theme?: Theme,
 };
 
-export const theme = 'react-native-paper$theme';
+export const channel = 'react-native-paper$theme';
 
 export default class ThemeProvider
   extends PureComponent<DefaultProps, Props, void> {
@@ -28,14 +28,40 @@ export default class ThemeProvider
   };
 
   static childContextTypes = {
-    [theme]: PropTypes.object,
+    [channel]: PropTypes.object,
   };
 
   getChildContext() {
     return {
-      [theme]: this.props.theme,
+      [channel]: {
+        subscribe: this._subscribe,
+        get: this._get,
+      },
     };
   }
+
+  componentWillReceiveProps(nextProps: *) {
+    if (this.props.theme !== nextProps.theme) {
+      this._subscriptions.forEach(cb => cb(nextProps.theme));
+    }
+  }
+
+  _subscriptions = [];
+
+  _subscribe = (callback: Theme => void) => {
+    this._subscriptions.push(callback);
+
+    const remove = () => {
+      const index = this._subscriptions.indexOf(callback);
+      if (index > -1) {
+        this._subscriptions.splice(index, 1);
+      }
+    };
+
+    return { remove };
+  };
+
+  _get = () => this.props.theme;
 
   render() {
     return Children.only(this.props.children);
