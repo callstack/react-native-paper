@@ -134,7 +134,7 @@
     "react/jsx-no-duplicate-props": "error",
     "react/jsx-no-literals": "off",
     "react/jsx-no-undef": "error",
-    "react/jsx-pascal-case": "error",
+    "react/jsx-pascal-case": "off",
     "react/jsx-sort-props": "off",
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",

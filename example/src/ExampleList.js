@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { ListView, Text, StyleSheet } from 'react-native';
 import { Colors, TouchableRipple, Divider } from 'react-native-paper';
 import ButtonExample from './ButtonExample';
+import FABExample from './FABExample';
 import CardExample from './CardExample';
 import CheckboxExample from './CheckboxExample';
 import DividerExample from './DividerExample';
@@ -17,6 +18,7 @@ import SearchExample from './SearchExample';
 
 export const examples = {
   button: ButtonExample,
+  fab: FABExample,
   card: CardExample,
   checkbox: CheckboxExample,
   divider: DividerExample,
