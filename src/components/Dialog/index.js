@@ -6,17 +6,17 @@ import {
   View,
   Easing,
   StyleSheet,
-  Dimensions,
   TouchableWithoutFeedback,
   BackAndroid,
-  ScrollView,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import ThemedPortal from './Portal/ThemedPortal';
-import { black, white } from '../styles/colors';
-import Paper from './Paper';
-import Title from './Typography/Title';
-import Card from './Card';
+import ThemedPortal from '../Portal/ThemedPortal';
+import { black, white } from '../../styles/colors';
+import Paper from '../Paper';
+import Actions from './Actions';
+import Title from './Title';
+import Content from './Content';
+import ScrollArea from './ScrollArea';
 
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
@@ -24,15 +24,12 @@ type Props = {
   children?: any,
   dismissable?: boolean,
   onRequestClose?: Function,
-  title?: string,
-  titleColor?: string,
   style?: any,
   visible: boolean,
 };
 
 type DefaultProps = {
   dismissable: boolean,
-  titleColor: string,
   visible: boolean,
 };
 
@@ -40,8 +37,6 @@ type State = {
   opacity: Animated.Value,
   rendered: boolean,
 };
-
-const { width: deviceWidth, height: deviceHeight } = Dimensions.get('window');
 
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
@@ -62,12 +57,14 @@ const { width: deviceWidth, height: deviceHeight } = Dimensions.get('window');
  *         <Dialog
  *            visible={visible}
  *            onRequestClose={this._hideDialog}
- *            title='Alert'
  *         >
- *           <Paragraph>This is simple dialog</Paragraph>
- *           <Card.Actions>
+ *           <Dialog.Title>Alert</Dialog.Title>
+ *           <Dialog.Content>
+ *             <Paragraph>This is simple dialog</Paragraph>
+ *           </Dialog.Content>
+ *           <Dialog.Actions>
  *             <Button onPress={this._hideDialog}>Done</Button>
- *           </Card.Actions>
+ *           </Dialog.Actions>
  *         </Dialog>
  *       </View>
  *     );
@@ -77,6 +74,11 @@ const { width: deviceWidth, height: deviceHeight } = Dimensions.get('window');
  */
 
 export default class Dialog extends PureComponent<DefaultProps, Props, State> {
+  static Actions = Actions;
+  static Title = Title;
+  static Content = Content;
+  static ScrollArea = ScrollArea;
+
   static propTypes = {
     children: PropTypes.node.isRequired,
     /**
@@ -87,14 +89,6 @@ export default class Dialog extends PureComponent<DefaultProps, Props, State> {
      * Callback that is called when the user dismisses the dialog
      */
     onRequestClose: PropTypes.func.isRequired,
-    /**
-     * The title of the dialog
-     */
-    title: PropTypes.string,
-    /**
-     * The color of the title
-     */
-    titleColor: PropTypes.string,
     style: PropTypes.object,
     /**
      * Determines Whether the dialog is visible
@@ -179,14 +173,27 @@ export default class Dialog extends PureComponent<DefaultProps, Props, State> {
   render() {
     if (!this.state.rendered) return null;
 
-    const { children, dismissable, title, titleColor, style } = this.props;
+    const { children, dismissable, style } = this.props;
     const childrenArray = Children.toArray(children);
+    const title = childrenArray.find(child => child.type === Title);
     const actionBtnsChildren = childrenArray.filter(
-      child => child.type === Card.Actions
+      child => child.type === Actions
     );
     const restOfChildren = childrenArray.filter(
-      child => child.type !== Card.Actions
+      child => child.type !== Actions && child.type !== Title
     );
+    let restOfChildrenWithoutTitle = restOfChildren;
+    if (!title) {
+      restOfChildrenWithoutTitle = restOfChildren.map(child => {
+        if (child.type === Content) {
+          return React.cloneElement(child, {
+            style: { paddingTop: 24 },
+          });
+        } else {
+          return child;
+        }
+      });
+    }
 
     return (
       <ThemedPortal>
@@ -207,16 +214,11 @@ export default class Dialog extends PureComponent<DefaultProps, Props, State> {
             elevation={24}
             style={[{ opacity: this.state.opacity }, styles.container, style]}
           >
-            {title &&
-              <Title style={[styles.title, { color: titleColor }]}>
-                {title}
-              </Title>}
-            <ScrollView style={styles.scrollViewContainer}>
-              <View>
-                {restOfChildren}
-              </View>
-            </ScrollView>
-            <View>{actionBtnsChildren}</View>
+            <View style={styles.contentArea}>
+              {title}
+              {restOfChildrenWithoutTitle}
+            </View>
+            {actionBtnsChildren}
           </AnimatedPaper>
         </Animated.View>
       </ThemedPortal>
@@ -226,25 +228,12 @@ export default class Dialog extends PureComponent<DefaultProps, Props, State> {
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 96,
-    maxHeight: deviceHeight / 2,
-    width: deviceWidth - 52,
+    marginHorizontal: 26,
     borderRadius: 2,
     backgroundColor: white,
   },
   wrapper: {
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'center',
-    alignItems: 'center',
-  },
-  scrollViewContainer: {
-    marginHorizontal: 24,
-    marginBottom: 24,
-  },
-  title: {
-    marginBottom: 20,
-    marginTop: 24,
-    marginHorizontal: 24,
-    lineHeight: 24,
   },
 });

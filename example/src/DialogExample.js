@@ -1,12 +1,17 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { View, StyleSheet, ActivityIndicator, Platform } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ActivityIndicator,
+  Platform,
+  ScrollView,
+} from 'react-native';
 import {
   Paragraph,
   Colors,
   Button,
-  Card,
   RadioButton,
   Dialog,
 } from 'react-native-paper';
@@ -30,17 +35,28 @@ export default class DialogExample extends Component {
     return (
       <Dialog
         onRequestClose={() => this.setState({ visible1: false })}
-        title="Alert"
         visible={visible1}
       >
-        <Paragraph>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
-        </Paragraph>
-        <Card.Actions>
+        <Dialog.Title>Alert</Dialog.Title>
+        <Dialog.Content>
+          <Paragraph>
+            Material is the metaphor
+            {'\n'}
+            {'\n'}
+            A material metaphor is the unifying theory of a rationalized space and a system of motion. The material is grounded in tactile reality, inspired by the study of paper and ink, yet technologically advanced and open to imagination and magic.
+            {'\n'}
+            {'\n'}
+            Surfaces and edges of the material provide visual cues that are grounded in reality. The use of familiar tactile attributes helps users quickly understand affordances. Yet the flexibility of the material creates new affordances that supersede those in the physical world, without breaking the rules of physics.
+            {'\n'}
+            {'\n'}
+            The fundamentals of light, surface, and movement are key to conveying how objects move, interact, and exist in space and in relation to each other. Realistic lighting shows seams, divides space, and indicates moving parts.
+          </Paragraph>
+        </Dialog.Content>
+        <Dialog.Actions>
           <Button primary onPress={() => this.setState({ visible1: false })}>
             OK
           </Button>
-        </Card.Actions>
+        </Dialog.Actions>
       </Dialog>
     );
   };
@@ -50,35 +66,48 @@ export default class DialogExample extends Component {
     return (
       <Dialog
         onRequestClose={() => this.setState({ visible2: false })}
-        title="Choose an option"
         visible={visible2}
       >
-        <View style={styles.checkBoxRow}>
-          <RadioButton
-            checked={checked === 0}
-            onPress={() => this.setState({ checked: 0 })}
-          />
-          <Paragraph style={{ marginLeft: 16 }}>Option 1</Paragraph>
-        </View>
-        <View style={styles.checkBoxRow}>
-          <RadioButton
-            checked={checked === 1}
-            onPress={() => this.setState({ checked: 1 })}
-          />
-          <Paragraph style={{ marginLeft: 16 }}>Option 2</Paragraph>
-        </View>
-        <View style={styles.checkBoxRow}>
-          <RadioButton
-            checked={checked === 2}
-            onPress={() => this.setState({ checked: 2 })}
-          />
-          <Paragraph style={{ marginLeft: 16 }}>Option 3</Paragraph>
-        </View>
-        <Card.Actions>
+        <Dialog.Title>Choose an option</Dialog.Title>
+        <Dialog.ScrollArea style={{ maxHeight: 170 }}>
+          <ScrollView>
+            <View>
+              <View style={styles.checkBoxRow}>
+                <RadioButton
+                  checked={checked === 0}
+                  onPress={() => this.setState({ checked: 0 })}
+                />
+                <Paragraph style={{ marginLeft: 16 }}>Option 1</Paragraph>
+              </View>
+              <View style={styles.checkBoxRow}>
+                <RadioButton
+                  checked={checked === 1}
+                  onPress={() => this.setState({ checked: 1 })}
+                />
+                <Paragraph style={{ marginLeft: 16 }}>Option 2</Paragraph>
+              </View>
+              <View style={styles.checkBoxRow}>
+                <RadioButton
+                  checked={checked === 2}
+                  onPress={() => this.setState({ checked: 2 })}
+                />
+                <Paragraph style={{ marginLeft: 16 }}>Option 3</Paragraph>
+              </View>
+              <View style={styles.checkBoxRow}>
+                <RadioButton
+                  checked={checked === 3}
+                  onPress={() => this.setState({ checked: 3 })}
+                />
+                <Paragraph style={{ marginLeft: 16 }}>Option 4</Paragraph>
+              </View>
+            </View>
+          </ScrollView>
+        </Dialog.ScrollArea>
+        <Dialog.Actions>
           <Button primary onPress={() => this.setState({ visible2: false })}>
             Done
           </Button>
-        </Card.Actions>
+        </Dialog.Actions>
       </Dialog>
     );
   };
@@ -88,19 +117,20 @@ export default class DialogExample extends Component {
     return (
       <Dialog
         onRequestClose={() => this.setState({ visible3: false })}
-        title="Alert"
         visible={visible3}
       >
-        <View
-          style={{ flexDirection: 'row', alignItems: 'center', padding: 8 }}
-        >
-          <ActivityIndicator
-            color={Colors.indigo500}
-            size={isIOS ? 'large' : 48}
-            style={{ marginRight: 16 }}
-          />
-          <Paragraph>Loading.....</Paragraph>
-        </View>
+        <Dialog.Content>
+          <View
+            style={{ flexDirection: 'row', alignItems: 'center', padding: 8 }}
+          >
+            <ActivityIndicator
+              color={Colors.indigo500}
+              size={isIOS ? 'large' : 48}
+              style={{ marginRight: 16 }}
+            />
+            <Paragraph>Loading.....</Paragraph>
+          </View>
+        </Dialog.Content>
       </Dialog>
     );
   };
@@ -110,17 +140,19 @@ export default class DialogExample extends Component {
     return (
       <Dialog
         onRequestClose={() => this.setState({ visible4: false })}
-        title="Alert"
         visible={visible4}
         dismissable={false}
       >
-        <Paragraph>This is an undismissable dialog!!</Paragraph>
-        <Card.Actions>
+        <Dialog.Title>Alert</Dialog.Title>
+        <Dialog.Content>
+          <Paragraph>This is an undismissable dialog!!</Paragraph>
+        </Dialog.Content>
+        <Dialog.Actions>
           <Button color={Colors.teal500} disabled>Disagree</Button>
           <Button primary onPress={() => this.setState({ visible4: false })}>
             Agree
           </Button>
-        </Card.Actions>
+        </Dialog.Actions>
       </Dialog>
     );
   };
@@ -130,22 +162,23 @@ export default class DialogExample extends Component {
     return (
       <Dialog
         onRequestClose={() => this.setState({ visible5: false })}
-        title="Alert"
-        titleColor={Colors.white}
         style={{ backgroundColor: Colors.grey800 }}
         visible={visible5}
       >
-        <Paragraph style={{ color: Colors.white }}>
-          This is a dialog with custom colors
-        </Paragraph>
-        <Card.Actions>
+        <Dialog.Title color={Colors.white}>Alert</Dialog.Title>
+        <Dialog.Content>
+          <Paragraph style={{ color: Colors.white }}>
+            This is a dialog with custom colors
+          </Paragraph>
+        </Dialog.Content>
+        <Dialog.Actions>
           <Button
             color={Colors.teal500}
             onPress={() => this.setState({ visible5: false })}
           >
             OK
           </Button>
-        </Card.Actions>
+        </Dialog.Actions>
       </Dialog>
     );
   };
@@ -182,7 +215,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.grey200,
-    padding: 4,
+    padding: 16,
   },
   checkBoxRow: {
     flexDirection: 'row',
