@@ -4,11 +4,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, TextInput } from 'react-native';
 import color from 'color';
-
 import withTheme from '../core/withTheme';
 import Icon from './Icon';
 import TouchableRipple from './TouchableRipple';
 import Paper from './Paper';
+import { white } from '../styles/colors';
 import type { Theme } from '../types/Theme';
 
 type Props = {
@@ -16,6 +16,7 @@ type Props = {
   value: string,
   onChangeText: (query: string) => void,
   theme: Theme,
+  style?: any,
 };
 
 /**
@@ -36,6 +37,7 @@ class SearchBar extends Component<void, Props, void> {
      */
     onChangeText: PropTypes.func.isRequired,
     theme: PropTypes.object.isRequired,
+    style: Paper.propTypes.style,
   };
 
   _handleClearPress = () => {
@@ -43,31 +45,41 @@ class SearchBar extends Component<void, Props, void> {
   };
 
   render() {
-    const { placeholder, value, theme } = this.props;
+    const { placeholder, value, theme, style, ...rest } = this.props;
+    const { colors, roundness } = theme;
+    const textColor = colors.text;
+    const iconColor = color(textColor).alpha(0.54).rgbaString();
+    const rippleColor = color(textColor).alpha(0.32).rgbaString();
 
     return (
-      <Paper elevation={4} style={styles.container}>
+      <Paper
+        elevation={4}
+        style={[{ borderRadius: roundness }, styles.container, style]}
+      >
         <Icon
-          style={[styles.iconWrapper, styles.icon]}
+          style={[styles.icon, { color: iconColor }]}
           name="search"
           size={24}
         />
         <TextInput
-          style={styles.input}
+          style={[styles.input, { color: textColor }]}
           placeholder={placeholder || ''}
-          value={value}
-          placeholderTextColor={theme.colors.placeholder}
+          placeholderTextColor={colors.placeholder}
           underlineColorAndroid="transparent"
-          onChangeText={this.props.onChangeText}
           returnKeyType="search"
+          {...rest}
         />
         {value
           ? <TouchableRipple
               borderless
+              rippleColor={rippleColor}
               onPress={this._handleClearPress}
-              style={styles.iconWrapper}
             >
-              <Icon style={styles.icon} name="close" size={24} />
+              <Icon
+                style={[styles.icon, { color: iconColor }]}
+                name="close"
+                size={24}
+              />
             </TouchableRipple>
           : null}
       </Paper>
@@ -78,19 +90,16 @@ class SearchBar extends Component<void, Props, void> {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
-    margin: 8,
+    backgroundColor: white,
+    margin: 4,
   },
   input: {
     flex: 1,
     fontSize: 18,
   },
-  iconWrapper: {
-    padding: 16,
-  },
   icon: {
-    color: color('black').alpha(0.54).rgbaString(),
+    margin: 12,
   },
 });
 
