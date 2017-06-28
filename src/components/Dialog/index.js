@@ -125,6 +125,10 @@ export default Dialog;
 
 const styles = StyleSheet.create({
   container: {
+    /**
+     * This is a fix for Android because overflow: visible isn't supported
+     */
+    marginVertical: 56,
     marginHorizontal: 26,
     borderRadius: 2,
     backgroundColor: white,
