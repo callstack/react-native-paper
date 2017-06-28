@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { ListView, Text, StyleSheet } from 'react-native';
 import { Colors, TouchableRipple, Divider } from 'react-native-paper';
 import ButtonExample from './ButtonExample';
+import FABExample from './FABExample';
 import CardExample from './CardExample';
 import CheckboxExample from './CheckboxExample';
 import DialogExample from './DialogExample';
@@ -14,10 +15,11 @@ import PaperExample from './PaperExample';
 import RippleExample from './RippleExample';
 import RadioButtonExample from './RadioButtonExample';
 import TextExample from './TextExample';
-import SearchExample from './SearchExample';
+import SearchBarExample from './SearchBarExample';
 
 export const examples = {
   button: ButtonExample,
+  fab: FABExample,
   card: CardExample,
   checkbox: CheckboxExample,
   dialog: DialogExample,
@@ -27,7 +29,7 @@ export const examples = {
   ripple: RippleExample,
   radio: RadioButtonExample,
   text: TextExample,
-  search: SearchExample,
+  searchbar: SearchBarExample,
 };
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });

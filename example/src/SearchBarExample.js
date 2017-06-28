@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { SearchBar } from 'react-native-paper';
 
 export default class SearchExample extends Component {
-  static title = 'Search';
+  static title = 'Searchbar';
 
   state = {
     query: '',
