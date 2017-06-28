@@ -143,7 +143,7 @@ export default class Dialog extends PureComponent<DefaultProps, Props, State> {
     BackAndroid.addEventListener('hardwareBackPress', this._handleBack);
     Animated.timing(this.state.opacity, {
       toValue: 1,
-      duration: 300,
+      duration: 280,
       easing: Easing.easing,
     }).start();
   };
@@ -152,7 +152,7 @@ export default class Dialog extends PureComponent<DefaultProps, Props, State> {
     BackAndroid.removeEventListener('hardwareBackPress', this._handleBack);
     Animated.timing(this.state.opacity, {
       toValue: 0,
-      duration: 300,
+      duration: 280,
       easing: Easing.easing,
     }).start(() => {
       if (this.props.visible && this.props.onRequestClose) {
@@ -214,10 +214,8 @@ export default class Dialog extends PureComponent<DefaultProps, Props, State> {
             elevation={24}
             style={[{ opacity: this.state.opacity }, styles.container, style]}
           >
-            <View style={styles.contentArea}>
-              {title}
-              {restOfChildrenWithoutTitle}
-            </View>
+            {title}
+            {restOfChildrenWithoutTitle}
             {actionBtnsChildren}
           </AnimatedPaper>
         </Animated.View>

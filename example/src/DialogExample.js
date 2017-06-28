@@ -38,20 +38,22 @@ export default class DialogExample extends Component {
         visible={visible1}
       >
         <Dialog.Title>Alert</Dialog.Title>
-        <Dialog.Content>
-          <Paragraph>
-            Material is the metaphor
-            {'\n'}
-            {'\n'}
-            A material metaphor is the unifying theory of a rationalized space and a system of motion. The material is grounded in tactile reality, inspired by the study of paper and ink, yet technologically advanced and open to imagination and magic.
-            {'\n'}
-            {'\n'}
-            Surfaces and edges of the material provide visual cues that are grounded in reality. The use of familiar tactile attributes helps users quickly understand affordances. Yet the flexibility of the material creates new affordances that supersede those in the physical world, without breaking the rules of physics.
-            {'\n'}
-            {'\n'}
-            The fundamentals of light, surface, and movement are key to conveying how objects move, interact, and exist in space and in relation to each other. Realistic lighting shows seams, divides space, and indicates moving parts.
-          </Paragraph>
-        </Dialog.Content>
+        <Dialog.ScrollArea style={{ maxHeight: 220, paddingHorizontal: 0 }}>
+          <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>
+            <Paragraph>
+              Material is the metaphor
+              {'\n'}
+              {'\n'}
+              A material metaphor is the unifying theory of a rationalized space and a system of motion. The material is grounded in tactile reality, inspired by the study of paper and ink, yet technologically advanced and open to imagination and magic.
+              {'\n'}
+              {'\n'}
+              Surfaces and edges of the material provide visual cues that are grounded in reality. The use of familiar tactile attributes helps users quickly understand affordances. Yet the flexibility of the material creates new affordances that supersede those in the physical world, without breaking the rules of physics.
+              {'\n'}
+              {'\n'}
+              The fundamentals of light, surface, and movement are key to conveying how objects move, interact, and exist in space and in relation to each other. Realistic lighting shows seams, divides space, and indicates moving parts.
+            </Paragraph>
+          </ScrollView>
+        </Dialog.ScrollArea>
         <Dialog.Actions>
           <Button primary onPress={() => this.setState({ visible1: false })}>
             OK
@@ -69,8 +71,8 @@ export default class DialogExample extends Component {
         visible={visible2}
       >
         <Dialog.Title>Choose an option</Dialog.Title>
-        <Dialog.ScrollArea style={{ maxHeight: 170 }}>
-          <ScrollView>
+        <Dialog.ScrollArea style={{ maxHeight: 170, paddingHorizontal: 0 }}>
+          <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>
             <View>
               <View style={styles.checkBoxRow}>
                 <RadioButton
@@ -119,10 +121,9 @@ export default class DialogExample extends Component {
         onRequestClose={() => this.setState({ visible3: false })}
         visible={visible3}
       >
+        <Dialog.Title>Progress Dialog</Dialog.Title>
         <Dialog.Content>
-          <View
-            style={{ flexDirection: 'row', alignItems: 'center', padding: 8 }}
-          >
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <ActivityIndicator
               color={Colors.indigo500}
               size={isIOS ? 'large' : 48}

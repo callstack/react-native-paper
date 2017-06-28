@@ -12,15 +12,20 @@ type Props = {
 };
 
 const Title = ({ children, theme: { colors: { text } }, color }: Props) => (
-  <PaperTitle style={[styles.text, { color: color || text }]}>
+  <PaperTitle style={[styles.text, { color: color || text, margin: 0 }]}>
     {children}
   </PaperTitle>
 );
 
 const styles = StyleSheet.create({
   text: {
-    paddingTop: 24,
-    paddingBottom: 20,
+    /**
+     * I subtracted 2 from these values because Text component has 
+     * 2 pixels margin vertically by default
+     */
+    margin: 0,
+    paddingTop: 22,
+    paddingBottom: 18,
     paddingHorizontal: 24,
   },
 });
