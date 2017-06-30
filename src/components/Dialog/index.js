@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { Children } from 'react';
-import { Animated, StyleSheet } from 'react-native';
+import { Animated, StyleSheet, Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import Modal from '../Modal';
 import { black, white } from '../../styles/colors';
@@ -126,9 +126,12 @@ export default Dialog;
 const styles = StyleSheet.create({
   container: {
     /**
-     * This is a fix for Android because overflow: visible isn't supported
+     * This is a fix for Android because overflow: visible isn't supported.
+     * One downside for this fix is that it will disable clicks on the area
+     * of the shadow around the dialog, consequently, if you click around the
+     * dialog (44 pixel from the top and bottom) it won't be dismissed. 
      */
-    marginVertical: 56,
+    marginVertical: Platform.OS === 'android' ? 44 : 0,
     marginHorizontal: 26,
     borderRadius: 2,
     backgroundColor: white,
