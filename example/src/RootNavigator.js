@@ -12,9 +12,11 @@ const routes = Object.keys(examples)
   .reduce((acc, { id, item }) => {
     const Comp = item;
     const Screen = props => <Comp {...props} />;
-
+    
     Screen.navigationOptions = {
       title: Comp.title,
+      /* $FlowFixMe */
+      ...Comp.navigationOptions,
     };
 
     return {
