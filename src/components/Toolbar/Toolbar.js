@@ -6,8 +6,25 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import withTheme from '../../core/withTheme';
 import Paper from '../Paper';
 import ToolbarContent from './ToolbarContent';
+import ToolbarAction from './ToolbarAction';
 
-class Toolbar extends Component {
+import type { Theme } from '../../types/Theme';
+
+type Props = {
+  children?: any,
+  elevation?: number,
+  translucent?: boolean,
+  theme: Theme,
+}
+
+type DefaultProps = {
+  elevation: number,
+  translucent: boolean,
+};
+
+const toolbarHeight = Platform.OS === 'ios' ? 44 : 56;
+
+class Toolbar extends Component<DefaultProps, Props, void> {
   
   static defaultProps = {
     elevation: 4,
@@ -15,6 +32,7 @@ class Toolbar extends Component {
   };
   
   static Content = ToolbarContent;
+  static Action = ToolbarAction;
   
   render() {
     const { children, elevation, theme, translucent } = this.props;
@@ -22,14 +40,13 @@ class Toolbar extends Component {
     
     const toolbarStyle = {
       backgroundColor: colors.primary,
-      // TODO make height orientation aware
-      height: Platform.OS === 'ios' ? 44 : 56 + (translucent ? StatusBar.currentHeight : 0),
-      paddingHorizontal: 16,
+      // TODO make height orientation aware ???
+      height: toolbarHeight + (translucent ? StatusBar.currentHeight : 0),
     };
     
     return (
-      <Paper elevation={elevation} style={[ toolbarStyle ]}>
-        <View style={[ styles.content, elevation && { paddingTop: StatusBar.currentHeight }]}>
+      <Paper elevation={elevation} style={[ toolbarStyle, translucent && { paddingTop: StatusBar.currentHeight } ]}>
+        <View style={[ styles.content ]}>
           { children }
         </View>
       </Paper>
@@ -39,7 +56,10 @@ class Toolbar extends Component {
 
 const styles = StyleSheet.create({
   content: {
-    flex: 1,
+    flexDirection: 'row',
+    height: toolbarHeight,
+    alignItems:'center',
+    paddingHorizontal: 8,
   },
 });
 

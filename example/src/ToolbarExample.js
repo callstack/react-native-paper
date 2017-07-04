@@ -15,16 +15,26 @@ export default class ToolbarExample extends Component {
     return (
       <View style={styles.container} >
         <Toolbar translucent>
-          {/*<Toolbar.Action icon={icon} onPress={} />*/}
+          <Toolbar.Action
+            dark
+            icon="arrow-back"
+            onPress={() => this.props.navigation.goBack()}
+          />
           <Toolbar.Content
+            dark
             title="Title"
             subTitle="Subtitle"
-            dark
           />
-          {/*<Toolbar.ActionGroup>*/}
-            {/*<Toolbar.Action icon={icon} onPress={} />*/}
-            {/*<Toolbar.Action icon={icon} onPress={} />*/}
-          {/*</Toolbar.ActionGroup>*/}
+          <Toolbar.Action
+            dark
+            icon="search"
+            onPress={() => {}}
+          />
+          <Toolbar.Action
+            dark
+            icon="more-vert"
+            onPress={() => {}}
+          />
         </Toolbar>
         <View style={styles.content} />
       </View>

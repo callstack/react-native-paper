@@ -4,9 +4,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import color from 'color';
 
-import Paragraph from '../Typography/Paragraph';
-import Title from '../Typography/Title';
-import Subheading from '../Typography/Subheading';
+import Text from '../Typography/Text';
 
 import withTheme from '../../core/withTheme';
 import { white} from '../../styles/colors';
@@ -36,18 +34,20 @@ class ToolbarContent extends Component {
     const titleStyles = [styles.text, { color: titleColor, fontFamily: fontFamilyMedium }, titleStyle];
     
     return (
-      <View style={styles.container}>
-        { !subTitle ?
-          <Title style={titleStyles}>{title}</Title>
-          :
-          <Subheading style={titleStyles}>
-            {title}
-          </Subheading>
-        }
+    <View style={styles.container}>
+        <Text
+          style={[ !subTitle ? styles.title : styles.subTitle, titleStyles ]}
+          numberOfLines={1}
+        >
+          {title}
+        </Text>
         { subTitle &&
-          <Paragraph style={[styles.text, {color: subTitleColor}, subTitleStyle]}>
+          <Text
+            style={[styles.subTitle, { color: subTitleColor }, subTitleStyle]}
+            numberOfLines={1}
+          >
             {subTitle}
-          </Paragraph>
+          </Text>
         }
       </View>
     )
@@ -57,12 +57,13 @@ class ToolbarContent extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    paddingHorizontal: 16,
   },
-  text: {
-    lineHeight: null,
-    marginVertical: 0,
-    color: 'white',
+  title: {
+    fontSize: 20,
+  },
+  subTitle: {
+    fontSize: 14,
   },
 });
 
