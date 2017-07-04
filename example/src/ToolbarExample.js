@@ -27,6 +27,7 @@ export default class ToolbarExample extends Component {
           />
           <Toolbar.Content
             dark
+            hasStartIcon
             title="Title"
             subtitle={showSubtitle ? 'Subtitle' : null}
           />

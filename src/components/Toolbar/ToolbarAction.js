@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, View } from 'react-native';
+import { Platform, View } from 'react-native';
 import color from 'color';
 
 import { black, white } from '../../styles/colors';
@@ -39,22 +39,37 @@ export default class ToolbarAction extends Component<void, Props, void> {
     const iconColor = dark ? white : color(black).alpha(0.54).rgbaString();
     const rippleColor = color(iconColor).alpha(0.32).rgbaString();
 
+    const touchableStyle =
+      Platform.OS === 'ios'
+        ? {
+            height: 44,
+            width: 44,
+            borderRadius: 44 / 2,
+            justifyContent: 'center',
+          }
+        : {
+            height: 28,
+            width: 28,
+            justifyContent: 'center',
+            marginHorizontal: 8,
+          };
+    const iconStyle = { alignSelf: 'center' };
+
     return (
       <TouchableRipple
         borderless
         onPress={onPress}
         rippleColor={rippleColor}
-        style={style}
+        hitSlop={
+          Platform.OS === 'android'
+            ? { top: 8, left: 8, bottom: 8, right: 8 }
+            : null
+        }
+        style={[touchableStyle, style]}
         {...rest}
       >
-        <Icon color={iconColor} name={icon} size={24} style={styles.icon} />
+        <Icon color={iconColor} name={icon} size={24} style={iconStyle} />
       </TouchableRipple>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  icon: {
-    paddingHorizontal: 8,
-  },
-});

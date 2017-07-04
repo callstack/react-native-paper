@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   toolbar: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 8,
+    paddingHorizontal: Platform.OS === 'ios' ? 0 : 6,
   },
 });
 
