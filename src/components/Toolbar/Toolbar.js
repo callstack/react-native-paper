@@ -11,11 +11,14 @@ import ToolbarAction from './ToolbarAction';
 import type { Theme } from '../../types/Theme';
 
 type Props = {
+  backgroundColor?: string,
   children?: any,
   elevation?: number,
+  height?: number,
+  style?: any,
   translucent?: boolean,
   theme: Theme,
-}
+};
 
 type DefaultProps = {
   elevation: number,
@@ -25,40 +28,55 @@ type DefaultProps = {
 const toolbarHeight = Platform.OS === 'ios' ? 44 : 56;
 
 class Toolbar extends Component<DefaultProps, Props, void> {
-  
   static defaultProps = {
     elevation: 4,
     translucent: Platform.OS === 'ios',
   };
-  
+
   static Content = ToolbarContent;
   static Action = ToolbarAction;
-  
+
   render() {
-    const { children, elevation, theme, translucent } = this.props;
+    const {
+      backgroundColor,
+      children,
+      elevation,
+      height,
+      style,
+      theme,
+      translucent,
+    } = this.props;
     const { colors } = theme;
-    
+
     const toolbarStyle = {
-      backgroundColor: colors.primary,
+      backgroundColor: backgroundColor || colors.primary,
       // TODO make height orientation aware ???
-      height: toolbarHeight + (translucent ? StatusBar.currentHeight : 0),
+      height: height ||
+        toolbarHeight + (translucent ? StatusBar.currentHeight : 0),
     };
-    
+
     return (
-      <Paper elevation={elevation} style={[ toolbarStyle, translucent && { paddingTop: StatusBar.currentHeight } ]}>
-        <View style={[ styles.content ]}>
-          { children }
+      <Paper
+        elevation={elevation}
+        style={[
+          toolbarStyle,
+          translucent && { paddingTop: StatusBar.currentHeight },
+        ]}
+      >
+        <View
+          style={[{ height: height || toolbarHeight }, styles.content, style]}
+        >
+          {children}
         </View>
       </Paper>
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
   content: {
     flexDirection: 'row',
-    height: toolbarHeight,
-    alignItems:'center',
+    alignItems: 'center',
     paddingHorizontal: 8,
   },
 });

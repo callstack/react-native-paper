@@ -14,7 +14,7 @@ import PaperExample from './PaperExample';
 import RippleExample from './RippleExample';
 import RadioButtonExample from './RadioButtonExample';
 import TextExample from './TextExample';
-import ToolbarExample from './ToolbarExample'
+import ToolbarExample from './ToolbarExample';
 import SearchBarExample from './SearchBarExample';
 
 export const examples = {

@@ -13,15 +13,15 @@ type Props = {
   icon: string,
   onPress?: () => void,
   style?: any,
-}
+};
 
 export default class ToolbarAction extends Component<void, Props, void> {
   render() {
     const { dark, icon, onPress, style } = this.props;
-    
+
     const iconColor = dark ? white : color(black).alpha(0.54).rgbaString();
     const rippleColor = color(iconColor).alpha(0.32).rgbaString();
-    
+
     return (
       <TouchableRipple
         borderless
@@ -30,19 +30,14 @@ export default class ToolbarAction extends Component<void, Props, void> {
         rippleColor={rippleColor}
         style={style}
       >
-        <Icon
-          color={iconColor}
-          name={icon}
-          size={24}
-          style={styles.icon}
-        />
+        <Icon color={iconColor} name={icon} size={24} style={styles.icon} />
       </TouchableRipple>
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
   icon: {
     paddingHorizontal: 8,
-  }
+  },
 });

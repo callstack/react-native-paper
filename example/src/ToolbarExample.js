@@ -5,15 +5,14 @@ import { View, StyleSheet } from 'react-native';
 import { Colors, Toolbar } from 'react-native-paper';
 
 export default class ToolbarExample extends Component {
-  
   static title = 'Toolbar';
   static navigationOptions = {
     header: null,
   };
-  
+
   render() {
     return (
-      <View style={styles.container} >
+      <View style={styles.container}>
         <Toolbar translucent>
           <Toolbar.Action
             dark
@@ -25,16 +24,8 @@ export default class ToolbarExample extends Component {
             title="Title"
             subTitle="Subtitle"
           />
-          <Toolbar.Action
-            dark
-            icon="search"
-            onPress={() => {}}
-          />
-          <Toolbar.Action
-            dark
-            icon="more-vert"
-            onPress={() => {}}
-          />
+          <Toolbar.Action dark icon="search" onPress={() => {}} />
+          <Toolbar.Action dark icon="more-vert" onPress={() => {}} />
         </Toolbar>
         <View style={styles.content} />
       </View>
@@ -50,5 +41,5 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     padding: 4,
-  }
+  },
 });
