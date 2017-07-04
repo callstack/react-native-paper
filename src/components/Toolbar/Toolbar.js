@@ -33,7 +33,10 @@ class Toolbar extends Component<DefaultProps, Props, void> {
     /**
      * Toolbar content
      */
-    children: PropTypes.element.isRequired,
+    children: PropTypes.oneOfType([
+      PropTypes.node,
+      PropTypes.arrayOf(PropTypes.node),
+    ]),
     /**
      * Toolbar height
      */
