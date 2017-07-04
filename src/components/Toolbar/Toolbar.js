@@ -50,7 +50,6 @@ class Toolbar extends Component<DefaultProps, Props, void> {
   };
 
   static defaultProps = {
-    height: Platform.OS === 'ios' ? 44 : 56,
     translucent: Platform.OS === 'ios',
   };
 
@@ -68,10 +67,13 @@ class Toolbar extends Component<DefaultProps, Props, void> {
     } = this.props;
     const { colors } = theme;
 
+    const toolbarHeight = Platform.OS === 'ios' ? 44 : 56;
+
     const toolbarStyle = {
       backgroundColor: backgroundColor || colors.primary,
       // TODO make height orientation aware ???
-      height: height + (translucent ? StatusBar.currentHeight : 0),
+      height: (height || toolbarHeight) +
+        (translucent ? StatusBar.currentHeight : 0),
     };
 
     return (
@@ -82,7 +84,9 @@ class Toolbar extends Component<DefaultProps, Props, void> {
           translucent && { paddingTop: StatusBar.currentHeight },
         ]}
       >
-        <View style={[{ height }, styles.content, style]}>
+        <View
+          style={[{ height: height || toolbarHeight }, styles.content, style]}
+        >
           {children}
         </View>
       </Paper>
