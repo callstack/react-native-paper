@@ -1,0 +1,15 @@
+language: node_js
+cache:
+  directories:
+    - $HOME/.npm
+node_js:
+  - 'stable'
+before_install:
+  - npm i -g npm@latest
+install:
+  - npm install
+  - cd docs && npm install && cd ..
+  - cd example && npm install && cd ..
+script:
+  - npm run lint
+  - npm run flow -- check
