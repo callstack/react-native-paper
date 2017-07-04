@@ -14,11 +14,11 @@ import type { Theme } from '../../types/Theme';
 
 type Props = {
   dark?: boolean,
-  subTitle?: string,
-  title: string,
+  subtitle?: string | React.Element<*>,
+  title: string | React.Element<*>,
   titleStyle?: any,
   style?: any,
-  subTitleStyle?: any,
+  subtitleStyle?: any,
   theme: Theme,
 };
 
@@ -31,11 +31,11 @@ class ToolbarContent extends Component<void, Props, void> {
     /**
      * Text for the subtitle
      */
-    subTitle: PropTypes.string,
+    subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     /**
      * Text for the title
      */
-    title: PropTypes.string.isRequired,
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     /**
      * Style for the title
      */
@@ -44,15 +44,15 @@ class ToolbarContent extends Component<void, Props, void> {
     /**
      * Style for the subtitle
      */
-    subTitleStyle: View.propTypes.style,
+    subtitleStyle: View.propTypes.style,
     theme: PropTypes.object.isRequired,
   };
 
   render() {
     const {
       dark,
-      subTitle,
-      subTitleStyle,
+      subtitle,
+      subtitleStyle,
       style,
       titleStyle,
       theme,
@@ -60,14 +60,13 @@ class ToolbarContent extends Component<void, Props, void> {
     } = this.props;
     const { colors, fonts } = theme;
     const { text: primaryText, secondaryText } = colors;
-    const fontFamilyMedium = fonts['medium'];
+    const fontFamilyMedium = fonts.medium;
 
     const titleColor = dark ? white : primaryText;
-    const subTitleColor = dark
+    const subtitleColor = dark
       ? color(white).alpha(0.7).rgbaString()
       : secondaryText;
     const titleStyles = [
-      styles.text,
       { color: titleColor, fontFamily: fontFamilyMedium },
       titleStyle,
     ];
@@ -75,17 +74,17 @@ class ToolbarContent extends Component<void, Props, void> {
     return (
       <View style={[styles.container, style]}>
         <Text
-          style={[!subTitle ? styles.title : styles.subTitle, titleStyles]}
+          style={[!subtitle ? styles.title : styles.subtitle, titleStyles]}
           numberOfLines={1}
         >
           {title}
         </Text>
-        {subTitle &&
+        {subtitle &&
           <Text
-            style={[styles.subTitle, { color: subTitleColor }, subTitleStyle]}
+            style={[styles.subtitle, { color: subtitleColor }, subtitleStyle]}
             numberOfLines={1}
           >
-            {subTitle}
+            {subtitle}
           </Text>}
       </View>
     );
@@ -100,7 +99,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
   },
-  subTitle: {
+  subtitle: {
     fontSize: 14,
   },
 });

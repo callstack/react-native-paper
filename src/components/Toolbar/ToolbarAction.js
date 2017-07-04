@@ -34,7 +34,7 @@ export default class ToolbarAction extends Component<void, Props, void> {
   };
 
   render() {
-    const { dark, icon, onPress, style } = this.props;
+    const { dark, icon, onPress, style, ...rest } = this.props;
 
     const iconColor = dark ? white : color(black).alpha(0.54).rgbaString();
     const rippleColor = color(iconColor).alpha(0.32).rgbaString();
@@ -45,6 +45,7 @@ export default class ToolbarAction extends Component<void, Props, void> {
         onPress={onPress}
         rippleColor={rippleColor}
         style={style}
+        {...rest}
       >
         <Icon color={iconColor} name={icon} size={24} style={styles.icon} />
       </TouchableRipple>

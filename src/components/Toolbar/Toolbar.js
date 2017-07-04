@@ -12,59 +12,39 @@ import ToolbarAction from './ToolbarAction';
 import type { Theme } from '../../types/Theme';
 
 type Props = {
-  backgroundColor?: string,
   children?: any,
-  height?: number,
   style?: any,
-  translucent?: boolean,
+  statusBarIsTranslucent?: boolean,
   theme: Theme,
 };
 
 type DefaultProps = {
-  translucent: boolean,
+  statusBarIsTranslucent: boolean,
 };
 
 class Toolbar extends Component<DefaultProps, Props, void> {
   static propTypes = {
     /**
-     * Color used for the background
-     */
-    backgroundColor: PropTypes.string,
-    /**
      * Toolbar content
      */
-    children: PropTypes.oneOfType([
-      PropTypes.node,
-      PropTypes.arrayOf(PropTypes.node),
-    ]),
-    /**
-     * Toolbar height
-     */
-    height: PropTypes.number,
+    children: PropTypes.node.isRequired,
     style: View.propTypes.style,
     /**
-     * Whether Toolbar needs to adapt to a translucent StatusBar or not
+     * Whether Toolbar needs to adapt to a statusBarIsTranslucent StatusBar or not
      */
-    translucent: PropTypes.bool,
+    statusBarIsTranslucent: PropTypes.bool,
     theme: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
-    translucent: Platform.OS === 'ios',
+    statusBarIsTranslucent: Platform.OS === 'ios',
   };
 
   static Content = ToolbarContent;
   static Action = ToolbarAction;
 
   render() {
-    const {
-      backgroundColor,
-      children,
-      height,
-      style,
-      theme,
-      translucent,
-    } = this.props;
+    const { children, style, theme, statusBarIsTranslucent } = this.props;
     const { colors } = theme;
 
     const toolbarHeight = Platform.OS === 'ios' ? 44 : 56;
@@ -72,28 +52,30 @@ class Toolbar extends Component<DefaultProps, Props, void> {
       Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
 
     const toolbarStyle = {
-      backgroundColor: backgroundColor || colors.primary,
+      backgroundColor: (style && style.backgroundColor) || colors.primary,
       // TODO make height orientation aware ???
-      height: (height || toolbarHeight) + (translucent ? statusBarHeight : 0),
+      height:
+        ((style && style.height) || toolbarHeight) +
+        (statusBarIsTranslucent ? statusBarHeight : 0),
     };
 
     return (
       <Paper
         elevation={4}
-        style={[toolbarStyle, translucent && { paddingTop: statusBarHeight }]}
+        style={[
+          toolbarStyle,
+          statusBarIsTranslucent && { paddingTop: statusBarHeight },
+          styles.toolbar,
+        ]}
       >
-        <View
-          style={[{ height: height || toolbarHeight }, styles.content, style]}
-        >
-          {children}
-        </View>
+        {children}
       </Paper>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  content: {
+  toolbar: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 8,

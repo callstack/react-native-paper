@@ -11,15 +11,15 @@ export default class ToolbarExample extends Component {
   };
 
   state = {
-    showSubTitle: true,
+    showSubtitle: true,
   };
 
   render() {
-    const { showSubTitle } = this.state;
+    const { showSubtitle } = this.state;
 
     return (
       <View style={styles.container}>
-        <Toolbar translucent>
+        <Toolbar statusBarIsTranslucent>
           <Toolbar.Action
             dark
             icon="arrow-back"
@@ -28,7 +28,7 @@ export default class ToolbarExample extends Component {
           <Toolbar.Content
             dark
             title="Title"
-            subTitle={showSubTitle ? 'Subtitle' : null}
+            subtitle={showSubtitle ? 'Subtitle' : null}
           />
           <Toolbar.Action dark icon="search" onPress={() => {}} />
           <Toolbar.Action dark icon="more-vert" onPress={() => {}} />
@@ -38,9 +38,9 @@ export default class ToolbarExample extends Component {
             accent
             raised
             onPress={() =>
-              this.setState({ showSubTitle: !this.state.showSubTitle })}
+              this.setState({ showSubtitle: !this.state.showSubtitle })}
           >
-            {`Subtitle: ${showSubTitle ? 'On' : 'Off'}`}
+            {`Subtitle: ${showSubtitle ? 'On' : 'Off'}`}
           </Button>
         </View>
       </View>
