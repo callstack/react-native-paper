@@ -162,9 +162,10 @@ class Button extends PureComponent<void, Props, State> {
     if (typeof dark === 'boolean') {
       isDark = dark;
     } else {
-      isDark = backgroundColor === 'transparent'
-        ? false
-        : !color(backgroundColor).light();
+      isDark =
+        backgroundColor === 'transparent'
+          ? false
+          : !color(backgroundColor).light();
     }
 
     if (disabled) {

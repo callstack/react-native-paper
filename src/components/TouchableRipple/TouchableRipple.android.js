@@ -20,8 +20,11 @@ type DefaultProps = {
   rippleColor: string,
 };
 
-export default class TouchableRipple
-  extends PureComponent<DefaultProps, Props, void> {
+export default class TouchableRipple extends PureComponent<
+  DefaultProps,
+  Props,
+  void
+> {
   static propTypes = {
     children: PropTypes.element.isRequired,
     borderless: PropTypes.bool,

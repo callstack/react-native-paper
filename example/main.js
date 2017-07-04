@@ -30,14 +30,14 @@ class App extends Component {
     return (
       <View style={styles.drawerContent}>
         <Drawer.Section label="Subheader">
-          {DrawerItems.map((props, index) => (
+          {DrawerItems.map((props, index) =>
             <Drawer.Item
               {...props}
               key={props.key}
               active={this.state.drawerItemIndex === index}
               onPress={() => this._setDrawerItem(index)}
             />
-          ))}
+          )}
         </Drawer.Section>
       </View>
     );

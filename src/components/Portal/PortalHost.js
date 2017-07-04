@@ -100,11 +100,11 @@ export default class Portals extends PureComponent<void, Props, State> {
               return [...acc, group];
             }
           }, [])
-          .map(({ position, items }) => (
+          .map(({ position, items }) =>
             <View key={position} style={StyleSheet.absoluteFill}>
               {items}
             </View>
-          ))}
+          )}
       </View>
     );
   }

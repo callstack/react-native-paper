@@ -25,7 +25,10 @@ export default class CardExample extends Component {
           <Card.Content>
             <Title>Abandoned Ship</Title>
             <Paragraph>
-              The Abandoned Ship is a wrecked ship located on Route 108 in Hoenn, originally being a ship named the S.S. Cactus. The second part of the ship can only be accessed by using Dive and contains the Scanner.
+              The Abandoned Ship is a wrecked ship located on Route 108 in
+              Hoenn, originally being a ship named the S.S. Cactus. The second
+              part of the ship can only be accessed by using Dive and contains
+              the Scanner.
             </Paragraph>
           </Card.Content>
         </Card>
@@ -41,7 +44,11 @@ export default class CardExample extends Component {
             <Title>Berries</Title>
             <Caption>Omega Ruby</Caption>
             <Paragraph>
-              Dotted around the Hoenn region, you will find loamy soil, many of which are housing berries. Once you have picked the berries, then you have the ability to use that loamy soil to grow your own berries. These can be any berry and will require attention to get the best crop.
+              Dotted around the Hoenn region, you will find loamy soil, many of
+              which are housing berries. Once you have picked the berries, then
+              you have the ability to use that loamy soil to grow your own
+              berries. These can be any berry and will require attention to get
+              the best crop.
             </Paragraph>
           </Card.Content>
         </Card>
