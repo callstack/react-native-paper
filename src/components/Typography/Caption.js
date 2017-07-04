@@ -8,14 +8,13 @@ type Props = {
   style?: any,
 };
 
-const Caption = (props: Props) => (
+const Caption = (props: Props) =>
   <StyledText
     {...props}
     alpha={0.54}
     family="regular"
     style={[styles.text, props.style]}
-  />
-);
+  />;
 
 export default Caption;
 

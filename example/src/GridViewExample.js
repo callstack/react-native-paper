@@ -42,7 +42,9 @@ export default class GridViewExample extends Component {
     return (
       <Card style={styles.tile}>
         <View style={styles.inner}>
-          <Text style={styles.text}>{index}</Text>
+          <Text style={styles.text}>
+            {index}
+          </Text>
         </View>
       </Card>
     );

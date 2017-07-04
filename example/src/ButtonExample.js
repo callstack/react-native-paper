@@ -21,8 +21,12 @@ export default class ButtonExample extends Component {
         </View>
         <View style={styles.row}>
           <Button raised>Raised</Button>
-          <Button raised primary>Primary</Button>
-          <Button raised color={Colors.pink500}>Custom</Button>
+          <Button raised primary>
+            Primary
+          </Button>
+          <Button raised color={Colors.pink500}>
+            Custom
+          </Button>
         </View>
         <View style={styles.row}>
           <Button icon="add-a-photo">Icon</Button>
@@ -38,7 +42,9 @@ export default class ButtonExample extends Component {
           </Button>
         </View>
         <View style={styles.row}>
-          <Button disabled icon="my-location">Disabled</Button>
+          <Button disabled icon="my-location">
+            Disabled
+          </Button>
           <Button disabled loading raised>
             Loading
           </Button>

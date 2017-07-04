@@ -34,8 +34,8 @@ export default StackNavigator(
       headerStyle: {
         backgroundColor: Colors.indigo500,
         paddingTop: Expo.Constants.statusBarHeight,
-        height: (Platform.OS === 'ios' ? 44 : 56) +
-          Expo.Constants.statusBarHeight,
+        height:
+          (Platform.OS === 'ios' ? 44 : 56) + Expo.Constants.statusBarHeight,
       },
     },
   }

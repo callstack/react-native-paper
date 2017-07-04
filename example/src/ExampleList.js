@@ -42,14 +42,15 @@ export default class ExampleList extends Component {
     navigation: PropTypes.object,
   };
 
-  _renderRow = id => (
+  _renderRow = id =>
     <TouchableRipple
       style={styles.item}
       onPress={() => this.props.navigation.navigate(id)}
     >
-      <Text style={styles.text}>{examples[id].title}</Text>
-    </TouchableRipple>
-  );
+      <Text style={styles.text}>
+        {examples[id].title}
+      </Text>
+    </TouchableRipple>;
 
   _renderSeparator = (sectionId, rowId) => <Divider key={rowId} />;
 

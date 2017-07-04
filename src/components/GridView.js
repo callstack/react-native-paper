@@ -30,8 +30,11 @@ type State = {
   layout: Layout,
 };
 
-export default class GridView
-  extends PureComponent<DefaultProps, Props, State> {
+export default class GridView extends PureComponent<
+  DefaultProps,
+  Props,
+  State
+> {
   static propTypes = {
     dataSource: PropTypes.instanceOf(ListView.DataSource).isRequired,
     spacing: PropTypes.number.isRequired,
@@ -83,7 +86,8 @@ export default class GridView
     const containerWidth = this.state.layout.width;
     const { getNumberOfColumns, spacing } = this.props;
     const style = {
-      width: (containerWidth - spacing) / getNumberOfColumns(containerWidth) -
+      width:
+        (containerWidth - spacing) / getNumberOfColumns(containerWidth) -
         spacing,
       margin: spacing / 2,
     };
