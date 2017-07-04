@@ -72,8 +72,8 @@ class Toolbar extends Component<DefaultProps, Props, void> {
     const toolbarStyle = {
       backgroundColor: backgroundColor || colors.primary,
       // TODO make height orientation aware ???
-      height: (height || toolbarHeight) +
-        (translucent ? StatusBar.currentHeight : 0),
+      height:
+        (height || toolbarHeight) + (translucent ? StatusBar.currentHeight : 0),
     };
 
     return (
