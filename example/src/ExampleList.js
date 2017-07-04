@@ -57,7 +57,6 @@ export default class ExampleList extends Component {
   render() {
     return (
       <ListView
-        style={styles.container}
         dataSource={dataSource}
         renderRow={this._renderRow}
         renderSeparator={this._renderSeparator}
