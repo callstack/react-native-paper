@@ -19,11 +19,7 @@ export default class ToolbarExample extends Component {
             icon="arrow-back"
             onPress={() => this.props.navigation.goBack()}
           />
-          <Toolbar.Content
-            dark
-            title="Title"
-            subTitle="Subtitle"
-          />
+          <Toolbar.Content dark title="Title" subTitle="Subtitle" />
           <Toolbar.Action dark icon="search" onPress={() => {}} />
           <Toolbar.Action dark icon="more-vert" onPress={() => {}} />
         </Toolbar>

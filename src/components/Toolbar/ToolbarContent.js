@@ -1,6 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 import color from 'color';
 
@@ -16,13 +17,36 @@ type Props = {
   subTitle?: string,
   title: string,
   titleStyle?: any,
-  theme: Theme,
   style?: any,
   subTitleStyle?: any,
+  theme: Theme,
 };
 
-class ToolbarContent extends Component {
-  props: Props;
+class ToolbarContent extends Component<void, Props, void> {
+  static propTypes = {
+    /**
+     * Theme color for the text, a dark toolbar will render light text and vice-versa
+     */
+    dark: PropTypes.bool,
+    /**
+     * Text for the subtitle
+     */
+    subTitle: PropTypes.string,
+    /**
+     * Text for the title
+     */
+    title: PropTypes.string.isRequired,
+    /**
+     * Style for the title
+     */
+    titleStyle: View.propTypes.style,
+    style: View.propTypes.style,
+    /**
+     * Style for the subtitle
+     */
+    subTitleStyle: View.propTypes.style,
+    theme: PropTypes.object.isRequired,
+  };
 
   render() {
     const {

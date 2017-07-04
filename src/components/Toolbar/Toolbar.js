@@ -1,6 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 
 import withTheme from '../../core/withTheme';
@@ -13,7 +14,6 @@ import type { Theme } from '../../types/Theme';
 type Props = {
   backgroundColor?: string,
   children?: any,
-  elevation?: number,
   height?: number,
   style?: any,
   translucent?: boolean,
@@ -21,15 +21,33 @@ type Props = {
 };
 
 type DefaultProps = {
-  elevation: number,
   translucent: boolean,
 };
 
-const toolbarHeight = Platform.OS === 'ios' ? 44 : 56;
-
 class Toolbar extends Component<DefaultProps, Props, void> {
+  static propTypes = {
+    /**
+     * Color used for the background
+     */
+    backgroundColor: PropTypes.string,
+    /**
+     * Toolbar content
+     */
+    children: PropTypes.element.isRequired,
+    /**
+     * Toolbar height
+     */
+    height: PropTypes.number,
+    style: View.propTypes.style,
+    /**
+     * Whether Toolbar needs to adapt to a translucent StatusBar or not
+     */
+    translucent: PropTypes.bool,
+    theme: PropTypes.object.isRequired,
+  };
+
   static defaultProps = {
-    elevation: 4,
+    height: Platform.OS === 'ios' ? 44 : 56,
     translucent: Platform.OS === 'ios',
   };
 
@@ -40,7 +58,6 @@ class Toolbar extends Component<DefaultProps, Props, void> {
     const {
       backgroundColor,
       children,
-      elevation,
       height,
       style,
       theme,
@@ -51,21 +68,18 @@ class Toolbar extends Component<DefaultProps, Props, void> {
     const toolbarStyle = {
       backgroundColor: backgroundColor || colors.primary,
       // TODO make height orientation aware ???
-      height: height ||
-        toolbarHeight + (translucent ? StatusBar.currentHeight : 0),
+      height: height + (translucent ? StatusBar.currentHeight : 0),
     };
 
     return (
       <Paper
-        elevation={elevation}
+        elevation={4}
         style={[
           toolbarStyle,
           translucent && { paddingTop: StatusBar.currentHeight },
         ]}
       >
-        <View
-          style={[{ height: height || toolbarHeight }, styles.content, style]}
-        >
+        <View style={[{ height }, styles.content, style]}>
           {children}
         </View>
       </Paper>

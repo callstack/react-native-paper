@@ -1,7 +1,8 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
+import { StyleSheet, View } from 'react-native';
 import color from 'color';
 
 import { black, white } from '../../styles/colors';
@@ -16,6 +17,22 @@ type Props = {
 };
 
 export default class ToolbarAction extends Component<void, Props, void> {
+  static propTypes = {
+    /**
+     * Theme color for the action icon, a dark action icon will render a light icon and vice-versa
+     */
+    dark: PropTypes.bool,
+    /**
+     * Name of the icon to show
+     */
+    icon: PropTypes.string,
+    /**
+     * Function to execute on press
+     */
+    onPress: PropTypes.func,
+    style: View.propTypes.style,
+  };
+
   render() {
     const { dark, icon, onPress, style } = this.props;
 
@@ -25,7 +42,6 @@ export default class ToolbarAction extends Component<void, Props, void> {
     return (
       <TouchableRipple
         borderless
-        delayPressIn={0}
         onPress={onPress}
         rippleColor={rippleColor}
         style={style}
