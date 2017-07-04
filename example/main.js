@@ -2,9 +2,11 @@
 
 import Expo from 'expo';
 import React, { Component } from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
+import { View, StyleSheet, StatusBar, Platform } from 'react-native';
 import { Drawer, Provider as PaperProvider } from 'react-native-paper';
 import RootNavigator from './src/RootNavigator';
+
+StatusBar.setBarStyle('light-content');
 
 const DrawerItems = [
   { label: 'Inbox', icon: 'inbox', key: 0 },
@@ -52,7 +54,7 @@ class App extends Component {
           open={this.state.open}
           content={this._renderDrawerItems()}
         >
-          <RootNavigator />
+          <RootNavigator onNavigationStateChange={() => {}} />
         </Drawer>
       </PaperProvider>
     );

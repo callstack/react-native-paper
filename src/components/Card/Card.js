@@ -23,7 +23,7 @@ type DefaultProps = {
 };
 
 type Props = {
-  elevation?: number,
+  elevation: number,
   children?: string,
   onPress?: Function,
   style?: any,
@@ -54,7 +54,7 @@ class Card extends Component<DefaultProps, Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      elevation: new Animated.Value(props.elevation),
+      elevation: new Animated.Value(this.props.elevation),
     };
   }
 

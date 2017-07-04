@@ -59,7 +59,6 @@ export default class GridViewExample extends Component {
       <GridView
         {...this.props}
         removeClippedSubviews={false}
-        contentContainerStyle={styles.content}
         spacing={8}
         getNumberOfColumns={this._getNumberOfColumns}
         dataSource={this.state.dataSource}
