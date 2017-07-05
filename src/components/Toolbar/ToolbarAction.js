@@ -44,15 +44,22 @@ export default class ToolbarAction extends Component<void, Props, void> {
         ? {
             height: 44,
             width: 44,
+            // TODO add custom ios touchable for Toolbar to handle this
+            // minWidth: 32,
+            // maxWidth: 44,
+            marginHorizontal: 2,
+            paddingHorizontal: 2,
             borderRadius: 44 / 2,
             justifyContent: 'center',
           }
         : {
             height: 28,
             width: 28,
+            marginHorizontal: 10,
+            paddingHorizontal: 2,
             justifyContent: 'center',
-            marginHorizontal: 8,
           };
+
     const iconStyle = { alignSelf: 'center' };
 
     return (

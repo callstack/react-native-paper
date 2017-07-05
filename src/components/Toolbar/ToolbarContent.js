@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Platform, View, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import color from 'color';
 
 import Text from '../Typography/Text';
@@ -14,7 +14,6 @@ import type { Theme } from '../../types/Theme';
 
 type Props = {
   dark?: boolean,
-  hasStartIcon?: boolean,
   subtitle?: string | React.Element<*>,
   title: string | React.Element<*>,
   titleStyle?: any,
@@ -29,10 +28,6 @@ class ToolbarContent extends Component<void, Props, void> {
      * Theme color for the text, a dark toolbar will render light text and vice-versa
      */
     dark: PropTypes.bool,
-    /**
-     * If Toolbar has a left icon, this prop will align the title accordingly
-     */
-    hasStartIcon: PropTypes.bool,
     /**
      * Text for the subtitle
      */
@@ -56,7 +51,6 @@ class ToolbarContent extends Component<void, Props, void> {
   render() {
     const {
       dark,
-      hasStartIcon,
       subtitle,
       subtitleStyle,
       style,
@@ -78,16 +72,7 @@ class ToolbarContent extends Component<void, Props, void> {
     ];
 
     return (
-      <View
-        style={[
-          styles.container,
-          {
-            paddingHorizontal:
-              Platform.OS === 'ios' ? 16 : hasStartIcon ? 22 : 16,
-          },
-          style,
-        ]}
-      >
+      <View style={[styles.container, style]}>
         <Text
           style={[!subtitle ? styles.title : styles.subtitle, titleStyles]}
           numberOfLines={1}
@@ -109,7 +94,7 @@ class ToolbarContent extends Component<void, Props, void> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: Platform.OS === 'ios' ? 16 : 16,
+    paddingHorizontal: 12,
   },
   title: {
     fontSize: 20,

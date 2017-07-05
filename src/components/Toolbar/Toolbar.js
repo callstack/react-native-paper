@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import React, { Children, Component } from 'react';
 import PropTypes from 'prop-types';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 
@@ -12,6 +12,7 @@ import ToolbarAction from './ToolbarAction';
 import type { Theme } from '../../types/Theme';
 
 type Props = {
+  dark?: boolean,
   children?: any,
   style?: any,
   statusBarIsTranslucent?: boolean,
@@ -24,6 +25,11 @@ type DefaultProps = {
 
 class Toolbar extends Component<DefaultProps, Props, void> {
   static propTypes = {
+    /**
+     * Theme color for the whole toolbar, a dark toolbar will render light text and vice-versa
+     * Child elements can override this prop independently
+     */
+    dark: PropTypes.bool,
     /**
      * Toolbar content
      */
@@ -44,7 +50,7 @@ class Toolbar extends Component<DefaultProps, Props, void> {
   static Action = ToolbarAction;
 
   render() {
-    const { children, style, theme, statusBarIsTranslucent } = this.props;
+    const { children, dark, style, theme, statusBarIsTranslucent } = this.props;
     const { colors } = theme;
 
     const toolbarHeight = Platform.OS === 'ios' ? 44 : 56;
@@ -68,7 +74,22 @@ class Toolbar extends Component<DefaultProps, Props, void> {
           styles.toolbar,
         ]}
       >
-        {children}
+        {Children.toArray(children).filter(child => child).map((child, i) => {
+          const props: { dark: ?boolean, style?: any } = {
+            dark:
+              typeof child.props.dark === 'undefined' ? dark : child.props.dark,
+          };
+
+          if (child.type === ToolbarContent) {
+            // Extra margin between left icon and ToolbarContent
+            props.style = [
+              { marginHorizontal: i === 0 ? 0 : 8 },
+              child.props.style,
+            ];
+          }
+
+          return React.cloneElement(child, props);
+        })}
       </Paper>
     );
   }
@@ -78,7 +99,7 @@ const styles = StyleSheet.create({
   toolbar: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: Platform.OS === 'ios' ? 0 : 6,
+    paddingHorizontal: 4,
   },
 });
 

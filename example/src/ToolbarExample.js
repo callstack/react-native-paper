@@ -11,30 +11,37 @@ export default class ToolbarExample extends Component {
   };
 
   state = {
+    showLeftIcon: true,
     showSubtitle: true,
   };
 
   render() {
-    const { showSubtitle } = this.state;
+    const { showLeftIcon, showSubtitle } = this.state;
 
     return (
       <View style={styles.container}>
-        <Toolbar statusBarIsTranslucent>
-          <Toolbar.Action
-            dark
-            icon="arrow-back"
-            onPress={() => this.props.navigation.goBack()}
-          />
+        <Toolbar dark statusBarIsTranslucent>
+          {showLeftIcon &&
+            <Toolbar.Action
+              icon="arrow-back"
+              onPress={() => this.props.navigation.goBack()}
+            />}
           <Toolbar.Content
-            dark
-            hasStartIcon
             title="Title"
             subtitle={showSubtitle ? 'Subtitle' : null}
           />
-          <Toolbar.Action dark icon="search" onPress={() => {}} />
-          <Toolbar.Action dark icon="more-vert" onPress={() => {}} />
+          <Toolbar.Action icon="search" onPress={() => {}} />
+          <Toolbar.Action icon="more-vert" onPress={() => {}} />
         </Toolbar>
         <View style={styles.content}>
+          <Button
+            accent
+            raised
+            onPress={() =>
+              this.setState({ showLeftIcon: !this.state.showLeftIcon })}
+          >
+            {`Left icon: ${showLeftIcon ? 'On' : 'Off'}`}
+          </Button>
           <Button
             accent
             raised
