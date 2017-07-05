@@ -27,3 +27,5 @@ export { default as Divider } from './components/Divider';
 export { default as Drawer } from './components/Drawer';
 export { default as GridView } from './components/GridView';
 export { default as SearchBar } from './components/SearchBar';
+
+export { default as Toolbar } from './components/Toolbar';

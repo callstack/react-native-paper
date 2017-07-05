@@ -15,6 +15,8 @@ const routes = Object.keys(examples)
 
     Screen.navigationOptions = {
       title: Comp.title,
+      /* $FlowFixMe */
+      ...Comp.navigationOptions,
     };
 
     return {
