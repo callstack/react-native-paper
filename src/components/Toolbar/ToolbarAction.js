@@ -47,7 +47,7 @@ export default class ToolbarAction extends Component<void, Props, void> {
         hitSlop={
           Platform.OS === 'android'
             ? { top: 8, left: 8, bottom: 8, right: 8 }
-            : null
+            : { top: 4, left: 4, bottom: 4, right: 4 }
         }
         style={[styles.button, style]}
         {...rest}
@@ -62,12 +62,12 @@ const styles = StyleSheet.create({
   button:
     Platform.OS === 'ios'
       ? {
-          height: 44,
-          width: 44,
+          height: 36,
+          width: 36,
           // TODO add custom ios touchable for Toolbar to handle this
-          // minWidth: 32,
-          // maxWidth: 44,
-          marginHorizontal: 2,
+          // minWidth: 24,
+          // maxWidth: 36,
+          marginHorizontal: 6,
           paddingHorizontal: 2,
           borderRadius: 44 / 2,
           justifyContent: 'center',
