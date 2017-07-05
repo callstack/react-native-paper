@@ -1,9 +1,5 @@
 /* @flow */
 
-require("babel-core").transform("code", {
-  plugins: ["transform-flow-strip-types"]
-});
-
 const fs = require('fs');
 const util = require('util');
 
@@ -26,7 +22,7 @@ function printError() {
   console.error('INVALID COMMIT MSG: ' + util.format.apply(null, arguments));
 }
 
-function validateMessage(message: string) {
+function validateMessage(message /*: string */) {
   if (message.length > MAX_LENGTH) {
     printError('is longer than %d characters !', MAX_LENGTH);
     return false;
@@ -48,7 +44,7 @@ function validateMessage(message: string) {
   return true;
 }
 
-function firstLineFromBuffer(buffer: Object) {
+function firstLineFromBuffer(buffer /*: Buffer */) {
   return buffer.toString().split('\n').shift();
 }
 
