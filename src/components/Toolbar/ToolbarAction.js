@@ -12,7 +12,7 @@ import Icon from '../Icon';
 type Props = {
   dark?: boolean,
   icon: string,
-  onPress?: () => void,
+  onPress?: Function,
   style?: any,
 };
 
