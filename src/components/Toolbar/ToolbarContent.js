@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet } from 'react-native';
+import { View, Platform, StyleSheet } from 'react-native';
 import color from 'color';
 
 import Text from '../Typography/Text';
@@ -60,21 +60,20 @@ class ToolbarContent extends Component<void, Props, void> {
     } = this.props;
     const { colors, fonts } = theme;
     const { text: primaryText, secondaryText } = colors;
-    const fontFamilyMedium = fonts.medium;
 
     const titleColor = dark ? white : primaryText;
     const subtitleColor = dark
       ? color(white).alpha(0.7).rgbaString()
       : secondaryText;
-    const titleStyles = [
-      { color: titleColor, fontFamily: fontFamilyMedium },
-      titleStyle,
-    ];
 
     return (
       <View style={[styles.container, style]}>
         <Text
-          style={[!subtitle ? styles.title : styles.subtitle, titleStyles]}
+          style={[
+            styles.title,
+            { color: titleColor, fontFamily: fonts.medium },
+            titleStyle,
+          ]}
           numberOfLines={1}
         >
           {title}
@@ -97,10 +96,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   title: {
-    fontSize: 20,
+    fontSize: Platform.OS === 'ios' ? 18 : 20,
   },
   subtitle: {
-    fontSize: 14,
+    fontSize: Platform.OS === 'ios' ? 12 : 14,
   },
 });
 
