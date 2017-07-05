@@ -50,20 +50,36 @@ class Toolbar extends Component<DefaultProps, Props, void> {
   static Action = ToolbarAction;
 
   render() {
-    const { children, dark, style, theme, statusBarHeight } = this.props;
+    const {
+      children,
+      dark,
+      statusBarHeight,
+      style,
+      theme,
+      ...rest
+    } = this.props;
     const { colors } = theme;
 
     const toolbarHeight = Platform.OS === 'ios' ? 44 : 56;
+    const flattenStyle = style ? StyleSheet.flatten(style) : {};
+    const { height: heightProp, ...styleProp } = { ...flattenStyle };
+
     const toolbarStyle = {
-      backgroundColor: (style && style.backgroundColor) || colors.primary,
+      backgroundColor: colors.primary,
       // TODO make height orientation aware ???
-      height: (style && style.height) || toolbarHeight + statusBarHeight,
+      height: (heightProp || toolbarHeight) + statusBarHeight,
     };
 
     return (
       <Paper
         elevation={4}
-        style={[toolbarStyle, { paddingTop: statusBarHeight }, styles.toolbar]}
+        style={[
+          toolbarStyle,
+          { paddingTop: statusBarHeight },
+          styles.toolbar,
+          styleProp,
+        ]}
+        {...rest}
       >
         {Children.toArray(children).filter(child => child).map((child, i) => {
           const props: { dark: ?boolean, style?: any } = {

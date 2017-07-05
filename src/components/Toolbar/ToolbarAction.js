@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Platform, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import color from 'color';
 
 import { black, white } from '../../styles/colors';
@@ -39,29 +39,6 @@ export default class ToolbarAction extends Component<void, Props, void> {
     const iconColor = dark ? white : color(black).alpha(0.54).rgbaString();
     const rippleColor = color(iconColor).alpha(0.32).rgbaString();
 
-    const touchableStyle =
-      Platform.OS === 'ios'
-        ? {
-            height: 44,
-            width: 44,
-            // TODO add custom ios touchable for Toolbar to handle this
-            // minWidth: 32,
-            // maxWidth: 44,
-            marginHorizontal: 2,
-            paddingHorizontal: 2,
-            borderRadius: 44 / 2,
-            justifyContent: 'center',
-          }
-        : {
-            height: 28,
-            width: 28,
-            marginHorizontal: 10,
-            paddingHorizontal: 2,
-            justifyContent: 'center',
-          };
-
-    const iconStyle = { alignSelf: 'center' };
-
     return (
       <TouchableRipple
         borderless
@@ -72,11 +49,36 @@ export default class ToolbarAction extends Component<void, Props, void> {
             ? { top: 8, left: 8, bottom: 8, right: 8 }
             : null
         }
-        style={[touchableStyle, style]}
+        style={[styles.button, style]}
         {...rest}
       >
-        <Icon color={iconColor} name={icon} size={24} style={iconStyle} />
+        <Icon color={iconColor} name={icon} size={24} />
       </TouchableRipple>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  button:
+    Platform.OS === 'ios'
+      ? {
+          height: 44,
+          width: 44,
+          // TODO add custom ios touchable for Toolbar to handle this
+          // minWidth: 32,
+          // maxWidth: 44,
+          marginHorizontal: 2,
+          paddingHorizontal: 2,
+          borderRadius: 44 / 2,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }
+      : {
+          height: 28,
+          width: 28,
+          marginHorizontal: 10,
+          paddingHorizontal: 2,
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
+});
