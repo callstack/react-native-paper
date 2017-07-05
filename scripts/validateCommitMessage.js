@@ -13,6 +13,7 @@ const TYPES = {
   test: true,
   chore: true,
   revert: true,
+  breaking: true,
 };
 
 function printError() {
@@ -47,12 +48,14 @@ function firstLineFromBuffer(buffer) {
 
 const commitMsgFile = process.argv[2];
 
-fs.readFile(commitMsgFile, function(err, buffer) {
+try {
+  const buffer = fs.readFileSync(commitMsgFile);
   const msg = firstLineFromBuffer(buffer);
-
   if (!validateMessage(msg)) {
     process.exit(1);
   } else {
     process.exit(0);
   }
-});
+} catch (error) {
+  process.exit(1);
+}
