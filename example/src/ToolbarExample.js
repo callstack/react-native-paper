@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, Platform, StatusBar, StyleSheet } from 'react-native';
 import { Colors, Button, Toolbar } from 'react-native-paper';
 
 export default class ToolbarExample extends Component {
@@ -20,7 +20,10 @@ export default class ToolbarExample extends Component {
 
     return (
       <View style={styles.container}>
-        <Toolbar dark statusBarIsTranslucent>
+        <Toolbar
+          dark
+          statusBarHeight={Platform.OS === 'ios' ? 20 : StatusBar.currentHeight}
+        >
           {showLeftIcon &&
             <Toolbar.Action
               icon="arrow-back"

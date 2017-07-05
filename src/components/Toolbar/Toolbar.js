@@ -2,7 +2,7 @@
 
 import React, { Children, Component } from 'react';
 import PropTypes from 'prop-types';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 
 import withTheme from '../../core/withTheme';
 import Paper from '../Paper';
@@ -15,12 +15,12 @@ type Props = {
   dark?: boolean,
   children?: any,
   style?: any,
-  statusBarIsTranslucent?: boolean,
+  statusBarHeight?: number,
   theme: Theme,
 };
 
 type DefaultProps = {
-  statusBarIsTranslucent: boolean,
+  statusBarHeight: number,
 };
 
 class Toolbar extends Component<DefaultProps, Props, void> {
@@ -36,43 +36,34 @@ class Toolbar extends Component<DefaultProps, Props, void> {
     children: PropTypes.node.isRequired,
     style: View.propTypes.style,
     /**
-     * Whether Toolbar needs to adapt to a statusBarIsTranslucent StatusBar or not
+     * Space added it Toolbar to adapt to the StatusBar
      */
-    statusBarIsTranslucent: PropTypes.bool,
+    statusBarHeight: PropTypes.number,
     theme: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
-    statusBarIsTranslucent: Platform.OS === 'ios',
+    statusBarHeight: Platform.OS === 'ios' ? 20 : 0,
   };
 
   static Content = ToolbarContent;
   static Action = ToolbarAction;
 
   render() {
-    const { children, dark, style, theme, statusBarIsTranslucent } = this.props;
+    const { children, dark, style, theme, statusBarHeight } = this.props;
     const { colors } = theme;
 
     const toolbarHeight = Platform.OS === 'ios' ? 44 : 56;
-    const statusBarHeight =
-      Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
-
     const toolbarStyle = {
       backgroundColor: (style && style.backgroundColor) || colors.primary,
       // TODO make height orientation aware ???
-      height:
-        ((style && style.height) || toolbarHeight) +
-        (statusBarIsTranslucent ? statusBarHeight : 0),
+      height: (style && style.height) || toolbarHeight + statusBarHeight,
     };
 
     return (
       <Paper
         elevation={4}
-        style={[
-          toolbarStyle,
-          statusBarIsTranslucent && { paddingTop: statusBarHeight },
-          styles.toolbar,
-        ]}
+        style={[toolbarStyle, { paddingTop: statusBarHeight }, styles.toolbar]}
       >
         {Children.toArray(children).filter(child => child).map((child, i) => {
           const props: { dark: ?boolean, style?: any } = {
