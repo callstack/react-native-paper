@@ -22,7 +22,9 @@
     "react-native-vector-icons": "*"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
+    "babel-preset-flow": "^6.23.0",
     "eslint": "^4.1.1",
     "eslint-config-prettier": "^2.3.0",
     "eslint-plugin-babel": "^4.1.1",
@@ -44,7 +46,7 @@
     "react-native-drawer": "^2.3.0"
   },
   "scripts": {
-    "commitmsg": "node ./scripts/validateCommitMessage $GIT_PARAMS",
+    "commitmsg": "babel-node ./scripts/validateCommitMessage.js $GIT_PARAMS --presets flow",
     "precommit": "npm run lint && npm run flow",
     "flow": "flow",
     "lint": "eslint .",
