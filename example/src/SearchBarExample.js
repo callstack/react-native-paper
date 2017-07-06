@@ -2,10 +2,10 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Caption, SearchBar } from 'react-native-paper';
+import { Colors, Caption, SearchBar } from 'react-native-paper';
 
 export default class SearchExample extends Component {
-  static title = 'SearchBar';
+  static title = 'Search bar';
 
   state = {
     firstQuery: '',
@@ -15,7 +15,7 @@ export default class SearchExample extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <SearchBar
           placeholder="Search"
           onChangeText={query => this.setState({ firstQuery: query })}
@@ -27,14 +27,14 @@ export default class SearchExample extends Component {
           onChangeText={query => this.setState({ secondQuery: query })}
           value={this.state.secondQuery}
           onIconPress={() => this.props.navigation.goBack()}
-          iconName="arrow-back"
+          icon="arrow-back"
         />
         <SearchBar
           placeholder="Search"
           onChangeText={query => this.setState({ thirdQuery: query })}
           value={this.state.thirdQuery}
-          onIconPress={() => {}}
-          iconName="menu"
+          onIconPress={/* In real code, this will open the drawer */ () => {}}
+          icon="menu"
         />
       </View>
     );
@@ -42,6 +42,10 @@ export default class SearchExample extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Colors.grey200,
+  },
   caption: {
     paddingHorizontal: 16,
     paddingVertical: 8,

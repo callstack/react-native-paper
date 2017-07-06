@@ -14,7 +14,7 @@ import type { Theme } from '../types/Theme';
 
 type Props = {
   placeholder?: string,
-  iconName?: string,
+  icon?: string,
   value: string,
   onChangeText: (query: string) => void,
   onIconPress?: Function,
@@ -46,7 +46,7 @@ class SearchBar extends Component<void, Props, void> {
     /**
      * Icon name for the left icon button (see onIconPress)
      */
-    iconName: PropTypes.string,
+    icon: PropTypes.string,
     theme: PropTypes.object.isRequired,
     style: Paper.propTypes.style,
   };
@@ -59,7 +59,7 @@ class SearchBar extends Component<void, Props, void> {
     const {
       placeholder,
       onIconPress,
-      iconName,
+      icon,
       value,
       theme,
       style,
@@ -81,7 +81,7 @@ class SearchBar extends Component<void, Props, void> {
               rippleColor={rippleColor}
               onPress={onIconPress}
               iconStyle={[styles.icon, { color: iconColor }]}
-              name={iconName || 'search'}
+              name={icon || 'search'}
             />
           : <Icon
               style={[styles.icon, { color: iconColor }]}
