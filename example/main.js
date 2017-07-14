@@ -59,4 +59,8 @@ const styles = StyleSheet.create({
   },
 });
 
-Expo.registerRootComponent(() => <PaperProvider><App /></PaperProvider>);
+Expo.registerRootComponent(() => (
+  <PaperProvider>
+    <App />
+  </PaperProvider>
+));
