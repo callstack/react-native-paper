@@ -4,9 +4,9 @@ import color from 'color';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
-import Divider from '../Divider';
-import withTheme from '../../core/withTheme';
-import type { Theme } from '../../types/Theme';
+import Divider from './Divider';
+import withTheme from '../core/withTheme';
+import type { Theme } from '../types/Theme';
 
 type Props = {
   children: any,

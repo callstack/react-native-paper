@@ -4,11 +4,11 @@ import color from 'color';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, StyleSheet } from 'react-native';
-import Icon from '.././Icon';
-import TouchableRipple from '../TouchableRipple';
-import { grey300 } from '../../styles/colors';
-import withTheme from '../../core/withTheme';
-import type { Theme } from '../../types/Theme';
+import Icon from './Icon';
+import TouchableRipple from './TouchableRipple';
+import { grey300 } from '../styles/colors';
+import withTheme from '../core/withTheme';
+import type { Theme } from '../types/Theme';
 
 type Props = {
   icon?: string,
