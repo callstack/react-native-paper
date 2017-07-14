@@ -67,6 +67,7 @@ class SearchBar extends Component<void, Props, void> {
           placeholderTextColor={colors.placeholder}
           underlineColorAndroid="transparent"
           returnKeyType="search"
+          value={value}
           {...rest}
         />
         {value

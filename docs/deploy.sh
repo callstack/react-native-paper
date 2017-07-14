@@ -2,11 +2,14 @@
 
 set -e
 
-git clone https://${GITHUB_TOKEN}@github.com/react-native-paper/react-native-paper.github.io.git docs/dist
+git clone https://${GITHUB_TOKEN}@github.com/callstack-io/react-native-paper.git docs/dist
 
-rm -rf docs/dist/**
+cd docs/dist
 
-cd docs && npm run build && cd dist
+git checkout gh-pages
+rm -rf **
+
+cd .. && npm run build && cd dist
 
 if [ -z "$(git diff --exit-code)" ]; then
     echo "No changes to the output on this push; exiting."
@@ -19,4 +22,4 @@ git config user.email "bot@travis-ci.org"
 git add -A .
 git commit -m "Deploy documentation: $(git rev-parse --verify HEAD)"
 
-git push -f -u origin master
+git push -f -u origin gh-pages

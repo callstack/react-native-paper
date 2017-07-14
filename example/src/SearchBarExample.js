@@ -10,13 +10,13 @@ export default class SearchExample extends Component {
     query: '',
   };
 
-  _onChangeSearch = query => this.setState({ query });
+  _handleChangeSearch = query => this.setState({ query });
 
   render() {
     return (
       <SearchBar
         placeholder="Search"
-        onChangeText={this._onChangeSearch}
+        onChangeText={this._handleChangeSearch}
         value={this.state.query}
       />
     );

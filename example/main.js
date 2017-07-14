@@ -2,7 +2,7 @@
 
 import Expo from 'expo';
 import React, { Component } from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
+import { View, StyleSheet, Platform, StatusBar } from 'react-native';
 import {
   DrawerItem,
   DrawerSection,
@@ -10,6 +10,8 @@ import {
 } from 'react-native-paper';
 import { DrawerNavigator } from 'react-navigation';
 import RootNavigator from './src/RootNavigator';
+
+StatusBar.setBarStyle('light-content');
 
 const DrawerItemsData = [
   { label: 'Inbox', icon: 'inbox', key: 0 },

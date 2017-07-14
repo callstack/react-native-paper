@@ -42,7 +42,9 @@ export default class GridViewExample extends Component {
     return (
       <Card style={styles.tile}>
         <View style={styles.inner}>
-          <Text style={styles.text}>{index}</Text>
+          <Text style={styles.text}>
+            {index}
+          </Text>
         </View>
       </Card>
     );
@@ -57,7 +59,6 @@ export default class GridViewExample extends Component {
       <GridView
         {...this.props}
         removeClippedSubviews={false}
-        contentContainerStyle={styles.content}
         spacing={8}
         getNumberOfColumns={this._getNumberOfColumns}
         dataSource={this.state.dataSource}

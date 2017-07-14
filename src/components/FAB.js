@@ -27,9 +27,8 @@ type Props = {
 const FAB = (props: Props) => {
   const { small, dark, icon, color: iconColor, onPress, theme, style } = props;
   const backgroundColor = theme.colors.accent;
-  const isDark = typeof dark === 'boolean'
-    ? dark
-    : !color(backgroundColor).light();
+  const isDark =
+    typeof dark === 'boolean' ? dark : !color(backgroundColor).light();
   const textColor = iconColor || (isDark ? white : 'rgba(0, 0, 0, .54)');
   const rippleColor = color(textColor).alpha(0.32).rgbaString();
 

@@ -8,14 +8,13 @@ type Props = {
   style?: any,
 };
 
-const Subheading = (props: Props) => (
+const Subheading = (props: Props) =>
   <StyledText
     {...props}
     alpha={0.87}
     family="regular"
     style={[styles.text, props.style]}
-  />
-);
+  />;
 
 export default Subheading;
 
