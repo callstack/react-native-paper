@@ -17,6 +17,6 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "component-docs": "^0.0.3"
+    "component-docs": "^0.1.0"
   }
 }
