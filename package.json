@@ -37,7 +37,7 @@
     "husky": "^0.14.2",
     "prettier": "^1.5.2",
     "react": "16.0.0-alpha.12",
-    "react-native": "^0.45.1",
+    "react-native": "~0.45.1",
     "react-native-vector-icons": "~4.2.0"
   },
   "dependencies": {
