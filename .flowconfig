@@ -26,6 +26,8 @@
 .*/example/node_modules/react/.*
 .*/example/node_modules/react-native/.*
 .*/example/node_modules/expo/.*
+.*/example/node_modules/xdl
+.*/example/node_modules/reqwest
 .*/example/\.buckd/
 .*/example/node_modules/react-navigation/.*/__tests__/.*
 .*/example/node_modules/react-native-fbads
