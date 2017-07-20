@@ -24,7 +24,7 @@ function getFiles() {
         const matches = fs
           .readFileSync(file)
           .toString()
-          .match(/export \{ default as default \} from .+/);
+          .match(/export \{ default \} from .+/);
         if (matches && matches.length) {
           const name = matches[0].split(' ').pop().replace(/('|;)/g, '');
           return require.resolve(path.join(__dirname, '../src', line, name));
