@@ -3,18 +3,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, TextInput } from 'react-native';
+
 import color from 'color';
 import withTheme from '../core/withTheme';
 import Icon from './Icon';
-import TouchableRipple from './TouchableRipple';
+import TouchableIcon from './TouchableIcon';
 import Paper from './Paper';
 import { white } from '../styles/colors';
 import type { Theme } from '../types/Theme';
 
 type Props = {
   placeholder?: string,
+  icon?: string,
   value: string,
   onChangeText: (query: string) => void,
+  onIconPress?: Function,
   theme: Theme,
   style?: any,
 };
@@ -36,6 +39,14 @@ class SearchBar extends Component<void, Props, void> {
      * Callback that is called when the text input's text changes
      */
     onChangeText: PropTypes.func.isRequired,
+    /**
+     * Callback to execute if we want the left icon to act as button
+     */
+    onIconPress: PropTypes.func,
+    /**
+     * Icon name for the left icon button (see onIconPress)
+     */
+    icon: PropTypes.string,
     theme: PropTypes.object.isRequired,
     style: Paper.propTypes.style,
   };
@@ -45,7 +56,15 @@ class SearchBar extends Component<void, Props, void> {
   };
 
   render() {
-    const { placeholder, value, theme, style, ...rest } = this.props;
+    const {
+      placeholder,
+      onIconPress,
+      icon,
+      value,
+      theme,
+      style,
+      ...rest
+    } = this.props;
     const { colors, roundness } = theme;
     const textColor = colors.text;
     const iconColor = color(textColor).alpha(0.54).rgbaString();
@@ -56,11 +75,19 @@ class SearchBar extends Component<void, Props, void> {
         elevation={4}
         style={[{ borderRadius: roundness }, styles.container, style]}
       >
-        <Icon
-          style={[styles.icon, { color: iconColor }]}
-          name="search"
-          size={24}
-        />
+        {onIconPress
+          ? <TouchableIcon
+              borderless
+              rippleColor={rippleColor}
+              onPress={onIconPress}
+              iconStyle={[styles.icon, { color: iconColor }]}
+              name={icon || 'search'}
+            />
+          : <Icon
+              style={[styles.icon, { color: iconColor }]}
+              name="search"
+              size={24}
+            />}
         <TextInput
           style={[styles.input, { color: textColor }]}
           placeholder={placeholder || ''}
@@ -71,17 +98,13 @@ class SearchBar extends Component<void, Props, void> {
           {...rest}
         />
         {value
-          ? <TouchableRipple
+          ? <TouchableIcon
               borderless
               rippleColor={rippleColor}
               onPress={this._handleClearPress}
-            >
-              <Icon
-                style={[styles.icon, { color: iconColor }]}
-                name="close"
-                size={24}
-              />
-            </TouchableRipple>
+              iconStyle={[styles.icon, { color: iconColor }]}
+              name="close"
+            />
           : null}
       </Paper>
     );
@@ -98,6 +121,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 18,
+    paddingLeft: 8,
   },
   icon: {
     margin: 12,
