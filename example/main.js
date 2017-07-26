@@ -2,13 +2,18 @@
 
 import Expo from 'expo';
 import React, { Component } from 'react';
-import { View, StyleSheet, StatusBar, Platform } from 'react-native';
-import { Drawer, Provider as PaperProvider } from 'react-native-paper';
+import { View, StyleSheet, Platform, StatusBar } from 'react-native';
+import {
+  DrawerItem,
+  DrawerSection,
+  Provider as PaperProvider,
+} from 'react-native-paper';
+import { DrawerNavigator } from 'react-navigation';
 import RootNavigator from './src/RootNavigator';
 
 StatusBar.setBarStyle('light-content');
 
-const DrawerItems = [
+const DrawerItemsData = [
   { label: 'Inbox', icon: 'inbox', key: 0 },
   { label: 'Starred', icon: 'star', key: 1 },
   { label: 'Sent mail', icon: 'send', key: 2 },
@@ -16,50 +21,36 @@ const DrawerItems = [
   { label: 'No Icon', key: 4 },
 ];
 
-class App extends Component {
+class DrawerItems extends Component {
   state = {
     open: false,
     drawerItemIndex: 0,
   };
 
-  _handleOpenDrawer = () => this.setState({ open: true });
-
-  _handleCloseDrawer = () => this.setState({ open: false });
-
   _setDrawerItem = index => this.setState({ drawerItemIndex: index });
 
-  _renderDrawerItems = () => {
+  render() {
     return (
       <View style={styles.drawerContent}>
-        <Drawer.Section label="Subheader">
-          {DrawerItems.map((props, index) =>
-            <Drawer.Item
+        <DrawerSection label="Subheader">
+          {DrawerItemsData.map((props, index) =>
+            <DrawerItem
               {...props}
               key={props.key}
               active={this.state.drawerItemIndex === index}
               onPress={() => this._setDrawerItem(index)}
             />
           )}
-        </Drawer.Section>
+        </DrawerSection>
       </View>
-    );
-  };
-
-  render() {
-    return (
-      <PaperProvider>
-        <Drawer
-          onOpen={this._handleOpenDrawer}
-          onClose={this._handleCloseDrawer}
-          open={this.state.open}
-          content={this._renderDrawerItems()}
-        >
-          <RootNavigator onNavigationStateChange={() => {}} />
-        </Drawer>
-      </PaperProvider>
     );
   }
 }
+
+const App = DrawerNavigator(
+  { Home: { screen: RootNavigator } },
+  { contentComponent: () => <DrawerItems /> }
+);
 
 const styles = StyleSheet.create({
   drawerContent: {
@@ -68,4 +59,8 @@ const styles = StyleSheet.create({
   },
 });
 
-Expo.registerRootComponent(App);
+Expo.registerRootComponent(() =>
+  <PaperProvider>
+    <App />
+  </PaperProvider>
+);
