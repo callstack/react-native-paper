@@ -7,7 +7,7 @@ import {
   Easing,
   StyleSheet,
   TouchableWithoutFeedback,
-  BackAndroid,
+  BackHandler,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import ThemedPortal from './Portal/ThemedPortal';
@@ -112,7 +112,7 @@ export default class Modal extends PureComponent<DefaultProps, Props, State> {
   };
 
   _showModal = () => {
-    BackAndroid.addEventListener('hardwareBackPress', this._handleBack);
+    BackHandler.addEventListener('hardwareBackPress', this._handleBack);
     Animated.timing(this.state.opacity, {
       toValue: 1,
       duration: 280,
@@ -121,7 +121,7 @@ export default class Modal extends PureComponent<DefaultProps, Props, State> {
   };
 
   _hideModal = () => {
-    BackAndroid.removeEventListener('hardwareBackPress', this._handleBack);
+    BackHandler.removeEventListener('hardwareBackPress', this._handleBack);
     Animated.timing(this.state.opacity, {
       toValue: 0,
       duration: 280,
