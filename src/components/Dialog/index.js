@@ -6,10 +6,10 @@ import PropTypes from 'prop-types';
 import Modal from '../Modal';
 import { black, white } from '../../styles/colors';
 import Paper from '../Paper';
-import Actions from './Actions';
-import Title from './Title';
-import Content from './Content';
-import ScrollArea from './ScrollArea';
+import DialogActions from './Actions';
+import DialogTitle from './Title';
+import DialogContent from './Content';
+import DialogScrollArea from './ScrollArea';
 
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
@@ -59,17 +59,17 @@ type Props = {
 const Dialog = (props: Props) => {
   const { children, dismissable, onRequestClose, visible, style } = props;
   const childrenArray = Children.toArray(children);
-  const title = childrenArray.find(child => child.type === Title);
+  const title = childrenArray.find(child => child.type === DialogTitle);
   const actionBtnsChildren = childrenArray.filter(
-    child => child.type === Actions
+    child => child.type === DialogActions
   );
   const restOfChildren = childrenArray.filter(
-    child => child.type !== Actions && child.type !== Title
+    child => child.type !== DialogActions && child.type !== DialogTitle
   );
   let restOfChildrenWithoutTitle = restOfChildren;
   if (!title) {
     restOfChildrenWithoutTitle = restOfChildren.map(child => {
-      if (child.type === Content) {
+      if (child.type === DialogContent) {
         return React.cloneElement(child, {
           style: { paddingTop: 24 },
         });
@@ -93,10 +93,10 @@ const Dialog = (props: Props) => {
   );
 };
 
-Dialog.Actions = Actions;
-Dialog.Title = Title;
-Dialog.Content = Content;
-Dialog.ScrollArea = ScrollArea;
+Dialog.Actions = DialogActions;
+Dialog.Title = DialogTitle;
+Dialog.Content = DialogContent;
+Dialog.ScrollArea = DialogScrollArea;
 
 Dialog.propTypes = {
   children: PropTypes.node.isRequired,

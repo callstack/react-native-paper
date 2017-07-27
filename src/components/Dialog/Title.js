@@ -1,3 +1,5 @@
+/* @flow */
+
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
@@ -11,7 +13,7 @@ type Props = {
   theme: Theme,
 };
 
-const Title = ({ children, theme: { colors: { text } }, color }: Props) =>
+const DialogTitle = ({ children, theme: { colors: { text } }, color }: Props) =>
   <PaperTitle style={[styles.text, { color: color || text, margin: 0 }]}>
     {children}
   </PaperTitle>;
@@ -29,10 +31,10 @@ const styles = StyleSheet.create({
   },
 });
 
-Title.propTypes = {
+DialogTitle.propTypes = {
   children: PropTypes.node.isRequired,
   color: PropTypes.string,
   theme: PropTypes.object.isRequired,
 };
 
-export default withTheme(Title);
+export default withTheme(DialogTitle);

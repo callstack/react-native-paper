@@ -9,7 +9,7 @@ type Props = {
   style?: any,
 };
 
-const Actions = (props: Props) => {
+const DialogActions = (props: Props) => {
   return (
     <View {...props} style={[styles.container, props.style]}>
       {Children.map(props.children, child =>
@@ -21,7 +21,7 @@ const Actions = (props: Props) => {
   );
 };
 
-Actions.propTypes = {
+DialogActions.propTypes = {
   children: PropTypes.node.isRequired,
   style: View.propTypes.style,
 };
@@ -35,4 +35,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Actions;
+export default DialogActions;

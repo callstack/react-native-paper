@@ -1,3 +1,5 @@
+/* @flow */
+
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { grey400 } from '../../styles/colors';
@@ -7,7 +9,7 @@ type Props = {
   style?: any,
 };
 
-const ScrollArea = ({ children, style }: Props) =>
+const DialogScrollArea = ({ children, style }: Props) =>
   <View style={[styles.container, style]}>
     {children}
   </View>;
@@ -21,4 +23,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ScrollArea;
+export default DialogScrollArea;

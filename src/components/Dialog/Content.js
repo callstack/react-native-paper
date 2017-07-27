@@ -1,3 +1,5 @@
+/* @flow */
+
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
@@ -6,7 +8,7 @@ type Props = {
   style?: any,
 };
 
-const Content = ({ children, style }: Props) =>
+const DialogContent = ({ children, style }: Props) =>
   <View style={[styles.container, style]}>
     {children}
   </View>;
@@ -18,4 +20,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Content;
+export default DialogContent;
