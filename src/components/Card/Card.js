@@ -16,8 +16,6 @@ import { white } from '../../styles/colors';
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types/Theme';
 
-const AnimatedPaper = Animated.createAnimatedComponent(Paper);
-
 type DefaultProps = {
   elevation: number,
 };
@@ -82,7 +80,7 @@ class Card extends Component<DefaultProps, Props, State> {
     const siblings = Children.map(children, child => child.type.displayName);
 
     return (
-      <AnimatedPaper
+      <Paper.Animated
         elevation={this.state.elevation}
         style={[styles.card, { borderRadius: roundness }, style]}
       >
@@ -103,7 +101,7 @@ class Card extends Component<DefaultProps, Props, State> {
             )}
           </View>
         </TouchableWithoutFeedback>
-      </AnimatedPaper>
+      </Paper.Animated>
     );
   }
 }

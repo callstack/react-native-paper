@@ -12,8 +12,6 @@ import { black, white } from '../styles/colors';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types/Theme';
 
-const AnimatedPaper = Animated.createAnimatedComponent(Paper);
-
 type Props = {
   disabled?: boolean,
   compact?: boolean,
@@ -222,7 +220,7 @@ class Button extends PureComponent<void, Props, State> {
     );
 
     return (
-      <AnimatedPaper
+      <Paper.Animated
         elevation={disabled ? 0 : this.state.elevation}
         style={[styles.button, compact && styles.compact, buttonStyle, style]}
       >
@@ -239,7 +237,7 @@ class Button extends PureComponent<void, Props, State> {
             >
               {content}
             </TouchableRipple>}
-      </AnimatedPaper>
+      </Paper.Animated>
     );
   }
 }

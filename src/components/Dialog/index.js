@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { Children } from 'react';
-import { Animated, StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import Modal from '../Modal';
 import { black, white } from '../../styles/colors';
@@ -10,8 +10,6 @@ import DialogActions from './Actions';
 import DialogTitle from './Title';
 import DialogContent from './Content';
 import DialogScrollArea from './ScrollArea';
-
-const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
 type Props = {
   children?: any,
@@ -68,8 +66,10 @@ const Dialog = (props: Props) => {
   );
   let restOfChildrenWithoutTitle = restOfChildren;
   if (!title) {
+    let found = false;
     restOfChildrenWithoutTitle = restOfChildren.map(child => {
-      if (child.type === DialogContent) {
+      if (child.type === DialogContent && !found) {
+        found = true;
         return React.cloneElement(child, {
           style: { paddingTop: 24 },
         });
@@ -84,11 +84,11 @@ const Dialog = (props: Props) => {
       onRequestClose={onRequestClose}
       visible={visible}
     >
-      <AnimatedPaper style={[styles.container, style]} elevation={24}>
+      <Paper.Animated style={[styles.container, style]} elevation={24}>
         {title}
         {restOfChildrenWithoutTitle}
         {actionBtnsChildren}
-      </AnimatedPaper>
+      </Paper.Animated>
     </Modal>
   );
 };
@@ -101,17 +101,17 @@ Dialog.ScrollArea = DialogScrollArea;
 Dialog.propTypes = {
   children: PropTypes.node.isRequired,
   /**
-     * Determines whether clicking outside the dialog dismiss it, true by default
-     */
+   * Determines whether clicking outside the dialog dismiss it, true by default
+   */
   dismissable: PropTypes.bool,
   /**
-     * Callback that is called when the user dismisses the dialog
-     */
+   * Callback that is called when the user dismisses the dialog
+   */
   onRequestClose: PropTypes.func.isRequired,
   style: PropTypes.object,
   /**
-     * Determines Whether the dialog is visible
-     */
+   * Determines Whether the dialog is visible
+   */
   visible: PropTypes.bool,
 };
 
@@ -126,7 +126,8 @@ export default Dialog;
 const styles = StyleSheet.create({
   container: {
     /**
-     * This is a fix for Android because overflow: visible isn't supported.
+     * This prevents the shadow from being clipped on Android since Android 
+     * doesn't support `overflow: visible`.
      * One downside for this fix is that it will disable clicks on the area
      * of the shadow around the dialog, consequently, if you click around the
      * dialog (44 pixel from the top and bottom) it won't be dismissed. 
