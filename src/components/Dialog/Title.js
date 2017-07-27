@@ -9,31 +9,26 @@ import type { Theme } from '../../types/Theme';
 
 type Props = {
   children: any,
-  color?: string,
+  style?: any,
   theme: Theme,
 };
 
-const DialogTitle = ({ children, theme: { colors: { text } }, color }: Props) =>
-  <PaperTitle style={[styles.text, { color: color || text, margin: 0 }]}>
+const DialogTitle = ({ children, theme: { colors: { text } }, style }: Props) =>
+  <PaperTitle style={[styles.text, { color: text }, style]}>
     {children}
   </PaperTitle>;
 
 const styles = StyleSheet.create({
   text: {
-    /**
-     * I subtracted 2 from these values because Text component has 
-     * 2 pixels margin vertically by default
-     */
-    margin: 0,
-    paddingTop: 22,
-    paddingBottom: 18,
-    paddingHorizontal: 24,
+    marginTop: 22,
+    marginBottom: 18,
+    marginHorizontal: 24,
   },
 });
 
 DialogTitle.propTypes = {
   children: PropTypes.node.isRequired,
-  color: PropTypes.string,
+  style: PropTypes.object,
   theme: PropTypes.object.isRequired,
 };
 

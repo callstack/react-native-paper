@@ -15,7 +15,7 @@ const DialogWithCustomColors = ({
     style={{ backgroundColor: Colors.grey800 }}
     visible={visible}
   >
-    <Dialog.Title color={Colors.white}>Alert</Dialog.Title>
+    <Dialog.Title style={{ color: Colors.white }}>Alert</Dialog.Title>
     <Dialog.Content>
       <Paragraph style={{ color: Colors.white }}>
         This is a dialog with custom colors
