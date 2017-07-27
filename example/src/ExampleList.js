@@ -15,6 +15,7 @@ import PaperExample from './PaperExample';
 import RippleExample from './RippleExample';
 import RadioButtonExample from './RadioButtonExample';
 import TextExample from './TextExample';
+import ToolbarExample from './ToolbarExample';
 import SearchBarExample from './SearchBarExample';
 
 export const examples = {
@@ -28,6 +29,7 @@ export const examples = {
   paper: PaperExample,
   ripple: RippleExample,
   radio: RadioButtonExample,
+  toolbar: ToolbarExample,
   text: TextExample,
   searchbar: SearchBarExample,
 };
@@ -44,21 +46,21 @@ export default class ExampleList extends Component {
     navigation: PropTypes.object,
   };
 
-  _renderRow = id => (
+  _renderRow = id =>
     <TouchableRipple
       style={styles.item}
       onPress={() => this.props.navigation.navigate(id)}
     >
-      <Text style={styles.text}>{examples[id].title}</Text>
-    </TouchableRipple>
-  );
+      <Text style={styles.text}>
+        {examples[id].title}
+      </Text>
+    </TouchableRipple>;
 
   _renderSeparator = (sectionId, rowId) => <Divider key={rowId} />;
 
   render() {
     return (
       <ListView
-        style={styles.container}
         dataSource={dataSource}
         renderRow={this._renderRow}
         renderSeparator={this._renderSeparator}

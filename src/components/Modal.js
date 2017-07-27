@@ -116,7 +116,7 @@ export default class Modal extends PureComponent<DefaultProps, Props, State> {
     Animated.timing(this.state.opacity, {
       toValue: 1,
       duration: 280,
-      easing: Easing.easing,
+      easing: Easing.ease,
     }).start();
   };
 
@@ -125,7 +125,7 @@ export default class Modal extends PureComponent<DefaultProps, Props, State> {
     Animated.timing(this.state.opacity, {
       toValue: 0,
       duration: 280,
-      easing: Easing.easing,
+      easing: Easing.ease,
     }).start(() => {
       if (this.props.visible && this.props.onRequestClose) {
         this.props.onRequestClose();

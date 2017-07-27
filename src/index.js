@@ -25,7 +25,9 @@ export { default as Title } from './components/Typography/Title';
 export { default as Text } from './components/Typography/Text';
 
 export { default as Divider } from './components/Divider';
-export { default as Drawer } from './components/Drawer';
+export { default as DrawerItem } from './components/DrawerItem';
+export { default as DrawerSection } from './components/DrawerSection';
 export { default as GridView } from './components/GridView';
 export { default as SearchBar } from './components/SearchBar';
 export { default as Modal } from './components/Modal';
+export { default as Toolbar } from './components/Toolbar';

@@ -7,11 +7,10 @@ type Props = {
   style?: any,
 };
 
-const ScrollArea = ({ children, style }: Props) => (
+const ScrollArea = ({ children, style }: Props) =>
   <View style={[styles.container, style]}>
     {children}
-  </View>
-);
+  </View>;
 
 const styles = StyleSheet.create({
   container: {

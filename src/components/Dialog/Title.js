@@ -11,11 +11,10 @@ type Props = {
   theme: Theme,
 };
 
-const Title = ({ children, theme: { colors: { text } }, color }: Props) => (
+const Title = ({ children, theme: { colors: { text } }, color }: Props) =>
   <PaperTitle style={[styles.text, { color: color || text, margin: 0 }]}>
     {children}
-  </PaperTitle>
-);
+  </PaperTitle>;
 
 const styles = StyleSheet.create({
   text: {

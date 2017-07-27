@@ -8,14 +8,13 @@ type Props = {
   style?: any,
 };
 
-const Paragraph = (props: Props) => (
+const Paragraph = (props: Props) =>
   <StyledText
     {...props}
     alpha={0.87}
     family="regular"
     style={[styles.text, props.style]}
-  />
-);
+  />;
 
 export default Paragraph;
 

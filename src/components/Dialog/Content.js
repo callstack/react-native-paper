@@ -6,11 +6,10 @@ type Props = {
   style?: any,
 };
 
-const Content = ({ children, style }: Props) => (
+const Content = ({ children, style }: Props) =>
   <View style={[styles.container, style]}>
     {children}
-  </View>
-);
+  </View>;
 
 const styles = StyleSheet.create({
   container: {

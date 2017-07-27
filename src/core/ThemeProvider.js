@@ -16,8 +16,11 @@ type Props = {
 
 export const channel = 'react-native-paper$theme';
 
-export default class ThemeProvider
-  extends PureComponent<DefaultProps, Props, void> {
+export default class ThemeProvider extends PureComponent<
+  DefaultProps,
+  Props,
+  void
+> {
   static propTypes = {
     children: PropTypes.element.isRequired,
     theme: PropTypes.object,
