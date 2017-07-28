@@ -10,11 +10,12 @@ import TouchableRipple from './TouchableRipple';
 import { white } from '../styles/colors';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types/Theme';
+import type { IconSource } from './Icon';
 
 type Props = {
   small?: boolean,
   dark?: boolean,
-  icon: string,
+  icon: IconSource,
   color?: string,
   onPress?: Function,
   theme: Theme,
