@@ -2,11 +2,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import RedBox from 'redbox-react';
-import { rehydrate } from 'glamor';
-import App from './../node_modules/component-docs/dist/templates/App';
+import App from '/home/travis/build/callstack-io/react-native-paper/docs/node_modules/component-docs/dist/templates/App.js';
+import Layout from '/home/travis/build/callstack-io/react-native-paper/docs/node_modules/component-docs/dist/templates/Layout.js';
 import data from './app.data.json';
-
-rehydrate(window.__GLAMOR__);
 
 const root = document.getElementById('root');
 const render = () => {
@@ -15,6 +13,7 @@ const render = () => {
       <App
         name={window.__INITIAL_PATH__}
         data={data}
+        layout={Layout}
       />,
       root
     );
