@@ -1,5 +1,9 @@
 language: node_js
 cache: yarn
+env:
+  global:
+    - ENCRYPTION_LABEL "efa09eced906"
+    - COMMIT_AUTHOR_EMAIL "gh-bot@callstack.io"
 node_js:
   - 'stable'
 before_install:
@@ -12,9 +16,4 @@ install:
 script:
   - yarn run flow -- check
   - yarn run lint
-deploy:
-  provider: script
-  script: docs/deploy.sh
-  skip_cleanup: true
-  on:
-    branch: master
+  - cd docs && bash ./deploy.sh
