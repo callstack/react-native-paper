@@ -1,5 +1,9 @@
 language: node_js
 cache: yarn
+env:
+  global:
+    - ENCRYPTION_LABEL "efa09eced906"
+    - COMMIT_AUTHOR_EMAIL "gh-bot@callstack.io"
 node_js:
   - 'stable'
 before_install:
