@@ -45,6 +45,17 @@ class ExampleList extends Component {
     navigation: PropTypes.object,
   };
 
+  state = {
+    value: 0,
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.theme !== this.props.theme) {
+      /// Super dirty way to update the listview when now rows change
+      this.setState({ value: this.state.value + 1 });
+    }
+  }
+
   _renderRow = id => {
     const { theme: { colors: { paper, text } } } = this.props;
     return (
@@ -66,6 +77,7 @@ class ExampleList extends Component {
     return (
       <View style={{ flex: 1, backgroundColor: background }}>
         <ListView
+          key={this.state.value}
           dataSource={dataSource}
           renderRow={this._renderRow}
           renderSeparator={this._renderSeparator}
