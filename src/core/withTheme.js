@@ -2,7 +2,9 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import merge from 'lodash.merge';
 import { channel } from './ThemeProvider';
+import DefaultTheme from '../styles/DefaultTheme';
 import type { Theme } from '../types/Theme';
 
 type State = {
@@ -34,8 +36,14 @@ export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
       }
 
       this.state = {
-        theme: this._merge(theme, this.props.theme),
+        theme: merge(DefaultTheme, theme, this.props.theme),
       };
+
+      // console.log('Ahmed');
+      // console.log(theme);
+      // console.log(this.props.theme);
+      // console.log(merge(DefaultTheme, theme, this.props.theme));
+      // console.log('Ahmed');
     }
 
     state: State;
@@ -44,14 +52,14 @@ export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
       this._subscription =
         this.context[channel] &&
         this.context[channel].subscribe(theme =>
-          this.setState({ theme: this._merge(theme, this.props.theme) })
+          this.setState({ theme: merge(theme, this.props.theme) })
         );
     }
 
     componentWillReceiveProps(nextProps: *) {
       if (this.props.theme !== nextProps.theme) {
         this.setState({
-          theme: this._merge(
+          theme: merge(
             this.context[channel] && this.context[channel].get(),
             nextProps.theme
           ),
@@ -70,14 +78,6 @@ export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
     setNativeProps(...args) {
       return this._root.setNativeProps(...args);
     }
-
-    _merge = (a, b) => {
-      if (a && b) {
-        return { ...a, ...b };
-      } else {
-        return a || b;
-      }
-    };
 
     _subscription: { remove: Function };
     _root: any;

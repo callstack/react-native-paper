@@ -1,23 +1,27 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { ScrollView, StyleSheet } from 'react-native';
 import {
   Title,
   Caption,
   Paragraph,
-  Colors,
   Card,
   Button,
+  withTheme,
 } from 'react-native-paper';
 
-export default class CardExample extends Component {
+class CardExample extends Component {
   static title = 'Card';
-
+  static propTypes = {
+    theme: PropTypes.object.isRequired,
+  };
   render() {
+    const { theme: { colors: { background } } } = this.props;
     return (
       <ScrollView
-        style={styles.container}
+        style={[styles.container, { backgroundColor: background }]}
         contentContainerStyle={styles.content}
       >
         <Card>
@@ -65,7 +69,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
-    backgroundColor: Colors.grey200,
     padding: 4,
   },
 });
+
+export default withTheme(CardExample);

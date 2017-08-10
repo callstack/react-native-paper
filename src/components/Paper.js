@@ -2,20 +2,22 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, View } from 'react-native';
-import * as Colors from '../styles/colors';
+import { View } from 'react-native';
 import shadow from '../styles/shadow';
+import withTheme from '../core/withTheme';
+import type { Theme } from '../types/Theme';
 
 type Props = {
   elevation: number,
   children?: any,
   style?: any,
+  theme: Theme,
 };
 
 /**
  * Paper is a basic container that can give depth to the page
  */
-export default class Paper extends PureComponent<void, Props, void> {
+class Paper extends PureComponent<void, Props, void> {
   static propTypes = {
     /**
      * Elevation for the paper
@@ -23,15 +25,20 @@ export default class Paper extends PureComponent<void, Props, void> {
     elevation: PropTypes.number.isRequired,
     children: PropTypes.node,
     style: View.propTypes.style,
+    theme: PropTypes.object.isRequired,
   };
 
   render() {
-    const { children, elevation } = this.props;
+    const { children, elevation, theme: { colors: { paper } } } = this.props;
 
     return (
       <View
         {...this.props}
-        style={[styles.paper, elevation && shadow(elevation), this.props.style]}
+        style={[
+          elevation && shadow(elevation),
+          { backgroundColor: paper },
+          this.props.style,
+        ]}
       >
         {children}
       </View>
@@ -39,8 +46,4 @@ export default class Paper extends PureComponent<void, Props, void> {
   }
 }
 
-const styles = StyleSheet.create({
-  paper: {
-    backgroundColor: Colors.white,
-  },
-});
+export default withTheme(Paper);

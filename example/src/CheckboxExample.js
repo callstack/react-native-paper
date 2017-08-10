@@ -2,10 +2,14 @@
 
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Paragraph, Checkbox, Colors } from 'react-native-paper';
+import PropTypes from 'prop-types';
+import { Paragraph, Checkbox, Colors, withTheme } from 'react-native-paper';
 
-export default class CheckboxExample extends Component {
+class CheckboxExample extends Component {
   static title = 'Checkbox';
+  static propTypes = {
+    theme: PropTypes.object.isRequired,
+  };
 
   state = {
     checkedNormal: true,
@@ -13,8 +17,9 @@ export default class CheckboxExample extends Component {
   };
 
   render() {
+    const { theme: { colors: { background } } } = this.props;
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { backgroundColor: background }]}>
         <View style={styles.row}>
           <Paragraph>Normal</Paragraph>
           <Checkbox
@@ -48,7 +53,6 @@ export default class CheckboxExample extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
     padding: 8,
   },
 
@@ -59,3 +63,5 @@ const styles = StyleSheet.create({
     padding: 8,
   },
 });
+
+export default withTheme(CheckboxExample);

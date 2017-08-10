@@ -1,11 +1,15 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
-import { Paragraph, RadioButton, Colors } from 'react-native-paper';
+import { Paragraph, RadioButton, Colors, withTheme } from 'react-native-paper';
 
-export default class RadioButtonExample extends Component {
+class RadioButtonExample extends Component {
   static title = 'Radio button';
+  static propTypes = {
+    theme: PropTypes.object.isRequired,
+  };
 
   state = {
     checkedNormal: true,
@@ -13,8 +17,9 @@ export default class RadioButtonExample extends Component {
   };
 
   render() {
+    const { theme: { colors: { background } } } = this.props;
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { backgroundColor: background }]}>
         <View style={styles.row}>
           <Paragraph>Normal</Paragraph>
           <RadioButton
@@ -48,7 +53,6 @@ export default class RadioButtonExample extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
     padding: 8,
   },
 
@@ -59,3 +63,5 @@ const styles = StyleSheet.create({
     padding: 8,
   },
 });
+
+export default withTheme(RadioButtonExample);

@@ -42,8 +42,8 @@
   },
   "dependencies": {
     "color": "^0.11.4",
-    "prop-types": "^15.5.10",
-    "react-native-drawer": "^2.3.0"
+    "lodash.merge": "^4.6.0",
+    "prop-types": "^15.5.10"
   },
   "scripts": {
     "commitmsg": "babel-node ./scripts/validateCommitMessage.js $GIT_PARAMS --presets flow",

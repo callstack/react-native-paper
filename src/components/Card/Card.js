@@ -12,7 +12,6 @@ import Paper from '../Paper';
 import CardContent from './CardContent';
 import CardCover from './CardCover';
 import CardActions from './CardActions';
-import { white } from '../../styles/colors';
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types/Theme';
 
@@ -110,7 +109,6 @@ class Card extends Component<DefaultProps, Props, State> {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: white,
     margin: 4,
   },
   container: {

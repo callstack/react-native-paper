@@ -9,7 +9,6 @@ import withTheme from '../core/withTheme';
 import Icon from './Icon';
 import TouchableIcon from './TouchableIcon';
 import Paper from './Paper';
-import { white } from '../styles/colors';
 import type { Theme } from '../types/Theme';
 
 type Props = {
@@ -115,7 +114,6 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: white,
     margin: 4,
   },
   input: {

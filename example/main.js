@@ -2,11 +2,14 @@
 
 import Expo from 'expo';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, StyleSheet, Platform, StatusBar } from 'react-native';
 import {
   DrawerItem,
   DrawerSection,
   Provider as PaperProvider,
+  withTheme,
+  DarkTheme,
 } from 'react-native-paper';
 import { DrawerNavigator } from 'react-navigation';
 import RootNavigator from './src/RootNavigator';
@@ -22,16 +25,19 @@ const DrawerItemsData = [
 ];
 
 class DrawerItems extends Component {
+  static propTypes = {
+    theme: PropTypes.object.isRequired,
+  };
   state = {
     open: false,
     drawerItemIndex: 0,
   };
-
   _setDrawerItem = index => this.setState({ drawerItemIndex: index });
 
   render() {
+    const { theme: { colors: { paper } } } = this.props;
     return (
-      <View style={styles.drawerContent}>
+      <View style={[styles.drawerContent, { backgroundColor: paper }]}>
         <DrawerSection label="Subheader">
           {DrawerItemsData.map((props, index) =>
             <DrawerItem
@@ -46,21 +52,22 @@ class DrawerItems extends Component {
     );
   }
 }
+const ThemedDrawerItems = withTheme(DrawerItems);
 
 const App = DrawerNavigator(
   { Home: { screen: RootNavigator } },
-  { contentComponent: () => <DrawerItems /> }
+  { contentComponent: () => <ThemedDrawerItems /> }
 );
 
 const styles = StyleSheet.create({
   drawerContent: {
     flex: 1,
-    marginTop: Platform.OS === 'android' ? 25 : 22,
+    paddingTop: Platform.OS === 'android' ? 25 : 22,
   },
 });
 
 Expo.registerRootComponent(() =>
-  <PaperProvider>
+  <PaperProvider theme={DarkTheme}>
     <App />
   </PaperProvider>
 );

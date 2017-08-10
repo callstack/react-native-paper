@@ -90,7 +90,7 @@ class Checkbox extends Component<void, Props, State> {
 
     if (disabled) {
       rippleColor = 'rgba(0, 0, 0, .16)';
-      checkboxColor = 'rgba(0, 0, 0, .26)';
+      checkboxColor = theme.colors.disabled;
     } else {
       rippleColor = color(checkedColor).clearer(0.32).rgbaString();
       checkboxColor = checked ? checkedColor : uncheckedColor;
