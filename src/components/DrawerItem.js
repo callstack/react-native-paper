@@ -26,10 +26,8 @@ const DrawerItem = ({
   theme,
   ...props
 }: Props) => {
-  const { colors, type } = theme;
-  const backgroundColor = active
-    ? type === 'light' ? grey300 : grey700
-    : 'transparent';
+  const { colors, dark } = theme;
+  const backgroundColor = active ? (dark ? grey700 : grey300) : 'transparent';
   const labelColor = active
     ? colors.primary
     : color(colors.text).alpha(0.87).rgbaString();

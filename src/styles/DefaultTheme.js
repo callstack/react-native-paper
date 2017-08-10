@@ -5,7 +5,7 @@ import { indigo500, indigo700, pinkA200, black, white, grey50 } from './colors';
 import fonts from './fonts';
 
 export default {
-  type: 'light',
+  dark: false,
   roundness: 2,
   colors: {
     primary: indigo500,

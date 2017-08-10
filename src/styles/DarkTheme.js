@@ -6,6 +6,7 @@ import DefaultTheme from './DefaultTheme';
 import { white, grey800 } from './colors';
 
 const DarkTheme = {
+  dark: true,
   colors: {
     background: '#303030',
     paper: grey800,
@@ -16,4 +17,4 @@ const DarkTheme = {
   },
 };
 
-export default merge(DefaultTheme, DarkTheme);
+export default merge({}, DefaultTheme, DarkTheme);

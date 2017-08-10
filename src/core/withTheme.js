@@ -36,7 +36,7 @@ export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
       }
 
       this.state = {
-        theme: merge(DefaultTheme, theme, this.props.theme),
+        theme: merge({}, DefaultTheme, theme, this.props.theme),
       };
     }
 
@@ -46,7 +46,7 @@ export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
       this._subscription =
         this.context[channel] &&
         this.context[channel].subscribe(theme =>
-          this.setState({ theme: merge(theme, this.props.theme) })
+          this.setState({ theme: merge({}, theme, this.props.theme) })
         );
     }
 
@@ -54,6 +54,7 @@ export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
       if (this.props.theme !== nextProps.theme) {
         this.setState({
           theme: merge(
+            {},
             this.context[channel] && this.context[channel].get(),
             nextProps.theme
           ),
