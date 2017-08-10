@@ -38,12 +38,6 @@ export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
       this.state = {
         theme: merge(DefaultTheme, theme, this.props.theme),
       };
-
-      // console.log('Ahmed');
-      // console.log(theme);
-      // console.log(this.props.theme);
-      // console.log(merge(DefaultTheme, theme, this.props.theme));
-      // console.log('Ahmed');
     }
 
     state: State;
