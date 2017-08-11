@@ -39,12 +39,12 @@ class ToolbarContent extends Component<void, Props, void> {
     /**
      * Style for the title
      */
-    titleStyle: View.propTypes.style,
+    titleStyle: Text.propTypes.style,
     style: View.propTypes.style,
     /**
      * Style for the subtitle
      */
-    subtitleStyle: View.propTypes.style,
+    subtitleStyle: Text.propTypes.style,
     theme: PropTypes.object.isRequired,
   };
 
