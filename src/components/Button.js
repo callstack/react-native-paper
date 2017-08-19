@@ -3,7 +3,13 @@
 import color from 'color';
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { ActivityIndicator, Animated, View, StyleSheet } from 'react-native';
+import {
+  ActivityIndicator,
+  Animated,
+  View,
+  StyleSheet,
+  ViewPropTypes,
+} from 'react-native';
 import Icon from './Icon';
 import Paper from './Paper';
 import Text from './Typography/Text';
@@ -90,7 +96,7 @@ class Button extends PureComponent<void, Props, State> {
      * Function to execute on press
      */
     onPress: PropTypes.func,
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
     theme: PropTypes.object.isRequired,
   };
 

@@ -7,6 +7,7 @@ import {
   TouchableHighlight,
   Platform,
   View,
+  ViewPropTypes,
 } from 'react-native';
 import color from 'color';
 
@@ -39,7 +40,7 @@ export default class TouchableItem extends PureComponent<
     rippleColor: PropTypes.string,
     underlayColor: PropTypes.string,
     children: PropTypes.element.isRequired,
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
   };
 
   static defaultProps = {

@@ -2,7 +2,7 @@
 
 const path = require('path');
 const escape = require('escape-string-regexp');
-const blacklist = require('react-native/packager/blacklist');
+const blacklist = require('metro-bundler/src/blacklist');
 
 module.exports = {
   getProjectRoots() {

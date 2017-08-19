@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, ViewPropTypes } from 'react-native';
 import color from 'color';
 
 import { black, white } from '../../styles/colors';
@@ -32,7 +32,7 @@ export default class ToolbarAction extends Component<void, Props, void> {
      * Function to execute on press
      */
     onPress: PropTypes.func,
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
   };
 
   render() {

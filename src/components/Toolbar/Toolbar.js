@@ -2,7 +2,7 @@
 
 import React, { Children, Component } from 'react';
 import PropTypes from 'prop-types';
-import { Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, ViewPropTypes } from 'react-native';
 
 import withTheme from '../../core/withTheme';
 import Paper from '../Paper';
@@ -34,7 +34,7 @@ class Toolbar extends Component<DefaultProps, Props, void> {
      * Toolbar content
      */
     children: PropTypes.node.isRequired,
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
     /**
      * Space added it Toolbar to adapt to the StatusBar
      */

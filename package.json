@@ -22,32 +22,31 @@
     "react-native-vector-icons": "*"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
+    "babel-cli": "^6.26.0",
     "babel-eslint": "^7.2.3",
-    "babel-preset-flow": "^6.23.0",
-    "eslint": "^4.1.1",
+    "eslint": "^4.5.0",
     "eslint-config-prettier": "^2.3.0",
-    "eslint-plugin-babel": "^4.1.1",
-    "eslint-plugin-flowtype": "^2.34.1",
-    "eslint-plugin-import": "^2.6.1",
-    "eslint-plugin-prettier": "^2.1.2",
-    "eslint-plugin-react": "^7.1.0",
-    "eslint-plugin-react-native": "^2.3.2",
-    "flow-bin": "~0.45.0",
-    "husky": "^0.14.2",
-    "prettier": "^1.5.2",
+    "eslint-plugin-babel": "^4.1.2",
+    "eslint-plugin-flowtype": "^2.35.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-prettier": "^2.2.0",
+    "eslint-plugin-react": "^7.2.1",
+    "eslint-plugin-react-native": "^3.0.1",
+    "flow-bin": "~0.49.1",
+    "husky": "^0.14.3",
+    "prettier": "^1.5.3",
     "react": "16.0.0-alpha.12",
-    "react-native": "~0.45.1",
-    "react-native-vector-icons": "~4.2.0"
+    "react-native": "^0.47.1",
+    "react-native-vector-icons": "~4.3.0"
   },
   "dependencies": {
     "color": "^0.11.4",
     "prop-types": "^15.5.10",
-    "react-native-drawer": "^2.3.0"
+    "react-native-drawer": "^2.4.0"
   },
   "scripts": {
-    "commitmsg": "babel-node ./scripts/validateCommitMessage.js $GIT_PARAMS --presets flow",
-    "precommit": "npm run lint && npm run flow",
+    "commitmsg": "node ./scripts/validate-commit-message.js $GIT_PARAMS",
+    "precommit": "yarn run lint && yarn run flow",
     "flow": "flow",
     "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"

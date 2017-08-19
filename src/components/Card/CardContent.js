@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ViewPropTypes } from 'react-native';
 
 type Props = {
   index?: number,
@@ -53,7 +53,7 @@ CardContent.propTypes = {
   index: PropTypes.number,
   total: PropTypes.number,
   siblings: PropTypes.arrayOf(PropTypes.string),
-  style: View.propTypes.style,
+  style: ViewPropTypes.style,
 };
 
 const styles = StyleSheet.create({

@@ -18,11 +18,11 @@ const TYPES = {
   breaking: true,
 };
 
-function printError() {
-  console.error('INVALID COMMIT MSG: ' + util.format.apply(null, arguments));
+function printError(...args) {
+  console.error('INVALID COMMIT MSG: ' + util.format.apply(null, args));
 }
 
-function validateMessage(message /*: string */) {
+function validateMessage(message) {
   if (message.length > MAX_LENGTH) {
     printError('is longer than %d characters !', MAX_LENGTH);
     return false;
@@ -44,7 +44,7 @@ function validateMessage(message /*: string */) {
   return true;
 }
 
-function firstLineFromBuffer(buffer /*: Buffer */) {
+function firstLineFromBuffer(buffer) {
   return buffer.toString().split('\n').shift();
 }
 

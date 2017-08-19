@@ -61,6 +61,6 @@ const styles = StyleSheet.create({
 
 Expo.registerRootComponent(() =>
   <PaperProvider>
-    <App />
+    <App onNavigationStateChange={null} />
   </PaperProvider>
 );

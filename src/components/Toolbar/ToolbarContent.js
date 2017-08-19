@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Platform, StyleSheet } from 'react-native';
+import { View, Platform, StyleSheet, ViewPropTypes } from 'react-native';
 import color from 'color';
 
 import Text from '../Typography/Text';
@@ -40,7 +40,7 @@ class ToolbarContent extends Component<void, Props, void> {
      * Style for the title
      */
     titleStyle: Text.propTypes.style,
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
     /**
      * Style for the subtitle
      */
