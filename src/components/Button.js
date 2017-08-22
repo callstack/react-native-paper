@@ -17,6 +17,7 @@ import TouchableRipple from './TouchableRipple';
 import { black, white } from '../styles/colors';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types/Theme';
+import type { IconSource } from './Icon';
 
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
@@ -27,7 +28,7 @@ type Props = {
   primary?: boolean,
   dark?: boolean,
   loading?: boolean,
-  icon?: string,
+  icon?: IconSource,
   color?: string,
   children?: string | Array<string>,
   onPress?: Function,
@@ -78,9 +79,17 @@ class Button extends PureComponent<void, Props, State> {
      */
     loading: PropTypes.bool,
     /**
-     * Icon name
+     * Icon name.
+     * Can be a string (name of MaterialIcon),
+     * an object {of shape {uri: 'https://path.to'}},
+     * required image from assets (const icon = reqiure('../path/to/image.png')),
+     * or any valid React-Native Component (e.g. <Image />)
      */
-    icon: PropTypes.string,
+    icon: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.shape({ uri: PropTypes.string }),
+      PropTypes.number,
+    ]),
     /**
      * Custom text color for flat button, or background color for raised button
      */
@@ -144,9 +153,7 @@ class Button extends PureComponent<void, Props, State> {
     } = this.props;
     const { colors, roundness } = theme;
     const fontFamily = theme.fonts.medium;
-
     let backgroundColor, textColor, isDark;
-
     if (raised) {
       if (disabled) {
         backgroundColor = 'rgba(0, 0, 0, .12)';

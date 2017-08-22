@@ -11,10 +11,11 @@ import TouchableIcon from './TouchableIcon';
 import Paper from './Paper';
 import { white } from '../styles/colors';
 import type { Theme } from '../types/Theme';
+import type { IconSource } from './Icon';
 
 type Props = {
   placeholder?: string,
-  icon?: string,
+  icon?: IconSource,
   value: string,
   onChangeText: (query: string) => void,
   onIconPress?: Function,

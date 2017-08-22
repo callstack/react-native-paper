@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import { Colors, Button } from 'react-native-paper';
 
 export default class ButtonExample extends Component {
@@ -12,6 +12,8 @@ export default class ButtonExample extends Component {
   };
 
   render() {
+    const uri = { uri: 'https://facebook.github.io/react/img/logo_og.png' };
+    const source = require('../assets/chameleon.jpg');
     return (
       <View style={styles.container}>
         <View style={styles.row}>
@@ -47,6 +49,25 @@ export default class ButtonExample extends Component {
           </Button>
           <Button disabled loading raised>
             Loading
+          </Button>
+        </View>
+        <View style={styles.row}>
+          <Button raised icon={uri}>
+            Remote image
+          </Button>
+          <Button raised icon={source}>
+            Required asset
+          </Button>
+          <Button
+            icon={
+              <Image
+                source={source}
+                style={{ width: 16, height: 16, borderRadius: 10 }}
+              />
+            }
+            raised
+          >
+            Custom component
           </Button>
         </View>
       </View>

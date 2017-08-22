@@ -8,12 +8,13 @@ import color from 'color';
 import { black, white } from '../../styles/colors';
 import TouchableRipple from '../TouchableRipple';
 import Icon from '../Icon';
+import type { IconSource } from '../Icon';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 
 type Props = {
   dark?: boolean,
-  icon: string,
+  icon: IconSource,
   onPress?: Function,
   style?: any,
 };
