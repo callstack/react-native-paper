@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { ProgressBar } from 'react-native-paper';
+import { ProgressBar, Paragraph, Colors } from 'react-native-paper';
 
 export default class ProgressBarExample extends Component {
   static title = 'Progress bar';
@@ -10,12 +10,10 @@ export default class ProgressBarExample extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <ProgressBar progress={0} />
-        <ProgressBar progress={0.2} color="red" />
-        <ProgressBar progress={0.4} />
-        <ProgressBar progress={0.6} />
-        <ProgressBar progress={0.8} />
-        <ProgressBar progress={1} />
+        <Paragraph>ProgressBar primary color</Paragraph>
+        <ProgressBar progress={0.5} />
+        <Paragraph>ProgressBar custom color</Paragraph>
+        <ProgressBar progress={0.5} color={Colors.red800} />
       </View>
     );
   }
