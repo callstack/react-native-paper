@@ -89,7 +89,7 @@ export default class TouchableItem extends PureComponent<
                 .rgbaString()
         }
       >
-        {Children.only(children)}
+        <View>{Children.only(children)}</View>
       </TouchableHighlight>
     );
   }

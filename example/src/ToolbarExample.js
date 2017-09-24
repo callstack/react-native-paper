@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import { View, Platform, StatusBar, StyleSheet } from 'react-native';
 import { Colors, Button, Toolbar } from 'react-native-paper';
 
+const MORE_ICON = Platform.OS === 'android' ? 'more-vert' : 'more-horiz';
+
 export default class ToolbarExample extends Component {
   static title = 'Toolbar';
   static navigationOptions = {
@@ -12,11 +14,18 @@ export default class ToolbarExample extends Component {
 
   state = {
     showLeftIcon: true,
-    showSubtitle: true,
+    showSearchIcon: Platform.OS === 'android',
+    showMoreIcon: true,
+    showSubtitle: Platform.OS === 'android',
   };
 
   render() {
-    const { showLeftIcon, showSubtitle } = this.state;
+    const {
+      showLeftIcon,
+      showSearchIcon,
+      showMoreIcon,
+      showSubtitle,
+    } = this.state;
 
     return (
       <View style={styles.container}>
@@ -25,8 +34,7 @@ export default class ToolbarExample extends Component {
           statusBarHeight={Platform.OS === 'ios' ? 20 : StatusBar.currentHeight}
         >
           {showLeftIcon && (
-            <Toolbar.Action
-              icon="arrow-back"
+            <Toolbar.BackAction
               onPress={() => this.props.navigation.goBack()}
             />
           )}
@@ -34,8 +42,12 @@ export default class ToolbarExample extends Component {
             title="Title"
             subtitle={showSubtitle ? 'Subtitle' : null}
           />
-          <Toolbar.Action icon="search" onPress={() => {}} />
-          <Toolbar.Action icon="more-vert" onPress={() => {}} />
+          {showSearchIcon && (
+            <Toolbar.Action icon="search" onPress={() => {}} />
+          )}
+          {showMoreIcon && (
+            <Toolbar.Action icon={MORE_ICON} onPress={() => {}} />
+          )}
         </Toolbar>
         <View style={styles.content}>
           <Button
@@ -53,6 +65,22 @@ export default class ToolbarExample extends Component {
               this.setState({ showSubtitle: !this.state.showSubtitle })}
           >
             {`Subtitle: ${showSubtitle ? 'On' : 'Off'}`}
+          </Button>
+          <Button
+            accent
+            raised
+            onPress={() =>
+              this.setState({ showSearchIcon: !this.state.showSearchIcon })}
+          >
+            {`Search icon: ${showSearchIcon ? 'On' : 'Off'}`}
+          </Button>
+          <Button
+            accent
+            raised
+            onPress={() =>
+              this.setState({ showMoreIcon: !this.state.showMoreIcon })}
+          >
+            {`More icon: ${showMoreIcon ? 'On' : 'Off'}`}
           </Button>
         </View>
       </View>
