@@ -2,62 +2,58 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  View,
-  ProgressBarAndroid,
-  ProgressViewIOS,
-  Platform,
-  StyleSheet,
-} from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types/Theme';
 import setColor from 'color';
 
 type Props = {
+  /**
+   * Progress value (between 0 and 1)
+   */
   progress: number,
+  /**
+   * Color of the progress bar
+   */
   color?: string,
   style?: any,
   theme: Theme,
 };
 
-export const progressProps = {
-  styleAttr: 'Horizontal',
-  indeterminate: false,
-};
-
 /**
-* Progress bar is an indicator used to present some activity in the app
-*/
+ * Progress bar is an indicator used to present some activity in the app
+ *
+ * **Usage:**
+ * ```
+ * const MyComponent = () => (
+ *   <ProgressBar progress={0.5} color={Colors.red800} />
+ * );
+ * ```
+ */
 const ProgressBar = ({ progress, color, style, theme }: Props) => {
-  const ProgressBarComponent =
-    Platform.OS === 'ios' ? ProgressViewIOS : ProgressBarAndroid;
+  const ProgressBarComponent = Platform.select({
+    ios: () => require('react-native').ProgressViewIOS,
+    android: () => require('react-native').ProgressBarAndroid,
+  })();
 
-  const setTintColor = color => {
-    return setColor(color).alpha(0.38).rgbaString();
-  };
+  const tintColor = color || theme.colors.primary;
+  const trackTintColor = setColor(tintColor).alpha(0.38).rgbaString();
 
   return (
-    <View>
-      <ProgressBarComponent
-        {...progressProps}
-        progress={progress}
-        progressTintColor={color || theme.colors.primary}
-        color={color || theme.colors.primary}
-        style={[styles.progressBarHeight, style]}
-        trackTintColor={setTintColor(color || theme.colors.primary)}
-      />
-    </View>
+    <ProgressBarComponent
+      styleAttr="Horizontal"
+      indeterminate={false}
+      progress={progress}
+      progressTintColor={tintColor}
+      color={tintColor}
+      style={[styles.progressBarHeight, style]}
+      trackTintColor={trackTintColor}
+    />
   );
 };
 
 ProgressBar.propTypes = {
-  /**
-  * Progress value (between 0 and 1)
-  */
   progress: PropTypes.number,
-  /**
-  * Color of the progress bar
-  */
   color: PropTypes.string,
   style: PropTypes.any,
   theme: PropTypes.object.isRequired,
@@ -65,7 +61,7 @@ ProgressBar.propTypes = {
 
 const styles = StyleSheet.create({
   progressBarHeight: {
-    height: 40,
+    paddingVertical: 10,
   },
 });
 
