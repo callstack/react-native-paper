@@ -42,13 +42,23 @@ export default class GridViewExample extends Component {
     return (
       <Card style={styles.tile}>
         <View style={styles.inner}>
-          <Text style={styles.text}>
-            {index}
-          </Text>
+          <Text style={styles.text}>{index}</Text>
         </View>
       </Card>
     );
   };
+
+  _renderItem = ({ id, name }) => {
+    return (
+      <Card style={styles.tile}>
+        <View style={styles.inner}>
+          <Text style={styles.text}>{id}</Text>
+        </View>
+      </Card>
+    );
+  };
+
+  _keyExtractor = ({ id }) => id;
 
   _getNumberOfColumns = (width: number) => {
     return Math.floor(width / CARD_SIZE);
@@ -63,6 +73,8 @@ export default class GridViewExample extends Component {
         getNumberOfColumns={this._getNumberOfColumns}
         dataSource={this.state.dataSource}
         renderRow={this._renderRow}
+        keyExtractor={this._keyExtractor}
+        renderItem={this._renderItem}
         onEndReached={this._genRows}
       />
     );

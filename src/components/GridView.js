@@ -2,7 +2,15 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Dimensions, ListView, StyleSheet, ViewPropTypes } from 'react-native';
+import {
+  Dimensions,
+  ListView,
+  StyleSheet,
+  ViewPropTypes,
+  Text,
+  View,
+  VirtualizedList,
+} from 'react-native';
 import { grey200 } from '../styles/colors';
 
 type Layout = {
@@ -18,6 +26,7 @@ type Props = {
   initialLayout: Layout,
   onLayout?: Function,
   contentContainerStyle?: any,
+  keyExtractor: () => string,
 };
 
 type DefaultProps = {
@@ -82,7 +91,15 @@ export default class GridView extends PureComponent<
     });
   };
 
-  _renderRow = (...args: any) => {
+  _keyExtractor = data => {
+    const { keyExtractor } = this.props;
+
+    return Object.values(data)
+      .map(keyExtractor)
+      .join('-');
+  };
+
+  _renderItem = ({ item }) => {
     const containerWidth = this.state.layout.width;
     const { getNumberOfColumns, spacing } = this.props;
     const style = {
@@ -91,13 +108,28 @@ export default class GridView extends PureComponent<
         spacing,
       margin: spacing / 2,
     };
-    const row = this.props.renderRow(...args);
-    if (!row) {
-      return row;
-    }
-    return React.cloneElement(row, {
-      style: [row.props.style, style],
-    });
+
+    return (
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+        }}
+      >
+        {item.map(a => {
+          const row = this.props.renderItem(a);
+
+          if (!row) {
+            return row;
+          }
+
+          return React.cloneElement(row, {
+            key: a.id,
+            style: [row.props.style, style],
+          });
+        })}
+      </View>
+    );
   };
 
   _handleLayout = (e: any) => {
@@ -119,19 +151,80 @@ export default class GridView extends PureComponent<
   _setRef = (c: Object) => (this._root = c);
 
   render() {
+    const data = [
+      {
+        id: 0,
+        name: 'nula',
+      },
+      {
+        id: 1,
+        name: 'jednicka',
+      },
+      {
+        id: 2,
+        name: 'jednicka',
+      },
+      {
+        id: 3,
+        name: 'jednicka',
+      },
+      {
+        id: 4,
+        name: 'jednicka',
+      },
+    ];
+
+    const getItemCount = data => {
+      const containerWidth = this.state.layout.width;
+      const { getNumberOfColumns, spacing } = this.props;
+      const style = {
+        width:
+          (containerWidth - spacing) / getNumberOfColumns(containerWidth) -
+          spacing,
+        margin: spacing / 2,
+      };
+
+      return Math.ceil(style.width * data.length / containerWidth);
+    };
+
+    const getItem = (data, index) => {
+      const containerWidth = this.state.layout.width;
+      const { getNumberOfColumns, spacing } = this.props;
+      const style = {
+        width:
+          (containerWidth - spacing) / getNumberOfColumns(containerWidth) -
+          spacing,
+        margin: spacing / 2,
+      };
+
+      console.log(
+        index,
+        Math.floor(containerWidth / style.width),
+        data.slice(index, index + Math.floor(containerWidth / style.width))
+      );
+
+      return data.slice(
+        index * Math.floor(containerWidth / style.width),
+        index * Math.floor(containerWidth / style.width) +
+          index +
+          Math.floor(containerWidth / style.width)
+      );
+    };
+
+    const keyExtractor = a => {
+      return Object.values(a)
+        .map(({ id }) => id)
+        .join('-');
+    };
+
     return (
-      <ListView
-        {...this.props}
-        key={`grid-${this.state.layout.width}`}
+      <VirtualizedList
+        data={data}
+        getItemCount={getItemCount}
+        getItem={getItem}
         onLayout={this._handleLayout}
-        renderSectionHeader={this._renderSectionHeader}
-        renderRow={this._renderRow}
-        contentContainerStyle={[
-          styles.grid,
-          { padding: this.props.spacing / 2 },
-          this.props.contentContainerStyle,
-        ]}
-        ref={this._setRef}
+        renderItem={this._renderItem}
+        keyExtractor={keyExtractor}
       />
     );
   }
