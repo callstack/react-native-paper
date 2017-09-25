@@ -4,11 +4,9 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import {
   Dimensions,
-  ListView,
-  StyleSheet,
-  ViewPropTypes,
-  Text,
   View,
+  Text,
+  StyleSheet,
   VirtualizedList,
 } from 'react-native';
 import { grey200 } from '../styles/colors';
@@ -18,15 +16,13 @@ type Layout = {
 };
 
 type Props = {
-  dataSource: ListView.DataSource,
   spacing: number,
   getNumberOfColumns: (width: number) => number,
   renderSectionHeader?: (...args: any) => any,
-  renderRow: (...args: any) => any,
   initialLayout: Layout,
   onLayout?: Function,
-  contentContainerStyle?: any,
   keyExtractor: () => string,
+  renderItem: () => void,
 };
 
 type DefaultProps = {
@@ -44,23 +40,11 @@ export default class GridView extends PureComponent<
   Props,
   State
 > {
-  static propTypes = {
-    dataSource: PropTypes.instanceOf(ListView.DataSource).isRequired,
-    spacing: PropTypes.number.isRequired,
-    getNumberOfColumns: PropTypes.func.isRequired,
-    renderSectionHeader: PropTypes.func,
-    renderRow: PropTypes.func.isRequired,
-    onLayout: PropTypes.func,
-    contentContainerStyle: ViewPropTypes.style,
-  };
-
   static defaultProps = {
     initialLayout: { width: Dimensions.get('window').width },
     getNumberOfColumns: () => 1,
     spacing: 0,
   };
-
-  static DataSource = ListView.DataSource;
 
   constructor(props: Props) {
     super(props);
@@ -72,24 +56,27 @@ export default class GridView extends PureComponent<
 
   state: State;
 
-  scrollTo(options: any) {
-    this._root.scrollTo(options);
-  }
-
   _root: Object;
 
-  _renderSectionHeader = (...args) => {
-    const header = this.props.renderSectionHeader
-      ? this.props.renderSectionHeader(...args)
-      : null;
-    if (!header) {
-      return header;
-    }
-    const { width } = this.state.layout;
-    return React.cloneElement(header, {
-      style: [header.props.style, { width }],
+  /**
+   * PUBLIC METHODS
+   */
+
+  scrollToIndex = index => {
+    const containerWidth = this.state.layout.width;
+
+    return this._root.scrollToIndex({
+      index: Math.floor(index / (containerWidth / this._getWidthOfOneItem())),
     });
   };
+
+  scrollToEnd = () => this._root.scrollToEnd(); // todo
+  scrollToItem = () => this._root.scrollToItem(); // todo
+  scrollToOffset = (...args) => this._root.scrollToOffset(...args); // todo
+
+  /**
+   * PRIVATE FUNCTIONS
+   */
 
   _keyExtractor = data => {
     const { keyExtractor } = this.props;
@@ -100,12 +87,9 @@ export default class GridView extends PureComponent<
   };
 
   _renderItem = ({ item }) => {
-    const containerWidth = this.state.layout.width;
-    const { getNumberOfColumns, spacing } = this.props;
+    const { spacing, keyExtractor } = this.props;
     const style = {
-      width:
-        (containerWidth - spacing) / getNumberOfColumns(containerWidth) -
-        spacing,
+      width: this._getWidthOfOneItem(),
       margin: spacing / 2,
     };
 
@@ -113,6 +97,7 @@ export default class GridView extends PureComponent<
       <View
         style={{
           display: 'flex',
+          justifyContent: 'center',
           flexDirection: 'row',
         }}
       >
@@ -120,11 +105,11 @@ export default class GridView extends PureComponent<
           const row = this.props.renderItem(a);
 
           if (!row) {
-            return row;
+            return null;
           }
 
           return React.cloneElement(row, {
-            key: a.id,
+            key: keyExtractor(a),
             style: [row.props.style, style],
           });
         })}
@@ -150,81 +135,46 @@ export default class GridView extends PureComponent<
 
   _setRef = (c: Object) => (this._root = c);
 
+  _getItemCount = data => {
+    const containerWidth = this.state.layout.width;
+
+    return Math.ceil(
+      data.length /
+        (containerWidth / (this._getWidthOfOneItem() + this.props.spacing))
+    );
+  };
+
+  _getItem = (data, index) => {
+    const containerWidth = this.state.layout.width;
+    const itemWidth = this._getWidthOfOneItem();
+    const numberOfItemsInRow = Math.floor(containerWidth / itemWidth);
+
+    return data.slice(
+      index * numberOfItemsInRow,
+      index * numberOfItemsInRow + numberOfItemsInRow
+    );
+  };
+
+  _getWidthOfOneItem = () => {
+    const containerWidth = this.state.layout.width;
+    const { getNumberOfColumns, spacing } = this.props;
+    return (
+      (containerWidth - spacing) / getNumberOfColumns(containerWidth) - spacing
+    );
+  };
+
   render() {
-    const data = [
-      {
-        id: 0,
-        name: 'nula',
-      },
-      {
-        id: 1,
-        name: 'jednicka',
-      },
-      {
-        id: 2,
-        name: 'jednicka',
-      },
-      {
-        id: 3,
-        name: 'jednicka',
-      },
-      {
-        id: 4,
-        name: 'jednicka',
-      },
-    ];
-
-    const getItemCount = data => {
-      const containerWidth = this.state.layout.width;
-      const { getNumberOfColumns, spacing } = this.props;
-      const style = {
-        width:
-          (containerWidth - spacing) / getNumberOfColumns(containerWidth) -
-          spacing,
-        margin: spacing / 2,
-      };
-
-      return Math.ceil(style.width * data.length / containerWidth);
-    };
-
-    const getItem = (data, index) => {
-      const containerWidth = this.state.layout.width;
-      const { getNumberOfColumns, spacing } = this.props;
-      const style = {
-        width:
-          (containerWidth - spacing) / getNumberOfColumns(containerWidth) -
-          spacing,
-        margin: spacing / 2,
-      };
-
-      console.log(
-        index,
-        Math.floor(containerWidth / style.width),
-        data.slice(index, index + Math.floor(containerWidth / style.width))
-      );
-
-      return data.slice(
-        index * Math.floor(containerWidth / style.width),
-        index * Math.floor(containerWidth / style.width) +
-          index +
-          Math.floor(containerWidth / style.width)
-      );
-    };
-
-    const keyExtractor = a => {
-      return Object.values(a)
-        .map(({ id }) => id)
-        .join('-');
-    };
-
+    const { data } = this.props;
     return (
       <VirtualizedList
+        {...this.props}
         data={data}
-        getItemCount={getItemCount}
-        getItem={getItem}
+        getItemCount={this._getItemCount}
+        getItem={this._getItem}
         onLayout={this._handleLayout}
         renderItem={this._renderItem}
-        keyExtractor={keyExtractor}
+        keyExtractor={this._keyExtractor}
+        ref={c => (this._root = c)}
       />
     );
   }

@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Button } from 'react-native';
 import { Colors, Card, Text, GridView } from 'react-native-paper';
 
 const CARD_SIZE = 160;
@@ -11,16 +11,13 @@ export default class GridViewExample extends Component {
 
   state = {
     items: [],
-    dataSource: new GridView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-    }),
   };
 
   componentWillMount() {
-    this._genRows();
+    this.genRows();
   }
 
-  _genRows = () => {
+  genRows = () => {
     const items = this.state.items.slice(0);
     const itemsLength = items.length;
 
@@ -34,21 +31,10 @@ export default class GridViewExample extends Component {
 
     this.setState({
       items,
-      dataSource: this.state.dataSource.cloneWithRows(items),
     });
   };
 
-  _renderRow = index => {
-    return (
-      <Card style={styles.tile}>
-        <View style={styles.inner}>
-          <Text style={styles.text}>{index}</Text>
-        </View>
-      </Card>
-    );
-  };
-
-  _renderItem = ({ id, name }) => {
+  renderItem = id => {
     return (
       <Card style={styles.tile}>
         <View style={styles.inner}>
@@ -58,25 +44,33 @@ export default class GridViewExample extends Component {
     );
   };
 
-  _keyExtractor = ({ id }) => id;
+  keyExtractor = id => {
+    return id;
+  };
 
-  _getNumberOfColumns = (width: number) => {
+  getNumberOfColumns = (width: number) => {
     return Math.floor(width / CARD_SIZE);
   };
 
   render() {
     return (
-      <GridView
-        {...this.props}
-        removeClippedSubviews={false}
-        spacing={8}
-        getNumberOfColumns={this._getNumberOfColumns}
-        dataSource={this.state.dataSource}
-        renderRow={this._renderRow}
-        keyExtractor={this._keyExtractor}
-        renderItem={this._renderItem}
-        onEndReached={this._genRows}
-      />
+      <View>
+        <Button
+          title={'Scroll to tile with index 5'}
+          onPress={() => this.ref.scrollToIndex(5)}
+        />
+
+        <GridView
+          {...this.props}
+          spacing={8}
+          getNumberOfColumns={this.getNumberOfColumns}
+          data={this.state.items}
+          keyExtractor={this.keyExtractor}
+          renderItem={this.renderItem}
+          ref={ref => (this.ref = ref)}
+          onEndReached={this.genRows}
+        />
+      </View>
     );
   }
 }
