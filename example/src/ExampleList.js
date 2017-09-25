@@ -16,6 +16,7 @@ import RadioButtonExample from './RadioButtonExample';
 import TextExample from './TextExample';
 import ToolbarExample from './ToolbarExample';
 import SearchBarExample from './SearchBarExample';
+import ProgressBarExample from './ProgressBarExample';
 
 export const examples = {
   button: ButtonExample,
@@ -30,6 +31,7 @@ export const examples = {
   toolbar: ToolbarExample,
   text: TextExample,
   searchbar: SearchBarExample,
+  progressbar: ProgressBarExample,
 };
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
