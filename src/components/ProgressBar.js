@@ -2,7 +2,12 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Platform, StyleSheet } from 'react-native';
+import {
+  Platform,
+  StyleSheet,
+  ProgressViewIOS,
+  ProgressBarAndroid,
+} from 'react-native';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types/Theme';
 import setColor from 'color';
@@ -20,6 +25,11 @@ type Props = {
   theme: Theme,
 };
 
+const ProgressBarComponent = Platform.select({
+  ios: ProgressViewIOS,
+  android: ProgressBarAndroid,
+});
+
 /**
  * Progress bar is an indicator used to present some activity in the app
  *
@@ -31,11 +41,6 @@ type Props = {
  * ```
  */
 const ProgressBar = ({ progress, color, style, theme }: Props) => {
-  const ProgressBarComponent = Platform.select({
-    ios: () => require('react-native').ProgressViewIOS,
-    android: () => require('react-native').ProgressBarAndroid,
-  })();
-
   const tintColor = color || theme.colors.primary;
   const trackTintColor = setColor(tintColor).alpha(0.38).rgbaString();
 
