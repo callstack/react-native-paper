@@ -11,14 +11,13 @@ export default class GridViewExample extends Component {
 
   state = {
     items: [],
-    dataSource: new GridView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-    }),
   };
 
   componentWillMount() {
     this._genRows();
   }
+
+  ref: GridView;
 
   _genRows = () => {
     const items = this.state.items.slice(0);
@@ -34,18 +33,21 @@ export default class GridViewExample extends Component {
 
     this.setState({
       items,
-      dataSource: this.state.dataSource.cloneWithRows(items),
     });
   };
 
-  _renderRow = index => {
+  _renderItem = (id: number) => {
     return (
       <Card style={styles.tile}>
         <View style={styles.inner}>
-          <Text style={styles.text}>{index}</Text>
+          <Text style={styles.text}>{id}</Text>
         </View>
       </Card>
     );
+  };
+
+  _keyExtractor = (id: number) => {
+    return id;
   };
 
   _getNumberOfColumns = (width: number) => {
@@ -54,15 +56,18 @@ export default class GridViewExample extends Component {
 
   render() {
     return (
-      <GridView
-        {...this.props}
-        removeClippedSubviews={false}
-        spacing={8}
-        getNumberOfColumns={this._getNumberOfColumns}
-        dataSource={this.state.dataSource}
-        renderRow={this._renderRow}
-        onEndReached={this._genRows}
-      />
+      <View>
+        <GridView
+          {...this.props}
+          spacing={8}
+          getNumberOfColumns={this._getNumberOfColumns}
+          data={this.state.items}
+          keyExtractor={this._keyExtractor}
+          renderItem={this._renderItem}
+          ref={ref => (this.ref = ref)}
+          onEndReached={this._genRows}
+        />
+      </View>
     );
   }
 }

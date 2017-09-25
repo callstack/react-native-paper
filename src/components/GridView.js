@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Dimensions, ListView, StyleSheet, ViewPropTypes } from 'react-native';
+import { Dimensions, View, StyleSheet, VirtualizedList } from 'react-native';
 import { grey200 } from '../styles/colors';
 
 type Layout = {
@@ -10,14 +10,29 @@ type Layout = {
 };
 
 type Props = {
-  dataSource: ListView.DataSource,
+  /**
+   * Item's spacing
+   */
   spacing: number,
+  /**
+   * Function which determine number of columns.
+   */
   getNumberOfColumns: (width: number) => number,
-  renderSectionHeader?: (...args: any) => any,
-  renderRow: (...args: any) => any,
+  /**
+   * Data for the list
+   */
+  data: Array<any>,
+  /**
+   * Function which should return ID base on the item.
+   */
+  keyExtractor: (item: any) => string,
+  contentContainerStyle: ?Object,
+  /**
+   * Component for rendering item
+   */
+  renderItem: (item: any) => React$Element<*>,
   initialLayout: Layout,
   onLayout?: Function,
-  contentContainerStyle?: any,
 };
 
 type DefaultProps = {
@@ -36,13 +51,17 @@ export default class GridView extends PureComponent<
   State
 > {
   static propTypes = {
-    dataSource: PropTypes.instanceOf(ListView.DataSource).isRequired,
+    data: PropTypes.array.isRequired,
+
     spacing: PropTypes.number.isRequired,
+
     getNumberOfColumns: PropTypes.func.isRequired,
-    renderSectionHeader: PropTypes.func,
-    renderRow: PropTypes.func.isRequired,
+
+    renderItem: PropTypes.func.isRequired,
+
+    keyExtractor: PropTypes.func.isRequired,
     onLayout: PropTypes.func,
-    contentContainerStyle: ViewPropTypes.style,
+    initialLayout: PropTypes.object,
   };
 
   static defaultProps = {
@@ -50,8 +69,6 @@ export default class GridView extends PureComponent<
     getNumberOfColumns: () => 1,
     spacing: 0,
   };
-
-  static DataSource = ListView.DataSource;
 
   constructor(props: Props) {
     super(props);
@@ -63,41 +80,69 @@ export default class GridView extends PureComponent<
 
   state: State;
 
-  scrollTo(options: any) {
-    this._root.scrollTo(options);
-  }
+  _root: VirtualizedList;
 
-  _root: Object;
+  scrollToIndex = (index: number) => {
+    const containerWidth = this.state.layout.width;
 
-  _renderSectionHeader = (...args) => {
-    const header = this.props.renderSectionHeader
-      ? this.props.renderSectionHeader(...args)
-      : null;
-    if (!header) {
-      return header;
-    }
-    const { width } = this.state.layout;
-    return React.cloneElement(header, {
-      style: [header.props.style, { width }],
+    return this._root.scrollToIndex({
+      index: Math.floor(index / (containerWidth / this._getWidthOfOneItem())),
     });
   };
 
-  _renderRow = (...args: any) => {
+  scrollToItem = (item: any) => {
+    const { data, keyExtractor } = this.props;
     const containerWidth = this.state.layout.width;
-    const { getNumberOfColumns, spacing } = this.props;
+
+    const index = data.findIndex(
+      item_ => keyExtractor(item_) === keyExtractor(item)
+    );
+
+    return this._root.scrollToIndex({
+      index: Math.floor(index / (containerWidth / this._getWidthOfOneItem())),
+    });
+  };
+
+  scrollToEnd = () => this._root.scrollToEnd();
+
+  scrollToOffset = (offset: number, animated: boolean = true) =>
+    this._root.scrollToOffset({
+      animated,
+      offset,
+    });
+
+  _keyExtractor = data => {
+    const { keyExtractor } = this.props;
+
+    return Object.values(data)
+      .map(keyExtractor)
+      .join('-');
+  };
+
+  _renderItem = ({ item: items }) => {
+    const { spacing, keyExtractor, renderItem } = this.props;
     const style = {
-      width:
-        (containerWidth - spacing) / getNumberOfColumns(containerWidth) -
-        spacing,
+      width: this._getWidthOfOneItem(),
       margin: spacing / 2,
     };
-    const row = this.props.renderRow(...args);
-    if (!row) {
-      return row;
-    }
-    return React.cloneElement(row, {
-      style: [row.props.style, style],
-    });
+
+    return (
+      <View
+        style={[
+          styles.grid,
+          { padding: this.props.spacing / 2 },
+          this.props.contentContainerStyle,
+        ]}
+      >
+        {items.map(item => {
+          const itemElement = renderItem(item);
+          return React.cloneElement(itemElement, {
+            key: keyExtractor(item),
+            style: [itemElement.props.style, style],
+          });
+        })}
+      </View>
+    );
   };
 
   _handleLayout = (e: any) => {
@@ -105,33 +150,59 @@ export default class GridView extends PureComponent<
       this.props.onLayout(e);
     }
 
-    if (this.state.layout.width === e.nativeEvent.layout.width) {
+    const layoutWidth = Math.round(e.nativeEvent.layout.width);
+
+    if (this.state.layout.width === layoutWidth) {
       return;
     }
 
-    const containerWidth = e.nativeEvent.layout.width;
-
     this.setState({
-      layout: { width: containerWidth },
+      layout: { width: layoutWidth },
     });
   };
 
-  _setRef = (c: Object) => (this._root = c);
+  _getItemCount = data => {
+    const containerWidth = this.state.layout.width;
+
+    return Math.ceil(
+      data.length /
+        Math.floor(
+          containerWidth / (this._getWidthOfOneItem() + this.props.spacing)
+        )
+    );
+  };
+
+  _getItem = (data, index) => {
+    const containerWidth = this.state.layout.width;
+    const itemWidth = this._getWidthOfOneItem();
+    const numberOfItemsInRow = Math.floor(containerWidth / itemWidth);
+
+    return data.slice(
+      index * numberOfItemsInRow,
+      index * numberOfItemsInRow + numberOfItemsInRow
+    );
+  };
+
+  _getWidthOfOneItem = () => {
+    const containerWidth = this.state.layout.width;
+    const { getNumberOfColumns, spacing } = this.props;
+    return (
+      (containerWidth - spacing) / getNumberOfColumns(containerWidth) - spacing
+    );
+  };
 
   render() {
+    const { data } = this.props;
     return (
-      <ListView
+      <VirtualizedList
         {...this.props}
-        key={`grid-${this.state.layout.width}`}
+        data={data}
+        getItemCount={this._getItemCount}
+        getItem={this._getItem}
         onLayout={this._handleLayout}
-        renderSectionHeader={this._renderSectionHeader}
-        renderRow={this._renderRow}
-        contentContainerStyle={[
-          styles.grid,
-          { padding: this.props.spacing / 2 },
-          this.props.contentContainerStyle,
-        ]}
-        ref={this._setRef}
+        renderItem={this._renderItem}
+        keyExtractor={this._keyExtractor}
+        ref={c => (this._root = c)}
       />
     );
   }
@@ -140,7 +211,6 @@ export default class GridView extends PureComponent<
 const styles = StyleSheet.create({
   grid: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
     alignItems: 'flex-start',
     backgroundColor: grey200,
   },
