@@ -14,12 +14,12 @@ export default class GridViewExample extends Component {
   };
 
   componentWillMount() {
-    this.genRows();
+    this._genRows();
   }
 
   ref: GridView;
 
-  genRows = () => {
+  _genRows = () => {
     const items = this.state.items.slice(0);
     const itemsLength = items.length;
 
@@ -36,7 +36,7 @@ export default class GridViewExample extends Component {
     });
   };
 
-  renderItem = (id: number) => {
+  _renderItem = (id: number) => {
     return (
       <Card style={styles.tile}>
         <View style={styles.inner}>
@@ -46,11 +46,11 @@ export default class GridViewExample extends Component {
     );
   };
 
-  keyExtractor = (id: number) => {
+  _keyExtractor = (id: number) => {
     return id;
   };
 
-  getNumberOfColumns = (width: number) => {
+  _getNumberOfColumns = (width: number) => {
     return Math.floor(width / CARD_SIZE);
   };
 
@@ -60,12 +60,12 @@ export default class GridViewExample extends Component {
         <GridView
           {...this.props}
           spacing={8}
-          getNumberOfColumns={this.getNumberOfColumns}
+          getNumberOfColumns={this._getNumberOfColumns}
           data={this.state.items}
-          keyExtractor={this.keyExtractor}
-          renderItem={this.renderItem}
+          keyExtractor={this._keyExtractor}
+          renderItem={this._renderItem}
           ref={ref => (this.ref = ref)}
-          onEndReached={this.genRows}
+          onEndReached={this._genRows}
         />
       </View>
     );
