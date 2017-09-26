@@ -63,7 +63,9 @@ class ToolbarContent extends Component<void, Props, void> {
 
     const titleColor = dark ? white : primaryText;
     const subtitleColor = dark
-      ? color(white).alpha(0.7).rgbaString()
+      ? color(white)
+          .alpha(0.7)
+          .rgbaString()
       : secondaryText;
 
     return (
@@ -78,13 +80,14 @@ class ToolbarContent extends Component<void, Props, void> {
         >
           {title}
         </Text>
-        {subtitle &&
+        {subtitle && (
           <Text
             style={[styles.subtitle, { color: subtitleColor }, subtitleStyle]}
             numberOfLines={1}
           >
             {subtitle}
-          </Text>}
+          </Text>
+        )}
       </View>
     );
   }

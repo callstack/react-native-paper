@@ -72,9 +72,7 @@ export default class TouchableItem extends PureComponent<
               : TouchableNativeFeedback.Ripple(rippleColor, borderless)
           }
         >
-          <View style={style}>
-            {Children.only(children)}
-          </View>
+          <View style={style}>{Children.only(children)}</View>
         </TouchableNativeFeedback>
       );
     }
@@ -86,7 +84,9 @@ export default class TouchableItem extends PureComponent<
         underlayColor={
           underlayColor != null
             ? underlayColor
-            : color(rippleColor).clearer(0.5).rgbaString()
+            : color(rippleColor)
+                .clearer(0.5)
+                .rgbaString()
         }
       >
         {Children.only(children)}

@@ -84,7 +84,9 @@ class RadioButton extends Component<void, Props, State> {
       rippleColor = 'rgba(0, 0, 0, .16)';
       radioColor = 'rgba(0, 0, 0, .26)';
     } else {
-      rippleColor = color(checkedColor).clearer(0.32).rgbaString();
+      rippleColor = color(checkedColor)
+        .clearer(0.32)
+        .rgbaString();
       radioColor = checked ? checkedColor : uncheckedColor;
     }
 
@@ -102,19 +104,19 @@ class RadioButton extends Component<void, Props, State> {
             { borderColor: radioColor, borderWidth: this.state.borderAnim },
           ]}
         >
-          {this.props.checked
-            ? <View style={[StyleSheet.absoluteFill, styles.radioContainer]}>
-                <Animated.View
-                  style={[
-                    styles.dot,
-                    {
-                      backgroundColor: radioColor,
-                      transform: [{ scale: this.state.radioAnim }],
-                    },
-                  ]}
-                />
-              </View>
-            : null}
+          {this.props.checked ? (
+            <View style={[StyleSheet.absoluteFill, styles.radioContainer]}>
+              <Animated.View
+                style={[
+                  styles.dot,
+                  {
+                    backgroundColor: radioColor,
+                    transform: [{ scale: this.state.radioAnim }],
+                  },
+                ]}
+              />
+            </View>
+          ) : null}
         </Animated.View>
       </TouchableRipple>
     );

@@ -16,7 +16,12 @@ function getFiles() {
     .readFileSync(path.join(__dirname, '../src/index.js'))
     .toString()
     .split('\n')
-    .map(line => line.split(' ').pop().replace(/('|;)/g, ''))
+    .map(line =>
+      line
+        .split(' ')
+        .pop()
+        .replace(/('|;)/g, '')
+    )
     .filter(line => line.startsWith('./components/'))
     .map(line => {
       const file = require.resolve(path.join(__dirname, '../src', line));
@@ -26,7 +31,10 @@ function getFiles() {
           .toString()
           .match(/export \{ default \} from .+/);
         if (matches && matches.length) {
-          const name = matches[0].split(' ').pop().replace(/('|;)/g, '');
+          const name = matches[0]
+            .split(' ')
+            .pop()
+            .replace(/('|;)/g, '');
           return require.resolve(path.join(__dirname, '../src', line, name));
         }
       }

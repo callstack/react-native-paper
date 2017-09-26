@@ -20,6 +20,14 @@ module.exports = {
   getBlacklistRE() {
     return blacklist([
       new RegExp(
+        `^${escape(
+          path.resolve(
+            __dirname,
+            'node_modules/react-native-svg/node_modules/color'
+          )
+        )}\\/.*$`
+      ),
+      new RegExp(
         `^${escape(path.resolve(__dirname, '..', 'node_modules'))}\\/.*$`
       ),
       new RegExp(
