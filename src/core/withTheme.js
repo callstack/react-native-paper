@@ -9,6 +9,8 @@ type State = {
   theme: Theme,
 };
 
+const isClassComponent = Component => !!Component.prototype.render;
+
 export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
   class ThemedComponent extends PureComponent<void, *, State> {
     static displayName = `withTheme(${Comp.displayName || Comp.name})`;
@@ -67,10 +69,6 @@ export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
       return this._root;
     }
 
-    setNativeProps(...args) {
-      return this._root.setNativeProps(...args);
-    }
-
     _merge = (a, b) => {
       if (a && b) {
         return { ...a, ...b };
@@ -83,13 +81,38 @@ export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
     _root: any;
 
     render() {
-      return (
-        <Comp
-          {...this.props}
-          ref={c => (this._root = c)}
-          theme={this.state.theme}
-        />
-      );
+      if (isClassComponent(Comp)) {
+        return (
+          <Comp
+            {...this.props}
+            ref={c => (this._root = c)}
+            theme={this.state.theme}
+          />
+        );
+      } else {
+        return <Comp {...this.props} theme={this.state.theme} />;
+      }
+    }
+  }
+
+  if (isClassComponent(Comp)) {
+    // getWrappedInstance is exposed by some HOCs like react-redux's connect
+    // Use it to get the ref to the underlying element
+    // Also expose it to access the underlying element after wrapping
+    // $FlowFixMe
+    ThemedComponent.prototype.getWrappedInstance = function() {
+      return this._root.getWrappedInstance
+        ? this._root.getWrappedInstance()
+        : this._root;
+    };
+
+    // setNativeProps is used by Animated to set props on the native component
+    if (Comp.prototype.setNativeProps) {
+      // $FlowFixMe
+      ThemedComponent.prototype.setNativeProps = function(...args) {
+        const root = this.getWrappedInstance();
+        return root.setNativeProps(...args);
+      };
     }
   }
 
