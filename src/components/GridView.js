@@ -61,10 +61,6 @@ export default class GridView extends PureComponent<
 
   _root: VirtualizedList;
 
-  /**
-   * PUBLIC METHODS
-   */
-
   scrollToIndex = (index: number) => {
     const containerWidth = this.state.layout.width;
 
@@ -92,11 +88,7 @@ export default class GridView extends PureComponent<
     this._root.scrollToOffset({
       animated,
       offset,
-    }); // todo
-
-  /**
-   * PRIVATE FUNCTIONS
-   */
+    });
 
   _keyExtractor = data => {
     const { keyExtractor } = this.props;
