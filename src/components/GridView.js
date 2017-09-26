@@ -30,7 +30,7 @@ type Props = {
   /**
    * Component for rendering item
    */
-  renderItem: (item: any) => ?React$Element<*>,
+  renderItem: (item: any) => React$Element<*>,
   initialLayout: Layout,
   onLayout?: Function,
 };
@@ -119,8 +119,8 @@ export default class GridView extends PureComponent<
       .join('-');
   };
 
-  _renderItem = ({ item }) => {
-    const { spacing, keyExtractor } = this.props;
+  _renderItem = ({ item: items }) => {
+    const { spacing, keyExtractor, renderItem } = this.props;
     const style = {
       width: this._getWidthOfOneItem(),
       margin: spacing / 2,
@@ -134,16 +134,11 @@ export default class GridView extends PureComponent<
           this.props.contentContainerStyle,
         ]}
       >
-        {item.map(a => {
-          const row = this.props.renderItem(a);
-
-          if (!row) {
-            return null;
-          }
-
-          return React.cloneElement(row, {
-            key: keyExtractor(a),
-            style: [row.props.style, style],
+        {items.map(item => {
+          const itemElement = renderItem(item);
+          return React.cloneElement(itemElement, {
+            key: keyExtractor(item),
+            style: [itemElement.props.style, style],
           });
         })}
       </View>
