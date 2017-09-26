@@ -25,12 +25,12 @@ type Props = {
   /**
    * Function which should return ID base on the item.
    */
-  keyExtractor: any => string,
+  keyExtractor: (item: any) => string,
   contentContainerStyle: ?Object,
   /**
    * Component for rendering item
    */
-  renderItem: any => ?React$Element<*>,
+  renderItem: (item: any) => ?React$Element<*>,
   initialLayout: Layout,
   onLayout?: Function,
 };
