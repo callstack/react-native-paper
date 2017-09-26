@@ -42,7 +42,9 @@ const ProgressBarComponent = Platform.select({
  */
 const ProgressBar = ({ progress, color, style, theme }: Props) => {
   const tintColor = color || theme.colors.primary;
-  const trackTintColor = setColor(tintColor).alpha(0.38).rgbaString();
+  const trackTintColor = setColor(tintColor)
+    .alpha(0.38)
+    .rgbaString();
 
   return (
     <ProgressBarComponent

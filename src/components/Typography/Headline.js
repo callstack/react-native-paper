@@ -8,13 +8,14 @@ type Props = {
   style?: any,
 };
 
-const Headline = (props: Props) =>
+const Headline = (props: Props) => (
   <StyledText
     {...props}
     alpha={0.87}
     family="regular"
     style={[styles.text, props.style]}
-  />;
+  />
+);
 
 export default Headline;
 

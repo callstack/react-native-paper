@@ -11,9 +11,15 @@ export default {
     primaryDark: indigo700,
     accent: pinkA200,
     text: black,
-    secondaryText: color(black).alpha(0.7).rgbaString(),
-    disabled: color(black).alpha(0.5).rgbaString(),
-    placeholder: color(black).alpha(0.38).rgbaString(),
+    secondaryText: color(black)
+      .alpha(0.7)
+      .rgbaString(),
+    disabled: color(black)
+      .alpha(0.5)
+      .rgbaString(),
+    placeholder: color(black)
+      .alpha(0.38)
+      .rgbaString(),
   },
   fonts,
 };
