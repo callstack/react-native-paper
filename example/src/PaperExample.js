@@ -16,9 +16,7 @@ export default class RipplesExample extends Component {
         {[1, 2, 4, 6, 12].map(i => {
           return (
             <Paper key={i} elevation={i} style={styles.paper}>
-              <Text>
-                {i}
-              </Text>
+              <Text>{i}</Text>
             </Paper>
           );
         })}

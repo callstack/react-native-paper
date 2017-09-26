@@ -24,11 +24,12 @@ export default class ToolbarExample extends Component {
           dark
           statusBarHeight={Platform.OS === 'ios' ? 20 : StatusBar.currentHeight}
         >
-          {showLeftIcon &&
+          {showLeftIcon && (
             <Toolbar.Action
               icon="arrow-back"
               onPress={() => this.props.navigation.goBack()}
-            />}
+            />
+          )}
           <Toolbar.Content
             title="Title"
             subtitle={showSubtitle ? 'Subtitle' : null}
