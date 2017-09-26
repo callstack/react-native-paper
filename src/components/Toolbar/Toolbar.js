@@ -72,10 +72,9 @@ class Toolbar extends Component<DefaultProps, Props, void> {
 
     return (
       <Paper
-        elevation={4}
         style={[
           toolbarStyle,
-          { paddingTop: statusBarHeight },
+          { paddingTop: statusBarHeight, elevation: 4 },
           styles.toolbar,
           styleProp,
         ]}

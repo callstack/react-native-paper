@@ -1,40 +1,34 @@
 /* @flow */
 
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, ViewPropTypes } from 'react-native';
 import * as Colors from '../styles/colors';
 import shadow from '../styles/shadow';
 
 type Props = {
-  elevation: number,
   children?: any,
   style?: any,
 };
 
 /**
- * Paper is a basic container that can give depth to the page
+ * Paper is a basic container that can give depth to the page.
+ * 
+ * Note: Pass *elevation* style, to apply shadow to the component. Defaults to 2.
  */
-export default class Paper extends PureComponent<void, Props, void> {
+export default class Paper extends Component<void, Props, void> {
   static propTypes = {
-    /**
-     * Elevation for the paper
-     */
-    elevation: PropTypes.number.isRequired,
     children: PropTypes.node,
     style: ViewPropTypes.style,
   };
 
   render() {
-    const { children, elevation } = this.props;
+    const { style, ...restOfProps } = this.props;
+    const flattenedStyles = StyleSheet.flatten(style) || {};
+    const { elevation = 2 } = flattenedStyles;
 
     return (
-      <View
-        {...this.props}
-        style={[styles.paper, elevation && shadow(elevation), this.props.style]}
-      >
-        {children}
-      </View>
+      <View {...restOfProps} style={[styles.paper, shadow(elevation), style]} />
     );
   }
 }
