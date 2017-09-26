@@ -12,13 +12,12 @@ type Layout = {
 type Props = {
   spacing: number,
   getNumberOfColumns: (width: number) => number,
-  renderSectionHeader?: (...args: any) => any,
   initialLayout: Layout,
   onLayout?: Function,
   data: Array<any>,
   keyExtractor: any => string,
   contentContainerStyle: ?Object,
-  renderItem: any => React$Element<*>,
+  renderItem: any => ?React$Element<*>,
 };
 
 type DefaultProps = {
@@ -37,10 +36,28 @@ export default class GridView extends PureComponent<
   State
 > {
   static propTypes = {
+    /**
+     * Data for the list
+     */
     data: PropTypes.array.isRequired,
+    /**
+     * Item's spacing
+     */
     spacing: PropTypes.number.isRequired,
+    /**
+     * Function which determine number of columns.
+     */
     getNumberOfColumns: PropTypes.func.isRequired,
+    /**
+     * Component for rendering item
+     */
     renderItem: PropTypes.func.isRequired,
+    /**
+     * Function which should return ID base on the item.
+     */
+    keyExtractor: PropTypes.func.isRequired,
+    onLayout: PropTypes.func,
+    initialLayout: PropTypes.object,
   };
 
   static defaultProps = {
@@ -144,8 +161,6 @@ export default class GridView extends PureComponent<
       layout: { width: containerWidth },
     });
   };
-
-  _setRef = (c: Object) => (this._root = c);
 
   _getItemCount = data => {
     const containerWidth = this.state.layout.width;
