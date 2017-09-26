@@ -4800,11 +4800,7 @@ watch@~0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/watch/-/watch-0.10.0.tgz#77798b2da0f9910d595f1ace5b0c2258521f21dc"
 
-<<<<<<< HEAD
-websql@expo/node-websql#18.0.0:
-=======
 "websql@https://github.com/expo/node-websql/archive/18.0.0.tar.gz":
->>>>>>> master
   version "0.4.4"
   resolved "https://github.com/expo/node-websql/archive/18.0.0.tar.gz#39b12a08b0180495de1412d8a64a529e21ad554e"
   dependencies:

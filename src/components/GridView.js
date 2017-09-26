@@ -155,14 +155,14 @@ export default class GridView extends PureComponent<
       this.props.onLayout(e);
     }
 
-    if (this.state.layout.width === e.nativeEvent.layout.width) {
+    const layoutWidth = Math.round(e.nativeEvent.layout.width);
+
+    if (this.state.layout.width === layoutWidth) {
       return;
     }
 
-    const containerWidth = e.nativeEvent.layout.width;
-
     this.setState({
-      layout: { width: containerWidth },
+      layout: { width: layoutWidth },
     });
   };
 
