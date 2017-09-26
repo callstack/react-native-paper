@@ -2,13 +2,7 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Dimensions,
-  View,
-  Text,
-  StyleSheet,
-  VirtualizedList,
-} from 'react-native';
+import { Dimensions, View, StyleSheet, VirtualizedList } from 'react-native';
 import { grey200 } from '../styles/colors';
 
 type Layout = {
@@ -21,8 +15,10 @@ type Props = {
   renderSectionHeader?: (...args: any) => any,
   initialLayout: Layout,
   onLayout?: Function,
-  keyExtractor: () => string,
-  renderItem: () => void,
+  data: Array<any>,
+  keyExtractor: any => string,
+  contentContainerStyle: ?Object,
+  renderItem: any => React$Element<*>,
 };
 
 type DefaultProps = {
@@ -40,6 +36,13 @@ export default class GridView extends PureComponent<
   Props,
   State
 > {
+  static propTypes = {
+    data: PropTypes.array.isRequired,
+    spacing: PropTypes.number.isRequired,
+    getNumberOfColumns: PropTypes.func.isRequired,
+    renderItem: PropTypes.func.isRequired,
+  };
+
   static defaultProps = {
     initialLayout: { width: Dimensions.get('window').width },
     getNumberOfColumns: () => 1,
@@ -56,13 +59,13 @@ export default class GridView extends PureComponent<
 
   state: State;
 
-  _root: Object;
+  _root: VirtualizedList;
 
   /**
    * PUBLIC METHODS
    */
 
-  scrollToIndex = index => {
+  scrollToIndex = (index: number) => {
     const containerWidth = this.state.layout.width;
 
     return this._root.scrollToIndex({
@@ -70,9 +73,26 @@ export default class GridView extends PureComponent<
     });
   };
 
-  scrollToEnd = () => this._root.scrollToEnd(); // todo
-  scrollToItem = () => this._root.scrollToItem(); // todo
-  scrollToOffset = (...args) => this._root.scrollToOffset(...args); // todo
+  scrollToItem = (item: any) => {
+    const { data, keyExtractor } = this.props;
+    const containerWidth = this.state.layout.width;
+
+    const index = data.findIndex(
+      item_ => keyExtractor(item_) === keyExtractor(item)
+    );
+
+    return this._root.scrollToIndex({
+      index: Math.floor(index / (containerWidth / this._getWidthOfOneItem())),
+    });
+  };
+
+  scrollToEnd = () => this._root.scrollToEnd();
+
+  scrollToOffset = (offset: number, animated: boolean = true) =>
+    this._root.scrollToOffset({
+      animated,
+      offset,
+    }); // todo
 
   /**
    * PRIVATE FUNCTIONS
@@ -95,11 +115,11 @@ export default class GridView extends PureComponent<
 
     return (
       <View
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          flexDirection: 'row',
-        }}
+        style={[
+          styles.grid,
+          { padding: this.props.spacing / 2 },
+          this.props.contentContainerStyle,
+        ]}
       >
         {item.map(a => {
           const row = this.props.renderItem(a);
@@ -140,7 +160,9 @@ export default class GridView extends PureComponent<
 
     return Math.ceil(
       data.length /
-        (containerWidth / (this._getWidthOfOneItem() + this.props.spacing))
+        Math.floor(
+          containerWidth / (this._getWidthOfOneItem() + this.props.spacing)
+        )
     );
   };
 
@@ -183,7 +205,6 @@ export default class GridView extends PureComponent<
 const styles = StyleSheet.create({
   grid: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
     alignItems: 'flex-start',
     backgroundColor: grey200,
   },

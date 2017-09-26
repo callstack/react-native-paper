@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { View, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Colors, Card, Text, GridView } from 'react-native-paper';
 
 const CARD_SIZE = 160;
@@ -16,6 +16,8 @@ export default class GridViewExample extends Component {
   componentWillMount() {
     this.genRows();
   }
+
+  ref: GridView;
 
   genRows = () => {
     const items = this.state.items.slice(0);
@@ -34,7 +36,7 @@ export default class GridViewExample extends Component {
     });
   };
 
-  renderItem = id => {
+  renderItem = (id: number) => {
     return (
       <Card style={styles.tile}>
         <View style={styles.inner}>
@@ -44,7 +46,7 @@ export default class GridViewExample extends Component {
     );
   };
 
-  keyExtractor = id => {
+  keyExtractor = (id: number) => {
     return id;
   };
 
@@ -55,11 +57,6 @@ export default class GridViewExample extends Component {
   render() {
     return (
       <View>
-        <Button
-          title={'Scroll to tile with index 5'}
-          onPress={() => this.ref.scrollToIndex(5)}
-        />
-
         <GridView
           {...this.props}
           spacing={8}
