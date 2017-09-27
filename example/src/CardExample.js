@@ -21,7 +21,7 @@ export default class CardExample extends Component {
         contentContainerStyle={styles.content}
       >
         <Card>
-          <Card.Cover source={require('../assets/wrecked-ship.jpg')} />
+          <Card.Cover source={require('../assets/images/wrecked-ship.jpg')} />
           <Card.Content>
             <Title>Abandoned Ship</Title>
             <Paragraph>
@@ -33,7 +33,7 @@ export default class CardExample extends Component {
           </Card.Content>
         </Card>
         <Card>
-          <Card.Cover source={require('../assets/forest.jpg')} />
+          <Card.Cover source={require('../assets/images/forest.jpg')} />
           <Card.Actions>
             <Button primary>Cancel</Button>
             <Button primary>Ok</Button>
@@ -53,7 +53,7 @@ export default class CardExample extends Component {
           </Card.Content>
         </Card>
         <Card>
-          <Card.Cover source={require('../assets/strawberries.jpg')} />
+          <Card.Cover source={require('../assets/images/strawberries.jpg')} />
         </Card>
       </ScrollView>
     );

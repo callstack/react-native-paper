@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ListView, Text, StyleSheet } from 'react-native';
 import { Colors, TouchableRipple, Divider } from 'react-native-paper';
+import BottomSheetExample from './BottomSheetExample';
 import ButtonExample from './ButtonExample';
 import FABExample from './FABExample';
 import CardExample from './CardExample';
@@ -19,6 +20,7 @@ import SearchBarExample from './SearchBarExample';
 import ProgressBarExample from './ProgressBarExample';
 
 export const examples = {
+  bottomSheet: BottomSheetExample,
   button: ButtonExample,
   fab: FABExample,
   card: CardExample,
