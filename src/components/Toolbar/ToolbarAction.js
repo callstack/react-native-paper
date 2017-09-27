@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import color from 'color';
 
 import { black, white } from '../../styles/colors';
@@ -58,7 +58,9 @@ export default class ToolbarAction extends Component<void, Props, void> {
         style={[styles.button, style]}
         {...rest}
       >
-        <Icon color={iconColor} name={icon} size={size || 24} />
+        <View>
+          <Icon color={iconColor} name={icon} size={size || 24} />
+        </View>
       </TouchableRipple>
     );
   }
