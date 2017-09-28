@@ -18,16 +18,16 @@ type Props = {
 };
 
 /**
- * Checkboxes allow the selection of multiple options from a set
+ * Radio buttons allow the selection of multiple options from a set
  */
-class Checkbox extends Component<void, Props, void> {
+class RadioButton extends Component<void, Props, void> {
   static propTypes = {
     /**
-     * Whether checkbox is checked
+     * Whether radio is checked
      */
     checked: PropTypes.bool.isRequired,
     /**
-     * Whether checkbox is disabled
+     * Whether radio is disabled
      */
     disabled: PropTypes.bool,
     /**
@@ -35,7 +35,7 @@ class Checkbox extends Component<void, Props, void> {
      */
     onPress: PropTypes.func,
     /**
-     * Custom color for checkbox
+     * Custom color for radio
      */
     color: PropTypes.string,
     theme: PropTypes.object.isRequired,
@@ -91,4 +91,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Checkbox);
+export default withTheme(RadioButton);

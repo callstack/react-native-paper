@@ -82,7 +82,7 @@ class RadioButton extends Component<void, Props, State> {
 
     if (disabled) {
       rippleColor = 'rgba(0, 0, 0, .16)';
-      radioColor = 'rgba(0, 0, 0, .26)';
+      radioColor = theme.colors.disabled;
     } else {
       rippleColor = color(checkedColor)
         .clearer(0.32)
