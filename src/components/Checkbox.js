@@ -82,7 +82,6 @@ class Checkbox extends Component<void, Props, State> {
     const { checked, disabled, onPress, theme } = this.props;
 
     const checkedColor = this.props.color || theme.colors.accent;
-    const uncheckedColor = 'rgba(0, 0, 0, .54)';
 
     let rippleColor, checkboxColor;
 
@@ -93,7 +92,7 @@ class Checkbox extends Component<void, Props, State> {
       rippleColor = color(checkedColor)
         .clearer(0.32)
         .rgbaString();
-      checkboxColor = checked ? checkedColor : uncheckedColor;
+      checkboxColor = checked ? checkedColor : theme.colors.disabled;
     }
 
     const borderWidth = this.state.scaleAnim.interpolate({

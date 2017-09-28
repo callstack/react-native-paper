@@ -76,7 +76,6 @@ class RadioButton extends Component<void, Props, State> {
     const { disabled, onPress, checked, theme } = this.props;
 
     const checkedColor = this.props.color || theme.colors.accent;
-    const uncheckedColor = 'rgba(0, 0, 0, .54)';
 
     let rippleColor, radioColor;
 
@@ -87,7 +86,7 @@ class RadioButton extends Component<void, Props, State> {
       rippleColor = color(checkedColor)
         .clearer(0.32)
         .rgbaString();
-      radioColor = checked ? checkedColor : uncheckedColor;
+      radioColor = checked ? checkedColor : theme.colors.disabled;
     }
 
     return (

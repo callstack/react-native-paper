@@ -2,9 +2,9 @@
 
 import React, { Component } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
-import { Colors, Button } from 'react-native-paper';
+import { Colors, Button, withTheme } from 'react-native-paper';
 
-export default class ButtonExample extends Component {
+class ButtonExample extends Component {
   static title = 'Button';
 
   state = {
@@ -14,8 +14,9 @@ export default class ButtonExample extends Component {
   render() {
     const uri = { uri: 'https://facebook.github.io/react/img/logo_og.png' };
     const source = require('../assets/chameleon.jpg');
+    const { theme: { colors: { background } } } = this.props;
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { backgroundColor: background }]}>
         <View style={styles.row}>
           <Button>Simple</Button>
           <Button primary>Primary</Button>
@@ -78,7 +79,6 @@ export default class ButtonExample extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.grey200,
     padding: 4,
   },
 
@@ -88,3 +88,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+export default withTheme(ButtonExample);
