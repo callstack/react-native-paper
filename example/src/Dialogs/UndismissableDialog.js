@@ -9,7 +9,7 @@ const DialogWithLongText = ({
 }: {
   visible: boolean,
   close: Function,
-}) =>
+}) => (
   <Dialog onRequestClose={close} visible={visible} dismissable={false}>
     <Dialog.Title>Alert</Dialog.Title>
     <Dialog.Content>
@@ -23,7 +23,8 @@ const DialogWithLongText = ({
         Agree
       </Button>
     </Dialog.Actions>
-  </Dialog>;
+  </Dialog>
+);
 
 DialogWithLongText.propTypes = {
   visible: PropTypes.bool,

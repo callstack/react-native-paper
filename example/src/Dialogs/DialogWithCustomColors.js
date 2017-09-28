@@ -9,7 +9,7 @@ const DialogWithCustomColors = ({
 }: {
   visible: boolean,
   close: Function,
-}) =>
+}) => (
   <Dialog
     onRequestClose={close}
     style={{ backgroundColor: Colors.grey800 }}
@@ -26,7 +26,8 @@ const DialogWithCustomColors = ({
         OK
       </Button>
     </Dialog.Actions>
-  </Dialog>;
+  </Dialog>
+);
 
 DialogWithCustomColors.propTypes = {
   visible: PropTypes.bool,

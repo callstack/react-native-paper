@@ -7,6 +7,7 @@ import {
   View,
   TouchableWithoutFeedback,
   StyleSheet,
+  ViewPropTypes,
 } from 'react-native';
 import Paper from '../Paper';
 import CardContent from './CardContent';
@@ -15,6 +16,8 @@ import CardActions from './CardActions';
 import { white } from '../../styles/colors';
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types/Theme';
+
+const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
 type DefaultProps = {
   elevation: number,
@@ -41,7 +44,7 @@ class Card extends Component<DefaultProps, Props, State> {
     elevation: PropTypes.number,
     children: PropTypes.node.isRequired,
     onPress: PropTypes.func,
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
     theme: PropTypes.object.isRequired,
   };
 
@@ -80,7 +83,7 @@ class Card extends Component<DefaultProps, Props, State> {
     const siblings = Children.map(children, child => child.type.displayName);
 
     return (
-      <Paper.Animated
+      <AnimatedPaper
         elevation={this.state.elevation}
         style={[styles.card, { borderRadius: roundness }, style]}
       >
@@ -101,7 +104,7 @@ class Card extends Component<DefaultProps, Props, State> {
             )}
           </View>
         </TouchableWithoutFeedback>
-      </Paper.Animated>
+      </AnimatedPaper>
     );
   }
 }

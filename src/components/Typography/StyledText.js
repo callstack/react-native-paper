@@ -24,7 +24,9 @@ class StyledText extends PureComponent<void, Props, void> {
 
   render() {
     const { theme, alpha, family, style, ...rest } = this.props;
-    const textColor = color(theme.colors.text).alpha(alpha).rgbaString();
+    const textColor = color(theme.colors.text)
+      .alpha(alpha)
+      .rgbaString();
     const fontFamily = theme.fonts[family];
 
     return (

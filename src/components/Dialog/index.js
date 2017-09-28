@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { Children } from 'react';
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform, Animated } from 'react-native';
 import PropTypes from 'prop-types';
 import Modal from '../Modal';
 import { black, white } from '../../styles/colors';
@@ -10,6 +10,8 @@ import DialogActions from './Actions';
 import DialogTitle from './Title';
 import DialogContent from './Content';
 import DialogScrollArea from './ScrollArea';
+
+const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
 type Props = {
   children?: any,
@@ -84,11 +86,11 @@ const Dialog = (props: Props) => {
       onRequestClose={onRequestClose}
       visible={visible}
     >
-      <Paper.Animated style={[styles.container, style]} elevation={24}>
+      <AnimatedPaper style={[styles.container, style]} elevation={24}>
         {title}
         {restOfChildrenWithoutTitle}
         {actionBtnsChildren}
-      </Paper.Animated>
+      </AnimatedPaper>
     </Modal>
   );
 };

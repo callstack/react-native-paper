@@ -10,11 +10,12 @@ import TouchableRipple from './TouchableRipple';
 import { white } from '../styles/colors';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types/Theme';
+import type { IconSource } from './Icon';
 
 type Props = {
   small?: boolean,
   dark?: boolean,
-  icon: string,
+  icon: IconSource,
   color?: string,
   onPress?: Function,
   theme: Theme,
@@ -30,7 +31,9 @@ const FAB = (props: Props) => {
   const isDark =
     typeof dark === 'boolean' ? dark : !color(backgroundColor).light();
   const textColor = iconColor || (isDark ? white : 'rgba(0, 0, 0, .54)');
-  const rippleColor = color(textColor).alpha(0.32).rgbaString();
+  const rippleColor = color(textColor)
+    .alpha(0.32)
+    .rgbaString();
 
   return (
     <Paper

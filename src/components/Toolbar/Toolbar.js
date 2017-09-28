@@ -2,7 +2,7 @@
 
 import React, { Children, Component } from 'react';
 import PropTypes from 'prop-types';
-import { Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, ViewPropTypes } from 'react-native';
 
 import withTheme from '../../core/withTheme';
 import Paper from '../Paper';
@@ -34,7 +34,7 @@ class Toolbar extends Component<DefaultProps, Props, void> {
      * Toolbar content
      */
     children: PropTypes.node.isRequired,
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
     /**
      * Space added it Toolbar to adapt to the StatusBar
      */
@@ -81,22 +81,26 @@ class Toolbar extends Component<DefaultProps, Props, void> {
         ]}
         {...rest}
       >
-        {Children.toArray(children).filter(child => child).map((child, i) => {
-          const props: { dark: ?boolean, style?: any } = {
-            dark:
-              typeof child.props.dark === 'undefined' ? dark : child.props.dark,
-          };
+        {Children.toArray(children)
+          .filter(child => child)
+          .map((child, i) => {
+            const props: { dark: ?boolean, style?: any } = {
+              dark:
+                typeof child.props.dark === 'undefined'
+                  ? dark
+                  : child.props.dark,
+            };
 
-          if (child.type === ToolbarContent) {
-            // Extra margin between left icon and ToolbarContent
-            props.style = [
-              { marginHorizontal: i === 0 ? 0 : 8 },
-              child.props.style,
-            ];
-          }
+            if (child.type === ToolbarContent) {
+              // Extra margin between left icon and ToolbarContent
+              props.style = [
+                { marginHorizontal: i === 0 ? 0 : 8 },
+                child.props.style,
+              ];
+            }
 
-          return React.cloneElement(child, props);
-        })}
+            return React.cloneElement(child, props);
+          })}
       </Paper>
     );
   }

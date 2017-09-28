@@ -8,10 +8,9 @@ type Props = {
   style?: any,
 };
 
-const DialogContent = ({ children, style }: Props) =>
-  <View style={[styles.container, style]}>
-    {children}
-  </View>;
+const DialogContent = ({ children, style }: Props) => (
+  <View style={[styles.container, style]}>{children}</View>
+);
 
 const styles = StyleSheet.create({
   container: {

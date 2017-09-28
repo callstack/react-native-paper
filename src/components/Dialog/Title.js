@@ -13,10 +13,15 @@ type Props = {
   theme: Theme,
 };
 
-const DialogTitle = ({ children, theme: { colors: { text } }, style }: Props) =>
+const DialogTitle = ({
+  children,
+  theme: { colors: { text } },
+  style,
+}: Props) => (
   <PaperTitle style={[styles.text, { color: text }, style]}>
     {children}
-  </PaperTitle>;
+  </PaperTitle>
+);
 
 const styles = StyleSheet.create({
   text: {

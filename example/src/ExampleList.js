@@ -17,6 +17,7 @@ import RadioButtonExample from './RadioButtonExample';
 import TextExample from './TextExample';
 import ToolbarExample from './ToolbarExample';
 import SearchBarExample from './SearchBarExample';
+import ProgressBarExample from './ProgressBarExample';
 
 export const examples = {
   button: ButtonExample,
@@ -32,6 +33,7 @@ export const examples = {
   toolbar: ToolbarExample,
   text: TextExample,
   searchbar: SearchBarExample,
+  progressbar: ProgressBarExample,
 };
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -46,15 +48,14 @@ export default class ExampleList extends Component {
     navigation: PropTypes.object,
   };
 
-  _renderRow = id =>
+  _renderRow = id => (
     <TouchableRipple
       style={styles.item}
       onPress={() => this.props.navigation.navigate(id)}
     >
-      <Text style={styles.text}>
-        {examples[id].title}
-      </Text>
-    </TouchableRipple>;
+      <Text style={styles.text}>{examples[id].title}</Text>
+    </TouchableRipple>
+  );
 
   _renderSeparator = (sectionId, rowId) => <Divider key={rowId} />;
 

@@ -33,14 +33,14 @@ class DrawerItems extends Component {
     return (
       <View style={styles.drawerContent}>
         <DrawerSection label="Subheader">
-          {DrawerItemsData.map((props, index) =>
+          {DrawerItemsData.map((props, index) => (
             <DrawerItem
               {...props}
               key={props.key}
               active={this.state.drawerItemIndex === index}
               onPress={() => this._setDrawerItem(index)}
             />
-          )}
+          ))}
         </DrawerSection>
       </View>
     );
@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
   },
 });
 
-Expo.registerRootComponent(() =>
+Expo.registerRootComponent(() => (
   <PaperProvider>
-    <App />
+    <App onNavigationStateChange={null} />
   </PaperProvider>
-);
+));

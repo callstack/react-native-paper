@@ -9,10 +9,9 @@ type Props = {
   style?: any,
 };
 
-const DialogScrollArea = ({ children, style }: Props) =>
-  <View style={[styles.container, style]}>
-    {children}
-  </View>;
+const DialogScrollArea = ({ children, style }: Props) => (
+  <View style={[styles.container, style]}>{children}</View>
+);
 
 const styles = StyleSheet.create({
   container: {

@@ -2,7 +2,7 @@
 
 import React, { Children } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ViewPropTypes } from 'react-native';
 
 type Props = {
   children?: any,
@@ -23,7 +23,7 @@ const DialogActions = (props: Props) => {
 
 DialogActions.propTypes = {
   children: PropTypes.node.isRequired,
-  style: View.propTypes.style,
+  style: ViewPropTypes.style,
 };
 
 const styles = StyleSheet.create({

@@ -12,7 +12,7 @@ const DialogWithLoadingIndicator = ({
 }: {
   visible: boolean,
   close: Function,
-}) =>
+}) => (
   <Dialog onRequestClose={close} visible={visible}>
     <Dialog.Title>Progress Dialog</Dialog.Title>
     <Dialog.Content>
@@ -25,7 +25,8 @@ const DialogWithLoadingIndicator = ({
         <Paragraph>Loading.....</Paragraph>
       </View>
     </Dialog.Content>
-  </Dialog>;
+  </Dialog>
+);
 
 DialogWithLoadingIndicator.propTypes = {
   visible: PropTypes.bool,

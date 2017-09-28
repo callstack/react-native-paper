@@ -16,12 +16,14 @@ type Props = {
 
 const DrawerSection = ({ children, label, theme, ...props }: Props) => {
   const { colors, fonts } = theme;
-  const labelColor = color(colors.text).alpha(0.54).rgbaString();
+  const labelColor = color(colors.text)
+    .alpha(0.54)
+    .rgbaString();
   const fontFamily = fonts.medium;
 
   return (
     <View {...props}>
-      {label &&
+      {label && (
         <View style={{ height: 40, justifyContent: 'center' }}>
           <Text
             numberOfLines={1}
@@ -29,7 +31,8 @@ const DrawerSection = ({ children, label, theme, ...props }: Props) => {
           >
             {label}
           </Text>
-        </View>}
+        </View>
+      )}
       {children}
       <Divider style={{ marginVertical: 4 }} />
     </View>

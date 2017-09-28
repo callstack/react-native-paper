@@ -2,18 +2,19 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, ViewPropTypes } from 'react-native';
 import color from 'color';
 
 import { black, white } from '../../styles/colors';
 import TouchableRipple from '../TouchableRipple';
 import Icon from '../Icon';
+import type { IconSource } from '../Icon';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 
 type Props = {
   dark?: boolean,
-  icon: string,
+  icon: IconSource,
   onPress?: Function,
   style?: any,
 };
@@ -32,14 +33,20 @@ export default class ToolbarAction extends Component<void, Props, void> {
      * Function to execute on press
      */
     onPress: PropTypes.func,
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
   };
 
   render() {
     const { dark, icon, onPress, style, ...rest } = this.props;
 
-    const iconColor = dark ? white : color(black).alpha(0.54).rgbaString();
-    const rippleColor = color(iconColor).alpha(0.32).rgbaString();
+    const iconColor = dark
+      ? white
+      : color(black)
+          .alpha(0.54)
+          .rgbaString();
+    const rippleColor = color(iconColor)
+      .alpha(0.32)
+      .rgbaString();
 
     return (
       <TouchableRipple

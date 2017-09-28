@@ -2,7 +2,12 @@
 
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Paragraph, Checkbox, Colors } from 'react-native-paper';
+import {
+  Paragraph,
+  Checkbox,
+  Colors,
+  TouchableRipple,
+} from 'react-native-paper';
 
 export default class CheckboxExample extends Component {
   static title = 'Checkbox';
@@ -15,16 +20,21 @@ export default class CheckboxExample extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <TouchableRipple
+          onPress={() =>
+            this.setState(state => ({
+              checkedNormal: !state.checkedNormal,
+            }))}
+        >
+          <View style={styles.row}>
+            <Paragraph>Normal (click list item)</Paragraph>
+            <View pointerEvents="none">
+              <Checkbox checked={this.state.checkedNormal} />
+            </View>
+          </View>
+        </TouchableRipple>
         <View style={styles.row}>
-          <Paragraph>Normal</Paragraph>
-          <Checkbox
-            checked={this.state.checkedNormal}
-            onPress={() =>
-              this.setState(state => ({ checkedNormal: !state.checkedNormal }))}
-          />
-        </View>
-        <View style={styles.row}>
-          <Paragraph>Custom</Paragraph>
+          <Paragraph>Custom (click checkbox)</Paragraph>
           <Checkbox
             color={Colors.blue500}
             checked={this.state.checkedCustom}
@@ -49,13 +59,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.white,
-    padding: 8,
+    paddingVertical: 8,
   },
 
   row: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
   },
 });

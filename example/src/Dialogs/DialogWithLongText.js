@@ -10,7 +10,7 @@ const DialogWithLongText = ({
 }: {
   visible: boolean,
   close: Function,
-}) =>
+}) => (
   <Dialog onRequestClose={close} visible={visible}>
     <Dialog.Title>Alert</Dialog.Title>
     <Dialog.ScrollArea style={{ maxHeight: 220, paddingHorizontal: 0 }}>
@@ -44,7 +44,8 @@ const DialogWithLongText = ({
         OK
       </Button>
     </Dialog.Actions>
-  </Dialog>;
+  </Dialog>
+);
 
 DialogWithLongText.propTypes = {
   visible: PropTypes.bool,

@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, View, Animated } from 'react-native';
+import { StyleSheet, View, ViewPropTypes } from 'react-native';
 import * as Colors from '../styles/colors';
 import shadow from '../styles/shadow';
 
@@ -22,10 +22,8 @@ export default class Paper extends PureComponent<void, Props, void> {
      */
     elevation: PropTypes.number.isRequired,
     children: PropTypes.node,
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
   };
-
-  static Animated = null;
 
   render() {
     const { children, elevation } = this.props;
@@ -40,8 +38,6 @@ export default class Paper extends PureComponent<void, Props, void> {
     );
   }
 }
-
-Paper.Animated = Animated.createAnimatedComponent(Paper);
 
 const styles = StyleSheet.create({
   paper: {

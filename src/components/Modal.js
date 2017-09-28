@@ -157,10 +157,11 @@ export default class Modal extends PureComponent<DefaultProps, Props, State> {
               { backgroundColor: 'rgba(0, 0, 0, .5)' },
             ]}
           />
-          {dismissable &&
+          {dismissable && (
             <TouchableWithoutFeedback onPress={this._hideModal}>
               <View style={StyleSheet.absoluteFill} />
-            </TouchableWithoutFeedback>}
+            </TouchableWithoutFeedback>
+          )}
           <Animated.View style={[{ opacity: this.state.opacity }]}>
             {children}
           </Animated.View>
