@@ -29,5 +29,6 @@ export { default as DrawerItem } from './components/DrawerItem';
 export { default as DrawerSection } from './components/DrawerSection';
 export { default as GridView } from './components/GridView';
 export { default as SearchBar } from './components/SearchBar';
+export { default as ProgressBar } from './components/ProgressBar';
 
 export { default as Toolbar } from './components/Toolbar';

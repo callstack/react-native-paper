@@ -2,7 +2,7 @@
 
 const path = require('path');
 const escape = require('escape-string-regexp');
-const blacklist = require('react-native/packager/blacklist');
+const blacklist = require('metro-bundler/src/blacklist');
 
 module.exports = {
   getProjectRoots() {
@@ -13,6 +13,14 @@ module.exports = {
   },
   getBlacklistRE() {
     return blacklist([
+      new RegExp(
+        `^${escape(
+          path.resolve(
+            __dirname,
+            'node_modules/react-native-svg/node_modules/color'
+          )
+        )}\\/.*$`
+      ),
       new RegExp(
         `^${escape(path.resolve(__dirname, '..', 'node_modules'))}\\/.*$`
       ),

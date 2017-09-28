@@ -9,8 +9,6 @@ import TouchableRipple from './TouchableRipple';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types/Theme';
 
-const AnimatedIcon = Animated.createAnimatedComponent(Icon);
-
 type Props = {
   checked: boolean,
   disabled?: boolean,
@@ -92,7 +90,9 @@ class Checkbox extends Component<void, Props, State> {
       rippleColor = 'rgba(0, 0, 0, .16)';
       checkboxColor = theme.colors.disabled;
     } else {
-      rippleColor = color(checkedColor).clearer(0.32).rgbaString();
+      rippleColor = color(checkedColor)
+        .clearer(0.32)
+        .rgbaString();
       checkboxColor = checked ? checkedColor : uncheckedColor;
     }
 
@@ -110,7 +110,7 @@ class Checkbox extends Component<void, Props, State> {
         style={styles.container}
       >
         <Animated.View style={{ transform: [{ scale: this.state.scaleAnim }] }}>
-          <AnimatedIcon
+          <Icon
             allowFontScaling={false}
             name={checked ? 'check-box' : 'check-box-outline-blank'}
             size={24}

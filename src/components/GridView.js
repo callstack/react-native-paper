@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Dimensions, ListView, StyleSheet, View } from 'react-native';
+import { Dimensions, ListView, StyleSheet, ViewPropTypes } from 'react-native';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types/Theme';
 
@@ -40,8 +40,8 @@ class GridView extends PureComponent<DefaultProps, Props, State> {
     renderSectionHeader: PropTypes.func,
     renderRow: PropTypes.func.isRequired,
     onLayout: PropTypes.func,
-    contentContainerStyle: View.propTypes.style,
     theme: PropTypes.object.isRequired,
+    contentContainerStyle: ViewPropTypes.style,
   };
 
   static defaultProps = {

@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
+import { View, ViewPropTypes } from 'react-native';
 import shadow from '../styles/shadow';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types/Theme';
@@ -24,8 +24,8 @@ class Paper extends PureComponent<void, Props, void> {
      */
     elevation: PropTypes.number.isRequired,
     children: PropTypes.node,
-    style: View.propTypes.style,
     theme: PropTypes.object.isRequired,
+    style: ViewPropTypes.style,
   };
 
   render() {

@@ -10,10 +10,11 @@ import Icon from './Icon';
 import TouchableIcon from './TouchableIcon';
 import Paper from './Paper';
 import type { Theme } from '../types/Theme';
+import type { IconSource } from './Icon';
 
 type Props = {
   placeholder?: string,
-  icon?: string,
+  icon?: IconSource,
   value: string,
   onChangeText: (query: string) => void,
   onIconPress?: Function,
@@ -66,27 +67,33 @@ class SearchBar extends Component<void, Props, void> {
     } = this.props;
     const { colors, roundness } = theme;
     const textColor = colors.text;
-    const iconColor = color(textColor).alpha(0.54).rgbaString();
-    const rippleColor = color(textColor).alpha(0.32).rgbaString();
+    const iconColor = color(textColor)
+      .alpha(0.54)
+      .rgbaString();
+    const rippleColor = color(textColor)
+      .alpha(0.32)
+      .rgbaString();
 
     return (
       <Paper
         elevation={4}
         style={[{ borderRadius: roundness }, styles.container, style]}
       >
-        {onIconPress
-          ? <TouchableIcon
-              borderless
-              rippleColor={rippleColor}
-              onPress={onIconPress}
-              iconStyle={[styles.icon, { color: iconColor }]}
-              name={icon || 'search'}
-            />
-          : <Icon
-              style={[styles.icon, { color: iconColor }]}
-              name="search"
-              size={24}
-            />}
+        {onIconPress ? (
+          <TouchableIcon
+            borderless
+            rippleColor={rippleColor}
+            onPress={onIconPress}
+            iconStyle={[styles.icon, { color: iconColor }]}
+            name={icon || 'search'}
+          />
+        ) : (
+          <Icon
+            style={[styles.icon, { color: iconColor }]}
+            name="search"
+            size={24}
+          />
+        )}
         <TextInput
           style={[styles.input, { color: textColor }]}
           placeholder={placeholder || ''}
@@ -96,15 +103,15 @@ class SearchBar extends Component<void, Props, void> {
           value={value}
           {...rest}
         />
-        {value
-          ? <TouchableIcon
-              borderless
-              rippleColor={rippleColor}
-              onPress={this._handleClearPress}
-              iconStyle={[styles.icon, { color: iconColor }]}
-              name="close"
-            />
-          : null}
+        {value ? (
+          <TouchableIcon
+            borderless
+            rippleColor={rippleColor}
+            onPress={this._handleClearPress}
+            iconStyle={[styles.icon, { color: iconColor }]}
+            name="close"
+          />
+        ) : null}
       </Paper>
     );
   }

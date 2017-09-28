@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Platform, StyleSheet } from 'react-native';
+import { View, Platform, StyleSheet, ViewPropTypes } from 'react-native';
 import color from 'color';
 
 import Text from '../Typography/Text';
@@ -39,12 +39,12 @@ class ToolbarContent extends Component<void, Props, void> {
     /**
      * Style for the title
      */
-    titleStyle: View.propTypes.style,
-    style: View.propTypes.style,
+    titleStyle: Text.propTypes.style,
+    style: ViewPropTypes.style,
     /**
      * Style for the subtitle
      */
-    subtitleStyle: View.propTypes.style,
+    subtitleStyle: Text.propTypes.style,
     theme: PropTypes.object.isRequired,
   };
 
@@ -63,7 +63,9 @@ class ToolbarContent extends Component<void, Props, void> {
 
     const titleColor = dark ? white : primaryText;
     const subtitleColor = dark
-      ? color(white).alpha(0.7).rgbaString()
+      ? color(white)
+          .alpha(0.7)
+          .rgbaString()
       : secondaryText;
 
     return (
@@ -78,13 +80,14 @@ class ToolbarContent extends Component<void, Props, void> {
         >
           {title}
         </Text>
-        {subtitle &&
+        {subtitle && (
           <Text
             style={[styles.subtitle, { color: subtitleColor }, subtitleStyle]}
             numberOfLines={1}
           >
             {subtitle}
-          </Text>}
+          </Text>
+        )}
       </View>
     );
   }

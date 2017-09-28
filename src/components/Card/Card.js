@@ -7,6 +7,7 @@ import {
   View,
   TouchableWithoutFeedback,
   StyleSheet,
+  ViewPropTypes,
 } from 'react-native';
 import Paper from '../Paper';
 import CardContent from './CardContent';
@@ -42,7 +43,7 @@ class Card extends Component<DefaultProps, Props, State> {
     elevation: PropTypes.number,
     children: PropTypes.node.isRequired,
     onPress: PropTypes.func,
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
     theme: PropTypes.object.isRequired,
   };
 

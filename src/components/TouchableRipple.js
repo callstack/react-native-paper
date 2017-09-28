@@ -7,6 +7,7 @@ import {
   TouchableHighlight,
   Platform,
   View,
+  ViewPropTypes,
 } from 'react-native';
 import color from 'color';
 
@@ -39,7 +40,7 @@ export default class TouchableItem extends PureComponent<
     rippleColor: PropTypes.string,
     underlayColor: PropTypes.string,
     children: PropTypes.element.isRequired,
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
   };
 
   static defaultProps = {
@@ -71,9 +72,7 @@ export default class TouchableItem extends PureComponent<
               : TouchableNativeFeedback.Ripple(rippleColor, borderless)
           }
         >
-          <View style={style}>
-            {Children.only(children)}
-          </View>
+          <View style={style}>{Children.only(children)}</View>
         </TouchableNativeFeedback>
       );
     }
@@ -85,7 +84,9 @@ export default class TouchableItem extends PureComponent<
         underlayColor={
           underlayColor != null
             ? underlayColor
-            : color(rippleColor).clearer(0.5).rgbaString()
+            : color(rippleColor)
+                .clearer(0.5)
+                .rgbaString()
         }
       >
         {Children.only(children)}

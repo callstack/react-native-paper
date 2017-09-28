@@ -4,9 +4,10 @@ import React from 'react';
 
 import TouchableRipple from './TouchableRipple';
 import Icon from './Icon';
+import type { IconSource } from './Icon';
 
 type Props = {
-  name: string,
+  name: IconSource,
   iconStyle?: any,
   onPress: Function,
 };

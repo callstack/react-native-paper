@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ViewPropTypes } from 'react-native';
 import type { PortalProps } from './Portal';
 
 type Props = {
@@ -25,7 +25,7 @@ export const manager = 'react-native-paper$portal-manager';
 export default class Portals extends PureComponent<void, Props, State> {
   static propTypes = {
     children: PropTypes.node.isRequired,
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
   };
 
   static childContextTypes = {
@@ -100,11 +100,11 @@ export default class Portals extends PureComponent<void, Props, State> {
               return [...acc, group];
             }
           }, [])
-          .map(({ position, items }) =>
+          .map(({ position, items }) => (
             <View key={position} style={StyleSheet.absoluteFill}>
               {items}
             </View>
-          )}
+          ))}
       </View>
     );
   }

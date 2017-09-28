@@ -3,7 +3,13 @@
 import color from 'color';
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { ActivityIndicator, Animated, View, StyleSheet } from 'react-native';
+import {
+  ActivityIndicator,
+  Animated,
+  View,
+  StyleSheet,
+  ViewPropTypes,
+} from 'react-native';
 import Icon from './Icon';
 import Paper from './Paper';
 import Text from './Typography/Text';
@@ -11,6 +17,7 @@ import TouchableRipple from './TouchableRipple';
 import { black, white } from '../styles/colors';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types/Theme';
+import type { IconSource } from './Icon';
 
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
@@ -21,7 +28,7 @@ type Props = {
   primary?: boolean,
   dark?: boolean,
   loading?: boolean,
-  icon?: string,
+  icon?: IconSource,
   color?: string,
   children?: string | Array<string>,
   onPress?: Function,
@@ -72,9 +79,17 @@ class Button extends PureComponent<void, Props, State> {
      */
     loading: PropTypes.bool,
     /**
-     * Icon name
+     * Icon name.
+     * Can be a string (name of MaterialIcon),
+     * an object {of shape {uri: 'https://path.to'}},
+     * required image from assets (const icon = reqiure('../path/to/image.png')),
+     * or any valid React-Native Component (e.g. <Image />)
      */
-    icon: PropTypes.string,
+    icon: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.shape({ uri: PropTypes.string }),
+      PropTypes.number,
+    ]),
     /**
      * Custom text color for flat button, or background color for raised button
      */
@@ -90,7 +105,7 @@ class Button extends PureComponent<void, Props, State> {
      * Function to execute on press
      */
     onPress: PropTypes.func,
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
     theme: PropTypes.object.isRequired,
   };
 
@@ -138,9 +153,7 @@ class Button extends PureComponent<void, Props, State> {
     } = this.props;
     const { colors, roundness } = theme;
     const fontFamily = theme.fonts.medium;
-
     let backgroundColor, textColor, isDark;
-
     if (raised) {
       if (disabled) {
         backgroundColor = 'rgba(0, 0, 0, .12)';
@@ -186,23 +199,25 @@ class Button extends PureComponent<void, Props, State> {
       }
     }
 
-    const rippleColor = color(textColor).alpha(0.32).rgbaString();
+    const rippleColor = color(textColor)
+      .alpha(0.32)
+      .rgbaString();
     const buttonStyle = { backgroundColor, borderRadius: roundness };
     const touchableStyle = { borderRadius: roundness };
     const textStyle = { color: textColor, fontFamily };
 
     const content = (
       <View style={styles.content}>
-        {icon && loading !== true
-          ? <Icon name={icon} size={16} color={textColor} style={styles.icon} />
-          : null}
-        {loading
-          ? <ActivityIndicator
-              size="small"
-              color={textColor}
-              style={styles.icon}
-            />
-          : null}
+        {icon && loading !== true ? (
+          <Icon name={icon} size={16} color={textColor} style={styles.icon} />
+        ) : null}
+        {loading ? (
+          <ActivityIndicator
+            size="small"
+            color={textColor}
+            style={styles.icon}
+          />
+        ) : null}
         <Text
           numberOfLines={1}
           style={[
@@ -215,7 +230,8 @@ class Button extends PureComponent<void, Props, State> {
           {children
             ? (Array.isArray(children)
                 ? children.join('')
-                : children).toUpperCase()
+                : children
+              ).toUpperCase()
             : ''}
         </Text>
       </View>
@@ -226,19 +242,21 @@ class Button extends PureComponent<void, Props, State> {
         elevation={disabled ? 0 : this.state.elevation}
         style={[styles.button, compact && styles.compact, buttonStyle, style]}
       >
-        {disabled
-          ? content
-          : <TouchableRipple
-              borderless
-              delayPressIn={0}
-              onPress={onPress}
-              onPressIn={this._handlePressIn}
-              onPressOut={this._handlePressOut}
-              rippleColor={rippleColor}
-              style={touchableStyle}
-            >
-              {content}
-            </TouchableRipple>}
+        {disabled ? (
+          content
+        ) : (
+          <TouchableRipple
+            borderless
+            delayPressIn={0}
+            onPress={onPress}
+            onPressIn={this._handlePressIn}
+            onPressOut={this._handlePressOut}
+            rippleColor={rippleColor}
+            style={touchableStyle}
+          >
+            {content}
+          </TouchableRipple>
+        )}
       </AnimatedPaper>
     );
   }

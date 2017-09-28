@@ -14,9 +14,15 @@ export default {
     background: grey50,
     paper: white,
     text: black,
-    secondaryText: color(black).alpha(0.7).rgbaString(),
-    disabled: color(black).alpha(0.5).rgbaString(),
-    placeholder: color(black).alpha(0.38).rgbaString(),
+    secondaryText: color(black)
+      .alpha(0.7)
+      .rgbaString(),
+    disabled: color(black)
+      .alpha(0.5)
+      .rgbaString(),
+    placeholder: color(black)
+      .alpha(0.38)
+      .rgbaString(),
   },
   fonts,
 };

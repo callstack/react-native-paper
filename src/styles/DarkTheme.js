@@ -11,9 +11,15 @@ const DarkTheme = {
     background: '#303030',
     paper: grey800,
     text: white,
-    secondaryText: color(white).alpha(0.7).rgbaString(),
-    disabled: color(white).alpha(0.5).rgbaString(),
-    placeholder: color(white).alpha(0.38).rgbaString(),
+    secondaryText: color(white)
+      .alpha(0.7)
+      .rgbaString(),
+    disabled: color(white)
+      .alpha(0.5)
+      .rgbaString(),
+    placeholder: color(white)
+      .alpha(0.38)
+      .rgbaString(),
   },
 };
 

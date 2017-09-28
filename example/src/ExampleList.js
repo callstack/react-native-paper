@@ -16,6 +16,7 @@ import RadioButtonExample from './RadioButtonExample';
 import TextExample from './TextExample';
 import ToolbarExample from './ToolbarExample';
 import SearchBarExample from './SearchBarExample';
+import ProgressBarExample from './ProgressBarExample';
 
 export const examples = {
   button: ButtonExample,
@@ -30,6 +31,7 @@ export const examples = {
   toolbar: ToolbarExample,
   text: TextExample,
   searchbar: SearchBarExample,
+  progressbar: ProgressBarExample,
 };
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -45,17 +47,6 @@ class ExampleList extends Component {
     navigation: PropTypes.object,
   };
 
-  state = {
-    value: 0,
-  };
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.theme !== this.props.theme) {
-      /// Super dirty way to update the listview when now rows change
-      this.setState({ value: this.state.value + 1 });
-    }
-  }
-
   _renderRow = id => {
     const { theme: { colors: { paper, text } } } = this.props;
     return (
@@ -63,9 +54,7 @@ class ExampleList extends Component {
         style={[styles.item, { backgroundColor: paper }]}
         onPress={() => this.props.navigation.navigate(id)}
       >
-        <Text style={[styles.text, { color: text }]}>
-          {examples[id].title}
-        </Text>
+        <Text style={[styles.text, { color: text }]}>{examples[id].title}</Text>
       </TouchableRipple>
     );
   };
@@ -77,7 +66,6 @@ class ExampleList extends Component {
     return (
       <View style={{ flex: 1, backgroundColor: background }}>
         <ListView
-          key={this.state.value}
           dataSource={dataSource}
           renderRow={this._renderRow}
           renderSeparator={this._renderSeparator}

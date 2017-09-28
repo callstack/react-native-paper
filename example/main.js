@@ -17,8 +17,9 @@ StatusBar.setBarStyle('light-content');
 const App = DrawerNavigator(
   { Home: { screen: RootNavigator } },
   {
-    contentComponent: ({ screenProps }) =>
-      <DrawerItems toggleTheme={screenProps.toggleTheme} />,
+    contentComponent: ({ screenProps }) => (
+      <DrawerItems toggleTheme={screenProps.toggleTheme} />
+    ),
   }
 );
 

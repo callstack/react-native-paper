@@ -28,14 +28,14 @@ class DrawerItems extends Component {
     return (
       <View style={[styles.drawerContent, { backgroundColor: paper }]}>
         <DrawerSection label="Subheader">
-          {DrawerItemsData.map((props, index) =>
+          {DrawerItemsData.map((props, index) => (
             <DrawerItem
               {...props}
               key={props.key}
               active={this.state.drawerItemIndex === index}
               onPress={() => this._setDrawerItem(index)}
             />
-          )}
+          ))}
           <DrawerItem
             label="Toggle Theme"
             key={4}

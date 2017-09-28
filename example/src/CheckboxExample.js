@@ -3,7 +3,13 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import { Paragraph, Checkbox, Colors, withTheme } from 'react-native-paper';
+import {
+  Paragraph,
+  Checkbox,
+  Colors,
+  withTheme,
+  TouchableRipple,
+} from 'react-native-paper';
 
 class CheckboxExample extends Component {
   static title = 'Checkbox';
@@ -19,22 +25,36 @@ class CheckboxExample extends Component {
   render() {
     const { theme: { colors: { background } } } = this.props;
     return (
-      <View style={[styles.container, { backgroundColor: background }]}>
+      <View
+        style={[
+          styles.container,
+          {
+            backgroundColor: background,
+          },
+        ]}
+      >
+        <TouchableRipple
+          onPress={() =>
+            this.setState(state => ({
+              checkedNormal: !state.checkedNormal,
+            }))}
+        >
+          <View style={styles.row}>
+            <Paragraph>Normal (click list item)</Paragraph>
+            <View pointerEvents="none">
+              <Checkbox checked={this.state.checkedNormal} />
+            </View>
+          </View>
+        </TouchableRipple>
         <View style={styles.row}>
-          <Paragraph>Normal</Paragraph>
-          <Checkbox
-            checked={this.state.checkedNormal}
-            onPress={() =>
-              this.setState(state => ({ checkedNormal: !state.checkedNormal }))}
-          />
-        </View>
-        <View style={styles.row}>
-          <Paragraph>Custom</Paragraph>
+          <Paragraph>Custom (click checkbox)</Paragraph>
           <Checkbox
             color={Colors.blue500}
             checked={this.state.checkedCustom}
             onPress={() =>
-              this.setState(state => ({ checkedCustom: !state.checkedCustom }))}
+              this.setState(state => ({
+                checkedCustom: !state.checkedCustom,
+              }))}
           />
         </View>
         <View style={styles.row}>
@@ -53,14 +73,16 @@ class CheckboxExample extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 8,
+    backgroundColor: Colors.white,
+    paddingVertical: 8,
   },
 
   row: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
   },
 });
 

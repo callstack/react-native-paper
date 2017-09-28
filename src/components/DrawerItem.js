@@ -9,9 +9,10 @@ import TouchableRipple from './TouchableRipple';
 import { grey300, grey700 } from '../styles/colors';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types/Theme';
+import type { IconSource } from './Icon';
 
 type Props = {
-  icon?: string,
+  icon?: IconSource,
   label: string,
   active?: boolean,
   onPress?: Function,
@@ -30,10 +31,14 @@ const DrawerItem = ({
   const backgroundColor = active ? (dark ? grey700 : grey300) : 'transparent';
   const labelColor = active
     ? colors.primary
-    : color(colors.text).alpha(0.87).rgbaString();
+    : color(colors.text)
+        .alpha(0.87)
+        .rgbaString();
   const iconColor = active
     ? colors.primary
-    : color(colors.text).alpha(0.54).rgbaString();
+    : color(colors.text)
+        .alpha(0.54)
+        .rgbaString();
   const fontFamily = theme.fonts.medium;
   const labelMargin = icon ? 32 : 0;
   return (
