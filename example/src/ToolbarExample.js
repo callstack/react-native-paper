@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { View, Platform, StatusBar, StyleSheet } from 'react-native';
 import { Colors, Button, Toolbar } from 'react-native-paper';
 
-const MORE_ICON = Platform.OS === 'android' ? 'more-vert' : 'more-horiz';
+const MORE_ICON = Platform.OS === 'ios' ? 'more-horiz' : 'more-vert';
 
 export default class ToolbarExample extends Component {
   static title = 'Toolbar';
@@ -14,9 +14,9 @@ export default class ToolbarExample extends Component {
 
   state = {
     showLeftIcon: true,
-    showSearchIcon: Platform.OS === 'android',
+    showSearchIcon: Platform.OS !== 'ios',
     showMoreIcon: true,
-    showSubtitle: Platform.OS === 'android',
+    showSubtitle: Platform.OS !== 'ios',
   };
 
   render() {
