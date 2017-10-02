@@ -9,9 +9,21 @@ import withTheme from '../core/withTheme';
 import type { Theme } from '../types/Theme';
 
 type Props = {
+  /**
+   * Whether radio is checked
+   */
   checked: boolean,
+  /**
+   * Whether radio is disabled
+   */
   disabled?: boolean,
+  /**
+   * Function to execute on press
+   */
   onPress?: Function,
+  /**
+   * Custom color for radio
+   */
   color?: string,
   theme: Theme,
 };
@@ -28,21 +40,9 @@ const BORDER_WIDTH = 2;
  */
 class RadioButton extends Component<void, Props, State> {
   static propTypes = {
-    /**
-     * Whether radio is checked
-     */
     checked: PropTypes.bool.isRequired,
-    /**
-     * Whether radio is disabled
-     */
     disabled: PropTypes.bool,
-    /**
-     * Function to execute on press
-     */
     onPress: PropTypes.func,
-    /**
-     * Custom color for radio
-     */
     color: PropTypes.string,
     theme: PropTypes.object.isRequired,
   };
@@ -73,7 +73,7 @@ class RadioButton extends Component<void, Props, State> {
   }
 
   render() {
-    const { disabled, onPress, checked, theme } = this.props;
+    const { disabled, onPress, checked, theme, ...rest } = this.props;
 
     const checkedColor = this.props.color || theme.colors.accent;
     const uncheckedColor = 'rgba(0, 0, 0, .54)';
@@ -92,7 +92,7 @@ class RadioButton extends Component<void, Props, State> {
 
     return (
       <TouchableRipple
-        {...this.props}
+        {...rest}
         borderless
         rippleColor={rippleColor}
         onPress={disabled ? undefined : onPress}
@@ -127,19 +127,16 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 18,
   },
-
   radioContainer: {
     alignItems: 'center',
     justifyContent: 'center',
   },
-
   radio: {
     height: 20,
     width: 20,
     borderRadius: 10,
     margin: 8,
   },
-
   dot: {
     height: 10,
     width: 10,

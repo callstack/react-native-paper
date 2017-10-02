@@ -18,12 +18,12 @@ type Props = {
    */
   value?: boolean,
   /**
-   * Invoked with the new value when the value changes
-   */
-  /**
    * Custom color for checkbox
    */
   color?: string,
+  /**
+   * Invoked with the new value when the value changes
+   */
   onValueChange?: Function,
   style?: any,
   theme: Theme,
@@ -44,20 +44,22 @@ class SwitchRow extends Component<void, Props, void> {
     } = this.props;
 
     const checkedColor = color || theme.colors.accent;
+
     const trackTintColor =
-      Platform.OS === 'android'
-        ? disabled
+      Platform.OS === 'ios'
+        ? checkedColor
+        : disabled
           ? setColor(grey400)
               .alpha(0.38)
               .rgbaString()
           : setColor(checkedColor)
               .alpha(0.38)
-              .rgbaString()
-        : checkedColor;
+              .rgbaString();
+
     const trackThumbTintColor =
-      Platform.OS === 'android'
-        ? disabled ? grey400 : value ? checkedColor : grey50
-        : undefined;
+      Platform.OS === 'ios'
+        ? undefined
+        : disabled ? grey400 : value ? checkedColor : grey50;
 
     return (
       <View>
