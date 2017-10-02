@@ -15,7 +15,7 @@ export default {
       .alpha(0.7)
       .rgbaString(),
     disabled: color(black)
-      .alpha(0.5)
+      .alpha(0.25)
       .rgbaString(),
     placeholder: color(black)
       .alpha(0.38)
