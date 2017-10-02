@@ -2,36 +2,46 @@
 
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Paragraph, RadioButton, Colors } from 'react-native-paper';
+import {
+  Paragraph,
+  RadioButton,
+  Colors,
+  TouchableRipple,
+} from 'react-native-paper';
 
 export default class RadioButtonExample extends Component {
   static title = 'Radio button';
 
   state = {
-    checkedNormal: true,
-    checkedCustom: true,
+    checked: 'normal',
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.row}>
-          <Paragraph>Normal</Paragraph>
-          <RadioButton
-            checked={this.state.checkedNormal}
-            onPress={() =>
-              this.setState(state => ({ checkedNormal: !state.checkedNormal }))}
-          />
-        </View>
-        <View style={styles.row}>
-          <Paragraph>Custom</Paragraph>
-          <RadioButton
-            color={Colors.blue500}
-            checked={this.state.checkedCustom}
-            onPress={() =>
-              this.setState(state => ({ checkedCustom: !state.checkedCustom }))}
-          />
-        </View>
+        <TouchableRipple onPress={() => this.setState({ checked: 'normal' })}>
+          <View style={styles.row}>
+            <Paragraph>Normal</Paragraph>
+            <View pointerEvents="none">
+              <RadioButton
+                value="normal"
+                checked={this.state.checked === 'normal'}
+              />
+            </View>
+          </View>
+        </TouchableRipple>
+        <TouchableRipple onPress={() => this.setState({ checked: 'custom' })}>
+          <View style={styles.row}>
+            <Paragraph>Custom</Paragraph>
+            <View pointerEvents="none">
+              <RadioButton
+                value="custom"
+                color={Colors.blue500}
+                checked={this.state.checked === 'custom'}
+              />
+            </View>
+          </View>
+        </TouchableRipple>
         <View style={styles.row}>
           <Paragraph>Checked (Disabled)</Paragraph>
           <RadioButton checked disabled />
