@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Dimensions, View, StyleSheet, VirtualizedList } from 'react-native';
+import { Dimensions, StyleSheet, VirtualizedList } from 'react-native';
 import { grey200 } from '../styles/colors';
 
 type Layout = {
@@ -82,67 +82,23 @@ export default class GridView extends PureComponent<
 
   _root: VirtualizedList;
 
-  scrollToIndex = (index: number) => {
-    const containerWidth = this.state.layout.width;
+  scrollToIndex = (params: Object) => this._root.scrollToIndex(params);
+  scrollToItem = (params: Object) => this._root.scrollToItem(params);
+  scrollToEnd = (params?: Object) => this._root.scrollToEnd(params);
+  scrollToOffset = (params: Object) => this._root.scrollToOffset(params);
 
-    return this._root.scrollToIndex({
-      index: Math.floor(index / (containerWidth / this._getWidthOfOneItem())),
-    });
-  };
+  _renderItem = ({ item }) => {
+    const { spacing, renderItem } = this.props;
 
-  scrollToItem = (item: any) => {
-    const { data, keyExtractor } = this.props;
-    const containerWidth = this.state.layout.width;
-
-    const index = data.findIndex(
-      item_ => keyExtractor(item_) === keyExtractor(item)
-    );
-
-    return this._root.scrollToIndex({
-      index: Math.floor(index / (containerWidth / this._getWidthOfOneItem())),
-    });
-  };
-
-  scrollToEnd = () => this._root.scrollToEnd();
-
-  scrollToOffset = (offset: number, animated: boolean = true) =>
-    this._root.scrollToOffset({
-      animated,
-      offset,
-    });
-
-  _keyExtractor = data => {
-    const { keyExtractor } = this.props;
-
-    return Object.values(data)
-      .map(keyExtractor)
-      .join('-');
-  };
-
-  _renderItem = ({ item: items }) => {
-    const { spacing, keyExtractor, renderItem } = this.props;
     const style = {
       width: this._getWidthOfOneItem(),
       margin: spacing / 2,
     };
 
-    return (
-      <View
-        style={[
-          styles.grid,
-          { padding: this.props.spacing / 2 },
-          this.props.contentContainerStyle,
-        ]}
-      >
-        {items.map(item => {
-          const itemElement = renderItem(item);
-          return React.cloneElement(itemElement, {
-            key: keyExtractor(item),
-            style: [itemElement.props.style, style],
-          });
-        })}
-      </View>
-    );
+    const itemElement = renderItem(item);
+    return React.cloneElement(itemElement, {
+      style: [itemElement.props.style, style],
+    });
   };
 
   _handleLayout = (e: any) => {
@@ -173,14 +129,7 @@ export default class GridView extends PureComponent<
   };
 
   _getItem = (data, index) => {
-    const containerWidth = this.state.layout.width;
-    const itemWidth = this._getWidthOfOneItem();
-    const numberOfItemsInRow = Math.floor(containerWidth / itemWidth);
-
-    return data.slice(
-      index * numberOfItemsInRow,
-      index * numberOfItemsInRow + numberOfItemsInRow
-    );
+    return data[index];
   };
 
   _getWidthOfOneItem = () => {
@@ -192,7 +141,7 @@ export default class GridView extends PureComponent<
   };
 
   render() {
-    const { data } = this.props;
+    const { data, keyExtractor, spacing, contentContainerStyle } = this.props;
     return (
       <VirtualizedList
         {...this.props}
@@ -201,8 +150,13 @@ export default class GridView extends PureComponent<
         getItem={this._getItem}
         onLayout={this._handleLayout}
         renderItem={this._renderItem}
-        keyExtractor={this._keyExtractor}
+        keyExtractor={keyExtractor}
         ref={c => (this._root = c)}
+        contentContainerStyle={[
+          styles.grid,
+          { padding: spacing / 2 },
+          contentContainerStyle,
+        ]}
       />
     );
   }
@@ -210,6 +164,7 @@ export default class GridView extends PureComponent<
 
 const styles = StyleSheet.create({
   grid: {
+    flexWrap: 'wrap', // Warning is misleading https://github.com/facebook/react-native/issues/15772
     flexDirection: 'row',
     alignItems: 'flex-start',
     backgroundColor: grey200,

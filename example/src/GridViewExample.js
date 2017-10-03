@@ -28,7 +28,7 @@ export default class GridViewExample extends Component {
     }
 
     for (let i = 0; i < 100; i++) {
-      items.push(itemsLength + i);
+      items.push({ id: itemsLength + i });
     }
 
     this.setState({
@@ -36,18 +36,18 @@ export default class GridViewExample extends Component {
     });
   };
 
-  _renderItem = (id: number) => {
+  _renderItem = (item: Object) => {
     return (
       <Card style={styles.tile}>
         <View style={styles.inner}>
-          <Text style={styles.text}>{id}</Text>
+          <Text style={styles.text}>{item.id}</Text>
         </View>
       </Card>
     );
   };
 
-  _keyExtractor = (id: number) => {
-    return id;
+  _keyExtractor = (item: Object) => {
+    return item.id;
   };
 
   _getNumberOfColumns = (width: number) => {
