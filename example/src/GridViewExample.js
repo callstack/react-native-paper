@@ -1,9 +1,8 @@
-/* @flow */
+// @flow
 
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Colors, Card, Text, GridView } from 'react-native-paper';
-
 const CARD_SIZE = 160;
 
 export default class GridViewExample extends Component {
@@ -36,7 +35,7 @@ export default class GridViewExample extends Component {
     });
   };
 
-  _renderItem = (item: Object) => {
+  _renderItem = item => {
     return (
       <Card style={styles.tile}>
         <View style={styles.inner}>
@@ -46,7 +45,7 @@ export default class GridViewExample extends Component {
     );
   };
 
-  _keyExtractor = (item: Object) => {
+  _keyExtractor = item => {
     return item.id;
   };
 

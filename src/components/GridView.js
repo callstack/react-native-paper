@@ -2,7 +2,12 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Dimensions, StyleSheet, VirtualizedList } from 'react-native';
+import {
+  Dimensions,
+  StyleSheet,
+  Animated,
+  VirtualizedList,
+} from 'react-native';
 import { grey200 } from '../styles/colors';
 
 type Layout = {
@@ -43,6 +48,7 @@ type DefaultProps = {
 
 type State = {
   layout: Layout,
+  itemWidth: Animated.Value,
 };
 
 export default class GridView extends PureComponent<
@@ -75,6 +81,7 @@ export default class GridView extends PureComponent<
 
     this.state = {
       layout: props.initialLayout,
+      itemWidth: new Animated.Value(0),
     };
   }
 
@@ -91,22 +98,25 @@ export default class GridView extends PureComponent<
     const { spacing, renderItem } = this.props;
 
     const style = {
-      width: this._getWidthOfOneItem(),
+      width: this.state.itemWidth,
       margin: spacing / 2,
     };
 
-    const itemElement = renderItem(item);
-    return React.cloneElement(itemElement, {
-      style: [itemElement.props.style, style],
-    });
+    return <Animated.View style={style}>{renderItem(item)}</Animated.View>;
   };
 
   _handleLayout = (e: any) => {
+    const { getNumberOfColumns, spacing } = this.props;
+
     if (this.props.onLayout) {
       this.props.onLayout(e);
     }
 
     const layoutWidth = Math.round(e.nativeEvent.layout.width);
+
+    this.state.itemWidth.setValue(
+      (layoutWidth - spacing) / getNumberOfColumns(layoutWidth) - spacing
+    );
 
     if (this.state.layout.width === layoutWidth) {
       return;
@@ -117,20 +127,9 @@ export default class GridView extends PureComponent<
     });
   };
 
-  _getItemCount = data => {
-    const containerWidth = this.state.layout.width;
+  _getItemCount = (data: Array<any>) => data.length;
 
-    return Math.ceil(
-      data.length /
-        Math.floor(
-          containerWidth / (this._getWidthOfOneItem() + this.props.spacing)
-        )
-    );
-  };
-
-  _getItem = (data, index) => {
-    return data[index];
-  };
+  _getItem = (data, index) => data[index];
 
   _getWidthOfOneItem = () => {
     const containerWidth = this.state.layout.width;
