@@ -47,6 +47,13 @@ export default class TouchableItem extends PureComponent<
     borderless: false,
     rippleColor: 'rgba(0, 0, 0, .32)',
   };
+  _ref = null;
+
+  setNativeProps(...args: Array<any>) {
+    if (this._ref) {
+      this._ref.setNativeProps(...args);
+    }
+  }
 
   render() {
     const {
@@ -72,7 +79,9 @@ export default class TouchableItem extends PureComponent<
               : TouchableNativeFeedback.Ripple(rippleColor, borderless)
           }
         >
-          <View style={style}>{Children.only(children)}</View>
+          <View ref={ref => (this._ref = ref)} style={style}>
+            {Children.only(children)}
+          </View>
         </TouchableNativeFeedback>
       );
     }
@@ -89,7 +98,7 @@ export default class TouchableItem extends PureComponent<
                 .rgbaString()
         }
       >
-        {Children.only(children)}
+        <View ref={ref => (this._ref = ref)}>{Children.only(children)}</View>
       </TouchableHighlight>
     );
   }
