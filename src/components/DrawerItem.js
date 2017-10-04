@@ -30,10 +30,8 @@ const DrawerItem = ({
   const { colors, dark } = theme;
   const backgroundColor = active ? (dark ? grey700 : grey300) : 'transparent';
   const labelColor = active
-    ? colors.primary
-    : color(colors.text)
-        .alpha(0.87)
-        .rgbaString();
+    ? dark ? colors.text : colors.primary
+    : colors.secondaryText;
   const iconColor = active
     ? colors.primary
     : color(colors.text)

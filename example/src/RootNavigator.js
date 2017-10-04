@@ -30,13 +30,13 @@ export default StackNavigator(
     ...routes,
   },
   {
-    navigationOptions: {
+    navigationOptions: ({ screenProps: { theme } }) => ({
       headerTintColor: Colors.white,
       headerStyle: {
-        backgroundColor: Colors.indigo500,
+        backgroundColor: theme.colors.primary,
         paddingTop: Expo.Constants.statusBarHeight,
         height: 56 + Expo.Constants.statusBarHeight,
       },
-    },
+    }),
   }
 );

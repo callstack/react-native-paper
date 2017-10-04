@@ -1,18 +1,28 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, StyleSheet, Platform } from 'react-native';
-import { Paragraph, Switch, Colors, TouchableRipple } from 'react-native-paper';
+import {
+  Paragraph,
+  Switch,
+  Colors,
+  TouchableRipple,
+  withTheme,
+} from 'react-native-paper';
 
-export default class SwitchExample extends Component {
+class SwitchExample extends Component {
   static title = 'Switch';
-
+  static propTypes = {
+    theme: PropTypes.object.isRequired,
+  };
   state = {
     valueNormal: true,
     valueCustom: true,
   };
 
   render() {
+    const { theme: { colors: { background } } } = this.props;
     const switchValueNormalLabel = `switch ${this.state.valueNormal === true
       ? 'on'
       : 'off'}`;
@@ -22,7 +32,14 @@ export default class SwitchExample extends Component {
       : 'off'}`;
 
     return Platform.OS === 'android' ? (
-      <View style={styles.container}>
+      <View
+        style={[
+          styles.container,
+          {
+            backgroundColor: background,
+          },
+        ]}
+      >
         <TouchableRipple
           onPress={() =>
             this.setState(state => ({
@@ -59,7 +76,14 @@ export default class SwitchExample extends Component {
         </View>
       </View>
     ) : (
-      <View style={styles.container}>
+      <View
+        style={[
+          styles.container,
+          {
+            backgroundColor: background,
+          },
+        ]}
+      >
         <View style={styles.row}>
           <Paragraph>Normal {switchValueNormalLabel}</Paragraph>
           <View>
@@ -117,3 +141,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 });
+
+export default withTheme(SwitchExample);

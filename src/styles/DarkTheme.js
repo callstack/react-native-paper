@@ -3,11 +3,13 @@
 import color from 'color';
 import merge from 'lodash.merge';
 import DefaultTheme from './DefaultTheme';
-import { white, grey800 } from './colors';
+import { white, grey800, cyan500, cyan700 } from './colors';
 
 const DarkTheme = {
   dark: true,
   colors: {
+    primary: cyan500,
+    primaryDark: cyan700,
     background: '#303030',
     paper: grey800,
     text: white,

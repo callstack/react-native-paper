@@ -36,7 +36,12 @@ class PaperExample extends Component {
   render() {
     return (
       <PaperProvider theme={this.state.theme}>
-        <App screenProps={{ toggleTheme: this._toggleTheme }} />
+        <App
+          screenProps={{
+            toggleTheme: this._toggleTheme,
+            theme: this.state.theme,
+          }}
+        />
       </PaperProvider>
     );
   }

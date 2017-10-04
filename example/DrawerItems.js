@@ -3,7 +3,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, StyleSheet, Platform } from 'react-native';
-import { DrawerItem, DrawerSection, withTheme } from 'react-native-paper';
+import {
+  DrawerItem,
+  DrawerSection,
+  withTheme,
+  Checkbox,
+  TouchableRipple,
+  Paragraph,
+} from 'react-native-paper';
 
 const DrawerItemsData = [
   { label: 'Inbox', icon: 'inbox', key: 0 },
@@ -20,8 +27,13 @@ class DrawerItems extends Component {
   state = {
     open: false,
     drawerItemIndex: 0,
+    isDark: true,
   };
   _setDrawerItem = index => this.setState({ drawerItemIndex: index });
+  _toggleTheme = () => {
+    this.props.toggleTheme();
+    this.setState({ isDark: !this.state.isDark });
+  };
 
   render() {
     const { theme: { colors: { paper } } } = this.props;
@@ -36,11 +48,22 @@ class DrawerItems extends Component {
               onPress={() => this._setDrawerItem(index)}
             />
           ))}
-          <DrawerItem
-            label="Toggle Theme"
-            key={4}
-            onPress={this.props.toggleTheme}
-          />
+          <TouchableRipple onPress={this._toggleTheme}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                paddingVertical: 8,
+                paddingHorizontal: 16,
+              }}
+            >
+              <Paragraph>Dark Theme</Paragraph>
+              <View pointerEvents="none">
+                <Checkbox checked={this.state.isDark} />
+              </View>
+            </View>
+          </TouchableRipple>
         </DrawerSection>
       </View>
     );
