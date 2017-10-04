@@ -2,17 +2,8 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Dimensions,
-  StyleSheet,
-  Animated,
-  VirtualizedList,
-} from 'react-native';
+import { StyleSheet, Animated, VirtualizedList } from 'react-native';
 import { grey200 } from '../styles/colors';
-
-type Layout = {
-  width: number,
-};
 
 type Props = {
   /**
@@ -36,18 +27,15 @@ type Props = {
    * Component for rendering item
    */
   renderItem: (item: any) => React$Element<*>,
-  initialLayout: Layout,
   onLayout?: Function,
 };
 
 type DefaultProps = {
-  initialLayout: Layout,
   getNumberOfColumns: (width: number) => number,
   spacing: number,
 };
 
 type State = {
-  layout: Layout,
   itemWidth: Animated.Value,
 };
 
@@ -58,20 +46,14 @@ export default class GridView extends PureComponent<
 > {
   static propTypes = {
     data: PropTypes.array.isRequired,
-
     spacing: PropTypes.number.isRequired,
-
     getNumberOfColumns: PropTypes.func.isRequired,
-
     renderItem: PropTypes.func.isRequired,
-
     keyExtractor: PropTypes.func.isRequired,
     onLayout: PropTypes.func,
-    initialLayout: PropTypes.object,
   };
 
   static defaultProps = {
-    initialLayout: { width: Dimensions.get('window').width },
     getNumberOfColumns: () => 1,
     spacing: 0,
   };
@@ -80,7 +62,6 @@ export default class GridView extends PureComponent<
     super(props);
 
     this.state = {
-      layout: props.initialLayout,
       itemWidth: new Animated.Value(0),
     };
   }
@@ -112,32 +93,16 @@ export default class GridView extends PureComponent<
       this.props.onLayout(e);
     }
 
-    const layoutWidth = Math.round(e.nativeEvent.layout.width);
+    const layoutWidth = e.nativeEvent.layout.width;
 
     this.state.itemWidth.setValue(
       (layoutWidth - spacing) / getNumberOfColumns(layoutWidth) - spacing
     );
-
-    if (this.state.layout.width === layoutWidth) {
-      return;
-    }
-
-    this.setState({
-      layout: { width: layoutWidth },
-    });
   };
 
   _getItemCount = (data: Array<any>) => data.length;
 
   _getItem = (data, index) => data[index];
-
-  _getWidthOfOneItem = () => {
-    const containerWidth = this.state.layout.width;
-    const { getNumberOfColumns, spacing } = this.props;
-    return (
-      (containerWidth - spacing) / getNumberOfColumns(containerWidth) - spacing
-    );
-  };
 
   render() {
     const { data, keyExtractor, spacing, contentContainerStyle } = this.props;
