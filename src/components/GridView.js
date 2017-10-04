@@ -3,6 +3,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, Animated, VirtualizedList } from 'react-native';
+
 import { grey200 } from '../styles/colors';
 
 type Props = {

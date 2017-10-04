@@ -45,9 +45,7 @@ export default class GridViewExample extends Component {
     );
   };
 
-  _keyExtractor = item => {
-    return item.id;
-  };
+  _keyExtractor = item => item.id;
 
   _getNumberOfColumns = (width: number) => {
     return Math.floor(width / CARD_SIZE);
@@ -55,18 +53,16 @@ export default class GridViewExample extends Component {
 
   render() {
     return (
-      <View>
-        <GridView
-          {...this.props}
-          spacing={8}
-          getNumberOfColumns={this._getNumberOfColumns}
-          data={this.state.items}
-          keyExtractor={this._keyExtractor}
-          renderItem={this._renderItem}
-          ref={ref => (this.ref = ref)}
-          onEndReached={this._genRows}
-        />
-      </View>
+      <GridView
+        {...this.props}
+        spacing={8}
+        getNumberOfColumns={this._getNumberOfColumns}
+        data={this.state.items}
+        keyExtractor={this._keyExtractor}
+        renderItem={this._renderItem}
+        ref={ref => (this.ref = ref)}
+        onEndReached={this._genRows}
+      />
     );
   }
 }
