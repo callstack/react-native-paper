@@ -1,49 +1,54 @@
 /* @flow */
 
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, ViewPropTypes } from 'react-native';
+import { View, ViewPropTypes, StyleSheet } from 'react-native';
 import shadow from '../styles/shadow';
 import withTheme from '../core/withTheme';
+import * as Colors from '../styles/colors';
 import type { Theme } from '../types/Theme';
 
 type Props = {
-  elevation: number,
   children?: any,
   style?: any,
   theme: Theme,
 };
 
 /**
- * Paper is a basic container that can give depth to the page
+ * Paper is a basic container that can give depth to the page.
+ * 
+ * Note: Pass *elevation* style, to apply shadow to the component. Defaults to 2.
  */
-class Paper extends PureComponent<void, Props, void> {
+class Paper extends Component<void, Props, void> {
   static propTypes = {
-    /**
-     * Elevation for the paper
-     */
-    elevation: PropTypes.number.isRequired,
     children: PropTypes.node,
     theme: PropTypes.object.isRequired,
     style: ViewPropTypes.style,
   };
 
   render() {
-    const { children, elevation, theme: { colors: { paper } } } = this.props;
+    const { style, theme: { colors: { paper } }, ...restOfProps } = this.props;
+    const flattenedStyles = StyleSheet.flatten(style) || {};
+    const { elevation = 2 } = flattenedStyles;
 
     return (
       <View
-        {...this.props}
+        {...restOfProps}
         style={[
-          elevation && shadow(elevation),
+          styles.paper,
           { backgroundColor: paper },
-          this.props.style,
+          shadow(elevation),
+          style,
         ]}
-      >
-        {children}
-      </View>
+      />
     );
   }
 }
 
 export default withTheme(Paper);
+
+const styles = StyleSheet.create({
+  paper: {
+    backgroundColor: Colors.white,
+  },
+});

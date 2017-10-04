@@ -39,12 +39,11 @@ const FAB = (props: Props) => {
     <Paper
       {...props}
       style={[
-        { backgroundColor },
+        { backgroundColor, elevation: 12 },
         styles.content,
         small ? styles.small : styles.standard,
         style,
       ]}
-      elevation={12}
     >
       <TouchableRipple
         borderless

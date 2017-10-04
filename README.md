@@ -1,7 +1,7 @@
 React Native Paper
 ==================
 
-Material Design for React Native.
+Material design for React Native.
 
 ## Features
 
@@ -13,4 +13,4 @@ Material Design for React Native.
 
 This project is still a work in progress and lots of components are missing.
 
-Currently supported React Native version: **0.46.4**
+Currently supported React Native version: `>= 0.46.4`

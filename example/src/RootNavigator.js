@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from 'react';
-import { Platform } from 'react-native';
 import Expo from 'expo';
 import { StackNavigator } from 'react-navigation';
 import { Colors } from 'react-native-paper';
@@ -36,8 +35,7 @@ export default StackNavigator(
       headerStyle: {
         backgroundColor: Colors.indigo500,
         paddingTop: Expo.Constants.statusBarHeight,
-        height:
-          (Platform.OS === 'ios' ? 44 : 56) + Expo.Constants.statusBarHeight,
+        height: 56 + Expo.Constants.statusBarHeight,
       },
     },
   }

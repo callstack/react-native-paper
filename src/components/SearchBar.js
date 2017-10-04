@@ -78,8 +78,11 @@ class SearchBar extends Component<void, Props, void> {
 
     return (
       <Paper
-        elevation={4}
-        style={[{ borderRadius: roundness }, styles.container, style]}
+        style={[
+          { borderRadius: roundness, elevation: 4 },
+          styles.container,
+          style,
+        ]}
       >
         {onIconPress ? (
           <TouchableIcon

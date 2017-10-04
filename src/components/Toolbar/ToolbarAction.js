@@ -1,8 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Platform, StyleSheet, ViewPropTypes } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import color from 'color';
 
 import { black, white } from '../../styles/colors';
@@ -13,31 +12,28 @@ import type { IconSource } from '../Icon';
 const ANDROID_VERSION_LOLLIPOP = 21;
 
 type Props = {
+  /**
+   * Theme color for the action icon, a dark action icon will render a light icon and vice-versa
+   */
   dark?: boolean,
+  /**
+   * Name of the icon to show
+   */
   icon: IconSource,
+  /**
+   * Optional icon size, defaults to 24
+   */
+  size?: number,
+  /**
+   * Function to execute on press
+   */
   onPress?: Function,
   style?: any,
 };
 
 export default class ToolbarAction extends Component<void, Props, void> {
-  static propTypes = {
-    /**
-     * Theme color for the action icon, a dark action icon will render a light icon and vice-versa
-     */
-    dark: PropTypes.bool,
-    /**
-     * Name of the icon to show
-     */
-    icon: PropTypes.string,
-    /**
-     * Function to execute on press
-     */
-    onPress: PropTypes.func,
-    style: ViewPropTypes.style,
-  };
-
   render() {
-    const { dark, icon, onPress, style, ...rest } = this.props;
+    const { dark, icon, onPress, size, style, ...rest } = this.props;
 
     const iconColor = dark
       ? white
@@ -62,7 +58,9 @@ export default class ToolbarAction extends Component<void, Props, void> {
         style={[styles.button, style]}
         {...rest}
       >
-        <Icon color={iconColor} name={icon} size={24} />
+        <View>
+          <Icon color={iconColor} name={icon} size={size || 24} />
+        </View>
       </TouchableRipple>
     );
   }
@@ -86,7 +84,6 @@ const styles = StyleSheet.create({
           // minWidth: 24,
           // maxWidth: 36,
           marginHorizontal: 6,
-          paddingHorizontal: 2,
           borderRadius: 44 / 2,
           justifyContent: 'center',
           alignItems: 'center',

@@ -1,14 +1,14 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
+import { View, StyleSheet } from 'react-native';
 import {
   Paragraph,
   Checkbox,
   Colors,
-  withTheme,
   TouchableRipple,
+  withTheme,
 } from 'react-native-paper';
 
 class CheckboxExample extends Component {
@@ -40,23 +40,29 @@ class CheckboxExample extends Component {
             }))}
         >
           <View style={styles.row}>
-            <Paragraph>Normal (click list item)</Paragraph>
+            <Paragraph>Normal</Paragraph>
             <View pointerEvents="none">
               <Checkbox checked={this.state.checkedNormal} />
             </View>
           </View>
         </TouchableRipple>
-        <View style={styles.row}>
-          <Paragraph>Custom (click checkbox)</Paragraph>
-          <Checkbox
-            color={Colors.blue500}
-            checked={this.state.checkedCustom}
-            onPress={() =>
-              this.setState(state => ({
-                checkedCustom: !state.checkedCustom,
-              }))}
-          />
-        </View>
+
+        <TouchableRipple
+          onPress={() =>
+            this.setState(state => ({
+              checkedCustom: !state.checkedCustom,
+            }))}
+        >
+          <View style={styles.row}>
+            <Paragraph>Custom</Paragraph>
+            <View pointerEvents="none">
+              <Checkbox
+                color={Colors.blue500}
+                checked={this.state.checkedCustom}
+              />
+            </View>
+          </View>
+        </TouchableRipple>
         <View style={styles.row}>
           <Paragraph>Checked (Disabled)</Paragraph>
           <Checkbox checked disabled />

@@ -9,6 +9,7 @@ export { default as Provider } from './core/Provider';
 export { default as DefaultTheme } from './styles/DefaultTheme';
 export { default as DarkTheme } from './styles/DarkTheme';
 
+export { default as Switch } from './components/Switch';
 export { default as Button } from './components/Button';
 export { default as FAB } from './components/FAB';
 export { default as Card } from './components/Card';

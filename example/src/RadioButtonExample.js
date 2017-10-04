@@ -3,7 +3,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
-import { Paragraph, RadioButton, Colors, withTheme } from 'react-native-paper';
+import {
+  Paragraph,
+  RadioButton,
+  Colors,
+  TouchableRipple,
+  withTheme,
+} from 'react-native-paper';
 
 class RadioButtonExample extends Component {
   static title = 'Radio button';
@@ -12,31 +18,43 @@ class RadioButtonExample extends Component {
   };
 
   state = {
-    checkedNormal: true,
-    checkedCustom: true,
+    checked: 'normal',
   };
 
   render() {
     const { theme: { colors: { background } } } = this.props;
     return (
-      <View style={[styles.container, { backgroundColor: background }]}>
-        <View style={styles.row}>
-          <Paragraph>Normal</Paragraph>
-          <RadioButton
-            checked={this.state.checkedNormal}
-            onPress={() =>
-              this.setState(state => ({ checkedNormal: !state.checkedNormal }))}
-          />
-        </View>
-        <View style={styles.row}>
-          <Paragraph>Custom</Paragraph>
-          <RadioButton
-            color={Colors.blue500}
-            checked={this.state.checkedCustom}
-            onPress={() =>
-              this.setState(state => ({ checkedCustom: !state.checkedCustom }))}
-          />
-        </View>
+      <View
+        style={[
+          styles.container,
+          {
+            backgroundColor: background,
+          },
+        ]}
+      >
+        <TouchableRipple onPress={() => this.setState({ checked: 'normal' })}>
+          <View style={styles.row}>
+            <Paragraph>Normal</Paragraph>
+            <View pointerEvents="none">
+              <RadioButton
+                value="normal"
+                checked={this.state.checked === 'normal'}
+              />
+            </View>
+          </View>
+        </TouchableRipple>
+        <TouchableRipple onPress={() => this.setState({ checked: 'custom' })}>
+          <View style={styles.row}>
+            <Paragraph>Custom</Paragraph>
+            <View pointerEvents="none">
+              <RadioButton
+                value="custom"
+                color={Colors.blue500}
+                checked={this.state.checked === 'custom'}
+              />
+            </View>
+          </View>
+        </TouchableRipple>
         <View style={styles.row}>
           <Paragraph>Checked (Disabled)</Paragraph>
           <RadioButton checked disabled />
@@ -53,6 +71,7 @@ class RadioButtonExample extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: Colors.white,
     padding: 8,
   },
 
