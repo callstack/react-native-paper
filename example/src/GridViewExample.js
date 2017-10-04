@@ -16,8 +16,6 @@ export default class GridViewExample extends Component {
     this._genRows();
   }
 
-  ref: GridView;
-
   _genRows = () => {
     const items = this.state.items.slice(0);
     const itemsLength = items.length;
@@ -60,7 +58,6 @@ export default class GridViewExample extends Component {
         data={this.state.items}
         keyExtractor={this._keyExtractor}
         renderItem={this._renderItem}
-        ref={ref => (this.ref = ref)}
         onEndReached={this._genRows}
       />
     );
