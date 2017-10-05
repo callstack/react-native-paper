@@ -11,7 +11,6 @@ import {
 
 export default class RadioButtonExample extends Component {
   static title = 'Radio button';
-
   state = {
     checked: 'normal',
   };
