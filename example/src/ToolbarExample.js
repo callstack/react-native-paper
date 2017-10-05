@@ -9,7 +9,6 @@ const MORE_ICON = Platform.OS === 'ios' ? 'more-horiz' : 'more-vert';
 export default class ToolbarExample extends Component {
   static title = 'Toolbar';
   static navigationOptions = ({ navigation }) => {
-    console.log(navigation, 'herere');
     return {
       header: (
         <Toolbar
