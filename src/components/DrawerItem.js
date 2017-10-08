@@ -12,6 +12,10 @@ import type { Theme } from '../types/Theme';
 import type { IconSource } from './Icon';
 
 type Props = {
+  /**
+   * Custom color for checkbox
+   */
+  color?: string,
   icon?: IconSource,
   label: string,
   active?: boolean,
@@ -20,6 +24,7 @@ type Props = {
 };
 
 const DrawerItem = ({
+  color: activeColor,
   icon,
   label,
   active,
@@ -30,10 +35,12 @@ const DrawerItem = ({
   const { colors, dark } = theme;
   const backgroundColor = active ? (dark ? grey700 : grey300) : 'transparent';
   const labelColor = active
-    ? dark ? colors.text : colors.primary
-    : colors.secondaryText;
+    ? activeColor || colors.text
+    : color(colors.text)
+        .alpha(0.54)
+        .rgbaString();
   const iconColor = active
-    ? colors.primary
+    ? activeColor || colors.text
     : color(colors.text)
         .alpha(0.54)
         .rgbaString();
@@ -70,6 +77,7 @@ const styles = StyleSheet.create({
 });
 
 DrawerItem.propTypes = {
+  color: PropTypes.string,
   icon: PropTypes.string,
   label: PropTypes.string.isRequired,
   active: PropTypes.bool,

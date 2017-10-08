@@ -10,13 +10,15 @@ import {
   Checkbox,
   TouchableRipple,
   Paragraph,
+  Colors,
 } from 'react-native-paper';
 
 const DrawerItemsData = [
   { label: 'Inbox', icon: 'inbox', key: 0 },
   { label: 'Starred', icon: 'star', key: 1 },
   { label: 'Sent mail', icon: 'send', key: 2 },
-  { label: 'A very long title that will be truncated', icon: 'delete', key: 3 },
+  { label: 'Colored label', icon: 'color-lens', key: 3 },
+  { label: 'A very long title that will be truncated', icon: 'delete', key: 4 },
 ];
 
 class DrawerItems extends Component {
@@ -44,6 +46,7 @@ class DrawerItems extends Component {
             <DrawerItem
               {...props}
               key={props.key}
+              color={props.key === 3 ? Colors.tealA200 : null}
               active={this.state.drawerItemIndex === index}
               onPress={() => this._setDrawerItem(index)}
             />
