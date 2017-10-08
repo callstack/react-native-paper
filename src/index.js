@@ -31,4 +31,5 @@ export { default as GridView } from './components/GridView';
 export { default as SearchBar } from './components/SearchBar';
 export { default as ProgressBar } from './components/ProgressBar';
 
+export { default as BottomTabs } from './components/BottomTabs';
 export { default as Toolbar } from './components/Toolbar';

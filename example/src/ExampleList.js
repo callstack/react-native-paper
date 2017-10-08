@@ -18,8 +18,10 @@ import ToolbarExample from './ToolbarExample';
 import SearchBarExample from './SearchBarExample';
 import ProgressBarExample from './ProgressBarExample';
 import SwitchExample from './SwitchExample';
+import BottomTabsExample from './BottomTabsExample';
 
 export const examples = {
+  bottomTabs: BottomTabsExample,
   button: ButtonExample,
   fab: FABExample,
   card: CardExample,

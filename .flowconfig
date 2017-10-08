@@ -39,7 +39,9 @@
 
 ; Ignore some modules we don't need to parse
 .*/node_modules/prettier/.*
-.*/node_modules/eslint.*
+.*/node_modules/eslint/.*
+.*/node_modules/react-native-material-bottom-navigation/lib/.*
+
 
 [include]
 
