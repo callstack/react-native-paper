@@ -1,10 +1,12 @@
 /* @flow */
 
 import React from 'react';
-import Expo from 'expo';
 import { StackNavigator } from 'react-navigation';
-import { Colors } from 'react-native-paper';
+import { Platform, StatusBar } from 'react-native';
+import { Toolbar } from 'react-native-paper';
 import ExampleList, { examples } from './ExampleList';
+
+const MORE_ICON = Platform.OS === 'ios' ? 'more-horiz' : 'more-vert';
 
 const routes = Object.keys(examples)
   .map(id => ({ id, item: examples[id] }))
@@ -12,10 +14,34 @@ const routes = Object.keys(examples)
     const Comp = item;
     const Screen = props => <Comp {...props} />;
 
-    Screen.navigationOptions = {
-      title: Comp.title,
-      /* $FlowFixMe */
-      ...Comp.navigationOptions,
+    Screen.navigationOptions = ({ navigation }) => {
+      const { params = {} } = navigation.state;
+      return {
+        header: (
+          <Toolbar
+            dark
+            statusBarHeight={
+              Platform.OS === 'ios' ? 20 : StatusBar.currentHeight
+            }
+          >
+            {!params.showLeftIcon && (
+              <Toolbar.BackAction onPress={() => navigation.goBack()} />
+            )}
+            <Toolbar.Content
+              title={Comp.title}
+              subtitle={params.showSubtitle ? 'Subtitle' : null}
+            />
+            {params.showSearchIcon && (
+              <Toolbar.Action icon="search" onPress={() => {}} />
+            )}
+            {!params.showMoreIcon && (
+              <Toolbar.Action icon={MORE_ICON} onPress={() => {}} />
+            )}
+          </Toolbar>
+        ),
+        /* $FlowFixMe */
+        ...Comp.navigationOptions,
+      };
     };
 
     return {
@@ -30,13 +56,15 @@ export default StackNavigator(
     ...routes,
   },
   {
-    navigationOptions: ({ screenProps: { theme } }) => ({
-      headerTintColor: Colors.white,
-      headerStyle: {
-        backgroundColor: theme.colors.primary,
-        paddingTop: Expo.Constants.statusBarHeight,
-        height: 56 + Expo.Constants.statusBarHeight,
-      },
-    }),
+    navigationOptions: {
+      header: (
+        <Toolbar
+          dark
+          statusBarHeight={Platform.OS === 'ios' ? 20 : StatusBar.currentHeight}
+        >
+          <Toolbar.Content title="Examples" />
+        </Toolbar>
+      ),
+    },
   }
 );
