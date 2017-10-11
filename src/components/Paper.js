@@ -27,7 +27,7 @@ class Paper extends Component<void, Props, void> {
   };
 
   render() {
-    const { style, theme: { colors: { paper } }, ...restOfProps } = this.props;
+    const { style, theme, ...restOfProps } = this.props;
     const flattenedStyles = StyleSheet.flatten(style) || {};
     const { elevation = 2 } = flattenedStyles;
 
@@ -36,7 +36,7 @@ class Paper extends Component<void, Props, void> {
         {...restOfProps}
         style={[
           styles.paper,
-          { backgroundColor: paper },
+          { backgroundColor: theme.colors.paper },
           shadow(elevation),
           style,
         ]}

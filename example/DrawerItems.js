@@ -26,12 +26,15 @@ class DrawerItems extends Component {
     theme: PropTypes.object.isRequired,
     toggleTheme: PropTypes.func.isRequired,
   };
+
   state = {
     open: false,
     drawerItemIndex: 0,
     isDark: true,
   };
+
   _setDrawerItem = index => this.setState({ drawerItemIndex: index });
+
   _toggleTheme = () => {
     this.props.toggleTheme();
     this.setState({ isDark: !this.state.isDark });

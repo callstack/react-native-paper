@@ -118,7 +118,7 @@ class GridView extends PureComponent<DefaultProps, Props, State> {
   _setRef = (c: Object) => (this._root = c);
 
   render() {
-    const { spacing, theme: { colors: { background } } } = this.props;
+    const { spacing, theme } = this.props;
     return (
       <ListView
         {...this.props}
@@ -128,7 +128,7 @@ class GridView extends PureComponent<DefaultProps, Props, State> {
         renderRow={this._renderRow}
         contentContainerStyle={[
           styles.grid,
-          { padding: spacing / 2, backgroundColor: background },
+          { padding: spacing / 2, backgroundColor: theme.colors.background },
           this.props.contentContainerStyle,
         ]}
         ref={this._setRef}
