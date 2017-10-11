@@ -8,6 +8,7 @@ import ButtonExample from './ButtonExample';
 import FABExample from './FABExample';
 import CardExample from './CardExample';
 import CheckboxExample from './CheckboxExample';
+import DialogExample from './DialogExample';
 import DividerExample from './DividerExample';
 import GridViewExample from './GridViewExample';
 import PaperExample from './PaperExample';
@@ -24,6 +25,7 @@ export const examples = {
   fab: FABExample,
   card: CardExample,
   checkbox: CheckboxExample,
+  dialog: DialogExample,
   divider: DividerExample,
   grid: GridViewExample,
   paper: PaperExample,
