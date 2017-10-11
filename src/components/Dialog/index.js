@@ -24,6 +24,7 @@ type Props = {
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
  *
+ * ```
  * export default class MyComponent extends Component {
  *   state = {
  *     visible: false,

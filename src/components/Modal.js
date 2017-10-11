@@ -31,7 +31,8 @@ type State = {
 
 /**
  * The Modal component is a simple way to present content above an enclosing view.
- *
+ * 
+ * ```
  * export default class MyComponent extends Component {
  *   state = {
  *     visible: false,
@@ -130,15 +131,13 @@ export default class Modal extends PureComponent<DefaultProps, Props, State> {
       if (this.props.visible && this.props.onRequestClose) {
         this.props.onRequestClose();
       }
-      global.requestAnimationFrame(() => {
-        if (this.props.visible) {
-          this._showModal();
-        } else {
-          this.setState({
-            rendered: false,
-          });
-        }
-      });
+      if (this.props.visible) {
+        this._showModal();
+      } else {
+        this.setState({
+          rendered: false,
+        });
+      }
     });
   };
 
