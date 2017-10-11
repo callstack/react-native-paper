@@ -1,7 +1,7 @@
 /* @flow */
 
 import color from 'color';
-import merge from 'lodash.merge';
+import _ from 'lodash';
 import DefaultTheme from './DefaultTheme';
 import { white, grey800, cyan500, cyan700 } from './colors';
 
@@ -25,4 +25,4 @@ const DarkTheme = {
   },
 };
 
-export default merge({}, DefaultTheme, DarkTheme);
+export default _.merge({}, DefaultTheme, DarkTheme);

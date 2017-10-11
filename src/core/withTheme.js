@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import merge from 'lodash.merge';
+import _ from 'lodash';
 import { channel } from './ThemeProvider';
 import DefaultTheme from '../styles/DefaultTheme';
 import type { Theme } from '../types/Theme';
@@ -38,7 +38,7 @@ export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
       }
 
       this.state = {
-        theme: merge({}, DefaultTheme, theme, this.props.theme),
+        theme: _.merge({}, DefaultTheme, theme, this.props.theme),
       };
     }
 
@@ -48,14 +48,14 @@ export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
       this._subscription =
         this.context[channel] &&
         this.context[channel].subscribe(theme =>
-          this.setState({ theme: merge({}, theme, this.props.theme) })
+          this.setState({ theme: _.merge({}, theme, this.props.theme) })
         );
     }
 
     componentWillReceiveProps(nextProps: *) {
       if (this.props.theme !== nextProps.theme) {
         this.setState({
-          theme: merge(
+          theme: _.merge(
             {},
             this.context[channel] && this.context[channel].get(),
             nextProps.theme
