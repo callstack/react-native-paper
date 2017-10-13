@@ -25,6 +25,26 @@ type Props = {
 
 /**
  * SearchBar is a simple input box where users can type search queries
+ *
+ * **Usage:**
+ * ```
+ * export default class MyComponent extends Component {
+ *   state = {
+ *     firstQuery: '',
+ *   };
+ *
+ *   render() {
+ *     const { firstQuery } = this.state;
+ *     return (
+ *       <SearchBar
+ *         placeholder="Search"
+ *         onChangeText={query => { this.setState({ firstQuery: query }); }}
+ *         value={firstQuery}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
  */
 class SearchBar extends Component<void, Props, void> {
   static propTypes = {
