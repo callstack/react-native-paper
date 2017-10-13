@@ -3,7 +3,7 @@
 import color from 'color';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Paper from './Paper';
 import Icon from './Icon';
 import TouchableRipple from './TouchableRipple';
@@ -51,7 +51,9 @@ const FAB = (props: Props) => {
         rippleColor={rippleColor}
         style={[styles.content, small ? styles.small : styles.standard]}
       >
-        <Icon name={icon} size={24} style={{ color: textColor }} />
+        <View>
+          <Icon name={icon} size={24} style={{ color: textColor }} />
+        </View>
       </TouchableRipple>
     </Paper>
   );
