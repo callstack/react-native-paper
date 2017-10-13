@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "color": "^0.11.4",
+    "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "react-native-drawer": "^2.5.0"
   },

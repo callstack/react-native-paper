@@ -9,13 +9,7 @@ module.exports = {
     return [__dirname, path.resolve(__dirname, '..')];
   },
   getProvidesModuleNodeModules() {
-    return [
-      'react-native',
-      'react',
-      'prop-types',
-      'react-native-drawer',
-      'color',
-    ];
+    return ['react-native', 'react', 'prop-types', 'color', 'lodash.merge'];
   },
   getBlacklistRE() {
     return blacklist([

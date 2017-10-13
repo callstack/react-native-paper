@@ -74,7 +74,6 @@ class RadioButton extends Component<void, Props, State> {
 
   render() {
     const { disabled, onPress, checked, theme, ...rest } = this.props;
-
     const checkedColor = this.props.color || theme.colors.accent;
     const uncheckedColor = 'rgba(0, 0, 0, .54)';
 

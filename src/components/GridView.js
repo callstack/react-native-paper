@@ -3,7 +3,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Dimensions, ListView, StyleSheet, ViewPropTypes } from 'react-native';
-import { grey200 } from '../styles/colors';
+import withTheme from '../core/withTheme';
+import type { Theme } from '../types/Theme';
 
 type Layout = {
   width: number,
@@ -18,6 +19,7 @@ type Props = {
   initialLayout: Layout,
   onLayout?: Function,
   contentContainerStyle?: any,
+  theme: Theme,
 };
 
 type DefaultProps = {
@@ -30,11 +32,7 @@ type State = {
   layout: Layout,
 };
 
-export default class GridView extends PureComponent<
-  DefaultProps,
-  Props,
-  State
-> {
+class GridView extends PureComponent<DefaultProps, Props, State> {
   static propTypes = {
     dataSource: PropTypes.instanceOf(ListView.DataSource).isRequired,
     spacing: PropTypes.number.isRequired,
@@ -42,6 +40,7 @@ export default class GridView extends PureComponent<
     renderSectionHeader: PropTypes.func,
     renderRow: PropTypes.func.isRequired,
     onLayout: PropTypes.func,
+    theme: PropTypes.object.isRequired,
     contentContainerStyle: ViewPropTypes.style,
   };
 
@@ -119,6 +118,7 @@ export default class GridView extends PureComponent<
   _setRef = (c: Object) => (this._root = c);
 
   render() {
+    const { spacing, theme } = this.props;
     return (
       <ListView
         {...this.props}
@@ -128,7 +128,7 @@ export default class GridView extends PureComponent<
         renderRow={this._renderRow}
         contentContainerStyle={[
           styles.grid,
-          { padding: this.props.spacing / 2 },
+          { padding: spacing / 2, backgroundColor: theme.colors.background },
           this.props.contentContainerStyle,
         ]}
         ref={this._setRef}
@@ -142,6 +142,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'flex-start',
-    backgroundColor: grey200,
   },
 });
+
+export default withTheme(GridView);

@@ -1,11 +1,15 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
-import { Colors, Caption, SearchBar } from 'react-native-paper';
+import { Colors, Caption, SearchBar, withTheme } from 'react-native-paper';
 
-export default class SearchExample extends Component {
+class SearchExample extends Component {
   static title = 'Search bar';
+  static propTypes = {
+    theme: PropTypes.object.isRequired,
+  };
 
   state = {
     firstQuery: '',
@@ -14,8 +18,9 @@ export default class SearchExample extends Component {
   };
 
   render() {
+    const { theme: { colors: { background } } } = this.props;
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { backgroundColor: background }]}>
         <SearchBar
           placeholder="Search"
           onChangeText={query => this.setState({ firstQuery: query })}
@@ -51,3 +56,5 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
 });
+
+export default withTheme(SearchExample);
