@@ -36,6 +36,28 @@ type State = {
 
 /**
  * Checkboxes allow the selection of multiple options from a set
+ *
+ * **Usage:**
+ * ```
+ * export default class MyComponent extends Component {
+ *   state = {
+ *     checked: false,
+ *   };
+ *
+ *   render() {
+ *     const { checked } = this.state;
+ *     return (
+ *       <Checkbox
+ *         checked={checked}
+ *         onPress={() =>
+ *           this.setState(() => ({
+ *             checked: !checked,
+ *           }))}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
  */
 class Checkbox extends Component<void, Props, State> {
   static propTypes = {
