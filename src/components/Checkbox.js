@@ -133,6 +133,8 @@ class Checkbox extends Component<void, Props, State> {
 const styles = StyleSheet.create({
   container: {
     borderRadius: 18,
+    width: 36,
+    height: 36,
   },
   icon: {
     margin: 6,
