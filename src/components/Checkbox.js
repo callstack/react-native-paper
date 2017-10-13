@@ -49,10 +49,7 @@ type State = {
  *     return (
  *       <Checkbox
  *         checked={checked}
- *         onPress={() =>
- *           this.setState(() => ({
- *             checked: !checked,
- *           }))}
+ *         onPress={() => { this.setState({ checked: !checked }); }}
  *       />
  *     );
  *   }

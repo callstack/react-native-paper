@@ -45,9 +45,8 @@ type Props = {
  *       <Switch
  *         value={isSwitchOn}
  *         onValueChange={() =>
- *           this.setState(() => ({
- *             isSwitchOn: !isSwitchOn,
- *         }))}
+ *           { this.setState({ isSwitchOn: !isSwitchOn }); }
+ *         }
  *       />
  *     );
  *   }

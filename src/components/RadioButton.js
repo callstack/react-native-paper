@@ -51,12 +51,12 @@ const BORDER_WIDTH = 2;
  *         <RadioButton
  *           value='firstOption'
  *           checked={checked === 'firstOption'}
- *           onPress={() => this.setState({ checked: 'firstOption'})
+ *           onPress={() => { this.setState({ checked: 'firstOption' }); }}
  *         />
  *         <RadioButton
  *           value='secondOption'
  *           checked={checked === 'secondOption'}
- *           onPress={() => this.setState({ checked: 'secondOption'})
+ *           onPress={() => { this.setState({ checked: 'secondOption' }); }}
  *         />
  *       </View>
  *     );
