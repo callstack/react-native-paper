@@ -37,6 +37,32 @@ const BORDER_WIDTH = 2;
 
 /**
  * Radio buttons allow the selection of a single option from a set
+ * **Usage:**
+ * ```
+ * export default class MyComponent extends Component {
+ *   state = {
+ *     checked: 'firstOption',
+ *   };
+ *
+ *   render() {
+ *     const { checked } = this.state;
+ *     return (
+ *       <View>
+ *         <RadioButton
+ *           value='firstOption'
+ *           checked={checked === 'firstOption'}
+ *           onPress={() => this.setState({ checked: 'firstOption'})
+ *         />
+ *         <RadioButton
+ *           value='secondOption'
+ *           checked={checked === 'secondOption'}
+ *           onPress={() => this.setState({ checked: 'secondOption'})
+ *         />
+ *       </View>
+ *     );
+ *   }
+ * }
+ * ```
  */
 class RadioButton extends Component<void, Props, State> {
   static propTypes = {
