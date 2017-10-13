@@ -33,4 +33,5 @@ export { default as SearchBar } from './components/SearchBar';
 export { default as Modal } from './components/Modal';
 export { default as ProgressBar } from './components/ProgressBar';
 
+export { default as BottomTabs } from './components/BottomTabs';
 export { default as Toolbar } from './components/Toolbar';

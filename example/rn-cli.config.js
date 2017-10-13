@@ -15,6 +15,7 @@ module.exports = {
       'prop-types',
       'react-native-drawer',
       'color',
+      'react-native-material-bottom-navigation',
     ];
   },
   getBlacklistRE() {
