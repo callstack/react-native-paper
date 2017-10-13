@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from 'react';
+import { View } from 'react-native';
 
 import TouchableRipple from './TouchableRipple';
 import Icon from './Icon';
@@ -15,7 +16,9 @@ type Props = {
 const TouchableIcon = ({ name, iconStyle, onPress, ...rest }: Props) => {
   return (
     <TouchableRipple onPress={onPress} {...rest}>
-      <Icon style={iconStyle} name={name} size={24} />
+      <View>
+        <Icon style={iconStyle} name={name} size={24} />
+      </View>
     </TouchableRipple>
   );
 };
