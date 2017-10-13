@@ -8,6 +8,17 @@ type Props = {
   style?: any,
 };
 
+/**
+ * Caption - typography style
+ *
+ * **Usage:**
+ * ```
+ * export default class MyComponent extends Component {
+ * const MyComponent = () => (
+ *   <Caption>Caption</Caption>
+ * );
+ * ```
+ */
 const Caption = (props: Props) => (
   <StyledText
     {...props}

@@ -8,6 +8,17 @@ type Props = {
   style?: any,
 };
 
+/**
+ * Title - typography style
+ *
+ * **Usage:**
+ * ```
+ * export default class MyComponent extends Component {
+ * const MyComponent = () => (
+ *   <Title>Title</Title>
+ * );
+ * ```
+ */
 const Title = (props: Props) => (
   <StyledText
     {...props}

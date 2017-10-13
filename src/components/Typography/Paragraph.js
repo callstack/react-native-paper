@@ -8,6 +8,17 @@ type Props = {
   style?: any,
 };
 
+/**
+ * Paragraph - typography style
+ *
+ * **Usage:**
+ * ```
+ * export default class MyComponent extends Component {
+ * const MyComponent = () => (
+ *   <Paragraph>Paragraph</Paragraph>
+ * );
+ * ```
+ */
 const Paragraph = (props: Props) => (
   <StyledText
     {...props}
