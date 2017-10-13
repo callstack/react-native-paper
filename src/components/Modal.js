@@ -31,7 +31,8 @@ type State = {
 
 /**
  * The Modal component is a simple way to present content above an enclosing view.
- * 
+ *
+ * **Usage:**
  * ```
  * export default class MyComponent extends Component {
  *   state = {

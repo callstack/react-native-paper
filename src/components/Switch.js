@@ -31,6 +31,28 @@ type Props = {
 
 /**
  * Switch is a visual toggle between two mutually exclusive states—on and off
+ *
+ * **Usage:**
+ * ```
+ * export default class MyComponent extends Component {
+ *   state = {
+ *     isSwitchOn: false,
+ *   };
+ *
+ *   render() {
+ *     const { isSwitchOn } = this.state;
+ *     return (
+ *       <Switch
+ *         value={isSwitchOn}
+ *         onValueChange={() =>
+ *           this.setState(() => ({
+ *             isSwitchOn: !isSwitchOn,
+ *         }))}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
  */
 class SwitchRow extends Component<void, Props, void> {
   render() {
