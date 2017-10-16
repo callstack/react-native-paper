@@ -9,7 +9,6 @@ import withTheme from '../core/withTheme';
 import Icon from './Icon';
 import TouchableIcon from './TouchableIcon';
 import Paper from './Paper';
-import { white } from '../styles/colors';
 import type { Theme } from '../types/Theme';
 import type { IconSource } from './Icon';
 
@@ -86,11 +85,13 @@ class SearchBar extends Component<void, Props, void> {
       style,
       ...rest
     } = this.props;
-    const { colors, roundness } = theme;
+    const { colors, roundness, dark } = theme;
     const textColor = colors.text;
-    const iconColor = color(textColor)
-      .alpha(0.54)
-      .rgbaString();
+    const iconColor = dark
+      ? textColor
+      : color(textColor)
+          .alpha(0.54)
+          .rgbaString();
     const rippleColor = color(textColor)
       .alpha(0.32)
       .rgbaString();
@@ -145,7 +146,6 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: white,
     margin: 4,
   },
   input: {

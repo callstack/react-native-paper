@@ -1,16 +1,21 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 import {
   Paragraph,
   Checkbox,
   Colors,
   TouchableRipple,
+  withTheme,
 } from 'react-native-paper';
 
-export default class CheckboxExample extends Component {
+class CheckboxExample extends Component {
   static title = 'Checkbox';
+  static propTypes = {
+    theme: PropTypes.object.isRequired,
+  };
 
   state = {
     checkedNormal: true,
@@ -18,8 +23,16 @@ export default class CheckboxExample extends Component {
   };
 
   render() {
+    const { theme: { colors: { background } } } = this.props;
     return (
-      <View style={styles.container}>
+      <View
+        style={[
+          styles.container,
+          {
+            backgroundColor: background,
+          },
+        ]}
+      >
         <TouchableRipple
           onPress={() =>
             this.setState(state => ({
@@ -78,3 +91,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 });
+
+export default withTheme(CheckboxExample);

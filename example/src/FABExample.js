@@ -1,17 +1,22 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
-import { Colors, FAB } from 'react-native-paper';
+import { Colors, FAB, withTheme } from 'react-native-paper';
 
-export default class ButtonExample extends Component {
+class ButtonExample extends Component {
   static title = 'Floating Action Button';
+  static propTypes = {
+    theme: PropTypes.object.isRequired,
+  };
 
   _handlePress = () => {};
 
   render() {
+    const { theme: { colors: { background } } } = this.props;
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { backgroundColor: background }]}>
         <View style={styles.row}>
           <FAB
             small
@@ -43,3 +48,5 @@ const styles = StyleSheet.create({
     margin: 8,
   },
 });
+
+export default withTheme(ButtonExample);
