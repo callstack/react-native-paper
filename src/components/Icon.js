@@ -41,8 +41,10 @@ const Icon = ({ name, ...props }: Props) => {
       {...props}
       style={[
         {
-          width: props.size,
-          height: props.size,
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+          alignItems: 'center',
           overflow: 'hidden',
         },
         props.style,

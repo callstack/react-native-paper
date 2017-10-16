@@ -2,9 +2,14 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, Animated, VirtualizedList } from 'react-native';
-
-import { grey200 } from '../styles/colors';
+import {
+  Animated,
+  StyleSheet,
+  VirtualizedList,
+  ViewPropTypes,
+} from 'react-native';
+import withTheme from '../core/withTheme';
+import type { Theme } from '../types/Theme';
 
 type Props = {
   /**
@@ -29,6 +34,7 @@ type Props = {
    */
   renderItem: (item: any) => React$Element<*>,
   onLayout?: Function,
+  theme: Theme,
 };
 
 type DefaultProps = {
@@ -40,11 +46,7 @@ type State = {
   itemWidth: Animated.Value,
 };
 
-export default class GridView extends PureComponent<
-  DefaultProps,
-  Props,
-  State
-> {
+class GridView extends PureComponent<DefaultProps, Props, State> {
   static propTypes = {
     data: PropTypes.array.isRequired,
     spacing: PropTypes.number.isRequired,
@@ -52,6 +54,8 @@ export default class GridView extends PureComponent<
     renderItem: PropTypes.func.isRequired,
     keyExtractor: PropTypes.func.isRequired,
     onLayout: PropTypes.func,
+    theme: PropTypes.object.isRequired,
+    contentContainerStyle: ViewPropTypes.style,
   };
 
   static defaultProps = {
@@ -106,7 +110,7 @@ export default class GridView extends PureComponent<
   _getItem = (data, index) => data[index];
 
   render() {
-    const { data, keyExtractor, spacing, contentContainerStyle } = this.props;
+    const { spacing, theme, data, keyExtractor } = this.props;
     return (
       <VirtualizedList
         {...this.props}
@@ -119,8 +123,8 @@ export default class GridView extends PureComponent<
         ref={c => (this._root = c)}
         contentContainerStyle={[
           styles.grid,
-          { padding: spacing / 2 },
-          contentContainerStyle,
+          { padding: spacing / 2, backgroundColor: theme.colors.background },
+          this.props.contentContainerStyle,
         ]}
       />
     );
@@ -132,6 +136,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap', // Warning is misleading https://github.com/facebook/react-native/issues/15772
     flexDirection: 'row',
     alignItems: 'flex-start',
-    backgroundColor: grey200,
   },
 });
+
+export default withTheme(GridView);

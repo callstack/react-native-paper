@@ -7,11 +7,14 @@ export { default as withTheme } from './core/withTheme';
 export { default as ThemeProvider } from './core/ThemeProvider';
 export { default as Provider } from './core/Provider';
 export { default as DefaultTheme } from './styles/DefaultTheme';
+export { default as DarkTheme } from './styles/DarkTheme';
 
+export { default as Switch } from './components/Switch';
 export { default as Button } from './components/Button';
 export { default as FAB } from './components/FAB';
 export { default as Card } from './components/Card';
 export { default as Checkbox } from './components/Checkbox';
+export { default as Dialog } from './components/Dialog';
 export { default as Paper } from './components/Paper';
 export { default as RadioButton } from './components/RadioButton';
 export { default as TouchableRipple } from './components/TouchableRipple';
@@ -28,6 +31,7 @@ export { default as DrawerItem } from './components/DrawerItem';
 export { default as DrawerSection } from './components/DrawerSection';
 export { default as GridView } from './components/GridView';
 export { default as SearchBar } from './components/SearchBar';
+export { default as Modal } from './components/Modal';
 export { default as ProgressBar } from './components/ProgressBar';
 
 export { default as Toolbar } from './components/Toolbar';

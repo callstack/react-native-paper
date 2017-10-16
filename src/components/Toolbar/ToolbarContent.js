@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Platform, StyleSheet, ViewPropTypes } from 'react-native';
+import { View, StyleSheet, ViewPropTypes } from 'react-native';
 import color from 'color';
 
 import Text from '../Typography/Text';
@@ -99,10 +99,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   title: {
-    fontSize: Platform.OS === 'ios' ? 18 : 20,
+    fontSize: 20,
   },
   subtitle: {
-    fontSize: Platform.OS === 'ios' ? 12 : 14,
+    fontSize: 14,
   },
 });
 

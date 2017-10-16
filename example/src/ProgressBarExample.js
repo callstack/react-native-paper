@@ -2,14 +2,15 @@
 
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { ProgressBar, Paragraph, Colors } from 'react-native-paper';
+import { ProgressBar, Paragraph, Colors, withTheme } from 'react-native-paper';
 
-export default class ProgressBarExample extends Component {
+class ProgressBarExample extends Component {
   static title = 'Progress bar';
 
   render() {
+    const { theme: { colors: { background } } } = this.props;
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { backgroundColor: background }]}>
         <Paragraph>ProgressBar primary color</Paragraph>
         <ProgressBar progress={0.5} />
         <Paragraph>ProgressBar custom color</Paragraph>
@@ -20,6 +21,9 @@ export default class ProgressBarExample extends Component {
 }
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     padding: 16,
   },
 });
+
+export default withTheme(ProgressBarExample);

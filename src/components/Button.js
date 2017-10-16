@@ -205,6 +205,7 @@ class Button extends PureComponent<void, Props, State> {
     const buttonStyle = { backgroundColor, borderRadius: roundness };
     const touchableStyle = { borderRadius: roundness };
     const textStyle = { color: textColor, fontFamily };
+    const elevation = disabled ? 0 : this.state.elevation;
 
     const content = (
       <View style={styles.content}>
@@ -239,8 +240,13 @@ class Button extends PureComponent<void, Props, State> {
 
     return (
       <AnimatedPaper
-        elevation={disabled ? 0 : this.state.elevation}
-        style={[styles.button, compact && styles.compact, buttonStyle, style]}
+        style={[
+          styles.button,
+          compact && styles.compact,
+          { elevation },
+          buttonStyle,
+          style,
+        ]}
       >
         {disabled ? (
           content

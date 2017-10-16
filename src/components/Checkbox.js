@@ -10,9 +10,21 @@ import withTheme from '../core/withTheme';
 import type { Theme } from '../types/Theme';
 
 type Props = {
+  /**
+   * Whether checkbox is checked
+   */
   checked: boolean,
+  /**
+   * Whether checkbox is disabled
+   */
   disabled?: boolean,
+  /**
+   * Function to execute on press
+   */
   onPress?: Function,
+  /**
+   * Custom color for checkbox
+   */
   color?: string,
   theme: Theme,
 };
@@ -27,21 +39,9 @@ type State = {
  */
 class Checkbox extends Component<void, Props, State> {
   static propTypes = {
-    /**
-     * Whether checkbox is checked
-     */
     checked: PropTypes.bool.isRequired,
-    /**
-     * Whether checkbox is disabled
-     */
     disabled: PropTypes.bool,
-    /**
-     * Function to execute on press
-     */
     onPress: PropTypes.func,
-    /**
-     * Custom color for checkbox
-     */
     color: PropTypes.string,
     theme: PropTypes.object.isRequired,
   };
@@ -79,8 +79,7 @@ class Checkbox extends Component<void, Props, State> {
   }
 
   render() {
-    const { checked, disabled, onPress, theme } = this.props;
-
+    const { checked, disabled, onPress, theme, ...rest } = this.props;
     const checkedColor = this.props.color || theme.colors.accent;
     const uncheckedColor = 'rgba(0, 0, 0, .54)';
 
@@ -88,7 +87,7 @@ class Checkbox extends Component<void, Props, State> {
 
     if (disabled) {
       rippleColor = 'rgba(0, 0, 0, .16)';
-      checkboxColor = 'rgba(0, 0, 0, .26)';
+      checkboxColor = theme.colors.disabled;
     } else {
       rippleColor = color(checkedColor)
         .clearer(0.32)
@@ -103,7 +102,7 @@ class Checkbox extends Component<void, Props, State> {
 
     return (
       <TouchableRipple
-        {...this.props}
+        {...rest}
         borderless
         rippleColor={rippleColor}
         onPress={disabled ? undefined : onPress}
@@ -134,17 +133,16 @@ class Checkbox extends Component<void, Props, State> {
 const styles = StyleSheet.create({
   container: {
     borderRadius: 18,
+    width: 36,
+    height: 36,
   },
-
   icon: {
     margin: 6,
   },
-
   fillContainer: {
     alignItems: 'center',
     justifyContent: 'center',
   },
-
   fill: {
     height: 14,
     width: 14,

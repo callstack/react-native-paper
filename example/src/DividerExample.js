@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { ListView, StyleSheet } from 'react-native';
-import { Divider, Subheading, Colors } from 'react-native-paper';
+import { Divider, Subheading, withTheme } from 'react-native-paper';
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 const dataSource = ds.cloneWithRows([
@@ -14,10 +14,11 @@ const dataSource = ds.cloneWithRows([
   'Peach',
 ]);
 
-const DividerExample = () => {
+const DividerExample = props => {
+  const { theme: { colors: { background } } } = props;
   return (
     <ListView
-      style={styles.container}
+      style={[styles.container, { backgroundColor: background }]}
       dataSource={dataSource}
       renderRow={rowData => (
         <Subheading style={styles.item}>{rowData}</Subheading>
@@ -32,7 +33,6 @@ DividerExample.title = 'Divider';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
   },
   item: {
     paddingVertical: 8,
@@ -40,4 +40,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DividerExample;
+export default withTheme(DividerExample);

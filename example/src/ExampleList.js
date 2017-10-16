@@ -2,12 +2,14 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ListView, Text, StyleSheet } from 'react-native';
-import { Colors, TouchableRipple, Divider } from 'react-native-paper';
+import { ListView } from 'react-native';
+import { Divider, withTheme } from 'react-native-paper';
+import ExampleListRow from './ExampleListRow';
 import ButtonExample from './ButtonExample';
 import FABExample from './FABExample';
 import CardExample from './CardExample';
 import CheckboxExample from './CheckboxExample';
+import DialogExample from './DialogExample';
 import DividerExample from './DividerExample';
 import GridViewExample from './GridViewExample';
 import PaperExample from './PaperExample';
@@ -17,12 +19,14 @@ import TextExample from './TextExample';
 import ToolbarExample from './ToolbarExample';
 import SearchBarExample from './SearchBarExample';
 import ProgressBarExample from './ProgressBarExample';
+import SwitchExample from './SwitchExample';
 
 export const examples = {
   button: ButtonExample,
   fab: FABExample,
   card: CardExample,
   checkbox: CheckboxExample,
+  dialog: DialogExample,
   divider: DividerExample,
   grid: GridViewExample,
   paper: PaperExample,
@@ -32,34 +36,36 @@ export const examples = {
   text: TextExample,
   searchbar: SearchBarExample,
   progressbar: ProgressBarExample,
+  switch: SwitchExample,
 };
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 const dataSource = ds.cloneWithRows(Object.keys(examples));
 
-export default class ExampleList extends Component {
+class ExampleList extends Component {
   static navigationOptions = {
     title: 'Examples',
   };
 
   static propTypes = {
+    theme: PropTypes.object.isRequired,
     navigation: PropTypes.object,
   };
 
   _renderRow = id => (
-    <TouchableRipple
-      style={styles.item}
+    <ExampleListRow
+      title={examples[id].title}
       onPress={() => this.props.navigation.navigate(id)}
-    >
-      <Text style={styles.text}>{examples[id].title}</Text>
-    </TouchableRipple>
+    />
   );
 
   _renderSeparator = (sectionId, rowId) => <Divider key={rowId} />;
 
   render() {
+    const { theme: { colors: { background } } } = this.props;
     return (
       <ListView
+        contentContainerStyle={{ flex: 1, backgroundColor: background }}
         dataSource={dataSource}
         renderRow={this._renderRow}
         renderSeparator={this._renderSeparator}
@@ -68,13 +74,4 @@ export default class ExampleList extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  item: {
-    padding: 16,
-    backgroundColor: Colors.white,
-  },
-  text: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-});
+export default withTheme(ExampleList);

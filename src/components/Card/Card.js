@@ -13,7 +13,6 @@ import Paper from '../Paper';
 import CardContent from './CardContent';
 import CardCover from './CardCover';
 import CardActions from './CardActions';
-import { white } from '../../styles/colors';
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types/Theme';
 
@@ -77,15 +76,13 @@ class Card extends Component<DefaultProps, Props, State> {
 
   render() {
     const { children, onPress, style, theme } = this.props;
-
+    const { elevation } = this.state;
     const { roundness } = theme;
     const total = Children.count(children);
     const siblings = Children.map(children, child => child.type.displayName);
-
     return (
       <AnimatedPaper
-        elevation={this.state.elevation}
-        style={[styles.card, { borderRadius: roundness }, style]}
+        style={[styles.card, { borderRadius: roundness, elevation }, style]}
       >
         <TouchableWithoutFeedback
           delayPressIn={0}
@@ -111,7 +108,6 @@ class Card extends Component<DefaultProps, Props, State> {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: white,
     margin: 4,
   },
   container: {

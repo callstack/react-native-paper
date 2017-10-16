@@ -4,55 +4,101 @@ import React, { Component } from 'react';
 import { View, Platform, StatusBar, StyleSheet } from 'react-native';
 import { Colors, Button, Toolbar } from 'react-native-paper';
 
+const MORE_ICON = Platform.OS === 'ios' ? 'more-horiz' : 'more-vert';
+
 export default class ToolbarExample extends Component {
   static title = 'Toolbar';
-  static navigationOptions = {
-    header: null,
-  };
-
-  state = {
-    showLeftIcon: true,
-    showSubtitle: true,
-  };
-
-  render() {
-    const { showLeftIcon, showSubtitle } = this.state;
-
-    return (
-      <View style={styles.container}>
+  static navigationOptions = ({ navigation }) => {
+    return {
+      header: (
         <Toolbar
           dark
           statusBarHeight={Platform.OS === 'ios' ? 20 : StatusBar.currentHeight}
         >
-          {showLeftIcon && (
-            <Toolbar.Action
-              icon="arrow-back"
+          {navigation.params.showLeftIcon && (
+            <Toolbar.BackAction
               onPress={() => this.props.navigation.goBack()}
             />
           )}
           <Toolbar.Content
             title="Title"
-            subtitle={showSubtitle ? 'Subtitle' : null}
+            subtitle={navigation.params.showSubtitle ? 'Subtitle' : null}
           />
-          <Toolbar.Action icon="search" onPress={() => {}} />
-          <Toolbar.Action icon="more-vert" onPress={() => {}} />
+          {navigation.params.showSearchIcon && (
+            <Toolbar.Action icon="search" onPress={() => {}} />
+          )}
+          {navigation.params.showMoreIcon && (
+            <Toolbar.Action icon={MORE_ICON} onPress={() => {}} />
+          )}
         </Toolbar>
+      ),
+    };
+  };
+
+  state = {
+    showLeftIcon: true,
+    showSearchIcon: false,
+    showMoreIcon: true,
+    showSubtitle: false,
+  };
+
+  render() {
+    const {
+      showLeftIcon,
+      showSearchIcon,
+      showMoreIcon,
+      showSubtitle,
+    } = this.state;
+    return (
+      <View style={styles.container}>
         <View style={styles.content}>
           <Button
             accent
             raised
-            onPress={() =>
-              this.setState({ showLeftIcon: !this.state.showLeftIcon })}
+            onPress={() => {
+              this.setState({ showLeftIcon: !this.state.showLeftIcon });
+              this.props.navigation.setParams({
+                showLeftIcon: !!showLeftIcon,
+              });
+            }}
           >
             {`Left icon: ${showLeftIcon ? 'On' : 'Off'}`}
           </Button>
           <Button
             accent
             raised
-            onPress={() =>
-              this.setState({ showSubtitle: !this.state.showSubtitle })}
+            onPress={() => {
+              this.setState({ showSubtitle: !this.state.showSubtitle });
+              this.props.navigation.setParams({
+                showSubtitle: !showSubtitle,
+              });
+            }}
           >
             {`Subtitle: ${showSubtitle ? 'On' : 'Off'}`}
+          </Button>
+          <Button
+            accent
+            raised
+            onPress={() => {
+              this.setState({ showSearchIcon: !this.state.showSearchIcon });
+              this.props.navigation.setParams({
+                showSearchIcon: !showSearchIcon,
+              });
+            }}
+          >
+            {`Search icon: ${showSearchIcon ? 'On' : 'Off'}`}
+          </Button>
+          <Button
+            accent
+            raised
+            onPress={() => {
+              this.setState({ showMoreIcon: !this.state.showMoreIcon });
+              this.props.navigation.setParams({
+                showMoreIcon: !!showMoreIcon,
+              });
+            }}
+          >
+            {`More icon: ${showMoreIcon ? 'On' : 'Off'}`}
           </Button>
         </View>
       </View>

@@ -1,21 +1,26 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { ScrollView, StyleSheet } from 'react-native';
-import { Text, Colors, Paper } from 'react-native-paper';
+import { Text, Paper, withTheme } from 'react-native-paper';
 
-export default class RipplesExample extends Component {
+class PaperExample extends Component {
   static title = 'Paper';
+  static propTypes = {
+    theme: PropTypes.object.isRequired,
+  };
 
   render() {
+    const { theme: { colors: { background } } } = this.props;
     return (
       <ScrollView
-        style={styles.container}
+        style={[styles.container, { backgroundColor: background }]}
         contentContainerStyle={styles.content}
       >
         {[1, 2, 4, 6, 12].map(i => {
           return (
-            <Paper key={i} elevation={i} style={styles.paper}>
+            <Paper key={i} style={[styles.paper, { elevation: i }]}>
               <Text>{i}</Text>
             </Paper>
           );
@@ -28,7 +33,6 @@ export default class RipplesExample extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.grey200,
   },
 
   content: {
@@ -44,3 +48,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default withTheme(PaperExample);

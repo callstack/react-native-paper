@@ -1,7 +1,7 @@
 {
   "name": "react-native-paper",
-  "version": "0.0.6",
-  "description": "",
+  "version": "0.0.7",
+  "description": "Material design for React Native",
   "main": "src/index.js",
   "files": [
     "src/"
@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "color": "^0.11.4",
+    "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "react-native-drawer": "^2.5.0"
   },
