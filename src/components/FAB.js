@@ -24,6 +24,17 @@ type Props = {
 
 /**
  * A floating action button represents the primary action in an application
+ *
+ * **Usage:**
+ * ```
+ * const MyComponent = () => (
+ *   <FAB
+ *     small
+ *     icon="add"
+ *     onPress={() => {}}
+ *   />
+ * );
+ * ```
  */
 const FAB = (props: Props) => {
   const { small, dark, icon, color: iconColor, onPress, theme, style } = props;
