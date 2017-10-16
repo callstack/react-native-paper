@@ -1,9 +1,8 @@
-/* @flow */
+// @flow
 
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Colors, Card, Text, GridView } from 'react-native-paper';
-
 const CARD_SIZE = 160;
 
 export default class GridViewExample extends Component {
@@ -11,9 +10,6 @@ export default class GridViewExample extends Component {
 
   state = {
     items: [],
-    dataSource: new GridView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-    }),
   };
 
   componentWillMount() {
@@ -29,24 +25,25 @@ export default class GridViewExample extends Component {
     }
 
     for (let i = 0; i < 100; i++) {
-      items.push(itemsLength + i);
+      items.push({ id: itemsLength + i });
     }
 
     this.setState({
       items,
-      dataSource: this.state.dataSource.cloneWithRows(items),
     });
   };
 
-  _renderRow = index => {
+  _renderItem = item => {
     return (
       <Card style={styles.tile}>
         <View style={styles.inner}>
-          <Text style={styles.text}>{index}</Text>
+          <Text style={styles.text}>{item.id}</Text>
         </View>
       </Card>
     );
   };
+
+  _keyExtractor = item => item.id;
 
   _getNumberOfColumns = (width: number) => {
     return Math.floor(width / CARD_SIZE);
@@ -56,11 +53,11 @@ export default class GridViewExample extends Component {
     return (
       <GridView
         {...this.props}
-        removeClippedSubviews={false}
         spacing={8}
         getNumberOfColumns={this._getNumberOfColumns}
-        dataSource={this.state.dataSource}
-        renderRow={this._renderRow}
+        data={this.state.items}
+        keyExtractor={this._keyExtractor}
+        renderItem={this._renderItem}
         onEndReached={this._genRows}
       />
     );

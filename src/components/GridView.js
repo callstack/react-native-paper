@@ -2,136 +2,130 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Dimensions, ListView, StyleSheet, ViewPropTypes } from 'react-native';
+import {
+  Animated,
+  StyleSheet,
+  VirtualizedList,
+  ViewPropTypes,
+} from 'react-native';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types/Theme';
 
-type Layout = {
-  width: number,
-};
-
 type Props = {
-  dataSource: ListView.DataSource,
+  /**
+   * Item's spacing
+   */
   spacing: number,
+  /**
+   * Function which determine number of columns.
+   */
   getNumberOfColumns: (width: number) => number,
-  renderSectionHeader?: (...args: any) => any,
-  renderRow: (...args: any) => any,
-  initialLayout: Layout,
+  /**
+   * Data for the list
+   */
+  data: Array<any>,
+  /**
+   * Function which should return ID base on the item.
+   */
+  keyExtractor: (item: any) => string,
+  contentContainerStyle: ?Object,
+  /**
+   * Component for rendering item
+   */
+  renderItem: (item: any) => React$Element<*>,
   onLayout?: Function,
-  contentContainerStyle?: any,
   theme: Theme,
 };
 
 type DefaultProps = {
-  initialLayout: Layout,
   getNumberOfColumns: (width: number) => number,
   spacing: number,
 };
 
 type State = {
-  layout: Layout,
+  itemWidth: Animated.Value,
 };
 
 class GridView extends PureComponent<DefaultProps, Props, State> {
   static propTypes = {
-    dataSource: PropTypes.instanceOf(ListView.DataSource).isRequired,
+    data: PropTypes.array.isRequired,
     spacing: PropTypes.number.isRequired,
     getNumberOfColumns: PropTypes.func.isRequired,
-    renderSectionHeader: PropTypes.func,
-    renderRow: PropTypes.func.isRequired,
+    renderItem: PropTypes.func.isRequired,
+    keyExtractor: PropTypes.func.isRequired,
     onLayout: PropTypes.func,
     theme: PropTypes.object.isRequired,
     contentContainerStyle: ViewPropTypes.style,
   };
 
   static defaultProps = {
-    initialLayout: { width: Dimensions.get('window').width },
     getNumberOfColumns: () => 1,
     spacing: 0,
   };
-
-  static DataSource = ListView.DataSource;
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      layout: props.initialLayout,
+      itemWidth: new Animated.Value(0),
     };
   }
 
   state: State;
 
-  scrollTo(options: any) {
-    this._root.scrollTo(options);
-  }
+  _root: VirtualizedList;
 
-  _root: Object;
+  scrollToIndex = (params: Object) => this._root.scrollToIndex(params);
+  scrollToItem = (params: Object) => this._root.scrollToItem(params);
+  scrollToEnd = (params?: Object) => this._root.scrollToEnd(params);
+  scrollToOffset = (params: Object) => this._root.scrollToOffset(params);
 
-  _renderSectionHeader = (...args) => {
-    const header = this.props.renderSectionHeader
-      ? this.props.renderSectionHeader(...args)
-      : null;
-    if (!header) {
-      return header;
-    }
-    const { width } = this.state.layout;
-    return React.cloneElement(header, {
-      style: [header.props.style, { width }],
-    });
-  };
+  _renderItem = ({ item }) => {
+    const { spacing, renderItem } = this.props;
 
-  _renderRow = (...args: any) => {
-    const containerWidth = this.state.layout.width;
-    const { getNumberOfColumns, spacing } = this.props;
     const style = {
-      width:
-        (containerWidth - spacing) / getNumberOfColumns(containerWidth) -
-        spacing,
+      width: this.state.itemWidth,
       margin: spacing / 2,
     };
-    const row = this.props.renderRow(...args);
-    if (!row) {
-      return row;
-    }
-    return React.cloneElement(row, {
-      style: [row.props.style, style],
-    });
+
+    return <Animated.View style={style}>{renderItem(item)}</Animated.View>;
   };
 
   _handleLayout = (e: any) => {
+    const { getNumberOfColumns, spacing } = this.props;
+
     if (this.props.onLayout) {
       this.props.onLayout(e);
     }
 
-    if (this.state.layout.width === e.nativeEvent.layout.width) {
-      return;
-    }
+    const layoutWidth = e.nativeEvent.layout.width;
 
-    const containerWidth = e.nativeEvent.layout.width;
-
-    this.setState({
-      layout: { width: containerWidth },
-    });
+    this.state.itemWidth.setValue(
+      (layoutWidth - spacing) / getNumberOfColumns(layoutWidth) - spacing
+    );
   };
 
-  _setRef = (c: Object) => (this._root = c);
+  _getItemCount = (data: Array<any>) => data.length;
+
+  _getItem = (data, index) => data[index];
 
   render() {
-    const { spacing, theme } = this.props;
+    const { spacing, theme, data, keyExtractor } = this.props;
     return (
-      <ListView
+      <VirtualizedList
         {...this.props}
-        key={`grid-${this.state.layout.width}`}
+        data={data}
+        getItemCount={this._getItemCount}
+        getItem={this._getItem}
         onLayout={this._handleLayout}
-        renderSectionHeader={this._renderSectionHeader}
-        renderRow={this._renderRow}
+        renderItem={this._renderItem}
+        keyExtractor={keyExtractor}
+        ref={c => (this._root = c)}
         contentContainerStyle={[
           styles.grid,
           { padding: spacing / 2, backgroundColor: theme.colors.background },
           this.props.contentContainerStyle,
         ]}
-        ref={this._setRef}
       />
     );
   }
@@ -139,8 +133,8 @@ class GridView extends PureComponent<DefaultProps, Props, State> {
 
 const styles = StyleSheet.create({
   grid: {
+    flexWrap: 'wrap', // Warning is misleading https://github.com/facebook/react-native/issues/15772
     flexDirection: 'row',
-    flexWrap: 'wrap',
     alignItems: 'flex-start',
   },
 });
