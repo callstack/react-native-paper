@@ -25,7 +25,7 @@ const App = DrawerNavigator(
 
 class PaperExample extends Component {
   state = {
-    theme: DarkTheme,
+    theme: DefaultTheme,
   };
 
   _toggleTheme = () =>
