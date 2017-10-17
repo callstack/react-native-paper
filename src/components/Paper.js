@@ -16,7 +16,26 @@ type Props = {
 
 /**
  * Paper is a basic container that can give depth to the page.
- * 
+ *
+ * **Usage:**
+ * ```
+ * const MyComponent = () => (
+ *   <Paper style={styles.paper}>
+ *      <Text>Paper</Text>
+ *   </Paper>
+ * );
+ *
+ *
+ * const styles = StyleSheet.create({
+ *   paper: {
+ *    padding: 8,
+ *    height: 80,
+ *    width: 80,
+ *    alignItems: 'center',
+ *    justifyContent: 'center',
+*    },
+ * });
+ * ```
  * Note: Pass *elevation* style, to apply shadow to the component. Defaults to 2.
  */
 class Paper extends Component<void, Props, void> {
