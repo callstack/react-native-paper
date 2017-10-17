@@ -3,7 +3,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { channel } from './ThemeProvider';
+import ThemeProvider, { channel } from './ThemeProvider';
 import DefaultTheme from '../styles/DefaultTheme';
 import type { Theme } from '../types/Theme';
 
@@ -76,8 +76,10 @@ export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
     _root: any;
 
     render() {
+      let element;
+
       if (isClassComponent(Comp)) {
-        return (
+        element = (
           <Comp
             {...this.props}
             ref={c => (this._root = c)}
@@ -85,8 +87,16 @@ export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
           />
         );
       } else {
-        return <Comp {...this.props} theme={this.state.theme} />;
+        element = <Comp {...this.props} theme={this.state.theme} />;
       }
+
+      if (this.state.theme !== this.props.theme) {
+        return (
+          <ThemeProvider theme={this.state.theme}>{element}</ThemeProvider>
+        );
+      }
+
+      return element;
     }
   }
 
