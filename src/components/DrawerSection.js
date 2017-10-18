@@ -20,7 +20,7 @@ type Props = {
  * ```
  * export default class MyComponent extends Component {
  *   state = {
- *     active: 'first item',
+ *     active: 'First Item',
  *   };
  *
  *   render() {
