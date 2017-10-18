@@ -6,37 +6,39 @@ import { ListView } from 'react-native';
 import { Divider, withTheme } from 'react-native-paper';
 import ExampleListRow from './ExampleListRow';
 import ButtonExample from './ButtonExample';
-import FABExample from './FABExample';
 import CardExample from './CardExample';
 import CheckboxExample from './CheckboxExample';
 import DialogExample from './DialogExample';
 import DividerExample from './DividerExample';
+import FABExample from './FABExample';
 import GridViewExample from './GridViewExample';
 import PaperExample from './PaperExample';
-import RippleExample from './RippleExample';
-import RadioButtonExample from './RadioButtonExample';
-import TextExample from './TextExample';
-import ToolbarExample from './ToolbarExample';
-import SearchBarExample from './SearchBarExample';
 import ProgressBarExample from './ProgressBarExample';
+import RadioButtonExample from './RadioButtonExample';
+import RippleExample from './RippleExample';
+import SearchBarExample from './SearchBarExample';
 import SwitchExample from './SwitchExample';
+import TextExample from './TextExample';
+import TextInputExample from './TextInputExample';
+import ToolbarExample from './ToolbarExample';
 
 export const examples = {
   button: ButtonExample,
-  fab: FABExample,
   card: CardExample,
   checkbox: CheckboxExample,
   dialog: DialogExample,
   divider: DividerExample,
+  fab: FABExample,
   grid: GridViewExample,
   paper: PaperExample,
-  ripple: RippleExample,
-  radio: RadioButtonExample,
-  toolbar: ToolbarExample,
-  text: TextExample,
-  searchbar: SearchBarExample,
   progressbar: ProgressBarExample,
+  radio: RadioButtonExample,
+  ripple: RippleExample,
+  searchbar: SearchBarExample,
   switch: SwitchExample,
+  text: TextExample,
+  textInput: TextInputExample,
+  toolbar: ToolbarExample,
 };
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
