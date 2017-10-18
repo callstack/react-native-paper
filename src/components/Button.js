@@ -46,8 +46,8 @@ type State = {
  * **Usage:**
  * ```
  * const MyComponent = () => (
- *   <Button raised onPress={() => console.log('Pressed')>}
- *    Press me
+ *   <Button raised onPress={() => console.log('Pressed')}>
+ *     Press me
  *   </Button>
  * );
  * ```

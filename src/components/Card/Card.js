@@ -34,6 +34,26 @@ type State = {
   elevation: Animated.Value,
 };
 
+/**
+ * A card is a sheet of material that serves as an entry point to more detailed information.
+ *
+ * **Usage:**
+ * ```
+ * const MyComponent = () => (
+ *   <Card>
+ *     <Card.Content>
+ *       <Title>Card title</Title>
+ *       <Paragraph>Card content</Paragraph>
+ *     </Card.Content>
+ *     <Card.Cover source={} />
+ *     <Card.Actions>
+ *       <Button>Cancel</Button>
+ *       <Button>Ok</Button>
+ *     <Card.Actions>
+ *   <Card>
+ * );
+ * ```
+ */
 class Card extends Component<DefaultProps, Props, State> {
   static Cover = CardCover;
   static Content = CardContent;
