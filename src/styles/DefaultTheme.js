@@ -23,6 +23,9 @@ export default {
     placeholder: color(black)
       .alpha(0.38)
       .rgbaString(),
+    helperText: color(black)
+      .alpha(0.54)
+      .rgbaString(),
   },
   fonts,
 };

@@ -316,7 +316,10 @@ class TextInput extends Component<DefaultProps, Props, State> {
         {
           helperText &&
             <Text
-              style={styles.helperText}
+              style={[
+                styles.helperText,
+                { color: colors.helperText }
+              ]}
             >
               {helperText}
             </Text>
@@ -361,6 +364,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     paddingTop: 4,
     paddingBottom: 4,
+    fontSize: 12,
   },
 });
 
