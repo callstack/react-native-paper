@@ -13,6 +13,36 @@ type Props = {
   theme: Theme,
 };
 
+/**
+ * Drawer container slides in from the left and contains the navigation destinations for your app
+ *
+ * **Usage:**
+ * ```
+ * export default class MyComponent extends Component {
+ *   state = {
+ *     active: 'first item',
+ *   };
+ *
+ *   render() {
+ *     const { active } = this.state;
+ *     return (
+ *       <DrawerSection label="Subheader">
+ *         <DrawerItem
+ *           label="First Item"
+ *           active={this.state.active === 'First Item'}
+ *           onPress={() => { this.setState({ active: 'First Item' }); }}
+ *        />
+ *         <DrawerItem
+ *           label="Second Item"
+ *           active={this.state.active === 'Second Item'}
+ *           onPress={() => { this.setState({ active: 'Second Item' }); }}
+ *        />
+ *      </DrawerSection>
+ *     );
+ *   }
+ * }
+ * ```
+ */
 const DrawerSection = ({ children, label, theme, ...props }: Props) => {
   const { colors, fonts } = theme;
   const labelColor = color(colors.text)
