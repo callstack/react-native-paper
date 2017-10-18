@@ -56,6 +56,10 @@ type Props = {
    * Value of the text input
    */
   value?: string,
+  /**
+   * Text that gives context about a field’s input
+   */
+  helperText?: string,
   style?: any,
   theme: Theme,
 };
@@ -107,6 +111,7 @@ class TextInput extends Component<DefaultProps, Props, State> {
     onBlur: PropTypes.func,
     style: ViewPropTypes.style,
     value: PropTypes.string,
+    helperText: PropTypes.string,
     theme: PropTypes.object.isRequired,
   };
 
@@ -214,6 +219,7 @@ class TextInput extends Component<DefaultProps, Props, State> {
       disabled,
       label,
       underlineColor,
+      helperText,
       style,
       theme,
       ...rest
@@ -307,6 +313,14 @@ class TextInput extends Component<DefaultProps, Props, State> {
             style={[styles.bottomLine, styles.focusLine, bottomLineStyle]}
           />
         </View>
+        {
+          helperText &&
+            <Text
+              style={styles.helperText}
+            >
+              {helperText}
+            </Text>
+        }
       </View>
     );
   }
@@ -342,6 +356,11 @@ const styles = StyleSheet.create({
   },
   focusLine: {
     height: StyleSheet.hairlineWidth * 4,
+  },
+  helperText: {
+    textAlign: 'left',
+    paddingTop: 4,
+    paddingBottom: 4,
   },
 });
 
