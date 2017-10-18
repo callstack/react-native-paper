@@ -66,6 +66,8 @@ class Toolbar extends Component<DefaultProps, Props, void> {
     const flattenStyle = style ? StyleSheet.flatten(style) : {};
     const { height: heightProp, ...styleProp } = { ...flattenStyle };
 
+    const elevation = Platform.OS === 'ios' ? 0 : 4;
+
     const toolbarStyle = {
       backgroundColor: colors.primary,
       // TODO make height orientation aware ???
@@ -108,7 +110,7 @@ class Toolbar extends Component<DefaultProps, Props, void> {
       <Paper
         style={[
           toolbarStyle,
-          { paddingTop: statusBarHeight, elevation: 4 },
+          { paddingTop: statusBarHeight, elevation },
           styles.toolbar,
           styleProp,
         ]}
