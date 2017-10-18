@@ -9,6 +9,8 @@ export default class TextInputExample extends Component {
 
   state = {
     text: '',
+    errorTestText: '',
+    hasError: false,
   };
 
   render() {
@@ -25,7 +27,28 @@ export default class TextInputExample extends Component {
         <TextInput
           disabled
           style={styles.inputContainerStyle}
+          helperText="Helper text"
           label="Disabled Input"
+        />
+        <TextInput
+          style={styles.inputContainerStyle}
+          label="Error input"
+          placeholder="Type something & then unfocus"
+          helperText="Helper: This will be replaced by error"
+          value={this.state.errorTestText}
+          onChangeText={errorTestText => this.setState({ errorTestText })}
+          onBlur={() =>
+            this.setState({ hasError: this.state.errorTestText !== 'fix' })}
+          hasError={this.state.hasError}
+          errorText="Error: Type fix to remove the error"
+        />
+        <TextInput
+          disabled
+          style={styles.inputContainerStyle}
+          helperText="Helper: Disable styles should override error styles"
+          label="Disabled with error"
+          hasError
+          errorText="Error: Type fix to remove the error"
         />
       </ScrollView>
     );

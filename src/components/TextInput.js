@@ -60,12 +60,21 @@ type Props = {
    * Text that gives context about a field’s input
    */
   helperText?: string,
+  /**
+   * Represents error state, true represents an invalid input
+   */
+  hasError?: boolean,
+  /**
+   * Text to show for error state, visible only when hasError prop is true
+   */
+  errorText?: string,
   style?: any,
   theme: Theme,
 };
 
 type DefaultProps = {
   disabled: boolean,
+  hasError: boolean,
 };
 
 type State = {
@@ -112,11 +121,14 @@ class TextInput extends Component<DefaultProps, Props, State> {
     style: ViewPropTypes.style,
     value: PropTypes.string,
     helperText: PropTypes.string,
+    hasError: PropTypes.bool,
+    errorText: PropTypes.string,
     theme: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
     disabled: false,
+    hasError: false,
   };
 
   constructor(props: Props) {
@@ -220,6 +232,8 @@ class TextInput extends Component<DefaultProps, Props, State> {
       label,
       underlineColor,
       helperText,
+      hasError,
+      errorText,
       style,
       theme,
       ...rest
@@ -227,16 +241,20 @@ class TextInput extends Component<DefaultProps, Props, State> {
     const { colors, fonts } = theme;
     const fontFamily = fonts.regular;
     const primaryColor = colors.primary;
-    const inactiveColor = colors.disabled;
+    let inactiveColor = colors.disabled;
+    let helperTextColor = colors.helperText;
 
     let inputTextColor, labelColor, bottomLineColor;
 
-    if (!disabled) {
+    if (disabled) {
+      inputTextColor = labelColor = bottomLineColor = inactiveColor;
+    } else if (hasError) {
+      helperTextColor = labelColor = bottomLineColor = inactiveColor =
+        colors.error;
+    } else {
       inputTextColor = colors.text;
       labelColor = primaryColor;
       bottomLineColor = underlineColor || primaryColor;
-    } else {
-      inputTextColor = labelColor = bottomLineColor = inactiveColor;
     }
 
     const labelColorAnimation = this.state.focused.interpolate({
@@ -313,17 +331,12 @@ class TextInput extends Component<DefaultProps, Props, State> {
             style={[styles.bottomLine, styles.focusLine, bottomLineStyle]}
           />
         </View>
-        {
-          helperText &&
-            <Text
-              style={[
-                styles.helperText,
-                { color: colors.helperText }
-              ]}
-            >
-              {helperText}
+        {helperText &&
+          !disabled && (
+            <Text style={[styles.helperText, { color: helperTextColor }]}>
+              {hasError ? errorText : helperText}
             </Text>
-        }
+          )}
       </View>
     );
   }
