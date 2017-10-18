@@ -2,7 +2,6 @@
 
 import color from 'color';
 import React from 'react';
-import PropTypes from 'prop-types';
 import { View, Text, StyleSheet } from 'react-native';
 import Icon from './Icon';
 import TouchableRipple from './TouchableRipple';
@@ -75,14 +74,5 @@ const styles = StyleSheet.create({
     height: 48,
   },
 });
-
-DrawerItem.propTypes = {
-  color: PropTypes.string,
-  icon: PropTypes.string,
-  label: PropTypes.string.isRequired,
-  active: PropTypes.bool,
-  onPress: PropTypes.func,
-  theme: PropTypes.object.isRequired,
-};
 
 export default withTheme(DrawerItem);

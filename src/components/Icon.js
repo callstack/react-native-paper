@@ -1,7 +1,6 @@
 /* @flow */
 import React from 'react';
 import { Image, View } from 'react-native';
-import PropTypes from 'prop-types';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export type IconSource = string | { uri: string } | number | React.Element<*>;
@@ -69,14 +68,3 @@ const Icon = ({ name, ...props }: Props) => {
 };
 
 export default Icon;
-
-Icon.propTypes = {
-  name: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.object,
-  ]),
-  size: PropTypes.number.isRequired,
-  color: PropTypes.string,
-  style: PropTypes.any,
-};

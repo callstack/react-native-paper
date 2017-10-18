@@ -1,7 +1,6 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { grey400, grey50 } from '../styles/colors';
 import { View, Switch, Platform } from 'react-native';
 import withTheme from '../core/withTheme';
@@ -96,14 +95,5 @@ class SwitchRow extends Component<void, Props, void> {
     );
   }
 }
-
-SwitchRow.propTypes = {
-  disabled: PropTypes.bool,
-  value: PropTypes.bool,
-  onValueChange: PropTypes.func,
-  style: PropTypes.any,
-  theme: PropTypes.object.isRequired,
-  color: PropTypes.string,
-};
 
 export default withTheme(SwitchRow);

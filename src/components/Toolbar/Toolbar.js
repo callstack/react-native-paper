@@ -1,8 +1,7 @@
 /* @flow */
 
 import React, { Children, Component } from 'react';
-import PropTypes from 'prop-types';
-import { Platform, StyleSheet, ViewPropTypes, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 
 import withTheme from '../../core/withTheme';
 import Paper from '../Paper';
@@ -73,14 +72,6 @@ type DefaultProps = {
  * ```
  */
 class Toolbar extends Component<DefaultProps, Props, void> {
-  static propTypes = {
-    dark: PropTypes.bool,
-    children: PropTypes.node.isRequired,
-    style: ViewPropTypes.style,
-    statusBarHeight: PropTypes.number,
-    theme: PropTypes.object.isRequired,
-  };
-
   static defaultProps = {
     statusBarHeight: Platform.OS === 'ios' ? 20 : 0,
   };

@@ -2,7 +2,6 @@
 
 import React, { Children } from 'react';
 import { StyleSheet, Platform, Animated } from 'react-native';
-import PropTypes from 'prop-types';
 import Modal from '../Modal';
 import { black, white } from '../../styles/colors';
 import Paper from '../Paper';
@@ -15,9 +14,18 @@ const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
 type Props = {
   children?: any,
+  /**
+   * Determines whether clicking outside the dialog dismiss it, true by default
+   */
   dismissable?: boolean,
+  /**
+   * Callback that is called when the user dismisses the dialog
+   */
   onRequestClose?: Function,
   style?: any,
+  /**
+   * Determines Whether the dialog is visible
+   */
   visible: boolean,
 };
 
@@ -101,23 +109,6 @@ Dialog.Title = DialogTitle;
 Dialog.Content = DialogContent;
 Dialog.ScrollArea = DialogScrollArea;
 
-Dialog.propTypes = {
-  children: PropTypes.node.isRequired,
-  /**
-   * Determines whether clicking outside the dialog dismiss it, true by default
-   */
-  dismissable: PropTypes.bool,
-  /**
-   * Callback that is called when the user dismisses the dialog
-   */
-  onRequestClose: PropTypes.func.isRequired,
-  style: PropTypes.object,
-  /**
-   * Determines Whether the dialog is visible
-   */
-  visible: PropTypes.bool,
-};
-
 Dialog.defaultProps = {
   dismissable: true,
   titleColor: black,
@@ -129,11 +120,11 @@ export default Dialog;
 const styles = StyleSheet.create({
   container: {
     /**
-     * This prevents the shadow from being clipped on Android since Android 
+     * This prevents the shadow from being clipped on Android since Android
      * doesn't support `overflow: visible`.
      * One downside for this fix is that it will disable clicks on the area
      * of the shadow around the dialog, consequently, if you click around the
-     * dialog (44 pixel from the top and bottom) it won't be dismissed. 
+     * dialog (44 pixel from the top and bottom) it won't be dismissed.
      */
     marginVertical: Platform.OS === 'android' ? 44 : 0,
     marginHorizontal: 26,

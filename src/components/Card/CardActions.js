@@ -1,8 +1,7 @@
 /* @flow */
 
 import React, { Children } from 'react';
-import PropTypes from 'prop-types';
-import { StyleSheet, View, ViewPropTypes } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 type Props = {
   children?: any,
@@ -19,11 +18,6 @@ const CardActions = (props: Props) => {
       )}
     </View>
   );
-};
-
-CardActions.propTypes = {
-  children: PropTypes.node.isRequired,
-  style: ViewPropTypes.style,
 };
 
 const styles = StyleSheet.create({

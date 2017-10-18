@@ -2,14 +2,7 @@
 
 import color from 'color';
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import {
-  ActivityIndicator,
-  Animated,
-  View,
-  StyleSheet,
-  ViewPropTypes,
-} from 'react-native';
+import { ActivityIndicator, Animated, View, StyleSheet } from 'react-native';
 import Icon from './Icon';
 import Paper from './Paper';
 import Text from './Typography/Text';
@@ -22,15 +15,49 @@ import type { IconSource } from './Icon';
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
 type Props = {
+  /**
+   * Disable the button
+   */
   disabled?: boolean,
+  /**
+   * Use a compact look, useful for flat buttons in a row
+   */
   compact?: boolean,
+  /**
+   * Add elevation to button, as opposed to default flat appearance
+   */
   raised?: boolean,
+  /**
+   * Use to primary color from theme
+   */
   primary?: boolean,
+  /**
+   * Text color of button, a dark button will render light text and vice-versa
+   */
   dark?: boolean,
+  /**
+   * Whether to show a loading indicator
+   */
   loading?: boolean,
+  /**
+   * Icon name.
+   * Can be a string (name of MaterialIcon),
+   * an object {of shape {uri: 'https://path.to'}},
+   * required image from assets (const icon = reqiure('../path/to/image.png')),
+   * or any valid React-Native Component (e.g. <Image />)
+   */
   icon?: IconSource,
+  /**
+   * Custom text color for flat button, or background color for raised button
+   */
   color?: string,
+  /**
+   * Button text
+   */
   children?: string | Array<string>,
+  /**
+   * Function to execute on press
+   */
   onPress?: Function,
   style?: any,
   theme: Theme,
@@ -53,62 +80,6 @@ type State = {
  * ```
  */
 class Button extends PureComponent<void, Props, State> {
-  static propTypes = {
-    /**
-     * Disable the button
-     */
-    disabled: PropTypes.bool,
-    /**
-     * Use a compact look, useful for flat buttons in a row
-     */
-    compact: PropTypes.bool,
-    /**
-     * Add elevation to button, as opposed to default flat appearance
-     */
-    raised: PropTypes.bool,
-    /**
-     * Use to primary color from theme
-     */
-    primary: PropTypes.bool,
-    /**
-     * Text color of button, a dark button will render light text and vice-versa
-     */
-    dark: PropTypes.bool,
-    /**
-     * Whether to show a loading indicator
-     */
-    loading: PropTypes.bool,
-    /**
-     * Icon name.
-     * Can be a string (name of MaterialIcon),
-     * an object {of shape {uri: 'https://path.to'}},
-     * required image from assets (const icon = reqiure('../path/to/image.png')),
-     * or any valid React-Native Component (e.g. <Image />)
-     */
-    icon: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.shape({ uri: PropTypes.string }),
-      PropTypes.number,
-    ]),
-    /**
-     * Custom text color for flat button, or background color for raised button
-     */
-    color: PropTypes.string,
-    /**
-     * Button text
-     */
-    children: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.arrayOf(PropTypes.string),
-    ]).isRequired,
-    /**
-     * Function to execute on press
-     */
-    onPress: PropTypes.func,
-    style: ViewPropTypes.style,
-    theme: PropTypes.object.isRequired,
-  };
-
   constructor(props: Props) {
     super(props);
     this.state = {

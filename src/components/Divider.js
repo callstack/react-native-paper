@@ -1,10 +1,12 @@
 /* @flow */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import { StyleSheet, View, ViewPropTypes } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 type Props = {
+  /**
+   *  Whether divider has a left inset
+   */
   inset?: boolean,
   style?: any,
 };
@@ -29,14 +31,6 @@ const Divider = (props: Props) => {
   return (
     <View {...props} style={[styles.divider, inset && styles.inset, style]} />
   );
-};
-
-Divider.propTypes = {
-  /**
-   *  Whether divider has a left inset
-   */
-  inset: PropTypes.bool,
-  style: ViewPropTypes.style,
 };
 
 const styles = StyleSheet.create({

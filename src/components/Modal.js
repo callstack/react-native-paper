@@ -9,13 +9,21 @@ import {
   TouchableWithoutFeedback,
   BackHandler,
 } from 'react-native';
-import PropTypes from 'prop-types';
 import ThemedPortal from './Portal/ThemedPortal';
 
 type Props = {
   children?: any,
+  /**
+   * Determines whether clicking outside the dialog dismiss it, true by default
+   */
   dismissable?: boolean,
+  /**
+   * Callback that is called when the user dismisses the dialog
+   */
   onRequestClose?: Function,
+  /**
+   * Determines Whether the dialog is visible
+   */
   visible: boolean,
 };
 
@@ -55,22 +63,6 @@ type State = {
  */
 
 export default class Modal extends PureComponent<DefaultProps, Props, State> {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    /**
-     * Determines whether clicking outside the dialog dismiss it, true by default
-     */
-    dismissable: PropTypes.bool,
-    /**
-     * Callback that is called when the user dismisses the dialog
-     */
-    onRequestClose: PropTypes.func.isRequired,
-    /**
-     * Determines Whether the dialog is visible
-     */
-    visible: PropTypes.bool,
-  };
-
   static defaultProps = {
     dismissable: true,
     visible: false,

@@ -1,13 +1,7 @@
 /* @flow */
 
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import {
-  Animated,
-  StyleSheet,
-  VirtualizedList,
-  ViewPropTypes,
-} from 'react-native';
+import { Animated, StyleSheet, VirtualizedList } from 'react-native';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types/Theme';
 
@@ -47,17 +41,6 @@ type State = {
 };
 
 class GridView extends PureComponent<DefaultProps, Props, State> {
-  static propTypes = {
-    data: PropTypes.array.isRequired,
-    spacing: PropTypes.number.isRequired,
-    getNumberOfColumns: PropTypes.func.isRequired,
-    renderItem: PropTypes.func.isRequired,
-    keyExtractor: PropTypes.func.isRequired,
-    onLayout: PropTypes.func,
-    theme: PropTypes.object.isRequired,
-    contentContainerStyle: ViewPropTypes.style,
-  };
-
   static defaultProps = {
     getNumberOfColumns: () => 1,
     spacing: 0,

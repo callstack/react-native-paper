@@ -2,7 +2,6 @@
 
 import color from 'color';
 import React from 'react';
-import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
 import Divider from './Divider';
 import withTheme from '../core/withTheme';
@@ -37,12 +36,6 @@ const DrawerSection = ({ children, label, theme, ...props }: Props) => {
       <Divider style={{ marginVertical: 4 }} />
     </View>
   );
-};
-
-DrawerSection.propTypes = {
-  children: PropTypes.node.isRequired,
-  label: PropTypes.string,
-  theme: PropTypes.object.isRequired,
 };
 
 export default withTheme(DrawerSection);

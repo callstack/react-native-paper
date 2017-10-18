@@ -1,8 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { View, StyleSheet, ViewPropTypes } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import color from 'color';
 
 import Text from '../Typography/Text';
@@ -13,41 +12,31 @@ import { white } from '../../styles/colors';
 import type { Theme } from '../../types/Theme';
 
 type Props = {
+  /**
+   * Theme color for the text, a dark toolbar will render light text and vice-versa
+   */
   dark?: boolean,
+  /**
+   * Text for the subtitle
+   */
   subtitle?: string | React.Element<*>,
+  /**
+   * Text for the title
+   */
   title: string | React.Element<*>,
+  /**
+   * Style for the title
+   */
   titleStyle?: any,
-  style?: any,
+  /**
+   * Style for the subtitle
+   */
   subtitleStyle?: any,
   theme: Theme,
+  style?: any,
 };
 
 class ToolbarContent extends Component<void, Props, void> {
-  static propTypes = {
-    /**
-     * Theme color for the text, a dark toolbar will render light text and vice-versa
-     */
-    dark: PropTypes.bool,
-    /**
-     * Text for the subtitle
-     */
-    subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-    /**
-     * Text for the title
-     */
-    title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-    /**
-     * Style for the title
-     */
-    titleStyle: Text.propTypes.style,
-    style: ViewPropTypes.style,
-    /**
-     * Style for the subtitle
-     */
-    subtitleStyle: Text.propTypes.style,
-    theme: PropTypes.object.isRequired,
-  };
-
   render() {
     const {
       dark,

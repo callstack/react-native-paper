@@ -2,7 +2,6 @@
 
 import color from 'color';
 import React from 'react';
-import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
 import Paper from './Paper';
 import Icon from './Icon';
@@ -13,10 +12,25 @@ import type { Theme } from '../types/Theme';
 import type { IconSource } from './Icon';
 
 type Props = {
+  /**
+   *  Whether FAB is mini-sized, used to create visual continuity with other elements
+   */
   small?: boolean,
+  /**
+   * Icon color of button, a dark button will render light text and vice-versa
+   */
   dark?: boolean,
+  /**
+   * Name of the icon to show
+   */
   icon: IconSource,
+  /**
+   * Custom color for the icon
+   */
   color?: string,
+  /**
+   * Function to execute on press
+   */
   onPress?: Function,
   theme: Theme,
   style?: any,
@@ -68,31 +82,6 @@ const FAB = (props: Props) => {
       </TouchableRipple>
     </Paper>
   );
-};
-
-FAB.propTypes = {
-  /**
-   *  Whether FAB is mini-sized, used to create visual continuity with other elements
-   */
-  small: PropTypes.bool,
-  /**
-   * Icon color of button, a dark button will render light text and vice-versa
-   */
-  dark: PropTypes.bool,
-  /**
-   * Name of the icon to show
-   */
-  icon: PropTypes.string,
-  /**
-   * Custom color for the icon
-   */
-  color: PropTypes.string,
-  /**
-   * Function to execute on press
-   */
-  onPress: PropTypes.func,
-  style: Paper.propTypes.style,
-  theme: PropTypes.object.isRequired,
 };
 
 const styles = StyleSheet.create({
