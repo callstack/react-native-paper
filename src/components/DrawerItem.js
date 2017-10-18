@@ -22,6 +22,16 @@ type Props = {
   theme: Theme,
 };
 
+/**
+ * Item from drawer's list which navigates to speficic location
+ *
+ * **Usage:**
+ * ```
+ * const MyComponent = () => (
+ *   <DrawerItem label="First Item" />
+ * );
+ * ```
+ */
 const DrawerItem = ({
   color: activeColor,
   icon,
