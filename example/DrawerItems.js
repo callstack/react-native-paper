@@ -30,7 +30,7 @@ class DrawerItems extends Component {
   state = {
     open: false,
     drawerItemIndex: 0,
-    isDark: true,
+    isDark: false,
   };
 
   _setDrawerItem = index => this.setState({ drawerItemIndex: index });

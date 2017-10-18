@@ -65,7 +65,7 @@ class ExampleList extends Component {
     const { theme: { colors: { background } } } = this.props;
     return (
       <ListView
-        contentContainerStyle={{ flex: 1, backgroundColor: background }}
+        contentContainerStyle={{ backgroundColor: background }}
         dataSource={dataSource}
         renderRow={this._renderRow}
         renderSeparator={this._renderSeparator}

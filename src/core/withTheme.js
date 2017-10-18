@@ -3,8 +3,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { channel } from './ThemeProvider';
-import DefaultTheme from '../styles/DefaultTheme';
+import ThemeProvider, { channel } from './ThemeProvider';
 import type { Theme } from '../types/Theme';
 
 type State = {
@@ -38,27 +37,28 @@ export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
       }
 
       this.state = {
-        theme: _.merge({}, DefaultTheme, theme, this.props.theme),
+        theme: this._merge(theme, props),
       };
     }
 
     state: State;
 
     componentDidMount() {
+      // Pure components could prevent propagation of context updates
+      // We setup a subscription so we always get notified about theme updates
       this._subscription =
         this.context[channel] &&
         this.context[channel].subscribe(theme =>
-          this.setState({ theme: _.merge({}, theme, this.props.theme) })
+          this.setState({ theme: this._merge(theme, this.props) })
         );
     }
 
     componentWillReceiveProps(nextProps: *) {
       if (this.props.theme !== nextProps.theme) {
         this.setState({
-          theme: _.merge(
-            {},
+          theme: this._merge(
             this.context[channel] && this.context[channel].get(),
-            nextProps.theme
+            nextProps
           ),
         });
       }
@@ -68,16 +68,24 @@ export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
       this._subscription && this._subscription.remove();
     }
 
-    getWrappedInstance() {
-      return this._root;
-    }
+    _merge = (theme: Theme, props: *) => {
+      // Only merge if both theme from context and props are present
+      // Avoiding unnecessary merge allows us to check equality by reference
+      return theme && props.theme
+        ? _.merge({}, theme, props.theme)
+        : theme || props.theme;
+    };
 
     _subscription: { remove: Function };
     _root: any;
 
     render() {
+      let element;
+
       if (isClassComponent(Comp)) {
-        return (
+        // Only add refs for class components as function components don't support them
+        // It's needed to support use cases which need access to the underlying node
+        element = (
           <Comp
             {...this.props}
             ref={c => (this._root = c)}
@@ -85,8 +93,17 @@ export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
           />
         );
       } else {
-        return <Comp {...this.props} theme={this.state.theme} />;
+        element = <Comp {...this.props} theme={this.state.theme} />;
       }
+
+      if (this.state.theme !== this.props.theme) {
+        // If a theme prop was passed, expose it to the children
+        return (
+          <ThemeProvider theme={this.state.theme}>{element}</ThemeProvider>
+        );
+      }
+
+      return element;
     }
   }
 
