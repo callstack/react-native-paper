@@ -40,6 +40,63 @@ type State = {
   itemWidth: Animated.Value,
 };
 
+/**
+ * Grid lists are an alternative to standard list views.
+ *
+ * **Usage:**
+ * ```
+ * export default class MyComponent extends Component {
+ *   state = {
+ *     items: [],
+ *   };
+ *
+ *   _genRows = () => {
+ *     const items = this.state.items.slice(0);
+ *     const itemsLength = items.length;
+ *
+ *     if (itemsLength >= 5) {
+ *       return;
+ *     }
+ *
+ *     for (let i = 0; i < 4; i++) {
+ *       items.push({ id: itemsLength + i });
+ *     }
+ *
+ *     this.setState({
+ *       items,
+ *     });
+ *   }
+ *
+ *   _renderItem = item => {
+ *     return (
+ *       <Card>
+ *         <Text>{item.id}</Text>
+ *       </Card>
+ *     );
+ *   };
+ *
+ *   _keyExtractor = item => item.id
+ *
+ *   _getNumberOfColumns = (width) => {
+ *     return Math.floor(width / 160)
+ *   }
+ *
+ *   render() {
+ *     const { items } = this.state;
+ *     return (
+ *       <GridView
+ *         spacing={40}
+ *         getNumberOfColumns={this._getNumberOfColumns}
+ *         data={items}
+ *         keyExtractor={this._keyExtractor}
+ *         renderItem={this._renderItem}
+ *         onEndReached={this._genRows}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
+ */
 class GridView extends PureComponent<DefaultProps, Props, State> {
   static defaultProps = {
     getNumberOfColumns: () => 1,
