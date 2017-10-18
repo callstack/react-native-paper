@@ -1,6 +1,7 @@
 /* @flow */
 
 import * as Colors from './styles/colors';
+
 export { Colors };
 
 export { default as withTheme } from './core/withTheme';
@@ -18,6 +19,7 @@ export { default as Dialog } from './components/Dialog';
 export { default as Paper } from './components/Paper';
 export { default as RadioButton } from './components/RadioButton';
 export { default as TouchableRipple } from './components/TouchableRipple';
+export { default as TextInput } from './components/TextInput';
 
 export { default as Caption } from './components/Typography/Caption';
 export { default as Headline } from './components/Typography/Headline';
