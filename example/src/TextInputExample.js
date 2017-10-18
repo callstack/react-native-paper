@@ -18,6 +18,7 @@ export default class TextInputExample extends Component {
           style={styles.inputContainerStyle}
           label="Normal input"
           placeholder="Type something"
+          helperText="Helper text"
           value={this.state.text}
           onChangeText={text => this.setState({ text })}
         />
