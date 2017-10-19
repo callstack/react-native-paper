@@ -26,6 +26,24 @@ type DefaultProps = {
   rippleColor: string,
 };
 
+/**
+ * Ripple provides components with a material "ink ripple" interaction effect
+ *
+ * **Usage:**
+ * ```
+ * const MyComponent = () => (
+ *   <TouchableRipple>
+ *     onPress={() => {}}
+ *     borderless
+ *     rippleColor="rgba(0, 0, 0, .32)"
+ *   >
+ *     <View>
+ *       <Paragraph>Press me</Paragrpah>
+ *     </View>
+ *   </TouchableRipple>
+ * );
+ * ```
+ */
 export default class TouchableItem extends PureComponent<
   DefaultProps,
   Props,
