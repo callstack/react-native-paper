@@ -8,14 +8,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/callstackio/react-native-paper.git"
+    "url": "git+https://github.com/callstack/react-native-paper.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/callstackio/react-native-paper/issues"
+    "url": "https://github.com/callstack/react-native-paper/issues"
   },
-  "homepage": "https://github.com/callstackio/react-native-paper#readme",
+  "homepage": "https://callstack.github.io/react-native-paper",
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
