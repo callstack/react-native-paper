@@ -48,10 +48,10 @@ class TextInputExample extends Component {
         <TextInput
           disabled
           style={styles.inputContainerStyle}
-          helperText="Helper: Disable styles should override error styles"
+          helperText="Helper: won't be visible for disabled"
           label="Disabled with error"
           hasError
-          errorText="Error: Type fix to remove the error"
+          errorText="Error: Disable styles should override error styles"
         />
       </ScrollView>
     );
