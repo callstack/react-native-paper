@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import { Colors, TextInput, withTheme } from 'react-native-paper';
+import { TextInput, withTheme } from 'react-native-paper';
 
 class TextInputExample extends Component {
   static title = 'TextInput';
@@ -30,8 +30,10 @@ class TextInputExample extends Component {
         <TextInput
           disabled
           style={styles.inputContainerStyle}
-          helperText="Helper text"
+          helperText="Helper: won't be visible for disabled"
           label="Disabled Input"
+          hasError
+          errorText="Error: Disable styles should override error styles"
         />
         <TextInput
           style={styles.inputContainerStyle}
@@ -44,14 +46,6 @@ class TextInputExample extends Component {
             this.setState({ hasError: this.state.errorTestText !== 'fix' })}
           hasError={this.state.hasError}
           errorText="Error: Type fix to remove the error"
-        />
-        <TextInput
-          disabled
-          style={styles.inputContainerStyle}
-          helperText="Helper: won't be visible for disabled"
-          label="Disabled with error"
-          hasError
-          errorText="Error: Disable styles should override error styles"
         />
       </ScrollView>
     );
