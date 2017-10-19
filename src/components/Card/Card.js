@@ -47,8 +47,8 @@ type State = {
  *     <Card.Actions>
  *       <Button>Cancel</Button>
  *       <Button>Ok</Button>
- *     <Card.Actions>
- *   <Card>
+ *     </Card.Actions>
+ *   </Card>
  * );
  * ```
  */
