@@ -30,7 +30,6 @@ type Props = {
 
 type State = {
   scaleAnim: Animated.Value,
-  checkAnim: Animated.Value,
 };
 
 /**
@@ -56,33 +55,22 @@ type State = {
  * ```
  */
 class Checkbox extends Component<void, Props, State> {
-  state = {
-    scaleAnim: new Animated.Value(1),
-    checkAnim: new Animated.Value(1),
+  state: State = {
+    scaleAnim: new Animated.Value(0),
   };
-
-  componentDidMount() {
-    this.state.checkAnim.setValue(this.props.checked ? 1 : 0);
-  }
 
   componentWillReceiveProps(nextProps: Props) {
     if (nextProps.checked !== this.props.checked) {
       if (Platform.OS === 'android') {
-        Animated.parallel([
-          Animated.timing(this.state.checkAnim, {
-            toValue: nextProps.checked ? 1 : 0,
-            duration: 450,
+        Animated.sequence([
+          Animated.timing(this.state.scaleAnim, {
+            toValue: 0.85,
+            duration: nextProps.checked ? 0 : 200,
           }),
-          Animated.sequence([
-            Animated.timing(this.state.scaleAnim, {
-              toValue: 0.85,
-              duration: nextProps.checked ? 0 : 200,
-            }),
-            Animated.timing(this.state.scaleAnim, {
-              toValue: 1,
-              duration: nextProps.checked ? 350 : 200,
-            }),
-          ]),
+          Animated.timing(this.state.scaleAnim, {
+            toValue: 1,
+            duration: nextProps.checked ? 350 : 200,
+          }),
         ]).start();
       }
     }
