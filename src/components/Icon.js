@@ -12,19 +12,6 @@ export type Props = {
   style?: any,
 };
 
-/**
- * Material icon easy to extend, style and integrate
- *
- * **Usage:**
- * ```
- * const MyComponent = () => (
- *   <Icon
- *     name="search"
- *     size={24}
- *   />
- * );
- * ```
- */
 const Icon = ({ name, ...props }: Props) => {
   if (typeof name === 'string') {
     return <MaterialIcons {...props} name={name} />;
