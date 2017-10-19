@@ -8,6 +8,16 @@ type Props = {
   style?: any,
 };
 
+/**
+ * Headline - typography style
+ *
+ * **Usage:**
+ * ```
+ * const MyComponent = () => (
+ *   <Headline>Headline</Headline>
+ * );
+ * ```
+ */
 const Headline = (props: Props) => (
   <StyledText
     {...props}

@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet, ViewPropTypes } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import type { PortalProps } from './Portal';
 
 type Props = {
@@ -23,11 +23,6 @@ export const manager = 'react-native-paper$portal-manager';
  * Portal host is the component which actually renders all Portals.
  */
 export default class Portals extends PureComponent<void, Props, State> {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    style: ViewPropTypes.style,
-  };
-
   static childContextTypes = {
     [manager]: PropTypes.object,
   };

@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import PropTypes from 'prop-types';
 import PaperTitle from '../Typography/Title';
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types/Theme';
@@ -30,11 +29,5 @@ const styles = StyleSheet.create({
     marginHorizontal: 24,
   },
 });
-
-DialogTitle.propTypes = {
-  children: PropTypes.node.isRequired,
-  style: PropTypes.object,
-  theme: PropTypes.object.isRequired,
-};
 
 export default withTheme(DialogTitle);

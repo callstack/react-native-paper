@@ -1,7 +1,6 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Animated, View, Platform, StyleSheet } from 'react-native';
 import color from 'color';
 import TouchableRipple from './TouchableRipple';
@@ -37,16 +36,34 @@ const BORDER_WIDTH = 2;
 
 /**
  * Radio buttons allow the selection of a single option from a set
+ * **Usage:**
+ * ```
+ * export default class MyComponent extends Component {
+ *   state = {
+ *     checked: 'firstOption',
+ *   };
+ *
+ *   render() {
+ *     const { checked } = this.state;
+ *     return (
+ *       <View>
+ *         <RadioButton
+ *           value='firstOption'
+ *           checked={checked === 'firstOption'}
+ *           onPress={() => { this.setState({ checked: 'firstOption' }); }}
+ *         />
+ *         <RadioButton
+ *           value='secondOption'
+ *           checked={checked === 'secondOption'}
+ *           onPress={() => { this.setState({ checked: 'secondOption' }); }}
+ *         />
+ *       </View>
+ *     );
+ *   }
+ * }
+ * ```
  */
 class RadioButton extends Component<void, Props, State> {
-  static propTypes = {
-    checked: PropTypes.bool.isRequired,
-    disabled: PropTypes.bool,
-    onPress: PropTypes.func,
-    color: PropTypes.string,
-    theme: PropTypes.object.isRequired,
-  };
-
   state = {
     borderAnim: new Animated.Value(BORDER_WIDTH),
     radioAnim: new Animated.Value(1),

@@ -1,7 +1,6 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Animated, Platform, View, StyleSheet } from 'react-native';
 import color from 'color';
 import Icon from './Icon';
@@ -36,16 +35,27 @@ type State = {
 
 /**
  * Checkboxes allow the selection of multiple options from a set
+ *
+ * **Usage:**
+ * ```
+ * export default class MyComponent extends Component {
+ *   state = {
+ *     checked: false,
+ *   };
+ *
+ *   render() {
+ *     const { checked } = this.state;
+ *     return (
+ *       <Checkbox
+ *         checked={checked}
+ *         onPress={() => { this.setState({ checked: !checked }); }}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
  */
 class Checkbox extends Component<void, Props, State> {
-  static propTypes = {
-    checked: PropTypes.bool.isRequired,
-    disabled: PropTypes.bool,
-    onPress: PropTypes.func,
-    color: PropTypes.string,
-    theme: PropTypes.object.isRequired,
-  };
-
   state = {
     scaleAnim: new Animated.Value(1),
     checkAnim: new Animated.Value(1),

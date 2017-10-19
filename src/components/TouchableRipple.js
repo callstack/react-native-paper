@@ -1,13 +1,11 @@
 /* @flow */
 
 import React, { Children, PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import {
   TouchableNativeFeedback,
   TouchableHighlight,
   Platform,
   View,
-  ViewPropTypes,
 } from 'react-native';
 import color from 'color';
 
@@ -28,21 +26,29 @@ type DefaultProps = {
   rippleColor: string,
 };
 
+/**
+ * Ripple provides components with a material "ink ripple" interaction effect
+ *
+ * **Usage:**
+ * ```
+ * const MyComponent = () => (
+ *   <TouchableRipple>
+ *     onPress={() => {}}
+ *     borderless
+ *     rippleColor="rgba(0, 0, 0, .32)"
+ *   >
+ *     <View>
+ *       <Paragraph>Press me</Paragrpah>
+ *     </View>
+ *   </TouchableRipple>
+ * );
+ * ```
+ */
 export default class TouchableItem extends PureComponent<
   DefaultProps,
   Props,
   void
 > {
-  static propTypes = {
-    borderless: PropTypes.bool,
-    background: PropTypes.object,
-    onPress: PropTypes.func,
-    rippleColor: PropTypes.string,
-    underlayColor: PropTypes.string,
-    children: PropTypes.element.isRequired,
-    style: ViewPropTypes.style,
-  };
-
   static defaultProps = {
     borderless: false,
     rippleColor: 'rgba(0, 0, 0, .32)',

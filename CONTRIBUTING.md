@@ -1,10 +1,61 @@
-## Contributing Guidelines
-1. Assign yourself to component(s) from the issues
-2. Every component has a link to its section in the Material Design docs, make sure to read the documentation thoroughly before start implementing
-3. Default colors will be provided my the theme you, if you find that there's something missing from the theme that might be beneficial for other components
-don't hesitate to add it to the theme.
-4. For any Text usage, use our components provided in the Typography folder.
-5. If your app depends on the theme always wrap you component with `withTheme` to get the theme as a prop instead of the context refer to `TouchableRipple`.
-6. Make sure to write a brief description of every prop when defining `propTypes`.
-7. Always make sure that your code passes `eslint` before opening a PR
-8. Have different usages of your component in the example app.  
+# Contributing to React Native Paper
+
+React Native Paper was started by [satya164](https://github.com/satya164) and [ahmedlhanafy](https://github.com/ahmedlhanafy). Right now, is one of [Callstack](https://callstack.com)'s open source projects that is currently under active development.
+
+## [Code of Conduct](/CODE_OF_CONDUCT.md)
+
+We want this community to be friendly and respectful to each other. Please read [the full text](/CODE_OF_CONDUCT.md) so that you can understand what actions will and will not be tolerated.
+
+## Our Development Process
+
+The core team works directly on GitHub and all work is public.
+
+### Workflow and Pull Requests
+
+> **Working on your first Pull Request?** 
+You can learn how from this *free* series [How to Contribute to an Open Source Project on GitHub](https://egghead.io/series/how-to-contribute-to-an-open-source-project-on-github)
+
+*Before* submitting a pull request, please make sure the following is done:
+
+1. Fork the repo and create your branch from `master` (a guide on [how to fork a repository](https://help.github.com/articles/fork-a-repo/))
+
+2. We have a commit message convention, messages should start by one of the following: 
+* `fix`: : for bug fixes, e.g. fix Button color on DarkTheme
+* `feat`: for new features, e.g. add Snackbar component
+* `refactor`: for code/structure refactor, e.g. new structure folder for components
+* `BREAKING`: for changes that break current versiong usage, e.g. remove withTheme
+* `docs`: changes into documentation, e.g. add usage example for Button
+* `chore`: tooling changes, e.g. change circle ci config
+
+3. We use `flow`, `eslint` and `prettier`. Be sure that `npm run flow` and `npm run lint -- --fix` give no errors.
+
+4. If you work on a component:
+   * Be sure to follow the specifics (design, name convention, etc) described in the [official material docs](https://material.io/guidelines/)
+   * For any Text usage, use our components provided in the Typography folder
+   * If your app depends on the theme always wrap you component with `withTheme` to get the theme as a prop instead of the context
+   * Default colors will be provided by the theme, if you find that there's something missing from the theme that might be beneficial for other components don't hesitate to add it
+   * Make sure to write a brief description of every prop when defining `type Props`
+   * Make sure to provide an example usage for the component (check how others do it)
+
+5. In case of doubts, check out the current code. For example, we use the prop `icon` not `iconName`.
+
+## Docs
+
+When you provide the description to your `Props` and declare also the component Usage, our docs tool will generate everything for you after the PR is merged. 
+
+## Reporting New Issues
+
+The best way to get your bug fixed is to provide a reduced test case. Please provide a public repository with a runnable example.
+
+## How to Get in Touch
+
+* Callstack Open Source Slack - [#react-native-paper](https://slack.callstack.io/).
+
+## Code Conventions
+
+We use [eslint-config-callstack](https://github.com/callstack/eslint-config-callstack-io).
+
+## License
+
+By contributing to React Native Paper, you agree that your contributions will be licensed under its **MIT** license.
+

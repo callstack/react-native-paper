@@ -1,7 +1,6 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { grey400, grey50 } from '../styles/colors';
 import { View, Switch, Platform } from 'react-native';
 import withTheme from '../core/withTheme';
@@ -31,6 +30,27 @@ type Props = {
 
 /**
  * Switch is a visual toggle between two mutually exclusive states—on and off
+ *
+ * **Usage:**
+ * ```
+ * export default class MyComponent extends Component {
+ *   state = {
+ *     isSwitchOn: false,
+ *   };
+ *
+ *   render() {
+ *     const { isSwitchOn } = this.state;
+ *     return (
+ *       <Switch
+ *         value={isSwitchOn}
+ *         onValueChange={() =>
+ *           { this.setState({ isSwitchOn: !isSwitchOn }); }
+ *         }
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
  */
 class SwitchRow extends Component<void, Props, void> {
   render() {
@@ -75,14 +95,5 @@ class SwitchRow extends Component<void, Props, void> {
     );
   }
 }
-
-SwitchRow.propTypes = {
-  disabled: PropTypes.bool,
-  value: PropTypes.bool,
-  onValueChange: PropTypes.func,
-  style: PropTypes.any,
-  theme: PropTypes.object.isRequired,
-  color: PropTypes.string,
-};
 
 export default withTheme(SwitchRow);
