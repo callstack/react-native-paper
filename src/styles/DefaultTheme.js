@@ -34,7 +34,9 @@ export default {
     helperText: color(black)
       .alpha(0.54)
       .rgbaString(),
-    error: redA400,
+    error: color(redA400)
+      .alpha(0.87)
+      .rgbaString(),
   },
   fonts,
 };
