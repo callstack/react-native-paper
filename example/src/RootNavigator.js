@@ -56,15 +56,19 @@ export default StackNavigator(
     ...routes,
   },
   {
-    navigationOptions: {
+    navigationOptions: ({ navigation }) => ({
       header: (
         <Toolbar
           dark
           statusBarHeight={Platform.OS === 'ios' ? 20 : StatusBar.currentHeight}
         >
+          <Toolbar.Action
+            icon="menu"
+            onPress={() => navigation.navigate('DrawerOpen')}
+          />
           <Toolbar.Content title="Examples" />
         </Toolbar>
       ),
-    },
+    }),
   }
 );
