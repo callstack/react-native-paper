@@ -16,6 +16,8 @@ class RippleExample extends Component {
       <TouchableRipple
         style={[styles.container, { backgroundColor: background }]}
         onPress={() => {}}
+        borderless
+        rippleColor="rgba(0, 0, 0, .32)"
       >
         <View>
           <Paragraph>Press me</Paragraph>
