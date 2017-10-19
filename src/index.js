@@ -15,7 +15,7 @@ export { default as Button } from './components/Button';
 export { default as FAB } from './components/FAB';
 export { default as Card } from './components/Card';
 export { default as Checkbox } from './components/Checkbox';
-export { default as Dialog } from './components/Dialog';
+export { default as Dialog } from './components/Dialog/Dialog';
 export { default as Paper } from './components/Paper';
 export { default as RadioButton } from './components/RadioButton';
 export { default as TouchableRipple } from './components/TouchableRipple';

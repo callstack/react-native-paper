@@ -40,7 +40,12 @@ function getFiles() {
       }
       return file;
     })
-    .sort();
+    .sort((a, b) => {
+      const nameA = a.split('/').pop();
+      const nameB = b.split('/').pop();
+      return nameA.localeCompare(nameB);
+    });
+
   const pages = fs
     .readdirSync(path.join(__dirname, 'pages'))
     .map(page => path.join(__dirname, 'pages', page));

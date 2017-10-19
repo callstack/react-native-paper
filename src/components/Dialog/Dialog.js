@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { Children } from 'react';
+import React, { Children, Component } from 'react';
 import { StyleSheet, Platform, Animated } from 'react-native';
 import Modal from '../Modal';
 import { black, white } from '../../styles/colors';
@@ -26,6 +26,12 @@ type Props = {
   /**
    * Determines Whether the dialog is visible
    */
+  visible: boolean,
+};
+
+type DefaultProps = {
+  dismissable: boolean,
+  titleColor: string,
   visible: boolean,
 };
 
@@ -64,56 +70,63 @@ type Props = {
  * }
  * ```
  */
+class Dialog extends Component<DefaultProps, Props, void> {
+  static Actions = DialogActions;
+  static Title = DialogTitle;
+  static Content = DialogContent;
+  static ScrollArea = DialogScrollArea;
 
-const Dialog = (props: Props) => {
-  const { children, dismissable, onRequestClose, visible, style } = props;
-  const childrenArray = Children.toArray(children);
-  const title = childrenArray.find(child => child.type === DialogTitle);
-  const actionBtnsChildren = childrenArray.filter(
-    child => child.type === DialogActions
-  );
-  const restOfChildren = childrenArray.filter(
-    child => child.type !== DialogActions && child.type !== DialogTitle
-  );
-  let restOfChildrenWithoutTitle = restOfChildren;
-  if (!title) {
-    let found = false;
-    restOfChildrenWithoutTitle = restOfChildren.map(child => {
-      if (child.type === DialogContent && !found) {
-        found = true;
-        return React.cloneElement(child, {
-          style: { paddingTop: 24 },
-        });
-      } else {
-        return child;
-      }
-    });
+  static defaultProps = {
+    dismissable: true,
+    titleColor: black,
+    visible: false,
+  };
+
+  render() {
+    const {
+      children,
+      dismissable,
+      onRequestClose,
+      visible,
+      style,
+    } = this.props;
+    const childrenArray = Children.toArray(children);
+    const title = childrenArray.find(child => child.type === DialogTitle);
+    const actionBtnsChildren = childrenArray.filter(
+      child => child.type === DialogActions
+    );
+    const restOfChildren = childrenArray.filter(
+      child => child.type !== DialogActions && child.type !== DialogTitle
+    );
+    let restOfChildrenWithoutTitle = restOfChildren;
+    if (!title) {
+      let found = false;
+      restOfChildrenWithoutTitle = restOfChildren.map(child => {
+        if (child.type === DialogContent && !found) {
+          found = true;
+          return React.cloneElement(child, {
+            style: { paddingTop: 24 },
+          });
+        } else {
+          return child;
+        }
+      });
+    }
+    return (
+      <Modal
+        dismissable={dismissable}
+        onRequestClose={onRequestClose}
+        visible={visible}
+      >
+        <AnimatedPaper style={[styles.container, style]} elevation={24}>
+          {title}
+          {restOfChildrenWithoutTitle}
+          {actionBtnsChildren}
+        </AnimatedPaper>
+      </Modal>
+    );
   }
-  return (
-    <Modal
-      dismissable={dismissable}
-      onRequestClose={onRequestClose}
-      visible={visible}
-    >
-      <AnimatedPaper style={[styles.container, style]} elevation={24}>
-        {title}
-        {restOfChildrenWithoutTitle}
-        {actionBtnsChildren}
-      </AnimatedPaper>
-    </Modal>
-  );
-};
-
-Dialog.Actions = DialogActions;
-Dialog.Title = DialogTitle;
-Dialog.Content = DialogContent;
-Dialog.ScrollArea = DialogScrollArea;
-
-Dialog.defaultProps = {
-  dismissable: true,
-  titleColor: black,
-  visible: false,
-};
+}
 
 export default Dialog;
 
