@@ -39,32 +39,18 @@ type DefaultProps = {
  * **Usage:**
  * ```
  * export default class MyComponent extends Component {
- *   state = {
- *     showLeftIcon: true,
- *     showSearchIcon: true,
- *     showMoreIcon: true,
- *     showSubtitle: true,
- *   };
- *
  *   render() {
- *     const { showLeftIcon, showSearchIcon, showMoreIcon, showSubtitle } = this.state;
  *     return (
  *       <Toolbar>
- *         {showLeftIcon && (
- *           <Toolbar.BackAction
- *             onPress={() => {}}
- *           />
- *         )}
+ *         <Toolbar.BackAction
+ *           onPress={this._goBack}
+ *         />
  *         <Toolbar.Content
  *           title="Title"
- *           subtitle={showSubtitle ? 'Subtitle' : null}
+ *           subtitle="Subtitle"
  *         />
- *         {showSearchIcon && (
- *           <Toolbar.Action icon="search" onPress={() => {}} />
- *         )}
- *         {showMoreIcon && (
- *           <Toolbar.Action icon="more-horiz" onPress={() => {}} />
- *         )}
+ *         <Toolbar.Action icon="search" onPress={this._onSearch} />
+ *         <Toolbar.Action icon="more-vert" onPress={this._onMore} />
  *       <Toolbar>
  *     );
  *   }
