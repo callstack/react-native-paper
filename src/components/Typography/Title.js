@@ -13,7 +13,6 @@ type Props = {
  *
  * **Usage:**
  * ```
- * export default class MyComponent extends Component {
  * const MyComponent = () => (
  *   <Title>Title</Title>
  * );
