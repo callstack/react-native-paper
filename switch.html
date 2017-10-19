@@ -1,4 +1,67 @@
-<html lang="en" data-reactroot="" data-reactid="1" data-react-checksum="383719497"><head data-reactid="2"><meta charset="utf-8" data-reactid="3"/><meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" data-reactid="4"/><meta name="mobile-web-app-capable" content="yes" data-reactid="5"/><meta name="apple-mobile-web-app-capable" content="yes" data-reactid="6"/><meta name="description" content="Switch is a visual toggle between two mutually exclusive states—on and off" data-reactid="7"/><meta name="twitter:card" content="summary" data-reactid="8"/><meta name="twitter:title" content="Switch" data-reactid="9"/><meta name="twitter:description" content="Switch is a visual toggle between two mutually exclusive states—on and off" data-reactid="10"/><meta property="og:type" content="website" data-reactid="11"/><meta property="og:title" content="Switch" data-reactid="12"/><meta property="og:description" content="Switch is a visual toggle between two mutually exclusive states—on and off" data-reactid="13"/><title data-reactid="14">Switch</title><style type="text/css" data-reactid="15">
+<html lang="en" data-reactroot="" data-reactid="1" data-react-checksum="-1318108898"><head data-reactid="2"><meta charset="utf-8" data-reactid="3"/><meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" data-reactid="4"/><meta name="mobile-web-app-capable" content="yes" data-reactid="5"/><meta name="apple-mobile-web-app-capable" content="yes" data-reactid="6"/><meta name="description" content="Switch is a visual toggle between two mutually exclusive states—on and off
+
+**Usage:**
+```
+export default class MyComponent extends Component {
+  state = {
+    isSwitchOn: false,
+  };
+
+  render() {
+    const { isSwitchOn } = this.state;
+    return (
+      &lt;Switch
+        value={isSwitchOn}
+        onValueChange={() =&gt;
+          { this.setState({ isSwitchOn: !isSwitchOn }); }
+        }
+      /&gt;
+    );
+  }
+}
+```" data-reactid="7"/><meta name="twitter:card" content="summary" data-reactid="8"/><meta name="twitter:title" content="Switch" data-reactid="9"/><meta name="twitter:description" content="Switch is a visual toggle between two mutually exclusive states—on and off
+
+**Usage:**
+```
+export default class MyComponent extends Component {
+  state = {
+    isSwitchOn: false,
+  };
+
+  render() {
+    const { isSwitchOn } = this.state;
+    return (
+      &lt;Switch
+        value={isSwitchOn}
+        onValueChange={() =&gt;
+          { this.setState({ isSwitchOn: !isSwitchOn }); }
+        }
+      /&gt;
+    );
+  }
+}
+```" data-reactid="10"/><meta property="og:type" content="website" data-reactid="11"/><meta property="og:title" content="Switch" data-reactid="12"/><meta property="og:description" content="Switch is a visual toggle between two mutually exclusive states—on and off
+
+**Usage:**
+```
+export default class MyComponent extends Component {
+  state = {
+    isSwitchOn: false,
+  };
+
+  render() {
+    const { isSwitchOn } = this.state;
+    return (
+      &lt;Switch
+        value={isSwitchOn}
+        onValueChange={() =&gt;
+          { this.setState({ isSwitchOn: !isSwitchOn }); }
+        }
+      /&gt;
+    );
+  }
+}
+```" data-reactid="13"/><title data-reactid="14">Switch</title><style type="text/css" data-reactid="15">
           
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
@@ -341,12 +404,31 @@ pre code, pre tt {
 .css-34af48d6{-webkit-flex: 1;-ms-flex: 1;flex: 1;padding: 24px;}@media(min-width: 640px){.css-34af48d6{height: 100%;overflow: auto;padding: 24px 48px;}}
 .css-f383d55d{display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;display: flex;height: 100%;-webkit-flex-direction: column;-ms-flex-direction: column;flex-direction: column;}@media(min-width: 640px){.css-f383d55d{-webkit-flex-direction: row;-ms-flex-direction: row;flex-direction: row;}}
 
-          </style></head><body data-reactid="16"><div id='root'><div class="css-f383d55d" data-reactroot="" data-reactid="1" data-react-checksum="1985047745"><div data-reactid="2"><input type="checkbox" class="css-44d1c845" id="slide-sidebar" role="button" data-reactid="3"/><label class="css-e3e17907" for="slide-sidebar" data-reactid="4"><span data-reactid="5">☰</span><span data-reactid="6">✕</span></label><nav class="css-30fe5008" data-reactid="7"><a class="css-a5984c42 " href="index.html" data-reactid="8">Home</a><a class="css-a5984c42 " href="getting-started.html" data-reactid="9">Getting Started</a><hr class="css-fe6183d8" data-reactid="10"/><a class="css-a5984c42 " href="button.html" data-reactid="11">Button</a><a class="css-a5984c42 " href="card.html" data-reactid="12">Card</a><a class="css-a5984c42 " href="checkbox.html" data-reactid="13">Checkbox</a><a class="css-a5984c42 " href="divider.html" data-reactid="14">Divider</a><a class="css-a5984c42 " href="draweritem.html" data-reactid="15">DrawerItem</a><a class="css-a5984c42 " href="drawersection.html" data-reactid="16">DrawerSection</a><a class="css-a5984c42 " href="fab.html" data-reactid="17">FAB</a><a class="css-a5984c42 " href="gridview.html" data-reactid="18">GridView</a><a class="css-a5984c42 " href="modal.html" data-reactid="19">Modal</a><a class="css-a5984c42 " href="paper.html" data-reactid="20">Paper</a><a class="css-a5984c42 " href="progressbar.html" data-reactid="21">ProgressBar</a><a class="css-a5984c42 " href="radiobutton.html" data-reactid="22">RadioButton</a><a class="css-a5984c42 " href="searchbar.html" data-reactid="23">SearchBar</a><a class="css-a5984c42 css-a877d34b" href="switch.html" data-reactid="24">Switch</a><a class="css-a5984c42 " href="textinput.html" data-reactid="25">TextInput</a><a class="css-a5984c42 " href="toolbar.html" data-reactid="26">Toolbar</a><a class="css-a5984c42 " href="touchableripple.html" data-reactid="27">TouchableRipple</a><a class="css-a5984c42 " href="caption.html" data-reactid="28">Caption</a><a class="css-a5984c42 " href="headline.html" data-reactid="29">Headline</a><a class="css-a5984c42 " href="paragraph.html" data-reactid="30">Paragraph</a><a class="css-a5984c42 " href="subheading.html" data-reactid="31">Subheading</a><a class="css-a5984c42 " href="text.html" data-reactid="32">Text</a><a class="css-a5984c42 " href="title.html" data-reactid="33">Title</a></nav></div><div class="css-34af48d6" data-reactid="34"><div data-reactid="35"><h1 class="css-3b116f09" data-reactid="36"><code data-reactid="37">&lt;Switch /&gt;</code></h1><div class="css-47382704 css-6060edd1" data-reactid="38"><div data-reactid="39"><span data-reactid="40"><p>Switch is a visual toggle between two mutually exclusive states—on and off</p>
+          </style></head><body data-reactid="16"><div id='root'><div class="css-f383d55d" data-reactroot="" data-reactid="1" data-react-checksum="529097251"><div data-reactid="2"><input type="checkbox" class="css-44d1c845" id="slide-sidebar" role="button" data-reactid="3"/><label class="css-e3e17907" for="slide-sidebar" data-reactid="4"><span data-reactid="5">☰</span><span data-reactid="6">✕</span></label><nav class="css-30fe5008" data-reactid="7"><a class="css-a5984c42 " href="index.html" data-reactid="8">Home</a><a class="css-a5984c42 " href="getting-started.html" data-reactid="9">Getting Started</a><hr class="css-fe6183d8" data-reactid="10"/><a class="css-a5984c42 " href="button.html" data-reactid="11">Button</a><a class="css-a5984c42 " href="card.html" data-reactid="12">Card</a><a class="css-a5984c42 " href="checkbox.html" data-reactid="13">Checkbox</a><a class="css-a5984c42 " href="divider.html" data-reactid="14">Divider</a><a class="css-a5984c42 " href="draweritem.html" data-reactid="15">DrawerItem</a><a class="css-a5984c42 " href="drawersection.html" data-reactid="16">DrawerSection</a><a class="css-a5984c42 " href="fab.html" data-reactid="17">FAB</a><a class="css-a5984c42 " href="gridview.html" data-reactid="18">GridView</a><a class="css-a5984c42 " href="modal.html" data-reactid="19">Modal</a><a class="css-a5984c42 " href="paper.html" data-reactid="20">Paper</a><a class="css-a5984c42 " href="progressbar.html" data-reactid="21">ProgressBar</a><a class="css-a5984c42 " href="radiobutton.html" data-reactid="22">RadioButton</a><a class="css-a5984c42 " href="searchbar.html" data-reactid="23">SearchBar</a><a class="css-a5984c42 css-a877d34b" href="switch.html" data-reactid="24">Switch</a><a class="css-a5984c42 " href="textinput.html" data-reactid="25">TextInput</a><a class="css-a5984c42 " href="toolbar.html" data-reactid="26">Toolbar</a><a class="css-a5984c42 " href="touchableripple.html" data-reactid="27">TouchableRipple</a><a class="css-a5984c42 " href="caption.html" data-reactid="28">Caption</a><a class="css-a5984c42 " href="headline.html" data-reactid="29">Headline</a><a class="css-a5984c42 " href="paragraph.html" data-reactid="30">Paragraph</a><a class="css-a5984c42 " href="subheading.html" data-reactid="31">Subheading</a><a class="css-a5984c42 " href="text.html" data-reactid="32">Text</a><a class="css-a5984c42 " href="title.html" data-reactid="33">Title</a></nav></div><div class="css-34af48d6" data-reactid="34"><div data-reactid="35"><h1 class="css-3b116f09" data-reactid="36"><code data-reactid="37">&lt;Switch /&gt;</code></h1><div class="css-47382704 css-6060edd1" data-reactid="38"><div data-reactid="39"><span data-reactid="40"><p>Switch is a visual toggle between two mutually exclusive states—on and off</p>
+<p><strong>Usage:</strong></p>
+<pre><code>export <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyComponent</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+  state = {
+    isSwitchOn: <span class="hljs-literal">false</span>,
+  };
+
+  render() {
+    const { isSwitchOn } = <span class="hljs-keyword">this</span>.state;
+    <span class="hljs-keyword">return</span> (
+      &lt;<span class="hljs-type">Switch</span>
+        value={isSwitchOn}
+        onValueChange={() =&gt;
+          { <span class="hljs-keyword">this</span>.setState({ isSwitchOn: !isSwitchOn }); }
+        }
+      /&gt;
+    );
+  }
+}
+</code></pre>
 </span></div></div><h2 class="css-1d0ea09c" data-reactid="41">Props</h2><div class="css-13ecb845" data-reactid="42"><span class="css-46899069" data-reactid="43"><code class="css-5ab44212" data-hint="required" data-reactid="44"></code><a class="css-c6baff17" name="disabled" href="#disabled" data-reactid="45"><code data-reactid="46"><!-- react-text: 47 -->disabled<!-- /react-text --><!-- react-text: 48 -->:<!-- /react-text --><!-- react-text: 49 --> <!-- /react-text --><!-- react-text: 50 -->boolean<!-- /react-text --></code></a></span><div class="css-47382704 css-b86ecc03 css-6060edd1" data-reactid="51"><div data-reactid="52"><span data-reactid="53"><p>Disable toggling the switch</p>
 </span></div></div></div><div class="css-13ecb845" data-reactid="54"><span class="css-46899069" data-reactid="55"><code class="css-5ab44212" data-hint="required" data-reactid="56"></code><a class="css-c6baff17" name="value" href="#value" data-reactid="57"><code data-reactid="58"><!-- react-text: 59 -->value<!-- /react-text --><!-- react-text: 60 -->:<!-- /react-text --><!-- react-text: 61 --> <!-- /react-text --><!-- react-text: 62 -->boolean<!-- /react-text --></code></a></span><div class="css-47382704 css-b86ecc03 css-6060edd1" data-reactid="63"><div data-reactid="64"><span data-reactid="65"><p>Switch value- true or false</p>
-</span></div></div></div><div class="css-13ecb845" data-reactid="66"><span class="css-46899069" data-reactid="67"><code class="css-5ab44212" data-hint="required" data-reactid="68"></code><a class="css-c6baff17" name="onValueChange" href="#onValueChange" data-reactid="69"><code data-reactid="70"><!-- react-text: 71 -->onValueChange<!-- /react-text --><!-- react-text: 72 -->:<!-- /react-text --><!-- react-text: 73 --> <!-- /react-text --><!-- react-text: 74 -->Function<!-- /react-text --></code></a></span><div class="css-47382704 css-b86ecc03 css-6060edd1" data-reactid="75"><div data-reactid="76"><span data-reactid="77"><p>Invoked with the new value when the value changes</p>
-</span></div></div></div><div class="css-13ecb845" data-reactid="78"><span class="css-46899069" data-reactid="79"><code class="css-5ab44212" data-hint="required" data-reactid="80"></code><a class="css-c6baff17" name="style" href="#style" data-reactid="81"><code data-reactid="82"><!-- react-text: 83 -->style<!-- /react-text --><!-- react-text: 84 -->:<!-- /react-text --><!-- react-text: 85 --> <!-- /react-text --><!-- react-text: 86 -->any<!-- /react-text --></code></a></span><div class="css-47382704 css-b86ecc03 css-6060edd1" data-reactid="87"><div data-reactid="88"></div></div></div><div class="css-13ecb845" data-reactid="89"><span class="css-46899069" data-reactid="90"><code class="css-5ab44212" data-hint="required" data-reactid="91">*</code><a class="css-c6baff17" name="theme" href="#theme" data-reactid="92"><code data-reactid="93"><!-- react-text: 94 -->theme<!-- /react-text --><!-- react-text: 95 -->:<!-- /react-text --><!-- react-text: 96 --> <!-- /react-text --><!-- react-text: 97 -->Theme<!-- /react-text --></code></a></span><div class="css-47382704 css-b86ecc03 css-6060edd1" data-reactid="98"><div data-reactid="99"></div></div></div><div class="css-13ecb845" data-reactid="100"><span class="css-46899069" data-reactid="101"><code class="css-5ab44212" data-hint="required" data-reactid="102"></code><a class="css-c6baff17" name="color" href="#color" data-reactid="103"><code data-reactid="104"><!-- react-text: 105 -->color<!-- /react-text --><!-- react-text: 106 -->:<!-- /react-text --><!-- react-text: 107 --> <!-- /react-text --><!-- react-text: 108 -->string<!-- /react-text --></code></a></span><div class="css-47382704 css-b86ecc03 css-6060edd1" data-reactid="109"><div data-reactid="110"><span data-reactid="111"><p>Custom color for checkbox</p>
-</span></div></div></div></div></div></div></div>
+</span></div></div></div><div class="css-13ecb845" data-reactid="66"><span class="css-46899069" data-reactid="67"><code class="css-5ab44212" data-hint="required" data-reactid="68"></code><a class="css-c6baff17" name="color" href="#color" data-reactid="69"><code data-reactid="70"><!-- react-text: 71 -->color<!-- /react-text --><!-- react-text: 72 -->:<!-- /react-text --><!-- react-text: 73 --> <!-- /react-text --><!-- react-text: 74 -->string<!-- /react-text --></code></a></span><div class="css-47382704 css-b86ecc03 css-6060edd1" data-reactid="75"><div data-reactid="76"><span data-reactid="77"><p>Custom color for checkbox</p>
+</span></div></div></div><div class="css-13ecb845" data-reactid="78"><span class="css-46899069" data-reactid="79"><code class="css-5ab44212" data-hint="required" data-reactid="80"></code><a class="css-c6baff17" name="onValueChange" href="#onValueChange" data-reactid="81"><code data-reactid="82"><!-- react-text: 83 -->onValueChange<!-- /react-text --><!-- react-text: 84 -->:<!-- /react-text --><!-- react-text: 85 --> <!-- /react-text --><!-- react-text: 86 -->Function<!-- /react-text --></code></a></span><div class="css-47382704 css-b86ecc03 css-6060edd1" data-reactid="87"><div data-reactid="88"><span data-reactid="89"><p>Invoked with the new value when the value changes</p>
+</span></div></div></div><div class="css-13ecb845" data-reactid="90"><span class="css-46899069" data-reactid="91"><code class="css-5ab44212" data-hint="required" data-reactid="92"></code><a class="css-c6baff17" name="style" href="#style" data-reactid="93"><code data-reactid="94"><!-- react-text: 95 -->style<!-- /react-text --><!-- react-text: 96 -->:<!-- /react-text --><!-- react-text: 97 --> <!-- /react-text --><!-- react-text: 98 -->any<!-- /react-text --></code></a></span><div class="css-47382704 css-b86ecc03 css-6060edd1" data-reactid="99"><div data-reactid="100"></div></div></div><div class="css-13ecb845" data-reactid="101"><span class="css-46899069" data-reactid="102"><code class="css-5ab44212" data-hint="required" data-reactid="103">*</code><a class="css-c6baff17" name="theme" href="#theme" data-reactid="104"><code data-reactid="105"><!-- react-text: 106 -->theme<!-- /react-text --><!-- react-text: 107 -->:<!-- /react-text --><!-- react-text: 108 --> <!-- /react-text --><!-- react-text: 109 -->Theme<!-- /react-text --></code></a></span><div class="css-47382704 css-b86ecc03 css-6060edd1" data-reactid="110"><div data-reactid="111"></div></div></div></div></div></div></div>
     <script>
       window.__INITIAL_PATH__ = 'switch';
     </script>
