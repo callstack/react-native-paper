@@ -241,10 +241,12 @@ class TextInput extends Component<DefaultProps, Props, State> {
     const { colors, fonts } = theme;
     const fontFamily = fonts.regular;
     const primaryColor = colors.primary;
+
     let inactiveColor = colors.disabled;
     let helperTextColor = colors.helperText;
-
-    let inputTextColor, labelColor, bottomLineColor;
+    let inputTextColor = colors.text,
+      labelColor,
+      bottomLineColor;
 
     if (disabled) {
       inputTextColor = labelColor = bottomLineColor = inactiveColor;
@@ -252,7 +254,6 @@ class TextInput extends Component<DefaultProps, Props, State> {
       helperTextColor = labelColor = bottomLineColor = inactiveColor =
         colors.error;
     } else {
-      inputTextColor = colors.text;
       labelColor = primaryColor;
       bottomLineColor = underlineColor || primaryColor;
     }
