@@ -1,10 +1,8 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import {
   View,
-  ViewPropTypes,
   Animated,
   TextInput as NativeTextInput,
   StyleSheet,
@@ -96,20 +94,6 @@ type State = {
  */
 
 class TextInput extends Component<DefaultProps, Props, State> {
-  static propTypes = {
-    disabled: PropTypes.bool,
-    label: PropTypes.string,
-    placeholder: PropTypes.string,
-    onChangeText: PropTypes.func,
-    multiline: PropTypes.bool,
-    numberOfLines: PropTypes.number,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    style: ViewPropTypes.style,
-    value: PropTypes.string,
-    theme: PropTypes.object.isRequired,
-  };
-
   static defaultProps = {
     disabled: false,
   };

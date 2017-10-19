@@ -8,6 +8,16 @@ type Props = {
   style?: any,
 };
 
+/**
+ * Subheading - typography style
+ *
+ * **Usage:**
+ * ```
+ * const MyComponent = () => (
+ *   <Subheading>Subheading</Subheading>
+ * );
+ * ```
+ */
 const Subheading = (props: Props) => (
   <StyledText
     {...props}

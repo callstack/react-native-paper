@@ -1,13 +1,11 @@
 /* @flow */
 
 import React, { Component, Children } from 'react';
-import PropTypes from 'prop-types';
 import {
   Animated,
   View,
   TouchableWithoutFeedback,
   StyleSheet,
-  ViewPropTypes,
 } from 'react-native';
 import Paper from '../Paper';
 import CardContent from './CardContent';
@@ -34,18 +32,30 @@ type State = {
   elevation: Animated.Value,
 };
 
+/**
+ * A card is a sheet of material that serves as an entry point to more detailed information.
+ *
+ * **Usage:**
+ * ```
+ * const MyComponent = () => (
+ *   <Card>
+ *     <Card.Content>
+ *       <Title>Card title</Title>
+ *       <Paragraph>Card content</Paragraph>
+ *     </Card.Content>
+ *     <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
+ *     <Card.Actions>
+ *       <Button>Cancel</Button>
+ *       <Button>Ok</Button>
+ *     <Card.Actions>
+ *   <Card>
+ * );
+ * ```
+ */
 class Card extends Component<DefaultProps, Props, State> {
   static Cover = CardCover;
   static Content = CardContent;
   static Actions = CardActions;
-
-  static propTypes = {
-    elevation: PropTypes.number,
-    children: PropTypes.node.isRequired,
-    onPress: PropTypes.func,
-    style: ViewPropTypes.style,
-    theme: PropTypes.object.isRequired,
-  };
 
   static defaultProps = {
     elevation: 2,

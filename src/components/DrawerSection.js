@@ -2,7 +2,6 @@
 
 import color from 'color';
 import React from 'react';
-import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
 import Divider from './Divider';
 import withTheme from '../core/withTheme';
@@ -14,6 +13,36 @@ type Props = {
   theme: Theme,
 };
 
+/**
+ * Drawer container slides in from the left and contains the navigation destinations for your app
+ *
+ * **Usage:**
+ * ```
+ * export default class MyComponent extends Component {
+ *   state = {
+ *     active: 'First Item',
+ *   };
+ *
+ *   render() {
+ *     const { active } = this.state;
+ *     return (
+ *       <DrawerSection label="Subheader">
+ *         <DrawerItem
+ *           label="First Item"
+ *           active={this.state.active === 'First Item'}
+ *           onPress={() => { this.setState({ active: 'First Item' }); }}
+ *        />
+ *         <DrawerItem
+ *           label="Second Item"
+ *           active={this.state.active === 'Second Item'}
+ *           onPress={() => { this.setState({ active: 'Second Item' }); }}
+ *        />
+ *      </DrawerSection>
+ *     );
+ *   }
+ * }
+ * ```
+ */
 const DrawerSection = ({ children, label, theme, ...props }: Props) => {
   const { colors, fonts } = theme;
   const labelColor = color(colors.text)
@@ -37,12 +66,6 @@ const DrawerSection = ({ children, label, theme, ...props }: Props) => {
       <Divider style={{ marginVertical: 4 }} />
     </View>
   );
-};
-
-DrawerSection.propTypes = {
-  children: PropTypes.node.isRequired,
-  label: PropTypes.string,
-  theme: PropTypes.object.isRequired,
 };
 
 export default withTheme(DrawerSection);

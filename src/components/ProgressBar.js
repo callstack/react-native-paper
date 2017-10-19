@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   Platform,
   StyleSheet,
@@ -57,13 +56,6 @@ const ProgressBar = ({ progress, color, style, theme }: Props) => {
       trackTintColor={trackTintColor}
     />
   );
-};
-
-ProgressBar.propTypes = {
-  progress: PropTypes.number,
-  color: PropTypes.string,
-  style: PropTypes.any,
-  theme: PropTypes.object.isRequired,
 };
 
 const styles = StyleSheet.create({

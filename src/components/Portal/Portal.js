@@ -6,6 +6,9 @@ import { manager } from './PortalHost';
 
 export type PortalProps = {
   children: any,
+  /**
+   * Position of the element in the z-axis
+   */
   position: number,
 };
 
@@ -15,14 +18,6 @@ type Props = PortalProps;
  * Portal allows to render a component at a different place in the parent tree.
  */
 export default class Portal extends PureComponent<void, Props, void> {
-  static propTypes = {
-    /**
-     * Position of the element in the z-axis
-     */
-    position: PropTypes.number,
-    children: PropTypes.node.isRequired,
-  };
-
   static contextTypes = {
     [manager]: PropTypes.object,
   };

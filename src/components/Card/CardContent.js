@@ -1,8 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import { StyleSheet, View, ViewPropTypes } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 type Props = {
   index?: number,
@@ -47,13 +46,6 @@ const CardContent = (props: Props) => {
   }
 
   return <View {...props} style={[styles.container, contentStyle, style]} />;
-};
-
-CardContent.propTypes = {
-  index: PropTypes.number,
-  total: PropTypes.number,
-  siblings: PropTypes.arrayOf(PropTypes.string),
-  style: ViewPropTypes.style,
 };
 
 const styles = StyleSheet.create({

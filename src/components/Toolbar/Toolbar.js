@@ -1,8 +1,7 @@
 /* @flow */
 
 import React, { Children, Component } from 'react';
-import PropTypes from 'prop-types';
-import { Platform, StyleSheet, ViewPropTypes, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 
 import withTheme from '../../core/withTheme';
 import Paper from '../Paper';
@@ -13,9 +12,19 @@ import type { Theme } from '../../types/Theme';
 import ToolbarBackAction from './ToolbarBackAction';
 
 type Props = {
+  /**
+   * Theme color for the whole toolbar, a dark toolbar will render light text and vice-versa
+   * Child elements can override this prop independently
+   */
   dark?: boolean,
+  /**
+   * Toolbar content
+   */
   children?: any,
   style?: any,
+  /**
+   * Space added it Toolbar to adapt to the StatusBar
+   */
   statusBarHeight?: number,
   theme: Theme,
 };
@@ -24,25 +33,45 @@ type DefaultProps = {
   statusBarHeight: number,
 };
 
+/**
+ *  Toolbar is a generalization of action bars for use within application layouts.
+ *
+ * **Usage:**
+ * ```
+ * export default class MyComponent extends Component {
+ *   state = {
+ *     showLeftIcon: true,
+ *     showSearchIcon: true,
+ *     showMoreIcon: true,
+ *     showSubtitle: true,
+ *   };
+ *
+ *   render() {
+ *     const { showLeftIcon, showSearchIcon, showMoreIcon, showSubtitle } = this.state;
+ *     return (
+ *       <Toolbar>
+ *         {showLeftIcon && (
+ *           <Toolbar.BackAction
+ *             onPress={() => {}}
+ *           />
+ *         )}
+ *         <Toolbar.Content
+ *           title="Title"
+ *           subtitle={showSubtitle ? 'Subtitle' : null}
+ *         />
+ *         {showSearchIcon && (
+ *           <Toolbar.Action icon="search" onPress={() => {}} />
+ *         )}
+ *         {showMoreIcon && (
+ *           <Toolbar.Action icon="more-horiz" onPress={() => {}} />
+ *         )}
+ *       <Toolbar>
+ *     );
+ *   }
+ * }
+ * ```
+ */
 class Toolbar extends Component<DefaultProps, Props, void> {
-  static propTypes = {
-    /**
-     * Theme color for the whole toolbar, a dark toolbar will render light text and vice-versa
-     * Child elements can override this prop independently
-     */
-    dark: PropTypes.bool,
-    /**
-     * Toolbar content
-     */
-    children: PropTypes.node.isRequired,
-    style: ViewPropTypes.style,
-    /**
-     * Space added it Toolbar to adapt to the StatusBar
-     */
-    statusBarHeight: PropTypes.number,
-    theme: PropTypes.object.isRequired,
-  };
-
   static defaultProps = {
     statusBarHeight: Platform.OS === 'ios' ? 20 : 0,
   };

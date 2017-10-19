@@ -1,7 +1,6 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { StyleSheet, TextInput } from 'react-native';
 
 import color from 'color';
@@ -13,10 +12,25 @@ import type { Theme } from '../types/Theme';
 import type { IconSource } from './Icon';
 
 type Props = {
+  /**
+   * Hint text shown when the input is empty
+   */
   placeholder?: string,
+  /**
+   * Icon name for the left icon button (see onIconPress)
+   */
   icon?: IconSource,
+  /**
+   * The value of the text input
+   */
   value: string,
+  /**
+   * Callback that is called when the text input's text changes
+   */
   onChangeText: (query: string) => void,
+  /**
+   * Callback to execute if we want the left icon to act as button
+   */
   onIconPress?: Function,
   theme: Theme,
   style?: any,
@@ -24,33 +38,28 @@ type Props = {
 
 /**
  * SearchBar is a simple input box where users can type search queries
+ *
+ * **Usage:**
+ * ```
+ * export default class MyComponent extends Component {
+ *   state = {
+ *     firstQuery: '',
+ *   };
+ *
+ *   render() {
+ *     const { firstQuery } = this.state;
+ *     return (
+ *       <SearchBar
+ *         placeholder="Search"
+ *         onChangeText={query => { this.setState({ firstQuery: query }); }}
+ *         value={firstQuery}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
  */
 class SearchBar extends Component<void, Props, void> {
-  static propTypes = {
-    /**
-     * Hint text shown when the input is empty
-     */
-    placeholder: PropTypes.string,
-    /**
-     * The value of the text input
-     */
-    value: PropTypes.string.isRequired,
-    /**
-     * Callback that is called when the text input's text changes
-     */
-    onChangeText: PropTypes.func.isRequired,
-    /**
-     * Callback to execute if we want the left icon to act as button
-     */
-    onIconPress: PropTypes.func,
-    /**
-     * Icon name for the left icon button (see onIconPress)
-     */
-    icon: PropTypes.string,
-    theme: PropTypes.object.isRequired,
-    style: Paper.propTypes.style,
-  };
-
   _handleClearPress = () => {
     this.props.onChangeText('');
   };

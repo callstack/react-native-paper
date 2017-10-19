@@ -1,7 +1,6 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
 import color from 'color';
 import Icon from './Icon';
@@ -33,14 +32,6 @@ type Props = {
  * Checkboxes allow the selection of multiple options from a set
  */
 class Checkbox extends Component<void, Props, void> {
-  static propTypes = {
-    checked: PropTypes.bool.isRequired,
-    disabled: PropTypes.bool,
-    onPress: PropTypes.func,
-    color: PropTypes.string,
-    theme: PropTypes.object.isRequired,
-  };
-
   render() {
     const { checked, disabled, onPress, theme, ...rest } = this.props;
 

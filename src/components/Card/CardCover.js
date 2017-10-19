@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import { StyleSheet, View, Image } from 'react-native';
 import withTheme from '../../core/withTheme';
 import { grey200 } from '../../styles/colors';
@@ -44,13 +43,6 @@ const CardCover = (props: Props) => {
       <Image {...props} style={[styles.image, coverStyle]} />
     </View>
   );
-};
-
-CardCover.propTypes = {
-  index: PropTypes.number,
-  total: PropTypes.number,
-  style: Image.propTypes.style,
-  theme: PropTypes.object.isRequired,
 };
 
 const styles = StyleSheet.create({
