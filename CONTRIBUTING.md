@@ -39,9 +39,17 @@ You can learn how from this *free* series [How to Contribute to an Open Source P
 
 5. In case of doubts, check out the current code. For example, we use the prop `icon` not `iconName`.
 
-## Docs
+## Running the example
 
-When you provide the description to your `Props` and declare also the component Usage, our docs tool will generate everything for you after the PR is merged. 
+The example app uses [Expo](https://expo.io/). You will need to install the Expo app for [Android](https://play.google.com/store/apps/details?id=host.exp.exponent) and [iOS](https://itunes.apple.com/app/apple-store/id982107779) to start developing.
+
+After you're done, you can run `yarn && yarn start` in the `example/` folder and scan the QR code to launch it on your device.
+
+## Working on documentation
+
+The documentation is automatically generated from the [flowtype](https://flowtype.org) annotation in the components. You can add comments above the type annotations to add descriptions. To preview the generated documentation, run `yarn && yarn start` in the `docs/` folder.
+
+When your pull request is merged to master, the documentation updates are automatically deployed to the website.
 
 ## Reporting New Issues
 
