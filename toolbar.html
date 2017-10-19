@@ -1,34 +1,20 @@
-<html lang="en" data-reactroot="" data-reactid="1" data-react-checksum="714427688"><head data-reactid="2"><meta charset="utf-8" data-reactid="3"/><meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" data-reactid="4"/><meta name="mobile-web-app-capable" content="yes" data-reactid="5"/><meta name="apple-mobile-web-app-capable" content="yes" data-reactid="6"/><meta name="description" content="Toolbar is a generalization of action bars for use within application layouts.
+<html lang="en" data-reactroot="" data-reactid="1" data-react-checksum="331449037"><head data-reactid="2"><meta charset="utf-8" data-reactid="3"/><meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" data-reactid="4"/><meta name="mobile-web-app-capable" content="yes" data-reactid="5"/><meta name="apple-mobile-web-app-capable" content="yes" data-reactid="6"/><meta name="description" content="Toolbar is a generalization of action bars for use within application layouts.
 
 **Usage:**
 ```
 export default class MyComponent extends Component {
-  state = {
-    showLeftIcon: true,
-    showSearchIcon: true,
-    showMoreIcon: true,
-    showSubtitle: true,
-  };
-
   render() {
-    const { showLeftIcon, showSearchIcon, showMoreIcon, showSubtitle } = this.state;
     return (
       &lt;Toolbar&gt;
-        {showLeftIcon &amp;&amp; (
-          &lt;Toolbar.BackAction
-            onPress={() =&gt; {}}
-          /&gt;
-        )}
+        &lt;Toolbar.BackAction
+          onPress={this._goBack}
+        /&gt;
         &lt;Toolbar.Content
           title=&quot;Title&quot;
-          subtitle={showSubtitle ? &#x27;Subtitle&#x27; : null}
+          subtitle=&quot;Subtitle&quot;
         /&gt;
-        {showSearchIcon &amp;&amp; (
-          &lt;Toolbar.Action icon=&quot;search&quot; onPress={() =&gt; {}} /&gt;
-        )}
-        {showMoreIcon &amp;&amp; (
-          &lt;Toolbar.Action icon=&quot;more-horiz&quot; onPress={() =&gt; {}} /&gt;
-        )}
+        &lt;Toolbar.Action icon=&quot;search&quot; onPress={this._onSearch} /&gt;
+        &lt;Toolbar.Action icon=&quot;more-vert&quot; onPress={this._onMore} /&gt;
       &lt;Toolbar&gt;
     );
   }
@@ -38,32 +24,18 @@ export default class MyComponent extends Component {
 **Usage:**
 ```
 export default class MyComponent extends Component {
-  state = {
-    showLeftIcon: true,
-    showSearchIcon: true,
-    showMoreIcon: true,
-    showSubtitle: true,
-  };
-
   render() {
-    const { showLeftIcon, showSearchIcon, showMoreIcon, showSubtitle } = this.state;
     return (
       &lt;Toolbar&gt;
-        {showLeftIcon &amp;&amp; (
-          &lt;Toolbar.BackAction
-            onPress={() =&gt; {}}
-          /&gt;
-        )}
+        &lt;Toolbar.BackAction
+          onPress={this._goBack}
+        /&gt;
         &lt;Toolbar.Content
           title=&quot;Title&quot;
-          subtitle={showSubtitle ? &#x27;Subtitle&#x27; : null}
+          subtitle=&quot;Subtitle&quot;
         /&gt;
-        {showSearchIcon &amp;&amp; (
-          &lt;Toolbar.Action icon=&quot;search&quot; onPress={() =&gt; {}} /&gt;
-        )}
-        {showMoreIcon &amp;&amp; (
-          &lt;Toolbar.Action icon=&quot;more-horiz&quot; onPress={() =&gt; {}} /&gt;
-        )}
+        &lt;Toolbar.Action icon=&quot;search&quot; onPress={this._onSearch} /&gt;
+        &lt;Toolbar.Action icon=&quot;more-vert&quot; onPress={this._onMore} /&gt;
       &lt;Toolbar&gt;
     );
   }
@@ -73,32 +45,18 @@ export default class MyComponent extends Component {
 **Usage:**
 ```
 export default class MyComponent extends Component {
-  state = {
-    showLeftIcon: true,
-    showSearchIcon: true,
-    showMoreIcon: true,
-    showSubtitle: true,
-  };
-
   render() {
-    const { showLeftIcon, showSearchIcon, showMoreIcon, showSubtitle } = this.state;
     return (
       &lt;Toolbar&gt;
-        {showLeftIcon &amp;&amp; (
-          &lt;Toolbar.BackAction
-            onPress={() =&gt; {}}
-          /&gt;
-        )}
+        &lt;Toolbar.BackAction
+          onPress={this._goBack}
+        /&gt;
         &lt;Toolbar.Content
           title=&quot;Title&quot;
-          subtitle={showSubtitle ? &#x27;Subtitle&#x27; : null}
+          subtitle=&quot;Subtitle&quot;
         /&gt;
-        {showSearchIcon &amp;&amp; (
-          &lt;Toolbar.Action icon=&quot;search&quot; onPress={() =&gt; {}} /&gt;
-        )}
-        {showMoreIcon &amp;&amp; (
-          &lt;Toolbar.Action icon=&quot;more-horiz&quot; onPress={() =&gt; {}} /&gt;
-        )}
+        &lt;Toolbar.Action icon=&quot;search&quot; onPress={this._onSearch} /&gt;
+        &lt;Toolbar.Action icon=&quot;more-vert&quot; onPress={this._onMore} /&gt;
       &lt;Toolbar&gt;
     );
   }
@@ -446,35 +404,21 @@ pre code, pre tt {
 .css-34af48d6{-webkit-flex: 1;-ms-flex: 1;flex: 1;padding: 24px;}@media(min-width: 640px){.css-34af48d6{height: 100%;overflow: auto;padding: 24px 48px;}}
 .css-f383d55d{display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;display: flex;height: 100%;-webkit-flex-direction: column;-ms-flex-direction: column;flex-direction: column;}@media(min-width: 640px){.css-f383d55d{-webkit-flex-direction: row;-ms-flex-direction: row;flex-direction: row;}}
 
-          </style></head><body data-reactid="16"><div id='root'><div class="css-f383d55d" data-reactroot="" data-reactid="1" data-react-checksum="1987766141"><div data-reactid="2"><input type="checkbox" class="css-44d1c845" id="slide-sidebar" role="button" data-reactid="3"/><label class="css-e3e17907" for="slide-sidebar" data-reactid="4"><span data-reactid="5">☰</span><span data-reactid="6">✕</span></label><nav class="css-30fe5008" data-reactid="7"><a class="css-a5984c42 " href="index.html" data-reactid="8">Home</a><a class="css-a5984c42 " href="getting-started.html" data-reactid="9">Getting Started</a><hr class="css-fe6183d8" data-reactid="10"/><a class="css-a5984c42 " href="button.html" data-reactid="11">Button</a><a class="css-a5984c42 " href="card.html" data-reactid="12">Card</a><a class="css-a5984c42 " href="checkbox.html" data-reactid="13">Checkbox</a><a class="css-a5984c42 " href="divider.html" data-reactid="14">Divider</a><a class="css-a5984c42 " href="draweritem.html" data-reactid="15">DrawerItem</a><a class="css-a5984c42 " href="drawersection.html" data-reactid="16">DrawerSection</a><a class="css-a5984c42 " href="fab.html" data-reactid="17">FAB</a><a class="css-a5984c42 " href="gridview.html" data-reactid="18">GridView</a><a class="css-a5984c42 " href="modal.html" data-reactid="19">Modal</a><a class="css-a5984c42 " href="paper.html" data-reactid="20">Paper</a><a class="css-a5984c42 " href="progressbar.html" data-reactid="21">ProgressBar</a><a class="css-a5984c42 " href="radiobutton.html" data-reactid="22">RadioButton</a><a class="css-a5984c42 " href="searchbar.html" data-reactid="23">SearchBar</a><a class="css-a5984c42 " href="switch.html" data-reactid="24">Switch</a><a class="css-a5984c42 " href="textinput.html" data-reactid="25">TextInput</a><a class="css-a5984c42 css-a877d34b" href="toolbar.html" data-reactid="26">Toolbar</a><a class="css-a5984c42 " href="touchableripple.html" data-reactid="27">TouchableRipple</a><a class="css-a5984c42 " href="caption.html" data-reactid="28">Caption</a><a class="css-a5984c42 " href="headline.html" data-reactid="29">Headline</a><a class="css-a5984c42 " href="paragraph.html" data-reactid="30">Paragraph</a><a class="css-a5984c42 " href="subheading.html" data-reactid="31">Subheading</a><a class="css-a5984c42 " href="text.html" data-reactid="32">Text</a><a class="css-a5984c42 " href="title.html" data-reactid="33">Title</a></nav></div><div class="css-34af48d6" data-reactid="34"><div data-reactid="35"><h1 class="css-3b116f09" data-reactid="36"><code data-reactid="37">&lt;Toolbar /&gt;</code></h1><div class="css-47382704 css-6060edd1" data-reactid="38"><div data-reactid="39"><span data-reactid="40"><p>Toolbar is a generalization of action bars for use within application layouts.</p>
+          </style></head><body data-reactid="16"><div id='root'><div class="css-f383d55d" data-reactroot="" data-reactid="1" data-react-checksum="236935388"><div data-reactid="2"><input type="checkbox" class="css-44d1c845" id="slide-sidebar" role="button" data-reactid="3"/><label class="css-e3e17907" for="slide-sidebar" data-reactid="4"><span data-reactid="5">☰</span><span data-reactid="6">✕</span></label><nav class="css-30fe5008" data-reactid="7"><a class="css-a5984c42 " href="index.html" data-reactid="8">Home</a><a class="css-a5984c42 " href="getting-started.html" data-reactid="9">Getting Started</a><hr class="css-fe6183d8" data-reactid="10"/><a class="css-a5984c42 " href="button.html" data-reactid="11">Button</a><a class="css-a5984c42 " href="card.html" data-reactid="12">Card</a><a class="css-a5984c42 " href="checkbox.html" data-reactid="13">Checkbox</a><a class="css-a5984c42 " href="divider.html" data-reactid="14">Divider</a><a class="css-a5984c42 " href="draweritem.html" data-reactid="15">DrawerItem</a><a class="css-a5984c42 " href="drawersection.html" data-reactid="16">DrawerSection</a><a class="css-a5984c42 " href="fab.html" data-reactid="17">FAB</a><a class="css-a5984c42 " href="gridview.html" data-reactid="18">GridView</a><a class="css-a5984c42 " href="modal.html" data-reactid="19">Modal</a><a class="css-a5984c42 " href="paper.html" data-reactid="20">Paper</a><a class="css-a5984c42 " href="progressbar.html" data-reactid="21">ProgressBar</a><a class="css-a5984c42 " href="radiobutton.html" data-reactid="22">RadioButton</a><a class="css-a5984c42 " href="searchbar.html" data-reactid="23">SearchBar</a><a class="css-a5984c42 " href="switch.html" data-reactid="24">Switch</a><a class="css-a5984c42 " href="textinput.html" data-reactid="25">TextInput</a><a class="css-a5984c42 css-a877d34b" href="toolbar.html" data-reactid="26">Toolbar</a><a class="css-a5984c42 " href="touchableripple.html" data-reactid="27">TouchableRipple</a><a class="css-a5984c42 " href="caption.html" data-reactid="28">Caption</a><a class="css-a5984c42 " href="headline.html" data-reactid="29">Headline</a><a class="css-a5984c42 " href="paragraph.html" data-reactid="30">Paragraph</a><a class="css-a5984c42 " href="subheading.html" data-reactid="31">Subheading</a><a class="css-a5984c42 " href="text.html" data-reactid="32">Text</a><a class="css-a5984c42 " href="title.html" data-reactid="33">Title</a></nav></div><div class="css-34af48d6" data-reactid="34"><div data-reactid="35"><h1 class="css-3b116f09" data-reactid="36"><code data-reactid="37">&lt;Toolbar /&gt;</code></h1><div class="css-47382704 css-6060edd1" data-reactid="38"><div data-reactid="39"><span data-reactid="40"><p>Toolbar is a generalization of action bars for use within application layouts.</p>
 <p><strong>Usage:</strong></p>
 <pre><code>export <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyComponent</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
-  state = {
-    showLeftIcon: <span class="hljs-literal">true</span>,
-    showSearchIcon: <span class="hljs-literal">true</span>,
-    showMoreIcon: <span class="hljs-literal">true</span>,
-    showSubtitle: <span class="hljs-literal">true</span>,
-  };
-
   render() {
-    const { showLeftIcon, showSearchIcon, showMoreIcon, showSubtitle } = <span class="hljs-keyword">this</span>.state;
     <span class="hljs-keyword">return</span> (
       &lt;<span class="hljs-type">Toolbar</span>&gt;
-        {showLeftIcon &amp;&amp; (
-          &lt;<span class="hljs-type">Toolbar</span>.<span class="hljs-type">BackAction</span>
-            onPress={() =&gt; {}}
-          /&gt;
-        )}
+        &lt;<span class="hljs-type">Toolbar</span>.<span class="hljs-type">BackAction</span>
+          onPress={<span class="hljs-keyword">this</span>._goBack}
+        /&gt;
         &lt;<span class="hljs-type">Toolbar</span>.<span class="hljs-type">Content</span>
           title=<span class="hljs-string">"Title"</span>
-          subtitle={showSubtitle ? <span class="hljs-symbol">'Subtitl</span>e' : <span class="hljs-literal">null</span>}
+          subtitle=<span class="hljs-string">"Subtitle"</span>
         /&gt;
-        {showSearchIcon &amp;&amp; (
-          &lt;<span class="hljs-type">Toolbar</span>.<span class="hljs-type">Action</span> icon=<span class="hljs-string">"search"</span> onPress={() =&gt; {}} /&gt;
-        )}
-        {showMoreIcon &amp;&amp; (
-          &lt;<span class="hljs-type">Toolbar</span>.<span class="hljs-type">Action</span> icon=<span class="hljs-string">"more-horiz"</span> onPress={() =&gt; {}} /&gt;
-        )}
+        &lt;<span class="hljs-type">Toolbar</span>.<span class="hljs-type">Action</span> icon=<span class="hljs-string">"search"</span> onPress={<span class="hljs-keyword">this</span>._onSearch} /&gt;
+        &lt;<span class="hljs-type">Toolbar</span>.<span class="hljs-type">Action</span> icon=<span class="hljs-string">"more-vert"</span> onPress={<span class="hljs-keyword">this</span>._onMore} /&gt;
       &lt;<span class="hljs-type">Toolbar</span>&gt;
     );
   }
