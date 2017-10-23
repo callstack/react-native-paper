@@ -12,7 +12,7 @@ const DialogWithCustomColors = ({
 }) => (
   <Dialog
     onRequestClose={close}
-    style={{ backgroundColor: Colors.grey800 }}
+    style={{ backgroundColor: Colors.purple900 }}
     visible={visible}
   >
     <Dialog.Title style={{ color: Colors.white }}>Alert</Dialog.Title>
@@ -22,7 +22,7 @@ const DialogWithCustomColors = ({
       </Paragraph>
     </Dialog.Content>
     <Dialog.Actions>
-      <Button color={Colors.teal500} onPress={close}>
+      <Button color={Colors.pink500} onPress={close}>
         OK
       </Button>
     </Dialog.Actions>

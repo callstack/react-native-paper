@@ -4,11 +4,13 @@ import React, { Children } from 'react';
 import { StyleSheet, Platform, Animated } from 'react-native';
 import Modal from '../Modal';
 import { black, white } from '../../styles/colors';
+import withTheme from '../../core/withTheme';
 import Paper from '../Paper';
 import DialogActions from './Actions';
 import DialogTitle from './Title';
 import DialogContent from './Content';
 import DialogScrollArea from './ScrollArea';
+import type { Theme } from '../../types/Theme';
 
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
@@ -23,6 +25,7 @@ type Props = {
    */
   onRequestClose?: Function,
   style?: any,
+  theme: Theme,
   /**
    * Determines Whether the dialog is visible
    */
@@ -66,7 +69,15 @@ type Props = {
  */
 
 const Dialog = (props: Props) => {
-  const { children, dismissable, onRequestClose, visible, style } = props;
+  const {
+    children,
+    dismissable,
+    onRequestClose,
+    visible,
+    style,
+    theme,
+  } = props;
+  const backgroundColor = theme.colors.paper;
   const childrenArray = Children.toArray(children);
   const title = childrenArray.find(child => child.type === DialogTitle);
   const actionBtnsChildren = childrenArray.filter(
@@ -95,7 +106,10 @@ const Dialog = (props: Props) => {
       onRequestClose={onRequestClose}
       visible={visible}
     >
-      <AnimatedPaper style={[styles.container, style]} elevation={24}>
+      <AnimatedPaper
+        style={[styles.container, { backgroundColor }, style]}
+        elevation={24}
+      >
         {title}
         {restOfChildrenWithoutTitle}
         {actionBtnsChildren}
@@ -115,7 +129,7 @@ Dialog.defaultProps = {
   visible: false,
 };
 
-export default Dialog;
+export default withTheme(Dialog);
 
 const styles = StyleSheet.create({
   container: {

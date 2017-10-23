@@ -2,7 +2,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ScrollView, View, StyleSheet } from 'react-native';
-import { Paragraph, Button, Dialog, RadioButton } from 'react-native-paper';
+import {
+  Paragraph,
+  Button,
+  Dialog,
+  RadioButton,
+  TouchableRipple,
+} from 'react-native-paper';
 
 type Props = {
   visible: boolean,
@@ -31,36 +37,40 @@ export default class extends Component<void, Props, State> {
       <Dialog onRequestClose={close} visible={visible}>
         <Dialog.Title>Choose an option</Dialog.Title>
         <Dialog.ScrollArea style={{ maxHeight: 170, paddingHorizontal: 0 }}>
-          <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>
+          <ScrollView>
             <View>
-              <View style={styles.checkBoxRow}>
-                <RadioButton
-                  checked={checked === 0}
-                  onPress={() => this.setState({ checked: 0 })}
-                />
-                <Paragraph style={styles.paragraph}>Option 1</Paragraph>
-              </View>
-              <View style={styles.checkBoxRow}>
-                <RadioButton
-                  checked={checked === 1}
-                  onPress={() => this.setState({ checked: 1 })}
-                />
-                <Paragraph style={styles.paragraph}>Option 2</Paragraph>
-              </View>
-              <View style={styles.checkBoxRow}>
-                <RadioButton
-                  checked={checked === 2}
-                  onPress={() => this.setState({ checked: 2 })}
-                />
-                <Paragraph style={styles.paragraph}>Option 3</Paragraph>
-              </View>
-              <View style={styles.checkBoxRow}>
-                <RadioButton
-                  checked={checked === 3}
-                  onPress={() => this.setState({ checked: 3 })}
-                />
-                <Paragraph style={styles.paragraph}>Option 4</Paragraph>
-              </View>
+              <TouchableRipple onPress={() => this.setState({ checked: 0 })}>
+                <View style={styles.row}>
+                  <Paragraph>Option 1</Paragraph>
+                  <View pointerEvents="none">
+                    <RadioButton value="normal" checked={checked === 0} />
+                  </View>
+                </View>
+              </TouchableRipple>
+              <TouchableRipple onPress={() => this.setState({ checked: 1 })}>
+                <View style={styles.row}>
+                  <Paragraph>Option 2</Paragraph>
+                  <View pointerEvents="none">
+                    <RadioButton value="normal" checked={checked === 1} />
+                  </View>
+                </View>
+              </TouchableRipple>
+              <TouchableRipple onPress={() => this.setState({ checked: 2 })}>
+                <View style={styles.row}>
+                  <Paragraph>Option 3</Paragraph>
+                  <View pointerEvents="none">
+                    <RadioButton value="normal" checked={checked === 2} />
+                  </View>
+                </View>
+              </TouchableRipple>
+              <TouchableRipple onPress={() => this.setState({ checked: 3 })}>
+                <View style={styles.row}>
+                  <Paragraph>Option 4</Paragraph>
+                  <View pointerEvents="none">
+                    <RadioButton value="normal" checked={checked === 3} />
+                  </View>
+                </View>
+              </TouchableRipple>
             </View>
           </ScrollView>
         </Dialog.ScrollArea>
@@ -75,10 +85,11 @@ export default class extends Component<void, Props, State> {
 }
 
 const styles = StyleSheet.create({
-  checkBoxRow: {
+  row: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 56,
+    justifyContent: 'space-between',
+    padding: 8,
+    paddingHorizontal: 24,
   },
-  paragraph: { marginLeft: 16 },
 });
