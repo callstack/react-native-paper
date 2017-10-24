@@ -48,7 +48,7 @@ class Paper extends Component<void, Props, void> {
   render() {
     const { style, theme, ...restOfProps } = this.props;
     const flattenedStyles = StyleSheet.flatten(style) || {};
-    const { elevation = 2 } = flattenedStyles;
+    const { elevation } = flattenedStyles;
 
     return (
       <View
@@ -56,7 +56,7 @@ class Paper extends Component<void, Props, void> {
         style={[
           styles.paper,
           { backgroundColor: theme.colors.paper },
-          shadow(elevation),
+          elevation && shadow(elevation),
           style,
         ]}
       />
