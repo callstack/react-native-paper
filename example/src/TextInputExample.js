@@ -1,11 +1,15 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { ScrollView, StyleSheet } from 'react-native';
 import { TextInput, withTheme } from 'react-native-paper';
 
 class TextInputExample extends Component {
   static title = 'TextInput';
+  static propTypes = {
+    theme: PropTypes.object.isRequired,
+  };
 
   state = {
     text: '',
