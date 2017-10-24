@@ -3,7 +3,7 @@
 import React, { Children } from 'react';
 import { StyleSheet, Platform, Animated } from 'react-native';
 import Modal from '../Modal';
-import { black, white } from '../../styles/colors';
+import { white } from '../../styles/colors';
 import withTheme from '../../core/withTheme';
 import Paper from '../Paper';
 import DialogActions from './Actions';
@@ -77,7 +77,9 @@ const Dialog = (props: Props) => {
     style,
     theme,
   } = props;
+
   const backgroundColor = theme.colors.paper;
+
   const childrenArray = Children.toArray(children);
   const title = childrenArray.find(child => child.type === DialogTitle);
   const actionBtnsChildren = childrenArray.filter(
@@ -86,6 +88,7 @@ const Dialog = (props: Props) => {
   const restOfChildren = childrenArray.filter(
     child => child.type !== DialogActions && child.type !== DialogTitle
   );
+
   let restOfChildrenWithoutTitle = restOfChildren;
   if (!title) {
     let found = false;
@@ -100,16 +103,14 @@ const Dialog = (props: Props) => {
       }
     });
   }
+
   return (
     <Modal
       dismissable={dismissable}
       onRequestClose={onRequestClose}
       visible={visible}
     >
-      <AnimatedPaper
-        style={[styles.container, { backgroundColor }, style]}
-        elevation={24}
-      >
+      <AnimatedPaper style={[styles.container, { backgroundColor }, style]}>
         {title}
         {restOfChildrenWithoutTitle}
         {actionBtnsChildren}
@@ -125,7 +126,6 @@ Dialog.ScrollArea = DialogScrollArea;
 
 Dialog.defaultProps = {
   dismissable: true,
-  titleColor: black,
   visible: false,
 };
 
@@ -144,5 +144,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 26,
     borderRadius: 2,
     backgroundColor: white,
+    elevation: 24,
   },
 });
