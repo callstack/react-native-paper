@@ -2,29 +2,50 @@
 
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import { Colors, TextInput } from 'react-native-paper';
+import { TextInput, withTheme } from 'react-native-paper';
 
-export default class TextInputExample extends Component {
+class TextInputExample extends Component {
   static title = 'TextInput';
 
   state = {
     text: '',
+    errorTestText: '',
+    hasError: false,
   };
 
   render() {
+    const themeBackground = this.props.theme.colors.background;
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView
+        style={[styles.container, { backgroundColor: themeBackground }]}
+      >
         <TextInput
           style={styles.inputContainerStyle}
           label="Normal input"
           placeholder="Type something"
+          helperText="Helper text"
           value={this.state.text}
           onChangeText={text => this.setState({ text })}
         />
         <TextInput
           disabled
           style={styles.inputContainerStyle}
+          helperText="Helper: won't be visible for disabled"
           label="Disabled Input"
+          hasError
+          errorText="Error: Disable styles should override error styles"
+        />
+        <TextInput
+          style={styles.inputContainerStyle}
+          label="Error input"
+          placeholder="Type something & then unfocus"
+          helperText="Helper: This will be replaced by error"
+          value={this.state.errorTestText}
+          onChangeText={errorTestText => this.setState({ errorTestText })}
+          onBlur={() =>
+            this.setState({ hasError: this.state.errorTestText !== 'fix' })}
+          hasError={this.state.hasError}
+          errorText="Error: Type fix to remove the error"
         />
       </ScrollView>
     );
@@ -34,10 +55,11 @@ export default class TextInputExample extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
     padding: 8,
   },
   inputContainerStyle: {
     margin: 8,
   },
 });
+
+export default withTheme(TextInputExample);

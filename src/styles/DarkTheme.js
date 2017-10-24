@@ -3,7 +3,7 @@
 import color from 'color';
 import _ from 'lodash';
 import DefaultTheme from './DefaultTheme';
-import { white, grey800, cyan500, cyan700 } from './colors';
+import { white, grey800, cyan500, cyan700, redA400 } from './colors';
 
 const DarkTheme = {
   dark: true,
@@ -22,6 +22,10 @@ const DarkTheme = {
     placeholder: color(white)
       .alpha(0.38)
       .rgbaString(),
+    helperText: color(white)
+      .alpha(0.7)
+      .rgbaString(),
+    error: redA400,
   },
 };
 

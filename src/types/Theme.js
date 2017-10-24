@@ -13,6 +13,8 @@ export type Theme = {
     secondaryText: string,
     disabled: string,
     placeholder: string,
+    helperText: string,
+    error: string,
   },
   fonts: {
     regular: string,

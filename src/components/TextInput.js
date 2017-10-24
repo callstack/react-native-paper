@@ -54,12 +54,25 @@ type Props = {
    * Value of the text input
    */
   value?: string,
+  /**
+   * Text that gives context about a field’s input
+   */
+  helperText?: string,
+  /**
+   * Represents error state, true represents an invalid input
+   */
+  hasError?: boolean,
+  /**
+   * Text to show for error state, visible only when hasError prop is true
+   */
+  errorText?: string,
   style?: any,
   theme: Theme,
 };
 
 type DefaultProps = {
   disabled: boolean,
+  hasError: boolean,
 };
 
 type State = {
@@ -96,6 +109,7 @@ type State = {
 class TextInput extends Component<DefaultProps, Props, State> {
   static defaultProps = {
     disabled: false,
+    hasError: false,
   };
 
   constructor(props: Props) {
@@ -198,6 +212,9 @@ class TextInput extends Component<DefaultProps, Props, State> {
       disabled,
       label,
       underlineColor,
+      helperText,
+      hasError,
+      errorText,
       style,
       theme,
       ...rest
@@ -205,16 +222,21 @@ class TextInput extends Component<DefaultProps, Props, State> {
     const { colors, fonts } = theme;
     const fontFamily = fonts.regular;
     const primaryColor = colors.primary;
-    const inactiveColor = colors.disabled;
 
-    let inputTextColor, labelColor, bottomLineColor;
+    let inactiveColor = colors.disabled;
+    let helperTextColor = colors.helperText;
+    let inputTextColor = colors.text,
+      labelColor,
+      bottomLineColor;
 
-    if (!disabled) {
-      inputTextColor = colors.text;
+    if (disabled) {
+      inputTextColor = labelColor = bottomLineColor = inactiveColor;
+    } else if (hasError) {
+      helperTextColor = labelColor = bottomLineColor = inactiveColor =
+        colors.error;
+    } else {
       labelColor = primaryColor;
       bottomLineColor = underlineColor || primaryColor;
-    } else {
-      inputTextColor = labelColor = bottomLineColor = inactiveColor;
     }
 
     const labelColorAnimation = this.state.focused.interpolate({
@@ -291,6 +313,12 @@ class TextInput extends Component<DefaultProps, Props, State> {
             style={[styles.bottomLine, styles.focusLine, bottomLineStyle]}
           />
         </View>
+        {helperText &&
+          !disabled && (
+            <Text style={[styles.helperText, { color: helperTextColor }]}>
+              {hasError ? errorText : helperText}
+            </Text>
+          )}
       </View>
     );
   }
@@ -326,6 +354,12 @@ const styles = StyleSheet.create({
   },
   focusLine: {
     height: StyleSheet.hairlineWidth * 4,
+  },
+  helperText: {
+    textAlign: 'left',
+    paddingTop: 4,
+    paddingBottom: 4,
+    fontSize: 12,
   },
 });
 

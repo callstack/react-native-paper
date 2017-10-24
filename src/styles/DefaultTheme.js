@@ -1,7 +1,15 @@
 /* @flow */
 
 import color from 'color';
-import { indigo500, indigo700, pinkA200, black, white, grey50 } from './colors';
+import {
+  indigo500,
+  indigo700,
+  pinkA200,
+  black,
+  white,
+  grey50,
+  redA400,
+} from './colors';
 import fonts from './fonts';
 
 export default {
@@ -22,6 +30,12 @@ export default {
       .rgbaString(),
     placeholder: color(black)
       .alpha(0.38)
+      .rgbaString(),
+    helperText: color(black)
+      .alpha(0.54)
+      .rgbaString(),
+    error: color(redA400)
+      .alpha(0.87)
       .rgbaString(),
   },
   fonts,
