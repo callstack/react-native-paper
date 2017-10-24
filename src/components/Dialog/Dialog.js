@@ -3,7 +3,7 @@
 import React, { Children, Component } from 'react';
 import { StyleSheet, Platform, Animated } from 'react-native';
 import Modal from '../Modal';
-import { black, white } from '../../styles/colors';
+import { white } from '../../styles/colors';
 import Paper from '../Paper';
 import DialogActions from './Actions';
 import DialogTitle from './Title';
@@ -12,26 +12,16 @@ import DialogScrollArea from './ScrollArea';
 
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
-type Props = {
-  children?: any,
-  /**
-   * Determines whether clicking outside the dialog dismiss it, true by default
-   */
-  dismissable?: boolean,
-  /**
-   * Callback that is called when the user dismisses the dialog
-   */
-  onRequestClose?: Function,
-  style?: any,
-  /**
-   * Determines Whether the dialog is visible
-   */
+type DefaultProps = {
+  dismissable: boolean,
   visible: boolean,
 };
 
-type DefaultProps = {
-  dismissable: boolean,
-  titleColor: string,
+type Props = {
+  children?: any,
+  dismissable?: boolean,
+  onRequestClose?: Function,
+  style?: any,
   visible: boolean,
 };
 
@@ -78,7 +68,6 @@ class Dialog extends Component<DefaultProps, Props, void> {
 
   static defaultProps = {
     dismissable: true,
-    titleColor: black,
     visible: false,
   };
 
