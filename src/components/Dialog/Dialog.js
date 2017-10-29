@@ -104,7 +104,6 @@ class Dialog extends PureComponent<DefaultProps, Props, void> {
     const restOfChildren = childrenArray.filter(
       child => child.type !== DialogActions && child.type !== DialogTitle
     );
-
     let restOfChildrenWithoutTitle = restOfChildren;
     if (!title) {
       let found = false;
@@ -119,7 +118,6 @@ class Dialog extends PureComponent<DefaultProps, Props, void> {
         }
       });
     }
-
     return (
       <Modal
         dismissable={dismissable}
