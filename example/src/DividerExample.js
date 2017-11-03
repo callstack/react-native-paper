@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ListView, StyleSheet } from 'react-native';
 import { Divider, Subheading, withTheme } from 'react-native-paper';
 
@@ -29,6 +30,9 @@ const DividerExample = props => {
 };
 
 DividerExample.title = 'Divider';
+DividerExample.propTypes = {
+  theme: PropTypes.object.isRequired,
+};
 
 const styles = StyleSheet.create({
   container: {

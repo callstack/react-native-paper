@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Paragraph, Button, Dialog, Colors } from 'react-native-paper';
+import { Paragraph, Button, Dialog } from 'react-native-paper';
 
 const DialogWithLongText = ({
   visible,
@@ -16,9 +16,7 @@ const DialogWithLongText = ({
       <Paragraph>This is an undismissable dialog!!</Paragraph>
     </Dialog.Content>
     <Dialog.Actions>
-      <Button color={Colors.teal500} disabled>
-        Disagree
-      </Button>
+      <Button disabled>Disagree</Button>
       <Button primary onPress={close}>
         Agree
       </Button>

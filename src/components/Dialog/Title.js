@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import PaperTitle from '../Typography/Title';
+import Title from '../Typography/Title';
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types/Theme';
 
@@ -17,9 +17,7 @@ const DialogTitle = ({
   theme: { colors: { text } },
   style,
 }: Props) => (
-  <PaperTitle style={[styles.text, { color: text }, style]}>
-    {children}
-  </PaperTitle>
+  <Title style={[styles.text, { color: text }, style]}>{children}</Title>
 );
 
 const styles = StyleSheet.create({

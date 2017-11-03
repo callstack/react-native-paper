@@ -1,19 +1,24 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { ScrollView, StyleSheet } from 'react-native';
-import { Colors, TextInput } from 'react-native-paper';
+import { TextInput, withTheme } from 'react-native-paper';
 
-export default class TextInputExample extends Component {
+class TextInputExample extends Component {
   static title = 'TextInput';
+  static propTypes = {
+    theme: PropTypes.object.isRequired,
+  };
 
   state = {
     text: '',
   };
 
   render() {
+    const { theme: { colors: { background } } } = this.props;
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView style={[styles.container, { backgroundColor: background }]}>
         <TextInput
           style={styles.inputContainerStyle}
           label="Normal input"
@@ -34,10 +39,11 @@ export default class TextInputExample extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
     padding: 8,
   },
   inputContainerStyle: {
     margin: 8,
   },
 });
+
+export default withTheme(TextInputExample);

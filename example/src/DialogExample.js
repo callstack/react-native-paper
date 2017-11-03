@@ -1,8 +1,9 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
-import { Colors, Button } from 'react-native-paper';
+import { Colors, Button, withTheme } from 'react-native-paper';
 import {
   DialogWithCustomColors,
   DialogWithLoadingIndicator,
@@ -11,8 +12,11 @@ import {
   UndismissableDialog,
 } from './Dialogs';
 
-export default class DialogExample extends Component {
+class DialogExample extends Component {
   static title = 'Dialog';
+  static propTypes = {
+    theme: PropTypes.object.isRequired,
+  };
 
   state = {
     visible1: false,
@@ -35,9 +39,10 @@ export default class DialogExample extends Component {
   _closeDialog5 = () => this.setState({ visible5: false });
 
   render() {
+    const { theme: { colors: { background } } } = this.props;
     const { visible1, visible2, visible3, visible4, visible5 } = this.state;
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { backgroundColor: background }]}>
         <Button primary onPress={this._openDialog1}>
           Show Dialog with long text
         </Button>
@@ -73,3 +78,5 @@ const styles = StyleSheet.create({
     padding: 16,
   },
 });
+
+export default withTheme(DialogExample);

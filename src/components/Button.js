@@ -122,7 +122,7 @@ class Button extends PureComponent<void, Props, State> {
       style,
       theme,
     } = this.props;
-    const { colors, roundness } = theme;
+    const { colors, roundness, dark: isDarkTheme } = theme;
     const fontFamily = theme.fonts.medium;
     let backgroundColor, textColor, isDark;
     if (raised) {
@@ -153,7 +153,9 @@ class Button extends PureComponent<void, Props, State> {
     }
 
     if (disabled) {
-      textColor = 'rgba(0, 0, 0, .26)';
+      textColor = isDarkTheme
+        ? 'rgba(255, 255, 255, .26)'
+        : 'rgba(0, 0, 0, .26)';
     } else {
       if (raised) {
         textColor = isDark ? white : black;

@@ -1,6 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 import {
   Caption,
@@ -13,6 +14,9 @@ import {
 
 class TextExample extends Component {
   static title = 'Typography';
+  static propTypes = {
+    theme: PropTypes.object.isRequired,
+  };
 
   render() {
     const { theme: { colors: { background } } } = this.props;

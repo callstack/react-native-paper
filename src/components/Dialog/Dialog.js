@@ -1,14 +1,16 @@
 /* @flow */
 
-import React, { Children, Component } from 'react';
+import React, { Children, PureComponent } from 'react';
 import { StyleSheet, Platform, Animated } from 'react-native';
 import Modal from '../Modal';
 import { white } from '../../styles/colors';
+import withTheme from '../../core/withTheme';
 import Paper from '../Paper';
 import DialogActions from './Actions';
 import DialogTitle from './Title';
 import DialogContent from './Content';
 import DialogScrollArea from './ScrollArea';
+import type { Theme } from '../../types/Theme';
 
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
@@ -19,9 +21,19 @@ type DefaultProps = {
 
 type Props = {
   children?: any,
+  /**
+   * Determines whether clicking outside the dialog dismisses it, true by default
+   */
   dismissable?: boolean,
+  /**
+   * Callback that is called when the user dismisses the dialog
+   */
   onRequestClose?: Function,
   style?: any,
+  theme: Theme,
+  /**
+   * Determines Whether the dialog is visible
+   */
   visible: boolean,
 };
 
@@ -60,7 +72,8 @@ type Props = {
  * }
  * ```
  */
-class Dialog extends Component<DefaultProps, Props, void> {
+
+class Dialog extends PureComponent<DefaultProps, Props, void> {
   static Actions = DialogActions;
   static Title = DialogTitle;
   static Content = DialogContent;
@@ -78,7 +91,11 @@ class Dialog extends Component<DefaultProps, Props, void> {
       onRequestClose,
       visible,
       style,
+      theme,
     } = this.props;
+
+    const backgroundColor = theme.colors.paper;
+
     const childrenArray = Children.toArray(children);
     const title = childrenArray.find(child => child.type === DialogTitle);
     const actionBtnsChildren = childrenArray.filter(
@@ -107,7 +124,7 @@ class Dialog extends Component<DefaultProps, Props, void> {
         onRequestClose={onRequestClose}
         visible={visible}
       >
-        <AnimatedPaper style={[styles.container, style]} elevation={24}>
+        <AnimatedPaper style={[styles.container, { backgroundColor }, style]}>
           {title}
           {restOfChildrenWithoutTitle}
           {actionBtnsChildren}
@@ -117,7 +134,7 @@ class Dialog extends Component<DefaultProps, Props, void> {
   }
 }
 
-export default Dialog;
+export default withTheme(Dialog);
 
 const styles = StyleSheet.create({
   container: {
@@ -132,5 +149,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 26,
     borderRadius: 2,
     backgroundColor: white,
+    elevation: 24,
   },
 });

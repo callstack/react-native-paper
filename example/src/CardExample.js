@@ -17,6 +17,7 @@ class CardExample extends Component {
   static propTypes = {
     theme: PropTypes.object.isRequired,
   };
+
   render() {
     const { theme: { colors: { background } } } = this.props;
     return (
