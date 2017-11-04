@@ -1,0 +1,89 @@
+version: 2
+
+defaults: &defaults
+  docker:
+    - image: circleci/node:7.10
+  working_directory: ~/react-native-paper
+
+jobs:
+  install-dependencies:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/react-native-paper
+      - restore_cache:
+          keys:
+            - dependencies-{{ checksum "package.json" }}
+            - dependencies-
+      - restore_cache:
+          keys:
+            - dependencies-docs-{{ checksum "docs/package.json" }}
+            - dependencies-docs-
+      - restore_cache:
+          keys:
+            - dependencies-example-{{ checksum "example/package.json" }}
+            - dependencies-example-
+      - run: |
+          yarn install --frozen-lockfile
+          cd docs && yarn install --frozen-lockfile && cd ..
+          cd example && yarn install --frozen-lockfile && cd ..
+      - save_cache:
+          key: dependencies-{{ checksum "package.json" }}
+          paths: node_modules
+      - save_cache:
+          key: dependencies-docs-{{ checksum "docs/package.json" }}
+          paths: docs/node_modules
+      - save_cache:
+          key: dependencies-example-{{ checksum "example/package.json" }}
+          paths: example/node_modules
+      - persist_to_workspace:
+          root: .
+          paths: .
+  lint-and-flow:
+      <<: *defaults
+      steps:
+        - attach_workspace:
+            at: ~/react-native-paper
+        - run: |
+            yarn run lint
+            yarn run flow
+  build-docs:
+      <<: *defaults
+      steps:
+        - attach_workspace:
+            at: ~/react-native-paper
+        - run: |
+            cd docs && yarn run build && cd ..
+        - store_artifacts:
+            path: docs/dist
+            destination: docs
+  deploy-docs:
+      <<: *defaults
+      steps:
+        - checkout
+        - attach_workspace:
+            at: ~/react-native-paper
+        - add_ssh_keys:
+            fingerprints:
+              - "2f:b4:ed:e1:25:88:5c:4a:03:c2:16:40:56:70:29:29"
+        - run: |
+            bash docs/deploy.sh
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - install-dependencies
+      - lint-and-flow:
+          requires:
+            - install-dependencies
+      - build-docs:
+          requires:
+            - install-dependencies
+      - deploy-docs:
+          requires:
+            - install-dependencies
+          filters:
+            branches:
+              only: master
