@@ -1,47 +1,41 @@
 /* @flow */
 
-import React, { Children, PureComponent } from 'react';
+import * as React from 'react';
 import { StyleSheet, Platform, Animated } from 'react-native';
 import Modal from '../Modal';
-import { white } from '../../styles/colors';
-import withTheme from '../../core/withTheme';
+import { black, white } from '../../styles/colors';
 import Paper from '../Paper';
-import DialogActions from './Actions';
-import DialogTitle from './Title';
-import DialogContent from './Content';
-import DialogScrollArea from './ScrollArea';
-import type { Theme } from '../../types/Theme';
+import DialogActions from './DialogActions';
+import DialogTitle from './DialogTitle';
+import DialogContent from './DialogContent';
+import withTheme from '../../core/withTheme';
+import type { Theme } from '../../types';
 
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
-type DefaultProps = {
-  dismissable: boolean,
-  visible: boolean,
-};
-
 type Props = {
-  children?: any,
+  children: React.Node,
   /**
-   * Determines whether clicking outside the dialog dismisses it, true by default
+   * Determines whether clicking outside the dialog dismiss it, true by default
    */
   dismissable?: boolean,
   /**
    * Callback that is called when the user dismisses the dialog
    */
-  onRequestClose?: Function,
-  style?: any,
-  theme: Theme,
+  onRequestClose: Function,
   /**
    * Determines Whether the dialog is visible
    */
   visible: boolean,
+  theme: Theme,
+  style?: any,
 };
 
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
  *
  * ```
- * export default class MyComponent extends Component {
+ * export default class MyComponent extends React.Component {
  *   state = {
  *     visible: false,
  *   };
@@ -72,13 +66,7 @@ type Props = {
  * }
  * ```
  */
-
-class Dialog extends PureComponent<DefaultProps, Props, void> {
-  static Actions = DialogActions;
-  static Title = DialogTitle;
-  static Content = DialogContent;
-  static ScrollArea = DialogScrollArea;
-
+class Dialog extends React.Component<Props, void> {
   static defaultProps = {
     dismissable: true,
     visible: false,
@@ -96,13 +84,17 @@ class Dialog extends PureComponent<DefaultProps, Props, void> {
 
     const backgroundColor = theme.colors.paper;
 
-    const childrenArray = Children.toArray(children);
+    const childrenArray = React.Children.toArray(children);
+    /* $FlowFixMe */
     const title = childrenArray.find(child => child.type === DialogTitle);
     const actionBtnsChildren = childrenArray.filter(
-      child => child.type === DialogActions
+      /* $FlowFixMe */
+      child => child && child.type === DialogActions
     );
     const restOfChildren = childrenArray.filter(
-      child => child.type !== DialogActions && child.type !== DialogTitle
+      child =>
+        /* $FlowFixMe */
+        child && child.type !== DialogActions && child.type !== DialogTitle
     );
     let restOfChildrenWithoutTitle = restOfChildren;
     if (!title) {
@@ -110,6 +102,7 @@ class Dialog extends PureComponent<DefaultProps, Props, void> {
       restOfChildrenWithoutTitle = restOfChildren.map(child => {
         if (child.type === DialogContent && !found) {
           found = true;
+          /* $FlowFixMe */
           return React.cloneElement(child, {
             style: { paddingTop: 24 },
           });
@@ -133,6 +126,12 @@ class Dialog extends PureComponent<DefaultProps, Props, void> {
     );
   }
 }
+
+Dialog.defaultProps = {
+  dismissable: true,
+  titleColor: black,
+  visible: false,
+};
 
 export default withTheme(Dialog);
 

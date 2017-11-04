@@ -1,10 +1,19 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import { Colors, Button, withTheme } from 'react-native-paper';
+import type { Theme } from 'react-native-paper/types';
 
-class ButtonExample extends Component {
+type Props = {
+  theme: Theme,
+};
+
+type State = {
+  loading: boolean,
+};
+
+class ButtonExample extends React.Component<Props, State> {
   static title = 'Button';
 
   state = {

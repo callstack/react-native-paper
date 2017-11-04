@@ -1,7 +1,6 @@
 /* @flow */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import {
   Caption,
@@ -11,12 +10,14 @@ import {
   Title,
   withTheme,
 } from 'react-native-paper';
+import type { Theme } from 'react-native-paper/types';
 
-class TextExample extends Component {
+type Props = {
+  theme: Theme,
+};
+
+class TextExample extends React.Component<Props> {
   static title = 'Typography';
-  static propTypes = {
-    theme: PropTypes.object.isRequired,
-  };
 
   render() {
     const { theme: { colors: { background } } } = this.props;

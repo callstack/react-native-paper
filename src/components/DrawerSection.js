@@ -1,11 +1,11 @@
 /* @flow */
 
 import color from 'color';
-import React from 'react';
+import * as React from 'react';
 import { View, Text } from 'react-native';
 import Divider from './Divider';
 import withTheme from '../core/withTheme';
-import type { Theme } from '../types/Theme';
+import type { Theme } from '../types';
 
 type Props = {
   children: any,

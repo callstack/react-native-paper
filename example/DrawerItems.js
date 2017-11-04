@@ -1,7 +1,6 @@
 /* @flow */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
 import {
   DrawerItem,
@@ -12,6 +11,18 @@ import {
   Paragraph,
   Colors,
 } from 'react-native-paper';
+import type { Theme } from 'react-native-paper/types';
+
+type Props = {
+  theme: Theme,
+  toggleTheme: Function,
+};
+
+type State = {
+  open: boolean,
+  drawerItemIndex: number,
+  isDark: boolean,
+};
 
 const DrawerItemsData = [
   { label: 'Inbox', icon: 'inbox', key: 0 },
@@ -21,12 +32,7 @@ const DrawerItemsData = [
   { label: 'A very long title that will be truncated', icon: 'delete', key: 4 },
 ];
 
-class DrawerItems extends Component {
-  static propTypes = {
-    theme: PropTypes.object.isRequired,
-    toggleTheme: PropTypes.func.isRequired,
-  };
-
+class DrawerItems extends React.Component<Props, State> {
   state = {
     open: false,
     drawerItemIndex: 0,

@@ -1,31 +1,25 @@
 /* @flow */
 
-import React, { Component, Children } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import Portal from './Portal';
 import ThemeProvider from '../../core/ThemeProvider';
 import withTheme from '../../core/withTheme';
-import type { Theme } from '../../types/Theme';
+import type { Theme } from '../../types';
 
 type Props = {
-  children?: any,
+  children: React.Node,
   theme: Theme,
 };
 
 /**
  * Themed portal is a special portal which preserves the theme in the context.
  */
-class ThemedPortal extends Component<void, Props, void> {
-  static propTypes = {
-    children: PropTypes.element.isRequired,
-    theme: PropTypes.object.isRequired,
-  };
-
+class ThemedPortal extends React.Component<Props> {
   render() {
     return (
       <Portal {...this.props}>
         <ThemeProvider theme={this.props.theme}>
-          {Children.only(this.props.children)}
+          {React.Children.only(this.props.children)}
         </ThemeProvider>
       </Portal>
     );

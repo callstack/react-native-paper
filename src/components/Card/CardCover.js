@@ -1,10 +1,10 @@
 /* @flow */
 
-import React from 'react';
+import * as React from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 import withTheme from '../../core/withTheme';
 import { grey200 } from '../../styles/colors';
-import type { Theme } from '../../types/Theme';
+import type { Theme } from '../../types';
 
 type Props = {
   index?: number,

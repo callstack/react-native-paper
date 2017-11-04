@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from 'react';
+import * as React from 'react';
 import {
   Platform,
   StyleSheet,
@@ -8,7 +8,7 @@ import {
   ProgressBarAndroid,
 } from 'react-native';
 import withTheme from '../core/withTheme';
-import type { Theme } from '../types/Theme';
+import type { Theme } from '../types';
 import setColor from 'color';
 
 type Props = {

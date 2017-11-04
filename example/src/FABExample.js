@@ -1,15 +1,16 @@
 /* @flow */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Colors, FAB, withTheme } from 'react-native-paper';
+import type { Theme } from 'react-native-paper/types';
 
-class ButtonExample extends Component {
+type Props = {
+  theme: Theme,
+};
+
+class ButtonExample extends React.Component<Props> {
   static title = 'Floating Action Button';
-  static propTypes = {
-    theme: PropTypes.object.isRequired,
-  };
 
   _handlePress = () => {};
 

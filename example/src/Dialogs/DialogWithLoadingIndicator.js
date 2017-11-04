@@ -1,8 +1,14 @@
 /* @flow */
-import React from 'react';
-import PropTypes from 'prop-types';
+
+import * as React from 'react';
 import { ActivityIndicator, Platform, View } from 'react-native';
-import { Paragraph, Colors, Dialog } from 'react-native-paper';
+import {
+  Paragraph,
+  Colors,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+} from 'react-native-paper';
 
 const isIOS = Platform.OS === 'ios';
 
@@ -14,8 +20,8 @@ const DialogWithLoadingIndicator = ({
   close: Function,
 }) => (
   <Dialog onRequestClose={close} visible={visible}>
-    <Dialog.Title>Progress Dialog</Dialog.Title>
-    <Dialog.Content>
+    <DialogTitle>Progress Dialog</DialogTitle>
+    <DialogContent>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <ActivityIndicator
           color={Colors.indigo500}
@@ -24,13 +30,8 @@ const DialogWithLoadingIndicator = ({
         />
         <Paragraph>Loading.....</Paragraph>
       </View>
-    </Dialog.Content>
+    </DialogContent>
   </Dialog>
 );
-
-DialogWithLoadingIndicator.propTypes = {
-  visible: PropTypes.bool,
-  close: PropTypes.func,
-};
 
 export default DialogWithLoadingIndicator;

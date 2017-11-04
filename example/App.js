@@ -1,7 +1,7 @@
 /* @flow */
 
 import Expo from 'expo';
-import React, { Component } from 'react';
+import * as React from 'react';
 import { StatusBar } from 'react-native';
 import {
   Provider as PaperProvider,
@@ -11,8 +11,11 @@ import {
 import { DrawerNavigator } from 'react-navigation';
 import RootNavigator from './src/RootNavigator';
 import DrawerItems from './DrawerItems';
+import type { Theme } from 'react-native-paper/types';
 
-StatusBar.setBarStyle('light-content');
+type State = {
+  theme: Theme,
+};
 
 const App = DrawerNavigator(
   { Home: { screen: RootNavigator } },
@@ -23,10 +26,14 @@ const App = DrawerNavigator(
   }
 );
 
-class PaperExample extends Component {
+class PaperExample extends React.Component<{}, State> {
   state = {
     theme: DefaultTheme,
   };
+
+  componentDidMount() {
+    StatusBar.setBarStyle('light-content');
+  }
 
   _toggleTheme = () =>
     this.setState({

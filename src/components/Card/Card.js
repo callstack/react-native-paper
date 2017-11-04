@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { Component, Children } from 'react';
+import * as React from 'react';
 import {
   Animated,
   View,
@@ -8,21 +8,14 @@ import {
   StyleSheet,
 } from 'react-native';
 import Paper from '../Paper';
-import CardContent from './CardContent';
-import CardCover from './CardCover';
-import CardActions from './CardActions';
 import withTheme from '../../core/withTheme';
-import type { Theme } from '../../types/Theme';
+import type { Theme } from '../../types';
 
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
-type DefaultProps = {
-  elevation: number,
-};
-
 type Props = {
   elevation: number,
-  children?: string,
+  children: React.Node,
   onPress?: Function,
   style?: any,
   theme: Theme,
@@ -52,11 +45,7 @@ type State = {
  * );
  * ```
  */
-class Card extends Component<DefaultProps, Props, State> {
-  static Cover = CardCover;
-  static Content = CardContent;
-  static Actions = CardActions;
-
+class Card extends React.Component<Props, State> {
   static defaultProps = {
     elevation: 2,
   };
@@ -88,8 +77,13 @@ class Card extends Component<DefaultProps, Props, State> {
     const { children, onPress, style, theme } = this.props;
     const { elevation } = this.state;
     const { roundness } = theme;
-    const total = Children.count(children);
-    const siblings = Children.map(children, child => child.type.displayName);
+    const total = React.Children.count(children);
+    const siblings = React.Children.map(
+      children,
+      child =>
+        /* $FlowFixMe */
+        typeof child === 'object' && child.type ? child.type.displayName : null
+    );
     return (
       <AnimatedPaper
         style={[styles.card, { borderRadius: roundness, elevation }, style]}
@@ -102,12 +96,17 @@ class Card extends Component<DefaultProps, Props, State> {
           style={styles.container}
         >
           <View style={styles.innerContainer}>
-            {Children.map(children, (child, index) =>
-              React.cloneElement(child, {
-                index,
-                total,
-                siblings,
-              })
+            {React.Children.map(
+              children,
+              (child, index) =>
+                typeof child === 'object' && child !== null
+                  ? /* $FlowFixMe */
+                    React.cloneElement(child, {
+                      index,
+                      total,
+                      siblings,
+                    })
+                  : child
             )}
           </View>
         </TouchableWithoutFeedback>

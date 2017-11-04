@@ -1,11 +1,14 @@
 /* @flow */
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+
+import * as React from 'react';
 import { ScrollView, View, StyleSheet } from 'react-native';
 import {
   Paragraph,
   Button,
   Dialog,
+  DialogTitle,
+  DialogActions,
+  DialogScrollArea,
   RadioButton,
   TouchableRipple,
 } from 'react-native-paper';
@@ -19,11 +22,7 @@ type State = {
   checked: number,
 };
 
-export default class extends Component<void, Props, State> {
-  static propTypes = {
-    visible: PropTypes.bool,
-    close: PropTypes.func,
-  };
+export default class extends React.Component<Props, State> {
   state = {
     checked: 0,
   };
@@ -35,9 +34,9 @@ export default class extends Component<void, Props, State> {
     const { visible, close } = this.props;
     return (
       <Dialog onRequestClose={close} visible={visible}>
-        <Dialog.Title>Choose an option</Dialog.Title>
-        <Dialog.ScrollArea style={{ maxHeight: 170, paddingHorizontal: 0 }}>
-          <ScrollView>
+        <DialogTitle>Choose an option</DialogTitle>
+        <DialogScrollArea style={{ maxHeight: 170, paddingHorizontal: 0 }}>
+          <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>
             <View>
               <TouchableRipple onPress={() => this.setState({ checked: 0 })}>
                 <View style={styles.row}>
@@ -73,12 +72,12 @@ export default class extends Component<void, Props, State> {
               </TouchableRipple>
             </View>
           </ScrollView>
-        </Dialog.ScrollArea>
-        <Dialog.Actions>
+        </DialogScrollArea>
+        <DialogActions>
           <Button primary onPress={close}>
             Done
           </Button>
-        </Dialog.Actions>
+        </DialogActions>
       </Dialog>
     );
   }

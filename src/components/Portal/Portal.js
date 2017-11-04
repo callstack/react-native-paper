@@ -1,15 +1,15 @@
 /* @flow */
 
-import { PureComponent } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import { manager } from './PortalHost';
 
 export type PortalProps = {
-  children: any,
   /**
    * Position of the element in the z-axis
    */
-  position: number,
+  position?: number,
+  children: React.Node,
 };
 
 type Props = PortalProps;
@@ -17,7 +17,7 @@ type Props = PortalProps;
 /**
  * Portal allows to render a component at a different place in the parent tree.
  */
-export default class Portal extends PureComponent<void, Props, void> {
+export default class Portal extends React.Component<Props> {
   static contextTypes = {
     [manager]: PropTypes.object,
   };

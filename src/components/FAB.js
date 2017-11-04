@@ -1,14 +1,14 @@
 /* @flow */
 
 import color from 'color';
-import React from 'react';
+import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Paper from './Paper';
 import Icon from './Icon';
 import TouchableRipple from './TouchableRipple';
 import { white } from '../styles/colors';
 import withTheme from '../core/withTheme';
-import type { Theme } from '../types/Theme';
+import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
 type Props = {
@@ -21,11 +21,11 @@ type Props = {
    */
   dark?: boolean,
   /**
-   * Name of the icon to show
+   * Custom color for the icon
    */
   icon: IconSource,
   /**
-   * Custom color for the icon
+   * Function to execute on press
    */
   color?: string,
   /**

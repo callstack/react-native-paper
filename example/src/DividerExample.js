@@ -1,9 +1,13 @@
 /* @flow */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { ListView, StyleSheet } from 'react-native';
 import { Divider, Subheading, withTheme } from 'react-native-paper';
+import type { Theme } from 'react-native-paper/types';
+
+type Props = {
+  theme: Theme,
+};
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 const dataSource = ds.cloneWithRows([
@@ -15,7 +19,7 @@ const dataSource = ds.cloneWithRows([
   'Peach',
 ]);
 
-const DividerExample = props => {
+const DividerExample = (props: Props) => {
   const { theme: { colors: { background } } } = props;
   return (
     <ListView
@@ -30,9 +34,6 @@ const DividerExample = props => {
 };
 
 DividerExample.title = 'Divider';
-DividerExample.propTypes = {
-  theme: PropTypes.object.isRequired,
-};
 
 const styles = StyleSheet.create({
   container: {

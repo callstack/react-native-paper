@@ -1,13 +1,13 @@
 /* @flow */
 
 import color from 'color';
-import React from 'react';
+import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Icon from './Icon';
 import TouchableRipple from './TouchableRipple';
 import { grey300, grey700 } from '../styles/colors';
 import withTheme from '../core/withTheme';
-import type { Theme } from '../types/Theme';
+import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
 type Props = {

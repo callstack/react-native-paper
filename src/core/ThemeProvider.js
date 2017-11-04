@@ -1,31 +1,18 @@
 /* @flow */
 
-import { PureComponent, Children } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import DefaultTheme from '../styles/DefaultTheme';
-import type { Theme } from '../types/Theme';
-
-type DefaultProps = {
-  theme: Theme,
-};
+import type { Theme } from '../types';
 
 type Props = {
-  children?: any,
+  children: React.Node,
   theme?: Theme,
 };
 
 export const channel = 'react-native-paper$theme';
 
-export default class ThemeProvider extends PureComponent<
-  DefaultProps,
-  Props,
-  void
-> {
-  static propTypes = {
-    children: PropTypes.element.isRequired,
-    theme: PropTypes.object,
-  };
-
+export default class ThemeProvider extends React.Component<Props> {
   static defaultProps = {
     theme: DefaultTheme,
   };
@@ -67,6 +54,6 @@ export default class ThemeProvider extends PureComponent<
   _get = () => this.props.theme;
 
   render() {
-    return Children.only(this.props.children);
+    return React.Children.only(this.props.children);
   }
 }
