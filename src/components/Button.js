@@ -135,7 +135,8 @@ class Button extends PureComponent<void, Props, State> {
           if (primary) {
             backgroundColor = colors.primary;
           } else {
-            backgroundColor = dark ? black : white;
+            backgroundColor =
+              dark || isDarkTheme ? 'rgba(58, 55, 55, .9)' : white;
           }
         }
       }
@@ -158,7 +159,7 @@ class Button extends PureComponent<void, Props, State> {
         : 'rgba(0, 0, 0, .26)';
     } else {
       if (raised) {
-        textColor = isDark ? white : black;
+        textColor = isDark || isDarkTheme ? white : black;
       } else {
         if (buttonColor) {
           textColor = buttonColor;
@@ -166,7 +167,7 @@ class Button extends PureComponent<void, Props, State> {
           if (primary) {
             textColor = colors.primary;
           } else {
-            textColor = isDark ? white : black;
+            textColor = isDark || isDarkTheme ? white : black;
           }
         }
       }

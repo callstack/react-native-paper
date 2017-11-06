@@ -2,11 +2,11 @@
 
 import React, { Component } from 'react';
 import { View, Platform, StatusBar, StyleSheet } from 'react-native';
-import { Colors, Button, Toolbar } from 'react-native-paper';
+import { Colors, Button, Toolbar, withTheme } from 'react-native-paper';
 
 const MORE_ICON = Platform.OS === 'ios' ? 'more-horiz' : 'more-vert';
 
-export default class ToolbarExample extends Component {
+class ToolbarExample extends Component {
   static title = 'Toolbar';
   static navigationOptions = ({ navigation }) => {
     return {
@@ -49,8 +49,16 @@ export default class ToolbarExample extends Component {
       showMoreIcon,
       showSubtitle,
     } = this.state;
+    const { theme: { colors: { background } } } = this.props;
     return (
-      <View style={styles.container}>
+      <View
+        style={[
+          styles.container,
+          {
+            backgroundColor: background,
+          },
+        ]}
+      >
         <View style={styles.content}>
           <Button
             accent
@@ -119,3 +127,5 @@ const styles = StyleSheet.create({
     padding: 4,
   },
 });
+
+export default withTheme(ToolbarExample);
