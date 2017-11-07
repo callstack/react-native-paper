@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import { StyleSheet, TextInput } from 'react-native';
 
 import color from 'color';
@@ -8,7 +8,7 @@ import withTheme from '../core/withTheme';
 import Icon from './Icon';
 import TouchableIcon from './TouchableIcon';
 import Paper from './Paper';
-import type { Theme } from '../types/Theme';
+import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
 type Props = {
@@ -17,13 +17,13 @@ type Props = {
    */
   placeholder?: string,
   /**
-   * Icon name for the left icon button (see onIconPress)
-   */
-  icon?: IconSource,
-  /**
    * The value of the text input
    */
   value: string,
+  /**
+   * Icon name for the left icon button (see onIconPress)
+   */
+  icon?: IconSource,
   /**
    * Callback that is called when the text input's text changes
    */
@@ -59,7 +59,7 @@ type Props = {
  * }
  * ```
  */
-class SearchBar extends Component<void, Props, void> {
+class SearchBar extends React.Component<Props> {
   _handleClearPress = () => {
     this.props.onChangeText('');
   };

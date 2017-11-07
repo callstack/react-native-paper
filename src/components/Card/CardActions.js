@@ -1,20 +1,26 @@
 /* @flow */
 
-import React, { Children } from 'react';
+import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 type Props = {
-  children?: any,
+  children: React.Node,
   style?: any,
 };
 
 const CardActions = (props: Props) => {
   return (
     <View {...props} style={[styles.container, props.style]}>
-      {Children.map(props.children, child =>
-        React.cloneElement(child, {
-          compact: child.props.compact !== false,
-        })
+      {React.Children.map(
+        props.children,
+        child =>
+          typeof child === 'object' && child !== null
+            ? /* $FlowFixMe */
+              React.cloneElement(child, {
+                /* $FlowFixMe */
+                compact: child.props.compact !== false,
+              })
+            : child
       )}
     </View>
   );

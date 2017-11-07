@@ -1,15 +1,23 @@
 /* @flow */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Colors, Caption, SearchBar, withTheme } from 'react-native-paper';
+import type { Theme } from 'react-native-paper/types';
 
-class SearchExample extends Component {
+type Props = {
+  navigation: any,
+  theme: Theme,
+};
+
+type State = {
+  firstQuery: string,
+  secondQuery: string,
+  thirdQuery: string,
+};
+
+class SearchExample extends React.Component<Props, State> {
   static title = 'Search bar';
-  static propTypes = {
-    theme: PropTypes.object.isRequired,
-  };
 
   state = {
     firstQuery: '',

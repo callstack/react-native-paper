@@ -1,12 +1,30 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import { View, Platform, StatusBar, StyleSheet } from 'react-native';
-import { Colors, Button, Toolbar } from 'react-native-paper';
+import {
+  Colors,
+  Button,
+  Toolbar,
+  ToolbarContent,
+  ToolbarAction,
+  ToolbarBackAction,
+} from 'react-native-paper';
+
+type Props = {
+  navigation: any,
+};
+
+type State = {
+  showLeftIcon: boolean,
+  showSearchIcon: boolean,
+  showMoreIcon: boolean,
+  showSubtitle: boolean,
+};
 
 const MORE_ICON = Platform.OS === 'ios' ? 'more-horiz' : 'more-vert';
 
-export default class ToolbarExample extends Component {
+export default class ToolbarExample extends React.Component<Props, State> {
   static title = 'Toolbar';
   static navigationOptions = ({ navigation }) => {
     return {
@@ -16,19 +34,17 @@ export default class ToolbarExample extends Component {
           statusBarHeight={Platform.OS === 'ios' ? 20 : StatusBar.currentHeight}
         >
           {navigation.params.showLeftIcon && (
-            <Toolbar.BackAction
-              onPress={() => this.props.navigation.goBack()}
-            />
+            <ToolbarBackAction onPress={() => navigation.goBack()} />
           )}
-          <Toolbar.Content
+          <ToolbarContent
             title="Title"
             subtitle={navigation.params.showSubtitle ? 'Subtitle' : null}
           />
           {navigation.params.showSearchIcon && (
-            <Toolbar.Action icon="search" onPress={() => {}} />
+            <ToolbarAction icon="search" onPress={() => {}} />
           )}
           {navigation.params.showMoreIcon && (
-            <Toolbar.Action icon={MORE_ICON} onPress={() => {}} />
+            <ToolbarAction icon={MORE_ICON} onPress={() => {}} />
           )}
         </Toolbar>
       ),

@@ -1,9 +1,9 @@
 /* @flow */
 
-import React, { PureComponent } from 'react';
+import * as React from 'react';
 import { Animated, StyleSheet, VirtualizedList } from 'react-native';
 import withTheme from '../core/withTheme';
-import type { Theme } from '../types/Theme';
+import type { Theme } from '../types';
 
 type Props = {
   /**
@@ -22,18 +22,13 @@ type Props = {
    * Function which should return ID base on the item.
    */
   keyExtractor: (item: any) => string,
-  contentContainerStyle: ?Object,
+  contentContainerStyle?: ?Object,
   /**
    * Component for rendering item
    */
-  renderItem: (item: any) => React$Element<*>,
+  renderItem: (item: any) => React.Element<any>,
   onLayout?: Function,
   theme: Theme,
-};
-
-type DefaultProps = {
-  getNumberOfColumns: (width: number) => number,
-  spacing: number,
 };
 
 type State = {
@@ -97,7 +92,7 @@ type State = {
  * }
  * ```
  */
-class GridView extends PureComponent<DefaultProps, Props, State> {
+class GridView extends React.Component<Props, State> {
   static defaultProps = {
     getNumberOfColumns: () => 1,
     spacing: 0,
@@ -160,10 +155,13 @@ class GridView extends PureComponent<DefaultProps, Props, State> {
         onLayout={this._handleLayout}
         renderItem={this._renderItem}
         keyExtractor={keyExtractor}
-        ref={c => (this._root = c)}
+        ref={(c: any) => (this._root = c)}
         contentContainerStyle={[
           styles.grid,
-          { padding: spacing / 2, backgroundColor: theme.colors.background },
+          {
+            padding: spacing / 2,
+            backgroundColor: theme.colors.background,
+          },
           this.props.contentContainerStyle,
         ]}
       />

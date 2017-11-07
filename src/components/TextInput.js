@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import {
   View,
   Animated,
@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Text from './Typography/Text';
 import withTheme from '../core/withTheme';
-import type { Theme } from '../types/Theme';
+import type { Theme } from '../types';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
@@ -58,10 +58,6 @@ type Props = {
   theme: Theme,
 };
 
-type DefaultProps = {
-  disabled: boolean,
-};
-
 type State = {
   focused: Animated.Value,
   placeholder: ?string,
@@ -93,7 +89,7 @@ type State = {
  *
  */
 
-class TextInput extends Component<DefaultProps, Props, State> {
+class TextInput extends React.Component<Props, State> {
   static defaultProps = {
     disabled: false,
   };
@@ -141,7 +137,7 @@ class TextInput extends Component<DefaultProps, Props, State> {
 
   _timer: any;
   _root: any;
-  _setRef = (c: Object) => (this._root = c);
+  _setRef: any = (c: Object) => (this._root = c);
 
   _animateFocus = () => {
     Animated.timing(this.state.focused, {

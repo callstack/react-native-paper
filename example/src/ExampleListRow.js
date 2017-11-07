@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { Text, StyleSheet } from 'react-native';
 import { TouchableRipple, withTheme } from 'react-native-paper';
 
@@ -11,12 +10,6 @@ const ExampleListRow = ({ title, theme, onPress }) => (
     <Text style={[styles.text, { color: theme.colors.text }]}>{title}</Text>
   </TouchableRipple>
 );
-
-ExampleListRow.propTypes = {
-  title: PropTypes.string.isRequired,
-  onPress: PropTypes.func,
-  theme: PropTypes.object.isRequired,
-};
 
 const styles = StyleSheet.create({
   item: {

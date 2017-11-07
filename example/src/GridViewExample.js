@@ -1,11 +1,21 @@
 // @flow
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Colors, Card, Text, GridView } from 'react-native-paper';
+import type { Theme } from 'react-native-paper/types';
+
+type Props = {
+  theme: Theme,
+};
+
+type State = {
+  items: Array<{ id: number }>,
+};
+
 const CARD_SIZE = 160;
 
-export default class GridViewExample extends Component {
+export default class GridViewExample extends React.Component<Props, State> {
   static title = 'GridView';
 
   state = {

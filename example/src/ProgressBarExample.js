@@ -1,15 +1,16 @@
 /* @flow */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { ProgressBar, Paragraph, Colors, withTheme } from 'react-native-paper';
+import type { Theme } from 'react-native-paper/types';
 
-class ProgressBarExample extends Component {
+type Props = {
+  theme: Theme,
+};
+
+class ProgressBarExample extends React.Component<Props> {
   static title = 'Progress bar';
-  static propTypes = {
-    theme: PropTypes.object.isRequired,
-  };
 
   render() {
     const { theme: { colors: { background } } } = this.props;

@@ -1,7 +1,15 @@
 /* @flow */
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Paragraph, Button, Dialog } from 'react-native-paper';
+
+import * as React from 'react';
+import {
+  Paragraph,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogActions,
+  DialogContent,
+  Colors,
+} from 'react-native-paper';
 
 const DialogWithLongText = ({
   visible,
@@ -11,22 +19,19 @@ const DialogWithLongText = ({
   close: Function,
 }) => (
   <Dialog onRequestClose={close} visible={visible} dismissable={false}>
-    <Dialog.Title>Alert</Dialog.Title>
-    <Dialog.Content>
+    <DialogTitle>Alert</DialogTitle>
+    <DialogContent>
       <Paragraph>This is an undismissable dialog!!</Paragraph>
-    </Dialog.Content>
-    <Dialog.Actions>
-      <Button disabled>Disagree</Button>
+    </DialogContent>
+    <DialogActions>
+      <Button color={Colors.teal500} disabled>
+        Disagree
+      </Button>
       <Button primary onPress={close}>
         Agree
       </Button>
-    </Dialog.Actions>
+    </DialogActions>
   </Dialog>
 );
-
-DialogWithLongText.propTypes = {
-  visible: PropTypes.bool,
-  close: PropTypes.func,
-};
 
 export default DialogWithLongText;

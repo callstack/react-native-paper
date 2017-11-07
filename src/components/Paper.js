@@ -1,15 +1,14 @@
 /* @flow */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { View, ViewPropTypes, StyleSheet } from 'react-native';
+import * as React from 'react';
+import { View, StyleSheet } from 'react-native';
 import shadow from '../styles/shadow';
 import withTheme from '../core/withTheme';
 import * as Colors from '../styles/colors';
-import type { Theme } from '../types/Theme';
+import type { Theme } from '../types';
 
 type Props = {
-  children?: any,
+  children: React.Node,
   style?: any,
   theme: Theme,
 };
@@ -38,13 +37,7 @@ type Props = {
  * ```
  * Note: Pass *elevation* style, to apply shadow to the component. Defaults to 2.
  */
-class Paper extends Component<void, Props, void> {
-  static propTypes = {
-    children: PropTypes.node,
-    theme: PropTypes.object.isRequired,
-    style: ViewPropTypes.style,
-  };
-
+class Paper extends React.Component<Props> {
   render() {
     const { style, theme, ...restOfProps } = this.props;
     const flattenedStyles = StyleSheet.flatten(style) || {};

@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { Children, PureComponent } from 'react';
+import * as React from 'react';
 import {
   TouchableNativeFeedback,
   TouchableHighlight,
@@ -12,18 +12,13 @@ import color from 'color';
 const ANDROID_VERSION_LOLLIPOP = 21;
 
 type Props = {
-  borderless: boolean,
+  borderless?: boolean,
   background?: Object,
   onPress?: ?Function,
-  rippleColor: string,
+  rippleColor?: string,
   underlayColor?: string,
-  children?: any,
+  children: React.Node,
   style?: any,
-};
-
-type DefaultProps = {
-  borderless: boolean,
-  rippleColor: string,
 };
 
 /**
@@ -44,11 +39,7 @@ type DefaultProps = {
  * );
  * ```
  */
-export default class TouchableItem extends PureComponent<
-  DefaultProps,
-  Props,
-  void
-> {
+export default class TouchableRipple extends React.Component<Props, void> {
   static defaultProps = {
     borderless: false,
     rippleColor: 'rgba(0, 0, 0, .32)',
@@ -78,12 +69,13 @@ export default class TouchableItem extends PureComponent<
               : TouchableNativeFeedback.Ripple(rippleColor, borderless)
           }
         >
-          <View style={style}>{Children.only(children)}</View>
+          <View style={style}>{React.Children.only(children)}</View>
         </TouchableNativeFeedback>
       );
     }
 
     return (
+      /* $FlowFixMe */
       <TouchableHighlight
         {...rest}
         style={style}
@@ -95,7 +87,7 @@ export default class TouchableItem extends PureComponent<
                 .rgbaString()
         }
       >
-        {Children.only(children)}
+        {React.Children.only(children)}
       </TouchableHighlight>
     );
   }

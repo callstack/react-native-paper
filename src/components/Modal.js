@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { PureComponent } from 'react';
+import * as React from 'react';
 import {
   Animated,
   View,
@@ -12,7 +12,6 @@ import {
 import ThemedPortal from './Portal/ThemedPortal';
 
 type Props = {
-  children?: any,
   /**
    * Determines whether clicking outside the dialog dismiss it, true by default
    */
@@ -20,16 +19,12 @@ type Props = {
   /**
    * Callback that is called when the user dismisses the dialog
    */
-  onRequestClose?: Function,
+  onRequestClose: Function,
   /**
    * Determines Whether the dialog is visible
    */
   visible: boolean,
-};
-
-type DefaultProps = {
-  dismissable: boolean,
-  visible: boolean,
+  children: React.Node,
 };
 
 type State = {
@@ -40,9 +35,8 @@ type State = {
 /**
  * The Modal component is a simple way to present content above an enclosing view.
  *
- * **Usage:**
  * ```
- * export default class MyComponent extends Component {
+ * export default class MyComponent extends React.Component {
  *   state = {
  *     visible: false,
  *   };
@@ -62,7 +56,7 @@ type State = {
  * ```
  */
 
-export default class Modal extends PureComponent<DefaultProps, Props, State> {
+export default class Modal extends React.Component<Props, State> {
   static defaultProps = {
     dismissable: true,
     visible: false,

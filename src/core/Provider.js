@@ -1,27 +1,21 @@
 /* @flow */
 
-import React, { PureComponent, Children } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import ThemeProvider from './ThemeProvider';
 import PortalHost from '../components/Portal/PortalHost';
-import type { Theme } from '../types/Theme';
+import type { Theme } from '../types';
 
 type Props = {
-  children?: any,
+  children: React.Node,
   theme?: Theme,
 };
 
-export default class Provider extends PureComponent<void, Props, void> {
-  static propTypes = {
-    children: PropTypes.element.isRequired,
-    theme: PropTypes.object,
-  };
-
+export default class Provider extends React.Component<Props> {
   render() {
     return (
       <PortalHost>
         <ThemeProvider theme={this.props.theme}>
-          {Children.only(this.props.children)}
+          {React.Children.only(this.props.children)}
         </ThemeProvider>
       </PortalHost>
     );

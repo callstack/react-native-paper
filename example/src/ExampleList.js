@@ -1,15 +1,14 @@
 /* @flow */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { ListView } from 'react-native';
 import { Divider, withTheme } from 'react-native-paper';
-import ExampleListRow from './ExampleListRow';
 import ButtonExample from './ButtonExample';
 import CardExample from './CardExample';
 import CheckboxExample from './CheckboxExample';
 import DialogExample from './DialogExample';
 import DividerExample from './DividerExample';
+import ExampleListRow from './ExampleListRow';
 import FABExample from './FABExample';
 import GridViewExample from './GridViewExample';
 import PaperExample from './PaperExample';
@@ -21,6 +20,12 @@ import SwitchExample from './SwitchExample';
 import TextExample from './TextExample';
 import TextInputExample from './TextInputExample';
 import ToolbarExample from './ToolbarExample';
+import type { Theme } from 'react-native-paper/types';
+
+type Props = {
+  theme: Theme,
+  navigation: any,
+};
 
 export const examples = {
   button: ButtonExample,
@@ -44,14 +49,9 @@ export const examples = {
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 const dataSource = ds.cloneWithRows(Object.keys(examples));
 
-class ExampleList extends Component {
+class ExampleList extends React.Component<Props> {
   static navigationOptions = {
     title: 'Examples',
-  };
-
-  static propTypes = {
-    theme: PropTypes.object.isRequired,
-    navigation: PropTypes.object,
   };
 
   _renderRow = id => (

@@ -1,7 +1,15 @@
 /* @flow */
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Paragraph, Button, Dialog, Colors } from 'react-native-paper';
+
+import * as React from 'react';
+import {
+  Paragraph,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogActions,
+  DialogContent,
+  Colors,
+} from 'react-native-paper';
 
 const DialogWithCustomColors = ({
   visible,
@@ -15,23 +23,18 @@ const DialogWithCustomColors = ({
     style={{ backgroundColor: Colors.purple900 }}
     visible={visible}
   >
-    <Dialog.Title style={{ color: Colors.white }}>Alert</Dialog.Title>
-    <Dialog.Content>
+    <DialogTitle style={{ color: Colors.white }}>Alert</DialogTitle>
+    <DialogContent>
       <Paragraph style={{ color: Colors.white }}>
         This is a dialog with custom colors
       </Paragraph>
-    </Dialog.Content>
-    <Dialog.Actions>
-      <Button color={Colors.pink500} onPress={close}>
+    </DialogContent>
+    <DialogActions>
+      <Button color={Colors.teal500} onPress={close}>
         OK
       </Button>
-    </Dialog.Actions>
+    </DialogActions>
   </Dialog>
 );
-
-DialogWithCustomColors.propTypes = {
-  visible: PropTypes.bool,
-  close: PropTypes.func,
-};
 
 export default DialogWithCustomColors;

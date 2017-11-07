@@ -1,20 +1,25 @@
 /* @flow */
 
-import React, { Children } from 'react';
+import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 type Props = {
-  children?: any,
+  children: React.Node,
   style?: any,
 };
 
 const DialogActions = (props: Props) => {
   return (
     <View {...props} style={[styles.container, props.style]}>
-      {Children.map(props.children, child =>
-        React.cloneElement(child, {
-          compact: true,
-        })
+      {React.Children.map(
+        props.children,
+        child =>
+          typeof child === 'object' && child !== null
+            ? /* $FlowFixMe */
+              React.cloneElement(child, {
+                compact: true,
+              })
+            : child
       )}
     </View>
   );

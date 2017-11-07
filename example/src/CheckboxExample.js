@@ -1,7 +1,6 @@
 /* @flow */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import {
   Paragraph,
@@ -10,12 +9,19 @@ import {
   TouchableRipple,
   withTheme,
 } from 'react-native-paper';
+import type { Theme } from 'react-native-paper/types';
 
-class CheckboxExample extends Component {
+type Props = {
+  theme: Theme,
+};
+
+type State = {
+  checkedNormal: boolean,
+  checkedCustom: boolean,
+};
+
+class CheckboxExample extends React.Component<Props, State> {
   static title = 'Checkbox';
-  static propTypes = {
-    theme: PropTypes.object.isRequired,
-  };
 
   state = {
     checkedNormal: true,
