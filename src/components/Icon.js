@@ -1,9 +1,10 @@
 /* @flow */
-import React from 'react';
-import { Image, View } from 'react-native';
+
+import * as React from 'react';
+import { Image, View, StyleSheet } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-export type IconSource = string | { uri: string } | number | React.Element<*>;
+export type IconSource = string | { uri: string } | number | React.Node;
 
 export type Props = {
   name: IconSource,
@@ -17,8 +18,8 @@ const Icon = ({ name, ...props }: Props) => {
     return <MaterialIcons {...props} name={name} />;
   } else if (
     (typeof name === 'object' &&
-      name.hasOwnProperty('uri') &&
-      typeof name.uri === 'string') ||
+      name !== null &&
+      (name.hasOwnProperty('uri') && typeof name.uri === 'string')) ||
     typeof name === 'number'
   ) {
     return (
@@ -34,24 +35,31 @@ const Icon = ({ name, ...props }: Props) => {
         ]}
       />
     );
+  } else {
+    return (
+      <View
+        {...props}
+        style={[
+          {
+            width: props.size,
+            height: props.size,
+          },
+          styles.container,
+          props.style,
+        ]}
+      >
+        {(name: any)}
+      </View>
+    );
   }
-  return (
-    <View
-      {...props}
-      style={[
-        {
-          width: '100%',
-          height: '100%',
-          justifyContent: 'center',
-          alignItems: 'center',
-          overflow: 'hidden',
-        },
-        props.style,
-      ]}
-    >
-      {name}
-    </View>
-  );
 };
 
 export default Icon;
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+  },
+});

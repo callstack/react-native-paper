@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import color from 'color';
 
@@ -9,7 +9,7 @@ import Text from '../Typography/Text';
 import withTheme from '../../core/withTheme';
 import { white } from '../../styles/colors';
 
-import type { Theme } from '../../types/Theme';
+import type { Theme } from '../../types';
 
 type Props = {
   /**
@@ -17,17 +17,17 @@ type Props = {
    */
   dark?: boolean,
   /**
-   * Text for the subtitle
-   */
-  subtitle?: string | React.Element<*>,
-  /**
    * Text for the title
    */
-  title: string | React.Element<*>,
+  title: string | React.Node,
   /**
    * Style for the title
    */
   titleStyle?: any,
+  /**
+   * Text for the subtitle
+   */
+  subtitle?: string | React.Node,
   /**
    * Style for the subtitle
    */
@@ -36,7 +36,7 @@ type Props = {
   style?: any,
 };
 
-class ToolbarContent extends Component<void, Props, void> {
+class ToolbarContent extends React.Component<Props> {
   render() {
     const {
       dark,

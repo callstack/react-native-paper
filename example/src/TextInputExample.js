@@ -1,11 +1,20 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import { ScrollView, StyleSheet } from 'react-native';
 import { TextInput, withTheme } from 'react-native-paper';
+import type { Theme } from 'react-native-paper/types';
 
-class TextInputExample extends Component {
+type Props = {
+  theme: Theme,
+};
+
+type State = {
+  text: string,
+};
+
+class TextInputExample extends React.Component<Props, State> {
   static title = 'TextInput';
   static propTypes = {
     theme: PropTypes.object.isRequired,

@@ -1,22 +1,26 @@
 /* @flow */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import {
   Title,
   Caption,
   Paragraph,
   Card,
+  CardCover,
+  CardActions,
+  CardContent,
   Button,
   withTheme,
 } from 'react-native-paper';
+import type { Theme } from 'react-native-paper/types';
 
-class CardExample extends Component {
+type Props = {
+  theme: Theme,
+};
+
+class CardExample extends React.Component<Props> {
   static title = 'Card';
-  static propTypes = {
-    theme: PropTypes.object.isRequired,
-  };
 
   render() {
     const { theme: { colors: { background } } } = this.props;
@@ -26,8 +30,8 @@ class CardExample extends Component {
         contentContainerStyle={styles.content}
       >
         <Card>
-          <Card.Cover source={require('../assets/wrecked-ship.jpg')} />
-          <Card.Content>
+          <CardCover source={require('../assets/wrecked-ship.jpg')} />
+          <CardContent>
             <Title>Abandoned Ship</Title>
             <Paragraph>
               The Abandoned Ship is a wrecked ship located on Route 108 in
@@ -35,17 +39,17 @@ class CardExample extends Component {
               part of the ship can only be accessed by using Dive and contains
               the Scanner.
             </Paragraph>
-          </Card.Content>
+          </CardContent>
         </Card>
         <Card>
-          <Card.Cover source={require('../assets/forest.jpg')} />
-          <Card.Actions>
+          <CardCover source={require('../assets/forest.jpg')} />
+          <CardActions>
             <Button primary>Cancel</Button>
             <Button primary>Ok</Button>
-          </Card.Actions>
+          </CardActions>
         </Card>
         <Card>
-          <Card.Content>
+          <CardContent>
             <Title>Berries</Title>
             <Caption>Omega Ruby</Caption>
             <Paragraph>
@@ -55,10 +59,10 @@ class CardExample extends Component {
               berries. These can be any berry and will require attention to get
               the best crop.
             </Paragraph>
-          </Card.Content>
+          </CardContent>
         </Card>
         <Card>
-          <Card.Cover source={require('../assets/strawberries.jpg')} />
+          <CardCover source={require('../assets/strawberries.jpg')} />
         </Card>
       </ScrollView>
     );

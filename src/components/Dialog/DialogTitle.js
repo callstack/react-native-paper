@@ -1,10 +1,10 @@
 /* @flow */
 
-import React from 'react';
+import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import Title from '../Typography/Title';
 import withTheme from '../../core/withTheme';
-import type { Theme } from '../../types/Theme';
+import type { Theme } from '../../types';
 
 type Props = {
   children: any,

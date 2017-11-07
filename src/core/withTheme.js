@@ -1,24 +1,23 @@
 /* @flow */
 
-import React, { PureComponent } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
 import ThemeProvider, { channel } from './ThemeProvider';
-import type { Theme } from '../types/Theme';
+import type { Theme } from '../types';
 
 type State = {
   theme: Theme,
 };
 
-const isClassComponent = Component => !!Component.prototype.render;
+const isClassComponent = (Component: Function) => !!Component.prototype.render;
 
-export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
-  class ThemedComponent extends PureComponent<void, *, State> {
+export default function withTheme<Props: {}>(
+  // TODO: this should be React.ComponentType<{ theme: Theme } & Props>
+  Comp: React.ComponentType<any>
+): React.ComponentType<Props> {
+  class ThemedComponent extends React.Component<*, State> {
+    /* $FlowFixMe */
     static displayName = `withTheme(${Comp.displayName || Comp.name})`;
-
-    static propTypes = {
-      theme: PropTypes.object,
-    };
 
     static contextTypes = {
       [channel]: PropTypes.object,
@@ -72,7 +71,8 @@ export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
       // Only merge if both theme from context and props are present
       // Avoiding unnecessary merge allows us to check equality by reference
       return theme && props.theme
-        ? _.merge({}, theme, props.theme)
+        ? // TODO: deep merge
+          { ...theme, ...props.theme }
         : theme || props.theme;
     };
 
@@ -119,6 +119,7 @@ export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
     };
 
     // setNativeProps is used by Animated to set props on the native component
+    /* $FlowFixMe */
     if (Comp.prototype.setNativeProps) {
       // $FlowFixMe
       ThemedComponent.prototype.setNativeProps = function(...args) {
@@ -133,8 +134,8 @@ export default function withTheme<T: *>(Comp: ReactClass<T>): ReactClass<T> {
     if (prop !== 'displayName' && prop !== 'contextTypes') {
       if (prop === 'propTypes') {
         // Only the underlying component will receive the theme prop
-        // eslint-disable-next-line no-shadow, no-unused-vars
-        const { theme, ...propTypes } = Comp[prop];
+        /* $FlowFixMe */
+        const { theme, ...propTypes } = Comp[prop]; // eslint-disable-line no-shadow, no-unused-vars
         /* $FlowFixMe */
         ThemedComponent[prop] = propTypes;
       } else {

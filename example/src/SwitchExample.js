@@ -1,7 +1,6 @@
 /* @flow */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
 import {
   Paragraph,
@@ -10,12 +9,20 @@ import {
   TouchableRipple,
   withTheme,
 } from 'react-native-paper';
+import type { Theme } from 'react-native-paper/types';
 
-class SwitchExample extends Component {
+type Props = {
+  theme: Theme,
+};
+
+type State = {
+  valueNormal: boolean,
+  valueCustom: boolean,
+};
+
+class SwitchExample extends React.Component<Props, State> {
   static title = 'Switch';
-  static propTypes = {
-    theme: PropTypes.object.isRequired,
-  };
+
   state = {
     valueNormal: true,
     valueCustom: true,

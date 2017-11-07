@@ -1,15 +1,13 @@
 /* @flow */
 
-import React, { Children, Component } from 'react';
+import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 
 import withTheme from '../../core/withTheme';
 import Paper from '../Paper';
 import ToolbarContent from './ToolbarContent';
-import ToolbarAction from './ToolbarAction';
 
-import type { Theme } from '../../types/Theme';
-import ToolbarBackAction from './ToolbarBackAction';
+import type { Theme } from '../../types';
 
 type Props = {
   /**
@@ -18,19 +16,15 @@ type Props = {
    */
   dark?: boolean,
   /**
-   * Toolbar content
-   */
-  children?: any,
-  style?: any,
-  /**
    * Space added it Toolbar to adapt to the StatusBar
    */
   statusBarHeight?: number,
+  /**
+   * Toolbar content
+   */
+  children: React.Node,
   theme: Theme,
-};
-
-type DefaultProps = {
-  statusBarHeight: number,
+  style?: any,
 };
 
 /**
@@ -57,14 +51,10 @@ type DefaultProps = {
  * }
  * ```
  */
-class Toolbar extends Component<DefaultProps, Props, void> {
+class Toolbar extends React.Component<Props> {
   static defaultProps = {
     statusBarHeight: Platform.OS === 'ios' ? 20 : 0,
   };
-
-  static Content = ToolbarContent;
-  static Action = ToolbarAction;
-  static BackAction = ToolbarBackAction;
 
   render() {
     const {
@@ -89,7 +79,7 @@ class Toolbar extends Component<DefaultProps, Props, void> {
       height: (heightProp || toolbarHeight) + statusBarHeight,
     };
 
-    const childrenArray = Children.toArray(children);
+    const childrenArray = React.Children.toArray(children);
     let isToolbarContentFound = false;
     let leftActions = 0,
       rightActions = 0;
@@ -131,7 +121,7 @@ class Toolbar extends Component<DefaultProps, Props, void> {
         ]}
         {...rest}
       >
-        {childrenArray.filter(child => child).map((child, i) => {
+        {childrenArray.filter(child => child).map((child: any, i) => {
           const props: { dark: ?boolean, style?: any } = {
             dark:
               typeof child.props.dark === 'undefined' ? dark : child.props.dark,

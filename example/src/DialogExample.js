@@ -1,7 +1,6 @@
 /* @flow */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Colors, Button, withTheme } from 'react-native-paper';
 import {
@@ -11,12 +10,22 @@ import {
   DialogWithRadioBtns,
   UndismissableDialog,
 } from './Dialogs';
+import type { Theme } from 'react-native-paper/types';
 
-class DialogExample extends Component {
+type State = {
+  visible1: boolean,
+  visible2: boolean,
+  visible3: boolean,
+  visible4: boolean,
+  visible5: boolean,
+};
+
+type Props = {
+  theme: Theme,
+};
+
+class DialogExample extends React.Component<Props, State> {
   static title = 'Dialog';
-  static propTypes = {
-    theme: PropTypes.object.isRequired,
-  };
 
   state = {
     visible1: false,

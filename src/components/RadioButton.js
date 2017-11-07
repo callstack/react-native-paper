@@ -1,11 +1,11 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import { Animated, View, Platform, StyleSheet } from 'react-native';
 import color from 'color';
 import TouchableRipple from './TouchableRipple';
 import withTheme from '../core/withTheme';
-import type { Theme } from '../types/Theme';
+import type { Theme } from '../types';
 
 type Props = {
   /**
@@ -63,7 +63,7 @@ const BORDER_WIDTH = 2;
  * }
  * ```
  */
-class RadioButton extends Component<void, Props, State> {
+class RadioButton extends React.Component<Props, State> {
   state = {
     borderAnim: new Animated.Value(BORDER_WIDTH),
     radioAnim: new Animated.Value(1),

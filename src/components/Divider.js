@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from 'react';
+import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types/Theme';
