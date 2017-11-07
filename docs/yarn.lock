@@ -1462,9 +1462,9 @@ commondir@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
 
-component-docs@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/component-docs/-/component-docs-0.2.0.tgz#0e9c8534955026e7b2e408a7ce574489d645bc9f"
+component-docs@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/component-docs/-/component-docs-0.3.0.tgz#5d29aa69b1d3547379b8672b38a713edfd7936ce"
   dependencies:
     highlight.js "^9.12.0"
     history "^4.7.2"
