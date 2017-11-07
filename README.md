@@ -45,12 +45,12 @@ Example:
 ```js
 import React from 'react';
 import { AppRegistry } from 'react-native';
-import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
+import { Provider as PaperProvider } from 'react-native-paper';
 import App from './src/App';
 
 function Main() {
   return (
-    <PaperProvider theme={DefaultTheme}>
+    <PaperProvider>
       <App />
     </PaperProvider>
   );
@@ -69,6 +69,8 @@ You can provide a custom theme to customize the colors, fonts etc. with the `Pro
 Example:
 
 ```js
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+
 const theme = {
   ...DefaultTheme,
   colors: {
