@@ -33,7 +33,7 @@ const ProgressBarComponent = Platform.select({
  * Progress bar is an indicator used to present some activity in the app
  *
  * **Usage:**
- * ```
+ * ```js
  * const MyComponent = () => (
  *   <ProgressBar progress={0.5} color={Colors.red800} />
  * );

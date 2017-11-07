@@ -71,7 +71,7 @@ type State = {
  * Buttons communicate the action that will occur when the user touches them
  *
  * **Usage:**
- * ```
+ * ```js
  * const MyComponent = () => (
  *   <Button raised onPress={() => console.log('Pressed')}>
  *     Press me

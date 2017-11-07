@@ -17,7 +17,7 @@ type Props = {
  * Drawer container slides in from the left and contains the navigation destinations for your app
  *
  * **Usage:**
- * ```
+ * ```js
  * export default class MyComponent extends Component {
  *   state = {
  *     active: 'First Item',

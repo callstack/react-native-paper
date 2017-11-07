@@ -17,7 +17,7 @@ type Props = {
  * Paper is a basic container that can give depth to the page.
  *
  * **Usage:**
- * ```
+ * ```js
  * const MyComponent = () => (
  *   <Paper style={styles.paper}>
  *      <Text>Paper</Text>

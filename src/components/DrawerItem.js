@@ -26,7 +26,7 @@ type Props = {
  * Item from drawer's list which navigates to speficic location
  *
  * **Usage:**
- * ```
+ * ```js
  * const MyComponent = () => (
  *   <DrawerItem label="First Item" />
  * );

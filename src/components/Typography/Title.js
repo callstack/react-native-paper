@@ -12,7 +12,7 @@ type Props = {
  * Title - typography style
  *
  * **Usage:**
- * ```
+ * ```js
  * const MyComponent = () => (
  *   <Title>Title</Title>
  * );

@@ -12,7 +12,7 @@ type Props = {
  * Headline - typography style
  *
  * **Usage:**
- * ```
+ * ```js
  * const MyComponent = () => (
  *   <Headline>Headline</Headline>
  * );

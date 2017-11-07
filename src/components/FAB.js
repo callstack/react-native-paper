@@ -40,7 +40,7 @@ type Props = {
  * A floating action button represents the primary action in an application
  *
  * **Usage:**
- * ```
+ * ```js
  * const MyComponent = () => (
  *   <FAB
  *     small
