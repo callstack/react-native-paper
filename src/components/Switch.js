@@ -1,11 +1,11 @@
 /* @flow */
+import * as React from 'react';
 
-import React, { Component } from 'react';
 import { grey400, grey800, grey50, white, black } from '../styles/colors';
 import { View, Switch, Platform } from 'react-native';
 import withTheme from '../core/withTheme';
 import setColor from 'color';
-import type { Theme } from '../types/Theme';
+import type { Theme } from '../types';
 
 type Props = {
   /**
@@ -52,7 +52,7 @@ type Props = {
  * }
  * ```
  */
-class SwitchRow extends Component<void, Props, void> {
+class SwitchRow extends React.Component<Props> {
   render() {
     const {
       value,

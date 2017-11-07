@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 import color from 'color';
 
@@ -31,7 +31,7 @@ type Props = {
   style?: any,
 };
 
-export default class ToolbarAction extends Component<void, Props, void> {
+export default class ToolbarAction extends React.Component<Props> {
   render() {
     const { dark, icon, onPress, size, style, ...rest } = this.props;
 

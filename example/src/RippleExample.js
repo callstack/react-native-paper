@@ -1,15 +1,16 @@
 /* @flow */
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { TouchableRipple, withTheme, Paragraph } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { TouchableRipple, withTheme, Paragraph } from 'react-native-paper';
+import type { Theme } from 'react-native-paper/types';
 
-class RippleExample extends Component {
+type Props = {
+  theme: Theme,
+};
+
+class RippleExample extends React.Component<Props> {
   static title = 'Ripples';
-  static propTypes = {
-    theme: PropTypes.object.isRequired,
-  };
 
   render() {
     const { theme: { colors: { background } } } = this.props;

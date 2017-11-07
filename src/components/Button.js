@@ -1,7 +1,7 @@
 /* @flow */
 
 import color from 'color';
-import React, { PureComponent } from 'react';
+import * as React from 'react';
 import { ActivityIndicator, Animated, View, StyleSheet } from 'react-native';
 import Icon from './Icon';
 import Paper from './Paper';
@@ -9,7 +9,7 @@ import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple';
 import { black, white } from '../styles/colors';
 import withTheme from '../core/withTheme';
-import type { Theme } from '../types/Theme';
+import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
@@ -40,7 +40,7 @@ type Props = {
    */
   loading?: boolean,
   /**
-   * Icon name.
+   * Name of the icon
    * Can be a string (name of MaterialIcon),
    * an object {of shape {uri: 'https://path.to'}},
    * required image from assets (const icon = reqiure('../path/to/image.png')),
@@ -54,7 +54,7 @@ type Props = {
   /**
    * Button text
    */
-  children?: string | Array<string>,
+  children: string | Array<string>,
   /**
    * Function to execute on press
    */
@@ -79,7 +79,7 @@ type State = {
  * );
  * ```
  */
-class Button extends PureComponent<void, Props, State> {
+class Button extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -129,8 +129,12 @@ class Button extends PureComponent<void, Props, State> {
     if (raised) {
       if (disabled) {
         isDarkActive
-          ? (backgroundColor = 'rgba(255, 255, 255, .12)')
-          : (backgroundColor = 'rgba(0, 0, 0, .12)');
+          ? (backgroundColor = color(white)
+              .alpha(0.12)
+              .rgbaString())
+          : (backgroundColor = color(black)
+              .alpha(0.12)
+              .rgbaString());
       } else {
         if (buttonColor) {
           backgroundColor = buttonColor;
@@ -157,8 +161,12 @@ class Button extends PureComponent<void, Props, State> {
 
     if (disabled) {
       textColor = isDarkTheme
-        ? 'rgba(255, 255, 255, .30)'
-        : 'rgba(0, 0, 0, .26)';
+        ? color(white)
+            .alpha(0.3)
+            .rgbaString()
+        : color(black)
+            .alpha(0.26)
+            .rgbaString();
     } else {
       if (raised) {
         textColor = isDarkActive ? white : black;
@@ -204,12 +212,10 @@ class Button extends PureComponent<void, Props, State> {
             { fontFamily },
           ]}
         >
-          {children
-            ? (Array.isArray(children)
-                ? children.join('')
-                : children
-              ).toUpperCase()
-            : ''}
+          {React.Children.map(
+            children,
+            child => (typeof child === 'string' ? child.toUpperCase() : child)
+          )}
         </Text>
       </View>
     );

@@ -1,10 +1,9 @@
 /* @flow */
 
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { Text as NativeText } from 'react-native';
 import withTheme from '../../core/withTheme';
-import type { Theme } from '../../types/Theme';
+import type { Theme } from '../../types';
 
 type Props = {
   style?: any,
@@ -16,12 +15,7 @@ type Props = {
  *
  * @extends Text props https://facebook.github.io/react-native/docs/text.html#props
  */
-class Text extends PureComponent<void, Props, void> {
-  static propTypes = {
-    theme: PropTypes.object.isRequired,
-    style: NativeText.propTypes.style,
-  };
-
+class Text extends React.Component<Props> {
   _root: any;
 
   setNativeProps(...args) {

@@ -1,7 +1,6 @@
 /* @flow */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import {
   Paragraph,
@@ -10,12 +9,18 @@ import {
   TouchableRipple,
   withTheme,
 } from 'react-native-paper';
+import type { Theme } from 'react-native-paper/types';
 
-class RadioButtonExample extends Component {
+type Props = {
+  theme: Theme,
+};
+
+type State = {
+  checked: 'normal' | 'custom',
+};
+
+class RadioButtonExample extends React.Component<Props, State> {
   static title = 'Radio button';
-  static propTypes = {
-    theme: PropTypes.object.isRequired,
-  };
 
   state = {
     checked: 'normal',

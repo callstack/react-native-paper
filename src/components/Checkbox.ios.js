@@ -1,12 +1,12 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import color from 'color';
 import Icon from './Icon';
 import TouchableRipple from './TouchableRipple';
 import withTheme from '../core/withTheme';
-import type { Theme } from '../types/Theme';
+import type { Theme } from '../types';
 
 type Props = {
   /**
@@ -31,7 +31,7 @@ type Props = {
 /**
  * Checkboxes allow the selection of multiple options from a set
  */
-class Checkbox extends Component<void, Props, void> {
+class Checkbox extends React.Component<Props> {
   render() {
     const { checked, disabled, onPress, theme, ...rest } = this.props;
 

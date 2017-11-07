@@ -1,11 +1,10 @@
 /* @flow */
 
 import color from 'color';
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import Text from './Text';
 import withTheme from '../../core/withTheme';
-import type { Theme } from '../../types/Theme';
+import type { Theme } from '../../types';
 
 type Props = {
   alpha: number,
@@ -14,14 +13,7 @@ type Props = {
   theme: Theme,
 };
 
-class StyledText extends PureComponent<void, Props, void> {
-  static propTypes = {
-    alpha: PropTypes.number.isRequired,
-    family: PropTypes.string.isRequired,
-    theme: PropTypes.object.isRequired,
-    style: Text.propTypes.style,
-  };
-
+class StyledText extends React.Component<Props> {
   render() {
     const { theme, alpha, family, style, ...rest } = this.props;
     const textColor = color(theme.colors.text)

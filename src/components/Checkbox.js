@@ -1,12 +1,12 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import { Animated, Platform, View, StyleSheet } from 'react-native';
 import color from 'color';
 import Icon from './Icon';
 import TouchableRipple from './TouchableRipple';
 import withTheme from '../core/withTheme';
-import type { Theme } from '../types/Theme';
+import type { Theme } from '../types';
 
 type Props = {
   /**
@@ -54,9 +54,9 @@ type State = {
  * }
  * ```
  */
-class Checkbox extends Component<void, Props, State> {
-  state: State = {
-    scaleAnim: new Animated.Value(0),
+class Checkbox extends React.Component<Props, State> {
+  state = {
+    scaleAnim: new Animated.Value(1),
   };
 
   componentWillReceiveProps(nextProps: Props) {

@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from 'react';
+import * as React from 'react';
 import { Platform } from 'react-native';
 import color from 'color';
 

@@ -1,9 +1,11 @@
 /* @flow */
 
-import React from 'react';
+import * as React from 'react';
+import color from 'color';
 import { StyleSheet, View } from 'react-native';
 import withTheme from '../core/withTheme';
-import type { Theme } from '../types/Theme';
+import type { Theme } from '../types';
+import { black, white } from '../styles/colors';
 
 type Props = {
   /**
@@ -47,11 +49,15 @@ const Divider = (props: Props) => {
 
 const styles = StyleSheet.create({
   dividerDeafultTheme: {
-    backgroundColor: 'rgba(0, 0, 0, .12)',
+    backgroundColor: color(black)
+      .alpha(0.12)
+      .rgbaString(),
     height: StyleSheet.hairlineWidth,
   },
   dividerDarkTheme: {
-    backgroundColor: 'rgba(255,255,255, .12)',
+    backgroundColor: color(white)
+      .alpha(0.12)
+      .rgbaString(),
     height: StyleSheet.hairlineWidth,
   },
   inset: {

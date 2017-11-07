@@ -1,15 +1,16 @@
 /* @flow */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import { Text, Paper, withTheme } from 'react-native-paper';
+import type { Theme } from 'react-native-paper/types';
 
-class PaperExample extends Component {
+type Props = {
+  theme: Theme,
+};
+
+class PaperExample extends React.Component<Props> {
   static title = 'Paper';
-  static propTypes = {
-    theme: PropTypes.object.isRequired,
-  };
 
   render() {
     const { theme: { colors: { background } } } = this.props;
