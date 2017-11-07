@@ -37,7 +37,7 @@ const Divider = (props: Props) => {
     <View
       {...props}
       style={[
-        isDarkTheme ? styles.dividerDarkTheme : styles.divider,
+        isDarkTheme ? styles.dividerDarkTheme : styles.dividerDeafultTheme,
         inset && styles.inset,
         style,
       ]}
@@ -46,12 +46,12 @@ const Divider = (props: Props) => {
 };
 
 const styles = StyleSheet.create({
-  divider: {
+  dividerDeafultTheme: {
     backgroundColor: 'rgba(0, 0, 0, .12)',
     height: StyleSheet.hairlineWidth,
   },
   dividerDarkTheme: {
-    backgroundColor: 'rgba(255,255,255, .2)',
+    backgroundColor: 'rgba(255,255,255, .12)',
     height: StyleSheet.hairlineWidth,
   },
   inset: {

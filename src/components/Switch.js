@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { grey400, grey50 } from '../styles/colors';
+import { grey400, grey800, grey50, white, black } from '../styles/colors';
 import { View, Switch, Platform } from 'react-native';
 import withTheme from '../core/withTheme';
 import setColor from 'color';
@@ -63,23 +63,31 @@ class SwitchRow extends Component<void, Props, void> {
       ...props
     } = this.props;
 
+    const { dark: isDarkTheme } = theme;
+
     const checkedColor = color || theme.colors.accent;
 
     const trackTintColor =
       Platform.OS === 'ios'
         ? checkedColor
         : disabled
-          ? setColor(grey400)
-              .alpha(0.38)
-              .rgbaString()
+          ? isDarkTheme
+            ? setColor(white)
+                .alpha(0.1)
+                .rgbaString()
+            : setColor(black)
+                .alpha(0.12)
+                .rgbaString()
           : setColor(checkedColor)
-              .alpha(0.38)
+              .alpha(0.5)
               .rgbaString();
 
     const trackThumbTintColor =
       Platform.OS === 'ios'
         ? undefined
-        : disabled ? grey400 : value ? checkedColor : grey50;
+        : disabled
+          ? isDarkTheme ? grey800 : grey400
+          : value ? checkedColor : isDarkTheme ? grey400 : grey50;
 
     return (
       <View>
