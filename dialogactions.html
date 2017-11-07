@@ -1,4 +1,4 @@
-<html lang="en" data-reactroot=""><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="description" content=""/><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Getting Started"/><meta name="twitter:description" content=""/><meta property="og:type" content="website"/><meta property="og:title" content="Getting Started"/><meta property="og:description" content=""/><title>Getting Started</title><style type="text/css">
+<html lang="en" data-reactroot=""><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="description" content=""/><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="DialogActions"/><meta name="twitter:description" content=""/><meta property="og:type" content="website"/><meta property="og:title" content="DialogActions"/><meta property="og:description" content=""/><title>DialogActions</title><style type="text/css">
           
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
@@ -339,60 +339,8 @@ pre code, pre tt {
 .css-94139e56{-webkit-flex:1;-ms-flex:1;flex:1;padding:24px;}@media (min-width:640px){.css-94139e56{height:100%;overflow:auto;padding:24px 48px;}}
 .css-c6a7da1d{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;height:100%;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;}@media (min-width:640px){.css-c6a7da1d{-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;}}
 
-          </style></head><body><div id='root'><div class="css-c6a7da1d" data-reactroot=""><div><input type="checkbox" class="css-e3482b9c" id="slide-sidebar" role="button"/><label class="css-77d1b527" for="slide-sidebar"><span>☰</span><span>✕</span></label><nav class="css-9cccb1ba"><a class="css-dc98cacf " href="index.html">Home</a><a class="css-dc98cacf css-eef4b5ab" href="getting-started.html">Getting Started</a><a class="css-dc98cacf " href="theming.html">Theming</a><hr class="css-abee0f65"/><a class="css-dc98cacf " href="button.html">Button</a><a class="css-dc98cacf " href="caption.html">Caption</a><a class="css-dc98cacf " href="card.html">Card</a><a class="css-dc98cacf " href="cardactions.html">CardActions</a><a class="css-dc98cacf " href="cardcontent.html">CardContent</a><a class="css-dc98cacf " href="cardcover.html">CardCover</a><a class="css-dc98cacf " href="checkbox.html">Checkbox</a><a class="css-dc98cacf " href="dialog.html">Dialog</a><a class="css-dc98cacf " href="dialogactions.html">DialogActions</a><a class="css-dc98cacf " href="dialogcontent.html">DialogContent</a><a class="css-dc98cacf " href="dialogscrollarea.html">DialogScrollArea</a><a class="css-dc98cacf " href="dialogtitle.html">DialogTitle</a><a class="css-dc98cacf " href="divider.html">Divider</a><a class="css-dc98cacf " href="draweritem.html">DrawerItem</a><a class="css-dc98cacf " href="drawersection.html">DrawerSection</a><a class="css-dc98cacf " href="fab.html">FAB</a><a class="css-dc98cacf " href="gridview.html">GridView</a><a class="css-dc98cacf " href="headline.html">Headline</a><a class="css-dc98cacf " href="modal.html">Modal</a><a class="css-dc98cacf " href="paper.html">Paper</a><a class="css-dc98cacf " href="paragraph.html">Paragraph</a><a class="css-dc98cacf " href="progressbar.html">ProgressBar</a><a class="css-dc98cacf " href="radiobutton.html">RadioButton</a><a class="css-dc98cacf " href="searchbar.html">SearchBar</a><a class="css-dc98cacf " href="subheading.html">Subheading</a><a class="css-dc98cacf " href="switch.html">Switch</a><a class="css-dc98cacf " href="text.html">Text</a><a class="css-dc98cacf " href="textinput.html">TextInput</a><a class="css-dc98cacf " href="title.html">Title</a><a class="css-dc98cacf " href="toolbar.html">Toolbar</a><a class="css-dc98cacf " href="toolbaraction.html">ToolbarAction</a><a class="css-dc98cacf " href="toolbarbackaction.html">ToolbarBackAction</a><a class="css-dc98cacf " href="toolbarcontent.html">ToolbarContent</a><a class="css-dc98cacf " href="touchableripple.html">TouchableRipple</a></nav></div><div class="css-94139e56"><div class="css-c8100a4e undefined"><div><span><h1>Getting Started</h1>
-<h2>Installation</h2>
-<p>Open a Terminal in your project's folder and run,</p>
-<pre><code class="language-sh">npm install --save react-native-paper react-native-vector-icons
-</code></pre>
-<p>After installation, you'll need to link <a href="https://github.com/oblador/react-native-vector-icons">react-native-vector-icons</a>.</p>
-<h2>Usage</h2>
-<p>Wrap your root component in <code>Provider</code> from <code>react-native-paper</code>. It's a good idea to wrap the component which is passed to <code>AppRegistry.registerComponent</code>.</p>
-<p>Example:</p>
-<pre><code class="language-js"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
-<span class="hljs-keyword">import</span> { AppRegistry } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native'</span>;
-<span class="hljs-keyword">import</span> { Provider <span class="hljs-keyword">as</span> PaperProvider } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native-paper'</span>;
-<span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">'./src/App'</span>;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">PaperProvider</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">PaperProvider</span>&gt;</span></span>
-  );
-}
-
-AppRegistry.registerComponent(<span class="hljs-string">'main'</span>, () =&gt; Main);
-</code></pre>
-<p>The <code>PaperProvider</code> component provides the theme to all the components in the framework. It also acts as a portal to components which need to be rendered at the top level.</p>
-<h2>Customization</h2>
-<p>You can provide a custom theme to customize the colors, fonts etc. with the <code>Provider</code> component. Check the <a href="blob/master/src/styles/DefaultTheme.js">default theme</a> to see what customization options are supported.</p>
-<p>Example:</p>
-<pre><code class="language-js"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
-<span class="hljs-keyword">import</span> { AppRegistry } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native'</span>;
-<span class="hljs-keyword">import</span> { DefaultTheme, Provider <span class="hljs-keyword">as</span> PaperProvider } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native-paper'</span>;
-<span class="hljs-keyword">import</span> color <span class="hljs-keyword">from</span> <span class="hljs-string">'color'</span>;
-<span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">'./src/App'</span>;
-
-<span class="hljs-keyword">const</span> theme = {
-  ...DefaultTheme,
-  <span class="hljs-attr">colors</span>: {
-    ...DefaultTheme.colors,
-    <span class="hljs-attr">primary</span>: <span class="hljs-string">'tomato'</span>,
-    <span class="hljs-attr">primaryDark</span>: color(<span class="hljs-string">'tomato'</span>).darken(<span class="hljs-number">0.2</span>).rgbaString(),
-    <span class="hljs-attr">accent</span>: <span class="hljs-string">'yellow'</span>,
-  },
-};
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">PaperProvider</span> <span class="hljs-attr">theme</span>=<span class="hljs-string">{theme}</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">PaperProvider</span>&gt;</span></span>
-  );
-}
-</code></pre>
-</span></div></div></div></div></div>
+          </style></head><body><div id='root'><div class="css-c6a7da1d" data-reactroot=""><div><input type="checkbox" class="css-e3482b9c" id="slide-sidebar" role="button"/><label class="css-77d1b527" for="slide-sidebar"><span>☰</span><span>✕</span></label><nav class="css-9cccb1ba"><a class="css-dc98cacf " href="index.html">Home</a><a class="css-dc98cacf " href="getting-started.html">Getting Started</a><a class="css-dc98cacf " href="theming.html">Theming</a><hr class="css-abee0f65"/><a class="css-dc98cacf " href="button.html">Button</a><a class="css-dc98cacf " href="caption.html">Caption</a><a class="css-dc98cacf " href="card.html">Card</a><a class="css-dc98cacf " href="cardactions.html">CardActions</a><a class="css-dc98cacf " href="cardcontent.html">CardContent</a><a class="css-dc98cacf " href="cardcover.html">CardCover</a><a class="css-dc98cacf " href="checkbox.html">Checkbox</a><a class="css-dc98cacf " href="dialog.html">Dialog</a><a class="css-dc98cacf css-eef4b5ab" href="dialogactions.html">DialogActions</a><a class="css-dc98cacf " href="dialogcontent.html">DialogContent</a><a class="css-dc98cacf " href="dialogscrollarea.html">DialogScrollArea</a><a class="css-dc98cacf " href="dialogtitle.html">DialogTitle</a><a class="css-dc98cacf " href="divider.html">Divider</a><a class="css-dc98cacf " href="draweritem.html">DrawerItem</a><a class="css-dc98cacf " href="drawersection.html">DrawerSection</a><a class="css-dc98cacf " href="fab.html">FAB</a><a class="css-dc98cacf " href="gridview.html">GridView</a><a class="css-dc98cacf " href="headline.html">Headline</a><a class="css-dc98cacf " href="modal.html">Modal</a><a class="css-dc98cacf " href="paper.html">Paper</a><a class="css-dc98cacf " href="paragraph.html">Paragraph</a><a class="css-dc98cacf " href="progressbar.html">ProgressBar</a><a class="css-dc98cacf " href="radiobutton.html">RadioButton</a><a class="css-dc98cacf " href="searchbar.html">SearchBar</a><a class="css-dc98cacf " href="subheading.html">Subheading</a><a class="css-dc98cacf " href="switch.html">Switch</a><a class="css-dc98cacf " href="text.html">Text</a><a class="css-dc98cacf " href="textinput.html">TextInput</a><a class="css-dc98cacf " href="title.html">Title</a><a class="css-dc98cacf " href="toolbar.html">Toolbar</a><a class="css-dc98cacf " href="toolbaraction.html">ToolbarAction</a><a class="css-dc98cacf " href="toolbarbackaction.html">ToolbarBackAction</a><a class="css-dc98cacf " href="toolbarcontent.html">ToolbarContent</a><a class="css-dc98cacf " href="touchableripple.html">TouchableRipple</a></nav></div><div class="css-94139e56"><div><h1 class="css-3b116f09"><code>&lt;DialogActions /&gt;</code></h1><div options="[object Object]" class="css-c8100a4e css-6060edd1"><div></div></div><h2 class="css-1d0ea09c">Props</h2><div class="css-13ecb845"><span class="css-46899069"><code class="css-f0eb4c13" data-hint="required">*</code><a class="css-aab088b4" name="children" href="#children"><code>children<!-- -->:<!-- --> <!-- -->unknown</code></a></span><div class="css-c8100a4e css-ce1ae663 css-6060edd1"><div></div></div></div><div class="css-13ecb845"><span class="css-46899069"><code class="css-f0eb4c13" data-hint="required"></code><a class="css-aab088b4" name="style" href="#style"><code>style<!-- -->:<!-- --> <!-- -->any</code></a></span><div class="css-c8100a4e css-ce1ae663 css-6060edd1"><div></div></div></div></div></div></div></div>
     <script>
-      window.__INITIAL_PATH__ = 'getting-started';
+      window.__INITIAL_PATH__ = 'dialogactions';
     </script>
   <script src="./app.bundle.js?transpile=false"></script></body></html>
