@@ -9,7 +9,7 @@ import data from './app.data.json';
 const root = document.getElementById('root');
 const render = () => {
   try {
-    ReactDOM.render(
+    ReactDOM.hydrate(
       <App
         name={window.__INITIAL_PATH__}
         data={data}
