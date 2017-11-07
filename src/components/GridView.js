@@ -39,7 +39,7 @@ type State = {
  * Grid lists are an alternative to standard list views.
  *
  * **Usage:**
- * ```
+ * ```js
  * export default class MyComponent extends Component {
  *   state = {
  *     items: [],

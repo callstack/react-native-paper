@@ -67,7 +67,7 @@ type State = {
  * TextInputs allow users to input text.
  *
  * **Usage:**
- * ```
+ * ```js
  * class MyComponent extends React.Component {
  *   state = {
  *     text: ''

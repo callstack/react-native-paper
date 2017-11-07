@@ -36,7 +36,7 @@ type State = {
  * Checkboxes allow the selection of multiple options from a set
  *
  * **Usage:**
- * ```
+ * ```js
  * export default class MyComponent extends Component {
  *   state = {
  *     checked: false,

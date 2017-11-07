@@ -32,7 +32,7 @@ type Props = {
  * Switch is a visual toggle between two mutually exclusive states—on and off
  *
  * **Usage:**
- * ```
+ * ```js
  * export default class MyComponent extends Component {
  *   state = {
  *     isSwitchOn: false,

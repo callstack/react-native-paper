@@ -25,7 +25,7 @@ type Props = {
  * Ripple provides components with a material "ink ripple" interaction effect
  *
  * **Usage:**
- * ```
+ * ```js
  * const MyComponent = () => (
  *   <TouchableRipple>
  *     onPress={() => {}}

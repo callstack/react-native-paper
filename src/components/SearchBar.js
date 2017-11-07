@@ -40,7 +40,7 @@ type Props = {
  * SearchBar is a simple input box where users can type search queries
  *
  * **Usage:**
- * ```
+ * ```js
  * export default class MyComponent extends Component {
  *   state = {
  *     firstQuery: '',
