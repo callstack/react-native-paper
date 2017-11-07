@@ -1,12 +1,4 @@
-# React Native Paper
-
-[![Build Status][build-badge]][build]
-[![Version][version-badge]][package]
-[![MIT License][license-badge]][license]
-
-[![PRs Welcome][prs-welcome-badge]][prs-welcome]
-[![Chat][chat-badge]][chat]
-[![Code of Conduct][coc-badge]][coc]
+# React Native Paper &middot; [![Build Status][build-badge]][build] [![Version][version-badge]][package] [![MIT License][license-badge]][license] [![Chat][chat-badge]][chat]
 
 Material design for React Native.
 
@@ -95,9 +87,5 @@ Check all the components and its usage in our [docs page](https://callstack.gith
 [package]: https://www.npmjs.com/package/react-native-paper
 [license-badge]: https://img.shields.io/npm/l/react-native-paper.svg?style=flat-square
 [license]: https://opensource.org/licenses/MIT
-[prs-welcome-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
-[prs-welcome]: https://github.com/callstack/react-native-paper/blob/master/CONTRIBUTING.md
-[coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
-[coc]: https://github.com/callstack/react-native-paper/blob/master/CODE_OF_CONDUCT.md
 [chat-badge]: https://img.shields.io/badge/chat-slack-brightgreen.svg?style=flat-square&colorB=E01563
 [chat]: https://slack.callstack.io/
