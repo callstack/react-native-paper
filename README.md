@@ -1,9 +1,5 @@
 # React Native Paper
 
-Material design for React Native.
-
----
-
 [![Build Status][build-badge]][build]
 [![Version][version-badge]][package]
 [![MIT License][license-badge]][license]
@@ -11,6 +7,8 @@ Material design for React Native.
 [![PRs Welcome][prs-welcome-badge]][prs-welcome]
 [![Chat][chat-badge]][chat]
 [![Code of Conduct][coc-badge]][coc]
+
+Material design for React Native.
 
 ## Features
 
