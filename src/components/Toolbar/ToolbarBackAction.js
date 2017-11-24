@@ -14,7 +14,8 @@ const getBackIcon = Platform.select({
       ? white
       : color(black)
           .alpha(0.54)
-          .rgbaString();
+          .rgb()
+          .string();
     return <Icon name="keyboard-arrow-left" size={36} color={iconColor} />;
   },
   android: () => 'arrow-back',

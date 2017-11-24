@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import merge from 'deepmerge';
 import ThemeProvider, { channel } from './ThemeProvider';
 import type { Theme } from '../types';
 
@@ -71,8 +72,7 @@ export default function withTheme<Props: {}>(
       // Only merge if both theme from context and props are present
       // Avoiding unnecessary merge allows us to check equality by reference
       return theme && props.theme
-        ? // TODO: deep merge
-          { ...theme, ...props.theme }
+        ? merge(theme, props.theme)
         : theme || props.theme;
     };
 

@@ -71,10 +71,12 @@ class SwitchRow extends React.Component<Props> {
         : disabled
           ? setColor(grey400)
               .alpha(0.38)
-              .rgbaString()
+              .rgb()
+              .string()
           : setColor(checkedColor)
               .alpha(0.38)
-              .rgbaString();
+              .rgb()
+              .string();
 
     const trackThumbTintColor =
       Platform.OS === 'ios'

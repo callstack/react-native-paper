@@ -17,13 +17,16 @@ const DarkTheme: Theme = {
     text: white,
     secondaryText: color(white)
       .alpha(0.7)
-      .rgbaString(),
+      .rgb()
+      .string(),
     disabled: color(white)
       .alpha(0.5)
-      .rgbaString(),
+      .rgb()
+      .string(),
     placeholder: color(white)
       .alpha(0.38)
-      .rgbaString(),
+      .rgb()
+      .string(),
   },
 };
 
