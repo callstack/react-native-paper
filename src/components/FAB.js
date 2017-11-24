@@ -58,7 +58,8 @@ const FAB = (props: Props) => {
   const textColor = iconColor || (isDark ? white : 'rgba(0, 0, 0, .54)');
   const rippleColor = color(textColor)
     .alpha(0.32)
-    .rgbaString();
+    .rgb()
+    .string();
 
   return (
     <Paper

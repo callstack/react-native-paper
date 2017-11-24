@@ -174,7 +174,8 @@ class Button extends React.Component<Props, State> {
 
     const rippleColor = color(textColor)
       .alpha(0.32)
-      .rgbaString();
+      .rgb()
+      .string();
     const buttonStyle = { backgroundColor, borderRadius: roundness };
     const touchableStyle = { borderRadius: roundness };
     const textStyle = { color: textColor, fontFamily };

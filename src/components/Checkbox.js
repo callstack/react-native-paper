@@ -88,8 +88,9 @@ class Checkbox extends React.Component<Props, State> {
       checkboxColor = theme.colors.disabled;
     } else {
       rippleColor = color(checkedColor)
-        .clearer(0.32)
-        .rgbaString();
+        .fade(0.32)
+        .rgb()
+        .string();
       checkboxColor = checked ? checkedColor : uncheckedColor;
     }
 
