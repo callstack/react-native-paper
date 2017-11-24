@@ -18,9 +18,6 @@ module.exports = {
     return blacklist([
       glob(`${path.resolve(__dirname, '..')}/node_modules/*`),
       glob(`${path.resolve(__dirname, '..')}/docs/node_modules/*`),
-      glob(`${__dirname}/node_modules/*/{${dependencies.join(',')}}`, {
-        extended: true,
-      }),
     ]);
   },
 };

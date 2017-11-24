@@ -48,7 +48,8 @@ class ButtonExample extends React.Component<Props, State> {
             icon="file-download"
             loading={this.state.loading}
             onPress={() =>
-              this.setState(state => ({ loading: !state.loading }))}
+              this.setState(state => ({ loading: !state.loading }))
+            }
           >
             Loading
           </Button>

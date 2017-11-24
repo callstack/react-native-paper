@@ -16,13 +16,16 @@ export default {
     text: black,
     secondaryText: color(black)
       .alpha(0.7)
-      .rgbaString(),
+      .rgb()
+      .string(),
     disabled: color(black)
       .alpha(0.25)
-      .rgbaString(),
+      .rgb()
+      .string(),
     placeholder: color(black)
       .alpha(0.38)
-      .rgbaString(),
+      .rgb()
+      .string(),
   },
   fonts,
 };

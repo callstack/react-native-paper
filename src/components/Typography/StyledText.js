@@ -18,7 +18,8 @@ class StyledText extends React.Component<Props> {
     const { theme, alpha, family, style, ...rest } = this.props;
     const textColor = color(theme.colors.text)
       .alpha(alpha)
-      .rgbaString();
+      .rgb()
+      .string();
     const fontFamily = theme.fonts[family];
 
     return (

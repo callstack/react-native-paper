@@ -83,8 +83,9 @@ export default class TouchableRipple extends React.Component<Props, void> {
           underlayColor != null
             ? underlayColor
             : color(rippleColor)
-                .clearer(0.5)
-                .rgbaString()
+                .fade(0.5)
+                .rgb()
+                .string()
         }
       >
         {React.Children.only(children)}

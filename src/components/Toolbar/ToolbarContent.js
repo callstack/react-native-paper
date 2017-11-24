@@ -54,7 +54,8 @@ class ToolbarContent extends React.Component<Props> {
     const subtitleColor = dark
       ? color(white)
           .alpha(0.7)
-          .rgbaString()
+          .rgb()
+          .string()
       : secondaryText;
 
     return (

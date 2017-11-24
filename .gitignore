@@ -2,9 +2,6 @@
 #
 .DS_Store
 
-# XDE
-.exponent/
-
 # VSCode
 .vscode/
 tsconfig.json
@@ -43,10 +40,8 @@ npm-debug.log
 yarn-error.log
 
 # BUCK
+#
 buck-out/
 \.buckd/
 android/app/libs
 android/keystores/debug.keystore
-
-# Deployment
-deploy_key

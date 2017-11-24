@@ -32,7 +32,7 @@ type Props = {
  *    width: 80,
  *    alignItems: 'center',
  *    justifyContent: 'center',
-*    },
+ *    },
  * });
  * ```
  * Note: Pass *elevation* style, to apply shadow to the component. Defaults to 2.

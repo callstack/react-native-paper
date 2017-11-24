@@ -47,7 +47,8 @@ const DrawerSection = ({ children, label, theme, ...props }: Props) => {
   const { colors, fonts } = theme;
   const labelColor = color(colors.text)
     .alpha(0.54)
-    .rgbaString();
+    .rgb()
+    .string();
   const fontFamily = fonts.medium;
 
   return (
