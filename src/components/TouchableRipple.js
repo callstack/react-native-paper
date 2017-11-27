@@ -27,7 +27,7 @@ type Props = {
  * **Usage:**
  * ```js
  * const MyComponent = () => (
- *   <TouchableRipple>
+ *   <TouchableRipple
  *     onPress={() => {}}
  *     borderless
  *     rippleColor="rgba(0, 0, 0, .32)"
