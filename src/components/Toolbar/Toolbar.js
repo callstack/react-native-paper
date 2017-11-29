@@ -45,7 +45,7 @@ type Props = {
  *         />
  *         <Toolbar.Action icon="search" onPress={this._onSearch} />
  *         <Toolbar.Action icon="more-vert" onPress={this._onMore} />
- *       <Toolbar>
+ *       </Toolbar>
  *     );
  *   }
  * }
