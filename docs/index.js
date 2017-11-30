@@ -11,7 +11,7 @@ if (!fs.existsSync(dist)) {
   fs.mkdirSync(dist);
 }
 
-function getFiles() {
+function getPages() {
   const components = fs
     .readFileSync(path.join(__dirname, '../src/index.js'))
     .toString()
@@ -44,22 +44,25 @@ function getFiles() {
       const nameA = a.split('/').pop();
       const nameB = b.split('/').pop();
       return nameA.localeCompare(nameB);
-    });
+    })
+    .map(file => ({ file, type: 'component' }));
 
-  const pages = fs
-    .readdirSync(path.join(__dirname, 'pages'))
-    .map(page => path.join(__dirname, 'pages', page));
-  return [pages, components];
+  const docs = fs.readdirSync(path.join(__dirname, 'pages')).map(file => ({
+    file: path.join(__dirname, 'pages', file),
+    type: file.endsWith('.js') ? 'custom' : 'markdown',
+  }));
+
+  return [...docs, { type: 'separator' }, ...components];
 }
 
 if (task !== 'build') {
   serve({
-    files: getFiles,
+    pages: getPages,
     output: path.join(__dirname, 'dist'),
   });
 } else {
   build({
-    files: getFiles,
+    pages: getPages,
     output: path.join(__dirname, 'dist'),
   });
 }

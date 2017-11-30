@@ -19,6 +19,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "component-docs": "^0.4.5"
+    "component-docs": "^0.6.1",
+    "linaria": "^0.4.1"
   }
 }
