@@ -1456,9 +1456,9 @@ commondir@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
 
-component-docs@^0.4.5:
-  version "0.4.5"
-  resolved "https://registry.yarnpkg.com/component-docs/-/component-docs-0.4.5.tgz#ff00ec075f1dd2454c9e2b5d14420b965aab10e5"
+component-docs@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/component-docs/-/component-docs-0.6.1.tgz#e7502d68c85ece346090154508b97d7ea33e2ae0"
   dependencies:
     babel-core "^6.26.0"
     babel-loader "^7.1.2"
@@ -1471,8 +1471,9 @@ component-docs@^0.4.5:
     express "^4.16.2"
     extract-text-webpack-plugin "^3.0.2"
     history "^4.7.2"
+    ignore-styles "^5.0.1"
     illuminate-js "^0.3.0"
-    linaria "^0.4.0"
+    linaria "^0.4.1"
     node-watch "^0.5.5"
     prop-types "^15.6.0"
     react "~16.1.1"
@@ -2515,6 +2516,10 @@ ieee754@^1.1.4:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
 
+ignore-styles@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/ignore-styles/-/ignore-styles-5.0.1.tgz#b49ef2274bdafcd8a4880a966bfe38d1a0bf4671"
+
 illuminate-js@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/illuminate-js/-/illuminate-js-0.3.0.tgz#30b66bcb30a3efc63f2df8c08b86403482a4b6d7"
@@ -2859,9 +2864,9 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-linaria@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/linaria/-/linaria-0.4.0.tgz#8334c3c3a24bedd6e9934b50a5a0f091e2c08088"
+linaria@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/linaria/-/linaria-0.4.1.tgz#c4719d5744afae166038f0119d9ed2a71247d875"
   dependencies:
     babel-code-frame "^6.26.0"
     babel-core "^6.26.0"
