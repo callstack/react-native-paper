@@ -1456,9 +1456,9 @@ commondir@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
 
-component-docs@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/component-docs/-/component-docs-0.6.1.tgz#e7502d68c85ece346090154508b97d7ea33e2ae0"
+component-docs@^0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/component-docs/-/component-docs-0.6.3.tgz#3a0349c3330246e924581e13e484fd70e695e74c"
   dependencies:
     babel-core "^6.26.0"
     babel-loader "^7.1.2"
@@ -1468,6 +1468,7 @@ component-docs@^0.6.1:
     babel-preset-stage-2 "^6.24.1"
     css-loader "^0.28.7"
     dashify "^0.2.2"
+    dedent "^0.7.0"
     express "^4.16.2"
     extract-text-webpack-plugin "^3.0.2"
     history "^4.7.2"
