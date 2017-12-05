@@ -8,7 +8,11 @@ Material design for React Native.
 - Works on both iOS and Android following [platform adaptation guidelines](https://material.io/guidelines/platforms/platform-adaptation.html)
 - Full theming support
 
-Currently supported React Native version: `>= 0.46.4`
+Currently supported React Native version: `>= 0.50.3`
+
+## Try it out
+
+Run the [example app](https://exp.host/@satya164/react-native-paper-example) with [Expo](https://expo.io/) to see it in action.
 
 ## Getting Started
 
