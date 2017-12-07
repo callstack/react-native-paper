@@ -2,15 +2,17 @@
 
 import color from 'color';
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Animated } from 'react-native';
 import Paper from './Paper';
-import Icon from './Icon';
+import CrossFadeIcon from './CrossFadeIcon';
 import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple';
 import { white } from '../styles/colors';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
+
+const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
 type Props = {
   /**
@@ -90,7 +92,7 @@ class FAB extends React.Component<Props> {
       .string();
 
     return (
-      <Paper
+      <AnimatedPaper
         {...rest}
         style={[{ backgroundColor, elevation: 12 }, styles.container, style]}
       >
@@ -105,8 +107,9 @@ class FAB extends React.Component<Props> {
               styles.content,
               label ? styles.extended : small ? styles.small : styles.standard,
             ]}
+            pointerEvents="none"
           >
-            <Icon name={icon} size={24} color={textColor} />
+            <CrossFadeIcon source={icon} size={24} color={textColor} />
             {label ? (
               <Text
                 style={[
@@ -119,7 +122,7 @@ class FAB extends React.Component<Props> {
             ) : null}
           </View>
         </TouchableRipple>
-      </Paper>
+      </AnimatedPaper>
     );
   }
 }

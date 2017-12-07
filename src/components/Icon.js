@@ -44,7 +44,7 @@ type Props = IconProps & {
   name: IconSource,
 };
 
-const isImageSource = source =>
+const isImageSource = (source: any) =>
   // source is an object with uri
   (typeof source === 'object' &&
     source !== null &&
@@ -52,6 +52,25 @@ const isImageSource = source =>
       typeof source.uri === 'string')) ||
   // source is a module, e.g. - require('image')
   typeof source === 'number';
+
+const getIconId = (source: any) => {
+  if (
+    typeof source === 'object' &&
+    source !== null &&
+    (Object.prototype.hasOwnProperty.call(source, 'uri') &&
+      typeof source.uri === 'string')
+  ) {
+    return source.uri;
+  }
+
+  return source;
+};
+
+export const isValidIcon = (source: any) =>
+  typeof source === 'string' || isImageSource(source);
+
+export const isEqualIcon = (a: any, b: any) =>
+  a === b || getIconId(a) === getIconId(b);
 
 const Icon = ({ name, color, size, ...rest }: Props) => {
   if (typeof name === 'string') {

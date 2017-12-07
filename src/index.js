@@ -42,6 +42,7 @@ export { default as Searchbar } from './components/Searchbar';
 export { default as SearchBar } from './components/Searchbar';
 export { default as Snackbar } from './components/Snackbar';
 export { default as Switch } from './components/Switch';
+export { default as FABGroup } from './components/FABGroup';
 export { default as Toolbar } from './components/Toolbar/Toolbar';
 export { default as ToolbarAction } from './components/Toolbar/ToolbarAction';
 export {
