@@ -9,10 +9,13 @@ import {
   ToolbarContent,
   ToolbarAction,
   ToolbarBackAction,
+  withTheme,
 } from 'react-native-paper';
+import type { Theme } from 'react-native-paper/types';
 
 type Props = {
   navigation: any,
+  theme: Theme,
 };
 
 type State = {
@@ -24,7 +27,7 @@ type State = {
 
 const MORE_ICON = Platform.OS === 'ios' ? 'more-horiz' : 'more-vert';
 
-export default class ToolbarExample extends React.Component<Props, State> {
+class ToolbarExample extends React.Component<Props, State> {
   static title = 'Toolbar';
   static navigationOptions = ({ navigation }) => {
     return {
@@ -65,8 +68,16 @@ export default class ToolbarExample extends React.Component<Props, State> {
       showMoreIcon,
       showSubtitle,
     } = this.state;
+    const { theme: { colors: { background } } } = this.props;
     return (
-      <View style={styles.container}>
+      <View
+        style={[
+          styles.container,
+          {
+            backgroundColor: background,
+          },
+        ]}
+      >
         <View style={styles.content}>
           <Button
             accent
@@ -135,3 +146,5 @@ const styles = StyleSheet.create({
     padding: 4,
   },
 });
+
+export default withTheme(ToolbarExample);

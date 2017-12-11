@@ -1,7 +1,11 @@
 /* @flow */
 
 import * as React from 'react';
+import color from 'color';
 import { StyleSheet, View } from 'react-native';
+import withTheme from '../core/withTheme';
+import type { Theme } from '../types';
+import { black, white } from '../styles/colors';
 
 type Props = {
   /**
@@ -9,6 +13,7 @@ type Props = {
    */
   inset?: boolean,
   style?: any,
+  theme: Theme,
 };
 
 /**
@@ -27,15 +32,31 @@ type Props = {
  * ```
  */
 const Divider = (props: Props) => {
-  const { inset, style } = props;
+  const { inset, style, theme } = props;
+  const { dark: isDarkTheme } = theme;
   return (
-    <View {...props} style={[styles.divider, inset && styles.inset, style]} />
+    <View
+      {...props}
+      style={[
+        isDarkTheme ? styles.dividerDarkTheme : styles.dividerDeafultTheme,
+        inset && styles.inset,
+        style,
+      ]}
+    />
   );
 };
 
 const styles = StyleSheet.create({
-  divider: {
-    backgroundColor: 'rgba(0, 0, 0, .12)',
+  dividerDeafultTheme: {
+    backgroundColor: color(black)
+      .alpha(0.12)
+      .rgbaString(),
+    height: StyleSheet.hairlineWidth,
+  },
+  dividerDarkTheme: {
+    backgroundColor: color(white)
+      .alpha(0.12)
+      .rgbaString(),
     height: StyleSheet.hairlineWidth,
   },
   inset: {
@@ -43,4 +64,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Divider;
+export default withTheme(Divider);

@@ -123,11 +123,18 @@ class Button extends React.Component<Props, State> {
       theme,
     } = this.props;
     const { colors, roundness, dark: isDarkTheme } = theme;
+    const isDarkActive = this.props.dark || this.props.theme.dark;
     const fontFamily = theme.fonts.medium;
     let backgroundColor, textColor, isDark;
     if (raised) {
       if (disabled) {
-        backgroundColor = 'rgba(0, 0, 0, .12)';
+        isDarkActive
+          ? (backgroundColor = color(white)
+              .alpha(0.12)
+              .rgbaString())
+          : (backgroundColor = color(black)
+              .alpha(0.12)
+              .rgbaString());
       } else {
         if (buttonColor) {
           backgroundColor = buttonColor;
@@ -135,7 +142,7 @@ class Button extends React.Component<Props, State> {
           if (primary) {
             backgroundColor = colors.primary;
           } else {
-            backgroundColor = dark ? black : white;
+            backgroundColor = isDarkActive ? 'rgba(58, 55, 55, .9)' : white;
           }
         }
       }
@@ -154,11 +161,15 @@ class Button extends React.Component<Props, State> {
 
     if (disabled) {
       textColor = isDarkTheme
-        ? 'rgba(255, 255, 255, .26)'
-        : 'rgba(0, 0, 0, .26)';
+        ? color(white)
+            .alpha(0.3)
+            .rgbaString()
+        : color(black)
+            .alpha(0.26)
+            .rgbaString();
     } else {
       if (raised) {
-        textColor = isDark ? white : black;
+        textColor = isDarkActive ? white : black;
       } else {
         if (buttonColor) {
           textColor = buttonColor;
@@ -166,7 +177,7 @@ class Button extends React.Component<Props, State> {
           if (primary) {
             textColor = colors.primary;
           } else {
-            textColor = isDark ? white : black;
+            textColor = isDark || isDarkTheme ? white : black;
           }
         }
       }
