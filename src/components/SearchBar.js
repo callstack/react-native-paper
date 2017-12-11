@@ -40,7 +40,7 @@ type Props = {
  * SearchBar is a simple input box where users can type search queries
  *
  * **Usage:**
- * ```
+ * ```js
  * export default class MyComponent extends Component {
  *   state = {
  *     firstQuery: '',
@@ -80,10 +80,12 @@ class SearchBar extends React.Component<Props> {
       ? textColor
       : color(textColor)
           .alpha(0.54)
-          .rgbaString();
+          .rgb()
+          .string();
     const rippleColor = color(textColor)
       .alpha(0.32)
-      .rgbaString();
+      .rgb()
+      .string();
 
     return (
       <Paper

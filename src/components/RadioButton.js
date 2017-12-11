@@ -37,7 +37,7 @@ const BORDER_WIDTH = 2;
 /**
  * Radio buttons allow the selection of a single option from a set
  * **Usage:**
- * ```
+ * ```js
  * export default class MyComponent extends Component {
  *   state = {
  *     checked: 'firstOption',
@@ -48,12 +48,12 @@ const BORDER_WIDTH = 2;
  *     return (
  *       <View>
  *         <RadioButton
- *           value='firstOption'
+ *           value="firstOption"
  *           checked={checked === 'firstOption'}
  *           onPress={() => { this.setState({ checked: 'firstOption' }); }}
  *         />
  *         <RadioButton
- *           value='secondOption'
+ *           value="secondOption"
  *           checked={checked === 'secondOption'}
  *           onPress={() => { this.setState({ checked: 'secondOption' }); }}
  *         />
@@ -101,8 +101,9 @@ class RadioButton extends React.Component<Props, State> {
       radioColor = theme.colors.disabled;
     } else {
       rippleColor = color(checkedColor)
-        .clearer(0.32)
-        .rgbaString();
+        .fade(0.32)
+        .rgb()
+        .string();
       radioColor = checked ? checkedColor : uncheckedColor;
     }
 

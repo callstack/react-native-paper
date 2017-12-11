@@ -39,10 +39,12 @@ export default class ToolbarAction extends React.Component<Props> {
       ? white
       : color(black)
           .alpha(0.54)
-          .rgbaString();
+          .rgb()
+          .string();
     const rippleColor = color(iconColor)
       .alpha(0.32)
-      .rgbaString();
+      .rgb()
+      .string();
 
     return (
       <TouchableRipple

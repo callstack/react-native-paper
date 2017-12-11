@@ -31,7 +31,7 @@ type Props = {
  *  Toolbar is a generalization of action bars for use within application layouts.
  *
  * **Usage:**
- * ```
+ * ```js
  * export default class MyComponent extends Component {
  *   render() {
  *     return (
@@ -45,7 +45,7 @@ type Props = {
  *         />
  *         <Toolbar.Action icon="search" onPress={this._onSearch} />
  *         <Toolbar.Action icon="more-vert" onPress={this._onMore} />
- *       <Toolbar>
+ *       </Toolbar>
  *     );
  *   }
  * }

@@ -17,7 +17,7 @@ type Props = {
  * Paper is a basic container that can give depth to the page.
  *
  * **Usage:**
- * ```
+ * ```js
  * const MyComponent = () => (
  *   <Paper style={styles.paper}>
  *      <Text>Paper</Text>
@@ -32,7 +32,7 @@ type Props = {
  *    width: 80,
  *    alignItems: 'center',
  *    justifyContent: 'center',
-*    },
+ *    },
  * });
  * ```
  * Note: Pass *elevation* style, to apply shadow to the component. Defaults to 2.

@@ -12,7 +12,7 @@ type Props = {
  * Paragraph - typography style
  *
  * **Usage:**
- * ```
+ * ```js
  * const MyComponent = () => (
  *   <Paragraph>Paragraph</Paragraph>
  * );

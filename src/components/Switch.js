@@ -32,7 +32,7 @@ type Props = {
  * Switch is a visual toggle between two mutually exclusive states—on and off
  *
  * **Usage:**
- * ```
+ * ```js
  * export default class MyComponent extends Component {
  *   state = {
  *     isSwitchOn: false,
@@ -74,13 +74,16 @@ class SwitchRow extends React.Component<Props> {
           ? isDarkTheme
             ? setColor(white)
                 .alpha(0.1)
-                .rgbaString()
+                .rgb()
+                .string()
             : setColor(black)
                 .alpha(0.12)
-                .rgbaString()
+                .rgb()
+                .string()
           : setColor(checkedColor)
               .alpha(0.5)
-              .rgbaString();
+              .rgb()
+              .string();
 
     const trackThumbTintColor =
       Platform.OS === 'ios'

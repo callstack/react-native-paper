@@ -17,7 +17,7 @@ type Props = {
  * Drawer container slides in from the left and contains the navigation destinations for your app
  *
  * **Usage:**
- * ```
+ * ```js
  * export default class MyComponent extends Component {
  *   state = {
  *     active: 'First Item',
@@ -47,7 +47,8 @@ const DrawerSection = ({ children, label, theme, ...props }: Props) => {
   const { colors, fonts } = theme;
   const labelColor = color(colors.text)
     .alpha(0.54)
-    .rgbaString();
+    .rgb()
+    .string();
   const fontFamily = fonts.medium;
 
   return (

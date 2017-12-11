@@ -43,7 +43,8 @@ class CheckboxExample extends React.Component<Props, State> {
           onPress={() =>
             this.setState(state => ({
               checkedNormal: !state.checkedNormal,
-            }))}
+            }))
+          }
         >
           <View style={styles.row}>
             <Paragraph>Normal</Paragraph>
@@ -57,7 +58,8 @@ class CheckboxExample extends React.Component<Props, State> {
           onPress={() =>
             this.setState(state => ({
               checkedCustom: !state.checkedCustom,
-            }))}
+            }))
+          }
         >
           <View style={styles.row}>
             <Paragraph>Custom</Paragraph>

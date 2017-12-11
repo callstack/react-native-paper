@@ -12,7 +12,7 @@ type Props = {
  * Subheading - typography style
  *
  * **Usage:**
- * ```
+ * ```js
  * const MyComponent = () => (
  *   <Subheading>Subheading</Subheading>
  * );

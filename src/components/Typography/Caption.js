@@ -12,7 +12,7 @@ type Props = {
  * Caption - typography style
  *
  * **Usage:**
- * ```
+ * ```js
  * const MyComponent = () => (
  *   <Caption>Caption</Caption>
  * );

@@ -25,9 +25,9 @@ type Props = {
  * Ripple provides components with a material "ink ripple" interaction effect
  *
  * **Usage:**
- * ```
+ * ```js
  * const MyComponent = () => (
- *   <TouchableRipple>
+ *   <TouchableRipple
  *     onPress={() => {}}
  *     borderless
  *     rippleColor="rgba(0, 0, 0, .32)"
@@ -83,8 +83,9 @@ export default class TouchableRipple extends React.Component<Props, void> {
           underlayColor != null
             ? underlayColor
             : color(rippleColor)
-                .clearer(0.5)
-                .rgbaString()
+                .fade(0.5)
+                .rgb()
+                .string()
         }
       >
         {React.Children.only(children)}

@@ -20,21 +20,20 @@ type Props = {
  * A divider is a thin, lightweight rule that groups content in lists and page layouts
  *
  * **Usage:**
- * ```
+ * ```js
  * const MyComponent = () => (
  *   <View>
  *     <Text>Apple</Text>
  *     </Divider>
  *     <Text>Orange</Text>
  *     </Divider>
- *   </Button>
+ *   </View>
  * );
  * ```
  */
 const Divider = (props: Props) => {
   const { inset, style, theme } = props;
   const { dark: isDarkTheme } = theme;
-  console.log(isDarkTheme);
   return (
     <View
       {...props}

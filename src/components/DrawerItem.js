@@ -26,7 +26,7 @@ type Props = {
  * Item from drawer's list which navigates to speficic location
  *
  * **Usage:**
- * ```
+ * ```js
  * const MyComponent = () => (
  *   <DrawerItem label="First Item" />
  * );
@@ -47,12 +47,14 @@ const DrawerItem = ({
     ? activeColor || colors.text
     : color(colors.text)
         .alpha(0.54)
-        .rgbaString();
+        .rgb()
+        .string();
   const iconColor = active
     ? activeColor || colors.text
     : color(colors.text)
         .alpha(0.54)
-        .rgbaString();
+        .rgb()
+        .string();
   const fontFamily = theme.fonts.medium;
   const labelMargin = icon ? 32 : 0;
   return (

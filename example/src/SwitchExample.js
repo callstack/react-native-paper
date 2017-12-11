@@ -30,13 +30,13 @@ class SwitchExample extends React.Component<Props, State> {
 
   render() {
     const { theme: { colors: { background } } } = this.props;
-    const switchValueNormalLabel = `switch ${this.state.valueNormal === true
-      ? 'on'
-      : 'off'}`;
+    const switchValueNormalLabel = `switch ${
+      this.state.valueNormal === true ? 'on' : 'off'
+    }`;
 
-    const switchValueCustomlLabel = `switch ${this.state.valueCustom === true
-      ? 'on'
-      : 'off'}`;
+    const switchValueCustomlLabel = `switch ${
+      this.state.valueCustom === true ? 'on' : 'off'
+    }`;
 
     return Platform.OS === 'android' ? (
       <View
@@ -51,7 +51,8 @@ class SwitchExample extends React.Component<Props, State> {
           onPress={() =>
             this.setState(state => ({
               valueNormal: !state.valueNormal,
-            }))}
+            }))
+          }
         >
           <View style={styles.row}>
             <Paragraph>Normal {switchValueNormalLabel}</Paragraph>
@@ -64,7 +65,8 @@ class SwitchExample extends React.Component<Props, State> {
           onPress={() =>
             this.setState(state => ({
               valueCustom: !state.valueCustom,
-            }))}
+            }))
+          }
         >
           <View style={styles.row}>
             <Paragraph>Custom {switchValueCustomlLabel}</Paragraph>
@@ -99,7 +101,8 @@ class SwitchExample extends React.Component<Props, State> {
               onValueChange={() =>
                 this.setState(state => ({
                   valueNormal: !state.valueNormal,
-                }))}
+                }))
+              }
             />
           </View>
         </View>
@@ -111,7 +114,8 @@ class SwitchExample extends React.Component<Props, State> {
               onValueChange={() =>
                 this.setState(state => ({
                   valueCustom: !state.valueCustom,
-                }))}
+                }))
+              }
               color={Colors.blue500}
             />
           </View>
