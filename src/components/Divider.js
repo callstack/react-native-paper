@@ -50,13 +50,15 @@ const styles = StyleSheet.create({
   dividerDeafultTheme: {
     backgroundColor: color(black)
       .alpha(0.12)
-      .rgbaString(),
+      .rgb()
+      .string(),
     height: StyleSheet.hairlineWidth,
   },
   dividerDarkTheme: {
     backgroundColor: color(white)
       .alpha(0.12)
-      .rgbaString(),
+      .rgb()
+      .string(),
     height: StyleSheet.hairlineWidth,
   },
   inset: {
