@@ -131,10 +131,12 @@ class Button extends React.Component<Props, State> {
         isDarkActive
           ? (backgroundColor = color(white)
               .alpha(0.12)
-              .rgbaString())
+              .rgb()
+              .string())
           : (backgroundColor = color(black)
               .alpha(0.12)
-              .rgbaString());
+              .rgb()
+              .string());
       } else {
         if (buttonColor) {
           backgroundColor = buttonColor;
@@ -163,10 +165,12 @@ class Button extends React.Component<Props, State> {
       textColor = isDarkTheme
         ? color(white)
             .alpha(0.3)
-            .rgbaString()
+            .rgb()
+            .string()
         : color(black)
             .alpha(0.26)
-            .rgbaString();
+            .rgb()
+            .string();
     } else {
       if (raised) {
         textColor = isDarkActive ? white : black;
