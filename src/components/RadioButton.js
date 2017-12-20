@@ -69,7 +69,7 @@ class RadioButton extends React.Component<Props, State> {
     radioAnim: new Animated.Value(1),
   };
 
-  componentWillReceiveProps(nextProps: Props) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.checked !== this.props.checked) {
       if (Platform.OS === 'android') {
         if (nextProps.checked) {

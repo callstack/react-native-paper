@@ -13,9 +13,8 @@ type State = {
 const isClassComponent = (Component: Function) => !!Component.prototype.render;
 
 export default function withTheme<Props: {}>(
-  // TODO: this should be React.ComponentType<{ theme: Theme } & Props>
-  Comp: React.ComponentType<any>
-): React.ComponentType<Props> {
+  Comp: React.ComponentType<Props>
+): React.ComponentType<$Diff<Props, { theme: Theme }>> {
   class ThemedComponent extends React.Component<*, State> {
     /* $FlowFixMe */
     static displayName = `withTheme(${Comp.displayName || Comp.name})`;
