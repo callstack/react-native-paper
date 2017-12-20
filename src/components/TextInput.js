@@ -94,7 +94,7 @@ class TextInput extends React.Component<Props, State> {
     disabled: false,
   };
 
-  constructor(props: Props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -105,7 +105,7 @@ class TextInput extends React.Component<Props, State> {
 
   state: State;
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps) {
     if (
       (prevProps.value !== this.props.value ||
         prevProps.placeholder !== this.props.placeholder) &&

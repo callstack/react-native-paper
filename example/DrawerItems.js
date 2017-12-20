@@ -55,7 +55,7 @@ class DrawerItems extends React.Component<Props, State> {
             <DrawerItem
               {...props}
               key={props.key}
-              color={props.key === 3 ? Colors.tealA200 : null}
+              color={props.key === 3 ? Colors.tealA200 : undefined}
               active={this.state.drawerItemIndex === index}
               onPress={() => this._setDrawerItem(index)}
             />

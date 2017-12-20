@@ -80,7 +80,7 @@ type State = {
  * ```
  */
 class Button extends React.Component<Props, State> {
-  constructor(props: Props) {
+  constructor(props) {
     super(props);
     this.state = {
       elevation: new Animated.Value(props.raised ? 2 : 0),

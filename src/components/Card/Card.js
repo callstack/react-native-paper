@@ -14,7 +14,7 @@ import type { Theme } from '../../types';
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
 type Props = {
-  elevation: number,
+  elevation?: number,
   children: React.Node,
   onPress?: Function,
   style?: any,
@@ -50,9 +50,10 @@ class Card extends React.Component<Props, State> {
     elevation: 2,
   };
 
-  constructor(props: Props) {
+  constructor(props) {
     super(props);
     this.state = {
+      /* $FlowFixMe: somehow default props are not respected */
       elevation: new Animated.Value(this.props.elevation),
     };
   }
@@ -68,6 +69,7 @@ class Card extends React.Component<Props, State> {
 
   _handlePressOut = () => {
     Animated.timing(this.state.elevation, {
+      /* $FlowFixMe: somehow default props are not respected */
       toValue: this.props.elevation,
       duration: 150,
     }).start();

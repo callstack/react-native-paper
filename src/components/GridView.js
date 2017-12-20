@@ -98,7 +98,7 @@ class GridView extends React.Component<Props, State> {
     spacing: 0,
   };
 
-  constructor(props: Props) {
+  constructor(props) {
     super(props);
 
     this.state = {
