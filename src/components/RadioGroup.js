@@ -1,13 +1,13 @@
 /* @flow */
 
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 
 type Props = {
   /**
    * Array of RadioButton elements
    */
-  children?: React.ReactNode,
+  children?: React.Node,
   /**
    * Function to execute on selection change
    */
@@ -19,7 +19,7 @@ type Props = {
   /**
    * Style that will be set to View that wrapps Radio Buttons
    */
-  style?: StyleSheet.Styles,
+  style?: any,
 };
 
 /**
@@ -38,7 +38,7 @@ type Props = {
  *       <RadioGroup
  *         selectedIndex={this.state.selectedIndex}
  *         selectionChanged={index => {
- *           this.setState({ selectedIdx: index });
+ *           this.setState({ selectedIndex: index });
  *         }}
  *       >
  *         <RadioButton />
