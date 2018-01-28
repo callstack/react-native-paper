@@ -43,7 +43,7 @@ export default class Portal extends React.Component<Props> {
     this.context[manager].unmount(this._key);
   }
 
-  _key: ?string;
+  _key: any;
 
   render() {
     return null;
