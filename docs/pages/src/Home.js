@@ -22,7 +22,8 @@ const cover = css`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 180px 32px;
+  min-height: 70vh;
+  padding: 32px;
 `;
 
 const title = css`
@@ -98,13 +99,13 @@ const gallery = css`
 `;
 
 const screenshots = [
-  'assets/button.png',
-  'assets/card.png',
-  'assets/checkbox.png',
-  'assets/radio.png',
-  'assets/searchbar.png',
-  'assets/switch.png',
-  'assets/typography.png',
+  'gallery/button.png',
+  'gallery/card.png',
+  'gallery/checkbox.png',
+  'gallery/radio.png',
+  'gallery/searchbar.png',
+  'gallery/switch.png',
+  'gallery/typography.png',
 ];
 
 export default class Home extends React.Component<{}> {

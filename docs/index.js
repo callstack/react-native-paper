@@ -6,6 +6,11 @@ import { build, serve } from 'component-docs';
 
 const task = process.argv[2];
 const dist = path.join(__dirname, 'dist');
+const assets = [
+  path.join(__dirname, 'assets', 'gallery'),
+  path.join(__dirname, 'assets', 'screenshots'),
+];
+const styles = [path.join(__dirname, 'assets', 'styles.css')];
 
 if (!fs.existsSync(dist)) {
   fs.mkdirSync(dist);
@@ -60,13 +65,15 @@ function getPages() {
 
 if (task !== 'build') {
   serve({
-    assets: path.join(__dirname, 'screenshots'),
+    assets,
+    styles,
     pages: getPages,
     output: path.join(__dirname, 'dist'),
   });
 } else {
   build({
-    assets: path.join(__dirname, 'screenshots'),
+    assets,
+    styles,
     pages: getPages,
     output: path.join(__dirname, 'dist'),
   });
