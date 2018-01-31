@@ -2,13 +2,7 @@
 
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import {
-  Row,
-  Checkbox,
-  RadioButton,
-  Colors,
-  withTheme,
-} from 'react-native-paper';
+import { RadioGroupItem, Colors, withTheme } from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
 
 type Props = {
@@ -20,8 +14,8 @@ type State = {
   index: number,
 };
 
-class RowExample extends React.Component<Props, State> {
-  static title = 'Row';
+class RadioGroupItemExample extends React.Component<Props, State> {
+  static title = 'Radio group item';
 
   state = {
     checked: true,
@@ -30,7 +24,7 @@ class RowExample extends React.Component<Props, State> {
 
   render() {
     const { theme: { colors: { background } } } = this.props;
-    const { index, checked } = this.state;
+    const { index } = this.state;
 
     return (
       <View
@@ -41,27 +35,33 @@ class RowExample extends React.Component<Props, State> {
           },
         ]}
       >
-        <Row
-          checked={checked}
-          onPress={() =>
-            this.setState(({ checked }) => ({ checked: !checked }))
-          }
-          label="Checkbox"
-          color={Colors.blue500}
-          renderComponent={props => <Checkbox {...props} />}
-        />
-        <Row
+        <RadioGroupItem
           onPress={() => this.setState({ index: 0 })}
-          label="Radio (default color)"
+          label="Default"
           checked={index === 0}
-          renderComponent={props => <RadioButton {...props} />}
         />
-        <Row
+        <RadioGroupItem
           onPress={() => this.setState({ index: 1 })}
-          label="Radio (custom color)"
+          label="Custom"
           checked={index === 1}
           color={Colors.blue500}
-          renderComponent={props => <RadioButton {...props} />}
+          labelStyle={{
+            fontSize: 16,
+            marginVertical: 4,
+            color: Colors.blue500,
+          }}
+        />
+        <RadioGroupItem
+          onPress={() => this.setState({ index: 0 })}
+          label="Checked disabled"
+          checked
+          disabled
+        />
+        <RadioGroupItem
+          onPress={() => this.setState({ index: 1 })}
+          label="Unchecked disabled"
+          checked={false}
+          disabled
         />
       </View>
     );
@@ -76,4 +76,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(RowExample);
+export default withTheme(RadioGroupItemExample);

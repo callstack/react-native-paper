@@ -4,6 +4,7 @@ import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import TouchableRipple from './TouchableRipple';
 import Paragraph from './Typography/Paragraph';
+import RadioButton from './RadioButton';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types';
 
@@ -21,51 +22,44 @@ type Props = {
    */
   disabled?: boolean,
   /**
-   * Text that will be displayed inside row
+   * Label that will displayed inside component
    */
   label: string,
   /**
-   * Styles that will be applied to Label
+   * Style that will be applied to label
    */
-  labelStyle?: string,
+  labelStyle?: Object,
   /**
-   * color that will be applied to Checkbox or Radio button
+   * Color that will be applied to RadioButton
    */
   color?: string,
-  /**
-   * Function that returns JSX for Checkbox or Radio Button
-   */
-  renderComponent: Function,
   theme: Theme,
 };
 
 /**
- * Row allow to display Checkbox or Radio button with a label
+ * RadioGroupItem allow to display Radio button with a label
  *
  * **Usage:**
  * ```js
- * export default class RowExample extends React.Component {
+ * export default class RadioGroupItemExample extends React.Component {
  *   state = {
- *     index: 0,
+ *     value: 'first',
  *   };
  *
  *   render() {
- *     const { index } = this.state;
+ *     const { value } = this.state;
  *
  *     return (
  *       <View>
- *         <Row
- *           onPress={() => this.setState({ index: 0 })}
- *           label="First radio"
- *           checked={index === 0}
- *           renderComponent={props => <RadioButton {...props} />}
+ *         <RadioGroupItem
+ *           onPress={() => this.setState({ value: 'first' })}
+ *           label="Radio first"
+ *           checked={ value === 'first' }
  *         />
- *         <Row
- *           disabled
- *           onPress={() => this.setState({ index: 1 })}
- *           label="Second radio"
- *           checked={index === 1}
- *           renderComponent={props => <RadioButton {...props} />}
+ *         <RadioGroupItem
+ *           onPress={() => this.setState({ value: 'second' })}
+ *           label="Radio second"
+ *           checked={ value === 'second' }
  *         />
  *       </View>
  *     );
@@ -74,24 +68,16 @@ type Props = {
  * ```
  */
 
-class Row extends React.Component<Props> {
+class RadioGroupItem extends React.Component<Props> {
   render() {
-    const {
-      label,
-      onPress,
-      labelStyle,
-      disabled,
-      checked,
-      color,
-      renderComponent,
-    } = this.props;
+    const { label, onPress, disabled, labelStyle, ...rest } = this.props;
 
     return (
       <TouchableRipple onPress={disabled ? undefined : onPress}>
         <View style={styles.row}>
           <Paragraph style={labelStyle}>{label}</Paragraph>
           <View pointerEvents="none">
-            {renderComponent({ checked, disabled, color })}
+            <RadioButton disabled={disabled} {...rest} />
           </View>
         </View>
       </TouchableRipple>
@@ -108,4 +94,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Row);
+export default withTheme(RadioGroupItem);

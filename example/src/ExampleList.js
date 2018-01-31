@@ -20,7 +20,7 @@ import SwitchExample from './SwitchExample';
 import TextExample from './TextExample';
 import TextInputExample from './TextInputExample';
 import ToolbarExample from './ToolbarExample';
-import RowExample from './RowExample';
+import RadioGroupItemExample from './RadioGroupItemExample';
 import type { Theme } from 'react-native-paper/types';
 
 type Props = {
@@ -39,13 +39,13 @@ export const examples = {
   paper: PaperExample,
   progressbar: ProgressBarExample,
   radio: RadioButtonExample,
+  radioGroupItem: RadioGroupItemExample,
   ripple: RippleExample,
   searchbar: SearchBarExample,
   switch: SwitchExample,
   text: TextExample,
   textInput: TextInputExample,
   toolbar: ToolbarExample,
-  row: RowExample,
 };
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
