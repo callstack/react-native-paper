@@ -4,7 +4,13 @@
 }
 
 .screenshots > img {
-  height: 160px;
-  width: auto;
+  width: 280px;
+  height: auto;
   margin: 4px;
+}
+
+@media (min-width: 1100px) {
+  .screenshots > img {
+    width: 240px;
+  }
 }

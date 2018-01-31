@@ -4,12 +4,8 @@
 import * as React from 'react';
 import { css, styles, include } from 'linaria';
 
-const transition = css`
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-`;
-
 const elevated = css`
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.24);
 `;
 
 const container = css`
@@ -43,15 +39,16 @@ const buttons = css`
 const button = css`
   appearance: none;
   margin: 8px;
+  min-width: 120px;
+  text-align: center;
   font-size: 15px;
   font-weight: bold;
-  padding: 12px 24px;
+  padding: 8px 16px;
   border: 0;
   border-radius: 3px;
   cursor: pointer;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-
-  ${include(transition)};
+  transition: 0.3s;
 
   &:hover {
     ${include(elevated)};
