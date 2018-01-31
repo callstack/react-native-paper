@@ -1,0 +1,10 @@
+.screenshots {
+  padding: 12px 0 4px 0;
+  margin: 0 -4px;
+}
+
+.screenshots > img {
+  height: 160px;
+  width: auto;
+  margin: 4px;
+}
