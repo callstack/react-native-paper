@@ -37,7 +37,6 @@ const DrawerItem = ({
   icon,
   label,
   active,
-  onPress,
   theme,
   ...props
 }: Props) => {
@@ -58,7 +57,7 @@ const DrawerItem = ({
   const fontFamily = theme.fonts.medium;
   const labelMargin = icon ? 32 : 0;
   return (
-    <TouchableRipple {...props} onPress={onPress}>
+    <TouchableRipple {...props}>
       <View style={[styles.wrapper, { backgroundColor }]}>
         {icon && <Icon name={icon} size={24} color={iconColor} />}
         <Text
