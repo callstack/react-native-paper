@@ -47,21 +47,26 @@ function getPages() {
     })
     .map(file => ({ file, type: 'component' }));
 
-  const docs = fs.readdirSync(path.join(__dirname, 'pages')).map(file => ({
-    file: path.join(__dirname, 'pages', file),
-    type: file.endsWith('.js') ? 'custom' : 'markdown',
-  }));
+  const docs = fs
+    .readdirSync(path.join(__dirname, 'pages'))
+    .filter(file => file.includes('.'))
+    .map(file => ({
+      file: path.join(__dirname, 'pages', file),
+      type: file.endsWith('.js') ? 'custom' : 'markdown',
+    }));
 
   return [...docs, { type: 'separator' }, ...components];
 }
 
 if (task !== 'build') {
   serve({
+    assets: path.join(__dirname, 'screenshots'),
     pages: getPages,
     output: path.join(__dirname, 'dist'),
   });
 } else {
   build({
+    assets: path.join(__dirname, 'screenshots'),
     pages: getPages,
     output: path.join(__dirname, 'dist'),
   });
