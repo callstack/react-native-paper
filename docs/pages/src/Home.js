@@ -3,6 +3,7 @@
 
 import * as React from 'react';
 import { css, styles, include } from 'linaria';
+import { Link } from 'component-docs/components';
 
 const elevated = css`
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -18,16 +19,12 @@ const cover = css`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 70vh;
+  min-height: 80vh;
   padding: 32px;
 `;
 
 const title = css`
   font-size: 48px;
-`;
-
-const description = css`
-  font-size: 16px;
 `;
 
 const buttons = css`
@@ -40,10 +37,10 @@ const button = css`
   appearance: none;
   margin: 8px;
   min-width: 120px;
+  font-size: 13px;
   text-align: center;
-  font-size: 15px;
-  font-weight: bold;
-  padding: 8px 16px;
+  text-transform: uppercase;
+  padding: 9px 16px;
   border: 0;
   border-radius: 3px;
   cursor: pointer;
@@ -67,14 +64,27 @@ const primary = css`
 `;
 
 const secondary = css`
-  background-color: #f9f9f9;
+  background-color: #fafafa;
   color: #222;
+  font-weight: 600;
 
   &:hover,
   &:focus,
   &:active {
     color: #222;
   }
+`;
+
+const qrcode = css`
+  display: block;
+  width: 200px;
+  height: 200px;
+  margin: 16px;
+`;
+
+const qrcodeContainer = css`
+  margin: 16px;
+  text-align: center;
 `;
 
 const gallery = css`
@@ -111,18 +121,32 @@ export default class Home extends React.Component<{}> {
       <div {...styles(container)}>
         <div {...styles(cover)}>
           <h1 {...styles(title)}>React Native Paper</h1>
-          <p {...styles(description)}>
-            Cross-platform Material Design for React Native
-          </p>
+          <p>Cross-platform Material Design for React Native</p>
           <div {...styles(buttons)}>
-            <a {...styles(button, primary)} href="getting-started.html">
+            <Link {...styles(button, primary)} to="getting-started.html">
               Get started
-            </a>
+            </Link>
             <a
               {...styles(button, secondary)}
               href="https://github.com/callstack/react-native-paper"
+              target="_blank"
             >
               GitHub
+            </a>
+          </div>
+          <div {...styles(qrcodeContainer)}>
+            <div>
+              Scan with{' '}
+              <a href="https://expo.io/" target="_blank">
+                Expo
+              </a>{' '}
+              to try it out
+            </div>
+            <a
+              href="https://expo.io/@satya164/react-native-paper-example"
+              target="_blank"
+            >
+              <img {...styles(qrcode)} src="images/expo-qr.png" />
             </a>
           </div>
         </div>

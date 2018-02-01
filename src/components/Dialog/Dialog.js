@@ -14,26 +14,33 @@ import type { Theme } from '../../types';
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
 type Props = {
-  children: React.Node,
   /**
-   * Determines whether clicking outside the dialog dismiss it, true by default
+   * Determines whether clicking outside the dialog dismiss it.
    */
   dismissable?: boolean,
   /**
-   * Callback that is called when the user dismisses the dialog
+   * Callback that is called when the user dismisses the dialog.
    */
   onRequestClose: Function,
   /**
-   * Determines Whether the dialog is visible
+   * Determines Whether the dialog is visible.
    */
   visible: boolean,
-  theme: Theme,
+  /**
+   * Content of the `Dialog`.
+   */
+  children: React.Node,
   style?: any,
+  /**
+   * @optional
+   */
+  theme: Theme,
 };
 
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
  *
+ * ## Usage
  * ```js
  * export default class MyComponent extends React.Component {
  *   state = {
@@ -52,13 +59,13 @@ type Props = {
  *            visible={visible}
  *            onRequestClose={this._hideDialog}
  *         >
- *           <Dialog.Title>Alert</Dialog.Title>
- *           <Dialog.Content>
+ *           <DialogTitle>Alert</DialogTitle>
+ *           <DialogContent>
  *             <Paragraph>This is simple dialog</Paragraph>
- *           </Dialog.Content>
- *           <Dialog.Actions>
+ *           </DialogContent>
+ *           <DialogActions>
  *             <Button onPress={this._hideDialog}>Done</Button>
- *           </Dialog.Actions>
+ *           </DialogActions>
  *         </Dialog>
  *       </View>
  *     );

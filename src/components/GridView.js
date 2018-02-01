@@ -7,7 +7,7 @@ import type { Theme } from '../types';
 
 type Props = {
   /**
-   * Item's spacing
+   * Gutter between the items.
    */
   spacing: number,
   /**
@@ -15,7 +15,7 @@ type Props = {
    */
   getNumberOfColumns: (width: number) => number,
   /**
-   * Data for the list
+   * Data for the list.
    */
   data: Array<any>,
   /**
@@ -24,10 +24,13 @@ type Props = {
   keyExtractor: (item: any) => string,
   contentContainerStyle?: ?Object,
   /**
-   * Component for rendering item
+   * Component for rendering item.
    */
   renderItem: (item: any) => React.Element<any>,
   onLayout?: Function,
+  /**
+   * @optional
+   */
   theme: Theme,
 };
 
@@ -38,7 +41,7 @@ type State = {
 /**
  * Grid lists are an alternative to standard list views.
  *
- * **Usage:**
+ * ## Usage
  * ```js
  * export default class MyComponent extends Component {
  *   state = {

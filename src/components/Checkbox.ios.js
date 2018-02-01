@@ -10,26 +10,29 @@ import type { Theme } from '../types';
 
 type Props = {
   /**
-   * Whether checkbox is checked
+   * Whether checkbox is checked.
    */
   checked?: boolean,
   /**
-   * Whether checkbox is disabled
+   * Whether checkbox is disabled.
    */
   disabled?: boolean,
   /**
-   * Function to execute on press
+   * Function to execute on press.
    */
   onPress?: Function,
   /**
-   * Custom color for checkbox
+   * Custom color for checkbox.
    */
   color?: string,
+  /**
+   * @optional
+   */
   theme: Theme,
 };
 
 /**
- * Checkboxes allow the selection of multiple options from a set
+ * Checkboxes allow the selection of multiple options from a set.
  */
 class Checkbox extends React.Component<Props> {
   render() {

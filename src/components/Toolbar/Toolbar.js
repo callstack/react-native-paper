@@ -11,18 +11,21 @@ import type { Theme } from '../../types';
 
 type Props = {
   /**
-   * Theme color for the whole toolbar, a dark toolbar will render light text and vice-versa
-   * Child elements can override this prop independently
+   * Theme color for the toolbar, a dark toolbar will render light text and vice-versa
+   * Child elements can override this prop independently.
    */
   dark?: boolean,
   /**
-   * Space added it Toolbar to adapt to the StatusBar
+   * Space added it Toolbar to adapt to the StatusBar.
    */
   statusBarHeight?: number,
   /**
-   * Toolbar content
+   * Content of the `Toolbar`.
    */
   children: React.Node,
+  /**
+   * @optional
+   */
   theme: Theme,
   style?: any,
 };
@@ -30,21 +33,21 @@ type Props = {
 /**
  *  Toolbar is a generalization of action bars for use within application layouts.
  *
- * **Usage:**
+ * ## Usage
  * ```js
  * export default class MyComponent extends Component {
  *   render() {
  *     return (
  *       <Toolbar>
- *         <Toolbar.BackAction
+ *         <ToolbarBackAction
  *           onPress={this._goBack}
  *         />
- *         <Toolbar.Content
+ *         <ToolbarContent
  *           title="Title"
  *           subtitle="Subtitle"
  *         />
- *         <Toolbar.Action icon="search" onPress={this._onSearch} />
- *         <Toolbar.Action icon="more-vert" onPress={this._onMore} />
+ *         <ToolbarAction icon="search" onPress={this._onSearch} />
+ *         <ToolbarAction icon="more-vert" onPress={this._onMore} />
  *       </Toolbar>
  *     );
  *   }

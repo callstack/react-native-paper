@@ -13,19 +13,19 @@ const ANDROID_VERSION_LOLLIPOP = 21;
 
 type Props = {
   /**
-   * Theme color for the action icon, a dark action icon will render a light icon and vice-versa
+   * Theme color for the action icon, a dark action icon will render a light icon and vice-versa.
    */
   dark?: boolean,
   /**
-   * Name of the icon to show
+   * Name of the icon to show.
    */
   icon: IconSource,
   /**
-   * Optional icon size, defaults to 24
+   * Optional icon size, defaults to 24.
    */
   size?: number,
   /**
-   * Function to execute on press
+   * Function to execute on press.
    */
   onPress?: Function,
   style?: any,
