@@ -6,7 +6,7 @@ import {
   DrawerItem,
   DrawerSection,
   withTheme,
-  Checkbox,
+  Switch,
   TouchableRipple,
   Paragraph,
   Colors,
@@ -72,7 +72,7 @@ class DrawerItems extends React.Component<Props, State> {
             >
               <Paragraph>Dark Theme</Paragraph>
               <View pointerEvents="none">
-                <Checkbox checked={this.state.isDark} />
+                <Switch value={this.state.isDark} />
               </View>
             </View>
           </TouchableRipple>

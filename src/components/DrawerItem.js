@@ -85,7 +85,7 @@ const DrawerItem = ({
             color: labelColor,
             fontFamily,
             marginLeft: labelMargin,
-            marginRight: 16,
+            marginRight: 32,
           }}
         >
           {label}
