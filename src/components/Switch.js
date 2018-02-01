@@ -31,6 +31,11 @@ type Props = {
 /**
  * Switch is a visual toggle between two mutually exclusive states—on and off
  *
+ * <div class="screenshots">
+ *   <img src="screenshots/switch-android.png" />
+ *   <img src="screenshots/switch-ios.png" />
+ * </div>
+ *
  * **Usage:**
  * ```js
  * export default class MyComponent extends Component {

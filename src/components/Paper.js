@@ -16,6 +16,10 @@ type Props = {
 /**
  * Paper is a basic container that can give depth to the page.
  *
+ * <div class="screenshots">
+ *   <img src="screenshots/paper.png" />
+ * </div>
+ *
  * **Usage:**
  * ```js
  * const MyComponent = () => (
@@ -23,7 +27,6 @@ type Props = {
  *      <Text>Paper</Text>
  *   </Paper>
  * );
- *
  *
  * const styles = StyleSheet.create({
  *   paper: {

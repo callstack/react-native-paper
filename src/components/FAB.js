@@ -39,6 +39,10 @@ type Props = {
 /**
  * A floating action button represents the primary action in an application
  *
+ * <div class="screenshots">
+ *   <img src="screenshots/fab.png" />
+ * </div>
+ *
  * **Usage:**
  * ```js
  * const MyComponent = () => (
