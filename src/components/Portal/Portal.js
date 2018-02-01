@@ -25,7 +25,7 @@ export default class Portal extends React.Component<Props> {
     [manager]: PropTypes.object,
   };
 
-  componentDidMount() {
+  componentWillMount() {
     if (
       typeof this.context[manager] !== 'object' ||
       this.context[manager] === null
@@ -38,8 +38,8 @@ export default class Portal extends React.Component<Props> {
     this._key = this.context[manager].mount(this.props);
   }
 
-  componentDidUpdate() {
-    this.context[manager].update(this._key, this.props);
+  componentWillReceiveProps(nextProps: Props) {
+    this.context[manager].update(this._key, nextProps);
   }
 
   componentWillUnmount() {
