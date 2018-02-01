@@ -3,14 +3,22 @@
   margin: 0 -4px;
 }
 
-.screenshots > img {
-  width: 280px;
+.screenshots img {
+  max-width: 280px;
   height: auto;
+}
+
+.screenshots > div {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.screenshots > * {
   margin: 4px;
 }
 
 @media (min-width: 1100px) {
-  .screenshots > img {
-    width: 240px;
+  .screenshots img {
+    max-width: 240px;
   }
 }
