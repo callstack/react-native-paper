@@ -32,8 +32,14 @@ type Props = {
  * Switch is a visual toggle between two mutually exclusive states—on and off
  *
  * <div class="screenshots">
- *   <img src="screenshots/switch-android.png" />
- *   <img src="screenshots/switch-ios.png" />
+ *   <div>
+ *     <img src="screenshots/switch-android.png" />
+ *     <span>Android</span>
+ *   </div>
+ *   <div>
+ *     <img src="screenshots/switch-ios.png" />
+ *     <span>iOS</span>
+ *   </div>
  * </div>
  *
  * **Usage:**
