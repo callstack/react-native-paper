@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { View } from 'react-native';
+import { Broadcast } from 'react-broadcast';
 
 type Props = {
   /**
@@ -11,11 +12,11 @@ type Props = {
   /**
    * Function to execute on selection change
    */
-  selectionChanged?: Function,
+  onValueChange: Function,
   /**
-   * Index of selected element
+   * Value of currently selected Radio
    */
-  selectedIndex: number,
+  value: string,
   /**
    * Style that will be set to View that wrapps Radio Buttons
    */
@@ -26,26 +27,26 @@ type Props = {
  * RadioGroup allows the selection of a single RadioButton
  * **Usage**
  * ```js
+ *
+ * const Radio = withRadioGroup(RadioButton);
+ *
  * export default class MyComponent extends Component {
  *   state = {
- *     selectedIndex: 0,
+ *     value: 'first',
  *   };
  *
  *   render() {
- *     const { selectedIndex } = this.state;
- *
  *     return(
  *       <RadioGroup
- *         selectedIndex={this.state.selectedIndex}
- *         selectionChanged={index => {
- *           this.setState({ selectedIndex: index });
- *         }}
+ *         onValueChange={value => this.setState({ value })}
+ *         value={this.state.value}
  *       >
- *         <RadioButton />
- *         <RadioButton />
- *         <RadioButton />
- *         <RadioButton />
- *         <RadioButton />
+ *         <View>
+ *           <Radio value="first" />
+ *         </View>
+ *         <View>
+ *           <Radio value="second" />
+ *         </View>
  *       </RadioGroup>
  *     )
  *   }
@@ -53,21 +54,16 @@ type Props = {
  *```
  */
 
+export const channel = 'react-native-paper$radio-group';
+
 class RadioGroup extends React.Component<Props> {
   render() {
-    const { children, selectionChanged, selectedIndex, style } = this.props;
+    const { value, onValueChange, children } = this.props;
 
     return (
-      <View style={style}>
-        {React.Children.map(children, (child, index) =>
-          React.cloneElement(child, {
-            checked: selectedIndex === index,
-            onPress: () => {
-              selectionChanged(index);
-            },
-          })
-        )}
-      </View>
+      <Broadcast channel={channel} value={{ value, onValueChange }}>
+        <View>{children}</View>
+      </Broadcast>
     );
   }
 }

@@ -42,7 +42,8 @@
   "dependencies": {
     "color": "^2.0.1",
     "deepmerge": "^2.0.1",
-    "prop-types": "^15.6.0"
+    "prop-types": "^15.6.0",
+    "react-broadcast": "^0.6.2"
   },
   "scripts": {
     "commitmsg": "node ./scripts/validate-commit-message.js $GIT_PARAMS",
