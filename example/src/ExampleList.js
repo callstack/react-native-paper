@@ -14,6 +14,7 @@ import GridViewExample from './GridViewExample';
 import PaperExample from './PaperExample';
 import ProgressBarExample from './ProgressBarExample';
 import RadioButtonExample from './RadioButtonExample';
+import RadioGroupExample from './RadioGroupExample';
 import RippleExample from './RippleExample';
 import SearchBarExample from './SearchBarExample';
 import SwitchExample from './SwitchExample';
@@ -38,6 +39,7 @@ export const examples = {
   paper: PaperExample,
   progressbar: ProgressBarExample,
   radio: RadioButtonExample,
+  radioGroup: RadioGroupExample,
   ripple: RippleExample,
   searchbar: SearchBarExample,
   switch: SwitchExample,
