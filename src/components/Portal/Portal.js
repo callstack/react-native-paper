@@ -9,6 +9,9 @@ export type PortalProps = {
    * Position of the element in the z-axis
    */
   position?: number,
+  /**
+   * Content of the `Portal`.
+   */
   children: React.Node,
 };
 

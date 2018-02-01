@@ -12,19 +12,38 @@ import color from 'color';
 const ANDROID_VERSION_LOLLIPOP = 21;
 
 type Props = {
+  /**
+   * Whether to render the ripple outside the view bounds.
+   */
   borderless?: boolean,
+  /**
+   * Type of background drawabale to display the feedback.
+   * https://facebook.github.io/react-native/docs/touchablenativefeedback.html#background
+   */
   background?: Object,
+  /**
+   * Function to execute on press.
+   */
   onPress?: ?Function,
+  /**
+   * Color of the ripple effect.
+   */
   rippleColor?: string,
+  /**
+   * Color of the underlay for the highlight effect.
+   */
   underlayColor?: string,
+  /**
+   * Content of the `TouchableRipple`.
+   */
   children: React.Node,
   style?: any,
 };
 
 /**
- * Ripple provides components with a material "ink ripple" interaction effect
+ * Ripple provides components with a material "ink ripple" interaction effect.
  *
- * **Usage:**
+ * ## Usage
  * ```js
  * const MyComponent = () => (
  *   <TouchableRipple

@@ -9,9 +9,9 @@ type Props = {
 };
 
 /**
- * Headline - typography style
+ * Typography component for showing a headline.
  *
- * **Usage:**
+ * ## Usage
  * ```js
  * const MyComponent = () => (
  *   <Headline>Headline</Headline>

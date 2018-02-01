@@ -9,9 +9,9 @@ type Props = {
 };
 
 /**
- * Subheading - typography style
+ * Typography component for showing a subheading.
  *
- * **Usage:**
+ * ## Usage
  * ```js
  * const MyComponent = () => (
  *   <Subheading>Subheading</Subheading>

@@ -13,27 +13,30 @@ import type { Theme } from '../../types';
 
 type Props = {
   /**
-   * Theme color for the text, a dark toolbar will render light text and vice-versa
+   * Theme color for the text, a dark toolbar will render light text and vice-versa.
    */
   dark?: boolean,
   /**
-   * Text for the title
+   * Text for the title.
    */
   title: string | React.Node,
   /**
-   * Style for the title
+   * Style for the title.
    */
   titleStyle?: any,
   /**
-   * Text for the subtitle
+   * Text for the subtitle.
    */
   subtitle?: string | React.Node,
   /**
-   * Style for the subtitle
+   * Style for the subtitle.
    */
   subtitleStyle?: any,
-  theme: Theme,
   style?: any,
+  /**
+   * @optional
+   */
+  theme: Theme,
 };
 
 class ToolbarContent extends React.Component<Props> {

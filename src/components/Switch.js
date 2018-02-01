@@ -2,36 +2,39 @@
 import * as React from 'react';
 
 import { grey400, grey800, grey50, white, black } from '../styles/colors';
-import { View, Switch, Platform } from 'react-native';
+import { View, Switch as NativeSwitch, Platform } from 'react-native';
 import withTheme from '../core/withTheme';
 import setColor from 'color';
 import type { Theme } from '../types';
 
 type Props = {
   /**
-   * Disable toggling the switch
+   * Disable toggling the switch.
    */
   disabled?: boolean,
   /**
-   * Switch value- true or false
+   * Switch value- true or false.
    */
   value?: boolean,
   /**
-   * Custom color for checkbox
+   * Custom color for checkbox.
    */
   color?: string,
   /**
-   * Invoked with the new value when the value changes
+   * Invoked with the new value when the value changes.
    */
   onValueChange?: Function,
   style?: any,
+  /**
+   * @optional
+   */
   theme: Theme,
 };
 
 /**
- * Switch is a visual toggle between two mutually exclusive states—on and off
+ * Switch is a visual toggle between two mutually exclusive states—on and off.
  *
- * **Usage:**
+ * ## Usage
  * ```js
  * export default class MyComponent extends Component {
  *   state = {
@@ -52,7 +55,7 @@ type Props = {
  * }
  * ```
  */
-class SwitchRow extends React.Component<Props> {
+class Switch extends React.Component<Props> {
   render() {
     const {
       value,
@@ -94,7 +97,7 @@ class SwitchRow extends React.Component<Props> {
 
     return (
       <View>
-        <Switch
+        <NativeSwitch
           {...props}
           value={value}
           disabled={disabled}
@@ -107,4 +110,4 @@ class SwitchRow extends React.Component<Props> {
   }
 }
 
-export default withTheme(SwitchRow);
+export default withTheme(Switch);
