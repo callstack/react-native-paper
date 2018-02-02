@@ -22,7 +22,7 @@ type Props = {
  *   <img src="screenshots/paper.9_12.png" />
  * </div>
  *
- * **Usage:**
+ * ## Usage
  * ```js
  * const MyComponent = () => (
  *   <Paper style={styles.paper}>

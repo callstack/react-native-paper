@@ -43,7 +43,7 @@ type Props = {
  *   <img src="screenshots/fab.png" />
  * </div>
  *
- * **Usage:**
+ * ## Usage
  * ```js
  * const MyComponent = () => (
  *   <FAB

@@ -50,7 +50,7 @@ type Props = {
  *   </div>
  * </div>
  *
- * **Usage:**
+ * ## Usage
  * ```js
  * export default class MyComponent extends Component {
  *   state = {

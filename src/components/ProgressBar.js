@@ -36,7 +36,7 @@ const ProgressBarComponent = Platform.select({
  *   <img src="screenshots/progress-bar.png" />
  * </div>
  *
- * **Usage:**
+ * ## Usage
  * ```js
  * const MyComponent = () => (
  *   <ProgressBar progress={0.5} color={Colors.red800} />
