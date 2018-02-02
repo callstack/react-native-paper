@@ -55,6 +55,7 @@ jobs:
             at: ~/react-native-paper
         - run: |
             cd docs && yarn run build && cd ..
+            bash .circleci/comment-artifacts.sh
         - store_artifacts:
             path: docs/dist
             destination: docs
@@ -68,7 +69,7 @@ jobs:
             fingerprints:
               - "2f:b4:ed:e1:25:88:5c:4a:03:c2:16:40:56:70:29:29"
         - run: |
-            bash docs/deploy.sh
+            bash .circleci/deploy-docs.sh
 
 workflows:
   version: 2
@@ -81,6 +82,9 @@ workflows:
       - build-docs:
           requires:
             - install-dependencies
+          filters:
+            branches:
+              ignore: master
       - deploy-docs:
           requires:
             - install-dependencies
