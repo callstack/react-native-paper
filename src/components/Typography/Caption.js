@@ -9,9 +9,9 @@ type Props = {
 };
 
 /**
- * Caption - typography style
+ * Typography component for showing a caption.
  *
- * **Usage:**
+ * ## Usage
  * ```js
  * const MyComponent = () => (
  *   <Caption>Caption</Caption>

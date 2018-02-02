@@ -4,10 +4,28 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 type Props = {
+  /**
+   * Content of the `CardActions`.
+   */
   children: React.Node,
   style?: any,
 };
 
+/**
+ * A component to show a list of actions inside a Card.
+ *
+ * ## Usage
+ * ```js
+ * const MyComponent = () => (
+ *   <Card>
+ *     <CardActions>
+ *       <Button>Cancel</Button>
+ *       <Button>Ok</Button>
+ *     </CardActions>
+ *   </Card>
+ * );
+ * ```
+ */
 const CardActions = (props: Props) => {
   return (
     <View {...props} style={[styles.container, props.style]}>

@@ -7,12 +7,33 @@ import { grey200 } from '../../styles/colors';
 import type { Theme } from '../../types';
 
 type Props = {
+  /**
+   * @internal
+   */
   index?: number,
+  /**
+   * @internal
+   */
   total?: number,
   style?: any,
+  /**
+   * @optional
+   */
   theme: Theme,
 };
 
+/**
+ * A component to show a cover image inside a Card.
+ *
+ * ## Usage
+ * ```js
+ * const MyComponent = () => (
+ *   <Card>
+ *     <CardCover source={{ uri: 'https://picsum.photos/700' }} />
+ *   </Card>
+ * );
+ * ```
+ */
 const CardCover = (props: Props) => {
   const { index, total, style, theme } = props;
   const { roundness } = theme;

@@ -8,15 +8,24 @@ import withTheme from '../core/withTheme';
 import type { Theme } from '../types';
 
 type Props = {
-  children: any,
-  label?: string,
+  /**
+   * Title to show as the header for the section.
+   */
+  title?: string,
+  /**
+   * Content of the `DrawerSection`.
+   */
+  children: React.Node,
+  /**
+   * @optional
+   */
   theme: Theme,
 };
 
 /**
- * Drawer container slides in from the left and contains the navigation destinations for your app
+ * Drawer container slides in from the left and contains the navigation destinations for your app.
  *
- * **Usage:**
+ * ## Usage
  * ```js
  * export default class MyComponent extends Component {
  *   state = {
@@ -26,7 +35,7 @@ type Props = {
  *   render() {
  *     const { active } = this.state;
  *     return (
- *       <DrawerSection label="Subheader">
+ *       <DrawerSection title="Subheader">
  *         <DrawerItem
  *           label="First Item"
  *           active={this.state.active === 'First Item'}
@@ -43,9 +52,9 @@ type Props = {
  * }
  * ```
  */
-const DrawerSection = ({ children, label, theme, ...props }: Props) => {
+const DrawerSection = ({ children, title, theme, ...props }: Props) => {
   const { colors, fonts } = theme;
-  const labelColor = color(colors.text)
+  const titleColor = color(colors.text)
     .alpha(0.54)
     .rgb()
     .string();
@@ -53,13 +62,13 @@ const DrawerSection = ({ children, label, theme, ...props }: Props) => {
 
   return (
     <View {...props}>
-      {label && (
+      {title && (
         <View style={{ height: 40, justifyContent: 'center' }}>
           <Text
             numberOfLines={1}
-            style={{ color: labelColor, fontFamily, marginLeft: 16 }}
+            style={{ color: titleColor, fontFamily, marginLeft: 16 }}
           >
-            {label}
+            {title}
           </Text>
         </View>
       )}

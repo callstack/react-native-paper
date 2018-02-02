@@ -8,8 +8,14 @@ import * as Colors from '../styles/colors';
 import type { Theme } from '../types';
 
 type Props = {
+  /**
+   * Content of the `Paper`.
+   */
   children: React.Node,
   style?: any,
+  /**
+   * @optional
+   */
   theme: Theme,
 };
 

@@ -9,9 +9,9 @@ type Props = {
 };
 
 /**
- * Title - typography style
+ * Typography component for showing a title.
  *
- * **Usage:**
+ * ## Usage
  * ```js
  * const MyComponent = () => (
  *   <Title>Title</Title>

@@ -23,11 +23,11 @@ const getBackIcon = Platform.select({
 
 type Props = {
   /**
-   * Theme color for the back icon, a dark action icon will render a light icon and vice-versa
+   * Theme color for the back icon, a dark action icon will render a light icon and vice-versa.
    */
   dark?: boolean,
   /**
-   * Function to execute on press
+   * Function to execute on press.
    */
   onPress?: Function,
   style?: any,
