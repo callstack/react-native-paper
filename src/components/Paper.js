@@ -17,7 +17,9 @@ type Props = {
  * Paper is a basic container that can give depth to the page.
  *
  * <div class="screenshots">
- *   <img src="screenshots/paper.png" />
+ *   <img src="screenshots/paper.1_2.png" />
+ *   <img src="screenshots/paper.4_6.png" />
+ *   <img src="screenshots/paper.9_12.png" />
  * </div>
  *
  * **Usage:**

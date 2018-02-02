@@ -33,12 +33,20 @@ type Props = {
  *
  * <div class="screenshots">
  *   <div>
- *     <img src="screenshots/switch-android.png" />
- *     <span>Android</span>
+ *     <img src="screenshots/switch.android.enabled.png" />
+ *     <span>Android (enabled)</span>
  *   </div>
  *   <div>
- *     <img src="screenshots/switch-ios.png" />
- *     <span>iOS</span>
+ *     <img src="screenshots/switch.android.disabled.png" />
+ *     <span>Android (disabled)</span>
+ *   </div>
+ *   <div>
+ *     <img src="screenshots/switch.ios.enabled.png" />
+ *     <span>iOS (enabled)</span>
+ *   </div>
+ *   <div>
+ *     <img src="screenshots/switch.ios.disabled.png" />
+ *     <span>iOS (disabled)</span>
  *   </div>
  * </div>
  *
