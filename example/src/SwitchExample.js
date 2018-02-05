@@ -95,42 +95,34 @@ class SwitchExample extends React.Component<Props, State> {
       >
         <View style={styles.row}>
           <Paragraph>Normal {switchValueNormalLabel}</Paragraph>
-          <View>
-            <Switch
-              value={this.state.valueNormal}
-              onValueChange={() =>
-                this.setState(state => ({
-                  valueNormal: !state.valueNormal,
-                }))
-              }
-            />
-          </View>
+          <Switch
+            value={this.state.valueNormal}
+            onValueChange={() =>
+              this.setState(state => ({
+                valueNormal: !state.valueNormal,
+              }))
+            }
+          />
         </View>
         <View style={styles.row}>
           <Paragraph>Custom {switchValueCustomlLabel}</Paragraph>
-          <View>
-            <Switch
-              value={this.state.valueCustom}
-              onValueChange={() =>
-                this.setState(state => ({
-                  valueCustom: !state.valueCustom,
-                }))
-              }
-              color={Colors.blue500}
-            />
-          </View>
+          <Switch
+            value={this.state.valueCustom}
+            onValueChange={() =>
+              this.setState(state => ({
+                valueCustom: !state.valueCustom,
+              }))
+            }
+            color={Colors.blue500}
+          />
         </View>
         <View style={styles.row}>
           <Paragraph>Switch on (disabled)</Paragraph>
-          <View>
-            <Switch value disabled />
-          </View>
+          <Switch value disabled />
         </View>
         <View style={styles.row}>
           <Paragraph>Switch off (disabled)</Paragraph>
-          <View>
-            <Switch value={false} disabled />
-          </View>
+          <Switch value={false} disabled />
         </View>
       </View>
     );
@@ -143,7 +135,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     paddingVertical: 8,
   },
-
   row: {
     flexDirection: 'row',
     alignItems: 'center',
