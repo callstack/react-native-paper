@@ -4,7 +4,8 @@ import * as React from 'react';
 import { View, Platform, StatusBar, StyleSheet } from 'react-native';
 import {
   Colors,
-  Button,
+  Switch,
+  Paragraph,
   Toolbar,
   ToolbarContent,
   ToolbarAction,
@@ -18,35 +19,37 @@ type Props = {
   theme: Theme,
 };
 
-type State = {
-  showLeftIcon: boolean,
-  showSearchIcon: boolean,
-  showMoreIcon: boolean,
-  showSubtitle: boolean,
+const initialParams = {
+  showLeftIcon: true,
+  showSubtitle: true,
+  showSearchIcon: true,
+  showMoreIcon: true,
 };
 
 const MORE_ICON = Platform.OS === 'ios' ? 'more-horiz' : 'more-vert';
 
-class ToolbarExample extends React.Component<Props, State> {
+class ToolbarExample extends React.Component<Props> {
   static title = 'Toolbar';
   static navigationOptions = ({ navigation }) => {
+    const params = { ...initialParams, ...navigation.state.params };
+
     return {
       header: (
         <Toolbar
           dark
           statusBarHeight={Platform.OS === 'ios' ? 20 : StatusBar.currentHeight}
         >
-          {navigation.params.showLeftIcon && (
+          {params.showLeftIcon && (
             <ToolbarBackAction onPress={() => navigation.goBack()} />
           )}
           <ToolbarContent
             title="Title"
-            subtitle={navigation.params.showSubtitle ? 'Subtitle' : null}
+            subtitle={params.showSubtitle ? 'Subtitle' : null}
           />
-          {navigation.params.showSearchIcon && (
+          {params.showSearchIcon && (
             <ToolbarAction icon="search" onPress={() => {}} />
           )}
-          {navigation.params.showMoreIcon && (
+          {params.showMoreIcon && (
             <ToolbarAction icon={MORE_ICON} onPress={() => {}} />
           )}
         </Toolbar>
@@ -54,21 +57,10 @@ class ToolbarExample extends React.Component<Props, State> {
     };
   };
 
-  state = {
-    showLeftIcon: true,
-    showSearchIcon: false,
-    showMoreIcon: true,
-    showSubtitle: false,
-  };
-
   render() {
-    const {
-      showLeftIcon,
-      showSearchIcon,
-      showMoreIcon,
-      showSubtitle,
-    } = this.state;
-    const { theme: { colors: { background } } } = this.props;
+    const { navigation, theme: { colors: { background } } } = this.props;
+    const params = { ...initialParams, ...navigation.state.params };
+
     return (
       <View
         style={[
@@ -78,55 +70,49 @@ class ToolbarExample extends React.Component<Props, State> {
           },
         ]}
       >
-        <View style={styles.content}>
-          <Button
-            accent
-            raised
-            onPress={() => {
-              this.setState({ showLeftIcon: !this.state.showLeftIcon });
-              this.props.navigation.setParams({
-                showLeftIcon: !!showLeftIcon,
-              });
-            }}
-          >
-            {`Left icon: ${showLeftIcon ? 'On' : 'Off'}`}
-          </Button>
-          <Button
-            accent
-            raised
-            onPress={() => {
-              this.setState({ showSubtitle: !this.state.showSubtitle });
-              this.props.navigation.setParams({
-                showSubtitle: !showSubtitle,
-              });
-            }}
-          >
-            {`Subtitle: ${showSubtitle ? 'On' : 'Off'}`}
-          </Button>
-          <Button
-            accent
-            raised
-            onPress={() => {
-              this.setState({ showSearchIcon: !this.state.showSearchIcon });
-              this.props.navigation.setParams({
-                showSearchIcon: !showSearchIcon,
-              });
-            }}
-          >
-            {`Search icon: ${showSearchIcon ? 'On' : 'Off'}`}
-          </Button>
-          <Button
-            accent
-            raised
-            onPress={() => {
-              this.setState({ showMoreIcon: !this.state.showMoreIcon });
-              this.props.navigation.setParams({
-                showMoreIcon: !!showMoreIcon,
-              });
-            }}
-          >
-            {`More icon: ${showMoreIcon ? 'On' : 'Off'}`}
-          </Button>
+        <View style={styles.row}>
+          <Paragraph>Left icon</Paragraph>
+          <Switch
+            value={params.showLeftIcon}
+            onValueChange={value =>
+              navigation.setParams({
+                showLeftIcon: value,
+              })
+            }
+          />
+        </View>
+        <View style={styles.row}>
+          <Paragraph>Subtitle</Paragraph>
+          <Switch
+            value={params.showSubtitle}
+            onValueChange={value =>
+              navigation.setParams({
+                showSubtitle: value,
+              })
+            }
+          />
+        </View>
+        <View style={styles.row}>
+          <Paragraph>Search icon</Paragraph>
+          <Switch
+            value={params.showSearchIcon}
+            onValueChange={value =>
+              navigation.setParams({
+                showSearchIcon: value,
+              })
+            }
+          />
+        </View>
+        <View style={styles.row}>
+          <Paragraph>More icon</Paragraph>
+          <Switch
+            value={params.showMoreIcon}
+            onValueChange={value =>
+              navigation.setParams({
+                showMoreIcon: value,
+              })
+            }
+          />
         </View>
       </View>
     );
@@ -136,14 +122,15 @@ class ToolbarExample extends React.Component<Props, State> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.grey200,
+    backgroundColor: Colors.white,
+    paddingVertical: 8,
   },
-  content: {
-    flex: 1,
-    flexWrap: 'wrap',
+  row: {
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    padding: 4,
+    justifyContent: 'space-between',
+    paddingVertical: 8,
+    paddingHorizontal: 16,
   },
 });
 
