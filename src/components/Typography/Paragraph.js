@@ -31,7 +31,7 @@ export default Paragraph;
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 20,
+    fontSize: 14,
     lineHeight: 20,
     marginVertical: 2,
   },
