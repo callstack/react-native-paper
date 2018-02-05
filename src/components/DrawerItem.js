@@ -12,20 +12,38 @@ import type { IconSource } from './Icon';
 
 type Props = {
   /**
-   * Custom color for checkbox
+   * The label text of the item.
+   */
+  label: string,
+  /**
+   * Name of the icon. Can be a string (name of `MaterialIcon`),
+   * an object of shape `{ uri: 'https://path.to' }`,
+   * a local image: `require('../path/to/image.png')`,
+   * or a valid React Native component.
+   */
+  icon?: IconSource,
+  /**
+   * Whether to highlight the drawer item as active.
+   */
+  active?: boolean,
+  /**
+   * Function to execute on press.
+   */
+  onPress?: Function,
+  /**
+   * Custom color for the drawer text and icon.
    */
   color?: string,
-  icon?: IconSource,
-  label: string,
-  active?: boolean,
-  onPress?: Function,
+  /**
+   * @optional
+   */
   theme: Theme,
 };
 
 /**
- * Item from drawer's list which navigates to speficic location
+ * Item from drawer's list which navigates to specific location.
  *
- * **Usage:**
+ * ## Usage
  * ```js
  * const MyComponent = () => (
  *   <DrawerItem label="First Item" />
@@ -66,7 +84,7 @@ const DrawerItem = ({
             color: labelColor,
             fontFamily,
             marginLeft: labelMargin,
-            marginRight: 16,
+            marginRight: 32,
           }}
         >
           {label}

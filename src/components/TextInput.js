@@ -15,46 +15,49 @@ const AnimatedText = Animated.createAnimatedComponent(Text);
 
 type Props = {
   /**
-   * If true, user won't be able to interact with the component. The default value is false
+   * If true, user won't be able to interact with the component.
    */
   disabled?: boolean,
   /**
-   * The text to use for the floating label
+   * The text to use for the floating label.
    */
   label?: string,
   /**
-   * Placeholder for the input
+   * Placeholder for the input.
    */
   placeholder?: string,
   /**
-   * Callback that is called when the text input's text changes. Changed text is passed as an argument to the callback handler
+   * Callback that is called when the text input's text changes. Changed text is passed as an argument to the callback handler.
    */
   onChangeText?: Function,
   /**
-   * Underline color of the input
+   * Underline color of the input.
    */
   underlineColor?: string,
   /**
-   * Whether the input can have multiple lines
+   * Whether the input can have multiple lines.
    */
   multiline: boolean,
   /**
-   * The number of lines to show in the input (Android only)
+   * The number of lines to show in the input (Android only).
    */
   numberOfLines: number,
   /**
-   * Callback that is called when the text input is focused
+   * Callback that is called when the text input is focused.
    */
   onFocus?: Function,
   /**
-   * Callback that is called when the text input is blurred
+   * Callback that is called when the text input is blurred.
    */
   onBlur?: Function,
   /**
-   * Value of the text input
+   * Value of the text input.
    */
   value?: string,
   style?: any,
+  /**
+   * @optional
+   */
   theme: Theme,
 };
 
@@ -66,7 +69,7 @@ type State = {
 /**
  * TextInputs allow users to input text.
  *
- * **Usage:**
+ * ## Usage
  * ```js
  * class MyComponent extends React.Component {
  *   state = {

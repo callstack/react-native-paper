@@ -13,14 +13,17 @@ import setColor from 'color';
 
 type Props = {
   /**
-   * Progress value (between 0 and 1)
+   * Progress value (between 0 and 1).
    */
   progress: number,
   /**
-   * Color of the progress bar
+   * Color of the progress bar.
    */
   color?: string,
   style?: any,
+  /**
+   * @optional
+   */
   theme: Theme,
 };
 
@@ -30,9 +33,13 @@ const ProgressBarComponent = Platform.select({
 });
 
 /**
- * Progress bar is an indicator used to present some activity in the app
+ * Progress bar is an indicator used to present some activity in the app.
  *
- * **Usage:**
+ * <div class="screenshots">
+ *   <img src="screenshots/progress-bar.png" />
+ * </div>
+ *
+ * ## Usage
  * ```js
  * const MyComponent = () => (
  *   <ProgressBar progress={0.5} color={Colors.red800} />

@@ -6,7 +6,7 @@ import {
   DrawerItem,
   DrawerSection,
   withTheme,
-  Checkbox,
+  Switch,
   TouchableRipple,
   Paragraph,
   Colors,
@@ -50,7 +50,7 @@ class DrawerItems extends React.Component<Props, State> {
     const { theme: { colors: { paper } } } = this.props;
     return (
       <View style={[styles.drawerContent, { backgroundColor: paper }]}>
-        <DrawerSection label="Subheader">
+        <DrawerSection title="Subheader">
           {DrawerItemsData.map((props, index) => (
             <DrawerItem
               {...props}
@@ -72,7 +72,7 @@ class DrawerItems extends React.Component<Props, State> {
             >
               <Paragraph>Dark Theme</Paragraph>
               <View pointerEvents="none">
-                <Checkbox checked={this.state.isDark} />
+                <Switch value={this.state.isDark} />
               </View>
             </View>
           </TouchableRipple>

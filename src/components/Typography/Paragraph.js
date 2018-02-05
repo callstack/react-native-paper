@@ -9,9 +9,9 @@ type Props = {
 };
 
 /**
- * Paragraph - typography style
+ * Typography component for showing a paragraph.
  *
- * **Usage:**
+ * ## Usage
  * ```js
  * const MyComponent = () => (
  *   <Paragraph>Paragraph</Paragraph>

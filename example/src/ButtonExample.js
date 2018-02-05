@@ -21,7 +21,10 @@ class ButtonExample extends React.Component<Props, State> {
   };
 
   render() {
-    const uri = { uri: 'https://facebook.github.io/react/img/logo_og.png' };
+    const uri = {
+      // Callstack company avatar from github.
+      uri: 'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400',
+    };
     const source = require('../assets/chameleon.jpg');
     const { theme: { colors: { background } } } = this.props;
     return (
