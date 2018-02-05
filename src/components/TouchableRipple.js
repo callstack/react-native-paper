@@ -75,6 +75,8 @@ export default class TouchableRipple extends React.Component<Props, void> {
       ...rest
     } = this.props;
 
+    const disabled = this.props.onPress === undefined;
+
     if (
       Platform.OS === 'android' &&
       Platform.Version >= ANDROID_VERSION_LOLLIPOP
@@ -82,6 +84,7 @@ export default class TouchableRipple extends React.Component<Props, void> {
       return (
         <TouchableNativeFeedback
           {...rest}
+          disabled={disabled}
           background={
             background != null
               ? background
@@ -97,6 +100,7 @@ export default class TouchableRipple extends React.Component<Props, void> {
       /* $FlowFixMe */
       <TouchableHighlight
         {...rest}
+        disabled={disabled}
         style={style}
         underlayColor={
           underlayColor != null
