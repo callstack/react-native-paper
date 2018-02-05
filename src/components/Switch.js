@@ -34,6 +34,25 @@ type Props = {
 /**
  * Switch is a visual toggle between two mutually exclusive states—on and off.
  *
+ * <div class="screenshots">
+ *   <div>
+ *     <img src="screenshots/switch.android.enabled.png" />
+ *     <span>Android (enabled)</span>
+ *   </div>
+ *   <div>
+ *     <img src="screenshots/switch.android.disabled.png" />
+ *     <span>Android (disabled)</span>
+ *   </div>
+ *   <div>
+ *     <img src="screenshots/switch.ios.enabled.png" />
+ *     <span>iOS (enabled)</span>
+ *   </div>
+ *   <div>
+ *     <img src="screenshots/switch.ios.disabled.png" />
+ *     <span>iOS (disabled)</span>
+ *   </div>
+ * </div>
+ *
  * ## Usage
  * ```js
  * export default class MyComponent extends Component {
