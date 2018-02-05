@@ -9,17 +9,41 @@ type Props = {
   theme: Theme,
 };
 
-class ProgressBarExample extends React.Component<Props> {
+type State = {
+  progress: number,
+};
+
+class ProgressBarExample extends React.Component<Props, State> {
   static title = 'Progress bar';
+
+  state = {
+    progress: 0,
+  };
+
+  componentDidMount() {
+    this._interval = setInterval(
+      () =>
+        this.setState(state => ({
+          progress: state.progress < 1 ? state.progress + 0.01 : 0,
+        })),
+      16
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this._interval);
+  }
+
+  _interval: any;
 
   render() {
     const { theme: { colors: { background } } } = this.props;
     return (
       <View style={[styles.container, { backgroundColor: background }]}>
         <Paragraph>ProgressBar primary color</Paragraph>
-        <ProgressBar progress={0.5} />
+        <ProgressBar progress={this.state.progress} />
         <Paragraph>ProgressBar custom color</Paragraph>
-        <ProgressBar progress={0.5} color={Colors.red800} />
+        <ProgressBar progress={this.state.progress} color={Colors.red800} />
       </View>
     );
   }
