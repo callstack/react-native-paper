@@ -96,7 +96,9 @@ class RadioButton extends React.Component<Props, State> {
   render() {
     const { disabled, onPress, checked, theme, ...rest } = this.props;
     const checkedColor = this.props.color || theme.colors.accent;
-    const uncheckedColor = 'rgba(0, 0, 0, .54)';
+    const uncheckedColor = theme.dark
+      ? 'rgba(255, 255, 255, .7)'
+      : 'rgba(0, 0, 0, .54)';
 
     let rippleColor, radioColor;
 

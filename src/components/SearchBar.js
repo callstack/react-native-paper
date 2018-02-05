@@ -117,6 +117,7 @@ class SearchBar extends React.Component<Props> {
           style={[styles.input, { color: textColor }]}
           placeholder={placeholder || ''}
           placeholderTextColor={colors.placeholder}
+          selectionColor={colors.primary}
           underlineColorAndroid="transparent"
           returnKeyType="search"
           value={value}

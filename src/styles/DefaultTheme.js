@@ -19,7 +19,7 @@ export default {
       .rgb()
       .string(),
     disabled: color(black)
-      .alpha(0.25)
+      .alpha(0.26)
       .rgb()
       .string(),
     placeholder: color(black)
