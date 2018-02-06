@@ -69,6 +69,17 @@ type State = {
 /**
  * TextInputs allow users to input text.
  *
+ * <div class="screenshots">
+ *   <div>
+ *     <img src="screenshots/textinput.unfocused.png" />
+ *     <span>Unfocused</span>
+ *   </div>
+ *   <div>
+ *     <img src="screenshots/textinput.focused.png" />
+ *     <span>Focused</span>
+ *   </div>
+ * </div>
+ *
  * ## Usage
  * ```js
  * class MyComponent extends React.Component {
