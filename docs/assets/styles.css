@@ -1,0 +1,30 @@
+.screenshots {
+  padding: 12px 0 4px 0;
+  margin: 0 -4px;
+}
+
+.screenshots img {
+  max-width: 280px;
+  height: auto;
+}
+
+.screenshots > div {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.screenshots > * {
+  margin: 4px;
+}
+
+.screenshots span { 
+  color: #616161;
+  font-size: 13px;
+  line-height: 24px;
+}
+
+@media (min-width: 1100px) {
+  .screenshots img {
+    max-width: 240px;
+  }
+}

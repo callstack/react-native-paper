@@ -13,33 +13,43 @@ import type { IconSource } from './Icon';
 
 type Props = {
   /**
-   *  Whether FAB is mini-sized, used to create visual continuity with other elements
+   *  Whether FAB is mini-sized, used to create visual continuity with other elements.
    */
   small?: boolean,
   /**
-   * Icon color of button, a dark button will render light text and vice-versa
+   * Icon color of button, a dark button will render light text and vice-versa.
    */
   dark?: boolean,
   /**
-   * Custom color for the icon
+   * Name of the icon. Can be a string (name of `MaterialIcon`),
+   * an object of shape `{ uri: 'https://path.to' }`,
+   * a local image: `require('../path/to/image.png')`,
+   * or a valid React Native component.
    */
   icon: IconSource,
   /**
-   * Function to execute on press
+   * Custom color for the FAB.
    */
   color?: string,
   /**
-   * Function to execute on press
+   * Function to execute on press.
    */
   onPress?: Function,
-  theme: Theme,
   style?: any,
+  /**
+   * @optional
+   */
+  theme: Theme,
 };
 
 /**
- * A floating action button represents the primary action in an application
+ * A floating action button represents the primary action in an application.
  *
- * **Usage:**
+ * <div class="screenshots">
+ *   <img src="screenshots/fab.png" />
+ * </div>
+ *
+ * ## Usage
  * ```js
  * const MyComponent = () => (
  *   <FAB

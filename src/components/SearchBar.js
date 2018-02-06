@@ -13,33 +13,36 @@ import type { IconSource } from './Icon';
 
 type Props = {
   /**
-   * Hint text shown when the input is empty
+   * Hint text shown when the input is empty.
    */
   placeholder?: string,
   /**
-   * The value of the text input
+   * The value of the text input.
    */
   value: string,
   /**
-   * Icon name for the left icon button (see onIconPress)
+   * Icon name for the left icon button (see `onIconPress`).
    */
   icon?: IconSource,
   /**
-   * Callback that is called when the text input's text changes
+   * Callback that is called when the text input's text changes.
    */
   onChangeText: (query: string) => void,
   /**
-   * Callback to execute if we want the left icon to act as button
+   * Callback to execute if we want the left icon to act as button.
    */
   onIconPress?: Function,
-  theme: Theme,
   style?: any,
+  /**
+   * @optional
+   */
+  theme: Theme,
 };
 
 /**
- * SearchBar is a simple input box where users can type search queries
+ * SearchBar is a simple input box where users can type search queries.
  *
- * **Usage:**
+ * ## Usage
  * ```js
  * export default class MyComponent extends Component {
  *   state = {
@@ -114,6 +117,7 @@ class SearchBar extends React.Component<Props> {
           style={[styles.input, { color: textColor }]}
           placeholder={placeholder || ''}
           placeholderTextColor={colors.placeholder}
+          selectionColor={colors.primary}
           underlineColorAndroid="transparent"
           returnKeyType="search"
           value={value}

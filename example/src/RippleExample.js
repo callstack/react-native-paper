@@ -1,7 +1,6 @@
 /* @flow */
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableRipple, withTheme, Paragraph } from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
 
@@ -16,18 +15,13 @@ class RippleExample extends React.Component<Props> {
     const { theme: { colors: { background } } } = this.props;
     return (
       <View style={[styles.container, { backgroundColor: background }]}>
-        <View style={styles.row}>
-          <TouchableRipple
-            onPress={() => {}}
-            rippleColor="rgba(0, 0, 0, .32)"
-            borderless
-          >
-            <Icon name="fingerprint" size={50} />
-          </TouchableRipple>
-        </View>
-        <TouchableRipple onPress={() => {}} rippleColor="rgba(0, 0, 0, .32)">
-          <View style={styles.row}>
-            <Paragraph>Press me</Paragraph>
+        <TouchableRipple
+          style={styles.ripple}
+          onPress={() => {}}
+          rippleColor="rgba(0, 0, 0, .32)"
+        >
+          <View pointerEvents="none">
+            <Paragraph>Press anywhere</Paragraph>
           </View>
         </TouchableRipple>
       </View>
@@ -38,14 +32,11 @@ class RippleExample extends React.Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 8,
   },
-  row: {
-    flexDirection: 'row',
+  ripple: {
+    flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: 8,
-    paddingHorizontal: 16,
+    justifyContent: 'center',
   },
 });
 

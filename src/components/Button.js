@@ -16,50 +16,52 @@ const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
 type Props = {
   /**
-   * Disable the button
+   * Disable the button.
    */
   disabled?: boolean,
   /**
-   * Use a compact look, useful for flat buttons in a row
+   * Use a compact look, useful for flat buttons in a row.
    */
   compact?: boolean,
   /**
-   * Add elevation to button, as opposed to default flat appearance
+   * Add elevation to button, as opposed to default flat appearance.
    */
   raised?: boolean,
   /**
-   * Use to primary color from theme
+   * Use to primary color from theme.
    */
   primary?: boolean,
   /**
-   * Text color of button, a dark button will render light text and vice-versa
+   * Text color of button, a dark button will render light text and vice-versa.
    */
   dark?: boolean,
   /**
-   * Whether to show a loading indicator
+   * Whether to show a loading indicator.
    */
   loading?: boolean,
   /**
-   * Name of the icon
-   * Can be a string (name of MaterialIcon),
-   * an object {of shape {uri: 'https://path.to'}},
-   * required image from assets (const icon = reqiure('../path/to/image.png')),
-   * or any valid React-Native Component (e.g. <Image />)
+   * Name of the icon. Can be a string (name of `MaterialIcon`),
+   * an object of shape `{ uri: 'https://path.to' }`,
+   * a local image: `require('../path/to/image.png')`,
+   * or a valid React Native component.
    */
   icon?: IconSource,
   /**
-   * Custom text color for flat button, or background color for raised button
+   * Custom text color for flat button, or background color for raised button.
    */
   color?: string,
   /**
-   * Button text
+   * Label text of the button.
    */
   children: string | Array<string>,
   /**
-   * Function to execute on press
+   * Function to execute on press.
    */
   onPress?: Function,
   style?: any,
+  /**
+   * @optional
+   */
   theme: Theme,
 };
 
@@ -68,9 +70,15 @@ type State = {
 };
 
 /**
- * Buttons communicate the action that will occur when the user touches them
+ * Buttons communicate the action that will occur when the user touches them.
  *
- * **Usage:**
+ * <div class="screenshots">
+ *   <img src="screenshots/button-raised.png" />
+ *   <img src="screenshots/button-primary.png" />
+ *   <img src="screenshots/button-custom.png" />
+ * </div>
+ *
+ * ## Usage
  * ```js
  * const MyComponent = () => (
  *   <Button raised onPress={() => console.log('Pressed')}>
@@ -122,21 +130,17 @@ class Button extends React.Component<Props, State> {
       style,
       theme,
     } = this.props;
-    const { colors, roundness, dark: isDarkTheme } = theme;
-    const isDarkActive = this.props.dark || this.props.theme.dark;
+    const { colors, roundness } = theme;
     const fontFamily = theme.fonts.medium;
+
     let backgroundColor, textColor, isDark;
+
     if (raised) {
       if (disabled) {
-        isDarkActive
-          ? (backgroundColor = color(white)
-              .alpha(0.12)
-              .rgb()
-              .string())
-          : (backgroundColor = color(black)
-              .alpha(0.12)
-              .rgb()
-              .string());
+        backgroundColor = color(theme.dark ? white : black)
+          .alpha(0.12)
+          .rgb()
+          .string();
       } else {
         if (buttonColor) {
           backgroundColor = buttonColor;
@@ -144,7 +148,7 @@ class Button extends React.Component<Props, State> {
           if (primary) {
             backgroundColor = colors.primary;
           } else {
-            backgroundColor = isDarkActive ? 'rgba(58, 55, 55, .9)' : white;
+            backgroundColor = theme.dark ? '#535354' : white;
           }
         }
       }
@@ -162,7 +166,7 @@ class Button extends React.Component<Props, State> {
     }
 
     if (disabled) {
-      textColor = isDarkTheme
+      textColor = theme.dark
         ? color(white)
             .alpha(0.3)
             .rgb()
@@ -173,7 +177,7 @@ class Button extends React.Component<Props, State> {
             .string();
     } else {
       if (raised) {
-        textColor = isDarkActive ? white : black;
+        textColor = isDark ? white : black;
       } else {
         if (buttonColor) {
           textColor = buttonColor;
@@ -181,7 +185,7 @@ class Button extends React.Component<Props, State> {
           if (primary) {
             textColor = colors.primary;
           } else {
-            textColor = isDark || isDarkTheme ? white : black;
+            textColor = theme.dark ? white : black;
           }
         }
       }

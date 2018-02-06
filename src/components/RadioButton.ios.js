@@ -10,21 +10,24 @@ import type { Theme } from '../types';
 
 type Props = {
   /**
-   * Whether radio is checked
+   * Whether radio is checked.
    */
   checked?: boolean,
   /**
-   * Whether radio is disabled
+   * Whether radio is disabled.
    */
   disabled?: boolean,
   /**
-   * Function to execute on press
+   * Function to execute on press.
    */
   onPress?: Function,
   /**
-   * Custom color for radio
+   * Custom color for radio.
    */
   color?: string,
+  /**
+   * @optional
+   */
   theme: Theme,
 };
 

@@ -2,7 +2,7 @@
 
 import color from 'color';
 import DefaultTheme from './DefaultTheme';
-import { white, grey800, cyan500, cyan700 } from './colors';
+import { white, grey800, lightBlue500, lightBlue700 } from './colors';
 import type { Theme } from '../types';
 
 const DarkTheme: Theme = {
@@ -10,8 +10,8 @@ const DarkTheme: Theme = {
   dark: true,
   colors: {
     ...DefaultTheme.colors,
-    primary: cyan500,
-    primaryDark: cyan700,
+    primary: lightBlue500,
+    primaryDark: lightBlue700,
     background: '#303030',
     paper: grey800,
     text: white,
@@ -20,7 +20,7 @@ const DarkTheme: Theme = {
       .rgb()
       .string(),
     disabled: color(white)
-      .alpha(0.5)
+      .alpha(0.3)
       .rgb()
       .string(),
     placeholder: color(white)
