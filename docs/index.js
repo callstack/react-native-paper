@@ -6,6 +6,12 @@ import { build, serve } from 'component-docs';
 
 const task = process.argv[2];
 const dist = path.join(__dirname, 'dist');
+const assets = [
+  path.join(__dirname, 'assets', 'gallery'),
+  path.join(__dirname, 'assets', 'screenshots'),
+  path.join(__dirname, 'assets', 'images'),
+];
+const styles = [path.join(__dirname, 'assets', 'styles.css')];
 
 if (!fs.existsSync(dist)) {
   fs.mkdirSync(dist);
@@ -47,21 +53,28 @@ function getPages() {
     })
     .map(file => ({ file, type: 'component' }));
 
-  const docs = fs.readdirSync(path.join(__dirname, 'pages')).map(file => ({
-    file: path.join(__dirname, 'pages', file),
-    type: file.endsWith('.js') ? 'custom' : 'markdown',
-  }));
+  const docs = fs
+    .readdirSync(path.join(__dirname, 'pages'))
+    .filter(file => file.includes('.'))
+    .map(file => ({
+      file: path.join(__dirname, 'pages', file),
+      type: file.endsWith('.js') ? 'custom' : 'markdown',
+    }));
 
   return [...docs, { type: 'separator' }, ...components];
 }
 
 if (task !== 'build') {
   serve({
+    assets,
+    styles,
     pages: getPages,
     output: path.join(__dirname, 'dist'),
   });
 } else {
   build({
+    assets,
+    styles,
     pages: getPages,
     output: path.join(__dirname, 'dist'),
   });

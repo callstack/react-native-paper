@@ -7,11 +7,44 @@ import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types';
 
 type Props = {
-  children: any,
+  /**
+   * Title text for the `DialogTitle`.
+   */
+  children: React.Node,
   style?: any,
+  /**
+   * @optional
+   */
   theme: Theme,
 };
 
+/**
+ * A component to show a title in a Dialog.
+ *
+ * ## Usage
+ * ```js
+ * export default class MyComponent extends React.Component {
+ *   state = {
+ *     visible: false,
+ *   };
+ *
+ *   _hideDialog = () => this.setState({ visble: false });
+ *
+ *   render() {
+ *     return (
+ *       <Dialog
+ *         visible={this.state.visible}
+ *         onRequestClose={this._hideDialog}>
+ *         <DialogTitle>This is a title</DialogTitle>
+ *         <DialogContent>
+ *           <Paragraph>This is simple dialog</Paragraph>
+ *         </DialogContent>
+ *       </Dialog>
+ *     );
+ *   }
+ * }
+ * ```
+ */
 const DialogTitle = ({
   children,
   theme: { colors: { text } },

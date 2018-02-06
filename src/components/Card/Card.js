@@ -14,10 +14,22 @@ import type { Theme } from '../../types';
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
 type Props = {
+  /**
+   * Resting elevation of the card which controls the drop shadow.
+   */
   elevation?: number,
-  children: React.Node,
+  /**
+   * Function to execute on press.
+   */
   onPress?: Function,
+  /**
+   * Content of the `Card`.
+   */
+  children: React.Node,
   style?: any,
+  /**
+   * @optional
+   */
   theme: Theme,
 };
 
@@ -28,19 +40,19 @@ type State = {
 /**
  * A card is a sheet of material that serves as an entry point to more detailed information.
  *
- * **Usage:**
+ * ## Usage
  * ```js
  * const MyComponent = () => (
  *   <Card>
- *     <Card.Content>
+ *     <CardContent>
  *       <Title>Card title</Title>
  *       <Paragraph>Card content</Paragraph>
- *     </Card.Content>
- *     <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
- *     <Card.Actions>
+ *     </CardContent>
+ *     <CardCover source={{ uri: 'https://picsum.photos/700' }} />
+ *     <CardActions>
  *       <Button>Cancel</Button>
  *       <Button>Ok</Button>
- *     </Card.Actions>
+ *     </CardActions>
  *   </Card>
  * );
  * ```
