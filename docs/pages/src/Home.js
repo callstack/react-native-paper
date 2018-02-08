@@ -108,11 +108,12 @@ const gallery = css`
 const screenshots = [
   'gallery/button.png',
   'gallery/card.png',
+  'gallery/input.png',
+  'gallery/searchbar.png',
+  'gallery/typography.png',
   'gallery/checkbox.png',
   'gallery/radio.png',
-  'gallery/searchbar.png',
   'gallery/switch.png',
-  'gallery/typography.png',
 ];
 
 export default class Home extends React.Component<{}> {

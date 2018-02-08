@@ -11,6 +11,10 @@ type Props = {
 /**
  * Typography component for showing a paragraph.
  *
+ * <div class="screenshots">
+ *   <img src="screenshots/paragraph.png" />
+ * </div>
+ *
  * ## Usage
  * ```js
  * const MyComponent = () => (
