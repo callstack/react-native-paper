@@ -8,7 +8,9 @@ type Props = {
   value: string,
 };
 
-function withRadioGroup(Component) {
+function withRadioGroup(
+  Component: React.ComponentType<any>
+): React.ComponentType<any> {
   return class extends React.Component<Props> {
     render() {
       const { value } = this.props;
