@@ -4,12 +4,36 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 type Props = {
+  /**
+   * @internal
+   */
   index?: number,
+  /**
+   * @internal
+   */
   total?: number,
+  /**
+   * @internal
+   */
   siblings?: Array<string>,
   style?: any,
 };
 
+/**
+ * A component to show content inside a Card.
+ *
+ * ## Usage
+ * ```js
+ * const MyComponent = () => (
+ *   <Card>
+ *     <CardContent>
+ *       <Title>Card title</Title>
+ *       <Paragraph>Card content</Paragraph>
+ *     </CardContent>
+ *   </Card>
+ * );
+ * ```
+ */
 const CardContent = (props: Props) => {
   const { index, total, siblings, style } = props;
   const cover = 'withTheme(CardCover)';

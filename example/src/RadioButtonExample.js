@@ -77,14 +77,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.white,
-    padding: 8,
+    paddingVertical: 8,
   },
 
   row: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
   },
 });
 

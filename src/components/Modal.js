@@ -13,17 +13,20 @@ import ThemedPortal from './Portal/ThemedPortal';
 
 type Props = {
   /**
-   * Determines whether clicking outside the dialog dismiss it, true by default
+   * Determines whether clicking outside the modal dismiss it.
    */
   dismissable?: boolean,
   /**
-   * Callback that is called when the user dismisses the dialog
+   * Callback that is called when the user dismisses the modal.
    */
   onRequestClose: Function,
   /**
-   * Determines Whether the dialog is visible
+   * Determines Whether the modal is visible.
    */
   visible: boolean,
+  /**
+   * Content of the `Modal`.
+   */
   children: React.Node,
 };
 
@@ -35,7 +38,7 @@ type State = {
 /**
  * The Modal component is a simple way to present content above an enclosing view.
  *
- * **Usage:**
+ * ## Usage
  * ```js
  * export default class MyComponent extends React.Component {
  *   state = {

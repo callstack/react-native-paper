@@ -8,22 +8,33 @@ import * as Colors from '../styles/colors';
 import type { Theme } from '../types';
 
 type Props = {
+  /**
+   * Content of the `Paper`.
+   */
   children: React.Node,
   style?: any,
+  /**
+   * @optional
+   */
   theme: Theme,
 };
 
 /**
  * Paper is a basic container that can give depth to the page.
  *
- * **Usage:**
+ * <div class="screenshots">
+ *   <img src="screenshots/paper.1_2.png" />
+ *   <img src="screenshots/paper.4_6.png" />
+ *   <img src="screenshots/paper.9_12.png" />
+ * </div>
+ *
+ * ## Usage
  * ```js
  * const MyComponent = () => (
  *   <Paper style={styles.paper}>
  *      <Text>Paper</Text>
  *   </Paper>
  * );
- *
  *
  * const styles = StyleSheet.create({
  *   paper: {

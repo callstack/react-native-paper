@@ -7,11 +7,14 @@ import type { Theme } from '../../types';
 
 type Props = {
   style?: any,
+  /**
+   * @optional
+   */
   theme: Theme,
 };
 
 /**
- * Text component which follows settings from the theme
+ * Text component which follows styles from the theme.
  *
  * @extends Text props https://facebook.github.io/react-native/docs/text.html#props
  */

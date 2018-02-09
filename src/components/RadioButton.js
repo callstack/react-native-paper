@@ -9,21 +9,24 @@ import type { Theme } from '../types';
 
 type Props = {
   /**
-   * Whether radio is checked
+   * Whether radio is checked.
    */
   checked: boolean,
   /**
-   * Whether radio is disabled
+   * Whether radio is disabled.
    */
   disabled?: boolean,
   /**
-   * Function to execute on press
+   * Function to execute on press.
    */
   onPress?: Function,
   /**
-   * Custom color for radio
+   * Custom color for radio.
    */
   color?: string,
+  /**
+   * @optional
+   */
   theme: Theme,
 };
 
@@ -35,8 +38,9 @@ type State = {
 const BORDER_WIDTH = 2;
 
 /**
- * Radio buttons allow the selection of a single option from a set
- * **Usage:**
+ * Radio buttons allow the selection of a single option from a set.
+ *
+ * ## Usage
  * ```js
  * export default class MyComponent extends Component {
  *   state = {
@@ -92,7 +96,9 @@ class RadioButton extends React.Component<Props, State> {
   render() {
     const { disabled, onPress, checked, theme, ...rest } = this.props;
     const checkedColor = this.props.color || theme.colors.accent;
-    const uncheckedColor = 'rgba(0, 0, 0, .54)';
+    const uncheckedColor = theme.dark
+      ? 'rgba(255, 255, 255, .7)'
+      : 'rgba(0, 0, 0, .54)';
 
     let rippleColor, radioColor;
 

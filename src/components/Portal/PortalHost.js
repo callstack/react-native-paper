@@ -44,31 +44,27 @@ export default class Portals extends React.Component<Props, State> {
   _nextId = 0;
 
   _mountPortal = (props: PortalProps) => {
-    const portals = this.state.portals;
-    this.setState({
-      portals: portals.concat({ key: this._nextId, props }),
-    });
-    return this._nextId++;
+    const key = this._nextId++;
+    this.setState(state => ({
+      portals: [...state.portals, { key, props }],
+    }));
+    return key;
   };
 
-  _unmountPortal = (key: number) => {
-    const portals = this.state.portals;
-    this.setState({
-      portals: portals.filter(item => item.key !== key),
-    });
-  };
+  _unmountPortal = (key: number) =>
+    this.setState(state => ({
+      portals: state.portals.filter(item => item.key !== key),
+    }));
 
-  _updatePortal = (key: number, props: PortalProps) => {
-    const portals = this.state.portals;
-    this.setState({
-      portals: portals.map(item => {
+  _updatePortal = (key: number, props: PortalProps) =>
+    this.setState(state => ({
+      portals: state.portals.map(item => {
         if (item.key === key) {
           return { ...item, props };
         }
         return item;
       }),
-    });
-  };
+    }));
 
   render() {
     const { portals } = this.state;

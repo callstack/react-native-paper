@@ -9,24 +9,27 @@ import { black, white } from '../styles/colors';
 
 type Props = {
   /**
-   *  Whether divider has a left inset
+   *  Whether divider has a left inset.
    */
   inset?: boolean,
   style?: any,
+  /**
+   * @optional
+   */
   theme: Theme,
 };
 
 /**
- * A divider is a thin, lightweight rule that groups content in lists and page layouts
+ * A divider is a thin, lightweight rule that groups content in lists and page layouts.
  *
- * **Usage:**
+ * ## Usage
  * ```js
  * const MyComponent = () => (
  *   <View>
  *     <Text>Apple</Text>
- *     </Divider>
+ *     <Divider />
  *     <Text>Orange</Text>
- *     </Divider>
+ *     <Divider />
  *   </View>
  * );
  * ```
