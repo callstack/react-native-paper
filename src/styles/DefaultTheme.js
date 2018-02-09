@@ -26,6 +26,10 @@ export default {
       .alpha(0.38)
       .rgb()
       .string(),
+    divider: color(black)
+      .alpha(0.12)
+      .rgb()
+      .string(),
   },
   fonts,
 };
