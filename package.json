@@ -50,6 +50,6 @@
     "flow": "flow",
     "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "bootstrap": "cd example && yarn && cd ../docs && yarn"
+    "bootstrap": "yarn --cwd example && yarn --cwd docs"
   }
 }
