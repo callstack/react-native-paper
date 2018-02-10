@@ -13,6 +13,7 @@ export type Theme = {
     secondaryText: string,
     disabled: string,
     placeholder: string,
+    divider: string,
   },
   fonts: {
     regular: string,
