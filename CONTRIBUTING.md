@@ -39,6 +39,8 @@ You can learn how from this *free* series [How to Contribute to an Open Source P
 
 5. In case of doubts, check out the current code. For example, we use the prop `icon` not `iconName`.
 
+6. You can run `yarn run bootstrap` which will install all the dependecies in example & docs folder respectively.
+
 ## Running the example
 
 The example app uses [Expo](https://expo.io/). You will need to install the Expo app for [Android](https://play.google.com/store/apps/details?id=host.exp.exponent) and [iOS](https://itunes.apple.com/app/apple-store/id982107779) to start developing.
