@@ -26,7 +26,7 @@ You can learn how from this *free* series [How to Contribute to an Open Source P
 * `BREAKING`: for changes that break current versiong usage, e.g. remove withTheme
 * `docs`: changes into documentation, e.g. add usage example for Button
 * `chore`: tooling changes, e.g. change circle ci config
-* `tests`: for testcases, eg unit, snapshot testing
+* `test`: for testcases, eg unit, snapshot testing
 
 3. We use `flow`, `eslint` and `prettier`. Be sure that `npm run flow` and `npm run lint -- --fix` give no errors.
 

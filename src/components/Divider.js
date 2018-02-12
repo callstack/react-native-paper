@@ -27,9 +27,9 @@ type Props = {
  * const MyComponent = () => (
  *   <View>
  *     <Text>Apple</Text>
- *     </Divider>
+ *     <Divider />
  *     <Text>Orange</Text>
- *     </Divider>
+ *     <Divider />
  *   </View>
  * );
  * ```

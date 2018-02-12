@@ -2,7 +2,7 @@
 import * as React from 'react';
 
 import { grey400, grey800, grey50, white, black } from '../styles/colors';
-import { View, Switch as NativeSwitch, Platform } from 'react-native';
+import { Switch as NativeSwitch, Platform } from 'react-native';
 import withTheme from '../core/withTheme';
 import setColor from 'color';
 import type { Theme } from '../types';
@@ -85,15 +85,13 @@ class Switch extends React.Component<Props> {
       ...props
     } = this.props;
 
-    const { dark: isDarkTheme } = theme;
-
     const checkedColor = color || theme.colors.accent;
 
     const trackTintColor =
       Platform.OS === 'ios'
         ? checkedColor
         : disabled
-          ? isDarkTheme
+          ? theme.dark
             ? setColor(white)
                 .alpha(0.1)
                 .rgb()
@@ -107,24 +105,22 @@ class Switch extends React.Component<Props> {
               .rgb()
               .string();
 
-    const trackThumbTintColor =
+    const thumbTintColor =
       Platform.OS === 'ios'
         ? undefined
         : disabled
-          ? isDarkTheme ? grey800 : grey400
-          : value ? checkedColor : isDarkTheme ? grey400 : grey50;
+          ? theme.dark ? grey800 : grey400
+          : value ? checkedColor : theme.dark ? grey400 : grey50;
 
     return (
-      <View>
-        <NativeSwitch
-          {...props}
-          value={value}
-          disabled={disabled}
-          onTintColor={trackTintColor}
-          thumbTintColor={trackThumbTintColor}
-          onValueChange={disabled ? undefined : onValueChange}
-        />
-      </View>
+      <NativeSwitch
+        {...props}
+        value={value}
+        disabled={disabled}
+        onTintColor={trackTintColor}
+        thumbTintColor={thumbTintColor}
+        onValueChange={disabled ? undefined : onValueChange}
+      />
     );
   }
 }

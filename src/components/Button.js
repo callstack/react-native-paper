@@ -130,21 +130,17 @@ class Button extends React.Component<Props, State> {
       style,
       theme,
     } = this.props;
-    const { colors, roundness, dark: isDarkTheme } = theme;
-    const isDarkActive = this.props.dark || this.props.theme.dark;
+    const { colors, roundness } = theme;
     const fontFamily = theme.fonts.medium;
+
     let backgroundColor, textColor, isDark;
+
     if (raised) {
       if (disabled) {
-        isDarkActive
-          ? (backgroundColor = color(white)
-              .alpha(0.12)
-              .rgb()
-              .string())
-          : (backgroundColor = color(black)
-              .alpha(0.12)
-              .rgb()
-              .string());
+        backgroundColor = color(theme.dark ? white : black)
+          .alpha(0.12)
+          .rgb()
+          .string();
       } else {
         if (buttonColor) {
           backgroundColor = buttonColor;
@@ -152,7 +148,7 @@ class Button extends React.Component<Props, State> {
           if (primary) {
             backgroundColor = colors.primary;
           } else {
-            backgroundColor = isDarkActive ? 'rgba(58, 55, 55, .9)' : white;
+            backgroundColor = theme.dark ? '#535354' : white;
           }
         }
       }
@@ -170,7 +166,7 @@ class Button extends React.Component<Props, State> {
     }
 
     if (disabled) {
-      textColor = isDarkTheme
+      textColor = theme.dark
         ? color(white)
             .alpha(0.3)
             .rgb()
@@ -181,7 +177,7 @@ class Button extends React.Component<Props, State> {
             .string();
     } else {
       if (raised) {
-        textColor = isDarkActive ? white : black;
+        textColor = isDark ? white : black;
       } else {
         if (buttonColor) {
           textColor = buttonColor;
@@ -189,7 +185,7 @@ class Button extends React.Component<Props, State> {
           if (primary) {
             textColor = colors.primary;
           } else {
-            textColor = isDark || isDarkTheme ? white : black;
+            textColor = theme.dark ? white : black;
           }
         }
       }
