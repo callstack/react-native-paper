@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { Platform } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import color from 'color';
 
 import ToolbarAction from './ToolbarAction';
@@ -16,7 +16,13 @@ const getBackIcon = Platform.select({
           .alpha(0.54)
           .rgb()
           .string();
-    return <Icon name="keyboard-arrow-left" size={36} color={iconColor} />;
+    return (
+      <Icon
+        name="keyboard-arrow-left"
+        style={styles.backIcon}
+        color={iconColor}
+      />
+    );
   },
   android: () => 'arrow-back',
 });
@@ -41,9 +47,28 @@ const ToolbarBackAction = (props: Props) => {
       icon={BackIcon}
       dark={dark}
       onPress={onPress}
-      style={style}
+      style={[styles.backAction, style]}
     />
   );
 };
+
+const styles = StyleSheet.create({
+  backAction: {
+    ...Platform.select({
+      ios: {
+        marginHorizontal: 0,
+      },
+    }),
+  },
+  backIcon: {
+    ...Platform.select({
+      ios: {
+        fontSize: 36,
+        height: 36,
+        width: 36,
+      },
+    }),
+  },
+});
 
 export default ToolbarBackAction;
