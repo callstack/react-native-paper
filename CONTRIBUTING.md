@@ -26,6 +26,7 @@ You can learn how from this *free* series [How to Contribute to an Open Source P
 * `BREAKING`: for changes that break current versiong usage, e.g. remove withTheme
 * `docs`: changes into documentation, e.g. add usage example for Button
 * `chore`: tooling changes, e.g. change circle ci config
+* `test`: for testcases, eg unit, snapshot testing
 
 3. We use `flow`, `eslint` and `prettier`. Be sure that `npm run flow` and `npm run lint -- --fix` give no errors.
 
@@ -38,6 +39,8 @@ You can learn how from this *free* series [How to Contribute to an Open Source P
    * Make sure to provide an example usage for the component (check how others do it)
 
 5. In case of doubts, check out the current code. For example, we use the prop `icon` not `iconName`.
+
+6. You can run `yarn run bootstrap` which will install all the dependencies in example & docs folder respectively.
 
 ## Running the example
 

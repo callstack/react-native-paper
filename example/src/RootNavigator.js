@@ -11,43 +11,26 @@ import {
 } from 'react-native-paper';
 import ExampleList, { examples } from './ExampleList';
 
-const MORE_ICON = Platform.OS === 'ios' ? 'more-horiz' : 'more-vert';
-
 const routes = Object.keys(examples)
   .map(id => ({ id, item: examples[id] }))
   .reduce((acc, { id, item }) => {
     const Comp = item;
     const Screen = props => <Comp {...props} />;
 
-    Screen.navigationOptions = ({ navigation }) => {
-      const { params = {} } = navigation.state;
-      return {
-        header: (
-          <Toolbar
-            dark
-            statusBarHeight={
-              Platform.OS === 'ios' ? 20 : StatusBar.currentHeight
-            }
-          >
-            {!params.showLeftIcon && (
-              <ToolbarBackAction onPress={() => navigation.goBack()} />
-            )}
-            <ToolbarContent
-              title={(Comp: any).title}
-              subtitle={params.showSubtitle ? 'Subtitle' : null}
-            />
-            {params.showSearchIcon && (
-              <ToolbarAction icon="search" onPress={() => {}} />
-            )}
-            {!params.showMoreIcon && (
-              <ToolbarAction icon={MORE_ICON} onPress={() => {}} />
-            )}
-          </Toolbar>
-        ),
-        /* $FlowFixMe */
-        ...Comp.navigationOptions,
-      };
-    };
+    Screen.navigationOptions = props => ({
+      header: (
+        <Toolbar
+          dark
+          statusBarHeight={Platform.OS === 'ios' ? 20 : StatusBar.currentHeight}
+        >
+          <ToolbarBackAction onPress={() => props.navigation.goBack()} />
+          <ToolbarContent title={(Comp: any).title} />
+        </Toolbar>
+      ),
+      ...(typeof Comp.navigationOptions === 'function'
+        ? Comp.navigationOptions(props)
+        : Comp.navigationOptions),
+    });
 
     return {
       ...acc,

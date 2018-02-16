@@ -1,6 +1,6 @@
 {
   "name": "react-native-paper",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Material design for React Native",
   "main": "src/index.js",
   "files": [
@@ -49,6 +49,7 @@
     "precommit": "yarn run lint && yarn run flow",
     "flow": "flow",
     "lint": "eslint .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bootstrap": "yarn --cwd example && yarn --cwd docs"
   }
 }
