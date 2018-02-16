@@ -8,6 +8,7 @@ export type Theme = {
     background: string,
     paper: string,
     accent: string,
+    error: string,
     text: string,
     disabled: string,
     placeholder: string,
