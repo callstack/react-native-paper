@@ -22,7 +22,11 @@ type Props = {
    */
   background?: Object,
   /**
-   * Function to execute on press.
+   * Whether to prevent interaction with the touchable.
+   */
+  disabled?: boolean,
+  /**
+   * Function to execute on press. If not set, will cause the touchable to be disabled.
    */
   onPress?: ?Function,
   /**
@@ -69,11 +73,14 @@ export default class TouchableRipple extends React.Component<Props, void> {
       style,
       background,
       borderless,
+      disabled: disabledProp,
       rippleColor,
       underlayColor,
       children,
       ...rest
     } = this.props;
+
+    const disabled = disabledProp || !this.props.onPress;
 
     if (
       Platform.OS === 'android' &&
@@ -82,6 +89,7 @@ export default class TouchableRipple extends React.Component<Props, void> {
       return (
         <TouchableNativeFeedback
           {...rest}
+          disabled={disabled}
           background={
             background != null
               ? background
@@ -97,6 +105,7 @@ export default class TouchableRipple extends React.Component<Props, void> {
       /* $FlowFixMe */
       <TouchableHighlight
         {...rest}
+        disabled={disabled}
         style={style}
         underlayColor={
           underlayColor != null

@@ -30,21 +30,29 @@ class ButtonExample extends React.Component<Props, State> {
     return (
       <View style={[styles.container, { backgroundColor: background }]}>
         <View style={styles.row}>
-          <Button>Simple</Button>
-          <Button primary>Primary</Button>
-          <Button color={Colors.pink500}>Custom</Button>
-        </View>
-        <View style={styles.row}>
-          <Button raised>Raised</Button>
-          <Button raised primary>
+          <Button onPress={() => {}}>Simple</Button>
+          <Button primary onPress={() => {}}>
             Primary
           </Button>
-          <Button raised color={Colors.pink500}>
+          <Button color={Colors.pink500} onPress={() => {}}>
             Custom
           </Button>
         </View>
         <View style={styles.row}>
-          <Button icon="add-a-photo">Icon</Button>
+          <Button raised onPress={() => {}}>
+            Raised
+          </Button>
+          <Button raised primary onPress={() => {}}>
+            Primary
+          </Button>
+          <Button raised color={Colors.pink500} onPress={() => {}}>
+            Custom
+          </Button>
+        </View>
+        <View style={styles.row}>
+          <Button icon="add-a-photo" onPress={() => {}}>
+            Icon
+          </Button>
           <Button
             raised
             primary
@@ -58,18 +66,18 @@ class ButtonExample extends React.Component<Props, State> {
           </Button>
         </View>
         <View style={styles.row}>
-          <Button disabled icon="my-location">
+          <Button disabled icon="my-location" onPress={() => {}}>
             Disabled
           </Button>
-          <Button disabled loading raised>
+          <Button disabled loading raised onPress={() => {}}>
             Loading
           </Button>
         </View>
         <View style={styles.row}>
-          <Button raised icon={uri}>
+          <Button raised icon={uri} onPress={() => {}}>
             Remote image
           </Button>
-          <Button raised icon={source}>
+          <Button raised icon={source} onPress={() => {}}>
             Required asset
           </Button>
           <Button
@@ -80,6 +88,7 @@ class ButtonExample extends React.Component<Props, State> {
               />
             }
             raised
+            onPress={() => {}}
           >
             Custom component
           </Button>
