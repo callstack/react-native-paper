@@ -27,31 +27,30 @@ class ButtonExample extends React.Component<Props, State> {
     };
     const source = require('../assets/chameleon.jpg');
     const { theme: { colors: { background } } } = this.props;
-    const dummyFunction = () => {}; // There's no ripple effect without a valid onPress prop.
     return (
       <View style={[styles.container, { backgroundColor: background }]}>
         <View style={styles.row}>
-          <Button onPress={dummyFunction}>Simple</Button>
-          <Button primary onPress={dummyFunction}>
+          <Button onPress={() => {}}>Simple</Button>
+          <Button primary onPress={() => {}}>
             Primary
           </Button>
-          <Button color={Colors.pink500} onPress={dummyFunction}>
+          <Button color={Colors.pink500} onPress={() => {}}>
             Custom
           </Button>
         </View>
         <View style={styles.row}>
-          <Button raised onPress={dummyFunction}>
+          <Button raised onPress={() => {}}>
             Raised
           </Button>
-          <Button raised primary onPress={dummyFunction}>
+          <Button raised primary onPress={() => {}}>
             Primary
           </Button>
-          <Button raised color={Colors.pink500} onPress={dummyFunction}>
+          <Button raised color={Colors.pink500} onPress={() => {}}>
             Custom
           </Button>
         </View>
         <View style={styles.row}>
-          <Button icon="add-a-photo" onPress={dummyFunction}>
+          <Button icon="add-a-photo" onPress={() => {}}>
             Icon
           </Button>
           <Button
@@ -67,18 +66,18 @@ class ButtonExample extends React.Component<Props, State> {
           </Button>
         </View>
         <View style={styles.row}>
-          <Button disabled icon="my-location" onPress={dummyFunction}>
+          <Button disabled icon="my-location" onPress={() => {}}>
             Disabled
           </Button>
-          <Button disabled loading raised onPress={dummyFunction}>
+          <Button disabled loading raised onPress={() => {}}>
             Loading
           </Button>
         </View>
         <View style={styles.row}>
-          <Button raised icon={uri} onPress={dummyFunction}>
+          <Button raised icon={uri} onPress={() => {}}>
             Remote image
           </Button>
-          <Button raised icon={source} onPress={dummyFunction}>
+          <Button raised icon={source} onPress={() => {}}>
             Required asset
           </Button>
           <Button
@@ -89,7 +88,7 @@ class ButtonExample extends React.Component<Props, State> {
               />
             }
             raised
-            onPress={dummyFunction}
+            onPress={() => {}}
           >
             Custom component
           </Button>
