@@ -8,7 +8,6 @@ import {
   View,
 } from 'react-native';
 import color from 'color';
-
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types';
 
