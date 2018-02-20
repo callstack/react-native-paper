@@ -8,6 +8,8 @@ import {
   View,
 } from 'react-native';
 import color from 'color';
+import withTheme from '../core/withTheme';
+import type { Theme } from '../types';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 
@@ -42,6 +44,10 @@ type Props = {
    */
   children: React.Node,
   style?: any,
+  /**
+   * @optional
+   */
+  theme: Theme,
 };
 
 /**
@@ -62,10 +68,9 @@ type Props = {
  * );
  * ```
  */
-export default class TouchableRipple extends React.Component<Props, void> {
+class TouchableRipple extends React.Component<Props, void> {
   static defaultProps = {
     borderless: false,
-    rippleColor: 'rgba(0, 0, 0, .32)',
   };
 
   render() {
@@ -77,10 +82,15 @@ export default class TouchableRipple extends React.Component<Props, void> {
       rippleColor,
       underlayColor,
       children,
+      theme,
       ...rest
     } = this.props;
 
+    const { dark: isDarkTheme } = theme;
     const disabled = disabledProp || !this.props.onPress;
+    const calculatedRippleColor =
+      rippleColor ||
+      (isDarkTheme ? 'rgba(255, 255, 255, .20)' : 'rgba(0, 0, 0, .32)');
 
     if (
       Platform.OS === 'android' &&
@@ -93,7 +103,10 @@ export default class TouchableRipple extends React.Component<Props, void> {
           background={
             background != null
               ? background
-              : TouchableNativeFeedback.Ripple(rippleColor, borderless)
+              : TouchableNativeFeedback.Ripple(
+                  calculatedRippleColor,
+                  borderless
+                )
           }
         >
           <View style={style}>{React.Children.only(children)}</View>
@@ -110,7 +123,7 @@ export default class TouchableRipple extends React.Component<Props, void> {
         underlayColor={
           underlayColor != null
             ? underlayColor
-            : color(rippleColor)
+            : color(calculatedRippleColor)
                 .fade(0.5)
                 .rgb()
                 .string()
@@ -121,3 +134,5 @@ export default class TouchableRipple extends React.Component<Props, void> {
     );
   }
 }
+
+export default withTheme(TouchableRipple);
