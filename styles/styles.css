@@ -4,7 +4,7 @@
 }
 
 .screenshots img {
-  max-width: 280px;
+  width: 280px;
   height: auto;
 }
 
@@ -17,7 +17,7 @@
   margin: 4px;
 }
 
-.screenshots span { 
+.screenshots span {
   color: #616161;
   font-size: 13px;
   line-height: 24px;
@@ -25,6 +25,6 @@
 
 @media (min-width: 1100px) {
   .screenshots img {
-    max-width: 240px;
+    width: 240px;
   }
 }
