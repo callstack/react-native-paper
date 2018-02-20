@@ -11,6 +11,10 @@ type Props = {
 /**
  * Typography component for showing a headline.
  *
+ * <div class="screenshots">
+ *   <img src="screenshots/headline.png" />
+ * </div>
+ *
  * ## Usage
  * ```js
  * const MyComponent = () => (

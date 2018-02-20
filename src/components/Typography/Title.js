@@ -11,6 +11,10 @@ type Props = {
 /**
  * Typography component for showing a title.
  *
+ * <div class="screenshots">
+ *   <img src="screenshots/title.png" />
+ * </div>
+ *
  * ## Usage
  * ```js
  * const MyComponent = () => (

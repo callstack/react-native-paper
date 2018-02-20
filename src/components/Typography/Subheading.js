@@ -11,6 +11,10 @@ type Props = {
 /**
  * Typography component for showing a subheading.
  *
+ * <div class="screenshots">
+ *   <img src="screenshots/subheading.png" />
+ * </div>
+ *
  * ## Usage
  * ```js
  * const MyComponent = () => (
