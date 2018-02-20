@@ -8,25 +8,6 @@ import ToolbarAction from './ToolbarAction';
 import Icon from '../Icon';
 import { black, white } from '../../styles/colors';
 
-const getBackIcon = Platform.select({
-  ios: (dark?: boolean) => {
-    const iconColor = dark
-      ? white
-      : color(black)
-          .alpha(0.54)
-          .rgb()
-          .string();
-    return (
-      <Icon
-        name="keyboard-arrow-left"
-        style={styles.icon}
-        color={iconColor}
-      />
-    );
-  },
-  android: () => 'arrow-back',
-});
-
 type Props = {
   /**
    * Theme color for the back icon, a dark action icon will render a light icon and vice-versa.
@@ -41,7 +22,28 @@ type Props = {
 
 const ToolbarBackAction = (props: Props) => {
   const { dark, onPress, style } = props;
-  const BackIcon = getBackIcon(dark);
+  
+  let icon;
+  
+  if (Platform.OS === 'ios') {
+    const iconColor = dark
+      ? white
+      : color(black)
+          .alpha(0.54)
+          .rgb()
+          .string();
+    
+    icon = (
+      <Icon
+        name="keyboard-arrow-left"
+        style={styles.icon}
+        color={iconColor}
+      />
+    );
+  } else {
+    icon = 'arrow-back';
+  }
+  
   return (
     <ToolbarAction
       icon={BackIcon}
