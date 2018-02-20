@@ -19,7 +19,7 @@ const getBackIcon = Platform.select({
     return (
       <Icon
         name="keyboard-arrow-left"
-        style={styles.backIcon}
+        style={styles.icon}
         color={iconColor}
       />
     );
@@ -47,28 +47,24 @@ const ToolbarBackAction = (props: Props) => {
       icon={BackIcon}
       dark={dark}
       onPress={onPress}
-      style={[styles.backAction, style]}
+      style={[styles.action, style]}
     />
   );
 };
 
 const styles = StyleSheet.create({
-  backAction: {
-    ...Platform.select({
-      ios: {
-        marginHorizontal: 0,
-      },
-    }),
-  },
-  backIcon: {
-    ...Platform.select({
-      ios: {
-        fontSize: 36,
-        height: 36,
-        width: 36,
-      },
-    }),
-  },
+  action: Platform.select({
+    ios: {
+      marginHorizontal: 0,
+    },
+  }),
+  icon: Platform.select({
+    ios: {
+      fontSize: 36,
+      height: 36,
+      width: 36,
+    },
+  }),
 });
 
 export default ToolbarBackAction;
