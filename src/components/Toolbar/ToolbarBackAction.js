@@ -22,9 +22,9 @@ type Props = {
 
 const ToolbarBackAction = (props: Props) => {
   const { dark, onPress, style } = props;
-  
+
   let icon;
-  
+
   if (Platform.OS === 'ios') {
     const iconColor = dark
       ? white
@@ -32,21 +32,17 @@ const ToolbarBackAction = (props: Props) => {
           .alpha(0.54)
           .rgb()
           .string();
-    
+
     icon = (
-      <Icon
-        name="keyboard-arrow-left"
-        style={styles.icon}
-        color={iconColor}
-      />
+      <Icon name="keyboard-arrow-left" style={styles.icon} color={iconColor} />
     );
   } else {
     icon = 'arrow-back';
   }
-  
+
   return (
     <ToolbarAction
-      icon={BackIcon}
+      icon={icon}
       dark={dark}
       onPress={onPress}
       style={[styles.action, style]}
