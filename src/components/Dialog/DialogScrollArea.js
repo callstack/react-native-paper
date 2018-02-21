@@ -28,7 +28,7 @@ type Props = {
  *     return (
  *       <Dialog
  *         visible={this.state.visible}
- *         onRequestClose={this._hideDialog}>
+ *         onDismiss={this._hideDialog}>
  *         <DialogScrollArea>
  *           <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>
  *             This is a scrollable area

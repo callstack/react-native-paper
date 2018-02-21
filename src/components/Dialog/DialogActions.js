@@ -27,7 +27,7 @@ type Props = {
  *     return (
  *       <Dialog
  *         visible={this.state.visible}
- *         onRequestClose={this._hideDialog}>
+ *         onDismiss={this._hideDialog}>
  *         <DialogActions>
  *           <Button onPress={() => console.log("Cancel"))}>Cancel</Button>
  *           <Button onPress={() => console.log("Ok")}>Ok</Button>
