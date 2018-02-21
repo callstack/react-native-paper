@@ -31,7 +31,8 @@ type Props = {
 };
 
 /**
- *  Toolbar is a generalization of action bars for use within application layouts.
+ * Toolbar is usually used as a header placed at the top of the screen.
+ * It can contain the screen title, controls such as navigation buttons, menu button etc.
  *
  * ## Usage
  * ```js

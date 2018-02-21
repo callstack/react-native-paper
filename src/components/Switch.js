@@ -32,7 +32,7 @@ type Props = {
 };
 
 /**
- * Switch is a visual toggle between two mutually exclusive states—on and off.
+ * Switch is a visual toggle between two mutually exclusive states — on and off.
  *
  * <div class="screenshots">
  *   <div>

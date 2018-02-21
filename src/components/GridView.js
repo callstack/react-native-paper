@@ -39,7 +39,7 @@ type State = {
 };
 
 /**
- * Grid lists are an alternative to standard list views.
+ * A GridView can display items in a grid as opposed to the columnar layout of the ListView.
  *
  * ## Usage
  * ```js

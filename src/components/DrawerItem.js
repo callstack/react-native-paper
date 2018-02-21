@@ -41,7 +41,7 @@ type Props = {
 };
 
 /**
- * Item from drawer's list which navigates to specific location.
+ * DrawerItem is a component used to show an action item with an icon and a label in a navigation drawer.
  *
  * ## Usage
  * ```js

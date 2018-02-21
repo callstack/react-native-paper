@@ -30,6 +30,7 @@ const Icon = ({ name, ...props }: Props) => {
           {
             width: props.size,
             height: props.size,
+            tintColor: props.color,
           },
           props.style,
         ]}

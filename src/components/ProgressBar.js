@@ -33,7 +33,7 @@ const ProgressBarComponent = Platform.select({
 });
 
 /**
- * Progress bar is an indicator used to present some activity in the app.
+ * Progress bar is an indicator used to present progress of some activity in the app.
  *
  * <div class="screenshots">
  *   <img src="screenshots/progress-bar.png" />

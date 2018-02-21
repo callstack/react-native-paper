@@ -20,6 +20,9 @@ type Props = {
   style?: any,
 };
 
+/**
+ * The ToolbarBackAction component is used for displaying a back button in the toolbar.
+ */
 const ToolbarBackAction = (props: Props) => {
   const { dark, onPress, style } = props;
 

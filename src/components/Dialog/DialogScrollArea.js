@@ -12,7 +12,8 @@ type Props = {
 };
 
 /**
- * A component to show a scrollable content in a Dialog.
+ * A component to show a scrollable content in a Dialog. The component only provides appropriate styling.
+ * For the scrollable content you can use `ScrollView`, `FlatList` etc. depending on your requirement.
  *
  * ## Usage
  * ```js

@@ -23,7 +23,7 @@ type Props = {
 };
 
 /**
- * Drawer container slides in from the left and contains the navigation destinations for your app.
+ * A DrawerSection groups content inside a navigation drawer.
  *
  * ## Usage
  * ```js
@@ -35,7 +35,7 @@ type Props = {
  *   render() {
  *     const { active } = this.state;
  *     return (
- *       <DrawerSection title="Subheader">
+ *       <DrawerSection title="Some title">
  *         <DrawerItem
  *           label="First Item"
  *           active={this.state.active === 'First Item'}
