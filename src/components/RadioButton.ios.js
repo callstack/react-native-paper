@@ -32,7 +32,7 @@ type Props = {
 };
 
 /**
- * Radio buttons allow the selection of multiple options from a set
+ * Radio buttons allow the selection a single option from a set
  */
 class RadioButton extends React.Component<Props> {
   render() {

@@ -33,7 +33,7 @@ export default class extends React.Component<Props, State> {
     const { checked } = this.state;
     const { visible, close } = this.props;
     return (
-      <Dialog onRequestClose={close} visible={visible}>
+      <Dialog onDismiss={close} visible={visible}>
         <DialogTitle>Choose an option</DialogTitle>
         <DialogScrollArea style={{ maxHeight: 170, paddingHorizontal: 0 }}>
           <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>

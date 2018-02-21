@@ -18,7 +18,7 @@ const DialogWithLongText = ({
   visible: boolean,
   close: Function,
 }) => (
-  <Dialog onRequestClose={close} visible={visible}>
+  <Dialog onDismiss={close} visible={visible}>
     <DialogTitle>Alert</DialogTitle>
     <DialogScrollArea style={{ maxHeight: 220, paddingHorizontal: 0 }}>
       <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>

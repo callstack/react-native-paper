@@ -38,7 +38,7 @@ type State = {
 const BORDER_WIDTH = 2;
 
 /**
- * Radio buttons allow the selection of a single option from a set.
+ * Radio buttons allow the selection a single option from a set
  *
  * ## Usage
  * ```js

@@ -21,7 +21,7 @@ Run the [example app](https://exp.host/@satya164/react-native-paper-example) wit
 Open a Terminal in your project's folder and run,
 
 ```sh
-npm install --save react-native-paper react-native-vector-icons
+yarn add react-native-paper react-native-vector-icons
 ```
 
 After installation, you'll need to link [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons).

@@ -19,7 +19,7 @@ const DialogWithCustomColors = ({
   close: Function,
 }) => (
   <Dialog
-    onRequestClose={close}
+    onDismiss={close}
     style={{ backgroundColor: Colors.purple900 }}
     visible={visible}
   >

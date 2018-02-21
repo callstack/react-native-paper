@@ -18,7 +18,7 @@ const DialogWithLongText = ({
   visible: boolean,
   close: Function,
 }) => (
-  <Dialog onRequestClose={close} visible={visible} dismissable={false}>
+  <Dialog onDismiss={close} visible={visible} dismissable={false}>
     <DialogTitle>Alert</DialogTitle>
     <DialogContent>
       <Paragraph>This is an undismissable dialog!!</Paragraph>

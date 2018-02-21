@@ -15,7 +15,7 @@ const TYPES = {
   test: true,
   chore: true,
   revert: true,
-  breaking: true
+  BREAKING: true
 };
 
 function printError(...args) {

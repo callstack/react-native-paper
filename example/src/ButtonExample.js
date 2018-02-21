@@ -21,11 +21,6 @@ class ButtonExample extends React.Component<Props, State> {
   };
 
   render() {
-    const uri = {
-      // Callstack company avatar from github.
-      uri: 'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400',
-    };
-    const source = require('../assets/chameleon.jpg');
     const { theme: { colors: { background } } } = this.props;
     return (
       <View style={[styles.container, { backgroundColor: background }]}>
@@ -74,16 +69,27 @@ class ButtonExample extends React.Component<Props, State> {
           </Button>
         </View>
         <View style={styles.row}>
-          <Button raised icon={uri} onPress={() => {}}>
+          <Button
+            raised
+            icon={{
+              uri:
+                'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400',
+            }}
+            onPress={() => {}}
+          >
             Remote image
           </Button>
-          <Button raised icon={source} onPress={() => {}}>
+          <Button
+            raised
+            icon={require('../assets/chameleon.jpg')}
+            onPress={() => {}}
+          >
             Required asset
           </Button>
           <Button
             icon={
               <Image
-                source={source}
+                source={require('../assets/chameleon.jpg')}
                 style={{ width: 16, height: 16, borderRadius: 10 }}
               />
             }

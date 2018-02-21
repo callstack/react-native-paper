@@ -12,7 +12,8 @@ type Props = {
 };
 
 /**
- * A component to show a scrollable content in a Dialog.
+ * A component to show a scrollable content in a Dialog. The component only provides appropriate styling.
+ * For the scrollable content you can use `ScrollView`, `FlatList` etc. depending on your requirement.
  *
  * ## Usage
  * ```js
@@ -27,7 +28,7 @@ type Props = {
  *     return (
  *       <Dialog
  *         visible={this.state.visible}
- *         onRequestClose={this._hideDialog}>
+ *         onDismiss={this._hideDialog}>
  *         <DialogScrollArea>
  *           <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>
  *             This is a scrollable area

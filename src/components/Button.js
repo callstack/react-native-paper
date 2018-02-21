@@ -16,7 +16,7 @@ const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
 type Props = {
   /**
-   * Disable the button.
+   * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean,
   /**
@@ -24,11 +24,11 @@ type Props = {
    */
   compact?: boolean,
   /**
-   * Add elevation to button, as opposed to default flat appearance.
+   * Add elevation to button, as opposed to default flat appearance. Typically used on a flat surface.
    */
   raised?: boolean,
   /**
-   * Use to primary color from theme.
+   * Use to primary color from theme. Typically used to emphasize an action.
    */
   primary?: boolean,
   /**
@@ -70,7 +70,7 @@ type State = {
 };
 
 /**
- * Buttons communicate the action that will occur when the user touches them.
+ * A button is component that the user can press to trigger an action.
  *
  * <div class="screenshots">
  *   <img src="screenshots/button-raised.png" />

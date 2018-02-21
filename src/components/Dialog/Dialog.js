@@ -21,7 +21,7 @@ type Props = {
   /**
    * Callback that is called when the user dismisses the dialog.
    */
-  onRequestClose: Function,
+  onDismiss: Function,
   /**
    * Determines Whether the dialog is visible.
    */
@@ -57,7 +57,7 @@ type Props = {
  *         <Button onPress={this._showDialog}>Show Dialog</Button>
  *         <Dialog
  *            visible={visible}
- *            onRequestClose={this._hideDialog}
+ *            onDismiss={this._hideDialog}
  *         >
  *           <DialogTitle>Alert</DialogTitle>
  *           <DialogContent>
@@ -83,7 +83,7 @@ class Dialog extends React.Component<Props, void> {
     const {
       children,
       dismissable,
-      onRequestClose,
+      onDismiss,
       visible,
       style,
       theme,
@@ -119,11 +119,7 @@ class Dialog extends React.Component<Props, void> {
       });
     }
     return (
-      <Modal
-        dismissable={dismissable}
-        onRequestClose={onRequestClose}
-        visible={visible}
-      >
+      <Modal dismissable={dismissable} onDismiss={onDismiss} visible={visible}>
         <AnimatedPaper style={[styles.container, { backgroundColor }, style]}>
           {title}
           {restOfChildrenWithoutTitle}
