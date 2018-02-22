@@ -27,7 +27,6 @@ export { default as Divider } from './components/Divider';
 export { default as DrawerItem } from './components/DrawerItem';
 export { default as DrawerSection } from './components/DrawerSection';
 export { default as FAB } from './components/FAB';
-export { default as GridView } from './components/GridView';
 export { default as Modal } from './components/Modal';
 export { default as Paper } from './components/Paper';
 export { default as ProgressBar } from './components/ProgressBar';

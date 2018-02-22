@@ -10,7 +10,6 @@ import DialogExample from './DialogExample';
 import DividerExample from './DividerExample';
 import ExampleListRow from './ExampleListRow';
 import FABExample from './FABExample';
-import GridViewExample from './GridViewExample';
 import PaperExample from './PaperExample';
 import ProgressBarExample from './ProgressBarExample';
 import RadioButtonExample from './RadioButtonExample';
@@ -34,7 +33,6 @@ export const examples = {
   dialog: DialogExample,
   divider: DividerExample,
   fab: FABExample,
-  grid: GridViewExample,
   paper: PaperExample,
   progressbar: ProgressBarExample,
   radio: RadioButtonExample,
