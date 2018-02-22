@@ -40,6 +40,11 @@ type Props = {
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
  *
+ *  <div class="screenshots">
+ *   <img class="medium" src="screenshots/dialog-1.png" />
+ *   <img class="medium" src="screenshots/dialog-2.png" />
+ * </div>
+ *
  * ## Usage
  * ```js
  * export default class MyComponent extends React.Component {
