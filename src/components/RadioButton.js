@@ -40,6 +40,25 @@ const BORDER_WIDTH = 2;
 /**
  * Radio buttons allow the selection a single option from a set
  *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img src="screenshots/radio-enabled.android.png" />
+ *     <figcaption>Android (enabled)</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/radio-disabled.android.png" />
+ *     <figcaption>Android (disabled)</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/radio-enabled.ios.png" />
+ *     <figcaption>iOS (enabled)</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/radio-disabled.ios.png" />
+ *     <figcaption>iOS (disabled)</figcaption>
+ *   </figure>
+ * </div>
+ *
  * ## Usage
  * ```js
  * export default class MyComponent extends Component {

@@ -34,6 +34,17 @@ type Props = {
  * Toolbar is usually used as a header placed at the top of the screen.
  * It can contain the screen title, controls such as navigation buttons, menu button etc.
  *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/toolbar.android.png" />
+ *     <figcaption>Android</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img class="medium" src="screenshots/toolbar.ios.png" />
+ *     <figcaption>iOS</figcaption>
+ *   </figure>
+ * </div>
+ *
  * ## Usage
  * ```js
  * export default class MyComponent extends Component {
