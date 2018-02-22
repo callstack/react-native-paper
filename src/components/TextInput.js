@@ -70,14 +70,14 @@ type State = {
  * TextInputs allow users to input text.
  *
  * <div class="screenshots">
- *   <div>
+ *   <figure>
  *     <img src="screenshots/textinput.unfocused.png" />
- *     <span>Unfocused</span>
- *   </div>
- *   <div>
+ *     <figcaption>Unfocused</span>
+ *   </figure>
+ *   <figure>
  *     <img src="screenshots/textinput.focused.png" />
- *     <span>Focused</span>
- *   </div>
+ *     <figcaption>Focused</figcaption>
+ *   </figure>
  * </div>
  *
  * ## Usage

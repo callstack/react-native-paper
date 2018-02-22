@@ -35,22 +35,22 @@ type Props = {
  * Switch is a visual toggle between two mutually exclusive states — on and off.
  *
  * <div class="screenshots">
- *   <div>
- *     <img src="screenshots/switch.android.enabled.png" />
- *     <span>Android (enabled)</span>
- *   </div>
- *   <div>
- *     <img src="screenshots/switch.android.disabled.png" />
- *     <span>Android (disabled)</span>
- *   </div>
- *   <div>
- *     <img src="screenshots/switch.ios.enabled.png" />
- *     <span>iOS (enabled)</span>
- *   </div>
- *   <div>
- *     <img src="screenshots/switch.ios.disabled.png" />
- *     <span>iOS (disabled)</span>
- *   </div>
+ *   <figure>
+ *     <img src="screenshots/switch-enabled.android.png" />
+ *     <figcaption>Android (enabled)</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/switch-disabled.android.png" />
+ *     <figcaption>Android (disabled)</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/switch-enabled.ios.png" />
+ *     <figcaption>iOS (enabled)</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/switch-disabled.ios.png" />
+ *     <figcaption>iOS (disabled)</figcaption>
+ *   </figure>
  * </div>
  *
  * ## Usage
