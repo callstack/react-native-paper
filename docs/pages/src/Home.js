@@ -153,7 +153,11 @@ export default class Home extends React.Component<{}> {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img {...styles(qrcode)} src="images/expo-qr.png" alt="" />
+              <img
+                {...styles(qrcode)}
+                src="images/expo-qr.png"
+                alt="Expo QR Code"
+              />
             </a>
           </div>
         </div>
