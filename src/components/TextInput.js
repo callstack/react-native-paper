@@ -151,7 +151,9 @@ class TextInput extends React.Component<Props, State> {
 
   _timer: any;
   _root: any;
-  _setRef: any = (c: Object) => (this._root = c);
+  _setRef: any = (c: Object) => {
+    this._root = c;
+  };
 
   _animateFocus = () => {
     Animated.timing(this.state.focused, {

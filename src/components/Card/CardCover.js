@@ -51,12 +51,10 @@ const CardCover = (props: Props) => {
         borderTopRightRadius: roundness,
       };
     }
-  } else {
-    if (typeof total === 'number' && index === total - 1) {
-      coverStyle = {
-        borderBottomLeftRadius: roundness,
-      };
-    }
+  } else if (typeof total === 'number' && index === total - 1) {
+    coverStyle = {
+      borderBottomLeftRadius: roundness,
+    };
   }
 
   return (
