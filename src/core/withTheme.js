@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import hoistNonReactStatics from 'hoist-non-react-statics';
 import merge from 'deepmerge';
 import ThemeProvider, { channel } from './ThemeProvider';
 import type { Theme } from '../types';
@@ -128,21 +129,7 @@ export default function withTheme<Props: {}>(
     }
   }
 
-  // This is ugly, but we need to hoist static properties manually
-  for (const prop in Comp) {
-    if (prop !== 'displayName' && prop !== 'contextTypes') {
-      if (prop === 'propTypes') {
-        // Only the underlying component will receive the theme prop
-        /* $FlowFixMe */
-        const { theme, ...propTypes } = Comp[prop]; // eslint-disable-line no-shadow, no-unused-vars
-        /* $FlowFixMe */
-        ThemedComponent[prop] = propTypes;
-      } else {
-        /* $FlowFixMe */
-        ThemedComponent[prop] = Comp[prop];
-      }
-    }
-  }
+  hoistNonReactStatics(ThemedComponent, Comp);
 
   return ThemedComponent;
 }
