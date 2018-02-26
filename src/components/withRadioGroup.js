@@ -5,6 +5,9 @@ import { Subscriber } from 'react-broadcast';
 import { channel } from './RadioGroup';
 
 type Props = {
+  /**
+   * Radio button value
+   */
   value: string,
 };
 
