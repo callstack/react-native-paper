@@ -8,6 +8,37 @@ type Props = {
   value: string,
 };
 
+/**
+ * withRadioGroup connects context provided by RadioGroup to wrapped component
+ * **Usage**
+ * ```js
+ *
+ * const Radio = withRadioGroup(RadioButton);
+ *
+ * export default class MyComponent extends Component {
+ *   state = {
+ *     value: 'first',
+ *   };
+ *
+ *   render() {
+ *     return(
+ *       <RadioGroup
+ *         onValueChange={value => this.setState({ value })}
+ *         value={this.state.value}
+ *       >
+ *         <View>
+ *           <Radio value="first" />
+ *         </View>
+ *         <View>
+ *           <Radio value="second" />
+ *         </View>
+ *       </RadioGroup>
+ *     )
+ *   }
+ * }
+ *```
+ */
+
 function withRadioGroup(
   Component: React.ComponentType<any>
 ): React.ComponentType<any> {
