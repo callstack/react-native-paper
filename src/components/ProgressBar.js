@@ -7,9 +7,9 @@ import {
   ProgressViewIOS,
   ProgressBarAndroid,
 } from 'react-native';
+import setColor from 'color';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types';
-import setColor from 'color';
 
 type Props = {
   /**

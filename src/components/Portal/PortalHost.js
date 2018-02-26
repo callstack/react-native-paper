@@ -86,10 +86,9 @@ export default class Portals extends React.Component<Props, State> {
                 }
                 return g;
               });
-            } else {
-              group = { position, items: [children] };
-              return [...acc, group];
             }
+            group = { position, items: [children] };
+            return [...acc, group];
           }, [])
           .map(({ position, items }) => (
             <View key={position} style={StyleSheet.absoluteFill}>

@@ -68,13 +68,10 @@ export default function withTheme<Props: {}>(
       this._subscription && this._subscription.remove();
     }
 
-    _merge = (theme: Theme, props: *) => {
+    _merge = (theme: Theme, props: *) =>
       // Only merge if both theme from context and props are present
       // Avoiding unnecessary merge allows us to check equality by reference
-      return theme && props.theme
-        ? merge(theme, props.theme)
-        : theme || props.theme;
-    };
+      theme && props.theme ? merge(theme, props.theme) : theme || props.theme;
 
     _subscription: { remove: Function };
     _root: any;
@@ -88,7 +85,9 @@ export default function withTheme<Props: {}>(
         element = (
           <Comp
             {...this.props}
-            ref={c => (this._root = c)}
+            ref={c => {
+              this._root = c;
+            }}
             theme={this.state.theme}
           />
         );

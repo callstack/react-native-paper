@@ -141,16 +141,12 @@ class Button extends React.Component<Props, State> {
           .alpha(0.12)
           .rgb()
           .string();
+      } else if (buttonColor) {
+        backgroundColor = buttonColor;
+      } else if (primary) {
+        backgroundColor = colors.primary;
       } else {
-        if (buttonColor) {
-          backgroundColor = buttonColor;
-        } else {
-          if (primary) {
-            backgroundColor = colors.primary;
-          } else {
-            backgroundColor = theme.dark ? '#535354' : white;
-          }
-        }
+        backgroundColor = theme.dark ? '#535354' : white;
       }
     } else {
       backgroundColor = 'transparent';
@@ -175,20 +171,14 @@ class Button extends React.Component<Props, State> {
             .alpha(0.26)
             .rgb()
             .string();
+    } else if (raised) {
+      textColor = isDark ? white : black;
+    } else if (buttonColor) {
+      textColor = buttonColor;
+    } else if (primary) {
+      textColor = colors.primary;
     } else {
-      if (raised) {
-        textColor = isDark ? white : black;
-      } else {
-        if (buttonColor) {
-          textColor = buttonColor;
-        } else {
-          if (primary) {
-            textColor = colors.primary;
-          } else {
-            textColor = theme.dark ? white : black;
-          }
-        }
-      }
+      textColor = theme.dark ? white : black;
     }
 
     const rippleColor = color(textColor)

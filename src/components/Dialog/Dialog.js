@@ -118,9 +118,8 @@ class Dialog extends React.Component<Props, void> {
           return React.cloneElement(child, {
             style: { paddingTop: 24 },
           });
-        } else {
-          return child;
         }
+        return child;
       });
     }
     return (
