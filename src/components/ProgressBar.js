@@ -41,6 +41,9 @@ const ProgressBarComponent = Platform.select({
  *
  * ## Usage
  * ```js
+ * import React from 'react';
+ * import { ProgressBar } from 'react-native-paper';
+ *
  * const MyComponent = () => (
  *   <ProgressBar progress={0.5} color={Colors.red800} />
  * );

@@ -17,6 +17,9 @@ type Props = {
  *
  * ## Usage
  * ```js
+ * import React from 'react';
+ * import { Caption } from 'react-native-paper';
+ *
  * const MyComponent = () => (
  *   <Caption>Caption</Caption>
  * );

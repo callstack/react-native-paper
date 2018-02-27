@@ -45,6 +45,9 @@ type Props = {
  *
  * ## Usage
  * ```js
+ * import React from 'react';
+ * import { DrawerItem } from 'react-native-paper';
+ *
  * const MyComponent = () => (
  *   <DrawerItem label="First Item" />
  * );

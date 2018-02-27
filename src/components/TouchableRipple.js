@@ -55,6 +55,10 @@ type Props = {
  *
  * ## Usage
  * ```js
+ * import React from 'react';
+ * import { View } from 'react-native';
+ * import { Paragraph, TouchableRipple } from 'react-native-paper';
+ *
  * const MyComponent = () => (
  *   <TouchableRipple
  *     onPress={() => {}}

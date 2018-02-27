@@ -61,7 +61,11 @@ const BORDER_WIDTH = 2;
  *
  * ## Usage
  * ```js
- * export default class MyComponent extends Component {
+ * import React from 'react';
+ * import { View } from 'react-native';
+ * import { RadioButton } from 'react-native-paper';
+ *
+ * export default class MyComponent extends React.Component {
  *   state = {
  *     checked: 'firstOption',
  *   };

@@ -27,7 +27,10 @@ type Props = {
  *
  * ## Usage
  * ```js
- * export default class MyComponent extends Component {
+ * import React from 'react';
+ * import { DrawerSection, DrawerItem } from 'react-native-paper';
+ *
+ * export default class MyComponent extends React.Component {
  *   state = {
  *     active: 'First Item',
  *   };

@@ -24,6 +24,9 @@ type Props = {
  *
  * ## Usage
  * ```js
+ * import React from 'react';
+ * import { Card, CardContent, Title, Paragraph } from 'react-native-paper';
+ *
  * const MyComponent = () => (
  *   <Card>
  *     <CardContent>

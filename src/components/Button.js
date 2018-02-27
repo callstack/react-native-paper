@@ -80,6 +80,9 @@ type State = {
  *
  * ## Usage
  * ```js
+ * import React from 'react';
+ * import { Button } from 'react-native-paper';
+ *
  * const MyComponent = () => (
  *   <Button raised onPress={() => console.log('Pressed')}>
  *     Press me

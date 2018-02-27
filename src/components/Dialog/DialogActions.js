@@ -16,6 +16,9 @@ type Props = {
  *
  * ## Usage
  * ```js
+ * import React from 'react';
+ * import { Button, Dialog, DialogActions } from 'react-native-paper';
+ *
  * export default class MyComponent extends React.Component {
  *   state = {
  *     visible: false,
