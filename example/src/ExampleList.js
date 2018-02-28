@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { ListView } from 'react-native';
 import { Divider, withTheme } from 'react-native-paper';
+import BottomNavigationExample from './BottomNavigationExample';
 import ButtonExample from './ButtonExample';
 import CardExample from './CardExample';
 import CheckboxExample from './CheckboxExample';
@@ -27,6 +28,7 @@ type Props = {
 };
 
 export const examples = {
+  bottomNavigation: BottomNavigationExample,
   button: ButtonExample,
   card: CardExample,
   checkbox: CheckboxExample,

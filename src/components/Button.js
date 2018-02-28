@@ -40,10 +40,7 @@ type Props = {
    */
   loading?: boolean,
   /**
-   * Name of the icon. Can be a string (name of `MaterialIcon`),
-   * an object of shape `{ uri: 'https://path.to' }`,
-   * a local image: `require('../path/to/image.png')`,
-   * or a valid React Native component.
+   * Name of the icon. Can be a string, an image source or a react component.
    */
   icon?: IconSource,
   /**
