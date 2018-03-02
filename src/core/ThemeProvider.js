@@ -54,6 +54,6 @@ export default class ThemeProvider extends React.Component<Props> {
   _get = () => this.props.theme;
 
   render() {
-    return React.Children.only(this.props.children);
+    return this.props.children;
   }
 }

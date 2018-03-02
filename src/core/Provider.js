@@ -15,7 +15,7 @@ export default class Provider extends React.Component<Props> {
     return (
       <PortalHost>
         <ThemeProvider theme={this.props.theme}>
-          {React.Children.only(this.props.children)}
+          {this.props.children}
         </ThemeProvider>
       </PortalHost>
     );
