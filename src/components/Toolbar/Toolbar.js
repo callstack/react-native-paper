@@ -47,7 +47,7 @@ type Props = {
  *
  * ## Usage
  * ```js
- * import React from 'react';
+ * import * as React from 'react';
  * import { Toolbar, ToolbarBackAction, ToolbarContent, ToolbarAction } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {

@@ -30,7 +30,7 @@ type Props = {
  *
  * ## Usage
  * ```js
- * import React from 'react';
+ * import * as React from 'react';
  * import { Text } from 'react-native';
  * import { Paper } from 'react-native-paper';
  *

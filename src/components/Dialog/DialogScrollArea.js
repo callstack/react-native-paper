@@ -17,7 +17,7 @@ type Props = {
  *
  * ## Usage
  * ```js
- * import React from 'react';
+ * import * as React from 'react';
  * import { ScrollView } from 'react-native';
  * import { Dialog, DialogScrollArea } from 'react-native-paper';
  *

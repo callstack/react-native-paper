@@ -61,7 +61,7 @@ const BORDER_WIDTH = 2;
  *
  * ## Usage
  * ```js
- * import React from 'react';
+ * import * as React from 'react';
  * import { View } from 'react-native';
  * import { RadioButton } from 'react-native-paper';
  *

@@ -82,7 +82,7 @@ type State = {
  *
  * ## Usage
  * ```js
- * import React from 'react';
+ * import * as React from 'react';
  * import { TextInput } from 'react-native-paper';
  *
  * class MyComponent extends React.Component {

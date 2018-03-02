@@ -17,7 +17,7 @@ type Props = {
  *
  * ## Usage
  * ```js
- * import React from 'react';
+ * import * as React from 'react';
  * import { Paragraph } from 'react-native-paper';
  *
  * const MyComponent = () => (
