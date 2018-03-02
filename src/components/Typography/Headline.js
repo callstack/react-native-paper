@@ -17,6 +17,9 @@ type Props = {
  *
  * ## Usage
  * ```js
+ * import * as React from 'react';
+ * import { Headline } from 'react-native-paper';
+ *
  * const MyComponent = () => (
  *   <Headline>Headline</Headline>
  * );

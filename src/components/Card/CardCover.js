@@ -27,6 +27,9 @@ type Props = {
  *
  * ## Usage
  * ```js
+ * import * as React from 'react';
+ * import { Card, CardCover } from 'react-native-paper';
+ *
  * const MyComponent = () => (
  *   <Card>
  *     <CardCover source={{ uri: 'https://picsum.photos/700' }} />
