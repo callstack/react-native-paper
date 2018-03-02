@@ -33,6 +33,8 @@ type Props = {
  *   </Card>
  * );
  * ```
+ *
+ * @extends Image props https://facebook.github.io/react-native/docs/image.html#props
  */
 const CardCover = (props: Props) => {
   const { index, total, style, theme } = props;
