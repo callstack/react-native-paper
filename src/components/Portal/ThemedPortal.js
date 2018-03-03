@@ -19,7 +19,7 @@ class ThemedPortal extends React.Component<Props> {
     return (
       <Portal {...this.props}>
         <ThemeProvider theme={this.props.theme}>
-          {React.Children.only(this.props.children)}
+          {this.props.children}
         </ThemeProvider>
       </Portal>
     );

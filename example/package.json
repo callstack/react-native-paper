@@ -13,6 +13,7 @@
   "dependencies": {
     "@expo/vector-icons": "^6.2.0",
     "color": "^2.0.1",
+    "create-react-context": "^0.2.1",
     "deepmerge": "^2.0.1",
     "expo": "~23.0.2",
     "prop-types": "^15.6.0",

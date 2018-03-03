@@ -1,6 +1,6 @@
 /* @flow */
 
-import Expo from 'expo';
+import Expo, { KeepAwake } from 'expo';
 import * as React from 'react';
 import { StatusBar } from 'react-native';
 import {
@@ -49,6 +49,7 @@ class PaperExample extends React.Component<{}, State> {
             theme: this.state.theme,
           }}
         />
+        <KeepAwake />
       </PaperProvider>
     );
   }
