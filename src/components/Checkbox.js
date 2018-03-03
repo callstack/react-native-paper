@@ -59,7 +59,10 @@ type State = {
  *
  * ## Usage
  * ```js
- * export default class MyComponent extends Component {
+ * import * as React from 'react';
+ * import { Checkbox } from 'react-native-paper';
+ *
+ * export default class MyComponent extends React.Component {
  *   state = {
  *     checked: false,
  *   };

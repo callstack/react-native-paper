@@ -16,36 +16,56 @@
     "url": "https://github.com/callstack/react-native-paper/issues"
   },
   "homepage": "https://callstack.github.io/react-native-paper",
-  "peerDependencies": {
-    "react": "*",
-    "react-native": "*",
-    "react-native-vector-icons": "*"
+  "scripts": {
+    "commitmsg": "node ./scripts/validate-commit-message.js $GIT_PARAMS",
+    "precommit": "yarn run lint && yarn run flow",
+    "flow": "flow",
+    "lint": "eslint .",
+    "test": "jest",
+    "bootstrap": "yarn --cwd example && yarn --cwd docs"
+  },
+  "dependencies": {
+    "color": "^2.0.1",
+    "create-react-context": "^0.2.1",
+    "deepmerge": "^2.0.1",
+    "hoist-non-react-statics": "^2.5.0",
+    "prop-types": "^15.6.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-preset-react-native": "^4.0.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.1",
     "eslint": "^4.18.1",
     "eslint-config-callstack-io": "^1.1.1",
     "eslint-plugin-prettier": "^2.1.2",
     "eslint-plugin-react-native": "^3.2.0",
     "flow-bin": "~0.56.0",
     "husky": "^0.14.3",
+    "jest": "^22.4.2",
     "prettier": "^1.8.2",
     "react": "16.0.0",
+    "react-dom": "^16.2.0",
     "react-native": "~0.50.3",
-    "react-native-vector-icons": "~4.4.2"
+    "react-native-vector-icons": "~4.4.2",
+    "react-test-renderer": "^16.2.0"
   },
-  "dependencies": {
-    "color": "^2.0.1",
-    "deepmerge": "^2.0.1",
-    "hoist-non-react-statics": "^2.5.0",
-    "prop-types": "^15.6.0"
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
+    "react-native-vector-icons": "*"
   },
-  "scripts": {
-    "commitmsg": "node ./scripts/validate-commit-message.js $GIT_PARAMS",
-    "precommit": "yarn run lint && yarn run flow",
-    "flow": "flow",
-    "lint": "eslint .",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "bootstrap": "yarn --cwd example && yarn --cwd docs"
+  "jest": {
+    "preset": "react-native",
+    "setupFiles": [
+      "<rootDir>/__setup__/enzyme.js"
+    ],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/example/node_modules"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   }
 }

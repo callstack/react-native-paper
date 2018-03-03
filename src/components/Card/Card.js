@@ -47,6 +47,17 @@ type State = {
  *
  * ## Usage
  * ```js
+ * import * as React from 'react';
+ * import {
+ *   Button,
+ *   Card,
+ *   CardActions,
+ *   CardContent,
+ *   CardCover,
+ *   Title,
+ *   Paragraph
+ * } from 'react-native-paper';
+ *
  * const MyComponent = () => (
  *   <Card>
  *     <CardContent>
