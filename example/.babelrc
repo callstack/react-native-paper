@@ -5,7 +5,7 @@
   "plugins": [
     ["module-resolver", {
       "alias": {
-        "react-native-paper": "..",
+        "react-native-paper": "../src/index",
         "react-native-vector-icons": "@expo-vector-icons"
       }
     }]
