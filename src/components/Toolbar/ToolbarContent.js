@@ -7,7 +7,7 @@ import color from 'color';
 import Text from '../Typography/Text';
 
 import withTheme from '../../core/withTheme';
-import { white } from '../../styles/colors';
+import { white, black } from '../../styles/colors';
 
 import type { Theme } from '../../types';
 
@@ -53,23 +53,20 @@ class ToolbarContent extends React.Component<Props> {
       theme,
       title,
     } = this.props;
-    const { colors, fonts } = theme;
-    const { text: primaryText, secondaryText } = colors;
+    const { fonts } = theme;
 
-    const titleColor = dark ? white : primaryText;
-    const subtitleColor = dark
-      ? color(white)
-          .alpha(0.7)
-          .rgb()
-          .string()
-      : secondaryText;
+    const titleColor = dark ? white : black;
+    const subtitleColor = color(titleColor)
+      .alpha(0.7)
+      .rgb()
+      .string();
 
     return (
       <View style={[styles.container, style]}>
         <Text
           style={[
-            styles.title,
             { color: titleColor, fontFamily: fonts.medium },
+            styles.title,
             titleStyle,
           ]}
           numberOfLines={1}

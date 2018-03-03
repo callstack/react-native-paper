@@ -14,10 +14,6 @@ export default {
     background: grey50,
     paper: white,
     text: black,
-    secondaryText: color(black)
-      .alpha(0.7)
-      .rgb()
-      .string(),
     disabled: color(black)
       .alpha(0.26)
       .rgb()

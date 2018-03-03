@@ -10,7 +10,6 @@ export type Theme = {
     paper: string,
     accent: string,
     text: string,
-    secondaryText: string,
     disabled: string,
     placeholder: string,
   },

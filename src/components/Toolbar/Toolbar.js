@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
+import color from 'color';
 
 import withTheme from '../../core/withTheme';
 import Paper from '../Paper';
@@ -29,6 +30,8 @@ type Props = {
   theme: Theme,
   style?: any,
 };
+
+const DEFAULT_TOOLBAR_HEIGHT = 56;
 
 /**
  * Toolbar is usually used as a header placed at the top of the screen.
@@ -83,24 +86,37 @@ class Toolbar extends React.Component<Props> {
       theme,
       ...rest
     } = this.props;
+
     const { colors } = theme;
+    const {
+      height = DEFAULT_TOOLBAR_HEIGHT,
+      backgroundColor = colors.primary,
+      ...restStyle
+    } =
+      StyleSheet.flatten(style) || {};
 
-    const toolbarHeight = 56;
-    const flattenStyle = style ? StyleSheet.flatten(style) : {};
-    const { height: heightProp, ...styleProp } = { ...flattenStyle };
+    let isDark;
 
-    const elevation = Platform.OS === 'ios' ? 0 : 4;
+    if (typeof dark === 'boolean') {
+      isDark = dark;
+    } else {
+      isDark =
+        backgroundColor === 'transparent'
+          ? false
+          : !color(backgroundColor).light();
+    }
 
     const toolbarStyle = {
-      backgroundColor: colors.primary,
-      // TODO make height orientation aware ???
-      height: (heightProp || toolbarHeight) + statusBarHeight,
+      backgroundColor,
+      // TODO: make height orientation aware
+      height: height + statusBarHeight,
     };
 
     const childrenArray = React.Children.toArray(children);
+
     let isToolbarContentFound = false;
-    let leftActions = 0,
-      rightActions = 0;
+    let leftActions = 0;
+    let rightActions = 0;
 
     if (Platform.OS === 'ios') {
       childrenArray.forEach(child => {
@@ -133,16 +149,18 @@ class Toolbar extends React.Component<Props> {
       <Paper
         style={[
           toolbarStyle,
-          { paddingTop: statusBarHeight, elevation },
+          { paddingTop: statusBarHeight },
           styles.toolbar,
-          styleProp,
+          restStyle,
         ]}
         {...rest}
       >
-        {childrenArray.filter(child => child).map((child: any, i) => {
+        {childrenArray.filter(Boolean).map((child: any, i) => {
           const props: { dark: ?boolean, style?: any } = {
             dark:
-              typeof child.props.dark === 'undefined' ? dark : child.props.dark,
+              typeof child.props.dark === 'undefined'
+                ? isDark
+                : child.props.dark,
           };
 
           if (child.type === ToolbarContent) {
@@ -166,6 +184,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 4,
+    elevation: Platform.OS === 'ios' ? 0 : 4,
   },
   emptyIcon: {
     height: 36,

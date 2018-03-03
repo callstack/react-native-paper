@@ -36,7 +36,6 @@ class ToolbarExample extends React.Component<Props> {
     return {
       header: (
         <Toolbar
-          dark
           statusBarHeight={Platform.OS === 'ios' ? 20 : StatusBar.currentHeight}
         >
           {params.showLeftIcon && (

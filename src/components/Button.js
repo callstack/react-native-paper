@@ -1,8 +1,8 @@
 /* @flow */
 
-import color from 'color';
 import * as React from 'react';
 import { ActivityIndicator, Animated, View, StyleSheet } from 'react-native';
+import color from 'color';
 import Icon from './Icon';
 import Paper from './Paper';
 import Text from './Typography/Text';

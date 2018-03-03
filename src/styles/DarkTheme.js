@@ -15,10 +15,6 @@ const DarkTheme: Theme = {
     background: '#303030',
     paper: grey800,
     text: white,
-    secondaryText: color(white)
-      .alpha(0.7)
-      .rgb()
-      .string(),
     disabled: color(white)
       .alpha(0.3)
       .rgb()
