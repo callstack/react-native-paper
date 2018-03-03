@@ -30,10 +30,6 @@ type Props = {
  * ```
  */
 class CardActions extends React.Component<Props, void> {
-  static defaultProps = {
-    right: false,
-  };
-
   render() {
     return (
       <View {...this.props} style={[styles.container, this.props.style]}>
