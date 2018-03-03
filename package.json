@@ -28,8 +28,7 @@
     "color": "^2.0.1",
     "create-react-context": "^0.2.1",
     "deepmerge": "^2.0.1",
-    "hoist-non-react-statics": "^2.5.0",
-    "prop-types": "^15.6.0"
+    "hoist-non-react-statics": "^2.5.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
