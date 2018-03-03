@@ -35,9 +35,7 @@ class ToolbarExample extends React.Component<Props> {
 
     return {
       header: (
-        <Toolbar
-          statusBarHeight={Platform.OS === 'ios' ? 20 : StatusBar.currentHeight}
-        >
+        <Toolbar>
           {params.showLeftIcon && (
             <ToolbarBackAction onPress={() => navigation.goBack()} />
           )}

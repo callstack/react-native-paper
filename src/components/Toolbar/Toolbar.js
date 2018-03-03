@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import { View, Platform, StyleSheet, DeviceInfo } from 'react-native';
 import color from 'color';
 
 import withTheme from '../../core/withTheme';
@@ -17,7 +17,8 @@ type Props = {
    */
   dark?: boolean,
   /**
-   * Space added it Toolbar to adapt to the StatusBar.
+   * Extra padding to add at the top of toolbar to account for translucent status bar.
+   * This is automatically handled for Expo apps with translucent status bar.
    */
   statusBarHeight?: number,
   /**
@@ -74,7 +75,13 @@ const DEFAULT_TOOLBAR_HEIGHT = 56;
  */
 class Toolbar extends React.Component<Props> {
   static defaultProps = {
-    statusBarHeight: Platform.OS === 'ios' ? 20 : 0,
+    statusBarHeight:
+      // TODO: handle orientation changes
+      global.__expo && global.__expo.Constants
+        ? global.__expo.Constants.statusBarHeight
+        : Platform.OS === 'ios'
+          ? DeviceInfo.isIPhoneX_deprecated ? 44 : 20
+          : 0,
   };
 
   render() {
