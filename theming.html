@@ -36,6 +36,29 @@
 <span class="token punctuation brackets-braces" >}</span>
 </code></pre>
 <p>You can change the theme prop dynamically and all the components will automatically update to reflect the new theme.</p>
+<p>A theme contains the following properties:</p>
+<ul>
+<li><code>dark</code> (<code>boolean</code>): whether this is a dark theme or light theme.</li>
+<li><code>roundness</code> (<code>number</code>): roundness of common elements, such as buttons.</li>
+<li><code>colors</code> (<code>object</code>): various colors used throught different elements.
+<ul>
+<li><code>primary</code> - primary color for your app, usually your brand color.</li>
+<li><code>accent</code> - secondary color for your app which complements the primary color.</li>
+<li><code>background</code> - background color for pages, such as lists.</li>
+<li><code>paper</code> - background color for elements containing content, such as cards.</li>
+<li><code>text</code> - text color for content.</li>
+<li><code>disabled</code> - color for disabled elements.</li>
+<li><code>placeholder</code> - color for placeholder text, such as input placeholder.</li>
+</ul></li>
+<li><code>fonts</code> (<code>object</code>): various fonts used throught different elements
+<ul>
+<li><code>regular</code></li>
+<li><code>medium</code></li>
+<li><code>light</code></li>
+<li><code>thin</code></li>
+</ul></li>
+</ul>
+<p>When creating a custom theme, you will need to provide all of these properties.</p>
 <h2>Applying a theme to a paper component</h2>
 <p>If you want to change the theme for a certain component from the library, you can directly pass the <code>theme</code> prop to the component. The theme passed as the prop is merged with the theme from the <code>Provider</code>.</p>
 <pre><code class="language-js"><span class="token keyword keyword-import" >import</span> <span class="token operator" >*</span> <span class="token keyword keyword-as" >as</span> React <span class="token keyword keyword-from" >from</span> <span class="token string" >'react'</span><span class="token punctuation" >;</span>
