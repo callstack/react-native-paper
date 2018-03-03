@@ -66,7 +66,6 @@ const theme = {
   colors: {
     ...DefaultTheme.colors,
     primary: 'tomato',
-    primaryDark: color('tomato').darken(0.2).rgb().string(),
     accent: 'yellow',
   },
 };

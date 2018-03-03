@@ -1,7 +1,7 @@
 /* @flow */
 
 import color from 'color';
-import { indigo500, indigo700, pinkA200, black, white, grey50 } from './colors';
+import { indigo500, pinkA200, black, white, grey50 } from './colors';
 import fonts from './fonts';
 
 export default {
@@ -9,7 +9,6 @@ export default {
   roundness: 2,
   colors: {
     primary: indigo500,
-    primaryDark: indigo700,
     accent: pinkA200,
     background: grey50,
     paper: white,
