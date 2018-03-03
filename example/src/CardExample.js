@@ -44,8 +44,12 @@ class CardExample extends React.Component<Props> {
         <Card>
           <CardCover source={require('../assets/forest.jpg')} />
           <CardActions>
-            <Button primary>Cancel</Button>
-            <Button primary>Ok</Button>
+            <Button primary onPress={() => {}}>
+              Share
+            </Button>
+            <Button primary onPress={() => {}}>
+              Explore
+            </Button>
           </CardActions>
         </Card>
         <Card>

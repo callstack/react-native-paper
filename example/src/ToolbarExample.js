@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { View, Platform, StatusBar, StyleSheet } from 'react-native';
+import { View, Platform, StyleSheet } from 'react-native';
 import {
   Colors,
   Switch,

@@ -75,8 +75,8 @@ const DEFAULT_TOOLBAR_HEIGHT = 56;
  */
 class Toolbar extends React.Component<Props> {
   static defaultProps = {
+    // TODO: handle orientation changes
     statusBarHeight:
-      // TODO: handle orientation changes
       global.__expo && global.__expo.Constants
         ? global.__expo.Constants.statusBarHeight
         : Platform.OS === 'ios'
