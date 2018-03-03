@@ -8,10 +8,6 @@ type Props = {
    * Content of the `CardActions`.
    */
   children: React.Node,
-  /**
-   * Should actions be aligned to the right.
-   */
-  right?: boolean,
   style?: any,
 };
 
@@ -39,14 +35,6 @@ class CardActions extends React.Component<Props, void> {
   };
 
   render() {
-    const styles = StyleSheet.create({
-      container: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: this.props.right ? 'flex-end' : 'flex-start',
-        padding: 4,
-      },
-    });
     return (
       <View {...this.props} style={[styles.container, this.props.style]}>
         {React.Children.map(
@@ -64,5 +52,14 @@ class CardActions extends React.Component<Props, void> {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    padding: 4,
+  },
+});
 
 export default CardActions;
