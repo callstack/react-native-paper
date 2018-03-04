@@ -10,13 +10,15 @@ const isClassComponent = (Component: Function) => !!Component.prototype.render;
 
 export default function withTheme<Props: {}>(
   Comp: React.ComponentType<Props>
-): React.ComponentType<$Diff<Props, { theme: Theme }>> {
+): React.ComponentType<
+  $Diff<Props, { theme: Theme }> & { theme?: $Shape<Theme> }
+> {
   class ThemedComponent extends React.Component<*> {
     /* $FlowFixMe */
     static displayName = `withTheme(${Comp.displayName || Comp.name})`;
 
-    _previous: ?{ a: Theme, b: ?Theme, result: Theme };
-    _merge = (a: Theme, b: ?Theme) => {
+    _previous: ?{ a: Theme, b: ?$Shape<Theme>, result: Theme };
+    _merge = (a: Theme, b: ?$Shape<Theme>) => {
       const previous = this._previous;
 
       if (previous && previous.a === a && previous.b === b) {
