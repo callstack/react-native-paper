@@ -10,6 +10,7 @@ export { default as Provider } from './core/Provider';
 export { default as DefaultTheme } from './styles/DefaultTheme';
 export { default as DarkTheme } from './styles/DarkTheme';
 
+export { default as BottomNavigation } from './components/BottomNavigation';
 export { default as Button } from './components/Button';
 export { default as Card } from './components/Card/Card';
 export { default as CardActions } from './components/Card/CardActions';
