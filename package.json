@@ -1,6 +1,6 @@
 {
   "name": "react-native-paper",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Material design for React Native",
   "main": "src/index.js",
   "files": [
