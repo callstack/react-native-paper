@@ -41,7 +41,7 @@ type Props = {
   /**
    * The number of lines to show in the input (Android only).
    */
-  numberOfLines: number,
+  numberOfLines?: number,
   /**
    * Callback that is called when the text input is focused.
    */
