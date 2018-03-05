@@ -37,7 +37,7 @@ type Props = {
   /**
    * Whether the input can have multiple lines.
    */
-  multiline: boolean,
+  multiline?: boolean,
   /**
    * The number of lines to show in the input (Android only).
    */
@@ -109,6 +109,7 @@ type State = {
 class TextInput extends React.Component<Props, State> {
   static defaultProps = {
     disabled: false,
+    multiline: false,
   };
 
   constructor(props) {
