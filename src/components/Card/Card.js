@@ -40,8 +40,24 @@ type State = {
 /**
  * A card is a sheet of material that serves as an entry point to more detailed information.
  *
+ * <div class="screenshots">
+ *   <img class="medium" src="screenshots/card-1.png" />
+ *   <img class="medium" src="screenshots/card-2.png" />
+ * </div>
+ *
  * ## Usage
  * ```js
+ * import * as React from 'react';
+ * import {
+ *   Button,
+ *   Card,
+ *   CardActions,
+ *   CardContent,
+ *   CardCover,
+ *   Title,
+ *   Paragraph
+ * } from 'react-native-paper';
+ *
  * const MyComponent = () => (
  *   <Card>
  *     <CardContent>

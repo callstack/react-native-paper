@@ -31,6 +31,9 @@ type Props = {
   style?: any,
 };
 
+/**
+ * The ToolbarAction component is used for displaying an action item in the toolbar.
+ */
 export default class ToolbarAction extends React.Component<Props> {
   render() {
     const { dark, icon, onPress, size, style, ...rest } = this.props;

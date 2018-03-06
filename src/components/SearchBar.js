@@ -42,9 +42,16 @@ type Props = {
 /**
  * SearchBar is a simple input box where users can type search queries.
  *
+ * <div class="screenshots">
+ *   <img class="medium" src="screenshots/searchbar.png" />
+ * </div>
+ *
  * ## Usage
  * ```js
- * export default class MyComponent extends Component {
+ * import React from 'react';
+ * import { SearchBar } from 'react-native-paper';
+ *
+ * export default class MyComponent extends React.Component {
  *   state = {
  *     firstQuery: '',
  *   };

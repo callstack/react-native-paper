@@ -20,10 +20,14 @@ type Props = {
 };
 
 /**
- * A divider is a thin, lightweight rule that groups content in lists and page layouts.
+ * A divider is a thin, lightweight separator that groups content in lists and page layouts.
  *
  * ## Usage
  * ```js
+ * import * as React from 'react';
+ * import { Text, View } from 'react-native';
+ * import { Divider } from 'react-native-paper';
+ *
  * const MyComponent = () => (
  *   <View>
  *     <Text>Apple</Text>
@@ -41,7 +45,7 @@ const Divider = (props: Props) => {
     <View
       {...props}
       style={[
-        isDarkTheme ? styles.dividerDarkTheme : styles.dividerDeafultTheme,
+        isDarkTheme ? styles.dark : styles.light,
         inset && styles.inset,
         style,
       ]}
@@ -50,14 +54,14 @@ const Divider = (props: Props) => {
 };
 
 const styles = StyleSheet.create({
-  dividerDeafultTheme: {
+  light: {
     backgroundColor: color(black)
       .alpha(0.12)
       .rgb()
       .string(),
     height: StyleSheet.hairlineWidth,
   },
-  dividerDarkTheme: {
+  dark: {
     backgroundColor: color(white)
       .alpha(0.12)
       .rgb()

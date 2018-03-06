@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { View, Platform, StatusBar, StyleSheet } from 'react-native';
+import { View, Platform, StyleSheet } from 'react-native';
 import {
   Colors,
   Switch,
@@ -35,10 +35,7 @@ class ToolbarExample extends React.Component<Props> {
 
     return {
       header: (
-        <Toolbar
-          dark
-          statusBarHeight={Platform.OS === 'ios' ? 20 : StatusBar.currentHeight}
-        >
+        <Toolbar>
           {params.showLeftIcon && (
             <ToolbarBackAction onPress={() => navigation.goBack()} />
           )}

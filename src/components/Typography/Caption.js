@@ -11,8 +11,15 @@ type Props = {
 /**
  * Typography component for showing a caption.
  *
+ * <div class="screenshots">
+ *   <img src="screenshots/caption.png" />
+ * </div>
+ *
  * ## Usage
  * ```js
+ * import * as React from 'react';
+ * import { Caption } from 'react-native-paper';
+ *
  * const MyComponent = () => (
  *   <Caption>Caption</Caption>
  * );

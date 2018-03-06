@@ -3,8 +3,8 @@ import * as React from 'react';
 
 import { grey400, grey800, grey50, white, black } from '../styles/colors';
 import { Switch as NativeSwitch, Platform } from 'react-native';
-import withTheme from '../core/withTheme';
 import setColor from 'color';
+import withTheme from '../core/withTheme';
 import type { Theme } from '../types';
 
 type Props = {
@@ -32,30 +32,33 @@ type Props = {
 };
 
 /**
- * Switch is a visual toggle between two mutually exclusive states—on and off.
+ * Switch is a visual toggle between two mutually exclusive states — on and off.
  *
  * <div class="screenshots">
- *   <div>
- *     <img src="screenshots/switch.android.enabled.png" />
- *     <span>Android (enabled)</span>
- *   </div>
- *   <div>
- *     <img src="screenshots/switch.android.disabled.png" />
- *     <span>Android (disabled)</span>
- *   </div>
- *   <div>
- *     <img src="screenshots/switch.ios.enabled.png" />
- *     <span>iOS (enabled)</span>
- *   </div>
- *   <div>
- *     <img src="screenshots/switch.ios.disabled.png" />
- *     <span>iOS (disabled)</span>
- *   </div>
+ *   <figure>
+ *     <img src="screenshots/switch-enabled.android.png" />
+ *     <figcaption>Android (enabled)</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/switch-disabled.android.png" />
+ *     <figcaption>Android (disabled)</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/switch-enabled.ios.png" />
+ *     <figcaption>iOS (enabled)</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/switch-disabled.ios.png" />
+ *     <figcaption>iOS (disabled)</figcaption>
+ *   </figure>
  * </div>
  *
  * ## Usage
  * ```js
- * export default class MyComponent extends Component {
+ * import * as React from 'react';
+ * import { Switch } from 'react-native-paper';
+ *
+ * export default class MyComponent extends React.Component {
  *   state = {
  *     isSwitchOn: false,
  *   };

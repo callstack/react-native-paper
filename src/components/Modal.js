@@ -19,7 +19,7 @@ type Props = {
   /**
    * Callback that is called when the user dismisses the modal.
    */
-  onRequestClose: Function,
+  onDismiss: Function,
   /**
    * Determines Whether the modal is visible.
    */
@@ -40,6 +40,10 @@ type State = {
  *
  * ## Usage
  * ```js
+ * import * as React from 'react';
+ * import { Text } from 'react-native';
+ * import { Modal } from 'react-native-paper';
+ *
  * export default class MyComponent extends React.Component {
  *   state = {
  *     visible: false,
@@ -119,8 +123,8 @@ export default class Modal extends React.Component<Props, State> {
       duration: 280,
       easing: Easing.ease,
     }).start(() => {
-      if (this.props.visible && this.props.onRequestClose) {
-        this.props.onRequestClose();
+      if (this.props.visible && this.props.onDismiss) {
+        this.props.onDismiss();
       }
       if (this.props.visible) {
         this._showModal();

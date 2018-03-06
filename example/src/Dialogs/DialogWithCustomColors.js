@@ -19,7 +19,7 @@ const DialogWithCustomColors = ({
   close: Function,
 }) => (
   <Dialog
-    onRequestClose={close}
+    onDismiss={close}
     style={{ backgroundColor: Colors.purple900 }}
     visible={visible}
   >
@@ -30,7 +30,7 @@ const DialogWithCustomColors = ({
       </Paragraph>
     </DialogContent>
     <DialogActions>
-      <Button color={Colors.teal500} onPress={close}>
+      <Button color={Colors.white} onPress={close}>
         OK
       </Button>
     </DialogActions>

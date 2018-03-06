@@ -4,10 +4,10 @@
   "description": "Documentation for React Native Paper",
   "private": true,
   "scripts": {
-    "dev": "babel-node index",
+    "start": "babel-node index",
     "build": "babel-node index build",
     "clean": "del dist/",
-    "predev": "yarn run clean"
+    "prestart": "yarn run clean"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",

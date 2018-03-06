@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import { StackNavigator } from 'react-navigation';
-import { Platform, StatusBar } from 'react-native';
 import {
   Toolbar,
   ToolbarContent,
@@ -19,10 +18,7 @@ const routes = Object.keys(examples)
 
     Screen.navigationOptions = props => ({
       header: (
-        <Toolbar
-          dark
-          statusBarHeight={Platform.OS === 'ios' ? 20 : StatusBar.currentHeight}
-        >
+        <Toolbar>
           <ToolbarBackAction onPress={() => props.navigation.goBack()} />
           <ToolbarContent title={(Comp: any).title} />
         </Toolbar>
@@ -46,10 +42,7 @@ export default StackNavigator(
   {
     navigationOptions: ({ navigation }) => ({
       header: (
-        <Toolbar
-          dark
-          statusBarHeight={Platform.OS === 'ios' ? 20 : StatusBar.currentHeight}
-        >
+        <Toolbar>
           <ToolbarAction
             icon="menu"
             onPress={() => navigation.navigate('DrawerOpen')}

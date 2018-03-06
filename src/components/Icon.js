@@ -8,7 +8,7 @@ export type IconSource = string | { uri: string } | number | React.Node;
 
 export type Props = {
   name: IconSource,
-  size: number,
+  size?: number,
   color?: string,
   style?: any,
 };
@@ -19,7 +19,8 @@ const Icon = ({ name, ...props }: Props) => {
   } else if (
     (typeof name === 'object' &&
       name !== null &&
-      (name.hasOwnProperty('uri') && typeof name.uri === 'string')) ||
+      (Object.prototype.hasOwnProperty.call(name, 'uri') &&
+        typeof name.uri === 'string')) ||
     typeof name === 'number'
   ) {
     return (
@@ -30,28 +31,28 @@ const Icon = ({ name, ...props }: Props) => {
           {
             width: props.size,
             height: props.size,
+            tintColor: props.color,
           },
           props.style,
         ]}
       />
     );
-  } else {
-    return (
-      <View
-        {...props}
-        style={[
-          {
-            width: props.size,
-            height: props.size,
-          },
-          styles.container,
-          props.style,
-        ]}
-      >
-        {(name: any)}
-      </View>
-    );
   }
+  return (
+    <View
+      {...props}
+      style={[
+        {
+          width: props.size,
+          height: props.size,
+        },
+        styles.container,
+        props.style,
+      ]}
+    >
+      {(name: any)}
+    </View>
+  );
 };
 
 export default Icon;

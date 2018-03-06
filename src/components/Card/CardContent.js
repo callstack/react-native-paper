@@ -24,6 +24,9 @@ type Props = {
  *
  * ## Usage
  * ```js
+ * import * as React from 'react';
+ * import { Card, CardContent, Title, Paragraph } from 'react-native-paper';
+ *
  * const MyComponent = () => (
  *   <Card>
  *     <CardContent>
@@ -47,26 +50,22 @@ const CardContent = (props: Props) => {
 
   if ((prev === cover && next === cover) || total === 1) {
     contentStyle = styles.only;
-  } else {
-    if (index === 0) {
-      if (next === cover) {
-        contentStyle = styles.only;
-      } else {
-        contentStyle = styles.first;
-      }
-    } else if (typeof total === 'number' && index === total - 1) {
-      if (prev === cover) {
-        contentStyle = styles.only;
-      } else {
-        contentStyle = styles.last;
-      }
+  } else if (index === 0) {
+    if (next === cover) {
+      contentStyle = styles.only;
     } else {
-      if (prev === cover) {
-        contentStyle = styles.first;
-      } else if (next === cover) {
-        contentStyle = styles.last;
-      }
+      contentStyle = styles.first;
     }
+  } else if (typeof total === 'number' && index === total - 1) {
+    if (prev === cover) {
+      contentStyle = styles.only;
+    } else {
+      contentStyle = styles.last;
+    }
+  } else if (prev === cover) {
+    contentStyle = styles.first;
+  } else if (next === cover) {
+    contentStyle = styles.last;
   }
 
   return <View {...props} style={[styles.container, contentStyle, style]} />;

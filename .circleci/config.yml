@@ -48,6 +48,16 @@ jobs:
         - run: |
             yarn run lint
             yarn run flow
+
+  unit-tests:
+      <<: *defaults
+      steps:
+        - attach_workspace:
+            at: ~/react-native-paper
+        - run: yarn test -- --coverage
+        - store_artifacts:
+            path: coverage
+            destination: coverage
   build-docs:
       <<: *defaults
       steps:
@@ -77,6 +87,9 @@ workflows:
     jobs:
       - install-dependencies
       - lint-and-flow:
+          requires:
+            - install-dependencies
+      - unit-tests:
           requires:
             - install-dependencies
       - build-docs:

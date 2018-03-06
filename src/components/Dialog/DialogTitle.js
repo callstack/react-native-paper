@@ -23,6 +23,9 @@ type Props = {
  *
  * ## Usage
  * ```js
+ * import * as React from 'react';
+ * import { Dialog, DialogContent, DialogTitle, Paragraph } from 'react-native-paper';
+ *
  * export default class MyComponent extends React.Component {
  *   state = {
  *     visible: false,
@@ -34,7 +37,7 @@ type Props = {
  *     return (
  *       <Dialog
  *         visible={this.state.visible}
- *         onRequestClose={this._hideDialog}>
+ *         onDismiss={this._hideDialog}>
  *         <DialogTitle>This is a title</DialogTitle>
  *         <DialogContent>
  *           <Paragraph>This is simple dialog</Paragraph>

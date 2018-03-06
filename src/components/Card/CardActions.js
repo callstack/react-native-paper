@@ -16,6 +16,9 @@ type Props = {
  *
  * ## Usage
  * ```js
+ * import * as React from 'react';
+ * import { Button, Card, CardActions } from 'react-native-paper';
+ *
  * const MyComponent = () => (
  *   <Card>
  *     <CardActions>
@@ -26,29 +29,27 @@ type Props = {
  * );
  * ```
  */
-const CardActions = (props: Props) => {
-  return (
-    <View {...props} style={[styles.container, props.style]}>
-      {React.Children.map(
-        props.children,
-        child =>
-          typeof child === 'object' && child !== null
-            ? /* $FlowFixMe */
-              React.cloneElement(child, {
-                /* $FlowFixMe */
-                compact: child.props.compact !== false,
-              })
-            : child
-      )}
-    </View>
-  );
-};
+const CardActions = (props: Props) => (
+  <View {...props} style={[styles.container, props.style]}>
+    {React.Children.map(
+      props.children,
+      child =>
+        typeof child === 'object' && child !== null
+          ? /* $FlowFixMe */
+            React.cloneElement(child, {
+              /* $FlowFixMe */
+              compact: child.props.compact !== false,
+            })
+          : child
+    )}
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
     padding: 4,
   },
 });

@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { ListView } from 'react-native';
 import { Divider, withTheme } from 'react-native-paper';
+import BottomNavigationExample from './BottomNavigationExample';
 import ButtonExample from './ButtonExample';
 import CardExample from './CardExample';
 import CheckboxExample from './CheckboxExample';
@@ -10,7 +11,6 @@ import DialogExample from './DialogExample';
 import DividerExample from './DividerExample';
 import ExampleListRow from './ExampleListRow';
 import FABExample from './FABExample';
-import GridViewExample from './GridViewExample';
 import PaperExample from './PaperExample';
 import ProgressBarExample from './ProgressBarExample';
 import RadioButtonExample from './RadioButtonExample';
@@ -29,13 +29,13 @@ type Props = {
 };
 
 export const examples = {
+  bottomNavigation: BottomNavigationExample,
   button: ButtonExample,
   card: CardExample,
   checkbox: CheckboxExample,
   dialog: DialogExample,
   divider: DividerExample,
   fab: FABExample,
-  grid: GridViewExample,
   paper: PaperExample,
   progressbar: ProgressBarExample,
   radio: RadioButtonExample,
