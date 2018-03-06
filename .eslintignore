@@ -1,4 +1,5 @@
 node_modules/
 flow-typed/
+coverage/
 docs/dist/
 scripts/

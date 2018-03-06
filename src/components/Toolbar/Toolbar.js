@@ -1,11 +1,10 @@
 /* @flow */
 
 import * as React from 'react';
-import { View, Platform, StyleSheet, DeviceInfo } from 'react-native';
+import { View, Platform, StyleSheet, SafeAreaView } from 'react-native';
 import color from 'color';
 
 import withTheme from '../../core/withTheme';
-import Paper from '../Paper';
 import ToolbarContent from './ToolbarContent';
 
 import type { Theme } from '../../types';
@@ -18,7 +17,9 @@ type Props = {
   dark?: boolean,
   /**
    * Extra padding to add at the top of toolbar to account for translucent status bar.
-   * This is automatically handled for Expo apps with translucent status bar.
+   * This is automatically handled on iOS including iPhone X.
+   * If you are using Android and use Expo, we assume translucent status bar and set a height for status bar automatically.
+   * Pass `0` or a custom value to disable the default behaviour.
    */
   statusBarHeight?: number,
   /**
@@ -77,18 +78,17 @@ class Toolbar extends React.Component<Props> {
   static defaultProps = {
     // TODO: handle orientation changes
     statusBarHeight:
-      global.__expo && global.__expo.Constants
+      Platform.OS === 'android' && global.__expo && global.__expo.Constants
         ? global.__expo.Constants.statusBarHeight
-        : Platform.OS === 'ios'
-          ? DeviceInfo.isIPhoneX_deprecated ? 44 : 20
-          : 0,
+        : undefined,
   };
 
   render() {
     const {
+      // Don't use default props since we check it to know whether we should use SafeAreaView
+      statusBarHeight = 0,
       children,
       dark,
-      statusBarHeight,
       style,
       theme,
       ...rest
@@ -112,12 +112,6 @@ class Toolbar extends React.Component<Props> {
           ? false
           : !color(backgroundColor).light();
     }
-
-    const toolbarStyle = {
-      backgroundColor,
-      // TODO: make height orientation aware
-      height: height + statusBarHeight,
-    };
 
     const childrenArray = React.Children.toArray(children);
 
@@ -152,46 +146,54 @@ class Toolbar extends React.Component<Props> {
       );
     }
 
+    // Let the user override the behaviour
+    const Wrapper =
+      typeof this.props.statusBarHeight === 'number' ? View : SafeAreaView;
+
     return (
-      <Paper
-        style={[
-          toolbarStyle,
-          { paddingTop: statusBarHeight },
-          styles.toolbar,
-          restStyle,
-        ]}
+      <Wrapper
+        style={[{ backgroundColor }, styles.toolbar, restStyle]}
         {...rest}
       >
-        {childrenArray.filter(Boolean).map((child: any, i) => {
-          const props: { dark: ?boolean, style?: any } = {
-            dark:
-              typeof child.props.dark === 'undefined'
-                ? isDark
-                : child.props.dark,
-          };
+        <View
+          style={[
+            { height: height + statusBarHeight, paddingTop: statusBarHeight },
+            styles.wrapper,
+          ]}
+        >
+          {childrenArray.filter(Boolean).map((child: any, i) => {
+            const props: { dark: ?boolean, style?: any } = {
+              dark:
+                typeof child.props.dark === 'undefined'
+                  ? isDark
+                  : child.props.dark,
+            };
 
-          if (child.type === ToolbarContent) {
-            // Extra margin between left icon and ToolbarContent
-            props.style = [
-              { marginHorizontal: i === 0 ? 0 : 8 },
-              centerIos && { alignItems: 'center' },
-              child.props.style,
-            ];
-          }
+            if (child.type === ToolbarContent) {
+              // Extra margin between left icon and ToolbarContent
+              props.style = [
+                { marginHorizontal: i === 0 ? 0 : 8 },
+                centerIos && { alignItems: 'center' },
+                child.props.style,
+              ];
+            }
 
-          return React.cloneElement(child, props);
-        })}
-      </Paper>
+            return React.cloneElement(child, props);
+          })}
+        </View>
+      </Wrapper>
     );
   }
 }
 
 const styles = StyleSheet.create({
   toolbar: {
+    elevation: 4,
+  },
+  wrapper: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 4,
-    elevation: Platform.OS === 'ios' ? 0 : 4,
   },
   emptyIcon: {
     height: 36,
