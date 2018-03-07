@@ -5,13 +5,18 @@ import { Animated, View, Platform, StyleSheet } from 'react-native';
 import color from 'color';
 import TouchableRipple from './TouchableRipple';
 import withTheme from '../core/withTheme';
+import { RadioGroupContext } from './RadioGroup';
 import type { Theme } from '../types';
 
 type Props = {
   /**
+   * Value of the radio button
+   */
+  value: string,
+  /**
    * Whether radio is checked.
    */
-  checked: boolean,
+  checked?: boolean,
   /**
    * Whether radio is disabled.
    */
@@ -117,54 +122,75 @@ class RadioButton extends React.Component<Props, State> {
   }
 
   render() {
-    const { disabled, onPress, checked, theme, ...rest } = this.props;
-    const checkedColor = this.props.color || theme.colors.accent;
-    const uncheckedColor = theme.dark
-      ? 'rgba(255, 255, 255, .7)'
-      : 'rgba(0, 0, 0, .54)';
-
-    let rippleColor, radioColor;
-
-    if (disabled) {
-      rippleColor = 'rgba(0, 0, 0, .16)';
-      radioColor = theme.colors.disabled;
-    } else {
-      rippleColor = color(checkedColor)
-        .fade(0.32)
-        .rgb()
-        .string();
-      radioColor = checked ? checkedColor : uncheckedColor;
-    }
-
     return (
-      <TouchableRipple
-        {...rest}
-        borderless
-        rippleColor={rippleColor}
-        onPress={disabled ? undefined : onPress}
-        style={styles.container}
-      >
-        <Animated.View
-          style={[
-            styles.radio,
-            { borderColor: radioColor, borderWidth: this.state.borderAnim },
-          ]}
-        >
-          {this.props.checked ? (
-            <View style={[StyleSheet.absoluteFill, styles.radioContainer]}>
+      <RadioGroupContext.Consumer>
+        {context => {
+          const { disabled, onPress, theme, ...rest } = this.props;
+          const checkedColor = this.props.color || theme.colors.accent;
+          const uncheckedColor = theme.dark
+            ? 'rgba(255, 255, 255, .7)'
+            : 'rgba(0, 0, 0, .54)';
+
+          let rippleColor, radioColor;
+
+          const { passed, value, onValueChange } = context;
+
+          const checked = passed
+            ? value === this.props.value
+            : this.props.checked;
+
+          if (disabled) {
+            rippleColor = 'rgba(0, 0, 0, .16)';
+            radioColor = theme.colors.disabled;
+          } else {
+            rippleColor = color(checkedColor)
+              .fade(0.32)
+              .rgb()
+              .string();
+            radioColor = checked ? checkedColor : uncheckedColor;
+          }
+
+          return (
+            <TouchableRipple
+              {...rest}
+              borderless
+              rippleColor={rippleColor}
+              onPress={
+                disabled
+                  ? undefined
+                  : passed ? () => onValueChange(this.props.value) : onPress
+              }
+              style={styles.container}
+            >
               <Animated.View
                 style={[
-                  styles.dot,
+                  styles.radio,
                   {
-                    backgroundColor: radioColor,
-                    transform: [{ scale: this.state.radioAnim }],
+                    borderColor: radioColor,
+                    borderWidth: this.state.borderAnim,
                   },
                 ]}
-              />
-            </View>
-          ) : null}
-        </Animated.View>
-      </TouchableRipple>
+              >
+                {checked ? (
+                  <View
+                    style={[StyleSheet.absoluteFill, styles.radioContainer]}
+                  >
+                    <Animated.View
+                      style={[
+                        styles.dot,
+                        {
+                          backgroundColor: radioColor,
+                          transform: [{ scale: this.state.radioAnim }],
+                        },
+                      ]}
+                    />
+                  </View>
+                ) : null}
+              </Animated.View>
+            </TouchableRipple>
+          );
+        }}
+      </RadioGroupContext.Consumer>
     );
   }
 }

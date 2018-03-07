@@ -62,11 +62,11 @@ class RadioButtonExample extends React.Component<Props, State> {
         </TouchableRipple>
         <View style={styles.row}>
           <Paragraph>Checked (Disabled)</Paragraph>
-          <RadioButton checked disabled />
+          <RadioButton value="checked disabled" checked disabled />
         </View>
         <View style={styles.row}>
           <Paragraph>Unchecked (Disabled)</Paragraph>
-          <RadioButton checked={false} disabled />
+          <RadioButton value="disabled" checked={false} disabled />
         </View>
       </View>
     );

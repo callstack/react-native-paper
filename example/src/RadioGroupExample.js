@@ -3,11 +3,11 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import {
-  RadioButton,
   Colors,
   withTheme,
   RadioGroup,
-  withRadioGroup,
+  RadioButton,
+  Paragraph,
 } from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
 
@@ -16,10 +16,8 @@ type Props = {
 };
 
 type State = {
-  value: 'first' | 'second',
+  value: string,
 };
-
-const Radio = withRadioGroup(RadioButton);
 
 class RadioGroupExample extends React.Component<Props, State> {
   static title = 'Radio group';
@@ -40,14 +38,16 @@ class RadioGroupExample extends React.Component<Props, State> {
         ]}
       >
         <RadioGroup
-          onValueChange={value => this.setState({ value })}
           value={this.state.value}
+          onValueChange={value => this.setState({ value })}
         >
-          <View>
-            <Radio value="first" />
+          <View style={styles.row}>
+            <Paragraph>First</Paragraph>
+            <RadioButton value="first" />
           </View>
-          <View>
-            <Radio value="second" />
+          <View style={styles.row}>
+            <Paragraph>Second</Paragraph>
+            <RadioButton value="second" />
           </View>
         </RadioGroup>
       </View>
@@ -60,6 +60,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.white,
     padding: 8,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 8,
+    paddingHorizontal: 16,
   },
 });
 

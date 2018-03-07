@@ -1,34 +1,36 @@
 /* @flow */
 
 import * as React from 'react';
-import { View } from 'react-native';
-import { Broadcast } from 'react-broadcast';
+import createReactContext, { type Context } from 'create-react-context';
 
 type Props = {
   /**
-   * Array of RadioButton elements
+   * React elements containing radio buttons
    */
-  children?: React.Node,
+  children: React.Node,
   /**
    * Function to execute on selection change
    */
-  onValueChange: Function,
+  onValueChange: (value: string) => mixed,
   /**
    * Value of currently selected Radio
    */
   value: string,
-  /**
-   * Style that will be set to View that wrapps Radio Buttons
-   */
-  style?: any,
+};
+
+type Ctx = {
+  value: string,
+  onValueChange: (item: string) => mixed,
+  passed: boolean,
 };
 
 /**
  * RadioGroup allows the selection of a single RadioButton
- * **Usage**
+ * ## Usage
  * ```js
- *
- * const Radio = withRadioGroup(RadioButton);
+ * import * as React from 'react';
+ * import { View } from 'react-native';
+ * import { RadioGroup, RadioButton } from 'react-native-paper';
  *
  * export default class MyComponent extends Component {
  *   state = {
@@ -42,10 +44,10 @@ type Props = {
  *         value={this.state.value}
  *       >
  *         <View>
- *           <Radio value="first" />
+ *           <RadioButton value="first" />
  *         </View>
  *         <View>
- *           <Radio value="second" />
+ *           <RadioButton value="second" />
  *         </View>
  *       </RadioGroup>
  *     )
@@ -54,16 +56,22 @@ type Props = {
  *```
  */
 
-export const channel = 'react-native-paper$radio-group';
+export const RadioGroupContext: Context<Ctx> = createReactContext({
+  value: '',
+  passed: false,
+  onValueChange: () => {},
+});
 
 class RadioGroup extends React.Component<Props> {
   render() {
     const { value, onValueChange, children } = this.props;
 
     return (
-      <Broadcast channel={channel} value={{ value, onValueChange }}>
-        <View>{children}</View>
-      </Broadcast>
+      <RadioGroupContext.Provider
+        value={{ value, onValueChange, passed: true }}
+      >
+        {children}
+      </RadioGroupContext.Provider>
     );
   }
 }
