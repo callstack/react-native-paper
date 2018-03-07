@@ -2,9 +2,19 @@
 <p>Open a Terminal in your project's folder and run,</p>
 <pre><code class="language-sh">yarn add react-native-paper
 </code></pre>
-<p>If you're on a vanilla React Native project, you also need to install and link <a href="https://github.com/oblador/react-native-vector-icons">react-native-vector-icons</a>. If you use CRNA or Expo, you don't need this step.</p>
+<p>If you're on a vanilla React Native project, you also need to install and link <a href="https://github.com/oblador/react-native-vector-icons">react-native-vector-icons</a>.</p>
 <pre><code class="language-sh">yarn add react-native-vector-icons
 react-native link react-native-vector-icons
+</code></pre>
+<p>If you use CRNA or Expo, you don't need this step, but you will need to install <code>babel-preset-expo</code> as a dev dependency and add it to the <code>.babelrc</code> config:</p>
+<pre><code class="language-sh">yarn add -D babel-preset-expo
+</code></pre>
+<p><strong>.babelrc</strong></p>
+<pre><code class="language-json"><span class="token punctuation brackets-braces" >{</span>
+  <span class="token property" >"presets"</span><span class="token operator" >:</span> <span class="token punctuation brackets-square" >[</span>
+    <span class="token string" >"expo"</span>
+  <span class="token punctuation" >]</span>
+<span class="token punctuation brackets-braces" >}</span>
 </code></pre>
 <h2>Usage</h2>
 <p>Wrap your root component in <code>Provider</code> from <code>react-native-paper</code>. If you have a vanilla React Native project, it's a good idea to add it in the component which is passed to <code>AppRegistry.registerComponent</code>. This will usually be in the <code>index.js</code> file. If you have a CRNA or Expo project, you can do this inside the exported component in the <code>App.js</code> file.</p>
