@@ -168,7 +168,7 @@ By default, this is <code>true</code> when you have more than 3 tabs.</p>
 <li><code>key</code>: a unique key to identify the route</li>
 <li><code>title</code>: title of the route to use as the tab label</li>
 <li><code>icon</code>: icon to use as the tab icon, can be a string, an image source or a react component</li>
-<li><code>color</code>: color to use as background color for shifting bottom navigation (optional)</li>
+<li><code>color</code>: color to use as background color for shifting bottom navigation</li>
 </ul>
 <p>Example:</p>
 <pre><code class="language-js"><span class="token punctuation brackets-braces" >{</span>
@@ -210,8 +210,18 @@ Each component will receive the current route and a <code>jumpTo</code> method a
 The <code>jumpTo</code> method can be used to navigate to other tabs programmatically:</p>
 <pre><code class="language-js"><span class="token keyword keyword-this" >this</span><span class="token punctuation" >.</span>props<span class="token punctuation" >.</span><span class="token function" >jumpTo</span><span class="token punctuation brackets-parentheses" >(</span><span class="token string" >'albums'</span><span class="token punctuation brackets-parentheses" >)</span>
 </code></pre>
-</span></div></div></div><div class="_propInfo__vv20rl"><a class="_propLabel__vv20rl" name="renderIcon" href="#renderIcon"><code>renderIcon</code></a><div class="_propItem__vv20rl"><span>Type: </span><code>(props: { route: T, focused: boolean }) =&gt; React.Node</code></div><div class="_markdown__1e8xr4b _propItem__vv20rl _markdown__vv20rl"><div><span><p>Callback which returns a React Element to be used as tab icon.</p>
-</span></div></div></div><div class="_propInfo__vv20rl"><a class="_propLabel__vv20rl" name="renderLabel" href="#renderLabel"><code>renderLabel</code></a><div class="_propItem__vv20rl"><span>Type: </span><code>(props: { route: T, focused: boolean }) =&gt; React.Node</code></div><div class="_markdown__1e8xr4b _propItem__vv20rl _markdown__vv20rl"><div><span><p>Callback which React Element to be used as tab label.</p>
+</span></div></div></div><div class="_propInfo__vv20rl"><a class="_propLabel__vv20rl" name="renderIcon" href="#renderIcon"><code>renderIcon</code></a><div class="_propItem__vv20rl"><span>Type: </span><code>(props: {
+  route: T,
+  focused: boolean,
+  tintColor: string,
+}) =&gt; React.Node</code></div><div class="_markdown__1e8xr4b _propItem__vv20rl _markdown__vv20rl"><div><span><p>Callback which returns a React Element to be used as tab icon.</p>
+</span></div></div></div><div class="_propInfo__vv20rl"><a class="_propLabel__vv20rl" name="renderLabel" href="#renderLabel"><code>renderLabel</code></a><div class="_propItem__vv20rl"><span>Type: </span><code>(props: {
+  route: T,
+  focused: boolean,
+  tintColor: string,
+}) =&gt; React.Node</code></div><div class="_markdown__1e8xr4b _propItem__vv20rl _markdown__vv20rl"><div><span><p>Callback which React Element to be used as tab label.</p>
+</span></div></div></div><div class="_propInfo__vv20rl"><a class="_propLabel__vv20rl" name="getLabelText" href="#getLabelText"><code>getLabelText</code></a><div class="_propItem__vv20rl"><span>Type: </span><code>(props: { route: T }) =&gt; string</code></div><div class="_markdown__1e8xr4b _propItem__vv20rl _markdown__vv20rl"><div><span><p>Get label text for the tab, uses <code>route.title</code> by default. Use <code>renderLabel</code> to replace label component.</p>
+</span></div></div></div><div class="_propInfo__vv20rl"><a class="_propLabel__vv20rl" name="getColor" href="#getColor"><code>getColor</code></a><div class="_propItem__vv20rl"><span>Type: </span><code>(props: { route: T }) =&gt; string</code></div><div class="_markdown__1e8xr4b _propItem__vv20rl _markdown__vv20rl"><div><span><p>Get color for the tab, uses <code>route.color</code> by default.</p>
 </span></div></div></div><div class="_propInfo__vv20rl"><a class="_propLabel__vv20rl" name="onTabPress" href="#onTabPress"><code>onTabPress</code></a><div class="_propItem__vv20rl"><span>Type: </span><code>(props: { route: T, focused: boolean }) =&gt; mixed</code></div><div class="_markdown__1e8xr4b _propItem__vv20rl _markdown__vv20rl"><div><span><p>Function to execute on tab press. It receives the route for the pressed tab, useful for things like scroll to top.</p>
 </span></div></div></div><div class="_propInfo__vv20rl"><a class="_propLabel__vv20rl" name="barStyle" href="#barStyle"><code>barStyle</code></a><div class="_propItem__vv20rl"><span>Type: </span><code>any</code></div><div class="_markdown__1e8xr4b _propItem__vv20rl _markdown__vv20rl"><div><span><p>Style for the bottom navigation bar.
 You can set a bottom padding here if you have a translucent navigation bar on Android:</p>
