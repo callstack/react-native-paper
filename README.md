@@ -31,11 +31,11 @@ Refer to the [getting started guide](https://callstack.github.io/react-native-pa
 Check the components and their usage in our [documentation](https://callstack.github.io/react-native-paper/index.html).
 
 <!-- badges -->
-[build-badge]: https://img.shields.io/circleci/project/github/callstack/linaria/master.svg?style=flat-square
-[build]: https://circleci.com/gh/callstack/linaria
-[version-badge]: https://img.shields.io/npm/v/linaria.svg?style=flat-square
-[package]: https://www.npmjs.com/package/linaria
-[license-badge]: https://img.shields.io/npm/l/linaria.svg?style=flat-square
+[build-badge]: https://img.shields.io/circleci/project/github/callstack/react-native-paper/master.svg?style=flat-square
+[build]: https://circleci.com/gh/callstack/react-native-paper
+[version-badge]: https://img.shields.io/npm/v/react-native-paper.svg?style=flat-square
+[package]: https://www.npmjs.com/package/react-native-paper
+[license-badge]: https://img.shields.io/npm/l/react-native-paper.svg?style=flat-square
 [license]: https://opensource.org/licenses/MIT
 [prs-welcome-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [prs-welcome]: http://makeapullrequest.com
