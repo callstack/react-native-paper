@@ -40,7 +40,7 @@ You can learn how from this *free* series [How to Contribute to an Open Source P
 
 5. In case of doubts, check out the current code. For example, we use the prop `icon` not `iconName`.
 
-6. You can run `yarn run bootstrap` which will install all the dependencies in example & docs folder respectively.
+6. You can run `yarn bootstrap` which will install all the dependencies in example & docs folder respectively.
 
 ## Running the example
 

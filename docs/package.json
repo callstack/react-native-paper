@@ -7,7 +7,7 @@
     "start": "babel-node index",
     "build": "babel-node index build",
     "clean": "del dist/",
-    "prestart": "yarn run clean"
+    "prestart": "yarn clean"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
