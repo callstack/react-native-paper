@@ -46,8 +46,8 @@ jobs:
         - attach_workspace:
             at: ~/react-native-paper
         - run: |
-            yarn run lint
-            yarn run flow
+            yarn lint
+            yarn flow
 
   unit-tests:
       <<: *defaults
@@ -64,7 +64,7 @@ jobs:
         - attach_workspace:
             at: ~/react-native-paper
         - run: |
-            cd docs && yarn run build && cd ..
+            cd docs && yarn build && cd ..
             bash .circleci/comment-artifacts.sh
         - store_artifacts:
             path: docs/dist
