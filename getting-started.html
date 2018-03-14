@@ -6,14 +6,9 @@
 <pre><code class="language-sh">yarn add react-native-vector-icons
 react-native link react-native-vector-icons
 </code></pre>
-<p>If you use CRNA or Expo, you don't need this step, but you will need to install <code>babel-preset-expo</code> as a dev dependency and add it to the <code>.babelrc</code> config:</p>
-<pre><code class="language-sh">yarn add -D babel-preset-expo
-</code></pre>
-<p><strong>.babelrc</strong></p>
+<p>If you use CRNA or Expo, you don't need this step, but you will need to make sure that your <code>.babelrc</code> includes <code>babel-preset-expo</code>:</p>
 <pre><code class="language-json"><span class="token punctuation brackets-braces" >{</span>
-  <span class="token property" >"presets"</span><span class="token operator" >:</span> <span class="token punctuation brackets-square" >[</span>
-    <span class="token string" >"expo"</span>
-  <span class="token punctuation" >]</span>
+  <span class="token property" >"presets"</span><span class="token operator" >:</span> <span class="token punctuation brackets-square" >[</span><span class="token string" >"expo"</span><span class="token punctuation" >]</span>
 <span class="token punctuation brackets-braces" >}</span>
 </code></pre>
 <h2>Usage</h2>
