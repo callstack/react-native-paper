@@ -24,8 +24,8 @@ const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
 type Route = {
   key: string,
-  title: string,
-  icon: IconSource,
+  title?: string,
+  icon?: IconSource,
   color?: string,
 };
 
@@ -51,7 +51,7 @@ type Props<T> = {
    * - `key`: a unique key to identify the route
    * - `title`: title of the route to use as the tab label
    * - `icon`: icon to use as the tab icon, can be a string, an image source or a react component
-   * - `color`: color to use as background color for shifting bottom navigation (optional)
+   * - `color`: color to use as background color for shifting bottom navigation
    *
    * Example:
    *
@@ -89,6 +89,9 @@ type Props<T> = {
    * }
    * ```
    *
+   * Pages are lazily rendered, which means that a page will be rendered the first time you navigate to it.
+   * After initial render, all the pages stay rendered to preserve their state.
+   *
    * You need to make sure that your individual routes implement a `shouldComponentUpdate` to improve the performance.
    * To make it easier to specify the components, you can use the `SceneMap` helper:
    *
@@ -109,21 +112,36 @@ type Props<T> = {
    */
   renderScene: (props: {
     route: T,
-    focused: boolean,
     jumpTo: (key: string) => mixed,
   }) => ?React.Node,
   /**
    * Callback which returns a React Element to be used as tab icon.
    */
-  renderIcon?: (props: { route: T, focused: boolean }) => React.Node,
+  renderIcon?: (props: {
+    route: T,
+    focused: boolean,
+    tintColor: string,
+  }) => React.Node,
   /**
    * Callback which React Element to be used as tab label.
    */
-  renderLabel?: (props: { route: T, focused: boolean }) => React.Node,
+  renderLabel?: (props: {
+    route: T,
+    focused: boolean,
+    tintColor: string,
+  }) => React.Node,
+  /**
+   * Get label text for the tab, uses `route.title` by default. Use `renderLabel` to replace label component.
+   */
+  getLabelText?: (props: { route: T }) => string,
+  /**
+   * Get color for the tab, uses `route.color` by default.
+   */
+  getColor?: (props: { route: T }) => string,
   /**
    * Function to execute on tab press. It receives the route for the pressed tab, useful for things like scroll to top.
    */
-  onTabPress?: (props: { route: T, focused: boolean }) => mixed,
+  onTabPress?: (props: { route: T }) => mixed,
   /**
    * Style for the bottom navigation bar.
    * You can set a bottom padding here if you have a translucent navigation bar on Android:
@@ -159,6 +177,10 @@ type State = {
    */
   ripple: Animated.Value,
   /**
+   * Animation for the touch feedback, used to determine it's scale and opacity.
+   */
+  touch: Animated.Value,
+  /**
    * Layout of the tab bar. The width is used to determine the size and position of the ripple.
    */
   layout: { height: number, width: number, measured: boolean },
@@ -166,6 +188,10 @@ type State = {
    * Previously active index. Used to determine the position of the ripple.
    */
   previous: number,
+  /**
+   * List of loaded tabs, tabs will be loaded when navigated to.
+   */
+  loaded: number[],
 };
 
 const MIN_RIPPLE_SCALE = 0.001; // Minimum scale is not 0 due to bug with animation
@@ -173,7 +199,7 @@ const MIN_SHIFT_AMOUNT = 10;
 const MIN_TAB_WIDTH = 96;
 const MAX_TAB_WIDTH = 168;
 const BAR_HEIGHT = 56;
-const SMALL_RIPPLE_SIZE = 72;
+const SMALL_RIPPLE_SIZE = 96;
 const ACTIVE_LABEL_SIZE = 14;
 const INACTIVE_LABEL_SIZE = 12;
 
@@ -251,16 +277,24 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
       ),
       index: new Animated.Value(index),
       ripple: new Animated.Value(MIN_RIPPLE_SCALE),
+      touch: new Animated.Value(MIN_RIPPLE_SCALE),
       layout: { height: 0, width: 0, measured: false },
       previous: 0,
+      loaded: [index],
     };
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.navigationState.index !== this.props.navigationState.index) {
-      this.setState({
-        previous: this.props.navigationState.index,
-      });
+      const previous = this.props.navigationState.index;
+      const next = nextProps.navigationState.index;
+
+      this.setState(state => ({
+        previous,
+        loaded: state.loaded.includes(next)
+          ? state.loaded
+          : [...state.loaded, next],
+      }));
     }
   }
 
@@ -349,15 +383,22 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
   _handleTabPress = (index: number) => {
     const { navigationState } = this.props;
 
+    this.state.touch.setValue(MIN_RIPPLE_SCALE);
+
+    Animated.timing(this.state.touch, {
+      toValue: 1,
+      duration: 300,
+      easing: Easing.in(Easing.sin),
+      useNativeDriver: true,
+    }).start();
+
     if (index !== navigationState.index) {
       this.props.onIndexChange(index);
     }
 
     if (this.props.onTabPress) {
-      const route = navigationState.routes[index];
       this.props.onTabPress({
-        route,
-        focused: navigationState.index === index,
+        route: navigationState.routes[index],
       });
     }
   };
@@ -376,11 +417,13 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
       renderScene,
       renderIcon,
       renderLabel,
+      getLabelText = ({ route }) => route.title,
+      getColor = ({ route }) => route.color,
       barStyle,
       style,
       theme,
     } = this.props;
-    const { layout } = this.state;
+    const { layout, loaded } = this.state;
     const { routes } = navigationState;
     const { colors } = theme;
 
@@ -400,7 +443,7 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
       ? this.state.index.interpolate({
           inputRange: routes.map((_, i) => i),
           outputRange: routes.map(
-            route => route.color || approxBackgroundColor
+            route => getColor({ route }) || approxBackgroundColor
           ),
         })
       : approxBackgroundColor;
@@ -416,7 +459,7 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
           .rgb()
           .string();
 
-    const rippleColor = color(textColor)
+    const touchColor = color(textColor)
       .alpha(0.12)
       .rgb()
       .string();
@@ -428,29 +471,19 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
       maxTabWidth
     );
 
-    // Since we have a single ripple, we have to reposition it so that it appears to expand from active tab.
-    // We need to move it from the left to the active tab and also account for how much that tab has shifted.
-    const rippleShift =
-      navigationState.index * tabWidth +
-      tabWidth / 2 +
-      this._calculateShift(
-        this.state.previous,
-        navigationState.index,
-        routes.length
-      );
-
     return (
       <View
-        style={[
-          styles.container,
-          { backgroundColor: theme.dark ? white : black },
-          style,
-        ]}
+        style={[styles.container, style]}
         onLayout={this._handleLayout}
         pointerEvents={layout.measured ? 'auto' : 'none'}
       >
         <View style={[styles.content, { backgroundColor: colors.background }]}>
           {routes.map((route, index) => {
+            if (!loaded.includes(index)) {
+              // Don't render a screen if we've never navigated to it
+              return null;
+            }
+
             const focused = this.state.tabs[index];
             const opacity = focused;
             const translateY = shifting
@@ -473,7 +506,6 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
               >
                 {renderScene({
                   route,
-                  focused: navigationState.index === index,
                   jumpTo: this._jumpTo,
                 })}
               </Animated.View>
@@ -485,25 +517,31 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
             style={[styles.items, { maxWidth: maxTabWidth * routes.length }]}
           >
             {shifting ? (
-              // Large ripple with the backround color
               <Animated.View
                 pointerEvents="none"
                 style={[
                   styles.ripple,
                   {
-                    // Set top and left values so that the ripple's center is same as the tab's center
-                    top: BAR_HEIGHT / 2 - layout.width / 2,
-                    left: rippleShift - layout.width / 2,
-                    height: layout.width,
-                    width: layout.width,
+                    // Since we have a single ripple, we have to reposition it so that it appears to expand from active tab.
+                    // We need to move it from the top to center of the tab bar and from the left to the active tab.
+                    top: BAR_HEIGHT / 2 - layout.width / 8,
+                    left:
+                      navigationState.index * tabWidth +
+                      tabWidth / 2 -
+                      layout.width / 8,
+                    height: layout.width / 4,
+                    width: layout.width / 4,
                     borderRadius: layout.width / 2,
-                    backgroundColor: routes[navigationState.index].color,
+                    backgroundColor: getColor({
+                      route: routes[navigationState.index],
+                    }),
                     transform: [
+                      { translateX: this.state.shifts[navigationState.index] },
                       {
                         // Scale to twice the size  to ensure it covers the whole tab bar
                         scale: this.state.ripple.interpolate({
                           inputRange: [0, 1],
-                          outputRange: [0, 2],
+                          outputRange: [0, 8],
                         }),
                       },
                     ],
@@ -515,36 +553,36 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
                 ]}
               />
             ) : null}
-            {shifting ? (
-              // Small subtle ripple on touch
-              <Animated.View
-                pointerEvents="none"
-                style={[
-                  styles.ripple,
-                  {
-                    // Set top and left values so that the ripple's center is same as the tab's center
-                    top: BAR_HEIGHT / 2 - SMALL_RIPPLE_SIZE / 2,
-                    left: rippleShift - SMALL_RIPPLE_SIZE / 2,
-                    height: SMALL_RIPPLE_SIZE,
-                    width: SMALL_RIPPLE_SIZE,
-                    borderRadius: SMALL_RIPPLE_SIZE / 2,
-                    backgroundColor: rippleColor,
-                    transform: [
-                      {
-                        scale: this.state.ripple.interpolate({
-                          inputRange: [0, 0.5, 1],
-                          outputRange: [0, 1, 1],
-                        }),
-                      },
-                    ],
-                    opacity: this.state.ripple.interpolate({
-                      inputRange: [0, MIN_RIPPLE_SCALE, 0.25, 0.5],
-                      outputRange: [0, 0, 1, 0],
-                    }),
-                  },
-                ]}
-              />
-            ) : null}
+            <Animated.View
+              pointerEvents="none"
+              style={[
+                styles.ripple,
+                {
+                  // Set top and left values so that the ripple's center is same as the tab's center
+                  top: BAR_HEIGHT / 2 - SMALL_RIPPLE_SIZE / 2,
+                  left:
+                    navigationState.index * tabWidth +
+                    tabWidth / 2 -
+                    SMALL_RIPPLE_SIZE / 2,
+                  height: SMALL_RIPPLE_SIZE,
+                  width: SMALL_RIPPLE_SIZE,
+                  borderRadius: SMALL_RIPPLE_SIZE / 2,
+                  backgroundColor: touchColor,
+                  transform: [
+                    {
+                      translateX: shifting
+                        ? this.state.shifts[navigationState.index]
+                        : 0,
+                    },
+                    { scale: this.state.touch },
+                  ],
+                  opacity: this.state.touch.interpolate({
+                    inputRange: [0, 0.5, 1],
+                    outputRange: [0, 1, 0],
+                  }),
+                },
+              ]}
+            />
             {routes.map((route, index) => {
               const shift = this.state.shifts[index];
               const focused = this.state.tabs[index];
@@ -607,7 +645,11 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
                         ]}
                       >
                         {renderIcon ? (
-                          renderIcon({ route, focused: true })
+                          renderIcon({
+                            route,
+                            focused: true,
+                            tintColor: activeColor,
+                          })
                         ) : (
                           <Icon
                             style={styles.icon}
@@ -625,7 +667,11 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
                           ]}
                         >
                           {renderIcon ? (
-                            renderIcon({ route, focused: false })
+                            renderIcon({
+                              route,
+                              focused: false,
+                              tintColor: inactiveColor,
+                            })
                           ) : (
                             <Icon
                               style={styles.icon}
@@ -652,7 +698,11 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
                         ]}
                       >
                         {renderLabel ? (
-                          renderLabel({ route, focused: true })
+                          renderLabel({
+                            route,
+                            focused: true,
+                            tintColor: activeColor,
+                          })
                         ) : (
                           <AnimatedText
                             style={[
@@ -662,7 +712,7 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
                               },
                             ]}
                           >
-                            {route.title}
+                            {getLabelText({ route })}
                           </AnimatedText>
                         )}
                       </Animated.View>
@@ -674,7 +724,11 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
                           ]}
                         >
                           {renderLabel ? (
-                            renderLabel({ route, focused: false })
+                            renderLabel({
+                              route,
+                              focused: false,
+                              tintColor: inactiveColor,
+                            })
                           ) : (
                             <AnimatedText
                               style={[
@@ -684,7 +738,7 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
                                 },
                               ]}
                             >
-                              {route.title}
+                              {getLabelText({ route })}
                             </AnimatedText>
                           )}
                         </Animated.View>

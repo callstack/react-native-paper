@@ -1,6 +1,6 @@
 {
   "name": "react-native-paper",
-  "version": "1.1.1",
+  "version": "1.2.3",
   "description": "Material design for React Native",
   "main": "src/index.js",
   "files": [
@@ -18,7 +18,7 @@
   "homepage": "https://callstack.github.io/react-native-paper",
   "scripts": {
     "commitmsg": "node ./scripts/validate-commit-message.js $GIT_PARAMS",
-    "precommit": "yarn run lint && yarn run flow",
+    "precommit": "yarn lint && yarn flow && yarn test",
     "flow": "flow",
     "lint": "eslint .",
     "test": "jest",

@@ -27,7 +27,7 @@ cd ..
 rm -rf dist/**/* || exit 0
 
 # Run our build script.
-yarn run build
+yarn build
 
 cd dist
 

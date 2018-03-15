@@ -9,9 +9,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
       Object {
         "flex": 1,
       },
-      Object {
-        "backgroundColor": "#000000",
-      },
       undefined,
     ]
   }
@@ -53,56 +50,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
     >
       Route: 0
     </AnimatedComponent>
-    <AnimatedComponent
-      key="key-1"
-      pointerEvents="none"
-      style={
-        Array [
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-          Object {
-            "opacity": 0,
-            "transform": Array [
-              Object {
-                "translateY": 0,
-              },
-            ],
-          },
-        ]
-      }
-    >
-      Route: 1
-    </AnimatedComponent>
-    <AnimatedComponent
-      key="key-2"
-      pointerEvents="none"
-      style={
-        Array [
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-          Object {
-            "opacity": 0,
-            "transform": Array [
-              Object {
-                "translateY": 0,
-              },
-            ],
-          },
-        ]
-      }
-    >
-      Route: 2
-    </AnimatedComponent>
   </View>
   <AnimatedComponent
     style={
@@ -132,6 +79,33 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         ]
       }
     >
+      <AnimatedComponent
+        pointerEvents="none"
+        style={
+          Array [
+            Object {
+              "position": "absolute",
+            },
+            Object {
+              "backgroundColor": "rgba(0, 0, 0, 0.12)",
+              "borderRadius": 48,
+              "height": 96,
+              "left": -54.666666666666664,
+              "opacity": 0.002,
+              "top": -20,
+              "transform": Array [
+                Object {
+                  "translateX": 0,
+                },
+                Object {
+                  "scale": 0.001,
+                },
+              ],
+              "width": 96,
+            },
+          ]
+        }
+      />
       <TouchableWithoutFeedback
         key="key-0"
         onPress={[Function]}
@@ -599,9 +573,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
       Object {
         "flex": 1,
       },
-      Object {
-        "backgroundColor": "#000000",
-      },
       undefined,
     ]
   }
@@ -643,106 +614,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
     >
       Route: 0
     </AnimatedComponent>
-    <AnimatedComponent
-      key="key-1"
-      pointerEvents="none"
-      style={
-        Array [
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-          Object {
-            "opacity": 0,
-            "transform": Array [
-              Object {
-                "translateY": 8,
-              },
-            ],
-          },
-        ]
-      }
-    >
-      Route: 1
-    </AnimatedComponent>
-    <AnimatedComponent
-      key="key-2"
-      pointerEvents="none"
-      style={
-        Array [
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-          Object {
-            "opacity": 0,
-            "transform": Array [
-              Object {
-                "translateY": 8,
-              },
-            ],
-          },
-        ]
-      }
-    >
-      Route: 2
-    </AnimatedComponent>
-    <AnimatedComponent
-      key="key-3"
-      pointerEvents="none"
-      style={
-        Array [
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-          Object {
-            "opacity": 0,
-            "transform": Array [
-              Object {
-                "translateY": 8,
-              },
-            ],
-          },
-        ]
-      }
-    >
-      Route: 3
-    </AnimatedComponent>
-    <AnimatedComponent
-      key="key-4"
-      pointerEvents="none"
-      style={
-        Array [
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-          Object {
-            "opacity": 0,
-            "transform": Array [
-              Object {
-                "translateY": 8,
-              },
-            ],
-          },
-        ]
-      }
-    >
-      Route: 4
-    </AnimatedComponent>
   </View>
   <AnimatedComponent
     style={
@@ -783,12 +654,15 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               "backgroundColor": undefined,
               "borderRadius": 0,
               "height": 0,
-              "left": 6,
+              "left": -4,
               "opacity": 0,
               "top": 28,
               "transform": Array [
                 Object {
-                  "scale": 0.002,
+                  "translateX": 10,
+                },
+                Object {
+                  "scale": 0.008,
                 },
               ],
               "width": 0,
@@ -805,17 +679,20 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             },
             Object {
               "backgroundColor": "rgba(255, 255, 255, 0.12)",
-              "borderRadius": 36,
-              "height": 72,
-              "left": -30,
-              "opacity": 0,
-              "top": -8,
+              "borderRadius": 48,
+              "height": 96,
+              "left": -52,
+              "opacity": 0.002,
+              "top": -20,
               "transform": Array [
                 Object {
-                  "scale": 0.002,
+                  "translateX": 10,
+                },
+                Object {
+                  "scale": 0.001,
                 },
               ],
-              "width": 72,
+              "width": 96,
             },
           ]
         }
@@ -1374,9 +1251,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
       Object {
         "flex": 1,
       },
-      Object {
-        "backgroundColor": "#000000",
-      },
       undefined,
     ]
   }
@@ -1418,56 +1292,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
     >
       Route: 0
     </AnimatedComponent>
-    <AnimatedComponent
-      key="key-1"
-      pointerEvents="none"
-      style={
-        Array [
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-          Object {
-            "opacity": 0,
-            "transform": Array [
-              Object {
-                "translateY": 0,
-              },
-            ],
-          },
-        ]
-      }
-    >
-      Route: 1
-    </AnimatedComponent>
-    <AnimatedComponent
-      key="key-2"
-      pointerEvents="none"
-      style={
-        Array [
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-          Object {
-            "opacity": 0,
-            "transform": Array [
-              Object {
-                "translateY": 0,
-              },
-            ],
-          },
-        ]
-      }
-    >
-      Route: 2
-    </AnimatedComponent>
   </View>
   <AnimatedComponent
     style={
@@ -1497,6 +1321,33 @@ exports[`renders non-shifting bottom navigation 1`] = `
         ]
       }
     >
+      <AnimatedComponent
+        pointerEvents="none"
+        style={
+          Array [
+            Object {
+              "position": "absolute",
+            },
+            Object {
+              "backgroundColor": "rgba(0, 0, 0, 0.12)",
+              "borderRadius": 48,
+              "height": 96,
+              "left": -54.666666666666664,
+              "opacity": 0.002,
+              "top": -20,
+              "transform": Array [
+                Object {
+                  "translateX": 0,
+                },
+                Object {
+                  "scale": 0.001,
+                },
+              ],
+              "width": 96,
+            },
+          ]
+        }
+      />
       <TouchableWithoutFeedback
         key="key-0"
         onPress={[Function]}
@@ -2072,9 +1923,6 @@ exports[`renders shifting bottom navigation 1`] = `
       Object {
         "flex": 1,
       },
-      Object {
-        "backgroundColor": "#000000",
-      },
       undefined,
     ]
   }
@@ -2116,106 +1964,6 @@ exports[`renders shifting bottom navigation 1`] = `
     >
       Route: 0
     </AnimatedComponent>
-    <AnimatedComponent
-      key="key-1"
-      pointerEvents="none"
-      style={
-        Array [
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-          Object {
-            "opacity": 0,
-            "transform": Array [
-              Object {
-                "translateY": 8,
-              },
-            ],
-          },
-        ]
-      }
-    >
-      Route: 1
-    </AnimatedComponent>
-    <AnimatedComponent
-      key="key-2"
-      pointerEvents="none"
-      style={
-        Array [
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-          Object {
-            "opacity": 0,
-            "transform": Array [
-              Object {
-                "translateY": 8,
-              },
-            ],
-          },
-        ]
-      }
-    >
-      Route: 2
-    </AnimatedComponent>
-    <AnimatedComponent
-      key="key-3"
-      pointerEvents="none"
-      style={
-        Array [
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-          Object {
-            "opacity": 0,
-            "transform": Array [
-              Object {
-                "translateY": 8,
-              },
-            ],
-          },
-        ]
-      }
-    >
-      Route: 3
-    </AnimatedComponent>
-    <AnimatedComponent
-      key="key-4"
-      pointerEvents="none"
-      style={
-        Array [
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-          Object {
-            "opacity": 0,
-            "transform": Array [
-              Object {
-                "translateY": 8,
-              },
-            ],
-          },
-        ]
-      }
-    >
-      Route: 4
-    </AnimatedComponent>
   </View>
   <AnimatedComponent
     style={
@@ -2256,12 +2004,15 @@ exports[`renders shifting bottom navigation 1`] = `
               "backgroundColor": undefined,
               "borderRadius": 0,
               "height": 0,
-              "left": 6,
+              "left": -4,
               "opacity": 0,
               "top": 28,
               "transform": Array [
                 Object {
-                  "scale": 0.002,
+                  "translateX": 10,
+                },
+                Object {
+                  "scale": 0.008,
                 },
               ],
               "width": 0,
@@ -2278,17 +2029,20 @@ exports[`renders shifting bottom navigation 1`] = `
             },
             Object {
               "backgroundColor": "rgba(255, 255, 255, 0.12)",
-              "borderRadius": 36,
-              "height": 72,
-              "left": -30,
-              "opacity": 0,
-              "top": -8,
+              "borderRadius": 48,
+              "height": 96,
+              "left": -52,
+              "opacity": 0.002,
+              "top": -20,
               "transform": Array [
                 Object {
-                  "scale": 0.002,
+                  "translateX": 10,
+                },
+                Object {
+                  "scale": 0.001,
                 },
               ],
-              "width": 72,
+              "width": 96,
             },
           ]
         }
