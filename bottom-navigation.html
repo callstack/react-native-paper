@@ -197,8 +197,8 @@ The navigation state needs to be updated when it's called, otherwise the change 
   <span class="token punctuation brackets-braces" >}</span>
 <span class="token punctuation brackets-braces" >}</span>
 </code></pre>
-<p>Screens are lazily rendered, which means that a screen will be rendered the first time you navigate to it.
-After initial render, all the screens stay rendered to preserve their state.</p>
+<p>Pages are lazily rendered, which means that a page will be rendered the first time you navigate to it.
+After initial render, all the pages stay rendered to preserve their state.</p>
 <p>You need to make sure that your individual routes implement a <code>shouldComponentUpdate</code> to improve the performance.
 To make it easier to specify the components, you can use the <code>SceneMap</code> helper:</p>
 <pre><code class="language-js">renderScene <span class="token operator" >=</span> BottomNavigation<span class="token punctuation" >.</span><span class="token function" >SceneMap</span><span class="token punctuation brackets-parentheses" >(</span><span class="token punctuation brackets-braces" >{</span>
