@@ -89,6 +89,9 @@ type Props<T> = {
    * }
    * ```
    *
+   * Screens are lazily rendered, which means that a screen will be rendered the first time you navigate to it.
+   * After initial render, all the screens stay rendered to preserve their state.
+   *
    * You need to make sure that your individual routes implement a `shouldComponentUpdate` to improve the performance.
    * To make it easier to specify the components, you can use the `SceneMap` helper:
    *
@@ -109,7 +112,6 @@ type Props<T> = {
    */
   renderScene: (props: {
     route: T,
-    focused: boolean,
     jumpTo: (key: string) => mixed,
   }) => ?React.Node,
   /**
@@ -139,7 +141,7 @@ type Props<T> = {
   /**
    * Function to execute on tab press. It receives the route for the pressed tab, useful for things like scroll to top.
    */
-  onTabPress?: (props: { route: T, focused: boolean }) => mixed,
+  onTabPress?: (props: { route: T }) => mixed,
   /**
    * Style for the bottom navigation bar.
    * You can set a bottom padding here if you have a translucent navigation bar on Android:
@@ -186,6 +188,10 @@ type State = {
    * Previously active index. Used to determine the position of the ripple.
    */
   previous: number,
+  /**
+   * List of loaded tabs, tabs will be loaded when navigated to.
+   */
+  loaded: number[],
 };
 
 const MIN_RIPPLE_SCALE = 0.001; // Minimum scale is not 0 due to bug with animation
@@ -274,14 +280,21 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
       touch: new Animated.Value(MIN_RIPPLE_SCALE),
       layout: { height: 0, width: 0, measured: false },
       previous: 0,
+      loaded: [index],
     };
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.navigationState.index !== this.props.navigationState.index) {
-      this.setState({
-        previous: this.props.navigationState.index,
-      });
+      const previous = this.props.navigationState.index;
+      const next = nextProps.navigationState.index;
+
+      this.setState(state => ({
+        previous,
+        loaded: state.loaded.includes(next)
+          ? state.loaded
+          : [...state.loaded, next],
+      }));
     }
   }
 
@@ -384,10 +397,8 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
     }
 
     if (this.props.onTabPress) {
-      const route = navigationState.routes[index];
       this.props.onTabPress({
-        route,
-        focused: navigationState.index === index,
+        route: navigationState.routes[index],
       });
     }
   };
@@ -412,7 +423,7 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
       style,
       theme,
     } = this.props;
-    const { layout } = this.state;
+    const { layout, loaded } = this.state;
     const { routes } = navigationState;
     const { colors } = theme;
 
@@ -460,9 +471,6 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
       maxTabWidth
     );
 
-    // Since we have a single ripple, we have to reposition it so that it appears to expand from active tab.
-    // We need to move it from the left to the active tab and also account for how much that tab has shifted.
-
     return (
       <View
         style={[styles.container, style]}
@@ -471,6 +479,11 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
       >
         <View style={[styles.content, { backgroundColor: colors.background }]}>
           {routes.map((route, index) => {
+            if (!loaded.includes(index)) {
+              // Don't render a screen if we've never navigated to it
+              return null;
+            }
+
             const focused = this.state.tabs[index];
             const opacity = focused;
             const translateY = shifting
@@ -493,7 +506,6 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
               >
                 {renderScene({
                   route,
-                  focused: navigationState.index === index,
                   jumpTo: this._jumpTo,
                 })}
               </Animated.View>
@@ -510,7 +522,8 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
                 style={[
                   styles.ripple,
                   {
-                    // Set top and left values so that the ripple's center is same as the tab's center
+                    // Since we have a single ripple, we have to reposition it so that it appears to expand from active tab.
+                    // We need to move it from the top to center of the tab bar and from the left to the active tab.
                     top: BAR_HEIGHT / 2 - layout.width / 8,
                     left:
                       navigationState.index * tabWidth +
