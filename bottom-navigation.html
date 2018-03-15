@@ -186,7 +186,6 @@ By default, this is <code>true</code> when you have more than 3 tabs.</p>
 The navigation state needs to be updated when it's called, otherwise the change is dropped.</p>
 </span></div></div></div><div class="_propInfo__vv20rl"><a class="_propLabel__vv20rl" name="renderScene" href="#renderScene"><code>renderScene</code> (required)</a><div class="_propItem__vv20rl"><span>Type: </span><code>(props: {
   route: T,
-  focused: boolean,
   jumpTo: (key: string) =&gt; mixed,
 }) =&gt; ?React.Node</code></div><div class="_markdown__1e8xr4b _propItem__vv20rl _markdown__vv20rl"><div><span><p>Callback which returns a react element to render as the page for the tab. Receives an object containing the route as the argument:</p>
 <pre><code class="language-js">renderScene <span class="token operator" >=</span> <span class="token punctuation brackets-parentheses" >(</span><span class="token punctuation brackets-braces" >{</span> route<span class="token punctuation" >,</span> jumpTo <span class="token punctuation brackets-braces" >}</span><span class="token punctuation brackets-parentheses" >)</span> <span class="token operator" >=</span><span class="token operator" >&gt;</span> <span class="token punctuation brackets-braces" >{</span>
@@ -198,6 +197,8 @@ The navigation state needs to be updated when it's called, otherwise the change 
   <span class="token punctuation brackets-braces" >}</span>
 <span class="token punctuation brackets-braces" >}</span>
 </code></pre>
+<p>Screens are lazily rendered, which means that a screen will be rendered the first time you navigate to it.
+After initial render, all the screens stay rendered to preserve their state.</p>
 <p>You need to make sure that your individual routes implement a <code>shouldComponentUpdate</code> to improve the performance.
 To make it easier to specify the components, you can use the <code>SceneMap</code> helper:</p>
 <pre><code class="language-js">renderScene <span class="token operator" >=</span> BottomNavigation<span class="token punctuation" >.</span><span class="token function" >SceneMap</span><span class="token punctuation brackets-parentheses" >(</span><span class="token punctuation brackets-braces" >{</span>
@@ -222,7 +223,7 @@ The <code>jumpTo</code> method can be used to navigate to other tabs programmati
 }) =&gt; React.Node</code></div><div class="_markdown__1e8xr4b _propItem__vv20rl _markdown__vv20rl"><div><span><p>Callback which React Element to be used as tab label.</p>
 </span></div></div></div><div class="_propInfo__vv20rl"><a class="_propLabel__vv20rl" name="getLabelText" href="#getLabelText"><code>getLabelText</code></a><div class="_propItem__vv20rl"><span>Type: </span><code>(props: { route: T }) =&gt; string</code></div><div class="_markdown__1e8xr4b _propItem__vv20rl _markdown__vv20rl"><div><span><p>Get label text for the tab, uses <code>route.title</code> by default. Use <code>renderLabel</code> to replace label component.</p>
 </span></div></div></div><div class="_propInfo__vv20rl"><a class="_propLabel__vv20rl" name="getColor" href="#getColor"><code>getColor</code></a><div class="_propItem__vv20rl"><span>Type: </span><code>(props: { route: T }) =&gt; string</code></div><div class="_markdown__1e8xr4b _propItem__vv20rl _markdown__vv20rl"><div><span><p>Get color for the tab, uses <code>route.color</code> by default.</p>
-</span></div></div></div><div class="_propInfo__vv20rl"><a class="_propLabel__vv20rl" name="onTabPress" href="#onTabPress"><code>onTabPress</code></a><div class="_propItem__vv20rl"><span>Type: </span><code>(props: { route: T, focused: boolean }) =&gt; mixed</code></div><div class="_markdown__1e8xr4b _propItem__vv20rl _markdown__vv20rl"><div><span><p>Function to execute on tab press. It receives the route for the pressed tab, useful for things like scroll to top.</p>
+</span></div></div></div><div class="_propInfo__vv20rl"><a class="_propLabel__vv20rl" name="onTabPress" href="#onTabPress"><code>onTabPress</code></a><div class="_propItem__vv20rl"><span>Type: </span><code>(props: { route: T }) =&gt; mixed</code></div><div class="_markdown__1e8xr4b _propItem__vv20rl _markdown__vv20rl"><div><span><p>Function to execute on tab press. It receives the route for the pressed tab, useful for things like scroll to top.</p>
 </span></div></div></div><div class="_propInfo__vv20rl"><a class="_propLabel__vv20rl" name="barStyle" href="#barStyle"><code>barStyle</code></a><div class="_propItem__vv20rl"><span>Type: </span><code>any</code></div><div class="_markdown__1e8xr4b _propItem__vv20rl _markdown__vv20rl"><div><span><p>Style for the bottom navigation bar.
 You can set a bottom padding here if you have a translucent navigation bar on Android:</p>
 <pre><code class="language-js">barStyle<span class="token operator" >=</span><span class="token punctuation brackets-braces" >{</span><span class="token punctuation brackets-braces" >{</span> paddingBottom<span class="token punctuation" >:</span> <span class="token number" >48</span> <span class="token punctuation brackets-braces" >}</span><span class="token punctuation brackets-braces" >}</span>
