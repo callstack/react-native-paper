@@ -89,8 +89,8 @@ type Props<T> = {
    * }
    * ```
    *
-   * Screens are lazily rendered, which means that a screen will be rendered the first time you navigate to it.
-   * After initial render, all the screens stay rendered to preserve their state.
+   * Pages are lazily rendered, which means that a page will be rendered the first time you navigate to it.
+   * After initial render, all the pages stay rendered to preserve their state.
    *
    * You need to make sure that your individual routes implement a `shouldComponentUpdate` to improve the performance.
    * To make it easier to specify the components, you can use the `SceneMap` helper:
