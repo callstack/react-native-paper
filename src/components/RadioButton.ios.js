@@ -52,9 +52,8 @@ class RadioButton extends React.Component<Props> {
 
           let rippleColor;
 
-          const { passed, value, onValueChange } = context;
-          const checked = passed
-            ? value === this.props.value
+          const checked = context
+            ? context.value === this.props.value
             : this.props.checked;
 
           if (disabled) {
@@ -73,7 +72,10 @@ class RadioButton extends React.Component<Props> {
               onPress={
                 disabled
                   ? undefined
-                  : passed ? () => onValueChange(this.props.value) : onPress
+                  : e => {
+                      context && context.onValueChange(this.props.value);
+                      onPress && onPress(e);
+                    }
               }
               style={styles.container}
             >

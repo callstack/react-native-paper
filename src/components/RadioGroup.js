@@ -18,10 +18,9 @@ type Props = {
   value: string,
 };
 
-type Ctx = {
+type RadioContext = {
   value: string,
   onValueChange: (item: string) => mixed,
-  passed: boolean,
 };
 
 /**
@@ -44,9 +43,11 @@ type Ctx = {
  *         value={this.state.value}
  *       >
  *         <View>
+ *           <Text>First</Text>
  *           <RadioButton value="first" />
  *         </View>
  *         <View>
+ *           <Text>Second</Text>
  *           <RadioButton value="second" />
  *         </View>
  *       </RadioGroup>
@@ -56,11 +57,9 @@ type Ctx = {
  *```
  */
 
-export const RadioGroupContext: Context<Ctx> = createReactContext({
-  value: '',
-  passed: false,
-  onValueChange: () => {},
-});
+export const RadioGroupContext: Context<?RadioContext> = createReactContext(
+  null
+);
 
 class RadioGroup extends React.Component<Props> {
   render() {
