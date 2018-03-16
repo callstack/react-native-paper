@@ -20,6 +20,7 @@ export { default as Checkbox } from './components/Checkbox';
 export { default as Dialog } from './components/Dialog/Dialog';
 export { default as DialogActions } from './components/Dialog/DialogActions';
 export { default as DialogContent } from './components/Dialog/DialogContent';
+export { default as ListDialog } from './components/Dialog/ListDialog';
 export {
   default as DialogScrollArea,
 } from './components/Dialog/DialogScrollArea';
