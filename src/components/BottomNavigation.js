@@ -48,7 +48,7 @@ type Props<T> = {
    *
    * Each route object should contain the following properties:
    *
-   * - `key`: a unique key to identify the route
+   * - `key`: a unique key to identify the route (required)
    * - `title`: title of the route to use as the tab label
    * - `icon`: icon to use as the tab icon, can be a string, an image source or a react component
    * - `color`: color to use as background color for shifting bottom navigation
@@ -206,6 +206,8 @@ const INACTIVE_LABEL_SIZE = 12;
 /**
  * Bottom navigation provides quick navigation between top-level views of an app with a bottom tab bar.
  * It is primarily designed for use on mobile.
+ *
+ * For integration with React Navigation, you can use [react-navigation-tabs](https://github.com/react-navigation/react-navigation-tabs).
  *
  * <div class="screenshots">
  *   <img class="medium" src="screenshots/bottom-navigation.gif" />
