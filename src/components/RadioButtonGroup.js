@@ -5,31 +5,36 @@ import createReactContext, { type Context } from 'create-react-context';
 
 type Props = {
   /**
-   * React elements containing radio buttons
-   */
-  children: React.Node,
-  /**
-   * Function to execute on selection change
+   * Function to execute on selection change.
    */
   onValueChange: (value: string) => mixed,
   /**
-   * Value of currently selected Radio
+   * Value of the currently selected radio button.
    */
   value: string,
+  /**
+   * React elements containing radio buttons.
+   */
+  children: React.Node,
 };
 
-type RadioContext = {
+type RadioButtonContextType = {
   value: string,
   onValueChange: (item: string) => mixed,
 };
 
+export const RadioButtonContext: Context<?RadioButtonContextType> = createReactContext(
+  null
+);
+
 /**
- * RadioGroup allows the selection of a single RadioButton
+ * Radio button group allows to control a group of radio buttons.
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
  * import { View } from 'react-native';
- * import { RadioGroup, RadioButton } from 'react-native-paper';
+ * import { RadioButtonGroup, RadioButton } from 'react-native-paper';
  *
  * export default class MyComponent extends Component {
  *   state = {
@@ -38,7 +43,7 @@ type RadioContext = {
  *
  *   render() {
  *     return(
- *       <RadioGroup
+ *       <RadioButtonGroup
  *         onValueChange={value => this.setState({ value })}
  *         value={this.state.value}
  *       >
@@ -50,29 +55,22 @@ type RadioContext = {
  *           <Text>Second</Text>
  *           <RadioButton value="second" />
  *         </View>
- *       </RadioGroup>
+ *       </RadioButtonGroup>
  *     )
  *   }
  * }
  *```
  */
-
-export const RadioGroupContext: Context<?RadioContext> = createReactContext(
-  null
-);
-
-class RadioGroup extends React.Component<Props> {
+class RadioButtonGroup extends React.Component<Props> {
   render() {
     const { value, onValueChange, children } = this.props;
 
     return (
-      <RadioGroupContext.Provider
-        value={{ value, onValueChange, passed: true }}
-      >
+      <RadioButtonContext.Provider value={{ value, onValueChange }}>
         {children}
-      </RadioGroupContext.Provider>
+      </RadioButtonContext.Provider>
     );
   }
 }
 
-export default RadioGroup;
+export default RadioButtonGroup;

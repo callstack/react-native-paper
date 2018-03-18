@@ -6,7 +6,7 @@ import color from 'color';
 import Icon from './Icon';
 import TouchableRipple from './TouchableRipple';
 import withTheme from '../core/withTheme';
-import { RadioGroupContext } from './RadioGroup';
+import { RadioButtonContext } from './RadioButtonGroup';
 import type { Theme } from '../types';
 
 type Props = {
@@ -42,7 +42,7 @@ type Props = {
 class RadioButton extends React.Component<Props> {
   render() {
     return (
-      <RadioGroupContext.Consumer>
+      <RadioButtonContext.Consumer>
         {context => {
           const { disabled, onPress, theme, ...rest } = this.props;
 
@@ -92,7 +92,7 @@ class RadioButton extends React.Component<Props> {
             </TouchableRipple>
           );
         }}
-      </RadioGroupContext.Consumer>
+      </RadioButtonContext.Consumer>
     );
   }
 }

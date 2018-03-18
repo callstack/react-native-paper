@@ -5,7 +5,7 @@ import { Animated, View, Platform, StyleSheet } from 'react-native';
 import color from 'color';
 import TouchableRipple from './TouchableRipple';
 import withTheme from '../core/withTheme';
-import { RadioGroupContext } from './RadioGroup';
+import { RadioButtonContext } from './RadioButtonGroup';
 import type { Theme } from '../types';
 
 type Props = {
@@ -43,7 +43,7 @@ type State = {
 const BORDER_WIDTH = 2;
 
 /**
- * Radio buttons allow the selection a single option from a set
+ * Radio buttons allow the selection a single option from a set.
  *
  * <div class="screenshots">
  *   <figure>
@@ -72,21 +72,22 @@ const BORDER_WIDTH = 2;
  *
  * export default class MyComponent extends React.Component {
  *   state = {
- *     checked: 'firstOption',
+ *     checked: 'first',
  *   };
  *
  *   render() {
  *     const { checked } = this.state;
+ *
  *     return (
  *       <View>
  *         <RadioButton
- *           value="firstOption"
- *           checked={checked === 'firstOption'}
+ *           value="first"
+ *           checked={checked === 'first'}
  *           onPress={() => { this.setState({ checked: 'firstOption' }); }}
  *         />
  *         <RadioButton
- *           value="secondOption"
- *           checked={checked === 'secondOption'}
+ *           value="second"
+ *           checked={checked === 'second'}
  *           onPress={() => { this.setState({ checked: 'secondOption' }); }}
  *         />
  *       </View>
@@ -123,7 +124,7 @@ class RadioButton extends React.Component<Props, State> {
 
   render() {
     return (
-      <RadioGroupContext.Consumer>
+      <RadioButtonContext.Consumer>
         {context => {
           const { disabled, onPress, theme, ...rest } = this.props;
           const checkedColor = this.props.color || theme.colors.accent;
@@ -191,7 +192,7 @@ class RadioButton extends React.Component<Props, State> {
             </TouchableRipple>
           );
         }}
-      </RadioGroupContext.Consumer>
+      </RadioButtonContext.Consumer>
     );
   }
 }

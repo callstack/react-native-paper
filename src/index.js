@@ -32,7 +32,7 @@ export { default as Modal } from './components/Modal';
 export { default as Paper } from './components/Paper';
 export { default as ProgressBar } from './components/ProgressBar';
 export { default as RadioButton } from './components/RadioButton';
-export { default as RadioGroup } from './components/RadioGroup';
+export { default as RadioButtonGroup } from './components/RadioButtonGroup';
 export { default as SearchBar } from './components/SearchBar';
 export { default as Switch } from './components/Switch';
 export { default as Toolbar } from './components/Toolbar/Toolbar';
