@@ -30,7 +30,7 @@ export { default as DrawerSection } from './components/DrawerSection';
 export { default as FAB } from './components/FAB';
 export { default as Modal } from './components/Modal';
 export { default as Paper } from './components/Paper';
-export { default as ProgressBar } from './components/ProgressBar';
+export { default as ProgressBar } from './components/ProgressBar/ProgressBar';
 export { default as RadioButton } from './components/RadioButton';
 export { default as RadioButtonGroup } from './components/RadioButtonGroup';
 export { default as SearchBar } from './components/SearchBar';

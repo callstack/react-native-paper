@@ -57,6 +57,10 @@ experimental.strict_type_args=true
 
 munge_underscores=true
 
+module.file_ext=.js
+module.file_ext=.android.js
+module.file_ext=.ios.js
+
 module.name_mapper='^expo$' -> 'emptyObject'
 module.name_mapper='^react-navigation$' -> 'emptyObject'
 module.name_mapper='^react-native-gesture-handler$' -> 'emptyObject'
