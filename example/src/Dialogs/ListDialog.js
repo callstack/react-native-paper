@@ -8,7 +8,15 @@ type Props = {
   close: Function,
 };
 
-const sampleData = [
+type State = {
+  data: Array<{
+    id: string,
+    label: string,
+    checked: boolean,
+  }>,
+};
+
+const listData = [
   {
     id: 'First',
     label: 'First option',
@@ -26,31 +34,16 @@ const sampleData = [
   },
 ];
 
-type State = {
-  data: Array<{
-    id: string,
-    label: string,
-    checked: boolean,
-  }>,
-};
-
 export default class extends React.Component<Props, State> {
   state = {
-    data: sampleData,
+    data: listData,
   };
 
-  updateState = (id: string, value?: boolean) => {
-    const data = [...this.state.data].map(item => {
-      if (item.id === id) {
-        return {
-          ...item,
-          checked: value,
-        };
-      }
-      return {
-        ...item,
-      };
-    });
+  updateState = (id: string) => {
+    const data = [...this.state.data].map(item => ({
+      ...item,
+      checked: item.id === id,
+    }));
     this.setState({ data });
   };
 
@@ -62,10 +55,9 @@ export default class extends React.Component<Props, State> {
         onDismiss={this.props.close}
         data={this.state.data}
         actions={[
-          { text: 'Cancel', callback: this.props.close },
+          { text: 'Cancel', callback: this.props.close, primary: true },
           { text: 'Ok', callback: this.props.close, primary: true },
         ]}
-        multiselect
         onChange={this.updateState}
       />
     );

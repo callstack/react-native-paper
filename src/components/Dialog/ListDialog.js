@@ -14,6 +14,10 @@ import Button from '../Button';
 
 type Props = {
   /**
+   * Determines whether clicking outside the dialog dismiss it.
+   */
+  dismissable?: boolean,
+  /**
    * Dialog's title displayed on top.
    */
   title: string,
@@ -89,9 +93,19 @@ type Props = {
    * Dialog will use internally Checkbox if multiselect is true and RadioButton if false.
    */
   multiselect: boolean,
+  /**
+   * Style that will be applied to whole Dialog
+   */
+  style?: any,
 };
 
 class ListDialog extends React.Component<Props> {
+  static defaultProps = {
+    dismissable: true,
+    visible: false,
+    multiselect: false,
+  };
+
   render() {
     const {
       title,
@@ -103,9 +117,10 @@ class ListDialog extends React.Component<Props> {
       data,
       onChange,
       color,
+      style,
     } = this.props;
     return (
-      <Dialog onDismiss={onDismiss} visible={visible}>
+      <Dialog onDismiss={onDismiss} visible={visible} style={style}>
         <DialogTitle>{title}</DialogTitle>
         <DialogScrollArea
           style={{ maxHeight: maxHeight || 200, paddingHorizontal: 0 }}
