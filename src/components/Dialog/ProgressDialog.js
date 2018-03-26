@@ -5,20 +5,9 @@ import Paragraph from '../Typography/Paragraph';
 import Dialog from './Dialog';
 import DialogTitle from './DialogTitle';
 import DialogContent from './DialogContent';
+import type { DialogProps } from './Dialog';
 
-type Props = {
-  /**
-   * Determines whether clicking outside the dialog dismiss it.
-   */
-  dismissable?: boolean,
-  /**
-   * Determines whether the dialog is visible.
-   */
-  visible: boolean,
-  /**
-   * Callback that is called when the user dismisses the dialog.
-   */
-  onDismiss: Function,
+type Props = DialogProps & {
   /**
    * Size of the ActivityIndicator. It can take following values:
    * - for iOS: 'small' | 'large'
@@ -28,7 +17,7 @@ type Props = {
   /**
    * Color of the ActivityIndicator.
    */
-  color: string,
+  color?: string,
   /**
    * Title of the dialog.
    */
@@ -45,10 +34,6 @@ type Props = {
    * Color of the text.
    */
   textColor?: string,
-  /**
-   * Style that will be applied to whole Dialog e.g. backgroundColor
-   */
-  style?: any,
 };
 
 /**
@@ -57,33 +42,21 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { View, Platform } from 'react-native';
- * import { ProgressDialog, Colors } from 'react-native-paper';
+ * import { Platform } from 'react-native';
+ * import { Dialog } from 'react-native-paper';
  *
  * const isIOS = Platform.OS === 'ios';
  *
  * export default class MyComponent extends React.Component {
- *   state = {
- *     visible: false,
- *   };
- *
- *   _showDialog = () => this.setState({ visble: true });
- *   _hideDialog = () => this.setState({ visble: false });
  *
  *   render() {
- *     const { visible } = this.state;
  *     return (
- *       <View>
- *         <Button onPress={this._showDialog}>Show Dialog</Button>
- *         <ProgressDialog
- *           color={Colors.indigo500}
- *           onDismiss={this._hideDialog}
- *           visible={visible}
- *           size={isIOS ? 'large' : 48}
- *           text="Loading....."
- *           title="Progress Dialog"
- *         />
- *       </View>
+ *       <Dialog.Progress
+ *         onDismiss={() => {}}
+ *         size={isIOS ? 'large' : 48}
+ *         text="Loading....."
+ *         title="Progress Dialog"
+ *       />
  *     );
  *   }
  * }
