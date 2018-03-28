@@ -27,12 +27,17 @@ type Props = {
  *
  * ## Usage
  * ```js
+ * import * as React from 'react';
+ * import { Card, CardCover } from 'react-native-paper';
+ *
  * const MyComponent = () => (
  *   <Card>
  *     <CardCover source={{ uri: 'https://picsum.photos/700' }} />
  *   </Card>
  * );
  * ```
+ *
+ * @extends Image props https://facebook.github.io/react-native/docs/image.html#props
  */
 const CardCover = (props: Props) => {
   const { index, total, style, theme } = props;
@@ -51,12 +56,10 @@ const CardCover = (props: Props) => {
         borderTopRightRadius: roundness,
       };
     }
-  } else {
-    if (typeof total === 'number' && index === total - 1) {
-      coverStyle = {
-        borderBottomLeftRadius: roundness,
-      };
-    }
+  } else if (typeof total === 'number' && index === total - 1) {
+    coverStyle = {
+      borderBottomLeftRadius: roundness,
+    };
   }
 
   return (

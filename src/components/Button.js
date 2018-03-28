@@ -1,8 +1,8 @@
 /* @flow */
 
-import color from 'color';
 import * as React from 'react';
 import { ActivityIndicator, Animated, View, StyleSheet } from 'react-native';
+import color from 'color';
 import Icon from './Icon';
 import Paper from './Paper';
 import Text from './Typography/Text';
@@ -16,7 +16,7 @@ const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
 type Props = {
   /**
-   * Disable the button.
+   * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean,
   /**
@@ -24,11 +24,11 @@ type Props = {
    */
   compact?: boolean,
   /**
-   * Add elevation to button, as opposed to default flat appearance.
+   * Add elevation to button, as opposed to default flat appearance. Typically used on a flat surface.
    */
   raised?: boolean,
   /**
-   * Use to primary color from theme.
+   * Use to primary color from theme. Typically used to emphasize an action.
    */
   primary?: boolean,
   /**
@@ -40,10 +40,7 @@ type Props = {
    */
   loading?: boolean,
   /**
-   * Name of the icon. Can be a string (name of `MaterialIcon`),
-   * an object of shape `{ uri: 'https://path.to' }`,
-   * a local image: `require('../path/to/image.png')`,
-   * or a valid React Native component.
+   * Name of the icon. Can be a string, an image source or a react component.
    */
   icon?: IconSource,
   /**
@@ -70,7 +67,7 @@ type State = {
 };
 
 /**
- * Buttons communicate the action that will occur when the user touches them.
+ * A button is component that the user can press to trigger an action.
  *
  * <div class="screenshots">
  *   <img src="screenshots/button-raised.png" />
@@ -80,6 +77,9 @@ type State = {
  *
  * ## Usage
  * ```js
+ * import * as React from 'react';
+ * import { Button } from 'react-native-paper';
+ *
  * const MyComponent = () => (
  *   <Button raised onPress={() => console.log('Pressed')}>
  *     Press me
@@ -141,16 +141,12 @@ class Button extends React.Component<Props, State> {
           .alpha(0.12)
           .rgb()
           .string();
+      } else if (buttonColor) {
+        backgroundColor = buttonColor;
+      } else if (primary) {
+        backgroundColor = colors.primary;
       } else {
-        if (buttonColor) {
-          backgroundColor = buttonColor;
-        } else {
-          if (primary) {
-            backgroundColor = colors.primary;
-          } else {
-            backgroundColor = theme.dark ? '#535354' : white;
-          }
-        }
+        backgroundColor = theme.dark ? '#535354' : white;
       }
     } else {
       backgroundColor = 'transparent';
@@ -175,20 +171,14 @@ class Button extends React.Component<Props, State> {
             .alpha(0.26)
             .rgb()
             .string();
+    } else if (raised) {
+      textColor = isDark ? white : black;
+    } else if (buttonColor) {
+      textColor = buttonColor;
+    } else if (primary) {
+      textColor = colors.primary;
     } else {
-      if (raised) {
-        textColor = isDark ? white : black;
-      } else {
-        if (buttonColor) {
-          textColor = buttonColor;
-        } else {
-          if (primary) {
-            textColor = colors.primary;
-          } else {
-            textColor = theme.dark ? white : black;
-          }
-        }
-      }
+      textColor = theme.dark ? white : black;
     }
 
     const rippleColor = color(textColor)

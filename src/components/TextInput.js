@@ -37,11 +37,11 @@ type Props = {
   /**
    * Whether the input can have multiple lines.
    */
-  multiline: boolean,
+  multiline?: boolean,
   /**
    * The number of lines to show in the input (Android only).
    */
-  numberOfLines: number,
+  numberOfLines?: number,
   /**
    * Callback that is called when the text input is focused.
    */
@@ -69,8 +69,22 @@ type State = {
 /**
  * TextInputs allow users to input text.
  *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img src="screenshots/textinput.unfocused.png" />
+ *     <figcaption>Unfocused</span>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/textinput.focused.png" />
+ *     <figcaption>Focused</figcaption>
+ *   </figure>
+ * </div>
+ *
  * ## Usage
  * ```js
+ * import * as React from 'react';
+ * import { TextInput } from 'react-native-paper';
+ *
  * class MyComponent extends React.Component {
  *   state = {
  *     text: ''
@@ -95,6 +109,7 @@ type State = {
 class TextInput extends React.Component<Props, State> {
   static defaultProps = {
     disabled: false,
+    multiline: false,
   };
 
   constructor(props) {
@@ -140,7 +155,9 @@ class TextInput extends React.Component<Props, State> {
 
   _timer: any;
   _root: any;
-  _setRef: any = (c: Object) => (this._root = c);
+  _setRef: any = (c: Object) => {
+    this._root = c;
+  };
 
   _animateFocus = () => {
     Animated.timing(this.state.focused, {

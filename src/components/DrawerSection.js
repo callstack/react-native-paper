@@ -23,11 +23,14 @@ type Props = {
 };
 
 /**
- * Drawer container slides in from the left and contains the navigation destinations for your app.
+ * A DrawerSection groups content inside a navigation drawer.
  *
  * ## Usage
  * ```js
- * export default class MyComponent extends Component {
+ * import * as React from 'react';
+ * import { DrawerSection, DrawerItem } from 'react-native-paper';
+ *
+ * export default class MyComponent extends React.Component {
  *   state = {
  *     active: 'First Item',
  *   };
@@ -35,7 +38,7 @@ type Props = {
  *   render() {
  *     const { active } = this.state;
  *     return (
- *       <DrawerSection title="Subheader">
+ *       <DrawerSection title="Some title">
  *         <DrawerItem
  *           label="First Item"
  *           active={this.state.active === 'First Item'}

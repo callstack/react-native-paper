@@ -1,8 +1,9 @@
 /* @flow */
 
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
+import PortalManager from './PortalManager';
+import createReactContext, { type Context } from 'create-react-context';
 import type { PortalProps } from './Portal';
 
 type Props = {
@@ -10,92 +11,105 @@ type Props = {
   style?: any,
 };
 
-type State = {
-  portals: Array<{
-    key: number,
-    props: PortalProps,
-  }>,
+type Operation =
+  | { type: 'mount', key: number, props: PortalProps }
+  | { type: 'update', key: number, props: PortalProps }
+  | { type: 'unmount', key: number };
+
+export type PortalMethods = {
+  mount: (props: PortalProps) => number,
+  update: (key: number, props: PortalProps) => void,
+  unmount: (key: number) => void,
 };
 
-export const manager = 'react-native-paper$portal-manager';
+export const PortalContext: Context<PortalMethods> = createReactContext(
+  (null: any)
+);
 
 /**
  * Portal host is the component which actually renders all Portals.
  */
-export default class Portals extends React.Component<Props, State> {
-  static childContextTypes = {
-    [manager]: PropTypes.object,
-  };
-
-  state = {
-    portals: [],
-  };
-
-  getChildContext() {
-    return {
-      [manager]: {
-        mount: this._mountPortal,
-        unmount: this._unmountPortal,
-        update: this._updatePortal,
-      },
-    };
-  }
-
-  _nextId = 0;
-
-  _mountPortal = (props: PortalProps) => {
+export default class PortalHost extends React.Component<Props> {
+  _mount = (props: PortalProps) => {
     const key = this._nextId++;
-    this.setState(state => ({
-      portals: [...state.portals, { key, props }],
-    }));
+
+    if (this._manager) {
+      this._manager.mount(key, props);
+    } else {
+      this._queue.push({ type: 'mount', key, props });
+    }
+
     return key;
   };
 
-  _unmountPortal = (key: number) =>
-    this.setState(state => ({
-      portals: state.portals.filter(item => item.key !== key),
-    }));
+  _update = (key: number, props: PortalProps) => {
+    if (this._manager) {
+      this._manager.update(key, props);
+    } else {
+      const op = { type: 'update', key, props };
+      const index = this._queue.findIndex(
+        o => o.type === 'mount' || (o.type === 'update' && o.key === key)
+      );
 
-  _updatePortal = (key: number, props: PortalProps) =>
-    this.setState(state => ({
-      portals: state.portals.map(item => {
-        if (item.key === key) {
-          return { ...item, props };
-        }
-        return item;
-      }),
-    }));
+      if (index > -1) {
+        /* $FlowFixMe */
+        this._queue = this._queue[index] = op;
+      } else {
+        this._queue.push(op);
+      }
+    }
+  };
+
+  _unmount = (key: number) => {
+    if (this._manager) {
+      this._manager.unmount(key);
+    } else {
+      this._queue.push({ type: 'unmount', key });
+    }
+  };
+
+  _handleRef = (manager: ?PortalManager) => {
+    this._manager = manager;
+
+    while (this._queue.length && manager) {
+      const action = this._queue.pop();
+
+      // eslint-disable-next-line default-case
+      switch (action.type) {
+        case 'mount':
+          manager.mount(action.key, action.props);
+          break;
+        case 'update':
+          manager.update(action.key, action.props);
+          break;
+        case 'unmount':
+          manager.unmount(action.key);
+          break;
+      }
+    }
+  };
+
+  _nextId = 0;
+  _queue: Operation[] = [];
+  _manager: ?PortalManager;
 
   render() {
-    const { portals } = this.state;
     return (
-      <View {...this.props} style={[styles.container, this.props.style]}>
-        {this.props.children}
-        {portals
-          .reduce((acc, curr) => {
-            const { position = 0, children } = curr.props;
-            let group = acc.find(it => it.position === position);
-            if (group) {
-              group = {
-                position,
-                items: group.items.concat([children]),
-              };
-              return acc.map(g => {
-                if (group && g.position === position) {
-                  return group;
-                }
-                return g;
-              });
-            } else {
-              group = { position, items: [children] };
-              return [...acc, group];
-            }
-          }, [])
-          .map(({ position, items }) => (
-            <View key={position} style={StyleSheet.absoluteFill}>
-              {items}
-            </View>
-          ))}
+      <View
+        pointerEvents="box-none"
+        {...this.props}
+        style={[styles.container, this.props.style]}
+      >
+        <PortalContext.Provider
+          value={{
+            mount: this._mount,
+            update: this._update,
+            unmount: this._unmount,
+          }}
+        >
+          {this.props.children}
+        </PortalContext.Provider>
+        <PortalManager ref={this._handleRef} />
       </View>
     );
   }

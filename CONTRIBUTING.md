@@ -1,7 +1,5 @@
 # Contributing to React Native Paper
 
-React Native Paper was started by [satya164](https://github.com/satya164) and [ahmedlhanafy](https://github.com/ahmedlhanafy). Right now, is one of [Callstack](https://callstack.com)'s open source projects that is currently under active development.
-
 ## [Code of Conduct](/CODE_OF_CONDUCT.md)
 
 We want this community to be friendly and respectful to each other. Please read [the full text](/CODE_OF_CONDUCT.md) so that you can understand what actions will and will not be tolerated.
@@ -10,60 +8,69 @@ We want this community to be friendly and respectful to each other. Please read 
 
 The core team works directly on GitHub and all work is public.
 
-### Workflow and Pull Requests
+### Development workflow
 
-> **Working on your first Pull Request?** 
-You can learn how from this *free* series [How to Contribute to an Open Source Project on GitHub](https://egghead.io/series/how-to-contribute-to-an-open-source-project-on-github)
+> **Working on your first pull request?** You can learn how from this *free* series: [How to Contribute to an Open Source Project on GitHub](https://egghead.io/series/how-to-contribute-to-an-open-source-project-on-github).
 
-*Before* submitting a pull request, please make sure the following is done:
+1. Fork the repo and create your branch from `master` (a guide on [how to fork a repository](https://help.github.com/articles/fork-a-repo/)).
+2. Run `yarn bootstrap` to setup the developement environment.
+3. Do the changes you want and test them out in the example app before sending a pull request.
 
-1. Fork the repo and create your branch from `master` (a guide on [how to fork a repository](https://help.github.com/articles/fork-a-repo/))
+### Commit message convention
 
-2. We have a commit message convention, messages should start by one of the following: 
-* `fix`: : for bug fixes, e.g. fix Button color on DarkTheme
-* `feat`: for new features, e.g. add Snackbar component
-* `refactor`: for code/structure refactor, e.g. new structure folder for components
-* `BREAKING`: for changes that break current versiong usage, e.g. remove withTheme
-* `docs`: changes into documentation, e.g. add usage example for Button
-* `chore`: tooling changes, e.g. change circle ci config
+We prefix our commit messages with one of the following to signify the kind of change:
 
-3. We use `flow`, `eslint` and `prettier`. Be sure that `npm run flow` and `npm run lint -- --fix` give no errors.
+* `fix`: bug fixes, e.g. fix Button color on DarkTheme.
+* `feat`: new features, e.g. add Snackbar component.
+* `refactor`: code/structure refactor, e.g. new structure folder for components.
+* `docs`: changes into documentation, e.g. add usage example for Button.
+* `test`: adding or updating tests, eg unit, snapshot testing.
+* `chore`: tooling changes, e.g. change circle ci config.
+* `BREAKING`: for changes that break existing usage, e.g. change API of a component.
 
-4. If you work on a component:
-   * Be sure to follow the specifics (design, name convention, etc) described in the [official material docs](https://material.io/guidelines/)
-   * For any Text usage, use our components provided in the Typography folder
-   * If your app depends on the theme always wrap you component with `withTheme` to get the theme as a prop instead of the context
-   * Default colors will be provided by the theme, if you find that there's something missing from the theme that might be beneficial for other components don't hesitate to add it
-   * Make sure to write a brief description of every prop when defining `type Props`
-   * Make sure to provide an example usage for the component (check how others do it)
+Our pre-commit hooks verify that your commit message matches this format when committing.
 
-5. In case of doubts, check out the current code. For example, we use the prop `icon` not `iconName`.
+### Linting and tests
 
-## Running the example
+We use `flow` for type checking, `eslint` with `prettier` for linting and formatting the code, and `jest` for testing. Our pre-commit hooks verify that the linter and tests pass when commiting. You can also run the following commands manually:
+
+* `yarn flow`: run flow on all files.
+* `yarn lint`: run eslint and prettier.
+* `yarn test`: run tests.
+
+### Sending a pull request
+
+When you're sending a pull request:
+
+* Prefer small pull requests focused on one change.
+* Verify that `flow`, `eslint` and tests are passing.
+* Preview the documentation to make sure it looks good.
+* Follow the pull request template when opening a pull request.
+
+When you're working on a component:
+
+* Follow the guidelines described in the [official material design docs](https://material.io/guidelines/).
+* Write a brief description of every prop when defining `type Props` to aid with documentation.
+* Provide an example usage for the component (check other components to get a idea).
+
+### Running the example
 
 The example app uses [Expo](https://expo.io/). You will need to install the Expo app for [Android](https://play.google.com/store/apps/details?id=host.exp.exponent) and [iOS](https://itunes.apple.com/app/apple-store/id982107779) to start developing.
 
-After you're done, you can run `yarn && yarn start` in the `example/` folder and scan the QR code to launch it on your device.
+After you're done, you can run `yarn start` in the `example/` folder and scan the QR code to launch it on your device.
 
-## Working on documentation
+### Working on documentation
 
-The documentation is automatically generated from the [flowtype](https://flowtype.org) annotation in the components. You can add comments above the type annotations to add descriptions. To preview the generated documentation, run `yarn && yarn start` in the `docs/` folder.
+The documentation is automatically generated from the [flowtype](https://flowtype.org) annotations in the components. You can add comments above the type annotations to add descriptions. To preview the generated documentation, run `yarn start` in the `docs/` folder.
 
-When your pull request is merged to master, the documentation updates are automatically deployed to the website.
+## Reporting issues
 
-## Reporting New Issues
+You can report issues on our [bug tracker](https://github.com/callstack/react-native-paper/issues). Please follow the issue template when opening an issue.
 
-The best way to get your bug fixed is to provide a reduced test case. Please provide a public repository with a runnable example.
-
-## How to Get in Touch
+## Get in touch
 
 * Callstack Open Source Slack - [#react-native-paper](https://slack.callstack.io/).
-
-## Code Conventions
-
-We use [eslint-config-callstack](https://github.com/callstack/eslint-config-callstack-io).
 
 ## License
 
 By contributing to React Native Paper, you agree that your contributions will be licensed under its **MIT** license.
-

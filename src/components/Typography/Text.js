@@ -31,7 +31,9 @@ class Text extends React.Component<Props> {
     return (
       <NativeText
         {...this.props}
-        ref={c => (this._root = c)}
+        ref={c => {
+          this._root = c;
+        }}
         style={[
           { fontFamily: theme.fonts.regular, color: theme.colors.text },
           style,

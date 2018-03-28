@@ -19,7 +19,7 @@ const DialogWithLoadingIndicator = ({
   visible: boolean,
   close: Function,
 }) => (
-  <Dialog onRequestClose={close} visible={visible}>
+  <Dialog onDismiss={close} visible={visible}>
     <DialogTitle>Progress Dialog</DialogTitle>
     <DialogContent>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>

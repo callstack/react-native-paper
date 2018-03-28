@@ -46,15 +46,25 @@ jobs:
         - attach_workspace:
             at: ~/react-native-paper
         - run: |
-            yarn run lint
-            yarn run flow
+            yarn lint
+            yarn flow
+
+  unit-tests:
+      <<: *defaults
+      steps:
+        - attach_workspace:
+            at: ~/react-native-paper
+        - run: yarn test -- --coverage
+        - store_artifacts:
+            path: coverage
+            destination: coverage
   build-docs:
       <<: *defaults
       steps:
         - attach_workspace:
             at: ~/react-native-paper
         - run: |
-            cd docs && yarn run build && cd ..
+            cd docs && yarn build && cd ..
             bash .circleci/comment-artifacts.sh
         - store_artifacts:
             path: docs/dist
@@ -77,6 +87,9 @@ workflows:
     jobs:
       - install-dependencies
       - lint-and-flow:
+          requires:
+            - install-dependencies
+      - unit-tests:
           requires:
             - install-dependencies
       - build-docs:

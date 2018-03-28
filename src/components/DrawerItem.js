@@ -41,10 +41,13 @@ type Props = {
 };
 
 /**
- * Item from drawer's list which navigates to specific location.
+ * DrawerItem is a component used to show an action item with an icon and a label in a navigation drawer.
  *
  * ## Usage
  * ```js
+ * import * as React from 'react';
+ * import { DrawerItem } from 'react-native-paper';
+ *
  * const MyComponent = () => (
  *   <DrawerItem label="First Item" />
  * );
@@ -55,7 +58,6 @@ const DrawerItem = ({
   icon,
   label,
   active,
-  onPress,
   theme,
   ...props
 }: Props) => {
@@ -76,7 +78,7 @@ const DrawerItem = ({
   const fontFamily = theme.fonts.medium;
   const labelMargin = icon ? 32 : 0;
   return (
-    <TouchableRipple {...props} onPress={onPress}>
+    <TouchableRipple {...props}>
       <View style={[styles.wrapper, { backgroundColor }]}>
         {icon && <Icon name={icon} size={24} color={iconColor} />}
         <Text

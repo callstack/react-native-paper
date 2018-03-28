@@ -1,6 +1,6 @@
 /* @flow */
 
-import Expo from 'expo';
+import Expo, { KeepAwake } from 'expo';
 import * as React from 'react';
 import { StatusBar } from 'react-native';
 import {
@@ -8,6 +8,7 @@ import {
   DarkTheme,
   DefaultTheme,
 } from 'react-native-paper';
+import createReactContext from 'create-react-context';
 import { DrawerNavigator } from 'react-navigation';
 import RootNavigator from './src/RootNavigator';
 import DrawerItems from './DrawerItems';
@@ -17,11 +18,15 @@ type State = {
   theme: Theme,
 };
 
+const ThemeToggleContext: any = createReactContext();
+
 const App = DrawerNavigator(
   { Home: { screen: RootNavigator } },
   {
-    contentComponent: ({ screenProps }) => (
-      <DrawerItems toggleTheme={screenProps.toggleTheme} />
+    contentComponent: () => (
+      <ThemeToggleContext.Consumer>
+        {toggleTheme => <DrawerItems toggleTheme={toggleTheme} />}
+      </ThemeToggleContext.Consumer>
     ),
   }
 );
@@ -36,19 +41,17 @@ class PaperExample extends React.Component<{}, State> {
   }
 
   _toggleTheme = () =>
-    this.setState({
-      theme: this.state.theme === DarkTheme ? DefaultTheme : DarkTheme,
-    });
+    this.setState(state => ({
+      theme: state.theme === DarkTheme ? DefaultTheme : DarkTheme,
+    }));
 
   render() {
     return (
       <PaperProvider theme={this.state.theme}>
-        <App
-          screenProps={{
-            toggleTheme: this._toggleTheme,
-            theme: this.state.theme,
-          }}
-        />
+        <ThemeToggleContext.Provider value={this._toggleTheme}>
+          <App />
+        </ThemeToggleContext.Provider>
+        <KeepAwake />
       </PaperProvider>
     );
   }

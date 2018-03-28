@@ -7,7 +7,7 @@ import type { Theme } from '../types';
 
 type Props = {
   children: React.Node,
-  theme?: Theme,
+  theme?: $Shape<Theme>,
 };
 
 export default class Provider extends React.Component<Props> {
@@ -15,7 +15,7 @@ export default class Provider extends React.Component<Props> {
     return (
       <PortalHost>
         <ThemeProvider theme={this.props.theme}>
-          {React.Children.only(this.props.children)}
+          {this.props.children}
         </ThemeProvider>
       </PortalHost>
     );

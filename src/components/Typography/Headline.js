@@ -11,8 +11,15 @@ type Props = {
 /**
  * Typography component for showing a headline.
  *
+ * <div class="screenshots">
+ *   <img src="screenshots/headline.png" />
+ * </div>
+ *
  * ## Usage
  * ```js
+ * import * as React from 'react';
+ * import { Headline } from 'react-native-paper';
+ *
  * const MyComponent = () => (
  *   <Headline>Headline</Headline>
  * );

@@ -11,8 +11,15 @@ type Props = {
 /**
  * Typography component for showing a subheading.
  *
+ * <div class="screenshots">
+ *   <img src="screenshots/subheading.png" />
+ * </div>
+ *
  * ## Usage
  * ```js
+ * import * as React from 'react';
+ * import { Subheading } from 'react-native-paper';
+ *
  * const MyComponent = () => (
  *   <Subheading>Subheading</Subheading>
  * );

@@ -1,15 +1,11 @@
 /* @flow */
 
 import * as React from 'react';
-import {
-  Platform,
-  StyleSheet,
-  ProgressViewIOS,
-  ProgressBarAndroid,
-} from 'react-native';
-import withTheme from '../core/withTheme';
-import type { Theme } from '../types';
+import { StyleSheet } from 'react-native';
 import setColor from 'color';
+import ProgressBarComponent from './ProgressBarComponent';
+import withTheme from '../../core/withTheme';
+import type { Theme } from '../../types';
 
 type Props = {
   /**
@@ -27,13 +23,8 @@ type Props = {
   theme: Theme,
 };
 
-const ProgressBarComponent = Platform.select({
-  ios: ProgressViewIOS,
-  android: ProgressBarAndroid,
-});
-
 /**
- * Progress bar is an indicator used to present some activity in the app.
+ * Progress bar is an indicator used to present progress of some activity in the app.
  *
  * <div class="screenshots">
  *   <img src="screenshots/progress-bar.png" />
@@ -41,6 +32,9 @@ const ProgressBarComponent = Platform.select({
  *
  * ## Usage
  * ```js
+ * import * as React from 'react';
+ * import { ProgressBar } from 'react-native-paper';
+ *
  * const MyComponent = () => (
  *   <ProgressBar progress={0.5} color={Colors.red800} />
  * );
