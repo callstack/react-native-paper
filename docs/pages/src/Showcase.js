@@ -26,6 +26,7 @@ export default class Showcase extends React.Component<{}> {
         <div {...styles(gallery)}>
           {showcaseData.map(data => (
             <div key={data.image}>
+              <h3 {...styles(appName)}>{data.name}</h3>
               <img src={data.image} alt="" />
               <div {...styles(badgeContainer)}>
                 <a
@@ -76,6 +77,12 @@ const elevated = css`
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.24);
 `;
 
+const appName = css`
+  @media (min-width: 680px) {
+    margin: 0 10px;
+  }
+`;
+
 const gallery = css`
   display: flex;
   flex-direction: row;
@@ -92,9 +99,8 @@ const gallery = css`
     display: block;
     max-height: 640px;
     width: auto;
-    margin: 10px;
-    @media (max-width: 680px) {
-      margin: 0;
+    @media (min-width: 680px) {
+      margin: 10px;
     }
   }
 `;
