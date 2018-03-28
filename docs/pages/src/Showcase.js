@@ -60,13 +60,16 @@ export default class Showcase extends React.Component<{}> {
 }
 
 const container = css`
-  padding: 24px;
+  padding: 24px 0;
   width: 100%;
   overflow-y: auto;
 `;
 
 const content = css`
   padding: 0 48px;
+  @media (max-width: 680px) {
+    padding: 0 16px;
+  }
 `;
 
 const elevated = css`
@@ -77,25 +80,31 @@ const gallery = css`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  padding: 12px 38px;
   @media (max-width: 680px) {
     justify-content: center;
+    padding: 12px 16px;
   }
-  padding: 12px 38px;
   min-width: 0;
 
   > div > img {
     ${include(elevated)};
     display: block;
-    height: 640px;
+    max-height: 640px;
     width: auto;
     margin: 10px;
+    @media (max-width: 680px) {
+      margin: 0;
+    }
   }
 `;
 
 const badgeContainer = css`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  @media (min-width: 680px) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
   height: 50px;
   margin: 0 0 48px 0;
   > a,
@@ -105,6 +114,10 @@ const badgeContainer = css`
   }
   > a {
     margin: 10px;
+    @media (max-width: 680px) {
+      display: block;
+      margin: 10px 0;
+    }
   }
 `;
 
