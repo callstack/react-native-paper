@@ -1,6 +1,6 @@
 {
   "name": "react-native-paper",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Material design for React Native",
   "main": "src/index.js",
   "files": [
@@ -22,7 +22,7 @@
     "flow": "flow",
     "lint": "eslint .",
     "test": "jest",
-    "bootstrap": "yarn --cwd example && yarn --cwd docs"
+    "bootstrap": "yarn && yarn --cwd example && yarn --cwd docs"
   },
   "dependencies": {
     "color": "^2.0.1",

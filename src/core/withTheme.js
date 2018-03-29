@@ -31,7 +31,8 @@ const REACT_METHODS = [
   'updateComponent',
 ];
 
-const isClassComponent = (Component: Function) => !!Component.prototype.render;
+const isClassComponent = (Component: Function) =>
+  !!(Component && Component.prototype && Component.prototype.render);
 
 export default function withTheme<Props: {}>(
   Comp: React.ComponentType<Props>

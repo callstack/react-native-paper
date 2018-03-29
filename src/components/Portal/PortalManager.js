@@ -11,6 +11,12 @@ type State = {
   }>,
 };
 
+type Group = {
+  key: number,
+  elevation?: number,
+  items: React.Node[],
+};
+
 /**
  * Portal host is the component which actually renders all Portals.
  */
@@ -42,27 +48,34 @@ export default class PortalManager extends React.PureComponent<{}, State> {
 
   render() {
     return this.state.portals
-      .reduce((acc, curr) => {
-        const { position = 0, children } = curr.props;
-        let group = acc.find(it => it.position === position);
+      .reduce((acc: Group[], curr) => {
+        const { elevation, children } = curr.props;
+        let group = acc.find(it => it.elevation === elevation);
         if (group) {
           group = {
-            position,
-            items: group.items.concat([children]),
+            key: elevation,
+            elevation,
+            items: [
+              ...group.items,
+              React.cloneElement(children, { key: curr.key }),
+            ],
           };
           return acc.map(g => {
-            if (group && g.position === position) {
+            if (group && g.elevation === elevation) {
               return group;
             }
             return g;
           });
         }
-        group = { position, items: [children] };
+        group = {
+          key: typeof elevation === 'undefined' ? curr.key : elevation,
+          items: [React.cloneElement(children, { key: curr.key })],
+        };
         return [...acc, group];
       }, [])
-      .map(({ position, items }) => (
+      .map(({ key, items }) => (
         <View
-          key={position}
+          key={key}
           pointerEvents="box-none"
           style={StyleSheet.absoluteFill}
         >
