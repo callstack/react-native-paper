@@ -22,7 +22,7 @@
     "flow": "flow",
     "lint": "eslint .",
     "test": "jest",
-    "bootstrap": "yarn --cwd example && yarn --cwd docs"
+    "bootstrap": "yarn && yarn --cwd example && yarn --cwd docs"
   },
   "dependencies": {
     "color": "^2.0.1",
