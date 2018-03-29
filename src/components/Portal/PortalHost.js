@@ -30,8 +30,30 @@ export const PortalContext: Context<PortalMethods> = createReactContext(
  * Portal host is the component which actually renders all Portals.
  */
 export default class PortalHost extends React.Component<Props> {
+  componentDidMount() {
+    const manager = this._manager;
+    const queue = this._queue;
+
+    while (queue.length && manager) {
+      const action = queue.pop();
+
+      // eslint-disable-next-line default-case
+      switch (action.type) {
+        case 'mount':
+          manager.mount(action.key, action.props);
+          break;
+        case 'update':
+          manager.update(action.key, action.props);
+          break;
+        case 'unmount':
+          manager.unmount(action.key);
+          break;
+      }
+    }
+  }
+
   _mount = (props: PortalProps) => {
-    const key = this._nextId++;
+    const key = this._nextKey++;
 
     if (this._manager) {
       this._manager.mount(key, props);
@@ -68,28 +90,7 @@ export default class PortalHost extends React.Component<Props> {
     }
   };
 
-  _handleRef = (manager: ?PortalManager) => {
-    this._manager = manager;
-
-    while (this._queue.length && manager) {
-      const action = this._queue.pop();
-
-      // eslint-disable-next-line default-case
-      switch (action.type) {
-        case 'mount':
-          manager.mount(action.key, action.props);
-          break;
-        case 'update':
-          manager.update(action.key, action.props);
-          break;
-        case 'unmount':
-          manager.unmount(action.key);
-          break;
-      }
-    }
-  };
-
-  _nextId = 0;
+  _nextKey = 0;
   _queue: Operation[] = [];
   _manager: ?PortalManager;
 
@@ -109,7 +110,11 @@ export default class PortalHost extends React.Component<Props> {
         >
           {this.props.children}
         </PortalContext.Provider>
-        <PortalManager ref={this._handleRef} />
+        <PortalManager
+          ref={c => {
+            this._manager = c;
+          }}
+        />
       </View>
     );
   }
