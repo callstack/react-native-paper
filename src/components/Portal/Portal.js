@@ -7,9 +7,9 @@ import { PortalContext } from './PortalHost';
 
 export type PortalProps = {
   /**
-   * Position of the element in the z-axis
+   * Elevation of the element in the z-axis
    */
-  position?: number,
+  elevation?: number,
   /**
    * Content of the `Portal`.
    */
