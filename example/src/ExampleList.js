@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { ListView } from 'react-native';
 import { Divider, withTheme } from 'react-native-paper';
-import BottomNavigationExample from './BottomNavigationExample';
+import BottomNavigationExample from './BottomNavigation/BottomNavigationExample';
 import ButtonExample from './ButtonExample';
 import CardExample from './CardExample';
 import CheckboxExample from './CheckboxExample';
