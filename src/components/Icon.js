@@ -38,6 +38,10 @@ const Icon = ({ name, ...props }: Props) => {
       />
     );
   }
+  const style = { ...props.style };
+  if (style) {
+    delete style.color;
+  }
   return (
     <View
       {...props}
@@ -47,7 +51,7 @@ const Icon = ({ name, ...props }: Props) => {
           height: props.size,
         },
         styles.container,
-        props.style,
+        style,
       ]}
     >
       {(name: any)}
