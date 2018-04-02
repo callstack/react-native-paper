@@ -37,6 +37,7 @@ export { default as RadioButton } from './components/RadioButton';
 export { default as RadioButtonGroup } from './components/RadioButtonGroup';
 export { default as Searchbar } from './components/Searchbar';
 export { default as SearchBar } from './components/Searchbar';
+export { default as Snackbar } from './components/Snackbar';
 export { default as Switch } from './components/Switch';
 export { default as Toolbar } from './components/Toolbar/Toolbar';
 export { default as ToolbarAction } from './components/Toolbar/ToolbarAction';
