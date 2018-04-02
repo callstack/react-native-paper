@@ -39,6 +39,7 @@ class RadioGroupItemExample extends React.Component<Props, State> {
           onPress={() => this.setState({ index: 0 })}
           label="Default"
           checked={index === 0}
+          value="first"
         />
         <RadioGroupItem
           onPress={() => this.setState({ index: 1 })}
@@ -50,18 +51,21 @@ class RadioGroupItemExample extends React.Component<Props, State> {
             marginVertical: 4,
             color: Colors.blue500,
           }}
+          value="second"
         />
         <RadioGroupItem
           onPress={() => this.setState({ index: 0 })}
           label="Checked disabled"
           checked
           disabled
+          value="third"
         />
         <RadioGroupItem
           onPress={() => this.setState({ index: 1 })}
           label="Unchecked disabled"
           checked={false}
           disabled
+          value="fourth"
         />
       </View>
     );

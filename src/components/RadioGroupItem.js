@@ -10,6 +10,10 @@ import type { Theme } from '../types';
 
 type Props = {
   /**
+   * Value of the radio button
+   */
+  value: string,
+  /**
    * Function to execute onPress
    */
   onPress?: Function,
