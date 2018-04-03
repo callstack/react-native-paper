@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { ListDialog } from 'react-native-paper';
+import { Dialog } from 'react-native-paper';
 
 type Props = {
   visible: boolean,
@@ -49,14 +49,15 @@ export default class extends React.Component<Props, State> {
 
   render() {
     return (
-      <ListDialog
+      // $FlowFixMe
+      <Dialog.ListDialog
         title="ListDialog"
         visible={this.props.visible}
         onDismiss={this.props.close}
         data={this.state.data}
         actions={[
-          { text: 'Cancel', callback: this.props.close, primary: true },
-          { text: 'Ok', callback: this.props.close, primary: true },
+          { text: 'Cancel', onPress: this.props.close, primary: true },
+          { text: 'Ok', onPress: this.props.close, primary: true },
         ]}
         onChange={this.updateState}
       />

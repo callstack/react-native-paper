@@ -11,24 +11,13 @@ import Checkbox from '../Checkbox';
 import TouchableRipple from '../TouchableRipple';
 import Subheading from '../Typography/Subheading';
 import Button from '../Button';
+import type { DialogProps } from './Dialog';
 
-type Props = {
-  /**
-   * Determines whether clicking outside the dialog dismiss it.
-   */
-  dismissable?: boolean,
+type Props = DialogProps & {
   /**
    * Dialog's title displayed on top.
    */
   title: string,
-  /**
-   * Determines whether the dialog is visible.
-   */
-  visible: boolean,
-  /**
-   * Callback that is called when the user dismisses the dialog.
-   */
-  onDismiss: Function,
   /**
    * data prop is an array of objects that determines the structure of the list.
    * Every object should contain following properties:
@@ -57,31 +46,31 @@ type Props = {
   /**
    * Function that is called on selection change. It takes 2 following parameters:
    * - `id`: a string that represents id of changed item.
-   * - `value`: a boolean that represents if RadioButton is checked or not. It's passed only in multiselect mode.
+   * - `value`: a boolean that represents if RadioButton or Checkbox is checked.
    */
   onChange: (id: string, value?: boolean) => mixed,
   /**
    * Array of objects that are transformed on Buttons. Objects should have following properties:
    *
    * - `text`: a string that will be displayed inside button.
-   * - `callback`: a function that will be invoked on button press.
+   * - `onPress`: a function that will be invoked on button press.
    * - Any other prop that react-native-paper's Button takes.
    *
    * Example:
    *
    * ```js
    * [
-   *   { text: 'Cancel', callback: () => console.log('pressed') },
-   *   { text: 'Ok', callback: () => console.log('pressed'), primary: true },
+   *   { text: 'Cancel', onPress: () => console.log('pressed') },
+   *   { text: 'Ok', onPress: () => console.log('pressed'), primary: true },
    * ]
    * ```
    */
   actions: Array<{
     text: string,
-    callback: Function,
+    onPress: Function,
   }>,
   /**
-   * Max height of the content section. When content is higher it's going be scrollable.
+   * Max height of the content section. When content is higher it's going to be scrollable.
    */
   maxHeight?: number,
   /**
@@ -93,11 +82,58 @@ type Props = {
    * Dialog will use internally Checkbox if multiselect is true and RadioButton if false.
    */
   multiselect: boolean,
-  /**
-   * Style that will be applied to whole Dialog
-   */
-  style?: any,
 };
+
+/**
+ *
+ * ## Usage
+ * ```js
+ * import * as React from 'react';
+ * import { Dialog } from 'react-native-paper';
+ *
+ * const listData = [
+ *   {
+ *     id: 'First',
+ *     label: 'First option',
+ *     checked: true,
+ *   },
+ *   {
+ *     id: 'Second',
+ *     label: 'Second option',
+ *     checked: false,
+ *   },
+ * ];
+ *
+ * export default class extends React.Component {
+ *   state = {
+ *     data: listData,
+ *   };
+ *
+ *   updateState = id => {
+ *     const data = [...this.state.data].map(item => ({
+ *       ...item,
+ *       checked: item.id === id,
+ *     }));
+ *     this.setState({ data });
+ *   };
+ *
+ *   render() {
+ *     return (
+ *       <Dialog.ListDialog
+ *         title="ListDialog"
+ *         visible={this.props.visible}
+ *         onDismiss={this.props.close}
+ *         data={this.state.data}
+ *         actions={[
+ *           { text: 'Ok', onPress: this.props.close, primary: true },
+ *         ]}
+ *         onChange={this.updateState}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
+ */
 
 class ListDialog extends React.Component<Props> {
   static defaultProps = {
@@ -152,8 +188,8 @@ class ListDialog extends React.Component<Props> {
           </ScrollView>
         </DialogScrollArea>
         <DialogActions>
-          {actions.map(({ text, callback, ...rest }) => (
-            <Button {...rest} key={text} onPress={callback}>
+          {actions.map(({ text, onPress, ...rest }) => (
+            <Button {...rest} key={text} onPress={onPress}>
               {text}
             </Button>
           ))}
