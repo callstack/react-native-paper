@@ -102,23 +102,25 @@ class RadioButton extends React.Component<Props, State> {
     radioAnim: new Animated.Value(1),
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.checked !== this.props.checked) {
-      if (Platform.OS === 'android') {
-        if (nextProps.checked) {
-          this.state.radioAnim.setValue(1.2);
-          Animated.timing(this.state.radioAnim, {
-            toValue: 1,
-            duration: 150,
-          }).start();
-        } else {
-          this.state.borderAnim.setValue(10);
-          Animated.timing(this.state.borderAnim, {
-            toValue: BORDER_WIDTH,
-            duration: 150,
-          }).start();
-        }
-      }
+  componentDidUpdate(prevProps) {
+    if (prevProps.checked === this.props.checked || Platform.OS !== 'android') {
+      return;
+    }
+
+    if (this.props.checked) {
+      this.state.radioAnim.setValue(1.2);
+
+      Animated.timing(this.state.radioAnim, {
+        toValue: 1,
+        duration: 150,
+      }).start();
+    } else {
+      this.state.borderAnim.setValue(10);
+
+      Animated.timing(this.state.borderAnim, {
+        toValue: BORDER_WIDTH,
+        duration: 150,
+      }).start();
     }
   }
 
