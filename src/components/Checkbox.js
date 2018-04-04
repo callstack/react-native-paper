@@ -139,7 +139,8 @@ class Checkbox extends React.Component<Props, State> {
             allowFontScaling={false}
             name={checked ? 'check-box' : 'check-box-outline-blank'}
             size={24}
-            style={[styles.icon, { color: checkboxColor }]}
+            color={checkboxColor}
+            style={styles.icon}
           />
           <View style={[StyleSheet.absoluteFill, styles.fillContainer]}>
             <Animated.View
