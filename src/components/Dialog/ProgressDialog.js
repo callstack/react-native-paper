@@ -5,9 +5,20 @@ import Paragraph from '../Typography/Paragraph';
 import Dialog from './Dialog';
 import DialogTitle from './DialogTitle';
 import DialogContent from './DialogContent';
-import type { DialogProps } from './Dialog';
 
-type Props = DialogProps & {
+type Props = {
+  /**
+   * Determines whether clicking outside the dialog dismiss it.
+   */
+  dismissable?: boolean,
+  /**
+   * Determines whether the dialog is visible.
+   */
+  visible: boolean,
+  /**
+   * Callback that is called when the user dismisses the dialog.
+   */
+  onDismiss: Function,
   /**
    * Size of the ActivityIndicator. It can take following values:
    * - for iOS: 'small' | 'large'
@@ -34,6 +45,10 @@ type Props = DialogProps & {
    * Color of the text.
    */
   textColor?: string,
+  /**
+   * Style that will be applied to whole Dialog e.g. backgroundColor
+   */
+  style?: any,
 };
 
 /**
@@ -43,7 +58,7 @@ type Props = DialogProps & {
  * ```js
  * import * as React from 'react';
  * import { Platform } from 'react-native';
- * import { Dialog } from 'react-native-paper';
+ * import { ProgressDialog } from 'react-native-paper';
  *
  * const isIOS = Platform.OS === 'ios';
  *
@@ -51,7 +66,7 @@ type Props = DialogProps & {
  *
  *   render() {
  *     return (
- *       <Dialog.Progress
+ *       <ProgressDialog
  *         onDismiss={() => {}}
  *         size={isIOS ? 'large' : 48}
  *         text="Loading....."

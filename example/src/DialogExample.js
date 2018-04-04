@@ -61,7 +61,7 @@ class DialogExample extends React.Component<Props, State> {
           Show Dialog with radio buttons
         </Button>
         <Button primary onPress={this._openDialog3}>
-          Show Dialog with loading indicator
+          Show Progress Dialog
         </Button>
         <Button primary onPress={this._openDialog4}>
           Show undismissable Dialog
