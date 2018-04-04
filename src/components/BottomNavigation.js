@@ -10,6 +10,7 @@ import {
   StyleSheet,
   Platform,
 } from 'react-native';
+import { polyfill } from 'react-lifecycles-compat';
 import color from 'color';
 import Icon from './Icon';
 import Paper from './Paper';
@@ -185,6 +186,10 @@ type State = {
    */
   layout: { height: number, width: number, measured: boolean },
   /**
+   * Currently active index. Used only for getDerivedStateFromProps.
+   */
+  current: number,
+  /**
    * Previously active index. Used to determine the position of the ripple.
    */
   previous: number,
@@ -266,6 +271,22 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
     );
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const current = nextProps.navigationState.index;
+
+    if (current === prevState.current) {
+      return null;
+    }
+
+    return {
+      current,
+      previous: prevState.current,
+      loaded: prevState.loaded.includes(current)
+        ? prevState.loaded
+        : [...prevState.loaded, current],
+    };
+  }
+
   constructor(props) {
     super(props);
 
@@ -281,23 +302,10 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
       ripple: new Animated.Value(MIN_RIPPLE_SCALE),
       touch: new Animated.Value(MIN_RIPPLE_SCALE),
       layout: { height: 0, width: 0, measured: false },
+      current: index,
       previous: 0,
       loaded: [index],
     };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.navigationState.index !== this.props.navigationState.index) {
-      const previous = this.props.navigationState.index;
-      const next = nextProps.navigationState.index;
-
-      this.setState(state => ({
-        previous,
-        loaded: state.loaded.includes(next)
-          ? state.loaded
-          : [...state.loaded, next],
-      }));
-    }
   }
 
   componentDidUpdate(prevProps) {
@@ -756,6 +764,8 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
     );
   }
 }
+
+polyfill(BottomNavigation);
 
 export default withTheme(BottomNavigation);
 

@@ -112,16 +112,10 @@ class TextInput extends React.Component<Props, State> {
     multiline: false,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      focused: new Animated.Value(0),
-      placeholder: '',
-    };
-  }
-
-  state: State;
+  state = {
+    focused: new Animated.Value(0),
+    placeholder: '',
+  };
 
   componentDidUpdate(prevProps) {
     if (

@@ -11,12 +11,12 @@ type Props = {
 };
 
 export default class PortalConsumer extends React.Component<Props> {
-  componentWillMount() {
+  componentDidMount() {
     this._key = this.props.manager.mount(this.props.props);
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    this.props.manager.update(this._key, nextProps.props);
+  componentDidUpdate() {
+    this.props.manager.update(this._key, this.props.props);
   }
 
   componentWillUnmount() {
