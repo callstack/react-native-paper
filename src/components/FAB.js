@@ -91,7 +91,7 @@ const FAB = (props: Props) => {
         style={[styles.content, small ? styles.small : styles.standard]}
       >
         <View>
-          <Icon name={icon} size={24} style={{ color: textColor }} />
+          <Icon name={icon} size={24} color={textColor} />
         </View>
       </TouchableRipple>
     </Paper>

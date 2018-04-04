@@ -8,8 +8,8 @@ export type IconSource = string | { uri: string } | number | React.Node;
 
 export type Props = {
   name: IconSource,
+  color: string,
   size?: number,
-  color?: string,
   style?: any,
 };
 
