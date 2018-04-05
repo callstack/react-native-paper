@@ -48,7 +48,7 @@ type Props = {
  *           text="Second Item"
  *           icon="folder"
  *        />
- *      </DrawerSection>
+ *      </List>
  *     );
  *   }
  * }
