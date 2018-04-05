@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { Dialog } from 'react-native-paper';
+import { ListDialog } from 'react-native-paper';
 
 type Props = {
   visible: boolean,
@@ -49,8 +49,7 @@ export default class extends React.Component<Props, State> {
 
   render() {
     return (
-      // $FlowFixMe
-      <Dialog.ListDialog
+      <ListDialog
         title="ListDialog"
         visible={this.props.visible}
         onDismiss={this.props.close}

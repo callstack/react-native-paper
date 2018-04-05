@@ -11,9 +11,20 @@ import Checkbox from '../Checkbox';
 import TouchableRipple from '../TouchableRipple';
 import Subheading from '../Typography/Subheading';
 import Button from '../Button';
-import type { DialogProps } from './Dialog';
 
-type Props = DialogProps & {
+type Props = {
+  /**
+   * Determines whether clicking outside the dialog dismiss it.
+   */
+  dismissable?: boolean,
+  /**
+   * Callback that is called when the user dismisses the dialog.
+   */
+  onDismiss: Function,
+  /**
+   * Determines Whether the dialog is visible.
+   */
+  visible: boolean,
   /**
    * Dialog's title displayed on top.
    */
@@ -82,6 +93,7 @@ type Props = DialogProps & {
    * Dialog will use internally Checkbox if multiselect is true and RadioButton if false.
    */
   multiselect: boolean,
+  style?: any,
 };
 
 /**
@@ -146,6 +158,7 @@ class ListDialog extends React.Component<Props> {
     const {
       title,
       onDismiss,
+      dismissable,
       visible,
       actions,
       maxHeight,
@@ -156,7 +169,12 @@ class ListDialog extends React.Component<Props> {
       style,
     } = this.props;
     return (
-      <Dialog onDismiss={onDismiss} visible={visible} style={style}>
+      <Dialog
+        onDismiss={onDismiss}
+        visible={visible}
+        style={style}
+        dismissable={dismissable}
+      >
         <DialogTitle>{title}</DialogTitle>
         <DialogScrollArea
           style={{ maxHeight: maxHeight || 200, paddingHorizontal: 0 }}
