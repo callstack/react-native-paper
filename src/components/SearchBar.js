@@ -110,15 +110,12 @@ class SearchBar extends React.Component<Props> {
             borderless
             rippleColor={rippleColor}
             onPress={onIconPress}
-            iconStyle={[styles.icon, { color: iconColor }]}
+            color={iconColor}
+            iconStyle={styles.icon}
             name={icon || 'search'}
           />
         ) : (
-          <Icon
-            style={[styles.icon, { color: iconColor }]}
-            name="search"
-            size={24}
-          />
+          <Icon style={styles.icon} name="search" size={24} color={iconColor} />
         )}
         <TextInput
           style={[styles.input, { color: textColor }]}
@@ -133,9 +130,10 @@ class SearchBar extends React.Component<Props> {
         {value ? (
           <TouchableIcon
             borderless
+            color={iconColor}
             rippleColor={rippleColor}
             onPress={this._handleClearPress}
-            iconStyle={[styles.icon, { color: iconColor }]}
+            iconStyle={styles.icon}
             name="close"
           />
         ) : null}
