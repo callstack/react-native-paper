@@ -48,6 +48,10 @@ type Props = {
    */
   color?: string,
   /**
+   * Whether to capitalize the text.
+   */
+  upperCase?: boolean,
+  /**
    * Label text of the button.
    */
   children: string | Array<string>,
@@ -124,6 +128,7 @@ class Button extends React.Component<Props, State> {
       onPress,
       style,
       theme,
+      upperCase = true
     } = this.props;
     const { colors, roundness } = theme;
     const fontFamily = theme.fonts.medium;
@@ -208,7 +213,7 @@ class Button extends React.Component<Props, State> {
         >
           {React.Children.map(
             children,
-            child => (typeof child === 'string' ? child.toUpperCase() : child)
+            child => (typeof child === 'string' && upperCase ? child.toUpperCase() : child)
           )}
         </Text>
       </View>
