@@ -44,13 +44,13 @@ type Props = {
    */
   icon?: IconSource,
   /**
+   * Whether to capitalize the text.
+   */
+  uppercase?: boolean,
+  /**
    * Custom text color for flat button, or background color for raised button.
    */
   color?: string,
-  /**
-   * Whether to capitalize the text.
-   */
-  upperCase?: boolean,
   /**
    * Label text of the button.
    */
@@ -92,6 +92,10 @@ type State = {
  * ```
  */
 class Button extends React.Component<Props, State> {
+  static defaultProps = {
+    uppercase: true,
+  };
+  
   state = {
     elevation: new Animated.Value(this.props.raised ? 2 : 0),
   };
@@ -128,7 +132,7 @@ class Button extends React.Component<Props, State> {
       onPress,
       style,
       theme,
-      upperCase = true
+      uppercase
     } = this.props;
     const { colors, roundness } = theme;
     const fontFamily = theme.fonts.medium;
@@ -213,7 +217,7 @@ class Button extends React.Component<Props, State> {
         >
           {React.Children.map(
             children,
-            child => (typeof child === 'string' && upperCase ? child.toUpperCase() : child)
+            child => (typeof child === 'string' && uppercase ? child.toUpperCase() : child)
           )}
         </Text>
       </View>
