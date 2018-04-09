@@ -44,13 +44,13 @@ type Props = {
    */
   icon?: IconSource,
   /**
-   * Whether to capitalize the text.
-   */
-  uppercase?: boolean,
-  /**
    * Custom text color for flat button, or background color for raised button.
    */
   color?: string,
+  /**
+   * Whether to capitalize the label text.
+   */
+  uppercase?: boolean,
   /**
    * Label text of the button.
    */
@@ -128,11 +128,11 @@ class Button extends React.Component<Props, State> {
       loading,
       icon,
       color: buttonColor,
+      uppercase,
       children,
       onPress,
       style,
       theme,
-      uppercase
     } = this.props;
     const { colors, roundness } = theme;
     const fontFamily = theme.fonts.medium;
