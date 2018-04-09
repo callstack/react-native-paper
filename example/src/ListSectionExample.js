@@ -2,50 +2,56 @@
 
 import * as React from 'react';
 import { ScrollView, StyleSheet, Image, Alert } from 'react-native';
-import { List, ListItem, Divider, Text, withTheme } from 'react-native-paper';
+import {
+  ListSection,
+  ListItem,
+  Divider,
+  Text,
+  withTheme,
+} from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
 
 type Props = {
   theme: Theme,
 };
 
-class ListExample extends React.Component<Props> {
-  static title = 'List';
+class ListSectionExample extends React.Component<Props> {
+  static title = 'ListSection';
 
   render() {
     const { theme: { colors: { background } } } = this.props;
     return (
       <ScrollView style={[styles.container, { backgroundColor: background }]}>
-        <List title="Single-line text">
-          <ListItem text="Item 1" />
-          <ListItem text="Item 2" />
-          <ListItem text="Item 3" />
-        </List>
+        <ListSection title="Single-line text">
+          <ListItem title="Item 1" />
+          <ListItem title="Item 2" />
+          <ListItem title="Item 3" />
+        </ListSection>
         <Divider />
-        <List title="Two-line with icon">
+        <ListSection title="Two-line with icon">
           <ListItem
             icon="folder"
-            text="List item 1"
-            secondaryText="Describes clickable item 1"
+            title="List item 1"
+            description="Describes clickable item 1"
             onPress={() => {
               Alert.alert('clickable element');
             }}
           />
           <ListItem
             icon="add"
-            text="List item 2"
-            secondaryText="Describes item 2"
+            title="List item 2"
+            description="Describes item 2"
           />
           <ListItem
             icon="perm-identity"
-            text="List item 3"
-            secondaryText={
+            title="List item 3"
+            description={
               <Text style={{ color: 'red' }}>Describes important item 3</Text>
             }
           />
-        </List>
+        </ListSection>
         <Divider />
-        <List title="Two-line with avatar">
+        <ListSection title="Two-line with avatar">
           <ListItem
             avatar={
               <Image
@@ -53,8 +59,8 @@ class ListExample extends React.Component<Props> {
                 style={{ width: 48, height: 48 }}
               />
             }
-            text="List item 1"
-            secondaryText="Describes item 1"
+            title="List item 1"
+            description="Describes item 1"
           />
           <ListItem
             avatar={
@@ -63,8 +69,8 @@ class ListExample extends React.Component<Props> {
                 style={{ width: 48, height: 48 }}
               />
             }
-            text="List item 2"
-            secondaryText="Describes item 2"
+            title="List item 2"
+            description="Describes item 2"
           />
           <ListItem
             avatar={
@@ -73,12 +79,12 @@ class ListExample extends React.Component<Props> {
                 style={{ width: 48, height: 48 }}
               />
             }
-            text="List item 3"
-            secondaryText="Describes item 3"
+            title="List item 3"
+            description="Describes item 3"
           />
-        </List>
+        </ListSection>
         <Divider />
-        <List title="Three-line with icon and avatar">
+        <ListSection title="Three-line with icon and avatar">
           <ListItem
             icon="folder"
             avatar={
@@ -87,8 +93,8 @@ class ListExample extends React.Component<Props> {
                 style={{ width: 48, height: 48 }}
               />
             }
-            text="List item 1"
-            secondaryText="Describes item 1. Example of a long description."
+            title="List item 1"
+            description="Describes item 1. Example of a long description."
           />
           <ListItem
             icon="add"
@@ -98,8 +104,8 @@ class ListExample extends React.Component<Props> {
                 style={{ width: 48, height: 48 }}
               />
             }
-            text="List item 2"
-            secondaryText="Describes item 2. Example of a long description."
+            title="List item 2"
+            description="Describes item 2. Example of a long description."
           />
           <ListItem
             icon="perm-identity"
@@ -109,10 +115,10 @@ class ListExample extends React.Component<Props> {
                 style={{ width: 48, height: 48 }}
               />
             }
-            text="List item 3"
-            secondaryText="Describes item 3. Example of a long description."
+            title="List item 3"
+            description="Describes item 3. Example of a long description."
           />
-        </List>
+        </ListSection>
       </ScrollView>
     );
   }
@@ -124,4 +130,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(ListExample);
+export default withTheme(ListSectionExample);

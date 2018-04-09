@@ -2,7 +2,8 @@
 
 import color from 'color';
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import Text from './Typography/Text';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types';
 
@@ -12,17 +13,18 @@ type Props = {
    */
   title?: string,
   /**
-   * Content of the `List`.
+   * Content of the `ListSection`.
    */
   children: React.Node,
   /**
    * @optional
    */
   theme: Theme,
+  style?: any,
 };
 
 /**
- * A List groups Tiles (`ListItem`) inside the container.
+ * A ListSection groups Tiles (`ListItem`) inside the container.
  *
  * <div class="screenshots">
  *   <img class="medium" src="screenshots/list-1.png" />
@@ -34,27 +36,27 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { List, ListItem } from 'react-native-paper';
+ * import { ListSection, ListItem } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   render() {
  *     return (
- *       <List title="Some title">
+ *       <ListSection title="Some title">
  *         <ListItem
- *           text="First Item"
+ *           title="First Item"
  *           icon="folder"
  *        />
  *         <ListItem
- *           text="Second Item"
+ *           title="Second Item"
  *           icon="folder"
  *        />
- *      </List>
+ *      </ListSection>
  *     );
  *   }
  * }
  * ```
  */
-const List = ({ children, title, theme, ...props }: Props) => {
+const ListSection = ({ children, title, theme, ...props }: Props) => {
   const { colors, fonts } = theme;
   const titleColor = color(colors.text)
     .alpha(0.54)
@@ -63,25 +65,29 @@ const List = ({ children, title, theme, ...props }: Props) => {
   const fontFamily = fonts.medium;
 
   return (
-    <View
-      {...props}
-      style={{ marginVertical: 8, justifyContent: 'flex-start' }}
-    >
+    <View {...props} style={[styles.container, props.style]}>
       {title && (
-        <View
-          style={{ height: 40, flexDirection: 'row', alignItems: 'center' }}
+        <Text
+          numberOfLines={1}
+          style={[styles.title, { color: titleColor, fontFamily }]}
         >
-          <Text
-            numberOfLines={1}
-            style={{ color: titleColor, fontFamily, marginLeft: 16 }}
-          >
-            {title}
-          </Text>
-        </View>
+          {title}
+        </Text>
       )}
       {children}
     </View>
   );
 };
 
-export default withTheme(List);
+const styles = StyleSheet.create({
+  container: {
+    marginVertical: 8,
+    justifyContent: 'flex-start',
+  },
+  title: {
+    marginVertical: 13,
+    marginHorizontal: 16,
+  },
+});
+
+export default withTheme(ListSection);

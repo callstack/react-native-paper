@@ -28,7 +28,7 @@ export { default as Divider } from './components/Divider';
 export { default as DrawerItem } from './components/DrawerItem';
 export { default as DrawerSection } from './components/DrawerSection';
 export { default as FAB } from './components/FAB';
-export { default as List } from './components/List';
+export { default as ListSection } from './components/ListSection';
 export { default as ListItem } from './components/ListItem';
 export { default as Modal } from './components/Modal';
 export { default as Paper } from './components/Paper';
