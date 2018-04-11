@@ -74,8 +74,7 @@ export default class PortalHost extends React.Component<Props> {
       );
 
       if (index > -1) {
-        /* $FlowFixMe */
-        this._queue = this._queue[index] = op;
+        this._queue[index] = op;
       } else {
         this._queue.push(op);
       }
