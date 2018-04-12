@@ -88,11 +88,11 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
             },
             Object {
               "backgroundColor": "rgba(0, 0, 0, 0.12)",
-              "borderRadius": 48,
-              "height": 96,
-              "left": -54.666666666666664,
+              "borderRadius": 0,
+              "height": 0,
+              "left": -6.666666666666667,
               "opacity": 0.002,
-              "top": -20,
+              "top": 28,
               "transform": Array [
                 Object {
                   "translateX": 0,
@@ -101,7 +101,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   "scale": 0.001,
                 },
               ],
-              "width": 96,
+              "width": 0,
             },
           ]
         }
@@ -679,11 +679,11 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             },
             Object {
               "backgroundColor": "rgba(255, 255, 255, 0.12)",
-              "borderRadius": 48,
-              "height": 96,
-              "left": -52,
+              "borderRadius": 0,
+              "height": 0,
+              "left": -4,
               "opacity": 0.002,
-              "top": -20,
+              "top": 28,
               "transform": Array [
                 Object {
                   "translateX": 10,
@@ -692,7 +692,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   "scale": 0.001,
                 },
               ],
-              "width": 96,
+              "width": 0,
             },
           ]
         }
@@ -1330,11 +1330,11 @@ exports[`renders non-shifting bottom navigation 1`] = `
             },
             Object {
               "backgroundColor": "rgba(0, 0, 0, 0.12)",
-              "borderRadius": 48,
-              "height": 96,
-              "left": -54.666666666666664,
+              "borderRadius": 0,
+              "height": 0,
+              "left": -6.666666666666667,
               "opacity": 0.002,
-              "top": -20,
+              "top": 28,
               "transform": Array [
                 Object {
                   "translateX": 0,
@@ -1343,7 +1343,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   "scale": 0.001,
                 },
               ],
-              "width": 96,
+              "width": 0,
             },
           ]
         }
@@ -2029,11 +2029,11 @@ exports[`renders shifting bottom navigation 1`] = `
             },
             Object {
               "backgroundColor": "rgba(255, 255, 255, 0.12)",
-              "borderRadius": 48,
-              "height": 96,
-              "left": -52,
+              "borderRadius": 0,
+              "height": 0,
+              "left": -4,
               "opacity": 0.002,
-              "top": -20,
+              "top": 28,
               "transform": Array [
                 Object {
                   "translateX": 10,
@@ -2042,7 +2042,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   "scale": 0.001,
                 },
               ],
-              "width": 96,
+              "width": 0,
             },
           ]
         }

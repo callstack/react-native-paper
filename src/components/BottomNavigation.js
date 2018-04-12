@@ -204,9 +204,35 @@ const MIN_SHIFT_AMOUNT = 10;
 const MIN_TAB_WIDTH = 96;
 const MAX_TAB_WIDTH = 168;
 const BAR_HEIGHT = 56;
-const SMALL_RIPPLE_SIZE = 96;
 const ACTIVE_LABEL_SIZE = 14;
 const INACTIVE_LABEL_SIZE = 12;
+
+const calculateShift = (activeIndex, currentIndex, numberOfItems) => {
+  if (activeIndex < currentIndex) {
+    // If the new active tab comes before current tab, current tab will shift towards right
+    return 2 * MIN_SHIFT_AMOUNT;
+  }
+
+  if (activeIndex > currentIndex) {
+    // If the new active tab comes after current tab, current tab will shift towards left
+    return -2 * MIN_SHIFT_AMOUNT;
+  }
+
+  if (activeIndex === currentIndex) {
+    if (currentIndex === 0) {
+      // If the current tab is the new active tab and its the first tab, it'll shift towards right
+      return MIN_SHIFT_AMOUNT;
+    }
+
+    if (currentIndex === numberOfItems - 1) {
+      // If the current tab is the new active tab and its the last tab, it'll shift towards left
+      return -MIN_SHIFT_AMOUNT;
+    }
+  }
+
+  // If the current tab is the new active tab and its somewhere in the middle, it won't shift
+  return 0;
+};
 
 /**
  * Bottom navigation provides quick navigation between top-level views of an app with a bottom tab bar.
@@ -272,32 +298,49 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const current = nextProps.navigationState.index;
+    const { index, routes } = nextProps.navigationState;
 
-    if (current === prevState.current) {
-      return null;
+    // Re-create animated values if routes have been added/removed
+    // Preserve previous animated values if they exist, so we don't break animations
+    const tabs = routes.map(
+      // focused === 1, unfocused === 0
+      (_, i) => prevState.tabs[i] || new Animated.Value(i === index ? 1 : 0)
+    );
+    const shifts = routes.map(
+      (_, i) =>
+        prevState.shifts[i] ||
+        new Animated.Value(calculateShift(index, i, routes.length))
+    );
+
+    const nextState = {
+      tabs,
+      shifts,
+    };
+
+    if (index !== prevState.current) {
+      /* $FlowFixMe */
+      Object.assign(nextState, {
+        // Store the current index in state so that we can later check if the index has changed
+        current: index,
+        previous: prevState.current,
+        // Set the current tab to be loaded if it was not loaded before
+        loaded: prevState.loaded.includes(index)
+          ? prevState.loaded
+          : [...prevState.loaded, index],
+      });
     }
 
-    return {
-      current,
-      previous: prevState.current,
-      loaded: prevState.loaded.includes(current)
-        ? prevState.loaded
-        : [...prevState.loaded, current],
-    };
+    return nextState;
   }
 
   constructor(props) {
     super(props);
 
-    const { routes, index } = this.props.navigationState;
+    const { index } = this.props.navigationState;
 
     this.state = {
-      tabs: routes.map((_, i) => new Animated.Value(i === index ? 1 : 0)),
-      shifts: routes.map(
-        (_, i) =>
-          new Animated.Value(this._calculateShift(index, i, routes.length))
-      ),
+      tabs: [],
+      shifts: [],
       index: new Animated.Value(index),
       ripple: new Animated.Value(MIN_RIPPLE_SCALE),
       touch: new Animated.Value(MIN_RIPPLE_SCALE),
@@ -336,7 +379,7 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
           ),
           ...routes.map((_, i) =>
             Animated.timing(this.state.shifts[i], {
-              toValue: this._calculateShift(index, i, routes.length),
+              toValue: calculateShift(index, i, routes.length),
               duration: 200,
               easing: Easing.out(Easing.sin),
               useNativeDriver: true,
@@ -353,33 +396,6 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
       this.state.ripple.setValue(MIN_RIPPLE_SCALE);
     });
   }
-
-  _calculateShift = (activeIndex, currentIndex, numberOfItems) => {
-    if (activeIndex < currentIndex) {
-      // If the new active tab comes before current tab, current tab will shift towards right
-      return 2 * MIN_SHIFT_AMOUNT;
-    }
-
-    if (activeIndex > currentIndex) {
-      // If the new active tab comes after current tab, current tab will shift towards left
-      return -2 * MIN_SHIFT_AMOUNT;
-    }
-
-    if (activeIndex === currentIndex) {
-      if (currentIndex === 0) {
-        // If the current tab is the new active tab and its the first tab, it'll shift towards right
-        return MIN_SHIFT_AMOUNT;
-      }
-
-      if (currentIndex === numberOfItems - 1) {
-        // If the current tab is the new active tab and its the last tab, it'll shift towards left
-        return -MIN_SHIFT_AMOUNT;
-      }
-    }
-
-    // If the current tab is the new active tab and its somewhere in the middle, it won't shift
-    return 0;
-  };
 
   _handleLayout = e =>
     this.setState({
@@ -474,6 +490,7 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
       .rgb()
       .string();
 
+    const touchRippleSize = layout.width / routes.length;
     const maxTabWidth = routes.length > 3 ? MIN_TAB_WIDTH : MAX_TAB_WIDTH;
     const tabWidth = Math.min(
       // Account for horizontal padding around the items
@@ -569,14 +586,14 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
                 styles.ripple,
                 {
                   // Set top and left values so that the ripple's center is same as the tab's center
-                  top: BAR_HEIGHT / 2 - SMALL_RIPPLE_SIZE / 2,
+                  top: BAR_HEIGHT / 2 - touchRippleSize / 2,
                   left:
                     navigationState.index * tabWidth +
                     tabWidth / 2 -
-                    SMALL_RIPPLE_SIZE / 2,
-                  height: SMALL_RIPPLE_SIZE,
-                  width: SMALL_RIPPLE_SIZE,
-                  borderRadius: SMALL_RIPPLE_SIZE / 2,
+                    touchRippleSize / 2,
+                  height: touchRippleSize,
+                  width: touchRippleSize,
+                  borderRadius: touchRippleSize / 2,
                   backgroundColor: touchColor,
                   transform: [
                     {
