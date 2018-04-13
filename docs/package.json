@@ -21,6 +21,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "color": "^2.0.1",
     "component-docs": "^0.10.0",
     "linaria": "^0.4.1"
   }

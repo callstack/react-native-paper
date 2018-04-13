@@ -78,15 +78,10 @@ class Card extends React.Component<Props, State> {
     elevation: 2,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      /* $FlowFixMe: somehow default props are not respected */
-      elevation: new Animated.Value(this.props.elevation),
-    };
-  }
-
-  state: State;
+  state = {
+    /* $FlowFixMe: somehow default props are not respected */
+    elevation: new Animated.Value(this.props.elevation),
+  };
 
   _handlePressIn = () => {
     Animated.timing(this.state.elevation, {

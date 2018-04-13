@@ -88,14 +88,9 @@ type State = {
  * ```
  */
 class Button extends React.Component<Props, State> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      elevation: new Animated.Value(props.raised ? 2 : 0),
-    };
-  }
-
-  state: State;
+  state = {
+    elevation: new Animated.Value(this.props.raised ? 2 : 0),
+  };
 
   _handlePressIn = () => {
     if (this.props.raised) {

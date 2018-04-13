@@ -84,21 +84,21 @@ class Checkbox extends React.Component<Props, State> {
     scaleAnim: new Animated.Value(1),
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.checked !== this.props.checked) {
-      if (Platform.OS === 'android') {
-        Animated.sequence([
-          Animated.timing(this.state.scaleAnim, {
-            toValue: 0.85,
-            duration: nextProps.checked ? 0 : 200,
-          }),
-          Animated.timing(this.state.scaleAnim, {
-            toValue: 1,
-            duration: nextProps.checked ? 350 : 200,
-          }),
-        ]).start();
-      }
+  componentDidUpdate(nextProps) {
+    if (nextProps.checked === this.props.checked || Platform.OS !== 'android') {
+      return;
     }
+
+    Animated.sequence([
+      Animated.timing(this.state.scaleAnim, {
+        toValue: 0.85,
+        duration: nextProps.checked ? 0 : 200,
+      }),
+      Animated.timing(this.state.scaleAnim, {
+        toValue: 1,
+        duration: nextProps.checked ? 350 : 200,
+      }),
+    ]).start();
   }
 
   render() {

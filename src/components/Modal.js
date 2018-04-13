@@ -9,6 +9,7 @@ import {
   TouchableWithoutFeedback,
   BackHandler,
 } from 'react-native';
+import { polyfill } from 'react-lifecycles-compat';
 import ThemedPortal from './Portal/ThemedPortal';
 
 type Props = {
@@ -64,31 +65,26 @@ type State = {
  * ```
  */
 
-export default class Modal extends React.Component<Props, State> {
+class Modal extends React.Component<Props, State> {
   static defaultProps = {
     dismissable: true,
     visible: false,
   };
 
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      opacity: new Animated.Value(props.visible ? 1 : 0),
-      rendered: props.visible,
-    };
-  }
-
-  state: State;
-
-  componentWillReceiveProps({ visible }: Props) {
-    if (this.props.visible !== visible) {
-      if (visible) {
-        this.setState({
-          rendered: true,
-        });
-      }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.visible && !prevState.rendered) {
+      return {
+        rendered: true,
+      };
     }
+
+    return null;
   }
+
+  state = {
+    opacity: new Animated.Value(this.props.visible ? 1 : 0),
+    rendered: this.props.visible,
+  };
 
   componentDidUpdate({ visible }: Props) {
     if (visible !== this.props.visible) {
@@ -164,6 +160,10 @@ export default class Modal extends React.Component<Props, State> {
     );
   }
 }
+
+polyfill(Modal);
+
+export default Modal;
 
 const styles = StyleSheet.create({
   wrapper: {

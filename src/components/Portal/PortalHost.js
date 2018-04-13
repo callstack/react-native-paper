@@ -68,14 +68,14 @@ export default class PortalHost extends React.Component<Props> {
     if (this._manager) {
       this._manager.update(key, props);
     } else {
-      const op = { type: 'update', key, props };
+      const op = { type: 'mount', key, props };
       const index = this._queue.findIndex(
         o => o.type === 'mount' || (o.type === 'update' && o.key === key)
       );
 
       if (index > -1) {
         /* $FlowFixMe */
-        this._queue = this._queue[index] = op;
+        this._queue[index] = op;
       } else {
         this._queue.push(op);
       }

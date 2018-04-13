@@ -1,6 +1,6 @@
 {
   "name": "react-native-paper",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "Material design for React Native",
   "main": "src/index.js",
   "files": [
@@ -8,7 +8,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/callstack/react-native-paper.git"
+    "url": "https://github.com/callstack/react-native-paper.git"
   },
   "author": "",
   "license": "MIT",
@@ -28,7 +28,8 @@
     "color": "^2.0.1",
     "create-react-context": "^0.2.1",
     "deepmerge": "^2.0.1",
-    "hoist-non-react-statics": "^2.5.0"
+    "hoist-non-react-statics": "^2.5.0",
+    "react-lifecycles-compat": "^2.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
