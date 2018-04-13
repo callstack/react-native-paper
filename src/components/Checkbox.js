@@ -22,6 +22,10 @@ type Props = {
    */
   onPress?: Function,
   /**
+   * Custom color for unchecked checkbox.
+   */
+  uncheckedColor?: string,
+  /**
    * Custom color for checkbox.
    */
   color?: string,
@@ -104,9 +108,9 @@ class Checkbox extends React.Component<Props, State> {
   render() {
     const { checked, disabled, onPress, theme, ...rest } = this.props;
     const checkedColor = this.props.color || theme.colors.accent;
-    const uncheckedColor = theme.dark
+    const uncheckedColor = this.props.uncheckedColor || (theme.dark
       ? 'rgba(255, 255, 255, .7)'
-      : 'rgba(0, 0, 0, .54)';
+      : 'rgba(0, 0, 0, .54)');
 
     let rippleColor, checkboxColor;
 
