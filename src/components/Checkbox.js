@@ -104,14 +104,18 @@ class Checkbox extends React.Component<Props, State> {
   render() {
     const { checked, disabled, onPress, theme, ...rest } = this.props;
     const checkedColor = this.props.color || theme.colors.accent;
-    const uncheckedColor = theme.dark
-      ? 'rgba(255, 255, 255, .7)'
-      : 'rgba(0, 0, 0, .54)';
+    const uncheckedColor = color(theme.colors.text)
+      .alpha(theme.dark ? 0.7 : 0.54)
+      .rgb()
+      .string();
 
     let rippleColor, checkboxColor;
 
     if (disabled) {
-      rippleColor = 'rgba(0, 0, 0, .16)';
+      rippleColor = color(theme.colors.text)
+        .alpha(0.16)
+        .rgb()
+        .string();
       checkboxColor = theme.colors.disabled;
     } else {
       rippleColor = color(checkedColor)

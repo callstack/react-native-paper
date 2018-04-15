@@ -45,7 +45,10 @@ class Checkbox extends React.Component<Props> {
     let rippleColor;
 
     if (disabled) {
-      rippleColor = 'rgba(0, 0, 0, .16)';
+      rippleColor = color(theme.colors.text)
+        .alpha(0.16)
+        .rgb()
+        .string();
     } else {
       rippleColor = color(checkedColor)
         .fade(0.32)
