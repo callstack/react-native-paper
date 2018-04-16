@@ -56,6 +56,10 @@ type Props = {
   value?: string,
   style?: any,
   /**
+   * Style of native text input.
+   */
+  textInputStyle?: any,
+  /**
    * @optional
    */
   theme: Theme,
@@ -209,6 +213,7 @@ class TextInput extends React.Component<Props, State> {
       label,
       underlineColor,
       style,
+      textInputStyle,
       theme,
       ...rest
     } = this.props;
@@ -291,6 +296,7 @@ class TextInput extends React.Component<Props, State> {
               color: inputTextColor,
               fontFamily,
             },
+            textInputStyle,
           ]}
         />
         <View pointerEvents="none" style={styles.bottomLineContainer}>
