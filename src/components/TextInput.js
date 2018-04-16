@@ -35,6 +35,10 @@ type Props = {
    */
   underlineColor?: string,
   /**
+   * Underline style of the input.
+   */
+  underlineStyle?: any,
+  /**
    * Whether the input can have multiple lines.
    */
   multiline?: boolean,
@@ -212,6 +216,7 @@ class TextInput extends React.Component<Props, State> {
       disabled,
       label,
       underlineColor,
+      underlineStyle,
       style,
       textInputStyle,
       theme,
@@ -304,7 +309,12 @@ class TextInput extends React.Component<Props, State> {
             style={[styles.bottomLine, { backgroundColor: inactiveColor }]}
           />
           <Animated.View
-            style={[styles.bottomLine, styles.focusLine, bottomLineStyle]}
+            style={[
+              styles.bottomLine,
+              styles.focusLine,
+              bottomLineStyle,
+              underlineStyle,
+            ]}
           />
         </View>
       </View>
