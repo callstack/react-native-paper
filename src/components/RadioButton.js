@@ -26,6 +26,10 @@ type Props = {
    */
   onPress?: Function,
   /**
+   * Custom color for unchecked radio.
+   */
+  uncheckedColor?: string,
+  /**
    * Custom color for radio.
    */
   color?: string,
@@ -130,10 +134,12 @@ class RadioButton extends React.Component<Props, State> {
         {context => {
           const { disabled, onPress, theme, ...rest } = this.props;
           const checkedColor = this.props.color || theme.colors.accent;
-          const uncheckedColor = color(theme.colors.text)
-            .alpha(theme.dark ? 0.7 : 0.54)
-            .rgb()
-            .string();
+          const uncheckedColor =
+            this.props.uncheckedColor ||
+            color(theme.colors.text)
+              .alpha(theme.dark ? 0.7 : 0.54)
+              .rgb()
+              .string();
 
           let rippleColor, radioColor;
 
