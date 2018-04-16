@@ -275,6 +275,8 @@ class TextInput extends React.Component<Props, State> {
       }),
     };
 
+    const placeholder = label ? this.state.placeholder : rest.placeholder; // display placeholder if no label wasn't passed
+
     return (
       <View style={style}>
         <AnimatedText
@@ -286,7 +288,7 @@ class TextInput extends React.Component<Props, State> {
         <NativeTextInput
           {...rest}
           value={value}
-          placeholder={this.state.placeholder}
+          placeholder={placeholder}
           placeholderTextColor={colors.placeholder}
           editable={!disabled}
           ref={this._setRef}
