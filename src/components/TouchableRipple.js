@@ -89,11 +89,14 @@ class TouchableRipple extends React.Component<Props, void> {
       ...rest
     } = this.props;
 
-    const { dark: isDarkTheme } = theme;
+    const { dark, colors } = theme;
     const disabled = disabledProp || !this.props.onPress;
     const calculatedRippleColor =
       rippleColor ||
-      (isDarkTheme ? 'rgba(255, 255, 255, .20)' : 'rgba(0, 0, 0, .32)');
+      color(colors.text)
+        .alpha(dark ? 0.32 : 0.2)
+        .rgb()
+        .string();
 
     if (
       Platform.OS === 'android' &&
