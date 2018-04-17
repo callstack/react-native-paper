@@ -15,7 +15,7 @@ import color from 'color';
 import Icon from './Icon';
 import Paper from './Paper';
 import Text from './Typography/Text';
-import { black, white } from '../styles/colors';
+import { black, grey900, white } from '../styles/colors';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
@@ -368,12 +368,12 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
         useNativeDriver: true,
       }),
       Animated.sequence([
-        Animated.delay(100),
+        Animated.delay(this.props.shifting ? 100 : 0),
         Animated.parallel([
           ...routes.map((_, i) =>
             Animated.timing(this.state.tabs[i], {
               toValue: i === index ? 1 : 0,
-              duration: 200,
+              duration: this.props.shifting ? 200 : 150,
               useNativeDriver: true,
             })
           ),
@@ -462,7 +462,7 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
       backgroundColor: approxBackgroundColor = shifting
         ? colors.primary
         : theme.dark
-          ? black
+          ? grey900
           : white,
     } =
       StyleSheet.flatten(barStyle) || {};
