@@ -21,7 +21,11 @@ class ButtonExample extends React.Component<Props, State> {
   };
 
   render() {
-    const { theme: { colors: { background } } } = this.props;
+    const {
+      theme: {
+        colors: { background },
+      },
+    } = this.props;
     return (
       <View style={[styles.container, { backgroundColor: background }]}>
         <View style={styles.row}>

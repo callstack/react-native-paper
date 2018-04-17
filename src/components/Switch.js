@@ -112,8 +112,14 @@ class Switch extends React.Component<Props> {
       Platform.OS === 'ios'
         ? undefined
         : disabled
-          ? theme.dark ? grey800 : grey400
-          : value ? checkedColor : theme.dark ? grey400 : grey50;
+          ? theme.dark
+            ? grey800
+            : grey400
+          : value
+            ? checkedColor
+            : theme.dark
+              ? grey400
+              : grey50;
 
     return (
       <NativeSwitch

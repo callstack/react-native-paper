@@ -13,7 +13,11 @@ class PaperExample extends React.Component<Props> {
   static title = 'Paper';
 
   render() {
-    const { theme: { colors: { background } } } = this.props;
+    const {
+      theme: {
+        colors: { background },
+      },
+    } = this.props;
     return (
       <ScrollView
         style={[styles.container, { backgroundColor: background }]}

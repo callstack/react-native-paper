@@ -23,6 +23,7 @@ const routes = Object.keys(examples)
           <ToolbarContent title={(Comp: any).title} />
         </Toolbar>
       ),
+      /* $FlowFixMe */
       ...(typeof Comp.navigationOptions === 'function'
         ? Comp.navigationOptions(props)
         : Comp.navigationOptions),

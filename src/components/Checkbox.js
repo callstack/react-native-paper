@@ -85,7 +85,7 @@ class Checkbox extends React.Component<Props, State> {
   };
 
   componentDidUpdate(prevProps) {
-    if (prevProps.checked === this.props.checked && Platform.OS !== 'android') {
+    if (prevProps.checked === this.props.checked || Platform.OS !== 'android') {
       return;
     }
 

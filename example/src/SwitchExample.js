@@ -29,7 +29,11 @@ class SwitchExample extends React.Component<Props, State> {
   };
 
   render() {
-    const { theme: { colors: { background } } } = this.props;
+    const {
+      theme: {
+        colors: { background },
+      },
+    } = this.props;
     const switchValueNormalLabel = `switch ${
       this.state.valueNormal === true ? 'on' : 'off'
     }`;

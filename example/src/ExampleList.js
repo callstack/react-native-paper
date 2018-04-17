@@ -68,7 +68,11 @@ class ExampleList extends React.Component<Props> {
   _renderSeparator = (sectionId, rowId) => <Divider key={rowId} />;
 
   render() {
-    const { theme: { colors: { background } } } = this.props;
+    const {
+      theme: {
+        colors: { background },
+      },
+    } = this.props;
     return (
       <ListView
         contentContainerStyle={{ backgroundColor: background }}

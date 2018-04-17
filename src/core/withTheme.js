@@ -31,14 +31,13 @@ const REACT_METHODS = [
   'updateComponent',
 ];
 
-const isClassComponent = (Component: Function) =>
-  !!(Component && Component.prototype && Component.prototype.render);
+const isClassComponent = (Component: any) =>
+  Boolean(Component.prototype && Component.prototype.isReactComponent);
 
-export default function withTheme<Props: {}>(
-  Comp: React.ComponentType<Props>
-): React.ComponentType<
-  $Diff<Props, { theme: Theme }> & { theme?: $Shape<Theme> }
-> {
+export default function withTheme<P: {}, C: React.ComponentType<P>>(
+  Comp: C
+): C &
+  React.ComponentType<$Diff<P, { theme: Theme }> & { theme?: $Shape<Theme> }> {
   class ThemedComponent extends React.Component<*> {
     /* $FlowFixMe */
     static displayName = `withTheme(${Comp.displayName || Comp.name})`;
@@ -131,9 +130,6 @@ export default function withTheme<Props: {}>(
             // $FlowFixMe
             Comp.prototype[prop].apply(this.getWrappedInstance(), args);
           };
-          // Set the function name for better debugging
-          // $FlowFixMe
-          ThemedComponent.prototype[prop].name = prop;
         } else {
           // Copy properties as getters and setters
           // This make sure dynamic properties always stay up-to-date

@@ -40,25 +40,28 @@ type Props = {
  * );
  * ```
  */
-const ProgressBar = ({ progress, color, style, theme }: Props) => {
-  const tintColor = color || theme.colors.primary;
-  const trackTintColor = setColor(tintColor)
-    .alpha(0.38)
-    .rgb()
-    .string();
+class ProgressBar extends React.Component<Props> {
+  render() {
+    const { progress, color, style, theme } = this.props;
+    const tintColor = color || theme.colors.primary;
+    const trackTintColor = setColor(tintColor)
+      .alpha(0.38)
+      .rgb()
+      .string();
 
-  return (
-    <ProgressBarComponent
-      styleAttr="Horizontal"
-      indeterminate={false}
-      progress={progress}
-      progressTintColor={tintColor}
-      color={tintColor}
-      style={[styles.progressBarHeight, style]}
-      trackTintColor={trackTintColor}
-    />
-  );
-};
+    return (
+      <ProgressBarComponent
+        styleAttr="Horizontal"
+        indeterminate={false}
+        progress={progress}
+        progressTintColor={tintColor}
+        color={tintColor}
+        style={[styles.progressBarHeight, style]}
+        trackTintColor={trackTintColor}
+      />
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   progressBarHeight: {

@@ -21,7 +21,7 @@ type Group = {
  * Portal host is the component which actually renders all Portals.
  */
 export default class PortalManager extends React.PureComponent<{}, State> {
-  state = {
+  state: State = {
     portals: [],
   };
 
@@ -50,8 +50,10 @@ export default class PortalManager extends React.PureComponent<{}, State> {
     return this.state.portals
       .reduce((acc: Group[], curr) => {
         const { elevation, children } = curr.props;
-        let group = acc.find(it => it.elevation === elevation);
-        if (group) {
+
+        let group: ?Group = acc.find(it => it.elevation === elevation);
+
+        if (group && typeof elevation === 'number') {
           group = {
             key: elevation,
             elevation,
