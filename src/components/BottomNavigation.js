@@ -23,14 +23,14 @@ import type { IconSource } from './Icon';
 const AnimatedText = Animated.createAnimatedComponent(Text);
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
-type Route = {
+type Route = $Shape<{
   key: string,
-  title?: string,
-  icon?: IconSource,
-  color?: string,
-};
+  title: string,
+  icon: IconSource,
+  color: string,
+}>;
 
-type NavigationState<T> = {
+type NavigationState<T: Route> = {
   index: number,
   routes: Array<T>,
 };
@@ -279,7 +279,7 @@ const calculateShift = (activeIndex, currentIndex, numberOfItems) => {
  * }
  * ```
  */
-class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
+class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
   /**
    * Pure components are used to minmize re-rendering of the pages.
    * This drastically improves the animation performance.
@@ -443,8 +443,8 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
       renderScene,
       renderIcon,
       renderLabel,
-      getLabelText = ({ route }) => route.title,
-      getColor = ({ route }) => route.color,
+      getLabelText = ({ route }: Object) => route.title,
+      getColor = ({ route }: Object) => route.color,
       barStyle,
       style,
       theme,
@@ -682,7 +682,7 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
                         ) : (
                           <Icon
                             style={styles.icon}
-                            name={route.icon}
+                            name={(route: Object).icon}
                             color={activeColor}
                             size={24}
                           />
@@ -704,7 +704,7 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
                           ) : (
                             <Icon
                               style={styles.icon}
-                              name={route.icon}
+                              name={(route: Object).icon}
                               color={inactiveColor}
                               size={24}
                             />

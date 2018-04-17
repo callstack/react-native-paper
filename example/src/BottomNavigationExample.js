@@ -4,7 +4,20 @@ import * as React from 'react';
 import { ScrollView, View, Image, Dimensions, StyleSheet } from 'react-native';
 import { BottomNavigation } from 'react-native-paper';
 
-export default class ButtomNavigationExample extends React.Component<{}, any> {
+type State = {
+  index: number,
+  routes: Array<{
+    key: string,
+    title: string,
+    icon: string,
+    color: string,
+  }>,
+};
+
+export default class ButtomNavigationExample extends React.Component<
+  {},
+  State
+> {
   static title = 'Bottom navigation';
 
   state = {
