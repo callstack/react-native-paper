@@ -115,7 +115,12 @@ class SearchBar extends React.Component<Props> {
             name={icon || 'search'}
           />
         ) : (
-          <Icon style={styles.icon} name="search" size={24} color={iconColor} />
+          <Icon
+            style={styles.icon}
+            name={icon || 'search'}
+            size={24}
+            color={iconColor}
+          />
         )}
         <TextInput
           style={[styles.input, { color: textColor }]}
