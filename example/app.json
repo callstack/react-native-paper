@@ -4,7 +4,7 @@
     "description": "Example app for React Native Paper: https://callstack.github.io/react-native-paper/",
     "slug": "react-native-paper-example",
     "privacy": "public",
-    "sdkVersion": "23.0.0",
+    "sdkVersion": "26.0.0",
     "version": "1.0.0",
     "orientation": "default",
     "primaryColor": "#cccccc",

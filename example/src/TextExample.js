@@ -20,7 +20,11 @@ class TextExample extends React.Component<Props> {
   static title = 'Typography';
 
   render() {
-    const { theme: { colors: { background } } } = this.props;
+    const {
+      theme: {
+        colors: { background },
+      },
+    } = this.props;
     return (
       <View style={[styles.container, { backgroundColor: background }]}>
         <Caption style={styles.text}>Caption</Caption>

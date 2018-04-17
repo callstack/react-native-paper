@@ -26,30 +26,27 @@
   },
   "dependencies": {
     "color": "^2.0.1",
-    "create-react-context": "^0.2.1",
-    "deepmerge": "^2.0.1",
+    "create-react-context": "^0.2.2",
+    "deepmerge": "^2.1.0",
     "hoist-non-react-statics": "^2.5.0",
-    "react-lifecycles-compat": "^2.0.0"
+    "react-lifecycles-compat": "^3.0.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-react-native": "^4.0.0",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "enzyme-to-json": "^3.3.1",
-    "eslint": "^4.18.1",
+    "eslint": "^4.19.1",
     "eslint-config-callstack-io": "^1.1.1",
-    "eslint-plugin-prettier": "^2.1.2",
-    "eslint-plugin-react-native": "^3.2.0",
-    "flow-bin": "~0.56.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react-native": "^3.2.1",
+    "flow-bin": "~0.65.0",
     "husky": "^0.14.3",
-    "jest": "^22.4.2",
-    "prettier": "^1.8.2",
-    "react": "16.0.0",
-    "react-dom": "^16.2.0",
-    "react-native": "~0.50.3",
-    "react-native-vector-icons": "~4.4.2",
-    "react-test-renderer": "^16.2.0"
+    "jest": "^22.4.3",
+    "prettier": "^1.12.1",
+    "react": "16.3.0-alpha.1",
+    "react-dom": "16.3.0-alpha.1",
+    "react-native": "~0.54.4",
+    "react-native-vector-icons": "~4.6.0",
+    "react-test-renderer": "16.3.0-alpha.1"
   },
   "peerDependencies": {
     "react": "*",
@@ -58,14 +55,8 @@
   },
   "jest": {
     "preset": "react-native",
-    "setupFiles": [
-      "<rootDir>/__setup__/enzyme.js"
-    ],
     "modulePathIgnorePatterns": [
       "<rootDir>/example/node_modules"
-    ],
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
     ]
   }
 }

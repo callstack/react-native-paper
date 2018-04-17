@@ -12,12 +12,22 @@ exports[`renders portal with siblings 1`] = `
     ]
   }
 >
-  <Provider
-    value={
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Outside content
+  </Text>
+  <View
+    pointerEvents="box-none"
+    style={
       Object {
-        "mount": [Function],
-        "unmount": [Function],
-        "update": [Function],
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
       }
     }
   >
@@ -26,18 +36,8 @@ exports[`renders portal with siblings 1`] = `
       allowFontScaling={true}
       ellipsizeMode="tail"
     >
-      Outside content
+      Portal content
     </Text>
-    <Portal>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
-        Portal content
-      </Text>
-    </Portal>
-  </Provider>
-  <PortalManager />
+  </View>
 </View>
 `;

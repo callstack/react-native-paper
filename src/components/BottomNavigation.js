@@ -461,7 +461,9 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
     const {
       backgroundColor: approxBackgroundColor = shifting
         ? colors.primary
-        : theme.dark ? black : white,
+        : theme.dark
+          ? black
+          : white,
     } =
       StyleSheet.flatten(barStyle) || {};
 

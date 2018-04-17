@@ -53,49 +53,53 @@ type Props = {
  * );
  * ```
  */
-const DrawerItem = ({
-  color: activeColor,
-  icon,
-  label,
-  active,
-  theme,
-  ...props
-}: Props) => {
-  const { colors, dark } = theme;
-  const backgroundColor = active ? (dark ? grey700 : grey300) : 'transparent';
-  const labelColor = active
-    ? activeColor || colors.text
-    : color(colors.text)
-        .alpha(0.54)
-        .rgb()
-        .string();
-  const iconColor = active
-    ? activeColor || colors.text
-    : color(colors.text)
-        .alpha(0.54)
-        .rgb()
-        .string();
-  const fontFamily = theme.fonts.medium;
-  const labelMargin = icon ? 32 : 0;
-  return (
-    <TouchableRipple {...props}>
-      <View style={[styles.wrapper, { backgroundColor }]}>
-        {icon && <Icon name={icon} size={24} color={iconColor} />}
-        <Text
-          numberOfLines={1}
-          style={{
-            color: labelColor,
-            fontFamily,
-            marginLeft: labelMargin,
-            marginRight: 32,
-          }}
-        >
-          {label}
-        </Text>
-      </View>
-    </TouchableRipple>
-  );
-};
+class DrawerItem extends React.Component<Props> {
+  render() {
+    const {
+      color: activeColor,
+      icon,
+      label,
+      active,
+      theme,
+      ...props
+    } = this.props;
+    const { colors, dark } = theme;
+    const backgroundColor = active ? (dark ? grey700 : grey300) : 'transparent';
+    const labelColor = active
+      ? activeColor || colors.text
+      : color(colors.text)
+          .alpha(0.54)
+          .rgb()
+          .string();
+    const iconColor = active
+      ? activeColor || colors.text
+      : color(colors.text)
+          .alpha(0.54)
+          .rgb()
+          .string();
+    const fontFamily = theme.fonts.medium;
+    const labelMargin = icon ? 32 : 0;
+
+    return (
+      <TouchableRipple {...props}>
+        <View style={[styles.wrapper, { backgroundColor }]}>
+          {icon && <Icon name={icon} size={24} color={iconColor} />}
+          <Text
+            numberOfLines={1}
+            style={{
+              color: labelColor,
+              fontFamily,
+              marginLeft: labelMargin,
+              marginRight: 32,
+            }}
+          >
+            {label}
+          </Text>
+        </View>
+      </TouchableRipple>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   wrapper: {

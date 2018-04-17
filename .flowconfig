@@ -5,8 +5,8 @@
 ; Ignore templates for 'react-native init'
 .*/local-cli/templates/.*
 
-; Ignore the website subdir
-<PROJECT_ROOT>/website/.*
+; Ignore the Dangerfile
+<PROJECT_ROOT>/bots/dangerfile.js
 
 ; Ignore "BUCK" generated dirs
 <PROJECT_ROOT>/\.buckd/
@@ -18,7 +18,12 @@
 ; For RN Apps installed via npm, "Libraries" folder is inside
 ; "node_modules/react-native" but in the source repo it is in the root
 .*/Libraries/react-native/React.js
-.*/Libraries/react-native/ReactNative.js
+
+; Ignore polyfills
+.*/Libraries/polyfills/.*
+
+; Ignore metro
+.*/node_modules/metro/.*
 
 ; Ignore duplicate modules under example/
 .*/example/node_modules/fbjs/.*
@@ -29,7 +34,6 @@
 .*/example/node_modules/xdl
 .*/example/node_modules/reqwest
 .*/example/\.buckd/
-.*/example/node_modules/react-native-tab-view
 .*/example/node_modules/react-navigation
 .*/example/node_modules/react-native-fbads
 .*/example/node_modules/react-native-gesture-handler
@@ -46,14 +50,13 @@
 
 [libs]
 node_modules/react-native/Libraries/react-native/react-native-interface.js
+node_modules/react-native/flow-github
 node_modules/react-native/flow
 
 [options]
 emoji=true
 
 module.system=haste
-
-experimental.strict_type_args=true
 
 munge_underscores=true
 
@@ -71,14 +74,12 @@ suppress_type=$FlowIssue
 suppress_type=$FlowFixMe
 suppress_type=$FlowFixMeProps
 suppress_type=$FlowFixMeState
-suppress_type=$FixMe
 
-suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe\\($\\|[^(]\\|(\\(>=0\\.\\(5[0-6]\\|[1-4][0-9]\\|[0-9]\\).[0-9]\\)? *\\(site=[a-z,_]*[react_native_oss|react_native_fb][a-z,_]*\\)?)\\)
-suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(>=0\\.\\(5[0-6]\\|[1-4][0-9]\\|[0-9]\\).[0-9]\\)? *\\(site=[a-z,_]*[react_native_oss|react_native_fb][a-z,_]*\\)?)\\)?:? #[0-9]+
+suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe\\($\\|[^(]\\|(\\(<VERSION>\\)? *\\(site=[a-z,_]*[react_native_oss|react_native_fb][a-z,_]*\\)?)\\)
+suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(<VERSION>\\)? *\\(site=[a-z,_]*[react_native_oss|react_native_fb][a-z,_]*\\)?)\\)?:? #[0-9]+
 suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
 suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
 
-unsafe.enable_getters_and_setters=true
-
 [version]
-^0.56.0
+^0.65.0
+
