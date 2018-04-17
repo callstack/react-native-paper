@@ -4,7 +4,9 @@
   "description": "Material design for React Native",
   "main": "src/index.js",
   "files": [
-    "src/"
+    "src/",
+    "dist/",
+    "babel.js"
   ],
   "repository": {
     "type": "git",
@@ -22,6 +24,7 @@
     "flow": "flow",
     "lint": "eslint .",
     "test": "jest",
+    "prepare": "node ./scripts/generate-mappings",
     "bootstrap": "yarn && yarn --cwd example && yarn --cwd docs"
   },
   "dependencies": {
@@ -33,6 +36,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-plugin-tester": "^5.0.0",
     "babel-preset-react-native": "^4.0.0",
     "eslint": "^4.19.1",
     "eslint-config-callstack-io": "^1.1.1",
