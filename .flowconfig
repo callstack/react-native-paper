@@ -30,13 +30,7 @@
 .*/example/node_modules/fbemitter/.*
 .*/example/node_modules/react/.*
 .*/example/node_modules/react-native/.*
-.*/example/node_modules/expo/.*
-.*/example/node_modules/xdl
-.*/example/node_modules/reqwest
 .*/example/\.buckd/
-.*/example/node_modules/react-navigation
-.*/example/node_modules/react-native-fbads
-.*/example/node_modules/react-native-gesture-handler
 
 ; Ignore duplicate modules under docs/
 .*/docs/node_modules/fbjs/.*
@@ -45,6 +39,11 @@
 ; Ignore some modules we don't need to parse
 .*/node_modules/prettier/.*
 .*/node_modules/eslint.*
+
+[untyped]
+.*/node_modules/expo/.*
+.*/node_modules/react-navigation/.*
+.*/node_modules/react-native-gesture-handler/.*
 
 [include]
 
@@ -63,10 +62,6 @@ munge_underscores=true
 module.file_ext=.js
 module.file_ext=.android.js
 module.file_ext=.ios.js
-
-module.name_mapper='^expo$' -> 'emptyObject'
-module.name_mapper='^react-navigation$' -> 'emptyObject'
-module.name_mapper='^react-native-gesture-handler$' -> 'emptyObject'
 
 module.name_mapper='^[./a-zA-Z0-9$_-]+\.\(bmp\|gif\|jpg\|jpeg\|png\|psd\|svg\|webp\|m4v\|mov\|mp4\|mpeg\|mpg\|webm\|aac\|aiff\|caf\|m4a\|mp3\|wav\|html\|pdf\)$' -> 'RelativeImageStub'
 
