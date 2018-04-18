@@ -21,7 +21,7 @@ type Props = {
   /**
    * Component to display as primary action of the `ListControl`.
    */
-  primaryAction?: React.Element<*>,
+  primaryAction?: React.Node,
   /**
    * Component to display as secondary action of the `ListControl`.
    */
