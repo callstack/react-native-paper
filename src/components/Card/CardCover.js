@@ -40,7 +40,7 @@ type Props = {
  * @extends Image props https://facebook.github.io/react-native/docs/image.html#props
  */
 class CardCover extends React.Component<Props> {
-  return() {
+  render() {
     const { index, total, style, theme, ...rest } = this.props;
     const { roundness } = theme;
 
