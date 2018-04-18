@@ -151,7 +151,9 @@ class SearchBar extends React.Component<Props> {
           selectionColor={colors.primary}
           underlineColorAndroid="transparent"
           returnKeyType="search"
-          ref={c => { this._root = c; }}
+          ref={c => {
+            this._root = c;
+          }}
           value={value}
           {...rest}
         />
