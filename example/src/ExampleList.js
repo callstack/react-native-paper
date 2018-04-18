@@ -12,6 +12,7 @@ import DividerExample from './DividerExample';
 import ExampleListRow from './ExampleListRow';
 import FABExample from './FABExample';
 import ListSectionExample from './ListSectionExample';
+import ListControlExample from './ListControlExample';
 import PaperExample from './PaperExample';
 import ProgressBarExample from './ProgressBarExample';
 import RadioButtonExample from './RadioButtonExample';
@@ -38,6 +39,7 @@ export const examples = {
   divider: DividerExample,
   fab: FABExample,
   listSection: ListSectionExample,
+  listControl: ListControlExample,
   paper: PaperExample,
   progressbar: ProgressBarExample,
   radio: RadioButtonExample,
