@@ -71,7 +71,7 @@ type Props = {
  */
 class SearchBar extends React.Component<Props> {
   _handleClearPress = () => {
-    this.clear();
+    this.props.onChangeText('');
   };
   _root: any;
   _setRef: any = (c: Object) => {
