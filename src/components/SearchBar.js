@@ -73,13 +73,13 @@ class SearchBar extends React.Component<Props> {
   _handleClearPress = () => {
     this.props.onChangeText('');
   };
-  _root: any;
-  _setRef: any = (c: Object) => {
-    this._root = c;
-  };
+
+  _root: TextInput;
+
   setNativeProps(...args) {
     return this._root.setNativeProps(...args);
   }
+
   isFocused(...args) {
     return this._root.isFocused(...args);
   }
@@ -151,7 +151,7 @@ class SearchBar extends React.Component<Props> {
           selectionColor={colors.primary}
           underlineColorAndroid="transparent"
           returnKeyType="search"
-          ref={this._setRef}
+          ref={c => { this._root = c; }}
           value={value}
           {...rest}
         />
