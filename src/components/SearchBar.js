@@ -27,7 +27,7 @@ type Props = {
   /**
    * Callback that is called when the text input's text changes.
    */
-  onChangeText: (query: string) => void,
+  onChangeText?: (query: string) => void,
   /**
    * Callback to execute if we want the left icon to act as button.
    */
@@ -71,7 +71,8 @@ type Props = {
  */
 class SearchBar extends React.Component<Props> {
   _handleClearPress = () => {
-    this.props.onChangeText('');
+    this.clear();
+    this.props.onChangeText && this.props.onChangeText('');
   };
 
   _root: TextInput;

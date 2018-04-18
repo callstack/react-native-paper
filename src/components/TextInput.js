@@ -64,6 +64,7 @@ type Props = {
 type State = {
   focused: Animated.Value,
   placeholder: ?string,
+  value: ?string,
 };
 
 /**
@@ -115,15 +116,19 @@ class TextInput extends React.Component<Props, State> {
   state = {
     focused: new Animated.Value(0),
     placeholder: '',
+    value: this.props.value,
   };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (
-      (prevProps.value !== this.props.value ||
-        prevProps.placeholder !== this.props.placeholder) &&
-      this.props.value === ''
+      prevState.value !== this.state.value ||
+      prevProps.placeholder !== this.props.placeholder
     ) {
-      this._setPlaceholder();
+      if (this.state.value) {
+        this._removePlaceholder();
+      } else {
+        this._setPlaceholder();
+      }
     }
   }
 
@@ -161,6 +166,7 @@ class TextInput extends React.Component<Props, State> {
 
   _animateBlur = () => {
     this._removePlaceholder();
+
     Animated.timing(this.state.focused, {
       toValue: 0,
       duration: 180,
@@ -169,6 +175,7 @@ class TextInput extends React.Component<Props, State> {
 
   _handleFocus = (...args) => {
     this._animateFocus();
+
     if (this.props.onFocus) {
       this.props.onFocus(...args);
     }
@@ -176,9 +183,15 @@ class TextInput extends React.Component<Props, State> {
 
   _handleBlur = (...args) => {
     this._animateBlur();
+
     if (this.props.onBlur) {
       this.props.onBlur(...args);
     }
+  };
+
+  _handleChangeText = (value: string) => {
+    this.setState({ value });
+    this.props.onChangeText && this.props.onChangeText(value);
   };
 
   setNativeProps(...args) {
@@ -203,7 +216,6 @@ class TextInput extends React.Component<Props, State> {
 
   render() {
     const {
-      value,
       disabled,
       label,
       underlineColor,
@@ -211,6 +223,7 @@ class TextInput extends React.Component<Props, State> {
       theme,
       ...rest
     } = this.props;
+
     const { colors, fonts } = theme;
     const fontFamily = fonts.regular;
     const primaryColor = colors.primary;
@@ -231,13 +244,13 @@ class TextInput extends React.Component<Props, State> {
       outputRange: [inactiveColor, labelColor],
     });
 
-    const translateY = value
+    const translateY = this.state.value
       ? -22
       : this.state.focused.interpolate({
           inputRange: [0, 1],
           outputRange: [0, -22],
         });
-    const fontSize = value
+    const fontSize = this.state.value
       ? 12
       : this.state.focused.interpolate({
           inputRange: [0, 1],
@@ -277,8 +290,8 @@ class TextInput extends React.Component<Props, State> {
           ref={c => {
             this._root = c;
           }}
-          value={value}
-          placeholder={this.state.placeholder}
+          onChangeText={this._handleChangeText}
+          placeholder={label ? this.state.placeholder : this.props.placeholder}
           placeholderTextColor={colors.placeholder}
           editable={!disabled}
           selectionColor={labelColor}
@@ -287,7 +300,12 @@ class TextInput extends React.Component<Props, State> {
           underlineColorAndroid="transparent"
           style={[
             styles.input,
-            rest.multiline && styles.multiline,
+            label ? styles.inputWithLabel : styles.inputWithoutLabel,
+            rest.multiline
+              ? label
+                ? styles.multilineWithLabel
+                : styles.multilineWithoutLabel
+              : null,
             {
               color: inputTextColor,
               fontFamily,
@@ -307,22 +325,35 @@ class TextInput extends React.Component<Props, State> {
   }
 }
 
+export default withTheme(TextInput);
+
 const styles = StyleSheet.create({
   placeholder: {
     position: 'absolute',
     left: 0,
-    top: 38,
+    top: 40,
     fontSize: 16,
   },
   input: {
-    minHeight: 64,
-    paddingTop: 20,
     paddingBottom: 0,
     marginTop: 8,
     marginBottom: -4,
+    fontSize: 16,
   },
-  multiline: {
+  inputWithLabel: {
+    paddingTop: 20,
+    minHeight: 64,
+  },
+  inputWithoutLabel: {
+    paddingTop: 0,
+    minHeight: 44,
+  },
+  multilineWithLabel: {
     paddingTop: 30,
+    paddingBottom: 10,
+  },
+  multilineWithoutLabel: {
+    paddingVertical: 10,
   },
   bottomLineContainer: {
     marginBottom: 4,
@@ -339,5 +370,3 @@ const styles = StyleSheet.create({
     height: StyleSheet.hairlineWidth * 4,
   },
 });
-
-export default withTheme(TextInput);
