@@ -74,6 +74,28 @@ class SearchBar extends React.Component<Props> {
     this.props.onChangeText('');
   };
 
+  _root: TextInput;
+
+  setNativeProps(...args) {
+    return this._root.setNativeProps(...args);
+  }
+
+  isFocused(...args) {
+    return this._root.isFocused(...args);
+  }
+
+  clear(...args) {
+    return this._root.clear(...args);
+  }
+
+  focus(...args) {
+    return this._root.focus(...args);
+  }
+
+  blur(...args) {
+    return this._root.blur(...args);
+  }
+
   render() {
     const {
       placeholder,
@@ -129,6 +151,9 @@ class SearchBar extends React.Component<Props> {
           selectionColor={colors.primary}
           underlineColorAndroid="transparent"
           returnKeyType="search"
+          ref={c => {
+            this._root = c;
+          }}
           value={value}
           {...rest}
         />
