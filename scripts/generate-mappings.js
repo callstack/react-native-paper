@@ -27,10 +27,12 @@ const relative = (value /* : string */) =>
 const mappings = ast.program.body.reduce((acc, declaration, index, self) => {
   if (types.isExportNamedDeclaration(declaration)) {
     if (declaration.source) {
-      const name = declaration.specifiers.find(
-        specifier => specifier.local.name === 'default'
-      ).exported.name;
-      acc[name] = relative(declaration.source.value);
+      declaration.specifiers.forEach(specifier => {
+        acc[specifier.exported.name] = {
+          path: relative(declaration.source.value),
+          name: specifier.local.name,
+        };
+      });
     } else {
       declaration.specifiers.forEach(specifier => {
         const name = specifier.exported.name;
@@ -44,7 +46,10 @@ const mappings = ast.program.body.reduce((acc, declaration, index, self) => {
                 s.local.name === specifier.local.name
             )
           ) {
-            acc[name] = relative(it.source.value);
+            acc[name] = {
+              path: relative(it.source.value),
+              name: '*',
+            };
           }
         });
       });

@@ -20,17 +20,24 @@ module.exports = function rewire(babel) {
             const mapping = mappings[specifier.imported.name];
 
             if (mapping) {
-              const alias = `${path.node.source.value}/${mapping}`;
+              const alias = `${path.node.source.value}/${mapping.path}`;
+              const identifier = t.identifier(specifier.local.name);
+
+              let s;
+
+              switch (mapping.name) {
+                case 'default':
+                  s = t.importDefaultSpecifier(identifier);
+                  break;
+                case '*':
+                  s = t.importNamespaceSpecifier(identifier);
+                  break;
+                default:
+                  s = t.importSpecifier(identifier, t.identifier(mapping.name));
+              }
 
               declarations.push(
-                t.importDeclaration(
-                  [
-                    t.importDefaultSpecifier(
-                      t.identifier(specifier.local.name)
-                    ),
-                  ],
-                  t.stringLiteral(alias)
-                )
+                t.importDeclaration([s], t.stringLiteral(alias))
               );
             } else {
               const previous = declarations.find(
