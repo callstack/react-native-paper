@@ -133,6 +133,7 @@ class TextInput extends React.Component<Props, State> {
 
   _setPlaceholder = () => {
     clearTimeout(this._timer);
+
     this._timer = setTimeout(
       () =>
         this.setState({
@@ -147,11 +148,9 @@ class TextInput extends React.Component<Props, State> {
       placeholder: '',
     });
 
-  _timer: any;
-  _root: any;
-  _setRef: any = (c: Object) => {
-    this._root = c;
-  };
+  _timer: TimeoutID;
+
+  _root: NativeTextInput;
 
   _animateFocus = () => {
     Animated.timing(this.state.focused, {
@@ -275,11 +274,13 @@ class TextInput extends React.Component<Props, State> {
         </AnimatedText>
         <NativeTextInput
           {...rest}
+          ref={c => {
+            this._root = c;
+          }}
           value={value}
           placeholder={this.state.placeholder}
           placeholderTextColor={colors.placeholder}
           editable={!disabled}
-          ref={this._setRef}
           selectionColor={labelColor}
           onFocus={this._handleFocus}
           onBlur={this._handleBlur}
