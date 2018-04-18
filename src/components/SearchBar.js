@@ -71,8 +71,30 @@ type Props = {
  */
 class SearchBar extends React.Component<Props> {
   _handleClearPress = () => {
-    this.props.onChangeText('');
+    this.clear();
   };
+  _root: any;
+  _setRef: any = (c: Object) => {
+    this._root = c;
+  };
+  setNativeProps(...args) {
+    return this._root.setNativeProps(...args);
+  }
+  isFocused(...args) {
+    return this._root.isFocused(...args);
+  }
+
+  clear(...args) {
+    return this._root.clear(...args);
+  }
+
+  focus(...args) {
+    return this._root.focus(...args);
+  }
+
+  blur(...args) {
+    return this._root.blur(...args);
+  }
 
   render() {
     const {
@@ -129,6 +151,7 @@ class SearchBar extends React.Component<Props> {
           selectionColor={colors.primary}
           underlineColorAndroid="transparent"
           returnKeyType="search"
+          ref={this._setRef}
           value={value}
           {...rest}
         />
