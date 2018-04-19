@@ -2,8 +2,8 @@
 
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import ListSection from '../ListSection';
-import ListItem from '../ListItem';
+import ListSection from '../List/ListSection';
+import ListItem from '../List/ListItem';
 
 it('renders list section without title', () => {
   const tree = renderer

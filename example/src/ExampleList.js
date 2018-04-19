@@ -11,6 +11,7 @@ import DialogExample from './DialogExample';
 import DividerExample from './DividerExample';
 import ExampleListRow from './ExampleListRow';
 import FABExample from './FABExample';
+import ListAccordionExample from './ListAccordionExample';
 import ListSectionExample from './ListSectionExample';
 import PaperExample from './PaperExample';
 import ProgressBarExample from './ProgressBarExample';
@@ -37,6 +38,7 @@ export const examples = {
   dialog: DialogExample,
   divider: DividerExample,
   fab: FABExample,
+  listAccordion: ListAccordionExample,
   listSection: ListSectionExample,
   paper: PaperExample,
   progressbar: ProgressBarExample,
