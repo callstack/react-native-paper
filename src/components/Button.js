@@ -40,7 +40,7 @@ type Props = {
    */
   loading?: boolean,
   /**
-   * Name of the icon. Can be a string, an image source or a react component.
+   * Icon to display for the `Button`.
    */
   icon?: IconSource,
   /**

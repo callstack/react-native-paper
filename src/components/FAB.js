@@ -21,10 +21,7 @@ type Props = {
    */
   dark?: boolean,
   /**
-   * Name of the icon. Can be a string (name of `MaterialIcon`),
-   * an object of shape `{ uri: 'https://path.to' }`,
-   * a local image: `require('../path/to/image.png')`,
-   * or a valid React Native component.
+   * Icon to display for the `FAB`.
    */
   icon: IconSource,
   /**

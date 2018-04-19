@@ -93,6 +93,7 @@ const Icon = ({ name, color, size, ...rest }: Props) => {
         },
         styles.container,
       ]}
+      pointerEvents="box-none"
     >
       {(name: any)}
     </View>
