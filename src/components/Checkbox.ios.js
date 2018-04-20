@@ -64,7 +64,7 @@ class Checkbox extends React.Component<Props> {
         onPress={disabled ? undefined : onPress}
         style={styles.container}
       >
-        <View style={[styles.iconContainer, { opacity: checked ? 1 : 0 }]}>
+        <View style={{ opacity: checked ? 1 : 0 }}>
           <Icon
             allowFontScaling={false}
             name="done"
@@ -84,9 +84,6 @@ const styles = StyleSheet.create({
   },
   icon: {
     margin: 6,
-  },
-  iconContainer: {
-    height: 36,
   },
 });
 
