@@ -56,6 +56,7 @@ type Props = {
    */
   onPress?: Function,
   style?: any,
+  contentStyle?: any,
   /**
    * @optional
    */
@@ -123,6 +124,7 @@ class Button extends React.Component<Props, State> {
       children,
       onPress,
       style,
+      contentStyle,
       theme,
     } = this.props;
     const { colors, roundness } = theme;
@@ -181,12 +183,12 @@ class Button extends React.Component<Props, State> {
       .rgb()
       .string();
     const buttonStyle = { backgroundColor, borderRadius: roundness };
-    const touchableStyle = { borderRadius: roundness };
+    const touchableStyle = [{ borderRadius: roundness }, contentStyle];
     const textStyle = { color: textColor, fontFamily };
     const elevation = disabled ? 0 : this.state.elevation;
 
     const content = (
-      <View style={styles.content}>
+      <View style={[styles.content, contentStyle]}>
         {icon && loading !== true ? (
           <Icon name={icon} size={16} color={textColor} style={styles.icon} />
         ) : null}
