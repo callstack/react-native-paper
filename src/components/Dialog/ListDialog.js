@@ -59,7 +59,7 @@ type Props = {
    * - `id`: a string that represents id of changed item.
    * - `value`: a boolean that represents if RadioButton or Checkbox is checked.
    */
-  onChange: (id: string, value?: boolean) => mixed,
+  onChange: (id: string, value: boolean) => mixed,
   /**
    * Array of objects that are transformed on Buttons. Objects should have following properties:
    *
@@ -177,7 +177,7 @@ class ListDialog extends React.Component<Props> {
       >
         <DialogTitle>{title}</DialogTitle>
         <DialogScrollArea
-          style={{ maxHeight: maxHeight || 200, paddingHorizontal: 0 }}
+          style={[styles.scrollArea, { maxHeight: maxHeight || 200 }]}
         >
           <ScrollView>
             <View>
@@ -218,6 +218,9 @@ class ListDialog extends React.Component<Props> {
 }
 
 const styles = StyleSheet.create({
+  scrollArea: {
+    paddingHorizontal: 0,
+  },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
