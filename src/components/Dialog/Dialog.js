@@ -8,6 +8,7 @@ import Paper from '../Paper';
 import DialogActions from './DialogActions';
 import DialogTitle from './DialogTitle';
 import DialogContent from './DialogContent';
+import ProgressDialog from './ProgressDialog';
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types';
 
@@ -87,6 +88,8 @@ class Dialog extends React.Component<DialogProps, void> {
     dismissable: true,
     visible: false,
   };
+
+  static ProgressDialog = ProgressDialog;
 
   render() {
     const {

@@ -33,7 +33,6 @@ export { default as ListItem } from './components/ListItem';
 export { default as Modal } from './components/Modal';
 export { default as Paper } from './components/Paper';
 export { default as ProgressBar } from './components/ProgressBar/ProgressBar';
-export { default as ProgressDialog } from './components/Dialog/ProgressDialog';
 export { default as RadioButton } from './components/RadioButton';
 export { default as RadioButtonGroup } from './components/RadioButtonGroup';
 export { default as Searchbar } from './components/Searchbar';

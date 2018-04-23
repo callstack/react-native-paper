@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { Platform } from 'react-native';
-import { ProgressDialog, Colors } from 'react-native-paper';
+import { Dialog, Colors } from 'react-native-paper';
 
 const isIOS = Platform.OS === 'ios';
 
@@ -13,7 +13,7 @@ const ProgressDialogExample = ({
   visible: boolean,
   close: Function,
 }) => (
-  <ProgressDialog
+  <Dialog.ProgressDialog
     color={Colors.indigo500}
     onDismiss={close}
     visible={visible}

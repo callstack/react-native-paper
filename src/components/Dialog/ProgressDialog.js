@@ -58,7 +58,7 @@ type Props = {
  * ```js
  * import * as React from 'react';
  * import { Platform } from 'react-native';
- * import { ProgressDialog } from 'react-native-paper';
+ * import { Dialog } from 'react-native-paper';
  *
  * const isIOS = Platform.OS === 'ios';
  *
@@ -66,7 +66,7 @@ type Props = {
  *
  *   render() {
  *     return (
- *       <ProgressDialog
+ *       <Dialog.ProgressDialog
  *         onDismiss={() => {}}
  *         size={isIOS ? 'large' : 48}
  *         text="Loading....."
