@@ -5,7 +5,7 @@ import { View, StyleSheet } from 'react-native';
 import {
   Colors,
   withTheme,
-  RadioGroup,
+  RadioButtonGroup,
   RadioButton,
   Paragraph,
 } from 'react-native-paper';
@@ -19,15 +19,19 @@ type State = {
   value: string,
 };
 
-class RadioGroupExample extends React.Component<Props, State> {
-  static title = 'Radio group';
+class RadioButtonGroupExample extends React.Component<Props, State> {
+  static title = 'Radio button group';
 
   state = {
     value: 'first',
   };
 
   render() {
-    const { theme: { colors: { background } } } = this.props;
+    const {
+      theme: {
+        colors: { background },
+      },
+    } = this.props;
     return (
       <View
         style={[
@@ -37,7 +41,7 @@ class RadioGroupExample extends React.Component<Props, State> {
           },
         ]}
       >
-        <RadioGroup
+        <RadioButtonGroup
           value={this.state.value}
           onValueChange={value => this.setState({ value })}
         >
@@ -49,7 +53,7 @@ class RadioGroupExample extends React.Component<Props, State> {
             <Paragraph>Second</Paragraph>
             <RadioButton value="second" />
           </View>
-        </RadioGroup>
+        </RadioButtonGroup>
       </View>
     );
   }
@@ -70,4 +74,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(RadioGroupExample);
+export default withTheme(RadioButtonGroupExample);

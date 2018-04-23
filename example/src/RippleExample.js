@@ -12,7 +12,11 @@ class RippleExample extends React.Component<Props> {
   static title = 'Ripples';
 
   render() {
-    const { theme: { colors: { background } } } = this.props;
+    const {
+      theme: {
+        colors: { background },
+      },
+    } = this.props;
     return (
       <View style={[styles.container, { backgroundColor: background }]}>
         <TouchableRipple

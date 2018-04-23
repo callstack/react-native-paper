@@ -38,20 +38,22 @@ type Props = {
  * );
  * ```
  */
-const Divider = (props: Props) => {
-  const { inset, style, theme } = props;
-  const { dark: isDarkTheme } = theme;
-  return (
-    <View
-      {...props}
-      style={[
-        isDarkTheme ? styles.dark : styles.light,
-        inset && styles.inset,
-        style,
-      ]}
-    />
-  );
-};
+class Divider extends React.Component<Props> {
+  render() {
+    const { inset, style, theme, ...rest } = this.props;
+    const { dark: isDarkTheme } = theme;
+    return (
+      <View
+        {...rest}
+        style={[
+          isDarkTheme ? styles.dark : styles.light,
+          inset && styles.inset,
+          style,
+        ]}
+      />
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   light: {

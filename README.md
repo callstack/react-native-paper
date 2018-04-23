@@ -30,6 +30,10 @@ Refer to the [getting started guide](https://callstack.github.io/react-native-pa
 
 Check the components and their usage in our [documentation](https://callstack.github.io/react-native-paper/index.html).
 
+## Contributing
+
+Read the [contribution guidelines](/CONTRIBUTING.md) before contributing.
+
 <!-- badges -->
 [build-badge]: https://img.shields.io/circleci/project/github/callstack/react-native-paper/master.svg?style=flat-square
 [build]: https://circleci.com/gh/callstack/react-native-paper

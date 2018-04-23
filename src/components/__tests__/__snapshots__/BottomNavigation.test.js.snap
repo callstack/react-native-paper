@@ -25,49 +25,58 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
       ]
     }
   >
-    <AnimatedComponent
-      key="key-0"
+    <View
+      collapsable={undefined}
       pointerEvents="auto"
       style={
-        Array [
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-          Object {
-            "opacity": 1,
-            "transform": Array [
-              Object {
-                "translateY": 0,
-              },
-            ],
-          },
-        ]
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "opacity": 1,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "transform": Array [
+            Object {
+              "translateY": 0,
+            },
+          ],
+        }
       }
     >
       Route: 0
-    </AnimatedComponent>
+    </View>
   </View>
-  <AnimatedComponent
+  <View
+    collapsable={undefined}
     style={
       Array [
         Object {
+          "backgroundColor": "#ffffff",
+        },
+        Object {
+          "backgroundColor": "#ffffff",
+        },
+        Object {
+          "shadowColor": "#000000",
+          "shadowOffset": Object {
+            "height": 7,
+            "width": 0,
+          },
+          "shadowOpacity": 0.24,
+          "shadowRadius": 8,
+        },
+        Object {
           "alignItems": "center",
+          "backgroundColor": "#ffffff",
           "elevation": 8,
           "overflow": "hidden",
           "paddingHorizontal": 20,
         },
-        undefined,
-        Object {
-          "backgroundColor": "#ffffff",
-        },
       ]
     }
   >
-    <SafeAreaView
+    <RCTSafeAreaView
       style={
         Array [
           Object {
@@ -79,488 +88,449 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         ]
       }
     >
-      <AnimatedComponent
+      <View
+        collapsable={undefined}
         pointerEvents="none"
         style={
-          Array [
-            Object {
-              "position": "absolute",
-            },
-            Object {
-              "backgroundColor": "rgba(0, 0, 0, 0.12)",
-              "borderRadius": 48,
-              "height": 96,
-              "left": -54.666666666666664,
-              "opacity": 0.002,
-              "top": -20,
-              "transform": Array [
-                Object {
-                  "translateX": 0,
-                },
-                Object {
-                  "scale": 0.001,
-                },
-              ],
-              "width": 96,
-            },
-          ]
+          Object {
+            "backgroundColor": "rgba(0, 0, 0, 0.12)",
+            "borderRadius": 0,
+            "height": 0,
+            "left": -6.666666666666667,
+            "opacity": 0.002,
+            "position": "absolute",
+            "top": 28,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+              Object {
+                "scale": 0.001,
+              },
+            ],
+            "width": 0,
+          }
         }
       />
-      <TouchableWithoutFeedback
-        key="key-0"
-        onPress={[Function]}
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "paddingVertical": 6,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+            ],
+          }
+        }
+        testID={undefined}
       >
-        <AnimatedComponent
+        <View
+          collapsable={undefined}
           style={
-            Array [
-              Object {
-                "flex": 1,
-                "paddingVertical": 6,
-              },
-              Object {
-                "transform": Array [
-                  Object {
-                    "translateX": 0,
-                  },
-                ],
-              },
-            ]
+            Object {
+              "alignSelf": "center",
+              "height": 24,
+              "marginHorizontal": 12,
+              "transform": Array [
+                Object {
+                  "translateY": 0,
+                },
+              ],
+              "width": 24,
+            }
           }
         >
-          <AnimatedComponent
+          <View
+            collapsable={undefined}
             style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "height": 24,
-                  "marginHorizontal": 12,
-                  "width": 24,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "translateY": 0,
-                    },
-                  ],
-                },
-              ]
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
             }
           >
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 1,
-                  },
-                ]
-              }
+            <icon
+              color="blue"
             >
-              <icon
-                color="blue"
-              >
-                icon-0
-              </icon>
-            </AnimatedComponent>
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 0,
-                  },
-                ]
-              }
-            >
-              <icon
-                color="white"
-              >
-                icon-0
-              </icon>
-            </AnimatedComponent>
-          </AnimatedComponent>
-          <AnimatedComponent
+              3d-rotation
+            </icon>
+          </View>
+          <View
+            collapsable={undefined}
             style={
-              Array [
-                Object {
-                  "height": 18,
-                  "marginTop": 2,
-                  "paddingBottom": 4,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scale": 1,
-                    },
-                    Object {
-                      "translateY": 0,
-                    },
-                  ],
-                },
-              ]
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
             }
           >
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 1,
-                  },
-                ]
-              }
+            <icon
+              color="white"
             >
-              <text
-                color="blue"
-              />
-            </AnimatedComponent>
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 0,
-                  },
-                ]
-              }
-            >
-              <text
-                color="white"
-              />
-            </AnimatedComponent>
-          </AnimatedComponent>
-        </AnimatedComponent>
-      </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback
-        key="key-1"
-        onPress={[Function]}
-      >
-        <AnimatedComponent
+              3d-rotation
+            </icon>
+          </View>
+        </View>
+        <View
+          collapsable={undefined}
           style={
-            Array [
-              Object {
-                "flex": 1,
-                "paddingVertical": 6,
-              },
-              Object {
-                "transform": Array [
-                  Object {
-                    "translateX": 0,
-                  },
-                ],
-              },
-            ]
+            Object {
+              "height": 18,
+              "marginTop": 2,
+              "paddingBottom": 4,
+              "transform": Array [
+                Object {
+                  "scale": 1,
+                },
+                Object {
+                  "translateY": 0,
+                },
+              ],
+            }
           }
         >
-          <AnimatedComponent
+          <View
+            collapsable={undefined}
             style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "height": 24,
-                  "marginHorizontal": 12,
-                  "width": 24,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "translateY": 2,
-                    },
-                  ],
-                },
-              ]
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
             }
           >
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 0,
-                  },
-                ]
-              }
-            >
-              <icon
-                color="blue"
-              >
-                icon-1
-              </icon>
-            </AnimatedComponent>
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 1,
-                  },
-                ]
-              }
-            >
-              <icon
-                color="white"
-              >
-                icon-1
-              </icon>
-            </AnimatedComponent>
-          </AnimatedComponent>
-          <AnimatedComponent
+            <text
+              color="blue"
+            />
+          </View>
+          <View
+            collapsable={undefined}
             style={
-              Array [
-                Object {
-                  "height": 18,
-                  "marginTop": 2,
-                  "paddingBottom": 4,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scale": 0.8571428571428571,
-                    },
-                    Object {
-                      "translateY": 2,
-                    },
-                  ],
-                },
-              ]
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
             }
           >
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 0,
-                  },
-                ]
-              }
-            >
-              <text
-                color="blue"
-              />
-            </AnimatedComponent>
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 1,
-                  },
-                ]
-              }
-            >
-              <text
-                color="white"
-              />
-            </AnimatedComponent>
-          </AnimatedComponent>
-        </AnimatedComponent>
-      </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback
-        key="key-2"
-        onPress={[Function]}
+            <text
+              color="white"
+            />
+          </View>
+        </View>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "paddingVertical": 6,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+            ],
+          }
+        }
+        testID={undefined}
       >
-        <AnimatedComponent
+        <View
+          collapsable={undefined}
           style={
-            Array [
-              Object {
-                "flex": 1,
-                "paddingVertical": 6,
-              },
-              Object {
-                "transform": Array [
-                  Object {
-                    "translateX": 0,
-                  },
-                ],
-              },
-            ]
+            Object {
+              "alignSelf": "center",
+              "height": 24,
+              "marginHorizontal": 12,
+              "transform": Array [
+                Object {
+                  "translateY": 2,
+                },
+              ],
+              "width": 24,
+            }
           }
         >
-          <AnimatedComponent
+          <View
+            collapsable={undefined}
             style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "height": 24,
-                  "marginHorizontal": 12,
-                  "width": 24,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "translateY": 2,
-                    },
-                  ],
-                },
-              ]
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
             }
           >
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 0,
-                  },
-                ]
-              }
+            <icon
+              color="blue"
             >
-              <icon
-                color="blue"
-              >
-                icon-2
-              </icon>
-            </AnimatedComponent>
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 1,
-                  },
-                ]
-              }
-            >
-              <icon
-                color="white"
-              >
-                icon-2
-              </icon>
-            </AnimatedComponent>
-          </AnimatedComponent>
-          <AnimatedComponent
+              ac-unit
+            </icon>
+          </View>
+          <View
+            collapsable={undefined}
             style={
-              Array [
-                Object {
-                  "height": 18,
-                  "marginTop": 2,
-                  "paddingBottom": 4,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scale": 0.8571428571428571,
-                    },
-                    Object {
-                      "translateY": 2,
-                    },
-                  ],
-                },
-              ]
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
             }
           >
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 0,
-                  },
-                ]
-              }
+            <icon
+              color="white"
             >
-              <text
-                color="blue"
-              />
-            </AnimatedComponent>
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 1,
-                  },
-                ]
+              ac-unit
+            </icon>
+          </View>
+        </View>
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "height": 18,
+              "marginTop": 2,
+              "paddingBottom": 4,
+              "transform": Array [
+                Object {
+                  "scale": 0.8571428571428571,
+                },
+                Object {
+                  "translateY": 2,
+                },
+              ],
+            }
+          }
+        >
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
               }
+            }
+          >
+            <text
+              color="blue"
+            />
+          </View>
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <text
+              color="white"
+            />
+          </View>
+        </View>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "paddingVertical": 6,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+            ],
+          }
+        }
+        testID={undefined}
+      >
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "alignSelf": "center",
+              "height": 24,
+              "marginHorizontal": 12,
+              "transform": Array [
+                Object {
+                  "translateY": 2,
+                },
+              ],
+              "width": 24,
+            }
+          }
+        >
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <icon
+              color="blue"
             >
-              <text
-                color="white"
-              />
-            </AnimatedComponent>
-          </AnimatedComponent>
-        </AnimatedComponent>
-      </TouchableWithoutFeedback>
-    </SafeAreaView>
-  </AnimatedComponent>
+              access-alarm
+            </icon>
+          </View>
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <icon
+              color="white"
+            >
+              access-alarm
+            </icon>
+          </View>
+        </View>
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "height": 18,
+              "marginTop": 2,
+              "paddingBottom": 4,
+              "transform": Array [
+                Object {
+                  "scale": 0.8571428571428571,
+                },
+                Object {
+                  "translateY": 2,
+                },
+              ],
+            }
+          }
+        >
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <text
+              color="blue"
+            />
+          </View>
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <text
+              color="white"
+            />
+          </View>
+        </View>
+      </View>
+    </RCTSafeAreaView>
+  </View>
 </View>
 `;
 
@@ -589,49 +559,58 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
       ]
     }
   >
-    <AnimatedComponent
-      key="key-0"
+    <View
+      collapsable={undefined}
       pointerEvents="auto"
       style={
-        Array [
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-          Object {
-            "opacity": 1,
-            "transform": Array [
-              Object {
-                "translateY": 0,
-              },
-            ],
-          },
-        ]
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "opacity": 1,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "transform": Array [
+            Object {
+              "translateY": 0,
+            },
+          ],
+        }
       }
     >
       Route: 0
-    </AnimatedComponent>
+    </View>
   </View>
-  <AnimatedComponent
+  <View
+    collapsable={undefined}
     style={
       Array [
         Object {
+          "backgroundColor": "#ffffff",
+        },
+        Object {
+          "backgroundColor": "#ffffff",
+        },
+        Object {
+          "shadowColor": "#000000",
+          "shadowOffset": Object {
+            "height": 7,
+            "width": 0,
+          },
+          "shadowOpacity": 0.24,
+          "shadowRadius": 8,
+        },
+        Object {
           "alignItems": "center",
+          "backgroundColor": "rgba(63, 81, 181, 1)",
           "elevation": 8,
           "overflow": "hidden",
           "paddingHorizontal": 20,
         },
-        undefined,
-        Object {
-          "backgroundColor": "rgba(63, 81, 181, 1)",
-        },
       ]
     }
   >
-    <SafeAreaView
+    <RCTSafeAreaView
       style={
         Array [
           Object {
@@ -643,602 +622,566 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         ]
       }
     >
-      <AnimatedComponent
+      <View
+        collapsable={undefined}
         pointerEvents="none"
         style={
-          Array [
-            Object {
-              "position": "absolute",
-            },
-            Object {
-              "backgroundColor": undefined,
-              "borderRadius": 0,
-              "height": 0,
-              "left": -4,
-              "opacity": 0,
-              "top": 28,
-              "transform": Array [
-                Object {
-                  "translateX": 10,
-                },
-                Object {
-                  "scale": 0.008,
-                },
-              ],
-              "width": 0,
-            },
-          ]
+          Object {
+            "backgroundColor": undefined,
+            "borderRadius": 0,
+            "height": 0,
+            "left": -4,
+            "opacity": 0,
+            "position": "absolute",
+            "top": 28,
+            "transform": Array [
+              Object {
+                "translateX": 10,
+              },
+              Object {
+                "scale": 0.008,
+              },
+            ],
+            "width": 0,
+          }
         }
       />
-      <AnimatedComponent
+      <View
+        collapsable={undefined}
         pointerEvents="none"
         style={
-          Array [
-            Object {
-              "position": "absolute",
-            },
-            Object {
-              "backgroundColor": "rgba(255, 255, 255, 0.12)",
-              "borderRadius": 48,
-              "height": 96,
-              "left": -52,
-              "opacity": 0.002,
-              "top": -20,
-              "transform": Array [
-                Object {
-                  "translateX": 10,
-                },
-                Object {
-                  "scale": 0.001,
-                },
-              ],
-              "width": 96,
-            },
-          ]
+          Object {
+            "backgroundColor": "rgba(255, 255, 255, 0.12)",
+            "borderRadius": 0,
+            "height": 0,
+            "left": -4,
+            "opacity": 0.002,
+            "position": "absolute",
+            "top": 28,
+            "transform": Array [
+              Object {
+                "translateX": 10,
+              },
+              Object {
+                "scale": 0.001,
+              },
+            ],
+            "width": 0,
+          }
         }
       />
-      <TouchableWithoutFeedback
-        key="key-0"
-        onPress={[Function]}
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "paddingVertical": 6,
+            "transform": Array [
+              Object {
+                "translateX": 10,
+              },
+            ],
+          }
+        }
+        testID={undefined}
       >
-        <AnimatedComponent
+        <View
+          collapsable={undefined}
           style={
-            Array [
-              Object {
-                "flex": 1,
-                "paddingVertical": 6,
-              },
-              Object {
-                "transform": Array [
-                  Object {
-                    "translateX": 10,
-                  },
-                ],
-              },
-            ]
+            Object {
+              "alignSelf": "center",
+              "height": 24,
+              "marginHorizontal": 12,
+              "transform": Array [
+                Object {
+                  "translateY": 0,
+                },
+              ],
+              "width": 24,
+            }
           }
         >
-          <AnimatedComponent
+          <View
+            collapsable={undefined}
             style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "height": 24,
-                  "marginHorizontal": 12,
-                  "width": 24,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "translateY": 0,
-                    },
-                  ],
-                },
-              ]
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
             }
           >
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 1,
-                  },
-                ]
-              }
+            <icon
+              color="blue"
             >
-              <icon
-                color="blue"
-              >
-                icon-0
-              </icon>
-            </AnimatedComponent>
-          </AnimatedComponent>
-          <AnimatedComponent
-            style={
-              Array [
-                Object {
-                  "height": 18,
-                  "marginTop": 2,
-                  "paddingBottom": 4,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scale": 1,
-                    },
-                    Object {
-                      "translateY": 0,
-                    },
-                  ],
-                },
-              ]
-            }
-          >
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 1,
-                  },
-                ]
-              }
-            >
-              <text
-                color="blue"
-              />
-            </AnimatedComponent>
-          </AnimatedComponent>
-        </AnimatedComponent>
-      </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback
-        key="key-1"
-        onPress={[Function]}
-      >
-        <AnimatedComponent
+              3d-rotation
+            </icon>
+          </View>
+        </View>
+        <View
+          collapsable={undefined}
           style={
-            Array [
-              Object {
-                "flex": 1,
-                "paddingVertical": 6,
-              },
-              Object {
-                "transform": Array [
-                  Object {
-                    "translateX": 20,
-                  },
-                ],
-              },
-            ]
+            Object {
+              "height": 18,
+              "marginTop": 2,
+              "paddingBottom": 4,
+              "transform": Array [
+                Object {
+                  "scale": 1,
+                },
+                Object {
+                  "translateY": 0,
+                },
+              ],
+            }
           }
         >
-          <AnimatedComponent
+          <View
+            collapsable={undefined}
             style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "height": 24,
-                  "marginHorizontal": 12,
-                  "width": 24,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "translateY": 10,
-                    },
-                  ],
-                },
-              ]
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
             }
           >
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 0.6,
-                  },
-                ]
-              }
-            >
-              <icon
-                color="blue"
-              >
-                icon-1
-              </icon>
-            </AnimatedComponent>
-          </AnimatedComponent>
-          <AnimatedComponent
-            style={
-              Array [
-                Object {
-                  "height": 18,
-                  "marginTop": 2,
-                  "paddingBottom": 4,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scale": 0.5,
-                    },
-                    Object {
-                      "translateY": 10,
-                    },
-                  ],
-                },
-              ]
-            }
-          >
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 0,
-                  },
-                ]
-              }
-            >
-              <text
-                color="blue"
-              />
-            </AnimatedComponent>
-          </AnimatedComponent>
-        </AnimatedComponent>
-      </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback
-        key="key-2"
-        onPress={[Function]}
+            <text
+              color="blue"
+            />
+          </View>
+        </View>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "paddingVertical": 6,
+            "transform": Array [
+              Object {
+                "translateX": 20,
+              },
+            ],
+          }
+        }
+        testID={undefined}
       >
-        <AnimatedComponent
+        <View
+          collapsable={undefined}
           style={
-            Array [
-              Object {
-                "flex": 1,
-                "paddingVertical": 6,
-              },
-              Object {
-                "transform": Array [
-                  Object {
-                    "translateX": 20,
-                  },
-                ],
-              },
-            ]
+            Object {
+              "alignSelf": "center",
+              "height": 24,
+              "marginHorizontal": 12,
+              "transform": Array [
+                Object {
+                  "translateY": 10,
+                },
+              ],
+              "width": 24,
+            }
           }
         >
-          <AnimatedComponent
+          <View
+            collapsable={undefined}
             style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "height": 24,
-                  "marginHorizontal": 12,
-                  "width": 24,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "translateY": 10,
-                    },
-                  ],
-                },
-              ]
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0.6,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
             }
           >
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 0.6,
-                  },
-                ]
-              }
+            <icon
+              color="blue"
             >
-              <icon
-                color="blue"
-              >
-                icon-2
-              </icon>
-            </AnimatedComponent>
-          </AnimatedComponent>
-          <AnimatedComponent
-            style={
-              Array [
-                Object {
-                  "height": 18,
-                  "marginTop": 2,
-                  "paddingBottom": 4,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scale": 0.5,
-                    },
-                    Object {
-                      "translateY": 10,
-                    },
-                  ],
-                },
-              ]
-            }
-          >
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 0,
-                  },
-                ]
-              }
-            >
-              <text
-                color="blue"
-              />
-            </AnimatedComponent>
-          </AnimatedComponent>
-        </AnimatedComponent>
-      </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback
-        key="key-3"
-        onPress={[Function]}
-      >
-        <AnimatedComponent
+              ac-unit
+            </icon>
+          </View>
+        </View>
+        <View
+          collapsable={undefined}
           style={
-            Array [
-              Object {
-                "flex": 1,
-                "paddingVertical": 6,
-              },
-              Object {
-                "transform": Array [
-                  Object {
-                    "translateX": 20,
-                  },
-                ],
-              },
-            ]
+            Object {
+              "height": 18,
+              "marginTop": 2,
+              "paddingBottom": 4,
+              "transform": Array [
+                Object {
+                  "scale": 0.5,
+                },
+                Object {
+                  "translateY": 10,
+                },
+              ],
+            }
           }
         >
-          <AnimatedComponent
+          <View
+            collapsable={undefined}
             style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "height": 24,
-                  "marginHorizontal": 12,
-                  "width": 24,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "translateY": 10,
-                    },
-                  ],
-                },
-              ]
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
             }
           >
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 0.6,
-                  },
-                ]
-              }
-            >
-              <icon
-                color="blue"
-              >
-                icon-3
-              </icon>
-            </AnimatedComponent>
-          </AnimatedComponent>
-          <AnimatedComponent
-            style={
-              Array [
-                Object {
-                  "height": 18,
-                  "marginTop": 2,
-                  "paddingBottom": 4,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scale": 0.5,
-                    },
-                    Object {
-                      "translateY": 10,
-                    },
-                  ],
-                },
-              ]
-            }
-          >
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 0,
-                  },
-                ]
-              }
-            >
-              <text
-                color="blue"
-              />
-            </AnimatedComponent>
-          </AnimatedComponent>
-        </AnimatedComponent>
-      </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback
-        key="key-4"
-        onPress={[Function]}
+            <text
+              color="blue"
+            />
+          </View>
+        </View>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "paddingVertical": 6,
+            "transform": Array [
+              Object {
+                "translateX": 20,
+              },
+            ],
+          }
+        }
+        testID={undefined}
       >
-        <AnimatedComponent
+        <View
+          collapsable={undefined}
           style={
-            Array [
-              Object {
-                "flex": 1,
-                "paddingVertical": 6,
-              },
-              Object {
-                "transform": Array [
-                  Object {
-                    "translateX": 20,
-                  },
-                ],
-              },
-            ]
+            Object {
+              "alignSelf": "center",
+              "height": 24,
+              "marginHorizontal": 12,
+              "transform": Array [
+                Object {
+                  "translateY": 10,
+                },
+              ],
+              "width": 24,
+            }
           }
         >
-          <AnimatedComponent
+          <View
+            collapsable={undefined}
             style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "height": 24,
-                  "marginHorizontal": 12,
-                  "width": 24,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "translateY": 10,
-                    },
-                  ],
-                },
-              ]
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0.6,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
             }
           >
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 0.6,
-                  },
-                ]
-              }
+            <icon
+              color="blue"
             >
-              <icon
-                color="blue"
-              >
-                icon-4
-              </icon>
-            </AnimatedComponent>
-          </AnimatedComponent>
-          <AnimatedComponent
+              access-alarm
+            </icon>
+          </View>
+        </View>
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "height": 18,
+              "marginTop": 2,
+              "paddingBottom": 4,
+              "transform": Array [
+                Object {
+                  "scale": 0.5,
+                },
+                Object {
+                  "translateY": 10,
+                },
+              ],
+            }
+          }
+        >
+          <View
+            collapsable={undefined}
             style={
-              Array [
-                Object {
-                  "height": 18,
-                  "marginTop": 2,
-                  "paddingBottom": 4,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scale": 0.5,
-                    },
-                    Object {
-                      "translateY": 10,
-                    },
-                  ],
-                },
-              ]
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
             }
           >
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 0,
-                  },
-                ]
+            <text
+              color="blue"
+            />
+          </View>
+        </View>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "paddingVertical": 6,
+            "transform": Array [
+              Object {
+                "translateX": 20,
+              },
+            ],
+          }
+        }
+        testID={undefined}
+      >
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "alignSelf": "center",
+              "height": 24,
+              "marginHorizontal": 12,
+              "transform": Array [
+                Object {
+                  "translateY": 10,
+                },
+              ],
+              "width": 24,
+            }
+          }
+        >
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0.6,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
               }
+            }
+          >
+            <icon
+              color="blue"
             >
-              <text
-                color="blue"
-              />
-            </AnimatedComponent>
-          </AnimatedComponent>
-        </AnimatedComponent>
-      </TouchableWithoutFeedback>
-    </SafeAreaView>
-  </AnimatedComponent>
+              access-alarms
+            </icon>
+          </View>
+        </View>
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "height": 18,
+              "marginTop": 2,
+              "paddingBottom": 4,
+              "transform": Array [
+                Object {
+                  "scale": 0.5,
+                },
+                Object {
+                  "translateY": 10,
+                },
+              ],
+            }
+          }
+        >
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <text
+              color="blue"
+            />
+          </View>
+        </View>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "paddingVertical": 6,
+            "transform": Array [
+              Object {
+                "translateX": 20,
+              },
+            ],
+          }
+        }
+        testID={undefined}
+      >
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "alignSelf": "center",
+              "height": 24,
+              "marginHorizontal": 12,
+              "transform": Array [
+                Object {
+                  "translateY": 10,
+                },
+              ],
+              "width": 24,
+            }
+          }
+        >
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0.6,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <icon
+              color="blue"
+            >
+              access-time
+            </icon>
+          </View>
+        </View>
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "height": 18,
+              "marginTop": 2,
+              "paddingBottom": 4,
+              "transform": Array [
+                Object {
+                  "scale": 0.5,
+                },
+                Object {
+                  "translateY": 10,
+                },
+              ],
+            }
+          }
+        >
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <text
+              color="blue"
+            />
+          </View>
+        </View>
+      </View>
+    </RCTSafeAreaView>
+  </View>
 </View>
 `;
 
@@ -1267,49 +1210,58 @@ exports[`renders non-shifting bottom navigation 1`] = `
       ]
     }
   >
-    <AnimatedComponent
-      key="key-0"
+    <View
+      collapsable={undefined}
       pointerEvents="auto"
       style={
-        Array [
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-          Object {
-            "opacity": 1,
-            "transform": Array [
-              Object {
-                "translateY": 0,
-              },
-            ],
-          },
-        ]
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "opacity": 1,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "transform": Array [
+            Object {
+              "translateY": 0,
+            },
+          ],
+        }
       }
     >
       Route: 0
-    </AnimatedComponent>
+    </View>
   </View>
-  <AnimatedComponent
+  <View
+    collapsable={undefined}
     style={
       Array [
         Object {
+          "backgroundColor": "#ffffff",
+        },
+        Object {
+          "backgroundColor": "#ffffff",
+        },
+        Object {
+          "shadowColor": "#000000",
+          "shadowOffset": Object {
+            "height": 7,
+            "width": 0,
+          },
+          "shadowOpacity": 0.24,
+          "shadowRadius": 8,
+        },
+        Object {
           "alignItems": "center",
+          "backgroundColor": "#ffffff",
           "elevation": 8,
           "overflow": "hidden",
           "paddingHorizontal": 20,
         },
-        undefined,
-        Object {
-          "backgroundColor": "#ffffff",
-        },
       ]
     }
   >
-    <SafeAreaView
+    <RCTSafeAreaView
       style={
         Array [
           Object {
@@ -1321,596 +1273,797 @@ exports[`renders non-shifting bottom navigation 1`] = `
         ]
       }
     >
-      <AnimatedComponent
+      <View
+        collapsable={undefined}
         pointerEvents="none"
         style={
-          Array [
-            Object {
-              "position": "absolute",
-            },
-            Object {
-              "backgroundColor": "rgba(0, 0, 0, 0.12)",
-              "borderRadius": 48,
-              "height": 96,
-              "left": -54.666666666666664,
-              "opacity": 0.002,
-              "top": -20,
-              "transform": Array [
-                Object {
-                  "translateX": 0,
-                },
-                Object {
-                  "scale": 0.001,
-                },
-              ],
-              "width": 96,
-            },
-          ]
+          Object {
+            "backgroundColor": "rgba(0, 0, 0, 0.12)",
+            "borderRadius": 0,
+            "height": 0,
+            "left": -6.666666666666667,
+            "opacity": 0.002,
+            "position": "absolute",
+            "top": 28,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+              Object {
+                "scale": 0.001,
+              },
+            ],
+            "width": 0,
+          }
         }
       />
-      <TouchableWithoutFeedback
-        key="key-0"
-        onPress={[Function]}
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "paddingVertical": 6,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+            ],
+          }
+        }
+        testID={undefined}
       >
-        <AnimatedComponent
+        <View
+          collapsable={undefined}
           style={
-            Array [
-              Object {
-                "flex": 1,
-                "paddingVertical": 6,
-              },
-              Object {
-                "transform": Array [
-                  Object {
-                    "translateX": 0,
-                  },
-                ],
-              },
-            ]
+            Object {
+              "alignSelf": "center",
+              "height": 24,
+              "marginHorizontal": 12,
+              "transform": Array [
+                Object {
+                  "translateY": 0,
+                },
+              ],
+              "width": 24,
+            }
           }
         >
-          <AnimatedComponent
+          <View
+            collapsable={undefined}
             style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "height": 24,
-                  "marginHorizontal": 12,
-                  "width": 24,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "translateY": 0,
-                    },
-                  ],
-                },
-              ]
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
             }
           >
-            <AnimatedComponent
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
               style={
                 Array [
                   Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
+                    "color": "#3f51b5",
+                    "fontSize": 24,
                   },
                   Object {
-                    "opacity": 1,
+                    "backgroundColor": "transparent",
+                  },
+                  Object {
+                    "fontFamily": "Material Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
                   },
                 ]
               }
             >
-              <Icon
-                color="#3f51b5"
-                name="icon-0"
-                size={24}
-                style={
-                  Object {
-                    "backgroundColor": "transparent",
-                  }
-                }
-              />
-            </AnimatedComponent>
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 0,
-                  },
-                ]
-              }
-            >
-              <Icon
-                color="rgba(0, 0, 0, 0.5)"
-                name="icon-0"
-                size={24}
-                style={
-                  Object {
-                    "backgroundColor": "transparent",
-                  }
-                }
-              />
-            </AnimatedComponent>
-          </AnimatedComponent>
-          <AnimatedComponent
+              
+            </Text>
+          </View>
+          <View
+            collapsable={undefined}
             style={
-              Array [
-                Object {
-                  "height": 18,
-                  "marginTop": 2,
-                  "paddingBottom": 4,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scale": 1,
-                    },
-                    Object {
-                      "translateY": 0,
-                    },
-                  ],
-                },
-              ]
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
             }
           >
-            <AnimatedComponent
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
               style={
                 Array [
                   Object {
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
+                    "color": "rgba(0, 0, 0, 0.5)",
+                    "fontSize": 24,
                   },
                   Object {
-                    "opacity": 1,
+                    "backgroundColor": "transparent",
+                  },
+                  Object {
+                    "fontFamily": "Material Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
                   },
                 ]
               }
             >
-              <AnimatedComponent
-                style={
-                  Array [
-                    Object {
-                      "backgroundColor": "transparent",
-                      "fontSize": 13,
-                      "textAlign": "center",
-                    },
-                    Object {
-                      "color": "#3f51b5",
-                    },
-                  ]
-                }
-              >
-                Route: 0
-              </AnimatedComponent>
-            </AnimatedComponent>
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 0,
-                  },
-                ]
-              }
-            >
-              <AnimatedComponent
-                style={
-                  Array [
-                    Object {
-                      "backgroundColor": "transparent",
-                      "fontSize": 13,
-                      "textAlign": "center",
-                    },
-                    Object {
-                      "color": "rgba(0, 0, 0, 0.5)",
-                    },
-                  ]
-                }
-              >
-                Route: 0
-              </AnimatedComponent>
-            </AnimatedComponent>
-          </AnimatedComponent>
-        </AnimatedComponent>
-      </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback
-        key="key-1"
-        onPress={[Function]}
-      >
-        <AnimatedComponent
+              
+            </Text>
+          </View>
+        </View>
+        <View
+          collapsable={undefined}
           style={
-            Array [
-              Object {
-                "flex": 1,
-                "paddingVertical": 6,
-              },
-              Object {
-                "transform": Array [
-                  Object {
-                    "translateX": 0,
-                  },
-                ],
-              },
-            ]
+            Object {
+              "height": 18,
+              "marginTop": 2,
+              "paddingBottom": 4,
+              "transform": Array [
+                Object {
+                  "scale": 1,
+                },
+                Object {
+                  "translateY": 0,
+                },
+              ],
+            }
           }
         >
-          <AnimatedComponent
+          <View
+            collapsable={undefined}
             style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "height": 24,
-                  "marginHorizontal": 12,
-                  "width": 24,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "translateY": 2,
-                    },
-                  ],
-                },
-              ]
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
             }
           >
-            <AnimatedComponent
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              collapsable={undefined}
+              ellipsizeMode="tail"
               style={
                 Array [
                   Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
+                    "color": "#000000",
+                    "fontFamily": "Helvetica Neue",
                   },
                   Object {
-                    "opacity": 0,
+                    "backgroundColor": "transparent",
+                    "color": "#3f51b5",
+                    "fontSize": 13,
+                    "textAlign": "center",
                   },
                 ]
               }
-            >
-              <Icon
-                color="#3f51b5"
-                name="icon-1"
-                size={24}
-                style={
-                  Object {
-                    "backgroundColor": "transparent",
-                  }
+              theme={
+                Object {
+                  "colors": Object {
+                    "accent": "#ff4081",
+                    "background": "#fafafa",
+                    "disabled": "rgba(0, 0, 0, 0.26)",
+                    "paper": "#ffffff",
+                    "placeholder": "rgba(0, 0, 0, 0.38)",
+                    "primary": "#3f51b5",
+                    "text": "#000000",
+                  },
+                  "dark": false,
+                  "fonts": Object {
+                    "light": "HelveticaNeue-Light",
+                    "medium": "HelveticaNeue-Medium",
+                    "regular": "Helvetica Neue",
+                    "thin": "HelveticaNeue-Thin",
+                  },
+                  "roundness": 2,
                 }
-              />
-            </AnimatedComponent>
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 1,
-                  },
-                ]
               }
             >
-              <Icon
-                color="rgba(0, 0, 0, 0.5)"
-                name="icon-1"
-                size={24}
-                style={
-                  Object {
-                    "backgroundColor": "transparent",
-                  }
-                }
-              />
-            </AnimatedComponent>
-          </AnimatedComponent>
-          <AnimatedComponent
+              Route: 0
+            </Text>
+          </View>
+          <View
+            collapsable={undefined}
             style={
-              Array [
-                Object {
-                  "height": 18,
-                  "marginTop": 2,
-                  "paddingBottom": 4,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scale": 0.8571428571428571,
-                    },
-                    Object {
-                      "translateY": 2,
-                    },
-                  ],
-                },
-              ]
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
             }
           >
-            <AnimatedComponent
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              collapsable={undefined}
+              ellipsizeMode="tail"
               style={
                 Array [
                   Object {
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
+                    "color": "#000000",
+                    "fontFamily": "Helvetica Neue",
                   },
                   Object {
-                    "opacity": 0,
+                    "backgroundColor": "transparent",
+                    "color": "rgba(0, 0, 0, 0.5)",
+                    "fontSize": 13,
+                    "textAlign": "center",
                   },
                 ]
               }
-            >
-              <AnimatedComponent
-                style={
-                  Array [
-                    Object {
-                      "backgroundColor": "transparent",
-                      "fontSize": 13,
-                      "textAlign": "center",
-                    },
-                    Object {
-                      "color": "#3f51b5",
-                    },
-                  ]
+              theme={
+                Object {
+                  "colors": Object {
+                    "accent": "#ff4081",
+                    "background": "#fafafa",
+                    "disabled": "rgba(0, 0, 0, 0.26)",
+                    "paper": "#ffffff",
+                    "placeholder": "rgba(0, 0, 0, 0.38)",
+                    "primary": "#3f51b5",
+                    "text": "#000000",
+                  },
+                  "dark": false,
+                  "fonts": Object {
+                    "light": "HelveticaNeue-Light",
+                    "medium": "HelveticaNeue-Medium",
+                    "regular": "Helvetica Neue",
+                    "thin": "HelveticaNeue-Thin",
+                  },
+                  "roundness": 2,
                 }
-              >
-                Route: 1
-              </AnimatedComponent>
-            </AnimatedComponent>
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 1,
-                  },
-                ]
               }
             >
-              <AnimatedComponent
-                style={
-                  Array [
-                    Object {
-                      "backgroundColor": "transparent",
-                      "fontSize": 13,
-                      "textAlign": "center",
-                    },
-                    Object {
-                      "color": "rgba(0, 0, 0, 0.5)",
-                    },
-                  ]
-                }
-              >
-                Route: 1
-              </AnimatedComponent>
-            </AnimatedComponent>
-          </AnimatedComponent>
-        </AnimatedComponent>
-      </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback
-        key="key-2"
-        onPress={[Function]}
+              Route: 0
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "paddingVertical": 6,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+            ],
+          }
+        }
+        testID={undefined}
       >
-        <AnimatedComponent
+        <View
+          collapsable={undefined}
           style={
-            Array [
-              Object {
-                "flex": 1,
-                "paddingVertical": 6,
-              },
-              Object {
-                "transform": Array [
-                  Object {
-                    "translateX": 0,
-                  },
-                ],
-              },
-            ]
+            Object {
+              "alignSelf": "center",
+              "height": 24,
+              "marginHorizontal": 12,
+              "transform": Array [
+                Object {
+                  "translateY": 2,
+                },
+              ],
+              "width": 24,
+            }
           }
         >
-          <AnimatedComponent
+          <View
+            collapsable={undefined}
             style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "height": 24,
-                  "marginHorizontal": 12,
-                  "width": 24,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "translateY": 2,
-                    },
-                  ],
-                },
-              ]
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
             }
           >
-            <AnimatedComponent
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
               style={
                 Array [
                   Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
+                    "color": "#3f51b5",
+                    "fontSize": 24,
                   },
                   Object {
-                    "opacity": 0,
+                    "backgroundColor": "transparent",
+                  },
+                  Object {
+                    "fontFamily": "Material Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
                   },
                 ]
               }
             >
-              <Icon
-                color="#3f51b5"
-                name="icon-2"
-                size={24}
-                style={
-                  Object {
-                    "backgroundColor": "transparent",
-                  }
-                }
-              />
-            </AnimatedComponent>
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 1,
-                  },
-                ]
-              }
-            >
-              <Icon
-                color="rgba(0, 0, 0, 0.5)"
-                name="icon-2"
-                size={24}
-                style={
-                  Object {
-                    "backgroundColor": "transparent",
-                  }
-                }
-              />
-            </AnimatedComponent>
-          </AnimatedComponent>
-          <AnimatedComponent
+              
+            </Text>
+          </View>
+          <View
+            collapsable={undefined}
             style={
-              Array [
-                Object {
-                  "height": 18,
-                  "marginTop": 2,
-                  "paddingBottom": 4,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scale": 0.8571428571428571,
-                    },
-                    Object {
-                      "translateY": 2,
-                    },
-                  ],
-                },
-              ]
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
             }
           >
-            <AnimatedComponent
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
               style={
                 Array [
                   Object {
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
+                    "color": "rgba(0, 0, 0, 0.5)",
+                    "fontSize": 24,
                   },
                   Object {
-                    "opacity": 0,
+                    "backgroundColor": "transparent",
+                  },
+                  Object {
+                    "fontFamily": "Material Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
                   },
                 ]
               }
             >
-              <AnimatedComponent
-                style={
-                  Array [
-                    Object {
-                      "backgroundColor": "transparent",
-                      "fontSize": 13,
-                      "textAlign": "center",
-                    },
-                    Object {
-                      "color": "#3f51b5",
-                    },
-                  ]
-                }
-              >
-                Route: 2
-              </AnimatedComponent>
-            </AnimatedComponent>
-            <AnimatedComponent
+              
+            </Text>
+          </View>
+        </View>
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "height": 18,
+              "marginTop": 2,
+              "paddingBottom": 4,
+              "transform": Array [
+                Object {
+                  "scale": 0.8571428571428571,
+                },
+                Object {
+                  "translateY": 2,
+                },
+              ],
+            }
+          }
+        >
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              collapsable={undefined}
+              ellipsizeMode="tail"
               style={
                 Array [
                   Object {
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
+                    "color": "#000000",
+                    "fontFamily": "Helvetica Neue",
                   },
                   Object {
-                    "opacity": 1,
+                    "backgroundColor": "transparent",
+                    "color": "#3f51b5",
+                    "fontSize": 13,
+                    "textAlign": "center",
+                  },
+                ]
+              }
+              theme={
+                Object {
+                  "colors": Object {
+                    "accent": "#ff4081",
+                    "background": "#fafafa",
+                    "disabled": "rgba(0, 0, 0, 0.26)",
+                    "paper": "#ffffff",
+                    "placeholder": "rgba(0, 0, 0, 0.38)",
+                    "primary": "#3f51b5",
+                    "text": "#000000",
+                  },
+                  "dark": false,
+                  "fonts": Object {
+                    "light": "HelveticaNeue-Light",
+                    "medium": "HelveticaNeue-Medium",
+                    "regular": "Helvetica Neue",
+                    "thin": "HelveticaNeue-Thin",
+                  },
+                  "roundness": 2,
+                }
+              }
+            >
+              Route: 1
+            </Text>
+          </View>
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              collapsable={undefined}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "Helvetica Neue",
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                    "color": "rgba(0, 0, 0, 0.5)",
+                    "fontSize": 13,
+                    "textAlign": "center",
+                  },
+                ]
+              }
+              theme={
+                Object {
+                  "colors": Object {
+                    "accent": "#ff4081",
+                    "background": "#fafafa",
+                    "disabled": "rgba(0, 0, 0, 0.26)",
+                    "paper": "#ffffff",
+                    "placeholder": "rgba(0, 0, 0, 0.38)",
+                    "primary": "#3f51b5",
+                    "text": "#000000",
+                  },
+                  "dark": false,
+                  "fonts": Object {
+                    "light": "HelveticaNeue-Light",
+                    "medium": "HelveticaNeue-Medium",
+                    "regular": "Helvetica Neue",
+                    "thin": "HelveticaNeue-Thin",
+                  },
+                  "roundness": 2,
+                }
+              }
+            >
+              Route: 1
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "paddingVertical": 6,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+            ],
+          }
+        }
+        testID={undefined}
+      >
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "alignSelf": "center",
+              "height": 24,
+              "marginHorizontal": 12,
+              "transform": Array [
+                Object {
+                  "translateY": 2,
+                },
+              ],
+              "width": 24,
+            }
+          }
+        >
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#3f51b5",
+                    "fontSize": 24,
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                  Object {
+                    "fontFamily": "Material Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
                   },
                 ]
               }
             >
-              <AnimatedComponent
-                style={
-                  Array [
-                    Object {
-                      "backgroundColor": "transparent",
-                      "fontSize": 13,
-                      "textAlign": "center",
-                    },
-                    Object {
-                      "color": "rgba(0, 0, 0, 0.5)",
-                    },
-                  ]
+              
+            </Text>
+          </View>
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "rgba(0, 0, 0, 0.5)",
+                    "fontSize": 24,
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                  Object {
+                    "fontFamily": "Material Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                ]
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "height": 18,
+              "marginTop": 2,
+              "paddingBottom": 4,
+              "transform": Array [
+                Object {
+                  "scale": 0.8571428571428571,
+                },
+                Object {
+                  "translateY": 2,
+                },
+              ],
+            }
+          }
+        >
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              collapsable={undefined}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "Helvetica Neue",
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                    "color": "#3f51b5",
+                    "fontSize": 13,
+                    "textAlign": "center",
+                  },
+                ]
+              }
+              theme={
+                Object {
+                  "colors": Object {
+                    "accent": "#ff4081",
+                    "background": "#fafafa",
+                    "disabled": "rgba(0, 0, 0, 0.26)",
+                    "paper": "#ffffff",
+                    "placeholder": "rgba(0, 0, 0, 0.38)",
+                    "primary": "#3f51b5",
+                    "text": "#000000",
+                  },
+                  "dark": false,
+                  "fonts": Object {
+                    "light": "HelveticaNeue-Light",
+                    "medium": "HelveticaNeue-Medium",
+                    "regular": "Helvetica Neue",
+                    "thin": "HelveticaNeue-Thin",
+                  },
+                  "roundness": 2,
                 }
-              >
-                Route: 2
-              </AnimatedComponent>
-            </AnimatedComponent>
-          </AnimatedComponent>
-        </AnimatedComponent>
-      </TouchableWithoutFeedback>
-    </SafeAreaView>
-  </AnimatedComponent>
+              }
+            >
+              Route: 2
+            </Text>
+          </View>
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              collapsable={undefined}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "Helvetica Neue",
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                    "color": "rgba(0, 0, 0, 0.5)",
+                    "fontSize": 13,
+                    "textAlign": "center",
+                  },
+                ]
+              }
+              theme={
+                Object {
+                  "colors": Object {
+                    "accent": "#ff4081",
+                    "background": "#fafafa",
+                    "disabled": "rgba(0, 0, 0, 0.26)",
+                    "paper": "#ffffff",
+                    "placeholder": "rgba(0, 0, 0, 0.38)",
+                    "primary": "#3f51b5",
+                    "text": "#000000",
+                  },
+                  "dark": false,
+                  "fonts": Object {
+                    "light": "HelveticaNeue-Light",
+                    "medium": "HelveticaNeue-Medium",
+                    "regular": "Helvetica Neue",
+                    "thin": "HelveticaNeue-Thin",
+                  },
+                  "roundness": 2,
+                }
+              }
+            >
+              Route: 2
+            </Text>
+          </View>
+        </View>
+      </View>
+    </RCTSafeAreaView>
+  </View>
 </View>
 `;
 
@@ -1939,49 +2092,58 @@ exports[`renders shifting bottom navigation 1`] = `
       ]
     }
   >
-    <AnimatedComponent
-      key="key-0"
+    <View
+      collapsable={undefined}
       pointerEvents="auto"
       style={
-        Array [
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-          Object {
-            "opacity": 1,
-            "transform": Array [
-              Object {
-                "translateY": 0,
-              },
-            ],
-          },
-        ]
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "opacity": 1,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "transform": Array [
+            Object {
+              "translateY": 0,
+            },
+          ],
+        }
       }
     >
       Route: 0
-    </AnimatedComponent>
+    </View>
   </View>
-  <AnimatedComponent
+  <View
+    collapsable={undefined}
     style={
       Array [
         Object {
+          "backgroundColor": "#ffffff",
+        },
+        Object {
+          "backgroundColor": "#ffffff",
+        },
+        Object {
+          "shadowColor": "#000000",
+          "shadowOffset": Object {
+            "height": 7,
+            "width": 0,
+          },
+          "shadowOpacity": 0.24,
+          "shadowRadius": 8,
+        },
+        Object {
           "alignItems": "center",
+          "backgroundColor": "rgba(63, 81, 181, 1)",
           "elevation": 8,
           "overflow": "hidden",
           "paddingHorizontal": 20,
         },
-        undefined,
-        Object {
-          "backgroundColor": "rgba(63, 81, 181, 1)",
-        },
       ]
     }
   >
-    <SafeAreaView
+    <RCTSafeAreaView
       style={
         Array [
           Object {
@@ -1993,691 +2155,855 @@ exports[`renders shifting bottom navigation 1`] = `
         ]
       }
     >
-      <AnimatedComponent
+      <View
+        collapsable={undefined}
         pointerEvents="none"
         style={
-          Array [
-            Object {
-              "position": "absolute",
-            },
-            Object {
-              "backgroundColor": undefined,
-              "borderRadius": 0,
-              "height": 0,
-              "left": -4,
-              "opacity": 0,
-              "top": 28,
-              "transform": Array [
-                Object {
-                  "translateX": 10,
-                },
-                Object {
-                  "scale": 0.008,
-                },
-              ],
-              "width": 0,
-            },
-          ]
+          Object {
+            "backgroundColor": undefined,
+            "borderRadius": 0,
+            "height": 0,
+            "left": -4,
+            "opacity": 0,
+            "position": "absolute",
+            "top": 28,
+            "transform": Array [
+              Object {
+                "translateX": 10,
+              },
+              Object {
+                "scale": 0.008,
+              },
+            ],
+            "width": 0,
+          }
         }
       />
-      <AnimatedComponent
+      <View
+        collapsable={undefined}
         pointerEvents="none"
         style={
-          Array [
-            Object {
-              "position": "absolute",
-            },
-            Object {
-              "backgroundColor": "rgba(255, 255, 255, 0.12)",
-              "borderRadius": 48,
-              "height": 96,
-              "left": -52,
-              "opacity": 0.002,
-              "top": -20,
-              "transform": Array [
-                Object {
-                  "translateX": 10,
-                },
-                Object {
-                  "scale": 0.001,
-                },
-              ],
-              "width": 96,
-            },
-          ]
+          Object {
+            "backgroundColor": "rgba(255, 255, 255, 0.12)",
+            "borderRadius": 0,
+            "height": 0,
+            "left": -4,
+            "opacity": 0.002,
+            "position": "absolute",
+            "top": 28,
+            "transform": Array [
+              Object {
+                "translateX": 10,
+              },
+              Object {
+                "scale": 0.001,
+              },
+            ],
+            "width": 0,
+          }
         }
       />
-      <TouchableWithoutFeedback
-        key="key-0"
-        onPress={[Function]}
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "paddingVertical": 6,
+            "transform": Array [
+              Object {
+                "translateX": 10,
+              },
+            ],
+          }
+        }
+        testID={undefined}
       >
-        <AnimatedComponent
+        <View
+          collapsable={undefined}
           style={
-            Array [
-              Object {
-                "flex": 1,
-                "paddingVertical": 6,
-              },
-              Object {
-                "transform": Array [
-                  Object {
-                    "translateX": 10,
-                  },
-                ],
-              },
-            ]
+            Object {
+              "alignSelf": "center",
+              "height": 24,
+              "marginHorizontal": 12,
+              "transform": Array [
+                Object {
+                  "translateY": 0,
+                },
+              ],
+              "width": 24,
+            }
           }
         >
-          <AnimatedComponent
+          <View
+            collapsable={undefined}
             style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "height": 24,
-                  "marginHorizontal": 12,
-                  "width": 24,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "translateY": 0,
-                    },
-                  ],
-                },
-              ]
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
             }
           >
-            <AnimatedComponent
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
               style={
                 Array [
                   Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
+                    "color": "#ffffff",
+                    "fontSize": 24,
                   },
-                  Object {
-                    "opacity": 1,
-                  },
-                ]
-              }
-            >
-              <Icon
-                color="#ffffff"
-                name="icon-0"
-                size={24}
-                style={
                   Object {
                     "backgroundColor": "transparent",
-                  }
-                }
-              />
-            </AnimatedComponent>
-          </AnimatedComponent>
-          <AnimatedComponent
-            style={
-              Array [
-                Object {
-                  "height": 18,
-                  "marginTop": 2,
-                  "paddingBottom": 4,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scale": 1,
-                    },
-                    Object {
-                      "translateY": 0,
-                    },
-                  ],
-                },
-              ]
-            }
-          >
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
                   },
                   Object {
-                    "opacity": 1,
+                    "fontFamily": "Material Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
                   },
                 ]
               }
             >
-              <AnimatedComponent
-                style={
-                  Array [
-                    Object {
-                      "backgroundColor": "transparent",
-                      "fontSize": 13,
-                      "textAlign": "center",
-                    },
-                    Object {
-                      "color": "#ffffff",
-                    },
-                  ]
-                }
-              >
-                Route: 0
-              </AnimatedComponent>
-            </AnimatedComponent>
-          </AnimatedComponent>
-        </AnimatedComponent>
-      </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback
-        key="key-1"
-        onPress={[Function]}
-      >
-        <AnimatedComponent
+              
+            </Text>
+          </View>
+        </View>
+        <View
+          collapsable={undefined}
           style={
-            Array [
-              Object {
-                "flex": 1,
-                "paddingVertical": 6,
-              },
-              Object {
-                "transform": Array [
-                  Object {
-                    "translateX": 20,
-                  },
-                ],
-              },
-            ]
+            Object {
+              "height": 18,
+              "marginTop": 2,
+              "paddingBottom": 4,
+              "transform": Array [
+                Object {
+                  "scale": 1,
+                },
+                Object {
+                  "translateY": 0,
+                },
+              ],
+            }
           }
         >
-          <AnimatedComponent
+          <View
+            collapsable={undefined}
             style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "height": 24,
-                  "marginHorizontal": 12,
-                  "width": 24,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "translateY": 10,
-                    },
-                  ],
-                },
-              ]
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
             }
           >
-            <AnimatedComponent
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              collapsable={undefined}
+              ellipsizeMode="tail"
               style={
                 Array [
                   Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
+                    "color": "#000000",
+                    "fontFamily": "Helvetica Neue",
                   },
-                  Object {
-                    "opacity": 0.6,
-                  },
-                ]
-              }
-            >
-              <Icon
-                color="#ffffff"
-                name="icon-1"
-                size={24}
-                style={
                   Object {
                     "backgroundColor": "transparent",
-                  }
-                }
-              />
-            </AnimatedComponent>
-          </AnimatedComponent>
-          <AnimatedComponent
-            style={
-              Array [
-                Object {
-                  "height": 18,
-                  "marginTop": 2,
-                  "paddingBottom": 4,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scale": 0.5,
-                    },
-                    Object {
-                      "translateY": 10,
-                    },
-                  ],
-                },
-              ]
-            }
-          >
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 0,
+                    "color": "#ffffff",
+                    "fontSize": 13,
+                    "textAlign": "center",
                   },
                 ]
               }
-            >
-              <AnimatedComponent
-                style={
-                  Array [
-                    Object {
-                      "backgroundColor": "transparent",
-                      "fontSize": 13,
-                      "textAlign": "center",
-                    },
-                    Object {
-                      "color": "#ffffff",
-                    },
-                  ]
-                }
-              >
-                Route: 1
-              </AnimatedComponent>
-            </AnimatedComponent>
-          </AnimatedComponent>
-        </AnimatedComponent>
-      </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback
-        key="key-2"
-        onPress={[Function]}
-      >
-        <AnimatedComponent
-          style={
-            Array [
-              Object {
-                "flex": 1,
-                "paddingVertical": 6,
-              },
-              Object {
-                "transform": Array [
-                  Object {
-                    "translateX": 20,
+              theme={
+                Object {
+                  "colors": Object {
+                    "accent": "#ff4081",
+                    "background": "#fafafa",
+                    "disabled": "rgba(0, 0, 0, 0.26)",
+                    "paper": "#ffffff",
+                    "placeholder": "rgba(0, 0, 0, 0.38)",
+                    "primary": "#3f51b5",
+                    "text": "#000000",
                   },
-                ],
+                  "dark": false,
+                  "fonts": Object {
+                    "light": "HelveticaNeue-Light",
+                    "medium": "HelveticaNeue-Medium",
+                    "regular": "Helvetica Neue",
+                    "thin": "HelveticaNeue-Thin",
+                  },
+                  "roundness": 2,
+                }
+              }
+            >
+              Route: 0
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "paddingVertical": 6,
+            "transform": Array [
+              Object {
+                "translateX": 20,
               },
-            ]
+            ],
+          }
+        }
+        testID={undefined}
+      >
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "alignSelf": "center",
+              "height": 24,
+              "marginHorizontal": 12,
+              "transform": Array [
+                Object {
+                  "translateY": 10,
+                },
+              ],
+              "width": 24,
+            }
           }
         >
-          <AnimatedComponent
+          <View
+            collapsable={undefined}
             style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "height": 24,
-                  "marginHorizontal": 12,
-                  "width": 24,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "translateY": 10,
-                    },
-                  ],
-                },
-              ]
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0.6,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
             }
           >
-            <AnimatedComponent
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
               style={
                 Array [
                   Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
+                    "color": "#ffffff",
+                    "fontSize": 24,
                   },
-                  Object {
-                    "opacity": 0.6,
-                  },
-                ]
-              }
-            >
-              <Icon
-                color="#ffffff"
-                name="icon-2"
-                size={24}
-                style={
                   Object {
                     "backgroundColor": "transparent",
-                  }
-                }
-              />
-            </AnimatedComponent>
-          </AnimatedComponent>
-          <AnimatedComponent
-            style={
-              Array [
-                Object {
-                  "height": 18,
-                  "marginTop": 2,
-                  "paddingBottom": 4,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scale": 0.5,
-                    },
-                    Object {
-                      "translateY": 10,
-                    },
-                  ],
-                },
-              ]
-            }
-          >
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
                   },
                   Object {
-                    "opacity": 0,
+                    "fontFamily": "Material Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
                   },
                 ]
               }
             >
-              <AnimatedComponent
-                style={
-                  Array [
-                    Object {
-                      "backgroundColor": "transparent",
-                      "fontSize": 13,
-                      "textAlign": "center",
-                    },
-                    Object {
-                      "color": "#ffffff",
-                    },
-                  ]
-                }
-              >
-                Route: 2
-              </AnimatedComponent>
-            </AnimatedComponent>
-          </AnimatedComponent>
-        </AnimatedComponent>
-      </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback
-        key="key-3"
-        onPress={[Function]}
-      >
-        <AnimatedComponent
+              
+            </Text>
+          </View>
+        </View>
+        <View
+          collapsable={undefined}
           style={
-            Array [
-              Object {
-                "flex": 1,
-                "paddingVertical": 6,
-              },
-              Object {
-                "transform": Array [
-                  Object {
-                    "translateX": 20,
-                  },
-                ],
-              },
-            ]
+            Object {
+              "height": 18,
+              "marginTop": 2,
+              "paddingBottom": 4,
+              "transform": Array [
+                Object {
+                  "scale": 0.5,
+                },
+                Object {
+                  "translateY": 10,
+                },
+              ],
+            }
           }
         >
-          <AnimatedComponent
+          <View
+            collapsable={undefined}
             style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "height": 24,
-                  "marginHorizontal": 12,
-                  "width": 24,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "translateY": 10,
-                    },
-                  ],
-                },
-              ]
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
             }
           >
-            <AnimatedComponent
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              collapsable={undefined}
+              ellipsizeMode="tail"
               style={
                 Array [
                   Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
+                    "color": "#000000",
+                    "fontFamily": "Helvetica Neue",
                   },
-                  Object {
-                    "opacity": 0.6,
-                  },
-                ]
-              }
-            >
-              <Icon
-                color="#ffffff"
-                name="icon-3"
-                size={24}
-                style={
                   Object {
                     "backgroundColor": "transparent",
-                  }
-                }
-              />
-            </AnimatedComponent>
-          </AnimatedComponent>
-          <AnimatedComponent
-            style={
-              Array [
-                Object {
-                  "height": 18,
-                  "marginTop": 2,
-                  "paddingBottom": 4,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scale": 0.5,
-                    },
-                    Object {
-                      "translateY": 10,
-                    },
-                  ],
-                },
-              ]
-            }
-          >
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                  Object {
-                    "opacity": 0,
+                    "color": "#ffffff",
+                    "fontSize": 13,
+                    "textAlign": "center",
                   },
                 ]
               }
-            >
-              <AnimatedComponent
-                style={
-                  Array [
-                    Object {
-                      "backgroundColor": "transparent",
-                      "fontSize": 13,
-                      "textAlign": "center",
-                    },
-                    Object {
-                      "color": "#ffffff",
-                    },
-                  ]
-                }
-              >
-                Route: 3
-              </AnimatedComponent>
-            </AnimatedComponent>
-          </AnimatedComponent>
-        </AnimatedComponent>
-      </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback
-        key="key-4"
-        onPress={[Function]}
-      >
-        <AnimatedComponent
-          style={
-            Array [
-              Object {
-                "flex": 1,
-                "paddingVertical": 6,
-              },
-              Object {
-                "transform": Array [
-                  Object {
-                    "translateX": 20,
+              theme={
+                Object {
+                  "colors": Object {
+                    "accent": "#ff4081",
+                    "background": "#fafafa",
+                    "disabled": "rgba(0, 0, 0, 0.26)",
+                    "paper": "#ffffff",
+                    "placeholder": "rgba(0, 0, 0, 0.38)",
+                    "primary": "#3f51b5",
+                    "text": "#000000",
                   },
-                ],
+                  "dark": false,
+                  "fonts": Object {
+                    "light": "HelveticaNeue-Light",
+                    "medium": "HelveticaNeue-Medium",
+                    "regular": "Helvetica Neue",
+                    "thin": "HelveticaNeue-Thin",
+                  },
+                  "roundness": 2,
+                }
+              }
+            >
+              Route: 1
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "paddingVertical": 6,
+            "transform": Array [
+              Object {
+                "translateX": 20,
               },
-            ]
+            ],
+          }
+        }
+        testID={undefined}
+      >
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "alignSelf": "center",
+              "height": 24,
+              "marginHorizontal": 12,
+              "transform": Array [
+                Object {
+                  "translateY": 10,
+                },
+              ],
+              "width": 24,
+            }
           }
         >
-          <AnimatedComponent
+          <View
+            collapsable={undefined}
             style={
-              Array [
-                Object {
-                  "alignSelf": "center",
-                  "height": 24,
-                  "marginHorizontal": 12,
-                  "width": 24,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "translateY": 10,
-                    },
-                  ],
-                },
-              ]
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0.6,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
             }
           >
-            <AnimatedComponent
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
               style={
                 Array [
                   Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
+                    "color": "#ffffff",
+                    "fontSize": 24,
                   },
-                  Object {
-                    "opacity": 0.6,
-                  },
-                ]
-              }
-            >
-              <Icon
-                color="#ffffff"
-                name="icon-4"
-                size={24}
-                style={
                   Object {
                     "backgroundColor": "transparent",
-                  }
-                }
-              />
-            </AnimatedComponent>
-          </AnimatedComponent>
-          <AnimatedComponent
-            style={
-              Array [
-                Object {
-                  "height": 18,
-                  "marginTop": 2,
-                  "paddingBottom": 4,
-                },
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scale": 0.5,
-                    },
-                    Object {
-                      "translateY": 10,
-                    },
-                  ],
-                },
-              ]
-            }
-          >
-            <AnimatedComponent
-              style={
-                Array [
-                  Object {
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
                   },
                   Object {
-                    "opacity": 0,
+                    "fontFamily": "Material Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
                   },
                 ]
               }
             >
-              <AnimatedComponent
-                style={
-                  Array [
-                    Object {
-                      "backgroundColor": "transparent",
-                      "fontSize": 13,
-                      "textAlign": "center",
-                    },
-                    Object {
-                      "color": "#ffffff",
-                    },
-                  ]
+              
+            </Text>
+          </View>
+        </View>
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "height": 18,
+              "marginTop": 2,
+              "paddingBottom": 4,
+              "transform": Array [
+                Object {
+                  "scale": 0.5,
+                },
+                Object {
+                  "translateY": 10,
+                },
+              ],
+            }
+          }
+        >
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              collapsable={undefined}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "Helvetica Neue",
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                    "color": "#ffffff",
+                    "fontSize": 13,
+                    "textAlign": "center",
+                  },
+                ]
+              }
+              theme={
+                Object {
+                  "colors": Object {
+                    "accent": "#ff4081",
+                    "background": "#fafafa",
+                    "disabled": "rgba(0, 0, 0, 0.26)",
+                    "paper": "#ffffff",
+                    "placeholder": "rgba(0, 0, 0, 0.38)",
+                    "primary": "#3f51b5",
+                    "text": "#000000",
+                  },
+                  "dark": false,
+                  "fonts": Object {
+                    "light": "HelveticaNeue-Light",
+                    "medium": "HelveticaNeue-Medium",
+                    "regular": "Helvetica Neue",
+                    "thin": "HelveticaNeue-Thin",
+                  },
+                  "roundness": 2,
                 }
-              >
-                Route: 4
-              </AnimatedComponent>
-            </AnimatedComponent>
-          </AnimatedComponent>
-        </AnimatedComponent>
-      </TouchableWithoutFeedback>
-    </SafeAreaView>
-  </AnimatedComponent>
+              }
+            >
+              Route: 2
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "paddingVertical": 6,
+            "transform": Array [
+              Object {
+                "translateX": 20,
+              },
+            ],
+          }
+        }
+        testID={undefined}
+      >
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "alignSelf": "center",
+              "height": 24,
+              "marginHorizontal": 12,
+              "transform": Array [
+                Object {
+                  "translateY": 10,
+                },
+              ],
+              "width": 24,
+            }
+          }
+        >
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0.6,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#ffffff",
+                    "fontSize": 24,
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                  Object {
+                    "fontFamily": "Material Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                ]
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "height": 18,
+              "marginTop": 2,
+              "paddingBottom": 4,
+              "transform": Array [
+                Object {
+                  "scale": 0.5,
+                },
+                Object {
+                  "translateY": 10,
+                },
+              ],
+            }
+          }
+        >
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              collapsable={undefined}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "Helvetica Neue",
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                    "color": "#ffffff",
+                    "fontSize": 13,
+                    "textAlign": "center",
+                  },
+                ]
+              }
+              theme={
+                Object {
+                  "colors": Object {
+                    "accent": "#ff4081",
+                    "background": "#fafafa",
+                    "disabled": "rgba(0, 0, 0, 0.26)",
+                    "paper": "#ffffff",
+                    "placeholder": "rgba(0, 0, 0, 0.38)",
+                    "primary": "#3f51b5",
+                    "text": "#000000",
+                  },
+                  "dark": false,
+                  "fonts": Object {
+                    "light": "HelveticaNeue-Light",
+                    "medium": "HelveticaNeue-Medium",
+                    "regular": "Helvetica Neue",
+                    "thin": "HelveticaNeue-Thin",
+                  },
+                  "roundness": 2,
+                }
+              }
+            >
+              Route: 3
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "paddingVertical": 6,
+            "transform": Array [
+              Object {
+                "translateX": 20,
+              },
+            ],
+          }
+        }
+        testID={undefined}
+      >
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "alignSelf": "center",
+              "height": 24,
+              "marginHorizontal": 12,
+              "transform": Array [
+                Object {
+                  "translateY": 10,
+                },
+              ],
+              "width": 24,
+            }
+          }
+        >
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0.6,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#ffffff",
+                    "fontSize": 24,
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                  Object {
+                    "fontFamily": "Material Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                ]
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "height": 18,
+              "marginTop": 2,
+              "paddingBottom": 4,
+              "transform": Array [
+                Object {
+                  "scale": 0.5,
+                },
+                Object {
+                  "translateY": 10,
+                },
+              ],
+            }
+          }
+        >
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              collapsable={undefined}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "Helvetica Neue",
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                    "color": "#ffffff",
+                    "fontSize": 13,
+                    "textAlign": "center",
+                  },
+                ]
+              }
+              theme={
+                Object {
+                  "colors": Object {
+                    "accent": "#ff4081",
+                    "background": "#fafafa",
+                    "disabled": "rgba(0, 0, 0, 0.26)",
+                    "paper": "#ffffff",
+                    "placeholder": "rgba(0, 0, 0, 0.38)",
+                    "primary": "#3f51b5",
+                    "text": "#000000",
+                  },
+                  "dark": false,
+                  "fonts": Object {
+                    "light": "HelveticaNeue-Light",
+                    "medium": "HelveticaNeue-Medium",
+                    "regular": "Helvetica Neue",
+                    "thin": "HelveticaNeue-Thin",
+                  },
+                  "roundness": 2,
+                }
+              }
+            >
+              Route: 4
+            </Text>
+          </View>
+        </View>
+      </View>
+    </RCTSafeAreaView>
+  </View>
 </View>
 `;

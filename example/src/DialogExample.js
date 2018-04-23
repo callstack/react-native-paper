@@ -48,7 +48,11 @@ class DialogExample extends React.Component<Props, State> {
   _closeDialog5 = () => this.setState({ visible5: false });
 
   render() {
-    const { theme: { colors: { background } } } = this.props;
+    const {
+      theme: {
+        colors: { background },
+      },
+    } = this.props;
     const { visible1, visible2, visible3, visible4, visible5 } = this.state;
     return (
       <View style={[styles.container, { backgroundColor: background }]}>

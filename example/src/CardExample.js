@@ -23,7 +23,11 @@ class CardExample extends React.Component<Props> {
   static title = 'Card';
 
   render() {
-    const { theme: { colors: { background } } } = this.props;
+    const {
+      theme: {
+        colors: { background },
+      },
+    } = this.props;
     return (
       <ScrollView
         style={[styles.container, { backgroundColor: background }]}

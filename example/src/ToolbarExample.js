@@ -55,7 +55,12 @@ class ToolbarExample extends React.Component<Props> {
   };
 
   render() {
-    const { navigation, theme: { colors: { background } } } = this.props;
+    const {
+      navigation,
+      theme: {
+        colors: { background },
+      },
+    } = this.props;
     const params = { ...initialParams, ...navigation.state.params };
 
     return (

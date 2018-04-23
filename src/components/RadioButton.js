@@ -5,7 +5,7 @@ import { Animated, View, Platform, StyleSheet } from 'react-native';
 import color from 'color';
 import TouchableRipple from './TouchableRipple';
 import withTheme from '../core/withTheme';
-import { RadioGroupContext } from './RadioGroup';
+import { RadioButtonContext } from './RadioButtonGroup';
 import type { Theme } from '../types';
 
 type Props = {
@@ -26,6 +26,10 @@ type Props = {
    */
   onPress?: Function,
   /**
+   * Custom color for unchecked radio.
+   */
+  uncheckedColor?: string,
+  /**
    * Custom color for radio.
    */
   color?: string,
@@ -43,7 +47,7 @@ type State = {
 const BORDER_WIDTH = 2;
 
 /**
- * Radio buttons allow the selection a single option from a set
+ * Radio buttons allow the selection a single option from a set.
  *
  * <div class="screenshots">
  *   <figure>
@@ -72,21 +76,22 @@ const BORDER_WIDTH = 2;
  *
  * export default class MyComponent extends React.Component {
  *   state = {
- *     checked: 'firstOption',
+ *     checked: 'first',
  *   };
  *
  *   render() {
  *     const { checked } = this.state;
+ *
  *     return (
  *       <View>
  *         <RadioButton
- *           value="firstOption"
- *           checked={checked === 'firstOption'}
+ *           value="first"
+ *           checked={checked === 'first'}
  *           onPress={() => { this.setState({ checked: 'firstOption' }); }}
  *         />
  *         <RadioButton
- *           value="secondOption"
- *           checked={checked === 'secondOption'}
+ *           value="second"
+ *           checked={checked === 'second'}
  *           onPress={() => { this.setState({ checked: 'secondOption' }); }}
  *         />
  *       </View>
@@ -101,35 +106,40 @@ class RadioButton extends React.Component<Props, State> {
     radioAnim: new Animated.Value(1),
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.checked !== this.props.checked) {
-      if (Platform.OS === 'android') {
-        if (nextProps.checked) {
-          this.state.radioAnim.setValue(1.2);
-          Animated.timing(this.state.radioAnim, {
-            toValue: 1,
-            duration: 150,
-          }).start();
-        } else {
-          this.state.borderAnim.setValue(10);
-          Animated.timing(this.state.borderAnim, {
-            toValue: BORDER_WIDTH,
-            duration: 150,
-          }).start();
-        }
-      }
+  componentDidUpdate(prevProps) {
+    if (prevProps.checked === this.props.checked || Platform.OS !== 'android') {
+      return;
+    }
+
+    if (this.props.checked) {
+      this.state.radioAnim.setValue(1.2);
+
+      Animated.timing(this.state.radioAnim, {
+        toValue: 1,
+        duration: 150,
+      }).start();
+    } else {
+      this.state.borderAnim.setValue(10);
+
+      Animated.timing(this.state.borderAnim, {
+        toValue: BORDER_WIDTH,
+        duration: 150,
+      }).start();
     }
   }
 
   render() {
     return (
-      <RadioGroupContext.Consumer>
+      <RadioButtonContext.Consumer>
         {context => {
           const { disabled, onPress, theme, ...rest } = this.props;
           const checkedColor = this.props.color || theme.colors.accent;
-          const uncheckedColor = theme.dark
-            ? 'rgba(255, 255, 255, .7)'
-            : 'rgba(0, 0, 0, .54)';
+          const uncheckedColor =
+            this.props.uncheckedColor ||
+            color(theme.colors.text)
+              .alpha(theme.dark ? 0.7 : 0.54)
+              .rgb()
+              .string();
 
           let rippleColor, radioColor;
 
@@ -138,7 +148,10 @@ class RadioButton extends React.Component<Props, State> {
             : this.props.checked;
 
           if (disabled) {
-            rippleColor = 'rgba(0, 0, 0, .16)';
+            rippleColor = color(theme.colors.text)
+              .alpha(0.16)
+              .rgb()
+              .string();
             radioColor = theme.colors.disabled;
           } else {
             rippleColor = color(checkedColor)
@@ -191,7 +204,7 @@ class RadioButton extends React.Component<Props, State> {
             </TouchableRipple>
           );
         }}
-      </RadioGroupContext.Consumer>
+      </RadioButtonContext.Consumer>
     );
   }
 }

@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { Animated, Platform, View, StyleSheet } from 'react-native';
+import { Animated, View, Platform, StyleSheet } from 'react-native';
 import color from 'color';
 import Icon from './Icon';
 import TouchableRipple from './TouchableRipple';
@@ -21,6 +21,10 @@ type Props = {
    * Function to execute on press.
    */
   onPress?: Function,
+  /**
+   * Custom color for unchecked checkbox.
+   */
+  uncheckedColor?: string,
   /**
    * Custom color for checkbox.
    */
@@ -84,34 +88,40 @@ class Checkbox extends React.Component<Props, State> {
     scaleAnim: new Animated.Value(1),
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.checked !== this.props.checked) {
-      if (Platform.OS === 'android') {
-        Animated.sequence([
-          Animated.timing(this.state.scaleAnim, {
-            toValue: 0.85,
-            duration: nextProps.checked ? 0 : 200,
-          }),
-          Animated.timing(this.state.scaleAnim, {
-            toValue: 1,
-            duration: nextProps.checked ? 350 : 200,
-          }),
-        ]).start();
-      }
+  componentDidUpdate(prevProps) {
+    if (prevProps.checked === this.props.checked || Platform.OS !== 'android') {
+      return;
     }
+
+    Animated.sequence([
+      Animated.timing(this.state.scaleAnim, {
+        toValue: 0.85,
+        duration: this.props.checked ? 200 : 0,
+      }),
+      Animated.timing(this.state.scaleAnim, {
+        toValue: 1,
+        duration: this.props.checked ? 200 : 350,
+      }),
+    ]).start();
   }
 
   render() {
     const { checked, disabled, onPress, theme, ...rest } = this.props;
     const checkedColor = this.props.color || theme.colors.accent;
-    const uncheckedColor = theme.dark
-      ? 'rgba(255, 255, 255, .7)'
-      : 'rgba(0, 0, 0, .54)';
+    const uncheckedColor =
+      this.props.uncheckedColor ||
+      color(theme.colors.text)
+        .alpha(theme.dark ? 0.7 : 0.54)
+        .rgb()
+        .string();
 
     let rippleColor, checkboxColor;
 
     if (disabled) {
-      rippleColor = 'rgba(0, 0, 0, .16)';
+      rippleColor = color(theme.colors.text)
+        .alpha(0.16)
+        .rgb()
+        .string();
       checkboxColor = theme.colors.disabled;
     } else {
       rippleColor = color(checkedColor)
@@ -139,7 +149,8 @@ class Checkbox extends React.Component<Props, State> {
             allowFontScaling={false}
             name={checked ? 'check-box' : 'check-box-outline-blank'}
             size={24}
-            style={[styles.icon, { color: checkboxColor }]}
+            color={checkboxColor}
+            style={styles.icon}
           />
           <View style={[StyleSheet.absoluteFill, styles.fillContainer]}>
             <Animated.View

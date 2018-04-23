@@ -10,11 +10,12 @@ import {
   StyleSheet,
   Platform,
 } from 'react-native';
+import { polyfill } from 'react-lifecycles-compat';
 import color from 'color';
 import Icon from './Icon';
 import Paper from './Paper';
 import Text from './Typography/Text';
-import { black, white } from '../styles/colors';
+import { black, grey900, white } from '../styles/colors';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
@@ -22,14 +23,14 @@ import type { IconSource } from './Icon';
 const AnimatedText = Animated.createAnimatedComponent(Text);
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
-type Route = {
+type Route = $Shape<{
   key: string,
-  title?: string,
-  icon?: IconSource,
-  color?: string,
-};
+  title: string,
+  icon: IconSource,
+  color: string,
+}>;
 
-type NavigationState<T> = {
+type NavigationState<T: Route> = {
   index: number,
   routes: Array<T>,
 };
@@ -48,7 +49,7 @@ type Props<T> = {
    *
    * Each route object should contain the following properties:
    *
-   * - `key`: a unique key to identify the route
+   * - `key`: a unique key to identify the route (required)
    * - `title`: title of the route to use as the tab label
    * - `icon`: icon to use as the tab icon, can be a string, an image source or a react component
    * - `color`: color to use as background color for shifting bottom navigation
@@ -185,6 +186,10 @@ type State = {
    */
   layout: { height: number, width: number, measured: boolean },
   /**
+   * Currently active index. Used only for getDerivedStateFromProps.
+   */
+  current: number,
+  /**
    * Previously active index. Used to determine the position of the ripple.
    */
   previous: number,
@@ -199,13 +204,41 @@ const MIN_SHIFT_AMOUNT = 10;
 const MIN_TAB_WIDTH = 96;
 const MAX_TAB_WIDTH = 168;
 const BAR_HEIGHT = 56;
-const SMALL_RIPPLE_SIZE = 96;
 const ACTIVE_LABEL_SIZE = 14;
 const INACTIVE_LABEL_SIZE = 12;
+
+const calculateShift = (activeIndex, currentIndex, numberOfItems) => {
+  if (activeIndex < currentIndex) {
+    // If the new active tab comes before current tab, current tab will shift towards right
+    return 2 * MIN_SHIFT_AMOUNT;
+  }
+
+  if (activeIndex > currentIndex) {
+    // If the new active tab comes after current tab, current tab will shift towards left
+    return -2 * MIN_SHIFT_AMOUNT;
+  }
+
+  if (activeIndex === currentIndex) {
+    if (currentIndex === 0) {
+      // If the current tab is the new active tab and its the first tab, it'll shift towards right
+      return MIN_SHIFT_AMOUNT;
+    }
+
+    if (currentIndex === numberOfItems - 1) {
+      // If the current tab is the new active tab and its the last tab, it'll shift towards left
+      return -MIN_SHIFT_AMOUNT;
+    }
+  }
+
+  // If the current tab is the new active tab and its somewhere in the middle, it won't shift
+  return 0;
+};
 
 /**
  * Bottom navigation provides quick navigation between top-level views of an app with a bottom tab bar.
  * It is primarily designed for use on mobile.
+ *
+ * For integration with React Navigation, you can use [react-navigation-tabs](https://github.com/react-navigation/react-navigation-tabs).
  *
  * <div class="screenshots">
  *   <img class="medium" src="screenshots/bottom-navigation.gif" />
@@ -246,7 +279,7 @@ const INACTIVE_LABEL_SIZE = 12;
  * }
  * ```
  */
-class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
+class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
   /**
    * Pure components are used to minmize re-rendering of the pages.
    * This drastically improves the animation performance.
@@ -264,38 +297,58 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
     );
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { index, routes } = nextProps.navigationState;
+
+    // Re-create animated values if routes have been added/removed
+    // Preserve previous animated values if they exist, so we don't break animations
+    const tabs = routes.map(
+      // focused === 1, unfocused === 0
+      (_, i) => prevState.tabs[i] || new Animated.Value(i === index ? 1 : 0)
+    );
+    const shifts = routes.map(
+      (_, i) =>
+        prevState.shifts[i] ||
+        new Animated.Value(calculateShift(index, i, routes.length))
+    );
+
+    const nextState = {
+      tabs,
+      shifts,
+    };
+
+    if (index !== prevState.current) {
+      /* $FlowFixMe */
+      Object.assign(nextState, {
+        // Store the current index in state so that we can later check if the index has changed
+        current: index,
+        previous: prevState.current,
+        // Set the current tab to be loaded if it was not loaded before
+        loaded: prevState.loaded.includes(index)
+          ? prevState.loaded
+          : [...prevState.loaded, index],
+      });
+    }
+
+    return nextState;
+  }
+
   constructor(props) {
     super(props);
 
-    const { routes, index } = this.props.navigationState;
+    const { index } = this.props.navigationState;
 
     this.state = {
-      tabs: routes.map((_, i) => new Animated.Value(i === index ? 1 : 0)),
-      shifts: routes.map(
-        (_, i) =>
-          new Animated.Value(this._calculateShift(index, i, routes.length))
-      ),
+      tabs: [],
+      shifts: [],
       index: new Animated.Value(index),
       ripple: new Animated.Value(MIN_RIPPLE_SCALE),
       touch: new Animated.Value(MIN_RIPPLE_SCALE),
       layout: { height: 0, width: 0, measured: false },
+      current: index,
       previous: 0,
       loaded: [index],
     };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.navigationState.index !== this.props.navigationState.index) {
-      const previous = this.props.navigationState.index;
-      const next = nextProps.navigationState.index;
-
-      this.setState(state => ({
-        previous,
-        loaded: state.loaded.includes(next)
-          ? state.loaded
-          : [...state.loaded, next],
-      }));
-    }
   }
 
   componentDidUpdate(prevProps) {
@@ -315,18 +368,18 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
         useNativeDriver: true,
       }),
       Animated.sequence([
-        Animated.delay(100),
+        Animated.delay(this.props.shifting ? 100 : 0),
         Animated.parallel([
           ...routes.map((_, i) =>
             Animated.timing(this.state.tabs[i], {
               toValue: i === index ? 1 : 0,
-              duration: 200,
+              duration: this.props.shifting ? 200 : 150,
               useNativeDriver: true,
             })
           ),
           ...routes.map((_, i) =>
             Animated.timing(this.state.shifts[i], {
-              toValue: this._calculateShift(index, i, routes.length),
+              toValue: calculateShift(index, i, routes.length),
               duration: 200,
               easing: Easing.out(Easing.sin),
               useNativeDriver: true,
@@ -343,33 +396,6 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
       this.state.ripple.setValue(MIN_RIPPLE_SCALE);
     });
   }
-
-  _calculateShift = (activeIndex, currentIndex, numberOfItems) => {
-    if (activeIndex < currentIndex) {
-      // If the new active tab comes before current tab, current tab will shift towards right
-      return 2 * MIN_SHIFT_AMOUNT;
-    }
-
-    if (activeIndex > currentIndex) {
-      // If the new active tab comes after current tab, current tab will shift towards left
-      return -2 * MIN_SHIFT_AMOUNT;
-    }
-
-    if (activeIndex === currentIndex) {
-      if (currentIndex === 0) {
-        // If the current tab is the new active tab and its the first tab, it'll shift towards right
-        return MIN_SHIFT_AMOUNT;
-      }
-
-      if (currentIndex === numberOfItems - 1) {
-        // If the current tab is the new active tab and its the last tab, it'll shift towards left
-        return -MIN_SHIFT_AMOUNT;
-      }
-    }
-
-    // If the current tab is the new active tab and its somewhere in the middle, it won't shift
-    return 0;
-  };
 
   _handleLayout = e =>
     this.setState({
@@ -417,8 +443,8 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
       renderScene,
       renderIcon,
       renderLabel,
-      getLabelText = ({ route }) => route.title,
-      getColor = ({ route }) => route.color,
+      getLabelText = ({ route }: Object) => route.title,
+      getColor = ({ route }: Object) => route.color,
       barStyle,
       style,
       theme,
@@ -435,7 +461,9 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
     const {
       backgroundColor: approxBackgroundColor = shifting
         ? colors.primary
-        : theme.dark ? black : white,
+        : theme.dark
+          ? grey900
+          : white,
     } =
       StyleSheet.flatten(barStyle) || {};
 
@@ -464,6 +492,7 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
       .rgb()
       .string();
 
+    const touchRippleSize = layout.width / routes.length;
     const maxTabWidth = routes.length > 3 ? MIN_TAB_WIDTH : MAX_TAB_WIDTH;
     const tabWidth = Math.min(
       // Account for horizontal padding around the items
@@ -559,14 +588,14 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
                 styles.ripple,
                 {
                   // Set top and left values so that the ripple's center is same as the tab's center
-                  top: BAR_HEIGHT / 2 - SMALL_RIPPLE_SIZE / 2,
+                  top: BAR_HEIGHT / 2 - touchRippleSize / 2,
                   left:
                     navigationState.index * tabWidth +
                     tabWidth / 2 -
-                    SMALL_RIPPLE_SIZE / 2,
-                  height: SMALL_RIPPLE_SIZE,
-                  width: SMALL_RIPPLE_SIZE,
-                  borderRadius: SMALL_RIPPLE_SIZE / 2,
+                    touchRippleSize / 2,
+                  height: touchRippleSize,
+                  width: touchRippleSize,
+                  borderRadius: touchRippleSize / 2,
                   backgroundColor: touchColor,
                   transform: [
                     {
@@ -653,7 +682,7 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
                         ) : (
                           <Icon
                             style={styles.icon}
-                            name={route.icon}
+                            name={(route: Object).icon}
                             color={activeColor}
                             size={24}
                           />
@@ -675,7 +704,7 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
                           ) : (
                             <Icon
                               style={styles.icon}
-                              name={route.icon}
+                              name={(route: Object).icon}
                               color={inactiveColor}
                               size={24}
                             />
@@ -754,6 +783,8 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
     );
   }
 }
+
+polyfill(BottomNavigation);
 
 export default withTheme(BottomNavigation);
 

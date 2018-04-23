@@ -23,8 +23,10 @@ cd dist
 git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
 cd ..
 
-# Clean dist existing contents
-rm -rf dist/**/* || exit 0
+# Clean existing dist/ contents
+rm -rf dist/**/* || :
+rm -f dist/*.{html,css,js,json,map} || :
+rmdir dist/* || :
 
 # Run our build script.
 yarn build

@@ -27,8 +27,6 @@ export default class extends React.Component<Props, State> {
     checked: 0,
   };
 
-  state: State;
-
   render() {
     const { checked } = this.state;
     const { visible, close } = this.props;

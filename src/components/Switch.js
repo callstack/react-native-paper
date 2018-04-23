@@ -13,15 +13,15 @@ type Props = {
    */
   disabled?: boolean,
   /**
-   * Switch value- true or false.
+   * Value of the switch, true means 'on', false means 'off'.
    */
   value?: boolean,
   /**
-   * Custom color for checkbox.
+   * Custom color for switch.
    */
   color?: string,
   /**
-   * Invoked with the new value when the value changes.
+   * Callback called with the new value when it changes.
    */
   onValueChange?: Function,
   style?: any,
@@ -112,8 +112,14 @@ class Switch extends React.Component<Props> {
       Platform.OS === 'ios'
         ? undefined
         : disabled
-          ? theme.dark ? grey800 : grey400
-          : value ? checkedColor : theme.dark ? grey400 : grey50;
+          ? theme.dark
+            ? grey800
+            : grey400
+          : value
+            ? checkedColor
+            : theme.dark
+              ? grey400
+              : grey50;
 
     return (
       <NativeSwitch

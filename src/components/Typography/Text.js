@@ -19,7 +19,7 @@ type Props = {
  * @extends Text props https://facebook.github.io/react-native/docs/text.html#props
  */
 class Text extends React.Component<Props> {
-  _root: any;
+  _root: NativeText;
 
   setNativeProps(...args) {
     return this._root.setNativeProps(...args);

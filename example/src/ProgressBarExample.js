@@ -34,10 +34,14 @@ class ProgressBarExample extends React.Component<Props, State> {
     clearInterval(this._interval);
   }
 
-  _interval: any;
+  _interval: IntervalID;
 
   render() {
-    const { theme: { colors: { background } } } = this.props;
+    const {
+      theme: {
+        colors: { background },
+      },
+    } = this.props;
     return (
       <View style={[styles.container, { backgroundColor: background }]}>
         <Paragraph>ProgressBar primary color</Paragraph>

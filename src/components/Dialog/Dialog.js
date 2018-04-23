@@ -57,8 +57,8 @@ export type DialogProps = {
  *     visible: false,
  *   };
  *
- *   _showDialog = () => this.setState({ visble: true });
- *   _hideDialog = () => this.setState({ visble: false });
+ *   _showDialog = () => this.setState({ visible: true });
+ *   _hideDialog = () => this.setState({ visible: false });
  *
  *   render() {
  *     const { visible } = this.state;

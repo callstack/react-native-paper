@@ -51,23 +51,22 @@ type Props = {
 };
 
 /**
- * Ripple provides components with a material "ink ripple" interaction effect.
+ * A wrapper for views that should respond to touches.
+ * Provides a material "ink ripple" interaction effect for supported platforms (>= Android Lollipop).
+ * On unsupported platforms, it falls back to a highlight effect.
  *
  * ## Usage
  * ```js
  * import * as React from 'react';
  * import { View } from 'react-native';
- * import { Paragraph, TouchableRipple } from 'react-native-paper';
+ * import { Text, TouchableRipple } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <TouchableRipple
- *     onPress={() => {}}
- *     borderless
+ *     onPress={() => console.log('Pressed')}
  *     rippleColor="rgba(0, 0, 0, .32)"
  *   >
- *     <View>
- *       <Paragraph>Press me</Paragrpah>
- *     </View>
+ *     <Text>Press me</Text>
  *   </TouchableRipple>
  * );
  * ```
@@ -90,11 +89,14 @@ class TouchableRipple extends React.Component<Props, void> {
       ...rest
     } = this.props;
 
-    const { dark: isDarkTheme } = theme;
+    const { dark, colors } = theme;
     const disabled = disabledProp || !this.props.onPress;
     const calculatedRippleColor =
       rippleColor ||
-      (isDarkTheme ? 'rgba(255, 255, 255, .20)' : 'rgba(0, 0, 0, .32)');
+      color(colors.text)
+        .alpha(dark ? 0.32 : 0.2)
+        .rgb()
+        .string();
 
     if (
       Platform.OS === 'android' &&
