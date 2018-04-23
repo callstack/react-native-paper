@@ -89,7 +89,7 @@ class Dialog extends React.Component<DialogProps, void> {
     visible: false,
   };
 
-  static ListDialog = ListDialog;
+  static List = ListDialog;
 
   render() {
     const {

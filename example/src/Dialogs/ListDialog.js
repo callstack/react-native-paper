@@ -49,7 +49,7 @@ export default class extends React.Component<Props, State> {
 
   render() {
     return (
-      <Dialog.ListDialog
+      <Dialog.List
         title="ListDialog"
         visible={this.props.visible}
         onDismiss={this.props.close}
