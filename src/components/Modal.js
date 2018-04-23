@@ -71,7 +71,7 @@ class Modal extends React.Component<Props, State> {
     visible: false,
   };
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
     if (nextProps.visible && !prevState.rendered) {
       return {
         rendered: true,
@@ -86,8 +86,8 @@ class Modal extends React.Component<Props, State> {
     rendered: this.props.visible,
   };
 
-  componentDidUpdate({ visible }: Props) {
-    if (visible !== this.props.visible) {
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps.visible !== this.props.visible) {
       if (this.props.visible) {
         this._showModal();
       } else {

@@ -60,65 +60,73 @@ type Props = {
  * );
  * ```
  */
-const ListItem = ({
-  icon,
-  avatar,
-  title,
-  description,
-  onPress,
-  theme,
-  style,
-}: Props) => {
-  const titleColor = color(theme.colors.text)
-    .alpha(0.87)
-    .rgb()
-    .string();
-  const descriptionColor = color(theme.colors.text)
-    .alpha(0.54)
-    .rgb()
-    .string();
+class ListItem extends React.Component<Props> {
+  render() {
+    const {
+      icon,
+      avatar,
+      title,
+      description,
+      onPress,
+      theme,
+      style,
+    } = this.props;
+    const titleColor = color(theme.colors.text)
+      .alpha(0.87)
+      .rgb()
+      .string();
+    const descriptionColor = color(theme.colors.text)
+      .alpha(0.54)
+      .rgb()
+      .string();
 
-  return (
-    <TouchableRipple style={[styles.container, style]} onPress={onPress}>
-      <View style={styles.row}>
-        {avatar || icon ? (
-          <View
-            style={[
-              styles.item,
-              styles.avatar,
-              description && styles.multiline,
-            ]}
-          >
-            {avatar || <Icon name={icon} size={24} color={descriptionColor} />}
-          </View>
-        ) : null}
-        <View style={[styles.item, styles.content]}>
-          <Text numberOfLines={1} style={[styles.title, { color: titleColor }]}>
-            {title}
-          </Text>
-          {description && (
-            <Text
-              numberOfLines={2}
+    return (
+      <TouchableRipple style={[styles.container, style]} onPress={onPress}>
+        <View style={styles.row}>
+          {avatar || icon ? (
+            <View
               style={[
-                styles.description,
-                {
-                  color: descriptionColor,
-                },
+                styles.item,
+                styles.avatar,
+                description && styles.multiline,
               ]}
             >
-              {description}
+              {avatar || (
+                <Icon name={icon} size={24} color={descriptionColor} />
+              )}
+            </View>
+          ) : null}
+          <View style={[styles.item, styles.content]}>
+            <Text
+              numberOfLines={1}
+              style={[styles.title, { color: titleColor }]}
+            >
+              {title}
             </Text>
-          )}
-        </View>
-        {avatar && icon ? (
-          <View style={[styles.item, description && styles.multiline]}>
-            <Icon name={icon} size={24} color={descriptionColor} />
+            {description && (
+              <Text
+                numberOfLines={2}
+                style={[
+                  styles.description,
+                  {
+                    color: descriptionColor,
+                  },
+                ]}
+              >
+                {description}
+              </Text>
+            )}
           </View>
-        ) : null}
-      </View>
-    </TouchableRipple>
-  );
-};
+          {avatar && icon ? (
+            <View style={[styles.item, description && styles.multiline]}>
+              <Icon name={icon} size={24} color={descriptionColor} />
+            </View>
+          ) : null}
+        </View>
+      </TouchableRipple>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {

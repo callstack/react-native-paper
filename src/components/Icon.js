@@ -1,8 +1,27 @@
 /* @flow */
 
 import * as React from 'react';
-import { Image, View, StyleSheet } from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { Image, Text, View, StyleSheet } from 'react-native';
+
+let MaterialIcons;
+
+try {
+  // Optionally require vector-icons
+  MaterialIcons = require('react-native-vector-icons/MaterialIcons').default;
+} catch (e) {
+  MaterialIcons = ({ name, color, size, style, ...rest }) => {
+    // eslint-disable-next-line no-console
+    console.warn(
+      `Tried to use the icon '${name}' in a component from 'react-native-paper', but 'react-native-vector-icons' is not installed. To remove this warning, install 'react-native-vector-icons' or use another method to specify icon: https://callstack.github.io/react-native-paper/icons.html.`
+    );
+
+    return (
+      <Text {...rest} style={[{ color, fontSize: size }, style]}>
+        □
+      </Text>
+    );
+  };
+}
 
 export type IconSource = string | { uri: string } | number | React.Node;
 
@@ -13,9 +32,17 @@ export type Props = {
   style?: any,
 };
 
-const Icon = ({ name, ...props }: Props) => {
+const Icon = ({ name, color, size, style, ...rest }: Props) => {
   if (typeof name === 'string') {
-    return <MaterialIcons {...props} name={name} />;
+    return (
+      <MaterialIcons
+        {...rest}
+        name={name}
+        color={color}
+        size={size}
+        style={style}
+      />
+    );
   } else if (
     (typeof name === 'object' &&
       name !== null &&
@@ -25,29 +52,29 @@ const Icon = ({ name, ...props }: Props) => {
   ) {
     return (
       <Image
-        {...props}
+        {...rest}
         source={name}
         style={[
           {
-            width: props.size,
-            height: props.size,
-            tintColor: props.color,
+            width: size,
+            height: size,
+            tintColor: color,
           },
-          props.style,
+          style,
         ]}
       />
     );
   }
   return (
     <View
-      {...props}
+      {...rest}
       style={[
         {
-          width: props.size,
-          height: props.size,
+          width: size,
+          height: size,
         },
         styles.container,
-        props.style,
+        style,
       ]}
     >
       {(name: any)}

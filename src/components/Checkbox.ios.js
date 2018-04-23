@@ -45,7 +45,10 @@ class Checkbox extends React.Component<Props> {
     let rippleColor;
 
     if (disabled) {
-      rippleColor = 'rgba(0, 0, 0, .16)';
+      rippleColor = color(theme.colors.text)
+        .alpha(0.16)
+        .rgb()
+        .string();
     } else {
       rippleColor = color(checkedColor)
         .fade(0.32)
@@ -61,16 +64,14 @@ class Checkbox extends React.Component<Props> {
         onPress={disabled ? undefined : onPress}
         style={styles.container}
       >
-        <View style={styles.iconContainer}>
-          {checked && (
-            <Icon
-              allowFontScaling={false}
-              name={checked && 'done'}
-              size={24}
-              color={checkedColor}
-              style={styles.icon}
-            />
-          )}
+        <View style={{ opacity: checked ? 1 : 0 }}>
+          <Icon
+            allowFontScaling={false}
+            name="done"
+            size={24}
+            color={checkedColor}
+            style={styles.icon}
+          />
         </View>
       </TouchableRipple>
     );
@@ -83,9 +84,6 @@ const styles = StyleSheet.create({
   },
   icon: {
     margin: 6,
-  },
-  iconContainer: {
-    height: 36,
   },
 });
 

@@ -20,7 +20,8 @@ type Props = {
 };
 
 /**
- * Paper is a basic container that can give depth to the page.
+ * Paper is a basic container that can give depth to an element with elevation shadow.
+ * A shadow can be applied by specifying the `elevation` property both on Android and iOS.
  *
  * <div class="screenshots">
  *   <img src="screenshots/paper.1_2.png" />
@@ -42,25 +43,25 @@ type Props = {
  *
  * const styles = StyleSheet.create({
  *   paper: {
- *    padding: 8,
- *    height: 80,
- *    width: 80,
- *    alignItems: 'center',
- *    justifyContent: 'center',
- *    },
+ *     padding: 8,
+ *     height: 80,
+ *     width: 80,
+ *     alignItems: 'center',
+ *     justifyContent: 'center',
+ *     elevation: 4,
+ *   },
  * });
  * ```
- * Note: Pass *elevation* style, to apply shadow to the component. Defaults to 2.
  */
 class Paper extends React.Component<Props> {
   render() {
-    const { style, theme, ...restOfProps } = this.props;
+    const { style, theme, ...rest } = this.props;
     const flattenedStyles = StyleSheet.flatten(style) || {};
     const { elevation } = flattenedStyles;
 
     return (
       <View
-        {...restOfProps}
+        {...rest}
         style={[
           styles.paper,
           { backgroundColor: theme.colors.paper },

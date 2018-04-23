@@ -57,7 +57,10 @@ class RadioButton extends React.Component<Props> {
             : this.props.checked;
 
           if (disabled) {
-            rippleColor = 'rgba(0, 0, 0, .16)';
+            rippleColor = color(theme.colors.text)
+              .alpha(0.16)
+              .rgb()
+              .string();
           } else {
             rippleColor = color(checkedColor)
               .fade(0.32)

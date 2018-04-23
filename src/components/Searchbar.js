@@ -27,7 +27,7 @@ type Props = {
   /**
    * Callback that is called when the text input's text changes.
    */
-  onChangeText: (query: string) => void,
+  onChangeText?: (query: string) => void,
   /**
    * Callback to execute if we want the left icon to act as button.
    */
@@ -40,16 +40,16 @@ type Props = {
 };
 
 /**
- * SearchBar is a simple input box where users can type search queries.
+ * Searchbar is a simple input box where users can type search queries.
  *
  * <div class="screenshots">
- *   <img class="medium" src="screenshots/searchbar.png" />
+ *   <img class="medium" src="screenshots/Searchbar.png" />
  * </div>
  *
  * ## Usage
  * ```js
  * import React from 'react';
- * import { SearchBar } from 'react-native-paper';
+ * import { Searchbar } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
@@ -59,7 +59,7 @@ type Props = {
  *   render() {
  *     const { firstQuery } = this.state;
  *     return (
- *       <SearchBar
+ *       <Searchbar
  *         placeholder="Search"
  *         onChangeText={query => { this.setState({ firstQuery: query }); }}
  *         value={firstQuery}
@@ -69,10 +69,33 @@ type Props = {
  * }
  * ```
  */
-class SearchBar extends React.Component<Props> {
+class Searchbar extends React.Component<Props> {
   _handleClearPress = () => {
-    this.props.onChangeText('');
+    this.clear();
+    this.props.onChangeText && this.props.onChangeText('');
   };
+
+  _root: TextInput;
+
+  setNativeProps(...args) {
+    return this._root.setNativeProps(...args);
+  }
+
+  isFocused(...args) {
+    return this._root.isFocused(...args);
+  }
+
+  clear(...args) {
+    return this._root.clear(...args);
+  }
+
+  focus(...args) {
+    return this._root.focus(...args);
+  }
+
+  blur(...args) {
+    return this._root.blur(...args);
+  }
 
   render() {
     const {
@@ -115,7 +138,12 @@ class SearchBar extends React.Component<Props> {
             name={icon || 'search'}
           />
         ) : (
-          <Icon style={styles.icon} name="search" size={24} color={iconColor} />
+          <Icon
+            style={styles.icon}
+            name={icon || 'search'}
+            size={24}
+            color={iconColor}
+          />
         )}
         <TextInput
           style={[styles.input, { color: textColor }]}
@@ -124,6 +152,9 @@ class SearchBar extends React.Component<Props> {
           selectionColor={colors.primary}
           underlineColorAndroid="transparent"
           returnKeyType="search"
+          ref={c => {
+            this._root = c;
+          }}
           value={value}
           {...rest}
         />
@@ -158,4 +189,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(SearchBar);
+export default withTheme(Searchbar);

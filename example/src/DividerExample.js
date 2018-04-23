@@ -20,7 +20,11 @@ const dataSource = ds.cloneWithRows([
 ]);
 
 const DividerExample = (props: Props) => {
-  const { theme: { colors: { background } } } = props;
+  const {
+    theme: {
+      colors: { background },
+    },
+  } = props;
   return (
     <ListView
       style={[styles.container, { backgroundColor: background }]}

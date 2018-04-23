@@ -15,7 +15,7 @@ import color from 'color';
 import Icon from './Icon';
 import Paper from './Paper';
 import Text from './Typography/Text';
-import { black, white } from '../styles/colors';
+import { black, grey900, white } from '../styles/colors';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
@@ -23,14 +23,14 @@ import type { IconSource } from './Icon';
 const AnimatedText = Animated.createAnimatedComponent(Text);
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
-type Route = {
+type Route = $Shape<{
   key: string,
-  title?: string,
-  icon?: IconSource,
-  color?: string,
-};
+  title: string,
+  icon: IconSource,
+  color: string,
+}>;
 
-type NavigationState<T> = {
+type NavigationState<T: Route> = {
   index: number,
   routes: Array<T>,
 };
@@ -279,7 +279,7 @@ const calculateShift = (activeIndex, currentIndex, numberOfItems) => {
  * }
  * ```
  */
-class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
+class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
   /**
    * Pure components are used to minmize re-rendering of the pages.
    * This drastically improves the animation performance.
@@ -368,12 +368,12 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
         useNativeDriver: true,
       }),
       Animated.sequence([
-        Animated.delay(100),
+        Animated.delay(this.props.shifting ? 100 : 0),
         Animated.parallel([
           ...routes.map((_, i) =>
             Animated.timing(this.state.tabs[i], {
               toValue: i === index ? 1 : 0,
-              duration: 200,
+              duration: this.props.shifting ? 200 : 150,
               useNativeDriver: true,
             })
           ),
@@ -443,8 +443,8 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
       renderScene,
       renderIcon,
       renderLabel,
-      getLabelText = ({ route }) => route.title,
-      getColor = ({ route }) => route.color,
+      getLabelText = ({ route }: Object) => route.title,
+      getColor = ({ route }: Object) => route.color,
       barStyle,
       style,
       theme,
@@ -461,7 +461,9 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
     const {
       backgroundColor: approxBackgroundColor = shifting
         ? colors.primary
-        : theme.dark ? black : white,
+        : theme.dark
+          ? grey900
+          : white,
     } =
       StyleSheet.flatten(barStyle) || {};
 
@@ -680,7 +682,7 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
                         ) : (
                           <Icon
                             style={styles.icon}
-                            name={route.icon}
+                            name={(route: Object).icon}
                             color={activeColor}
                             size={24}
                           />
@@ -702,7 +704,7 @@ class BottomNavigation<T: Route> extends React.Component<Props<T>, State> {
                           ) : (
                             <Icon
                               style={styles.icon}
-                              name={route.icon}
+                              name={(route: Object).icon}
                               color={inactiveColor}
                               size={24}
                             />

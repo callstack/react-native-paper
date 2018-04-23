@@ -63,40 +63,51 @@ type Props = {
  * );
  * ```
  */
-const FAB = (props: Props) => {
-  const { small, dark, icon, color: iconColor, onPress, theme, style } = props;
-  const backgroundColor = theme.colors.accent;
-  const isDark =
-    typeof dark === 'boolean' ? dark : !color(backgroundColor).light();
-  const textColor = iconColor || (isDark ? white : 'rgba(0, 0, 0, .54)');
-  const rippleColor = color(textColor)
-    .alpha(0.32)
-    .rgb()
-    .string();
+class FAB extends React.Component<Props> {
+  render() {
+    const {
+      small,
+      dark,
+      icon,
+      color: iconColor,
+      onPress,
+      theme,
+      style,
+      ...rest
+    } = this.props;
+    const backgroundColor = theme.colors.accent;
+    const isDark =
+      typeof dark === 'boolean' ? dark : !color(backgroundColor).light();
+    const textColor = iconColor || (isDark ? white : 'rgba(0, 0, 0, .54)');
+    const rippleColor = color(textColor)
+      .alpha(0.32)
+      .rgb()
+      .string();
 
-  return (
-    <Paper
-      {...props}
-      style={[
-        { backgroundColor, elevation: 12 },
-        styles.content,
-        small ? styles.small : styles.standard,
-        style,
-      ]}
-    >
-      <TouchableRipple
-        borderless
-        onPress={onPress}
-        rippleColor={rippleColor}
-        style={[styles.content, small ? styles.small : styles.standard]}
+    return (
+      <Paper
+        {...rest}
+        style={[
+          { backgroundColor, elevation: 12 },
+          styles.content,
+          small ? styles.small : styles.standard,
+          style,
+        ]}
       >
-        <View>
-          <Icon name={icon} size={24} color={textColor} />
-        </View>
-      </TouchableRipple>
-    </Paper>
-  );
-};
+        <TouchableRipple
+          borderless
+          onPress={onPress}
+          rippleColor={rippleColor}
+          style={[styles.content, small ? styles.small : styles.standard]}
+        >
+          <View>
+            <Icon name={icon} size={24} color={textColor} />
+          </View>
+        </TouchableRipple>
+      </Paper>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   content: {

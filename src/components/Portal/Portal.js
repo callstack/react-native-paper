@@ -13,7 +13,7 @@ export type PortalProps = {
   /**
    * Content of the `Portal`.
    */
-  children: React.Node,
+  children: React.Element<*>,
 };
 
 /**

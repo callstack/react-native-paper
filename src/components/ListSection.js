@@ -53,29 +53,32 @@ type Props = {
  * }
  * ```
  */
-const ListSection = ({ children, title, theme, style, ...rest }: Props) => {
-  const { colors, fonts } = theme;
+class ListSection extends React.Component<Props> {
+  render() {
+    const { children, title, theme, style, ...rest } = this.props;
+    const { colors, fonts } = theme;
 
-  const titleColor = color(colors.text)
-    .alpha(0.54)
-    .rgb()
-    .string();
-  const fontFamily = fonts.medium;
+    const titleColor = color(colors.text)
+      .alpha(0.54)
+      .rgb()
+      .string();
+    const fontFamily = fonts.medium;
 
-  return (
-    <View {...rest} style={[styles.container, style]}>
-      {title && (
-        <Text
-          numberOfLines={1}
-          style={[styles.title, { color: titleColor, fontFamily }]}
-        >
-          {title}
-        </Text>
-      )}
-      {children}
-    </View>
-  );
-};
+    return (
+      <View {...rest} style={[styles.container, style]}>
+        {title && (
+          <Text
+            numberOfLines={1}
+            style={[styles.title, { color: titleColor, fontFamily }]}
+          >
+            {title}
+          </Text>
+        )}
+        {children}
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {

@@ -55,30 +55,33 @@ type Props = {
  * }
  * ```
  */
-const DrawerSection = ({ children, title, theme, ...props }: Props) => {
-  const { colors, fonts } = theme;
-  const titleColor = color(colors.text)
-    .alpha(0.54)
-    .rgb()
-    .string();
-  const fontFamily = fonts.medium;
+class DrawerSection extends React.Component<Props> {
+  render() {
+    const { children, title, theme, ...rest } = this.props;
+    const { colors, fonts } = theme;
+    const titleColor = color(colors.text)
+      .alpha(0.54)
+      .rgb()
+      .string();
+    const fontFamily = fonts.medium;
 
-  return (
-    <View {...props}>
-      {title && (
-        <View style={{ height: 40, justifyContent: 'center' }}>
-          <Text
-            numberOfLines={1}
-            style={{ color: titleColor, fontFamily, marginLeft: 16 }}
-          >
-            {title}
-          </Text>
-        </View>
-      )}
-      {children}
-      <Divider style={{ marginVertical: 4 }} />
-    </View>
-  );
-};
+    return (
+      <View {...rest}>
+        {title && (
+          <View style={{ height: 40, justifyContent: 'center' }}>
+            <Text
+              numberOfLines={1}
+              style={{ color: titleColor, fontFamily, marginLeft: 16 }}
+            >
+              {title}
+            </Text>
+          </View>
+        )}
+        {children}
+        <Divider style={{ marginVertical: 4 }} />
+      </View>
+    );
+  }
+}
 
 export default withTheme(DrawerSection);

@@ -17,7 +17,7 @@ import ProgressBarExample from './ProgressBarExample';
 import RadioButtonExample from './RadioButtonExample';
 import RadioButtonGroupExample from './RadioButtonGroupExample';
 import RippleExample from './RippleExample';
-import SearchBarExample from './SearchBarExample';
+import SearchbarExample from './SearchbarExample';
 import SwitchExample from './SwitchExample';
 import TextExample from './TextExample';
 import TextInputExample from './TextInputExample';
@@ -43,7 +43,7 @@ export const examples = {
   radio: RadioButtonExample,
   radioGroup: RadioButtonGroupExample,
   ripple: RippleExample,
-  searchbar: SearchBarExample,
+  searchbar: SearchbarExample,
   switch: SwitchExample,
   text: TextExample,
   textInput: TextInputExample,
@@ -68,7 +68,11 @@ class ExampleList extends React.Component<Props> {
   _renderSeparator = (sectionId, rowId) => <Divider key={rowId} />;
 
   render() {
-    const { theme: { colors: { background } } } = this.props;
+    const {
+      theme: {
+        colors: { background },
+      },
+    } = this.props;
     return (
       <ListView
         contentContainerStyle={{ backgroundColor: background }}

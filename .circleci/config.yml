@@ -48,7 +48,12 @@ jobs:
         - run: |
             yarn lint
             yarn flow
-
+  build-package:
+      <<: *defaults
+      steps:
+        - attach_workspace:
+            at: ~/react-native-paper
+        - run: yarn prepare
   unit-tests:
       <<: *defaults
       steps:
@@ -90,6 +95,9 @@ workflows:
           requires:
             - install-dependencies
       - unit-tests:
+          requires:
+            - install-dependencies
+      - build-package:
           requires:
             - install-dependencies
       - build-docs:

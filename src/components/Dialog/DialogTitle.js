@@ -48,13 +48,20 @@ type Props = {
  * }
  * ```
  */
-const DialogTitle = ({
-  children,
-  theme: { colors: { text } },
-  style,
-}: Props) => (
-  <Title style={[styles.text, { color: text }, style]}>{children}</Title>
-);
+class DialogTitle extends React.Component<Props> {
+  render() {
+    const { children, theme, style, ...rest } = this.props;
+
+    return (
+      <Title
+        {...rest}
+        style={[styles.text, { color: theme.colors.text }, style]}
+      >
+        {children}
+      </Title>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   text: {

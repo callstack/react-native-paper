@@ -37,39 +37,41 @@ type Props = {
  * );
  * ```
  */
-const CardContent = (props: Props) => {
-  const { index, total, siblings, style } = props;
-  const cover = 'withTheme(CardCover)';
+class CardContent extends React.Component<Props> {
+  render() {
+    const { index, total, siblings, style, ...rest } = this.props;
+    const cover = 'withTheme(CardCover)';
 
-  let contentStyle, prev, next;
+    let contentStyle, prev, next;
 
-  if (typeof index === 'number' && siblings) {
-    prev = siblings[index - 1];
-    next = siblings[index + 1];
-  }
-
-  if ((prev === cover && next === cover) || total === 1) {
-    contentStyle = styles.only;
-  } else if (index === 0) {
-    if (next === cover) {
-      contentStyle = styles.only;
-    } else {
-      contentStyle = styles.first;
+    if (typeof index === 'number' && siblings) {
+      prev = siblings[index - 1];
+      next = siblings[index + 1];
     }
-  } else if (typeof total === 'number' && index === total - 1) {
-    if (prev === cover) {
+
+    if ((prev === cover && next === cover) || total === 1) {
       contentStyle = styles.only;
-    } else {
+    } else if (index === 0) {
+      if (next === cover) {
+        contentStyle = styles.only;
+      } else {
+        contentStyle = styles.first;
+      }
+    } else if (typeof total === 'number' && index === total - 1) {
+      if (prev === cover) {
+        contentStyle = styles.only;
+      } else {
+        contentStyle = styles.last;
+      }
+    } else if (prev === cover) {
+      contentStyle = styles.first;
+    } else if (next === cover) {
       contentStyle = styles.last;
     }
-  } else if (prev === cover) {
-    contentStyle = styles.first;
-  } else if (next === cover) {
-    contentStyle = styles.last;
-  }
 
-  return <View {...props} style={[styles.container, contentStyle, style]} />;
-};
+    return <View {...rest} style={[styles.container, contentStyle, style]} />;
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
