@@ -64,16 +64,14 @@ class Checkbox extends React.Component<Props> {
         onPress={disabled ? undefined : onPress}
         style={styles.container}
       >
-        <View style={styles.iconContainer}>
-          {checked && (
-            <Icon
-              allowFontScaling={false}
-              name={checked && 'done'}
-              size={24}
-              color={checkedColor}
-              style={styles.icon}
-            />
-          )}
+        <View style={{ opacity: checked ? 1 : 0 }}>
+          <Icon
+            allowFontScaling={false}
+            name="done"
+            size={24}
+            color={checkedColor}
+            style={styles.icon}
+          />
         </View>
       </TouchableRipple>
     );
@@ -86,9 +84,6 @@ const styles = StyleSheet.create({
   },
   icon: {
     margin: 6,
-  },
-  iconContainer: {
-    height: 36,
   },
 });
 
