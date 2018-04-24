@@ -13,7 +13,7 @@ const ProgressDialogExample = ({
   visible: boolean,
   close: Function,
 }) => (
-  <Dialog.ProgressDialog
+  <Dialog.Progress
     color={Colors.indigo500}
     onDismiss={close}
     visible={visible}
