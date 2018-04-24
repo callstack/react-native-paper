@@ -1,6 +1,6 @@
 {
   "name": "react-native-paper",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Material design for React Native",
   "main": "src/index.js",
   "files": [
@@ -18,6 +18,15 @@
     "url": "https://github.com/callstack/react-native-paper/issues"
   },
   "homepage": "https://callstack.github.io/react-native-paper",
+  "keywords": [
+    "android",
+    "ios",
+    "react native",
+    "component library",
+    "ui kit",
+    "material design",
+    "bootstrap"
+  ],
   "scripts": {
     "commitmsg": "node ./scripts/validate-commit-message.js $GIT_PARAMS",
     "precommit": "yarn lint && yarn flow && yarn test",

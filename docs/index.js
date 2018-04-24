@@ -47,6 +47,7 @@ function getPages() {
       }
       return file;
     })
+    .filter((name, index, self) => self.indexOf(name) === index)
     .sort((a, b) => {
       const nameA = a.split('/').pop();
       const nameB = b.split('/').pop();
