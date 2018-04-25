@@ -26,8 +26,9 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
     }
   >
     <View
-      collapsable={undefined}
+      collapsable={false}
       pointerEvents="auto"
+      removeClippedSubviews={false}
       style={
         Object {
           "bottom": 0,
@@ -44,7 +45,17 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         }
       }
     >
-      Route: 0
+      <View
+        collapsable={undefined}
+        style={
+          Object {
+            "flex": 1,
+            "top": 0,
+          }
+        }
+      >
+        Route: 0
+      </View>
     </View>
   </View>
   <View
@@ -560,8 +571,9 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
     }
   >
     <View
-      collapsable={undefined}
+      collapsable={false}
       pointerEvents="auto"
+      removeClippedSubviews={false}
       style={
         Object {
           "bottom": 0,
@@ -578,7 +590,17 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         }
       }
     >
-      Route: 0
+      <View
+        collapsable={undefined}
+        style={
+          Object {
+            "flex": 1,
+            "top": 0,
+          }
+        }
+      >
+        Route: 0
+      </View>
     </View>
   </View>
   <View
@@ -1211,8 +1233,9 @@ exports[`renders non-shifting bottom navigation 1`] = `
     }
   >
     <View
-      collapsable={undefined}
+      collapsable={false}
       pointerEvents="auto"
+      removeClippedSubviews={false}
       style={
         Object {
           "bottom": 0,
@@ -1229,7 +1252,17 @@ exports[`renders non-shifting bottom navigation 1`] = `
         }
       }
     >
-      Route: 0
+      <View
+        collapsable={undefined}
+        style={
+          Object {
+            "flex": 1,
+            "top": 0,
+          }
+        }
+      >
+        Route: 0
+      </View>
     </View>
   </View>
   <View
@@ -2093,8 +2126,9 @@ exports[`renders shifting bottom navigation 1`] = `
     }
   >
     <View
-      collapsable={undefined}
+      collapsable={false}
       pointerEvents="auto"
+      removeClippedSubviews={false}
       style={
         Object {
           "bottom": 0,
@@ -2111,7 +2145,17 @@ exports[`renders shifting bottom navigation 1`] = `
         }
       }
     >
-      Route: 0
+      <View
+        collapsable={undefined}
+        style={
+          Object {
+            "flex": 1,
+            "top": 0,
+          }
+        }
+      >
+        Route: 0
+      </View>
     </View>
   </View>
   <View
