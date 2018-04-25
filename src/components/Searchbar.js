@@ -40,7 +40,7 @@ type Props = {
 };
 
 /**
- * SearchBar is a simple input box where users can type search queries.
+ * Searchbar is a simple input box where users can type search queries.
  *
  * <div class="screenshots">
  *   <img class="medium" src="screenshots/searchbar.png" />
@@ -49,7 +49,7 @@ type Props = {
  * ## Usage
  * ```js
  * import React from 'react';
- * import { SearchBar } from 'react-native-paper';
+ * import { Searchbar } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
@@ -59,7 +59,7 @@ type Props = {
  *   render() {
  *     const { firstQuery } = this.state;
  *     return (
- *       <SearchBar
+ *       <Searchbar
  *         placeholder="Search"
  *         onChangeText={query => { this.setState({ firstQuery: query }); }}
  *         value={firstQuery}
@@ -69,7 +69,7 @@ type Props = {
  * }
  * ```
  */
-class SearchBar extends React.Component<Props> {
+class Searchbar extends React.Component<Props> {
   _handleClearPress = () => {
     this.clear();
     this.props.onChangeText && this.props.onChangeText('');
@@ -189,4 +189,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(SearchBar);
+export default withTheme(Searchbar);
