@@ -65,9 +65,9 @@ class ListAccordion extends React.Component<Props, State> {
   };
 
   _handlePress = () => {
-    this.setState({
-      expanded: !this.state.expanded,
-    });
+    this.setState(state => ({
+      expanded: !state.expanded,
+    }));
   };
 
   render() {
@@ -82,7 +82,7 @@ class ListAccordion extends React.Component<Props, State> {
       .string();
 
     return (
-      <React.Fragment>
+      <View>
         <TouchableRipple
           style={[styles.container, style]}
           onPress={this._handlePress}
@@ -153,13 +153,13 @@ class ListAccordion extends React.Component<Props, State> {
           ? React.Children.map(children, child => {
               if (icon && !child.props.icon && !child.props.avatar) {
                 return React.cloneElement(child, {
-                  style: { paddingLeft: 64 },
+                  style: [styles.child, child.props.style],
                 });
               }
               return child;
             })
           : null}
-      </React.Fragment>
+      </View>
     );
   }
 }
@@ -187,6 +187,9 @@ const styles = StyleSheet.create({
   },
   item: {
     margin: 8,
+  },
+  child: {
+    paddingLeft: 64,
   },
   content: {
     flex: 1,
