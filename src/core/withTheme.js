@@ -34,12 +34,13 @@ const REACT_METHODS = [
 const isClassComponent = (Component: any) =>
   Boolean(Component.prototype && Component.prototype.isReactComponent);
 
-export default function withTheme<P: {}, C: React.ComponentType<P>>(
+export default function withTheme<C: React.ComponentType<*>>(
   Comp: C
 ): C &
-  React.ComponentType<$Diff<P, { theme: Theme }> & { theme?: $Shape<Theme> }> {
+  React.ComponentType<
+    $Diff<React.ElementConfig<C>, { theme: Theme }> & { theme?: $Shape<Theme> }
+  > {
   class ThemedComponent extends React.Component<*> {
-    /* $FlowFixMe */
     static displayName = `withTheme(${Comp.displayName || Comp.name})`;
 
     _previous: ?{ a: Theme, b: ?$Shape<Theme>, result: Theme };
