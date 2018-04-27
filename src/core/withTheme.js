@@ -4,7 +4,7 @@ import * as React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import merge from 'deepmerge';
 import ThemeProvider, { ThemeContext } from './ThemeProvider';
-import type { Theme } from '../types';
+import type { Theme, ThemeShape } from '../types';
 
 const REACT_METHODS = [
   'autobind',
@@ -38,13 +38,13 @@ export default function withTheme<C: React.ComponentType<*>>(
   Comp: C
 ): C &
   React.ComponentType<
-    $Diff<React.ElementConfig<C>, { theme: Theme }> & { theme?: $Shape<Theme> }
+    $Diff<React.ElementConfig<C>, { theme: Theme }> & { theme?: ThemeShape }
   > {
   class ThemedComponent extends React.Component<*> {
     static displayName = `withTheme(${Comp.displayName || Comp.name})`;
 
-    _previous: ?{ a: Theme, b: ?$Shape<Theme>, result: Theme };
-    _merge = (a: Theme, b: ?$Shape<Theme>) => {
+    _previous: ?{ a: Theme, b: ?ThemeShape, result: Theme };
+    _merge = (a: Theme, b: ?ThemeShape) => {
       const previous = this._previous;
 
       if (previous && previous.a === a && previous.b === b) {
