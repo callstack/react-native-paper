@@ -1,0 +1,473 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders list control with action, title and description 1`] = `
+<View
+  accessibilityComponentType={undefined}
+  accessibilityLabel={undefined}
+  accessibilityTraits={undefined}
+  accessible={true}
+  hasTVPreferredFocus={undefined}
+  hitSlop={undefined}
+  isTVSelectable={true}
+  nativeID={undefined}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "padding": 8,
+      },
+      undefined,
+    ]
+  }
+  testID={undefined}
+  tvParallaxProperties={undefined}
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "margin": 8,
+          },
+          Object {
+            "width": 40,
+          },
+          Object {
+            "alignItems": "center",
+            "height": 40,
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Action
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "margin": 8,
+          },
+          Object {
+            "flex": 1,
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
+            },
+            Array [
+              Object {
+                "fontSize": 16,
+              },
+              Object {
+                "color": "rgba(0, 0, 0, 0.87)",
+              },
+            ],
+          ]
+        }
+        theme={
+          Object {
+            "colors": Object {
+              "accent": "#ff4081",
+              "background": "#fafafa",
+              "disabled": "rgba(0, 0, 0, 0.26)",
+              "paper": "#ffffff",
+              "placeholder": "rgba(0, 0, 0, 0.38)",
+              "primary": "#3f51b5",
+              "text": "#000000",
+            },
+            "dark": false,
+            "fonts": Object {
+              "light": "HelveticaNeue-Light",
+              "medium": "HelveticaNeue-Medium",
+              "regular": "Helvetica Neue",
+              "thin": "HelveticaNeue-Thin",
+            },
+            "roundness": 2,
+          }
+        }
+      >
+        First Item
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
+            },
+            Array [
+              Object {
+                "fontSize": 14,
+              },
+              Object {
+                "color": "rgba(0, 0, 0, 0.54)",
+              },
+            ],
+          ]
+        }
+        theme={
+          Object {
+            "colors": Object {
+              "accent": "#ff4081",
+              "background": "#fafafa",
+              "disabled": "rgba(0, 0, 0, 0.26)",
+              "paper": "#ffffff",
+              "placeholder": "rgba(0, 0, 0, 0.38)",
+              "primary": "#3f51b5",
+              "text": "#000000",
+            },
+            "dark": false,
+            "fonts": Object {
+              "light": "HelveticaNeue-Light",
+              "medium": "HelveticaNeue-Medium",
+              "regular": "Helvetica Neue",
+              "thin": "HelveticaNeue-Thin",
+            },
+            "roundness": 2,
+          }
+        }
+      >
+        Description for first item
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders list control with children 1`] = `
+<View
+  accessibilityComponentType={undefined}
+  accessibilityLabel={undefined}
+  accessibilityTraits={undefined}
+  accessible={true}
+  hasTVPreferredFocus={undefined}
+  hitSlop={undefined}
+  isTVSelectable={true}
+  nativeID={undefined}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "padding": 8,
+      },
+      undefined,
+    ]
+  }
+  testID={undefined}
+  tvParallaxProperties={undefined}
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "margin": 8,
+          },
+          Object {
+            "width": 40,
+          },
+          Object {
+            "alignItems": "center",
+            "height": 40,
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Action
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "margin": 8,
+          },
+          Object {
+            "flex": 1,
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
+            },
+            Array [
+              Object {
+                "fontSize": 16,
+              },
+              Object {
+                "color": "rgba(0, 0, 0, 0.87)",
+              },
+            ],
+          ]
+        }
+        theme={
+          Object {
+            "colors": Object {
+              "accent": "#ff4081",
+              "background": "#fafafa",
+              "disabled": "rgba(0, 0, 0, 0.26)",
+              "paper": "#ffffff",
+              "placeholder": "rgba(0, 0, 0, 0.38)",
+              "primary": "#3f51b5",
+              "text": "#000000",
+            },
+            "dark": false,
+            "fonts": Object {
+              "light": "HelveticaNeue-Light",
+              "medium": "HelveticaNeue-Medium",
+              "regular": "Helvetica Neue",
+              "thin": "HelveticaNeue-Thin",
+            },
+            "roundness": 2,
+          }
+        }
+      >
+        First Item
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "margin": 8,
+          },
+          Object {
+            "alignItems": "center",
+            "height": 40,
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": "rgba(0, 0, 0, 0.87)",
+              "fontSize": 24,
+            },
+            undefined,
+            Object {
+              "fontFamily": "Material Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders list control with primary and secondary action 1`] = `
+<View
+  accessibilityComponentType={undefined}
+  accessibilityLabel={undefined}
+  accessibilityTraits={undefined}
+  accessible={true}
+  hasTVPreferredFocus={undefined}
+  hitSlop={undefined}
+  isTVSelectable={true}
+  nativeID={undefined}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "padding": 8,
+      },
+      undefined,
+    ]
+  }
+  testID={undefined}
+  tvParallaxProperties={undefined}
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "margin": 8,
+          },
+          Object {
+            "width": 40,
+          },
+          Object {
+            "alignItems": "center",
+            "height": 40,
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Action
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "margin": 8,
+          },
+          Object {
+            "flex": 1,
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
+            },
+            Array [
+              Object {
+                "fontSize": 16,
+              },
+              Object {
+                "color": "rgba(0, 0, 0, 0.87)",
+              },
+            ],
+          ]
+        }
+        theme={
+          Object {
+            "colors": Object {
+              "accent": "#ff4081",
+              "background": "#fafafa",
+              "disabled": "rgba(0, 0, 0, 0.26)",
+              "paper": "#ffffff",
+              "placeholder": "rgba(0, 0, 0, 0.38)",
+              "primary": "#3f51b5",
+              "text": "#000000",
+            },
+            "dark": false,
+            "fonts": Object {
+              "light": "HelveticaNeue-Light",
+              "medium": "HelveticaNeue-Medium",
+              "regular": "Helvetica Neue",
+              "thin": "HelveticaNeue-Thin",
+            },
+            "roundness": 2,
+          }
+        }
+      >
+        First Item
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "margin": 8,
+          },
+          Object {
+            "alignItems": "center",
+            "height": 40,
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Action
+      </Text>
+    </View>
+  </View>
+</View>
+`;
