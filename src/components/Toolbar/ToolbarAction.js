@@ -17,9 +17,9 @@ type Props = {
    */
   dark?: boolean,
   /**
-   * Custom icon color for Toolbar action.
+   *  Icon color for Toolbar action.
    */
-  customColor?: string,
+  color?: string,
   /**
    * Name of the icon to show.
    */
@@ -41,7 +41,7 @@ type Props = {
 export default class ToolbarAction extends React.Component<Props> {
   render() {
     const {
-      customColor,
+      color: customColor,
       dark,
       icon,
       onPress,
