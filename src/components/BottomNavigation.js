@@ -288,10 +288,16 @@ const calculateShift = (activeIndex, currentIndex, numberOfItems) => {
  */
 class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
   /**
+   * Function which takes a map of route keys to components.
    * Pure components are used to minmize re-rendering of the pages.
    * This drastically improves the animation performance.
    */
-  static SceneMap(scenes: { [key: string]: Function }) {
+  static SceneMap(scenes: {
+    [key: string]: React.ComponentType<{
+      route: T,
+      jumpTo: (key: string) => mixed,
+    }>,
+  }) {
     /* eslint-disable react/no-multi-comp */
     class SceneComponent extends React.PureComponent<*> {
       render() {
