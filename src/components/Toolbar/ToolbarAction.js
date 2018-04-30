@@ -13,9 +13,13 @@ const ANDROID_VERSION_LOLLIPOP = 21;
 
 type Props = {
   /**
-   * Theme color for the action icon, a dark action icon will render a light icon and vice-versa.
+   * A dark action icon will render a light icon and vice-versa.
    */
   dark?: boolean,
+  /**
+   *  Custom color for action icon.
+   */
+  color?: string,
   /**
    * Name of the icon to show.
    */
@@ -36,14 +40,29 @@ type Props = {
  */
 export default class ToolbarAction extends React.Component<Props> {
   render() {
-    const { dark, icon, onPress, size, style, ...rest } = this.props;
+    const {
+      color: customColor,
+      dark,
+      icon,
+      onPress,
+      size,
+      style,
+      ...rest
+    } = this.props;
 
-    const iconColor = dark
-      ? white
-      : color(black)
-          .alpha(0.54)
-          .rgb()
-          .string();
+    let iconColor;
+
+    if (customColor) {
+      iconColor = customColor;
+    } else if (dark) {
+      iconColor = white;
+    } else {
+      iconColor = color(black)
+        .alpha(0.54)
+        .rgb()
+        .string();
+    }
+
     const rippleColor = color(iconColor)
       .alpha(0.32)
       .rgb()
