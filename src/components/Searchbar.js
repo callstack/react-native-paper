@@ -77,24 +77,39 @@ class Searchbar extends React.Component<Props> {
 
   _root: TextInput;
 
+  /**
+   * @internal
+   */
   setNativeProps(...args) {
     return this._root.setNativeProps(...args);
   }
 
-  isFocused(...args) {
-    return this._root.isFocused(...args);
+  /**
+   * Returns `true` if the input is currently focused, `false` otherwise.
+   */
+  isFocused() {
+    return this._root.isFocused();
   }
 
-  clear(...args) {
-    return this._root.clear(...args);
+  /**
+   * Removes all text from the TextInput.
+   */
+  clear() {
+    return this._root.clear();
   }
 
-  focus(...args) {
-    return this._root.focus(...args);
+  /**
+   * Focuses the input.
+   */
+  focus() {
+    return this._root.focus();
   }
 
-  blur(...args) {
-    return this._root.blur(...args);
+  /**
+   * Removes focus from the input.
+   */
+  blur() {
+    return this._root.blur();
   }
 
   render() {
