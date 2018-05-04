@@ -70,5 +70,6 @@
     "modulePathIgnorePatterns": [
       "<rootDir>/example/node_modules"
     ]
-  }
+  },
+  "sideEffects": false
 }
