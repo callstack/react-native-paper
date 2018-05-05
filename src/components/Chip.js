@@ -11,7 +11,7 @@ import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
 type Props = {
-  text: string,
+  children: string | Array<string>,
   icon?: IconSource,
   onPress?: Function,
   onDelete?: Function,
@@ -31,13 +31,13 @@ type Props = {
  * import { Chip } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Chip text="Example Chip" icon="info" onPress={() => {}} />
+ *   <Chip icon="info" onPress={() => {}}>Example Chip</Chip>
  * );
  * ```
  */
 class Chip extends React.Component<Props> {
   render() {
-    const { text, icon, onPress, onDelete, style, theme } = this.props;
+    const { children, icon, onPress, onDelete, style, theme } = this.props;
     const fontFamily = theme.fonts.light;
 
     const textColor = theme.dark ? white : black;
@@ -81,7 +81,7 @@ class Chip extends React.Component<Props> {
           </View>
         ) : null}
         <Text numberOfLines={1} style={[{ fontFamily }, styles.text]}>
-          {text}
+          {children}
         </Text>
         {onDelete ? (
           <Icon

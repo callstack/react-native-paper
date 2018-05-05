@@ -22,31 +22,34 @@ class ChipExample extends React.Component<Props> {
       <View style={[styles.container, { backgroundColor: background }]}>
         <View style={styles.row}>
           <Chip
-            text="Example Chip"
             onPress={() => {
               Alert.alert('Pressed', 'Chip pressed');
             }}
-          />
+          >
+            Example Chip
+          </Chip>
         </View>
         <View style={styles.row}>
           <Chip
-            text="Example Chip"
             onDelete={() => {
               Alert.alert('Delete', 'Delete pressed');
             }}
-          />
+          >
+            Example Chip
+          </Chip>
         </View>
         <View style={styles.row}>
-          <Chip text="Example Chip" icon="info" />
+          <Chip icon="info">Example Chip</Chip>
         </View>
         <View style={styles.row}>
           <Chip
-            text="Example Chip"
             icon={<Image source={require('../assets/avatar.png')} />}
             onDelete={() => {
               Alert.alert('Delete', 'Delete pressed');
             }}
-          />
+          >
+            Example Chip
+          </Chip>
         </View>
       </View>
     );
