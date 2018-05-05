@@ -1,15 +1,13 @@
 /* @flow */
 
 import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import color from 'color';
 
 import { black, white } from '../../styles/colors';
 import TouchableRipple from '../TouchableRipple';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
-
-const ANDROID_VERSION_LOLLIPOP = 21;
 
 type Props = {
   /**
@@ -74,12 +72,11 @@ export default class ToolbarAction extends React.Component<Props> {
         onPress={onPress}
         rippleColor={rippleColor}
         hitSlop={
-          Platform.OS === 'android' &&
-          Platform.Version >= ANDROID_VERSION_LOLLIPOP
-            ? { top: 8, left: 8, bottom: 8, right: 8 }
-            : { top: 4, left: 4, bottom: 4, right: 4 }
+          TouchableRipple.supported
+            ? { top: 10, left: 10, bottom: 10, right: 10 }
+            : { top: 6, left: 6, bottom: 6, right: 6 }
         }
-        style={[styles.button, style]}
+        style={[styles.container, style]}
         {...rest}
       >
         <View>
@@ -91,25 +88,20 @@ export default class ToolbarAction extends React.Component<Props> {
 }
 
 const styles = StyleSheet.create({
-  button:
-    Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_LOLLIPOP
-      ? {
-          height: 28,
-          width: 28,
-          marginHorizontal: 10,
-          paddingHorizontal: 2,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }
-      : {
-          height: 36,
-          width: 36,
-          // TODO add custom ios touchable for Toolbar to handle this
-          // minWidth: 24,
-          // maxWidth: 36,
-          marginHorizontal: 6,
-          borderRadius: 44 / 2,
-          justifyContent: 'center',
-          alignItems: 'center',
-        },
+  container: TouchableRipple.supported
+    ? {
+        height: 28,
+        width: 28,
+        margin: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }
+    : {
+        borderRadius: 36 / 2,
+        height: 36,
+        width: 36,
+        margin: 6,
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
 });

@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform } from 'react-native';
 
 import ToolbarAction from './ToolbarAction';
 import Icon from '../Icon';
@@ -26,8 +26,6 @@ type Props = {
  * The ToolbarBackAction component is used for displaying a back button in the toolbar.
  */
 const ToolbarBackAction = (props: Props) => {
-  const { style, ...rest } = props;
-
   const icon =
     Platform.OS === 'ios'
       ? ({ color }) => (
@@ -35,15 +33,7 @@ const ToolbarBackAction = (props: Props) => {
         )
       : 'arrow-back';
 
-  return <ToolbarAction {...rest} icon={icon} style={[styles.action, style]} />;
+  return <ToolbarAction {...props} icon={icon} />;
 };
-
-const styles = StyleSheet.create({
-  action: Platform.select({
-    ios: {
-      marginHorizontal: 0,
-    },
-  }),
-});
 
 export default ToolbarBackAction;
