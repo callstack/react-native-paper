@@ -33,7 +33,7 @@ const ToolbarBackAction = (props: Props) => {
         )
       : 'arrow-back';
 
-  return <ToolbarAction {...props} icon={icon} />;
+  return <ToolbarAction {...props} size={24} icon={icon} />;
 };
 
 export default ToolbarBackAction;

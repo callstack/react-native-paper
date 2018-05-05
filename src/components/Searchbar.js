@@ -148,7 +148,6 @@ class Searchbar extends React.Component<Props> {
           onPress={onIconPress}
           color={iconColor}
           name={icon || 'search'}
-          style={styles.icon}
         />
         <TextInput
           style={[styles.input, { color: textColor }]}
@@ -169,7 +168,6 @@ class Searchbar extends React.Component<Props> {
             color={iconColor}
             rippleColor={rippleColor}
             onPress={this._handleClearPress}
-            iconStyle={styles.icon}
             name="close"
           />
         ) : null}
@@ -188,9 +186,6 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 18,
     paddingLeft: 8,
-  },
-  icon: {
-    margin: 12,
   },
 });
 

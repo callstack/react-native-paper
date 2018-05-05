@@ -1,12 +1,10 @@
 /* @flow */
 
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
 import color from 'color';
 
 import { black, white } from '../../styles/colors';
-import TouchableRipple from '../TouchableRipple';
-import Icon from '../Icon';
+import TouchableIcon from '../TouchableIcon';
 import type { IconSource } from '../Icon';
 
 type Props = {
@@ -23,7 +21,7 @@ type Props = {
    */
   icon: IconSource,
   /**
-   * Optional icon size, defaults to 24.
+   * Optional icon size.
    */
   size?: number,
   /**
@@ -37,16 +35,12 @@ type Props = {
  * The ToolbarAction component is used for displaying an action item in the toolbar.
  */
 export default class ToolbarAction extends React.Component<Props> {
+  static defaultProps = {
+    size: 24,
+  };
+
   render() {
-    const {
-      color: customColor,
-      dark,
-      icon,
-      onPress,
-      size,
-      style,
-      ...rest
-    } = this.props;
+    const { color: customColor, dark, icon, onPress, ...rest } = this.props;
 
     let iconColor;
 
@@ -61,47 +55,13 @@ export default class ToolbarAction extends React.Component<Props> {
         .string();
     }
 
-    const rippleColor = color(iconColor)
-      .alpha(0.32)
-      .rgb()
-      .string();
-
     return (
-      <TouchableRipple
-        borderless
+      <TouchableIcon
         onPress={onPress}
-        rippleColor={rippleColor}
-        hitSlop={
-          TouchableRipple.supported
-            ? { top: 10, left: 10, bottom: 10, right: 10 }
-            : { top: 6, left: 6, bottom: 6, right: 6 }
-        }
-        style={[styles.container, style]}
+        color={iconColor}
+        name={icon}
         {...rest}
-      >
-        <View>
-          <Icon color={iconColor} name={icon} size={size || 24} />
-        </View>
-      </TouchableRipple>
+      />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: TouchableRipple.supported
-    ? {
-        height: 28,
-        width: 28,
-        margin: 10,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }
-    : {
-        borderRadius: 36 / 2,
-        height: 36,
-        width: 36,
-        margin: 6,
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-});
