@@ -10,14 +10,13 @@ import type { IconSource } from './Icon';
 type Props = {
   name: IconSource,
   color: string,
-  onPress: Function,
-  iconStyle?: any,
+  onPress: ?Function,
 };
 
-const TouchableIcon = ({ name, color, onPress, iconStyle, ...rest }: Props) => (
+const TouchableIcon = ({ name, color, onPress, ...rest }: Props) => (
   <TouchableRipple onPress={onPress} {...rest}>
     <View>
-      <Icon color={color} style={iconStyle} name={name} size={24} />
+      <Icon color={color} name={name} size={24} />
     </View>
   </TouchableRipple>
 );

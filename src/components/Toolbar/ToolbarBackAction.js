@@ -2,11 +2,9 @@
 
 import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
-import color from 'color';
 
 import ToolbarAction from './ToolbarAction';
 import Icon from '../Icon';
-import { black, white } from '../../styles/colors';
 
 type Props = {
   /**
@@ -24,46 +22,22 @@ type Props = {
  * The ToolbarBackAction component is used for displaying a back button in the toolbar.
  */
 const ToolbarBackAction = (props: Props) => {
-  const { dark, onPress, style } = props;
+  const { style, ...rest } = props;
 
-  let icon;
+  const icon =
+    Platform.OS === 'ios'
+      ? ({ color }) => (
+          <Icon name="keyboard-arrow-left" size={36} color={color} />
+        )
+      : 'arrow-back';
 
-  if (Platform.OS === 'ios') {
-    const iconColor = dark
-      ? white
-      : color(black)
-          .alpha(0.54)
-          .rgb()
-          .string();
-
-    icon = (
-      <Icon name="keyboard-arrow-left" style={styles.icon} color={iconColor} />
-    );
-  } else {
-    icon = 'arrow-back';
-  }
-
-  return (
-    <ToolbarAction
-      icon={icon}
-      dark={dark}
-      onPress={onPress}
-      style={[styles.action, style]}
-    />
-  );
+  return <ToolbarAction {...rest} icon={icon} style={[styles.action, style]} />;
 };
 
 const styles = StyleSheet.create({
   action: Platform.select({
     ios: {
       marginHorizontal: 0,
-    },
-  }),
-  icon: Platform.select({
-    ios: {
-      fontSize: 36,
-      height: 36,
-      width: 36,
     },
   }),
 });

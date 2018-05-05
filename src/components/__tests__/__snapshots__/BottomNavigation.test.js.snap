@@ -1392,6 +1392,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
               accessible={true}
               allowFontScaling={false}
               ellipsizeMode="tail"
+              pointerEvents="none"
               style={
                 Array [
                   Object {
@@ -1430,6 +1431,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
               accessible={true}
               allowFontScaling={false}
               ellipsizeMode="tail"
+              pointerEvents="none"
               style={
                 Array [
                   Object {
@@ -1647,6 +1649,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
               accessible={true}
               allowFontScaling={false}
               ellipsizeMode="tail"
+              pointerEvents="none"
               style={
                 Array [
                   Object {
@@ -1685,6 +1688,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
               accessible={true}
               allowFontScaling={false}
               ellipsizeMode="tail"
+              pointerEvents="none"
               style={
                 Array [
                   Object {
@@ -1902,6 +1906,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
               accessible={true}
               allowFontScaling={false}
               ellipsizeMode="tail"
+              pointerEvents="none"
               style={
                 Array [
                   Object {
@@ -1940,6 +1945,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
               accessible={true}
               allowFontScaling={false}
               ellipsizeMode="tail"
+              pointerEvents="none"
               style={
                 Array [
                   Object {
@@ -2309,6 +2315,7 @@ exports[`renders shifting bottom navigation 1`] = `
               accessible={true}
               allowFontScaling={false}
               ellipsizeMode="tail"
+              pointerEvents="none"
               style={
                 Array [
                   Object {
@@ -2469,6 +2476,7 @@ exports[`renders shifting bottom navigation 1`] = `
               accessible={true}
               allowFontScaling={false}
               ellipsizeMode="tail"
+              pointerEvents="none"
               style={
                 Array [
                   Object {
@@ -2629,6 +2637,7 @@ exports[`renders shifting bottom navigation 1`] = `
               accessible={true}
               allowFontScaling={false}
               ellipsizeMode="tail"
+              pointerEvents="none"
               style={
                 Array [
                   Object {
@@ -2789,6 +2798,7 @@ exports[`renders shifting bottom navigation 1`] = `
               accessible={true}
               allowFontScaling={false}
               ellipsizeMode="tail"
+              pointerEvents="none"
               style={
                 Array [
                   Object {
@@ -2949,6 +2959,7 @@ exports[`renders shifting bottom navigation 1`] = `
               accessible={true}
               allowFontScaling={false}
               ellipsizeMode="tail"
+              pointerEvents="none"
               style={
                 Array [
                   Object {

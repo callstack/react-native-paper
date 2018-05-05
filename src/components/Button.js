@@ -188,7 +188,9 @@ class Button extends React.Component<Props, State> {
     const content = (
       <View style={styles.content}>
         {icon && loading !== true ? (
-          <Icon name={icon} size={16} color={textColor} style={styles.icon} />
+          <View style={styles.icon}>
+            <Icon name={icon} size={16} color={textColor} />
+          </View>
         ) : null}
         {loading ? (
           <ActivityIndicator

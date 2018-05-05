@@ -5,7 +5,6 @@ import { StyleSheet, TextInput } from 'react-native';
 
 import color from 'color';
 import withTheme from '../core/withTheme';
-import Icon from './Icon';
 import TouchableIcon from './TouchableIcon';
 import Paper from './Paper';
 import type { Theme } from '../types';
@@ -143,23 +142,14 @@ class Searchbar extends React.Component<Props> {
           style,
         ]}
       >
-        {onIconPress ? (
-          <TouchableIcon
-            borderless
-            rippleColor={rippleColor}
-            onPress={onIconPress}
-            color={iconColor}
-            iconStyle={styles.icon}
-            name={icon || 'search'}
-          />
-        ) : (
-          <Icon
-            style={styles.icon}
-            name={icon || 'search'}
-            size={24}
-            color={iconColor}
-          />
-        )}
+        <TouchableIcon
+          borderless
+          rippleColor={rippleColor}
+          onPress={onIconPress}
+          color={iconColor}
+          name={icon || 'search'}
+          style={styles.icon}
+        />
         <TextInput
           style={[styles.input, { color: textColor }]}
           placeholder={placeholder || ''}

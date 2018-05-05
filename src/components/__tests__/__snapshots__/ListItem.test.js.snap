@@ -301,13 +301,16 @@ exports[`renders list item with avatar and icon 1`] = `
         accessible={true}
         allowFontScaling={false}
         ellipsizeMode="tail"
+        pointerEvents="none"
         style={
           Array [
             Object {
               "color": "rgba(0, 0, 0, 0.54)",
               "fontSize": 24,
             },
-            undefined,
+            Object {
+              "backgroundColor": "transparent",
+            },
             Object {
               "fontFamily": "Material Icons",
               "fontStyle": "normal",
@@ -375,13 +378,16 @@ exports[`renders list item with icon 1`] = `
         accessible={true}
         allowFontScaling={false}
         ellipsizeMode="tail"
+        pointerEvents="none"
         style={
           Array [
             Object {
               "color": "rgba(0, 0, 0, 0.54)",
               "fontSize": 24,
             },
-            undefined,
+            Object {
+              "backgroundColor": "transparent",
+            },
             Object {
               "fontFamily": "Material Icons",
               "fontStyle": "normal",

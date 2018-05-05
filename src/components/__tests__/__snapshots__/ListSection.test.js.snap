@@ -109,13 +109,16 @@ exports[`renders list section with title 1`] = `
           accessible={true}
           allowFontScaling={false}
           ellipsizeMode="tail"
+          pointerEvents="none"
           style={
             Array [
               Object {
                 "color": "rgba(0, 0, 0, 0.54)",
                 "fontSize": 24,
               },
-              undefined,
+              Object {
+                "backgroundColor": "transparent",
+              },
               Object {
                 "fontFamily": "Material Icons",
                 "fontStyle": "normal",
@@ -239,13 +242,16 @@ exports[`renders list section with title 1`] = `
           accessible={true}
           allowFontScaling={false}
           ellipsizeMode="tail"
+          pointerEvents="none"
           style={
             Array [
               Object {
                 "color": "rgba(0, 0, 0, 0.54)",
                 "fontSize": 24,
               },
-              undefined,
+              Object {
+                "backgroundColor": "transparent",
+              },
               Object {
                 "fontFamily": "Material Icons",
                 "fontStyle": "normal",
@@ -383,13 +389,16 @@ exports[`renders list section without title 1`] = `
           accessible={true}
           allowFontScaling={false}
           ellipsizeMode="tail"
+          pointerEvents="none"
           style={
             Array [
               Object {
                 "color": "rgba(0, 0, 0, 0.54)",
                 "fontSize": 24,
               },
-              undefined,
+              Object {
+                "backgroundColor": "transparent",
+              },
               Object {
                 "fontFamily": "Material Icons",
                 "fontStyle": "normal",
@@ -513,13 +522,16 @@ exports[`renders list section without title 1`] = `
           accessible={true}
           allowFontScaling={false}
           ellipsizeMode="tail"
+          pointerEvents="none"
           style={
             Array [
               Object {
                 "color": "rgba(0, 0, 0, 0.54)",
                 "fontSize": 24,
               },
-              undefined,
+              Object {
+                "backgroundColor": "transparent",
+              },
               Object {
                 "fontFamily": "Material Icons",
                 "fontStyle": "normal",

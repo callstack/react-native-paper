@@ -732,7 +732,6 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                           })
                         ) : (
                           <Icon
-                            style={styles.icon}
                             name={(route: Object).icon}
                             color={activeColor}
                             size={24}
@@ -754,7 +753,6 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                             })
                           ) : (
                             <Icon
-                              style={styles.icon}
                               name={(route: Object).icon}
                               color={inactiveColor}
                               size={24}
@@ -873,9 +871,6 @@ const styles = StyleSheet.create({
   iconWrapper: {
     ...StyleSheet.absoluteFillObject,
     alignItems: 'center',
-  },
-  icon: {
-    backgroundColor: 'transparent',
   },
   labelContainer: {
     height: 18,
