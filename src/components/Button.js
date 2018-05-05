@@ -48,6 +48,10 @@ type Props = {
    */
   color?: string,
   /**
+   * Whether to capitalize the label text.
+   */
+  uppercase?: boolean,
+  /**
    * Label text of the button.
    */
   children: string | Array<string>,
@@ -88,6 +92,10 @@ type State = {
  * ```
  */
 class Button extends React.Component<Props, State> {
+  static defaultProps = {
+    uppercase: true,
+  };
+  
   state = {
     elevation: new Animated.Value(this.props.raised ? 2 : 0),
   };
@@ -120,6 +128,7 @@ class Button extends React.Component<Props, State> {
       loading,
       icon,
       color: buttonColor,
+      uppercase,
       children,
       onPress,
       style,
@@ -210,7 +219,7 @@ class Button extends React.Component<Props, State> {
         >
           {React.Children.map(
             children,
-            child => (typeof child === 'string' ? child.toUpperCase() : child)
+            child => (typeof child === 'string' && uppercase ? child.toUpperCase() : child)
           )}
         </Text>
       </View>
