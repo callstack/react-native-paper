@@ -9,16 +9,8 @@ type Props = {
   theme: Theme,
 };
 
-type State = {
-  loading: boolean,
-};
-
 class ChipExample extends React.Component<Props, State> {
   static title = 'Chip';
-
-  state = {
-    loading: true,
-  };
 
   render() {
     const {
