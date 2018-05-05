@@ -9,7 +9,7 @@ type Props = {
   theme: Theme,
 };
 
-class ChipExample extends React.Component<Props, State> {
+class ChipExample extends React.Component<Props> {
   static title = 'Chip';
 
   render() {
