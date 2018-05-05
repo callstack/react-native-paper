@@ -1,0 +1,344 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders chip with icon 1`] = `
+<View
+  accessibilityComponentType={undefined}
+  accessibilityLabel={undefined}
+  accessibilityTraits={undefined}
+  accessible={true}
+  hitSlop={undefined}
+  nativeID={undefined}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderRadius": 16,
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+        "margin": 4,
+      },
+      Object {
+        "backgroundColor": "rgba(0, 0, 0, 0.12)",
+      },
+      undefined,
+    ]
+  }
+  testID={undefined}
+>
+  <Text
+    accessible={true}
+    allowFontScaling={false}
+    ellipsizeMode="tail"
+    pointerEvents="none"
+    style={
+      Array [
+        Object {
+          "color": "rgba(0, 0, 0, 0.54)",
+          "fontSize": 32,
+        },
+        Object {
+          "backgroundColor": "transparent",
+        },
+        Object {
+          "fontFamily": "Material Icons",
+          "fontStyle": "normal",
+          "fontWeight": "normal",
+        },
+      ]
+    }
+  >
+    
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    numberOfLines={1}
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "Helvetica Neue",
+        },
+        Array [
+          Object {
+            "marginVertical": 8,
+          },
+          Object {
+            "color": "rgba(0, 0, 0, 0.87)",
+            "marginLeft": 8,
+            "marginRight": 12,
+          },
+        ],
+      ]
+    }
+    theme={
+      Object {
+        "colors": Object {
+          "accent": "#ff4081",
+          "background": "#fafafa",
+          "disabled": "rgba(0, 0, 0, 0.26)",
+          "error": "#ff1744",
+          "paper": "#ffffff",
+          "placeholder": "rgba(0, 0, 0, 0.38)",
+          "primary": "#3f51b5",
+          "text": "#000000",
+        },
+        "dark": false,
+        "fonts": Object {
+          "light": "HelveticaNeue-Light",
+          "medium": "HelveticaNeue-Medium",
+          "regular": "Helvetica Neue",
+          "thin": "HelveticaNeue-Thin",
+        },
+        "roundness": 2,
+      }
+    }
+  >
+    Example Chip
+  </Text>
+</View>
+`;
+
+exports[`renders chip with onPress 1`] = `
+<View
+  accessibilityComponentType={undefined}
+  accessibilityLabel={undefined}
+  accessibilityTraits={undefined}
+  accessible={true}
+  hitSlop={undefined}
+  nativeID={undefined}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderRadius": 16,
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+        "margin": 4,
+      },
+      Object {
+        "backgroundColor": "rgba(0, 0, 0, 0.12)",
+      },
+      undefined,
+    ]
+  }
+  testID={undefined}
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    numberOfLines={1}
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "Helvetica Neue",
+        },
+        Array [
+          Object {
+            "marginVertical": 8,
+          },
+          Object {
+            "color": "rgba(0, 0, 0, 0.87)",
+            "marginLeft": 12,
+            "marginRight": 12,
+          },
+        ],
+      ]
+    }
+    theme={
+      Object {
+        "colors": Object {
+          "accent": "#ff4081",
+          "background": "#fafafa",
+          "disabled": "rgba(0, 0, 0, 0.26)",
+          "error": "#ff1744",
+          "paper": "#ffffff",
+          "placeholder": "rgba(0, 0, 0, 0.38)",
+          "primary": "#3f51b5",
+          "text": "#000000",
+        },
+        "dark": false,
+        "fonts": Object {
+          "light": "HelveticaNeue-Light",
+          "medium": "HelveticaNeue-Medium",
+          "regular": "Helvetica Neue",
+          "thin": "HelveticaNeue-Thin",
+        },
+        "roundness": 2,
+      }
+    }
+  >
+    Example Chip
+  </Text>
+</View>
+`;
+
+exports[`renders deletable chip 1`] = `
+<View
+  accessibilityComponentType={undefined}
+  accessibilityLabel={undefined}
+  accessibilityTraits={undefined}
+  accessible={true}
+  hitSlop={undefined}
+  nativeID={undefined}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderRadius": 16,
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+        "margin": 4,
+      },
+      Object {
+        "backgroundColor": "rgba(0, 0, 0, 0.12)",
+      },
+      undefined,
+    ]
+  }
+  testID={undefined}
+>
+  <Text
+    accessible={true}
+    allowFontScaling={false}
+    ellipsizeMode="tail"
+    pointerEvents="none"
+    style={
+      Array [
+        Object {
+          "color": "rgba(0, 0, 0, 0.54)",
+          "fontSize": 32,
+        },
+        Object {
+          "backgroundColor": "transparent",
+        },
+        Object {
+          "fontFamily": "Material Icons",
+          "fontStyle": "normal",
+          "fontWeight": "normal",
+        },
+      ]
+    }
+  >
+    
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    numberOfLines={1}
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "Helvetica Neue",
+        },
+        Array [
+          Object {
+            "marginVertical": 8,
+          },
+          Object {
+            "color": "rgba(0, 0, 0, 0.87)",
+            "marginLeft": 8,
+            "marginRight": 0,
+          },
+        ],
+      ]
+    }
+    theme={
+      Object {
+        "colors": Object {
+          "accent": "#ff4081",
+          "background": "#fafafa",
+          "disabled": "rgba(0, 0, 0, 0.26)",
+          "error": "#ff1744",
+          "paper": "#ffffff",
+          "placeholder": "rgba(0, 0, 0, 0.38)",
+          "primary": "#3f51b5",
+          "text": "#000000",
+        },
+        "dark": false,
+        "fonts": Object {
+          "light": "HelveticaNeue-Light",
+          "medium": "HelveticaNeue-Medium",
+          "regular": "Helvetica Neue",
+          "thin": "HelveticaNeue-Thin",
+        },
+        "roundness": 2,
+      }
+    }
+  >
+    Example Chip
+  </Text>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    hitSlop={undefined}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "padding": 6,
+      }
+    }
+    testID={undefined}
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={false}
+      ellipsizeMode="tail"
+      pointerEvents="none"
+      style={
+        Array [
+          Object {
+            "color": "rgba(0, 0, 0, 0.54)",
+            "fontSize": 20,
+          },
+          Object {
+            "backgroundColor": "transparent",
+          },
+          Object {
+            "fontFamily": "Material Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+        ]
+      }
+    >
+      
+    </Text>
+  </View>
+</View>
+`;

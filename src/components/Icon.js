@@ -37,7 +37,7 @@ export type IconSource =
 
 type IconProps = {
   color: string,
-  size?: number,
+  size: number,
 };
 
 type Props = IconProps & {
