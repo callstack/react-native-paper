@@ -22,16 +22,16 @@
   Press me
 <span class="token tag" ><span class="token tag" ><span class="token punctuation" >&lt;/</span>Button</span><span class="token punctuation" >&gt;</span></span>
 </code></pre>
-<h3>3. A React element</h3>
-<p>You can pass any react element to be used an icon. The element is used as is without any modification. However, it might get clipped if the provided element's size are bigger than what the component renders. It's upto you to make sure that the size of the element is correct.</p>
+<h3>3. A render function</h3>
+<p>You can pass a function which returns a react element to be used an icon. The function receives an object with <code>size</code> and <code>color</code> properties as it's argument. element is used as is without any modification. However, it might get clipped if the provided element's size are bigger than what the component renders. It's upto you to make sure that the size of the element is correct.</p>
 <p>Example:</p>
 <pre><code class="language-js"><span class="token tag" ><span class="token tag" ><span class="token punctuation" >&lt;</span>Button</span>
-  <span class="token attr-name" >icon</span><span class="token script language-javascript" ><span class="token punctuation" >=</span><span class="token punctuation brackets-braces" >{</span>
+  <span class="token attr-name" >icon</span><span class="token script language-javascript" ><span class="token punctuation" >=</span><span class="token punctuation brackets-braces" >{</span><span class="token punctuation brackets-parentheses" >(</span><span class="token punctuation brackets-braces" >{</span> size<span class="token punctuation" >,</span> color <span class="token punctuation brackets-braces" >}</span><span class="token punctuation brackets-parentheses" >)</span> <span class="token operator" >=</span><span class="token operator" >&gt;</span> <span class="token punctuation brackets-parentheses" >(</span>
     <span class="token operator" >&lt;</span>Image
-     source<span class="token punctuation" >=</span><span class="token punctuation brackets-braces" >{</span><span class="token function" >require</span><span class="token punctuation brackets-parentheses" >(</span><span class="token string" >'../assets/chameleon.jpg'</span><span class="token punctuation brackets-parentheses" >)</span><span class="token punctuation brackets-braces" >}</span>
-     style<span class="token punctuation" >=</span><span class="token punctuation brackets-braces" >{</span><span class="token punctuation brackets-braces" >{</span> width<span class="token punctuation" >:</span> <span class="token number" >16</span><span class="token punctuation" >,</span> height<span class="token punctuation" >:</span> <span class="token number" >16</span><span class="token punctuation" >,</span> borderRadius<span class="token punctuation" >:</span> <span class="token number" >10</span> <span class="token punctuation brackets-braces" >}</span><span class="token punctuation brackets-braces" >}</span></span>
+      source<span class="token punctuation" >=</span><span class="token punctuation brackets-braces" >{</span><span class="token function" >require</span><span class="token punctuation brackets-parentheses" >(</span><span class="token string" >'../assets/chameleon.jpg'</span><span class="token punctuation brackets-parentheses" >)</span><span class="token punctuation brackets-braces" >}</span>
+      style<span class="token punctuation" >=</span><span class="token punctuation brackets-braces" >{</span><span class="token punctuation brackets-braces" >{</span> width<span class="token punctuation" >:</span> size<span class="token punctuation" >,</span> height<span class="token punctuation" >:</span> size<span class="token punctuation" >,</span> tintColor<span class="token punctuation" >:</span> color <span class="token punctuation brackets-braces" >}</span><span class="token punctuation brackets-braces" >}</span></span>
     <span class="token punctuation" >/&gt;</span></span>
-  <span class="token punctuation brackets-braces" >}</span>
+  <span class="token punctuation brackets-parentheses" >)</span><span class="token punctuation brackets-braces" >}</span>
 <span class="token operator" >&gt;</span>
   Press me
 <span class="token tag" ><span class="token tag" ><span class="token punctuation" >&lt;/</span>Button</span><span class="token punctuation" >&gt;</span></span>
