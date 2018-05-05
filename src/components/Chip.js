@@ -22,6 +22,19 @@ type Props = {
   theme: Theme,
 };
 
+/**
+ * The Chip component displays entities in small blocks.
+ *
+ * ## Usage
+ * ```js
+ * import * as React from 'react';
+ * import { Chip } from 'react-native-paper';
+ *
+ * const MyComponent = () => (
+ *   <Chip text="Example Chip" icon="info" onPress={() => {}} />
+ * );
+ * ```
+ */
 class Chip extends React.Component<Props> {
   render() {
     const { text, icon, onPress, onDelete, style, theme } = this.props;
