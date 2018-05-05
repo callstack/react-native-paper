@@ -3,7 +3,7 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
 import { Text } from 'react-native';
-import ListItem from '../ListItem';
+import ListItem from '../List/ListItem';
 
 it('renders list item with title and description', () => {
   const tree = renderer

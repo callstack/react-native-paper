@@ -3,12 +3,12 @@
 import color from 'color';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import Icon from './Icon';
-import TouchableRipple from './TouchableRipple';
-import Text from './Typography/Text';
-import withTheme from '../core/withTheme';
-import type { Theme } from '../types';
-import type { IconSource } from './Icon';
+import Icon from '../Icon';
+import TouchableRipple from '../TouchableRipple';
+import Text from '../Typography/Text';
+import withTheme from '../../core/withTheme';
+import type { Theme } from '../../types';
+import type { IconSource } from '../Icon';
 
 type Props = {
   /**
