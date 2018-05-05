@@ -17,6 +17,10 @@ type Props = {
    */
   dark?: boolean,
   /**
+   *  Icon color for Toolbar action.
+   */
+  color?: string,
+  /**
    * Name of the icon to show.
    */
   icon: IconSource,
@@ -36,14 +40,29 @@ type Props = {
  */
 export default class ToolbarAction extends React.Component<Props> {
   render() {
-    const { dark, icon, onPress, size, style, ...rest } = this.props;
-
-    const iconColor = dark
-      ? white
-      : color(black)
-          .alpha(0.54)
-          .rgb()
-          .string();
+    const {
+      color: customColor,
+      dark,
+      icon,
+      onPress,
+      size,
+      style,
+      ...rest
+    } = this.props;
+    let iconColor;
+    if (customColor) {
+      iconColor = color(customColor)
+        .alpha(0.54)
+        .rgb()
+        .string();
+    } else if (dark) {
+      iconColor = white;
+    } else {
+      iconColor = color(black)
+        .alpha(0.54)
+        .rgb()
+        .string();
+    }
     const rippleColor = color(iconColor)
       .alpha(0.32)
       .rgb()
