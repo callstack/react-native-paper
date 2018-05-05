@@ -1,15 +1,14 @@
 /* @flow */
 
 import * as React from 'react';
-import { ListView } from 'react-native';
-import { Divider, withTheme } from 'react-native-paper';
+import { FlatList } from 'react-native';
+import { ListItem, Divider, withTheme } from 'react-native-paper';
 import BottomNavigationExample from './BottomNavigationExample';
 import ButtonExample from './ButtonExample';
 import CardExample from './CardExample';
 import CheckboxExample from './CheckboxExample';
 import DialogExample from './DialogExample';
 import DividerExample from './DividerExample';
-import ExampleListRow from './ExampleListRow';
 import FABExample from './FABExample';
 import ListSectionExample from './ListSectionExample';
 import PaperExample from './PaperExample';
@@ -52,22 +51,21 @@ export const examples = {
   toolbar: ToolbarExample,
 };
 
-const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-const dataSource = ds.cloneWithRows(Object.keys(examples));
+const data = Object.keys(examples).map(id => ({ id, data: examples[id] }));
 
 class ExampleList extends React.Component<Props> {
   static navigationOptions = {
     title: 'Examples',
   };
 
-  _renderRow = id => (
-    <ExampleListRow
-      title={examples[id].title}
-      onPress={() => this.props.navigation.navigate(id)}
+  _renderItem = ({ item }) => (
+    <ListItem
+      title={item.data.title}
+      onPress={() => this.props.navigation.navigate(item.id)}
     />
   );
 
-  _renderSeparator = (sectionId, rowId) => <Divider key={rowId} />;
+  _keyExtractor = item => item.id;
 
   render() {
     const {
@@ -75,12 +73,14 @@ class ExampleList extends React.Component<Props> {
         colors: { background },
       },
     } = this.props;
+
     return (
-      <ListView
+      <FlatList
         contentContainerStyle={{ backgroundColor: background }}
-        dataSource={dataSource}
-        renderRow={this._renderRow}
-        renderSeparator={this._renderSeparator}
+        ItemSeparatorComponent={Divider}
+        renderItem={this._renderItem}
+        keyExtractor={this._keyExtractor}
+        data={data}
       />
     );
   }
