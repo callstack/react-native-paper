@@ -28,6 +28,7 @@ export { default as Divider } from './components/Divider';
 export { default as DrawerItem } from './components/DrawerItem';
 export { default as DrawerSection } from './components/DrawerSection';
 export { default as FAB } from './components/FAB';
+export { default as HelperText } from './components/HelperText';
 export { default as ListAccordion } from './components/List/ListAccordion';
 export { default as ListItem } from './components/List/ListItem';
 export { default as ListSection } from './components/List/ListSection';

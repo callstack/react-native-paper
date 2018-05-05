@@ -1,8 +1,8 @@
 /* @flow */
 
 import * as React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { TextInput, withTheme } from 'react-native-paper';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { TextInput, HelperText, withTheme } from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
 
 type Props = {
@@ -11,6 +11,7 @@ type Props = {
 
 type State = {
   text: string,
+  name: string,
 };
 
 class TextInputExample extends React.Component<Props, State> {
@@ -18,7 +19,10 @@ class TextInputExample extends React.Component<Props, State> {
 
   state = {
     text: '',
+    name: '',
   };
+
+  _isUsernameValid = () => /^[a-z]*$/.test(this.state.name);
 
   render() {
     const {
@@ -26,6 +30,7 @@ class TextInputExample extends React.Component<Props, State> {
         colors: { background },
       },
     } = this.props;
+
     return (
       <ScrollView style={[styles.container, { backgroundColor: background }]}>
         <TextInput
@@ -40,6 +45,18 @@ class TextInputExample extends React.Component<Props, State> {
           style={styles.inputContainerStyle}
           label="Disabled Input"
         />
+        <View style={styles.inputContainerStyle}>
+          <TextInput
+            label="Input with helper text"
+            placeholder="Enter username, only letters"
+            value={this.state.name}
+            error={!this._isUsernameValid()}
+            onChangeText={name => this.setState({ name })}
+          />
+          <HelperText type="error" visible={!this._isUsernameValid()}>
+            Error: Only letters are allowed
+          </HelperText>
+        </View>
       </ScrollView>
     );
   }
