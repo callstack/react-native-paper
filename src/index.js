@@ -17,6 +17,7 @@ export { default as CardActions } from './components/Card/CardActions';
 export { default as CardContent } from './components/Card/CardContent';
 export { default as CardCover } from './components/Card/CardCover';
 export { default as Checkbox } from './components/Checkbox';
+export { default as Chip } from './components/Chip';
 export { default as Dialog } from './components/Dialog/Dialog';
 export { default as DialogActions } from './components/Dialog/DialogActions';
 export { default as DialogContent } from './components/Dialog/DialogContent';

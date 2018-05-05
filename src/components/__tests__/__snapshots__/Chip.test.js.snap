@@ -1,0 +1,318 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders chip with icon 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderRadius": 16,
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+      },
+      Object {
+        "backgroundColor": "rgba(0, 0, 0, 0.12)",
+        "paddingLeft": 0,
+        "paddingRight": 12,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "rgba(0, 0, 0, 0.26)",
+        },
+        Object {
+          "borderRadius": 16,
+          "height": 32,
+          "marginRight": 8,
+          "width": 32,
+        },
+      ]
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={false}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontSize": 32,
+          },
+          Object {
+            "borderRadius": 16,
+          },
+          Object {
+            "fontFamily": "Material Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+        ]
+      }
+    >
+      
+    </Text>
+  </View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    numberOfLines={1}
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "Helvetica Neue",
+        },
+        Array [
+          Object {
+            "fontFamily": "HelveticaNeue-Light",
+          },
+          Object {
+            "marginVertical": 8,
+          },
+        ],
+      ]
+    }
+    theme={
+      Object {
+        "colors": Object {
+          "accent": "#ff4081",
+          "background": "#fafafa",
+          "disabled": "rgba(0, 0, 0, 0.26)",
+          "paper": "#ffffff",
+          "placeholder": "rgba(0, 0, 0, 0.38)",
+          "primary": "#3f51b5",
+          "text": "#000000",
+        },
+        "dark": false,
+        "fonts": Object {
+          "light": "HelveticaNeue-Light",
+          "medium": "HelveticaNeue-Medium",
+          "regular": "Helvetica Neue",
+          "thin": "HelveticaNeue-Thin",
+        },
+        "roundness": 2,
+      }
+    }
+  >
+    Example Chip
+  </Text>
+</View>
+`;
+
+exports[`renders chip with onPress 1`] = `
+<View
+  accessibilityComponentType={undefined}
+  accessibilityLabel={undefined}
+  accessibilityTraits={undefined}
+  accessible={true}
+  hitSlop={undefined}
+  nativeID={undefined}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderRadius": 16,
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+      },
+      Object {
+        "backgroundColor": "rgba(0, 0, 0, 0.12)",
+        "paddingLeft": 12,
+        "paddingRight": 12,
+      },
+      undefined,
+    ]
+  }
+  testID={undefined}
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    numberOfLines={1}
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "Helvetica Neue",
+        },
+        Array [
+          Object {
+            "fontFamily": "HelveticaNeue-Light",
+          },
+          Object {
+            "marginVertical": 8,
+          },
+        ],
+      ]
+    }
+    theme={
+      Object {
+        "colors": Object {
+          "accent": "#ff4081",
+          "background": "#fafafa",
+          "disabled": "rgba(0, 0, 0, 0.26)",
+          "paper": "#ffffff",
+          "placeholder": "rgba(0, 0, 0, 0.38)",
+          "primary": "#3f51b5",
+          "text": "#000000",
+        },
+        "dark": false,
+        "fonts": Object {
+          "light": "HelveticaNeue-Light",
+          "medium": "HelveticaNeue-Medium",
+          "regular": "Helvetica Neue",
+          "thin": "HelveticaNeue-Thin",
+        },
+        "roundness": 2,
+      }
+    }
+  >
+    Example Chip
+  </Text>
+</View>
+`;
+
+exports[`renders deletable chip 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderRadius": 16,
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+      },
+      Object {
+        "backgroundColor": "rgba(0, 0, 0, 0.12)",
+        "paddingLeft": 0,
+        "paddingRight": 4,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "rgba(0, 0, 0, 0.26)",
+        },
+        Object {
+          "borderRadius": 16,
+          "height": 32,
+          "marginRight": 8,
+          "width": 32,
+        },
+      ]
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={false}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontSize": 32,
+          },
+          Object {
+            "borderRadius": 16,
+          },
+          Object {
+            "fontFamily": "Material Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+        ]
+      }
+    >
+      
+    </Text>
+  </View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    numberOfLines={1}
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "Helvetica Neue",
+        },
+        Array [
+          Object {
+            "fontFamily": "HelveticaNeue-Light",
+          },
+          Object {
+            "marginVertical": 8,
+          },
+        ],
+      ]
+    }
+    theme={
+      Object {
+        "colors": Object {
+          "accent": "#ff4081",
+          "background": "#fafafa",
+          "disabled": "rgba(0, 0, 0, 0.26)",
+          "paper": "#ffffff",
+          "placeholder": "rgba(0, 0, 0, 0.38)",
+          "primary": "#3f51b5",
+          "text": "#000000",
+        },
+        "dark": false,
+        "fonts": Object {
+          "light": "HelveticaNeue-Light",
+          "medium": "HelveticaNeue-Medium",
+          "regular": "Helvetica Neue",
+          "thin": "HelveticaNeue-Thin",
+        },
+        "roundness": 2,
+      }
+    }
+  >
+    Example Chip
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={false}
+    ellipsizeMode="tail"
+    onPress={[Function]}
+    style={
+      Array [
+        Object {
+          "color": "rgba(0, 0, 0, 0.54)",
+          "fontSize": 18,
+        },
+        Object {
+          "padding": 4,
+        },
+        Object {
+          "fontFamily": "Material Icons",
+          "fontStyle": "normal",
+          "fontWeight": "normal",
+        },
+      ]
+    }
+  >
+    
+  </Text>
+</View>
+`;
