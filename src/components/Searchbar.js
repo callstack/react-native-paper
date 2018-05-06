@@ -30,7 +30,7 @@ type Props = {
   /**
    * Callback to execute if we want the left icon to act as button.
    */
-  onIconPress?: Function,
+  onIconPress?: () => mixed,
   style?: any,
   /**
    * @optional
