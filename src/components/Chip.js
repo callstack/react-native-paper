@@ -11,9 +11,21 @@ import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
 type Props = {
+  /**
+   * Label text of the chip.
+   */
   children: string | Array<string>,
+  /**
+   * Name of the icon. Can be a string, an image source or a react component.
+   */
   icon?: IconSource,
+  /**
+   * Function to execute on press.
+   */
   onPress?: Function,
+  /**
+   * Function to execute on delete.
+   */
   onDelete?: Function,
   style?: any,
   /**
