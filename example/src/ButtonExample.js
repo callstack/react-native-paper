@@ -103,6 +103,20 @@ class ButtonExample extends React.Component<Props, State> {
             Custom component
           </Button>
         </View>
+        <View style={styles.row}>
+          <Button
+            raised
+            primary
+            style={{ flex: 1, height: 50 }}
+            contentStyle={{
+              flex: 1,
+              alignItems: 'center',
+            }}
+            onPress={() => {}}
+          >
+            Custom styles
+          </Button>
+        </View>
       </View>
     );
   }
