@@ -1,14 +1,9 @@
 /* @flow */
 
 import * as React from 'react';
-import {
-  StyleSheet,
-  Animated,
-  Text,
-  View,
-  TouchableWithoutFeedback,
-} from 'react-native';
+import { StyleSheet, Animated } from 'react-native';
 
+import Text from './Typography/Text';
 import ThemedPortal from './Portal/ThemedPortal';
 import withTheme from '../core/withTheme';
 import { white } from '../styles/colors';
@@ -48,8 +43,10 @@ type Props = {
 };
 
 type State = {
-  rendered: boolean,
-  height: number,
+  layout: {
+    height: number,
+    measured: boolean,
+  },
   opacity: Animated.Value,
   translateY: Animated.Value,
 };
@@ -129,25 +126,17 @@ class Snackbar extends React.Component<Props, State> {
   };
 
   state = {
-    rendered: false,
-    height: 0,
+    layout: {
+      height: 0,
+      measured: false,
+    },
     opacity: new Animated.Value(0),
     translateY: new Animated.Value(0),
   };
 
-  componentDidMount() {
-    if (this.props.visible) {
-      this._show();
-    }
-  }
-
   componentDidUpdate(prevProps) {
     if (prevProps.visible !== this.props.visible) {
-      if (this.props.visible) {
-        this._show();
-      } else {
-        this._hide();
-      }
+      this._toggle();
     }
   }
 
@@ -159,16 +148,38 @@ class Snackbar extends React.Component<Props, State> {
 
   _handleLayout = e => {
     const { height } = e.nativeEvent.layout;
+    const { measured } = this.state.layout;
 
-    this.setState({
-      height,
-      rendered: true,
+    this.setState({ layout: { height, measured: true } }, () => {
+      if (measured) {
+        if (!this.props.visible) {
+          // If height changed and Snackbar was hidden, adjust the translate to keep it hidden
+          this.state.translateY.setValue(height);
+        }
+      } else {
+        // Set the appropriate initial values if height was previously unknown
+        this.state.translateY.setValue(height);
+        this.state.opacity.setValue(0);
+
+        // Perform the animation only if we're showing
+        if (this.props.visible) {
+          this._show();
+        }
+      }
     });
+  };
 
-    this.state.translateY.setValue(height);
+  _toggle = () => {
+    if (this.props.visible) {
+      this._show();
+    } else {
+      this._hide();
+    }
   };
 
   _show = () => {
+    clearTimeout(this._hideTimeout);
+
     Animated.parallel([
       Animated.timing(this.state.opacity, {
         toValue: 1,
@@ -199,7 +210,7 @@ class Snackbar extends React.Component<Props, State> {
         useNativeDriver: true,
       }),
       Animated.timing(this.state.translateY, {
-        toValue: this.state.height,
+        toValue: this.state.layout.height,
         duration: SNACKBAR_ANIMATION_DURATION,
         useNativeDriver: true,
       }),
@@ -210,9 +221,6 @@ class Snackbar extends React.Component<Props, State> {
     const { children, action, onDismiss, theme, style } = this.props;
     const { fonts, colors } = theme;
 
-    const buttonMargin = action ? 24 : 0;
-    const contentRightMargin = action ? 0 : 24;
-
     return (
       <ThemedPortal>
         <Animated.View
@@ -220,7 +228,7 @@ class Snackbar extends React.Component<Props, State> {
           style={[
             styles.wrapper,
             {
-              opacity: this.state.rendered ? 1 : 0,
+              opacity: this.state.layout.measured ? 1 : 0,
               transform: [
                 {
                   translateY: this.state.translateY,
@@ -241,36 +249,22 @@ class Snackbar extends React.Component<Props, State> {
               },
             ]}
           >
-            <Text
-              style={[
-                styles.content,
-                {
-                  fontFamily: fonts.regular,
-                  marginRight: contentRightMargin,
-                },
-              ]}
-            >
+            <Text style={[styles.content, { marginRight: action ? 0 : 24 }]}>
               {children}
             </Text>
             {action ? (
-              <View
-                style={{
-                  marginHorizontal: buttonMargin,
+              <Text
+                style={[
+                  styles.button,
+                  { color: colors.accent, fontFamily: fonts.medium },
+                ]}
+                onPress={() => {
+                  action.onPress();
+                  onDismiss();
                 }}
               >
-                <TouchableWithoutFeedback
-                  onPress={() => {
-                    action.onPress();
-                    onDismiss();
-                  }}
-                >
-                  <View>
-                    <Text style={{ color: colors.accent }}>
-                      {action.label.toUpperCase()}
-                    </Text>
-                  </View>
-                </TouchableWithoutFeedback>
-              </View>
+                {action.label.toUpperCase()}
+              </Text>
             ) : null}
           </Animated.View>
         </Animated.View>
@@ -298,6 +292,10 @@ const styles = StyleSheet.create({
     marginVertical: 14,
     flexWrap: 'wrap',
     flex: 1,
+  },
+  button: {
+    paddingHorizontal: 24,
+    paddingVertical: 14,
   },
 });
 
