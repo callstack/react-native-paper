@@ -56,11 +56,11 @@ type Props = {
   /**
    * Callback that is called when the text input is focused.
    */
-  onFocus?: Function,
+  onFocus?: () => mixed,
   /**
    * Callback that is called when the text input is blurred.
    */
-  onBlur?: Function,
+  onBlur?: () => mixed,
   /**
    * Value of the text input.
    */

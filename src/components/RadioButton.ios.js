@@ -25,7 +25,7 @@ type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: Function,
+  onPress?: () => mixed,
   /**
    * Custom color for radio.
    */
@@ -75,9 +75,9 @@ class RadioButton extends React.Component<Props> {
               onPress={
                 disabled
                   ? undefined
-                  : e => {
+                  : () => {
                       context && context.onValueChange(this.props.value);
-                      onPress && onPress(e);
+                      onPress && onPress();
                     }
               }
               style={styles.container}

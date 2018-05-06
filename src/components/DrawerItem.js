@@ -26,7 +26,7 @@ type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: Function,
+  onPress?: () => mixed,
   /**
    * Custom color for the drawer text and icon.
    */
