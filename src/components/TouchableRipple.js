@@ -76,6 +76,12 @@ class TouchableRipple extends React.Component<Props, void> {
     borderless: false,
   };
 
+  /**
+   * Whether ripple effect is supported.
+   */
+  static supported = Platform.OS === 'android' &&
+  Platform.Version >= ANDROID_VERSION_LOLLIPOP;
+
   render() {
     const {
       style,
@@ -98,10 +104,7 @@ class TouchableRipple extends React.Component<Props, void> {
         .rgb()
         .string();
 
-    if (
-      Platform.OS === 'android' &&
-      Platform.Version >= ANDROID_VERSION_LOLLIPOP
-    ) {
+    if (TouchableRipple.supported) {
       return (
         <TouchableNativeFeedback
           {...rest}

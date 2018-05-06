@@ -21,6 +21,9 @@ type Props = {
 class Text extends React.Component<Props> {
   _root: NativeText;
 
+  /**
+   * @internal
+   */
   setNativeProps(...args) {
     return this._root.setNativeProps(...args);
   }

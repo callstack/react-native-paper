@@ -40,7 +40,7 @@ type Props = {
    */
   loading?: boolean,
   /**
-   * Name of the icon. Can be a string, an image source or a react component.
+   * Icon to display for the `Button`.
    */
   icon?: IconSource,
   /**
@@ -188,7 +188,9 @@ class Button extends React.Component<Props, State> {
     const content = (
       <View style={styles.content}>
         {icon && loading !== true ? (
-          <Icon name={icon} size={16} color={textColor} style={styles.icon} />
+          <View style={styles.icon}>
+            <Icon name={icon} size={16} color={textColor} />
+          </View>
         ) : null}
         {loading ? (
           <ActivityIndicator

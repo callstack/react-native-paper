@@ -9,30 +9,51 @@ try {
   // Optionally require vector-icons
   MaterialIcons = require('react-native-vector-icons/MaterialIcons').default;
 } catch (e) {
-  MaterialIcons = ({ name, color, size, style, ...rest }) => {
+  MaterialIcons = ({ name, color, size, ...rest }) => {
     // eslint-disable-next-line no-console
     console.warn(
       `Tried to use the icon '${name}' in a component from 'react-native-paper', but 'react-native-vector-icons' is not installed. To remove this warning, install 'react-native-vector-icons' or use another method to specify icon: https://callstack.github.io/react-native-paper/icons.html.`
     );
 
     return (
-      <Text {...rest} style={[{ color, fontSize: size }, style]}>
+      <Text
+        {...rest}
+        style={[styles.icon, { color, fontSize: size }]}
+        pointerEvents="none"
+      >
         □
       </Text>
     );
   };
 }
 
-export type IconSource = string | { uri: string } | number | React.Node;
+export type IconSource =
+  | string
+  | number
+  | { uri: string }
+  | ((props: IconProps) => React.Node)
+  // This will be removed in next major version
+  | React.Node;
 
-export type Props = {
-  name: IconSource,
+type IconProps = {
   color: string,
   size?: number,
-  style?: any,
 };
 
-const Icon = ({ name, color, size, style, ...rest }: Props) => {
+type Props = IconProps & {
+  name: IconSource,
+};
+
+const isImageSource = source =>
+  // source is an object with uri
+  (typeof source === 'object' &&
+    source !== null &&
+    (Object.prototype.hasOwnProperty.call(source, 'uri') &&
+      typeof source.uri === 'string')) ||
+  // source is a module, e.g. - require('image')
+  typeof source === 'number';
+
+const Icon = ({ name, color, size, ...rest }: Props) => {
   if (typeof name === 'string') {
     return (
       <MaterialIcons
@@ -40,16 +61,11 @@ const Icon = ({ name, color, size, style, ...rest }: Props) => {
         name={name}
         color={color}
         size={size}
-        style={style}
+        style={styles.icon}
+        pointerEvents="none"
       />
     );
-  } else if (
-    (typeof name === 'object' &&
-      name !== null &&
-      (Object.prototype.hasOwnProperty.call(name, 'uri') &&
-        typeof name.uri === 'string')) ||
-    typeof name === 'number'
-  ) {
+  } else if (isImageSource(name)) {
     return (
       <Image
         {...rest}
@@ -60,11 +76,13 @@ const Icon = ({ name, color, size, style, ...rest }: Props) => {
             height: size,
             tintColor: color,
           },
-          style,
         ]}
       />
     );
+  } else if (typeof name === 'function') {
+    return name({ color, size });
   }
+
   return (
     <View
       {...rest}
@@ -74,8 +92,8 @@ const Icon = ({ name, color, size, style, ...rest }: Props) => {
           height: size,
         },
         styles.container,
-        style,
       ]}
+      pointerEvents="box-none"
     >
       {(name: any)}
     </View>
@@ -89,5 +107,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
+  },
+  icon: {
+    backgroundColor: 'transparent',
   },
 });
