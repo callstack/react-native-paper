@@ -75,9 +75,9 @@ class RadioButton extends React.Component<Props> {
               onPress={
                 disabled
                   ? undefined
-                  : e => {
+                  : () => {
                       context && context.onValueChange(this.props.value);
-                      onPress && onPress(e);
+                      onPress && onPress();
                     }
               }
               style={styles.container}
