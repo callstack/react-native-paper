@@ -22,11 +22,11 @@ type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: Function,
+  onPress?: () => mixed,
   /**
    * Function to execute on delete.
    */
-  onDelete?: Function,
+  onDelete?: () => mixed,
   style?: any,
   /**
    * @optional
