@@ -70,9 +70,9 @@ type State = {
  * A button is component that the user can press to trigger an action.
  *
  * <div class="screenshots">
- *   <img src="screenshots/button-raised.png" />
- *   <img src="screenshots/button-primary.png" />
- *   <img src="screenshots/button-custom.png" />
+ *   <img src="screenshots/button-1.png" />
+ *   <img src="screenshots/button-2.png" />
+ *   <img src="screenshots/button-3.png" />
  * </div>
  *
  * ## Usage
@@ -185,37 +185,6 @@ class Button extends React.Component<Props, State> {
     const textStyle = { color: textColor, fontFamily };
     const elevation = disabled ? 0 : this.state.elevation;
 
-    const content = (
-      <View style={styles.content}>
-        {icon && loading !== true ? (
-          <View style={styles.icon}>
-            <Icon name={icon} size={16} color={textColor} />
-          </View>
-        ) : null}
-        {loading ? (
-          <ActivityIndicator
-            size="small"
-            color={textColor}
-            style={styles.icon}
-          />
-        ) : null}
-        <Text
-          numberOfLines={1}
-          style={[
-            styles.label,
-            compact && styles.compactLabel,
-            textStyle,
-            { fontFamily },
-          ]}
-        >
-          {React.Children.map(
-            children,
-            child => (typeof child === 'string' ? child.toUpperCase() : child)
-          )}
-        </Text>
-      </View>
-    );
-
     return (
       <AnimatedPaper
         style={[
@@ -226,21 +195,45 @@ class Button extends React.Component<Props, State> {
           style,
         ]}
       >
-        {disabled ? (
-          content
-        ) : (
-          <TouchableRipple
-            borderless
-            delayPressIn={0}
-            onPress={onPress}
-            onPressIn={this._handlePressIn}
-            onPressOut={this._handlePressOut}
-            rippleColor={rippleColor}
-            style={touchableStyle}
-          >
-            {content}
-          </TouchableRipple>
-        )}
+        <TouchableRipple
+          borderless
+          delayPressIn={0}
+          onPress={disabled ? undefined : onPress}
+          onPressIn={disabled ? undefined : this._handlePressIn}
+          onPressOut={disabled ? undefined : this._handlePressOut}
+          rippleColor={rippleColor}
+          style={touchableStyle}
+        >
+          <View style={styles.content}>
+            {icon && loading !== true ? (
+              <View style={styles.icon}>
+                <Icon name={icon} size={16} color={textColor} />
+              </View>
+            ) : null}
+            {loading ? (
+              <ActivityIndicator
+                size="small"
+                color={textColor}
+                style={styles.icon}
+              />
+            ) : null}
+            <Text
+              numberOfLines={1}
+              style={[
+                styles.label,
+                compact && styles.compactLabel,
+                textStyle,
+                { fontFamily },
+              ]}
+            >
+              {React.Children.map(
+                children,
+                child =>
+                  typeof child === 'string' ? child.toUpperCase() : child
+              )}
+            </Text>
+          </View>
+        </TouchableRipple>
       </AnimatedPaper>
     );
   }
@@ -257,7 +250,7 @@ const styles = StyleSheet.create({
   content: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
   },
   icon: {
     width: 16,
