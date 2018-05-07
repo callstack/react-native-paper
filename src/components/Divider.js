@@ -25,8 +25,8 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Text, View } from 'react-native';
- * import { Divider } from 'react-native-paper';
+ * import { View } from 'react-native';
+ * import { Divider, Text } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <View>
