@@ -186,23 +186,17 @@ class Button extends React.Component<Props, State> {
     const elevation = disabled ? 0 : this.state.elevation;
 
     return (
-      <AnimatedPaper
-        style={[
-          styles.button,
-          compact && styles.compact,
-          { elevation },
-          buttonStyle,
-          style,
-        ]}
+      <TouchableRipple
+        borderless
+        delayPressIn={0}
+        onPress={disabled ? undefined : onPress}
+        onPressIn={disabled ? undefined : this._handlePressIn}
+        onPressOut={disabled ? undefined : this._handlePressOut}
+        rippleColor={rippleColor}
+        style={[touchableStyle, styles.button]}
       >
-        <TouchableRipple
-          borderless
-          delayPressIn={0}
-          onPress={disabled ? undefined : onPress}
-          onPressIn={disabled ? undefined : this._handlePressIn}
-          onPressOut={disabled ? undefined : this._handlePressOut}
-          rippleColor={rippleColor}
-          style={touchableStyle}
+        <AnimatedPaper
+          style={[compact && styles.compact, { elevation }, buttonStyle, style]}
         >
           <View style={styles.content}>
             {icon && loading !== true ? (
@@ -233,8 +227,8 @@ class Button extends React.Component<Props, State> {
               )}
             </Text>
           </View>
-        </TouchableRipple>
-      </AnimatedPaper>
+        </AnimatedPaper>
+      </TouchableRipple>
     );
   }
 }
