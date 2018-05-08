@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { StyleSheet, Platform, Animated } from 'react-native';
 import Modal from '../Modal';
-import { black, white } from '../../styles/colors';
+import { white } from '../../styles/colors';
 import Paper from '../Paper';
 import DialogActions from './DialogActions';
 import DialogTitle from './DialogTitle';
@@ -21,7 +21,7 @@ type Props = {
   /**
    * Callback that is called when the user dismisses the dialog.
    */
-  onDismiss: Function,
+  onDismiss: () => mixed,
   /**
    * Determines Whether the dialog is visible.
    */
@@ -137,12 +137,6 @@ class Dialog extends React.Component<Props, void> {
     );
   }
 }
-
-Dialog.defaultProps = {
-  dismissable: true,
-  titleColor: black,
-  visible: false,
-};
 
 export default withTheme(Dialog);
 

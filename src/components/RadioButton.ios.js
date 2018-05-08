@@ -25,7 +25,7 @@ type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: Function,
+  onPress?: () => mixed,
   /**
    * Custom color for radio.
    */
@@ -75,23 +75,20 @@ class RadioButton extends React.Component<Props> {
               onPress={
                 disabled
                   ? undefined
-                  : e => {
+                  : () => {
                       context && context.onValueChange(this.props.value);
-                      onPress && onPress(e);
+                      onPress && onPress();
                     }
               }
               style={styles.container}
             >
-              <View style={styles.iconContainer}>
-                {checked && (
-                  <Icon
-                    allowFontScaling={false}
-                    name={checked && 'done'}
-                    size={24}
-                    color={checkedColor}
-                    style={styles.icon}
-                  />
-                )}
+              <View style={{ opacity: checked ? 1 : 0 }}>
+                <Icon
+                  allowFontScaling={false}
+                  name={checked && 'done'}
+                  size={24}
+                  color={checkedColor}
+                />
               </View>
             </TouchableRipple>
           );
@@ -104,12 +101,7 @@ class RadioButton extends React.Component<Props> {
 const styles = StyleSheet.create({
   container: {
     borderRadius: 18,
-  },
-  icon: {
-    margin: 6,
-  },
-  iconContainer: {
-    height: 36,
+    padding: 6,
   },
 });
 

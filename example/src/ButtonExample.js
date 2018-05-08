@@ -85,18 +85,18 @@ class ButtonExample extends React.Component<Props, State> {
           </Button>
           <Button
             raised
-            icon={require('../assets/chameleon.jpg')}
+            icon={require('../assets/favorite.png')}
             onPress={() => {}}
           >
             Required asset
           </Button>
           <Button
-            icon={
+            icon={({ size }) => (
               <Image
                 source={require('../assets/chameleon.jpg')}
-                style={{ width: 16, height: 16, borderRadius: 10 }}
+                style={{ width: size, height: size, borderRadius: size / 2 }}
               />
-            }
+            )}
             raised
             onPress={() => {}}
           >

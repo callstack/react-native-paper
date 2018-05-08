@@ -245,7 +245,7 @@ const calculateShift = (activeIndex, currentIndex, numberOfItems) => {
  * Bottom navigation provides quick navigation between top-level views of an app with a bottom tab bar.
  * It is primarily designed for use on mobile.
  *
- * For integration with React Navigation, you can use [react-navigation-tabs](https://github.com/react-navigation/react-navigation-tabs).
+ * For integration with React Navigation, you can use [react-navigation-material-bottom-tab-navigator](https://github.com/react-navigation/react-navigation-material-bottom-tab-navigator).
  *
  * <div class="screenshots">
  *   <img class="medium" src="screenshots/bottom-navigation.gif" />
@@ -288,10 +288,16 @@ const calculateShift = (activeIndex, currentIndex, numberOfItems) => {
  */
 class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
   /**
+   * Function which takes a map of route keys to components.
    * Pure components are used to minmize re-rendering of the pages.
    * This drastically improves the animation performance.
    */
-  static SceneMap(scenes: { [key: string]: Function }) {
+  static SceneMap(scenes: {
+    [key: string]: React.ComponentType<{
+      route: T,
+      jumpTo: (key: string) => mixed,
+    }>,
+  }) {
     /* eslint-disable react/no-multi-comp */
     class SceneComponent extends React.PureComponent<*> {
       render() {
@@ -726,7 +732,6 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                           })
                         ) : (
                           <Icon
-                            style={styles.icon}
                             name={(route: Object).icon}
                             color={activeColor}
                             size={24}
@@ -748,7 +753,6 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                             })
                           ) : (
                             <Icon
-                              style={styles.icon}
                               name={(route: Object).icon}
                               color={inactiveColor}
                               size={24}
@@ -867,9 +871,6 @@ const styles = StyleSheet.create({
   iconWrapper: {
     ...StyleSheet.absoluteFillObject,
     alignItems: 'center',
-  },
-  icon: {
-    backgroundColor: 'transparent',
   },
   labelContainer: {
     height: 18,

@@ -1,0 +1,538 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders list accordion with children 1`] = `
+<View>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    hasTVPreferredFocus={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "padding": 8,
+        },
+        undefined,
+      ]
+    }
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
+    <View
+      pointerEvents="none"
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "margin": 8,
+            },
+            Object {
+              "width": 40,
+            },
+            undefined,
+          ]
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={false}
+          ellipsizeMode="tail"
+          pointerEvents="none"
+          style={
+            Array [
+              Object {
+                "color": "rgba(0, 0, 0, 0.54)",
+                "fontSize": 24,
+              },
+              Object {
+                "backgroundColor": "transparent",
+              },
+              Object {
+                "fontFamily": "Material Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "margin": 8,
+            },
+            Object {
+              "flex": 1,
+              "justifyContent": "center",
+            },
+          ]
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "Helvetica Neue",
+              },
+              Array [
+                Object {
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "rgba(0, 0, 0, 0.87)",
+                },
+              ],
+            ]
+          }
+          theme={
+            Object {
+              "colors": Object {
+                "accent": "#ff4081",
+                "background": "#fafafa",
+                "disabled": "rgba(0, 0, 0, 0.26)",
+                "error": "#ff1744",
+                "paper": "#ffffff",
+                "placeholder": "rgba(0, 0, 0, 0.38)",
+                "primary": "#3f51b5",
+                "text": "#000000",
+              },
+              "dark": false,
+              "fonts": Object {
+                "light": "HelveticaNeue-Light",
+                "medium": "HelveticaNeue-Medium",
+                "regular": "Helvetica Neue",
+                "thin": "HelveticaNeue-Thin",
+              },
+              "roundness": 2,
+            }
+          }
+        >
+          Expandable list item
+        </Text>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "margin": 8,
+            },
+            undefined,
+          ]
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={false}
+          ellipsizeMode="tail"
+          pointerEvents="none"
+          style={
+            Array [
+              Object {
+                "color": "rgba(0, 0, 0, 0.87)",
+                "fontSize": 24,
+              },
+              Object {
+                "backgroundColor": "transparent",
+              },
+              Object {
+                "fontFamily": "Material Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders list accordion with icons 1`] = `
+<View>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    hasTVPreferredFocus={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "padding": 8,
+        },
+        undefined,
+      ]
+    }
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
+    <View
+      pointerEvents="none"
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "margin": 8,
+            },
+            Object {
+              "width": 40,
+            },
+            undefined,
+          ]
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={false}
+          ellipsizeMode="tail"
+          pointerEvents="none"
+          style={
+            Array [
+              Object {
+                "color": "rgba(0, 0, 0, 0.54)",
+                "fontSize": 24,
+              },
+              Object {
+                "backgroundColor": "transparent",
+              },
+              Object {
+                "fontFamily": "Material Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "margin": 8,
+            },
+            Object {
+              "flex": 1,
+              "justifyContent": "center",
+            },
+          ]
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "Helvetica Neue",
+              },
+              Array [
+                Object {
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "rgba(0, 0, 0, 0.87)",
+                },
+              ],
+            ]
+          }
+          theme={
+            Object {
+              "colors": Object {
+                "accent": "#ff4081",
+                "background": "#fafafa",
+                "disabled": "rgba(0, 0, 0, 0.26)",
+                "error": "#ff1744",
+                "paper": "#ffffff",
+                "placeholder": "rgba(0, 0, 0, 0.38)",
+                "primary": "#3f51b5",
+                "text": "#000000",
+              },
+              "dark": false,
+              "fonts": Object {
+                "light": "HelveticaNeue-Light",
+                "medium": "HelveticaNeue-Medium",
+                "regular": "Helvetica Neue",
+                "thin": "HelveticaNeue-Thin",
+              },
+              "roundness": 2,
+            }
+          }
+        >
+          Accordion item 1
+        </Text>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "margin": 8,
+            },
+            undefined,
+          ]
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={false}
+          ellipsizeMode="tail"
+          pointerEvents="none"
+          style={
+            Array [
+              Object {
+                "color": "rgba(0, 0, 0, 0.87)",
+                "fontSize": 24,
+              },
+              Object {
+                "backgroundColor": "transparent",
+              },
+              Object {
+                "fontFamily": "Material Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders multiline list accordion 1`] = `
+<View>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    hasTVPreferredFocus={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "padding": 8,
+        },
+        undefined,
+      ]
+    }
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
+    <View
+      pointerEvents="none"
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "margin": 8,
+            },
+            Object {
+              "flex": 1,
+              "justifyContent": "center",
+            },
+          ]
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "Helvetica Neue",
+              },
+              Array [
+                Object {
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "rgba(0, 0, 0, 0.87)",
+                },
+              ],
+            ]
+          }
+          theme={
+            Object {
+              "colors": Object {
+                "accent": "#ff4081",
+                "background": "#fafafa",
+                "disabled": "rgba(0, 0, 0, 0.26)",
+                "error": "#ff1744",
+                "paper": "#ffffff",
+                "placeholder": "rgba(0, 0, 0, 0.38)",
+                "primary": "#3f51b5",
+                "text": "#000000",
+              },
+              "dark": false,
+              "fonts": Object {
+                "light": "HelveticaNeue-Light",
+                "medium": "HelveticaNeue-Medium",
+                "regular": "Helvetica Neue",
+                "thin": "HelveticaNeue-Thin",
+              },
+              "roundness": 2,
+            }
+          }
+        >
+          Expandable list item
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={2}
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "Helvetica Neue",
+              },
+              Array [
+                Object {
+                  "fontSize": 14,
+                },
+                Object {
+                  "color": "rgba(0, 0, 0, 0.54)",
+                },
+              ],
+            ]
+          }
+          theme={
+            Object {
+              "colors": Object {
+                "accent": "#ff4081",
+                "background": "#fafafa",
+                "disabled": "rgba(0, 0, 0, 0.26)",
+                "error": "#ff1744",
+                "paper": "#ffffff",
+                "placeholder": "rgba(0, 0, 0, 0.38)",
+                "primary": "#3f51b5",
+                "text": "#000000",
+              },
+              "dark": false,
+              "fonts": Object {
+                "light": "HelveticaNeue-Light",
+                "medium": "HelveticaNeue-Medium",
+                "regular": "Helvetica Neue",
+                "thin": "HelveticaNeue-Thin",
+              },
+              "roundness": 2,
+            }
+          }
+        >
+          Describes the expandable list item
+        </Text>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "margin": 8,
+            },
+            Object {
+              "alignItems": "center",
+              "height": 40,
+              "justifyContent": "center",
+            },
+          ]
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={false}
+          ellipsizeMode="tail"
+          pointerEvents="none"
+          style={
+            Array [
+              Object {
+                "color": "rgba(0, 0, 0, 0.87)",
+                "fontSize": 24,
+              },
+              Object {
+                "backgroundColor": "transparent",
+              },
+              Object {
+                "fontFamily": "Material Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;

@@ -8,6 +8,7 @@ export type Theme = {
     background: string,
     paper: string,
     accent: string,
+    error: string,
     text: string,
     disabled: string,
     placeholder: string,
@@ -19,3 +20,9 @@ export type Theme = {
     thin: string,
   },
 };
+
+export type ThemeShape = $Shape<{
+  ...Theme,
+  colors: $Shape<$PropertyType<Theme, 'colors'>>,
+  fonts: $Shape<$PropertyType<Theme, 'fonts'>>,
+}>;

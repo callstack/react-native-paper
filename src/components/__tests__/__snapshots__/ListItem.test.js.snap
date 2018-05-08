@@ -96,6 +96,7 @@ exports[`renders list item with avatar 1`] = `
               "accent": "#ff4081",
               "background": "#fafafa",
               "disabled": "rgba(0, 0, 0, 0.26)",
+              "error": "#ff1744",
               "paper": "#ffffff",
               "placeholder": "rgba(0, 0, 0, 0.38)",
               "primary": "#3f51b5",
@@ -219,6 +220,7 @@ exports[`renders list item with avatar and icon 1`] = `
               "accent": "#ff4081",
               "background": "#fafafa",
               "disabled": "rgba(0, 0, 0, 0.26)",
+              "error": "#ff1744",
               "paper": "#ffffff",
               "placeholder": "rgba(0, 0, 0, 0.38)",
               "primary": "#3f51b5",
@@ -264,6 +266,7 @@ exports[`renders list item with avatar and icon 1`] = `
               "accent": "#ff4081",
               "background": "#fafafa",
               "disabled": "rgba(0, 0, 0, 0.26)",
+              "error": "#ff1744",
               "paper": "#ffffff",
               "placeholder": "rgba(0, 0, 0, 0.38)",
               "primary": "#3f51b5",
@@ -301,13 +304,16 @@ exports[`renders list item with avatar and icon 1`] = `
         accessible={true}
         allowFontScaling={false}
         ellipsizeMode="tail"
+        pointerEvents="none"
         style={
           Array [
             Object {
               "color": "rgba(0, 0, 0, 0.54)",
               "fontSize": 24,
             },
-            undefined,
+            Object {
+              "backgroundColor": "transparent",
+            },
             Object {
               "fontFamily": "Material Icons",
               "fontStyle": "normal",
@@ -375,13 +381,16 @@ exports[`renders list item with icon 1`] = `
         accessible={true}
         allowFontScaling={false}
         ellipsizeMode="tail"
+        pointerEvents="none"
         style={
           Array [
             Object {
               "color": "rgba(0, 0, 0, 0.54)",
               "fontSize": 24,
             },
-            undefined,
+            Object {
+              "backgroundColor": "transparent",
+            },
             Object {
               "fontFamily": "Material Icons",
               "fontStyle": "normal",
@@ -433,6 +442,7 @@ exports[`renders list item with icon 1`] = `
               "accent": "#ff4081",
               "background": "#fafafa",
               "disabled": "rgba(0, 0, 0, 0.26)",
+              "error": "#ff1744",
               "paper": "#ffffff",
               "placeholder": "rgba(0, 0, 0, 0.38)",
               "primary": "#3f51b5",
@@ -531,6 +541,7 @@ exports[`renders list item with title and description 1`] = `
               "accent": "#ff4081",
               "background": "#fafafa",
               "disabled": "rgba(0, 0, 0, 0.26)",
+              "error": "#ff1744",
               "paper": "#ffffff",
               "placeholder": "rgba(0, 0, 0, 0.38)",
               "primary": "#3f51b5",
@@ -576,6 +587,7 @@ exports[`renders list item with title and description 1`] = `
               "accent": "#ff4081",
               "background": "#fafafa",
               "disabled": "rgba(0, 0, 0, 0.26)",
+              "error": "#ff1744",
               "paper": "#ffffff",
               "placeholder": "rgba(0, 0, 0, 0.38)",
               "primary": "#3f51b5",

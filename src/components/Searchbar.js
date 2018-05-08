@@ -5,7 +5,6 @@ import { StyleSheet, TextInput } from 'react-native';
 
 import color from 'color';
 import withTheme from '../core/withTheme';
-import Icon from './Icon';
 import TouchableIcon from './TouchableIcon';
 import Paper from './Paper';
 import type { Theme } from '../types';
@@ -31,7 +30,7 @@ type Props = {
   /**
    * Callback to execute if we want the left icon to act as button.
    */
-  onIconPress?: Function,
+  onIconPress?: () => mixed,
   style?: any,
   /**
    * @optional
@@ -77,24 +76,39 @@ class Searchbar extends React.Component<Props> {
 
   _root: TextInput;
 
+  /**
+   * @internal
+   */
   setNativeProps(...args) {
     return this._root.setNativeProps(...args);
   }
 
-  isFocused(...args) {
-    return this._root.isFocused(...args);
+  /**
+   * Returns `true` if the input is currently focused, `false` otherwise.
+   */
+  isFocused() {
+    return this._root.isFocused();
   }
 
-  clear(...args) {
-    return this._root.clear(...args);
+  /**
+   * Removes all text from the TextInput.
+   */
+  clear() {
+    return this._root.clear();
   }
 
-  focus(...args) {
-    return this._root.focus(...args);
+  /**
+   * Focuses the input.
+   */
+  focus() {
+    return this._root.focus();
   }
 
-  blur(...args) {
-    return this._root.blur(...args);
+  /**
+   * Removes focus from the input.
+   */
+  blur() {
+    return this._root.blur();
   }
 
   render() {
@@ -128,23 +142,13 @@ class Searchbar extends React.Component<Props> {
           style,
         ]}
       >
-        {onIconPress ? (
-          <TouchableIcon
-            borderless
-            rippleColor={rippleColor}
-            onPress={onIconPress}
-            color={iconColor}
-            iconStyle={styles.icon}
-            name={icon || 'search'}
-          />
-        ) : (
-          <Icon
-            style={styles.icon}
-            name={icon || 'search'}
-            size={24}
-            color={iconColor}
-          />
-        )}
+        <TouchableIcon
+          borderless
+          rippleColor={rippleColor}
+          onPress={onIconPress}
+          color={iconColor}
+          name={icon || 'search'}
+        />
         <TextInput
           style={[styles.input, { color: textColor }]}
           placeholder={placeholder || ''}
@@ -164,7 +168,6 @@ class Searchbar extends React.Component<Props> {
             color={iconColor}
             rippleColor={rippleColor}
             onPress={this._handleClearPress}
-            iconStyle={styles.icon}
             name="close"
           />
         ) : null}
@@ -183,9 +186,6 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 18,
     paddingLeft: 8,
-  },
-  icon: {
-    margin: 12,
   },
 });
 

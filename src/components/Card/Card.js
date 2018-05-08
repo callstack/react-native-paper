@@ -21,7 +21,7 @@ type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: Function,
+  onPress?: () => mixed,
   /**
    * Content of the `Card`.
    */

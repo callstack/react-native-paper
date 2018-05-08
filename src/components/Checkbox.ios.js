@@ -20,7 +20,7 @@ type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: Function,
+  onPress?: () => mixed,
   /**
    * Custom color for checkbox.
    */
@@ -70,7 +70,6 @@ class Checkbox extends React.Component<Props> {
             name="done"
             size={24}
             color={checkedColor}
-            style={styles.icon}
           />
         </View>
       </TouchableRipple>
@@ -81,9 +80,7 @@ class Checkbox extends React.Component<Props> {
 const styles = StyleSheet.create({
   container: {
     borderRadius: 18,
-  },
-  icon: {
-    margin: 6,
+    padding: 6,
   },
 });
 
