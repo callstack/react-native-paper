@@ -94,6 +94,7 @@ const container = css`
   padding: 24px 0;
   width: 100%;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 `;
 
 const content = css`
