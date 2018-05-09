@@ -20,7 +20,7 @@ type Props = {
   /**
    * Callback that is called when the user dismisses the modal.
    */
-  onDismiss: Function,
+  onDismiss: () => mixed,
   /**
    * Determines Whether the modal is visible.
    */

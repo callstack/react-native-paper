@@ -26,8 +26,9 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
     }
   >
     <View
-      collapsable={undefined}
+      collapsable={false}
       pointerEvents="auto"
+      removeClippedSubviews={false}
       style={
         Object {
           "bottom": 0,
@@ -44,7 +45,17 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         }
       }
     >
-      Route: 0
+      <View
+        collapsable={undefined}
+        style={
+          Object {
+            "flex": 1,
+            "top": 0,
+          }
+        }
+      >
+        Route: 0
+      </View>
     </View>
   </View>
   <View
@@ -560,8 +571,9 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
     }
   >
     <View
-      collapsable={undefined}
+      collapsable={false}
       pointerEvents="auto"
+      removeClippedSubviews={false}
       style={
         Object {
           "bottom": 0,
@@ -578,7 +590,17 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         }
       }
     >
-      Route: 0
+      <View
+        collapsable={undefined}
+        style={
+          Object {
+            "flex": 1,
+            "top": 0,
+          }
+        }
+      >
+        Route: 0
+      </View>
     </View>
   </View>
   <View
@@ -1211,8 +1233,9 @@ exports[`renders non-shifting bottom navigation 1`] = `
     }
   >
     <View
-      collapsable={undefined}
+      collapsable={false}
       pointerEvents="auto"
+      removeClippedSubviews={false}
       style={
         Object {
           "bottom": 0,
@@ -1229,7 +1252,17 @@ exports[`renders non-shifting bottom navigation 1`] = `
         }
       }
     >
-      Route: 0
+      <View
+        collapsable={undefined}
+        style={
+          Object {
+            "flex": 1,
+            "top": 0,
+          }
+        }
+      >
+        Route: 0
+      </View>
     </View>
   </View>
   <View
@@ -1359,6 +1392,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
               accessible={true}
               allowFontScaling={false}
               ellipsizeMode="tail"
+              pointerEvents="none"
               style={
                 Array [
                   Object {
@@ -1397,6 +1431,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
               accessible={true}
               allowFontScaling={false}
               ellipsizeMode="tail"
+              pointerEvents="none"
               style={
                 Array [
                   Object {
@@ -1474,6 +1509,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     "accent": "#ff4081",
                     "background": "#fafafa",
                     "disabled": "rgba(0, 0, 0, 0.26)",
+                    "error": "#ff1744",
                     "paper": "#ffffff",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
                     "primary": "#3f51b5",
@@ -1531,6 +1567,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     "accent": "#ff4081",
                     "background": "#fafafa",
                     "disabled": "rgba(0, 0, 0, 0.26)",
+                    "error": "#ff1744",
                     "paper": "#ffffff",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
                     "primary": "#3f51b5",
@@ -1614,6 +1651,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
               accessible={true}
               allowFontScaling={false}
               ellipsizeMode="tail"
+              pointerEvents="none"
               style={
                 Array [
                   Object {
@@ -1652,6 +1690,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
               accessible={true}
               allowFontScaling={false}
               ellipsizeMode="tail"
+              pointerEvents="none"
               style={
                 Array [
                   Object {
@@ -1729,6 +1768,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     "accent": "#ff4081",
                     "background": "#fafafa",
                     "disabled": "rgba(0, 0, 0, 0.26)",
+                    "error": "#ff1744",
                     "paper": "#ffffff",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
                     "primary": "#3f51b5",
@@ -1786,6 +1826,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     "accent": "#ff4081",
                     "background": "#fafafa",
                     "disabled": "rgba(0, 0, 0, 0.26)",
+                    "error": "#ff1744",
                     "paper": "#ffffff",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
                     "primary": "#3f51b5",
@@ -1869,6 +1910,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
               accessible={true}
               allowFontScaling={false}
               ellipsizeMode="tail"
+              pointerEvents="none"
               style={
                 Array [
                   Object {
@@ -1907,6 +1949,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
               accessible={true}
               allowFontScaling={false}
               ellipsizeMode="tail"
+              pointerEvents="none"
               style={
                 Array [
                   Object {
@@ -1984,6 +2027,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     "accent": "#ff4081",
                     "background": "#fafafa",
                     "disabled": "rgba(0, 0, 0, 0.26)",
+                    "error": "#ff1744",
                     "paper": "#ffffff",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
                     "primary": "#3f51b5",
@@ -2041,6 +2085,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     "accent": "#ff4081",
                     "background": "#fafafa",
                     "disabled": "rgba(0, 0, 0, 0.26)",
+                    "error": "#ff1744",
                     "paper": "#ffffff",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
                     "primary": "#3f51b5",
@@ -2093,8 +2138,9 @@ exports[`renders shifting bottom navigation 1`] = `
     }
   >
     <View
-      collapsable={undefined}
+      collapsable={false}
       pointerEvents="auto"
+      removeClippedSubviews={false}
       style={
         Object {
           "bottom": 0,
@@ -2111,7 +2157,17 @@ exports[`renders shifting bottom navigation 1`] = `
         }
       }
     >
-      Route: 0
+      <View
+        collapsable={undefined}
+        style={
+          Object {
+            "flex": 1,
+            "top": 0,
+          }
+        }
+      >
+        Route: 0
+      </View>
     </View>
   </View>
   <View
@@ -2265,6 +2321,7 @@ exports[`renders shifting bottom navigation 1`] = `
               accessible={true}
               allowFontScaling={false}
               ellipsizeMode="tail"
+              pointerEvents="none"
               style={
                 Array [
                   Object {
@@ -2342,6 +2399,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     "accent": "#ff4081",
                     "background": "#fafafa",
                     "disabled": "rgba(0, 0, 0, 0.26)",
+                    "error": "#ff1744",
                     "paper": "#ffffff",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
                     "primary": "#3f51b5",
@@ -2425,6 +2483,7 @@ exports[`renders shifting bottom navigation 1`] = `
               accessible={true}
               allowFontScaling={false}
               ellipsizeMode="tail"
+              pointerEvents="none"
               style={
                 Array [
                   Object {
@@ -2502,6 +2561,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     "accent": "#ff4081",
                     "background": "#fafafa",
                     "disabled": "rgba(0, 0, 0, 0.26)",
+                    "error": "#ff1744",
                     "paper": "#ffffff",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
                     "primary": "#3f51b5",
@@ -2585,6 +2645,7 @@ exports[`renders shifting bottom navigation 1`] = `
               accessible={true}
               allowFontScaling={false}
               ellipsizeMode="tail"
+              pointerEvents="none"
               style={
                 Array [
                   Object {
@@ -2662,6 +2723,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     "accent": "#ff4081",
                     "background": "#fafafa",
                     "disabled": "rgba(0, 0, 0, 0.26)",
+                    "error": "#ff1744",
                     "paper": "#ffffff",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
                     "primary": "#3f51b5",
@@ -2745,6 +2807,7 @@ exports[`renders shifting bottom navigation 1`] = `
               accessible={true}
               allowFontScaling={false}
               ellipsizeMode="tail"
+              pointerEvents="none"
               style={
                 Array [
                   Object {
@@ -2822,6 +2885,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     "accent": "#ff4081",
                     "background": "#fafafa",
                     "disabled": "rgba(0, 0, 0, 0.26)",
+                    "error": "#ff1744",
                     "paper": "#ffffff",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
                     "primary": "#3f51b5",
@@ -2905,6 +2969,7 @@ exports[`renders shifting bottom navigation 1`] = `
               accessible={true}
               allowFontScaling={false}
               ellipsizeMode="tail"
+              pointerEvents="none"
               style={
                 Array [
                   Object {
@@ -2982,6 +3047,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     "accent": "#ff4081",
                     "background": "#fafafa",
                     "disabled": "rgba(0, 0, 0, 0.26)",
+                    "error": "#ff1744",
                     "paper": "#ffffff",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
                     "primary": "#3f51b5",

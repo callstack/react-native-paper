@@ -1,16 +1,17 @@
 /* @flow */
 
 import * as React from 'react';
-import { ListView } from 'react-native';
-import { Divider, withTheme } from 'react-native-paper';
+import { FlatList } from 'react-native';
+import { ListItem, Divider, withTheme } from 'react-native-paper';
 import BottomNavigationExample from './BottomNavigationExample';
 import ButtonExample from './ButtonExample';
 import CardExample from './CardExample';
 import CheckboxExample from './CheckboxExample';
+import ChipExample from './ChipExample';
 import DialogExample from './DialogExample';
 import DividerExample from './DividerExample';
-import ExampleListRow from './ExampleListRow';
 import FABExample from './FABExample';
+import ListAccordionExample from './ListAccordionExample';
 import ListSectionExample from './ListSectionExample';
 import PaperExample from './PaperExample';
 import ProgressBarExample from './ProgressBarExample';
@@ -18,6 +19,7 @@ import RadioButtonExample from './RadioButtonExample';
 import RadioButtonGroupExample from './RadioButtonGroupExample';
 import RippleExample from './RippleExample';
 import SearchbarExample from './SearchbarExample';
+import SnackbarExample from './SnackbarExample';
 import SwitchExample from './SwitchExample';
 import TextExample from './TextExample';
 import TextInputExample from './TextInputExample';
@@ -34,9 +36,11 @@ export const examples = {
   button: ButtonExample,
   card: CardExample,
   checkbox: CheckboxExample,
+  chip: ChipExample,
   dialog: DialogExample,
   divider: DividerExample,
   fab: FABExample,
+  listAccordion: ListAccordionExample,
   listSection: ListSectionExample,
   paper: PaperExample,
   progressbar: ProgressBarExample,
@@ -44,28 +48,28 @@ export const examples = {
   radioGroup: RadioButtonGroupExample,
   ripple: RippleExample,
   searchbar: SearchbarExample,
+  snackbar: SnackbarExample,
   switch: SwitchExample,
   text: TextExample,
   textInput: TextInputExample,
   toolbar: ToolbarExample,
 };
 
-const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-const dataSource = ds.cloneWithRows(Object.keys(examples));
+const data = Object.keys(examples).map(id => ({ id, data: examples[id] }));
 
 class ExampleList extends React.Component<Props> {
   static navigationOptions = {
     title: 'Examples',
   };
 
-  _renderRow = id => (
-    <ExampleListRow
-      title={examples[id].title}
-      onPress={() => this.props.navigation.navigate(id)}
+  _renderItem = ({ item }) => (
+    <ListItem
+      title={item.data.title}
+      onPress={() => this.props.navigation.navigate(item.id)}
     />
   );
 
-  _renderSeparator = (sectionId, rowId) => <Divider key={rowId} />;
+  _keyExtractor = item => item.id;
 
   render() {
     const {
@@ -73,12 +77,14 @@ class ExampleList extends React.Component<Props> {
         colors: { background },
       },
     } = this.props;
+
     return (
-      <ListView
+      <FlatList
         contentContainerStyle={{ backgroundColor: background }}
-        dataSource={dataSource}
-        renderRow={this._renderRow}
-        renderSeparator={this._renderSeparator}
+        ItemSeparatorComponent={Divider}
+        renderItem={this._renderItem}
+        keyExtractor={this._keyExtractor}
+        data={data}
       />
     );
   }

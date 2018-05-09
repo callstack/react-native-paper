@@ -1,6 +1,6 @@
 {
   "name": "react-native-paper",
-  "version": "1.4.1",
+  "version": "1.7.0",
   "description": "Material design for React Native",
   "main": "src/index.js",
   "files": [
@@ -63,12 +63,14 @@
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-vector-icons": "*"
   },
   "jest": {
     "preset": "react-native",
     "modulePathIgnorePatterns": [
       "<rootDir>/example/node_modules"
     ]
-  }
+  },
+  "sideEffects": false
 }

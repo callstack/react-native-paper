@@ -20,7 +20,7 @@ type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: Function,
+  onPress?: () => mixed,
   /**
    * Custom color for unchecked checkbox.
    */
@@ -150,7 +150,6 @@ class Checkbox extends React.Component<Props, State> {
             name={checked ? 'check-box' : 'check-box-outline-blank'}
             size={24}
             color={checkboxColor}
-            style={styles.icon}
           />
           <View style={[StyleSheet.absoluteFill, styles.fillContainer]}>
             <Animated.View
@@ -172,9 +171,7 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     width: 36,
     height: 36,
-  },
-  icon: {
-    margin: 6,
+    padding: 6,
   },
   fillContainer: {
     alignItems: 'center',

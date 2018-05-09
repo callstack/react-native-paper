@@ -71,6 +71,7 @@ export default class PortalManager extends React.PureComponent<{}, State> {
         }
         group = {
           key: typeof elevation === 'undefined' ? curr.key : elevation,
+          elevation,
           items: [React.cloneElement(children, { key: curr.key })],
         };
         return [...acc, group];

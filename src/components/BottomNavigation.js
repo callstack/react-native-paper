@@ -169,6 +169,12 @@ type State = {
    */
   shifts: Animated.Value[],
   /**
+   * The top offset for each tab item to position it offscreen.
+   * Placing items offscreen helps to save memory usage for inactive screens with removeClippedSubviews.
+   * We use animated values for this to prevent unnecesary re-renders.
+   */
+  offsets: Animated.Value[],
+  /**
    * Index of the currently active tab. Used for setting the background color.
    * Use don't use the color as an animated value directly, because `setValue` seems to be buggy with colors.
    */
@@ -206,6 +212,7 @@ const MAX_TAB_WIDTH = 168;
 const BAR_HEIGHT = 56;
 const ACTIVE_LABEL_SIZE = 14;
 const INACTIVE_LABEL_SIZE = 12;
+const FAR_FAR_AWAY = 9999;
 
 const calculateShift = (activeIndex, currentIndex, numberOfItems) => {
   if (activeIndex < currentIndex) {
@@ -238,7 +245,7 @@ const calculateShift = (activeIndex, currentIndex, numberOfItems) => {
  * Bottom navigation provides quick navigation between top-level views of an app with a bottom tab bar.
  * It is primarily designed for use on mobile.
  *
- * For integration with React Navigation, you can use [react-navigation-tabs](https://github.com/react-navigation/react-navigation-tabs).
+ * For integration with React Navigation, you can use [react-navigation-material-bottom-tab-navigator](https://github.com/react-navigation/react-navigation-material-bottom-tab-navigator).
  *
  * <div class="screenshots">
  *   <img class="medium" src="screenshots/bottom-navigation.gif" />
@@ -281,10 +288,16 @@ const calculateShift = (activeIndex, currentIndex, numberOfItems) => {
  */
 class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
   /**
+   * Function which takes a map of route keys to components.
    * Pure components are used to minmize re-rendering of the pages.
    * This drastically improves the animation performance.
    */
-  static SceneMap(scenes: { [key: string]: Function }) {
+  static SceneMap(scenes: {
+    [key: string]: React.ComponentType<{
+      route: T,
+      jumpTo: (key: string) => mixed,
+    }>,
+  }) {
     /* eslint-disable react/no-multi-comp */
     class SceneComponent extends React.PureComponent<*> {
       render() {
@@ -311,10 +324,15 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
         prevState.shifts[i] ||
         new Animated.Value(calculateShift(index, i, routes.length))
     );
+    const offsets = routes.map(
+      // offscreen === 1, normal === 0
+      (_, i) => prevState.offsets[i] || new Animated.Value(i === index ? 0 : 1)
+    );
 
     const nextState = {
       tabs,
       shifts,
+      offsets,
     };
 
     if (index !== prevState.current) {
@@ -341,6 +359,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
     this.state = {
       tabs: [],
       shifts: [],
+      offsets: [],
       index: new Animated.Value(index),
       ripple: new Animated.Value(MIN_RIPPLE_SCALE),
       touch: new Animated.Value(MIN_RIPPLE_SCALE),
@@ -357,6 +376,13 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
     }
 
     const { routes, index } = this.props.navigationState;
+
+    // Reset offsets of previous and current tabs before animation
+    this.state.offsets.forEach((offset, i) => {
+      if (i === index || i === prevProps.navigationState.index) {
+        offset.setValue(0);
+      }
+    });
 
     // Reset the ripple to avoid glitch if it's currently animating
     this.state.ripple.setValue(MIN_RIPPLE_SCALE);
@@ -387,13 +413,25 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
           ),
         ]),
       ]),
-    ]).start(() => {
+    ]).start(({ finished }) => {
       // Workaround a bug in native animations where this is reset after first animation
       this.state.tabs.map((tab, i) => tab.setValue(i === index ? 1 : 0));
 
       // Update the index to change bar's bacground color and then hide the ripple
       this.state.index.setValue(index);
       this.state.ripple.setValue(MIN_RIPPLE_SCALE);
+
+      if (finished) {
+        // Position all inactive screens offscreen to save memory usage
+        // Only do it when animation has finished to avoid glitches mid-transition if switching fast
+        this.state.offsets.forEach((offset, i) => {
+          if (i === index) {
+            offset.setValue(0);
+          } else {
+            offset.setValue(1);
+          }
+        });
+      }
     });
   }
 
@@ -522,6 +560,11 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                 })
               : 0;
 
+            const top = this.state.offsets[index].interpolate({
+              inputRange: [0, 1],
+              outputRange: [0, FAR_FAR_AWAY],
+            });
+
             return (
               <Animated.View
                 key={route.key}
@@ -532,11 +575,19 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                   StyleSheet.absoluteFill,
                   { opacity, transform: [{ translateY }] },
                 ]}
+                collapsable={false}
+                removeClippedSubviews={
+                  // On iOS, set removeClippedSubviews to true only when not focused
+                  // This is an workaround for a bug where the clipped view never re-appears
+                  Platform.OS === 'ios' ? navigationState.index !== index : true
+                }
               >
-                {renderScene({
-                  route,
-                  jumpTo: this._jumpTo,
-                })}
+                <Animated.View style={[styles.content, { top }]}>
+                  {renderScene({
+                    route,
+                    jumpTo: this._jumpTo,
+                  })}
+                </Animated.View>
               </Animated.View>
             );
           })}
@@ -681,7 +732,6 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                           })
                         ) : (
                           <Icon
-                            style={styles.icon}
                             name={(route: Object).icon}
                             color={activeColor}
                             size={24}
@@ -703,7 +753,6 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                             })
                           ) : (
                             <Icon
-                              style={styles.icon}
                               name={(route: Object).icon}
                               color={inactiveColor}
                               size={24}
@@ -822,9 +871,6 @@ const styles = StyleSheet.create({
   iconWrapper: {
     ...StyleSheet.absoluteFillObject,
     alignItems: 'center',
-  },
-  icon: {
-    backgroundColor: 'transparent',
   },
   labelContainer: {
     height: 18,

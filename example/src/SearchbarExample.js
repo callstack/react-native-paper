@@ -17,7 +17,7 @@ type State = {
 };
 
 class SearchExample extends React.Component<Props, State> {
-  static title = 'Search bar';
+  static title = 'Searchbar';
 
   state = {
     firstQuery: '',

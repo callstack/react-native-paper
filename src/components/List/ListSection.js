@@ -3,9 +3,9 @@
 import color from 'color';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import Text from './Typography/Text';
-import withTheme from '../core/withTheme';
-import type { Theme } from '../types';
+import Text from '../Typography/Text';
+import withTheme from '../../core/withTheme';
+import type { Theme } from '../../types';
 
 type Props = {
   /**

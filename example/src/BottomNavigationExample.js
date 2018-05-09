@@ -14,6 +14,22 @@ type State = {
   }>,
 };
 
+const PhotoGallery = ({ route }) => {
+  const PHOTOS = Array.from({ length: 24 }).map(
+    (_, i) => `https://unsplash.it/300/300/?random&__id=${route.key}${i}`
+  );
+
+  return (
+    <ScrollView contentContainerStyle={styles.content}>
+      {PHOTOS.map(uri => (
+        <View key={uri} style={styles.item}>
+          <Image source={{ uri }} style={styles.photo} />
+        </View>
+      ))}
+    </ScrollView>
+  );
+};
+
 export default class ButtomNavigationExample extends React.Component<
   {},
   State
@@ -42,21 +58,12 @@ export default class ButtomNavigationExample extends React.Component<
 
   _handleIndexChange = index => this.setState({ index });
 
-  _renderScene = ({ route }) => {
-    const PHOTOS = Array.from({ length: 24 }).map(
-      (_, i) => `https://unsplash.it/300/300/?random&__id=${route.key}${i}`
-    );
-
-    return (
-      <ScrollView contentContainerStyle={styles.content}>
-        {PHOTOS.map(uri => (
-          <View key={uri} style={styles.item}>
-            <Image source={{ uri }} style={styles.photo} />
-          </View>
-        ))}
-      </ScrollView>
-    );
-  };
+  _renderScene = BottomNavigation.SceneMap({
+    album: PhotoGallery,
+    library: PhotoGallery,
+    recents: PhotoGallery,
+    purchased: PhotoGallery,
+  });
 
   render() {
     return (
