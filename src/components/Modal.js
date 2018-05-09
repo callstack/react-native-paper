@@ -42,8 +42,7 @@ type State = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Text } from 'react-native';
- * import { Modal } from 'react-native-paper';
+ * import { Modal, Text } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
