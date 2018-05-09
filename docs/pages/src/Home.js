@@ -66,6 +66,7 @@ const elevated = css`
 const container = css`
   width: 100%;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 `;
 
 const cover = css`
