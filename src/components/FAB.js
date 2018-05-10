@@ -3,7 +3,7 @@
 import color from 'color';
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import Paper from './Paper';
+import Surface from './Surface';
 import Icon from './Icon';
 import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple';
@@ -90,7 +90,7 @@ class FAB extends React.Component<Props> {
       .string();
 
     return (
-      <Paper
+      <Surface
         {...rest}
         style={[{ backgroundColor, elevation: 12 }, styles.container, style]}
       >
@@ -119,7 +119,7 @@ class FAB extends React.Component<Props> {
             ) : null}
           </View>
         </TouchableRipple>
-      </Paper>
+      </Surface>
     );
   }
 }

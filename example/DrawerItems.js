@@ -47,13 +47,10 @@ class DrawerItems extends React.Component<Props, State> {
   };
 
   render() {
-    const {
-      theme: {
-        colors: { paper },
-      },
-    } = this.props;
+    const { colors } = this.props.theme;
+
     return (
-      <View style={[styles.drawerContent, { backgroundColor: paper }]}>
+      <View style={[styles.drawerContent, { backgroundColor: colors.surface }]}>
         <DrawerSection title="Subheader">
           {DrawerItemsData.map((props, index) => (
             <DrawerItem
