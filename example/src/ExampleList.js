@@ -13,13 +13,13 @@ import DividerExample from './DividerExample';
 import FABExample from './FABExample';
 import ListAccordionExample from './ListAccordionExample';
 import ListSectionExample from './ListSectionExample';
-import PaperExample from './PaperExample';
 import ProgressBarExample from './ProgressBarExample';
 import RadioButtonExample from './RadioButtonExample';
 import RadioButtonGroupExample from './RadioButtonGroupExample';
 import RippleExample from './RippleExample';
 import SearchbarExample from './SearchbarExample';
 import SnackbarExample from './SnackbarExample';
+import SurfaceExample from './SurfaceExample';
 import SwitchExample from './SwitchExample';
 import TextExample from './TextExample';
 import TextInputExample from './TextInputExample';
@@ -42,13 +42,13 @@ export const examples = {
   fab: FABExample,
   listAccordion: ListAccordionExample,
   listSection: ListSectionExample,
-  paper: PaperExample,
   progressbar: ProgressBarExample,
   radio: RadioButtonExample,
   radioGroup: RadioButtonGroupExample,
   ripple: RippleExample,
   searchbar: SearchbarExample,
   snackbar: SnackbarExample,
+  surface: SurfaceExample,
   switch: SwitchExample,
   text: TextExample,
   textInput: TextInputExample,

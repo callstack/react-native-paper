@@ -4,7 +4,7 @@ import * as React from 'react';
 import { ActivityIndicator, Animated, View, StyleSheet } from 'react-native';
 import color from 'color';
 import Icon from './Icon';
-import Paper from './Paper';
+import Surface from './Surface';
 import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple';
 import { black, white } from '../styles/colors';
@@ -12,7 +12,7 @@ import withTheme from '../core/withTheme';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
-const AnimatedPaper = Animated.createAnimatedComponent(Paper);
+const AnimatedSurface = Animated.createAnimatedComponent(Surface);
 
 type Props = {
   /**
@@ -186,7 +186,7 @@ class Button extends React.Component<Props, State> {
     const elevation = disabled ? 0 : this.state.elevation;
 
     return (
-      <AnimatedPaper
+      <AnimatedSurface
         style={[
           styles.button,
           compact && styles.compact,
@@ -234,7 +234,7 @@ class Button extends React.Component<Props, State> {
             </Text>
           </View>
         </TouchableRipple>
-      </AnimatedPaper>
+      </AnimatedSurface>
     );
   }
 }
