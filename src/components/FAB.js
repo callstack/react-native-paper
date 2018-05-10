@@ -106,7 +106,7 @@ class FAB extends React.Component<Props> {
               label ? styles.extended : small ? styles.small : styles.standard,
             ]}
           >
-            <Icon name={icon} size={24} color={textColor} />
+            <Icon source={icon} size={24} color={textColor} />
             {label ? (
               <Text
                 style={[

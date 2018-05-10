@@ -75,7 +75,7 @@ class Chip extends React.Component<Props> {
     return (
       <TouchableWithoutFeedback onPress={onPress}>
         <View style={[styles.content, { backgroundColor }, style]}>
-          {icon ? <Icon name={icon} color={iconColor} size={32} /> : null}
+          {icon ? <Icon source={icon} color={iconColor} size={32} /> : null}
           <Text
             numberOfLines={1}
             style={[
@@ -92,7 +92,7 @@ class Chip extends React.Component<Props> {
           {onDelete ? (
             <TouchableWithoutFeedback onPress={onDelete}>
               <View style={styles.delete}>
-                <Icon name="cancel" size={20} color={iconColor} />
+                <Icon source="cancel" size={20} color={iconColor} />
               </View>
             </TouchableWithoutFeedback>
           ) : null}

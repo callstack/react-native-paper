@@ -59,7 +59,7 @@ export default class ToolbarAction extends React.Component<Props> {
       <TouchableIcon
         onPress={onPress}
         color={iconColor}
-        name={icon}
+        source={icon}
         {...rest}
       />
     );

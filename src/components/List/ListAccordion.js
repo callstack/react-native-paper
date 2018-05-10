@@ -4,7 +4,7 @@ import color from 'color';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import TouchableRipple from '../TouchableRipple';
-import Icon from '../Icon';
+import Icon, { type IconSource } from '../Icon';
 import Text from '../Typography/Text';
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types';
@@ -21,7 +21,7 @@ type Props = {
   /**
    * Icon to display for the `ListAccordion`.
    */
-  icon?: React.Node,
+  icon?: IconSource,
 
   /**
    * Content of the section.
@@ -101,7 +101,7 @@ class ListAccordion extends React.Component<Props, State> {
                 ]}
               >
                 <Icon
-                  name={icon}
+                  source={icon}
                   size={24}
                   color={
                     this.state.expanded
@@ -141,7 +141,7 @@ class ListAccordion extends React.Component<Props, State> {
             </View>
             <View style={[styles.item, description && styles.multiline]}>
               <Icon
-                name={
+                source={
                   this.state.expanded
                     ? 'keyboard-arrow-up'
                     : 'keyboard-arrow-down'

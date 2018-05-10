@@ -67,7 +67,7 @@ class Checkbox extends React.Component<Props> {
         <View style={{ opacity: checked ? 1 : 0 }}>
           <Icon
             allowFontScaling={false}
-            name="done"
+            source="done"
             size={24}
             color={checkedColor}
           />
