@@ -2,8 +2,8 @@
 
 import color from 'color';
 import * as React from 'react';
-import { StyleSheet, View, Animated } from 'react-native';
-import Paper from './Paper';
+import { Animated, View, StyleSheet } from 'react-native';
+import Surface from './Surface';
 import CrossFadeIcon from './CrossFadeIcon';
 import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple';
@@ -12,7 +12,7 @@ import withTheme from '../core/withTheme';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
-const AnimatedPaper = Animated.createAnimatedComponent(Paper);
+const AnimatedSurface = Animated.createAnimatedComponent(Surface);
 
 type Props = {
   /**
@@ -92,7 +92,7 @@ class FAB extends React.Component<Props> {
       .string();
 
     return (
-      <AnimatedPaper
+      <AnimatedSurface
         {...rest}
         style={[{ backgroundColor, elevation: 12 }, styles.container, style]}
       >
@@ -122,7 +122,7 @@ class FAB extends React.Component<Props> {
             ) : null}
           </View>
         </TouchableRipple>
-      </AnimatedPaper>
+      </AnimatedSurface>
     );
   }
 }

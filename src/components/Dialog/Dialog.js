@@ -3,15 +3,12 @@
 import * as React from 'react';
 import { StyleSheet, Platform, Animated } from 'react-native';
 import Modal from '../Modal';
-import { white } from '../../styles/colors';
-import Paper from '../Paper';
+import Surface from '../Surface';
 import DialogActions from './DialogActions';
 import DialogTitle from './DialogTitle';
 import DialogContent from './DialogContent';
-import withTheme from '../../core/withTheme';
-import type { Theme } from '../../types';
 
-const AnimatedPaper = Animated.createAnimatedComponent(Paper);
+const AnimatedSurface = Animated.createAnimatedComponent(Surface);
 
 type Props = {
   /**
@@ -31,10 +28,6 @@ type Props = {
    */
   children: React.Node,
   style?: any,
-  /**
-   * @optional
-   */
-  theme: Theme,
 };
 
 /**
@@ -82,23 +75,14 @@ type Props = {
  * }
  * ```
  */
-class Dialog extends React.Component<Props, void> {
+export default class Dialog extends React.Component<Props, void> {
   static defaultProps = {
     dismissable: true,
     visible: false,
   };
 
   render() {
-    const {
-      children,
-      dismissable,
-      onDismiss,
-      visible,
-      style,
-      theme,
-    } = this.props;
-
-    const backgroundColor = theme.colors.paper;
+    const { children, dismissable, onDismiss, visible, style } = this.props;
 
     const childrenArray = React.Children.toArray(children);
     /* $FlowFixMe */
@@ -128,17 +112,15 @@ class Dialog extends React.Component<Props, void> {
     }
     return (
       <Modal dismissable={dismissable} onDismiss={onDismiss} visible={visible}>
-        <AnimatedPaper style={[styles.container, { backgroundColor }, style]}>
+        <AnimatedSurface style={[styles.container, style]}>
           {title}
           {restOfChildrenWithoutTitle}
           {actionBtnsChildren}
-        </AnimatedPaper>
+        </AnimatedSurface>
       </Modal>
     );
   }
 }
-
-export default withTheme(Dialog);
 
 const styles = StyleSheet.create({
   container: {
@@ -152,7 +134,6 @@ const styles = StyleSheet.create({
     marginVertical: Platform.OS === 'android' ? 44 : 0,
     marginHorizontal: 26,
     borderRadius: 2,
-    backgroundColor: white,
     elevation: 24,
   },
 });

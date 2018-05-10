@@ -2,15 +2,15 @@
 
 import * as React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import { Text, Paper, withTheme } from 'react-native-paper';
+import { Text, Surface, withTheme } from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
 
 type Props = {
   theme: Theme,
 };
 
-class PaperExample extends React.Component<Props> {
-  static title = 'Paper';
+class SurfaceExample extends React.Component<Props> {
+  static title = 'Surface';
 
   render() {
     const {
@@ -24,9 +24,9 @@ class PaperExample extends React.Component<Props> {
         contentContainerStyle={styles.content}
       >
         {[1, 2, 4, 6, 12].map(i => (
-          <Paper key={i} style={[styles.paper, { elevation: i }]}>
+          <Surface key={i} style={[styles.surface, { elevation: i }]}>
             <Text>{i}</Text>
-          </Paper>
+          </Surface>
         ))}
       </ScrollView>
     );
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  paper: {
+  surface: {
     margin: 24,
     height: 80,
     width: 80,
@@ -52,4 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(PaperExample);
+export default withTheme(SurfaceExample);

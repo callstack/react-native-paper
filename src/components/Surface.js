@@ -9,7 +9,7 @@ import type { Theme } from '../types';
 
 type Props = {
   /**
-   * Content of the `Paper`.
+   * Content of the `Surface`.
    */
   children: React.Node,
   style?: any,
@@ -20,28 +20,28 @@ type Props = {
 };
 
 /**
- * Paper is a basic container that can give depth to an element with elevation shadow.
+ * Surface is a basic container that can give depth to an element with elevation shadow.
  * A shadow can be applied by specifying the `elevation` property both on Android and iOS.
  *
  * <div class="screenshots">
- *   <img src="screenshots/paper.1_2.png" />
- *   <img src="screenshots/paper.4_6.png" />
- *   <img src="screenshots/paper.9_12.png" />
+ *   <img src="screenshots/surface-1.png" />
+ *   <img src="screenshots/surface-2.png" />
+ *   <img src="screenshots/surface-3.png" />
  * </div>
  *
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Paper, Text } from 'react-native-paper';
+ * import { Surface, Text } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Paper style={styles.paper}>
- *      <Text>Paper</Text>
- *   </Paper>
+ *   <Surface style={styles.surface}>
+ *      <Text>Surface</Text>
+ *   </Surface>
  * );
  *
  * const styles = StyleSheet.create({
- *   paper: {
+ *   surface: {
  *     padding: 8,
  *     height: 80,
  *     width: 80,
@@ -52,7 +52,7 @@ type Props = {
  * });
  * ```
  */
-class Paper extends React.Component<Props> {
+class Surface extends React.Component<Props> {
   render() {
     const { style, theme, ...rest } = this.props;
     const flattenedStyles = StyleSheet.flatten(style) || {};
@@ -62,8 +62,8 @@ class Paper extends React.Component<Props> {
       <View
         {...rest}
         style={[
-          styles.paper,
-          { backgroundColor: theme.colors.paper },
+          styles.surface,
+          { backgroundColor: theme.colors.surface },
           elevation && shadow(elevation),
           style,
         ]}
@@ -72,10 +72,10 @@ class Paper extends React.Component<Props> {
   }
 }
 
-export default withTheme(Paper);
+export default withTheme(Surface);
 
 const styles = StyleSheet.create({
-  paper: {
+  surface: {
     backgroundColor: Colors.white,
   },
 });

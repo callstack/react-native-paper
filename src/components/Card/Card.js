@@ -7,11 +7,11 @@ import {
   TouchableWithoutFeedback,
   StyleSheet,
 } from 'react-native';
-import Paper from '../Paper';
+import Surface from '../Surface';
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types';
 
-const AnimatedPaper = Animated.createAnimatedComponent(Paper);
+const AnimatedSurface = Animated.createAnimatedComponent(Surface);
 
 type Props = {
   /**
@@ -110,7 +110,7 @@ class Card extends React.Component<Props, State> {
         typeof child === 'object' && child.type ? child.type.displayName : null
     );
     return (
-      <AnimatedPaper
+      <AnimatedSurface
         style={[styles.card, { borderRadius: roundness, elevation }, style]}
       >
         <TouchableWithoutFeedback
@@ -135,7 +135,7 @@ class Card extends React.Component<Props, State> {
             )}
           </View>
         </TouchableWithoutFeedback>
-      </AnimatedPaper>
+      </AnimatedSurface>
     );
   }
 }
