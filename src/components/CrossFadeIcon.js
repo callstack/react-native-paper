@@ -105,7 +105,7 @@ class CrossFadeIcon extends React.Component<Props, State> {
               },
             ]}
           >
-            <Icon name={this.state.previousIcon} size={size} color={color} />
+            <Icon source={this.state.previousIcon} size={size} color={color} />
           </Animated.View>
         ) : null}
         <Animated.View
@@ -117,7 +117,7 @@ class CrossFadeIcon extends React.Component<Props, State> {
             },
           ]}
         >
-          <Icon name={this.state.currentIcon} size={size} color={color} />
+          <Icon source={this.state.currentIcon} size={size} color={color} />
         </Animated.View>
       </View>
     );

@@ -9,7 +9,7 @@ import Icon from './Icon';
 import type { IconSource } from './Icon';
 
 type Props = {
-  name: IconSource,
+  source: IconSource,
   color: string,
   size?: number,
   onPress: ?Function,
@@ -17,7 +17,7 @@ type Props = {
 };
 
 const TouchableIcon = ({
-  name,
+  source,
   color: iconColor,
   size = 24,
   onPress,
@@ -43,7 +43,7 @@ const TouchableIcon = ({
       {...rest}
     >
       <View>
-        <Icon color={iconColor} name={name} size={size} />
+        <Icon color={iconColor} source={source} size={size} />
       </View>
     </TouchableRipple>
   );

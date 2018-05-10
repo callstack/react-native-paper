@@ -81,7 +81,7 @@ class DrawerItem extends React.Component<Props> {
     return (
       <TouchableRipple {...props}>
         <View style={[styles.wrapper, { backgroundColor }]}>
-          {icon && <Icon name={icon} size={24} color={iconColor} />}
+          {icon && <Icon source={icon} size={24} color={iconColor} />}
           <Text
             numberOfLines={1}
             style={[
