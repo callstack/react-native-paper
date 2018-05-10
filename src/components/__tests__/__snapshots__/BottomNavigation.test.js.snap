@@ -1509,7 +1509,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     "accent": "#ff4081",
                     "background": "#fafafa",
                     "disabled": "rgba(0, 0, 0, 0.26)",
-                    "error": "#ff1744",
+                    "error": "#B00020",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
                     "primary": "#3f51b5",
                     "surface": "#ffffff",
@@ -1522,7 +1522,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     "regular": "Helvetica Neue",
                     "thin": "HelveticaNeue-Thin",
                   },
-                  "roundness": 2,
+                  "roundness": 4,
                 }
               }
             >
@@ -1567,7 +1567,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     "accent": "#ff4081",
                     "background": "#fafafa",
                     "disabled": "rgba(0, 0, 0, 0.26)",
-                    "error": "#ff1744",
+                    "error": "#B00020",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
                     "primary": "#3f51b5",
                     "surface": "#ffffff",
@@ -1580,7 +1580,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     "regular": "Helvetica Neue",
                     "thin": "HelveticaNeue-Thin",
                   },
-                  "roundness": 2,
+                  "roundness": 4,
                 }
               }
             >
@@ -1768,7 +1768,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     "accent": "#ff4081",
                     "background": "#fafafa",
                     "disabled": "rgba(0, 0, 0, 0.26)",
-                    "error": "#ff1744",
+                    "error": "#B00020",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
                     "primary": "#3f51b5",
                     "surface": "#ffffff",
@@ -1781,7 +1781,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     "regular": "Helvetica Neue",
                     "thin": "HelveticaNeue-Thin",
                   },
-                  "roundness": 2,
+                  "roundness": 4,
                 }
               }
             >
@@ -1826,7 +1826,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     "accent": "#ff4081",
                     "background": "#fafafa",
                     "disabled": "rgba(0, 0, 0, 0.26)",
-                    "error": "#ff1744",
+                    "error": "#B00020",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
                     "primary": "#3f51b5",
                     "surface": "#ffffff",
@@ -1839,7 +1839,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     "regular": "Helvetica Neue",
                     "thin": "HelveticaNeue-Thin",
                   },
-                  "roundness": 2,
+                  "roundness": 4,
                 }
               }
             >
@@ -2027,7 +2027,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     "accent": "#ff4081",
                     "background": "#fafafa",
                     "disabled": "rgba(0, 0, 0, 0.26)",
-                    "error": "#ff1744",
+                    "error": "#B00020",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
                     "primary": "#3f51b5",
                     "surface": "#ffffff",
@@ -2040,7 +2040,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     "regular": "Helvetica Neue",
                     "thin": "HelveticaNeue-Thin",
                   },
-                  "roundness": 2,
+                  "roundness": 4,
                 }
               }
             >
@@ -2085,7 +2085,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     "accent": "#ff4081",
                     "background": "#fafafa",
                     "disabled": "rgba(0, 0, 0, 0.26)",
-                    "error": "#ff1744",
+                    "error": "#B00020",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
                     "primary": "#3f51b5",
                     "surface": "#ffffff",
@@ -2098,7 +2098,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     "regular": "Helvetica Neue",
                     "thin": "HelveticaNeue-Thin",
                   },
-                  "roundness": 2,
+                  "roundness": 4,
                 }
               }
             >
@@ -2399,7 +2399,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     "accent": "#ff4081",
                     "background": "#fafafa",
                     "disabled": "rgba(0, 0, 0, 0.26)",
-                    "error": "#ff1744",
+                    "error": "#B00020",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
                     "primary": "#3f51b5",
                     "surface": "#ffffff",
@@ -2412,7 +2412,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     "regular": "Helvetica Neue",
                     "thin": "HelveticaNeue-Thin",
                   },
-                  "roundness": 2,
+                  "roundness": 4,
                 }
               }
             >
@@ -2561,7 +2561,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     "accent": "#ff4081",
                     "background": "#fafafa",
                     "disabled": "rgba(0, 0, 0, 0.26)",
-                    "error": "#ff1744",
+                    "error": "#B00020",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
                     "primary": "#3f51b5",
                     "surface": "#ffffff",
@@ -2574,7 +2574,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     "regular": "Helvetica Neue",
                     "thin": "HelveticaNeue-Thin",
                   },
-                  "roundness": 2,
+                  "roundness": 4,
                 }
               }
             >
@@ -2723,7 +2723,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     "accent": "#ff4081",
                     "background": "#fafafa",
                     "disabled": "rgba(0, 0, 0, 0.26)",
-                    "error": "#ff1744",
+                    "error": "#B00020",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
                     "primary": "#3f51b5",
                     "surface": "#ffffff",
@@ -2736,7 +2736,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     "regular": "Helvetica Neue",
                     "thin": "HelveticaNeue-Thin",
                   },
-                  "roundness": 2,
+                  "roundness": 4,
                 }
               }
             >
@@ -2885,7 +2885,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     "accent": "#ff4081",
                     "background": "#fafafa",
                     "disabled": "rgba(0, 0, 0, 0.26)",
-                    "error": "#ff1744",
+                    "error": "#B00020",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
                     "primary": "#3f51b5",
                     "surface": "#ffffff",
@@ -2898,7 +2898,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     "regular": "Helvetica Neue",
                     "thin": "HelveticaNeue-Thin",
                   },
-                  "roundness": 2,
+                  "roundness": 4,
                 }
               }
             >
@@ -3047,7 +3047,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     "accent": "#ff4081",
                     "background": "#fafafa",
                     "disabled": "rgba(0, 0, 0, 0.26)",
-                    "error": "#ff1744",
+                    "error": "#B00020",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
                     "primary": "#3f51b5",
                     "surface": "#ffffff",
@@ -3060,7 +3060,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     "regular": "Helvetica Neue",
                     "thin": "HelveticaNeue-Thin",
                   },
-                  "roundness": 2,
+                  "roundness": 4,
                 }
               }
             >
