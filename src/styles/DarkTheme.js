@@ -12,7 +12,7 @@ const DarkTheme: Theme = {
     ...DefaultTheme.colors,
     primary: lightBlue500,
     background: '#303030',
-    paper: grey800,
+    surface: grey800,
     text: white,
     disabled: color(white)
       .alpha(0.3)

@@ -247,7 +247,7 @@ class FABGroup extends React.Component<Props, State> {
                       style={[
                         {
                           transform: [{ scale: scales[i] }],
-                          backgroundColor: theme.colors.paper,
+                          backgroundColor: theme.colors.surface,
                         },
                       ]}
                       onPress={it.onPress}

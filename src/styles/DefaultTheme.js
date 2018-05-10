@@ -11,7 +11,7 @@ export default {
     primary: indigo500,
     accent: pinkA200,
     background: grey50,
-    paper: white,
+    surface: white,
     error: redA400,
     text: black,
     disabled: color(black)
