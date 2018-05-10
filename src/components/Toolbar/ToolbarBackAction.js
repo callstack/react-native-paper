@@ -29,7 +29,7 @@ const ToolbarBackAction = (props: Props) => {
   const icon =
     Platform.OS === 'ios'
       ? ({ color }) => (
-          <Icon name="keyboard-arrow-left" size={36} color={color} />
+          <Icon source="keyboard-arrow-left" size={36} color={color} />
         )
       : 'arrow-back';
 

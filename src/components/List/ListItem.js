@@ -88,9 +88,10 @@ class ListItem extends React.Component<Props> {
                 description && styles.multiline,
               ]}
             >
-              {avatar || (
-                <Icon name={icon} size={24} color={descriptionColor} />
-              )}
+              {avatar ||
+                (icon ? (
+                  <Icon source={icon} size={24} color={descriptionColor} />
+                ) : null)}
             </View>
           ) : null}
           <View style={[styles.item, styles.content]}>
@@ -116,7 +117,7 @@ class ListItem extends React.Component<Props> {
           </View>
           {avatar && icon ? (
             <View style={[styles.item, description && styles.multiline]}>
-              <Icon name={icon} size={24} color={descriptionColor} />
+              <Icon source={icon} size={24} color={descriptionColor} />
             </View>
           ) : null}
         </View>

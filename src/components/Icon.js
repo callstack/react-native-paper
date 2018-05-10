@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { Image, Text, View, StyleSheet } from 'react-native';
+import { Image, Text, StyleSheet } from 'react-native';
 
 let MaterialIcons;
 
@@ -31,9 +31,7 @@ export type IconSource =
   | string
   | number
   | { uri: string }
-  | ((props: IconProps) => React.Node)
-  // This will be removed in next major version
-  | React.Node;
+  | ((props: IconProps) => React.Node);
 
 type IconProps = {
   color: string,
@@ -41,7 +39,7 @@ type IconProps = {
 };
 
 type Props = IconProps & {
-  name: IconSource,
+  source: IconSource,
 };
 
 const isImageSource = (source: any) =>
@@ -72,23 +70,23 @@ export const isValidIcon = (source: any) =>
 export const isEqualIcon = (a: any, b: any) =>
   a === b || getIconId(a) === getIconId(b);
 
-const Icon = ({ name, color, size, ...rest }: Props) => {
-  if (typeof name === 'string') {
+const Icon = ({ source, color, size, ...rest }: Props) => {
+  if (typeof source === 'string') {
     return (
       <MaterialIcons
         {...rest}
-        name={name}
+        name={source}
         color={color}
         size={size}
         style={styles.icon}
         pointerEvents="none"
       />
     );
-  } else if (isImageSource(name)) {
+  } else if (isImageSource(source)) {
     return (
       <Image
         {...rest}
-        source={name}
+        source={source}
         style={[
           {
             width: size,
@@ -98,35 +96,16 @@ const Icon = ({ name, color, size, ...rest }: Props) => {
         ]}
       />
     );
-  } else if (typeof name === 'function') {
-    return name({ color, size });
+  } else if (typeof source === 'function') {
+    return source({ color, size });
   }
 
-  return (
-    <View
-      {...rest}
-      style={[
-        {
-          width: size,
-          height: size,
-        },
-        styles.container,
-      ]}
-      pointerEvents="box-none"
-    >
-      {(name: any)}
-    </View>
-  );
+  return null;
 };
 
 export default Icon;
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'hidden',
-  },
   icon: {
     backgroundColor: 'transparent',
   },

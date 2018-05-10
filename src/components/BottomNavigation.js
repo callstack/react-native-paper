@@ -732,7 +732,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                           })
                         ) : (
                           <Icon
-                            name={(route: Object).icon}
+                            source={(route: Object).icon}
                             color={activeColor}
                             size={24}
                           />
@@ -753,7 +753,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                             })
                           ) : (
                             <Icon
-                              name={(route: Object).icon}
+                              source={(route: Object).icon}
                               color={inactiveColor}
                               size={24}
                             />

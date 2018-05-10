@@ -85,7 +85,7 @@ class RadioButton extends React.Component<Props> {
               <View style={{ opacity: checked ? 1 : 0 }}>
                 <Icon
                   allowFontScaling={false}
-                  name={checked && 'done'}
+                  source="done"
                   size={24}
                   color={checkedColor}
                 />
