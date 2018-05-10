@@ -147,7 +147,7 @@ class Searchbar extends React.Component<Props> {
           rippleColor={rippleColor}
           onPress={onIconPress}
           color={iconColor}
-          name={icon || 'search'}
+          source={icon || 'search'}
         />
         <TextInput
           style={[styles.input, { color: textColor }]}
@@ -168,7 +168,7 @@ class Searchbar extends React.Component<Props> {
             color={iconColor}
             rippleColor={rippleColor}
             onPress={this._handleClearPress}
-            name="close"
+            source="close"
           />
         ) : null}
       </Paper>
