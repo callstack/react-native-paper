@@ -13,7 +13,7 @@ import {
 import { polyfill } from 'react-lifecycles-compat';
 import color from 'color';
 import Icon from './Icon';
-import Paper from './Paper';
+import Surface from './Surface';
 import Text from './Typography/Text';
 import { black, grey900, white } from '../styles/colors';
 import withTheme from '../core/withTheme';
@@ -21,7 +21,7 @@ import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
-const AnimatedPaper = Animated.createAnimatedComponent(Paper);
+const AnimatedSurface = Animated.createAnimatedComponent(Surface);
 
 type Route = $Shape<{
   key: string,
@@ -592,7 +592,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
             );
           })}
         </View>
-        <AnimatedPaper style={[styles.bar, barStyle, { backgroundColor }]}>
+        <AnimatedSurface style={[styles.bar, barStyle, { backgroundColor }]}>
           <SafeAreaView
             style={[styles.items, { maxWidth: maxTabWidth * routes.length }]}
           >
@@ -827,7 +827,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
               );
             })}
           </SafeAreaView>
-        </AnimatedPaper>
+        </AnimatedSurface>
       </View>
     );
   }

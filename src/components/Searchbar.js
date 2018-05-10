@@ -6,7 +6,7 @@ import { StyleSheet, TextInput } from 'react-native';
 import color from 'color';
 import withTheme from '../core/withTheme';
 import TouchableIcon from './TouchableIcon';
-import Paper from './Paper';
+import Surface from './Surface';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
@@ -135,7 +135,7 @@ class Searchbar extends React.Component<Props> {
       .string();
 
     return (
-      <Paper
+      <Surface
         style={[
           { borderRadius: roundness, elevation: 4 },
           styles.container,
@@ -171,7 +171,7 @@ class Searchbar extends React.Component<Props> {
             source="close"
           />
         ) : null}
-      </Paper>
+      </Surface>
     );
   }
 }
