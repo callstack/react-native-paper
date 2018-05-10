@@ -115,7 +115,7 @@ exports[`renders list accordion with children 1`] = `
                 "accent": "#ff4081",
                 "background": "#fafafa",
                 "disabled": "rgba(0, 0, 0, 0.26)",
-                "error": "#ff1744",
+                "error": "#B00020",
                 "placeholder": "rgba(0, 0, 0, 0.38)",
                 "primary": "#3f51b5",
                 "surface": "#ffffff",
@@ -128,7 +128,7 @@ exports[`renders list accordion with children 1`] = `
                 "regular": "Helvetica Neue",
                 "thin": "HelveticaNeue-Thin",
               },
-              "roundness": 2,
+              "roundness": 4,
             }
           }
         >
@@ -290,7 +290,7 @@ exports[`renders list accordion with icons 1`] = `
                 "accent": "#ff4081",
                 "background": "#fafafa",
                 "disabled": "rgba(0, 0, 0, 0.26)",
-                "error": "#ff1744",
+                "error": "#B00020",
                 "placeholder": "rgba(0, 0, 0, 0.38)",
                 "primary": "#3f51b5",
                 "surface": "#ffffff",
@@ -303,7 +303,7 @@ exports[`renders list accordion with icons 1`] = `
                 "regular": "Helvetica Neue",
                 "thin": "HelveticaNeue-Thin",
               },
-              "roundness": 2,
+              "roundness": 4,
             }
           }
         >
@@ -427,7 +427,7 @@ exports[`renders multiline list accordion 1`] = `
                 "accent": "#ff4081",
                 "background": "#fafafa",
                 "disabled": "rgba(0, 0, 0, 0.26)",
-                "error": "#ff1744",
+                "error": "#B00020",
                 "placeholder": "rgba(0, 0, 0, 0.38)",
                 "primary": "#3f51b5",
                 "surface": "#ffffff",
@@ -440,7 +440,7 @@ exports[`renders multiline list accordion 1`] = `
                 "regular": "Helvetica Neue",
                 "thin": "HelveticaNeue-Thin",
               },
-              "roundness": 2,
+              "roundness": 4,
             }
           }
         >
@@ -473,7 +473,7 @@ exports[`renders multiline list accordion 1`] = `
                 "accent": "#ff4081",
                 "background": "#fafafa",
                 "disabled": "rgba(0, 0, 0, 0.26)",
-                "error": "#ff1744",
+                "error": "#B00020",
                 "placeholder": "rgba(0, 0, 0, 0.38)",
                 "primary": "#3f51b5",
                 "surface": "#ffffff",
@@ -486,7 +486,7 @@ exports[`renders multiline list accordion 1`] = `
                 "regular": "Helvetica Neue",
                 "thin": "HelveticaNeue-Thin",
               },
-              "roundness": 2,
+              "roundness": 4,
             }
           }
         >

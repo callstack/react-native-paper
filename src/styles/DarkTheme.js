@@ -2,7 +2,7 @@
 
 import color from 'color';
 import DefaultTheme from './DefaultTheme';
-import { white, grey800, lightBlue500 } from './colors';
+import { white, grey800, lightBlue500, redA400 } from './colors';
 import type { Theme } from '../types';
 
 const DarkTheme: Theme = {
@@ -13,6 +13,7 @@ const DarkTheme: Theme = {
     primary: lightBlue500,
     background: '#303030',
     surface: grey800,
+    error: redA400,
     text: white,
     disabled: color(white)
       .alpha(0.3)
