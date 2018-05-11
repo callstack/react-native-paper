@@ -29,7 +29,13 @@ class ButtonExample extends React.Component<Props> {
             style={styles.fab}
             onPress={this._handlePress}
           />
-          <FAB icon="add" style={styles.fab} onPress={this._handlePress} />
+          <FAB icon="favorite" style={styles.fab} onPress={this._handlePress} />
+          <FAB
+            icon="done"
+            label="Extended FAB"
+            style={styles.fab}
+            onPress={this._handlePress}
+          />
         </View>
       </View>
     );

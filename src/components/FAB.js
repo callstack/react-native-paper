@@ -5,6 +5,7 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Paper from './Paper';
 import Icon from './Icon';
+import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple';
 import { white } from '../styles/colors';
 import withTheme from '../core/withTheme';
@@ -13,7 +14,15 @@ import type { IconSource } from './Icon';
 
 type Props = {
   /**
-   *  Whether FAB is mini-sized, used to create visual continuity with other elements.
+   * Icon to display for the `FAB`.
+   */
+  icon: IconSource,
+  /**
+   * Optional label for extended `FAB`.
+   */
+  label?: string,
+  /**
+   *  Whether FAB is mini-sized, used to create visual continuity with other elements. This has no effect if `label` is specified.
    */
   small?: boolean,
   /**
@@ -21,11 +30,7 @@ type Props = {
    */
   dark?: boolean,
   /**
-   * Icon to display for the `FAB`.
-   */
-  icon: IconSource,
-  /**
-   * Custom color for the FAB.
+   * Custom color for the `FAB`.
    */
   color?: string,
   /**
@@ -43,7 +48,8 @@ type Props = {
  * A floating action button represents the primary action in an application.
  *
  * <div class="screenshots">
- *   <img src="screenshots/fab.png" />
+ *   <img src="screenshots/fab-1.png" />
+ *   <img src="screenshots/fab-2.png" />
  * </div>
  *
  * ## Usage
@@ -66,12 +72,14 @@ class FAB extends React.Component<Props> {
       small,
       dark,
       icon,
+      label,
       color: iconColor,
       onPress,
       theme,
       style,
       ...rest
     } = this.props;
+
     const backgroundColor = theme.colors.accent;
     const isDark =
       typeof dark === 'boolean' ? dark : !color(backgroundColor).light();
@@ -84,21 +92,31 @@ class FAB extends React.Component<Props> {
     return (
       <Paper
         {...rest}
-        style={[
-          { backgroundColor, elevation: 12 },
-          styles.content,
-          small ? styles.small : styles.standard,
-          style,
-        ]}
+        style={[{ backgroundColor, elevation: 12 }, styles.container, style]}
       >
         <TouchableRipple
           borderless
           onPress={onPress}
           rippleColor={rippleColor}
-          style={[styles.content, small ? styles.small : styles.standard]}
+          style={styles.container}
         >
-          <View>
+          <View
+            style={[
+              styles.content,
+              label ? styles.extended : small ? styles.small : styles.standard,
+            ]}
+          >
             <Icon name={icon} size={24} color={textColor} />
+            {label ? (
+              <Text
+                style={[
+                  styles.label,
+                  { color: textColor, fontFamily: theme.fonts.medium },
+                ]}
+              >
+                {label.toUpperCase()}
+              </Text>
+            ) : null}
           </View>
         </TouchableRipple>
       </Paper>
@@ -107,19 +125,28 @@ class FAB extends React.Component<Props> {
 }
 
 const styles = StyleSheet.create({
-  content: {
-    alignItems: 'center',
-    justifyContent: 'center',
+  container: {
+    borderRadius: 28,
   },
   standard: {
     height: 56,
     width: 56,
-    borderRadius: 28,
   },
   small: {
     height: 40,
     width: 40,
-    borderRadius: 20,
+  },
+  extended: {
+    height: 48,
+    paddingHorizontal: 16,
+  },
+  content: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  label: {
+    marginHorizontal: 8,
   },
 });
 
