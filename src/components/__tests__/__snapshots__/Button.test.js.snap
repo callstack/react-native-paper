@@ -89,12 +89,12 @@ exports[`renders button with color 1`] = `
         theme={
           Object {
             "colors": Object {
-              "accent": "#ff4081",
-              "background": "#fafafa",
+              "accent": "#03dac4",
+              "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
               "placeholder": "rgba(0, 0, 0, 0.38)",
-              "primary": "#3f51b5",
+              "primary": "#6200ee",
               "surface": "#ffffff",
               "text": "#000000",
             },
@@ -191,7 +191,7 @@ exports[`renders button with icon 1`] = `
           style={
             Array [
               Object {
-                "color": "#3f51b5",
+                "color": "#6200ee",
                 "fontSize": 16,
               },
               Object {
@@ -227,7 +227,7 @@ exports[`renders button with icon 1`] = `
               },
               undefined,
               Object {
-                "color": "#3f51b5",
+                "color": "#6200ee",
                 "fontFamily": "HelveticaNeue-Medium",
               },
               Object {
@@ -239,12 +239,12 @@ exports[`renders button with icon 1`] = `
         theme={
           Object {
             "colors": Object {
-              "accent": "#ff4081",
-              "background": "#fafafa",
+              "accent": "#03dac4",
+              "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
               "placeholder": "rgba(0, 0, 0, 0.38)",
-              "primary": "#3f51b5",
+              "primary": "#6200ee",
               "surface": "#ffffff",
               "text": "#000000",
             },
@@ -287,7 +287,7 @@ exports[`renders contained contained with mode 1`] = `
         "shadowRadius": 1.5,
       },
       Object {
-        "backgroundColor": "#3f51b5",
+        "backgroundColor": "#6200ee",
         "borderColor": "transparent",
         "borderRadius": 4,
         "borderStyle": "solid",
@@ -363,12 +363,12 @@ exports[`renders contained contained with mode 1`] = `
         theme={
           Object {
             "colors": Object {
-              "accent": "#ff4081",
-              "background": "#fafafa",
+              "accent": "#03dac4",
+              "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
               "placeholder": "rgba(0, 0, 0, 0.38)",
-              "primary": "#3f51b5",
+              "primary": "#6200ee",
               "surface": "#ffffff",
               "text": "#000000",
             },
@@ -479,12 +479,12 @@ exports[`renders disabled button 1`] = `
         theme={
           Object {
             "colors": Object {
-              "accent": "#ff4081",
-              "background": "#fafafa",
+              "accent": "#03dac4",
+              "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
               "placeholder": "rgba(0, 0, 0, 0.38)",
-              "primary": "#3f51b5",
+              "primary": "#6200ee",
               "surface": "#ffffff",
               "text": "#000000",
             },
@@ -566,7 +566,7 @@ exports[`renders loading button 1`] = `
     >
       <ActivityIndicator
         animating={true}
-        color="#3f51b5"
+        color="#6200ee"
         hidesWhenStopped={true}
         size="small"
         style={
@@ -596,7 +596,7 @@ exports[`renders loading button 1`] = `
               },
               undefined,
               Object {
-                "color": "#3f51b5",
+                "color": "#6200ee",
                 "fontFamily": "HelveticaNeue-Medium",
               },
               Object {
@@ -608,12 +608,12 @@ exports[`renders loading button 1`] = `
         theme={
           Object {
             "colors": Object {
-              "accent": "#ff4081",
-              "background": "#fafafa",
+              "accent": "#03dac4",
+              "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
               "placeholder": "rgba(0, 0, 0, 0.38)",
-              "primary": "#3f51b5",
+              "primary": "#6200ee",
               "surface": "#ffffff",
               "text": "#000000",
             },
@@ -712,7 +712,7 @@ exports[`renders outlined button with mode 1`] = `
               },
               undefined,
               Object {
-                "color": "#3f51b5",
+                "color": "#6200ee",
                 "fontFamily": "HelveticaNeue-Medium",
               },
               Object {
@@ -724,12 +724,12 @@ exports[`renders outlined button with mode 1`] = `
         theme={
           Object {
             "colors": Object {
-              "accent": "#ff4081",
-              "background": "#fafafa",
+              "accent": "#03dac4",
+              "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
               "placeholder": "rgba(0, 0, 0, 0.38)",
-              "primary": "#3f51b5",
+              "primary": "#6200ee",
               "surface": "#ffffff",
               "text": "#000000",
             },
@@ -828,7 +828,7 @@ exports[`renders text button by default 1`] = `
               },
               undefined,
               Object {
-                "color": "#3f51b5",
+                "color": "#6200ee",
                 "fontFamily": "HelveticaNeue-Medium",
               },
               Object {
@@ -840,12 +840,12 @@ exports[`renders text button by default 1`] = `
         theme={
           Object {
             "colors": Object {
-              "accent": "#ff4081",
-              "background": "#fafafa",
+              "accent": "#03dac4",
+              "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
               "placeholder": "rgba(0, 0, 0, 0.38)",
-              "primary": "#3f51b5",
+              "primary": "#6200ee",
               "surface": "#ffffff",
               "text": "#000000",
             },
@@ -944,7 +944,7 @@ exports[`renders text button with mode 1`] = `
               },
               undefined,
               Object {
-                "color": "#3f51b5",
+                "color": "#6200ee",
                 "fontFamily": "HelveticaNeue-Medium",
               },
               Object {
@@ -956,12 +956,12 @@ exports[`renders text button with mode 1`] = `
         theme={
           Object {
             "colors": Object {
-              "accent": "#ff4081",
-              "background": "#fafafa",
+              "accent": "#03dac4",
+              "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
               "placeholder": "rgba(0, 0, 0, 0.38)",
-              "primary": "#3f51b5",
+              "primary": "#6200ee",
               "surface": "#ffffff",
               "text": "#000000",
             },
