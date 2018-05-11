@@ -11,7 +11,7 @@ const DarkTheme: Theme = {
   colors: {
     ...DefaultTheme.colors,
     primary: lightBlue500,
-    background: '#303030',
+    background: '#242424',
     surface: grey800,
     error: redA400,
     text: white,
