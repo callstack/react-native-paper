@@ -37,12 +37,12 @@ exports[`renders list section with title 1`] = `
     theme={
       Object {
         "colors": Object {
-          "accent": "#ff4081",
-          "background": "#fafafa",
+          "accent": "#03dac4",
+          "background": "#f6f6f6",
           "disabled": "rgba(0, 0, 0, 0.26)",
           "error": "#B00020",
           "placeholder": "rgba(0, 0, 0, 0.38)",
-          "primary": "#3f51b5",
+          "primary": "#6200ee",
           "surface": "#ffffff",
           "text": "#000000",
         },
@@ -168,12 +168,12 @@ exports[`renders list section with title 1`] = `
           theme={
             Object {
               "colors": Object {
-                "accent": "#ff4081",
-                "background": "#fafafa",
+                "accent": "#03dac4",
+                "background": "#f6f6f6",
                 "disabled": "rgba(0, 0, 0, 0.26)",
                 "error": "#B00020",
                 "placeholder": "rgba(0, 0, 0, 0.38)",
-                "primary": "#3f51b5",
+                "primary": "#6200ee",
                 "surface": "#ffffff",
                 "text": "#000000",
               },
@@ -302,12 +302,12 @@ exports[`renders list section with title 1`] = `
           theme={
             Object {
               "colors": Object {
-                "accent": "#ff4081",
-                "background": "#fafafa",
+                "accent": "#03dac4",
+                "background": "#f6f6f6",
                 "disabled": "rgba(0, 0, 0, 0.26)",
                 "error": "#B00020",
                 "placeholder": "rgba(0, 0, 0, 0.38)",
-                "primary": "#3f51b5",
+                "primary": "#6200ee",
                 "surface": "#ffffff",
                 "text": "#000000",
               },
@@ -450,12 +450,12 @@ exports[`renders list section without title 1`] = `
           theme={
             Object {
               "colors": Object {
-                "accent": "#ff4081",
-                "background": "#fafafa",
+                "accent": "#03dac4",
+                "background": "#f6f6f6",
                 "disabled": "rgba(0, 0, 0, 0.26)",
                 "error": "#B00020",
                 "placeholder": "rgba(0, 0, 0, 0.38)",
-                "primary": "#3f51b5",
+                "primary": "#6200ee",
                 "surface": "#ffffff",
                 "text": "#000000",
               },
@@ -584,12 +584,12 @@ exports[`renders list section without title 1`] = `
           theme={
             Object {
               "colors": Object {
-                "accent": "#ff4081",
-                "background": "#fafafa",
+                "accent": "#03dac4",
+                "background": "#f6f6f6",
                 "disabled": "rgba(0, 0, 0, 0.26)",
                 "error": "#B00020",
                 "placeholder": "rgba(0, 0, 0, 0.38)",
-                "primary": "#3f51b5",
+                "primary": "#6200ee",
                 "surface": "#ffffff",
                 "text": "#000000",
               },

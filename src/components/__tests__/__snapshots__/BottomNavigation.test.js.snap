@@ -20,7 +20,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           "flex": 1,
         },
         Object {
-          "backgroundColor": "#fafafa",
+          "backgroundColor": "#f6f6f6",
         },
       ]
     }
@@ -565,7 +565,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           "flex": 1,
         },
         Object {
-          "backgroundColor": "#fafafa",
+          "backgroundColor": "#f6f6f6",
         },
       ]
     }
@@ -624,7 +624,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         },
         Object {
           "alignItems": "center",
-          "backgroundColor": "rgba(63, 81, 181, 1)",
+          "backgroundColor": "rgba(98, 0, 238, 1)",
           "elevation": 8,
           "overflow": "hidden",
           "paddingHorizontal": 20,
@@ -1227,7 +1227,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
           "flex": 1,
         },
         Object {
-          "backgroundColor": "#fafafa",
+          "backgroundColor": "#f6f6f6",
         },
       ]
     }
@@ -1396,7 +1396,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
               style={
                 Array [
                   Object {
-                    "color": "#3f51b5",
+                    "color": "#6200ee",
                     "fontSize": 24,
                   },
                   Object {
@@ -1497,7 +1497,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   },
                   Object {
                     "backgroundColor": "transparent",
-                    "color": "#3f51b5",
+                    "color": "#6200ee",
                     "fontSize": 13,
                     "textAlign": "center",
                   },
@@ -1506,12 +1506,12 @@ exports[`renders non-shifting bottom navigation 1`] = `
               theme={
                 Object {
                   "colors": Object {
-                    "accent": "#ff4081",
-                    "background": "#fafafa",
+                    "accent": "#03dac4",
+                    "background": "#f6f6f6",
                     "disabled": "rgba(0, 0, 0, 0.26)",
                     "error": "#B00020",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
-                    "primary": "#3f51b5",
+                    "primary": "#6200ee",
                     "surface": "#ffffff",
                     "text": "#000000",
                   },
@@ -1564,12 +1564,12 @@ exports[`renders non-shifting bottom navigation 1`] = `
               theme={
                 Object {
                   "colors": Object {
-                    "accent": "#ff4081",
-                    "background": "#fafafa",
+                    "accent": "#03dac4",
+                    "background": "#f6f6f6",
                     "disabled": "rgba(0, 0, 0, 0.26)",
                     "error": "#B00020",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
-                    "primary": "#3f51b5",
+                    "primary": "#6200ee",
                     "surface": "#ffffff",
                     "text": "#000000",
                   },
@@ -1655,7 +1655,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
               style={
                 Array [
                   Object {
-                    "color": "#3f51b5",
+                    "color": "#6200ee",
                     "fontSize": 24,
                   },
                   Object {
@@ -1756,7 +1756,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   },
                   Object {
                     "backgroundColor": "transparent",
-                    "color": "#3f51b5",
+                    "color": "#6200ee",
                     "fontSize": 13,
                     "textAlign": "center",
                   },
@@ -1765,12 +1765,12 @@ exports[`renders non-shifting bottom navigation 1`] = `
               theme={
                 Object {
                   "colors": Object {
-                    "accent": "#ff4081",
-                    "background": "#fafafa",
+                    "accent": "#03dac4",
+                    "background": "#f6f6f6",
                     "disabled": "rgba(0, 0, 0, 0.26)",
                     "error": "#B00020",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
-                    "primary": "#3f51b5",
+                    "primary": "#6200ee",
                     "surface": "#ffffff",
                     "text": "#000000",
                   },
@@ -1823,12 +1823,12 @@ exports[`renders non-shifting bottom navigation 1`] = `
               theme={
                 Object {
                   "colors": Object {
-                    "accent": "#ff4081",
-                    "background": "#fafafa",
+                    "accent": "#03dac4",
+                    "background": "#f6f6f6",
                     "disabled": "rgba(0, 0, 0, 0.26)",
                     "error": "#B00020",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
-                    "primary": "#3f51b5",
+                    "primary": "#6200ee",
                     "surface": "#ffffff",
                     "text": "#000000",
                   },
@@ -1914,7 +1914,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
               style={
                 Array [
                   Object {
-                    "color": "#3f51b5",
+                    "color": "#6200ee",
                     "fontSize": 24,
                   },
                   Object {
@@ -2015,7 +2015,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   },
                   Object {
                     "backgroundColor": "transparent",
-                    "color": "#3f51b5",
+                    "color": "#6200ee",
                     "fontSize": 13,
                     "textAlign": "center",
                   },
@@ -2024,12 +2024,12 @@ exports[`renders non-shifting bottom navigation 1`] = `
               theme={
                 Object {
                   "colors": Object {
-                    "accent": "#ff4081",
-                    "background": "#fafafa",
+                    "accent": "#03dac4",
+                    "background": "#f6f6f6",
                     "disabled": "rgba(0, 0, 0, 0.26)",
                     "error": "#B00020",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
-                    "primary": "#3f51b5",
+                    "primary": "#6200ee",
                     "surface": "#ffffff",
                     "text": "#000000",
                   },
@@ -2082,12 +2082,12 @@ exports[`renders non-shifting bottom navigation 1`] = `
               theme={
                 Object {
                   "colors": Object {
-                    "accent": "#ff4081",
-                    "background": "#fafafa",
+                    "accent": "#03dac4",
+                    "background": "#f6f6f6",
                     "disabled": "rgba(0, 0, 0, 0.26)",
                     "error": "#B00020",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
-                    "primary": "#3f51b5",
+                    "primary": "#6200ee",
                     "surface": "#ffffff",
                     "text": "#000000",
                   },
@@ -2132,7 +2132,7 @@ exports[`renders shifting bottom navigation 1`] = `
           "flex": 1,
         },
         Object {
-          "backgroundColor": "#fafafa",
+          "backgroundColor": "#f6f6f6",
         },
       ]
     }
@@ -2191,7 +2191,7 @@ exports[`renders shifting bottom navigation 1`] = `
         },
         Object {
           "alignItems": "center",
-          "backgroundColor": "rgba(63, 81, 181, 1)",
+          "backgroundColor": "rgba(98, 0, 238, 1)",
           "elevation": 8,
           "overflow": "hidden",
           "paddingHorizontal": 20,
@@ -2396,12 +2396,12 @@ exports[`renders shifting bottom navigation 1`] = `
               theme={
                 Object {
                   "colors": Object {
-                    "accent": "#ff4081",
-                    "background": "#fafafa",
+                    "accent": "#03dac4",
+                    "background": "#f6f6f6",
                     "disabled": "rgba(0, 0, 0, 0.26)",
                     "error": "#B00020",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
-                    "primary": "#3f51b5",
+                    "primary": "#6200ee",
                     "surface": "#ffffff",
                     "text": "#000000",
                   },
@@ -2558,12 +2558,12 @@ exports[`renders shifting bottom navigation 1`] = `
               theme={
                 Object {
                   "colors": Object {
-                    "accent": "#ff4081",
-                    "background": "#fafafa",
+                    "accent": "#03dac4",
+                    "background": "#f6f6f6",
                     "disabled": "rgba(0, 0, 0, 0.26)",
                     "error": "#B00020",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
-                    "primary": "#3f51b5",
+                    "primary": "#6200ee",
                     "surface": "#ffffff",
                     "text": "#000000",
                   },
@@ -2720,12 +2720,12 @@ exports[`renders shifting bottom navigation 1`] = `
               theme={
                 Object {
                   "colors": Object {
-                    "accent": "#ff4081",
-                    "background": "#fafafa",
+                    "accent": "#03dac4",
+                    "background": "#f6f6f6",
                     "disabled": "rgba(0, 0, 0, 0.26)",
                     "error": "#B00020",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
-                    "primary": "#3f51b5",
+                    "primary": "#6200ee",
                     "surface": "#ffffff",
                     "text": "#000000",
                   },
@@ -2882,12 +2882,12 @@ exports[`renders shifting bottom navigation 1`] = `
               theme={
                 Object {
                   "colors": Object {
-                    "accent": "#ff4081",
-                    "background": "#fafafa",
+                    "accent": "#03dac4",
+                    "background": "#f6f6f6",
                     "disabled": "rgba(0, 0, 0, 0.26)",
                     "error": "#B00020",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
-                    "primary": "#3f51b5",
+                    "primary": "#6200ee",
                     "surface": "#ffffff",
                     "text": "#000000",
                   },
@@ -3044,12 +3044,12 @@ exports[`renders shifting bottom navigation 1`] = `
               theme={
                 Object {
                   "colors": Object {
-                    "accent": "#ff4081",
-                    "background": "#fafafa",
+                    "accent": "#03dac4",
+                    "background": "#f6f6f6",
                     "disabled": "rgba(0, 0, 0, 0.26)",
                     "error": "#B00020",
                     "placeholder": "rgba(0, 0, 0, 0.38)",
-                    "primary": "#3f51b5",
+                    "primary": "#6200ee",
                     "surface": "#ffffff",
                     "text": "#000000",
                   },

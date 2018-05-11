@@ -1,16 +1,16 @@
 /* @flow */
 
 import color from 'color';
-import { indigo500, pinkA200, black, white, grey50 } from './colors';
+import { black, white } from './colors';
 import fonts from './fonts';
 
 export default {
   dark: false,
   roundness: 4,
   colors: {
-    primary: indigo500,
-    accent: pinkA200,
-    background: grey50,
+    primary: '#6200ee',
+    accent: '#03dac4',
+    background: '#f6f6f6',
     surface: white,
     error: '#B00020',
     text: black,
