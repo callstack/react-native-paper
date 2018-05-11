@@ -1,8 +1,8 @@
 /* @flow */
 
 import * as React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
-import { Colors, Button, withTheme } from 'react-native-paper';
+import { View, ScrollView, StyleSheet, Image } from 'react-native';
+import { Colors, Button, ListSection, withTheme } from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
 
 type Props = {
@@ -16,94 +16,104 @@ type State = {
 class ButtonExample extends React.Component<Props, State> {
   static title = 'Button';
 
-  state = {
-    loading: true,
-  };
-
   render() {
     const {
       theme: {
         colors: { background },
       },
     } = this.props;
+
     return (
-      <View style={[styles.container, { backgroundColor: background }]}>
-        <View style={styles.row}>
-          <Button onPress={() => {}}>Simple</Button>
-          <Button primary onPress={() => {}}>
-            Primary
-          </Button>
-          <Button color={Colors.pink500} onPress={() => {}}>
-            Custom
-          </Button>
-        </View>
-        <View style={styles.row}>
-          <Button raised onPress={() => {}}>
-            Raised
-          </Button>
-          <Button raised primary onPress={() => {}}>
-            Primary
-          </Button>
-          <Button raised color={Colors.pink500} onPress={() => {}}>
-            Custom
-          </Button>
-        </View>
-        <View style={styles.row}>
-          <Button icon="add-a-photo" onPress={() => {}}>
-            Icon
-          </Button>
-          <Button
-            raised
-            primary
-            icon="file-download"
-            loading={this.state.loading}
-            onPress={() =>
-              this.setState(state => ({ loading: !state.loading }))
-            }
-          >
-            Loading
-          </Button>
-        </View>
-        <View style={styles.row}>
-          <Button disabled icon="my-location" onPress={() => {}}>
-            Disabled
-          </Button>
-          <Button disabled loading raised onPress={() => {}}>
-            Loading
-          </Button>
-        </View>
-        <View style={styles.row}>
-          <Button
-            raised
-            icon={{
-              uri:
-                'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400',
-            }}
-            onPress={() => {}}
-          >
-            Remote image
-          </Button>
-          <Button
-            raised
-            icon={require('../assets/favorite.png')}
-            onPress={() => {}}
-          >
-            Required asset
-          </Button>
-          <Button
-            icon={({ size }) => (
-              <Image
-                source={require('../assets/chameleon.jpg')}
-                style={{ width: size, height: size, borderRadius: size / 2 }}
-              />
-            )}
-            raised
-            onPress={() => {}}
-          >
-            Custom component
-          </Button>
-        </View>
-      </View>
+      <ScrollView style={[styles.container, { backgroundColor: background }]}>
+        <ListSection title="Text button">
+          <View style={styles.row}>
+            <Button onPress={() => {}}>Default</Button>
+            <Button color={Colors.pink500} onPress={() => {}}>
+              Custom
+            </Button>
+            <Button disabled onPress={() => {}}>
+              Disabled
+            </Button>
+            <Button icon="add-a-photo" onPress={() => {}}>
+              Icon
+            </Button>
+            <Button loading onPress={() => {}}>
+              Loading
+            </Button>
+          </View>
+        </ListSection>
+        <ListSection title="Outlined button">
+          <View style={styles.row}>
+            <Button mode="outlined" onPress={() => {}}>
+              Default
+            </Button>
+            <Button mode="outlined" color={Colors.pink500} onPress={() => {}}>
+              Custom
+            </Button>
+            <Button mode="outlined" disabled onPress={() => {}}>
+              Disabled
+            </Button>
+            <Button mode="outlined" icon="add-a-photo" onPress={() => {}}>
+              Icon
+            </Button>
+            <Button mode="outlined" loading onPress={() => {}}>
+              Loading
+            </Button>
+          </View>
+        </ListSection>
+        <ListSection title="Contained button">
+          <View style={styles.row}>
+            <Button mode="contained" onPress={() => {}}>
+              Default
+            </Button>
+            <Button mode="contained" color={Colors.pink500} onPress={() => {}}>
+              Custom
+            </Button>
+            <Button mode="contained" disabled onPress={() => {}}>
+              Disabled
+            </Button>
+            <Button mode="contained" icon="add-a-photo" onPress={() => {}}>
+              Icon
+            </Button>
+            <Button mode="contained" loading onPress={() => {}}>
+              Loading
+            </Button>
+          </View>
+        </ListSection>
+        <ListSection title="Custom icon">
+          <View style={styles.row}>
+            <Button
+              mode="outlined"
+              icon={{
+                uri:
+                  'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400',
+              }}
+              onPress={() => {}}
+            >
+              Remote image
+            </Button>
+            <Button
+              mode="outlined"
+              icon={require('../assets/favorite.png')}
+              onPress={() => {}}
+            >
+              Required asset
+            </Button>
+            <Button
+              mode="outlined"
+              icon={({ size }) => (
+                <Image
+                  source={require('../assets/chameleon.jpg')}
+                  style={{ width: size, height: size, borderRadius: size / 2 }}
+                />
+              )}
+              onPress={() => {}}
+            >
+              Custom component
+            </Button>
+          </View>
+        </ListSection>
+      </ScrollView>
     );
   }
 }
@@ -111,13 +121,11 @@ class ButtonExample extends React.Component<Props, State> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 4,
   },
-
   row: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    alignItems: 'center',
+    paddingHorizontal: 12,
   },
 });
 
