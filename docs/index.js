@@ -47,6 +47,28 @@ function getPages() {
       }
       return file;
     })
+    .reduce((acc, file) => {
+      const matches = fs
+        .readFileSync(file)
+        .toString()
+        .match(/\/\/ @component (.\/\w+\.js)/gm);
+      if (matches && matches.length) {
+        const componentFiles = matches.map(line => {
+          const fileName = line.split(' ')[2];
+          return require.resolve(
+            path.join(
+              file
+                .split('/')
+                .slice(0, -1)
+                .join('/'),
+              fileName
+            )
+          );
+        });
+        return [...acc, file, ...componentFiles];
+      }
+      return [...acc, file];
+    }, [])
     .filter((name, index, self) => self.indexOf(name) === index)
     .sort((a, b) => {
       const nameA = a.split('/').pop();
