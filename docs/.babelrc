@@ -1,7 +1,11 @@
 {
   "presets": [
-    "es2015",
-    "stage-1",
+    ["env", {
+      "targets": {
+        "browsers": [ ">0.25%", "not ie 11", "not op_mini all"]
+      }
+    }],
+    "stage-2",
     "react",
     "linaria/babel"
   ]
