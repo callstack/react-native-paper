@@ -8,6 +8,8 @@ import data from './app.data';
 import '/home/circleci/react-native-paper/docs/node_modules/component-docs/dist/styles/reset.css';
 import '/home/circleci/react-native-paper/docs/node_modules/component-docs/dist/styles/globals.css';
 
+import '/home/circleci/react-native-paper/docs/assets/styles.css';
+
 const root = document.getElementById('root');
 const render = () => {
   try {
