@@ -21,7 +21,7 @@ exports[`renders extended FAB 1`] = `
       },
       Array [
         Object {
-          "backgroundColor": "#ff4081",
+          "backgroundColor": "#03dac4",
           "elevation": 12,
         },
         Object {
@@ -119,13 +119,13 @@ exports[`renders extended FAB 1`] = `
         theme={
           Object {
             "colors": Object {
-              "accent": "#ff4081",
-              "background": "#fafafa",
+              "accent": "#03dac4",
+              "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#ff1744",
-              "paper": "#ffffff",
+              "error": "#B00020",
               "placeholder": "rgba(0, 0, 0, 0.38)",
-              "primary": "#3f51b5",
+              "primary": "#6200ee",
+              "surface": "#ffffff",
               "text": "#000000",
             },
             "dark": false,
@@ -135,7 +135,7 @@ exports[`renders extended FAB 1`] = `
               "regular": "Helvetica Neue",
               "thin": "HelveticaNeue-Thin",
             },
-            "roundness": 2,
+            "roundness": 4,
           }
         }
       >
@@ -167,7 +167,7 @@ exports[`renders normal FAB 1`] = `
       },
       Array [
         Object {
-          "backgroundColor": "#ff4081",
+          "backgroundColor": "#03dac4",
           "elevation": 12,
         },
         Object {
@@ -267,7 +267,7 @@ exports[`renders small FAB 1`] = `
       },
       Array [
         Object {
-          "backgroundColor": "#ff4081",
+          "backgroundColor": "#03dac4",
           "elevation": 12,
         },
         Object {
