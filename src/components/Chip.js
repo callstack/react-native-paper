@@ -138,15 +138,6 @@ class Chip extends React.Component<Props> {
               : null,
           ]}
         >
-          {icon || selected ? (
-            /* $FlowFixMe */ <View style={styles.icon}>
-              <Icon
-                source={selected ? 'done' : icon}
-                color={iconColor}
-                size={18}
-              />
-            </View>
-          ) : null}
           {avatar && !icon
             ? /* $FlowFixMe */
               React.cloneElement(avatar, {
@@ -154,6 +145,16 @@ class Chip extends React.Component<Props> {
                 style: [styles.avatar, avatar.props.style],
               })
             : null}
+          {icon || selected ? (
+            <View style={[styles.icon, avatar ? styles.avatarSelected : null]}>
+              {/* $FlowFixMe */}
+              <Icon
+                source={selected ? 'done' : icon}
+                color={avatar ? colors.background : iconColor}
+                size={18}
+              />
+            </View>
+          ) : null}
           <Text
             numberOfLines={1}
             style={[
@@ -208,6 +209,11 @@ const styles = StyleSheet.create({
     height: 24,
     borderRadius: 12,
     marginRight: 4,
+  },
+  avatarSelected: {
+    position: 'relative',
+    left: -30,
+    marginRight: -30,
   },
 });
 

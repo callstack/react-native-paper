@@ -31,6 +31,14 @@ class ChipExample extends React.Component<Props> {
           >
             Chip with image
           </Chip>
+          <Chip
+            avatar={<Image source={require('../assets/avatar.jpg')} />}
+            onDelete={() => {}}
+            style={styles.chip}
+            selected
+          >
+            Selected with image
+          </Chip>
         </View>
         <View style={styles.row}>
           <Chip style={styles.chip}>Simple Chip</Chip>

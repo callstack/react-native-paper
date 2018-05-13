@@ -47,10 +47,13 @@ exports[`renders chip with icon 1`] = `
   >
     <View
       style={
-        Object {
-          "paddingHorizontal": 4,
-          "paddingVertical": 7,
-        }
+        Array [
+          Object {
+            "paddingHorizontal": 4,
+            "paddingVertical": 7,
+          },
+          null,
+        ]
       }
     >
       <Text
@@ -274,10 +277,13 @@ exports[`renders deletable chip 1`] = `
   >
     <View
       style={
-        Object {
-          "paddingHorizontal": 4,
-          "paddingVertical": 7,
-        }
+        Array [
+          Object {
+            "paddingHorizontal": 4,
+            "paddingVertical": 7,
+          },
+          null,
+        ]
       }
     >
       <Text
@@ -550,10 +556,13 @@ exports[`renders selected chip 1`] = `
   >
     <View
       style={
-        Object {
-          "paddingHorizontal": 4,
-          "paddingVertical": 7,
-        }
+        Array [
+          Object {
+            "paddingHorizontal": 4,
+            "paddingVertical": 7,
+          },
+          null,
+        ]
       }
     >
       <Text
