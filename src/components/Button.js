@@ -258,7 +258,6 @@ class Button extends React.Component<Props, State> {
 
 const styles = StyleSheet.create({
   button: {
-    margin: 4,
     minWidth: 88,
     borderWidth: StyleSheet.hairlineWidth,
     borderStyle: 'solid',
