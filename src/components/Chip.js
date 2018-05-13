@@ -145,11 +145,13 @@ class Chip extends React.Component<Props> {
           ]}
         >
           {icon || selected ? (
-            /* $FlowFixMe */ <Icon
-              source={selected ? 'done' : icon}
-              color={iconColor}
-              size={20}
-            />
+            /* $FlowFixMe */ <View style={styles.icon}>
+              <Icon
+                source={selected ? 'done' : icon}
+                color={iconColor}
+                size={18}
+              />
+            </View>
           ) : null}
           {avatar && !icon
             ? /* $FlowFixMe */
@@ -164,7 +166,8 @@ class Chip extends React.Component<Props> {
               styles.text,
               {
                 color: textColor,
-                marginRight: onDelete ? 0 : 8,
+                marginRight: onDelete ? 4 : 8,
+                marginLeft: avatar || icon || selected ? 4 : 8,
               },
             ]}
           >
@@ -173,7 +176,7 @@ class Chip extends React.Component<Props> {
           {onDelete ? (
             <TouchableWithoutFeedback onPress={onDelete}>
               <View style={styles.delete}>
-                <Icon source="cancel" size={20} color={iconColor} />
+                <Icon source="cancel" size={16} color={iconColor} />
               </View>
             </TouchableWithoutFeedback>
           ) : null}
@@ -195,16 +198,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
     borderWidth: StyleSheet.hairlineWidth,
   },
+  icon: {
+    paddingHorizontal: 4,
+    paddingVertical: 7,
+  },
   delete: {
-    padding: 6,
+    paddingHorizontal: 4,
+    paddingVertical: 8,
   },
   text: {
-    margin: 8,
+    marginVertical: 8,
   },
   avatar: {
     width: 24,
     height: 24,
     borderRadius: 12,
+    marginRight: 4,
   },
 });
 
