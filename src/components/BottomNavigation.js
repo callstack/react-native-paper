@@ -4,7 +4,6 @@ import * as React from 'react';
 import {
   View,
   Animated,
-  Easing,
   TouchableWithoutFeedback,
   SafeAreaView,
   StyleSheet,
@@ -14,8 +13,9 @@ import { polyfill } from 'react-lifecycles-compat';
 import color from 'color';
 import Icon from './Icon';
 import Surface from './Surface';
+import TouchableRipple from './TouchableRipple';
 import Text from './Typography/Text';
-import { black, grey900, white } from '../styles/colors';
+import { black, white } from '../styles/colors';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
@@ -165,10 +165,6 @@ type State = {
    */
   tabs: Animated.Value[],
   /**
-   * The amount of horizontal shift for each tab item.
-   */
-  shifts: Animated.Value[],
-  /**
    * The top offset for each tab item to position it offscreen.
    * Placing items offscreen helps to save memory usage for inactive screens with removeClippedSubviews.
    * We use animated values for this to prevent unnecesary re-renders.
@@ -183,10 +179,6 @@ type State = {
    * Animation for the background color ripple, used to determine it's scale and opacity.
    */
   ripple: Animated.Value,
-  /**
-   * Animation for the touch feedback, used to determine it's scale and opacity.
-   */
-  touch: Animated.Value,
   /**
    * Layout of the tab bar. The width is used to determine the size and position of the ripple.
    */
@@ -206,40 +198,19 @@ type State = {
 };
 
 const MIN_RIPPLE_SCALE = 0.001; // Minimum scale is not 0 due to bug with animation
-const MIN_SHIFT_AMOUNT = 10;
 const MIN_TAB_WIDTH = 96;
 const MAX_TAB_WIDTH = 168;
 const BAR_HEIGHT = 56;
-const ACTIVE_LABEL_SIZE = 14;
-const INACTIVE_LABEL_SIZE = 12;
 const FAR_FAR_AWAY = 9999;
 
-const calculateShift = (activeIndex, currentIndex, numberOfItems) => {
-  if (activeIndex < currentIndex) {
-    // If the new active tab comes before current tab, current tab will shift towards right
-    return 2 * MIN_SHIFT_AMOUNT;
-  }
-
-  if (activeIndex > currentIndex) {
-    // If the new active tab comes after current tab, current tab will shift towards left
-    return -2 * MIN_SHIFT_AMOUNT;
-  }
-
-  if (activeIndex === currentIndex) {
-    if (currentIndex === 0) {
-      // If the current tab is the new active tab and its the first tab, it'll shift towards right
-      return MIN_SHIFT_AMOUNT;
-    }
-
-    if (currentIndex === numberOfItems - 1) {
-      // If the current tab is the new active tab and its the last tab, it'll shift towards left
-      return -MIN_SHIFT_AMOUNT;
-    }
-  }
-
-  // If the current tab is the new active tab and its somewhere in the middle, it won't shift
-  return 0;
-};
+const Touchable =
+  Platform.OS === 'android'
+    ? TouchableRipple
+    : ({ style, children, ...rest }) => (
+        <TouchableWithoutFeedback {...rest}>
+          <View style={style}>{children}</View>
+        </TouchableWithoutFeedback>
+      );
 
 /**
  * Bottom navigation provides quick navigation between top-level views of an app with a bottom tab bar.
@@ -319,11 +290,6 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
       // focused === 1, unfocused === 0
       (_, i) => prevState.tabs[i] || new Animated.Value(i === index ? 1 : 0)
     );
-    const shifts = routes.map(
-      (_, i) =>
-        prevState.shifts[i] ||
-        new Animated.Value(calculateShift(index, i, routes.length))
-    );
     const offsets = routes.map(
       // offscreen === 1, normal === 0
       (_, i) => prevState.offsets[i] || new Animated.Value(i === index ? 0 : 1)
@@ -331,7 +297,6 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
 
     const nextState = {
       tabs,
-      shifts,
       offsets,
     };
 
@@ -358,7 +323,6 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
 
     this.state = {
       tabs: [],
-      shifts: [],
       offsets: [],
       index: new Animated.Value(index),
       ripple: new Animated.Value(MIN_RIPPLE_SCALE),
@@ -393,26 +357,13 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
         duration: 400,
         useNativeDriver: true,
       }),
-      Animated.sequence([
-        Animated.delay(this.props.shifting ? 100 : 0),
-        Animated.parallel([
-          ...routes.map((_, i) =>
-            Animated.timing(this.state.tabs[i], {
-              toValue: i === index ? 1 : 0,
-              duration: this.props.shifting ? 200 : 150,
-              useNativeDriver: true,
-            })
-          ),
-          ...routes.map((_, i) =>
-            Animated.timing(this.state.shifts[i], {
-              toValue: calculateShift(index, i, routes.length),
-              duration: 200,
-              easing: Easing.out(Easing.sin),
-              useNativeDriver: true,
-            })
-          ),
-        ]),
-      ]),
+      ...routes.map((_, i) =>
+        Animated.timing(this.state.tabs[i], {
+          toValue: i === index ? 1 : 0,
+          duration: 150,
+          useNativeDriver: true,
+        })
+      ),
     ]).start(({ finished }) => {
       // Workaround a bug in native animations where this is reset after first animation
       this.state.tabs.map((tab, i) => tab.setValue(i === index ? 1 : 0));
@@ -453,15 +404,6 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
       });
     }
 
-    this.state.touch.setValue(MIN_RIPPLE_SCALE);
-
-    Animated.timing(this.state.touch, {
-      toValue: 1,
-      duration: 300,
-      easing: Easing.in(Easing.sin),
-      useNativeDriver: true,
-    }).start();
-
     if (index !== navigationState.index) {
       onIndexChange(index);
     }
@@ -496,13 +438,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
         ? this.props.shifting
         : routes.length > 3;
 
-    const {
-      backgroundColor: approxBackgroundColor = shifting
-        ? colors.primary
-        : theme.dark
-          ? grey900
-          : white,
-    } =
+    const { backgroundColor: approxBackgroundColor = colors.primary } =
       StyleSheet.flatten(barStyle) || {};
 
     const backgroundColor = shifting
@@ -517,7 +453,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
     const isDark = !color(approxBackgroundColor).light();
 
     const textColor = isDark ? white : black;
-    const activeColor = shifting ? textColor : colors.primary;
+    const activeColor = textColor;
     const inactiveColor = shifting
       ? textColor
       : color(textColor)
@@ -530,11 +466,10 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
       .rgb()
       .string();
 
-    const touchRippleSize = layout.width / routes.length;
     const maxTabWidth = routes.length > 3 ? MIN_TAB_WIDTH : MAX_TAB_WIDTH;
     const tabWidth = Math.min(
       // Account for horizontal padding around the items
-      (layout.width - MIN_SHIFT_AMOUNT * 4) / routes.length,
+      layout.width * 4 / routes.length,
       maxTabWidth
     );
 
@@ -553,12 +488,6 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
 
             const focused = this.state.tabs[index];
             const opacity = focused;
-            const translateY = shifting
-              ? focused.interpolate({
-                  inputRange: [0, 0.5, 1],
-                  outputRange: [8, 8, 0],
-                })
-              : 0;
 
             const top = this.state.offsets[index].interpolate({
               inputRange: [0, 1],
@@ -571,10 +500,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                 pointerEvents={
                   navigationState.index === index ? 'auto' : 'none'
                 }
-                style={[
-                  StyleSheet.absoluteFill,
-                  { opacity, transform: [{ translateY }] },
-                ]}
+                style={[StyleSheet.absoluteFill, { opacity }]}
                 collapsable={false}
                 removeClippedSubviews={
                   // On iOS, set removeClippedSubviews to true only when not focused
@@ -616,7 +542,6 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                       route: routes[navigationState.index],
                     }),
                     transform: [
-                      { translateX: this.state.shifts[navigationState.index] },
                       {
                         // Scale to twice the size  to ensure it covers the whole tab bar
                         scale: this.state.ripple.interpolate({
@@ -633,85 +558,49 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                 ]}
               />
             ) : null}
-            <Animated.View
-              pointerEvents="none"
-              style={[
-                styles.ripple,
-                {
-                  // Set top and left values so that the ripple's center is same as the tab's center
-                  top: BAR_HEIGHT / 2 - touchRippleSize / 2,
-                  left:
-                    navigationState.index * tabWidth +
-                    tabWidth / 2 -
-                    touchRippleSize / 2,
-                  height: touchRippleSize,
-                  width: touchRippleSize,
-                  borderRadius: touchRippleSize / 2,
-                  backgroundColor: touchColor,
-                  transform: [
-                    {
-                      translateX: shifting
-                        ? this.state.shifts[navigationState.index]
-                        : 0,
-                    },
-                    { scale: this.state.touch },
-                  ],
-                  opacity: this.state.touch.interpolate({
-                    inputRange: [0, 0.5, 1],
-                    outputRange: [0, 1, 0],
-                  }),
-                },
-              ]}
-            />
             {routes.map((route, index) => {
-              const shift = this.state.shifts[index];
               const focused = this.state.tabs[index];
 
-              // Since we can't animate font size with native driver, calculate the scale to emulate it.
-              const scale = focused.interpolate({
-                inputRange: [0, 1],
-                outputRange: [
-                  shifting ? 0.5 : INACTIVE_LABEL_SIZE / ACTIVE_LABEL_SIZE,
-                  1,
-                ],
-              });
+              // animate in the label
+              const scale = shifting
+                ? focused.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0.5, 1],
+                  })
+                : 1;
 
               // Move down the icon to account for no-label in shifting and smaller label in non-shifting.
-              const translateY = focused.interpolate({
-                inputRange: [0, 1],
-                outputRange: [shifting ? 10 : 2, 0],
-              });
-
-              // Amount of shifting for the shifting bottom navigation.
-              // This gives the illusion of the active tab getting bigger.
-              // We don't animate the width directly since we can't use native driver.
-              const translateX = shifting ? shift : 0;
+              const translateY = shifting
+                ? focused.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [10, 0],
+                  })
+                : 0;
 
               // We render the active icon and label on top of inactive ones and cross-fade them on change.
               // This trick gives the illusion that we are animating between active and inactive colors.
               // This is to ensure that we can use native driver, as colors cannot be animated with native driver.
               const inactiveOpacity = focused.interpolate({
                 inputRange: [0, 1],
-                outputRange: [1, 0],
+                outputRange: [1, 0.6],
               });
-              const activeIconOpacity = shifting
-                ? focused.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0.6, 1],
-                  })
-                : focused;
+              const activeIconOpacity = focused.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0.6, 1],
+              });
               const activeLabelOpacity = focused;
               const inactiveIconOpacity = inactiveOpacity;
               const inactiveLabelOpacity = inactiveOpacity;
 
               return (
-                <TouchableWithoutFeedback
+                <Touchable
                   key={route.key}
+                  borderless
+                  rippleColor={touchColor}
                   onPress={() => this._handleTabPress(index)}
+                  style={styles.item}
                 >
-                  <Animated.View
-                    style={[styles.item, { transform: [{ translateX }] }]}
-                  >
+                  <View pointerEvents="none">
                     <Animated.View
                       style={[
                         styles.iconContainer,
@@ -765,7 +654,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                       style={[
                         styles.labelContainer,
                         {
-                          transform: [{ scale }, { translateY }],
+                          transform: [{ scale }],
                         },
                       ]}
                     >
@@ -822,8 +711,8 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                         </Animated.View>
                       )}
                     </Animated.View>
-                  </Animated.View>
-                </TouchableWithoutFeedback>
+                  </View>
+                </Touchable>
               );
             })}
           </SafeAreaView>
@@ -848,14 +737,13 @@ const styles = StyleSheet.create({
     elevation: 8,
     overflow: 'hidden',
     alignItems: 'center',
-    paddingHorizontal: MIN_SHIFT_AMOUNT * 2,
   },
   items: {
     flexDirection: 'row',
   },
   item: {
     flex: 1,
-    // Top adding is 6 and bottom padding is 10
+    // Top padding is 6 and bottom padding is 10
     // The extra 4dp bottom padding is offset by label's height
     paddingVertical: 6,
   },
@@ -881,7 +769,7 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
   label: {
-    fontSize: Platform.OS === 'ios' ? 13 : 14,
+    fontSize: 12,
     textAlign: 'center',
     backgroundColor: 'transparent',
   },
