@@ -12,15 +12,21 @@ import type { IconSource } from './Icon';
 
 type Props = {
   /**
+   * Mode of the chip.
+   * - `flat` - flat chip without outline
+   * - `outlined` - chip with an outline
+   */
+  mode?: 'flat' | 'outlined',
+  /**
    * Text content of the `Chip`.
    */
   children: React.Node,
   /**
-   * Icon to display for the `Chip`.
+   * Icon to display for the `Chip`. Both icon and avatar cannot be specified.
    */
   icon?: IconSource,
   /**
-   * Avatar to display for the `Chip`.
+   * Avatar to display for the `Chip`. Both icon and avatar cannot be specified.
    */
   avatar?: React.Node,
   /**
@@ -43,10 +49,6 @@ type Props = {
    * Function to execute on delete. The delete button appears only when this prop is specified.
    */
   onDelete?: () => mixed,
-  /**
-   * Displays chip with outline.
-   */
-  outlined?: boolean,
   style?: any,
   /**
    * @optional
@@ -74,6 +76,7 @@ type Props = {
  */
 class Chip extends React.Component<Props> {
   static defaultProps = {
+    mode: 'flat',
     disabled: false,
     pressed: false,
     selected: false,
@@ -82,6 +85,7 @@ class Chip extends React.Component<Props> {
 
   render() {
     const {
+      mode,
       children,
       icon,
       avatar,
@@ -90,18 +94,18 @@ class Chip extends React.Component<Props> {
       pressed,
       onPress,
       onDelete,
-      outlined,
       style,
       theme,
     } = this.props;
     const { dark, colors } = theme;
 
-    const backgroundColor = outlined
-      ? colors.background
-      : color(colors.text)
-          .alpha(disabled ? 0.05 : 0.12)
-          .rgb()
-          .string();
+    const backgroundColor =
+      mode === 'outlined'
+        ? colors.background
+        : color(colors.text)
+            .alpha(disabled ? 0.05 : 0.12)
+            .rgb()
+            .string();
     const textColor = disabled
       ? colors.disabled
       : color(colors.text)
@@ -115,7 +119,7 @@ class Chip extends React.Component<Props> {
           .rgb()
           .string();
     const pressedColor = color(colors.text)
-      .alpha(outlined ? 0.1 : 0.3)
+      .alpha(mode === 'outlined' ? 0.1 : 0.3)
       .rgb()
       .string();
 
@@ -130,7 +134,7 @@ class Chip extends React.Component<Props> {
             styles.content,
             {
               backgroundColor,
-              borderColor: outlined ? colors.text : 'transparent',
+              borderColor: mode === 'outlined' ? colors.text : 'transparent',
             },
             style,
             pressed || selected
@@ -147,7 +151,7 @@ class Chip extends React.Component<Props> {
               size={20}
             />
           ) : null}
-          {avatar
+          {avatar && !icon
             ? /* $FlowFixMe */
               React.cloneElement(avatar, {
                 /* $FlowFixMe */
@@ -181,7 +185,6 @@ class Chip extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   touchable: {
-    margin: 4,
     borderRadius: 16,
   },
   content: {

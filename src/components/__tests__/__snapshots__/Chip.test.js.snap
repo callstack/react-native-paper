@@ -20,7 +20,6 @@ exports[`renders chip with icon 1`] = `
   style={
     Object {
       "borderRadius": 16,
-      "margin": 4,
     }
   }
   testID={undefined}
@@ -141,7 +140,6 @@ exports[`renders chip with onPress 1`] = `
   style={
     Object {
       "borderRadius": 16,
-      "margin": 4,
     }
   }
   testID={undefined}
@@ -238,7 +236,6 @@ exports[`renders deletable chip 1`] = `
   style={
     Object {
       "borderRadius": 16,
-      "margin": 4,
     }
   }
   testID={undefined}
@@ -405,7 +402,6 @@ exports[`renders outlined disabled chip 1`] = `
   style={
     Object {
       "borderRadius": 16,
-      "margin": 4,
     }
   }
   testID={undefined}
@@ -502,7 +498,6 @@ exports[`renders pressed chip 1`] = `
   style={
     Object {
       "borderRadius": 16,
-      "margin": 4,
     }
   }
   testID={undefined}
@@ -601,7 +596,6 @@ exports[`renders selected chip 1`] = `
   style={
     Object {
       "borderRadius": 16,
-      "margin": 4,
     }
   }
   testID={undefined}

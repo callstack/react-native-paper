@@ -33,7 +33,7 @@ it('renders deletable chip', () => {
 it('renders outlined disabled chip', () => {
   const tree = renderer
     .create(
-      <Chip outlined disabled>
+      <Chip mode="outlined" disabled>
         Example Chip
       </Chip>
     )
