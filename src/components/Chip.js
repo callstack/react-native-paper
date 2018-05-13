@@ -1,32 +1,59 @@
 /* @flow */
 
 import * as React from 'react';
-import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Animated,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import color from 'color';
 import Icon from './Icon';
+import Surface from './Surface';
 import Text from './Typography/Text';
-import { black, white } from '../styles/colors';
+import TouchableRipple from './TouchableRipple';
 import withTheme from '../core/withTheme';
+import { black, white } from '../styles/colors';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
+const AnimatedSurface = Animated.createAnimatedComponent(Surface);
+
 type Props = {
+  /**
+   * Mode of the chip.
+   * - `flat` - flat chip without outline.
+   * - `outlined` - chip with an outline.
+   */
+  mode?: 'flat' | 'outlined',
   /**
    * Text content of the `Chip`.
    */
   children: React.Node,
   /**
-   * Icon to display for the `Chip`.
+   * Icon to display for the `Chip`. Both icon and avatar cannot be specified.
    */
   icon?: IconSource,
+  /**
+   * Avatar to display for the `Chip`. Both icon and avatar cannot be specified.
+   */
+  avatar?: React.Node,
+  /**
+   * Whether to style the chip as selected.
+   */
+  selected?: boolean,
+  /**
+   * Whether the chip is disabled. A disabled chip is greyed out and `onPress` is not called on touch.
+   */
+  disabled?: boolean,
   /**
    * Function to execute on press.
    */
   onPress?: () => mixed,
   /**
-   * Function to execute on delete. The delete button appears only when this prop is specified.
+   * Function to execute on close button press. The close button appears only when this prop is specified.
    */
-  onDelete?: () => mixed,
+  onClose?: () => mixed,
   style?: any,
   /**
    * @optional
@@ -34,12 +61,22 @@ type Props = {
   theme: Theme,
 };
 
+type State = {
+  elevation: Animated.Value,
+};
+
 /**
  * Chips can be used to display entities in small blocks.
  *
  * <div class="screenshots">
- *   <img src="screenshots/chip-1.png" />
- *   <img src="screenshots/chip-2.png" />
+ *   <figure>
+ *     <img class="medium" src="screenshots/chip-1.png" />
+ *     <figcaption>Flat chip</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img class="medium" src="screenshots/chip-2.png" />
+ *     <figcaption>Outlined chip</figcaption>
+ *   </figure>
  * </div>
  *
  * ## Usage
@@ -52,68 +89,193 @@ type Props = {
  * );
  * ```
  */
-class Chip extends React.Component<Props> {
+class Chip extends React.Component<Props, State> {
+  static defaultProps = {
+    mode: 'flat',
+    disabled: false,
+    selected: false,
+  };
+
+  state = {
+    elevation: new Animated.Value(0),
+  };
+
+  _handlePressIn = () => {
+    Animated.timing(this.state.elevation, {
+      toValue: 4,
+      duration: 200,
+    }).start();
+  };
+
+  _handlePressOut = () => {
+    Animated.timing(this.state.elevation, {
+      toValue: 0,
+      duration: 150,
+    }).start();
+  };
+
   render() {
-    const { children, icon, onPress, onDelete, style, theme } = this.props;
+    const {
+      mode,
+      children,
+      icon,
+      avatar,
+      selected,
+      disabled,
+      onPress,
+      onClose,
+      style,
+      theme,
+    } = this.props;
     const { dark, colors } = theme;
 
-    const backgroundColor = color(dark ? white : black)
-      .alpha(0.12)
-      .rgb()
-      .string();
-    const textColor = dark
-      ? colors.text
+    const {
+      backgroundColor = mode === 'outlined'
+        ? colors.surface
+        : dark
+          ? '#383838'
+          : '#ebebeb',
+    } =
+      StyleSheet.flatten(style) || {};
+
+    const borderColor =
+      mode === 'outlined'
+        ? color(dark ? white : black)
+            .alpha(0.29)
+            .rgb()
+            .string()
+        : backgroundColor;
+    const textColor = disabled
+      ? colors.disabled
       : color(colors.text)
           .alpha(0.87)
           .rgb()
           .string();
-    const iconColor = color(colors.text)
-      .alpha(dark ? 0.7 : 0.54)
+    const iconColor = disabled
+      ? colors.disabled
+      : color(colors.text)
+          .alpha(0.54)
+          .rgb()
+          .string();
+    const selectedBackgroundColor = color(dark ? white : black)
+      .alpha(mode === 'outlined' ? 0.12 : 0.24)
       .rgb()
       .string();
 
     return (
-      <TouchableWithoutFeedback onPress={onPress}>
-        <View style={[styles.content, { backgroundColor }, style]}>
-          {icon ? <Icon source={icon} color={iconColor} size={32} /> : null}
-          <Text
-            numberOfLines={1}
-            style={[
-              styles.text,
-              {
-                color: textColor,
-                marginLeft: icon ? 8 : 12,
-                marginRight: onDelete ? 0 : 12,
-              },
-            ]}
-          >
-            {children}
-          </Text>
-          {onDelete ? (
-            <TouchableWithoutFeedback onPress={onDelete}>
-              <View style={styles.delete}>
-                <Icon source="cancel" size={20} color={iconColor} />
+      <AnimatedSurface
+        style={[
+          styles.container,
+          {
+            elevation: this.state.elevation,
+            backgroundColor: selected
+              ? selectedBackgroundColor
+              : backgroundColor,
+            borderColor,
+          },
+          style,
+        ]}
+      >
+        <TouchableRipple
+          borderless
+          delayPressIn={0}
+          style={styles.touchable}
+          onPress={onPress}
+          onPressIn={this._handlePressIn}
+          onPressOut={this._handlePressOut}
+          underlayColor={selectedBackgroundColor}
+          disabled={disabled}
+        >
+          <View style={styles.content}>
+            {avatar && !icon ? (
+              <View
+                style={[styles.avatarWrapper, disabled && { opacity: 0.26 }]}
+              >
+                {React.isValidElement(avatar)
+                  ? /* $FlowFixMe */
+                    React.cloneElement(avatar, {
+                      /* $FlowFixMe */
+                      style: [styles.avatar, avatar.props.style],
+                    })
+                  : avatar}
               </View>
-            </TouchableWithoutFeedback>
-          ) : null}
-        </View>
-      </TouchableWithoutFeedback>
+            ) : null}
+            {icon || selected ? (
+              <View
+                style={[
+                  styles.icon,
+                  avatar ? [styles.avatar, styles.avatarSelected] : null,
+                ]}
+              >
+                <Icon
+                  source={icon || 'done'}
+                  color={avatar ? white : iconColor}
+                  size={18}
+                />
+              </View>
+            ) : null}
+            <Text
+              numberOfLines={1}
+              style={[
+                styles.text,
+                {
+                  color: textColor,
+                  marginRight: onClose ? 4 : 8,
+                  marginLeft: avatar || icon || selected ? 4 : 8,
+                },
+              ]}
+            >
+              {children}
+            </Text>
+            {onClose ? (
+              <TouchableWithoutFeedback onPress={onClose}>
+                <View style={styles.icon}>
+                  <Icon source="cancel" size={16} color={iconColor} />
+                </View>
+              </TouchableWithoutFeedback>
+            ) : null}
+          </View>
+        </TouchableRipple>
+      </AnimatedSurface>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  content: {
+  container: {
     borderRadius: 16,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderStyle: 'solid',
+  },
+  touchable: {
+    borderRadius: 16,
+  },
+  content: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-around',
+    paddingHorizontal: 4,
   },
-  delete: {
-    padding: 6,
+  icon: {
+    padding: 4,
   },
   text: {
-    marginVertical: 8,
+    height: 24,
+    textAlignVertical: 'center',
+    marginVertical: 4,
+  },
+  avatar: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+  },
+  avatarWrapper: {
+    marginRight: 4,
+  },
+  avatarSelected: {
+    position: 'absolute',
+    top: 4,
+    left: 4,
+    backgroundColor: 'rgba(0, 0, 0, .29)',
   },
 });
 

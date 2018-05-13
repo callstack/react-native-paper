@@ -29,3 +29,21 @@ it('renders deletable chip', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('renders outlined disabled chip', () => {
+  const tree = renderer
+    .create(
+      <Chip mode="outlined" disabled>
+        Example Chip
+      </Chip>
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders selected chip', () => {
+  const tree = renderer.create(<Chip selected>Example Chip</Chip>).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});

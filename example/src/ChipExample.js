@@ -1,8 +1,8 @@
 /* @flow */
 
 import * as React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
-import { Chip, withTheme } from 'react-native-paper';
+import { View, ScrollView, StyleSheet, Image } from 'react-native';
+import { Chip, ListSection, withTheme } from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
 
 type Props = {
@@ -16,31 +16,117 @@ class ChipExample extends React.Component<Props> {
     const { colors } = this.props.theme;
 
     return (
-      <View style={[styles.container, { backgroundColor: colors.background }]}>
-        <View style={styles.row}>
-          <Chip onPress={() => {}} style={styles.chip}>
-            Simple Chip
-          </Chip>
-          <Chip onDelete={() => {}} style={styles.chip}>
-            Chip with delete button
-          </Chip>
-          <Chip icon="info" style={styles.chip}>
-            Chip with icon
-          </Chip>
-          <Chip
-            icon={({ size }) => (
-              <Image
-                source={require('../assets/avatar.jpg')}
-                style={{ height: size, width: size, borderRadius: size / 2 }}
-              />
-            )}
-            onDelete={() => {}}
-            style={styles.chip}
-          >
-            Chip with image
-          </Chip>
-        </View>
-      </View>
+      <ScrollView
+        style={[styles.container, { backgroundColor: colors.surface }]}
+      >
+        <ListSection title="Flat chip">
+          <View style={styles.row}>
+            <Chip onPress={() => {}} style={styles.chip}>
+              Simple
+            </Chip>
+            <Chip onPress={() => {}} onClose={() => {}} style={styles.chip}>
+              Close button
+            </Chip>
+            <Chip
+              icon="favorite"
+              onPress={() => {}}
+              onClose={() => {}}
+              style={styles.chip}
+            >
+              Icon
+            </Chip>
+            <Chip
+              avatar={<Image source={require('../assets/avatar.jpg')} />}
+              onPress={() => {}}
+              onClose={() => {}}
+              style={styles.chip}
+            >
+              Avatar
+            </Chip>
+            <Chip
+              selected
+              avatar={<Image source={require('../assets/avatar.jpg')} />}
+              onPress={() => {}}
+              style={styles.chip}
+            >
+              Avatar (selected)
+            </Chip>
+            <Chip
+              disabled
+              icon="favorite"
+              onClose={() => {}}
+              style={styles.chip}
+            >
+              Icon (disabled)
+            </Chip>
+            <Chip
+              disabled
+              avatar={<Image source={require('../assets/avatar.jpg')} />}
+              style={styles.chip}
+            >
+              Avatar (disabled)
+            </Chip>
+          </View>
+        </ListSection>
+        <ListSection title="Outlined chip">
+          <View style={styles.row}>
+            <Chip mode="outlined" onPress={() => {}} style={styles.chip}>
+              Simple
+            </Chip>
+            <Chip
+              mode="outlined"
+              onPress={() => {}}
+              onClose={() => {}}
+              style={styles.chip}
+            >
+              Close button
+            </Chip>
+            <Chip
+              mode="outlined"
+              icon="favorite"
+              onPress={() => {}}
+              onClose={() => {}}
+              style={styles.chip}
+            >
+              Icon
+            </Chip>
+            <Chip
+              mode="outlined"
+              avatar={<Image source={require('../assets/avatar.jpg')} />}
+              onPress={() => {}}
+              style={styles.chip}
+            >
+              Avatar
+            </Chip>
+            <Chip
+              selected
+              mode="outlined"
+              avatar={<Image source={require('../assets/avatar.jpg')} />}
+              onPress={() => {}}
+              style={styles.chip}
+            >
+              Avatar (selected)
+            </Chip>
+            <Chip
+              disabled
+              mode="outlined"
+              icon="favorite"
+              onClose={() => {}}
+              style={styles.chip}
+            >
+              Icon (disabled)
+            </Chip>
+            <Chip
+              disabled
+              mode="outlined"
+              avatar={<Image source={require('../assets/avatar.jpg')} />}
+              style={styles.chip}
+            >
+              Avatar (disabled)
+            </Chip>
+          </View>
+        </ListSection>
+      </ScrollView>
     );
   }
 }
@@ -48,14 +134,12 @@ class ChipExample extends React.Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 4,
   },
-
   row: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    paddingHorizontal: 12,
   },
-
   chip: {
     margin: 4,
   },
