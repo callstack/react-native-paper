@@ -19,7 +19,6 @@ exports[`renders button with color 1`] = `
         "borderStyle": "solid",
         "borderWidth": 0.5,
         "elevation": 0,
-        "margin": 4,
         "minWidth": 88,
       },
     ]
@@ -136,7 +135,6 @@ exports[`renders button with icon 1`] = `
         "borderStyle": "solid",
         "borderWidth": 0.5,
         "elevation": 0,
-        "margin": 4,
         "minWidth": 88,
       },
     ]
@@ -295,7 +293,6 @@ exports[`renders contained contained with mode 1`] = `
         "borderStyle": "solid",
         "borderWidth": 0.5,
         "elevation": 2,
-        "margin": 4,
         "minWidth": 88,
       },
     ]
@@ -412,7 +409,6 @@ exports[`renders disabled button 1`] = `
         "borderStyle": "solid",
         "borderWidth": 0.5,
         "elevation": 0,
-        "margin": 4,
         "minWidth": 88,
       },
     ]
@@ -529,7 +525,6 @@ exports[`renders loading button 1`] = `
         "borderStyle": "solid",
         "borderWidth": 0.5,
         "elevation": 0,
-        "margin": 4,
         "minWidth": 88,
       },
     ]
@@ -659,7 +654,6 @@ exports[`renders outlined button with mode 1`] = `
         "borderStyle": "solid",
         "borderWidth": 0.5,
         "elevation": 0,
-        "margin": 4,
         "minWidth": 88,
       },
     ]
@@ -776,7 +770,6 @@ exports[`renders text button by default 1`] = `
         "borderStyle": "solid",
         "borderWidth": 0.5,
         "elevation": 0,
-        "margin": 4,
         "minWidth": 88,
       },
     ]
@@ -893,7 +886,6 @@ exports[`renders text button with mode 1`] = `
         "borderStyle": "solid",
         "borderWidth": 0.5,
         "elevation": 0,
-        "margin": 4,
         "minWidth": 88,
       },
     ]

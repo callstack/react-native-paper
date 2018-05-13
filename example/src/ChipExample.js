@@ -13,17 +13,20 @@ class ChipExample extends React.Component<Props> {
   static title = 'Chip';
 
   render() {
-    const {
-      theme: {
-        colors: { background },
-      },
-    } = this.props;
+    const { colors } = this.props.theme;
+
     return (
-      <View style={[styles.container, { backgroundColor: background }]}>
+      <View style={[styles.container, { backgroundColor: colors.background }]}>
         <View style={styles.row}>
-          <Chip onPress={() => {}}>Simple Chip</Chip>
-          <Chip onDelete={() => {}}>Chip with delete button</Chip>
-          <Chip icon="info">Chip with icon</Chip>
+          <Chip onPress={() => {}} style={styles.chip}>
+            Simple Chip
+          </Chip>
+          <Chip onDelete={() => {}} style={styles.chip}>
+            Chip with delete button
+          </Chip>
+          <Chip icon="info" style={styles.chip}>
+            Chip with icon
+          </Chip>
           <Chip
             icon={({ size }) => (
               <Image
@@ -32,6 +35,7 @@ class ChipExample extends React.Component<Props> {
               />
             )}
             onDelete={() => {}}
+            style={styles.chip}
           >
             Chip with image
           </Chip>
@@ -50,6 +54,10 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+  },
+
+  chip: {
+    margin: 4,
   },
 });
 

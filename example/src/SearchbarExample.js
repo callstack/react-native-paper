@@ -37,6 +37,7 @@ class SearchExample extends React.Component<Props, State> {
           placeholder="Search"
           onChangeText={query => this.setState({ firstQuery: query })}
           value={this.state.firstQuery}
+          style={styles.searchbar}
         />
         <Caption style={styles.caption}>Clickable icon</Caption>
         <Searchbar
@@ -45,6 +46,7 @@ class SearchExample extends React.Component<Props, State> {
           value={this.state.secondQuery}
           onIconPress={() => this.props.navigation.goBack()}
           icon="arrow-back"
+          style={styles.searchbar}
         />
         <Searchbar
           placeholder="Search"
@@ -52,6 +54,7 @@ class SearchExample extends React.Component<Props, State> {
           value={this.state.thirdQuery}
           onIconPress={/* In real code, this will open the drawer */ () => {}}
           icon="menu"
+          style={styles.searchbar}
         />
       </View>
     );
@@ -66,6 +69,9 @@ const styles = StyleSheet.create({
   caption: {
     paddingHorizontal: 16,
     paddingVertical: 8,
+  },
+  searchbar: {
+    margin: 4,
   },
 });
 
