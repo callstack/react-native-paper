@@ -215,9 +215,10 @@ class Button extends React.Component<Props, State> {
         <TouchableRipple
           borderless
           delayPressIn={0}
-          onPress={disabled ? undefined : onPress}
-          onPressIn={disabled ? undefined : this._handlePressIn}
-          onPressOut={disabled ? undefined : this._handlePressOut}
+          onPress={onPress}
+          onPressIn={this._handlePressIn}
+          onPressOut={this._handlePressOut}
+          disabled={disabled}
           rippleColor={rippleColor}
           style={touchableStyle}
         >
