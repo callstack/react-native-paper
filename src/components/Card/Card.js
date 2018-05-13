@@ -110,9 +110,7 @@ class Card extends React.Component<Props, State> {
         typeof child === 'object' && child.type ? child.type.displayName : null
     );
     return (
-      <AnimatedSurface
-        style={[styles.card, { borderRadius: roundness, elevation }, style]}
-      >
+      <AnimatedSurface style={[{ borderRadius: roundness, elevation }, style]}>
         <TouchableWithoutFeedback
           delayPressIn={0}
           onPress={onPress}
@@ -141,9 +139,6 @@ class Card extends React.Component<Props, State> {
 }
 
 const styles = StyleSheet.create({
-  card: {
-    margin: 4,
-  },
   container: {
     flex: 1,
   },

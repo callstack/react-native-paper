@@ -25,55 +25,101 @@ class ButtonExample extends React.Component<Props, State> {
       >
         <ListSection title="Text button">
           <View style={styles.row}>
-            <Button onPress={() => {}}>Default</Button>
-            <Button color={colors.accent} onPress={() => {}}>
+            <Button onPress={() => {}} style={styles.button}>
+              Default
+            </Button>
+            <Button
+              color={colors.accent}
+              onPress={() => {}}
+              style={styles.button}
+            >
               Custom
             </Button>
-            <Button disabled onPress={() => {}}>
+            <Button disabled onPress={() => {}} style={styles.button}>
               Disabled
             </Button>
-            <Button icon="add-a-photo" onPress={() => {}}>
+            <Button icon="add-a-photo" onPress={() => {}} style={styles.button}>
               Icon
             </Button>
-            <Button loading onPress={() => {}}>
+            <Button loading onPress={() => {}} style={styles.button}>
               Loading
             </Button>
           </View>
         </ListSection>
         <ListSection title="Outlined button">
           <View style={styles.row}>
-            <Button mode="outlined" onPress={() => {}}>
+            <Button mode="outlined" onPress={() => {}} style={styles.button}>
               Default
             </Button>
-            <Button mode="outlined" color={colors.accent} onPress={() => {}}>
+            <Button
+              mode="outlined"
+              color={colors.accent}
+              onPress={() => {}}
+              style={styles.button}
+            >
               Custom
             </Button>
-            <Button mode="outlined" disabled onPress={() => {}}>
+            <Button
+              mode="outlined"
+              disabled
+              onPress={() => {}}
+              style={styles.button}
+            >
               Disabled
             </Button>
-            <Button mode="outlined" icon="add-a-photo" onPress={() => {}}>
+            <Button
+              mode="outlined"
+              icon="add-a-photo"
+              onPress={() => {}}
+              style={styles.button}
+            >
               Icon
             </Button>
-            <Button mode="outlined" loading onPress={() => {}}>
+            <Button
+              mode="outlined"
+              loading
+              onPress={() => {}}
+              style={styles.button}
+            >
               Loading
             </Button>
           </View>
         </ListSection>
         <ListSection title="Contained button">
           <View style={styles.row}>
-            <Button mode="contained" onPress={() => {}}>
+            <Button mode="contained" onPress={() => {}} style={styles.button}>
               Default
             </Button>
-            <Button mode="contained" color={colors.accent} onPress={() => {}}>
+            <Button
+              mode="contained"
+              color={colors.accent}
+              onPress={() => {}}
+              style={styles.button}
+            >
               Custom
             </Button>
-            <Button mode="contained" disabled onPress={() => {}}>
+            <Button
+              mode="contained"
+              disabled
+              onPress={() => {}}
+              style={styles.button}
+            >
               Disabled
             </Button>
-            <Button mode="contained" icon="add-a-photo" onPress={() => {}}>
+            <Button
+              mode="contained"
+              icon="add-a-photo"
+              onPress={() => {}}
+              style={styles.button}
+            >
               Icon
             </Button>
-            <Button mode="contained" loading onPress={() => {}}>
+            <Button
+              mode="contained"
+              loading
+              onPress={() => {}}
+              style={styles.button}
+            >
               Loading
             </Button>
           </View>
@@ -87,6 +133,7 @@ class ButtonExample extends React.Component<Props, State> {
                   'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400',
               }}
               onPress={() => {}}
+              style={styles.button}
             >
               Remote image
             </Button>
@@ -94,6 +141,7 @@ class ButtonExample extends React.Component<Props, State> {
               mode="outlined"
               icon={require('../assets/favorite.png')}
               onPress={() => {}}
+              style={styles.button}
             >
               Required asset
             </Button>
@@ -106,6 +154,7 @@ class ButtonExample extends React.Component<Props, State> {
                 />
               )}
               onPress={() => {}}
+              style={styles.button}
             >
               Custom component
             </Button>
@@ -124,6 +173,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     paddingHorizontal: 12,
+  },
+  button: {
+    margin: 4,
   },
 });
 
