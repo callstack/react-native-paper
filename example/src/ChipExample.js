@@ -18,26 +18,36 @@ class ChipExample extends React.Component<Props> {
     return (
       <View style={[styles.container, { backgroundColor: colors.background }]}>
         <View style={styles.row}>
-          <Chip onPress={() => {}} style={styles.chip}>
-            Simple Chip
-          </Chip>
-          <Chip onDelete={() => {}} style={styles.chip}>
+          <Chip onPress={() => {}} onDelete={() => {}}>
             Chip with delete button
           </Chip>
-          <Chip icon="info" style={styles.chip}>
-            Chip with icon
-          </Chip>
+          <Chip icon="favorite">Chip with icon</Chip>
           <Chip
-            icon={({ size }) => (
-              <Image
-                source={require('../assets/avatar.jpg')}
-                style={{ height: size, width: size, borderRadius: size / 2 }}
-              />
-            )}
+            avatar={<Image source={require('../assets/avatar.jpg')} />}
             onDelete={() => {}}
             style={styles.chip}
           >
             Chip with image
+          </Chip>
+        </View>
+        <View style={styles.row}>
+          <Chip>Simple Chip</Chip>
+          <Chip selected>Selected chip</Chip>
+          <Chip pressed>Pressed chip</Chip>
+          <Chip icon="favorite" onDelete={() => {}} disabled>
+            Disabled chip
+          </Chip>
+        </View>
+        <View style={styles.row}>
+          <Chip outlined>Chip with outline</Chip>
+          <Chip outlined selected>
+            Selected chip
+          </Chip>
+          <Chip outlined pressed>
+            Pressed chip
+          </Chip>
+          <Chip icon="favorite" onDelete={() => {}} outlined disabled>
+            Disabled chip
           </Chip>
         </View>
       </View>
