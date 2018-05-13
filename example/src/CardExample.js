@@ -33,7 +33,7 @@ class CardExample extends React.Component<Props> {
         style={[styles.container, { backgroundColor: background }]}
         contentContainerStyle={styles.content}
       >
-        <Card>
+        <Card style={styles.card}>
           <CardCover source={require('../assets/wrecked-ship.jpg')} />
           <CardContent>
             <Title>Abandoned Ship</Title>
@@ -45,7 +45,7 @@ class CardExample extends React.Component<Props> {
             </Paragraph>
           </CardContent>
         </Card>
-        <Card>
+        <Card style={styles.card}>
           <CardCover source={require('../assets/forest.jpg')} />
           <CardActions>
             <Button primary onPress={() => {}}>
@@ -56,7 +56,7 @@ class CardExample extends React.Component<Props> {
             </Button>
           </CardActions>
         </Card>
-        <Card>
+        <Card style={styles.card}>
           <CardContent>
             <Title>Berries</Title>
             <Caption>Omega Ruby</Caption>
@@ -69,7 +69,7 @@ class CardExample extends React.Component<Props> {
             </Paragraph>
           </CardContent>
         </Card>
-        <Card>
+        <Card style={styles.card}>
           <CardCover source={require('../assets/strawberries.jpg')} />
         </Card>
       </ScrollView>
@@ -83,6 +83,9 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 4,
+  },
+  card: {
+    margin: 4,
   },
 });
 

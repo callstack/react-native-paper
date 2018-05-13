@@ -180,7 +180,6 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    margin: 4,
   },
   input: {
     flex: 1,

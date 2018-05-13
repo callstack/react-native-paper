@@ -108,7 +108,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
-    margin: 4,
   },
   delete: {
     padding: 6,

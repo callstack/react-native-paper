@@ -22,7 +22,6 @@ exports[`renders chip with icon 1`] = `
         "borderRadius": 16,
         "flexDirection": "row",
         "justifyContent": "space-around",
-        "margin": 4,
       },
       Object {
         "backgroundColor": "rgba(0, 0, 0, 0.12)",
@@ -129,7 +128,6 @@ exports[`renders chip with onPress 1`] = `
         "borderRadius": 16,
         "flexDirection": "row",
         "justifyContent": "space-around",
-        "margin": 4,
       },
       Object {
         "backgroundColor": "rgba(0, 0, 0, 0.12)",
@@ -212,7 +210,6 @@ exports[`renders deletable chip 1`] = `
         "borderRadius": 16,
         "flexDirection": "row",
         "justifyContent": "space-around",
-        "margin": 4,
       },
       Object {
         "backgroundColor": "rgba(0, 0, 0, 0.12)",
