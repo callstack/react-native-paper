@@ -38,10 +38,6 @@ type Props = {
    */
   disabled?: boolean,
   /**
-   * Displays the chip as pressed.
-   */
-  pressed?: boolean,
-  /**
    * Function to execute on press.
    */
   onPress?: () => mixed,
@@ -78,7 +74,6 @@ class Chip extends React.Component<Props> {
   static defaultProps = {
     mode: 'flat',
     disabled: false,
-    pressed: false,
     selected: false,
     style: {},
   };
@@ -91,7 +86,6 @@ class Chip extends React.Component<Props> {
       avatar,
       selected,
       disabled,
-      pressed,
       onPress,
       onDelete,
       style,
@@ -118,7 +112,7 @@ class Chip extends React.Component<Props> {
           .alpha(dark ? 0.7 : 0.54)
           .rgb()
           .string();
-    const pressedColor = color(colors.text)
+    const selectedColor = color(colors.text)
       .alpha(mode === 'outlined' ? 0.1 : 0.3)
       .rgb()
       .string();
@@ -137,9 +131,9 @@ class Chip extends React.Component<Props> {
               borderColor: mode === 'outlined' ? colors.text : 'transparent',
             },
             style,
-            pressed || selected
+            selected
               ? {
-                  backgroundColor: pressedColor,
+                  backgroundColor: selectedColor,
                 }
               : null,
           ]}

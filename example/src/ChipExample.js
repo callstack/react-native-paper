@@ -37,9 +37,6 @@ class ChipExample extends React.Component<Props> {
           <Chip selected style={styles.chip}>
             Selected chip
           </Chip>
-          <Chip pressed style={styles.chip}>
-            Pressed chip
-          </Chip>
           <Chip
             icon="favorite"
             onDelete={() => {}}
@@ -55,9 +52,6 @@ class ChipExample extends React.Component<Props> {
           </Chip>
           <Chip mode="outlined" selected style={styles.chip}>
             Selected chip
-          </Chip>
-          <Chip mode="outlined" pressed style={styles.chip}>
-            Pressed chip
           </Chip>
           <Chip
             icon="favorite"

@@ -42,12 +42,6 @@ it('renders outlined disabled chip', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders pressed chip', () => {
-  const tree = renderer.create(<Chip pressed>Example Chip</Chip>).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
 it('renders selected chip', () => {
   const tree = renderer.create(<Chip selected>Example Chip</Chip>).toJSON();
 
