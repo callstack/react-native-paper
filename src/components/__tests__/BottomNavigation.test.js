@@ -128,3 +128,35 @@ it('renders custom icon and label with custom colors in non-shifting bottom navi
 
   expect(tree).toMatchSnapshot();
 });
+
+it('hides labels in shifting bottom navigation', () => {
+  const tree = renderer
+    .create(
+      <BottomNavigation
+        shifting
+        labeled={false}
+        navigationState={createState(0, 3)}
+        onIndexChange={jest.fn()}
+        renderScene={({ route }) => route.title}
+      />
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('hides labels in non-shifting bottom navigation', () => {
+  const tree = renderer
+    .create(
+      <BottomNavigation
+        shifting={false}
+        labeled={false}
+        navigationState={createState(0, 3)}
+        onIndexChange={jest.fn()}
+        renderScene={({ route }) => route.title}
+      />
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
