@@ -59,11 +59,11 @@ it('renders custom icon and label in shifting bottom navigation', () => {
         navigationState={createState(0, 5)}
         onIndexChange={jest.fn()}
         renderScene={({ route }) => route.title}
-        renderIcon={({ route, focused }) => (
-          <icon color={focused ? 'blue' : 'white'}>{route.icon}</icon>
+        renderIcon={({ route, tintColor }) => (
+          <icon color={tintColor}>{route.icon}</icon>
         )}
-        renderLabel={({ route, focused }) => (
-          <text color={focused ? 'blue' : 'white'}>{route.label}</text>
+        renderLabel={({ route, tintColor }) => (
+          <text color={tintColor}>{route.label}</text>
         )}
       />
     )
@@ -80,12 +80,48 @@ it('renders custom icon and label in non-shifting bottom navigation', () => {
         navigationState={createState(0, 3)}
         onIndexChange={jest.fn()}
         renderScene={({ route }) => route.title}
-        renderIcon={({ route, focused }) => (
-          <icon color={focused ? 'blue' : 'white'}>{route.icon}</icon>
+        renderIcon={({ route, tintColor }) => (
+          <icon color={tintColor}>{route.icon}</icon>
         )}
-        renderLabel={({ route, focused }) => (
-          <text color={focused ? 'blue' : 'white'}>{route.label}</text>
+        renderLabel={({ route, tintColor }) => (
+          <text color={tintColor}>{route.label}</text>
         )}
+      />
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders custom icon and label with custom colors in shifting bottom navigation', () => {
+  const tree = renderer
+    .create(
+      <BottomNavigation
+        shifting
+        navigationState={createState(0, 3)}
+        onIndexChange={jest.fn()}
+        renderScene={({ route }) => route.title}
+        activeTintColor="#FBF7DB"
+        inctiveTintColor="#853D4B"
+        barStyle={{ backgroundColor: '#E96A82' }}
+      />
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders custom icon and label with custom colors in non-shifting bottom navigation', () => {
+  const tree = renderer
+    .create(
+      <BottomNavigation
+        shifting={false}
+        navigationState={createState(0, 3)}
+        onIndexChange={jest.fn()}
+        renderScene={({ route }) => route.title}
+        activeTintColor="#FBF7DB"
+        inctiveTintColor="#853D4B"
+        barStyle={{ backgroundColor: '#E96A82' }}
       />
     )
     .toJSON();

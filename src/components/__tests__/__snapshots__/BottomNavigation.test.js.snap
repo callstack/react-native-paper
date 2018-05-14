@@ -149,7 +149,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               }
             >
               <icon
-                color="blue"
+                color="#ffffff"
               >
                 3d-rotation
               </icon>
@@ -161,7 +161,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   "alignItems": "center",
                   "bottom": 0,
                   "left": 0,
-                  "opacity": 0.6,
+                  "opacity": 0,
                   "position": "absolute",
                   "right": 0,
                   "top": 0,
@@ -169,7 +169,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               }
             >
               <icon
-                color="white"
+                color="rgba(255, 255, 255, 0.5)"
               >
                 3d-rotation
               </icon>
@@ -204,7 +204,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               }
             >
               <text
-                color="blue"
+                color="#ffffff"
               />
             </View>
             <View
@@ -213,7 +213,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 Object {
                   "bottom": 0,
                   "left": 0,
-                  "opacity": 0.6,
+                  "opacity": 0,
                   "position": "absolute",
                   "right": 0,
                   "top": 0,
@@ -221,7 +221,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               }
             >
               <text
-                color="white"
+                color="rgba(255, 255, 255, 0.5)"
               />
             </View>
           </View>
@@ -275,7 +275,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   "alignItems": "center",
                   "bottom": 0,
                   "left": 0,
-                  "opacity": 0.6,
+                  "opacity": 0,
                   "position": "absolute",
                   "right": 0,
                   "top": 0,
@@ -283,7 +283,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               }
             >
               <icon
-                color="blue"
+                color="#ffffff"
               >
                 ac-unit
               </icon>
@@ -303,7 +303,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               }
             >
               <icon
-                color="white"
+                color="rgba(255, 255, 255, 0.5)"
               >
                 ac-unit
               </icon>
@@ -338,7 +338,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               }
             >
               <text
-                color="blue"
+                color="#ffffff"
               />
             </View>
             <View
@@ -355,7 +355,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               }
             >
               <text
-                color="white"
+                color="rgba(255, 255, 255, 0.5)"
               />
             </View>
           </View>
@@ -409,7 +409,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   "alignItems": "center",
                   "bottom": 0,
                   "left": 0,
-                  "opacity": 0.6,
+                  "opacity": 0,
                   "position": "absolute",
                   "right": 0,
                   "top": 0,
@@ -417,7 +417,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               }
             >
               <icon
-                color="blue"
+                color="#ffffff"
               >
                 access-alarm
               </icon>
@@ -437,7 +437,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               }
             >
               <icon
-                color="white"
+                color="rgba(255, 255, 255, 0.5)"
               >
                 access-alarm
               </icon>
@@ -472,7 +472,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               }
             >
               <text
-                color="blue"
+                color="#ffffff"
               />
             </View>
             <View
@@ -489,7 +489,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               }
             >
               <text
-                color="white"
+                color="rgba(255, 255, 255, 0.5)"
               />
             </View>
           </View>
@@ -670,7 +670,27 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               }
             >
               <icon
-                color="blue"
+                color="#ffffff"
+              >
+                3d-rotation
+              </icon>
+            </View>
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <icon
+                color="rgba(255, 255, 255, 0.5)"
               >
                 3d-rotation
               </icon>
@@ -705,7 +725,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               }
             >
               <text
-                color="blue"
+                color="#ffffff"
               />
             </View>
           </View>
@@ -759,7 +779,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   "alignItems": "center",
                   "bottom": 0,
                   "left": 0,
-                  "opacity": 0.6,
+                  "opacity": 0,
                   "position": "absolute",
                   "right": 0,
                   "top": 0,
@@ -767,7 +787,27 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               }
             >
               <icon
-                color="blue"
+                color="#ffffff"
+              >
+                ac-unit
+              </icon>
+            </View>
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <icon
+                color="rgba(255, 255, 255, 0.5)"
               >
                 ac-unit
               </icon>
@@ -802,7 +842,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               }
             >
               <text
-                color="blue"
+                color="#ffffff"
               />
             </View>
           </View>
@@ -856,7 +896,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   "alignItems": "center",
                   "bottom": 0,
                   "left": 0,
-                  "opacity": 0.6,
+                  "opacity": 0,
                   "position": "absolute",
                   "right": 0,
                   "top": 0,
@@ -864,7 +904,27 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               }
             >
               <icon
-                color="blue"
+                color="#ffffff"
+              >
+                access-alarm
+              </icon>
+            </View>
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <icon
+                color="rgba(255, 255, 255, 0.5)"
               >
                 access-alarm
               </icon>
@@ -899,7 +959,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               }
             >
               <text
-                color="blue"
+                color="#ffffff"
               />
             </View>
           </View>
@@ -953,7 +1013,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   "alignItems": "center",
                   "bottom": 0,
                   "left": 0,
-                  "opacity": 0.6,
+                  "opacity": 0,
                   "position": "absolute",
                   "right": 0,
                   "top": 0,
@@ -961,7 +1021,27 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               }
             >
               <icon
-                color="blue"
+                color="#ffffff"
+              >
+                access-alarms
+              </icon>
+            </View>
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <icon
+                color="rgba(255, 255, 255, 0.5)"
               >
                 access-alarms
               </icon>
@@ -996,7 +1076,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               }
             >
               <text
-                color="blue"
+                color="#ffffff"
               />
             </View>
           </View>
@@ -1050,7 +1130,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   "alignItems": "center",
                   "bottom": 0,
                   "left": 0,
-                  "opacity": 0.6,
+                  "opacity": 0,
                   "position": "absolute",
                   "right": 0,
                   "top": 0,
@@ -1058,7 +1138,27 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               }
             >
               <icon
-                color="blue"
+                color="#ffffff"
+              >
+                access-time
+              </icon>
+            </View>
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <icon
+                color="rgba(255, 255, 255, 0.5)"
               >
                 access-time
               </icon>
@@ -1093,8 +1193,1575 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               }
             >
               <text
-                color="blue"
+                color="#ffffff"
               />
+            </View>
+          </View>
+        </View>
+      </View>
+    </RCTSafeAreaView>
+  </View>
+</View>
+`;
+
+exports[`renders custom icon and label with custom colors in non-shifting bottom navigation 1`] = `
+<View
+  onLayout={[Function]}
+  pointerEvents="none"
+  style={
+    Array [
+      Object {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "flex": 1,
+        },
+        Object {
+          "backgroundColor": "#f6f6f6",
+        },
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      pointerEvents="auto"
+      removeClippedSubviews={false}
+      style={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "opacity": 1,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      <View
+        collapsable={undefined}
+        style={
+          Object {
+            "flex": 1,
+            "top": 0,
+          }
+        }
+      >
+        Route: 0
+      </View>
+    </View>
+  </View>
+  <View
+    collapsable={undefined}
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#ffffff",
+        },
+        Object {
+          "backgroundColor": "#ffffff",
+        },
+        Object {
+          "shadowColor": "#000000",
+          "shadowOffset": Object {
+            "height": 7,
+            "width": 0,
+          },
+          "shadowOpacity": 0.24,
+          "shadowRadius": 8,
+        },
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#E96A82",
+          "elevation": 8,
+          "overflow": "hidden",
+        },
+      ]
+    }
+  >
+    <RCTSafeAreaView
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "maxWidth": 504,
+          },
+        ]
+      }
+    >
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "paddingVertical": 6,
+          }
+        }
+        testID={undefined}
+      >
+        <View
+          pointerEvents="none"
+        >
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "alignSelf": "center",
+                "height": 24,
+                "marginHorizontal": 12,
+                "transform": Array [
+                  Object {
+                    "translateY": 0,
+                  },
+                ],
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                pointerEvents="none"
+                style={
+                  Array [
+                    Object {
+                      "color": "#FBF7DB",
+                      "fontSize": 24,
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                pointerEvents="none"
+                style={
+                  Array [
+                    Object {
+                      "color": "rgba(0, 0, 0, 0.5)",
+                      "fontSize": 24,
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+          </View>
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "height": 18,
+                "marginTop": 2,
+                "paddingBottom": 4,
+                "transform": Array [
+                  Object {
+                    "scale": 1,
+                  },
+                ],
+              }
+            }
+          >
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                collapsable={undefined}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#000000",
+                      "fontFamily": "Helvetica Neue",
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                      "color": "#FBF7DB",
+                      "fontSize": 12,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+                theme={
+                  Object {
+                    "colors": Object {
+                      "accent": "#03dac4",
+                      "background": "#f6f6f6",
+                      "disabled": "rgba(0, 0, 0, 0.26)",
+                      "error": "#B00020",
+                      "placeholder": "rgba(0, 0, 0, 0.38)",
+                      "primary": "#6200ee",
+                      "surface": "#ffffff",
+                      "text": "#000000",
+                    },
+                    "dark": false,
+                    "fonts": Object {
+                      "light": "HelveticaNeue-Light",
+                      "medium": "HelveticaNeue-Medium",
+                      "regular": "Helvetica Neue",
+                      "thin": "HelveticaNeue-Thin",
+                    },
+                    "roundness": 4,
+                  }
+                }
+              >
+                Route: 0
+              </Text>
+            </View>
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                collapsable={undefined}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#000000",
+                      "fontFamily": "Helvetica Neue",
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                      "color": "rgba(0, 0, 0, 0.5)",
+                      "fontSize": 12,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+                theme={
+                  Object {
+                    "colors": Object {
+                      "accent": "#03dac4",
+                      "background": "#f6f6f6",
+                      "disabled": "rgba(0, 0, 0, 0.26)",
+                      "error": "#B00020",
+                      "placeholder": "rgba(0, 0, 0, 0.38)",
+                      "primary": "#6200ee",
+                      "surface": "#ffffff",
+                      "text": "#000000",
+                    },
+                    "dark": false,
+                    "fonts": Object {
+                      "light": "HelveticaNeue-Light",
+                      "medium": "HelveticaNeue-Medium",
+                      "regular": "Helvetica Neue",
+                      "thin": "HelveticaNeue-Thin",
+                    },
+                    "roundness": 4,
+                  }
+                }
+              >
+                Route: 0
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "paddingVertical": 6,
+          }
+        }
+        testID={undefined}
+      >
+        <View
+          pointerEvents="none"
+        >
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "alignSelf": "center",
+                "height": 24,
+                "marginHorizontal": 12,
+                "transform": Array [
+                  Object {
+                    "translateY": 0,
+                  },
+                ],
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                pointerEvents="none"
+                style={
+                  Array [
+                    Object {
+                      "color": "#FBF7DB",
+                      "fontSize": 24,
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                pointerEvents="none"
+                style={
+                  Array [
+                    Object {
+                      "color": "rgba(0, 0, 0, 0.5)",
+                      "fontSize": 24,
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+          </View>
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "height": 18,
+                "marginTop": 2,
+                "paddingBottom": 4,
+                "transform": Array [
+                  Object {
+                    "scale": 1,
+                  },
+                ],
+              }
+            }
+          >
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                collapsable={undefined}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#000000",
+                      "fontFamily": "Helvetica Neue",
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                      "color": "#FBF7DB",
+                      "fontSize": 12,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+                theme={
+                  Object {
+                    "colors": Object {
+                      "accent": "#03dac4",
+                      "background": "#f6f6f6",
+                      "disabled": "rgba(0, 0, 0, 0.26)",
+                      "error": "#B00020",
+                      "placeholder": "rgba(0, 0, 0, 0.38)",
+                      "primary": "#6200ee",
+                      "surface": "#ffffff",
+                      "text": "#000000",
+                    },
+                    "dark": false,
+                    "fonts": Object {
+                      "light": "HelveticaNeue-Light",
+                      "medium": "HelveticaNeue-Medium",
+                      "regular": "Helvetica Neue",
+                      "thin": "HelveticaNeue-Thin",
+                    },
+                    "roundness": 4,
+                  }
+                }
+              >
+                Route: 1
+              </Text>
+            </View>
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                collapsable={undefined}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#000000",
+                      "fontFamily": "Helvetica Neue",
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                      "color": "rgba(0, 0, 0, 0.5)",
+                      "fontSize": 12,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+                theme={
+                  Object {
+                    "colors": Object {
+                      "accent": "#03dac4",
+                      "background": "#f6f6f6",
+                      "disabled": "rgba(0, 0, 0, 0.26)",
+                      "error": "#B00020",
+                      "placeholder": "rgba(0, 0, 0, 0.38)",
+                      "primary": "#6200ee",
+                      "surface": "#ffffff",
+                      "text": "#000000",
+                    },
+                    "dark": false,
+                    "fonts": Object {
+                      "light": "HelveticaNeue-Light",
+                      "medium": "HelveticaNeue-Medium",
+                      "regular": "Helvetica Neue",
+                      "thin": "HelveticaNeue-Thin",
+                    },
+                    "roundness": 4,
+                  }
+                }
+              >
+                Route: 1
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "paddingVertical": 6,
+          }
+        }
+        testID={undefined}
+      >
+        <View
+          pointerEvents="none"
+        >
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "alignSelf": "center",
+                "height": 24,
+                "marginHorizontal": 12,
+                "transform": Array [
+                  Object {
+                    "translateY": 0,
+                  },
+                ],
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                pointerEvents="none"
+                style={
+                  Array [
+                    Object {
+                      "color": "#FBF7DB",
+                      "fontSize": 24,
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                pointerEvents="none"
+                style={
+                  Array [
+                    Object {
+                      "color": "rgba(0, 0, 0, 0.5)",
+                      "fontSize": 24,
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+          </View>
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "height": 18,
+                "marginTop": 2,
+                "paddingBottom": 4,
+                "transform": Array [
+                  Object {
+                    "scale": 1,
+                  },
+                ],
+              }
+            }
+          >
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                collapsable={undefined}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#000000",
+                      "fontFamily": "Helvetica Neue",
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                      "color": "#FBF7DB",
+                      "fontSize": 12,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+                theme={
+                  Object {
+                    "colors": Object {
+                      "accent": "#03dac4",
+                      "background": "#f6f6f6",
+                      "disabled": "rgba(0, 0, 0, 0.26)",
+                      "error": "#B00020",
+                      "placeholder": "rgba(0, 0, 0, 0.38)",
+                      "primary": "#6200ee",
+                      "surface": "#ffffff",
+                      "text": "#000000",
+                    },
+                    "dark": false,
+                    "fonts": Object {
+                      "light": "HelveticaNeue-Light",
+                      "medium": "HelveticaNeue-Medium",
+                      "regular": "Helvetica Neue",
+                      "thin": "HelveticaNeue-Thin",
+                    },
+                    "roundness": 4,
+                  }
+                }
+              >
+                Route: 2
+              </Text>
+            </View>
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                collapsable={undefined}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#000000",
+                      "fontFamily": "Helvetica Neue",
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                      "color": "rgba(0, 0, 0, 0.5)",
+                      "fontSize": 12,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+                theme={
+                  Object {
+                    "colors": Object {
+                      "accent": "#03dac4",
+                      "background": "#f6f6f6",
+                      "disabled": "rgba(0, 0, 0, 0.26)",
+                      "error": "#B00020",
+                      "placeholder": "rgba(0, 0, 0, 0.38)",
+                      "primary": "#6200ee",
+                      "surface": "#ffffff",
+                      "text": "#000000",
+                    },
+                    "dark": false,
+                    "fonts": Object {
+                      "light": "HelveticaNeue-Light",
+                      "medium": "HelveticaNeue-Medium",
+                      "regular": "Helvetica Neue",
+                      "thin": "HelveticaNeue-Thin",
+                    },
+                    "roundness": 4,
+                  }
+                }
+              >
+                Route: 2
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </RCTSafeAreaView>
+  </View>
+</View>
+`;
+
+exports[`renders custom icon and label with custom colors in shifting bottom navigation 1`] = `
+<View
+  onLayout={[Function]}
+  pointerEvents="none"
+  style={
+    Array [
+      Object {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "flex": 1,
+        },
+        Object {
+          "backgroundColor": "#f6f6f6",
+        },
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      pointerEvents="auto"
+      removeClippedSubviews={false}
+      style={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "opacity": 1,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      <View
+        collapsable={undefined}
+        style={
+          Object {
+            "flex": 1,
+            "top": 0,
+          }
+        }
+      >
+        Route: 0
+      </View>
+    </View>
+  </View>
+  <View
+    collapsable={undefined}
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#ffffff",
+        },
+        Object {
+          "backgroundColor": "#ffffff",
+        },
+        Object {
+          "shadowColor": "#000000",
+          "shadowOffset": Object {
+            "height": 7,
+            "width": 0,
+          },
+          "shadowOpacity": 0.24,
+          "shadowRadius": 8,
+        },
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "rgba(233, 106, 130, 1)",
+          "elevation": 8,
+          "overflow": "hidden",
+        },
+      ]
+    }
+  >
+    <RCTSafeAreaView
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "maxWidth": 504,
+          },
+        ]
+      }
+    >
+      <View
+        collapsable={undefined}
+        pointerEvents="none"
+        style={
+          Object {
+            "backgroundColor": undefined,
+            "borderRadius": 0,
+            "height": 0,
+            "left": 0,
+            "opacity": 0,
+            "position": "absolute",
+            "top": 28,
+            "transform": Array [
+              Object {
+                "scale": 0.008,
+              },
+            ],
+            "width": 0,
+          }
+        }
+      />
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "paddingVertical": 6,
+          }
+        }
+        testID={undefined}
+      >
+        <View
+          pointerEvents="none"
+        >
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "alignSelf": "center",
+                "height": 24,
+                "marginHorizontal": 12,
+                "transform": Array [
+                  Object {
+                    "translateY": 0,
+                  },
+                ],
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                pointerEvents="none"
+                style={
+                  Array [
+                    Object {
+                      "color": "#FBF7DB",
+                      "fontSize": 24,
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                pointerEvents="none"
+                style={
+                  Array [
+                    Object {
+                      "color": "rgba(0, 0, 0, 0.5)",
+                      "fontSize": 24,
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+          </View>
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "height": 18,
+                "marginTop": 2,
+                "paddingBottom": 4,
+                "transform": Array [
+                  Object {
+                    "scale": 1,
+                  },
+                ],
+              }
+            }
+          >
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                collapsable={undefined}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#000000",
+                      "fontFamily": "Helvetica Neue",
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                      "color": "#FBF7DB",
+                      "fontSize": 12,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+                theme={
+                  Object {
+                    "colors": Object {
+                      "accent": "#03dac4",
+                      "background": "#f6f6f6",
+                      "disabled": "rgba(0, 0, 0, 0.26)",
+                      "error": "#B00020",
+                      "placeholder": "rgba(0, 0, 0, 0.38)",
+                      "primary": "#6200ee",
+                      "surface": "#ffffff",
+                      "text": "#000000",
+                    },
+                    "dark": false,
+                    "fonts": Object {
+                      "light": "HelveticaNeue-Light",
+                      "medium": "HelveticaNeue-Medium",
+                      "regular": "Helvetica Neue",
+                      "thin": "HelveticaNeue-Thin",
+                    },
+                    "roundness": 4,
+                  }
+                }
+              >
+                Route: 0
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "paddingVertical": 6,
+          }
+        }
+        testID={undefined}
+      >
+        <View
+          pointerEvents="none"
+        >
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "alignSelf": "center",
+                "height": 24,
+                "marginHorizontal": 12,
+                "transform": Array [
+                  Object {
+                    "translateY": 10,
+                  },
+                ],
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                pointerEvents="none"
+                style={
+                  Array [
+                    Object {
+                      "color": "#FBF7DB",
+                      "fontSize": 24,
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                pointerEvents="none"
+                style={
+                  Array [
+                    Object {
+                      "color": "rgba(0, 0, 0, 0.5)",
+                      "fontSize": 24,
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+          </View>
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "height": 18,
+                "marginTop": 2,
+                "paddingBottom": 4,
+                "transform": Array [
+                  Object {
+                    "scale": 0.5,
+                  },
+                ],
+              }
+            }
+          >
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                collapsable={undefined}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#000000",
+                      "fontFamily": "Helvetica Neue",
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                      "color": "#FBF7DB",
+                      "fontSize": 12,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+                theme={
+                  Object {
+                    "colors": Object {
+                      "accent": "#03dac4",
+                      "background": "#f6f6f6",
+                      "disabled": "rgba(0, 0, 0, 0.26)",
+                      "error": "#B00020",
+                      "placeholder": "rgba(0, 0, 0, 0.38)",
+                      "primary": "#6200ee",
+                      "surface": "#ffffff",
+                      "text": "#000000",
+                    },
+                    "dark": false,
+                    "fonts": Object {
+                      "light": "HelveticaNeue-Light",
+                      "medium": "HelveticaNeue-Medium",
+                      "regular": "Helvetica Neue",
+                      "thin": "HelveticaNeue-Thin",
+                    },
+                    "roundness": 4,
+                  }
+                }
+              >
+                Route: 1
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "paddingVertical": 6,
+          }
+        }
+        testID={undefined}
+      >
+        <View
+          pointerEvents="none"
+        >
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "alignSelf": "center",
+                "height": 24,
+                "marginHorizontal": 12,
+                "transform": Array [
+                  Object {
+                    "translateY": 10,
+                  },
+                ],
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                pointerEvents="none"
+                style={
+                  Array [
+                    Object {
+                      "color": "#FBF7DB",
+                      "fontSize": 24,
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                pointerEvents="none"
+                style={
+                  Array [
+                    Object {
+                      "color": "rgba(0, 0, 0, 0.5)",
+                      "fontSize": 24,
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+          </View>
+          <View
+            collapsable={undefined}
+            style={
+              Object {
+                "height": 18,
+                "marginTop": 2,
+                "paddingBottom": 4,
+                "transform": Array [
+                  Object {
+                    "scale": 0.5,
+                  },
+                ],
+              }
+            }
+          >
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                collapsable={undefined}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#000000",
+                      "fontFamily": "Helvetica Neue",
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                      "color": "#FBF7DB",
+                      "fontSize": 12,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+                theme={
+                  Object {
+                    "colors": Object {
+                      "accent": "#03dac4",
+                      "background": "#f6f6f6",
+                      "disabled": "rgba(0, 0, 0, 0.26)",
+                      "error": "#B00020",
+                      "placeholder": "rgba(0, 0, 0, 0.38)",
+                      "primary": "#6200ee",
+                      "surface": "#ffffff",
+                      "text": "#000000",
+                    },
+                    "dark": false,
+                    "fonts": Object {
+                      "light": "HelveticaNeue-Light",
+                      "medium": "HelveticaNeue-Medium",
+                      "regular": "Helvetica Neue",
+                      "thin": "HelveticaNeue-Thin",
+                    },
+                    "roundness": 4,
+                  }
+                }
+              >
+                Route: 2
+              </Text>
             </View>
           </View>
         </View>
@@ -1284,7 +2951,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   "alignItems": "center",
                   "bottom": 0,
                   "left": 0,
-                  "opacity": 0.6,
+                  "opacity": 0,
                   "position": "absolute",
                   "right": 0,
                   "top": 0,
@@ -1396,7 +3063,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 Object {
                   "bottom": 0,
                   "left": 0,
-                  "opacity": 0.6,
+                  "opacity": 0,
                   "position": "absolute",
                   "right": 0,
                   "top": 0,
@@ -1499,7 +3166,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   "alignItems": "center",
                   "bottom": 0,
                   "left": 0,
-                  "opacity": 0.6,
+                  "opacity": 0,
                   "position": "absolute",
                   "right": 0,
                   "top": 0,
@@ -1753,7 +3420,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   "alignItems": "center",
                   "bottom": 0,
                   "left": 0,
-                  "opacity": 0.6,
+                  "opacity": 0,
                   "position": "absolute",
                   "right": 0,
                   "top": 0,
@@ -2158,6 +3825,45 @@ exports[`renders shifting bottom navigation 1`] = `
                 
               </Text>
             </View>
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                pointerEvents="none"
+                style={
+                  Array [
+                    Object {
+                      "color": "rgba(255, 255, 255, 0.5)",
+                      "fontSize": 24,
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
           </View>
           <View
             collapsable={undefined}
@@ -2283,7 +3989,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   "alignItems": "center",
                   "bottom": 0,
                   "left": 0,
-                  "opacity": 0.6,
+                  "opacity": 0,
                   "position": "absolute",
                   "right": 0,
                   "top": 0,
@@ -2299,6 +4005,45 @@ exports[`renders shifting bottom navigation 1`] = `
                   Array [
                     Object {
                       "color": "#ffffff",
+                      "fontSize": 24,
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                pointerEvents="none"
+                style={
+                  Array [
+                    Object {
+                      "color": "rgba(255, 255, 255, 0.5)",
                       "fontSize": 24,
                     },
                     Object {
@@ -2440,7 +4185,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   "alignItems": "center",
                   "bottom": 0,
                   "left": 0,
-                  "opacity": 0.6,
+                  "opacity": 0,
                   "position": "absolute",
                   "right": 0,
                   "top": 0,
@@ -2456,6 +4201,45 @@ exports[`renders shifting bottom navigation 1`] = `
                   Array [
                     Object {
                       "color": "#ffffff",
+                      "fontSize": 24,
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                pointerEvents="none"
+                style={
+                  Array [
+                    Object {
+                      "color": "rgba(255, 255, 255, 0.5)",
                       "fontSize": 24,
                     },
                     Object {
@@ -2597,7 +4381,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   "alignItems": "center",
                   "bottom": 0,
                   "left": 0,
-                  "opacity": 0.6,
+                  "opacity": 0,
                   "position": "absolute",
                   "right": 0,
                   "top": 0,
@@ -2613,6 +4397,45 @@ exports[`renders shifting bottom navigation 1`] = `
                   Array [
                     Object {
                       "color": "#ffffff",
+                      "fontSize": 24,
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                pointerEvents="none"
+                style={
+                  Array [
+                    Object {
+                      "color": "rgba(255, 255, 255, 0.5)",
                       "fontSize": 24,
                     },
                     Object {
@@ -2754,7 +4577,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   "alignItems": "center",
                   "bottom": 0,
                   "left": 0,
-                  "opacity": 0.6,
+                  "opacity": 0,
                   "position": "absolute",
                   "right": 0,
                   "top": 0,
@@ -2770,6 +4593,45 @@ exports[`renders shifting bottom navigation 1`] = `
                   Array [
                     Object {
                       "color": "#ffffff",
+                      "fontSize": 24,
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                pointerEvents="none"
+                style={
+                  Array [
+                    Object {
+                      "color": "rgba(255, 255, 255, 0.5)",
                       "fontSize": 24,
                     },
                     Object {
