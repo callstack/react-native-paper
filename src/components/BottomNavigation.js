@@ -42,6 +42,10 @@ type Props<T> = {
    */
   shifting?: boolean,
   /**
+   * Whether to show labels in tabs. When `false`, only icons will be displayed.
+   */
+  labeled?: boolean,
+  /**
    * State for the bottom navigation. The state should contain the following properties:
    *
    * - `index`: a number reprsenting the index of the active route in the `routes` array
@@ -289,6 +293,10 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
     );
   }
 
+  static defaultProps = {
+    labeled: true,
+  };
+
   static getDerivedStateFromProps(nextProps, prevState) {
     const { index, routes } = nextProps.navigationState;
 
@@ -436,6 +444,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
       activeTintColor,
       inactiveTintColor,
       barStyle,
+      labeled,
       style,
       theme,
     } = this.props;
@@ -574,20 +583,23 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
               const focused = this.state.tabs[index];
 
               // Scale up in the label
-              const scale = shifting
-                ? focused.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0.5, 1],
-                  })
-                : 1;
+              const scale =
+                labeled && shifting
+                  ? focused.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [0.5, 1],
+                    })
+                  : 1;
 
               // Move down the icon to account for no-label in shifting and smaller label in non-shifting.
-              const translateY = shifting
-                ? focused.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [10, 0],
-                  })
-                : 0;
+              const translateY = labeled
+                ? shifting
+                  ? focused.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [10, 0],
+                    })
+                  : 0
+                : 10;
 
               // We render the active icon and label on top of inactive ones and cross-fade them on change.
               // This trick gives the illusion that we are animating between active and inactive colors.
@@ -651,58 +663,33 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                         )}
                       </Animated.View>
                     </Animated.View>
-                    <Animated.View
-                      style={[
-                        styles.labelContainer,
-                        {
-                          transform: [{ scale }],
-                        },
-                      ]}
-                    >
+                    {labeled ? (
                       <Animated.View
                         style={[
-                          styles.labelWrapper,
-                          { opacity: activeOpacity },
+                          styles.labelContainer,
+                          {
+                            transform: [{ scale }],
+                          },
                         ]}
                       >
-                        {renderLabel ? (
-                          renderLabel({
-                            route,
-                            focused: true,
-                            tintColor: activeColor,
-                          })
-                        ) : (
-                          <AnimatedText
-                            style={[
-                              styles.label,
-                              {
-                                color: activeColor,
-                              },
-                            ]}
-                          >
-                            {getLabelText({ route })}
-                          </AnimatedText>
-                        )}
-                      </Animated.View>
-                      {shifting ? null : (
                         <Animated.View
                           style={[
                             styles.labelWrapper,
-                            { opacity: inactiveOpacity },
+                            { opacity: activeOpacity },
                           ]}
                         >
                           {renderLabel ? (
                             renderLabel({
                               route,
-                              focused: false,
-                              tintColor: inactiveColor,
+                              focused: true,
+                              tintColor: activeColor,
                             })
                           ) : (
                             <AnimatedText
                               style={[
                                 styles.label,
                                 {
-                                  color: inactiveColor,
+                                  color: activeColor,
                                 },
                               ]}
                             >
@@ -710,8 +697,37 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                             </AnimatedText>
                           )}
                         </Animated.View>
-                      )}
-                    </Animated.View>
+                        {shifting ? null : (
+                          <Animated.View
+                            style={[
+                              styles.labelWrapper,
+                              { opacity: inactiveOpacity },
+                            ]}
+                          >
+                            {renderLabel ? (
+                              renderLabel({
+                                route,
+                                focused: false,
+                                tintColor: inactiveColor,
+                              })
+                            ) : (
+                              <AnimatedText
+                                style={[
+                                  styles.label,
+                                  {
+                                    color: inactiveColor,
+                                  },
+                                ]}
+                              >
+                                {getLabelText({ route })}
+                              </AnimatedText>
+                            )}
+                          </Animated.View>
+                        )}
+                      </Animated.View>
+                    ) : (
+                      <View style={styles.labelContainer} />
+                    )}
                   </View>
                 </Touchable>
               );
