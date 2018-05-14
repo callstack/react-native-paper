@@ -144,6 +144,14 @@ type Props<T> = {
    */
   onTabPress?: (props: { route: T }) => mixed,
   /**
+   * Custom color for icon and label in the active tab.
+   */
+  activeTintColor?: string,
+  /**
+   * Custom color for icon and label in the inactive tab.
+   */
+  inactiveTintColor?: string,
+  /**
    * Style for the bottom navigation bar.
    * You can set a bottom padding here if you have a translucent navigation bar on Android:
    *
@@ -425,6 +433,8 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
       renderLabel,
       getLabelText = ({ route }: Object) => route.title,
       getColor = ({ route }: Object) => route.color,
+      activeTintColor,
+      inactiveTintColor,
       barStyle,
       style,
       theme,
@@ -453,13 +463,15 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
     const isDark = !color(approxBackgroundColor).light();
 
     const textColor = isDark ? white : black;
-    const activeColor = textColor;
-    const inactiveColor = shifting
-      ? textColor
-      : color(textColor)
-          .alpha(0.5)
-          .rgb()
-          .string();
+    const activeColor =
+      typeof activeTintColor !== 'undefined' ? activeTintColor : textColor;
+    const inactiveColor =
+      typeof inactiveTintColor !== 'undefined'
+        ? inactiveTintColor
+        : color(textColor)
+            .alpha(0.5)
+            .rgb()
+            .string();
 
     const touchColor = color(textColor)
       .alpha(0.12)
@@ -561,7 +573,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
             {routes.map((route, index) => {
               const focused = this.state.tabs[index];
 
-              // animate in the label
+              // Scale up in the label
               const scale = shifting
                 ? focused.interpolate({
                     inputRange: [0, 1],
@@ -580,17 +592,11 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
               // We render the active icon and label on top of inactive ones and cross-fade them on change.
               // This trick gives the illusion that we are animating between active and inactive colors.
               // This is to ensure that we can use native driver, as colors cannot be animated with native driver.
+              const activeOpacity = focused;
               const inactiveOpacity = focused.interpolate({
                 inputRange: [0, 1],
-                outputRange: [1, 0.6],
+                outputRange: [1, 0],
               });
-              const activeIconOpacity = focused.interpolate({
-                inputRange: [0, 1],
-                outputRange: [0.6, 1],
-              });
-              const activeLabelOpacity = focused;
-              const inactiveIconOpacity = inactiveOpacity;
-              const inactiveLabelOpacity = inactiveOpacity;
 
               return (
                 <Touchable
@@ -608,10 +614,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                       ]}
                     >
                       <Animated.View
-                        style={[
-                          styles.iconWrapper,
-                          { opacity: activeIconOpacity },
-                        ]}
+                        style={[styles.iconWrapper, { opacity: activeOpacity }]}
                       >
                         {renderIcon ? (
                           renderIcon({
@@ -627,28 +630,26 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                           />
                         )}
                       </Animated.View>
-                      {shifting ? null : (
-                        <Animated.View
-                          style={[
-                            styles.iconWrapper,
-                            { opacity: inactiveIconOpacity },
-                          ]}
-                        >
-                          {renderIcon ? (
-                            renderIcon({
-                              route,
-                              focused: false,
-                              tintColor: inactiveColor,
-                            })
-                          ) : (
-                            <Icon
-                              source={(route: Object).icon}
-                              color={inactiveColor}
-                              size={24}
-                            />
-                          )}
-                        </Animated.View>
-                      )}
+                      <Animated.View
+                        style={[
+                          styles.iconWrapper,
+                          { opacity: inactiveOpacity },
+                        ]}
+                      >
+                        {renderIcon ? (
+                          renderIcon({
+                            route,
+                            focused: false,
+                            tintColor: inactiveColor,
+                          })
+                        ) : (
+                          <Icon
+                            source={(route: Object).icon}
+                            color={inactiveColor}
+                            size={24}
+                          />
+                        )}
+                      </Animated.View>
                     </Animated.View>
                     <Animated.View
                       style={[
@@ -661,7 +662,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                       <Animated.View
                         style={[
                           styles.labelWrapper,
-                          { opacity: activeLabelOpacity },
+                          { opacity: activeOpacity },
                         ]}
                       >
                         {renderLabel ? (
@@ -687,7 +688,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                         <Animated.View
                           style={[
                             styles.labelWrapper,
-                            { opacity: inactiveLabelOpacity },
+                            { opacity: inactiveOpacity },
                           ]}
                         >
                           {renderLabel ? (
