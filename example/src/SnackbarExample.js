@@ -29,7 +29,7 @@ class SnackbarExample extends React.Component<Props, State> {
     return (
       <View style={[styles.container, { backgroundColor: background }]}>
         <Button
-          raised
+          mode="outlined"
           onPress={() => this.setState(state => ({ visible: !state.visible }))}
         >
           {this.state.visible ? 'Hide' : 'Show'}
@@ -43,7 +43,7 @@ class SnackbarExample extends React.Component<Props, State> {
               // Do something
             },
           }}
-          duration={Snackbar.DURATION_INDEFINITE}
+          duration={Snackbar.DURATION_MEDIUM}
         >
           Hey there! I&apos;m a Snackbar.
         </Snackbar>
