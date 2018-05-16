@@ -445,7 +445,13 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
     });
 
   _handleTabPress = (index: number) => {
-    const { navigationState } = this.props;
+    const { navigationState, onTabPress, onIndexChange } = this.props;
+
+    if (onTabPress) {
+      onTabPress({
+        route: navigationState.routes[index],
+      });
+    }
 
     this.state.touch.setValue(MIN_RIPPLE_SCALE);
 
@@ -457,13 +463,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
     }).start();
 
     if (index !== navigationState.index) {
-      this.props.onIndexChange(index);
-    }
-
-    if (this.props.onTabPress) {
-      this.props.onTabPress({
-        route: navigationState.routes[index],
-      });
+      onIndexChange(index);
     }
   };
 
