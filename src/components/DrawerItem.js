@@ -5,7 +5,6 @@ import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Icon from './Icon';
 import TouchableRipple from './TouchableRipple';
-import { grey300, grey700 } from '../styles/colors';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
@@ -28,10 +27,6 @@ type Props = {
    */
   onPress?: () => mixed,
   /**
-   * Custom color for the drawer text and icon.
-   */
-  color?: string,
-  /**
    * @optional
    */
   theme: Theme,
@@ -52,39 +47,36 @@ type Props = {
  */
 class DrawerItem extends React.Component<Props> {
   render() {
-    const {
-      color: activeColor,
-      icon,
-      label,
-      active,
-      theme,
-      ...props
-    } = this.props;
-    const { colors, dark } = theme;
-    const backgroundColor = active ? (dark ? grey700 : grey300) : 'transparent';
-    const labelColor = active
-      ? activeColor || colors.text
-      : color(colors.text)
-          .alpha(0.54)
+    const { icon, label, active, theme, ...props } = this.props;
+    const { colors, roundness } = theme;
+    const backgroundColor = active
+      ? color(colors.primary)
+          .alpha(0.12)
           .rgb()
-          .string();
-    const iconColor = active
-      ? activeColor || colors.text
+          .string()
+      : 'transparent';
+    const contentColor = active
+      ? colors.primary
       : color(colors.text)
-          .alpha(0.54)
+          .alpha(0.68)
           .rgb()
           .string();
     const fontFamily = theme.fonts.medium;
     const labelMargin = icon ? 32 : 0;
 
     return (
-      <TouchableRipple {...props}>
-        <View style={[styles.wrapper, { backgroundColor }]}>
-          {icon && <Icon source={icon} size={24} color={iconColor} />}
+      <TouchableRipple
+        {...props}
+        style={[styles.touchable, { borderRadius: roundness }]}
+      >
+        <View
+          style={[styles.wrapper, { backgroundColor, borderRadius: roundness }]}
+        >
+          {icon && <Icon source={icon} size={24} color={contentColor} />}
           <Text
             numberOfLines={1}
             style={{
-              color: labelColor,
+              color: contentColor,
               fontFamily,
               marginLeft: labelMargin,
               marginRight: 32,
@@ -99,12 +91,15 @@ class DrawerItem extends React.Component<Props> {
 }
 
 const styles = StyleSheet.create({
+  touchable: {
+    marginHorizontal: 10,
+    marginVertical: 4,
+  },
   wrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    height: 48,
+    padding: 8,
+    height: 40,
   },
 });
 
