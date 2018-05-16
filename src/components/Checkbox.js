@@ -141,7 +141,8 @@ class Checkbox extends React.Component<Props, State> {
         {...rest}
         borderless
         rippleColor={rippleColor}
-        onPress={disabled ? undefined : onPress}
+        onPress={onPress}
+        disabled={disabled}
         style={styles.container}
       >
         <Animated.View style={{ transform: [{ scale: this.state.scaleAnim }] }}>
