@@ -41,12 +41,12 @@ type Props = {
  *       <DrawerSection title="Some title">
  *         <DrawerItem
  *           label="First Item"
- *           active={this.state.active === 'First Item'}
+ *           active={active === 'First Item'}
  *           onPress={() => { this.setState({ active: 'First Item' }); }}
  *        />
  *         <DrawerItem
  *           label="Second Item"
- *           active={this.state.active === 'Second Item'}
+ *           active={active === 'Second Item'}
  *           onPress={() => { this.setState({ active: 'Second Item' }); }}
  *        />
  *      </DrawerSection>
