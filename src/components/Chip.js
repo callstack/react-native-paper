@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
   avatarSelected: {
     position: 'relative',
     left: -30,
-    marginRight: -30,
+    marginRight: -26,
   },
 });
 
