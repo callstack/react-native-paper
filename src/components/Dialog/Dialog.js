@@ -89,6 +89,7 @@ class Dialog extends React.Component<DialogProps, void> {
     visible: false,
   };
 
+  // @component ./ProgressDialog.js
   static Progress = ProgressDialog;
 
   render() {

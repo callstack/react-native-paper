@@ -1,6 +1,6 @@
 /* @flow */
 import * as React from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, View, StyleSheet } from 'react-native';
 import Paragraph from '../Typography/Paragraph';
 import Dialog from './Dialog';
 import DialogTitle from './DialogTitle';
@@ -83,6 +83,8 @@ class ProgressDialog extends React.Component<Props> {
     visible: false,
   };
 
+  static displayName = 'Dialog.Progress';
+
   render() {
     const {
       dismissable,
@@ -105,7 +107,7 @@ class ProgressDialog extends React.Component<Props> {
       >
         <DialogTitle style={{ color: titleColor }}>{title}</DialogTitle>
         <DialogContent>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={styles.content}>
             <ActivityIndicator
               color={color}
               size={size}
@@ -118,5 +120,12 @@ class ProgressDialog extends React.Component<Props> {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  content: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+});
 
 export default ProgressDialog;
