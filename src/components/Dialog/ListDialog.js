@@ -154,6 +154,8 @@ class ListDialog extends React.Component<Props> {
     multiselect: false,
   };
 
+  static displayName = 'Dialog.List';
+
   render() {
     const {
       title,
