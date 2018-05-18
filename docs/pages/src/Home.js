@@ -10,7 +10,11 @@ export default class Home extends React.Component<{}> {
     return (
       <div {...styles(container)}>
         <div {...styles(cover)}>
-          <h1 {...styles(title)}>React Native Paper</h1>
+          <img
+            {...styles(logo)}
+            src="images/paper-color.png"
+            alt="React Native Paper"
+          />
           <p>Cross-platform Material Design for React Native</p>
           <div {...styles(buttons)}>
             <Link {...styles(button, primary)} to="getting-started.html">
@@ -59,6 +63,11 @@ export default class Home extends React.Component<{}> {
   }
 }
 
+const logo = css`
+  max-height: 125px;
+  width: auto;
+`;
+
 const elevated = css`
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.24);
 `;
@@ -76,10 +85,7 @@ const cover = css`
   justify-content: center;
   min-height: 80vh;
   padding: 32px;
-`;
-
-const title = css`
-  font-size: 48px;
+  text-align: center;
 `;
 
 const buttons = css`

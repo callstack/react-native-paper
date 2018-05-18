@@ -1,12 +1,17 @@
-# React Native Paper
+<p align="center">
+  <img alt="react-native-paper" src="docs/assets/images/paper-color.png" width="300">
+</p>
+<p align="center">
+  Material design for React Native.
+</p>
+
+---
 
 [![Build Status][build-badge]][build]
 [![Version][version-badge]][package]
 [![MIT License][license-badge]][license]
 [![PRs Welcome][prs-welcome-badge]][prs-welcome]
 [![Chat][chat-badge]][chat]
-
-Material design for React Native.
 
 ## Features
 
