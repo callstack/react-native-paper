@@ -13,7 +13,7 @@ export default class Home extends React.Component<{}> {
           <img
             {...styles(logo)}
             src="images/paper-color.png"
-            alt="Paper logo"
+            alt="React Native Paper"
           />
           <p>Cross-platform Material Design for React Native</p>
           <div {...styles(buttons)}>
