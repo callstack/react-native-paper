@@ -85,6 +85,7 @@ const cover = css`
   justify-content: center;
   min-height: 80vh;
   padding: 32px;
+  text-align: center;
 `;
 
 const buttons = css`
