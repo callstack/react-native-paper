@@ -1,0 +1,262 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders DrawerItem with icon 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "marginHorizontal": 10,
+        "marginVertical": 4,
+      },
+      Object {
+        "backgroundColor": "transparent",
+        "borderRadius": 4,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    hasTVPreferredFocus={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "borderRadius": 4,
+      }
+    }
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "height": 40,
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={false}
+        ellipsizeMode="tail"
+        pointerEvents="none"
+        style={
+          Array [
+            Object {
+              "color": "rgba(0, 0, 0, 0.68)",
+              "fontSize": 24,
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+            Object {
+              "fontFamily": "Material Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+          ]
+        }
+      >
+        
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        numberOfLines={1}
+        style={
+          Object {
+            "color": "rgba(0, 0, 0, 0.68)",
+            "fontFamily": "HelveticaNeue-Medium",
+            "marginLeft": 32,
+            "marginRight": 32,
+          }
+        }
+      >
+        Example item
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders active DrawerItem 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "marginHorizontal": 10,
+        "marginVertical": 4,
+      },
+      Object {
+        "backgroundColor": "rgba(98, 0, 238, 0.12)",
+        "borderRadius": 4,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    hasTVPreferredFocus={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "borderRadius": 4,
+      }
+    }
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "height": 40,
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={false}
+        ellipsizeMode="tail"
+        pointerEvents="none"
+        style={
+          Array [
+            Object {
+              "color": "#6200ee",
+              "fontSize": 24,
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+            Object {
+              "fontFamily": "Material Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+          ]
+        }
+      >
+        
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        numberOfLines={1}
+        style={
+          Object {
+            "color": "#6200ee",
+            "fontFamily": "HelveticaNeue-Medium",
+            "marginLeft": 32,
+            "marginRight": 32,
+          }
+        }
+      >
+        Example item
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders basic DrawerItem 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "marginHorizontal": 10,
+        "marginVertical": 4,
+      },
+      Object {
+        "backgroundColor": "transparent",
+        "borderRadius": 4,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    hasTVPreferredFocus={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "borderRadius": 4,
+      }
+    }
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "height": 40,
+          "padding": 8,
+        }
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        numberOfLines={1}
+        style={
+          Object {
+            "color": "rgba(0, 0, 0, 0.68)",
+            "fontFamily": "HelveticaNeue-Medium",
+            "marginLeft": 0,
+            "marginRight": 32,
+          }
+        }
+      >
+        Example item
+      </Text>
+    </View>
+  </View>
+</View>
+`;

@@ -5,7 +5,6 @@ import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Icon from './Icon';
 import TouchableRipple from './TouchableRipple';
-import { grey300, grey700 } from '../styles/colors';
 import withTheme from '../core/withTheme';
 import Text from './Typography/Text';
 import type { Theme } from '../types';
@@ -28,10 +27,7 @@ type Props = {
    * Function to execute on press.
    */
   onPress?: () => mixed,
-  /**
-   * Custom color for the drawer text and icon.
-   */
-  color?: string,
+  style?: any,
   /**
    * @optional
    */
@@ -53,61 +49,72 @@ type Props = {
  */
 class DrawerItem extends React.Component<Props> {
   render() {
-    const {
-      color: activeColor,
-      icon,
-      label,
-      active,
-      theme,
-      ...props
-    } = this.props;
-    const { colors, dark } = theme;
-    const backgroundColor = active ? (dark ? grey700 : grey300) : 'transparent';
-    const labelColor = active
-      ? activeColor || colors.text
-      : color(colors.text)
-          .alpha(0.54)
+    const { icon, label, active, theme, style, onPress, ...rest } = this.props;
+    const { colors, roundness } = theme;
+    const backgroundColor = active
+      ? color(colors.primary)
+          .alpha(0.12)
           .rgb()
-          .string();
-    const iconColor = active
-      ? activeColor || colors.text
+          .string()
+      : 'transparent';
+    const contentColor = active
+      ? colors.primary
       : color(colors.text)
-          .alpha(0.54)
+          .alpha(0.68)
           .rgb()
           .string();
     const fontFamily = theme.fonts.medium;
     const labelMargin = icon ? 32 : 0;
 
     return (
-      <TouchableRipple {...props}>
-        <View style={[styles.wrapper, { backgroundColor }]}>
-          {icon && <Icon source={icon} size={24} color={iconColor} />}
-          <Text
-            numberOfLines={1}
-            style={[
-              {
-                color: labelColor,
-                fontFamily,
-                marginLeft: labelMargin,
-              },
-              styles.label,
-            ]}
-          >
-            {label}
-          </Text>
-        </View>
-      </TouchableRipple>
+      <View
+        {...rest}
+        style={[
+          styles.container,
+          { backgroundColor, borderRadius: roundness },
+          style,
+        ]}
+      >
+        <TouchableRipple
+          borderless
+          delayPressIn={0}
+          onPress={onPress}
+          style={{ borderRadius: roundness }}
+        >
+          <View style={styles.wrapper}>
+            {icon ? (
+              <Icon source={icon} size={24} color={contentColor} />
+            ) : null}
+            <Text
+              numberOfLines={1}
+              style={[
+                styles.label,
+                {
+                  color: contentColor,
+                  fontFamily,
+                  marginLeft: labelMargin,
+                },
+              ]}
+            >
+              {label}
+            </Text>
+          </View>
+        </TouchableRipple>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    marginHorizontal: 10,
+    marginVertical: 4,
+  },
   wrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    height: 48,
+    padding: 8,
+    height: 40,
   },
   label: {
     marginRight: 32,
