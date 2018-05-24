@@ -5,11 +5,7 @@ import * as React from 'react';
 import PortalConsumer from './PortalConsumer';
 import { PortalContext } from './PortalHost';
 
-export type PortalProps = {
-  /**
-   * Elevation of the element in the z-axis
-   */
-  elevation?: number,
+type Props = {
   /**
    * Content of the `Portal`.
    */
@@ -19,10 +15,10 @@ export type PortalProps = {
 /**
  * Portal allows to render a component at a different place in the parent tree.
  */
-export default function Portal(props: PortalProps) {
+export default function Portal({ children }: Props) {
   return (
     <PortalContext.Consumer>
-      {manager => <PortalConsumer manager={manager} props={props} />}
+      {manager => <PortalConsumer manager={manager}>{children}</PortalConsumer>}
     </PortalContext.Consumer>
   );
 }

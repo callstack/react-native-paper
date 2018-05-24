@@ -3,20 +3,19 @@
 
 import * as React from 'react';
 import type { PortalMethods } from './PortalHost';
-import type { PortalProps } from './Portal';
 
 type Props = {
   manager: PortalMethods,
-  props: PortalProps,
+  children: React.Node,
 };
 
 export default class PortalConsumer extends React.Component<Props> {
   componentDidMount() {
-    this._key = this.props.manager.mount(this.props.props);
+    this._key = this.props.manager.mount(this.props.children);
   }
 
   componentDidUpdate() {
-    this.props.manager.update(this._key, this.props.props);
+    this.props.manager.update(this._key, this.props.children);
   }
 
   componentWillUnmount() {

@@ -2,19 +2,12 @@
 
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import type { PortalProps } from './Portal';
 
 type State = {
   portals: Array<{
     key: number,
-    props: PortalProps,
+    children: React.Node,
   }>,
-};
-
-type Group = {
-  key: number,
-  elevation?: number,
-  items: React.Node[],
 };
 
 /**
@@ -25,17 +18,17 @@ export default class PortalManager extends React.PureComponent<{}, State> {
     portals: [],
   };
 
-  mount = (key: number, props: PortalProps) => {
+  mount = (key: number, children: React.Node) => {
     this.setState(state => ({
-      portals: [...state.portals, { key, props }],
+      portals: [...state.portals, { key, children }],
     }));
   };
 
-  update = (key: number, props: PortalProps) =>
+  update = (key: number, children: React.Node) =>
     this.setState(state => ({
       portals: state.portals.map(item => {
         if (item.key === key) {
-          return { ...item, props };
+          return { ...item, children };
         }
         return item;
       }),
@@ -47,43 +40,10 @@ export default class PortalManager extends React.PureComponent<{}, State> {
     }));
 
   render() {
-    return this.state.portals
-      .reduce((acc: Group[], curr) => {
-        const { elevation, children } = curr.props;
-
-        let group: ?Group = acc.find(it => it.elevation === elevation);
-
-        if (group && typeof elevation === 'number') {
-          group = {
-            key: elevation,
-            elevation,
-            items: [
-              ...group.items,
-              React.cloneElement(children, { key: curr.key }),
-            ],
-          };
-          return acc.map(g => {
-            if (group && g.elevation === elevation) {
-              return group;
-            }
-            return g;
-          });
-        }
-        group = {
-          key: typeof elevation === 'undefined' ? curr.key : elevation,
-          elevation,
-          items: [React.cloneElement(children, { key: curr.key })],
-        };
-        return [...acc, group];
-      }, [])
-      .map(({ key, items }) => (
-        <View
-          key={key}
-          pointerEvents="box-none"
-          style={StyleSheet.absoluteFill}
-        >
-          {items}
-        </View>
-      ));
+    return this.state.portals.map(({ key, children }) => (
+      <View key={key} pointerEvents="box-none" style={StyleSheet.absoluteFill}>
+        {children}
+      </View>
+    ));
   }
 }

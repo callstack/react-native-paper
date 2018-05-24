@@ -4,7 +4,6 @@ import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import PortalManager from './PortalManager';
 import createReactContext, { type Context } from 'create-react-context';
-import type { PortalProps } from './Portal';
 
 type Props = {
   children: React.Node,
@@ -12,13 +11,13 @@ type Props = {
 };
 
 type Operation =
-  | { type: 'mount', key: number, props: PortalProps }
-  | { type: 'update', key: number, props: PortalProps }
+  | { type: 'mount', key: number, children: React.Node }
+  | { type: 'update', key: number, children: React.Node }
   | { type: 'unmount', key: number };
 
 export type PortalMethods = {
-  mount: (props: PortalProps) => number,
-  update: (key: number, props: PortalProps) => void,
+  mount: (children: React.Node) => number,
+  update: (key: number, children: React.Node) => void,
   unmount: (key: number) => void,
 };
 
@@ -40,10 +39,10 @@ export default class PortalHost extends React.Component<Props> {
       // eslint-disable-next-line default-case
       switch (action.type) {
         case 'mount':
-          manager.mount(action.key, action.props);
+          manager.mount(action.key, action.children);
           break;
         case 'update':
-          manager.update(action.key, action.props);
+          manager.update(action.key, action.children);
           break;
         case 'unmount':
           manager.unmount(action.key);
@@ -52,23 +51,23 @@ export default class PortalHost extends React.Component<Props> {
     }
   }
 
-  _mount = (props: PortalProps) => {
+  _mount = (children: React.Node) => {
     const key = this._nextKey++;
 
     if (this._manager) {
-      this._manager.mount(key, props);
+      this._manager.mount(key, children);
     } else {
-      this._queue.push({ type: 'mount', key, props });
+      this._queue.push({ type: 'mount', key, children });
     }
 
     return key;
   };
 
-  _update = (key: number, props: PortalProps) => {
+  _update = (key: number, children: React.Node) => {
     if (this._manager) {
-      this._manager.update(key, props);
+      this._manager.update(key, children);
     } else {
-      const op = { type: 'mount', key, props };
+      const op = { type: 'mount', key, children };
       const index = this._queue.findIndex(
         o => o.type === 'mount' || (o.type === 'update' && o.key === key)
       );
