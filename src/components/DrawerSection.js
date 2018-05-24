@@ -2,9 +2,10 @@
 
 import color from 'color';
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import Divider from './Divider';
 import withTheme from '../core/withTheme';
+import Text from './Typography/Text';
 import type { Theme } from '../types';
 
 type Props = {
