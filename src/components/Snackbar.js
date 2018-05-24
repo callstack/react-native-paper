@@ -53,6 +53,10 @@ type State = {
 
 const SNACKBAR_ANIMATION_DURATION = 250;
 
+const SNACKBAR_ANIMATION_DURATION_SHORT = 2500;
+
+const SNACKBAR_ANIMATION_DURATION_LONG = 3500;
+
 /**
  * Snackbar provide brief feedback about an operation through a message at the bottom of the screen.
  *
@@ -109,12 +113,12 @@ class Snackbar extends React.Component<Props, State> {
   /**
    * Show the Snackbar for a short duration.
    */
-  static DURATION_SHORT = 2000;
+  static DURATION_SHORT = SNACKBAR_ANIMATION_DURATION_SHORT;
 
   /**
    * Show the Snackbar for a long duration.
    */
-  static DURATION_LONG = 3500;
+  static DURATION_LONG = SNACKBAR_ANIMATION_DURATION_LONG;
 
   /**
    * Show the Snackbar for indefinite amount of time.
@@ -122,7 +126,7 @@ class Snackbar extends React.Component<Props, State> {
   static DURATION_INDEFINITE = Infinity;
 
   static defaultProps = {
-    duration: this.DURATION_LONG,
+    duration: SNACKBAR_ANIMATION_DURATION_LONG,
   };
 
   state = {
