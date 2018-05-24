@@ -2,6 +2,7 @@
 
 exports[`renders extended FAB 1`] = `
 <View
+  collapsable={undefined}
   style={
     Array [
       Object {
@@ -19,16 +20,11 @@ exports[`renders extended FAB 1`] = `
         "shadowOpacity": 0.24,
         "shadowRadius": 12,
       },
-      Array [
-        Object {
-          "backgroundColor": "#ff4081",
-          "elevation": 12,
-        },
-        Object {
-          "borderRadius": 28,
-        },
-        undefined,
-      ],
+      Object {
+        "backgroundColor": "#ff4081",
+        "borderRadius": 28,
+        "elevation": 12,
+      },
     ]
   }
 >
@@ -57,6 +53,7 @@ exports[`renders extended FAB 1`] = `
     tvParallaxProperties={undefined}
   >
     <View
+      pointerEvents="none"
       style={
         Array [
           Object {
@@ -71,30 +68,64 @@ exports[`renders extended FAB 1`] = `
         ]
       }
     >
-      <Text
-        accessible={true}
-        allowFontScaling={false}
-        ellipsizeMode="tail"
-        pointerEvents="none"
+      <View
         style={
           Array [
             Object {
-              "color": "rgba(0, 0, 0, .54)",
-              "fontSize": 24,
+              "alignItems": "center",
+              "justifyContent": "center",
             },
             Object {
-              "backgroundColor": "transparent",
-            },
-            Object {
-              "fontFamily": "Material Icons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
+              "height": 24,
+              "width": 24,
             },
           ]
         }
       >
-        
-      </Text>
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "opacity": 1,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+              "transform": Array [
+                Object {
+                  "rotate": "0deg",
+                },
+              ],
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={false}
+            ellipsizeMode="tail"
+            pointerEvents="none"
+            style={
+              Array [
+                Object {
+                  "color": "rgba(0, 0, 0, .54)",
+                  "fontSize": 24,
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+                Object {
+                  "fontFamily": "Material Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+              ]
+            }
+          >
+            
+          </Text>
+        </View>
+      </View>
       <Text
         accessible={true}
         allowFontScaling={true}
@@ -148,6 +179,7 @@ exports[`renders extended FAB 1`] = `
 
 exports[`renders normal FAB 1`] = `
 <View
+  collapsable={undefined}
   style={
     Array [
       Object {
@@ -165,16 +197,11 @@ exports[`renders normal FAB 1`] = `
         "shadowOpacity": 0.24,
         "shadowRadius": 12,
       },
-      Array [
-        Object {
-          "backgroundColor": "#ff4081",
-          "elevation": 12,
-        },
-        Object {
-          "borderRadius": 28,
-        },
-        undefined,
-      ],
+      Object {
+        "backgroundColor": "#ff4081",
+        "borderRadius": 28,
+        "elevation": 12,
+      },
     ]
   }
 >
@@ -203,6 +230,7 @@ exports[`renders normal FAB 1`] = `
     tvParallaxProperties={undefined}
   >
     <View
+      pointerEvents="none"
       style={
         Array [
           Object {
@@ -217,30 +245,64 @@ exports[`renders normal FAB 1`] = `
         ]
       }
     >
-      <Text
-        accessible={true}
-        allowFontScaling={false}
-        ellipsizeMode="tail"
-        pointerEvents="none"
+      <View
         style={
           Array [
             Object {
-              "color": "rgba(0, 0, 0, .54)",
-              "fontSize": 24,
+              "alignItems": "center",
+              "justifyContent": "center",
             },
             Object {
-              "backgroundColor": "transparent",
-            },
-            Object {
-              "fontFamily": "Material Icons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
+              "height": 24,
+              "width": 24,
             },
           ]
         }
       >
-        
-      </Text>
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "opacity": 1,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+              "transform": Array [
+                Object {
+                  "rotate": "0deg",
+                },
+              ],
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={false}
+            ellipsizeMode="tail"
+            pointerEvents="none"
+            style={
+              Array [
+                Object {
+                  "color": "rgba(0, 0, 0, .54)",
+                  "fontSize": 24,
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+                Object {
+                  "fontFamily": "Material Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+              ]
+            }
+          >
+            
+          </Text>
+        </View>
+      </View>
     </View>
   </View>
 </View>
@@ -248,6 +310,7 @@ exports[`renders normal FAB 1`] = `
 
 exports[`renders small FAB 1`] = `
 <View
+  collapsable={undefined}
   style={
     Array [
       Object {
@@ -265,16 +328,11 @@ exports[`renders small FAB 1`] = `
         "shadowOpacity": 0.24,
         "shadowRadius": 12,
       },
-      Array [
-        Object {
-          "backgroundColor": "#ff4081",
-          "elevation": 12,
-        },
-        Object {
-          "borderRadius": 28,
-        },
-        undefined,
-      ],
+      Object {
+        "backgroundColor": "#ff4081",
+        "borderRadius": 28,
+        "elevation": 12,
+      },
     ]
   }
 >
@@ -303,6 +361,7 @@ exports[`renders small FAB 1`] = `
     tvParallaxProperties={undefined}
   >
     <View
+      pointerEvents="none"
       style={
         Array [
           Object {
@@ -317,30 +376,64 @@ exports[`renders small FAB 1`] = `
         ]
       }
     >
-      <Text
-        accessible={true}
-        allowFontScaling={false}
-        ellipsizeMode="tail"
-        pointerEvents="none"
+      <View
         style={
           Array [
             Object {
-              "color": "rgba(0, 0, 0, .54)",
-              "fontSize": 24,
+              "alignItems": "center",
+              "justifyContent": "center",
             },
             Object {
-              "backgroundColor": "transparent",
-            },
-            Object {
-              "fontFamily": "Material Icons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
+              "height": 24,
+              "width": 24,
             },
           ]
         }
       >
-        
-      </Text>
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "opacity": 1,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+              "transform": Array [
+                Object {
+                  "rotate": "0deg",
+                },
+              ],
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={false}
+            ellipsizeMode="tail"
+            pointerEvents="none"
+            style={
+              Array [
+                Object {
+                  "color": "rgba(0, 0, 0, .54)",
+                  "fontSize": 24,
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+                Object {
+                  "fontFamily": "Material Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+              ]
+            }
+          >
+            
+          </Text>
+        </View>
+      </View>
     </View>
   </View>
 </View>

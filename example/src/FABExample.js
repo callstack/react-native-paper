@@ -2,17 +2,23 @@
 
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Colors, FAB, withTheme } from 'react-native-paper';
+import { Colors, FAB, FABGroup, withTheme } from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
 
 type Props = {
   theme: Theme,
 };
 
-class ButtonExample extends React.Component<Props> {
+type State = {
+  open: boolean,
+};
+
+class ButtonExample extends React.Component<Props, State> {
   static title = 'Floating Action Button';
 
-  _handlePress = () => {};
+  state = {
+    open: false,
+  };
 
   render() {
     const {
@@ -20,21 +26,33 @@ class ButtonExample extends React.Component<Props> {
         colors: { background },
       },
     } = this.props;
+
     return (
       <View style={[styles.container, { backgroundColor: background }]}>
         <View style={styles.row}>
-          <FAB
-            small
-            icon="add"
-            style={styles.fab}
-            onPress={this._handlePress}
-          />
-          <FAB icon="favorite" style={styles.fab} onPress={this._handlePress} />
+          <FAB small icon="add" style={styles.fab} onPress={() => {}} />
+          <FAB icon="favorite" style={styles.fab} onPress={() => {}} />
           <FAB
             icon="done"
             label="Extended FAB"
             style={styles.fab}
-            onPress={this._handlePress}
+            onPress={() => {}}
+          />
+          <FABGroup
+            open={this.state.open}
+            icon={this.state.open ? 'today' : 'add'}
+            actions={[
+              { icon: 'add', onPress: () => {} },
+              { icon: 'star', label: 'Star', onPress: () => {} },
+              { icon: 'email', label: 'Email', onPress: () => {} },
+              { icon: 'notifications', label: 'Remind', onPress: () => {} },
+            ]}
+            onStateChange={({ open }) => this.setState({ open })}
+            onPress={() => {
+              if (this.state.open) {
+                // do something if the speed dial is open
+              }
+            }}
           />
         </View>
       </View>
