@@ -31,7 +31,7 @@ type Props = {
  *     visible: false,
  *   };
  *
- *   _hideDialog = () => this.setState({ visble: false });
+ *   _hideDialog = () => this.setState({ visible: false });
  *
  *   render() {
  *     return (
