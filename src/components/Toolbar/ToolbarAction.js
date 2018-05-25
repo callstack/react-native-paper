@@ -3,15 +3,11 @@
 import * as React from 'react';
 import color from 'color';
 
-import { black, white } from '../../styles/colors';
+import { black } from '../../styles/colors';
 import TouchableIcon from '../TouchableIcon';
 import type { IconSource } from '../Icon';
 
 type Props = {
-  /**
-   * A dark action icon will render a light icon and vice-versa.
-   */
-  dark?: boolean,
   /**
    *  Custom color for action icon.
    */
@@ -40,20 +36,15 @@ export default class ToolbarAction extends React.Component<Props> {
   };
 
   render() {
-    const { color: customColor, dark, icon, onPress, ...rest } = this.props;
-
-    let iconColor;
-
-    if (customColor) {
-      iconColor = customColor;
-    } else if (dark) {
-      iconColor = white;
-    } else {
-      iconColor = color(black)
+    const {
+      color: iconColor = color(black)
         .alpha(0.54)
         .rgb()
-        .string();
-    }
+        .string(),
+      icon,
+      onPress,
+      ...rest
+    } = this.props;
 
     return (
       <TouchableIcon

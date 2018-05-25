@@ -7,15 +7,15 @@ import color from 'color';
 import Text from '../Typography/Text';
 
 import withTheme from '../../core/withTheme';
-import { white, black } from '../../styles/colors';
+import { black } from '../../styles/colors';
 
 import type { Theme } from '../../types';
 
 type Props = {
   /**
-   * Theme color for the text, a dark toolbar will render light text and vice-versa.
+   * CUstom color for the text.
    */
-  dark?: boolean,
+  color?: string,
   /**
    * Text for the title.
    */
@@ -45,7 +45,7 @@ type Props = {
 class ToolbarContent extends React.Component<Props> {
   render() {
     const {
-      dark,
+      color: titleColor = black,
       subtitle,
       subtitleStyle,
       style,
@@ -55,7 +55,6 @@ class ToolbarContent extends React.Component<Props> {
     } = this.props;
     const { fonts } = theme;
 
-    const titleColor = dark ? white : black;
     const subtitleColor = color(titleColor)
       .alpha(0.7)
       .rgb()

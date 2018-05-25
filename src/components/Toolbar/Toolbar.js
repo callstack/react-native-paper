@@ -10,15 +10,14 @@ import {
 } from 'react-native';
 import color from 'color';
 
-import withTheme from '../../core/withTheme';
 import ToolbarContent from './ToolbarContent';
-
+import withTheme from '../../core/withTheme';
+import { black, white } from '../../styles/colors';
 import type { Theme } from '../../types';
 
 type Props = {
   /**
-   * Theme color for the toolbar, a dark toolbar will render light text and vice-versa
-   * Child elements can override this prop independently.
+   * Whether the background color is a dark color. A dark toolbar will render light text and vice-versa.
    */
   dark?: boolean,
   /**
@@ -173,11 +172,13 @@ class Toolbar extends React.Component<Props> {
       >
         <View style={[{ height, marginTop: statusBarHeight }, styles.wrapper]}>
           {childrenArray.filter(Boolean).map((child: any, i) => {
-            const props: { dark: ?boolean, style?: any } = {
-              dark:
-                typeof child.props.dark === 'undefined'
-                  ? isDark
-                  : child.props.dark,
+            const props: { color: ?string, style?: any } = {
+              color:
+                typeof child.props.color !== 'undefined'
+                  ? child.props.color
+                  : isDark
+                    ? white
+                    : black,
             };
 
             if (child.type === ToolbarContent) {

@@ -28,10 +28,6 @@ type Props = {
    */
   small?: boolean,
   /**
-   * Icon color of button, a dark button will render light text and vice-versa.
-   */
-  dark?: boolean,
-  /**
    * Custom color for the `FAB`.
    */
   color?: string,
@@ -72,10 +68,9 @@ class FAB extends React.Component<Props> {
   render() {
     const {
       small,
-      dark,
       icon,
       label,
-      color: iconColor,
+      color: customColor,
       onPress,
       theme,
       style,
@@ -84,10 +79,18 @@ class FAB extends React.Component<Props> {
 
     const { backgroundColor = theme.colors.accent } =
       StyleSheet.flatten(style) || {};
-    const isDark =
-      typeof dark === 'boolean' ? dark : !color(backgroundColor).light();
-    const textColor = iconColor || (isDark ? white : 'rgba(0, 0, 0, .54)');
-    const rippleColor = color(textColor)
+
+    let foregroundColor;
+
+    if (typeof customColor !== 'undefined') {
+      foregroundColor = customColor;
+    } else {
+      foregroundColor = !color(backgroundColor).light()
+        ? white
+        : 'rgba(0, 0, 0, .54)';
+    }
+
+    const rippleColor = color(foregroundColor)
       .alpha(0.32)
       .rgb()
       .string();
@@ -110,12 +113,12 @@ class FAB extends React.Component<Props> {
             ]}
             pointerEvents="none"
           >
-            <CrossFadeIcon source={icon} size={24} color={textColor} />
+            <CrossFadeIcon source={icon} size={24} color={foregroundColor} />
             {label ? (
               <Text
                 style={[
                   styles.label,
-                  { color: textColor, fontFamily: theme.fonts.medium },
+                  { color: foregroundColor, fontFamily: theme.fonts.medium },
                 ]}
               >
                 {label.toUpperCase()}

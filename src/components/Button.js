@@ -23,7 +23,7 @@ type Props = {
    */
   mode?: 'text' | 'outlined' | 'contained',
   /**
-   * Text color of button, a dark button will render light text and vice-versa. Only applicable for `contained` mode.
+   * Whether the color is a dark color. A dark button will render light text and vice-versa. Only applicable for `contained` mode.
    */
   dark?: boolean,
   /**

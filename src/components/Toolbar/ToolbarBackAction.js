@@ -8,10 +8,6 @@ import Icon from '../Icon';
 
 type Props = {
   /**
-   * A dark action icon will render a light icon and vice-versa.
-   */
-  dark?: boolean,
-  /**
    *  Custom color for back icon.
    */
   color?: string,
