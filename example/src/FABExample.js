@@ -48,6 +48,11 @@ class ButtonExample extends React.Component<Props, State> {
               { icon: 'star', onPress: () => {} },
             ]}
             onStateChange={({ open }) => this.setState({ open })}
+            onPress={() => {
+              if (this.state.open) {
+                // do something if the speed dial is open
+              }
+            }}
           />
         </View>
       </View>

@@ -50,7 +50,6 @@ type Props = {
   color?: string,
   /**
    * Function to execute on pressing the `FAB`.
-   * This is executed only when the speed dial is open.
    */
   onPress?: () => mixed,
   /**
@@ -102,7 +101,11 @@ type State = {
  *           { icon: 'star', onPress: () => {} },
  *         ]}
  *         onStateChange={({ open }) => this.setState({ open })}
- *         onPress={() => {}}
+ *         onPress={() => {
+ *           if (this.state.open) {
+ *             // do something if the speed dial is open
+ *           }
+ *         }}
  *       />
  *     );
  *   }
@@ -263,10 +266,7 @@ class FABGroup extends React.Component<Props, State> {
           </View>
           <FAB
             onPress={() => {
-              if (open && onPress) {
-                onPress();
-              }
-
+              onPress && onPress();
               this._toggleOpen();
             }}
             icon={icon}
