@@ -3,6 +3,8 @@
 import color from 'color';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
+import ListItem from './ListItem';
+import ListAccordion from './ListAccordion';
 import Text from '../Typography/Text';
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types';
@@ -24,7 +26,7 @@ type Props = {
 };
 
 /**
- * `ListSection` groups items, usually `ListItem`.
+ * A component used to group list items.
  *
  * <div class="screenshots">
  *   <img src="screenshots/list-section.png" />
@@ -54,6 +56,11 @@ type Props = {
  * ```
  */
 class ListSection extends React.Component<Props> {
+  // @component ./ListItem.js
+  static Item = ListItem;
+  // @component ./ListAccordion.js
+  static Accordion = ListAccordion;
+
   render() {
     const { children, title, theme, style, ...rest } = this.props;
     const { colors, fonts } = theme;

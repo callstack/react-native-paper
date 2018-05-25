@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import DrawerItem from '../DrawerItem';
+import DrawerItem from '../Drawer/DrawerItem';
 
 it('renders basic DrawerItem', () => {
   const tree = renderer

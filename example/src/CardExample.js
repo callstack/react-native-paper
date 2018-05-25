@@ -7,9 +7,6 @@ import {
   Caption,
   Paragraph,
   Card,
-  CardCover,
-  CardActions,
-  CardContent,
   Button,
   withTheme,
 } from 'react-native-paper';
@@ -34,8 +31,8 @@ class CardExample extends React.Component<Props> {
         contentContainerStyle={styles.content}
       >
         <Card style={styles.card}>
-          <CardCover source={require('../assets/wrecked-ship.jpg')} />
-          <CardContent>
+          <Card.Cover source={require('../assets/wrecked-ship.jpg')} />
+          <Card.Content>
             <Title>Abandoned Ship</Title>
             <Paragraph>
               The Abandoned Ship is a wrecked ship located on Route 108 in
@@ -43,21 +40,21 @@ class CardExample extends React.Component<Props> {
               part of the ship can only be accessed by using Dive and contains
               the Scanner.
             </Paragraph>
-          </CardContent>
+          </Card.Content>
         </Card>
         <Card style={styles.card}>
-          <CardCover source={require('../assets/forest.jpg')} />
-          <CardActions>
+          <Card.Cover source={require('../assets/forest.jpg')} />
+          <Card.Actions>
             <Button primary onPress={() => {}}>
               Share
             </Button>
             <Button primary onPress={() => {}}>
               Explore
             </Button>
-          </CardActions>
+          </Card.Actions>
         </Card>
         <Card style={styles.card}>
-          <CardContent>
+          <Card.Content>
             <Title>Berries</Title>
             <Caption>Omega Ruby</Caption>
             <Paragraph>
@@ -67,10 +64,10 @@ class CardExample extends React.Component<Props> {
               berries. These can be any berry and will require attention to get
               the best crop.
             </Paragraph>
-          </CardContent>
+          </Card.Content>
         </Card>
         <Card style={styles.card}>
-          <CardCover source={require('../assets/strawberries.jpg')} />
+          <Card.Cover source={require('../assets/strawberries.jpg')} />
         </Card>
       </ScrollView>
     );

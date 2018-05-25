@@ -17,7 +17,7 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Dialog, DialogContent, Paragraph } from 'react-native-paper';
+ * import { Dialog, Paragraph } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
@@ -31,18 +31,26 @@ type Props = {
  *       <Dialog
  *         visible={this.state.visible}
  *         onDismiss={this._hideDialog}>
- *         <DialogContent>
+ *         <Dialog.Content>
  *           <Paragraph>This is simple dialog</Paragraph>
- *         </DialogContent>
+ *         </Dialog.Content>
  *       </Dialog>
  *     );
  *   }
  * }
  * ```
  */
-const DialogContent = ({ children, style }: Props) => (
-  <View style={[styles.container, style]}>{children}</View>
-);
+class DialogContent extends React.Component<Props> {
+  static displayName = 'Dialog.Content';
+
+  render() {
+    return (
+      <View style={[styles.container, this.props.style]}>
+        {this.props.children}
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {

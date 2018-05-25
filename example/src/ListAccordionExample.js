@@ -2,13 +2,7 @@
 
 import * as React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import {
-  ListAccordion,
-  ListSection,
-  ListItem,
-  Divider,
-  withTheme,
-} from 'react-native-paper';
+import { ListSection, Divider, withTheme } from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
 
 type Props = {
@@ -16,7 +10,7 @@ type Props = {
 };
 
 class ListAccordionExample extends React.Component<Props> {
-  static title = 'ListAccordion';
+  static title = 'ListSection.Accordion';
 
   render() {
     const {
@@ -27,27 +21,27 @@ class ListAccordionExample extends React.Component<Props> {
     return (
       <ScrollView style={[styles.container, { backgroundColor: background }]}>
         <ListSection title="Expandable list item">
-          <ListAccordion icon="folder" title="Expandable list item">
-            <ListItem title="List item 1" />
-            <ListItem title="List item 2" />
-          </ListAccordion>
+          <ListSection.Accordion icon="folder" title="Expandable list item">
+            <ListSection.Item title="List item 1" />
+            <ListSection.Item title="List item 2" />
+          </ListSection.Accordion>
         </ListSection>
         <Divider />
         <ListSection title="Expandable & multiline list item">
-          <ListAccordion
+          <ListSection.Accordion
             title="Expandable list item"
             description="Describes the expandable list item"
           >
-            <ListItem title="List item 1" />
-            <ListItem title="List item 2" />
-          </ListAccordion>
+            <ListSection.Item title="List item 1" />
+            <ListSection.Item title="List item 2" />
+          </ListSection.Accordion>
         </ListSection>
         <Divider />
         <ListSection title="Expandable list with icons">
-          <ListAccordion icon="star" title="Accordion item 1">
-            <ListItem icon="thumb-up" title="List item 1" />
-            <ListItem icon="thumb-down" title="List item 2" />
-          </ListAccordion>
+          <ListSection.Accordion icon="star" title="Accordion item 1">
+            <ListSection.Item icon="thumb-up" title="List item 1" />
+            <ListSection.Item icon="thumb-down" title="List item 2" />
+          </ListSection.Accordion>
         </ListSection>
       </ScrollView>
     );

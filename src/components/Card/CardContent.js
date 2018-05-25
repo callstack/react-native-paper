@@ -25,19 +25,21 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Card, CardContent, Title, Paragraph } from 'react-native-paper';
+ * import { Card, Title, Paragraph } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <Card>
- *     <CardContent>
+ *     <Card.Content>
  *       <Title>Card title</Title>
  *       <Paragraph>Card content</Paragraph>
- *     </CardContent>
+ *     </Card.Content>
  *   </Card>
  * );
  * ```
  */
 class CardContent extends React.Component<Props> {
+  static displayName = 'Card.Content';
+
   render() {
     const { index, total, siblings, style, ...rest } = this.props;
     const cover = 'withTheme(CardCover)';

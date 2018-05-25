@@ -7,6 +7,9 @@ import {
   TouchableWithoutFeedback,
   StyleSheet,
 } from 'react-native';
+import CardContent from './CardContent';
+import CardActions from './CardActions';
+import CardCover from './CardCover';
 import Surface from '../Surface';
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types';
@@ -74,6 +77,13 @@ type State = {
  * ```
  */
 class Card extends React.Component<Props, State> {
+  // @component ./CardContent.js
+  static Content = CardContent;
+  // @component ./CardActions.js
+  static Actions = CardActions;
+  // @component ./CardCover.js
+  static Cover = CardCover;
+
   static defaultProps = {
     elevation: 2,
   };

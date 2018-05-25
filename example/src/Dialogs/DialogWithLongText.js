@@ -2,14 +2,7 @@
 
 import * as React from 'react';
 import { ScrollView } from 'react-native';
-import {
-  Paragraph,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogActions,
-  DialogScrollArea,
-} from 'react-native-paper';
+import { Paragraph, Button, Dialog } from 'react-native-paper';
 
 const DialogWithLongText = ({
   visible,
@@ -19,8 +12,8 @@ const DialogWithLongText = ({
   close: Function,
 }) => (
   <Dialog onDismiss={close} visible={visible}>
-    <DialogTitle>Alert</DialogTitle>
-    <DialogScrollArea style={{ maxHeight: 220, paddingHorizontal: 0 }}>
+    <Dialog.Title>Alert</Dialog.Title>
+    <Dialog.ScrollArea style={{ maxHeight: 220, paddingHorizontal: 0 }}>
       <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>
         <Paragraph>
           Material is the metaphor
@@ -45,12 +38,12 @@ const DialogWithLongText = ({
           moving parts.
         </Paragraph>
       </ScrollView>
-    </DialogScrollArea>
-    <DialogActions>
+    </Dialog.ScrollArea>
+    <Dialog.Actions>
       <Button primary onPress={close}>
         OK
       </Button>
-    </DialogActions>
+    </Dialog.Actions>
   </Dialog>
 );
 

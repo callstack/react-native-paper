@@ -40,7 +40,7 @@ type State = {
 };
 
 /**
- * `ListAccordion` can be used to display an expandable list item.
+ * A component used to display an expandable list item.
  *
  * <div class="screenshots">
  *   <img class="medium" src="screenshots/list-accordion-1.png" />
@@ -51,20 +51,22 @@ type State = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { ListAccordion, ListItem, Checkbox } from 'react-native-paper';
+ * import { ListSection, Checkbox } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <ListAccordion
+ *   <ListSection.Accordion
  *     title="Accordion"
  *     icon="folder"
  *   >
  *     <ListItem title="First item" />
  *     <ListItem title="Second item" />
- *   </ListAccordion>
+ *   </ListSection.Accordion>
  * );
  * ```
  */
 class ListAccordion extends React.Component<Props, State> {
+  static displayName = 'ListSection.Accordion';
+
   state = {
     expanded: false,
   };

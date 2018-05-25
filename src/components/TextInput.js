@@ -82,7 +82,7 @@ type State = {
 };
 
 /**
- * TextInputs allow users to input text.
+ * A component to allow users to input text.
  *
  * <div class="screenshots">
  *   <figure>

@@ -24,7 +24,7 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Dialog, DialogContent, DialogTitle, Paragraph } from 'react-native-paper';
+ * import { Dialog, Paragraph } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
@@ -38,10 +38,10 @@ type Props = {
  *       <Dialog
  *         visible={this.state.visible}
  *         onDismiss={this._hideDialog}>
- *         <DialogTitle>This is a title</DialogTitle>
- *         <DialogContent>
+ *         <Dialog.Title>This is a title</Dialog.Title>
+ *         <Dialog.Content>
  *           <Paragraph>This is simple dialog</Paragraph>
- *         </DialogContent>
+ *         </Dialog.Content>
  *       </Dialog>
  *     );
  *   }
@@ -49,6 +49,8 @@ type Props = {
  * ```
  */
 class DialogTitle extends React.Component<Props> {
+  static displayName = 'Dialog.Title';
+
   render() {
     const { children, theme, style, ...rest } = this.props;
 

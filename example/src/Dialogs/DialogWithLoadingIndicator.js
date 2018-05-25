@@ -2,13 +2,7 @@
 
 import * as React from 'react';
 import { ActivityIndicator, Platform, View } from 'react-native';
-import {
-  Paragraph,
-  Colors,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-} from 'react-native-paper';
+import { Paragraph, Colors, Dialog } from 'react-native-paper';
 
 const isIOS = Platform.OS === 'ios';
 
@@ -20,8 +14,8 @@ const DialogWithLoadingIndicator = ({
   close: Function,
 }) => (
   <Dialog onDismiss={close} visible={visible}>
-    <DialogTitle>Progress Dialog</DialogTitle>
-    <DialogContent>
+    <Dialog.Title>Progress Dialog</Dialog.Title>
+    <Dialog.Content>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <ActivityIndicator
           color={Colors.indigo500}
@@ -30,7 +24,7 @@ const DialogWithLoadingIndicator = ({
         />
         <Paragraph>Loading.....</Paragraph>
       </View>
-    </DialogContent>
+    </Dialog.Content>
   </Dialog>
 );
 

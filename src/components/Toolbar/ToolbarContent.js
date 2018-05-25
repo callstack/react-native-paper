@@ -40,9 +40,11 @@ type Props = {
 };
 
 /**
- * The ToolbarContent component is used for displaying a title and optional subtitle in a toolbar.
+ * A component used to display a title and optional subtitle in a toolbar.
  */
 class ToolbarContent extends React.Component<Props> {
+  static displayName = 'Toolbar.Content';
+
   render() {
     const {
       color: titleColor = black,

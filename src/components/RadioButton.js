@@ -3,9 +3,9 @@
 import * as React from 'react';
 import { Animated, View, Platform, StyleSheet } from 'react-native';
 import color from 'color';
+import RadioButtonGroup, { RadioButtonContext } from './RadioButtonGroup';
 import TouchableRipple from './TouchableRipple';
 import withTheme from '../core/withTheme';
-import { RadioButtonContext } from './RadioButtonGroup';
 import type { Theme } from '../types';
 
 type Props = {
@@ -101,6 +101,9 @@ const BORDER_WIDTH = 2;
  * ```
  */
 class RadioButton extends React.Component<Props, State> {
+  // @component ./RadioButtonGroup.js
+  static Group = RadioButtonGroup;
+
   state = {
     borderAnim: new Animated.Value(BORDER_WIDTH),
     radioAnim: new Animated.Value(1),

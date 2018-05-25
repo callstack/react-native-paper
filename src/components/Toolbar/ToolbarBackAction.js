@@ -19,17 +19,21 @@ type Props = {
 };
 
 /**
- * The ToolbarBackAction component is used for displaying a back button in the toolbar.
+ * A component used to display a back button in the toolbar.
  */
-const ToolbarBackAction = (props: Props) => {
-  const icon =
-    Platform.OS === 'ios'
-      ? ({ color }) => (
-          <Icon source="keyboard-arrow-left" size={36} color={color} />
-        )
-      : 'arrow-back';
+class ToolbarBackAction extends React.Component<Props> {
+  static displayName = 'Toolbar.BackAction';
 
-  return <ToolbarAction {...props} size={24} icon={icon} />;
-};
+  render() {
+    const icon =
+      Platform.OS === 'ios'
+        ? ({ color }) => (
+            <Icon source="keyboard-arrow-left" size={36} color={color} />
+          )
+        : 'arrow-back';
+
+    return <ToolbarAction {...this.props} size={24} icon={icon} />;
+  }
+}
 
 export default ToolbarBackAction;

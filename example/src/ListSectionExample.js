@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { ScrollView, StyleSheet, Image } from 'react-native';
-import { ListSection, ListItem, Divider, withTheme } from 'react-native-paper';
+import { ListSection, Divider, withTheme } from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
 
 type Props = {
@@ -21,12 +21,12 @@ class ListSectionExample extends React.Component<Props> {
     return (
       <ScrollView style={[styles.container, { backgroundColor: background }]}>
         <ListSection title="Single line">
-          <ListItem icon="event" title="List item 1" />
-          <ListItem icon="redeem" title="List item 2" />
+          <ListSection.Item icon="event" title="List item 1" />
+          <ListSection.Item icon="redeem" title="List item 2" />
         </ListSection>
         <Divider />
         <ListSection title="Two line">
-          <ListItem
+          <ListSection.Item
             avatar={
               <Image
                 source={require('../assets/email-icon.png')}
@@ -36,7 +36,7 @@ class ListSectionExample extends React.Component<Props> {
             title="List item 1"
             description="Describes item 1"
           />
-          <ListItem
+          <ListSection.Item
             icon="info"
             avatar={
               <Image
@@ -50,7 +50,7 @@ class ListSectionExample extends React.Component<Props> {
         </ListSection>
         <Divider />
         <ListSection title="Three line">
-          <ListItem
+          <ListSection.Item
             avatar={
               <Image
                 source={require('../assets/email-icon.png')}
@@ -60,7 +60,7 @@ class ListSectionExample extends React.Component<Props> {
             title="List item 1"
             description="Describes item 1. Example of a very very long description."
           />
-          <ListItem
+          <ListSection.Item
             icon="star-border"
             avatar={
               <Image

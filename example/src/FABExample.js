@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Colors, FAB, FABGroup, withTheme } from 'react-native-paper';
+import { Colors, FAB, withTheme } from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
 
 type Props = {
@@ -38,7 +38,7 @@ class ButtonExample extends React.Component<Props, State> {
             style={styles.fab}
             onPress={() => {}}
           />
-          <FABGroup
+          <FAB.Group
             open={this.state.open}
             icon={this.state.open ? 'today' : 'add'}
             actions={[

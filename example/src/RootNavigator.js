@@ -2,12 +2,7 @@
 
 import * as React from 'react';
 import { StackNavigator } from 'react-navigation';
-import {
-  Toolbar,
-  ToolbarContent,
-  ToolbarAction,
-  ToolbarBackAction,
-} from 'react-native-paper';
+import { Toolbar } from 'react-native-paper';
 import ExampleList, { examples } from './ExampleList';
 
 const routes = Object.keys(examples)
@@ -19,8 +14,8 @@ const routes = Object.keys(examples)
     Screen.navigationOptions = props => ({
       header: (
         <Toolbar>
-          <ToolbarBackAction onPress={() => props.navigation.goBack()} />
-          <ToolbarContent title={(Comp: any).title} />
+          <Toolbar.BackAction onPress={() => props.navigation.goBack()} />
+          <Toolbar.Content title={(Comp: any).title} />
         </Toolbar>
       ),
       /* $FlowFixMe */
@@ -44,11 +39,11 @@ export default StackNavigator(
     navigationOptions: ({ navigation }) => ({
       header: (
         <Toolbar>
-          <ToolbarAction
+          <Toolbar.Action
             icon="menu"
             onPress={() => navigation.navigate('DrawerOpen')}
           />
-          <ToolbarContent title="Examples" />
+          <Toolbar.Content title="Examples" />
         </Toolbar>
       ),
     }),

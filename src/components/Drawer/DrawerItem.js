@@ -3,12 +3,12 @@
 import color from 'color';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import Icon from './Icon';
-import TouchableRipple from './TouchableRipple';
-import withTheme from '../core/withTheme';
-import Text from './Typography/Text';
-import type { Theme } from '../types';
-import type { IconSource } from './Icon';
+import Text from '../Typography/Text';
+import Icon from '../Icon';
+import TouchableRipple from '../TouchableRipple';
+import withTheme from '../../core/withTheme';
+import type { Theme } from '../../types';
+import type { IconSource } from '../Icon';
 
 type Props = {
   /**
@@ -35,19 +35,21 @@ type Props = {
 };
 
 /**
- * DrawerItem is a component used to show an action item with an icon and a label in a navigation drawer.
+ * A component used to show an action item with an icon and a label in a navigation drawer.
  *
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { DrawerItem } from 'react-native-paper';
+ * import { DrawerSection } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <DrawerItem label="First Item" />
+ *   <DrawerSection.Item label="First Item" />
  * );
  * ```
  */
 class DrawerItem extends React.Component<Props> {
+  static displayName = 'DrawerSection.Item';
+
   render() {
     const { icon, label, active, theme, style, onPress, ...rest } = this.props;
     const { colors, roundness } = theme;

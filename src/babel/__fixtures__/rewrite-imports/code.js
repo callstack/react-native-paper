@@ -3,7 +3,7 @@ import {
   Provider as PaperProvider,
   BottomNavigation,
   Button,
-  CardCover,
+  FAB,
   Toolbar,
   Colors,
   NonExistent,

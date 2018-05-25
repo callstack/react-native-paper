@@ -35,7 +35,7 @@ type Props = {
 };
 
 /**
- * A Chip can be used to display entities in small blocks.
+ * Chips can be used to display entities in small blocks.
  *
  * <div class="screenshots">
  *   <img src="screenshots/chip-1.png" />

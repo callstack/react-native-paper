@@ -3,14 +3,15 @@
 import color from 'color';
 import * as React from 'react';
 import { Animated, View, StyleSheet } from 'react-native';
-import Surface from './Surface';
-import CrossFadeIcon from './CrossFadeIcon';
-import Text from './Typography/Text';
-import TouchableRipple from './TouchableRipple';
-import { white } from '../styles/colors';
-import withTheme from '../core/withTheme';
-import type { Theme } from '../types';
-import type { IconSource } from './Icon';
+import FABGroup from './FABGroup';
+import Surface from '../Surface';
+import CrossFadeIcon from '../CrossFadeIcon';
+import Text from '../Typography/Text';
+import TouchableRipple from '../TouchableRipple';
+import { white } from '../../styles/colors';
+import withTheme from '../../core/withTheme';
+import type { Theme } from '../../types';
+import type { IconSource } from './../Icon';
 
 const AnimatedSurface = Animated.createAnimatedComponent(Surface);
 
@@ -65,6 +66,9 @@ type Props = {
  * ```
  */
 class FAB extends React.Component<Props> {
+  // @component ./FABGroup.js
+  static Group = FABGroup;
+
   render() {
     const {
       small,

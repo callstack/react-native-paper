@@ -39,7 +39,7 @@ type Props = {
 };
 
 /**
- * ListItem can be used to show tiles inside a List.
+ * A component to show tiles inside a List.
  *
  * <div class="screenshots">
  *   <img class="medium" src="screenshots/list-item-1.png" />
@@ -58,6 +58,8 @@ type Props = {
  * ```
  */
 class ListItem extends React.Component<Props> {
+  static displayName = 'ListSection.Item';
+
   render() {
     const {
       icon,

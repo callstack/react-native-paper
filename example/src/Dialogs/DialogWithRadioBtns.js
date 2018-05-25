@@ -6,9 +6,6 @@ import {
   Subheading,
   Button,
   Dialog,
-  DialogTitle,
-  DialogActions,
-  DialogScrollArea,
   RadioButton,
   TouchableRipple,
 } from 'react-native-paper';
@@ -32,8 +29,8 @@ export default class extends React.Component<Props, State> {
     const { visible, close } = this.props;
     return (
       <Dialog onDismiss={close} visible={visible}>
-        <DialogTitle>Choose an option</DialogTitle>
-        <DialogScrollArea style={{ maxHeight: 170, paddingHorizontal: 0 }}>
+        <Dialog.Title>Choose an option</Dialog.Title>
+        <Dialog.ScrollArea style={{ maxHeight: 170, paddingHorizontal: 0 }}>
           <ScrollView>
             <View>
               <TouchableRipple onPress={() => this.setState({ checked: 0 })}>
@@ -70,15 +67,15 @@ export default class extends React.Component<Props, State> {
               </TouchableRipple>
             </View>
           </ScrollView>
-        </DialogScrollArea>
-        <DialogActions>
+        </Dialog.ScrollArea>
+        <Dialog.Actions>
           <Button primary onPress={close}>
             Cancel
           </Button>
           <Button primary onPress={close}>
             Ok
           </Button>
-        </DialogActions>
+        </Dialog.Actions>
       </Dialog>
     );
   }

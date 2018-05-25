@@ -2,13 +2,7 @@
 
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import {
-  Colors,
-  withTheme,
-  RadioButtonGroup,
-  RadioButton,
-  Paragraph,
-} from 'react-native-paper';
+import { Colors, withTheme, RadioButton, Paragraph } from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
 
 type Props = {
@@ -41,7 +35,7 @@ class RadioButtonGroupExample extends React.Component<Props, State> {
           },
         ]}
       >
-        <RadioButtonGroup
+        <RadioButton.Group
           value={this.state.value}
           onValueChange={value => this.setState({ value })}
         >
@@ -53,7 +47,7 @@ class RadioButtonGroupExample extends React.Component<Props, State> {
             <Paragraph>Second</Paragraph>
             <RadioButton value="second" />
           </View>
-        </RadioButtonGroup>
+        </RadioButton.Group>
       </View>
     );
   }

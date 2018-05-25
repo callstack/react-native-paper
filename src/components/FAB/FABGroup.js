@@ -10,13 +10,13 @@ import {
 } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
 import color from 'color';
-import Text from './Typography/Text';
-import Card from './Card/Card';
-import ThemedPortal from './Portal/ThemedPortal';
 import FAB from './FAB';
-import withTheme from '../core/withTheme';
-import type { Theme } from '../types';
-import type { IconSource } from './Icon';
+import Text from '../Typography/Text';
+import Card from '../Card/Card';
+import ThemedPortal from '../Portal/ThemedPortal';
+import withTheme from '../../core/withTheme';
+import type { Theme } from '../../types';
+import type { IconSource } from '../Icon';
 
 type Props = {
   /**
@@ -67,7 +67,7 @@ type State = {
 };
 
 /**
- * FABGroup displays a stack of FABs with related actions in a speed dial.
+ * A component to display a stack of FABs with related actions in a speed dial.
  *
  * <div class="screenshots">
  *   <img src="screenshots/fab-group.png" />
@@ -76,7 +76,7 @@ type State = {
  * ## Usage
  * ```js
  * import React from 'react';
- * import { FABGroup, StyleSheet } from 'react-native-paper';
+ * import { FAB, StyleSheet } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
@@ -85,7 +85,7 @@ type State = {
  *
  *   render() {
  *     return (
- *       <FABGroup
+ *       <FAB.Group
  *         open={this.state.open}
  *         icon={this.state.open ? 'today' : 'add'}
  *         actions={[
@@ -107,6 +107,8 @@ type State = {
  * ```
  */
 class FABGroup extends React.Component<Props, State> {
+  static displayName = 'FAB.Group';
+
   static getDerivedStateFromProps(nextProps, prevState) {
     return {
       animations: nextProps.actions.map(

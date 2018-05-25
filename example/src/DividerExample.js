@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { FlatList } from 'react-native';
-import { Divider, ListItem, withTheme } from 'react-native-paper';
+import { Divider, ListSection, withTheme } from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
 
 type Props = {
@@ -21,7 +21,7 @@ const DividerExample = (props: Props) => {
   return (
     <FlatList
       style={{ backgroundColor: background }}
-      renderItem={({ item }) => <ListItem title={item} />}
+      renderItem={({ item }) => <ListSection.Item title={item} />}
       keyExtractor={item => item}
       ItemSeparatorComponent={Divider}
       data={items}

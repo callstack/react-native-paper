@@ -3,7 +3,6 @@
 import * as React from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
 import {
-  DrawerItem,
   DrawerSection,
   withTheme,
   Switch,
@@ -53,7 +52,7 @@ class DrawerItems extends React.Component<Props, State> {
       <View style={[styles.drawerContent, { backgroundColor: colors.surface }]}>
         <DrawerSection title="Subheader">
           {DrawerItemsData.map((props, index) => (
-            <DrawerItem
+            <DrawerSection.Item
               {...props}
               key={props.key}
               theme={

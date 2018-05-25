@@ -3,10 +3,10 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import color from 'color';
+import RadioButtonGroup, { RadioButtonContext } from './RadioButtonGroup';
 import Icon from './Icon';
 import TouchableRipple from './TouchableRipple';
 import withTheme from '../core/withTheme';
-import { RadioButtonContext } from './RadioButtonGroup';
 import type { Theme } from '../types';
 
 type Props = {
@@ -40,6 +40,9 @@ type Props = {
  * Radio buttons allow the selection a single option from a set
  */
 class RadioButton extends React.Component<Props> {
+  // @component ./RadioButtonGroup.js
+  static Group = RadioButtonGroup;
+
   render() {
     return (
       <RadioButtonContext.Consumer>

@@ -17,7 +17,7 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Button, Dialog, DialogActions } from 'react-native-paper';
+ * import { Button, Dialog } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
@@ -31,30 +31,36 @@ type Props = {
  *       <Dialog
  *         visible={this.state.visible}
  *         onDismiss={this._hideDialog}>
- *         <DialogActions>
+ *         <Dialog.Actions>
  *           <Button onPress={() => console.log("Cancel"))}>Cancel</Button>
  *           <Button onPress={() => console.log("Ok")}>Ok</Button>
- *         </DialogActions>
+ *         </Dialog.Actions>
  *       </Dialog>
  *     );
  *   }
  * }
  * ```
  */
-const DialogActions = (props: Props) => (
-  <View {...props} style={[styles.container, props.style]}>
-    {React.Children.map(
-      props.children,
-      child =>
-        typeof child === 'object' && child !== null
-          ? /* $FlowFixMe */
-            React.cloneElement(child, {
-              compact: true,
-            })
-          : child
-    )}
-  </View>
-);
+class DialogActions extends React.Component<Props> {
+  static displayName = 'Dialog.Actions';
+
+  render() {
+    return (
+      <View {...this.props} style={[styles.container, this.props.style]}>
+        {React.Children.map(
+          this.props.children,
+          child =>
+            typeof child === 'object' && child !== null
+              ? /* $FlowFixMe */
+                React.cloneElement(child, {
+                  compact: true,
+                })
+              : child
+        )}
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {

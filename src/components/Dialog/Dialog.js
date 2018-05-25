@@ -4,9 +4,10 @@ import * as React from 'react';
 import { StyleSheet, Platform, Animated } from 'react-native';
 import Modal from '../Modal';
 import Surface from '../Surface';
+import DialogContent from './DialogContent';
 import DialogActions from './DialogActions';
 import DialogTitle from './DialogTitle';
-import DialogContent from './DialogContent';
+import DialogScrollArea from './DialogScrollArea';
 
 const AnimatedSurface = Animated.createAnimatedComponent(Surface);
 
@@ -76,6 +77,15 @@ type Props = {
  * ```
  */
 export default class Dialog extends React.Component<Props, void> {
+  // @component ./DialogContent.js
+  static Content = DialogContent;
+  // @component ./DialogActions.js
+  static Actions = DialogActions;
+  // @component ./DialogTitle.js
+  static Title = DialogTitle;
+  // @component ./DialogScrollArea.js
+  static ScrollArea = DialogScrollArea;
+
   static defaultProps = {
     dismissable: true,
     visible: false,

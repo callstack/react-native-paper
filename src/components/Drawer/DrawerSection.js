@@ -3,10 +3,11 @@
 import color from 'color';
 import * as React from 'react';
 import { View } from 'react-native';
-import Divider from './Divider';
-import withTheme from '../core/withTheme';
-import Text from './Typography/Text';
-import type { Theme } from '../types';
+import DrawerItem from './DrawerItem';
+import Text from '../Typography/Text';
+import Divider from '../Divider';
+import withTheme from '../../core/withTheme';
+import type { Theme } from '../../types';
 
 type Props = {
   /**
@@ -24,7 +25,7 @@ type Props = {
 };
 
 /**
- * A DrawerSection groups content inside a navigation drawer.
+ * A component to group content inside a navigation drawer.
  *
  * ## Usage
  * ```js
@@ -57,6 +58,9 @@ type Props = {
  * ```
  */
 class DrawerSection extends React.Component<Props> {
+  // @component ./DrawerItem.js
+  static Item = DrawerItem;
+
   render() {
     const { children, title, theme, ...rest } = this.props;
     const { colors, fonts } = theme;

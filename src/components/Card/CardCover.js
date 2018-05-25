@@ -28,11 +28,11 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Card, CardCover } from 'react-native-paper';
+ * import { Card } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <Card>
- *     <CardCover source={{ uri: 'https://picsum.photos/700' }} />
+ *     <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
  *   </Card>
  * );
  * ```
@@ -40,6 +40,8 @@ type Props = {
  * @extends Image props https://facebook.github.io/react-native/docs/image.html#props
  */
 class CardCover extends React.Component<Props> {
+  static displayName = 'Card.Cover';
+
   render() {
     const { index, total, style, theme, ...rest } = this.props;
     const { roundness } = theme;

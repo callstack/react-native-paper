@@ -7,9 +7,6 @@ import {
   Switch,
   Paragraph,
   Toolbar,
-  ToolbarContent,
-  ToolbarAction,
-  ToolbarBackAction,
   withTheme,
 } from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
@@ -37,17 +34,17 @@ class ToolbarExample extends React.Component<Props> {
       header: (
         <Toolbar>
           {params.showLeftIcon && (
-            <ToolbarBackAction onPress={() => navigation.goBack()} />
+            <Toolbar.BackAction onPress={() => navigation.goBack()} />
           )}
-          <ToolbarContent
+          <Toolbar.Content
             title="Title"
             subtitle={params.showSubtitle ? 'Subtitle' : null}
           />
           {params.showSearchIcon && (
-            <ToolbarAction icon="search" onPress={() => {}} />
+            <Toolbar.Action icon="search" onPress={() => {}} />
           )}
           {params.showMoreIcon && (
-            <ToolbarAction icon={MORE_ICON} onPress={() => {}} />
+            <Toolbar.Action icon={MORE_ICON} onPress={() => {}} />
           )}
         </Toolbar>
       ),

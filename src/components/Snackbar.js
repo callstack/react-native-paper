@@ -58,7 +58,7 @@ const DURATION_LONG = 3500;
 const DURATION_INDEFINITE = Infinity;
 
 /**
- * Snackbar provide brief feedback about an operation through a message at the bottom of the screen.
+ * Snackbars provide brief feedback about an operation through a message at the bottom of the screen.
  *
  * <div class="screenshots">
  *   <img class="medium" src="screenshots/snackbar.gif" />

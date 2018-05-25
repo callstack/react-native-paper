@@ -11,6 +11,8 @@ import {
 import color from 'color';
 
 import ToolbarContent from './ToolbarContent';
+import ToolbarAction from './ToolbarAction';
+import ToolbarBackAction from './ToolbarBackAction';
 import withTheme from '../../core/withTheme';
 import { black, white } from '../../styles/colors';
 import type { Theme } from '../../types';
@@ -93,6 +95,13 @@ const DEFAULT_STATUSBAR_HEIGHT = Platform.select({
  * ```
  */
 class Toolbar extends React.Component<Props> {
+  // @component ./ToolbarContent.js
+  static Content = ToolbarContent;
+  // @component ./ToolbarAction.js
+  static Action = ToolbarAction;
+  // @component ./ToolbarBackAction.js
+  static BackAction = ToolbarBackAction;
+
   static defaultProps = {
     // TODO: handle orientation changes
     statusBarHeight: DEFAULT_STATUSBAR_HEIGHT,

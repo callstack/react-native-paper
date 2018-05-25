@@ -1432,9 +1432,9 @@ commondir@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
 
-component-docs@^0.12.3:
-  version "0.12.3"
-  resolved "https://registry.yarnpkg.com/component-docs/-/component-docs-0.12.3.tgz#37532417a846872f950ff74099afdbc619b7652c"
+component-docs@^0.12.4:
+  version "0.12.4"
+  resolved "https://registry.yarnpkg.com/component-docs/-/component-docs-0.12.4.tgz#acadb57d37d96453853be9e99fce34064163b26d"
   dependencies:
     babel-core "^6.26.3"
     babel-loader "^7.1.4"
