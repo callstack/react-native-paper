@@ -2,11 +2,12 @@
 
 import color from 'color';
 import * as React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Icon from './Icon';
 import TouchableRipple from './TouchableRipple';
 import { grey300, grey700 } from '../styles/colors';
 import withTheme from '../core/withTheme';
+import Text from './Typography/Text';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
