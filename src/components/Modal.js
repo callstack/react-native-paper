@@ -49,8 +49,8 @@ type State = {
  *     visible: false,
  *   };
  *
- *   _showModal = () => this.setState({ visble: true });
- *   _hideModal = () => this.setState({ visble: false });
+ *   _showModal = () => this.setState({ visible: true });
+ *   _hideModal = () => this.setState({ visible: false });
  *
  *   render() {
  *     const { visible } = this.state;
