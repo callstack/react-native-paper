@@ -83,12 +83,14 @@ class DrawerItem extends React.Component<Props> {
           {icon && <Icon name={icon} size={24} color={iconColor} />}
           <Text
             numberOfLines={1}
-            style={{
-              color: labelColor,
-              fontFamily,
-              marginLeft: labelMargin,
-              marginRight: 32,
-            }}
+            style={[
+              {
+                color: labelColor,
+                fontFamily,
+                marginLeft: labelMargin,
+              },
+              styles.label,
+            ]}
           >
             {label}
           </Text>
@@ -103,8 +105,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 16,
-    paddingVertical: 16,
+    paddingVertical: 12,
     height: 48,
+  },
+  label: {
+    marginRight: 32,
   },
 });
 
