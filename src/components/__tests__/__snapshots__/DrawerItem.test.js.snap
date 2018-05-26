@@ -80,11 +80,43 @@ exports[`renders DrawerItem with icon 1`] = `
         ellipsizeMode="tail"
         numberOfLines={1}
         style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
+            },
+            Array [
+              Object {
+                "marginRight": 32,
+              },
+              Object {
+                "color": "rgba(0, 0, 0, 0.68)",
+                "fontFamily": "HelveticaNeue-Medium",
+                "marginLeft": 32,
+              },
+            ],
+          ]
+        }
+        theme={
           Object {
-            "color": "rgba(0, 0, 0, 0.68)",
-            "fontFamily": "HelveticaNeue-Medium",
-            "marginLeft": 32,
-            "marginRight": 32,
+            "colors": Object {
+              "accent": "#03dac4",
+              "background": "#f6f6f6",
+              "disabled": "rgba(0, 0, 0, 0.26)",
+              "error": "#B00020",
+              "placeholder": "rgba(0, 0, 0, 0.38)",
+              "primary": "#6200ee",
+              "surface": "#ffffff",
+              "text": "#000000",
+            },
+            "dark": false,
+            "fonts": Object {
+              "light": "HelveticaNeue-Light",
+              "medium": "HelveticaNeue-Medium",
+              "regular": "Helvetica Neue",
+              "thin": "HelveticaNeue-Thin",
+            },
+            "roundness": 4,
           }
         }
       >
@@ -175,11 +207,43 @@ exports[`renders active DrawerItem 1`] = `
         ellipsizeMode="tail"
         numberOfLines={1}
         style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
+            },
+            Array [
+              Object {
+                "marginRight": 32,
+              },
+              Object {
+                "color": "#6200ee",
+                "fontFamily": "HelveticaNeue-Medium",
+                "marginLeft": 32,
+              },
+            ],
+          ]
+        }
+        theme={
           Object {
-            "color": "#6200ee",
-            "fontFamily": "HelveticaNeue-Medium",
-            "marginLeft": 32,
-            "marginRight": 32,
+            "colors": Object {
+              "accent": "#03dac4",
+              "background": "#f6f6f6",
+              "disabled": "rgba(0, 0, 0, 0.26)",
+              "error": "#B00020",
+              "placeholder": "rgba(0, 0, 0, 0.38)",
+              "primary": "#6200ee",
+              "surface": "#ffffff",
+              "text": "#000000",
+            },
+            "dark": false,
+            "fonts": Object {
+              "light": "HelveticaNeue-Light",
+              "medium": "HelveticaNeue-Medium",
+              "regular": "Helvetica Neue",
+              "thin": "HelveticaNeue-Thin",
+            },
+            "roundness": 4,
           }
         }
       >
@@ -246,11 +310,43 @@ exports[`renders basic DrawerItem 1`] = `
         ellipsizeMode="tail"
         numberOfLines={1}
         style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
+            },
+            Array [
+              Object {
+                "marginRight": 32,
+              },
+              Object {
+                "color": "rgba(0, 0, 0, 0.68)",
+                "fontFamily": "HelveticaNeue-Medium",
+                "marginLeft": 0,
+              },
+            ],
+          ]
+        }
+        theme={
           Object {
-            "color": "rgba(0, 0, 0, 0.68)",
-            "fontFamily": "HelveticaNeue-Medium",
-            "marginLeft": 0,
-            "marginRight": 32,
+            "colors": Object {
+              "accent": "#03dac4",
+              "background": "#f6f6f6",
+              "disabled": "rgba(0, 0, 0, 0.26)",
+              "error": "#B00020",
+              "placeholder": "rgba(0, 0, 0, 0.38)",
+              "primary": "#6200ee",
+              "surface": "#ffffff",
+              "text": "#000000",
+            },
+            "dark": false,
+            "fonts": Object {
+              "light": "HelveticaNeue-Light",
+              "medium": "HelveticaNeue-Medium",
+              "regular": "Helvetica Neue",
+              "thin": "HelveticaNeue-Thin",
+            },
+            "roundness": 4,
           }
         }
       >
