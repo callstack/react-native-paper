@@ -355,6 +355,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
       return;
     }
 
+    const shifting = this._isShifting();
     const { routes, index } = this.props.navigationState;
 
     // Reset offsets of previous and current tabs before animation
@@ -370,13 +371,13 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
     Animated.parallel([
       Animated.timing(this.state.ripple, {
         toValue: 1,
-        duration: 400,
+        duration: shifting ? 400 : 0,
         useNativeDriver: true,
       }),
       ...routes.map((_, i) =>
         Animated.timing(this.state.tabs[i], {
           toValue: i === index ? 1 : 0,
-          duration: 150,
+          duration: shifting ? 150 : 75,
           useNativeDriver: true,
         })
       ),
@@ -433,6 +434,11 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
     this.props.onIndexChange(index);
   };
 
+  _isShifting = () =>
+    typeof this.props.shifting === 'boolean'
+      ? this.props.shifting
+      : this.props.navigationState.routes.length > 3;
+
   render() {
     const {
       navigationState,
@@ -452,10 +458,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
     const { routes } = navigationState;
     const { colors } = theme;
 
-    const shifting =
-      typeof this.props.shifting === 'boolean'
-        ? this.props.shifting
-        : routes.length > 3;
+    const shifting = this._isShifting();
 
     const { backgroundColor: approxBackgroundColor = colors.primary } =
       StyleSheet.flatten(barStyle) || {};
