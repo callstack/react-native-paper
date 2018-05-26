@@ -9,7 +9,7 @@ import {
   DefaultTheme,
 } from 'react-native-paper';
 import createReactContext from 'create-react-context';
-import { DrawerNavigator } from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation';
 import RootNavigator from './src/RootNavigator';
 import DrawerItems from './DrawerItems';
 import type { Theme } from 'react-native-paper/types';
@@ -20,7 +20,7 @@ type State = {
 
 const ThemeToggleContext: any = createReactContext();
 
-const App = DrawerNavigator(
+const App = createDrawerNavigator(
   { Home: { screen: RootNavigator } },
   {
     contentComponent: () => (

@@ -3,15 +3,8 @@
 exports[`renders list accordion with children 1`] = `
 <View>
   <View
-    accessibilityComponentType={undefined}
-    accessibilityLabel={undefined}
-    accessibilityTraits={undefined}
     accessible={true}
-    hasTVPreferredFocus={undefined}
-    hitSlop={undefined}
     isTVSelectable={true}
-    nativeID={undefined}
-    onLayout={undefined}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -26,8 +19,6 @@ exports[`renders list accordion with children 1`] = `
         undefined,
       ]
     }
-    testID={undefined}
-    tvParallaxProperties={undefined}
   >
     <View
       pointerEvents="none"
@@ -178,15 +169,8 @@ exports[`renders list accordion with children 1`] = `
 exports[`renders list accordion with icons 1`] = `
 <View>
   <View
-    accessibilityComponentType={undefined}
-    accessibilityLabel={undefined}
-    accessibilityTraits={undefined}
     accessible={true}
-    hasTVPreferredFocus={undefined}
-    hitSlop={undefined}
     isTVSelectable={true}
-    nativeID={undefined}
-    onLayout={undefined}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -201,8 +185,6 @@ exports[`renders list accordion with icons 1`] = `
         undefined,
       ]
     }
-    testID={undefined}
-    tvParallaxProperties={undefined}
   >
     <View
       pointerEvents="none"
@@ -353,15 +335,8 @@ exports[`renders list accordion with icons 1`] = `
 exports[`renders multiline list accordion 1`] = `
 <View>
   <View
-    accessibilityComponentType={undefined}
-    accessibilityLabel={undefined}
-    accessibilityTraits={undefined}
     accessible={true}
-    hasTVPreferredFocus={undefined}
-    hitSlop={undefined}
     isTVSelectable={true}
-    nativeID={undefined}
-    onLayout={undefined}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -376,8 +351,6 @@ exports[`renders multiline list accordion 1`] = `
         undefined,
       ]
     }
-    testID={undefined}
-    tvParallaxProperties={undefined}
   >
     <View
       pointerEvents="none"

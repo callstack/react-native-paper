@@ -34,7 +34,6 @@ exports[`renders not visible snackbar with content 1`] = `
       }
     >
       <View
-        collapsable={undefined}
         style={
           Object {
             "opacity": 0,
@@ -155,7 +154,6 @@ exports[`renders snackbar with Text as a child 1`] = `
       }
     >
       <View
-        collapsable={undefined}
         style={
           Object {
             "opacity": 0,
@@ -282,7 +280,6 @@ exports[`renders snackbar with action button 1`] = `
       }
     >
       <View
-        collapsable={undefined}
         style={
           Object {
             "opacity": 0,
@@ -363,7 +360,6 @@ exports[`renders snackbar with action button 1`] = `
             Snackbar content
           </Text>
           <View
-            collapsable={undefined}
             style={
               Array [
                 Object {
@@ -388,15 +384,8 @@ exports[`renders snackbar with action button 1`] = `
             }
           >
             <View
-              accessibilityComponentType={undefined}
-              accessibilityLabel={undefined}
-              accessibilityTraits={undefined}
               accessible={true}
-              hasTVPreferredFocus={undefined}
-              hitSlop={undefined}
               isTVSelectable={true}
-              nativeID={undefined}
-              onLayout={undefined}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -408,8 +397,6 @@ exports[`renders snackbar with action button 1`] = `
                   "borderRadius": 4,
                 }
               }
-              testID={undefined}
-              tvParallaxProperties={undefined}
             >
               <View
                 style={
@@ -520,7 +507,6 @@ exports[`renders snackbar with content 1`] = `
       }
     >
       <View
-        collapsable={undefined}
         style={
           Object {
             "opacity": 0,

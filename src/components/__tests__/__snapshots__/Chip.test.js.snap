@@ -2,13 +2,7 @@
 
 exports[`renders chip with icon 1`] = `
 <View
-  accessibilityComponentType={undefined}
-  accessibilityLabel={undefined}
-  accessibilityTraits={undefined}
   accessible={true}
-  hitSlop={undefined}
-  nativeID={undefined}
-  onLayout={undefined}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -29,7 +23,6 @@ exports[`renders chip with icon 1`] = `
       undefined,
     ]
   }
-  testID={undefined}
 >
   <Text
     accessible={true}
@@ -108,13 +101,7 @@ exports[`renders chip with icon 1`] = `
 
 exports[`renders chip with onPress 1`] = `
 <View
-  accessibilityComponentType={undefined}
-  accessibilityLabel={undefined}
-  accessibilityTraits={undefined}
   accessible={true}
-  hitSlop={undefined}
-  nativeID={undefined}
-  onLayout={undefined}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -135,7 +122,6 @@ exports[`renders chip with onPress 1`] = `
       undefined,
     ]
   }
-  testID={undefined}
 >
   <Text
     accessible={true}
@@ -190,13 +176,7 @@ exports[`renders chip with onPress 1`] = `
 
 exports[`renders deletable chip 1`] = `
 <View
-  accessibilityComponentType={undefined}
-  accessibilityLabel={undefined}
-  accessibilityTraits={undefined}
   accessible={true}
-  hitSlop={undefined}
-  nativeID={undefined}
-  onLayout={undefined}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -217,7 +197,6 @@ exports[`renders deletable chip 1`] = `
       undefined,
     ]
   }
-  testID={undefined}
 >
   <Text
     accessible={true}
@@ -292,13 +271,7 @@ exports[`renders deletable chip 1`] = `
     Example Chip
   </Text>
   <View
-    accessibilityComponentType={undefined}
-    accessibilityLabel={undefined}
-    accessibilityTraits={undefined}
     accessible={true}
-    hitSlop={undefined}
-    nativeID={undefined}
-    onLayout={undefined}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -310,7 +283,6 @@ exports[`renders deletable chip 1`] = `
         "padding": 6,
       }
     }
-    testID={undefined}
   >
     <Text
       accessible={true}

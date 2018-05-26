@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 import { Toolbar } from 'react-native-paper';
 import ExampleList, { examples } from './ExampleList';
 
@@ -30,7 +30,7 @@ const routes = Object.keys(examples)
     };
   }, {});
 
-export default StackNavigator(
+export default createStackNavigator(
   {
     home: { screen: ExampleList },
     ...routes,
@@ -39,10 +39,7 @@ export default StackNavigator(
     navigationOptions: ({ navigation }) => ({
       header: (
         <Toolbar>
-          <Toolbar.Action
-            icon="menu"
-            onPress={() => navigation.navigate('DrawerOpen')}
-          />
+          <Toolbar.Action icon="menu" onPress={() => navigation.openDrawer()} />
           <Toolbar.Content title="Examples" />
         </Toolbar>
       ),
