@@ -197,9 +197,7 @@ class FABGroup extends React.Component<Props, State> {
 
     return (
       <ThemedPortal>
-        {open ? (
-          <StatusBar barStyle={theme.dark ? 'light-content' : 'dark-content'} />
-        ) : null}
+        {open ? <StatusBar barStyle="light-content" /> : null}
         <View pointerEvents="box-none" style={styles.container}>
           <TouchableWithoutFeedback onPress={this._toggleOpen}>
             <Animated.View
