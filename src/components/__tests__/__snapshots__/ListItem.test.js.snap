@@ -2,15 +2,8 @@
 
 exports[`renders list item with avatar 1`] = `
 <View
-  accessibilityComponentType={undefined}
-  accessibilityLabel={undefined}
-  accessibilityTraits={undefined}
   accessible={true}
-  hasTVPreferredFocus={undefined}
-  hitSlop={undefined}
   isTVSelectable={true}
-  nativeID={undefined}
-  onLayout={undefined}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -25,8 +18,6 @@ exports[`renders list item with avatar 1`] = `
       undefined,
     ]
   }
-  testID={undefined}
-  tvParallaxProperties={undefined}
 >
   <View
     style={
@@ -122,15 +113,8 @@ exports[`renders list item with avatar 1`] = `
 
 exports[`renders list item with avatar and icon 1`] = `
 <View
-  accessibilityComponentType={undefined}
-  accessibilityLabel={undefined}
-  accessibilityTraits={undefined}
   accessible={true}
-  hasTVPreferredFocus={undefined}
-  hitSlop={undefined}
   isTVSelectable={true}
-  nativeID={undefined}
-  onLayout={undefined}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -145,8 +129,6 @@ exports[`renders list item with avatar and icon 1`] = `
       undefined,
     ]
   }
-  testID={undefined}
-  tvParallaxProperties={undefined}
 >
   <View
     style={
@@ -331,15 +313,8 @@ exports[`renders list item with avatar and icon 1`] = `
 
 exports[`renders list item with icon 1`] = `
 <View
-  accessibilityComponentType={undefined}
-  accessibilityLabel={undefined}
-  accessibilityTraits={undefined}
   accessible={true}
-  hasTVPreferredFocus={undefined}
-  hitSlop={undefined}
   isTVSelectable={true}
-  nativeID={undefined}
-  onLayout={undefined}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -354,8 +329,6 @@ exports[`renders list item with icon 1`] = `
       undefined,
     ]
   }
-  testID={undefined}
-  tvParallaxProperties={undefined}
 >
   <View
     style={
@@ -468,15 +441,8 @@ exports[`renders list item with icon 1`] = `
 
 exports[`renders list item with title and description 1`] = `
 <View
-  accessibilityComponentType={undefined}
-  accessibilityLabel={undefined}
-  accessibilityTraits={undefined}
   accessible={true}
-  hasTVPreferredFocus={undefined}
-  hitSlop={undefined}
   isTVSelectable={true}
-  nativeID={undefined}
-  onLayout={undefined}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -491,8 +457,6 @@ exports[`renders list item with title and description 1`] = `
       undefined,
     ]
   }
-  testID={undefined}
-  tvParallaxProperties={undefined}
 >
   <View
     style={

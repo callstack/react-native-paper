@@ -25,7 +25,6 @@ exports[`renders not visible snackbar with content 1`] = `
     }
   >
     <View
-      collapsable={undefined}
       onLayout={[Function]}
       style={
         Object {
@@ -44,7 +43,6 @@ exports[`renders not visible snackbar with content 1`] = `
       }
     >
       <View
-        collapsable={undefined}
         style={
           Object {
             "alignItems": "center",
@@ -134,7 +132,6 @@ exports[`renders snackbar with Text as a child 1`] = `
     }
   >
     <View
-      collapsable={undefined}
       onLayout={[Function]}
       style={
         Object {
@@ -153,7 +150,6 @@ exports[`renders snackbar with Text as a child 1`] = `
       }
     >
       <View
-        collapsable={undefined}
         style={
           Object {
             "alignItems": "center",
@@ -249,7 +245,6 @@ exports[`renders snackbar with action button 1`] = `
     }
   >
     <View
-      collapsable={undefined}
       onLayout={[Function]}
       style={
         Object {
@@ -268,7 +263,6 @@ exports[`renders snackbar with action button 1`] = `
       }
     >
       <View
-        collapsable={undefined}
         style={
           Object {
             "alignItems": "center",
@@ -406,7 +400,6 @@ exports[`renders snackbar with content 1`] = `
     }
   >
     <View
-      collapsable={undefined}
       onLayout={[Function]}
       style={
         Object {
@@ -425,7 +418,6 @@ exports[`renders snackbar with content 1`] = `
       }
     >
       <View
-        collapsable={undefined}
         style={
           Object {
             "alignItems": "center",

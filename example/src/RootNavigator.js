@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 import {
   Toolbar,
   ToolbarContent,
@@ -35,7 +35,7 @@ const routes = Object.keys(examples)
     };
   }, {});
 
-export default StackNavigator(
+export default createStackNavigator(
   {
     home: { screen: ExampleList },
     ...routes,
@@ -44,10 +44,7 @@ export default StackNavigator(
     navigationOptions: ({ navigation }) => ({
       header: (
         <Toolbar>
-          <ToolbarAction
-            icon="menu"
-            onPress={() => navigation.navigate('DrawerOpen')}
-          />
+          <ToolbarAction icon="menu" onPress={() => navigation.openDrawer()} />
           <ToolbarContent title="Examples" />
         </Toolbar>
       ),

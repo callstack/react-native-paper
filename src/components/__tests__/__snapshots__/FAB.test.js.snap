@@ -2,7 +2,6 @@
 
 exports[`renders extended FAB 1`] = `
 <View
-  collapsable={undefined}
   style={
     Array [
       Object {
@@ -29,15 +28,8 @@ exports[`renders extended FAB 1`] = `
   }
 >
   <View
-    accessibilityComponentType={undefined}
-    accessibilityLabel={undefined}
-    accessibilityTraits={undefined}
     accessible={true}
-    hasTVPreferredFocus={undefined}
-    hitSlop={undefined}
     isTVSelectable={true}
-    nativeID={undefined}
-    onLayout={undefined}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -49,8 +41,6 @@ exports[`renders extended FAB 1`] = `
         "borderRadius": 28,
       }
     }
-    testID={undefined}
-    tvParallaxProperties={undefined}
   >
     <View
       pointerEvents="none"
@@ -83,7 +73,6 @@ exports[`renders extended FAB 1`] = `
         }
       >
         <View
-          collapsable={undefined}
           style={
             Object {
               "bottom": 0,
@@ -179,7 +168,6 @@ exports[`renders extended FAB 1`] = `
 
 exports[`renders normal FAB 1`] = `
 <View
-  collapsable={undefined}
   style={
     Array [
       Object {
@@ -206,15 +194,8 @@ exports[`renders normal FAB 1`] = `
   }
 >
   <View
-    accessibilityComponentType={undefined}
-    accessibilityLabel={undefined}
-    accessibilityTraits={undefined}
     accessible={true}
-    hasTVPreferredFocus={undefined}
-    hitSlop={undefined}
     isTVSelectable={true}
-    nativeID={undefined}
-    onLayout={undefined}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -226,8 +207,6 @@ exports[`renders normal FAB 1`] = `
         "borderRadius": 28,
       }
     }
-    testID={undefined}
-    tvParallaxProperties={undefined}
   >
     <View
       pointerEvents="none"
@@ -260,7 +239,6 @@ exports[`renders normal FAB 1`] = `
         }
       >
         <View
-          collapsable={undefined}
           style={
             Object {
               "bottom": 0,
@@ -310,7 +288,6 @@ exports[`renders normal FAB 1`] = `
 
 exports[`renders small FAB 1`] = `
 <View
-  collapsable={undefined}
   style={
     Array [
       Object {
@@ -337,15 +314,8 @@ exports[`renders small FAB 1`] = `
   }
 >
   <View
-    accessibilityComponentType={undefined}
-    accessibilityLabel={undefined}
-    accessibilityTraits={undefined}
     accessible={true}
-    hasTVPreferredFocus={undefined}
-    hitSlop={undefined}
     isTVSelectable={true}
-    nativeID={undefined}
-    onLayout={undefined}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -357,8 +327,6 @@ exports[`renders small FAB 1`] = `
         "borderRadius": 28,
       }
     }
-    testID={undefined}
-    tvParallaxProperties={undefined}
   >
     <View
       pointerEvents="none"
@@ -391,7 +359,6 @@ exports[`renders small FAB 1`] = `
         }
       >
         <View
-          collapsable={undefined}
           style={
             Object {
               "bottom": 0,
