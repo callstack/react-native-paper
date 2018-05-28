@@ -49,6 +49,7 @@ export {
   default as ToolbarBackAction,
 } from './components/Toolbar/ToolbarBackAction';
 export { default as ToolbarContent } from './components/Toolbar/ToolbarContent';
+export { default as TouchableIcon } from './components/TouchableIcon';
 export { default as TouchableRipple } from './components/TouchableRipple';
 export { default as TextInput } from './components/TextInput';
 
