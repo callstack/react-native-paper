@@ -18,26 +18,57 @@ class ChipExample extends React.Component<Props> {
     return (
       <View style={[styles.container, { backgroundColor: colors.background }]}>
         <View style={styles.row}>
-          <Chip onPress={() => {}} style={styles.chip}>
-            Simple Chip
-          </Chip>
-          <Chip onDelete={() => {}} style={styles.chip}>
+          <Chip onPress={() => {}} onDelete={() => {}} style={styles.chip}>
             Chip with delete button
           </Chip>
-          <Chip icon="info" style={styles.chip}>
+          <Chip icon="favorite" style={styles.chip}>
             Chip with icon
           </Chip>
           <Chip
-            icon={({ size }) => (
-              <Image
-                source={require('../assets/avatar.jpg')}
-                style={{ height: size, width: size, borderRadius: size / 2 }}
-              />
-            )}
+            avatar={<Image source={require('../assets/avatar.jpg')} />}
             onDelete={() => {}}
             style={styles.chip}
           >
             Chip with image
+          </Chip>
+          <Chip
+            avatar={<Image source={require('../assets/avatar.jpg')} />}
+            onDelete={() => {}}
+            style={styles.chip}
+            selected
+          >
+            Selected with image
+          </Chip>
+        </View>
+        <View style={styles.row}>
+          <Chip style={styles.chip}>Simple Chip</Chip>
+          <Chip selected style={styles.chip}>
+            Selected chip
+          </Chip>
+          <Chip
+            icon="favorite"
+            onDelete={() => {}}
+            disabled
+            style={styles.chip}
+          >
+            Disabled chip
+          </Chip>
+        </View>
+        <View style={styles.row}>
+          <Chip mode="outlined" style={styles.chip}>
+            Chip with outline
+          </Chip>
+          <Chip mode="outlined" selected style={styles.chip}>
+            Selected chip
+          </Chip>
+          <Chip
+            icon="favorite"
+            onDelete={() => {}}
+            mode="outlined"
+            disabled
+            style={styles.chip}
+          >
+            Disabled chip
           </Chip>
         </View>
       </View>

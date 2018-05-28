@@ -1,24 +1,50 @@
 /* @flow */
 
 import * as React from 'react';
-import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Animated,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import color from 'color';
 import Icon from './Icon';
+import Surface from './Surface';
 import Text from './Typography/Text';
-import { black, white } from '../styles/colors';
+import TouchableRipple from './TouchableRipple';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
+const AnimatedSurface = Animated.createAnimatedComponent(Surface);
+
 type Props = {
+  /**
+   * Mode of the chip.
+   * - `flat` - flat chip without outline
+   * - `outlined` - chip with an outline
+   */
+  mode?: 'flat' | 'outlined',
   /**
    * Text content of the `Chip`.
    */
   children: React.Node,
   /**
-   * Icon to display for the `Chip`.
+   * Icon to display for the `Chip`. Both icon and avatar cannot be specified.
    */
   icon?: IconSource,
+  /**
+   * Avatar to display for the `Chip`. Both icon and avatar cannot be specified.
+   */
+  avatar?: React.Node,
+  /**
+   * Display the chip as selected.
+   */
+  selected?: boolean,
+  /**
+   * Disables the chip. `onPress` function won't execute.
+   */
+  disabled?: boolean,
   /**
    * Function to execute on press.
    */
@@ -32,6 +58,10 @@ type Props = {
    * @optional
    */
   theme: Theme,
+};
+
+type State = {
+  elevation: Animated.Value,
 };
 
 /**
@@ -52,68 +82,182 @@ type Props = {
  * );
  * ```
  */
-class Chip extends React.Component<Props> {
+class Chip extends React.Component<Props, State> {
+  static defaultProps = {
+    mode: 'flat',
+    disabled: false,
+    selected: false,
+    style: {},
+  };
+
+  state = {
+    elevation: new Animated.Value(0),
+  };
+
+  _handlePressIn = () => {
+    Animated.timing(this.state.elevation, {
+      toValue: 4,
+      duration: 200,
+    }).start();
+  };
+
+  _handlePressOut = () => {
+    Animated.timing(this.state.elevation, {
+      toValue: 0,
+      duration: 150,
+    }).start();
+  };
+
   render() {
-    const { children, icon, onPress, onDelete, style, theme } = this.props;
+    const {
+      mode,
+      children,
+      icon,
+      avatar,
+      selected,
+      disabled,
+      onPress,
+      onDelete,
+      style,
+      theme,
+    } = this.props;
     const { dark, colors } = theme;
 
-    const backgroundColor = color(dark ? white : black)
-      .alpha(0.12)
-      .rgb()
-      .string();
-    const textColor = dark
-      ? colors.text
+    const backgroundColor =
+      mode === 'outlined'
+        ? colors.background
+        : color(colors.text)
+            .alpha(disabled ? 0.05 : 0.12)
+            .rgb()
+            .string();
+    const textColor = disabled
+      ? colors.disabled
       : color(colors.text)
-          .alpha(0.87)
+          .alpha(dark ? 0.7 : 0.87)
           .rgb()
           .string();
-    const iconColor = color(colors.text)
-      .alpha(dark ? 0.7 : 0.54)
+    const iconColor = disabled
+      ? colors.disabled
+      : color(colors.text)
+          .alpha(dark ? 0.7 : 0.54)
+          .rgb()
+          .string();
+    const selectedColor = color(colors.text)
+      .alpha(mode === 'outlined' ? 0.1 : 0.3)
       .rgb()
       .string();
 
     return (
-      <TouchableWithoutFeedback onPress={onPress}>
-        <View style={[styles.content, { backgroundColor }, style]}>
-          {icon ? <Icon source={icon} color={iconColor} size={32} /> : null}
-          <Text
-            numberOfLines={1}
+      <AnimatedSurface
+        style={[
+          styles.touchable,
+          {
+            elevation: this.state.elevation,
+          },
+          style,
+        ]}
+      >
+        <TouchableRipple
+          style={styles.touchable}
+          onPress={onPress}
+          onPressIn={this._handlePressIn}
+          onPressOut={this._handlePressOut}
+          underlayColor={selectedColor}
+          disabled={disabled}
+        >
+          <View
             style={[
-              styles.text,
+              styles.content,
               {
-                color: textColor,
-                marginLeft: icon ? 8 : 12,
-                marginRight: onDelete ? 0 : 12,
+                backgroundColor,
+                borderColor: mode === 'outlined' ? colors.text : 'transparent',
               },
+              selected
+                ? {
+                    backgroundColor: selectedColor,
+                  }
+                : null,
             ]}
           >
-            {children}
-          </Text>
-          {onDelete ? (
-            <TouchableWithoutFeedback onPress={onDelete}>
-              <View style={styles.delete}>
-                <Icon source="cancel" size={20} color={iconColor} />
+            {avatar && !icon
+              ? /* $FlowFixMe */
+                React.cloneElement(avatar, {
+                  /* $FlowFixMe */
+                  style: [styles.avatar, avatar.props.style],
+                })
+              : null}
+            {icon || selected ? (
+              <View
+                style={[styles.icon, avatar ? styles.avatarSelected : null]}
+              >
+                {/* $FlowFixMe */}
+                <Icon
+                  source={selected ? 'done' : icon}
+                  color={avatar ? colors.background : iconColor}
+                  size={18}
+                />
               </View>
-            </TouchableWithoutFeedback>
-          ) : null}
-        </View>
-      </TouchableWithoutFeedback>
+            ) : null}
+            <Text
+              numberOfLines={1}
+              style={[
+                styles.text,
+                {
+                  color: textColor,
+                  marginRight: onDelete ? 4 : 8,
+                  marginLeft: avatar || icon || selected ? 4 : 8,
+                },
+              ]}
+            >
+              {children}
+            </Text>
+            {onDelete ? (
+              <TouchableWithoutFeedback onPress={onDelete}>
+                <View style={styles.delete}>
+                  <Icon source="cancel" size={16} color={iconColor} />
+                </View>
+              </TouchableWithoutFeedback>
+            ) : null}
+          </View>
+        </TouchableRipple>
+      </AnimatedSurface>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  touchable: {
+    borderRadius: 16,
+  },
   content: {
     borderRadius: 16,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
+    paddingHorizontal: 4,
+    borderWidth: StyleSheet.hairlineWidth,
+  },
+  icon: {
+    paddingHorizontal: 4,
+    paddingVertical: 7,
   },
   delete: {
-    padding: 6,
+    paddingHorizontal: 4,
+    paddingVertical: 8,
   },
   text: {
     marginVertical: 8,
+  },
+  avatar: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    marginRight: 4,
+  },
+  avatarSelected: {
+    position: 'relative',
+    left: -30,
+    marginRight: -26,
   },
 });
 
