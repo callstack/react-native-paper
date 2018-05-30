@@ -23,7 +23,7 @@ import SurfaceExample from './SurfaceExample';
 import SwitchExample from './SwitchExample';
 import TextExample from './TextExample';
 import TextInputExample from './TextInputExample';
-import ToolbarExample from './ToolbarExample';
+import AppbarExample from './AppbarExample';
 import type { Theme } from 'react-native-paper/types';
 
 type Props = {
@@ -32,6 +32,7 @@ type Props = {
 };
 
 export const examples = {
+  appbar: AppbarExample,
   bottomNavigation: BottomNavigationExample,
   button: ButtonExample,
   card: CardExample,
@@ -52,7 +53,6 @@ export const examples = {
   switch: SwitchExample,
   text: TextExample,
   textInput: TextInputExample,
-  toolbar: ToolbarExample,
 };
 
 const data = Object.keys(examples).map(id => ({ id, data: examples[id] }));

@@ -19,7 +19,7 @@ type Props = {
   /**
    * Text for the title.
    */
-  title: string | React.Node,
+  title: React.Node,
   /**
    * Style for the title.
    */
@@ -27,7 +27,7 @@ type Props = {
   /**
    * Text for the subtitle.
    */
-  subtitle?: string | React.Node,
+  subtitle?: React.Node,
   /**
    * Style for the subtitle.
    */
@@ -40,10 +40,10 @@ type Props = {
 };
 
 /**
- * A component used to display a title and optional subtitle in a toolbar.
+ * A component used to display a title and optional subtitle in a appbar.
  */
-class ToolbarContent extends React.Component<Props> {
-  static displayName = 'Toolbar.Content';
+class AppbarContent extends React.Component<Props> {
+  static displayName = 'Appbar.Content';
 
   render() {
     const {
@@ -103,4 +103,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(ToolbarContent);
+export default withTheme(AppbarContent);

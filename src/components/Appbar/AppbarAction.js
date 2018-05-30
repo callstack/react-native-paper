@@ -27,10 +27,10 @@ type Props = {
 };
 
 /**
- * A component used to display an action item in the toolbar.
+ * A component used to display an action item in the appbar.
  */
-export default class ToolbarAction extends React.Component<Props> {
-  static displayName = 'Toolbar.Action';
+export default class AppbarAction extends React.Component<Props> {
+  static displayName = 'Appbar.Action';
 
   static defaultProps = {
     size: 24,

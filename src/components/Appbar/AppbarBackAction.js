@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { View, Image, StyleSheet, Platform } from 'react-native';
 
-import ToolbarAction from './ToolbarAction';
+import AppbarAction from './AppbarAction';
 
 type Props = {
   /**
@@ -18,14 +18,14 @@ type Props = {
 };
 
 /**
- * A component used to display a back button in the toolbar.
+ * A component used to display a back button in the appbar.
  */
-class ToolbarBackAction extends React.Component<Props> {
-  static displayName = 'Toolbar.BackAction';
+class AppbarBackAction extends React.Component<Props> {
+  static displayName = 'Appbar.BackAction';
 
   render() {
     return (
-      <ToolbarAction
+      <AppbarAction
         {...this.props}
         icon={
           Platform.OS === 'ios'
@@ -56,4 +56,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ToolbarBackAction;
+export default AppbarBackAction;
