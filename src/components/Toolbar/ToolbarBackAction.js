@@ -1,10 +1,9 @@
 /* @flow */
 
 import * as React from 'react';
-import { Platform } from 'react-native';
+import { View, Image, StyleSheet, Platform } from 'react-native';
 
 import ToolbarAction from './ToolbarAction';
-import Icon from '../Icon';
 
 type Props = {
   /**
@@ -25,15 +24,36 @@ class ToolbarBackAction extends React.Component<Props> {
   static displayName = 'Toolbar.BackAction';
 
   render() {
-    const icon =
-      Platform.OS === 'ios'
-        ? ({ color }) => (
-            <Icon source="keyboard-arrow-left" size={36} color={color} />
-          )
-        : 'arrow-back';
-
-    return <ToolbarAction {...this.props} size={24} icon={icon} />;
+    return (
+      <ToolbarAction
+        {...this.props}
+        icon={
+          Platform.OS === 'ios'
+            ? ({ size, color }) => (
+                <View style={[styles.wrapper, { width: size, height: size }]}>
+                  <Image
+                    source={require('../../assets/back-chevron.png')}
+                    style={[styles.icon, { tintColor: color }]}
+                  />
+                </View>
+              )
+            : 'arrow-back'
+        }
+      />
+    );
   }
 }
+
+const styles = StyleSheet.create({
+  wrapper: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  icon: {
+    height: 21,
+    width: 21,
+    resizeMode: 'contain',
+  },
+});
 
 export default ToolbarBackAction;

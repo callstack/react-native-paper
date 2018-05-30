@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 import color from 'color';
 
 import Text from '../Typography/Text';
@@ -66,7 +66,10 @@ class ToolbarContent extends React.Component<Props> {
       <View style={[styles.container, style]}>
         <Text
           style={[
-            { color: titleColor, fontFamily: fonts.medium },
+            {
+              color: titleColor,
+              fontFamily: Platform.OS === 'ios' ? fonts.regular : fonts.medium,
+            },
             styles.title,
             titleStyle,
           ]}
@@ -93,10 +96,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   title: {
-    fontSize: 20,
+    fontSize: Platform.OS === 'ios' ? 17 : 20,
   },
   subtitle: {
-    fontSize: 14,
+    fontSize: Platform.OS === 'ios' ? 11 : 14,
   },
 });
 

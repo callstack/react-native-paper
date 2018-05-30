@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import color from 'color';
-
 import { black } from '../../styles/colors';
 import TouchableIcon from '../TouchableIcon';
 import type { IconSource } from '../Icon';
