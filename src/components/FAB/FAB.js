@@ -102,13 +102,13 @@ class FAB extends React.Component<Props> {
     return (
       <AnimatedSurface
         {...rest}
-        style={[{ backgroundColor, elevation: 12 }, styles.container, style]}
+        style={[{ backgroundColor }, styles.container, style]}
       >
         <TouchableRipple
           borderless
           onPress={onPress}
           rippleColor={rippleColor}
-          style={styles.container}
+          style={styles.touchable}
         >
           <View
             style={[
@@ -137,6 +137,10 @@ class FAB extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
+    borderRadius: 28,
+    elevation: 12,
+  },
+  touchable: {
     borderRadius: 28,
   },
   standard: {

@@ -28,7 +28,7 @@ export { default as Searchbar } from './components/Searchbar';
 export { default as Snackbar } from './components/Snackbar';
 export { default as Surface } from './components/Surface';
 export { default as Switch } from './components/Switch';
-export { default as Toolbar } from './components/Toolbar/Toolbar';
+export { default as Appbar } from './components/Appbar/Appbar';
 export { default as TouchableRipple } from './components/TouchableRipple';
 export { default as TextInput } from './components/TextInput';
 

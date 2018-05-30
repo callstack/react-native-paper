@@ -4,9 +4,10 @@ import * as React from 'react';
 import { View, Platform, StyleSheet } from 'react-native';
 import {
   Colors,
+  Appbar,
+  FAB,
   Switch,
   Paragraph,
-  Toolbar,
   withTheme,
 } from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
@@ -25,28 +26,28 @@ const initialParams = {
 
 const MORE_ICON = Platform.OS === 'ios' ? 'more-horiz' : 'more-vert';
 
-class ToolbarExample extends React.Component<Props> {
-  static title = 'Toolbar';
+class AppbarExample extends React.Component<Props> {
+  static title = 'Appbar';
   static navigationOptions = ({ navigation }) => {
     const params = { ...initialParams, ...navigation.state.params };
 
     return {
       header: (
-        <Toolbar>
+        <Appbar.Header>
           {params.showLeftIcon && (
-            <Toolbar.BackAction onPress={() => navigation.goBack()} />
+            <Appbar.BackAction onPress={() => navigation.goBack()} />
           )}
-          <Toolbar.Content
+          <Appbar.Content
             title="Title"
             subtitle={params.showSubtitle ? 'Subtitle' : null}
           />
           {params.showSearchIcon && (
-            <Toolbar.Action icon="search" onPress={() => {}} />
+            <Appbar.Action icon="search" onPress={() => {}} />
           )}
           {params.showMoreIcon && (
-            <Toolbar.Action icon={MORE_ICON} onPress={() => {}} />
+            <Appbar.Action icon={MORE_ICON} onPress={() => {}} />
           )}
-        </Toolbar>
+        </Appbar.Header>
       ),
     };
   };
@@ -113,6 +114,13 @@ class ToolbarExample extends React.Component<Props> {
             }
           />
         </View>
+        <Appbar style={styles.bottom}>
+          <Appbar.Action icon="archive" onPress={() => {}} />
+          <Appbar.Action icon="mail" onPress={() => {}} />
+          <Appbar.Action icon="label" onPress={() => {}} />
+          <Appbar.Action icon="delete" onPress={() => {}} />
+        </Appbar>
+        <FAB icon="reply" onPress={() => {}} style={styles.fab} />
       </View>
     );
   }
@@ -131,6 +139,17 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 16,
   },
+  bottom: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  fab: {
+    position: 'absolute',
+    right: 16,
+    bottom: 28,
+  },
 });
 
-export default withTheme(ToolbarExample);
+export default withTheme(AppbarExample);
