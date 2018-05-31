@@ -166,7 +166,9 @@ class FABGroup extends React.Component<Props, State> {
     }
   }
 
-  _toggleOpen = () => this.props.onStateChange({ open: !this.props.open });
+  _close = () => this.props.onStateChange({ open: false });
+
+  _toggle = () => this.props.onStateChange({ open: !this.props.open });
 
   render() {
     const { actions, icon, open, onPress, theme } = this.props;
@@ -201,7 +203,7 @@ class FABGroup extends React.Component<Props, State> {
       <ThemedPortal>
         {open ? <StatusBar barStyle="light-content" /> : null}
         <View pointerEvents="box-none" style={styles.container}>
-          <TouchableWithoutFeedback onPress={this._toggleOpen}>
+          <TouchableWithoutFeedback onPress={this._close}>
             <Animated.View
               pointerEvents={open ? 'auto' : 'none'}
               style={[
@@ -233,7 +235,10 @@ class FABGroup extends React.Component<Props, State> {
                           transform: [{ scale: scales[i] }],
                         },
                       ]}
-                      onPress={it.onPress}
+                      onPress={() => {
+                        it.onPress();
+                        this._close();
+                      }}
                     >
                       <Text style={{ color: labelColor }}>{it.label}</Text>
                     </Card>
@@ -248,7 +253,10 @@ class FABGroup extends React.Component<Props, State> {
                         backgroundColor: theme.colors.surface,
                       },
                     ]}
-                    onPress={it.onPress}
+                    onPress={() => {
+                      it.onPress();
+                      this._close();
+                    }}
                   />
                 </View>
               </Animated.View>
@@ -257,7 +265,7 @@ class FABGroup extends React.Component<Props, State> {
           <FAB
             onPress={() => {
               onPress && onPress();
-              this._toggleOpen();
+              this._toggle();
             }}
             icon={icon}
             color={this.props.color}
