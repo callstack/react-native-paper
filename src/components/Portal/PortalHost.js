@@ -108,12 +108,13 @@ export default class PortalHost extends React.Component<Props> {
           }}
         >
           {this.props.children}
+      
+          <PortalManager
+            ref={c => {
+              this._manager = c;
+            }}
+          />
         </PortalContext.Provider>
-        <PortalManager
-          ref={c => {
-            this._manager = c;
-          }}
-        />
       </View>
     );
   }
