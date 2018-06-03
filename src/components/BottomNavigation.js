@@ -141,6 +141,15 @@ type Props<T> = {
    */
   getLabelText?: (props: { route: T }) => string,
   /**
+   * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
+   * Uses `route.accessibilityLabel` if specified, otherwise uses the tab label by default.
+   */
+  getAccessibilityLabel?: (props: { route: T }) => ?string,
+  /**
+   * Get the id to locate this tab button in tests, uses `route.testID` by default.
+   */
+  getTestID?: (props: { route: T }) => ?string,
+  /**
    * Get color for the tab, uses `route.color` by default.
    */
   getColor?: (props: { route: T }) => string,
@@ -453,6 +462,8 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
       renderLabel,
       getLabelText = ({ route }: Object) => route.title,
       getColor = ({ route }: Object) => route.color,
+      getAccessibilityLabel = ({ route }: Object) => route.accessibilityLabel,
+      getTestID = ({ route }: Object) => route.testID,
       activeTintColor,
       inactiveTintColor,
       barStyle,
@@ -516,19 +527,21 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
               return null;
             }
 
-            const focused = this.state.tabs[index];
-            const opacity = focused;
-
+            const opacity = this.state.tabs[index];
             const top = this.state.offsets[index].interpolate({
               inputRange: [0, 1],
               outputRange: [0, FAR_FAR_AWAY],
             });
 
+            const focused = navigationState.index === index;
+
             return (
               <Animated.View
                 key={route.key}
-                pointerEvents={
-                  navigationState.index === index ? 'auto' : 'none'
+                pointerEvents={focused ? 'auto' : 'none'}
+                accessibilityElementsHidden={!focused}
+                importantForAccessibility={
+                  focused ? 'auto' : 'no-hide-descendants'
                 }
                 style={[StyleSheet.absoluteFill, { opacity }]}
                 collapsable={false}
@@ -589,12 +602,12 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
               />
             ) : null}
             {routes.map((route, index) => {
-              const focused = this.state.tabs[index];
+              const active = this.state.tabs[index];
 
               // Scale up in the label
               const scale =
                 labeled && shifting
-                  ? focused.interpolate({
+                  ? active.interpolate({
                       inputRange: [0, 1],
                       outputRange: [0.5, 1],
                     })
@@ -603,7 +616,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
               // Move down the icon to account for no-label in shifting and smaller label in non-shifting.
               const translateY = labeled
                 ? shifting
-                  ? focused.interpolate({
+                  ? active.interpolate({
                       inputRange: [0, 1],
                       outputRange: [10, 0],
                     })
@@ -613,11 +626,20 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
               // We render the active icon and label on top of inactive ones and cross-fade them on change.
               // This trick gives the illusion that we are animating between active and inactive colors.
               // This is to ensure that we can use native driver, as colors cannot be animated with native driver.
-              const activeOpacity = focused;
-              const inactiveOpacity = focused.interpolate({
+              const activeOpacity = active;
+              const inactiveOpacity = active.interpolate({
                 inputRange: [0, 1],
                 outputRange: [1, 0],
               });
+
+              let accessibilityLabel = getAccessibilityLabel({
+                route,
+              });
+
+              accessibilityLabel =
+                typeof accessibilityLabel !== 'undefined'
+                  ? accessibilityLabel
+                  : getLabelText({ route });
 
               return (
                 <Touchable
@@ -625,6 +647,10 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                   borderless
                   rippleColor={touchColor}
                   onPress={() => this._handleTabPress(index)}
+                  testID={getTestID({ route })}
+                  accessibilityLabel={accessibilityLabel}
+                  accessibilityTraits="button"
+                  accessibilityComponentType="button"
                   style={styles.item}
                 >
                   <View pointerEvents="none">
