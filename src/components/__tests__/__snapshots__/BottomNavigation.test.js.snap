@@ -115,6 +115,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 10,
@@ -204,9 +205,8 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
               }
             }
           />
@@ -236,6 +236,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 10,
@@ -325,9 +326,8 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
               }
             }
           />
@@ -357,6 +357,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 10,
@@ -446,9 +447,8 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
               }
             }
           />
@@ -594,6 +594,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 10,
@@ -683,9 +684,8 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
               }
             }
           />
@@ -715,6 +715,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 10,
@@ -804,9 +805,8 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
               }
             }
           />
@@ -836,6 +836,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 10,
@@ -925,9 +926,8 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
               }
             }
           />
@@ -1053,6 +1053,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 0,
@@ -1104,9 +1105,8 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
                 "transform": Array [
                   Object {
                     "scale": 1,
@@ -1174,6 +1174,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 0,
@@ -1225,9 +1226,8 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
                 "transform": Array [
                   Object {
                     "scale": 1,
@@ -1295,6 +1295,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 0,
@@ -1346,9 +1347,8 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
                 "transform": Array [
                   Object {
                     "scale": 1,
@@ -1532,6 +1532,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 0,
@@ -1583,9 +1584,8 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
                 "transform": Array [
                   Object {
                     "scale": 1,
@@ -1637,6 +1637,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 10,
@@ -1688,9 +1689,8 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
                 "transform": Array [
                   Object {
                     "scale": 0.5,
@@ -1742,6 +1742,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 10,
@@ -1793,9 +1794,8 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
                 "transform": Array [
                   Object {
                     "scale": 0.5,
@@ -1847,6 +1847,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 10,
@@ -1898,9 +1899,8 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
                 "transform": Array [
                   Object {
                     "scale": 0.5,
@@ -1952,6 +1952,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 10,
@@ -2003,9 +2004,8 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
                 "transform": Array [
                   Object {
                     "scale": 0.5,
@@ -2153,6 +2153,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 0,
@@ -2242,9 +2243,8 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
                 "transform": Array [
                   Object {
                     "scale": 1,
@@ -2392,6 +2392,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 0,
@@ -2481,9 +2482,8 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
                 "transform": Array [
                   Object {
                     "scale": 1,
@@ -2631,6 +2631,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 0,
@@ -2720,9 +2721,8 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
                 "transform": Array [
                   Object {
                     "scale": 1,
@@ -2986,6 +2986,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 0,
@@ -3075,9 +3076,8 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
                 "transform": Array [
                   Object {
                     "scale": 1,
@@ -3169,6 +3169,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 10,
@@ -3258,9 +3259,8 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
                 "transform": Array [
                   Object {
                     "scale": 0.5,
@@ -3352,6 +3352,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 10,
@@ -3441,9 +3442,8 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
                 "transform": Array [
                   Object {
                     "scale": 0.5,
@@ -3631,6 +3631,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 0,
@@ -3720,9 +3721,8 @@ exports[`renders non-shifting bottom navigation 1`] = `
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
                 "transform": Array [
                   Object {
                     "scale": 1,
@@ -3870,6 +3870,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 0,
@@ -3959,9 +3960,8 @@ exports[`renders non-shifting bottom navigation 1`] = `
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
                 "transform": Array [
                   Object {
                     "scale": 1,
@@ -4109,6 +4109,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 0,
@@ -4198,9 +4199,8 @@ exports[`renders non-shifting bottom navigation 1`] = `
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
                 "transform": Array [
                   Object {
                     "scale": 1,
@@ -4464,6 +4464,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 0,
@@ -4553,9 +4554,8 @@ exports[`renders shifting bottom navigation 1`] = `
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
                 "transform": Array [
                   Object {
                     "scale": 1,
@@ -4647,6 +4647,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 10,
@@ -4736,9 +4737,8 @@ exports[`renders shifting bottom navigation 1`] = `
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
                 "transform": Array [
                   Object {
                     "scale": 0.5,
@@ -4830,6 +4830,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 10,
@@ -4919,9 +4920,8 @@ exports[`renders shifting bottom navigation 1`] = `
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
                 "transform": Array [
                   Object {
                     "scale": 0.5,
@@ -5013,6 +5013,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 10,
@@ -5102,9 +5103,8 @@ exports[`renders shifting bottom navigation 1`] = `
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
                 "transform": Array [
                   Object {
                     "scale": 0.5,
@@ -5196,6 +5196,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 "alignSelf": "center",
                 "height": 24,
                 "marginHorizontal": 12,
+                "marginTop": 2,
                 "transform": Array [
                   Object {
                     "translateY": 10,
@@ -5285,9 +5286,8 @@ exports[`renders shifting bottom navigation 1`] = `
           <View
             style={
               Object {
-                "height": 18,
-                "marginTop": 2,
-                "paddingBottom": 4,
+                "height": 16,
+                "paddingBottom": 2,
                 "transform": Array [
                   Object {
                     "scale": 0.5,

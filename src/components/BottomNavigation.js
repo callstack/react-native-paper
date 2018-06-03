@@ -779,6 +779,7 @@ const styles = StyleSheet.create({
   iconContainer: {
     height: 24,
     width: 24,
+    marginTop: 2,
     marginHorizontal: 12,
     alignSelf: 'center',
   },
@@ -787,9 +788,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   labelContainer: {
-    height: 18,
-    marginTop: 2,
-    paddingBottom: 4,
+    height: 16,
+    paddingBottom: 2,
   },
   labelWrapper: {
     ...StyleSheet.absoluteFillObject,
