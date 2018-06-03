@@ -103,9 +103,16 @@ class Appbar extends React.Component<Props> {
 
     if (Platform.OS === 'ios') {
       childrenArray.forEach(child => {
-        if (!isAppbarContentFound && child.type !== AppbarContent) {
+        if (
+          !isAppbarContentFound &&
+          React.isValidElement(child) &&
+          child.type !== AppbarContent
+        ) {
           leftActions++;
-        } else if (child.type === AppbarContent) {
+        } else if (
+          React.isValidElement(child) &&
+          child.type === AppbarContent
+        ) {
           isAppbarContentFound = true;
         } else {
           rightActions++;
@@ -130,27 +137,29 @@ class Appbar extends React.Component<Props> {
 
     return (
       <View style={[{ backgroundColor }, styles.appbar, restStyle]} {...rest}>
-        {childrenArray.filter(Boolean).map((child: any, i) => {
-          const props: { color: ?string, style?: any } = {
-            color:
-              typeof child.props.color !== 'undefined'
-                ? child.props.color
-                : isDark
-                  ? white
-                  : black,
-          };
+        {childrenArray
+          .filter(child => React.isValidElement(child))
+          .map((child: any, i) => {
+            const props: { color: ?string, style?: any } = {
+              color:
+                typeof child.props.color !== 'undefined'
+                  ? child.props.color
+                  : isDark
+                    ? white
+                    : black,
+            };
 
-          if (child.type === AppbarContent) {
-            // Extra margin between left icon and AppbarContent
-            props.style = [
-              { marginHorizontal: i === 0 ? 0 : 8 },
-              centerIos && { alignItems: 'center' },
-              child.props.style,
-            ];
-          }
+            if (child.type === AppbarContent) {
+              // Extra margin between left icon and AppbarContent
+              props.style = [
+                { marginHorizontal: i === 0 ? 0 : 8 },
+                centerIos && { alignItems: 'center' },
+                child.props.style,
+              ];
+            }
 
-          return React.cloneElement(child, props);
-        })}
+            return React.cloneElement(child, props);
+          })}
       </View>
     );
   }

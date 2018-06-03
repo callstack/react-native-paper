@@ -38,10 +38,8 @@ class CardActions extends React.Component<Props> {
         {React.Children.map(
           this.props.children,
           child =>
-            typeof child === 'object' && child !== null
-              ? /* $FlowFixMe */
-                React.cloneElement(child, {
-                  /* $FlowFixMe */
+            React.isValidElement(child)
+              ? React.cloneElement(child, {
                   compact: child.props.compact !== false,
                 })
               : child

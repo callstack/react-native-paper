@@ -95,24 +95,28 @@ export default class Dialog extends React.Component<Props, void> {
     const { children, dismissable, onDismiss, visible, style } = this.props;
 
     const childrenArray = React.Children.toArray(children);
-    /* $FlowFixMe */
-    const title = childrenArray.find(child => child.type === DialogTitle);
+    const title = childrenArray.find(
+      child => React.isValidElement(child) && child.type === DialogTitle
+    );
     const actionBtnsChildren = childrenArray.filter(
-      /* $FlowFixMe */
-      child => child && child.type === DialogActions
+      child => React.isValidElement(child) && child.type === DialogActions
     );
     const restOfChildren = childrenArray.filter(
       child =>
-        /* $FlowFixMe */
-        child && child.type !== DialogActions && child.type !== DialogTitle
+        React.isValidElement(child) &&
+        child.type !== DialogActions &&
+        child.type !== DialogTitle
     );
     let restOfChildrenWithoutTitle = restOfChildren;
     if (!title) {
       let found = false;
       restOfChildrenWithoutTitle = restOfChildren.map(child => {
-        if (child.type === DialogContent && !found) {
+        if (
+          React.isValidElement(child) &&
+          child.type === DialogContent &&
+          !found
+        ) {
           found = true;
-          /* $FlowFixMe */
           return React.cloneElement(child, {
             style: { paddingTop: 24 },
           });

@@ -116,8 +116,9 @@ class Card extends React.Component<Props, State> {
     const siblings = React.Children.map(
       children,
       child =>
-        /* $FlowFixMe */
-        typeof child === 'object' && child.type ? child.type.displayName : null
+        React.isValidElement(child) && child.type
+          ? child.type.displayName
+          : null
     );
     return (
       <AnimatedSurface style={[{ borderRadius: roundness, elevation }, style]}>
@@ -132,9 +133,8 @@ class Card extends React.Component<Props, State> {
             {React.Children.map(
               children,
               (child, index) =>
-                typeof child === 'object' && child !== null
-                  ? /* $FlowFixMe */
-                    React.cloneElement(child, {
+                React.isValidElement(child)
+                  ? React.cloneElement(child, {
                       index,
                       total,
                       siblings,
