@@ -1,13 +1,11 @@
 /* @flow */
 
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
 import PortalManager from './PortalManager';
 import createReactContext, { type Context } from 'create-react-context';
 
 type Props = {
   children: React.Node,
-  style?: any,
 };
 
 type Operation =
@@ -95,33 +93,20 @@ export default class PortalHost extends React.Component<Props> {
 
   render() {
     return (
-      <View
-        pointerEvents="box-none"
-        {...this.props}
-        style={[styles.container, this.props.style]}
+      <PortalContext.Provider
+        value={{
+          mount: this._mount,
+          update: this._update,
+          unmount: this._unmount,
+        }}
       >
-        <PortalContext.Provider
-          value={{
-            mount: this._mount,
-            update: this._update,
-            unmount: this._unmount,
+        {this.props.children}
+        <PortalManager
+          ref={c => {
+            this._manager = c;
           }}
-        >
-          {this.props.children}
-      
-          <PortalManager
-            ref={c => {
-              this._manager = c;
-            }}
-          />
-        </PortalContext.Provider>
-      </View>
+        />
+      </PortalContext.Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

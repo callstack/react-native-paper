@@ -1,24 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders portal with siblings 1`] = `
-<View
-  pointerEvents="box-none"
-  style={
-    Array [
-      Object {
-        "flex": 1,
-      },
-      undefined,
-    ]
-  }
->
+Array [
   <Text
     accessible={true}
     allowFontScaling={true}
     ellipsizeMode="tail"
   >
     Outside content
-  </Text>
+  </Text>,
   <View
     pointerEvents="box-none"
     style={
@@ -38,6 +28,6 @@ exports[`renders portal with siblings 1`] = `
     >
       Portal content
     </Text>
-  </View>
-</View>
+  </View>,
+]
 `;
