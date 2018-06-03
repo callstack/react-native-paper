@@ -26,7 +26,9 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
     }
   >
     <View
+      accessibilityElementsHidden={false}
       collapsable={false}
+      importantForAccessibility="auto"
       pointerEvents="auto"
       removeClippedSubviews={false}
       style={
@@ -121,6 +123,9 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         }
       />
       <View
+        accessibilityComponentType="button"
+        accessibilityLabel="Route: 0"
+        accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -246,6 +251,9 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         </View>
       </View>
       <View
+        accessibilityComponentType="button"
+        accessibilityLabel="Route: 1"
+        accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -371,6 +379,9 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         </View>
       </View>
       <View
+        accessibilityComponentType="button"
+        accessibilityLabel="Route: 2"
+        accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -526,7 +537,9 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
     }
   >
     <View
+      accessibilityElementsHidden={false}
       collapsable={false}
+      importantForAccessibility="auto"
       pointerEvents="auto"
       removeClippedSubviews={false}
       style={
@@ -644,6 +657,9 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         }
       />
       <View
+        accessibilityComponentType="button"
+        accessibilityLabel="Route: 0"
+        accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -734,6 +750,9 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         </View>
       </View>
       <View
+        accessibilityComponentType="button"
+        accessibilityLabel="Route: 1"
+        accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -824,6 +843,9 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         </View>
       </View>
       <View
+        accessibilityComponentType="button"
+        accessibilityLabel="Route: 2"
+        accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -914,6 +936,9 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         </View>
       </View>
       <View
+        accessibilityComponentType="button"
+        accessibilityLabel="Route: 3"
+        accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -1004,6 +1029,9 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         </View>
       </View>
       <View
+        accessibilityComponentType="button"
+        accessibilityLabel="Route: 4"
+        accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -1124,7 +1152,9 @@ exports[`renders non-shifting bottom navigation 1`] = `
     }
   >
     <View
+      accessibilityElementsHidden={false}
       collapsable={false}
+      importantForAccessibility="auto"
       pointerEvents="auto"
       removeClippedSubviews={false}
       style={
@@ -1219,6 +1249,9 @@ exports[`renders non-shifting bottom navigation 1`] = `
         }
       />
       <View
+        accessibilityComponentType="button"
+        accessibilityLabel="Route: 0"
+        accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -1462,6 +1495,9 @@ exports[`renders non-shifting bottom navigation 1`] = `
         </View>
       </View>
       <View
+        accessibilityComponentType="button"
+        accessibilityLabel="Route: 1"
+        accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -1705,6 +1741,9 @@ exports[`renders non-shifting bottom navigation 1`] = `
         </View>
       </View>
       <View
+        accessibilityComponentType="button"
+        accessibilityLabel="Route: 2"
+        accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -1978,7 +2017,9 @@ exports[`renders shifting bottom navigation 1`] = `
     }
   >
     <View
+      accessibilityElementsHidden={false}
       collapsable={false}
+      importantForAccessibility="auto"
       pointerEvents="auto"
       removeClippedSubviews={false}
       style={
@@ -2096,6 +2137,9 @@ exports[`renders shifting bottom navigation 1`] = `
         }
       />
       <View
+        accessibilityComponentType="button"
+        accessibilityLabel="Route: 0"
+        accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -2245,6 +2289,9 @@ exports[`renders shifting bottom navigation 1`] = `
         </View>
       </View>
       <View
+        accessibilityComponentType="button"
+        accessibilityLabel="Route: 1"
+        accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -2394,6 +2441,9 @@ exports[`renders shifting bottom navigation 1`] = `
         </View>
       </View>
       <View
+        accessibilityComponentType="button"
+        accessibilityLabel="Route: 2"
+        accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -2543,6 +2593,9 @@ exports[`renders shifting bottom navigation 1`] = `
         </View>
       </View>
       <View
+        accessibilityComponentType="button"
+        accessibilityLabel="Route: 3"
+        accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -2692,6 +2745,9 @@ exports[`renders shifting bottom navigation 1`] = `
         </View>
       </View>
       <View
+        accessibilityComponentType="button"
+        accessibilityLabel="Route: 4"
+        accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}

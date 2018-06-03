@@ -136,6 +136,15 @@ type Props<T> = {
    */
   getLabelText?: (props: { route: T }) => string,
   /**
+   * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
+   * The label for the tab is used as the accessibility label by default.
+   */
+  getAccessibilityLabel?: (props: { route: T }) => ?string,
+  /**
+   * Get the id to locate this tab button in tests.
+   */
+  getTestID?: (props: { route: T }) => ?string,
+  /**
    * Get color for the tab, uses `route.color` by default.
    */
   getColor?: (props: { route: T }) => string,
@@ -483,6 +492,8 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
       renderLabel,
       getLabelText = ({ route }: Object) => route.title,
       getColor = ({ route }: Object) => route.color,
+      getAccessibilityLabel = ({ route }: Object) => route.accessibilityLabel,
+      getTestID = ({ route }: Object) => route.testID,
       barStyle,
       style,
       theme,
@@ -570,6 +581,12 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                 key={route.key}
                 pointerEvents={
                   navigationState.index === index ? 'auto' : 'none'
+                }
+                accessibilityElementsHidden={navigationState.index !== index}
+                importantForAccessibility={
+                  navigationState.index === index
+                    ? 'auto'
+                    : 'no-hide-descendants'
                 }
                 style={[
                   StyleSheet.absoluteFill,
@@ -704,10 +721,23 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
               const inactiveIconOpacity = inactiveOpacity;
               const inactiveLabelOpacity = inactiveOpacity;
 
+              let accessibilityLabel = getAccessibilityLabel({
+                route,
+              });
+
+              accessibilityLabel =
+                typeof accessibilityLabel !== 'undefined'
+                  ? accessibilityLabel
+                  : getLabelText({ route });
+
               return (
                 <TouchableWithoutFeedback
                   key={route.key}
                   onPress={() => this._handleTabPress(index)}
+                  testID={getTestID({ route })}
+                  accessibilityLabel={accessibilityLabel}
+                  accessibilityTraits="button"
+                  accessibilityComponentType="button"
                 >
                   <Animated.View
                     style={[styles.item, { transform: [{ translateX }] }]}
