@@ -27,6 +27,7 @@ exports[`renders list item with avatar 1`] = `
     }
   >
     <View
+      pointerEvents="box-none"
       style={
         Array [
           Object {
@@ -48,6 +49,7 @@ exports[`renders list item with avatar 1`] = `
       </Text>
     </View>
     <View
+      pointerEvents="none"
       style={
         Array [
           Object {
@@ -138,6 +140,7 @@ exports[`renders list item with avatar and icon 1`] = `
     }
   >
     <View
+      pointerEvents="box-none"
       style={
         Array [
           Object {
@@ -163,6 +166,7 @@ exports[`renders list item with avatar and icon 1`] = `
       </Text>
     </View>
     <View
+      pointerEvents="none"
       style={
         Array [
           Object {
@@ -269,6 +273,7 @@ exports[`renders list item with avatar and icon 1`] = `
       </Text>
     </View>
     <View
+      pointerEvents="box-none"
       style={
         Array [
           Object {
@@ -338,6 +343,7 @@ exports[`renders list item with icon 1`] = `
     }
   >
     <View
+      pointerEvents="box-none"
       style={
         Array [
           Object {
@@ -376,6 +382,7 @@ exports[`renders list item with icon 1`] = `
       </Text>
     </View>
     <View
+      pointerEvents="none"
       style={
         Array [
           Object {
@@ -466,6 +473,7 @@ exports[`renders list item with title and description 1`] = `
     }
   >
     <View
+      pointerEvents="none"
       style={
         Array [
           Object {
