@@ -95,51 +95,43 @@ class Appbar extends React.Component<Props> {
           : !color(backgroundColor).light();
     }
 
-    const childrenArray = React.Children.toArray(children);
-
-    let isAppbarContentFound = false;
-    let leftActions = 0;
-    let rightActions = 0;
+    let shouldCenterContent = false;
+    let shouldAddLeftSpacing = false;
+    let shouldAddRightSpacing = false;
 
     if (Platform.OS === 'ios') {
-      childrenArray.forEach(child => {
-        if (
-          !isAppbarContentFound &&
-          React.isValidElement(child) &&
-          child.type !== AppbarContent
-        ) {
-          leftActions++;
-        } else if (
-          React.isValidElement(child) &&
-          child.type === AppbarContent
-        ) {
-          isAppbarContentFound = true;
-        } else {
-          rightActions++;
+      let hasAppbarContent = false;
+      let leftItemsCount = 0;
+      let rightItemsCount = 0;
+
+      React.Children.forEach(children, child => {
+        if (React.isValidElement(child)) {
+          if (child.type === AppbarContent) {
+            hasAppbarContent = true;
+          } else if (hasAppbarContent) {
+            rightItemsCount++;
+          } else {
+            leftItemsCount++;
+          }
         }
       });
-    }
 
-    const centerIos =
-      Platform.OS === 'ios' && (leftActions < 2 && rightActions < 2);
-
-    if (centerIos && leftActions === 0) {
-      childrenArray.unshift(
-        <View key="left-empty-icon" style={styles.emptyIcon} />
-      );
-    }
-
-    if (centerIos && rightActions === 0) {
-      childrenArray.push(
-        <View key="right-empty-icon" style={styles.emptyIcon} />
-      );
+      shouldCenterContent =
+        hasAppbarContent && (leftItemsCount < 2 && rightItemsCount < 2);
+      shouldAddLeftSpacing = shouldCenterContent && leftItemsCount === 0;
+      shouldAddRightSpacing = shouldCenterContent && rightItemsCount === 0;
     }
 
     return (
       <View style={[{ backgroundColor }, styles.appbar, restStyle]} {...rest}>
-        {childrenArray
-          .filter(child => React.isValidElement(child))
-          .map((child: any, i) => {
+        {shouldAddLeftSpacing ? <View style={styles.spacing} /> : null}
+        {React.Children.toArray(children)
+          .filter(child => child != null && typeof child !== 'boolean')
+          .map((child, i) => {
+            if (!React.isValidElement(child)) {
+              return child;
+            }
+
             const props: { color: ?string, style?: any } = {
               color:
                 typeof child.props.color !== 'undefined'
@@ -150,16 +142,17 @@ class Appbar extends React.Component<Props> {
             };
 
             if (child.type === AppbarContent) {
-              // Extra margin between left icon and AppbarContent
               props.style = [
-                { marginHorizontal: i === 0 ? 0 : 8 },
-                centerIos && { alignItems: 'center' },
+                // Since content is not first item, add extra left margin
+                i !== 0 && { marginLeft: 8 },
+                shouldCenterContent && { alignItems: 'center' },
                 child.props.style,
               ];
             }
 
             return React.cloneElement(child, props);
           })}
+        {shouldAddRightSpacing ? <View style={styles.spacing} /> : null}
       </View>
     );
   }
@@ -173,10 +166,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
     elevation: 4,
   },
-  emptyIcon: {
-    height: 36,
-    width: 36,
-    marginHorizontal: 6,
+  spacing: {
+    width: 48,
   },
 });
 
