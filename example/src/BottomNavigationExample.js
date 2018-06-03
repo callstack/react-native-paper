@@ -61,21 +61,17 @@ export default class ButtomNavigationExample extends React.Component<
     ],
   };
 
-  _handleIndexChange = index => this.setState({ index });
-
-  _renderScene = BottomNavigation.SceneMap({
-    album: PhotoGallery,
-    library: PhotoGallery,
-    favorites: PhotoGallery,
-    purchased: PhotoGallery,
-  });
-
   render() {
     return (
       <BottomNavigation
         navigationState={this.state}
-        onIndexChange={this._handleIndexChange}
-        renderScene={this._renderScene}
+        onIndexChange={index => this.setState({ index })}
+        renderScene={BottomNavigation.SceneMap({
+          album: PhotoGallery,
+          library: PhotoGallery,
+          favorites: PhotoGallery,
+          purchased: PhotoGallery,
+        })}
       />
     );
   }

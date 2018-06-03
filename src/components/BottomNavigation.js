@@ -1,4 +1,5 @@
 /* @flow */
+/* eslint-disable react/no-multi-comp */
 
 import * as React from 'react';
 import {
@@ -224,6 +225,13 @@ const Touchable =
         </TouchableWithoutFeedback>
       );
 
+class SceneComponent extends React.PureComponent<*> {
+  render() {
+    const { component, ...rest } = this.props;
+    return React.createElement(component, rest);
+  }
+}
+
 /**
  * Bottom navigation provides quick navigation between top-level views of an app with a bottom tab bar.
  * It is primarily designed for use on mobile.
@@ -281,15 +289,13 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
       jumpTo: (key: string) => mixed,
     }>,
   }) {
-    /* eslint-disable react/no-multi-comp */
-    class SceneComponent extends React.PureComponent<*> {
-      render() {
-        return React.createElement(scenes[this.props.route.key], this.props);
-      }
-    }
-
     return ({ route, jumpTo }: *) => (
-      <SceneComponent key={route.key} route={route} jumpTo={jumpTo} />
+      <SceneComponent
+        key={route.key}
+        component={scenes[route.key]}
+        route={route}
+        jumpTo={jumpTo}
+      />
     );
   }
 
