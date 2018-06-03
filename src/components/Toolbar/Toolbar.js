@@ -137,9 +137,16 @@ class Toolbar extends React.Component<Props> {
 
     if (Platform.OS === 'ios') {
       childrenArray.forEach(child => {
-        if (!isToolbarContentFound && child.type !== ToolbarContent) {
+        if (
+          !isToolbarContentFound &&
+          React.isValidElement(child) &&
+          child.type !== ToolbarContent
+        ) {
           leftActions++;
-        } else if (child.type === ToolbarContent) {
+        } else if (
+          React.isValidElement(child) &&
+          child.type === ToolbarContent
+        ) {
           isToolbarContentFound = true;
         } else {
           rightActions++;
@@ -172,25 +179,27 @@ class Toolbar extends React.Component<Props> {
         {...rest}
       >
         <View style={[{ height, marginTop: statusBarHeight }, styles.wrapper]}>
-          {childrenArray.filter(Boolean).map((child: any, i) => {
-            const props: { dark: ?boolean, style?: any } = {
-              dark:
-                typeof child.props.dark === 'undefined'
-                  ? isDark
-                  : child.props.dark,
-            };
+          {childrenArray
+            .filter(child => React.isValidElement(child))
+            .map((child: any, i) => {
+              const props: { dark: ?boolean, style?: any } = {
+                dark:
+                  typeof child.props.dark === 'undefined'
+                    ? isDark
+                    : child.props.dark,
+              };
 
-            if (child.type === ToolbarContent) {
-              // Extra margin between left icon and ToolbarContent
-              props.style = [
-                { marginHorizontal: i === 0 ? 0 : 8 },
-                centerIos && { alignItems: 'center' },
-                child.props.style,
-              ];
-            }
+              if (child.type === ToolbarContent) {
+                // Extra margin between left icon and ToolbarContent
+                props.style = [
+                  { marginHorizontal: i === 0 ? 0 : 8 },
+                  centerIos && { alignItems: 'center' },
+                  child.props.style,
+                ];
+              }
 
-            return React.cloneElement(child, props);
-          })}
+              return React.cloneElement(child, props);
+            })}
         </View>
       </Wrapper>
     );

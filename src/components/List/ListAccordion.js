@@ -154,7 +154,12 @@ class ListAccordion extends React.Component<Props, State> {
         </TouchableRipple>
         {this.state.expanded
           ? React.Children.map(children, child => {
-              if (icon && child && !child.props.icon && !child.props.avatar) {
+              if (
+                icon &&
+                React.isValidElement(child) &&
+                !child.props.icon &&
+                !child.props.avatar
+              ) {
                 return React.cloneElement(child, {
                   style: [styles.child, child.props.style],
                 });
