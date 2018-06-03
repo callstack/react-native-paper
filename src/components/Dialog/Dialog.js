@@ -94,42 +94,25 @@ export default class Dialog extends React.Component<Props, void> {
   render() {
     const { children, dismissable, onDismiss, visible, style } = this.props;
 
-    const childrenArray = React.Children.toArray(children);
-    const title = childrenArray.find(
-      child => React.isValidElement(child) && child.type === DialogTitle
-    );
-    const actionBtnsChildren = childrenArray.filter(
-      child => React.isValidElement(child) && child.type === DialogActions
-    );
-    const restOfChildren = childrenArray.filter(
-      child =>
-        React.isValidElement(child) &&
-        child.type !== DialogActions &&
-        child.type !== DialogTitle
-    );
-    let restOfChildrenWithoutTitle = restOfChildren;
-    if (!title) {
-      let found = false;
-      restOfChildrenWithoutTitle = restOfChildren.map(child => {
-        if (
-          React.isValidElement(child) &&
-          child.type === DialogContent &&
-          !found
-        ) {
-          found = true;
-          return React.cloneElement(child, {
-            style: { paddingTop: 24 },
-          });
-        }
-        return child;
-      });
-    }
     return (
       <Modal dismissable={dismissable} onDismiss={onDismiss} visible={visible}>
         <AnimatedSurface style={[styles.container, style]}>
-          {title}
-          {restOfChildrenWithoutTitle}
-          {actionBtnsChildren}
+          {React.Children.toArray(children)
+            .filter(child => child != null && typeof child !== 'boolean')
+            .map((child, i) => {
+              if (
+                i === 0 &&
+                React.isValidElement(child) &&
+                child.type === DialogContent
+              ) {
+                // Dialog content is the first item, so we add a top padding
+                return React.cloneElement(child, {
+                  style: [{ paddingTop: 24 }, child.props.style],
+                });
+              }
+
+              return child;
+            })}
         </AnimatedSurface>
       </Modal>
     );
