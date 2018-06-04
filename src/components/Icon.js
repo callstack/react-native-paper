@@ -80,6 +80,8 @@ const Icon = ({ source, color, size, ...rest }: Props) => {
         size={size}
         style={styles.icon}
         pointerEvents="none"
+        accessibilityElementsHidden
+        importantForAccessibility="no-hide-descendants"
       />
     );
   } else if (isImageSource(source)) {
@@ -95,6 +97,8 @@ const Icon = ({ source, color, size, ...rest }: Props) => {
             resizeMode: 'contain',
           },
         ]}
+        accessibilityElementsHidden
+        importantForAccessibility="no-hide-descendants"
       />
     );
   } else if (typeof source === 'function') {
