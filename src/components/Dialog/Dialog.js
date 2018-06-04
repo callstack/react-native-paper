@@ -8,12 +8,13 @@ import Paper from '../Paper';
 import DialogActions from './DialogActions';
 import DialogTitle from './DialogTitle';
 import DialogContent from './DialogContent';
+import ProgressDialog from './ProgressDialog';
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types';
 
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
-type Props = {
+type DialogProps = {
   /**
    * Determines whether clicking outside the dialog dismiss it.
    */
@@ -82,11 +83,14 @@ type Props = {
  * }
  * ```
  */
-class Dialog extends React.Component<Props, void> {
+class Dialog extends React.Component<DialogProps, void> {
   static defaultProps = {
     dismissable: true,
     visible: false,
   };
+
+  // @component ./ProgressDialog.js
+  static Progress = ProgressDialog;
 
   render() {
     const {

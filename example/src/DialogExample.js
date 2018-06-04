@@ -5,10 +5,10 @@ import { View, StyleSheet } from 'react-native';
 import { Colors, Button, withTheme } from 'react-native-paper';
 import {
   DialogWithCustomColors,
-  DialogWithLoadingIndicator,
   DialogWithLongText,
   DialogWithRadioBtns,
   UndismissableDialog,
+  ProgressDialog,
 } from './Dialogs';
 import type { Theme } from 'react-native-paper/types';
 
@@ -18,6 +18,7 @@ type State = {
   visible3: boolean,
   visible4: boolean,
   visible5: boolean,
+  visible6: boolean,
 };
 
 type Props = {
@@ -33,6 +34,7 @@ class DialogExample extends React.Component<Props, State> {
     visible3: false,
     visible4: false,
     visible5: false,
+    visible6: false,
   };
 
   _openDialog1 = () => this.setState({ visible1: true });
@@ -63,7 +65,7 @@ class DialogExample extends React.Component<Props, State> {
           Show Dialog with radio buttons
         </Button>
         <Button primary onPress={this._openDialog3}>
-          Show Dialog with loading indicator
+          Show Progress Dialog
         </Button>
         <Button primary onPress={this._openDialog4}>
           Show undismissable Dialog
@@ -73,10 +75,7 @@ class DialogExample extends React.Component<Props, State> {
         </Button>
         <DialogWithLongText visible={visible1} close={this._closeDialog1} />
         <DialogWithRadioBtns visible={visible2} close={this._closeDialog2} />
-        <DialogWithLoadingIndicator
-          visible={visible3}
-          close={this._closeDialog3}
-        />
+        <ProgressDialog visible={visible3} close={this._closeDialog3} />
         <UndismissableDialog visible={visible4} close={this._closeDialog4} />
         <DialogWithCustomColors visible={visible5} close={this._closeDialog5} />
       </View>
