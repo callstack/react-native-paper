@@ -24,6 +24,11 @@ type Props = {
    * Optional label for extended `FAB`.
    */
   label?: string,
+  /*
+   * Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.
+   * Uses `label` by default if specified.
+   */
+  accessibilityLabel?: string,
   /**
    *  Whether FAB is mini-sized, used to create visual continuity with other elements. This has no effect if `label` is specified.
    */
@@ -74,6 +79,7 @@ class FAB extends React.Component<Props> {
       small,
       icon,
       label,
+      accessibilityLabel = label,
       color: customColor,
       onPress,
       theme,
@@ -108,6 +114,9 @@ class FAB extends React.Component<Props> {
           borderless
           onPress={onPress}
           rippleColor={rippleColor}
+          accessibilityLabel={accessibilityLabel}
+          accessibilityTraits="button"
+          accessibilityComponentType="button"
           style={styles.touchable}
         >
           <View

@@ -56,8 +56,9 @@ class DialogTitle extends React.Component<Props> {
 
     return (
       <Title
-        {...rest}
+        accessibilityTraits="header"
         style={[styles.text, { color: theme.colors.text }, style]}
+        {...rest}
       >
         {children}
       </Title>

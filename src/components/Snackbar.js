@@ -136,8 +136,6 @@ class Snackbar extends React.Component<Props, State> {
     clearTimeout(this._hideTimeout);
   }
 
-  _hideTimeout: TimeoutID;
-
   _toggle = () => {
     if (this.props.visible) {
       this._show();
@@ -168,6 +166,8 @@ class Snackbar extends React.Component<Props, State> {
     }).start();
   };
 
+  _hideTimeout: TimeoutID;
+
   render() {
     const { children, visible, action, onDismiss, theme, style } = this.props;
     const { colors, roundness } = theme;
@@ -176,6 +176,7 @@ class Snackbar extends React.Component<Props, State> {
       <ThemedPortal>
         <SafeAreaView style={styles.wrapper}>
           <Animated.View
+            accessibilityLiveRegion="polite"
             style={{
               opacity: this.state.opacity,
               transform: [

@@ -24,6 +24,7 @@ type Props = {
    * An action item should contain the following properties:
    * - `icon`: icon to display (required)
    * - `label`: optional label text
+   * - `accessibilityLabel`: accessibility label for the action, uses label by default if specified
    * - `color`: custom icon color of the action item
    * - `onPress`: callback that is called when `FAB` is pressed (required)
    */
@@ -31,6 +32,7 @@ type Props = {
     icon: string,
     label?: string,
     color?: string,
+    accessibilityLabel?: string,
     onPress: () => mixed,
   }>,
   /**
@@ -38,6 +40,10 @@ type Props = {
    * You can toggle it based on whether the speed dial is open to display a different icon.
    */
   icon: IconSource,
+  /*
+   * Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.
+   */
+  accessibilityLabel?: string,
   /**
    * Custom icon color for the `FAB`.
    */
@@ -171,7 +177,14 @@ class FABGroup extends React.Component<Props, State> {
   _toggle = () => this.props.onStateChange({ open: !this.props.open });
 
   render() {
-    const { actions, icon, open, onPress, theme } = this.props;
+    const {
+      actions,
+      icon,
+      open,
+      onPress,
+      accessibilityLabel,
+      theme,
+    } = this.props;
 
     const labelColor = theme.dark
       ? theme.colors.text
@@ -239,6 +252,13 @@ class FABGroup extends React.Component<Props, State> {
                         it.onPress();
                         this._close();
                       }}
+                      accessibilityLabel={
+                        it.accessibilityLabel !== 'undefined'
+                          ? it.accessibilityLabel
+                          : it.label
+                      }
+                      accessibilityTraits="button"
+                      accessibilityComponentType="button"
                     >
                       <Text style={{ color: labelColor }}>{it.label}</Text>
                     </Card>
@@ -257,6 +277,13 @@ class FABGroup extends React.Component<Props, State> {
                       it.onPress();
                       this._close();
                     }}
+                    accessibilityLabel={
+                      typeof it.accessibilityLabel !== 'undefined'
+                        ? it.accessibilityLabel
+                        : it.label
+                    }
+                    accessibilityTraits="button"
+                    accessibilityComponentType="button"
                   />
                 </View>
               </Animated.View>
@@ -269,6 +296,9 @@ class FABGroup extends React.Component<Props, State> {
             }}
             icon={icon}
             color={this.props.color}
+            accessibilityLabel={accessibilityLabel}
+            accessibilityTraits="button"
+            accessibilityComponentType="button"
             style={styles.fab}
           />
         </View>

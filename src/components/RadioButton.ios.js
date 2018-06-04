@@ -83,6 +83,11 @@ class RadioButton extends React.Component<Props> {
                       onPress && onPress();
                     }
               }
+              accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
+              accessibilityComponentType={
+                checked ? 'radiobutton_checked' : 'radiobutton_unchecked'
+              }
+              accessibilityLiveRegion="polite"
               style={styles.container}
             >
               <View style={{ opacity: checked ? 1 : 0 }}>

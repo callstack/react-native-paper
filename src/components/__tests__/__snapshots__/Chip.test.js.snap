@@ -23,6 +23,12 @@ exports[`renders chip with icon 1`] = `
   }
 >
   <View
+    accessibilityComponentType="button"
+    accessibilityTraits={
+      Array [
+        "button",
+      ]
+    }
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -57,9 +63,11 @@ exports[`renders chip with icon 1`] = `
         }
       >
         <Text
+          accessibilityElementsHidden={true}
           accessible={true}
           allowFontScaling={false}
           ellipsizeMode="tail"
+          importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
             Array [
@@ -160,6 +168,12 @@ exports[`renders chip with onPress 1`] = `
   }
 >
   <View
+    accessibilityComponentType="button"
+    accessibilityTraits={
+      Array [
+        "button",
+      ]
+    }
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -262,6 +276,12 @@ exports[`renders deletable chip 1`] = `
   }
 >
   <View
+    accessibilityComponentType="button"
+    accessibilityTraits={
+      Array [
+        "button",
+      ]
+    }
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -296,9 +316,11 @@ exports[`renders deletable chip 1`] = `
         }
       >
         <Text
+          accessibilityElementsHidden={true}
           accessible={true}
           allowFontScaling={false}
           ellipsizeMode="tail"
+          importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
             Array [
@@ -399,6 +421,13 @@ exports[`renders outlined disabled chip 1`] = `
   }
 >
   <View
+    accessibilityComponentType="button"
+    accessibilityTraits={
+      Array [
+        "button",
+        "disabled",
+      ]
+    }
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -501,6 +530,13 @@ exports[`renders selected chip 1`] = `
   }
 >
   <View
+    accessibilityComponentType="button"
+    accessibilityTraits={
+      Array [
+        "button",
+        "selected",
+      ]
+    }
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -535,9 +571,11 @@ exports[`renders selected chip 1`] = `
         }
       >
         <Text
+          accessibilityElementsHidden={true}
           accessible={true}
           allowFontScaling={false}
           ellipsizeMode="tail"
+          importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
             Array [

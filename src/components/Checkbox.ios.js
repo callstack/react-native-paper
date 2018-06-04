@@ -63,6 +63,9 @@ class Checkbox extends React.Component<Props> {
         rippleColor={rippleColor}
         onPress={onPress}
         disabled={disabled}
+        accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
+        accessibilityComponentType="button"
+        accessibilityLiveRegion="polite"
         style={styles.container}
       >
         <View style={{ opacity: checked ? 1 : 0 }}>
