@@ -9,11 +9,12 @@ import DialogActions from './DialogActions';
 import DialogTitle from './DialogTitle';
 import DialogContent from './DialogContent';
 import withTheme from '../../core/withTheme';
+import ListDialog from './ListDialog';
 import type { Theme } from '../../types';
 
 const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
-type Props = {
+export type DialogProps = {
   /**
    * Determines whether clicking outside the dialog dismiss it.
    */
@@ -82,11 +83,14 @@ type Props = {
  * }
  * ```
  */
-class Dialog extends React.Component<Props, void> {
+class Dialog extends React.Component<DialogProps, void> {
   static defaultProps = {
     dismissable: true,
     visible: false,
   };
+
+  // @component ./ListDialog.js
+  static List = ListDialog;
 
   render() {
     const {

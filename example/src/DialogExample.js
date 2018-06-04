@@ -7,8 +7,8 @@ import {
   DialogWithCustomColors,
   DialogWithLoadingIndicator,
   DialogWithLongText,
-  DialogWithRadioBtns,
   UndismissableDialog,
+  ListDialog,
 } from './Dialogs';
 import type { Theme } from 'react-native-paper/types';
 
@@ -60,7 +60,7 @@ class DialogExample extends React.Component<Props, State> {
           Show Dialog with long text
         </Button>
         <Button primary onPress={this._openDialog2}>
-          Show Dialog with radio buttons
+          Show single select list dialog
         </Button>
         <Button primary onPress={this._openDialog3}>
           Show Dialog with loading indicator
@@ -72,7 +72,7 @@ class DialogExample extends React.Component<Props, State> {
           Show Dialog with custom colors
         </Button>
         <DialogWithLongText visible={visible1} close={this._closeDialog1} />
-        <DialogWithRadioBtns visible={visible2} close={this._closeDialog2} />
+        <ListDialog visible={visible2} close={this._closeDialog2} />
         <DialogWithLoadingIndicator
           visible={visible3}
           close={this._closeDialog3}
