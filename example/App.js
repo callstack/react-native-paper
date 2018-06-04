@@ -49,7 +49,13 @@ class PaperExample extends React.Component<{}, State> {
     return (
       <PaperProvider theme={this.state.theme}>
         <ThemeToggleContext.Provider value={this._toggleTheme}>
-          <App />
+          <App
+            persistenceKey={
+              process.env.NODE_ENV !== 'production'
+                ? 'NavigationStateDEV'
+                : null
+            }
+          />
         </ThemeToggleContext.Provider>
         <KeepAwake />
       </PaperProvider>
