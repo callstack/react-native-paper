@@ -95,6 +95,7 @@ exports[`renders chip with icon 1`] = `
             Array [
               Object {
                 "height": 24,
+                "lineHeight": 24,
                 "marginVertical": 4,
                 "textAlignVertical": "center",
               },
@@ -196,6 +197,7 @@ exports[`renders chip with onPress 1`] = `
             Array [
               Object {
                 "height": 24,
+                "lineHeight": 24,
                 "marginVertical": 4,
                 "textAlignVertical": "center",
               },
@@ -332,6 +334,7 @@ exports[`renders deletable chip 1`] = `
             Array [
               Object {
                 "height": 24,
+                "lineHeight": 24,
                 "marginVertical": 4,
                 "textAlignVertical": "center",
               },
@@ -433,6 +436,7 @@ exports[`renders outlined disabled chip 1`] = `
             Array [
               Object {
                 "height": 24,
+                "lineHeight": 24,
                 "marginVertical": 4,
                 "textAlignVertical": "center",
               },
@@ -569,6 +573,7 @@ exports[`renders selected chip 1`] = `
             Array [
               Object {
                 "height": 24,
+                "lineHeight": 24,
                 "marginVertical": 4,
                 "textAlignVertical": "center",
               },

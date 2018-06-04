@@ -260,6 +260,7 @@ const styles = StyleSheet.create({
   },
   text: {
     height: 24,
+    lineHeight: 24,
     textAlignVertical: 'center',
     marginVertical: 4,
   },
