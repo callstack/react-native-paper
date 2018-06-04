@@ -15,6 +15,10 @@ const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
 type Props = {
   /**
+   * Elevation of the element in the z-axis
+   */
+  elevation?: number,
+  /**
    * Determines whether clicking outside the dialog dismiss it.
    */
   dismissable?: boolean,
