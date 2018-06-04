@@ -100,6 +100,7 @@ class Dialog extends React.Component<Props, void> {
       visible,
       style,
       theme,
+      elevation,
     } = this.props;
 
     const backgroundColor = theme.colors.paper;
@@ -135,7 +136,7 @@ class Dialog extends React.Component<Props, void> {
       });
     }
     return (
-      <Modal dismissable={dismissable} onDismiss={onDismiss} visible={visible}>
+      <Modal dismissable={dismissable} onDismiss={onDismiss} visible={visible} elevation={elevation}>
         <AnimatedPaper style={[styles.container, { backgroundColor }, style]}>
           {title}
           {restOfChildrenWithoutTitle}
