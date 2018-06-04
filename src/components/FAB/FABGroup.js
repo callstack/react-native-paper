@@ -214,50 +214,45 @@ class FABGroup extends React.Component<Props, State> {
             />
           </TouchableWithoutFeedback>
           <View pointerEvents={open ? 'box-none' : 'none'}>
-            {actions.map((it, i) => {
-              if (it.primary) {
-                return null;
-              }
-              return (
-                <Animated.View
-                  key={i} //eslint-disable-line
-                  style={[
-                    {
-                      opacity: opacities[i],
-                    },
-                  ]}
-                  pointerEvents="box-none"
-                >
-                  <View style={styles.item} pointerEvents="box-none">
-                    {it.label && (
-                      <Card
-                        style={[
-                          styles.label,
-                          {
-                            transform: [{ scale: scales[i] }],
-                          },
-                        ]}
-                        onPress={it.onPress}
-                      >
-                        <Text style={{ color: labelColor }}>{it.label}</Text>
-                      </Card>
-                    )}
-                    <FAB
-                      small
-                      icon={it.icon}
-                      color={it.color}
+            {actions.map((it, i) => (
+              <Animated.View
+                key={i} //eslint-disable-line
+                style={[
+                  {
+                    opacity: opacities[i],
+                  },
+                ]}
+                pointerEvents="box-none"
+              >
+                <View style={styles.item} pointerEvents="box-none">
+                  {it.label && (
+                    <Card
                       style={[
+                        styles.label,
                         {
                           transform: [{ scale: scales[i] }],
-                          backgroundColor: theme.colors.surface,
                         },
                       ]}
                       onPress={it.onPress}
-                    />
-                  </View>
-                </Animated.View>
-              );
-            })}
+                    >
+                      <Text style={{ color: labelColor }}>{it.label}</Text>
+                    </Card>
+                  )}
+                  <FAB
+                    small
+                    icon={it.icon}
+                    color={it.color}
+                    style={[
+                      {
+                        transform: [{ scale: scales[i] }],
+                        backgroundColor: theme.colors.surface,
+                      },
+                    ]}
+                    onPress={it.onPress}
+                  />
+                </View>
+              </Animated.View>
+            ))}
           </View>
           <FAB
             onPress={() => {
