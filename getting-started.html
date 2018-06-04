@@ -9,17 +9,20 @@ react-native link react-native-vector-icons
 <p>If you don't want to install vector icons, you can use <a href="https://github.com/satya164/babel-plugin-optional-require">babel-plugin-optional-require</a> to opt-out.</p>
 <p>If you use CRNA or Expo, you don't need to install vector icons. But you will need to make sure that your <code>.babelrc</code> includes <code>babel-preset-expo</code>:</p>
 <pre><code class="language-json"><span class="token punctuation brackets-braces" >{</span>
-  <span class="token property" >"presets"</span><span class="token operator" >:</span> <span class="token punctuation brackets-square" >[</span><span class="token string" >"expo"</span><span class="token punctuation" >]</span>
+  <span class="token property" >"presets"</span><span class="token operator" >:</span> <span class="token punctuation brackets-square" >[</span><span class="token string" >"babel-preset-expo"</span><span class="token punctuation" >]</span>
 <span class="token punctuation brackets-braces" >}</span>
 </code></pre>
-<p>To get smaller bundle size by excluding modules you don't use, you can use our optional babel plugin. The plugin automatically rewrites the import statements so that only the modules you use are imported instead of the whole library. Add <code>react-native-paper/babel</code> to the <code>plugins</code> section in your <code>.babelrc</code>:</p>
+<p>To get smaller bundle size by excluding modules you don't use, you can use our optional babel plugin. The plugin automatically rewrites the import statements so that only the modules you use are imported instead of the whole library. Add <code>react-native-paper/babel</code> to the <code>plugins</code> section in your <code>.babelrc</code> for production environment. It should look like this:</p>
 <pre><code class="language-json"><span class="token punctuation brackets-braces" >{</span>
-  <span class="token property" >"plugins"</span><span class="token operator" >:</span> <span class="token punctuation brackets-square" >[</span>
-    <span class="token string" >"react-native-paper/babel"</span>
-  <span class="token punctuation" >]</span>
+  <span class="token property" >"presets"</span><span class="token operator" >:</span> <span class="token punctuation brackets-square" >[</span><span class="token string" >"babel-preset-react-native"</span><span class="token punctuation" >]</span><span class="token punctuation" >,</span>
+  <span class="token property" >"env"</span><span class="token operator" >:</span> <span class="token punctuation brackets-braces" >{</span>
+    <span class="token property" >"production"</span><span class="token operator" >:</span> <span class="token punctuation brackets-braces" >{</span>
+      <span class="token property" >"plugins"</span><span class="token operator" >:</span> <span class="token punctuation brackets-square" >[</span><span class="token string" >"react-native-paper/babel"</span><span class="token punctuation" >]</span>
+    <span class="token punctuation brackets-braces" >}</span>
+  <span class="token punctuation brackets-braces" >}</span>
 <span class="token punctuation brackets-braces" >}</span>
 </code></pre>
-<p>If you created your project using CRNA or Expo, you'll have an <code>env</code> section. You can create a new <code>production</code> key and place it below so it looks like this:</p>
+<p>If you created your project using CRNA or Expo, it'll look something like this:</p>
 <pre><code class="language-json"><span class="token punctuation brackets-braces" >{</span>
   <span class="token property" >"presets"</span><span class="token operator" >:</span> <span class="token punctuation brackets-square" >[</span><span class="token string" >"babel-preset-expo"</span><span class="token punctuation" >]</span><span class="token punctuation" >,</span>
   <span class="token property" >"env"</span><span class="token operator" >:</span> <span class="token punctuation brackets-braces" >{</span>
@@ -33,6 +36,11 @@ react-native link react-native-vector-icons
 <span class="token punctuation brackets-braces" >}</span>
 </code></pre>
 <p><strong>Note:</strong> The plugin only works if you are importing the library using ES2015 import statements and not with <code>require</code>.</p>
+<p>If you're using Flow for typechecking your code, you need to add the following under the <code>[options]</code> section in your <code>.flowconfig</code>:</p>
+<pre><code class="language-ini"><span class="token constant" >module.file_ext</span><span class="token attr-value" ><span class="token punctuation" >=</span>.js</span>
+<span class="token constant" >module.file_ext</span><span class="token attr-value" ><span class="token punctuation" >=</span>.android.js</span>
+<span class="token constant" >module.file_ext</span><span class="token attr-value" ><span class="token punctuation" >=</span>.ios.js</span>
+</code></pre>
 <h2>Usage</h2>
 <p>Wrap your root component in <code>Provider</code> from <code>react-native-paper</code>. If you have a vanilla React Native project, it's a good idea to add it in the component which is passed to <code>AppRegistry.registerComponent</code>. This will usually be in the <code>index.js</code> file. If you have a CRNA or Expo project, you can do this inside the exported component in the <code>App.js</code> file.</p>
 <p>Example:</p>
