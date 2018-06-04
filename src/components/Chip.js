@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Animated,
   TouchableWithoutFeedback,
+  Platform,
 } from 'react-native';
 import color from 'color';
 import Icon from './Icon';
@@ -167,7 +168,7 @@ class Chip extends React.Component<Props, State> {
         style={[
           styles.container,
           {
-            elevation: this.state.elevation,
+            elevation: Platform.OS === 'android' ? this.state.elevation : 0,
             backgroundColor: selected
               ? selectedBackgroundColor
               : backgroundColor,
