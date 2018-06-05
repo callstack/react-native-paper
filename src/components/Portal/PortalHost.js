@@ -27,14 +27,6 @@ export const PortalContext: Context<PortalMethods> = createReactContext(
  * Portal host is the component which actually renders all Portals.
  */
 export default class PortalHost extends React.Component<Props> {
-  constructor(props: Props) {
-    super(props);
-
-    this._setManager = (manager: Object) => {
-      this._manager = manager;
-    };
-  }
-
   componentDidMount() {
     const manager = this._manager;
     const queue = this._queue;
@@ -56,6 +48,10 @@ export default class PortalHost extends React.Component<Props> {
       }
     }
   }
+
+  _setManager = (manager: Object) => {
+    this._manager = manager;
+  };
 
   _mount = (children: React.Node) => {
     const key = this._nextKey++;
