@@ -47,6 +47,10 @@ type Props = {
    * Whether the chip is disabled. A disabled chip is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean,
+  /*
+   * Accessibility label for the chip. This is read by the screen reader when the user taps the chip.
+   */
+  accessibilityLabel?: string,
   /**
    * Function to execute on press.
    */
@@ -123,6 +127,7 @@ class Chip extends React.Component<Props, State> {
       avatar,
       selected,
       disabled,
+      accessibilityLabel,
       onPress,
       onClose,
       style,
@@ -163,6 +168,16 @@ class Chip extends React.Component<Props, State> {
       .rgb()
       .string();
 
+    const accessibilityTraits = ['button'];
+
+    if (selected) {
+      accessibilityTraits.push('selected');
+    }
+
+    if (disabled) {
+      accessibilityTraits.push('disabled');
+    }
+
     return (
       <AnimatedSurface
         style={[
@@ -186,6 +201,9 @@ class Chip extends React.Component<Props, State> {
           onPressOut={this._handlePressOut}
           underlayColor={selectedBackgroundColor}
           disabled={disabled}
+          accessibilityLabel={accessibilityLabel}
+          accessibilityTraits={accessibilityTraits}
+          accessibilityComponentType="button"
         >
           <View style={styles.content}>
             {avatar && !icon ? (
@@ -229,7 +247,11 @@ class Chip extends React.Component<Props, State> {
               {children}
             </Text>
             {onClose ? (
-              <TouchableWithoutFeedback onPress={onClose}>
+              <TouchableWithoutFeedback
+                onPress={onClose}
+                accessibilityTraits="button"
+                accessibilityComponentType="button"
+              >
                 <View style={styles.icon}>
                   <Icon source="cancel" size={16} color={iconColor} />
                 </View>

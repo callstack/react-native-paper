@@ -29,6 +29,8 @@ type Route = $Shape<{
   title: string,
   icon: IconSource,
   color: string,
+  accessibilityLabel: string,
+  testID: string,
 }>;
 
 type NavigationState<T: Route> = {
@@ -58,6 +60,8 @@ type Props<T> = {
    * - `title`: title of the route to use as the tab label
    * - `icon`: icon to use as the tab icon, can be a string, an image source or a react component
    * - `color`: color to use as background color for shifting bottom navigation
+   * - `accessibilityLabel`: accessibility label for the tab button
+   * - `testID`: test id for the tab button
    *
    * Example:
    *
@@ -142,7 +146,7 @@ type Props<T> = {
   getLabelText?: (props: { route: T }) => string,
   /**
    * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
-   * Uses `route.accessibilityLabel` if specified, otherwise uses the tab label by default.
+   * Uses `route.accessibilityLabel` by default.
    */
   getAccessibilityLabel?: (props: { route: T }) => ?string,
   /**
@@ -602,6 +606,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
               />
             ) : null}
             {routes.map((route, index) => {
+              const focused = navigationState.index === index;
               const active = this.state.tabs[index];
 
               // Scale up in the label
@@ -632,15 +637,6 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                 outputRange: [1, 0],
               });
 
-              let accessibilityLabel = getAccessibilityLabel({
-                route,
-              });
-
-              accessibilityLabel =
-                typeof accessibilityLabel !== 'undefined'
-                  ? accessibilityLabel
-                  : getLabelText({ route });
-
               return (
                 <Touchable
                   key={route.key}
@@ -648,8 +644,10 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                   rippleColor={touchColor}
                   onPress={() => this._handleTabPress(index)}
                   testID={getTestID({ route })}
-                  accessibilityLabel={accessibilityLabel}
-                  accessibilityTraits="button"
+                  accessibilityLabel={getAccessibilityLabel({ route })}
+                  accessibilityTraits={
+                    focused ? ['button', 'selected'] : 'button'
+                  }
                   accessibilityComponentType="button"
                   style={styles.item}
                 >

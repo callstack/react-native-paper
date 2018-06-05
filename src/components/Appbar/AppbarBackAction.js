@@ -10,6 +10,10 @@ type Props = {
    *  Custom color for back icon.
    */
   color?: string,
+  /*
+   * Accessibility label for the button. This is read by the screen reader when the user taps the button.
+   */
+  accessibilityLabel?: string,
   /**
    * Function to execute on press.
    */
@@ -22,6 +26,10 @@ type Props = {
  */
 class AppbarBackAction extends React.Component<Props> {
   static displayName = 'Appbar.BackAction';
+
+  static defaultProps = {
+    accessibilityLabel: 'Back',
+  };
 
   render() {
     return (

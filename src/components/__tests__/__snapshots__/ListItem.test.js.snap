@@ -288,9 +288,11 @@ exports[`renders list item with avatar and icon 1`] = `
       }
     >
       <Text
+        accessibilityElementsHidden={true}
         accessible={true}
         allowFontScaling={false}
         ellipsizeMode="tail"
+        importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         style={
           Array [
@@ -357,9 +359,11 @@ exports[`renders list item with icon 1`] = `
       }
     >
       <Text
+        accessibilityElementsHidden={true}
         accessible={true}
         allowFontScaling={false}
         ellipsizeMode="tail"
+        importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         style={
           Array [

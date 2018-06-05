@@ -49,7 +49,11 @@ type Props = {
   /**
    * Label text of the button.
    */
-  children: string | Array<string>,
+  children: React.Node,
+  /*
+   * Accessibility label for the button. This is read by the screen reader when the user taps the button.
+   */
+  accessibilityLabel?: string,
   /**
    * Function to execute on press.
    */
@@ -132,6 +136,7 @@ class Button extends React.Component<Props, State> {
       icon,
       color: buttonColor,
       children,
+      accessibilityLabel,
       onPress,
       style,
       theme,
@@ -218,6 +223,9 @@ class Button extends React.Component<Props, State> {
           onPress={onPress}
           onPressIn={this._handlePressIn}
           onPressOut={this._handlePressOut}
+          accessibilityLabel={accessibilityLabel}
+          accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
+          accessibilityComponentType="button"
           disabled={disabled}
           rippleColor={rippleColor}
           style={touchableStyle}

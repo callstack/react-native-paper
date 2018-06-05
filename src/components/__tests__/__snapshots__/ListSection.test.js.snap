@@ -99,9 +99,11 @@ exports[`renders list section with title 1`] = `
         }
       >
         <Text
+          accessibilityElementsHidden={true}
           accessible={true}
           allowFontScaling={false}
           ellipsizeMode="tail"
+          importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
             Array [
@@ -226,9 +228,11 @@ exports[`renders list section with title 1`] = `
         }
       >
         <Text
+          accessibilityElementsHidden={true}
           accessible={true}
           allowFontScaling={false}
           ellipsizeMode="tail"
+          importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
             Array [
@@ -367,9 +371,11 @@ exports[`renders list section without title 1`] = `
         }
       >
         <Text
+          accessibilityElementsHidden={true}
           accessible={true}
           allowFontScaling={false}
           ellipsizeMode="tail"
+          importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
             Array [
@@ -494,9 +500,11 @@ exports[`renders list section without title 1`] = `
         }
       >
         <Text
+          accessibilityElementsHidden={true}
           accessible={true}
           allowFontScaling={false}
           ellipsizeMode="tail"
+          importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
             Array [

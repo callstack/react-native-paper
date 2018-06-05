@@ -92,6 +92,8 @@ class ListAccordion extends React.Component<Props, State> {
         <TouchableRipple
           style={[styles.container, style]}
           onPress={this._handlePress}
+          accessibilityTraits="button"
+          accessibilityComponentType="button"
         >
           <View style={styles.row} pointerEvents="none">
             {icon ? (

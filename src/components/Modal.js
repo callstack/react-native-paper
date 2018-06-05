@@ -138,6 +138,8 @@ class Modal extends React.Component<Props, State> {
     return (
       <ThemedPortal>
         <Animated.View
+          accessibilityViewIsModal
+          accessibilityLiveRegion="polite"
           style={[{ opacity: this.state.opacity }, styles.wrapper]}
         >
           <View

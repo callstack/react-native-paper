@@ -156,6 +156,7 @@ class Searchbar extends React.Component<Props> {
           selectionColor={colors.primary}
           underlineColorAndroid="transparent"
           returnKeyType="search"
+          accessibilityTraits="search"
           ref={c => {
             this._root = c;
           }}
@@ -169,6 +170,8 @@ class Searchbar extends React.Component<Props> {
             rippleColor={rippleColor}
             onPress={this._handleClearPress}
             source="close"
+            accessibilityTraits="button"
+            accessibilityComponentType="button"
           />
         ) : null}
       </Surface>

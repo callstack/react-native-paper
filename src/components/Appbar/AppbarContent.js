@@ -74,6 +74,7 @@ class AppbarContent extends React.Component<Props> {
             titleStyle,
           ]}
           numberOfLines={1}
+          accessibilityTraits="header"
         >
           {title}
         </Text>

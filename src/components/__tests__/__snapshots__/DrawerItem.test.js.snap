@@ -42,9 +42,11 @@ exports[`renders DrawerItem with icon 1`] = `
       }
     >
       <Text
+        accessibilityElementsHidden={true}
         accessible={true}
         allowFontScaling={false}
         ellipsizeMode="tail"
+        importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         style={
           Array [
@@ -160,9 +162,11 @@ exports[`renders active DrawerItem 1`] = `
       }
     >
       <Text
+        accessibilityElementsHidden={true}
         accessible={true}
         allowFontScaling={false}
         ellipsizeMode="tail"
+        importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         style={
           Array [

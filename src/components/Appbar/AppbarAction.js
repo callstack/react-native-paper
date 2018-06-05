@@ -19,6 +19,10 @@ type Props = {
    * Optional icon size.
    */
   size?: number,
+  /*
+   * Accessibility label for the button. This is read by the screen reader when the user taps the button.
+   */
+  accessibilityLabel?: string,
   /**
    * Function to execute on press.
    */
@@ -44,6 +48,7 @@ export default class AppbarAction extends React.Component<Props> {
         .string(),
       icon,
       onPress,
+      accessibilityLabel,
       ...rest
     } = this.props;
 
@@ -52,6 +57,9 @@ export default class AppbarAction extends React.Component<Props> {
         onPress={onPress}
         color={iconColor}
         source={icon}
+        accessibilityLabel={accessibilityLabel}
+        accessibilityTraits="button"
+        accessibilityComponentType="button"
         {...rest}
       />
     );
