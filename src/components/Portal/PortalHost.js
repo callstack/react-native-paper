@@ -49,7 +49,7 @@ export default class PortalHost extends React.Component<Props> {
     }
   }
 
-  _setManager = (manager: Object) => {
+  _setManager = (manager: ?Object) => {
     this._manager = manager;
   };
 
