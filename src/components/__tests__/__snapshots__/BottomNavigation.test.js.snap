@@ -127,7 +127,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 "marginTop": 2,
                 "transform": Array [
                   Object {
-                    "translateY": 10,
+                    "translateY": 7,
                   },
                 ],
                 "width": 24,
@@ -254,7 +254,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 "marginTop": 2,
                 "transform": Array [
                   Object {
-                    "translateY": 10,
+                    "translateY": 7,
                   },
                 ],
                 "width": 24,
@@ -381,7 +381,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 "marginTop": 2,
                 "transform": Array [
                   Object {
-                    "translateY": 10,
+                    "translateY": 7,
                   },
                 ],
                 "width": 24,
@@ -631,7 +631,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 "marginTop": 2,
                 "transform": Array [
                   Object {
-                    "translateY": 10,
+                    "translateY": 7,
                   },
                 ],
                 "width": 24,
@@ -758,7 +758,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 "marginTop": 2,
                 "transform": Array [
                   Object {
-                    "translateY": 10,
+                    "translateY": 7,
                   },
                 ],
                 "width": 24,
@@ -885,7 +885,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 "marginTop": 2,
                 "transform": Array [
                   Object {
-                    "translateY": 10,
+                    "translateY": 7,
                   },
                 ],
                 "width": 24,
@@ -1714,7 +1714,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 "marginTop": 2,
                 "transform": Array [
                   Object {
-                    "translateY": 10,
+                    "translateY": 7,
                   },
                 ],
                 "width": 24,
@@ -1821,7 +1821,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 "marginTop": 2,
                 "transform": Array [
                   Object {
-                    "translateY": 10,
+                    "translateY": 7,
                   },
                 ],
                 "width": 24,
@@ -1928,7 +1928,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 "marginTop": 2,
                 "transform": Array [
                   Object {
-                    "translateY": 10,
+                    "translateY": 7,
                   },
                 ],
                 "width": 24,
@@ -2035,7 +2035,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 "marginTop": 2,
                 "transform": Array [
                   Object {
-                    "translateY": 10,
+                    "translateY": 7,
                   },
                 ],
                 "width": 24,
@@ -3292,7 +3292,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 "marginTop": 2,
                 "transform": Array [
                   Object {
-                    "translateY": 10,
+                    "translateY": 7,
                   },
                 ],
                 "width": 24,
@@ -3481,7 +3481,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 "marginTop": 2,
                 "transform": Array [
                   Object {
-                    "translateY": 10,
+                    "translateY": 7,
                   },
                 ],
                 "width": 24,
@@ -4820,7 +4820,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 "marginTop": 2,
                 "transform": Array [
                   Object {
-                    "translateY": 10,
+                    "translateY": 7,
                   },
                 ],
                 "width": 24,
@@ -5009,7 +5009,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 "marginTop": 2,
                 "transform": Array [
                   Object {
-                    "translateY": 10,
+                    "translateY": 7,
                   },
                 ],
                 "width": 24,
@@ -5198,7 +5198,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 "marginTop": 2,
                 "transform": Array [
                   Object {
-                    "translateY": 10,
+                    "translateY": 7,
                   },
                 ],
                 "width": 24,
@@ -5387,7 +5387,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 "marginTop": 2,
                 "transform": Array [
                   Object {
-                    "translateY": 10,
+                    "translateY": 7,
                   },
                 ],
                 "width": 24,

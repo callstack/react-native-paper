@@ -623,10 +623,10 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                 ? shifting
                   ? active.interpolate({
                       inputRange: [0, 1],
-                      outputRange: [10, 0],
+                      outputRange: [7, 0],
                     })
                   : 0
-                : 10;
+                : 7;
 
               // We render the active icon and label on top of inactive ones and cross-fade them on change.
               // This trick gives the illusion that we are animating between active and inactive colors.
