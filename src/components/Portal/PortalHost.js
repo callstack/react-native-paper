@@ -89,6 +89,10 @@ export default class PortalHost extends React.Component<Props> {
     }
   };
 
+  _setManager = (manager: ?Object) => {
+    this._manager = manager;
+  };
+
   _nextKey = 0;
   _queue: Operation[] = [];
   _manager: ?PortalManager;
@@ -103,11 +107,7 @@ export default class PortalHost extends React.Component<Props> {
         }}
       >
         {this.props.children}
-        <PortalManager
-          ref={c => {
-            this._manager = c;
-          }}
-        />
+        <PortalManager ref={this._setManager} />
       </PortalContext.Provider>
     );
   }
