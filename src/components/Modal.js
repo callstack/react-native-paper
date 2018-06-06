@@ -14,6 +14,10 @@ import ThemedPortal from './Portal/ThemedPortal';
 
 type Props = {
   /**
+   * Elevation of the element in the z-axis
+   */
+  elevation?: number,
+  /**
    * Determines whether clicking outside the modal dismiss it.
    */
   dismissable?: boolean,
@@ -134,9 +138,9 @@ class Modal extends React.Component<Props, State> {
   render() {
     if (!this.state.rendered) return null;
 
-    const { children, dismissable } = this.props;
+    const { children, dismissable, elevation } = this.props;
     return (
-      <ThemedPortal>
+      <ThemedPortal elevation={elevation}>
         <Animated.View
           style={[{ opacity: this.state.opacity }, styles.wrapper]}
         >

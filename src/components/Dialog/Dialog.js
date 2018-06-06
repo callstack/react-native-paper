@@ -15,6 +15,10 @@ const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
 type Props = {
   /**
+   * Elevation of the element in the z-axis
+   */
+  elevation?: number,
+  /**
    * Determines whether clicking outside the dialog dismiss it.
    */
   dismissable?: boolean,
@@ -96,6 +100,7 @@ class Dialog extends React.Component<Props, void> {
       visible,
       style,
       theme,
+      elevation,
     } = this.props;
 
     const backgroundColor = theme.colors.paper;
@@ -131,7 +136,7 @@ class Dialog extends React.Component<Props, void> {
       });
     }
     return (
-      <Modal dismissable={dismissable} onDismiss={onDismiss} visible={visible}>
+      <Modal dismissable={dismissable} onDismiss={onDismiss} visible={visible} elevation={elevation}>
         <AnimatedPaper style={[styles.container, { backgroundColor }, style]}>
           {title}
           {restOfChildrenWithoutTitle}
