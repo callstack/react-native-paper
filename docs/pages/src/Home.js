@@ -29,30 +29,13 @@ export default class Home extends React.Component<{}> {
               GitHub
             </a>
           </div>
-          <div {...styles(qrcodeContainer)}>
-            <div>
-              Scan with{' '}
-              <a
-                href="https://expo.io/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Expo
-              </a>{' '}
-              to try it out
-            </div>
-            <a
-              href="https://expo.io/@satya164/react-native-paper-example"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                {...styles(qrcode)}
-                src="images/expo-qr.png"
-                alt="Expo QR Code"
-              />
-            </a>
-          </div>
+          <a
+            href="https://snack.expo.io/@satya164/github.com-callstack-react-native-paper:example"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Try it out with Snack
+          </a>
         </div>
         <div {...styles(gallery)}>
           {// eslint-disable-next-line react/no-array-index-key
@@ -134,18 +117,6 @@ const secondary = css`
   &:active {
     color: #222;
   }
-`;
-
-const qrcode = css`
-  display: block;
-  width: 200px;
-  height: 200px;
-  margin: 16px;
-`;
-
-const qrcodeContainer = css`
-  margin: 16px;
-  text-align: center;
 `;
 
 const gallery = css`
