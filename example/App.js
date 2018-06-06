@@ -1,6 +1,6 @@
 /* @flow */
 
-import Expo, { KeepAwake } from 'expo';
+import { KeepAwake } from 'expo';
 import * as React from 'react';
 import { StatusBar } from 'react-native';
 import {
@@ -31,7 +31,7 @@ const App = createDrawerNavigator(
   }
 );
 
-class PaperExample extends React.Component<{}, State> {
+export default class PaperExample extends React.Component<{}, State> {
   state = {
     theme: DefaultTheme,
   };
@@ -56,5 +56,3 @@ class PaperExample extends React.Component<{}, State> {
     );
   }
 }
-
-Expo.registerRootComponent(PaperExample);

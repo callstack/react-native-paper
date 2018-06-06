@@ -9,7 +9,7 @@
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios"
   },
-  "main": "App.js",
+  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "dependencies": {
     "@expo/vector-icons": "^6.3.1",
     "color": "^2.0.1",
