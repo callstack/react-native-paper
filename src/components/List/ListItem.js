@@ -101,7 +101,7 @@ class ListItem extends React.Component<Props> {
             >
               {title}
             </Text>
-            {description && (
+            {description ? (
               <Text
                 numberOfLines={2}
                 style={[
@@ -113,7 +113,7 @@ class ListItem extends React.Component<Props> {
               >
                 {description}
               </Text>
-            )}
+            ) : null}
           </View>
           {avatar && icon ? (
             <View
