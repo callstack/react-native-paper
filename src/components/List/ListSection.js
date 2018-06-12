@@ -35,17 +35,17 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { ListSection, ListItem } from 'react-native-paper';
+ * import { ListSection } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   render() {
  *     return (
  *       <ListSection title="Some title">
- *         <ListItem
+ *         <ListSection.Item
  *           title="First Item"
  *           icon="folder"
  *        />
- *         <ListItem
+ *         <ListSection.Item
  *           title="Second Item"
  *           icon="folder"
  *        />

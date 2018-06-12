@@ -43,7 +43,7 @@ type Props = {
  * ```js
  * import * as React from 'react';
  * import { View } from 'react-native';
- * import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Paragraph } from 'react-native-paper';
+ * import { Button, Dialog, Paragraph } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
@@ -51,24 +51,24 @@ type Props = {
  *   };
  *
  *   _showDialog = () => this.setState({ visible: true });
+ *
  *   _hideDialog = () => this.setState({ visible: false });
  *
  *   render() {
- *     const { visible } = this.state;
  *     return (
  *       <View>
  *         <Button onPress={this._showDialog}>Show Dialog</Button>
  *         <Dialog
- *            visible={visible}
+ *            visible={this.state.visible}
  *            onDismiss={this._hideDialog}
  *         >
- *           <DialogTitle>Alert</DialogTitle>
- *           <DialogContent>
+ *           <Dialog.Title>Alert</Dialog.Title>
+ *           <Dialog.Content>
  *             <Paragraph>This is simple dialog</Paragraph>
- *           </DialogContent>
- *           <DialogActions>
+ *           </Dialog.Content>
+ *           <Dialog.Actions>
  *             <Button onPress={this._hideDialog}>Done</Button>
- *           </DialogActions>
+ *           </Dialog.Actions>
  *         </Dialog>
  *       </View>
  *     );

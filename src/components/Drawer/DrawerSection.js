@@ -30,27 +30,28 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { DrawerSection, DrawerItem } from 'react-native-paper';
+ * import { DrawerSection } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
- *     active: 'First Item',
+ *     active: 'first',
  *   };
  *
  *   render() {
  *     const { active } = this.state;
+ *
  *     return (
  *       <DrawerSection title="Some title">
- *         <DrawerItem
+ *         <DrawerSection.Item
  *           label="First Item"
- *           active={active === 'First Item'}
- *           onPress={() => { this.setState({ active: 'First Item' }); }}
- *        />
- *         <DrawerItem
+ *           active={active === 'first'}
+ *           onPress={() => { this.setState({ active: 'first' }); }}
+ *         />
+ *         <DrawerSection.Item
  *           label="Second Item"
- *           active={active === 'Second Item'}
- *           onPress={() => { this.setState({ active: 'Second Item' }); }}
- *        />
+ *           active={active === 'second'}
+ *           onPress={() => { this.setState({ active: 'second' }); }}
+ *         />
  *      </DrawerSection>
  *     );
  *   }

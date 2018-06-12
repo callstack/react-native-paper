@@ -50,10 +50,10 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { ListItem } from 'react-native-paper';
+ * import { ListSection } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <ListItem title="First Item" description="Item description" icon="folder" />
+ *   <ListSection.Item title="First Item" description="Item description" icon="folder" />
  * );
  * ```
  */

@@ -58,8 +58,8 @@ type State = {
  *     title="Accordion"
  *     icon="folder"
  *   >
- *     <ListItem title="First item" />
- *     <ListItem title="Second item" />
+ *     <ListSection.Item title="First item" />
+ *     <ListSection.Item title="Second item" />
  *   </ListSection.Accordion>
  * );
  * ```

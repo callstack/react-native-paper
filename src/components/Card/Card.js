@@ -51,27 +51,19 @@ type State = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import {
- *   Button,
- *   Card,
- *   CardActions,
- *   CardContent,
- *   CardCover,
- *   Title,
- *   Paragraph
- * } from 'react-native-paper';
+ * import { Button, Card, Title, Paragraph } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <Card>
- *     <CardContent>
+ *     <Card.Content>
  *       <Title>Card title</Title>
  *       <Paragraph>Card content</Paragraph>
- *     </CardContent>
- *     <CardCover source={{ uri: 'https://picsum.photos/700' }} />
- *     <CardActions>
+ *     </Card.Content>
+ *     <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
+ *     <Card.Actions>
  *       <Button>Cancel</Button>
  *       <Button>Ok</Button>
- *     </CardActions>
+ *     </Card.Actions>
  *   </Card>
  * );
  * ```
