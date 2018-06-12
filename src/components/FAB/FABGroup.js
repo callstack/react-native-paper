@@ -62,6 +62,11 @@ type Props = {
    */
   onStateChange: (state: { open: boolean }) => mixed,
   /**
+   * Style for the group. You can use it to pass additional styles if you need.
+   * For example, you can set an additional margin if you have a tab bar at the bottom.
+   */
+  style?: any,
+  /**
    * @optional
    */
   theme: Theme,
@@ -184,6 +189,7 @@ class FABGroup extends React.Component<Props, State> {
       onPress,
       accessibilityLabel,
       theme,
+      style,
     } = this.props;
 
     const labelColor = theme.dark
@@ -215,7 +221,7 @@ class FABGroup extends React.Component<Props, State> {
     return (
       <ThemedPortal>
         {open ? <StatusBar barStyle="light-content" /> : null}
-        <View pointerEvents="box-none" style={styles.container}>
+        <View pointerEvents="box-none" style={[styles.container, style]}>
           <TouchableWithoutFeedback onPress={this._close}>
             <Animated.View
               pointerEvents={open ? 'auto' : 'none'}
