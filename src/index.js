@@ -4,8 +4,8 @@ import * as Colors from './styles/colors';
 
 export { Colors };
 
-export { default as withTheme } from './core/withTheme';
-export { default as ThemeProvider } from './core/ThemeProvider';
+export { withTheme, ThemeProvider } from './core/theming';
+
 export { default as Provider } from './core/Provider';
 export { default as DefaultTheme } from './styles/DefaultTheme';
 export { default as DarkTheme } from './styles/DarkTheme';

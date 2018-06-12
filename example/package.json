@@ -11,10 +11,10 @@
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "dependencies": {
+    "@callstack/react-theme-provider": "^1.0.3",
     "@expo/vector-icons": "^6.3.1",
     "color": "^2.0.1",
     "create-react-context": "^0.2.2",
-    "deepmerge": "^2.1.0",
     "expo": "~27.0.2",
     "react": "16.3.1",
     "react-lifecycles-compat": "^3.0.4",
@@ -28,7 +28,6 @@
     "react-native-scripts": "1.14.0"
   },
   "resolutions": {
-    "**/deepmerge": "2.1.0",
     "**/hoist-non-react-statics": "2.5.0",
     "**/react-lifecycles-compat": "3.0.4",
     "**/react": "16.3.1"

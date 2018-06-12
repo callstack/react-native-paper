@@ -6,7 +6,7 @@ import { View } from 'react-native';
 import DrawerItem from './DrawerItem';
 import Text from '../Typography/Text';
 import Divider from '../Divider';
-import withTheme from '../../core/withTheme';
+import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
 type Props = {

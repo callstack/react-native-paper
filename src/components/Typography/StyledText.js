@@ -3,7 +3,7 @@
 import color from 'color';
 import * as React from 'react';
 import Text from './Text';
-import withTheme from '../../core/withTheme';
+import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
 type Props = {

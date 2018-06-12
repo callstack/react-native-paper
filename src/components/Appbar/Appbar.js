@@ -8,7 +8,7 @@ import AppbarContent from './AppbarContent';
 import AppbarAction from './AppbarAction';
 import AppbarBackAction from './AppbarBackAction';
 import AppbarHeader from './AppbarHeader';
-import withTheme from '../../core/withTheme';
+import { withTheme } from '../../core/theming';
 import { black, white } from '../../styles/colors';
 import type { Theme } from '../../types';
 

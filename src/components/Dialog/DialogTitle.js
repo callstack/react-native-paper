@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import Title from '../Typography/Title';
-import withTheme from '../../core/withTheme';
+import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
 type Props = {

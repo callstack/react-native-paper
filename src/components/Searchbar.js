@@ -4,9 +4,9 @@ import * as React from 'react';
 import { StyleSheet, TextInput } from 'react-native';
 
 import color from 'color';
-import withTheme from '../core/withTheme';
 import IconButton from './IconButton';
 import Surface from './Surface';
+import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 

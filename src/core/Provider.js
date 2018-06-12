@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import ThemeProvider from './ThemeProvider';
+import { ThemeProvider } from './theming';
 import Portal from '../components/Portal/Portal';
 import type { Theme } from '../types';
 
