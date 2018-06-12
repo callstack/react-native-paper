@@ -11,7 +11,7 @@ import CardContent from './CardContent';
 import CardActions from './CardActions';
 import CardCover from './CardCover';
 import Surface from '../Surface';
-import withTheme from '../../core/withTheme';
+import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
 const AnimatedSurface = Animated.createAnimatedComponent(Surface);

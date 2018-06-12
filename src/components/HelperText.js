@@ -4,7 +4,7 @@ import * as React from 'react';
 import color from 'color';
 import { Animated, StyleSheet } from 'react-native';
 import Text from './Typography/Text';
-import withTheme from '../core/withTheme';
+import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);

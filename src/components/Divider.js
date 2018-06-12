@@ -3,7 +3,7 @@
 import * as React from 'react';
 import color from 'color';
 import { StyleSheet, View } from 'react-native';
-import withTheme from '../core/withTheme';
+import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 import { black, white } from '../styles/colors';
 

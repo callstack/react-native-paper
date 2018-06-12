@@ -38,9 +38,9 @@
     "bootstrap": "yarn && yarn --cwd example && yarn --cwd docs"
   },
   "dependencies": {
+    "@callstack/react-theme-provider": "^1.0.3",
     "color": "^2.0.1",
     "create-react-context": "^0.2.2",
-    "deepmerge": "^2.1.0",
     "hoist-non-react-statics": "^2.5.0",
     "react-lifecycles-compat": "^3.0.4"
   },

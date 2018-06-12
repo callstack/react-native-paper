@@ -5,7 +5,7 @@ import { StyleSheet, Animated, View, SafeAreaView } from 'react-native';
 
 import Button from './Button';
 import Text from './Typography/Text';
-import withTheme from '../core/withTheme';
+import { withTheme } from '../core/theming';
 import { white } from '../styles/colors';
 import type { Theme } from '../types';
 

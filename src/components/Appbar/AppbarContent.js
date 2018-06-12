@@ -6,7 +6,7 @@ import color from 'color';
 
 import Text from '../Typography/Text';
 
-import withTheme from '../../core/withTheme';
+import { withTheme } from '../../core/theming';
 import { black } from '../../styles/colors';
 
 import type { Theme } from '../../types';
