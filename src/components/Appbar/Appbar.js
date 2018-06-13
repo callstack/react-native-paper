@@ -124,7 +124,10 @@ class Appbar extends React.Component<Props> {
     }
 
     return (
-      <Surface style={[{ backgroundColor }, styles.appbar, restStyle]} {...rest}>
+      <Surface
+        style={[{ backgroundColor }, styles.appbar, restStyle]}
+        {...rest}
+      >
         {shouldAddLeftSpacing ? <View style={styles.spacing} /> : null}
         {React.Children.toArray(children)
           .filter(child => child != null && typeof child !== 'boolean')
