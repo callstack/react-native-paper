@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import Appbar, { DEFAULT_APPBAR_HEIGHT } from './Appbar';
-import Card from '../../Card/Card';
+import Card from '../Card/Card';
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types';
 
