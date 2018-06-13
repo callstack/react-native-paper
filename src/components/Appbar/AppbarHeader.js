@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import Appbar, { DEFAULT_APPBAR_HEIGHT } from './Appbar';
+import Surface from '../Surface';
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types';
 
@@ -119,15 +120,17 @@ class AppbarHeader extends React.Component<Props> {
       typeof this.props.statusBarHeight === 'number' ? View : SafeAreaView;
 
     return (
-      <Wrapper style={[{ backgroundColor, elevation }]}>
-        <Appbar
-          style={[
-            { height, backgroundColor, marginTop: statusBarHeight },
-            styles.appbar,
-            restStyle,
-          ]}
-          {...rest}
-        />
+      <Wrapper>
+        <Surface style={[{ backgroundColor, elevation }]}>
+          <Appbar
+            style={[
+              { height, backgroundColor, marginTop: statusBarHeight },
+              styles.appbar,
+              restStyle,
+            ]}
+            {...rest}
+          />
+        </Surface>
       </Wrapper>
     );
   }
