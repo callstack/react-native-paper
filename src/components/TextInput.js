@@ -304,6 +304,7 @@ class TextInput extends React.Component<Props, State> {
     const fontFamily = fonts.regular;
     const {
       primary: primaryColor,
+      accent: accentColor,
       disabled: inactiveColor,
       error: errorColor,
     } = colors;
@@ -370,7 +371,7 @@ class TextInput extends React.Component<Props, State> {
           placeholder={label ? this.state.placeholder : this.props.placeholder}
           placeholderTextColor={colors.placeholder}
           editable={!disabled}
-          selectionColor={labelColor}
+          selectionColor={accentColor}
           onFocus={this._handleFocus}
           onBlur={this._handleBlur}
           underlineColorAndroid="transparent"
