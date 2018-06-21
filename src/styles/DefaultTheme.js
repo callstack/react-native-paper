@@ -19,7 +19,7 @@ export default {
       .rgb()
       .string(),
     placeholder: color(black)
-      .alpha(0.38)
+      .alpha(0.54)
       .rgb()
       .string(),
     backdrop: color(black)

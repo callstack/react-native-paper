@@ -160,7 +160,7 @@ exports[`renders extended FAB 1`] = `
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.38)",
+              "placeholder": "rgba(0, 0, 0, 0.54)",
               "primary": "#6200ee",
               "surface": "#ffffff",
               "text": "#000000",
