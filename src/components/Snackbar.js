@@ -174,8 +174,9 @@ class Snackbar extends React.Component<Props, State> {
 
     return (
       <ThemedPortal>
-        <SafeAreaView style={styles.wrapper}>
+        <SafeAreaView pointerEvents="box-none" style={styles.wrapper}>
           <Animated.View
+            pointerEvents="box-none"
             accessibilityLiveRegion="polite"
             style={{
               opacity: this.state.opacity,
