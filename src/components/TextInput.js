@@ -14,7 +14,8 @@ import type { Theme } from '../types';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
-const MINIMIZED_LABEL_Y_OFFSET = -22;
+const MINIMIZED_LABEL_Y_OFFSET = -12;
+const OUTLINE_MINIMIZED_LABEL_Y_OFFSET = -28;
 const MAXIMIZED_LABEL_FONT_SIZE = 16;
 const MINIMIZED_LABEL_FONT_SIZE = 12;
 const LABEL_WIGGLE_X_OFFSET = 4;
@@ -22,6 +23,12 @@ const FOCUS_ANIMATION_DURATION = 150;
 const BLUR_ANIMATION_DURATION = 180;
 
 type Props = {
+  /**
+   * Mode of the TextInput.
+   * - `flat` - flat input without outline.
+   * - `outlined` - input with an outline.
+   */
+  mode?: 'flat' | 'outlined',
   /**
    * If true, user won't be able to interact with the component.
    */
@@ -123,6 +130,7 @@ type State = {
 
 class TextInput extends React.Component<Props, State> {
   static defaultProps = {
+    mode: 'flat',
     disabled: false,
     error: false,
     multiline: false,
@@ -289,8 +297,22 @@ class TextInput extends React.Component<Props, State> {
     return this._root.blur();
   }
 
+  /**
+  TODO
+  - outlined error color
+  - outlined border top
+  - look into colors
+  - outlined - look into measurements (e.g. text position)
+  - flat - check if background can be calculated out of current theme
+  - check multiline inputs
+  - leading icon
+  - trailing icon
+  - cleanup, remove comments
+   */
+
   render() {
     const {
+      mode,
       disabled,
       label,
       error,
@@ -308,7 +330,7 @@ class TextInput extends React.Component<Props, State> {
       error: errorColor,
     } = colors;
 
-    let inputTextColor, labelColor, bottomLineColor;
+    let inputTextColor, labelColor, bottomLineColor, containerStyle;
 
     if (!disabled) {
       inputTextColor = colors.text;
@@ -316,6 +338,24 @@ class TextInput extends React.Component<Props, State> {
       bottomLineColor = underlineColor || primaryColor;
     } else {
       inputTextColor = labelColor = bottomLineColor = inactiveColor;
+    }
+
+    if (mode === 'flat') {
+      containerStyle = {
+        backgroundColor: '#D7D7D7',
+        borderTopLeftRadius: theme.roundness,
+        borderTopRightRadius: theme.roundness,
+      };
+    } else {
+      containerStyle = {
+        borderRadius: theme.roundness,
+        borderWidth: this.state.focused
+          ? StyleSheet.hairlineWidth * 4
+          : StyleSheet.hairlineWidth,
+        borderColor: this.state.focused ? primaryColor : underlineColor,
+        // borderTopWidth: 0,
+        padding: this.state.focused ? 0 : 1.5, // 0.75 with no border top
+      };
     }
 
     const labelColorAnimation = this.state.labeled.interpolate({
@@ -335,7 +375,12 @@ class TextInput extends React.Component<Props, State> {
     // Move label to top if value is set
     const labelTranslateY = this.state.labeled.interpolate({
       inputRange: [0, 1],
-      outputRange: [MINIMIZED_LABEL_Y_OFFSET, 0],
+      outputRange: [
+        mode === 'flat'
+          ? MINIMIZED_LABEL_Y_OFFSET
+          : OUTLINE_MINIMIZED_LABEL_Y_OFFSET,
+        0,
+      ],
     });
 
     const labelFontSize = this.state.labeled.interpolate({
@@ -354,7 +399,7 @@ class TextInput extends React.Component<Props, State> {
     };
 
     return (
-      <View style={style}>
+      <View style={[containerStyle, style]}>
         <AnimatedText
           pointerEvents="none"
           style={[styles.placeholder, labelStyle]}
@@ -388,38 +433,40 @@ class TextInput extends React.Component<Props, State> {
             },
           ]}
         />
-        <View pointerEvents="none" style={styles.bottomLineContainer}>
-          <View
-            style={[
-              styles.bottomLine,
-              { backgroundColor: error ? errorColor : inactiveColor },
-            ]}
-          />
-          <Animated.View
-            style={[
-              styles.bottomLine,
-              styles.focusLine,
-              this._getBottomLineStyle(
-                bottomLineColor,
-                this.state.labeled.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [1, 0],
-                })
-              ),
-            ]}
-          />
-          <Animated.View
-            style={[
-              styles.bottomLine,
-              styles.focusLine,
-              this._getBottomLineStyle(
-                errorColor,
-                // $FlowFixMe$
-                Animated.multiply(this.state.labeled, this.state.error)
-              ),
-            ]}
-          />
-        </View>
+        {mode === 'flat' ? (
+          <View pointerEvents="none" style={styles.bottomLineContainer}>
+            <View
+              style={[
+                styles.bottomLine,
+                { backgroundColor: error ? errorColor : inactiveColor },
+              ]}
+            />
+            <Animated.View
+              style={[
+                styles.bottomLine,
+                styles.focusLine,
+                this._getBottomLineStyle(
+                  bottomLineColor,
+                  this.state.labeled.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [1, 0],
+                  })
+                ),
+              ]}
+            />
+            <Animated.View
+              style={[
+                styles.bottomLine,
+                styles.focusLine,
+                this._getBottomLineStyle(
+                  errorColor,
+                  // $FlowFixMe$
+                  Animated.multiply(this.state.labeled, this.state.error)
+                ),
+              ]}
+            />
+          </View>
+        ) : null}
       </View>
     );
   }
@@ -433,18 +480,19 @@ const styles = StyleSheet.create({
   placeholder: {
     position: 'absolute',
     left: 0,
-    top: 40,
+    top: 20,
     fontSize: 16,
+    paddingHorizontal: 12,
   },
   input: {
     paddingBottom: 0,
-    marginTop: 8,
-    marginBottom: -4,
+    paddingHorizontal: 12,
+    marginTop: 6,
     fontSize: 16,
   },
   inputWithLabel: {
-    paddingTop: 20,
-    minHeight: 64,
+    paddingTop: 10,
+    minHeight: 50,
   },
   inputWithoutLabel: {
     paddingTop: 0,
@@ -458,7 +506,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   bottomLineContainer: {
-    marginBottom: 4,
+    marginBottom: -1,
     height: StyleSheet.hairlineWidth * 4,
   },
   bottomLine: {
