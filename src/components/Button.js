@@ -171,7 +171,7 @@ class Button extends React.Component<Props, State> {
     }
 
     if (disabled) {
-      textColor = color(theme.dak ? white : black)
+      textColor = color(theme.dark ? white : black)
         .alpha(0.32)
         .rgb()
         .string();

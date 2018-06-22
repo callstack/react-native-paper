@@ -3,7 +3,7 @@
 import * as React from 'react';
 import color from 'color';
 import { black } from '../../styles/colors';
-import TouchableIcon from '../TouchableIcon';
+import IconButton from '../IconButton';
 import type { IconSource } from '../Icon';
 
 type Props = {
@@ -53,13 +53,11 @@ export default class AppbarAction extends React.Component<Props> {
     } = this.props;
 
     return (
-      <TouchableIcon
+      <IconButton
         onPress={onPress}
         color={iconColor}
-        source={icon}
+        icon={icon}
         accessibilityLabel={accessibilityLabel}
-        accessibilityTraits="button"
-        accessibilityComponentType="button"
         {...rest}
       />
     );
