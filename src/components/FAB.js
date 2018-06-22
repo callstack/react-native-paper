@@ -32,6 +32,10 @@ type Props = {
    */
   dark?: boolean,
   /**
+   * Is Button disabled?.
+   */
+  disabled?: boolean,
+  /**
    * Custom color for the `FAB`.
    */
   color?: string,
@@ -78,6 +82,7 @@ class FAB extends React.Component<Props> {
       color: iconColor,
       onPress,
       theme,
+      disabled,
       style,
       ...rest
     } = this.props;
@@ -100,6 +105,7 @@ class FAB extends React.Component<Props> {
         <TouchableRipple
           borderless
           onPress={onPress}
+          disabled={disabled}
           rippleColor={rippleColor}
           style={styles.container}
         >
