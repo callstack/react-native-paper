@@ -193,6 +193,7 @@ class Snackbar extends React.Component<Props, State> {
             }}
           >
             <View
+              pointerEvents="box-none"
               style={[styles.container, { borderRadius: roundness }, style]}
             >
               <Text style={[styles.content, { marginRight: action ? 0 : 16 }]}>
