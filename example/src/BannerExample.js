@@ -64,11 +64,11 @@ class BannerExample extends React.Component<Props, State> {
               }}
             />
           }
-          text="Some text to display inside banner"
+          message="Some text to display inside banner"
           visible={this.state.visible}
         >
           <ScrollView contentContainerStyle={styles.content}>
-            {PhotoGallery({ route: 1 })}
+            {PhotoGallery({ route: { key: 1 } })}
           </ScrollView>
           <FAB
             small

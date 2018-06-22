@@ -8,15 +8,36 @@ import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 
 type Props = {
+  /**
+   * Whether banner is currently visible
+   */
   visible: boolean,
+  /**
+   * Array of objects that are displayed as action buttons.
+   * Object should have following properties:
+   * - `label`: label of the action button (required)
+   * - `onPress`: callback that is called when button is pressed (required)
+   */
   actions: Array<{
     label: string,
     onPress: () => mixed,
   }>,
-  text: string,
-  children: React.Node,
+  /**
+   * Message that will be displayed inside banner
+   */
+  message: string,
+  /**
+   * Image that will be displayed inside banner
+   */
   image?: React.Node,
+  /**
+   * Content we want to display under banner
+   */
+  children: React.Node,
   style?: any,
+  /**
+   * @optional
+   */
   theme: Theme,
 };
 
@@ -67,10 +88,11 @@ class Banner extends React.Component<Props, State> {
         if (!this.props.visible) {
           // If height changed and Banner was hidden, adjust the translate to keep it hidden
           this.state.position.setValue(-height);
+          this.state.contentPosition.setValue(height);
         }
       } else {
         // Set the appropriate initial values if height was previously unknown
-        this.state.position.setValue(-height);
+        this.state.contentPosition.setValue(height);
 
         // Perform the animation only if we're showing
         if (this.props.visible) {
@@ -97,7 +119,7 @@ class Banner extends React.Component<Props, State> {
       }),
       Animated.timing(this.state.contentPosition, {
         duration: 300,
-        toValue: this.state.height,
+        toValue: this.state.height || 0,
       }),
     ]).start();
   };
@@ -106,7 +128,7 @@ class Banner extends React.Component<Props, State> {
     Animated.parallel([
       Animated.timing(this.state.position, {
         duration: 300,
-        toValue: -this.state.height || 0,
+        toValue: -(this.state.height || 0),
         useNativeDriver: true,
       }),
       Animated.timing(this.state.contentPosition, {
@@ -121,9 +143,8 @@ class Banner extends React.Component<Props, State> {
       image,
       children,
       actions,
-      visible,
       style,
-      text,
+      message,
       theme: { colors },
     } = this.props;
 
@@ -159,7 +180,7 @@ class Banner extends React.Component<Props, State> {
           <View style={styles.contentRow}>
             {image ? <View style={styles.imageContainer}>{image}</View> : null}
             <View style={{ flex: 1 }}>
-              <Text style={styles.message}>{text}</Text>
+              <Text style={styles.message}>{message}</Text>
             </View>
           </View>
           <View style={styles.actions}>
