@@ -16,7 +16,7 @@ type Props = {
   style?: any,
 };
 
-const TouchableIcon = ({
+const IconButton = ({
   source,
   color: iconColor,
   size = 24,
@@ -68,4 +68,4 @@ const styles = StyleSheet.create({
       },
 });
 
-export default TouchableIcon;
+export default IconButton;

@@ -5,7 +5,7 @@ import { StyleSheet, TextInput } from 'react-native';
 
 import color from 'color';
 import withTheme from '../core/withTheme';
-import TouchableIcon from './TouchableIcon';
+import IconButton from './IconButton';
 import Surface from './Surface';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
@@ -142,7 +142,7 @@ class Searchbar extends React.Component<Props> {
           style,
         ]}
       >
-        <TouchableIcon
+        <IconButton
           borderless
           rippleColor={rippleColor}
           onPress={onIconPress}
@@ -164,7 +164,7 @@ class Searchbar extends React.Component<Props> {
           {...rest}
         />
         {value ? (
-          <TouchableIcon
+          <IconButton
             borderless
             color={iconColor}
             rippleColor={rippleColor}

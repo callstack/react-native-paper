@@ -20,6 +20,7 @@ export { default as Divider } from './components/Divider';
 export { default as DrawerSection } from './components/Drawer/DrawerSection';
 export { default as FAB } from './components/FAB/FAB';
 export { default as HelperText } from './components/HelperText';
+export { default as IconButton } from './components/IconButton';
 export { default as ListSection } from './components/List/ListSection';
 export { default as Modal } from './components/Modal';
 export { default as ProgressBar } from './components/ProgressBar/ProgressBar';
@@ -29,7 +30,6 @@ export { default as Snackbar } from './components/Snackbar';
 export { default as Surface } from './components/Surface';
 export { default as Switch } from './components/Switch';
 export { default as Appbar } from './components/Appbar/Appbar';
-export { default as TouchableIcon } from './components/TouchableIcon';
 export { default as TouchableRipple } from './components/TouchableRipple';
 export { default as TextInput } from './components/TextInput';
 
