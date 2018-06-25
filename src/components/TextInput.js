@@ -228,7 +228,7 @@ class TextInput extends React.Component<Props, State> {
     if (this.props.disabled) {
       return;
     }
-    
+
     this.setState({ focused: true });
 
     if (this.props.onFocus) {
@@ -240,7 +240,7 @@ class TextInput extends React.Component<Props, State> {
     if (this.props.disabled) {
       return;
     }
-    
+
     this.setState({ focused: false });
 
     if (this.props.onBlur) {
