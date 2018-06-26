@@ -4,9 +4,11 @@ import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import color from 'color';
 
+import withTheme from '../core/withTheme';
 import TouchableRipple from './TouchableRipple';
 import Icon from './Icon';
 import type { IconSource } from './Icon';
+import type { Theme } from '../../types';
 
 type Props = {
   /**
@@ -16,7 +18,7 @@ type Props = {
   /**
    * Color of the icon.
    */
-  color: string,
+  color?: string,
   /**
    * Size of the icon.
    */
@@ -26,6 +28,10 @@ type Props = {
    */
   onPress: ?Function,
   style?: any,
+  /**
+   * @optional
+   */
+  theme: Theme,
 };
 
 /**
@@ -57,10 +63,11 @@ const IconButton = ({
   color: iconColor,
   size = 24,
   onPress,
+  theme,
   style,
   ...rest
 }: Props) => {
-  const rippleColor = color(iconColor)
+  const rippleColor = color(iconColor || theme.colors.accent)
     .alpha(0.32)
     .rgb()
     .string();
@@ -79,7 +86,11 @@ const IconButton = ({
       {...rest}
     >
       <View>
-        <Icon color={iconColor} source={source} size={size} />
+        <Icon
+          color={iconColor || theme.colors.accent}
+          source={source}
+          size={size}
+        />
       </View>
     </TouchableRipple>
   );
@@ -104,4 +115,4 @@ const styles = StyleSheet.create({
       },
 });
 
-export default IconButton;
+export default withTheme(IconButton);
