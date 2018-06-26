@@ -26,7 +26,7 @@ type Props = {
   /**
    * Function to execute on press.
    */
-  onPress: ?Function,
+  onPress?: () => mixed,
   style?: any,
   /**
    * @optional
