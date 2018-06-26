@@ -9,13 +9,49 @@ import Icon from './Icon';
 import type { IconSource } from './Icon';
 
 type Props = {
+  /**
+   * Source of the icon to show.
+   */
   source: IconSource,
+  /**
+   * Color of the icon.
+   */
   color: string,
+  /**
+   * Size of the icon.
+   */
   size?: number,
+  /**
+   * Function to execute on press.
+   */
   onPress: ?Function,
   style?: any,
 };
 
+/**
+ * An icon button is a component that the user can press to trigger an action.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img src="screenshots/icon-button-1.png" />
+ *     <figcaption>Icon button</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/icon-button-2.png" />
+ *     <figcaption>Focused icon button</figcaption>
+ *   </figure>
+ * </div>
+ *
+ * ## Usage
+ * ```js
+ * import * as React from 'react';
+ * import { IconButton } from 'react-native-paper';
+ *
+ * const MyComponent = () => (
+ *   <IconButton source="add-a-photo" color="#FF0000" size={20} onPress={() => console.log('Pressed')} />
+ * );
+ * ```
+ */
 const IconButton = ({
   source,
   color: iconColor,
