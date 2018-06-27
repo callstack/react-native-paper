@@ -2,6 +2,7 @@
 
 import color from 'color';
 import * as React from 'react';
+import { I18nManager } from 'react-native';
 import Text from './Text';
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types';
@@ -21,11 +22,16 @@ class StyledText extends React.Component<Props> {
       .rgb()
       .string();
     const fontFamily = theme.fonts[family];
+    const writingDirection = I18nManager.isRTL ? 'rtl' : 'ltr';
 
     return (
       <Text
         {...rest}
-        style={[{ color: textColor, fontFamily }, style, this.props.style]}
+        style={[
+          { color: textColor, fontFamily, writingDirection, textAlign: 'left' },
+          style,
+          this.props.style,
+        ]}
       />
     );
   }
