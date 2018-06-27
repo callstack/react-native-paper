@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { View, Image, StyleSheet, Platform } from 'react-native';
+import { View, Image, I18nManager, StyleSheet, Platform } from 'react-native';
 
 import AppbarAction from './AppbarAction';
 
@@ -46,14 +46,23 @@ class AppbarBackAction extends React.Component<Props> {
         icon={
           Platform.OS === 'ios'
             ? ({ size, color }) => (
-                <View style={[styles.wrapper, { width: size, height: size }]}>
+                <View
+                  style={[
+                    styles.wrapper,
+                    {
+                      width: size,
+                      height: size,
+                      transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }],
+                    },
+                  ]}
+                >
                   <Image
                     source={require('../../assets/back-chevron.png')}
                     style={[styles.icon, { tintColor: color }]}
                   />
                 </View>
               )
-            : 'arrow-back'
+            : { source: 'arrow-back', direction: 'auto' }
         }
       />
     );

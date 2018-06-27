@@ -54,6 +54,8 @@ exports[`renders not visible snackbar with content 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -153,6 +155,8 @@ exports[`renders snackbar with Text as a child 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -258,6 +262,8 @@ exports[`renders snackbar with action button 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -358,6 +364,8 @@ exports[`renders snackbar with action button 1`] = `
                   Object {
                     "color": "#000000",
                     "fontFamily": "Helvetica Neue",
+                    "textAlign": "left",
+                    "writingDirection": "ltr",
                   },
                   Array [
                     Object {
@@ -466,6 +474,8 @@ exports[`renders snackbar with content 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {

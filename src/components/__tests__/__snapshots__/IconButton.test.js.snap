@@ -58,9 +58,18 @@ exports[`renders disabled icon button 1`] = `
             "color": "#000000",
             "fontSize": 24,
           },
-          Object {
-            "backgroundColor": "transparent",
-          },
+          Array [
+            Object {
+              "transform": Array [
+                Object {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
           Object {
             "fontFamily": "Material Icons",
             "fontStyle": "normal",
@@ -126,9 +135,18 @@ exports[`renders icon button by default 1`] = `
             "color": "#000000",
             "fontSize": 24,
           },
-          Object {
-            "backgroundColor": "transparent",
-          },
+          Array [
+            Object {
+              "transform": Array [
+                Object {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
           Object {
             "fontFamily": "Material Icons",
             "fontStyle": "normal",
@@ -194,9 +212,18 @@ exports[`renders icon button with color 1`] = `
             "color": "#e91e63",
             "fontSize": 24,
           },
-          Object {
-            "backgroundColor": "transparent",
-          },
+          Array [
+            Object {
+              "transform": Array [
+                Object {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
           Object {
             "fontFamily": "Material Icons",
             "fontStyle": "normal",
@@ -262,9 +289,18 @@ exports[`renders icon button with size 1`] = `
             "color": "#000000",
             "fontSize": 30,
           },
-          Object {
-            "backgroundColor": "transparent",
-          },
+          Array [
+            Object {
+              "transform": Array [
+                Object {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
           Object {
             "fontFamily": "Material Icons",
             "fontStyle": "normal",
