@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { Image, Text, StyleSheet, I18nManager } from 'react-native';
+import { Image, Text, StyleSheet } from 'react-native';
 
 let MaterialIcons;
 
@@ -113,6 +113,5 @@ export default Icon;
 const styles = StyleSheet.create({
   icon: {
     backgroundColor: 'transparent',
-    transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }],
   },
 });
