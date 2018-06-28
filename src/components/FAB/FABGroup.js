@@ -23,6 +23,7 @@ type Props = {
    * Action items to display in the form of a speed dial.
    * An action item should contain the following properties:
    * - `icon`: icon to display (required)
+   * - `iconRtl`: Whether the icon should be RTL, The icon will be flliped if the device is RTL.
    * - `label`: optional label text
    * - `accessibilityLabel`: accessibility label for the action, uses label by default if specified
    * - `color`: custom icon color of the action item
@@ -30,6 +31,7 @@ type Props = {
    */
   actions: Array<{
     icon: string,
+    iconRtl?: boolean,
     label?: string,
     color?: string,
     accessibilityLabel?: string,
@@ -40,6 +42,10 @@ type Props = {
    * You can toggle it based on whether the speed dial is open to display a different icon.
    */
   icon: IconSource,
+  /**
+   * Whether the icon should be RTL, The icon will be flliped if the device is RTL.
+   */
+  iconRtl?: boolean,
   /*
    * Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.
    */
@@ -185,6 +191,7 @@ class FABGroup extends React.Component<Props, State> {
     const {
       actions,
       icon,
+      iconRtl,
       open,
       onPress,
       accessibilityLabel,
@@ -272,6 +279,7 @@ class FABGroup extends React.Component<Props, State> {
                   <FAB
                     small
                     icon={it.icon}
+                    iconRtl={it.iconRtl}
                     color={it.color}
                     style={[
                       {
@@ -301,6 +309,7 @@ class FABGroup extends React.Component<Props, State> {
               this._toggle();
             }}
             icon={icon}
+            iconRtl={iconRtl}
             color={this.props.color}
             accessibilityLabel={accessibilityLabel}
             accessibilityTraits="button"

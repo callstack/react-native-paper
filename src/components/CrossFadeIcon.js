@@ -12,6 +12,10 @@ type Props = {
    */
   source: IconSource,
   /**
+   * RTL support for the icon.
+   */
+  iconRtl: boolean,
+  /**
    * Color of the icon.
    */
   color: string,
@@ -64,7 +68,7 @@ class CrossFadeIcon extends React.Component<Props, State> {
   }
 
   render() {
-    const { color, size } = this.props;
+    const { color, size, iconRtl } = this.props;
     const opacityPrev = this.state.fade;
     const opacityNext = this.state.previousIcon
       ? this.state.fade.interpolate({
@@ -105,7 +109,12 @@ class CrossFadeIcon extends React.Component<Props, State> {
               },
             ]}
           >
-            <Icon source={this.state.previousIcon} size={size} color={color} />
+            <Icon
+              source={this.state.previousIcon}
+              rtl={iconRtl}
+              size={size}
+              color={color}
+            />
           </Animated.View>
         ) : null}
         <Animated.View
@@ -117,7 +126,12 @@ class CrossFadeIcon extends React.Component<Props, State> {
             },
           ]}
         >
-          <Icon source={this.state.currentIcon} size={size} color={color} />
+          <Icon
+            source={this.state.currentIcon}
+            rtl={iconRtl}
+            size={size}
+            color={color}
+          />
         </Animated.View>
       </View>
     );

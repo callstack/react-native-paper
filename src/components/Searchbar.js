@@ -24,6 +24,10 @@ type Props = {
    */
   icon?: IconSource,
   /**
+   * Whether the icon should be RTL, The icon will be flliped if the device is RTL.
+   */
+  iconRtl?: boolean,
+  /**
    * Callback that is called when the text input's text changes.
    */
   onChangeText?: (query: string) => void,
@@ -116,6 +120,7 @@ class Searchbar extends React.Component<Props> {
       placeholder,
       onIconPress,
       icon,
+      iconRtl,
       value,
       theme,
       style,
@@ -148,6 +153,7 @@ class Searchbar extends React.Component<Props> {
           onPress={onIconPress}
           color={iconColor}
           source={icon || 'search'}
+          rtl={iconRtl || true}
         />
         <TextInput
           style={[styles.input, { color: textColor }]}

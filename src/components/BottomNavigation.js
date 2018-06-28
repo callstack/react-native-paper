@@ -28,6 +28,7 @@ type Route = $Shape<{
   key: string,
   title: string,
   icon: IconSource,
+  iconRtl: boolean,
   color: string,
   accessibilityLabel: string,
   testID: string,
@@ -59,6 +60,7 @@ type Props<T> = {
    * - `key`: a unique key to identify the route (required)
    * - `title`: title of the route to use as the tab label
    * - `icon`: icon to use as the tab icon, can be a string, an image source or a react component
+   * - `iconRtl`: Whether the icon should be RTL, The icon will be flliped if the device is RTL
    * - `color`: color to use as background color for shifting bottom navigation
    * - `accessibilityLabel`: accessibility label for the tab button
    * - `testID`: test id for the tab button
@@ -670,6 +672,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                         ) : (
                           <Icon
                             source={(route: Object).icon}
+                            rtl={(route: Object).iconRtl}
                             color={activeColor}
                             size={24}
                           />
@@ -690,6 +693,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                         ) : (
                           <Icon
                             source={(route: Object).icon}
+                            rtl={(route: Object).iconRtl}
                             color={inactiveColor}
                             size={24}
                           />

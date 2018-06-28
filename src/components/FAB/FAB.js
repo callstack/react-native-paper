@@ -21,6 +21,10 @@ type Props = {
    */
   icon: IconSource,
   /**
+   * Whether the icon should be RTL, The icon will be flliped if the device is RTL.
+   */
+  iconRtl?: boolean,
+  /**
    * Optional label for extended `FAB`.
    */
   label?: string,
@@ -78,6 +82,7 @@ class FAB extends React.Component<Props> {
     const {
       small,
       icon,
+      iconRtl,
       label,
       accessibilityLabel = label,
       color: customColor,
@@ -126,7 +131,12 @@ class FAB extends React.Component<Props> {
             ]}
             pointerEvents="none"
           >
-            <CrossFadeIcon source={icon} size={24} color={foregroundColor} />
+            <CrossFadeIcon
+              source={icon}
+              iconRtl={iconRtl}
+              size={24}
+              color={foregroundColor}
+            />
             {label ? (
               <Text
                 style={[

@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { Image, Text, StyleSheet } from 'react-native';
+import { Image, Text, StyleSheet, I18nManager } from 'react-native';
 
 let MaterialIcons;
 
@@ -36,6 +36,7 @@ export type IconSource =
 type IconProps = {
   color: string,
   size: number,
+  rtl: boolean,
 };
 
 type Props = IconProps & {
@@ -70,7 +71,7 @@ export const isValidIcon = (source: any) =>
 export const isEqualIcon = (a: any, b: any) =>
   a === b || getIconId(a) === getIconId(b);
 
-const Icon = ({ source, color, size, ...rest }: Props) => {
+const Icon = ({ source, color, size, rtl, ...rest }: Props) => {
   if (typeof source === 'string') {
     return (
       <MaterialIcons
@@ -78,7 +79,10 @@ const Icon = ({ source, color, size, ...rest }: Props) => {
         name={source}
         color={color}
         size={size}
-        style={styles.icon}
+        style={[
+          { transform: [{ scaleX: rtl && I18nManager.isRTL ? -1 : 1 }] },
+          styles.icon,
+        ]}
         pointerEvents="none"
         accessibilityElementsHidden
         importantForAccessibility="no-hide-descendants"
