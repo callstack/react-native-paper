@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { Image, Text, StyleSheet } from 'react-native';
+import { Image, Text, StyleSheet, I18nManager } from 'react-native';
 
 let MaterialIcons;
 
@@ -27,10 +27,11 @@ try {
   };
 }
 
+type IconSourceBase = string | number | { uri: string };
+
 export type IconSource =
-  | string
-  | number
-  | { uri: string }
+  | IconSourceBase
+  | { source: IconSourceBase, direction: 'rtl' | 'ltr' }
   | ((props: IconProps) => React.Node);
 
 type IconProps = {
@@ -42,6 +43,12 @@ type Props = IconProps & {
   source: IconSource,
 };
 
+const sourceHasDirection = (source: any) =>
+  typeof source === 'object' &&
+  source !== null &&
+  (Object.prototype.hasOwnProperty.call(source, 'direction') &&
+    Object.prototype.hasOwnProperty.call(source, 'source'));
+
 const isImageSource = (source: any) =>
   // source is an object with uri
   (typeof source === 'object' &&
@@ -49,7 +56,9 @@ const isImageSource = (source: any) =>
     (Object.prototype.hasOwnProperty.call(source, 'uri') &&
       typeof source.uri === 'string')) ||
   // source is a module, e.g. - require('image')
-  typeof source === 'number';
+  typeof source === 'number' ||
+  // source is an object with the actual source and direction
+  (sourceHasDirection(source) && isImageSource(source.source));
 
 const getIconId = (source: any) => {
   if (
@@ -71,14 +80,31 @@ export const isEqualIcon = (a: any, b: any) =>
   a === b || getIconId(a) === getIconId(b);
 
 const Icon = ({ source, color, size, ...rest }: Props) => {
-  if (typeof source === 'string') {
+  if (
+    typeof source === 'string' ||
+    (sourceHasDirection(source) && typeof source.source === 'string')
+  ) {
     return (
       <MaterialIcons
         {...rest}
-        name={source}
+        name={sourceHasDirection(source) ? source.source : source}
         color={color}
         size={size}
-        style={styles.icon}
+        style={[
+          {
+            transform: [
+              {
+                scaleX:
+                  sourceHasDirection(source) &&
+                  I18nManager.isRTL &&
+                  source.direction === 'rtl'
+                    ? -1
+                    : 1,
+              },
+            ],
+          },
+          styles.icon,
+        ]}
         pointerEvents="none"
         accessibilityElementsHidden
         importantForAccessibility="no-hide-descendants"
@@ -88,8 +114,20 @@ const Icon = ({ source, color, size, ...rest }: Props) => {
     return (
       <Image
         {...rest}
-        source={source}
+        source={sourceHasDirection(source) ? source.source : source}
         style={[
+          {
+            transform: [
+              {
+                scaleX:
+                  sourceHasDirection(source) &&
+                  I18nManager.isRTL &&
+                  source.direction === 'rtl'
+                    ? -1
+                    : 1,
+              },
+            ],
+          },
           {
             width: size,
             height: size,
