@@ -30,10 +30,6 @@ type Props = {
    * Image that will be displayed inside banner
    */
   image?: React.Node,
-  /**
-   * Content we want to display under banner
-   */
-  children: React.Node,
   style?: any,
   /**
    * @optional
@@ -66,7 +62,7 @@ class Banner extends React.Component<Props, State> {
 
   state = {
     height: null,
-    position: new Animated.Value(-1000),
+    position: new Animated.Value(0),
     contentPosition: new Animated.Value(0),
     measured: false,
   };
@@ -87,16 +83,20 @@ class Banner extends React.Component<Props, State> {
       if (measured) {
         if (!this.props.visible) {
           // If height changed and Banner was hidden, adjust the translate to keep it hidden
+          this.state.position.setValue(0);
+          this.state.contentPosition.setValue(height);
+        } else {
           this.state.position.setValue(-height);
           this.state.contentPosition.setValue(height);
         }
       } else {
         // Set the appropriate initial values if height was previously unknown
-        this.state.contentPosition.setValue(height);
-
-        // Perform the animation only if we're showing
-        if (this.props.visible) {
-          this._show();
+        if (!this.props.visible) {
+          this.state.position.setValue(-height);
+          this.state.contentPosition.setValue(0);
+        } else {
+          this.state.position.setValue(0);
+          this.state.contentPosition.setValue(height);
         }
       }
     });
@@ -141,30 +141,29 @@ class Banner extends React.Component<Props, State> {
   render() {
     const {
       image,
-      children,
       actions,
       style,
       message,
+      visible,
       theme: { colors },
     } = this.props;
 
+    const { measured } = this.state;
+
     return (
-      <View style={[{ flex: 1 }]}>
-        <Animated.View
-          style={{
-            height: this.state.contentPosition,
-          }}
-        />
-        <View
-          style={{
-            flex: 1,
-          }}
-        >
-          {children}
-        </View>
+      <Animated.View
+        style={
+          measured
+            ? {
+                height: this.state.contentPosition,
+              }
+            : {}
+        }
+      >
         <Animated.View
           onLayout={this.onLayout}
           style={[
+            { position: measured || !visible ? 'absolute' : 'relative' },
             styles.container,
             {
               backgroundColor: colors.background,
@@ -199,15 +198,14 @@ class Banner extends React.Component<Props, State> {
             ))}
           </View>
         </Animated.View>
-      </View>
+      </Animated.View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    top: 0,
+    // top: 0,
     width: '100%',
     borderBottomColor: '#ddd',
     borderBottomWidth: 1,

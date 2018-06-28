@@ -29,7 +29,7 @@ class BannerExample extends React.Component<Props, State> {
   static title = 'Banner';
 
   state = {
-    visible: true,
+    visible: false,
   };
 
   render() {
@@ -39,7 +39,7 @@ class BannerExample extends React.Component<Props, State> {
       },
     } = this.props;
     return (
-      <View style={[styles.container, { backgroundColor: background }]}>
+      <View style={{ flex: 1 }}>
         <Banner
           actions={[
             {
@@ -66,23 +66,25 @@ class BannerExample extends React.Component<Props, State> {
           }
           message="Some text to display inside banner"
           visible={this.state.visible}
+        />
+        <ScrollView
+          style={[styles.container, { backgroundColor: background }]}
+          contentContainerStyle={styles.content}
         >
-          <ScrollView contentContainerStyle={styles.content}>
-            {PhotoGallery({ route: { key: 1 } })}
-          </ScrollView>
-          <FAB
-            small
-            icon="add"
-            style={{
-              margin: 8,
-              position: 'absolute',
-              bottom: 0,
-            }}
-            onPress={() => {
-              this.setState({ visible: true });
-            }}
-          />
-        </Banner>
+          {PhotoGallery({ route: { key: 1 } })}
+        </ScrollView>
+        <FAB
+          small
+          icon="add"
+          style={{
+            margin: 8,
+            position: 'absolute',
+            bottom: 0,
+          }}
+          onPress={() => {
+            this.setState({ visible: true });
+          }}
+        />
       </View>
     );
   }
@@ -95,6 +97,7 @@ const styles = StyleSheet.create({
   content: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    flex: 1,
   },
   item: {
     height: Dimensions.get('window').width / 2,
