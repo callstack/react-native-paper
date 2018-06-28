@@ -47,7 +47,7 @@ type Props = {
    * Whether the chip is disabled. A disabled chip is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean,
-  /*
+  /**
    * Accessibility label for the chip. This is read by the screen reader when the user taps the chip.
    */
   accessibilityLabel?: string,

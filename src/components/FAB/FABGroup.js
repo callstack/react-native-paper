@@ -40,7 +40,7 @@ type Props = {
    * You can toggle it based on whether the speed dial is open to display a different icon.
    */
   icon: IconSource,
-  /*
+  /**
    * Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.
    */
   accessibilityLabel?: string,

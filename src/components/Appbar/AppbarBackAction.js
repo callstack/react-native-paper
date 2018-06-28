@@ -10,7 +10,7 @@ type Props = {
    *  Custom color for back icon.
    */
   color?: string,
-  /*
+  /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
   accessibilityLabel?: string,

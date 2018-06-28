@@ -50,7 +50,7 @@ type Props = {
    * Label text of the button.
    */
   children: React.Node,
-  /*
+  /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
   accessibilityLabel?: string,
