@@ -133,7 +133,7 @@ class Checkbox extends React.Component<Props, State> {
 
     const borderWidth = this.state.scaleAnim.interpolate({
       inputRange: [0.8, 1],
-      outputRange: [7, 0],
+      outputRange: [10, 0],
     });
 
     return (
