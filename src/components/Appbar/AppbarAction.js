@@ -16,10 +16,6 @@ type Props = {
    */
   icon: IconSource,
   /**
-   * Whether the icon should be RTL, The icon will be flliped if the device is RTL.
-   */
-  iconRtl?: boolean,
-  /**
    * Optional icon size.
    */
   size?: number,
@@ -51,7 +47,6 @@ export default class AppbarAction extends React.Component<Props> {
         .rgb()
         .string(),
       icon,
-      iconRtl,
       onPress,
       accessibilityLabel,
       ...rest
@@ -62,7 +57,6 @@ export default class AppbarAction extends React.Component<Props> {
         onPress={onPress}
         color={iconColor}
         source={icon}
-        rtl={iconRtl}
         accessibilityLabel={accessibilityLabel}
         accessibilityTraits="button"
         accessibilityComponentType="button"

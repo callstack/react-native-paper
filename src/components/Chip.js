@@ -36,10 +36,6 @@ type Props = {
    */
   icon?: IconSource,
   /**
-   * Whether the icon should be RTL, The icon will be flliped if the device is RTL.
-   */
-  iconRtl?: boolean,
-  /**
    * Avatar to display for the `Chip`. Both icon and avatar cannot be specified.
    */
   avatar?: React.Node,
@@ -128,7 +124,6 @@ class Chip extends React.Component<Props, State> {
       mode,
       children,
       icon,
-      iconRtl,
       avatar,
       selected,
       disabled,
@@ -233,7 +228,6 @@ class Chip extends React.Component<Props, State> {
               >
                 <Icon
                   source={icon || 'done'}
-                  rtl={iconRtl}
                   color={avatar ? white : iconColor}
                   size={18}
                 />

@@ -22,10 +22,6 @@ type Props = {
    * Icon to display for the `ListAccordion`.
    */
   icon?: IconSource,
-  /**
-   * Whether the icon should be RTL, The icon will be flliped if the device is RTL.
-   */
-  iconRtl?: boolean,
 
   /**
    * Content of the section.
@@ -81,15 +77,7 @@ class ListAccordion extends React.Component<Props, State> {
     }));
 
   render() {
-    const {
-      icon,
-      iconRtl,
-      title,
-      description,
-      children,
-      theme,
-      style,
-    } = this.props;
+    const { icon, title, description, children, theme, style } = this.props;
     const titleColor = color(theme.colors.text)
       .alpha(0.87)
       .rgb()
@@ -118,7 +106,6 @@ class ListAccordion extends React.Component<Props, State> {
               >
                 <Icon
                   source={icon}
-                  rtl={iconRtl}
                   size={24}
                   color={
                     this.state.expanded

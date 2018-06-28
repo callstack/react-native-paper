@@ -47,7 +47,6 @@ class AppbarBackAction extends React.Component<Props> {
               )
             : 'arrow-back'
         }
-        iconRtl
       />
     );
   }

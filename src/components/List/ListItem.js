@@ -24,10 +24,6 @@ type Props = {
    */
   icon?: IconSource,
   /**
-   * Whether the icon should be RTL, The icon will be flliped if the device is RTL.
-   */
-  iconRtl?: boolean,
-  /**
    * Component to display as avatar image.
    */
   avatar?: React.Node,
@@ -67,7 +63,6 @@ class ListItem extends React.Component<Props> {
   render() {
     const {
       icon,
-      iconRtl,
       avatar,
       title,
       description,
@@ -98,12 +93,7 @@ class ListItem extends React.Component<Props> {
             >
               {avatar ||
                 (icon ? (
-                  <Icon
-                    source={icon}
-                    rtl={iconRtl}
-                    size={24}
-                    color={descriptionColor}
-                  />
+                  <Icon source={icon} size={24} color={descriptionColor} />
                 ) : null)}
             </View>
           ) : null}
@@ -133,12 +123,7 @@ class ListItem extends React.Component<Props> {
               style={[styles.item, description && styles.multiline]}
               pointerEvents="box-none"
             >
-              <Icon
-                source={icon}
-                rtl={iconRtl}
-                size={24}
-                color={descriptionColor}
-              />
+              <Icon source={icon} size={24} color={descriptionColor} />
             </View>
           ) : null}
         </View>

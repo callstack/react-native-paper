@@ -43,10 +43,6 @@ type Props = {
    */
   icon?: IconSource,
   /**
-   * Whether the icon should be RTL, The icon will be flliped if the device is RTL.
-   */
-  iconRtl?: boolean,
-  /**
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean,
@@ -138,7 +134,6 @@ class Button extends React.Component<Props, State> {
       dark,
       loading,
       icon,
-      iconRtl,
       color: buttonColor,
       children,
       accessibilityLabel,
@@ -238,7 +233,7 @@ class Button extends React.Component<Props, State> {
           <View style={styles.content}>
             {icon && loading !== true ? (
               <View style={styles.icon}>
-                <Icon source={icon} rtl={iconRtl} size={16} color={textColor} />
+                <Icon source={icon} size={16} color={textColor} />
               </View>
             ) : null}
             {loading ? (

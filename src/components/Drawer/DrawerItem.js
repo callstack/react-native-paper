@@ -20,10 +20,6 @@ type Props = {
    */
   icon?: IconSource,
   /**
-   * Whether the icon should be RTL, The icon will be flliped if the device is RTL.
-   */
-  iconRtl?: boolean,
-  /**
    * Whether to highlight the drawer item as active.
    */
   active?: boolean,
@@ -55,16 +51,7 @@ class DrawerItem extends React.Component<Props> {
   static displayName = 'DrawerSection.Item';
 
   render() {
-    const {
-      icon,
-      iconRtl,
-      label,
-      active,
-      theme,
-      style,
-      onPress,
-      ...rest
-    } = this.props;
+    const { icon, label, active, theme, style, onPress, ...rest } = this.props;
     const { colors, roundness } = theme;
     const backgroundColor = active
       ? color(colors.primary)
@@ -98,12 +85,7 @@ class DrawerItem extends React.Component<Props> {
         >
           <View style={styles.wrapper}>
             {icon ? (
-              <Icon
-                source={icon}
-                rtl={iconRtl}
-                size={24}
-                color={contentColor}
-              />
+              <Icon source={icon} size={24} color={contentColor} />
             ) : null}
             <Text
               numberOfLines={1}

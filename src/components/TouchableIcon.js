@@ -12,7 +12,6 @@ type Props = {
   source: IconSource,
   color: string,
   size?: number,
-  rtl?: boolean,
   onPress: ?Function,
   style?: any,
 };
@@ -21,7 +20,6 @@ const TouchableIcon = ({
   source,
   color: iconColor,
   size = 24,
-  rtl = false,
   onPress,
   style,
   ...rest
@@ -45,7 +43,7 @@ const TouchableIcon = ({
       {...rest}
     >
       <View>
-        <Icon color={iconColor} source={source} size={size} rtl={rtl} />
+        <Icon color={iconColor} source={source} size={size} />
       </View>
     </TouchableRipple>
   );
