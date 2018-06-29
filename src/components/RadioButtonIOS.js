@@ -39,7 +39,7 @@ type Props = {
 /**
  * Radio buttons allow the selection a single option from a set
  */
-class RadioButton extends React.Component<Props> {
+class RadioButtonIOS extends React.Component<Props> {
   // @component ./RadioButtonGroup.js
   static Group = RadioButtonGroup;
 
@@ -113,4 +113,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(RadioButton);
+export default withTheme(RadioButtonIOS);
