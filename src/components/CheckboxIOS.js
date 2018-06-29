@@ -33,6 +33,17 @@ type Props = {
 
 /**
  * Checkboxes allow the selection of multiple options from a set.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img src="screenshots/checkbox-enabled.ios.png" />
+ *     <figcaption>iOS (enabled)</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/checkbox-disabled.ios.png" />
+ *     <figcaption>iOS (disabled)</figcaption>
+ *   </figure>
+ * </div>
  */
 class CheckboxIOS extends React.Component<Props> {
   render() {

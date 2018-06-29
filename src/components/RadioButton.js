@@ -1,7 +1,109 @@
+/* @flow */
+
+import * as React from 'react';
 import { Platform } from 'react-native';
+import RadioButtonGroup from './RadioButtonGroup';
 import RadioButtonAndroid from './RadioButtonAndroid';
 import RadioButtonIOS from './RadioButtonIOS';
+import withTheme from '../core/withTheme';
+import type { Theme } from '../types';
 
-const RadioButton = Platform.OS === 'ios' ? RadioButtonIOS : RadioButtonAndroid;
+type Props = {
+  /**
+   * Value of the radio button
+   */
+  value: string,
+  /**
+   * Whether radio is checked.
+   */
+  checked?: boolean,
+  /**
+   * Whether radio is disabled.
+   */
+  disabled?: boolean,
+  /**
+   * Function to execute on press.
+   */
+  onPress?: () => mixed,
+  /**
+   * Custom color for unchecked radio.
+   */
+  uncheckedColor?: string,
+  /**
+   * Custom color for radio.
+   */
+  color?: string,
+  /**
+   * @optional
+   */
+  theme: Theme,
+};
 
-export default RadioButton;
+/**
+ * Radio buttons allow the selection a single option from a set.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img src="screenshots/radio-enabled.android.png" />
+ *     <figcaption>Android (enabled)</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/radio-disabled.android.png" />
+ *     <figcaption>Android (disabled)</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/radio-enabled.ios.png" />
+ *     <figcaption>iOS (enabled)</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/radio-disabled.ios.png" />
+ *     <figcaption>iOS (disabled)</figcaption>
+ *   </figure>
+ * </div>
+ *
+ * ## Usage
+ * ```js
+ * import * as React from 'react';
+ * import { View } from 'react-native';
+ * import { RadioButton } from 'react-native-paper';
+ *
+ * export default class MyComponent extends React.Component {
+ *   state = {
+ *     checked: 'first',
+ *   };
+ *
+ *   render() {
+ *     const { checked } = this.state;
+ *
+ *     return (
+ *       <View>
+ *         <RadioButton
+ *           value="first"
+ *           checked={checked === 'first'}
+ *           onPress={() => { this.setState({ checked: 'firstOption' }); }}
+ *         />
+ *         <RadioButton
+ *           value="second"
+ *           checked={checked === 'second'}
+ *           onPress={() => { this.setState({ checked: 'secondOption' }); }}
+ *         />
+ *       </View>
+ *     );
+ *   }
+ * }
+ * ```
+ */
+class RadioButton extends React.Component<Props> {
+  // @component ./RadioButtonGroup.js
+  static Group = RadioButtonGroup;
+
+  render() {
+    return Platform.OS === 'ios' ? (
+      <RadioButtonIOS {...this.props} />
+    ) : (
+      <RadioButtonAndroid {...this.props} />
+    );
+  }
+}
+
+export default withTheme(RadioButton);

@@ -51,37 +51,7 @@ type State = {
  *     <img src="screenshots/checkbox-disabled.android.png" />
  *     <figcaption>Android (disabled)</figcaption>
  *   </figure>
- *   <figure>
- *     <img src="screenshots/checkbox-enabled.ios.png" />
- *     <figcaption>iOS (enabled)</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/checkbox-disabled.ios.png" />
- *     <figcaption>iOS (disabled)</figcaption>
- *   </figure>
  * </div>
- *
- * ## Usage
- * ```js
- * import * as React from 'react';
- * import { Checkbox } from 'react-native-paper';
- *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     checked: false,
- *   };
- *
- *   render() {
- *     const { checked } = this.state;
- *     return (
- *       <Checkbox
- *         checked={checked}
- *         onPress={() => { this.setState({ checked: !checked }); }}
- *       />
- *     );
- *   }
- * }
- * ```
  */
 class CheckboxAndroid extends React.Component<Props, State> {
   state = {

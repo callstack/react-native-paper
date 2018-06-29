@@ -58,47 +58,7 @@ const BORDER_WIDTH = 2;
  *     <img src="screenshots/radio-disabled.android.png" />
  *     <figcaption>Android (disabled)</figcaption>
  *   </figure>
- *   <figure>
- *     <img src="screenshots/radio-enabled.ios.png" />
- *     <figcaption>iOS (enabled)</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/radio-disabled.ios.png" />
- *     <figcaption>iOS (disabled)</figcaption>
- *   </figure>
  * </div>
- *
- * ## Usage
- * ```js
- * import * as React from 'react';
- * import { View } from 'react-native';
- * import { RadioButton } from 'react-native-paper';
- *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     checked: 'first',
- *   };
- *
- *   render() {
- *     const { checked } = this.state;
- *
- *     return (
- *       <View>
- *         <RadioButton
- *           value="first"
- *           checked={checked === 'first'}
- *           onPress={() => { this.setState({ checked: 'firstOption' }); }}
- *         />
- *         <RadioButton
- *           value="second"
- *           checked={checked === 'second'}
- *           onPress={() => { this.setState({ checked: 'secondOption' }); }}
- *         />
- *       </View>
- *     );
- *   }
- * }
- * ```
  */
 class RadioButtonAndroid extends React.Component<Props, State> {
   // @component ./RadioButtonGroup.js

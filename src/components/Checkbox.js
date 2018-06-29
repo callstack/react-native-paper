@@ -1,7 +1,91 @@
+/* @flow */
+
+import * as React from 'react';
 import { Platform } from 'react-native';
 import CheckboxAndroid from './CheckboxAndroid';
 import CheckboxIOS from './CheckboxIOS';
+import withTheme from '../core/withTheme';
+import type { Theme } from '../types';
 
-const Checkbox = Platform.OS === 'ios' ? CheckboxIOS : CheckboxAndroid;
+type Props = {
+  /**
+   * Whether checkbox is checked.
+   */
+  checked: boolean,
+  /**
+   * Whether checkbox is disabled.
+   */
+  disabled?: boolean,
+  /**
+   * Function to execute on press.
+   */
+  onPress?: () => mixed,
+  /**
+   * Custom color for unchecked checkbox.
+   */
+  uncheckedColor?: string,
+  /**
+   * Custom color for checkbox.
+   */
+  color?: string,
+  /**
+   * @optional
+   */
+  theme: Theme,
+};
 
-export default Checkbox;
+/**
+ * Checkboxes allow the selection of multiple options from a set.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img src="screenshots/checkbox-enabled.android.png" />
+ *     <figcaption>Android (enabled)</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/checkbox-disabled.android.png" />
+ *     <figcaption>Android (disabled)</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/checkbox-enabled.ios.png" />
+ *     <figcaption>iOS (enabled)</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/checkbox-disabled.ios.png" />
+ *     <figcaption>iOS (disabled)</figcaption>
+ *   </figure>
+ * </div>
+ *
+ * ## Usage
+ * ```js
+ * import * as React from 'react';
+ * import { Checkbox } from 'react-native-paper';
+ *
+ * export default class MyComponent extends React.Component {
+ *   state = {
+ *     checked: false,
+ *   };
+ *
+ *   render() {
+ *     const { checked } = this.state;
+ *     return (
+ *       <Checkbox
+ *         checked={checked}
+ *         onPress={() => { this.setState({ checked: !checked }); }}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
+ */
+class Checkbox extends React.Component<Props> {
+  render() {
+    return Platform.OS === 'ios' ? (
+      <CheckboxIOS {...this.props} />
+    ) : (
+      <CheckboxAndroid {...this.props} />
+    );
+  }
+}
+
+export default withTheme(Checkbox);
