@@ -29,7 +29,7 @@ class BannerExample extends React.Component<Props, State> {
   static title = 'Banner';
 
   state = {
-    visible: false,
+    visible: true,
   };
 
   render() {
@@ -40,42 +40,42 @@ class BannerExample extends React.Component<Props, State> {
     } = this.props;
     return (
       <View style={{ flex: 1 }}>
-        <Banner
-          actions={[
-            {
-              label: 'Fix it',
-              onPress: () => {
-                this.setState({ visible: false });
+        <ScrollView style={[styles.container, { backgroundColor: background }]}>
+          <Banner
+            actions={[
+              {
+                label: 'Fix it',
+                onPress: () => {
+                  this.setState({ visible: false });
+                },
               },
-            },
-            {
-              label: 'Learn more',
-              onPress: () => {
-                this.setState({ visible: false });
+              {
+                label: 'Learn more',
+                onPress: () => {
+                  this.setState({ visible: false });
+                },
               },
-            },
-          ]}
-          image={
-            <Image
-              source={require('../assets/email-icon.png')}
-              style={{
-                width: 40,
-                height: 40,
-              }}
-            />
-          }
-          message="Some text to display inside banner"
-          visible={this.state.visible}
-        />
-        <ScrollView
-          style={[styles.container, { backgroundColor: background }]}
-          contentContainerStyle={styles.content}
-        >
-          {PhotoGallery({ route: { key: 1 } })}
+            ]}
+            image={
+              <Image
+                source={require('../assets/email-icon.png')}
+                style={{
+                  width: 40,
+                  height: 40,
+                }}
+              />
+            }
+            message="There was a problem processing a transaction on your credit card."
+            visible={this.state.visible}
+          />
+          <View style={styles.content}>
+            {PhotoGallery({ route: { key: 1 } })}
+          </View>
         </ScrollView>
         <FAB
           small
           icon="add"
+          label="Show Banner"
           style={{
             margin: 8,
             position: 'absolute',

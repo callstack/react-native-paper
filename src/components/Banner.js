@@ -55,6 +55,8 @@ type NativeEvent = {
   },
 };
 
+const ANIMATION_DURATION = 250;
+
 class Banner extends React.Component<Props, State> {
   static defaultProps = {
     visible: true,
@@ -113,12 +115,12 @@ class Banner extends React.Component<Props, State> {
   _show = () => {
     Animated.parallel([
       Animated.timing(this.state.position, {
-        duration: 300,
+        duration: ANIMATION_DURATION,
         toValue: 0,
         useNativeDriver: true,
       }),
       Animated.timing(this.state.contentPosition, {
-        duration: 300,
+        duration: ANIMATION_DURATION,
         toValue: this.state.height || 0,
       }),
     ]).start();
@@ -127,12 +129,12 @@ class Banner extends React.Component<Props, State> {
   _hide = () => {
     Animated.parallel([
       Animated.timing(this.state.position, {
-        duration: 300,
+        duration: ANIMATION_DURATION,
         toValue: -(this.state.height || 0),
         useNativeDriver: true,
       }),
       Animated.timing(this.state.contentPosition, {
-        duration: 300,
+        duration: ANIMATION_DURATION,
         toValue: 0,
       }),
     ]).start();
@@ -157,7 +159,7 @@ class Banner extends React.Component<Props, State> {
             ? {
                 height: this.state.contentPosition,
               }
-            : {}
+            : null
         }
       >
         <Animated.View
@@ -187,7 +189,9 @@ class Banner extends React.Component<Props, State> {
               <Button
                 key={label}
                 onPress={onPress}
-                style={index === actions.length - 1 ? {} : styles.buttonMargin}
+                style={
+                  index === actions.length - 1 ? null : styles.buttonMargin
+                }
                 color={colors.primary}
                 compact
                 mode="text"
@@ -205,7 +209,6 @@ class Banner extends React.Component<Props, State> {
 
 const styles = StyleSheet.create({
   container: {
-    // top: 0,
     width: '100%',
     borderBottomColor: '#ddd',
     borderBottomWidth: 1,
