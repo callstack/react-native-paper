@@ -39,8 +39,8 @@ type Props = {
 
 type State = {
   height: ?number,
-  position: Animated.Value,
-  contentPosition: Animated.Value,
+  animatedPosition: Animated.Value,
+  animatedHeight: Animated.Value,
   measured: boolean,
 };
 
@@ -57,6 +57,78 @@ type NativeEvent = {
 
 const ANIMATION_DURATION = 250;
 
+/**
+ * Banner displays a prominent message and related optional actions.
+ *
+ * ## Usage
+ * ```js
+ * import React from 'react';
+ * import { View, ScrollView } from 'react-native';
+ * import { Banner } from 'react-native-paper';
+ *
+ * export default class MyComponent extends React.Component {
+ *   state = {
+ *     visible: false,
+ *   };
+ *
+ *   render() {
+ *     const { visible } = this.state;
+ *     return (
+ *       <View style={styles.container}>
+ *         <Banner
+ *           actions={[
+ *             {
+ *               label: 'Fix it',
+ *               onPress: () => {
+ *                 this.setState({ visible: false });
+ *               },
+ *             },
+ *             {
+ *               label: 'Learn more',
+ *               onPress: () => {
+ *                 this.setState({ visible: false });
+ *               },
+ *             },
+ *           ]}
+ *           image={
+ *             <Image
+ *               source={{ uri: 'https://avatars3.githubusercontent.com/u/17571969?s=400&v=4' }}
+ *               style={{
+ *                 width: 40,
+ *                 height: 40,
+ *               }}
+ *             />
+ *           }
+ *           message="There was a problem processing a transaction on your credit card."
+ *           visible={this.state.visible}
+ *         />
+ *         <FAB
+ *           small
+ *           icon="add"
+ *           label="Show Banner"
+ *           style={{
+ *             margin: 8,
+ *             position: 'absolute',
+ *             bottom: 0,
+ *           }}
+ *           onPress={() => {
+ *             this.setState({ visible: true });
+ *           }}
+ *         />
+ *       </View>
+ *     );
+ *   }
+ * }
+ *
+ * const styles = StyleSheet.create({
+ *   container: {
+ *     flex: 1,
+ *     justifyContent: 'space-between',
+ *   },
+ * });
+ * ```
+ */
+
 class Banner extends React.Component<Props, State> {
   static defaultProps = {
     visible: true,
@@ -64,8 +136,8 @@ class Banner extends React.Component<Props, State> {
 
   state = {
     height: null,
-    position: new Animated.Value(0),
-    contentPosition: new Animated.Value(0),
+    animatedPosition: new Animated.Value(this.props.visible ? 0 : -500),
+    animatedHeight: new Animated.Value(0),
     measured: false,
   };
 
@@ -82,23 +154,14 @@ class Banner extends React.Component<Props, State> {
     const { measured } = this.state;
 
     this.setState({ height, measured: true }, () => {
-      if (measured) {
-        if (!this.props.visible) {
-          // If height changed and Banner was hidden, adjust the translate to keep it hidden
-          this.state.position.setValue(0);
-          this.state.contentPosition.setValue(height);
-        } else {
-          this.state.position.setValue(-height);
-          this.state.contentPosition.setValue(height);
-        }
-      } else {
+      if (!measured) {
         // Set the appropriate initial values if height was previously unknown
         if (!this.props.visible) {
-          this.state.position.setValue(-height);
-          this.state.contentPosition.setValue(0);
+          this.state.animatedPosition.setValue(-height);
+          this.state.animatedHeight.setValue(0);
         } else {
-          this.state.position.setValue(0);
-          this.state.contentPosition.setValue(height);
+          this.state.animatedPosition.setValue(0);
+          this.state.animatedHeight.setValue(height);
         }
       }
     });
@@ -114,12 +177,12 @@ class Banner extends React.Component<Props, State> {
 
   _show = () => {
     Animated.parallel([
-      Animated.timing(this.state.position, {
+      Animated.timing(this.state.animatedPosition, {
         duration: ANIMATION_DURATION,
         toValue: 0,
         useNativeDriver: true,
       }),
-      Animated.timing(this.state.contentPosition, {
+      Animated.timing(this.state.animatedHeight, {
         duration: ANIMATION_DURATION,
         toValue: this.state.height || 0,
       }),
@@ -128,12 +191,12 @@ class Banner extends React.Component<Props, State> {
 
   _hide = () => {
     Animated.parallel([
-      Animated.timing(this.state.position, {
+      Animated.timing(this.state.animatedPosition, {
         duration: ANIMATION_DURATION,
         toValue: -(this.state.height || 0),
         useNativeDriver: true,
       }),
-      Animated.timing(this.state.contentPosition, {
+      Animated.timing(this.state.animatedHeight, {
         duration: ANIMATION_DURATION,
         toValue: 0,
       }),
@@ -157,7 +220,7 @@ class Banner extends React.Component<Props, State> {
         style={
           measured
             ? {
-                height: this.state.contentPosition,
+                height: this.state.animatedHeight,
               }
             : null
         }
@@ -171,7 +234,7 @@ class Banner extends React.Component<Props, State> {
               backgroundColor: colors.background,
               transform: [
                 {
-                  translateY: this.state.position,
+                  translateY: this.state.animatedPosition,
                 },
               ],
             },
