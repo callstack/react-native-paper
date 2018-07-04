@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Colors, FAB, withTheme } from 'react-native-paper';
+import { Colors, FAB, Portal, withTheme } from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
 
 type Props = {
@@ -38,22 +38,24 @@ class ButtonExample extends React.Component<Props, State> {
             style={styles.fab}
             onPress={() => {}}
           />
-          <FAB.Group
-            open={this.state.open}
-            icon={this.state.open ? 'today' : 'add'}
-            actions={[
-              { icon: 'add', onPress: () => {} },
-              { icon: 'star', label: 'Star', onPress: () => {} },
-              { icon: 'email', label: 'Email', onPress: () => {} },
-              { icon: 'notifications', label: 'Remind', onPress: () => {} },
-            ]}
-            onStateChange={({ open }) => this.setState({ open })}
-            onPress={() => {
-              if (this.state.open) {
-                // do something if the speed dial is open
-              }
-            }}
-          />
+          <Portal>
+            <FAB.Group
+              open={this.state.open}
+              icon={this.state.open ? 'today' : 'add'}
+              actions={[
+                { icon: 'add', onPress: () => {} },
+                { icon: 'star', label: 'Star', onPress: () => {} },
+                { icon: 'email', label: 'Email', onPress: () => {} },
+                { icon: 'notifications', label: 'Remind', onPress: () => {} },
+              ]}
+              onStateChange={({ open }) => this.setState({ open })}
+              onPress={() => {
+                if (this.state.open) {
+                  // do something if the speed dial is open
+                }
+              }}
+            />
+          </Portal>
         </View>
       </View>
     );

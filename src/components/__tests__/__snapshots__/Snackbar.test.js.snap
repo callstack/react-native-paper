@@ -1,564 +1,512 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders not visible snackbar with content 1`] = `
-<View
+<RCTSafeAreaView
   pointerEvents="box-none"
   style={
     Object {
       "bottom": 0,
-      "left": 0,
       "position": "absolute",
-      "right": 0,
-      "top": 0,
+      "width": "100%",
     }
   }
 >
-  <RCTSafeAreaView
+  <View
+    accessibilityLiveRegion="polite"
     pointerEvents="box-none"
     style={
       Object {
-        "bottom": 0,
-        "position": "absolute",
-        "width": "100%",
+        "opacity": 0,
+        "transform": Array [
+          Object {
+            "scale": 1,
+          },
+        ],
       }
     }
   >
     <View
-      accessibilityLiveRegion="polite"
       pointerEvents="box-none"
       style={
-        Object {
-          "opacity": 0,
-          "transform": Array [
-            Object {
-              "scale": 1,
-            },
-          ],
-        }
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#323232",
+            "borderRadius": 4,
+            "elevation": 6,
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "margin": 8,
+          },
+          Object {
+            "borderRadius": 4,
+          },
+          undefined,
+        ]
       }
     >
-      <View
-        pointerEvents="box-none"
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
         style={
           Array [
             Object {
-              "alignItems": "center",
-              "backgroundColor": "#323232",
-              "borderRadius": 4,
-              "elevation": 6,
-              "flexDirection": "row",
-              "justifyContent": "space-between",
-              "margin": 8,
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
             },
-            Object {
-              "borderRadius": 4,
-            },
-            undefined,
-          ]
-        }
-      >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          style={
             Array [
               Object {
-                "color": "#000000",
-                "fontFamily": "Helvetica Neue",
+                "color": "#ffffff",
+                "flex": 1,
+                "flexWrap": "wrap",
+                "marginLeft": 16,
+                "marginVertical": 14,
               },
-              Array [
-                Object {
-                  "color": "#ffffff",
-                  "flex": 1,
-                  "flexWrap": "wrap",
-                  "marginLeft": 16,
-                  "marginVertical": 14,
-                },
-                Object {
-                  "marginRight": 16,
-                },
-              ],
-            ]
+              Object {
+                "marginRight": 16,
+              },
+            ],
+          ]
+        }
+        theme={
+          Object {
+            "colors": Object {
+              "accent": "#03dac4",
+              "background": "#f6f6f6",
+              "disabled": "rgba(0, 0, 0, 0.26)",
+              "error": "#B00020",
+              "placeholder": "rgba(0, 0, 0, 0.38)",
+              "primary": "#6200ee",
+              "surface": "#ffffff",
+              "text": "#000000",
+            },
+            "dark": false,
+            "fonts": Object {
+              "light": "HelveticaNeue-Light",
+              "medium": "HelveticaNeue-Medium",
+              "regular": "Helvetica Neue",
+              "thin": "HelveticaNeue-Thin",
+            },
+            "roundness": 4,
           }
-          theme={
-            Object {
-              "colors": Object {
-                "accent": "#03dac4",
-                "background": "#f6f6f6",
-                "disabled": "rgba(0, 0, 0, 0.26)",
-                "error": "#B00020",
-                "placeholder": "rgba(0, 0, 0, 0.38)",
-                "primary": "#6200ee",
-                "surface": "#ffffff",
-                "text": "#000000",
-              },
-              "dark": false,
-              "fonts": Object {
-                "light": "HelveticaNeue-Light",
-                "medium": "HelveticaNeue-Medium",
-                "regular": "Helvetica Neue",
-                "thin": "HelveticaNeue-Thin",
-              },
-              "roundness": 4,
-            }
-          }
-        >
-          Snackbar content
-        </Text>
-      </View>
+        }
+      >
+        Snackbar content
+      </Text>
     </View>
-  </RCTSafeAreaView>
-</View>
+  </View>
+</RCTSafeAreaView>
 `;
 
 exports[`renders snackbar with Text as a child 1`] = `
-<View
+<RCTSafeAreaView
   pointerEvents="box-none"
   style={
     Object {
       "bottom": 0,
-      "left": 0,
       "position": "absolute",
-      "right": 0,
-      "top": 0,
+      "width": "100%",
     }
   }
 >
-  <RCTSafeAreaView
+  <View
+    accessibilityLiveRegion="polite"
     pointerEvents="box-none"
     style={
       Object {
-        "bottom": 0,
-        "position": "absolute",
-        "width": "100%",
+        "opacity": 0,
+        "transform": Array [
+          Object {
+            "scale": 0.9,
+          },
+        ],
       }
     }
   >
     <View
-      accessibilityLiveRegion="polite"
       pointerEvents="box-none"
       style={
-        Object {
-          "opacity": 0,
-          "transform": Array [
-            Object {
-              "scale": 0.9,
-            },
-          ],
-        }
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#323232",
+            "borderRadius": 4,
+            "elevation": 6,
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "margin": 8,
+          },
+          Object {
+            "borderRadius": 4,
+          },
+          undefined,
+        ]
       }
     >
-      <View
-        pointerEvents="box-none"
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
         style={
           Array [
             Object {
-              "alignItems": "center",
-              "backgroundColor": "#323232",
-              "borderRadius": 4,
-              "elevation": 6,
-              "flexDirection": "row",
-              "justifyContent": "space-between",
-              "margin": 8,
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
             },
-            Object {
-              "borderRadius": 4,
-            },
-            undefined,
+            Array [
+              Object {
+                "color": "#ffffff",
+                "flex": 1,
+                "flexWrap": "wrap",
+                "marginLeft": 16,
+                "marginVertical": 14,
+              },
+              Object {
+                "marginRight": 16,
+              },
+            ],
           ]
+        }
+        theme={
+          Object {
+            "colors": Object {
+              "accent": "#03dac4",
+              "background": "#f6f6f6",
+              "disabled": "rgba(0, 0, 0, 0.26)",
+              "error": "#B00020",
+              "placeholder": "rgba(0, 0, 0, 0.38)",
+              "primary": "#6200ee",
+              "surface": "#ffffff",
+              "text": "#000000",
+            },
+            "dark": false,
+            "fonts": Object {
+              "light": "HelveticaNeue-Light",
+              "medium": "HelveticaNeue-Medium",
+              "regular": "Helvetica Neue",
+              "thin": "HelveticaNeue-Thin",
+            },
+            "roundness": 4,
+          }
         }
       >
         <Text
           accessible={true}
           allowFontScaling={true}
           ellipsizeMode="tail"
-          style={
-            Array [
-              Object {
-                "color": "#000000",
-                "fontFamily": "Helvetica Neue",
-              },
-              Array [
-                Object {
-                  "color": "#ffffff",
-                  "flex": 1,
-                  "flexWrap": "wrap",
-                  "marginLeft": 16,
-                  "marginVertical": 14,
-                },
-                Object {
-                  "marginRight": 16,
-                },
-              ],
-            ]
-          }
-          theme={
-            Object {
-              "colors": Object {
-                "accent": "#03dac4",
-                "background": "#f6f6f6",
-                "disabled": "rgba(0, 0, 0, 0.26)",
-                "error": "#B00020",
-                "placeholder": "rgba(0, 0, 0, 0.38)",
-                "primary": "#6200ee",
-                "surface": "#ffffff",
-                "text": "#000000",
-              },
-              "dark": false,
-              "fonts": Object {
-                "light": "HelveticaNeue-Light",
-                "medium": "HelveticaNeue-Medium",
-                "regular": "Helvetica Neue",
-                "thin": "HelveticaNeue-Thin",
-              },
-              "roundness": 4,
-            }
-          }
-        >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-          >
-            Snackbar content
-          </Text>
-        </Text>
-      </View>
-    </View>
-  </RCTSafeAreaView>
-</View>
-`;
-
-exports[`renders snackbar with action button 1`] = `
-<View
-  pointerEvents="box-none"
-  style={
-    Object {
-      "bottom": 0,
-      "left": 0,
-      "position": "absolute",
-      "right": 0,
-      "top": 0,
-    }
-  }
->
-  <RCTSafeAreaView
-    pointerEvents="box-none"
-    style={
-      Object {
-        "bottom": 0,
-        "position": "absolute",
-        "width": "100%",
-      }
-    }
-  >
-    <View
-      accessibilityLiveRegion="polite"
-      pointerEvents="box-none"
-      style={
-        Object {
-          "opacity": 0,
-          "transform": Array [
-            Object {
-              "scale": 0.9,
-            },
-          ],
-        }
-      }
-    >
-      <View
-        pointerEvents="box-none"
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "backgroundColor": "#323232",
-              "borderRadius": 4,
-              "elevation": 6,
-              "flexDirection": "row",
-              "justifyContent": "space-between",
-              "margin": 8,
-            },
-            Object {
-              "borderRadius": 4,
-            },
-            undefined,
-          ]
-        }
-      >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          style={
-            Array [
-              Object {
-                "color": "#000000",
-                "fontFamily": "Helvetica Neue",
-              },
-              Array [
-                Object {
-                  "color": "#ffffff",
-                  "flex": 1,
-                  "flexWrap": "wrap",
-                  "marginLeft": 16,
-                  "marginVertical": 14,
-                },
-                Object {
-                  "marginRight": 0,
-                },
-              ],
-            ]
-          }
-          theme={
-            Object {
-              "colors": Object {
-                "accent": "#03dac4",
-                "background": "#f6f6f6",
-                "disabled": "rgba(0, 0, 0, 0.26)",
-                "error": "#B00020",
-                "placeholder": "rgba(0, 0, 0, 0.38)",
-                "primary": "#6200ee",
-                "surface": "#ffffff",
-                "text": "#000000",
-              },
-              "dark": false,
-              "fonts": Object {
-                "light": "HelveticaNeue-Light",
-                "medium": "HelveticaNeue-Medium",
-                "regular": "Helvetica Neue",
-                "thin": "HelveticaNeue-Thin",
-              },
-              "roundness": 4,
-            }
-          }
         >
           Snackbar content
         </Text>
-        <View
-          style={
+      </Text>
+    </View>
+  </View>
+</RCTSafeAreaView>
+`;
+
+exports[`renders snackbar with action button 1`] = `
+<RCTSafeAreaView
+  pointerEvents="box-none"
+  style={
+    Object {
+      "bottom": 0,
+      "position": "absolute",
+      "width": "100%",
+    }
+  }
+>
+  <View
+    accessibilityLiveRegion="polite"
+    pointerEvents="box-none"
+    style={
+      Object {
+        "opacity": 0,
+        "transform": Array [
+          Object {
+            "scale": 0.9,
+          },
+        ],
+      }
+    }
+  >
+    <View
+      pointerEvents="box-none"
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#323232",
+            "borderRadius": 4,
+            "elevation": 6,
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "margin": 8,
+          },
+          Object {
+            "borderRadius": 4,
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
+            },
             Array [
               Object {
-                "backgroundColor": "#ffffff",
+                "color": "#ffffff",
+                "flex": 1,
+                "flexWrap": "wrap",
+                "marginLeft": 16,
+                "marginVertical": 14,
               },
               Object {
-                "backgroundColor": "#ffffff",
+                "marginRight": 0,
               },
-              0,
-              Object {
-                "backgroundColor": "transparent",
-                "borderColor": "transparent",
-                "borderRadius": 4,
-                "borderStyle": "solid",
-                "borderWidth": 0.5,
-                "elevation": 0,
-                "marginHorizontal": 8,
-                "marginVertical": 6,
-                "minWidth": 64,
-              },
-            ]
+            ],
+          ]
+        }
+        theme={
+          Object {
+            "colors": Object {
+              "accent": "#03dac4",
+              "background": "#f6f6f6",
+              "disabled": "rgba(0, 0, 0, 0.26)",
+              "error": "#B00020",
+              "placeholder": "rgba(0, 0, 0, 0.38)",
+              "primary": "#6200ee",
+              "surface": "#ffffff",
+              "text": "#000000",
+            },
+            "dark": false,
+            "fonts": Object {
+              "light": "HelveticaNeue-Light",
+              "medium": "HelveticaNeue-Medium",
+              "regular": "Helvetica Neue",
+              "thin": "HelveticaNeue-Thin",
+            },
+            "roundness": 4,
+          }
+        }
+      >
+        Snackbar content
+      </Text>
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "#ffffff",
+            },
+            Object {
+              "backgroundColor": "#ffffff",
+            },
+            0,
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "transparent",
+              "borderRadius": 4,
+              "borderStyle": "solid",
+              "borderWidth": 0.5,
+              "elevation": 0,
+              "marginHorizontal": 8,
+              "marginVertical": 6,
+              "minWidth": 64,
+            },
+          ]
+        }
+      >
+        <View
+          accessibilityComponentType="button"
+          accessibilityTraits="button"
+          accessible={true}
+          isTVSelectable={true}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "borderRadius": 4,
+            }
           }
         >
           <View
-            accessibilityComponentType="button"
-            accessibilityTraits="button"
-            accessible={true}
-            isTVSelectable={true}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Object {
-                "borderRadius": 4,
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "center",
               }
             }
           >
-            <View
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
               style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "Helvetica Neue",
+                  },
+                  Array [
+                    Object {
+                      "letterSpacing": 1,
+                      "marginHorizontal": 16,
+                      "marginVertical": 9,
+                      "textAlign": "center",
+                    },
+                    Object {
+                      "marginHorizontal": 8,
+                    },
+                    Object {
+                      "color": "#03dac4",
+                      "fontFamily": "HelveticaNeue-Medium",
+                    },
+                    Object {
+                      "fontFamily": "HelveticaNeue-Medium",
+                    },
+                  ],
+                ]
+              }
+              theme={
                 Object {
-                  "alignItems": "center",
-                  "flexDirection": "row",
-                  "justifyContent": "center",
+                  "colors": Object {
+                    "accent": "#03dac4",
+                    "background": "#f6f6f6",
+                    "disabled": "rgba(0, 0, 0, 0.26)",
+                    "error": "#B00020",
+                    "placeholder": "rgba(0, 0, 0, 0.38)",
+                    "primary": "#6200ee",
+                    "surface": "#ffffff",
+                    "text": "#000000",
+                  },
+                  "dark": false,
+                  "fonts": Object {
+                    "light": "HelveticaNeue-Light",
+                    "medium": "HelveticaNeue-Medium",
+                    "regular": "Helvetica Neue",
+                    "thin": "HelveticaNeue-Thin",
+                  },
+                  "roundness": 4,
                 }
               }
             >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                numberOfLines={1}
-                style={
-                  Array [
-                    Object {
-                      "color": "#000000",
-                      "fontFamily": "Helvetica Neue",
-                    },
-                    Array [
-                      Object {
-                        "letterSpacing": 1,
-                        "marginHorizontal": 16,
-                        "marginVertical": 9,
-                        "textAlign": "center",
-                      },
-                      Object {
-                        "marginHorizontal": 8,
-                      },
-                      Object {
-                        "color": "#03dac4",
-                        "fontFamily": "HelveticaNeue-Medium",
-                      },
-                      Object {
-                        "fontFamily": "HelveticaNeue-Medium",
-                      },
-                    ],
-                  ]
-                }
-                theme={
-                  Object {
-                    "colors": Object {
-                      "accent": "#03dac4",
-                      "background": "#f6f6f6",
-                      "disabled": "rgba(0, 0, 0, 0.26)",
-                      "error": "#B00020",
-                      "placeholder": "rgba(0, 0, 0, 0.38)",
-                      "primary": "#6200ee",
-                      "surface": "#ffffff",
-                      "text": "#000000",
-                    },
-                    "dark": false,
-                    "fonts": Object {
-                      "light": "HelveticaNeue-Light",
-                      "medium": "HelveticaNeue-Medium",
-                      "regular": "Helvetica Neue",
-                      "thin": "HelveticaNeue-Thin",
-                    },
-                    "roundness": 4,
-                  }
-                }
-              >
-                UNDO
-              </Text>
-            </View>
+              UNDO
+            </Text>
           </View>
         </View>
       </View>
     </View>
-  </RCTSafeAreaView>
-</View>
+  </View>
+</RCTSafeAreaView>
 `;
 
 exports[`renders snackbar with content 1`] = `
-<View
+<RCTSafeAreaView
   pointerEvents="box-none"
   style={
     Object {
       "bottom": 0,
-      "left": 0,
       "position": "absolute",
-      "right": 0,
-      "top": 0,
+      "width": "100%",
     }
   }
 >
-  <RCTSafeAreaView
+  <View
+    accessibilityLiveRegion="polite"
     pointerEvents="box-none"
     style={
       Object {
-        "bottom": 0,
-        "position": "absolute",
-        "width": "100%",
+        "opacity": 0,
+        "transform": Array [
+          Object {
+            "scale": 0.9,
+          },
+        ],
       }
     }
   >
     <View
-      accessibilityLiveRegion="polite"
       pointerEvents="box-none"
       style={
-        Object {
-          "opacity": 0,
-          "transform": Array [
-            Object {
-              "scale": 0.9,
-            },
-          ],
-        }
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#323232",
+            "borderRadius": 4,
+            "elevation": 6,
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "margin": 8,
+          },
+          Object {
+            "borderRadius": 4,
+          },
+          undefined,
+        ]
       }
     >
-      <View
-        pointerEvents="box-none"
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
         style={
           Array [
             Object {
-              "alignItems": "center",
-              "backgroundColor": "#323232",
-              "borderRadius": 4,
-              "elevation": 6,
-              "flexDirection": "row",
-              "justifyContent": "space-between",
-              "margin": 8,
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
             },
-            Object {
-              "borderRadius": 4,
-            },
-            undefined,
-          ]
-        }
-      >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          style={
             Array [
               Object {
-                "color": "#000000",
-                "fontFamily": "Helvetica Neue",
+                "color": "#ffffff",
+                "flex": 1,
+                "flexWrap": "wrap",
+                "marginLeft": 16,
+                "marginVertical": 14,
               },
-              Array [
-                Object {
-                  "color": "#ffffff",
-                  "flex": 1,
-                  "flexWrap": "wrap",
-                  "marginLeft": 16,
-                  "marginVertical": 14,
-                },
-                Object {
-                  "marginRight": 16,
-                },
-              ],
-            ]
+              Object {
+                "marginRight": 16,
+              },
+            ],
+          ]
+        }
+        theme={
+          Object {
+            "colors": Object {
+              "accent": "#03dac4",
+              "background": "#f6f6f6",
+              "disabled": "rgba(0, 0, 0, 0.26)",
+              "error": "#B00020",
+              "placeholder": "rgba(0, 0, 0, 0.38)",
+              "primary": "#6200ee",
+              "surface": "#ffffff",
+              "text": "#000000",
+            },
+            "dark": false,
+            "fonts": Object {
+              "light": "HelveticaNeue-Light",
+              "medium": "HelveticaNeue-Medium",
+              "regular": "Helvetica Neue",
+              "thin": "HelveticaNeue-Thin",
+            },
+            "roundness": 4,
           }
-          theme={
-            Object {
-              "colors": Object {
-                "accent": "#03dac4",
-                "background": "#f6f6f6",
-                "disabled": "rgba(0, 0, 0, 0.26)",
-                "error": "#B00020",
-                "placeholder": "rgba(0, 0, 0, 0.38)",
-                "primary": "#6200ee",
-                "surface": "#ffffff",
-                "text": "#000000",
-              },
-              "dark": false,
-              "fonts": Object {
-                "light": "HelveticaNeue-Light",
-                "medium": "HelveticaNeue-Medium",
-                "regular": "Helvetica Neue",
-                "thin": "HelveticaNeue-Thin",
-              },
-              "roundness": 4,
-            }
-          }
-        >
-          Snackbar content
-        </Text>
-      </View>
+        }
+      >
+        Snackbar content
+      </Text>
     </View>
-  </RCTSafeAreaView>
-</View>
+  </View>
+</RCTSafeAreaView>
 `;

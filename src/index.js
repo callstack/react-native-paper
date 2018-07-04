@@ -23,6 +23,7 @@ export { default as HelperText } from './components/HelperText';
 export { default as IconButton } from './components/IconButton';
 export { default as ListSection } from './components/List/ListSection';
 export { default as Modal } from './components/Modal';
+export { default as Portal } from './components/Portal/Portal';
 export { default as ProgressBar } from './components/ProgressBar/ProgressBar';
 export { default as RadioButton } from './components/RadioButton';
 export { default as Searchbar } from './components/Searchbar';

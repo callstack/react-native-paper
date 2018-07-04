@@ -10,7 +10,6 @@ import {
   BackHandler,
 } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
-import ThemedPortal from './Portal/ThemedPortal';
 
 type Props = {
   /**
@@ -38,11 +37,12 @@ type State = {
 
 /**
  * The Modal component is a simple way to present content above an enclosing view.
+ * To render the `Modal` above other components, you'll need to wrap it with the [`Portal`](portal.html) component.
  *
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Modal, Text } from 'react-native-paper';
+ * import { Modal, Portal, Text } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
@@ -55,9 +55,11 @@ type State = {
  *   render() {
  *     const { visible } = this.state;
  *     return (
- *       <Modal visible={visible}>
- *         <Text>Example Modal</Text>
- *       </Modal>
+ *       <Portal>
+ *         <Modal visible={visible}>
+ *           <Text>Example Modal</Text>
+ *         </Modal>
+ *       </Portal>
  *     );
  *   }
  * }
@@ -136,28 +138,26 @@ class Modal extends React.Component<Props, State> {
 
     const { children, dismissable } = this.props;
     return (
-      <ThemedPortal>
-        <Animated.View
-          accessibilityViewIsModal
-          accessibilityLiveRegion="polite"
-          style={[{ opacity: this.state.opacity }, styles.wrapper]}
-        >
-          <View
-            style={[
-              StyleSheet.absoluteFill,
-              { backgroundColor: 'rgba(0, 0, 0, .5)' },
-            ]}
-          />
-          {dismissable && (
-            <TouchableWithoutFeedback onPress={this._hideModal}>
-              <View style={StyleSheet.absoluteFill} />
-            </TouchableWithoutFeedback>
-          )}
-          <Animated.View style={[{ opacity: this.state.opacity }]}>
-            {children}
-          </Animated.View>
+      <Animated.View
+        accessibilityViewIsModal
+        accessibilityLiveRegion="polite"
+        style={[{ opacity: this.state.opacity }, styles.wrapper]}
+      >
+        <View
+          style={[
+            StyleSheet.absoluteFill,
+            { backgroundColor: 'rgba(0, 0, 0, .5)' },
+          ]}
+        />
+        {dismissable && (
+          <TouchableWithoutFeedback onPress={this._hideModal}>
+            <View style={StyleSheet.absoluteFill} />
+          </TouchableWithoutFeedback>
+        )}
+        <Animated.View style={[{ opacity: this.state.opacity }]}>
+          {children}
         </Animated.View>
-      </ThemedPortal>
+      </Animated.View>
     );
   }
 }
