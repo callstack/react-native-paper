@@ -1,10 +1,9 @@
 /* @flow */
 
 import * as React from 'react';
-import { Animated, View, Platform, StyleSheet } from 'react-native';
-import color from 'color';
-import Icon from './Icon';
-import TouchableRipple from './TouchableRipple';
+import { Platform } from 'react-native';
+import CheckboxAndroid from './CheckboxAndroid';
+import CheckboxIOS from './CheckboxIOS';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types';
 
@@ -33,10 +32,6 @@ type Props = {
    * @optional
    */
   theme: Theme,
-};
-
-type State = {
-  scaleAnim: Animated.Value,
 };
 
 /**
@@ -83,108 +78,14 @@ type State = {
  * }
  * ```
  */
-class Checkbox extends React.Component<Props, State> {
-  state = {
-    scaleAnim: new Animated.Value(1),
-  };
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.checked === this.props.checked || Platform.OS !== 'android') {
-      return;
-    }
-
-    Animated.sequence([
-      Animated.timing(this.state.scaleAnim, {
-        toValue: 0.85,
-        duration: this.props.checked ? 200 : 0,
-      }),
-      Animated.timing(this.state.scaleAnim, {
-        toValue: 1,
-        duration: this.props.checked ? 200 : 350,
-      }),
-    ]).start();
-  }
-
+class Checkbox extends React.Component<Props> {
   render() {
-    const { checked, disabled, onPress, theme, ...rest } = this.props;
-    const checkedColor = this.props.color || theme.colors.accent;
-    const uncheckedColor =
-      this.props.uncheckedColor ||
-      color(theme.colors.text)
-        .alpha(theme.dark ? 0.7 : 0.54)
-        .rgb()
-        .string();
-
-    let rippleColor, checkboxColor;
-
-    if (disabled) {
-      rippleColor = color(theme.colors.text)
-        .alpha(0.16)
-        .rgb()
-        .string();
-      checkboxColor = theme.colors.disabled;
-    } else {
-      rippleColor = color(checkedColor)
-        .fade(0.32)
-        .rgb()
-        .string();
-      checkboxColor = checked ? checkedColor : uncheckedColor;
-    }
-
-    const borderWidth = this.state.scaleAnim.interpolate({
-      inputRange: [0.8, 1],
-      outputRange: [7, 0],
-    });
-
-    return (
-      <TouchableRipple
-        {...rest}
-        borderless
-        rippleColor={rippleColor}
-        onPress={onPress}
-        disabled={disabled}
-        accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
-        accessibilityComponentType="button"
-        accessibilityLiveRegion="polite"
-        style={styles.container}
-      >
-        <Animated.View style={{ transform: [{ scale: this.state.scaleAnim }] }}>
-          <Icon
-            allowFontScaling={false}
-            source={checked ? 'check-box' : 'check-box-outline-blank'}
-            size={24}
-            color={checkboxColor}
-          />
-          <View style={[StyleSheet.absoluteFill, styles.fillContainer]}>
-            <Animated.View
-              style={[
-                styles.fill,
-                { borderColor: checkboxColor },
-                { borderWidth },
-              ]}
-            />
-          </View>
-        </Animated.View>
-      </TouchableRipple>
+    return Platform.OS === 'ios' ? (
+      <CheckboxIOS {...this.props} />
+    ) : (
+      <CheckboxAndroid {...this.props} />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    borderRadius: 18,
-    width: 36,
-    height: 36,
-    padding: 6,
-  },
-  fillContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  fill: {
-    height: 14,
-    width: 14,
-  },
-});
 
 export default withTheme(Checkbox);

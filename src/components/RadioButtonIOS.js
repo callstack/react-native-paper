@@ -38,8 +38,19 @@ type Props = {
 
 /**
  * Radio buttons allow the selection a single option from a set
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img src="screenshots/radio-enabled.ios.png" />
+ *     <figcaption>iOS (enabled)</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/radio-disabled.ios.png" />
+ *     <figcaption>iOS (disabled)</figcaption>
+ *   </figure>
+ * </div>
  */
-class RadioButton extends React.Component<Props> {
+class RadioButtonIOS extends React.Component<Props> {
   // @component ./RadioButtonGroup.js
   static Group = RadioButtonGroup;
 
@@ -113,4 +124,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(RadioButton);
+export default withTheme(RadioButtonIOS);

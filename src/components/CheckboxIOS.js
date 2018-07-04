@@ -33,8 +33,19 @@ type Props = {
 
 /**
  * Checkboxes allow the selection of multiple options from a set.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img src="screenshots/checkbox-enabled.ios.png" />
+ *     <figcaption>iOS (enabled)</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/checkbox-disabled.ios.png" />
+ *     <figcaption>iOS (disabled)</figcaption>
+ *   </figure>
+ * </div>
  */
-class Checkbox extends React.Component<Props> {
+class CheckboxIOS extends React.Component<Props> {
   render() {
     const { checked, disabled, onPress, theme, ...rest } = this.props;
 
@@ -88,4 +99,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Checkbox);
+export default withTheme(CheckboxIOS);
