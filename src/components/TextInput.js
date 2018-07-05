@@ -15,7 +15,7 @@ import type { Theme } from '../types';
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
 const MINIMIZED_LABEL_Y_OFFSET = -12;
-const OUTLINE_MINIMIZED_LABEL_Y_OFFSET = -28;
+const OUTLINE_MINIMIZED_LABEL_Y_OFFSET = -29;
 const MAXIMIZED_LABEL_FONT_SIZE = 16;
 const MINIMIZED_LABEL_FONT_SIZE = 12;
 const LABEL_WIGGLE_X_OFFSET = 4;
@@ -54,6 +54,10 @@ type Props = {
    */
   underlineColor?: string,
   /**
+   * Background color to be used for outlined TextInput. Uses theme's background by default.
+   */
+  outlinedBackgroundColor?: string,
+  /**
    * Whether the input can have multiple lines.
    */
   multiline?: boolean,
@@ -86,6 +90,18 @@ type State = {
   focused: boolean,
   placeholder: ?string,
   value: ?string,
+  maxLabelWidth: number,
+};
+
+type LayoutEvent = {
+  nativeEvent: {
+    layout: {
+      x: number,
+      y: number,
+      width: number,
+      height: number,
+    },
+  },
 };
 
 /**
@@ -151,6 +167,7 @@ class TextInput extends React.Component<Props, State> {
     focused: false,
     placeholder: '',
     value: this.props.value,
+    maxLabelWidth: 0,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -262,6 +279,12 @@ class TextInput extends React.Component<Props, State> {
     }),
   });
 
+  _setMaxLabelWidth = (event: LayoutEvent) => {
+    this.setState({
+      maxLabelWidth: event.nativeEvent.layout.width,
+    });
+  };
+
   /**
    * @internal
    */
@@ -299,15 +322,9 @@ class TextInput extends React.Component<Props, State> {
 
   /**
   TODO
-  - outlined error color
-  - outlined border top
-  - look into colors
-  - outlined - look into measurements (e.g. text position)
   - flat - check if background can be calculated out of current theme
-  - check multiline inputs
   - leading icon
   - trailing icon
-  - cleanup, remove comments
    */
 
   render() {
@@ -317,6 +334,7 @@ class TextInput extends React.Component<Props, State> {
       label,
       error,
       underlineColor,
+      outlinedBackgroundColor,
       style,
       theme,
       ...rest
@@ -352,9 +370,8 @@ class TextInput extends React.Component<Props, State> {
         borderWidth: this.state.focused
           ? StyleSheet.hairlineWidth * 4
           : StyleSheet.hairlineWidth,
-        borderColor: this.state.focused ? primaryColor : underlineColor,
-        // borderTopWidth: 0,
-        padding: this.state.focused ? 0 : 1.5, // 0.75 with no border top
+        borderColor: this.state.focused ? labelColor : underlineColor,
+        padding: this.state.focused ? 0 : 1.5,
       };
     }
 
@@ -383,6 +400,11 @@ class TextInput extends React.Component<Props, State> {
       ],
     });
 
+    const outlinedLabelWidth = this.state.labeled.interpolate({
+      inputRange: [0, 1],
+      outputRange: [this.state.maxLabelWidth - 10, 0],
+    });
+
     const labelFontSize = this.state.labeled.interpolate({
       inputRange: [0, 1],
       outputRange: [MINIMIZED_LABEL_FONT_SIZE, MAXIMIZED_LABEL_FONT_SIZE],
@@ -398,11 +420,31 @@ class TextInput extends React.Component<Props, State> {
       ],
     };
 
+    const outlinedLabelStyle = {
+      color: outlinedBackgroundColor || colors.background,
+      backgroundColor: outlinedBackgroundColor || colors.background,
+      fontFamily,
+      fontSize: MINIMIZED_LABEL_FONT_SIZE,
+      width: outlinedLabelWidth,
+    };
+
     return (
       <View style={[containerStyle, style]}>
+        {mode === 'outlined' ? (
+          <AnimatedText
+            pointerEvents="none"
+            style={[styles.outlinedLabel, outlinedLabelStyle]}
+            numberOfLines={1}
+          >
+            {label}
+          </AnimatedText>
+        ) : null}
         <AnimatedText
           pointerEvents="none"
           style={[styles.placeholder, labelStyle]}
+          onLayout={event => {
+            this._setMaxLabelWidth(event);
+          }}
         >
           {label}
         </AnimatedText>
@@ -427,6 +469,7 @@ class TextInput extends React.Component<Props, State> {
                 ? styles.multilineWithLabel
                 : styles.multilineWithoutLabel
               : null,
+            mode === 'outlined' ? styles.inputOutlined : null,
             {
               color: inputTextColor,
               fontFamily,
@@ -484,11 +527,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingHorizontal: 12,
   },
+  outlinedLabel: {
+    position: 'absolute',
+    top: -10,
+    left: 4,
+  },
   input: {
     paddingBottom: 0,
     paddingHorizontal: 12,
     marginTop: 6,
     fontSize: 16,
+  },
+  inputOutlined: {
+    top: -5,
   },
   inputWithLabel: {
     paddingTop: 10,
