@@ -65,9 +65,10 @@ class BannerExample extends React.Component<Props, State> {
                 }}
               />
             }
-            message="There was a problem processing a transaction on your credit card."
             visible={this.state.visible}
-          />
+          >
+            There was a problem processing a transaction on your credit card.
+          </Banner>
           <View style={styles.content}>
             {PhotoGallery({ route: { key: 1 } })}
           </View>

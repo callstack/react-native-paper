@@ -13,10 +13,11 @@ type Props = {
    */
   visible: boolean,
   /**
-   * Array of objects that are displayed as action buttons.
+   * Array of objects that will be converted to action buttons.
    * Object should have following properties:
    * - `label`: label of the action button (required)
    * - `onPress`: callback that is called when button is pressed (required)
+   * To customize button you can pass other props that button component takes.
    */
   actions: Array<{
     label: string,
@@ -25,7 +26,7 @@ type Props = {
   /**
    * Message that will be displayed inside banner
    */
-  message: string,
+  children: string,
   /**
    * Image that will be displayed inside banner
    */
@@ -39,20 +40,9 @@ type Props = {
 
 type State = {
   height: ?number,
-  animatedPosition: Animated.Value,
-  animatedHeight: Animated.Value,
+  bannerPosition: Animated.Value,
+  wrapperHeight: Animated.Value,
   measured: boolean,
-};
-
-type NativeEvent = {
-  nativeEvent: {
-    layout: {
-      x: number,
-      y: number,
-      width: number,
-      height: number,
-    },
-  },
 };
 
 const ANIMATION_DURATION = 250;
@@ -74,7 +64,7 @@ const ANIMATION_DURATION = 250;
  *   render() {
  *     const { visible } = this.state;
  *     return (
- *       <View style={styles.container}>
+ *       <View style={{ flex: 1 }}>
  *         <Banner
  *           actions={[
  *             {
@@ -119,13 +109,6 @@ const ANIMATION_DURATION = 250;
  *     );
  *   }
  * }
- *
- * const styles = StyleSheet.create({
- *   container: {
- *     flex: 1,
- *     justifyContent: 'space-between',
- *   },
- * });
  * ```
  */
 
@@ -136,8 +119,8 @@ class Banner extends React.Component<Props, State> {
 
   state = {
     height: null,
-    animatedPosition: new Animated.Value(this.props.visible ? 0 : -500),
-    animatedHeight: new Animated.Value(0),
+    bannerPosition: new Animated.Value(this.props.visible ? 0 : -500),
+    wrapperHeight: new Animated.Value(0),
     measured: false,
   };
 
@@ -149,7 +132,7 @@ class Banner extends React.Component<Props, State> {
     }
   }
 
-  onLayout = ({ nativeEvent }: NativeEvent) => {
+  onLayout = ({ nativeEvent }) => {
     const { height } = nativeEvent.layout;
     const { measured } = this.state;
 
@@ -157,11 +140,11 @@ class Banner extends React.Component<Props, State> {
       if (!measured) {
         // Set the appropriate initial values if height was previously unknown
         if (!this.props.visible) {
-          this.state.animatedPosition.setValue(-height);
-          this.state.animatedHeight.setValue(0);
+          this.state.bannerPosition.setValue(-height);
+          this.state.wrapperHeight.setValue(0);
         } else {
-          this.state.animatedPosition.setValue(0);
-          this.state.animatedHeight.setValue(height);
+          this.state.bannerPosition.setValue(0);
+          this.state.wrapperHeight.setValue(height);
         }
       }
     });
@@ -177,12 +160,12 @@ class Banner extends React.Component<Props, State> {
 
   _show = () => {
     Animated.parallel([
-      Animated.timing(this.state.animatedPosition, {
+      Animated.timing(this.state.bannerPosition, {
         duration: ANIMATION_DURATION,
         toValue: 0,
         useNativeDriver: true,
       }),
-      Animated.timing(this.state.animatedHeight, {
+      Animated.timing(this.state.wrapperHeight, {
         duration: ANIMATION_DURATION,
         toValue: this.state.height || 0,
       }),
@@ -191,12 +174,12 @@ class Banner extends React.Component<Props, State> {
 
   _hide = () => {
     Animated.parallel([
-      Animated.timing(this.state.animatedPosition, {
+      Animated.timing(this.state.bannerPosition, {
         duration: ANIMATION_DURATION,
         toValue: -(this.state.height || 0),
         useNativeDriver: true,
       }),
-      Animated.timing(this.state.animatedHeight, {
+      Animated.timing(this.state.wrapperHeight, {
         duration: ANIMATION_DURATION,
         toValue: 0,
       }),
@@ -208,7 +191,7 @@ class Banner extends React.Component<Props, State> {
       image,
       actions,
       style,
-      message,
+      children,
       visible,
       theme: { colors },
     } = this.props;
@@ -220,7 +203,7 @@ class Banner extends React.Component<Props, State> {
         style={
           measured
             ? {
-                height: this.state.animatedHeight,
+                height: this.state.wrapperHeight,
               }
             : null
         }
@@ -234,7 +217,7 @@ class Banner extends React.Component<Props, State> {
               backgroundColor: colors.background,
               transform: [
                 {
-                  translateY: this.state.animatedPosition,
+                  translateY: this.state.bannerPosition,
                 },
               ],
             },
@@ -244,7 +227,7 @@ class Banner extends React.Component<Props, State> {
           <View style={styles.contentRow}>
             {image ? <View style={styles.imageContainer}>{image}</View> : null}
             <View style={{ flex: 1 }}>
-              <Text style={styles.message}>{message}</Text>
+              <Text style={styles.message}>{children}</Text>
             </View>
           </View>
           <View style={styles.actions}>
