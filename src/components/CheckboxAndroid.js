@@ -10,9 +10,9 @@ import type { Theme } from '../types';
 
 type Props = {
   /**
-   * Whether checkbox is checked.
+   * Status of checkbox.
    */
-  checked: boolean,
+  status: 'checked' | 'unchecked' | 'indeterminate',
   /**
    * Whether checkbox is disabled.
    */
@@ -62,24 +62,27 @@ class CheckboxAndroid extends React.Component<Props, State> {
   };
 
   componentDidUpdate(prevProps) {
-    if (prevProps.checked === this.props.checked) {
+    if (prevProps.status === this.props.status) {
       return;
     }
 
+    const checked = this.props.status === 'checked';
     Animated.sequence([
       Animated.timing(this.state.scaleAnim, {
         toValue: 0.85,
-        duration: this.props.checked ? 200 : 0,
+        duration: checked ? 200 : 0,
       }),
       Animated.timing(this.state.scaleAnim, {
         toValue: 1,
-        duration: this.props.checked ? 200 : 350,
+        duration: checked ? 200 : 350,
       }),
     ]).start();
   }
 
   render() {
-    const { checked, disabled, onPress, theme, ...rest } = this.props;
+    const { status, disabled, onPress, theme, ...rest } = this.props;
+    const checked = status === 'checked';
+    const indeterminate = status === 'indeterminate';
     const checkedColor = this.props.color || theme.colors.accent;
     const uncheckedColor =
       this.props.uncheckedColor ||
@@ -109,6 +112,12 @@ class CheckboxAndroid extends React.Component<Props, State> {
       outputRange: [7, 0],
     });
 
+    const icon = indeterminate
+      ? 'indeterminate-check-box'
+      : checked
+        ? 'check-box'
+        : 'check-box-outline-blank';
+
     return (
       <TouchableRipple
         {...rest}
@@ -124,7 +133,7 @@ class CheckboxAndroid extends React.Component<Props, State> {
         <Animated.View style={{ transform: [{ scale: this.state.scaleAnim }] }}>
           <Icon
             allowFontScaling={false}
-            source={checked ? 'check-box' : 'check-box-outline-blank'}
+            source={icon}
             size={24}
             color={checkboxColor}
           />

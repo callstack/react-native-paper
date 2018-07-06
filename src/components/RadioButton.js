@@ -14,9 +14,9 @@ type Props = {
    */
   value: string,
   /**
-   * Whether radio is checked.
+   * Status of radio button.
    */
-  checked?: boolean,
+  status?: 'checked' | 'unchecked',
   /**
    * Whether radio is disabled.
    */

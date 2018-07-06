@@ -15,9 +15,9 @@ type Props = {
    */
   value: string,
   /**
-   * Whether radio is checked.
+   * Status of radio button.
    */
-  checked?: boolean,
+  status?: 'checked' | 'unchecked',
   /**
    * Whether radio is disabled.
    */
@@ -68,7 +68,7 @@ class RadioButtonIOS extends React.Component<Props> {
 
           const checked = context
             ? context.value === this.props.value
-            : this.props.checked;
+            : this.props.status === 'checked';
 
           if (disabled) {
             rippleColor = color(theme.colors.text)

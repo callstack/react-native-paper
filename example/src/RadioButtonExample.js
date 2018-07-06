@@ -47,7 +47,9 @@ class RadioButtonExample extends React.Component<Props, State> {
             <View pointerEvents="none">
               <RadioButton
                 value="normal"
-                checked={this.state.checked === 'normal'}
+                status={
+                  this.state.checked === 'normal' ? 'checked' : 'unchecked'
+                }
               />
             </View>
           </View>
@@ -59,18 +61,20 @@ class RadioButtonExample extends React.Component<Props, State> {
               <RadioButton
                 value="custom"
                 color={Colors.blue500}
-                checked={this.state.checked === 'custom'}
+                status={
+                  this.state.checked === 'custom' ? 'checked' : 'unchecked'
+                }
               />
             </View>
           </View>
         </TouchableRipple>
         <View style={styles.row}>
           <Paragraph>Checked (Disabled)</Paragraph>
-          <RadioButton value="first" checked disabled />
+          <RadioButton value="first" status="checked" disabled />
         </View>
         <View style={styles.row}>
           <Paragraph>Unchecked (Disabled)</Paragraph>
-          <RadioButton value="second" checked={false} disabled />
+          <RadioButton value="second" status="unchecked" disabled />
         </View>
       </View>
     );

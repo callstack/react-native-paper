@@ -14,9 +14,9 @@ type Props = {
    */
   value: string,
   /**
-   * Whether radio is checked.
+   * Status of radio button.
    */
-  checked?: boolean,
+  status?: 'checked' | 'unchecked',
   /**
    * Whether radio is disabled.
    */
@@ -70,11 +70,11 @@ class RadioButtonAndroid extends React.Component<Props, State> {
   };
 
   componentDidUpdate(prevProps) {
-    if (prevProps.checked === this.props.checked) {
+    if (prevProps.status === this.props.status) {
       return;
     }
 
-    if (this.props.checked) {
+    if (this.props.status === 'checked') {
       this.state.radioAnim.setValue(1.2);
 
       Animated.timing(this.state.radioAnim, {
@@ -108,7 +108,7 @@ class RadioButtonAndroid extends React.Component<Props, State> {
 
           const checked = context
             ? context.value === this.props.value
-            : this.props.checked;
+            : this.props.status === 'checked';
 
           if (disabled) {
             rippleColor = color(theme.colors.text)

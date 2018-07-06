@@ -18,6 +18,7 @@ type Props = {
 type State = {
   checkedNormal: boolean,
   checkedCustom: boolean,
+  indeterminate: boolean,
 };
 
 class CheckboxExample extends React.Component<Props, State> {
@@ -26,6 +27,7 @@ class CheckboxExample extends React.Component<Props, State> {
   state = {
     checkedNormal: true,
     checkedCustom: true,
+    indeterminate: true,
   };
 
   render() {
@@ -53,7 +55,9 @@ class CheckboxExample extends React.Component<Props, State> {
           <View style={styles.row}>
             <Paragraph>Normal</Paragraph>
             <View pointerEvents="none">
-              <Checkbox checked={this.state.checkedNormal} />
+              <Checkbox
+                status={this.state.checkedNormal ? 'checked' : 'unchecked'}
+              />
             </View>
           </View>
         </TouchableRipple>
@@ -70,18 +74,42 @@ class CheckboxExample extends React.Component<Props, State> {
             <View pointerEvents="none">
               <Checkbox
                 color={Colors.blue500}
-                checked={this.state.checkedCustom}
+                status={this.state.checkedCustom ? 'checked' : 'unchecked'}
               />
             </View>
           </View>
         </TouchableRipple>
+
+        <TouchableRipple
+          onPress={() =>
+            this.setState(state => ({
+              indeterminate: !state.indeterminate,
+            }))
+          }
+        >
+          <View style={styles.row}>
+            <Paragraph>Indeterminate</Paragraph>
+            <View pointerEvents="none">
+              <Checkbox
+                status={
+                  this.state.indeterminate ? 'indeterminate' : 'unchecked'
+                }
+              />
+            </View>
+          </View>
+        </TouchableRipple>
+
         <View style={styles.row}>
           <Paragraph>Checked (Disabled)</Paragraph>
-          <Checkbox checked disabled />
+          <Checkbox status="checked" disabled />
         </View>
         <View style={styles.row}>
           <Paragraph>Unchecked (Disabled)</Paragraph>
-          <Checkbox checked={false} disabled />
+          <Checkbox status="unchecked" disabled />
+        </View>
+        <View style={styles.row}>
+          <Paragraph>Indeterminate (Disabled)</Paragraph>
+          <Checkbox status="indeterminate" disabled />
         </View>
       </View>
     );
