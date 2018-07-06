@@ -185,6 +185,7 @@ const styles = StyleSheet.create({
   },
   disabled: {
     opacity: 0.32,
+    elevation: 0,
   },
 });
 
