@@ -10,9 +10,9 @@ import type { Theme } from '../types';
 
 type Props = {
   /**
-   * Whether checkbox is checked.
+   * Status of checkbox.
    */
-  checked?: boolean,
+  status: 'checked' | 'unchecked' | 'indeterminate',
   /**
    * Whether checkbox is disabled.
    */
@@ -50,7 +50,9 @@ class CheckboxIOS extends React.Component<Props> {
   static displayName = 'Checkbox.IOS';
 
   render() {
-    const { checked, disabled, onPress, theme, ...rest } = this.props;
+    const { status, disabled, onPress, theme, ...rest } = this.props;
+    const checked = status === 'checked';
+    const indeterminate = status === 'indeterminate';
 
     const checkedColor = disabled
       ? theme.colors.disabled
@@ -70,6 +72,8 @@ class CheckboxIOS extends React.Component<Props> {
         .string();
     }
 
+    const icon = indeterminate ? 'indeterminate-check-box' : 'done';
+
     return (
       <TouchableRipple
         {...rest}
@@ -82,10 +86,10 @@ class CheckboxIOS extends React.Component<Props> {
         accessibilityLiveRegion="polite"
         style={styles.container}
       >
-        <View style={{ opacity: checked ? 1 : 0 }}>
+        <View style={{ opacity: indeterminate || checked ? 1 : 0 }}>
           <Icon
             allowFontScaling={false}
-            source="done"
+            source={icon}
             size={24}
             color={checkedColor}
           />

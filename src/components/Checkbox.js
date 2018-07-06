@@ -9,9 +9,9 @@ import type { Theme } from '../types';
 
 type Props = {
   /**
-   * Whether checkbox is checked.
+   * Status of checkbox.
    */
-  checked: boolean,
+  status: 'checked' | 'unchecked' | 'indeterminate',
   /**
    * Whether checkbox is disabled.
    */
@@ -70,7 +70,7 @@ type Props = {
  *     const { checked } = this.state;
  *     return (
  *       <Checkbox
- *         checked={checked}
+ *         status={checked ? 'checked' : 'unchecked'}
  *         onPress={() => { this.setState({ checked: !checked }); }}
  *       />
  *     );
