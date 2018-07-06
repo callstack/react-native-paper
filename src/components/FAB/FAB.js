@@ -38,6 +38,10 @@ type Props = {
    */
   color?: string,
   /**
+   * Whether `FAB` is disabled. A disabled button is greyed out and `onPress` is not called on touch.
+   */
+  disabled?: boolean,
+  /**
    * Function to execute on press.
    */
   onPress?: () => mixed,
@@ -81,6 +85,7 @@ class FAB extends React.Component<Props> {
       label,
       accessibilityLabel = label,
       color: customColor,
+      disabled,
       onPress,
       theme,
       style,
@@ -108,12 +113,18 @@ class FAB extends React.Component<Props> {
     return (
       <AnimatedSurface
         {...rest}
-        style={[{ backgroundColor }, styles.container, style]}
+        style={[
+          { backgroundColor },
+          styles.container,
+          disabled && styles.disabled,
+          style,
+        ]}
       >
         <TouchableRipple
           borderless
           onPress={onPress}
           rippleColor={rippleColor}
+          disabled={disabled}
           accessibilityLabel={accessibilityLabel}
           accessibilityTraits="button"
           accessibilityComponentType="button"
@@ -171,6 +182,9 @@ const styles = StyleSheet.create({
   },
   label: {
     marginHorizontal: 8,
+  },
+  disabled: {
+    opacity: 0.32,
   },
 });
 

@@ -38,24 +38,29 @@ class ButtonExample extends React.Component<Props, State> {
             style={styles.fab}
             onPress={() => {}}
           />
-          <Portal>
-            <FAB.Group
-              open={this.state.open}
-              icon={this.state.open ? 'today' : 'add'}
-              actions={[
-                { icon: 'add', onPress: () => {} },
-                { icon: 'star', label: 'Star', onPress: () => {} },
-                { icon: 'email', label: 'Email', onPress: () => {} },
-                { icon: 'notifications', label: 'Remind', onPress: () => {} },
-              ]}
-              onStateChange={({ open }) => this.setState({ open })}
-              onPress={() => {
-                if (this.state.open) {
-                  // do something if the speed dial is open
-                }
-              }}
-            />
-          </Portal>
+          <FAB
+            icon="cancel"
+            label="Disabled FAB"
+            style={styles.fab}
+            onPress={() => {}}
+            disabled
+          />
+          <FAB.Group
+            open={this.state.open}
+            icon={this.state.open ? 'today' : 'add'}
+            actions={[
+              { icon: 'add', onPress: () => {} },
+              { icon: 'star', label: 'Star', onPress: () => {} },
+              { icon: 'email', label: 'Email', onPress: () => {} },
+              { icon: 'notifications', label: 'Remind', onPress: () => {} },
+            ]}
+            onStateChange={({ open }) => this.setState({ open })}
+            onPress={() => {
+              if (this.state.open) {
+                // do something if the speed dial is open
+              }
+            }}
+          />
         </View>
       </View>
     );

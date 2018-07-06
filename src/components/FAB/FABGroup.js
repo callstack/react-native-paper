@@ -48,6 +48,10 @@ type Props = {
    */
   color?: string,
   /**
+   * Whether `FAB` is disabled. A disabled button is greyed out and `onPress` is not called on touch.
+   */
+  disabled?: boolean,
+  /**
    * Function to execute on pressing the `FAB`.
    */
   onPress?: () => mixed,
@@ -188,6 +192,7 @@ class FABGroup extends React.Component<Props, State> {
       actions,
       icon,
       open,
+      disabled,
       onPress,
       accessibilityLabel,
       theme,
@@ -266,35 +271,24 @@ class FABGroup extends React.Component<Props, State> {
                     }
                     accessibilityTraits="button"
                     accessibilityComponentType="button"
-                  >
-                    <Text style={{ color: labelColor }}>{it.label}</Text>
-                  </Card>
-                )}
-                <FAB
-                  small
-                  icon={it.icon}
-                  color={it.color}
-                  style={[
-                    {
-                      transform: [{ scale: scales[i] }],
-                      backgroundColor: theme.colors.surface,
-                    },
-                  ]}
-                  onPress={() => {
-                    it.onPress();
-                    this._close();
-                  }}
-                  accessibilityLabel={
-                    typeof it.accessibilityLabel !== 'undefined'
-                      ? it.accessibilityLabel
-                      : it.label
-                  }
-                  accessibilityTraits="button"
-                  accessibilityComponentType="button"
-                />
-              </View>
-            </Animated.View>
-          ))}
+                  />
+                </View>
+              </Animated.View>
+            ))}
+          </View>
+          <FAB
+            onPress={() => {
+              onPress && onPress();
+              this._toggle();
+            }}
+            icon={icon}
+            disabled={disabled}
+            color={this.props.color}
+            accessibilityLabel={accessibilityLabel}
+            accessibilityTraits="button"
+            accessibilityComponentType="button"
+            style={styles.fab}
+          />
         </View>
         <FAB
           onPress={() => {
