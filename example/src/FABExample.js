@@ -38,6 +38,13 @@ class ButtonExample extends React.Component<Props, State> {
             style={styles.fab}
             onPress={() => {}}
           />
+          <FAB
+            icon="cancel"
+            label="Disabled FAB"
+            style={styles.fab}
+            onPress={() => {}}
+            disabled
+          />
           <Portal>
             <FAB.Group
               open={this.state.open}

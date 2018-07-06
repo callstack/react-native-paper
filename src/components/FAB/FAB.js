@@ -8,7 +8,7 @@ import Surface from '../Surface';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple';
-import { white } from '../../styles/colors';
+import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 import type { IconSource } from './../Icon';
@@ -37,6 +37,10 @@ type Props = {
    * Custom color for the `FAB`.
    */
   color?: string,
+  /**
+   * Whether `FAB` is disabled. A disabled button is greyed out and `onPress` is not called on touch.
+   */
+  disabled?: boolean,
   /**
    * Function to execute on press.
    */
@@ -81,19 +85,30 @@ class FAB extends React.Component<Props> {
       label,
       accessibilityLabel = label,
       color: customColor,
+      disabled,
       onPress,
       theme,
       style,
       ...rest
     } = this.props;
 
-    const { backgroundColor = theme.colors.accent } =
+    const disabledColor = color(theme.dark ? white : black)
+      .alpha(0.12)
+      .rgb()
+      .string();
+
+    const { backgroundColor = disabled ? disabledColor : theme.colors.accent } =
       StyleSheet.flatten(style) || {};
 
     let foregroundColor;
 
     if (typeof customColor !== 'undefined') {
       foregroundColor = customColor;
+    } else if (disabled) {
+      foregroundColor = color(theme.dark ? white : black)
+        .alpha(0.32)
+        .rgb()
+        .string();
     } else {
       foregroundColor = !color(backgroundColor).light()
         ? white
@@ -108,12 +123,18 @@ class FAB extends React.Component<Props> {
     return (
       <AnimatedSurface
         {...rest}
-        style={[{ backgroundColor }, styles.container, style]}
+        style={[
+          { backgroundColor },
+          styles.container,
+          disabled && styles.disabled,
+          style,
+        ]}
       >
         <TouchableRipple
           borderless
           onPress={onPress}
           rippleColor={rippleColor}
+          disabled={disabled}
           accessibilityLabel={accessibilityLabel}
           accessibilityTraits="button"
           accessibilityComponentType="button"
@@ -147,7 +168,7 @@ class FAB extends React.Component<Props> {
 const styles = StyleSheet.create({
   container: {
     borderRadius: 28,
-    elevation: 12,
+    elevation: 6,
   },
   touchable: {
     borderRadius: 28,
@@ -171,6 +192,9 @@ const styles = StyleSheet.create({
   },
   label: {
     marginHorizontal: 8,
+  },
+  disabled: {
+    elevation: 0,
   },
 });
 
