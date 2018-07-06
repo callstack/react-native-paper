@@ -5,7 +5,6 @@ import { StyleSheet, Animated, View, SafeAreaView } from 'react-native';
 
 import Button from './Button';
 import Text from './Typography/Text';
-import ThemedPortal from './Portal/ThemedPortal';
 import withTheme from '../core/withTheme';
 import { white } from '../styles/colors';
 import type { Theme } from '../types';
@@ -60,8 +59,9 @@ const DURATION_LONG = 10000;
  *
  * ## Usage
  * ```js
- * import React from 'react';
- * import { Snackbar, StyleSheet } from 'react-native-paper';
+ * import * as React from 'react';
+ * import { StyleSheet } from 'react-native';
+ * import { Snackbar } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
@@ -173,50 +173,48 @@ class Snackbar extends React.Component<Props, State> {
     const { colors, roundness } = theme;
 
     return (
-      <ThemedPortal>
-        <SafeAreaView pointerEvents="box-none" style={styles.wrapper}>
-          <Animated.View
+      <SafeAreaView pointerEvents="box-none" style={styles.wrapper}>
+        <Animated.View
+          pointerEvents="box-none"
+          accessibilityLiveRegion="polite"
+          style={{
+            opacity: this.state.opacity,
+            transform: [
+              {
+                scale: visible
+                  ? this.state.opacity.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [0.9, 1],
+                    })
+                  : 1,
+              },
+            ],
+          }}
+        >
+          <View
             pointerEvents="box-none"
-            accessibilityLiveRegion="polite"
-            style={{
-              opacity: this.state.opacity,
-              transform: [
-                {
-                  scale: visible
-                    ? this.state.opacity.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [0.9, 1],
-                      })
-                    : 1,
-                },
-              ],
-            }}
+            style={[styles.container, { borderRadius: roundness }, style]}
           >
-            <View
-              pointerEvents="box-none"
-              style={[styles.container, { borderRadius: roundness }, style]}
-            >
-              <Text style={[styles.content, { marginRight: action ? 0 : 16 }]}>
-                {children}
-              </Text>
-              {action ? (
-                <Button
-                  onPress={() => {
-                    action.onPress();
-                    onDismiss();
-                  }}
-                  style={styles.button}
-                  color={colors.accent}
-                  compact
-                  mode="text"
-                >
-                  {action.label.toUpperCase()}
-                </Button>
-              ) : null}
-            </View>
-          </Animated.View>
-        </SafeAreaView>
-      </ThemedPortal>
+            <Text style={[styles.content, { marginRight: action ? 0 : 16 }]}>
+              {children}
+            </Text>
+            {action ? (
+              <Button
+                onPress={() => {
+                  action.onPress();
+                  onDismiss();
+                }}
+                style={styles.button}
+                color={colors.accent}
+                compact
+                mode="text"
+              >
+                {action.label.toUpperCase()}
+              </Button>
+            ) : null}
+          </View>
+        </Animated.View>
+      </SafeAreaView>
     );
   }
 }

@@ -24,9 +24,31 @@ export const PortalContext: Context<PortalMethods> = createReactContext(
 );
 
 /**
- * Portal host is the component which actually renders all Portals.
+ * Portal host renders all of its children `Portal` elements.
+ * For example, you can wrap a screen in `Portal.Host` to render items above the screen.
+ * If you're using the `Provider` component, it already includes `Portal.Host`.
+ *
+ * ## Usage
+ * ```js
+ * import * as React from 'react';
+ * import { Portal, StyleSheet } from 'react-native-paper';
+ *
+ * export default class MyComponent extends React.Component {
+ *   render() {
+ *     return (
+ *       <Portal.Host>
+ *         <App />
+ *       </Portal.Host>
+ *     );
+ *   }
+ * }
+ * ```
+ *
+ * Here any `Portal` elements under `<App />` are rendered alongside `<App />` and will appear above `<App />` like a `Modal`.
  */
 export default class PortalHost extends React.Component<Props> {
+  static displayName = 'Portal.Host';
+
   componentDidMount() {
     const manager = this._manager;
     const queue = this._queue;
