@@ -22,6 +22,10 @@ type Props = {
    * Icon to display for the `ListAccordion`.
    */
   icon?: React.Node,
+  /**
+   * Indicates whether children should be indented or not.
+   */
+  indented?: boolean,
 
   /**
    * Content of the section.
@@ -75,7 +79,15 @@ class ListAccordion extends React.Component<Props, State> {
     }));
 
   render() {
-    const { icon, title, description, children, theme, style } = this.props;
+    const {
+      icon,
+      indented,
+      title,
+      description,
+      children,
+      theme,
+      style,
+    } = this.props;
     const titleColor = color(theme.colors.text)
       .alpha(0.87)
       .rgb()
@@ -160,11 +172,11 @@ class ListAccordion extends React.Component<Props, State> {
                 !child.props.icon &&
                 !child.props.avatar
               ) {
+                const applyIndent = indented == null || indented;
                 return React.cloneElement(child, {
-                  style: [styles.child, child.props.style],
+                  style: [applyIndent && styles.child, child.props.style],
                 });
               }
-
               return child;
             })
           : null}
