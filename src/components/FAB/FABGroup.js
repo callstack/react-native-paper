@@ -191,8 +191,8 @@ class FABGroup extends React.Component<Props, State> {
     const {
       actions,
       icon,
-      open,
       disabled,
+      open,
       onPress,
       accessibilityLabel,
       theme,
@@ -271,24 +271,36 @@ class FABGroup extends React.Component<Props, State> {
                     }
                     accessibilityTraits="button"
                     accessibilityComponentType="button"
-                  />
-                </View>
-              </Animated.View>
-            ))}
-          </View>
-          <FAB
-            onPress={() => {
-              onPress && onPress();
-              this._toggle();
-            }}
-            icon={icon}
-            disabled={disabled}
-            color={this.props.color}
-            accessibilityLabel={accessibilityLabel}
-            accessibilityTraits="button"
-            accessibilityComponentType="button"
-            style={styles.fab}
-          />
+                  >
+                    <Text style={{ color: labelColor }}>{it.label}</Text>
+                  </Card>
+                )}
+                <FAB
+                  small
+                  icon={it.icon}
+                  disabled={disabled}
+                  color={it.color}
+                  style={[
+                    {
+                      transform: [{ scale: scales[i] }],
+                      backgroundColor: theme.colors.surface,
+                    },
+                  ]}
+                  onPress={() => {
+                    it.onPress();
+                    this._close();
+                  }}
+                  accessibilityLabel={
+                    typeof it.accessibilityLabel !== 'undefined'
+                      ? it.accessibilityLabel
+                      : it.label
+                  }
+                  accessibilityTraits="button"
+                  accessibilityComponentType="button"
+                />
+              </View>
+            </Animated.View>
+          ))}
         </View>
         <FAB
           onPress={() => {
@@ -296,6 +308,7 @@ class FABGroup extends React.Component<Props, State> {
             this._toggle();
           }}
           icon={icon}
+          disabled={disabled}
           color={this.props.color}
           accessibilityLabel={accessibilityLabel}
           accessibilityTraits="button"
