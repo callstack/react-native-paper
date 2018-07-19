@@ -116,7 +116,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 8,
-    height: 40,
   },
   label: {
     marginRight: 32,
