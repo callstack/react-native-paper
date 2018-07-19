@@ -107,7 +107,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 16,
     paddingVertical: 12,
-    height: 48,
   },
   label: {
     marginRight: 32,
