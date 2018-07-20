@@ -25,12 +25,14 @@ type Props = {
    * - `label`: optional label text
    * - `accessibilityLabel`: accessibility label for the action, uses label by default if specified
    * - `color`: custom icon color of the action item
+   * - `disabled`: whether item is disabled
    * - `onPress`: callback that is called when `FAB` is pressed (required)
    */
   actions: Array<{
     icon: string,
     label?: string,
     color?: string,
+    disabled?: boolean,
     accessibilityLabel?: string,
     onPress: () => mixed,
   }>,
@@ -259,6 +261,7 @@ class FABGroup extends React.Component<Props, State> {
                       {
                         transform: [{ scale: scales[i] }],
                       },
+                      (it.disabled || disabled) && styles.disabledLabel,
                     ]}
                     onPress={() => {
                       it.onPress();
@@ -278,7 +281,7 @@ class FABGroup extends React.Component<Props, State> {
                 <FAB
                   small
                   icon={it.icon}
-                  disabled={disabled}
+                  disabled={it.disabled || disabled}
                   color={it.color}
                   style={[
                     {
@@ -345,6 +348,10 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     marginHorizontal: 16,
     elevation: 2,
+  },
+  disabledLabel: {
+    opacity: 0.32,
+    elevation: 0,
   },
   item: {
     marginHorizontal: 24,

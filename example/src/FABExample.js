@@ -53,6 +53,12 @@ class ButtonExample extends React.Component<Props, State> {
                 { icon: 'add', onPress: () => {} },
                 { icon: 'star', label: 'Star', onPress: () => {} },
                 { icon: 'email', label: 'Email', onPress: () => {} },
+                {
+                  icon: 'cancel',
+                  label: 'Call',
+                  disabled: true,
+                  onPress: () => {},
+                },
                 { icon: 'notifications', label: 'Remind', onPress: () => {} },
               ]}
               onStateChange={({ open }) => this.setState({ open })}
