@@ -72,6 +72,8 @@ exports[`renders list item with avatar 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -189,6 +191,8 @@ exports[`renders list item with avatar and icon 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -235,6 +239,8 @@ exports[`renders list item with avatar and icon 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -300,9 +306,18 @@ exports[`renders list item with avatar and icon 1`] = `
               "color": "rgba(0, 0, 0, 0.54)",
               "fontSize": 24,
             },
-            Object {
-              "backgroundColor": "transparent",
-            },
+            Array [
+              Object {
+                "transform": Array [
+                  Object {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              Object {
+                "backgroundColor": "transparent",
+              },
+            ],
             Object {
               "fontFamily": "Material Icons",
               "fontStyle": "normal",
@@ -371,9 +386,18 @@ exports[`renders list item with icon 1`] = `
               "color": "rgba(0, 0, 0, 0.54)",
               "fontSize": 24,
             },
-            Object {
-              "backgroundColor": "transparent",
-            },
+            Array [
+              Object {
+                "transform": Array [
+                  Object {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              Object {
+                "backgroundColor": "transparent",
+              },
+            ],
             Object {
               "fontFamily": "Material Icons",
               "fontStyle": "normal",
@@ -409,6 +433,8 @@ exports[`renders list item with icon 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -500,6 +526,8 @@ exports[`renders list item with title and description 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -546,6 +574,8 @@ exports[`renders list item with title and description 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
