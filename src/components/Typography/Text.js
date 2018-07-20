@@ -39,7 +39,12 @@ class Text extends React.Component<Props> {
           this._root = c;
         }}
         style={[
-          { fontFamily: theme.fonts.regular, color: theme.colors.text, textAlign: 'left', writingDirection },
+          {
+            fontFamily: theme.fonts.regular,
+            color: theme.colors.text,
+            textAlign: 'left',
+            writingDirection,
+          },
           style,
         ]}
       />

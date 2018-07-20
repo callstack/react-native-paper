@@ -28,7 +28,7 @@ class StyledText extends React.Component<Props> {
       <Text
         {...rest}
         style={[
-          { color: textColor, fontFamily, writingDirection, textAlign: 'left' },
+          { color: textColor, fontFamily, textAlign: 'left', writingDirection },
           style,
           this.props.style,
         ]}
