@@ -1,0 +1,316 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders disabled icon button 1`] = `
+<View
+  accessibilityComponentType="button"
+  accessibilityTraits={
+    Array [
+      "button",
+      "disabled",
+    ]
+  }
+  accessible={true}
+  hitSlop={
+    Object {
+      "bottom": 6,
+      "left": 6,
+      "right": 6,
+      "top": 6,
+    }
+  }
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderRadius": 18,
+        "height": 36,
+        "justifyContent": "center",
+        "margin": 6,
+        "width": 36,
+      },
+      Object {
+        "opacity": 0.32,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={null}
+  >
+    <Text
+      accessibilityElementsHidden={true}
+      accessible={true}
+      allowFontScaling={false}
+      ellipsizeMode="tail"
+      importantForAccessibility="no-hide-descendants"
+      pointerEvents="none"
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontSize": 24,
+          },
+          Array [
+            Object {
+              "transform": Array [
+                Object {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
+          Object {
+            "fontFamily": "Material Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+        ]
+      }
+    >
+      
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`renders icon button by default 1`] = `
+<View
+  accessibilityComponentType="button"
+  accessibilityTraits="button"
+  accessible={true}
+  hitSlop={
+    Object {
+      "bottom": 6,
+      "left": 6,
+      "right": 6,
+      "top": 6,
+    }
+  }
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderRadius": 18,
+        "height": 36,
+        "justifyContent": "center",
+        "margin": 6,
+        "width": 36,
+      },
+      undefined,
+      undefined,
+    ]
+  }
+>
+  <View
+    style={null}
+  >
+    <Text
+      accessibilityElementsHidden={true}
+      accessible={true}
+      allowFontScaling={false}
+      ellipsizeMode="tail"
+      importantForAccessibility="no-hide-descendants"
+      pointerEvents="none"
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontSize": 24,
+          },
+          Array [
+            Object {
+              "transform": Array [
+                Object {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
+          Object {
+            "fontFamily": "Material Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+        ]
+      }
+    >
+      
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`renders icon button with color 1`] = `
+<View
+  accessibilityComponentType="button"
+  accessibilityTraits="button"
+  accessible={true}
+  hitSlop={
+    Object {
+      "bottom": 6,
+      "left": 6,
+      "right": 6,
+      "top": 6,
+    }
+  }
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderRadius": 18,
+        "height": 36,
+        "justifyContent": "center",
+        "margin": 6,
+        "width": 36,
+      },
+      undefined,
+      undefined,
+    ]
+  }
+>
+  <View
+    style={null}
+  >
+    <Text
+      accessibilityElementsHidden={true}
+      accessible={true}
+      allowFontScaling={false}
+      ellipsizeMode="tail"
+      importantForAccessibility="no-hide-descendants"
+      pointerEvents="none"
+      style={
+        Array [
+          Object {
+            "color": "#e91e63",
+            "fontSize": 24,
+          },
+          Array [
+            Object {
+              "transform": Array [
+                Object {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
+          Object {
+            "fontFamily": "Material Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+        ]
+      }
+    >
+      
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`renders icon button with size 1`] = `
+<View
+  accessibilityComponentType="button"
+  accessibilityTraits="button"
+  accessible={true}
+  hitSlop={
+    Object {
+      "bottom": 6,
+      "left": 6,
+      "right": 6,
+      "top": 6,
+    }
+  }
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderRadius": 18,
+        "height": 36,
+        "justifyContent": "center",
+        "margin": 6,
+        "width": 36,
+      },
+      undefined,
+      undefined,
+    ]
+  }
+>
+  <View
+    style={null}
+  >
+    <Text
+      accessibilityElementsHidden={true}
+      accessible={true}
+      allowFontScaling={false}
+      ellipsizeMode="tail"
+      importantForAccessibility="no-hide-descendants"
+      pointerEvents="none"
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontSize": 30,
+          },
+          Array [
+            Object {
+              "transform": Array [
+                Object {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
+          Object {
+            "fontFamily": "Material Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+        ]
+      }
+    >
+      
+    </Text>
+  </View>
+</View>
+`;

@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import color from 'color';
-import RadioButtonGroup, { RadioButtonContext } from './RadioButtonGroup';
+import { RadioButtonContext } from './RadioButtonGroup';
 import Icon from './Icon';
 import TouchableRipple from './TouchableRipple';
 import withTheme from '../core/withTheme';
@@ -37,11 +37,22 @@ type Props = {
 };
 
 /**
- * Radio buttons allow the selection a single option from a set
+ * Radio buttons allow the selection a single option from a set.
+ * This component follows platform guidelines for iOS.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img src="screenshots/radio-enabled.ios.png" />
+ *     <figcaption>Enabled</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/radio-disabled.ios.png" />
+ *     <figcaption>Disabled</figcaption>
+ *   </figure>
+ * </div>
  */
-class RadioButton extends React.Component<Props> {
-  // @component ./RadioButtonGroup.js
-  static Group = RadioButtonGroup;
+class RadioButtonIOS extends React.Component<Props> {
+  static displayName = 'RadioButton.IOS';
 
   render() {
     return (
@@ -113,4 +124,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(RadioButton);
+export default withTheme(RadioButtonIOS);

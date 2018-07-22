@@ -17,7 +17,7 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Button, Dialog } from 'react-native-paper';
+ * import { Button, Dialog, Portal } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
@@ -28,14 +28,16 @@ type Props = {
  *
  *   render() {
  *     return (
- *       <Dialog
- *         visible={this.state.visible}
- *         onDismiss={this._hideDialog}>
- *         <Dialog.Actions>
- *           <Button onPress={() => console.log("Cancel"))}>Cancel</Button>
- *           <Button onPress={() => console.log("Ok")}>Ok</Button>
- *         </Dialog.Actions>
- *       </Dialog>
+ *       <Portal>
+ *         <Dialog
+ *           visible={this.state.visible}
+ *           onDismiss={this._hideDialog}>
+ *           <Dialog.Actions>
+ *             <Button onPress={() => console.log("Cancel"))}>Cancel</Button>
+ *             <Button onPress={() => console.log("Ok")}>Ok</Button>
+ *           </Dialog.Actions>
+ *         </Dialog>
+ *       </Portal>
  *     );
  *   }
  * }

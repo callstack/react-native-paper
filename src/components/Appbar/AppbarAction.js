@@ -3,7 +3,7 @@
 import * as React from 'react';
 import color from 'color';
 import { black } from '../../styles/colors';
-import TouchableIcon from '../TouchableIcon';
+import IconButton from '../IconButton';
 import type { IconSource } from '../Icon';
 
 type Props = {
@@ -19,7 +19,11 @@ type Props = {
    * Optional icon size.
    */
   size?: number,
-  /*
+  /**
+   * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
+   */
+  disabled?: boolean,
+  /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
   accessibilityLabel?: string,
@@ -47,19 +51,19 @@ export default class AppbarAction extends React.Component<Props> {
         .rgb()
         .string(),
       icon,
+      disabled,
       onPress,
       accessibilityLabel,
       ...rest
     } = this.props;
 
     return (
-      <TouchableIcon
+      <IconButton
         onPress={onPress}
         color={iconColor}
-        source={icon}
+        icon={icon}
+        disabled={disabled}
         accessibilityLabel={accessibilityLabel}
-        accessibilityTraits="button"
-        accessibilityComponentType="button"
         {...rest}
       />
     );

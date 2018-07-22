@@ -33,6 +33,7 @@ type Props = {
 
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
+ * To render the `Dialog` above other components, you'll need to wrap it with the [`Portal`](portal.html) component.
  *
  *  <div class="screenshots">
  *   <img class="medium" src="screenshots/dialog-1.png" />
@@ -43,7 +44,7 @@ type Props = {
  * ```js
  * import * as React from 'react';
  * import { View } from 'react-native';
- * import { Button, Dialog, Paragraph } from 'react-native-paper';
+ * import { Button, Paragraph, Dialog, Portal } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
@@ -58,18 +59,19 @@ type Props = {
  *     return (
  *       <View>
  *         <Button onPress={this._showDialog}>Show Dialog</Button>
- *         <Dialog
- *            visible={this.state.visible}
- *            onDismiss={this._hideDialog}
- *         >
- *           <Dialog.Title>Alert</Dialog.Title>
- *           <Dialog.Content>
- *             <Paragraph>This is simple dialog</Paragraph>
- *           </Dialog.Content>
- *           <Dialog.Actions>
- *             <Button onPress={this._hideDialog}>Done</Button>
- *           </Dialog.Actions>
- *         </Dialog>
+ *         <Portal>
+ *           <Dialog
+ *              visible={this.state.visible}
+ *              onDismiss={this._hideDialog}>
+ *             <Dialog.Title>Alert</Dialog.Title>
+ *             <Dialog.Content>
+ *               <Paragraph>This is simple dialog</Paragraph>
+ *             </Dialog.Content>
+ *             <Dialog.Actions>
+ *               <Button onPress={this._hideDialog}>Done</Button>
+ *             </Dialog.Actions>
+ *           </Dialog>
+ *         </Portal>
  *       </View>
  *     );
  *   }

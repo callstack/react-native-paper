@@ -50,7 +50,7 @@ type Props = {
    * Label text of the button.
    */
   children: React.Node,
-  /*
+  /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
   accessibilityLabel?: string,
@@ -171,7 +171,7 @@ class Button extends React.Component<Props, State> {
     }
 
     if (disabled) {
-      textColor = color(theme.dak ? white : black)
+      textColor = color(theme.dark ? white : black)
         .alpha(0.32)
         .rgb()
         .string();

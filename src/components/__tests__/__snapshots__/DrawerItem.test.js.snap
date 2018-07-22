@@ -36,7 +36,6 @@ exports[`renders DrawerItem with icon 1`] = `
         Object {
           "alignItems": "center",
           "flexDirection": "row",
-          "height": 40,
           "padding": 8,
         }
       }
@@ -167,7 +166,6 @@ exports[`renders active DrawerItem 1`] = `
         Object {
           "alignItems": "center",
           "flexDirection": "row",
-          "height": 40,
           "padding": 8,
         }
       }
@@ -298,7 +296,6 @@ exports[`renders basic DrawerItem 1`] = `
         Object {
           "alignItems": "center",
           "flexDirection": "row",
-          "height": 40,
           "padding": 8,
         }
       }

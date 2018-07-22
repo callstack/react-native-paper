@@ -13,7 +13,6 @@ import color from 'color';
 import FAB from './FAB';
 import Text from '../Typography/Text';
 import Card from '../Card/Card';
-import ThemedPortal from '../Portal/ThemedPortal';
 import withTheme from '../../core/withTheme';
 import type { Theme } from '../../types';
 import type { IconSource } from '../Icon';
@@ -40,7 +39,7 @@ type Props = {
    * You can toggle it based on whether the speed dial is open to display a different icon.
    */
   icon: IconSource,
-  /*
+  /**
    * Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.
    */
   accessibilityLabel?: string,
@@ -79,6 +78,7 @@ type State = {
 
 /**
  * A component to display a stack of FABs with related actions in a speed dial.
+ * To render the group above other components, you'll need to wrap it with the [`Portal`](portal.html) component.
  *
  * <div class="screenshots">
  *   <img src="screenshots/fab-group.png" />
@@ -86,8 +86,8 @@ type State = {
  *
  * ## Usage
  * ```js
- * import React from 'react';
- * import { FAB, StyleSheet } from 'react-native-paper';
+ * import * as React from 'react';
+ * import { FAB, Portal, StyleSheet } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
@@ -96,22 +96,24 @@ type State = {
  *
  *   render() {
  *     return (
- *       <FAB.Group
- *         open={this.state.open}
- *         icon={this.state.open ? 'today' : 'add'}
- *         actions={[
- *           { icon: 'add', onPress: () => {} },
- *           { icon: 'star', label: 'Star', onPress: () => {} },
- *           { icon: 'email', label: 'Email', onPress: () => {} },
- *           { icon: 'notifications', label: 'Remind', onPress: () => {} },
- *         ]}
- *         onStateChange={({ open }) => this.setState({ open })}
- *         onPress={() => {
- *           if (this.state.open) {
- *             // do something if the speed dial is open
- *           }
- *         }}
- *       />
+ *       <Portal>
+ *         <FAB.Group
+ *           open={this.state.open}
+ *           icon={this.state.open ? 'today' : 'add'}
+ *           actions={[
+ *             { icon: 'add', onPress: () => {} },
+ *             { icon: 'star', label: 'Star', onPress: () => {} },
+ *             { icon: 'email', label: 'Email', onPress: () => {} },
+ *             { icon: 'notifications', label: 'Remind', onPress: () => {} },
+ *           ]}
+ *           onStateChange={({ open }) => this.setState({ open })}
+ *           onPress={() => {
+ *             if (this.state.open) {
+ *               // do something if the speed dial is open
+ *             }
+ *           }}
+ *         />
+ *       </Portal>
  *     );
  *   }
  * }
@@ -219,64 +221,38 @@ class FABGroup extends React.Component<Props, State> {
     );
 
     return (
-      <ThemedPortal>
+      <View pointerEvents="box-none" style={[styles.container, style]}>
         {open ? <StatusBar barStyle="light-content" /> : null}
-        <View pointerEvents="box-none" style={[styles.container, style]}>
-          <TouchableWithoutFeedback onPress={this._close}>
+        <TouchableWithoutFeedback onPress={this._close}>
+          <Animated.View
+            pointerEvents={open ? 'auto' : 'none'}
+            style={[
+              styles.backdrop,
+              {
+                opacity: backdropOpacity,
+                backgroundColor: 'rgba(0, 0, 0, 0.4)',
+              },
+            ]}
+          />
+        </TouchableWithoutFeedback>
+        <View pointerEvents={open ? 'box-none' : 'none'}>
+          {actions.map((it, i) => (
             <Animated.View
-              pointerEvents={open ? 'auto' : 'none'}
+                key={i} //eslint-disable-line
               style={[
-                styles.backdrop,
                 {
-                  opacity: backdropOpacity,
-                  backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                  opacity: opacities[i],
                 },
               ]}
-            />
-          </TouchableWithoutFeedback>
-          <View pointerEvents={open ? 'box-none' : 'none'}>
-            {actions.map((it, i) => (
-              <Animated.View
-                key={i} //eslint-disable-line
-                style={[
-                  {
-                    opacity: opacities[i],
-                  },
-                ]}
-                pointerEvents="box-none"
-              >
-                <View style={styles.item} pointerEvents="box-none">
-                  {it.label && (
-                    <Card
-                      style={[
-                        styles.label,
-                        {
-                          transform: [{ scale: scales[i] }],
-                        },
-                      ]}
-                      onPress={() => {
-                        it.onPress();
-                        this._close();
-                      }}
-                      accessibilityLabel={
-                        it.accessibilityLabel !== 'undefined'
-                          ? it.accessibilityLabel
-                          : it.label
-                      }
-                      accessibilityTraits="button"
-                      accessibilityComponentType="button"
-                    >
-                      <Text style={{ color: labelColor }}>{it.label}</Text>
-                    </Card>
-                  )}
-                  <FAB
-                    small
-                    icon={it.icon}
-                    color={it.color}
+              pointerEvents="box-none"
+            >
+              <View style={styles.item} pointerEvents="box-none">
+                {it.label && (
+                  <Card
                     style={[
+                      styles.label,
                       {
                         transform: [{ scale: scales[i] }],
-                        backgroundColor: theme.colors.surface,
                       },
                     ]}
                     onPress={() => {
@@ -284,31 +260,55 @@ class FABGroup extends React.Component<Props, State> {
                       this._close();
                     }}
                     accessibilityLabel={
-                      typeof it.accessibilityLabel !== 'undefined'
+                      it.accessibilityLabel !== 'undefined'
                         ? it.accessibilityLabel
                         : it.label
                     }
                     accessibilityTraits="button"
                     accessibilityComponentType="button"
-                  />
-                </View>
-              </Animated.View>
-            ))}
-          </View>
-          <FAB
-            onPress={() => {
-              onPress && onPress();
-              this._toggle();
-            }}
-            icon={icon}
-            color={this.props.color}
-            accessibilityLabel={accessibilityLabel}
-            accessibilityTraits="button"
-            accessibilityComponentType="button"
-            style={styles.fab}
-          />
+                  >
+                    <Text style={{ color: labelColor }}>{it.label}</Text>
+                  </Card>
+                )}
+                <FAB
+                  small
+                  icon={it.icon}
+                  color={it.color}
+                  style={[
+                    {
+                      transform: [{ scale: scales[i] }],
+                      backgroundColor: theme.colors.surface,
+                    },
+                  ]}
+                  onPress={() => {
+                    it.onPress();
+                    this._close();
+                  }}
+                  accessibilityLabel={
+                    typeof it.accessibilityLabel !== 'undefined'
+                      ? it.accessibilityLabel
+                      : it.label
+                  }
+                  accessibilityTraits="button"
+                  accessibilityComponentType="button"
+                />
+              </View>
+            </Animated.View>
+          ))}
         </View>
-      </ThemedPortal>
+        <FAB
+          onPress={() => {
+            onPress && onPress();
+            this._toggle();
+          }}
+          icon={icon}
+          color={this.props.color}
+          accessibilityLabel={accessibilityLabel}
+          accessibilityTraits="button"
+          accessibilityComponentType="button"
+          style={styles.fab}
+        />
+      </View>
     );
   }
 }

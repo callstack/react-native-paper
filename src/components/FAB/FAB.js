@@ -24,7 +24,7 @@ type Props = {
    * Optional label for extended `FAB`.
    */
   label?: string,
-  /*
+  /**
    * Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.
    * Uses `label` by default if specified.
    */
