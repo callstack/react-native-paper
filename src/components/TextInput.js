@@ -9,8 +9,10 @@ import {
 } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
 import Text from './Typography/Text';
+import Icon from './Icon';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types';
+import type { IconSource } from './Icon';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
@@ -49,6 +51,14 @@ type Props = {
    * Callback that is called when the text input's text changes. Changed text is passed as an argument to the callback handler.
    */
   onChangeText?: Function,
+  /**
+   * Leading icon of the TextInput.
+   */
+  leadingIcon?: IconSource,
+  /**
+   * Trailing icon of the TextInput.
+   */
+  trailingIcon?: IconSource,
   /**
    * Underline color of the input.
    */
@@ -320,19 +330,14 @@ class TextInput extends React.Component<Props, State> {
     return this._root.blur();
   }
 
-  /**
-  TODO
-  - flat - check if background can be calculated out of current theme
-  - leading icon
-  - trailing icon
-   */
-
   render() {
     const {
       mode,
       disabled,
       label,
       error,
+      leadingIcon,
+      trailingIcon,
       underlineColor,
       outlinedBackgroundColor,
       style,
@@ -433,7 +438,11 @@ class TextInput extends React.Component<Props, State> {
         {mode === 'outlined' ? (
           <AnimatedText
             pointerEvents="none"
-            style={[styles.outlinedLabel, outlinedLabelStyle]}
+            style={[
+              styles.outlinedLabel,
+              outlinedLabelStyle,
+              leadingIcon ? styles.outlinedWithIcon : null,
+            ]}
             numberOfLines={1}
           >
             {label}
@@ -441,41 +450,66 @@ class TextInput extends React.Component<Props, State> {
         ) : null}
         <AnimatedText
           pointerEvents="none"
-          style={[styles.placeholder, labelStyle]}
+          style={[
+            styles.placeholder,
+            labelStyle,
+            leadingIcon ? styles.placeholderIcon : null,
+          ]}
           onLayout={event => {
             this._setMaxLabelWidth(event);
           }}
         >
           {label}
         </AnimatedText>
-        <NativeTextInput
-          {...rest}
-          ref={c => {
-            this._root = c;
-          }}
-          onChangeText={this._handleChangeText}
-          placeholder={label ? this.state.placeholder : this.props.placeholder}
-          placeholderTextColor={colors.placeholder}
-          editable={!disabled}
-          selectionColor={labelColor}
-          onFocus={this._handleFocus}
-          onBlur={this._handleBlur}
-          underlineColorAndroid="transparent"
-          style={[
-            styles.input,
-            label ? styles.inputWithLabel : styles.inputWithoutLabel,
-            rest.multiline
-              ? label
-                ? styles.multilineWithLabel
-                : styles.multilineWithoutLabel
-              : null,
-            mode === 'outlined' ? styles.inputOutlined : null,
-            {
-              color: inputTextColor,
-              fontFamily,
-            },
-          ]}
-        />
+        <View style={styles.iconContainer}>
+          {leadingIcon ? (
+            <View style={styles.icon}>
+              <Icon source={leadingIcon} color={inputTextColor} size={24} />
+            </View>
+          ) : null}
+          <NativeTextInput
+            {...rest}
+            ref={c => {
+              this._root = c;
+            }}
+            onChangeText={this._handleChangeText}
+            placeholder={
+              label ? this.state.placeholder : this.props.placeholder
+            }
+            placeholderTextColor={colors.placeholder}
+            editable={!disabled}
+            selectionColor={labelColor}
+            onFocus={this._handleFocus}
+            onBlur={this._handleBlur}
+            underlineColorAndroid="transparent"
+            style={[
+              styles.input,
+              label ? styles.inputWithLabel : styles.inputWithoutLabel,
+              rest.multiline
+                ? label
+                  ? styles.multilineWithLabel
+                  : styles.multilineWithoutLabel
+                : null,
+              mode === 'outlined' ? styles.inputOutlined : null,
+              {
+                color: inputTextColor,
+                fontFamily,
+                flex: 1,
+              },
+              leadingIcon ? styles.withIcon : null,
+            ]}
+          />
+          {trailingIcon ? (
+            <View style={styles.icon}>
+              <Icon
+                source={trailingIcon}
+                color={inputTextColor}
+                size={24}
+                style={styles.icon}
+              />
+            </View>
+          ) : null}
+        </View>
         {mode === 'flat' ? (
           <View pointerEvents="none" style={styles.bottomLineContainer}>
             <View
@@ -569,5 +603,23 @@ const styles = StyleSheet.create({
   },
   focusLine: {
     height: StyleSheet.hairlineWidth * 4,
+  },
+  iconContainer: {
+    flexDirection: 'row',
+    height: 56,
+  },
+  icon: {
+    marginTop: 18,
+    marginHorizontal: 12,
+  },
+  placeholderIcon: {
+    left: 36,
+  },
+  withIcon: {
+    left: -12,
+    flex: 1,
+  },
+  outlinedWithIcon: {
+    left: 42,
   },
 });
