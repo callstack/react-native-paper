@@ -49,6 +49,10 @@ type Props = {
    */
   underlineColor?: string,
   /**
+   * Color for the text selection background. Defaults to the theme's primary color.
+   */
+  selectionColor?: string,
+  /**
    * Whether the input can have multiple lines.
    */
   multiline?: boolean,
@@ -343,6 +347,7 @@ class TextInput extends React.Component<Props, State> {
       disabled,
       label,
       error,
+      selectionColor,
       underlineColor,
       style,
       theme,
@@ -423,7 +428,7 @@ class TextInput extends React.Component<Props, State> {
           placeholder={label ? this.state.placeholder : this.props.placeholder}
           placeholderTextColor={colors.placeholder}
           editable={!disabled}
-          selectionColor={labelColor}
+          selectionColor={selectionColor || colors.primary}
           onFocus={this._handleFocus}
           onBlur={this._handleBlur}
           underlineColorAndroid="transparent"
