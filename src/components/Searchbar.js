@@ -188,6 +188,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 18,
     paddingLeft: 8,
+    alignSelf: 'stretch',
   },
 });
 
