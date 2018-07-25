@@ -156,6 +156,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 12,
     paddingVertical: 4,
+    paddingHorizontal: 12,
   },
 });
 

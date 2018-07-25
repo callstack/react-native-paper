@@ -9,12 +9,15 @@ import {
 } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
 import Text from './Typography/Text';
+import Icon from './Icon';
 import withTheme from '../core/withTheme';
 import type { Theme } from '../types';
+import type { IconSource } from './Icon';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
-const MINIMIZED_LABEL_Y_OFFSET = -22;
+const MINIMIZED_LABEL_Y_OFFSET = -12;
+const OUTLINE_MINIMIZED_LABEL_Y_OFFSET = -29;
 const MAXIMIZED_LABEL_FONT_SIZE = 16;
 const MINIMIZED_LABEL_FONT_SIZE = 12;
 const LABEL_WIGGLE_X_OFFSET = 4;
@@ -22,6 +25,12 @@ const FOCUS_ANIMATION_DURATION = 150;
 const BLUR_ANIMATION_DURATION = 180;
 
 type Props = {
+  /**
+   * Mode of the TextInput.
+   * - `flat` - flat input without outline.
+   * - `outlined` - input with an outline.
+   */
+  mode?: 'flat' | 'outlined',
   /**
    * If true, user won't be able to interact with the component.
    */
@@ -43,9 +52,21 @@ type Props = {
    */
   onChangeText?: Function,
   /**
+   * Leading icon of the TextInput.
+   */
+  leadingIcon?: IconSource,
+  /**
+   * Trailing icon of the TextInput.
+   */
+  trailingIcon?: IconSource,
+  /**
    * Underline color of the input.
    */
   underlineColor?: string,
+  /**
+   * Background color to be used for outlined TextInput. Uses theme's background by default.
+   */
+  outlinedBackgroundColor?: string,
   /**
    * Whether the input can have multiple lines.
    */
@@ -79,6 +100,18 @@ type State = {
   focused: boolean,
   placeholder: ?string,
   value: ?string,
+  maxLabelWidth: number,
+};
+
+type LayoutEvent = {
+  nativeEvent: {
+    layout: {
+      x: number,
+      y: number,
+      width: number,
+      height: number,
+    },
+  },
 };
 
 /**
@@ -123,6 +156,7 @@ type State = {
 
 class TextInput extends React.Component<Props, State> {
   static defaultProps = {
+    mode: 'flat',
     disabled: false,
     error: false,
     multiline: false,
@@ -143,6 +177,7 @@ class TextInput extends React.Component<Props, State> {
     focused: false,
     placeholder: '',
     value: this.props.value,
+    maxLabelWidth: 0,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -262,6 +297,12 @@ class TextInput extends React.Component<Props, State> {
     }),
   });
 
+  _setMaxLabelWidth = (event: LayoutEvent) => {
+    this.setState({
+      maxLabelWidth: event.nativeEvent.layout.width,
+    });
+  };
+
   /**
    * @internal
    */
@@ -299,10 +340,14 @@ class TextInput extends React.Component<Props, State> {
 
   render() {
     const {
+      mode,
       disabled,
       label,
       error,
+      leadingIcon,
+      trailingIcon,
       underlineColor,
+      outlinedBackgroundColor,
       style,
       theme,
       ...rest
@@ -316,7 +361,7 @@ class TextInput extends React.Component<Props, State> {
       error: errorColor,
     } = colors;
 
-    let inputTextColor, labelColor, bottomLineColor;
+    let inputTextColor, labelColor, bottomLineColor, containerStyle;
 
     if (!disabled) {
       inputTextColor = colors.text;
@@ -324,6 +369,23 @@ class TextInput extends React.Component<Props, State> {
       bottomLineColor = underlineColor || primaryColor;
     } else {
       inputTextColor = labelColor = bottomLineColor = inactiveColor;
+    }
+
+    if (mode === 'flat') {
+      containerStyle = {
+        backgroundColor: '#D7D7D7',
+        borderTopLeftRadius: theme.roundness,
+        borderTopRightRadius: theme.roundness,
+      };
+    } else {
+      containerStyle = {
+        borderRadius: theme.roundness,
+        borderWidth: this.state.focused
+          ? StyleSheet.hairlineWidth * 4
+          : StyleSheet.hairlineWidth,
+        borderColor: this.state.focused ? labelColor : underlineColor,
+        padding: this.state.focused ? 0 : 1.5,
+      };
     }
 
     const labelColorAnimation = this.state.labeled.interpolate({
@@ -343,7 +405,17 @@ class TextInput extends React.Component<Props, State> {
     // Move label to top if value is set
     const labelTranslateY = this.state.labeled.interpolate({
       inputRange: [0, 1],
-      outputRange: [MINIMIZED_LABEL_Y_OFFSET, 0],
+      outputRange: [
+        mode === 'flat'
+          ? MINIMIZED_LABEL_Y_OFFSET
+          : OUTLINE_MINIMIZED_LABEL_Y_OFFSET,
+        0,
+      ],
+    });
+
+    const outlinedLabelWidth = this.state.labeled.interpolate({
+      inputRange: [0, 1],
+      outputRange: [this.state.maxLabelWidth - 10, 0],
     });
 
     const labelFontSize = this.state.labeled.interpolate({
@@ -361,73 +433,125 @@ class TextInput extends React.Component<Props, State> {
       ],
     };
 
+    const outlinedLabelStyle = {
+      color: outlinedBackgroundColor || colors.background,
+      backgroundColor: outlinedBackgroundColor || colors.background,
+      fontFamily,
+      fontSize: MINIMIZED_LABEL_FONT_SIZE,
+      width: outlinedLabelWidth,
+    };
+
     return (
-      <View style={style}>
+      <View style={[containerStyle, style]}>
+        {mode === 'outlined' ? (
+          <AnimatedText
+            pointerEvents="none"
+            style={[
+              styles.outlinedLabel,
+              outlinedLabelStyle,
+              leadingIcon ? styles.outlinedWithIcon : null,
+            ]}
+            numberOfLines={1}
+          >
+            {label}
+          </AnimatedText>
+        ) : null}
         <AnimatedText
           pointerEvents="none"
-          style={[styles.placeholder, labelStyle]}
+          style={[
+            styles.placeholder,
+            labelStyle,
+            leadingIcon ? styles.placeholderIcon : null,
+          ]}
+          onLayout={event => {
+            this._setMaxLabelWidth(event);
+          }}
         >
           {label}
         </AnimatedText>
-        <NativeTextInput
-          {...rest}
-          ref={c => {
-            this._root = c;
-          }}
-          onChangeText={this._handleChangeText}
-          placeholder={label ? this.state.placeholder : this.props.placeholder}
-          placeholderTextColor={colors.placeholder}
-          editable={!disabled}
-          selectionColor={labelColor}
-          onFocus={this._handleFocus}
-          onBlur={this._handleBlur}
-          underlineColorAndroid="transparent"
-          style={[
-            styles.input,
-            label ? styles.inputWithLabel : styles.inputWithoutLabel,
-            rest.multiline
-              ? label
-                ? styles.multilineWithLabel
-                : styles.multilineWithoutLabel
-              : null,
-            {
-              color: inputTextColor,
-              fontFamily,
-            },
-          ]}
-        />
-        <View pointerEvents="none" style={styles.bottomLineContainer}>
-          <View
+        <View style={styles.iconContainer}>
+          {leadingIcon ? (
+            <View style={styles.icon}>
+              <Icon source={leadingIcon} color={inputTextColor} size={24} />
+            </View>
+          ) : null}
+          <NativeTextInput
+            {...rest}
+            ref={c => {
+              this._root = c;
+            }}
+            onChangeText={this._handleChangeText}
+            placeholder={
+              label ? this.state.placeholder : this.props.placeholder
+            }
+            placeholderTextColor={colors.placeholder}
+            editable={!disabled}
+            selectionColor={labelColor}
+            onFocus={this._handleFocus}
+            onBlur={this._handleBlur}
+            underlineColorAndroid="transparent"
             style={[
-              styles.bottomLine,
-              { backgroundColor: error ? errorColor : inactiveColor },
+              styles.input,
+              label ? styles.inputWithLabel : styles.inputWithoutLabel,
+              rest.multiline
+                ? label
+                  ? styles.multilineWithLabel
+                  : styles.multilineWithoutLabel
+                : null,
+              mode === 'outlined' ? styles.inputOutlined : null,
+              {
+                color: inputTextColor,
+                fontFamily,
+                flex: 1,
+              },
+              leadingIcon ? styles.withIcon : null,
             ]}
           />
-          <Animated.View
-            style={[
-              styles.bottomLine,
-              styles.focusLine,
-              this._getBottomLineStyle(
-                bottomLineColor,
-                this.state.labeled.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [1, 0],
-                })
-              ),
-            ]}
-          />
-          <Animated.View
-            style={[
-              styles.bottomLine,
-              styles.focusLine,
-              this._getBottomLineStyle(
-                errorColor,
-                // $FlowFixMe$
-                Animated.multiply(this.state.labeled, this.state.error)
-              ),
-            ]}
-          />
+          {trailingIcon ? (
+            <View style={styles.icon}>
+              <Icon
+                source={trailingIcon}
+                color={inputTextColor}
+                size={24}
+                style={styles.icon}
+              />
+            </View>
+          ) : null}
         </View>
+        {mode === 'flat' ? (
+          <View pointerEvents="none" style={styles.bottomLineContainer}>
+            <View
+              style={[
+                styles.bottomLine,
+                { backgroundColor: error ? errorColor : inactiveColor },
+              ]}
+            />
+            <Animated.View
+              style={[
+                styles.bottomLine,
+                styles.focusLine,
+                this._getBottomLineStyle(
+                  bottomLineColor,
+                  this.state.labeled.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [1, 0],
+                  })
+                ),
+              ]}
+            />
+            <Animated.View
+              style={[
+                styles.bottomLine,
+                styles.focusLine,
+                this._getBottomLineStyle(
+                  errorColor,
+                  // $FlowFixMe$
+                  Animated.multiply(this.state.labeled, this.state.error)
+                ),
+              ]}
+            />
+          </View>
+        ) : null}
       </View>
     );
   }
@@ -441,18 +565,27 @@ const styles = StyleSheet.create({
   placeholder: {
     position: 'absolute',
     left: 0,
-    top: 40,
+    top: 20,
     fontSize: 16,
+    paddingHorizontal: 12,
+  },
+  outlinedLabel: {
+    position: 'absolute',
+    top: -10,
+    left: 4,
   },
   input: {
     paddingBottom: 0,
-    marginTop: 8,
-    marginBottom: -4,
+    paddingHorizontal: 12,
+    marginTop: 6,
     fontSize: 16,
   },
+  inputOutlined: {
+    top: -5,
+  },
   inputWithLabel: {
-    paddingTop: 20,
-    minHeight: 64,
+    paddingTop: 10,
+    minHeight: 50,
   },
   inputWithoutLabel: {
     paddingTop: 0,
@@ -466,7 +599,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   bottomLineContainer: {
-    marginBottom: 4,
+    marginBottom: -1,
     height: StyleSheet.hairlineWidth * 4,
   },
   bottomLine: {
@@ -478,5 +611,23 @@ const styles = StyleSheet.create({
   },
   focusLine: {
     height: StyleSheet.hairlineWidth * 4,
+  },
+  iconContainer: {
+    flexDirection: 'row',
+    height: 56,
+  },
+  icon: {
+    marginTop: 18,
+    marginHorizontal: 12,
+  },
+  placeholderIcon: {
+    left: 36,
+  },
+  withIcon: {
+    left: -12,
+    flex: 1,
+  },
+  outlinedWithIcon: {
+    left: 42,
   },
 });

@@ -12,6 +12,7 @@ type Props = {
 type State = {
   text: string,
   name: string,
+  outlinedText: string,
 };
 
 class TextInputExample extends React.Component<Props, State> {
@@ -20,6 +21,7 @@ class TextInputExample extends React.Component<Props, State> {
   state = {
     text: '',
     name: '',
+    outlinedText: '',
   };
 
   _isUsernameValid = () => /^[a-z]*$/.test(this.state.name);
@@ -44,6 +46,14 @@ class TextInputExample extends React.Component<Props, State> {
           disabled
           style={styles.inputContainerStyle}
           label="Disabled Input"
+        />
+        <TextInput
+          mode="outlined"
+          style={styles.inputContainerStyle}
+          label="Outlined input"
+          placeholder="Type something"
+          value={this.state.outlinedText}
+          onChangeText={outlinedText => this.setState({ outlinedText })}
         />
         <View style={styles.inputContainerStyle}>
           <TextInput
