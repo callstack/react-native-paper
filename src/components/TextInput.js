@@ -79,6 +79,10 @@ type State = {
   focused: boolean,
   placeholder: ?string,
   value: ?string,
+  selection: ?{
+    start: number,
+    end: number,
+  },
 };
 
 /**
@@ -143,6 +147,7 @@ class TextInput extends React.Component<Props, State> {
     focused: false,
     placeholder: '',
     value: this.props.value,
+    selection: null,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -229,7 +234,14 @@ class TextInput extends React.Component<Props, State> {
       return;
     }
 
-    this.setState({ focused: true });
+    const { value } = this.state;
+    const selection = value ? { start: value.length, end: value.length } : null;
+    this.setState({ focused: true, selection }, () => {
+      // Reset selection once it was set in order to not block any manual selection
+      this.setState({
+        selection: null,
+      });
+    });
 
     if (this.props.onFocus) {
       this.props.onFocus(...args);
@@ -241,7 +253,7 @@ class TextInput extends React.Component<Props, State> {
       return;
     }
 
-    this.setState({ focused: false });
+    this.setState({ focused: false, selection: { start: 0, end: 0 } });
 
     if (this.props.onBlur) {
       this.props.onBlur(...args);
@@ -379,6 +391,7 @@ class TextInput extends React.Component<Props, State> {
           placeholderTextColor={colors.placeholder}
           editable={!disabled}
           selectionColor={labelColor}
+          selection={this.state.selection}
           onFocus={this._handleFocus}
           onBlur={this._handleBlur}
           underlineColorAndroid="transparent"
