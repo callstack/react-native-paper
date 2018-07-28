@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
 import Text from './Typography/Text';
-import withTheme from '../core/withTheme';
+import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);

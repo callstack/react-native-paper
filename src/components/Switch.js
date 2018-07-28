@@ -4,7 +4,7 @@ import * as React from 'react';
 import { grey400, grey800, grey50, white, black } from '../styles/colors';
 import { Switch as NativeSwitch, Platform } from 'react-native';
 import setColor from 'color';
-import withTheme from '../core/withTheme';
+import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 
 type Props = {

@@ -13,7 +13,7 @@ import color from 'color';
 import FAB from './FAB';
 import Text from '../Typography/Text';
 import Card from '../Card/Card';
-import withTheme from '../../core/withTheme';
+import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 import type { IconSource } from '../Icon';
 

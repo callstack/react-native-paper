@@ -4,7 +4,7 @@ import color from 'color';
 import * as React from 'react';
 import { I18nManager } from 'react-native';
 import Text from './Text';
-import withTheme from '../../core/withTheme';
+import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
 type Props = {
