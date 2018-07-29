@@ -8,6 +8,7 @@ import DialogContent from './DialogContent';
 import DialogActions from './DialogActions';
 import DialogTitle from './DialogTitle';
 import DialogScrollArea from './DialogScrollArea';
+import { withTheme } from '../../core/theming';
 
 const AnimatedSurface = Animated.createAnimatedComponent(Surface);
 
@@ -78,7 +79,7 @@ type Props = {
  * }
  * ```
  */
-export default class Dialog extends React.Component<Props, void> {
+class Dialog extends React.Component<Props, void> {
   // @component ./DialogContent.js
   static Content = DialogContent;
   // @component ./DialogActions.js
@@ -94,11 +95,20 @@ export default class Dialog extends React.Component<Props, void> {
   };
 
   render() {
-    const { children, dismissable, onDismiss, visible, style } = this.props;
+    const {
+      children,
+      dismissable,
+      onDismiss,
+      visible,
+      style,
+      theme,
+    } = this.props;
 
     return (
       <Modal dismissable={dismissable} onDismiss={onDismiss} visible={visible}>
-        <AnimatedSurface style={[styles.container, style]}>
+        <AnimatedSurface
+          style={[styles.container, { borderRadius: theme.roundness }, style]}
+        >
           {React.Children.toArray(children)
             .filter(child => child != null && typeof child !== 'boolean')
             .map((child, i) => {
@@ -132,7 +142,8 @@ const styles = StyleSheet.create({
      */
     marginVertical: Platform.OS === 'android' ? 44 : 0,
     marginHorizontal: 26,
-    borderRadius: 2,
     elevation: 24,
   },
 });
+
+export default withTheme(Dialog);
