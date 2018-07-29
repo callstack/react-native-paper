@@ -9,6 +9,7 @@ import DialogActions from './DialogActions';
 import DialogTitle from './DialogTitle';
 import DialogScrollArea from './DialogScrollArea';
 import { withTheme } from '../../core/theming';
+import type { Theme } from '../../types';
 
 const AnimatedSurface = Animated.createAnimatedComponent(Surface);
 
@@ -30,6 +31,10 @@ type Props = {
    */
   children: React.Node,
   style?: any,
+  /**
+   * @optional
+   */
+  theme: Theme,
 };
 
 /**
