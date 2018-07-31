@@ -25,6 +25,7 @@ type Props = {
    * - `label`: optional label text
    * - `accessibilityLabel`: accessibility label for the action, uses label by default if specified
    * - `color`: custom icon color of the action item
+   * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
    * - `onPress`: callback that is called when `FAB` is pressed (required)
    */
   actions: Array<{
@@ -32,6 +33,7 @@ type Props = {
     label?: string,
     color?: string,
     accessibilityLabel?: string,
+    style?: any,
     onPress: () => mixed,
   }>,
   /**
@@ -44,7 +46,7 @@ type Props = {
    */
   accessibilityLabel?: string,
   /**
-   * Custom icon color for the `FAB`.
+   * Custom color for the `FAB`.
    */
   color?: string,
   /**
@@ -252,9 +254,7 @@ class FABGroup extends React.Component<Props, State> {
                   <Card
                     style={[
                       styles.label,
-                      {
-                        transform: [{ scale: scales[i] }],
-                      },
+                      { transform: [{ scale: scales[i] }] },
                     ]}
                     onPress={() => {
                       it.onPress();
@@ -280,6 +280,7 @@ class FABGroup extends React.Component<Props, State> {
                       transform: [{ scale: scales[i] }],
                       backgroundColor: theme.colors.surface,
                     },
+                    it.style,
                   ]}
                   onPress={() => {
                     it.onPress();
