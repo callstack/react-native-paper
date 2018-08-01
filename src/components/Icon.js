@@ -27,11 +27,11 @@ try {
   };
 }
 
-type IconSourceBase = string | number | { uri: string };
-
 export type IconSource =
-  | IconSourceBase
-  | { source: IconSourceBase, direction: 'rtl' | 'ltr' }
+  | string
+  | number
+  | { uri: string }
+  | { source: string | number | { uri: string }, direction: 'rtl' | 'ltr' }
   | ((props: IconProps) => React.Node);
 
 type IconProps = {
