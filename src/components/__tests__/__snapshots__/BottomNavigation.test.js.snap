@@ -160,9 +160,18 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       "color": "#ffffff",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -200,9 +209,18 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       "color": "rgba(255, 255, 255, 0.5)",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -287,9 +305,18 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       "color": "#ffffff",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -327,9 +354,18 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       "color": "rgba(255, 255, 255, 0.5)",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -414,9 +450,18 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       "color": "#ffffff",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -454,9 +499,18 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       "color": "rgba(255, 255, 255, 0.5)",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -664,9 +718,18 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       "color": "#ffffff",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -704,9 +767,18 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       "color": "rgba(255, 255, 255, 0.5)",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -791,9 +863,18 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       "color": "#ffffff",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -831,9 +912,18 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       "color": "rgba(255, 255, 255, 0.5)",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -918,9 +1008,18 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       "color": "#ffffff",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -958,9 +1057,18 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       "color": "rgba(255, 255, 255, 0.5)",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -2278,9 +2386,18 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       "color": "#FBF7DB",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -2318,9 +2435,18 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       "color": "rgba(0, 0, 0, 0.5)",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -2367,6 +2493,8 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     Object {
                       "color": "#000000",
                       "fontFamily": "Helvetica Neue",
+                      "textAlign": "left",
+                      "writingDirection": "ltr",
                     },
                     Object {
                       "backgroundColor": "transparent",
@@ -2423,6 +2551,8 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     Object {
                       "color": "#000000",
                       "fontFamily": "Helvetica Neue",
+                      "textAlign": "left",
+                      "writingDirection": "ltr",
                     },
                     Object {
                       "backgroundColor": "transparent",
@@ -2523,9 +2653,18 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       "color": "#FBF7DB",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -2563,9 +2702,18 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       "color": "rgba(0, 0, 0, 0.5)",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -2612,6 +2760,8 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     Object {
                       "color": "#000000",
                       "fontFamily": "Helvetica Neue",
+                      "textAlign": "left",
+                      "writingDirection": "ltr",
                     },
                     Object {
                       "backgroundColor": "transparent",
@@ -2668,6 +2818,8 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     Object {
                       "color": "#000000",
                       "fontFamily": "Helvetica Neue",
+                      "textAlign": "left",
+                      "writingDirection": "ltr",
                     },
                     Object {
                       "backgroundColor": "transparent",
@@ -2768,9 +2920,18 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       "color": "#FBF7DB",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -2808,9 +2969,18 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       "color": "rgba(0, 0, 0, 0.5)",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -2857,6 +3027,8 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     Object {
                       "color": "#000000",
                       "fontFamily": "Helvetica Neue",
+                      "textAlign": "left",
+                      "writingDirection": "ltr",
                     },
                     Object {
                       "backgroundColor": "transparent",
@@ -2913,6 +3085,8 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     Object {
                       "color": "#000000",
                       "fontFamily": "Helvetica Neue",
+                      "textAlign": "left",
+                      "writingDirection": "ltr",
                     },
                     Object {
                       "backgroundColor": "transparent",
@@ -3136,9 +3310,18 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       "color": "#FBF7DB",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -3176,9 +3359,18 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       "color": "rgba(0, 0, 0, 0.5)",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -3225,6 +3417,8 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     Object {
                       "color": "#000000",
                       "fontFamily": "Helvetica Neue",
+                      "textAlign": "left",
+                      "writingDirection": "ltr",
                     },
                     Object {
                       "backgroundColor": "transparent",
@@ -3325,9 +3519,18 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       "color": "#FBF7DB",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -3365,9 +3568,18 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       "color": "rgba(0, 0, 0, 0.5)",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -3414,6 +3626,8 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     Object {
                       "color": "#000000",
                       "fontFamily": "Helvetica Neue",
+                      "textAlign": "left",
+                      "writingDirection": "ltr",
                     },
                     Object {
                       "backgroundColor": "transparent",
@@ -3514,9 +3728,18 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       "color": "#FBF7DB",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -3554,9 +3777,18 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       "color": "rgba(0, 0, 0, 0.5)",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -3603,6 +3835,8 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     Object {
                       "color": "#000000",
                       "fontFamily": "Helvetica Neue",
+                      "textAlign": "left",
+                      "writingDirection": "ltr",
                     },
                     Object {
                       "backgroundColor": "transparent",
@@ -3806,9 +4040,18 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       "color": "#ffffff",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -3846,9 +4089,18 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       "color": "rgba(255, 255, 255, 0.5)",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -3895,6 +4147,8 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     Object {
                       "color": "#000000",
                       "fontFamily": "Helvetica Neue",
+                      "textAlign": "left",
+                      "writingDirection": "ltr",
                     },
                     Object {
                       "backgroundColor": "transparent",
@@ -3951,6 +4205,8 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     Object {
                       "color": "#000000",
                       "fontFamily": "Helvetica Neue",
+                      "textAlign": "left",
+                      "writingDirection": "ltr",
                     },
                     Object {
                       "backgroundColor": "transparent",
@@ -4051,9 +4307,18 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       "color": "#ffffff",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -4091,9 +4356,18 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       "color": "rgba(255, 255, 255, 0.5)",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -4140,6 +4414,8 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     Object {
                       "color": "#000000",
                       "fontFamily": "Helvetica Neue",
+                      "textAlign": "left",
+                      "writingDirection": "ltr",
                     },
                     Object {
                       "backgroundColor": "transparent",
@@ -4196,6 +4472,8 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     Object {
                       "color": "#000000",
                       "fontFamily": "Helvetica Neue",
+                      "textAlign": "left",
+                      "writingDirection": "ltr",
                     },
                     Object {
                       "backgroundColor": "transparent",
@@ -4296,9 +4574,18 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       "color": "#ffffff",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -4336,9 +4623,18 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       "color": "rgba(255, 255, 255, 0.5)",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -4385,6 +4681,8 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     Object {
                       "color": "#000000",
                       "fontFamily": "Helvetica Neue",
+                      "textAlign": "left",
+                      "writingDirection": "ltr",
                     },
                     Object {
                       "backgroundColor": "transparent",
@@ -4441,6 +4739,8 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     Object {
                       "color": "#000000",
                       "fontFamily": "Helvetica Neue",
+                      "textAlign": "left",
+                      "writingDirection": "ltr",
                     },
                     Object {
                       "backgroundColor": "transparent",
@@ -4664,9 +4964,18 @@ exports[`renders shifting bottom navigation 1`] = `
                       "color": "#ffffff",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -4704,9 +5013,18 @@ exports[`renders shifting bottom navigation 1`] = `
                       "color": "rgba(255, 255, 255, 0.5)",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -4753,6 +5071,8 @@ exports[`renders shifting bottom navigation 1`] = `
                     Object {
                       "color": "#000000",
                       "fontFamily": "Helvetica Neue",
+                      "textAlign": "left",
+                      "writingDirection": "ltr",
                     },
                     Object {
                       "backgroundColor": "transparent",
@@ -4853,9 +5173,18 @@ exports[`renders shifting bottom navigation 1`] = `
                       "color": "#ffffff",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -4893,9 +5222,18 @@ exports[`renders shifting bottom navigation 1`] = `
                       "color": "rgba(255, 255, 255, 0.5)",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -4942,6 +5280,8 @@ exports[`renders shifting bottom navigation 1`] = `
                     Object {
                       "color": "#000000",
                       "fontFamily": "Helvetica Neue",
+                      "textAlign": "left",
+                      "writingDirection": "ltr",
                     },
                     Object {
                       "backgroundColor": "transparent",
@@ -5042,9 +5382,18 @@ exports[`renders shifting bottom navigation 1`] = `
                       "color": "#ffffff",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -5082,9 +5431,18 @@ exports[`renders shifting bottom navigation 1`] = `
                       "color": "rgba(255, 255, 255, 0.5)",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -5131,6 +5489,8 @@ exports[`renders shifting bottom navigation 1`] = `
                     Object {
                       "color": "#000000",
                       "fontFamily": "Helvetica Neue",
+                      "textAlign": "left",
+                      "writingDirection": "ltr",
                     },
                     Object {
                       "backgroundColor": "transparent",
@@ -5231,9 +5591,18 @@ exports[`renders shifting bottom navigation 1`] = `
                       "color": "#ffffff",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -5271,9 +5640,18 @@ exports[`renders shifting bottom navigation 1`] = `
                       "color": "rgba(255, 255, 255, 0.5)",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -5320,6 +5698,8 @@ exports[`renders shifting bottom navigation 1`] = `
                     Object {
                       "color": "#000000",
                       "fontFamily": "Helvetica Neue",
+                      "textAlign": "left",
+                      "writingDirection": "ltr",
                     },
                     Object {
                       "backgroundColor": "transparent",
@@ -5420,9 +5800,18 @@ exports[`renders shifting bottom navigation 1`] = `
                       "color": "#ffffff",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -5460,9 +5849,18 @@ exports[`renders shifting bottom navigation 1`] = `
                       "color": "rgba(255, 255, 255, 0.5)",
                       "fontSize": 24,
                     },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
+                    Array [
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
                     Object {
                       "fontFamily": "Material Icons",
                       "fontStyle": "normal",
@@ -5509,6 +5907,8 @@ exports[`renders shifting bottom navigation 1`] = `
                     Object {
                       "color": "#000000",
                       "fontFamily": "Helvetica Neue",
+                      "textAlign": "left",
+                      "writingDirection": "ltr",
                     },
                     Object {
                       "backgroundColor": "transparent",

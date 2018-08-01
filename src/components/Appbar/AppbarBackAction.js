@@ -45,15 +45,18 @@ class AppbarBackAction extends React.Component<Props> {
         {...this.props}
         icon={
           Platform.OS === 'ios'
-            ? ({ size, color }) => (
-                <View style={[styles.wrapper, { width: size, height: size }]}>
-                  <Image
-                    source={require('../../assets/back-chevron.png')}
-                    style={[styles.icon, { tintColor: color }]}
-                  />
-                </View>
-              )
-            : 'arrow-back'
+            ? {
+                source: ({ size, color }) => (
+                  <View style={[styles.wrapper, { width: size, height: size }]}>
+                    <Image
+                      source={require('../../assets/back-chevron.png')}
+                      style={[styles.icon, { tintColor: color }]}
+                    />
+                  </View>
+                ),
+                direction: 'rtl',
+              }
+            : { source: 'arrow-back', direction: 'rtl' }
         }
       />
     );

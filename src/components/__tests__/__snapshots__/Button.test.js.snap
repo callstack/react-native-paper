@@ -59,6 +59,8 @@ exports[`renders button with color 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -179,9 +181,18 @@ exports[`renders button with icon 1`] = `
                 "color": "#6200ee",
                 "fontSize": 16,
               },
-              Object {
-                "backgroundColor": "transparent",
-              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
               Object {
                 "fontFamily": "Material Icons",
                 "fontStyle": "normal",
@@ -203,6 +214,8 @@ exports[`renders button with icon 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -319,6 +332,8 @@ exports[`renders contained contained with mode 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -432,6 +447,8 @@ exports[`renders disabled button 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -553,6 +570,8 @@ exports[`renders loading button 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -661,6 +680,8 @@ exports[`renders outlined button with mode 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -769,6 +790,8 @@ exports[`renders text button by default 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -877,6 +900,8 @@ exports[`renders text button with mode 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {

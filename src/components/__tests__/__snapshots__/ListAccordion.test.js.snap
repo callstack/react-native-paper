@@ -56,9 +56,18 @@ exports[`renders list accordion with children 1`] = `
                 "color": "rgba(0, 0, 0, 0.54)",
                 "fontSize": 24,
               },
-              Object {
-                "backgroundColor": "transparent",
-              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
               Object {
                 "fontFamily": "Material Icons",
                 "fontStyle": "normal",
@@ -93,6 +102,8 @@ exports[`renders list accordion with children 1`] = `
               Object {
                 "color": "#000000",
                 "fontFamily": "Helvetica Neue",
+                "textAlign": "left",
+                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -153,9 +164,18 @@ exports[`renders list accordion with children 1`] = `
                 "color": "rgba(0, 0, 0, 0.87)",
                 "fontSize": 24,
               },
-              Object {
-                "backgroundColor": "transparent",
-              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
               Object {
                 "fontFamily": "Material Icons",
                 "fontStyle": "normal",
@@ -228,9 +248,18 @@ exports[`renders list accordion with icons 1`] = `
                 "color": "rgba(0, 0, 0, 0.54)",
                 "fontSize": 24,
               },
-              Object {
-                "backgroundColor": "transparent",
-              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
               Object {
                 "fontFamily": "Material Icons",
                 "fontStyle": "normal",
@@ -265,6 +294,8 @@ exports[`renders list accordion with icons 1`] = `
               Object {
                 "color": "#000000",
                 "fontFamily": "Helvetica Neue",
+                "textAlign": "left",
+                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -325,9 +356,18 @@ exports[`renders list accordion with icons 1`] = `
                 "color": "rgba(0, 0, 0, 0.87)",
                 "fontSize": 24,
               },
-              Object {
-                "backgroundColor": "transparent",
-              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
               Object {
                 "fontFamily": "Material Icons",
                 "fontStyle": "normal",
@@ -397,6 +437,8 @@ exports[`renders multiline list accordion 1`] = `
               Object {
                 "color": "#000000",
                 "fontFamily": "Helvetica Neue",
+                "textAlign": "left",
+                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -443,6 +485,8 @@ exports[`renders multiline list accordion 1`] = `
               Object {
                 "color": "#000000",
                 "fontFamily": "Helvetica Neue",
+                "textAlign": "left",
+                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -507,9 +551,18 @@ exports[`renders multiline list accordion 1`] = `
                 "color": "rgba(0, 0, 0, 0.87)",
                 "fontSize": 24,
               },
-              Object {
-                "backgroundColor": "transparent",
-              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
               Object {
                 "fontFamily": "Material Icons",
                 "fontStyle": "normal",
