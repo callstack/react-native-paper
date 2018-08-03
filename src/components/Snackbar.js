@@ -15,7 +15,7 @@ type Props = {
    */
   visible: boolean,
   /**
-   * Label and press callback for the action button. It should contains following properties:
+   * Label and press callback for the action button. It should contain the following properties:
    * - `label` - Label of the action button
    * - `onPress` - Callback that is called when action button is pressed.
    */
