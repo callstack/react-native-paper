@@ -169,6 +169,7 @@ class Button extends React.Component<Props, State> {
       borderWidth = StyleSheet.hairlineWidth;
     } else {
       borderColor = 'transparent';
+      borderWidth = 0;
     }
 
     if (disabled) {
