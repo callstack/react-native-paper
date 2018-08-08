@@ -12,6 +12,7 @@ type State = {
 
 type Props = {
   theme: Theme,
+  navigation: any,
 };
 
 const MORE_ICON = Platform.OS === 'ios' ? 'more-horiz' : 'more-vert';
