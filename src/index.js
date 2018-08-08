@@ -34,6 +34,7 @@ export { default as FAB } from './components/FAB/FAB';
 export { default as HelperText } from './components/HelperText';
 export { default as IconButton } from './components/IconButton';
 export { default as Modal } from './components/Modal';
+export { default as Menu } from './components/Menu/Menu';
 export { default as Portal } from './components/Portal/Portal';
 export { default as ProgressBar } from './components/ProgressBar/ProgressBar';
 export { default as RadioButton } from './components/RadioButton';
