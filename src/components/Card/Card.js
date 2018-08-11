@@ -116,6 +116,7 @@ class Card extends React.Component<Props, State> {
       <AnimatedSurface style={[{ borderRadius: roundness, elevation }, style]}>
         <TouchableWithoutFeedback
           delayPressIn={0}
+          disabled={!onPress}
           onPress={onPress}
           onPressIn={onPress ? this._handlePressIn : undefined}
           onPressOut={onPress ? this._handlePressOut : undefined}
