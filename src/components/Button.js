@@ -124,6 +124,7 @@ class Button extends React.Component<Props, State> {
       onPress,
       style,
       theme,
+      ...rest
     } = this.props;
     const { colors, roundness } = theme;
     const fontFamily = theme.fonts.medium;
@@ -187,6 +188,7 @@ class Button extends React.Component<Props, State> {
 
     return (
       <AnimatedPaper
+        {...rest}
         style={[
           styles.button,
           compact && styles.compact,
