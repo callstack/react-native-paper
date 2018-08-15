@@ -67,6 +67,7 @@ class ListItem extends React.Component<Props> {
       onPress,
       theme,
       style,
+      ...rest
     } = this.props;
     const titleColor = color(theme.colors.text)
       .alpha(0.87)
@@ -78,7 +79,11 @@ class ListItem extends React.Component<Props> {
       .string();
 
     return (
-      <TouchableRipple style={[styles.container, style]} onPress={onPress}>
+      <TouchableRipple
+        {...rest}
+        style={[styles.container, style]}
+        onPress={onPress}
+      >
         <View style={styles.row}>
           {avatar || icon ? (
             <View
