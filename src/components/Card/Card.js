@@ -111,33 +111,31 @@ class Card extends React.Component<Props, State> {
           : null
     );
     return (
-      <View collapsable={false}>
-        <AnimatedPaper
-          style={[styles.card, { borderRadius: roundness, elevation }, style]}
+      <AnimatedPaper
+        style={[styles.card, { borderRadius: roundness, elevation }, style]}
+      >
+        <TouchableWithoutFeedback
+          delayPressIn={0}
+          onPress={onPress}
+          onPressIn={onPress ? this._handlePressIn : undefined}
+          onPressOut={onPress ? this._handlePressOut : undefined}
+          style={styles.container}
         >
-          <TouchableWithoutFeedback
-            delayPressIn={0}
-            onPress={onPress}
-            onPressIn={onPress ? this._handlePressIn : undefined}
-            onPressOut={onPress ? this._handlePressOut : undefined}
-            style={styles.container}
-          >
-            <View style={styles.innerContainer}>
-              {React.Children.map(
-                children,
-                (child, index) =>
-                  React.isValidElement(child)
-                    ? React.cloneElement(child, {
-                        index,
-                        total,
-                        siblings,
-                      })
-                    : child
-              )}
-            </View>
-          </TouchableWithoutFeedback>
-        </AnimatedPaper>
-      </View>
+          <View style={styles.innerContainer}>
+            {React.Children.map(
+              children,
+              (child, index) =>
+                React.isValidElement(child)
+                  ? React.cloneElement(child, {
+                      index,
+                      total,
+                      siblings,
+                    })
+                  : child
+            )}
+          </View>
+        </TouchableWithoutFeedback>
+      </AnimatedPaper>
     );
   }
 }

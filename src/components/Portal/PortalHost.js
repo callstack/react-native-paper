@@ -1,6 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
+import { View, StyleSheet } from 'react-native';
 import PortalManager from './PortalManager';
 import createReactContext, { type Context } from 'create-react-context';
 import type { PortalProps } from './Portal';
@@ -106,9 +107,18 @@ export default class PortalHost extends React.Component<Props> {
           unmount: this._unmount,
         }}
       >
-        {this.props.children}
+        {/* Need collapsable=false here to clip the elevations, otherwise they appear above Portal components */}
+        <View style={styles.container} collapsable={false}>
+          {this.props.children}
+        </View>
         <PortalManager ref={this._setManager} />
       </PortalContext.Provider>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
