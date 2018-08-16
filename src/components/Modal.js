@@ -55,7 +55,7 @@ type State = {
  *   render() {
  *     const { visible } = this.state;
  *     return (
- *       <Modal visible={visible}>
+ *       <Modal visible={visible} onDismiss={this._hideModal}>
  *         <Text>Example Modal</Text>
  *       </Modal>
  *     );
