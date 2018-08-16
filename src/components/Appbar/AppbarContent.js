@@ -79,14 +79,14 @@ class AppbarContent extends React.Component<Props> {
         >
           {title}
         </Text>
-        {subtitle && (
+        {subtitle ? (
           <Text
             style={[styles.subtitle, { color: subtitleColor }, subtitleStyle]}
             numberOfLines={1}
           >
             {subtitle}
           </Text>
-        )}
+        ) : null}
       </View>
     );
   }
