@@ -16,7 +16,7 @@
 ## Features
 
 - Follows [material design guidelines](https://material.io/guidelines/)
-- Works on both iOS and Android following [platform adaptation guidelines](https://material.io/guidelines/platforms/platform-adaptation.html)
+- Works on both iOS and Android following [platform adaptation guidelines](https://material.io/design/platform-guidance/cross-platform-adaptation.html)
 - Full [theming support](https://callstack.github.io/react-native-paper/theming.html)
 
 Currently supported React Native version: `>= 0.50.3`
