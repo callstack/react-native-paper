@@ -154,7 +154,7 @@ class Modal extends React.Component<Props, State> {
             <View style={StyleSheet.absoluteFill} />
           </TouchableWithoutFeedback>
         )}
-        <Animated.View style={[{ opacity: this.state.opacity }]}>
+        <Animated.View style={[{ opacity: this.state.opacity }, styles.childrenWrapper]}>
           {children}
         </Animated.View>
       </Animated.View>
@@ -171,4 +171,7 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'center',
   },
+  childrenWrapper: {
+    flex: 1
+  }
 });
