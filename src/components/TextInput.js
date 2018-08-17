@@ -6,6 +6,7 @@ import {
   Animated,
   TextInput as NativeTextInput,
   StyleSheet,
+  I18nManager,
 } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
 import color from 'color';
@@ -641,6 +642,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     margin: 0,
     minHeight: 58,
+    textAlign: I18nManager.isRTL ? 'right' : 'left',
   },
   inputOutlined: {
     paddingTop: 20,
