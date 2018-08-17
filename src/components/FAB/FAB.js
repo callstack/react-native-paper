@@ -8,8 +8,8 @@ import Surface from '../Surface';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple';
-import { white } from '../../styles/colors';
-import withTheme from '../../core/withTheme';
+import { white, grey500 } from '../../styles/colors';
+import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 import type { IconSource } from './../Icon';
 
@@ -92,7 +92,7 @@ class FAB extends React.Component<Props> {
       ...rest
     } = this.props;
 
-    const { backgroundColor = theme.colors.accent } =
+    const { backgroundColor = disabled ? grey500 : theme.colors.accent } =
       StyleSheet.flatten(style) || {};
 
     let foregroundColor;
@@ -184,7 +184,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
   },
   disabled: {
-    opacity: 0.32,
     elevation: 0,
   },
 });
