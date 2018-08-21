@@ -48,6 +48,10 @@ type Props = {
   theme: Theme,
 };
 
+type State = {
+  elevation: Animated.Value,
+};
+
 /**
  * A floating action button represents the primary action in an application.
  *
@@ -70,9 +74,27 @@ type Props = {
  * );
  * ```
  */
-class FAB extends React.Component<Props> {
+class FAB extends React.Component<Props, State> {
   // @component ./FABGroup.js
   static Group = FABGroup;
+
+  state = {
+    elevation: new Animated.Value(6),
+  };
+
+  _handlePressIn = () => {
+    Animated.timing(this.state.elevation, {
+      toValue: 12,
+      duration: 200,
+    }).start();
+  };
+
+  _handlePressOut = () => {
+    Animated.timing(this.state.elevation, {
+      toValue: 6,
+      duration: 150,
+    }).start();
+  };
 
   render() {
     const {
@@ -86,6 +108,8 @@ class FAB extends React.Component<Props> {
       style,
       ...rest
     } = this.props;
+
+    const { elevation } = this.state;
 
     const { backgroundColor = theme.colors.accent } =
       StyleSheet.flatten(style) || {};
@@ -108,11 +132,13 @@ class FAB extends React.Component<Props> {
     return (
       <AnimatedSurface
         {...rest}
-        style={[{ backgroundColor }, styles.container, style]}
+        style={[{ backgroundColor }, { elevation }, styles.container, style]}
       >
         <TouchableRipple
           borderless
           onPress={onPress}
+          onPressIn={this._handlePressIn}
+          onPressOut={this._handlePressOut}
           rippleColor={rippleColor}
           accessibilityLabel={accessibilityLabel}
           accessibilityTraits="button"
@@ -147,7 +173,6 @@ class FAB extends React.Component<Props> {
 const styles = StyleSheet.create({
   container: {
     borderRadius: 28,
-    elevation: 12,
   },
   touchable: {
     borderRadius: 28,
