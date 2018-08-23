@@ -6,6 +6,7 @@ import {
   Animated,
   TextInput as NativeTextInput,
   StyleSheet,
+  I18nManager,
 } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
 import color from 'color';
@@ -440,6 +441,7 @@ class TextInput extends React.Component<Props, State> {
                 ? styles.multilineWithLabel
                 : styles.multilineWithoutLabel
               : null,
+            I18nManager.isRTL ? styles.rtlDirection : styles.ltrDirection,
             {
               color: inputTextColor,
               fontFamily,
@@ -522,5 +524,11 @@ const styles = StyleSheet.create({
   },
   focusLine: {
     height: StyleSheet.hairlineWidth * 4,
+  },
+  ltrDirection: {
+    textAlign: 'left',
+  },
+  rtlDirection: {
+    textAlign: 'right',
   },
 });

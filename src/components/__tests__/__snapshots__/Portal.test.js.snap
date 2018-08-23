@@ -2,13 +2,22 @@
 
 exports[`renders portal with siblings 1`] = `
 Array [
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
+  <View
+    collapsable={false}
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
   >
-    Outside content
-  </Text>,
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Outside content
+    </Text>
+  </View>,
   <View
     pointerEvents="box-none"
     style={
