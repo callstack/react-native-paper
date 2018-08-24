@@ -44,6 +44,7 @@ type Props = {
 
 type State = {
   opacity: Animated.Value,
+  hidden: boolean,
 };
 
 const DURATION_SHORT = 4000;
@@ -124,6 +125,7 @@ class Snackbar extends React.Component<Props, State> {
 
   state = {
     opacity: new Animated.Value(0.0),
+    hidden: !this.props.visible,
   };
 
   componentDidUpdate(prevProps) {
@@ -146,6 +148,9 @@ class Snackbar extends React.Component<Props, State> {
 
   _show = () => {
     clearTimeout(this._hideTimeout);
+    this.setState({
+      hidden: false,
+    });
     Animated.timing(this.state.opacity, {
       toValue: 1,
       duration: 200,
@@ -163,7 +168,7 @@ class Snackbar extends React.Component<Props, State> {
       toValue: 0,
       duration: 100,
       useNativeDriver: true,
-    }).start();
+    }).start(() => this.setState({ hidden: true }));
   };
 
   _hideTimeout: TimeoutID;
@@ -171,7 +176,6 @@ class Snackbar extends React.Component<Props, State> {
   render() {
     const { children, visible, action, onDismiss, theme, style } = this.props;
     const { colors, roundness } = theme;
-
     return (
       <SafeAreaView pointerEvents="box-none" style={styles.wrapper}>
         <Animated.View
@@ -191,28 +195,30 @@ class Snackbar extends React.Component<Props, State> {
             ],
           }}
         >
-          <View
-            pointerEvents="box-none"
-            style={[styles.container, { borderRadius: roundness }, style]}
-          >
-            <Text style={[styles.content, { marginRight: action ? 0 : 16 }]}>
-              {children}
-            </Text>
-            {action ? (
-              <Button
-                onPress={() => {
-                  action.onPress();
-                  onDismiss();
-                }}
-                style={styles.button}
-                color={colors.accent}
-                compact
-                mode="text"
-              >
-                {action.label.toUpperCase()}
-              </Button>
-            ) : null}
-          </View>
+          {!this.state.hidden ? (
+            <View
+              pointerEvents="box-none"
+              style={[styles.container, { borderRadius: roundness }, style]}
+            >
+              <Text style={[styles.content, { marginRight: action ? 0 : 16 }]}>
+                {children}
+              </Text>
+              {action ? (
+                <Button
+                  onPress={() => {
+                    action.onPress();
+                    onDismiss();
+                  }}
+                  style={styles.button}
+                  color={colors.accent}
+                  compact
+                  mode="text"
+                >
+                  {action.label.toUpperCase()}
+                </Button>
+              ) : null}
+            </View>
+          ) : null}
         </Animated.View>
       </SafeAreaView>
     );
