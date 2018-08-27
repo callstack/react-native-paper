@@ -2,7 +2,7 @@
 
 import color from 'color';
 import DefaultTheme from './DefaultTheme';
-import { white, grey800, lightBlue500, redA400 } from './colors';
+import { black, white, grey800, lightBlue500, redA400 } from './colors';
 import type { Theme } from '../types';
 
 const DarkTheme: Theme = {
@@ -21,6 +21,10 @@ const DarkTheme: Theme = {
       .string(),
     placeholder: color(white)
       .alpha(0.38)
+      .rgb()
+      .string(),
+    backdrop: color(black)
+      .alpha(0.5)
       .rgb()
       .string(),
   },
