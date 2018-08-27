@@ -171,9 +171,9 @@ export default Modal;
 const styles = StyleSheet.create({
   wrapper: {
     ...StyleSheet.absoluteFillObject,
-    justifyContent: 'center',
   },
   childrenWrapper: {
     flex: 1,
+    justifyContent: 'center',
   },
 });
