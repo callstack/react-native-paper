@@ -441,7 +441,6 @@ class TextInput extends React.Component<Props, State> {
                 ? styles.multilineWithLabel
                 : styles.multilineWithoutLabel
               : null,
-            I18nManager.isRTL ? styles.rtlDirection : styles.ltrDirection,
             {
               color: inputTextColor,
               fontFamily,
@@ -495,6 +494,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginBottom: -4,
     fontSize: 16,
+    textAlign: I18nManager.isRTL ? 'right' : 'left',
   },
   inputWithLabel: {
     paddingTop: 20,
@@ -524,11 +524,5 @@ const styles = StyleSheet.create({
   },
   focusLine: {
     height: StyleSheet.hairlineWidth * 4,
-  },
-  ltrDirection: {
-    textAlign: 'left',
-  },
-  rtlDirection: {
-    textAlign: 'right',
   },
 });
