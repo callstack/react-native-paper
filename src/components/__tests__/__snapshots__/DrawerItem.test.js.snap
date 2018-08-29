@@ -104,6 +104,7 @@ exports[`renders DrawerItem with icon 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
@@ -234,6 +235,7 @@ exports[`renders active DrawerItem 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
@@ -329,6 +331,7 @@ exports[`renders basic DrawerItem 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",

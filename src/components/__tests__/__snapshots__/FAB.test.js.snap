@@ -13,16 +13,16 @@ exports[`renders extended FAB 1`] = `
       Object {
         "shadowColor": "#000000",
         "shadowOffset": Object {
-          "height": 11,
+          "height": 5,
           "width": 0,
         },
         "shadowOpacity": 0.24,
-        "shadowRadius": 12,
+        "shadowRadius": 6,
       },
       Object {
         "backgroundColor": "#03dac4",
         "borderRadius": 28,
-        "elevation": 12,
+        "elevation": 6,
       },
     ]
   }
@@ -156,6 +156,7 @@ exports[`renders extended FAB 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
@@ -195,16 +196,16 @@ exports[`renders normal FAB 1`] = `
       Object {
         "shadowColor": "#000000",
         "shadowOffset": Object {
-          "height": 11,
+          "height": 5,
           "width": 0,
         },
         "shadowOpacity": 0.24,
-        "shadowRadius": 12,
+        "shadowRadius": 6,
       },
       Object {
         "backgroundColor": "#03dac4",
         "borderRadius": 28,
-        "elevation": 12,
+        "elevation": 6,
       },
     ]
   }
@@ -328,16 +329,16 @@ exports[`renders small FAB 1`] = `
       Object {
         "shadowColor": "#000000",
         "shadowOffset": Object {
-          "height": 11,
+          "height": 5,
           "width": 0,
         },
         "shadowOpacity": 0.24,
-        "shadowRadius": 12,
+        "shadowRadius": 6,
       },
       Object {
         "backgroundColor": "#03dac4",
         "borderRadius": 28,
-        "elevation": 12,
+        "elevation": 6,
       },
     ]
   }

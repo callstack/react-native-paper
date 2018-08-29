@@ -103,6 +103,7 @@ exports[`renders snackbar with Text as a child 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
@@ -210,6 +211,7 @@ exports[`renders snackbar with action button 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
@@ -318,6 +320,7 @@ exports[`renders snackbar with action button 1`] = `
                 Object {
                   "colors": Object {
                     "accent": "#03dac4",
+                    "backdrop": "rgba(0, 0, 0, 0.5)",
                     "background": "#f6f6f6",
                     "disabled": "rgba(0, 0, 0, 0.26)",
                     "error": "#B00020",
@@ -422,6 +425,7 @@ exports[`renders snackbar with content 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
