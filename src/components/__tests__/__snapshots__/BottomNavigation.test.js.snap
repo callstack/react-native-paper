@@ -2508,6 +2508,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   Object {
                     "colors": Object {
                       "accent": "#03dac4",
+                      "backdrop": "rgba(0, 0, 0, 0.5)",
                       "background": "#f6f6f6",
                       "disabled": "rgba(0, 0, 0, 0.26)",
                       "error": "#B00020",
@@ -2566,6 +2567,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   Object {
                     "colors": Object {
                       "accent": "#03dac4",
+                      "backdrop": "rgba(0, 0, 0, 0.5)",
                       "background": "#f6f6f6",
                       "disabled": "rgba(0, 0, 0, 0.26)",
                       "error": "#B00020",
@@ -2775,6 +2777,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   Object {
                     "colors": Object {
                       "accent": "#03dac4",
+                      "backdrop": "rgba(0, 0, 0, 0.5)",
                       "background": "#f6f6f6",
                       "disabled": "rgba(0, 0, 0, 0.26)",
                       "error": "#B00020",
@@ -2833,6 +2836,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   Object {
                     "colors": Object {
                       "accent": "#03dac4",
+                      "backdrop": "rgba(0, 0, 0, 0.5)",
                       "background": "#f6f6f6",
                       "disabled": "rgba(0, 0, 0, 0.26)",
                       "error": "#B00020",
@@ -3042,6 +3046,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   Object {
                     "colors": Object {
                       "accent": "#03dac4",
+                      "backdrop": "rgba(0, 0, 0, 0.5)",
                       "background": "#f6f6f6",
                       "disabled": "rgba(0, 0, 0, 0.26)",
                       "error": "#B00020",
@@ -3100,6 +3105,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   Object {
                     "colors": Object {
                       "accent": "#03dac4",
+                      "backdrop": "rgba(0, 0, 0, 0.5)",
                       "background": "#f6f6f6",
                       "disabled": "rgba(0, 0, 0, 0.26)",
                       "error": "#B00020",
@@ -3432,6 +3438,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   Object {
                     "colors": Object {
                       "accent": "#03dac4",
+                      "backdrop": "rgba(0, 0, 0, 0.5)",
                       "background": "#f6f6f6",
                       "disabled": "rgba(0, 0, 0, 0.26)",
                       "error": "#B00020",
@@ -3641,6 +3648,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   Object {
                     "colors": Object {
                       "accent": "#03dac4",
+                      "backdrop": "rgba(0, 0, 0, 0.5)",
                       "background": "#f6f6f6",
                       "disabled": "rgba(0, 0, 0, 0.26)",
                       "error": "#B00020",
@@ -3850,6 +3858,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   Object {
                     "colors": Object {
                       "accent": "#03dac4",
+                      "backdrop": "rgba(0, 0, 0, 0.5)",
                       "background": "#f6f6f6",
                       "disabled": "rgba(0, 0, 0, 0.26)",
                       "error": "#B00020",
@@ -4162,6 +4171,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   Object {
                     "colors": Object {
                       "accent": "#03dac4",
+                      "backdrop": "rgba(0, 0, 0, 0.5)",
                       "background": "#f6f6f6",
                       "disabled": "rgba(0, 0, 0, 0.26)",
                       "error": "#B00020",
@@ -4220,6 +4230,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   Object {
                     "colors": Object {
                       "accent": "#03dac4",
+                      "backdrop": "rgba(0, 0, 0, 0.5)",
                       "background": "#f6f6f6",
                       "disabled": "rgba(0, 0, 0, 0.26)",
                       "error": "#B00020",
@@ -4429,6 +4440,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   Object {
                     "colors": Object {
                       "accent": "#03dac4",
+                      "backdrop": "rgba(0, 0, 0, 0.5)",
                       "background": "#f6f6f6",
                       "disabled": "rgba(0, 0, 0, 0.26)",
                       "error": "#B00020",
@@ -4487,6 +4499,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   Object {
                     "colors": Object {
                       "accent": "#03dac4",
+                      "backdrop": "rgba(0, 0, 0, 0.5)",
                       "background": "#f6f6f6",
                       "disabled": "rgba(0, 0, 0, 0.26)",
                       "error": "#B00020",
@@ -4696,6 +4709,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   Object {
                     "colors": Object {
                       "accent": "#03dac4",
+                      "backdrop": "rgba(0, 0, 0, 0.5)",
                       "background": "#f6f6f6",
                       "disabled": "rgba(0, 0, 0, 0.26)",
                       "error": "#B00020",
@@ -4754,6 +4768,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   Object {
                     "colors": Object {
                       "accent": "#03dac4",
+                      "backdrop": "rgba(0, 0, 0, 0.5)",
                       "background": "#f6f6f6",
                       "disabled": "rgba(0, 0, 0, 0.26)",
                       "error": "#B00020",
@@ -5086,6 +5101,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   Object {
                     "colors": Object {
                       "accent": "#03dac4",
+                      "backdrop": "rgba(0, 0, 0, 0.5)",
                       "background": "#f6f6f6",
                       "disabled": "rgba(0, 0, 0, 0.26)",
                       "error": "#B00020",
@@ -5295,6 +5311,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   Object {
                     "colors": Object {
                       "accent": "#03dac4",
+                      "backdrop": "rgba(0, 0, 0, 0.5)",
                       "background": "#f6f6f6",
                       "disabled": "rgba(0, 0, 0, 0.26)",
                       "error": "#B00020",
@@ -5504,6 +5521,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   Object {
                     "colors": Object {
                       "accent": "#03dac4",
+                      "backdrop": "rgba(0, 0, 0, 0.5)",
                       "background": "#f6f6f6",
                       "disabled": "rgba(0, 0, 0, 0.26)",
                       "error": "#B00020",
@@ -5713,6 +5731,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   Object {
                     "colors": Object {
                       "accent": "#03dac4",
+                      "backdrop": "rgba(0, 0, 0, 0.5)",
                       "background": "#f6f6f6",
                       "disabled": "rgba(0, 0, 0, 0.26)",
                       "error": "#B00020",
@@ -5922,6 +5941,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   Object {
                     "colors": Object {
                       "accent": "#03dac4",
+                      "backdrop": "rgba(0, 0, 0, 0.5)",
                       "background": "#f6f6f6",
                       "disabled": "rgba(0, 0, 0, 0.26)",
                       "error": "#B00020",

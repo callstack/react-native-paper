@@ -119,6 +119,7 @@ exports[`renders list accordion with children 1`] = `
             Object {
               "colors": Object {
                 "accent": "#03dac4",
+                "backdrop": "rgba(0, 0, 0, 0.5)",
                 "background": "#f6f6f6",
                 "disabled": "rgba(0, 0, 0, 0.26)",
                 "error": "#B00020",
@@ -311,6 +312,7 @@ exports[`renders list accordion with icons 1`] = `
             Object {
               "colors": Object {
                 "accent": "#03dac4",
+                "backdrop": "rgba(0, 0, 0, 0.5)",
                 "background": "#f6f6f6",
                 "disabled": "rgba(0, 0, 0, 0.26)",
                 "error": "#B00020",
@@ -454,6 +456,7 @@ exports[`renders multiline list accordion 1`] = `
             Object {
               "colors": Object {
                 "accent": "#03dac4",
+                "backdrop": "rgba(0, 0, 0, 0.5)",
                 "background": "#f6f6f6",
                 "disabled": "rgba(0, 0, 0, 0.26)",
                 "error": "#B00020",
@@ -502,6 +505,7 @@ exports[`renders multiline list accordion 1`] = `
             Object {
               "colors": Object {
                 "accent": "#03dac4",
+                "backdrop": "rgba(0, 0, 0, 0.5)",
                 "background": "#f6f6f6",
                 "disabled": "rgba(0, 0, 0, 0.26)",
                 "error": "#B00020",
