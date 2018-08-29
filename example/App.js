@@ -1,8 +1,8 @@
 /* @flow */
 
-import { KeepAwake } from 'expo';
+import { KeepAwake, Util } from 'expo';
 import * as React from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, I18nManager, AsyncStorage, Platform } from 'react-native';
 import {
   Provider as PaperProvider,
   DarkTheme,
@@ -16,25 +16,45 @@ import type { Theme } from 'react-native-paper/types';
 
 type State = {
   theme: Theme,
+  rtl: boolean,
 };
 
-const ThemeToggleContext: any = createReactContext();
+const ToggleContext: any = createReactContext();
 
 const App = createDrawerNavigator(
   { Home: { screen: RootNavigator } },
   {
     contentComponent: () => (
-      <ThemeToggleContext.Consumer>
-        {toggleTheme => <DrawerItems toggleTheme={toggleTheme} />}
-      </ThemeToggleContext.Consumer>
+      <ToggleContext.Consumer>
+        {toggle => (
+          <DrawerItems
+            toggleTheme={toggle.theme}
+            toggleRTL={toggle.rtl}
+            isRTL={toggle.isRTL}
+          />
+        )}
+      </ToggleContext.Consumer>
     ),
+    // set drawerPosition to support rtl toggle on android
+    drawerPosition:
+      Platform.OS === 'android' && (I18nManager.isRTL ? 'right' : 'left'),
   }
 );
 
 export default class PaperExample extends React.Component<{}, State> {
   state = {
     theme: DefaultTheme,
+    rtl: I18nManager.isRTL,
   };
+
+  componentWillMount() {
+    AsyncStorage.getItem('rtl').then(rtlSetting => {
+      const rtl =
+        rtlSetting == null ? I18nManager.isRTL : JSON.parse(rtlSetting);
+      I18nManager.forceRTL(rtl);
+      this.setState({ rtl });
+    });
+  }
 
   componentDidMount() {
     StatusBar.setBarStyle('light-content');
@@ -45,10 +65,23 @@ export default class PaperExample extends React.Component<{}, State> {
       theme: state.theme === DarkTheme ? DefaultTheme : DarkTheme,
     }));
 
+  _toggleRTL = () => {
+    const { rtl } = this.state;
+
+    I18nManager.forceRTL(!rtl);
+    AsyncStorage.setItem('rtl', JSON.stringify(!rtl)).then(() => Util.reload());
+  };
+
   render() {
     return (
       <PaperProvider theme={this.state.theme}>
-        <ThemeToggleContext.Provider value={this._toggleTheme}>
+        <ToggleContext.Provider
+          value={{
+            theme: this._toggleTheme,
+            rtl: this._toggleRTL,
+            isRTL: this.state.rtl,
+          }}
+        >
           <App
             persistenceKey={
               process.env.NODE_ENV !== 'production'
@@ -56,7 +89,7 @@ export default class PaperExample extends React.Component<{}, State> {
                 : null
             }
           />
-        </ThemeToggleContext.Provider>
+        </ToggleContext.Provider>
         <KeepAwake />
       </PaperProvider>
     );

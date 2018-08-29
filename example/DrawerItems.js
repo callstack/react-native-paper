@@ -15,6 +15,8 @@ import type { Theme } from 'react-native-paper/types';
 type Props = {
   theme: Theme,
   toggleTheme: Function,
+  toggleRTL: Function,
+  isRTL: boolean,
 };
 
 type State = {
@@ -77,6 +79,22 @@ class DrawerItems extends React.Component<Props, State> {
               <Paragraph>Dark Theme</Paragraph>
               <View pointerEvents="none">
                 <Switch value={this.state.isDark} />
+              </View>
+            </View>
+          </TouchableRipple>
+          <TouchableRipple onPress={this.props.toggleRTL}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                paddingVertical: 8,
+                paddingHorizontal: 16,
+              }}
+            >
+              <Paragraph>RTL</Paragraph>
+              <View pointerEvents="none">
+                <Switch value={this.props.isRTL} />
               </View>
             </View>
           </TouchableRipple>
