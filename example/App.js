@@ -1,8 +1,8 @@
 /* @flow */
 
-import { KeepAwake } from 'expo';
+import { KeepAwake, Util } from 'expo';
 import * as React from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, I18nManager, AsyncStorage, Platform } from 'react-native';
 import {
   Provider as PaperProvider,
   DarkTheme,
@@ -16,39 +16,101 @@ import type { Theme } from 'react-native-paper/types';
 
 type State = {
   theme: Theme,
+  rtl: boolean,
 };
 
-const ThemeToggleContext: any = createReactContext();
+const PreferencesContext: any = createReactContext();
 
 const App = createDrawerNavigator(
   { Home: { screen: RootNavigator } },
   {
     contentComponent: () => (
-      <ThemeToggleContext.Consumer>
-        {toggleTheme => <DrawerItems toggleTheme={toggleTheme} />}
-      </ThemeToggleContext.Consumer>
+      <PreferencesContext.Consumer>
+        {preferences => (
+          <DrawerItems
+            toggleTheme={preferences.theme}
+            toggleRTL={preferences.rtl}
+            isRTL={preferences.isRTL}
+            isDarkTheme={preferences.isDarkTheme}
+          />
+        )}
+      </PreferencesContext.Consumer>
     ),
+    // set drawerPosition to support rtl toggle on android
+    drawerPosition:
+      Platform.OS === 'android' && (I18nManager.isRTL ? 'right' : 'left'),
   }
 );
 
 export default class PaperExample extends React.Component<{}, State> {
   state = {
     theme: DefaultTheme,
+    rtl: I18nManager.isRTL,
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     StatusBar.setBarStyle('light-content');
+
+    try {
+      const prefString = await AsyncStorage.getItem('preferences');
+      const preferences = JSON.parse(prefString);
+
+      // eslint-disable-next-line react/no-did-mount-set-state
+      this.setState(state => ({
+        theme: preferences.theme === 'dark' ? DarkTheme : DefaultTheme,
+        rtl: typeof preferences.rtl === 'boolean' ? preferences.rtl : state.rtl,
+      }));
+    } catch (e) {
+      // ignore error
+    }
   }
 
+  _savePreferences = async () => {
+    try {
+      AsyncStorage.setItem(
+        'preferences',
+        JSON.stringify({
+          theme: this.state.theme === DarkTheme ? 'dark' : 'light',
+          rtl: this.state.rtl,
+        })
+      );
+    } catch (e) {
+      // ignore error
+    }
+  };
+
   _toggleTheme = () =>
-    this.setState(state => ({
-      theme: state.theme === DarkTheme ? DefaultTheme : DarkTheme,
-    }));
+    this.setState(
+      state => ({
+        theme: state.theme === DarkTheme ? DefaultTheme : DarkTheme,
+      }),
+      this._savePreferences
+    );
+
+  _toggleRTL = () =>
+    this.setState(
+      state => ({
+        rtl: !state.rtl,
+      }),
+      async () => {
+        await this._savePreferences();
+
+        I18nManager.forceRTL(this.state.rtl);
+        Util.reload();
+      }
+    );
 
   render() {
     return (
       <PaperProvider theme={this.state.theme}>
-        <ThemeToggleContext.Provider value={this._toggleTheme}>
+        <PreferencesContext.Provider
+          value={{
+            theme: this._toggleTheme,
+            rtl: this._toggleRTL,
+            isRTL: this.state.rtl,
+            isDarkTheme: this.state.theme === DarkTheme,
+          }}
+        >
           <App
             persistenceKey={
               process.env.NODE_ENV !== 'production'
@@ -56,7 +118,7 @@ export default class PaperExample extends React.Component<{}, State> {
                 : null
             }
           />
-        </ThemeToggleContext.Provider>
+        </PreferencesContext.Provider>
         <KeepAwake />
       </PaperProvider>
     );

@@ -7,7 +7,7 @@ import {
   withTheme,
   Switch,
   TouchableRipple,
-  Paragraph,
+  Text,
   Colors,
 } from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
@@ -15,12 +15,14 @@ import type { Theme } from 'react-native-paper/types';
 type Props = {
   theme: Theme,
   toggleTheme: Function,
+  toggleRTL: Function,
+  isRTL: boolean,
+  isDarkTheme: boolean,
 };
 
 type State = {
   open: boolean,
   drawerItemIndex: number,
-  isDark: boolean,
 };
 
 const DrawerItemsData = [
@@ -35,22 +37,16 @@ class DrawerItems extends React.Component<Props, State> {
   state = {
     open: false,
     drawerItemIndex: 0,
-    isDark: false,
   };
 
   _setDrawerItem = index => this.setState({ drawerItemIndex: index });
-
-  _toggleTheme = () => {
-    this.props.toggleTheme();
-    this.setState({ isDark: !this.state.isDark });
-  };
 
   render() {
     const { colors } = this.props.theme;
 
     return (
       <View style={[styles.drawerContent, { backgroundColor: colors.surface }]}>
-        <DrawerSection title="Subheader">
+        <DrawerSection title="Example items">
           {DrawerItemsData.map((props, index) => (
             <DrawerSection.Item
               {...props}
@@ -64,19 +60,22 @@ class DrawerItems extends React.Component<Props, State> {
               onPress={() => this._setDrawerItem(index)}
             />
           ))}
-          <TouchableRipple onPress={this._toggleTheme}>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                paddingVertical: 8,
-                paddingHorizontal: 16,
-              }}
-            >
-              <Paragraph>Dark Theme</Paragraph>
+        </DrawerSection>
+
+        <DrawerSection title="Preferences">
+          <TouchableRipple onPress={this.props.toggleTheme}>
+            <View style={styles.preference}>
+              <Text>Dark Theme</Text>
               <View pointerEvents="none">
-                <Switch value={this.state.isDark} />
+                <Switch value={this.props.isDarkTheme} />
+              </View>
+            </View>
+          </TouchableRipple>
+          <TouchableRipple onPress={this.props.toggleRTL}>
+            <View style={styles.preference}>
+              <Text>RTL</Text>
+              <View pointerEvents="none">
+                <Switch value={this.props.isRTL} />
               </View>
             </View>
           </TouchableRipple>
@@ -90,6 +89,12 @@ const styles = StyleSheet.create({
   drawerContent: {
     flex: 1,
     paddingTop: Platform.OS === 'android' ? 25 : 22,
+  },
+  preference: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
   },
 });
 
