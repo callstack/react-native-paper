@@ -22,6 +22,10 @@ export default {
       .alpha(0.38)
       .rgb()
       .string(),
+    backdrop: color(black)
+      .alpha(0.5)
+      .rgb()
+      .string(),
   },
   fonts,
 };

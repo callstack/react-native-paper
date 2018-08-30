@@ -193,10 +193,11 @@ class FABGroup extends React.Component<Props, State> {
       theme,
       style,
     } = this.props;
+    const { colors } = theme;
 
     const labelColor = theme.dark
-      ? theme.colors.text
-      : color(theme.colors.text)
+      ? colors.text
+      : color(colors.text)
           .fade(0.54)
           .rgb()
           .string();
@@ -230,7 +231,7 @@ class FABGroup extends React.Component<Props, State> {
               styles.backdrop,
               {
                 opacity: backdropOpacity,
-                backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                backgroundColor: colors.backdrop,
               },
             ]}
           />

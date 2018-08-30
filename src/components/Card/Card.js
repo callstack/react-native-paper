@@ -77,7 +77,7 @@ class Card extends React.Component<Props, State> {
   static Cover = CardCover;
 
   static defaultProps = {
-    elevation: 2,
+    elevation: 1,
   };
 
   state = {
@@ -88,7 +88,7 @@ class Card extends React.Component<Props, State> {
   _handlePressIn = () => {
     Animated.timing(this.state.elevation, {
       toValue: 8,
-      duration: 200,
+      duration: 150,
     }).start();
   };
 

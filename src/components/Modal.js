@@ -10,6 +10,8 @@ import {
   BackHandler,
 } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
+import { withTheme } from '../core/theming';
+import type { Theme } from '../types';
 
 type Props = {
   /**
@@ -28,6 +30,10 @@ type Props = {
    * Content of the `Modal`.
    */
   children: React.Node,
+  /**
+   * @optional
+   */
+  theme: Theme,
 };
 
 type State = {
@@ -136,7 +142,8 @@ class Modal extends React.Component<Props, State> {
   render() {
     if (!this.state.rendered) return null;
 
-    const { children, dismissable } = this.props;
+    const { children, dismissable, theme } = this.props;
+    const { colors } = theme;
     return (
       <Animated.View
         accessibilityViewIsModal
@@ -146,7 +153,7 @@ class Modal extends React.Component<Props, State> {
         <View
           style={[
             StyleSheet.absoluteFill,
-            { backgroundColor: 'rgba(0, 0, 0, .5)' },
+            { backgroundColor: colors.backdrop },
           ]}
         />
         {dismissable && (
@@ -166,14 +173,14 @@ class Modal extends React.Component<Props, State> {
 
 polyfill(Modal);
 
-export default Modal;
+export default withTheme(Modal);
 
 const styles = StyleSheet.create({
   wrapper: {
     ...StyleSheet.absoluteFillObject,
-    justifyContent: 'center',
   },
   childrenWrapper: {
     flex: 1,
+    justifyContent: 'center',
   },
 });

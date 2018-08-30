@@ -89,6 +89,7 @@ exports[`renders list item with avatar 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
@@ -208,6 +209,7 @@ exports[`renders list item with avatar and icon 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
@@ -256,6 +258,7 @@ exports[`renders list item with avatar and icon 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
@@ -450,6 +453,7 @@ exports[`renders list item with icon 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
@@ -543,6 +547,7 @@ exports[`renders list item with title and description 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
@@ -591,6 +596,7 @@ exports[`renders list item with title and description 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
