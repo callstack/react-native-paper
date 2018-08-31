@@ -19,7 +19,7 @@ it('renders snackbar with content', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders not visible snackbar with content', () => {
+it('renders not visible snackbar with content wrapper but no actual content', () => {
   const tree = renderer
     .create(
       <Snackbar visible={false} onDismiss={jest.fn()}>

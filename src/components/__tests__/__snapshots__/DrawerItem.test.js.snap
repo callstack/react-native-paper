@@ -53,9 +53,18 @@ exports[`renders DrawerItem with icon 1`] = `
               "color": "rgba(0, 0, 0, 0.68)",
               "fontSize": 24,
             },
-            Object {
-              "backgroundColor": "transparent",
-            },
+            Array [
+              Object {
+                "transform": Array [
+                  Object {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              Object {
+                "backgroundColor": "transparent",
+              },
+            ],
             Object {
               "fontFamily": "Material Icons",
               "fontStyle": "normal",
@@ -76,6 +85,8 @@ exports[`renders DrawerItem with icon 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -93,6 +104,7 @@ exports[`renders DrawerItem with icon 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
@@ -172,9 +184,18 @@ exports[`renders active DrawerItem 1`] = `
               "color": "#6200ee",
               "fontSize": 24,
             },
-            Object {
-              "backgroundColor": "transparent",
-            },
+            Array [
+              Object {
+                "transform": Array [
+                  Object {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              Object {
+                "backgroundColor": "transparent",
+              },
+            ],
             Object {
               "fontFamily": "Material Icons",
               "fontStyle": "normal",
@@ -195,6 +216,8 @@ exports[`renders active DrawerItem 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -212,6 +235,7 @@ exports[`renders active DrawerItem 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
@@ -288,6 +312,8 @@ exports[`renders basic DrawerItem 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -305,6 +331,7 @@ exports[`renders basic DrawerItem 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",

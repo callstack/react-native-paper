@@ -5,7 +5,7 @@ import { Animated, View, StyleSheet } from 'react-native';
 import color from 'color';
 import Icon from './Icon';
 import TouchableRipple from './TouchableRipple';
-import withTheme from '../core/withTheme';
+import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 
 type Props = {

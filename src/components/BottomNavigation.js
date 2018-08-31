@@ -17,7 +17,7 @@ import Surface from './Surface';
 import TouchableRipple from './TouchableRipple';
 import Text from './Typography/Text';
 import { black, white } from '../styles/colors';
-import withTheme from '../core/withTheme';
+import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
@@ -514,7 +514,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
     const maxTabWidth = routes.length > 3 ? MIN_TAB_WIDTH : MAX_TAB_WIDTH;
     const tabWidth = Math.min(
       // Account for horizontal padding around the items
-      layout.width * 4 / routes.length,
+      (layout.width * 4) / routes.length,
       maxTabWidth
     );
 

@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { StyleSheet, View, Image } from 'react-native';
-import withTheme from '../../core/withTheme';
+import { withTheme } from '../../core/theming';
 import { grey200 } from '../../styles/colors';
 import type { Theme } from '../../types';
 

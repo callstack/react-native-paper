@@ -8,4 +8,6 @@ import {
   Colors,
   NonExistent,
   NonExistentSecond as Stuff,
+  ThemeProvider,
+  withTheme,
 } from 'react-native-paper';

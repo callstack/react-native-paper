@@ -8,7 +8,7 @@ import Surface from './Surface';
 import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple';
 import { black, white } from '../styles/colors';
-import withTheme from '../core/withTheme';
+import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
@@ -144,7 +144,7 @@ class Button extends React.Component<Props, State> {
     const { colors, roundness } = theme;
     const fontFamily = theme.fonts.medium;
 
-    let backgroundColor, borderColor, textColor;
+    let backgroundColor, borderColor, textColor, borderWidth;
 
     if (mode === 'contained') {
       if (disabled) {
@@ -166,8 +166,10 @@ class Button extends React.Component<Props, State> {
         .alpha(0.29)
         .rgb()
         .string();
+      borderWidth = StyleSheet.hairlineWidth;
     } else {
       borderColor = 'transparent';
+      borderWidth = 0;
     }
 
     if (disabled) {
@@ -201,6 +203,7 @@ class Button extends React.Component<Props, State> {
     const buttonStyle = {
       backgroundColor,
       borderColor,
+      borderWidth,
       borderRadius: roundness,
     };
     const touchableStyle = { borderRadius: roundness };
@@ -268,7 +271,6 @@ class Button extends React.Component<Props, State> {
 const styles = StyleSheet.create({
   button: {
     minWidth: 88,
-    borderWidth: StyleSheet.hairlineWidth,
     borderStyle: 'solid',
   },
   compact: {

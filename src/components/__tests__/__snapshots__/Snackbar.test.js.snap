@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders not visible snackbar with content 1`] = `
+exports[`renders not visible snackbar with content wrapper but no actual content 1`] = `
 <RCTSafeAreaView
   pointerEvents="box-none"
   style={
@@ -24,78 +24,7 @@ exports[`renders not visible snackbar with content 1`] = `
         ],
       }
     }
-  >
-    <View
-      pointerEvents="box-none"
-      style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "backgroundColor": "#323232",
-            "borderRadius": 4,
-            "elevation": 6,
-            "flexDirection": "row",
-            "justifyContent": "space-between",
-            "margin": 8,
-          },
-          Object {
-            "borderRadius": 4,
-          },
-          undefined,
-        ]
-      }
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Array [
-            Object {
-              "color": "#000000",
-              "fontFamily": "Helvetica Neue",
-            },
-            Array [
-              Object {
-                "color": "#ffffff",
-                "flex": 1,
-                "flexWrap": "wrap",
-                "marginLeft": 16,
-                "marginVertical": 14,
-              },
-              Object {
-                "marginRight": 16,
-              },
-            ],
-          ]
-        }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.38)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
-        }
-      >
-        Snackbar content
-      </Text>
-    </View>
-  </View>
+  />
 </RCTSafeAreaView>
 `;
 
@@ -153,6 +82,8 @@ exports[`renders snackbar with Text as a child 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -172,6 +103,7 @@ exports[`renders snackbar with Text as a child 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
@@ -258,6 +190,8 @@ exports[`renders snackbar with action button 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -277,6 +211,7 @@ exports[`renders snackbar with action button 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
@@ -313,7 +248,7 @@ exports[`renders snackbar with action button 1`] = `
               "borderColor": "transparent",
               "borderRadius": 4,
               "borderStyle": "solid",
-              "borderWidth": 0.5,
+              "borderWidth": 0,
               "elevation": 0,
               "marginHorizontal": 8,
               "marginVertical": 6,
@@ -358,6 +293,8 @@ exports[`renders snackbar with action button 1`] = `
                   Object {
                     "color": "#000000",
                     "fontFamily": "Helvetica Neue",
+                    "textAlign": "left",
+                    "writingDirection": "ltr",
                   },
                   Array [
                     Object {
@@ -383,6 +320,7 @@ exports[`renders snackbar with action button 1`] = `
                 Object {
                   "colors": Object {
                     "accent": "#03dac4",
+                    "backdrop": "rgba(0, 0, 0, 0.5)",
                     "background": "#f6f6f6",
                     "disabled": "rgba(0, 0, 0, 0.26)",
                     "error": "#B00020",
@@ -466,6 +404,8 @@ exports[`renders snackbar with content 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -485,6 +425,7 @@ exports[`renders snackbar with content 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",

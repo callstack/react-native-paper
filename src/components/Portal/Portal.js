@@ -4,8 +4,7 @@
 import * as React from 'react';
 import PortalConsumer from './PortalConsumer';
 import PortalHost, { PortalContext } from './PortalHost';
-import ThemeProvider from '../../core/ThemeProvider';
-import withTheme from '../../core/withTheme';
+import { ThemeProvider, withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
 type Props = {

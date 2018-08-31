@@ -75,9 +75,18 @@ exports[`renders chip with icon 1`] = `
                 "color": "rgba(0, 0, 0, 0.54)",
                 "fontSize": 18,
               },
-              Object {
-                "backgroundColor": "transparent",
-              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
               Object {
                 "fontFamily": "Material Icons",
                 "fontStyle": "normal",
@@ -99,6 +108,8 @@ exports[`renders chip with icon 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -119,6 +130,7 @@ exports[`renders chip with icon 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
@@ -207,6 +219,8 @@ exports[`renders chip with onPress 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -227,6 +241,7 @@ exports[`renders chip with onPress 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
@@ -328,9 +343,18 @@ exports[`renders deletable chip 1`] = `
                 "color": "rgba(0, 0, 0, 0.54)",
                 "fontSize": 18,
               },
-              Object {
-                "backgroundColor": "transparent",
-              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
               Object {
                 "fontFamily": "Material Icons",
                 "fontStyle": "normal",
@@ -352,6 +376,8 @@ exports[`renders deletable chip 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -372,6 +398,7 @@ exports[`renders deletable chip 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
@@ -461,6 +488,8 @@ exports[`renders outlined disabled chip 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -481,6 +510,7 @@ exports[`renders outlined disabled chip 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
@@ -583,9 +613,18 @@ exports[`renders selected chip 1`] = `
                 "color": "rgba(0, 0, 0, 0.54)",
                 "fontSize": 18,
               },
-              Object {
-                "backgroundColor": "transparent",
-              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
               Object {
                 "fontFamily": "Material Icons",
                 "fontStyle": "normal",
@@ -607,6 +646,8 @@ exports[`renders selected chip 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -627,6 +668,7 @@ exports[`renders selected chip 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",

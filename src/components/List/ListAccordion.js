@@ -6,7 +6,7 @@ import { View, StyleSheet } from 'react-native';
 import TouchableRipple from '../TouchableRipple';
 import Icon, { type IconSource } from '../Icon';
 import Text from '../Typography/Text';
-import withTheme from '../../core/withTheme';
+import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
 type Props = {

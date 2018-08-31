@@ -12,7 +12,7 @@ exports[`renders disabled FAB 1`] = `
       },
       0,
       Object {
-        "backgroundColor": "#9e9e9e",
+        "backgroundColor": "rgba(0, 0, 0, 0.12)",
         "borderRadius": 28,
         "elevation": 0,
       },
@@ -93,12 +93,21 @@ exports[`renders disabled FAB 1`] = `
             style={
               Array [
                 Object {
-                  "color": "rgba(0, 0, 0, .54)",
+                  "color": "#ffffff",
                   "fontSize": 24,
                 },
-                Object {
-                  "backgroundColor": "transparent",
-                },
+                Array [
+                  Object {
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                ],
                 Object {
                   "fontFamily": "Material Icons",
                   "fontStyle": "normal",
@@ -129,16 +138,16 @@ exports[`renders extended FAB 1`] = `
       Object {
         "shadowColor": "#000000",
         "shadowOffset": Object {
-          "height": 11,
+          "height": 5,
           "width": 0,
         },
         "shadowOpacity": 0.24,
-        "shadowRadius": 12,
+        "shadowRadius": 6,
       },
       Object {
         "backgroundColor": "#03dac4",
         "borderRadius": 28,
-        "elevation": 12,
+        "elevation": 6,
       },
     ]
   }
@@ -221,9 +230,18 @@ exports[`renders extended FAB 1`] = `
                   "color": "rgba(0, 0, 0, .54)",
                   "fontSize": 24,
                 },
-                Object {
-                  "backgroundColor": "transparent",
-                },
+                Array [
+                  Object {
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                ],
                 Object {
                   "fontFamily": "Material Icons",
                   "fontStyle": "normal",
@@ -245,6 +263,8 @@ exports[`renders extended FAB 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -261,6 +281,7 @@ exports[`renders extended FAB 1`] = `
           Object {
             "colors": Object {
               "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
               "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
               "error": "#B00020",
@@ -300,16 +321,16 @@ exports[`renders normal FAB 1`] = `
       Object {
         "shadowColor": "#000000",
         "shadowOffset": Object {
-          "height": 11,
+          "height": 5,
           "width": 0,
         },
         "shadowOpacity": 0.24,
-        "shadowRadius": 12,
+        "shadowRadius": 6,
       },
       Object {
         "backgroundColor": "#03dac4",
         "borderRadius": 28,
-        "elevation": 12,
+        "elevation": 6,
       },
     ]
   }
@@ -391,9 +412,18 @@ exports[`renders normal FAB 1`] = `
                   "color": "rgba(0, 0, 0, .54)",
                   "fontSize": 24,
                 },
-                Object {
-                  "backgroundColor": "transparent",
-                },
+                Array [
+                  Object {
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                ],
                 Object {
                   "fontFamily": "Material Icons",
                   "fontStyle": "normal",
@@ -424,16 +454,16 @@ exports[`renders small FAB 1`] = `
       Object {
         "shadowColor": "#000000",
         "shadowOffset": Object {
-          "height": 11,
+          "height": 5,
           "width": 0,
         },
         "shadowOpacity": 0.24,
-        "shadowRadius": 12,
+        "shadowRadius": 6,
       },
       Object {
         "backgroundColor": "#03dac4",
         "borderRadius": 28,
-        "elevation": 12,
+        "elevation": 6,
       },
     ]
   }
@@ -515,9 +545,18 @@ exports[`renders small FAB 1`] = `
                   "color": "rgba(0, 0, 0, .54)",
                   "fontSize": 24,
                 },
-                Object {
-                  "backgroundColor": "transparent",
-                },
+                Array [
+                  Object {
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                ],
                 Object {
                   "fontFamily": "Material Icons",
                   "fontStyle": "normal",

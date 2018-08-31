@@ -39,10 +39,7 @@ export default createStackNavigator(
     navigationOptions: ({ navigation }) => ({
       header: (
         <Appbar.Header>
-          <Appbar.Action
-            icon="menu"
-            onPress={() => navigation.navigate('DrawerOpen')}
-          />
+          <Appbar.Action icon="menu" onPress={() => navigation.openDrawer()} />
           <Appbar.Content title="Examples" />
         </Appbar.Header>
       ),
