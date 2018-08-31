@@ -25,3 +25,11 @@ it('renders extended FAB', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('renders disabled FAB', () => {
+  const tree = renderer
+    .create(<FAB onPress={() => {}} icon="add" disabled />)
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});

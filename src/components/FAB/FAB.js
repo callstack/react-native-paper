@@ -8,7 +8,7 @@ import Surface from '../Surface';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple';
-import { white } from '../../styles/colors';
+import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 import type { IconSource } from './../Icon';
@@ -37,6 +37,10 @@ type Props = {
    * Custom color for the `FAB`.
    */
   color?: string,
+  /**
+   * Whether `FAB` is disabled. A disabled button is greyed out and `onPress` is not called on touch.
+   */
+  disabled?: boolean,
   /**
    * Function to execute on press.
    */
@@ -103,6 +107,7 @@ class FAB extends React.Component<Props, State> {
       label,
       accessibilityLabel = label,
       color: customColor,
+      disabled,
       onPress,
       theme,
       style,
@@ -111,7 +116,11 @@ class FAB extends React.Component<Props, State> {
 
     const { elevation } = this.state;
 
-    const { backgroundColor = theme.colors.accent } =
+    const disabledColor = color(theme.dark ? white : black)
+      .alpha(0.12)
+      .rgb()
+      .string();
+    const { backgroundColor = disabled ? disabledColor : theme.colors.accent } =
       StyleSheet.flatten(style) || {};
 
     let foregroundColor;
@@ -132,7 +141,13 @@ class FAB extends React.Component<Props, State> {
     return (
       <AnimatedSurface
         {...rest}
-        style={[{ backgroundColor }, { elevation }, styles.container, style]}
+        style={[
+          { backgroundColor },
+          { elevation },
+          styles.container,
+          disabled && styles.disabled,
+          style,
+        ]}
       >
         <TouchableRipple
           borderless
@@ -140,6 +155,7 @@ class FAB extends React.Component<Props, State> {
           onPressIn={this._handlePressIn}
           onPressOut={this._handlePressOut}
           rippleColor={rippleColor}
+          disabled={disabled}
           accessibilityLabel={accessibilityLabel}
           accessibilityTraits="button"
           accessibilityComponentType="button"
@@ -196,6 +212,9 @@ const styles = StyleSheet.create({
   },
   label: {
     marginHorizontal: 8,
+  },
+  disabled: {
+    elevation: 0,
   },
 });
 

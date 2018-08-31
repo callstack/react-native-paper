@@ -25,12 +25,14 @@ type Props = {
    * - `label`: optional label text
    * - `accessibilityLabel`: accessibility label for the action, uses label by default if specified
    * - `color`: custom icon color of the action item
+   * - `disabled`: whether item is disabled
    * - `onPress`: callback that is called when `FAB` is pressed (required)
    */
   actions: Array<{
     icon: string,
     label?: string,
     color?: string,
+    disabled?: boolean,
     accessibilityLabel?: string,
     onPress: () => mixed,
   }>,
@@ -47,6 +49,10 @@ type Props = {
    * Custom icon color for the `FAB`.
    */
   color?: string,
+  /**
+   * Whether `FAB` is disabled. A disabled button is greyed out and `onPress` is not called on touch.
+   */
+  disabled?: boolean,
   /**
    * Function to execute on pressing the `FAB`.
    */
@@ -187,6 +193,7 @@ class FABGroup extends React.Component<Props, State> {
     const {
       actions,
       icon,
+      disabled,
       open,
       onPress,
       accessibilityLabel,
@@ -255,6 +262,7 @@ class FABGroup extends React.Component<Props, State> {
                       {
                         transform: [{ scale: scales[i] }],
                       },
+                      (it.disabled || disabled) && styles.disabledLabel,
                     ]}
                     onPress={() => {
                       it.onPress();
@@ -274,6 +282,7 @@ class FABGroup extends React.Component<Props, State> {
                 <FAB
                   small
                   icon={it.icon}
+                  disabled={it.disabled || disabled}
                   color={it.color}
                   style={[
                     {
@@ -303,6 +312,7 @@ class FABGroup extends React.Component<Props, State> {
             this._toggle();
           }}
           icon={icon}
+          disabled={disabled}
           color={this.props.color}
           accessibilityLabel={accessibilityLabel}
           accessibilityTraits="button"
@@ -339,6 +349,10 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     marginHorizontal: 16,
     elevation: 2,
+  },
+  disabledLabel: {
+    opacity: 0.32,
+    elevation: 0,
   },
   item: {
     marginHorizontal: 24,
