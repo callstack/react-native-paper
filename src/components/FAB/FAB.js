@@ -8,7 +8,7 @@ import Surface from '../Surface';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple';
-import { white, grey500 } from '../../styles/colors';
+import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 import type { IconSource } from './../Icon';
@@ -92,7 +92,11 @@ class FAB extends React.Component<Props> {
       ...rest
     } = this.props;
 
-    const { backgroundColor = disabled ? grey500 : theme.colors.accent } =
+    const disabledColor = color(black)
+      .alpha(0.12)
+      .rgb()
+      .string();
+    const { backgroundColor = disabled ? disabledColor : theme.colors.accent } =
       StyleSheet.flatten(style) || {};
 
     let foregroundColor;
