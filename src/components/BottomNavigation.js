@@ -159,8 +159,17 @@ type Props<T> = {
    * ```js
    * barStyle={{ paddingBottom: 48 }}
    * ```
+   * ```js
+   * tabBarStyle={{ paddingVertical: 4 }}
+   * ```
    */
   barStyle?: any,
+  tabBatStyle?: any,
+  iconContainerStyle?: any,
+  iconWrapperStyle?: any,
+  labelContainerStyle?: any,
+  labelWrapperStyle?: any,
+  labelStyle?: any,
   style?: any,
   /**
    * @optional
@@ -494,6 +503,12 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
       getColor = ({ route }: Object) => route.color,
       getAccessibilityLabel = ({ route }: Object) => route.accessibilityLabel,
       getTestID = ({ route }: Object) => route.testID,
+      tabBatStyle,
+      iconContainerStyle,
+      iconWrapperStyle,
+      labelContainerStyle,
+      labelWrapperStyle,
+      labelStyle,
       barStyle,
       style,
       theme,
@@ -740,18 +755,24 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                   accessibilityComponentType="button"
                 >
                   <Animated.View
-                    style={[styles.item, { transform: [{ translateX }] }]}
+                    style={[
+                      styles.item,
+                      { transform: [{ translateX }] },
+                      tabBatStyle,
+                    ]}
                   >
                     <Animated.View
                       style={[
                         styles.iconContainer,
                         { transform: [{ translateY }] },
+                        iconContainerStyle,
                       ]}
                     >
                       <Animated.View
                         style={[
                           styles.iconWrapper,
                           { opacity: activeIconOpacity },
+                          iconWrapperStyle,
                         ]}
                       >
                         {renderIcon ? (
@@ -773,6 +794,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                           style={[
                             styles.iconWrapper,
                             { opacity: inactiveIconOpacity },
+                            iconWrapperStyle,
                           ]}
                         >
                           {renderIcon ? (
@@ -797,12 +819,14 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                         {
                           transform: [{ scale }, { translateY }],
                         },
+                        labelContainerStyle,
                       ]}
                     >
                       <Animated.View
                         style={[
                           styles.labelWrapper,
                           { opacity: activeLabelOpacity },
+                          labelWrapperStyle,
                         ]}
                       >
                         {renderLabel ? (
@@ -818,6 +842,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                               {
                                 color: activeColor,
                               },
+                              labelStyle,
                             ]}
                           >
                             {getLabelText({ route })}
@@ -829,6 +854,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                           style={[
                             styles.labelWrapper,
                             { opacity: inactiveLabelOpacity },
+                            labelWrapperStyle,
                           ]}
                         >
                           {renderLabel ? (
@@ -844,6 +870,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                                 {
                                   color: inactiveColor,
                                 },
+                                labelStyle,
                               ]}
                             >
                               {getLabelText({ route })}
