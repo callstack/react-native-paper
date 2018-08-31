@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import { TextInput, HelperText, withTheme } from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
 
@@ -12,6 +12,7 @@ type Props = {
 type State = {
   text: string,
   name: string,
+  outlinedText: string,
 };
 
 class TextInputExample extends React.Component<Props, State> {
@@ -20,6 +21,7 @@ class TextInputExample extends React.Component<Props, State> {
   state = {
     text: '',
     name: '',
+    outlinedText: '',
   };
 
   _isUsernameValid = () => /^[a-z]*$/.test(this.state.name);
@@ -35,7 +37,7 @@ class TextInputExample extends React.Component<Props, State> {
       <ScrollView style={[styles.container, { backgroundColor: background }]}>
         <TextInput
           style={styles.inputContainerStyle}
-          label="Normal input"
+          label="Flat input"
           placeholder="Type something"
           value={this.state.text}
           onChangeText={text => this.setState({ text })}
@@ -43,7 +45,21 @@ class TextInputExample extends React.Component<Props, State> {
         <TextInput
           disabled
           style={styles.inputContainerStyle}
-          label="Disabled Input"
+          label="Disabled flat input"
+        />
+        <TextInput
+          mode="outlined"
+          style={styles.inputContainerStyle}
+          label="Outlined input"
+          placeholder="Type something"
+          value={this.state.outlinedText}
+          onChangeText={outlinedText => this.setState({ outlinedText })}
+        />
+        <TextInput
+          mode="outlined"
+          disabled
+          style={styles.inputContainerStyle}
+          label="Disabled outlined input"
         />
         <View style={styles.inputContainerStyle}>
           <TextInput

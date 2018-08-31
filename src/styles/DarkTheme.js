@@ -20,7 +20,7 @@ const DarkTheme: Theme = {
       .rgb()
       .string(),
     placeholder: color(white)
-      .alpha(0.38)
+      .alpha(0.54)
       .rgb()
       .string(),
     backdrop: color(black)

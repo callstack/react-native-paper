@@ -8,13 +8,15 @@ import {
   StyleSheet,
 } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
+import color from 'color';
 import Text from './Typography/Text';
 import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
-const MINIMIZED_LABEL_Y_OFFSET = -22;
+const MINIMIZED_LABEL_Y_OFFSET = -12;
+const OUTLINE_MINIMIZED_LABEL_Y_OFFSET = -29;
 const MAXIMIZED_LABEL_FONT_SIZE = 16;
 const MINIMIZED_LABEL_FONT_SIZE = 12;
 const LABEL_WIGGLE_X_OFFSET = 4;
@@ -22,6 +24,12 @@ const FOCUS_ANIMATION_DURATION = 150;
 const BLUR_ANIMATION_DURATION = 180;
 
 type Props = {
+  /**
+   * Mode of the TextInput.
+   * - `flat` - flat input with an underline.
+   * - `outlined` - input with an outline.
+   */
+  mode?: 'flat' | 'outlined',
   /**
    * If true, user won't be able to interact with the component.
    */
@@ -79,6 +87,10 @@ type State = {
   focused: boolean,
   placeholder: ?string,
   value: ?string,
+  labelLayout: {
+    measured: boolean,
+    width: number,
+  },
 };
 
 /**
@@ -86,12 +98,20 @@ type State = {
  *
  * <div class="screenshots">
  *   <figure>
- *     <img src="screenshots/textinput.unfocused.png" />
- *     <figcaption>Unfocused</span>
+ *     <img class="medium" src="screenshots/textinput-flat.focused.png" />
+ *     <figcaption>Flat (focused)</figcaption>
  *   </figure>
  *   <figure>
- *     <img src="screenshots/textinput.focused.png" />
- *     <figcaption>Focused</figcaption>
+ *     <img class="medium" src="screenshots/textinput-flat.disabled.png" />
+ *     <figcaption>Flat (disabled)</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img class="medium" src="screenshots/textinput-outlined.focused.png" />
+ *     <figcaption>Outlined (focused)</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img class="medium" src="screenshots/textinput-outlined.disabled.png" />
+ *     <figcaption>Outlined (disabled)</figcaption>
  *   </figure>
  * </div>
  *
@@ -118,11 +138,11 @@ type State = {
  * ```
  *
  * @extends TextInput props https://facebook.github.io/react-native/docs/textinput.html#props
- *
  */
 
 class TextInput extends React.Component<Props, State> {
   static defaultProps = {
+    mode: 'flat',
     disabled: false,
     error: false,
     multiline: false,
@@ -143,28 +163,42 @@ class TextInput extends React.Component<Props, State> {
     focused: false,
     placeholder: '',
     value: this.props.value,
+    labelLayout: {
+      measured: false,
+      width: 0,
+    },
   };
 
   componentDidUpdate(prevProps, prevState) {
     if (
-      prevState.value !== this.state.value ||
       prevState.focused !== this.state.focused ||
-      prevProps.placeholder !== this.props.placeholder
+      prevState.value !== this.state.value
     ) {
+      // The label should be minimized if the text input is focused, or has text
+      // In minimized mode, the label moves up and becomes small
       if (this.state.value || this.state.focused) {
         this._minmizeLabel();
       } else {
         this._restoreLabel();
       }
+    }
 
-      if (this.state.value || !this.state.focused) {
-        this._hidePlaceholder();
+    if (
+      prevState.focused !== this.state.focused ||
+      prevProps.label !== this.props.label
+    ) {
+      // Show placeholder text only if the input is focused or there's no label
+      // We don't show placeholder if there's a label because the label acts as placeholder
+      // When focused, the label moves up, so we can show a placeholder
+      if (this.state.focused || !this.props.label) {
+        this._showPlaceholder();
       } else {
-        this._handleShowPlaceholder();
+        this._hidePlaceholder();
       }
     }
 
     if (prevProps.error !== this.props.error) {
+      // When the input has an error, we wiggle the label and apply error styles
       if (this.props.error) {
         this._showError();
       } else {
@@ -177,9 +211,11 @@ class TextInput extends React.Component<Props, State> {
     clearTimeout(this._timer);
   }
 
-  _handleShowPlaceholder = () => {
+  _showPlaceholder = () => {
     clearTimeout(this._timer);
 
+    // Set the placeholder in a delay to offset the label animation
+    // If we show it immediately, they'll overlap and look ugly
     this._timer = setTimeout(
       () =>
         this.setState({
@@ -195,20 +231,21 @@ class TextInput extends React.Component<Props, State> {
     });
 
   _timer: TimeoutID;
-
   _root: NativeTextInput;
 
   _showError = () => {
     Animated.timing(this.state.error, {
       toValue: 1,
       duration: FOCUS_ANIMATION_DURATION,
-    }).start(this._handleShowPlaceholder);
+      useNativeDriver: true,
+    }).start(this._showPlaceholder);
   };
 
   _hideError = () => {
     Animated.timing(this.state.error, {
       toValue: 0,
       duration: BLUR_ANIMATION_DURATION,
+      useNativeDriver: true,
     }).start();
   };
 
@@ -216,12 +253,14 @@ class TextInput extends React.Component<Props, State> {
     Animated.timing(this.state.labeled, {
       toValue: 1,
       duration: FOCUS_ANIMATION_DURATION,
+      useNativeDriver: true,
     }).start();
 
   _minmizeLabel = () =>
     Animated.timing(this.state.labeled, {
       toValue: 0,
       duration: BLUR_ANIMATION_DURATION,
+      useNativeDriver: true,
     }).start();
 
   _handleFocus = (...args) => {
@@ -252,15 +291,6 @@ class TextInput extends React.Component<Props, State> {
     this.setState({ value });
     this.props.onChangeText && this.props.onChangeText(value);
   };
-
-  _getBottomLineStyle = (color: string, animatedValue: *) => ({
-    backgroundColor: color,
-    transform: [{ scaleX: animatedValue }],
-    opacity: animatedValue.interpolate({
-      inputRange: [0, 0.1, 1],
-      outputRange: [0, 1, 1],
-    }),
-  });
 
   /**
    * @internal
@@ -299,6 +329,7 @@ class TextInput extends React.Component<Props, State> {
 
   render() {
     const {
+      mode,
       disabled,
       label,
       error,
@@ -310,65 +341,232 @@ class TextInput extends React.Component<Props, State> {
 
     const { colors, fonts } = theme;
     const fontFamily = fonts.regular;
-    const {
-      primary: primaryColor,
-      disabled: inactiveColor,
-      error: errorColor,
-    } = colors;
 
-    let inputTextColor, labelColor, bottomLineColor;
+    let inputTextColor,
+      activeColor,
+      underlineColorCustom,
+      outlineColor,
+      placeholderColor,
+      containerStyle;
 
-    if (!disabled) {
-      inputTextColor = colors.text;
-      labelColor = (error && errorColor) || primaryColor;
-      bottomLineColor = underlineColor || primaryColor;
+    if (disabled) {
+      inputTextColor = activeColor = color(colors.text)
+        .alpha(0.54)
+        .rgb()
+        .string();
+      placeholderColor = outlineColor = colors.disabled;
+      underlineColorCustom = 'transparent';
     } else {
-      inputTextColor = labelColor = bottomLineColor = inactiveColor;
+      inputTextColor = colors.text;
+      activeColor = error ? colors.error : colors.primary;
+      placeholderColor = outlineColor = colors.placeholder;
+      underlineColorCustom = underlineColor || colors.disabled;
     }
 
-    const labelColorAnimation = this.state.labeled.interpolate({
-      inputRange: [0, 1],
-      outputRange: [labelColor, inactiveColor],
-    });
-
-    // Wiggle when error appears and label is minimized
-    const labelTranslateX =
-      this.state.value && error
-        ? this.state.error.interpolate({
-            inputRange: [0, 0.5, 1],
-            outputRange: [0, LABEL_WIGGLE_X_OFFSET, 0],
-          })
-        : 0;
-
-    // Move label to top if value is set
-    const labelTranslateY = this.state.labeled.interpolate({
-      inputRange: [0, 1],
-      outputRange: [MINIMIZED_LABEL_Y_OFFSET, 0],
-    });
-
-    const labelFontSize = this.state.labeled.interpolate({
-      inputRange: [0, 1],
-      outputRange: [MINIMIZED_LABEL_FONT_SIZE, MAXIMIZED_LABEL_FONT_SIZE],
-    });
+    if (mode === 'flat') {
+      containerStyle = {
+        backgroundColor: theme.dark
+          ? color(colors.background)
+              .lighten(0.24)
+              .rgb()
+              .string()
+          : color(colors.background)
+              .darken(0.06)
+              .rgb()
+              .string(),
+        borderTopLeftRadius: theme.roundness,
+        borderTopRightRadius: theme.roundness,
+      };
+    }
 
     const labelStyle = {
-      color: labelColorAnimation,
       fontFamily,
-      fontSize: labelFontSize,
+      fontSize: MAXIMIZED_LABEL_FONT_SIZE,
       transform: [
-        { translateX: labelTranslateX },
-        { translateY: labelTranslateY },
+        {
+          // Wiggle the label when there's an error
+          translateX: this.state.error.interpolate({
+            inputRange: [0, 0.5, 1],
+            outputRange: [
+              0,
+              this.state.value && error ? LABEL_WIGGLE_X_OFFSET : 0,
+              0,
+            ],
+          }),
+        },
+        {
+          // Move label to top
+          translateY: this.state.labeled.interpolate({
+            inputRange: [0, 1],
+            outputRange: [
+              mode === 'outlined'
+                ? OUTLINE_MINIMIZED_LABEL_Y_OFFSET
+                : MINIMIZED_LABEL_Y_OFFSET,
+              0,
+            ],
+          }),
+        },
+        {
+          // Make label smaller
+          scale: this.state.labeled.interpolate({
+            inputRange: [0, 1],
+            outputRange: [
+              MINIMIZED_LABEL_FONT_SIZE / MAXIMIZED_LABEL_FONT_SIZE,
+              1,
+            ],
+          }),
+        },
+        {
+          // Offset label scale since RN doesn't support transform origin
+          translateX: this.state.labeled.interpolate({
+            inputRange: [0, 1],
+            outputRange: [
+              -(1 - MINIMIZED_LABEL_FONT_SIZE / MAXIMIZED_LABEL_FONT_SIZE) *
+                (this.state.labelLayout.width / 2),
+              0,
+            ],
+          }),
+        },
       ],
     };
 
     return (
-      <View style={style}>
-        <AnimatedText
-          pointerEvents="none"
-          style={[styles.placeholder, labelStyle]}
-        >
-          {label}
-        </AnimatedText>
+      <View style={[containerStyle, style]}>
+        {mode === 'outlined' ? (
+          // Render the outline separately from the container
+          // This is so that the label can overlap the outline
+          // Otherwise the border will cut off the label on Android
+          <View
+            style={[
+              styles.outline,
+              {
+                borderRadius: theme.roundness,
+                borderWidth: this.state.focused ? 2 : 1,
+                borderColor: this.state.focused ? activeColor : outlineColor,
+              },
+            ]}
+          />
+        ) : null}
+
+        {mode === 'outlined' && label ? (
+          // When mode == 'outlined', the input label stays on top of the outline
+          // The background of the label covers the outline so it looks cut off
+          // To achieve the effect, we position the actual label with a background on top of it
+          // We set the color of the text to transparent so only the background is visible
+          <AnimatedText
+            pointerEvents="none"
+            style={[
+              styles.outlinedLabelBackground,
+              {
+                color: 'transparent',
+                backgroundColor: colors.background,
+                fontFamily,
+                fontSize: MINIMIZED_LABEL_FONT_SIZE,
+                // Hide the background when scale will be 0
+                // There's a bug in RN which makes scale: 0 act weird
+                opacity: this.state.labeled.interpolate({
+                  inputRange: [0, 0.9, 1],
+                  outputRange: [1, 1, 0],
+                }),
+                transform: [
+                  {
+                    // Animate the scale when label is moved up
+                    scaleX: this.state.labeled.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [1, 0],
+                    }),
+                  },
+                ],
+              },
+            ]}
+            numberOfLines={1}
+          >
+            {label}
+          </AnimatedText>
+        ) : null}
+
+        {mode === 'flat' ? (
+          // When mode === 'flat', render an underline
+          <Animated.View
+            style={[
+              styles.underline,
+              {
+                backgroundColor: error
+                  ? colors.error
+                  : this.state.focused
+                    ? activeColor
+                    : underlineColorCustom,
+                // Underlines is thinner when input is not focused
+                transform: [{ scaleY: this.state.focused ? 1 : 0.5 }],
+              },
+            ]}
+          />
+        ) : null}
+
+        {label ? (
+          // Position colored placeholder and gray placeholder on top of each other and crossfade them
+          // This gives the effect of animating the color, but allows us to use native driver
+          <View
+            pointerEvents="none"
+            style={[
+              StyleSheet.absoluteFill,
+              {
+                opacity:
+                  // Hide the label in minimized state until we measure it's width
+                  this.state.value || this.state.focused
+                    ? this.state.labelLayout.measured
+                      ? 1
+                      : 0
+                    : 1,
+              },
+            ]}
+          >
+            <AnimatedText
+              onLayout={e =>
+                this.setState({
+                  labelLayout: {
+                    width: e.nativeEvent.layout.width,
+                    measured: true,
+                  },
+                })
+              }
+              style={[
+                styles.placeholder,
+                mode === 'outlined'
+                  ? styles.placeholderOutlined
+                  : styles.placeholderFlat,
+                labelStyle,
+                {
+                  color: activeColor,
+                  opacity: this.state.labeled.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [this.state.focused ? 1 : 0, 0],
+                  }),
+                },
+              ]}
+              numberOfLines={1}
+            >
+              {label}
+            </AnimatedText>
+            <AnimatedText
+              style={[
+                styles.placeholder,
+                mode === 'outlined'
+                  ? styles.placeholderOutlined
+                  : styles.placeholderFlat,
+                labelStyle,
+                {
+                  color: placeholderColor,
+                  opacity: this.state.focused ? this.state.labeled : 1,
+                },
+              ]}
+              numberOfLines={1}
+            >
+              {label}
+            </AnimatedText>
+          </View>
+        ) : null}
+
         <NativeTextInput
           {...rest}
           ref={c => {
@@ -376,58 +574,25 @@ class TextInput extends React.Component<Props, State> {
           }}
           onChangeText={this._handleChangeText}
           placeholder={label ? this.state.placeholder : this.props.placeholder}
-          placeholderTextColor={colors.placeholder}
+          placeholderTextColor={placeholderColor}
           editable={!disabled}
-          selectionColor={labelColor}
+          selectionColor={activeColor}
           onFocus={this._handleFocus}
           onBlur={this._handleBlur}
           underlineColorAndroid="transparent"
           style={[
             styles.input,
-            label ? styles.inputWithLabel : styles.inputWithoutLabel,
-            rest.multiline
-              ? label
-                ? styles.multilineWithLabel
-                : styles.multilineWithoutLabel
-              : null,
+            mode === 'outlined'
+              ? styles.inputOutlined
+              : this.props.label
+                ? styles.inputFlatWithLabel
+                : styles.inputFlatWithoutLabel,
             {
               color: inputTextColor,
               fontFamily,
             },
           ]}
         />
-        <View pointerEvents="none" style={styles.bottomLineContainer}>
-          <View
-            style={[
-              styles.bottomLine,
-              { backgroundColor: error ? errorColor : inactiveColor },
-            ]}
-          />
-          <Animated.View
-            style={[
-              styles.bottomLine,
-              styles.focusLine,
-              this._getBottomLineStyle(
-                bottomLineColor,
-                this.state.labeled.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [1, 0],
-                })
-              ),
-            ]}
-          />
-          <Animated.View
-            style={[
-              styles.bottomLine,
-              styles.focusLine,
-              this._getBottomLineStyle(
-                errorColor,
-                // $FlowFixMe$
-                Animated.multiply(this.state.labeled, this.state.error)
-              ),
-            ]}
-          />
-        </View>
       </View>
     );
   }
@@ -441,42 +606,52 @@ const styles = StyleSheet.create({
   placeholder: {
     position: 'absolute',
     left: 0,
-    top: 40,
     fontSize: 16,
+    paddingHorizontal: 12,
   },
-  input: {
-    paddingBottom: 0,
-    marginTop: 8,
-    marginBottom: -4,
-    fontSize: 16,
+  placeholderFlat: {
+    top: 19,
   },
-  inputWithLabel: {
-    paddingTop: 20,
-    minHeight: 64,
+  placeholderOutlined: {
+    top: 25,
   },
-  inputWithoutLabel: {
-    paddingTop: 0,
-    minHeight: 44,
-  },
-  multilineWithLabel: {
-    paddingTop: 30,
-    paddingBottom: 10,
-  },
-  multilineWithoutLabel: {
-    paddingVertical: 10,
-  },
-  bottomLineContainer: {
-    marginBottom: 4,
-    height: StyleSheet.hairlineWidth * 4,
-  },
-  bottomLine: {
+  underline: {
     position: 'absolute',
     left: 0,
     right: 0,
-    top: 0,
-    height: StyleSheet.hairlineWidth,
+    bottom: 0,
+    height: 2,
   },
-  focusLine: {
-    height: StyleSheet.hairlineWidth * 4,
+  outline: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 6,
+    bottom: 0,
+  },
+  outlinedLabelBackground: {
+    position: 'absolute',
+    top: -4,
+    left: 8,
+    paddingHorizontal: 4,
+  },
+  input: {
+    flex: 1,
+    paddingHorizontal: 12,
+    fontSize: 16,
+    margin: 0,
+    minHeight: 58,
+  },
+  inputOutlined: {
+    paddingTop: 20,
+    paddingBottom: 16,
+    minHeight: 64,
+  },
+  inputFlatWithLabel: {
+    paddingTop: 24,
+    paddingBottom: 6,
+  },
+  inputFlatWithoutLabel: {
+    paddingVertical: 15,
   },
 });
