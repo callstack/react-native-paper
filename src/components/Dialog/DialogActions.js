@@ -32,7 +32,7 @@ type Props = {
  *         visible={this.state.visible}
  *         onDismiss={this._hideDialog}>
  *         <DialogActions>
- *           <Button onPress={() => console.log("Cancel"))}>Cancel</Button>
+ *           <Button onPress={() => console.log("Cancel")}>Cancel</Button>
  *           <Button onPress={() => console.log("Ok")}>Ok</Button>
  *         </DialogActions>
  *       </Dialog>
