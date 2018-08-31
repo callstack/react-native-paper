@@ -82,6 +82,10 @@ class DrawerItem extends React.Component<Props> {
           delayPressIn={0}
           onPress={onPress}
           style={{ borderRadius: roundness }}
+          accessibilityTraits={active ? ['button', 'selected'] : 'button'}
+          accessibilityComponentType="button"
+          accessibilityRole="button"
+          accessibilityStates={active ? ['selected'] : undefined}
         >
           <View style={styles.wrapper}>
             {icon ? (

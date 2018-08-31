@@ -169,13 +169,16 @@ class Chip extends React.Component<Props, State> {
       .string();
 
     const accessibilityTraits = ['button'];
+    const accessibilityStates = [];
 
     if (selected) {
       accessibilityTraits.push('selected');
+      accessibilityStates.push('selected');
     }
 
     if (disabled) {
       accessibilityTraits.push('disabled');
+      accessibilityStates.push('disabled');
     }
 
     return (
@@ -204,6 +207,8 @@ class Chip extends React.Component<Props, State> {
           accessibilityLabel={accessibilityLabel}
           accessibilityTraits={accessibilityTraits}
           accessibilityComponentType="button"
+          accessibilityRole="button"
+          accessibilityStates={accessibilityStates}
         >
           <View style={styles.content}>
             {avatar && !icon ? (

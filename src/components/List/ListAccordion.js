@@ -94,6 +94,7 @@ class ListAccordion extends React.Component<Props, State> {
           onPress={this._handlePress}
           accessibilityTraits="button"
           accessibilityComponentType="button"
+          accessibilityRole="button"
         >
           <View style={styles.row} pointerEvents="none">
             {icon ? (

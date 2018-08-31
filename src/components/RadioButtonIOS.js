@@ -98,6 +98,8 @@ class RadioButtonIOS extends React.Component<Props> {
               accessibilityComponentType={
                 checked ? 'radiobutton_checked' : 'radiobutton_unchecked'
               }
+              accessibilityRole="button"
+              accessibilityStates={disabled ? ['disabled'] : undefined}
               accessibilityLiveRegion="polite"
               style={styles.container}
             >

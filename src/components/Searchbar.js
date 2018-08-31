@@ -157,6 +157,7 @@ class Searchbar extends React.Component<Props> {
           underlineColorAndroid="transparent"
           returnKeyType="search"
           accessibilityTraits="search"
+          accessibilityRole="search"
           ref={c => {
             this._root = c;
           }}
@@ -172,6 +173,7 @@ class Searchbar extends React.Component<Props> {
             icon="close"
             accessibilityTraits="button"
             accessibilityComponentType="button"
+            accessibilityRole="button"
           />
         ) : null}
       </Surface>

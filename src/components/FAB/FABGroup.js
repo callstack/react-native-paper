@@ -267,6 +267,7 @@ class FABGroup extends React.Component<Props, State> {
                     }
                     accessibilityTraits="button"
                     accessibilityComponentType="button"
+                    accessibilityRole="button"
                   >
                     <Text style={{ color: labelColor }}>{it.label}</Text>
                   </Card>
@@ -293,6 +294,7 @@ class FABGroup extends React.Component<Props, State> {
                   }
                   accessibilityTraits="button"
                   accessibilityComponentType="button"
+                  accessibilityRole="button"
                 />
               </View>
             </Animated.View>
@@ -308,6 +310,7 @@ class FABGroup extends React.Component<Props, State> {
           accessibilityLabel={accessibilityLabel}
           accessibilityTraits="button"
           accessibilityComponentType="button"
+          accessibilityRole="button"
           style={styles.fab}
         />
       </View>

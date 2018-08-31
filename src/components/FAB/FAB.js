@@ -136,8 +136,10 @@ class FAB extends React.Component<Props> {
           rippleColor={rippleColor}
           disabled={disabled}
           accessibilityLabel={accessibilityLabel}
-          accessibilityTraits="button"
+          accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
           accessibilityComponentType="button"
+          accessibilityRole="button"
+          accessibilityStates={disabled ? ['disabled'] : undefined}
           style={styles.touchable}
         >
           <View

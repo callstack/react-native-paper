@@ -83,6 +83,8 @@ class CheckboxIOS extends React.Component<Props> {
         disabled={disabled}
         accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={disabled ? ['disabled'] : undefined}
         accessibilityLiveRegion="polite"
         style={styles.container}
       >
