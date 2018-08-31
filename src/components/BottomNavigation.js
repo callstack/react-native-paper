@@ -162,6 +162,9 @@ type Props<T> = {
    * ```js
    * tabBarStyle={{ paddingVertical: 4 }}
    * ```
+   * ``js
+   * iconContainerStyle={{ paddingVertical: 4 }}
+   * ```
    */
   barStyle?: any,
   tabBatStyle?: any,
