@@ -55,11 +55,14 @@ export default class PaperExample extends React.Component<{}, State> {
       const prefString = await AsyncStorage.getItem('preferences');
       const preferences = JSON.parse(prefString);
 
-      // eslint-disable-next-line react/no-did-mount-set-state
-      this.setState(state => ({
-        theme: preferences.theme === 'dark' ? DarkTheme : DefaultTheme,
-        rtl: typeof preferences.rtl === 'boolean' ? preferences.rtl : state.rtl,
-      }));
+      if (preferences) {
+        // eslint-disable-next-line react/no-did-mount-set-state
+        this.setState(state => ({
+          theme: preferences.theme === 'dark' ? DarkTheme : DefaultTheme,
+          rtl:
+            typeof preferences.rtl === 'boolean' ? preferences.rtl : state.rtl,
+        }));
+      }
     } catch (e) {
       // ignore error
     }
