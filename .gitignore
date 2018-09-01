@@ -32,6 +32,7 @@ project.xcworkspace
 .idea
 .gradle
 local.properties
+*.iml
 
 # node.js
 #
@@ -53,3 +54,4 @@ android/keystores/debug.keystore
 # Build
 #
 dist/
+
