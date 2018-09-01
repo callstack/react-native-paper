@@ -3,11 +3,13 @@
   "version": "1.11.1",
   "description": "Material design for React Native",
   "main": "src/index.js",
+  "typings": "index.d.ts",
   "files": [
     "src/",
     "dist/",
     "types.js",
-    "babel.js"
+    "babel.js",
+    "index.d.ts"
   ],
   "repository": {
     "type": "git",
