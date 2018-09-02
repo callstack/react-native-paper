@@ -31,6 +31,11 @@ rmdir dist/* || :
 # Run our build script.
 yarn build
 
+# Build the docs for 1.0
+git checkout 1.0
+yarn build
+
+# Push the built docs
 cd dist
 
 # Configure git.

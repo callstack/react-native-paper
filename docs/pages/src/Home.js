@@ -9,6 +9,10 @@ export default class Home extends React.Component<{}> {
   render() {
     return (
       <div {...styles(container)}>
+        <p {...styles(banner)}>
+          Looking for the documentation for version 1.0? You can find it{' '}
+          <a href="1.0">here</a>.
+        </p>
         <div {...styles(cover)}>
           <img
             {...styles(logo)}
@@ -45,6 +49,13 @@ export default class Home extends React.Component<{}> {
     );
   }
 }
+
+const banner = css`
+  margin: 0;
+  padding: 10px 16px;
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+`;
 
 const logo = css`
   max-height: 125px;
