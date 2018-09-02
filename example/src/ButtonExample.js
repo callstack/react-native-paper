@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { View, ScrollView, StyleSheet, Image } from 'react-native';
-import { Button, ListSection, withTheme } from 'react-native-paper';
+import { Button, List, withTheme } from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
 
 type Props = {
@@ -23,7 +23,7 @@ class ButtonExample extends React.Component<Props, State> {
       <ScrollView
         style={[styles.container, { backgroundColor: colors.background }]}
       >
-        <ListSection title="Text button">
+        <List.Section title="Text button">
           <View style={styles.row}>
             <Button onPress={() => {}} style={styles.button}>
               Default
@@ -45,8 +45,8 @@ class ButtonExample extends React.Component<Props, State> {
               Loading
             </Button>
           </View>
-        </ListSection>
-        <ListSection title="Outlined button">
+        </List.Section>
+        <List.Section title="Outlined button">
           <View style={styles.row}>
             <Button mode="outlined" onPress={() => {}} style={styles.button}>
               Default
@@ -84,8 +84,8 @@ class ButtonExample extends React.Component<Props, State> {
               Loading
             </Button>
           </View>
-        </ListSection>
-        <ListSection title="Contained button">
+        </List.Section>
+        <List.Section title="Contained button">
           <View style={styles.row}>
             <Button mode="contained" onPress={() => {}} style={styles.button}>
               Default
@@ -123,8 +123,8 @@ class ButtonExample extends React.Component<Props, State> {
               Loading
             </Button>
           </View>
-        </ListSection>
-        <ListSection title="Custom icon">
+        </List.Section>
+        <List.Section title="Custom icon">
           <View style={styles.row}>
             <Button
               mode="outlined"
@@ -159,7 +159,7 @@ class ButtonExample extends React.Component<Props, State> {
               Custom component
             </Button>
           </View>
-        </ListSection>
+        </List.Section>
       </ScrollView>
     );
   }

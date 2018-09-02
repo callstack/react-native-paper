@@ -3,9 +3,6 @@
 import color from 'color';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import ListItem from './ListItem';
-import ListAccordion from './ListAccordion';
-import ListIcon from './ListIcon';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
@@ -36,33 +33,28 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { ListSection } from 'react-native-paper';
+ * import { List } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   render() {
  *     return (
- *       <ListSection title="Some title">
- *         <ListSection.Item
+ *       <List.Section title="Some title">
+ *         <List.Item
  *           title="First Item"
- *           left={<ListSection.Icon icon="folder" />}
+ *           left={<List.Icon icon="folder" />}
  *        />
- *         <ListSection.Item
+ *         <List.Item
  *           title="Second Item"
- *           left={<ListSection.Icon icon="folder" />}
+ *           left={<List.Icon icon="folder" />}
  *        />
- *      </ListSection>
+ *      </List.Section>
  *     );
  *   }
  * }
  * ```
  */
 class ListSection extends React.Component<Props> {
-  // @component ./ListItem.js
-  static Item = ListItem;
-  // @component ./ListAccordion.js
-  static Accordion = ListAccordion;
-  // @component ./ListIcon.js
-  static Icon = ListIcon;
+  static displayName = 'List.Section';
 
   render() {
     const { children, title, theme, style, ...rest } = this.props;

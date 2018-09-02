@@ -49,21 +49,21 @@ type State = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { ListSection, Checkbox } from 'react-native-paper';
+ * import { List, Checkbox } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <ListSection.Accordion
+ *   <List.Accordion
  *     title="Accordion"
- *     left={<ListSection.Icon icon="folder" />}
+ *     left={<List.Icon icon="folder" />}
  *   >
- *     <ListSection.Item title="First item" />
- *     <ListSection.Item title="Second item" />
- *   </ListSection.Accordion>
+ *     <List.Item title="First item" />
+ *     <List.Item title="Second item" />
+ *   </List.Accordion>
  * );
  * ```
  */
 class ListAccordion extends React.Component<Props, State> {
-  static displayName = 'ListSection.Accordion';
+  static displayName = 'List.Accordion';
 
   state = {
     expanded: false,

@@ -48,12 +48,16 @@ function getPages() {
       return file;
     })
     .reduce((acc, file) => {
-      const matches = fs
-        .readFileSync(file)
-        .toString()
-        .match(/\/\/ @component (.\/\w+\.js)/gm);
-      if (matches && matches.length) {
-        const componentFiles = matches.map(line => {
+      const content = fs.readFileSync(file).toString();
+
+      if (/import \* as React/.test(content)) {
+        acc.push(file);
+      }
+
+      const match = content.match(/\/\/ @component (.\/\w+\.js)/gm);
+
+      if (match && match.length) {
+        const componentFiles = match.map(line => {
           const fileName = line.split(' ')[2];
           return require.resolve(
             path.join(
@@ -65,9 +69,11 @@ function getPages() {
             )
           );
         });
-        return [...acc, file, ...componentFiles];
+
+        acc.push(...componentFiles);
       }
-      return [...acc, file];
+
+      return acc;
     }, [])
     .filter((name, index, self) => self.indexOf(name) === index)
     .sort((a, b) => {

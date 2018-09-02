@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
 import {
-  DrawerSection,
+  Drawer,
   withTheme,
   Switch,
   TouchableRipple,
@@ -46,9 +46,9 @@ class DrawerItems extends React.Component<Props, State> {
 
     return (
       <View style={[styles.drawerContent, { backgroundColor: colors.surface }]}>
-        <DrawerSection title="Example items">
+        <Drawer.Section title="Example items">
           {DrawerItemsData.map((props, index) => (
-            <DrawerSection.Item
+            <Drawer.Item
               {...props}
               key={props.key}
               theme={
@@ -60,9 +60,9 @@ class DrawerItems extends React.Component<Props, State> {
               onPress={() => this._setDrawerItem(index)}
             />
           ))}
-        </DrawerSection>
+        </Drawer.Section>
 
-        <DrawerSection title="Preferences">
+        <Drawer.Section title="Preferences">
           <TouchableRipple onPress={this.props.toggleTheme}>
             <View style={styles.preference}>
               <Text>Dark Theme</Text>
@@ -79,7 +79,7 @@ class DrawerItems extends React.Component<Props, State> {
               </View>
             </View>
           </TouchableRipple>
-        </DrawerSection>
+        </Drawer.Section>
       </View>
     );
   }
