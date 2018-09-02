@@ -4,6 +4,7 @@ import * as React from 'react';
 import renderer from 'react-test-renderer';
 import { Text } from 'react-native';
 import ListItem from '../List/ListItem';
+import ListIcon from '../List/ListIcon';
 
 it('renders list item with title and description', () => {
   const tree = renderer
@@ -15,30 +16,30 @@ it('renders list item with title and description', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders list item with icon', () => {
+it('renders list item with left item', () => {
   const tree = renderer
-    .create(<ListItem title="First Item" icon="folder" />)
+    .create(<ListItem title="First Item" left={<ListIcon icon="folder" />} />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders list item with avatar', () => {
+it('renders list item with right item', () => {
   const tree = renderer
-    .create(<ListItem title="First Item" avatar={<Text>GG</Text>} />)
+    .create(<ListItem title="First Item" right={<Text>GG</Text>} />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders list item with avatar and icon', () => {
+it('renders list item with left and right items', () => {
   const tree = renderer
     .create(
       <ListItem
         title="First Item"
         description="Item description"
-        icon="folder"
-        avatar={<Text>GG</Text>}
+        left={<Text>GG</Text>}
+        right={<ListIcon icon="folder" />}
       />
     )
     .toJSON();

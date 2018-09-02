@@ -31,12 +31,14 @@ exports[`renders list accordion with children 1`] = `
       }
     >
       <View
+        pointerEvents="box-none"
         style={
           Array [
             Object {
+              "alignItems": "center",
+              "height": 40,
+              "justifyContent": "center",
               "margin": 8,
-            },
-            Object {
               "width": 40,
             },
             undefined,
@@ -193,7 +195,7 @@ exports[`renders list accordion with children 1`] = `
 </View>
 `;
 
-exports[`renders list accordion with icons 1`] = `
+exports[`renders list accordion with left items 1`] = `
 <View>
   <View
     accessibilityComponentType="button"
@@ -224,12 +226,14 @@ exports[`renders list accordion with icons 1`] = `
       }
     >
       <View
+        pointerEvents="box-none"
         style={
           Array [
             Object {
+              "alignItems": "center",
+              "height": 40,
+              "justifyContent": "center",
               "margin": 8,
-            },
-            Object {
               "width": 40,
             },
             undefined,

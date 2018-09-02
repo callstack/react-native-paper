@@ -4,11 +4,15 @@ import * as React from 'react';
 import renderer from 'react-test-renderer';
 import ListAccordion from '../List/ListAccordion';
 import ListItem from '../List/ListItem';
+import ListIcon from '../List/ListIcon';
 
 it('renders list accordion with children', () => {
   const tree = renderer
     .create(
-      <ListAccordion icon="folder" title="Expandable list item">
+      <ListAccordion
+        left={<ListIcon icon="folder" />}
+        title="Expandable list item"
+      >
         <ListItem title="First Item" />
       </ListAccordion>
     )
@@ -32,11 +36,11 @@ it('renders multiline list accordion', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders list accordion with icons', () => {
+it('renders list accordion with left items', () => {
   const tree = renderer
     .create(
-      <ListAccordion icon="star" title="Accordion item 1">
-        <ListItem icon="thumb-up" title="List item 1" />
+      <ListAccordion left={<ListIcon icon="star" />} title="Accordion item 1">
+        <ListItem left={<ListIcon icon="thumb-up" />} title="List item 1" />
       </ListAccordion>
     )
     .toJSON();

@@ -92,9 +92,10 @@ exports[`renders list section with title 1`] = `
         style={
           Array [
             Object {
+              "alignItems": "center",
+              "height": 40,
+              "justifyContent": "center",
               "margin": 8,
-            },
-            Object {
               "width": 40,
             },
             undefined,
@@ -233,9 +234,10 @@ exports[`renders list section with title 1`] = `
         style={
           Array [
             Object {
+              "alignItems": "center",
+              "height": 40,
+              "justifyContent": "center",
               "margin": 8,
-            },
-            Object {
               "width": 40,
             },
             undefined,
@@ -388,9 +390,10 @@ exports[`renders list section without title 1`] = `
         style={
           Array [
             Object {
+              "alignItems": "center",
+              "height": 40,
+              "justifyContent": "center",
               "margin": 8,
-            },
-            Object {
               "width": 40,
             },
             undefined,
@@ -529,9 +532,10 @@ exports[`renders list section without title 1`] = `
         style={
           Array [
             Object {
+              "alignItems": "center",
+              "height": 40,
+              "justifyContent": "center",
               "margin": 8,
-            },
-            Object {
               "width": 40,
             },
             undefined,

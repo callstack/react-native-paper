@@ -21,29 +21,35 @@ class ListSectionExample extends React.Component<Props> {
     return (
       <ScrollView style={[styles.container, { backgroundColor: background }]}>
         <ListSection title="Single line">
-          <ListSection.Item icon="event" title="List item 1" />
-          <ListSection.Item icon="redeem" title="List item 2" />
+          <ListSection.Item
+            left={<ListSection.Icon icon="event" />}
+            title="List item 1"
+          />
+          <ListSection.Item
+            left={<ListSection.Icon icon="redeem" />}
+            title="List item 2"
+          />
         </ListSection>
         <Divider />
         <ListSection title="Two line">
           <ListSection.Item
-            avatar={
+            left={
               <Image
                 source={require('../assets/email-icon.png')}
-                style={styles.avatar}
+                style={styles.image}
               />
             }
             title="List item 1"
             description="Describes item 1"
           />
           <ListSection.Item
-            icon="info"
-            avatar={
+            left={
               <Image
                 source={require('../assets/email-icon.png')}
-                style={styles.avatar}
+                style={styles.image}
               />
             }
+            right={<ListSection.Icon icon="info" />}
             title="List item 2"
             description="Describes item 2"
           />
@@ -51,23 +57,23 @@ class ListSectionExample extends React.Component<Props> {
         <Divider />
         <ListSection title="Three line">
           <ListSection.Item
-            avatar={
+            left={
               <Image
                 source={require('../assets/email-icon.png')}
-                style={styles.avatar}
+                style={styles.image}
               />
             }
             title="List item 1"
             description="Describes item 1. Example of a very very long description."
           />
           <ListSection.Item
-            icon="star-border"
-            avatar={
+            left={
               <Image
                 source={require('../assets/email-icon.png')}
-                style={styles.avatar}
+                style={styles.image}
               />
             }
+            right={<ListSection.Icon icon="star-border" />}
             title="List item 2"
             description="Describes item 2. Example of a very very long description."
           />
@@ -81,9 +87,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  avatar: {
+  image: {
     height: 40,
     width: 40,
+    margin: 8,
   },
 });
 

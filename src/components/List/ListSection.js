@@ -5,6 +5,7 @@ import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import ListItem from './ListItem';
 import ListAccordion from './ListAccordion';
+import ListIcon from './ListIcon';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
@@ -43,11 +44,11 @@ type Props = {
  *       <ListSection title="Some title">
  *         <ListSection.Item
  *           title="First Item"
- *           icon="folder"
+ *           left={<ListSection.Icon icon="folder" />}
  *        />
  *         <ListSection.Item
  *           title="Second Item"
- *           icon="folder"
+ *           left={<ListSection.Icon icon="folder" />}
  *        />
  *      </ListSection>
  *     );
@@ -60,6 +61,8 @@ class ListSection extends React.Component<Props> {
   static Item = ListItem;
   // @component ./ListAccordion.js
   static Accordion = ListAccordion;
+  // @component ./ListIcon.js
+  static Icon = ListIcon;
 
   render() {
     const { children, title, theme, style, ...rest } = this.props;

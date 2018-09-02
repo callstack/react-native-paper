@@ -21,7 +21,10 @@ class ListAccordionExample extends React.Component<Props> {
     return (
       <ScrollView style={[styles.container, { backgroundColor: background }]}>
         <ListSection title="Expandable list item">
-          <ListSection.Accordion icon="folder" title="Expandable list item">
+          <ListSection.Accordion
+            left={<ListSection.Icon icon="folder" />}
+            title="Expandable list item"
+          >
             <ListSection.Item title="List item 1" />
             <ListSection.Item title="List item 2" />
           </ListSection.Accordion>
@@ -38,9 +41,18 @@ class ListAccordionExample extends React.Component<Props> {
         </ListSection>
         <Divider />
         <ListSection title="Expandable list with icons">
-          <ListSection.Accordion icon="star" title="Accordion item 1">
-            <ListSection.Item icon="thumb-up" title="List item 1" />
-            <ListSection.Item icon="thumb-down" title="List item 2" />
+          <ListSection.Accordion
+            left={<ListSection.Icon icon="star" />}
+            title="Accordion item 1"
+          >
+            <ListSection.Item
+              left={<ListSection.Icon icon="thumb-up" />}
+              title="List item 1"
+            />
+            <ListSection.Item
+              left={<ListSection.Icon icon="thumb-down" />}
+              title="List item 2"
+            />
           </ListSection.Accordion>
         </ListSection>
       </ScrollView>

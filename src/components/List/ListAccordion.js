@@ -4,7 +4,7 @@ import color from 'color';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import TouchableRipple from '../TouchableRipple';
-import Icon, { type IconSource } from '../Icon';
+import Icon from '../Icon';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
@@ -19,15 +19,13 @@ type Props = {
    */
   description?: React.Node,
   /**
-   * Icon to display for the `ListAccordion`.
+   * React element to display on the left side.
    */
-  icon?: IconSource,
-
+  left?: React.Node,
   /**
    * Content of the section.
    */
   children: React.Node,
-
   /**
    * @optional
    */
@@ -56,7 +54,7 @@ type State = {
  * const MyComponent = () => (
  *   <ListSection.Accordion
  *     title="Accordion"
- *     icon="folder"
+ *     left={<ListSection.Icon icon="folder" />}
  *   >
  *     <ListSection.Item title="First item" />
  *     <ListSection.Item title="Second item" />
@@ -77,7 +75,7 @@ class ListAccordion extends React.Component<Props, State> {
     }));
 
   render() {
-    const { icon, title, description, children, theme, style } = this.props;
+    const { left, title, description, children, theme, style } = this.props;
     const titleColor = color(theme.colors.text)
       .alpha(0.87)
       .rgb()
@@ -97,25 +95,7 @@ class ListAccordion extends React.Component<Props, State> {
           accessibilityRole="button"
         >
           <View style={styles.row} pointerEvents="none">
-            {icon ? (
-              <View
-                style={[
-                  styles.item,
-                  styles.icon,
-                  description && styles.multiline,
-                ]}
-              >
-                <Icon
-                  source={icon}
-                  size={24}
-                  color={
-                    this.state.expanded
-                      ? theme.colors.primary
-                      : descriptionColor
-                  }
-                />
-              </View>
-            ) : null}
+            {left}
             <View style={[styles.item, styles.content]}>
               <Text
                 numberOfLines={1}
@@ -160,10 +140,10 @@ class ListAccordion extends React.Component<Props, State> {
         {this.state.expanded
           ? React.Children.map(children, child => {
               if (
-                icon &&
+                left &&
                 React.isValidElement(child) &&
-                !child.props.icon &&
-                !child.props.avatar
+                !child.props.left &&
+                !child.props.right
               ) {
                 return React.cloneElement(child, {
                   style: [styles.child, child.props.style],
@@ -184,9 +164,6 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-  },
-  icon: {
-    width: 40,
   },
   multiline: {
     height: 40,

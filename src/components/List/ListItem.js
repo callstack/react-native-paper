@@ -3,12 +3,10 @@
 import color from 'color';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
-import type { IconSource } from '../Icon';
 
 type Props = {
   /**
@@ -20,13 +18,13 @@ type Props = {
    */
   description?: React.Node,
   /**
-   * Icon to display for the `ListItem`.
+   * React element to display on the left side.
    */
-  icon?: IconSource,
+  left?: React.Node,
   /**
-   * Component to display as avatar image.
+   * React element to display on the right side.
    */
-  avatar?: React.Node,
+  right?: React.Node,
   /**
    * Function to execute on press.
    */
@@ -53,7 +51,11 @@ type Props = {
  * import { ListSection } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <ListSection.Item title="First Item" description="Item description" icon="folder" />
+ *   <ListSection.Item
+ *     title="First Item"
+ *     description="Item description"
+ *     left={<ListSection.Icon icon="folder" />}
+ *   />
  * );
  * ```
  */
@@ -62,8 +64,8 @@ class ListItem extends React.Component<Props> {
 
   render() {
     const {
-      icon,
-      avatar,
+      left,
+      right,
       title,
       description,
       onPress,
@@ -87,21 +89,7 @@ class ListItem extends React.Component<Props> {
         onPress={onPress}
       >
         <View style={styles.row}>
-          {avatar || icon ? (
-            <View
-              style={[
-                styles.item,
-                styles.avatar,
-                description && styles.multiline,
-              ]}
-              pointerEvents="box-none"
-            >
-              {avatar ||
-                (icon ? (
-                  <Icon source={icon} size={24} color={descriptionColor} />
-                ) : null)}
-            </View>
-          ) : null}
+          {left}
           <View style={[styles.item, styles.content]} pointerEvents="none">
             <Text
               numberOfLines={1}
@@ -123,14 +111,7 @@ class ListItem extends React.Component<Props> {
               </Text>
             ) : null}
           </View>
-          {avatar && icon ? (
-            <View
-              style={[styles.item, description && styles.multiline]}
-              pointerEvents="box-none"
-            >
-              <Icon source={icon} size={24} color={descriptionColor} />
-            </View>
-          ) : null}
+          {right}
         </View>
       </TouchableRipple>
     );
@@ -143,14 +124,6 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-  },
-  avatar: {
-    width: 40,
-  },
-  multiline: {
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   title: {
     fontSize: 16,
