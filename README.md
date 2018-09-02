@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="react-native-paper" src="docs/assets/images/paper-color.png" width="300">
+  <img alt="react-native-paper" src="docs/assets/images/paper-logo.svg" width="300">
 </p>
 <p align="center">
   Material design for React Native.
