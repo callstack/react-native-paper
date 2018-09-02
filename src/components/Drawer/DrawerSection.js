@@ -3,7 +3,6 @@
 import color from 'color';
 import * as React from 'react';
 import { View } from 'react-native';
-import DrawerItem from './DrawerItem';
 import Text from '../Typography/Text';
 import Divider from '../Divider';
 import { withTheme } from '../../core/theming';
@@ -15,7 +14,7 @@ type Props = {
    */
   title?: string,
   /**
-   * Content of the `DrawerSection`.
+   * Content of the `Drawer.Section`.
    */
   children: React.Node,
   /**
@@ -30,7 +29,7 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { DrawerSection } from 'react-native-paper';
+ * import { Drawer } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
@@ -41,26 +40,25 @@ type Props = {
  *     const { active } = this.state;
  *
  *     return (
- *       <DrawerSection title="Some title">
- *         <DrawerSection.Item
+ *       <Drawer.Section title="Some title">
+ *         <Drawer.Item
  *           label="First Item"
  *           active={active === 'first'}
  *           onPress={() => { this.setState({ active: 'first' }); }}
  *         />
- *         <DrawerSection.Item
+ *         <Drawer.Item
  *           label="Second Item"
  *           active={active === 'second'}
  *           onPress={() => { this.setState({ active: 'second' }); }}
  *         />
- *      </DrawerSection>
+ *      </Drawer.Section>
  *     );
  *   }
  * }
  * ```
  */
 class DrawerSection extends React.Component<Props> {
-  // @component ./DrawerItem.js
-  static Item = DrawerItem;
+  static displayName = 'Drawer.Section';
 
   render() {
     const { children, title, theme, ...rest } = this.props;

@@ -48,19 +48,19 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { ListSection } from 'react-native-paper';
+ * import { List } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <ListSection.Item
+ *   <List.Item
  *     title="First Item"
  *     description="Item description"
- *     left={<ListSection.Icon icon="folder" />}
+ *     left={<List.Icon icon="folder" />}
  *   />
  * );
  * ```
  */
 class ListItem extends React.Component<Props> {
-  static displayName = 'ListSection.Item';
+  static displayName = 'List.Item';
 
   render() {
     const {

@@ -40,15 +40,15 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { DrawerSection } from 'react-native-paper';
+ * import { Drawer } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <DrawerSection.Item label="First Item" />
+ *   <Drawer.Item label="First Item" />
  * );
  * ```
  */
 class DrawerItem extends React.Component<Props> {
-  static displayName = 'DrawerSection.Item';
+  static displayName = 'Drawer.Item';
 
   render() {
     const { icon, label, active, theme, style, onPress, ...rest } = this.props;

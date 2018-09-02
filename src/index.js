@@ -10,6 +10,11 @@ export { default as Provider } from './core/Provider';
 export { default as DefaultTheme } from './styles/DefaultTheme';
 export { default as DarkTheme } from './styles/DarkTheme';
 
+import * as List from './components/List/List';
+import * as Drawer from './components/Drawer/Drawer';
+
+export { List, Drawer };
+
 export { default as BottomNavigation } from './components/BottomNavigation';
 export { default as Button } from './components/Button';
 export { default as Card } from './components/Card/Card';
@@ -17,11 +22,9 @@ export { default as Checkbox } from './components/Checkbox';
 export { default as Chip } from './components/Chip';
 export { default as Dialog } from './components/Dialog/Dialog';
 export { default as Divider } from './components/Divider';
-export { default as DrawerSection } from './components/Drawer/DrawerSection';
 export { default as FAB } from './components/FAB/FAB';
 export { default as HelperText } from './components/HelperText';
 export { default as IconButton } from './components/IconButton';
-export { default as ListSection } from './components/List/ListSection';
 export { default as Modal } from './components/Modal';
 export { default as Portal } from './components/Portal/Portal';
 export { default as ProgressBar } from './components/ProgressBar/ProgressBar';

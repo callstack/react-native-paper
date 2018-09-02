@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { FlatList } from 'react-native';
-import { ListSection, Divider, withTheme } from 'react-native-paper';
+import { List, Divider, withTheme } from 'react-native-paper';
 import BottomNavigationExample from './BottomNavigationExample';
 import ButtonExample from './ButtonExample';
 import CardExample from './CardExample';
@@ -63,7 +63,7 @@ class ExampleList extends React.Component<Props> {
   };
 
   _renderItem = ({ item }) => (
-    <ListSection.Item
+    <List.Item
       title={item.data.title}
       onPress={() => this.props.navigation.navigate(item.id)}
     />

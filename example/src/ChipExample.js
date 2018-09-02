@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { View, ScrollView, StyleSheet, Image } from 'react-native';
-import { Chip, ListSection, withTheme } from 'react-native-paper';
+import { Chip, List, withTheme } from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
 
 type Props = {
@@ -19,7 +19,7 @@ class ChipExample extends React.Component<Props> {
       <ScrollView
         style={[styles.container, { backgroundColor: colors.surface }]}
       >
-        <ListSection title="Flat chip">
+        <List.Section title="Flat chip">
           <View style={styles.row}>
             <Chip onPress={() => {}} style={styles.chip}>
               Simple
@@ -67,8 +67,8 @@ class ChipExample extends React.Component<Props> {
               Avatar (disabled)
             </Chip>
           </View>
-        </ListSection>
-        <ListSection title="Outlined chip">
+        </List.Section>
+        <List.Section title="Outlined chip">
           <View style={styles.row}>
             <Chip mode="outlined" onPress={() => {}} style={styles.chip}>
               Simple
@@ -125,7 +125,7 @@ class ChipExample extends React.Component<Props> {
               Avatar (disabled)
             </Chip>
           </View>
-        </ListSection>
+        </List.Section>
       </ScrollView>
     );
   }
