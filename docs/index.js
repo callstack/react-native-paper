@@ -93,13 +93,13 @@ if (task !== 'build') {
     assets,
     styles,
     pages: getPages,
-    output: path.join(__dirname, 'dist'),
+    output: path.join(__dirname, 'dist', '1.0'),
   });
 } else {
   build({
     assets,
     styles,
     pages: getPages,
-    output: path.join(__dirname, 'dist'),
+    output: path.join(__dirname, 'dist', '1.0'),
   });
 }
