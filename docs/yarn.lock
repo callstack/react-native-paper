@@ -1432,9 +1432,9 @@ commondir@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
 
-component-docs@^0.12.4:
-  version "0.12.4"
-  resolved "https://registry.yarnpkg.com/component-docs/-/component-docs-0.12.4.tgz#acadb57d37d96453853be9e99fce34064163b26d"
+component-docs@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/component-docs/-/component-docs-0.13.0.tgz#efc30a91592e3a2c429d86e0b887301cd39ec7b1"
   dependencies:
     babel-core "^6.26.3"
     babel-loader "^7.1.4"
@@ -1460,9 +1460,9 @@ component-docs@^0.12.4:
     react "~16.3.2"
     react-docgen "^3.0.0-beta8"
     react-dom "~16.3.2"
-    react-remarkable "^1.1.3"
     recast "^0.14.7"
     redbox-react "^1.6.0"
+    remarkable "^1.7.1"
     style-loader "^0.21.0"
     webpack "^4.8.2"
     webpack-dev-middleware "^3.1.3"
@@ -4152,12 +4152,6 @@ react-proxy@^1.1.7:
     lodash "^4.6.1"
     react-deep-force-update "^1.0.0"
 
-react-remarkable@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/react-remarkable/-/react-remarkable-1.1.3.tgz#6ef3861812d806fbf747cc1d1e151ee3172130a6"
-  dependencies:
-    remarkable "^1.x"
-
 react-transform-catch-errors@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-transform-catch-errors/-/react-transform-catch-errors-1.0.2.tgz#1b4d4a76e97271896fc16fe3086c793ec88a9eeb"
@@ -4335,7 +4329,7 @@ regjsparser@^0.1.4:
   dependencies:
     jsesc "~0.5.0"
 
-remarkable@^1.x:
+remarkable@^1.7.1:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/remarkable/-/remarkable-1.7.1.tgz#aaca4972100b66a642a63a1021ca4bac1be3bff6"
   dependencies:
