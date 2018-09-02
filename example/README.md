@@ -1,6 +1,6 @@
 ## Run the example
 
-- [View and edit it with Expo Snack](https://snack.expo.io/@satya164/github.com-callstack-react-native-paper:example)
+- [View and edit it with Expo Snack](https://snack.expo.io/@satya164/github.com-callstack-react-native-paper:example@1.0)
 - Run the example locally
   + Clone the repository and `cd` to this directory
   + Run `yarn` to install the dependencies

@@ -17,30 +17,30 @@
 
 - Follows [material design guidelines](https://material.io/guidelines/)
 - Works on both iOS and Android following [platform adaptation guidelines](https://material.io/design/platform-guidance/cross-platform-adaptation.html)
-- Full [theming support](https://callstack.github.io/react-native-paper/theming.html)
+- Full [theming support](https://callstack.github.io/react-native-paper/1.0/theming.html)
 
 Currently supported React Native version: `>= 0.50.3`
 
 ## Try it out
 
-Run the [example app](https://exp.host/@satya164/react-native-paper-example) with [Expo](https://expo.io/) to see it in action.
+Run the [example app](https://snack.expo.io/@satya164/github.com-callstack-react-native-paper:example@1.0) with [Expo](https://expo.io/) to see it in action.
 
 The source code for the examples are under the [/example](/example) folder.
 
 ## Getting Started
 
-Refer to the [getting started guide](https://callstack.github.io/react-native-paper/getting-started.html) for instructions.
+Refer to the [getting started guide](https://callstack.github.io/react-native-paper/1.0/getting-started.html) for instructions.
 
 ## Documentation
 
-Check the components and their usage in our [documentation](https://callstack.github.io/react-native-paper/index.html).
+Check the components and their usage in our [documentation](https://callstack.github.io/react-native-paper/1.0/index.html).
 
 ## Contributing
 
-Read the [contribution guidelines](/CONTRIBUTING.md) before contributing.
+Read the [contribution guidelines](/CONTRIBUTING.md) before contributing. This branch is in maintenance mode. We'll only accept pull requests for bug fixes.
 
 <!-- badges -->
-[build-badge]: https://img.shields.io/circleci/project/github/callstack/react-native-paper/master.svg?style=flat-square
+[build-badge]: https://img.shields.io/circleci/project/github/callstack/react-native-paper/1.0.svg?style=flat-square
 [build]: https://circleci.com/gh/callstack/react-native-paper
 [version-badge]: https://img.shields.io/npm/v/react-native-paper.svg?style=flat-square
 [package]: https://www.npmjs.com/package/react-native-paper
