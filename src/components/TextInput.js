@@ -347,7 +347,6 @@ class TextInput extends React.Component<Props, State> {
       disabled,
       label,
       error,
-      selectionColor,
       underlineColor,
       style,
       theme,
@@ -420,6 +419,7 @@ class TextInput extends React.Component<Props, State> {
           {label}
         </AnimatedText>
         <NativeTextInput
+          selectionColor={colors.primary}
           {...rest}
           ref={c => {
             this._root = c;
@@ -428,7 +428,6 @@ class TextInput extends React.Component<Props, State> {
           placeholder={label ? this.state.placeholder : this.props.placeholder}
           placeholderTextColor={colors.placeholder}
           editable={!disabled}
-          selectionColor={selectionColor || colors.primary}
           onFocus={this._handleFocus}
           onBlur={this._handleBlur}
           underlineColorAndroid="transparent"
