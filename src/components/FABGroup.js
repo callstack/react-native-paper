@@ -25,12 +25,14 @@ type Props = {
    * - `icon`: icon to display (required)
    * - `label`: optional label text
    * - `color`: custom icon color of the action item
+   * - `style`: pass additional styles, for example, backgroundColor
    * - `onPress`: callback that is called when `FAB` is pressed (required)
    */
   actions: Array<{
     icon: string,
     label?: string,
     color?: string,
+    style?: any,
     onPress: () => mixed,
   }>,
   /**
@@ -253,7 +255,10 @@ class FABGroup extends React.Component<Props, State> {
                     style={[
                       {
                         transform: [{ scale: scales[i] }],
-                        backgroundColor: theme.colors.paper,
+                        backgroundColor:
+                          it.style && it.style.backgroundColor
+                            ? it.style.backgroundColor
+                            : theme.colors.paper,
                       },
                     ]}
                     onPress={() => {
