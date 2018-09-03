@@ -10,8 +10,8 @@ it('renders list section without title', () => {
   const tree = renderer
     .create(
       <ListSection>
-        <ListItem title="First Item" left={<ListIcon icon="folder" />} />
-        <ListItem title="Second Item" left={<ListIcon icon="folder" />} />
+        <ListItem title="First Item" left={() => <ListIcon icon="folder" />} />
+        <ListItem title="Second Item" left={() => <ListIcon icon="folder" />} />
       </ListSection>
     )
     .toJSON();
@@ -23,8 +23,8 @@ it('renders list section with title', () => {
   const tree = renderer
     .create(
       <ListSection title="Some title">
-        <ListItem title="First Item" left={<ListIcon icon="folder" />} />
-        <ListItem title="Second Item" left={<ListIcon icon="folder" />} />
+        <ListItem title="First Item" left={() => <ListIcon icon="folder" />} />
+        <ListItem title="Second Item" left={() => <ListIcon icon="folder" />} />
       </ListSection>
     )
     .toJSON();

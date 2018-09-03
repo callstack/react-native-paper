@@ -41,11 +41,11 @@ type Props = {
  *       <List.Section title="Some title">
  *         <List.Item
  *           title="First Item"
- *           left={<List.Icon icon="folder" />}
+ *           left={() => <List.Icon icon="folder" />}
  *        />
  *         <List.Item
  *           title="Second Item"
- *           left={<List.Icon icon="folder" />}
+ *           left={() => <List.Icon icon="folder" />}
  *        />
  *      </List.Section>
  *     );

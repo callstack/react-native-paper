@@ -21,29 +21,35 @@ class ListSectionExample extends React.Component<Props> {
     return (
       <ScrollView style={[styles.container, { backgroundColor: background }]}>
         <List.Section title="Single line">
-          <List.Item left={<List.Icon icon="event" />} title="List item 1" />
-          <List.Item left={<List.Icon icon="redeem" />} title="List item 2" />
+          <List.Item
+            left={() => <List.Icon icon="event" />}
+            title="List item 1"
+          />
+          <List.Item
+            left={() => <List.Icon icon="redeem" />}
+            title="List item 2"
+          />
         </List.Section>
         <Divider />
         <List.Section title="Two line">
           <List.Item
-            left={
+            left={() => (
               <Image
                 source={require('../assets/email-icon.png')}
                 style={styles.image}
               />
-            }
+            )}
             title="List item 1"
             description="Describes item 1"
           />
           <List.Item
-            left={
+            left={() => (
               <Image
                 source={require('../assets/email-icon.png')}
                 style={styles.image}
               />
-            }
-            right={<List.Icon icon="info" />}
+            )}
+            right={() => <List.Icon icon="info" />}
             title="List item 2"
             description="Describes item 2"
           />
@@ -51,23 +57,23 @@ class ListSectionExample extends React.Component<Props> {
         <Divider />
         <List.Section title="Three line">
           <List.Item
-            left={
+            left={() => (
               <Image
                 source={require('../assets/email-icon.png')}
                 style={styles.image}
               />
-            }
+            )}
             title="List item 1"
             description="Describes item 1. Example of a very very long description."
           />
           <List.Item
-            left={
+            left={() => (
               <Image
                 source={require('../assets/email-icon.png')}
                 style={styles.image}
               />
-            }
-            right={<List.Icon icon="star-border" />}
+            )}
+            right={() => <List.Icon icon="star-border" />}
             title="List item 2"
             description="Describes item 2. Example of a very very long description."
           />

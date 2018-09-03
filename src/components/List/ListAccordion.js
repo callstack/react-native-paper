@@ -19,9 +19,9 @@ type Props = {
    */
   description?: React.Node,
   /**
-   * React element to display on the left side.
+   * Callback which returns a React element to display on the left side.
    */
-  left?: React.Node,
+  left?: () => React.Node,
   /**
    * Content of the section.
    */
@@ -54,7 +54,7 @@ type State = {
  * const MyComponent = () => (
  *   <List.Accordion
  *     title="Accordion"
- *     left={<List.Icon icon="folder" />}
+ *     left={() => <List.Icon icon="folder" />}
  *   >
  *     <List.Item title="First item" />
  *     <List.Item title="Second item" />
@@ -95,7 +95,7 @@ class ListAccordion extends React.Component<Props, State> {
           accessibilityRole="button"
         >
           <View style={styles.row} pointerEvents="none">
-            {left}
+            {left ? left() : null}
             <View style={[styles.item, styles.content]}>
               <Text
                 numberOfLines={1}

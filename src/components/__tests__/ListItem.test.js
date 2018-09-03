@@ -18,7 +18,9 @@ it('renders list item with title and description', () => {
 
 it('renders list item with left item', () => {
   const tree = renderer
-    .create(<ListItem title="First Item" left={<ListIcon icon="folder" />} />)
+    .create(
+      <ListItem title="First Item" left={() => <ListIcon icon="folder" />} />
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -26,7 +28,7 @@ it('renders list item with left item', () => {
 
 it('renders list item with right item', () => {
   const tree = renderer
-    .create(<ListItem title="First Item" right={<Text>GG</Text>} />)
+    .create(<ListItem title="First Item" right={() => <Text>GG</Text>} />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -38,8 +40,8 @@ it('renders list item with left and right items', () => {
       <ListItem
         title="First Item"
         description="Item description"
-        left={<Text>GG</Text>}
-        right={<ListIcon icon="folder" />}
+        left={() => <Text>GG</Text>}
+        right={() => <ListIcon icon="folder" />}
       />
     )
     .toJSON();
