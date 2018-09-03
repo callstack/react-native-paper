@@ -1,6 +1,6 @@
 # Contributing to React Native Paper
 
-## [Code of Conduct](/CODE_OF_CONDUCT.md)
+## Code of Conduct
 
 We want this community to be friendly and respectful to each other. Please read [the full text](/CODE_OF_CONDUCT.md) so that you can understand what actions will and will not be tolerated.
 
@@ -66,10 +66,6 @@ The documentation is automatically generated from the [flowtype](https://flowtyp
 ## Reporting issues
 
 You can report issues on our [bug tracker](https://github.com/callstack/react-native-paper/issues). Please follow the issue template when opening an issue.
-
-## Get in touch
-
-* Callstack Open Source Slack - [#react-native-paper](https://slack.callstack.io/).
 
 ## License
 
