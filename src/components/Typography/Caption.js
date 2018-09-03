@@ -23,6 +23,8 @@ type Props = {
  * const MyComponent = () => (
  *   <Caption>Caption</Caption>
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 const Caption = (props: Props) => (

@@ -66,6 +66,8 @@ type State = {
  *     </Card.Actions>
  *   </Card>
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 class Card extends React.Component<Props, State> {

@@ -23,6 +23,8 @@ type Props = {
  * const MyComponent = () => (
  *   <Headline>Headline</Headline>
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 const Headline = (props: Props) => (

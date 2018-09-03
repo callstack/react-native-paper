@@ -42,7 +42,8 @@ export const DEFAULT_APPBAR_HEIGHT = 56;
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Appbar, StyleSheet } from 'react-native-paper';
+ * import { Appbar } from 'react-native-paper';
+ * import { StyleSheet } from 'react-native';
  *
  * export default class MyComponent extends React.Component {
  *   render() {

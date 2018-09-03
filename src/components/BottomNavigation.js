@@ -258,7 +258,13 @@ class SceneComponent extends React.PureComponent<*> {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { BottomNavigation } from 'react-native-paper';
+ * import { BottomNavigation, Text } from 'react-native-paper';
+ *
+ * const MusicRoute = () => <Text>Music</Text>;
+ *
+ * const AlbumsRoute = () => <Text>Albums</Text>;
+ *
+ * const RecentsRoute = () => <Text>Recents</Text>;
  *
  * export default class MyComponent extends React.Component {
  *   state = {

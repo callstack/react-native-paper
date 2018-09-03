@@ -35,6 +35,8 @@ type Props = {
  *     <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
  *   </Card>
  * );
+ *
+ * export default MyComponent;
  * ```
  *
  * @extends Image props https://facebook.github.io/react-native/docs/image.html#props

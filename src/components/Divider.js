@@ -36,6 +36,8 @@ type Props = {
  *     <Divider />
  *   </View>
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 class Divider extends React.Component<Props> {

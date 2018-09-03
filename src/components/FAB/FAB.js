@@ -72,6 +72,8 @@ type Props = {
  *     onPress={() => {}}
  *   />
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 class FAB extends React.Component<Props> {

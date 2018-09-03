@@ -35,6 +35,8 @@ type Props = {
  *     </Card.Content>
  *   </Card>
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 class CardContent extends React.Component<Props> {

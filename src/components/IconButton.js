@@ -69,6 +69,8 @@ type Props = {
  *     onPress={() => console.log('Pressed')}
  *   />
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 const IconButton = ({

@@ -69,6 +69,8 @@ type Props = {
  *     <Text>Press me</Text>
  *   </TouchableRipple>
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 class TouchableRipple extends React.Component<Props, void> {

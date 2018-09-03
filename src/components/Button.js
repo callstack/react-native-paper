@@ -97,6 +97,8 @@ type State = {
  *     Press me
  *   </Button>
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 class Button extends React.Component<Props, State> {

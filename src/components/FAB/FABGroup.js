@@ -89,7 +89,7 @@ type State = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { FAB, Portal, StyleSheet } from 'react-native-paper';
+ * import { FAB, Portal } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {

@@ -23,6 +23,8 @@ type Props = {
  * const MyComponent = () => (
  *   <Subheading>Subheading</Subheading>
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 const Subheading = (props: Props) => (

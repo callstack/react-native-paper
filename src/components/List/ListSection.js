@@ -51,6 +51,8 @@ type Props = {
  *     );
  *   }
  * }
+ *
+ * export default MyComponent;
  * ```
  */
 class ListSection extends React.Component<Props> {

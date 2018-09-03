@@ -38,6 +38,8 @@ type Props = {
  * const MyComponent = () => (
  *   <ProgressBar progress={0.5} color={Colors.red800} />
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 class ProgressBar extends React.Component<Props> {

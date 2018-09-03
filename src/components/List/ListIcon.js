@@ -30,6 +30,8 @@ type Props = {
  * const MyComponent = () => (
  *   <List.Icon icon="folder" />
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 class ListIcon extends React.Component<Props> {

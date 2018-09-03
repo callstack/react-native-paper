@@ -27,6 +27,8 @@ type Props = {
  *     </Card.Actions>
  *   </Card>
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 class CardActions extends React.Component<Props> {

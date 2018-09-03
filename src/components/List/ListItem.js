@@ -57,6 +57,8 @@ type Props = {
  *     left={() => <List.Icon icon="folder" />}
  *   />
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 class ListItem extends React.Component<Props> {

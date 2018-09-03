@@ -45,6 +45,8 @@ type Props = {
  * const MyComponent = () => (
  *   <Drawer.Item label="First Item" />
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 class DrawerItem extends React.Component<Props> {

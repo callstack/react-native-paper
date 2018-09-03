@@ -23,6 +23,8 @@ type Props = {
  * const MyComponent = () => (
  *   <Paragraph>Paragraph</Paragraph>
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 const Paragraph = (props: Props) => (

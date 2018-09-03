@@ -92,6 +92,8 @@ type State = {
  * const MyComponent = () => (
  *   <Chip icon="info" onPress={() => {}}>Example Chip</Chip>
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 class Chip extends React.Component<Props, State> {

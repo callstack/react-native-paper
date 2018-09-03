@@ -60,6 +60,8 @@ type State = {
  *     <List.Item title="Second item" />
  *   </List.Accordion>
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 class ListAccordion extends React.Component<Props, State> {

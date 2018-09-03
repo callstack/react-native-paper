@@ -121,7 +121,7 @@ type State = {
  * import * as React from 'react';
  * import { TextInput } from 'react-native-paper';
  *
- * class MyComponent extends React.Component {
+ * export default class MyComponent extends React.Component {
  *   state = {
  *     text: ''
  *   };

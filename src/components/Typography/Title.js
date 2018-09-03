@@ -23,6 +23,8 @@ type Props = {
  * const MyComponent = () => (
  *   <Title>Title</Title>
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 const Title = (props: Props) => (
