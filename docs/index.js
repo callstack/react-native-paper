@@ -13,6 +13,7 @@ const assets = [
   path.join(__dirname, 'assets', 'images'),
 ];
 const styles = [path.join(__dirname, 'assets', 'styles.css')];
+const scripts = [path.join(__dirname, 'assets', 'snack.js')];
 
 if (!fs.existsSync(dist)) {
   fs.mkdirSync(dist);
@@ -98,6 +99,7 @@ if (task !== 'build') {
   serve({
     assets,
     styles,
+    scripts,
     pages: getPages,
     output: path.join(__dirname, 'dist'),
   });
@@ -105,6 +107,7 @@ if (task !== 'build') {
   build({
     assets,
     styles,
+    scripts,
     pages: getPages,
     output: path.join(__dirname, 'dist'),
   });
