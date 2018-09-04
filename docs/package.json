@@ -21,7 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "color": "^2.0.1",
-    "component-docs": "^0.13.0",
+    "component-docs": "^0.13.1",
     "linaria": "^0.5.0"
   }
 }
