@@ -157,11 +157,15 @@ const gallery = css`
 
 const screenshots = [
   'gallery/button.png',
-  'gallery/card.png',
   'gallery/input.png',
+  'gallery/card.png',
+  'gallery/appbar.png',
   'gallery/searchbar.png',
-  'gallery/typography.png',
+  'gallery/snackbar.png',
   'gallery/chip.png',
+  'gallery/list.png',
+  'gallery/list-accordion.png',
+  'gallery/typography.png',
   'gallery/bottom-navigation.png',
   'gallery/fab.png',
 ];
