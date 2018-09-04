@@ -20,7 +20,7 @@ type State = {
 };
 
 class RadioButtonExample extends React.Component<Props, State> {
-  static title = 'Radio button';
+  static title = 'Radio Button';
 
   state = {
     checked: 'normal',

@@ -34,7 +34,7 @@ export default class ButtomNavigationExample extends React.Component<
   {},
   State
 > {
-  static title = 'Bottom navigation';
+  static title = 'Bottom Navigation';
 
   state = {
     index: 0,

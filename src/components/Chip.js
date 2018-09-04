@@ -90,7 +90,7 @@ type State = {
  * import { Chip } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Chip icon="info" onPress={() => {}}>Example Chip</Chip>
+ *   <Chip icon="info" onPress={() => console.log('Pressed')}>Example Chip</Chip>
  * );
  *
  * export default MyComponent;

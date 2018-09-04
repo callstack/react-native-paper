@@ -14,7 +14,7 @@ type State = {
 };
 
 class RadioButtonGroupExample extends React.Component<Props, State> {
-  static title = 'Radio button group';
+  static title = 'Radio Button Group';
 
   state = {
     value: 'first',

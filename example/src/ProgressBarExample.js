@@ -14,7 +14,7 @@ type State = {
 };
 
 class ProgressBarExample extends React.Component<Props, State> {
-  static title = 'Progress bar';
+  static title = 'Progress Bar';
 
   state = {
     progress: 0,

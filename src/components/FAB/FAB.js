@@ -69,7 +69,7 @@ type Props = {
  *   <FAB
  *     small
  *     icon="add"
- *     onPress={() => {}}
+ *     onPress={() => console.log('Pressed')}
  *   />
  * );
  *

@@ -9,7 +9,7 @@ type Props = {
 };
 
 class RippleExample extends React.Component<Props> {
-  static title = 'Ripples';
+  static title = 'TouchableRipple';
 
   render() {
     const {
