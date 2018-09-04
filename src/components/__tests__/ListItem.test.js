@@ -19,7 +19,10 @@ it('renders list item with title and description', () => {
 it('renders list item with left item', () => {
   const tree = renderer
     .create(
-      <ListItem title="First Item" left={() => <ListIcon icon="folder" />} />
+      <ListItem
+        title="First Item"
+        left={props => <ListIcon {...props} icon="folder" />}
+      />
     )
     .toJSON();
 
@@ -41,7 +44,7 @@ it('renders list item with left and right items', () => {
         title="First Item"
         description="Item description"
         left={() => <Text>GG</Text>}
-        right={() => <ListIcon icon="folder" />}
+        right={props => <ListIcon {...props} icon="folder" />}
       />
     )
     .toJSON();

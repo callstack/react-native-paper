@@ -22,11 +22,11 @@ class ListSectionExample extends React.Component<Props> {
       <ScrollView style={[styles.container, { backgroundColor: background }]}>
         <List.Section title="Single line">
           <List.Item
-            left={() => <List.Icon icon="event" />}
+            left={props => <List.Icon {...props} icon="event" />}
             title="List item 1"
           />
           <List.Item
-            left={() => <List.Icon icon="redeem" />}
+            left={props => <List.Icon {...props} icon="redeem" />}
             title="List item 2"
           />
         </List.Section>
@@ -49,7 +49,7 @@ class ListSectionExample extends React.Component<Props> {
                 style={styles.image}
               />
             )}
-            right={() => <List.Icon icon="info" />}
+            right={props => <List.Icon {...props} icon="info" />}
             title="List item 2"
             description="Describes item 2"
           />
@@ -73,7 +73,7 @@ class ListSectionExample extends React.Component<Props> {
                 style={styles.image}
               />
             )}
-            right={() => <List.Icon icon="star-border" />}
+            right={props => <List.Icon {...props} icon="star-border" />}
             title="List item 2"
             description="Describes item 2. Example of a very very long description."
           />

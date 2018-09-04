@@ -1,11 +1,8 @@
 /* @flow */
 
-import color from 'color';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Icon, { type IconSource } from '../Icon';
-import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
 
 type Props = {
   /**
@@ -13,9 +10,9 @@ type Props = {
    */
   icon: IconSource,
   /**
-   * @optional
+   * Color for the icon.
    */
-  theme: Theme,
+  color: string,
   style?: any,
 };
 
@@ -25,25 +22,20 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { List } from 'react-native-paper';
+ * import { List, Colors } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <List.Icon icon="folder" />
+ *   <List.Icon color={Colors.blue500} icon="folder" />
  * );
  *
  * export default MyComponent;
  * ```
  */
-class ListIcon extends React.Component<Props> {
+export default class ListIcon extends React.Component<Props> {
   static displayName = 'List.Icon';
 
   render() {
-    const { icon, theme, style } = this.props;
-
-    const iconColor = color(theme.colors.text)
-      .alpha(0.54)
-      .rgb()
-      .string();
+    const { icon, color: iconColor, style } = this.props;
 
     return (
       <View style={[styles.item, style]} pointerEvents="box-none">
@@ -62,5 +54,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-export default withTheme(ListIcon);

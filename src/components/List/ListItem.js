@@ -20,11 +20,11 @@ type Props = {
   /**
    * Callback which returns a React element to display on the left side.
    */
-  left?: () => React.Node,
+  left?: (props: { color: string }) => React.Node,
   /**
    * Callback which returns a React element to display on the right side.
    */
-  right?: () => React.Node,
+  right?: (props: { color: string }) => React.Node,
   /**
    * Function to execute on press.
    */
@@ -54,7 +54,7 @@ type Props = {
  *   <List.Item
  *     title="First Item"
  *     description="Item description"
- *     left={() => <List.Icon icon="folder" />}
+ *     left={props => <List.Icon {...props} icon="folder" />}
  *   />
  * );
  *
@@ -91,7 +91,7 @@ class ListItem extends React.Component<Props> {
         onPress={onPress}
       >
         <View style={styles.row}>
-          {left ? left() : null}
+          {left ? left({ color: descriptionColor }) : null}
           <View style={[styles.item, styles.content]} pointerEvents="none">
             <Text
               numberOfLines={1}
@@ -113,7 +113,7 @@ class ListItem extends React.Component<Props> {
               </Text>
             ) : null}
           </View>
-          {right ? right() : null}
+          {right ? right({ color: descriptionColor }) : null}
         </View>
       </TouchableRipple>
     );

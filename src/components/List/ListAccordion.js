@@ -21,7 +21,7 @@ type Props = {
   /**
    * Callback which returns a React element to display on the left side.
    */
-  left?: () => React.Node,
+  left?: (props: { color: string }) => React.Node,
   /**
    * Content of the section.
    */
@@ -54,7 +54,7 @@ type State = {
  * const MyComponent = () => (
  *   <List.Accordion
  *     title="Accordion"
- *     left={() => <List.Icon icon="folder" />}
+ *     left={props => <List.Icon {...props} icon="folder" />}
  *   >
  *     <List.Item title="First item" />
  *     <List.Item title="Second item" />
@@ -97,7 +97,13 @@ class ListAccordion extends React.Component<Props, State> {
           accessibilityRole="button"
         >
           <View style={styles.row} pointerEvents="none">
-            {left ? left() : null}
+            {left
+              ? left({
+                  color: this.state.expanded
+                    ? theme.colors.primary
+                    : descriptionColor,
+                })
+              : null}
             <View style={[styles.item, styles.content]}>
               <Text
                 numberOfLines={1}
