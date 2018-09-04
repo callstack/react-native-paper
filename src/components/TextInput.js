@@ -29,6 +29,8 @@ type Props = {
    * Mode of the TextInput.
    * - `flat` - flat input with an underline.
    * - `outlined` - input with an outline.
+   *
+   * In `outlined` mode, the background color of the label is derived from `colors.background` in theme or the `backgroundColor` style.
    */
   mode?: 'flat' | 'outlined',
   /**
@@ -342,6 +344,8 @@ class TextInput extends React.Component<Props, State> {
 
     const { colors, fonts } = theme;
     const fontFamily = fonts.regular;
+    const { backgroundColor = colors.background } =
+      StyleSheet.flatten(style) || {};
 
     let inputTextColor,
       activeColor,
@@ -459,8 +463,7 @@ class TextInput extends React.Component<Props, State> {
             style={[
               styles.outlinedLabelBackground,
               {
-                color: 'transparent',
-                backgroundColor: colors.background,
+                backgroundColor,
                 fontFamily,
                 fontSize: MINIMIZED_LABEL_FONT_SIZE,
                 // Hide the background when scale will be 0
@@ -632,9 +635,10 @@ const styles = StyleSheet.create({
   },
   outlinedLabelBackground: {
     position: 'absolute',
-    top: -4,
+    top: 0,
     left: 8,
     paddingHorizontal: 4,
+    color: 'transparent',
   },
   input: {
     paddingHorizontal: 12,
