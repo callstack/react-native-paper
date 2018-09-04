@@ -59,11 +59,11 @@ it('renders custom icon and label in shifting bottom navigation', () => {
         navigationState={createState(0, 5)}
         onIndexChange={jest.fn()}
         renderScene={({ route }) => route.title}
-        renderIcon={({ route, tintColor }) => (
-          <icon color={tintColor}>{route.icon}</icon>
+        renderIcon={({ route, color }) => (
+          <icon color={color}>{route.icon}</icon>
         )}
-        renderLabel={({ route, tintColor }) => (
-          <text color={tintColor}>{route.label}</text>
+        renderLabel={({ route, color }) => (
+          <text color={color}>{route.label}</text>
         )}
       />
     )
@@ -80,11 +80,11 @@ it('renders custom icon and label in non-shifting bottom navigation', () => {
         navigationState={createState(0, 3)}
         onIndexChange={jest.fn()}
         renderScene={({ route }) => route.title}
-        renderIcon={({ route, tintColor }) => (
-          <icon color={tintColor}>{route.icon}</icon>
+        renderIcon={({ route, color }) => (
+          <icon color={color}>{route.icon}</icon>
         )}
-        renderLabel={({ route, tintColor }) => (
-          <text color={tintColor}>{route.label}</text>
+        renderLabel={({ route, color }) => (
+          <text color={color}>{route.label}</text>
         )}
       />
     )
@@ -101,8 +101,8 @@ it('renders custom icon and label with custom colors in shifting bottom navigati
         navigationState={createState(0, 3)}
         onIndexChange={jest.fn()}
         renderScene={({ route }) => route.title}
-        activeTintColor="#FBF7DB"
-        inctiveTintColor="#853D4B"
+        activeColor="#FBF7DB"
+        inactiveColor="#853D4B"
         barStyle={{ backgroundColor: '#E96A82' }}
       />
     )
@@ -119,8 +119,8 @@ it('renders custom icon and label with custom colors in non-shifting bottom navi
         navigationState={createState(0, 3)}
         onIndexChange={jest.fn()}
         renderScene={({ route }) => route.title}
-        activeTintColor="#FBF7DB"
-        inctiveTintColor="#853D4B"
+        activeColor="#FBF7DB"
+        inactiveColor="#853D4B"
         barStyle={{ backgroundColor: '#E96A82' }}
       />
     )

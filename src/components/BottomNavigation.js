@@ -130,7 +130,7 @@ type Props<T> = {
   renderIcon?: (props: {
     route: T,
     focused: boolean,
-    tintColor: string,
+    color: string,
   }) => React.Node,
   /**
    * Callback which React Element to be used as tab label.
@@ -138,7 +138,7 @@ type Props<T> = {
   renderLabel?: (props: {
     route: T,
     focused: boolean,
-    tintColor: string,
+    color: string,
   }) => React.Node,
   /**
    * Get label text for the tab, uses `route.title` by default. Use `renderLabel` to replace label component.
@@ -164,11 +164,11 @@ type Props<T> = {
   /**
    * Custom color for icon and label in the active tab.
    */
-  activeTintColor?: string,
+  activeColor?: string,
   /**
    * Custom color for icon and label in the inactive tab.
    */
-  inactiveTintColor?: string,
+  inactiveColor?: string,
   /**
    * Style for the bottom navigation bar.
    * You can set a bottom padding here if you have a translucent navigation bar on Android:
@@ -474,8 +474,8 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
       getColor = ({ route }: Object) => route.color,
       getAccessibilityLabel = ({ route }: Object) => route.accessibilityLabel,
       getTestID = ({ route }: Object) => route.testID,
-      activeTintColor,
-      inactiveTintColor,
+      activeColor,
+      inactiveColor,
       barStyle,
       labeled,
       style,
@@ -502,11 +502,11 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
     const isDark = !color(approxBackgroundColor).light();
 
     const textColor = isDark ? white : black;
-    const activeColor =
-      typeof activeTintColor !== 'undefined' ? activeTintColor : textColor;
-    const inactiveColor =
-      typeof inactiveTintColor !== 'undefined'
-        ? inactiveTintColor
+    const activeTintColor =
+      typeof activeColor !== 'undefined' ? activeColor : textColor;
+    const inactiveTintColor =
+      typeof inactiveColor !== 'undefined'
+        ? inactiveColor
         : color(textColor)
             .alpha(0.5)
             .rgb()
@@ -673,12 +673,12 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                           renderIcon({
                             route,
                             focused: true,
-                            tintColor: activeColor,
+                            color: activeTintColor,
                           })
                         ) : (
                           <Icon
                             source={(route: Object).icon}
-                            color={activeColor}
+                            color={activeTintColor}
                             size={24}
                           />
                         )}
@@ -693,12 +693,12 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                           renderIcon({
                             route,
                             focused: false,
-                            tintColor: inactiveColor,
+                            color: inactiveTintColor,
                           })
                         ) : (
                           <Icon
                             source={(route: Object).icon}
-                            color={inactiveColor}
+                            color={inactiveTintColor}
                             size={24}
                           />
                         )}
@@ -723,14 +723,14 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                             renderLabel({
                               route,
                               focused: true,
-                              tintColor: activeColor,
+                              color: activeTintColor,
                             })
                           ) : (
                             <AnimatedText
                               style={[
                                 styles.label,
                                 {
-                                  color: activeColor,
+                                  color: activeTintColor,
                                 },
                               ]}
                             >
@@ -749,14 +749,14 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                               renderLabel({
                                 route,
                                 focused: false,
-                                tintColor: inactiveColor,
+                                color: inactiveTintColor,
                               })
                             ) : (
                               <AnimatedText
                                 style={[
                                   styles.label,
                                   {
-                                    color: inactiveColor,
+                                    color: inactiveTintColor,
                                   },
                                 ]}
                               >

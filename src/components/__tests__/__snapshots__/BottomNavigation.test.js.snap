@@ -2432,7 +2432,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 style={
                   Array [
                     Object {
-                      "color": "rgba(0, 0, 0, 0.5)",
+                      "color": "#853D4B",
                       "fontSize": 24,
                     },
                     Array [
@@ -2557,7 +2557,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     },
                     Object {
                       "backgroundColor": "transparent",
-                      "color": "rgba(0, 0, 0, 0.5)",
+                      "color": "#853D4B",
                       "fontSize": 12,
                       "textAlign": "center",
                     },
@@ -2701,7 +2701,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 style={
                   Array [
                     Object {
-                      "color": "rgba(0, 0, 0, 0.5)",
+                      "color": "#853D4B",
                       "fontSize": 24,
                     },
                     Array [
@@ -2826,7 +2826,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     },
                     Object {
                       "backgroundColor": "transparent",
-                      "color": "rgba(0, 0, 0, 0.5)",
+                      "color": "#853D4B",
                       "fontSize": 12,
                       "textAlign": "center",
                     },
@@ -2970,7 +2970,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 style={
                   Array [
                     Object {
-                      "color": "rgba(0, 0, 0, 0.5)",
+                      "color": "#853D4B",
                       "fontSize": 24,
                     },
                     Array [
@@ -3095,7 +3095,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     },
                     Object {
                       "backgroundColor": "transparent",
-                      "color": "rgba(0, 0, 0, 0.5)",
+                      "color": "#853D4B",
                       "fontSize": 12,
                       "textAlign": "center",
                     },
@@ -3362,7 +3362,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 style={
                   Array [
                     Object {
-                      "color": "rgba(0, 0, 0, 0.5)",
+                      "color": "#853D4B",
                       "fontSize": 24,
                     },
                     Array [
@@ -3572,7 +3572,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 style={
                   Array [
                     Object {
-                      "color": "rgba(0, 0, 0, 0.5)",
+                      "color": "#853D4B",
                       "fontSize": 24,
                     },
                     Array [
@@ -3782,7 +3782,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 style={
                   Array [
                     Object {
-                      "color": "rgba(0, 0, 0, 0.5)",
+                      "color": "#853D4B",
                       "fontSize": 24,
                     },
                     Array [
