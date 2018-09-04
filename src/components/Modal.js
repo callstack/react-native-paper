@@ -148,24 +148,18 @@ class Modal extends React.Component<Props, State> {
       <Animated.View
         accessibilityViewIsModal
         accessibilityLiveRegion="polite"
-        style={[{ opacity: this.state.opacity }, styles.wrapper]}
+        style={[{ opacity: this.state.opacity }, StyleSheet.absoluteFill]}
       >
-        <View
-          style={[
-            StyleSheet.absoluteFill,
-            { backgroundColor: colors.backdrop },
-          ]}
-        />
-        {dismissable && (
-          <TouchableWithoutFeedback onPress={this._hideModal}>
-            <View style={StyleSheet.absoluteFill} />
-          </TouchableWithoutFeedback>
-        )}
-        <Animated.View
-          style={[{ opacity: this.state.opacity }, styles.childrenWrapper]}
+        <TouchableWithoutFeedback
+          onPress={dismissable ? this._hideModal : undefined}
         >
+          <View
+            style={[styles.backdrop, { backgroundColor: colors.backdrop }]}
+          />
+        </TouchableWithoutFeedback>
+        <View pointerEvents="box-none" style={styles.content}>
           {children}
-        </Animated.View>
+        </View>
       </Animated.View>
     );
   }
@@ -176,11 +170,11 @@ polyfill(Modal);
 export default withTheme(Modal);
 
 const styles = StyleSheet.create({
-  wrapper: {
-    ...StyleSheet.absoluteFillObject,
-  },
-  childrenWrapper: {
+  backdrop: {
     flex: 1,
+  },
+  content: {
+    ...StyleSheet.absoluteFillObject,
     justifyContent: 'center',
   },
 });
