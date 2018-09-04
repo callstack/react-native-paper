@@ -19,6 +19,7 @@ Array [
     </Text>
   </View>,
   <View
+    collapsable={false}
     pointerEvents="box-none"
     style={
       Object {
