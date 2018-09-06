@@ -13,10 +13,11 @@ export { default as Provider } from './core/Provider';
 export { default as DefaultTheme } from './styles/DefaultTheme';
 export { default as DarkTheme } from './styles/DarkTheme';
 
+import * as Avatar from './components/Avatar/Avatar';
 import * as List from './components/List/List';
 import * as Drawer from './components/Drawer/Drawer';
 
-export { List, Drawer };
+export { Avatar, List, Drawer };
 
 export { default as Banner } from './components/Banner';
 export { default as BottomNavigation } from './components/BottomNavigation';

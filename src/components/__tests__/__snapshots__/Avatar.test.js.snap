@@ -1,0 +1,326 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders avatar with icon 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#6200ee",
+        "borderRadius": 32,
+        "height": 64,
+        "width": 64,
+      },
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      Object {},
+    ]
+  }
+>
+  <Text
+    accessibilityElementsHidden={true}
+    allowFontScaling={false}
+    importantForAccessibility="no-hide-descendants"
+    pointerEvents="none"
+    style={
+      Array [
+        Object {
+          "color": "#ffffff",
+          "fontSize": 32,
+        },
+        Array [
+          Object {
+            "transform": Array [
+              Object {
+                "scaleX": 1,
+              },
+            ],
+          },
+          Object {
+            "backgroundColor": "transparent",
+          },
+        ],
+        Object {
+          "fontFamily": "Material Icons",
+          "fontStyle": "normal",
+          "fontWeight": "normal",
+        },
+        Object {},
+      ]
+    }
+  >
+    
+  </Text>
+</View>
+`;
+
+exports[`renders avatar with icon and custom background color 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#FF0000",
+        "borderRadius": 32,
+        "height": 64,
+        "width": 64,
+      },
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      Object {},
+    ]
+  }
+>
+  <Text
+    accessibilityElementsHidden={true}
+    allowFontScaling={false}
+    importantForAccessibility="no-hide-descendants"
+    pointerEvents="none"
+    style={
+      Array [
+        Object {
+          "color": "#ffffff",
+          "fontSize": 32,
+        },
+        Array [
+          Object {
+            "transform": Array [
+              Object {
+                "scaleX": 1,
+              },
+            ],
+          },
+          Object {
+            "backgroundColor": "transparent",
+          },
+        ],
+        Object {
+          "fontFamily": "Material Icons",
+          "fontStyle": "normal",
+          "fontWeight": "normal",
+        },
+        Object {},
+      ]
+    }
+  >
+    
+  </Text>
+</View>
+`;
+
+exports[`renders avatar with image 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#6200ee",
+        "borderRadius": 32,
+        "height": 64,
+        "width": 64,
+      },
+      undefined,
+    ]
+  }
+>
+  <Image
+    source={
+      Object {
+        "src": "avatar.png",
+      }
+    }
+    style={
+      Object {
+        "borderRadius": 32,
+        "height": 64,
+        "width": 64,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`renders avatar with text 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#6200ee",
+        "borderRadius": 32,
+        "height": 64,
+        "width": 64,
+      },
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      Object {},
+    ]
+  }
+>
+  <Text
+    numberOfLines={1}
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "Helvetica Neue",
+          "textAlign": "left",
+          "writingDirection": "ltr",
+        },
+        Array [
+          Object {
+            "textAlign": "center",
+          },
+          Object {
+            "color": "#ffffff",
+            "fontSize": 32,
+            "lineHeight": 64,
+          },
+        ],
+      ]
+    }
+  >
+    XD
+  </Text>
+</View>
+`;
+
+exports[`renders avatar with text and custom background color 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#FF0000",
+        "borderRadius": 32,
+        "height": 64,
+        "width": 64,
+      },
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      Object {},
+    ]
+  }
+>
+  <Text
+    numberOfLines={1}
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "Helvetica Neue",
+          "textAlign": "left",
+          "writingDirection": "ltr",
+        },
+        Array [
+          Object {
+            "textAlign": "center",
+          },
+          Object {
+            "color": "#ffffff",
+            "fontSize": 32,
+            "lineHeight": 64,
+          },
+        ],
+      ]
+    }
+  >
+    XD
+  </Text>
+</View>
+`;
+
+exports[`renders avatar with text and custom colors 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#6200ee",
+        "borderRadius": 32,
+        "height": 64,
+        "width": 64,
+      },
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      Object {},
+    ]
+  }
+>
+  <Text
+    numberOfLines={1}
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "Helvetica Neue",
+          "textAlign": "left",
+          "writingDirection": "ltr",
+        },
+        Array [
+          Object {
+            "textAlign": "center",
+          },
+          Object {
+            "color": "#FFFFFF",
+            "fontSize": 32,
+            "lineHeight": 64,
+          },
+        ],
+      ]
+    }
+  >
+    XD
+  </Text>
+</View>
+`;
+
+exports[`renders avatar with text and custom size 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#6200ee",
+        "borderRadius": 48,
+        "height": 96,
+        "width": 96,
+      },
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      Object {},
+    ]
+  }
+>
+  <Text
+    numberOfLines={1}
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "Helvetica Neue",
+          "textAlign": "left",
+          "writingDirection": "ltr",
+        },
+        Array [
+          Object {
+            "textAlign": "center",
+          },
+          Object {
+            "color": "#ffffff",
+            "fontSize": 48,
+            "lineHeight": 96,
+          },
+        ],
+      ]
+    }
+  >
+    XD
+  </Text>
+</View>
+`;
