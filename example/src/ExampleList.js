@@ -4,7 +4,7 @@ import * as React from 'react';
 import { FlatList } from 'react-native';
 import { List, Divider, withTheme, type Theme } from 'react-native-paper';
 import AppbarExample from './AppbarExample';
-import BannerExample from './BannerExample';
+import AvatarExample from './AvatarExample';
 import BottomNavigationExample from './BottomNavigationExample';
 import ButtonExample from './ButtonExample';
 import CardExample from './CardExample';
@@ -34,7 +34,7 @@ type Props = {
 
 export const examples = {
   appbar: AppbarExample,
-  banner: BannerExample,
+  avatar: AvatarExample,
   bottomNavigation: BottomNavigationExample,
   button: ButtonExample,
   card: CardExample,
