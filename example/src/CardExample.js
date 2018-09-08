@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { Alert, ScrollView, StyleSheet } from 'react-native';
 import {
   Title,
   Caption,
@@ -67,7 +67,37 @@ class CardExample extends React.Component<Props> {
           </Card.Content>
         </Card>
         <Card style={styles.card}>
+          <Title>Just Strawberries</Title>
           <Card.Cover source={require('../assets/strawberries.jpg')} />
+        </Card>
+        <Card
+          style={styles.card}
+          onPress={() => {
+            Alert.alert('The Chameleon is Pressed');
+          }}
+        >
+          <Card.Cover source={require('../assets/chameleon.jpg')} />
+          <Card.Content>
+            <Title>Pressable Chameleon</Title>
+            <Paragraph>
+              This is a pressable chameleon. If you press me, I will alert.
+            </Paragraph>
+          </Card.Content>
+        </Card>
+        <Card
+          style={styles.card}
+          onLongPress={() => {
+            Alert.alert('The City is Long Pressed');
+          }}
+        >
+          <Card.Cover source={require('../assets/city.jpg')} />
+          <Card.Content>
+            <Title>Long Pressable City</Title>
+            <Paragraph>
+              This is a long press only city. If you long press me, I will
+              alert.
+            </Paragraph>
+          </Card.Content>
         </Card>
       </ScrollView>
     );
