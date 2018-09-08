@@ -1,7 +1,14 @@
 /* @flow */
 
 import * as React from 'react';
-import { View, StyleSheet, Image, ScrollView, Dimensions } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Image,
+  ScrollView,
+  SafeAreaView,
+  Dimensions,
+} from 'react-native';
 import { Banner, withTheme, FAB } from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
 
@@ -13,17 +20,9 @@ type State = {
   visible: boolean,
 };
 
-const PhotoGallery = ({ route }) => {
-  const PHOTOS = Array.from({ length: 24 }).map(
-    (_, i) => `https://unsplash.it/300/300/?random&__id=${route.key}${i}`
-  );
-
-  return PHOTOS.map(uri => (
-    <View key={uri} style={styles.item}>
-      <Image source={{ uri }} style={styles.photo} />
-    </View>
-  ));
-};
+const PHOTOS = Array.from({ length: 24 }).map(
+  (_, i) => `https://unsplash.it/300/300/?random&__id=${i}`
+);
 
 class BannerExample extends React.Component<Props, State> {
   static title = 'Banner';
@@ -38,9 +37,10 @@ class BannerExample extends React.Component<Props, State> {
         colors: { background },
       },
     } = this.props;
+
     return (
-      <View style={{ flex: 1 }}>
-        <ScrollView style={[styles.container, { backgroundColor: background }]}>
+      <View style={[styles.container, { backgroundColor: background }]}>
+        <ScrollView>
           <Banner
             actions={[
               {
@@ -56,36 +56,40 @@ class BannerExample extends React.Component<Props, State> {
                 },
               },
             ]}
-            image={
+            image={({ size }) => (
               <Image
                 source={require('../assets/email-icon.png')}
                 style={{
-                  width: 40,
-                  height: 40,
+                  width: size,
+                  height: size,
                 }}
               />
-            }
+            )}
             visible={this.state.visible}
           >
-            There was a problem processing a transaction on your credit card.
+            Two line text string with two actions. One to two lines is
+            preferable on mobile.
           </Banner>
-          <View style={styles.content}>
-            {PhotoGallery({ route: { key: 1 } })}
+          <View style={styles.grid}>
+            {PHOTOS.map(uri => (
+              <View key={uri} style={styles.item}>
+                <Image source={{ uri }} style={styles.photo} />
+              </View>
+            ))}
           </View>
         </ScrollView>
-        <FAB
-          small
-          icon="add"
-          label="Show Banner"
-          style={{
-            margin: 8,
-            position: 'absolute',
-            bottom: 0,
-          }}
-          onPress={() => {
-            this.setState({ visible: true });
-          }}
-        />
+        <SafeAreaView>
+          <View>
+            <FAB
+              icon="visibility"
+              label={this.state.visible ? 'Hide banner' : 'Show banner'}
+              style={styles.fab}
+              onPress={() =>
+                this.setState(state => ({ visible: !state.visible }))
+              }
+            />
+          </View>
+        </SafeAreaView>
       </View>
     );
   }
@@ -95,10 +99,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  content: {
+  grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    flex: 1,
   },
   item: {
     height: Dimensions.get('window').width / 2,
@@ -108,6 +111,12 @@ const styles = StyleSheet.create({
   photo: {
     flex: 1,
     resizeMode: 'cover',
+  },
+  fab: {
+    alignSelf: 'center',
+    position: 'absolute',
+    bottom: 0,
+    margin: 16,
   },
 });
 
