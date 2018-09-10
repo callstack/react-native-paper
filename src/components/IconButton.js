@@ -6,6 +6,7 @@ import color from 'color';
 
 import TouchableRipple from './TouchableRipple';
 import Icon from './Icon';
+import Badge from './Badge';
 import { withTheme } from '../core/theming';
 import type { IconSource } from './Icon';
 import type { Theme } from '../../types';
@@ -31,6 +32,18 @@ type Props = {
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
   accessibilityLabel?: string,
+  /**
+   * Count to display for the badge.
+   */
+  badgeCount?: number,
+  /**
+   * Color of the badge.
+   */
+  badgeColor?: string,
+  /**
+   * Position of the badge.
+   */
+  badgePosition?: string,
   /**
    * Function to execute on press.
    */
@@ -82,6 +95,9 @@ const IconButton = ({
   onPress,
   theme,
   style,
+  badgeCount,
+  badgeColor,
+  badgePosition,
   ...rest
 }: Props) => {
   const iconColor =
@@ -90,6 +106,26 @@ const IconButton = ({
     .alpha(0.32)
     .rgb()
     .string();
+  let badgeLocation;
+
+  if (badgeCount && badgePosition) {
+    switch (badgePosition) {
+      case 'top-left':
+        badgeLocation = { left: -12, top: -12 };
+        break;
+      case 'top-right':
+        badgeLocation = { right: -12, top: -12 };
+        break;
+      case 'bottom-left':
+        badgeLocation = { right: -12, bottom: -12 };
+        break;
+      case 'bottom-right':
+        badgeLocation = { right: -12, bottom: -12 };
+        break;
+      default:
+        break;
+    }
+  }
 
   return (
     <TouchableRipple
@@ -111,7 +147,16 @@ const IconButton = ({
       {...rest}
     >
       <View>
-        <Icon color={iconColor} source={icon} size={size} />
+        {badgeCount ? (
+          <Badge
+            style={[styles.badge, badgeLocation]}
+            color={badgeColor}
+            count={badgeCount}
+          />
+        ) : null}
+        <View>
+          <Icon color={iconColor} source={icon} size={size} />
+        </View>
       </View>
     </TouchableRipple>
   );
@@ -136,6 +181,10 @@ const styles = StyleSheet.create({
       },
   disabled: {
     opacity: 0.32,
+  },
+  badge: {
+    position: 'absolute',
+    zIndex: 2,
   },
 });
 

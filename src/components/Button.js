@@ -5,6 +5,7 @@ import { ActivityIndicator, Animated, View, StyleSheet } from 'react-native';
 import color from 'color';
 import Icon from './Icon';
 import Surface from './Surface';
+import Badge from './Badge';
 import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple';
 import { black, white } from '../styles/colors';
@@ -54,6 +55,18 @@ type Props = {
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
   accessibilityLabel?: string,
+  /**
+   * Count to display for the badge.
+   */
+  badgeCount?: number,
+  /**
+   * Color of the badge.
+   */
+  badgeColor?: string,
+  /**
+   * Position of the badge.
+   */
+  badgePosition?: string,
   /**
    * Function to execute on press.
    */
@@ -142,12 +155,15 @@ class Button extends React.Component<Props, State> {
       onPress,
       style,
       theme,
+      badgeCount,
+      badgeColor,
+      badgePosition,
       ...rest
     } = this.props;
     const { colors, roundness } = theme;
     const fontFamily = theme.fonts.medium;
 
-    let backgroundColor, borderColor, textColor, borderWidth;
+    let backgroundColor, borderColor, textColor, borderWidth, badgeLocation;
 
     if (mode === 'contained') {
       if (disabled) {
@@ -199,6 +215,27 @@ class Button extends React.Component<Props, State> {
       textColor = colors.primary;
     }
 
+    if (badgeCount && badgePosition) {
+      switch (badgePosition) {
+        case 'top-left':
+          badgeLocation = { left: -10, top: -10 };
+          break;
+        case 'top-right':
+          badgeLocation = { right: -10, top: -10 };
+          break;
+        case 'bottom-left':
+          badgeLocation = { right: -10, bottom: -10 };
+          break;
+        case 'bottom-right':
+          badgeLocation = { right: -10, bottom: -10 };
+          break;
+        default:
+          break;
+      }
+    } else {
+      badgeLocation = { left: -10, top: -10 };
+    }
+
     const rippleColor = color(textColor)
       .alpha(0.32)
       .rgb()
@@ -239,34 +276,43 @@ class Button extends React.Component<Props, State> {
           rippleColor={rippleColor}
           style={touchableStyle}
         >
-          <View style={styles.content}>
-            {icon && loading !== true ? (
-              <View style={styles.icon}>
-                <Icon source={icon} size={16} color={textColor} />
-              </View>
-            ) : null}
-            {loading ? (
-              <ActivityIndicator
-                size="small"
-                color={textColor}
-                style={styles.icon}
+          <View>
+            {badgeCount ? (
+              <Badge
+                style={[styles.badge, badgeLocation]}
+                color={badgeColor}
+                count={badgeCount}
               />
             ) : null}
-            <Text
-              numberOfLines={1}
-              style={[
-                styles.label,
-                compact && styles.compactLabel,
-                textStyle,
-                { fontFamily },
-              ]}
-            >
-              {React.Children.map(
-                children,
-                child =>
-                  typeof child === 'string' ? child.toUpperCase() : child
-              )}
-            </Text>
+            <View style={styles.content}>
+              {icon && loading !== true ? (
+                <View style={styles.icon}>
+                  <Icon source={icon} size={16} color={textColor} />
+                </View>
+              ) : null}
+              {loading ? (
+                <ActivityIndicator
+                  size="small"
+                  color={textColor}
+                  style={styles.icon}
+                />
+              ) : null}
+              <Text
+                numberOfLines={1}
+                style={[
+                  styles.label,
+                  compact && styles.compactLabel,
+                  textStyle,
+                  { fontFamily },
+                ]}
+              >
+                {React.Children.map(
+                  children,
+                  child =>
+                    typeof child === 'string' ? child.toUpperCase() : child
+                )}
+              </Text>
+            </View>
           </View>
         </TouchableRipple>
       </AnimatedSurface>
@@ -286,6 +332,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  badge: {
+    position: 'absolute',
   },
   icon: {
     width: 16,
