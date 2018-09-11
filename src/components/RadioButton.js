@@ -84,7 +84,7 @@ type Props = {
  *         />
  *         <RadioButton
  *           value="second"
- *           checked={checked === 'second' && 'unchecked'}
+ *           status={checked === 'second' && 'checked'}
  *           onPress={() => { this.setState({ checked: 'second' }); }}
  *         />
  *       </View>
