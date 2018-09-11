@@ -79,12 +79,12 @@ type Props = {
  *       <View>
  *         <RadioButton
  *           value="first"
- *           status={checked === 'first' && 'checked'}
+ *           status={checked === 'first' ? 'checked' : 'unchecked'}
  *           onPress={() => { this.setState({ checked: 'first' }); }}
  *         />
  *         <RadioButton
  *           value="second"
- *           status={checked === 'second' && 'checked'}
+ *           status={checked === 'second' ? 'checked' : 'unchecked'}
  *           onPress={() => { this.setState({ checked: 'second' }); }}
  *         />
  *       </View>
