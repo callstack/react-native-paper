@@ -430,9 +430,15 @@ class TextInput extends React.Component<Props, State> {
       };
     }
 
+    const { fontSize, ...viewStyle } = StyleSheet.flatten(style) || {};
+
+    const minimizedFontSize = fontSize
+      ? fontSize - (MAXIMIZED_LABEL_FONT_SIZE - MINIMIZED_LABEL_FONT_SIZE)
+      : MINIMIZED_LABEL_FONT_SIZE;
+
     const labelStyle = {
       fontFamily,
-      fontSize: MAXIMIZED_LABEL_FONT_SIZE,
+      fontSize: fontSize || MAXIMIZED_LABEL_FONT_SIZE,
       transform: [
         {
           // Wiggle the label when there's an error
@@ -461,10 +467,7 @@ class TextInput extends React.Component<Props, State> {
           // Make label smaller
           scale: this.state.labeled.interpolate({
             inputRange: [0, 1],
-            outputRange: [
-              MINIMIZED_LABEL_FONT_SIZE / MAXIMIZED_LABEL_FONT_SIZE,
-              1,
-            ],
+            outputRange: [minimizedFontSize / MAXIMIZED_LABEL_FONT_SIZE, 1],
           }),
         },
         {
@@ -472,7 +475,7 @@ class TextInput extends React.Component<Props, State> {
           translateX: this.state.labeled.interpolate({
             inputRange: [0, 1],
             outputRange: [
-              -(1 - MINIMIZED_LABEL_FONT_SIZE / MAXIMIZED_LABEL_FONT_SIZE) *
+              -(1 - minimizedFontSize / MAXIMIZED_LABEL_FONT_SIZE) *
                 (this.state.labelLayout.width / 2),
               0,
             ],
@@ -482,7 +485,7 @@ class TextInput extends React.Component<Props, State> {
     };
 
     return (
-      <View style={[containerStyle, style]}>
+      <View style={[containerStyle, viewStyle]}>
         {mode === 'outlined' ? (
           // Render the outline separately from the container
           // This is so that the label can overlap the outline
@@ -511,7 +514,7 @@ class TextInput extends React.Component<Props, State> {
               {
                 backgroundColor,
                 fontFamily,
-                fontSize: MINIMIZED_LABEL_FONT_SIZE,
+                fontSize: fontSize || MINIMIZED_LABEL_FONT_SIZE,
                 // Hide the background when scale will be 0
                 // There's a bug in RN which makes scale: 0 act weird
                 opacity: this.state.labeled.interpolate({
@@ -592,6 +595,7 @@ class TextInput extends React.Component<Props, State> {
                     inputRange: [0, 1],
                     outputRange: [hasActiveOutline ? 1 : 0, 0],
                   }),
+                  fontSize,
                 },
               ]}
               numberOfLines={1}

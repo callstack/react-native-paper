@@ -18,6 +18,7 @@ type State = {
   text: string,
   name: string,
   outlinedText: string,
+  customFontSizeText: string,
 };
 
 class TextInputExample extends React.Component<Props, State> {
@@ -27,6 +28,7 @@ class TextInputExample extends React.Component<Props, State> {
     text: '',
     name: '',
     outlinedText: '',
+    customFontSizeText: '',
   };
 
   _isUsernameValid = () => /^[a-zA-Z]*$/.test(this.state.name);
@@ -75,6 +77,25 @@ class TextInputExample extends React.Component<Props, State> {
             style={styles.inputContainerStyle}
             label="Disabled outlined input"
           />
+          <TextInput
+            style={[styles.inputContainerStyle, styles.fontSize]}
+            label="Custom Font Size Input"
+            placeholder="Type something"
+            value={this.state.customFontSizeText}
+            onChangeText={customFontSizeText =>
+              this.setState({ customFontSizeText })
+            }
+          />
+          <TextInput
+            mode="outlined"
+            style={[styles.inputContainerStyle, styles.fontSize]}
+            label="Custom Font Size Outlined Input"
+            placeholder="Type something"
+            value={this.state.customFontSizeText}
+            onChangeText={customFontSizeText =>
+              this.setState({ customFontSizeText })
+            }
+          />
           <View style={styles.inputContainerStyle}>
             <TextInput
               label="Input with helper text"
@@ -103,6 +124,9 @@ const styles = StyleSheet.create({
   },
   inputContainerStyle: {
     margin: 8,
+  },
+  fontSize: {
+    fontSize: 18,
   },
 });
 
