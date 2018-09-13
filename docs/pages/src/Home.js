@@ -21,7 +21,7 @@ export default class Home extends React.Component<{}> {
           />
           <p>Cross-platform Material Design for React Native</p>
           <div {...styles(buttons)}>
-            <Link {...styles(button, primary)} to="getting-started.html">
+            <Link {...styles(button, primary)} to="getting-started">
               Get started
             </Link>
             <a
