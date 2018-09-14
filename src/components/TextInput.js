@@ -73,6 +73,9 @@ type Props = {
    * Callback that is called when the text input is blurred.
    */
   onBlur?: () => mixed,
+  render: <T: React.ElementProps<NativeTextInput>>(
+    props: T
+  ) => React.Element<T>,
   /**
    * Value of the text input.
    */
@@ -149,6 +152,7 @@ class TextInput extends React.Component<Props, State> {
     disabled: false,
     error: false,
     multiline: false,
+    render: props => <NativeTextInput {...props} />,
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -571,20 +575,20 @@ class TextInput extends React.Component<Props, State> {
           </View>
         ) : null}
 
-        <NativeTextInput
-          {...rest}
-          ref={c => {
+        {this.props.render({
+          ...rest,
+          ref: c => {
             this._root = c;
-          }}
-          onChangeText={this._handleChangeText}
-          placeholder={label ? this.state.placeholder : this.props.placeholder}
-          placeholderTextColor={placeholderColor}
-          editable={!disabled}
-          selectionColor={activeColor}
-          onFocus={this._handleFocus}
-          onBlur={this._handleBlur}
-          underlineColorAndroid="transparent"
-          style={[
+          },
+          onChangeText: this._handleChangeText,
+          placeholder: label ? this.state.placeholder : this.props.placeholder,
+          placeholderTextColor: placeholderColor,
+          editable: !disabled,
+          selectionColor: activeColor,
+          onFocus: this._handleFocus,
+          onBlur: this._handleBlur,
+          underlineColorAndroid: 'transparent',
+          style: [
             styles.input,
             mode === 'outlined'
               ? styles.inputOutlined
@@ -595,8 +599,8 @@ class TextInput extends React.Component<Props, State> {
               color: inputTextColor,
               fontFamily,
             },
-          ]}
-        />
+          ],
+        })}
       </View>
     );
   }
