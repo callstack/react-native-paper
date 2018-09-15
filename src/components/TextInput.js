@@ -73,6 +73,10 @@ type Props = {
    * Callback that is called when the text input is blurred.
    */
   onBlur?: () => mixed,
+  /**
+   * @optional
+   * Custom render function to replace rendering native TextInput.
+   */
   render: <T: React.ElementProps<NativeTextInput>>(
     props: T
   ) => React.Element<T>,
