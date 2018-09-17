@@ -24,6 +24,22 @@ const LABEL_WIGGLE_X_OFFSET = 4;
 const FOCUS_ANIMATION_DURATION = 150;
 const BLUR_ANIMATION_DURATION = 180;
 
+type RenderProps = {
+  ref: NativeTextInput => void,
+  onChangeText: string => void,
+  placeholder: ?string,
+  placeholderTextColor: string,
+  editable?: boolean,
+  selectionColor: string,
+  onFocus: () => mixed,
+  onBlur: () => mixed,
+  underlineColorAndroid: string,
+  style: any,
+  multiline?: boolean,
+  numberOfLines?: number,
+  value?: string,
+};
+
 type Props = {
   /**
    * Mode of the TextInput.
@@ -74,12 +90,22 @@ type Props = {
    */
   onBlur?: () => mixed,
   /**
-   * @optional
+   *
    * Custom render function to replace rendering native TextInput.
+   * Example:
+   * ```js
+   * <TextInput
+   *   label="Phone number"
+   *   render={props =>
+   *     <TextInputMask
+   *       {...props}
+   *       mask="+[00] [000] [000] [000]"
+   *     />
+   *   }
+   * />
+   * ```
    */
-  render: <T: React.ElementProps<NativeTextInput>>(
-    props: T
-  ) => React.Element<T>,
+  render: (props: RenderProps) => React.Node,
   /**
    * Value of the text input.
    */
@@ -347,6 +373,7 @@ class TextInput extends React.Component<Props, State> {
       underlineColor,
       style,
       theme,
+      render,
       ...rest
     } = this.props;
 
@@ -579,7 +606,7 @@ class TextInput extends React.Component<Props, State> {
           </View>
         ) : null}
 
-        {this.props.render({
+        {render({
           ...rest,
           ref: c => {
             this._root = c;
