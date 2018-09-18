@@ -239,7 +239,12 @@ class Button extends React.Component<Props, State> {
           rippleColor={rippleColor}
           style={touchableStyle}
         >
-          <View style={styles.content}>
+          <View
+            style={[
+              styles.content,
+              { height: style && style.height ? style.height : 'auto' },
+            ]}
+          >
             {icon && loading !== true ? (
               <View style={styles.icon}>
                 <Icon source={icon} size={16} color={textColor} />
