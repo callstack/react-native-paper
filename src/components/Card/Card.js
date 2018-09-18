@@ -122,7 +122,6 @@ class Card extends React.Component<Props, State> {
           onPress={onPress}
           onPressIn={onPress ? this._handlePressIn : undefined}
           onPressOut={onPress ? this._handlePressOut : undefined}
-          style={styles.container}
         >
           <View style={styles.innerContainer}>
             {React.Children.map(
@@ -144,9 +143,6 @@ class Card extends React.Component<Props, State> {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   innerContainer: {
     flexGrow: 1,
   },
