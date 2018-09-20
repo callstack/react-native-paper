@@ -15,7 +15,7 @@ The core team works directly on GitHub and all work is public.
 1. Fork the repo and create your branch from `master` (a guide on [how to fork a repository](https://help.github.com/articles/fork-a-repo/)).
 2. Run `yarn bootstrap` to setup the developement environment.
 3. Go to the `docs` directory and run `npm i`.
-3. Do the changes you want and test them out in the example app before sending a pull request.
+4. Do the changes you want and test them out in the example app before sending a pull request.
 
 ### Commit message convention
 
