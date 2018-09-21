@@ -20,9 +20,9 @@ type Props = {
   dark?: boolean,
   /**
    * Extra padding to add at the top of header to account for translucent status bar.
-   * This is automatically handled on iOS including iPhone X.
-   * If you are using Android and use Expo, we assume translucent status bar and set a height for status bar automatically.
-   * Pass `0` or a custom value to disable the default behaviour.
+   * This is automatically handled on iOS >= 11 including iPhone X using `SafeAreaView`.
+   * If you are using Expo, we assume translucent status bar and set a height for status bar automatically.
+   * Pass `0` or a custom value to disable the default behaviour, and customize the height.
    */
   statusBarHeight?: number,
   /**
@@ -44,9 +44,7 @@ const DEFAULT_STATUSBAR_HEIGHT = Platform.select({
   android: DEFAULT_STATUSBAR_HEIGHT_EXPO,
   ios:
     Platform.Version < 11
-      ? DEFAULT_STATUSBAR_HEIGHT_EXPO === undefined
-        ? StatusBar.currentHeight
-        : DEFAULT_STATUSBAR_HEIGHT_EXPO
+      ? DEFAULT_STATUSBAR_HEIGHT_EXPO
       : undefined,
 });
 
