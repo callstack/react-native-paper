@@ -24,6 +24,22 @@ const LABEL_WIGGLE_X_OFFSET = 4;
 const FOCUS_ANIMATION_DURATION = 150;
 const BLUR_ANIMATION_DURATION = 180;
 
+type RenderProps = {
+  ref: NativeTextInput => void,
+  onChangeText: string => void,
+  placeholder: ?string,
+  placeholderTextColor: string,
+  editable?: boolean,
+  selectionColor: string,
+  onFocus: () => mixed,
+  onBlur: () => mixed,
+  underlineColorAndroid: string,
+  style: any,
+  multiline?: boolean,
+  numberOfLines?: number,
+  value?: string,
+};
+
 type Props = {
   /**
    * Mode of the TextInput.
@@ -73,6 +89,23 @@ type Props = {
    * Callback that is called when the text input is blurred.
    */
   onBlur?: () => mixed,
+  /**
+   *
+   * Custom render function to replace rendering native TextInput.
+   * Example:
+   * ```js
+   * <TextInput
+   *   label="Phone number"
+   *   render={props =>
+   *     <TextInputMask
+   *       {...props}
+   *       mask="+[00] [000] [000] [000]"
+   *     />
+   *   }
+   * />
+   * ```
+   */
+  render: (props: RenderProps) => React.Node,
   /**
    * Value of the text input.
    */
@@ -149,6 +182,7 @@ class TextInput extends React.Component<Props, State> {
     disabled: false,
     error: false,
     multiline: false,
+    render: props => <NativeTextInput {...props} />,
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -339,6 +373,7 @@ class TextInput extends React.Component<Props, State> {
       underlineColor,
       style,
       theme,
+      render,
       ...rest
     } = this.props;
 
@@ -571,20 +606,20 @@ class TextInput extends React.Component<Props, State> {
           </View>
         ) : null}
 
-        <NativeTextInput
-          {...rest}
-          ref={c => {
+        {render({
+          ...rest,
+          ref: c => {
             this._root = c;
-          }}
-          onChangeText={this._handleChangeText}
-          placeholder={label ? this.state.placeholder : this.props.placeholder}
-          placeholderTextColor={placeholderColor}
-          editable={!disabled}
-          selectionColor={activeColor}
-          onFocus={this._handleFocus}
-          onBlur={this._handleBlur}
-          underlineColorAndroid="transparent"
-          style={[
+          },
+          onChangeText: this._handleChangeText,
+          placeholder: label ? this.state.placeholder : this.props.placeholder,
+          placeholderTextColor: placeholderColor,
+          editable: !disabled,
+          selectionColor: activeColor,
+          onFocus: this._handleFocus,
+          onBlur: this._handleBlur,
+          underlineColorAndroid: 'transparent',
+          style: [
             styles.input,
             mode === 'outlined'
               ? styles.inputOutlined
@@ -595,8 +630,8 @@ class TextInput extends React.Component<Props, State> {
               color: inputTextColor,
               fontFamily,
             },
-          ]}
-        />
+          ],
+        })}
       </View>
     );
   }
