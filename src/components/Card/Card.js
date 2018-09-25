@@ -22,6 +22,10 @@ type Props = {
    */
   elevation?: number,
   /**
+   * Function to execute on long press.
+   */
+  onLongPress?: () => mixed,
+  /**
    * Function to execute on press.
    */
   onPress?: () => mixed,
@@ -103,7 +107,7 @@ class Card extends React.Component<Props, State> {
   };
 
   render() {
-    const { children, onPress, style, theme } = this.props;
+    const { children, onLongPress, onPress, style, theme } = this.props;
     const { elevation } = this.state;
     const { roundness } = theme;
     const total = React.Children.count(children);
@@ -118,7 +122,8 @@ class Card extends React.Component<Props, State> {
       <AnimatedSurface style={[{ borderRadius: roundness, elevation }, style]}>
         <TouchableWithoutFeedback
           delayPressIn={0}
-          disabled={!onPress}
+          disabled={!(onPress || onLongPress)}
+          onLongPress={onLongPress}
           onPress={onPress}
           onPressIn={onPress ? this._handlePressIn : undefined}
           onPressOut={onPress ? this._handlePressOut : undefined}
