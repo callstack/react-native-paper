@@ -18,8 +18,6 @@ import { black, white } from '../styles/colors';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
-const AnimatedSurface = Animated.createAnimatedComponent(Surface);
-
 type Props = {
   /**
    * Mode of the chip.
@@ -184,7 +182,7 @@ class Chip extends React.Component<Props, State> {
     }
 
     return (
-      <AnimatedSurface
+      <Surface
         style={[
           styles.container,
           {
@@ -266,7 +264,7 @@ class Chip extends React.Component<Props, State> {
             ) : null}
           </View>
         </TouchableRipple>
-      </AnimatedSurface>
+      </Surface>
     );
   }
 }

@@ -22,7 +22,6 @@ import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
-const AnimatedSurface = Animated.createAnimatedComponent(Surface);
 
 type Route = $Shape<{
   key: string,
@@ -571,7 +570,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
             );
           })}
         </View>
-        <AnimatedSurface style={[styles.bar, barStyle, { backgroundColor }]}>
+        <Surface style={[styles.bar, barStyle, { backgroundColor }]}>
           <SafeAreaView
             style={[styles.items, { maxWidth: maxTabWidth * routes.length }]}
           >
@@ -774,7 +773,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
               );
             })}
           </SafeAreaView>
-        </AnimatedSurface>
+        </Surface>
       </View>
     );
   }

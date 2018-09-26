@@ -12,8 +12,6 @@ import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
-const AnimatedSurface = Animated.createAnimatedComponent(Surface);
-
 type Props = {
   /**
    * Mode of the button. You can change the mode to adjust the styling to give it desired emphasis.
@@ -214,7 +212,7 @@ class Button extends React.Component<Props, State> {
     const elevation = disabled ? 0 : this.state.elevation;
 
     return (
-      <AnimatedSurface
+      <Surface
         {...rest}
         style={[
           styles.button,
@@ -269,7 +267,7 @@ class Button extends React.Component<Props, State> {
             </Text>
           </View>
         </TouchableRipple>
-      </AnimatedSurface>
+      </Surface>
     );
   }
 }
