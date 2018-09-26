@@ -1,13 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import {
-  View,
-  Platform,
-  StatusBar,
-  SafeAreaView,
-  StyleSheet,
-} from 'react-native';
+import { View, Platform, SafeAreaView, StyleSheet } from 'react-native';
 
 import Appbar, { DEFAULT_APPBAR_HEIGHT } from './Appbar';
 import { withTheme } from '../../core/theming';
@@ -42,10 +36,7 @@ const DEFAULT_STATUSBAR_HEIGHT_EXPO =
     : undefined;
 const DEFAULT_STATUSBAR_HEIGHT = Platform.select({
   android: DEFAULT_STATUSBAR_HEIGHT_EXPO,
-  ios:
-    Platform.Version < 11
-      ? DEFAULT_STATUSBAR_HEIGHT_EXPO
-      : undefined,
+  ios: Platform.Version < 11 ? DEFAULT_STATUSBAR_HEIGHT_EXPO : undefined,
 });
 
 /**
