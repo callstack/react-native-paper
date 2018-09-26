@@ -1,10 +1,9 @@
 /* @flow */
 
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 import shadow from '../styles/shadow';
 import { withTheme } from '../core/theming';
-import * as Colors from '../styles/colors';
 import type { Theme } from '../types';
 
 type Props = {
@@ -62,10 +61,9 @@ class Surface extends React.Component<Props> {
     const { elevation } = flattenedStyles;
 
     return (
-      <View
+      <Animated.View
         {...rest}
         style={[
-          styles.surface,
           { backgroundColor: theme.colors.surface },
           elevation && shadow(elevation),
           style,
@@ -76,9 +74,3 @@ class Surface extends React.Component<Props> {
 }
 
 export default withTheme(Surface);
-
-const styles = StyleSheet.create({
-  surface: {
-    backgroundColor: Colors.white,
-  },
-});

@@ -3,24 +3,22 @@
 exports[`renders button with color 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
+    Object {
+      "backgroundColor": "transparent",
+      "borderColor": "transparent",
+      "borderRadius": 4,
+      "borderStyle": "solid",
+      "borderWidth": 0,
+      "elevation": 0,
+      "minWidth": 88,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": NaN,
+        "width": 0,
       },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      0,
-      Object {
-        "backgroundColor": "transparent",
-        "borderColor": "transparent",
-        "borderRadius": 4,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "elevation": 0,
-        "minWidth": 88,
-      },
-    ]
+      "shadowOpacity": 0.24,
+      "shadowRadius": 0,
+    }
   }
 >
   <View
@@ -114,24 +112,22 @@ exports[`renders button with color 1`] = `
 exports[`renders button with icon 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
+    Object {
+      "backgroundColor": "transparent",
+      "borderColor": "transparent",
+      "borderRadius": 4,
+      "borderStyle": "solid",
+      "borderWidth": 0,
+      "elevation": 0,
+      "minWidth": 88,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": NaN,
+        "width": 0,
       },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      0,
-      Object {
-        "backgroundColor": "transparent",
-        "borderColor": "transparent",
-        "borderRadius": 4,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "elevation": 0,
-        "minWidth": 88,
-      },
-    ]
+      "shadowOpacity": 0.24,
+      "shadowRadius": 0,
+    }
   }
 >
   <View
@@ -270,32 +266,22 @@ exports[`renders button with icon 1`] = `
 exports[`renders contained contained with mode 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
+    Object {
+      "backgroundColor": "#6200ee",
+      "borderColor": "transparent",
+      "borderRadius": 4,
+      "borderStyle": "solid",
+      "borderWidth": 0,
+      "elevation": 2,
+      "minWidth": 88,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": NaN,
+        "width": 0,
       },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      Object {
-        "shadowColor": "#000000",
-        "shadowOffset": Object {
-          "height": 0.75,
-          "width": 0,
-        },
-        "shadowOpacity": 0.24,
-        "shadowRadius": 1.5,
-      },
-      Object {
-        "backgroundColor": "#6200ee",
-        "borderColor": "transparent",
-        "borderRadius": 4,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "elevation": 2,
-        "minWidth": 88,
-      },
-    ]
+      "shadowOpacity": 0.24,
+      "shadowRadius": 2,
+    }
   }
 >
   <View
@@ -389,24 +375,15 @@ exports[`renders contained contained with mode 1`] = `
 exports[`renders disabled button 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      0,
-      Object {
-        "backgroundColor": "transparent",
-        "borderColor": "transparent",
-        "borderRadius": 4,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "elevation": 0,
-        "minWidth": 88,
-      },
-    ]
+    Object {
+      "backgroundColor": "transparent",
+      "borderColor": "transparent",
+      "borderRadius": 4,
+      "borderStyle": "solid",
+      "borderWidth": 0,
+      "elevation": 0,
+      "minWidth": 88,
+    }
   }
 >
   <View
@@ -505,24 +482,22 @@ exports[`renders disabled button 1`] = `
 exports[`renders loading button 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
+    Object {
+      "backgroundColor": "transparent",
+      "borderColor": "transparent",
+      "borderRadius": 4,
+      "borderStyle": "solid",
+      "borderWidth": 0,
+      "elevation": 0,
+      "minWidth": 88,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": NaN,
+        "width": 0,
       },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      0,
-      Object {
-        "backgroundColor": "transparent",
-        "borderColor": "transparent",
-        "borderRadius": 4,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "elevation": 0,
-        "minWidth": 88,
-      },
-    ]
+      "shadowOpacity": 0.24,
+      "shadowRadius": 0,
+    }
   }
 >
   <View
@@ -629,24 +604,22 @@ exports[`renders loading button 1`] = `
 exports[`renders outlined button with mode 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
+    Object {
+      "backgroundColor": "transparent",
+      "borderColor": "rgba(0, 0, 0, 0.29)",
+      "borderRadius": 4,
+      "borderStyle": "solid",
+      "borderWidth": 0.5,
+      "elevation": 0,
+      "minWidth": 88,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": NaN,
+        "width": 0,
       },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      0,
-      Object {
-        "backgroundColor": "transparent",
-        "borderColor": "rgba(0, 0, 0, 0.29)",
-        "borderRadius": 4,
-        "borderStyle": "solid",
-        "borderWidth": 0.5,
-        "elevation": 0,
-        "minWidth": 88,
-      },
-    ]
+      "shadowOpacity": 0.24,
+      "shadowRadius": 0,
+    }
   }
 >
   <View
@@ -740,24 +713,22 @@ exports[`renders outlined button with mode 1`] = `
 exports[`renders text button by default 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
+    Object {
+      "backgroundColor": "transparent",
+      "borderColor": "transparent",
+      "borderRadius": 4,
+      "borderStyle": "solid",
+      "borderWidth": 0,
+      "elevation": 0,
+      "minWidth": 88,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": NaN,
+        "width": 0,
       },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      0,
-      Object {
-        "backgroundColor": "transparent",
-        "borderColor": "transparent",
-        "borderRadius": 4,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "elevation": 0,
-        "minWidth": 88,
-      },
-    ]
+      "shadowOpacity": 0.24,
+      "shadowRadius": 0,
+    }
   }
 >
   <View
@@ -851,24 +822,22 @@ exports[`renders text button by default 1`] = `
 exports[`renders text button with mode 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
+    Object {
+      "backgroundColor": "transparent",
+      "borderColor": "transparent",
+      "borderRadius": 4,
+      "borderStyle": "solid",
+      "borderWidth": 0,
+      "elevation": 0,
+      "minWidth": 88,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": NaN,
+        "width": 0,
       },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      0,
-      Object {
-        "backgroundColor": "transparent",
-        "borderColor": "transparent",
-        "borderRadius": 4,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "elevation": 0,
-        "minWidth": 88,
-      },
-    ]
+      "shadowOpacity": 0.24,
+      "shadowRadius": 0,
+    }
   }
 >
   <View

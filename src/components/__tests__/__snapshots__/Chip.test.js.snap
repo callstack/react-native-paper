@@ -3,23 +3,14 @@
 exports[`renders chip with icon 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      0,
-      Object {
-        "backgroundColor": "#ebebeb",
-        "borderColor": "#ebebeb",
-        "borderRadius": 16,
-        "borderStyle": "solid",
-        "borderWidth": 0.5,
-        "elevation": 0,
-      },
-    ]
+    Object {
+      "backgroundColor": "#ebebeb",
+      "borderColor": "#ebebeb",
+      "borderRadius": 16,
+      "borderStyle": "solid",
+      "borderWidth": 0.5,
+      "elevation": 0,
+    }
   }
 >
   <View
@@ -160,23 +151,14 @@ exports[`renders chip with icon 1`] = `
 exports[`renders chip with onPress 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      0,
-      Object {
-        "backgroundColor": "#ebebeb",
-        "borderColor": "#ebebeb",
-        "borderRadius": 16,
-        "borderStyle": "solid",
-        "borderWidth": 0.5,
-        "elevation": 0,
-      },
-    ]
+    Object {
+      "backgroundColor": "#ebebeb",
+      "borderColor": "#ebebeb",
+      "borderRadius": 16,
+      "borderStyle": "solid",
+      "borderWidth": 0.5,
+      "elevation": 0,
+    }
   }
 >
   <View
@@ -271,23 +253,14 @@ exports[`renders chip with onPress 1`] = `
 exports[`renders deletable chip 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      0,
-      Object {
-        "backgroundColor": "#ebebeb",
-        "borderColor": "#ebebeb",
-        "borderRadius": 16,
-        "borderStyle": "solid",
-        "borderWidth": 0.5,
-        "elevation": 0,
-      },
-    ]
+    Object {
+      "backgroundColor": "#ebebeb",
+      "borderColor": "#ebebeb",
+      "borderRadius": 16,
+      "borderStyle": "solid",
+      "borderWidth": 0.5,
+      "elevation": 0,
+    }
   }
 >
   <View
@@ -428,23 +401,14 @@ exports[`renders deletable chip 1`] = `
 exports[`renders outlined disabled chip 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      0,
-      Object {
-        "backgroundColor": "#ffffff",
-        "borderColor": "rgba(0, 0, 0, 0.29)",
-        "borderRadius": 16,
-        "borderStyle": "solid",
-        "borderWidth": 0.5,
-        "elevation": 0,
-      },
-    ]
+    Object {
+      "backgroundColor": "#ffffff",
+      "borderColor": "rgba(0, 0, 0, 0.29)",
+      "borderRadius": 16,
+      "borderStyle": "solid",
+      "borderWidth": 0.5,
+      "elevation": 0,
+    }
   }
 >
   <View
@@ -540,23 +504,14 @@ exports[`renders outlined disabled chip 1`] = `
 exports[`renders selected chip 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      0,
-      Object {
-        "backgroundColor": "rgba(0, 0, 0, 0.24)",
-        "borderColor": "#ebebeb",
-        "borderRadius": 16,
-        "borderStyle": "solid",
-        "borderWidth": 0.5,
-        "elevation": 0,
-      },
-    ]
+    Object {
+      "backgroundColor": "rgba(0, 0, 0, 0.24)",
+      "borderColor": "#ebebeb",
+      "borderRadius": 16,
+      "borderStyle": "solid",
+      "borderWidth": 0.5,
+      "elevation": 0,
+    }
   }
 >
   <View
