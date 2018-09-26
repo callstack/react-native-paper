@@ -1,0 +1,276 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders disabled toggle button 1`] = `
+<View
+  accessibilityRole="button"
+  accessibilityStates={
+    Array [
+      "disabled",
+    ]
+  }
+  accessible={true}
+  hitSlop={
+    Object {
+      "bottom": 6,
+      "left": 6,
+      "right": 6,
+      "top": 6,
+    }
+  }
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderRadius": 18,
+        "height": 36,
+        "justifyContent": "center",
+        "margin": 6,
+        "width": 36,
+      },
+      Object {
+        "opacity": 0.32,
+      },
+      Array [
+        Object {
+          "borderRadius": 0,
+          "height": 42,
+          "margin": 0,
+          "width": 42,
+        },
+        Object {
+          "backgroundColor": "#6200ee",
+          "borderColor": "#f6f6f6",
+          "borderWidth": 0.5,
+        },
+      ],
+    ]
+  }
+>
+  <View
+    style={null}
+  >
+    <Text
+      accessibilityElementsHidden={true}
+      allowFontScaling={false}
+      importantForAccessibility="no-hide-descendants"
+      pointerEvents="none"
+      style={
+        Array [
+          Object {
+            "color": "rgba(255, 255, 255, 0.32)",
+            "fontSize": 24,
+          },
+          Array [
+            Object {
+              "transform": Array [
+                Object {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
+          Object {
+            "fontFamily": "Material Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          Object {},
+        ]
+      }
+    >
+      
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`renders toggle button 1`] = `
+<View
+  accessibilityRole="button"
+  accessible={true}
+  hitSlop={
+    Object {
+      "bottom": 6,
+      "left": 6,
+      "right": 6,
+      "top": 6,
+    }
+  }
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderRadius": 18,
+        "height": 36,
+        "justifyContent": "center",
+        "margin": 6,
+        "width": 36,
+      },
+      undefined,
+      Array [
+        Object {
+          "borderRadius": 0,
+          "height": 42,
+          "margin": 0,
+          "width": 42,
+        },
+        Object {
+          "backgroundColor": "#6200ee",
+          "borderColor": "#f6f6f6",
+          "borderWidth": 0.5,
+        },
+      ],
+    ]
+  }
+>
+  <View
+    style={null}
+  >
+    <Text
+      accessibilityElementsHidden={true}
+      allowFontScaling={false}
+      importantForAccessibility="no-hide-descendants"
+      pointerEvents="none"
+      style={
+        Array [
+          Object {
+            "color": "#ffffff",
+            "fontSize": 24,
+          },
+          Array [
+            Object {
+              "transform": Array [
+                Object {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
+          Object {
+            "fontFamily": "Material Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          Object {},
+        ]
+      }
+    >
+      
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`renders unchecked toggle button 1`] = `
+<View
+  accessibilityRole="button"
+  accessibilityStates={
+    Array [
+      "disabled",
+    ]
+  }
+  accessible={true}
+  hitSlop={
+    Object {
+      "bottom": 6,
+      "left": 6,
+      "right": 6,
+      "top": 6,
+    }
+  }
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderRadius": 18,
+        "height": 36,
+        "justifyContent": "center",
+        "margin": 6,
+        "width": 36,
+      },
+      Object {
+        "opacity": 0.32,
+      },
+      Array [
+        Object {
+          "borderRadius": 0,
+          "height": 42,
+          "margin": 0,
+          "width": 42,
+        },
+        Object {
+          "backgroundColor": "#f6f6f6",
+          "borderColor": "#f6f6f6",
+          "borderWidth": 0.5,
+        },
+      ],
+    ]
+  }
+>
+  <View
+    style={null}
+  >
+    <Text
+      accessibilityElementsHidden={true}
+      allowFontScaling={false}
+      importantForAccessibility="no-hide-descendants"
+      pointerEvents="none"
+      style={
+        Array [
+          Object {
+            "color": "rgba(0, 0, 0, 0.32)",
+            "fontSize": 24,
+          },
+          Array [
+            Object {
+              "transform": Array [
+                Object {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
+          Object {
+            "fontFamily": "Material Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          Object {},
+        ]
+      }
+    >
+      
+    </Text>
+  </View>
+</View>
+`;
