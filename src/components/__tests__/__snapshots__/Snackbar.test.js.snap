@@ -244,7 +244,7 @@ exports[`renders snackbar with action button 1`] = `
             "elevation": 0,
             "marginHorizontal": 8,
             "marginVertical": 6,
-            "minWidth": 64,
+            "minWidth": "auto",
             "shadowColor": "#000000",
             "shadowOffset": Object {
               "height": NaN,
