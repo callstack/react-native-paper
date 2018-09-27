@@ -3,29 +3,17 @@
 exports[`renders hidden banner, without action buttons and without image 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
+    Object {
+      "backgroundColor": "#ffffff",
+      "elevation": 1,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0.5,
+        "width": 0,
       },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      Object {
-        "shadowColor": "#000000",
-        "shadowOffset": Object {
-          "height": 0.5,
-          "width": 0,
-        },
-        "shadowOpacity": 0.24,
-        "shadowRadius": 0.75,
-      },
-      Array [
-        Object {
-          "elevation": 1,
-        },
-        undefined,
-      ],
-    ]
+      "shadowOpacity": 0.24,
+      "shadowRadius": 0.75,
+    }
   }
   visible={false}
 >
@@ -123,29 +111,17 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
 exports[`renders visible banner, with action buttons and with image 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
+    Object {
+      "backgroundColor": "#ffffff",
+      "elevation": 1,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0.5,
+        "width": 0,
       },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      Object {
-        "shadowColor": "#000000",
-        "shadowOffset": Object {
-          "height": 0.5,
-          "width": 0,
-        },
-        "shadowOpacity": 0.24,
-        "shadowRadius": 0.75,
-      },
-      Array [
-        Object {
-          "elevation": 1,
-        },
-        undefined,
-      ],
-    ]
+      "shadowOpacity": 0.24,
+      "shadowRadius": 0.75,
+    }
   }
   visible={true}
 >
@@ -248,25 +224,23 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
-              "backgroundColor": "#ffffff",
+          Object {
+            "backgroundColor": "transparent",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderStyle": "solid",
+            "borderWidth": 0,
+            "elevation": 0,
+            "margin": 4,
+            "minWidth": 64,
+            "shadowColor": "#000000",
+            "shadowOffset": Object {
+              "height": NaN,
+              "width": 0,
             },
-            Object {
-              "backgroundColor": "#ffffff",
-            },
-            0,
-            Object {
-              "backgroundColor": "transparent",
-              "borderColor": "transparent",
-              "borderRadius": 4,
-              "borderStyle": "solid",
-              "borderWidth": 0,
-              "elevation": 0,
-              "margin": 4,
-              "minWidth": 64,
-            },
-          ]
+            "shadowOpacity": 0.24,
+            "shadowRadius": 0,
+          }
         }
       >
         <View
@@ -365,29 +339,17 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
 exports[`renders visible banner, with action buttons and without image 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
+    Object {
+      "backgroundColor": "#ffffff",
+      "elevation": 1,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0.5,
+        "width": 0,
       },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      Object {
-        "shadowColor": "#000000",
-        "shadowOffset": Object {
-          "height": 0.5,
-          "width": 0,
-        },
-        "shadowOpacity": 0.24,
-        "shadowRadius": 0.75,
-      },
-      Array [
-        Object {
-          "elevation": 1,
-        },
-        undefined,
-      ],
-    ]
+      "shadowOpacity": 0.24,
+      "shadowRadius": 0.75,
+    }
   }
   visible={true}
 >
@@ -469,25 +431,23 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
-              "backgroundColor": "#ffffff",
+          Object {
+            "backgroundColor": "transparent",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderStyle": "solid",
+            "borderWidth": 0,
+            "elevation": 0,
+            "margin": 4,
+            "minWidth": 64,
+            "shadowColor": "#000000",
+            "shadowOffset": Object {
+              "height": NaN,
+              "width": 0,
             },
-            Object {
-              "backgroundColor": "#ffffff",
-            },
-            0,
-            Object {
-              "backgroundColor": "transparent",
-              "borderColor": "transparent",
-              "borderRadius": 4,
-              "borderStyle": "solid",
-              "borderWidth": 0,
-              "elevation": 0,
-              "margin": 4,
-              "minWidth": 64,
-            },
-          ]
+            "shadowOpacity": 0.24,
+            "shadowRadius": 0,
+          }
         }
       >
         <View
@@ -580,25 +540,23 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
       </View>
       <View
         style={
-          Array [
-            Object {
-              "backgroundColor": "#ffffff",
+          Object {
+            "backgroundColor": "transparent",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderStyle": "solid",
+            "borderWidth": 0,
+            "elevation": 0,
+            "margin": 4,
+            "minWidth": 64,
+            "shadowColor": "#000000",
+            "shadowOffset": Object {
+              "height": NaN,
+              "width": 0,
             },
-            Object {
-              "backgroundColor": "#ffffff",
-            },
-            0,
-            Object {
-              "backgroundColor": "transparent",
-              "borderColor": "transparent",
-              "borderRadius": 4,
-              "borderStyle": "solid",
-              "borderWidth": 0,
-              "elevation": 0,
-              "margin": 4,
-              "minWidth": 64,
-            },
-          ]
+            "shadowOpacity": 0.24,
+            "shadowRadius": 0,
+          }
         }
       >
         <View
@@ -697,29 +655,17 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
 exports[`renders visible banner, without action buttons and with image 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
+    Object {
+      "backgroundColor": "#ffffff",
+      "elevation": 1,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0.5,
+        "width": 0,
       },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      Object {
-        "shadowColor": "#000000",
-        "shadowOffset": Object {
-          "height": 0.5,
-          "width": 0,
-        },
-        "shadowOpacity": 0.24,
-        "shadowRadius": 0.75,
-      },
-      Array [
-        Object {
-          "elevation": 1,
-        },
-        undefined,
-      ],
-    ]
+      "shadowOpacity": 0.24,
+      "shadowRadius": 0.75,
+    }
   }
   visible={true}
 >
@@ -827,29 +773,17 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
 exports[`renders visible banner, without action buttons and without image 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
+    Object {
+      "backgroundColor": "#ffffff",
+      "elevation": 1,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0.5,
+        "width": 0,
       },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      Object {
-        "shadowColor": "#000000",
-        "shadowOffset": Object {
-          "height": 0.5,
-          "width": 0,
-        },
-        "shadowOpacity": 0.24,
-        "shadowRadius": 0.75,
-      },
-      Array [
-        Object {
-          "elevation": 1,
-        },
-        undefined,
-      ],
-    ]
+      "shadowOpacity": 0.24,
+      "shadowRadius": 0.75,
+    }
   }
   visible={true}
 >
