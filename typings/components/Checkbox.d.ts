@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ThemeShape } from '..';
+import { ThemeShape } from '../types';
 
 export interface CheckboxProps {
   status: 'checked' | 'unchecked' | 'indeterminate';
@@ -10,7 +10,7 @@ export interface CheckboxProps {
   theme?: ThemeShape;
 }
 
-export class Checkbox extends React.Component<CheckboxProps> {
-  static Android: React.Component<CheckboxProps>;
-  static IOS: React.Component<CheckboxProps>;
+export declare class Checkbox extends React.Component<CheckboxProps> {
+  static Android: React.ComponentType<CheckboxProps>;
+  static IOS: React.ComponentType<CheckboxProps>;
 }

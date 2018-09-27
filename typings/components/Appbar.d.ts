@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { ThemeShape } from '..';
-import { IconSource } from './Icon';
+import { IconSource, ThemeShape } from '../types';
 
 export interface AppbarContentProps {
   color?: string;
@@ -12,8 +11,6 @@ export interface AppbarContentProps {
   theme?: ThemeShape;
 }
 
-class AppbarContent extends React.Component<AppbarContentProps> {}
-
 export interface AppbarActionProps {
   color?: string;
   icon: IconSource;
@@ -24,8 +21,6 @@ export interface AppbarActionProps {
   style?: any;
 }
 
-class AppbarAction extends React.Component<AppbarActionProps> {}
-
 export interface AppbarBackActionProps {
   color?: string;
   size?: number;
@@ -35,8 +30,6 @@ export interface AppbarBackActionProps {
   style?: any;
 }
 
-class AppbarBackAction extends React.Component<AppbarBackActionProps> {}
-
 export interface AppbarHeaderProps {
   dark?: boolean;
   statusBarHeight?: number;
@@ -45,8 +38,6 @@ export interface AppbarHeaderProps {
   theme?: ThemeShape;
 }
 
-class AppbarHeader extends React.Component<AppbarHeaderProps> {}
-
 export interface AppbarProps {
   dark?: boolean;
   children: React.ReactNode;
@@ -54,9 +45,9 @@ export interface AppbarProps {
   theme?: ThemeShape;
 }
 
-export class Appbar extends React.Component<AppbarProps> {
-  static Content: AppbarContent;
-  static Action: AppbarAction;
-  static BackAction: AppbarBackAction;
-  static Header: AppbarHeader;
+export declare class Appbar extends React.Component<AppbarProps> {
+  static Content: React.ComponentClass<AppbarContentProps>;
+  static Action: React.ComponentClass<AppbarActionProps>;
+  static BackAction: React.ComponentClass<AppbarBackActionProps>;
+  static Header: React.ComponentClass<AppbarHeaderProps>;
 }

@@ -1,30 +1,19 @@
 import * as React from 'react';
-import { ThemeShape } from '..';
+import { ThemeShape } from '../types';
 
 export interface CardContentProps {
-  index?: number;
-  total?: number;
-  sibling?: Array<string>;
   style?: any;
 }
-
-class CardContent extends React.Component<CardContentProps> {}
 
 export interface CardActionsProps {
   children: React.ReactNode;
   style?: any;
 }
 
-class CardAction extends React.Component<CardActionsProps> {}
-
 export interface CardCoverProps {
-  index?: number;
-  total?: number;
   style?: any;
   theme: ThemeShape;
 }
-
-class CardCover extends React.Component<CardCoverProps> {}
 
 export interface CardProps {
   elevation?: number;
@@ -34,8 +23,8 @@ export interface CardProps {
   theme?: ThemeShape;
 }
 
-export class Card extends React.Component<CardProps> {
-  static Content: CardContent;
-  static Actions: CardAction;
-  static Cover: CardCover;
+export declare class Card extends React.Component<CardProps> {
+  static Content: React.ComponentType<CardContentProps>;
+  static Actions: React.ComponentType<CardActionsProps>;
+  static Cover: React.ComponentType<CardCoverProps>;
 }

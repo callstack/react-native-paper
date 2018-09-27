@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ThemeShape } from '..';
+import { ThemeShape } from '../types';
 
 export interface SwitchProps {
   disabled?: boolean;
@@ -10,4 +10,4 @@ export interface SwitchProps {
   theme?: ThemeShape;
 }
 
-export class Switch extends React.Component<SwitchProps> {}
+export declare class Switch extends React.Component<SwitchProps> {}

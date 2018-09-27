@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { IconSource } from './Icon';
-import { ThemeShape } from '..';
+import { ThemeShape, IconSource } from '../types';
 
 export interface SearchbarProps {
   placeholder?: string;
@@ -12,4 +11,4 @@ export interface SearchbarProps {
   theme?: ThemeShape;
 }
 
-export class Searchbar extends React.Component<SearchbarProps> {}
+export declare class Searchbar extends React.Component<SearchbarProps> {}

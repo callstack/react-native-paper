@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ThemeShape } from '..';
+import { ThemeShape } from '../types';
 
 export interface TouchableRippleProps {
   borderless?: boolean;
@@ -13,4 +13,8 @@ export interface TouchableRippleProps {
   theme?: ThemeShape;
 }
 
-export class TouchableRipple extends React.Component<TouchableRippleProps> {}
+export declare class TouchableRipple extends React.Component<
+  TouchableRippleProps
+> {
+  static supported: boolean;
+}

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ThemeShape } from '..';
+import { ThemeShape } from '../types';
 
 export interface SurfaceProps {
   children: React.ReactNode;
@@ -7,4 +7,4 @@ export interface SurfaceProps {
   theme?: ThemeShape;
 }
 
-export class Surface extends React.Component<SurfaceProps> {}
+export declare class Surface extends React.Component<SurfaceProps> {}

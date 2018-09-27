@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { ThemeShape } from '..';
+import { ThemeShape } from '../types';
 
 export interface RadioButtonGroupProps {
-  onValueChange: (value: string) => mixed;
+  onValueChange: (value: string) => any;
   value: string;
   children: React.ReactNode;
 }
-
-class RadioButtonGroup extends React.Component<RadioButtonGroupProps> {}
 
 export interface RadioButtonProps {
   value: string;
@@ -19,8 +17,10 @@ export interface RadioButtonProps {
   theme?: ThemeShape;
 }
 
-export class RadioButton extends React.Component<RadioButtonProps> {
-  static Group: RadioButtonGroup;
-  static Android: React.Component<RadioButtonProps>;
-  static IOS: React.Component<RadioButtonProps>;
+export declare class RadioButton extends React.Component<RadioButtonProps> {
+  static Group: React.ComponentType<RadioButtonGroupProps>;
+  static Android: React.ComponentType<RadioButtonProps>;
+  static IOS: React.ComponentType<
+    Exclude<RadioButtonProps, { uncheckedColor?: string }>
+  >;
 }

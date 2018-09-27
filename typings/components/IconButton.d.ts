@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { IconSource } from './Icon';
-import { ThemeShape } from '..';
+import { ThemeShape, IconSource } from '../types';
 
 export interface IconButtonProps {
   icon: IconSource;
@@ -13,4 +12,4 @@ export interface IconButtonProps {
   theme?: ThemeShape;
 }
 
-export class IconButton extends React.Component<IconButtonProps> {}
+export declare class IconButton extends React.Component<IconButtonProps> {}

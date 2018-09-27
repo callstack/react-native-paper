@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ThemeShape } from '..';
+import { ThemeShape } from '../types';
 
 export interface DividerProps {
   inset?: boolean;
@@ -7,4 +7,4 @@ export interface DividerProps {
   theme?: ThemeShape;
 }
 
-export class Divider extends React.Component<DividerProps> {}
+export declare class Divider extends React.Component<DividerProps> {}

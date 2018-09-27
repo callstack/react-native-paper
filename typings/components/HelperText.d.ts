@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ThemeShape } from '..';
+import { ThemeShape } from '../types';
 
 export interface HelperTextProps {
   type: 'error' | 'info';
@@ -9,4 +9,4 @@ export interface HelperTextProps {
   theme?: ThemeShape;
 }
 
-export class HelperText extends React.Component<HelperTextProps> {}
+export declare class HelperText extends React.Component<HelperTextProps> {}

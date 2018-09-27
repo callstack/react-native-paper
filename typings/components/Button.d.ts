@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { IconSource } from './Icon';
-import { ThemeShape } from '..';
+import { ThemeShape, IconSource } from '../types';
 
 export interface ButtonProps {
   mode?: 'text' | 'outlined' | 'contained';
@@ -17,4 +16,4 @@ export interface ButtonProps {
   theme?: ThemeShape;
 }
 
-export class Button extends React.Component<ButtonProps> {}
+export declare class Button extends React.Component<ButtonProps> {}

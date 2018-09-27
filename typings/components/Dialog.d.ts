@@ -1,47 +1,30 @@
 import * as React from 'react';
-import { ThemeShape } from '..';
+import { ThemeShape } from '../types';
 
-export interface DialogContentProps {
+interface DialogBaseProps {
   children: React.ReactNode;
   style?: any;
 }
 
-class DialogContent extends React.Component<DialogContentProps> {}
-
-export interface DialogActionsProps {
-  children: React.ReactNode;
-  style?: any;
-}
-
-class DialogActions extends React.Component<DialogActionsProps> {}
-
-export interface DialogTitleProps {
-  children: React.ReactNode;
-  style?: any;
+export interface DialogContentProps extends DialogBaseProps {}
+export interface DialogActionsProps extends DialogBaseProps {}
+export interface DialogScrollAreaProps extends DialogBaseProps {}
+export interface DialogTitleProps extends DialogBaseProps {
   theme?: ThemeShape;
 }
 
-class DialogTitle extends React.Component<DialogTitleProps> {}
-
-export interface DialogScrollAreaProps {
-  children: React.ReactNode;
-  style?: any;
-}
-
-class DialogScrollArea extends React.Component<DialogScrollAreaProps> {}
-
 export interface DialogProps {
   dismissable?: boolean;
-  onDismiss?: () => any;
+  onDismiss: () => any;
   visible: boolean;
   children: React.ReactNode;
   style?: any;
   theme?: ThemeShape;
 }
 
-export class Dialog extends React.Component<DialogProps> {
-  static Content: DialogContent;
-  static Actions: DialogActions;
-  static Title: DialogTitle;
-  static ScrollArea: DialogScrollArea;
+export declare class Dialog extends React.Component<DialogProps> {
+  static Content: React.ComponentType<DialogContentProps>;
+  static Actions: React.ComponentType<DialogActionsProps>;
+  static Title: React.ComponentType<DialogTitleProps>;
+  static ScrollArea: React.ComponentType<DialogScrollAreaProps>;
 }

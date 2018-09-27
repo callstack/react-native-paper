@@ -1,17 +1,16 @@
 import * as React from 'react';
-import { IconSource } from './Icon';
-import { ThemeShape } from '..';
+import { ThemeShape, IconSource } from '../types';
 
 export interface ItemProps {
   label: string;
   icon?: IconSource;
   active?: boolean;
-  onPress?: () => mixed;
+  onPress?: () => any;
   style?: any;
   theme?: ThemeShape;
 }
 
-export class Drawer extends React.Component<ItemProps> {}
+export declare class Item extends React.Component<ItemProps> {}
 
 export interface SectionProps {
   title?: string;
@@ -19,4 +18,4 @@ export interface SectionProps {
   theme?: ThemeShape;
 }
 
-export class Section extends React.Component<SectionProps> {}
+export declare class Section extends React.Component<SectionProps> {}

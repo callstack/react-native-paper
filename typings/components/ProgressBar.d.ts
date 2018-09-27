@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ThemeShape } from '..';
+import { ThemeShape } from '../types';
 
 export interface ProgressBarProps {
   progress: number;
@@ -8,4 +8,4 @@ export interface ProgressBarProps {
   theme?: ThemeShape;
 }
 
-export class ProgressBar extends React.Component<ProgressBarProps> {}
+export declare class ProgressBar extends React.Component<ProgressBarProps> {}

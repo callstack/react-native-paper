@@ -1,16 +1,17 @@
 import * as React from 'react';
-import { IconSource } from './Icon';
-import { ThemeShape } from '..';
+import { ThemeShape, IconSource } from '../types';
+
+export interface FABGroupAction {
+  icon: string;
+  label?: string;
+  color?: string;
+  accessibilityLabel?: string;
+  style?: any;
+  onPress: () => any;
+}
 
 export interface FABGroupProps {
-  actions: Array<{
-    icon: string;
-    label?: string;
-    color?: string;
-    accessibilityLabel?: string;
-    style?: any;
-    onPress: () => any;
-  }>;
+  actions: Array<FABGroupAction>;
   icon: IconSource;
   accessibilityLabel?: string;
   color?: string;
@@ -21,8 +22,6 @@ export interface FABGroupProps {
   theme?: ThemeShape;
 }
 
-class FABGroup extends React.Component<FABGroupProps> {}
-
 export interface FABProps {
   icon: IconSource;
   label?: string;
@@ -30,11 +29,11 @@ export interface FABProps {
   small?: boolean;
   color?: string;
   disabled?: boolean;
-  onPress?: () => mixed;
+  onPress?: () => any;
   style?: any;
   theme?: ThemeShape;
 }
 
 export class FAB extends React.Component<FABProps> {
-  static Group: FABGroup;
+  static Group: React.ComponentType<FABGroupProps>;
 }

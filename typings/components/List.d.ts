@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { ThemeShape } from '../index';
-import { IconSource } from './Icon';
+import { ThemeShape, IconSource } from '../types';
 
 export interface AccordionProps {
-  title?: React.ReactNode;
+  title: React.ReactNode;
   description?: React.ReactNode;
   left?: (props: { color: string }) => React.ReactNode;
   children: React.ReactNode;
@@ -11,7 +10,7 @@ export interface AccordionProps {
   style?: any;
 }
 
-export class Accordion extends React.Component<AccordionProps> {}
+export declare class Accordion extends React.Component<AccordionProps> {}
 
 export interface IconProps {
   icon: IconSource;
@@ -19,7 +18,7 @@ export interface IconProps {
   style?: any;
 }
 
-export class Icon extends React.Component<IconProps> {}
+export declare class Icon extends React.Component<IconProps> {}
 
 export interface ItemProps {
   title: React.ReactNode;
@@ -31,7 +30,7 @@ export interface ItemProps {
   style?: any;
 }
 
-export class Item extends React.Component<ItemProps> {}
+export declare class Item extends React.Component<ItemProps> {}
 
 export interface SectionProps {
   title?: string;
@@ -40,4 +39,4 @@ export interface SectionProps {
   style?: any;
 }
 
-export class Section extends React.Component<SectionProps> {}
+export declare class Section extends React.Component<SectionProps> {}

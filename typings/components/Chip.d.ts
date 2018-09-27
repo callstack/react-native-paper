@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { IconSource } from './Icon';
-import { ThemeShape } from '..';
+import { ThemeShape, IconSource } from '../types';
 
 export interface ChipProps {
   mode?: 'flat' | 'outlined';
@@ -16,4 +15,4 @@ export interface ChipProps {
   theme: ThemeShape;
 }
 
-export class Chip extends React.Component<ChipProps> {}
+export declare class Chip extends React.Component<ChipProps> {}

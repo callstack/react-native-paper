@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IconSource } from './Icon';
+import { IconSource, ThemeShape } from '../types';
 
 type Route = Partial<{
   key: string;
@@ -12,33 +12,42 @@ type Route = Partial<{
 
 type NavigationState<T extends Route> = {
   index: number;
-  router: Array<T>;
+  routes: Array<T>;
 };
-
-export interface BottomNavigationProps<T> {
-  shifting?: boolean;
-  labeled?: boolean;
-  navigationState: NavigationState<T>;
-  onIndexChange: (index: number) => any;
-  renderScene: (
-    props: { route: T; jumpTo: (key: string) => any }
-  ) => React.ReactNode | null | undefined;
-}
 
 export interface SceneProps<T> {
   route: T;
   jumpTo: (key: string) => any;
 }
 
-export class BottomNavigation<T> extends React.Component<
+export interface BottomNavigationProps<T> {
+  shifting?: boolean;
+  labeled?: boolean;
+  navigationState: NavigationState<T>;
+  onIndexChange: (index: number) => any;
+  renderScene: (props: SceneProps<T>) => React.ReactNode | null | undefined;
+  renderIcon?: (
+    props: { route: T; focused: boolean; color: string }
+  ) => React.ReactNode;
+  renderLabel?: (
+    props: { route: T; focused: boolean; color: string }
+  ) => React.ReactNode;
+  getLabelText?: (props: { route: T }) => string;
+  getAccessibilityLabel?: (props: { route: T }) => string | null | undefined;
+  getTestID?: (props: { route: T }) => string | null | undefined;
+  getColor?: (props: { route: T }) => string;
+  onTabPress?: (props: { route: T }) => any;
+  activeColor?: string;
+  inactiveColor?: string;
+  barStyle?: any;
+  style?: any;
+  theme?: ThemeShape;
+}
+
+export declare class BottomNavigation<T> extends React.Component<
   BottomNavigationProps<T>
 > {
-  static SceneMap: (
-    scenes: {
-      [key: string]: React.ComponentType<{
-        route: T;
-        jumpTo: (key: string) => any;
-      }>;
-    }
-  ) => React.ComponentType<{ route: T; jumpTo: (key: string) => any }>;
+  static SceneMap: <P>(
+    scenes: Record<string, React.ComponentType<SceneProps<P>>>
+  ) => (props: SceneProps<P>) => React.ReactNode;
 }
