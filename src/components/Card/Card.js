@@ -14,8 +14,6 @@ import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
-const AnimatedSurface = Animated.createAnimatedComponent(Surface);
-
 type Props = {
   /**
    * Resting elevation of the card which controls the drop shadow.
@@ -119,7 +117,7 @@ class Card extends React.Component<Props, State> {
           : null
     );
     return (
-      <AnimatedSurface style={[{ borderRadius: roundness, elevation }, style]}>
+      <Surface style={[{ borderRadius: roundness, elevation }, style]}>
         <TouchableWithoutFeedback
           delayPressIn={0}
           disabled={!(onPress || onLongPress)}
@@ -142,7 +140,7 @@ class Card extends React.Component<Props, State> {
             )}
           </View>
         </TouchableWithoutFeedback>
-      </AnimatedSurface>
+      </Surface>
     );
   }
 }

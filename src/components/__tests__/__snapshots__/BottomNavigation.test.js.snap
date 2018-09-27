@@ -56,29 +56,19 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
   </View>
   <View
     style={
-      Array [
-        Object {
-          "backgroundColor": "#ffffff",
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#6200ee",
+        "elevation": 8,
+        "overflow": "hidden",
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 7,
+          "width": 0,
         },
-        Object {
-          "backgroundColor": "#ffffff",
-        },
-        Object {
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 7,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 8,
-        },
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#6200ee",
-          "elevation": 8,
-          "overflow": "hidden",
-        },
-      ]
+        "shadowOpacity": 0.24,
+        "shadowRadius": 8,
+      }
     }
   >
     <RCTSafeAreaView
@@ -594,29 +584,19 @@ exports[`hides labels in shifting bottom navigation 1`] = `
   </View>
   <View
     style={
-      Array [
-        Object {
-          "backgroundColor": "#ffffff",
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "rgba(98, 0, 238, 1)",
+        "elevation": 8,
+        "overflow": "hidden",
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 7,
+          "width": 0,
         },
-        Object {
-          "backgroundColor": "#ffffff",
-        },
-        Object {
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 7,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 8,
-        },
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "rgba(98, 0, 238, 1)",
-          "elevation": 8,
-          "overflow": "hidden",
-        },
-      ]
+        "shadowOpacity": 0.24,
+        "shadowRadius": 8,
+      }
     }
   >
     <RCTSafeAreaView
@@ -1152,29 +1132,19 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
   </View>
   <View
     style={
-      Array [
-        Object {
-          "backgroundColor": "#ffffff",
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#6200ee",
+        "elevation": 8,
+        "overflow": "hidden",
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 7,
+          "width": 0,
         },
-        Object {
-          "backgroundColor": "#ffffff",
-        },
-        Object {
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 7,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 8,
-        },
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#6200ee",
-          "elevation": 8,
-          "overflow": "hidden",
-        },
-      ]
+        "shadowOpacity": 0.24,
+        "shadowRadius": 8,
+      }
     }
   >
     <RCTSafeAreaView
@@ -1624,29 +1594,19 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
   </View>
   <View
     style={
-      Array [
-        Object {
-          "backgroundColor": "#ffffff",
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "rgba(98, 0, 238, 1)",
+        "elevation": 8,
+        "overflow": "hidden",
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 7,
+          "width": 0,
         },
-        Object {
-          "backgroundColor": "#ffffff",
-        },
-        Object {
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 7,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 8,
-        },
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "rgba(98, 0, 238, 1)",
-          "elevation": 8,
-          "overflow": "hidden",
-        },
-      ]
+        "shadowOpacity": 0.24,
+        "shadowRadius": 8,
+      }
     }
   >
     <RCTSafeAreaView
@@ -2282,29 +2242,19 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
   </View>
   <View
     style={
-      Array [
-        Object {
-          "backgroundColor": "#ffffff",
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#E96A82",
+        "elevation": 8,
+        "overflow": "hidden",
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 7,
+          "width": 0,
         },
-        Object {
-          "backgroundColor": "#ffffff",
-        },
-        Object {
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 7,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 8,
-        },
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#E96A82",
-          "elevation": 8,
-          "overflow": "hidden",
-        },
-      ]
+        "shadowOpacity": 0.24,
+        "shadowRadius": 8,
+      }
     }
   >
     <RCTSafeAreaView
@@ -3192,29 +3142,19 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
   </View>
   <View
     style={
-      Array [
-        Object {
-          "backgroundColor": "#ffffff",
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "rgba(233, 106, 130, 1)",
+        "elevation": 8,
+        "overflow": "hidden",
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 7,
+          "width": 0,
         },
-        Object {
-          "backgroundColor": "#ffffff",
-        },
-        Object {
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 7,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 8,
-        },
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "rgba(233, 106, 130, 1)",
-          "elevation": 8,
-          "overflow": "hidden",
-        },
-      ]
+        "shadowOpacity": 0.24,
+        "shadowRadius": 8,
+      }
     }
   >
     <RCTSafeAreaView
@@ -3945,29 +3885,19 @@ exports[`renders non-shifting bottom navigation 1`] = `
   </View>
   <View
     style={
-      Array [
-        Object {
-          "backgroundColor": "#ffffff",
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#6200ee",
+        "elevation": 8,
+        "overflow": "hidden",
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 7,
+          "width": 0,
         },
-        Object {
-          "backgroundColor": "#ffffff",
-        },
-        Object {
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 7,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 8,
-        },
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#6200ee",
-          "elevation": 8,
-          "overflow": "hidden",
-        },
-      ]
+        "shadowOpacity": 0.24,
+        "shadowRadius": 8,
+      }
     }
   >
     <RCTSafeAreaView
@@ -4855,29 +4785,19 @@ exports[`renders shifting bottom navigation 1`] = `
   </View>
   <View
     style={
-      Array [
-        Object {
-          "backgroundColor": "#ffffff",
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "rgba(98, 0, 238, 1)",
+        "elevation": 8,
+        "overflow": "hidden",
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 7,
+          "width": 0,
         },
-        Object {
-          "backgroundColor": "#ffffff",
-        },
-        Object {
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 7,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 8,
-        },
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "rgba(98, 0, 238, 1)",
-          "elevation": 8,
-          "overflow": "hidden",
-        },
-      ]
+        "shadowOpacity": 0.24,
+        "shadowRadius": 8,
+      }
     }
   >
     <RCTSafeAreaView

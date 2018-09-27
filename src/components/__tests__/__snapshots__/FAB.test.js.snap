@@ -3,28 +3,18 @@
 exports[`renders extended FAB 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
+    Object {
+      "backgroundColor": "#03dac4",
+      "borderRadius": 28,
+      "elevation": 6,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 5,
+        "width": 0,
       },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      Object {
-        "shadowColor": "#000000",
-        "shadowOffset": Object {
-          "height": 5,
-          "width": 0,
-        },
-        "shadowOpacity": 0.24,
-        "shadowRadius": 6,
-      },
-      Object {
-        "backgroundColor": "#03dac4",
-        "borderRadius": 28,
-        "elevation": 6,
-      },
-    ]
+      "shadowOpacity": 0.24,
+      "shadowRadius": 6,
+    }
   }
 >
   <View
@@ -186,28 +176,18 @@ exports[`renders extended FAB 1`] = `
 exports[`renders normal FAB 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
+    Object {
+      "backgroundColor": "#03dac4",
+      "borderRadius": 28,
+      "elevation": 6,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 5,
+        "width": 0,
       },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      Object {
-        "shadowColor": "#000000",
-        "shadowOffset": Object {
-          "height": 5,
-          "width": 0,
-        },
-        "shadowOpacity": 0.24,
-        "shadowRadius": 6,
-      },
-      Object {
-        "backgroundColor": "#03dac4",
-        "borderRadius": 28,
-        "elevation": 6,
-      },
-    ]
+      "shadowOpacity": 0.24,
+      "shadowRadius": 6,
+    }
   }
 >
   <View
@@ -319,28 +299,18 @@ exports[`renders normal FAB 1`] = `
 exports[`renders small FAB 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
+    Object {
+      "backgroundColor": "#03dac4",
+      "borderRadius": 28,
+      "elevation": 6,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 5,
+        "width": 0,
       },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      Object {
-        "shadowColor": "#000000",
-        "shadowOffset": Object {
-          "height": 5,
-          "width": 0,
-        },
-        "shadowOpacity": 0.24,
-        "shadowRadius": 6,
-      },
-      Object {
-        "backgroundColor": "#03dac4",
-        "borderRadius": 28,
-        "elevation": 6,
-      },
-    ]
+      "shadowOpacity": 0.24,
+      "shadowRadius": 6,
+    }
   }
 >
   <View
