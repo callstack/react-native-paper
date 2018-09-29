@@ -32,7 +32,7 @@
   ],
   "scripts": {
     "commitmsg": "node ./scripts/validate-commit-message.js $GIT_PARAMS",
-    "precommit": "yarn lint && yarn flow && yarn test",
+    "precommit": "yarn lint && yarn flow && yarn typescript && yarn test",
     "flow": "flow",
     "typescript": "node ./scripts/generate-ts-tests.js && tsc --noEmit --skipLibCheck --jsx react ./__ts-tests__/*",
     "lint": "eslint .",

@@ -48,6 +48,12 @@ jobs:
         - run: |
             yarn lint
             yarn flow
+  typescript:
+      <<: *defaults
+      steps:
+        - attach_workspace:
+            at: ~/react-native-paper
+        - run: yarn typescript
   build-package:
       <<: *defaults
       steps:
@@ -92,6 +98,9 @@ workflows:
     jobs:
       - install-dependencies
       - lint-and-flow:
+          requires:
+            - install-dependencies
+      - typescript:
           requires:
             - install-dependencies
       - unit-tests:
