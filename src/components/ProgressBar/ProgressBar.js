@@ -33,7 +33,7 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { ProgressBar } from 'react-native-paper';
+ * import { ProgressBar, Colors } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <ProgressBar progress={0.5} color={Colors.red800} />

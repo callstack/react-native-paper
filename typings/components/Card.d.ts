@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ImageProps } from 'react-native';
 import { ThemeShape } from '../types';
 
 export interface CardContentProps {
@@ -10,9 +11,9 @@ export interface CardActionsProps {
   style?: any;
 }
 
-export interface CardCoverProps {
+export interface CardCoverProps extends ImageProps {
   style?: any;
-  theme: ThemeShape;
+  theme?: ThemeShape;
 }
 
 export interface CardProps {

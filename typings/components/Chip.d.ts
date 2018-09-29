@@ -12,7 +12,7 @@ export interface ChipProps {
   onPress?: () => any;
   onClose?: () => any;
   style?: any;
-  theme: ThemeShape;
+  theme?: ThemeShape;
 }
 
 export declare class Chip extends React.Component<ChipProps> {}

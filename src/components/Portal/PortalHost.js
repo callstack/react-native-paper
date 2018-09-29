@@ -32,13 +32,14 @@ export const PortalContext: Context<PortalMethods> = createReactContext(
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Portal, StyleSheet } from 'react-native-paper';
+ * import { View } from 'react-native';
+ * import { Portal } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   render() {
  *     return (
  *       <Portal.Host>
- *         <App />
+ *         <View />
  *       </Portal.Host>
  *     );
  *   }

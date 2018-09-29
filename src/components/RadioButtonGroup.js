@@ -36,7 +36,7 @@ export const RadioButtonContext: Context<?RadioButtonContextType> = createReactC
  * import { View } from 'react-native';
  * import { RadioButton, Text } from 'react-native-paper';
  *
- * export default class MyComponent extends Component {
+ * export default class MyComponent extends React.Component {
  *   state = {
  *     value: 'first',
  *   };

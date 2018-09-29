@@ -34,7 +34,7 @@
     "commitmsg": "node ./scripts/validate-commit-message.js $GIT_PARAMS",
     "precommit": "yarn lint && yarn flow && yarn test",
     "flow": "flow",
-    "typescript": "tsc -p ./tsconfig.json",
+    "typescript": "node ./scripts/generate-ts-tests.js && tsc --noEmit --skipLibCheck --jsx react ./__ts-tests__/*",
     "lint": "eslint .",
     "test": "jest",
     "prepare": "node ./scripts/generate-mappings",
@@ -58,6 +58,7 @@
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react-native": "^3.2.1",
     "flow-bin": "~0.67.1",
+    "glob": "^7.1.3",
     "husky": "^0.14.3",
     "jest": "^23.0.0",
     "prettier": "^1.12.1",
@@ -66,6 +67,7 @@
     "react-native": "~0.55.4",
     "react-native-vector-icons": "~4.6.0",
     "react-test-renderer": "16.3.1",
+    "rimraf": "^2.6.2",
     "typescript": "^3.0.3"
   },
   "peerDependencies": {
