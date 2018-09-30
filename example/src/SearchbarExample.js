@@ -45,7 +45,7 @@ class SearchExample extends React.Component<Props, State> {
           onChangeText={query => this.setState({ secondQuery: query })}
           value={this.state.secondQuery}
           onIconPress={() => this.props.navigation.goBack()}
-          icon="arrow-back"
+          icon={{ source: 'arrow-back', direction: 'auto' }}
           style={styles.searchbar}
         />
         <Searchbar
