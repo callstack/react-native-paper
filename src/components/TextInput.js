@@ -449,6 +449,16 @@ class TextInput extends React.Component<Props, State> {
           }),
         },
         {
+          // RTL Support
+          translateX: this.state.labeled.interpolate({
+            inputRange: [0, 1],
+            outputRange: [
+              I18nManager.isRTL ? (20 / 100) * this.state.labelLayout.width : 0,
+              0,
+            ],
+          }),
+        },
+        {
           // Make label smaller
           scale: this.state.labeled.interpolate({
             inputRange: [0, 1],
