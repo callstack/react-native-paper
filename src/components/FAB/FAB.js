@@ -61,23 +61,22 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { View, StyleSheet } from 'react-native';
+ * import { StyleSheet } from 'react-native';
  * import { FAB } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <View style={styles.container}>
- *     <FAB
- *       small
- *       icon="add"
- *       onPress={() => console.log('Pressed')}
- *     />
- *   </View>
+ *   <FAB
+ *     style={styles.fab}
+ *     small
+ *     icon="add"
+ *     onPress={() => console.log('Pressed')}
+ *   />
  * );
  *
  * const styles = StyleSheet.create({
- *   container: {
+ *   fab: {
  *     position: 'absolute',
- *     padding: 16,
+ *     margin: 16,
  *     right: 0,
  *     bottom: 0,
  *   },
