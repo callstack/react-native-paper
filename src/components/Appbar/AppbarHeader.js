@@ -61,8 +61,11 @@ const DEFAULT_STATUSBAR_HEIGHT = Platform.select({
  *
  * export default class MyComponent extends React.Component {
  *   _goBack = () => console.log('Went back');
+ *
  *   _onSearch = () => console.log('Searching');
+ *
  *   _onMore = () => console.log('Shown more');
+ *
  *   render() {
  *     return (
  *       <Appbar.Header>
