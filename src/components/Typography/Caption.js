@@ -40,7 +40,7 @@ export default Caption;
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 14,
+    fontSize: 12,
     lineHeight: 20,
     marginVertical: 2,
   },
