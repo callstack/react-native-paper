@@ -125,7 +125,7 @@ const Icon = ({ source, color, size, ...rest }: Props) => {
       />
     );
   } else if (typeof s === 'function') {
-    return s({ color, size });
+    return s({ color, size, direction });
   }
 
   return null;
