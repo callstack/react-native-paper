@@ -41,6 +41,7 @@
 .*/node_modules/eslint.*
 
 [untyped]
+.*/node_modules/metro/.*
 .*/node_modules/expo/.*
 .*/node_modules/react-navigation/.*
 .*/node_modules/react-native-gesture-handler/.*
