@@ -36,6 +36,45 @@
   Press me
 <span class="token tag" ><span class="token tag" ><span class="token punctuation" >&lt;/</span>Button</span><span class="token punctuation" >&gt;</span></span>
 </code></pre>
+<h2>RTL support</h2>
+<p>If you want your icon to behave properly in a RTL environment, you can pass an object to the <code>icon</code> prop with shape: <code>{ source: { uri: 'https://path.to' }, direction : 'rtl' }</code>. <code>source</code> can be any of the values that the <code>icon</code> prop accepts in <a href="#1.-an-icon-name">option 1</a> and <a href="#2.-an-image-source">option 2</a>. For <code>direction</code> you have few options:</p>
+<ol>
+<li><code>auto</code> - uses the device language to determine if icon should be displayed from rtl. Uses the <code>I18nManager</code> module to get this info.</li>
+<li><code>rtl</code> - flips the icon so that it is rtl, this is regradless of the device language.</li>
+<li><code>ltr</code> - displays from ltr, even if in an rtl environment.</li>
+</ol>
+<p>Example for using an image source:</p>
+<pre><code class="language-js"><span class="token tag" ><span class="token tag" ><span class="token punctuation" >&lt;</span>Button</span> <span class="token attr-name" >icon</span><span class="token script language-javascript" ><span class="token punctuation" >=</span><span class="token punctuation brackets-braces" >{</span><span class="token punctuation brackets-braces" >{</span> source<span class="token punctuation" >:</span> <span class="token punctuation brackets-braces" >{</span> uri<span class="token punctuation" >:</span> <span class="token string" >'https://avatars0.githubusercontent.com/u/17571969?v=3&amp;s=400'</span> <span class="token punctuation brackets-braces" >}</span><span class="token punctuation" >,</span> direction<span class="token punctuation" >:</span> <span class="token string" >'rtl'</span> <span class="token punctuation brackets-braces" >}</span></span><span class="token attr-name" >}</span><span class="token punctuation" >&gt;</span></span>
+  Press me
+<span class="token tag" ><span class="token tag" ><span class="token punctuation" >&lt;/</span>Button</span><span class="token punctuation" >&gt;</span></span>
+</code></pre>
+<p>Example for using an icon name:</p>
+<pre><code class="language-js"><span class="token tag" ><span class="token tag" ><span class="token punctuation" >&lt;</span>Button</span> <span class="token attr-name" >icon</span><span class="token script language-javascript" ><span class="token punctuation" >=</span><span class="token punctuation brackets-braces" >{</span><span class="token punctuation brackets-braces" >{</span> source<span class="token punctuation" >:</span> <span class="token string" >"add-a-photo"</span><span class="token punctuation" >,</span> direction<span class="token punctuation" >:</span> <span class="token string" >'rtl'</span> <span class="token punctuation brackets-braces" >}</span><span class="token punctuation brackets-braces" >}</span></span><span class="token punctuation" >&gt;</span></span>
+  Press me
+<span class="token tag" ><span class="token tag" ><span class="token punctuation" >&lt;/</span>Button</span><span class="token punctuation" >&gt;</span></span>
+</code></pre>
+<p>You can also use a render function. Along with <code>size</code> and <code>color</code>, you have access to <code>direction</code> which will either be <code>'rtl'</code> or <code>'ltr'</code>. You can then decide how to render your icon component accordingly.</p>
+<p>Example of using a render function:</p>
+<pre><code class="language-js"><span class="token tag" ><span class="token tag" ><span class="token punctuation" >&lt;</span>Button</span>
+  <span class="token attr-name" >icon</span><span class="token script language-javascript" ><span class="token punctuation" >=</span><span class="token punctuation brackets-braces" >{</span><span class="token punctuation brackets-parentheses" >(</span><span class="token punctuation brackets-braces" >{</span> size<span class="token punctuation" >,</span> color<span class="token punctuation" >,</span> direction <span class="token punctuation brackets-braces" >}</span><span class="token punctuation brackets-parentheses" >)</span> <span class="token operator" >=</span><span class="token operator" >&gt;</span> <span class="token punctuation brackets-parentheses" >(</span>
+    <span class="token operator" >&lt;</span>Image
+      source<span class="token punctuation" >=</span><span class="token punctuation brackets-braces" >{</span><span class="token function" >require</span><span class="token punctuation brackets-parentheses" >(</span><span class="token string" >'../assets/chameleon.jpg'</span><span class="token punctuation brackets-parentheses" >)</span><span class="token punctuation brackets-braces" >}</span>
+      style<span class="token punctuation" >=</span><span class="token punctuation brackets-braces" >{</span><span class="token punctuation brackets-square" >[</span>
+        <span class="token punctuation brackets-braces" >{</span>
+          transform<span class="token punctuation" >:</span> <span class="token punctuation brackets-square" >[</span><span class="token punctuation brackets-braces" >{</span> scaleX<span class="token punctuation" >:</span> direction <span class="token operator" >===</span> <span class="token string" >'rtl'</span> <span class="token operator" >?</span> <span class="token operator" >-</span><span class="token number" >1</span> <span class="token punctuation" >:</span> <span class="token number" >1</span> <span class="token punctuation brackets-braces" >}</span><span class="token punctuation" >]</span><span class="token punctuation" >,</span>
+        <span class="token punctuation brackets-braces" >}</span></span><span class="token attr-name" >,</span>
+        <span class="token attr-name" >{</span>
+          <span class="token attr-name" ><span class="token namespace" >width:</span></span> <span class="token attr-name" >size,</span>
+          <span class="token attr-name" ><span class="token namespace" >height:</span></span> <span class="token attr-name" >size,</span>
+          <span class="token attr-name" ><span class="token namespace" >tintColor:</span></span> <span class="token attr-name" >color</span>
+        <span class="token attr-name" >}</span>
+      <span class="token attr-name" >]}</span>
+    <span class="token punctuation" >/&gt;</span></span>
+  <span class="token punctuation brackets-parentheses" >)</span><span class="token punctuation brackets-braces" >}</span>
+<span class="token operator" >&gt;</span>
+  Press me
+<span class="token tag" ><span class="token tag" ><span class="token punctuation" >&lt;/</span>Button</span><span class="token punctuation" >&gt;</span></span>
+</code></pre>
 </div></main></div></div></div>
     <script>
       window.__INITIAL_PATH__ = 'icons';
