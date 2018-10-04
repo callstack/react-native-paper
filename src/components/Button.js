@@ -274,11 +274,11 @@ class Button extends React.Component<Props, State> {
 
 const styles = StyleSheet.create({
   button: {
-    minWidth: 88,
+    minWidth: 64,
     borderStyle: 'solid',
   },
   compact: {
-    minWidth: 64,
+    minWidth: 'auto',
   },
   content: {
     flexDirection: 'row',

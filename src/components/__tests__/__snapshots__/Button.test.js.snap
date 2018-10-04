@@ -10,7 +10,7 @@ exports[`renders button with color 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0,
       "elevation": 0,
-      "minWidth": 88,
+      "minWidth": 64,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": NaN,
@@ -119,7 +119,7 @@ exports[`renders button with icon 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0,
       "elevation": 0,
-      "minWidth": 88,
+      "minWidth": 64,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": NaN,
@@ -273,7 +273,7 @@ exports[`renders contained contained with mode 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0,
       "elevation": 2,
-      "minWidth": 88,
+      "minWidth": 64,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": NaN,
@@ -382,7 +382,7 @@ exports[`renders disabled button 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0,
       "elevation": 0,
-      "minWidth": 88,
+      "minWidth": 64,
     }
   }
 >
@@ -489,7 +489,7 @@ exports[`renders loading button 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0,
       "elevation": 0,
-      "minWidth": 88,
+      "minWidth": 64,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": NaN,
@@ -611,7 +611,7 @@ exports[`renders outlined button with mode 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0.5,
       "elevation": 0,
-      "minWidth": 88,
+      "minWidth": 64,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": NaN,
@@ -720,7 +720,7 @@ exports[`renders text button by default 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0,
       "elevation": 0,
-      "minWidth": 88,
+      "minWidth": 64,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": NaN,
@@ -829,7 +829,7 @@ exports[`renders text button with mode 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0,
       "elevation": 0,
-      "minWidth": 88,
+      "minWidth": 64,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": NaN,
