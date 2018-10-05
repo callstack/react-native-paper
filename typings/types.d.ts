@@ -38,17 +38,13 @@ export type Theme = {
   };
 };
 
+type Theming = ThemingType<Theme, ThemeShape>;
+
 export type ThemeShape = DeepPartial<Theme>;
-export declare const withTheme: Pick<
-  ThemingType<Theme, ThemeShape>,
-  'withTheme'
->;
+export declare const withTheme: Theming['withTheme'];
 export declare const DefaultTheme: Theme;
 export declare const DarkTheme: Theme;
-export declare const ThemeProvider: Pick<
-  ThemingType<Theme, ThemeShape>,
-  'ThemeProvider'
->;
+export declare const ThemeProvider: Theming['ThemeProvider'];
 
 export declare class Provider extends React.Component<{
   children: React.ReactNode;
