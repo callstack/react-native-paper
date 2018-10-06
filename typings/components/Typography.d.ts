@@ -1,7 +1,8 @@
 import * as React from 'react';
+import { TextProps } from 'react-native';
 import { ThemeShape } from '../types';
 
-interface TypographyProps {
+interface TypographyProps extends TextProps {
   style?: any;
 }
 

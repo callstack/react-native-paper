@@ -1,13 +1,14 @@
 import * as React from 'react';
+import { TextInputProps as NativeTextInputProps } from 'react-native';
 import { ThemeShape } from '../types';
 
-export interface TextInputProps {
+export interface TextInputProps extends NativeTextInputProps {
   mode?: 'flat' | 'outlined';
   disabled?: boolean;
   label?: string;
   placeholder?: string;
   error?: boolean;
-  onChangeText?: Function;
+  onChangeText?: (text: string) => void;
   underlineColor?: string;
   multiline?: boolean;
   numberOfLines?: number;
@@ -19,8 +20,7 @@ export interface TextInputProps {
   theme?: ThemeShape;
 }
 
-// TODO: Adjust this types to Typescript
-export interface RenderProps {
+export interface RenderProps extends NativeTextInputProps {
   ref: (ref: any) => void;
   onChangeText: (text: string) => void;
   placeholder?: string;
