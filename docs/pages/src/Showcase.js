@@ -65,7 +65,7 @@ export default class Showcase extends React.Component<{}> {
                         href={item.android || null}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={{ opacity: data.android ? 1 : 0.4 }}
+                        style={{ opacity: item.android ? 1 : 0.4 }}
                       >
                         <GooglePlayIcon color={tintColor} />
                       </a>
@@ -74,7 +74,7 @@ export default class Showcase extends React.Component<{}> {
                         href={item.ios || null}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={{ opacity: data.ios ? 1 : 0.4 }}
+                        style={{ opacity: item.ios ? 1 : 0.4 }}
                       >
                         <IphoneIcon color={tintColor} />
                       </a>
