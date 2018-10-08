@@ -28,14 +28,15 @@
 <p>We use <code>flow</code> for type checking, <code>eslint</code> with <code>prettier</code> for linting and formatting the code, and <code>jest</code> for testing. Our pre-commit hooks verify that the linter and tests pass when commiting. You can also run the following commands manually:</p>
 <ul>
 <li><code>yarn flow</code>: run flow on all files.</li>
+<li><code>yarn typescript</code>: run tests for typescript.</li>
 <li><code>yarn lint</code>: run eslint and prettier.</li>
-<li><code>yarn test</code>: run tests.</li>
+<li><code>yarn test</code>: run unit tests.</li>
 </ul>
 <h3>Sending a pull request</h3>
 <p>When you're sending a pull request:</p>
 <ul>
 <li>Prefer small pull requests focused on one change.</li>
-<li>Verify that <code>flow</code>, <code>eslint</code> and tests are passing.</li>
+<li>Verify that <code>flow</code>, <code>eslint</code> and all tests are passing.</li>
 <li>Preview the documentation to make sure it looks good.</li>
 <li>Follow the pull request template when opening a pull request.</li>
 </ul>
@@ -44,12 +45,17 @@
 <li>Follow the guidelines described in the <a href="https://material.io/guidelines/">official material design docs</a>.</li>
 <li>Write a brief description of every prop when defining <code>type Props</code> to aid with documentation.</li>
 <li>Provide an example usage for the component (check other components to get a idea).</li>
+<li>Update the type definitions for Flow and Typescript if you changed an API or added a component.</li>
 </ul>
 <h3>Running the example</h3>
 <p>The example app uses <a href="https://expo.io/">Expo</a>. You will need to install the Expo app for <a href="https://play.google.com/store/apps/details?id=host.exp.exponent">Android</a> and <a href="https://itunes.apple.com/app/apple-store/id982107779">iOS</a> to start developing.</p>
 <p>After you're done, you can run <code>yarn start</code> or <code>expo start</code> in the <code>example/</code> folder and scan the QR code to launch it on your device.</p>
 <h3>Working on documentation</h3>
 <p>The documentation is automatically generated from the <a href="https://flowtype.org">flowtype</a> annotations in the components. You can add comments above the type annotations to add descriptions. To preview the generated documentation, run <code>yarn start</code> in the <code>docs/</code> folder.</p>
+<h3>Publishing a release</h3>
+<p>We use <a href="https://github.com/webpro/release-it">release-it</a> to automate our release. If you have publish access to the NPM package, run the following from the master branch to publish a new release:</p>
+<pre><code class="language-sh">yarn release
+</code></pre>
 <h2>Reporting issues</h2>
 <p>You can report issues on our <a href="https://github.com/callstack/react-native-paper/issues">bug tracker</a>. Please follow the issue template when opening an issue.</p>
 <h2>License</h2>
