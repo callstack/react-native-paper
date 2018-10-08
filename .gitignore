@@ -54,3 +54,7 @@ android/keystores/debug.keystore
 #
 dist/
 __ts-tests__/
+
+# Release
+#
+CHANGELOG.md
