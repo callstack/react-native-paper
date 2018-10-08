@@ -574,10 +574,10 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
-"@callstack/react-theme-provider@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@callstack/react-theme-provider/-/react-theme-provider-1.0.5.tgz#7b0347252284ef2365883fcf5946f5f49de64875"
-  integrity sha512-tmxAEW7zTtAtXtFU0tvX3S4rI/3ghLKlaIpmI3OUrabth7379oOLtQwtx4nu890dI/BOx9yQR/uEoyyud6HRwg==
+"@callstack/react-theme-provider@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@callstack/react-theme-provider/-/react-theme-provider-1.0.6.tgz#6298708c811f287d2bad2e10df0783b8b8e4c53d"
+  integrity sha512-v2lAll0Xd8Dhb6kyIH2vF7DbS6oa7aRxdfsV50M8m4CbGcYzd3GDhi2/N8w62rkyHBbL511r+wQ8UzxzqlsH1A==
   dependencies:
     create-react-context "^0.2.1"
     deepmerge "^2.1.1"
