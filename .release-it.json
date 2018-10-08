@@ -1,0 +1,14 @@
+{
+  "non-interactive": true,
+  "increment": "conventional:angular",
+  "src": {
+    "commitMessage": "chore: release %s",
+    "tagName": "v%s"
+  },
+  "npm": {
+    "publish": true
+  },
+  "github": {
+    "release": true
+  }
+}

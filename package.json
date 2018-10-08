@@ -38,7 +38,8 @@
     "lint": "eslint .",
     "test": "jest",
     "prepare": "node ./scripts/generate-mappings",
-    "bootstrap": "yarn && yarn --cwd example && yarn --cwd docs"
+    "bootstrap": "yarn && yarn --cwd example && yarn --cwd docs",
+    "release": "release-it"
   },
   "dependencies": {
     "@callstack/react-theme-provider": "^1.0.5",
@@ -53,6 +54,8 @@
     "babel-cli": "^6.26.0",
     "babel-plugin-tester": "^5.0.0",
     "babel-preset-react-native": "^4.0.0",
+    "chalk": "^2.4.1",
+    "dedent": "^0.7.0",
     "eslint": "^4.19.1",
     "eslint-config-callstack-io": "^1.1.1",
     "eslint-plugin-prettier": "^2.6.0",
@@ -67,6 +70,7 @@
     "react-native": "~0.55.4",
     "react-native-vector-icons": "~4.6.0",
     "react-test-renderer": "16.3.1",
+    "release-it": "^7.6.1",
     "rimraf": "^2.6.2",
     "typescript": "^3.0.3"
   },
