@@ -6,6 +6,12 @@ export interface TextInputProps extends NativeTextInputProps {
   mode?: 'flat' | 'outlined';
   disabled?: boolean;
   label?: string;
+  leadingIcon?: IconSource,
+  leadingIconOnPressIn?: () => void,
+  leadingIconOnPressOut?: () => void,
+  trailingIcon?: IconSource,
+  trailingIconOnPressIn?: () => void,
+  trailingIconOnPressOut?: () => void,
   placeholder?: string;
   error?: boolean;
   onChangeText?: (text: string) => void;
@@ -20,6 +26,7 @@ export interface TextInputProps extends NativeTextInputProps {
   theme?: ThemeShape;
 }
 
+// TODO: Adjust this types to Typescript
 export interface RenderProps extends NativeTextInputProps {
   ref: (ref: any) => void;
   onChangeText: (text: string) => void;

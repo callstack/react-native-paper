@@ -7,12 +7,15 @@ import {
   TextInput as NativeTextInput,
   StyleSheet,
   I18nManager,
+  TouchableOpacity,
 } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
 import color from 'color';
+import Icon from './Icon';
 import Text from './Typography/Text';
 import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
+import type { IconSource } from './Icon';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
@@ -57,6 +60,30 @@ type Props = {
    * The text to use for the floating label.
    */
   label?: string,
+  /**
+   * Icon to display for the `Button`.
+   */
+  leadingIcon?: IconSource,
+  /**
+   * Function to execute on press in on the leadingIcon.
+   */
+  leadingIconOnPressIn?: () => Function,
+  /**
+   * Function to execute on press out on the leadingIcon.
+   */
+  leadingIconOnPressOut?: () => Function,
+  /**
+   * Icon to display for the `Button`.
+   */
+  trailingIcon?: IconSource,
+  /**
+   * Function to execute on press in on the trailingIcon.
+   */
+  trailingIconOnPressIn?: () => Function,
+    /**
+   * Function to execute on press out on the trailingIcon.
+   */
+  trailingIconOnPressOut?: () => Function,
   /**
    * Placeholder for the input.
    */
@@ -373,6 +400,12 @@ class TextInput extends React.Component<Props, State> {
       label,
       error,
       underlineColor,
+      leadingIcon,
+      leadingIconOnPressIn,
+      leadingIconOnPressOut,
+      trailingIcon,
+      trailingIconOnPressIn,
+      trailingIconOnPressOut,
       style,
       theme,
       render,
@@ -401,12 +434,13 @@ class TextInput extends React.Component<Props, State> {
     } else {
       inputTextColor = colors.text;
       activeColor = error ? colors.error : colors.primary;
-      placeholderColor = outlineColor = colors.placeholder;
+      placeholderColor = error ? colors.error : outlineColor = colors.placeholder;
       underlineColorCustom = underlineColor || colors.disabled;
     }
 
     if (mode === 'flat') {
       containerStyle = {
+        minHeight: 56,
         backgroundColor: theme.dark
           ? color(colors.background)
               .lighten(0.24)
@@ -419,6 +453,11 @@ class TextInput extends React.Component<Props, State> {
         borderTopLeftRadius: theme.roundness,
         borderTopRightRadius: theme.roundness,
       };
+    }
+    else if (mode === 'outlined') {
+      containerStyle = {
+        minHeight: 64,
+      }
     }
 
     const labelStyle = {
@@ -471,9 +510,14 @@ class TextInput extends React.Component<Props, State> {
         },
       ],
     };
+    let iconYOffset = 0;
+    if (mode === 'outlined') {
+      iconYOffset = 3;
+    };
 
     return (
-      <View style={[containerStyle, style]}>
+      <View style={[containerStyle, style]} // whole Component View
+      >
         {mode === 'outlined' ? (
           // Render the outline separately from the container
           // This is so that the label can overlap the outline
@@ -484,48 +528,11 @@ class TextInput extends React.Component<Props, State> {
               {
                 borderRadius: theme.roundness,
                 borderWidth: this.state.focused ? 2 : 1,
-                borderColor: this.state.focused ? activeColor : outlineColor,
+                borderColor: error ? colors.error : this.state.focused ? activeColor : outlineColor,
               },
             ]}
           />
         ) : null}
-
-        {mode === 'outlined' && label ? (
-          // When mode == 'outlined', the input label stays on top of the outline
-          // The background of the label covers the outline so it looks cut off
-          // To achieve the effect, we position the actual label with a background on top of it
-          // We set the color of the text to transparent so only the background is visible
-          <AnimatedText
-            pointerEvents="none"
-            style={[
-              styles.outlinedLabelBackground,
-              {
-                backgroundColor,
-                fontFamily,
-                fontSize: MINIMIZED_LABEL_FONT_SIZE,
-                // Hide the background when scale will be 0
-                // There's a bug in RN which makes scale: 0 act weird
-                opacity: this.state.labeled.interpolate({
-                  inputRange: [0, 0.9, 1],
-                  outputRange: [1, 1, 0],
-                }),
-                transform: [
-                  {
-                    // Animate the scale when label is moved up
-                    scaleX: this.state.labeled.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [1, 0],
-                    }),
-                  },
-                ],
-              },
-            ]}
-            numberOfLines={1}
-          >
-            {label}
-          </AnimatedText>
-        ) : null}
-
         {mode === 'flat' ? (
           // When mode === 'flat', render an underline
           <Animated.View
@@ -543,97 +550,156 @@ class TextInput extends React.Component<Props, State> {
             ]}
           />
         ) : null}
-
-        {label ? (
-          // Position colored placeholder and gray placeholder on top of each other and crossfade them
-          // This gives the effect of animating the color, but allows us to use native driver
-          <View
-            pointerEvents="none"
-            style={[
-              StyleSheet.absoluteFill,
-              {
-                opacity:
-                  // Hide the label in minimized state until we measure it's width
-                  this.state.value || this.state.focused
-                    ? this.state.labelLayout.measured
-                      ? 1
-                      : 0
-                    : 1,
-              },
-            ]}
+        <View style={styles.content} // Content View
+        >
+          {leadingIcon ? (
+            <TouchableOpacity 
+            style={[styles.icon, { top: iconYOffset }]} 
+            onPressIn={leadingIconOnPressIn} 
+            onPressOut={leadingIconOnPressOut}
+            
+            >
+              <Icon source={leadingIcon} size={24} color={error ? colors.error : this.state.focused ? activeColor : placeholderColor}/>
+            </TouchableOpacity>
+          ) : null}
+          <View style={styles.inputField} // Input View
           >
-            <AnimatedText
-              onLayout={e =>
-                this.setState({
-                  labelLayout: {
-                    width: e.nativeEvent.layout.width,
-                    measured: true,
+            {mode === 'outlined' && label ? (
+              // When mode == 'outlined', the input label stays on top of the outline
+              // The background of the label covers the outline so it looks cut off
+              // To achieve the effect, we position the actual label with a background on top of it
+              // We set the color of the text to transparent so only the background is visible
+              <AnimatedText
+                pointerEvents="none"
+                style={[
+                  styles.outlinedLabelBackground,
+                  {
+                    backgroundColor,
+                    fontFamily,
+                    fontSize: MINIMIZED_LABEL_FONT_SIZE,
+                    // Hide the background when scale will be 0
+                    // There's a bug in RN which makes scale: 0 act weird
+                    opacity: this.state.labeled.interpolate({
+                      inputRange: [0, 0.9, 1],
+                      outputRange: [1, 1, 0],
+                    }),
+                    transform: [
+                      {
+                        // Animate the scale when label is moved up
+                        scaleX: this.state.labeled.interpolate({
+                          inputRange: [0, 1],
+                          outputRange: [1, 0],
+                        }),
+                      },
+                    ],
                   },
-                })
-              }
-              style={[
-                styles.placeholder,
-                mode === 'outlined'
-                  ? styles.placeholderOutlined
-                  : styles.placeholderFlat,
-                labelStyle,
-                {
-                  color: activeColor,
-                  opacity: this.state.labeled.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [this.state.focused ? 1 : 0, 0],
-                  }),
-                },
-              ]}
-              numberOfLines={1}
-            >
-              {label}
-            </AnimatedText>
-            <AnimatedText
-              style={[
-                styles.placeholder,
-                mode === 'outlined'
-                  ? styles.placeholderOutlined
-                  : styles.placeholderFlat,
-                labelStyle,
-                {
-                  color: placeholderColor,
-                  opacity: this.state.focused ? this.state.labeled : 1,
-                },
-              ]}
-              numberOfLines={1}
-            >
-              {label}
-            </AnimatedText>
-          </View>
-        ) : null}
+                ]}
+                numberOfLines={1}
+              >
+                {label}
+              </AnimatedText>
+            ) : null}
 
-        {render({
-          ...rest,
-          ref: c => {
-            this._root = c;
-          },
-          onChangeText: this._handleChangeText,
-          placeholder: label ? this.state.placeholder : this.props.placeholder,
-          placeholderTextColor: placeholderColor,
-          editable: !disabled,
-          selectionColor: activeColor,
-          onFocus: this._handleFocus,
-          onBlur: this._handleBlur,
-          underlineColorAndroid: 'transparent',
-          style: [
-            styles.input,
-            mode === 'outlined'
-              ? styles.inputOutlined
-              : this.props.label
-                ? styles.inputFlatWithLabel
-                : styles.inputFlatWithoutLabel,
-            {
-              color: inputTextColor,
-              fontFamily,
-            },
-          ],
-        })}
+            {label ? (
+              // Position colored placeholder and gray placeholder on top of each other and crossfade them
+              // This gives the effect of animating the color, but allows us to use native driver
+              <View
+                pointerEvents="none"
+                style={[
+                  StyleSheet.absoluteFill,
+                  {
+                    opacity:
+                      // Hide the label in minimized state until we measure it's width
+                      this.state.value || this.state.focused
+                        ? this.state.labelLayout.measured
+                          ? 1
+                          : 0
+                        : 1,
+                  },
+                ]}
+              >
+                <AnimatedText
+                  onLayout={e =>
+                    this.setState({
+                      labelLayout: {
+                        width: e.nativeEvent.layout.width,
+                        measured: true,
+                      },
+                    })
+                  }
+                  style={[
+                    styles.placeholder,
+                    mode === 'outlined'
+                      ? styles.placeholderOutlined
+                      : styles.placeholderFlat,
+                    labelStyle,
+                    {
+                      color: activeColor,
+                      opacity: this.state.labeled.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [this.state.focused ? 1 : 0, 0],
+                      }),
+                    },
+                  ]}
+                  numberOfLines={1}
+                >
+                  {label}
+                </AnimatedText>
+                <AnimatedText
+                  style={[
+                    styles.placeholder,
+                    mode === 'outlined'
+                      ? styles.placeholderOutlined
+                      : styles.placeholderFlat,
+                    labelStyle,
+                    {
+                      color: placeholderColor,
+                      opacity: this.state.focused ? this.state.labeled : 1,
+                    },
+                  ]}
+                  numberOfLines={1}
+                >
+                  {label}
+                </AnimatedText>
+              </View>
+            ) : null}
+
+            {render({
+              ...rest,
+              ref: c => {
+                this._root = c;
+              },
+              onChangeText: this._handleChangeText,
+              placeholder: label ? this.state.placeholder : this.props.placeholder,
+              placeholderTextColor: placeholderColor,
+              editable: !disabled,
+              selectionColor: activeColor,
+              onFocus: this._handleFocus,
+              onBlur: this._handleBlur,
+              underlineColorAndroid: 'transparent',
+              style: [
+                styles.input,
+                mode === 'outlined'
+                  ? styles.inputOutlined
+                  : this.props.label
+                    ? styles.inputFlatWithLabel
+                    : styles.inputFlatWithoutLabel,
+                {
+                  color: inputTextColor,
+                  fontFamily,
+                },
+              ],
+            })}
+          </View>
+          {trailingIcon ? (
+            <TouchableOpacity 
+              style={[styles.icon, { top: iconYOffset, marginLeft: 0, marginRight: 12 }]} 
+              onPressIn={trailingIconOnPressIn} 
+              onPressOut={trailingIconOnPressOut}>
+              <Icon source={trailingIcon} size={24} color={error ? colors.error : this.state.focused ? activeColor : placeholderColor}/>
+            </TouchableOpacity>
+          ) : null}
+        </View>
       </View>
     );
   }
@@ -681,12 +747,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     fontSize: 16,
     margin: 0,
-    minHeight: 58,
+    minHeight: 56,
     textAlign: I18nManager.isRTL ? 'right' : 'left',
   },
   inputOutlined: {
     paddingTop: 20,
-    paddingBottom: 16,
+    paddingBottom: 12,
     minHeight: 64,
   },
   inputFlatWithLabel: {
@@ -695,5 +761,19 @@ const styles = StyleSheet.create({
   },
   inputFlatWithoutLabel: {
     paddingVertical: 15,
+  },
+  content: {
+    // flex: 1,
+    minHeight: 56,
+    flexDirection: 'row',
+  },
+  icon: {
+    width: 24,
+    height: 24,
+    marginLeft: 12,
+    alignSelf: 'center',
+  },
+  inputField: {
+    flex: 1,
   },
 });
