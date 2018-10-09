@@ -42,7 +42,7 @@
     "release": "release-it"
   },
   "dependencies": {
-    "@callstack/react-theme-provider": "^1.0.5",
+    "@callstack/react-theme-provider": "^1.0.6",
     "color": "^2.0.1",
     "create-react-context": "^0.2.2",
     "hoist-non-react-statics": "^2.5.0",
