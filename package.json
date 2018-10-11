@@ -41,6 +41,9 @@
     "bootstrap": "yarn && yarn --cwd example && yarn --cwd docs",
     "release": "release-it"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "dependencies": {
     "@callstack/react-theme-provider": "^1.0.6",
     "color": "^2.0.1",
