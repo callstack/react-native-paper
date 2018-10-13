@@ -484,7 +484,8 @@ class TextInput extends React.Component<Props, State> {
               {
                 borderRadius: theme.roundness,
                 borderWidth: this.state.focused ? 2 : 1,
-                borderColor: this.state.focused ? activeColor : outlineColor,
+                borderColor:
+                  this.state.focused || error ? activeColor : outlineColor,
               },
             ]}
           />
@@ -581,7 +582,7 @@ class TextInput extends React.Component<Props, State> {
                   color: activeColor,
                   opacity: this.state.labeled.interpolate({
                     inputRange: [0, 1],
-                    outputRange: [this.state.focused ? 1 : 0, 0],
+                    outputRange: [this.state.focused || error ? 1 : 0, 0],
                   }),
                 },
               ]}
@@ -598,7 +599,7 @@ class TextInput extends React.Component<Props, State> {
                 labelStyle,
                 {
                   color: placeholderColor,
-                  opacity: this.state.focused ? this.state.labeled : 1,
+                  opacity: this.state.focused || error ? this.state.labeled : 1,
                 },
               ]}
               numberOfLines={1}
