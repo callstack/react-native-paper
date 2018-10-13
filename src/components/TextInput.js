@@ -484,7 +484,7 @@ class TextInput extends React.Component<Props, State> {
               styles.outline,
               {
                 borderRadius: theme.roundness,
-                borderWidth: this.state.focused ? 2 : 1,
+                borderWidth: hasActiveOutline ? 2 : 1,
                 borderColor: hasActiveOutline ? activeColor : outlineColor,
               },
             ]}
