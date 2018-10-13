@@ -381,6 +381,7 @@ class TextInput extends React.Component<Props, State> {
 
     const { colors, fonts } = theme;
     const fontFamily = fonts.regular;
+    const hasActiveOutline = this.state.focused || error;
     const { backgroundColor = colors.background } =
       StyleSheet.flatten(style) || {};
 
@@ -483,8 +484,8 @@ class TextInput extends React.Component<Props, State> {
               styles.outline,
               {
                 borderRadius: theme.roundness,
-                borderWidth: this.state.focused ? 2 : 1,
-                borderColor: this.state.focused ? activeColor : outlineColor,
+                borderWidth: hasActiveOutline ? 2 : 1,
+                borderColor: hasActiveOutline ? activeColor : outlineColor,
               },
             ]}
           />
@@ -581,7 +582,7 @@ class TextInput extends React.Component<Props, State> {
                   color: activeColor,
                   opacity: this.state.labeled.interpolate({
                     inputRange: [0, 1],
-                    outputRange: [this.state.focused ? 1 : 0, 0],
+                    outputRange: [hasActiveOutline ? 1 : 0, 0],
                   }),
                 },
               ]}
@@ -598,7 +599,7 @@ class TextInput extends React.Component<Props, State> {
                 labelStyle,
                 {
                   color: placeholderColor,
-                  opacity: this.state.focused ? this.state.labeled : 1,
+                  opacity: hasActiveOutline ? this.state.labeled : 1,
                 },
               ]}
               numberOfLines={1}
