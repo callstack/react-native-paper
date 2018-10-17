@@ -184,6 +184,7 @@ class TextInput extends React.Component<Props, State> {
     disabled: false,
     error: false,
     multiline: false,
+    editable: true,
     render: props => <NativeTextInput {...props} />,
   };
 
@@ -327,6 +328,8 @@ class TextInput extends React.Component<Props, State> {
   };
 
   _handleChangeText = (value: string) => {
+    if (!this.props.editable) return;
+
     this.setState({ value });
     this.props.onChangeText && this.props.onChangeText(value);
   };
