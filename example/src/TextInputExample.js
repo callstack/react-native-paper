@@ -40,10 +40,9 @@ class TextInputExample extends React.Component<Props, State> {
 
     return (
       <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={'padding'}
-        keyboardVerticalOffset="80"
-        enabled
+        style={styles.wrapper}
+        behavior="padding"
+        keyboardVerticalOffset={80}
       >
         <ScrollView
           style={[styles.container, { backgroundColor: background }]}
@@ -98,6 +97,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 8,
+  },
+  wrapper: {
+    flex: 1,
   },
   inputContainerStyle: {
     margin: 8,

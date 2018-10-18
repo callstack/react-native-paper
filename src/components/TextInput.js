@@ -198,10 +198,10 @@ class TextInput extends React.Component<Props, State> {
   }
 
   state = {
-    labeled: new Animated.Value(this.props.value ? 0 : 1),
+    labeled: new Animated.Value(this.props.value || this.props.error ? 0 : 1),
     error: new Animated.Value(this.props.error ? 1 : 0),
     focused: false,
-    placeholder: '',
+    placeholder: this.props.error ? this.props.placeholder : '',
     value: this.props.value,
     labelLayout: {
       measured: false,
@@ -216,7 +216,7 @@ class TextInput extends React.Component<Props, State> {
     ) {
       // The label should be minimized if the text input is focused, or has text
       // In minimized mode, the label moves up and becomes small
-      if (this.state.value || this.state.focused) {
+      if (this.state.value || this.state.focused || this.props.error) {
         this._minmizeLabel();
       } else {
         this._restoreLabel();
@@ -227,10 +227,10 @@ class TextInput extends React.Component<Props, State> {
       prevState.focused !== this.state.focused ||
       prevProps.label !== this.props.label
     ) {
-      // Show placeholder text only if the input is focused or there's no label
+      // Show placeholder text only if the input is focused, or has error, or there's no label
       // We don't show placeholder if there's a label because the label acts as placeholder
       // When focused, the label moves up, so we can show a placeholder
-      if (this.state.focused || !this.props.label) {
+      if (this.state.focused || this.props.error || !this.props.label) {
         this._showPlaceholder();
       } else {
         this._hidePlaceholder();
@@ -328,7 +328,9 @@ class TextInput extends React.Component<Props, State> {
   };
 
   _handleChangeText = (value: string) => {
-    if (!this.props.editable) return;
+    if (!this.props.editable) {
+      return;
+    }
 
     this.setState({ value });
     this.props.onChangeText && this.props.onChangeText(value);
