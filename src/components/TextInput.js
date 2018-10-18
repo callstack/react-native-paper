@@ -684,6 +684,7 @@ const styles = StyleSheet.create({
     color: 'transparent',
   },
   input: {
+    flexGrow: 1,
     paddingHorizontal: 12,
     fontSize: 16,
     margin: 0,
