@@ -1,7 +1,12 @@
 /* @flow */
 
 import * as React from 'react';
-import { StyleSheet, View, ScrollView, KeyboardAvoidingView } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  KeyboardAvoidingView,
+} from 'react-native';
 import { TextInput, HelperText, withTheme } from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
 
@@ -34,8 +39,17 @@ class TextInputExample extends React.Component<Props, State> {
     } = this.props;
 
     return (
-      <KeyboardAvoidingView style={{ flex: 1 }} behavior={'padding'} keyboardVerticalOffset="80" enabled>
-        <ScrollView style={[styles.container, { backgroundColor: background }]} keyboardShouldPersistTaps={'always'} removeClippedSubviews={false}>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={'padding'}
+        keyboardVerticalOffset="80"
+        enabled
+      >
+        <ScrollView
+          style={[styles.container, { backgroundColor: background }]}
+          keyboardShouldPersistTaps={'always'}
+          removeClippedSubviews={false}
+        >
           <TextInput
             style={styles.inputContainerStyle}
             label="Flat input"
