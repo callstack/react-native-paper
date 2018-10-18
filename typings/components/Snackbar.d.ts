@@ -15,7 +15,7 @@ export interface SnackbarProps {
 }
 
 export declare class Snackbar extends React.Component<SnackbarProps> {
-  static DURATION_SHORT: string;
-  static DURATION_MEDIUM: string;
-  static DURATION_LONG: string;
+  static DURATION_SHORT: number;
+  static DURATION_MEDIUM: number;
+  static DURATION_LONG: number;
 }
