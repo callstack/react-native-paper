@@ -48,7 +48,7 @@ type Props = {
  * ```js
  * import * as React from 'react';
  * import { View } from 'react-native';
- * import { Button, Paragraph, Dialog, Portal } from 'react-native-paper';
+ * import { Button, Paragraph, Dialog, Portal, Provider } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
@@ -61,22 +61,24 @@ type Props = {
  *
  *   render() {
  *     return (
- *       <View>
- *         <Button onPress={this._showDialog}>Show Dialog</Button>
- *         <Portal>
- *           <Dialog
- *              visible={this.state.visible}
- *              onDismiss={this._hideDialog}>
- *             <Dialog.Title>Alert</Dialog.Title>
- *             <Dialog.Content>
- *               <Paragraph>This is simple dialog</Paragraph>
- *             </Dialog.Content>
- *             <Dialog.Actions>
- *               <Button onPress={this._hideDialog}>Done</Button>
- *             </Dialog.Actions>
- *           </Dialog>
- *         </Portal>
- *       </View>
+ *       <Provider>
+ *         <View>
+ *           <Button onPress={this._showDialog}>Show Dialog</Button>
+ *           <Portal>
+ *             <Dialog
+ *                visible={this.state.visible}
+ *                onDismiss={this._hideDialog}>
+ *               <Dialog.Title>Alert</Dialog.Title>
+ *               <Dialog.Content>
+ *                 <Paragraph>This is simple dialog</Paragraph>
+ *               </Dialog.Content>
+ *               <Dialog.Actions>
+ *                 <Button onPress={this._hideDialog}>Done</Button>
+ *               </Dialog.Actions>
+ *             </Dialog>
+ *           </Portal>
+ *         </View>
+ *       </Provider>
  *     );
  *   }
  * }
