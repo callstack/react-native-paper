@@ -7,6 +7,20 @@ import Snackbar from '../Snackbar';
 
 jest.useFakeTimers();
 
+// mock the Animated and make sure any animation finishes before checking the snapshot results
+jest.mock('Animated', () => {
+  const ActualAnimated = jest.requireActual('Animated');
+  return {
+    ...ActualAnimated,
+    timing: (value, config) => ({
+      start: callback => {
+        value.setValue(config.toValue);
+        callback && callback();
+      },
+    }),
+  };
+});
+
 it('renders snackbar with content', () => {
   const tree = renderer
     .create(
