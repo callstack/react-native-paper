@@ -44,10 +44,10 @@ exports[`renders snackbar with Text as a child 1`] = `
     pointerEvents="box-none"
     style={
       Object {
-        "opacity": 0,
+        "opacity": 1,
         "transform": Array [
           Object {
-            "scale": 0.9,
+            "scale": 1,
           },
         ],
       }
@@ -145,10 +145,10 @@ exports[`renders snackbar with action button 1`] = `
     pointerEvents="box-none"
     style={
       Object {
-        "opacity": 0,
+        "opacity": 1,
         "transform": Array [
           Object {
-            "scale": 0.9,
+            "scale": 1,
           },
         ],
       }
@@ -350,10 +350,10 @@ exports[`renders snackbar with content 1`] = `
     pointerEvents="box-none"
     style={
       Object {
-        "opacity": 0,
+        "opacity": 1,
         "transform": Array [
           Object {
-            "scale": 0.9,
+            "scale": 1,
           },
         ],
       }

@@ -129,7 +129,9 @@ class Snackbar extends React.Component<Props, State> {
   };
 
   componentDidMount() {
-    this._toggle();
+    if (this.props.visible) {
+      this._show();
+    }
   }
 
   componentDidUpdate(prevProps) {
