@@ -68,7 +68,8 @@ class ListAccordion extends React.Component<Props, State> {
   static displayName = 'List.Accordion';
 
   state = {
-    expanded: false,
+    expanded: this.props.expanded || false,
+
   };
 
   _handlePress = () =>
