@@ -69,7 +69,7 @@ type NativeEvent = {
  *
  * ## Usage
  * ```js
- * import React from 'react';
+ * import * as React from 'react';
  * import { Image } from 'react-native';
  * import { Banner } from 'react-native-paper';
  *
