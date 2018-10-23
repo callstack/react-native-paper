@@ -27,6 +27,7 @@ const DarkTheme: Theme = {
       .alpha(0.5)
       .rgb()
       .string(),
+    badge: lightBlue500,
   },
 };
 

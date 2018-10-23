@@ -13,6 +13,7 @@ export type Theme = {
     disabled: string,
     placeholder: string,
     backdrop: string,
+    badge: string,
   },
   fonts: {
     regular: string,

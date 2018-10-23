@@ -1,0 +1,413 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders badge in bottom left corner 1`] = `
+<View>
+  <View>
+    Text
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "position": "absolute",
+        },
+        Object {
+          "backgroundColor": "#f44336",
+          "borderRadius": 6,
+          "bottom": -6,
+          "left": -6,
+          "paddingHorizontal": 6,
+        },
+        undefined,
+      ]
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontFamily": "Helvetica Neue",
+            "textAlign": "left",
+            "writingDirection": "ltr",
+          },
+          Object {
+            "color": "#ffffff",
+          },
+        ]
+      }
+      theme={
+        Object {
+          "colors": Object {
+            "accent": "#03dac4",
+            "backdrop": "rgba(0, 0, 0, 0.5)",
+            "background": "#f6f6f6",
+            "disabled": "rgba(0, 0, 0, 0.26)",
+            "error": "#B00020",
+            "placeholder": "rgba(0, 0, 0, 0.54)",
+            "primary": "#6200ee",
+            "surface": "#ffffff",
+            "text": "#000000",
+          },
+          "dark": false,
+          "fonts": Object {
+            "light": "HelveticaNeue-Light",
+            "medium": "HelveticaNeue-Medium",
+            "regular": "Helvetica Neue",
+            "thin": "HelveticaNeue-Thin",
+          },
+          "roundness": 4,
+        }
+      }
+    >
+      3
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`renders badge in bottom right corner 1`] = `
+<View>
+  <View>
+    Text
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "position": "absolute",
+        },
+        Object {
+          "backgroundColor": "#f44336",
+          "borderRadius": 6,
+          "bottom": -6,
+          "paddingHorizontal": 6,
+          "right": -6,
+        },
+        undefined,
+      ]
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontFamily": "Helvetica Neue",
+            "textAlign": "left",
+            "writingDirection": "ltr",
+          },
+          Object {
+            "color": "#ffffff",
+          },
+        ]
+      }
+      theme={
+        Object {
+          "colors": Object {
+            "accent": "#03dac4",
+            "backdrop": "rgba(0, 0, 0, 0.5)",
+            "background": "#f6f6f6",
+            "disabled": "rgba(0, 0, 0, 0.26)",
+            "error": "#B00020",
+            "placeholder": "rgba(0, 0, 0, 0.54)",
+            "primary": "#6200ee",
+            "surface": "#ffffff",
+            "text": "#000000",
+          },
+          "dark": false,
+          "fonts": Object {
+            "light": "HelveticaNeue-Light",
+            "medium": "HelveticaNeue-Medium",
+            "regular": "Helvetica Neue",
+            "thin": "HelveticaNeue-Thin",
+          },
+          "roundness": 4,
+        }
+      }
+    >
+      3
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`renders badge in different color 1`] = `
+<View>
+  <View>
+    Text
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "position": "absolute",
+        },
+        Object {
+          "backgroundColor": "#e91e63",
+          "borderRadius": 6,
+          "paddingHorizontal": 6,
+          "right": -6,
+          "top": -6,
+        },
+        undefined,
+      ]
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontFamily": "Helvetica Neue",
+            "textAlign": "left",
+            "writingDirection": "ltr",
+          },
+          Object {
+            "color": "#ffffff",
+          },
+        ]
+      }
+      theme={
+        Object {
+          "colors": Object {
+            "accent": "#03dac4",
+            "backdrop": "rgba(0, 0, 0, 0.5)",
+            "background": "#f6f6f6",
+            "disabled": "rgba(0, 0, 0, 0.26)",
+            "error": "#B00020",
+            "placeholder": "rgba(0, 0, 0, 0.54)",
+            "primary": "#6200ee",
+            "surface": "#ffffff",
+            "text": "#000000",
+          },
+          "dark": false,
+          "fonts": Object {
+            "light": "HelveticaNeue-Light",
+            "medium": "HelveticaNeue-Medium",
+            "regular": "Helvetica Neue",
+            "thin": "HelveticaNeue-Thin",
+          },
+          "roundness": 4,
+        }
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`renders badge in different size 1`] = `
+<View>
+  <View>
+    Text
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "position": "absolute",
+        },
+        Object {
+          "backgroundColor": "#f44336",
+          "borderRadius": 6,
+          "paddingHorizontal": 6,
+          "right": -6,
+          "top": -6,
+        },
+        undefined,
+      ]
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontFamily": "Helvetica Neue",
+            "textAlign": "left",
+            "writingDirection": "ltr",
+          },
+          Object {
+            "color": "#ffffff",
+          },
+        ]
+      }
+      theme={
+        Object {
+          "colors": Object {
+            "accent": "#03dac4",
+            "backdrop": "rgba(0, 0, 0, 0.5)",
+            "background": "#f6f6f6",
+            "disabled": "rgba(0, 0, 0, 0.26)",
+            "error": "#B00020",
+            "placeholder": "rgba(0, 0, 0, 0.54)",
+            "primary": "#6200ee",
+            "surface": "#ffffff",
+            "text": "#000000",
+          },
+          "dark": false,
+          "fonts": Object {
+            "light": "HelveticaNeue-Light",
+            "medium": "HelveticaNeue-Medium",
+            "regular": "Helvetica Neue",
+            "thin": "HelveticaNeue-Thin",
+          },
+          "roundness": 4,
+        }
+      }
+    >
+      3
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`renders badge in top left corner 1`] = `
+<View>
+  <View>
+    Text
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "position": "absolute",
+        },
+        Object {
+          "backgroundColor": "#f44336",
+          "borderRadius": 6,
+          "left": -6,
+          "paddingHorizontal": 6,
+          "top": -6,
+        },
+        undefined,
+      ]
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontFamily": "Helvetica Neue",
+            "textAlign": "left",
+            "writingDirection": "ltr",
+          },
+          Object {
+            "color": "#ffffff",
+          },
+        ]
+      }
+      theme={
+        Object {
+          "colors": Object {
+            "accent": "#03dac4",
+            "backdrop": "rgba(0, 0, 0, 0.5)",
+            "background": "#f6f6f6",
+            "disabled": "rgba(0, 0, 0, 0.26)",
+            "error": "#B00020",
+            "placeholder": "rgba(0, 0, 0, 0.54)",
+            "primary": "#6200ee",
+            "surface": "#ffffff",
+            "text": "#000000",
+          },
+          "dark": false,
+          "fonts": Object {
+            "light": "HelveticaNeue-Light",
+            "medium": "HelveticaNeue-Medium",
+            "regular": "Helvetica Neue",
+            "thin": "HelveticaNeue-Thin",
+          },
+          "roundness": 4,
+        }
+      }
+    >
+      3
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`renders badge in top right corner by default 1`] = `
+<View>
+  <View>
+    Text
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "position": "absolute",
+        },
+        Object {
+          "backgroundColor": "#f44336",
+          "borderRadius": 6,
+          "paddingHorizontal": 6,
+          "right": -6,
+          "top": -6,
+        },
+        undefined,
+      ]
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontFamily": "Helvetica Neue",
+            "textAlign": "left",
+            "writingDirection": "ltr",
+          },
+          Object {
+            "color": "#ffffff",
+          },
+        ]
+      }
+      theme={
+        Object {
+          "colors": Object {
+            "accent": "#03dac4",
+            "backdrop": "rgba(0, 0, 0, 0.5)",
+            "background": "#f6f6f6",
+            "disabled": "rgba(0, 0, 0, 0.26)",
+            "error": "#B00020",
+            "placeholder": "rgba(0, 0, 0, 0.54)",
+            "primary": "#6200ee",
+            "surface": "#ffffff",
+            "text": "#000000",
+          },
+          "dark": false,
+          "fonts": Object {
+            "light": "HelveticaNeue-Light",
+            "medium": "HelveticaNeue-Medium",
+            "regular": "Helvetica Neue",
+            "thin": "HelveticaNeue-Thin",
+          },
+          "roundness": 4,
+        }
+      }
+    >
+      3
+    </Text>
+  </View>
+</View>
+`;

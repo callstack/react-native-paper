@@ -26,6 +26,7 @@ export default {
       .alpha(0.5)
       .rgb()
       .string(),
+    badge: '#6200ee',
   },
   fonts,
 };
