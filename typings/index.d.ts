@@ -5,6 +5,7 @@ import * as Drawer from './components/Drawer';
 
 export * from './types';
 export * from './components/Appbar';
+export * from './components/Badge';
 export * from './components/Banner';
 export * from './components/BottomNavigation';
 export * from './components/Typography';

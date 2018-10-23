@@ -19,6 +19,7 @@ import * as Drawer from './components/Drawer/Drawer';
 
 export { Avatar, List, Drawer };
 
+export { default as Badge } from './components/Badge';
 export { default as Banner } from './components/Banner';
 export { default as BottomNavigation } from './components/BottomNavigation';
 export { default as Button } from './components/Button';

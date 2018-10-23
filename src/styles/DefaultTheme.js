@@ -1,7 +1,7 @@
 /* @flow */
 
 import color from 'color';
-import { black, white } from './colors';
+import { black, white, pinkA400 } from './colors';
 import fonts from './fonts';
 
 export default {
@@ -26,6 +26,7 @@ export default {
       .alpha(0.5)
       .rgb()
       .string(),
+    notification: pinkA400,
   },
   fonts,
 };

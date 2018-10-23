@@ -172,6 +172,7 @@ exports[`renders avatar with text 1`] = `
         Array [
           Object {
             "textAlign": "center",
+            "textAlignVertical": "center",
           },
           Object {
             "color": "#ffffff",
@@ -218,6 +219,7 @@ exports[`renders avatar with text and custom background color 1`] = `
         Array [
           Object {
             "textAlign": "center",
+            "textAlignVertical": "center",
           },
           Object {
             "color": "#ffffff",
@@ -264,6 +266,7 @@ exports[`renders avatar with text and custom colors 1`] = `
         Array [
           Object {
             "textAlign": "center",
+            "textAlignVertical": "center",
           },
           Object {
             "color": "#FFFFFF",
@@ -310,6 +313,7 @@ exports[`renders avatar with text and custom size 1`] = `
         Array [
           Object {
             "textAlign": "center",
+            "textAlignVertical": "center",
           },
           Object {
             "color": "#ffffff",

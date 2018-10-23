@@ -15,6 +15,7 @@ export type Theme = {
     disabled: string,
     placeholder: string,
     backdrop: string,
+    notification: string,
   },
   fonts: {
     regular: string,
