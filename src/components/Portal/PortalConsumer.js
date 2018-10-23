@@ -13,12 +13,12 @@ export default class PortalConsumer extends React.Component<Props> {
   componentDidMount() {
     if (!this.props.manager) {
       throw new Error(
-        'This error occured because you forgot to wrap your root component with Provider component from react-native-paper.\n\n' +
-          "Please read our getting-started guide and make sure you've done all required steps.\n\n" +
+        'Looks like you forgot to wrap your root component with `Provider` component from `react-native-paper`.\n\n' +
+          "Please read our getting-started guide and make sure you've followed all the required steps.\n\n" +
           'https://callstack.github.io/react-native-paper/getting-started.html'
       );
     }
-
+    
     this._key = this.props.manager.mount(this.props.children);
   }
 
