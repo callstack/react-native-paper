@@ -24,7 +24,7 @@ class TextInputExample extends React.Component<Props, State> {
     outlinedText: '',
   };
 
-  _isUsernameValid = () => /^[a-z]*$/.test(this.state.name);
+  _isUsernameValid = () => /^[a-zA-Z]*$/.test(this.state.name);
 
   render() {
     const {
