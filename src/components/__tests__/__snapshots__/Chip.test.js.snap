@@ -106,7 +106,8 @@ exports[`renders chip with icon 1`] = `
               Object {
                 "height": 24,
                 "lineHeight": 24,
-                "marginVertical": 4,
+                "marginBottom": 5,
+                "marginTop": 3,
                 "textAlignVertical": "center",
               },
               Object {
@@ -208,7 +209,8 @@ exports[`renders chip with onPress 1`] = `
               Object {
                 "height": 24,
                 "lineHeight": 24,
-                "marginVertical": 4,
+                "marginBottom": 5,
+                "marginTop": 3,
                 "textAlignVertical": "center",
               },
               Object {
@@ -356,7 +358,8 @@ exports[`renders deletable chip 1`] = `
               Object {
                 "height": 24,
                 "lineHeight": 24,
-                "marginVertical": 4,
+                "marginBottom": 5,
+                "marginTop": 3,
                 "textAlignVertical": "center",
               },
               Object {
@@ -459,7 +462,8 @@ exports[`renders outlined disabled chip 1`] = `
               Object {
                 "height": 24,
                 "lineHeight": 24,
-                "marginVertical": 4,
+                "marginBottom": 5,
+                "marginTop": 3,
                 "textAlignVertical": "center",
               },
               Object {
@@ -608,7 +612,8 @@ exports[`renders selected chip 1`] = `
               Object {
                 "height": 24,
                 "lineHeight": 24,
-                "marginVertical": 4,
+                "marginBottom": 5,
+                "marginTop": 3,
                 "textAlignVertical": "center",
               },
               Object {

@@ -290,7 +290,8 @@ const styles = StyleSheet.create({
     height: 24,
     lineHeight: 24,
     textAlignVertical: 'center',
-    marginVertical: 4,
+    marginTop: 3,
+    marginBottom: 5,
   },
   avatar: {
     width: 24,
