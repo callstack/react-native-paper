@@ -1,15 +1,14 @@
 import * as React from 'react';
+import { TouchableWithoutFeedbackProps } from 'react-native';
 import { ThemeShape } from '../types';
 
-export interface TouchableRippleProps {
+export interface TouchableRippleProps extends TouchableWithoutFeedbackProps {
   borderless?: boolean;
   background?: Object;
   disabled?: boolean;
-  onPress?: Function;
   rippleColor?: string;
   underlayColor?: string;
   children: React.ReactNode;
-  style?: any;
   theme?: ThemeShape;
 }
 
