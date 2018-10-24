@@ -18,7 +18,7 @@ export default class PortalConsumer extends React.Component<Props> {
           'https://callstack.github.io/react-native-paper/getting-started.html'
       );
     }
-    
+
     this._key = this.props.manager.mount(this.props.children);
   }
 
