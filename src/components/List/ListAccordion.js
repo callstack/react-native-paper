@@ -23,6 +23,10 @@ type Props = {
    */
   left?: (props: { color: string }) => React.Node,
   /**
+   * Default state of visibility for accordion
+   */
+  expanded?: React.Node,
+  /**
    * Content of the section.
    */
   children: React.Node,
