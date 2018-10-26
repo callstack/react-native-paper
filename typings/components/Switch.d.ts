@@ -1,12 +1,9 @@
 import * as React from 'react';
+import { SwitchProps as NativeSwitchProps } from 'react-native';
 import { ThemeShape } from '../types';
 
-export interface SwitchProps {
-  disabled?: boolean;
-  value?: boolean;
+export interface SwitchProps extends NativeSwitchProps {
   color?: string;
-  onValueChange?: Function;
-  style?: any;
   theme?: ThemeShape;
 }
 

@@ -1,18 +1,16 @@
 import * as React from 'react';
 import { ThemeShape } from '../types';
+import { SurfaceProps } from './Surface';
 
 export interface BannerAction {
   label: string;
   onPress: () => any;
 }
 
-export interface BannerProps {
+export interface BannerProps extends SurfaceProps {
   visible: boolean;
-  children: React.ReactNode;
   image?: (props: { size: number }) => React.ReactNode;
-  actions: Array<BannerAction>;
-  style?: any;
-  theme?: ThemeShape;
+  actions: BannerAction[];
 }
 
 export declare class Banner extends React.Component<BannerProps> {}

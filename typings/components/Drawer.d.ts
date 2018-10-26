@@ -1,20 +1,19 @@
 import * as React from 'react';
+import { ViewProps } from 'react-native';
 import { ThemeShape, IconSource } from '../types';
 
-export interface ItemProps {
+export interface ItemProps extends ViewProps {
   label: string;
   icon?: IconSource;
   active?: boolean;
-  onPress?: () => any;
-  style?: any;
   theme?: ThemeShape;
 }
 
 export declare class Item extends React.Component<ItemProps> {}
 
-export interface SectionProps {
-  title?: string;
+export interface SectionProps extends ViewProps {
   children: React.ReactNode;
+  title?: string;
   theme?: ThemeShape;
 }
 
