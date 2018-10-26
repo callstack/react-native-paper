@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { StyleProp, ViewStyle, ViewProps, TouchableNativeFeedbackProps } from 'react-native';
+import { StyleProp, TextStyle, ViewStyle, ViewProps, TouchableNativeFeedbackProps } from 'react-native';
 import { IconSource, ThemeShape } from '../types';
-import { TouchableRippleProps } from './TouchableRipple';
+import { TouchableRipplePropsWithoutChildren } from './TouchableRipple';
 
 export interface AppbarContentProps {
   color?: string;
@@ -13,13 +13,13 @@ export interface AppbarContentProps {
   theme?: ThemeShape;
 }
 
-export interface AppbarActionProps extends TouchableRippleProps {
+export interface AppbarActionProps extends TouchableRipplePropsWithoutChildren {
   color?: string;
   icon: IconSource;
   size?: number;
 }
 
-export interface AppbarBackActionProps extends TouchableRippleProps {
+export interface AppbarBackActionProps extends TouchableRipplePropsWithoutChildren {
   color?: string;
   size?: number;
 }

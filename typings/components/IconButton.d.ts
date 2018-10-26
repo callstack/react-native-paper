@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { ThemeShape, IconSource } from '../types';
-import { TouchableRippleProps } from './TouchableRipple';
+import { TouchableRipplePropsWithoutChildren } from './TouchableRipple';
 
-export interface IconButtonProps extends TouchableRippleProps {
+export interface IconButtonProps extends TouchableRipplePropsWithoutChildren {
   icon: IconSource;
   color?: string;
   size?: number;
