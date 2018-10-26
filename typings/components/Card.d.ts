@@ -18,6 +18,7 @@ export interface CardCoverProps extends ImageProps {
 
 export interface CardProps {
   elevation?: number;
+  onLongPress?: () => any;
   onPress?: () => any;
   children: React.ReactNode;
   style?: any;
