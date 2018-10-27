@@ -41,7 +41,7 @@ class TextInputExample extends React.Component<Props, State> {
     return (
       <KeyboardAvoidingView
         style={styles.wrapper}
-        behavior="padding"
+        behavior={Platform.OS !== 'android'?"padding":undefined}
         keyboardVerticalOffset={80}
       >
         <ScrollView
