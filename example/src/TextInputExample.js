@@ -6,7 +6,7 @@ import {
   View,
   ScrollView,
   KeyboardAvoidingView,
-  Platform
+  Platform,
 } from 'react-native';
 import { TextInput, HelperText, withTheme } from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
@@ -42,7 +42,7 @@ class TextInputExample extends React.Component<Props, State> {
     return (
       <KeyboardAvoidingView
         style={styles.wrapper}
-        behavior={Platform.OS !== 'android'?"padding":undefined}
+        behavior={Platform.OS !== 'android'?'padding':undefined}
         keyboardVerticalOffset={80}
       >
         <ScrollView
