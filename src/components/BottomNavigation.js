@@ -375,6 +375,8 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
   }
 
   componentDidMount() {
+    // Workaround for native animated bug in react-native@^0.57
+    // Context: https://github.com/callstack/react-native-paper/pull/637
     this._animateToCurrentIndex();
   }
 
