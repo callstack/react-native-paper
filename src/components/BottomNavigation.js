@@ -374,20 +374,31 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
     };
   }
 
+  componentDidMount() {
+    this._animateToCurrentIndex();
+  }
+
   componentDidUpdate(prevProps) {
     if (prevProps.navigationState.index === this.props.navigationState.index) {
       return;
     }
 
-    const shifting = this._isShifting();
-    const { routes, index } = this.props.navigationState;
-
     // Reset offsets of previous and current tabs before animation
     this.state.offsets.forEach((offset, i) => {
-      if (i === index || i === prevProps.navigationState.index) {
+      if (
+        i === this.props.navigationState.index ||
+        i === prevProps.navigationState.index
+      ) {
         offset.setValue(0);
       }
     });
+
+    this._animateToCurrentIndex();
+  }
+
+  _animateToCurrentIndex = () => {
+    const shifting = this._isShifting();
+    const { routes, index } = this.props.navigationState;
 
     // Reset the ripple to avoid glitch if it's currently animating
     this.state.ripple.setValue(MIN_RIPPLE_SCALE);
@@ -425,7 +436,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
         });
       }
     });
-  }
+  };
 
   _handleLayout = e =>
     this.setState({
