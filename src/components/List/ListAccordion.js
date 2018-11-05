@@ -23,10 +23,9 @@ type Props = {
    */
   left?: (props: { color: string }) => React.Node,
   /**
-   * Whether the list accordion is expanded or not.
-   * If this is provided the accordion will behave as a "controlled component"
-   * which means that you need to provide the onPress prop to know when your
-   * user is trying to toggle it.
+   * Whether the accordion is expanded or not.
+   * If this prop is provided, the accordion will behave as a "controlled component".
+   * You'll need to update this prop when you want to toggle the component or on `onPress`.
    */
   expanded?: boolean,
   /**
@@ -107,8 +106,15 @@ class ListAccordion extends React.Component<Props, State> {
   };
 
   _handlePress = () => {
-    if (this.props.expanded !== undefined && this.props.onPress) {
-      this.props.onPress();
+    if (this.props.expanded !== undefined) {
+      if (typeof this.props.onPress === 'undefined') {
+        throw new Error(
+          'The `onPress` prop must be passed when the `expanded` prop is passed to List.Accordion.'
+        );
+      } else {
+        this.props.onPress();
+      }
+
       return;
     }
 
@@ -128,9 +134,10 @@ class ListAccordion extends React.Component<Props, State> {
       .rgb()
       .string();
 
-    const expanded = this.props.expanded !== undefined && this.props.onPress
-      ? this.props.expanded
-      : this.state.expanded;
+    const expanded =
+      this.props.expanded !== undefined
+        ? this.props.expanded
+        : this.state.expanded;
 
     return (
       <View>
