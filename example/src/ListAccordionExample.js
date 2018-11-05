@@ -9,8 +9,20 @@ type Props = {
   theme: Theme,
 };
 
-class ListAccordionExample extends React.Component<Props> {
+type State = {
+  expanded: boolean,
+};
+
+class ListAccordionExample extends React.Component<Props, State> {
   static title = 'List.Accordion';
+
+  state = {
+    expanded: true,
+  };
+
+  _handlePress = () => {
+    this.setState({ expanded: !this.state.expanded });
+  };
 
   render() {
     const {
@@ -18,6 +30,7 @@ class ListAccordionExample extends React.Component<Props> {
         colors: { background },
       },
     } = this.props;
+
     return (
       <ScrollView style={[styles.container, { backgroundColor: background }]}>
         <List.Section title="Expandable list item">
@@ -27,6 +40,14 @@ class ListAccordionExample extends React.Component<Props> {
           >
             <List.Item title="List item 1" />
             <List.Item title="List item 2" />
+          </List.Accordion>
+          <List.Accordion
+            left={props => <List.Icon {...props} icon="folder" />}
+            title="Start expanded"
+            expanded={this.state.expanded}
+            onPress={this._handlePress}
+          >
+            <List.Item title="List item 1" />
           </List.Accordion>
         </List.Section>
         <Divider />

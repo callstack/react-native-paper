@@ -4,6 +4,8 @@ import { ThemeShape, IconSource } from '../types';
 export interface AccordionProps {
   title: React.ReactNode;
   description?: React.ReactNode;
+  expanded?: boolean;
+  onPress?: () => any;
   left?: (props: { color: string }) => React.ReactNode;
   children: React.ReactNode;
   theme?: ThemeShape;
