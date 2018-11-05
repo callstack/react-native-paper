@@ -20,7 +20,7 @@ class ListAccordionExample extends React.Component<Props, State> {
     expanded: true,
   };
 
-  _onPress = () => {
+  _handlePress = () => {
     this.setState({ expanded: !this.state.expanded });
   };
 
@@ -45,7 +45,7 @@ class ListAccordionExample extends React.Component<Props, State> {
             left={props => <List.Icon {...props} icon="folder" />}
             title="Start expanded"
             expanded={this.state.expanded}
-            onPress={this._onPress}
+            onPress={this._handlePress}
           >
             <List.Item title="List item 1" />
           </List.Accordion>
