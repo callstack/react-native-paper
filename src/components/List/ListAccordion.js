@@ -128,7 +128,7 @@ class ListAccordion extends React.Component<Props, State> {
       .rgb()
       .string();
 
-    const expanded = this.props.onPress
+    const expanded = this.props.expanded !== undefined && this.props.onPress
       ? this.props.expanded
       : this.state.expanded;
 
