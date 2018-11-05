@@ -2,10 +2,9 @@
 
 exports[`renders disabled icon button 1`] = `
 <View
-  accessibilityComponentType="button"
-  accessibilityTraits={
+  accessibilityRole="button"
+  accessibilityStates={
     Array [
-      "button",
       "disabled",
     ]
   }
@@ -47,9 +46,7 @@ exports[`renders disabled icon button 1`] = `
   >
     <Text
       accessibilityElementsHidden={true}
-      accessible={true}
       allowFontScaling={false}
-      ellipsizeMode="tail"
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
       style={
@@ -75,6 +72,7 @@ exports[`renders disabled icon button 1`] = `
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
+          Object {},
         ]
       }
     >
@@ -86,8 +84,7 @@ exports[`renders disabled icon button 1`] = `
 
 exports[`renders icon button by default 1`] = `
 <View
-  accessibilityComponentType="button"
-  accessibilityTraits="button"
+  accessibilityRole="button"
   accessible={true}
   hitSlop={
     Object {
@@ -124,9 +121,7 @@ exports[`renders icon button by default 1`] = `
   >
     <Text
       accessibilityElementsHidden={true}
-      accessible={true}
       allowFontScaling={false}
-      ellipsizeMode="tail"
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
       style={
@@ -152,6 +147,7 @@ exports[`renders icon button by default 1`] = `
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
+          Object {},
         ]
       }
     >
@@ -163,8 +159,7 @@ exports[`renders icon button by default 1`] = `
 
 exports[`renders icon button with color 1`] = `
 <View
-  accessibilityComponentType="button"
-  accessibilityTraits="button"
+  accessibilityRole="button"
   accessible={true}
   hitSlop={
     Object {
@@ -201,9 +196,7 @@ exports[`renders icon button with color 1`] = `
   >
     <Text
       accessibilityElementsHidden={true}
-      accessible={true}
       allowFontScaling={false}
-      ellipsizeMode="tail"
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
       style={
@@ -229,6 +222,7 @@ exports[`renders icon button with color 1`] = `
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
+          Object {},
         ]
       }
     >
@@ -240,8 +234,7 @@ exports[`renders icon button with color 1`] = `
 
 exports[`renders icon button with size 1`] = `
 <View
-  accessibilityComponentType="button"
-  accessibilityTraits="button"
+  accessibilityRole="button"
   accessible={true}
   hitSlop={
     Object {
@@ -278,9 +271,7 @@ exports[`renders icon button with size 1`] = `
   >
     <Text
       accessibilityElementsHidden={true}
-      accessible={true}
       allowFontScaling={false}
-      ellipsizeMode="tail"
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
       style={
@@ -306,6 +297,7 @@ exports[`renders icon button with size 1`] = `
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
+          Object {},
         ]
       }
     >

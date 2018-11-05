@@ -40,7 +40,7 @@ type RenderProps = {
   value?: string,
 };
 
-type Props = {
+type Props = React.ElementProps<NativeTextInput> & {
   /**
    * Mode of the TextInput.
    * - `flat` - flat input with an underline.

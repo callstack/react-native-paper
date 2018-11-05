@@ -18,9 +18,8 @@ exports[`renders extended FAB 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
     accessibilityLabel="Add items"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -84,9 +83,7 @@ exports[`renders extended FAB 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            accessible={true}
             allowFontScaling={false}
-            ellipsizeMode="tail"
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             style={
@@ -112,6 +109,7 @@ exports[`renders extended FAB 1`] = `
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
+                Object {},
               ]
             }
           >
@@ -120,9 +118,6 @@ exports[`renders extended FAB 1`] = `
         </View>
       </View>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
@@ -191,8 +186,7 @@ exports[`renders normal FAB 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -256,9 +250,7 @@ exports[`renders normal FAB 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            accessible={true}
             allowFontScaling={false}
-            ellipsizeMode="tail"
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             style={
@@ -284,6 +276,7 @@ exports[`renders normal FAB 1`] = `
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
+                Object {},
               ]
             }
           >
@@ -314,8 +307,7 @@ exports[`renders small FAB 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -379,9 +371,7 @@ exports[`renders small FAB 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            accessible={true}
             allowFontScaling={false}
-            ellipsizeMode="tail"
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             style={
@@ -407,6 +397,7 @@ exports[`renders small FAB 1`] = `
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
+                Object {},
               ]
             }
           >

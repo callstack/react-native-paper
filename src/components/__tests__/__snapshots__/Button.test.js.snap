@@ -22,8 +22,7 @@ exports[`renders button with color 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -48,9 +47,6 @@ exports[`renders button with color 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -131,8 +127,7 @@ exports[`renders button with icon 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -167,9 +162,7 @@ exports[`renders button with icon 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
@@ -195,6 +188,7 @@ exports[`renders button with icon 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -202,9 +196,6 @@ exports[`renders button with icon 1`] = `
         </Text>
       </View>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -285,8 +276,7 @@ exports[`renders contained contained with mode 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -311,9 +301,6 @@ exports[`renders contained contained with mode 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -387,10 +374,9 @@ exports[`renders disabled button 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits={
+    accessibilityRole="button"
+    accessibilityStates={
       Array [
-        "button",
         "disabled",
       ]
     }
@@ -418,9 +404,6 @@ exports[`renders disabled button 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -501,8 +484,7 @@ exports[`renders loading button 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -540,9 +522,6 @@ exports[`renders loading button 1`] = `
         }
       />
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -623,8 +602,7 @@ exports[`renders outlined button with mode 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -649,9 +627,6 @@ exports[`renders outlined button with mode 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -732,8 +707,7 @@ exports[`renders text button by default 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -758,9 +732,6 @@ exports[`renders text button by default 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -841,8 +812,7 @@ exports[`renders text button with mode 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -867,9 +837,6 @@ exports[`renders text button with mode 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [

@@ -241,7 +241,7 @@ class FABGroup extends React.Component<Props, State> {
         <View pointerEvents={open ? 'box-none' : 'none'}>
           {actions.map((it, i) => (
             <Animated.View
-                key={i} //eslint-disable-line
+              key={i} // eslint-disable-line react/no-array-index-key
               style={[
                 {
                   opacity: opacities[i],
