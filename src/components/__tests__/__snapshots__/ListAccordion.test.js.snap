@@ -3,8 +3,7 @@
 exports[`renders list accordion with children 1`] = `
 <View>
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -47,9 +46,7 @@ exports[`renders list accordion with children 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
@@ -75,6 +72,7 @@ exports[`renders list accordion with children 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -95,9 +93,6 @@ exports[`renders list accordion with children 1`] = `
         }
       >
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           numberOfLines={1}
           style={
             Array [
@@ -156,9 +151,7 @@ exports[`renders list accordion with children 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
@@ -184,6 +177,7 @@ exports[`renders list accordion with children 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -198,8 +192,7 @@ exports[`renders list accordion with children 1`] = `
 exports[`renders list accordion with left items 1`] = `
 <View>
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -242,9 +235,7 @@ exports[`renders list accordion with left items 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
@@ -270,6 +261,7 @@ exports[`renders list accordion with left items 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -290,9 +282,6 @@ exports[`renders list accordion with left items 1`] = `
         }
       >
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           numberOfLines={1}
           style={
             Array [
@@ -351,9 +340,7 @@ exports[`renders list accordion with left items 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
@@ -379,6 +366,7 @@ exports[`renders list accordion with left items 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -393,8 +381,7 @@ exports[`renders list accordion with left items 1`] = `
 exports[`renders multiline list accordion 1`] = `
 <View>
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -434,9 +421,6 @@ exports[`renders multiline list accordion 1`] = `
         }
       >
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           numberOfLines={1}
           style={
             Array [
@@ -483,9 +467,6 @@ exports[`renders multiline list accordion 1`] = `
           Expandable list item
         </Text>
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           numberOfLines={2}
           style={
             Array [
@@ -548,9 +529,7 @@ exports[`renders multiline list accordion 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
@@ -576,6 +555,7 @@ exports[`renders multiline list accordion 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >

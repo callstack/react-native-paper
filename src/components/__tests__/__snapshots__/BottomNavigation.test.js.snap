@@ -85,6 +85,12 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
     >
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits={
           Array [
             "button",
@@ -139,9 +145,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -167,6 +171,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -188,9 +193,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -216,6 +219,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -235,6 +239,12 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
       </View>
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
@@ -284,9 +294,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -312,6 +320,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -333,9 +342,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -361,6 +368,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -380,6 +388,12 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
       </View>
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
@@ -429,9 +443,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -457,6 +469,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -478,9 +491,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -506,6 +517,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -633,6 +645,12 @@ exports[`hides labels in shifting bottom navigation 1`] = `
       />
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits={
           Array [
             "button",
@@ -687,9 +705,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -715,6 +731,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -736,9 +753,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -764,6 +779,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -783,6 +799,12 @@ exports[`hides labels in shifting bottom navigation 1`] = `
       </View>
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
@@ -832,9 +854,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -860,6 +880,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -881,9 +902,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -909,6 +928,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -928,6 +948,12 @@ exports[`hides labels in shifting bottom navigation 1`] = `
       </View>
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
@@ -977,9 +1003,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -1005,6 +1029,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -1026,9 +1051,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -1054,6 +1077,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -1161,6 +1185,12 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
     >
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits={
           Array [
             "button",
@@ -1289,6 +1319,12 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
       </View>
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
@@ -1412,6 +1448,12 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
       </View>
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
@@ -1643,6 +1685,12 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
       />
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits={
           Array [
             "button",
@@ -1755,6 +1803,12 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
       </View>
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
@@ -1862,6 +1916,12 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
       </View>
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
@@ -1969,6 +2029,12 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
       </View>
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
@@ -2076,6 +2142,12 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
       </View>
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
@@ -2271,6 +2343,12 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
     >
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits={
           Array [
             "button",
@@ -2325,9 +2403,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -2353,6 +2429,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -2374,9 +2451,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -2402,6 +2477,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -2435,9 +2511,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
               }
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     Object {
@@ -2494,9 +2567,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
               }
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     Object {
@@ -2545,6 +2615,12 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
       </View>
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
@@ -2594,9 +2670,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -2622,6 +2696,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -2643,9 +2718,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -2671,6 +2744,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -2704,9 +2778,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
               }
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     Object {
@@ -2763,9 +2834,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
               }
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     Object {
@@ -2814,6 +2882,12 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
       </View>
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
@@ -2863,9 +2937,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -2891,6 +2963,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -2912,9 +2985,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -2940,6 +3011,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -2973,9 +3045,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
               }
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     Object {
@@ -3032,9 +3101,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
               }
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     Object {
@@ -3191,6 +3257,12 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
       />
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits={
           Array [
             "button",
@@ -3245,9 +3317,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -3273,6 +3343,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -3294,9 +3365,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -3322,6 +3391,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -3355,9 +3425,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
               }
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     Object {
@@ -3406,6 +3473,12 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
       </View>
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
@@ -3455,9 +3528,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -3483,6 +3554,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -3504,9 +3576,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -3532,6 +3602,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -3565,9 +3636,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
               }
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     Object {
@@ -3616,6 +3684,12 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
       </View>
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
@@ -3665,9 +3739,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -3693,6 +3765,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -3714,9 +3787,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -3742,6 +3813,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -3775,9 +3847,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
               }
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     Object {
@@ -3914,6 +3983,12 @@ exports[`renders non-shifting bottom navigation 1`] = `
     >
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits={
           Array [
             "button",
@@ -3968,9 +4043,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -3996,6 +4069,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -4017,9 +4091,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -4045,6 +4117,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -4078,9 +4151,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
               }
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     Object {
@@ -4137,9 +4207,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
               }
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     Object {
@@ -4188,6 +4255,12 @@ exports[`renders non-shifting bottom navigation 1`] = `
       </View>
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
@@ -4237,9 +4310,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -4265,6 +4336,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -4286,9 +4358,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -4314,6 +4384,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -4347,9 +4418,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
               }
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     Object {
@@ -4406,9 +4474,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
               }
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     Object {
@@ -4457,6 +4522,12 @@ exports[`renders non-shifting bottom navigation 1`] = `
       </View>
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
@@ -4506,9 +4577,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -4534,6 +4603,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -4555,9 +4625,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -4583,6 +4651,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -4616,9 +4685,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
               }
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     Object {
@@ -4675,9 +4741,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
               }
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     Object {
@@ -4834,6 +4897,12 @@ exports[`renders shifting bottom navigation 1`] = `
       />
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits={
           Array [
             "button",
@@ -4888,9 +4957,7 @@ exports[`renders shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -4916,6 +4983,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -4937,9 +5005,7 @@ exports[`renders shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -4965,6 +5031,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -4998,9 +5065,6 @@ exports[`renders shifting bottom navigation 1`] = `
               }
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     Object {
@@ -5049,6 +5113,12 @@ exports[`renders shifting bottom navigation 1`] = `
       </View>
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
@@ -5098,9 +5168,7 @@ exports[`renders shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -5126,6 +5194,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -5147,9 +5216,7 @@ exports[`renders shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -5175,6 +5242,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -5208,9 +5276,6 @@ exports[`renders shifting bottom navigation 1`] = `
               }
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     Object {
@@ -5259,6 +5324,12 @@ exports[`renders shifting bottom navigation 1`] = `
       </View>
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
@@ -5308,9 +5379,7 @@ exports[`renders shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -5336,6 +5405,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -5357,9 +5427,7 @@ exports[`renders shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -5385,6 +5453,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -5418,9 +5487,6 @@ exports[`renders shifting bottom navigation 1`] = `
               }
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     Object {
@@ -5469,6 +5535,12 @@ exports[`renders shifting bottom navigation 1`] = `
       </View>
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
@@ -5518,9 +5590,7 @@ exports[`renders shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -5546,6 +5616,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -5567,9 +5638,7 @@ exports[`renders shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -5595,6 +5664,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -5628,9 +5698,6 @@ exports[`renders shifting bottom navigation 1`] = `
               }
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     Object {
@@ -5679,6 +5746,12 @@ exports[`renders shifting bottom navigation 1`] = `
       </View>
       <View
         accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
         accessibilityTraits="button"
         accessible={true}
         onResponderGrant={[Function]}
@@ -5728,9 +5801,7 @@ exports[`renders shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -5756,6 +5827,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -5777,9 +5849,7 @@ exports[`renders shifting bottom navigation 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                accessible={true}
                 allowFontScaling={false}
-                ellipsizeMode="tail"
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 style={
@@ -5805,6 +5875,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       "fontStyle": "normal",
                       "fontWeight": "normal",
                     },
+                    Object {},
                   ]
                 }
               >
@@ -5838,9 +5909,6 @@ exports[`renders shifting bottom navigation 1`] = `
               }
             >
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Array [
                     Object {

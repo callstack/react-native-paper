@@ -7,7 +7,7 @@ import setColor from 'color';
 import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 
-type Props = {
+type Props = React.ElementProps<NativeSwitch> & {
   /**
    * Disable toggling the switch.
    */

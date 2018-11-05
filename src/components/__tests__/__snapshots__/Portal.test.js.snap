@@ -10,11 +10,7 @@ Array [
       }
     }
   >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Outside content
     </Text>
   </View>,
@@ -31,11 +27,7 @@ Array [
       }
     }
   >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Portal content
     </Text>
   </View>,

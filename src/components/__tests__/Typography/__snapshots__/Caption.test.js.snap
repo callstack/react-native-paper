@@ -2,9 +2,6 @@
 
 exports[`renders caption applying style 1`] = `
 <Text
-  accessible={true}
-  allowFontScaling={true}
-  ellipsizeMode="tail"
   style={
     Array [
       Object {
@@ -75,9 +72,6 @@ exports[`renders caption applying style 1`] = `
 
 exports[`renders caption with children as content 1`] = `
 <Text
-  accessible={true}
-  allowFontScaling={true}
-  ellipsizeMode="tail"
   style={
     Array [
       Object {

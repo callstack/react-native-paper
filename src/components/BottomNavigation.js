@@ -231,7 +231,7 @@ const FAR_FAR_AWAY = 9999;
 const Touchable =
   Platform.OS === 'android'
     ? TouchableRipple
-    : ({ style, children, ...rest }) => (
+    : ({ style, children, borderless, rippleColor, ...rest }) => (
         <TouchableWithoutFeedback {...rest}>
           <View style={style}>{children}</View>
         </TouchableWithoutFeedback>

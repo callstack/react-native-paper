@@ -51,9 +51,6 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
@@ -169,9 +166,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
         />
       </View>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
@@ -244,8 +238,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
         }
       >
         <View
-          accessibilityComponentType="button"
-          accessibilityTraits="button"
+          accessibilityRole="button"
           accessible={true}
           isTVSelectable={true}
           onResponderGrant={[Function]}
@@ -270,9 +263,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
             }
           >
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               numberOfLines={1}
               style={
                 Array [
@@ -376,9 +366,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
@@ -451,8 +438,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
         }
       >
         <View
-          accessibilityComponentType="button"
-          accessibilityTraits="button"
+          accessibilityRole="button"
           accessible={true}
           isTVSelectable={true}
           onResponderGrant={[Function]}
@@ -477,9 +463,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
             }
           >
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               numberOfLines={1}
               style={
                 Array [
@@ -560,8 +543,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
         }
       >
         <View
-          accessibilityComponentType="button"
-          accessibilityTraits="button"
+          accessibilityRole="button"
           accessible={true}
           isTVSelectable={true}
           onResponderGrant={[Function]}
@@ -586,9 +568,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
             }
           >
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               numberOfLines={1}
               style={
                 Array [
@@ -713,9 +692,6 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
         />
       </View>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
@@ -810,9 +786,6 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {

@@ -10,4 +10,8 @@ tester({
   plugin: require('../index'),
   pluginName: 'react-native-paper/babel',
   fixtures: path.join(__dirname, '..', '__fixtures__'),
+  babelOptions: {
+    babelrc: false,
+    configFile: false,
+  },
 });

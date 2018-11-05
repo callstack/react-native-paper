@@ -53,11 +53,8 @@ class ProgressBar extends React.Component<Props> {
 
     return (
       <ProgressBarComponent
-        styleAttr="Horizontal"
-        indeterminate={false}
         progress={progress}
         progressTintColor={tintColor}
-        color={tintColor}
         style={[styles.progressBarHeight, style]}
         trackTintColor={trackTintColor}
       />
