@@ -116,13 +116,13 @@ class ListAccordion extends React.Component<Props, State> {
       } else {
         this.props.onPress();
       }
+    } else {
+      this.props.onPress && this.props.onPress();
 
-      return;
+      this.setState(state => ({
+        expanded: !state.expanded,
+      }));
     }
-
-    this.setState(state => ({
-      expanded: !state.expanded,
-    }));
   };
 
   render() {
