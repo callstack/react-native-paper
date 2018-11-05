@@ -121,7 +121,7 @@ class Searchbar extends React.Component<Props> {
       style,
       ...rest
     } = this.props;
-    const { colors, dark: isDarkTheme, roundness, dark } = theme;
+    const { colors, roundness, dark } = theme;
     const textColor = colors.text;
     const iconColor = dark
       ? textColor
@@ -156,7 +156,7 @@ class Searchbar extends React.Component<Props> {
           selectionColor={colors.primary}
           underlineColorAndroid="transparent"
           returnKeyType="search"
-          keyboardAppearance={isDarkTheme ? 'dark' : 'light'}
+          keyboardAppearance={dark ? 'dark' : 'light'}
           accessibilityTraits="search"
           accessibilityRole="search"
           ref={c => {
