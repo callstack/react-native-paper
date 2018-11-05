@@ -66,11 +66,10 @@ type State = {
  *     expanded: true
  *   }
  *
- *   _handlePress = () => {
+ *   _handlePress = () =>
  *     this.setState({
  *       expanded: !this.state.expanded
  *     });
- *   };
  *
  *   render() {
  *     return (
@@ -108,17 +107,11 @@ class ListAccordion extends React.Component<Props, State> {
   };
 
   _handlePress = () => {
-    if (this.props.expanded !== undefined) {
-      if (typeof this.props.onPress === 'undefined') {
-        throw new Error(
-          'The `onPress` prop must be passed when the `expanded` prop is passed to List.Accordion.'
-        );
-      } else {
-        this.props.onPress();
-      }
-    } else {
-      this.props.onPress && this.props.onPress();
+    this.props.onPress && this.props.onPress();
 
+    if (this.props.expanded === undefined) {
+      // Only update state of the `expanded` prop was not passed
+      // If it was passed, the component will act as a controlled component
       this.setState(state => ({
         expanded: !state.expanded,
       }));
