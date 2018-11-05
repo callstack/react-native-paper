@@ -23,7 +23,7 @@ type Props = {
    */
   left?: (props: { color: string }) => React.Node,
   /**
-   * Whether the accordion is expanded or not.
+   * Whether the accordion is expanded
    * If this prop is provided, the accordion will behave as a "controlled component".
    * You'll need to update this prop when you want to toggle the component or on `onPress`.
    */
@@ -66,9 +66,11 @@ type State = {
  *     expanded: true
  *   }
  *
- *   _onPress = () => {
- *     this.setState({expanded: !this.state.expanded})
- *   }
+ *   _handlePress = () => {
+ *     this.setState({
+ *       expanded: !this.state.expanded
+ *     });
+ *   };
  *
  *   render() {
  *     return (
@@ -85,7 +87,7 @@ type State = {
  *           title="Controlled Accordion"
  *           left={props => <List.Icon {...props} icon="folder" />}
  *           expanded={this.state.expanded}
- *           onPress={this._onPress}
+ *           onPress={this._handlePress}
  *         >
  *           <List.Item title="First item" />
  *           <List.Item title="Second item" />
