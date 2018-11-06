@@ -212,7 +212,8 @@ class TextInput extends React.Component<Props, State> {
   componentDidUpdate(prevProps, prevState) {
     if (
       prevState.focused !== this.state.focused ||
-      prevState.value !== this.state.value
+      prevState.value !== this.state.value ||
+      prevProps.error !== this.props.error
     ) {
       // The label should be minimized if the text input is focused, or has text
       // In minimized mode, the label moves up and becomes small
@@ -225,7 +226,8 @@ class TextInput extends React.Component<Props, State> {
 
     if (
       prevState.focused !== this.state.focused ||
-      prevProps.label !== this.props.label
+      prevProps.label !== this.props.label ||
+      prevProps.error !== this.props.error
     ) {
       // Show placeholder text only if the input is focused, or has error, or there's no label
       // We don't show placeholder if there's a label because the label acts as placeholder
