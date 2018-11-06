@@ -2,13 +2,12 @@
 
 import * as React from 'react';
 import { grey400, grey800, grey50, white, black } from '../styles/colors';
-import { Switch as NativeSwitch, Platform } from 'react-native';
+import { Switch as NativeSwitch, Platform, NativeModules } from 'react-native';
 import setColor from 'color';
 import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 
-// eslint-disable-next-line import/no-unresolved
-const { version } = require('ReactNativeVersion');
+const version = NativeModules.PlatformConstants.reactNativeVersion;
 
 type Props = React.ElementProps<NativeSwitch> & {
   /**
