@@ -2,7 +2,7 @@
 
 import color from 'color';
 import * as React from 'react';
-import { Animated, View, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import FABGroup from './FABGroup';
 import Surface from '../Surface';
 import CrossFadeIcon from '../CrossFadeIcon';
@@ -12,8 +12,6 @@ import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 import type { IconSource } from './../Icon';
-
-const AnimatedSurface = Animated.createAnimatedComponent(Surface);
 
 type Props = {
   /**
@@ -63,15 +61,26 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
+ * import { StyleSheet } from 'react-native';
  * import { FAB } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <FAB
+ *     style={styles.fab}
  *     small
  *     icon="add"
  *     onPress={() => console.log('Pressed')}
  *   />
  * );
+ *
+ * const styles = StyleSheet.create({
+ *   fab: {
+ *     position: 'absolute',
+ *     margin: 16,
+ *     right: 0,
+ *     bottom: 0,
+ *   },
+ * })
  *
  * export default MyComponent;
  * ```
@@ -123,7 +132,7 @@ class FAB extends React.Component<Props> {
       .string();
 
     return (
-      <AnimatedSurface
+      <Surface
         {...rest}
         style={[
           { backgroundColor },
@@ -164,7 +173,7 @@ class FAB extends React.Component<Props> {
             ) : null}
           </View>
         </TouchableRipple>
-      </AnimatedSurface>
+      </Surface>
     );
   }
 }

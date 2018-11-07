@@ -44,10 +44,10 @@ exports[`renders snackbar with Text as a child 1`] = `
     pointerEvents="box-none"
     style={
       Object {
-        "opacity": 0,
+        "opacity": 1,
         "transform": Array [
           Object {
-            "scale": 0.9,
+            "scale": 1,
           },
         ],
       }
@@ -74,9 +74,6 @@ exports[`renders snackbar with Text as a child 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
@@ -123,11 +120,7 @@ exports[`renders snackbar with Text as a child 1`] = `
           }
         }
       >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
+        <Text>
           Snackbar content
         </Text>
       </Text>
@@ -152,10 +145,10 @@ exports[`renders snackbar with action button 1`] = `
     pointerEvents="box-none"
     style={
       Object {
-        "opacity": 0,
+        "opacity": 1,
         "transform": Array [
           Object {
-            "scale": 0.9,
+            "scale": 1,
           },
         ],
       }
@@ -182,9 +175,6 @@ exports[`renders snackbar with action button 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
@@ -235,31 +225,28 @@ exports[`renders snackbar with action button 1`] = `
       </Text>
       <View
         style={
-          Array [
-            Object {
-              "backgroundColor": "#ffffff",
+          Object {
+            "backgroundColor": "transparent",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderStyle": "solid",
+            "borderWidth": 0,
+            "elevation": 0,
+            "marginHorizontal": 8,
+            "marginVertical": 6,
+            "minWidth": "auto",
+            "shadowColor": "#000000",
+            "shadowOffset": Object {
+              "height": NaN,
+              "width": 0,
             },
-            Object {
-              "backgroundColor": "#ffffff",
-            },
-            0,
-            Object {
-              "backgroundColor": "transparent",
-              "borderColor": "transparent",
-              "borderRadius": 4,
-              "borderStyle": "solid",
-              "borderWidth": 0,
-              "elevation": 0,
-              "marginHorizontal": 8,
-              "marginVertical": 6,
-              "minWidth": 64,
-            },
-          ]
+            "shadowOpacity": 0.24,
+            "shadowRadius": 0,
+          }
         }
       >
         <View
-          accessibilityComponentType="button"
-          accessibilityTraits="button"
+          accessibilityRole="button"
           accessible={true}
           isTVSelectable={true}
           onResponderGrant={[Function]}
@@ -284,9 +271,6 @@ exports[`renders snackbar with action button 1`] = `
             }
           >
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               numberOfLines={1}
               style={
                 Array [
@@ -366,10 +350,10 @@ exports[`renders snackbar with content 1`] = `
     pointerEvents="box-none"
     style={
       Object {
-        "opacity": 0,
+        "opacity": 1,
         "transform": Array [
           Object {
-            "scale": 0.9,
+            "scale": 1,
           },
         ],
       }
@@ -396,9 +380,6 @@ exports[`renders snackbar with content 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {

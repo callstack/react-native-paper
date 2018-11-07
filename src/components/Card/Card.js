@@ -14,13 +14,15 @@ import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
-const AnimatedSurface = Animated.createAnimatedComponent(Surface);
-
 type Props = {
   /**
    * Resting elevation of the card which controls the drop shadow.
    */
   elevation?: number,
+  /**
+   * Function to execute on long press.
+   */
+  onLongPress?: () => mixed,
   /**
    * Function to execute on press.
    */
@@ -103,7 +105,7 @@ class Card extends React.Component<Props, State> {
   };
 
   render() {
-    const { children, onPress, style, theme } = this.props;
+    const { children, onLongPress, onPress, style, theme } = this.props;
     const { elevation } = this.state;
     const { roundness } = theme;
     const total = React.Children.count(children);
@@ -115,14 +117,14 @@ class Card extends React.Component<Props, State> {
           : null
     );
     return (
-      <AnimatedSurface style={[{ borderRadius: roundness, elevation }, style]}>
+      <Surface style={[{ borderRadius: roundness, elevation }, style]}>
         <TouchableWithoutFeedback
           delayPressIn={0}
-          disabled={!onPress}
+          disabled={!(onPress || onLongPress)}
+          onLongPress={onLongPress}
           onPress={onPress}
           onPressIn={onPress ? this._handlePressIn : undefined}
           onPressOut={onPress ? this._handlePressOut : undefined}
-          style={styles.container}
         >
           <View style={styles.innerContainer}>
             {React.Children.map(
@@ -138,15 +140,12 @@ class Card extends React.Component<Props, State> {
             )}
           </View>
         </TouchableWithoutFeedback>
-      </AnimatedSurface>
+      </Surface>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   innerContainer: {
     flexGrow: 1,
   },

@@ -1,13 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import {
-  View,
-  Platform,
-  StatusBar,
-  SafeAreaView,
-  StyleSheet,
-} from 'react-native';
+import { View, Platform, SafeAreaView, StyleSheet } from 'react-native';
 
 import Appbar, { DEFAULT_APPBAR_HEIGHT } from './Appbar';
 import { withTheme } from '../../core/theming';
@@ -20,9 +14,9 @@ type Props = {
   dark?: boolean,
   /**
    * Extra padding to add at the top of header to account for translucent status bar.
-   * This is automatically handled on iOS including iPhone X.
-   * If you are using Android and use Expo, we assume translucent status bar and set a height for status bar automatically.
-   * Pass `0` or a custom value to disable the default behaviour.
+   * This is automatically handled on iOS >= 11 including iPhone X using `SafeAreaView`.
+   * If you are using Expo, we assume translucent status bar and set a height for status bar automatically.
+   * Pass `0` or a custom value to disable the default behaviour, and customize the height.
    */
   statusBarHeight?: number,
   /**
@@ -39,15 +33,10 @@ type Props = {
 const DEFAULT_STATUSBAR_HEIGHT_EXPO =
   global.__expo && global.__expo.Constants
     ? global.__expo.Constants.statusBarHeight
-    : undefined;
+    : 0;
 const DEFAULT_STATUSBAR_HEIGHT = Platform.select({
   android: DEFAULT_STATUSBAR_HEIGHT_EXPO,
-  ios:
-    Platform.Version < 11
-      ? DEFAULT_STATUSBAR_HEIGHT_EXPO === undefined
-        ? StatusBar.currentHeight
-        : DEFAULT_STATUSBAR_HEIGHT_EXPO
-      : undefined,
+  ios: Platform.Version < 11 ? DEFAULT_STATUSBAR_HEIGHT_EXPO : 0,
 });
 
 /**
@@ -71,6 +60,12 @@ const DEFAULT_STATUSBAR_HEIGHT = Platform.select({
  * import { Appbar } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
+ *   _goBack = () => console.log('Went back');
+ *
+ *   _onSearch = () => console.log('Searching');
+ *
+ *   _onMore = () => console.log('Shown more');
+ *
  *   render() {
  *     return (
  *       <Appbar.Header>
@@ -92,15 +87,10 @@ const DEFAULT_STATUSBAR_HEIGHT = Platform.select({
 class AppbarHeader extends React.Component<Props> {
   static displayName = 'Appbar.Header';
 
-  static defaultProps = {
-    // TODO: handle orientation changes
-    statusBarHeight: DEFAULT_STATUSBAR_HEIGHT,
-  };
-
   render() {
     const {
       // Don't use default props since we check it to know whether we should use SafeAreaView
-      statusBarHeight = 0,
+      statusBarHeight = DEFAULT_STATUSBAR_HEIGHT,
       style,
       ...rest
     } = this.props;
@@ -111,8 +101,7 @@ class AppbarHeader extends React.Component<Props> {
       elevation = 4,
       backgroundColor = colors.primary,
       ...restStyle
-    } =
-      StyleSheet.flatten(style) || {};
+    } = StyleSheet.flatten(style) || {};
 
     // Let the user override the behaviour
     const Wrapper =

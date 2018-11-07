@@ -82,17 +82,20 @@ class HelperText extends React.PureComponent<Props, State> {
     textHeight: 0,
   };
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.visible !== this.props.visible) {
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      prevProps.visible !== this.props.visible ||
+      prevState.textHeight !== this.state.textHeight
+    ) {
       if (this.props.visible) {
-        this._animateFocus();
+        this._showText();
       } else {
-        this._animateBlur();
+        this._hideText();
       }
     }
   }
 
-  _animateFocus = () => {
+  _showText = () => {
     Animated.timing(this.state.shown, {
       toValue: 1,
       duration: 150,
@@ -100,7 +103,7 @@ class HelperText extends React.PureComponent<Props, State> {
     }).start();
   };
 
-  _animateBlur = () => {
+  _hideText = () => {
     Animated.timing(this.state.shown, {
       toValue: 0,
       duration: 180,

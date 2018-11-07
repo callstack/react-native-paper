@@ -17,8 +17,7 @@ exports[`renders DrawerItem with icon 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -44,9 +43,7 @@ exports[`renders DrawerItem with icon 1`] = `
     >
       <Text
         accessibilityElementsHidden={true}
-        accessible={true}
         allowFontScaling={false}
-        ellipsizeMode="tail"
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         style={
@@ -72,15 +69,13 @@ exports[`renders DrawerItem with icon 1`] = `
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
+            Object {},
           ]
         }
       >
         
       </Text>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -150,10 +145,9 @@ exports[`renders active DrawerItem 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits={
+    accessibilityRole="button"
+    accessibilityStates={
       Array [
-        "button",
         "selected",
       ]
     }
@@ -182,9 +176,7 @@ exports[`renders active DrawerItem 1`] = `
     >
       <Text
         accessibilityElementsHidden={true}
-        accessible={true}
         allowFontScaling={false}
-        ellipsizeMode="tail"
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         style={
@@ -210,15 +202,13 @@ exports[`renders active DrawerItem 1`] = `
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
+            Object {},
           ]
         }
       >
         
       </Text>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -288,8 +278,7 @@ exports[`renders basic DrawerItem 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -314,9 +303,6 @@ exports[`renders basic DrawerItem 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [

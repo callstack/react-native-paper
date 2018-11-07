@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { StyleSheet, TextInput } from 'react-native';
+import { StyleSheet, TextInput, I18nManager } from 'react-native';
 
 import color from 'color';
 import IconButton from './IconButton';
@@ -74,41 +74,41 @@ class Searchbar extends React.Component<Props> {
     this.props.onChangeText && this.props.onChangeText('');
   };
 
-  _root: TextInput;
+  _root: ?TextInput;
 
   /**
    * @internal
    */
   setNativeProps(...args) {
-    return this._root.setNativeProps(...args);
+    return this._root && this._root.setNativeProps(...args);
   }
 
   /**
    * Returns `true` if the input is currently focused, `false` otherwise.
    */
   isFocused() {
-    return this._root.isFocused();
+    return this._root && this._root.isFocused();
   }
 
   /**
    * Removes all text from the TextInput.
    */
   clear() {
-    return this._root.clear();
+    return this._root && this._root.clear();
   }
 
   /**
    * Focuses the input.
    */
   focus() {
-    return this._root.focus();
+    return this._root && this._root.focus();
   }
 
   /**
    * Removes focus from the input.
    */
   blur() {
-    return this._root.blur();
+    return this._root && this._root.blur();
   }
 
   render() {
@@ -156,6 +156,7 @@ class Searchbar extends React.Component<Props> {
           selectionColor={colors.primary}
           underlineColorAndroid="transparent"
           returnKeyType="search"
+          keyboardAppearance={dark ? 'dark' : 'light'}
           accessibilityTraits="search"
           accessibilityRole="search"
           ref={c => {
@@ -191,6 +192,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingLeft: 8,
     alignSelf: 'stretch',
+    textAlign: I18nManager.isRTL ? 'right' : 'left',
   },
 });
 

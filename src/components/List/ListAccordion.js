@@ -23,6 +23,16 @@ type Props = {
    */
   left?: (props: { color: string }) => React.Node,
   /**
+   * Whether the accordion is expanded
+   * If this prop is provided, the accordion will behave as a "controlled component".
+   * You'll need to update this prop when you want to toggle the component or on `onPress`.
+   */
+  expanded?: boolean,
+  /**
+   * Function to execute on press.
+   */
+  onPress?: () => mixed,
+  /**
    * Content of the section.
    */
   children: React.Node,
@@ -51,15 +61,40 @@ type State = {
  * import * as React from 'react';
  * import { List, Checkbox } from 'react-native-paper';
  *
- * const MyComponent = () => (
- *   <List.Accordion
- *     title="Accordion"
- *     left={props => <List.Icon {...props} icon="folder" />}
- *   >
- *     <List.Item title="First item" />
- *     <List.Item title="Second item" />
- *   </List.Accordion>
- * );
+ * class MyComponent extends React.Component {
+ *   state = {
+ *     expanded: true
+ *   }
+ *
+ *   _handlePress = () =>
+ *     this.setState({
+ *       expanded: !this.state.expanded
+ *     });
+ *
+ *   render() {
+ *     return (
+ *       <List.Section title="Accordions">
+ *         <List.Accordion
+ *           title="Uncontrolled Accordion"
+ *           left={props => <List.Icon {...props} icon="folder" />}
+ *         >
+ *           <List.Item title="First item" />
+ *           <List.Item title="Second item" />
+ *         </List.Accordion>
+ *
+ *         <List.Accordion
+ *           title="Controlled Accordion"
+ *           left={props => <List.Icon {...props} icon="folder" />}
+ *           expanded={this.state.expanded}
+ *           onPress={this._handlePress}
+ *         >
+ *           <List.Item title="First item" />
+ *           <List.Item title="Second item" />
+ *         </List.Accordion>
+ *       </List.Section>
+ *     );
+ *   }
+ * }
  *
  * export default MyComponent;
  * ```
@@ -68,13 +103,20 @@ class ListAccordion extends React.Component<Props, State> {
   static displayName = 'List.Accordion';
 
   state = {
-    expanded: false,
+    expanded: this.props.expanded || false,
   };
 
-  _handlePress = () =>
-    this.setState(state => ({
-      expanded: !state.expanded,
-    }));
+  _handlePress = () => {
+    this.props.onPress && this.props.onPress();
+
+    if (this.props.expanded === undefined) {
+      // Only update state of the `expanded` prop was not passed
+      // If it was passed, the component will act as a controlled component
+      this.setState(state => ({
+        expanded: !state.expanded,
+      }));
+    }
+  };
 
   render() {
     const { left, title, description, children, theme, style } = this.props;
@@ -86,6 +128,11 @@ class ListAccordion extends React.Component<Props, State> {
       .alpha(0.54)
       .rgb()
       .string();
+
+    const expanded =
+      this.props.expanded !== undefined
+        ? this.props.expanded
+        : this.state.expanded;
 
     return (
       <View>
@@ -99,9 +146,7 @@ class ListAccordion extends React.Component<Props, State> {
           <View style={styles.row} pointerEvents="none">
             {left
               ? left({
-                  color: this.state.expanded
-                    ? theme.colors.primary
-                    : descriptionColor,
+                  color: expanded ? theme.colors.primary : descriptionColor,
                 })
               : null}
             <View style={[styles.item, styles.content]}>
@@ -110,9 +155,7 @@ class ListAccordion extends React.Component<Props, State> {
                 style={[
                   styles.title,
                   {
-                    color: this.state.expanded
-                      ? theme.colors.primary
-                      : titleColor,
+                    color: expanded ? theme.colors.primary : titleColor,
                   },
                 ]}
               >
@@ -134,18 +177,14 @@ class ListAccordion extends React.Component<Props, State> {
             </View>
             <View style={[styles.item, description && styles.multiline]}>
               <Icon
-                source={
-                  this.state.expanded
-                    ? 'keyboard-arrow-up'
-                    : 'keyboard-arrow-down'
-                }
+                source={expanded ? 'keyboard-arrow-up' : 'keyboard-arrow-down'}
                 color={titleColor}
                 size={24}
               />
             </View>
           </View>
         </TouchableRipple>
-        {this.state.expanded
+        {expanded
           ? React.Children.map(children, child => {
               if (
                 left &&

@@ -1,11 +1,13 @@
 {
   "name": "react-native-paper",
-  "version": "2.0.1",
+  "version": "2.2.2",
   "description": "Material design for React Native",
   "main": "src/index.js",
+  "typings": "typings/index.d.ts",
   "files": [
     "src/",
     "dist/",
+    "typings/",
     "types.js",
     "babel.js"
   ],
@@ -29,38 +31,60 @@
     "bootstrap"
   ],
   "scripts": {
-    "commitmsg": "node ./scripts/validate-commit-message.js $GIT_PARAMS",
-    "precommit": "yarn lint && yarn flow && yarn test",
     "flow": "flow",
+    "typescript": "node ./scripts/generate-ts-tests.js && tsc --noEmit --skipLibCheck --jsx react ./__ts-tests__/*",
     "lint": "eslint .",
     "test": "jest",
     "prepare": "node ./scripts/generate-mappings",
-    "bootstrap": "yarn && yarn --cwd example && yarn --cwd docs"
+    "bootstrap": "yarn && yarn --cwd example && yarn --cwd docs",
+    "release": "release-it"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "node ./scripts/validate-commit-message.js $HUSKY_GIT_PARAMS",
+      "pre-commit": "yarn lint && yarn flow && yarn typescript && yarn test"
+    }
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@callstack/react-theme-provider": "^1.0.3",
+    "@callstack/react-theme-provider": "^1.0.7",
     "color": "^2.0.1",
-    "create-react-context": "^0.2.2",
-    "hoist-non-react-statics": "^2.5.0",
+    "create-react-context": "^0.2.3",
+    "hoist-non-react-statics": "^3.1.0",
     "react-lifecycles-compat": "^3.0.4"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/runtime": "^7.1.2",
+    "@types/react": "^16.4.18",
+    "@types/react-native": "^0.57.7",
     "babel-cli": "^6.26.0",
-    "babel-plugin-tester": "^5.0.0",
-    "babel-preset-react-native": "^4.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "babel-plugin-tester": "^5.5.1",
+    "chalk": "^2.4.1",
+    "conventional-changelog-cli": "^2.0.11",
+    "dedent": "^0.7.0",
     "eslint": "^4.19.1",
     "eslint-config-callstack-io": "^1.1.1",
-    "eslint-plugin-prettier": "^2.6.0",
-    "eslint-plugin-react-native": "^3.2.1",
-    "flow-bin": "~0.67.1",
-    "husky": "^0.14.3",
-    "jest": "^23.0.0",
-    "prettier": "^1.12.1",
-    "react": "16.3.1",
-    "react-dom": "16.3.1",
-    "react-native": "~0.55.4",
-    "react-native-vector-icons": "~4.6.0",
-    "react-test-renderer": "16.3.1"
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-react-native": "^3.5.0",
+    "flow-bin": "~0.78.0",
+    "glob": "^7.1.3",
+    "husky": "^1.1.3",
+    "jest": "^23.6.0",
+    "metro-react-native-babel-preset": "^0.49.0",
+    "prettier": "^1.14.3",
+    "react": "16.6.0-alpha.8af6728",
+    "react-dom": "16.6.0-alpha.8af6728",
+    "react-native": "~0.57.4",
+    "react-native-vector-icons": "~6.0.2",
+    "react-test-renderer": "16.6.0-alpha.8af6728",
+    "release-it": "^7.6.2",
+    "rimraf": "^2.6.2",
+    "typescript": "^3.1.6"
   },
   "peerDependencies": {
     "react": "*",
@@ -72,6 +96,9 @@
     "modulePathIgnorePatterns": [
       "<rootDir>/example/node_modules"
     ]
+  },
+  "resolutions": {
+    "**/babel-core": "7.0.0-bridge.0"
   },
   "sideEffects": false
 }

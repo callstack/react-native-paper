@@ -17,12 +17,12 @@ type Props = {
 };
 
 type State = {
-  checked: number,
+  checked: 'normal' | 'first' | 'second' | 'third' | 'fourth',
 };
 
 export default class extends React.Component<Props, State> {
   state = {
-    checked: 0,
+    checked: 'normal',
   };
 
   render() {
@@ -35,34 +35,54 @@ export default class extends React.Component<Props, State> {
           <Dialog.ScrollArea style={{ maxHeight: 170, paddingHorizontal: 0 }}>
             <ScrollView>
               <View>
-                <TouchableRipple onPress={() => this.setState({ checked: 0 })}>
+                <TouchableRipple
+                  onPress={() => this.setState({ checked: 'normal' })}
+                >
                   <View style={styles.row}>
                     <View pointerEvents="none">
-                      <RadioButton value="normal" checked={checked === 0} />
+                      <RadioButton
+                        value="normal"
+                        status={checked === 'normal' ? 'checked' : 'unchecked'}
+                      />
                     </View>
                     <Subheading style={styles.text}>Option 1</Subheading>
                   </View>
                 </TouchableRipple>
-                <TouchableRipple onPress={() => this.setState({ checked: 1 })}>
+                <TouchableRipple
+                  onPress={() => this.setState({ checked: 'second' })}
+                >
                   <View style={styles.row}>
                     <View pointerEvents="none">
-                      <RadioButton value="normal" checked={checked === 1} />
+                      <RadioButton
+                        value="second"
+                        status={checked === 'second' ? 'checked' : 'unchecked'}
+                      />
                     </View>
                     <Subheading style={styles.text}>Option 2</Subheading>
                   </View>
                 </TouchableRipple>
-                <TouchableRipple onPress={() => this.setState({ checked: 2 })}>
+                <TouchableRipple
+                  onPress={() => this.setState({ checked: 'third' })}
+                >
                   <View style={styles.row}>
                     <View pointerEvents="none">
-                      <RadioButton value="normal" checked={checked === 2} />
+                      <RadioButton
+                        value="third"
+                        status={checked === 'third' ? 'checked' : 'unchecked'}
+                      />
                     </View>
                     <Subheading style={styles.text}>Option 3</Subheading>
                   </View>
                 </TouchableRipple>
-                <TouchableRipple onPress={() => this.setState({ checked: 3 })}>
+                <TouchableRipple
+                  onPress={() => this.setState({ checked: 'fourth' })}
+                >
                   <View style={styles.row}>
                     <View pointerEvents="none">
-                      <RadioButton value="normal" checked={checked === 3} />
+                      <RadioButton
+                        value="fourth"
+                        status={checked === 'fourth' ? 'checked' : 'unchecked'}
+                      />
                     </View>
                     <Subheading style={styles.text}>Option 4</Subheading>
                   </View>

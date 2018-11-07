@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { StyleSheet, Platform, Animated } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import Modal from '../Modal';
 import Surface from '../Surface';
 import DialogContent from './DialogContent';
@@ -10,8 +10,6 @@ import DialogTitle from './DialogTitle';
 import DialogScrollArea from './DialogScrollArea';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
-
-const AnimatedSurface = Animated.createAnimatedComponent(Surface);
 
 type Props = {
   /**
@@ -111,7 +109,7 @@ class Dialog extends React.Component<Props, void> {
 
     return (
       <Modal dismissable={dismissable} onDismiss={onDismiss} visible={visible}>
-        <AnimatedSurface
+        <Surface
           style={[styles.container, { borderRadius: theme.roundness }, style]}
         >
           {React.Children.toArray(children)
@@ -130,7 +128,7 @@ class Dialog extends React.Component<Props, void> {
 
               return child;
             })}
-        </AnimatedSurface>
+        </Surface>
       </Modal>
     );
   }

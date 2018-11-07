@@ -1,7 +1,12 @@
 /* @flow */
 
 import * as React from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  KeyboardAvoidingView,
+} from 'react-native';
 import { TextInput, HelperText, withTheme } from 'react-native-paper';
 import type { Theme } from 'react-native-paper/types';
 
@@ -24,7 +29,7 @@ class TextInputExample extends React.Component<Props, State> {
     outlinedText: '',
   };
 
-  _isUsernameValid = () => /^[a-z]*$/.test(this.state.name);
+  _isUsernameValid = () => /^[a-zA-Z]*$/.test(this.state.name);
 
   render() {
     const {
@@ -34,46 +39,56 @@ class TextInputExample extends React.Component<Props, State> {
     } = this.props;
 
     return (
-      <ScrollView style={[styles.container, { backgroundColor: background }]}>
-        <TextInput
-          style={styles.inputContainerStyle}
-          label="Flat input"
-          placeholder="Type something"
-          value={this.state.text}
-          onChangeText={text => this.setState({ text })}
-        />
-        <TextInput
-          disabled
-          style={styles.inputContainerStyle}
-          label="Disabled flat input"
-        />
-        <TextInput
-          mode="outlined"
-          style={styles.inputContainerStyle}
-          label="Outlined input"
-          placeholder="Type something"
-          value={this.state.outlinedText}
-          onChangeText={outlinedText => this.setState({ outlinedText })}
-        />
-        <TextInput
-          mode="outlined"
-          disabled
-          style={styles.inputContainerStyle}
-          label="Disabled outlined input"
-        />
-        <View style={styles.inputContainerStyle}>
+      <KeyboardAvoidingView
+        style={styles.wrapper}
+        behavior="padding"
+        keyboardVerticalOffset={80}
+      >
+        <ScrollView
+          style={[styles.container, { backgroundColor: background }]}
+          keyboardShouldPersistTaps={'always'}
+          removeClippedSubviews={false}
+        >
           <TextInput
-            label="Input with helper text"
-            placeholder="Enter username, only letters"
-            value={this.state.name}
-            error={!this._isUsernameValid()}
-            onChangeText={name => this.setState({ name })}
+            style={styles.inputContainerStyle}
+            label="Flat input"
+            placeholder="Type something"
+            value={this.state.text}
+            onChangeText={text => this.setState({ text })}
           />
-          <HelperText type="error" visible={!this._isUsernameValid()}>
-            Error: Only letters are allowed
-          </HelperText>
-        </View>
-      </ScrollView>
+          <TextInput
+            disabled
+            style={styles.inputContainerStyle}
+            label="Disabled flat input"
+          />
+          <TextInput
+            mode="outlined"
+            style={styles.inputContainerStyle}
+            label="Outlined input"
+            placeholder="Type something"
+            value={this.state.outlinedText}
+            onChangeText={outlinedText => this.setState({ outlinedText })}
+          />
+          <TextInput
+            mode="outlined"
+            disabled
+            style={styles.inputContainerStyle}
+            label="Disabled outlined input"
+          />
+          <View style={styles.inputContainerStyle}>
+            <TextInput
+              label="Input with helper text"
+              placeholder="Enter username, only letters"
+              value={this.state.name}
+              error={!this._isUsernameValid()}
+              onChangeText={name => this.setState({ name })}
+            />
+            <HelperText type="error" visible={!this._isUsernameValid()}>
+              Error: Only letters are allowed
+            </HelperText>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -82,6 +97,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 8,
+  },
+  wrapper: {
+    flex: 1,
   },
   inputContainerStyle: {
     margin: 8,

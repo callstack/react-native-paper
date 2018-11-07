@@ -5,31 +5,32 @@
   "author": "",
   "private": true,
   "scripts": {
-    "start": "react-native-scripts start",
-    "android": "react-native-scripts android",
-    "ios": "react-native-scripts ios"
+    "start": "expo start",
+    "android": "expo android",
+    "ios": "expo ios"
   },
-  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
+  "main": "node_modules/expo/AppEntry.js",
   "dependencies": {
-    "@callstack/react-theme-provider": "^1.0.3",
-    "@expo/vector-icons": "^6.3.1",
+    "@callstack/react-theme-provider": "^1.0.7",
+    "@expo/vector-icons": "^8.0.0",
     "color": "^2.0.1",
-    "create-react-context": "^0.2.2",
-    "expo": "~27.0.2",
-    "react": "16.3.1",
+    "create-react-context": "^0.2.3",
+    "expo": "^31.0.3",
+    "react": "16.5.0",
     "react-lifecycles-compat": "^3.0.4",
-    "react-native": "~0.55.4",
-    "react-navigation": "^2.0.4"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.1.tar.gz",
+    "react-navigation": "^2.18.2"
   },
   "devDependencies": {
     "babel-plugin-module-resolver": "^3.1.1",
-    "babel-preset-expo": "^4.0.0",
-    "glob-to-regexp": "^0.4.0",
-    "react-native-scripts": "1.14.0"
+    "babel-preset-expo": "^5.0.0",
+    "expo-cli": "^2.2.6",
+    "glob-to-regexp": "^0.4.0"
   },
   "resolutions": {
+    "**/create-react-context": "0.2.3",
     "**/hoist-non-react-statics": "2.5.0",
     "**/react-lifecycles-compat": "3.0.4",
-    "**/react": "16.3.1"
+    "**/react": "16.5.0"
   }
 }

@@ -3,32 +3,19 @@
 exports[`renders chip with icon 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      0,
-      Object {
-        "backgroundColor": "#ebebeb",
-        "borderColor": "#ebebeb",
-        "borderRadius": 16,
-        "borderStyle": "solid",
-        "borderWidth": 0.5,
-        "elevation": 0,
-      },
-    ]
+    Object {
+      "backgroundColor": "#ebebeb",
+      "borderColor": "#ebebeb",
+      "borderRadius": 16,
+      "borderStyle": "solid",
+      "borderWidth": 0.5,
+      "elevation": 0,
+    }
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits={
-      Array [
-        "button",
-      ]
-    }
+    accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -64,9 +51,7 @@ exports[`renders chip with icon 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
@@ -92,6 +77,7 @@ exports[`renders chip with icon 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -99,9 +85,6 @@ exports[`renders chip with icon 1`] = `
         </Text>
       </View>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -160,32 +143,19 @@ exports[`renders chip with icon 1`] = `
 exports[`renders chip with onPress 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      0,
-      Object {
-        "backgroundColor": "#ebebeb",
-        "borderColor": "#ebebeb",
-        "borderRadius": 16,
-        "borderStyle": "solid",
-        "borderWidth": 0.5,
-        "elevation": 0,
-      },
-    ]
+    Object {
+      "backgroundColor": "#ebebeb",
+      "borderColor": "#ebebeb",
+      "borderRadius": 16,
+      "borderStyle": "solid",
+      "borderWidth": 0.5,
+      "elevation": 0,
+    }
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits={
-      Array [
-        "button",
-      ]
-    }
+    accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -210,9 +180,6 @@ exports[`renders chip with onPress 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -271,32 +238,19 @@ exports[`renders chip with onPress 1`] = `
 exports[`renders deletable chip 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      0,
-      Object {
-        "backgroundColor": "#ebebeb",
-        "borderColor": "#ebebeb",
-        "borderRadius": 16,
-        "borderStyle": "solid",
-        "borderWidth": 0.5,
-        "elevation": 0,
-      },
-    ]
+    Object {
+      "backgroundColor": "#ebebeb",
+      "borderColor": "#ebebeb",
+      "borderRadius": 16,
+      "borderStyle": "solid",
+      "borderWidth": 0.5,
+      "elevation": 0,
+    }
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits={
-      Array [
-        "button",
-      ]
-    }
+    accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -332,9 +286,7 @@ exports[`renders deletable chip 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
@@ -360,6 +312,7 @@ exports[`renders deletable chip 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -367,9 +320,6 @@ exports[`renders deletable chip 1`] = `
         </Text>
       </View>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -428,30 +378,20 @@ exports[`renders deletable chip 1`] = `
 exports[`renders outlined disabled chip 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      0,
-      Object {
-        "backgroundColor": "#ffffff",
-        "borderColor": "rgba(0, 0, 0, 0.29)",
-        "borderRadius": 16,
-        "borderStyle": "solid",
-        "borderWidth": 0.5,
-        "elevation": 0,
-      },
-    ]
+    Object {
+      "backgroundColor": "#ffffff",
+      "borderColor": "rgba(0, 0, 0, 0.29)",
+      "borderRadius": 16,
+      "borderStyle": "solid",
+      "borderWidth": 0.5,
+      "elevation": 0,
+    }
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits={
+    accessibilityRole="button"
+    accessibilityStates={
       Array [
-        "button",
         "disabled",
       ]
     }
@@ -479,9 +419,6 @@ exports[`renders outlined disabled chip 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -540,30 +477,20 @@ exports[`renders outlined disabled chip 1`] = `
 exports[`renders selected chip 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      Object {
-        "backgroundColor": "#ffffff",
-      },
-      0,
-      Object {
-        "backgroundColor": "rgba(0, 0, 0, 0.24)",
-        "borderColor": "#ebebeb",
-        "borderRadius": 16,
-        "borderStyle": "solid",
-        "borderWidth": 0.5,
-        "elevation": 0,
-      },
-    ]
+    Object {
+      "backgroundColor": "rgba(0, 0, 0, 0.24)",
+      "borderColor": "#ebebeb",
+      "borderRadius": 16,
+      "borderStyle": "solid",
+      "borderWidth": 0.5,
+      "elevation": 0,
+    }
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits={
+    accessibilityRole="button"
+    accessibilityStates={
       Array [
-        "button",
         "selected",
       ]
     }
@@ -602,9 +529,7 @@ exports[`renders selected chip 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
@@ -630,6 +555,7 @@ exports[`renders selected chip 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -637,9 +563,6 @@ exports[`renders selected chip 1`] = `
         </Text>
       </View>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [

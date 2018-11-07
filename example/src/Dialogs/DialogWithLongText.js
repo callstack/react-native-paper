@@ -19,11 +19,10 @@ const DialogWithLongText = ({
           <Paragraph>
             Material is the metaphor
             {'\n'}
-            {'\n'}
-            A material metaphor is the unifying theory of a rationalized space
-            and a system of motion. The material is grounded in tactile reality,
-            inspired by the study of paper and ink, yet technologically advanced
-            and open to imagination and magic.
+            {'\n'}A material metaphor is the unifying theory of a rationalized
+            space and a system of motion. The material is grounded in tactile
+            reality, inspired by the study of paper and ink, yet technologically
+            advanced and open to imagination and magic.
             {'\n'}
             {'\n'}
             Surfaces and edges of the material provide visual cues that are

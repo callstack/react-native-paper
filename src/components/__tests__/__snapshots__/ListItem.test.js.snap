@@ -26,11 +26,7 @@ exports[`renders list item with left and right items 1`] = `
       }
     }
   >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       GG
     </Text>
     <View
@@ -48,9 +44,6 @@ exports[`renders list item with left and right items 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -97,9 +90,6 @@ exports[`renders list item with left and right items 1`] = `
         First Item
       </Text>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={2}
         style={
           Array [
@@ -163,9 +153,7 @@ exports[`renders list item with left and right items 1`] = `
     >
       <Text
         accessibilityElementsHidden={true}
-        accessible={true}
         allowFontScaling={false}
-        ellipsizeMode="tail"
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         style={
@@ -191,6 +179,7 @@ exports[`renders list item with left and right items 1`] = `
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
+            Object {},
           ]
         }
       >
@@ -244,9 +233,7 @@ exports[`renders list item with left item 1`] = `
     >
       <Text
         accessibilityElementsHidden={true}
-        accessible={true}
         allowFontScaling={false}
-        ellipsizeMode="tail"
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         style={
@@ -272,6 +259,7 @@ exports[`renders list item with left item 1`] = `
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
+            Object {},
           ]
         }
       >
@@ -293,9 +281,6 @@ exports[`renders list item with left item 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -387,9 +372,6 @@ exports[`renders list item with right item 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -436,11 +418,7 @@ exports[`renders list item with right item 1`] = `
         First Item
       </Text>
     </View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       GG
     </Text>
   </View>
@@ -488,9 +466,6 @@ exports[`renders list item with title and description 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -537,9 +512,6 @@ exports[`renders list item with title and description 1`] = `
         First Item
       </Text>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={2}
         style={
           Array [
