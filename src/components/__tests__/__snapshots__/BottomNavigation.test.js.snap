@@ -22,6 +22,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         Object {
           "backgroundColor": "#f6f6f6",
         },
+        undefined,
       ]
     }
   >
@@ -562,6 +563,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         Object {
           "backgroundColor": "#f6f6f6",
         },
+        undefined,
       ]
     }
   >
@@ -1122,6 +1124,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         Object {
           "backgroundColor": "#f6f6f6",
         },
+        undefined,
       ]
     }
   >
@@ -1602,6 +1605,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         Object {
           "backgroundColor": "#f6f6f6",
         },
+        undefined,
       ]
     }
   >
@@ -2279,6 +2283,9 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         },
         Object {
           "backgroundColor": "#f6f6f6",
+        },
+        Object {
+          "backgroundColor": "#F9F9F9",
         },
       ]
     }
@@ -3174,6 +3181,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         Object {
           "backgroundColor": "#f6f6f6",
         },
+        undefined,
       ]
     }
   >
@@ -3920,6 +3928,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
         Object {
           "backgroundColor": "#f6f6f6",
         },
+        undefined,
       ]
     }
   >
@@ -4814,6 +4823,7 @@ exports[`renders shifting bottom navigation 1`] = `
         Object {
           "backgroundColor": "#f6f6f6",
         },
+        undefined,
       ]
     }
   >

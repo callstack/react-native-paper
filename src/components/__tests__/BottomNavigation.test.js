@@ -136,6 +136,7 @@ it('renders custom icon and label with custom colors in non-shifting bottom navi
         activeColor="#FBF7DB"
         inactiveColor="#853D4B"
         barStyle={{ backgroundColor: '#E96A82' }}
+        contentStyle={{ backgroundColor: '#F9F9F9' }}
       />
     )
     .toJSON();

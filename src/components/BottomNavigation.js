@@ -544,7 +544,13 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
         onLayout={this._handleLayout}
         pointerEvents={layout.measured ? 'auto' : 'none'}
       >
-        <View style={[styles.content, { backgroundColor: colors.background }, contentStyle]}>
+        <View
+          style={[
+            styles.content,
+            { backgroundColor: colors.background },
+            contentStyle,
+          ]}
+        >
           {routes.map((route, index) => {
             if (!loaded.includes(index)) {
               // Don't render a screen if we've never navigated to it
