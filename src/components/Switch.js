@@ -7,7 +7,9 @@ import setColor from 'color';
 import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 
-const version = NativeModules.PlatformConstants.reactNativeVersion;
+const version = NativeModules.PlatformConstants
+  ? NativeModules.PlatformConstants.reactNativeVersion
+  : undefined;
 
 type Props = React.ElementProps<NativeSwitch> & {
   /**
@@ -124,7 +126,7 @@ class Switch extends React.Component<Props> {
               : grey50;
 
     const props =
-      version.major === 0 && version.minor <= 56
+      version && version.major === 0 && version.minor <= 56
         ? {
             onTintColor,
             thumbTintColor,

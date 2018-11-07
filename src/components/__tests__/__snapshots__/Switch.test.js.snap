@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders disabled switch 1`] = `
+<RCTSwitch
+  disabled={true}
+  onChange={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  onTintColor="#03dac4"
+  style={
+    Object {
+      "height": 31,
+      "width": 51,
+    }
+  }
+  value={true}
+/>
+`;
+
+exports[`renders off switch 1`] = `
+<RCTSwitch
+  onChange={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  onTintColor="#03dac4"
+  style={
+    Object {
+      "height": 31,
+      "width": 51,
+    }
+  }
+  value={false}
+/>
+`;
+
+exports[`renders on switch 1`] = `
+<RCTSwitch
+  onChange={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  onTintColor="#03dac4"
+  style={
+    Object {
+      "height": 31,
+      "width": 51,
+    }
+  }
+  value={true}
+/>
+`;
+
+exports[`renders switch with color 1`] = `
+<RCTSwitch
+  onChange={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  onTintColor="#e91e63"
+  style={
+    Object {
+      "height": 31,
+      "width": 51,
+    }
+  }
+  value={true}
+/>
+`;
