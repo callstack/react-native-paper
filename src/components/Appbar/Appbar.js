@@ -12,7 +12,7 @@ import { withTheme } from '../../core/theming';
 import { black, white } from '../../styles/colors';
 import type { Theme } from '../../types';
 
-type Props = React.ElementConfig<typeof View> & {
+type Props = React.ElementConfig<typeof View> & {|
   /**
    * Whether the background color is a dark color. A dark appbar will render light text and vice-versa.
    */
@@ -26,7 +26,7 @@ type Props = React.ElementConfig<typeof View> & {
    */
   theme: Theme,
   style?: any,
-};
+|};
 
 export const DEFAULT_APPBAR_HEIGHT = 56;
 

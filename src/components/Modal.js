@@ -13,7 +13,7 @@ import { polyfill } from 'react-lifecycles-compat';
 import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 
-type Props = {
+type Props = {|
   /**
    * Determines whether clicking outside the modal dismiss it.
    */
@@ -34,7 +34,7 @@ type Props = {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 type State = {
   opacity: Animated.Value,

@@ -18,7 +18,7 @@ import { black, white } from '../styles/colors';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
-type Props = React.ElementConfig<typeof Surface> & {
+type Props = React.ElementConfig<typeof Surface> & {|
   /**
    * Mode of the chip.
    * - `flat` - flat chip without outline.
@@ -62,7 +62,7 @@ type Props = React.ElementConfig<typeof Surface> & {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 type State = {
   elevation: Animated.Value,

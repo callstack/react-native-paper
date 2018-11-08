@@ -9,7 +9,7 @@ import { withTheme } from '../core/theming';
 import { white } from '../styles/colors';
 import type { Theme } from '../types';
 
-type Props = {
+type Props = {|
   /**
    * Whether the Snackbar is currently visible.
    */
@@ -40,7 +40,7 @@ type Props = {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 type State = {
   opacity: Animated.Value,

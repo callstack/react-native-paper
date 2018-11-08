@@ -8,7 +8,7 @@ import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import type { Theme, $RemoveChildren } from '../../types';
 
-type Props = $RemoveChildren<typeof TouchableRipple> & {
+type Props = $RemoveChildren<typeof TouchableRipple> & {|
   /**
    * Title text for the list item.
    */
@@ -34,7 +34,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   theme: Theme,
   style?: any,
-};
+|};
 
 /**
  * A component to show tiles inside a List.

@@ -8,7 +8,7 @@ import TouchableRipple from './TouchableRipple';
 import { withTheme } from '../core/theming';
 import type { Theme, $RemoveChildren } from '../types';
 
-type Props = $RemoveChildren<typeof TouchableRipple> & {
+type Props = $RemoveChildren<typeof TouchableRipple> & {|
   /**
    * Status of checkbox.
    */
@@ -33,7 +33,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 type State = {
   scaleAnim: Animated.Value,

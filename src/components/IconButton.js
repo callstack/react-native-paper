@@ -10,7 +10,7 @@ import { withTheme } from '../core/theming';
 import type { IconSource } from './Icon';
 import type { Theme, $RemoveChildren } from '../types';
 
-type Props = $RemoveChildren<typeof TouchableRipple> & {
+type Props = $RemoveChildren<typeof TouchableRipple> & {|
   /**
    * Icon to display.
    */
@@ -40,7 +40,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 /**
  * An icon button is a button which displays only an icon without a label.

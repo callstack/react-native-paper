@@ -8,7 +8,7 @@ import TouchableRipple from './TouchableRipple';
 import { withTheme } from '../core/theming';
 import type { Theme, $RemoveChildren } from '../types';
 
-type Props = $RemoveChildren<typeof TouchableRipple> & {
+type Props = $RemoveChildren<typeof TouchableRipple> & {|
   /**
    * Value of the radio button
    */
@@ -37,7 +37,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 type State = {
   borderAnim: Animated.Value,

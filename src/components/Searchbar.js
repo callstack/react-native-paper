@@ -9,7 +9,7 @@ import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
-type Props = React.ElementConfig<typeof TextInput> & {
+type Props = React.ElementConfig<typeof TextInput> & {|
   /**
    * Hint text shown when the input is empty.
    */
@@ -35,7 +35,7 @@ type Props = React.ElementConfig<typeof TextInput> & {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 /**
  * Searchbar is a simple input box where users can type search queries.

@@ -11,7 +11,7 @@ const version = NativeModules.PlatformConstants
   ? NativeModules.PlatformConstants.reactNativeVersion
   : undefined;
 
-type Props = React.ElementConfig<typeof NativeSwitch> & {
+type Props = React.ElementConfig<typeof NativeSwitch> & {|
   /**
    * Disable toggling the switch.
    */
@@ -33,7 +33,7 @@ type Props = React.ElementConfig<typeof NativeSwitch> & {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 /**
  * Switch is a visual toggle between two mutually exclusive states — on and off.

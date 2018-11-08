@@ -8,7 +8,7 @@ import Button from './Button';
 import { withTheme } from '../core/theming';
 import type { Theme, $RemoveChildren } from '../types';
 
-type Props = $RemoveChildren<typeof Surface> & {
+type Props = $RemoveChildren<typeof Surface> & {|
   /**
    * Whether banner is currently visible.
    */
@@ -39,7 +39,7 @@ type Props = $RemoveChildren<typeof Surface> & {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 type State = {
   position: Animated.Value,

@@ -40,7 +40,7 @@ type RenderProps = {
   value?: string,
 };
 
-type Props = React.ElementConfig<typeof NativeTextInput> & {
+type Props = React.ElementConfig<typeof NativeTextInput> & {|
   /**
    * Mode of the TextInput.
    * - `flat` - flat input with an underline.
@@ -117,7 +117,7 @@ type Props = React.ElementConfig<typeof NativeTextInput> & {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 type State = {
   labeled: Animated.Value,

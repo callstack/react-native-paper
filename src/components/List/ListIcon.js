@@ -4,7 +4,7 @@ import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Icon, { type IconSource } from '../Icon';
 
-type Props = {
+type Props = {|
   /**
    * Icon to show.
    */
@@ -14,7 +14,7 @@ type Props = {
    */
   color: string,
   style?: any,
-};
+|};
 
 /**
  * A component to show an icon in a list item.
