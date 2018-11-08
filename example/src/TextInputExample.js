@@ -6,9 +6,9 @@ import {
   View,
   ScrollView,
   KeyboardAvoidingView,
+  type Theme,
 } from 'react-native';
 import { TextInput, HelperText, withTheme } from 'react-native-paper';
-import type { Theme } from 'react-native-paper/types';
 
 type Props = {
   theme: Theme,

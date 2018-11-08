@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { FlatList } from 'react-native';
-import { List, Divider, withTheme } from 'react-native-paper';
+import { List, Divider, withTheme, type Theme } from 'react-native-paper';
 import AppbarExample from './AppbarExample';
 import BannerExample from './BannerExample';
 import BottomNavigationExample from './BottomNavigationExample';
@@ -26,7 +26,6 @@ import SwitchExample from './SwitchExample';
 import TextExample from './TextExample';
 import TextInputExample from './TextInputExample';
 import TouchableRippleExample from './TouchableRippleExample';
-import type { Theme } from 'react-native-paper/types';
 
 type Props = {
   theme: Theme,

@@ -2,8 +2,7 @@
 
 import * as React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import { Text, Surface, withTheme } from 'react-native-paper';
-import type { Theme } from 'react-native-paper/types';
+import { Text, Surface, withTheme, type Theme } from 'react-native-paper';
 
 type Props = {
   theme: Theme,

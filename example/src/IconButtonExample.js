@@ -2,8 +2,7 @@
 
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { IconButton, Colors, withTheme } from 'react-native-paper';
-import type { Theme } from 'react-native-paper/types';
+import { IconButton, Colors, withTheme, type Theme } from 'react-native-paper';
 
 type Props = {
   theme: Theme,

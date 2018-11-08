@@ -2,8 +2,13 @@
 
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Colors, Caption, Searchbar, withTheme } from 'react-native-paper';
-import type { Theme } from 'react-native-paper/types';
+import {
+  Colors,
+  Caption,
+  Searchbar,
+  withTheme,
+  type Theme,
+} from 'react-native-paper';
 
 type Props = {
   navigation: any,

@@ -2,8 +2,13 @@
 
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Snackbar, Colors, withTheme, Button } from 'react-native-paper';
-import type { Theme } from 'react-native-paper/types';
+import {
+  Snackbar,
+  Colors,
+  withTheme,
+  Button,
+  type Theme,
+} from 'react-native-paper';
 
 type Props = {
   theme: Theme,
