@@ -1,7 +1,9 @@
 import * as React from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
 import { ThemeShape } from '../types';
 
 export interface SnackbarProps {
+  children: React.ReactNode;
   visible: boolean;
   action?: {
     label: string;
@@ -9,8 +11,7 @@ export interface SnackbarProps {
   };
   duration?: number;
   onDismiss: () => any;
-  children: React.ReactNode;
-  style?: any;
+  style?: StyleProp<ViewStyle>;
   theme?: ThemeShape;
 }
 

@@ -1,10 +1,9 @@
 import * as React from 'react';
+import { TouchableHighlightProps, TouchableNativeFeedbackProps } from 'react-native';
 import { ThemeShape } from '../types';
 
-export interface CheckboxProps {
+export interface CheckboxProps extends TouchableHighlightProps, TouchableNativeFeedbackProps {
   status: 'checked' | 'unchecked' | 'indeterminate';
-  disabled?: boolean;
-  onPress?: () => any;
   uncheckedColor?: string;
   color?: string;
   theme?: ThemeShape;

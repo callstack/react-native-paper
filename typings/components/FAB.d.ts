@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ViewProps } from 'react-native';
 import { ThemeShape, IconSource } from '../types';
 
 export interface FABGroupAction {
@@ -22,7 +23,7 @@ export interface FABGroupProps {
   theme?: ThemeShape;
 }
 
-export interface FABProps {
+export interface FABProps extends ViewProps {
   icon: IconSource;
   label?: string;
   accessibilityLabel?: string;
@@ -30,7 +31,6 @@ export interface FABProps {
   color?: string;
   disabled?: boolean;
   onPress?: () => any;
-  style?: any;
   theme?: ThemeShape;
 }
 

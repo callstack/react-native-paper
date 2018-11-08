@@ -1,18 +1,16 @@
 import * as React from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
 import { ThemeShape, IconSource } from '../types';
+import { TouchableRippleProps } from './TouchableRipple';
 
-export interface ButtonProps {
+export interface ButtonProps extends TouchableRippleProps {
   mode?: 'text' | 'outlined' | 'contained';
+  color?: string;
   dark?: boolean;
   compact?: boolean;
-  color?: string;
   loading?: boolean;
+  style?: StyleProp<ViewStyle>;
   icon?: IconSource;
-  disabled?: boolean;
-  children: React.ReactNode;
-  accessibilityLabel?: string;
-  onPress?: () => any;
-  style?: any;
   theme?: ThemeShape;
 }
 
