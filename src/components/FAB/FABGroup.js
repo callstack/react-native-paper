@@ -206,7 +206,6 @@ class FABGroup extends React.Component<Props, State> {
     const backdropOpacity = open
       ? this.state.backdrop.interpolate({
           inputRange: [0, 0.5, 1],
-          // $FlowFixMe
           outputRange: [0, 1, 1],
         })
       : this.state.backdrop;
@@ -217,7 +216,6 @@ class FABGroup extends React.Component<Props, State> {
         open
           ? opacity.interpolate({
               inputRange: [0, 1],
-              // $FlowFixMe
               outputRange: [0.8, 1],
             })
           : 1

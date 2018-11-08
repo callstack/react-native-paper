@@ -4,6 +4,7 @@ import * as React from 'react';
 import {
   TouchableNativeFeedback,
   TouchableHighlight,
+  TouchableWithoutFeedback,
   Platform,
   View,
 } from 'react-native';
@@ -13,7 +14,7 @@ import type { Theme } from '../types';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 
-type Props = {
+type Props = React.ElementConfig<typeof TouchableWithoutFeedback> & {
   /**
    * Whether to render the ripple outside the view bounds.
    */
@@ -126,7 +127,6 @@ class TouchableRipple extends React.Component<Props, void> {
     }
 
     return (
-      /* $FlowFixMe */
       <TouchableHighlight
         {...rest}
         disabled={disabled}

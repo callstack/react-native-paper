@@ -10,10 +10,10 @@ import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple';
 import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import type { Theme, $RemoveChildren } from '../../types';
 import type { IconSource } from './../Icon';
 
-type Props = {
+type Props = $RemoveChildren<typeof Surface> & {
   /**
    * Icon to display for the `FAB`.
    */

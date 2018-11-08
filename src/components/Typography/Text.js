@@ -5,7 +5,7 @@ import { Text as NativeText, I18nManager } from 'react-native';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
-type Props = {
+type Props = React.ElementConfig<typeof NativeText> & {
   style?: any,
   /**
    * @optional

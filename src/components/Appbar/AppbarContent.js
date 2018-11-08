@@ -9,9 +9,9 @@ import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import { black } from '../../styles/colors';
 
-import type { Theme } from '../../types';
+import type { Theme, $RemoveChildren } from '../../types';
 
-type Props = {
+type Props = $RemoveChildren<typeof View> & {
   /**
    * CUstom color for the text.
    */
@@ -54,6 +54,7 @@ class AppbarContent extends React.Component<Props> {
       titleStyle,
       theme,
       title,
+      ...rest
     } = this.props;
     const { fonts } = theme;
 
@@ -63,7 +64,7 @@ class AppbarContent extends React.Component<Props> {
       .string();
 
     return (
-      <View style={[styles.container, style]}>
+      <View style={[styles.container, style]} {...rest}>
         <Text
           style={[
             {

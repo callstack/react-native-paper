@@ -11,7 +11,7 @@ const version = NativeModules.PlatformConstants
   ? NativeModules.PlatformConstants.reactNativeVersion
   : undefined;
 
-type Props = React.ElementProps<NativeSwitch> & {
+type Props = React.ElementConfig<typeof NativeSwitch> & {
   /**
    * Disable toggling the switch.
    */
@@ -127,10 +127,10 @@ class Switch extends React.Component<Props> {
 
     const props =
       version && version.major === 0 && version.minor <= 56
-        ? {
+        ? ({
             onTintColor,
             thumbTintColor,
-          }
+          }: any)
         : {
             thumbColor: thumbTintColor,
             trackColor: {

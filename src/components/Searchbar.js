@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import { StyleSheet, TextInput, I18nManager } from 'react-native';
-
 import color from 'color';
 import IconButton from './IconButton';
 import Surface from './Surface';
@@ -10,7 +9,7 @@ import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
-type Props = {
+type Props = React.ElementConfig<typeof TextInput> & {
   /**
    * Hint text shown when the input is empty.
    */

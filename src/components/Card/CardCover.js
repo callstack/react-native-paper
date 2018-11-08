@@ -6,7 +6,7 @@ import { withTheme } from '../../core/theming';
 import { grey200 } from '../../styles/colors';
 import type { Theme } from '../../types';
 
-type Props = {
+type Props = React.ElementConfig<typeof Image> & {
   /**
    * @internal
    */

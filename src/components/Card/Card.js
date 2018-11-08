@@ -14,7 +14,7 @@ import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
-type Props = {
+type Props = React.ElementConfig<typeof Surface> & {
   /**
    * Resting elevation of the card which controls the drop shadow.
    */
@@ -105,7 +105,14 @@ class Card extends React.Component<Props, State> {
   };
 
   render() {
-    const { children, onLongPress, onPress, style, theme } = this.props;
+    const {
+      children,
+      onLongPress,
+      onPress,
+      style,
+      theme,
+      ...rest
+    } = this.props;
     const { elevation } = this.state;
     const { roundness } = theme;
     const total = React.Children.count(children);
@@ -117,7 +124,10 @@ class Card extends React.Component<Props, State> {
           : null
     );
     return (
-      <Surface style={[{ borderRadius: roundness, elevation }, style]}>
+      <Surface
+        style={[{ borderRadius: roundness, elevation }, style]}
+        {...rest}
+      >
         <TouchableWithoutFeedback
           delayPressIn={0}
           disabled={!(onPress || onLongPress)}

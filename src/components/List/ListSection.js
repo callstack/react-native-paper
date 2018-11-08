@@ -7,7 +7,7 @@ import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
-type Props = {
+type Props = React.ElementConfig<typeof View> & {
   /**
    * Title text for the section.
    */
