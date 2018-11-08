@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { StyleProp, ViewStyle, TextInputProps } from 'react-native';
+import { StyleProp, ViewStyle } from 'react-native';
 import { ThemeShape } from '../types';
 
-export interface SnackbarProps extends TextInputProps {
+export interface SnackbarProps {
   children: React.ReactNode;
   visible: boolean;
   action?: {
@@ -16,7 +16,7 @@ export interface SnackbarProps extends TextInputProps {
 }
 
 export declare class Snackbar extends React.Component<SnackbarProps> {
-  static DURATION_SHORT: string;
-  static DURATION_MEDIUM: string;
-  static DURATION_LONG: string;
+  static DURATION_SHORT: number;
+  static DURATION_MEDIUM: number;
+  static DURATION_LONG: number;
 }
