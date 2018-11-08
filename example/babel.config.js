@@ -6,7 +6,6 @@ module.exports = {
       {
         alias: {
           'react-native-paper': '../src/index',
-          'react-native-paper/types': '../types',
           'react-native-vector-icons': '@expo/vector-icons',
         },
       },

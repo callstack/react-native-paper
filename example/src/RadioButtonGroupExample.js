@@ -2,8 +2,13 @@
 
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Colors, withTheme, RadioButton, Paragraph } from 'react-native-paper';
-import type { Theme } from 'react-native-paper/types';
+import {
+  Colors,
+  withTheme,
+  RadioButton,
+  Paragraph,
+  type Theme,
+} from 'react-native-paper';
 
 type Props = {
   theme: Theme,

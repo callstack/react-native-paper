@@ -1,6 +1,9 @@
 /* @flow */
 
 import * as Colors from './styles/colors';
+import type { Theme as _Theme } from './types';
+
+export type Theme = _Theme;
 
 export { Colors };
 

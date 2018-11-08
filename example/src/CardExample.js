@@ -9,8 +9,8 @@ import {
   Card,
   Button,
   withTheme,
+  type Theme,
 } from 'react-native-paper';
-import type { Theme } from 'react-native-paper/types';
 
 type Props = {
   theme: Theme,

@@ -7,12 +7,12 @@ import {
   Provider as PaperProvider,
   DarkTheme,
   DefaultTheme,
+  type Theme,
 } from 'react-native-paper';
 import createReactContext from 'create-react-context';
 import { createDrawerNavigator } from 'react-navigation';
 import RootNavigator from './src/RootNavigator';
 import DrawerItems from './DrawerItems';
-import type { Theme } from 'react-native-paper/types';
 
 type State = {
   theme: Theme,

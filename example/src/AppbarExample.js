@@ -9,8 +9,8 @@ import {
   Switch,
   Paragraph,
   withTheme,
+  type Theme,
 } from 'react-native-paper';
-import type { Theme } from 'react-native-paper/types';
 
 type Props = {
   navigation: any,

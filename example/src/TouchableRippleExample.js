@@ -1,8 +1,12 @@
 /* @flow */
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { TouchableRipple, withTheme, Paragraph } from 'react-native-paper';
-import type { Theme } from 'react-native-paper/types';
+import {
+  TouchableRipple,
+  withTheme,
+  Paragraph,
+  type Theme,
+} from 'react-native-paper';
 
 type Props = {
   theme: Theme,

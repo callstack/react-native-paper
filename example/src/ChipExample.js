@@ -2,8 +2,7 @@
 
 import * as React from 'react';
 import { View, ScrollView, StyleSheet, Image } from 'react-native';
-import { Chip, List, withTheme } from 'react-native-paper';
-import type { Theme } from 'react-native-paper/types';
+import { Chip, List, withTheme, type Theme } from 'react-native-paper';
 
 type Props = {
   theme: Theme,

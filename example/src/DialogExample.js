@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Colors, Button, withTheme } from 'react-native-paper';
+import { Colors, Button, withTheme, type Theme } from 'react-native-paper';
 import {
   DialogWithCustomColors,
   DialogWithLoadingIndicator,
@@ -10,7 +10,6 @@ import {
   DialogWithRadioBtns,
   UndismissableDialog,
 } from './Dialogs';
-import type { Theme } from 'react-native-paper/types';
 
 type State = {
   visible1: boolean,
