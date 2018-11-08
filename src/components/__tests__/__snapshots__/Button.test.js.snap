@@ -74,29 +74,6 @@ exports[`renders button with color 1`] = `
             ],
           ]
         }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
-        }
       >
         CUSTOM BUTTON
       </Text>
@@ -223,29 +200,6 @@ exports[`renders button with icon 1`] = `
             ],
           ]
         }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
-        }
       >
         ICON BUTTON
       </Text>
@@ -328,29 +282,6 @@ exports[`renders contained contained with mode 1`] = `
             ],
           ]
         }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
-        }
       >
         CONTAINED BUTTON
       </Text>
@@ -430,29 +361,6 @@ exports[`renders disabled button 1`] = `
               },
             ],
           ]
-        }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
         }
       >
         DISABLED BUTTON
@@ -549,29 +457,6 @@ exports[`renders loading button 1`] = `
             ],
           ]
         }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
-        }
       >
         LOADING BUTTON
       </Text>
@@ -653,29 +538,6 @@ exports[`renders outlined button with mode 1`] = `
               },
             ],
           ]
-        }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
         }
       >
         OUTLINED BUTTON
@@ -759,29 +621,6 @@ exports[`renders text button by default 1`] = `
             ],
           ]
         }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
-        }
       >
         TEXT BUTTON
       </Text>
@@ -863,29 +702,6 @@ exports[`renders text button with mode 1`] = `
               },
             ],
           ]
-        }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
         }
       >
         TEXT BUTTON

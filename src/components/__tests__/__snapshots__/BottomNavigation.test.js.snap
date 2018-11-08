@@ -2527,29 +2527,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     },
                   ]
                 }
-                theme={
-                  Object {
-                    "colors": Object {
-                      "accent": "#03dac4",
-                      "backdrop": "rgba(0, 0, 0, 0.5)",
-                      "background": "#f6f6f6",
-                      "disabled": "rgba(0, 0, 0, 0.26)",
-                      "error": "#B00020",
-                      "placeholder": "rgba(0, 0, 0, 0.54)",
-                      "primary": "#6200ee",
-                      "surface": "#ffffff",
-                      "text": "#000000",
-                    },
-                    "dark": false,
-                    "fonts": Object {
-                      "light": "HelveticaNeue-Light",
-                      "medium": "HelveticaNeue-Medium",
-                      "regular": "Helvetica Neue",
-                      "thin": "HelveticaNeue-Thin",
-                    },
-                    "roundness": 4,
-                  }
-                }
               >
                 Route: 0
               </Text>
@@ -2582,29 +2559,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       "textAlign": "center",
                     },
                   ]
-                }
-                theme={
-                  Object {
-                    "colors": Object {
-                      "accent": "#03dac4",
-                      "backdrop": "rgba(0, 0, 0, 0.5)",
-                      "background": "#f6f6f6",
-                      "disabled": "rgba(0, 0, 0, 0.26)",
-                      "error": "#B00020",
-                      "placeholder": "rgba(0, 0, 0, 0.54)",
-                      "primary": "#6200ee",
-                      "surface": "#ffffff",
-                      "text": "#000000",
-                    },
-                    "dark": false,
-                    "fonts": Object {
-                      "light": "HelveticaNeue-Light",
-                      "medium": "HelveticaNeue-Medium",
-                      "regular": "Helvetica Neue",
-                      "thin": "HelveticaNeue-Thin",
-                    },
-                    "roundness": 4,
-                  }
                 }
               >
                 Route: 0
@@ -2794,29 +2748,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     },
                   ]
                 }
-                theme={
-                  Object {
-                    "colors": Object {
-                      "accent": "#03dac4",
-                      "backdrop": "rgba(0, 0, 0, 0.5)",
-                      "background": "#f6f6f6",
-                      "disabled": "rgba(0, 0, 0, 0.26)",
-                      "error": "#B00020",
-                      "placeholder": "rgba(0, 0, 0, 0.54)",
-                      "primary": "#6200ee",
-                      "surface": "#ffffff",
-                      "text": "#000000",
-                    },
-                    "dark": false,
-                    "fonts": Object {
-                      "light": "HelveticaNeue-Light",
-                      "medium": "HelveticaNeue-Medium",
-                      "regular": "Helvetica Neue",
-                      "thin": "HelveticaNeue-Thin",
-                    },
-                    "roundness": 4,
-                  }
-                }
               >
                 Route: 1
               </Text>
@@ -2849,29 +2780,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       "textAlign": "center",
                     },
                   ]
-                }
-                theme={
-                  Object {
-                    "colors": Object {
-                      "accent": "#03dac4",
-                      "backdrop": "rgba(0, 0, 0, 0.5)",
-                      "background": "#f6f6f6",
-                      "disabled": "rgba(0, 0, 0, 0.26)",
-                      "error": "#B00020",
-                      "placeholder": "rgba(0, 0, 0, 0.54)",
-                      "primary": "#6200ee",
-                      "surface": "#ffffff",
-                      "text": "#000000",
-                    },
-                    "dark": false,
-                    "fonts": Object {
-                      "light": "HelveticaNeue-Light",
-                      "medium": "HelveticaNeue-Medium",
-                      "regular": "Helvetica Neue",
-                      "thin": "HelveticaNeue-Thin",
-                    },
-                    "roundness": 4,
-                  }
                 }
               >
                 Route: 1
@@ -3060,29 +2968,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       "textAlign": "center",
                     },
                   ]
-                }
-                theme={
-                  Object {
-                    "colors": Object {
-                      "accent": "#03dac4",
-                      "backdrop": "rgba(0, 0, 0, 0.5)",
-                      "background": "#f6f6f6",
-                      "disabled": "rgba(0, 0, 0, 0.26)",
-                      "error": "#B00020",
-                      "placeholder": "rgba(0, 0, 0, 0.54)",
-                      "primary": "#6200ee",
-                      "surface": "#ffffff",
-                      "text": "#000000",
-                    },
-                    "dark": false,
-                    "fonts": Object {
-                      "light": "HelveticaNeue-Light",
-                      "medium": "HelveticaNeue-Medium",
-                      "regular": "Helvetica Neue",
-                      "thin": "HelveticaNeue-Thin",
-                    },
-                    "roundness": 4,
-                  }
                 }
               >
                 Route: 2
@@ -3116,29 +3001,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       "textAlign": "center",
                     },
                   ]
-                }
-                theme={
-                  Object {
-                    "colors": Object {
-                      "accent": "#03dac4",
-                      "backdrop": "rgba(0, 0, 0, 0.5)",
-                      "background": "#f6f6f6",
-                      "disabled": "rgba(0, 0, 0, 0.26)",
-                      "error": "#B00020",
-                      "placeholder": "rgba(0, 0, 0, 0.54)",
-                      "primary": "#6200ee",
-                      "surface": "#ffffff",
-                      "text": "#000000",
-                    },
-                    "dark": false,
-                    "fonts": Object {
-                      "light": "HelveticaNeue-Light",
-                      "medium": "HelveticaNeue-Medium",
-                      "regular": "Helvetica Neue",
-                      "thin": "HelveticaNeue-Thin",
-                    },
-                    "roundness": 4,
-                  }
                 }
               >
                 Route: 2
@@ -3441,29 +3303,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     },
                   ]
                 }
-                theme={
-                  Object {
-                    "colors": Object {
-                      "accent": "#03dac4",
-                      "backdrop": "rgba(0, 0, 0, 0.5)",
-                      "background": "#f6f6f6",
-                      "disabled": "rgba(0, 0, 0, 0.26)",
-                      "error": "#B00020",
-                      "placeholder": "rgba(0, 0, 0, 0.54)",
-                      "primary": "#6200ee",
-                      "surface": "#ffffff",
-                      "text": "#000000",
-                    },
-                    "dark": false,
-                    "fonts": Object {
-                      "light": "HelveticaNeue-Light",
-                      "medium": "HelveticaNeue-Medium",
-                      "regular": "Helvetica Neue",
-                      "thin": "HelveticaNeue-Thin",
-                    },
-                    "roundness": 4,
-                  }
-                }
               >
                 Route: 0
               </Text>
@@ -3652,29 +3491,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     },
                   ]
                 }
-                theme={
-                  Object {
-                    "colors": Object {
-                      "accent": "#03dac4",
-                      "backdrop": "rgba(0, 0, 0, 0.5)",
-                      "background": "#f6f6f6",
-                      "disabled": "rgba(0, 0, 0, 0.26)",
-                      "error": "#B00020",
-                      "placeholder": "rgba(0, 0, 0, 0.54)",
-                      "primary": "#6200ee",
-                      "surface": "#ffffff",
-                      "text": "#000000",
-                    },
-                    "dark": false,
-                    "fonts": Object {
-                      "light": "HelveticaNeue-Light",
-                      "medium": "HelveticaNeue-Medium",
-                      "regular": "Helvetica Neue",
-                      "thin": "HelveticaNeue-Thin",
-                    },
-                    "roundness": 4,
-                  }
-                }
               >
                 Route: 1
               </Text>
@@ -3862,29 +3678,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       "textAlign": "center",
                     },
                   ]
-                }
-                theme={
-                  Object {
-                    "colors": Object {
-                      "accent": "#03dac4",
-                      "backdrop": "rgba(0, 0, 0, 0.5)",
-                      "background": "#f6f6f6",
-                      "disabled": "rgba(0, 0, 0, 0.26)",
-                      "error": "#B00020",
-                      "placeholder": "rgba(0, 0, 0, 0.54)",
-                      "primary": "#6200ee",
-                      "surface": "#ffffff",
-                      "text": "#000000",
-                    },
-                    "dark": false,
-                    "fonts": Object {
-                      "light": "HelveticaNeue-Light",
-                      "medium": "HelveticaNeue-Medium",
-                      "regular": "Helvetica Neue",
-                      "thin": "HelveticaNeue-Thin",
-                    },
-                    "roundness": 4,
-                  }
                 }
               >
                 Route: 2
@@ -4167,29 +3960,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     },
                   ]
                 }
-                theme={
-                  Object {
-                    "colors": Object {
-                      "accent": "#03dac4",
-                      "backdrop": "rgba(0, 0, 0, 0.5)",
-                      "background": "#f6f6f6",
-                      "disabled": "rgba(0, 0, 0, 0.26)",
-                      "error": "#B00020",
-                      "placeholder": "rgba(0, 0, 0, 0.54)",
-                      "primary": "#6200ee",
-                      "surface": "#ffffff",
-                      "text": "#000000",
-                    },
-                    "dark": false,
-                    "fonts": Object {
-                      "light": "HelveticaNeue-Light",
-                      "medium": "HelveticaNeue-Medium",
-                      "regular": "Helvetica Neue",
-                      "thin": "HelveticaNeue-Thin",
-                    },
-                    "roundness": 4,
-                  }
-                }
               >
                 Route: 0
               </Text>
@@ -4222,29 +3992,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       "textAlign": "center",
                     },
                   ]
-                }
-                theme={
-                  Object {
-                    "colors": Object {
-                      "accent": "#03dac4",
-                      "backdrop": "rgba(0, 0, 0, 0.5)",
-                      "background": "#f6f6f6",
-                      "disabled": "rgba(0, 0, 0, 0.26)",
-                      "error": "#B00020",
-                      "placeholder": "rgba(0, 0, 0, 0.54)",
-                      "primary": "#6200ee",
-                      "surface": "#ffffff",
-                      "text": "#000000",
-                    },
-                    "dark": false,
-                    "fonts": Object {
-                      "light": "HelveticaNeue-Light",
-                      "medium": "HelveticaNeue-Medium",
-                      "regular": "Helvetica Neue",
-                      "thin": "HelveticaNeue-Thin",
-                    },
-                    "roundness": 4,
-                  }
                 }
               >
                 Route: 0
@@ -4434,29 +4181,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     },
                   ]
                 }
-                theme={
-                  Object {
-                    "colors": Object {
-                      "accent": "#03dac4",
-                      "backdrop": "rgba(0, 0, 0, 0.5)",
-                      "background": "#f6f6f6",
-                      "disabled": "rgba(0, 0, 0, 0.26)",
-                      "error": "#B00020",
-                      "placeholder": "rgba(0, 0, 0, 0.54)",
-                      "primary": "#6200ee",
-                      "surface": "#ffffff",
-                      "text": "#000000",
-                    },
-                    "dark": false,
-                    "fonts": Object {
-                      "light": "HelveticaNeue-Light",
-                      "medium": "HelveticaNeue-Medium",
-                      "regular": "Helvetica Neue",
-                      "thin": "HelveticaNeue-Thin",
-                    },
-                    "roundness": 4,
-                  }
-                }
               >
                 Route: 1
               </Text>
@@ -4489,29 +4213,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       "textAlign": "center",
                     },
                   ]
-                }
-                theme={
-                  Object {
-                    "colors": Object {
-                      "accent": "#03dac4",
-                      "backdrop": "rgba(0, 0, 0, 0.5)",
-                      "background": "#f6f6f6",
-                      "disabled": "rgba(0, 0, 0, 0.26)",
-                      "error": "#B00020",
-                      "placeholder": "rgba(0, 0, 0, 0.54)",
-                      "primary": "#6200ee",
-                      "surface": "#ffffff",
-                      "text": "#000000",
-                    },
-                    "dark": false,
-                    "fonts": Object {
-                      "light": "HelveticaNeue-Light",
-                      "medium": "HelveticaNeue-Medium",
-                      "regular": "Helvetica Neue",
-                      "thin": "HelveticaNeue-Thin",
-                    },
-                    "roundness": 4,
-                  }
                 }
               >
                 Route: 1
@@ -4700,29 +4401,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       "textAlign": "center",
                     },
                   ]
-                }
-                theme={
-                  Object {
-                    "colors": Object {
-                      "accent": "#03dac4",
-                      "backdrop": "rgba(0, 0, 0, 0.5)",
-                      "background": "#f6f6f6",
-                      "disabled": "rgba(0, 0, 0, 0.26)",
-                      "error": "#B00020",
-                      "placeholder": "rgba(0, 0, 0, 0.54)",
-                      "primary": "#6200ee",
-                      "surface": "#ffffff",
-                      "text": "#000000",
-                    },
-                    "dark": false,
-                    "fonts": Object {
-                      "light": "HelveticaNeue-Light",
-                      "medium": "HelveticaNeue-Medium",
-                      "regular": "Helvetica Neue",
-                      "thin": "HelveticaNeue-Thin",
-                    },
-                    "roundness": 4,
-                  }
                 }
               >
                 Route: 2
@@ -4756,29 +4434,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       "textAlign": "center",
                     },
                   ]
-                }
-                theme={
-                  Object {
-                    "colors": Object {
-                      "accent": "#03dac4",
-                      "backdrop": "rgba(0, 0, 0, 0.5)",
-                      "background": "#f6f6f6",
-                      "disabled": "rgba(0, 0, 0, 0.26)",
-                      "error": "#B00020",
-                      "placeholder": "rgba(0, 0, 0, 0.54)",
-                      "primary": "#6200ee",
-                      "surface": "#ffffff",
-                      "text": "#000000",
-                    },
-                    "dark": false,
-                    "fonts": Object {
-                      "light": "HelveticaNeue-Light",
-                      "medium": "HelveticaNeue-Medium",
-                      "regular": "Helvetica Neue",
-                      "thin": "HelveticaNeue-Thin",
-                    },
-                    "roundness": 4,
-                  }
                 }
               >
                 Route: 2
@@ -5081,29 +4736,6 @@ exports[`renders shifting bottom navigation 1`] = `
                     },
                   ]
                 }
-                theme={
-                  Object {
-                    "colors": Object {
-                      "accent": "#03dac4",
-                      "backdrop": "rgba(0, 0, 0, 0.5)",
-                      "background": "#f6f6f6",
-                      "disabled": "rgba(0, 0, 0, 0.26)",
-                      "error": "#B00020",
-                      "placeholder": "rgba(0, 0, 0, 0.54)",
-                      "primary": "#6200ee",
-                      "surface": "#ffffff",
-                      "text": "#000000",
-                    },
-                    "dark": false,
-                    "fonts": Object {
-                      "light": "HelveticaNeue-Light",
-                      "medium": "HelveticaNeue-Medium",
-                      "regular": "Helvetica Neue",
-                      "thin": "HelveticaNeue-Thin",
-                    },
-                    "roundness": 4,
-                  }
-                }
               >
                 Route: 0
               </Text>
@@ -5291,29 +4923,6 @@ exports[`renders shifting bottom navigation 1`] = `
                       "textAlign": "center",
                     },
                   ]
-                }
-                theme={
-                  Object {
-                    "colors": Object {
-                      "accent": "#03dac4",
-                      "backdrop": "rgba(0, 0, 0, 0.5)",
-                      "background": "#f6f6f6",
-                      "disabled": "rgba(0, 0, 0, 0.26)",
-                      "error": "#B00020",
-                      "placeholder": "rgba(0, 0, 0, 0.54)",
-                      "primary": "#6200ee",
-                      "surface": "#ffffff",
-                      "text": "#000000",
-                    },
-                    "dark": false,
-                    "fonts": Object {
-                      "light": "HelveticaNeue-Light",
-                      "medium": "HelveticaNeue-Medium",
-                      "regular": "Helvetica Neue",
-                      "thin": "HelveticaNeue-Thin",
-                    },
-                    "roundness": 4,
-                  }
                 }
               >
                 Route: 1
@@ -5503,29 +5112,6 @@ exports[`renders shifting bottom navigation 1`] = `
                     },
                   ]
                 }
-                theme={
-                  Object {
-                    "colors": Object {
-                      "accent": "#03dac4",
-                      "backdrop": "rgba(0, 0, 0, 0.5)",
-                      "background": "#f6f6f6",
-                      "disabled": "rgba(0, 0, 0, 0.26)",
-                      "error": "#B00020",
-                      "placeholder": "rgba(0, 0, 0, 0.54)",
-                      "primary": "#6200ee",
-                      "surface": "#ffffff",
-                      "text": "#000000",
-                    },
-                    "dark": false,
-                    "fonts": Object {
-                      "light": "HelveticaNeue-Light",
-                      "medium": "HelveticaNeue-Medium",
-                      "regular": "Helvetica Neue",
-                      "thin": "HelveticaNeue-Thin",
-                    },
-                    "roundness": 4,
-                  }
-                }
               >
                 Route: 2
               </Text>
@@ -5714,29 +5300,6 @@ exports[`renders shifting bottom navigation 1`] = `
                     },
                   ]
                 }
-                theme={
-                  Object {
-                    "colors": Object {
-                      "accent": "#03dac4",
-                      "backdrop": "rgba(0, 0, 0, 0.5)",
-                      "background": "#f6f6f6",
-                      "disabled": "rgba(0, 0, 0, 0.26)",
-                      "error": "#B00020",
-                      "placeholder": "rgba(0, 0, 0, 0.54)",
-                      "primary": "#6200ee",
-                      "surface": "#ffffff",
-                      "text": "#000000",
-                    },
-                    "dark": false,
-                    "fonts": Object {
-                      "light": "HelveticaNeue-Light",
-                      "medium": "HelveticaNeue-Medium",
-                      "regular": "Helvetica Neue",
-                      "thin": "HelveticaNeue-Thin",
-                    },
-                    "roundness": 4,
-                  }
-                }
               >
                 Route: 3
               </Text>
@@ -5924,29 +5487,6 @@ exports[`renders shifting bottom navigation 1`] = `
                       "textAlign": "center",
                     },
                   ]
-                }
-                theme={
-                  Object {
-                    "colors": Object {
-                      "accent": "#03dac4",
-                      "backdrop": "rgba(0, 0, 0, 0.5)",
-                      "background": "#f6f6f6",
-                      "disabled": "rgba(0, 0, 0, 0.26)",
-                      "error": "#B00020",
-                      "placeholder": "rgba(0, 0, 0, 0.54)",
-                      "primary": "#6200ee",
-                      "surface": "#ffffff",
-                      "text": "#000000",
-                    },
-                    "dark": false,
-                    "fonts": Object {
-                      "light": "HelveticaNeue-Light",
-                      "medium": "HelveticaNeue-Medium",
-                      "regular": "Helvetica Neue",
-                      "thin": "HelveticaNeue-Thin",
-                    },
-                    "roundness": 4,
-                  }
                 }
               >
                 Route: 4

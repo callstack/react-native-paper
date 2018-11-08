@@ -29,12 +29,12 @@ class Text extends React.Component<Props> {
   }
 
   render() {
-    const { style, theme } = this.props;
+    const { style, theme, ...rest } = this.props;
     const writingDirection = I18nManager.isRTL ? 'rtl' : 'ltr';
 
     return (
       <NativeText
-        {...this.props}
+        {...rest}
         ref={c => {
           this._root = c;
         }}
