@@ -6,9 +6,9 @@ import color from 'color';
 import Icon from './Icon';
 import TouchableRipple from './TouchableRipple';
 import { withTheme } from '../core/theming';
-import type { Theme } from '../types';
+import type { Theme, $RemoveChildren } from '../types';
 
-type Props = {
+type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Status of checkbox.
    */

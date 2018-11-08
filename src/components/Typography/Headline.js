@@ -1,10 +1,10 @@
 /* @flow */
 
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import StyledText from './StyledText';
 
-type Props = {
+type Props = React.ElementConfig<typeof Text> & {
   style?: any,
 };
 

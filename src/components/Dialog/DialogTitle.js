@@ -6,7 +6,7 @@ import Title from '../Typography/Title';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
-type Props = {
+type Props = React.ElementConfig<typeof Title> & {
   /**
    * Title text for the `DialogTitle`.
    */

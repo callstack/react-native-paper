@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-type Props = {
+type Props = React.ElementConfig<typeof View> & {
   /**
    * Content of the `DialogContent`.
    */
@@ -47,7 +47,7 @@ class DialogContent extends React.Component<Props> {
 
   render() {
     return (
-      <View style={[styles.container, this.props.style]}>
+      <View {...this.props} style={[styles.container, this.props.style]}>
         {this.props.children}
       </View>
     );

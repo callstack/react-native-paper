@@ -9,7 +9,7 @@ import type { Theme } from '../types';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
-type Props = {
+type Props = React.ElementConfig<typeof Text> & {
   /**
    * Type of the helper text.
    */
@@ -111,13 +111,15 @@ class HelperText extends React.PureComponent<Props, State> {
     }).start();
   };
 
-  _handleTextLayout = e =>
+  _handleTextLayout = e => {
+    this.props.onLayout && this.props.onLayout(e);
     this.setState({
       textHeight: e.nativeEvent.layout.height,
     });
+  };
 
   render() {
-    const { style, type, visible, theme } = this.props;
+    const { style, type, visible, theme, onLayout, ...rest } = this.props;
     const { colors, dark } = theme;
 
     const textColor =
@@ -150,6 +152,7 @@ class HelperText extends React.PureComponent<Props, State> {
           },
           style,
         ]}
+        {...rest}
       >
         {this.props.children}
       </AnimatedText>

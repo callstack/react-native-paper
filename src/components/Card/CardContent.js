@@ -3,7 +3,11 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-type Props = {
+type Props = React.ElementConfig<typeof View> & {
+  /**
+   * Items inside the `Card.Content`.
+   */
+  children: React.Node,
   /**
    * @internal
    */

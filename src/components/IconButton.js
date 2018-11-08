@@ -8,9 +8,9 @@ import TouchableRipple from './TouchableRipple';
 import Icon from './Icon';
 import { withTheme } from '../core/theming';
 import type { IconSource } from './Icon';
-import type { Theme } from '../../types';
+import type { Theme, $RemoveChildren } from '../types';
 
-type Props = {
+type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Icon to display.
    */
