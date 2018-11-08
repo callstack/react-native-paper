@@ -11,7 +11,7 @@ import { black } from '../../styles/colors';
 
 import type { Theme, $RemoveChildren } from '../../types';
 
-type Props = $RemoveChildren<typeof View> & {
+type Props = $RemoveChildren<typeof View> & {|
   /**
    * CUstom color for the text.
    */
@@ -37,7 +37,7 @@ type Props = $RemoveChildren<typeof View> & {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 /**
  * A component used to display a title and optional subtitle in a appbar.

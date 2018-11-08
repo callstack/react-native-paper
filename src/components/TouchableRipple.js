@@ -14,7 +14,7 @@ import type { Theme } from '../types';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 
-type Props = React.ElementConfig<typeof TouchableWithoutFeedback> & {
+type Props = React.ElementConfig<typeof TouchableWithoutFeedback> & {|
   /**
    * Whether to render the ripple outside the view bounds.
    */
@@ -49,7 +49,7 @@ type Props = React.ElementConfig<typeof TouchableWithoutFeedback> & {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 /**
  * A wrapper for views that should respond to touches.

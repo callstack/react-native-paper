@@ -6,7 +6,7 @@ import { withTheme } from '../../core/theming';
 import { grey200 } from '../../styles/colors';
 import type { Theme } from '../../types';
 
-type Props = React.ElementConfig<typeof Image> & {
+type Props = React.ElementConfig<typeof Image> & {|
   /**
    * @internal
    */
@@ -20,7 +20,7 @@ type Props = React.ElementConfig<typeof Image> & {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 /**
  * A component to show a cover image inside a Card.

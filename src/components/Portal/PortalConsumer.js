@@ -4,10 +4,10 @@
 import * as React from 'react';
 import type { PortalMethods } from './PortalHost';
 
-type Props = {
+type Props = {|
   manager: PortalMethods,
   children: React.Node,
-};
+|};
 
 export default class PortalConsumer extends React.Component<Props> {
   componentDidMount() {

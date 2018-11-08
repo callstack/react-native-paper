@@ -7,7 +7,7 @@ import ProgressBarComponent from './ProgressBarComponent';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
-type Props = {
+type Props = {|
   /**
    * Progress value (between 0 and 1).
    */
@@ -21,7 +21,7 @@ type Props = {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 /**
  * Progress bar is an indicator used to present progress of some activity in the app.

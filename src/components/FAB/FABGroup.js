@@ -17,7 +17,7 @@ import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 import type { IconSource } from '../Icon';
 
-type Props = {
+type Props = {|
   /**
    * Action items to display in the form of a speed dial.
    * An action item should contain the following properties:
@@ -71,7 +71,7 @@ type Props = {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 type State = {
   backdrop: Animated.Value,

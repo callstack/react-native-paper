@@ -6,7 +6,7 @@ import { black } from '../../styles/colors';
 import IconButton from '../IconButton';
 import type { IconSource } from '../Icon';
 
-type Props = React.ElementConfig<typeof IconButton> & {
+type Props = React.ElementConfig<typeof IconButton> & {|
   /**
    *  Custom color for action icon.
    */
@@ -32,7 +32,7 @@ type Props = React.ElementConfig<typeof IconButton> & {
    */
   onPress?: () => mixed,
   style?: any,
-};
+|};
 
 /**
  * A component used to display an action item in the appbar.

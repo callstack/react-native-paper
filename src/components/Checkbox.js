@@ -7,7 +7,7 @@ import CheckboxIOS from './CheckboxIOS';
 import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 
-type Props = {
+type Props = {|
   /**
    * Status of checkbox.
    */
@@ -32,7 +32,7 @@ type Props = {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 /**
  * Checkboxes allow the selection of multiple options from a set.

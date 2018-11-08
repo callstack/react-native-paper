@@ -14,7 +14,7 @@ import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
-type Props = React.ElementConfig<typeof Surface> & {
+type Props = React.ElementConfig<typeof Surface> & {|
   /**
    * Resting elevation of the card which controls the drop shadow.
    */
@@ -36,7 +36,7 @@ type Props = React.ElementConfig<typeof Surface> & {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 type State = {
   elevation: Animated.Value,

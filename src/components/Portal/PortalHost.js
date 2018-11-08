@@ -5,9 +5,9 @@ import { View, StyleSheet } from 'react-native';
 import PortalManager from './PortalManager';
 import createReactContext, { type Context } from 'create-react-context';
 
-type Props = {
+type Props = {|
   children: React.Node,
-};
+|};
 
 type Operation =
   | { type: 'mount', key: number, children: React.Node }

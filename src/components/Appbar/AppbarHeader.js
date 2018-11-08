@@ -7,7 +7,7 @@ import Appbar, { DEFAULT_APPBAR_HEIGHT } from './Appbar';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
-type Props = React.ElementConfig<typeof Appbar> & {
+type Props = React.ElementConfig<typeof Appbar> & {|
   /**
    * Whether the background color is a dark color. A dark header will render light text and vice-versa.
    */
@@ -28,7 +28,7 @@ type Props = React.ElementConfig<typeof Appbar> & {
    */
   theme: Theme,
   style?: any,
-};
+|};
 
 const DEFAULT_STATUSBAR_HEIGHT_EXPO =
   global.__expo && global.__expo.Constants

@@ -13,7 +13,7 @@ import { withTheme } from '../../core/theming';
 import type { Theme, $RemoveChildren } from '../../types';
 import type { IconSource } from './../Icon';
 
-type Props = $RemoveChildren<typeof Surface> & {
+type Props = $RemoveChildren<typeof Surface> & {|
   /**
    * Icon to display for the `FAB`.
    */
@@ -48,7 +48,7 @@ type Props = $RemoveChildren<typeof Surface> & {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 /**
  * A floating action button represents the primary action in an application.
