@@ -47,6 +47,7 @@ type Props = {
  * <div class="screenshots">
  *   <figure>
  *     <img src="screenshots/badge.png" />
+ *     <figcaption>Button with badge</figcaption>
  *   </figure>
  * </div>
  *
