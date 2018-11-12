@@ -639,6 +639,7 @@ class TextInput extends React.Component<Props, State> {
             {
               color: inputTextColor,
               fontFamily,
+              textAlignVertical: multiline ? 'top' : 'center',
             },
           ],
         })}
