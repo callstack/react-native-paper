@@ -1,7 +1,6 @@
 // /* eslint-disable import/no-commonjs */
 
 const path = require('path');
-const glob = require('glob-to-regexp');
 const blacklist = require('metro-config/src/defaults/blacklist');
 const pak = require('../package.json');
 
@@ -13,8 +12,8 @@ module.exports = {
 
   resolver: {
     blacklistRE: blacklist([
-      glob(`${path.resolve(__dirname, '..')}/node_modules/*`),
-      glob(`${path.resolve(__dirname, '..')}/docs/node_modules/*`),
+      /react-native-paper\/node_modules\/(.*)/,
+      /react-native-paper\/docs\/node_modules\/(.*)/,
     ]),
 
     providesModuleNodeModules: [
