@@ -660,7 +660,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     fontSize: 16,
-    paddingHorizontal: 12,
+    paddingHorizontal: 0,
   },
   placeholderFlat: {
     top: 19,
@@ -691,7 +691,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flexGrow: 1,
-    paddingHorizontal: 12,
+    paddingHorizontal: 1,
     fontSize: 16,
     margin: 0,
     minHeight: 58,
