@@ -388,7 +388,8 @@ class TextInput extends React.Component<Props, State> {
     } = this.props;
 
     const { colors, fonts } = theme;
-    const fontFamily = fonts.regular;
+    const fontFamilyLabel = fonts.regular;
+    const fontFamilyInput = fonts.medium;
     const hasActiveOutline = this.state.focused || error;
     const { backgroundColor = colors.background } =
       StyleSheet.flatten(style) || {};
@@ -431,7 +432,7 @@ class TextInput extends React.Component<Props, State> {
     }
 
     const labelStyle = {
-      fontFamily,
+      fontFamilyLabel,
       fontSize: MAXIMIZED_LABEL_FONT_SIZE,
       transform: [
         {
@@ -510,7 +511,7 @@ class TextInput extends React.Component<Props, State> {
               styles.outlinedLabelBackground,
               {
                 backgroundColor,
-                fontFamily,
+                fontFamilyLabel,
                 fontSize: MINIMIZED_LABEL_FONT_SIZE,
                 // Hide the background when scale will be 0
                 // There's a bug in RN which makes scale: 0 act weird
@@ -640,7 +641,7 @@ class TextInput extends React.Component<Props, State> {
                 : styles.inputFlatWithoutLabel,
             {
               color: inputTextColor,
-              fontFamily,
+              fontFamilyInput,
               textAlignVertical: multiline ? 'top' : 'center',
             },
           ],
