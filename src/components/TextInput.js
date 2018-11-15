@@ -426,6 +426,9 @@ class TextInput extends React.Component<Props, State> {
 
     if (mode === 'flat') {
       containerStyle = {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: theme.dark
           ? color(colors.background)
               .lighten(0.24)
@@ -636,6 +639,7 @@ class TextInput extends React.Component<Props, State> {
           placeholder: label ? this.state.placeholder : this.props.placeholder,
           placeholderTextColor: placeholderColor,
           editable: !disabled,
+          secureTextEntry: this.state.secureTextEntry,
           selectionColor: activeColor,
           onFocus: this._handleFocus,
           onBlur: this._handleBlur,
