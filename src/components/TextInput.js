@@ -7,8 +7,10 @@ import {
   TextInput as NativeTextInput,
   StyleSheet,
   I18nManager,
+  TouchableHighlight,
 } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import color from 'color';
 import Text from './Typography/Text';
 import { withTheme } from '../core/theming';
@@ -74,6 +76,10 @@ type Props = React.ElementConfig<typeof NativeTextInput> & {|
    */
   underlineColor?: string,
   /**
+   * Type of the input.
+   */
+  type?: string,
+  /**
    * Whether the input can have multiple lines.
    */
   multiline?: boolean,
@@ -125,6 +131,7 @@ type State = {
   focused: boolean,
   placeholder: ?string,
   value: ?string,
+  secureTextEntry: boolean,
   labelLayout: {
     measured: boolean,
     width: number,
@@ -185,6 +192,7 @@ class TextInput extends React.Component<Props, State> {
     error: false,
     multiline: false,
     editable: true,
+    secureTextEntry: false,
     render: props => <NativeTextInput {...props} />,
   };
 
@@ -203,6 +211,7 @@ class TextInput extends React.Component<Props, State> {
     focused: false,
     placeholder: this.props.error ? this.props.placeholder : '',
     value: this.props.value,
+    secureTextEntry: this.props.type === 'password',
     labelLayout: {
       measured: false,
       width: 0,
@@ -384,6 +393,7 @@ class TextInput extends React.Component<Props, State> {
       theme,
       render,
       multiline,
+      type,
       ...rest
     } = this.props;
 
@@ -645,6 +655,26 @@ class TextInput extends React.Component<Props, State> {
             },
           ],
         })}
+        {type === 'password' && (
+          <TouchableHighlight
+            onPress={() => {
+              this.setState(previousState => ({
+                secureTextEntry: !previousState.secureTextEntry,
+              }));
+            }}
+            underlayColor={'transparent'}
+          >
+            <Icon
+              style={styles.icon}
+              name={
+                this.state.secureTextEntry === true
+                  ? 'visibility'
+                  : 'visibility-off'
+              }
+              size={24}
+            />
+          </TouchableHighlight>
+        )}
       </View>
     );
   }
@@ -655,6 +685,9 @@ polyfill(TextInput);
 export default withTheme(TextInput);
 
 const styles = StyleSheet.create({
+  icon: {
+    marginRight: 30,
+  },
   placeholder: {
     position: 'absolute',
     left: 0,
