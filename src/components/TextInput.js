@@ -432,7 +432,7 @@ class TextInput extends React.Component<Props, State> {
     }
 
     const labelStyle = {
-      fontFamilyLabel,
+      fontFamily: fontFamilyLabel,
       fontSize: MAXIMIZED_LABEL_FONT_SIZE,
       transform: [
         {
@@ -511,7 +511,7 @@ class TextInput extends React.Component<Props, State> {
               styles.outlinedLabelBackground,
               {
                 backgroundColor,
-                fontFamilyLabel,
+                fontFamily: fontFamilyLabel,
                 fontSize: MINIMIZED_LABEL_FONT_SIZE,
                 // Hide the background when scale will be 0
                 // There's a bug in RN which makes scale: 0 act weird
@@ -641,7 +641,7 @@ class TextInput extends React.Component<Props, State> {
                 : styles.inputFlatWithoutLabel,
             {
               color: inputTextColor,
-              fontFamilyInput,
+              fontFamily: fontFamilyInput,
               textAlignVertical: multiline ? 'top' : 'center',
             },
           ],
