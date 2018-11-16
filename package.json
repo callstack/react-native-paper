@@ -31,7 +31,7 @@
     "bootstrap"
   ],
   "scripts": {
-    "flow": "flow",
+    "flow": "flow focus-check",
     "typescript": "node ./scripts/generate-ts-tests.js && tsc --noEmit --skipLibCheck --jsx react ./__ts-tests__/*",
     "lint": "eslint .",
     "test": "jest",
@@ -42,8 +42,19 @@
   "husky": {
     "hooks": {
       "commit-msg": "node ./scripts/validate-commit-message.js",
-      "pre-commit": "yarn lint && yarn flow && yarn typescript && yarn test"
+      "pre-commit": "lint-staged && yarn typescript"
     }
+  },
+  "lint-staged": {
+    "linters": {
+      "**/*.js": ["yarn lint", "yarn flow", "yarn jest", "git add"],
+      "*": ["git add"]
+    },
+    "ignore": [
+      "dist/*",
+      "**/node_modules/*"
+    ],
+    "concurrent": false
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -75,6 +86,7 @@
     "glob": "^7.1.3",
     "husky": "^1.1.3",
     "jest": "^23.6.0",
+    "lint-staged": "^8.0.4",
     "metro-react-native-babel-preset": "^0.49.0",
     "prettier": "^1.14.3",
     "react": "16.6.0-alpha.8af6728",
