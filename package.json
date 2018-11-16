@@ -33,8 +33,8 @@
   "scripts": {
     "flow": "flow focus-check",
     "typescript": "node ./scripts/generate-ts-tests.js && tsc --noEmit --skipLibCheck --jsx react ./__ts-tests__/*",
-    "lint": "eslint .",
-    "test": "jest",
+    "lint": "eslint --fix",
+    "test": "jest --bail",
     "prepare": "node ./scripts/generate-mappings",
     "bootstrap": "yarn && yarn --cwd example && yarn --cwd docs",
     "release": "release-it"
@@ -47,7 +47,7 @@
   },
   "lint-staged": {
     "linters": {
-      "**/*.js": ["yarn lint", "yarn flow", "yarn jest", "git add"],
+      "**/*.js": ["yarn lint", "git add", "yarn jest --findRelatedTests"],
       "*": ["git add"]
     },
     "ignore": [
