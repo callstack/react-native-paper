@@ -41,7 +41,7 @@
   },
   "husky": {
     "hooks": {
-      "commit-msg": "node ./scripts/validate-commit-message.js $HUSKY_GIT_PARAMS",
+      "commit-msg": "node ./scripts/validate-commit-message.js",
       "pre-commit": "yarn lint && yarn flow && yarn typescript && yarn test"
     }
   },

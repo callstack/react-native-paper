@@ -19,7 +19,7 @@ const TYPES = [
   'BREAKING',
 ];
 
-const commit = process.argv[2];
+const commit = process.env.HUSKY_GIT_PARAMS;
 
 try {
   const message = fs.readFileSync(commit, 'utf8').split('\n')[0];
