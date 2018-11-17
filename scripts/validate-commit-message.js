@@ -22,7 +22,7 @@ const TYPES = [
 const commit = process.env.HUSKY_GIT_PARAMS;
 
 try {
-  const message = fs.readFileSync(commit, 'utf8').split('\n')[0];
+  const message = fs.readFileSync(commit);
 
   let error;
 

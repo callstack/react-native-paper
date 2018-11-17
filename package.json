@@ -31,9 +31,11 @@
     "bootstrap"
   ],
   "scripts": {
-    "flow": "flow focus-check",
+    "flow": "flow",
+    "flow:staged": "flow focus-check",
     "typescript": "node ./scripts/generate-ts-tests.js && tsc --noEmit --skipLibCheck --jsx react ./__ts-tests__/*",
-    "lint": "eslint --fix",
+    "lint": "eslint .",
+    "lint:staged": "eslint --fix",
     "test": "jest --bail",
     "prepare": "node ./scripts/generate-mappings",
     "bootstrap": "yarn && yarn --cwd example && yarn --cwd docs",
@@ -42,13 +44,12 @@
   "husky": {
     "hooks": {
       "commit-msg": "node ./scripts/validate-commit-message.js",
-      "pre-commit": "lint-staged && yarn typescript"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
     "linters": {
-      "**/*.js": ["yarn lint", "git add", "yarn jest --findRelatedTests"],
-      "*": ["git add"]
+      "**/*.jsx": ["yarn lint:staged", "yarn flow:staged", "git add", "yarn jest --findRelatedTests"]
     },
     "ignore": [
       "dist/*",
