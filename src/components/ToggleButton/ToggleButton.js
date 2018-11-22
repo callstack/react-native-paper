@@ -5,7 +5,9 @@ import { StyleSheet } from 'react-native';
 import { withTheme } from '../../core/theming';
 import color from 'color';
 import IconButton from '../IconButton';
-import ToggleGroup, { ToggleGroupContext } from './ToggleGroup';
+import ToggleButtonGroup, {
+  ToggleButtonGroupContext,
+} from './ToggleButtonGroup';
 import { black, white } from '../../styles/colors';
 import type { IconSource } from '../Icon';
 import type { Theme } from '../../types';
@@ -43,11 +45,6 @@ type Props = {
    * Status of button.
    */
   status?: 'checked' | 'unchecked',
-  /**
-   * Show a outlined `ToggleButton` (with border color). If outlined prop is not provided,
-   * then border color used is the default from theme prop.
-   */
-  outlined?: boolean,
   style?: any,
   /**
    * @optional
@@ -92,7 +89,7 @@ type Props = {
  */
 class ToggleButton extends React.Component<Props> {
   // @component ./ToggleButton.js
-  static Group = ToggleGroup;
+  static Group = ToggleButtonGroup;
 
   render() {
     const {
@@ -102,41 +99,31 @@ class ToggleButton extends React.Component<Props> {
       accessibilityLabel,
       disabled,
       style,
-      color: buttonColor,
-      outlined,
       value,
       status,
+      ...rest
     } = this.props;
-    const { colors } = theme;
-    let textColor, backgroundColor;
+    const borderRadius = theme.roundness;
 
     return (
-      <ToggleGroupContext.Consumer>
+      <ToggleButtonGroupContext.Consumer>
         {(context: ?{ value: string, onValueChange: Function }) => {
+          let backgroundColor;
+
           const checked: ?boolean =
             (context && context.value === value) || status === 'checked';
 
           if (checked) {
-            backgroundColor = colors.primary;
+            backgroundColor = theme.dark
+              ? 'rgba(255, 255, 255, .12)'
+              : 'rgba(0, 0, 0, .08)';
           } else {
-            backgroundColor = colors.background;
-          }
-
-          if (buttonColor) {
-            textColor = buttonColor;
-          } else {
-            textColor = color(backgroundColor).dark() ? white : black;
-          }
-
-          if (disabled) {
-            textColor = color(textColor)
-              .alpha(0.32)
-              .rgb()
-              .string();
+            backgroundColor = 'transparent';
           }
 
           return (
             <IconButton
+              borderless={false}
               icon={icon}
               onPress={() => {
                 if (this.props.onPress) {
@@ -147,27 +134,26 @@ class ToggleButton extends React.Component<Props> {
                   context.onValueChange(!checked ? value : null);
                 }
               }}
-              color={textColor}
               size={size}
               accessibilityLabel={accessibilityLabel}
               disabled={disabled}
               style={[
                 styles.content,
-                style || {
+                {
                   backgroundColor,
-                  borderColor: outlined
-                    ? color(theme.dark ? white : black)
-                        .alpha(0.29)
-                        .rgb()
-                        .string()
-                    : colors.background,
-                  borderWidth: StyleSheet.hairlineWidth,
+                  borderRadius,
+                  borderColor: color(theme.dark ? white : black)
+                    .alpha(0.29)
+                    .rgb()
+                    .string(),
                 },
+                style,
               ]}
+              {...rest}
             />
           );
         }}
-      </ToggleGroupContext.Consumer>
+      </ToggleButtonGroupContext.Consumer>
     );
   }
 }
@@ -176,7 +162,6 @@ const styles = StyleSheet.create({
   content: {
     width: 42,
     height: 42,
-    borderRadius: 0,
     margin: 0,
   },
 });

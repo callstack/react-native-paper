@@ -1,7 +1,9 @@
 /* @flow */
 
 import * as React from 'react';
+import { StyleSheet } from 'react-native';
 import createReactContext, { type Context } from 'create-react-context';
+import TogglButton from './ToggleButton';
 
 type Props = {
   /**
@@ -23,7 +25,7 @@ type ToggleButtonContextType = {
   onValueChange: (item: string) => mixed,
 };
 
-export const ToggleGroupContext: Context<?ToggleButtonContextType> = createReactContext(
+export const ToggleButtonGroupContext: Context<?ToggleButtonContextType> = createReactContext(
   null
 );
 
@@ -55,23 +57,62 @@ export const ToggleGroupContext: Context<?ToggleButtonContextType> = createReact
  * }
  *```
  */
-class ToggleGroup extends React.Component<Props> {
+class ToggleButtonGroup extends React.Component<Props> {
   static displayName = 'ToggleButton.Group';
 
   render() {
     const { value, onValueChange, children } = this.props;
+    const count = React.Children.count(children);
 
     return (
-      <ToggleGroupContext.Provider
+      <ToggleButtonGroupContext.Provider
         value={{
           value,
           onValueChange,
         }}
       >
-        {children}
-      </ToggleGroupContext.Provider>
+        {React.Children.map(children, (child, i) => {
+          if (child && child.type === TogglButton) {
+            return React.cloneElement(child, {
+              style: [
+                styles.button,
+                i === 0
+                  ? styles.first
+                  : i === count - 1
+                    ? styles.last
+                    : styles.middle,
+                child.props.style,
+              ],
+            });
+          }
+
+          return child;
+        })}
+      </ToggleButtonGroupContext.Provider>
     );
   }
 }
 
-export default ToggleGroup;
+const styles = StyleSheet.create({
+  button: {
+    borderWidth: StyleSheet.hairlineWidth,
+  },
+
+  first: {
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0,
+  },
+
+  middle: {
+    borderRadius: 0,
+    borderLeftWidth: 0,
+  },
+
+  last: {
+    borderLeftWidth: 0,
+    borderTopLeftRadius: 0,
+    borderBottomLeftRadius: 0,
+  },
+});
+
+export default ToggleButtonGroup;

@@ -100,6 +100,7 @@ class ToggleButtonExample extends React.Component<Props, State> {
                 }}
               >
                 <ToggleButton
+                  borderless
                   value="watermelon"
                   size={24}
                   style={{
@@ -126,6 +127,7 @@ class ToggleButtonExample extends React.Component<Props, State> {
                 }}
               >
                 <ToggleButton
+                  borderless
                   value="strawberries"
                   size={24}
                   style={{
