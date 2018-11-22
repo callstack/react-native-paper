@@ -5,7 +5,7 @@ import { View, StyleSheet } from 'react-native';
 import color from 'color';
 
 import TouchableRipple from './TouchableRipple';
-import Icon from './Icon';
+import CrossFadeIcon from './CrossFadeIcon';
 import { withTheme } from '../core/theming';
 import type { IconSource } from './Icon';
 import type { Theme, $RemoveChildren } from '../types';
@@ -111,7 +111,7 @@ const IconButton = ({
       {...rest}
     >
       <View>
-        <Icon color={iconColor} source={icon} size={size} />
+        <CrossFadeIcon color={iconColor} source={icon} size={size} />
       </View>
     </TouchableRipple>
   );
