@@ -61,6 +61,10 @@ type Props = React.ElementConfig<typeof Surface> & {|
    * @optional
    */
   theme: Theme,
+  /**
+   * Set case for button text
+   */
+  upperCase: boolean,
 |};
 
 type State = {
@@ -102,6 +106,7 @@ type State = {
 class Button extends React.Component<Props, State> {
   static defaultProps = {
     mode: 'text',
+    upperCase: true,
   };
 
   state = {
@@ -140,6 +145,7 @@ class Button extends React.Component<Props, State> {
       onPress,
       style,
       theme,
+      upperCase,
       ...rest
     } = this.props;
     const { colors, roundness } = theme;
@@ -262,7 +268,11 @@ class Button extends React.Component<Props, State> {
               {React.Children.map(
                 children,
                 child =>
-                  typeof child === 'string' ? child.toUpperCase() : child
+                  typeof child === 'string'
+                    ? upperCase
+                      ? child.toUpperCase()
+                      : child
+                    : child
               )}
             </Text>
           </View>
