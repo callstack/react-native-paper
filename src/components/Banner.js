@@ -153,7 +153,15 @@ class Banner extends React.Component<Props, State> {
   };
 
   render() {
-    const { image, children, actions, style, ...rest } = this.props;
+    const {
+      visible,
+      image,
+      children,
+      actions,
+      style,
+      theme,
+      ...rest
+    } = this.props;
 
     const height = Animated.multiply(
       this.state.position,
