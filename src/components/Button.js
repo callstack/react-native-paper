@@ -49,6 +49,10 @@ type Props = React.ElementConfig<typeof Surface> & {|
    */
   children: React.Node,
   /**
+   * Make the label text uppercased. Note that this won't work if you pass React elements as children.
+   */
+  uppercase: boolean,
+  /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
   accessibilityLabel?: string,
@@ -61,10 +65,6 @@ type Props = React.ElementConfig<typeof Surface> & {|
    * @optional
    */
   theme: Theme,
-  /**
-   * Change the case of the text inside the button component.
-   */
-  upperCase?: boolean,
 |};
 
 type State = {
@@ -106,7 +106,7 @@ type State = {
 class Button extends React.Component<Props, State> {
   static defaultProps = {
     mode: 'text',
-    upperCase: true,
+    uppercase: true,
   };
 
   state = {
@@ -141,11 +141,11 @@ class Button extends React.Component<Props, State> {
       icon,
       color: buttonColor,
       children,
+      uppercase,
       accessibilityLabel,
       onPress,
       style,
       theme,
-      upperCase,
       ...rest
     } = this.props;
     const { colors, roundness } = theme;
@@ -268,10 +268,8 @@ class Button extends React.Component<Props, State> {
               {React.Children.map(
                 children,
                 child =>
-                  typeof child === 'string'
-                    ? upperCase
-                      ? child.toUpperCase()
-                      : child
+                  typeof child === 'string' && uppercase
+                    ? child.toUpperCase()
                     : child
               )}
             </Text>
