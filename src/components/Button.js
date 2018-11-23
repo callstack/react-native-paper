@@ -62,9 +62,9 @@ type Props = React.ElementConfig<typeof Surface> & {|
    */
   theme: Theme,
   /**
-   * Set case for button text
+   * Change the case of the text inside the button component.
    */
-  upperCase: boolean,
+  upperCase?: boolean,
 |};
 
 type State = {
