@@ -9,6 +9,7 @@ import {
   SafeAreaView,
   StyleSheet,
   Platform,
+  Keyboard,
 } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
 import color from 'color';
@@ -22,7 +23,6 @@ import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
-
 type Route = $Shape<{
   key: string,
   title: string,
@@ -220,6 +220,11 @@ type State = {
    * List of loaded tabs, tabs will be loaded when navigated to.
    */
   loaded: number[],
+
+  /**
+   * Gracefully shows/hides tabs with respect to keyboards open and close events.
+   */
+  shouldShowTabs: Boolean,
 };
 
 const MIN_RIPPLE_SCALE = 0.001; // Minimum scale is not 0 due to bug with animation
@@ -371,6 +376,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
       current: index,
       previous: 0,
       loaded: [index],
+      shouldShowTabs: true,
     };
   }
 
@@ -378,6 +384,21 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
     // Workaround for native animated bug in react-native@^0.57
     // Context: https://github.com/callstack/react-native-paper/pull/637
     this._animateToCurrentIndex();
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
+  
+  }
+
+  _keyboardDidShow = () => {
+    this.setState({
+      shouldShowTabs: false,
+    })
+  }
+
+  _keyboardDidHide =  () =>  {
+    this.setState({
+      shouldShowTabs: true,
+    })
   }
 
   componentDidUpdate(prevProps) {
@@ -583,7 +604,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
             );
           })}
         </View>
-        <Surface style={[styles.bar, barStyle, { backgroundColor }]}>
+        {this.state.shouldShowTabs && <Surface style={[styles.bar, barStyle, { backgroundColor }]}>
           <SafeAreaView
             style={[styles.items, { maxWidth: maxTabWidth * routes.length }]}
           >
@@ -786,9 +807,14 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
               );
             })}
           </SafeAreaView>
-        </Surface>
+        </Surface>}
       </View>
     );
+  }
+
+  componentWillUnmount () {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
   }
 }
 
