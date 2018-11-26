@@ -9,6 +9,7 @@ import {
   SafeAreaView,
   StyleSheet,
   Platform,
+  Keyboard,
 } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
 import color from 'color';
@@ -169,6 +170,11 @@ type Props<T> = {
    */
   inactiveColor?: string,
   /**
+   * Whether the bottom navigation bar is hidden when keyboard is shown.
+   * On Android, this works best when [`windowSoftInputMode`](https://developer.android.com/guide/topics/manifest/activity-element#wsoft) is set to `adjustResize`.
+   */
+  keyboardHidesNavigationBar?: boolean,
+  /**
    * Style for the bottom navigation bar.
    * You can set a bottom padding here if you have a translucent navigation bar on Android:
    *
@@ -185,6 +191,10 @@ type Props<T> = {
 };
 
 type State = {
+  /**
+   * Visibility of the navigation bar, visible state is 1 and invisible is 0.
+   */
+  visible: Animated.Value,
   /**
    * Active state of individual tab items, active state is 1 and inactve state is 0.
    */
@@ -205,7 +215,7 @@ type State = {
    */
   ripple: Animated.Value,
   /**
-   * Layout of the tab bar. The width is used to determine the size and position of the ripple.
+   * Layout of the navigation bar. The width is used to determine the size and position of the ripple.
    */
   layout: { height: number, width: number, measured: boolean },
   /**
@@ -220,6 +230,10 @@ type State = {
    * List of loaded tabs, tabs will be loaded when navigated to.
    */
   loaded: number[],
+  /**
+   * Trak whether the keyboard is visible to show and hide the navigation bar.
+   */
+  keyboard: boolean,
 };
 
 const MIN_RIPPLE_SCALE = 0.001; // Minimum scale is not 0 due to bug with animation
@@ -245,7 +259,7 @@ class SceneComponent extends React.PureComponent<*> {
 }
 
 /**
- * Bottom navigation provides quick navigation between top-level views of an app with a bottom tab bar.
+ * Bottom navigation provides quick navigation between top-level views of an app with a bottom navigation bar.
  * It is primarily designed for use on mobile.
  *
  * For integration with React Navigation, you can use [react-navigation-material-bottom-tab-navigator](https://github.com/react-navigation/react-navigation-material-bottom-tab-navigator).
@@ -319,6 +333,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
 
   static defaultProps = {
     labeled: true,
+    keyboardHidesNavigationBar: true,
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -362,6 +377,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
     const { index } = this.props.navigationState;
 
     this.state = {
+      visible: new Animated.Value(1),
       tabs: [],
       offsets: [],
       index: new Animated.Value(index),
@@ -371,6 +387,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
       current: index,
       previous: 0,
       loaded: [index],
+      keyboard: false,
     };
   }
 
@@ -378,6 +395,14 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
     // Workaround for native animated bug in react-native@^0.57
     // Context: https://github.com/callstack/react-native-paper/pull/637
     this._animateToCurrentIndex();
+
+    if (Platform.OS === 'ios') {
+      Keyboard.addListener('keyboardWillShow', this._handleKeyboardShow);
+      Keyboard.addListener('keyboardWillHide', this._handleKeyboardHide);
+    } else {
+      Keyboard.addListener('keyboardDidShow', this._handleKeyboardShow);
+      Keyboard.addListener('keyboardDidHide', this._handleKeyboardHide);
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -397,6 +422,34 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
 
     this._animateToCurrentIndex();
   }
+
+  componentWillUnmount() {
+    if (Platform.OS === 'ios') {
+      Keyboard.removeListener('keyboardWillShow', this._handleKeyboardShow);
+      Keyboard.removeListener('keyboardWillHide', this._handleKeyboardHide);
+    } else {
+      Keyboard.removeListener('keyboardDidShow', this._handleKeyboardShow);
+      Keyboard.removeListener('keyboardDidHide', this._handleKeyboardHide);
+    }
+  }
+
+  _handleKeyboardShow = () =>
+    this.setState({ keyboard: true }, () =>
+      Animated.timing(this.state.visible, {
+        toValue: 0,
+        duration: 150,
+        useNativeDriver: true,
+      }).start()
+    );
+
+  _handleKeyboardHide = () =>
+    Animated.timing(this.state.visible, {
+      toValue: 1,
+      duration: 100,
+      useNativeDriver: true,
+    }).start(() => {
+      this.setState({ keyboard: false });
+    });
 
   _animateToCurrentIndex = () => {
     const shifting = this._isShifting();
@@ -488,11 +541,13 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
       getTestID = ({ route }: Object) => route.testID,
       activeColor,
       inactiveColor,
+      keyboardHidesNavigationBar,
       barStyle,
       labeled,
       style,
       theme,
     } = this.props;
+
     const { layout, loaded } = this.state;
     const { routes } = navigationState;
     const { colors } = theme;
@@ -539,7 +594,6 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
     return (
       <View
         style={[styles.container, style]}
-        onLayout={this._handleLayout}
         pointerEvents={layout.measured ? 'auto' : 'none'}
       >
         <View style={[styles.content, { backgroundColor: colors.background }]}>
@@ -583,209 +637,233 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
             );
           })}
         </View>
-        <Surface style={[styles.bar, barStyle, { backgroundColor }]}>
-          <SafeAreaView
-            style={[styles.items, { maxWidth: maxTabWidth * routes.length }]}
-          >
-            {shifting ? (
-              <Animated.View
-                pointerEvents="none"
-                style={[
-                  styles.ripple,
-                  {
-                    // Since we have a single ripple, we have to reposition it so that it appears to expand from active tab.
-                    // We need to move it from the top to center of the tab bar and from the left to the active tab.
-                    top: BAR_HEIGHT / 2 - layout.width / 8,
-                    left:
-                      navigationState.index * tabWidth +
-                      tabWidth / 2 -
-                      layout.width / 8,
-                    height: layout.width / 4,
-                    width: layout.width / 4,
-                    borderRadius: layout.width / 2,
-                    backgroundColor: getColor({
-                      route: routes[navigationState.index],
-                    }),
-                    transform: [
-                      {
-                        // Scale to twice the size  to ensure it covers the whole tab bar
-                        scale: this.state.ripple.interpolate({
-                          inputRange: [0, 1],
-                          outputRange: [0, 8],
-                        }),
-                      },
-                    ],
-                    opacity: this.state.ripple.interpolate({
-                      inputRange: [0, MIN_RIPPLE_SCALE, 0.3, 1],
-                      outputRange: [0, 0, 1, 1],
-                    }),
-                  },
-                ]}
-              />
-            ) : null}
-            {routes.map((route, index) => {
-              const focused = navigationState.index === index;
-              const active = this.state.tabs[index];
+        <Surface
+          style={[
+            styles.bar,
+            keyboardHidesNavigationBar
+              ? {
+                  // When the keyboard is shown, slide down the navigation bar
+                  transform: [
+                    {
+                      translateY: this.state.visible.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [this.state.layout.height, 0],
+                      }),
+                    },
+                  ],
+                  // Absolutely position the navigation bar so that the content is below it
+                  // This is needed to avoid gap at bottom when the navigation bar is hidden
+                  position: this.state.keyboard ? 'absolute' : null,
+                }
+              : null,
+            barStyle,
+          ]}
+          pointerEvents={
+            keyboardHidesNavigationBar && this.state.keyboard ? 'none' : 'auto'
+          }
+          onLayout={this._handleLayout}
+        >
+          <Animated.View style={[styles.barContent, { backgroundColor }]}>
+            <SafeAreaView
+              style={[styles.items, { maxWidth: maxTabWidth * routes.length }]}
+            >
+              {shifting ? (
+                <Animated.View
+                  pointerEvents="none"
+                  style={[
+                    styles.ripple,
+                    {
+                      // Since we have a single ripple, we have to reposition it so that it appears to expand from active tab.
+                      // We need to move it from the top to center of the navigation bar and from the left to the active tab.
+                      top: BAR_HEIGHT / 2 - layout.width / 8,
+                      left:
+                        navigationState.index * tabWidth +
+                        tabWidth / 2 -
+                        layout.width / 8,
+                      height: layout.width / 4,
+                      width: layout.width / 4,
+                      borderRadius: layout.width / 2,
+                      backgroundColor: getColor({
+                        route: routes[navigationState.index],
+                      }),
+                      transform: [
+                        {
+                          // Scale to twice the size  to ensure it covers the whole navigation bar
+                          scale: this.state.ripple.interpolate({
+                            inputRange: [0, 1],
+                            outputRange: [0, 8],
+                          }),
+                        },
+                      ],
+                      opacity: this.state.ripple.interpolate({
+                        inputRange: [0, MIN_RIPPLE_SCALE, 0.3, 1],
+                        outputRange: [0, 0, 1, 1],
+                      }),
+                    },
+                  ]}
+                />
+              ) : null}
+              {routes.map((route, index) => {
+                const focused = navigationState.index === index;
+                const active = this.state.tabs[index];
 
-              // Scale up in the label
-              const scale =
-                labeled && shifting
-                  ? active.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [0.5, 1],
-                    })
-                  : 1;
+                // Scale the label up
+                const scale =
+                  labeled && shifting
+                    ? active.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0.5, 1],
+                      })
+                    : 1;
 
-              // Move down the icon to account for no-label in shifting and smaller label in non-shifting.
-              const translateY = labeled
-                ? shifting
-                  ? active.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [7, 0],
-                    })
-                  : 0
-                : 7;
+                // Move down the icon to account for no-label in shifting and smaller label in non-shifting.
+                const translateY = labeled
+                  ? shifting
+                    ? active.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [7, 0],
+                      })
+                    : 0
+                  : 7;
 
-              // We render the active icon and label on top of inactive ones and cross-fade them on change.
-              // This trick gives the illusion that we are animating between active and inactive colors.
-              // This is to ensure that we can use native driver, as colors cannot be animated with native driver.
-              const activeOpacity = active;
-              const inactiveOpacity = active.interpolate({
-                inputRange: [0, 1],
-                outputRange: [1, 0],
-              });
+                // We render the active icon and label on top of inactive ones and cross-fade them on change.
+                // This trick gives the illusion that we are animating between active and inactive colors.
+                // This is to ensure that we can use native driver, as colors cannot be animated with native driver.
+                const activeOpacity = active;
+                const inactiveOpacity = active.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [1, 0],
+                });
 
-              return (
-                <Touchable
-                  key={route.key}
-                  borderless
-                  rippleColor={touchColor}
-                  onPress={() => this._handleTabPress(index)}
-                  testID={getTestID({ route })}
-                  accessibilityLabel={getAccessibilityLabel({ route })}
-                  accessibilityTraits={
-                    focused ? ['button', 'selected'] : 'button'
-                  }
-                  accessibilityComponentType="button"
-                  accessibilityRole="button"
-                  accessibilityStates={['selected']}
-                  style={styles.item}
-                >
-                  <View pointerEvents="none">
-                    <Animated.View
-                      style={[
-                        styles.iconContainer,
-                        { transform: [{ translateY }] },
-                      ]}
-                    >
-                      <Animated.View
-                        style={[styles.iconWrapper, { opacity: activeOpacity }]}
-                      >
-                        {renderIcon ? (
-                          renderIcon({
-                            route,
-                            focused: true,
-                            color: activeTintColor,
-                          })
-                        ) : (
-                          <Icon
-                            source={(route: Object).icon}
-                            color={activeTintColor}
-                            size={24}
-                          />
-                        )}
-                      </Animated.View>
-                      <Animated.View
-                        style={[
-                          styles.iconWrapper,
-                          { opacity: inactiveOpacity },
-                        ]}
-                      >
-                        {renderIcon ? (
-                          renderIcon({
-                            route,
-                            focused: false,
-                            color: inactiveTintColor,
-                          })
-                        ) : (
-                          <Icon
-                            source={(route: Object).icon}
-                            color={inactiveTintColor}
-                            size={24}
-                          />
-                        )}
-                      </Animated.View>
-                    </Animated.View>
-                    {labeled ? (
+                return (
+                  <Touchable
+                    key={route.key}
+                    borderless
+                    rippleColor={touchColor}
+                    onPress={() => this._handleTabPress(index)}
+                    testID={getTestID({ route })}
+                    accessibilityLabel={getAccessibilityLabel({ route })}
+                    accessibilityTraits={
+                      focused ? ['button', 'selected'] : 'button'
+                    }
+                    accessibilityComponentType="button"
+                    accessibilityRole="button"
+                    accessibilityStates={['selected']}
+                    style={styles.item}
+                  >
+                    <View pointerEvents="none">
                       <Animated.View
                         style={[
-                          styles.labelContainer,
-                          {
-                            transform: [{ scale }],
-                          },
+                          styles.iconContainer,
+                          { transform: [{ translateY }] },
                         ]}
                       >
                         <Animated.View
                           style={[
-                            styles.labelWrapper,
+                            styles.iconWrapper,
                             { opacity: activeOpacity },
                           ]}
                         >
-                          {renderLabel ? (
-                            renderLabel({
+                          {renderIcon ? (
+                            renderIcon({
                               route,
                               focused: true,
                               color: activeTintColor,
                             })
                           ) : (
-                            <AnimatedText
-                              style={[
-                                styles.label,
-                                {
-                                  color: activeTintColor,
-                                },
-                              ]}
-                            >
-                              {getLabelText({ route })}
-                            </AnimatedText>
+                            <Icon
+                              source={(route: Object).icon}
+                              color={activeTintColor}
+                              size={24}
+                            />
                           )}
                         </Animated.View>
-                        {shifting ? null : (
+                        <Animated.View
+                          style={[
+                            styles.iconWrapper,
+                            { opacity: inactiveOpacity },
+                          ]}
+                        >
+                          {renderIcon ? (
+                            renderIcon({
+                              route,
+                              focused: false,
+                              color: inactiveTintColor,
+                            })
+                          ) : (
+                            <Icon
+                              source={(route: Object).icon}
+                              color={inactiveTintColor}
+                              size={24}
+                            />
+                          )}
+                        </Animated.View>
+                      </Animated.View>
+                      {labeled ? (
+                        <Animated.View
+                          style={[
+                            styles.labelContainer,
+                            { transform: [{ scale }] },
+                          ]}
+                        >
                           <Animated.View
                             style={[
                               styles.labelWrapper,
-                              { opacity: inactiveOpacity },
+                              { opacity: activeOpacity },
                             ]}
                           >
                             {renderLabel ? (
                               renderLabel({
                                 route,
-                                focused: false,
-                                color: inactiveTintColor,
+                                focused: true,
+                                color: activeTintColor,
                               })
                             ) : (
                               <AnimatedText
                                 style={[
                                   styles.label,
-                                  {
-                                    color: inactiveTintColor,
-                                  },
+                                  { color: activeTintColor },
                                 ]}
                               >
                                 {getLabelText({ route })}
                               </AnimatedText>
                             )}
                           </Animated.View>
-                        )}
-                      </Animated.View>
-                    ) : (
-                      <View style={styles.labelContainer} />
-                    )}
-                  </View>
-                </Touchable>
-              );
-            })}
-          </SafeAreaView>
+                          {shifting ? null : (
+                            <Animated.View
+                              style={[
+                                styles.labelWrapper,
+                                { opacity: inactiveOpacity },
+                              ]}
+                            >
+                              {renderLabel ? (
+                                renderLabel({
+                                  route,
+                                  focused: false,
+                                  color: inactiveTintColor,
+                                })
+                              ) : (
+                                <AnimatedText
+                                  style={[
+                                    styles.label,
+                                    { color: inactiveTintColor },
+                                  ]}
+                                >
+                                  {getLabelText({ route })}
+                                </AnimatedText>
+                              )}
+                            </Animated.View>
+                          )}
+                        </Animated.View>
+                      ) : (
+                        <View style={styles.labelContainer} />
+                      )}
+                    </View>
+                  </Touchable>
+                );
+              })}
+            </SafeAreaView>
+          </Animated.View>
         </Surface>
       </View>
     );
@@ -804,9 +882,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   bar: {
+    left: 0,
+    right: 0,
+    bottom: 0,
     elevation: 8,
+  },
+  barContent: {
     overflow: 'hidden',
-    alignItems: 'center',
   },
   items: {
     flexDirection: 'row',

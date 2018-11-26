@@ -40,6 +40,7 @@ export interface BottomNavigationProps<T> {
   onTabPress?: (props: { route: T }) => any;
   activeColor?: string;
   inactiveColor?: string;
+  keyboardHidesNavigationBar?: boolean;
   barStyle?: any;
   style?: StyleProp<ViewStyle>;
   theme?: ThemeShape;
