@@ -1,5 +1,7 @@
 /* @flow */
 
+import * as React from 'react';
+
 export type Theme = {
   dark: boolean,
   roundness: number,

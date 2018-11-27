@@ -111,6 +111,7 @@ class Card extends React.Component<Props, State> {
   render() {
     const {
       children,
+      elevation: cardElevation,
       onLongPress,
       onPress,
       style,
