@@ -49,8 +49,8 @@ export const ToggleButtonGroupContext: Context<?ToggleButtonContextType> = creat
  *         onValueChange={value => this.setState({ value })}
  *         value={this.state.value}
  *       >
- *           <ToggleButton outlined icon="format-align-left" value="left" />
- *           <ToggleButton outlined icon="format-align-right" value="right" />
+ *           <ToggleButton icon="format-align-left" value="left" />
+ *           <ToggleButton icon="format-align-right" value="right" />
  *       </ToggleButton.Group>
  *     )
  *   }
