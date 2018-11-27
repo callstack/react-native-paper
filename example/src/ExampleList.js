@@ -10,6 +10,7 @@ import ButtonExample from './ButtonExample';
 import CardExample from './CardExample';
 import CheckboxExample from './CheckboxExample';
 import ChipExample from './ChipExample';
+import DataTableExample from './DataTableExample';
 import DialogExample from './DialogExample';
 import DividerExample from './DividerExample';
 import FABExample from './FABExample';
@@ -41,6 +42,7 @@ export const examples = {
   card: CardExample,
   checkbox: CheckboxExample,
   chip: ChipExample,
+  dataTable: DataTableExample,
   dialog: DialogExample,
   divider: DividerExample,
   fab: FABExample,
