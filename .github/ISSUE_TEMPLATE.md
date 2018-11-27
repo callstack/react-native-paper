@@ -30,3 +30,6 @@
 | react-native-paper    |
 | node                  |
 | npm or yarn           |
+| expo sdk              |
+
+<!-- Add expo sdk version along with snack that reproduces the issue -->
