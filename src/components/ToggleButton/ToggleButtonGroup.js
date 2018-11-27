@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import createReactContext, { type Context } from 'create-react-context';
-import TogglButton from './ToggleButton';
+import ToggleButton from './ToggleButton';
 
 type Props = {
   /**
@@ -72,7 +72,7 @@ class ToggleButtonGroup extends React.Component<Props> {
         }}
       >
         {React.Children.map(children, (child, i) => {
-          if (child && child.type === TogglButton) {
+          if (child && child.type === ToggleButton) {
             return React.cloneElement(child, {
               style: [
                 styles.button,
