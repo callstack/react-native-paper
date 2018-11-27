@@ -36,7 +36,6 @@ class ToggleButtonExample extends React.Component<Props, State> {
         <List.Section title="Single">
           <View style={styles.row}>
             <ToggleButton
-              outlined
               icon="android"
               value="android"
               status={this.state.status}
@@ -58,23 +57,10 @@ class ToggleButtonExample extends React.Component<Props, State> {
                 })
               }
             >
-              <ToggleButton
-                outlined
-                disabled
-                icon="format-italic"
-                value="italic"
-              />
-              <ToggleButton icon="format-bold" outlined value="bold" />
-              <ToggleButton
-                icon="format-underlined"
-                outlined
-                value="underlined"
-              />
-              <ToggleButton
-                icon="format-color-text"
-                outlined
-                value="format-color"
-              />
+              <ToggleButton disabled icon="format-italic" value="italic" />
+              <ToggleButton icon="format-bold" value="bold" />
+              <ToggleButton icon="format-underlined" value="underlined" />
+              <ToggleButton icon="format-color-text" value="format-color" />
             </ToggleButton.Group>
           </View>
         </List.Section>
