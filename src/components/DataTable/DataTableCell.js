@@ -33,7 +33,11 @@ class DataTableCell extends React.Component<Props> {
         {...rest}
         style={[styles.container, right && styles.right, style]}
       >
-        <Text numberOfLines={1}>{children}</Text>
+        {typeof children === 'string' || typeof children === 'number' ? (
+          <Text numberOfLines={1}>{children}</Text>
+        ) : (
+          children
+        )}
       </TouchableRipple>
     );
   }

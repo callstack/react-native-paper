@@ -2,7 +2,13 @@
 
 import * as React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import { DataTable, Card, withTheme, type Theme } from 'react-native-paper';
+import {
+  DataTable,
+  Card,
+  IconButton,
+  withTheme,
+  type Theme,
+} from 'react-native-paper';
 
 type Props = {
   theme: Theme,
@@ -105,6 +111,7 @@ class DataTableExample extends React.Component<Props, State> {
               </DataTable.Title>
               <DataTable.Title right>Calories</DataTable.Title>
               <DataTable.Title right>Fat (g)</DataTable.Title>
+              <DataTable.Title right />
             </DataTable.Header>
 
             {items.slice(from, to).map(item => (
@@ -114,6 +121,9 @@ class DataTableExample extends React.Component<Props, State> {
                 </DataTable.Cell>
                 <DataTable.Cell right>{item.calories}</DataTable.Cell>
                 <DataTable.Cell right>{item.fat}</DataTable.Cell>
+                <DataTable.Cell right>
+                  <IconButton icon="info" onPress={() => {}} />
+                </DataTable.Cell>
               </DataTable.Row>
             ))}
 

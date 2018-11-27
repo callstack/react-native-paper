@@ -3,6 +3,7 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
 import DataTable from '../DataTable/DataTable';
+import IconButton from '../IconButton';
 
 it('renders data table header', () => {
   const tree = renderer
@@ -58,6 +59,18 @@ it('renders data table cell', () => {
 it('renders right aligned data table cell', () => {
   const tree = renderer
     .create(<DataTable.Cell right>356</DataTable.Cell>)
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders data table cell with custom content', () => {
+  const tree = renderer
+    .create(
+      <DataTable.Cell>
+        <IconButton icon="info" onPress={() => {}} />
+      </DataTable.Cell>
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();
