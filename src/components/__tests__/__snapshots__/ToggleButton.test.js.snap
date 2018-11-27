@@ -39,16 +39,16 @@ exports[`renders disabled toggle button 1`] = `
       },
       Array [
         Object {
-          "borderRadius": 0,
           "height": 42,
           "margin": 0,
           "width": 42,
         },
         Object {
-          "backgroundColor": "#6200ee",
-          "borderColor": "#f6f6f6",
-          "borderWidth": 0.5,
+          "backgroundColor": "rgba(0, 0, 0, .08)",
+          "borderColor": "rgba(0, 0, 0, 0.29)",
+          "borderRadius": 4,
         },
+        undefined,
       ],
     ]
   }
@@ -64,7 +64,7 @@ exports[`renders disabled toggle button 1`] = `
       style={
         Array [
           Object {
-            "color": "rgba(255, 255, 255, 0.32)",
+            "color": "#000000",
             "fontSize": 24,
           },
           Array [
@@ -126,16 +126,16 @@ exports[`renders toggle button 1`] = `
       undefined,
       Array [
         Object {
-          "borderRadius": 0,
           "height": 42,
           "margin": 0,
           "width": 42,
         },
         Object {
-          "backgroundColor": "#6200ee",
-          "borderColor": "#f6f6f6",
-          "borderWidth": 0.5,
+          "backgroundColor": "rgba(0, 0, 0, .08)",
+          "borderColor": "rgba(0, 0, 0, 0.29)",
+          "borderRadius": 4,
         },
+        undefined,
       ],
     ]
   }
@@ -151,7 +151,7 @@ exports[`renders toggle button 1`] = `
       style={
         Array [
           Object {
-            "color": "#ffffff",
+            "color": "#000000",
             "fontSize": 24,
           },
           Array [
@@ -220,16 +220,16 @@ exports[`renders unchecked toggle button 1`] = `
       },
       Array [
         Object {
-          "borderRadius": 0,
           "height": 42,
           "margin": 0,
           "width": 42,
         },
         Object {
-          "backgroundColor": "#f6f6f6",
-          "borderColor": "#f6f6f6",
-          "borderWidth": 0.5,
+          "backgroundColor": "transparent",
+          "borderColor": "rgba(0, 0, 0, 0.29)",
+          "borderRadius": 4,
         },
+        undefined,
       ],
     ]
   }
@@ -245,7 +245,7 @@ exports[`renders unchecked toggle button 1`] = `
       style={
         Array [
           Object {
-            "color": "rgba(0, 0, 0, 0.32)",
+            "color": "#000000",
             "fontSize": 24,
           },
           Array [
