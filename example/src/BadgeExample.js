@@ -15,8 +15,16 @@ type Props = {
   theme: Theme,
 };
 
-class BadgeExample extends React.Component<Props> {
+type State = {
+  value: number,
+};
+
+class BadgeExample extends React.Component<Props, State> {
   static title = 'Badge';
+
+  state = {
+    value: 2,
+  };
 
   render() {
     const {
@@ -24,12 +32,31 @@ class BadgeExample extends React.Component<Props> {
         colors: { background },
       },
     } = this.props;
+    const { value } = this.state;
 
     return (
       <View style={[styles.container, { backgroundColor: background }]}>
+        <View style={styles.row}>
+          <Button
+            onPress={() => {
+              this.setState({ value: this.state.value + 1 });
+            }}
+          >
+            Increase
+          </Button>
+
+          <Button
+            onPress={() => {
+              this.setState({ value: this.state.value - 1 });
+            }}
+          >
+            Decrease
+          </Button>
+        </View>
+
         <List.Section title="Buttons">
           <View style={styles.row}>
-            <Badge value="3">
+            <Badge value={value}>
               <Button mode="outlined" onPress={() => {}}>
                 Display notifications
               </Button>
@@ -38,7 +65,7 @@ class BadgeExample extends React.Component<Props> {
 
           <View style={styles.row}>
             <Badge
-              value="3"
+              value={value}
               verticalPosition="bottom"
               horizontalPosition="right"
             >
@@ -50,7 +77,7 @@ class BadgeExample extends React.Component<Props> {
 
           <View style={styles.row}>
             <Badge
-              value="3"
+              value={value}
               verticalPosition="bottom"
               horizontalPosition="left"
             >
@@ -61,7 +88,11 @@ class BadgeExample extends React.Component<Props> {
           </View>
 
           <View style={styles.row}>
-            <Badge value="3" verticalPosition="top" horizontalPosition="left">
+            <Badge
+              value={value}
+              verticalPosition="top"
+              horizontalPosition="left"
+            >
               <Button mode="outlined" onPress={() => {}}>
                 Display notifications
               </Button>
@@ -71,7 +102,7 @@ class BadgeExample extends React.Component<Props> {
 
         <List.Section title="Drawer Items">
           <View style={styles.row}>
-            <Badge value="new">
+            <Badge value={value}>
               <Drawer.Item label="First Item" />
             </Badge>
           </View>
