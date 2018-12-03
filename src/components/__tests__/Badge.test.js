@@ -21,6 +21,7 @@ jest.mock('Animated', () => {
 });
 
 it('renders no badge', () => {
+  // $FlowFixMe
   const tree = renderer.create(<Badge value={null}>Text</Badge>).toJSON();
 
   expect(tree).toMatchSnapshot();

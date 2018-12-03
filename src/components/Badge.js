@@ -8,7 +8,7 @@ import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 
-type Props = {
+type Props = {|
   /**
    * Value of the `Badge`.
    */
@@ -38,7 +38,7 @@ type Props = {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 type State = {
   opacity: Animated.Value,
