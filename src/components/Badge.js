@@ -83,7 +83,7 @@ class Badge extends React.Component<Props, State> {
   };
 
   componentDidUpdate(prevProps: Props) {
-    const { value } = this.state;
+    const { value } = this.props;
 
     if (value !== prevProps.value) {
       Animated.timing(this.state.opacity, {
