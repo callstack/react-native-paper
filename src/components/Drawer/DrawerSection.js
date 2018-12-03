@@ -8,7 +8,7 @@ import Divider from '../Divider';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
-type Props = {
+type Props = React.ElementConfig<typeof View> & {
   /**
    * Title to show as the header for the section.
    */

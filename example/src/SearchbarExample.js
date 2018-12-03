@@ -2,8 +2,13 @@
 
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Colors, Caption, Searchbar, withTheme } from 'react-native-paper';
-import type { Theme } from 'react-native-paper/types';
+import {
+  Colors,
+  Caption,
+  Searchbar,
+  withTheme,
+  type Theme,
+} from 'react-native-paper';
 
 type Props = {
   navigation: any,
@@ -45,7 +50,7 @@ class SearchExample extends React.Component<Props, State> {
           onChangeText={query => this.setState({ secondQuery: query })}
           value={this.state.secondQuery}
           onIconPress={() => this.props.navigation.goBack()}
-          icon="arrow-back"
+          icon={{ source: 'arrow-back', direction: 'auto' }}
           style={styles.searchbar}
         />
         <Searchbar

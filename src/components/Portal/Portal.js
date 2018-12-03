@@ -7,7 +7,7 @@ import PortalHost, { PortalContext } from './PortalHost';
 import { ThemeProvider, withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
-type Props = {
+type Props = {|
   /**
    * Content of the `Portal`.
    */
@@ -16,7 +16,7 @@ type Props = {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 /**
  * Portal allows to render a component at a different place in the parent tree.

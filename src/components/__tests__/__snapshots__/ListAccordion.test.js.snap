@@ -1,10 +1,190 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`renders expanded accordion 1`] = `
+<View>
+  <View
+    accessibilityRole="button"
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "padding": 8,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      pointerEvents="none"
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "margin": 8,
+            },
+            Object {
+              "flex": 1,
+              "justifyContent": "center",
+            },
+          ]
+        }
+      >
+        <Text
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "Helvetica Neue",
+                "textAlign": "left",
+                "writingDirection": "ltr",
+              },
+              Array [
+                Object {
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "#6200ee",
+                },
+              ],
+            ]
+          }
+        >
+          Accordion item 1
+        </Text>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "margin": 8,
+            },
+            undefined,
+          ]
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          allowFontScaling={false}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          style={
+            Array [
+              Object {
+                "color": "rgba(0, 0, 0, 0.87)",
+                "fontSize": 24,
+              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "padding": 8,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        pointerEvents="none"
+        style={
+          Array [
+            Object {
+              "margin": 8,
+            },
+            Object {
+              "flex": 1,
+              "justifyContent": "center",
+            },
+          ]
+        }
+      >
+        <Text
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "Helvetica Neue",
+                "textAlign": "left",
+                "writingDirection": "ltr",
+              },
+              Array [
+                Object {
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "rgba(0, 0, 0, 0.87)",
+                },
+              ],
+            ]
+          }
+        >
+          List item 1
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
 exports[`renders list accordion with children 1`] = `
 <View>
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -47,9 +227,7 @@ exports[`renders list accordion with children 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
@@ -75,6 +253,7 @@ exports[`renders list accordion with children 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -95,9 +274,6 @@ exports[`renders list accordion with children 1`] = `
         }
       >
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           numberOfLines={1}
           style={
             Array [
@@ -117,29 +293,6 @@ exports[`renders list accordion with children 1`] = `
               ],
             ]
           }
-          theme={
-            Object {
-              "colors": Object {
-                "accent": "#03dac4",
-                "backdrop": "rgba(0, 0, 0, 0.5)",
-                "background": "#f6f6f6",
-                "disabled": "rgba(0, 0, 0, 0.26)",
-                "error": "#B00020",
-                "placeholder": "rgba(0, 0, 0, 0.54)",
-                "primary": "#6200ee",
-                "surface": "#ffffff",
-                "text": "#000000",
-              },
-              "dark": false,
-              "fonts": Object {
-                "light": "HelveticaNeue-Light",
-                "medium": "HelveticaNeue-Medium",
-                "regular": "Helvetica Neue",
-                "thin": "HelveticaNeue-Thin",
-              },
-              "roundness": 4,
-            }
-          }
         >
           Expandable list item
         </Text>
@@ -156,9 +309,7 @@ exports[`renders list accordion with children 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
@@ -184,6 +335,7 @@ exports[`renders list accordion with children 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -198,8 +350,7 @@ exports[`renders list accordion with children 1`] = `
 exports[`renders list accordion with left items 1`] = `
 <View>
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -242,9 +393,7 @@ exports[`renders list accordion with left items 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
@@ -270,6 +419,7 @@ exports[`renders list accordion with left items 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -290,9 +440,6 @@ exports[`renders list accordion with left items 1`] = `
         }
       >
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           numberOfLines={1}
           style={
             Array [
@@ -312,29 +459,6 @@ exports[`renders list accordion with left items 1`] = `
               ],
             ]
           }
-          theme={
-            Object {
-              "colors": Object {
-                "accent": "#03dac4",
-                "backdrop": "rgba(0, 0, 0, 0.5)",
-                "background": "#f6f6f6",
-                "disabled": "rgba(0, 0, 0, 0.26)",
-                "error": "#B00020",
-                "placeholder": "rgba(0, 0, 0, 0.54)",
-                "primary": "#6200ee",
-                "surface": "#ffffff",
-                "text": "#000000",
-              },
-              "dark": false,
-              "fonts": Object {
-                "light": "HelveticaNeue-Light",
-                "medium": "HelveticaNeue-Medium",
-                "regular": "Helvetica Neue",
-                "thin": "HelveticaNeue-Thin",
-              },
-              "roundness": 4,
-            }
-          }
         >
           Accordion item 1
         </Text>
@@ -351,9 +475,7 @@ exports[`renders list accordion with left items 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
@@ -379,6 +501,7 @@ exports[`renders list accordion with left items 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -393,8 +516,7 @@ exports[`renders list accordion with left items 1`] = `
 exports[`renders multiline list accordion 1`] = `
 <View>
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -434,9 +556,6 @@ exports[`renders multiline list accordion 1`] = `
         }
       >
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           numberOfLines={1}
           style={
             Array [
@@ -456,36 +575,10 @@ exports[`renders multiline list accordion 1`] = `
               ],
             ]
           }
-          theme={
-            Object {
-              "colors": Object {
-                "accent": "#03dac4",
-                "backdrop": "rgba(0, 0, 0, 0.5)",
-                "background": "#f6f6f6",
-                "disabled": "rgba(0, 0, 0, 0.26)",
-                "error": "#B00020",
-                "placeholder": "rgba(0, 0, 0, 0.54)",
-                "primary": "#6200ee",
-                "surface": "#ffffff",
-                "text": "#000000",
-              },
-              "dark": false,
-              "fonts": Object {
-                "light": "HelveticaNeue-Light",
-                "medium": "HelveticaNeue-Medium",
-                "regular": "Helvetica Neue",
-                "thin": "HelveticaNeue-Thin",
-              },
-              "roundness": 4,
-            }
-          }
         >
           Expandable list item
         </Text>
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           numberOfLines={2}
           style={
             Array [
@@ -504,29 +597,6 @@ exports[`renders multiline list accordion 1`] = `
                 },
               ],
             ]
-          }
-          theme={
-            Object {
-              "colors": Object {
-                "accent": "#03dac4",
-                "backdrop": "rgba(0, 0, 0, 0.5)",
-                "background": "#f6f6f6",
-                "disabled": "rgba(0, 0, 0, 0.26)",
-                "error": "#B00020",
-                "placeholder": "rgba(0, 0, 0, 0.54)",
-                "primary": "#6200ee",
-                "surface": "#ffffff",
-                "text": "#000000",
-              },
-              "dark": false,
-              "fonts": Object {
-                "light": "HelveticaNeue-Light",
-                "medium": "HelveticaNeue-Medium",
-                "regular": "Helvetica Neue",
-                "thin": "HelveticaNeue-Thin",
-              },
-              "roundness": 4,
-            }
           }
         >
           Describes the expandable list item
@@ -548,9 +618,7 @@ exports[`renders multiline list accordion 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
@@ -576,6 +644,7 @@ exports[`renders multiline list accordion 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >

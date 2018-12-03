@@ -18,9 +18,8 @@ exports[`renders extended FAB 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
     accessibilityLabel="Add items"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -84,9 +83,7 @@ exports[`renders extended FAB 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            accessible={true}
             allowFontScaling={false}
-            ellipsizeMode="tail"
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             style={
@@ -112,6 +109,7 @@ exports[`renders extended FAB 1`] = `
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
+                Object {},
               ]
             }
           >
@@ -120,9 +118,6 @@ exports[`renders extended FAB 1`] = `
         </View>
       </View>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
@@ -141,29 +136,6 @@ exports[`renders extended FAB 1`] = `
               },
             ],
           ]
-        }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
         }
       >
         ADD ITEMS
@@ -191,8 +163,7 @@ exports[`renders normal FAB 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -256,9 +227,7 @@ exports[`renders normal FAB 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            accessible={true}
             allowFontScaling={false}
-            ellipsizeMode="tail"
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             style={
@@ -284,6 +253,7 @@ exports[`renders normal FAB 1`] = `
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
+                Object {},
               ]
             }
           >
@@ -314,8 +284,7 @@ exports[`renders small FAB 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -379,9 +348,7 @@ exports[`renders small FAB 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            accessible={true}
             allowFontScaling={false}
-            ellipsizeMode="tail"
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             style={
@@ -407,6 +374,7 @@ exports[`renders small FAB 1`] = `
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
+                Object {},
               ]
             }
           >

@@ -1,47 +1,39 @@
 import * as React from 'react';
+import { StyleProp, TextStyle, ViewStyle, ViewProps, TouchableNativeFeedbackProps } from 'react-native';
 import { IconSource, ThemeShape } from '../types';
+import { TouchableRipplePropsWithoutChildren } from './TouchableRipple';
 
 export interface AppbarContentProps {
   color?: string;
   title: React.ReactNode;
-  titleStyle?: any;
+  titleStyle?: StyleProp<TextStyle>;
   subtitle?: React.ReactNode;
-  subtitleStyle?: any;
-  style?: any;
+  subtitleStyle?: StyleProp<TextStyle>;
+  style?: StyleProp<ViewStyle>;
   theme?: ThemeShape;
 }
 
-export interface AppbarActionProps {
+export interface AppbarActionProps extends TouchableRipplePropsWithoutChildren {
   color?: string;
   icon: IconSource;
   size?: number;
-  disabled?: boolean;
-  accessibilityLabel?: string;
-  onPress?: () => any;
-  style?: any;
 }
 
-export interface AppbarBackActionProps {
+export interface AppbarBackActionProps extends TouchableRipplePropsWithoutChildren {
   color?: string;
   size?: number;
-  disabled?: boolean;
-  accessibilityLabel?: string;
-  onPress?: () => any;
-  style?: any;
 }
 
-export interface AppbarHeaderProps {
+export interface AppbarHeaderProps extends ViewProps {
+  children: React.ReactNode;
   dark?: boolean;
   statusBarHeight?: number;
-  children: React.ReactNode;
-  style?: any;
   theme?: ThemeShape;
 }
 
-export interface AppbarProps {
-  dark?: boolean;
+export interface AppbarProps extends ViewProps {
   children: React.ReactNode;
-  style?: any;
+  dark?: boolean;
   theme?: ThemeShape;
 }
 

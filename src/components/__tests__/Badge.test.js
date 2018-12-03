@@ -5,8 +5,54 @@ import renderer from 'react-test-renderer';
 import Badge from '../Badge';
 import { pink500 } from '../../styles/colors';
 
+// Make sure any animation finishes before checking the snapshot results
+jest.mock('Animated', () => {
+  const ActualAnimated = jest.requireActual('Animated');
+
+  return {
+    ...ActualAnimated,
+    timing: (value, config) => ({
+      start: callback => {
+        value.setValue(config.toValue);
+        callback && callback({ finished: true });
+      },
+    }),
+  };
+});
+
+it('renders no badge', () => {
+  const tree = renderer.create(<Badge value={null}>Text</Badge>).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders numeric badge', () => {
+  const tree = renderer.create(<Badge value={3}>Text</Badge>).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
 it('renders badge in top right corner by default', () => {
-  const tree = renderer.create(<Badge value="3">Text</Badge>).toJSON();
+  const defaultTree = renderer.create(<Badge value="3">Text</Badge>).toJSON();
+  const tree = renderer
+    .create(
+      <Badge value="3" verticalPosition="top" horizontalPosition="right">
+        Text
+      </Badge>
+    )
+    .toJSON();
+
+  expect(defaultTree).toEqual(tree);
+});
+
+it('renders badge in top right corner', () => {
+  const tree = renderer
+    .create(
+      <Badge value="3" verticalPosition="top" horizontalPosition="right">
+        Text
+      </Badge>
+    )
+    .toJSON();
 
   expect(tree).toMatchSnapshot();
 });
@@ -14,7 +60,7 @@ it('renders badge in top right corner by default', () => {
 it('renders badge in bottom right corner', () => {
   const tree = renderer
     .create(
-      <Badge value="3" verticalPosition="bottom">
+      <Badge value="3" verticalPosition="bottom" horizontalPosition="right">
         Text
       </Badge>
     )

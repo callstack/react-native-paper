@@ -1,18 +1,15 @@
 import * as React from 'react';
-import { ImageProps } from 'react-native';
+import { ImageProps, ViewProps } from 'react-native';
 import { ThemeShape } from '../types';
 
-export interface CardContentProps {
-  style?: any;
+export interface CardContentProps extends ViewProps {
 }
 
-export interface CardActionsProps {
+export interface CardActionsProps extends ViewProps {
   children: React.ReactNode;
-  style?: any;
 }
 
 export interface CardCoverProps extends ImageProps {
-  style?: any;
   theme?: ThemeShape;
 }
 

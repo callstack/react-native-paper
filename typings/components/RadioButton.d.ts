@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ThemeShape } from '../types';
+import { TouchableRipplePropsWithoutChildren } from './TouchableRipple';
 
 export interface RadioButtonGroupProps {
   onValueChange: (value: string) => any;
@@ -7,14 +8,11 @@ export interface RadioButtonGroupProps {
   children: React.ReactNode;
 }
 
-export interface RadioButtonProps {
+export interface RadioButtonProps extends TouchableRipplePropsWithoutChildren {
   value: string;
   status?: 'checked' | 'unchecked';
-  disabled?: boolean;
-  onPress?: () => any;
   uncheckedColor?: string;
   color?: string;
-  theme?: ThemeShape;
 }
 
 export declare class RadioButton extends React.Component<RadioButtonProps> {

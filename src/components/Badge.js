@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { Animated, View, StyleSheet } from 'react-native';
 import color from 'color';
 import Text from './Typography/Text';
 import { black, white } from '../styles/colors';
@@ -12,7 +12,7 @@ type Props = {
   /**
    * Value of the `Badge`.
    */
-  value: string,
+  value?: string | number,
   /**
    * Vertical position of `Badge`.
    */
@@ -40,6 +40,10 @@ type Props = {
   theme: Theme,
 };
 
+type State = {
+  opacity: Animated.Value,
+};
+
 /**
  * Badges are small status descriptors for UI elements.
  * A badge consists of a small circle, typically containing a number or other short set of characters, that appears in proximity to another object.
@@ -47,6 +51,7 @@ type Props = {
  * <div class="screenshots">
  *   <figure>
  *     <img src="screenshots/badge.png" />
+ *     <figcaption>Button with badge</figcaption>
  *   </figure>
  * </div>
  *
@@ -56,7 +61,7 @@ type Props = {
  * import { Badge, Button } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Badge value="3">
+ *   <Badge value={3} color="#FF0000">
  *     <Button mode="outlined" onPress={() => {}}>
  *       Display notifications
  *     </Button>
@@ -66,12 +71,27 @@ type Props = {
  * export default MyComponent;
  * ```
  */
-class Badge extends React.Component<Props> {
+class Badge extends React.Component<Props, State> {
   static defaultProps = {
     verticalPosition: 'top',
     horizontalPosition: 'right',
     size: 12,
   };
+
+  state = {
+    opacity: new Animated.Value(this.props.value ? 1 : 0),
+  };
+
+  componentDidUpdate(prevProps: Props) {
+    const { value } = this.state;
+
+    if (value !== prevProps.value) {
+      Animated.timing(this.state.opacity, {
+        toValue: value ? 1 : 0,
+        duration: 150,
+      }).start();
+    }
+  }
 
   render() {
     const {
@@ -84,6 +104,7 @@ class Badge extends React.Component<Props> {
       value,
       verticalPosition,
     } = this.props;
+    const { opacity } = this.state;
 
     const backgroundColor = badgeColor || theme.colors.badge;
     const textColor = color(backgroundColor).dark() ? white : black;
@@ -99,10 +120,11 @@ class Badge extends React.Component<Props> {
       <View>
         <View>{children}</View>
 
-        <View
+        <Animated.View
           style={[
             styles.badge,
             {
+              opacity,
               backgroundColor,
               borderRadius,
               paddingHorizontal,
@@ -115,7 +137,7 @@ class Badge extends React.Component<Props> {
           ]}
         >
           <Text style={{ color: textColor }}>{value}</Text>
-        </View>
+        </Animated.View>
       </View>
     );
   }

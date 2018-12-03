@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders chip with icon 1`] = `
+exports[`renders chip with close button 1`] = `
 <View
   style={
     Object {
@@ -14,12 +14,8 @@ exports[`renders chip with icon 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits={
-      Array [
-        "button",
-      ]
-    }
+    accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -55,9 +51,7 @@ exports[`renders chip with icon 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
@@ -83,6 +77,7 @@ exports[`renders chip with icon 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -90,9 +85,174 @@ exports[`renders chip with icon 1`] = `
         </Text>
       </View>
       <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
+            },
+            Array [
+              Object {
+                "height": 24,
+                "lineHeight": 24,
+                "marginVertical": 4,
+                "textAlignVertical": "center",
+              },
+              Object {
+                "color": "rgba(0, 0, 0, 0.87)",
+                "marginLeft": 4,
+                "marginRight": 4,
+              },
+            ],
+          ]
+        }
+      >
+        Example Chip
+      </Text>
+      <View
+        accessibilityComponentType="button"
+        accessibilityTraits="button"
         accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "padding": 4,
+          }
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          allowFontScaling={false}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          style={
+            Array [
+              Object {
+                "color": "rgba(0, 0, 0, 0.54)",
+                "fontSize": 16,
+              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders chip with icon 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ebebeb",
+      "borderColor": "#ebebeb",
+      "borderRadius": 16,
+      "borderStyle": "solid",
+      "borderWidth": 0.5,
+      "elevation": 0,
+    }
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessibilityStates={Array []}
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "borderRadius": 16,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "paddingHorizontal": 4,
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "padding": 4,
+            },
+            null,
+          ]
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          allowFontScaling={false}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          style={
+            Array [
+              Object {
+                "color": "rgba(0, 0, 0, 0.54)",
+                "fontSize": 18,
+              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+      <Text
         numberOfLines={1}
         style={
           Array [
@@ -117,29 +277,6 @@ exports[`renders chip with icon 1`] = `
             ],
           ]
         }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
-        }
       >
         Example Chip
       </Text>
@@ -162,12 +299,8 @@ exports[`renders chip with onPress 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits={
-      Array [
-        "button",
-      ]
-    }
+    accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -192,9 +325,6 @@ exports[`renders chip with onPress 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -219,177 +349,6 @@ exports[`renders chip with onPress 1`] = `
             ],
           ]
         }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
-        }
-      >
-        Example Chip
-      </Text>
-    </View>
-  </View>
-</View>
-`;
-
-exports[`renders deletable chip 1`] = `
-<View
-  style={
-    Object {
-      "backgroundColor": "#ebebeb",
-      "borderColor": "#ebebeb",
-      "borderRadius": 16,
-      "borderStyle": "solid",
-      "borderWidth": 0.5,
-      "elevation": 0,
-    }
-  }
->
-  <View
-    accessibilityComponentType="button"
-    accessibilityTraits={
-      Array [
-        "button",
-      ]
-    }
-    accessible={true}
-    isTVSelectable={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "borderRadius": 16,
-      }
-    }
-  >
-    <View
-      style={
-        Object {
-          "alignItems": "center",
-          "flexDirection": "row",
-          "paddingHorizontal": 4,
-        }
-      }
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "padding": 4,
-            },
-            null,
-          ]
-        }
-      >
-        <Text
-          accessibilityElementsHidden={true}
-          accessible={true}
-          allowFontScaling={false}
-          ellipsizeMode="tail"
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          style={
-            Array [
-              Object {
-                "color": "rgba(0, 0, 0, 0.54)",
-                "fontSize": 18,
-              },
-              Array [
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-            ]
-          }
-        >
-          
-        </Text>
-      </View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        numberOfLines={1}
-        style={
-          Array [
-            Object {
-              "color": "#000000",
-              "fontFamily": "Helvetica Neue",
-              "textAlign": "left",
-              "writingDirection": "ltr",
-            },
-            Array [
-              Object {
-                "height": 24,
-                "lineHeight": 24,
-                "marginVertical": 4,
-                "textAlignVertical": "center",
-              },
-              Object {
-                "color": "rgba(0, 0, 0, 0.87)",
-                "marginLeft": 4,
-                "marginRight": 8,
-              },
-            ],
-          ]
-        }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
-        }
       >
         Example Chip
       </Text>
@@ -412,10 +371,9 @@ exports[`renders outlined disabled chip 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits={
+    accessibilityRole="button"
+    accessibilityStates={
       Array [
-        "button",
         "disabled",
       ]
     }
@@ -443,9 +401,6 @@ exports[`renders outlined disabled chip 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -470,29 +425,6 @@ exports[`renders outlined disabled chip 1`] = `
             ],
           ]
         }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
-        }
       >
         Example Chip
       </Text>
@@ -515,10 +447,9 @@ exports[`renders selected chip 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits={
+    accessibilityRole="button"
+    accessibilityStates={
       Array [
-        "button",
         "selected",
       ]
     }
@@ -557,9 +488,7 @@ exports[`renders selected chip 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
@@ -585,6 +514,7 @@ exports[`renders selected chip 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -592,9 +522,6 @@ exports[`renders selected chip 1`] = `
         </Text>
       </View>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -618,29 +545,6 @@ exports[`renders selected chip 1`] = `
               },
             ],
           ]
-        }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
         }
       >
         Example Chip

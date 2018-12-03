@@ -2,9 +2,6 @@
 
 exports[`renders caption applying style 1`] = `
 <Text
-  accessible={true}
-  allowFontScaling={true}
-  ellipsizeMode="tail"
   style={
     Array [
       Object {
@@ -44,29 +41,6 @@ exports[`renders caption applying style 1`] = `
         ],
       ],
     ]
-  }
-  theme={
-    Object {
-      "colors": Object {
-        "accent": "#03dac4",
-        "backdrop": "rgba(0, 0, 0, 0.5)",
-        "background": "#f6f6f6",
-        "disabled": "rgba(0, 0, 0, 0.26)",
-        "error": "#B00020",
-        "placeholder": "rgba(0, 0, 0, 0.54)",
-        "primary": "#6200ee",
-        "surface": "#ffffff",
-        "text": "#000000",
-      },
-      "dark": false,
-      "fonts": Object {
-        "light": "HelveticaNeue-Light",
-        "medium": "HelveticaNeue-Medium",
-        "regular": "Helvetica Neue",
-        "thin": "HelveticaNeue-Thin",
-      },
-      "roundness": 4,
-    }
   }
 >
   Big and red caption
@@ -75,9 +49,6 @@ exports[`renders caption applying style 1`] = `
 
 exports[`renders caption with children as content 1`] = `
 <Text
-  accessible={true}
-  allowFontScaling={true}
-  ellipsizeMode="tail"
   style={
     Array [
       Object {
@@ -111,29 +82,6 @@ exports[`renders caption with children as content 1`] = `
         ],
       ],
     ]
-  }
-  theme={
-    Object {
-      "colors": Object {
-        "accent": "#03dac4",
-        "backdrop": "rgba(0, 0, 0, 0.5)",
-        "background": "#f6f6f6",
-        "disabled": "rgba(0, 0, 0, 0.26)",
-        "error": "#B00020",
-        "placeholder": "rgba(0, 0, 0, 0.54)",
-        "primary": "#6200ee",
-        "surface": "#ffffff",
-        "text": "#000000",
-      },
-      "dark": false,
-      "fonts": Object {
-        "light": "HelveticaNeue-Light",
-        "medium": "HelveticaNeue-Medium",
-        "regular": "Helvetica Neue",
-        "thin": "HelveticaNeue-Thin",
-      },
-      "roundness": 4,
-    }
   }
 >
   Caption content

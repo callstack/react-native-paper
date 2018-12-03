@@ -6,9 +6,9 @@ import {
   View,
   ScrollView,
   KeyboardAvoidingView,
+  type Theme,
 } from 'react-native';
 import { TextInput, HelperText, withTheme } from 'react-native-paper';
-import type { Theme } from 'react-native-paper/types';
 
 type Props = {
   theme: Theme,
@@ -29,7 +29,7 @@ class TextInputExample extends React.Component<Props, State> {
     outlinedText: '',
   };
 
-  _isUsernameValid = () => /^[a-z]*$/.test(this.state.name);
+  _isUsernameValid = () => /^[a-zA-Z]*$/.test(this.state.name);
 
   render() {
     const {

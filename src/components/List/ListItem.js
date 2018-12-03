@@ -6,9 +6,9 @@ import { View, StyleSheet } from 'react-native';
 import TouchableRipple from '../TouchableRipple';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import type { Theme, $RemoveChildren } from '../../types';
 
-type Props = {
+type Props = $RemoveChildren<typeof TouchableRipple> & {|
   /**
    * Title text for the list item.
    */
@@ -34,7 +34,7 @@ type Props = {
    */
   theme: Theme,
   style?: any,
-};
+|};
 
 /**
  * A component to show tiles inside a List.

@@ -20,9 +20,7 @@ const DialogWithLongText = ({
         <Button color={Colors.teal500} disabled>
           Disagree
         </Button>
-        <Button primary onPress={close}>
-          Agree
-        </Button>
+        <Button onPress={close}>Agree</Button>
       </Dialog.Actions>
     </Dialog>
   </Portal>

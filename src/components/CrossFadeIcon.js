@@ -6,7 +6,7 @@ import { polyfill } from 'react-lifecycles-compat';
 import Icon, { isValidIcon, isEqualIcon } from './Icon';
 import type { IconSource } from './Icon';
 
-type Props = {
+type Props = {|
   /**
    * Icon to display for the `CrossFadeIcon`.
    */
@@ -19,7 +19,7 @@ type Props = {
    * Size of the icon.
    */
   size: number,
-};
+|};
 
 type State = {
   currentIcon: IconSource,

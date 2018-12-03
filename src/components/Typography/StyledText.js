@@ -7,7 +7,7 @@ import Text from './Text';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
-type Props = {
+type Props = React.ElementConfig<typeof Text> & {
   alpha: number,
   family: 'regular' | 'medium' | 'light' | 'thin',
   style?: any,

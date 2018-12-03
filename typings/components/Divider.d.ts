@@ -1,9 +1,9 @@
 import * as React from 'react';
+import { ViewProps } from 'react-native';
 import { ThemeShape } from '../types';
 
-export interface DividerProps {
+export interface DividerProps extends ViewProps {
   inset?: boolean;
-  style?: any;
   theme?: ThemeShape;
 }
 

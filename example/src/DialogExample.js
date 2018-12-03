@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Colors, Button, withTheme } from 'react-native-paper';
+import { Colors, Button, withTheme, type Theme } from 'react-native-paper';
 import {
   DialogWithCustomColors,
   DialogWithLoadingIndicator,
@@ -10,7 +10,6 @@ import {
   DialogWithRadioBtns,
   UndismissableDialog,
 } from './Dialogs';
-import type { Theme } from 'react-native-paper/types';
 
 type State = {
   visible1: boolean,
@@ -56,19 +55,15 @@ class DialogExample extends React.Component<Props, State> {
     const { visible1, visible2, visible3, visible4, visible5 } = this.state;
     return (
       <View style={[styles.container, { backgroundColor: background }]}>
-        <Button primary onPress={this._openDialog1}>
-          Show Dialog with long text
-        </Button>
-        <Button primary onPress={this._openDialog2}>
+        <Button onPress={this._openDialog1}>Show Dialog with long text</Button>
+        <Button onPress={this._openDialog2}>
           Show Dialog with radio buttons
         </Button>
-        <Button primary onPress={this._openDialog3}>
+        <Button onPress={this._openDialog3}>
           Show Dialog with loading indicator
         </Button>
-        <Button primary onPress={this._openDialog4}>
-          Show undismissable Dialog
-        </Button>
-        <Button primary onPress={this._openDialog5}>
+        <Button onPress={this._openDialog4}>Show undismissable Dialog</Button>
+        <Button onPress={this._openDialog5}>
           Show Dialog with custom colors
         </Button>
         <DialogWithLongText visible={visible1} close={this._closeDialog1} />

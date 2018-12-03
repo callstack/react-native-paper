@@ -231,7 +231,7 @@ const FAR_FAR_AWAY = 9999;
 const Touchable =
   Platform.OS === 'android'
     ? TouchableRipple
-    : ({ style, children, ...rest }) => (
+    : ({ style, children, borderless, rippleColor, ...rest }) => (
         <TouchableWithoutFeedback {...rest}>
           <View style={style}>{children}</View>
         </TouchableWithoutFeedback>
@@ -374,20 +374,33 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
     };
   }
 
+  componentDidMount() {
+    // Workaround for native animated bug in react-native@^0.57
+    // Context: https://github.com/callstack/react-native-paper/pull/637
+    this._animateToCurrentIndex();
+  }
+
   componentDidUpdate(prevProps) {
     if (prevProps.navigationState.index === this.props.navigationState.index) {
       return;
     }
 
-    const shifting = this._isShifting();
-    const { routes, index } = this.props.navigationState;
-
     // Reset offsets of previous and current tabs before animation
     this.state.offsets.forEach((offset, i) => {
-      if (i === index || i === prevProps.navigationState.index) {
+      if (
+        i === this.props.navigationState.index ||
+        i === prevProps.navigationState.index
+      ) {
         offset.setValue(0);
       }
     });
+
+    this._animateToCurrentIndex();
+  }
+
+  _animateToCurrentIndex = () => {
+    const shifting = this._isShifting();
+    const { routes, index } = this.props.navigationState;
 
     // Reset the ripple to avoid glitch if it's currently animating
     this.state.ripple.setValue(MIN_RIPPLE_SCALE);
@@ -425,7 +438,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
         });
       }
     });
-  }
+  };
 
   _handleLayout = e =>
     this.setState({

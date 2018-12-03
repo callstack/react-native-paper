@@ -1,8 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { StyleSheet, TextInput } from 'react-native';
-
+import { StyleSheet, TextInput, I18nManager } from 'react-native';
 import color from 'color';
 import IconButton from './IconButton';
 import Surface from './Surface';
@@ -10,7 +9,7 @@ import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
-type Props = {
+type Props = React.ElementConfig<typeof TextInput> & {|
   /**
    * Hint text shown when the input is empty.
    */
@@ -36,7 +35,7 @@ type Props = {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 /**
  * Searchbar is a simple input box where users can type search queries.
@@ -156,6 +155,7 @@ class Searchbar extends React.Component<Props> {
           selectionColor={colors.primary}
           underlineColorAndroid="transparent"
           returnKeyType="search"
+          keyboardAppearance={dark ? 'dark' : 'light'}
           accessibilityTraits="search"
           accessibilityRole="search"
           ref={c => {
@@ -191,6 +191,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingLeft: 8,
     alignSelf: 'stretch',
+    textAlign: I18nManager.isRTL ? 'right' : 'left',
   },
 });
 

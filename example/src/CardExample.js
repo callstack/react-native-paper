@@ -9,8 +9,8 @@ import {
   Card,
   Button,
   withTheme,
+  type Theme,
 } from 'react-native-paper';
-import type { Theme } from 'react-native-paper/types';
 
 type Props = {
   theme: Theme,
@@ -45,12 +45,8 @@ class CardExample extends React.Component<Props> {
         <Card style={styles.card}>
           <Card.Cover source={require('../assets/forest.jpg')} />
           <Card.Actions>
-            <Button primary onPress={() => {}}>
-              Share
-            </Button>
-            <Button primary onPress={() => {}}>
-              Explore
-            </Button>
+            <Button onPress={() => {}}>Share</Button>
+            <Button onPress={() => {}}>Explore</Button>
           </Card.Actions>
         </Card>
         <Card style={styles.card}>

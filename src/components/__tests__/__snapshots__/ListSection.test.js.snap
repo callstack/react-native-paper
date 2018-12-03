@@ -12,9 +12,6 @@ exports[`renders list section with title 1`] = `
   }
 >
   <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
     numberOfLines={1}
     style={
       Array [
@@ -35,29 +32,6 @@ exports[`renders list section with title 1`] = `
           },
         ],
       ]
-    }
-    theme={
-      Object {
-        "colors": Object {
-          "accent": "#03dac4",
-          "backdrop": "rgba(0, 0, 0, 0.5)",
-          "background": "#f6f6f6",
-          "disabled": "rgba(0, 0, 0, 0.26)",
-          "error": "#B00020",
-          "placeholder": "rgba(0, 0, 0, 0.54)",
-          "primary": "#6200ee",
-          "surface": "#ffffff",
-          "text": "#000000",
-        },
-        "dark": false,
-        "fonts": Object {
-          "light": "HelveticaNeue-Light",
-          "medium": "HelveticaNeue-Medium",
-          "regular": "Helvetica Neue",
-          "thin": "HelveticaNeue-Thin",
-        },
-        "roundness": 4,
-      }
     }
   >
     Some title
@@ -104,9 +78,7 @@ exports[`renders list section with title 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
@@ -132,6 +104,7 @@ exports[`renders list section with title 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -153,9 +126,6 @@ exports[`renders list section with title 1`] = `
         }
       >
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           numberOfLines={1}
           style={
             Array [
@@ -174,29 +144,6 @@ exports[`renders list section with title 1`] = `
                 },
               ],
             ]
-          }
-          theme={
-            Object {
-              "colors": Object {
-                "accent": "#03dac4",
-                "backdrop": "rgba(0, 0, 0, 0.5)",
-                "background": "#f6f6f6",
-                "disabled": "rgba(0, 0, 0, 0.26)",
-                "error": "#B00020",
-                "placeholder": "rgba(0, 0, 0, 0.54)",
-                "primary": "#6200ee",
-                "surface": "#ffffff",
-                "text": "#000000",
-              },
-              "dark": false,
-              "fonts": Object {
-                "light": "HelveticaNeue-Light",
-                "medium": "HelveticaNeue-Medium",
-                "regular": "Helvetica Neue",
-                "thin": "HelveticaNeue-Thin",
-              },
-              "roundness": 4,
-            }
           }
         >
           First Item
@@ -246,9 +193,7 @@ exports[`renders list section with title 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
@@ -274,6 +219,7 @@ exports[`renders list section with title 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -295,9 +241,6 @@ exports[`renders list section with title 1`] = `
         }
       >
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           numberOfLines={1}
           style={
             Array [
@@ -316,29 +259,6 @@ exports[`renders list section with title 1`] = `
                 },
               ],
             ]
-          }
-          theme={
-            Object {
-              "colors": Object {
-                "accent": "#03dac4",
-                "backdrop": "rgba(0, 0, 0, 0.5)",
-                "background": "#f6f6f6",
-                "disabled": "rgba(0, 0, 0, 0.26)",
-                "error": "#B00020",
-                "placeholder": "rgba(0, 0, 0, 0.54)",
-                "primary": "#6200ee",
-                "surface": "#ffffff",
-                "text": "#000000",
-              },
-              "dark": false,
-              "fonts": Object {
-                "light": "HelveticaNeue-Light",
-                "medium": "HelveticaNeue-Medium",
-                "regular": "Helvetica Neue",
-                "thin": "HelveticaNeue-Thin",
-              },
-              "roundness": 4,
-            }
           }
         >
           Second Item
@@ -402,9 +322,7 @@ exports[`renders list section without title 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
@@ -430,6 +348,7 @@ exports[`renders list section without title 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -451,9 +370,6 @@ exports[`renders list section without title 1`] = `
         }
       >
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           numberOfLines={1}
           style={
             Array [
@@ -472,29 +388,6 @@ exports[`renders list section without title 1`] = `
                 },
               ],
             ]
-          }
-          theme={
-            Object {
-              "colors": Object {
-                "accent": "#03dac4",
-                "backdrop": "rgba(0, 0, 0, 0.5)",
-                "background": "#f6f6f6",
-                "disabled": "rgba(0, 0, 0, 0.26)",
-                "error": "#B00020",
-                "placeholder": "rgba(0, 0, 0, 0.54)",
-                "primary": "#6200ee",
-                "surface": "#ffffff",
-                "text": "#000000",
-              },
-              "dark": false,
-              "fonts": Object {
-                "light": "HelveticaNeue-Light",
-                "medium": "HelveticaNeue-Medium",
-                "regular": "Helvetica Neue",
-                "thin": "HelveticaNeue-Thin",
-              },
-              "roundness": 4,
-            }
           }
         >
           First Item
@@ -544,9 +437,7 @@ exports[`renders list section without title 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
@@ -572,6 +463,7 @@ exports[`renders list section without title 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -593,9 +485,6 @@ exports[`renders list section without title 1`] = `
         }
       >
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           numberOfLines={1}
           style={
             Array [
@@ -614,29 +503,6 @@ exports[`renders list section without title 1`] = `
                 },
               ],
             ]
-          }
-          theme={
-            Object {
-              "colors": Object {
-                "accent": "#03dac4",
-                "backdrop": "rgba(0, 0, 0, 0.5)",
-                "background": "#f6f6f6",
-                "disabled": "rgba(0, 0, 0, 0.26)",
-                "error": "#B00020",
-                "placeholder": "rgba(0, 0, 0, 0.54)",
-                "primary": "#6200ee",
-                "surface": "#ffffff",
-                "text": "#000000",
-              },
-              "dark": false,
-              "fonts": Object {
-                "light": "HelveticaNeue-Light",
-                "medium": "HelveticaNeue-Medium",
-                "regular": "Helvetica Neue",
-                "thin": "HelveticaNeue-Thin",
-              },
-              "roundness": 4,
-            }
           }
         >
           Second Item

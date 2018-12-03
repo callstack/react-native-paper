@@ -18,10 +18,10 @@ it('renders chip with icon', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders deletable chip', () => {
+it('renders chip with close button', () => {
   const tree = renderer
     .create(
-      <Chip icon="info" onDelete={() => {}}>
+      <Chip icon="info" onClose={() => {}}>
         Example Chip
       </Chip>
     )

@@ -6,9 +6,9 @@ import Surface from './Surface';
 import Text from './Typography/Text';
 import Button from './Button';
 import { withTheme } from '../core/theming';
-import type { Theme } from '../types';
+import type { Theme, $RemoveChildren } from '../types';
 
-type Props = {
+type Props = $RemoveChildren<typeof Surface> & {|
   /**
    * Whether banner is currently visible.
    */
@@ -39,7 +39,7 @@ type Props = {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 type State = {
   position: Animated.Value,
@@ -69,7 +69,7 @@ type NativeEvent = {
  *
  * ## Usage
  * ```js
- * import React from 'react';
+ * import * as React from 'react';
  * import { Image } from 'react-native';
  * import { Banner } from 'react-native-paper';
  *

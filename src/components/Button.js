@@ -12,7 +12,7 @@ import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
-type Props = {
+type Props = React.ElementConfig<typeof Surface> & {|
   /**
    * Mode of the button. You can change the mode to adjust the styling to give it desired emphasis.
    * - `text` - flat button without background or outline (low emphasis)
@@ -61,7 +61,7 @@ type Props = {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 type State = {
   elevation: Animated.Value,

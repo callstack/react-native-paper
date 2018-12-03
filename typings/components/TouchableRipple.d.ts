@@ -1,20 +1,16 @@
 import * as React from 'react';
+import { TouchableHighlightProps, TouchableNativeFeedbackProps } from 'react-native';
 import { ThemeShape } from '../types';
 
-export interface TouchableRippleProps {
+interface TouchableRipplePropsWithoutChildren extends TouchableHighlightProps, TouchableNativeFeedbackProps {
   borderless?: boolean;
-  background?: Object;
-  disabled?: boolean;
-  onPress?: Function;
-  rippleColor?: string;
-  underlayColor?: string;
-  children: React.ReactNode;
-  style?: any;
   theme?: ThemeShape;
 }
 
-export declare class TouchableRipple extends React.Component<
-  TouchableRippleProps
-> {
+export interface TouchableRippleProps extends TouchableRipplePropsWithoutChildren {
+  children: React.ReactNode;
+}
+
+export declare class TouchableRipple extends React.Component<TouchableRippleProps> {
   static supported: boolean;
 }

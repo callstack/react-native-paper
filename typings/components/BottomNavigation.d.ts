@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
 import { IconSource, ThemeShape } from '../types';
 
 type Route = Partial<{
@@ -40,7 +41,7 @@ export interface BottomNavigationProps<T> {
   activeColor?: string;
   inactiveColor?: string;
   barStyle?: any;
-  style?: any;
+  style?: StyleProp<ViewStyle>;
   theme?: ThemeShape;
 }
 

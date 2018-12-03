@@ -53,3 +53,15 @@ it('renders list accordion with left items', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('renders expanded accordion', () => {
+  const tree = renderer
+    .create(
+      <ListAccordion title="Accordion item 1" expanded>
+        <ListItem title="List item 1" />
+      </ListAccordion>
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});

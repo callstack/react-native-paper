@@ -7,25 +7,18 @@ exports[`renders badge in bottom left corner 1`] = `
   </View>
   <View
     style={
-      Array [
-        Object {
-          "position": "absolute",
-        },
-        Object {
-          "backgroundColor": "#f44336",
-          "borderRadius": 6,
-          "bottom": -6,
-          "left": -6,
-          "paddingHorizontal": 6,
-        },
-        undefined,
-      ]
+      Object {
+        "backgroundColor": "#6200ee",
+        "borderRadius": 6,
+        "bottom": -6,
+        "left": -6,
+        "opacity": 1,
+        "paddingHorizontal": 6,
+        "position": "absolute",
+      }
     }
   >
     <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
       style={
         Array [
           Object {
@@ -38,29 +31,6 @@ exports[`renders badge in bottom left corner 1`] = `
             "color": "#ffffff",
           },
         ]
-      }
-      theme={
-        Object {
-          "colors": Object {
-            "accent": "#03dac4",
-            "backdrop": "rgba(0, 0, 0, 0.5)",
-            "background": "#f6f6f6",
-            "disabled": "rgba(0, 0, 0, 0.26)",
-            "error": "#B00020",
-            "placeholder": "rgba(0, 0, 0, 0.54)",
-            "primary": "#6200ee",
-            "surface": "#ffffff",
-            "text": "#000000",
-          },
-          "dark": false,
-          "fonts": Object {
-            "light": "HelveticaNeue-Light",
-            "medium": "HelveticaNeue-Medium",
-            "regular": "Helvetica Neue",
-            "thin": "HelveticaNeue-Thin",
-          },
-          "roundness": 4,
-        }
       }
     >
       3
@@ -76,25 +46,18 @@ exports[`renders badge in bottom right corner 1`] = `
   </View>
   <View
     style={
-      Array [
-        Object {
-          "position": "absolute",
-        },
-        Object {
-          "backgroundColor": "#f44336",
-          "borderRadius": 6,
-          "bottom": -6,
-          "paddingHorizontal": 6,
-          "right": -6,
-        },
-        undefined,
-      ]
+      Object {
+        "backgroundColor": "#6200ee",
+        "borderRadius": 6,
+        "bottom": -6,
+        "opacity": 1,
+        "paddingHorizontal": 6,
+        "position": "absolute",
+        "right": -6,
+      }
     }
   >
     <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
       style={
         Array [
           Object {
@@ -107,29 +70,6 @@ exports[`renders badge in bottom right corner 1`] = `
             "color": "#ffffff",
           },
         ]
-      }
-      theme={
-        Object {
-          "colors": Object {
-            "accent": "#03dac4",
-            "backdrop": "rgba(0, 0, 0, 0.5)",
-            "background": "#f6f6f6",
-            "disabled": "rgba(0, 0, 0, 0.26)",
-            "error": "#B00020",
-            "placeholder": "rgba(0, 0, 0, 0.54)",
-            "primary": "#6200ee",
-            "surface": "#ffffff",
-            "text": "#000000",
-          },
-          "dark": false,
-          "fonts": Object {
-            "light": "HelveticaNeue-Light",
-            "medium": "HelveticaNeue-Medium",
-            "regular": "Helvetica Neue",
-            "thin": "HelveticaNeue-Thin",
-          },
-          "roundness": 4,
-        }
       }
     >
       3
@@ -145,25 +85,18 @@ exports[`renders badge in different color 1`] = `
   </View>
   <View
     style={
-      Array [
-        Object {
-          "position": "absolute",
-        },
-        Object {
-          "backgroundColor": "#e91e63",
-          "borderRadius": 6,
-          "paddingHorizontal": 6,
-          "right": -6,
-          "top": -6,
-        },
-        undefined,
-      ]
+      Object {
+        "backgroundColor": "#e91e63",
+        "borderRadius": 6,
+        "opacity": 1,
+        "paddingHorizontal": 6,
+        "position": "absolute",
+        "right": -6,
+        "top": -6,
+      }
     }
   >
     <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
       style={
         Array [
           Object {
@@ -177,30 +110,9 @@ exports[`renders badge in different color 1`] = `
           },
         ]
       }
-      theme={
-        Object {
-          "colors": Object {
-            "accent": "#03dac4",
-            "backdrop": "rgba(0, 0, 0, 0.5)",
-            "background": "#f6f6f6",
-            "disabled": "rgba(0, 0, 0, 0.26)",
-            "error": "#B00020",
-            "placeholder": "rgba(0, 0, 0, 0.54)",
-            "primary": "#6200ee",
-            "surface": "#ffffff",
-            "text": "#000000",
-          },
-          "dark": false,
-          "fonts": Object {
-            "light": "HelveticaNeue-Light",
-            "medium": "HelveticaNeue-Medium",
-            "regular": "Helvetica Neue",
-            "thin": "HelveticaNeue-Thin",
-          },
-          "roundness": 4,
-        }
-      }
-    />
+    >
+      3
+    </Text>
   </View>
 </View>
 `;
@@ -212,25 +124,18 @@ exports[`renders badge in different size 1`] = `
   </View>
   <View
     style={
-      Array [
-        Object {
-          "position": "absolute",
-        },
-        Object {
-          "backgroundColor": "#f44336",
-          "borderRadius": 6,
-          "paddingHorizontal": 6,
-          "right": -6,
-          "top": -6,
-        },
-        undefined,
-      ]
+      Object {
+        "backgroundColor": "#6200ee",
+        "borderRadius": 6,
+        "opacity": 1,
+        "paddingHorizontal": 6,
+        "position": "absolute",
+        "right": -6,
+        "top": -6,
+      }
     }
   >
     <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
       style={
         Array [
           Object {
@@ -243,29 +148,6 @@ exports[`renders badge in different size 1`] = `
             "color": "#ffffff",
           },
         ]
-      }
-      theme={
-        Object {
-          "colors": Object {
-            "accent": "#03dac4",
-            "backdrop": "rgba(0, 0, 0, 0.5)",
-            "background": "#f6f6f6",
-            "disabled": "rgba(0, 0, 0, 0.26)",
-            "error": "#B00020",
-            "placeholder": "rgba(0, 0, 0, 0.54)",
-            "primary": "#6200ee",
-            "surface": "#ffffff",
-            "text": "#000000",
-          },
-          "dark": false,
-          "fonts": Object {
-            "light": "HelveticaNeue-Light",
-            "medium": "HelveticaNeue-Medium",
-            "regular": "Helvetica Neue",
-            "thin": "HelveticaNeue-Thin",
-          },
-          "roundness": 4,
-        }
       }
     >
       3
@@ -281,25 +163,18 @@ exports[`renders badge in top left corner 1`] = `
   </View>
   <View
     style={
-      Array [
-        Object {
-          "position": "absolute",
-        },
-        Object {
-          "backgroundColor": "#f44336",
-          "borderRadius": 6,
-          "left": -6,
-          "paddingHorizontal": 6,
-          "top": -6,
-        },
-        undefined,
-      ]
+      Object {
+        "backgroundColor": "#6200ee",
+        "borderRadius": 6,
+        "left": -6,
+        "opacity": 1,
+        "paddingHorizontal": 6,
+        "position": "absolute",
+        "top": -6,
+      }
     }
   >
     <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
       style={
         Array [
           Object {
@@ -312,29 +187,6 @@ exports[`renders badge in top left corner 1`] = `
             "color": "#ffffff",
           },
         ]
-      }
-      theme={
-        Object {
-          "colors": Object {
-            "accent": "#03dac4",
-            "backdrop": "rgba(0, 0, 0, 0.5)",
-            "background": "#f6f6f6",
-            "disabled": "rgba(0, 0, 0, 0.26)",
-            "error": "#B00020",
-            "placeholder": "rgba(0, 0, 0, 0.54)",
-            "primary": "#6200ee",
-            "surface": "#ffffff",
-            "text": "#000000",
-          },
-          "dark": false,
-          "fonts": Object {
-            "light": "HelveticaNeue-Light",
-            "medium": "HelveticaNeue-Medium",
-            "regular": "Helvetica Neue",
-            "thin": "HelveticaNeue-Thin",
-          },
-          "roundness": 4,
-        }
       }
     >
       3
@@ -343,32 +195,25 @@ exports[`renders badge in top left corner 1`] = `
 </View>
 `;
 
-exports[`renders badge in top right corner by default 1`] = `
+exports[`renders badge in top right corner 1`] = `
 <View>
   <View>
     Text
   </View>
   <View
     style={
-      Array [
-        Object {
-          "position": "absolute",
-        },
-        Object {
-          "backgroundColor": "#f44336",
-          "borderRadius": 6,
-          "paddingHorizontal": 6,
-          "right": -6,
-          "top": -6,
-        },
-        undefined,
-      ]
+      Object {
+        "backgroundColor": "#6200ee",
+        "borderRadius": 6,
+        "opacity": 1,
+        "paddingHorizontal": 6,
+        "position": "absolute",
+        "right": -6,
+        "top": -6,
+      }
     }
   >
     <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
       style={
         Array [
           Object {
@@ -382,28 +227,81 @@ exports[`renders badge in top right corner by default 1`] = `
           },
         ]
       }
-      theme={
-        Object {
-          "colors": Object {
-            "accent": "#03dac4",
-            "backdrop": "rgba(0, 0, 0, 0.5)",
-            "background": "#f6f6f6",
-            "disabled": "rgba(0, 0, 0, 0.26)",
-            "error": "#B00020",
-            "placeholder": "rgba(0, 0, 0, 0.54)",
-            "primary": "#6200ee",
-            "surface": "#ffffff",
-            "text": "#000000",
+    >
+      3
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`renders no badge 1`] = `
+<View>
+  <View>
+    Text
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#6200ee",
+        "borderRadius": 6,
+        "opacity": 0,
+        "paddingHorizontal": 6,
+        "position": "absolute",
+        "right": -6,
+        "top": -6,
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontFamily": "Helvetica Neue",
+            "textAlign": "left",
+            "writingDirection": "ltr",
           },
-          "dark": false,
-          "fonts": Object {
-            "light": "HelveticaNeue-Light",
-            "medium": "HelveticaNeue-Medium",
-            "regular": "Helvetica Neue",
-            "thin": "HelveticaNeue-Thin",
+          Object {
+            "color": "#ffffff",
           },
-          "roundness": 4,
-        }
+        ]
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`renders numeric badge 1`] = `
+<View>
+  <View>
+    Text
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#6200ee",
+        "borderRadius": 6,
+        "opacity": 1,
+        "paddingHorizontal": 6,
+        "position": "absolute",
+        "right": -6,
+        "top": -6,
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontFamily": "Helvetica Neue",
+            "textAlign": "left",
+            "writingDirection": "ltr",
+          },
+          Object {
+            "color": "#ffffff",
+          },
+        ]
       }
     >
       3

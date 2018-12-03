@@ -17,7 +17,7 @@ import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 import type { IconSource } from '../Icon';
 
-type Props = {
+type Props = {|
   /**
    * Action items to display in the form of a speed dial.
    * An action item should contain the following properties:
@@ -71,7 +71,7 @@ type Props = {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 type State = {
   backdrop: Animated.Value,
@@ -206,7 +206,6 @@ class FABGroup extends React.Component<Props, State> {
     const backdropOpacity = open
       ? this.state.backdrop.interpolate({
           inputRange: [0, 0.5, 1],
-          // $FlowFixMe
           outputRange: [0, 1, 1],
         })
       : this.state.backdrop;
@@ -217,7 +216,6 @@ class FABGroup extends React.Component<Props, State> {
         open
           ? opacity.interpolate({
               inputRange: [0, 1],
-              // $FlowFixMe
               outputRange: [0.8, 1],
             })
           : 1
@@ -241,7 +239,7 @@ class FABGroup extends React.Component<Props, State> {
         <View pointerEvents={open ? 'box-none' : 'none'}>
           {actions.map((it, i) => (
             <Animated.View
-                key={i} //eslint-disable-line
+              key={i} // eslint-disable-line react/no-array-index-key
               style={[
                 {
                   opacity: opacities[i],

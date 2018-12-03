@@ -42,8 +42,10 @@ export default class Home extends React.Component<{}> {
           </a>
         </div>
         <div {...styles(gallery)}>
-          {// eslint-disable-next-line react/no-array-index-key
-          screenshots.map((image, i) => <img key={i} src={image} alt="" />)}
+          {screenshots.map((image, i) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <img key={i} src={image} alt="" />
+          ))}
         </div>
       </div>
     );

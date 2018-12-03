@@ -18,7 +18,7 @@ import { black, white } from '../styles/colors';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
-type Props = {
+type Props = React.ElementConfig<typeof Surface> & {|
   /**
    * Mode of the chip.
    * - `flat` - flat chip without outline.
@@ -62,7 +62,7 @@ type Props = {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 type State = {
   elevation: Animated.Value,
@@ -132,6 +132,7 @@ class Chip extends React.Component<Props, State> {
       onClose,
       style,
       theme,
+      ...rest
     } = this.props;
     const { dark, colors } = theme;
 
@@ -141,8 +142,7 @@ class Chip extends React.Component<Props, State> {
         : dark
           ? '#383838'
           : '#ebebeb',
-    } =
-      StyleSheet.flatten(style) || {};
+    } = StyleSheet.flatten(style) || {};
 
     const borderColor =
       mode === 'outlined'
@@ -194,6 +194,7 @@ class Chip extends React.Component<Props, State> {
           },
           style,
         ]}
+        {...rest}
       >
         <TouchableRipple
           borderless
@@ -249,7 +250,7 @@ class Chip extends React.Component<Props, State> {
                 },
               ]}
             >
-              {children}
+              {(children: any)}
             </Text>
             {onClose ? (
               <TouchableWithoutFeedback

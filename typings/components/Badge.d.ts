@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ThemeShape } from '../types';
 
 export interface BadgeProps {
-    value: string;
+  value?: string|number;
   verticalPosition?: 'top' | 'bottom';
   horizontalPosition?: 'left' | 'right';
   size?: number;

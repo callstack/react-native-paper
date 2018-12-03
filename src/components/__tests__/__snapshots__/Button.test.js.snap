@@ -22,8 +22,7 @@ exports[`renders button with color 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -48,9 +47,6 @@ exports[`renders button with color 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -77,29 +73,6 @@ exports[`renders button with color 1`] = `
               },
             ],
           ]
-        }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
         }
       >
         CUSTOM BUTTON
@@ -131,8 +104,7 @@ exports[`renders button with icon 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -167,9 +139,7 @@ exports[`renders button with icon 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
@@ -195,6 +165,7 @@ exports[`renders button with icon 1`] = `
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
@@ -202,9 +173,6 @@ exports[`renders button with icon 1`] = `
         </Text>
       </View>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -231,29 +199,6 @@ exports[`renders button with icon 1`] = `
               },
             ],
           ]
-        }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
         }
       >
         ICON BUTTON
@@ -285,8 +230,7 @@ exports[`renders contained contained with mode 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -311,9 +255,6 @@ exports[`renders contained contained with mode 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -341,29 +282,6 @@ exports[`renders contained contained with mode 1`] = `
             ],
           ]
         }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
-        }
       >
         CONTAINED BUTTON
       </Text>
@@ -387,10 +305,9 @@ exports[`renders disabled button 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits={
+    accessibilityRole="button"
+    accessibilityStates={
       Array [
-        "button",
         "disabled",
       ]
     }
@@ -418,9 +335,6 @@ exports[`renders disabled button 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -447,29 +361,6 @@ exports[`renders disabled button 1`] = `
               },
             ],
           ]
-        }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
         }
       >
         DISABLED BUTTON
@@ -501,8 +392,7 @@ exports[`renders loading button 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -540,9 +430,6 @@ exports[`renders loading button 1`] = `
         }
       />
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -569,29 +456,6 @@ exports[`renders loading button 1`] = `
               },
             ],
           ]
-        }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
         }
       >
         LOADING BUTTON
@@ -623,8 +487,7 @@ exports[`renders outlined button with mode 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -649,9 +512,6 @@ exports[`renders outlined button with mode 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -678,29 +538,6 @@ exports[`renders outlined button with mode 1`] = `
               },
             ],
           ]
-        }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
         }
       >
         OUTLINED BUTTON
@@ -732,8 +569,7 @@ exports[`renders text button by default 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -758,9 +594,6 @@ exports[`renders text button by default 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -787,29 +620,6 @@ exports[`renders text button by default 1`] = `
               },
             ],
           ]
-        }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
         }
       >
         TEXT BUTTON
@@ -841,8 +651,7 @@ exports[`renders text button with mode 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -867,9 +676,6 @@ exports[`renders text button with mode 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -896,29 +702,6 @@ exports[`renders text button with mode 1`] = `
               },
             ],
           ]
-        }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
         }
       >
         TEXT BUTTON

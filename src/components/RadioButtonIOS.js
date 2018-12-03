@@ -7,9 +7,9 @@ import { RadioButtonContext } from './RadioButtonGroup';
 import Icon from './Icon';
 import TouchableRipple from './TouchableRipple';
 import { withTheme } from '../core/theming';
-import type { Theme } from '../types';
+import type { Theme, $RemoveChildren } from '../types';
 
-type Props = {
+type Props = $RemoveChildren<typeof TouchableRipple> & {|
   /**
    * Value of the radio button
    */
@@ -34,7 +34,7 @@ type Props = {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 /**
  * Radio buttons allow the selection a single option from a set.

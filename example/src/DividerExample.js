@@ -2,8 +2,7 @@
 
 import * as React from 'react';
 import { FlatList } from 'react-native';
-import { Divider, List, withTheme } from 'react-native-paper';
-import type { Theme } from 'react-native-paper/types';
+import { Divider, List, withTheme, type Theme } from 'react-native-paper';
 
 type Props = {
   theme: Theme,

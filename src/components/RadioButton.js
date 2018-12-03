@@ -8,7 +8,7 @@ import RadioButtonIOS from './RadioButtonIOS';
 import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 
-type Props = {
+type Props = {|
   /**
    * Value of the radio button
    */
@@ -37,7 +37,7 @@ type Props = {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 /**
  * Radio buttons allow the selection a single option from a set.

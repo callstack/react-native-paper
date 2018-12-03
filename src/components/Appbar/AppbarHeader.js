@@ -7,7 +7,7 @@ import Appbar, { DEFAULT_APPBAR_HEIGHT } from './Appbar';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
-type Props = {
+type Props = React.ElementConfig<typeof Appbar> & {|
   /**
    * Whether the background color is a dark color. A dark header will render light text and vice-versa.
    */
@@ -28,15 +28,15 @@ type Props = {
    */
   theme: Theme,
   style?: any,
-};
+|};
 
 const DEFAULT_STATUSBAR_HEIGHT_EXPO =
   global.__expo && global.__expo.Constants
     ? global.__expo.Constants.statusBarHeight
-    : undefined;
+    : 0;
 const DEFAULT_STATUSBAR_HEIGHT = Platform.select({
   android: DEFAULT_STATUSBAR_HEIGHT_EXPO,
-  ios: Platform.Version < 11 ? DEFAULT_STATUSBAR_HEIGHT_EXPO : undefined,
+  ios: Platform.Version < 11 ? DEFAULT_STATUSBAR_HEIGHT_EXPO : 0,
 });
 
 /**
@@ -87,15 +87,10 @@ const DEFAULT_STATUSBAR_HEIGHT = Platform.select({
 class AppbarHeader extends React.Component<Props> {
   static displayName = 'Appbar.Header';
 
-  static defaultProps = {
-    // TODO: handle orientation changes
-    statusBarHeight: DEFAULT_STATUSBAR_HEIGHT,
-  };
-
   render() {
     const {
       // Don't use default props since we check it to know whether we should use SafeAreaView
-      statusBarHeight = 0,
+      statusBarHeight = DEFAULT_STATUSBAR_HEIGHT,
       style,
       ...rest
     } = this.props;
@@ -106,8 +101,7 @@ class AppbarHeader extends React.Component<Props> {
       elevation = 4,
       backgroundColor = colors.primary,
       ...restStyle
-    } =
-      StyleSheet.flatten(style) || {};
+    } = StyleSheet.flatten(style) || {};
 
     // Let the user override the behaviour
     const Wrapper =
@@ -115,6 +109,7 @@ class AppbarHeader extends React.Component<Props> {
 
     return (
       <Wrapper style={[{ backgroundColor, elevation }]}>
+        {/* $FlowFixMe: There seems to be conflict between Appbar's props and Header's props */}
         <Appbar
           style={[
             { height, backgroundColor, marginTop: statusBarHeight },

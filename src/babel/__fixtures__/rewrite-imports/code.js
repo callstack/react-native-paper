@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+
 import { Text } from 'react-native';
 import {
   Provider as PaperProvider,

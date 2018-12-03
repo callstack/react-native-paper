@@ -91,12 +91,8 @@ export default class extends React.Component<Props, State> {
             </ScrollView>
           </Dialog.ScrollArea>
           <Dialog.Actions>
-            <Button primary onPress={close}>
-              Cancel
-            </Button>
-            <Button primary onPress={close}>
-              Ok
-            </Button>
+            <Button onPress={close}>Cancel</Button>
+            <Button onPress={close}>Ok</Button>
           </Dialog.Actions>
         </Dialog>
       </Portal>

@@ -5,7 +5,7 @@ import { Text as NativeText, I18nManager } from 'react-native';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
-type Props = {
+type Props = React.ElementConfig<typeof NativeText> & {
   style?: any,
   /**
    * @optional
@@ -29,12 +29,12 @@ class Text extends React.Component<Props> {
   }
 
   render() {
-    const { style, theme } = this.props;
+    const { style, theme, ...rest } = this.props;
     const writingDirection = I18nManager.isRTL ? 'rtl' : 'ltr';
 
     return (
       <NativeText
-        {...this.props}
+        {...rest}
         ref={c => {
           this._root = c;
         }}

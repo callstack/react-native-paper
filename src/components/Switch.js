@@ -1,13 +1,17 @@
 /* @flow */
-import * as React from 'react';
 
+import * as React from 'react';
 import { grey400, grey800, grey50, white, black } from '../styles/colors';
-import { Switch as NativeSwitch, Platform } from 'react-native';
+import { Switch as NativeSwitch, Platform, NativeModules } from 'react-native';
 import setColor from 'color';
 import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 
-type Props = {
+const version = NativeModules.PlatformConstants
+  ? NativeModules.PlatformConstants.reactNativeVersion
+  : undefined;
+
+type Props = React.ElementConfig<typeof NativeSwitch> & {|
   /**
    * Disable toggling the switch.
    */
@@ -29,7 +33,7 @@ type Props = {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 /**
  * Switch is a visual toggle between two mutually exclusive states — on and off.
@@ -85,12 +89,12 @@ class Switch extends React.Component<Props> {
       onValueChange,
       color,
       theme,
-      ...props
+      ...rest
     } = this.props;
 
     const checkedColor = color || theme.colors.accent;
 
-    const trackTintColor =
+    const onTintColor =
       Platform.OS === 'ios'
         ? checkedColor
         : disabled
@@ -121,14 +125,26 @@ class Switch extends React.Component<Props> {
               ? grey400
               : grey50;
 
+    const props =
+      version && version.major === 0 && version.minor <= 56
+        ? ({
+            onTintColor,
+            thumbTintColor,
+          }: any)
+        : {
+            thumbColor: thumbTintColor,
+            trackColor: {
+              true: onTintColor,
+            },
+          };
+
     return (
       <NativeSwitch
-        {...props}
         value={value}
         disabled={disabled}
-        onTintColor={trackTintColor}
-        thumbTintColor={thumbTintColor}
         onValueChange={disabled ? undefined : onValueChange}
+        {...props}
+        {...rest}
       />
     );
   }

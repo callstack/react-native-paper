@@ -17,8 +17,7 @@ exports[`renders DrawerItem with icon 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -44,9 +43,7 @@ exports[`renders DrawerItem with icon 1`] = `
     >
       <Text
         accessibilityElementsHidden={true}
-        accessible={true}
         allowFontScaling={false}
-        ellipsizeMode="tail"
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         style={
@@ -72,15 +69,13 @@ exports[`renders DrawerItem with icon 1`] = `
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
+            Object {},
           ]
         }
       >
         
       </Text>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -101,29 +96,6 @@ exports[`renders DrawerItem with icon 1`] = `
               },
             ],
           ]
-        }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
         }
       >
         Example item
@@ -150,10 +122,9 @@ exports[`renders active DrawerItem 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits={
+    accessibilityRole="button"
+    accessibilityStates={
       Array [
-        "button",
         "selected",
       ]
     }
@@ -182,9 +153,7 @@ exports[`renders active DrawerItem 1`] = `
     >
       <Text
         accessibilityElementsHidden={true}
-        accessible={true}
         allowFontScaling={false}
-        ellipsizeMode="tail"
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         style={
@@ -210,15 +179,13 @@ exports[`renders active DrawerItem 1`] = `
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
+            Object {},
           ]
         }
       >
         
       </Text>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -239,29 +206,6 @@ exports[`renders active DrawerItem 1`] = `
               },
             ],
           ]
-        }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
         }
       >
         Example item
@@ -288,8 +232,7 @@ exports[`renders basic DrawerItem 1`] = `
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -314,9 +257,6 @@ exports[`renders basic DrawerItem 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         numberOfLines={1}
         style={
           Array [
@@ -337,29 +277,6 @@ exports[`renders basic DrawerItem 1`] = `
               },
             ],
           ]
-        }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
         }
       >
         Example item

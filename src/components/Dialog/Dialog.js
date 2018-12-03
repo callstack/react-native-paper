@@ -11,7 +11,7 @@ import DialogScrollArea from './DialogScrollArea';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
-type Props = {
+type Props = {|
   /**
    * Determines whether clicking outside the dialog dismiss it.
    */
@@ -33,7 +33,7 @@ type Props = {
    * @optional
    */
   theme: Theme,
-};
+|};
 
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
