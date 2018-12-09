@@ -13,7 +13,7 @@ import type { Theme, $RemoveChildren } from '../../types';
 
 type Props = $RemoveChildren<typeof View> & {|
   /**
-   * CUstom color for the text.
+   * Custom color for the text.
    */
   color?: string,
   /**
