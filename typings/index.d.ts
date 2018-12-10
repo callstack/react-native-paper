@@ -26,6 +26,7 @@ export * from './components/Snackbar';
 export * from './components/Surface';
 export * from './components/Switch';
 export * from './components/TextInput';
+export * from './components/ToggleButton';
 export * from './components/TouchableRipple';
 export * from './components/Typography';
 export { Colors, List, Drawer };

@@ -26,6 +26,7 @@ import SurfaceExample from './SurfaceExample';
 import SwitchExample from './SwitchExample';
 import TextExample from './TextExample';
 import TextInputExample from './TextInputExample';
+import ToggleButtonExample from './ToggleButtonExample';
 import TouchableRippleExample from './TouchableRippleExample';
 
 type Props = {
@@ -57,6 +58,7 @@ export const examples = {
   switch: SwitchExample,
   text: TextExample,
   textInput: TextInputExample,
+  toggleButton: ToggleButtonExample,
   touchableRipple: TouchableRippleExample,
 };
 
