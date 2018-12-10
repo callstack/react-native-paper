@@ -29,7 +29,7 @@ it('renders data table title with sort icon', () => {
 
 it('renders right aligned data table title', () => {
   const tree = renderer
-    .create(<DataTable.Title right>Calories</DataTable.Title>)
+    .create(<DataTable.Title numeric>Calories</DataTable.Title>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -57,7 +57,7 @@ it('renders data table cell', () => {
 
 it('renders right aligned data table cell', () => {
   const tree = renderer
-    .create(<DataTable.Cell right>356</DataTable.Cell>)
+    .create(<DataTable.Cell numeric>356</DataTable.Cell>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

@@ -19,9 +19,9 @@ type Props = React.ElementConfig<typeof TouchableWithoutFeedback> & {|
    */
   children: React.Node,
   /**
-   * Align the text to the right.
+   * Align the text to the right. Generally monetary or number fields are aligned to right.
    */
-  right?: boolean,
+  numeric?: boolean,
   /**
    * Direction of sorting. An arrow indicating the direction is displayed when this is given.
    */
@@ -64,7 +64,7 @@ class DataTableTitle extends React.Component<Props, State> {
 
   render() {
     const {
-      right,
+      numeric,
       children,
       onPress,
       sortDirection,
@@ -91,7 +91,7 @@ class DataTableTitle extends React.Component<Props, State> {
 
     return (
       <TouchableWithoutFeedback onPress={onPress} {...rest}>
-        <View style={[styles.container, right && styles.right, style]}>
+        <View style={[styles.container, numeric && styles.right, style]}>
           {icon}
 
           <Text

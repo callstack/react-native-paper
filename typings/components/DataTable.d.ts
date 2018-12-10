@@ -9,7 +9,7 @@ export interface DataTableHeaderProps extends ViewProps {
 }
 
 export interface DataTableTitleProps extends TouchableRippleProps {
-  right?: boolean;
+  numeric?: boolean;
   sortDirection?: 'ascending' | 'descending';
   theme?: ThemeShape;
 }
@@ -19,7 +19,7 @@ export interface DataTableRowProps extends TouchableRippleProps {
 }
 
 export interface DataTableCellProps extends TouchableRippleProps {
-  right?: boolean;
+  numeric?: boolean;
   style?: StyleProp<ViewStyle>;
 }
 

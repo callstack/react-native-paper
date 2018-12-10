@@ -103,8 +103,8 @@ class DataTableExample extends React.Component<Props, State> {
               >
                 Dessert
               </DataTable.Title>
-              <DataTable.Title right>Calories</DataTable.Title>
-              <DataTable.Title right>Fat (g)</DataTable.Title>
+              <DataTable.Title numeric>Calories</DataTable.Title>
+              <DataTable.Title numeric>Fat (g)</DataTable.Title>
             </DataTable.Header>
 
             {items.slice(from, to).map(item => (
@@ -112,8 +112,8 @@ class DataTableExample extends React.Component<Props, State> {
                 <DataTable.Cell style={styles.first}>
                   {item.name}
                 </DataTable.Cell>
-                <DataTable.Cell right>{item.calories}</DataTable.Cell>
-                <DataTable.Cell right>{item.fat}</DataTable.Cell>
+                <DataTable.Cell numeric>{item.calories}</DataTable.Cell>
+                <DataTable.Cell numeric>{item.fat}</DataTable.Cell>
               </DataTable.Row>
             ))}
 
