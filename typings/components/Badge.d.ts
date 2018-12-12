@@ -6,7 +6,6 @@ export interface BadgeProps {
   verticalPosition?: 'top' | 'bottom';
   horizontalPosition?: 'left' | 'right';
   size?: number;
-  color?: string;
   children: React.ReactNode;
   style?: any;
   theme?: ThemeShape;

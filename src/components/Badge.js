@@ -26,10 +26,6 @@ type Props = {|
    */
   size?: number,
   /**
-   * Custom background color.
-   */
-  color?: string,
-  /**
    * The content to which the `Badge` is attached.
    */
   children: React.Node,
@@ -61,7 +57,7 @@ type State = {
  * import { Badge, Button } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Badge value={3} color="#FF0000">
+ *   <Badge value={3}>
  *     <Button mode="outlined" onPress={() => {}}>
  *       Display notifications
  *     </Button>
@@ -95,7 +91,6 @@ class Badge extends React.Component<Props, State> {
 
   render() {
     const {
-      color: badgeColor,
       children,
       horizontalPosition,
       size,
@@ -106,7 +101,8 @@ class Badge extends React.Component<Props, State> {
     } = this.props;
     const { opacity } = this.state;
 
-    const backgroundColor = badgeColor || theme.colors.badge;
+    const { backgroundColor = theme.colors.badge, ...restStyle } =
+      StyleSheet.flatten(style) || {};
     const textColor = color(backgroundColor).dark() ? white : black;
 
     // $FlowFixMe
@@ -133,7 +129,7 @@ class Badge extends React.Component<Props, State> {
               // $FlowFixMe
               [horizontalPosition]: offset,
             },
-            style,
+            restStyle,
           ]}
         >
           <Text style={{ color: textColor }}>{value}</Text>

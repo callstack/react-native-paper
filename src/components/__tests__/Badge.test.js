@@ -3,7 +3,7 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
 import Badge from '../Badge';
-import { pink500 } from '../../styles/colors';
+import { red500 } from '../../styles/colors';
 
 // Make sure any animation finishes before checking the snapshot results
 jest.mock('Animated', () => {
@@ -97,7 +97,7 @@ it('renders badge in top left corner', () => {
 it('renders badge in different color', () => {
   const tree = renderer
     .create(
-      <Badge value="3" color={pink500}>
+      <Badge value="3" style={{ backgroundColor: red500 }}>
         Text
       </Badge>
     )

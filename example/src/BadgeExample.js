@@ -102,7 +102,7 @@ class BadgeExample extends React.Component<Props, State> {
 
         <List.Section title="Drawer Items">
           <View style={styles.row}>
-            <Badge value={value}>
+            <Badge value={value} style={{ backgroundColor: '#FF0000' }}>
               <Drawer.Item label="First Item" />
             </Badge>
           </View>

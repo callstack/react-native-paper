@@ -1,7 +1,7 @@
 /* @flow */
 
 import color from 'color';
-import { black, white } from './colors';
+import { black, white, pinkA200 } from './colors';
 import fonts from './fonts';
 
 export default {
@@ -26,7 +26,7 @@ export default {
       .alpha(0.5)
       .rgb()
       .string(),
-    badge: '#6200ee',
+    badge: pinkA200,
   },
   fonts,
 };

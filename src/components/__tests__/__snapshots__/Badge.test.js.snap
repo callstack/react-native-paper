@@ -8,7 +8,7 @@ exports[`renders badge in bottom left corner 1`] = `
   <View
     style={
       Object {
-        "backgroundColor": "#6200ee",
+        "backgroundColor": "#ff4081",
         "borderRadius": 6,
         "bottom": -6,
         "left": -6,
@@ -28,7 +28,7 @@ exports[`renders badge in bottom left corner 1`] = `
             "writingDirection": "ltr",
           },
           Object {
-            "color": "#ffffff",
+            "color": "#000000",
           },
         ]
       }
@@ -47,7 +47,7 @@ exports[`renders badge in bottom right corner 1`] = `
   <View
     style={
       Object {
-        "backgroundColor": "#6200ee",
+        "backgroundColor": "#ff4081",
         "borderRadius": 6,
         "bottom": -6,
         "opacity": 1,
@@ -67,7 +67,7 @@ exports[`renders badge in bottom right corner 1`] = `
             "writingDirection": "ltr",
           },
           Object {
-            "color": "#ffffff",
+            "color": "#000000",
           },
         ]
       }
@@ -86,7 +86,7 @@ exports[`renders badge in different color 1`] = `
   <View
     style={
       Object {
-        "backgroundColor": "#e91e63",
+        "backgroundColor": "#f44336",
         "borderRadius": 6,
         "opacity": 1,
         "paddingHorizontal": 6,
@@ -125,7 +125,7 @@ exports[`renders badge in different size 1`] = `
   <View
     style={
       Object {
-        "backgroundColor": "#6200ee",
+        "backgroundColor": "#ff4081",
         "borderRadius": 6,
         "opacity": 1,
         "paddingHorizontal": 6,
@@ -145,7 +145,7 @@ exports[`renders badge in different size 1`] = `
             "writingDirection": "ltr",
           },
           Object {
-            "color": "#ffffff",
+            "color": "#000000",
           },
         ]
       }
@@ -164,7 +164,7 @@ exports[`renders badge in top left corner 1`] = `
   <View
     style={
       Object {
-        "backgroundColor": "#6200ee",
+        "backgroundColor": "#ff4081",
         "borderRadius": 6,
         "left": -6,
         "opacity": 1,
@@ -184,7 +184,7 @@ exports[`renders badge in top left corner 1`] = `
             "writingDirection": "ltr",
           },
           Object {
-            "color": "#ffffff",
+            "color": "#000000",
           },
         ]
       }
@@ -203,7 +203,7 @@ exports[`renders badge in top right corner 1`] = `
   <View
     style={
       Object {
-        "backgroundColor": "#6200ee",
+        "backgroundColor": "#ff4081",
         "borderRadius": 6,
         "opacity": 1,
         "paddingHorizontal": 6,
@@ -223,7 +223,7 @@ exports[`renders badge in top right corner 1`] = `
             "writingDirection": "ltr",
           },
           Object {
-            "color": "#ffffff",
+            "color": "#000000",
           },
         ]
       }
@@ -242,7 +242,7 @@ exports[`renders no badge 1`] = `
   <View
     style={
       Object {
-        "backgroundColor": "#6200ee",
+        "backgroundColor": "#ff4081",
         "borderRadius": 6,
         "opacity": 0,
         "paddingHorizontal": 6,
@@ -262,7 +262,7 @@ exports[`renders no badge 1`] = `
             "writingDirection": "ltr",
           },
           Object {
-            "color": "#ffffff",
+            "color": "#000000",
           },
         ]
       }
@@ -279,7 +279,7 @@ exports[`renders numeric badge 1`] = `
   <View
     style={
       Object {
-        "backgroundColor": "#6200ee",
+        "backgroundColor": "#ff4081",
         "borderRadius": 6,
         "opacity": 1,
         "paddingHorizontal": 6,
@@ -299,7 +299,7 @@ exports[`renders numeric badge 1`] = `
             "writingDirection": "ltr",
           },
           Object {
-            "color": "#ffffff",
+            "color": "#000000",
           },
         ]
       }
