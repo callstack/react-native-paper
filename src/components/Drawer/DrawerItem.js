@@ -1,3 +1,4 @@
+yarn exec v1.12.3
 /* @flow */
 
 import color from 'color';
@@ -57,7 +58,16 @@ class DrawerItem extends React.Component<Props> {
   static displayName = 'Drawer.Item';
 
   render() {
-    const { icon, label, active, theme, style, onPress, numberOfLines, ...rest } = this.props;
+    const {
+      icon,
+      label,
+      active,
+      theme,
+      style,
+      onPress,
+      numberOfLines,
+      ...rest
+    } = this.props;
     const { colors, roundness } = theme;
     const backgroundColor = active
       ? color(colors.primary)
@@ -133,3 +143,4 @@ const styles = StyleSheet.create({
 });
 
 export default withTheme(DrawerItem);
+Done in 0.28s.
