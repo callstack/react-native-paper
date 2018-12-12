@@ -1,4 +1,3 @@
-yarn exec v1.12.3
 /* @flow */
 
 import color from 'color';
