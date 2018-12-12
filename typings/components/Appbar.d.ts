@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleProp, TextStyle, ViewStyle, ViewProps, TouchableNativeFeedbackProps } from 'react-native';
+import { StyleProp, TextStyle, ViewProps, ViewStyle } from 'react-native';
 import { IconSource, ThemeShape } from '../types';
 import { TouchableRipplePropsWithoutChildren } from './TouchableRipple';
 
@@ -11,6 +11,8 @@ export interface AppbarContentProps {
   subtitleStyle?: StyleProp<TextStyle>;
   style?: StyleProp<ViewStyle>;
   theme?: ThemeShape;
+  allowTitleFontScaling?: boolean;
+  allowSubtitleFontScaling?: boolean;
 }
 
 export interface AppbarActionProps extends TouchableRipplePropsWithoutChildren {
