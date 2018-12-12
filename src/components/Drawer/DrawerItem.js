@@ -142,4 +142,3 @@ const styles = StyleSheet.create({
 });
 
 export default withTheme(DrawerItem);
-Done in 0.28s.
