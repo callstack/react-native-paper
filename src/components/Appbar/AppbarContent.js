@@ -95,7 +95,7 @@ class AppbarContent extends React.Component<Props> {
           <Text
             style={[styles.subtitle, { color: subtitleColor }, subtitleStyle]}
             numberOfLines={1}
-            allowSubtitleFontScaling={allowSubtitleFontScaling}
+            allowFontScaling={allowSubtitleFontScaling}
           >
             {subtitle}
           </Text>
