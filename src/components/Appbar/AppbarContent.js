@@ -116,7 +116,7 @@ class AppbarContent extends React.Component<Props> {
             numberOfLines={1}
             accessibilityTraits="header"
             accessibilityRole="header"
-            allowSubtitleFontScaling={allowSubtitleFontScaling}
+            allowFontScaling={allowSubtitleFontScaling}
           >
             {title}
           </Text>
