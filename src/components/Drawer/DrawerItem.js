@@ -24,6 +24,10 @@ type Props = {
    */
   active?: boolean,
   /**
+   * Number of lines to display for text, defaults to 1.
+   */
+  numberOfLines?: number,
+  /**
    * Function to execute on press.
    */
   onPress?: () => mixed,
@@ -53,7 +57,7 @@ class DrawerItem extends React.Component<Props> {
   static displayName = 'Drawer.Item';
 
   render() {
-    const { icon, label, active, theme, style, onPress, ...rest } = this.props;
+    const { icon, label, active, theme, style, onPress, numberOfLines, ...rest } = this.props;
     const { colors, roundness } = theme;
     const backgroundColor = active
       ? color(colors.primary)
@@ -69,7 +73,7 @@ class DrawerItem extends React.Component<Props> {
           .string();
     const fontFamily = theme.fonts.medium;
     const labelMargin = icon ? 32 : 0;
-
+    const numLines = typeof(numberOfLines) === "undefined" ? 1 : numberOfLines;
     return (
       <View
         {...rest}
@@ -94,7 +98,7 @@ class DrawerItem extends React.Component<Props> {
               <Icon source={icon} size={24} color={contentColor} />
             ) : null}
             <Text
-              numberOfLines={1}
+              numberOfLines={numLines}
               style={[
                 styles.label,
                 {

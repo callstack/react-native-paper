@@ -14,6 +14,10 @@ type Props = React.ElementConfig<typeof View> & {
    */
   title?: string,
   /**
+   * Number of lines to display for text, defaults to 1.
+   */
+  numberOfLines?: number,
+  /**
    * Content of the `Drawer.Section`.
    */
   children: React.Node,
@@ -61,20 +65,20 @@ class DrawerSection extends React.Component<Props> {
   static displayName = 'Drawer.Section';
 
   render() {
-    const { children, title, theme, ...rest } = this.props;
+    const { children, title, theme, numberOfLines, ...rest } = this.props;
     const { colors, fonts } = theme;
     const titleColor = color(colors.text)
       .alpha(0.54)
       .rgb()
       .string();
     const fontFamily = fonts.medium;
-
+    const numLines = typeof(numberOfLines) === "undefined" ? 1 : numberOfLines;
     return (
       <View {...rest}>
         {title && (
-          <View style={{ height: 40, justifyContent: 'center' }}>
+          <View style={{ minHeight: 40, justifyContent: 'center' }}>
             <Text
-              numberOfLines={1}
+              numberOfLines={numLines}
               style={{ color: titleColor, fontFamily, marginLeft: 16 }}
             >
               {title}
