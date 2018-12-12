@@ -73,7 +73,7 @@ class DrawerItem extends React.Component<Props> {
           .string();
     const fontFamily = theme.fonts.medium;
     const labelMargin = icon ? 32 : 0;
-    const numLines = typeof numberOfLines === "undefined" ? 1 : numberOfLines;
+    const numLines = typeof numberOfLines === 'undefined' ? 1 : numberOfLines;
     return (
       <View
         {...rest}

@@ -72,7 +72,7 @@ class DrawerSection extends React.Component<Props> {
       .rgb()
       .string();
     const fontFamily = fonts.medium;
-    const numLines = typeof numberOfLines === "undefined" ? 1 : numberOfLines;
+    const numLines = typeof numberOfLines === 'undefined' ? 1 : numberOfLines;
     return (
       <View {...rest}>
         {title && (
