@@ -294,7 +294,7 @@ const styles = StyleSheet.create({
     padding: 4,
   },
   text: {
-    height: 24,
+    minHeight: 24,
     lineHeight: 24,
     textAlignVertical: 'center',
     marginVertical: 4,
