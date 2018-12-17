@@ -25,6 +25,10 @@ type Props = React.ElementConfig<typeof Surface> & {|
    */
   dark?: boolean,
   /**
+   * Whether or not the ripple effect (Android) may extend the view bounds
+   */
+  borderless?: boolean,
+  /**
    * Use a compact look, useful for `text` buttons in a row.
    */
   compact?: boolean,
@@ -105,6 +109,7 @@ type State = {
  */
 class Button extends React.Component<Props, State> {
   static defaultProps = {
+    borderless: true,
     mode: 'text',
     uppercase: true,
   };
@@ -133,6 +138,7 @@ class Button extends React.Component<Props, State> {
 
   render() {
     const {
+      borderless,
       disabled,
       compact,
       mode,
@@ -229,7 +235,7 @@ class Button extends React.Component<Props, State> {
         ]}
       >
         <TouchableRipple
-          borderless
+          borderless={borderless}
           delayPressIn={0}
           onPress={onPress}
           onPressIn={this._handlePressIn}
