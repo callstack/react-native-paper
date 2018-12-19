@@ -5,7 +5,6 @@ export interface IconProps {
     icon: IconSource,
     size: number,
     color?: string,
-    backgroundColor?: string,
     style?: any,
     theme?: ThemeShape,
 
@@ -20,7 +19,6 @@ export interface ImageProps {
 | number,
     size: number,
     color?: string,
-    backgroundColor?: string,
     style?: any,
     them?: ThemeShape,
 
@@ -32,7 +30,6 @@ export interface TextProps {
     label?: string,
     size: number,
     color?: string,
-    backgroundColor?: string,
     style?: any,
     theme?: ThemeShape,
 

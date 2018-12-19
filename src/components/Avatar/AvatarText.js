@@ -21,10 +21,6 @@ type Props = {
    * Custom color.
    */
   color?: string,
-  /**
-   * Custom background color.
-   */
-  backgroundColor?: string,
   style?: any,
   /**
    * @optional
@@ -63,7 +59,8 @@ class AvatarText extends React.Component<Props> {
     const { label, size, style, theme } = this.props;
     const { colors } = theme;
 
-    const backgroundColor = this.props.backgroundColor || colors.primary;
+    const { backgroundColor = colors.primary } =
+      StyleSheet.flatten(style) || {};
     const textColor =
       this.props.color || color(backgroundColor).light()
         ? white

@@ -1,15 +1,10 @@
 /* @flow */
 
 import * as React from 'react';
-import { Image, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
-
-type ImageSource =
-  | {
-      src: string,
-    }
-  | number;
+import type { ImageSource } from 'react-native/Libraries/Image/ImageSource';
 
 type Props = {
   /**
@@ -20,10 +15,6 @@ type Props = {
    * Size of the avatar.
    */
   size: number,
-  /**
-   * Custom background color.
-   */
-  backgroundColor?: string,
   style?: any,
   /**
    * @optional
@@ -61,7 +52,8 @@ class AvatarImage extends React.Component<Props> {
     const { size, source, style, theme } = this.props;
     const { colors } = theme;
 
-    const backgroundColor = this.props.backgroundColor || colors.primary;
+    const { backgroundColor = colors.primary } =
+      StyleSheet.flatten(style) || {};
 
     return (
       <View

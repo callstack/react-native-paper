@@ -18,7 +18,7 @@ it('renders avatar with text and custom size', () => {
 
 it('renders avatar with text and custom background color', () => {
   const tree = renderer
-    .create(<Avatar.Text backgroundColor="#FF0000" label="JD" />)
+    .create(<Avatar.Text style={{ backgroundColor: '#FF0000' }} label="JD" />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -26,9 +26,7 @@ it('renders avatar with text and custom background color', () => {
 
 it('renders avatar with text and custom colors', () => {
   const tree = renderer
-    .create(
-      <Avatar.Text backgroundColor="#FF0000" color="#FFFFFF" label="JD" />
-    )
+    .create(<Avatar.Text color="#FFFFFF" label="JD" />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -36,6 +34,14 @@ it('renders avatar with text and custom colors', () => {
 
 it('renders avatar with icon', () => {
   const tree = renderer.create(<Avatar.Icon icon="info" />).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders avatar with icon and custom background color', () => {
+  const tree = renderer
+    .create(<Avatar.Icon style={{ backgroundColor: '#FF0000' }} icon="info" />)
+    .toJSON();
 
   expect(tree).toMatchSnapshot();
 });

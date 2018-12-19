@@ -65,6 +65,73 @@ exports[`renders avatar with icon 1`] = `
 </View>
 `;
 
+exports[`renders avatar with icon and custom background color 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#FF0000",
+        "borderRadius": 32,
+        "height": 64,
+        "width": 64,
+      },
+      Object {
+        "backgroundColor": "#FF0000",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+        },
+        Object {
+          "height": 64,
+        },
+      ]
+    }
+  >
+    <Text
+      accessibilityElementsHidden={true}
+      allowFontScaling={false}
+      importantForAccessibility="no-hide-descendants"
+      pointerEvents="none"
+      style={
+        Array [
+          Object {
+            "color": "rgba(0, 0, 0, .54)",
+            "fontSize": 48,
+          },
+          Array [
+            Object {
+              "transform": Array [
+                Object {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
+          Object {
+            "fontFamily": "Material Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          Object {},
+        ]
+      }
+    >
+      
+    </Text>
+  </View>
+</View>
+`;
+
 exports[`renders avatar with image 1`] = `
 <View
   style={
@@ -149,7 +216,9 @@ exports[`renders avatar with text and custom background color 1`] = `
         "height": 64,
         "width": 64,
       },
-      undefined,
+      Object {
+        "backgroundColor": "#FF0000",
+      },
     ]
   }
 >
@@ -187,7 +256,7 @@ exports[`renders avatar with text and custom colors 1`] = `
   style={
     Array [
       Object {
-        "backgroundColor": "#FF0000",
+        "backgroundColor": "#6200ee",
         "borderRadius": 32,
         "height": 64,
         "width": 64,
