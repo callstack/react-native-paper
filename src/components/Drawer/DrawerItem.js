@@ -7,10 +7,10 @@ import Text from '../Typography/Text';
 import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple';
 import { withTheme } from '../../core/theming';
-import type { Theme, $RemoveChildren } from '../../types';
+import type { Theme } from '../../types';
 import type { IconSource } from '../Icon';
 
-type Props = $RemoveChildren<typeof View> & {
+type Props = {
   /**
    * The label text of the item.
    */

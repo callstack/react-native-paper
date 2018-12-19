@@ -7,6 +7,7 @@ export interface ItemProps extends ViewProps {
   icon?: IconSource;
   active?: boolean;
   theme?: ThemeShape;
+  onPress?: () => void;
 }
 
 export declare class Item extends React.Component<ItemProps> {}

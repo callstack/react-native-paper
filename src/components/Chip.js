@@ -62,6 +62,10 @@ type Props = React.ElementConfig<typeof Surface> & {|
    * @optional
    */
   theme: Theme,
+  /**
+   * Pass down testID from chip props to touchable for Detox tests.
+   */
+  testID?: string,
 |};
 
 type State = {
@@ -132,6 +136,7 @@ class Chip extends React.Component<Props, State> {
       onClose,
       style,
       theme,
+      testID,
       ...rest
     } = this.props;
     const { dark, colors } = theme;
@@ -210,6 +215,7 @@ class Chip extends React.Component<Props, State> {
           accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={accessibilityStates}
+          testID={testID}
         >
           <View style={styles.content}>
             {avatar && !icon ? (

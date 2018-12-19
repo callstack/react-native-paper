@@ -1,17 +1,16 @@
 const path = require('path');
 const { spawnSync } = require('child_process');
-const tester = require('babel-plugin-tester');
+const { create } = require('babel-test');
+const { toMatchFile } = require('jest-file-snapshot');
+
+expect.extend({ toMatchFile });
 
 spawnSync('node', [
   path.resolve(__dirname, '../../../scripts/generate-mappings.js'),
 ]);
 
-tester({
-  plugin: require('../index'),
-  pluginName: 'react-native-paper/babel',
-  fixtures: path.join(__dirname, '..', '__fixtures__'),
-  babelOptions: {
-    babelrc: false,
-    configFile: false,
-  },
+const { fixtures } = create({
+  plugins: [require.resolve('../index')],
 });
+
+fixtures('generate mappings', path.join(__dirname, '..', '__fixtures__'));

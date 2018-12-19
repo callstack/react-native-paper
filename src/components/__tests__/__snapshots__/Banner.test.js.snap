@@ -15,7 +15,6 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
       "shadowRadius": 0.75,
     }
   }
-  visible={false}
 >
   <View
     style={
@@ -97,7 +96,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
       "shadowRadius": 0.75,
     }
   }
-  visible={true}
 >
   <View
     style={
@@ -272,7 +270,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
       "shadowRadius": 0.75,
     }
   }
-  visible={true}
 >
   <View
     style={
@@ -508,7 +505,6 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
       "shadowRadius": 0.75,
     }
   }
-  visible={true}
 >
   <View
     style={
@@ -600,7 +596,6 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
       "shadowRadius": 0.75,
     }
   }
-  visible={true}
 >
   <View
     style={

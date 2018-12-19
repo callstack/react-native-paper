@@ -1,0 +1,825 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders data table cell 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "row",
+      },
+      undefined,
+      undefined,
+    ]
+  }
+>
+  <Text
+    numberOfLines={1}
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "Helvetica Neue",
+          "textAlign": "left",
+          "writingDirection": "ltr",
+        },
+        null,
+      ]
+    }
+  >
+    Cupcake
+  </Text>
+</View>
+`;
+
+exports[`renders data table header 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "height": 48,
+        "paddingHorizontal": 16,
+      },
+      Object {
+        "borderBottomColor": "rgba(0, 0, 0, 0.12)",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessible={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignContent": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "paddingVertical": 12,
+        },
+        undefined,
+        undefined,
+      ]
+    }
+  >
+    <Text
+      numberOfLines={1}
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontFamily": "Helvetica Neue",
+            "textAlign": "left",
+            "writingDirection": "ltr",
+          },
+          Array [
+            Object {
+              "alignItems": "center",
+              "fontSize": 12,
+              "fontWeight": "500",
+              "height": 24,
+              "lineHeight": 24,
+            },
+            Object {
+              "color": "rgba(0, 0, 0, 0.6)",
+            },
+          ],
+        ]
+      }
+    >
+      Dessert
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignContent": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "paddingVertical": 12,
+        },
+        undefined,
+        undefined,
+      ]
+    }
+  >
+    <Text
+      numberOfLines={1}
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontFamily": "Helvetica Neue",
+            "textAlign": "left",
+            "writingDirection": "ltr",
+          },
+          Array [
+            Object {
+              "alignItems": "center",
+              "fontSize": 12,
+              "fontWeight": "500",
+              "height": 24,
+              "lineHeight": 24,
+            },
+            Object {
+              "color": "rgba(0, 0, 0, 0.6)",
+            },
+          ],
+        ]
+      }
+    >
+      Calories
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`renders data table pagination 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "flex-end",
+        "paddingLeft": 16,
+      },
+      undefined,
+    ]
+  }
+>
+  <Text
+    numberOfLines={1}
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "Helvetica Neue",
+          "textAlign": "left",
+          "writingDirection": "ltr",
+        },
+        Array [
+          Object {
+            "fontSize": 12,
+            "marginRight": 44,
+          },
+          Object {
+            "color": "rgba(0, 0, 0, 0.6)",
+          },
+        ],
+      ]
+    }
+  />
+  <View
+    accessibilityRole="button"
+    accessible={true}
+    hitSlop={
+      Object {
+        "bottom": 6,
+        "left": 6,
+        "right": 6,
+        "top": 6,
+      }
+    }
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "borderRadius": 18,
+          "height": 36,
+          "justifyContent": "center",
+          "margin": 6,
+          "width": 36,
+        },
+        false,
+        undefined,
+      ]
+    }
+  >
+    <View
+      style={null}
+    >
+      <Text
+        accessibilityElementsHidden={true}
+        allowFontScaling={false}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontSize": 24,
+            },
+            Array [
+              Object {
+                "transform": Array [
+                  Object {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              Object {
+                "backgroundColor": "transparent",
+              },
+            ],
+            Object {
+              "fontFamily": "Material Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
+  </View>
+  <View
+    accessibilityRole="button"
+    accessible={true}
+    hitSlop={
+      Object {
+        "bottom": 6,
+        "left": 6,
+        "right": 6,
+        "top": 6,
+      }
+    }
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "borderRadius": 18,
+          "height": 36,
+          "justifyContent": "center",
+          "margin": 6,
+          "width": 36,
+        },
+        false,
+        undefined,
+      ]
+    }
+  >
+    <View
+      style={null}
+    >
+      <Text
+        accessibilityElementsHidden={true}
+        allowFontScaling={false}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontSize": 24,
+            },
+            Array [
+              Object {
+                "transform": Array [
+                  Object {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              Object {
+                "backgroundColor": "transparent",
+              },
+            ],
+            Object {
+              "fontFamily": "Material Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders data table pagination with label 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "flex-end",
+        "paddingLeft": 16,
+      },
+      undefined,
+    ]
+  }
+>
+  <Text
+    numberOfLines={1}
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "Helvetica Neue",
+          "textAlign": "left",
+          "writingDirection": "ltr",
+        },
+        Array [
+          Object {
+            "fontSize": 12,
+            "marginRight": 44,
+          },
+          Object {
+            "color": "rgba(0, 0, 0, 0.6)",
+          },
+        ],
+      ]
+    }
+  >
+    11-20 of 150
+  </Text>
+  <View
+    accessibilityRole="button"
+    accessible={true}
+    hitSlop={
+      Object {
+        "bottom": 6,
+        "left": 6,
+        "right": 6,
+        "top": 6,
+      }
+    }
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "borderRadius": 18,
+          "height": 36,
+          "justifyContent": "center",
+          "margin": 6,
+          "width": 36,
+        },
+        false,
+        undefined,
+      ]
+    }
+  >
+    <View
+      style={null}
+    >
+      <Text
+        accessibilityElementsHidden={true}
+        allowFontScaling={false}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontSize": 24,
+            },
+            Array [
+              Object {
+                "transform": Array [
+                  Object {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              Object {
+                "backgroundColor": "transparent",
+              },
+            ],
+            Object {
+              "fontFamily": "Material Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
+  </View>
+  <View
+    accessibilityRole="button"
+    accessible={true}
+    hitSlop={
+      Object {
+        "bottom": 6,
+        "left": 6,
+        "right": 6,
+        "top": 6,
+      }
+    }
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "borderRadius": 18,
+          "height": 36,
+          "justifyContent": "center",
+          "margin": 6,
+          "width": 36,
+        },
+        false,
+        undefined,
+      ]
+    }
+  >
+    <View
+      style={null}
+    >
+      <Text
+        accessibilityElementsHidden={true}
+        allowFontScaling={false}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontSize": 24,
+            },
+            Array [
+              Object {
+                "transform": Array [
+                  Object {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              Object {
+                "backgroundColor": "transparent",
+              },
+            ],
+            Object {
+              "fontFamily": "Material Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders data table title with press handler 1`] = `
+<View
+  accessible={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "alignContent": "center",
+        "flex": 1,
+        "flexDirection": "row",
+        "paddingVertical": 12,
+      },
+      undefined,
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "height": 24,
+        "justifyContent": "center",
+        "transform": Array [
+          Object {
+            "rotate": "180deg",
+          },
+        ],
+      }
+    }
+  >
+    <Text
+      accessibilityElementsHidden={true}
+      allowFontScaling={false}
+      importantForAccessibility="no-hide-descendants"
+      pointerEvents="none"
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontSize": 16,
+          },
+          Array [
+            Object {
+              "transform": Array [
+                Object {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
+          Object {
+            "fontFamily": "Material Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          Object {},
+        ]
+      }
+    >
+      
+    </Text>
+  </View>
+  <Text
+    numberOfLines={1}
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "Helvetica Neue",
+          "textAlign": "left",
+          "writingDirection": "ltr",
+        },
+        Array [
+          Object {
+            "alignItems": "center",
+            "fontSize": 12,
+            "fontWeight": "500",
+            "height": 24,
+            "lineHeight": 24,
+          },
+          Object {
+            "marginLeft": 8,
+          },
+        ],
+      ]
+    }
+  >
+    Dessert
+  </Text>
+</View>
+`;
+
+exports[`renders data table title with sort icon 1`] = `
+<View
+  accessible={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "alignContent": "center",
+        "flex": 1,
+        "flexDirection": "row",
+        "paddingVertical": 12,
+      },
+      undefined,
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "height": 24,
+        "justifyContent": "center",
+        "transform": Array [
+          Object {
+            "rotate": "180deg",
+          },
+        ],
+      }
+    }
+  >
+    <Text
+      accessibilityElementsHidden={true}
+      allowFontScaling={false}
+      importantForAccessibility="no-hide-descendants"
+      pointerEvents="none"
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontSize": 16,
+          },
+          Array [
+            Object {
+              "transform": Array [
+                Object {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
+          Object {
+            "fontFamily": "Material Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          Object {},
+        ]
+      }
+    >
+      
+    </Text>
+  </View>
+  <Text
+    numberOfLines={1}
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "Helvetica Neue",
+          "textAlign": "left",
+          "writingDirection": "ltr",
+        },
+        Array [
+          Object {
+            "alignItems": "center",
+            "fontSize": 12,
+            "fontWeight": "500",
+            "height": 24,
+            "lineHeight": 24,
+          },
+          Object {
+            "marginLeft": 8,
+          },
+        ],
+      ]
+    }
+  >
+    Dessert
+  </Text>
+</View>
+`;
+
+exports[`renders right aligned data table cell 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "row",
+      },
+      Object {
+        "justifyContent": "flex-end",
+      },
+      undefined,
+    ]
+  }
+>
+  <Text
+    numberOfLines={1}
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "Helvetica Neue",
+          "textAlign": "left",
+          "writingDirection": "ltr",
+        },
+        null,
+      ]
+    }
+  >
+    356
+  </Text>
+</View>
+`;
+
+exports[`renders right aligned data table title 1`] = `
+<View
+  accessible={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "alignContent": "center",
+        "flex": 1,
+        "flexDirection": "row",
+        "paddingVertical": 12,
+      },
+      Object {
+        "justifyContent": "flex-end",
+      },
+      undefined,
+    ]
+  }
+>
+  <Text
+    numberOfLines={1}
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "Helvetica Neue",
+          "textAlign": "left",
+          "writingDirection": "ltr",
+        },
+        Array [
+          Object {
+            "alignItems": "center",
+            "fontSize": 12,
+            "fontWeight": "500",
+            "height": 24,
+            "lineHeight": 24,
+          },
+          Object {
+            "color": "rgba(0, 0, 0, 0.6)",
+          },
+        ],
+      ]
+    }
+  >
+    Calories
+  </Text>
+</View>
+`;
