@@ -10,7 +10,7 @@ exports[`renders avatar with icon 1`] = `
         "height": 64,
         "width": 64,
       },
-      undefined,
+      Object {},
     ]
   }
 >
@@ -75,9 +75,7 @@ exports[`renders avatar with icon and custom background color 1`] = `
         "height": 64,
         "width": 64,
       },
-      Object {
-        "backgroundColor": "#FF0000",
-      },
+      Object {},
     ]
   }
 >
@@ -173,7 +171,7 @@ exports[`renders avatar with text 1`] = `
         "height": 64,
         "width": 64,
       },
-      undefined,
+      Object {},
     ]
   }
 >
@@ -216,9 +214,7 @@ exports[`renders avatar with text and custom background color 1`] = `
         "height": 64,
         "width": 64,
       },
-      Object {
-        "backgroundColor": "#FF0000",
-      },
+      Object {},
     ]
   }
 >
@@ -261,7 +257,7 @@ exports[`renders avatar with text and custom colors 1`] = `
         "height": 64,
         "width": 64,
       },
-      undefined,
+      Object {},
     ]
   }
 >
@@ -304,7 +300,7 @@ exports[`renders avatar with text and custom size 1`] = `
         "height": 96,
         "width": 96,
       },
-      undefined,
+      Object {},
     ]
   }
 >

@@ -57,9 +57,8 @@ class Avatar extends React.Component<Props> {
 
   render() {
     const { icon, size, style, theme } = this.props;
-    const { colors } = theme;
 
-    const { backgroundColor = colors.primary } =
+    const { backgroundColor = theme.colors.primary, ...restStyle } =
       StyleSheet.flatten(style) || {};
     const textColor =
       this.props.color || color(backgroundColor).light()
@@ -75,7 +74,7 @@ class Avatar extends React.Component<Props> {
             borderRadius: size / 2,
             backgroundColor,
           },
-          style,
+          restStyle,
         ]}
       >
         <View style={[styles.icon, { height: size }]}>
