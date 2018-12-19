@@ -170,4 +170,5 @@ const screenshots = [
   'gallery/typography.png',
   'gallery/bottom-navigation.png',
   'gallery/fab.png',
+  'gallery/toggle-button.png',
 ];

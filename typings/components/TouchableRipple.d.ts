@@ -4,6 +4,8 @@ import { ThemeShape } from '../types';
 
 interface TouchableRipplePropsWithoutChildren extends TouchableHighlightProps, TouchableNativeFeedbackProps {
   borderless?: boolean;
+  rippleColor?: string;
+  underlayColor?: string;
   theme?: ThemeShape;
 }
 

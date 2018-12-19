@@ -36,6 +36,10 @@ type Props = React.ElementConfig<typeof Surface> & {|
    * @optional
    */
   theme: Theme,
+  /**
+   * Pass down testID from card props to touchable
+   */
+  testID?: string,
 |};
 
 type State = {
@@ -107,10 +111,12 @@ class Card extends React.Component<Props, State> {
   render() {
     const {
       children,
+      elevation: cardElevation,
       onLongPress,
       onPress,
       style,
       theme,
+      testID,
       ...rest
     } = this.props;
     const { elevation } = this.state;
@@ -135,6 +141,7 @@ class Card extends React.Component<Props, State> {
           onPress={onPress}
           onPressIn={onPress ? this._handlePressIn : undefined}
           onPressOut={onPress ? this._handlePressOut : undefined}
+          testID={testID}
         >
           <View style={styles.innerContainer}>
             {React.Children.map(

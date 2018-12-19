@@ -383,6 +383,7 @@ class TextInput extends React.Component<Props, State> {
       style,
       theme,
       render,
+      multiline,
       ...rest
     } = this.props;
 
@@ -629,6 +630,7 @@ class TextInput extends React.Component<Props, State> {
           onFocus: this._handleFocus,
           onBlur: this._handleBlur,
           underlineColorAndroid: 'transparent',
+          multiline,
           style: [
             styles.input,
             mode === 'outlined'
@@ -639,6 +641,7 @@ class TextInput extends React.Component<Props, State> {
             {
               color: inputTextColor,
               fontFamily,
+              textAlignVertical: multiline ? 'top' : 'center',
             },
           ],
         })}

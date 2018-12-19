@@ -13,6 +13,7 @@ export interface ChipProps {
   onClose?: () => any;
   style?: any;
   theme?: ThemeShape;
+  testID?: string;
 }
 
 export declare class Chip extends React.Component<ChipProps> {}
