@@ -90,23 +90,6 @@ class AppbarContent extends React.Component<Props> {
             style={[
               {
                 color: titleColor,
-                fontFamily: Platform.OS === 'ios' ? fonts.regular : fonts.medium,
-              },
-              styles.title,
-              titleStyle,
-            ]}
-            numberOfLines={1}
-            allowFontScaling={allowTitleFontScaling}
-            accessibilityTraits="header"
-            accessibilityRole="header"
-          >
-            {title}
-          </Text>
-          {subtitle ? (
-          <Text
-            style={[
-              {
-                color: titleColor,
                 fontFamily:
                   Platform.OS === 'ios' ? fonts.regular : fonts.medium,
               },
@@ -116,7 +99,7 @@ class AppbarContent extends React.Component<Props> {
             numberOfLines={1}
             accessibilityTraits="header"
             accessibilityRole="header"
-            allowFontScaling={allowSubtitleFontScaling}
+            allowFontScaling={allowTitleFontScaling}
           >
             {title}
           </Text>
@@ -124,6 +107,7 @@ class AppbarContent extends React.Component<Props> {
             <Text
               style={[styles.subtitle, { color: subtitleColor }, subtitleStyle]}
               numberOfLines={1}
+              allowFontScaling={allowSubtitleFontScaling}
             >
               {subtitle}
             </Text>
