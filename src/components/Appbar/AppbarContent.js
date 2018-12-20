@@ -62,6 +62,11 @@ type Props = $RemoveChildren<typeof View> & {|
 class AppbarContent extends React.Component<Props> {
   static displayName = 'Appbar.Content';
 
+  static defaultProps = {
+    allowTitleFontScaling: true,
+    allowSubtitleFontScaling: true,
+  };
+
   render() {
     const {
       color: titleColor = black,
