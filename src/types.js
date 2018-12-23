@@ -2,26 +2,30 @@
 
 import * as React from 'react';
 
+export type ThemeColors = {
+  primary: string,
+  background: string,
+  surface: string,
+  accent: string,
+  error: string,
+  text: string,
+  disabled: string,
+  placeholder: string,
+  backdrop: string,
+};
+
+export type ThemeFonts = {
+  regular: string,
+  medium: string,
+  light: string,
+  thin: string,
+};
+
 export type Theme = {
   dark: boolean,
   roundness: number,
-  colors: {
-    primary: string,
-    background: string,
-    surface: string,
-    accent: string,
-    error: string,
-    text: string,
-    disabled: string,
-    placeholder: string,
-    backdrop: string,
-  },
-  fonts: {
-    regular: string,
-    medium: string,
-    light: string,
-    thin: string,
-  },
+  colors: ThemeColors,
+  fonts: ThemeFonts,
 };
 
 export type ThemeShape = $Shape<{
