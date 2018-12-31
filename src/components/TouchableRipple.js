@@ -13,7 +13,6 @@ import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
-const ANDROID_VERSION_NOUGAT = 27;
 
 type Props = React.ElementConfig<typeof TouchableWithoutFeedback> & {|
   /**
@@ -85,8 +84,7 @@ class TouchableRipple extends React.Component<Props, void> {
    */
   static supported =
     Platform.OS === 'android' &&
-    Platform.Version >= ANDROID_VERSION_LOLLIPOP &&
-    Platform.Version <= ANDROID_VERSION_NOUGAT;
+    Platform.Version >= ANDROID_VERSION_LOLLIPOP;
 
   render() {
     const {
