@@ -14,6 +14,7 @@ import DataTableExample from './DataTableExample';
 import DialogExample from './DialogExample';
 import DividerExample from './DividerExample';
 import FABExample from './FABExample';
+import PlusMinusCounterExample from './PlusMinusCounterExample';
 import IconButtonExample from './IconButtonExample';
 import ListAccordionExample from './ListAccordionExample';
 import ListSectionExample from './ListSectionExample';
@@ -46,6 +47,7 @@ export const examples = {
   dialog: DialogExample,
   divider: DividerExample,
   fab: FABExample,
+  PlusMinusCounter: PlusMinusCounterExample,
   iconButton: IconButtonExample,
   listAccordion: ListAccordionExample,
   listSection: ListSectionExample,
