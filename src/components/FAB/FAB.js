@@ -40,6 +40,10 @@ type Props = $RemoveChildren<typeof Surface> & {|
    */
   disabled?: boolean,
   /**
+   * Whether `FAB` is currently visible.
+   */
+  visible: boolean,
+  /**
    * Function to execute on press.
    */
   onPress?: () => mixed,
