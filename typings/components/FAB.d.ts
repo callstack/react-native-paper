@@ -19,6 +19,7 @@ export interface FABGroupProps {
   onPress?: () => any;
   open: boolean;
   onStateChange: (state: { open: boolean }) => any;
+  visible?: boolean;
   style?: any;
   theme?: ThemeShape;
 }
@@ -30,6 +31,7 @@ export interface FABProps extends ViewProps {
   small?: boolean;
   color?: string;
   disabled?: boolean;
+  visible?: boolean;
   onPress?: () => any;
   theme?: ThemeShape;
 }
