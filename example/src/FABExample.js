@@ -9,6 +9,7 @@ type Props = {
 };
 
 type State = {
+  visible: boolean,
   open: boolean,
 };
 
@@ -16,6 +17,7 @@ class ButtonExample extends React.Component<Props, State> {
   static title = 'Floating Action Button';
 
   state = {
+    visible: true,
     open: false,
   };
 
@@ -29,19 +31,38 @@ class ButtonExample extends React.Component<Props, State> {
     return (
       <View style={[styles.container, { backgroundColor: background }]}>
         <View style={styles.row}>
-          <FAB small icon="add" style={styles.fab} onPress={() => {}} />
-          <FAB icon="favorite" style={styles.fab} onPress={() => {}} />
+          <FAB
+            small
+            icon={this.state.visible ? 'visibility-off' : 'visibility'}
+            style={styles.fab}
+            onPress={() => {
+              this.setState({
+                visible: !this.state.visible,
+              });
+            }}
+          />
+        </View>
+
+        <View style={styles.row}>
+          <FAB
+            icon="favorite"
+            style={styles.fab}
+            onPress={() => {}}
+            visible={this.state.visible}
+          />
           <FAB
             icon="done"
             label="Extended FAB"
             style={styles.fab}
             onPress={() => {}}
+            visible={this.state.visible}
           />
           <FAB
             icon="cancel"
             label="Disabled FAB"
             style={styles.fab}
             onPress={() => {}}
+            visible={this.state.visible}
             disabled
           />
           <Portal>
@@ -60,6 +81,7 @@ class ButtonExample extends React.Component<Props, State> {
                   // do something if the speed dial is open
                 }
               }}
+              visible={this.state.visible}
             />
           </Portal>
         </View>
@@ -76,7 +98,6 @@ const styles = StyleSheet.create({
   },
 
   row: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },

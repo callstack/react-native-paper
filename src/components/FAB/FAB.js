@@ -2,7 +2,7 @@
 
 import color from 'color';
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { Animated, View, StyleSheet } from 'react-native';
 import FABGroup from './FABGroup';
 import Surface from '../Surface';
 import CrossFadeIcon from '../CrossFadeIcon';
@@ -40,6 +40,10 @@ type Props = $RemoveChildren<typeof Surface> & {|
    */
   disabled?: boolean,
   /**
+   * Whether `FAB` is currently visible.
+   */
+  visible: boolean,
+  /**
    * Function to execute on press.
    */
   onPress?: () => mixed,
@@ -49,6 +53,10 @@ type Props = $RemoveChildren<typeof Surface> & {|
    */
   theme: Theme,
 |};
+
+type State = {
+  visibility: Animated.Value,
+};
 
 /**
  * A floating action button represents the primary action in an application.
@@ -85,9 +93,37 @@ type Props = $RemoveChildren<typeof Surface> & {|
  * export default MyComponent;
  * ```
  */
-class FAB extends React.Component<Props> {
+class FAB extends React.Component<Props, State> {
   // @component ./FABGroup.js
   static Group = FABGroup;
+
+  static defaultProps = {
+    visible: true,
+  };
+
+  state = {
+    visibility: new Animated.Value(this.props.visible ? 1 : 0),
+  };
+
+  componentDidUpdate(prevProps) {
+    if (this.props.visible === prevProps.visible) {
+      return;
+    }
+
+    if (this.props.visible) {
+      Animated.timing(this.state.visibility, {
+        toValue: 1,
+        duration: 200,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      Animated.timing(this.state.visibility, {
+        toValue: 0,
+        duration: 150,
+        useNativeDriver: true,
+      }).start();
+    }
+  }
 
   render() {
     const {
@@ -102,6 +138,7 @@ class FAB extends React.Component<Props> {
       style,
       ...rest
     } = this.props;
+    const { visibility } = this.state;
 
     const disabledColor = color(theme.dark ? white : black)
       .alpha(0.12)
@@ -135,7 +172,15 @@ class FAB extends React.Component<Props> {
       <Surface
         {...rest}
         style={[
-          { backgroundColor },
+          {
+            backgroundColor,
+            opacity: visibility,
+            transform: [
+              {
+                scale: visibility,
+              },
+            ],
+          },
           styles.container,
           disabled && styles.disabled,
           style,
