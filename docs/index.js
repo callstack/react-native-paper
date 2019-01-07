@@ -14,6 +14,8 @@ const assets = [
 ];
 const styles = [path.join(__dirname, 'assets', 'styles.css')];
 const scripts = [path.join(__dirname, 'assets', 'snack.js')];
+const github =
+  'https://github.com/callstack/react-native-paper/edit/master/docs';
 
 if (!fs.existsSync(dist)) {
   fs.mkdirSync(dist);
@@ -102,6 +104,7 @@ if (task !== 'build') {
     scripts,
     pages: getPages,
     output: path.join(__dirname, 'dist'),
+    github,
   });
 } else {
   build({
@@ -110,5 +113,6 @@ if (task !== 'build') {
     scripts,
     pages: getPages,
     output: path.join(__dirname, 'dist'),
+    github,
   });
 }
