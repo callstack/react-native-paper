@@ -119,7 +119,7 @@ class FAB extends React.Component<Props, State> {
     } else {
       Animated.timing(this.state.visibility, {
         toValue: 0,
-        duration: 200,
+        duration: 150,
         useNativeDriver: true,
       }).start();
     }
