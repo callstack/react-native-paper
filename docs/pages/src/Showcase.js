@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { css, styles, include } from 'linaria';
+import { css } from 'linaria';
 import color from 'color';
 
 import GooglePlayIcon from '../../components/google-play-icon';
@@ -26,8 +26,8 @@ const data: Data[] = [
 export default class Showcase extends React.Component<{}> {
   render() {
     return (
-      <div {...styles(container)}>
-        <div {...styles(content)}>
+      <div className={container}>
+        <div className={content}>
           <h1>Who&apos;s using Paper?</h1>
           <p>
             Check out these apps built using Paper. Send us a{' '}
@@ -41,26 +41,23 @@ export default class Showcase extends React.Component<{}> {
             to add your app to this list.
           </p>
         </div>
-        <div {...styles(gallery)}>
+        <div className={gallery}>
           {data.map(item => {
             const tintColor = color(item.color).light() ? '#000000' : '#FFFFFF';
             return (
               <div key={item.image}>
-                <div {...styles(imageContainer)}>
-                  <img {...styles(image)} src={item.image} alt="" />
-                  <div
-                    {...styles(info)}
-                    style={{ backgroundColor: item.color }}
-                  >
+                <div className={imageContainer}>
+                  <img className={image} src={item.image} alt="" />
+                  <div className={info} style={{ backgroundColor: item.color }}>
                     <h3
-                      {...styles(appName)}
+                      className={appName}
                       style={{
                         color: tintColor,
                       }}
                     >
                       {item.name}
                     </h3>
-                    <div {...styles(badgeContainer)}>
+                    <div className={badgeContainer}>
                       <a
                         href={item.android || null}
                         target="_blank"
@@ -69,7 +66,7 @@ export default class Showcase extends React.Component<{}> {
                       >
                         <GooglePlayIcon color={tintColor} />
                       </a>
-                      <div {...styles(separation)} />
+                      <div className={separation} />
                       <a
                         href={item.ios || null}
                         target="_blank"
@@ -105,10 +102,6 @@ const content = css`
   }
 `;
 
-const elevated = css`
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.24);
-`;
-
 const appName = css`
   font-size: 16px;
   margin-top: 0;
@@ -136,12 +129,11 @@ const info = css`
 `;
 
 const imageContainer = css`
-  ${include(elevated)};
-
   height: ${480 + 48}px;
   width: auto;
   overflow: hidden;
   margin: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.24);
 
   &:hover,
   &:focus {
