@@ -120,8 +120,9 @@ class Searchbar extends React.Component<Props> {
       style,
       ...rest
     } = this.props;
-    const { colors, roundness, dark } = theme;
+    const { colors, roundness, dark, fonts } = theme;
     const textColor = colors.text;
+    const fontFamily = fonts.regular;
     const iconColor = dark
       ? textColor
       : color(textColor)
@@ -149,7 +150,7 @@ class Searchbar extends React.Component<Props> {
           icon={icon || 'search'}
         />
         <TextInput
-          style={[styles.input, { color: textColor }]}
+          style={[styles.input, { color: textColor, fontFamily }]}
           placeholder={placeholder || ''}
           placeholderTextColor={colors.placeholder}
           selectionColor={colors.primary}
