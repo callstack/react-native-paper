@@ -64,6 +64,7 @@ class Badge extends React.Component<Props, State> {
       Animated.timing(this.state.opacity, {
         toValue: children ? 1 : 0,
         duration: 150,
+        useNativeDriver: true,
       }).start();
     }
   }
