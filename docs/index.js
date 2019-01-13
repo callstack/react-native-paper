@@ -21,6 +21,15 @@ if (!fs.existsSync(dist)) {
   fs.mkdirSync(dist);
 }
 
+function getType(file: string) {
+  if (file.endsWith('.js')) {
+    return 'custom';
+  } else if (file.endsWith('.mdx')) {
+    return 'mdx';
+  }
+  return 'md';
+}
+
 function getPages() {
   const components = fs
     .readFileSync(path.join(__dirname, '../src/index.js'))
@@ -91,7 +100,7 @@ function getPages() {
     .filter(file => file.includes('.'))
     .map(file => ({
       file: path.join(__dirname, 'pages', file),
-      type: file.endsWith('.js') ? 'custom' : 'markdown',
+      type: getType(file),
     }));
 
   return [...docs, { type: 'separator' }, ...components];
