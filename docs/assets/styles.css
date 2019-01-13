@@ -1,9 +1,10 @@
-a, a:hover {
+a,
+a:hover {
   color: #6200ee;
 }
 
 a:hover {
-  color: #873DF2;
+  color: #873df2;
 }
 
 .screenshots {
@@ -47,4 +48,10 @@ a:hover {
   .screenshots img {
     width: 240px;
   }
+}
+
+@font-face {
+  font-family: 'MaterialIcons';
+  src: url('../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf')
+    format('truetype');
 }
