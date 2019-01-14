@@ -112,7 +112,7 @@ export default class IconsList extends React.Component<{}, State> {
     const searchResults = this._getResults();
 
     return (
-      <form className={container}>
+      <div className={container}>
         <input
           type="search"
           value={this.state.query}
@@ -137,7 +137,7 @@ export default class IconsList extends React.Component<{}, State> {
         ) : (
           <p>No matching icon found :(</p>
         )}
-      </form>
+      </div>
     );
   }
 }
