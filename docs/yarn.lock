@@ -1731,10 +1731,10 @@ commondir@^1.0.1:
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
   integrity sha1-3dgA2gxmEnOTzKWVDqloo6rxJTs=
 
-component-docs@^0.15.4:
-  version "0.15.4"
-  resolved "https://registry.yarnpkg.com/component-docs/-/component-docs-0.15.4.tgz#da7e185a5ddd7cba5bc516637111eb11d0c56bcd"
-  integrity sha512-dHjkHXhv4uveWL8Xb37dPAehl/7ERzbzq/XG1dUUNc1jMGJSYEDATnlmwdXRWF7I7CY/AeUfovp+NdFCn0B1tg==
+component-docs@^0.15.6:
+  version "0.15.6"
+  resolved "https://registry.yarnpkg.com/component-docs/-/component-docs-0.15.6.tgz#72e14c914361173c3b7c61edf3ba64d52e5b96a2"
+  integrity sha512-qgxoMsQ3pQmH9h4i/0CUDTYs3lD0r8CbS9bV5ABJldJSpWgTWn/hH+U+AdhV+YjbxaI/1g7+QWl5+XEPsM4cwQ==
   dependencies:
     "@babel/core" "^7.2.2"
     "@babel/plugin-proposal-class-properties" "^7.2.3"

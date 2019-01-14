@@ -5,6 +5,7 @@ import fs from 'fs';
 import { build, serve } from 'component-docs';
 
 const task = process.argv[2];
+const root = path.join(__dirname, '..');
 const dist = path.join(__dirname, 'dist');
 const assets = [
   path.join(__dirname, 'assets', 'gallery'),
@@ -106,22 +107,18 @@ function getPages() {
   return [...docs, { type: 'separator' }, ...components];
 }
 
+const options = {
+  root,
+  assets,
+  styles,
+  scripts,
+  pages: getPages,
+  output: dist,
+  github,
+};
+
 if (task !== 'build') {
-  serve({
-    assets,
-    styles,
-    scripts,
-    pages: getPages,
-    output: path.join(__dirname, 'dist'),
-    github,
-  });
+  serve(options);
 } else {
-  build({
-    assets,
-    styles,
-    scripts,
-    pages: getPages,
-    output: path.join(__dirname, 'dist'),
-    github,
-  });
+  build(options);
 }
