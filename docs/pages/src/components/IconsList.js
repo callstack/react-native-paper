@@ -109,6 +109,8 @@ export default class IconsList extends React.Component<{}, State> {
   };
 
   render() {
+    const searchResults = this._getResults();
+
     return (
       <form className={container}>
         <input
@@ -118,19 +120,23 @@ export default class IconsList extends React.Component<{}, State> {
           placeholder="Find icon by name…"
           className={searchbar}
         />
-        <div className={results}>
-          {this._getResults().map(name => (
-            <button
-              key={name}
-              type="button"
-              onClick={this._handleIconClick}
-              className={iconContainer}
-            >
-              <span className={icon}>{this._getIconCharacter(name)}</span>
-              <span className={iconName}>{name}</span>
-            </button>
-          ))}
-        </div>
+        {searchResults.length ? (
+          <div className={results}>
+            {searchResults.map(name => (
+              <button
+                key={name}
+                type="button"
+                onClick={this._handleIconClick}
+                className={iconContainer}
+              >
+                <span className={icon}>{this._getIconCharacter(name)}</span>
+                <span className={iconName}>{name}</span>
+              </button>
+            ))}
+          </div>
+        ) : (
+          <p>No matching icon found :(</p>
+        )}
       </form>
     );
   }
