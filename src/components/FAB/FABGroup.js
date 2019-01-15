@@ -63,6 +63,10 @@ type Props = {|
    */
   onStateChange: (state: { open: boolean }) => mixed,
   /**
+   * Whether `FAB` is currently visible.
+   */
+  visible: boolean,
+  /**
    * Style for the group. You can use it to pass additional styles if you need.
    * For example, you can set an additional margin if you have a tab bar at the bottom.
    */
@@ -194,6 +198,7 @@ class FABGroup extends React.Component<Props, State> {
       accessibilityLabel,
       theme,
       style,
+      visible,
     } = this.props;
     const { colors } = theme;
 
@@ -310,6 +315,7 @@ class FABGroup extends React.Component<Props, State> {
           accessibilityComponentType="button"
           accessibilityRole="button"
           style={styles.fab}
+          visible={visible}
         />
       </View>
     );

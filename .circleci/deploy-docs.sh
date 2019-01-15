@@ -33,6 +33,7 @@ yarn build
 
 # Build the docs for 1.0
 git checkout 1.0
+yarn
 yarn build
 
 # Push the built docs
@@ -55,3 +56,8 @@ git commit -m "Deploy to GitHub Pages: ${SHA}"
 
 # Now that we're all set up, we can push.
 git push $SSH_REPO $TARGET_BRANCH
+
+# Change back to original branch
+cd ..
+git checkout $SOURCE_BRANCH
+yarn

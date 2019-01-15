@@ -19,6 +19,7 @@ export interface CardProps {
   children: React.ReactNode;
   style?: any;
   theme?: ThemeShape;
+  testID?: string;
 }
 
 export declare class Card extends React.Component<CardProps> {

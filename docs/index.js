@@ -5,6 +5,7 @@ import fs from 'fs';
 import { build, serve } from 'component-docs';
 
 const task = process.argv[2];
+const root = path.join(__dirname, '..');
 const dist = path.join(__dirname, 'dist');
 const assets = [
   path.join(__dirname, 'assets', 'gallery'),
@@ -14,9 +15,20 @@ const assets = [
 ];
 const styles = [path.join(__dirname, 'assets', 'styles.css')];
 const scripts = [path.join(__dirname, 'assets', 'snack.js')];
+const github =
+  'https://github.com/callstack/react-native-paper/edit/master/docs';
 
 if (!fs.existsSync(dist)) {
   fs.mkdirSync(dist);
+}
+
+function getType(file: string) {
+  if (file.endsWith('.js')) {
+    return 'custom';
+  } else if (file.endsWith('.mdx')) {
+    return 'mdx';
+  }
+  return 'md';
 }
 
 function getPages() {
@@ -89,26 +101,24 @@ function getPages() {
     .filter(file => file.includes('.'))
     .map(file => ({
       file: path.join(__dirname, 'pages', file),
-      type: file.endsWith('.js') ? 'custom' : 'markdown',
+      type: getType(file),
     }));
 
   return [...docs, { type: 'separator' }, ...components];
 }
 
+const options = {
+  root,
+  assets,
+  styles,
+  scripts,
+  pages: getPages,
+  output: dist,
+  github,
+};
+
 if (task !== 'build') {
-  serve({
-    assets,
-    styles,
-    scripts,
-    pages: getPages,
-    output: path.join(__dirname, 'dist'),
-  });
+  serve(options);
 } else {
-  build({
-    assets,
-    styles,
-    scripts,
-    pages: getPages,
-    output: path.join(__dirname, 'dist'),
-  });
+  build(options);
 }

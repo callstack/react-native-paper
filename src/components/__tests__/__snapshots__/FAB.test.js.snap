@@ -7,6 +7,7 @@ exports[`renders extended FAB 1`] = `
       "backgroundColor": "#03dac4",
       "borderRadius": 28,
       "elevation": 6,
+      "opacity": 1,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 5,
@@ -14,8 +15,14 @@ exports[`renders extended FAB 1`] = `
       },
       "shadowOpacity": 0.24,
       "shadowRadius": 6,
+      "transform": Array [
+        Object {
+          "scale": 1,
+        },
+      ],
     }
   }
+  visible={true}
 >
   <View
     accessibilityLabel="Add items"
@@ -152,6 +159,7 @@ exports[`renders normal FAB 1`] = `
       "backgroundColor": "#03dac4",
       "borderRadius": 28,
       "elevation": 6,
+      "opacity": 1,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 5,
@@ -159,8 +167,14 @@ exports[`renders normal FAB 1`] = `
       },
       "shadowOpacity": 0.24,
       "shadowRadius": 6,
+      "transform": Array [
+        Object {
+          "scale": 1,
+        },
+      ],
     }
   }
+  visible={true}
 >
   <View
     accessibilityRole="button"
@@ -273,6 +287,7 @@ exports[`renders small FAB 1`] = `
       "backgroundColor": "#03dac4",
       "borderRadius": 28,
       "elevation": 6,
+      "opacity": 1,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 5,
@@ -280,8 +295,14 @@ exports[`renders small FAB 1`] = `
       },
       "shadowOpacity": 0.24,
       "shadowRadius": 6,
+      "transform": Array [
+        Object {
+          "scale": 1,
+        },
+      ],
     }
   }
+  visible={true}
 >
   <View
     accessibilityRole="button"

@@ -24,6 +24,7 @@ export { default as Button } from './components/Button';
 export { default as Card } from './components/Card/Card';
 export { default as Checkbox } from './components/Checkbox';
 export { default as Chip } from './components/Chip';
+export { default as DataTable } from './components/DataTable/DataTable';
 export { default as Dialog } from './components/Dialog/Dialog';
 export { default as Divider } from './components/Divider';
 export { default as FAB } from './components/FAB/FAB';
@@ -40,6 +41,9 @@ export { default as Switch } from './components/Switch';
 export { default as Appbar } from './components/Appbar/Appbar';
 export { default as TouchableRipple } from './components/TouchableRipple';
 export { default as TextInput } from './components/TextInput';
+export {
+  default as ToggleButton,
+} from './components/ToggleButton/ToggleButton';
 
 export { default as Caption } from './components/Typography/Caption';
 export { default as Headline } from './components/Typography/Headline';
