@@ -26,6 +26,7 @@ module.exports = {
     providesModuleNodeModules: [
       'react-native',
       'react',
+      'react-native-gesture-handler',
       '@expo/vector-icons',
       '@babel/runtime',
       ...dependencies,
