@@ -83,10 +83,13 @@ class ProgressBar extends React.Component<Props, State> {
   }
 
   _onLayout = event => {
-    this.setState(
-      { width: event.nativeEvent.layout.width },
-      this.startAnimation
-    );
+    const { animating } = this.props;
+
+    this.setState({ width: event.nativeEvent.layout.width }, () => {
+      if (animating) {
+        this.startAnimation();
+      }
+    });
   };
 
   startAnimation() {
@@ -98,6 +101,7 @@ class ProgressBar extends React.Component<Props, State> {
       duration: 200,
       toValue: 1,
       useNativeDriver: true,
+      isInteraction: false,
     }).start();
 
     // Animate progress bar
@@ -108,6 +112,7 @@ class ProgressBar extends React.Component<Props, State> {
           toValue: 1,
           // Animated.loop does not work if useNativeDriver is true on web
           useNativeDriver: Platform.OS !== 'web',
+          isInteraction: false,
         });
       }
 
@@ -122,6 +127,7 @@ class ProgressBar extends React.Component<Props, State> {
         // $FlowFixMe
         toValue: progress,
         useNativeDriver: true,
+        isInteraction: false,
       }).start();
     }
   }
@@ -138,6 +144,7 @@ class ProgressBar extends React.Component<Props, State> {
       duration: 200,
       toValue: 0,
       useNativeDriver: true,
+      isInteraction: false,
     }).start();
   }
 
