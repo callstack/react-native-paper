@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { Animated, Easing, Platform, StyleSheet, View } from 'react-native';
+import { Animated, Platform, StyleSheet, View } from 'react-native';
 import setColor from 'color';
 import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
@@ -10,7 +10,7 @@ type Props = {|
   /**
    * Progress value (between 0 and 1).
    */
-  progress: number,
+  progress?: number,
   /**
    * Color of the progress bar.
    */
@@ -32,11 +32,12 @@ type Props = {|
 
 type State = {
   width: number,
+  fade: Animated.Value,
   timer: Animated.Value,
-  progress: Animated.Value,
 };
 
-const DURATION = 2400;
+const INDETERMINATE_DURATION = 2000;
+const INDETERMINATE_MAX_WIDTH = 0.6;
 
 /**
  * Progress bar is an indicator used to present progress of some activity in the app.
@@ -58,83 +59,91 @@ const DURATION = 2400;
  * ```
  */
 class ProgressBar extends React.Component<Props, State> {
-    static defaultProps = {
-      animating: true,
-    };
-  
-    state = {
-      width: 0,
-      timer: new Animated.Value(0),
-      fade: new Animated.Value(
-        0
-      ),
-      progress: new Animated.Value(0),
-    };
+  static defaultProps = {
+    animating: true,
+    progress: 0,
+  };
 
-    animation = null;
+  state = {
+    width: 0,
+    timer: new Animated.Value(0),
+    fade: new Animated.Value(0),
+  };
 
-    componentDidMount() {
-      const { timer } = this.state;
-  
-      // Circular animation in loop
-      this.animation = Animated.timing(timer, {
-        duration: DURATION,
-        easing: Easing.linear,
-        // Animated.loop does not work if useNativeDriver is true on web
-        useNativeDriver: Platform.OS !== 'web',
-        toValue: 1,
-      });
+  indeterminateAnimation = null;
+
+  componentDidUpdate() {
+    const { animating } = this.props;
+
+    if (animating) {
+      this.startAnimation();
+    } else {
+      this.stopAnimation();
     }
+  }
 
-    componentDidUpdate() {
-      const { animating } = this.props;
+  _onLayout = event => {
+    this.setState(
+      { width: event.nativeEvent.layout.width },
+      this.startAnimation
+    );
+  };
 
-      if (animating) {
-        this.startAnimation();
-      }
-    }
+  startAnimation() {
+    const { indeterminate, progress } = this.props;
+    const { fade, timer } = this.state;
 
-    startAnimation() {
-      const { fade, timer, progress } = this.state;
-  
-      Animated.sequence([
-        // Show progress bar
-        Animated.timing(fade, {
-          duration: 1000,
-          easing: Easing.ease,
+    // Show progress bar
+    Animated.timing(fade, {
+      duration: 200,
+      toValue: 1,
+      useNativeDriver: true,
+    }).start();
+
+    // Animate progress bar
+    if (indeterminate) {
+      if (!this.indeterminateAnimation) {
+        this.indeterminateAnimation = Animated.timing(timer, {
+          duration: INDETERMINATE_DURATION,
           toValue: 1,
-          useNativeDriver: true
-        }),
+          // Animated.loop does not work if useNativeDriver is true on web
+          useNativeDriver: Platform.OS !== 'web',
+        });
+      }
 
-        // Animate progress
-        Animated.timing(progress, {
-          duration: 200,
-          toValue: this.props.progress,
-          useNativeDriver: true
-        }),
-      ]).start()
-return
-      // Circular animation in loop
-      if (this.animation) {
-        timer.setValue(0);
+      // Reset timer to the beginning
+      timer.setValue(0);
+
+      // $FlowFixMe
+      Animated.loop(this.indeterminateAnimation).start();
+    } else {
+      Animated.timing(timer, {
+        duration: 200,
         // $FlowFixMe
-        Animated.loop(this.animation).start();
-      }
+        toValue: progress,
+        useNativeDriver: true,
+      }).start();
     }
-  
-    stopAnimation() {
-      if (this.animation) {
-        this.animation.stop();
-      }
+  }
+
+  stopAnimation() {
+    const { fade } = this.state;
+
+    // Stop indeterminate animation
+    if (this.indeterminateAnimation) {
+      this.indeterminateAnimation.stop();
     }
 
-    _onLayout = (event) => {
-      this.setState({ width: event.nativeEvent.layout.width, }, this.startAnimation)
-    }
+    Animated.timing(fade, {
+      duration: 200,
+      toValue: 0,
+      useNativeDriver: true,
+    }).start();
+  }
 
   render() {
-    const { color, style, theme } = this.props;
-    const { fade, progress, width } = this.state;
+    const { color, indeterminate, style, theme } = this.props;
+    const { fade, timer, width } = this.state;
     const tintColor = color || theme.colors.primary;
     const trackTintColor = setColor(tintColor)
       .alpha(0.38)
@@ -143,29 +152,73 @@ return
 
     return (
       <View onLayout={this._onLayout}>
-        <Animated.View style={[styles.container, { backgroundColor: tintColor, opacity: fade }, style]}>
-
-      <Animated.View style={[styles.progressBar, {backgroundColor: 'pink', width,
-      transform : [{translateX: progress.interpolate({
-        inputRange: [0, 1],
-        outputRange: [width / -2, 0],
-      })}, { scaleX: progress.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0.0001, 1],
-      })  }]}]} />
-      </Animated.View></View>
+        <Animated.View
+          style={[
+            styles.container,
+            { backgroundColor: trackTintColor, opacity: fade },
+            style,
+          ]}
+        >
+          <Animated.View
+            style={[
+              styles.progressBar,
+              {
+                backgroundColor: tintColor,
+                width,
+                transform: [
+                  {
+                    translateX: timer.interpolate(
+                      indeterminate
+                        ? {
+                            inputRange: [0, 0.5, 1],
+                            outputRange: [
+                              -0.5 * width,
+                              -0.5 * INDETERMINATE_MAX_WIDTH * width,
+                              0.7 * width,
+                            ],
+                          }
+                        : {
+                            inputRange: [0, 1],
+                            outputRange: [-0.5 * width, 0],
+                          }
+                    ),
+                  },
+                  {
+                    // Workaround for workaround for https://github.com/facebook/react-native/issues/6278
+                    scaleX: timer.interpolate(
+                      indeterminate
+                        ? {
+                            inputRange: [0, 0.5, 1],
+                            outputRange: [
+                              0.0001,
+                              INDETERMINATE_MAX_WIDTH,
+                              0.0001,
+                            ],
+                          }
+                        : {
+                            inputRange: [0, 1],
+                            outputRange: [0.0001, 1],
+                          }
+                    ),
+                  },
+                ],
+              },
+            ]}
+          />
+        </Animated.View>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    height: 40,
-    overflow: 'hidden'
+    height: 4,
+    overflow: 'hidden',
   },
 
   progressBar: {
-
+    height: 4,
   },
 });
 

@@ -17,15 +17,15 @@ type Props = {
 
 type State = {
   progress: number,
-  animating: boolean
+  animating: boolean,
 };
 
 class ProgressBarExample extends React.Component<Props, State> {
   static title = 'Progress Bar';
 
   state = {
-    progress: 0.5,
-    animating: true
+    progress: 0.3,
+    animating: true,
   };
 
   render() {
@@ -37,14 +37,27 @@ class ProgressBarExample extends React.Component<Props, State> {
 
     return (
       <View style={[styles.container, { backgroundColor: background }]}>
-      <Button onPress={() => this.setState({ animating: !this.state.animating})}>Toggle animating</Button>
-        <Button onPress={() => this.setState({ progress: Math.random()})}>Random progress</Button>
+        <Button
+          onPress={() => this.setState({ animating: !this.state.animating })}
+        >
+          Toggle animating
+        </Button>
+        <Button onPress={() => this.setState({ progress: Math.random() })}>
+          Random progress
+        </Button>
         <Paragraph>ProgressBar primary color</Paragraph>
-        <ProgressBar progress={this.state.progress} animating={this.state.animating} />
+        <ProgressBar
+          progress={this.state.progress}
+          animating={this.state.animating}
+        />
         <Paragraph>ProgressBar custom color</Paragraph>
-        <ProgressBar progress={this.state.progress} animating={this.state.animating} color={Colors.red800} />
+        <ProgressBar
+          progress={this.state.progress}
+          animating={this.state.animating}
+          color={Colors.red800}
+        />
         <Paragraph>ProgressBar indeterminate</Paragraph>
-        <ProgressBar indeterminate color={Colors.red800} />
+        <ProgressBar indeterminate animating={this.state.animating} />
       </View>
     );
   }
