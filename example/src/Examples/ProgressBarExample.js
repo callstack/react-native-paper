@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import {
+  Button,
   ProgressBar,
   Paragraph,
   Colors,
@@ -16,30 +17,16 @@ type Props = {
 
 type State = {
   progress: number,
+  animating: boolean
 };
 
 class ProgressBarExample extends React.Component<Props, State> {
   static title = 'Progress Bar';
 
   state = {
-    progress: 0,
+    progress: 0.5,
+    animating: true
   };
-
-  componentDidMount() {
-    this._interval = setInterval(
-      () =>
-        this.setState(state => ({
-          progress: state.progress < 1 ? state.progress + 0.01 : 0,
-        })),
-      16
-    );
-  }
-
-  componentWillUnmount() {
-    clearInterval(this._interval);
-  }
-
-  _interval: IntervalID;
 
   render() {
     const {
@@ -47,12 +34,17 @@ class ProgressBarExample extends React.Component<Props, State> {
         colors: { background },
       },
     } = this.props;
+
     return (
       <View style={[styles.container, { backgroundColor: background }]}>
+      <Button onPress={() => this.setState({ animating: !this.state.animating})}>Toggle animating</Button>
+        <Button onPress={() => this.setState({ progress: Math.random()})}>Random progress</Button>
         <Paragraph>ProgressBar primary color</Paragraph>
-        <ProgressBar progress={this.state.progress} />
+        <ProgressBar progress={this.state.progress} animating={this.state.animating} />
         <Paragraph>ProgressBar custom color</Paragraph>
-        <ProgressBar progress={this.state.progress} color={Colors.red800} />
+        <ProgressBar progress={this.state.progress} animating={this.state.animating} color={Colors.red800} />
+        <Paragraph>ProgressBar indeterminate</Paragraph>
+        <ProgressBar indeterminate color={Colors.red800} />
       </View>
     );
   }
