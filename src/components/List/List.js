@@ -11,3 +11,6 @@ export { default as Item } from './ListItem';
 
 // @component ./ListSection.js
 export { default as Section } from './ListSection';
+
+// @component ./ListSubheader.js
+export { default as Subheader } from './ListSubheader';
