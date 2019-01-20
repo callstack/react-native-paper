@@ -13,6 +13,23 @@ type Props = React.ElementConfig<typeof Text> & {
   style?: any,
 };
 
+/**
+ * A component used to display a header in lists.
+ *
+ * ## Usage
+ * ```js
+ * import * as React from 'react';
+ * import { List } from 'react-native-paper';
+ *
+ * class MyComponent extends React.Component {
+ *  render () {
+ *    return <List.Subheader>My List Title</List.Subheader>;
+ *  }
+ * }
+ *
+ * export default MyComponent;
+ * ```
+ */
 class ListSubheader extends React.Component<Props> {
   static displayName = 'List.Subheader';
 
