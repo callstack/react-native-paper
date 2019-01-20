@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleProp, ViewStyle, ViewProps } from 'react-native';
+import { StyleProp, ViewStyle, ViewProps, TextProps, TextStyle } from 'react-native';
 import { ThemeShape, IconSource } from '../types';
 import { TouchableRipplePropsWithoutChildren } from './TouchableRipple';
 
@@ -40,3 +40,10 @@ export interface SectionProps extends ViewProps {
 }
 
 export declare class Section extends React.Component<SectionProps> {}
+
+export interface SubheaderProps extends TextProps {
+  style?: StyleProp<TextStyle>;
+  theme?: ThemeShape
+}
+
+export declare class Subheader extends React.Component<SubheaderProps> {}
