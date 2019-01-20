@@ -5,8 +5,9 @@ import renderer from 'react-test-renderer';
 import ListSection from '../List/ListSection';
 import ListItem from '../List/ListItem';
 import ListIcon from '../List/ListIcon';
+import ListSubheader from '../List/ListSubheader';
 
-it('renders list section without title', () => {
+it('renders list section without subheader', () => {
   const tree = renderer
     .create(
       <ListSection>
@@ -25,10 +26,11 @@ it('renders list section without title', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders list section with title', () => {
+it('renders list section with subheader', () => {
   const tree = renderer
     .create(
-      <ListSection title="Some title">
+      <ListSection>
+        <ListSubheader>Some title</ListSubheader>
         <ListItem
           title="First Item"
           left={props => <ListIcon {...props} icon="folder" />}

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders list section with title 1`] = `
+exports[`renders list section with subheader 1`] = `
 <View
   style={
     Array [
@@ -10,28 +10,41 @@ exports[`renders list section with title 1`] = `
       undefined,
     ]
   }
+  theme={
+    Object {
+      "colors": Object {
+        "accent": "#03dac4",
+        "backdrop": "rgba(0, 0, 0, 0.5)",
+        "background": "#f6f6f6",
+        "disabled": "rgba(0, 0, 0, 0.26)",
+        "error": "#B00020",
+        "placeholder": "rgba(0, 0, 0, 0.54)",
+        "primary": "#6200ee",
+        "surface": "#ffffff",
+        "text": "#000000",
+      },
+      "dark": false,
+      "fonts": Object {
+        "light": "HelveticaNeue-Light",
+        "medium": "HelveticaNeue-Medium",
+        "regular": "Helvetica Neue",
+        "thin": "HelveticaNeue-Thin",
+      },
+      "roundness": 4,
+    }
+  }
 >
   <Text
     numberOfLines={1}
     style={
-      Array [
-        Object {
-          "color": "#000000",
-          "fontFamily": "Helvetica Neue",
-          "textAlign": "left",
-          "writingDirection": "ltr",
-        },
-        Array [
-          Object {
-            "marginHorizontal": 16,
-            "marginVertical": 13,
-          },
-          Object {
-            "color": "rgba(0, 0, 0, 0.54)",
-            "fontFamily": "HelveticaNeue-Medium",
-          },
-        ],
-      ]
+      Object {
+        "color": "#000000",
+        "fontFamily": "Helvetica Neue",
+        "fontSize": 14,
+        "lineHeight": 14,
+        "paddingHorizontal": 16,
+        "paddingVertical": 17,
+      }
     }
   >
     Some title
@@ -275,7 +288,7 @@ exports[`renders list section with title 1`] = `
 </View>
 `;
 
-exports[`renders list section without title 1`] = `
+exports[`renders list section without subheader 1`] = `
 <View
   style={
     Array [
@@ -284,6 +297,29 @@ exports[`renders list section without title 1`] = `
       },
       undefined,
     ]
+  }
+  theme={
+    Object {
+      "colors": Object {
+        "accent": "#03dac4",
+        "backdrop": "rgba(0, 0, 0, 0.5)",
+        "background": "#f6f6f6",
+        "disabled": "rgba(0, 0, 0, 0.26)",
+        "error": "#B00020",
+        "placeholder": "rgba(0, 0, 0, 0.54)",
+        "primary": "#6200ee",
+        "surface": "#ffffff",
+        "text": "#000000",
+      },
+      "dark": false,
+      "fonts": Object {
+        "light": "HelveticaNeue-Light",
+        "medium": "HelveticaNeue-Medium",
+        "regular": "Helvetica Neue",
+        "thin": "HelveticaNeue-Thin",
+      },
+      "roundness": 4,
+    }
   }
 >
   <View
