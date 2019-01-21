@@ -242,14 +242,13 @@ const MAX_TAB_WIDTH = 168;
 const BAR_HEIGHT = 56;
 const FAR_FAR_AWAY = 9999;
 
-const Touchable =
-  Platform.OS === 'android'
-    ? TouchableRipple
-    : ({ style, children, borderless, rippleColor, ...rest }) => (
-        <TouchableWithoutFeedback {...rest}>
-          <View style={style}>{children}</View>
-        </TouchableWithoutFeedback>
-      );
+const Touchable = TouchableRipple.supported
+  ? TouchableRipple
+  : ({ style, children, borderless, rippleColor, ...rest }) => (
+      <TouchableWithoutFeedback {...rest}>
+        <View style={style}>{children}</View>
+      </TouchableWithoutFeedback>
+    );
 
 class SceneComponent extends React.PureComponent<*> {
   render() {
