@@ -86,6 +86,9 @@ class TouchableRipple extends React.Component<Props, void> {
   static supported =
     Platform.OS === 'android' &&
     Platform.Version >= ANDROID_VERSION_LOLLIPOP &&
+    // Ripple effect doesn't work properly with border radius on Android P
+    // So we disable it temporarily
+    // https://github.com/facebook/react-native/issues/6480
     Platform.Version <= ANDROID_VERSION_NOUGAT;
 
   render() {
