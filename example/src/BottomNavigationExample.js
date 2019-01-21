@@ -30,7 +30,7 @@ const PhotoGallery = ({ route }) => {
   );
 };
 
-export default class ButtomNavigationExample extends React.Component<
+export default class BottomNavigationExample extends React.Component<
   {},
   State
 > {
