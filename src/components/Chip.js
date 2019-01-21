@@ -168,8 +168,10 @@ class Chip extends React.Component<Props, State> {
           .alpha(0.54)
           .rgb()
           .string();
-    const selectedBackgroundColor = color(dark ? white : black)
-      .alpha(mode === 'outlined' ? 0.12 : 0.24)
+    const selectedBackgroundColor = (dark
+      ? color(backgroundColor).lighten(mode === 'outlined' ? 0.2 : 0.4)
+      : color(backgroundColor).darken(mode === 'outlined' ? 0.08 : 0.2)
+    )
       .rgb()
       .string();
 

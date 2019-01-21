@@ -243,64 +243,62 @@ class FABGroup extends React.Component<Props, State> {
         </TouchableWithoutFeedback>
         <View pointerEvents={open ? 'box-none' : 'none'}>
           {actions.map((it, i) => (
-            <Animated.View
+            <View
               key={i} // eslint-disable-line react/no-array-index-key
-              style={[
-                {
-                  opacity: opacities[i],
-                },
-              ]}
+              style={styles.item}
               pointerEvents="box-none"
             >
-              <View style={styles.item} pointerEvents="box-none">
-                {it.label && (
-                  <Card
-                    style={[
-                      styles.label,
-                      { transform: [{ scale: scales[i] }] },
-                    ]}
-                    onPress={() => {
-                      it.onPress();
-                      this._close();
-                    }}
-                    accessibilityLabel={
-                      it.accessibilityLabel !== 'undefined'
-                        ? it.accessibilityLabel
-                        : it.label
-                    }
-                    accessibilityTraits="button"
-                    accessibilityComponentType="button"
-                    accessibilityRole="button"
-                  >
-                    <Text style={{ color: labelColor }}>{it.label}</Text>
-                  </Card>
-                )}
-                <FAB
-                  small
-                  icon={it.icon}
-                  color={it.color}
+              {it.label && (
+                <Card
                   style={[
+                    styles.label,
                     {
                       transform: [{ scale: scales[i] }],
-                      backgroundColor: theme.colors.surface,
+                      opacity: opacities[i],
                     },
-                    it.style,
                   ]}
                   onPress={() => {
                     it.onPress();
                     this._close();
                   }}
                   accessibilityLabel={
-                    typeof it.accessibilityLabel !== 'undefined'
+                    it.accessibilityLabel !== 'undefined'
                       ? it.accessibilityLabel
                       : it.label
                   }
                   accessibilityTraits="button"
                   accessibilityComponentType="button"
                   accessibilityRole="button"
-                />
-              </View>
-            </Animated.View>
+                >
+                  <Text style={{ color: labelColor }}>{it.label}</Text>
+                </Card>
+              )}
+              <FAB
+                small
+                icon={it.icon}
+                color={it.color}
+                style={[
+                  {
+                    transform: [{ scale: scales[i] }],
+                    opacity: opacities[i],
+                    backgroundColor: theme.colors.surface,
+                  },
+                  it.style,
+                ]}
+                onPress={() => {
+                  it.onPress();
+                  this._close();
+                }}
+                accessibilityLabel={
+                  typeof it.accessibilityLabel !== 'undefined'
+                    ? it.accessibilityLabel
+                    : it.label
+                }
+                accessibilityTraits="button"
+                accessibilityComponentType="button"
+                accessibilityRole="button"
+              />
+            </View>
           ))}
         </View>
         <FAB

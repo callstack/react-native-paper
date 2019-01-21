@@ -3,7 +3,6 @@
 import * as React from 'react';
 import { StyleSheet, Platform } from 'react-native';
 import Modal from '../Modal';
-import Surface from '../Surface';
 import DialogContent from './DialogContent';
 import DialogActions from './DialogActions';
 import DialogTitle from './DialogTitle';
@@ -108,27 +107,35 @@ class Dialog extends React.Component<Props, void> {
     } = this.props;
 
     return (
-      <Modal dismissable={dismissable} onDismiss={onDismiss} visible={visible}>
-        <Surface
-          style={[styles.container, { borderRadius: theme.roundness }, style]}
-        >
-          {React.Children.toArray(children)
-            .filter(child => child != null && typeof child !== 'boolean')
-            .map((child, i) => {
-              if (
-                i === 0 &&
-                React.isValidElement(child) &&
-                child.type === DialogContent
-              ) {
-                // Dialog content is the first item, so we add a top padding
-                return React.cloneElement(child, {
-                  style: [{ paddingTop: 24 }, child.props.style],
-                });
-              }
+      <Modal
+        dismissable={dismissable}
+        onDismiss={onDismiss}
+        visible={visible}
+        contentContainerStyle={[
+          {
+            borderRadius: theme.roundness,
+            backgroundColor: theme.colors.surface,
+          },
+          styles.container,
+          style,
+        ]}
+      >
+        {React.Children.toArray(children)
+          .filter(child => child != null && typeof child !== 'boolean')
+          .map((child, i) => {
+            if (
+              i === 0 &&
+              React.isValidElement(child) &&
+              child.type === DialogContent
+            ) {
+              // Dialog content is the first item, so we add a top padding
+              return React.cloneElement(child, {
+                style: [{ paddingTop: 24 }, child.props.style],
+              });
+            }
 
-              return child;
-            })}
-        </Surface>
+            return child;
+          })}
       </Modal>
     );
   }
@@ -146,6 +153,7 @@ const styles = StyleSheet.create({
     marginVertical: Platform.OS === 'android' ? 44 : 0,
     marginHorizontal: 26,
     elevation: 24,
+    justifyContent: 'flex-start',
   },
 });
 

@@ -1,9 +1,10 @@
 /* @flow */
 
 import * as React from 'react';
-import { StyleSheet, Animated, View, SafeAreaView } from 'react-native';
+import { StyleSheet, Animated, SafeAreaView } from 'react-native';
 
 import Button from './Button';
+import Surface from './Surface';
 import Text from './Typography/Text';
 import { withTheme } from '../core/theming';
 import { white } from '../styles/colors';
@@ -182,50 +183,53 @@ class Snackbar extends React.Component<Props, State> {
   render() {
     const { children, visible, action, onDismiss, theme, style } = this.props;
     const { colors, roundness } = theme;
+
+    if (this.state.hidden) {
+      return null;
+    }
+
     return (
       <SafeAreaView pointerEvents="box-none" style={styles.wrapper}>
-        <Animated.View
+        <Surface
           pointerEvents="box-none"
           accessibilityLiveRegion="polite"
-          style={{
-            opacity: this.state.opacity,
-            transform: [
-              {
-                scale: visible
-                  ? this.state.opacity.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [0.9, 1],
-                    })
-                  : 1,
-              },
-            ],
-          }}
+          style={[
+            styles.container,
+            {
+              orderRadius: roundness,
+              opacity: this.state.opacity,
+              transform: [
+                {
+                  scale: visible
+                    ? this.state.opacity.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0.9, 1],
+                      })
+                    : 1,
+                },
+              ],
+            },
+            style,
+          ]}
         >
-          {!this.state.hidden ? (
-            <View
-              pointerEvents="box-none"
-              style={[styles.container, { borderRadius: roundness }, style]}
+          <Text style={[styles.content, { marginRight: action ? 0 : 16 }]}>
+            {children}
+          </Text>
+          {action ? (
+            <Button
+              onPress={() => {
+                action.onPress();
+                onDismiss();
+              }}
+              style={styles.button}
+              color={colors.accent}
+              compact
+              mode="text"
             >
-              <Text style={[styles.content, { marginRight: action ? 0 : 16 }]}>
-                {children}
-              </Text>
-              {action ? (
-                <Button
-                  onPress={() => {
-                    action.onPress();
-                    onDismiss();
-                  }}
-                  style={styles.button}
-                  color={colors.accent}
-                  compact
-                  mode="text"
-                >
-                  {action.label.toUpperCase()}
-                </Button>
-              ) : null}
-            </View>
+              {action.label.toUpperCase()}
+            </Button>
           ) : null}
-        </Animated.View>
+        </Surface>
       </SafeAreaView>
     );
   }

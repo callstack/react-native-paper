@@ -10,6 +10,7 @@ import {
   BackHandler,
 } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
+import Surface from './Surface';
 import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 
@@ -30,6 +31,10 @@ type Props = {|
    * Content of the `Modal`.
    */
   children: React.Node,
+  /**
+   * Style for the content of the modal
+   */
+  contentContainerStyle?: any,
   /**
    * @optional
    */
@@ -142,23 +147,35 @@ class Modal extends React.Component<Props, State> {
   render() {
     if (!this.state.rendered) return null;
 
-    const { children, dismissable, theme } = this.props;
+    const { children, dismissable, theme, contentContainerStyle } = this.props;
     const { colors } = theme;
     return (
       <Animated.View
         accessibilityViewIsModal
         accessibilityLiveRegion="polite"
-        style={[{ opacity: this.state.opacity }, StyleSheet.absoluteFill]}
+        style={StyleSheet.absoluteFill}
       >
         <TouchableWithoutFeedback
           onPress={dismissable ? this._hideModal : undefined}
         >
-          <View
-            style={[styles.backdrop, { backgroundColor: colors.backdrop }]}
+          <Animated.View
+            style={[
+              styles.backdrop,
+              { backgroundColor: colors.backdrop, opacity: this.state.opacity },
+            ]}
           />
         </TouchableWithoutFeedback>
-        <View pointerEvents="box-none" style={styles.content}>
-          {children}
+        <View style={styles.wrapper}>
+          <Surface
+            pointerEvents="box-none"
+            style={[
+              { opacity: this.state.opacity },
+              styles.content,
+              contentContainerStyle,
+            ]}
+          >
+            {children}
+          </Surface>
         </View>
       </Animated.View>
     );
@@ -173,8 +190,12 @@ const styles = StyleSheet.create({
   backdrop: {
     flex: 1,
   },
-  content: {
+  wrapper: {
     ...StyleSheet.absoluteFillObject,
+    justifyContent: 'center',
+  },
+  content: {
+    backgroundColor: 'transparent',
     justifyContent: 'center',
   },
 });

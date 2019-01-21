@@ -437,7 +437,7 @@ exports[`renders selected chip 1`] = `
 <View
   style={
     Object {
-      "backgroundColor": "rgba(0, 0, 0, 0.24)",
+      "backgroundColor": "rgb(188, 188, 188)",
       "borderColor": "#ebebeb",
       "borderRadius": 16,
       "borderStyle": "solid",
