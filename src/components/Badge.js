@@ -81,6 +81,7 @@ class Badge extends React.Component<Props, State> {
 
     return (
       <Animated.Text
+        numberOfLines={1}
         style={[
           {
             opacity,

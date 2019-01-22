@@ -2,6 +2,7 @@
 
 exports[`renders badge 1`] = `
 <Text
+  numberOfLines={1}
   style={
     Object {
       "alignSelf": "flex-end",
@@ -24,6 +25,7 @@ exports[`renders badge 1`] = `
 
 exports[`renders badge as hidden 1`] = `
 <Text
+  numberOfLines={1}
   style={
     Object {
       "alignSelf": "flex-end",
@@ -48,6 +50,7 @@ exports[`renders badge as hidden 1`] = `
 
 exports[`renders badge in different color 1`] = `
 <Text
+  numberOfLines={1}
   style={
     Object {
       "alignSelf": "flex-end",
@@ -72,6 +75,7 @@ exports[`renders badge in different color 1`] = `
 
 exports[`renders badge in different size 1`] = `
 <Text
+  numberOfLines={1}
   style={
     Object {
       "alignSelf": "flex-end",
@@ -96,6 +100,7 @@ exports[`renders badge in different size 1`] = `
 
 exports[`renders badge with content 1`] = `
 <Text
+  numberOfLines={1}
   style={
     Object {
       "alignSelf": "flex-end",

@@ -11,6 +11,7 @@ type State = {
     title: string,
     icon: string,
     color: string,
+    badge?: boolean,
   }>,
 };
 
@@ -45,6 +46,7 @@ export default class BottomNavigationExample extends React.Component<
         title: 'Library',
         icon: 'inbox',
         color: '#2962ff',
+        badge: true,
       },
       {
         key: 'favorites',

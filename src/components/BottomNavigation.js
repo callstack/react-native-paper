@@ -15,6 +15,7 @@ import { polyfill } from 'react-lifecycles-compat';
 import color from 'color';
 import Icon from './Icon';
 import Surface from './Surface';
+import Badge from './Badge';
 import TouchableRipple from './TouchableRipple';
 import Text from './Typography/Text';
 import { black, white } from '../styles/colors';
@@ -28,6 +29,7 @@ type Route = $Shape<{
   key: string,
   title: string,
   icon: IconSource,
+  badge: string | number | boolean,
   color: string,
   accessibilityLabel: string,
   testID: string,
@@ -60,6 +62,7 @@ type Props<T> = {
    * - `title`: title of the route to use as the tab label
    * - `icon`: icon to use as the tab icon, can be a string, an image source or a react component
    * - `color`: color to use as background color for shifting bottom navigation
+   * - `badge`: badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.
    * - `accessibilityLabel`: accessibility label for the tab button
    * - `testID`: test id for the tab button
    *
@@ -153,6 +156,11 @@ type Props<T> = {
    * Get the id to locate this tab button in tests, uses `route.testID` by default.
    */
   getTestID?: (props: { route: T }) => ?string,
+  /**
+   * Get badge for the tab, uses `route.badge` by default.
+   */
+  getBadge?: (props: { route: T }) => boolean | number | string,
+  /**
   /**
    * Get color for the tab, uses `route.color` by default.
    */
@@ -535,6 +543,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
       renderIcon,
       renderLabel,
       getLabelText = ({ route }: Object) => route.title,
+      getBadge = ({ route }: Object) => route.badge,
       getColor = ({ route }: Object) => route.color,
       getAccessibilityLabel = ({ route }: Object) => route.accessibilityLabel,
       getTestID = ({ route }: Object) => route.testID,
@@ -734,6 +743,8 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                   outputRange: [1, 0],
                 });
 
+                const badge = getBadge({ route });
+
                 return (
                   <Touchable
                     key={route.key}
@@ -797,6 +808,25 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                             />
                           )}
                         </Animated.View>
+                        <View
+                          style={[
+                            styles.badgeContainer,
+                            {
+                              right:
+                                (badge != null && typeof badge !== 'boolean'
+                                  ? String(badge).length * -2
+                                  : 0) - 2,
+                            },
+                          ]}
+                        >
+                          {typeof badge === 'boolean' ? (
+                            <Badge visible={badge} size={8} />
+                          ) : (
+                            <Badge visible={badge != null} size={16}>
+                              {badge}
+                            </Badge>
+                          )}
+                        </View>
                       </Animated.View>
                       {labeled ? (
                         <Animated.View
@@ -923,5 +953,10 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'center',
     backgroundColor: 'transparent',
+  },
+  badgeContainer: {
+    position: 'absolute',
+    left: 0,
+    top: -2,
   },
 });

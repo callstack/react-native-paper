@@ -242,6 +242,41 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   
                 </Text>
               </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
+              </View>
             </View>
             <View
               style={
@@ -391,6 +426,41 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   
                 </Text>
               </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
+              </View>
             </View>
             <View
               style={
@@ -539,6 +609,41 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 >
                   
                 </Text>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
               </View>
             </View>
             <View
@@ -819,6 +924,41 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   
                 </Text>
               </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
+              </View>
             </View>
             <View
               style={
@@ -968,6 +1108,41 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   
                 </Text>
               </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
+              </View>
             </View>
             <View
               style={
@@ -1116,6 +1291,41 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 >
                   
                 </Text>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
               </View>
             </View>
             <View
@@ -1318,6 +1528,41 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   3d-rotation
                 </icon>
               </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
+              </View>
             </View>
             <View
               style={
@@ -1447,6 +1692,41 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   ac-unit
                 </icon>
               </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
+              </View>
             </View>
             <View
               style={
@@ -1575,6 +1855,41 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 >
                   access-alarm
                 </icon>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
               </View>
             </View>
             <View
@@ -1835,6 +2150,41 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   3d-rotation
                 </icon>
               </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
+              </View>
             </View>
             <View
               style={
@@ -1948,6 +2298,41 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   ac-unit
                 </icon>
               </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
+              </View>
             </View>
             <View
               style={
@@ -2060,6 +2445,41 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 >
                   access-alarm
                 </icon>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
               </View>
             </View>
             <View
@@ -2174,6 +2594,41 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   access-alarms
                 </icon>
               </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
+              </View>
             </View>
             <View
               style={
@@ -2286,6 +2741,41 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 >
                   access-time
                 </icon>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
               </View>
             </View>
             <View
@@ -2568,6 +3058,41 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   
                 </Text>
               </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
+              </View>
             </View>
             <View
               style={
@@ -2789,6 +3314,41 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   
                 </Text>
               </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
+              </View>
             </View>
             <View
               style={
@@ -3009,6 +3569,41 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 >
                   
                 </Text>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
               </View>
             </View>
             <View
@@ -3361,6 +3956,41 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   
                 </Text>
               </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
+              </View>
             </View>
             <View
               style={
@@ -3549,6 +4179,41 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   
                 </Text>
               </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
+              </View>
             </View>
             <View
               style={
@@ -3736,6 +4401,41 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 >
                   
                 </Text>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
               </View>
             </View>
             <View
@@ -4035,6 +4735,41 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   
                 </Text>
               </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
+              </View>
             </View>
             <View
               style={
@@ -4256,6 +4991,41 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   
                 </Text>
               </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
+              </View>
             </View>
             <View
               style={
@@ -4476,6 +5246,41 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 >
                   
                 </Text>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
               </View>
             </View>
             <View
@@ -4828,6 +5633,41 @@ exports[`renders shifting bottom navigation 1`] = `
                   
                 </Text>
               </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
+              </View>
             </View>
             <View
               style={
@@ -5015,6 +5855,41 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   
                 </Text>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
               </View>
             </View>
             <View
@@ -5204,6 +6079,41 @@ exports[`renders shifting bottom navigation 1`] = `
                   
                 </Text>
               </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
+              </View>
             </View>
             <View
               style={
@@ -5392,6 +6302,41 @@ exports[`renders shifting bottom navigation 1`] = `
                   
                 </Text>
               </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
+              </View>
             </View>
             <View
               style={
@@ -5579,6 +6524,41 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   
                 </Text>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "left": 0,
+                      "position": "absolute",
+                      "top": -2,
+                    },
+                    Object {
+                      "right": -2,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "backgroundColor": "#f50057",
+                      "borderRadius": 8,
+                      "color": "#ffffff",
+                      "fontFamily": "Helvetica Neue",
+                      "fontSize": 8,
+                      "height": 16,
+                      "lineHeight": 16,
+                      "minWidth": 16,
+                      "opacity": 0,
+                      "paddingHorizontal": 4,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                />
               </View>
             </View>
             <View
