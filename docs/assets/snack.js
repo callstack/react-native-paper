@@ -3,9 +3,7 @@
 'use strict';
 
 function appendSnackLink() {
-  var usage = Array.from(document.querySelectorAll('h2')).find(
-    h => h.textContent === 'Usage'
-  );
+  var usage = document.getElementById('usage');
 
   if (usage) {
     var pre = usage.nextElementSibling;
