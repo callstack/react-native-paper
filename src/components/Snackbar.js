@@ -196,7 +196,7 @@ class Snackbar extends React.Component<Props, State> {
           style={[
             styles.container,
             {
-              orderRadius: roundness,
+              borderRadius: roundness,
               opacity: this.state.opacity,
               transform: [
                 {
