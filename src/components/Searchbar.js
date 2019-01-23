@@ -165,18 +165,17 @@ class Searchbar extends React.Component<Props> {
           value={value}
           {...rest}
         />
-        {value ? (
-          <IconButton
-            borderless
-            color={iconColor}
-            rippleColor={rippleColor}
-            onPress={this._handleClearPress}
-            icon="close"
-            accessibilityTraits="button"
-            accessibilityComponentType="button"
-            accessibilityRole="button"
-          />
-        ) : null}
+        <IconButton
+          borderless
+          disabled={!value}
+          color={value ? iconColor : 'rgba(255, 255, 255, 0)'}
+          rippleColor={rippleColor}
+          onPress={this._handleClearPress}
+          icon="close"
+          accessibilityTraits="button"
+          accessibilityComponentType="button"
+          accessibilityRole="button"
+        />
       </Surface>
     );
   }
