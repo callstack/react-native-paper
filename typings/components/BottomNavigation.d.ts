@@ -6,6 +6,7 @@ type Route = Partial<{
   key: string;
   title: string;
   icon: IconSource;
+  badge: string | number | boolean;
   color: string;
   accessibilityLabel: string;
   testID: string;
@@ -34,9 +35,10 @@ export interface BottomNavigationProps<T> {
     props: { route: T; focused: boolean; color: string }
   ) => React.ReactNode;
   getLabelText?: (props: { route: T }) => string;
+  getBadge?: (props: { route: T }) => boolean | number | string;
+  getColor?: (props: { route: T }) => string;
   getAccessibilityLabel?: (props: { route: T }) => string | null | undefined;
   getTestID?: (props: { route: T }) => string | null | undefined;
-  getColor?: (props: { route: T }) => string;
   onTabPress?: (props: { route: T }) => any;
   activeColor?: string;
   inactiveColor?: string;
