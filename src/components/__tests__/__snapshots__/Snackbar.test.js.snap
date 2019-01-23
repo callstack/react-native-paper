@@ -26,7 +26,6 @@ exports[`renders snackbar with Text as a child 1`] = `
         "justifyContent": "space-between",
         "margin": 8,
         "opacity": 1,
-        "orderRadius": 4,
         "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 5,
@@ -98,7 +97,6 @@ exports[`renders snackbar with action button 1`] = `
         "justifyContent": "space-between",
         "margin": 8,
         "opacity": 1,
-        "orderRadius": 4,
         "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 5,
@@ -251,7 +249,6 @@ exports[`renders snackbar with content 1`] = `
         "justifyContent": "space-between",
         "margin": 8,
         "opacity": 1,
-        "orderRadius": 4,
         "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 5,
