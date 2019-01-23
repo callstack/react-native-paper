@@ -38,7 +38,7 @@ const App = createDrawerNavigator(
     ),
     // set drawerPosition to support rtl toggle on android
     drawerPosition:
-      (Platform.OS === 'android' && I18nManager.isRTL) ? 'right' : 'left',
+      Platform.OS === 'android' && I18nManager.isRTL ? 'right' : 'left',
   }
 );
 
