@@ -63,6 +63,7 @@ By default, this is <code>true</code> when you have more than 3 tabs.</p>
 <li><code>title</code>: title of the route to use as the tab label</li>
 <li><code>icon</code>: icon to use as the tab icon, can be a string, an image source or a react component</li>
 <li><code>color</code>: color to use as background color for shifting bottom navigation</li>
+<li><code>badge</code>: badge to show on the tab icon, can be <code>true</code> to show a dot, <code>string</code> or <code>number</code> to show text.</li>
 <li><code>accessibilityLabel</code>: accessibility label for the tab button</li>
 <li><code>testID</code>: test id for the tab button</li>
 </ul>
@@ -117,7 +118,9 @@ The <code>jumpTo</code> method can be used to navigate to other tabs programmati
 </div></div><div class="psi127e"><a class="pwdtv5j" name="getAccessibilityLabel" href="#getAccessibilityLabel"><code>getAccessibilityLabel</code></a><div class="p5pwgte"><span>Type: </span><code>(props: { route: T }) =&gt; ?string</code></div><div class="p5pwgte m3ctz2y"><p>Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
 Uses <code>route.accessibilityLabel</code> by default.</p>
 </div></div><div class="psi127e"><a class="pwdtv5j" name="getTestID" href="#getTestID"><code>getTestID</code></a><div class="p5pwgte"><span>Type: </span><code>(props: { route: T }) =&gt; ?string</code></div><div class="p5pwgte m3ctz2y"><p>Get the id to locate this tab button in tests, uses <code>route.testID</code> by default.</p>
-</div></div><div class="psi127e"><a class="pwdtv5j" name="getColor" href="#getColor"><code>getColor</code></a><div class="p5pwgte"><span>Type: </span><code>(props: { route: T }) =&gt; string</code></div><div class="p5pwgte m3ctz2y"><p>Get color for the tab, uses <code>route.color</code> by default.</p>
+</div></div><div class="psi127e"><a class="pwdtv5j" name="getBadge" href="#getBadge"><code>getBadge</code></a><div class="p5pwgte"><span>Type: </span><code>(props: { route: T }) =&gt; boolean | number | string</code></div><div class="p5pwgte m3ctz2y"><p>Get badge for the tab, uses <code>route.badge</code> by default.</p>
+</div></div><div class="psi127e"><a class="pwdtv5j" name="getColor" href="#getColor"><code>getColor</code></a><div class="p5pwgte"><span>Type: </span><code>(props: { route: T }) =&gt; string</code></div><div class="p5pwgte m3ctz2y"><p>/**
+Get color for the tab, uses <code>route.color</code> by default.</p>
 </div></div><div class="psi127e"><a class="pwdtv5j" name="onTabPress" href="#onTabPress"><code>onTabPress</code></a><div class="p5pwgte"><span>Type: </span><code>(props: { route: T }) =&gt; mixed</code></div><div class="p5pwgte m3ctz2y"><p>Function to execute on tab press. It receives the route for the pressed tab, useful for things like scroll to top.</p>
 </div></div><div class="psi127e"><a class="pwdtv5j" name="activeColor" href="#activeColor"><code>activeColor</code></a><div class="p5pwgte"><span>Type: </span><code>string</code></div><div class="p5pwgte m3ctz2y"><p>Custom color for icon and label in the active tab.</p>
 </div></div><div class="psi127e"><a class="pwdtv5j" name="inactiveColor" href="#inactiveColor"><code>inactiveColor</code></a><div class="p5pwgte"><span>Type: </span><code>string</code></div><div class="p5pwgte m3ctz2y"><p>Custom color for icon and label in the inactive tab.</p>
