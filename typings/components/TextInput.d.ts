@@ -36,4 +36,9 @@ export interface RenderProps extends NativeTextInputProps {
   value?: string;
 }
 
-export declare class TextInput extends React.Component<TextInputProps> {}
+export declare class TextInput extends React.Component<TextInputProps> {
+  isFocused: () => boolean;
+  clear: () => void;
+  focus(): void;
+  blur(): void;
+}
