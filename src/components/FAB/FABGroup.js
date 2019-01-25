@@ -68,7 +68,7 @@ type Props = {|
   visible: boolean,
   /**
    * Style for the group. You can use it to pass additional styles if you need.
-   * For example, you can set an additional margin if you have a tab bar at the bottom.
+   * For example, you can set an additional padding if you have a tab bar at the bottom.
    */
   style?: any,
   /**
