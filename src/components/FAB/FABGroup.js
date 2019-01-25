@@ -226,8 +226,10 @@ class FABGroup extends React.Component<Props, State> {
           : 1
     );
 
+    const { backgroundColor, ...rest } = style || {};
+
     return (
-      <View pointerEvents="box-none" style={[styles.container, style]}>
+      <View pointerEvents="box-none" style={[styles.container, rest]}>
         {open ? <StatusBar barStyle="light-content" /> : null}
         <TouchableWithoutFeedback onPress={this._close}>
           <Animated.View
@@ -312,7 +314,7 @@ class FABGroup extends React.Component<Props, State> {
           accessibilityTraits="button"
           accessibilityComponentType="button"
           accessibilityRole="button"
-          style={styles.fab}
+          style={[styles.fab, backgroundColor ? { backgroundColor } : null]}
           visible={visible}
         />
       </View>
