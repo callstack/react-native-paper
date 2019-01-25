@@ -90,7 +90,7 @@ class DataTableTitle extends React.Component<Props, State> {
     ) : null;
 
     return (
-      <TouchableWithoutFeedback onPress={onPress} {...rest}>
+      <TouchableWithoutFeedback disabled={!onPress} onPress={onPress} {...rest}>
         <View style={[styles.container, numeric && styles.right, style]}>
           {icon}
 
