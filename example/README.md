@@ -1,8 +1,20 @@
-## Run the example
+# Example App for React Native Paper
 
-- [View and edit it with Expo Snack](https://snack.expo.io/@satya164/github.com-callstack-react-native-paper:example)
-- Run the example locally
-  + Clone the repository and `cd` to this directory
-  + Run `yarn` to install the dependencies
-  + Run `yarn start` to start the packager
-  + Follow the instructions to open it with the [Expo app](https://expo.io/)
+## React Native App
+
+You can run the React Native app with [this Snack](https://snack.expo.io/@satya164/github.com-callstack-react-native-paper:example). Snack allows you to make changes to the example app directly in the online editor and see changes on your phone instantly using the [Expo](https://expo.io/) app without having to install or setup anything on your computer. You can also "Export" it to download as a standalone Expo app to run locally.
+
+If you want to run the example from the repo,
+
+- Clone the repository and `cd` to this directory
+- Run `yarn` to install the dependencies
+- Run `yarn start` to start the packager
+- Follow the instructions to open it with the [Expo app](https://expo.io/)
+
+## Web App
+
+You can also run the example app as a web app using [react-native-web](https://github.com/necolas/react-native-web),
+
+- Clone the repository and `cd` to this directory
+- Run `yarn` to install the dependencies
+- Run `yarn web` to start the webpack server and open the app in your browser

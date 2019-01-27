@@ -34,7 +34,7 @@ class ListSectionExample extends React.Component<Props> {
           <List.Item
             left={() => (
               <Image
-                source={require('../assets/email-icon.png')}
+                source={require('../../assets/images/email-icon.png')}
                 style={styles.image}
               />
             )}
@@ -44,7 +44,7 @@ class ListSectionExample extends React.Component<Props> {
           <List.Item
             left={() => (
               <Image
-                source={require('../assets/email-icon.png')}
+                source={require('../../assets/images/email-icon.png')}
                 style={styles.image}
               />
             )}
@@ -58,7 +58,7 @@ class ListSectionExample extends React.Component<Props> {
           <List.Item
             left={() => (
               <Image
-                source={require('../assets/email-icon.png')}
+                source={require('../../assets/images/email-icon.png')}
                 style={styles.image}
               />
             )}
@@ -68,7 +68,7 @@ class ListSectionExample extends React.Component<Props> {
           <List.Item
             left={() => (
               <Image
-                source={require('../assets/email-icon.png')}
+                source={require('../../assets/images/email-icon.png')}
                 style={styles.image}
               />
             )}

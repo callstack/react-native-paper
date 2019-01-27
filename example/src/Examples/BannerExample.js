@@ -58,7 +58,7 @@ class BannerExample extends React.Component<Props, State> {
             ]}
             image={({ size }) => (
               <Image
-                source={require('../assets/email-icon.png')}
+                source={require('../../assets/images/email-icon.png')}
                 style={{
                   width: size,
                   height: size,

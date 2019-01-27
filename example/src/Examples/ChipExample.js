@@ -35,7 +35,9 @@ class ChipExample extends React.Component<Props> {
               Icon
             </Chip>
             <Chip
-              avatar={<Image source={require('../assets/avatar.png')} />}
+              avatar={
+                <Image source={require('../../assets/images/avatar.png')} />
+              }
               onPress={() => {}}
               onClose={() => {}}
               style={styles.chip}
@@ -44,7 +46,9 @@ class ChipExample extends React.Component<Props> {
             </Chip>
             <Chip
               selected
-              avatar={<Image source={require('../assets/avatar.png')} />}
+              avatar={
+                <Image source={require('../../assets/images/avatar.png')} />
+              }
               onPress={() => {}}
               style={styles.chip}
             >
@@ -60,7 +64,9 @@ class ChipExample extends React.Component<Props> {
             </Chip>
             <Chip
               disabled
-              avatar={<Image source={require('../assets/avatar.png')} />}
+              avatar={
+                <Image source={require('../../assets/images/avatar.png')} />
+              }
               style={styles.chip}
             >
               Avatar (disabled)
@@ -91,7 +97,9 @@ class ChipExample extends React.Component<Props> {
             </Chip>
             <Chip
               mode="outlined"
-              avatar={<Image source={require('../assets/avatar.png')} />}
+              avatar={
+                <Image source={require('../../assets/images/avatar.png')} />
+              }
               onPress={() => {}}
               style={styles.chip}
             >
@@ -100,7 +108,9 @@ class ChipExample extends React.Component<Props> {
             <Chip
               selected
               mode="outlined"
-              avatar={<Image source={require('../assets/avatar.png')} />}
+              avatar={
+                <Image source={require('../../assets/images/avatar.png')} />
+              }
               onPress={() => {}}
               style={styles.chip}
             >
@@ -118,7 +128,9 @@ class ChipExample extends React.Component<Props> {
             <Chip
               disabled
               mode="outlined"
-              avatar={<Image source={require('../assets/avatar.png')} />}
+              avatar={
+                <Image source={require('../../assets/images/avatar.png')} />
+              }
               style={styles.chip}
             >
               Avatar (disabled)

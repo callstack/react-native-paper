@@ -7,23 +7,39 @@
   "scripts": {
     "start": "expo start",
     "android": "expo android",
-    "ios": "expo ios"
+    "ios": "expo ios",
+    "web": "webpack-dev-server --mode development --open --hot"
   },
   "main": "node_modules/expo/AppEntry.js",
   "dependencies": {
     "@callstack/react-theme-provider": "^1.0.7",
     "@expo/vector-icons": "^8.0.0",
+    "@reach/router": "^1.2.1",
     "create-react-context": "^0.2.3",
     "expo": "^31.0.3",
     "react": "16.5.0",
+    "react-art": "^16.7.0",
     "react-lifecycles-compat": "^3.0.4",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.1.tar.gz",
+    "react-native-web": "^0.10.0-alpha.3",
     "react-navigation": "^2.18.2"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.1",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
     "babel-plugin-module-resolver": "^3.1.1",
     "babel-preset-expo": "^5.0.0",
-    "expo-cli": "^2.3.8"
+    "css-loader": "^2.1.0",
+    "expo-cli": "^2.3.8",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
   },
   "resolutions": {
     "**/create-react-context": "0.2.3",
