@@ -1,7 +1,6 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'production',
   entry: path.join(__dirname, 'App.web.js'),
   output: {
     path: path.join(__dirname, 'dist'),
@@ -45,17 +44,14 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/,
-        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
-      },
-      {
         test: /\.(jpg|png|woff|woff2|eot|ttf|svg)$/,
-        loader: 'url-loader?limit=1000000',
+        loader: 'file-loader',
       },
     ],
   },
   devServer: {
     contentBase: [path.join(__dirname, 'public'), path.join(__dirname, 'dist')],
     historyApiFallback: true,
+    hot: true,
   },
 };
