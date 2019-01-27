@@ -8,9 +8,9 @@ import {
   ScrollView,
   SafeAreaView,
   Dimensions,
-  type Theme,
+  Platform,
 } from 'react-native';
-import { Banner, withTheme, FAB } from 'react-native-paper';
+import { Banner, withTheme, FAB, type Theme } from 'react-native-paper';
 
 type Props = {
   theme: Theme,
@@ -99,15 +99,32 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-  item: {
-    height: Dimensions.get('window').width / 2,
-    width: '50%',
-    padding: 4,
-  },
+  ...Platform.select({
+    web: {
+      grid: {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
+        gridGap: 8,
+        padding: 8,
+      },
+      item: {
+        width: '100%',
+        height: 150,
+      },
+    },
+    default: {
+      grid: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        padding: 4,
+      },
+      item: {
+        height: Dimensions.get('window').width / 2,
+        width: '50%',
+        padding: 4,
+      },
+    },
+  }),
   photo: {
     flex: 1,
     resizeMode: 'cover',

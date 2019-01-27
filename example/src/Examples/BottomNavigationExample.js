@@ -1,7 +1,14 @@
 /* @flow */
 
 import * as React from 'react';
-import { ScrollView, View, Image, Dimensions, StyleSheet } from 'react-native';
+import {
+  ScrollView,
+  View,
+  Image,
+  Dimensions,
+  StyleSheet,
+  Platform,
+} from 'react-native';
 import { BottomNavigation } from 'react-native-paper';
 
 type State = {
@@ -80,16 +87,32 @@ export default class BottomNavigationExample extends React.Component<
 }
 
 const styles = StyleSheet.create({
-  content: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    padding: 4,
-  },
-  item: {
-    height: Dimensions.get('window').width / 2,
-    width: '50%',
-    padding: 4,
-  },
+  ...Platform.select({
+    web: {
+      content: {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
+        gridGap: 8,
+        padding: 8,
+      },
+      item: {
+        width: '100%',
+        height: 150,
+      },
+    },
+    default: {
+      content: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        padding: 4,
+      },
+      item: {
+        height: Dimensions.get('window').width / 2,
+        width: '50%',
+        padding: 4,
+      },
+    },
+  }),
   photo: {
     flex: 1,
     resizeMode: 'cover',
