@@ -72,6 +72,10 @@ type Props = {|
    */
   style?: any,
   /**
+   * Style for the FAB. It allows to pass the FAB button styles, such as backgroundColor.
+   */
+  fabStyle?: any,
+  /**
    * @optional
    */
   theme: Theme,
@@ -198,6 +202,7 @@ class FABGroup extends React.Component<Props, State> {
       accessibilityLabel,
       theme,
       style,
+      fabStyle,
       visible,
     } = this.props;
     const { colors } = theme;
@@ -226,10 +231,8 @@ class FABGroup extends React.Component<Props, State> {
           : 1
     );
 
-    const { backgroundColor, ...rest } = style || {};
-
     return (
-      <View pointerEvents="box-none" style={[styles.container, rest]}>
+      <View pointerEvents="box-none" style={[styles.container, style]}>
         {open ? <StatusBar barStyle="light-content" /> : null}
         <TouchableWithoutFeedback onPress={this._close}>
           <Animated.View
@@ -314,7 +317,7 @@ class FABGroup extends React.Component<Props, State> {
           accessibilityTraits="button"
           accessibilityComponentType="button"
           accessibilityRole="button"
-          style={[styles.fab, backgroundColor ? { backgroundColor } : null]}
+          style={[styles.fab, fabStyle]}
           visible={visible}
         />
       </View>
