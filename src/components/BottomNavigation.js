@@ -906,6 +906,7 @@ export default withTheme(BottomNavigation);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    overflow: 'hidden',
   },
   content: {
     flex: 1,
@@ -917,10 +918,12 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   barContent: {
+    alignItems: 'center',
     overflow: 'hidden',
   },
   items: {
     flexDirection: 'row',
+    width: '100%',
   },
   item: {
     flex: 1,
@@ -953,6 +956,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'center',
     backgroundColor: 'transparent',
+    ...((Platform.OS === 'web'
+      ? {
+          whiteSpace: 'nowrap',
+        }
+      : null): any),
   },
   badgeContainer: {
     position: 'absolute',
