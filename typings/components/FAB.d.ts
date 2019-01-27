@@ -21,6 +21,7 @@ export interface FABGroupProps {
   onStateChange: (state: { open: boolean }) => any;
   visible?: boolean;
   style?: any;
+  fabStyle?: any;
   theme?: ThemeShape;
 }
 
