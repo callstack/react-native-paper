@@ -88,7 +88,9 @@ class AppbarContent extends React.Component<Props> {
             ]}
             numberOfLines={1}
             accessibilityTraits="header"
-            accessibilityRole={Platform.OS === 'web' ? 'heading' : 'header'}
+            accessibilityRole={
+              Platform.OS === 'web' ? ('heading': any) : 'header'
+            }
           >
             {title}
           </Text>

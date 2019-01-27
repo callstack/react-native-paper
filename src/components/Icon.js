@@ -99,10 +99,10 @@ const Icon = ({ source, color, size, ...rest }: Props) => {
 
   const accessibilityProps =
     Platform.OS === 'web'
-      ? {
+      ? ({
           role: 'img',
           focusable: false,
-        }
+        }: any)
       : {
           accessibilityElementsHidden: true,
           importantForAccessibility: 'no-hide-descendants',

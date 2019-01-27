@@ -7,6 +7,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
     Array [
       Object {
         "flex": 1,
+        "overflow": "hidden",
       },
       undefined,
     ]
@@ -82,6 +83,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
     <View
       style={
         Object {
+          "alignItems": "center",
           "backgroundColor": "#6200ee",
           "overflow": "hidden",
         }
@@ -92,6 +94,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           Array [
             Object {
               "flexDirection": "row",
+              "width": "100%",
             },
             Object {
               "maxWidth": 504,
@@ -672,6 +675,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
     Array [
       Object {
         "flex": 1,
+        "overflow": "hidden",
       },
       undefined,
     ]
@@ -747,6 +751,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
     <View
       style={
         Object {
+          "alignItems": "center",
           "backgroundColor": "rgba(98, 0, 238, 1)",
           "overflow": "hidden",
         }
@@ -757,6 +762,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           Array [
             Object {
               "flexDirection": "row",
+              "width": "100%",
             },
             Object {
               "maxWidth": 504,
@@ -1357,6 +1363,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
     Array [
       Object {
         "flex": 1,
+        "overflow": "hidden",
       },
       undefined,
     ]
@@ -1432,6 +1439,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
     <View
       style={
         Object {
+          "alignItems": "center",
           "backgroundColor": "#6200ee",
           "overflow": "hidden",
         }
@@ -1442,6 +1450,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           Array [
             Object {
               "flexDirection": "row",
+              "width": "100%",
             },
             Object {
               "maxWidth": 504,
@@ -1962,6 +1971,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
     Array [
       Object {
         "flex": 1,
+        "overflow": "hidden",
       },
       undefined,
     ]
@@ -2037,6 +2047,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
     <View
       style={
         Object {
+          "alignItems": "center",
           "backgroundColor": "rgba(98, 0, 238, 1)",
           "overflow": "hidden",
         }
@@ -2047,6 +2058,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           Array [
             Object {
               "flexDirection": "row",
+              "width": "100%",
             },
             Object {
               "maxWidth": 480,
@@ -2837,6 +2849,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
     Array [
       Object {
         "flex": 1,
+        "overflow": "hidden",
       },
       undefined,
     ]
@@ -2912,6 +2925,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
     <View
       style={
         Object {
+          "alignItems": "center",
           "backgroundColor": "#E96A82",
           "overflow": "hidden",
         }
@@ -2922,6 +2936,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           Array [
             Object {
               "flexDirection": "row",
+              "width": "100%",
             },
             Object {
               "maxWidth": 504,
@@ -3718,6 +3733,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
     Array [
       Object {
         "flex": 1,
+        "overflow": "hidden",
       },
       undefined,
     ]
@@ -3793,6 +3809,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
     <View
       style={
         Object {
+          "alignItems": "center",
           "backgroundColor": "rgba(233, 106, 130, 1)",
           "overflow": "hidden",
         }
@@ -3803,6 +3820,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           Array [
             Object {
               "flexDirection": "row",
+              "width": "100%",
             },
             Object {
               "maxWidth": 504,
@@ -4520,6 +4538,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
     Array [
       Object {
         "flex": 1,
+        "overflow": "hidden",
       },
       undefined,
     ]
@@ -4595,6 +4614,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
     <View
       style={
         Object {
+          "alignItems": "center",
           "backgroundColor": "#6200ee",
           "overflow": "hidden",
         }
@@ -4605,6 +4625,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
           Array [
             Object {
               "flexDirection": "row",
+              "width": "100%",
             },
             Object {
               "maxWidth": 504,
@@ -5401,6 +5422,7 @@ exports[`renders shifting bottom navigation 1`] = `
     Array [
       Object {
         "flex": 1,
+        "overflow": "hidden",
       },
       undefined,
     ]
@@ -5476,6 +5498,7 @@ exports[`renders shifting bottom navigation 1`] = `
     <View
       style={
         Object {
+          "alignItems": "center",
           "backgroundColor": "rgba(98, 0, 238, 1)",
           "overflow": "hidden",
         }
@@ -5486,6 +5509,7 @@ exports[`renders shifting bottom navigation 1`] = `
           Array [
             Object {
               "flexDirection": "row",
+              "width": "100%",
             },
             Object {
               "maxWidth": 480,
