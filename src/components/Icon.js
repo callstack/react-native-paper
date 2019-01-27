@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { Image, Text, StyleSheet, I18nManager } from 'react-native';
+import { Image, Text, StyleSheet, I18nManager, Platform } from 'react-native';
 import type { ImageSource } from 'react-native/Libraries/Image/ImageSource';
 
 let MaterialIcons;
@@ -58,7 +58,11 @@ const isImageSource = (source: any) =>
     (Object.prototype.hasOwnProperty.call(source, 'uri') &&
       typeof source.uri === 'string')) ||
   // source is a module, e.g. - require('image')
-  typeof source === 'number';
+  typeof source === 'number' ||
+  // data url on web
+  (Platform.OS === 'web' &&
+    typeof source === 'string' &&
+    source.startsWith('data:image'));
 
 const getIconId = (source: any) => {
   if (
@@ -93,25 +97,18 @@ const Icon = ({ source, color, size, ...rest }: Props) => {
       ? source.source
       : source;
 
-  if (typeof s === 'string') {
-    return (
-      <MaterialIcons
-        {...rest}
-        name={s}
-        color={color}
-        size={size}
-        style={[
-          {
-            transform: [{ scaleX: direction === 'rtl' ? -1 : 1 }],
-          },
-          styles.icon,
-        ]}
-        pointerEvents="none"
-        accessibilityElementsHidden
-        importantForAccessibility="no-hide-descendants"
-      />
-    );
-  } else if (isImageSource(s)) {
+  const accessibilityProps =
+    Platform.OS === 'web'
+      ? {
+          role: 'img',
+          focusable: false,
+        }
+      : {
+          accessibilityElementsHidden: true,
+          importantForAccessibility: 'no-hide-descendants',
+        };
+
+  if (isImageSource(s)) {
     return (
       <Image
         {...rest}
@@ -127,8 +124,24 @@ const Icon = ({ source, color, size, ...rest }: Props) => {
             resizeMode: 'contain',
           },
         ]}
-        accessibilityElementsHidden
-        importantForAccessibility="no-hide-descendants"
+        {...accessibilityProps}
+      />
+    );
+  } else if (typeof s === 'string') {
+    return (
+      <MaterialIcons
+        {...rest}
+        name={s}
+        color={color}
+        size={size}
+        style={[
+          {
+            transform: [{ scaleX: direction === 'rtl' ? -1 : 1 }],
+          },
+          styles.icon,
+        ]}
+        pointerEvents="none"
+        {...accessibilityProps}
       />
     );
   } else if (typeof s === 'function') {
