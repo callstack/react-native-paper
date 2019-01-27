@@ -10,7 +10,6 @@ import {
 } from 'react-native-paper';
 import createReactContext from 'create-react-context';
 import App from './RootNavigator';
-import '../assets/styles/icons.css';
 
 type State = {
   theme: Theme,
@@ -69,7 +68,15 @@ export default class PaperExample extends React.Component<{}, State> {
             isDarkTheme: this.state.theme === DarkTheme,
           }}
         >
-          <App />
+          <React.Fragment>
+            <style type="text/css">{`
+              @font-face {
+                font-family: 'MaterialIcons';
+                src: url(${require('react-native-vector-icons/Fonts/MaterialIcons.ttf')}) format('truetype');
+              }
+            `}</style>
+            <App />
+          </React.Fragment>
         </PreferencesContext.Provider>
       </PaperProvider>
     );

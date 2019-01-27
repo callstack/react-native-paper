@@ -8,7 +8,7 @@
     "start": "expo start",
     "android": "expo android",
     "ios": "expo ios",
-    "web": "webpack-dev-server --mode development --open --hot"
+    "web": "webpack-dev-server --open"
   },
   "main": "node_modules/expo/AppEntry.js",
   "dependencies": {
@@ -17,6 +17,7 @@
     "@reach/router": "^1.2.1",
     "create-react-context": "^0.2.3",
     "expo": "^31.0.3",
+    "file-loader": "^3.0.1",
     "react": "16.5.0",
     "react-art": "^16.7.0",
     "react-lifecycles-compat": "^3.0.4",
@@ -33,10 +34,7 @@
     "babel-loader": "^8.0.5",
     "babel-plugin-module-resolver": "^3.1.1",
     "babel-preset-expo": "^5.0.0",
-    "css-loader": "^2.1.0",
     "expo-cli": "^2.3.8",
-    "style-loader": "^0.23.1",
-    "url-loader": "^1.1.2",
     "webpack": "^4.29.0",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14"
