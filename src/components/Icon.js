@@ -10,6 +10,9 @@ try {
   // Optionally require vector-icons
   MaterialIcons = require('react-native-vector-icons/MaterialIcons').default;
 } catch (e) {
+  console.warn(`Error loading the icon '${name}' in a component from 'react-native-paper', but 'react-native-vector-icons' is not installed. To remove this warning, install 'react-native-vector-icons' or use another method to specify icon: https://callstack.github.io/react-native-paper/icons.html.`)
+  console.error(e)
+
   if (global.__expo && global.__expo.Icon && global.__expo.Icon.MaterialIcons) {
     // Snack doesn't properly bundle vector icons from subpath
     // Use icons from the __expo global if available
@@ -18,10 +21,6 @@ try {
     // Fallback component for icons
     MaterialIcons = ({ name, color, size, ...rest }) => {
       // eslint-disable-next-line no-console
-      console.warn(
-        `Tried to use the icon '${name}' in a component from 'react-native-paper', but 'react-native-vector-icons' is not installed. To remove this warning, install 'react-native-vector-icons' or use another method to specify icon: https://callstack.github.io/react-native-paper/icons.html.`
-      );
-
       return (
         <Text
           {...rest}
