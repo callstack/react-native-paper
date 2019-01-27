@@ -1,21 +1,21 @@
 /* @flow */
 
 import * as React from 'react';
-import renderer from 'react-test-renderer';
+import { render, waitForElement } from 'react-native-testing-library';
 import { Text } from 'react-native';
 import Portal from '../Portal/Portal';
 
-it('renders portal with siblings', () => {
-  const tree = renderer
-    .create(
-      <Portal.Host>
-        <Text>Outside content</Text>
-        <Portal>
-          <Text>Portal content</Text>
-        </Portal>
-      </Portal.Host>
-    )
-    .toJSON();
+it('renders portal with siblings', async () => {
+  const { toJSON, getByTestId } = render(
+    <Portal.Host>
+      <Text>Outside content</Text>
+      <Portal>
+        <Text testID="content">Portal content</Text>
+      </Portal>
+    </Portal.Host>
+  );
 
-  expect(tree).toMatchSnapshot();
+  await waitForElement(() => getByTestId('content'));
+
+  expect(toJSON()).toMatchSnapshot();
 });

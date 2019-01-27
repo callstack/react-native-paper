@@ -7402,6 +7402,13 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-native-testing-library@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/react-native-testing-library/-/react-native-testing-library-1.5.0.tgz#02762bf8cb5c1295a220d5e5d40ffc2ebecf31da"
+  integrity sha512-ivS0K0uu8PnAU1DPi2LobZMDcWqQFZUFFP2NiGA1wFKgsGuv2zIGuiBY8mJVAtU2FnPMyVDfg5rL6XoyyCj+jg==
+  dependencies:
+    pretty-format "^23.6.0"
+
 react-native-vector-icons@~6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-6.0.2.tgz#826252a72d648cf957d46ada8df890318dac53e1"

@@ -27,7 +27,9 @@ Array [
       }
     }
   >
-    <Text>
+    <Text
+      testID="content"
+    >
       Portal content
     </Text>
   </View>,
