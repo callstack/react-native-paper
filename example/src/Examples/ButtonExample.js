@@ -138,7 +138,7 @@ class ButtonExample extends React.Component<Props, State> {
             </Button>
             <Button
               mode="outlined"
-              icon={require('../assets/favorite.png')}
+              icon={require('../../assets/images/favorite.png')}
               onPress={() => {}}
               style={styles.button}
             >
@@ -148,7 +148,7 @@ class ButtonExample extends React.Component<Props, State> {
               mode="outlined"
               icon={({ size }) => (
                 <Image
-                  source={require('../assets/chameleon.jpg')}
+                  source={require('../../assets/images/chameleon.jpg')}
                   style={{ width: size, height: size, borderRadius: size / 2 }}
                 />
               )}

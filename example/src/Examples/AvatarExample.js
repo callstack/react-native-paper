@@ -50,11 +50,11 @@ class AvatarExample extends React.Component<Props> {
           <View style={styles.row}>
             <Avatar.Image
               style={styles.avatar}
-              source={require('../assets/avatar.png')}
+              source={require('../../assets/images/avatar.png')}
             />
             <Avatar.Image
               style={styles.avatar}
-              source={require('../assets/avatar.png')}
+              source={require('../../assets/images/avatar.png')}
               size={80}
             />
           </View>

@@ -31,7 +31,9 @@ class CardExample extends React.Component<Props> {
         contentContainerStyle={styles.content}
       >
         <Card style={styles.card}>
-          <Card.Cover source={require('../assets/wrecked-ship.jpg')} />
+          <Card.Cover
+            source={require('../../assets/images/wrecked-ship.jpg')}
+          />
           <Card.Content>
             <Title>Abandoned Ship</Title>
             <Paragraph>
@@ -43,7 +45,7 @@ class CardExample extends React.Component<Props> {
           </Card.Content>
         </Card>
         <Card style={styles.card}>
-          <Card.Cover source={require('../assets/forest.jpg')} />
+          <Card.Cover source={require('../../assets/images/forest.jpg')} />
           <Card.Actions>
             <Button onPress={() => {}}>Share</Button>
             <Button onPress={() => {}}>Explore</Button>
@@ -64,7 +66,9 @@ class CardExample extends React.Component<Props> {
         </Card>
         <Card style={styles.card}>
           <Title>Just Strawberries</Title>
-          <Card.Cover source={require('../assets/strawberries.jpg')} />
+          <Card.Cover
+            source={require('../../assets/images/strawberries.jpg')}
+          />
         </Card>
         <Card
           style={styles.card}
@@ -72,7 +76,7 @@ class CardExample extends React.Component<Props> {
             Alert.alert('The Chameleon is Pressed');
           }}
         >
-          <Card.Cover source={require('../assets/chameleon.jpg')} />
+          <Card.Cover source={require('../../assets/images/chameleon.jpg')} />
           <Card.Content>
             <Title>Pressable Chameleon</Title>
             <Paragraph>
@@ -86,7 +90,7 @@ class CardExample extends React.Component<Props> {
             Alert.alert('The City is Long Pressed');
           }}
         >
-          <Card.Cover source={require('../assets/city.jpg')} />
+          <Card.Cover source={require('../../assets/images/city.jpg')} />
           <Card.Content>
             <Title>Long Pressable City</Title>
             <Paragraph>
