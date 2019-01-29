@@ -63,10 +63,11 @@ const isImageSource = (source: any) =>
       typeof source.uri === 'string')) ||
   // source is a module, e.g. - require('image')
   typeof source === 'number' ||
-  // data url on web
+  // image url on web
   (Platform.OS === 'web' &&
     typeof source === 'string' &&
-    source.startsWith('data:image'));
+    (source.startsWith('data:image') ||
+      /\.(bmp|jpg|jpeg|png|gif|svg)$/.test(source)));
 
 const getIconId = (source: any) => {
   if (
