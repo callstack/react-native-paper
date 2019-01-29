@@ -36,8 +36,10 @@
     "lint": "eslint .",
     "test": "jest",
     "prepare": "node ./scripts/generate-mappings",
+    "release": "release-it",
     "bootstrap": "yarn && yarn --cwd example && yarn --cwd docs",
-    "release": "release-it"
+    "docs": "yarn --cwd docs",
+    "example": "yarn --cwd example"
   },
   "husky": {
     "hooks": {

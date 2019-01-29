@@ -25,7 +25,7 @@ We prefix our commit messages with one of the following to signify the kind of c
 * `refactor`: code/structure refactor, e.g. new structure folder for components.
 * `docs`: changes into documentation, e.g. add usage example for Button.
 * `test`: adding or updating tests, eg unit, snapshot testing.
-* `chore`: tooling changes, e.g. change circle ci config.
+* `chore`: tooling changes, e.g. change circleci config.
 * `BREAKING`: for changes that break existing usage, e.g. change API of a component.
 
 Our pre-commit hooks verify that your commit message matches this format when committing.
@@ -57,13 +57,15 @@ When you're working on a component:
 
 ### Running the example
 
-The example app uses [Expo](https://expo.io/). You will need to install the Expo app for [Android](https://play.google.com/store/apps/details?id=host.exp.exponent) and [iOS](https://itunes.apple.com/app/apple-store/id982107779) to start developing.
+The example app uses [Expo](https://expo.io/) for the React Native example. You will need to install the Expo app for [Android](https://play.google.com/store/apps/details?id=host.exp.exponent) and [iOS](https://itunes.apple.com/app/apple-store/id982107779) to start developing.
 
-After you're done, you can run `yarn start` or `expo start` in the `example/` folder and scan the QR code to launch it on your device.
+After you're done, you can run `yarn example start` in the project root (or `expo start` in the `example/` folder) and scan the QR code to launch it on your device.
+
+To run the example on web, run `yarn example web` in the project root.
 
 ### Working on documentation
 
-The documentation is automatically generated from the [flowtype](https://flowtype.org) annotations in the components. You can add comments above the type annotations to add descriptions. To preview the generated documentation, run `yarn start` in the `docs/` folder.
+The documentation is automatically generated from the [flowtype](https://flowtype.org) annotations in the components. You can add comments above the type annotations to add descriptions. To preview the generated documentation, run `yarn docs start` in the project root.
 
 ### Publishing a release
 
