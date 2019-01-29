@@ -152,11 +152,11 @@ exports[`renders snackbar with action button 1`] = `
           "minWidth": "auto",
           "shadowColor": "#000000",
           "shadowOffset": Object {
-            "height": NaN,
+            "height": 0.5,
             "width": 0,
           },
           "shadowOpacity": 0.24,
-          "shadowRadius": 0,
+          "shadowRadius": 0.75,
         }
       }
     >

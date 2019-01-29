@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { ActivityIndicator, Animated, View, StyleSheet } from 'react-native';
+import { ActivityIndicator, View, StyleSheet } from 'react-native';
 import color from 'color';
 import Icon from './Icon';
 import Surface from './Surface';
@@ -68,7 +68,7 @@ type Props = React.ElementConfig<typeof Surface> & {|
 |};
 
 type State = {
-  elevation: Animated.Value,
+  elevation: number,
 };
 
 /**
@@ -110,24 +110,22 @@ class Button extends React.Component<Props, State> {
   };
 
   state = {
-    elevation: new Animated.Value(this.props.mode === 'contained' ? 2 : 0),
+    elevation: this.props.mode === 'contained' ? 2 : 0,
   };
 
   _handlePressIn = () => {
     if (this.props.mode === 'contained') {
-      Animated.timing(this.state.elevation, {
-        toValue: 8,
-        duration: 200,
-      }).start();
+      this.setState({
+        elevation: 8,
+      });
     }
   };
 
   _handlePressOut = () => {
     if (this.props.mode === 'contained') {
-      Animated.timing(this.state.elevation, {
-        toValue: 2,
-        duration: 150,
-      }).start();
+      this.setState({
+        elevation: 2,
+      });
     }
   };
 

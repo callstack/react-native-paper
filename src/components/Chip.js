@@ -4,7 +4,6 @@ import * as React from 'react';
 import {
   View,
   StyleSheet,
-  Animated,
   TouchableWithoutFeedback,
   Platform,
 } from 'react-native';
@@ -69,7 +68,7 @@ type Props = React.ElementConfig<typeof Surface> & {|
 |};
 
 type State = {
-  elevation: Animated.Value,
+  elevation: number,
 };
 
 /**
@@ -106,21 +105,19 @@ class Chip extends React.Component<Props, State> {
   };
 
   state = {
-    elevation: new Animated.Value(0),
+    elevation: 0,
   };
 
   _handlePressIn = () => {
-    Animated.timing(this.state.elevation, {
-      toValue: 4,
-      duration: 200,
-    }).start();
+    this.setState({
+      elevation: 4,
+    });
   };
 
   _handlePressOut = () => {
-    Animated.timing(this.state.elevation, {
-      toValue: 0,
-      duration: 150,
-    }).start();
+    this.setState({
+      elevation: 0,
+    });
   };
 
   render() {

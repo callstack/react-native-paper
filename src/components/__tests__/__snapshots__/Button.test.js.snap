@@ -13,11 +13,11 @@ exports[`renders button with color 1`] = `
       "minWidth": 64,
       "shadowColor": "#000000",
       "shadowOffset": Object {
-        "height": NaN,
+        "height": 0.5,
         "width": 0,
       },
       "shadowOpacity": 0.24,
-      "shadowRadius": 0,
+      "shadowRadius": 0.75,
     }
   }
 >
@@ -95,11 +95,11 @@ exports[`renders button with icon 1`] = `
       "minWidth": 64,
       "shadowColor": "#000000",
       "shadowOffset": Object {
-        "height": NaN,
+        "height": 0.5,
         "width": 0,
       },
       "shadowOpacity": 0.24,
-      "shadowRadius": 0,
+      "shadowRadius": 0.75,
     }
   }
 >
@@ -221,11 +221,11 @@ exports[`renders contained contained with mode 1`] = `
       "minWidth": 64,
       "shadowColor": "#000000",
       "shadowOffset": Object {
-        "height": NaN,
+        "height": 0.75,
         "width": 0,
       },
       "shadowOpacity": 0.24,
-      "shadowRadius": 2,
+      "shadowRadius": 1.5,
     }
   }
 >
@@ -301,6 +301,13 @@ exports[`renders disabled button 1`] = `
       "borderWidth": 0,
       "elevation": 0,
       "minWidth": 64,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0.5,
+        "width": 0,
+      },
+      "shadowOpacity": 0.24,
+      "shadowRadius": 0.75,
     }
   }
 >
@@ -383,11 +390,11 @@ exports[`renders loading button 1`] = `
       "minWidth": 64,
       "shadowColor": "#000000",
       "shadowOffset": Object {
-        "height": NaN,
+        "height": 0.5,
         "width": 0,
       },
       "shadowOpacity": 0.24,
-      "shadowRadius": 0,
+      "shadowRadius": 0.75,
     }
   }
 >
@@ -478,11 +485,11 @@ exports[`renders outlined button with mode 1`] = `
       "minWidth": 64,
       "shadowColor": "#000000",
       "shadowOffset": Object {
-        "height": NaN,
+        "height": 0.5,
         "width": 0,
       },
       "shadowOpacity": 0.24,
-      "shadowRadius": 0,
+      "shadowRadius": 0.75,
     }
   }
 >
@@ -560,11 +567,11 @@ exports[`renders text button by default 1`] = `
       "minWidth": 64,
       "shadowColor": "#000000",
       "shadowOffset": Object {
-        "height": NaN,
+        "height": 0.5,
         "width": 0,
       },
       "shadowOpacity": 0.24,
-      "shadowRadius": 0,
+      "shadowRadius": 0.75,
     }
   }
 >
@@ -642,11 +649,11 @@ exports[`renders text button with mode 1`] = `
       "minWidth": 64,
       "shadowColor": "#000000",
       "shadowOffset": Object {
-        "height": NaN,
+        "height": 0.5,
         "width": 0,
       },
       "shadowOpacity": 0.24,
-      "shadowRadius": 0,
+      "shadowRadius": 0.75,
     }
   }
 >

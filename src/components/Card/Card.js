@@ -1,12 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import {
-  Animated,
-  View,
-  TouchableWithoutFeedback,
-  StyleSheet,
-} from 'react-native';
+import { View, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 import CardContent from './CardContent';
 import CardActions from './CardActions';
 import CardCover from './CardCover';
@@ -43,7 +38,7 @@ type Props = React.ElementConfig<typeof Surface> & {|
 |};
 
 type State = {
-  elevation: Animated.Value,
+  elevation: number,
 };
 
 /**
@@ -90,22 +85,19 @@ class Card extends React.Component<Props, State> {
 
   state = {
     /* $FlowFixMe: somehow default props are not respected */
-    elevation: new Animated.Value(this.props.elevation),
+    elevation: this.props.elevation,
   };
 
   _handlePressIn = () => {
-    Animated.timing(this.state.elevation, {
-      toValue: 8,
-      duration: 150,
-    }).start();
+    this.setState({
+      elevation: 8,
+    });
   };
 
   _handlePressOut = () => {
-    Animated.timing(this.state.elevation, {
-      /* $FlowFixMe: somehow default props are not respected */
-      toValue: this.props.elevation,
-      duration: 150,
-    }).start();
+    this.setState({
+      elevation: this.props.elevation,
+    });
   };
 
   render() {
@@ -129,6 +121,7 @@ class Card extends React.Component<Props, State> {
           ? child.type.displayName
           : null
     );
+
     return (
       <Surface
         style={[{ borderRadius: roundness, elevation }, style]}
