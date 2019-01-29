@@ -64,6 +64,7 @@ export default class AppbarAction extends React.Component<Props> {
         icon={icon}
         disabled={disabled}
         accessibilityLabel={accessibilityLabel}
+        animated
         {...rest}
       />
     );

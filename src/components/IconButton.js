@@ -5,6 +5,7 @@ import { View, StyleSheet } from 'react-native';
 import color from 'color';
 
 import TouchableRipple from './TouchableRipple';
+import Icon from './Icon';
 import CrossFadeIcon from './CrossFadeIcon';
 import { withTheme } from '../core/theming';
 import type { IconSource } from './Icon';
@@ -27,6 +28,10 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {|
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean,
+  /**
+   * Whether an icon change is animated.
+   */
+  animated?: boolean,
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
@@ -80,6 +85,7 @@ const IconButton = ({
   accessibilityLabel,
   disabled,
   onPress,
+  animated = false,
   theme,
   style,
   ...rest
@@ -90,6 +96,7 @@ const IconButton = ({
     .alpha(0.32)
     .rgb()
     .string();
+  const IconComponent = animated ? CrossFadeIcon : Icon;
 
   return (
     <TouchableRipple
@@ -111,7 +118,7 @@ const IconButton = ({
       {...rest}
     >
       <View>
-        <CrossFadeIcon color={iconColor} source={icon} size={size} />
+        <IconComponent color={iconColor} source={icon} size={size} />
       </View>
     </TouchableRipple>
   );

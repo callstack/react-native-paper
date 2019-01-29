@@ -6,6 +6,7 @@ export interface IconButtonProps extends TouchableRipplePropsWithoutChildren {
   icon: IconSource;
   color?: string;
   size?: number;
+  animated?: boolean;
 }
 
 export declare class IconButton extends React.Component<IconButtonProps> {}
