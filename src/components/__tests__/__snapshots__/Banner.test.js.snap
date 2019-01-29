@@ -181,7 +181,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
             "minWidth": "auto",
             "shadowColor": "#000000",
             "shadowOffset": Object {
-              "height": NaN,
+              "height": 0,
               "width": 0,
             },
             "shadowOpacity": 0.24,
@@ -334,7 +334,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
             "minWidth": "auto",
             "shadowColor": "#000000",
             "shadowOffset": Object {
-              "height": NaN,
+              "height": 0,
               "width": 0,
             },
             "shadowOpacity": 0.24,
@@ -416,7 +416,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
             "minWidth": "auto",
             "shadowColor": "#000000",
             "shadowOffset": Object {
-              "height": NaN,
+              "height": 0,
               "width": 0,
             },
             "shadowOpacity": 0.24,
