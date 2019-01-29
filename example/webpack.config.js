@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+  mode: 'development',
   entry: path.join(__dirname, 'App.web.js'),
   output: {
     path: path.join(__dirname, 'dist'),
@@ -50,8 +51,7 @@ module.exports = {
     ],
   },
   devServer: {
-    contentBase: [path.join(__dirname, 'public'), path.join(__dirname, 'dist')],
+    contentBase: [path.join(__dirname, 'public')],
     historyApiFallback: true,
-    hot: true,
   },
 };

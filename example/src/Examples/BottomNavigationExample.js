@@ -92,7 +92,8 @@ const styles = StyleSheet.create({
       content: {
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
-        gridGap: 8,
+        gridRowGap: '8px',
+        gridColumnGap: '8px',
         padding: 8,
       },
       item: {
