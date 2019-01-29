@@ -34,3 +34,11 @@ it('renders disabled icon button', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('renders icon change animated', () => {
+  const tree = renderer
+    .create(<IconButton icon="add-a-photo" animated />)
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});

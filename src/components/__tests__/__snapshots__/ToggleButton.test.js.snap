@@ -56,73 +56,40 @@ exports[`renders disabled toggle button 1`] = `
   <View
     style={null}
   >
-    <View
+    <Text
+      accessibilityElementsHidden={true}
+      allowFontScaling={false}
+      importantForAccessibility="no-hide-descendants"
+      pointerEvents="none"
       style={
         Array [
           Object {
-            "alignItems": "center",
-            "justifyContent": "center",
+            "color": "#000000",
+            "fontSize": 24,
           },
+          Array [
+            Object {
+              "transform": Array [
+                Object {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
           Object {
-            "height": 24,
-            "width": 24,
+            "fontFamily": "Material Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
           },
+          Object {},
         ]
       }
     >
-      <View
-        style={
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "opacity": 1,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "transform": Array [
-              Object {
-                "rotate": "0deg",
-              },
-            ],
-          }
-        }
-      >
-        <Text
-          accessibilityElementsHidden={true}
-          allowFontScaling={false}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          style={
-            Array [
-              Object {
-                "color": "#000000",
-                "fontSize": 24,
-              },
-              Array [
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
-            ]
-          }
-        >
-          
-        </Text>
-      </View>
-    </View>
+      
+    </Text>
   </View>
 </View>
 `;
@@ -176,73 +143,40 @@ exports[`renders toggle button 1`] = `
   <View
     style={null}
   >
-    <View
+    <Text
+      accessibilityElementsHidden={true}
+      allowFontScaling={false}
+      importantForAccessibility="no-hide-descendants"
+      pointerEvents="none"
       style={
         Array [
           Object {
-            "alignItems": "center",
-            "justifyContent": "center",
+            "color": "#000000",
+            "fontSize": 24,
           },
+          Array [
+            Object {
+              "transform": Array [
+                Object {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
           Object {
-            "height": 24,
-            "width": 24,
+            "fontFamily": "Material Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
           },
+          Object {},
         ]
       }
     >
-      <View
-        style={
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "opacity": 1,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "transform": Array [
-              Object {
-                "rotate": "0deg",
-              },
-            ],
-          }
-        }
-      >
-        <Text
-          accessibilityElementsHidden={true}
-          allowFontScaling={false}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          style={
-            Array [
-              Object {
-                "color": "#000000",
-                "fontSize": 24,
-              },
-              Array [
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
-            ]
-          }
-        >
-          
-        </Text>
-      </View>
-    </View>
+      
+    </Text>
   </View>
 </View>
 `;
@@ -303,73 +237,40 @@ exports[`renders unchecked toggle button 1`] = `
   <View
     style={null}
   >
-    <View
+    <Text
+      accessibilityElementsHidden={true}
+      allowFontScaling={false}
+      importantForAccessibility="no-hide-descendants"
+      pointerEvents="none"
       style={
         Array [
           Object {
-            "alignItems": "center",
-            "justifyContent": "center",
+            "color": "#000000",
+            "fontSize": 24,
           },
+          Array [
+            Object {
+              "transform": Array [
+                Object {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
           Object {
-            "height": 24,
-            "width": 24,
+            "fontFamily": "Material Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
           },
+          Object {},
         ]
       }
     >
-      <View
-        style={
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "opacity": 1,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "transform": Array [
-              Object {
-                "rotate": "0deg",
-              },
-            ],
-          }
-        }
-      >
-        <Text
-          accessibilityElementsHidden={true}
-          allowFontScaling={false}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          style={
-            Array [
-              Object {
-                "color": "#000000",
-                "fontSize": 24,
-              },
-              Array [
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
-            ]
-          }
-        >
-          
-        </Text>
-      </View>
-    </View>
+      
+    </Text>
   </View>
 </View>
 `;
