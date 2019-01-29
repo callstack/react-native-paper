@@ -50,7 +50,7 @@
 <li><code>refactor</code>: code/structure refactor, e.g. new structure folder for components.</li>
 <li><code>docs</code>: changes into documentation, e.g. add usage example for Button.</li>
 <li><code>test</code>: adding or updating tests, eg unit, snapshot testing.</li>
-<li><code>chore</code>: tooling changes, e.g. change circle ci config.</li>
+<li><code>chore</code>: tooling changes, e.g. change circleci config.</li>
 <li><code>BREAKING</code>: for changes that break existing usage, e.g. change API of a component.</li>
 </ul>
 <p>Our pre-commit hooks verify that your commit message matches this format when committing.</p>
@@ -96,8 +96,9 @@
             </svg>
           </a>
         Running the example</h3>
-<p>The example app uses <a href="https://expo.io/">Expo</a>. You will need to install the Expo app for <a href="https://play.google.com/store/apps/details?id=host.exp.exponent">Android</a> and <a href="https://itunes.apple.com/app/apple-store/id982107779">iOS</a> to start developing.</p>
-<p>After you're done, you can run <code>yarn start</code> or <code>expo start</code> in the <code>example/</code> folder and scan the QR code to launch it on your device.</p>
+<p>The example app uses <a href="https://expo.io/">Expo</a> for the React Native example. You will need to install the Expo app for <a href="https://play.google.com/store/apps/details?id=host.exp.exponent">Android</a> and <a href="https://itunes.apple.com/app/apple-store/id982107779">iOS</a> to start developing.</p>
+<p>After you're done, you can run <code>yarn example start</code> in the project root (or <code>expo start</code> in the <code>example/</code> folder) and scan the QR code to launch it on your device.</p>
+<p>To run the example on web, run <code>yarn example web</code> in the project root.</p>
 <h3 id="working-on-documentation">
           <a class="anchor" href="#working-on-documentation">
             <svg width="16" height="16">
@@ -105,7 +106,7 @@
             </svg>
           </a>
         Working on documentation</h3>
-<p>The documentation is automatically generated from the <a href="https://flowtype.org">flowtype</a> annotations in the components. You can add comments above the type annotations to add descriptions. To preview the generated documentation, run <code>yarn start</code> in the <code>docs/</code> folder.</p>
+<p>The documentation is automatically generated from the <a href="https://flowtype.org">flowtype</a> annotations in the components. You can add comments above the type annotations to add descriptions. To preview the generated documentation, run <code>yarn docs start</code> in the project root.</p>
 <h3 id="publishing-a-release">
           <a class="anchor" href="#publishing-a-release">
             <svg width="16" height="16">
