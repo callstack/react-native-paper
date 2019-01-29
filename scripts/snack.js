@@ -36,7 +36,8 @@ function appendSnackLink() {
         '&description=' +
         encodeURIComponent(window.location.href) +
         '&code=' +
-        encodeURIComponent(pre.textContent);
+        encodeURIComponent(pre.textContent) +
+        '&dependencies=react-native-paper';
 
       if (link.href === href) {
         return;
