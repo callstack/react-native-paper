@@ -8,7 +8,7 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
       "elevation": 1,
       "shadowColor": "#000000",
       "shadowOffset": Object {
-        "height": 0.5,
+        "height": 0,
         "width": 0,
       },
       "shadowOpacity": 0.24,
@@ -89,7 +89,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
       "elevation": 1,
       "shadowColor": "#000000",
       "shadowOffset": Object {
-        "height": 0.5,
+        "height": 0,
         "width": 0,
       },
       "shadowOpacity": 0.24,
@@ -263,7 +263,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
       "elevation": 1,
       "shadowColor": "#000000",
       "shadowOffset": Object {
-        "height": 0.5,
+        "height": 0,
         "width": 0,
       },
       "shadowOpacity": 0.24,
@@ -498,7 +498,7 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
       "elevation": 1,
       "shadowColor": "#000000",
       "shadowOffset": Object {
-        "height": 0.5,
+        "height": 0,
         "width": 0,
       },
       "shadowOpacity": 0.24,
@@ -589,7 +589,7 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
       "elevation": 1,
       "shadowColor": "#000000",
       "shadowOffset": Object {
-        "height": 0.5,
+        "height": 0,
         "width": 0,
       },
       "shadowOpacity": 0.24,

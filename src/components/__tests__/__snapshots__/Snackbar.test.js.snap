@@ -28,7 +28,7 @@ exports[`renders snackbar with Text as a child 1`] = `
         "opacity": 1,
         "shadowColor": "#000000",
         "shadowOffset": Object {
-          "height": 5,
+          "height": 0,
           "width": 0,
         },
         "shadowOpacity": 0.24,
@@ -99,7 +99,7 @@ exports[`renders snackbar with action button 1`] = `
         "opacity": 1,
         "shadowColor": "#000000",
         "shadowOffset": Object {
-          "height": 5,
+          "height": 0,
           "width": 0,
         },
         "shadowOpacity": 0.24,
@@ -251,7 +251,7 @@ exports[`renders snackbar with content 1`] = `
         "opacity": 1,
         "shadowColor": "#000000",
         "shadowOffset": Object {
-          "height": 5,
+          "height": 0,
           "width": 0,
         },
         "shadowOpacity": 0.24,

@@ -221,7 +221,7 @@ exports[`renders contained contained with mode 1`] = `
       "minWidth": 64,
       "shadowColor": "#000000",
       "shadowOffset": Object {
-        "height": 0.75,
+        "height": 0,
         "width": 0,
       },
       "shadowOpacity": 0.24,
