@@ -15,6 +15,8 @@
 <pre><code class="language-js"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  mode<span class="token punctuation">:</span> <span class="token string">'development'</span><span class="token punctuation">,</span>
+
   <span class="token comment">// Path to the entry file, change it according to the path you have</span>
   entry<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'App.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
 
@@ -29,13 +31,17 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 
   <span class="token comment">// Loaders and resolver config</span>
   module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  resolver<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  resolve<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
 
   <span class="token comment">// Development server config</span>
   devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    contentBase<span class="token punctuation">:</span> <span class="token punctuation">[</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'public'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'dist'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    contentBase<span class="token punctuation">:</span> <span class="token punctuation">[</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'public'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
     historyApiFallback<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
@@ -79,7 +85,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
             </svg>
           </a>
         1. Alias <code>react-native</code> to <code>react-native-web</code></h3>
-<p>First, we have to tell webpack to use <code>react-native-web</code> instead of <code>react-native</code>. Add the following alias in your webpack config under <code>resolver</code>:</p>
+<p>First, we have to tell webpack to use <code>react-native-web</code> instead of <code>react-native</code>. Add the following alias in your webpack config under <code>resolve</code>:</p>
 <pre><code class="language-js">alias<span class="token punctuation">:</span> <span class="token punctuation">{</span>
   <span class="token string">'react-native$'</span><span class="token punctuation">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'react-native-web'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span></code></pre>
