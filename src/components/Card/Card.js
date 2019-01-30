@@ -100,6 +100,15 @@ class Card extends React.Component<Props, State> {
     elevation: new Animated.Value(this.props.elevation),
   };
 
+  componentDidUpdate(prevProps) {
+    if (this.props.elevation && this.props.elevation !== prevProps.elevation) {
+      Animated.timing(this.state.elevation, {
+        toValue: this.props.elevation,
+        duration: 150,
+      }).start();
+    }
+  }
+
   _handlePressIn = () => {
     Animated.timing(this.state.elevation, {
       toValue: 8,

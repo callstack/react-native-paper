@@ -11,7 +11,7 @@ exports[`renders with placeholder 1`] = `
       "flexDirection": "row",
       "shadowColor": "#000000",
       "shadowOffset": Object {
-        "height": 3,
+        "height": 0,
         "width": 0,
       },
       "shadowOpacity": 0.24,
@@ -224,7 +224,7 @@ exports[`renders with text 1`] = `
       "flexDirection": "row",
       "shadowColor": "#000000",
       "shadowOffset": Object {
-        "height": 3,
+        "height": 0,
         "width": 0,
       },
       "shadowOpacity": 0.24,

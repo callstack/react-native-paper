@@ -4,12 +4,17 @@ import * as Colors from './colors';
 import { Animated } from 'react-native';
 
 export default function shadow(elevation: number | Animated.Value) {
-  let height, radius;
+  let height, radius, width;
 
   if (elevation instanceof Animated.Value) {
+    width = elevation.interpolate({
+      inputRange: [0, 1, 2, 3, 8, 24],
+      outputRange: [0, 0, 0, 0, 0, 0],
+    });
+
     height = elevation.interpolate({
       inputRange: [0, 1, 2, 3, 8, 24],
-      outputRange: [0, 0.5, 0.75, 2, 7, 23],
+      outputRange: [0, 0, 0, 0, 0, 0],
     });
 
     radius = elevation.interpolate({
@@ -17,17 +22,17 @@ export default function shadow(elevation: number | Animated.Value) {
       outputRange: [0, 0.75, 1.5, 3, 8, 24],
     });
   } else {
+    width = 0;
+    height = 0;
+
     switch (elevation) {
       case 1:
-        height = 0.5;
         radius = 0.75;
         break;
       case 2:
-        height = 0.75;
         radius = 1.5;
         break;
       default:
-        height = elevation - 1;
         radius = elevation;
     }
   }
@@ -35,7 +40,7 @@ export default function shadow(elevation: number | Animated.Value) {
   return {
     shadowColor: Colors.black,
     shadowOffset: {
-      width: 0,
+      width,
       height,
     },
     shadowOpacity: 0.24,
