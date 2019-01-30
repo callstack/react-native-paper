@@ -35,7 +35,7 @@ module.exports = {
                 'module-resolver',
                 {
                   alias: {
-                    'react-native-paper': '../src/index',
+                    'react-native-paper': '../',
                     'react-native$': require.resolve('react-native-web'),
                   },
                 },
