@@ -13,7 +13,7 @@ import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
-const ANDROID_VERSION_NOUGAT = 27;
+const ANDROID_VERSION_PIE = 28;
 
 type Props = React.ElementConfig<typeof TouchableWithoutFeedback> & {|
   /**
@@ -84,12 +84,7 @@ class TouchableRipple extends React.Component<Props, void> {
    * Whether ripple effect is supported.
    */
   static supported =
-    Platform.OS === 'android' &&
-    Platform.Version >= ANDROID_VERSION_LOLLIPOP &&
-    // Ripple effect doesn't work properly with border radius on Android P
-    // So we disable it temporarily
-    // https://github.com/facebook/react-native/issues/6480
-    Platform.Version <= ANDROID_VERSION_NOUGAT;
+    Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_LOLLIPOP;
 
   render() {
     const {
@@ -113,11 +108,27 @@ class TouchableRipple extends React.Component<Props, void> {
         .rgb()
         .string();
 
+    // A workaround for ripple on Android P is to use useForeground + overflow: 'hidden'
+    // https://github.com/facebook/react-native/issues/6480
+    const useForeground =
+      Platform.OS === 'android' &&
+      Platform.Version >= ANDROID_VERSION_PIE &&
+      borderless;
+    const overflowStyle = {
+      overflow:
+        Platform.OS === 'android' &&
+        Platform.Version >= ANDROID_VERSION_PIE &&
+        borderless
+          ? 'hidden'
+          : 'visible',
+    };
+
     if (TouchableRipple.supported) {
       return (
         <TouchableNativeFeedback
           {...rest}
           disabled={disabled}
+          useForeground={useForeground}
           background={
             background != null
               ? background
@@ -127,7 +138,9 @@ class TouchableRipple extends React.Component<Props, void> {
                 )
           }
         >
-          <View style={style}>{React.Children.only(children)}</View>
+          <View style={[overflowStyle, style]}>
+            {React.Children.only(children)}
+          </View>
         </TouchableNativeFeedback>
       );
     }
