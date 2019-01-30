@@ -84,8 +84,7 @@ class AppbarContent extends React.Component<Props> {
             style={[
               {
                 color: titleColor,
-                fontFamily:
-                  Platform.OS === 'ios' ? fonts.regular : fonts.medium,
+                ...(Platform.OS === 'ios' ? fonts.regular : fonts.medium),
               },
               styles.title,
               titleStyle,
