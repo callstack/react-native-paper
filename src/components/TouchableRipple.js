@@ -115,12 +115,7 @@ class TouchableRipple extends React.Component<Props, void> {
       Platform.Version >= ANDROID_VERSION_PIE &&
       borderless;
     const overflowStyle = {
-      overflow:
-        Platform.OS === 'android' &&
-        Platform.Version >= ANDROID_VERSION_PIE &&
-        borderless
-          ? 'hidden'
-          : 'visible',
+      overflow: useForeground ? 'hidden' : 'visible',
     };
 
     if (TouchableRipple.supported) {
