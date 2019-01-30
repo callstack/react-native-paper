@@ -44,7 +44,8 @@ exports[`renders list section with subheader 1`] = `
       Array [
         Object {
           "color": "#000000",
-          "fontFamily": "Helvetica Neue",
+          "fontFamily": "System",
+          "fontWeight": "400",
           "textAlign": "left",
           "writingDirection": "ltr",
         },
@@ -55,7 +56,8 @@ exports[`renders list section with subheader 1`] = `
           },
           Object {
             "color": "rgba(0, 0, 0, 0.54)",
-            "fontFamily": "HelveticaNeue-Medium",
+            "fontFamily": "System",
+            "fontWeight": "500",
           },
           undefined,
         ],
@@ -162,7 +164,8 @@ exports[`renders list section with subheader 1`] = `
             Array [
               Object {
                 "color": "#000000",
-                "fontFamily": "Helvetica Neue",
+                "fontFamily": "System",
+                "fontWeight": "400",
                 "textAlign": "left",
                 "writingDirection": "ltr",
               },
@@ -281,7 +284,8 @@ exports[`renders list section with subheader 1`] = `
             Array [
               Object {
                 "color": "#000000",
-                "fontFamily": "Helvetica Neue",
+                "fontFamily": "System",
+                "fontWeight": "400",
                 "textAlign": "left",
                 "writingDirection": "ltr",
               },
@@ -441,7 +445,8 @@ exports[`renders list section without subheader 1`] = `
             Array [
               Object {
                 "color": "#000000",
-                "fontFamily": "Helvetica Neue",
+                "fontFamily": "System",
+                "fontWeight": "400",
                 "textAlign": "left",
                 "writingDirection": "ltr",
               },
@@ -560,7 +565,8 @@ exports[`renders list section without subheader 1`] = `
             Array [
               Object {
                 "color": "#000000",
-                "fontFamily": "Helvetica Neue",
+                "fontFamily": "System",
+                "fontWeight": "400",
                 "textAlign": "left",
                 "writingDirection": "ltr",
               },

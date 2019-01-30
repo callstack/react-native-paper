@@ -6,14 +6,16 @@ exports[`renders caption applying style 1`] = `
     Array [
       Object {
         "color": "#000000",
-        "fontFamily": "Helvetica Neue",
+        "fontFamily": "System",
+        "fontWeight": "400",
         "textAlign": "left",
         "writingDirection": "ltr",
       },
       Array [
         Object {
           "color": "rgba(0, 0, 0, 0.54)",
-          "fontFamily": "Helvetica Neue",
+          "fontFamily": "System",
+          "fontWeight": "400",
           "textAlign": "left",
           "writingDirection": "ltr",
         },
@@ -53,14 +55,16 @@ exports[`renders caption with children as content 1`] = `
     Array [
       Object {
         "color": "#000000",
-        "fontFamily": "Helvetica Neue",
+        "fontFamily": "System",
+        "fontWeight": "400",
         "textAlign": "left",
         "writingDirection": "ltr",
       },
       Array [
         Object {
           "color": "rgba(0, 0, 0, 0.54)",
-          "fontFamily": "Helvetica Neue",
+          "fontFamily": "System",
+          "fontWeight": "400",
           "textAlign": "left",
           "writingDirection": "ltr",
         },
