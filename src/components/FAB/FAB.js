@@ -213,7 +213,7 @@ class FAB extends React.Component<Props, State> {
               <Text
                 style={[
                   styles.label,
-                  { color: foregroundColor, fontFamily: theme.fonts.medium },
+                  { color: foregroundColor, ...theme.fonts.medium },
                 ]}
               >
                 {label.toUpperCase()}
