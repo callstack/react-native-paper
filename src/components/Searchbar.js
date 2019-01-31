@@ -192,6 +192,7 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
     alignSelf: 'stretch',
     textAlign: I18nManager.isRTL ? 'right' : 'left',
+    minWidth: 0,
   },
 });
 
