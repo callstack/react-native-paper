@@ -27,9 +27,14 @@ exports[`renders DrawerItem with icon 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
-        "borderRadius": 4,
-      }
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 4,
+        },
+      ]
     }
   >
     <View
@@ -137,9 +142,14 @@ exports[`renders active DrawerItem 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
-        "borderRadius": 4,
-      }
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 4,
+        },
+      ]
     }
   >
     <View
@@ -242,9 +252,14 @@ exports[`renders basic DrawerItem 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
-        "borderRadius": 4,
-      }
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 4,
+        },
+      ]
     }
   >
     <View

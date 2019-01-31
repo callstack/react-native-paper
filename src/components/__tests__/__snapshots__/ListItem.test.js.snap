@@ -12,10 +12,13 @@ exports[`renders list item with left and right items 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
-      Object {
-        "padding": 8,
-      },
-      undefined,
+      false,
+      Array [
+        Object {
+          "padding": 8,
+        },
+        undefined,
+      ],
     ]
   }
 >
@@ -156,10 +159,13 @@ exports[`renders list item with left item 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
-      Object {
-        "padding": 8,
-      },
-      undefined,
+      false,
+      Array [
+        Object {
+          "padding": 8,
+        },
+        undefined,
+      ],
     ]
   }
 >
@@ -274,10 +280,13 @@ exports[`renders list item with right item 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
-      Object {
-        "padding": 8,
-      },
-      undefined,
+      false,
+      Array [
+        Object {
+          "padding": 8,
+        },
+        undefined,
+      ],
     ]
   }
 >
@@ -345,10 +354,13 @@ exports[`renders list item with title and description 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
-      Object {
-        "padding": 8,
-      },
-      undefined,
+      false,
+      Array [
+        Object {
+          "padding": 8,
+        },
+        undefined,
+      ],
     ]
   }
 >

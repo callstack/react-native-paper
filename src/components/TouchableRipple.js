@@ -114,9 +114,6 @@ class TouchableRipple extends React.Component<Props, void> {
       Platform.OS === 'android' &&
       Platform.Version >= ANDROID_VERSION_PIE &&
       borderless;
-    const overflowStyle = {
-      overflow: useForeground ? 'hidden' : 'visible',
-    };
 
     if (TouchableRipple.supported) {
       return (
@@ -133,7 +130,7 @@ class TouchableRipple extends React.Component<Props, void> {
                 )
           }
         >
-          <View style={[overflowStyle, style]}>
+          <View style={[borderless && { overflow: 'hidden' }, style]}>
             {React.Children.only(children)}
           </View>
         </TouchableNativeFeedback>
@@ -144,7 +141,7 @@ class TouchableRipple extends React.Component<Props, void> {
       <TouchableHighlight
         {...rest}
         disabled={disabled}
-        style={style}
+        style={[borderless && { overflow: 'hidden' }, style]}
         underlayColor={
           underlayColor != null
             ? underlayColor
