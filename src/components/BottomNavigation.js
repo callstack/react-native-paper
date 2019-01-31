@@ -252,7 +252,7 @@ const FAR_FAR_AWAY = 9999;
 
 const Touchable = TouchableRipple.supported
   ? TouchableRipple
-  : ({ style, children, borderless, rippleColor, ...rest }) => (
+  : ({ style, children, borderless, centered, rippleColor, ...rest }) => (
       <TouchableWithoutFeedback {...rest}>
         <View style={style}>{children}</View>
       </TouchableWithoutFeedback>
@@ -749,6 +749,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                   <Touchable
                     key={route.key}
                     borderless
+                    centered
                     rippleColor={touchColor}
                     onPress={() => this._handleTabPress(index)}
                     testID={getTestID({ route })}

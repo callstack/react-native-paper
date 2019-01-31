@@ -34,6 +34,7 @@ exports[`renders disabled toggle button 1`] = `
           "height": 36,
           "justifyContent": "center",
           "margin": 6,
+          "overflow": "visible",
           "width": 36,
         },
         Object {
@@ -126,6 +127,7 @@ exports[`renders toggle button 1`] = `
           "height": 36,
           "justifyContent": "center",
           "margin": 6,
+          "overflow": "visible",
           "width": 36,
         },
         undefined,
@@ -221,6 +223,7 @@ exports[`renders unchecked toggle button 1`] = `
           "height": 36,
           "justifyContent": "center",
           "margin": 6,
+          "overflow": "visible",
           "width": 36,
         },
         Object {
