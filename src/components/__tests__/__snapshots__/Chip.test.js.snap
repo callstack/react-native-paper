@@ -25,9 +25,14 @@ exports[`renders chip with close button 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
-        "borderRadius": 16,
-      }
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 16,
+        },
+      ]
     }
   >
     <View
@@ -193,9 +198,14 @@ exports[`renders chip with icon 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
-        "borderRadius": 16,
-      }
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 16,
+        },
+      ]
     }
   >
     <View
@@ -310,9 +320,14 @@ exports[`renders chip with onPress 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
-        "borderRadius": 16,
-      }
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 16,
+        },
+      ]
     }
   >
     <View
@@ -386,9 +401,14 @@ exports[`renders outlined disabled chip 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
-        "borderRadius": 16,
-      }
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 16,
+        },
+      ]
     }
   >
     <View
@@ -462,9 +482,14 @@ exports[`renders selected chip 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
-        "borderRadius": 16,
-      }
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 16,
+        },
+      ]
     }
   >
     <View

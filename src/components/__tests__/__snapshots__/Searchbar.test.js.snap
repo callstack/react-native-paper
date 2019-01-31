@@ -40,15 +40,20 @@ exports[`renders with placeholder 1`] = `
     style={
       Array [
         Object {
-          "alignItems": "center",
-          "borderRadius": 18,
-          "height": 36,
-          "justifyContent": "center",
-          "margin": 6,
-          "width": 36,
+          "overflow": "hidden",
         },
-        undefined,
-        undefined,
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderRadius": 18,
+            "height": 36,
+            "justifyContent": "center",
+            "margin": 6,
+            "width": 36,
+          },
+          undefined,
+          undefined,
+        ],
       ]
     }
   >
@@ -144,17 +149,22 @@ exports[`renders with placeholder 1`] = `
     style={
       Array [
         Object {
-          "alignItems": "center",
-          "borderRadius": 18,
-          "height": 36,
-          "justifyContent": "center",
-          "margin": 6,
-          "width": 36,
+          "overflow": "hidden",
         },
-        Object {
-          "opacity": 0.32,
-        },
-        undefined,
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderRadius": 18,
+            "height": 36,
+            "justifyContent": "center",
+            "margin": 6,
+            "width": 36,
+          },
+          Object {
+            "opacity": 0.32,
+          },
+          undefined,
+        ],
       ]
     }
   >
@@ -240,15 +250,20 @@ exports[`renders with text 1`] = `
     style={
       Array [
         Object {
-          "alignItems": "center",
-          "borderRadius": 18,
-          "height": 36,
-          "justifyContent": "center",
-          "margin": 6,
-          "width": 36,
+          "overflow": "hidden",
         },
-        undefined,
-        undefined,
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderRadius": 18,
+            "height": 36,
+            "justifyContent": "center",
+            "margin": 6,
+            "width": 36,
+          },
+          undefined,
+          undefined,
+        ],
       ]
     }
   >
@@ -340,15 +355,20 @@ exports[`renders with text 1`] = `
     style={
       Array [
         Object {
-          "alignItems": "center",
-          "borderRadius": 18,
-          "height": 36,
-          "justifyContent": "center",
-          "margin": 6,
-          "width": 36,
+          "overflow": "hidden",
         },
-        false,
-        undefined,
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderRadius": 18,
+            "height": 36,
+            "justifyContent": "center",
+            "margin": 6,
+            "width": 36,
+          },
+          false,
+          undefined,
+        ],
       ]
     }
   >

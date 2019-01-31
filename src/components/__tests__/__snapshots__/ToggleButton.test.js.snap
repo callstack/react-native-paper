@@ -26,29 +26,32 @@ exports[`renders disabled toggle button 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
-      Object {
-        "alignItems": "center",
-        "borderRadius": 18,
-        "height": 36,
-        "justifyContent": "center",
-        "margin": 6,
-        "width": 36,
-      },
-      Object {
-        "opacity": 0.32,
-      },
+      false,
       Array [
         Object {
-          "height": 42,
-          "margin": 0,
-          "width": 42,
+          "alignItems": "center",
+          "borderRadius": 18,
+          "height": 36,
+          "justifyContent": "center",
+          "margin": 6,
+          "width": 36,
         },
         Object {
-          "backgroundColor": "rgba(0, 0, 0, .08)",
-          "borderColor": "rgba(0, 0, 0, 0.29)",
-          "borderRadius": 4,
+          "opacity": 0.32,
         },
-        undefined,
+        Array [
+          Object {
+            "height": 42,
+            "margin": 0,
+            "width": 42,
+          },
+          Object {
+            "backgroundColor": "rgba(0, 0, 0, .08)",
+            "borderColor": "rgba(0, 0, 0, 0.29)",
+            "borderRadius": 4,
+          },
+          undefined,
+        ],
       ],
     ]
   }
@@ -115,27 +118,30 @@ exports[`renders toggle button 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
-      Object {
-        "alignItems": "center",
-        "borderRadius": 18,
-        "height": 36,
-        "justifyContent": "center",
-        "margin": 6,
-        "width": 36,
-      },
-      undefined,
+      false,
       Array [
         Object {
-          "height": 42,
-          "margin": 0,
-          "width": 42,
-        },
-        Object {
-          "backgroundColor": "rgba(0, 0, 0, .08)",
-          "borderColor": "rgba(0, 0, 0, 0.29)",
-          "borderRadius": 4,
+          "alignItems": "center",
+          "borderRadius": 18,
+          "height": 36,
+          "justifyContent": "center",
+          "margin": 6,
+          "width": 36,
         },
         undefined,
+        Array [
+          Object {
+            "height": 42,
+            "margin": 0,
+            "width": 42,
+          },
+          Object {
+            "backgroundColor": "rgba(0, 0, 0, .08)",
+            "borderColor": "rgba(0, 0, 0, 0.29)",
+            "borderRadius": 4,
+          },
+          undefined,
+        ],
       ],
     ]
   }
@@ -207,29 +213,32 @@ exports[`renders unchecked toggle button 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
-      Object {
-        "alignItems": "center",
-        "borderRadius": 18,
-        "height": 36,
-        "justifyContent": "center",
-        "margin": 6,
-        "width": 36,
-      },
-      Object {
-        "opacity": 0.32,
-      },
+      false,
       Array [
         Object {
-          "height": 42,
-          "margin": 0,
-          "width": 42,
+          "alignItems": "center",
+          "borderRadius": 18,
+          "height": 36,
+          "justifyContent": "center",
+          "margin": 6,
+          "width": 36,
         },
         Object {
-          "backgroundColor": "transparent",
-          "borderColor": "rgba(0, 0, 0, 0.29)",
-          "borderRadius": 4,
+          "opacity": 0.32,
         },
-        undefined,
+        Array [
+          Object {
+            "height": 42,
+            "margin": 0,
+            "width": 42,
+          },
+          Object {
+            "backgroundColor": "transparent",
+            "borderColor": "rgba(0, 0, 0, 0.29)",
+            "borderRadius": 4,
+          },
+          undefined,
+        ],
       ],
     ]
   }

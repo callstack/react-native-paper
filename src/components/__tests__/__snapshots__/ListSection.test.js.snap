@@ -47,10 +47,13 @@ exports[`renders list section with title 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
-        Object {
-          "padding": 8,
-        },
-        undefined,
+        false,
+        Array [
+          Object {
+            "padding": 8,
+          },
+          undefined,
+        ],
       ]
     }
   >
@@ -162,10 +165,13 @@ exports[`renders list section with title 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
-        Object {
-          "padding": 8,
-        },
-        undefined,
+        false,
+        Array [
+          Object {
+            "padding": 8,
+          },
+          undefined,
+        ],
       ]
     }
   >
@@ -291,10 +297,13 @@ exports[`renders list section without title 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
-        Object {
-          "padding": 8,
-        },
-        undefined,
+        false,
+        Array [
+          Object {
+            "padding": 8,
+          },
+          undefined,
+        ],
       ]
     }
   >
@@ -406,10 +415,13 @@ exports[`renders list section without title 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
-        Object {
-          "padding": 8,
-        },
-        undefined,
+        false,
+        Array [
+          Object {
+            "padding": 8,
+          },
+          undefined,
+        ],
       ]
     }
   >

@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
         margin: 10,
         alignItems: 'center',
         justifyContent: 'center',
+        overflow: 'visible',
       }
     : {
         borderRadius: 36 / 2,
