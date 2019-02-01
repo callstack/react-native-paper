@@ -89,17 +89,19 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         }
       }
     >
-      <RCTSafeAreaView
+      <View
+        onLayout={[Function]}
+        pointerEvents="box-none"
         style={
-          Array [
-            Object {
-              "flexDirection": "row",
-              "width": "100%",
-            },
-            Object {
-              "maxWidth": 504,
-            },
-          ]
+          Object {
+            "flexDirection": "row",
+            "maxWidth": 504,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "paddingTop": 0,
+            "width": "100%",
+          }
         }
       >
         <View
@@ -662,7 +664,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             />
           </View>
         </View>
-      </RCTSafeAreaView>
+      </View>
     </View>
   </View>
 </View>
@@ -757,17 +759,19 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         }
       }
     >
-      <RCTSafeAreaView
+      <View
+        onLayout={[Function]}
+        pointerEvents="box-none"
         style={
-          Array [
-            Object {
-              "flexDirection": "row",
-              "width": "100%",
-            },
-            Object {
-              "maxWidth": 504,
-            },
-          ]
+          Object {
+            "flexDirection": "row",
+            "maxWidth": 504,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "paddingTop": 0,
+            "width": "100%",
+          }
         }
       >
         <View
@@ -1350,7 +1354,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             />
           </View>
         </View>
-      </RCTSafeAreaView>
+      </View>
     </View>
   </View>
 </View>
@@ -1445,17 +1449,19 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         }
       }
     >
-      <RCTSafeAreaView
+      <View
+        onLayout={[Function]}
+        pointerEvents="box-none"
         style={
-          Array [
-            Object {
-              "flexDirection": "row",
-              "width": "100%",
-            },
-            Object {
-              "maxWidth": 504,
-            },
-          ]
+          Object {
+            "flexDirection": "row",
+            "maxWidth": 504,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "paddingTop": 0,
+            "width": "100%",
+          }
         }
       >
         <View
@@ -1958,7 +1964,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
             </View>
           </View>
         </View>
-      </RCTSafeAreaView>
+      </View>
     </View>
   </View>
 </View>
@@ -2053,17 +2059,19 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         }
       }
     >
-      <RCTSafeAreaView
+      <View
+        onLayout={[Function]}
+        pointerEvents="box-none"
         style={
-          Array [
-            Object {
-              "flexDirection": "row",
-              "width": "100%",
-            },
-            Object {
-              "maxWidth": 480,
-            },
-          ]
+          Object {
+            "flexDirection": "row",
+            "maxWidth": 480,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "paddingTop": 0,
+            "width": "100%",
+          }
         }
       >
         <View
@@ -2836,7 +2844,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             </View>
           </View>
         </View>
-      </RCTSafeAreaView>
+      </View>
     </View>
   </View>
 </View>
@@ -2931,17 +2939,19 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         }
       }
     >
-      <RCTSafeAreaView
+      <View
+        onLayout={[Function]}
+        pointerEvents="box-none"
         style={
-          Array [
-            Object {
-              "flexDirection": "row",
-              "width": "100%",
-            },
-            Object {
-              "maxWidth": 504,
-            },
-          ]
+          Object {
+            "flexDirection": "row",
+            "maxWidth": 504,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "paddingTop": 0,
+            "width": "100%",
+          }
         }
       >
         <View
@@ -3720,7 +3730,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             </View>
           </View>
         </View>
-      </RCTSafeAreaView>
+      </View>
     </View>
   </View>
 </View>
@@ -3815,17 +3825,19 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         }
       }
     >
-      <RCTSafeAreaView
+      <View
+        onLayout={[Function]}
+        pointerEvents="box-none"
         style={
-          Array [
-            Object {
-              "flexDirection": "row",
-              "width": "100%",
-            },
-            Object {
-              "maxWidth": 504,
-            },
-          ]
+          Object {
+            "flexDirection": "row",
+            "maxWidth": 504,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "paddingTop": 0,
+            "width": "100%",
+          }
         }
       >
         <View
@@ -4525,7 +4537,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             </View>
           </View>
         </View>
-      </RCTSafeAreaView>
+      </View>
     </View>
   </View>
 </View>
@@ -4620,17 +4632,19 @@ exports[`renders non-shifting bottom navigation 1`] = `
         }
       }
     >
-      <RCTSafeAreaView
+      <View
+        onLayout={[Function]}
+        pointerEvents="box-none"
         style={
-          Array [
-            Object {
-              "flexDirection": "row",
-              "width": "100%",
-            },
-            Object {
-              "maxWidth": 504,
-            },
-          ]
+          Object {
+            "flexDirection": "row",
+            "maxWidth": 504,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "paddingTop": 0,
+            "width": "100%",
+          }
         }
       >
         <View
@@ -5409,7 +5423,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
             </View>
           </View>
         </View>
-      </RCTSafeAreaView>
+      </View>
     </View>
   </View>
 </View>
@@ -5504,17 +5518,19 @@ exports[`renders shifting bottom navigation 1`] = `
         }
       }
     >
-      <RCTSafeAreaView
+      <View
+        onLayout={[Function]}
+        pointerEvents="box-none"
         style={
-          Array [
-            Object {
-              "flexDirection": "row",
-              "width": "100%",
-            },
-            Object {
-              "maxWidth": 480,
-            },
-          ]
+          Object {
+            "flexDirection": "row",
+            "maxWidth": 480,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "paddingTop": 0,
+            "width": "100%",
+          }
         }
       >
         <View
@@ -6662,7 +6678,7 @@ exports[`renders shifting bottom navigation 1`] = `
             </View>
           </View>
         </View>
-      </RCTSafeAreaView>
+      </View>
     </View>
   </View>
 </View>
