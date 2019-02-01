@@ -2,7 +2,13 @@
 
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { ActivityIndicator, Colors, FAB, withTheme, type Theme } from 'react-native-paper';
+import {
+  ActivityIndicator,
+  Colors,
+  FAB,
+  withTheme,
+  type Theme,
+} from 'react-native-paper';
 
 type Props = {
   theme: Theme,
