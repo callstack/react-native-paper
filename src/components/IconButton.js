@@ -101,6 +101,7 @@ const IconButton = ({
   return (
     <TouchableRipple
       borderless
+      centered
       onPress={onPress}
       rippleColor={rippleColor}
       style={[styles.container, disabled && styles.disabled, style]}
@@ -141,6 +142,7 @@ const styles = StyleSheet.create({
         margin: 6,
         alignItems: 'center',
         justifyContent: 'center',
+        overflow: 'visible',
       },
   disabled: {
     opacity: 0.32,
