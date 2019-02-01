@@ -13,6 +13,15 @@ export interface CardCoverProps extends ImageProps {
   theme?: ThemeShape;
 }
 
+export interface CardTitleProps extends ViewProps {
+  title: React.ReactNode;
+  titleStyle?: StyleProp<TextStyle>;
+  subtitle?: React.ReactNode;
+  subtitleStyle?: StyleProp<TextStyle>;
+  style?: StyleProp<ViewStyle>;
+  avatar?: React.ReactNode;
+}
+
 export interface CardProps {
   elevation?: number;
   onPress?: () => any;
@@ -26,4 +35,5 @@ export declare class Card extends React.Component<CardProps> {
   static Content: React.ComponentType<CardContentProps>;
   static Actions: React.ComponentType<CardActionsProps>;
   static Cover: React.ComponentType<CardCoverProps>;
+  static Title: React.ComponentType<CardTitleProps>;
 }

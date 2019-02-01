@@ -10,6 +10,7 @@ import {
 import CardContent from './CardContent';
 import CardActions from './CardActions';
 import CardCover from './CardCover';
+import CardTitle from './CardTitle';
 import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
@@ -57,10 +58,11 @@ type State = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Button, Card, Title, Paragraph } from 'react-native-paper';
+ * import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <Card>
+ *     <Card.Title title="Card Title" subtitle="Card Subtitle" avatar={<Avatar.Icon icon="folder" />} />
  *     <Card.Content>
  *       <Title>Card title</Title>
  *       <Paragraph>Card content</Paragraph>
@@ -83,6 +85,8 @@ class Card extends React.Component<Props, State> {
   static Actions = CardActions;
   // @component ./CardCover.js
   static Cover = CardCover;
+  // @component ./CardTitle.js
+  static Title = CardTitle;
 
   static defaultProps = {
     elevation: 1,
