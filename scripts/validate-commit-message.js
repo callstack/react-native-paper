@@ -26,10 +26,10 @@ try {
 
   let error;
 
-  if (message.length > MAX_LENGTH) {
-    error = `It should be less than ${chalk.blue(
+  if (message.length >= MAX_LENGTH) {
+    error = `It should be at most ${chalk.blue(
       String(MAX_LENGTH)
-    )} characters`;
+    )} characters (was ${chalk.red(String(message.length))} characters)`;
   } else {
     const match = MESSAGE_PATTERN.exec(message);
 

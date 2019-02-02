@@ -27,6 +27,7 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
     onLayout={[Function]}
     style={
       Object {
+        "opacity": 0,
         "position": "absolute",
         "top": 0,
         "transform": Array [
@@ -106,7 +107,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
   />
   <View
     onLayout={[Function]}
-    style={null}
+    style={Object {}}
   >
     <View
       style={
@@ -285,7 +286,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
   />
   <View
     onLayout={[Function]}
-    style={null}
+    style={Object {}}
   >
     <View
       style={
@@ -530,7 +531,7 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
   />
   <View
     onLayout={[Function]}
-    style={null}
+    style={Object {}}
   >
     <View
       style={
@@ -621,7 +622,7 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
   />
   <View
     onLayout={[Function]}
-    style={null}
+    style={Object {}}
   >
     <View
       style={
