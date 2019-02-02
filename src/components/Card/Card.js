@@ -40,6 +40,10 @@ type Props = React.ElementConfig<typeof Surface> & {|
    * Pass down testID from card props to touchable
    */
   testID?: string,
+  /**
+   * Pass down accessible from card props to touchable
+   */
+  accessible?: boolean,
 |};
 
 type State = {
@@ -117,6 +121,7 @@ class Card extends React.Component<Props, State> {
       style,
       theme,
       testID,
+      accessible,
       ...rest
     } = this.props;
     const { elevation } = this.state;
@@ -142,6 +147,7 @@ class Card extends React.Component<Props, State> {
           onPressIn={onPress ? this._handlePressIn : undefined}
           onPressOut={onPress ? this._handlePressOut : undefined}
           testID={testID}
+          accessible={accessible}
         >
           <View style={styles.innerContainer}>
             {React.Children.map(
