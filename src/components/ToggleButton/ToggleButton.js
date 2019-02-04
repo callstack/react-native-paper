@@ -101,6 +101,7 @@ class ToggleButton extends React.Component<Props> {
       style,
       value,
       status,
+      onPress,
       ...rest
     } = this.props;
     const borderRadius = theme.roundness;
@@ -125,9 +126,9 @@ class ToggleButton extends React.Component<Props> {
             <IconButton
               borderless={false}
               icon={icon}
-              onPress={() => {
-                if (this.props.onPress) {
-                  this.props.onPress(status);
+              onPress={(e) => {
+                if (onPress) {
+                  onPress(e);
                 }
 
                 if (context) {
