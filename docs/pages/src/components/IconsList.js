@@ -102,7 +102,7 @@ export default class IconsList extends React.Component<{}, State> {
   _handleIconClick = (e: SyntheticEvent<HTMLButtonElement>) => {
     const range = document.createRange();
 
-    range.selectNode(e.currentTarget.childNodes[1]);
+    range.selectNode(e.currentTarget.childNodes[1].childNodes[0]);
 
     window.getSelection().removeAllRanges();
     window.getSelection().addRange(range);
