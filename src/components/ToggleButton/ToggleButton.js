@@ -88,7 +88,7 @@ type Props = {
  * ```
  */
 class ToggleButton extends React.Component<Props> {
-  // @component ./ToggleButton.js
+  // @component ./ToggleButtonGroup.js
   static Group = ToggleButtonGroup;
 
   render() {
