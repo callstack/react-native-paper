@@ -87,7 +87,7 @@ class ActivityIndicator extends React.Component<Props, State> {
     });
 
     if (animating) {
-      this.startRotation();
+      this._startRotation();
     }
   }
 
@@ -97,7 +97,7 @@ class ActivityIndicator extends React.Component<Props, State> {
 
     if (animating !== prevProps.animating) {
       if (animating) {
-        this.startRotation();
+        this._startRotation();
       } else if (hidesWhenStopped) {
         // Hide indicator first and then stop rotation
         Animated.timing(fade, {
@@ -105,14 +105,14 @@ class ActivityIndicator extends React.Component<Props, State> {
           toValue: 0,
           useNativeDriver: true,
           isInteraction: false,
-        }).start(this.stopRotation.bind(this));
+        }).start(this._stopRotation.bind(this));
       } else {
-        this.stopRotation();
+        this._stopRotation();
       }
     }
   }
 
-  startRotation() {
+  _startRotation = () => {
     const { fade, timer } = this.state;
 
     // Show indicator
@@ -129,13 +129,13 @@ class ActivityIndicator extends React.Component<Props, State> {
       // $FlowFixMe
       Animated.loop(this.rotation).start();
     }
-  }
+  };
 
-  stopRotation() {
+  _stopRotation = () => {
     if (this.rotation) {
       this.rotation.stop();
     }
-  }
+  };
 
   render() {
     const { fade, timer } = this.state;
