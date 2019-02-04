@@ -101,6 +101,7 @@ class ToggleButton extends React.Component<Props> {
       style,
       value,
       status,
+      onPress,
       ...rest
     } = this.props;
     const borderRadius = theme.roundness;
