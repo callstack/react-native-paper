@@ -25,13 +25,13 @@ type Props = React.ElementConfig<typeof View> & {|
    */
   subtitleStyle?: any,
   /**
-   * Avatar that will be displayed close to the title.
+   * Callback which returns a React element to display on the left side.
    */
-  avatar?: React.Element<*>,
+  left?: (props: { size: number }) => React.Node,
   /**
-   * Content that will be used to trigger an action (e.g., expand or overflow menu).
+   * Callback which returns a React element to display on the right side.
    */
-  action?: React.Element<*>,
+  right?: (props: { size: number }) => React.Node,
   /**
    * @internal
    */
@@ -63,8 +63,8 @@ type Props = React.ElementConfig<typeof View> & {|
  *   <Card.Title
  *     title="Card Title"
  *     subtitle="Card Subtitle"
- *     avatar={<Avatar.Icon icon="folder" />}
- *     action={<IconButton icon="more-vert" onPress={() => {}} />}
+ *     left={(props) => <Avatar.Icon {...props} icon="folder" />}
+ *     right={(props) => <IconButton {...props} icon="more-vert" onPress={() => {}} />}
  *   />
  * );
  *
@@ -76,8 +76,8 @@ class CardTitle extends React.Component<Props> {
 
   render() {
     const {
-      action,
-      avatar,
+      left,
+      right,
       subtitle,
       subtitleStyle,
       style,
@@ -87,9 +87,9 @@ class CardTitle extends React.Component<Props> {
 
     return (
       <View style={[styles.container, { height: subtitle ? 72 : 50 }, style]}>
-        {avatar ? (
+        {left ? (
           <View style={[styles.avatar]}>
-            {React.cloneElement(avatar, {
+            {left({
               size: 40,
             })}
           </View>
@@ -109,7 +109,7 @@ class CardTitle extends React.Component<Props> {
           ) : null}
         </View>
 
-        <View>{action}</View>
+        <View>{right ? right({ size: 24 }) : null}</View>
       </View>
     );
   }

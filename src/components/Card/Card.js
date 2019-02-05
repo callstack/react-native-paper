@@ -62,7 +62,7 @@ type State = {
  *
  * const MyComponent = () => (
  *   <Card>
- *     <Card.Title title="Card Title" subtitle="Card Subtitle" avatar={<Avatar.Icon icon="folder" />} />
+ *     <Card.Title title="Card Title" subtitle="Card Subtitle" left={(props) => <Avatar.Icon {...props} icon="folder" />} />
  *     <Card.Content>
  *       <Title>Card title</Title>
  *       <Paragraph>Card content</Paragraph>

@@ -20,8 +20,8 @@ export interface CardTitleProps extends ViewProps {
   subtitle?: React.ReactNode;
   subtitleStyle?: StyleProp<TextStyle>;
   style?: StyleProp<ViewStyle>;
-  avatar?: React.ReactNode;
-  action?: React.ReactNode;
+  left?: (props: { size:number }) => React.ReactNode;
+  right?: (props: { size:number }) => React.ReactNode;
 }
 
 export interface CardProps {
