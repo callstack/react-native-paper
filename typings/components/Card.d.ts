@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ImageProps, ViewProps } from 'react-native';
 import { ThemeShape } from '../types';
+import { AvatarIcon } from './Avatar';
 
 export interface CardContentProps extends ViewProps {
 }
@@ -20,6 +21,7 @@ export interface CardTitleProps extends ViewProps {
   subtitleStyle?: StyleProp<TextStyle>;
   style?: StyleProp<ViewStyle>;
   avatar?: React.ReactNode;
+  action?: React.ReactNode;
 }
 
 export interface CardProps {

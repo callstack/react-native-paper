@@ -7,6 +7,7 @@ import {
   Paragraph,
   Card,
   Button,
+  IconButton,
   withTheme,
   type Theme,
 } from 'react-native-paper';
@@ -55,6 +56,7 @@ class CardExample extends React.Component<Props> {
             title="Berries"
             subtitle="Omega Ruby"
             avatar={<Avatar.Icon icon="folder" />}
+            action={<IconButton icon="more-vert" onPress={() => {}} />}
           />
           <Card.Content>
             <Paragraph>
@@ -73,6 +75,7 @@ class CardExample extends React.Component<Props> {
           <Card.Title
             title="Just Strawberries"
             subtitle="... and only Strawberries"
+            action={<IconButton icon="expand-more" onPress={() => {}} />}
           />
         </Card>
         <Card

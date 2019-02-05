@@ -5,9 +5,6 @@ import { StyleSheet, View } from 'react-native';
 import { withTheme } from '../../core/theming';
 import Caption from './../Typography/Caption';
 import Title from './../Typography/Title';
-import AvatarIcon from './../Avatar/AvatarIcon';
-import AvatarImage from './../Avatar/AvatarImage';
-import AvatarText from './../Avatar/AvatarText';
 import type { Theme } from '../../types';
 
 type Props = React.ElementConfig<typeof View> & {|
@@ -28,12 +25,13 @@ type Props = React.ElementConfig<typeof View> & {|
    */
   subtitleStyle?: any,
   /**
-   * Avatar of the title.
+   * Avatar that will be displayed close to the title.
    */
-  avatar?:
-    | React.Element<AvatarIcon>
-    | React.Element<AvatarImage>
-    | React.Element<AvatarText>,
+  avatar?: React.Element<*>,
+  /**
+   * Content that will be used to trigger an action (e.g., expand or overflow menu).
+   */
+  action?: React.Element<*>,
   /**
    * @internal
    */
@@ -52,13 +50,22 @@ type Props = React.ElementConfig<typeof View> & {|
 /**
  * A component to show a title, subtitle and an avatar inside a Card.
  *
+ * <div class="screenshots">
+ *   <img class="medium" src="screenshots/card-title-1.png" />
+ * </div>
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Card } from 'react-native-paper';
+ * import { Avatar, Card, IconButton } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Card.Title title="Card Title" subtitle="Card Subtitle" avatar={<Avatar.Icon icon="folder" />} />
+ *   <Card.Title
+ *     title="Card Title"
+ *     subtitle="Card Subtitle"
+ *     avatar={<Avatar.Icon icon="folder" />}
+ *     action={<IconButton icon="more-vert" onPress={() => {}} />}
+ *   />
  * );
  *
  * export default MyComponent;
@@ -69,6 +76,7 @@ class CardTitle extends React.Component<Props> {
 
   render() {
     const {
+      action,
       avatar,
       subtitle,
       subtitleStyle,
@@ -100,6 +108,8 @@ class CardTitle extends React.Component<Props> {
             </Caption>
           ) : null}
         </View>
+
+        <View>{action}</View>
       </View>
     );
   }
@@ -109,7 +119,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 16,
+    justifyContent: 'space-between',
+    paddingLeft: 16,
   },
 
   avatar: {
@@ -119,6 +130,7 @@ const styles = StyleSheet.create({
   },
 
   titles: {
+    flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     height: 40,
