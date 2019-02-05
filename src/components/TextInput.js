@@ -510,6 +510,7 @@ class TextInput extends React.Component<Props, State> {
             style={[
               styles.outlinedLabelBackground,
               {
+                color: backgroundColor,
                 backgroundColor,
                 fontFamily,
                 fontSize: MINIMIZED_LABEL_FONT_SIZE,
