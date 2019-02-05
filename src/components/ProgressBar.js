@@ -76,9 +76,9 @@ class ProgressBar extends React.Component<Props, State> {
     const { animating } = this.props;
 
     if (animating) {
-      this.startAnimation();
+      this._startAnimation();
     } else {
-      this.stopAnimation();
+      this._stopAnimation();
     }
   }
 
@@ -87,12 +87,12 @@ class ProgressBar extends React.Component<Props, State> {
 
     this.setState({ width: event.nativeEvent.layout.width }, () => {
       if (animating) {
-        this.startAnimation();
+        this._startAnimation();
       }
     });
   };
 
-  startAnimation() {
+  _startAnimation() {
     const { indeterminate, progress } = this.props;
     const { fade, timer } = this.state;
 
@@ -132,7 +132,7 @@ class ProgressBar extends React.Component<Props, State> {
     }
   }
 
-  stopAnimation() {
+  _stopAnimation() {
     const { fade } = this.state;
 
     // Stop indeterminate animation
