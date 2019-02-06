@@ -494,6 +494,7 @@ class TextInput extends React.Component<Props, State> {
           // This is so that the label can overlap the outline
           // Otherwise the border will cut off the label on Android
           <View
+            pointerEvents="none"
             style={[
               styles.outline,
               {
@@ -704,6 +705,7 @@ const styles = StyleSheet.create({
     margin: 0,
     minHeight: 58,
     textAlign: I18nManager.isRTL ? 'right' : 'left',
+    zIndex: 1,
   },
   inputOutlined: {
     paddingTop: 20,
