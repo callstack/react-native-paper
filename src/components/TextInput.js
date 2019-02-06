@@ -70,6 +70,10 @@ type Props = React.ElementConfig<typeof NativeTextInput> & {|
    */
   onChangeText?: Function,
   /**
+   * Selection color of the input
+   */
+  selectionColor?: string,
+  /**
    * Underline color of the input.
    */
   underlineColor?: string,
@@ -379,6 +383,7 @@ class TextInput extends React.Component<Props, State> {
       disabled,
       label,
       error,
+      selectionColor,
       underlineColor,
       style,
       theme,
@@ -627,7 +632,10 @@ class TextInput extends React.Component<Props, State> {
           placeholder: label ? this.state.placeholder : this.props.placeholder,
           placeholderTextColor: placeholderColor,
           editable: !disabled,
-          selectionColor: activeColor,
+          selectionColor:
+            typeof selectionColor === 'undefined'
+              ? activeColor
+              : selectionColor,
           onFocus: this._handleFocus,
           onBlur: this._handleBlur,
           underlineColorAndroid: 'transparent',
