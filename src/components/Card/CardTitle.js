@@ -47,6 +47,8 @@ type Props = React.ElementConfig<typeof View> & {|
   theme: Theme,
 |};
 
+const LEFT_SIZE = 40;
+
 /**
  * A component to show a title, subtitle and an avatar inside a Card.
  *
@@ -88,9 +90,9 @@ class CardTitle extends React.Component<Props> {
     return (
       <View style={[styles.container, { height: subtitle ? 72 : 50 }, style]}>
         {left ? (
-          <View style={[styles.avatar]}>
+          <View style={[styles.left]}>
             {left({
-              size: 40,
+              size: LEFT_SIZE,
             })}
           </View>
         ) : null}
@@ -123,10 +125,11 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
   },
 
-  avatar: {
+  left: {
     justifyContent: 'center',
     marginRight: 16,
-    height: 40,
+    height: LEFT_SIZE,
+    width: LEFT_SIZE,
   },
 
   titles: {

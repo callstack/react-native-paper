@@ -78,7 +78,7 @@ class CardContent extends React.Component<Props> {
       }
     } else if (prev === cover || prev === title) {
       contentStyle = styles.first;
-    } else if (next === cover || prev === title) {
+    } else if (next === cover || next === title) {
       contentStyle = styles.last;
     }
 
