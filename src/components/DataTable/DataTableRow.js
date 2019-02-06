@@ -50,11 +50,11 @@ const styles = StyleSheet.create({
   container: {
     borderStyle: 'solid',
     borderBottomWidth: StyleSheet.hairlineWidth,
+    minHeight: 48,
   },
   content: {
     flex: 1,
     flexDirection: 'row',
-    height: 48,
     paddingHorizontal: 16,
   },
 });
