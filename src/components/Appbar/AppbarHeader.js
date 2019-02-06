@@ -4,6 +4,7 @@ import * as React from 'react';
 import { View, Platform, SafeAreaView, StyleSheet } from 'react-native';
 
 import Appbar, { DEFAULT_APPBAR_HEIGHT } from './Appbar';
+import shadow from '../../styles/shadow';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
@@ -99,6 +100,7 @@ class AppbarHeader extends React.Component<Props> {
     const {
       height = DEFAULT_APPBAR_HEIGHT,
       elevation = 4,
+      zIndex = 0,
       backgroundColor = colors.primary,
       ...restStyle
     } = StyleSheet.flatten(style) || {};
@@ -108,7 +110,9 @@ class AppbarHeader extends React.Component<Props> {
       typeof this.props.statusBarHeight === 'number' ? View : SafeAreaView;
 
     return (
-      <Wrapper style={[{ backgroundColor, elevation }]}>
+      <Wrapper
+        style={[{ backgroundColor, zIndex }, elevation && shadow(elevation)]}
+      >
         {/* $FlowFixMe: There seems to be conflict between Appbar's props and Header's props */}
         <Appbar
           style={[
