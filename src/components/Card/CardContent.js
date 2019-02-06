@@ -49,6 +49,7 @@ class CardContent extends React.Component<Props> {
   render() {
     const { index, total, siblings, style, ...rest } = this.props;
     const cover = 'withTheme(CardCover)';
+    const title = 'withTheme(CardTitle)';
 
     let contentStyle, prev, next;
 
@@ -57,23 +58,27 @@ class CardContent extends React.Component<Props> {
       next = siblings[index + 1];
     }
 
-    if ((prev === cover && next === cover) || total === 1) {
+    if (
+      (prev === cover && next === cover) ||
+      (prev === title && next === title) ||
+      total === 1
+    ) {
       contentStyle = styles.only;
     } else if (index === 0) {
-      if (next === cover) {
+      if (next === cover || next === title) {
         contentStyle = styles.only;
       } else {
         contentStyle = styles.first;
       }
     } else if (typeof total === 'number' && index === total - 1) {
-      if (prev === cover) {
+      if (prev === cover || prev === title) {
         contentStyle = styles.only;
       } else {
         contentStyle = styles.last;
       }
-    } else if (prev === cover) {
+    } else if (prev === cover || prev === title) {
       contentStyle = styles.first;
-    } else if (next === cover) {
+    } else if (next === cover || next === title) {
       contentStyle = styles.last;
     }
 

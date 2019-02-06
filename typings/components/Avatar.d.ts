@@ -4,7 +4,7 @@ import { ThemeShape, IconSource } from '../types';
 
 export interface IconProps {
   icon: IconSource;
-  size: number;
+  size?: number;
   color?: string;
   style?: any;
   theme?: ThemeShape;
@@ -14,7 +14,7 @@ export declare class Icon extends React.Component<IconProps> {}
 
 export interface ImageProps {
   source: ImageSourcePropType;
-  size: number;
+  size?: number;
   style?: any;
   them?: ThemeShape;
 }
@@ -23,7 +23,7 @@ export declare class Image extends React.Component<ImageProps> {}
 
 export interface TextProps {
   label: string;
-  size: number;
+  size?: number;
   color?: string;
   style?: any;
   theme?: ThemeShape;

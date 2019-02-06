@@ -3,11 +3,11 @@
 import * as React from 'react';
 import { Alert, ScrollView, StyleSheet } from 'react-native';
 import {
-  Title,
-  Caption,
+  Avatar,
   Paragraph,
   Card,
   Button,
+  IconButton,
   withTheme,
   type Theme,
 } from 'react-native-paper';
@@ -34,8 +34,8 @@ class CardExample extends React.Component<Props> {
           <Card.Cover
             source={require('../../assets/images/wrecked-ship.jpg')}
           />
+          <Card.Title title="Abandoned Ship" />
           <Card.Content>
-            <Title>Abandoned Ship</Title>
             <Paragraph>
               The Abandoned Ship is a wrecked ship located on Route 108 in
               Hoenn, originally being a ship named the S.S. Cactus. The second
@@ -52,9 +52,15 @@ class CardExample extends React.Component<Props> {
           </Card.Actions>
         </Card>
         <Card style={styles.card}>
+          <Card.Title
+            title="Berries"
+            subtitle="Omega Ruby"
+            left={props => <Avatar.Icon {...props} icon="folder" />}
+            right={props => (
+              <IconButton {...props} icon="more-vert" onPress={() => {}} />
+            )}
+          />
           <Card.Content>
-            <Title>Berries</Title>
-            <Caption>Omega Ruby</Caption>
             <Paragraph>
               Dotted around the Hoenn region, you will find loamy soil, many of
               which are housing berries. Once you have picked the berries, then
@@ -65,9 +71,15 @@ class CardExample extends React.Component<Props> {
           </Card.Content>
         </Card>
         <Card style={styles.card}>
-          <Title>Just Strawberries</Title>
           <Card.Cover
             source={require('../../assets/images/strawberries.jpg')}
+          />
+          <Card.Title
+            title="Just Strawberries"
+            subtitle="... and only Strawberries"
+            right={props => (
+              <IconButton {...props} icon="expand-more" onPress={() => {}} />
+            )}
           />
         </Card>
         <Card
@@ -77,8 +89,8 @@ class CardExample extends React.Component<Props> {
           }}
         >
           <Card.Cover source={require('../../assets/images/chameleon.jpg')} />
+          <Card.Title title="Pressable Chameleon" />
           <Card.Content>
-            <Title>Pressable Chameleon</Title>
             <Paragraph>
               This is a pressable chameleon. If you press me, I will alert.
             </Paragraph>
@@ -91,8 +103,11 @@ class CardExample extends React.Component<Props> {
           }}
         >
           <Card.Cover source={require('../../assets/images/city.jpg')} />
+          <Card.Title
+            title="Long Pressable City"
+            left={props => <Avatar.Icon {...props} icon="location-city" />}
+          />
           <Card.Content>
-            <Title>Long Pressable City</Title>
             <Paragraph>
               This is a long press only city. If you long press me, I will
               alert.
