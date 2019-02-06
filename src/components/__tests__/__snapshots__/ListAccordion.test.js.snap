@@ -28,6 +28,7 @@ exports[`renders expanded accordion 1`] = `
       pointerEvents="none"
       style={
         Object {
+          "alignItems": "center",
           "flexDirection": "row",
         }
       }
@@ -215,6 +216,7 @@ exports[`renders list accordion with children 1`] = `
       pointerEvents="none"
       style={
         Object {
+          "alignItems": "center",
           "flexDirection": "row",
         }
       }
@@ -384,6 +386,7 @@ exports[`renders list accordion with left items 1`] = `
       pointerEvents="none"
       style={
         Object {
+          "alignItems": "center",
           "flexDirection": "row",
         }
       }
@@ -553,6 +556,7 @@ exports[`renders multiline list accordion 1`] = `
       pointerEvents="none"
       style={
         Object {
+          "alignItems": "center",
           "flexDirection": "row",
         }
       }
