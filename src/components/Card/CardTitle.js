@@ -88,7 +88,13 @@ class CardTitle extends React.Component<Props> {
     } = this.props;
 
     return (
-      <View style={[styles.container, { height: subtitle ? 72 : 50 }, style]}>
+      <View
+        style={[
+          styles.container,
+          { height: subtitle || left || right ? 72 : 50 },
+          style,
+        ]}
+      >
         {left ? (
           <View style={[styles.left]}>
             {left({
