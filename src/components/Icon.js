@@ -10,9 +10,6 @@ try {
   // Optionally require vector-icons
   MaterialIcons = require('react-native-vector-icons/MaterialIcons').default;
 } catch (e) {
-  // eslint-disable-next-line no-console
-  console.error(e);
-
   if (global.__expo && global.__expo.Icon && global.__expo.Icon.MaterialIcons) {
     // Snack doesn't properly bundle vector icons from subpath
     // Use icons from the __expo global if available
