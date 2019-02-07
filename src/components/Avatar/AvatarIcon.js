@@ -77,7 +77,7 @@ class Avatar extends React.Component<Props> {
           restStyle,
         ]}
       >
-        <Icon source={icon} color={textColor} size={size * 0.75} />
+        <Icon source={icon} color={textColor} size={size * 0.6} />
       </View>
     );
   }
