@@ -105,13 +105,20 @@ class CardTitle extends React.Component<Props> {
 
         <View style={[styles.titles]}>
           {title ? (
-            <Title style={[{ marginBottom: subtitle ? 0 : 2 }, titleStyle]}>
+            <Title
+              style={[
+                styles.title,
+                { marginBottom: subtitle ? 0 : 2 },
+                titleStyle,
+              ]}
+              numberOfLines={1}
+            >
               {title}
             </Title>
           ) : null}
 
           {subtitle ? (
-            <Caption style={[styles.subtitle, subtitleStyle]}>
+            <Caption style={[styles.subtitle, subtitleStyle]} numberOfLines={1}>
               {subtitle}
             </Caption>
           ) : null}
@@ -142,10 +149,15 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    height: 40,
+    height: 50,
+  },
+
+  title: {
+    minHeight: 30,
   },
 
   subtitle: {
+    minHeight: 20,
     marginVertical: 0,
   },
 });

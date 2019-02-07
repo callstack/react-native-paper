@@ -53,7 +53,7 @@ class CardExample extends React.Component<Props> {
         </Card>
         <Card style={styles.card}>
           <Card.Title
-            title="Berries"
+            title="Berries that are trimmed at the end"
             subtitle="Omega Ruby"
             left={props => <Avatar.Icon {...props} icon="folder" />}
             right={props => (
