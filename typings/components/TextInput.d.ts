@@ -12,8 +12,8 @@ export interface TextInputProps extends NativeTextInputProps {
   underlineColor?: string;
   multiline?: boolean;
   numberOfLines?: number;
-  onFocus?: () => any;
-  onBlur?: () => any;
+  onFocus?: (e?: any) => any;
+  onBlur?: (e?: any) => any;
   render?: (props: RenderProps) => React.ReactNode;
   value?: string;
   style?: any;
@@ -27,8 +27,8 @@ export interface RenderProps extends NativeTextInputProps {
   placeholderTextColor: string;
   editable?: boolean;
   selectionColor: string;
-  onFocus: () => any;
-  onBlur: () => any;
+  onFocus: (e?: any) => any;
+  onBlur: (e?: any) => any;
   underlineColorAndroid: string;
   style: any;
   multiline?: boolean;
