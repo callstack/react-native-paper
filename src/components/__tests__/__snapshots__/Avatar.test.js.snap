@@ -27,7 +27,7 @@ exports[`renders avatar with icon 1`] = `
       Array [
         Object {
           "color": "#ffffff",
-          "fontSize": 32,
+          "fontSize": 38.4,
         },
         Array [
           Object {
@@ -82,7 +82,7 @@ exports[`renders avatar with icon and custom background color 1`] = `
       Array [
         Object {
           "color": "#ffffff",
-          "fontSize": 32,
+          "fontSize": 38.4,
         },
         Array [
           Object {
