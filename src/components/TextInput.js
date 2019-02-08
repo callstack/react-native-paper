@@ -23,6 +23,8 @@ const MINIMIZED_LABEL_FONT_SIZE = 12;
 const LABEL_WIGGLE_X_OFFSET = 4;
 const FOCUS_ANIMATION_DURATION = 150;
 const BLUR_ANIMATION_DURATION = 180;
+const LABEL_PADDING_HORIZONTAL = 12;
+const RANDOM_VALUE_TO_CENTER_LABEL = 4; // Don't know why 4, but it works
 
 type RenderProps = {
   ref: any => void,
@@ -435,6 +437,12 @@ class TextInput extends React.Component<Props, State> {
       };
     }
 
+    const labelHalfWidth = this.state.labelLayout.width / 2;
+    const baseLabelTranslateX =
+      (I18nManager.isRTL ? 1 : -1) *
+      (1 - MINIMIZED_LABEL_FONT_SIZE / MAXIMIZED_LABEL_FONT_SIZE) *
+      labelHalfWidth;
+
     const labelStyle = {
       fontFamily,
       fontSize: MAXIMIZED_LABEL_FONT_SIZE,
@@ -477,9 +485,13 @@ class TextInput extends React.Component<Props, State> {
           translateX: this.state.labeled.interpolate({
             inputRange: [0, 1],
             outputRange: [
-              (I18nManager.isRTL ? 1 : -1) *
-                (1 - MINIMIZED_LABEL_FONT_SIZE / MAXIMIZED_LABEL_FONT_SIZE) *
-                (this.state.labelLayout.width / 2),
+              baseLabelTranslateX > 0
+                ? baseLabelTranslateX +
+                  labelHalfWidth / LABEL_PADDING_HORIZONTAL -
+                  RANDOM_VALUE_TO_CENTER_LABEL
+                : baseLabelTranslateX -
+                  labelHalfWidth / LABEL_PADDING_HORIZONTAL +
+                  RANDOM_VALUE_TO_CENTER_LABEL,
               0,
             ],
           }),
@@ -669,7 +681,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     fontSize: 16,
-    paddingHorizontal: 12,
+    paddingHorizontal: LABEL_PADDING_HORIZONTAL,
   },
   placeholderFlat: {
     top: 19,
