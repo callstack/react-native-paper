@@ -1,5 +1,4 @@
 <p align="center">
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
   <img alt="react-native-paper" src="docs/assets/images/paper-logo.svg?sanitize=true" width="300">
 </p>
 <p align="center">
@@ -11,6 +10,7 @@
 [![Build Status][build-badge]][build]
 [![Version][version-badge]][package]
 [![MIT License][license-badge]][license]
+[![All Contributors][all-contributors-badge]][all-contributors]
 [![PRs Welcome][prs-welcome-badge]][prs-welcome]
 [![Chat][chat-badge]][chat]
 
@@ -47,6 +47,8 @@ Read the [contribution guidelines](/CONTRIBUTING.md) before contributing.
 [package]: https://www.npmjs.com/package/react-native-paper
 [license-badge]: https://img.shields.io/npm/l/react-native-paper.svg?style=flat-square
 [license]: https://opensource.org/licenses/MIT
+[all-contributors-badge]: https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square
+[all-contributors]: #contributors
 [prs-welcome-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [prs-welcome]: http://makeapullrequest.com
 [chat-badge]: https://img.shields.io/discord/426714625279524876.svg?style=flat-square&colorB=758ED3
