@@ -60,8 +60,8 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/all-contri
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-| [<img src="https://avatars1.githubusercontent.com/u/5358638?v=4" width="100px;" alt="Julian Hundeloh"/><br /><sub><b>Julian Hundeloh</b></sub>](http://hundeloh-consulting.ch/)<br />[💻](https://github.com/callstack/react-native-paper/commits?author=jaulz "Code") [📖](https://github.com/callstack/react-native-paper/commits?author=jaulz "Documentation") |
-| :---: |
+| [<img src="https://avatars1.githubusercontent.com/u/5358638?v=4" width="100px;" alt="Julian Hundeloh"/><br /><sub><b>Julian Hundeloh</b></sub>](http://hundeloh-consulting.ch/)<br />[💻](https://github.com/callstack/react-native-paper/commits?author=jaulz "Code") [📖](https://github.com/callstack/react-native-paper/commits?author=jaulz "Documentation") | [<img src="https://avatars3.githubusercontent.com/u/18584155?v=4" width="100px;" alt="Dawid"/><br /><sub><b>Dawid</b></sub>](http://dawidurbaniak.pl)<br />[💻](https://github.com/callstack/react-native-paper/commits?author=Trancever "Code") |
+| :---: | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
