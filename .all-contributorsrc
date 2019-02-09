@@ -18,6 +18,15 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "luissmg",
+      "name": "Luís",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/20660551?v=4",
+      "profile": "https://github.com/luissmg",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
