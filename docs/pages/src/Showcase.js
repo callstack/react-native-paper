@@ -21,6 +21,14 @@ const data: Data[] = [
     name: 'Showman',
     image: 'showcase/showman.png',
   },
+  {
+    color: '#F73942',
+    name: 'AppnGO',
+    image: 'showcase/appngo.png',
+    android:
+      'https://play.google.com/store/apps/details?id=com.helsedesign.appngo',
+    ios: 'https://itunes.apple.com/us/app/appngo/id1439585129',
+  },
 ];
 
 export default class Showcase extends React.Component<{}> {
