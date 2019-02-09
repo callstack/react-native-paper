@@ -10,6 +10,7 @@
 [![Build Status][build-badge]][build]
 [![Version][version-badge]][package]
 [![MIT License][license-badge]][license]
+[![All Contributors][all-contributors-badge]][all-contributors]
 [![PRs Welcome][prs-welcome-badge]][prs-welcome]
 [![Chat][chat-badge]][chat]
 
@@ -46,7 +47,21 @@ Read the [contribution guidelines](/CONTRIBUTING.md) before contributing.
 [package]: https://www.npmjs.com/package/react-native-paper
 [license-badge]: https://img.shields.io/npm/l/react-native-paper.svg?style=flat-square
 [license]: https://opensource.org/licenses/MIT
+[all-contributors-badge]: https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square
+[all-contributors]: #contributors
 [prs-welcome-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [prs-welcome]: http://makeapullrequest.com
 [chat-badge]: https://img.shields.io/discord/426714625279524876.svg?style=flat-square&colorB=758ED3
 [chat]: https://discord.gg/zwR2Cdh
+
+## Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://github.com/all-contributors/all-contributors#emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+| [<img src="https://avatars1.githubusercontent.com/u/5358638?v=4" width="100px;" alt="Julian Hundeloh"/><br /><sub><b>Julian Hundeloh</b></sub>](http://hundeloh-consulting.ch/)<br />[💻](https://github.com/callstack/react-native-paper/commits?author=jaulz "Code") [📖](https://github.com/callstack/react-native-paper/commits?author=jaulz "Documentation") |
+| :---: |
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

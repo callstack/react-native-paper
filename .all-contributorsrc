@@ -1,0 +1,24 @@
+{
+  "projectName": "react-native-paper",
+  "projectOwner": "callstack",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "jaulz",
+      "name": "Julian Hundeloh",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/5358638?v=4",
+      "profile": "http://hundeloh-consulting.ch/",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
