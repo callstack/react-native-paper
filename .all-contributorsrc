@@ -18,6 +18,15 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "Trancever",
+      "name": "Dawid",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/18584155?v=4",
+      "profile": "http://dawidurbaniak.pl",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
