@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TextInputProps as NativeTextInputProps } from 'react-native';
+import { TextInputProps as NativeTextInputProps, TextInputFocusEventData, NativeSyntheticEvent } from 'react-native';
 import { ThemeShape } from '../types';
 
 export interface TextInputProps extends NativeTextInputProps {
@@ -12,8 +12,8 @@ export interface TextInputProps extends NativeTextInputProps {
   underlineColor?: string;
   multiline?: boolean;
   numberOfLines?: number;
-  onFocus?: (e?: any) => any;
-  onBlur?: (e?: any) => any;
+  onFocus?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   render?: (props: RenderProps) => React.ReactNode;
   value?: string;
   style?: any;
@@ -27,8 +27,8 @@ export interface RenderProps extends NativeTextInputProps {
   placeholderTextColor: string;
   editable?: boolean;
   selectionColor: string;
-  onFocus: (e?: any) => any;
-  onBlur: (e?: any) => any;
+  onFocus?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   underlineColorAndroid: string;
   style: any;
   multiline?: boolean;
