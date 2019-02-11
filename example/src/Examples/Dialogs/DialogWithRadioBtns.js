@@ -32,7 +32,7 @@ export default class extends React.Component<Props, State> {
       <Portal>
         <Dialog onDismiss={close} visible={visible}>
           <Dialog.Title>Choose an option</Dialog.Title>
-          <Dialog.ScrollArea style={{ maxHeight: 170, paddingHorizontal: 0 }}>
+          <Dialog.ScrollArea style={{ maxHeight: 170 }}>
             <ScrollView>
               <View>
                 <TouchableRipple

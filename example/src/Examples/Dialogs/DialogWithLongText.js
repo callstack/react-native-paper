@@ -14,8 +14,8 @@ const DialogWithLongText = ({
   <Portal>
     <Dialog onDismiss={close} visible={visible}>
       <Dialog.Title>Alert</Dialog.Title>
-      <Dialog.ScrollArea style={{ maxHeight: 220, paddingHorizontal: 0 }}>
-        <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>
+      <Dialog.ScrollArea style={{ maxHeight: 220 }}>
+        <ScrollView>
           <Paragraph>
             Material is the metaphor
             {'\n'}

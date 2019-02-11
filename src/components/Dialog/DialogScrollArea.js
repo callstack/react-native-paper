@@ -35,7 +35,7 @@ type Props = React.ElementConfig<typeof View> & {
  *           visible={this.state.visible}
  *           onDismiss={this._hideDialog}>
  *           <Dialog.ScrollArea>
- *             <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>
+ *             <ScrollView>
  *               This is a scrollable area
  *             </ScrollView>
  *           </Dialog.ScrollArea>
@@ -52,7 +52,15 @@ class DialogScrollArea extends React.Component<Props> {
   render() {
     return (
       <View {...this.props} style={[styles.container, this.props.style]}>
-        {this.props.children}
+        {React.Children.map(this.props.children, child =>
+          React.cloneElement(child, {
+            ...child.props,
+            contentContainerStyle: [
+              styles.contentContainer,
+              child.props.contentContainerStyle,
+            ],
+          })
+        )}
       </View>
     );
   }
@@ -63,6 +71,9 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(0, 0, 0, .12)',
     borderTopWidth: StyleSheet.hairlineWidth,
     borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+
+  contentContainer: {
     paddingHorizontal: 24,
   },
 });
