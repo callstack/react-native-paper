@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { ImageProps, ViewProps } from 'react-native';
+
+import { ImageProps, StyleProp, TextStyle, ViewProps, ViewStyle } from 'react-native';
+import { StyledProps } from 'types/styled-components';
+
 import { ThemeShape } from '../types';
-import { AvatarIcon } from './Avatar';
 
 export interface CardContentProps extends ViewProps {
 }
