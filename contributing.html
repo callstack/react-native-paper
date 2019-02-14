@@ -33,7 +33,7 @@
 </blockquote>
 <ol>
 <li>Fork the repo and create your branch from <code>master</code> (a guide on <a href="https://help.github.com/articles/fork-a-repo/">how to fork a repository</a>).</li>
-<li>Run <code>yarn bootstrap</code> to setup the developement environment.</li>
+<li>Run <code>yarn bootstrap</code> to setup the development environment.</li>
 <li>Do the changes you want and test them out in the example app before sending a pull request.</li>
 </ol>
 <h3 id="commit-message-convention">
@@ -43,15 +43,15 @@
             </svg>
           </a>
         Commit message convention</h3>
-<p>We prefix our commit messages with one of the following to signify the kind of change:</p>
+<p>We follow the <a href="https://www.conventionalcommits.org/en">conventional commits specification</a> for our commit messages:</p>
 <ul>
 <li><code>fix</code>: bug fixes, e.g. fix Button color on DarkTheme.</li>
 <li><code>feat</code>: new features, e.g. add Snackbar component.</li>
-<li><code>refactor</code>: code/structure refactor, e.g. new structure folder for components.</li>
+<li><code>refactor</code>: code refactor, e.g. new folder structure for components.</li>
 <li><code>docs</code>: changes into documentation, e.g. add usage example for Button.</li>
 <li><code>test</code>: adding or updating tests, eg unit, snapshot testing.</li>
 <li><code>chore</code>: tooling changes, e.g. change circleci config.</li>
-<li><code>BREAKING</code>: for changes that break existing usage, e.g. change API of a component.</li>
+<li><code>BREAKING CHANGE</code>: for changes that break existing usage, e.g. change API of a component.</li>
 </ul>
 <p>Our pre-commit hooks verify that your commit message matches this format when committing.</p>
 <h3 id="linting-and-tests">
@@ -64,9 +64,9 @@
 <p>We use <code>flow</code> for type checking, <code>eslint</code> with <code>prettier</code> for linting and formatting the code, and <code>jest</code> for testing. Our pre-commit hooks verify that the linter and tests pass when commiting. You can also run the following commands manually:</p>
 <ul>
 <li><code>yarn flow</code>: run flow on all files.</li>
-<li><code>yarn typescript</code>: run tests for typescript.</li>
-<li><code>yarn lint</code>: run eslint and prettier.</li>
-<li><code>yarn test</code>: run unit tests.</li>
+<li><code>yarn typescript</code>: run tests for typescript definitions.</li>
+<li><code>yarn lint</code>: lint files with eslint and prettier.</li>
+<li><code>yarn test</code>: run unit tests with jest.</li>
 </ul>
 <h3 id="sending-a-pull-request">
           <a class="anchor" href="#sending-a-pull-request">
