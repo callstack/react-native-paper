@@ -10,7 +10,7 @@ interface DialogBaseProps {
 export interface DialogContentProps extends DialogBaseProps {}
 export interface DialogActionsProps extends DialogBaseProps {}
 export interface DialogScrollAreaProps {
-  children?: (scrollAreaProps: { contentContainerStyle: ViewStyle }) => React.ReactNode;
+  children?: React.ReactNode | ((scrollAreaProps: { contentContainerStyle: ViewStyle }) => React.ReactNode);
   style?: any; 
 }
 export interface DialogTitleProps extends DialogBaseProps {

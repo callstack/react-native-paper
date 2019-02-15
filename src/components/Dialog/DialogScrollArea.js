@@ -7,9 +7,11 @@ type Props = {
   /**
    * Content of the `DialogScrollArea`.
    */
-  children: (scrollViewProps: {
-    contentContainerStyle: any,
-  }) => React.Node,
+  children:
+    | React.Node
+    | ((scrollViewProps: {
+        contentContainerStyle: any,
+      }) => React.Node),
   style?: any,
 };
 
@@ -58,9 +60,13 @@ class DialogScrollArea extends React.Component<Props> {
 
     return (
       <View {...this.props} style={[styles.container, this.props.style]}>
-        {children({
-          contentContainerStyle: styles.contentContainer,
-        })}
+        {typeof children === 'function' ? (
+          children({
+            contentContainerStyle: styles.contentContainer,
+          })
+        ) : (
+          <View style={styles.contentContainer}>{children}</View>
+        )}
       </View>
     );
   }
