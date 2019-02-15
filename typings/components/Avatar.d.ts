@@ -30,3 +30,9 @@ export interface TextProps {
 }
 
 export declare class Text extends React.Component<TextProps> {}
+
+export declare class Avatar {
+  static Icon: Icon;
+  static Image: Image;
+  static Text: Text;
+}
