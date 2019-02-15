@@ -16,7 +16,7 @@ export interface ImageProps {
   source: ImageSourcePropType;
   size?: number;
   style?: any;
-  them?: ThemeShape;
+  theme?: ThemeShape;
 }
 
 export declare class Image extends React.Component<ImageProps> {}
