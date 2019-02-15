@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ThemeShape } from '../types';
-import { ScrollViewProps } from 'react-native';
+import { ScrollViewProps, ViewStyle } from 'react-native';
 
 interface DialogBaseProps {
   children: React.ReactNode;
@@ -10,7 +10,7 @@ interface DialogBaseProps {
 export interface DialogContentProps extends DialogBaseProps {}
 export interface DialogActionsProps extends DialogBaseProps {}
 export interface DialogScrollAreaProps {
-  children: React.ReactElement<ScrollViewProps>
+  children?: (scrollAreaProps: { contentContainerStyle: ViewStyle }) => React.ReactNode;
   style?: any; 
 }
 export interface DialogTitleProps extends DialogBaseProps {

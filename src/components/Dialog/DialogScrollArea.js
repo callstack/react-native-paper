@@ -3,11 +3,13 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-type Props = React.ElementConfig<typeof View> & {
+type Props = {
   /**
    * Content of the `DialogScrollArea`.
    */
-  children: React.Node,
+  children: (scrollViewProps: {
+    contentContainerStyle: any,
+  }) => React.Node,
   style?: any,
 };
 
@@ -35,9 +37,11 @@ type Props = React.ElementConfig<typeof View> & {
  *           visible={this.state.visible}
  *           onDismiss={this._hideDialog}>
  *           <Dialog.ScrollArea>
- *             <ScrollView>
- *               This is a scrollable area
- *             </ScrollView>
+ *             {(scrollViewProps) =>
+ *               <ScrollView {...scrollViewProps}>
+ *                 This is a scrollable area
+ *               </ScrollView>
+ *             }
  *           </Dialog.ScrollArea>
  *         </Dialog>
  *       </Portal>
@@ -50,17 +54,13 @@ class DialogScrollArea extends React.Component<Props> {
   static displayName = 'Dialog.ScrollArea';
 
   render() {
+    const { children } = this.props;
+
     return (
       <View {...this.props} style={[styles.container, this.props.style]}>
-        {React.Children.map(this.props.children, child =>
-          React.cloneElement(child, {
-            ...child.props,
-            contentContainerStyle: [
-              styles.contentContainer,
-              child.props.contentContainerStyle,
-            ],
-          })
-        )}
+        {children({
+          contentContainerStyle: styles.contentContainer,
+        })}
       </View>
     );
   }
@@ -71,6 +71,8 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(0, 0, 0, .12)',
     borderTopWidth: StyleSheet.hairlineWidth,
     borderBottomWidth: StyleSheet.hairlineWidth,
+    flexGrow: 1,
+    flexShrink: 1,
   },
 
   contentContainer: {
