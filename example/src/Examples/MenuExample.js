@@ -2,8 +2,14 @@
 
 import * as React from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
-import { Menu, Appbar, withTheme, Divider, Button } from 'react-native-paper';
-import type { Theme } from 'react-native-paper/types';
+import {
+  Menu,
+  Appbar,
+  Divider,
+  Button,
+  withTheme,
+  type Theme,
+} from 'react-native-paper';
 
 type State = {
   visible1: boolean,
