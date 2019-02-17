@@ -32,7 +32,7 @@ import SwitchExample from './Examples/SwitchExample';
 import TextExample from './Examples/TextExample';
 import TextInputExample from './Examples/TextInputExample';
 import ToggleButtonExample from './Examples/ToggleButtonExample';
-import TouchableRippleExample from './Examurlples/TouchableRippleExample';
+import TouchableRippleExample from './Examples/TouchableRippleExample';
 
 type Props = {
   theme: Theme,
