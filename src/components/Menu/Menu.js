@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
-import AnimatedSurface from './AnimatedSurface';
+import Surface from '../Surface';
 import MenuItem from './MenuItem';
 
 type Props = {
@@ -270,7 +270,7 @@ class Menu extends React.Component<Props, State> {
           <TouchableWithoutFeedback onPress={this._hide}>
             <View style={StyleSheet.absoluteFill} />
           </TouchableWithoutFeedback>
-          <AnimatedSurface
+          <Surface
             onLayout={this._onMenuLayout}
             style={[
               styles.shadowMenuContainer,
@@ -283,7 +283,7 @@ class Menu extends React.Component<Props, State> {
             >
               {children}
             </Animated.View>
-          </AnimatedSurface>
+          </Surface>
         </Modal>
       </View>
     );
