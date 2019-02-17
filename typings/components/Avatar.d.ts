@@ -16,7 +16,7 @@ export interface ImageProps {
   source: ImageSourcePropType;
   size?: number;
   style?: any;
-  them?: ThemeShape;
+  theme?: ThemeShape;
 }
 
 export declare class Image extends React.Component<ImageProps> {}
@@ -30,3 +30,9 @@ export interface TextProps {
 }
 
 export declare class Text extends React.Component<TextProps> {}
+
+export declare class Avatar {
+  static Icon: Icon;
+  static Image: Image;
+  static Text: Text;
+}
