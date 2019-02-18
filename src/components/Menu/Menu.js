@@ -41,6 +41,22 @@ type Props = {
   theme: Theme,
 };
 
+type State = {
+  top: number,
+  left: number,
+  menuWidth: number,
+  menuHeight: number,
+  buttonWidth: number,
+  buttonHeight: number,
+  opacityAnimation: Animated.Value,
+  menuSizeAnimation: Animated.ValueXY,
+  menuState: 'hidden' | 'animating' | 'shown',
+};
+
+const ANIMATION_DURATION = 300;
+const EASING = Easing.bezier(0.4, 0, 0.2, 1);
+const SCREEN_INDENT = 8;
+
 /**
  * Menus display a list of choices on temporary surfaces. Their placement varies based on the element that opens them.
  *
@@ -85,23 +101,6 @@ type Props = {
  * }
  * ```
  */
-
-type State = {
-  top: number,
-  left: number,
-  menuWidth: number,
-  menuHeight: number,
-  buttonWidth: number,
-  buttonHeight: number,
-  opacityAnimation: Animated.Value,
-  menuSizeAnimation: Animated.ValueXY,
-  menuState: 'hidden' | 'animating' | 'shown',
-};
-
-const ANIMATION_DURATION = 300;
-const EASING = Easing.bezier(0.4, 0, 0.2, 1);
-const SCREEN_INDENT = 8;
-
 class Menu extends React.Component<Props, State> {
   // @component ./MenuItem.js
   static Item = MenuItem;
@@ -120,7 +119,7 @@ class Menu extends React.Component<Props, State> {
 
   componentDidUpdate(prevProps) {
     if (prevProps.visible !== this.props.visible) {
-      this._toggle();
+      this._updateVisibility();
     }
   }
 
@@ -167,7 +166,7 @@ class Menu extends React.Component<Props, State> {
     this.setState({ buttonWidth: width, buttonHeight: height });
   };
 
-  _toggle = () => {
+  _updateVisibility = () => {
     if (this.props.visible) {
       this._show();
     } else {
@@ -219,43 +218,38 @@ class Menu extends React.Component<Props, State> {
       menuSizeAnimation,
     } = this.state;
 
-    const menuSize = {
-      width: menuSizeAnimation.x,
-      height: menuSizeAnimation.y,
-    };
-
     // Adjust position of menu
     let { left, top } = this.state;
     const transforms = [];
 
-    const dimensions = Dimensions.get('screen');
+    const { width: screenWidth, height: screenHeight } = Dimensions.get(
+      'screen'
+    );
 
     // Flip by X axis if menu hits right screen border
-    if (left > dimensions.width - menuWidth - SCREEN_INDENT) {
+    if (left > screenWidth - menuWidth - SCREEN_INDENT) {
       transforms.push({
         translateX: Animated.multiply(menuSizeAnimation.x, -1),
       });
 
-      left = Math.min(dimensions.width - SCREEN_INDENT, left + buttonWidth);
+      left = Math.min(screenWidth - SCREEN_INDENT, left + buttonWidth);
     }
 
     // Flip by Y axis if menu hits bottom screen border
-    if (top > dimensions.height - menuHeight - SCREEN_INDENT) {
+    if (top > screenHeight - menuHeight - SCREEN_INDENT) {
       transforms.push({
         translateY: Animated.multiply(menuSizeAnimation.y, -1),
       });
 
-      top = Math.min(dimensions.height - SCREEN_INDENT, top + buttonHeight);
+      top = Math.min(screenHeight - SCREEN_INDENT, top + buttonHeight);
     }
-
-    // RTL support
-    const leftOrRight = I18nManager.isRTL ? { right: left } : { left };
 
     const shadowMenuContainerStyle = {
       opacity: opacityAnimation,
       transform: transforms,
       borderRadius: theme.roundness,
-      ...leftOrRight,
+      right: I18nManager.isRTL ? left : {},
+      left: I18nManager.isRTL ? {} : left,
       top,
     };
 
@@ -279,7 +273,13 @@ class Menu extends React.Component<Props, State> {
             ]}
           >
             <Animated.View
-              style={[styles.menuContainer, animationStarted && menuSize]}
+              style={[
+                styles.menuContainer,
+                animationStarted && {
+                  width: menuSizeAnimation.x,
+                  height: menuSizeAnimation.y,
+                },
+              ]}
             >
               {children}
             </Animated.View>
