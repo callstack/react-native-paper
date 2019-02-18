@@ -58,7 +58,7 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
 const SCREEN_INDENT = 8;
 
 /**
- * Menus display a list of choices on temporary surfaces. Their placement varies based on the element that opens them.
+ * Menus display a list of choices on temporary elevated surfaces. Their placement varies based on the element that opens them.
  *
  *  <div class="screenshots">
  *   <img class="medium" src="screenshots/menu-1.png" />
