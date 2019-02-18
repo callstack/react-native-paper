@@ -21,7 +21,7 @@ type Props = {
    */
   icon?: IconSource,
   /**
-   * Whether the `MenuItem` is disabled. A disabled `MenuItem` is greyed out and `onPress` is not called on touch.
+   * Whether the 'item' is disabled. A disabled 'item' is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean,
   /**
@@ -36,7 +36,7 @@ type Props = {
 };
 
 /**
- * A component to show list of options inside a Menu.
+ * A component to show a single list item inside a Menu.
  *
  */
 
