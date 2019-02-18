@@ -77,6 +77,9 @@ var meta = {
   title: "Icons"
 };
 exports.meta = meta;
+var layoutProps = {
+  meta: meta
+};
 
 var MDXContent =
 /*#__PURE__*/
@@ -442,7 +445,8 @@ function (_React$Component) {
   return MDXContent;
 }(React.Component);
 
-exports.default = MDXContent;;
+exports.default = MDXContent;
+MDXContent.isMDXComponent = true;;
   }(
     m,
     m.exports,

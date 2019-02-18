@@ -17,6 +17,7 @@ const render = () => {
         name={window.__INITIAL_PATH__}
         data={data}
         github={"https://github.com/callstack/react-native-paper/edit/master"}
+        logo={"images/sidebar-logo.svg"}
       />,
       root
     );
