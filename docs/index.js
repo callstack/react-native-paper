@@ -108,6 +108,7 @@ function getPages() {
 
 const options = {
   root,
+  logo: 'images/sidebar-logo.svg',
   assets,
   styles,
   scripts,

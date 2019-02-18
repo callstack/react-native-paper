@@ -6,6 +6,7 @@ import color from 'color';
 
 import GooglePlayIcon from '../../components/google-play-icon';
 import IphoneIcon from '../../components/iphone-icon';
+import Content from './components/Content';
 
 type Data = {
   color: string,
@@ -34,21 +35,19 @@ const data: Data[] = [
 export default class Showcase extends React.Component<{}> {
   render() {
     return (
-      <div className={container}>
-        <div className={content}>
-          <h1>Who&apos;s using Paper?</h1>
-          <p>
-            Check out these apps built using Paper. Send us a{' '}
-            <a
-              href="https://github.com/callstack/react-native-paper/pulls"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              pull request
-            </a>{' '}
-            to add your app to this list.
-          </p>
-        </div>
+      <Content>
+        <h1>Who&apos;s using Paper?</h1>
+        <p>
+          Check out these apps built using Paper. Send us a{' '}
+          <a
+            href="https://github.com/callstack/react-native-paper/pulls"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            pull request
+          </a>{' '}
+          to add your app to this list.
+        </p>
         <div className={gallery}>
           {data.map(item => {
             const tintColor = color(item.color).light() ? '#000000' : '#FFFFFF';
@@ -90,25 +89,10 @@ export default class Showcase extends React.Component<{}> {
             );
           })}
         </div>
-      </div>
+      </Content>
     );
   }
 }
-
-const container = css`
-  padding: 24px 0;
-  width: 100%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-`;
-
-const content = css`
-  padding: 0 48px;
-
-  @media (max-width: 680px) {
-    padding: 0 16px;
-  }
-`;
 
 const appName = css`
   font-size: 16px;
@@ -120,12 +104,11 @@ const gallery = css`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 8px 38px;
   min-width: 0;
+  margin: 32px -16px;
 
   @media (max-width: 680px) {
     justify-content: center;
-    padding: 8px 16px;
   }
 `;
 
@@ -137,21 +120,19 @@ const info = css`
 `;
 
 const imageContainer = css`
-  height: ${480 + 48}px;
-  width: auto;
   overflow: hidden;
-  margin: 10px;
+  margin: 16px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.24);
 
-  &:hover,
-  &:focus {
-    .${info} {
-      transform: translateY(-48px);
-    }
-  }
+  @media (min-width: 420px) {
+    height: ${480 + 48}px;
 
-  @media (max-width: 680px) {
-    margin: 10px 0;
+    &:hover,
+    &:focus {
+      .${info} {
+        transform: translateY(-48px);
+      }
+    }
   }
 `;
 
@@ -159,6 +140,11 @@ const image = css`
   display: block;
   max-height: 480px;
   width: auto;
+
+  @media (min-width: 420px) {
+    height: 480px;
+    width: 270px;
+  }
 `;
 
 const badgeContainer = css`

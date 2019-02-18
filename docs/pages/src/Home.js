@@ -3,24 +3,37 @@
 
 import * as React from 'react';
 import { css, cx } from 'linaria';
+import { styled } from 'linaria/react';
 import { Link } from 'component-docs/components';
+
+import Content from './components/Content';
 
 export default class Home extends React.Component<{}> {
   render() {
     return (
       <div className={container}>
-        <p className={banner}>
+        <Banner>
           Looking for the documentation for version 1.0? You can find it{' '}
           <a href="1.0">here</a>.
-        </p>
-        <div className={cover}>
-          <img
-            className={logo}
-            src="images/paper-logo.svg"
-            alt="React Native Paper"
-          />
-          <p>Cross-platform Material Design for React Native</p>
-          <div className={buttons}>
+        </Banner>
+        <Content>
+          <h1>
+            Cross-platform <Highlighted>Material Design</Highlighted> for React
+            Native.
+          </h1>
+          <p>
+            Paper is a collection of customizable and production-ready
+            components for React Native, following Google’s Material Design
+            guidelines.
+          </p>
+          <a
+            href="https://snack.expo.io/@satya164/github.com-callstack-react-native-paper:example"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Try the demo on Snack
+          </a>
+          <Buttons>
             <Link className={cx(button, primary)} to="getting-started">
               Get started
             </Link>
@@ -32,21 +45,14 @@ export default class Home extends React.Component<{}> {
             >
               GitHub
             </a>
-          </div>
-          <a
-            href="https://snack.expo.io/@satya164/github.com-callstack-react-native-paper:example"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Try it out with Snack
-          </a>
-        </div>
-        <div className={gallery}>
-          {screenshots.map((image, i) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <img key={i} src={image} alt="" />
-          ))}
-        </div>
+          </Buttons>
+          <Gallery>
+            {screenshots.map((image, i) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <img key={i} src={image} alt="" />
+            ))}
+          </Gallery>
+        </Content>
       </div>
     );
   }
@@ -56,16 +62,16 @@ const elevated = `
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 3px 6px rgba(0, 0, 0, 0.24);
 `;
 
-const banner = css`
+const Banner = styled.p`
   margin: 0;
-  padding: 10px 16px;
+  padding: 16px;
+  margin: 0 24px;
   text-align: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
 `;
 
-const logo = css`
-  max-height: 125px;
-  width: auto;
+const Highlighted = styled.span`
+  color: #6221ea;
 `;
 
 const container = css`
@@ -74,26 +80,19 @@ const container = css`
   -webkit-overflow-scrolling: touch;
 `;
 
-const cover = css`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 80vh;
-  padding: 32px;
-  text-align: center;
-`;
-
-const buttons = css`
+const Buttons = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 16px 0;
+  flex-wrap: wrap;
+  margin: 16px -8px;
+  min-width: 0;
 `;
 
 const button = css`
   appearance: none;
   margin: 8px;
   min-width: 120px;
+  white-space: nowrap;
   font-size: 13px;
   font-weight: 600;
   text-align: center;
@@ -139,21 +138,21 @@ const secondary = css`
   }
 `;
 
-const gallery = css`
+const Gallery = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
-  padding: 10px;
+  justify-content: flex-start;
+  margin: 48px -16px;
   min-width: 0;
 
   > img {
     ${elevated};
 
     display: block;
-    height: 640px;
+    max-height: 480px;
     width: auto;
-    margin: 10px;
+    margin: 16px;
   }
 `;
 
@@ -170,5 +169,4 @@ const screenshots = [
   'gallery/typography.png',
   'gallery/bottom-navigation.png',
   'gallery/fab.png',
-  'gallery/toggle-button.png',
 ];
