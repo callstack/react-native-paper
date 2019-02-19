@@ -213,11 +213,14 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
         >
           <View
             style={
-              Object {
-                "alignItems": "center",
-                "flexDirection": "row",
-                "justifyContent": "center",
-              }
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                },
+                undefined,
+              ]
             }
           >
             <Text
@@ -371,11 +374,14 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
         >
           <View
             style={
-              Object {
-                "alignItems": "center",
-                "flexDirection": "row",
-                "justifyContent": "center",
-              }
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                },
+                undefined,
+              ]
             }
           >
             <Text
@@ -458,11 +464,14 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
         >
           <View
             style={
-              Object {
-                "alignItems": "center",
-                "flexDirection": "row",
-                "justifyContent": "center",
-              }
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                },
+                undefined,
+              ]
             }
           >
             <Text
