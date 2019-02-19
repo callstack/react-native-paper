@@ -1,8 +1,9 @@
 /* @flow */
 
 import * as React from 'react';
-import { ActivityIndicator, Animated, View, StyleSheet } from 'react-native';
+import { ActivityIndicator, Animated, StyleSheet, View } from 'react-native';
 import color from 'color';
+import type { IconSource } from './Icon';
 import Icon from './Icon';
 import Surface from './Surface';
 import Text from './Typography/Text';
@@ -10,7 +11,6 @@ import TouchableRipple from './TouchableRipple';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
-import type { IconSource } from './Icon';
 
 type Props = React.ElementConfig<typeof Surface> & {|
   /**
@@ -65,6 +65,10 @@ type Props = React.ElementConfig<typeof Surface> & {|
    * @optional
    */
   theme: Theme,
+  /**
+   * Alignment of content inside button i-e icon and text
+   */
+  contentAlign?: 'center' | 'left' | 'right',
 |};
 
 type State = {
@@ -107,6 +111,7 @@ class Button extends React.Component<Props, State> {
   static defaultProps = {
     mode: 'text',
     uppercase: true,
+    contentAlign: 'center',
   };
 
   state = {
@@ -146,12 +151,13 @@ class Button extends React.Component<Props, State> {
       onPress,
       style,
       theme,
+      contentAlign,
       ...rest
     } = this.props;
     const { colors, roundness } = theme;
     const fontFamily = theme.fonts.medium;
 
-    let backgroundColor, borderColor, textColor, borderWidth;
+    let backgroundColor, borderColor, textColor, borderWidth, justifyContent;
 
     if (mode === 'contained') {
       if (disabled) {
@@ -203,6 +209,20 @@ class Button extends React.Component<Props, State> {
       textColor = colors.primary;
     }
 
+    if (contentAlign === 'left') {
+      justifyContent = 'flex-start';
+    } else if (contentAlign === 'left') {
+      justifyContent = 'flex-end';
+    } else {
+      justifyContent = 'center';
+    }
+
+    const contentStyle = {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent,
+    };
+
     const rippleColor = color(textColor)
       .alpha(0.32)
       .rgb()
@@ -243,7 +263,7 @@ class Button extends React.Component<Props, State> {
           rippleColor={rippleColor}
           style={touchableStyle}
         >
-          <View style={styles.content}>
+          <View style={contentStyle}>
             {icon && loading !== true ? (
               <View style={styles.icon}>
                 <Icon source={icon} size={16} color={textColor} />
@@ -287,11 +307,6 @@ const styles = StyleSheet.create({
   },
   compact: {
     minWidth: 'auto',
-  },
-  content: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   icon: {
     width: 16,
