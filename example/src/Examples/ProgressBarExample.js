@@ -45,7 +45,7 @@ class ProgressBarExample extends React.Component<Props, State> {
         </Button>
 
         <View style={styles.row}>
-          <Paragraph>ProgressBar primary color</Paragraph>
+          <Paragraph>Default ProgressBar </Paragraph>
           <ProgressBar
             progress={this.state.progress}
             visible={this.state.visible}
@@ -53,7 +53,12 @@ class ProgressBarExample extends React.Component<Props, State> {
         </View>
 
         <View style={styles.row}>
-          <Paragraph>ProgressBar custom color</Paragraph>
+          <Paragraph>Indeterminate ProgressBar</Paragraph>
+          <ProgressBar indeterminate visible={this.state.visible} />
+        </View>
+
+        <View style={styles.row}>
+          <Paragraph>ProgressBar with custom color</Paragraph>
           <ProgressBar
             progress={this.state.progress}
             visible={this.state.visible}
@@ -62,8 +67,13 @@ class ProgressBarExample extends React.Component<Props, State> {
         </View>
 
         <View style={styles.row}>
-          <Paragraph>ProgressBar indeterminate</Paragraph>
-          <ProgressBar indeterminate visible={this.state.visible} />
+          <Paragraph>ProgressBar with custom background color</Paragraph>
+          <ProgressBar
+            progress={this.state.progress}
+            visible={this.state.visible}
+            color={Colors.red800}
+            style={{ backgroundColor: Colors.teal500 }}
+          />
         </View>
       </View>
     );
