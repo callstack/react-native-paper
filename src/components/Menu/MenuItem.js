@@ -46,21 +46,24 @@ class MenuItem extends React.Component<Props> {
   render() {
     const { icon, title, disabled, onPress, theme, style } = this.props;
 
-    let titleColor = color(theme.colors.text)
-      .alpha(0.87)
-      .rgb()
-      .string();
-    let iconColor = color(theme.colors.text)
-      .alpha(0.54)
+    const disabledColor = color(theme.dark ? white : black)
+      .alpha(0.32)
       .rgb()
       .string();
 
-    if (disabled) {
-      iconColor = titleColor = color(theme.dark ? white : black)
-        .alpha(0.32)
-        .rgb()
-        .string();
-    }
+    const titleColor = disabled
+      ? disabledColor
+      : color(theme.colors.text)
+          .alpha(0.87)
+          .rgb()
+          .string();
+
+    const iconColor = disabled
+      ? disabledColor
+      : color(theme.colors.text)
+          .alpha(0.54)
+          .rgb()
+          .string();
 
     return (
       <TouchableRipple
