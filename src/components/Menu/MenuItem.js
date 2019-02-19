@@ -93,6 +93,7 @@ class MenuItem extends React.Component<Props> {
 
 const minWidth = 112;
 const maxWidth = 280;
+const iconWidth = 40;
 
 const styles = StyleSheet.create({
   container: {
@@ -104,7 +105,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   icon: {
-    width: 40,
+    width: iconWidth,
   },
   title: {
     fontSize: 16,
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
     maxWidth: maxWidth - 16,
   },
   widthWithIcon: {
-    maxWidth: maxWidth - (8 * 6 + 40),
+    maxWidth: maxWidth - (iconWidth + 48),
   },
 });
 
