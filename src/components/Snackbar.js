@@ -46,6 +46,8 @@ type Props = {|
 type State = {
   opacity: Animated.Value,
   hidden: boolean,
+  inProgress: boolean,
+  queue: Array<boolean>,
 };
 
 const DURATION_SHORT = 4000;
@@ -127,6 +129,8 @@ class Snackbar extends React.Component<Props, State> {
   state = {
     opacity: new Animated.Value(0.0),
     hidden: !this.props.visible,
+    inProgress: false,
+    queue: [],
   };
 
   componentDidMount() {
@@ -146,10 +150,28 @@ class Snackbar extends React.Component<Props, State> {
   }
 
   _toggle = () => {
-    if (this.props.visible) {
-      this._show();
+    if (this.state.inProgress) {
+      this.state.queue.unshift(this.props.visible);
     } else {
-      this._hide();
+      this.state.inProgress = true;
+      if (this.props.visible) {
+        this._show();
+      } else {
+        this._hide();
+      }
+    }
+  };
+
+  manageQueue = () => {
+    if (this.state.queue.length > 0) {
+      const show = this.state.queue.pop();
+      if (show) {
+        this._show();
+      } else {
+        this._hide();
+      }
+    } else {
+      this.state.inProgress = false;
     }
   };
 
@@ -165,6 +187,7 @@ class Snackbar extends React.Component<Props, State> {
     }).start(() => {
       const { duration } = this.props;
       this._hideTimeout = setTimeout(this.props.onDismiss, duration);
+      this.manageQueue();
     });
   };
 
@@ -175,7 +198,7 @@ class Snackbar extends React.Component<Props, State> {
       toValue: 0,
       duration: 100,
       useNativeDriver: true,
-    }).start(() => this.setState({ hidden: true }));
+    }).start(() => this.setState({ hidden: true }, () => this.manageQueue()));
   };
 
   _hideTimeout: TimeoutID;
