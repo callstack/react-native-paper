@@ -12,7 +12,7 @@ type Props = {|
    */
   progress?: number,
   /**
-   * Color of the progress bar.
+   * Color of the progress bar. The background color will be calculated based on this but you can change it by passing `backgroundColor` to `style` prop.
    */
   color?: string,
   /**
@@ -22,7 +22,7 @@ type Props = {|
   /**
    * Whether to show the ProgressBar (true, the default) or hide it (false).
    */
-  animating?: boolean,
+  visible?: boolean,
   style?: any,
   /**
    * @optional
@@ -60,7 +60,7 @@ const INDETERMINATE_MAX_WIDTH = 0.6;
  */
 class ProgressBar extends React.Component<Props, State> {
   static defaultProps = {
-    animating: true,
+    visible: true,
     progress: 0,
   };
 
@@ -73,9 +73,9 @@ class ProgressBar extends React.Component<Props, State> {
   indeterminateAnimation = null;
 
   componentDidUpdate() {
-    const { animating } = this.props;
+    const { visible } = this.props;
 
-    if (animating) {
+    if (visible) {
       this._startAnimation();
     } else {
       this._stopAnimation();
@@ -83,10 +83,12 @@ class ProgressBar extends React.Component<Props, State> {
   }
 
   _onLayout = event => {
-    const { animating } = this.props;
+    const { visible } = this.props;
+    const { width: previousWidth } = this.state;
 
     this.setState({ width: event.nativeEvent.layout.width }, () => {
-      if (animating) {
+      // Start animation the very first time when previously the width was unclear
+      if (visible && previousWidth === 0) {
         this._startAnimation();
       }
     });

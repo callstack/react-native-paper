@@ -17,7 +17,7 @@ type Props = {
 
 type State = {
   progress: number,
-  animating: boolean,
+  visible: boolean,
 };
 
 class ProgressBarExample extends React.Component<Props, State> {
@@ -25,7 +25,7 @@ class ProgressBarExample extends React.Component<Props, State> {
 
   state = {
     progress: 0.3,
-    animating: true,
+    visible: true,
   };
 
   render() {
@@ -37,27 +37,34 @@ class ProgressBarExample extends React.Component<Props, State> {
 
     return (
       <View style={[styles.container, { backgroundColor: background }]}>
-        <Button
-          onPress={() => this.setState({ animating: !this.state.animating })}
-        >
-          Toggle animating
+        <Button onPress={() => this.setState({ visible: !this.state.visible })}>
+          Toggle visible
         </Button>
         <Button onPress={() => this.setState({ progress: Math.random() })}>
           Random progress
         </Button>
-        <Paragraph>ProgressBar primary color</Paragraph>
-        <ProgressBar
-          progress={this.state.progress}
-          animating={this.state.animating}
-        />
-        <Paragraph>ProgressBar custom color</Paragraph>
-        <ProgressBar
-          progress={this.state.progress}
-          animating={this.state.animating}
-          color={Colors.red800}
-        />
-        <Paragraph>ProgressBar indeterminate</Paragraph>
-        <ProgressBar indeterminate animating={this.state.animating} />
+
+        <View style={styles.row}>
+          <Paragraph>ProgressBar primary color</Paragraph>
+          <ProgressBar
+            progress={this.state.progress}
+            visible={this.state.visible}
+          />
+        </View>
+
+        <View style={styles.row}>
+          <Paragraph>ProgressBar custom color</Paragraph>
+          <ProgressBar
+            progress={this.state.progress}
+            visible={this.state.visible}
+            color={Colors.red800}
+          />
+        </View>
+
+        <View style={styles.row}>
+          <Paragraph>ProgressBar indeterminate</Paragraph>
+          <ProgressBar indeterminate visible={this.state.visible} />
+        </View>
       </View>
     );
   }
@@ -66,6 +73,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+  },
+
+  row: {
+    marginVertical: 10,
   },
 });
 

@@ -23,9 +23,7 @@ it('renders progress bar with specific progress', () => {
 });
 
 it('renders hidden progress bar', () => {
-  const tree = renderer.create(
-    <ProgressBar progress={0.2} animating={false} />
-  );
+  const tree = renderer.create(<ProgressBar progress={0.2} visible={false} />);
   tree.root.findByType(View).props.onLayout(layoutEvent);
 
   expect(tree.toJSON()).toMatchSnapshot();
