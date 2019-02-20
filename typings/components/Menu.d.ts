@@ -5,7 +5,7 @@ import { ThemeShape, IconSource } from '../types';
 export interface MenuProps {
   visible: boolean;
   anchor: React.ReactNode;
-  onDismiss: () => mixed;
+  onDismiss: () => any;
   children: React.ReactNode;
   style?: any;
   theme?: ThemeShape;
@@ -15,7 +15,7 @@ export interface ItemProps {
   title: React.ReactNode;
   icon?: IconSource;
   disabled?: boolean;
-  onPress?: () => mixed;
+  onPress?: () => any;
   theme?: ThemeShape;
   style?: any;
 }
