@@ -23,9 +23,9 @@ type Props = {
    */
   visible: boolean,
   /**
-   * The button to trigger the menu.
+   * The anchor to open the menu from. In most cases, it will be a button that opens the manu.
    */
-  button: React.Node,
+  anchor: React.Node,
   /**
    * Callback called when Menu is dismissed. The `visible` prop needs to be updated when this is called.
    */
@@ -46,8 +46,8 @@ type State = {
   left: number,
   menuWidth: number,
   menuHeight: number,
-  buttonWidth: number,
-  buttonHeight: number,
+  anchorWidth: number,
+  anchorHeight: number,
   opacityAnimation: Animated.Value,
   menuSizeAnimation: Animated.ValueXY,
   menuState: 'hidden' | 'animating' | 'shown',
@@ -86,7 +86,7 @@ const SCREEN_INDENT = 8;
  *         <Menu
  *           visible={this.state.visible}
  *           onDismiss={this._closeMenu}
- *           button={
+ *           anchor={
  *             <Button onPress={this._openMenu}>Show menu</Button>
  *           }
  *         >
@@ -111,8 +111,8 @@ class Menu extends React.Component<Props, State> {
     left: 0,
     menuWidth: 0,
     menuHeight: 0,
-    buttonWidth: 0,
-    buttonHeight: 0,
+    anchorWidth: 0,
+    anchorHeight: 0,
     opacityAnimation: new Animated.Value(0),
     menuSizeAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
   };
@@ -160,10 +160,10 @@ class Menu extends React.Component<Props, State> {
     );
   };
 
-  // Save button width and height for menu layout
-  _onButtonLayout = e => {
+  // Save anchor width and height for menu layout
+  _onAnchorLayout = e => {
     const { width, height } = e.nativeEvent.layout;
-    this.setState({ buttonWidth: width, buttonHeight: height });
+    this.setState({ anchorWidth: width, anchorHeight: height });
   };
 
   _updateVisibility = () => {
@@ -206,14 +206,14 @@ class Menu extends React.Component<Props, State> {
   };
 
   render() {
-    const { visible, button, style, children, theme } = this.props;
+    const { visible, anchor, style, children, theme } = this.props;
 
     const {
       menuState,
       menuWidth,
       menuHeight,
-      buttonWidth,
-      buttonHeight,
+      anchorWidth,
+      anchorHeight,
       opacityAnimation,
       menuSizeAnimation,
     } = this.state;
@@ -232,7 +232,7 @@ class Menu extends React.Component<Props, State> {
         translateX: Animated.multiply(menuSizeAnimation.x, -1),
       });
 
-      left = Math.min(screenWidth - SCREEN_INDENT, left + buttonWidth);
+      left = Math.min(screenWidth - SCREEN_INDENT, left + anchorWidth);
     }
 
     // Flip by Y axis if menu hits bottom screen border
@@ -241,7 +241,7 @@ class Menu extends React.Component<Props, State> {
         translateY: Animated.multiply(menuSizeAnimation.y, -1),
       });
 
-      top = Math.min(screenHeight - SCREEN_INDENT, top + buttonHeight);
+      top = Math.min(screenHeight - SCREEN_INDENT, top + anchorHeight);
     }
 
     const shadowMenuContainerStyle = {
@@ -258,7 +258,7 @@ class Menu extends React.Component<Props, State> {
 
     return (
       <View ref={this._setContainerRef} collapsable={false}>
-        <View onLayout={this._onButtonLayout}>{button}</View>
+        <View onLayout={this._onAnchorLayout}>{anchor}</View>
 
         <Modal visible={modalVisible} onRequestClose={this._hide} transparent>
           <TouchableWithoutFeedback onPress={this._hide}>

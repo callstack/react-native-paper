@@ -56,7 +56,7 @@ class MenuExample extends React.Component<Props, State> {
           <Menu
             visible={this.state.visible1}
             onDismiss={this._closeMenu1}
-            button={
+            anchor={
               <Appbar.Action
                 icon={MORE_ICON}
                 color="white"
@@ -76,7 +76,7 @@ class MenuExample extends React.Component<Props, State> {
           <Menu
             visible={this.state.visible2}
             onDismiss={this._closeMenu2}
-            button={
+            anchor={
               <Button mode="outlined" onPress={this._openMenu2}>
                 Menu with icons
               </Button>

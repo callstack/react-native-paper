@@ -4,7 +4,7 @@ import { ThemeShape, IconSource } from '../types';
 
 export interface MenuProps {
   visible: boolean;
-  button: React.ReactNode;
+  anchor: React.ReactNode;
   onDismiss: () => mixed;
   children: React.ReactNode;
   style?: any;
