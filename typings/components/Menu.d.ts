@@ -5,9 +5,9 @@ import { ThemeShape, IconSource } from '../types';
 export interface MenuProps {
   visible: boolean;
   anchor: React.ReactNode;
-  onDismiss: () => any;
+  onDismiss: () => void;
   children: React.ReactNode;
-  style?: any;
+  style?: StyleProp<ViewStyle>;
   theme?: ThemeShape;
 }
 
@@ -15,9 +15,9 @@ export interface ItemProps {
   title: React.ReactNode;
   icon?: IconSource;
   disabled?: boolean;
-  onPress?: () => any;
+  onPress?: () => void;
   theme?: ThemeShape;
-  style?: any;
+  style?: StyleProp<ViewStyle>;
 }
 
 export declare class Menu extends React.Component<MenuProps> {

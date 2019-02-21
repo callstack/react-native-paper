@@ -123,7 +123,7 @@ class Menu extends React.Component<Props, State> {
     }
   }
 
-  _container: any;
+  _container: ?View;
 
   _setContainerRef = ref => {
     this._container = ref;
