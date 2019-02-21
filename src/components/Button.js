@@ -111,6 +111,7 @@ class Button extends React.Component<Props, State> {
   static defaultProps = {
     mode: 'text',
     uppercase: true,
+    contentStyle:{}
   };
 
   state = {
