@@ -66,9 +66,9 @@ type Props = React.ElementConfig<typeof Surface> & {|
    */
   theme: Theme,
   /**
-   * Alignment of content inside button i-e icon and text
+   * Style of button's inner content
    */
-  contentAlign?: 'center' | 'left' | 'right',
+  contentStyle?: any,
 |};
 
 type State = {
@@ -111,7 +111,11 @@ class Button extends React.Component<Props, State> {
   static defaultProps = {
     mode: 'text',
     uppercase: true,
-    contentAlign: 'center',
+    contentStyle: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
   };
 
   state = {
@@ -151,13 +155,13 @@ class Button extends React.Component<Props, State> {
       onPress,
       style,
       theme,
-      contentAlign,
+      contentStyle,
       ...rest
     } = this.props;
     const { colors, roundness } = theme;
     const fontFamily = theme.fonts.medium;
 
-    let backgroundColor, borderColor, textColor, borderWidth, justifyContent;
+    let backgroundColor, borderColor, textColor, borderWidth;
 
     if (mode === 'contained') {
       if (disabled) {
@@ -208,20 +212,6 @@ class Button extends React.Component<Props, State> {
     } else {
       textColor = colors.primary;
     }
-
-    if (contentAlign === 'left') {
-      justifyContent = 'flex-start';
-    } else if (contentAlign === 'left') {
-      justifyContent = 'flex-end';
-    } else {
-      justifyContent = 'center';
-    }
-
-    const contentStyle = {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent,
-    };
 
     const rippleColor = color(textColor)
       .alpha(0.32)
