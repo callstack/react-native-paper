@@ -130,7 +130,10 @@ class Modal extends React.Component<Props, State> {
       toValue: 0,
       duration: 280,
       easing: Easing.ease,
-    }).start(() => {
+    }).start(({ finished }) => {
+      if (!finished) {
+        return;
+      }
       if (this.props.visible && this.props.onDismiss) {
         this.props.onDismiss();
       }

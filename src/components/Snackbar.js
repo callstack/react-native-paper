@@ -162,9 +162,11 @@ class Snackbar extends React.Component<Props, State> {
       toValue: 1,
       duration: 200,
       useNativeDriver: true,
-    }).start(() => {
-      const { duration } = this.props;
-      this._hideTimeout = setTimeout(this.props.onDismiss, duration);
+    }).start(({ finished }) => {
+      if (finished) {
+        const { duration } = this.props;
+        this._hideTimeout = setTimeout(this.props.onDismiss, duration);
+      }
     });
   };
 
@@ -175,7 +177,11 @@ class Snackbar extends React.Component<Props, State> {
       toValue: 0,
       duration: 100,
       useNativeDriver: true,
-    }).start(() => this.setState({ hidden: true }));
+    }).start(({ finished }) => {
+      if (finished) {
+        this.setState({ hidden: true });
+      }
+    });
   };
 
   _hideTimeout: TimeoutID;
