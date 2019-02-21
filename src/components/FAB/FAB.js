@@ -136,6 +136,7 @@ class FAB extends React.Component<Props, State> {
       onPress,
       theme,
       style,
+      visible,
       ...rest
     } = this.props;
     const { visibility } = this.state;
@@ -185,6 +186,7 @@ class FAB extends React.Component<Props, State> {
           disabled && styles.disabled,
           style,
         ]}
+        pointerEvents={visible ? 'auto' : 'none'}
       >
         <TouchableRipple
           borderless
