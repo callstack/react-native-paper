@@ -248,9 +248,8 @@ class Menu extends React.Component<Props, State> {
       opacity: opacityAnimation,
       transform: transforms,
       borderRadius: theme.roundness,
-      right: I18nManager.isRTL ? left : {},
-      left: I18nManager.isRTL ? {} : left,
       top,
+      ...(I18nManager.isRTL ? { right: left } : { left }),
     };
 
     const animationStarted = menuState === 'animating';
