@@ -111,11 +111,6 @@ class Button extends React.Component<Props, State> {
   static defaultProps = {
     mode: 'text',
     uppercase: true,
-    contentStyle: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
   };
 
   state = {
@@ -253,7 +248,7 @@ class Button extends React.Component<Props, State> {
           rippleColor={rippleColor}
           style={touchableStyle}
         >
-          <View style={contentStyle}>
+          <View style={[styles.content, contentStyle]}>
             {icon && loading !== true ? (
               <View style={styles.icon}>
                 <Icon source={icon} size={16} color={textColor} />
@@ -297,6 +292,11 @@ const styles = StyleSheet.create({
   },
   compact: {
     minWidth: 'auto',
+  },
+  content: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   icon: {
     width: 16,
