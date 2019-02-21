@@ -53,9 +53,13 @@ type State = {
   menuState: 'hidden' | 'animating' | 'shown',
 };
 
-const ANIMATION_DURATION = 300;
-const EASING = Easing.bezier(0.4, 0, 0.2, 1);
+// Minimum padding between the edge of the screen and the menu
 const SCREEN_INDENT = 8;
+
+// From https://material.io/design/motion/speed.html#duration
+const ANIMATION_DURATION = 250;
+// From the 'Standard easing' section of https://material.io/design/motion/speed.html#easing
+const EASING = Easing.bezier(0.4, 0, 0.2, 1);
 
 /**
  * Menus display a list of choices on temporary elevated surfaces. Their placement varies based on the element that opens them.
