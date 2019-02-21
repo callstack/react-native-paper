@@ -2,6 +2,7 @@
 
 exports[`renders extended FAB 1`] = `
 <View
+  pointerEvents="auto"
   style={
     Object {
       "backgroundColor": "#03dac4",
@@ -22,7 +23,6 @@ exports[`renders extended FAB 1`] = `
       ],
     }
   }
-  visible={true}
 >
   <View
     accessibilityLabel="Add items"
@@ -159,6 +159,7 @@ exports[`renders extended FAB 1`] = `
 
 exports[`renders normal FAB 1`] = `
 <View
+  pointerEvents="auto"
   style={
     Object {
       "backgroundColor": "#03dac4",
@@ -179,7 +180,6 @@ exports[`renders normal FAB 1`] = `
       ],
     }
   }
-  visible={true}
 >
   <View
     accessibilityRole="button"
@@ -292,6 +292,7 @@ exports[`renders normal FAB 1`] = `
 
 exports[`renders small FAB 1`] = `
 <View
+  pointerEvents="auto"
   style={
     Object {
       "backgroundColor": "#03dac4",
@@ -312,7 +313,6 @@ exports[`renders small FAB 1`] = `
       ],
     }
   }
-  visible={true}
 >
   <View
     accessibilityRole="button"
