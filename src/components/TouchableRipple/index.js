@@ -29,6 +29,10 @@ type Props = React.ElementConfig<typeof TouchableWithoutFeedback> & {|
    */
   onPress?: ?() => mixed,
   /**
+   * Function to execute on long press.
+   */
+  onLongPress?: () => mixed,
+  /**
    * Color of the ripple effect (Android >= 5.0 and Web).
    */
   rippleColor?: string,
