@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { css } from 'linaria';
+import { styled } from 'linaria/react';
 import color from 'color';
 
 import GooglePlayIcon from '../../components/google-play-icon';
@@ -48,23 +48,22 @@ export default class Showcase extends React.Component<{}> {
           </a>{' '}
           to add your app to this list.
         </p>
-        <div className={gallery}>
+        <Gallery>
           {data.map(item => {
             const tintColor = color(item.color).light() ? '#000000' : '#FFFFFF';
             return (
               <div key={item.image}>
-                <div className={imageContainer}>
-                  <img className={image} src={item.image} alt="" />
-                  <div className={info} style={{ backgroundColor: item.color }}>
-                    <h3
-                      className={appName}
+                <ImageContainer>
+                  <Image src={item.image} alt="" />
+                  <Info style={{ backgroundColor: item.color }}>
+                    <AppName
                       style={{
                         color: tintColor,
                       }}
                     >
                       {item.name}
-                    </h3>
-                    <div className={badgeContainer}>
+                    </AppName>
+                    <BadgeContainer>
                       <a
                         href={item.android || null}
                         target="_blank"
@@ -73,7 +72,7 @@ export default class Showcase extends React.Component<{}> {
                       >
                         <GooglePlayIcon color={tintColor} />
                       </a>
-                      <div className={separation} />
+                      <Separation />
                       <a
                         href={item.ios || null}
                         target="_blank"
@@ -82,25 +81,25 @@ export default class Showcase extends React.Component<{}> {
                       >
                         <IphoneIcon color={tintColor} />
                       </a>
-                    </div>
-                  </div>
-                </div>
+                    </BadgeContainer>
+                  </Info>
+                </ImageContainer>
               </div>
             );
           })}
-        </div>
+        </Gallery>
       </Content>
     );
   }
 }
 
-const appName = css`
+const AppName = styled.h3`
   font-size: 16px;
   margin-top: 0;
   margin-bottom: 12px;
 `;
 
-const gallery = css`
+const Gallery = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -112,31 +111,31 @@ const gallery = css`
   }
 `;
 
-const info = css`
+const Info = styled.div`
   height: 96px;
   padding: 12px;
   transform: translateY(0);
   transition: 150ms;
 `;
 
-const imageContainer = css`
+const ImageContainer = styled.div`
   overflow: hidden;
   margin: 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 
   @media (min-width: 420px) {
     height: ${480 + 48}px;
 
     &:hover,
     &:focus {
-      .${info} {
+      ${Info} {
         transform: translateY(-48px);
       }
     }
   }
 `;
 
-const image = css`
+const Image = styled.img`
   display: block;
   max-height: 480px;
   width: auto;
@@ -147,13 +146,13 @@ const image = css`
   }
 `;
 
-const badgeContainer = css`
+const BadgeContainer = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 16px;
   padding-left: 3px;
 `;
 
-const separation = css`
+const Separation = styled.div`
   margin: 0 10px;
 `;

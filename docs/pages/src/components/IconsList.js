@@ -1,75 +1,8 @@
 /* @flow */
 
 import * as React from 'react';
-import { css } from 'linaria';
+import { styled } from 'linaria/react';
 import icons from 'react-native-vector-icons/glyphmaps/MaterialIcons.json';
-
-const container = css`
-  margin: 16px 0;
-`;
-
-const iconContainer = css`
-  appearance: none;
-  border: 0;
-  background: 0;
-  outline: 0;
-  display: flex;
-  flex-direction: column;
-  width: 124px;
-  height: 124px;
-  align-items: center;
-  text-align: center;
-
-  @media (max-width: 680px) {
-    width: 96px;
-  }
-`;
-
-const icon = css`
-  display: block;
-  margin: 16px;
-  font-family: 'MaterialIcons';
-  font-size: 48px;
-`;
-
-const iconName = css`
-  display: block;
-  font-size: 12px;
-`;
-
-const results = css`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 24px 0;
-
-  &:last-child {
-    justify-content: flex-start;
-  }
-`;
-
-const searchbar = css`
-  box-sizing: border-box;
-  appearance: none;
-  border: 0;
-  display: block;
-  width: 100%;
-  padding: 12px;
-  font-size: 1em;
-  background-color: #f0f0f0;
-  border-radius: 3px;
-  transition: background-color 0.3s;
-  outline: 0;
-
-  &:focus,
-  &:hover {
-    background-color: #e7e7e7;
-  }
-
-  *:focus-visible {
-    outline: auto;
-  }
-`;
 
 type State = {
   query: string,
@@ -112,32 +45,97 @@ export default class IconsList extends React.Component<{}, State> {
     const searchResults = this._getResults();
 
     return (
-      <div className={container}>
-        <input
+      <Container>
+        <Searchbar
           type="search"
           value={this.state.query}
           onChange={this._handleInputChange}
           placeholder="Find icon by name…"
-          className={searchbar}
         />
         {searchResults.length ? (
-          <div className={results}>
+          <Results>
             {searchResults.map(name => (
-              <button
+              <IconContainer
                 key={name}
                 type="button"
                 onClick={this._handleIconClick}
-                className={iconContainer}
               >
-                <span className={icon}>{this._getIconCharacter(name)}</span>
-                <span className={iconName}>{name}</span>
-              </button>
+                <Icon>{this._getIconCharacter(name)}</Icon>
+                <IconName>{name}</IconName>
+              </IconContainer>
             ))}
-          </div>
+          </Results>
         ) : (
           <p>No matching icon found :(</p>
         )}
-      </div>
+      </Container>
     );
   }
 }
+
+const Container = styled.div`
+  margin: 16px 0;
+`;
+
+const IconContainer = styled.button`
+  appearance: none;
+  border: 0;
+  background: 0;
+  outline: 0;
+  display: flex;
+  flex-direction: column;
+  width: 124px;
+  height: 124px;
+  align-items: center;
+  text-align: center;
+
+  @media (max-width: 680px) {
+    width: 96px;
+  }
+`;
+
+const Icon = styled.span`
+  display: block;
+  margin: 16px;
+  font-family: 'MaterialIcons';
+  font-size: 48px;
+`;
+
+const IconName = styled.span`
+  display: block;
+  font-size: 12px;
+`;
+
+const Results = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 24px 0;
+
+  &:last-child {
+    justify-content: flex-start;
+  }
+`;
+
+const Searchbar = styled.input`
+  box-sizing: border-box;
+  appearance: none;
+  border: 0;
+  display: block;
+  width: 100%;
+  padding: 12px;
+  font-size: 1em;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  transition: background-color 0.3s;
+  outline: 0;
+
+  &:focus,
+  &:hover {
+    background-color: #e7e7e7;
+  }
+
+  *:focus-visible {
+    outline: auto;
+  }
+`;
