@@ -111,7 +111,7 @@ exports[`renders with placeholder 1`] = `
         Object {
           "alignSelf": "stretch",
           "flex": 1,
-          "fontSize": 18,
+          "fontSize": 16,
           "minWidth": 0,
           "paddingLeft": 8,
           "textAlign": "left",
@@ -323,7 +323,7 @@ exports[`renders with text 1`] = `
         Object {
           "alignSelf": "stretch",
           "flex": 1,
-          "fontSize": 18,
+          "fontSize": 16,
           "minWidth": 0,
           "paddingLeft": 8,
           "textAlign": "left",
