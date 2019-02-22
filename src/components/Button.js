@@ -111,7 +111,7 @@ class Button extends React.Component<Props, State> {
   static defaultProps = {
     mode: 'text',
     uppercase: true,
-    contentStyle:{}
+    contentStyle: {},
   };
 
   state = {
@@ -271,12 +271,10 @@ class Button extends React.Component<Props, State> {
                 { fontFamily },
               ]}
             >
-              {React.Children.map(
-                children,
-                child =>
-                  typeof child === 'string' && uppercase
-                    ? child.toUpperCase()
-                    : child
+              {React.Children.map(children, child =>
+                typeof child === 'string' && uppercase
+                  ? child.toUpperCase()
+                  : child
               )}
             </Text>
           </View>
