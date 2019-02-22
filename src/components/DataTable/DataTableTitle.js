@@ -27,6 +27,10 @@ type Props = React.ElementConfig<typeof TouchableWithoutFeedback> & {|
    */
   sortDirection?: 'ascending' | 'descending',
   /**
+   * The number of lines to show.
+   */
+  numberOfLines?: number,
+  /**
    * Function to execute on press.
    */
   onPress?: () => mixed,
@@ -43,6 +47,10 @@ type State = {
 
 class DataTableTitle extends React.Component<Props, State> {
   static displayName = 'DataTable.Title';
+
+  static defaultProps = {
+    numberOfLines: 1,
+  };
 
   state = {
     spinAnim: new Animated.Value(
@@ -70,6 +78,7 @@ class DataTableTitle extends React.Component<Props, State> {
       sortDirection,
       theme,
       style,
+      numberOfLines,
       ...rest
     } = this.props;
 
@@ -99,7 +108,7 @@ class DataTableTitle extends React.Component<Props, State> {
               styles.cell,
               sortDirection ? styles.sorted : { color: textColor },
             ]}
-            numberOfLines={1}
+            numberOfLines={numberOfLines}
           >
             {children}
           </Text>
