@@ -383,6 +383,7 @@ class TextInput extends React.Component<Props, State> {
     const {
       mode,
       disabled,
+      editable,
       label,
       error,
       selectionColor,
@@ -644,7 +645,7 @@ class TextInput extends React.Component<Props, State> {
           onChangeText: this._handleChangeText,
           placeholder: label ? this.state.placeholder : this.props.placeholder,
           placeholderTextColor: placeholderColor,
-          editable: !disabled,
+          editable,
           selectionColor:
             typeof selectionColor === 'undefined'
               ? activeColor
