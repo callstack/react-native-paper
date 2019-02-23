@@ -10,13 +10,11 @@ import {
 } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
 import color from 'color';
-import Text from './Typography/Text';
-import { withTheme } from '../core/theming';
-import type { Theme } from '../types';
+import Text from '../Typography/Text';
+import type { Theme } from '../../types';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
-const MINIMIZED_LABEL_Y_OFFSET = -12;
 const OUTLINE_MINIMIZED_LABEL_Y_OFFSET = -29;
 const MAXIMIZED_LABEL_FONT_SIZE = 16;
 const MINIMIZED_LABEL_FONT_SIZE = 12;
@@ -43,14 +41,6 @@ type RenderProps = {
 };
 
 type Props = React.ElementConfig<typeof NativeTextInput> & {|
-  /**
-   * Mode of the TextInput.
-   * - `flat` - flat input with an underline.
-   * - `outlined` - input with an outline.
-   *
-   * In `outlined` mode, the background color of the label is derived from `colors.background` in theme or the `backgroundColor` style.
-   */
-  mode?: 'flat' | 'outlined',
   /**
    * If true, user won't be able to interact with the component.
    */
@@ -184,9 +174,8 @@ type State = {
  * @extends TextInput props https://facebook.github.io/react-native/docs/textinput.html#props
  */
 
-class TextInput extends React.Component<Props, State> {
+class TextInputOutlined extends React.Component<Props, State> {
   static defaultProps = {
-    mode: 'flat',
     disabled: false,
     error: false,
     multiline: false,
@@ -381,7 +370,6 @@ class TextInput extends React.Component<Props, State> {
 
   render() {
     const {
-      mode,
       disabled,
       label,
       error,
@@ -402,7 +390,6 @@ class TextInput extends React.Component<Props, State> {
 
     let inputTextColor,
       activeColor,
-      underlineColorCustom,
       outlineColor,
       placeholderColor,
       containerStyle;
@@ -413,28 +400,10 @@ class TextInput extends React.Component<Props, State> {
         .rgb()
         .string();
       placeholderColor = outlineColor = colors.disabled;
-      underlineColorCustom = 'transparent';
     } else {
       inputTextColor = colors.text;
       activeColor = error ? colors.error : colors.primary;
       placeholderColor = outlineColor = colors.placeholder;
-      underlineColorCustom = underlineColor || colors.disabled;
-    }
-
-    if (mode === 'flat') {
-      containerStyle = {
-        backgroundColor: theme.dark
-          ? color(colors.background)
-              .lighten(0.24)
-              .rgb()
-              .string()
-          : color(colors.background)
-              .darken(0.06)
-              .rgb()
-              .string(),
-        borderTopLeftRadius: theme.roundness,
-        borderTopRightRadius: theme.roundness,
-      };
     }
 
     const labelHalfWidth = this.state.labelLayout.width / 2;
@@ -462,12 +431,7 @@ class TextInput extends React.Component<Props, State> {
           // Move label to top
           translateY: this.state.labeled.interpolate({
             inputRange: [0, 1],
-            outputRange: [
-              mode === 'outlined'
-                ? OUTLINE_MINIMIZED_LABEL_Y_OFFSET
-                : MINIMIZED_LABEL_Y_OFFSET,
-              0,
-            ],
+            outputRange: [OUTLINE_MINIMIZED_LABEL_Y_OFFSET, 0],
           }),
         },
         {
@@ -501,24 +465,24 @@ class TextInput extends React.Component<Props, State> {
 
     return (
       <View style={[containerStyle, style]}>
-        {mode === 'outlined' ? (
-          // Render the outline separately from the container
-          // This is so that the label can overlap the outline
-          // Otherwise the border will cut off the label on Android
-          <View
-            pointerEvents="none"
-            style={[
-              styles.outline,
-              {
-                borderRadius: theme.roundness,
-                borderWidth: hasActiveOutline ? 2 : 1,
-                borderColor: hasActiveOutline ? activeColor : outlineColor,
-              },
-            ]}
-          />
-        ) : null}
+        {/* 
+          Render the outline separately from the container
+          This is so that the label can overlap the outline
+          Otherwise the border will cut off the label on Android 
+          */}
+        <View
+          pointerEvents="none"
+          style={[
+            styles.outline,
+            {
+              borderRadius: theme.roundness,
+              borderWidth: hasActiveOutline ? 2 : 1,
+              borderColor: hasActiveOutline ? activeColor : outlineColor,
+            },
+          ]}
+        />
 
-        {mode === 'outlined' && label ? (
+        {label ? (
           // When mode == 'outlined', the input label stays on top of the outline
           // The background of the label covers the outline so it looks cut off
           // To achieve the effect, we position the actual label with a background on top of it
@@ -554,24 +518,6 @@ class TextInput extends React.Component<Props, State> {
           </AnimatedText>
         ) : null}
 
-        {mode === 'flat' ? (
-          // When mode === 'flat', render an underline
-          <Animated.View
-            style={[
-              styles.underline,
-              {
-                backgroundColor: error
-                  ? colors.error
-                  : this.state.focused
-                    ? activeColor
-                    : underlineColorCustom,
-                // Underlines is thinner when input is not focused
-                transform: [{ scaleY: this.state.focused ? 1 : 0.5 }],
-              },
-            ]}
-          />
-        ) : null}
-
         {label ? (
           // Position colored placeholder and gray placeholder on top of each other and crossfade them
           // This gives the effect of animating the color, but allows us to use native driver
@@ -601,9 +547,7 @@ class TextInput extends React.Component<Props, State> {
               }
               style={[
                 styles.placeholder,
-                mode === 'outlined'
-                  ? styles.placeholderOutlined
-                  : styles.placeholderFlat,
+                styles.placeholderOutlined,
                 labelStyle,
                 {
                   color: activeColor,
@@ -620,9 +564,7 @@ class TextInput extends React.Component<Props, State> {
             <AnimatedText
               style={[
                 styles.placeholder,
-                mode === 'outlined'
-                  ? styles.placeholderOutlined
-                  : styles.placeholderFlat,
+                styles.placeholderOutlined,
                 labelStyle,
                 {
                   color: placeholderColor,
@@ -655,11 +597,7 @@ class TextInput extends React.Component<Props, State> {
           multiline,
           style: [
             styles.input,
-            mode === 'outlined'
-              ? styles.inputOutlined
-              : this.props.label
-                ? styles.inputFlatWithLabel
-                : styles.inputFlatWithoutLabel,
+            styles.inputOutlined,
             {
               color: inputTextColor,
               fontFamily,
@@ -672,9 +610,9 @@ class TextInput extends React.Component<Props, State> {
   }
 }
 
-polyfill(TextInput);
+polyfill(TextInputOutlined);
 
-export default withTheme(TextInput);
+export default TextInputOutlined;
 
 const styles = StyleSheet.create({
   placeholder: {
@@ -683,18 +621,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingHorizontal: LABEL_PADDING_HORIZONTAL,
   },
-  placeholderFlat: {
-    top: 19,
-  },
   placeholderOutlined: {
     top: 25,
-  },
-  underline: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    height: 2,
   },
   outline: {
     position: 'absolute',
@@ -723,12 +651,5 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 16,
     minHeight: 64,
-  },
-  inputFlatWithLabel: {
-    paddingTop: 24,
-    paddingBottom: 6,
-  },
-  inputFlatWithoutLabel: {
-    paddingVertical: 15,
   },
 });
