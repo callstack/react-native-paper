@@ -4,8 +4,8 @@
   "description": "Documentation for React Native Paper",
   "private": true,
   "scripts": {
-    "start": "babel-node index",
-    "build": "babel-node index build",
+    "start": "component-docs serve",
+    "build": "component-docs build",
     "clean": "del dist/",
     "prestart": "yarn clean"
   },
@@ -23,7 +23,7 @@
   "license": "MIT",
   "dependencies": {
     "color": "^2.0.1",
-    "component-docs": "^0.16.2",
-    "linaria": "^1.1.3"
+    "component-docs": "^0.18.1",
+    "linaria": "^1.1.4"
   }
 }

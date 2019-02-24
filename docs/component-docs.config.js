@@ -2,9 +2,7 @@
 
 import path from 'path';
 import fs from 'fs';
-import { build, serve } from 'component-docs';
 
-const task = process.argv[2];
 const root = path.join(__dirname, '..');
 const dist = path.join(__dirname, 'dist');
 const assets = [
@@ -106,7 +104,7 @@ function getPages() {
   return [...docs, { type: 'separator' }, ...components];
 }
 
-const options = {
+module.exports = {
   root,
   logo: 'images/sidebar-logo.svg',
   assets,
@@ -116,9 +114,3 @@ const options = {
   output: dist,
   github,
 };
-
-if (task !== 'build') {
-  serve(options);
-} else {
-  build(options);
-}
