@@ -9,7 +9,6 @@ import type { Theme } from '../../types';
 type Props = React.ElementConfig<typeof View> & {
   /**
    * Title text for the section.
-   * @deprecated
    */
   title?: string,
   /**
