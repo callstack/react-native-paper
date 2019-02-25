@@ -1,15 +1,15 @@
 /* @flow */
 
 import * as React from 'react';
-import { ActivityIndicator, Animated, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Animated, View, StyleSheet } from 'react-native';
 import color from 'color';
-import type { IconSource } from './Icon';
 import Icon from './Icon';
 import Surface from './Surface';
 import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
+import type { IconSource } from './Icon';
 import type { Theme } from '../types';
 
 type Props = React.ElementConfig<typeof Surface> & {|
@@ -60,15 +60,15 @@ type Props = React.ElementConfig<typeof Surface> & {|
    * Function to execute on press.
    */
   onPress?: () => mixed,
+  /**
+   * Style of button's inner content
+   */
+  contentStyle?: any,
   style?: any,
   /**
    * @optional
    */
   theme: Theme,
-  /**
-   * Style of button's inner content
-   */
-  contentStyle?: any,
 |};
 
 type State = {
@@ -111,7 +111,6 @@ class Button extends React.Component<Props, State> {
   static defaultProps = {
     mode: 'text',
     uppercase: true,
-    contentStyle: {},
   };
 
   state = {
