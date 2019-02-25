@@ -95,7 +95,7 @@ class ListItem extends React.Component<Props> {
           <View style={[styles.item, styles.content]} pointerEvents="none">
             <Text
               numberOfLines={1}
-              style={[styles.title, { color: titleColor }]}
+              style={[styles.title, { color: titleColor }, style.title]}
             >
               {title}
             </Text>
@@ -107,6 +107,7 @@ class ListItem extends React.Component<Props> {
                   {
                     color: descriptionColor,
                   },
+                  style.description
                 ]}
               >
                 {description}
