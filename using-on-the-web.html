@@ -16,6 +16,61 @@
 <p>We're going to use <a href="https://github.com/necolas/react-native-web">react-native-web</a> and <a href="https://webpack.js.org/">webpack</a> to use React Native Paper on the web, so let's install them as well.</p>
 <p>To install <code>react-native-web</code>, run:</p>
 <pre><code class="language-sh">yarn add react-native-web react-dom react-art</code></pre>
+<h3 id="using-cra-create-react-app">
+          <a class="anchor" href="#using-cra-create-react-app-">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Using CRA (<a href="https://github.com/facebook/create-react-app">Create React App</a>)</h3>
+<p>Install <a href="https://github.com/timarney/react-app-rewired"><code>react-app-rewired</code></a> to override <code>webpack</code> configuration:</p>
+<pre><code class="language-sh">yarn add --dev react-app-rewired</code></pre>
+<p><a href="#2-configure-babel-loader">Configure <code>babel-loader</code></a> using a new file called <code>config-overrides.js</code>:</p>
+<pre><code class="language-js">module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token function">override</span><span class="token punctuation">(</span>config<span class="token punctuation">,</span> env<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  config<span class="token punctuation">.</span>module<span class="token punctuation">.</span>rules<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    test<span class="token punctuation">:</span> <span class="token regex">/\.js$/</span><span class="token punctuation">,</span>
+    exclude<span class="token punctuation">:</span> <span class="token regex">/node_modules[/\\](?!react-native-paper|react-native-vector-icons|react-native-safe-area-view)/</span><span class="token punctuation">,</span>
+    use<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      loader<span class="token punctuation">:</span> <span class="token string">"babel-loader"</span><span class="token punctuation">,</span>
+      options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Disable reading babel configuration</span>
+        babelrc<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+        configFile<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+
+        <span class="token comment">// The configration for compilation</span>
+        presets<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">[</span><span class="token string">"@babel/preset-env"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> useBuiltIns<span class="token punctuation">:</span> <span class="token string">"usage"</span> <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+          <span class="token string">"@babel/preset-react"</span><span class="token punctuation">,</span>
+          <span class="token string">"@babel/preset-flow"</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+          <span class="token string">"@babel/plugin-proposal-class-properties"</span><span class="token punctuation">,</span>
+          <span class="token string">"@babel/plugin-proposal-object-rest-spread"</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> config<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>Change your script in <code>package.json</code>:</p>
+<pre><code class="language-diff">/* package.json */
+
+  "scripts": {
+<span class="token deleted">-   "start": "react-scripts start",</span>
+<span class="token inserted">+   "start": "react-app-rewired start",</span>
+<span class="token deleted">-   "build": "react-scripts build",</span>
+<span class="token inserted">+   "build": "react-app-rewired build",</span>
+<span class="token deleted">-   "test": "react-scripts test --env=jsdom",</span>
+<span class="token inserted">+   "test": "react-app-rewired test --env=jsdom"</span>
+}</code></pre>
+<h3 id="custom-webpack-setup">
+          <a class="anchor" href="#custom-webpack-setup">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Custom webpack setup</h3>
 <p>To install <code>webpack</code>, run:</p>
 <pre><code class="language-sh">yarn add --dev webpack webpack-cli webpack-dev-server</code></pre>
 <p>If you don't have a webpack config in your project, copy the following to <code>webpack.config.js</code> get started:</p>
