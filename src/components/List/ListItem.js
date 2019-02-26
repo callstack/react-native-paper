@@ -96,10 +96,10 @@ class ListItem extends React.Component<Props> {
             <Text
               numberOfLines={1}
               style={[
-                 styles.title,
-                 { color: titleColor },
-                 style && style.title? style.title : {},
-               ]}
+                styles.title,
+                { color: titleColor },
+                style && style.title ? style.title : {},
+              ]}
             >
               {title}
             </Text>
@@ -111,7 +111,7 @@ class ListItem extends React.Component<Props> {
                   {
                     color: descriptionColor,
                   },
-                  style && style.description? style.description : {},
+                  style && style.description ? style.description : {},
                 ]}
               >
                 {description}
