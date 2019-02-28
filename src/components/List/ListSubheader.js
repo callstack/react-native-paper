@@ -1,7 +1,9 @@
 /* @flow */
 
 import * as React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import color from 'color';
+import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
@@ -36,26 +38,26 @@ class ListSubheader extends React.Component<Props> {
   render() {
     const { style, theme, ...rest } = this.props;
     const { colors, fonts } = theme;
+    const fontFamily = fonts.medium;
+    const textColor = color(colors.text)
+      .alpha(0.54)
+      .rgb()
+      .string();
 
-    const computedStyle = StyleSheet.flatten([
-      styles.container,
-      {
-        color: colors.text,
-        fontFamily: fonts.regular,
-      },
-      style,
-    ]);
-
-    return <Text numberOfLines={1} {...rest} style={computedStyle} />;
+    return (
+      <Text
+        numberOfLines={1}
+        {...rest}
+        style={[styles.container, { color: textColor, fontFamily }, style]}
+      />
+    );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    fontSize: 14,
-    lineHeight: 14,
-    paddingVertical: 17, // (48-14)/2
     paddingHorizontal: 16,
+    paddingVertical: 13,
   },
 });
 

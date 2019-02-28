@@ -38,14 +38,25 @@ exports[`renders list section with subheader 1`] = `
   <Text
     numberOfLines={1}
     style={
-      Object {
-        "color": "#000000",
-        "fontFamily": "Helvetica Neue",
-        "fontSize": 14,
-        "lineHeight": 14,
-        "paddingHorizontal": 16,
-        "paddingVertical": 17,
-      }
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "Helvetica Neue",
+          "textAlign": "left",
+          "writingDirection": "ltr",
+        },
+        Array [
+          Object {
+            "paddingHorizontal": 16,
+            "paddingVertical": 13,
+          },
+          Object {
+            "color": "rgba(0, 0, 0, 0.54)",
+            "fontFamily": "HelveticaNeue-Medium",
+          },
+          undefined,
+        ],
+      ]
     }
   >
     Some title
