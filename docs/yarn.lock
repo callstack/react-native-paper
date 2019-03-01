@@ -1857,10 +1857,10 @@ commondir@^1.0.1:
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
   integrity sha1-3dgA2gxmEnOTzKWVDqloo6rxJTs=
 
-component-docs@^0.19.4:
-  version "0.19.4"
-  resolved "https://registry.yarnpkg.com/component-docs/-/component-docs-0.19.4.tgz#5fbe9d5ad829090890417e619942a62e5e5a2975"
-  integrity sha512-NipAEX+wjVzM0lPTJ9M8IOKrdCTm7OR52qH7wNHYLKO4zwPv8Zz/CHI0cp9/hzrnpz3YO1dswYPBLNLfR5Qkcg==
+component-docs@^0.19.5:
+  version "0.19.5"
+  resolved "https://registry.yarnpkg.com/component-docs/-/component-docs-0.19.5.tgz#0ac3e8b0b1590d1504e6749bdcdec3dcd9f46543"
+  integrity sha512-175qW0CxJCwCiBy2+j0H8Xxf35nJkqIyAQaLDdCMSPa8g3TlfsUtfxMRB9ynQ5Ac9QY2tDid3CiElTXOeaCuuA==
   dependencies:
     "@babel/core" "^7.3.3"
     "@babel/plugin-proposal-class-properties" "^7.3.3"
@@ -3820,6 +3820,32 @@ linaria@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/linaria/-/linaria-1.2.1.tgz#c830c295258b7b03ef0a7b3ee5b82b9414895846"
   integrity sha512-2EpJhomogU2UQAJLsabL667lgIYz2+RemWboqn/WF6ULgN0+0ZarsjPiIm7BGTgglEo2F9Cs71lxYPKR1InGug==
+  dependencies:
+    "@babel/core" "^7.3.3"
+    "@babel/generator" "^7.3.3"
+    "@babel/plugin-proposal-export-namespace-from" "^7.2.0"
+    "@babel/plugin-syntax-dynamic-import" "^7.2.0"
+    "@babel/plugin-transform-modules-commonjs" "^7.2.0"
+    "@babel/register" "^7.0.0"
+    "@emotion/is-prop-valid" "^0.7.3"
+    cosmiconfig "^5.1.0"
+    dedent "^0.7.0"
+    enhanced-resolve "^4.1.0"
+    glob "^7.1.3"
+    loader-utils "^1.2.3"
+    mkdirp "^0.5.1"
+    normalize-path "^3.0.0"
+    postcss "^7.0.14"
+    react-is "^16.8.3"
+    rollup-pluginutils "^2.4.1"
+    source-map "^0.7.3"
+    stylis "^3.5.4"
+    yargs "^13.2.1"
+
+linaria@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/linaria/-/linaria-1.2.4.tgz#5ef2a8b14b8a2071939b5772964fd402a02fa6c6"
+  integrity sha512-b95yQdpvE5X9JZ5/ChQpgECw9ERk3lBR/Th8fmNKzISgrkl1COgFX9l7zmjTNKp7jUWIGaVfN4hDuM0bPe/4JQ==
   dependencies:
     "@babel/core" "^7.3.3"
     "@babel/generator" "^7.3.3"

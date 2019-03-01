@@ -47,7 +47,7 @@ jobs:
             at: ~/react-native-paper
         - run: |
             yarn lint
-            yarn flow
+            yarn flow check
   typescript:
       <<: *defaults
       steps:
