@@ -17,6 +17,7 @@ export interface DialogProps {
   dismissable?: boolean;
   onDismiss: () => any;
   visible: boolean;
+  transitionDuration: number | {enter: number, exit: number},
   children: React.ReactNode;
   style?: any;
   theme?: ThemeShape;

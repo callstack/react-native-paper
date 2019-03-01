@@ -13,6 +13,7 @@ import { polyfill } from 'react-lifecycles-compat';
 import Surface from './Surface';
 import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
+import {oneOf, oneOfType} from "prop-types";
 
 type Props = {|
   /**
@@ -27,6 +28,10 @@ type Props = {|
    * Determines Whether the modal is visible.
    */
   visible: boolean,
+  /**
+   * Duration of the Modal transition.
+   */
+  transitionDuration: number | {enter: number, exit: number},
   /**
    * Content of the `Modal`.
    */
@@ -81,6 +86,7 @@ class Modal extends React.Component<Props, State> {
   static defaultProps = {
     dismissable: true,
     visible: false,
+    transitionDuration: 280
   };
 
   static getDerivedStateFromProps(nextProps: Props, prevState: State) {
@@ -116,24 +122,23 @@ class Modal extends React.Component<Props, State> {
   };
 
   _showModal = () => {
+    const {transitionDuration} = this.props;
     BackHandler.addEventListener('hardwareBackPress', this._handleBack);
     Animated.timing(this.state.opacity, {
       toValue: 1,
-      duration: 280,
+      duration: isNaN(transitionDuration) ? transitionDuration.enter : transitionDuration,
       easing: Easing.ease,
     }).start();
   };
 
   _hideModal = () => {
+    const {transitionDuration} = this.props;
     BackHandler.removeEventListener('hardwareBackPress', this._handleBack);
     Animated.timing(this.state.opacity, {
       toValue: 0,
-      duration: 280,
+      duration: isNaN(transitionDuration) ? transitionDuration.exit : transitionDuration,
       easing: Easing.ease,
-    }).start(({ finished }) => {
-      if (!finished) {
-        return;
-      }
+    }).start(() => {
       if (this.props.visible && this.props.onDismiss) {
         this.props.onDismiss();
       }
@@ -148,6 +153,7 @@ class Modal extends React.Component<Props, State> {
   };
 
   render() {
+    console.log(this.props.transitionDuration)
     if (!this.state.rendered) return null;
 
     const { children, dismissable, theme, contentContainerStyle } = this.props;

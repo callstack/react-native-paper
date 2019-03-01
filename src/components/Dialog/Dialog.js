@@ -24,6 +24,10 @@ type Props = {|
    */
   visible: boolean,
   /**
+   * Duration of the Dialog transition.
+   */
+  transitionDuration: number | {enter: number, exit: number},
+  /**
    * Content of the `Dialog`.
    */
   children: React.Node,
@@ -102,6 +106,7 @@ class Dialog extends React.Component<Props, void> {
       dismissable,
       onDismiss,
       visible,
+      transitionDuration,
       style,
       theme,
     } = this.props;
@@ -111,6 +116,7 @@ class Dialog extends React.Component<Props, void> {
         dismissable={dismissable}
         onDismiss={onDismiss}
         visible={visible}
+        transitionDuration={transitionDuration}
         contentContainerStyle={[
           {
             borderRadius: theme.roundness,
