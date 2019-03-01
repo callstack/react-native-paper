@@ -1,9 +1,8 @@
 /* @flow */
 
-import color from 'color';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import Text from '../Typography/Text';
+import ListSubheader from './ListSubheader';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
@@ -38,7 +37,8 @@ type Props = React.ElementConfig<typeof View> & {
  * export default class MyComponent extends React.Component {
  *   render() {
  *     return (
- *       <List.Section title="Some title">
+ *       <List.Section>
+ *         <List.Subheader>Some title</List.Subheader>
  *         <List.Item
  *           title="First Item"
  *           left={() => <List.Icon icon="folder" />}
@@ -59,25 +59,11 @@ class ListSection extends React.Component<Props> {
   static displayName = 'List.Section';
 
   render() {
-    const { children, title, theme, style, ...rest } = this.props;
-    const { colors, fonts } = theme;
-
-    const titleColor = color(colors.text)
-      .alpha(0.54)
-      .rgb()
-      .string();
-    const fontFamily = fonts.medium;
+    const { children, title, style, ...rest } = this.props;
 
     return (
       <View {...rest} style={[styles.container, style]}>
-        {title && (
-          <Text
-            numberOfLines={1}
-            style={[styles.title, { color: titleColor, fontFamily }]}
-          >
-            {title}
-          </Text>
-        )}
+        {title && <ListSubheader>{title}</ListSubheader>}
         {children}
       </View>
     );
@@ -87,10 +73,6 @@ class ListSection extends React.Component<Props> {
 const styles = StyleSheet.create({
   container: {
     marginVertical: 8,
-  },
-  title: {
-    marginVertical: 13,
-    marginHorizontal: 16,
   },
 });
 
