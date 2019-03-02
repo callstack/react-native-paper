@@ -528,7 +528,6 @@ class TextInput extends React.Component<Props, State> {
             style={[
               styles.outlinedLabelBackground,
               {
-                height: hasActiveOutline ? 2 : 1,
                 backgroundColor,
                 fontFamily,
                 fontSize: MINIMIZED_LABEL_FONT_SIZE,
@@ -708,9 +707,8 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   outlinedLabelBackground: {
-    overflow: 'hidden',
     position: 'absolute',
-    top: 6,
+    top: 0,
     left: 8,
     paddingHorizontal: 4,
     color: 'transparent',
