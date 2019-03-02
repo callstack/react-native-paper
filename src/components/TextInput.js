@@ -669,7 +669,6 @@ const styles = StyleSheet.create({
     margin: 0,
     minHeight: 58,
     textAlign: I18nManager.isRTL ? 'right' : 'left',
-    zIndex: 1,
   },
   inputOutlined: {
     paddingTop: 20,
