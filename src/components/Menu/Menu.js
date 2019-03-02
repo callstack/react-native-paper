@@ -6,7 +6,6 @@ import {
   Animated,
   View,
   Easing,
-  Modal,
   Dimensions,
   TouchableWithoutFeedback,
   I18nManager,
@@ -14,6 +13,7 @@ import {
 } from 'react-native';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
+import Portal from '../Portal/Portal';
 import Surface from '../Surface';
 import MenuItem from './MenuItem';
 
@@ -44,10 +44,8 @@ type Props = {
 type State = {
   top: number,
   left: number,
-  menuWidth: number,
-  menuHeight: number,
-  anchorWidth: number,
-  anchorHeight: number,
+  menuLayout: { height: number, width: number },
+  anchorLayout: { height: number, width: number },
   opacityAnimation: Animated.Value,
   menuSizeAnimation: Animated.ValueXY,
   menuState: 'hidden' | 'animating' | 'shown',
@@ -113,10 +111,8 @@ class Menu extends React.Component<Props, State> {
     menuState: 'hidden',
     top: 0,
     left: 0,
-    menuWidth: 0,
-    menuHeight: 0,
-    anchorWidth: 0,
-    anchorHeight: 0,
+    menuLayout: { width: 0, height: 0 },
+    anchorLayout: { width: 0, height: 0 },
     opacityAnimation: new Animated.Value(0),
     menuSizeAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
   };
@@ -129,10 +125,6 @@ class Menu extends React.Component<Props, State> {
 
   _container: ?View;
 
-  _setContainerRef = ref => {
-    this._container = ref;
-  };
-
   // Start menu animation
   _onMenuLayout = e => {
     if (this.state.menuState === 'animating') {
@@ -144,8 +136,7 @@ class Menu extends React.Component<Props, State> {
     this.setState(
       {
         menuState: 'animating',
-        menuWidth: width,
-        menuHeight: height,
+        menuLayout: { width, height },
       },
       () => {
         Animated.parallel([
@@ -167,7 +158,8 @@ class Menu extends React.Component<Props, State> {
   // Save anchor width and height for menu layout
   _onAnchorLayout = e => {
     const { width, height } = e.nativeEvent.layout;
-    this.setState({ anchorWidth: width, anchorHeight: height });
+
+    this.setState({ anchorLayout: { width, height } });
   };
 
   _updateVisibility = () => {
@@ -180,15 +172,19 @@ class Menu extends React.Component<Props, State> {
 
   _show = () => {
     BackHandler.addEventListener('hardwareBackPress', this._hide);
-    this._container.measureInWindow((x, y) => {
-      const top = Math.max(SCREEN_INDENT, y);
-      const left = Math.max(SCREEN_INDENT, x);
-      this.setState({ menuState: 'shown', top, left });
-    });
+
+    if (this._container) {
+      this._container.measureInWindow((x, y) => {
+        const top = Math.max(SCREEN_INDENT, y);
+        const left = Math.max(SCREEN_INDENT, x);
+        this.setState({ menuState: 'shown', top, left });
+      });
+    }
   };
 
   _hide = () => {
     BackHandler.removeEventListener('hardwareBackPress', this._hide);
+
     Animated.timing(this.state.opacityAnimation, {
       toValue: 0,
       duration: ANIMATION_DURATION,
@@ -214,10 +210,8 @@ class Menu extends React.Component<Props, State> {
 
     const {
       menuState,
-      menuWidth,
-      menuHeight,
-      anchorWidth,
-      anchorHeight,
+      menuLayout,
+      anchorLayout,
       opacityAnimation,
       menuSizeAnimation,
     } = this.state;
@@ -231,21 +225,21 @@ class Menu extends React.Component<Props, State> {
     );
 
     // Flip by X axis if menu hits right screen border
-    if (left > screenWidth - menuWidth - SCREEN_INDENT) {
+    if (left > screenWidth - menuLayout.width - SCREEN_INDENT) {
       transforms.push({
         translateX: Animated.multiply(menuSizeAnimation.x, -1),
       });
 
-      left = Math.min(screenWidth - SCREEN_INDENT, left + anchorWidth);
+      left = Math.min(screenWidth - SCREEN_INDENT, left + anchorLayout.width);
     }
 
     // Flip by Y axis if menu hits bottom screen border
-    if (top > screenHeight - menuHeight - SCREEN_INDENT) {
+    if (top > screenHeight - menuLayout.height - SCREEN_INDENT) {
       transforms.push({
         translateY: Animated.multiply(menuSizeAnimation.y, -1),
       });
 
-      top = Math.min(screenHeight - SCREEN_INDENT, top + anchorHeight);
+      top = Math.min(screenHeight - SCREEN_INDENT, top + anchorLayout.height);
     }
 
     const shadowMenuContainerStyle = {
@@ -257,37 +251,43 @@ class Menu extends React.Component<Props, State> {
     };
 
     const animationStarted = menuState === 'animating';
-    const modalVisible = menuState === 'shown' || animationStarted || visible;
+    const menuVisible = menuState === 'shown' || animationStarted || visible;
 
     return (
-      <View ref={this._setContainerRef} collapsable={false}>
+      <View
+        ref={c => {
+          this._container = c;
+        }}
+        collapsable={false}
+      >
         <View onLayout={this._onAnchorLayout}>{anchor}</View>
-
-        <Modal visible={modalVisible} onRequestClose={this._hide} transparent>
-          <TouchableWithoutFeedback onPress={this._hide}>
-            <View style={StyleSheet.absoluteFill} />
-          </TouchableWithoutFeedback>
-          <Surface
-            onLayout={this._onMenuLayout}
-            style={[
-              styles.shadowMenuContainer,
-              shadowMenuContainerStyle,
-              style,
-            ]}
-          >
-            <Animated.View
+        {menuVisible ? (
+          <Portal>
+            <TouchableWithoutFeedback onPress={this._hide}>
+              <View style={StyleSheet.absoluteFill} />
+            </TouchableWithoutFeedback>
+            <Surface
+              onLayout={this._onMenuLayout}
               style={[
-                styles.menuContainer,
-                animationStarted && {
-                  width: menuSizeAnimation.x,
-                  height: menuSizeAnimation.y,
-                },
+                styles.shadowMenuContainer,
+                shadowMenuContainerStyle,
+                style,
               ]}
             >
-              {children}
-            </Animated.View>
-          </Surface>
-        </Modal>
+              <Animated.View
+                style={[
+                  styles.menuContainer,
+                  animationStarted && {
+                    width: menuSizeAnimation.x,
+                    height: menuSizeAnimation.y,
+                  },
+                ]}
+              >
+                {children}
+              </Animated.View>
+            </Surface>
+          </Portal>
+        ) : null}
       </View>
     );
   }
