@@ -36,9 +36,15 @@ exports[`renders button with color 1`] = `
         Object {
           "overflow": "hidden",
         },
-        Object {
-          "borderRadius": 4,
-        },
+        Array [
+          Object {
+            "flex": 1,
+            "width": "100%",
+          },
+          Object {
+            "borderRadius": 4,
+          },
+        ],
       ]
     }
   >
@@ -126,9 +132,15 @@ exports[`renders button with icon 1`] = `
         Object {
           "overflow": "hidden",
         },
-        Object {
-          "borderRadius": 4,
-        },
+        Array [
+          Object {
+            "flex": 1,
+            "width": "100%",
+          },
+          Object {
+            "borderRadius": 4,
+          },
+        ],
       ]
     }
   >
@@ -260,9 +272,15 @@ exports[`renders contained contained with mode 1`] = `
         Object {
           "overflow": "hidden",
         },
-        Object {
-          "borderRadius": 4,
-        },
+        Array [
+          Object {
+            "flex": 1,
+            "width": "100%",
+          },
+          Object {
+            "borderRadius": 4,
+          },
+        ],
       ]
     }
   >
@@ -348,9 +366,15 @@ exports[`renders disabled button 1`] = `
         Object {
           "overflow": "hidden",
         },
-        Object {
-          "borderRadius": 4,
-        },
+        Array [
+          Object {
+            "flex": 1,
+            "width": "100%",
+          },
+          Object {
+            "borderRadius": 4,
+          },
+        ],
       ]
     }
   >
@@ -438,9 +462,15 @@ exports[`renders loading button 1`] = `
         Object {
           "overflow": "hidden",
         },
-        Object {
-          "borderRadius": 4,
-        },
+        Array [
+          Object {
+            "flex": 1,
+            "width": "100%",
+          },
+          Object {
+            "borderRadius": 4,
+          },
+        ],
       ]
     }
   >
@@ -541,9 +571,15 @@ exports[`renders outlined button with mode 1`] = `
         Object {
           "overflow": "hidden",
         },
-        Object {
-          "borderRadius": 4,
-        },
+        Array [
+          Object {
+            "flex": 1,
+            "width": "100%",
+          },
+          Object {
+            "borderRadius": 4,
+          },
+        ],
       ]
     }
   >
@@ -631,9 +667,15 @@ exports[`renders text button by default 1`] = `
         Object {
           "overflow": "hidden",
         },
-        Object {
-          "borderRadius": 4,
-        },
+        Array [
+          Object {
+            "flex": 1,
+            "width": "100%",
+          },
+          Object {
+            "borderRadius": 4,
+          },
+        ],
       ]
     }
   >
@@ -721,9 +763,15 @@ exports[`renders text button with mode 1`] = `
         Object {
           "overflow": "hidden",
         },
-        Object {
-          "borderRadius": 4,
-        },
+        Array [
+          Object {
+            "flex": 1,
+            "width": "100%",
+          },
+          Object {
+            "borderRadius": 4,
+          },
+        ],
       ]
     }
   >
