@@ -30,7 +30,12 @@ type Props = React.ElementConfig<typeof TextInput> & {|
    * Callback to execute if we want the left icon to act as button.
    */
   onIconPress?: () => mixed,
+  /**
+   * Set style of the TextInput component inside the searchbar
+   */
+  inputStyle?: any,
   style?: any,
+
   /**
    * @optional
    */
@@ -118,6 +123,7 @@ class Searchbar extends React.Component<Props> {
       value,
       theme,
       style,
+      inputStyle,
       ...rest
     } = this.props;
     const { colors, roundness, dark, fonts } = theme;
@@ -150,7 +156,7 @@ class Searchbar extends React.Component<Props> {
           icon={icon || 'search'}
         />
         <TextInput
-          style={[styles.input, { color: textColor, fontFamily }]}
+          style={[styles.input, { color: textColor, fontFamily }, inputStyle]}
           placeholder={placeholder || ''}
           placeholderTextColor={colors.placeholder}
           selectionColor={colors.primary}
