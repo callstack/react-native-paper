@@ -55,8 +55,9 @@ class TextInputOutlinedLabel extends React.Component<Props> {
     const { fonts } = theme;
     const fontFamily = fonts.regular;
 
-    return (
+    return [
       <View
+        key="background"
         pointerEvents="none"
         style={[
           styles.outline,
@@ -66,44 +67,44 @@ class TextInputOutlinedLabel extends React.Component<Props> {
             borderColor,
           },
         ]}
-      >
-        {label ? (
-          // When mode == 'outlined', the input label stays on top of the outline
-          // The background of the label covers the outline so it looks cut off
-          // To achieve the effect, we position the actual label with a background on top of it
-          // We set the color of the text to transparent so only the background is visible
-          <AnimatedText
-            pointerEvents="none"
-            style={[
-              styles.outlinedLabelBackground,
-              {
-                backgroundColor,
-                fontFamily,
-                fontSize: MINIMIZED_LABEL_FONT_SIZE,
-                // Hide the background when scale will be 0
-                // There's a bug in RN which makes scale: 0 act weird
-                opacity: labeled.interpolate({
-                  inputRange: [0, 0.9, 1],
-                  outputRange: [1, 1, 0],
-                }),
-                transform: [
-                  {
-                    // Animate the scale when label is moved up
-                    scaleX: labeled.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [1, 0],
-                    }),
-                  },
-                ],
-              },
-            ]}
-            numberOfLines={1}
-          >
-            {label}
-          </AnimatedText>
-        ) : null}
-      </View>
-    );
+      />,
+      label && (
+        // When mode == 'outlined', the input label stays on top of the outline
+        // The background of the label covers the outline so it looks cut off
+        // To achieve the effect, we position the actual label with a background on top of it
+        // We set the color of the text to transparent so only the background is visible
+        <AnimatedText
+          key="label-text"
+          pointerEvents="none"
+          style={[
+            styles.outlinedLabelBackground,
+            {
+              backgroundColor,
+              fontFamily,
+              fontSize: MINIMIZED_LABEL_FONT_SIZE,
+              // Hide the background when scale will be 0
+              // There's a bug in RN which makes scale: 0 act weird
+              opacity: labeled.interpolate({
+                inputRange: [0, 0.9, 1],
+                outputRange: [1, 1, 0],
+              }),
+              transform: [
+                {
+                  // Animate the scale when label is moved up
+                  scaleX: labeled.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [1, 0],
+                  }),
+                },
+              ],
+            },
+          ]}
+          numberOfLines={1}
+        >
+          {label}
+        </AnimatedText>
+      ),
+    ];
   }
 }
 
@@ -116,13 +117,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    top: 0,
+    top: 6,
     bottom: 0,
   },
   outlinedLabelBackground: {
-    // position: 'absolute',
+    position: 'absolute',
     top: 0,
-    marginLeft: 8,
+    left: 8,
     paddingHorizontal: 4,
     color: 'transparent',
   },
