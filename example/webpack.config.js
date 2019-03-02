@@ -58,4 +58,14 @@ module.exports = {
     contentBase: [path.join(__dirname, 'public')],
     historyApiFallback: true,
   },
+  resolve: {
+    // This will only alias the exact import "react-native"
+    alias: {
+      'react-native$': 'react-native-web',
+    },
+    // If you're working on a multi-platform React Native app, web-specific
+    // module implementations should be written in files using the extension
+    // `.web.js`.
+    extensions: ['.web.js', '.js'],
+  },
 };

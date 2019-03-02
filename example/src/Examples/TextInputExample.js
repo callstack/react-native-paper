@@ -87,6 +87,29 @@ class TextInputExample extends React.Component<Props, State> {
               Error: Only letters are allowed
             </HelperText>
           </View>
+          <TextInput
+            // name="email"
+            // autoComplete="email"
+            // type="email"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            textContentType="username"
+            style={styles.inputContainerStyle}
+            label="Flat autocomplete"
+            placeholder="Type something"
+          />
+          <TextInput
+            // name="email"
+            // autoComplete="email"
+            // type="email"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            textContentType="username"
+            mode="outlined"
+            style={styles.inputContainerStyle}
+            label="Outlined autocomplete"
+            placeholder="Type something"
+          />
         </ScrollView>
       </KeyboardAvoidingView>
     );
