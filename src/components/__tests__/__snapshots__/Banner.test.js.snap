@@ -205,9 +205,15 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
               Object {
                 "overflow": "hidden",
               },
-              Object {
-                "borderRadius": 4,
-              },
+              Array [
+                Object {
+                  "flex": 1,
+                  "width": "100%",
+                },
+                Object {
+                  "borderRadius": 4,
+                },
+              ],
             ]
           }
         >
@@ -366,9 +372,15 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
               Object {
                 "overflow": "hidden",
               },
-              Object {
-                "borderRadius": 4,
-              },
+              Array [
+                Object {
+                  "flex": 1,
+                  "width": "100%",
+                },
+                Object {
+                  "borderRadius": 4,
+                },
+              ],
             ]
           }
         >
@@ -456,9 +468,15 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
               Object {
                 "overflow": "hidden",
               },
-              Object {
-                "borderRadius": 4,
-              },
+              Array [
+                Object {
+                  "flex": 1,
+                  "width": "100%",
+                },
+                Object {
+                  "borderRadius": 4,
+                },
+              ],
             ]
           }
         >
