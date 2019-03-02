@@ -1,68 +1,824 @@
-/* @flow */
+// Jest Snapshot v1, https://goo.gl/fbAQLP
 
-import * as React from 'react';
-import renderer from 'react-test-renderer';
-import Button from '../Button';
-import { pink500 } from '../../styles/colors';
+exports[`renders button with color 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "transparent",
+      "borderColor": "transparent",
+      "borderRadius": 4,
+      "borderStyle": "solid",
+      "borderWidth": 0,
+      "elevation": 0,
+      "minWidth": 64,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.24,
+      "shadowRadius": 0,
+    }
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Array [
+          Object {
+            "flex": 1,
+            "width": "100%",
+          },
+          Object {
+            "borderRadius": 4,
+          },
+        ],
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
+            },
+            Array [
+              Object {
+                "letterSpacing": 1,
+                "marginHorizontal": 16,
+                "marginVertical": 9,
+                "textAlign": "center",
+              },
+              undefined,
+              Object {
+                "color": "#e91e63",
+                "fontFamily": "HelveticaNeue-Medium",
+              },
+              Object {
+                "fontFamily": "HelveticaNeue-Medium",
+              },
+            ],
+          ]
+        }
+      >
+        CUSTOM BUTTON
+      </Text>
+    </View>
+  </View>
+</View>
+`;
 
-it('renders text button by default', () => {
-  const tree = renderer.create(<Button>Text Button</Button>).toJSON();
+exports[`renders button with icon 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "transparent",
+      "borderColor": "transparent",
+      "borderRadius": 4,
+      "borderStyle": "solid",
+      "borderWidth": 0,
+      "elevation": 0,
+      "minWidth": 64,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.24,
+      "shadowRadius": 0,
+    }
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Array [
+          Object {
+            "flex": 1,
+            "width": "100%",
+          },
+          Object {
+            "borderRadius": 4,
+          },
+        ],
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "marginLeft": 12,
+            "marginRight": -4,
+            "width": 16,
+          }
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          allowFontScaling={false}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          style={
+            Array [
+              Object {
+                "color": "#6200ee",
+                "fontSize": 16,
+              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
+            },
+            Array [
+              Object {
+                "letterSpacing": 1,
+                "marginHorizontal": 16,
+                "marginVertical": 9,
+                "textAlign": "center",
+              },
+              undefined,
+              Object {
+                "color": "#6200ee",
+                "fontFamily": "HelveticaNeue-Medium",
+              },
+              Object {
+                "fontFamily": "HelveticaNeue-Medium",
+              },
+            ],
+          ]
+        }
+      >
+        ICON BUTTON
+      </Text>
+    </View>
+  </View>
+</View>
+`;
 
-  expect(tree).toMatchSnapshot();
-});
+exports[`renders contained contained with mode 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#6200ee",
+      "borderColor": "transparent",
+      "borderRadius": 4,
+      "borderStyle": "solid",
+      "borderWidth": 0,
+      "elevation": 2,
+      "minWidth": 64,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0.75,
+        "width": 0,
+      },
+      "shadowOpacity": 0.24,
+      "shadowRadius": 1.5,
+    }
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Array [
+          Object {
+            "flex": 1,
+            "width": "100%",
+          },
+          Object {
+            "borderRadius": 4,
+          },
+        ],
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
+            },
+            Array [
+              Object {
+                "letterSpacing": 1,
+                "marginHorizontal": 16,
+                "marginVertical": 9,
+                "textAlign": "center",
+              },
+              undefined,
+              Object {
+                "color": "#ffffff",
+                "fontFamily": "HelveticaNeue-Medium",
+              },
+              Object {
+                "fontFamily": "HelveticaNeue-Medium",
+              },
+            ],
+          ]
+        }
+      >
+        CONTAINED BUTTON
+      </Text>
+    </View>
+  </View>
+</View>
+`;
 
-it('renders text button with mode', () => {
-  const tree = renderer
-    .create(<Button mode="text">Text Button</Button>)
-    .toJSON();
+exports[`renders disabled button 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "transparent",
+      "borderColor": "transparent",
+      "borderRadius": 4,
+      "borderStyle": "solid",
+      "borderWidth": 0,
+      "elevation": 0,
+      "minWidth": 64,
+    }
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessibilityStates={
+      Array [
+        "disabled",
+      ]
+    }
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Array [
+          Object {
+            "flex": 1,
+            "width": "100%",
+          },
+          Object {
+            "borderRadius": 4,
+          },
+        ],
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
+            },
+            Array [
+              Object {
+                "letterSpacing": 1,
+                "marginHorizontal": 16,
+                "marginVertical": 9,
+                "textAlign": "center",
+              },
+              undefined,
+              Object {
+                "color": "rgba(0, 0, 0, 0.32)",
+                "fontFamily": "HelveticaNeue-Medium",
+              },
+              Object {
+                "fontFamily": "HelveticaNeue-Medium",
+              },
+            ],
+          ]
+        }
+      >
+        DISABLED BUTTON
+      </Text>
+    </View>
+  </View>
+</View>
+`;
 
-  expect(tree).toMatchSnapshot();
-});
+exports[`renders loading button 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "transparent",
+      "borderColor": "transparent",
+      "borderRadius": 4,
+      "borderStyle": "solid",
+      "borderWidth": 0,
+      "elevation": 0,
+      "minWidth": 64,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.24,
+      "shadowRadius": 0,
+    }
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Array [
+          Object {
+            "flex": 1,
+            "width": "100%",
+          },
+          Object {
+            "borderRadius": 4,
+          },
+        ],
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <ActivityIndicator
+        animating={true}
+        color="#6200ee"
+        hidesWhenStopped={true}
+        size="small"
+        style={
+          Object {
+            "marginLeft": 12,
+            "marginRight": -4,
+            "width": 16,
+          }
+        }
+      />
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
+            },
+            Array [
+              Object {
+                "letterSpacing": 1,
+                "marginHorizontal": 16,
+                "marginVertical": 9,
+                "textAlign": "center",
+              },
+              undefined,
+              Object {
+                "color": "#6200ee",
+                "fontFamily": "HelveticaNeue-Medium",
+              },
+              Object {
+                "fontFamily": "HelveticaNeue-Medium",
+              },
+            ],
+          ]
+        }
+      >
+        LOADING BUTTON
+      </Text>
+    </View>
+  </View>
+</View>
+`;
 
-it('renders outlined button with mode', () => {
-  const tree = renderer
-    .create(<Button mode="outlined">Outlined Button</Button>)
-    .toJSON();
+exports[`renders outlined button with mode 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "transparent",
+      "borderColor": "rgba(0, 0, 0, 0.29)",
+      "borderRadius": 4,
+      "borderStyle": "solid",
+      "borderWidth": 0.5,
+      "elevation": 0,
+      "minWidth": 64,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.24,
+      "shadowRadius": 0,
+    }
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Array [
+          Object {
+            "flex": 1,
+            "width": "100%",
+          },
+          Object {
+            "borderRadius": 4,
+          },
+        ],
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
+            },
+            Array [
+              Object {
+                "letterSpacing": 1,
+                "marginHorizontal": 16,
+                "marginVertical": 9,
+                "textAlign": "center",
+              },
+              undefined,
+              Object {
+                "color": "#6200ee",
+                "fontFamily": "HelveticaNeue-Medium",
+              },
+              Object {
+                "fontFamily": "HelveticaNeue-Medium",
+              },
+            ],
+          ]
+        }
+      >
+        OUTLINED BUTTON
+      </Text>
+    </View>
+  </View>
+</View>
+`;
 
-  expect(tree).toMatchSnapshot();
-});
+exports[`renders text button by default 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "transparent",
+      "borderColor": "transparent",
+      "borderRadius": 4,
+      "borderStyle": "solid",
+      "borderWidth": 0,
+      "elevation": 0,
+      "minWidth": 64,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.24,
+      "shadowRadius": 0,
+    }
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Array [
+          Object {
+            "flex": 1,
+            "width": "100%",
+          },
+          Object {
+            "borderRadius": 4,
+          },
+        ],
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
+            },
+            Array [
+              Object {
+                "letterSpacing": 1,
+                "marginHorizontal": 16,
+                "marginVertical": 9,
+                "textAlign": "center",
+              },
+              undefined,
+              Object {
+                "color": "#6200ee",
+                "fontFamily": "HelveticaNeue-Medium",
+              },
+              Object {
+                "fontFamily": "HelveticaNeue-Medium",
+              },
+            ],
+          ]
+        }
+      >
+        TEXT BUTTON
+      </Text>
+    </View>
+  </View>
+</View>
+`;
 
-it('renders contained contained with mode', () => {
-  const tree = renderer
-    .create(<Button mode="contained">Contained Button</Button>)
-    .toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it('renders button with icon', () => {
-  const tree = renderer
-    .create(<Button icon="add-a-photo">Icon Button</Button>)
-    .toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it('renders loading button', () => {
-  const tree = renderer
-    .create(<Button loading>Loading Button</Button>)
-    .toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it('renders disabled button', () => {
-  const tree = renderer
-    .create(<Button disabled>Disabled Button</Button>)
-    .toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it('renders button with color', () => {
-  const tree = renderer
-    .create(<Button color={pink500}>Custom Button</Button>)
-    .toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
+exports[`renders text button with mode 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "transparent",
+      "borderColor": "transparent",
+      "borderRadius": 4,
+      "borderStyle": "solid",
+      "borderWidth": 0,
+      "elevation": 0,
+      "minWidth": 64,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.24,
+      "shadowRadius": 0,
+    }
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Array [
+          Object {
+            "flex": 1,
+            "width": "100%",
+          },
+          Object {
+            "borderRadius": 4,
+          },
+        ],
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
+            },
+            Array [
+              Object {
+                "letterSpacing": 1,
+                "marginHorizontal": 16,
+                "marginVertical": 9,
+                "textAlign": "center",
+              },
+              undefined,
+              Object {
+                "color": "#6200ee",
+                "fontFamily": "HelveticaNeue-Medium",
+              },
+              Object {
+                "fontFamily": "HelveticaNeue-Medium",
+              },
+            ],
+          ]
+        }
+      >
+        TEXT BUTTON
+      </Text>
+    </View>
+  </View>
+</View>
+`;
