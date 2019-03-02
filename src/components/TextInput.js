@@ -712,6 +712,7 @@ const styles = StyleSheet.create({
     left: 8,
     paddingHorizontal: 4,
     color: 'transparent',
+    borderRadius: 5,
   },
   input: {
     flexGrow: 1,
