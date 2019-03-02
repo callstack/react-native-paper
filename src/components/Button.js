@@ -246,7 +246,7 @@ class Button extends React.Component<Props, State> {
           accessibilityStates={disabled ? ['disabled'] : undefined}
           disabled={disabled}
           rippleColor={rippleColor}
-          style={touchableStyle}
+          style={[styles.touchable, touchableStyle]}
         >
           <View style={[styles.content, contentStyle]}>
             {icon && loading !== true ? (
@@ -289,6 +289,10 @@ const styles = StyleSheet.create({
   button: {
     minWidth: 64,
     borderStyle: 'solid',
+  },
+  touchable: {
+    width: '100%',
+    flex: 1,
   },
   compact: {
     minWidth: 'auto',
