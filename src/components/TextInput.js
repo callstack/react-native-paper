@@ -528,6 +528,7 @@ class TextInput extends React.Component<Props, State> {
             style={[
               styles.outlinedLabelBackground,
               {
+                height: hasActiveOutline ? 2 : 1,
                 backgroundColor,
                 fontFamily,
                 fontSize: MINIMIZED_LABEL_FONT_SIZE,
@@ -655,6 +656,9 @@ class TextInput extends React.Component<Props, State> {
           multiline,
           style: [
             styles.input,
+            mode === 'outlined' && {
+              borderRadius: theme.roundness,
+            },
             mode === 'outlined'
               ? styles.inputOutlined
               : this.props.label
@@ -704,8 +708,9 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   outlinedLabelBackground: {
+    overflow: 'hidden',
     position: 'absolute',
-    top: 0,
+    top: 6,
     left: 8,
     paddingHorizontal: 4,
     color: 'transparent',
@@ -717,12 +722,12 @@ const styles = StyleSheet.create({
     margin: 0,
     minHeight: 58,
     textAlign: I18nManager.isRTL ? 'right' : 'left',
-    zIndex: 1,
   },
   inputOutlined: {
     paddingTop: 20,
     paddingBottom: 16,
-    minHeight: 64,
+    minHeight: 58,
+    marginTop: 6,
   },
   inputFlatWithLabel: {
     paddingTop: 24,
