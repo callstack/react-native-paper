@@ -120,6 +120,7 @@ exports[`renders with placeholder 1`] = `
           "color": "#000000",
           "fontFamily": "Helvetica Neue",
         },
+        undefined,
       ]
     }
     underlineColorAndroid="transparent"
@@ -332,6 +333,7 @@ exports[`renders with text 1`] = `
           "color": "#000000",
           "fontFamily": "Helvetica Neue",
         },
+        undefined,
       ]
     }
     underlineColorAndroid="transparent"
