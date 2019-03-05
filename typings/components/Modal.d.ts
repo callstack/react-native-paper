@@ -3,7 +3,7 @@ import { ThemeShape } from '../types';
 
 export interface ModalProps {
   dismissable?: boolean;
-  onDismiss: () => any;
+  onDismiss?: () => any;
   visible: boolean;
   children: React.ReactNode;
   theme?: ThemeShape;
