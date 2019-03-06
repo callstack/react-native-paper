@@ -13,6 +13,9 @@
 [![All Contributors][all-contributors-badge]][all-contributors]
 [![PRs Welcome][prs-welcome-badge]][prs-welcome]
 [![Chat][chat-badge]][chat]
+<a href="https://callstack.com/open-source/?utm_source=github.com&utm_medium=referral&utm_campaign=react-native-paper&utm_term=readme">
+<img src="https://callstack.com/images/callstack-badge.png" alt="Sponsored by Callstack" height=20 />
+</a>
 
 ## Features
 
@@ -39,6 +42,10 @@ Check the components and their usage in our [documentation](https://callstack.gi
 ## Contributing
 
 Read the [contribution guidelines](/CONTRIBUTING.md) before contributing.
+
+## Made with ❤️ at Callstack
+
+`react-native-paper` is an open source project and will always remain free to use. If you think it's cool, please star it 🌟. [Callstack](https://callstack.com) is a group of React and React Native geeks, contact us at [hello@callstack.com](mailto:hello@callstack.com) if you need any help with these or just want to say hi!
 
 <!-- badges -->
 [build-badge]: https://img.shields.io/circleci/project/github/callstack/react-native-paper/master.svg?style=flat-square
