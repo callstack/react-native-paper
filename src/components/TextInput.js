@@ -655,8 +655,11 @@ class TextInput extends React.Component<Props, State> {
           multiline,
           style: [
             styles.input,
-            mode === 'outlined' && {
+            mode === 'outlined' ? {
               borderRadius: theme.roundness,
+            } : {
+              borderTopLeftRadius: theme.roundness,
+              borderTopRightRadius: theme.roundness,        
             },
             mode === 'outlined'
               ? styles.inputOutlined
