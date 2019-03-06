@@ -13,9 +13,7 @@
 [![All Contributors][all-contributors-badge]][all-contributors]
 [![PRs Welcome][prs-welcome-badge]][prs-welcome]
 [![Chat][chat-badge]][chat]
-<a href="https://callstack.com/open-source/?utm_source=github.com&utm_medium=referral&utm_campaign=react-native-paper&utm_term=readme">
-<img src="https://callstack.com/images/callstack-badge.png" alt="Sponsored by Callstack" height=20 />
-</a>
+[![Sponsored by Callstack][callstack-badge]][callstack]
 
 ## Features
 
@@ -60,6 +58,8 @@ Read the [contribution guidelines](/CONTRIBUTING.md) before contributing.
 [prs-welcome]: http://makeapullrequest.com
 [chat-badge]: https://img.shields.io/discord/426714625279524876.svg?style=flat-square&colorB=758ED3
 [chat]: https://discord.gg/zwR2Cdh
+[callstack-badge]: https://callstack.com/images/callstack-badge.svg
+[callstack]: https://callstack.com/open-source/?utm_source=github.com&utm_medium=referral&utm_campaign=react-native-paper&utm_term=readme
 
 ## Contributors
 
