@@ -163,8 +163,12 @@ class Snackbar extends React.Component<Props, State> {
       duration: 200,
       useNativeDriver: true,
     }).start(({ finished }) => {
-      if (finished) {
-        const { duration } = this.props;
+      const { duration } = this.props;
+      const isInfinity =
+        duration === Number.POSITIVE_INFINITY ||
+        duration === Number.NEGATIVE_INFINITY;
+
+      if (finished && !isInfinity) {
         this._hideTimeout = setTimeout(this.props.onDismiss, duration);
       }
     });
