@@ -61,7 +61,8 @@ type Props = React.ElementConfig<typeof Surface> & {|
    */
   onPress?: () => mixed,
   /**
-   * Style of button's inner content
+   * Style of button's inner content.
+   * Use this prop to apply custom height and width.
    */
   contentStyle?: any,
   style?: any,
