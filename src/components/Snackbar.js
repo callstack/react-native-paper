@@ -169,7 +169,7 @@ class Snackbar extends React.Component<Props, State> {
           duration === Number.POSITIVE_INFINITY ||
           duration === Number.NEGATIVE_INFINITY;
 
-          if(finished && !isInfinity) {
+        if (finished && !isInfinity) {
           this._hideTimeout = setTimeout(this.props.onDismiss, duration);
         }
       }
