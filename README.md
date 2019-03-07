@@ -43,7 +43,7 @@ Read the [contribution guidelines](/CONTRIBUTING.md) before contributing.
 
 ## Made with ❤️ at Callstack
 
-`react-native-paper` is an open source project and will always remain free to use. If you think it's cool, please star it 🌟. [Callstack](https://callstack.com) is a group of React and React Native geeks, contact us at [hello@callstack.com](mailto:hello@callstack.com) if you need any help with these or just want to say hi!
+`react-native-paper` is an open source project and will always remain free to use. If you think it's cool, please star it 🌟. [Callstack][callstack-readme-with-love] is a group of React and React Native geeks, contact us at [hello@callstack.com](mailto:hello@callstack.com) if you need any help with these or just want to say hi!
 
 <!-- badges -->
 [build-badge]: https://img.shields.io/circleci/project/github/callstack/react-native-paper/master.svg?style=flat-square
@@ -59,7 +59,8 @@ Read the [contribution guidelines](/CONTRIBUTING.md) before contributing.
 [chat-badge]: https://img.shields.io/discord/426714625279524876.svg?style=flat-square&colorB=758ED3
 [chat]: https://discord.gg/zwR2Cdh
 [callstack-badge]: https://callstack.com/images/callstack-badge.svg
-[callstack]: https://callstack.com/open-source/?utm_source=github.com&utm_medium=referral&utm_campaign=react-native-paper&utm_term=readme
+[callstack]: https://callstack.com/open-source/?utm_source=github.com&utm_medium=referral&utm_campaign=react-native-paper&utm_term=readme-badge
+[callstack-readme-with-love]: https://callstack.com/?utm_source=github.com&utm_medium=referral&utm_campaign=react-native-paper&utm_term=readme-with-love
 
 ## Contributors
 
