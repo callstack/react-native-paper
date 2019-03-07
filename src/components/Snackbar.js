@@ -165,7 +165,9 @@ class Snackbar extends React.Component<Props, State> {
     }).start(({ finished }) => {
       if (finished) {
         const { duration } = this.props;
-        this._hideTimeout = setTimeout(this.props.onDismiss, duration);
+        if(duration !== Infinity) {
+          this._hideTimeout = setTimeout(this.props.onDismiss, duration);
+        }
       }
     });
   };
