@@ -111,7 +111,7 @@ class AppbarHeader extends React.Component<Props> {
 
     return (
       <Wrapper
-        style={[{ backgroundColor, zIndex }, elevation && shadow(elevation)]}
+        style={[{ backgroundColor, zIndex }, elevation && {shadow(elevation), elevation}]}
       >
         {/* $FlowFixMe: There seems to be conflict between Appbar's props and Header's props */}
         <Appbar
