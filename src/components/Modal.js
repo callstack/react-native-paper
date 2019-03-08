@@ -43,7 +43,7 @@ type Props = {|
    * @optional
    * Overrides Styles for the Wrapper element.
    */
-  wrapperStyle?: StyleSheet,
+  wrapperStyle?: StyleProp<ViewStyle>,
 |};
 
 type State = {
