@@ -8,6 +8,8 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   BackHandler,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
 import Surface from './Surface';
