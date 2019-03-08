@@ -111,5 +111,15 @@
     "watchPathIgnorePatterns": [
       "__fixtures__\\/[^/]+\\/(output|error)\\.js"
     ]
+  },
+  "greenkeeper": {
+    "ignore": [
+      "expo",
+      "flow-bin",
+      "react",
+      "react-dom",
+      "react-native",
+      "react-test-renderer"
+    ]
   }
 }
