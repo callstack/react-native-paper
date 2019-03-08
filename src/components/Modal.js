@@ -8,6 +8,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   BackHandler,
+  StyleProp,
   ViewStyle,
 } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
@@ -44,7 +45,7 @@ type Props = {|
    * @optional
    * Overrides Styles for the Wrapper element.
    */
-  wrapperStyle?: StyleSheet.NamedStyles<ViewStyle>,
+  wrapperStyle?: StyleProp<ViewStyle>,
 |};
 
 type State = {
