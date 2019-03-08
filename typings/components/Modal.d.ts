@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ViewStyle } from 'react-native';
 import { ThemeShape } from '../types';
 
 export interface ModalProps {
@@ -8,7 +8,7 @@ export interface ModalProps {
   visible: boolean;
   children: React.ReactNode;
   theme?: ThemeShape;
-  wrapperStyle?: StyleSheet.Styles;
+  wrapperStyle?: StyleSheet.NamedStyles<ViewStyle>;
 }
 
 export declare class Modal extends React.Component<ModalProps> {}
