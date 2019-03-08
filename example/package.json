@@ -13,7 +13,7 @@
   "main": "node_modules/expo/AppEntry.js",
   "dependencies": {
     "@callstack/react-theme-provider": "^1.0.7",
-    "@expo/vector-icons": "^8.0.0",
+    "@expo/vector-icons": "^9.0.0",
     "@reach/router": "^1.2.1",
     "create-react-context": "^0.2.3",
     "expo": "^31.0.3",
@@ -23,7 +23,7 @@
     "react-lifecycles-compat": "^3.0.4",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.1.tar.gz",
     "react-native-web": "^0.10.0-alpha.3",
-    "react-navigation": "^2.18.2",
+    "react-navigation": "^3.3.2",
     "typeface-roboto": "^0.0.54"
   },
   "devDependencies": {
