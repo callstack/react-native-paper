@@ -43,7 +43,7 @@ type Props = {|
    * @optional
    * Overrides Styles for the Wrapper element.
    */
-  wrapperStyle?: StyleSheet
+  wrapperStyle?: StyleSheet,
 |};
 
 type State = {
@@ -173,7 +173,13 @@ class Modal extends React.Component<Props, State> {
             ]}
           />
         </TouchableWithoutFeedback>
-        <View pointerEvents="box-none" style={{...styles.wrapper, ...this.props.wrapperStyle}}>
+        <View
+          pointerEvents="box-none"
+          style={{
+            ...styles.wrapper,
+            ...this.props.wrapperStyle,
+          }}
+        >
           <Surface
             style={[
               { opacity: this.state.opacity },
