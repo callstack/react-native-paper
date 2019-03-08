@@ -16,13 +16,13 @@
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "del-cli": "^1.1.0",
-    "file-loader": "^1.1.11",
+    "file-loader": "^3.0.1",
     "url-loader": "^1.0.1"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "color": "^2.0.1",
+    "color": "^3.1.0",
     "component-docs": "^0.19.5",
     "linaria": "^1.2.4"
   }
