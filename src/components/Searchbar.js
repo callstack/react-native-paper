@@ -137,11 +137,11 @@ class Searchbar extends React.Component<Props> {
     const iconColor =
       customIconColor ||
       (dark
-      ? textColor
-      : color(textColor)
-          .alpha(0.54)
-          .rgb()
-          .string());
+        ? textColor
+        : color(textColor)
+            .alpha(0.54)
+            .rgb()
+            .string());
     const rippleColor = color(textColor)
       .alpha(0.32)
       .rgb()
