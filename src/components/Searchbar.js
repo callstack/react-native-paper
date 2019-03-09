@@ -127,14 +127,16 @@ class Searchbar extends React.Component<Props> {
       value,
       theme,
       style,
-      iconColor:customIconColor,
+      iconColor: customIconColor,
       inputStyle,
       ...rest
     } = this.props;
     const { colors, roundness, dark, fonts } = theme;
     const textColor = colors.text;
     const fontFamily = fonts.regular;
-    const iconColor =customIconColor || (dark
+    const iconColor =
+      customIconColor ||
+      (dark
       ? textColor
       : color(textColor)
           .alpha(0.54)
