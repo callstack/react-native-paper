@@ -265,8 +265,9 @@ class Menu extends React.Component<Props, State> {
           this._container = c;
         }}
         collapsable={false}
+        onLayout={this._onAnchorLayout}
       >
-        <View onLayout={this._onAnchorLayout}>{anchor}</View>
+        {anchor}
         {menuVisible ? (
           <Portal>
             <TouchableWithoutFeedback onPress={this._hide}>
