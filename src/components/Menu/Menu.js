@@ -176,12 +176,8 @@ class Menu extends React.Component<Props, State> {
 
     if (this._container) {
       this._container.measureInWindow((x, y) => {
-        let top = Math.max(SCREEN_INDENT, y);
+        const top = Math.max(SCREEN_INDENT, y) + StatusBar.currentHeight;
         const left = Math.max(SCREEN_INDENT, x);
-
-        if (StatusBar.currentHeight && top < StatusBar.currentHeight) {
-          top += StatusBar.currentHeight;
-        }
 
         this.setState({ menuState: 'shown', top, left });
       });
