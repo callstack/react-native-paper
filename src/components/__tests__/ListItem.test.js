@@ -51,3 +51,18 @@ it('renders list item with left and right items', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('renders list item wwith custom title and deescription styles', () => {
+  const tree = renderer
+    .create(
+      <ListItem
+        title="First Item"
+        description="Item description"
+        titleStyle={{ fontSize: 20 }}
+        descriptionStyle={{ color: 'red' }}
+      />
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});

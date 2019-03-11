@@ -63,6 +63,7 @@ exports[`renders list item with left and right items 1`] = `
               Object {
                 "color": "rgba(0, 0, 0, 0.87)",
               },
+              undefined,
             ],
           ]
         }
@@ -86,6 +87,7 @@ exports[`renders list item with left and right items 1`] = `
               Object {
                 "color": "rgba(0, 0, 0, 0.54)",
               },
+              undefined,
             ],
           ]
         }
@@ -257,6 +259,7 @@ exports[`renders list item with left item 1`] = `
               Object {
                 "color": "rgba(0, 0, 0, 0.87)",
               },
+              undefined,
             ],
           ]
         }
@@ -328,6 +331,7 @@ exports[`renders list item with right item 1`] = `
               Object {
                 "color": "rgba(0, 0, 0, 0.87)",
               },
+              undefined,
             ],
           ]
         }
@@ -402,6 +406,7 @@ exports[`renders list item with title and description 1`] = `
               Object {
                 "color": "rgba(0, 0, 0, 0.87)",
               },
+              undefined,
             ],
           ]
         }
@@ -425,11 +430,112 @@ exports[`renders list item with title and description 1`] = `
               Object {
                 "color": "rgba(0, 0, 0, 0.54)",
               },
+              undefined,
             ],
           ]
         }
       >
         Description for first item
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders list item wwith custom title and deescription styles 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      false,
+      Array [
+        Object {
+          "padding": 8,
+        },
+        undefined,
+      ],
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      pointerEvents="none"
+      style={
+        Array [
+          Object {
+            "margin": 8,
+          },
+          Object {
+            "flex": 1,
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
+            },
+            Array [
+              Object {
+                "fontSize": 16,
+              },
+              Object {
+                "color": "rgba(0, 0, 0, 0.87)",
+              },
+              Object {
+                "fontSize": 20,
+              },
+            ],
+          ]
+        }
+      >
+        First Item
+      </Text>
+      <Text
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
+            },
+            Array [
+              Object {
+                "fontSize": 14,
+              },
+              Object {
+                "color": "rgba(0, 0, 0, 0.54)",
+              },
+              Object {
+                "color": "red",
+              },
+            ],
+          ]
+        }
+      >
+        Item description
       </Text>
     </View>
   </View>

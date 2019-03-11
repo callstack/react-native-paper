@@ -170,6 +170,7 @@ exports[`renders list section with subheader 1`] = `
                 Object {
                   "color": "rgba(0, 0, 0, 0.87)",
                 },
+                undefined,
               ],
             ]
           }
@@ -288,6 +289,7 @@ exports[`renders list section with subheader 1`] = `
                 Object {
                   "color": "rgba(0, 0, 0, 0.87)",
                 },
+                undefined,
               ],
             ]
           }
@@ -444,6 +446,7 @@ exports[`renders list section without subheader 1`] = `
                 Object {
                   "color": "rgba(0, 0, 0, 0.87)",
                 },
+                undefined,
               ],
             ]
           }
@@ -562,6 +565,7 @@ exports[`renders list section without subheader 1`] = `
                 Object {
                   "color": "rgba(0, 0, 0, 0.87)",
                 },
+                undefined,
               ],
             ]
           }
