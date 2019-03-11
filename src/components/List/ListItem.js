@@ -33,7 +33,18 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {|
    * @optional
    */
   theme: Theme,
+  /**
+   * Style that is passed to the wrapping TouchableRipple element.
+   */
   style?: any,
+  /**
+   * Style that is passed to Title element.
+   */
+  titleStyle?: any,
+  /**
+   * Style that is passed to Description element.
+   */
+  descriptionStyle?: any,
 |};
 
 /**
@@ -73,6 +84,8 @@ class ListItem extends React.Component<Props> {
       onPress,
       theme,
       style,
+      titleStyle,
+      descriptionStyle,
       ...rest
     } = this.props;
     const titleColor = color(theme.colors.text)
@@ -95,7 +108,7 @@ class ListItem extends React.Component<Props> {
           <View style={[styles.item, styles.content]} pointerEvents="none">
             <Text
               numberOfLines={1}
-              style={[styles.title, { color: titleColor }]}
+              style={[styles.title, { color: titleColor }, titleStyle]}
             >
               {title}
             </Text>
@@ -107,6 +120,7 @@ class ListItem extends React.Component<Props> {
                   {
                     color: descriptionColor,
                   },
+                  descriptionStyle,
                 ]}
               >
                 {description}
