@@ -116,6 +116,7 @@ class Modal extends React.Component<Props, State> {
   };
 
   _showModal = () => {
+    BackHandler.removeEventListener('hardwareBackPress', this._handleBack);
     BackHandler.addEventListener('hardwareBackPress', this._handleBack);
     Animated.timing(this.state.opacity, {
       toValue: 1,
@@ -146,6 +147,10 @@ class Modal extends React.Component<Props, State> {
       }
     });
   };
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this._handleBack);
+  }
 
   render() {
     if (!this.state.rendered) return null;
