@@ -52,7 +52,7 @@ it('renders list item with left and right items', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders list item wwith custom title and deescription styles', () => {
+it('renders list item with custom title and description styles', () => {
   const tree = renderer
     .create(
       <ListItem
