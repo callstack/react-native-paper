@@ -7,7 +7,7 @@ import { polyfill } from 'react-lifecycles-compat';
 import TextInputOutlined from './TextInputOutlined';
 import TextInputFlat from './TextInputFlat';
 import { withTheme } from '../../core/theming';
-import type { Props } from './types';
+import type { Props, RenderProps } from './types';
 
 type TextInputProps = {|
   ...Props,
@@ -78,7 +78,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     error: false,
     multiline: false,
     editable: true,
-    render: props => <NativeTextInput {...props} />,
+    render: (props: RenderProps) => <NativeTextInput {...props} />,
   };
 
   render() {

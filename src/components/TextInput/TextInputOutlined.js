@@ -333,7 +333,7 @@ class TextInputOutlined extends React.Component<Props, State> {
         />
 
         {label ? (
-          // When mode == 'outlined', the input label stays on top of the outline
+          // The input label stays on top of the outline
           // The background of the label covers the outline so it looks cut off
           // To achieve the effect, we position the actual label with a background on top of it
           // We set the color of the text to transparent so only the background is visible

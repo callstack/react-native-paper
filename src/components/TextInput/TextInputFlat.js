@@ -325,7 +325,6 @@ class TextInputFlat extends React.Component<Props, State> {
 
     return (
       <View style={[containerStyle, style]}>
-        {/* When mode === 'flat', render an underline */}
         <Animated.View
           style={[
             styles.underline,
