@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import color from 'color';
 import Icon from '../Icon';
 import Text from '../Typography/Text';
@@ -34,7 +35,7 @@ type Props = React.ElementConfig<typeof TouchableWithoutFeedback> & {|
    * Function to execute on press.
    */
   onPress?: () => mixed,
-  style?: any,
+  style?: ViewStyleProp,
   /**
    * @optional
    */

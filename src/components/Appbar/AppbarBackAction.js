@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { View, Image, I18nManager, StyleSheet, Platform } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 import AppbarAction from './AppbarAction';
 
@@ -26,7 +27,7 @@ type Props = React.ElementConfig<typeof AppbarAction> & {|
    * Function to execute on press.
    */
   onPress?: () => mixed,
-  style?: any,
+  style?: ViewStyleProp,
 |};
 
 /**

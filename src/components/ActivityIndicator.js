@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { Animated, Easing, Platform, StyleSheet, View } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { withTheme } from '../core/theming';
 import type { Theme } from '../../types';
 
@@ -22,7 +23,7 @@ type Props = {|
    * Whether the indicator should hide when not animating.
    */
   hidesWhenStopped: boolean,
-  style?: any,
+  style?: ViewStyleProp,
   /**
    * @optional
    */

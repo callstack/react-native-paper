@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 import type { ImageSource } from 'react-native/Libraries/Image/ImageSource';
@@ -15,7 +16,7 @@ type Props = {
    * Size of the avatar.
    */
   size: number,
-  style?: any,
+  style?: ViewStyleProp,
   /**
    * @optional
    */

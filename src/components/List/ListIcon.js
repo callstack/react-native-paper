@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import Icon, { type IconSource } from '../Icon';
 
 type Props = {|
@@ -13,7 +14,7 @@ type Props = {|
    * Color for the icon.
    */
   color: string,
-  style?: any,
+  style?: ViewStyleProp,
 |};
 
 /**

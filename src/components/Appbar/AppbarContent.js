@@ -8,6 +8,10 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import color from 'color';
+import type {
+  TextStyleProp,
+  ViewStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 import Text from '../Typography/Text';
 
@@ -28,7 +32,7 @@ type Props = $RemoveChildren<typeof View> & {|
   /**
    * Style for the title.
    */
-  titleStyle?: any,
+  titleStyle?: TextStyleProp,
   /**
    * Text for the subtitle.
    */
@@ -36,12 +40,12 @@ type Props = $RemoveChildren<typeof View> & {|
   /**
    * Style for the subtitle.
    */
-  subtitleStyle?: any,
+  subtitleStyle?: TextStyleProp,
   /**
    * Function to execute on press.
    */
   onPress?: () => mixed,
-  style?: any,
+  style?: ViewStyleProp,
   /**
    * @optional
    */

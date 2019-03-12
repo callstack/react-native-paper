@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { TouchableWithoutFeedback, View, StyleSheet } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import color from 'color';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
@@ -44,7 +45,7 @@ type Props = React.ElementConfig<typeof TouchableWithoutFeedback> & {|
    * Content of the `TouchableRipple`.
    */
   children: React.Node,
-  style?: any,
+  style?: ViewStyleProp,
   /**
    * @optional
    */

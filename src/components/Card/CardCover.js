@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { StyleSheet, View, Image } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { withTheme } from '../../core/theming';
 import { grey200 } from '../../styles/colors';
 import type { Theme } from '../../types';
@@ -15,7 +16,7 @@ type Props = React.ElementConfig<typeof Image> & {|
    * @internal
    */
   total?: number,
-  style?: any,
+  style?: ViewStyleProp,
   /**
    * @optional
    */

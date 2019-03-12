@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple';
 import type { $RemoveChildren } from '../../types';
@@ -19,7 +20,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {|
    * Function to execute on press.
    */
   onPress?: () => mixed,
-  style?: any,
+  style?: ViewStyleProp,
 |};
 
 class DataTableCell extends React.Component<Props> {

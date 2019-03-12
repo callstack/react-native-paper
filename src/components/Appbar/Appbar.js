@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { View, Platform, StyleSheet } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import color from 'color';
 
 import AppbarContent from './AppbarContent';
@@ -26,7 +27,7 @@ type Props = React.ElementConfig<typeof View> & {|
    * @optional
    */
   theme: Theme,
-  style?: any,
+  style?: ViewStyleProp,
 |};
 
 export const DEFAULT_APPBAR_HEIGHT = 56;
@@ -137,7 +138,7 @@ class Appbar extends React.Component<Props> {
               return child;
             }
 
-            const props: { color: ?string, style?: any } = {
+            const props: { color: ?string, style?: ViewStyleProp } = {
               color:
                 typeof child.props.color !== 'undefined'
                   ? child.props.color

@@ -3,6 +3,7 @@
 import * as React from 'react';
 import color from 'color';
 import { StyleSheet, View } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
@@ -12,7 +13,7 @@ type Props = React.ElementConfig<typeof View> & {|
    * Content of the `DataTableHeader`.
    */
   children: React.Node,
-  style?: any,
+  style?: ViewStyleProp,
   /**
    * @optional
    */

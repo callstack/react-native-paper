@@ -3,6 +3,7 @@
 import color from 'color';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import Text from '../Typography/Text';
 import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple';
@@ -27,7 +28,7 @@ type Props = {
    * Function to execute on press.
    */
   onPress?: () => mixed,
-  style?: any,
+  style?: ViewStyleProp,
   /**
    * @optional
    */

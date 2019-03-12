@@ -8,6 +8,7 @@ import {
   StyleSheet,
   I18nManager,
 } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { polyfill } from 'react-lifecycles-compat';
 import color from 'color';
 import Text from './Typography/Text';
@@ -118,7 +119,7 @@ type Props = React.ElementConfig<typeof NativeTextInput> & {|
    * Value of the text input.
    */
   value?: string,
-  style?: any,
+  style?: ViewStyleProp,
   /**
    * @optional
    */

@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import color from 'color';
 import IconButton from '../IconButton';
 import Text from '../Typography/Text';
@@ -25,7 +26,7 @@ type Props = React.ElementConfig<typeof View> & {|
    * Function to execute on page change.
    */
   onPageChange: number => void,
-  style?: any,
+  style?: ViewStyleProp,
   /**
    * @optional
    */

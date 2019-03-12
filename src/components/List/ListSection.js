@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import ListSubheader from './ListSubheader';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
@@ -19,7 +20,7 @@ type Props = React.ElementConfig<typeof View> & {
    * @optional
    */
   theme: Theme,
-  style?: any,
+  style?: ViewStyleProp,
 };
 
 /**
