@@ -3,6 +3,10 @@
 import color from 'color';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
+import type {
+  ViewStyleProp,
+  TextStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet';
 import TouchableRipple from '../TouchableRipple';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
@@ -36,15 +40,15 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {|
   /**
    * Style that is passed to the wrapping TouchableRipple element.
    */
-  style?: any,
+  style?: ViewStyleProp,
   /**
    * Style that is passed to Title element.
    */
-  titleStyle?: any,
+  titleStyle?: TextStyleProp,
   /**
    * Style that is passed to Description element.
    */
-  descriptionStyle?: any,
+  descriptionStyle?: TextStyleProp,
 |};
 
 /**
