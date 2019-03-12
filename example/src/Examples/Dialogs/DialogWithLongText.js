@@ -15,7 +15,7 @@ const DialogWithLongText = ({
     <Dialog
       onDismiss={close}
       visible={visible}
-      style={{ maxHeight: 0.9 * Dimensions.get('window').height }}
+      style={{ maxHeight: 0.6 * Dimensions.get('window').height }}
     >
       <Dialog.Title>Alert</Dialog.Title>
       <Dialog.ScrollArea style={{ paddingHorizontal: 0 }}>
