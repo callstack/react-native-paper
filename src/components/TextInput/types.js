@@ -4,20 +4,20 @@ import * as React from 'react';
 import type { Theme } from '../../types';
 import { TextInput as NativeTextInput, Animated } from 'react-native';
 
-type RenderProps = {
+export type RenderProps = {
   ref: any => void,
-  onChangeText: string => void,
+  onChangeText: ?(string) => void,
   placeholder: ?string,
-  placeholderTextColor: string,
-  editable?: boolean,
-  selectionColor: string,
-  onFocus: () => mixed,
-  onBlur: () => mixed,
-  underlineColorAndroid: string,
+  placeholderTextColor: ?string,
+  editable: ?boolean,
+  selectionColor: ?string,
+  onFocus: ?() => mixed,
+  onBlur: ?() => mixed,
+  underlineColorAndroid: ?string,
   style: any,
-  multiline?: boolean,
-  numberOfLines?: number,
-  value?: string,
+  multiline: ?boolean,
+  numberOfLines: ?number,
+  value: ?string,
 };
 
 export type Props = {|

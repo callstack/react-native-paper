@@ -11,7 +11,7 @@ import {
 import { polyfill } from 'react-lifecycles-compat';
 import color from 'color';
 import Text from '../Typography/Text';
-import type { Props, State } from './types';
+import type { Props, State, RenderProps } from './types';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
@@ -30,10 +30,10 @@ class TextInputFlat extends React.Component<Props, State> {
     error: false,
     multiline: false,
     editable: true,
-    render: props => <NativeTextInput {...props} />,
+    render: (props: RenderProps) => <NativeTextInput {...props} />,
   };
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
     return {
       value:
         typeof nextProps.value !== 'undefined'
@@ -54,7 +54,7 @@ class TextInputFlat extends React.Component<Props, State> {
     },
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: Props, prevState: State) {
     if (
       prevState.focused !== this.state.focused ||
       prevState.value !== this.state.value ||
@@ -186,7 +186,7 @@ class TextInputFlat extends React.Component<Props, State> {
   /**
    * @internal
    */
-  setNativeProps(...args) {
+  setNativeProps(...args: any) {
     return this._root && this._root.setNativeProps(...args);
   }
 
@@ -401,35 +401,39 @@ class TextInputFlat extends React.Component<Props, State> {
           </View>
         ) : null}
 
-        {render({
-          ...rest,
-          ref: c => {
-            this._root = c;
-          },
-          onChangeText: this._handleChangeText,
-          placeholder: label ? this.state.placeholder : this.props.placeholder,
-          placeholderTextColor: placeholderColor,
-          editable: !disabled,
-          selectionColor:
-            typeof selectionColor === 'undefined'
-              ? activeColor
-              : selectionColor,
-          onFocus: this._handleFocus,
-          onBlur: this._handleBlur,
-          underlineColorAndroid: 'transparent',
-          multiline,
-          style: [
-            styles.input,
-            this.props.label
-              ? styles.inputFlatWithLabel
-              : styles.inputFlatWithoutLabel,
-            {
-              color: inputTextColor,
-              fontFamily,
-              textAlignVertical: multiline ? 'top' : 'center',
+        {render(
+          ({
+            ...rest,
+            ref: c => {
+              this._root = c;
             },
-          ],
-        })}
+            onChangeText: this._handleChangeText,
+            placeholder: label
+              ? this.state.placeholder
+              : this.props.placeholder,
+            placeholderTextColor: placeholderColor,
+            editable: !disabled,
+            selectionColor:
+              typeof selectionColor === 'undefined'
+                ? activeColor
+                : selectionColor,
+            onFocus: this._handleFocus,
+            onBlur: this._handleBlur,
+            underlineColorAndroid: 'transparent',
+            multiline,
+            style: [
+              styles.input,
+              this.props.label
+                ? styles.inputFlatWithLabel
+                : styles.inputFlatWithoutLabel,
+              {
+                color: inputTextColor,
+                fontFamily,
+                textAlignVertical: multiline ? 'top' : 'center',
+              },
+            ],
+          }: RenderProps)
+        )}
       </View>
     );
   }
