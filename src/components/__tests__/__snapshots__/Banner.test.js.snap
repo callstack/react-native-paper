@@ -6,7 +6,7 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
     Object {
       "backgroundColor": "#ffffff",
       "elevation": 1,
-      "shadowColor": "#000000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": Object {
         "height": 0,
         "width": 0,
@@ -87,7 +87,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
     Object {
       "backgroundColor": "#ffffff",
       "elevation": 1,
-      "shadowColor": "#000000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": Object {
         "height": 0,
         "width": 0,
@@ -179,7 +179,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
             "elevation": 0,
             "margin": 4,
             "minWidth": "auto",
-            "shadowColor": "#000000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": Object {
               "height": 0,
               "width": 0,
@@ -261,7 +261,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
     Object {
       "backgroundColor": "#ffffff",
       "elevation": 1,
-      "shadowColor": "#000000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": Object {
         "height": 0,
         "width": 0,
@@ -332,7 +332,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
             "elevation": 0,
             "margin": 4,
             "minWidth": "auto",
-            "shadowColor": "#000000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": Object {
               "height": 0,
               "width": 0,
@@ -414,7 +414,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
             "elevation": 0,
             "margin": 4,
             "minWidth": "auto",
-            "shadowColor": "#000000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": Object {
               "height": 0,
               "width": 0,
@@ -496,7 +496,7 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
     Object {
       "backgroundColor": "#ffffff",
       "elevation": 1,
-      "shadowColor": "#000000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": Object {
         "height": 0,
         "width": 0,
@@ -587,7 +587,7 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
     Object {
       "backgroundColor": "#ffffff",
       "elevation": 1,
-      "shadowColor": "#000000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": Object {
         "height": 0,
         "width": 0,
