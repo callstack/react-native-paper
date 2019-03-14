@@ -9,7 +9,7 @@ exports[`renders with placeholder 1`] = `
       "borderRadius": 4,
       "elevation": 4,
       "flexDirection": "row",
-      "shadowColor": "#000000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": Object {
         "height": 0,
         "width": 0,
@@ -222,7 +222,7 @@ exports[`renders with text 1`] = `
       "borderRadius": 4,
       "elevation": 4,
       "flexDirection": "row",
-      "shadowColor": "#000000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": Object {
         "height": 0,
         "width": 0,
