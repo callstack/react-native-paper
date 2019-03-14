@@ -18,7 +18,7 @@ exports[`renders colored progress bar 1`] = `
       style={
         Object {
           "backgroundColor": "red",
-          "height": 4,
+          "flex": 1,
           "transform": Array [
             Object {
               "translateX": -50,
@@ -53,7 +53,7 @@ exports[`renders hidden progress bar 1`] = `
       style={
         Object {
           "backgroundColor": "#6200ee",
-          "height": 4,
+          "flex": 1,
           "transform": Array [
             Object {
               "translateX": -50,
@@ -88,7 +88,7 @@ exports[`renders indeterminate progress bar 1`] = `
       style={
         Object {
           "backgroundColor": "#6200ee",
-          "height": 4,
+          "flex": 1,
           "transform": Array [
             Object {
               "translateX": -50,
@@ -123,7 +123,7 @@ exports[`renders progress bar with specific progress 1`] = `
       style={
         Object {
           "backgroundColor": "#6200ee",
-          "height": 4,
+          "flex": 1,
           "transform": Array [
             Object {
               "translateX": -50,
