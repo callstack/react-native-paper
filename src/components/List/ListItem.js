@@ -3,6 +3,10 @@
 import color from 'color';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
+import type {
+  ViewStyleProp,
+  TextStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet';
 import TouchableRipple from '../TouchableRipple';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
@@ -33,7 +37,18 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {|
    * @optional
    */
   theme: Theme,
-  style?: any,
+  /**
+   * Style that is passed to the wrapping TouchableRipple element.
+   */
+  style?: ViewStyleProp,
+  /**
+   * Style that is passed to Title element.
+   */
+  titleStyle?: TextStyleProp,
+  /**
+   * Style that is passed to Description element.
+   */
+  descriptionStyle?: TextStyleProp,
 |};
 
 /**
@@ -73,6 +88,8 @@ class ListItem extends React.Component<Props> {
       onPress,
       theme,
       style,
+      titleStyle,
+      descriptionStyle,
       ...rest
     } = this.props;
     const titleColor = color(theme.colors.text)
@@ -95,7 +112,7 @@ class ListItem extends React.Component<Props> {
           <View style={[styles.item, styles.content]} pointerEvents="none">
             <Text
               numberOfLines={1}
-              style={[styles.title, { color: titleColor }]}
+              style={[styles.title, { color: titleColor }, titleStyle]}
             >
               {title}
             </Text>
@@ -107,6 +124,7 @@ class ListItem extends React.Component<Props> {
                   {
                     color: descriptionColor,
                   },
+                  descriptionStyle,
                 ]}
               >
                 {description}
