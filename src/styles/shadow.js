@@ -4,15 +4,23 @@ import * as Colors from './colors';
 import { Animated } from 'react-native';
 
 function getRadius(elevation: ?number) {
-  const mapping = {
-    1: 0.75,
-    2: 1.5,
-  };
+  let radius = 0
 
-  return mapping[elevation] || elevation;
+  switch (elevation) {
+    case 1:
+      radius = 0.75;
+      break;
+    case 2:
+      radius = 1.5;
+      break;
+    default:
+      radius = elevation;
+  }
+
+  return radius
 }
 
-export default function shadow(elevation: number | Animated.Value) {
+export default function shadow(elevation: ?number | Animated.Value) {
   const animatedElevation: Animated.Value =
     elevation instanceof Animated.Value
       ? elevation
