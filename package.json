@@ -33,7 +33,6 @@
   ],
   "scripts": {
     "flow": "flow",
-    "typescript": "node ./scripts/generate-ts-tests.js && tsc --noEmit --skipLibCheck --jsx react ./__ts-tests__/*",
     "lint": "eslint .",
     "test": "jest",
     "prepare": "node ./scripts/generate-mappings",
@@ -100,7 +99,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "yarn lint && yarn flow check && yarn typescript && yarn test"
+      "pre-commit": "yarn lint && yarn flow check && yarn test"
     }
   },
   "jest": {

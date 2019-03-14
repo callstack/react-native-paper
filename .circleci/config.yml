@@ -100,9 +100,6 @@ workflows:
       - lint-and-flow:
           requires:
             - install-dependencies
-      - typescript:
-          requires:
-            - install-dependencies
       - unit-tests:
           requires:
             - install-dependencies
