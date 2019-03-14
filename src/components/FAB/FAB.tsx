@@ -103,6 +103,7 @@ class FAB extends React.Component<Props, State> {
 
   static defaultProps = {
     visible: true,
+    iconSize: 24,
   };
 
   state = {
@@ -133,6 +134,7 @@ class FAB extends React.Component<Props, State> {
     const {
       small,
       icon,
+      iconSize,
       label,
       accessibilityLabel = label,
       color: customColor,
@@ -215,7 +217,7 @@ class FAB extends React.Component<Props, State> {
             pointerEvents="none"
           >
             {icon && loading !== true ? (
-              <CrossFadeIcon source={icon} size={24} color={foregroundColor} />
+              <CrossFadeIcon source={icon} size={iconSize} color={foregroundColor} />
             ) : null}
             {loading && label ? (
               <ActivityIndicator size={18} color={foregroundColor} />
