@@ -100,7 +100,7 @@ class AppbarHeader extends React.Component<Props> {
     const {
       height = DEFAULT_APPBAR_HEIGHT,
       elevation = 4,
-      zIndex = 0,
+      zIndex = 1,
       backgroundColor = colors.primary,
       ...restStyle
     } = StyleSheet.flatten(style) || {};
