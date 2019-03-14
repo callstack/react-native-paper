@@ -75,6 +75,15 @@ class ProgressBarExample extends React.Component<Props, State> {
             style={{ backgroundColor: Colors.teal500 }}
           />
         </View>
+
+        <View style={styles.row}>
+          <Paragraph>ProgressBar with custom height</Paragraph>
+          <ProgressBar
+            progress={this.state.progress}
+            visible={this.state.visible}
+            style={{ height: 20 }}
+          />
+        </View>
       </View>
     );
   }

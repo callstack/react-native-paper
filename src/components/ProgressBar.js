@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
   },
 
   progressBar: {
-    height: 4,
+    flex: 1,
   },
 });
 
