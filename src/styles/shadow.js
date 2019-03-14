@@ -4,7 +4,7 @@ import * as Colors from './colors';
 import { Animated } from 'react-native';
 
 function getRadius(elevation: ?number) {
-  let radius = 0
+  let radius = 0;
 
   switch (elevation) {
     case 1:
@@ -17,7 +17,7 @@ function getRadius(elevation: ?number) {
       radius = elevation;
   }
 
-  return radius
+  return radius;
 }
 
 export default function shadow(elevation: ?number | Animated.Value) {
