@@ -145,7 +145,7 @@ exports[`renders snackbar with action button 1`] = `
           "borderColor": "transparent",
           "borderRadius": 4,
           "borderStyle": "solid",
-          "borderWidth": 0,
+          "borderWidth": 0.5,
           "elevation": 0,
           "marginHorizontal": 8,
           "marginVertical": 6,
