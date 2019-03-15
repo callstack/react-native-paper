@@ -67,7 +67,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         "right": 0,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": Object {
-          "height": 0,
+          "height": 7,
           "width": 0,
         },
         "shadowOpacity": 0.24,
@@ -737,7 +737,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         "right": 0,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": Object {
-          "height": 0,
+          "height": 7,
           "width": 0,
         },
         "shadowOpacity": 0.24,
@@ -1427,7 +1427,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         "right": 0,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": Object {
-          "height": 0,
+          "height": 7,
           "width": 0,
         },
         "shadowOpacity": 0.24,
@@ -2037,7 +2037,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         "right": 0,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": Object {
-          "height": 0,
+          "height": 7,
           "width": 0,
         },
         "shadowOpacity": 0.24,
@@ -2917,7 +2917,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         "right": 0,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": Object {
-          "height": 0,
+          "height": 7,
           "width": 0,
         },
         "shadowOpacity": 0.24,
@@ -3803,7 +3803,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         "right": 0,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": Object {
-          "height": 0,
+          "height": 7,
           "width": 0,
         },
         "shadowOpacity": 0.24,
@@ -4610,7 +4610,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
         "right": 0,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": Object {
-          "height": 0,
+          "height": 7,
           "width": 0,
         },
         "shadowOpacity": 0.24,
@@ -5496,7 +5496,7 @@ exports[`renders shifting bottom navigation 1`] = `
         "right": 0,
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": Object {
-          "height": 0,
+          "height": 7,
           "width": 0,
         },
         "shadowOpacity": 0.24,
