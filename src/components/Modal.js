@@ -53,7 +53,7 @@ type State = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Modal, Portal, Text } from 'react-native-paper';
+ * import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
@@ -70,6 +70,12 @@ type State = {
  *         <Modal visible={visible} onDismiss={this._hideModal}>
  *           <Text>Example Modal</Text>
  *         </Modal>
+ *         <Button
+ *           style={{ marginTop: 30 }}
+ *           onPress={() => this.setState({ visible: true })}
+ *         >
+ *           Show
+ *         </Button>
  *       </Portal>
  *     );
  *   }
