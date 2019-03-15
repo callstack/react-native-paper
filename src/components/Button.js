@@ -157,7 +157,7 @@ class Button extends React.Component<Props, State> {
     const { colors, roundness } = theme;
     const fontFamily = theme.fonts.medium;
 
-    let backgroundColor, borderColor, textColor, borderWidth;
+    let backgroundColor, borderColor, textColor;
 
     if (mode === 'contained') {
       if (disabled) {
@@ -179,10 +179,8 @@ class Button extends React.Component<Props, State> {
         .alpha(0.29)
         .rgb()
         .string();
-      borderWidth = StyleSheet.hairlineWidth;
     } else {
       borderColor = 'transparent';
-      borderWidth = 0;
     }
 
     if (disabled) {
@@ -216,7 +214,6 @@ class Button extends React.Component<Props, State> {
     const buttonStyle = {
       backgroundColor,
       borderColor,
-      borderWidth,
       borderRadius: roundness,
     };
     const touchableStyle = { borderRadius: roundness };
@@ -290,6 +287,7 @@ const styles = StyleSheet.create({
   button: {
     minWidth: 64,
     borderStyle: 'solid',
+    borderWidth: StyleSheet.hairlineWidth,
   },
   compact: {
     minWidth: 'auto',
