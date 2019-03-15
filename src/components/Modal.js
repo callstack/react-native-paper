@@ -72,7 +72,7 @@ type State = {
  *         </Modal>
  *         <Button
  *           style={{ marginTop: 30 }}
- *           onPress={() => this.setState({ visible: true })}
+ *           onPress={this._showModal}
  *         >
  *           Show
  *         </Button>
