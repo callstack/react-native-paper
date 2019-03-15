@@ -11,9 +11,9 @@ type Shadow = {
   },
   shadowOpacity: Animated.Value,
   shadowRadius: Animated.Interpolation,
-}
+};
 
-export default function shadow(elevation: ?number | Animated.Value):Shadow {
+export default function shadow(elevation: ?number | Animated.Value): Shadow {
   const animatedElevation: Animated.Value =
     elevation instanceof Animated.Value
       ? elevation
