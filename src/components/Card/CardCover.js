@@ -21,6 +21,10 @@ type Props = React.ElementConfig<typeof Image> & {|
    * @optional
    */
   theme: Theme,
+  /**
+   * @optional
+   */
+  fastImage: boolean,
 |};
 
 /**
