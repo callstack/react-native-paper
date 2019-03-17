@@ -4,6 +4,7 @@ import * as React from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 import { withTheme } from '../../core/theming';
 import { grey200 } from '../../styles/colors';
+import FastImage from 'react-native-fast-image';
 import type { Theme } from '../../types';
 
 type Props = React.ElementConfig<typeof Image> & {|
@@ -40,12 +41,29 @@ type Props = React.ElementConfig<typeof Image> & {|
  * ```
  *
  * @extends Image props https://facebook.github.io/react-native/docs/image.html#props
+ *
+ * ## Usage with FastImage library
+ * Make sure that you have ```react-native-fast-image``` library installed and linked
+ * https://github.com/DylanVann/react-native-fast-image#usage
+ *
+ * ```js
+ * import * as React from 'react';
+ * import { Card } from 'react-native-paper';
+ *
+ * const MyComponent = () => (
+ *   <Card>
+ *     <Card.Cover fastImage source={{ uri: 'https://picsum.photos/700' }} />
+ *   </Card>
+ * );
+ *
+ * export default MyComponent;
+ * ```
  */
 class CardCover extends React.Component<Props> {
   static displayName = 'Card.Cover';
 
   render() {
-    const { index, total, style, theme, ...rest } = this.props;
+    const { index, total, style, theme, fastImage, ...rest } = this.props;
     const { roundness } = theme;
 
     let coverStyle;
@@ -66,12 +84,21 @@ class CardCover extends React.Component<Props> {
         borderBottomLeftRadius: roundness,
       };
     }
-
-    return (
-      <View style={[styles.container, coverStyle, style]}>
-        <Image {...rest} style={[styles.image, coverStyle]} />
-      </View>
-    );
+    if (fastImage) {
+      console.log('FASTIMAGE');
+      return (
+        <View style={[styles.container, coverStyle, style]}>
+          <FastImage {...rest} style={[styles.fastImage, coverStyle]} />
+        </View>
+      );
+    } else {
+      console.log('IMAGE');
+      return (
+        <View style={[styles.container, coverStyle, style]}>
+          <Image {...rest} style={[styles.image, coverStyle]} />
+        </View>
+      );
+    }
   }
 }
 
@@ -88,6 +115,13 @@ const styles = StyleSheet.create({
     padding: 16,
     justifyContent: 'flex-end',
     resizeMode: 'cover',
+  },
+  fastImage: {
+    flex: 1,
+    height: null,
+    width: null,
+    padding: 16,
+    justifyContent: 'flex-end',
   },
 });
 
