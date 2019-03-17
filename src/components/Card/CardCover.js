@@ -85,14 +85,12 @@ class CardCover extends React.Component<Props> {
       };
     }
     if (fastImage) {
-      console.log('FASTIMAGE');
       return (
         <View style={[styles.container, coverStyle, style]}>
           <FastImage {...rest} style={[styles.fastImage, coverStyle]} />
         </View>
       );
     } else {
-      console.log('IMAGE');
       return (
         <View style={[styles.container, coverStyle, style]}>
           <Image {...rest} style={[styles.image, coverStyle]} />
