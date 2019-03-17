@@ -7,25 +7,26 @@ import { grey200 } from '../../styles/colors';
 import FastImage from 'react-native-fast-image';
 import type { Theme } from '../../types';
 
-type Props = React.ElementConfig<typeof Image> & {|
-  /**
-   * @internal
-   */
-  index?: number,
-  /**
-   * @internal
-   */
-  total?: number,
-  style?: any,
-  /**
-   * @optional
-   */
-  theme: Theme,
-  /**
-   * @optional
-   */
-  fastImage: boolean,
-|};
+type Props = React.ElementConfig<typeof Image> &
+  React.ElementConfig<typeof FastImage> & {|
+    /**
+     * @internal
+     */
+    index?: number,
+    /**
+     * @internal
+     */
+    total?: number,
+    style?: any,
+    /**
+     * @optional
+     */
+    theme: Theme,
+    /**
+     * @optional
+     */
+    fastImage: boolean,
+  |};
 
 /**
  * A component to show a cover image inside a Card.
