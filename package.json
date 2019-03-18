@@ -33,7 +33,8 @@
   ],
   "scripts": {
     "flow": "flow",
-    "typescript": "node ./scripts/generate-ts-tests.js && tsc --noEmit --skipLibCheck --jsx react ./__ts-tests__/*",
+    "typescript": "tsc --noEmit --skipLibCheck --jsx react ./__ts-tests__/*",
+    "typescript:generate": "node ./scripts/generate-ts-tests.js",
     "lint": "eslint .",
     "test": "jest",
     "prepare": "node ./scripts/generate-mappings",
