@@ -18,6 +18,7 @@ export type RenderProps = {
   multiline: ?boolean,
   numberOfLines: ?number,
   value: ?string,
+  forwardRef: React.forwardRef,
 };
 
 export type Props = {|
