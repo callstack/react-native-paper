@@ -82,7 +82,7 @@ class TextInput extends React.Component<TextInputProps, State> {
   };
 
   render() {
-    const {forwardRef,mode, ...rest } = this.props;
+    const { forwardRef, mode, ...rest } = this.props;
 
     return mode === 'outlined' ? (
       <TextInputOutlined ref={forwardRef} {...rest} />
@@ -95,6 +95,6 @@ class TextInput extends React.Component<TextInputProps, State> {
 polyfill(TextInput);
 
 TextInput = withTheme(TextInput);
-export default React.forwardRef((props, ref) => {
-  return <TextInput {...props} forwardRef={ref} />;
-});
+export default React.forwardRef((props, ref) => (
+  <TextInput {...props} forwardRef={ref} />
+));
