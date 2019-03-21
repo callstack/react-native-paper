@@ -23,6 +23,9 @@ export type Theme = {
     light: string,
     thin: string,
   },
+  animation: {
+    scale: number,
+  },
 };
 
 export type ThemeShape = $Shape<{

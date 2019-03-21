@@ -122,20 +122,32 @@ class Modal extends React.Component<Props, State> {
   };
 
   _showModal = () => {
+    const {
+      theme: {
+        animation: { scale },
+      },
+    } = this.props;
+
     BackHandler.removeEventListener('hardwareBackPress', this._handleBack);
     BackHandler.addEventListener('hardwareBackPress', this._handleBack);
     Animated.timing(this.state.opacity, {
       toValue: 1,
-      duration: 280,
+      duration: scale * 280,
       easing: Easing.ease,
     }).start();
   };
 
   _hideModal = () => {
+    const {
+      theme: {
+        animation: { scale },
+      },
+    } = this.props;
+
     BackHandler.removeEventListener('hardwareBackPress', this._handleBack);
     Animated.timing(this.state.opacity, {
       toValue: 0,
-      duration: 280,
+      duration: scale * 280,
       easing: Easing.ease,
     }).start(({ finished }) => {
       if (!finished) {

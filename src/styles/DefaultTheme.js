@@ -29,4 +29,7 @@ export default {
     notification: pinkA400,
   },
   fonts,
+  animation: {
+    scale: 1.0,
+  },
 };
