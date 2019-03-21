@@ -33,6 +33,7 @@ export { default as Divider } from './components/Divider';
 export { default as FAB } from './components/FAB/FAB';
 export { default as HelperText } from './components/HelperText';
 export { default as IconButton } from './components/IconButton';
+export { default as Menu } from './components/Menu/Menu';
 export { default as Modal } from './components/Modal';
 export { default as Portal } from './components/Portal/Portal';
 export { default as ProgressBar } from './components/ProgressBar/ProgressBar';
@@ -43,7 +44,7 @@ export { default as Surface } from './components/Surface';
 export { default as Switch } from './components/Switch';
 export { default as Appbar } from './components/Appbar/Appbar';
 export { default as TouchableRipple } from './components/TouchableRipple';
-export { default as TextInput } from './components/TextInput';
+export { default as TextInput } from './components/TextInput/TextInput';
 export {
   default as ToggleButton,
 } from './components/ToggleButton/ToggleButton';

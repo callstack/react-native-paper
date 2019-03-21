@@ -21,6 +21,7 @@ import FABExample from './Examples/FABExample';
 import IconButtonExample from './Examples/IconButtonExample';
 import ListAccordionExample from './Examples/ListAccordionExample';
 import ListSectionExample from './Examples/ListSectionExample';
+import MenuExample from './Examples/MenuExample';
 import ProgressBarExample from './Examples/ProgressBarExample';
 import RadioButtonExample from './Examples/RadioButtonExample';
 import RadioButtonGroupExample from './Examples/RadioButtonGroupExample';
@@ -56,6 +57,7 @@ export const examples = {
   iconButton: IconButtonExample,
   listAccordion: ListAccordionExample,
   listSection: ListSectionExample,
+  menu: MenuExample,
   progressbar: ProgressBarExample,
   radio: RadioButtonExample,
   radioGroup: RadioButtonGroupExample,

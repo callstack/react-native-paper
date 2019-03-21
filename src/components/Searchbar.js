@@ -40,6 +40,10 @@ type Props = React.ElementConfig<typeof TextInput> & {|
    * @optional
    */
   theme: Theme,
+  /**
+   * Custom color for icon, default will be derived from theme
+   */
+  iconColor?: string,
 |};
 
 /**
@@ -123,18 +127,21 @@ class Searchbar extends React.Component<Props> {
       value,
       theme,
       style,
+      iconColor: customIconColor,
       inputStyle,
       ...rest
     } = this.props;
     const { colors, roundness, dark, fonts } = theme;
     const textColor = colors.text;
     const fontFamily = fonts.regular;
-    const iconColor = dark
-      ? textColor
-      : color(textColor)
-          .alpha(0.54)
-          .rgb()
-          .string();
+    const iconColor =
+      customIconColor ||
+      (dark
+        ? textColor
+        : color(textColor)
+            .alpha(0.54)
+            .rgb()
+            .string());
     const rippleColor = color(textColor)
       .alpha(0.32)
       .rgb()

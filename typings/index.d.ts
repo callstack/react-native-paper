@@ -20,6 +20,7 @@ export * from './components/Divider';
 export * from './components/FAB';
 export * from './components/HelperText';
 export * from './components/IconButton';
+export * from './components/Menu'
 export * from './components/Modal';
 export * from './components/Portal';
 export * from './components/ProgressBar';

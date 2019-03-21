@@ -38,9 +38,13 @@ type Props = React.ElementConfig<typeof Surface> & {|
    */
   avatar?: React.Node,
   /**
-   * Whether to style the chip as selected.
+   * Whether chip is selected.
    */
   selected?: boolean,
+  /**
+   * Whether to style the chip color as selected.
+   */
+  selectedColor?: string,
   /**
    * Whether the chip is disabled. A disabled chip is greyed out and `onPress` is not called on touch.
    */
@@ -137,6 +141,7 @@ class Chip extends React.Component<Props, State> {
       style,
       theme,
       testID,
+      selectedColor,
       ...rest
     } = this.props;
     const { dark, colors } = theme;
@@ -151,20 +156,24 @@ class Chip extends React.Component<Props, State> {
 
     const borderColor =
       mode === 'outlined'
-        ? color(dark ? white : black)
+        ? color(
+            selectedColor !== undefined
+              ? selectedColor
+              : color(dark ? white : black)
+          )
             .alpha(0.29)
             .rgb()
             .string()
         : backgroundColor;
     const textColor = disabled
       ? colors.disabled
-      : color(colors.text)
+      : color(selectedColor !== undefined ? selectedColor : colors.text)
           .alpha(0.87)
           .rgb()
           .string();
     const iconColor = disabled
       ? colors.disabled
-      : color(colors.text)
+      : color(selectedColor !== undefined ? selectedColor : colors.text)
           .alpha(0.54)
           .rgb()
           .string();
@@ -174,6 +183,13 @@ class Chip extends React.Component<Props, State> {
     )
       .rgb()
       .string();
+
+    const underlayColor = selectedColor
+      ? color(selectedColor)
+          .fade(0.5)
+          .rgb()
+          .string()
+      : selectedBackgroundColor;
 
     const accessibilityTraits = ['button'];
     const accessibilityStates = [];
@@ -210,7 +226,7 @@ class Chip extends React.Component<Props, State> {
           onPress={onPress}
           onPressIn={this._handlePressIn}
           onPressOut={this._handlePressOut}
-          underlayColor={selectedBackgroundColor}
+          underlayColor={underlayColor}
           disabled={disabled}
           accessibilityLabel={accessibilityLabel}
           accessibilityTraits={accessibilityTraits}

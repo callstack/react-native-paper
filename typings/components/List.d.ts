@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { StyleProp, ViewStyle, ViewProps, TextProps, TextStyle } from 'react-native';
+import {
+  StyleProp,
+  ViewStyle,
+  ViewProps,
+  TextProps,
+  TextStyle,
+} from 'react-native';
 import { ThemeShape, IconSource } from '../types';
 import { TouchableRipplePropsWithoutChildren } from './TouchableRipple';
 
@@ -29,6 +35,8 @@ export interface ItemProps extends TouchableRipplePropsWithoutChildren {
   description?: React.ReactNode;
   left?: (props: { color: string }) => React.ReactNode;
   right?: (props: { color: string }) => React.ReactNode;
+  titleStyle?: StyleProp<TextStyle>;
+  descriptionStyle?: StyleProp<TextStyle>;
 }
 
 export declare class Item extends React.Component<ItemProps> {}
@@ -43,7 +51,7 @@ export declare class Section extends React.Component<SectionProps> {}
 
 export interface SubheaderProps extends TextProps {
   style?: StyleProp<TextStyle>;
-  theme?: ThemeShape
+  theme?: ThemeShape;
 }
 
 export declare class Subheader extends React.Component<SubheaderProps> {}
