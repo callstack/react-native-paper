@@ -121,7 +121,7 @@ class ListItem extends React.Component<Props> {
           {left ? left({ color: descriptionColor }) : null}
           <View style={[styles.item, styles.content]} pointerEvents="none">
             <Text
-              ellipsizeMode = {titleEllipsizeMode}
+              ellipsizeMode={titleEllipsizeMode}
               numberOfLines={1}
               style={[styles.title, { color: titleColor }, titleStyle]}
             >
@@ -129,7 +129,7 @@ class ListItem extends React.Component<Props> {
             </Text>
             {description ? (
               <Text
-                ellipsizeMode = {descriptionEllipsizeMode}
+                ellipsizeMode={descriptionEllipsizeMode}
                 numberOfLines={2}
                 style={[
                   styles.description,
