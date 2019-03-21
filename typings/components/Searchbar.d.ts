@@ -12,6 +12,6 @@ export interface SearchbarProps extends TextInputProps {
 export declare class Searchbar extends React.Component<SearchbarProps> {
   isFocused: () => boolean;
   clear: () => void;
-  focus(): void;
-  blur(): void;
+  focus: () => void;
+  blur: () => void;
 }
