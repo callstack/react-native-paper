@@ -37,6 +37,8 @@ export interface ItemProps extends TouchableRipplePropsWithoutChildren {
   right?: (props: { color: string }) => React.ReactNode;
   titleStyle?: StyleProp<TextStyle>;
   descriptionStyle?: StyleProp<TextStyle>;
+  titleEllipsizeMode?: 'head' | 'middle' | 'tail' | 'clip';
+  descriptionEllipsizeMode?: 'head' | 'middle' | 'tail' | 'clip';
 }
 
 export declare class Item extends React.Component<ItemProps> {}
