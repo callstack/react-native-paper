@@ -49,6 +49,14 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {|
    * Style that is passed to Description element.
    */
   descriptionStyle?: TextStyleProp,
+  /**
+   * Ellipsize Mode for the Title
+   */
+  titleEllipsizeMode?: 'head' | 'middle' | 'tail' | 'clip',
+  /**
+   * Ellipsize Mode for the Description
+   */
+  descriptionEllipsizeMode?: 'head' | 'middle' | 'tail' | 'clip',
 |};
 
 /**
@@ -90,6 +98,8 @@ class ListItem extends React.Component<Props> {
       style,
       titleStyle,
       descriptionStyle,
+      titleEllipsizeMode,
+      descriptionEllipsizeMode,
       ...rest
     } = this.props;
     const titleColor = color(theme.colors.text)
@@ -111,6 +121,7 @@ class ListItem extends React.Component<Props> {
           {left ? left({ color: descriptionColor }) : null}
           <View style={[styles.item, styles.content]} pointerEvents="none">
             <Text
+              ellipsizeMode={titleEllipsizeMode}
               numberOfLines={1}
               style={[styles.title, { color: titleColor }, titleStyle]}
             >
@@ -118,6 +129,7 @@ class ListItem extends React.Component<Props> {
             </Text>
             {description ? (
               <Text
+                ellipsizeMode={descriptionEllipsizeMode}
                 numberOfLines={2}
                 style={[
                   styles.description,
