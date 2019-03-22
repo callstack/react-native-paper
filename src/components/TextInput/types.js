@@ -61,11 +61,11 @@ export type Props = {|
   /**
    * Callback that is called when the text input is focused.
    */
-  onFocus?: () => mixed,
+  onFocus?: (args: any) => mixed,
   /**
    * Callback that is called when the text input is blurred.
    */
-  onBlur?: () => mixed,
+  onBlur?: (args: any) => mixed,
   /**
    *
    * Callback to render a custom input component such as `react-native-text-input-mask`
@@ -107,3 +107,13 @@ export type State = {
     width: number,
   },
 };
+
+export type ChildTextInputProps = {|
+  ...Props,
+  parentState: State,
+  innerRef: (ref: ?NativeTextInput) => void,
+  handleFocus: (args: any) => void,
+  handleBlur: (args: any) => void,
+  handleChangeText: (value: string) => void,
+  onLayoutAnimatedText: (e: any) => void,
+|};
