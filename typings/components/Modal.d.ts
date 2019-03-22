@@ -7,6 +7,7 @@ export interface ModalProps {
   visible: boolean;
   children: React.ReactNode;
   theme?: ThemeShape;
+  useNativeDriver?: boolean;
 }
 
 export declare class Modal extends React.Component<ModalProps> {}
