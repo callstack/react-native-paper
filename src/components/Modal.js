@@ -39,10 +39,6 @@ type Props = {|
    * @optional
    */
   theme: Theme,
-  /**
-   * Animate using native driver.
-   */
-  useNativeDriver?: boolean,
 |};
 
 type State = {
@@ -91,7 +87,6 @@ class Modal extends React.Component<Props, State> {
   static defaultProps = {
     dismissable: true,
     visible: false,
-    useNativeDriver: false,
   };
 
   static getDerivedStateFromProps(nextProps: Props, prevState: State) {
@@ -133,7 +128,7 @@ class Modal extends React.Component<Props, State> {
       toValue: 1,
       duration: 280,
       easing: Easing.ease,
-      useNativeDriver: this.props.useNativeDriver,
+      useNativeDriver: true,
     }).start();
   };
 
@@ -143,7 +138,7 @@ class Modal extends React.Component<Props, State> {
       toValue: 0,
       duration: 280,
       easing: Easing.ease,
-      useNativeDriver: this.props.useNativeDriver,
+      useNativeDriver: true,
     }).start(({ finished }) => {
       if (!finished) {
         return;
