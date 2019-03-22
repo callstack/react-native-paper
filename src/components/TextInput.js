@@ -10,11 +10,13 @@ import {
 } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
 import color from 'color';
-import Text from '../Typography/Text';
-import type { Props, State, RenderProps } from './types';
+import Text from './Typography/Text';
+import { withTheme } from './../core/theming';
+import type { Theme } from '../types';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
+const MINIMIZED_LABEL_Y_OFFSET = -12;
 const OUTLINE_MINIMIZED_LABEL_Y_OFFSET = -29;
 const MAXIMIZED_LABEL_FONT_SIZE = 16;
 const MINIMIZED_LABEL_FONT_SIZE = 12;
@@ -24,16 +26,130 @@ const BLUR_ANIMATION_DURATION = 180;
 const LABEL_PADDING_HORIZONTAL = 12;
 const RANDOM_VALUE_TO_CENTER_LABEL = 4; // Don't know why 4, but it works
 
-class TextInputOutlined extends React.Component<Props, State> {
+export type RenderProps = {
+  ref: any => void,
+  onChangeText: ?(string) => void,
+  placeholder: ?string,
+  placeholderTextColor: ?string,
+  editable: ?boolean,
+  selectionColor: ?string,
+  onFocus: ?() => mixed,
+  onBlur: ?() => mixed,
+  underlineColorAndroid: ?string,
+  style: any,
+  multiline: ?boolean,
+  numberOfLines: ?number,
+  value: ?string,
+};
+
+export type Props = {|
+  ...React.ElementConfig<typeof NativeTextInput>,
+  /**
+   * Mode of the TextInput.
+   * - `flat` - flat input with an underline.
+   * - `outlined` - input with an outline.
+   *
+   * In `outlined` mode, the background color of the label is derived from `colors.background` in theme or the `backgroundColor` style.
+   * This component render TextInputOutlined or TextInputFlat based on that props
+   */
+  mode?: 'flat' | 'outlined',
+  /**
+   * If true, user won't be able to interact with the component.
+   */
+  disabled?: boolean,
+  /**
+   * The text to use for the floating label.
+   */
+  label?: string,
+  /**
+   * Placeholder for the input.
+   */
+  placeholder?: string,
+  /**
+   * Whether to style the TextInput with error style.
+   */
+  error?: boolean,
+  /**
+   * Callback that is called when the text input's text changes. Changed text is passed as an argument to the callback handler.
+   */
+  onChangeText?: Function,
+  /**
+   * Selection color of the input
+   */
+  selectionColor?: string,
+  /**
+   * Underline color of the input.
+   */
+  underlineColor?: string,
+  /**
+   * Whether the input can have multiple lines.
+   */
+  multiline?: boolean,
+  /**
+   * The number of lines to show in the input (Android only).
+   */
+  numberOfLines?: number,
+  /**
+   * Callback that is called when the text input is focused.
+   */
+  onFocus?: () => mixed,
+  /**
+   * Callback that is called when the text input is blurred.
+   */
+  onBlur?: () => mixed,
+  /**
+   *
+   * Callback to render a custom input component such as `react-native-text-input-mask`
+   * instead of the default `TextInput` component from `react-native`.
+   *
+   * Example:
+   * ```js
+   * <TextInput
+   *   label="Phone number"
+   *   render={props =>
+   *     <TextInputMask
+   *       {...props}
+   *       mask="+[00] [000] [000] [000]"
+   *     />
+   *   }
+   * />
+   * ```
+   */
+  render: (props: RenderProps) => React.Node,
+  /**
+   * Value of the text input.
+   */
+  value?: string,
+  style?: any,
+  /**
+   * @optional
+   */
+  theme: Theme,
+|};
+
+type State = {
+  labeled: Animated.Value,
+  error: Animated.Value,
+  focused: boolean,
+  placeholder: ?string,
+  value: ?string,
+  labelLayout: {
+    measured: boolean,
+    width: number,
+  },
+};
+
+class TextInput extends React.Component<Props, State> {
   static defaultProps = {
+    mode: 'flat',
     disabled: false,
     error: false,
     multiline: false,
     editable: true,
-    render: (props: RenderProps) => <NativeTextInput {...props} />,
+    render: props => <NativeTextInput {...props} />,
   };
 
-  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
+  static getDerivedStateFromProps(nextProps, prevState) {
     return {
       value:
         typeof nextProps.value !== 'undefined'
@@ -54,7 +170,7 @@ class TextInputOutlined extends React.Component<Props, State> {
     },
   };
 
-  componentDidUpdate(prevProps: Props, prevState: State) {
+  componentDidUpdate(prevProps, prevState) {
     if (
       prevState.focused !== this.state.focused ||
       prevState.value !== this.state.value ||
@@ -186,7 +302,7 @@ class TextInputOutlined extends React.Component<Props, State> {
   /**
    * @internal
    */
-  setNativeProps(...args: any) {
+  setNativeProps(...args) {
     return this._root && this._root.setNativeProps(...args);
   }
 
@@ -218,7 +334,7 @@ class TextInputOutlined extends React.Component<Props, State> {
     return this._root && this._root.blur();
   }
 
-  render() {
+  renderOutlined() {
     const {
       disabled,
       label,
@@ -462,11 +578,236 @@ class TextInputOutlined extends React.Component<Props, State> {
       </View>
     );
   }
+
+  renderFlat() {
+    const {
+      disabled,
+      label,
+      error,
+      selectionColor,
+      underlineColor,
+      style,
+      theme,
+      render,
+      multiline,
+      ...rest
+    } = this.props;
+
+    const { colors, fonts } = theme;
+    const fontFamily = fonts.regular;
+    const hasActiveOutline = this.state.focused || error;
+
+    let inputTextColor, activeColor, underlineColorCustom, placeholderColor;
+
+    if (disabled) {
+      inputTextColor = activeColor = color(colors.text)
+        .alpha(0.54)
+        .rgb()
+        .string();
+      placeholderColor = colors.disabled;
+      underlineColorCustom = 'transparent';
+    } else {
+      inputTextColor = colors.text;
+      activeColor = error ? colors.error : colors.primary;
+      placeholderColor = colors.placeholder;
+      underlineColorCustom = underlineColor || colors.disabled;
+    }
+
+    const containerStyle = {
+      backgroundColor: theme.dark
+        ? color(colors.background)
+            .lighten(0.24)
+            .rgb()
+            .string()
+        : color(colors.background)
+            .darken(0.06)
+            .rgb()
+            .string(),
+      borderTopLeftRadius: theme.roundness,
+      borderTopRightRadius: theme.roundness,
+    };
+
+    const labelHalfWidth = this.state.labelLayout.width / 2;
+    const baseLabelTranslateX =
+      (I18nManager.isRTL ? 1 : -1) *
+      (1 - MINIMIZED_LABEL_FONT_SIZE / MAXIMIZED_LABEL_FONT_SIZE) *
+      labelHalfWidth;
+
+    const labelStyle = {
+      fontFamily,
+      fontSize: MAXIMIZED_LABEL_FONT_SIZE,
+      transform: [
+        {
+          // Wiggle the label when there's an error
+          translateX: this.state.error.interpolate({
+            inputRange: [0, 0.5, 1],
+            outputRange: [
+              0,
+              this.state.value && error ? LABEL_WIGGLE_X_OFFSET : 0,
+              0,
+            ],
+          }),
+        },
+        {
+          // Move label to top
+          translateY: this.state.labeled.interpolate({
+            inputRange: [0, 1],
+            outputRange: [MINIMIZED_LABEL_Y_OFFSET, 0],
+          }),
+        },
+        {
+          // Make label smaller
+          scale: this.state.labeled.interpolate({
+            inputRange: [0, 1],
+            outputRange: [
+              MINIMIZED_LABEL_FONT_SIZE / MAXIMIZED_LABEL_FONT_SIZE,
+              1,
+            ],
+          }),
+        },
+        {
+          // Offset label scale since RN doesn't support transform origin
+          translateX: this.state.labeled.interpolate({
+            inputRange: [0, 1],
+            outputRange: [
+              baseLabelTranslateX > 0
+                ? baseLabelTranslateX +
+                  labelHalfWidth / LABEL_PADDING_HORIZONTAL -
+                  RANDOM_VALUE_TO_CENTER_LABEL
+                : baseLabelTranslateX -
+                  labelHalfWidth / LABEL_PADDING_HORIZONTAL +
+                  RANDOM_VALUE_TO_CENTER_LABEL,
+              0,
+            ],
+          }),
+        },
+      ],
+    };
+
+    return (
+      <View style={[containerStyle, style]}>
+        <Animated.View
+          style={[
+            styles.underline,
+            {
+              backgroundColor: error
+                ? colors.error
+                : this.state.focused
+                  ? activeColor
+                  : underlineColorCustom,
+              // Underlines is thinner when input is not focused
+              transform: [{ scaleY: this.state.focused ? 1 : 0.5 }],
+            },
+          ]}
+        />
+
+        {label ? (
+          // Position colored placeholder and gray placeholder on top of each other and crossfade them
+          // This gives the effect of animating the color, but allows us to use native driver
+          <View
+            pointerEvents="none"
+            style={[
+              StyleSheet.absoluteFill,
+              {
+                opacity:
+                  // Hide the label in minimized state until we measure it's width
+                  this.state.value || this.state.focused
+                    ? this.state.labelLayout.measured
+                      ? 1
+                      : 0
+                    : 1,
+              },
+            ]}
+          >
+            <AnimatedText
+              onLayout={e =>
+                this.setState({
+                  labelLayout: {
+                    width: e.nativeEvent.layout.width,
+                    measured: true,
+                  },
+                })
+              }
+              style={[
+                styles.placeholder,
+                styles.placeholderFlat,
+                labelStyle,
+                {
+                  color: activeColor,
+                  opacity: this.state.labeled.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [hasActiveOutline ? 1 : 0, 0],
+                  }),
+                },
+              ]}
+              numberOfLines={1}
+            >
+              {label}
+            </AnimatedText>
+            <AnimatedText
+              style={[
+                styles.placeholder,
+                styles.placeholderFlat,
+                labelStyle,
+                {
+                  color: placeholderColor,
+                  opacity: hasActiveOutline ? this.state.labeled : 1,
+                },
+              ]}
+              numberOfLines={1}
+            >
+              {label}
+            </AnimatedText>
+          </View>
+        ) : null}
+
+        {render(
+          ({
+            ...rest,
+            ref: c => {
+              this._root = c;
+            },
+            onChangeText: this._handleChangeText,
+            placeholder: label
+              ? this.state.placeholder
+              : this.props.placeholder,
+            placeholderTextColor: placeholderColor,
+            editable: !disabled,
+            selectionColor:
+              typeof selectionColor === 'undefined'
+                ? activeColor
+                : selectionColor,
+            onFocus: this._handleFocus,
+            onBlur: this._handleBlur,
+            underlineColorAndroid: 'transparent',
+            multiline,
+            style: [
+              styles.input,
+              this.props.label
+                ? styles.inputFlatWithLabel
+                : styles.inputFlatWithoutLabel,
+              {
+                color: inputTextColor,
+                fontFamily,
+                textAlignVertical: multiline ? 'top' : 'center',
+              },
+            ],
+          }: RenderProps)
+        )}
+      </View>
+    );
+  }
+
+  render() {
+    return this.props.mode === 'outlined'
+      ? this.renderOutlined()
+      : this.renderFlat();
+  }
 }
 
-polyfill(TextInputOutlined);
+polyfill(TextInput);
 
-export default TextInputOutlined;
+export default withTheme(TextInput);
 
 const styles = StyleSheet.create({
   placeholder: {
@@ -475,8 +816,18 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingHorizontal: LABEL_PADDING_HORIZONTAL,
   },
+  placeholderFlat: {
+    top: 19,
+  },
   placeholderOutlined: {
     top: 25,
+  },
+  underline: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: 2,
   },
   outline: {
     position: 'absolute',
@@ -505,5 +856,12 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 16,
     minHeight: 64,
+  },
+  inputFlatWithLabel: {
+    paddingTop: 24,
+    paddingBottom: 6,
+  },
+  inputFlatWithoutLabel: {
+    paddingVertical: 15,
   },
 });
