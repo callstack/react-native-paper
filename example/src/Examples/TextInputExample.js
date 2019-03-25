@@ -30,7 +30,6 @@ class TextInputExample extends React.Component<Props, State> {
   };
 
   _isUsernameValid = () => /^[a-zA-Z]*$/.test(this.state.name);
-  textinput: React.Ref<typeof TextInput> = React.createRef();
 
   render() {
     const {
