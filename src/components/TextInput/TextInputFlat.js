@@ -8,10 +8,9 @@ import {
   StyleSheet,
   I18nManager,
 } from 'react-native';
-import { polyfill } from 'react-lifecycles-compat';
 import color from 'color';
 import Text from '../Typography/Text';
-import type { Props, State, RenderProps } from './types';
+import type { RenderProps, ChildTextInputProps } from './types';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
@@ -19,12 +18,10 @@ const MINIMIZED_LABEL_Y_OFFSET = -12;
 const MAXIMIZED_LABEL_FONT_SIZE = 16;
 const MINIMIZED_LABEL_FONT_SIZE = 12;
 const LABEL_WIGGLE_X_OFFSET = 4;
-const FOCUS_ANIMATION_DURATION = 150;
-const BLUR_ANIMATION_DURATION = 180;
 const LABEL_PADDING_HORIZONTAL = 12;
 const RANDOM_VALUE_TO_CENTER_LABEL = 4; // Don't know why 4, but it works
 
-class TextInputFlat extends React.Component<Props, State> {
+class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
   static defaultProps = {
     disabled: false,
     error: false,
@@ -32,191 +29,6 @@ class TextInputFlat extends React.Component<Props, State> {
     editable: true,
     render: (props: RenderProps) => <NativeTextInput {...props} />,
   };
-
-  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
-    return {
-      value:
-        typeof nextProps.value !== 'undefined'
-          ? nextProps.value
-          : prevState.value,
-    };
-  }
-
-  state = {
-    labeled: new Animated.Value(this.props.value || this.props.error ? 0 : 1),
-    error: new Animated.Value(this.props.error ? 1 : 0),
-    focused: false,
-    placeholder: this.props.error ? this.props.placeholder : '',
-    value: this.props.value,
-    labelLayout: {
-      measured: false,
-      width: 0,
-    },
-  };
-
-  componentDidUpdate(prevProps: Props, prevState: State) {
-    if (
-      prevState.focused !== this.state.focused ||
-      prevState.value !== this.state.value ||
-      prevProps.error !== this.props.error
-    ) {
-      // The label should be minimized if the text input is focused, or has text
-      // In minimized mode, the label moves up and becomes small
-      if (this.state.value || this.state.focused || this.props.error) {
-        this._minmizeLabel();
-      } else {
-        this._restoreLabel();
-      }
-    }
-
-    if (
-      prevState.focused !== this.state.focused ||
-      prevProps.label !== this.props.label ||
-      prevProps.error !== this.props.error
-    ) {
-      // Show placeholder text only if the input is focused, or has error, or there's no label
-      // We don't show placeholder if there's a label because the label acts as placeholder
-      // When focused, the label moves up, so we can show a placeholder
-      if (this.state.focused || this.props.error || !this.props.label) {
-        this._showPlaceholder();
-      } else {
-        this._hidePlaceholder();
-      }
-    }
-
-    if (prevProps.error !== this.props.error) {
-      // When the input has an error, we wiggle the label and apply error styles
-      if (this.props.error) {
-        this._showError();
-      } else {
-        this._hideError();
-      }
-    }
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this._timer);
-  }
-
-  _showPlaceholder = () => {
-    clearTimeout(this._timer);
-
-    // Set the placeholder in a delay to offset the label animation
-    // If we show it immediately, they'll overlap and look ugly
-    this._timer = setTimeout(
-      () =>
-        this.setState({
-          placeholder: this.props.placeholder,
-        }),
-      50
-    );
-  };
-
-  _hidePlaceholder = () =>
-    this.setState({
-      placeholder: '',
-    });
-
-  _timer: TimeoutID;
-  _root: ?NativeTextInput;
-
-  _showError = () => {
-    Animated.timing(this.state.error, {
-      toValue: 1,
-      duration: FOCUS_ANIMATION_DURATION,
-      useNativeDriver: true,
-    }).start(this._showPlaceholder);
-  };
-
-  _hideError = () => {
-    Animated.timing(this.state.error, {
-      toValue: 0,
-      duration: BLUR_ANIMATION_DURATION,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  _restoreLabel = () =>
-    Animated.timing(this.state.labeled, {
-      toValue: 1,
-      duration: FOCUS_ANIMATION_DURATION,
-      useNativeDriver: true,
-    }).start();
-
-  _minmizeLabel = () =>
-    Animated.timing(this.state.labeled, {
-      toValue: 0,
-      duration: BLUR_ANIMATION_DURATION,
-      useNativeDriver: true,
-    }).start();
-
-  _handleFocus = (...args) => {
-    if (this.props.disabled) {
-      return;
-    }
-
-    this.setState({ focused: true });
-
-    if (this.props.onFocus) {
-      this.props.onFocus(...args);
-    }
-  };
-
-  _handleBlur = (...args) => {
-    if (this.props.disabled) {
-      return;
-    }
-
-    this.setState({ focused: false });
-
-    if (this.props.onBlur) {
-      this.props.onBlur(...args);
-    }
-  };
-
-  _handleChangeText = (value: string) => {
-    if (!this.props.editable) {
-      return;
-    }
-
-    this.setState({ value });
-    this.props.onChangeText && this.props.onChangeText(value);
-  };
-
-  /**
-   * @internal
-   */
-  setNativeProps(...args: any) {
-    return this._root && this._root.setNativeProps(...args);
-  }
-
-  /**
-   * Returns `true` if the input is currently focused, `false` otherwise.
-   */
-  isFocused() {
-    return this._root && this._root.isFocused();
-  }
-
-  /**
-   * Removes all text from the TextInput.
-   */
-  clear() {
-    return this._root && this._root.clear();
-  }
-
-  /**
-   * Focuses the input.
-   */
-  focus() {
-    return this._root && this._root.focus();
-  }
-
-  /**
-   * Removes focus from the input.
-   */
-  blur() {
-    return this._root && this._root.blur();
-  }
 
   render() {
     const {
@@ -229,12 +41,18 @@ class TextInputFlat extends React.Component<Props, State> {
       theme,
       render,
       multiline,
+      parentState,
+      innerRef,
+      onFocus,
+      onBlur,
+      onChangeText,
+      onLayoutAnimatedText,
       ...rest
     } = this.props;
 
     const { colors, fonts } = theme;
     const fontFamily = fonts.regular;
-    const hasActiveOutline = this.state.focused || error;
+    const hasActiveOutline = parentState.focused || error;
 
     let inputTextColor, activeColor, underlineColorCustom, placeholderColor;
 
@@ -266,7 +84,7 @@ class TextInputFlat extends React.Component<Props, State> {
       borderTopRightRadius: theme.roundness,
     };
 
-    const labelHalfWidth = this.state.labelLayout.width / 2;
+    const labelHalfWidth = parentState.labelLayout.width / 2;
     const baseLabelTranslateX =
       (I18nManager.isRTL ? 1 : -1) *
       (1 - MINIMIZED_LABEL_FONT_SIZE / MAXIMIZED_LABEL_FONT_SIZE) *
@@ -278,25 +96,25 @@ class TextInputFlat extends React.Component<Props, State> {
       transform: [
         {
           // Wiggle the label when there's an error
-          translateX: this.state.error.interpolate({
+          translateX: parentState.error.interpolate({
             inputRange: [0, 0.5, 1],
             outputRange: [
               0,
-              this.state.value && error ? LABEL_WIGGLE_X_OFFSET : 0,
+              parentState.value && error ? LABEL_WIGGLE_X_OFFSET : 0,
               0,
             ],
           }),
         },
         {
           // Move label to top
-          translateY: this.state.labeled.interpolate({
+          translateY: parentState.labeled.interpolate({
             inputRange: [0, 1],
             outputRange: [MINIMIZED_LABEL_Y_OFFSET, 0],
           }),
         },
         {
           // Make label smaller
-          scale: this.state.labeled.interpolate({
+          scale: parentState.labeled.interpolate({
             inputRange: [0, 1],
             outputRange: [
               MINIMIZED_LABEL_FONT_SIZE / MAXIMIZED_LABEL_FONT_SIZE,
@@ -306,7 +124,7 @@ class TextInputFlat extends React.Component<Props, State> {
         },
         {
           // Offset label scale since RN doesn't support transform origin
-          translateX: this.state.labeled.interpolate({
+          translateX: parentState.labeled.interpolate({
             inputRange: [0, 1],
             outputRange: [
               baseLabelTranslateX > 0
@@ -331,11 +149,11 @@ class TextInputFlat extends React.Component<Props, State> {
             {
               backgroundColor: error
                 ? colors.error
-                : this.state.focused
+                : parentState.focused
                   ? activeColor
                   : underlineColorCustom,
               // Underlines is thinner when input is not focused
-              transform: [{ scaleY: this.state.focused ? 1 : 0.5 }],
+              transform: [{ scaleY: parentState.focused ? 1 : 0.5 }],
             },
           ]}
         />
@@ -350,8 +168,8 @@ class TextInputFlat extends React.Component<Props, State> {
               {
                 opacity:
                   // Hide the label in minimized state until we measure it's width
-                  this.state.value || this.state.focused
-                    ? this.state.labelLayout.measured
+                  parentState.value || parentState.focused
+                    ? parentState.labelLayout.measured
                       ? 1
                       : 0
                     : 1,
@@ -359,21 +177,14 @@ class TextInputFlat extends React.Component<Props, State> {
             ]}
           >
             <AnimatedText
-              onLayout={e =>
-                this.setState({
-                  labelLayout: {
-                    width: e.nativeEvent.layout.width,
-                    measured: true,
-                  },
-                })
-              }
+              onLayout={onLayoutAnimatedText}
               style={[
                 styles.placeholder,
                 styles.placeholderFlat,
                 labelStyle,
                 {
                   color: activeColor,
-                  opacity: this.state.labeled.interpolate({
+                  opacity: parentState.labeled.interpolate({
                     inputRange: [0, 1],
                     outputRange: [hasActiveOutline ? 1 : 0, 0],
                   }),
@@ -390,7 +201,7 @@ class TextInputFlat extends React.Component<Props, State> {
                 labelStyle,
                 {
                   color: placeholderColor,
-                  opacity: hasActiveOutline ? this.state.labeled : 1,
+                  opacity: hasActiveOutline ? parentState.labeled : 1,
                 },
               ]}
               numberOfLines={1}
@@ -403,12 +214,10 @@ class TextInputFlat extends React.Component<Props, State> {
         {render(
           ({
             ...rest,
-            ref: c => {
-              this._root = c;
-            },
-            onChangeText: this._handleChangeText,
+            ref: innerRef,
+            onChangeText,
             placeholder: label
-              ? this.state.placeholder
+              ? parentState.placeholder
               : this.props.placeholder,
             placeholderTextColor: placeholderColor,
             editable: !disabled,
@@ -416,8 +225,8 @@ class TextInputFlat extends React.Component<Props, State> {
               typeof selectionColor === 'undefined'
                 ? activeColor
                 : selectionColor,
-            onFocus: this._handleFocus,
-            onBlur: this._handleBlur,
+            onFocus,
+            onBlur,
             underlineColorAndroid: 'transparent',
             multiline,
             style: [
@@ -437,8 +246,6 @@ class TextInputFlat extends React.Component<Props, State> {
     );
   }
 }
-
-polyfill(TextInputFlat);
 
 export default TextInputFlat;
 
