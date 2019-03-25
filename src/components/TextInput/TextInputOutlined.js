@@ -43,9 +43,9 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       multiline,
       parentState,
       innerRef,
-      handleFocus,
-      handleBlur,
-      handleChangeText,
+      onFocus,
+      onBlur,
+      onChangeText,
       onLayoutAnimatedText,
       ...rest
     } = this.props;
@@ -243,7 +243,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
           ({
             ...rest,
             ref: innerRef,
-            onChangeText: handleChangeText,
+            onChangeText: onChangeText,
             placeholder: label
               ? parentState.placeholder
               : this.props.placeholder,
@@ -253,8 +253,8 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
               typeof selectionColor === 'undefined'
                 ? activeColor
                 : selectionColor,
-            onFocus: handleFocus,
-            onBlur: handleBlur,
+            onFocus: onFocus,
+            onBlur: onBlur,
             underlineColorAndroid: 'transparent',
             multiline,
             style: [

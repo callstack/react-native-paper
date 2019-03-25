@@ -288,9 +288,9 @@ class TextInput extends React.Component<TextInputProps, State> {
         innerRef={ref => {
           this.ref = ref;
         }}
-        handleFocus={this._handleFocus}
-        handleBlur={this._handleBlur}
-        handleChangeText={this._handleChangeText}
+        onFocus={this._handleFocus}
+        onBlur={this._handleBlur}
+        onChangeText={this._handleChangeText}
         onLayoutAnimatedText={this._onLayoutAnimatedText}
       />
     ) : (
@@ -300,9 +300,9 @@ class TextInput extends React.Component<TextInputProps, State> {
         innerRef={ref => {
           this.ref = ref;
         }}
-        handleFocus={this._handleFocus}
-        handleBlur={this._handleBlur}
-        handleChangeText={this._handleChangeText}
+        onFocus={this._handleFocus}
+        onBlur={this._handleBlur}
+        onChangeText={this._handleChangeText}
         onLayoutAnimatedText={this._onLayoutAnimatedText}
       />
     );
