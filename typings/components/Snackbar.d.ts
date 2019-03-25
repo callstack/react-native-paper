@@ -7,6 +7,7 @@ export interface SnackbarProps {
   visible: boolean;
   action?: {
     label: string;
+    accessibilityLabel?: string;
     onPress: () => any;
   };
   duration?: number;
