@@ -286,7 +286,7 @@ class TextInput extends React.Component<TextInputProps, State> {
         {...rest}
         parentState={this.state}
         innerRef={ref => {
-          this.ref = ref;
+          this._root = ref;
         }}
         onFocus={this._handleFocus}
         onBlur={this._handleBlur}
@@ -298,7 +298,7 @@ class TextInput extends React.Component<TextInputProps, State> {
         {...rest}
         parentState={this.state}
         innerRef={ref => {
-          this.ref = ref;
+          this._root = ref;
         }}
         onFocus={this._handleFocus}
         onBlur={this._handleBlur}

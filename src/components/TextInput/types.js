@@ -112,8 +112,8 @@ export type ChildTextInputProps = {|
   ...Props,
   parentState: State,
   innerRef: (ref: ?NativeTextInput) => void,
-  handleFocus: (args: any) => void,
-  handleBlur: (args: any) => void,
-  handleChangeText: (value: string) => void,
-  onLayoutAnimatedText: (e: any) => void,
+  onFocus?: (args: any) => void,
+  onBlur?: (args: any) => void,
+  onChangeText?: (value: string) => void,
+  onLayoutAnimatedText?: (e: any) => void,
 |};

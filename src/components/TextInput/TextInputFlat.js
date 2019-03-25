@@ -215,7 +215,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
           ({
             ...rest,
             ref: innerRef,
-            onChangeText: onChangeText,
+            onChangeText,
             placeholder: label
               ? parentState.placeholder
               : this.props.placeholder,
@@ -225,8 +225,8 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
               typeof selectionColor === 'undefined'
                 ? activeColor
                 : selectionColor,
-            onFocus: onFocus,
-            onBlur: onBlur,
+            onFocus,
+            onBlur,
             underlineColorAndroid: 'transparent',
             multiline,
             style: [
