@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import color from 'color';
 import Text from '../Typography/Text';
-import type { RenderProps, ChildTextInputProps} from './types';
+import type { RenderProps, ChildTextInputProps } from './types';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
