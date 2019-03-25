@@ -6,6 +6,8 @@ import ActivityIndicator from '../ActivityIndicator';
 
 jest.useFakeTimers();
 
+jest.mock('NativeAnimatedHelper');
+
 it('renders indicator', () => {
   const tree = renderer.create(<ActivityIndicator animating />).toJSON();
 

@@ -128,6 +128,7 @@ class Modal extends React.Component<Props, State> {
       toValue: 1,
       duration: 280,
       easing: Easing.ease,
+      useNativeDriver: true,
     }).start();
   };
 
@@ -137,6 +138,7 @@ class Modal extends React.Component<Props, State> {
       toValue: 0,
       duration: 280,
       easing: Easing.ease,
+      useNativeDriver: true,
     }).start(({ finished }) => {
       if (!finished) {
         return;
