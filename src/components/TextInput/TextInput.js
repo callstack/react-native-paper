@@ -1,19 +1,20 @@
 /* @flow */
 
 import * as React from 'react';
-import { Animated, TextInput as NativeTextInput } from 'react-native';
+import { Animated, TextInput as NativeTextInput, Platform } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
 
 import TextInputOutlined from './TextInputOutlined';
 import TextInputFlat from './TextInputFlat';
 import { withTheme } from '../../core/theming';
-import type { Props, RenderProps, State } from './types';
+import type { RenderProps, State } from './types';
+import type { Theme } from '../../types';
 
 const BLUR_ANIMATION_DURATION = 180;
 const FOCUS_ANIMATION_DURATION = 150;
 
-type TextInputProps = {|
-  ...Props,
+export type TextInputProps = {|
+  ...React.ElementConfig<typeof NativeTextInput>,
   /**
    * Mode of the TextInput.
    * - `flat` - flat input with an underline.
@@ -23,6 +24,78 @@ type TextInputProps = {|
    * This component render TextInputOutlined or TextInputFlat based on that props
    */
   mode?: 'flat' | 'outlined',
+  /**
+   * If true, user won't be able to interact with the component.
+   */
+  disabled?: boolean,
+  /**
+   * The text to use for the floating label.
+   */
+  label?: string,
+  /**
+   * Placeholder for the input.
+   */
+  placeholder?: string,
+  /**
+   * Whether to style the TextInput with error style.
+   */
+  error?: boolean,
+  /**
+   * Callback that is called when the text input's text changes. Changed text is passed as an argument to the callback handler.
+   */
+  onChangeText?: Function,
+  /**
+   * Selection color of the input
+   */
+  selectionColor?: string,
+  /**
+   * Underline color of the input.
+   */
+  underlineColor?: string,
+  /**
+   * Whether the input can have multiple lines.
+   */
+  multiline?: boolean,
+  /**
+   * The number of lines to show in the input (Android only).
+   */
+  numberOfLines?: number,
+  /**
+   * Callback that is called when the text input is focused.
+   */
+  onFocus?: (args: any) => mixed,
+  /**
+   * Callback that is called when the text input is blurred.
+   */
+  onBlur?: (args: any) => mixed,
+  /**
+   *
+   * Callback to render a custom input component such as `react-native-text-input-mask`
+   * instead of the default `TextInput` component from `react-native`.
+   *
+   * Example:
+   * ```js
+   * <TextInput
+   *   label="Phone number"
+   *   render={props =>
+   *     <TextInputMask
+   *       {...props}
+   *       mask="+[00] [000] [000] [000]"
+   *     />
+   *   }
+   * />
+   * ```
+   */
+  render: (props: RenderProps) => React.Node,
+  /**
+   * Value of the text input.
+   */
+  value?: string,
+  style?: any,
+  /**
+   * @optional
+   */
+  theme: Theme,
 |};
 
 /**
@@ -191,14 +264,22 @@ class TextInput extends React.Component<TextInputProps, State> {
     Animated.timing(this.state.labeled, {
       toValue: 1,
       duration: FOCUS_ANIMATION_DURATION,
-      useNativeDriver: true,
+      // To prevent this - https://github.com/callstack/react-native-paper/issues/941
+      useNativeDriver: Platform.select({
+        ios: false,
+        default: true,
+      }),
     }).start();
 
   _minmizeLabel = () =>
     Animated.timing(this.state.labeled, {
       toValue: 0,
       duration: BLUR_ANIMATION_DURATION,
-      useNativeDriver: true,
+      // To prevent this - https://github.com/callstack/react-native-paper/issues/941
+      useNativeDriver: Platform.select({
+        ios: false,
+        default: true,
+      }),
     }).start();
 
   _handleFocus = (...args) => {
