@@ -13,7 +13,6 @@ import color from 'color';
 import Icon from '../Icon';
 import Text from '../Typography/Text';
 import type { RenderProps, ChildTextInputProps } from './types';
-import type { IconSource } from './Icon';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
