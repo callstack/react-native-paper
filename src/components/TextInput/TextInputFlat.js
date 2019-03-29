@@ -270,6 +270,14 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
             ],
           }: RenderProps)
         )}
+        {trailingIcon ? (
+            <TouchableOpacity 
+              style={[styles.icon, { marginLeft: 0, marginRight: 12 }]} 
+              onPressIn={trailingIconOnPressIn} 
+              onPressOut={trailingIconOnPressOut}>
+              <Icon source={trailingIcon} size={24} color={error ? colors.error : parentState.focused ? activeColor : placeholderColor}/>
+            </TouchableOpacity>
+          ) : null}
         </View>
       </View>
     );
