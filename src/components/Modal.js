@@ -6,8 +6,10 @@ import {
   View,
   Easing,
   StyleSheet,
+  Platform,
   TouchableWithoutFeedback,
   BackHandler,
+  KeyboardAvoidingView,
 } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
 import Surface from './Surface';
@@ -165,6 +167,7 @@ class Modal extends React.Component<Props, State> {
 
     const { children, dismissable, theme, contentContainerStyle } = this.props;
     const { colors } = theme;
+    const SurfaceWrapper = Platform.OS === 'ios' ? KeyboardAvoidingView : View
     return (
       <Animated.View
         accessibilityViewIsModal
@@ -181,7 +184,11 @@ class Modal extends React.Component<Props, State> {
             ]}
           />
         </TouchableWithoutFeedback>
-        <View pointerEvents="box-none" style={styles.wrapper}>
+        <SurfaceWrapper
+          {...Platform.OS === 'ios' ? { behavior: 'padding' } : {}}
+          pointerEvents="box-none"
+          style={styles.wrapper}
+        >
           <Surface
             style={[
               { opacity: this.state.opacity },
@@ -191,7 +198,7 @@ class Modal extends React.Component<Props, State> {
           >
             {children}
           </Surface>
-        </View>
+        </SurfaceWrapper>
       </Animated.View>
     );
   }
