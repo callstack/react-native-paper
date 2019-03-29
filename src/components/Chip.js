@@ -152,6 +152,7 @@ class Chip extends React.Component<Props, State> {
         : dark
           ? '#383838'
           : '#ebebeb',
+      borderRadius = 16,
     } = StyleSheet.flatten(style) || {};
 
     const borderColor =
@@ -214,6 +215,7 @@ class Chip extends React.Component<Props, State> {
               ? selectedBackgroundColor
               : backgroundColor,
             borderColor,
+            borderRadius,
           },
           style,
         ]}
@@ -222,7 +224,7 @@ class Chip extends React.Component<Props, State> {
         <TouchableRipple
           borderless
           delayPressIn={0}
-          style={styles.touchable}
+          style={{ borderRadius }}
           onPress={onPress}
           onPressIn={this._handlePressIn}
           onPressOut={this._handlePressOut}
@@ -296,12 +298,8 @@ class Chip extends React.Component<Props, State> {
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 16,
     borderWidth: StyleSheet.hairlineWidth,
     borderStyle: 'solid',
-  },
-  touchable: {
-    borderRadius: 16,
   },
   content: {
     flexDirection: 'row',
