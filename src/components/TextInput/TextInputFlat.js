@@ -7,10 +7,13 @@ import {
   TextInput as NativeTextInput,
   StyleSheet,
   I18nManager,
+  TouchableOpacity,
 } from 'react-native';
 import color from 'color';
+import Icon from '../Icon';
 import Text from '../Typography/Text';
 import type { RenderProps, ChildTextInputProps } from './types';
+import type { IconSource } from './Icon';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
@@ -20,6 +23,7 @@ const MINIMIZED_LABEL_FONT_SIZE = 12;
 const LABEL_WIGGLE_X_OFFSET = 4;
 const LABEL_PADDING_HORIZONTAL = 12;
 const RANDOM_VALUE_TO_CENTER_LABEL = 4; // Don't know why 4, but it works
+const LEADING_ICON_PADDING = 30
 
 class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
   static defaultProps = {
@@ -37,6 +41,12 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       error,
       selectionColor,
       underlineColor,
+      leadingIcon,
+      leadingIconOnPressIn,
+      leadingIconOnPressOut,
+      trailingIcon,
+      trailingIconOnPressIn,
+      trailingIconOnPressOut,
       style,
       theme,
       render,
@@ -90,9 +100,17 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       (1 - MINIMIZED_LABEL_FONT_SIZE / MAXIMIZED_LABEL_FONT_SIZE) *
       labelHalfWidth;
 
+    let labelPaddingHorizontal = LABEL_PADDING_HORIZONTAL;
+    let randomValueToCenterLabel = RANDOM_VALUE_TO_CENTER_LABEL;
+    if(leadingIcon) {
+      labelPaddingHorizontal += LEADING_ICON_PADDING
+      randomValueToCenterLabel = 15;
+    }
+
     const labelStyle = {
       fontFamily,
       fontSize: MAXIMIZED_LABEL_FONT_SIZE,
+      paddingHorizontal: labelPaddingHorizontal,
       transform: [
         {
           // Wiggle the label when there's an error
@@ -129,11 +147,11 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
             outputRange: [
               baseLabelTranslateX > 0
                 ? baseLabelTranslateX +
-                  labelHalfWidth / LABEL_PADDING_HORIZONTAL -
-                  RANDOM_VALUE_TO_CENTER_LABEL
+                  labelHalfWidth / labelPaddingHorizontal -
+                  randomValueToCenterLabel
                 : baseLabelTranslateX -
-                  labelHalfWidth / LABEL_PADDING_HORIZONTAL +
-                  RANDOM_VALUE_TO_CENTER_LABEL,
+                  labelHalfWidth / labelPaddingHorizontal +
+                  randomValueToCenterLabel,
               0,
             ],
           }),
@@ -157,6 +175,17 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
             },
           ]}
         />
+<View style={styles.content}>
+	{leadingIcon ? (
+            <TouchableOpacity 
+            style={[styles.icon, { }]} 
+            onPressIn={leadingIconOnPressIn} 
+            onPressOut={leadingIconOnPressOut}
+            
+            >
+              <Icon source={leadingIcon} size={24} color={error ? colors.error : parentState.focused ? activeColor : placeholderColor}/>
+            </TouchableOpacity>
+          ) : null}
 
         {label ? (
           // Position colored placeholder and gray placeholder on top of each other and crossfade them
@@ -165,7 +194,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
             pointerEvents="none"
             style={[
               StyleSheet.absoluteFill,
-              {
+             {
                 opacity:
                   // Hide the label in minimized state until we measure it's width
                   parentState.value || parentState.focused
@@ -183,10 +212,10 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
                 styles.placeholderFlat,
                 labelStyle,
                 {
-                  color: activeColor,
+                  color: hasActiveOutline? activeColor : placeholderColor,
                   opacity: parentState.labeled.interpolate({
                     inputRange: [0, 1],
-                    outputRange: [hasActiveOutline ? 1 : 0, 0],
+                    outputRange: [hasActiveOutline ? 1 : 0, 1],
                   }),
                 },
               ]}
@@ -242,6 +271,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
             ],
           }: RenderProps)
         )}
+        </View>
       </View>
     );
   }
@@ -265,6 +295,16 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     height: 2,
+  },
+  content: {
+    minHeight: 56,
+    flexDirection: 'row',
+  },
+  icon: {
+    width: 24,
+    height: 24,
+    marginLeft: 12,
+    alignSelf: 'center',
   },
   input: {
     flexGrow: 1,
