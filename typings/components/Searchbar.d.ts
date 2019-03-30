@@ -5,6 +5,7 @@ import { ThemeShape, IconSource } from '../types';
 export interface SearchbarProps extends TextInputProps {
   icon?: IconSource;
   theme?: ThemeShape;
+  clearIcon?: IconSource;
   onIconPress?: () => any;
   onChangeText?: (query: string) => void;
 }
