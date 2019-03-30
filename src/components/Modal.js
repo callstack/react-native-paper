@@ -167,7 +167,7 @@ class Modal extends React.Component<Props, State> {
 
     const { children, dismissable, theme, contentContainerStyle } = this.props;
     const { colors } = theme;
-    const SurfaceWrapper = Platform.OS === 'ios' ? KeyboardAvoidingView : View
+    const SurfaceWrapper = Platform.OS === 'ios' ? KeyboardAvoidingView : View;
     return (
       <Animated.View
         accessibilityViewIsModal
