@@ -6,6 +6,7 @@ import { polyfill } from 'react-lifecycles-compat';
 
 import TextInputOutlined from './TextInputOutlined';
 import TextInputFlat from './TextInputFlat';
+import TextInputLegacy from './TextInputLegacy';
 import { withTheme } from '../../core/theming';
 import type { RenderProps, State } from './types';
 import type { Theme } from '../../types';
@@ -364,6 +365,18 @@ class TextInput extends React.Component<TextInputProps, State> {
 
     return mode === 'outlined' ? (
       <TextInputOutlined
+        {...rest}
+        parentState={this.state}
+        innerRef={ref => {
+          this._root = ref;
+        }}
+        onFocus={this._handleFocus}
+        onBlur={this._handleBlur}
+        onChangeText={this._handleChangeText}
+        onLayoutAnimatedText={this._onLayoutAnimatedText}
+      />
+    ) : mode === 'legacy' ? (
+      <TextInputLegacy
         {...rest}
         parentState={this.state}
         innerRef={ref => {
