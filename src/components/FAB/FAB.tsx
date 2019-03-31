@@ -19,6 +19,10 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   icon: IconSource;
   /**
+   * Icon to display for the `FAB`.
+   */
+  iconSize: number,
+  /**
    * Optional label for extended `FAB`.
    */
   label?: string;
