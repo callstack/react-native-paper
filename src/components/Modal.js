@@ -185,7 +185,7 @@ class Modal extends React.Component<Props, State> {
           />
         </TouchableWithoutFeedback>
         <SurfaceWrapper
-          {(...Platform.OS === 'ios' ? { behavior: 'padding' } : {})}
+          {...(Platform.OS === 'ios' ? { behavior: 'padding' } : {})}
           pointerEvents="box-none"
           style={styles.wrapper}
         >
