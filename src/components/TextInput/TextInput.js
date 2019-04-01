@@ -248,7 +248,11 @@ class TextInput extends React.Component<TextInputProps, State> {
     Animated.timing(this.state.error, {
       toValue: 1,
       duration: FOCUS_ANIMATION_DURATION,
-      useNativeDriver: true,
+      // To prevent this - https://github.com/callstack/react-native-paper/issues/941
+      useNativeDriver: Platform.select({
+        ios: false,
+        default: true,
+      }),
     }).start(this._showPlaceholder);
   };
 
@@ -256,7 +260,11 @@ class TextInput extends React.Component<TextInputProps, State> {
     Animated.timing(this.state.error, {
       toValue: 0,
       duration: BLUR_ANIMATION_DURATION,
-      useNativeDriver: true,
+      // To prevent this - https://github.com/callstack/react-native-paper/issues/941
+      useNativeDriver: Platform.select({
+        ios: false,
+        default: true,
+      }),
     }).start();
   };
 
