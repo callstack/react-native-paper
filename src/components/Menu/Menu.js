@@ -215,8 +215,8 @@ class Menu extends React.Component<Props, State> {
       scaleAnimation,
     } = this.state;
 
-    // Adjust position of menu
     let { left, top } = this.state;
+
     const scaleTransforms = [
       {
         scaleX: scaleAnimation.x.interpolate({
@@ -232,6 +232,7 @@ class Menu extends React.Component<Props, State> {
       },
     ];
 
+    // We need to translate menu while animating scale to imitate transform origin for scale animation
     const positionTransforms = [];
 
     const { width: screenWidth, height: screenHeight } = Dimensions.get(
