@@ -378,15 +378,11 @@ class Menu extends React.Component<Props, State> {
             }}
             collapsable={false}
             pointerEvents={visible ? 'auto' : 'none'}
-            style={[styles.wrapper, positionStyle]}
+            style={[styles.wrapper, positionStyle, style]}
           >
             <Animated.View style={{ transform: positionTransforms }}>
               <Surface
-                style={[
-                  styles.shadowMenuContainer,
-                  shadowMenuContainerStyle,
-                  style,
-                ]}
+                style={[styles.shadowMenuContainer, shadowMenuContainerStyle]}
               >
                 {children}
               </Surface>
