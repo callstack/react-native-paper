@@ -151,12 +151,36 @@ class Menu extends React.Component<Props, State> {
   };
 
   _show = async () => {
-    BackHandler.addEventListener('hardwareBackPress', this._hide);
+    BackHandler.addEventListener('hardwareBackPress', this.props.onDismiss);
 
     const [menuLayout, anchorLayout] = await Promise.all([
       this._measureMenuLayout(),
       this._measureAnchorLayout(),
     ]);
+
+    // When visible is true for first render
+    // native views can be still not rendered and
+    // measureMenuLayout/measureAnchorLayout functions
+    // return wrong values e.g { x:0, y: 0, width: 0, height: 0 }
+    // so we have to wait until views are ready
+    // and rerun this function to show menu
+    if (
+      !menuLayout.width ||
+      !menuLayout.height ||
+      !anchorLayout.width ||
+      !anchorLayout.height ||
+      !anchorLayout.x ||
+      !anchorLayout.y
+    ) {
+      BackHandler.removeEventListener(
+        'hardwareBackPress',
+        this.props.onDismiss
+      );
+      setTimeout(() => {
+        this._show();
+      }, ANIMATION_DURATION);
+      return;
+    }
 
     this.setState(
       {
@@ -191,7 +215,7 @@ class Menu extends React.Component<Props, State> {
   };
 
   _hide = () => {
-    BackHandler.removeEventListener('hardwareBackPress', this._hide);
+    BackHandler.removeEventListener('hardwareBackPress', this.props.onDismiss);
 
     Animated.timing(this.state.opacityAnimation, {
       toValue: 0,
@@ -309,7 +333,16 @@ class Menu extends React.Component<Props, State> {
           ) : null}
           <View
             ref={ref => {
-              this._menu = ref;
+              // This hack is needed to properly show menu
+              // when visible is `true` initially
+              // because in componentDidMount _menu ref is undefined
+              // because it's rendered in portal
+              if (!this._menu) {
+                this._menu = ref;
+                if (visible) {
+                  this._show();
+                }
+              }
             }}
             collapsable={false}
             pointerEvents={visible ? 'auto' : 'none'}
