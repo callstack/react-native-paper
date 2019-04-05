@@ -70,7 +70,7 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
  * ```js
  * import * as React from 'react';
  * import { View } from 'react-native';
- * import { Button, Paragraph, Menu, Divider } from 'react-native-paper';
+ * import { Button, Paragraph, Menu, Divider, Provider } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
@@ -83,20 +83,27 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
  *
  *   render() {
  *     return (
- *       <View>
- *         <Menu
- *           visible={this.state.visible}
- *           onDismiss={this._closeMenu}
- *           anchor={
- *             <Button onPress={this._openMenu}>Show menu</Button>
- *           }
- *         >
- *           <Menu.Item onPress={() => {}} title="Item 1" />
- *           <Menu.Item onPress={() => {}} title="Item 2" />
- *           <Divider />
- *           <Menu.Item onPress={() => {}} title="Item 3" />
- *         </Menu>
- *       </View>
+ *       <Provider>
+ *         <View
+ *           style={{
+ *             paddingTop: 50,
+ *             flexDirection: 'row',
+ *             justifyContent: 'center'
+ *           }}>
+ *           <Menu
+ *             visible={this.state.visible}
+ *             onDismiss={this._closeMenu}
+ *             anchor={
+ *               <Button onPress={this._openMenu}>Show menu</Button>
+ *             }
+ *           >
+ *             <Menu.Item onPress={() => {}} title="Item 1" />
+ *             <Menu.Item onPress={() => {}} title="Item 2" />
+ *             <Divider />
+ *             <Menu.Item onPress={() => {}} title="Item 3" />
+ *           </Menu>
+ *         </View>
+ *       </Provider>
  *     );
  *   }
  * }
