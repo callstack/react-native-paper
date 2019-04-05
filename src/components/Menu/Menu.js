@@ -175,9 +175,7 @@ class Menu extends React.Component<Props, State> {
       !menuLayout.width ||
       !menuLayout.height ||
       !anchorLayout.width ||
-      !anchorLayout.height ||
-      !anchorLayout.x ||
-      !anchorLayout.y
+      !anchorLayout.height
     ) {
       BackHandler.removeEventListener(
         'hardwareBackPress',
@@ -246,6 +244,12 @@ class Menu extends React.Component<Props, State> {
       scaleAnimation,
     } = this.state;
 
+    // I don't know why but on Android measure function is wrong by 24
+    const additionalVerticalValue = Platform.select({
+      android: 24,
+      default: 0,
+    });
+
     let { left, top } = this.state;
 
     const scaleTransforms = [
@@ -278,6 +282,11 @@ class Menu extends React.Component<Props, State> {
           outputRange: [-(menuLayout.width / 2), 0],
         }),
       });
+
+      // Check if menu position has enough space from left side
+      if (left >= 0 && left < SCREEN_INDENT) {
+        left = SCREEN_INDENT;
+      }
     } else {
       positionTransforms.push({
         translateX: scaleAnimation.x.interpolate({
@@ -286,9 +295,13 @@ class Menu extends React.Component<Props, State> {
         }),
       });
 
-      left =
-        Math.min(screenWidth - SCREEN_INDENT, left + anchorLayout.width) -
-        menuLayout.width;
+      left += anchorLayout.width - menuLayout.width;
+
+      const right = left + menuLayout.width;
+      // Check if menu position has enough space from right side
+      if (right <= screenWidth && right > screenWidth - SCREEN_INDENT) {
+        left = screenWidth - SCREEN_INDENT - menuLayout.width;
+      }
     }
 
     // Check if menu fits vertically and if not align it to bottom.
@@ -299,6 +312,11 @@ class Menu extends React.Component<Props, State> {
           outputRange: [-(menuLayout.height / 2), 0],
         }),
       });
+
+      // Check if menu position has enough space from top side
+      if (top >= 0 && top < SCREEN_INDENT) {
+        top = SCREEN_INDENT;
+      }
     } else {
       positionTransforms.push({
         translateY: scaleAnimation.y.interpolate({
@@ -307,9 +325,17 @@ class Menu extends React.Component<Props, State> {
         }),
       });
 
-      top =
-        Math.min(screenHeight - SCREEN_INDENT, top + anchorLayout.height) -
-        menuLayout.height;
+      top += anchorLayout.height - menuLayout.height;
+
+      const bottom = top + menuLayout.height + additionalVerticalValue;
+      // Check if menu position has enough space from bottom side
+      if (bottom <= screenHeight && bottom > screenHeight - SCREEN_INDENT) {
+        top =
+          screenHeight -
+          SCREEN_INDENT -
+          menuLayout.height -
+          additionalVerticalValue;
+      }
     }
 
     const shadowMenuContainerStyle = {
@@ -319,8 +345,7 @@ class Menu extends React.Component<Props, State> {
     };
 
     const positionStyle = {
-      // Don't know why position is wrong by 24 on Android
-      top: Platform.select({ default: top, android: top + 24 }),
+      top: top + additionalVerticalValue,
       ...(I18nManager.isRTL ? { right: left } : { left }),
     };
 
