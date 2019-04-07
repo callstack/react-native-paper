@@ -8,8 +8,9 @@ exports[`renders button with color 1`] = `
       "borderColor": "transparent",
       "borderRadius": 4,
       "borderStyle": "solid",
-      "borderWidth": 0.5,
+      "borderWidth": 0,
       "elevation": 0,
+      "minHeight": 36,
       "minWidth": 64,
       "shadowColor": "#000000",
       "shadowOffset": Object {
@@ -98,8 +99,9 @@ exports[`renders button with icon 1`] = `
       "borderColor": "transparent",
       "borderRadius": 4,
       "borderStyle": "solid",
-      "borderWidth": 0.5,
+      "borderWidth": 0,
       "elevation": 0,
+      "minHeight": 36,
       "minWidth": 64,
       "shadowColor": "#000000",
       "shadowOffset": Object {
@@ -232,8 +234,9 @@ exports[`renders contained contained with mode 1`] = `
       "borderColor": "transparent",
       "borderRadius": 4,
       "borderStyle": "solid",
-      "borderWidth": 0.5,
+      "borderWidth": 0,
       "elevation": 2,
+      "minHeight": 36,
       "minWidth": 64,
       "shadowColor": "#000000",
       "shadowOffset": Object {
@@ -322,8 +325,9 @@ exports[`renders disabled button 1`] = `
       "borderColor": "transparent",
       "borderRadius": 4,
       "borderStyle": "solid",
-      "borderWidth": 0.5,
+      "borderWidth": 0,
       "elevation": 0,
+      "minHeight": 36,
       "minWidth": 64,
     }
   }
@@ -410,8 +414,9 @@ exports[`renders loading button 1`] = `
       "borderColor": "transparent",
       "borderRadius": 4,
       "borderStyle": "solid",
-      "borderWidth": 0.5,
+      "borderWidth": 0,
       "elevation": 0,
+      "minHeight": 36,
       "minWidth": 64,
       "shadowColor": "#000000",
       "shadowOffset": Object {
@@ -515,6 +520,7 @@ exports[`renders outlined button with mode 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0.5,
       "elevation": 0,
+      "minHeight": 36,
       "minWidth": 64,
       "shadowColor": "#000000",
       "shadowOffset": Object {
@@ -603,8 +609,9 @@ exports[`renders text button by default 1`] = `
       "borderColor": "transparent",
       "borderRadius": 4,
       "borderStyle": "solid",
-      "borderWidth": 0.5,
+      "borderWidth": 0,
       "elevation": 0,
+      "minHeight": 36,
       "minWidth": 64,
       "shadowColor": "#000000",
       "shadowOffset": Object {
@@ -693,8 +700,9 @@ exports[`renders text button with mode 1`] = `
       "borderColor": "transparent",
       "borderRadius": 4,
       "borderStyle": "solid",
-      "borderWidth": 0.5,
+      "borderWidth": 0,
       "elevation": 0,
+      "minHeight": 36,
       "minWidth": 64,
       "shadowColor": "#000000",
       "shadowOffset": Object {
