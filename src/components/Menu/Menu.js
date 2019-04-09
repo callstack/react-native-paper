@@ -128,6 +128,10 @@ class Menu extends React.Component<Props, State> {
     }
   }
 
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.props.onDismiss);
+  }
+
   _anchor: ?View;
   _menu: ?View;
 
