@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { Platform } from 'react-native';
-import RadioButtonGroup from './RadioButtonGroup';
+import RadioButtonGroup, { RadioButtonContext } from './RadioButtonGroup';
 import RadioButtonAndroid from './RadioButtonAndroid';
 import RadioButtonIOS from './RadioButtonIOS';
 import { withTheme } from '../core/theming';
@@ -103,11 +103,32 @@ class RadioButton extends React.Component<Props> {
   // @component ./RadioButtonIOS.js
   static IOS = RadioButtonIOS;
 
+  handlePress = context => {
+    const { onPress } = this.props;
+    const { onValueChange } = context;
+
+    onPress || onValueChange(this.props.value);
+  };
+
+  isChecked = context =>
+    context.value === this.props.value ? 'checked' : 'unchecked';
+
   render() {
-    return Platform.OS === 'ios' ? (
-      <RadioButtonIOS {...this.props} />
-    ) : (
-      <RadioButtonAndroid {...this.props} />
+    const Button = Platform.select({
+      default: RadioButtonAndroid,
+      ios: RadioButtonIOS,
+    });
+
+    return (
+      <RadioButtonContext.Consumer>
+        {context => (
+          <Button
+            {...this.props}
+            status={this.props.status || (context && this.isChecked(context))}
+            onPress={() => context && this.handlePress(context)}
+          />
+        )}
+      </RadioButtonContext.Consumer>
     );
   }
 }
