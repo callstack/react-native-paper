@@ -1,17 +1,13 @@
 /* @flow */
 
 import * as React from 'react';
-import {
-  Animated,
-  View,
-  TouchableWithoutFeedback,
-  StyleSheet,
-} from 'react-native';
+import { Animated, View, StyleSheet } from 'react-native';
 import CardContent from './CardContent';
 import CardActions from './CardActions';
 import CardCover from './CardCover';
 import CardTitle from './CardTitle';
 import Surface from '../Surface';
+import TouchableRipple from '../TouchableRipple/';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
@@ -143,15 +139,15 @@ class Card extends React.Component<Props, State> {
         style={[{ borderRadius: roundness, elevation }, style]}
         {...rest}
       >
-        <TouchableWithoutFeedback
+        <TouchableRipple
           delayPressIn={0}
-          disabled={!(onPress || onLongPress)}
           onLongPress={onLongPress}
           onPress={onPress}
           onPressIn={onPress ? this._handlePressIn : undefined}
           onPressOut={onPress ? this._handlePressOut : undefined}
           testID={testID}
           accessible={accessible}
+          style={{ borderRadius: roundness }}
         >
           <View style={styles.innerContainer}>
             {React.Children.map(
@@ -166,7 +162,7 @@ class Card extends React.Component<Props, State> {
                   : child
             )}
           </View>
-        </TouchableWithoutFeedback>
+        </TouchableRipple>
       </Surface>
     );
   }

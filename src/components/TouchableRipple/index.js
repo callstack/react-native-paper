@@ -229,7 +229,8 @@ class TouchableRipple extends React.Component<Props, void> {
       ...rest
     } = this.props;
 
-    const disabled = disabledProp || !this.props.onPress;
+    const disabled =
+      disabledProp || !(this.props.onPress || this.props.onLongPress);
 
     return (
       <TouchableWithoutFeedback
