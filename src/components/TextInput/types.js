@@ -1,6 +1,5 @@
 // @flow
 import { TextInput as NativeTextInput, Animated } from 'react-native';
-import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import type { TextInputProps } from './TextInput';
 
 export type RenderProps = {
@@ -13,7 +12,7 @@ export type RenderProps = {
   onFocus: ?() => mixed,
   onBlur: ?() => mixed,
   underlineColorAndroid: ?string,
-  style: ViewStyleProp,
+  style: any,
   multiline: ?boolean,
   numberOfLines: ?number,
   value: ?string,
