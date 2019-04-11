@@ -13,7 +13,7 @@ import { withTheme } from '../../core/theming';
 import type { Theme, $RemoveChildren } from '../../types';
 import type { IconSource } from './../Icon';
 
-type Props = $RemoveChildren<typeof Surface> & {
+type Props = $RemoveChildren<typeof Surface> & {|
   /**
    * Icon to display for the `FAB`.
    */
@@ -42,11 +42,11 @@ type Props = $RemoveChildren<typeof Surface> & {
   /**
    * Whether `FAB` is currently visible.
    */
-  visible: boolean,
+  visible?: boolean,
   /**
    * Whether to show a loading indicator.
    */
-  loading ?: boolean,
+  loading?: boolean,
   /**
    * Function to execute on press.
    */
