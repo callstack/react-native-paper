@@ -12,6 +12,9 @@ exports[`renders list section with subheader 1`] = `
   }
   theme={
     Object {
+      "animation": Object {
+        "scale": 1,
+      },
       "colors": Object {
         "accent": "#03dac4",
         "backdrop": "rgba(0, 0, 0, 0.5)",
@@ -314,6 +317,9 @@ exports[`renders list section without subheader 1`] = `
   }
   theme={
     Object {
+      "animation": Object {
+        "scale": 1,
+      },
       "colors": Object {
         "accent": "#03dac4",
         "backdrop": "rgba(0, 0, 0, 0.5)",
