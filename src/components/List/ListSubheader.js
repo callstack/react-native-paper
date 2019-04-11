@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
+import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import color from 'color';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
@@ -12,7 +13,7 @@ type Props = React.ElementConfig<typeof Text> & {
    * @optional
    */
   theme: Theme,
-  style?: any,
+  style?: TextStyleProp,
 };
 
 /**

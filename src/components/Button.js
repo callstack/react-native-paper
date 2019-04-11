@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { ActivityIndicator, Animated, View, StyleSheet } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import color from 'color';
 import Icon from './Icon';
 import Surface from './Surface';
@@ -64,8 +65,8 @@ type Props = React.ElementConfig<typeof Surface> & {|
    * Style of button's inner content.
    * Use this prop to apply custom height and width.
    */
-  contentStyle?: any,
-  style?: any,
+  contentStyle?: ViewStyleProp,
+  style?: ViewStyleProp,
   /**
    * @optional
    */

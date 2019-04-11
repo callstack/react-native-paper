@@ -2,6 +2,10 @@
 
 import * as React from 'react';
 import { StyleSheet, TextInput, I18nManager } from 'react-native';
+import type {
+  ViewStyleProp,
+  TextStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet';
 import color from 'color';
 import IconButton from './IconButton';
 import Surface from './Surface';
@@ -33,8 +37,8 @@ type Props = React.ElementConfig<typeof TextInput> & {|
   /**
    * Set style of the TextInput component inside the searchbar
    */
-  inputStyle?: any,
-  style?: any,
+  inputStyle?: TextStyleProp,
+  style?: ViewStyleProp,
 
   /**
    * @optional

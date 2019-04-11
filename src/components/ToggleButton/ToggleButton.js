@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { withTheme } from '../../core/theming';
 import color from 'color';
 import IconButton from '../IconButton';
@@ -45,7 +46,7 @@ type Props = {
    * Status of button.
    */
   status?: 'checked' | 'unchecked',
-  style?: any,
+  style?: ViewStyleProp,
   /**
    * @optional
    */

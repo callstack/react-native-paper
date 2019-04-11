@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import DataTableCell from './DataTableCell';
 import DataTableHeader from './DataTableHeader';
 import DataTableTitle from './DataTableTitle';
@@ -13,7 +14,7 @@ type Props = React.ElementConfig<typeof View> & {
    * Content of the `DataTable`.
    */
   children: React.Node,
-  style?: any,
+  style?: ViewStyleProp,
 };
 
 /**

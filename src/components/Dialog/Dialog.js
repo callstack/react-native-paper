@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { StyleSheet, Platform } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import Modal from '../Modal';
 import DialogContent from './DialogContent';
 import DialogActions from './DialogActions';
@@ -27,7 +28,7 @@ type Props = {|
    * Content of the `Dialog`.
    */
   children: React.Node,
-  style?: any,
+  style?: ViewStyleProp,
   /**
    * @optional
    */

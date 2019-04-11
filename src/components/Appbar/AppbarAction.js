@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import color from 'color';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { black } from '../../styles/colors';
 import IconButton from '../IconButton';
 import type { IconSource } from '../Icon';
@@ -31,7 +32,7 @@ type Props = React.ElementConfig<typeof IconButton> & {|
    * Function to execute on press.
    */
   onPress?: () => mixed,
-  style?: any,
+  style?: ViewStyleProp,
 |};
 
 /**

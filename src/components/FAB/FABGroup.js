@@ -9,6 +9,7 @@ import {
   StatusBar,
   SafeAreaView,
 } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { polyfill } from 'react-lifecycles-compat';
 import color from 'color';
 import FAB from './FAB';
@@ -34,7 +35,7 @@ type Props = {|
     label?: string,
     color?: string,
     accessibilityLabel?: string,
-    style?: any,
+    style?: ViewStyleProp,
     onPress: () => mixed,
   }>,
   /**
@@ -71,11 +72,11 @@ type Props = {|
    * Style for the group. You can use it to pass additional styles if you need.
    * For example, you can set an additional padding if you have a tab bar at the bottom.
    */
-  style?: any,
+  style?: ViewStyleProp,
   /**
    * Style for the FAB. It allows to pass the FAB button styles, such as backgroundColor.
    */
-  fabStyle?: any,
+  fabStyle?: ViewStyleProp,
   /**
    * @optional
    */

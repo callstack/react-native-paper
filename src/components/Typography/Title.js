@@ -4,9 +4,7 @@ import * as React from 'react';
 import { Text, StyleSheet } from 'react-native';
 import StyledText from './StyledText';
 
-type Props = React.ElementConfig<typeof Text> & {
-  style?: any,
-};
+type Props = React.ElementConfig<typeof Text>;
 
 /**
  * Typography component for showing a title.
