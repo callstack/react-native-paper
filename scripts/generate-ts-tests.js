@@ -22,6 +22,8 @@ const getFiles = () =>
     .map(filePath => {
       const content = readFileSync(filePath, 'utf-8');
       const match = EXAMPLE_REGEX.exec(content);
+      // JS regexp is stateful, you need to reset lastIndex each time
+      EXAMPLE_REGEX.lastIndex = 0;
       return match
         ? {
             path: filePath,

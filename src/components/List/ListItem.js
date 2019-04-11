@@ -3,7 +3,10 @@
 import color from 'color';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import type {
+  ViewStyleProp,
+  TextStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet';
 import TouchableRipple from '../TouchableRipple';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
@@ -34,7 +37,26 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {|
    * @optional
    */
   theme: Theme,
+  /**
+   * Style that is passed to the wrapping TouchableRipple element.
+   */
   style?: ViewStyleProp,
+  /**
+   * Style that is passed to Title element.
+   */
+  titleStyle?: TextStyleProp,
+  /**
+   * Style that is passed to Description element.
+   */
+  descriptionStyle?: TextStyleProp,
+  /**
+   * Ellipsize Mode for the Title
+   */
+  titleEllipsizeMode?: 'head' | 'middle' | 'tail' | 'clip',
+  /**
+   * Ellipsize Mode for the Description
+   */
+  descriptionEllipsizeMode?: 'head' | 'middle' | 'tail' | 'clip',
 |};
 
 /**
@@ -74,6 +96,10 @@ class ListItem extends React.Component<Props> {
       onPress,
       theme,
       style,
+      titleStyle,
+      descriptionStyle,
+      titleEllipsizeMode,
+      descriptionEllipsizeMode,
       ...rest
     } = this.props;
     const titleColor = color(theme.colors.text)
@@ -95,19 +121,22 @@ class ListItem extends React.Component<Props> {
           {left ? left({ color: descriptionColor }) : null}
           <View style={[styles.item, styles.content]} pointerEvents="none">
             <Text
+              ellipsizeMode={titleEllipsizeMode}
               numberOfLines={1}
-              style={[styles.title, { color: titleColor }]}
+              style={[styles.title, { color: titleColor }, titleStyle]}
             >
               {title}
             </Text>
             {description ? (
               <Text
+                ellipsizeMode={descriptionEllipsizeMode}
                 numberOfLines={2}
                 style={[
                   styles.description,
                   {
                     color: descriptionColor,
                   },
+                  descriptionStyle,
                 ]}
               >
                 {description}

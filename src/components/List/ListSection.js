@@ -35,7 +35,7 @@ type Props = React.ElementConfig<typeof View> & {
  * import * as React from 'react';
  * import { List } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
+ * class MyComponent extends React.Component {
  *   render() {
  *     return (
  *       <List.Section>
@@ -46,7 +46,7 @@ type Props = React.ElementConfig<typeof View> & {
  *        />
  *         <List.Item
  *           title="Second Item"
- *           left={() => <List.Icon icon="folder" />}
+ *           left={() => <List.Icon color="#000" icon="folder" />}
  *        />
  *      </List.Section>
  *     );

@@ -45,6 +45,7 @@ type State = {
  * ## Usage
  * ```js
  * import * as React from 'react';
+ * import { View } from 'react-native';
  * import { HelperText, TextInput } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {

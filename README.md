@@ -2,7 +2,8 @@
   <img alt="react-native-paper" src="docs/assets/images/paper-logo.svg?sanitize=true" width="300">
 </p>
 <p align="center">
-  Material design for React Native.
+  Material design for React Native.<br/>
+  <a href="https://reactnativepaper.com">reactnativepaper.com</a>
 </p>
 
 ---

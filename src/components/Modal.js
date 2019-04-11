@@ -54,7 +54,7 @@ type State = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Modal, Portal, Text } from 'react-native-paper';
+ * import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
@@ -71,6 +71,12 @@ type State = {
  *         <Modal visible={visible} onDismiss={this._hideModal}>
  *           <Text>Example Modal</Text>
  *         </Modal>
+ *         <Button
+ *           style={{ marginTop: 30 }}
+ *           onPress={this._showModal}
+ *         >
+ *           Show
+ *         </Button>
  *       </Portal>
  *     );
  *   }
@@ -117,11 +123,13 @@ class Modal extends React.Component<Props, State> {
   };
 
   _showModal = () => {
+    BackHandler.removeEventListener('hardwareBackPress', this._handleBack);
     BackHandler.addEventListener('hardwareBackPress', this._handleBack);
     Animated.timing(this.state.opacity, {
       toValue: 1,
       duration: 280,
       easing: Easing.ease,
+      useNativeDriver: true,
     }).start();
   };
 
@@ -131,6 +139,7 @@ class Modal extends React.Component<Props, State> {
       toValue: 0,
       duration: 280,
       easing: Easing.ease,
+      useNativeDriver: true,
     }).start(({ finished }) => {
       if (!finished) {
         return;
@@ -147,6 +156,10 @@ class Modal extends React.Component<Props, State> {
       }
     });
   };
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this._handleBack);
+  }
 
   render() {
     if (!this.state.rendered) return null;

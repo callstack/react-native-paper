@@ -23,6 +23,7 @@ type Props = {|
    */
   action?: {
     label: string,
+    accessibilityLabel?: string,
     onPress: () => mixed,
   },
   /**
@@ -230,6 +231,7 @@ class Snackbar extends React.Component<Props, State> {
           </Text>
           {action ? (
             <Button
+              accessibilityLabel={action.accessibilityLabel}
               onPress={() => {
                 action.onPress();
                 onDismiss();
