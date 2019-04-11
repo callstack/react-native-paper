@@ -156,7 +156,7 @@ class Button extends React.Component<Props, State> {
       ...rest
     } = this.props;
     const { colors, roundness } = theme;
-    const fontFamily = theme.fonts.medium;
+    const font = theme.fonts.medium;
 
     let backgroundColor, borderColor, textColor, borderWidth;
 
@@ -221,7 +221,7 @@ class Button extends React.Component<Props, State> {
       borderRadius: roundness,
     };
     const touchableStyle = { borderRadius: roundness };
-    const textStyle = { color: textColor, fontFamily };
+    const textStyle = { color: textColor, ...font };
     const elevation = disabled ? 0 : this.state.elevation;
 
     return (
@@ -269,7 +269,7 @@ class Button extends React.Component<Props, State> {
                 styles.label,
                 compact && styles.compactLabel,
                 textStyle,
-                { fontFamily },
+                font,
               ]}
             >
               {React.Children.map(

@@ -89,7 +89,7 @@ class Badge extends React.Component<Props, State> {
             backgroundColor,
             color: textColor,
             fontSize: size * 0.5,
-            fontFamily: theme.fonts.regular,
+            ...theme.fonts.regular,
             lineHeight: size,
             height: size,
             minWidth: size,
