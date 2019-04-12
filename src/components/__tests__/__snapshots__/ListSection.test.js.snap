@@ -97,10 +97,10 @@ exports[`renders list section with subheader 1`] = `
               "alignItems": "center",
               "height": 40,
               "justifyContent": "center",
-              "margin": 8,
+              "marginRight": 16,
               "width": 40,
             },
-            undefined,
+            null,
           ]
         }
       >
@@ -144,7 +144,8 @@ exports[`renders list section with subheader 1`] = `
         style={
           Array [
             Object {
-              "margin": 8,
+              "marginVertical": 6,
+              "paddingLeft": 8,
             },
             Object {
               "flex": 1,
@@ -216,10 +217,10 @@ exports[`renders list section with subheader 1`] = `
               "alignItems": "center",
               "height": 40,
               "justifyContent": "center",
-              "margin": 8,
+              "marginRight": 16,
               "width": 40,
             },
-            undefined,
+            null,
           ]
         }
       >
@@ -263,7 +264,8 @@ exports[`renders list section with subheader 1`] = `
         style={
           Array [
             Object {
-              "margin": 8,
+              "marginVertical": 6,
+              "paddingLeft": 8,
             },
             Object {
               "flex": 1,
@@ -373,10 +375,10 @@ exports[`renders list section without subheader 1`] = `
               "alignItems": "center",
               "height": 40,
               "justifyContent": "center",
-              "margin": 8,
+              "marginRight": 16,
               "width": 40,
             },
-            undefined,
+            null,
           ]
         }
       >
@@ -420,7 +422,8 @@ exports[`renders list section without subheader 1`] = `
         style={
           Array [
             Object {
-              "margin": 8,
+              "marginVertical": 6,
+              "paddingLeft": 8,
             },
             Object {
               "flex": 1,
@@ -492,10 +495,10 @@ exports[`renders list section without subheader 1`] = `
               "alignItems": "center",
               "height": 40,
               "justifyContent": "center",
-              "margin": 8,
+              "marginRight": 16,
               "width": 40,
             },
-            undefined,
+            null,
           ]
         }
       >
@@ -539,7 +542,8 @@ exports[`renders list section without subheader 1`] = `
         style={
           Array [
             Object {
-              "margin": 8,
+              "marginVertical": 6,
+              "paddingLeft": 8,
             },
             Object {
               "flex": 1,

@@ -150,7 +150,8 @@ exports[`renders expanded accordion 1`] = `
         style={
           Array [
             Object {
-              "margin": 8,
+              "marginVertical": 6,
+              "paddingLeft": 8,
             },
             Object {
               "flex": 1,
@@ -230,7 +231,7 @@ exports[`renders list accordion with children 1`] = `
               "alignItems": "center",
               "height": 40,
               "justifyContent": "center",
-              "margin": 8,
+              "marginRight": 16,
               "width": 40,
             },
             undefined,
@@ -400,7 +401,7 @@ exports[`renders list accordion with left items 1`] = `
               "alignItems": "center",
               "height": 40,
               "justifyContent": "center",
-              "margin": 8,
+              "marginRight": 16,
               "width": 40,
             },
             undefined,
