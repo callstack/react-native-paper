@@ -118,7 +118,12 @@ class ListItem extends React.Component<Props> {
         onPress={onPress}
       >
         <View style={styles.row}>
-          {left ? left({ color: descriptionColor }) : null}
+          {left
+            ? left({
+                color: descriptionColor,
+                style: description ? styles.iconMargin : null,
+              })
+            : null}
           <View style={[styles.item, styles.content]} pointerEvents="none">
             <Text
               ellipsizeMode={titleEllipsizeMode}
@@ -143,7 +148,12 @@ class ListItem extends React.Component<Props> {
               </Text>
             ) : null}
           </View>
-          {right ? right({ color: descriptionColor }) : null}
+          {right
+            ? right({
+                color: descriptionColor,
+                style: description ? styles.iconMargin : null,
+              })
+            : null}
         </View>
       </TouchableRipple>
     );
@@ -163,8 +173,10 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 14,
   },
+  iconMargin: { marginVertical: 8 },
   item: {
-    margin: 8,
+    marginVertical: 6,
+    paddingLeft: 8,
   },
   content: {
     flex: 1,
