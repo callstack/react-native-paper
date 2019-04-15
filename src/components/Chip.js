@@ -61,6 +61,10 @@ type Props = React.ElementConfig<typeof Surface> & {|
    * Function to execute on close button press. The close button appears only when this prop is specified.
    */
   onClose?: () => mixed,
+  /**
+   * Style of chip's text
+   */
+  textStyle?: any,
   style?: any,
   /**
    * @optional
@@ -138,6 +142,7 @@ class Chip extends React.Component<Props, State> {
       accessibilityLabel,
       onPress,
       onClose,
+      textStyle,
       style,
       theme,
       testID,
@@ -274,6 +279,7 @@ class Chip extends React.Component<Props, State> {
                   marginRight: onClose ? 4 : 8,
                   marginLeft: avatar || icon || selected ? 4 : 8,
                 },
+                textStyle,
               ]}
             >
               {(children: any)}

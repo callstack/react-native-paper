@@ -176,6 +176,13 @@ class ChipExample extends React.Component<Props> {
             >
               Outlined unselected chip with custom color
             </Chip>
+            <Chip
+              onPress={() => {}}
+              style={styles.chip}
+              textStyle={styles.tiny}
+            >
+              With custom size
+            </Chip>
           </View>
         </List.Section>
       </ScrollView>
@@ -194,6 +201,13 @@ const styles = StyleSheet.create({
   },
   chip: {
     margin: 4,
+  },
+  tiny: {
+    marginVertical: 2,
+    marginRight: 2,
+    marginLeft: 2,
+    minHeight: 19,
+    lineHeight: 19,
   },
 });
 
