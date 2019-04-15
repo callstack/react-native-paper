@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   Platform,
 } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import color from 'color';
 import Icon from './Icon';
 import Surface from './Surface';
@@ -61,7 +62,7 @@ type Props = React.ElementConfig<typeof Surface> & {|
    * Function to execute on close button press. The close button appears only when this prop is specified.
    */
   onClose?: () => mixed,
-  style?: any,
+  style?: ViewStyleProp,
   /**
    * @optional
    */

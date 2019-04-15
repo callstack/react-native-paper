@@ -2,6 +2,10 @@
 
 import * as React from 'react';
 import { StyleSheet, TextInput, I18nManager } from 'react-native';
+import type {
+  ViewStyleProp,
+  TextStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet';
 import color from 'color';
 import IconButton from './IconButton';
 import Surface from './Surface';
@@ -33,8 +37,8 @@ type Props = React.ElementConfig<typeof TextInput> & {|
   /**
    * Set style of the TextInput component inside the searchbar
    */
-  inputStyle?: any,
-  style?: any,
+  inputStyle?: TextStyleProp,
+  style?: ViewStyleProp,
 
   /**
    * @optional
@@ -133,15 +137,13 @@ class Searchbar extends React.Component<Props> {
     } = this.props;
     const { colors, roundness, dark, fonts } = theme;
     const textColor = colors.text;
-    const fontFamily = fonts.regular;
-    const iconColor =
-      customIconColor ||
-      (dark
-        ? textColor
-        : color(textColor)
-            .alpha(0.54)
-            .rgb()
-            .string());
+    const font = fonts.regular;
+    const iconColor = dark
+      ? textColor
+      : color(textColor)
+          .alpha(0.54)
+          .rgb()
+          .string();
     const rippleColor = color(textColor)
       .alpha(0.32)
       .rgb()
@@ -163,7 +165,7 @@ class Searchbar extends React.Component<Props> {
           icon={icon || 'search'}
         />
         <TextInput
-          style={[styles.input, { color: textColor, fontFamily }, inputStyle]}
+          style={[styles.input, { color: textColor, ...font }, inputStyle]}
           placeholder={placeholder || ''}
           placeholderTextColor={colors.placeholder}
           selectionColor={colors.primary}

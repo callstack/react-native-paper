@@ -3,6 +3,7 @@
 import color from 'color';
 import * as React from 'react';
 import { Animated, View, StyleSheet } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import FABGroup from './FABGroup';
 import Surface from '../Surface';
 import CrossFadeIcon from '../CrossFadeIcon';
@@ -47,7 +48,7 @@ type Props = $RemoveChildren<typeof Surface> & {|
    * Function to execute on press.
    */
   onPress?: () => mixed,
-  style?: any,
+  style?: ViewStyleProp,
   /**
    * @optional
    */
@@ -212,7 +213,7 @@ class FAB extends React.Component<Props, State> {
               <Text
                 style={[
                   styles.label,
-                  { color: foregroundColor, fontFamily: theme.fonts.medium },
+                  { color: foregroundColor, ...theme.fonts.medium },
                 ]}
               >
                 {label.toUpperCase()}

@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { View, StyleSheet, Animated } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import Surface from './Surface';
 import Text from './Typography/Text';
 import Button from './Button';
@@ -37,7 +38,7 @@ type Props = $RemoveChildren<typeof Surface> & {|
     label: string,
     onPress: () => mixed,
   }>,
-  style?: any,
+  style?: ViewStyleProp,
   /**
    * @optional
    */

@@ -2,6 +2,22 @@
 
 import * as React from 'react';
 
+export type Font = {
+  fontFamily: string,
+  fontWeight?:
+    | 'normal'
+    | 'bold'
+    | '100'
+    | '200'
+    | '300'
+    | '400'
+    | '500'
+    | '600'
+    | '700'
+    | '800'
+    | '900',
+};
+
 export type Theme = {
   dark: boolean,
   roundness: number,
@@ -18,10 +34,13 @@ export type Theme = {
     notification: string,
   },
   fonts: {
-    regular: string,
-    medium: string,
-    light: string,
-    thin: string,
+    regular: Font,
+    medium: Font,
+    light: Font,
+    thin: Font,
+  },
+  animation: {
+    scale: number,
   },
 };
 

@@ -10,6 +10,7 @@ import {
   Platform,
   Keyboard,
 } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { polyfill } from 'react-lifecycles-compat';
 import SafeAreaView from 'react-native-safe-area-view';
 import color from 'color';
@@ -190,8 +191,8 @@ type Props<T> = {
    * barStyle={{ paddingBottom: 48 }}
    * ```
    */
-  barStyle?: any,
-  style?: any,
+  barStyle?: ViewStyleProp,
+  style?: ViewStyleProp,
   /**
    * @optional
    */

@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
   StyleSheet,
 } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import CardContent from './CardContent';
 import CardActions from './CardActions';
 import CardCover from './CardCover';
@@ -32,7 +33,7 @@ type Props = React.ElementConfig<typeof Surface> & {|
    * Content of the `Card`.
    */
   children: React.Node,
-  style?: any,
+  style?: ViewStyleProp,
   /**
    * @optional
    */
