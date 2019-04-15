@@ -50,6 +50,10 @@ type Props = React.ComponentProps<typeof TextInput> & {
    * Custom color for icon, default will be derived from theme
    */
   iconColor?: string;
+  /**
+   * Custom icon for clear button, default will be icon close
+   */
+  clearIcon?: IconSource;
 };
 
 /**
@@ -133,6 +137,7 @@ class Searchbar extends React.Component<Props> {
       theme,
       style,
       iconColor: customIconColor,
+      clearIcon,
       inputStyle,
       ...rest
     } = this.props;
@@ -189,7 +194,7 @@ class Searchbar extends React.Component<Props> {
           color={value ? iconColor : 'rgba(255, 255, 255, 0)'}
           rippleColor={rippleColor}
           onPress={this._handleClearPress}
-          icon="close"
+          icon={clearIcon || 'close'}
           accessibilityTraits="button"
           accessibilityComponentType="button"
           accessibilityRole="button"
