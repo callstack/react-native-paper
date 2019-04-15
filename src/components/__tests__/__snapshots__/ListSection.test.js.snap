@@ -29,10 +29,22 @@ exports[`renders list section with subheader 1`] = `
       },
       "dark": false,
       "fonts": Object {
-        "light": "HelveticaNeue-Light",
-        "medium": "HelveticaNeue-Medium",
-        "regular": "Helvetica Neue",
-        "thin": "HelveticaNeue-Thin",
+        "light": Object {
+          "fontFamily": "System",
+          "fontWeight": "300",
+        },
+        "medium": Object {
+          "fontFamily": "System",
+          "fontWeight": "500",
+        },
+        "regular": Object {
+          "fontFamily": "System",
+          "fontWeight": "400",
+        },
+        "thin": Object {
+          "fontFamily": "System",
+          "fontWeight": "100",
+        },
       },
       "roundness": 4,
     }
@@ -340,10 +352,22 @@ exports[`renders list section without subheader 1`] = `
       },
       "dark": false,
       "fonts": Object {
-        "light": "HelveticaNeue-Light",
-        "medium": "HelveticaNeue-Medium",
-        "regular": "Helvetica Neue",
-        "thin": "HelveticaNeue-Thin",
+        "light": Object {
+          "fontFamily": "System",
+          "fontWeight": "300",
+        },
+        "medium": Object {
+          "fontFamily": "System",
+          "fontWeight": "500",
+        },
+        "regular": Object {
+          "fontFamily": "System",
+          "fontWeight": "400",
+        },
+        "thin": Object {
+          "fontFamily": "System",
+          "fontWeight": "100",
+        },
       },
       "roundness": 4,
     }

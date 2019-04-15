@@ -50,7 +50,8 @@ exports[`renders list item with custom title and description styles 1`] = `
           Array [
             Object {
               "color": "#000000",
-              "fontFamily": "Helvetica Neue",
+              "fontFamily": "System",
+              "fontWeight": "400",
               "textAlign": "left",
               "writingDirection": "ltr",
             },
@@ -76,7 +77,8 @@ exports[`renders list item with custom title and description styles 1`] = `
           Array [
             Object {
               "color": "#000000",
-              "fontFamily": "Helvetica Neue",
+              "fontFamily": "System",
+              "fontWeight": "400",
               "textAlign": "left",
               "writingDirection": "ltr",
             },
