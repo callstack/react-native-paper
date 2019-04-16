@@ -5,6 +5,7 @@ import { View, StyleSheet } from 'react-native';
 import ListSubheader from './ListSubheader';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
+import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 type Props = React.ElementConfig<typeof View> & {
   /**
@@ -19,6 +20,10 @@ type Props = React.ElementConfig<typeof View> & {
    * @optional
    */
   theme: Theme,
+  /**
+   * Style that is passed to Title element.
+   */
+  titleStyle?: TextStyleProp,
   style?: any,
 };
 
@@ -59,11 +64,11 @@ class ListSection extends React.Component<Props> {
   static displayName = 'List.Section';
 
   render() {
-    const { children, title, style, ...rest } = this.props;
+    const { children, title, titleStyle, style, ...rest } = this.props;
 
     return (
       <View {...rest} style={[styles.container, style]}>
-        {title && <ListSubheader>{title}</ListSubheader>}
+        {title && <ListSubheader style={titleStyle}>{title}</ListSubheader>}
         {children}
       </View>
     );

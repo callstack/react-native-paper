@@ -12,6 +12,9 @@ type Props = React.ElementConfig<typeof Text> & {
    * @optional
    */
   theme: Theme,
+  /**
+   * Style that is passed to Text element.
+   */
   style?: any,
 };
 
