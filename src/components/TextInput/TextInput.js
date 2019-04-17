@@ -373,7 +373,7 @@ class TextInput extends React.Component<TextInputProps, State> {
   }
 
   render() {
-    const { mode, ...rest } = this.props;
+    const { mode, padding, ...rest } = this.props;
 
     return mode === 'outlined' ? (
       <TextInputOutlined
@@ -394,6 +394,7 @@ class TextInput extends React.Component<TextInputProps, State> {
         innerRef={ref => {
           this._root = ref;
         }}
+        padding={padding}
         onFocus={this._handleFocus}
         onBlur={this._handleBlur}
         onChangeText={this._handleChangeText}
