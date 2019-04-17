@@ -32,6 +32,7 @@ export type State = {
   labelLayout: {
     measured: boolean,
     width: number,
+    height: number,
   },
 };
 

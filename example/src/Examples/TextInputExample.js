@@ -18,6 +18,17 @@ type State = {
   text: string,
   name: string,
   outlinedText: string,
+  largeText: string,
+  outlinedLargeText: string,
+  nameNoPadding: string,
+  flatDenseText: string,
+  flatDense: string,
+  outlinedDenseText: string,
+  outlinedDense: string,
+  flatMultiline: string,
+  flatTextArea: string,
+  outlinedMultiline: string,
+  outlinedTextArea: string,
 };
 
 class TextInputExample extends React.Component<Props, State> {
@@ -27,9 +38,20 @@ class TextInputExample extends React.Component<Props, State> {
     text: '',
     name: '',
     outlinedText: '',
+    largeText: '',
+    outlinedLargeText: '',
+    nameNoPadding: '',
+    flatDenseText: '',
+    flatDense: '',
+    outlinedDenseText: '',
+    outlinedDense: '',
+    flatMultiline: '',
+    flatTextArea: '',
+    outlinedMultiline: '',
+    outlinedTextArea: '',
   };
 
-  _isUsernameValid = () => /^[a-zA-Z]*$/.test(this.state.name);
+  _isUsernameValid = (name: string) => /^[a-zA-Z]*$/.test(name);
 
   render() {
     const {
@@ -57,6 +79,44 @@ class TextInputExample extends React.Component<Props, State> {
             onChangeText={text => this.setState({ text })}
           />
           <TextInput
+            style={[styles.inputContainerStyle, styles.fontSize]}
+            label="Flat input large font"
+            placeholder="Type something"
+            value={this.state.largeText}
+            onChangeText={largeText => this.setState({ largeText })}
+          />
+          <TextInput
+            style={styles.inputContainerStyle}
+            dense
+            label="Dense flat input"
+            placeholder="Type something"
+            value={this.state.flatDenseText}
+            onChangeText={flatDenseText => this.setState({ flatDenseText })}
+          />
+          <TextInput
+            style={styles.inputContainerStyle}
+            dense
+            placeholder="Dense flat input without label"
+            value={this.state.flatDense}
+            onChangeText={flatDense => this.setState({ flatDense })}
+          />
+          <TextInput
+            style={styles.inputContainerStyle}
+            label="Flat input multiline"
+            multiline
+            placeholder="Type something"
+            value={this.state.flatMultiline}
+            onChangeText={flatMultiline => this.setState({ flatMultiline })}
+          />
+          <TextInput
+            style={[styles.inputContainerStyle, styles.textArea]}
+            label="Flat input text area"
+            multiline
+            placeholder="Type something"
+            value={this.state.flatTextArea}
+            onChangeText={flatTextArea => this.setState({ flatTextArea })}
+          />
+          <TextInput
             disabled
             style={styles.inputContainerStyle}
             label="Disabled flat input"
@@ -71,19 +131,73 @@ class TextInputExample extends React.Component<Props, State> {
           />
           <TextInput
             mode="outlined"
+            style={[styles.inputContainerStyle, styles.fontSize]}
+            label="Outlined large font"
+            placeholder="Type something"
+            value={this.state.outlinedLargeText}
+            onChangeText={outlinedLargeText =>
+              this.setState({ outlinedLargeText })
+            }
+          />
+          <TextInput
+            mode="outlined"
+            style={styles.inputContainerStyle}
+            dense
+            label="Dense outlined input"
+            placeholder="Type something"
+            value={this.state.outlinedDenseText}
+            onChangeText={outlinedDenseText =>
+              this.setState({ outlinedDenseText })
+            }
+          />
+          <TextInput
+            mode="outlined"
+            style={styles.inputContainerStyle}
+            dense
+            placeholder="Dense outlined input without label"
+            value={this.state.outlinedDense}
+            onChangeText={outlinedDense => this.setState({ outlinedDense })}
+          />
+          <TextInput
+            mode="outlined"
+            style={styles.inputContainerStyle}
+            label="Outlined input multiline"
+            multiline
+            placeholder="Type something"
+            value={this.state.outlinedMultiline}
+            onChangeText={outlinedMultiline =>
+              this.setState({ outlinedMultiline })
+            }
+          />
+          <TextInput
+            mode="outlined"
+            style={[styles.inputContainerStyle, styles.textArea]}
+            label="Outlined input text area"
+            multiline
+            placeholder="Type something"
+            value={this.state.outlinedTextArea}
+            onChangeText={outlinedTextArea =>
+              this.setState({ outlinedTextArea })
+            }
+          />
+          <TextInput
+            mode="outlined"
             disabled
             style={styles.inputContainerStyle}
             label="Disabled outlined input"
           />
           <View style={styles.inputContainerStyle}>
             <TextInput
-              label="Input with helper text"
+              label="Input with help"
               placeholder="Enter username, only letters"
               value={this.state.name}
-              error={!this._isUsernameValid()}
+              error={!this._isUsernameValid(this.state.name)}
               onChangeText={name => this.setState({ name })}
             />
-            <HelperText type="error" visible={!this._isUsernameValid()}>
+            <HelperText
+              type="error"
+              visible={!this._isUsernameValid(this.state.name)}
+            >
               Error: Only letters are allowed
             </HelperText>
           </View>
@@ -93,14 +207,14 @@ class TextInputExample extends React.Component<Props, State> {
               style={{ backgroundColor: 'transparent' }}
               padding="none"
               placeholder="Enter username, only letters"
-              value={this.state.name}
-              error={!this._isUsernameValid()}
-              onChangeText={name => this.setState({ name })}
+              value={this.state.nameNoPadding}
+              error={!this._isUsernameValid(this.state.nameNoPadding)}
+              onChangeText={nameNoPadding => this.setState({ nameNoPadding })}
             />
             <HelperText
               type="error"
               padding="none"
-              visible={!this._isUsernameValid()}
+              visible={!this._isUsernameValid(this.state.nameNoPadding)}
             >
               Error: Only letters are allowed
             </HelperText>
@@ -121,6 +235,12 @@ const styles = StyleSheet.create({
   },
   inputContainerStyle: {
     margin: 8,
+  },
+  fontSize: {
+    fontSize: 24,
+  },
+  textArea: {
+    height: 80,
   },
 });
 

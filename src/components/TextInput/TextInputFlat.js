@@ -7,19 +7,33 @@ import {
   TextInput as NativeTextInput,
   StyleSheet,
   I18nManager,
+  Platform,
 } from 'react-native';
 import color from 'color';
 import Text from '../Typography/Text';
 import type { RenderProps, ChildTextInputProps } from './types';
+import {
+  calculateLabelTopPosition,
+  calculateInputHeight,
+  calculatePadding,
+  adjustPaddingFlat,
+} from './helpers';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
-const MINIMIZED_LABEL_Y_OFFSET = -12;
+const MINIMIZED_LABEL_Y_OFFSET = -18;
 const MAXIMIZED_LABEL_FONT_SIZE = 16;
 const MINIMIZED_LABEL_FONT_SIZE = 12;
 const LABEL_WIGGLE_X_OFFSET = 4;
 const LABEL_PADDING_HORIZONTAL = 12;
-const RANDOM_VALUE_TO_CENTER_LABEL = 4; // Don't know why 4, but it works
+
+const LABEL_PADDING_TOP = 30;
+const LABEL_PADDING_TOP_DENSE = 24;
+const MIN_HEIGHT = 64;
+const MIN_DENSE_HEIGHT_WL = 52;
+const MIN_DENSE_HEIGHT = 40;
+
+const INPUT_OFFSET = 8;
 
 class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
   static defaultProps = {
@@ -39,6 +53,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       selectionColor,
       underlineColor,
       padding,
+      dense,
       style,
       theme,
       render,
@@ -56,6 +71,10 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
     const font = fonts.regular;
     const hasActiveOutline = parentState.focused || error;
     const paddingOffset = padding !== 'none' ? styles.paddingOffset : null;
+
+    const { fontSize: fontSizeStyle, height, ...viewStyle } =
+      StyleSheet.flatten(style) || {};
+    const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
 
     let inputTextColor, activeColor, underlineColorCustom, placeholderColor;
 
@@ -87,15 +106,93 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       borderTopRightRadius: theme.roundness,
     };
 
-    const labelHalfWidth = parentState.labelLayout.width / 2;
+    const labelScale = MINIMIZED_LABEL_FONT_SIZE / fontSize;
+    const fontScale = MAXIMIZED_LABEL_FONT_SIZE / fontSize;
+
+    const labelWidth = parentState.labelLayout.width;
+    const labelHeight = parentState.labelLayout.height;
+    const labelHalfWidth = labelWidth / 2;
+    const labelHalfHeight = labelHeight / 2;
+
     const baseLabelTranslateX =
       (I18nManager.isRTL ? 1 : -1) *
-      (1 - MINIMIZED_LABEL_FONT_SIZE / MAXIMIZED_LABEL_FONT_SIZE) *
-      labelHalfWidth;
+      (labelHalfWidth -
+        (labelScale * labelWidth) / 2 -
+        (fontSize - MINIMIZED_LABEL_FONT_SIZE) * labelScale +
+        (!paddingOffset ? (1 - labelScale) * LABEL_PADDING_HORIZONTAL : 0));
+
+    const minInputHeight = dense
+      ? (label ? MIN_DENSE_HEIGHT_WL : MIN_DENSE_HEIGHT) -
+        LABEL_PADDING_TOP_DENSE
+      : MIN_HEIGHT - LABEL_PADDING_TOP;
+
+    const inputHeight = calculateInputHeight(
+      labelHeight,
+      height,
+      minInputHeight
+    );
+
+    const topPosition = multiline
+      ? calculateLabelTopPosition(
+          labelHeight,
+          inputHeight,
+          height ? 0 : minInputHeight / 2
+        )
+      : calculateLabelTopPosition(
+          labelHeight,
+          inputHeight,
+          !height ? minInputHeight / 2 : 0
+        );
+
+    const flatHeight =
+      inputHeight +
+      (!height ? (dense ? LABEL_PADDING_TOP_DENSE : LABEL_PADDING_TOP) : 0);
+
+    const isAndroid = Platform.OS === 'android';
+
+    if (height && typeof height !== 'number')
+      // eslint-disable-next-line
+      console.warn('Currently we support only numbers in height prop');
+
+    const paddingSettings = {
+      height: +height || undefined,
+      labelHalfHeight,
+      multiline,
+      dense,
+      offset: INPUT_OFFSET,
+      topPosition,
+      fontSize,
+      label,
+      scale: fontScale,
+      isAndroid,
+      styles: dense ? styles.inputFlatDense : styles.inputFlat,
+    };
+
+    const pad = calculatePadding(paddingSettings);
+
+    const paddingFlat = adjustPaddingFlat({
+      ...paddingSettings,
+      pad,
+    });
+
+    const baseLabelTranslateY =
+      -labelHalfHeight - (topPosition + MINIMIZED_LABEL_Y_OFFSET);
+
+    const labelTranslationX = {
+      transform: [
+        {
+          // Offset label scale since RN doesn't support transform origin
+          translateX: parentState.labeled.interpolate({
+            inputRange: [0, 1],
+            outputRange: [baseLabelTranslateX, 0],
+          }),
+        },
+      ],
+    };
 
     const labelStyle = {
       ...font,
-      fontSize: MAXIMIZED_LABEL_FONT_SIZE,
+      fontSize,
       transform: [
         {
           // Wiggle the label when there's an error
@@ -112,40 +209,21 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
           // Move label to top
           translateY: parentState.labeled.interpolate({
             inputRange: [0, 1],
-            outputRange: [MINIMIZED_LABEL_Y_OFFSET, 0],
+            outputRange: [baseLabelTranslateY, 0],
           }),
         },
         {
           // Make label smaller
           scale: parentState.labeled.interpolate({
             inputRange: [0, 1],
-            outputRange: [
-              MINIMIZED_LABEL_FONT_SIZE / MAXIMIZED_LABEL_FONT_SIZE,
-              1,
-            ],
-          }),
-        },
-        {
-          // Offset label scale since RN doesn't support transform origin
-          translateX: parentState.labeled.interpolate({
-            inputRange: [0, 1],
-            outputRange: [
-              baseLabelTranslateX > 0
-                ? baseLabelTranslateX +
-                  labelHalfWidth / LABEL_PADDING_HORIZONTAL -
-                  RANDOM_VALUE_TO_CENTER_LABEL
-                : baseLabelTranslateX -
-                  labelHalfWidth / LABEL_PADDING_HORIZONTAL +
-                  (paddingOffset ? RANDOM_VALUE_TO_CENTER_LABEL : 0),
-              0,
-            ],
+            outputRange: [labelScale, 1],
           }),
         },
       ],
     };
 
     return (
-      <View style={[containerStyle, style]}>
+      <View style={[containerStyle, viewStyle]}>
         <Animated.View
           style={[
             styles.underline,
@@ -161,93 +239,119 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
           ]}
         />
 
-        {label ? (
-          // Position colored placeholder and gray placeholder on top of each other and crossfade them
-          // This gives the effect of animating the color, but allows us to use native driver
-          <View
-            pointerEvents="none"
-            style={[
-              StyleSheet.absoluteFill,
-              {
-                opacity:
-                  // Hide the label in minimized state until we measure it's width
-                  parentState.value || parentState.focused
-                    ? parentState.labelLayout.measured
-                      ? 1
-                      : 0
-                    : 1,
-              },
-            ]}
-          >
-            <AnimatedText
-              onLayout={onLayoutAnimatedText}
+        <View
+          style={{
+            paddingTop: 0,
+            paddingBottom: 0,
+            minHeight:
+              height ||
+              (dense
+                ? label
+                  ? MIN_DENSE_HEIGHT_WL
+                  : MIN_DENSE_HEIGHT
+                : MIN_HEIGHT),
+          }}
+        >
+          {label ? (
+            // Position colored placeholder and gray placeholder on top of each other and crossfade them
+            // This gives the effect of animating the color, but allows us to use native driver
+            <Animated.View
+              pointerEvents="none"
               style={[
-                styles.placeholder,
-                styles.placeholderFlat,
-                labelStyle,
-                paddingOffset,
+                StyleSheet.absoluteFill,
                 {
-                  color: activeColor,
-                  opacity: parentState.labeled.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [hasActiveOutline ? 1 : 0, 0],
-                  }),
+                  opacity:
+                    // Hide the label in minimized state until we measure it's width
+                    parentState.value || parentState.focused
+                      ? parentState.labelLayout.measured
+                        ? 1
+                        : 0
+                      : 1,
                 },
+                labelTranslationX,
               ]}
-              numberOfLines={1}
             >
-              {label}
-            </AnimatedText>
-            <AnimatedText
-              style={[
-                styles.placeholder,
-                styles.placeholderFlat,
-                labelStyle,
-                paddingOffset,
-                {
-                  color: placeholderColor,
-                  opacity: hasActiveOutline ? parentState.labeled : 1,
-                },
-              ]}
-              numberOfLines={1}
-            >
-              {label}
-            </AnimatedText>
-          </View>
-        ) : null}
+              <AnimatedText
+                onLayout={onLayoutAnimatedText}
+                style={[
+                  styles.placeholder,
+                  {
+                    top: topPosition,
+                  },
+                  labelStyle,
+                  paddingOffset,
+                  {
+                    color: activeColor,
+                    opacity: parentState.labeled.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [hasActiveOutline ? 1 : 0, 0],
+                    }),
+                  },
+                ]}
+                numberOfLines={1}
+              >
+                {label}
+              </AnimatedText>
+              <AnimatedText
+                style={[
+                  styles.placeholder,
+                  {
+                    top: topPosition,
+                  },
+                  labelStyle,
+                  paddingOffset,
+                  {
+                    color: placeholderColor,
+                    opacity: hasActiveOutline
+                      ? parentState.labeled
+                      : parentState.labelLayout.measured
+                        ? 1
+                        : 0,
+                  },
+                ]}
+                numberOfLines={1}
+              >
+                {label}
+              </AnimatedText>
+            </Animated.View>
+          ) : null}
 
-        {render(
-          ({
-            ...rest,
-            ref: innerRef,
-            onChangeText,
-            placeholder: label
-              ? parentState.placeholder
-              : this.props.placeholder,
-            placeholderTextColor: placeholderColor,
-            editable: !disabled && editable,
-            selectionColor:
-              typeof selectionColor === 'undefined'
-                ? activeColor
-                : selectionColor,
-            onFocus,
-            onBlur,
-            underlineColorAndroid: 'transparent',
-            multiline,
-            style: [
-              styles.input,
-              this.props.label
-                ? styles.inputFlatWithLabel
-                : styles.inputFlatWithoutLabel,
-              paddingOffset,
-              {
-                color: inputTextColor,
-                ...font,
-                textAlignVertical: multiline ? 'top' : 'center',
-              },
-            ],
-          }: RenderProps)
-        )}
+          {render(
+            ({
+              ...rest,
+              ref: innerRef,
+              onChangeText,
+              adjustsFontSizeToFit: true,
+              placeholder: label
+                ? parentState.placeholder
+                : this.props.placeholder,
+              placeholderTextColor: placeholderColor,
+              editable: !disabled && editable,
+              selectionColor:
+                typeof selectionColor === 'undefined'
+                  ? activeColor
+                  : selectionColor,
+              onFocus,
+              onBlur,
+              underlineColorAndroid: 'transparent',
+              multiline,
+              style: [
+                styles.input,
+                paddingOffset,
+                !multiline || (multiline && height)
+                  ? { height: flatHeight }
+                  : {},
+                paddingFlat,
+                {
+                  fontSize,
+                  color: inputTextColor,
+                  ...font,
+                  textAlignVertical: multiline && height ? 'top' : 'center',
+                },
+              ],
+            }: RenderProps)
+          )}
+        </View>
       </View>
     );
   }
@@ -259,10 +363,6 @@ const styles = StyleSheet.create({
   placeholder: {
     position: 'absolute',
     left: 0,
-    fontSize: 16,
-  },
-  placeholderFlat: {
-    top: 19,
   },
   underline: {
     position: 'absolute',
@@ -272,19 +372,18 @@ const styles = StyleSheet.create({
     height: 2,
   },
   input: {
-    flexGrow: 1,
-    fontSize: 16,
+    flex: 1,
     margin: 0,
-    minHeight: 58,
     textAlign: I18nManager.isRTL ? 'right' : 'left',
     zIndex: 1,
   },
-  inputFlatWithLabel: {
+  inputFlat: {
     paddingTop: 24,
-    paddingBottom: 6,
+    paddingBottom: 4,
   },
-  inputFlatWithoutLabel: {
-    paddingVertical: 15,
+  inputFlatDense: {
+    paddingTop: 22,
+    paddingBottom: 2,
   },
   paddingOffset: {
     paddingHorizontal: LABEL_PADDING_HORIZONTAL,

@@ -57,6 +57,10 @@ export type TextInputProps = {|
    */
   padding?: 'none' | 'normal',
   /**
+   * Sets min height with densed layout.
+   */
+  dense?: boolean,
+  /**
    * Whether the input can have multiple lines.
    */
   multiline?: boolean,
@@ -153,6 +157,7 @@ class TextInput extends React.Component<TextInputProps, State> {
   static defaultProps = {
     mode: 'flat',
     padding: 'normal',
+    dense: false,
     disabled: false,
     error: false,
     multiline: false,
@@ -178,6 +183,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     labelLayout: {
       measured: false,
       width: 0,
+      height: 0,
     },
   };
 
@@ -333,6 +339,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     this.setState({
       labelLayout: {
         width: e.nativeEvent.layout.width,
+        height: e.nativeEvent.layout.height,
         measured: true,
       },
     });
