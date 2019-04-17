@@ -53,6 +53,10 @@ export type TextInputProps = {|
    */
   underlineColor?: string,
   /**
+   * Whether to apply padding to label and input.
+   */
+  padding?: 'none' | 'offset',
+  /**
    * Whether the input can have multiple lines.
    */
   multiline?: boolean,
@@ -148,6 +152,7 @@ export type TextInputProps = {|
 class TextInput extends React.Component<TextInputProps, State> {
   static defaultProps = {
     mode: 'flat',
+    padding: 'offset',
     disabled: false,
     error: false,
     multiline: false,

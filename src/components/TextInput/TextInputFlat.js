@@ -37,6 +37,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       error,
       selectionColor,
       underlineColor,
+      padding,
       style,
       theme,
       render,
@@ -53,6 +54,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
     const { colors, fonts } = theme;
     const fontFamily = fonts.regular;
     const hasActiveOutline = parentState.focused || error;
+    const paddingOffset = padding !== 'none';
 
     let inputTextColor, activeColor, underlineColorCustom, placeholderColor;
 
@@ -133,7 +135,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
                   RANDOM_VALUE_TO_CENTER_LABEL
                 : baseLabelTranslateX -
                   labelHalfWidth / LABEL_PADDING_HORIZONTAL +
-                  RANDOM_VALUE_TO_CENTER_LABEL,
+                  (paddingOffset ? RANDOM_VALUE_TO_CENTER_LABEL : 0),
               0,
             ],
           }),
@@ -182,6 +184,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
                 styles.placeholder,
                 styles.placeholderFlat,
                 labelStyle,
+                paddingOffset && styles.paddingOffset,
                 {
                   color: activeColor,
                   opacity: parentState.labeled.interpolate({
@@ -199,6 +202,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
                 styles.placeholder,
                 styles.placeholderFlat,
                 labelStyle,
+                paddingOffset && styles.paddingOffset,
                 {
                   color: placeholderColor,
                   opacity: hasActiveOutline ? parentState.labeled : 1,
@@ -234,6 +238,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
               this.props.label
                 ? styles.inputFlatWithLabel
                 : styles.inputFlatWithoutLabel,
+              paddingOffset && styles.paddingOffset,
               {
                 color: inputTextColor,
                 fontFamily,
@@ -254,7 +259,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     fontSize: 16,
-    paddingHorizontal: LABEL_PADDING_HORIZONTAL,
   },
   placeholderFlat: {
     top: 19,
@@ -268,7 +272,6 @@ const styles = StyleSheet.create({
   },
   input: {
     flexGrow: 1,
-    paddingHorizontal: 12,
     fontSize: 16,
     margin: 0,
     minHeight: 58,
@@ -281,5 +284,8 @@ const styles = StyleSheet.create({
   },
   inputFlatWithoutLabel: {
     paddingVertical: 15,
+  },
+  paddingOffset: {
+    paddingHorizontal: LABEL_PADDING_HORIZONTAL,
   },
 });
