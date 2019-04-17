@@ -4,6 +4,7 @@ import { ThemeShape } from '../types';
 export interface HelperTextProps {
   type?: 'error' | 'info';
   visible?: boolean;
+  padding?: 'none'|'offset',
   children: React.ReactNode;
   style?: any;
   theme?: ThemeShape;

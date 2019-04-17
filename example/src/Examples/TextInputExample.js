@@ -87,6 +87,24 @@ class TextInputExample extends React.Component<Props, State> {
               Error: Only letters are allowed
             </HelperText>
           </View>
+          <View style={styles.inputContainerStyle}>
+            <TextInput
+              label="Input with no padding"
+              style={{ backgroundColor: 'transparent' }}
+              padding="none"
+              placeholder="Enter username, only letters"
+              value={this.state.name}
+              error={!this._isUsernameValid()}
+              onChangeText={name => this.setState({ name })}
+            />
+            <HelperText
+              type="error"
+              padding="none"
+              visible={!this._isUsernameValid()}
+            >
+              Error: Only letters are allowed
+            </HelperText>
+          </View>
         </ScrollView>
       </KeyboardAvoidingView>
     );
