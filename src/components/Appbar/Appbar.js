@@ -135,12 +135,9 @@ class Appbar extends React.Component<Props> {
           .map((child, i) => {
             if (
               !React.isValidElement(child) ||
-              ![
-                'AppbarContent',
-                'AppbarAction',
-                'AppbarBackAction',
-                'AppbarHeader',
-              ].includes(child.type.name)
+              ![AppbarContent, AppbarAction, AppbarBackAction].includes(
+                child.type
+              )
             ) {
               return child;
             }

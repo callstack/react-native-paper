@@ -15,4 +15,18 @@ describe('Appbar', () => {
 
     expect(tree).toMatchSnapshot();
   });
+
+  it('passes additional props to AppbarBackAction, AppbarContent and AppbarAction', () => {
+    const tree = renderer
+      .create(
+        <Appbar>
+          <Appbar.BackAction onPress={() => {}} />
+          <Appbar.Content title="Examples" />
+          <Appbar.Action icon="menu" onPress={() => {}} />
+        </Appbar>
+      )
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
 });
