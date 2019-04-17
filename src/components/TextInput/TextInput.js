@@ -61,6 +61,10 @@ export type TextInputProps = {|
    */
   numberOfLines?: number,
   /**
+   * The number of lines to show in the input (Android only).
+   */
+  paddingHorizontal?: number,
+  /**
    * Callback that is called when the text input is focused.
    */
   onFocus?: (args: any) => mixed,
@@ -152,6 +156,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     error: false,
     multiline: false,
     editable: true,
+    paddingHorizontal: 12,
     render: (props: RenderProps) => <NativeTextInput {...props} />,
   };
 
@@ -360,7 +365,7 @@ class TextInput extends React.Component<TextInputProps, State> {
   }
 
   render() {
-    const { mode, ...rest } = this.props;
+    const { mode, paddingHorizontal, ...rest } = this.props;
 
     return mode === 'outlined' ? (
       <TextInputOutlined
@@ -381,6 +386,7 @@ class TextInput extends React.Component<TextInputProps, State> {
         innerRef={ref => {
           this._root = ref;
         }}
+        paddingHorizontal={paddingHorizontal}
         onFocus={this._handleFocus}
         onBlur={this._handleBlur}
         onChangeText={this._handleChangeText}

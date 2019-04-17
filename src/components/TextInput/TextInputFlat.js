@@ -27,6 +27,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
     error: false,
     multiline: false,
     editable: true,
+    paddingHorizontal: 12,
     render: (props: RenderProps) => <NativeTextInput {...props} />,
   };
 
@@ -47,6 +48,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       onBlur,
       onChangeText,
       onLayoutAnimatedText,
+      paddingHorizontal,
       ...rest
     } = this.props;
 
@@ -188,6 +190,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
                     inputRange: [0, 1],
                     outputRange: [hasActiveOutline ? 1 : 0, 0],
                   }),
+                  paddingHorizontal,
                 },
               ]}
               numberOfLines={1}
@@ -202,6 +205,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
                 {
                   color: placeholderColor,
                   opacity: hasActiveOutline ? parentState.labeled : 1,
+                  paddingHorizontal,
                 },
               ]}
               numberOfLines={1}
@@ -238,6 +242,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
                 color: inputTextColor,
                 fontFamily,
                 textAlignVertical: multiline ? 'top' : 'center',
+                paddingHorizontal,
               },
             ],
           }: RenderProps)

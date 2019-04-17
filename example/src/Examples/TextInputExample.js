@@ -18,6 +18,7 @@ type State = {
   text: string,
   name: string,
   outlinedText: string,
+  standardInput: string,
 };
 
 class TextInputExample extends React.Component<Props, State> {
@@ -27,6 +28,7 @@ class TextInputExample extends React.Component<Props, State> {
     text: '',
     name: '',
     outlinedText: '',
+    standardInput: '',
   };
 
   _isUsernameValid = () => /^[a-zA-Z]*$/.test(this.state.name);
@@ -74,6 +76,13 @@ class TextInputExample extends React.Component<Props, State> {
             disabled
             style={styles.inputContainerStyle}
             label="Disabled outlined input"
+          />
+          <TextInput
+            mode="flat"
+            paddingHorizontal={0}
+            style={styles.inputContainerStyle}
+            label="Standard input"
+            onChangeText={standardInput => this.setState({ standardInput })}
           />
           <View style={styles.inputContainerStyle}>
             <TextInput
