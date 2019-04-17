@@ -22,12 +22,12 @@ const DarkTheme: Theme = {
     surface: grey800,
     error: redA400,
     text: white,
+    typography: {
+      primary: 'rgba(255, 255, 255, 0.87)',
+      secondary: 'rgba(255, 255, 255, 0.54)',
+    },
     disabled: color(white)
       .alpha(0.3)
-      .rgb()
-      .string(),
-    placeholder: color(white)
-      .alpha(0.54)
       .rgb()
       .string(),
     backdrop: color(black)

@@ -1,6 +1,5 @@
 /* @flow */
 
-import color from 'color';
 import * as React from 'react';
 import { View } from 'react-native';
 import Text from '../Typography/Text';
@@ -63,10 +62,6 @@ class DrawerSection extends React.Component<Props> {
   render() {
     const { children, title, theme, ...rest } = this.props;
     const { colors, fonts } = theme;
-    const titleColor = color(colors.text)
-      .alpha(0.54)
-      .rgb()
-      .string();
     const fontFamily = fonts.medium;
 
     return (
@@ -75,7 +70,11 @@ class DrawerSection extends React.Component<Props> {
           <View style={{ height: 40, justifyContent: 'center' }}>
             <Text
               numberOfLines={1}
-              style={{ color: titleColor, fontFamily, marginLeft: 16 }}
+              style={{
+                color: colors.typography.secondary,
+                fontFamily,
+                marginLeft: 16,
+              }}
             >
               {title}
             </Text>

@@ -1,6 +1,5 @@
 /* @flow */
 
-import color from 'color';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import type {
@@ -94,7 +93,7 @@ class ListItem extends React.Component<Props> {
       title,
       description,
       onPress,
-      theme,
+      theme: { colors },
       style,
       titleStyle,
       descriptionStyle,
@@ -102,14 +101,6 @@ class ListItem extends React.Component<Props> {
       descriptionEllipsizeMode,
       ...rest
     } = this.props;
-    const titleColor = color(theme.colors.text)
-      .alpha(0.87)
-      .rgb()
-      .string();
-    const descriptionColor = color(theme.colors.text)
-      .alpha(0.54)
-      .rgb()
-      .string();
 
     return (
       <TouchableRipple
@@ -118,12 +109,16 @@ class ListItem extends React.Component<Props> {
         onPress={onPress}
       >
         <View style={styles.row}>
-          {left ? left({ color: descriptionColor }) : null}
+          {left ? left({ color: colors.typography.secondary }) : null}
           <View style={[styles.item, styles.content]} pointerEvents="none">
             <Text
               ellipsizeMode={titleEllipsizeMode}
               numberOfLines={1}
-              style={[styles.title, { color: titleColor }, titleStyle]}
+              style={[
+                styles.title,
+                { color: colors.typography.primary },
+                titleStyle,
+              ]}
             >
               {title}
             </Text>
@@ -134,7 +129,7 @@ class ListItem extends React.Component<Props> {
                 style={[
                   styles.description,
                   {
-                    color: descriptionColor,
+                    color: colors.typography.secondary,
                   },
                   descriptionStyle,
                 ]}
@@ -143,7 +138,7 @@ class ListItem extends React.Component<Props> {
               </Text>
             ) : null}
           </View>
-          {right ? right({ color: descriptionColor }) : null}
+          {right ? right({ color: colors.typography.secondary }) : null}
         </View>
       </TouchableRipple>
     );

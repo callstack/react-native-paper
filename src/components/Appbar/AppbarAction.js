@@ -1,10 +1,10 @@
 /* @flow */
 
 import * as React from 'react';
-import color from 'color';
-import { black } from '../../styles/colors';
 import IconButton from '../IconButton';
 import type { IconSource } from '../Icon';
+import type { Theme } from '../../types';
+import { withTheme } from '../../core/theming';
 
 type Props = React.ElementConfig<typeof IconButton> & {|
   /**
@@ -32,12 +32,16 @@ type Props = React.ElementConfig<typeof IconButton> & {|
    */
   onPress?: () => mixed,
   style?: any,
+  /**
+   * @optional
+   */
+  theme: Theme,
 |};
 
 /**
  * A component used to display an action item in the appbar.
  */
-export default class AppbarAction extends React.Component<Props> {
+class AppbarAction extends React.Component<Props> {
   static displayName = 'Appbar.Action';
 
   static defaultProps = {
@@ -46,21 +50,19 @@ export default class AppbarAction extends React.Component<Props> {
 
   render() {
     const {
-      color: iconColor = color(black)
-        .alpha(0.54)
-        .rgb()
-        .string(),
+      color: iconColor,
       icon,
       disabled,
       onPress,
       accessibilityLabel,
+      theme: { colors },
       ...rest
     } = this.props;
 
     return (
       <IconButton
         onPress={onPress}
-        color={iconColor}
+        color={iconColor || colors.typography.secondary}
         icon={icon}
         disabled={disabled}
         accessibilityLabel={accessibilityLabel}
@@ -70,3 +72,5 @@ export default class AppbarAction extends React.Component<Props> {
     );
   }
 }
+
+export default withTheme(AppbarAction);

@@ -1,6 +1,5 @@
 /* @flow */
 
-import color from 'color';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import TouchableRipple from '../TouchableRipple';
@@ -119,15 +118,14 @@ class ListAccordion extends React.Component<Props, State> {
   };
 
   render() {
-    const { left, title, description, children, theme, style } = this.props;
-    const titleColor = color(theme.colors.text)
-      .alpha(0.87)
-      .rgb()
-      .string();
-    const descriptionColor = color(theme.colors.text)
-      .alpha(0.54)
-      .rgb()
-      .string();
+    const {
+      left,
+      title,
+      description,
+      children,
+      theme: { colors },
+      style,
+    } = this.props;
 
     const expanded =
       this.props.expanded !== undefined
@@ -146,7 +144,9 @@ class ListAccordion extends React.Component<Props, State> {
           <View style={styles.row} pointerEvents="none">
             {left
               ? left({
-                  color: expanded ? theme.colors.primary : descriptionColor,
+                  color: expanded
+                    ? colors.primary
+                    : colors.typography.secondary,
                 })
               : null}
             <View style={[styles.item, styles.content]}>
@@ -155,7 +155,9 @@ class ListAccordion extends React.Component<Props, State> {
                 style={[
                   styles.title,
                   {
-                    color: expanded ? theme.colors.primary : titleColor,
+                    color: expanded
+                      ? colors.primary
+                      : colors.typography.primary,
                   },
                 ]}
               >
@@ -167,7 +169,7 @@ class ListAccordion extends React.Component<Props, State> {
                   style={[
                     styles.description,
                     {
-                      color: descriptionColor,
+                      color: colors.typography.secondary,
                     },
                   ]}
                 >
@@ -178,7 +180,7 @@ class ListAccordion extends React.Component<Props, State> {
             <View style={[styles.item, description && styles.multiline]}>
               <Icon
                 source={expanded ? 'keyboard-arrow-up' : 'keyboard-arrow-down'}
-                color={titleColor}
+                color={colors.typography.primary}
                 size={24}
               />
             </View>

@@ -14,12 +14,12 @@ export default {
     surface: white,
     error: '#B00020',
     text: black,
+    typography: {
+      primary: 'rgba(0, 0, 0, 0.87)',
+      secondary: 'rgba(0, 0, 0, 0.54)',
+    },
     disabled: color(black)
       .alpha(0.26)
-      .rgb()
-      .string(),
-    placeholder: color(black)
-      .alpha(0.54)
       .rgb()
       .string(),
     backdrop: color(black)

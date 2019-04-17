@@ -140,13 +140,7 @@ class Searchbar extends React.Component<Props> {
     const textColor = colors.text;
     const fontFamily = fonts.regular;
     const iconColor =
-      customIconColor ||
-      (dark
-        ? textColor
-        : color(textColor)
-            .alpha(0.54)
-            .rgb()
-            .string());
+      customIconColor || (dark ? textColor : colors.typography.secondary);
     const rippleColor = color(textColor)
       .alpha(0.32)
       .rgb()
@@ -170,7 +164,7 @@ class Searchbar extends React.Component<Props> {
         <TextInput
           style={[styles.input, { color: textColor, fontFamily }, inputStyle]}
           placeholder={placeholder || ''}
-          placeholderTextColor={colors.placeholder}
+          placeholderTextColor={colors.typography.secondary}
           selectionColor={colors.primary}
           underlineColorAndroid="transparent"
           returnKeyType="search"

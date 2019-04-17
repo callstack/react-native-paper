@@ -8,7 +8,6 @@ import {
   StyleSheet,
   I18nManager,
 } from 'react-native';
-import color from 'color';
 import Text from '../Typography/Text';
 import type { ChildTextInputProps, RenderProps } from './types';
 
@@ -63,15 +62,12 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       containerStyle;
 
     if (disabled) {
-      inputTextColor = activeColor = color(colors.text)
-        .alpha(0.54)
-        .rgb()
-        .string();
+      inputTextColor = activeColor = colors.typography.secondary;
       placeholderColor = outlineColor = colors.disabled;
     } else {
       inputTextColor = colors.text;
       activeColor = error ? colors.error : colors.primary;
-      placeholderColor = outlineColor = colors.placeholder;
+      placeholderColor = outlineColor = colors.typography.secondary;
     }
 
     const labelHalfWidth = parentState.labelLayout.width / 2;
@@ -133,10 +129,10 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
 
     return (
       <View style={[containerStyle, style]}>
-        {/* 
+        {/*
           Render the outline separately from the container
           This is so that the label can overlap the outline
-          Otherwise the border will cut off the label on Android 
+          Otherwise the border will cut off the label on Android
           */}
         <View
           pointerEvents="none"

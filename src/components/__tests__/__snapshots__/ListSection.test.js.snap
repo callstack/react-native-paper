@@ -19,10 +19,13 @@ exports[`renders list section with subheader 1`] = `
         "disabled": "rgba(0, 0, 0, 0.26)",
         "error": "#B00020",
         "notification": "#f50057",
-        "placeholder": "rgba(0, 0, 0, 0.54)",
         "primary": "#6200ee",
         "surface": "#ffffff",
         "text": "#000000",
+        "typography": Object {
+          "primary": "rgba(0, 0, 0, 0.87)",
+          "secondary": "rgba(0, 0, 0, 0.54)",
+        },
       },
       "dark": false,
       "fonts": Object {
@@ -321,10 +324,13 @@ exports[`renders list section without subheader 1`] = `
         "disabled": "rgba(0, 0, 0, 0.26)",
         "error": "#B00020",
         "notification": "#f50057",
-        "placeholder": "rgba(0, 0, 0, 0.54)",
         "primary": "#6200ee",
         "surface": "#ffffff",
         "text": "#000000",
+        "typography": Object {
+          "primary": "rgba(0, 0, 0, 0.87)",
+          "secondary": "rgba(0, 0, 0, 0.54)",
+        },
       },
       "dark": false,
       "fonts": Object {

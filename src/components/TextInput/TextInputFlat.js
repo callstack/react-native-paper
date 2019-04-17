@@ -57,16 +57,13 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
     let inputTextColor, activeColor, underlineColorCustom, placeholderColor;
 
     if (disabled) {
-      inputTextColor = activeColor = color(colors.text)
-        .alpha(0.54)
-        .rgb()
-        .string();
+      inputTextColor = activeColor = colors.typography.secondary;
       placeholderColor = colors.disabled;
       underlineColorCustom = 'transparent';
     } else {
       inputTextColor = colors.text;
       activeColor = error ? colors.error : colors.primary;
-      placeholderColor = colors.placeholder;
+      placeholderColor = colors.typography.secondary;
       underlineColorCustom = underlineColor || colors.disabled;
     }
 

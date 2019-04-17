@@ -12,8 +12,11 @@ export type Theme = {
     accent: string,
     error: string,
     text: string,
+    typography: {
+      primary: string,
+      secondary: string,
+    },
     disabled: string,
-    placeholder: string,
     backdrop: string,
     notification: string,
   },
