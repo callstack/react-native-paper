@@ -142,6 +142,7 @@ class Appbar extends React.Component<Props> {
                 'AppbarAction',
                 'AppbarBackAction',
                 'AppbarHeader',
+                // @ts-ignore
               ].includes(child.type.name)
             ) {
               return child;

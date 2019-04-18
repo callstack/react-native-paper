@@ -123,6 +123,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
       keyboardAppearance="light"
       placeholder="Search"
       placeholderTextColor="rgba(0, 0, 0, 0.54)"
+      rejectResponderTermination={true}
       returnKeyType="search"
       selectionColor="#6200ee"
       style={
@@ -137,7 +138,8 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           },
           Object {
             "color": "#000000",
-            "fontFamily": "Helvetica Neue",
+            "fontFamily": "System",
+            "fontWeight": "400",
           },
           undefined,
         ]
