@@ -63,7 +63,8 @@ exports[`renders not visible menu 1`] = `
             Array [
               Object {
                 "color": "#000000",
-                "fontFamily": "Helvetica Neue",
+                "fontFamily": "System",
+                "fontWeight": "400",
                 "textAlign": "left",
                 "writingDirection": "ltr",
               },
@@ -77,10 +78,12 @@ exports[`renders not visible menu 1`] = `
                 undefined,
                 Object {
                   "color": "#6200ee",
-                  "fontFamily": "HelveticaNeue-Medium",
+                  "fontFamily": "System",
+                  "fontWeight": "500",
                 },
                 Object {
-                  "fontFamily": "HelveticaNeue-Medium",
+                  "fontFamily": "System",
+                  "fontWeight": "500",
                 },
               ],
             ]
@@ -157,7 +160,8 @@ exports[`renders visible menu 1`] = `
             Array [
               Object {
                 "color": "#000000",
-                "fontFamily": "Helvetica Neue",
+                "fontFamily": "System",
+                "fontWeight": "400",
                 "textAlign": "left",
                 "writingDirection": "ltr",
               },
@@ -171,10 +175,12 @@ exports[`renders visible menu 1`] = `
                 undefined,
                 Object {
                   "color": "#6200ee",
-                  "fontFamily": "HelveticaNeue-Medium",
+                  "fontFamily": "System",
+                  "fontWeight": "500",
                 },
                 Object {
-                  "fontFamily": "HelveticaNeue-Medium",
+                  "fontFamily": "System",
+                  "fontWeight": "500",
                 },
               ],
             ]
