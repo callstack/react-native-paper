@@ -57,6 +57,10 @@ class TextInputExample extends React.Component<Props, State> {
             onChangeText={text => this.setState({ text })}
           />
           <TextInput
+            style={styles.inputWithHeightStyle}
+            placeholder="Type something"
+          />
+          <TextInput
             disabled
             style={styles.inputContainerStyle}
             label="Disabled flat input"
@@ -103,6 +107,9 @@ const styles = StyleSheet.create({
   },
   inputContainerStyle: {
     margin: 8,
+  },
+  inputWithHeightStyle: {
+    height: 45,
   },
 });
 

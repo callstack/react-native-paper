@@ -20,6 +20,8 @@ const MINIMIZED_LABEL_FONT_SIZE = 12;
 const LABEL_WIGGLE_X_OFFSET = 4;
 const LABEL_PADDING_HORIZONTAL = 12;
 const RANDOM_VALUE_TO_CENTER_LABEL = 4; // Don't know why 4, but it works
+const DEFAULT_INPUT_HEIGHT = 58;
+const HALF_FONT_SIZE = 16 / 2; // 16 is fontSize
 
 class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
   static defaultProps = {
@@ -90,6 +92,10 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       (1 - MINIMIZED_LABEL_FONT_SIZE / MAXIMIZED_LABEL_FONT_SIZE) *
       labelHalfWidth;
 
+    const { height, ...viewStyle } = StyleSheet.flatten(style) || {};
+    const inputHeight = height || DEFAULT_INPUT_HEIGHT;
+    const PLACEHOLDER_CENTER_POSITION = inputHeight / 2 - HALF_FONT_SIZE - 2; // 2 is border height
+
     const labelStyle = {
       fontFamily,
       fontSize: MAXIMIZED_LABEL_FONT_SIZE,
@@ -142,7 +148,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
     };
 
     return (
-      <View style={[containerStyle, style]}>
+      <View style={[containerStyle, viewStyle]}>
         <Animated.View
           style={[
             styles.underline,
@@ -180,7 +186,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
               onLayout={onLayoutAnimatedText}
               style={[
                 styles.placeholder,
-                styles.placeholderFlat,
+                { top: PLACEHOLDER_CENTER_POSITION },
                 labelStyle,
                 {
                   color: activeColor,
@@ -197,7 +203,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
             <AnimatedText
               style={[
                 styles.placeholder,
-                styles.placeholderFlat,
+                { top: PLACEHOLDER_CENTER_POSITION },
                 labelStyle,
                 {
                   color: placeholderColor,
@@ -231,10 +237,12 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
             multiline,
             style: [
               styles.input,
+              this.props.multiline && styles.inputMultiline, // if no label, we still need some space
               this.props.label
                 ? styles.inputFlatWithLabel
                 : styles.inputFlatWithoutLabel,
               {
+                minHeight: inputHeight,
                 color: inputTextColor,
                 fontFamily,
                 textAlignVertical: multiline ? 'top' : 'center',
@@ -256,9 +264,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingHorizontal: LABEL_PADDING_HORIZONTAL,
   },
-  placeholderFlat: {
-    top: 19,
-  },
   underline: {
     position: 'absolute',
     left: 0,
@@ -271,13 +276,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     fontSize: 16,
     margin: 0,
-    minHeight: 58,
+    paddingBottom: 0,
+    paddingTop: 0,
     textAlign: I18nManager.isRTL ? 'right' : 'left',
     zIndex: 1,
   },
+  inputMultiline: {
+    paddingTop: 12,
+    paddingBottom: 2,
+  },
   inputFlatWithLabel: {
-    paddingTop: 24,
-    paddingBottom: 6,
+    paddingTop: 18,
+    paddingBottom: 2,
   },
   inputFlatWithoutLabel: {
     paddingVertical: 15,
