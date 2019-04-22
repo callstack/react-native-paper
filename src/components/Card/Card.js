@@ -19,7 +19,7 @@ type Props = React.ElementConfig<typeof Surface> & {|
   /**
    * Resting elevation of the card which controls the drop shadow.
    */
-  elevation?: number,
+  elevation: number,
   /**
    * Function to execute on long press.
    */
@@ -97,7 +97,6 @@ class Card extends React.Component<Props, State> {
   };
 
   state = {
-    /* $FlowFixMe: somehow default props are not respected */
     elevation: new Animated.Value(this.props.elevation),
   };
 
@@ -110,7 +109,6 @@ class Card extends React.Component<Props, State> {
 
   _handlePressOut = () => {
     Animated.timing(this.state.elevation, {
-      /* $FlowFixMe: somehow default props are not respected */
       toValue: this.props.elevation,
       duration: 150,
     }).start();
