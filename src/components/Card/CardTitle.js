@@ -29,9 +29,17 @@ type Props = React.ElementConfig<typeof View> & {|
    */
   left?: (props: { size: number }) => React.Node,
   /**
+   * Style for the left.
+   */
+  leftStyle?: any,
+  /**
    * Callback which returns a React element to display on the right side.
    */
   right?: (props: { size: number }) => React.Node,
+  /**
+   * Style for the right.
+   */
+  rightStyle?: any,
   /**
    * @internal
    */
@@ -79,7 +87,9 @@ class CardTitle extends React.Component<Props> {
   render() {
     const {
       left,
+      leftStyle,
       right,
+      rightStyle,
       subtitle,
       subtitleStyle,
       style,
@@ -96,7 +106,7 @@ class CardTitle extends React.Component<Props> {
         ]}
       >
         {left ? (
-          <View style={[styles.left]}>
+          <View style={[styles.left, leftStyle]}>
             {left({
               size: LEFT_SIZE,
             })}
@@ -124,7 +134,7 @@ class CardTitle extends React.Component<Props> {
           ) : null}
         </View>
 
-        <View>{right ? right({ size: 24 }) : null}</View>
+        <View style={rightStyle}>{right ? right({ size: 24 }) : null}</View>
       </View>
     );
   }
