@@ -9,7 +9,7 @@ import type { Theme } from '../../types';
 
 type Props = React.ElementConfig<typeof View> & {|
   /**
-   * Text for the title.
+   * Text for the title. Note that this will only accept a `<Text>`-based node.
    */
   title: React.Node,
   /**
