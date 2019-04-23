@@ -29,6 +29,11 @@ class ListSectionExample extends React.Component<Props> {
             left={props => <List.Icon {...props} icon="redeem" />}
             title="List item 2"
           />
+          <List.Item
+            title="List item 3"
+            left={props => <List.Icon {...props} icon="folder" />}
+            right={props => <List.Icon {...props} icon="drag-handle" />}
+          />
         </List.Section>
         <Divider />
         <List.Section>
