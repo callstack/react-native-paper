@@ -13,7 +13,6 @@ export type RenderProps = {
   onBlur: ?() => mixed,
   underlineColorAndroid: ?string,
   style: any,
-  childStyle: any,
   multiline: ?boolean,
   numberOfLines: ?number,
   value: ?string,
