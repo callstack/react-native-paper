@@ -53,6 +53,10 @@ export type TextInputProps = {|
    */
   underlineColor?: string,
   /**
+   * Whether to apply padding to label and input.
+   */
+  padding?: 'none' | 'normal',
+  /**
    * Whether the input can have multiple lines.
    */
   multiline?: boolean,
@@ -148,6 +152,7 @@ export type TextInputProps = {|
 class TextInput extends React.Component<TextInputProps, State> {
   static defaultProps = {
     mode: 'flat',
+    padding: 'normal',
     disabled: false,
     error: false,
     multiline: false,
@@ -368,7 +373,7 @@ class TextInput extends React.Component<TextInputProps, State> {
   }
 
   render() {
-    const { mode, ...rest } = this.props;
+    const { mode, padding, ...rest } = this.props;
 
     return mode === 'outlined' ? (
       <TextInputOutlined
@@ -389,6 +394,7 @@ class TextInput extends React.Component<TextInputProps, State> {
         innerRef={ref => {
           this._root = ref;
         }}
+        padding={padding}
         onFocus={this._handleFocus}
         onBlur={this._handleBlur}
         onChangeText={this._handleChangeText}
