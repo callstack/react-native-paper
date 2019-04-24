@@ -42,7 +42,7 @@ type Props = $RemoveChildren<typeof Surface> & {|
   /**
    * Whether `FAB` is currently visible.
    */
-  visible?: boolean,
+  visible: boolean,
   /**
    * Whether to show a loading indicator.
    */
