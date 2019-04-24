@@ -265,6 +265,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
                 fontFamily,
                 textAlignVertical: multiline ? 'top' : 'center',
               },
+              this.props.childStyle,
             ],
           }: RenderProps)
         )}
