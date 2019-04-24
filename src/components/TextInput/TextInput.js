@@ -93,6 +93,10 @@ export type TextInputProps = {|
   value?: string,
   style?: any,
   /**
+   * Style for the inner TextInput.
+   */
+  childStyle?: string,
+  /**
    * @optional
    */
   theme: Theme,
