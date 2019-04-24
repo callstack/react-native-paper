@@ -48,7 +48,7 @@ export default class ListIcon extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   item: {
-    marginRight: 16,
+    margin: 8,
     height: 40,
     width: 40,
     alignItems: 'center',

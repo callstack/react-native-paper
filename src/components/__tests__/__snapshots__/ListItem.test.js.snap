@@ -209,11 +209,11 @@ exports[`renders list item with left and right items 1`] = `
             "alignItems": "center",
             "height": 40,
             "justifyContent": "center",
-            "marginRight": 16,
+            "margin": 8,
             "width": 40,
           },
           Object {
-            "marginVertical": 8,
+            "marginRight": 0,
           },
         ]
       }
@@ -294,10 +294,14 @@ exports[`renders list item with left item 1`] = `
             "alignItems": "center",
             "height": 40,
             "justifyContent": "center",
-            "marginRight": 16,
+            "margin": 8,
             "width": 40,
           },
-          null,
+          Object {
+            "marginLeft": 0,
+            "marginRight": 16,
+            "marginVertical": 0,
+          },
         ]
       }
     >
