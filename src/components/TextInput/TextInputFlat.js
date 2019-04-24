@@ -54,7 +54,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
     const { colors, fonts } = theme;
     const fontFamily = fonts.regular;
     const hasActiveOutline = parentState.focused || error;
-    const paddingOffset = padding !== 'none';
+    const paddingOffset = padding !== 'none' ? styles.paddingOffset : null;
 
     let inputTextColor, activeColor, underlineColorCustom, placeholderColor;
 
@@ -184,7 +184,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
                 styles.placeholder,
                 styles.placeholderFlat,
                 labelStyle,
-                paddingOffset && styles.paddingOffset,
+                paddingOffset,
                 {
                   color: activeColor,
                   opacity: parentState.labeled.interpolate({
@@ -202,7 +202,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
                 styles.placeholder,
                 styles.placeholderFlat,
                 labelStyle,
-                paddingOffset && styles.paddingOffset,
+                paddingOffset,
                 {
                   color: placeholderColor,
                   opacity: hasActiveOutline ? parentState.labeled : 1,
@@ -238,7 +238,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
               this.props.label
                 ? styles.inputFlatWithLabel
                 : styles.inputFlatWithoutLabel,
-              paddingOffset && styles.paddingOffset,
+              paddingOffset,
               {
                 color: inputTextColor,
                 fontFamily,

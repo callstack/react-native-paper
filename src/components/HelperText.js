@@ -22,7 +22,7 @@ type Props = React.ElementConfig<typeof Text> & {
   /**
    * Whether to apply padding to the helper text.
    */
-  padding?: 'none' | 'offset',
+  padding?: 'none' | 'normal',
   /**
    * Text content of the HelperText.
    */
@@ -80,7 +80,7 @@ type State = {
 class HelperText extends React.PureComponent<Props, State> {
   static defaultProps = {
     type: 'info',
-    padding: 'offset',
+    padding: 'normal',
     visible: true,
   };
 
@@ -150,7 +150,7 @@ class HelperText extends React.PureComponent<Props, State> {
         onLayout={this._handleTextLayout}
         style={[
           styles.text,
-          padding !== 'none' && styles.padding,
+          padding !== 'none' ? styles.padding : {},
           {
             color: textColor,
             opacity: this.state.shown,
