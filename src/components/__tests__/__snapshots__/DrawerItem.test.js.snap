@@ -86,7 +86,8 @@ exports[`renders DrawerItem with icon 1`] = `
           Array [
             Object {
               "color": "#000000",
-              "fontFamily": "Helvetica Neue",
+              "fontFamily": "System",
+              "fontWeight": "400",
               "textAlign": "left",
               "writingDirection": "ltr",
             },
@@ -96,7 +97,8 @@ exports[`renders DrawerItem with icon 1`] = `
               },
               Object {
                 "color": "rgba(0, 0, 0, 0.68)",
-                "fontFamily": "HelveticaNeue-Medium",
+                "fontFamily": "System",
+                "fontWeight": "500",
                 "marginLeft": 32,
               },
             ],
@@ -201,7 +203,8 @@ exports[`renders active DrawerItem 1`] = `
           Array [
             Object {
               "color": "#000000",
-              "fontFamily": "Helvetica Neue",
+              "fontFamily": "System",
+              "fontWeight": "400",
               "textAlign": "left",
               "writingDirection": "ltr",
             },
@@ -211,7 +214,8 @@ exports[`renders active DrawerItem 1`] = `
               },
               Object {
                 "color": "#6200ee",
-                "fontFamily": "HelveticaNeue-Medium",
+                "fontFamily": "System",
+                "fontWeight": "500",
                 "marginLeft": 32,
               },
             ],
@@ -277,7 +281,8 @@ exports[`renders basic DrawerItem 1`] = `
           Array [
             Object {
               "color": "#000000",
-              "fontFamily": "Helvetica Neue",
+              "fontFamily": "System",
+              "fontWeight": "400",
               "textAlign": "left",
               "writingDirection": "ltr",
             },
@@ -287,7 +292,8 @@ exports[`renders basic DrawerItem 1`] = `
               },
               Object {
                 "color": "rgba(0, 0, 0, 0.68)",
-                "fontFamily": "HelveticaNeue-Medium",
+                "fontFamily": "System",
+                "fontWeight": "500",
                 "marginLeft": 0,
               },
             ],

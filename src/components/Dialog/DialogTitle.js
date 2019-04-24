@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
+import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import Title from '../Typography/Title';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
@@ -11,7 +12,7 @@ type Props = React.ElementConfig<typeof Title> & {|
    * Title text for the `DialogTitle`.
    */
   children: React.Node,
-  style?: any,
+  style?: TextStyleProp,
   /**
    * @optional
    */

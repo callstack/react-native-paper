@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { grey400, grey800, grey50, white, black } from '../styles/colors';
 import { Switch as NativeSwitch, Platform, NativeModules } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import setColor from 'color';
 import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
@@ -28,7 +29,7 @@ type Props = React.ElementConfig<typeof NativeSwitch> & {|
    * Callback called with the new value when it changes.
    */
   onValueChange?: Function,
-  style?: any,
+  style?: ViewStyleProp,
   /**
    * @optional
    */

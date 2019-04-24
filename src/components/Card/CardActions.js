@@ -2,13 +2,14 @@
 
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 type Props = React.ElementConfig<typeof View> & {
   /**
    * Items inside the `CardActions`.
    */
   children: React.Node,
-  style?: any,
+  style?: ViewStyleProp,
 };
 
 /**

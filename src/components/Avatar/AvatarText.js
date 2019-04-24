@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import color from 'color';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
@@ -21,7 +22,7 @@ type Props = {
    * Custom color for the text.
    */
   color?: string,
-  style?: any,
+  style?: ViewStyleProp,
   /**
    * @optional
    */

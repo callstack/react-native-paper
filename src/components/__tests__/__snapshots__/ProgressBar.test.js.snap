@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders colored progress bar 1`] = `
+<View
+  onLayout={[Function]}
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "rgba(255, 0, 0, 0.38)",
+        "height": 4,
+        "opacity": 0,
+        "overflow": "hidden",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "red",
+          "flex": 1,
+          "transform": Array [
+            Object {
+              "translateX": -50,
+            },
+            Object {
+              "scaleX": 0.0001,
+            },
+          ],
+          "width": 100,
+        }
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`renders hidden progress bar 1`] = `
+<View
+  onLayout={[Function]}
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "rgba(98, 0, 238, 0.38)",
+        "height": 4,
+        "opacity": 0,
+        "overflow": "hidden",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "#6200ee",
+          "flex": 1,
+          "transform": Array [
+            Object {
+              "translateX": -50,
+            },
+            Object {
+              "scaleX": 0.0001,
+            },
+          ],
+          "width": 100,
+        }
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`renders indeterminate progress bar 1`] = `
+<View
+  onLayout={[Function]}
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "rgba(98, 0, 238, 0.38)",
+        "height": 4,
+        "opacity": 0,
+        "overflow": "hidden",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "#6200ee",
+          "flex": 1,
+          "transform": Array [
+            Object {
+              "translateX": -50,
+            },
+            Object {
+              "scaleX": 0.0001,
+            },
+          ],
+          "width": 100,
+        }
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`renders progress bar with specific progress 1`] = `
+<View
+  onLayout={[Function]}
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "rgba(98, 0, 238, 0.38)",
+        "height": 4,
+        "opacity": 0,
+        "overflow": "hidden",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "#6200ee",
+          "flex": 1,
+          "transform": Array [
+            Object {
+              "translateX": -50,
+            },
+            Object {
+              "scaleX": 0.0001,
+            },
+          ],
+          "width": 100,
+        }
+      }
+    />
+  </View>
+</View>
+`;

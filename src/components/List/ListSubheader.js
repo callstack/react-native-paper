@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
+import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import color from 'color';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
@@ -12,7 +13,7 @@ type Props = React.ElementConfig<typeof Text> & {
    * @optional
    */
   theme: Theme,
-  style?: any,
+  style?: TextStyleProp,
 };
 
 /**
@@ -38,7 +39,7 @@ class ListSubheader extends React.Component<Props> {
   render() {
     const { style, theme, ...rest } = this.props;
     const { colors, fonts } = theme;
-    const fontFamily = fonts.medium;
+    const font = fonts.medium;
     const textColor = color(colors.text)
       .alpha(0.54)
       .rgb()
@@ -48,7 +49,7 @@ class ListSubheader extends React.Component<Props> {
       <Text
         numberOfLines={1}
         {...rest}
-        style={[styles.container, { color: textColor, fontFamily }, style]}
+        style={[styles.container, { color: textColor, ...font }, style]}
       />
     );
   }

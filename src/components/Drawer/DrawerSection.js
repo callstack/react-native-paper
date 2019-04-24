@@ -67,7 +67,7 @@ class DrawerSection extends React.Component<Props> {
       .alpha(0.54)
       .rgb()
       .string();
-    const fontFamily = fonts.medium;
+    const font = fonts.medium;
 
     return (
       <View {...rest}>
@@ -75,7 +75,7 @@ class DrawerSection extends React.Component<Props> {
           <View style={{ height: 40, justifyContent: 'center' }}>
             <Text
               numberOfLines={1}
-              style={{ color: titleColor, fontFamily, marginLeft: 16 }}
+              style={{ color: titleColor, ...font, marginLeft: 16 }}
             >
               {title}
             </Text>

@@ -12,6 +12,9 @@ exports[`renders list section with subheader 1`] = `
   }
   theme={
     Object {
+      "animation": Object {
+        "scale": 1,
+      },
       "colors": Object {
         "accent": "#03dac4",
         "backdrop": "rgba(0, 0, 0, 0.5)",
@@ -26,10 +29,22 @@ exports[`renders list section with subheader 1`] = `
       },
       "dark": false,
       "fonts": Object {
-        "light": "HelveticaNeue-Light",
-        "medium": "HelveticaNeue-Medium",
-        "regular": "Helvetica Neue",
-        "thin": "HelveticaNeue-Thin",
+        "light": Object {
+          "fontFamily": "System",
+          "fontWeight": "300",
+        },
+        "medium": Object {
+          "fontFamily": "System",
+          "fontWeight": "500",
+        },
+        "regular": Object {
+          "fontFamily": "System",
+          "fontWeight": "400",
+        },
+        "thin": Object {
+          "fontFamily": "System",
+          "fontWeight": "100",
+        },
       },
       "roundness": 4,
     }
@@ -41,7 +56,8 @@ exports[`renders list section with subheader 1`] = `
       Array [
         Object {
           "color": "#000000",
-          "fontFamily": "Helvetica Neue",
+          "fontFamily": "System",
+          "fontWeight": "400",
           "textAlign": "left",
           "writingDirection": "ltr",
         },
@@ -52,7 +68,8 @@ exports[`renders list section with subheader 1`] = `
           },
           Object {
             "color": "rgba(0, 0, 0, 0.54)",
-            "fontFamily": "HelveticaNeue-Medium",
+            "fontFamily": "System",
+            "fontWeight": "500",
           },
           undefined,
         ],
@@ -97,10 +114,10 @@ exports[`renders list section with subheader 1`] = `
               "alignItems": "center",
               "height": 40,
               "justifyContent": "center",
-              "margin": 8,
+              "marginRight": 16,
               "width": 40,
             },
-            undefined,
+            null,
           ]
         }
       >
@@ -144,7 +161,8 @@ exports[`renders list section with subheader 1`] = `
         style={
           Array [
             Object {
-              "margin": 8,
+              "marginVertical": 6,
+              "paddingLeft": 8,
             },
             Object {
               "flex": 1,
@@ -159,7 +177,8 @@ exports[`renders list section with subheader 1`] = `
             Array [
               Object {
                 "color": "#000000",
-                "fontFamily": "Helvetica Neue",
+                "fontFamily": "System",
+                "fontWeight": "400",
                 "textAlign": "left",
                 "writingDirection": "ltr",
               },
@@ -216,10 +235,10 @@ exports[`renders list section with subheader 1`] = `
               "alignItems": "center",
               "height": 40,
               "justifyContent": "center",
-              "margin": 8,
+              "marginRight": 16,
               "width": 40,
             },
-            undefined,
+            null,
           ]
         }
       >
@@ -263,7 +282,8 @@ exports[`renders list section with subheader 1`] = `
         style={
           Array [
             Object {
-              "margin": 8,
+              "marginVertical": 6,
+              "paddingLeft": 8,
             },
             Object {
               "flex": 1,
@@ -278,7 +298,8 @@ exports[`renders list section with subheader 1`] = `
             Array [
               Object {
                 "color": "#000000",
-                "fontFamily": "Helvetica Neue",
+                "fontFamily": "System",
+                "fontWeight": "400",
                 "textAlign": "left",
                 "writingDirection": "ltr",
               },
@@ -314,6 +335,9 @@ exports[`renders list section without subheader 1`] = `
   }
   theme={
     Object {
+      "animation": Object {
+        "scale": 1,
+      },
       "colors": Object {
         "accent": "#03dac4",
         "backdrop": "rgba(0, 0, 0, 0.5)",
@@ -328,10 +352,22 @@ exports[`renders list section without subheader 1`] = `
       },
       "dark": false,
       "fonts": Object {
-        "light": "HelveticaNeue-Light",
-        "medium": "HelveticaNeue-Medium",
-        "regular": "Helvetica Neue",
-        "thin": "HelveticaNeue-Thin",
+        "light": Object {
+          "fontFamily": "System",
+          "fontWeight": "300",
+        },
+        "medium": Object {
+          "fontFamily": "System",
+          "fontWeight": "500",
+        },
+        "regular": Object {
+          "fontFamily": "System",
+          "fontWeight": "400",
+        },
+        "thin": Object {
+          "fontFamily": "System",
+          "fontWeight": "100",
+        },
       },
       "roundness": 4,
     }
@@ -373,10 +409,10 @@ exports[`renders list section without subheader 1`] = `
               "alignItems": "center",
               "height": 40,
               "justifyContent": "center",
-              "margin": 8,
+              "marginRight": 16,
               "width": 40,
             },
-            undefined,
+            null,
           ]
         }
       >
@@ -420,7 +456,8 @@ exports[`renders list section without subheader 1`] = `
         style={
           Array [
             Object {
-              "margin": 8,
+              "marginVertical": 6,
+              "paddingLeft": 8,
             },
             Object {
               "flex": 1,
@@ -435,7 +472,8 @@ exports[`renders list section without subheader 1`] = `
             Array [
               Object {
                 "color": "#000000",
-                "fontFamily": "Helvetica Neue",
+                "fontFamily": "System",
+                "fontWeight": "400",
                 "textAlign": "left",
                 "writingDirection": "ltr",
               },
@@ -492,10 +530,10 @@ exports[`renders list section without subheader 1`] = `
               "alignItems": "center",
               "height": 40,
               "justifyContent": "center",
-              "margin": 8,
+              "marginRight": 16,
               "width": 40,
             },
-            undefined,
+            null,
           ]
         }
       >
@@ -539,7 +577,8 @@ exports[`renders list section without subheader 1`] = `
         style={
           Array [
             Object {
-              "margin": 8,
+              "marginVertical": 6,
+              "paddingLeft": 8,
             },
             Object {
               "flex": 1,
@@ -554,7 +593,8 @@ exports[`renders list section without subheader 1`] = `
             Array [
               Object {
                 "color": "#000000",
-                "fontFamily": "Helvetica Neue",
+                "fontFamily": "System",
+                "fontWeight": "400",
                 "textAlign": "left",
                 "writingDirection": "ltr",
               },

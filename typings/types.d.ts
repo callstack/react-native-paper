@@ -16,6 +16,11 @@ export type IconSource =
 
 type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]> };
 
+export type Font = {
+  fontFamily: string,
+  fontWeight?: 'normal' | 'bold' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900',
+};
+
 export type Theme = {
   dark: boolean;
   roundness: number;
@@ -31,10 +36,10 @@ export type Theme = {
     backdrop: string;
   };
   fonts: {
-    regular: string;
-    medium: string;
-    light: string;
-    thin: string;
+    regular: Font;
+    medium: Font;
+    light: Font;
+    thin: Font;
   };
 };
 

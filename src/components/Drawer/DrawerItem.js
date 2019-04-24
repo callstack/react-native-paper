@@ -3,6 +3,7 @@
 import color from 'color';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import Text from '../Typography/Text';
 import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple';
@@ -27,7 +28,7 @@ type Props = {
    * Function to execute on press.
    */
   onPress?: () => mixed,
-  style?: any,
+  style?: ViewStyleProp,
   /**
    * @optional
    */
@@ -67,7 +68,7 @@ class DrawerItem extends React.Component<Props> {
           .alpha(0.68)
           .rgb()
           .string();
-    const fontFamily = theme.fonts.medium;
+    const font = theme.fonts.medium;
     const labelMargin = icon ? 32 : 0;
 
     return (
@@ -99,7 +100,7 @@ class DrawerItem extends React.Component<Props> {
                 styles.label,
                 {
                   color: contentColor,
-                  fontFamily,
+                  ...font,
                   marginLeft: labelMargin,
                 },
               ]}

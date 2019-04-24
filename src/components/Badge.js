@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { Animated, StyleSheet } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import color from 'color';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
@@ -20,7 +21,7 @@ type Props = {|
    * Size of the `Badge`.
    */
   size: number,
-  style?: any,
+  style?: ViewStyleProp,
   /**
    * @optional
    */
@@ -88,7 +89,7 @@ class Badge extends React.Component<Props, State> {
             backgroundColor,
             color: textColor,
             fontSize: size * 0.5,
-            fontFamily: theme.fonts.regular,
+            ...theme.fonts.regular,
             lineHeight: size,
             height: size,
             minWidth: size,

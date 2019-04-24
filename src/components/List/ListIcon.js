@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import Icon, { type IconSource } from '../Icon';
 
 type Props = {|
@@ -13,7 +14,7 @@ type Props = {|
    * Color for the icon.
    */
   color: string,
-  style?: any,
+  style?: ViewStyleProp,
 |};
 
 /**
@@ -47,7 +48,7 @@ export default class ListIcon extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   item: {
-    margin: 8,
+    marginRight: 16,
     height: 40,
     width: 40,
     alignItems: 'center',

@@ -3,6 +3,7 @@
 import * as React from 'react';
 import color from 'color';
 import { Animated, StyleSheet } from 'react-native';
+import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import Text from './Typography/Text';
 import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
@@ -26,7 +27,7 @@ type Props = React.ElementConfig<typeof Text> & {
    * Text content of the HelperText.
    */
   children: React.Node,
-  style?: any,
+  style?: TextStyleProp,
   /**
    * @optional
    */

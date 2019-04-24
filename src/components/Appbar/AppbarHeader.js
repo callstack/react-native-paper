@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { View, Platform, SafeAreaView, StyleSheet } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 import Appbar, { DEFAULT_APPBAR_HEIGHT } from './Appbar';
 import shadow from '../../styles/shadow';
@@ -28,7 +29,7 @@ type Props = React.ElementConfig<typeof Appbar> & {|
    * @optional
    */
   theme: Theme,
-  style?: any,
+  style?: ViewStyleProp,
 |};
 
 const DEFAULT_STATUSBAR_HEIGHT_EXPO =

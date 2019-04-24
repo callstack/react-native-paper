@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { ActivityIndicator, Animated, View, StyleSheet } from 'react-native';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import color from 'color';
 import Icon from './Icon';
 import Surface from './Surface';
@@ -64,8 +65,8 @@ type Props = React.ElementConfig<typeof Surface> & {|
    * Style of button's inner content.
    * Use this prop to apply custom height and width.
    */
-  contentStyle?: any,
-  style?: any,
+  contentStyle?: ViewStyleProp,
+  style?: ViewStyleProp,
   /**
    * @optional
    */
@@ -155,7 +156,7 @@ class Button extends React.Component<Props, State> {
       ...rest
     } = this.props;
     const { colors, roundness } = theme;
-    const fontFamily = theme.fonts.medium;
+    const font = theme.fonts.medium;
 
     let backgroundColor, borderColor, textColor, borderWidth;
 
@@ -220,7 +221,7 @@ class Button extends React.Component<Props, State> {
       borderRadius: roundness,
     };
     const touchableStyle = { borderRadius: roundness };
-    const textStyle = { color: textColor, fontFamily };
+    const textStyle = { color: textColor, ...font };
     const elevation = disabled ? 0 : this.state.elevation;
 
     return (
@@ -268,7 +269,7 @@ class Button extends React.Component<Props, State> {
                 styles.label,
                 compact && styles.compactLabel,
                 textStyle,
-                { fontFamily },
+                font,
               ]}
             >
               {React.Children.map(

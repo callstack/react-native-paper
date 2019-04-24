@@ -34,7 +34,8 @@ exports[`renders list item with custom title and description styles 1`] = `
       style={
         Array [
           Object {
-            "margin": 8,
+            "marginVertical": 6,
+            "paddingLeft": 8,
           },
           Object {
             "flex": 1,
@@ -49,7 +50,8 @@ exports[`renders list item with custom title and description styles 1`] = `
           Array [
             Object {
               "color": "#000000",
-              "fontFamily": "Helvetica Neue",
+              "fontFamily": "System",
+              "fontWeight": "400",
               "textAlign": "left",
               "writingDirection": "ltr",
             },
@@ -75,7 +77,8 @@ exports[`renders list item with custom title and description styles 1`] = `
           Array [
             Object {
               "color": "#000000",
-              "fontFamily": "Helvetica Neue",
+              "fontFamily": "System",
+              "fontWeight": "400",
               "textAlign": "left",
               "writingDirection": "ltr",
             },
@@ -137,7 +140,8 @@ exports[`renders list item with left and right items 1`] = `
       style={
         Array [
           Object {
-            "margin": 8,
+            "marginVertical": 6,
+            "paddingLeft": 8,
           },
           Object {
             "flex": 1,
@@ -152,7 +156,8 @@ exports[`renders list item with left and right items 1`] = `
           Array [
             Object {
               "color": "#000000",
-              "fontFamily": "Helvetica Neue",
+              "fontFamily": "System",
+              "fontWeight": "400",
               "textAlign": "left",
               "writingDirection": "ltr",
             },
@@ -176,7 +181,8 @@ exports[`renders list item with left and right items 1`] = `
           Array [
             Object {
               "color": "#000000",
-              "fontFamily": "Helvetica Neue",
+              "fontFamily": "System",
+              "fontWeight": "400",
               "textAlign": "left",
               "writingDirection": "ltr",
             },
@@ -203,10 +209,12 @@ exports[`renders list item with left and right items 1`] = `
             "alignItems": "center",
             "height": 40,
             "justifyContent": "center",
-            "margin": 8,
+            "marginRight": 16,
             "width": 40,
           },
-          undefined,
+          Object {
+            "marginVertical": 8,
+          },
         ]
       }
     >
@@ -286,10 +294,10 @@ exports[`renders list item with left item 1`] = `
             "alignItems": "center",
             "height": 40,
             "justifyContent": "center",
-            "margin": 8,
+            "marginRight": 16,
             "width": 40,
           },
-          undefined,
+          null,
         ]
       }
     >
@@ -333,7 +341,8 @@ exports[`renders list item with left item 1`] = `
       style={
         Array [
           Object {
-            "margin": 8,
+            "marginVertical": 6,
+            "paddingLeft": 8,
           },
           Object {
             "flex": 1,
@@ -348,7 +357,8 @@ exports[`renders list item with left item 1`] = `
           Array [
             Object {
               "color": "#000000",
-              "fontFamily": "Helvetica Neue",
+              "fontFamily": "System",
+              "fontWeight": "400",
               "textAlign": "left",
               "writingDirection": "ltr",
             },
@@ -405,7 +415,8 @@ exports[`renders list item with right item 1`] = `
       style={
         Array [
           Object {
-            "margin": 8,
+            "marginVertical": 6,
+            "paddingLeft": 8,
           },
           Object {
             "flex": 1,
@@ -420,7 +431,8 @@ exports[`renders list item with right item 1`] = `
           Array [
             Object {
               "color": "#000000",
-              "fontFamily": "Helvetica Neue",
+              "fontFamily": "System",
+              "fontWeight": "400",
               "textAlign": "left",
               "writingDirection": "ltr",
             },
@@ -480,7 +492,8 @@ exports[`renders list item with title and description 1`] = `
       style={
         Array [
           Object {
-            "margin": 8,
+            "marginVertical": 6,
+            "paddingLeft": 8,
           },
           Object {
             "flex": 1,
@@ -495,7 +508,8 @@ exports[`renders list item with title and description 1`] = `
           Array [
             Object {
               "color": "#000000",
-              "fontFamily": "Helvetica Neue",
+              "fontFamily": "System",
+              "fontWeight": "400",
               "textAlign": "left",
               "writingDirection": "ltr",
             },
@@ -519,7 +533,8 @@ exports[`renders list item with title and description 1`] = `
           Array [
             Object {
               "color": "#000000",
-              "fontFamily": "Helvetica Neue",
+              "fontFamily": "System",
+              "fontWeight": "400",
               "textAlign": "left",
               "writingDirection": "ltr",
             },

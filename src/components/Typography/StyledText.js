@@ -21,14 +21,14 @@ class StyledText extends React.Component<Props> {
       .alpha(alpha)
       .rgb()
       .string();
-    const fontFamily = theme.fonts[family];
+    const font = theme.fonts[family];
     const writingDirection = I18nManager.isRTL ? 'rtl' : 'ltr';
 
     return (
       <Text
         {...rest}
         style={[
-          { color: textColor, fontFamily, textAlign: 'left', writingDirection },
+          { color: textColor, ...font, textAlign: 'left', writingDirection },
           style,
           this.props.style,
         ]}

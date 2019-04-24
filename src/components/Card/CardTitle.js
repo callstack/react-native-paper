@@ -2,6 +2,10 @@
 
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
+import type {
+  TextStyleProp,
+  ViewStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { withTheme } from '../../core/theming';
 import Caption from './../Typography/Caption';
 import Title from './../Typography/Title';
@@ -15,7 +19,7 @@ type Props = React.ElementConfig<typeof View> & {|
   /**
    * Style for the title.
    */
-  titleStyle?: any,
+  titleStyle?: TextStyleProp,
   /**
    * Text for the subtitle.
    */
@@ -23,7 +27,7 @@ type Props = React.ElementConfig<typeof View> & {|
   /**
    * Style for the subtitle.
    */
-  subtitleStyle?: any,
+  subtitleStyle?: TextStyleProp,
   /**
    * Callback which returns a React element to display on the left side.
    */
@@ -40,7 +44,7 @@ type Props = React.ElementConfig<typeof View> & {|
    * @internal
    */
   total?: number,
-  style?: any,
+  style?: ViewStyleProp,
   /**
    * @optional
    */
