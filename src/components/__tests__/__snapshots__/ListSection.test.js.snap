@@ -114,10 +114,14 @@ exports[`renders list section with subheader 1`] = `
               "alignItems": "center",
               "height": 40,
               "justifyContent": "center",
-              "marginRight": 16,
+              "margin": 8,
               "width": 40,
             },
-            null,
+            Object {
+              "marginLeft": 0,
+              "marginRight": 16,
+              "marginVertical": 0,
+            },
           ]
         }
       >
@@ -235,10 +239,14 @@ exports[`renders list section with subheader 1`] = `
               "alignItems": "center",
               "height": 40,
               "justifyContent": "center",
-              "marginRight": 16,
+              "margin": 8,
               "width": 40,
             },
-            null,
+            Object {
+              "marginLeft": 0,
+              "marginRight": 16,
+              "marginVertical": 0,
+            },
           ]
         }
       >
@@ -409,10 +417,14 @@ exports[`renders list section without subheader 1`] = `
               "alignItems": "center",
               "height": 40,
               "justifyContent": "center",
-              "marginRight": 16,
+              "margin": 8,
               "width": 40,
             },
-            null,
+            Object {
+              "marginLeft": 0,
+              "marginRight": 16,
+              "marginVertical": 0,
+            },
           ]
         }
       >
@@ -530,10 +542,14 @@ exports[`renders list section without subheader 1`] = `
               "alignItems": "center",
               "height": 40,
               "justifyContent": "center",
-              "marginRight": 16,
+              "margin": 8,
               "width": 40,
             },
-            null,
+            Object {
+              "marginLeft": 0,
+              "marginRight": 16,
+              "marginVertical": 0,
+            },
           ]
         }
       >

@@ -121,7 +121,9 @@ class ListItem extends React.Component<Props> {
           {left
             ? left({
                 color: descriptionColor,
-                style: description ? styles.iconMargin : null,
+                style: description
+                  ? styles.iconMarginLeft
+                  : { ...styles.iconMarginLeft, ...styles.marginVerticalNone },
               })
             : null}
           <View style={[styles.item, styles.content]} pointerEvents="none">
@@ -151,7 +153,9 @@ class ListItem extends React.Component<Props> {
           {right
             ? right({
                 color: descriptionColor,
-                style: description ? styles.iconMargin : null,
+                style: description
+                  ? styles.iconMarginRight
+                  : { ...styles.iconMarginRight, ...styles.marginVerticalNone },
               })
             : null}
         </View>
@@ -173,7 +177,9 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 14,
   },
-  iconMargin: { marginVertical: 8 },
+  marginVerticalNone: { marginVertical: 0 },
+  iconMarginLeft: { marginLeft: 0, marginRight: 16 },
+  iconMarginRight: { marginRight: 0 },
   item: {
     marginVertical: 6,
     paddingLeft: 8,
