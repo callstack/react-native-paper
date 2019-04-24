@@ -51,7 +51,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
     } = this.props;
 
     const { colors, fonts } = theme;
-    const fontFamily = fonts.regular;
+    const font = fonts.regular;
     const hasActiveOutline = parentState.focused || error;
     const { backgroundColor = colors.background } =
       StyleSheet.flatten(style) || {};
@@ -81,7 +81,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       labelHalfWidth;
 
     const labelStyle = {
-      fontFamily,
+      ...font,
       fontSize: MAXIMIZED_LABEL_FONT_SIZE,
       transform: [
         {
@@ -161,7 +161,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
               styles.outlinedLabelBackground,
               {
                 backgroundColor,
-                fontFamily,
+                ...font,
                 fontSize: MINIMIZED_LABEL_FONT_SIZE,
                 // Hide the background when scale will be 0
                 // There's a bug in RN which makes scale: 0 act weird
@@ -262,7 +262,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
               styles.inputOutlined,
               {
                 color: inputTextColor,
-                fontFamily,
+                ...font,
                 textAlignVertical: multiline ? 'top' : 'center',
               },
             ],

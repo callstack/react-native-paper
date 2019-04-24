@@ -52,7 +52,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
     } = this.props;
 
     const { colors, fonts } = theme;
-    const fontFamily = fonts.regular;
+    const font = fonts.regular;
     const hasActiveOutline = parentState.focused || error;
     const paddingOffset = padding !== 'none' ? styles.paddingOffset : null;
 
@@ -93,7 +93,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       labelHalfWidth;
 
     const labelStyle = {
-      fontFamily,
+      ...font,
       fontSize: MAXIMIZED_LABEL_FONT_SIZE,
       transform: [
         {
@@ -241,7 +241,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
               paddingOffset,
               {
                 color: inputTextColor,
-                fontFamily,
+                ...font,
                 textAlignVertical: multiline ? 'top' : 'center',
               },
             ],
