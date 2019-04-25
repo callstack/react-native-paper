@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Animated,
   TouchableWithoutFeedback,
-  StatusBar,
   SafeAreaView,
 } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
@@ -234,7 +233,6 @@ class FABGroup extends React.Component<Props, State> {
 
     return (
       <View pointerEvents="box-none" style={[styles.container, style]}>
-        {open ? <StatusBar barStyle="light-content" /> : null}
         <TouchableWithoutFeedback onPress={this._close}>
           <Animated.View
             pointerEvents={open ? 'auto' : 'none'}
