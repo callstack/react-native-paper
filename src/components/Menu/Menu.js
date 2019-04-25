@@ -17,6 +17,7 @@ import type { Theme } from '../../types';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
 import MenuItem from './MenuItem';
+import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
 
 type Props = {
   /**
@@ -27,6 +28,13 @@ type Props = {
    * The anchor to open the menu from. In most cases, it will be a button that opens the manu.
    */
   anchor: React.Node,
+  /**
+   * Extra margin to add at the top of the menu to account for translucent status bar on Android.
+   * If you are using Expo, we assume translucent status bar and set a height for status bar automatically.
+   * Pass `0` or a custom value to and customize it.
+   * This is automatically handled on iOS.
+   */
+  statusBarHeight: number,
   /**
    * Callback called when Menu is dismissed. The `visible` prop needs to be updated when this is called.
    */
@@ -42,14 +50,15 @@ type Props = {
   theme: Theme,
 };
 
-type State = {
+type State = {|
   top: number,
   left: number,
-  menuLayout: { height: number, width: number },
-  anchorLayout: { height: number, width: number },
+  windowLayout: {| height: number, width: number |},
+  menuLayout: {| height: number, width: number |},
+  anchorLayout: {| height: number, width: number |},
   opacityAnimation: Animated.Value,
   scaleAnimation: Animated.ValueXY,
-};
+|};
 
 // Minimum padding between the edge of the screen and the menu
 const SCREEN_INDENT = 8;
@@ -113,9 +122,14 @@ class Menu extends React.Component<Props, State> {
   // @component ./MenuItem.js
   static Item = MenuItem;
 
+  static defaultProps = {
+    statusBarHeight: APPROX_STATUSBAR_HEIGHT,
+  };
+
   state = {
     top: 0,
     left: 0,
+    windowLayout: { width: 0, height: 0 },
     menuLayout: { width: 0, height: 0 },
     anchorLayout: { width: 0, height: 0 },
     opacityAnimation: new Animated.Value(0),
@@ -129,7 +143,8 @@ class Menu extends React.Component<Props, State> {
   }
 
   componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.props.onDismiss);
+    BackHandler.removeEventListener('hardwareBackPress', this._handleDismiss);
+    Dimensions.removeEventListener('change', this._handleDismiss);
   }
 
   _anchor: ?View;
@@ -161,9 +176,17 @@ class Menu extends React.Component<Props, State> {
     }
   };
 
-  _show = async () => {
-    BackHandler.addEventListener('hardwareBackPress', this.props.onDismiss);
+  _handleDismiss = () => {
+    if (this.props.visible) {
+      this.props.onDismiss();
+    }
+  };
 
+  _show = async () => {
+    BackHandler.addEventListener('hardwareBackPress', this._handleDismiss);
+    Dimensions.addEventListener('change', this._handleDismiss);
+
+    const windowLayout = Dimensions.get('window');
     const [menuLayout, anchorLayout] = await Promise.all([
       this._measureMenuLayout(),
       this._measureAnchorLayout(),
@@ -176,18 +199,15 @@ class Menu extends React.Component<Props, State> {
     // so we have to wait until views are ready
     // and rerun this function to show menu
     if (
+      !windowLayout.width ||
+      !windowLayout.height ||
       !menuLayout.width ||
       !menuLayout.height ||
       !anchorLayout.width ||
       !anchorLayout.height
     ) {
-      BackHandler.removeEventListener(
-        'hardwareBackPress',
-        this.props.onDismiss
-      );
-      setTimeout(() => {
-        this._show();
-      }, ANIMATION_DURATION);
+      BackHandler.removeEventListener('hardwareBackPress', this._handleDismiss);
+      setTimeout(this._show, ANIMATION_DURATION);
       return;
     }
 
@@ -195,6 +215,10 @@ class Menu extends React.Component<Props, State> {
       {
         left: anchorLayout.x,
         top: anchorLayout.y,
+        windowLayout: {
+          height: windowLayout.height,
+          width: windowLayout.width,
+        },
         anchorLayout: {
           height: anchorLayout.height,
           width: anchorLayout.width,
@@ -224,7 +248,8 @@ class Menu extends React.Component<Props, State> {
   };
 
   _hide = () => {
-    BackHandler.removeEventListener('hardwareBackPress', this.props.onDismiss);
+    BackHandler.removeEventListener('hardwareBackPress', this._handleDismiss);
+    Dimensions.removeEventListener('change', this._handleDismiss);
 
     Animated.timing(this.state.opacityAnimation, {
       toValue: 0,
@@ -239,9 +264,18 @@ class Menu extends React.Component<Props, State> {
   };
 
   render() {
-    const { visible, anchor, style, children, theme, onDismiss } = this.props;
+    const {
+      visible,
+      anchor,
+      style,
+      children,
+      theme,
+      statusBarHeight,
+      onDismiss,
+    } = this.props;
 
     const {
+      windowLayout,
       menuLayout,
       anchorLayout,
       opacityAnimation,
@@ -250,7 +284,7 @@ class Menu extends React.Component<Props, State> {
 
     // I don't know why but on Android measure function is wrong by 24
     const additionalVerticalValue = Platform.select({
-      android: 24,
+      android: statusBarHeight,
       default: 0,
     });
 
@@ -274,12 +308,8 @@ class Menu extends React.Component<Props, State> {
     // We need to translate menu while animating scale to imitate transform origin for scale animation
     const positionTransforms = [];
 
-    const { width: screenWidth, height: screenHeight } = Dimensions.get(
-      'screen'
-    );
-
     // Check if menu fits horizontally and if not align it to right.
-    if (left <= screenWidth - menuLayout.width - SCREEN_INDENT) {
+    if (left <= windowLayout.width - menuLayout.width - SCREEN_INDENT) {
       positionTransforms.push({
         translateX: scaleAnimation.x.interpolate({
           inputRange: [0, menuLayout.width],
@@ -303,13 +333,16 @@ class Menu extends React.Component<Props, State> {
 
       const right = left + menuLayout.width;
       // Check if menu position has enough space from right side
-      if (right <= screenWidth && right > screenWidth - SCREEN_INDENT) {
-        left = screenWidth - SCREEN_INDENT - menuLayout.width;
+      if (
+        right <= windowLayout.width &&
+        right > windowLayout.width - SCREEN_INDENT
+      ) {
+        left = windowLayout.width - SCREEN_INDENT - menuLayout.width;
       }
     }
 
     // Check if menu fits vertically and if not align it to bottom.
-    if (top <= screenHeight - menuLayout.height - SCREEN_INDENT) {
+    if (top <= windowLayout.width - menuLayout.height - SCREEN_INDENT) {
       positionTransforms.push({
         translateY: scaleAnimation.y.interpolate({
           inputRange: [0, menuLayout.height],
@@ -333,9 +366,12 @@ class Menu extends React.Component<Props, State> {
 
       const bottom = top + menuLayout.height + additionalVerticalValue;
       // Check if menu position has enough space from bottom side
-      if (bottom <= screenHeight && bottom > screenHeight - SCREEN_INDENT) {
+      if (
+        bottom <= windowLayout.height &&
+        bottom > windowLayout.height - SCREEN_INDENT
+      ) {
         top =
-          screenHeight -
+          windowLayout.height -
           SCREEN_INDENT -
           menuLayout.height -
           additionalVerticalValue;

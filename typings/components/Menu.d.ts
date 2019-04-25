@@ -7,6 +7,7 @@ export interface MenuProps {
   anchor: React.ReactNode;
   onDismiss: () => void;
   children: React.ReactNode;
+  statusBarHeight?: number,
   style?: StyleProp<ViewStyle>;
   theme?: ThemeShape;
 }
