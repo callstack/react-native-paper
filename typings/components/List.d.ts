@@ -17,6 +17,8 @@ export interface AccordionProps {
   onPress?: () => any;
   left?: (props: { color: string }) => React.ReactNode;
   style?: StyleProp<ViewStyle>;
+  titleStyle?: StyleProp<TextStyle>;
+  descriptionStyle?: StyleProp<TextStyle>;
   theme?: ThemeShape;
 }
 
@@ -47,6 +49,7 @@ export interface SectionProps extends ViewProps {
   children: React.ReactNode;
   title?: string;
   theme?: ThemeShape;
+  titleStyle?: StyleProp<TextStyle>,
 }
 
 export declare class Section extends React.Component<SectionProps> {}

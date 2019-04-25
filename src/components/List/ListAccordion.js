@@ -8,6 +8,10 @@ import Icon from '../Icon';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
+import type {
+  ViewStyleProp,
+  TextStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 type Props = {|
   /**
@@ -40,7 +44,18 @@ type Props = {|
    * @optional
    */
   theme: Theme,
-  style?: any,
+  /**
+   * Style that is passed to the wrapping TouchableRipple element.
+   */
+  style?: ViewStyleProp,
+  /**
+   * Style that is passed to Title element.
+   */
+  titleStyle?: TextStyleProp,
+  /**
+   * Style that is passed to Description element.
+   */
+  descriptionStyle?: TextStyleProp,
 |};
 
 type State = {
@@ -119,7 +134,16 @@ class ListAccordion extends React.Component<Props, State> {
   };
 
   render() {
-    const { left, title, description, children, theme, style } = this.props;
+    const {
+      left,
+      title,
+      description,
+      children,
+      theme,
+      titleStyle,
+      descriptionStyle,
+      style,
+    } = this.props;
     const titleColor = color(theme.colors.text)
       .alpha(0.87)
       .rgb()
@@ -157,6 +181,7 @@ class ListAccordion extends React.Component<Props, State> {
                   {
                     color: expanded ? theme.colors.primary : titleColor,
                   },
+                  titleStyle,
                 ]}
               >
                 {title}
@@ -169,6 +194,7 @@ class ListAccordion extends React.Component<Props, State> {
                     {
                       color: descriptionColor,
                     },
+                    descriptionStyle,
                   ]}
                 >
                   {description}
