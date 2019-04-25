@@ -43,3 +43,22 @@ it('renders list section with subheader', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('renders list section with custom title style', () => {
+  const tree = renderer
+    .create(
+      <ListSection title="Some title" titleStyle={{ color: 'red' }}>
+        <ListItem
+          title="First Item"
+          left={props => <ListIcon {...props} icon="folder" />}
+        />
+        <ListItem
+          title="Second Item"
+          left={props => <ListIcon {...props} icon="folder" />}
+        />
+      </ListSection>
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});

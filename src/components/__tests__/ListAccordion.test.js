@@ -63,3 +63,20 @@ it('renders expanded accordion', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('renders list accordion with custom title and description styles', () => {
+  const tree = renderer
+    .create(
+      <ListAccordion
+        title="Accordion item 1"
+        description="Describes the expandable list item"
+        titleStyle={{ color: 'red' }}
+        descriptionStyle={{ color: 'red' }}
+      >
+        <ListItem title="List item 1" />
+      </ListAccordion>
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});

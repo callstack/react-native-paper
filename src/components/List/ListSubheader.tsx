@@ -10,6 +10,9 @@ type Props = React.ComponentProps<typeof Text> & {
    * @optional
    */
   theme: Theme;
+  /**
+   * Style that is passed to Text element.
+   */
   style?: StyleProp<TextStyle>;
 };
 
