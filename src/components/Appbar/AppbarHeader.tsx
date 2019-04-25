@@ -3,7 +3,6 @@ import {
   StyleSheet,
   StyleProp,
   View,
-  Platform,
   SafeAreaView,
   ViewStyle,
 } from 'react-native';
@@ -12,6 +11,7 @@ import Appbar, { DEFAULT_APPBAR_HEIGHT } from './Appbar';
 import shadow from '../../styles/shadow';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
+import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
 
 type Props = React.ComponentProps<typeof Appbar> & {
   /**
@@ -36,16 +36,6 @@ type Props = React.ComponentProps<typeof Appbar> & {
   style?: StyleProp<ViewStyle>;
   __expo?: any;
 };
-
-// @ts-ignore
-const expo = global.__expo;
-
-const DEFAULT_STATUSBAR_HEIGHT_EXPO =
-  expo && expo.Constants ? expo.Constants.statusBarHeight : 0;
-const DEFAULT_STATUSBAR_HEIGHT = Platform.select({
-  android: DEFAULT_STATUSBAR_HEIGHT_EXPO,
-  ios: Platform.Version < 11 ? DEFAULT_STATUSBAR_HEIGHT_EXPO : 0,
-});
 
 /**
  * A component to use as a header at the top of the screen.
@@ -98,7 +88,7 @@ class AppbarHeader extends React.Component<Props> {
   render() {
     const {
       // Don't use default props since we check it to know whether we should use SafeAreaView
-      statusBarHeight = DEFAULT_STATUSBAR_HEIGHT,
+      statusBarHeight = APPROX_STATUSBAR_HEIGHT,
       style,
       ...rest
     } = this.props;
