@@ -24,6 +24,10 @@ type Props = {|
    */
   visible: boolean,
   /**
+   * Duration for Fade In and Fade out.
+   */
+  duration?: number,
+  /**
    * Content of the `Dialog`.
    */
   children: React.Node,
@@ -94,6 +98,7 @@ class Dialog extends React.Component<Props, void> {
   static defaultProps = {
     dismissable: true,
     visible: false,
+    duration: 280,
   };
 
   render() {
@@ -104,6 +109,7 @@ class Dialog extends React.Component<Props, void> {
       visible,
       style,
       theme,
+      duration,
     } = this.props;
 
     return (
@@ -111,6 +117,7 @@ class Dialog extends React.Component<Props, void> {
         dismissable={dismissable}
         onDismiss={onDismiss}
         visible={visible}
+        duration={duration}
         contentContainerStyle={[
           {
             borderRadius: theme.roundness,

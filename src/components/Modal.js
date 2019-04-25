@@ -28,6 +28,10 @@ type Props = {|
    */
   visible: boolean,
   /**
+   * Duration for Fade In and Fade out.
+   */
+  duration?: number,
+  /**
    * Content of the `Modal`.
    */
   children: React.Node,
@@ -89,6 +93,7 @@ class Modal extends React.Component<Props, State> {
   static defaultProps = {
     dismissable: true,
     visible: false,
+    duration: 280,
   };
 
   static getDerivedStateFromProps(nextProps: Props, prevState: State) {
@@ -128,7 +133,7 @@ class Modal extends React.Component<Props, State> {
     BackHandler.addEventListener('hardwareBackPress', this._handleBack);
     Animated.timing(this.state.opacity, {
       toValue: 1,
-      duration: 280,
+      duration: this.props.duration,
       easing: Easing.ease,
       useNativeDriver: true,
     }).start();
@@ -138,7 +143,7 @@ class Modal extends React.Component<Props, State> {
     BackHandler.removeEventListener('hardwareBackPress', this._handleBack);
     Animated.timing(this.state.opacity, {
       toValue: 0,
-      duration: 280,
+      duration: this.props.duration,
       easing: Easing.ease,
       useNativeDriver: true,
     }).start(({ finished }) => {
