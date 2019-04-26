@@ -4,6 +4,8 @@ import * as React from 'react';
 import renderer from 'react-test-renderer';
 import BottomNavigation from '../BottomNavigation';
 
+jest.useFakeTimers();
+
 jest.mock('Animated', () => {
   const ActualAnimated = jest.requireActual('Animated');
 
