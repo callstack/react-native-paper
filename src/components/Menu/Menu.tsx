@@ -347,7 +347,7 @@ class Menu extends React.Component<Props, State> {
     }
 
     // Check if menu fits vertically and if not align it to bottom.
-    if (top <= windowLayout.width - menuLayout.height - SCREEN_INDENT) {
+    if (top <= windowLayout.height - menuLayout.height - SCREEN_INDENT) {
       positionTransforms.push({
         translateY: scaleAnimation.y.interpolate({
           inputRange: [0, menuLayout.height],
