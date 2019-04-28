@@ -185,6 +185,7 @@ class Menu extends React.Component<Props, State> {
     if (this.props.visible) {
       this.props.onDismiss();
     }
+    return true;
   };
 
   _show = async () => {
