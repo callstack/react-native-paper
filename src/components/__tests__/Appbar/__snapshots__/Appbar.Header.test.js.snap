@@ -1,0 +1,209 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppbarHeader Uses a SafeAreaView wrapper if statusBarHeight is not given 1`] = `
+<View
+  onLayout={[Function]}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "backgroundColor": "#6200ee",
+      "paddingBottom": 0,
+      "paddingLeft": 0,
+      "paddingRight": 0,
+      "paddingTop": 20,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 3,
+        "width": 0,
+      },
+      "shadowOpacity": 0.24,
+      "shadowRadius": 4,
+      "zIndex": 0,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#6200ee",
+        "elevation": 0,
+        "flexDirection": "row",
+        "height": 56,
+        "marginTop": 0,
+        "paddingHorizontal": 4,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "width": 48,
+        }
+      }
+    />
+    <View
+      accessible={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 12,
+          },
+          Array [
+            false,
+            Object {
+              "alignItems": "center",
+            },
+            undefined,
+          ],
+        ]
+      }
+    >
+      <Text
+        accessibilityRole="header"
+        accessibilityTraits="header"
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
+            },
+            Array [
+              Object {
+                "color": "#ffffff",
+                "fontFamily": "Helvetica Neue",
+              },
+              Object {
+                "fontSize": 17,
+              },
+              undefined,
+            ],
+          ]
+        }
+      >
+        Examples
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "width": 48,
+        }
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`AppbarHeader Uses a View wrapper if statusBarHeight is given a number 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#6200ee",
+        "zIndex": 0,
+      },
+      Object {
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 3,
+          "width": 0,
+        },
+        "shadowOpacity": 0.24,
+        "shadowRadius": 4,
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#6200ee",
+        "elevation": 0,
+        "flexDirection": "row",
+        "height": 56,
+        "marginTop": 100,
+        "paddingHorizontal": 4,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "width": 48,
+        }
+      }
+    />
+    <View
+      accessible={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 12,
+          },
+          Array [
+            false,
+            Object {
+              "alignItems": "center",
+            },
+            undefined,
+          ],
+        ]
+      }
+    >
+      <Text
+        accessibilityRole="header"
+        accessibilityTraits="header"
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
+            },
+            Array [
+              Object {
+                "color": "#ffffff",
+                "fontFamily": "Helvetica Neue",
+              },
+              Object {
+                "fontSize": 17,
+              },
+              undefined,
+            ],
+          ]
+        }
+      >
+        Examples
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "width": 48,
+        }
+      }
+    />
+  </View>
+</View>
+`;
