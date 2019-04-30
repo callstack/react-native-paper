@@ -486,9 +486,9 @@ exports[`renders loading button 1`] = `
         <View
           style={
             Object {
-              "height": 24,
+              "height": 16,
               "opacity": 1,
-              "width": 24,
+              "width": 16,
             }
           }
         >
@@ -508,13 +508,13 @@ exports[`renders loading button 1`] = `
             <View
               style={
                 Object {
-                  "height": 24,
+                  "height": 16,
                   "transform": Array [
                     Object {
                       "rotate": "45deg",
                     },
                   ],
-                  "width": 24,
+                  "width": 16,
                 }
               }
             >
@@ -522,16 +522,16 @@ exports[`renders loading button 1`] = `
                 collapsable={false}
                 style={
                   Object {
-                    "height": 12,
+                    "height": 8,
                     "overflow": "hidden",
-                    "width": 24,
+                    "width": 16,
                   }
                 }
               >
                 <View
                   style={
                     Object {
-                      "height": 24,
+                      "height": 16,
                       "transform": Array [
                         Object {
                           "translateY": 0,
@@ -540,7 +540,7 @@ exports[`renders loading button 1`] = `
                           "rotate": "-165deg",
                         },
                       ],
-                      "width": 24,
+                      "width": 16,
                     }
                   }
                 >
@@ -548,9 +548,9 @@ exports[`renders loading button 1`] = `
                     collapsable={false}
                     style={
                       Object {
-                        "height": 12,
+                        "height": 8,
                         "overflow": "hidden",
-                        "width": 24,
+                        "width": 16,
                       }
                     }
                   >
@@ -558,10 +558,10 @@ exports[`renders loading button 1`] = `
                       style={
                         Object {
                           "borderColor": "#6200ee",
-                          "borderRadius": 12,
-                          "borderWidth": 2.4,
-                          "height": 24,
-                          "width": 24,
+                          "borderRadius": 8,
+                          "borderWidth": 1.6,
+                          "height": 16,
+                          "width": 16,
                         }
                       }
                     />
@@ -586,13 +586,13 @@ exports[`renders loading button 1`] = `
             <View
               style={
                 Object {
-                  "height": 24,
+                  "height": 16,
                   "transform": Array [
                     Object {
                       "rotate": "45deg",
                     },
                   ],
-                  "width": 24,
+                  "width": 16,
                 }
               }
             >
@@ -600,26 +600,26 @@ exports[`renders loading button 1`] = `
                 collapsable={false}
                 style={
                   Object {
-                    "height": 12,
+                    "height": 8,
                     "overflow": "hidden",
-                    "top": 12,
-                    "width": 24,
+                    "top": 8,
+                    "width": 16,
                   }
                 }
               >
                 <View
                   style={
                     Object {
-                      "height": 24,
+                      "height": 16,
                       "transform": Array [
                         Object {
-                          "translateY": -12,
+                          "translateY": -8,
                         },
                         Object {
                           "rotate": "345deg",
                         },
                       ],
-                      "width": 24,
+                      "width": 16,
                     }
                   }
                 >
@@ -627,9 +627,9 @@ exports[`renders loading button 1`] = `
                     collapsable={false}
                     style={
                       Object {
-                        "height": 12,
+                        "height": 8,
                         "overflow": "hidden",
-                        "width": 24,
+                        "width": 16,
                       }
                     }
                   >
@@ -637,10 +637,10 @@ exports[`renders loading button 1`] = `
                       style={
                         Object {
                           "borderColor": "#6200ee",
-                          "borderRadius": 12,
-                          "borderWidth": 2.4,
-                          "height": 24,
-                          "width": 24,
+                          "borderRadius": 8,
+                          "borderWidth": 1.6,
+                          "height": 16,
+                          "width": 16,
                         }
                       }
                     />

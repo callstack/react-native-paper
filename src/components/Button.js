@@ -259,7 +259,7 @@ class Button extends React.Component<Props, State> {
             ) : null}
             {loading ? (
               <ActivityIndicator
-                size="small"
+                size={16}
                 color={textColor}
                 style={styles.icon}
               />
