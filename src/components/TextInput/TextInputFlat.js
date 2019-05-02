@@ -280,6 +280,6 @@ const styles = StyleSheet.create({
     paddingBottom: 6,
   },
   inputFlatWithoutLabel: {
-    paddingVertical: 15,
+    paddingTop: 20,
   },
 });
