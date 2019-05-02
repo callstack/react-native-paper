@@ -7,7 +7,6 @@ export interface MenuProps {
   anchor: React.ReactNode;
   onDismiss: () => void;
   children: React.ReactNode;
-  statusBarHeight?: number,
   style?: StyleProp<ViewStyle>;
   theme?: ThemeShape;
 }
@@ -21,6 +20,6 @@ export interface ItemProps {
   style?: StyleProp<ViewStyle>;
 }
 
-export declare class Menu extends React.Component<MenuProps> {
-    static Item: React.ComponentType<ItemProps>;
+export class Menu extends React.Component<MenuProps> {
+  static Item: React.ComponentType<ItemProps>;
 }
