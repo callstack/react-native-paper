@@ -8,6 +8,7 @@ export interface ChipProps {
   icon?: IconSource;
   avatar?: React.ReactNode;
   selected?: boolean;
+  selectedColor?: string;
   disabled?: boolean;
   accessibilityLabel?: string;
   onPress?: () => any;
