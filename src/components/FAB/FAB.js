@@ -2,7 +2,8 @@
 
 import color from 'color';
 import * as React from 'react';
-import { Animated, View, StyleSheet, ActivityIndicator } from 'react-native';
+import { Animated, View, StyleSheet } from 'react-native';
+import ActivityIndicator from '../ActivityIndicator';
 import FABGroup from './FABGroup';
 import Surface from '../Surface';
 import CrossFadeIcon from '../CrossFadeIcon';
@@ -215,12 +216,8 @@ class FAB extends React.Component<Props, State> {
             {icon && loading !== true ? (
               <CrossFadeIcon source={icon} size={24} color={foregroundColor} />
             ) : null}
-            {loading ? (
-              <ActivityIndicator
-                size="small"
-                color={foregroundColor}
-                style={styles.icon}
-              />
+            {loading && label ? (
+              <ActivityIndicator size={18} color={foregroundColor} />
             ) : null}
             {label ? (
               <Text
@@ -269,10 +266,6 @@ const styles = StyleSheet.create({
   },
   disabled: {
     elevation: 0,
-  },
-  icon: {
-    width: 16,
-    marginLeft: 12,
   },
 });
 
