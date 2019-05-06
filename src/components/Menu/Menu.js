@@ -11,6 +11,7 @@ import {
   I18nManager,
   BackHandler,
   Platform,
+  findNodeHandle,
 } from 'react-native';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
@@ -51,6 +52,7 @@ type Props = {
 };
 
 type State = {|
+  rendered: boolean,
   top: number,
   left: number,
   windowLayout: {| height: number, width: number |},
@@ -126,7 +128,16 @@ class Menu extends React.Component<Props, State> {
     statusBarHeight: APPROX_STATUSBAR_HEIGHT,
   };
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.visible && !prevState.rendered) {
+      return { rendered: true };
+    }
+
+    return null;
+  }
+
   state = {
+    rendered: this.props.visible,
     top: 0,
     left: 0,
     windowLayout: { width: 0, height: 0 },
@@ -143,12 +154,11 @@ class Menu extends React.Component<Props, State> {
   }
 
   componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this._handleDismiss);
-    Dimensions.removeEventListener('change', this._handleDismiss);
+    this._removeListeners();
   }
 
-  _anchor: ?View;
-  _menu: ?View;
+  _anchor: View | null = null;
+  _menu: View | null = null;
 
   _measureMenuLayout = () =>
     new Promise(resolve => {
@@ -168,11 +178,32 @@ class Menu extends React.Component<Props, State> {
       }
     });
 
-  _updateVisibility = () => {
+  _updateVisibility = async () => {
+    // Menu is rendered in Portal, which updates items asynchronously
+    // We need to do the same here so that the ref is up-to-date
+    await Promise.resolve();
+
     if (this.props.visible) {
       this._show();
     } else {
       this._hide();
+    }
+  };
+
+  _isBrowser = () => 'document' in global;
+
+  _focusFirstDOMNode = (el: View | null) => {
+    if (el && this._isBrowser()) {
+      // When in the browser, we want to focus the first focusable item on toggle
+      // For example, when menu is shown, focus the first item in the menu
+      // And when menu is dismissed, send focus back to the button to resume tabbing
+      const node: any = findNodeHandle(el);
+      const focusableNode = node.querySelector(
+        // This is a rough list of selectors that can be focused
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+
+      focusableNode && focusableNode.focus();
     }
   };
 
@@ -183,10 +214,29 @@ class Menu extends React.Component<Props, State> {
     return true;
   };
 
-  _show = async () => {
+  _handleKeypress = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      this.props.onDismiss();
+    }
+  };
+
+  _attachListeners = () => {
     BackHandler.addEventListener('hardwareBackPress', this._handleDismiss);
     Dimensions.addEventListener('change', this._handleDismiss);
 
+    this._isBrowser() &&
+      document.addEventListener('keyup', this._handleKeypress);
+  };
+
+  _removeListeners = () => {
+    BackHandler.removeEventListener('hardwareBackPress', this._handleDismiss);
+    Dimensions.removeEventListener('change', this._handleDismiss);
+
+    this._isBrowser() &&
+      document.removeEventListener('keyup', this._handleKeypress);
+  };
+
+  _show = async () => {
     const windowLayout = Dimensions.get('window');
     const [menuLayout, anchorLayout] = await Promise.all([
       this._measureMenuLayout(),
@@ -207,7 +257,6 @@ class Menu extends React.Component<Props, State> {
       !anchorLayout.width ||
       !anchorLayout.height
     ) {
-      BackHandler.removeEventListener('hardwareBackPress', this._handleDismiss);
       setTimeout(this._show, ANIMATION_DURATION);
       return;
     }
@@ -230,6 +279,8 @@ class Menu extends React.Component<Props, State> {
         },
       },
       () => {
+        this._attachListeners();
+
         Animated.parallel([
           Animated.timing(this.state.scaleAnimation, {
             toValue: { x: menuLayout.width, y: menuLayout.height },
@@ -243,14 +294,17 @@ class Menu extends React.Component<Props, State> {
             easing: EASING,
             useNativeDriver: true,
           }),
-        ]).start();
+        ]).start(({ finished }) => {
+          if (finished) {
+            this._focusFirstDOMNode(this._menu);
+          }
+        });
       }
     );
   };
 
   _hide = () => {
-    BackHandler.removeEventListener('hardwareBackPress', this._handleDismiss);
-    Dimensions.removeEventListener('change', this._handleDismiss);
+    this._removeListeners();
 
     Animated.timing(this.state.opacityAnimation, {
       toValue: 0,
@@ -259,7 +313,10 @@ class Menu extends React.Component<Props, State> {
       useNativeDriver: true,
     }).start(finished => {
       if (finished) {
+        this._focusFirstDOMNode(this._anchor);
+
         this.state.scaleAnimation.setValue({ x: 0, y: 0 });
+        this.setState({ rendered: false });
       }
     });
   };
@@ -276,6 +333,7 @@ class Menu extends React.Component<Props, State> {
     } = this.props;
 
     const {
+      rendered,
       windowLayout,
       menuLayout,
       anchorLayout,
@@ -398,38 +456,29 @@ class Menu extends React.Component<Props, State> {
         collapsable={false}
       >
         {anchor}
-        <Portal>
-          {visible ? (
+        {rendered ? (
+          <Portal>
             <TouchableWithoutFeedback onPress={onDismiss}>
               <View style={StyleSheet.absoluteFill} />
             </TouchableWithoutFeedback>
-          ) : null}
-          <View
-            ref={ref => {
-              // This hack is needed to properly show menu
-              // when visible is `true` initially
-              // because in componentDidMount _menu ref is undefined
-              // because it's rendered in portal
-              if (!this._menu) {
+            <View
+              ref={ref => {
                 this._menu = ref;
-                if (visible) {
-                  this._show();
-                }
-              }
-            }}
-            collapsable={false}
-            pointerEvents={visible ? 'auto' : 'none'}
-            style={[styles.wrapper, positionStyle, style]}
-          >
-            <Animated.View style={{ transform: positionTransforms }}>
-              <Surface
-                style={[styles.shadowMenuContainer, shadowMenuContainerStyle]}
-              >
-                {children}
-              </Surface>
-            </Animated.View>
-          </View>
-        </Portal>
+              }}
+              collapsable={false}
+              accessibilityViewIsModal={visible}
+              style={[styles.wrapper, positionStyle, style]}
+            >
+              <Animated.View style={{ transform: positionTransforms }}>
+                <Surface
+                  style={[styles.shadowMenuContainer, shadowMenuContainerStyle]}
+                >
+                  {children}
+                </Surface>
+              </Animated.View>
+            </View>
+          </Portal>
+        ) : null}
       </View>
     );
   }
