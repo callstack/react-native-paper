@@ -6,7 +6,7 @@ export interface ModalProps {
   onDismiss?: () => any;
   visible: boolean;
   children: React.ReactNode;
-  contentContainerStyle?: any;
+  contentContainerStyle?: StyleProp<ViewStyle>;
   theme?: ThemeShape;
 }
 
