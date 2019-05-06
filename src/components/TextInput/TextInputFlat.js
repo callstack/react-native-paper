@@ -94,7 +94,8 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
 
     const { height, ...viewStyle } = StyleSheet.flatten(style) || {};
     const inputHeight = height || DEFAULT_INPUT_HEIGHT;
-    const PLACEHOLDER_CENTER_POSITION = inputHeight / 2 - HALF_FONT_SIZE - 2; // 2 is border height
+    const PLACEHOLDER_CENTER_POSITION =
+      Number(inputHeight) / 2 - HALF_FONT_SIZE - 2; // 2 is border height
 
     const labelStyle = {
       fontFamily,
