@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
 import { ThemeShape } from '../types';
 
 export interface ModalProps {
