@@ -181,14 +181,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
             "flexDirection": "row",
             "justifyContent": "flex-end",
             "margin": 4,
-            "minWidth": "auto",
-            "shadowColor": "rgba(0, 0, 0, 1)",
-            "shadowOffset": Object {
-              "height": 0,
-              "width": 0,
-            },
-            "shadowOpacity": 0.24,
-            "shadowRadius": 0,
           }
         }
       >
@@ -203,7 +195,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
               "elevation": 0,
               "margin": 4,
               "minWidth": "auto",
-              "shadowColor": "#000000",
+              "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": Object {
                 "height": 0,
                 "width": 0,
@@ -358,14 +350,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
             "flexDirection": "row",
             "justifyContent": "flex-end",
             "margin": 4,
-            "minWidth": "auto",
-            "shadowColor": "rgba(0, 0, 0, 1)",
-            "shadowOffset": Object {
-              "height": 0,
-              "width": 0,
-            },
-            "shadowOpacity": 0.24,
-            "shadowRadius": 0,
           }
         }
       >
@@ -380,7 +364,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
               "elevation": 0,
               "margin": 4,
               "minWidth": "auto",
-              "shadowColor": "#000000",
+              "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": Object {
                 "height": 0,
                 "width": 0,
@@ -459,28 +443,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
             </View>
           </View>
         </View>
-      </View>
-      <View
-        style={
-          Object {
-            "backgroundColor": "transparent",
-            "borderColor": "transparent",
-            "borderRadius": 4,
-            "borderStyle": "solid",
-            "borderWidth": 0,
-            "elevation": 0,
-            "margin": 4,
-            "minWidth": "auto",
-            "shadowColor": "rgba(0, 0, 0, 1)",
-            "shadowOffset": Object {
-              "height": 0,
-              "width": 0,
-            },
-            "shadowOpacity": 0.24,
-            "shadowRadius": 0,
-          }
-        }
-      >
         <View
           style={
             Object {
@@ -492,7 +454,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
               "elevation": 0,
               "margin": 4,
               "minWidth": "auto",
-              "shadowColor": "#000000",
+              "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": Object {
                 "height": 0,
                 "width": 0,

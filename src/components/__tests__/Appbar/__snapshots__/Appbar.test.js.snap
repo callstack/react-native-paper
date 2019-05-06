@@ -10,7 +10,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
       "flexDirection": "row",
       "height": 56,
       "paddingHorizontal": 4,
-      "shadowColor": "#000000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": Object {
         "height": 3,
         "width": 0,
@@ -28,7 +28,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         "borderRadius": 4,
         "elevation": 4,
         "flexDirection": "row",
-        "shadowColor": "#000000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": Object {
           "height": 3,
           "width": 0,
@@ -243,7 +243,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       "flexDirection": "row",
       "height": 56,
       "paddingHorizontal": 4,
-      "shadowColor": "#000000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": Object {
         "height": 3,
         "width": 0,

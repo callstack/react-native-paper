@@ -14,7 +14,7 @@ exports[`renders not visible menu 1`] = `
         "borderWidth": 0.5,
         "elevation": 0,
         "minWidth": 64,
-        "shadowColor": "#000000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": Object {
           "height": 0,
           "width": 0,
@@ -108,7 +108,7 @@ exports[`renders visible menu 1`] = `
         "borderWidth": 0.5,
         "elevation": 0,
         "minWidth": 64,
-        "shadowColor": "#000000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": Object {
           "height": 0,
           "width": 0,
