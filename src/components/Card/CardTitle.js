@@ -6,6 +6,7 @@ import { withTheme } from '../../core/theming';
 import Caption from './../Typography/Caption';
 import Title from './../Typography/Title';
 import type { Theme } from '../../types';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 type Props = React.ElementConfig<typeof View> & {|
   /**
@@ -29,17 +30,17 @@ type Props = React.ElementConfig<typeof View> & {|
    */
   left?: (props: { size: number }) => React.Node,
   /**
-   * Style for the left.
+   * Style for the left element wrapper.
    */
-  leftStyle?: any,
+  leftStyle?: ViewStyleProp,
   /**
    * Callback which returns a React element to display on the right side.
    */
   right?: (props: { size: number }) => React.Node,
   /**
-   * Style for the right.
+   * Style for the right element wrapper.
    */
-  rightStyle?: any,
+  rightStyle?: ViewStyleProp,
   /**
    * @internal
    */
