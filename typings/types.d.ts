@@ -50,3 +50,5 @@ export declare class Provider extends React.Component<{
   children: React.ReactNode;
   theme?: ThemeShape;
 }> {}
+
+export type EllipsizeProp = 'head' | 'middle' | 'tail' | 'clip';

@@ -6,7 +6,7 @@ import {
   TextProps,
   TextStyle,
 } from 'react-native';
-import { ThemeShape, IconSource } from '../types';
+import { ThemeShape, IconSource, EllipsizeProp } from '../types';
 import { TouchableRipplePropsWithoutChildren } from './TouchableRipple';
 
 export interface AccordionProps {
@@ -37,8 +37,8 @@ export interface ItemProps extends TouchableRipplePropsWithoutChildren {
   right?: (props: { color: string }) => React.ReactNode;
   titleStyle?: StyleProp<TextStyle>;
   descriptionStyle?: StyleProp<TextStyle>;
-  titleEllipsizeMode?: 'head' | 'middle' | 'tail' | 'clip';
-  descriptionEllipsizeMode?: 'head' | 'middle' | 'tail' | 'clip';
+  titleEllipsizeMode?: EllipsizeProp;
+  descriptionEllipsizeMode?: EllipsizeProp;
 }
 
 export declare class Item extends React.Component<ItemProps> {}

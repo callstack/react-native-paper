@@ -10,7 +10,7 @@ import type {
 import TouchableRipple from '../TouchableRipple';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
-import type { Theme, $RemoveChildren } from '../../types';
+import type { Theme, $RemoveChildren, EllipsizeProp } from '../../types';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {|
   /**
@@ -18,9 +18,15 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {|
    */
   title: React.Node,
   /**
-   * Description text for the list item.
+   * Description text for the list item or callback which returns a React element to display the description.
    */
-  description?: React.Node,
+  description?:
+    | React.Node
+    | ((props: {
+        ellipsizeMode: EllipsizeProp,
+        color: string,
+        fontSize: number,
+      }) => React.Node),
   /**
    * Callback which returns a React element to display on the left side.
    */
@@ -52,11 +58,11 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {|
   /**
    * Ellipsize Mode for the Title
    */
-  titleEllipsizeMode?: 'head' | 'middle' | 'tail' | 'clip',
+  titleEllipsizeMode?: EllipsizeProp,
   /**
    * Ellipsize Mode for the Description
    */
-  descriptionEllipsizeMode?: 'head' | 'middle' | 'tail' | 'clip',
+  descriptionEllipsizeMode?: EllipsizeProp,
 |};
 
 /**
