@@ -11,13 +11,6 @@ exports[`renders button with color 1`] = `
       "borderWidth": 0,
       "elevation": 0,
       "minWidth": 64,
-      "shadowColor": "#000000",
-      "shadowOffset": Object {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0.24,
-      "shadowRadius": 0,
     }
   }
 >
@@ -104,13 +97,6 @@ exports[`renders button with icon 1`] = `
       "borderWidth": 0,
       "elevation": 0,
       "minWidth": 64,
-      "shadowColor": "#000000",
-      "shadowOffset": Object {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0.24,
-      "shadowRadius": 0,
     }
   }
 >
@@ -425,13 +411,6 @@ exports[`renders loading button 1`] = `
       "borderWidth": 0,
       "elevation": 0,
       "minWidth": 64,
-      "shadowColor": "#000000",
-      "shadowOffset": Object {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0.24,
-      "shadowRadius": 0,
     }
   }
 >
@@ -531,13 +510,6 @@ exports[`renders outlined button with mode 1`] = `
       "borderWidth": 0.5,
       "elevation": 0,
       "minWidth": 64,
-      "shadowColor": "#000000",
-      "shadowOffset": Object {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0.24,
-      "shadowRadius": 0,
     }
   }
 >
@@ -624,13 +596,6 @@ exports[`renders text button by default 1`] = `
       "borderWidth": 0,
       "elevation": 0,
       "minWidth": 64,
-      "shadowColor": "#000000",
-      "shadowOffset": Object {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0.24,
-      "shadowRadius": 0,
     }
   }
 >
@@ -717,13 +682,6 @@ exports[`renders text button with mode 1`] = `
       "borderWidth": 0,
       "elevation": 0,
       "minWidth": 64,
-      "shadowColor": "#000000",
-      "shadowOffset": Object {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0.24,
-      "shadowRadius": 0,
     }
   }
 >
