@@ -10,10 +10,11 @@ import { withTheme } from '../../core/theming';
 import Caption from './../Typography/Caption';
 import Title from './../Typography/Title';
 import type { Theme } from '../../types';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 type Props = React.ElementConfig<typeof View> & {|
   /**
-   * Text for the title.
+   * Text for the title. Note that this will only accept a string or `<Text>`-based node.
    */
   title: React.Node,
   /**
@@ -21,7 +22,7 @@ type Props = React.ElementConfig<typeof View> & {|
    */
   titleStyle?: TextStyleProp,
   /**
-   * Text for the subtitle.
+   * Text for the subtitle. Note that this will only accept a string or `<Text>`-based node.
    */
   subtitle?: React.Node,
   /**
@@ -33,9 +34,17 @@ type Props = React.ElementConfig<typeof View> & {|
    */
   left?: (props: { size: number }) => React.Node,
   /**
+   * Style for the left element wrapper.
+   */
+  leftStyle?: ViewStyleProp,
+  /**
    * Callback which returns a React element to display on the right side.
    */
   right?: (props: { size: number }) => React.Node,
+  /**
+   * Style for the right element wrapper.
+   */
+  rightStyle?: ViewStyleProp,
   /**
    * @internal
    */
@@ -83,7 +92,9 @@ class CardTitle extends React.Component<Props> {
   render() {
     const {
       left,
+      leftStyle,
       right,
+      rightStyle,
       subtitle,
       subtitleStyle,
       style,
@@ -100,7 +111,7 @@ class CardTitle extends React.Component<Props> {
         ]}
       >
         {left ? (
-          <View style={[styles.left]}>
+          <View style={[styles.left, leftStyle]}>
             {left({
               size: LEFT_SIZE,
             })}
@@ -128,7 +139,7 @@ class CardTitle extends React.Component<Props> {
           ) : null}
         </View>
 
-        <View>{right ? right({ size: 24 }) : null}</View>
+        <View style={rightStyle}>{right ? right({ size: 24 }) : null}</View>
       </View>
     );
   }
