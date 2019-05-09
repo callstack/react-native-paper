@@ -3,7 +3,7 @@ import { ViewProps } from 'react-native';
 import { ThemeShape, IconSource } from '../types';
 
 export interface FABGroupAction {
-  icon: string;
+  icon: IconSource;
   label?: string;
   color?: string;
   accessibilityLabel?: string;
