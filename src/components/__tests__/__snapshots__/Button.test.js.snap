@@ -447,19 +447,189 @@ exports[`renders loading button 1`] = `
         ]
       }
     >
-      <ActivityIndicator
-        animating={true}
-        color="#6200ee"
-        hidesWhenStopped={true}
-        size="small"
+      <View
         style={
-          Object {
-            "marginLeft": 12,
-            "marginRight": -4,
-            "width": 16,
-          }
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "marginLeft": 12,
+              "marginRight": -4,
+              "width": 16,
+            },
+          ]
         }
-      />
+      >
+        <View
+          style={
+            Object {
+              "height": 16,
+              "opacity": 1,
+              "width": 16,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "justifyContent": "center",
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "height": 16,
+                  "transform": Array [
+                    Object {
+                      "rotate": "45deg",
+                    },
+                  ],
+                  "width": 16,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  Object {
+                    "height": 8,
+                    "overflow": "hidden",
+                    "width": 16,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "height": 16,
+                      "transform": Array [
+                        Object {
+                          "translateY": 0,
+                        },
+                        Object {
+                          "rotate": "-165deg",
+                        },
+                      ],
+                      "width": 16,
+                    }
+                  }
+                >
+                  <View
+                    collapsable={false}
+                    style={
+                      Object {
+                        "height": 8,
+                        "overflow": "hidden",
+                        "width": 16,
+                      }
+                    }
+                  >
+                    <View
+                      style={
+                        Object {
+                          "borderColor": "#6200ee",
+                          "borderRadius": 8,
+                          "borderWidth": 1.6,
+                          "height": 16,
+                          "width": 16,
+                        }
+                      }
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "justifyContent": "center",
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "height": 16,
+                  "transform": Array [
+                    Object {
+                      "rotate": "45deg",
+                    },
+                  ],
+                  "width": 16,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  Object {
+                    "height": 8,
+                    "overflow": "hidden",
+                    "top": 8,
+                    "width": 16,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "height": 16,
+                      "transform": Array [
+                        Object {
+                          "translateY": -8,
+                        },
+                        Object {
+                          "rotate": "345deg",
+                        },
+                      ],
+                      "width": 16,
+                    }
+                  }
+                >
+                  <View
+                    collapsable={false}
+                    style={
+                      Object {
+                        "height": 8,
+                        "overflow": "hidden",
+                        "width": 16,
+                      }
+                    }
+                  >
+                    <View
+                      style={
+                        Object {
+                          "borderColor": "#6200ee",
+                          "borderRadius": 8,
+                          "borderWidth": 1.6,
+                          "height": 16,
+                          "width": 16,
+                        }
+                      }
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
       <Text
         numberOfLines={1}
         style={

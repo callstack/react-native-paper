@@ -1,9 +1,10 @@
 /* @flow */
 
 import * as React from 'react';
-import { ActivityIndicator, Animated, View, StyleSheet } from 'react-native';
+import { Animated, View, StyleSheet } from 'react-native';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import color from 'color';
+import ActivityIndicator from './ActivityIndicator';
 import Icon from './Icon';
 import Surface from './Surface';
 import Text from './Typography/Text';
@@ -259,7 +260,7 @@ class Button extends React.Component<Props, State> {
             ) : null}
             {loading ? (
               <ActivityIndicator
-                size="small"
+                size={16}
                 color={textColor}
                 style={styles.icon}
               />
