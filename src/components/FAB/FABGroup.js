@@ -30,7 +30,7 @@ type Props = {|
    * - `onPress`: callback that is called when `FAB` is pressed (required)
    */
   actions: Array<{
-    icon: string,
+    icon: IconSource,
     label?: string,
     color?: string,
     accessibilityLabel?: string,
