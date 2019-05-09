@@ -33,6 +33,7 @@ export interface FABProps extends ViewProps {
   color?: string;
   disabled?: boolean;
   visible?: boolean;
+  loading?: boolean;
   onPress?: () => any;
   theme?: ThemeShape;
 }

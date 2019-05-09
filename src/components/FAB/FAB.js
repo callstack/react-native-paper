@@ -3,6 +3,7 @@
 import color from 'color';
 import * as React from 'react';
 import { Animated, View, StyleSheet } from 'react-native';
+import ActivityIndicator from '../ActivityIndicator';
 import FABGroup from './FABGroup';
 import Surface from '../Surface';
 import CrossFadeIcon from '../CrossFadeIcon';
@@ -43,6 +44,10 @@ type Props = $RemoveChildren<typeof Surface> & {|
    * Whether `FAB` is currently visible.
    */
   visible: boolean,
+  /**
+   * Whether to show a loading indicator.
+   */
+  loading?: boolean,
   /**
    * Function to execute on press.
    */
@@ -137,6 +142,7 @@ class FAB extends React.Component<Props, State> {
       theme,
       style,
       visible,
+      loading,
       ...rest
     } = this.props;
     const { visibility } = this.state;
@@ -207,7 +213,12 @@ class FAB extends React.Component<Props, State> {
             ]}
             pointerEvents="none"
           >
-            <CrossFadeIcon source={icon} size={24} color={foregroundColor} />
+            {icon && loading !== true ? (
+              <CrossFadeIcon source={icon} size={24} color={foregroundColor} />
+            ) : null}
+            {loading && label ? (
+              <ActivityIndicator size={18} color={foregroundColor} />
+            ) : null}
             {label ? (
               <Text
                 style={[
