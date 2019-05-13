@@ -193,6 +193,14 @@ type Props<T> = {
   barStyle?: any,
   style?: any,
   /**
+   * Custom icon container size (square dimensions)
+   */
+  iconContainerSize?: Number,
+  /**
+   * Custom label font size
+   */
+  labelFontSize?: Number,
+  /**
    * @optional
    */
   theme: Theme,
@@ -775,6 +783,10 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                       <Animated.View
                         style={[
                           styles.iconContainer,
+                          {
+                            height: this.props.iconContainerSize || 24,
+                            width: this.props.iconContainerSize || 24,
+                          },
                           { transform: [{ translateY }] },
                         ]}
                       >
@@ -861,6 +873,9 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                               <AnimatedText
                                 style={[
                                   styles.label,
+                                  {
+                                    fontSize: this.props.labelFontSize || 12,
+                                  },
                                   { color: activeTintColor },
                                 ]}
                               >
@@ -885,6 +900,9 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                                 <AnimatedText
                                   style={[
                                     styles.label,
+                                    {
+                                      fontSize: this.props.labelFontSize || 12,
+                                    },
                                     { color: inactiveTintColor },
                                   ]}
                                 >
@@ -945,8 +963,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   iconContainer: {
-    height: 24,
-    width: 24,
     marginTop: 2,
     marginHorizontal: 12,
     alignSelf: 'center',
@@ -963,7 +979,6 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
   label: {
-    fontSize: 12,
     textAlign: 'center',
     backgroundColor: 'transparent',
     ...((Platform.OS === 'web'
