@@ -33,6 +33,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
   render() {
     const {
       disabled,
+      editable,
       label,
       error,
       selectionColor,

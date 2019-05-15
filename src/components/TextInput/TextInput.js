@@ -296,7 +296,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     }).start();
 
   _handleFocus = (...args) => {
-    if (this.props.disabled) {
+    if (this.props.disabled || !this.props.editable) {
       return;
     }
 
@@ -308,7 +308,7 @@ class TextInput extends React.Component<TextInputProps, State> {
   };
 
   _handleBlur = (...args) => {
-    if (this.props.disabled) {
+    if (this.props.disabled || !this.props.editable) {
       return;
     }
 
