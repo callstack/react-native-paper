@@ -2,11 +2,12 @@
 
 import color from 'color';
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Text from '../Typography/Text';
 import Divider from '../Divider';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 type Props = React.ElementConfig<typeof View> & {
   /**
@@ -17,6 +18,7 @@ type Props = React.ElementConfig<typeof View> & {
    * Content of the `Drawer.Section`.
    */
   children: React.Node,
+  style?: ViewStyleProp,
   /**
    * @optional
    */
@@ -61,7 +63,7 @@ class DrawerSection extends React.Component<Props> {
   static displayName = 'Drawer.Section';
 
   render() {
-    const { children, title, theme, ...rest } = this.props;
+    const { children, title, theme, style, ...rest } = this.props;
     const { colors, fonts } = theme;
     const titleColor = color(colors.text)
       .alpha(0.54)
@@ -70,9 +72,9 @@ class DrawerSection extends React.Component<Props> {
     const fontFamily = fonts.medium;
 
     return (
-      <View {...rest}>
+      <View style={[styles.container, style]} {...rest}>
         {title && (
-          <View style={{ height: 40, justifyContent: 'center' }}>
+          <View style={styles.titleContainer}>
             <Text
               numberOfLines={1}
               style={{ color: titleColor, fontFamily, marginLeft: 16 }}
@@ -82,10 +84,23 @@ class DrawerSection extends React.Component<Props> {
           </View>
         )}
         {children}
-        <Divider style={{ marginVertical: 4 }} />
+        <Divider style={styles.divider} />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginBottom: 4,
+  },
+  titleContainer: {
+    height: 40,
+    justifyContent: 'center',
+  },
+  divider: {
+    marginTop: 4,
+  },
+});
 
 export default withTheme(DrawerSection);
