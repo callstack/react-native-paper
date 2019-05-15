@@ -10,7 +10,7 @@ import {
   Platform,
 } from 'react-native';
 import color from 'color';
-import Text from '../Typography/Text';
+import InputLabel from './InputLabel';
 import type { RenderProps, ChildTextInputProps } from './types';
 import {
   calculateLabelTopPosition,
@@ -18,8 +18,6 @@ import {
   calculatePadding,
   adjustPaddingFlat,
 } from './helpers';
-
-const AnimatedText = Animated.createAnimatedComponent(Text);
 
 const MINIMIZED_LABEL_Y_OFFSET = -18;
 const MAXIMIZED_LABEL_FONT_SIZE = 16;
@@ -178,48 +176,29 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
     const baseLabelTranslateY =
       -labelHalfHeight - (topPosition + MINIMIZED_LABEL_Y_OFFSET);
 
-    const labelTranslationX = {
-      transform: [
-        {
-          // Offset label scale since RN doesn't support transform origin
-          translateX: parentState.labeled.interpolate({
-            inputRange: [0, 1],
-            outputRange: [baseLabelTranslateX, 0],
-          }),
-        },
-      ],
-    };
+    const placeholderOpacity = hasActiveOutline
+      ? parentState.labeled
+      : parentState.labelLayout.measured
+        ? 1
+        : 0;
 
-    const labelStyle = {
-      ...font,
+    const labelProps = {
+      label,
+      onLayoutAnimatedText,
+      placeholderOpacity,
+      error,
+      placeholderStyle: styles.placeholder,
+      baseLabelTranslateY,
+      baseLabelTranslateX,
+      font,
       fontSize,
-      transform: [
-        {
-          // Wiggle the label when there's an error
-          translateX: parentState.error.interpolate({
-            inputRange: [0, 0.5, 1],
-            outputRange: [
-              0,
-              parentState.value && error ? LABEL_WIGGLE_X_OFFSET : 0,
-              0,
-            ],
-          }),
-        },
-        {
-          // Move label to top
-          translateY: parentState.labeled.interpolate({
-            inputRange: [0, 1],
-            outputRange: [baseLabelTranslateY, 0],
-          }),
-        },
-        {
-          // Make label smaller
-          scale: parentState.labeled.interpolate({
-            inputRange: [0, 1],
-            outputRange: [labelScale, 1],
-          }),
-        },
-      ],
+      labelScale,
+      wiggleOffsetX: LABEL_WIGGLE_X_OFFSET,
+      topPosition,
+      paddingOffset,
+      hasActiveOutline,
+      activeColor,
+      placeholderColor,
     };
 
     return (
@@ -252,69 +231,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
                 : MIN_HEIGHT),
           }}
         >
-          {label ? (
-            // Position colored placeholder and gray placeholder on top of each other and crossfade them
-            // This gives the effect of animating the color, but allows us to use native driver
-            <Animated.View
-              pointerEvents="none"
-              style={[
-                StyleSheet.absoluteFill,
-                {
-                  opacity:
-                    // Hide the label in minimized state until we measure it's width
-                    parentState.value || parentState.focused
-                      ? parentState.labelLayout.measured
-                        ? 1
-                        : 0
-                      : 1,
-                },
-                labelTranslationX,
-              ]}
-            >
-              <AnimatedText
-                onLayout={onLayoutAnimatedText}
-                style={[
-                  styles.placeholder,
-                  {
-                    top: topPosition,
-                  },
-                  labelStyle,
-                  paddingOffset,
-                  {
-                    color: activeColor,
-                    opacity: parentState.labeled.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [hasActiveOutline ? 1 : 0, 0],
-                    }),
-                  },
-                ]}
-                numberOfLines={1}
-              >
-                {label}
-              </AnimatedText>
-              <AnimatedText
-                style={[
-                  styles.placeholder,
-                  {
-                    top: topPosition,
-                  },
-                  labelStyle,
-                  paddingOffset,
-                  {
-                    color: placeholderColor,
-                    opacity: hasActiveOutline
-                      ? parentState.labeled
-                      : parentState.labelLayout.measured
-                        ? 1
-                        : 0,
-                  },
-                ]}
-                numberOfLines={1}
-              >
-                {label}
-              </AnimatedText>
-            </Animated.View>
-          ) : null}
+          <InputLabel parentState={parentState} labelProps={labelProps} />
 
           {render(
             ({

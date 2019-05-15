@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import color from 'color';
 import Text from '../Typography/Text';
+import InputLabel from './InputLabel';
 import type { ChildTextInputProps, RenderProps } from './types';
 import {
   calculateLabelTopPosition,
@@ -147,48 +148,24 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
     const baseLabelTranslateY =
       -labelHalfHeight - (topPosition + OUTLINE_MINIMIZED_LABEL_Y_OFFSET);
 
-    const labelTranslationX = {
-      transform: [
-        {
-          // Offset label scale since RN doesn't support transform origin
-          translateX: parentState.labeled.interpolate({
-            inputRange: [0, 1],
-            outputRange: [baseLabelTranslateX, 0],
-          }),
-        },
-      ],
-    };
+    const placeholderOpacity = hasActiveOutline ? parentState.labeled : 1;
 
-    const labelStyle = {
-      ...font,
+    const labelProps = {
+      label,
+      onLayoutAnimatedText,
+      placeholderOpacity,
+      error,
+      placeholderStyle: styles.placeholder,
+      baseLabelTranslateY,
+      baseLabelTranslateX,
+      font,
       fontSize,
-      transform: [
-        {
-          // Wiggle the label when there's an error
-          translateX: parentState.error.interpolate({
-            inputRange: [0, 0.5, 1],
-            outputRange: [
-              0,
-              parentState.value && error ? LABEL_WIGGLE_X_OFFSET : 0,
-              0,
-            ],
-          }),
-        },
-        {
-          // Move label to top
-          translateY: parentState.labeled.interpolate({
-            inputRange: [0, 1],
-            outputRange: [baseLabelTranslateY, 0],
-          }),
-        },
-        {
-          // Make label smaller
-          scale: parentState.labeled.interpolate({
-            inputRange: [0, 1],
-            outputRange: [labelScale, 1],
-          }),
-        },
-      ],
+      labelScale,
+      wiggleOffsetX: LABEL_WIGGLE_X_OFFSET,
+      topPosition,
+      hasActiveOutline,
+      activeColor,
+      placeholderColor,
     };
 
     return (
@@ -253,63 +230,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
               </AnimatedText>
             ) : null}
 
-            {label ? (
-              // Position colored placeholder and gray placeholder on top of each other and crossfade them
-              // This gives the effect of animating the color, but allows us to use native driver
-              <Animated.View
-                pointerEvents="none"
-                style={[
-                  StyleSheet.absoluteFill,
-                  {
-                    opacity:
-                      // Hide the label in minimized state until we measure it's width
-                      parentState.value || parentState.focused
-                        ? parentState.labelLayout.measured
-                          ? 1
-                          : 0
-                        : 1,
-                  },
-                  labelTranslationX,
-                ]}
-              >
-                <AnimatedText
-                  onLayout={onLayoutAnimatedText}
-                  style={[
-                    styles.placeholder,
-                    {
-                      top: topPosition,
-                    },
-                    labelStyle,
-                    {
-                      color: activeColor,
-                      opacity: parentState.labeled.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [hasActiveOutline ? 1 : 0, 0],
-                      }),
-                    },
-                  ]}
-                  numberOfLines={1}
-                >
-                  {label}
-                </AnimatedText>
-                <AnimatedText
-                  style={[
-                    styles.placeholder,
-                    {
-                      top: topPosition,
-                    },
-                    labelStyle,
-                    {
-                      color: placeholderColor,
-                      opacity: hasActiveOutline ? parentState.labeled : 1,
-                    },
-                  ]}
-                  numberOfLines={1}
-                >
-                  {label}
-                </AnimatedText>
-              </Animated.View>
-            ) : null}
+            <InputLabel parentState={parentState} labelProps={labelProps} />
 
             {render(
               ({
