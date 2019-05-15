@@ -5,6 +5,8 @@ import { Animated, StyleSheet, View } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
 import Icon, { isValidIcon, isEqualIcon } from './Icon';
 import type { IconSource } from './Icon';
+import { withTheme } from '../core/theming';
+import type { Theme } from '../types';
 
 type Props = {|
   /**
@@ -19,6 +21,10 @@ type Props = {|
    * Size of the icon.
    */
   size: number,
+  /**
+   * @optional
+   */
+  theme: Theme,
 |};
 
 type State = {
@@ -47,6 +53,11 @@ class CrossFadeIcon extends React.Component<Props, State> {
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     const { previousIcon } = this.state;
+    const {
+      theme: {
+        animation: { scale },
+      },
+    } = this.props;
 
     if (
       !isValidIcon(previousIcon) ||
@@ -58,7 +69,7 @@ class CrossFadeIcon extends React.Component<Props, State> {
     this.state.fade.setValue(1);
 
     Animated.timing(this.state.fade, {
-      duration: 200,
+      duration: scale * 200,
       toValue: 0,
     }).start();
   }
@@ -126,7 +137,7 @@ class CrossFadeIcon extends React.Component<Props, State> {
 
 polyfill(CrossFadeIcon);
 
-export default CrossFadeIcon;
+export default withTheme(CrossFadeIcon);
 
 const styles = StyleSheet.create({
   content: {
