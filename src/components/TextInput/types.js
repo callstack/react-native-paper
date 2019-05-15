@@ -48,7 +48,7 @@ export type ChildTextInputProps = {|
 
 export type LabelProps = {
   placeholderStyle: any,
-  placeholderOpacity: 1 | 0,
+  placeholderOpacity: number | Animated.Value,
   baseLabelTranslateX: number,
   baseLabelTranslateY: number,
   wiggleOffsetX: number,
@@ -56,16 +56,15 @@ export type LabelProps = {
   fontSize: number,
   font: any,
   topPosition: number,
-  labelStyle: {},
-  paddingOffset: ?{
+  paddingOffset?: ?{
     paddingHorizontal: number,
   },
   placeholderColor: ?string,
   label?: ?string,
-  hasActiveOutline: boolean,
+  hasActiveOutline: ?boolean,
   activeColor: string,
   onLayoutAnimatedText: ?() => mixed,
-  error: Animated.Value,
+  error: ?boolean,
 };
 
 export type InputLabelProps = {

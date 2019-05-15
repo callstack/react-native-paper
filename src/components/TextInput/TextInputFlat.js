@@ -12,6 +12,14 @@ import {
 import color from 'color';
 import InputLabel from './InputLabel';
 import type { RenderProps, ChildTextInputProps } from './types';
+
+import {
+  MAXIMIZED_LABEL_FONT_SIZE,
+  MINIMIZED_LABEL_FONT_SIZE,
+  LABEL_WIGGLE_X_OFFSET,
+  LABEL_PADDING_HORIZONTAL,
+} from './constants';
+
 import {
   calculateLabelTopPosition,
   calculateInputHeight,
@@ -20,10 +28,6 @@ import {
 } from './helpers';
 
 const MINIMIZED_LABEL_Y_OFFSET = -18;
-const MAXIMIZED_LABEL_FONT_SIZE = 16;
-const MINIMIZED_LABEL_FONT_SIZE = 12;
-const LABEL_WIGGLE_X_OFFSET = 4;
-const LABEL_PADDING_HORIZONTAL = 12;
 
 const LABEL_PADDING_TOP = 30;
 const LABEL_PADDING_TOP_DENSE = 24;
@@ -130,23 +134,11 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       minInputHeight
     );
 
-    const topPosition = multiline
-      ? calculateLabelTopPosition(
-          labelHeight,
-          inputHeight,
-          height ? 0 : minInputHeight / 2
-        )
-      : calculateLabelTopPosition(
-          labelHeight,
-          inputHeight,
-          !height ? minInputHeight / 2 : 0
-        );
-
-    const flatHeight =
-      inputHeight +
-      (!height ? (dense ? LABEL_PADDING_TOP_DENSE : LABEL_PADDING_TOP) : 0);
-
-    const isAndroid = Platform.OS === 'android';
+    const topPosition = calculateLabelTopPosition(
+      labelHeight,
+      inputHeight,
+      multiline && height ? 0 : !height ? minInputHeight / 2 : 0
+    );
 
     if (height && typeof height !== 'number')
       // eslint-disable-next-line
@@ -155,14 +147,14 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
     const paddingSettings = {
       height: +height || undefined,
       labelHalfHeight,
+      offset: INPUT_OFFSET,
       multiline,
       dense,
-      offset: INPUT_OFFSET,
       topPosition,
       fontSize,
       label,
       scale: fontScale,
-      isAndroid,
+      isAndroid: Platform.OS === 'android',
       styles: dense ? styles.inputFlatDense : styles.inputFlat,
     };
 
@@ -201,34 +193,28 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       placeholderColor,
     };
 
+    const minHeight =
+      height ||
+      (dense ? (label ? MIN_DENSE_HEIGHT_WL : MIN_DENSE_HEIGHT) : MIN_HEIGHT);
+
+    const flatHeight =
+      inputHeight +
+      (!height ? (dense ? LABEL_PADDING_TOP_DENSE : LABEL_PADDING_TOP) : 0);
+
     return (
       <View style={[containerStyle, viewStyle]}>
-        <Animated.View
-          style={[
-            styles.underline,
-            {
-              backgroundColor: error
-                ? colors.error
-                : parentState.focused
-                  ? activeColor
-                  : underlineColorCustom,
-              // Underlines is thinner when input is not focused
-              transform: [{ scaleY: parentState.focused ? 1 : 0.5 }],
-            },
-          ]}
+        <Underline
+          parentState={parentState}
+          underlineColorCustom={underlineColorCustom}
+          error={error}
+          colors={colors}
+          activeColor={activeColor}
         />
-
         <View
           style={{
             paddingTop: 0,
             paddingBottom: 0,
-            minHeight:
-              height ||
-              (dense
-                ? label
-                  ? MIN_DENSE_HEIGHT_WL
-                  : MIN_DENSE_HEIGHT
-                : MIN_HEIGHT),
+            minHeight,
           }}
         >
           <InputLabel parentState={parentState} labelProps={labelProps} />
@@ -275,6 +261,31 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
 }
 
 export default TextInputFlat;
+
+const Underline = ({
+  parentState,
+  error,
+  colors,
+  activeColor,
+  underlineColorCustom,
+}) => {
+  let backgroundColor = parentState.focused
+    ? activeColor
+    : underlineColorCustom;
+  if (error) backgroundColor = colors.error;
+  return (
+    <Animated.View
+      style={[
+        styles.underline,
+        {
+          backgroundColor,
+          // Underlines is thinner when input is not focused
+          transform: [{ scaleY: parentState.focused ? 1 : 0.5 }],
+        },
+      ]}
+    />
+  );
+};
 
 const styles = StyleSheet.create({
   placeholder: {
