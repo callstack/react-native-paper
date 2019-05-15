@@ -249,7 +249,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
               ? parentState.placeholder
               : this.props.placeholder,
             placeholderTextColor: placeholderColor,
-            editable: !disabled,
+            editable: !disabled && editable,
             selectionColor:
               typeof selectionColor === 'undefined'
                 ? activeColor
