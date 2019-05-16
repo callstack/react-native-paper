@@ -57,6 +57,14 @@ export type TextInputProps = {|
    */
   padding?: 'none' | 'normal',
   /**
+   * Sets min height with densed layout. For `TextInput` in `flat` mode
+   * height is `64dp` or in dense layout - `52dp` with label or `40dp` without label.
+   * For `TextInput` in `outlined` mode
+   * height is `56dp` or in dense layout - `40dp` regardless of label.
+   * When you apply `heigh` prop in style the `dense` prop affects only `paddingVertical` inside `TextInput`
+   */
+  dense?: boolean,
+  /**
    * Whether the input can have multiple lines.
    */
   multiline?: boolean,
@@ -95,6 +103,11 @@ export type TextInputProps = {|
    * Value of the text input.
    */
   value?: string,
+  /**
+   * Pass `fontSize` prop to modify the font size inside `TextInput`.
+   * Pass `height` prop to set `TextInput` height. When `height` is passed,
+   * `dense` prop will affect only input's `paddingVertical`.
+   */
   style?: any,
   /**
    * @optional
@@ -153,6 +166,7 @@ class TextInput extends React.Component<TextInputProps, State> {
   static defaultProps = {
     mode: 'flat',
     padding: 'normal',
+    dense: false,
     disabled: false,
     error: false,
     multiline: false,
@@ -178,6 +192,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     labelLayout: {
       measured: false,
       width: 0,
+      height: 0,
     },
   };
 
@@ -333,6 +348,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     this.setState({
       labelLayout: {
         width: e.nativeEvent.layout.width,
+        height: e.nativeEvent.layout.height,
         measured: true,
       },
     });
