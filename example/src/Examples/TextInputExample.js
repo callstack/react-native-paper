@@ -188,7 +188,7 @@ class TextInputExample extends React.Component<Props, State> {
           />
           <View style={styles.inputContainerStyle}>
             <TextInput
-              label="Input with help"
+              label="Input with helper text"
               placeholder="Enter username, only letters"
               value={this.state.name}
               error={!this._isUsernameValid(this.state.name)}
