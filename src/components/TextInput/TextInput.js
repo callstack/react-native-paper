@@ -105,8 +105,8 @@ export type TextInputProps = {|
   value?: string,
   /**
    * Pass `fontSize` prop to modify the font size inside `TextInput`.
-   * Pass `height` prop to set `TextInput` height. In that case `dense`
-   * prop will be only applies to input `paddingVertical`
+   * Pass `height` prop to set `TextInput` height. When height is passed, 
+   * dense prop will affect only input's paddingVertical.
    */
   style?: any,
   /**
