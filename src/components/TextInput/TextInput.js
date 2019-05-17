@@ -178,15 +178,27 @@ class TextInput extends React.Component<TextInputProps, State> {
 
   ref: ?NativeTextInput;
 
+  componentDidMount() {
+    if (this.props.defaultValue) {
+      this._minmizeLabel();
+    }
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (
       prevState.focused !== this.state.focused ||
       prevState.value !== this.state.value ||
-      prevProps.error !== this.props.error
+      prevProps.error !== this.props.error ||
+      this.props.defaultValue
     ) {
       // The label should be minimized if the text input is focused, or has text
       // In minimized mode, the label moves up and becomes small
-      if (this.state.value || this.state.focused || this.props.error) {
+      if (
+        this.state.value ||
+        this.state.focused ||
+        this.props.error ||
+        this.props.defaultValue
+      ) {
         this._minmizeLabel();
       } else {
         this._restoreLabel();

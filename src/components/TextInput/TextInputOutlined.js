@@ -133,10 +133,10 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
 
     return (
       <View style={[containerStyle, style]}>
-        {/* 
+        {/*
           Render the outline separately from the container
           This is so that the label can overlap the outline
-          Otherwise the border will cut off the label on Android 
+          Otherwise the border will cut off the label on Android
           */}
         <View
           pointerEvents="none"
