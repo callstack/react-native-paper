@@ -65,6 +65,11 @@ type Props = React.ElementConfig<typeof Surface> & {|
    * Use this prop to apply custom height and width.
    */
   contentStyle?: any,
+  /**
+   * Style of button's text component.
+   * Use this prop to apply custom fontSize.
+   */
+  textStyles?: any,
   style?: any,
   /**
    * @optional
