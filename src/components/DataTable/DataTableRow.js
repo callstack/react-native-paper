@@ -40,7 +40,7 @@ class DataTableRow extends React.Component<Props> {
         onPress={onPress}
         style={[styles.container, { borderBottomColor }, style]}
       >
-        <View style={[styles.content, style]}>{this.props.children}</View>
+        <View style={ styles.content }>{this.props.children}</View>
       </TouchableRipple>
     );
   }
@@ -51,11 +51,11 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderBottomWidth: StyleSheet.hairlineWidth,
     minHeight: 48,
+    paddingHorizontal: 16,
   },
   content: {
     flex: 1,
     flexDirection: 'row',
-    paddingHorizontal: 16,
   },
 });
 
