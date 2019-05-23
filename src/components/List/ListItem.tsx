@@ -11,7 +11,15 @@ import {
 import TouchableRipple from '../TouchableRipple';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
-import { Theme, $RemoveChildren } from '../../types';
+import { Theme, $RemoveChildren, EllipsizeProp } from '../../types';
+
+type Description =
+  | React.ReactNode
+  | ((props: {
+      ellipsizeMode: EllipsizeProp | undefined;
+      color: string;
+      fontSize: number;
+    }) => React.ReactNode);
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -19,9 +27,9 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   title: React.ReactNode;
   /**
-   * Description text for the list item.
+   * Description text for the list item or callback which returns a React element to display the description.
    */
-  description?: React.ReactNode;
+  description?: Description | null;
   /**
    * Callback which returns a React element to display on the left side.
    */
@@ -66,11 +74,12 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Ellipsize Mode for the Title
    */
-  titleEllipsizeMode?: 'head' | 'middle' | 'tail' | 'clip';
+
+  titleEllipsizeMode?: EllipsizeProp;
   /**
    * Ellipsize Mode for the Description
    */
-  descriptionEllipsizeMode?: 'head' | 'middle' | 'tail' | 'clip';
+  descriptionEllipsizeMode?: EllipsizeProp;
 };
 
 /**
@@ -101,6 +110,35 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
 class ListItem extends React.Component<Props> {
   static displayName = 'List.Item';
 
+  renderDescription(
+    descriptionColor: string,
+    description?: Description | null
+  ) {
+    const { descriptionEllipsizeMode, descriptionStyle } = this.props;
+
+    return typeof description === 'string' ? (
+      <Text
+        numberOfLines={2}
+        ellipsizeMode={descriptionEllipsizeMode}
+        style={[
+          styles.description,
+          { color: descriptionColor },
+          descriptionStyle,
+        ]}
+      >
+        {description}
+      </Text>
+    ) : (
+      description &&
+        typeof description === 'function' &&
+        description({
+          ellipsizeMode: descriptionEllipsizeMode,
+          color: descriptionColor,
+          fontSize: styles.description.fontSize,
+        })
+    );
+  }
+
   render() {
     const {
       left,
@@ -111,9 +149,7 @@ class ListItem extends React.Component<Props> {
       theme,
       style,
       titleStyle,
-      descriptionStyle,
       titleEllipsizeMode,
-      descriptionEllipsizeMode,
       ...rest
     } = this.props;
     const titleColor = color(theme.colors.text)
@@ -151,21 +187,7 @@ class ListItem extends React.Component<Props> {
             >
               {title}
             </Text>
-            {description ? (
-              <Text
-                ellipsizeMode={descriptionEllipsizeMode}
-                numberOfLines={2}
-                style={[
-                  styles.description,
-                  {
-                    color: descriptionColor,
-                  },
-                  descriptionStyle,
-                ]}
-              >
-                {description}
-              </Text>
-            ) : null}
+            {this.renderDescription(descriptionColor, description)}
           </View>
           {right
             ? right({

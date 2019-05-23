@@ -1,6 +1,13 @@
 import * as React from 'react';
-import { ScrollView, StyleSheet, Image } from 'react-native';
-import { List, Divider, withTheme, Theme } from 'react-native-paper';
+import { ScrollView, StyleSheet, Image, View } from 'react-native';
+import {
+  List,
+  Text,
+  Chip,
+  Divider,
+  withTheme,
+  Theme,
+} from 'react-native-paper';
 
 type Props = {
   theme: Theme;
@@ -83,6 +90,42 @@ class ListSectionExample extends React.Component<Props> {
             description="Describes item 2. Example of a very very long description."
           />
         </List.Section>
+        <Divider />
+        <List.Section>
+          <List.Subheader>Custom description</List.Subheader>
+          <List.Item
+            left={() => (
+              <Image
+                source={require('../../assets/images/email-icon.png')}
+                style={styles.image}
+              />
+            )}
+            right={props => <List.Icon {...props} icon="star-border" />}
+            title="List Item 1"
+            description={({
+              ellipsizeMode,
+              color: descriptionColor,
+              fontSize,
+            }) => (
+              <View style={[styles.container, styles.column]}>
+                <Text
+                  numberOfLines={2}
+                  ellipsizeMode={ellipsizeMode}
+                  style={{ color: descriptionColor, fontSize }}
+                >
+                  React Native Paper is a high-quality, standard-compliant
+                  Material Design library that has you covered in all major
+                  use-cases.
+                </Text>
+                <View style={[styles.container, styles.row, { paddingTop: 8 }]}>
+                  <Chip icon="picture-as-pdf" onPress={() => {}}>
+                    DOCS.pdf
+                  </Chip>
+                </View>
+              </View>
+            )}
+          />
+        </List.Section>
       </ScrollView>
     );
   }
@@ -96,6 +139,12 @@ const styles = StyleSheet.create({
     height: 40,
     width: 40,
     margin: 8,
+  },
+  row: {
+    flexDirection: 'row',
+  },
+  column: {
+    flexDirection: 'column',
   },
 });
 
