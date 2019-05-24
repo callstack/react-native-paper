@@ -7,6 +7,7 @@ import color from 'color';
 import AppbarContent from './AppbarContent';
 import AppbarAction from './AppbarAction';
 import AppbarBackAction from './AppbarBackAction';
+import Tooltip from '../Tooltip';
 import AppbarHeader from './AppbarHeader';
 import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
@@ -135,9 +136,12 @@ class Appbar extends React.Component<Props> {
           .map((child, i) => {
             if (
               !React.isValidElement(child) ||
-              ![AppbarContent, AppbarAction, AppbarBackAction].includes(
-                child.type
-              )
+              ![
+                AppbarContent,
+                AppbarAction,
+                AppbarBackAction,
+                Tooltip,
+              ].includes(child.type)
             ) {
               return child;
             }
