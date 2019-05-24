@@ -2,7 +2,13 @@
 
 import * as React from 'react';
 import { View, StyleSheet, ImageBackground } from 'react-native';
-import { withTheme, ToggleButton, List, Theme } from 'react-native-paper';
+import {
+  withTheme,
+  ToggleButton,
+  List,
+  Theme,
+  Tooltip,
+} from 'react-native-paper';
 
 type Props = {
   theme: Theme;
@@ -35,16 +41,18 @@ class ToggleButtonExample extends React.Component<Props, State> {
       <View style={[styles.container, { backgroundColor: background }]}>
         <List.Section title="Single">
           <View style={styles.row}>
-            <ToggleButton
-              icon="android"
-              value="android"
-              status={this.state.status}
-              onPress={status => {
-                this.setState({
-                  status: status === 'checked' ? 'unchecked' : 'checked',
-                });
-              }}
-            />
+            <Tooltip title="Android">
+              <ToggleButton
+                icon="android"
+                value="android"
+                status={this.state.status}
+                onPress={status => {
+                  this.setState({
+                    status: status === 'checked' ? 'unchecked' : 'checked',
+                  });
+                }}
+              />
+            </Tooltip>
           </View>
         </List.Section>
         <List.Section title="Group">
@@ -57,10 +65,18 @@ class ToggleButtonExample extends React.Component<Props, State> {
                 })
               }
             >
-              <ToggleButton disabled icon="format-italic" value="italic" />
-              <ToggleButton icon="format-bold" value="bold" />
-              <ToggleButton icon="format-underlined" value="underlined" />
-              <ToggleButton icon="format-color-text" value="format-color" />
+              <Tooltip title="Italic">
+                <ToggleButton disabled icon="format-italic" value="italic" />
+              </Tooltip>
+              <Tooltip title="Bold">
+                <ToggleButton icon="format-bold" value="bold" />
+              </Tooltip>
+              <Tooltip title="Underlined">
+                <ToggleButton icon="format-underlined" value="underlined" />
+              </Tooltip>
+              <Tooltip title="Format color">
+                <ToggleButton icon="format-color-text" value="format-color" />
+              </Tooltip>
             </ToggleButton.Group>
           </View>
         </List.Section>
