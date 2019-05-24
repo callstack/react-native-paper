@@ -22,7 +22,7 @@ type Props = {|
   /**
    * Tooltip reference node.
    */
-  children: React.node,
+  children: React.Node,
   /**
    * Delay in ms before onLongPress is called.
    */
@@ -49,18 +49,22 @@ type State = {
 };
 
 class Tooltip extends React.Component<Props, State> {
+  _longPressTimeout: TimeoutID;
+  _children: React.Node;
+  _tooltip: ?View;
+
   static defaultProps = { delayLongPress: 500 };
 
   state = {
     childrenDimensions: {
-      x: null,
-      y: null,
-      width: null,
-      height: null,
+      x: 0,
+      y: 0,
+      width: 0,
+      height: 0,
     },
     tooltipDimensions: {
-      width: null,
-      height: null,
+      width: 0,
+      height: 0,
     },
     tooltipVisible: false,
     tooltipOpacity: 0,
@@ -81,9 +85,9 @@ class Tooltip extends React.Component<Props, State> {
   }
 
   getChildrenPosition() {
-    if (!this.children) return;
+    if (!this._children) return;
 
-    const target = findNodeHandle(this.children);
+    const target = findNodeHandle(this._children);
 
     setTimeout(() => {
       UIManager.measure(target, (_x, _y, width, height, pageX, pageY) => {
@@ -100,33 +104,34 @@ class Tooltip extends React.Component<Props, State> {
   }
 
   onTooltipLayout = () => {
-    this.tooltip.measureInWindow((_x, _y, width, height) => {
-      const {
-        tooltipDimensions: { width: tooltipWidth, height: tooltipHeight },
-      } = this.state;
+    this._tooltip &&
+      this._tooltip.measureInWindow((_x, _y, width, height) => {
+        const {
+          tooltipDimensions: { width: tooltipWidth, height: tooltipHeight },
+        } = this.state;
 
-      // Prevent rerender after getting tooltip dimensions
-      if (!tooltipWidth && !tooltipHeight)
-        this.setState({
-          tooltipDimensions: {
-            width,
-            height,
-          },
-          tooltipOpacity: 0.9,
-        });
-    });
+        // Prevent rerender after getting tooltip dimensions
+        if (!tooltipWidth && !tooltipHeight)
+          this.setState({
+            tooltipDimensions: {
+              width,
+              height,
+            },
+            tooltipOpacity: 0.9,
+          });
+      });
   };
 
   showTooltip = () => this.setState({ tooltipVisible: true });
 
   hideTooltip = () => this.setState({ tooltipVisible: false });
 
-  clearTimeouts = () => clearTimeout(this.longPressTimeout);
+  clearTimeouts = () => clearTimeout(this._longPressTimeout);
 
   onTouchStart = () => {
     const { delayLongPress } = this.props;
 
-    this.longPressTimeout = setTimeout(() => {
+    this._longPressTimeout = setTimeout(() => {
       this.showTooltip();
     }, delayLongPress);
   };
@@ -136,7 +141,7 @@ class Tooltip extends React.Component<Props, State> {
     const { tooltipVisible } = this.state;
 
     this.clearTimeouts();
-    this.longPressTimeout = setTimeout(() => {
+    this._longPressTimeout = setTimeout(() => {
       tooltipVisible && this.hideTooltip();
     }, delayLongPress);
   };
@@ -197,7 +202,7 @@ class Tooltip extends React.Component<Props, State> {
           {tooltipVisible && (
             <View
               ref={el => {
-                this.tooltip = el;
+                this._tooltip = el;
               }}
               style={[
                 styles.tooltip,
@@ -221,7 +226,7 @@ class Tooltip extends React.Component<Props, State> {
           {React.cloneElement(childElement, {
             onLongPress: () => {}, // Prevent touchable to trigger onPress after onLongPress
             ref: el => {
-              this.children = el;
+              this._children = el;
             },
             ...rest,
           })}
