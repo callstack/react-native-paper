@@ -8,6 +8,7 @@ import {
   FAB,
   Switch,
   Paragraph,
+  Tooltip,
   withTheme,
   type Theme,
 } from 'react-native-paper';
@@ -35,17 +36,23 @@ class AppbarExample extends React.Component<Props> {
       header: (
         <Appbar.Header>
           {params.showLeftIcon && (
-            <Appbar.BackAction onPress={() => navigation.goBack()} />
+            <Tooltip title="Go back">
+              <Appbar.BackAction onPress={() => navigation.goBack()} />
+            </Tooltip>
           )}
           <Appbar.Content
             title="Title"
             subtitle={params.showSubtitle ? 'Subtitle' : null}
           />
           {params.showSearchIcon && (
-            <Appbar.Action icon="search" onPress={() => {}} />
+            <Tooltip title="Search">
+              <Appbar.Action icon="search" onPress={() => {}} />
+            </Tooltip>
           )}
           {params.showMoreIcon && (
-            <Appbar.Action icon={MORE_ICON} onPress={() => {}} />
+            <Tooltip title="More">
+              <Appbar.Action icon={MORE_ICON} onPress={() => {}} />
+            </Tooltip>
           )}
         </Appbar.Header>
       ),
@@ -115,12 +122,22 @@ class AppbarExample extends React.Component<Props> {
           />
         </View>
         <Appbar style={styles.bottom}>
-          <Appbar.Action icon="archive" onPress={() => {}} />
-          <Appbar.Action icon="mail" onPress={() => {}} />
-          <Appbar.Action icon="label" onPress={() => {}} />
-          <Appbar.Action icon="delete" onPress={() => {}} />
+          <Tooltip title="Archive">
+            <Appbar.Action icon="archive" onPress={() => {}} />
+          </Tooltip>
+          <Tooltip title="Mail">
+            <Appbar.Action icon="mail" onPress={() => {}} />
+          </Tooltip>
+          <Tooltip title="Label">
+            <Appbar.Action icon="label" onPress={() => {}} />
+          </Tooltip>
+          <Tooltip title="Delete">
+            <Appbar.Action icon="delete" onPress={() => {}} />
+          </Tooltip>
         </Appbar>
-        <FAB icon="reply" onPress={() => {}} style={styles.fab} />
+        <Tooltip title="Reply" style={styles.fab}>
+          <FAB icon="reply" onPress={() => {}} />
+        </Tooltip>
       </View>
     );
   }
