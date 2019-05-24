@@ -1,7 +1,13 @@
 /* @flow */
 
 import * as React from 'react';
-import { Dimensions, StyleSheet, UIManager, View } from 'react-native';
+import {
+  Dimensions,
+  findNodeHandle,
+  StyleSheet,
+  UIManager,
+  View,
+} from 'react-native';
 import * as Colors from '../styles/colors';
 import { APPROX_STATUSBAR_HEIGHT } from '../constants';
 import Text from './Typography/Text';
@@ -60,11 +66,25 @@ class Tooltip extends React.Component<Props, State> {
     tooltipOpacity: 0,
   };
 
+  componentDidMount() {
+    Dimensions.addEventListener('change', this.getChildrenPosition.bind(this));
+
+    this.getChildrenPosition();
+  }
+
   componentWillUnmount() {
+    Dimensions.removeEventListener(
+      'change',
+      this.getChildrenPosition.bind(this)
+    );
     this.clearTimeouts();
   }
 
-  onChildrenLayout = ({ nativeEvent: { target } }) => {
+  getChildrenPosition() {
+    if (!this.children) return;
+
+    const target = findNodeHandle(this.children);
+
     setTimeout(() => {
       UIManager.measure(target, (_x, _y, width, height, pageX, pageY) => {
         this.setState({
@@ -77,7 +97,7 @@ class Tooltip extends React.Component<Props, State> {
         });
       });
     }, 500);
-  };
+  }
 
   onTooltipLayout = () => {
     this.tooltip.measureInWindow((_x, _y, width, height) => {
@@ -199,8 +219,10 @@ class Tooltip extends React.Component<Props, State> {
           onTouchCancel={this.onTouchCancel}
         >
           {React.cloneElement(childElement, {
-            onLayout: this.onChildrenLayout,
             onLongPress: () => {}, // Prevent touchable to trigger onPress after onLongPress
+            ref: el => {
+              this.children = el;
+            },
             ...rest,
           })}
         </View>
