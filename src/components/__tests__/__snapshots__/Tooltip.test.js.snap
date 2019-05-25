@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tooltip renders properly 1`] = `
+<View>
+  <View
+    onTouchCancel={[Function]}
+    onTouchEndCapture={[Function]}
+    onTouchStart={[Function]}
+  >
+    <View
+      delayLongPress={500}
+      onLongPress={[Function]}
+    />
+  </View>
+</View>
+`;
+
+exports[`Tooltip shows a tooltip when child element is longPressed 1`] = `
+Array [
+  <View
+    collapsable={false}
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View>
+      <View
+        onTouchCancel={[Function]}
+        onTouchEndCapture={[Function]}
+        onTouchStart={[Function]}
+      >
+        <View
+          delayLongPress={500}
+          onLongPress={[Function]}
+          testID="TooltipChild"
+        />
+      </View>
+    </View>
+  </View>,
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      onLayout={[Function]}
+      style={
+        Array [
+          Object {
+            "alignSelf": "flex-start",
+            "backgroundColor": "#616161",
+            "borderRadius": 4,
+            "marginTop": 24,
+            "maxWidth": 300,
+            "paddingHorizontal": 8,
+            "paddingVertical": 4,
+          },
+          Object {
+            "left": 0,
+            "opacity": 0,
+            "top": 0,
+          },
+        ]
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
+            },
+            Object {
+              "color": "#ffffff",
+            },
+          ]
+        }
+      >
+        Tooltip View
+      </Text>
+    </View>
+  </View>,
+]
+`;

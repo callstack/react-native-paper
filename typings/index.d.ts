@@ -33,5 +33,6 @@ export * from './components/TextInput';
 export * from './components/ToggleButton';
 export * from './components/TouchableRipple';
 export * from './components/Typography';
+export * from './components/Tooltip';
 
 export { Avatar, Colors, List, Drawer };
