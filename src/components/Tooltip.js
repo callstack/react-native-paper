@@ -13,6 +13,7 @@ import { APPROX_STATUSBAR_HEIGHT } from '../constants';
 import Text from './Typography/Text';
 import Portal from './Portal/Portal';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import type { LayoutEvent } from 'react-native/Libraries/Types/CoreEventTypes';
 
 type Props = {|
   /**
@@ -46,12 +47,12 @@ type State = {
   },
   tooltipVisible: boolean,
   tooltipOpacity: number,
+  tooltipMeasured: boolean,
 };
 
 class Tooltip extends React.Component<Props, State> {
   _longPressTimeout: TimeoutID;
   _children: React.Node;
-  _tooltip: ?View;
 
   static defaultProps = { delayLongPress: 500 };
 
@@ -68,6 +69,7 @@ class Tooltip extends React.Component<Props, State> {
     },
     tooltipVisible: false,
     tooltipOpacity: 0,
+    tooltipMeasured: false,
   };
 
   componentDidMount() {
@@ -103,22 +105,17 @@ class Tooltip extends React.Component<Props, State> {
     }, 500);
   }
 
-  onTooltipLayout = () => {
-    this._tooltip &&
-      this._tooltip.measureInWindow((_x, _y, width, height) => {
-        const {
-          tooltipDimensions: { width: tooltipWidth, height: tooltipHeight },
-        } = this.state;
+  _handleTooltipLayout = ({ nativeEvent: { layout } }: LayoutEvent) => {
+    const { tooltipMeasured } = this.state;
 
-        // Prevent rerender after getting tooltip dimensions
-        if (!tooltipWidth && !tooltipHeight)
-          this.setState({
-            tooltipDimensions: {
-              width,
-              height,
-            },
-            tooltipOpacity: 0.9,
-          });
+    if (!tooltipMeasured)
+      this.setState({
+        tooltipDimensions: {
+          width: layout.width,
+          height: layout.height,
+        },
+        tooltipOpacity: 0.9,
+        tooltipMeasured: true,
       });
   };
 
@@ -201,9 +198,6 @@ class Tooltip extends React.Component<Props, State> {
         <Portal>
           {tooltipVisible && (
             <View
-              ref={el => {
-                this._tooltip = el;
-              }}
               style={[
                 styles.tooltip,
                 {
@@ -212,7 +206,7 @@ class Tooltip extends React.Component<Props, State> {
                   top: this.getTooltipYPosition(),
                 },
               ]}
-              onLayout={this.onTooltipLayout}
+              onLayout={this._handleTooltipLayout}
             >
               <Text style={{ color: Colors.white }}>{title}</Text>
             </View>
