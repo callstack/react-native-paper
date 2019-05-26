@@ -78,8 +78,8 @@ const DEFAULT_STATUSBAR_HEIGHT = Platform.select({
  *           title="Title"
  *           subtitle="Subtitle"
  *         />
- *         <Appbar.Action icon="search" onPress={this._onSearch} />
- *         <Appbar.Action icon="more-vert" onPress={this._onMore} />
+ *         <Appbar.Action icon="magnify" onPress={this._onSearch} />
+ *         <Appbar.Action icon="dots-vertical" onPress={this._onMore} />
  *       </Appbar.Header>
  *     );
  *   }

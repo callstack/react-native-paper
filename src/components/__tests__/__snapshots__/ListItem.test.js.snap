@@ -242,7 +242,7 @@ exports[`renders list item with left and right items 1`] = `
               },
             ],
             Object {
-              "fontFamily": "Material Icons",
+              "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
@@ -250,7 +250,7 @@ exports[`renders list item with left and right items 1`] = `
           ]
         }
       >
-        
+        
       </Text>
     </View>
   </View>
@@ -329,7 +329,7 @@ exports[`renders list item with left item 1`] = `
               },
             ],
             Object {
-              "fontFamily": "Material Icons",
+              "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
@@ -337,7 +337,7 @@ exports[`renders list item with left item 1`] = `
           ]
         }
       >
-        
+        
       </Text>
     </View>
     <View

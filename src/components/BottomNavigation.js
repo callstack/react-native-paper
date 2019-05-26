@@ -73,10 +73,10 @@ type Props<T> = {
    * {
    *   index: 1,
    *   routes: [
-   *     { key: 'music', title: 'Music', icon: 'queue-music', color: '#3F51B5' },
+   *     { key: 'music', title: 'Music', icon: 'playlist-music', color: '#3F51B5' },
    *     { key: 'albums', title: 'Albums', icon: 'album', color: '#009688' },
    *     { key: 'recents', title: 'Recents', icon: 'history', color: '#795548' },
-   *     { key: 'purchased', title: 'Purchased', icon: 'shopping-cart', color: '#607D8B' },
+   *     { key: 'purchased', title: 'Purchased', icon: 'cart', color: '#607D8B' },
    *   ]
    * }
    * ```

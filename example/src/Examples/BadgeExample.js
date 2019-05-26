@@ -47,7 +47,11 @@ class BadgeExample extends React.Component<Props, State> {
         <List.Section title="Text">
           <View style={styles.row}>
             <View style={styles.item}>
-              <IconButton icon="style" size={36} style={styles.button} />
+              <IconButton
+                icon="palette-swatch"
+                size={36}
+                style={styles.button}
+              />
               <Badge visible={this.state.visible} style={styles.badge}>
                 12
               </Badge>
@@ -66,11 +70,7 @@ class BadgeExample extends React.Component<Props, State> {
         <List.Section title="Dot">
           <View style={styles.row}>
             <View style={styles.item}>
-              <IconButton
-                icon="chrome-reader-mode"
-                size={36}
-                style={styles.button}
-              />
+              <IconButton icon="book-open" size={36} style={styles.button} />
               <Badge
                 visible={this.state.visible}
                 style={styles.badge}

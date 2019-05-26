@@ -105,7 +105,7 @@ exports[`renders expanded accordion 1`] = `
                 },
               ],
               Object {
-                "fontFamily": "Material Icons",
+                "fontFamily": "Material Design Icons",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
@@ -113,7 +113,7 @@ exports[`renders expanded accordion 1`] = `
             ]
           }
         >
-          
+          
         </Text>
       </View>
     </View>
@@ -264,7 +264,7 @@ exports[`renders list accordion with children 1`] = `
                 },
               ],
               Object {
-                "fontFamily": "Material Icons",
+                "fontFamily": "Material Design Icons",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
@@ -272,7 +272,7 @@ exports[`renders list accordion with children 1`] = `
             ]
           }
         >
-          
+          
         </Text>
       </View>
       <View
@@ -347,7 +347,7 @@ exports[`renders list accordion with children 1`] = `
                 },
               ],
               Object {
-                "fontFamily": "Material Icons",
+                "fontFamily": "Material Design Icons",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
@@ -355,7 +355,7 @@ exports[`renders list accordion with children 1`] = `
             ]
           }
         >
-          
+          
         </Text>
       </View>
     </View>
@@ -435,7 +435,7 @@ exports[`renders list accordion with left items 1`] = `
                 },
               ],
               Object {
-                "fontFamily": "Material Icons",
+                "fontFamily": "Material Design Icons",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
@@ -443,7 +443,7 @@ exports[`renders list accordion with left items 1`] = `
             ]
           }
         >
-          
+          
         </Text>
       </View>
       <View
@@ -518,7 +518,7 @@ exports[`renders list accordion with left items 1`] = `
                 },
               ],
               Object {
-                "fontFamily": "Material Icons",
+                "fontFamily": "Material Design Icons",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
@@ -526,7 +526,7 @@ exports[`renders list accordion with left items 1`] = `
             ]
           }
         >
-          
+          
         </Text>
       </View>
     </View>
@@ -667,7 +667,7 @@ exports[`renders multiline list accordion 1`] = `
                 },
               ],
               Object {
-                "fontFamily": "Material Icons",
+                "fontFamily": "Material Design Icons",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
@@ -675,7 +675,7 @@ exports[`renders multiline list accordion 1`] = `
             ]
           }
         >
-          
+          
         </Text>
       </View>
     </View>

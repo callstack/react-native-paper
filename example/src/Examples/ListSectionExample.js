@@ -22,17 +22,17 @@ class ListSectionExample extends React.Component<Props> {
         <List.Section>
           <List.Subheader>Single line</List.Subheader>
           <List.Item
-            left={props => <List.Icon {...props} icon="event" />}
+            left={props => <List.Icon {...props} icon="calendar" />}
             title="List item 1"
           />
           <List.Item
-            left={props => <List.Icon {...props} icon="redeem" />}
+            left={props => <List.Icon {...props} icon="wallet-giftcard" />}
             title="List item 2"
           />
           <List.Item
             title="List item 3"
             left={props => <List.Icon {...props} icon="folder" />}
-            right={props => <List.Icon {...props} icon="drag-handle" />}
+            right={props => <List.Icon {...props} icon="reorder-horizontal" />}
           />
         </List.Section>
         <Divider />
@@ -55,7 +55,7 @@ class ListSectionExample extends React.Component<Props> {
                 style={styles.image}
               />
             )}
-            right={props => <List.Icon {...props} icon="info" />}
+            right={props => <List.Icon {...props} icon="information" />}
             title="List item 2"
             description="Describes item 2"
           />
@@ -80,7 +80,7 @@ class ListSectionExample extends React.Component<Props> {
                 style={styles.image}
               />
             )}
-            right={props => <List.Icon {...props} icon="star-border" />}
+            right={props => <List.Icon {...props} icon="star-outline" />}
             title="List item 2"
             description="Describes item 2. Example of a very very long description."
           />

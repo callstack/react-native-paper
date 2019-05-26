@@ -14,7 +14,7 @@ it('renders basic DrawerItem', () => {
 
 it('renders DrawerItem with icon', () => {
   const tree = renderer
-    .create(<DrawerItem icon="info" label="Example item" />)
+    .create(<DrawerItem icon="star" label="Example item" />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -22,7 +22,7 @@ it('renders DrawerItem with icon', () => {
 
 it('renders active DrawerItem', () => {
   const tree = renderer
-    .create(<DrawerItem icon="info" active label="Example item" />)
+    .create(<DrawerItem icon="star" active label="Example item" />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

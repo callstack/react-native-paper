@@ -117,7 +117,7 @@ exports[`renders extended FAB 1`] = `
                   },
                 ],
                 Object {
-                  "fontFamily": "Material Icons",
+                  "fontFamily": "Material Design Icons",
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
@@ -125,7 +125,7 @@ exports[`renders extended FAB 1`] = `
               ]
             }
           >
-            
+            
           </Text>
         </View>
       </View>
@@ -275,7 +275,7 @@ exports[`renders normal FAB 1`] = `
                   },
                 ],
                 Object {
-                  "fontFamily": "Material Icons",
+                  "fontFamily": "Material Design Icons",
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
@@ -283,7 +283,7 @@ exports[`renders normal FAB 1`] = `
               ]
             }
           >
-            
+            
           </Text>
         </View>
       </View>
@@ -408,7 +408,7 @@ exports[`renders small FAB 1`] = `
                   },
                 ],
                 Object {
-                  "fontFamily": "Material Icons",
+                  "fontFamily": "Material Design Icons",
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
@@ -416,7 +416,7 @@ exports[`renders small FAB 1`] = `
               ]
             }
           >
-            
+            
           </Text>
         </View>
       </View>

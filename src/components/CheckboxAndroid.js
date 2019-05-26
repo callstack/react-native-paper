@@ -113,10 +113,10 @@ class CheckboxAndroid extends React.Component<Props, State> {
     });
 
     const icon = indeterminate
-      ? 'indeterminate-check-box'
+      ? 'minus-box'
       : checked
-        ? 'check-box'
-        : 'check-box-outline-blank';
+        ? 'checkbox-marked'
+        : 'checkbox-blank-outline';
 
     return (
       <TouchableRipple

@@ -84,7 +84,7 @@ exports[`renders disabled toggle button 1`] = `
             },
           ],
           Object {
-            "fontFamily": "Material Icons",
+            "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
@@ -92,7 +92,7 @@ exports[`renders disabled toggle button 1`] = `
         ]
       }
     >
-      
+      
     </Text>
   </View>
 </View>
@@ -175,7 +175,7 @@ exports[`renders toggle button 1`] = `
             },
           ],
           Object {
-            "fontFamily": "Material Icons",
+            "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
@@ -183,7 +183,7 @@ exports[`renders toggle button 1`] = `
         ]
       }
     >
-      
+      
     </Text>
   </View>
 </View>
@@ -273,7 +273,7 @@ exports[`renders unchecked toggle button 1`] = `
             },
           ],
           Object {
-            "fontFamily": "Material Icons",
+            "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
@@ -281,7 +281,7 @@ exports[`renders unchecked toggle button 1`] = `
         ]
       }
     >
-      
+      
     </Text>
   </View>
 </View>

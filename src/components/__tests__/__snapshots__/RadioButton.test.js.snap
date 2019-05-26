@@ -91,7 +91,7 @@ exports[`RadioButton on ios platform renders properly 1`] = `
             },
           ],
           Object {
-            "fontFamily": "Material Icons",
+            "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
@@ -99,7 +99,7 @@ exports[`RadioButton on ios platform renders properly 1`] = `
         ]
       }
     >
-      
+      
     </Text>
   </View>
 </View>
@@ -159,7 +159,7 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
             },
           ],
           Object {
-            "fontFamily": "Material Icons",
+            "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
@@ -167,7 +167,7 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
         ]
       }
     >
-      
+      
     </Text>
   </View>
 </View>

@@ -78,7 +78,7 @@ const LEFT_SIZE = 40;
  *     title="Card Title"
  *     subtitle="Card Subtitle"
  *     left={(props) => <Avatar.Icon {...props} icon="folder" />}
- *     right={(props) => <IconButton {...props} icon="more-vert" onPress={() => {}} />}
+ *     right={(props) => <IconButton {...props} icon="dots-vertical" onPress={() => {}} />}
  *   />
  * );
  *

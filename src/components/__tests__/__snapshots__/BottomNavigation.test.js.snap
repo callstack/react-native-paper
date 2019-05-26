@@ -188,7 +188,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -196,7 +196,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -236,7 +236,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -244,7 +244,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -374,7 +374,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -382,7 +382,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -422,7 +422,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -430,7 +430,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -560,7 +560,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -568,7 +568,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -608,7 +608,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -616,7 +616,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -881,7 +881,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -889,7 +889,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -929,7 +929,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -937,7 +937,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -1067,7 +1067,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -1075,7 +1075,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -1115,7 +1115,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -1123,7 +1123,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -1253,7 +1253,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -1261,7 +1261,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -1301,7 +1301,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -1309,7 +1309,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -3052,7 +3052,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -3060,7 +3060,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -3100,7 +3100,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -3108,7 +3108,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -3312,7 +3312,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -3320,7 +3320,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -3360,7 +3360,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -3368,7 +3368,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -3572,7 +3572,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -3580,7 +3580,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -3620,7 +3620,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -3628,7 +3628,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -3967,7 +3967,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -3975,7 +3975,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -4015,7 +4015,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -4023,7 +4023,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -4193,7 +4193,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -4201,7 +4201,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -4241,7 +4241,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -4249,7 +4249,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -4419,7 +4419,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -4427,7 +4427,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -4467,7 +4467,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -4475,7 +4475,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -4760,7 +4760,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -4768,7 +4768,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -4808,7 +4808,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -4816,7 +4816,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -5020,7 +5020,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -5028,7 +5028,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -5068,7 +5068,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -5076,7 +5076,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -5280,7 +5280,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -5288,7 +5288,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -5328,7 +5328,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -5336,7 +5336,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -5675,7 +5675,7 @@ exports[`renders shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -5683,7 +5683,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -5723,7 +5723,7 @@ exports[`renders shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -5731,7 +5731,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -5901,7 +5901,7 @@ exports[`renders shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -5909,7 +5909,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -5949,7 +5949,7 @@ exports[`renders shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -5957,7 +5957,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -6127,7 +6127,7 @@ exports[`renders shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -6135,7 +6135,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -6175,7 +6175,7 @@ exports[`renders shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -6183,7 +6183,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -6353,7 +6353,7 @@ exports[`renders shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -6361,7 +6361,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -6401,7 +6401,7 @@ exports[`renders shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -6409,7 +6409,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -6579,7 +6579,7 @@ exports[`renders shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -6587,7 +6587,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View
@@ -6627,7 +6627,7 @@ exports[`renders shifting bottom navigation 1`] = `
                         },
                       ],
                       Object {
-                        "fontFamily": "Material Icons",
+                        "fontFamily": "Material Design Icons",
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
@@ -6635,7 +6635,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  
+                  ?
                 </Text>
               </View>
               <View

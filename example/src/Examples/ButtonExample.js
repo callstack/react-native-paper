@@ -37,7 +37,7 @@ class ButtonExample extends React.Component<Props, State> {
             <Button disabled onPress={() => {}} style={styles.button}>
               Disabled
             </Button>
-            <Button icon="add-a-photo" onPress={() => {}} style={styles.button}>
+            <Button icon="camera" onPress={() => {}} style={styles.button}>
               Icon
             </Button>
             <Button loading onPress={() => {}} style={styles.button}>
@@ -68,7 +68,7 @@ class ButtonExample extends React.Component<Props, State> {
             </Button>
             <Button
               mode="outlined"
-              icon="add-a-photo"
+              icon="camera"
               onPress={() => {}}
               style={styles.button}
             >
@@ -107,7 +107,7 @@ class ButtonExample extends React.Component<Props, State> {
             </Button>
             <Button
               mode="contained"
-              icon="add-a-photo"
+              icon="camera"
               onPress={() => {}}
               style={styles.button}
             >

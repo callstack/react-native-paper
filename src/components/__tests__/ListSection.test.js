@@ -13,11 +13,11 @@ it('renders list section without subheader', () => {
       <ListSection>
         <ListItem
           title="First Item"
-          left={props => <ListIcon {...props} icon="folder" />}
+          left={props => <ListIcon {...props} icon="star" />}
         />
         <ListItem
           title="Second Item"
-          left={props => <ListIcon {...props} icon="folder" />}
+          left={props => <ListIcon {...props} icon="star" />}
         />
       </ListSection>
     )
@@ -33,11 +33,11 @@ it('renders list section with subheader', () => {
         <ListSubheader>Some title</ListSubheader>
         <ListItem
           title="First Item"
-          left={props => <ListIcon {...props} icon="folder" />}
+          left={props => <ListIcon {...props} icon="star" />}
         />
         <ListItem
           title="Second Item"
-          left={props => <ListIcon {...props} icon="folder" />}
+          left={props => <ListIcon {...props} icon="star" />}
         />
       </ListSection>
     )

@@ -59,7 +59,7 @@ class ToggleButtonExample extends React.Component<Props, State> {
             >
               <ToggleButton disabled icon="format-italic" value="italic" />
               <ToggleButton icon="format-bold" value="bold" />
-              <ToggleButton icon="format-underlined" value="underlined" />
+              <ToggleButton icon="format-underline" value="format-underline" />
               <ToggleButton icon="format-color-text" value="format-color" />
             </ToggleButton.Group>
           </View>
@@ -96,8 +96,8 @@ class ToggleButtonExample extends React.Component<Props, State> {
                   color="white"
                   icon={
                     this.state.fruit === 'watermelon'
-                      ? 'favorite'
-                      : 'favorite-border'
+                      ? 'heart'
+                      : 'heart-outline'
                   }
                 />
               </ImageBackground>
@@ -123,8 +123,8 @@ class ToggleButtonExample extends React.Component<Props, State> {
                   color="white"
                   icon={
                     this.state.fruit === 'strawberries'
-                      ? 'favorite'
-                      : 'favorite-border'
+                      ? 'heart'
+                      : 'heart-outline'
                   }
                 />
               </ImageBackground>

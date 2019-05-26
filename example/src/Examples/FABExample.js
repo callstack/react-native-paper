@@ -33,7 +33,7 @@ class ButtonExample extends React.Component<Props, State> {
         <View style={styles.row}>
           <FAB
             small
-            icon={this.state.visible ? 'visibility-off' : 'visibility'}
+            icon={this.state.visible ? 'eye-off' : 'eye'}
             style={styles.fab}
             onPress={() => {
               this.setState({
@@ -45,20 +45,20 @@ class ButtonExample extends React.Component<Props, State> {
 
         <View style={styles.row}>
           <FAB
-            icon="favorite"
+            icon="heart"
             style={styles.fab}
             onPress={() => {}}
             visible={this.state.visible}
           />
           <FAB
-            icon="done"
+            icon="check"
             label="Extended FAB"
             style={styles.fab}
             onPress={() => {}}
             visible={this.state.visible}
           />
           <FAB
-            icon="cancel"
+            icon="close-circle"
             label="Disabled FAB"
             style={styles.fab}
             onPress={() => {}}
@@ -77,12 +77,12 @@ class ButtonExample extends React.Component<Props, State> {
           <Portal>
             <FAB.Group
               open={this.state.open}
-              icon={this.state.open ? 'today' : 'add'}
+              icon={this.state.open ? 'calendar-today' : 'plus'}
               actions={[
-                { icon: 'add', onPress: () => {} },
+                { icon: 'plus', onPress: () => {} },
                 { icon: 'star', label: 'Star', onPress: () => {} },
                 { icon: 'email', label: 'Email', onPress: () => {} },
-                { icon: 'notifications', label: 'Remind', onPress: () => {} },
+                { icon: 'bell', label: 'Remind', onPress: () => {} },
               ]}
               onStateChange={({ open }) => this.setState({ open })}
               onPress={() => {

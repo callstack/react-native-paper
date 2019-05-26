@@ -268,7 +268,7 @@ exports[`renders data table pagination 1`] = `
               },
             ],
             Object {
-              "fontFamily": "Material Icons",
+              "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
@@ -276,7 +276,7 @@ exports[`renders data table pagination 1`] = `
           ]
         }
       >
-        
+        
       </Text>
     </View>
   </View>
@@ -346,7 +346,7 @@ exports[`renders data table pagination 1`] = `
               },
             ],
             Object {
-              "fontFamily": "Material Icons",
+              "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
@@ -354,7 +354,7 @@ exports[`renders data table pagination 1`] = `
           ]
         }
       >
-        
+        
       </Text>
     </View>
   </View>
@@ -466,7 +466,7 @@ exports[`renders data table pagination with label 1`] = `
               },
             ],
             Object {
-              "fontFamily": "Material Icons",
+              "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
@@ -474,7 +474,7 @@ exports[`renders data table pagination with label 1`] = `
           ]
         }
       >
-        
+        
       </Text>
     </View>
   </View>
@@ -544,7 +544,7 @@ exports[`renders data table pagination with label 1`] = `
               },
             ],
             Object {
-              "fontFamily": "Material Icons",
+              "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
@@ -552,7 +552,7 @@ exports[`renders data table pagination with label 1`] = `
           ]
         }
       >
-        
+        
       </Text>
     </View>
   </View>
@@ -618,7 +618,7 @@ exports[`renders data table title with press handler 1`] = `
             },
           ],
           Object {
-            "fontFamily": "Material Icons",
+            "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
@@ -626,7 +626,7 @@ exports[`renders data table title with press handler 1`] = `
         ]
       }
     >
-      
+      
     </Text>
   </View>
   <Text
@@ -719,7 +719,7 @@ exports[`renders data table title with sort icon 1`] = `
             },
           ],
           Object {
-            "fontFamily": "Material Icons",
+            "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
@@ -727,7 +727,7 @@ exports[`renders data table title with sort icon 1`] = `
         ]
       }
     >
-      
+      
     </Text>
   </View>
   <Text

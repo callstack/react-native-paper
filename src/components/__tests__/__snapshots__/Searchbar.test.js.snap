@@ -85,7 +85,7 @@ exports[`renders with placeholder 1`] = `
               },
             ],
             Object {
-              "fontFamily": "Material Icons",
+              "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
@@ -93,7 +93,7 @@ exports[`renders with placeholder 1`] = `
           ]
         }
       >
-        
+        
       </Text>
     </View>
   </View>
@@ -199,7 +199,7 @@ exports[`renders with placeholder 1`] = `
               },
             ],
             Object {
-              "fontFamily": "Material Icons",
+              "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
@@ -207,7 +207,7 @@ exports[`renders with placeholder 1`] = `
           ]
         }
       >
-        
+        
       </Text>
     </View>
   </View>
@@ -299,7 +299,7 @@ exports[`renders with text 1`] = `
               },
             ],
             Object {
-              "fontFamily": "Material Icons",
+              "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
@@ -307,7 +307,7 @@ exports[`renders with text 1`] = `
           ]
         }
       >
-        
+        
       </Text>
     </View>
   </View>
@@ -407,7 +407,7 @@ exports[`renders with text 1`] = `
               },
             ],
             Object {
-              "fontFamily": "Material Icons",
+              "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
@@ -415,7 +415,7 @@ exports[`renders with text 1`] = `
           ]
         }
       >
-        
+        
       </Text>
     </View>
   </View>

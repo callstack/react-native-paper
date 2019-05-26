@@ -13,7 +13,7 @@ it('renders chip with onPress', () => {
 });
 
 it('renders chip with icon', () => {
-  const tree = renderer.create(<Chip icon="info">Example Chip</Chip>).toJSON();
+  const tree = renderer.create(<Chip icon="star">Example Chip</Chip>).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
@@ -21,7 +21,7 @@ it('renders chip with icon', () => {
 it('renders chip with close button', () => {
   const tree = renderer
     .create(
-      <Chip icon="info" onClose={() => {}}>
+      <Chip icon="star" onClose={() => {}}>
         Example Chip
       </Chip>
     )

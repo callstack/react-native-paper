@@ -33,14 +33,14 @@ it('renders avatar with text and custom colors', () => {
 });
 
 it('renders avatar with icon', () => {
-  const tree = renderer.create(<Avatar.Icon icon="info" />).toJSON();
+  const tree = renderer.create(<Avatar.Icon icon="star" />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders avatar with icon and custom background color', () => {
   const tree = renderer
-    .create(<Avatar.Icon style={{ backgroundColor: '#FF0000' }} icon="info" />)
+    .create(<Avatar.Icon style={{ backgroundColor: '#FF0000' }} icon="star" />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
