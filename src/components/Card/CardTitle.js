@@ -137,8 +137,10 @@ class CardTitle extends React.Component<Props> {
           ) : null}
 
           {subtitle ? (
-            <Caption style={[styles.subtitle, subtitleStyle]} 
-              numberOfLines={subtitleNumberOfLines}>
+            <Caption
+              style={[styles.subtitle, subtitleStyle]}
+              numberOfLines={subtitleNumberOfLines}
+            >
               {subtitle}
             </Caption>
           ) : null}
