@@ -45,3 +45,29 @@ export type ChildTextInputProps = {|
   onChangeText?: (value: string) => void,
   onLayoutAnimatedText?: (e: any) => void,
 |};
+
+export type LabelProps = {
+  placeholderStyle: any,
+  placeholderOpacity: number | Animated.Value,
+  baseLabelTranslateX: number,
+  baseLabelTranslateY: number,
+  wiggleOffsetX: number,
+  labelScale: number,
+  fontSize: number,
+  font: any,
+  topPosition: number,
+  paddingOffset?: ?{
+    paddingHorizontal: number,
+  },
+  placeholderColor: ?string,
+  label?: ?string,
+  hasActiveOutline: ?boolean,
+  activeColor: string,
+  onLayoutAnimatedText: ?() => mixed,
+  error: ?boolean,
+};
+
+export type InputLabelProps = {
+  parentState: State,
+  labelProps: LabelProps,
+};

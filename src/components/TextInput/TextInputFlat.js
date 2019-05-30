@@ -10,8 +10,16 @@ import {
   Platform,
 } from 'react-native';
 import color from 'color';
-import Text from '../Typography/Text';
+import InputLabel from './InputLabel';
 import type { RenderProps, ChildTextInputProps } from './types';
+
+import {
+  MAXIMIZED_LABEL_FONT_SIZE,
+  MINIMIZED_LABEL_FONT_SIZE,
+  LABEL_WIGGLE_X_OFFSET,
+  LABEL_PADDING_HORIZONTAL,
+} from './constants';
+
 import {
   calculateLabelTopPosition,
   calculateInputHeight,
@@ -19,13 +27,7 @@ import {
   adjustPaddingFlat,
 } from './helpers';
 
-const AnimatedText = Animated.createAnimatedComponent(Text);
-
 const MINIMIZED_LABEL_Y_OFFSET = -18;
-const MAXIMIZED_LABEL_FONT_SIZE = 16;
-const MINIMIZED_LABEL_FONT_SIZE = 12;
-const LABEL_WIGGLE_X_OFFSET = 4;
-const LABEL_PADDING_HORIZONTAL = 12;
 
 const LABEL_PADDING_TOP = 30;
 const LABEL_PADDING_TOP_DENSE = 24;
@@ -132,23 +134,11 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       minInputHeight
     );
 
-    const topPosition = multiline
-      ? calculateLabelTopPosition(
-          labelHeight,
-          inputHeight,
-          height ? 0 : minInputHeight / 2
-        )
-      : calculateLabelTopPosition(
-          labelHeight,
-          inputHeight,
-          !height ? minInputHeight / 2 : 0
-        );
-
-    const flatHeight =
-      inputHeight +
-      (!height ? (dense ? LABEL_PADDING_TOP_DENSE : LABEL_PADDING_TOP) : 0);
-
-    const isAndroid = Platform.OS === 'android';
+    const topPosition = calculateLabelTopPosition(
+      labelHeight,
+      inputHeight,
+      multiline && height ? 0 : !height ? minInputHeight / 2 : 0
+    );
 
     if (height && typeof height !== 'number')
       // eslint-disable-next-line
@@ -157,14 +147,14 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
     const paddingSettings = {
       height: +height || undefined,
       labelHalfHeight,
+      offset: INPUT_OFFSET,
       multiline,
       dense,
-      offset: INPUT_OFFSET,
       topPosition,
       fontSize,
       label,
       scale: fontScale,
-      isAndroid,
+      isAndroid: Platform.OS === 'android',
       styles: dense ? styles.inputFlatDense : styles.inputFlat,
     };
 
@@ -178,143 +168,56 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
     const baseLabelTranslateY =
       -labelHalfHeight - (topPosition + MINIMIZED_LABEL_Y_OFFSET);
 
-    const labelTranslationX = {
-      transform: [
-        {
-          // Offset label scale since RN doesn't support transform origin
-          translateX: parentState.labeled.interpolate({
-            inputRange: [0, 1],
-            outputRange: [baseLabelTranslateX, 0],
-          }),
-        },
-      ],
+    const placeholderOpacity = hasActiveOutline
+      ? parentState.labeled
+      : parentState.labelLayout.measured
+        ? 1
+        : 0;
+
+    const labelProps = {
+      label,
+      onLayoutAnimatedText,
+      placeholderOpacity,
+      error,
+      placeholderStyle: styles.placeholder,
+      baseLabelTranslateY,
+      baseLabelTranslateX,
+      font,
+      fontSize,
+      labelScale,
+      wiggleOffsetX: LABEL_WIGGLE_X_OFFSET,
+      topPosition,
+      paddingOffset,
+      hasActiveOutline,
+      activeColor,
+      placeholderColor,
     };
 
-    const labelStyle = {
-      ...font,
-      fontSize,
-      transform: [
-        {
-          // Wiggle the label when there's an error
-          translateX: parentState.error.interpolate({
-            inputRange: [0, 0.5, 1],
-            outputRange: [
-              0,
-              parentState.value && error ? LABEL_WIGGLE_X_OFFSET : 0,
-              0,
-            ],
-          }),
-        },
-        {
-          // Move label to top
-          translateY: parentState.labeled.interpolate({
-            inputRange: [0, 1],
-            outputRange: [baseLabelTranslateY, 0],
-          }),
-        },
-        {
-          // Make label smaller
-          scale: parentState.labeled.interpolate({
-            inputRange: [0, 1],
-            outputRange: [labelScale, 1],
-          }),
-        },
-      ],
-    };
+    const minHeight =
+      height ||
+      (dense ? (label ? MIN_DENSE_HEIGHT_WL : MIN_DENSE_HEIGHT) : MIN_HEIGHT);
+
+    const flatHeight =
+      inputHeight +
+      (!height ? (dense ? LABEL_PADDING_TOP_DENSE : LABEL_PADDING_TOP) : 0);
 
     return (
       <View style={[containerStyle, viewStyle]}>
-        <Animated.View
-          style={[
-            styles.underline,
-            {
-              backgroundColor: error
-                ? colors.error
-                : parentState.focused
-                  ? activeColor
-                  : underlineColorCustom,
-              // Underlines is thinner when input is not focused
-              transform: [{ scaleY: parentState.focused ? 1 : 0.5 }],
-            },
-          ]}
+        <Underline
+          parentState={parentState}
+          underlineColorCustom={underlineColorCustom}
+          error={error}
+          colors={colors}
+          activeColor={activeColor}
         />
-
         <View
           style={{
             paddingTop: 0,
             paddingBottom: 0,
-            minHeight:
-              height ||
-              (dense
-                ? label
-                  ? MIN_DENSE_HEIGHT_WL
-                  : MIN_DENSE_HEIGHT
-                : MIN_HEIGHT),
+            minHeight,
           }}
         >
-          {label ? (
-            // Position colored placeholder and gray placeholder on top of each other and crossfade them
-            // This gives the effect of animating the color, but allows us to use native driver
-            <Animated.View
-              pointerEvents="none"
-              style={[
-                StyleSheet.absoluteFill,
-                {
-                  opacity:
-                    // Hide the label in minimized state until we measure it's width
-                    parentState.value || parentState.focused
-                      ? parentState.labelLayout.measured
-                        ? 1
-                        : 0
-                      : 1,
-                },
-                labelTranslationX,
-              ]}
-            >
-              <AnimatedText
-                onLayout={onLayoutAnimatedText}
-                style={[
-                  styles.placeholder,
-                  {
-                    top: topPosition,
-                  },
-                  labelStyle,
-                  paddingOffset,
-                  {
-                    color: activeColor,
-                    opacity: parentState.labeled.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [hasActiveOutline ? 1 : 0, 0],
-                    }),
-                  },
-                ]}
-                numberOfLines={1}
-              >
-                {label}
-              </AnimatedText>
-              <AnimatedText
-                style={[
-                  styles.placeholder,
-                  {
-                    top: topPosition,
-                  },
-                  labelStyle,
-                  paddingOffset,
-                  {
-                    color: placeholderColor,
-                    opacity: hasActiveOutline
-                      ? parentState.labeled
-                      : parentState.labelLayout.measured
-                        ? 1
-                        : 0,
-                  },
-                ]}
-                numberOfLines={1}
-              >
-                {label}
-              </AnimatedText>
-            </Animated.View>
-          ) : null}
+          <InputLabel parentState={parentState} labelProps={labelProps} />
 
           {render(
             ({
@@ -358,6 +261,31 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
 }
 
 export default TextInputFlat;
+
+const Underline = ({
+  parentState,
+  error,
+  colors,
+  activeColor,
+  underlineColorCustom,
+}) => {
+  let backgroundColor = parentState.focused
+    ? activeColor
+    : underlineColorCustom;
+  if (error) backgroundColor = colors.error;
+  return (
+    <Animated.View
+      style={[
+        styles.underline,
+        {
+          backgroundColor,
+          // Underlines is thinner when input is not focused
+          transform: [{ scaleY: parentState.focused ? 1 : 0.5 }],
+        },
+      ]}
+    />
+  );
+};
 
 const styles = StyleSheet.create({
   placeholder: {

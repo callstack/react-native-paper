@@ -11,7 +11,16 @@ import {
 } from 'react-native';
 import color from 'color';
 import Text from '../Typography/Text';
-import type { ChildTextInputProps, RenderProps } from './types';
+import InputLabel from './InputLabel';
+import type { RenderProps, ChildTextInputProps } from './types';
+
+import {
+  MAXIMIZED_LABEL_FONT_SIZE,
+  MINIMIZED_LABEL_FONT_SIZE,
+  LABEL_WIGGLE_X_OFFSET,
+  LABEL_PADDING_HORIZONTAL,
+} from './constants';
+
 import {
   calculateLabelTopPosition,
   calculateInputHeight,
@@ -22,11 +31,6 @@ import {
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
 const OUTLINE_MINIMIZED_LABEL_Y_OFFSET = -6;
-const MAXIMIZED_LABEL_FONT_SIZE = 16;
-const MINIMIZED_LABEL_FONT_SIZE = 12;
-const LABEL_WIGGLE_X_OFFSET = 4;
-const LABEL_PADDING_HORIZONTAL = 12;
-
 const LABEL_PADDING_TOP = 8;
 const MIN_HEIGHT = 64;
 const MIN_DENSE_HEIGHT = 48;
@@ -90,13 +94,13 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       placeholderColor = outlineColor = colors.placeholder;
     }
 
+    const labelScale = MINIMIZED_LABEL_FONT_SIZE / fontSize;
+    const fontScale = MAXIMIZED_LABEL_FONT_SIZE / fontSize;
+
     const labelWidth = parentState.labelLayout.width;
     const labelHeight = parentState.labelLayout.height;
     const labelHalfWidth = labelWidth / 2;
     const labelHalfHeight = labelHeight / 2;
-
-    const labelScale = MINIMIZED_LABEL_FONT_SIZE / fontSize;
-    const fontScale = MAXIMIZED_LABEL_FONT_SIZE / fontSize;
 
     const baseLabelTranslateX =
       (I18nManager.isRTL ? 1 : -1) *
@@ -113,14 +117,11 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       minInputHeight
     );
 
-    const topPosition =
-      multiline && height
-        ? calculateLabelTopPosition(labelHeight, inputHeight, LABEL_PADDING_TOP) // 18
-        : calculateLabelTopPosition(
-            labelHeight,
-            inputHeight,
-            LABEL_PADDING_TOP
-          );
+    const topPosition = calculateLabelTopPosition(
+      labelHeight,
+      inputHeight,
+      LABEL_PADDING_TOP
+    );
 
     if (height && typeof height !== 'number')
       // eslint-disable-next-line
@@ -147,49 +148,27 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
     const baseLabelTranslateY =
       -labelHalfHeight - (topPosition + OUTLINE_MINIMIZED_LABEL_Y_OFFSET);
 
-    const labelTranslationX = {
-      transform: [
-        {
-          // Offset label scale since RN doesn't support transform origin
-          translateX: parentState.labeled.interpolate({
-            inputRange: [0, 1],
-            outputRange: [baseLabelTranslateX, 0],
-          }),
-        },
-      ],
+    const placeholderOpacity = hasActiveOutline ? parentState.labeled : 1;
+
+    const labelProps = {
+      label,
+      onLayoutAnimatedText,
+      placeholderOpacity,
+      error,
+      placeholderStyle: styles.placeholder,
+      baseLabelTranslateY,
+      baseLabelTranslateX,
+      font,
+      fontSize,
+      labelScale,
+      wiggleOffsetX: LABEL_WIGGLE_X_OFFSET,
+      topPosition,
+      hasActiveOutline,
+      activeColor,
+      placeholderColor,
     };
 
-    const labelStyle = {
-      ...font,
-      fontSize,
-      transform: [
-        {
-          // Wiggle the label when there's an error
-          translateX: parentState.error.interpolate({
-            inputRange: [0, 0.5, 1],
-            outputRange: [
-              0,
-              parentState.value && error ? LABEL_WIGGLE_X_OFFSET : 0,
-              0,
-            ],
-          }),
-        },
-        {
-          // Move label to top
-          translateY: parentState.labeled.interpolate({
-            inputRange: [0, 1],
-            outputRange: [baseLabelTranslateY, 0],
-          }),
-        },
-        {
-          // Make label smaller
-          scale: parentState.labeled.interpolate({
-            inputRange: [0, 1],
-            outputRange: [labelScale, 1],
-          }),
-        },
-      ],
-    };
+    const minHeight = height || (dense ? MIN_DENSE_HEIGHT : MIN_HEIGHT);
 
     return (
       <View style={[containerStyle, viewStyle]}>
@@ -199,117 +178,27 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
           Otherwise the border will cut off the label on Android 
           */}
         <View>
-          <View
-            pointerEvents="none"
-            style={[
-              styles.outline,
-              {
-                borderRadius: theme.roundness,
-                borderWidth: hasActiveOutline ? 2 : 1,
-                borderColor: hasActiveOutline ? activeColor : outlineColor,
-              },
-            ]}
+          <Outline
+            theme={theme}
+            hasActiveOutline={hasActiveOutline}
+            activeColor={activeColor}
+            outlineColor={outlineColor}
           />
           <View
             style={{
               paddingTop: LABEL_PADDING_TOP,
               paddingBottom: 0,
-              minHeight: height || (dense ? MIN_DENSE_HEIGHT : MIN_HEIGHT),
+              minHeight,
             }}
           >
-            {label ? (
-              // The input label stays on top of the outline
-              // The background of the label covers the outline so it looks cut off
-              // To achieve the effect, we position the actual label with a background on top of it
-              // We set the color of the text to transparent so only the background is visible
-              <AnimatedText
-                pointerEvents="none"
-                style={[
-                  styles.outlinedLabelBackground,
-                  {
-                    backgroundColor,
-                    ...font,
-                    fontSize: MINIMIZED_LABEL_FONT_SIZE,
-                    // Hide the background when scale will be 0
-                    // There's a bug in RN which makes scale: 0 act weird
-                    opacity: parentState.labeled.interpolate({
-                      inputRange: [0, 0.9, 1],
-                      outputRange: [1, 1, 0],
-                    }),
-                    transform: [
-                      {
-                        // Animate the scale when label is moved up
-                        scaleX: parentState.labeled.interpolate({
-                          inputRange: [0, 1],
-                          outputRange: [1, 0],
-                        }),
-                      },
-                    ],
-                  },
-                ]}
-                numberOfLines={1}
-              >
-                {label}
-              </AnimatedText>
-            ) : null}
+            <OutlinedLabel
+              parentState={parentState}
+              label={label}
+              backgroundColor={backgroundColor}
+              font={font}
+            />
 
-            {label ? (
-              // Position colored placeholder and gray placeholder on top of each other and crossfade them
-              // This gives the effect of animating the color, but allows us to use native driver
-              <Animated.View
-                pointerEvents="none"
-                style={[
-                  StyleSheet.absoluteFill,
-                  {
-                    opacity:
-                      // Hide the label in minimized state until we measure it's width
-                      parentState.value || parentState.focused
-                        ? parentState.labelLayout.measured
-                          ? 1
-                          : 0
-                        : 1,
-                  },
-                  labelTranslationX,
-                ]}
-              >
-                <AnimatedText
-                  onLayout={onLayoutAnimatedText}
-                  style={[
-                    styles.placeholder,
-                    {
-                      top: topPosition,
-                    },
-                    labelStyle,
-                    {
-                      color: activeColor,
-                      opacity: parentState.labeled.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [hasActiveOutline ? 1 : 0, 0],
-                      }),
-                    },
-                  ]}
-                  numberOfLines={1}
-                >
-                  {label}
-                </AnimatedText>
-                <AnimatedText
-                  style={[
-                    styles.placeholder,
-                    {
-                      top: topPosition,
-                    },
-                    labelStyle,
-                    {
-                      color: placeholderColor,
-                      opacity: hasActiveOutline ? parentState.labeled : 1,
-                    },
-                  ]}
-                  numberOfLines={1}
-                >
-                  {label}
-                </AnimatedText>
-              </Animated.View>
-            ) : null}
+            <InputLabel parentState={parentState} labelProps={labelProps} />
 
             {render(
               ({
@@ -352,6 +241,57 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
 }
 
 export default TextInputOutlined;
+
+const Outline = ({ theme, hasActiveOutline, activeColor, outlineColor }) => (
+  <View
+    pointerEvents="none"
+    style={[
+      styles.outline,
+      {
+        borderRadius: theme.roundness,
+        borderWidth: hasActiveOutline ? 2 : 1,
+        borderColor: hasActiveOutline ? activeColor : outlineColor,
+      },
+    ]}
+  />
+);
+
+const OutlinedLabel = ({ parentState, label, backgroundColor, font }) =>
+  label ? (
+    // The input label stays on top of the outline
+    // The background of the label covers the outline so it looks cut off
+    // To achieve the effect, we position the actual label with a background on top of it
+    // We set the color of the text to transparent so only the background is visible
+    <AnimatedText
+      pointerEvents="none"
+      style={[
+        styles.outlinedLabelBackground,
+        {
+          backgroundColor,
+          ...font,
+          fontSize: MINIMIZED_LABEL_FONT_SIZE,
+          // Hide the background when scale will be 0
+          // There's a bug in RN which makes scale: 0 act weird
+          opacity: parentState.labeled.interpolate({
+            inputRange: [0, 0.9, 1],
+            outputRange: [1, 1, 0],
+          }),
+          transform: [
+            {
+              // Animate the scale when label is moved up
+              scaleX: parentState.labeled.interpolate({
+                inputRange: [0, 1],
+                outputRange: [1, 0],
+              }),
+            },
+          ],
+        },
+      ]}
+      numberOfLines={1}
+    >
+      {label}
+    </AnimatedText>
+  ) : null;
 
 const styles = StyleSheet.create({
   placeholder: {
