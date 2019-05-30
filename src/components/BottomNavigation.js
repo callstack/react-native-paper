@@ -596,7 +596,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
             .rgb()
             .string();
 
-    const touchColor = color(textColor)
+    const touchColor = color(activeColor)
       .alpha(0.12)
       .rgb()
       .string();
