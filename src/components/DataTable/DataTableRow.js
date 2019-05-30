@@ -52,11 +52,11 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderBottomWidth: StyleSheet.hairlineWidth,
     minHeight: 48,
+    paddingHorizontal: 16,
   },
   content: {
     flex: 1,
     flexDirection: 'row',
-    paddingHorizontal: 16,
   },
 });
 
