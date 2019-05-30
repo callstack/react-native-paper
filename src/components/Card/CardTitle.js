@@ -26,6 +26,10 @@ type Props = React.ElementConfig<typeof View> & {|
    */
   subtitleStyle?: any,
   /**
+   * The number of lines for the subtitle.
+   */
+  subtitleNumberOfLines?: number,
+  /**
    * Callback which returns a React element to display on the left side.
    */
   left?: (props: { size: number }) => React.Node,
@@ -84,6 +88,9 @@ const LEFT_SIZE = 40;
  */
 class CardTitle extends React.Component<Props> {
   static displayName = 'Card.Title';
+  static defaultProps = {
+    subtitleNumberOfLines: 1,
+  };
 
   render() {
     const {
@@ -93,6 +100,7 @@ class CardTitle extends React.Component<Props> {
       rightStyle,
       subtitle,
       subtitleStyle,
+      subtitleNumberOfLines,
       style,
       title,
       titleStyle,
@@ -129,7 +137,8 @@ class CardTitle extends React.Component<Props> {
           ) : null}
 
           {subtitle ? (
-            <Caption style={[styles.subtitle, subtitleStyle]} numberOfLines={1}>
+            <Caption style={[styles.subtitle, subtitleStyle]} 
+              numberOfLines={subtitleNumberOfLines}>
               {subtitle}
             </Caption>
           ) : null}
