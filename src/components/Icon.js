@@ -4,11 +4,47 @@ import * as React from 'react';
 import { Image, Text, StyleSheet, I18nManager, Platform } from 'react-native';
 import type { ImageSource } from 'react-native/Libraries/Image/ImageSource';
 
-let MaterialIcons;
+let AntDesign,
+  Entypo,
+  EvilIcons,
+  Feather,
+  FontAwesome,
+  Foundation,
+  Ionicons,
+  MaterialIcons,
+  MaterialCommunityIcons,
+  Octicons,
+  Zocial,
+  SimpleLineIcons;
+const IconSets = {
+  AntDesign,
+  Entypo,
+  EvilIcons,
+  Feather,
+  FontAwesome,
+  Foundation,
+  Ionicons,
+  MaterialIcons,
+  MaterialCommunityIcons,
+  Octicons,
+  Zocial,
+  SimpleLineIcons,
+};
 
 try {
   // Optionally require vector-icons
-  MaterialIcons = require('react-native-vector-icons/MaterialIcons').default;
+  IconSets.AntDesign = require('react-native-vector-icons/AntDesign').default;
+  IconSets.Entypo = require('react-native-vector-icons/Entypo').default;
+  IconSets.EvilIcons = require('react-native-vector-icons/EvilIcons').default;
+  IconSets.Feather = require('react-native-vector-icons/Feather').default;
+  IconSets.FontAwesome = require('react-native-vector-icons/FontAwesome').default;
+  IconSets.Foundation = require('react-native-vector-icons/Foundation').default;
+  IconSets.Ionicons = require('react-native-vector-icons/Ionicons').default;
+  IconSets.MaterialIcons = require('react-native-vector-icons/MaterialIcons').default;
+  IconSets.MaterialCommunityIcons = require('react-native-vector-icons/MaterialCommunityIcons').default;
+  IconSets.Octicons = require('react-native-vector-icons/Octicons').default;
+  IconSets.Zocial = require('react-native-vector-icons/Zocial').default;
+  IconSets.SimpleLineIcons = require('react-native-vector-icons/SimpleLineIcons').default;
 } catch (e) {
   if (global.__expo && global.__expo.Icon && global.__expo.Icon.MaterialIcons) {
     // Snack doesn't properly bundle vector icons from subpath
@@ -125,6 +161,10 @@ const Icon = ({ source, color, size, ...rest }: Props) => {
           importantForAccessibility: 'no-hide-descendants',
         };
 
+  let ChoosenIcon =
+    source.type != null ? IconSets[source.type] : IconSets.MaterialIcons;
+  if (ChoosenIcon == null) ChoosenIcon = IconSets.MaterialIcons;
+
   if (isImageSource(s)) {
     return (
       <Image
@@ -146,7 +186,7 @@ const Icon = ({ source, color, size, ...rest }: Props) => {
     );
   } else if (typeof s === 'string') {
     return (
-      <MaterialIcons
+      <ChoosenIcon
         {...rest}
         name={s}
         color={color}
