@@ -1857,10 +1857,10 @@ commondir@^1.0.1:
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
   integrity sha1-3dgA2gxmEnOTzKWVDqloo6rxJTs=
 
-component-docs@^0.19.5:
-  version "0.19.5"
-  resolved "https://registry.yarnpkg.com/component-docs/-/component-docs-0.19.5.tgz#0ac3e8b0b1590d1504e6749bdcdec3dcd9f46543"
-  integrity sha512-175qW0CxJCwCiBy2+j0H8Xxf35nJkqIyAQaLDdCMSPa8g3TlfsUtfxMRB9ynQ5Ac9QY2tDid3CiElTXOeaCuuA==
+component-docs@^0.19.7:
+  version "0.19.7"
+  resolved "https://registry.yarnpkg.com/component-docs/-/component-docs-0.19.7.tgz#4b5e24277df54ef61a8f6ef4051c9855bc0736c7"
+  integrity sha512-7bM0zb5LtC/y12/FapbQFc58PNxU3nr1LqbqLY7c2xksQLn65hu10E2eS73SOI8wCYV54lCOx5V/KmyiCAwj8w==
   dependencies:
     "@babel/core" "^7.3.3"
     "@babel/plugin-proposal-class-properties" "^7.3.3"
