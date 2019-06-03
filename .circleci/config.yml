@@ -65,10 +65,19 @@ jobs:
       steps:
         - attach_workspace:
             at: ~/react-native-paper
-        - run: yarn test -- --coverage
+        - restore_cache:
+            name: Restoring Jest Cache
+            keys:
+            - jest-cache-{{ .Branch }}
+            - jest-cache
+        - run: yarn test --maxWorkers=2 --coverage
         - store_artifacts:
             path: coverage
             destination: coverage
+        - save_cache:
+            paths:
+            - ./cache/jest
+            key: jest-cache-{{ .Branch }}
   build-docs:
       <<: *defaults
       steps:

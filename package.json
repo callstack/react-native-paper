@@ -1,6 +1,6 @@
 {
   "name": "react-native-paper",
-  "version": "2.15.2",
+  "version": "2.16.0",
   "description": "Material design for React Native",
   "main": "src/index.js",
   "typings": "typings/index.d.ts",
@@ -106,6 +106,7 @@
   },
   "jest": {
     "preset": "react-native",
+    "cacheDirectory": "./cache/jest",
     "modulePathIgnorePatterns": [
       "<rootDir>/example/node_modules"
     ],
