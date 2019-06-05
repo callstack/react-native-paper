@@ -1,63 +1,61 @@
-/* @flow */
-
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import type {
-  TextStyleProp,
-  ViewStyleProp,
+import { StyleSheet, View, StyleProp } from 'react-native';
+import {
+  TextStyle,
+  ViewStyle,
 } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { withTheme } from '../../core/theming';
 import Caption from './../Typography/Caption';
 import Title from './../Typography/Title';
-import type { Theme } from '../../types';
+import { Theme } from '../../types';
 
-type Props = $Shape<React.ElementConfig<typeof View>> & {|
+type Props = React.ComponentProps<typeof View> & {
   /**
    * Text for the title. Note that this will only accept a string or `<Text>`-based node.
    */
-  title: React.Node,
+  title: React.ReactNode;
   /**
    * Style for the title.
    */
-  titleStyle?: TextStyleProp,
+  titleStyle?: StyleProp<TextStyle>;
   /**
    * Text for the subtitle. Note that this will only accept a string or `<Text>`-based node.
    */
-  subtitle?: React.Node,
+  subtitle?: React.ReactNode;
   /**
    * Style for the subtitle.
    */
-  subtitleStyle?: TextStyleProp,
+  subtitleStyle?: StyleProp<TextStyle>;
   /**
    * Callback which returns a React element to display on the left side.
    */
-  left?: (props: { size: number }) => React.Node,
+  left?: (props: { size: number }) => React.ReactNode;
   /**
    * Style for the left element wrapper.
    */
-  leftStyle?: ViewStyleProp,
+  leftStyle?: StyleProp<ViewStyle>;
   /**
    * Callback which returns a React element to display on the right side.
    */
-  right?: (props: { size: number }) => React.Node,
+  right?: (props: { size: number }) => React.ReactNode;
   /**
    * Style for the right element wrapper.
    */
-  rightStyle?: ViewStyleProp,
+  rightStyle?: StyleProp<ViewStyle>;
   /**
    * @internal
    */
-  index?: number,
+  index?: number;
   /**
    * @internal
    */
-  total?: number,
-  style?: ViewStyleProp,
+  total?: number;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
-|};
+  theme: Theme;
+};
 
 const LEFT_SIZE = 40;
 

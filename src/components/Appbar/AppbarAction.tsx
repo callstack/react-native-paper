@@ -2,12 +2,13 @@
 
 import * as React from 'react';
 import color from 'color';
-import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { StyleProp } from 'react-native';
 import { black } from '../../styles/colors';
 import IconButton from '../IconButton';
-import type { IconSource } from '../Icon';
+import { IconSource } from '../Icon';
 
-type Props = React.ElementConfig<typeof IconButton> & {|
+type Props = React.ComponentProps<typeof IconButton> & {
   /**
    *  Custom color for action icon.
    */
@@ -31,9 +32,9 @@ type Props = React.ElementConfig<typeof IconButton> & {|
   /**
    * Function to execute on press.
    */
-  onPress?: () => mixed,
-  style?: ViewStyleProp,
-|};
+  onPress?: () => void,
+  style?: StyleProp<ViewStyle>,
+};
 
 /**
  * A component used to display an action item in the appbar.

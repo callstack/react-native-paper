@@ -1,15 +1,15 @@
-/* @flow */
+
 
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { StyleSheet, StyleProp, View } from 'react-native';
+import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
-type Props = $Shape<React.ElementConfig<typeof View>> & {
+type Props = React.ComponentProps<typeof View> & {
   /**
    * Items inside the `CardActions`.
    */
-  children: React.Node,
-  style?: ViewStyleProp,
+  children: React.ReactNode,
+  style?: StyleProp<ViewStyle>,
 };
 
 /**

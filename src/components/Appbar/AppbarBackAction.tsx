@@ -1,12 +1,14 @@
+
 /* @flow */
 
 import * as React from 'react';
 import { View, Image, I18nManager, StyleSheet, Platform } from 'react-native';
-import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { StyleProp } from 'react-native';
 
 import AppbarAction from './AppbarAction';
 
-type Props = React.ElementConfig<typeof AppbarAction> & {|
+type Props = React.ComponentProps<typeof AppbarAction> & {
   /**
    *  Custom color for back icon.
    */
@@ -26,9 +28,9 @@ type Props = React.ElementConfig<typeof AppbarAction> & {|
   /**
    * Function to execute on press.
    */
-  onPress?: () => mixed,
-  style?: ViewStyleProp,
-|};
+  onPress?: () => void,
+  style?: StyleProp<ViewStyle>,
+};
 
 /**
  * A component used to display a back button in the appbar.
