@@ -12,6 +12,7 @@ import {
   TouchableWithoutFeedback,
   View,
   ViewStyle,
+  ScrollView,
   findNodeHandle,
 } from 'react-native';
 
@@ -60,7 +61,6 @@ type State = {
   rendered: boolean;
   top: number;
   left: number;
-  windowLayout: Layout;
   menuLayout: Layout;
   anchorLayout: Layout;
   opacityAnimation: Animated.Value;
@@ -145,7 +145,6 @@ class Menu extends React.Component<Props, State> {
     rendered: this.props.visible,
     top: 0,
     left: 0,
-    windowLayout: { width: 0, height: 0 },
     menuLayout: { width: 0, height: 0 },
     anchorLayout: { width: 0, height: 0 },
     opacityAnimation: new Animated.Value(0),
@@ -270,10 +269,6 @@ class Menu extends React.Component<Props, State> {
       () => ({
         left: anchorLayout.x,
         top: anchorLayout.y,
-        windowLayout: {
-          height: windowLayout.height,
-          width: windowLayout.width,
-        },
         anchorLayout: {
           height: anchorLayout.height,
           width: anchorLayout.width,
@@ -308,6 +303,7 @@ class Menu extends React.Component<Props, State> {
     );
   };
 
+
   _hide = () => {
     this._removeListeners();
 
@@ -318,9 +314,9 @@ class Menu extends React.Component<Props, State> {
       useNativeDriver: true,
     }).start(finished => {
       if (finished) {
-        this._focusFirstDOMNode(this._anchor);
-
+        this.setState({ menuLayout: { width: 0, height: 0 } });
         this.state.scaleAnimation.setValue({ x: 0, y: 0 });
+        this._focusFirstDOMNode(this._anchor);
         this.setState({ rendered: false });
       }
     });
@@ -339,20 +335,19 @@ class Menu extends React.Component<Props, State> {
 
     const {
       rendered,
-      windowLayout,
       menuLayout,
       anchorLayout,
       opacityAnimation,
       scaleAnimation,
     } = this.state;
 
+    let { left, top } = this.state;
+
     // I don't know why but on Android measure function is wrong by 24
     const additionalVerticalValue = Platform.select({
       android: statusBarHeight,
       default: 0,
     });
-
-    let { left, top } = this.state;
 
     const scaleTransforms = [
       {
@@ -369,6 +364,8 @@ class Menu extends React.Component<Props, State> {
       },
     ];
 
+    const windowLayout = Dimensions.get('window');
+
     // We need to translate menu while animating scale to imitate transform origin for scale animation
     const positionTransforms = [];
 
@@ -382,7 +379,7 @@ class Menu extends React.Component<Props, State> {
       });
 
       // Check if menu position has enough space from left side
-      if (left >= 0 && left < SCREEN_INDENT) {
+      if (left < SCREEN_INDENT) {
         left = SCREEN_INDENT;
       }
     } else {
@@ -397,48 +394,109 @@ class Menu extends React.Component<Props, State> {
 
       const right = left + menuLayout.width;
       // Check if menu position has enough space from right side
-      if (
-        right <= windowLayout.width &&
-        right > windowLayout.width - SCREEN_INDENT
-      ) {
+      if (right > windowLayout.width - SCREEN_INDENT) {
         left = windowLayout.width - SCREEN_INDENT - menuLayout.width;
       }
     }
 
-    // Check if menu fits vertically and if not align it to bottom.
-    if (top <= windowLayout.height - menuLayout.height - SCREEN_INDENT) {
+    // If the menu is larger than available vertical space,
+    // calculate the height of scrollable view
+    let scrollableMenuHeight = 0;
+
+    // Check if the menu should be scrollable
+    if (
+      // Check if the menu overflows from bottom side
+      top >=
+        windowLayout.height -
+          menuLayout.height -
+          SCREEN_INDENT -
+          additionalVerticalValue &&
+      // And bottom side of the screen has more space than top side
+      top <= windowLayout.height - top
+    ) {
+      // Scrollable menu should be below the anchor (expands downwards)
+      scrollableMenuHeight =
+        windowLayout.height - top - SCREEN_INDENT - additionalVerticalValue;
+    } else if (
+      // Check if the menu overflows from bottom side
+      top >=
+        windowLayout.height -
+          menuLayout.height -
+          SCREEN_INDENT -
+          additionalVerticalValue &&
+      // And top side of the screen has more space than bottom side
+      top >= windowLayout.height - top &&
+      // And menu overflows from top side
+      top <=
+        menuLayout.height -
+          anchorLayout.height +
+          SCREEN_INDENT -
+          additionalVerticalValue
+    ) {
+      // Scrollable menu should be above the anchor (expands upwards)
+      scrollableMenuHeight =
+        top + anchorLayout.height - SCREEN_INDENT + additionalVerticalValue;
+    }
+
+    // Scrollable menu max height
+    scrollableMenuHeight =
+      scrollableMenuHeight > windowLayout.height - 2 * SCREEN_INDENT
+        ? windowLayout.height - 2 * SCREEN_INDENT
+        : scrollableMenuHeight;
+
+    // Menu is typically positioned below the element that generates it
+    // So first check if it fits below the anchor (expands downwards)
+    if (
+      // Check if menu fits vertically
+      top <=
+        windowLayout.height -
+          menuLayout.height -
+          SCREEN_INDENT -
+          additionalVerticalValue ||
+      // Or if the menu overflows from bottom side
+      (top >=
+        windowLayout.height -
+          menuLayout.height -
+          SCREEN_INDENT -
+          additionalVerticalValue &&
+        // And bottom side of the screen has more space than top side
+        top <= windowLayout.height - top)
+    ) {
       positionTransforms.push({
         translateY: scaleAnimation.y.interpolate({
           inputRange: [0, menuLayout.height],
-          outputRange: [-(menuLayout.height / 2), 0],
+          outputRange: [-((scrollableMenuHeight || menuLayout.height) / 2), 0],
         }),
       });
 
       // Check if menu position has enough space from top side
-      if (top >= 0 && top < SCREEN_INDENT) {
+      if (top < SCREEN_INDENT) {
         top = SCREEN_INDENT;
       }
     } else {
       positionTransforms.push({
         translateY: scaleAnimation.y.interpolate({
           inputRange: [0, menuLayout.height],
-          outputRange: [menuLayout.height / 2, 0],
+          outputRange: [(scrollableMenuHeight || menuLayout.height) / 2, 0],
         }),
       });
 
-      top += anchorLayout.height - menuLayout.height;
+      top += anchorLayout.height - (scrollableMenuHeight || menuLayout.height);
 
-      const bottom = top + menuLayout.height + additionalVerticalValue;
+      const bottom =
+        top +
+        (scrollableMenuHeight || menuLayout.height) +
+        additionalVerticalValue;
+
       // Check if menu position has enough space from bottom side
-      if (
-        bottom <= windowLayout.height &&
-        bottom > windowLayout.height - SCREEN_INDENT
-      ) {
+      if (bottom > windowLayout.height - SCREEN_INDENT) {
         top =
-          windowLayout.height -
-          SCREEN_INDENT -
-          menuLayout.height -
-          additionalVerticalValue;
+          scrollableMenuHeight === windowLayout.height - 2 * SCREEN_INDENT
+            ? -SCREEN_INDENT * 2
+            : windowLayout.height -
+              menuLayout.height -
+              SCREEN_INDENT -
+              additionalVerticalValue;
       }
     }
 
@@ -446,6 +504,7 @@ class Menu extends React.Component<Props, State> {
       opacity: opacityAnimation,
       transform: scaleTransforms,
       borderRadius: theme.roundness,
+      ...(scrollableMenuHeight ? { height: scrollableMenuHeight } : {}),
     };
 
     const positionStyle = {
@@ -484,7 +543,9 @@ class Menu extends React.Component<Props, State> {
                     ] as StyleProp<ViewStyle>
                   }
                 >
-                  {children}
+                  {(scrollableMenuHeight && (
+                    <ScrollView>{children}</ScrollView>
+                  )) || <React.Fragment>{children}</React.Fragment>}
                 </Surface>
               </Animated.View>
             </View>
