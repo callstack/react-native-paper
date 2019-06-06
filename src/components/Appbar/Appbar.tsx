@@ -1,8 +1,8 @@
 /* @flow */
 
 import * as React from 'react';
-import { View, Platform, StyleSheet } from 'react-native';
-import { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { View, Platform, StyleSheet, StyleProp } from 'react-native';
+import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import color from 'color';
 
 import AppbarContent from './AppbarContent';
@@ -27,7 +27,7 @@ type Props = Partial<React.ComponentProps<typeof View>> & {
    * @optional
    */
   theme: Theme,
-  style?: ViewStyleProp,
+  style?: StyleProp<ViewStyle>,
 };
 
 export const DEFAULT_APPBAR_HEIGHT = 56;
