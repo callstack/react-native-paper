@@ -1,20 +1,19 @@
-/* @flow */
 
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { StyleSheet, StyleProp, View } from 'react-native';
+import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import DataTableCell from './DataTableCell';
 import DataTableHeader from './DataTableHeader';
 import DataTableTitle from './DataTableTitle';
 import DataTablePagination from './DataTablePagination';
 import DataTableRow from './DataTableRow';
 
-type Props = $Shape<React.ElementConfig<typeof View>> & {
+type Props = React.ComponentProps<typeof View> & {
   /**
    * Content of the `DataTable`.
    */
-  children: React.Node,
-  style?: ViewStyleProp,
+  children: React.ReactNode,
+  style?: StyleProp<ViewStyle>,
 };
 
 /**

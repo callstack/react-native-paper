@@ -1,24 +1,23 @@
-/* @flow */
 
 import * as React from 'react';
 import color from 'color';
-import { StyleSheet, View } from 'react-native';
-import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { StyleSheet, StyleProp, View } from 'react-native';
+import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { Theme } from '../../types';
 
-type Props = $Shape<React.ElementConfig<typeof View>> & {|
+type Props = React.ComponentProps<typeof View> & {
   /**
    * Content of the `DataTableHeader`.
    */
-  children: React.Node,
-  style?: ViewStyleProp,
+  children: React.ReactNode,
+  style?: StyleProp<ViewStyle>,
   /**
    * @optional
    */
   theme: Theme,
-|};
+};
 
 class DataTableHeader extends React.Component<Props> {
   static displayName = 'DataTable.Header';
