@@ -33,7 +33,7 @@ type Props = {|
   actions: Array<{
     icon: IconSource,
     label?: string,
-    labelStyle?: WiewStyleProp,
+    labelStyle?: ViewStyleProp,
     color?: string,
     accessibilityLabel?: string,
     style?: ViewStyleProp,
