@@ -1,13 +1,12 @@
-/* @flow */
 
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
-import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { View, StyleSheet, StyleProp } from 'react-native';
+import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import ListSubheader from './ListSubheader';
 import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { Theme } from '../../types';
 
-type Props = $Shape<React.ElementConfig<typeof View>> & {
+type Props = React.ComponentProps<typeof View> & {
   /**
    * Title text for the section.
    */
@@ -15,12 +14,12 @@ type Props = $Shape<React.ElementConfig<typeof View>> & {
   /**
    * Content of the section.
    */
-  children: React.Node,
+  children: React.ReactNode,
   /**
    * @optional
    */
   theme: Theme,
-  style?: ViewStyleProp,
+  style?: StyleProp<ViewStyle>,
 };
 
 /**
