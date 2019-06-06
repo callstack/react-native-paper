@@ -24,6 +24,7 @@ type Props = {|
    * An action item should contain the following properties:
    * - `icon`: icon to display (required)
    * - `label`: optional label text
+   * - `labelStyle`: pass additional styles for the fab label, for example `backgroundColor`
    * - `accessibilityLabel`: accessibility label for the action, uses label by default if specified
    * - `color`: custom icon color of the action item
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
@@ -32,6 +33,7 @@ type Props = {|
   actions: Array<{
     icon: IconSource,
     label?: string,
+    labelStyle?: WiewStyleProp,
     color?: string,
     accessibilityLabel?: string,
     style?: ViewStyleProp,
@@ -262,6 +264,7 @@ class FABGroup extends React.Component<Props, State> {
                         transform: [{ scale: scales[i] }],
                         opacity: opacities[i],
                       },
+                      it.labelStyle,
                     ]}
                     onPress={() => {
                       it.onPress();
