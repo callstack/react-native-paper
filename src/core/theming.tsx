@@ -1,14 +1,14 @@
-/* @flow */
 /* eslint-disable no-redeclare */
 
 import {
   createTheming,
-  type ThemingType,
+  ThemingType,
+  WithThemeType,
 } from '@callstack/react-theme-provider';
 import DefaultTheme from '../styles/DefaultTheme';
-import type { Theme, ThemeShape } from '../types';
+import { Theme, ThemeShape } from '../types';
 
 export const {
   ThemeProvider,
   withTheme,
-}: ThemingType<?Theme, ThemeShape> = createTheming(DefaultTheme);
+}: ThemingType<Theme, ThemeShape> = createTheming(DefaultTheme);
