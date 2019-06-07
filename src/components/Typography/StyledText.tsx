@@ -3,14 +3,17 @@
 import color from 'color';
 import * as React from 'react';
 import { I18nManager } from 'react-native';
+import { StyleProp } from 'react-native';
+import { TextStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+
 import Text from './Text';
 import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { Theme } from '../../types';
 
-type Props = React.ElementConfig<typeof Text> & {
+type Props = React.ComponentProps<typeof Text> & {
   alpha: number,
   family: 'regular' | 'medium' | 'light' | 'thin',
-  style?: any,
+  style?: StyleProp<TextStyle>,
   theme: Theme,
 };
 

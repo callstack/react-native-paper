@@ -1,11 +1,12 @@
+
 import color from 'color';
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, StyleProp } from 'react-native';
 import Text from '../Typography/Text';
 import Divider from '../Divider';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
-import { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 type Props = React.ComponentProps<typeof View> & {
   /**
@@ -16,7 +17,7 @@ type Props = React.ComponentProps<typeof View> & {
    * Content of the `Drawer.Section`.
    */
   children: React.ReactNode,
-  style?: ViewStyleProp,
+  style?: StyleProp<ViewStyle>,
   /**
    * @optional
    */

@@ -1,12 +1,12 @@
-/* @flow */
 
 import * as React from 'react';
-import { Text as NativeText, I18nManager } from 'react-native';
+import { Text as NativeText, I18nManager, StyleProp } from 'react-native';
+import { TextStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { Theme } from '../../types';
 
-type Props = React.ElementConfig<typeof NativeText> & {
-  style?: any,
+type Props = React.ComponentProps<typeof NativeText> & {
+  style?: StyleProp<TextStyle>,
   /**
    * @optional
    */
@@ -19,7 +19,7 @@ type Props = React.ElementConfig<typeof NativeText> & {
  * @extends Text props https://facebook.github.io/react-native/docs/text.html#props
  */
 class Text extends React.Component<Props> {
-  _root: ?NativeText;
+  _root: NativeText | undefined;
 
   /**
    * @internal

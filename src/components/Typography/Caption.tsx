@@ -1,11 +1,12 @@
 /* @flow */
 
 import * as React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, StyleProp } from 'react-native';
+import { TextStyle } from 'react-native/Libraries/StyleSheet/StyleSheet'
 import StyledText from './StyledText';
 
-type Props = React.ElementConfig<typeof Text> & {
-  style?: any,
+type Props = React.ComponentProps<typeof Text> & {
+  style?: StyleProp<TextStyle>,
 };
 
 /**
