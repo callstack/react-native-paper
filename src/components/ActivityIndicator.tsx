@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Animated, Easing, Platform, StyleSheet, StyleProp, View } from 'react-native';
 import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { withTheme } from '../core/theming';
-import { Theme } from '../../types';
+import { Theme } from '../types';
 
 type Props = React.ComponentProps<typeof View> & {
   /**

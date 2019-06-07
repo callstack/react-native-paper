@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { Image, Text, StyleSheet, I18nManager, Platform } from 'react-native';
-import type { ImageSource } from 'react-native/Libraries/Image/ImageSource';
+import { ImageSource } from 'react-native/Libraries/Image/ImageSource';
 
 let MaterialIcons;
 
@@ -55,16 +55,17 @@ type IconSourceBase = string | ImageSource;
 
 export type IconSource =
   | IconSourceBase
-  | $ReadOnly<{ source: IconSourceBase, direction: 'rtl' | 'ltr' | 'auto' }>
-  | ((props: IconProps) => React.Node);
+  | Readonly<{ source: IconSourceBase, direction: 'rtl' | 'ltr' | 'auto' }>
+  | ((props: IconProps) => React.ReactNode);
 
 type IconProps = {
   color: string,
-  size: number,
+	size: number,
+	allowFontScaling: boolean,
 };
 
 type Props = IconProps & {
-  source: IconSource,
+	source: IconSource,
 };
 
 const isImageSource = (source: any) =>
@@ -119,10 +120,10 @@ const Icon = ({ source, color, size, ...rest }: Props) => {
       ? ({
           role: 'img',
           focusable: false,
-        }: any)
+        })
       : {
           accessibilityElementsHidden: true,
-          importantForAccessibility: 'no-hide-descendants',
+          importantForAccessibility: 'no-hide-descendants' as "no-hide-descendants",
         };
 
   if (isImageSource(s)) {

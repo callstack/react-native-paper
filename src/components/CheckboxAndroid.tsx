@@ -1,3 +1,4 @@
+
 /* @flow */
 
 import * as React from 'react';
@@ -6,9 +7,9 @@ import color from 'color';
 import Icon from './Icon';
 import TouchableRipple from './TouchableRipple';
 import { withTheme } from '../core/theming';
-import type { Theme, $RemoveChildren } from '../types';
+import { Theme, $RemoveChildren } from '../types';
 
-type Props = $RemoveChildren<typeof TouchableRipple> & {|
+type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Status of checkbox.
    */
@@ -20,7 +21,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {|
   /**
    * Function to execute on press.
    */
-  onPress?: () => mixed,
+  onPress?: () => void,
   /**
    * Custom color for unchecked checkbox.
    */
@@ -33,7 +34,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {|
    * @optional
    */
   theme: Theme,
-|};
+};
 
 type State = {
   scaleAnim: Animated.Value,
@@ -134,7 +135,7 @@ class CheckboxAndroid extends React.Component<Props, State> {
       >
         <Animated.View style={{ transform: [{ scale: this.state.scaleAnim }] }}>
           <Icon
-            allowFontScaling={false}
+						allowFontScaling={false}
             source={icon}
             size={24}
             color={checkboxColor}

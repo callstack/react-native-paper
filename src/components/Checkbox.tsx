@@ -5,9 +5,9 @@ import { Platform } from 'react-native';
 import CheckboxAndroid from './CheckboxAndroid';
 import CheckboxIOS from './CheckboxIOS';
 import { withTheme } from '../core/theming';
-import type { Theme } from '../types';
+import { Theme } from '../types';
 
-type Props = {|
+type Props = {
   /**
    * Status of checkbox.
    */
@@ -19,7 +19,7 @@ type Props = {|
   /**
    * Function to execute on press.
    */
-  onPress?: () => mixed,
+  onPress?: () => void,
   /**
    * Custom color for unchecked checkbox.
    */
@@ -32,7 +32,7 @@ type Props = {|
    * @optional
    */
   theme: Theme,
-|};
+};
 
 /**
  * Checkboxes allow the selection of multiple options from a set.
