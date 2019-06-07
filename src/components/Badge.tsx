@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Animated, StyleSheet, StyleProp } from 'react-native';
+import { Animated, StyleSheet, StyleProp, TextInput } from 'react-native';
 import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import color from 'color';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
 import { Theme } from '../types';
 
-type Props = React.ComponentProps<typeof Text> & {
+type Props = React.ComponentProps<typeof TextInput> & {
   /**
    * Whether the badge is visible
    */
