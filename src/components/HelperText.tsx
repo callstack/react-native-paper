@@ -1,16 +1,17 @@
+
 /* @flow */
 
 import * as React from 'react';
 import color from 'color';
-import { Animated, StyleSheet } from 'react-native';
-import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { Animated, StyleSheet, StyleProp } from 'react-native';
+import { TextStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import Text from './Typography/Text';
 import { withTheme } from '../core/theming';
-import type { Theme } from '../types';
+import { Theme } from '../types';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
-type Props = React.ElementConfig<typeof Text> & {
+type Props = React.ComponentProps<typeof Text> & {
   /**
    * Type of the helper text.
    */
@@ -26,8 +27,8 @@ type Props = React.ElementConfig<typeof Text> & {
   /**
    * Text content of the HelperText.
    */
-  children: React.Node,
-  style?: TextStyleProp,
+  children: React.ReactNode,
+  style?: StyleProp<TextStyle>,
   /**
    * @optional
    */

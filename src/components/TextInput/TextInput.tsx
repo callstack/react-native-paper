@@ -310,7 +310,7 @@ class TextInput extends React.Component<TextInputProps, State> {
       }),
     }).start();
 
-  _handleFocus = (...args) => {
+  _handleFocus = (args: Object) => {
     if (this.props.disabled || !this.props.editable) {
       return;
     }
@@ -318,11 +318,11 @@ class TextInput extends React.Component<TextInputProps, State> {
     this.setState({ focused: true });
 
     if (this.props.onFocus) {
-      this.props.onFocus(...args);
+      this.props.onFocus(args);
     }
   };
 
-  _handleBlur = (...args) => {
+  _handleBlur = (args: Object) => {
     if (this.props.disabled || !this.props.editable) {
       return;
     }
@@ -330,7 +330,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     this.setState({ focused: false });
 
     if (this.props.onBlur) {
-      this.props.onBlur(...args);
+      this.props.onBlur(args);
     }
   };
 
@@ -356,8 +356,8 @@ class TextInput extends React.Component<TextInputProps, State> {
   /**
    * @internal
    */
-  setNativeProps(...args) {
-    return this._root && this._root.setNativeProps(...args);
+  setNativeProps(args: Object) {
+    return this._root && this._root.setNativeProps(args);
   }
 
   /**

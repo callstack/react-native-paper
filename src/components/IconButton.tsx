@@ -1,18 +1,18 @@
 /* @flow */
 
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, StyleProp } from 'react-native';
 import color from 'color';
-import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 import TouchableRipple from './TouchableRipple';
 import Icon from './Icon';
 import CrossFadeIcon from './CrossFadeIcon';
 import { withTheme } from '../core/theming';
-import type { IconSource } from './Icon';
-import type { Theme, $RemoveChildren } from '../types';
+import { IconSource } from './Icon';
+import { Theme, $RemoveChildren } from '../types';
 
-type Props = $RemoveChildren<typeof TouchableRipple> & {|
+type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Icon to display.
    */
@@ -40,13 +40,13 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {|
   /**
    * Function to execute on press.
    */
-  onPress?: () => mixed,
-  style?: ViewStyleProp,
+  onPress?: () => void,
+  style?: StyleProp<ViewStyle>,
   /**
    * @optional
    */
   theme: Theme,
-|};
+};
 
 /**
  * An icon button is a button which displays only an icon without a label.

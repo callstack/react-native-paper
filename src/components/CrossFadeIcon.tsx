@@ -4,11 +4,11 @@ import * as React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
 import Icon, { isValidIcon, isEqualIcon } from './Icon';
-import type { IconSource } from './Icon';
+import { IconSource } from './Icon';
 import { withTheme } from '../core/theming';
-import type { Theme } from '../types';
+import { Theme } from '../types';
 
-type Props = {|
+type Props = {
   /**
    * Icon to display for the `CrossFadeIcon`.
    */
@@ -25,11 +25,11 @@ type Props = {|
    * @optional
    */
   theme: Theme,
-|};
+};
 
 type State = {
   currentIcon: IconSource,
-  previousIcon: ?IconSource,
+  previousIcon: IconSource | undefined,
   fade: Animated.Value,
 };
 

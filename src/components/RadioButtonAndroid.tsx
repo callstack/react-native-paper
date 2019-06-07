@@ -5,9 +5,9 @@ import { Animated, View, StyleSheet } from 'react-native';
 import color from 'color';
 import TouchableRipple from './TouchableRipple';
 import { withTheme } from '../core/theming';
-import type { Theme, $RemoveChildren } from '../types';
+import { Theme, $RemoveChildren } from '../types';
 
-type Props = $RemoveChildren<typeof TouchableRipple> & {|
+type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Value of the radio button
    */
@@ -23,7 +23,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {|
   /**
    * Function to execute on press.
    */
-  onPress?: () => mixed,
+  onPress?: () => void,
   /**
    * Custom color for unchecked radio.
    */
@@ -36,7 +36,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {|
    * @optional
    */
   theme: Theme,
-|};
+};
 
 type State = {
   borderAnim: Animated.Value,

@@ -135,6 +135,7 @@ class Card extends React.Component<Props, State> {
       children,
       child =>
         React.isValidElement(child) && child.type
+          // @ts-ignore
           ? child.type.displayName
           : null
     );

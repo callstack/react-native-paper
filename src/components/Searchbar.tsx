@@ -1,19 +1,20 @@
+
 /* @flow */
 
 import * as React from 'react';
-import { StyleSheet, TextInput, I18nManager } from 'react-native';
-import type {
-  ViewStyleProp,
-  TextStyleProp,
+import { StyleSheet, StyleProp, TextInput, I18nManager } from 'react-native';
+import {
+  ViewStyle,
+  TextStyle,
 } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import color from 'color';
 import IconButton from './IconButton';
 import Surface from './Surface';
 import { withTheme } from '../core/theming';
-import type { Theme } from '../types';
-import type { IconSource } from './Icon';
+import { Theme } from '../types';
+import { IconSource } from './Icon';
 
-type Props = React.ElementConfig<typeof TextInput> & {|
+type Props = React.ComponentProps<typeof TextInput> & {
   /**
    * Hint text shown when the input is empty.
    */
@@ -33,12 +34,12 @@ type Props = React.ElementConfig<typeof TextInput> & {|
   /**
    * Callback to execute if we want the left icon to act as button.
    */
-  onIconPress?: () => mixed,
+  onIconPress?: () => void,
   /**
    * Set style of the TextInput component inside the searchbar
    */
-  inputStyle?: TextStyleProp,
-  style?: ViewStyleProp,
+  inputStyle?: StyleProp<TextStyle>,
+  style?: StyleProp<ViewStyle>,
 
   /**
    * @optional
@@ -48,7 +49,7 @@ type Props = React.ElementConfig<typeof TextInput> & {|
    * Custom color for icon, default will be derived from theme
    */
   iconColor?: string,
-|};
+};
 
 /**
  * Searchbar is a simple input box where users can type search queries.
@@ -86,13 +87,13 @@ class Searchbar extends React.Component<Props> {
     this.props.onChangeText && this.props.onChangeText('');
   };
 
-  _root: ?TextInput;
+  _root: TextInput | undefined | null;
 
   /**
    * @internal
-   */
-  setNativeProps(...args) {
-    return this._root && this._root.setNativeProps(...args);
+   */;
+  setNativeProps(args: Object) {
+    return this._root && this._root.setNativeProps(args);
   }
 
   /**

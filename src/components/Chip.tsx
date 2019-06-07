@@ -3,12 +3,13 @@
 import * as React from 'react';
 import {
   View,
-  StyleSheet,
+	StyleSheet,
+	StyleProp,
   Animated,
   TouchableWithoutFeedback,
   Platform,
 } from 'react-native';
-import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import color from 'color';
 import Icon from './Icon';
 import Surface from './Surface';
@@ -16,10 +17,10 @@ import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple';
 import { withTheme } from '../core/theming';
 import { black, white } from '../styles/colors';
-import type { Theme } from '../types';
-import type { IconSource } from './Icon';
+import { Theme } from '../types';
+import { IconSource } from './Icon';
 
-type Props = React.ElementConfig<typeof Surface> & {|
+type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Mode of the chip.
    * - `flat` - flat chip without outline.
@@ -29,7 +30,7 @@ type Props = React.ElementConfig<typeof Surface> & {|
   /**
    * Text content of the `Chip`.
    */
-  children: React.Node,
+  children: React.ReactNode,
   /**
    * Icon to display for the `Chip`. Both icon and avatar cannot be specified.
    */
@@ -37,7 +38,7 @@ type Props = React.ElementConfig<typeof Surface> & {|
   /**
    * Avatar to display for the `Chip`. Both icon and avatar cannot be specified.
    */
-  avatar?: React.Node,
+  avatar?: React.ReactNode,
   /**
    * Whether chip is selected.
    */
@@ -57,12 +58,12 @@ type Props = React.ElementConfig<typeof Surface> & {|
   /**
    * Function to execute on press.
    */
-  onPress?: () => mixed,
+  onPress?: () => void,
   /**
    * Function to execute on close button press. The close button appears only when this prop is specified.
    */
-  onClose?: () => mixed,
-  style?: ViewStyleProp,
+  onClose?: () => void,
+  style?: StyleProp<ViewStyle>,
   /**
    * @optional
    */
@@ -71,7 +72,7 @@ type Props = React.ElementConfig<typeof Surface> & {|
    * Pass down testID from chip props to touchable for Detox tests.
    */
   testID?: string,
-|};
+};
 
 type State = {
   elevation: Animated.Value,
@@ -277,7 +278,7 @@ class Chip extends React.Component<Props, State> {
                 },
               ]}
             >
-              {(children: any)}
+              {children}
             </Text>
             {onClose ? (
               <TouchableWithoutFeedback

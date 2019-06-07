@@ -1,4 +1,3 @@
-/* @flow */
 
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -6,9 +5,9 @@ import color from 'color';
 import Icon from './Icon';
 import TouchableRipple from './TouchableRipple';
 import { withTheme } from '../core/theming';
-import type { Theme, $RemoveChildren } from '../types';
+import { Theme, $RemoveChildren } from '../types';
 
-type Props = $RemoveChildren<typeof TouchableRipple> & {|
+type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Status of checkbox.
    */
@@ -20,7 +19,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {|
   /**
    * Function to execute on press.
    */
-  onPress?: () => mixed,
+  onPress?: () => void,
   /**
    * Custom color for checkbox.
    */
@@ -29,7 +28,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {|
    * @optional
    */
   theme: Theme,
-|};
+};
 
 /**
  * Checkboxes allow the selection of multiple options from a set.

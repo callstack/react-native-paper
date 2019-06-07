@@ -1,13 +1,13 @@
 /* @flow */
 
 import * as React from 'react';
-import createReactContext, { type Context } from 'create-react-context';
+import createReactContext, { Context } from 'create-react-context';
 
-type Props = {|
+type Props = {
   /**
    * Function to execute on selection change.
    */
-  onValueChange: (value: string) => mixed,
+  onValueChange: (value: string) => void,
   /**
    * Value of the currently selected radio button.
    */
@@ -15,15 +15,15 @@ type Props = {|
   /**
    * React elements containing radio buttons.
    */
-  children: React.Node,
-|};
+  children: React.ReactNode,
+};
 
 type RadioButtonContextType = {
   value: string,
-  onValueChange: (item: string) => mixed,
+  onValueChange: (item: string) => void,
 };
 
-export const RadioButtonContext: Context<?RadioButtonContextType> = createReactContext(
+export const RadioButtonContext: Context<RadioButtonContextType | null> = createReactContext(
   null
 );
 

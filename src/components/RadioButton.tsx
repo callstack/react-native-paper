@@ -1,4 +1,3 @@
-/* @flow */
 
 import * as React from 'react';
 import { Platform } from 'react-native';
@@ -6,9 +5,9 @@ import RadioButtonGroup, { RadioButtonContext } from './RadioButtonGroup';
 import RadioButtonAndroid from './RadioButtonAndroid';
 import RadioButtonIOS from './RadioButtonIOS';
 import { withTheme } from '../core/theming';
-import type { Theme } from '../types';
+import { Theme } from '../types';
 
-type Props = {|
+type Props = {
   /**
    * Value of the radio button
    */
@@ -24,7 +23,7 @@ type Props = {|
   /**
    * Function to execute on press.
    */
-  onPress?: () => mixed,
+  onPress?: () => void,
   /**
    * Custom color for unchecked radio.
    */
@@ -37,7 +36,7 @@ type Props = {|
    * @optional
    */
   theme: Theme,
-|};
+};
 
 /**
  * Radio buttons allow the selection a single option from a set.

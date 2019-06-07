@@ -1,12 +1,13 @@
 /* @flow */
 
 import * as React from 'react';
-import { Animated, Platform, StyleSheet, View } from 'react-native';
+import { Animated, Platform, StyleSheet, View, StyleProp } from 'react-native';
+import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import setColor from 'color';
 import { withTheme } from '../core/theming';
-import type { Theme } from '../types';
+import { Theme } from '../types';
 
-type Props = {|
+type Props = {
   /**
    * Progress value (between 0 and 1).
    */
@@ -23,12 +24,12 @@ type Props = {|
    * Whether to show the ProgressBar (true, the default) or hide it (false).
    */
   visible?: boolean,
-  style?: any,
+  style?: StyleProp<ViewStyle>,
   /**
    * @optional
    */
   theme: Theme,
-|};
+};
 
 type State = {
   width: number,

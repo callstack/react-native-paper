@@ -61,7 +61,7 @@ export type IconSource =
 type IconProps = {
   color: string,
 	size: number,
-	allowFontScaling: boolean,
+	allowFontScaling?: boolean,
 };
 
 type Props = IconProps & {
