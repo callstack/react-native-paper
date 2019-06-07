@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { StyleSheet, View, Image, StyleProp } from 'react-native';
 import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';

@@ -1,6 +1,4 @@
 
-/* @flow */
-
 import * as React from 'react';
 import { View, Platform, SafeAreaView, StyleProp, StyleSheet } from 'react-native';
 import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
@@ -31,6 +29,7 @@ type Props = React.ComponentProps<typeof Appbar> & {
    */
   theme: Theme,
   style?: StyleProp<ViewStyle>,
+  __expo: any
 };
 
 const DEFAULT_STATUSBAR_HEIGHT_EXPO =

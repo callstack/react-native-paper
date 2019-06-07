@@ -33,6 +33,7 @@
   ],
   "scripts": {
     "flow": "flow",
+    "tsc": "tsc --noEmit -w",
     "typescript": "tsc --noEmit --skipLibCheck --jsx react ./__ts-tests__/*",
     "typescript:generate": "node ./scripts/generate-ts-tests.js",
     "lint": "eslint .",

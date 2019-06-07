@@ -1,4 +1,3 @@
-
 import color from 'color';
 import * as React from 'react';
 import { View, StyleSheet, StyleProp } from 'react-native';

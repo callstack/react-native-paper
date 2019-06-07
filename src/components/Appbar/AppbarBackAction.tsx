@@ -1,6 +1,4 @@
 
-/* @flow */
-
 import * as React from 'react';
 import { View, Image, I18nManager, StyleSheet, Platform } from 'react-native';
 import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';

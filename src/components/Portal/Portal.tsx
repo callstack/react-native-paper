@@ -1,6 +1,3 @@
-/* @flow */
-/* eslint-disable react/no-unused-prop-types */
-
 import * as React from 'react';
 import PortalConsumer from './PortalConsumer';
 import PortalHost, { PortalContext } from './PortalHost';

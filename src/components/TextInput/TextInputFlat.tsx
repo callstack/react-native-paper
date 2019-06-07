@@ -251,7 +251,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
                   textAlignVertical: multiline && height ? 'top' : 'center',
                 },
               ],
-            }: RenderProps)
+            })
           )}
         </View>
       </View>

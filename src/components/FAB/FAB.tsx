@@ -1,5 +1,3 @@
-/* @flow */
-
 import color from 'color';
 import * as React from 'react';
 import { Animated, View, StyleSheet, StyleProp } from 'react-native';

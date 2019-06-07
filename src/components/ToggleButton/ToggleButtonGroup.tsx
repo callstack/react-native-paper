@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import createReactContext, { Context } from 'create-react-context';
