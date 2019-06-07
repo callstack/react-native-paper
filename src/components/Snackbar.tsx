@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StyleSheet, Animated, SafeAreaView } from 'react-native';
-import { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { StyleSheet, Animated, SafeAreaView, StyleProp } from 'react-native';
+import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 import Button from './Button';
 import Surface from './Surface';
@@ -36,7 +36,7 @@ type Props = {
    * Text content of the Snackbar.
    */
   children: React.ReactNode,
-  style?: ViewStyleProp,
+  style?: StyleProp<ViewStyle>,
   /**
    * @optional
    */

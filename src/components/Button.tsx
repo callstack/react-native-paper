@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Animated, View, StyleSheet } from 'react-native';
-import { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { Animated, View, StyleSheet, StyleProp } from 'react-native';
+import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import color from 'color';
 
 import ActivityIndicator from './ActivityIndicator';
@@ -65,8 +65,8 @@ type Props = React.ComponentProps<typeof Surface> & {
    * Style of button's inner content.
    * Use this prop to apply custom height and width.
    */
-  contentStyle?: ViewStyleProp,
-  style?: ViewStyleProp,
+  contentStyle?: StyleProp<ViewStyle>,
+  style?: StyleProp<ViewStyle>,
   /**
    * @optional
    */

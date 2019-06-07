@@ -6,8 +6,9 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   BackHandler,
+  StyleProp
 } from 'react-native';
-import { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { polyfill } from 'react-lifecycles-compat';
 import Surface from './Surface';
 import { withTheme } from '../core/theming';
@@ -33,7 +34,7 @@ type Props = {
   /**
    * Style for the content of the modal
    */
-  contentContainerStyle?: ViewStyleProp,
+  contentContainerStyle?: StyleProp<ViewStyle>,
   /**
    * @optional
    */
