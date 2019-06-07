@@ -1,8 +1,7 @@
-/* @flow */
 
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
-import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { StyleSheet, StyleProp } from 'react-native';
+import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { withTheme } from '../../core/theming';
 import color from 'color';
 import IconButton from '../IconButton';
@@ -10,8 +9,8 @@ import ToggleButtonGroup, {
   ToggleButtonGroupContext,
 } from './ToggleButtonGroup';
 import { black, white } from '../../styles/colors';
-import type { IconSource } from '../Icon';
-import type { Theme } from '../../types';
+import { IconSource } from '../Icon';
+import { Theme } from '../../types';
 
 type Props = {
   /**
@@ -37,7 +36,7 @@ type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: (value: ?string) => mixed,
+  onPress?: (value: string | null) => void,
   /**
    * Value of button.
    */
@@ -46,7 +45,7 @@ type Props = {
    * Status of button.
    */
   status?: 'checked' | 'unchecked',
-  style?: ViewStyleProp,
+  style?: StyleProp<ViewStyle>,
   /**
    * @optional
    */
@@ -109,10 +108,10 @@ class ToggleButton extends React.Component<Props> {
 
     return (
       <ToggleButtonGroupContext.Consumer>
-        {(context: ?{ value: string, onValueChange: Function }) => {
+        {(context: { value: string, onValueChange: Function } | null) => {
           let backgroundColor;
 
-          const checked: ?boolean =
+          const checked: boolean | null =
             (context && context.value === value) || status === 'checked';
 
           if (checked) {

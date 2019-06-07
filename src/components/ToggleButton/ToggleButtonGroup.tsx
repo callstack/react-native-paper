@@ -1,15 +1,14 @@
-/* @flow */
 
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import createReactContext, { type Context } from 'create-react-context';
+import createReactContext, { Context } from 'create-react-context';
 import ToggleButton from './ToggleButton';
 
 type Props = {
   /**
    * Function to execute on selection change.
    */
-  onValueChange: (value: string) => mixed,
+  onValueChange: (value: string) => void,
   /**
    * Value of the currently selected toggle button.
    */
@@ -17,15 +16,15 @@ type Props = {
   /**
    * React elements containing toggle buttons.
    */
-  children: React.Node,
+  children: React.ReactNode,
 };
 
 type ToggleButtonContextType = {
   value: string,
-  onValueChange: (item: string) => mixed,
+  onValueChange: (item: string) => void,
 };
 
-export const ToggleButtonGroupContext: Context<?ToggleButtonContextType> = createReactContext(
+export const ToggleButtonGroupContext: Context<ToggleButtonContextType | null> = createReactContext(
   null
 );
 

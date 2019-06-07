@@ -138,7 +138,7 @@ class Appbar extends React.Component<Props> {
               return child;
             }
 
-            const props: { color?: string, style?: ViewStyleProp } = {
+            const props: { color?: string, style?: StyleProp<ViewStyle> } = {
               color:
                 typeof child.props.color !== 'undefined'
                   ? child.props.color

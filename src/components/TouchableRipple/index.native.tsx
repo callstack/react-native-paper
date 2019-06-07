@@ -1,3 +1,4 @@
+
 /* @flow */
 
 import * as React from 'react';
@@ -6,27 +7,29 @@ import {
   TouchableHighlight,
   TouchableWithoutFeedback,
   Platform,
-  View,
+	View,
+	StyleProp,
+	BackgroundPropType,
 } from 'react-native';
-import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import color from 'color';
 import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { Theme } from '../../types';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 const ANDROID_VERSION_PIE = 28;
 
-type Props = React.ElementConfig<typeof TouchableWithoutFeedback> & {|
+type Props = React.ComponentProps<typeof TouchableWithoutFeedback> & {
   borderless?: boolean,
-  background?: Object,
+  background?: BackgroundPropType,
   disabled?: boolean,
-  onPress?: ?() => mixed,
+  onPress?: () => void | null,
   rippleColor?: string,
   underlayColor?: string,
-  children: React.Node,
-  style?: ViewStyleProp,
+  children: React.ReactNode,
+  style?: StyleProp<ViewStyle>,
   theme: Theme,
-|};
+};
 
 class TouchableRipple extends React.Component<Props, void> {
   static defaultProps = {

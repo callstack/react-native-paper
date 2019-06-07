@@ -1,13 +1,13 @@
-/* @flow */
+
 
 import * as React from 'react';
-import { TouchableWithoutFeedback, View, StyleSheet } from 'react-native';
-import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { TouchableWithoutFeedback, View, StyleSheet, StyleProp } from 'react-native';
+import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import color from 'color';
 import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { Theme } from '../../types';
 
-type Props = React.ElementConfig<typeof TouchableWithoutFeedback> & {|
+type Props = React.ComponentProps<typeof TouchableWithoutFeedback> & {
   /**
    * Whether to render the ripple outside the view bounds.
    */
@@ -28,11 +28,11 @@ type Props = React.ElementConfig<typeof TouchableWithoutFeedback> & {|
   /**
    * Function to execute on press. If not set, will cause the touchable to be disabled.
    */
-  onPress?: ?() => mixed,
+  onPress?: () => void | null,
   /**
    * Function to execute on long press.
    */
-  onLongPress?: () => mixed,
+  onLongPress?: () => void,
   /**
    * Color of the ripple effect (Android >= 5.0 and Web).
    */
@@ -44,13 +44,13 @@ type Props = React.ElementConfig<typeof TouchableWithoutFeedback> & {|
   /**
    * Content of the `TouchableRipple`.
    */
-  children: React.Node,
-  style?: ViewStyleProp,
+  children: React.ReactNode,
+  style?: StyleProp<ViewStyle>,
   /**
    * @optional
    */
   theme: Theme,
-|};
+};
 
 /**
  * A wrapper for views that should respond to touches.

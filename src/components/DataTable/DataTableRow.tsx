@@ -8,21 +8,21 @@ import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
 import { Theme, $RemoveChildren } from '../../types';
 
-type Props = $RemoveChildren<typeof TouchableRipple> & {|
+type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Content of the `DataTableRow`.
    */
-  children: React.Node,
+  children: React.ReactNode,
   /**
    * Function to execute on press.
    */
-  onPress?: () => mixed,
-  style?: ViewStyleProp,
+  onPress?: () => void,
+  style?: StyleProp<ViewStyle>,
   /**
    * @optional
    */
   theme: Theme,
-|};
+};
 
 class DataTableRow extends React.Component<Props> {
   static displayName = 'DataTable.Row';
