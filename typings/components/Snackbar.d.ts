@@ -13,6 +13,7 @@ export interface SnackbarProps {
   duration?: number;
   onDismiss: () => any;
   style?: StyleProp<ViewStyle>;
+  wrapperStyle?: StyleProp<ViewStyle>;
   theme?: ThemeShape;
 }
 
