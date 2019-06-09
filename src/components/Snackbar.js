@@ -38,7 +38,14 @@ type Props = {|
    * Text content of the Snackbar.
    */
   children: React.Node,
+  /**
+   * Snackbar Surface style
+   */
   style?: ViewStyleProp,
+  /**
+   * Snackbar SafeAreaView style
+   */
+  wrapperStyle?: ViewStyleProp,
   /**
    * @optional
    */
@@ -195,7 +202,7 @@ class Snackbar extends React.Component<Props, State> {
   _hideTimeout: TimeoutID;
 
   render() {
-    const { children, visible, action, onDismiss, theme, style } = this.props;
+    const { children, visible, action, onDismiss, theme, style, wrapperStyle } = this.props;
     const { colors, roundness } = theme;
 
     if (this.state.hidden) {
@@ -203,7 +210,7 @@ class Snackbar extends React.Component<Props, State> {
     }
 
     return (
-      <SafeAreaView pointerEvents="box-none" style={styles.wrapper}>
+      <SafeAreaView pointerEvents="box-none" style={[styles.wrapper, wrapperStyle]}>
         <Surface
           pointerEvents="box-none"
           accessibilityLiveRegion="polite"
