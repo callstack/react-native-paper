@@ -7,10 +7,11 @@ import {
   Animated,
   TouchableWithoutFeedback,
   StyleSheet,
+  StyleProp,
   Platform,
   Keyboard,
+  ViewStyle,
 } from 'react-native';
-import { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { polyfill } from 'react-lifecycles-compat';
 import SafeAreaView from 'react-native-safe-area-view';
 import color from 'color';
@@ -87,7 +88,7 @@ type Props<T> = {
    * Callback which is called on tab change, receives the index of the new tab as argument.
    * The navigation state needs to be updated when it's called, otherwise the change is dropped.
    */
-  onIndexChange: (index: number) => mixed,
+  onIndexChange: (index: number) => void,
   /**
    * Callback which returns a react element to render as the page for the tab. Receives an object containing the route as the argument:
    *
@@ -125,8 +126,8 @@ type Props<T> = {
    */
   renderScene: (props: {
     route: T,
-    jumpTo: (key: string) => mixed,
-  }) => ?React.Node,
+    jumpTo: (key: string) => void,
+  }) => React.ReactNode | null,
   /**
    * Callback which returns a React Element to be used as tab icon.
    */
@@ -134,7 +135,7 @@ type Props<T> = {
     route: T,
     focused: boolean,
     color: string,
-  }) => React.Node,
+  }) => React.ReactNode,
   /**
    * Callback which React Element to be used as tab label.
    */
@@ -142,7 +143,7 @@ type Props<T> = {
     route: T,
     focused: boolean,
     color: string,
-  }) => React.Node,
+  }) => React.ReactNode,
   /**
    * Get label text for the tab, uses `route.title` by default. Use `renderLabel` to replace label component.
    */
@@ -151,11 +152,11 @@ type Props<T> = {
    * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
    * Uses `route.accessibilityLabel` by default.
    */
-  getAccessibilityLabel?: (props: { route: T }) => ?string,
+  getAccessibilityLabel?: (props: { route: T }) => string | null,
   /**
    * Get the id to locate this tab button in tests, uses `route.testID` by default.
    */
-  getTestID?: (props: { route: T }) => ?string,
+  getTestID?: (props: { route: T }) => string | null,
   /**
    * Get badge for the tab, uses `route.badge` by default.
    */
@@ -168,7 +169,7 @@ type Props<T> = {
   /**
    * Function to execute on tab press. It receives the route for the pressed tab, useful for things like scroll to top.
    */
-  onTabPress?: (props: { route: T }) => mixed,
+  onTabPress?: (props: { route: T }) => void,
   /**
    * Custom color for icon and label in the active tab.
    */
@@ -190,8 +191,8 @@ type Props<T> = {
    * barStyle={{ paddingBottom: 48 }}
    * ```
    */
-  barStyle?: ViewStyleProp,
-  style?: ViewStyleProp,
+  barStyle?: StyleProp<ViewStyle>,
+  style?: StyleProp<ViewStyle>,
   /**
    * @optional
    */
@@ -218,6 +219,10 @@ type State = {
    * Use don't use the color as an animated value directly, because `setValue` seems to be buggy with colors.
    */
   index: Animated.Value,
+  /**
+   * Animation for the touch, used to determine it's scale and opacity.
+   */
+  touch: Animated.Value,
   /**
    * Animation for the background color ripple, used to determine it's scale and opacity.
    */
@@ -258,7 +263,7 @@ const Touchable = TouchableRipple.supported
       </TouchableWithoutFeedback>
     );
 
-class SceneComponent extends React.PureComponent<*> {
+class SceneComponent extends React.PureComponent<any> {
   render() {
     const { component, ...rest } = this.props;
     return React.createElement(component, rest);
@@ -316,7 +321,7 @@ class SceneComponent extends React.PureComponent<*> {
  * }
  * ```
  */
-class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
+class BottomNavigation<T extends Route> extends React.Component<Props<T>, State> {
   /**
    * Function which takes a map of route keys to components.
    * Pure components are used to minmize re-rendering of the pages.
@@ -324,11 +329,11 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
    */
   static SceneMap(scenes: {
     [key: string]: React.ComponentType<{
-      route: T,
-      jumpTo: (key: string) => mixed,
+      route: Route,
+      jumpTo: (key: string) => void,
     }>,
   }) {
-    return ({ route, jumpTo }: *) => (
+    return ({ route, jumpTo }: {route: Route, jumpTo: (key: string) => void}) => (
       <SceneComponent
         key={route.key}
         component={scenes[route.key]}
@@ -550,11 +555,11 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
       renderScene,
       renderIcon,
       renderLabel,
-      getLabelText = ({ route }: Object) => route.title,
-      getBadge = ({ route }: Object) => route.badge,
-      getColor = ({ route }: Object) => route.color,
-      getAccessibilityLabel = ({ route }: Object) => route.accessibilityLabel,
-      getTestID = ({ route }: Object) => route.testID,
+      getLabelText = ({ route }: {route: Route}) => route.title,
+      getBadge = ({ route }: {route: Route}) => route.badge,
+      getColor = ({ route }: {route: Route}) => route.color,
+      getAccessibilityLabel = ({ route }: {route: Route}) => route.accessibilityLabel,
+      getTestID = ({ route }: {route: Route}) => route.testID,
       activeColor,
       inactiveColor,
       keyboardHidesNavigationBar,
@@ -792,7 +797,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                             })
                           ) : (
                             <Icon
-                              source={(route: Object).icon}
+                              source={(route).icon}
                               color={activeTintColor}
                               size={24}
                             />
@@ -812,7 +817,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                             })
                           ) : (
                             <Icon
-                              source={(route: Object).icon}
+                              source={route.icon}
                               color={inactiveTintColor}
                               size={24}
                             />
@@ -970,7 +975,7 @@ const styles = StyleSheet.create({
       ? {
           whiteSpace: 'nowrap',
         }
-      : null): any),
+      : null)),
   },
   badgeContainer: {
     position: 'absolute',
