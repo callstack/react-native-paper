@@ -99,13 +99,10 @@
     "react-native": "*",
     "react-native-vector-icons": "*"
   },
-  "resolutions": {
-    "**/babel-core": "7.0.0-bridge.0"
-  },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "yarn lint && yarn flow check && yarn typescript && yarn test"
+      "pre-commit": "yarn lint && yarn tsc && yarn test"
     }
   },
   "jest": {
