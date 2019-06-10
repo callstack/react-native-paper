@@ -18,6 +18,13 @@ export type Font = {
     | '900',
 };
 
+export type Fonts = {
+  regular: Font,
+  medium: Font,
+  light: Font,
+  thin: Font,
+};
+
 export type Theme = {
   dark: boolean,
   roundness: number,
@@ -33,24 +40,13 @@ export type Theme = {
     backdrop: string,
     notification: string,
   },
-  fonts: {
-    regular: Font,
-    medium: Font,
-    light: Font,
-    thin: Font,
-  },
+  fonts: Fonts,
   animation: {
     scale: number,
   },
 };
 
-export type ThemeShape = $Shape<{
-  ...Theme,
-  colors: $Shape<$PropertyType<Theme, 'colors'>>,
-  fonts: $Shape<$PropertyType<Theme, 'fonts'>>,
-}>;
-
-export type $RemoveChildren<T> = $Diff<
-  React.ElementConfig<T>,
-  { children: any }
+export type $RemoveChildren<T extends React.ComponentType<any>> = Omit<
+  React.ComponentProps<T>,
+  'children'
 >;

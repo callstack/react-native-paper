@@ -11,7 +11,7 @@ import { Theme } from '../types';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
-type Props = React.ComponentProps<typeof Text> & {
+type Props = Omit<Omit<React.ComponentProps<typeof Text>, 'padding'>, 'type'> & {
   /**
    * Type of the helper text.
    */
@@ -79,7 +79,7 @@ type State = {
  * ```
  */
 class HelperText extends React.PureComponent<Props, State> {
-  static defaultProps = {
+  static defaultProps: Partial<Props> = {
     type: 'info',
     padding: 'normal',
     visible: true,

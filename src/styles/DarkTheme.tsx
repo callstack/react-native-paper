@@ -1,4 +1,3 @@
-/* @flow */
 
 import color from 'color';
 import DefaultTheme from './DefaultTheme';
@@ -10,7 +9,7 @@ import {
   redA400,
   pinkA100,
 } from './colors';
-import type { Theme } from '../types';
+import { Theme } from '../types';
 
 const DarkTheme: Theme = {
   ...DefaultTheme,

@@ -1,10 +1,11 @@
-/* @flow */
 
 import color from 'color';
 import { black, white, pinkA400 } from './colors';
 import fonts from './fonts';
 
-export default {
+import { Theme, Fonts } from '../types';
+
+const DefaultTheme: Theme = {
   dark: false,
   roundness: 4,
   colors: {
@@ -28,8 +29,10 @@ export default {
       .string(),
     notification: pinkA400,
   },
-  fonts,
+  fonts: fonts as Fonts,
   animation: {
     scale: 1.0,
   },
 };
+
+export default DefaultTheme;

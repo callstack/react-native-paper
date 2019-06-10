@@ -8,7 +8,7 @@ import { Theme } from '../types';
 
 type Props = {
   children: React.ReactNode,
-  theme?: Partial<Theme>,
+  theme?: Theme,
 };
 
 export default class Provider extends React.Component<Props> {
