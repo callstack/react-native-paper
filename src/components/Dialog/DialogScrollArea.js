@@ -19,7 +19,7 @@ type Props = React.ElementConfig<typeof View> & {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { ScrollView } from 'react-native';
+ * import { ScrollView, Text } from 'react-native';
  * import { Dialog, Portal } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
@@ -37,7 +37,7 @@ type Props = React.ElementConfig<typeof View> & {
  *           onDismiss={this._hideDialog}>
  *           <Dialog.ScrollArea>
  *             <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>
- *               This is a scrollable area
+ *               <Text>This is a scrollable area</Text>
  *             </ScrollView>
  *           </Dialog.ScrollArea>
  *         </Dialog>
