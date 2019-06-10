@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { Animated, StyleSheet, View, StyleProp } from 'react-native';
+import { Animated, StyleSheet, View, StyleProp, ViewStyle } from 'react-native';
 import shadow from '../styles/shadow';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { withTheme } from '../core/theming';
 import { Theme } from '../types';
 
@@ -9,12 +8,12 @@ type Props = React.ComponentProps<typeof View> & {
   /**
    * Content of the `Surface`.
    */
-  children: React.ReactNode,
-  style?: StyleProp<ViewStyle>,
+  children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 /**

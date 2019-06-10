@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
-import Icon, { isValidIcon, isEqualIcon } from './Icon';
-import { IconSource } from './Icon';
+import Icon, { isValidIcon, isEqualIcon, IconSource } from './Icon';
+
 import { withTheme } from '../core/theming';
 import { Theme } from '../types';
 
@@ -10,25 +10,25 @@ type Props = {
   /**
    * Icon to display for the `CrossFadeIcon`.
    */
-  source: IconSource,
+  source: IconSource;
   /**
    * Color of the icon.
    */
-  color: string,
+  color: string;
   /**
    * Size of the icon.
    */
-  size: number,
+  size: number;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 type State = {
-  currentIcon: IconSource,
-  previousIcon: IconSource | undefined,
-  fade: Animated.Value,
+  currentIcon: IconSource;
+  previousIcon: IconSource | undefined;
+  fade: Animated.Value;
 };
 
 class CrossFadeIcon extends React.Component<Props, State> {

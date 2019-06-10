@@ -1,7 +1,6 @@
 import * as React from 'react';
 import color from 'color';
-import { StyleSheet, View, StyleProp } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { StyleSheet, View, ViewStyle, StyleProp } from 'react-native';
 import { withTheme } from '../core/theming';
 import { black, white } from '../styles/colors';
 import { Theme, $RemoveChildren } from '../types';
@@ -10,12 +9,12 @@ type Props = $RemoveChildren<typeof View> & {
   /**
    *  Whether divider has a left inset.
    */
-  inset?: boolean,
-  style?: StyleProp<ViewStyle>,
+  inset?: boolean;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 /**
