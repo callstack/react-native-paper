@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import renderer from 'react-test-renderer';
-import DrawerSection from '../../Drawer/DrawerSection';
+import DrawerSection from '../../Drawer/DrawerSection.tsx';
 
 describe('DrawerSection', () => {
   it('renders properly', () => {

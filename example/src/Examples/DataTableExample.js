@@ -70,13 +70,12 @@ class DataTableExample extends React.Component<Props, State> {
 
     const items = this.state.items
       .slice()
-      .sort(
-        (item1, item2) =>
-          (sortAscending
-          ? item1.name < item2.name
-          : item2.name < item1.name)
-            ? 1
-            : -1
+      .sort((item1, item2) =>
+        (sortAscending
+        ? item1.name < item2.name
+        : item2.name < item1.name)
+          ? 1
+          : -1
       );
     const itemsPerPage = 2;
     const from = this.state.page * itemsPerPage;
