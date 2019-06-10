@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import color from 'color';
@@ -11,23 +10,23 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Status of checkbox.
    */
-  status: 'checked' | 'unchecked' | 'indeterminate',
+  status: 'checked' | 'unchecked' | 'indeterminate';
   /**
    * Whether checkbox is disabled.
    */
-  disabled?: boolean,
+  disabled?: boolean;
   /**
    * Function to execute on press.
    */
-  onPress?: () => void,
+  onPress?: () => void;
   /**
    * Custom color for checkbox.
    */
-  color?: string,
+  color?: string;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 /**

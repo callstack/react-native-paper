@@ -1,14 +1,14 @@
 import * as React from 'react';
 import {
   Animated,
-  View,
+  BackHandler,
   Easing,
+  StyleProp,
   StyleSheet,
   TouchableWithoutFeedback,
-  BackHandler,
-  StyleProp
+  View,
+  ViewStyle,
 } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { polyfill } from 'react-lifecycles-compat';
 import Surface from './Surface';
 import { withTheme } from '../core/theming';

@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Platform, StyleProp } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { StyleSheet, Platform, StyleProp, ViewStyle } from 'react-native';
 import Modal from '../Modal';
 import DialogContent from './DialogContent';
 import DialogActions from './DialogActions';
@@ -13,24 +12,24 @@ type Props = {
   /**
    * Determines whether clicking outside the dialog dismiss it.
    */
-  dismissable?: boolean,
+  dismissable?: boolean;
   /**
    * Callback that is called when the user dismisses the dialog.
    */
-  onDismiss?: () => void,
+  onDismiss?: () => void;
   /**
    * Determines Whether the dialog is visible.
    */
-  visible: boolean,
+  visible: boolean;
   /**
    * Content of the `Dialog`.
    */
-  children: React.ReactNode,
-  style?: StyleProp<ViewStyle>,
+  children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 /**

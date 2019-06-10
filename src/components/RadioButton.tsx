@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import { Platform } from 'react-native';
 import RadioButtonGroup, { RadioButtonContext } from './RadioButtonGroup';
@@ -11,31 +10,31 @@ type Props = {
   /**
    * Value of the radio button
    */
-  value: string,
+  value: string;
   /**
    * Status of radio button.
    */
-  status?: 'checked' | 'unchecked',
+  status?: 'checked' | 'unchecked';
   /**
    * Whether radio is disabled.
    */
-  disabled?: boolean,
+  disabled?: boolean;
   /**
    * Function to execute on press.
    */
-  onPress?: () => void,
+  onPress?: () => void;
   /**
    * Custom color for unchecked radio.
    */
-  uncheckedColor?: string,
+  uncheckedColor?: string;
   /**
    * Custom color for radio.
    */
-  color?: string,
+  color?: string;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 /**

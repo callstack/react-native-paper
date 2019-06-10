@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import {
   View,
@@ -170,8 +169,8 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
     const placeholderOpacity = hasActiveOutline
       ? parentState.labeled
       : parentState.labelLayout.measured
-        ? 1
-        : 0;
+      ? 1
+      : 0;
 
     const labelProps = {
       label,
@@ -218,41 +217,37 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
         >
           <InputLabel parentState={parentState} labelProps={labelProps} />
 
-          {render(
-            ({
-              ...rest,
-              ref: innerRef,
-              onChangeText,
-              adjustsFontSizeToFit: true,
-              placeholder: label
-                ? parentState.placeholder
-                : this.props.placeholder,
-              placeholderTextColor: placeholderColor,
-              editable: !disabled && editable,
-              selectionColor:
-                typeof selectionColor === 'undefined'
-                  ? activeColor
-                  : selectionColor,
-              onFocus,
-              onBlur,
-              underlineColorAndroid: 'transparent',
-              multiline,
-              style: [
-                styles.input,
-                paddingOffset,
-                !multiline || (multiline && height)
-                  ? { height: flatHeight }
-                  : {},
-                paddingFlat,
-                {
-                  fontSize,
-                  color: inputTextColor,
-                  ...font,
-                  textAlignVertical: multiline && height ? 'top' : 'center',
-                },
-              ],
-            })
-          )}
+          {render({
+            ...rest,
+            ref: innerRef,
+            onChangeText,
+            adjustsFontSizeToFit: true,
+            placeholder: label
+              ? parentState.placeholder
+              : this.props.placeholder,
+            placeholderTextColor: placeholderColor,
+            editable: !disabled && editable,
+            selectionColor:
+              typeof selectionColor === 'undefined'
+                ? activeColor
+                : selectionColor,
+            onFocus,
+            onBlur,
+            underlineColorAndroid: 'transparent',
+            multiline,
+            style: [
+              styles.input,
+              paddingOffset,
+              !multiline || (multiline && height) ? { height: flatHeight } : {},
+              paddingFlat,
+              {
+                fontSize,
+                color: inputTextColor,
+                ...font,
+                textAlignVertical: multiline && height ? 'top' : 'center',
+              },
+            ],
+          })}
         </View>
       </View>
     );

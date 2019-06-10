@@ -4,22 +4,22 @@ import PortalManager from './PortalManager';
 import createReactContext, { Context } from 'create-react-context';
 
 type Props = {
-  children: React.ReactNode,
+  children: React.ReactNode;
 };
 
 type Operation =
-  | { type: 'mount', key: number, children: React.ReactNode }
-  | { type: 'update', key: number, children: React.ReactNode }
-  | { type: 'unmount', key: number };
+  | { type: 'mount'; key: number; children: React.ReactNode }
+  | { type: 'update'; key: number; children: React.ReactNode }
+  | { type: 'unmount'; key: number };
 
 export type PortalMethods = {
-  mount: (children: React.ReactNode) => number,
-  update: (key: number, children: React.ReactNode) => void,
-  unmount: (key: number) => void,
+  mount: (children: React.ReactNode) => number;
+  update: (key: number, children: React.ReactNode) => void;
+  unmount: (key: number) => void;
 };
 
-export const PortalContext: Context<PortalMethods> = createReactContext(
-  (null)
+export const PortalContext: Context<PortalMethods | null> = createReactContext(
+  null
 );
 
 /**

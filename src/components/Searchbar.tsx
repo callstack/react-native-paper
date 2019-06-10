@@ -1,12 +1,13 @@
-
-/* @flow */
-
 import * as React from 'react';
-import { StyleSheet, StyleProp, TextInput, I18nManager } from 'react-native';
 import {
+  StyleSheet,
+  StyleProp,
+  TextInput,
+  I18nManager,
   ViewStyle,
   TextStyle,
-} from 'react-native/Libraries/StyleSheet/StyleSheet';
+} from 'react-native';
+
 import color from 'color';
 import IconButton from './IconButton';
 import Surface from './Surface';
@@ -18,37 +19,37 @@ type Props = React.ComponentProps<typeof TextInput> & {
   /**
    * Hint text shown when the input is empty.
    */
-  placeholder?: string,
+  placeholder?: string;
   /**
    * The value of the text input.
    */
-  value: string,
+  value: string;
   /**
    * Icon name for the left icon button (see `onIconPress`).
    */
-  icon?: IconSource,
+  icon?: IconSource;
   /**
    * Callback that is called when the text input's text changes.
    */
-  onChangeText?: (query: string) => void,
+  onChangeText?: (query: string) => void;
   /**
    * Callback to execute if we want the left icon to act as button.
    */
-  onIconPress?: () => void,
+  onIconPress?: () => void;
   /**
    * Set style of the TextInput component inside the searchbar
    */
-  inputStyle?: StyleProp<TextStyle>,
-  style?: StyleProp<ViewStyle>,
+  inputStyle?: StyleProp<TextStyle>;
+  style?: StyleProp<ViewStyle>;
 
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
   /**
    * Custom color for icon, default will be derived from theme
    */
-  iconColor?: string,
+  iconColor?: string;
 };
 
 /**
@@ -91,8 +92,7 @@ class Searchbar extends React.Component<Props> {
 
   /**
    * @internal
-   */;
-  setNativeProps(args: Object) {
+   */ setNativeProps(args: Object) {
     return this._root && this._root.setNativeProps(args);
   }
 

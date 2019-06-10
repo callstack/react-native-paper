@@ -1,7 +1,6 @@
 import * as React from 'react';
 import color from 'color';
-import { StyleSheet, StyleProp, View } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
 import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
@@ -10,12 +9,12 @@ type Props = React.ComponentProps<typeof View> & {
   /**
    * Content of the `DataTableHeader`.
    */
-  children: React.ReactNode,
-  style?: StyleProp<ViewStyle>,
+  children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 class DataTableHeader extends React.Component<Props> {

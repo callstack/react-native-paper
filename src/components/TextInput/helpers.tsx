@@ -1,24 +1,24 @@
 // @flow
 
 type PaddingProps = {
-  height: number | null,
-  labelHalfHeight: number,
-  multiline: boolean | null,
-  dense: boolean | null,
-  topPosition: number,
-  fontSize: number,
-  label?: string | null,
-  scale: number,
-  offset: number,
-  isAndroid: boolean,
-  styles: { paddingTop: number, paddingBottom: number },
+  height: number | null;
+  labelHalfHeight: number;
+  multiline: boolean | null;
+  dense: boolean | null;
+  topPosition: number;
+  fontSize: number;
+  label?: string | null;
+  scale: number;
+  offset: number;
+  isAndroid: boolean;
+  styles: { paddingTop: number; paddingBottom: number };
 };
 
 type AdjProps = PaddingProps & {
-  pad: number,
+  pad: number;
 };
 
-type Padding = { paddingTop: number, paddingBottom: number };
+type Padding = { paddingTop: number; paddingBottom: number };
 
 export const calculateLabelTopPosition = (
   labelHeight: number,
@@ -57,7 +57,7 @@ export const calculatePadding = (props: PaddingProps): number => {
   return Math.max(0, result);
 };
 
-const calculateTextAreaPadding = props => {
+const calculateTextAreaPadding = (props: PaddingProps) => {
   const { dense } = props;
 
   return dense ? 10 : 20;
@@ -71,7 +71,7 @@ const calculateInputPadding = ({
   dense,
   offset,
   isAndroid,
-}): number => {
+}: PaddingProps): number => {
   const refFontSize = scale * fontSize;
   let result = Math.floor(topPosition / 2);
 

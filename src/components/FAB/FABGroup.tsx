@@ -1,13 +1,13 @@
 import * as React from 'react';
 import {
-  View,
-	StyleSheet,
 	StyleProp,
+	StyleSheet,
   Animated,
-  TouchableWithoutFeedback,
   SafeAreaView,
+  TouchableWithoutFeedback,
+  View,
+  ViewStyle,
 } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { polyfill } from 'react-lifecycles-compat';
 import color from 'color';
 import FAB from './FAB';
@@ -132,7 +132,7 @@ type State = {
 class FABGroup extends React.Component<Props, State> {
   static displayName = 'FAB.Group';
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
     return {
       animations: nextProps.actions.map(
         (_, i) =>
@@ -141,12 +141,12 @@ class FABGroup extends React.Component<Props, State> {
     };
   }
 
-  state = {
+  state: State = {
     backdrop: new Animated.Value(0),
     animations: [],
   };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props) {
     if (this.props.open === prevProps.open) {
       return;
     }
@@ -326,6 +326,7 @@ class FABGroup extends React.Component<Props, State> {
   }
 }
 
+// @ts-ignore
 polyfill(FABGroup);
 
 export default withTheme(FABGroup);

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {
   Animated,
+  StyleProp,
   StyleSheet,
   TouchableWithoutFeedback,
-	View,
-	StyleProp
+  View,
+  ViewStyle,
 } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import color from 'color';
 import Icon from '../Icon';
 import Text from '../Typography/Text';
@@ -58,7 +58,7 @@ class DataTableTitle extends React.Component<Props, State> {
     ),
   };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props) {
     if (prevProps.sortDirection === this.props.sortDirection) {
       return;
     }

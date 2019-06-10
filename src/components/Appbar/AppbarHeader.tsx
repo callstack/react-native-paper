@@ -1,7 +1,12 @@
-
 import * as React from 'react';
-import { View, Platform, SafeAreaView, StyleProp, StyleSheet } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import {
+  StyleSheet,
+  StyleProp,
+  View,
+  Platform,
+  SafeAreaView,
+  ViewStyle,
+} from 'react-native';
 
 import Appbar, { DEFAULT_APPBAR_HEIGHT } from './Appbar';
 import shadow from '../../styles/shadow';
@@ -12,24 +17,24 @@ type Props = React.ComponentProps<typeof Appbar> & {
   /**
    * Whether the background color is a dark color. A dark header will render light text and vice-versa.
    */
-  dark?: boolean,
+  dark?: boolean;
   /**
    * Extra padding to add at the top of header to account for translucent status bar.
    * This is automatically handled on iOS >= 11 including iPhone X using `SafeAreaView`.
    * If you are using Expo, we assume translucent status bar and set a height for status bar automatically.
    * Pass `0` or a custom value to disable the default behaviour, and customize the height.
    */
-  statusBarHeight?: number,
+  statusBarHeight?: number;
   /**
    * Content of the header.
    */
-  children: React.ReactNode,
+  children: React.ReactNode;
   /**
    * @optional
    */
-  theme: Theme,
-  style?: StyleProp<ViewStyle>,
-  __expo: any
+  theme: Theme;
+  style?: StyleProp<ViewStyle>;
+  __expo: any;
 };
 
 const DEFAULT_STATUSBAR_HEIGHT_EXPO =
@@ -112,7 +117,12 @@ class AppbarHeader extends React.Component<Props> {
 
     return (
       <Wrapper
-        style={[{ backgroundColor, zIndex }, elevation && shadow(elevation)] as StyleProp<ViewStyle>}
+        style={
+          [
+            { backgroundColor, zIndex },
+            elevation && shadow(elevation),
+          ] as StyleProp<ViewStyle>
+        }
       >
         {/* $FlowFixMe: There seems to be conflict between Appbar's props and Header's props */}
         <Appbar

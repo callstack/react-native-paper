@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, StyleProp, View } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
 import color from 'color';
 import IconButton from '../IconButton';
 import Text from '../Typography/Text';
@@ -11,24 +10,24 @@ type Props = React.ComponentProps<typeof View> & {
   /**
    * The currently visible page (starting with 0).
    */
-  page: number,
+  page: number;
   /**
    * The total number of pages.
    */
-  numberOfPages: number,
+  numberOfPages: number;
   /**
    * Label text to display
    */
-  label?: React.ReactNode,
+  label?: React.ReactNode;
   /**
    * Function to execute on page change.
    */
-  onPageChange: (page: number) => void,
-  style?: StyleProp<ViewStyle>,
+  onPageChange: (page: number) => void;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 class DataTablePagination extends React.Component<Props> {

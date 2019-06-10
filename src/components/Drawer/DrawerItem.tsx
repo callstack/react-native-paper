@@ -1,36 +1,35 @@
 import color from 'color';
 import * as React from 'react';
-import { View, StyleSheet, StyleProp } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import Text from '../Typography/Text';
-import Icon from '../Icon';
+import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
-import { IconSource } from '../Icon';
+
 
 type Props = {
   /**
    * The label text of the item.
    */
-  label: string,
+  label: string;
   /**
    * Icon to display for the `DrawerItem`.
    */
-  icon?: IconSource,
+  icon?: IconSource;
   /**
    * Whether to highlight the drawer item as active.
    */
-  active?: boolean,
+  active?: boolean;
   /**
    * Function to execute on press.
    */
-  onPress?: () => void,
-  style?: StyleProp<ViewStyle>,
+  onPress?: () => void;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 /**

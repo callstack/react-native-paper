@@ -2,19 +2,17 @@
 
 import color from 'color';
 import * as React from 'react';
-import { I18nManager } from 'react-native';
-import { StyleProp } from 'react-native';
-import { TextStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { I18nManager, StyleProp, TextStyle } from 'react-native';
 
 import Text from './Text';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 
 type Props = React.ComponentProps<typeof Text> & {
-  alpha: number,
-  family: 'regular' | 'medium' | 'light' | 'thin',
-  style?: StyleProp<TextStyle>,
-  theme: Theme,
+  alpha: number;
+  family: 'regular' | 'medium' | 'light' | 'thin';
+  style?: StyleProp<TextStyle>;
+  theme: Theme;
 };
 
 class StyledText extends React.Component<Props> {

@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, StyleProp, View } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
 import DataTableCell from './DataTableCell';
 import DataTableHeader from './DataTableHeader';
 import DataTableTitle from './DataTableTitle';

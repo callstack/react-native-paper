@@ -1,18 +1,18 @@
 import * as React from 'react';
 import {
-	StyleSheet,
-	StyleProp,
-  Animated,
-  View,
-  Easing,
-  Dimensions,
-  TouchableWithoutFeedback,
-  I18nManager,
-  BackHandler,
 	Platform,
-	LayoutRectangle,
+	StyleProp,
+	StyleSheet,
+  Animated,
+  BackHandler,
+  Dimensions,
+  Easing,
+  I18nManager,
+  LayoutRectangle,
+  TouchableWithoutFeedback,
+  View,
+  ViewStyle,
 } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
@@ -43,8 +43,6 @@ type Props = {
    */
   theme: Theme,
 };
-
-type Layout = { height: number, width: number };
 
 type State = {
   top: number,
@@ -127,7 +125,7 @@ class Menu extends React.Component<Props, State> {
     scaleAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
   };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props) {
     if (prevProps.visible !== this.props.visible) {
       this._updateVisibility();
     }
@@ -137,8 +135,8 @@ class Menu extends React.Component<Props, State> {
     BackHandler.removeEventListener('hardwareBackPress', this.props.onDismiss);
   }
 
-  _anchor?: View;
-  _menu?: View;
+  _anchor?: View | null;
+  _menu?: View | null;
 
   _measureMenuLayout = () =>
     new Promise<LayoutRectangle>(resolve => {

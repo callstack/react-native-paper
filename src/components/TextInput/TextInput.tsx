@@ -22,39 +22,39 @@ export type TextInputProps = React.ComponentProps<typeof NativeTextInput> & {
    * In `outlined` mode, the background color of the label is derived from `colors.background` in theme or the `backgroundColor` style.
    * This component render TextInputOutlined or TextInputFlat based on that props
    */
-  mode?: 'flat' | 'outlined',
+  mode?: 'flat' | 'outlined';
   /**
    * If true, user won't be able to interact with the component.
    */
-  disabled?: boolean,
+  disabled?: boolean;
   /**
    * The text to use for the floating label.
    */
-  label?: string,
+  label?: string;
   /**
    * Placeholder for the input.
    */
-  placeholder?: string,
+  placeholder?: string;
   /**
    * Whether to style the TextInput with error style.
    */
-  error?: boolean,
+  error?: boolean;
   /**
    * Callback that is called when the text input's text changes. Changed text is passed as an argument to the callback handler.
    */
-  onChangeText?: Function,
+  onChangeText?: Function;
   /**
    * Selection color of the input
    */
-  selectionColor?: string,
+  selectionColor?: string;
   /**
    * Underline color of the input.
    */
-  underlineColor?: string,
+  underlineColor?: string;
   /**
    * Whether to apply padding to label and input.
    */
-  padding?: 'none' | 'normal',
+  padding?: 'none' | 'normal';
   /**
    * Sets min height with densed layout. For `TextInput` in `flat` mode
    * height is `64dp` or in dense layout - `52dp` with label or `40dp` without label.
@@ -62,23 +62,23 @@ export type TextInputProps = React.ComponentProps<typeof NativeTextInput> & {
    * height is `56dp` or in dense layout - `40dp` regardless of label.
    * When you apply `heigh` prop in style the `dense` prop affects only `paddingVertical` inside `TextInput`
    */
-  dense?: boolean,
+  dense?: boolean;
   /**
    * Whether the input can have multiple lines.
    */
-  multiline?: boolean,
+  multiline?: boolean;
   /**
    * The number of lines to show in the input (Android only).
    */
-  numberOfLines?: number,
+  numberOfLines?: number;
   /**
    * Callback that is called when the text input is focused.
    */
-  onFocus?: (args: any) => void,
+  onFocus?: (args: any) => void;
   /**
    * Callback that is called when the text input is blurred.
    */
-  onBlur?: (args: any) => void,
+  onBlur?: (args: any) => void;
   /**
    *
    * Callback to render a custom input component such as `react-native-text-input-mask`
@@ -97,21 +97,21 @@ export type TextInputProps = React.ComponentProps<typeof NativeTextInput> & {
    * />
    * ```
    */
-  render: (props: RenderProps) => React.ReactNode,
+  render: (props: RenderProps) => React.ReactNode;
   /**
    * Value of the text input.
    */
-  value?: string,
+  value?: string;
   /**
    * Pass `fontSize` prop to modify the font size inside `TextInput`.
    * Pass `height` prop to set `TextInput` height. When `height` is passed,
    * `dense` prop will affect only input's `paddingVertical`.
    */
-  style?: any,
+  style?: any;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 /**
@@ -173,7 +173,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     render: (props: RenderProps) => <NativeTextInput {...props} />,
   };
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(nextProps: TextInputProps, prevState: State) {
     return {
       value:
         typeof nextProps.value !== 'undefined'
@@ -197,7 +197,7 @@ class TextInput extends React.Component<TextInputProps, State> {
 
   ref: NativeTextInput | null;
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: TextInputProps, prevState: State) {
     if (
       prevState.focused !== this.state.focused ||
       prevState.value !== this.state.value ||

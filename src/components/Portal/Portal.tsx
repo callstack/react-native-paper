@@ -8,11 +8,11 @@ type Props = {
   /**
    * Content of the `Portal`.
    */
-  children: React.ReactNode,
+  children: React.ReactNode;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 /**

@@ -1,5 +1,3 @@
-/* @flow */
-
 import * as React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';

@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet, StyleProp } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 import color from 'color';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
@@ -11,20 +10,20 @@ type Props = {
   /**
    * Initials to show as the text in the `Avatar`.
    */
-  label: string,
+  label: string;
   /**
    * Size of the avatar.
    */
-  size: number,
+  size: number;
   /**
    * Custom color for the text.
    */
-  color?: string,
-  style?: StyleProp<ViewStyle>,
+  color?: string;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 /**

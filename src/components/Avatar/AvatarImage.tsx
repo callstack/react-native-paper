@@ -1,24 +1,29 @@
 import * as React from 'react';
-import { Image, StyleSheet, View, StyleProp } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import {
+  Image,
+  StyleSheet,
+  View,
+  ViewStyle,
+  StyleProp,
+  ImageSourcePropType,
+} from 'react-native';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
-import { ImageSource } from 'react-native/Libraries/Image/ImageSource';
 
 type Props = {
   /**
    * Image to display for the `Avatar`.
    */
-  source: ImageSource,
+  source: ImageSourcePropType;
   /**
    * Size of the avatar.
    */
-  size: number,
-  style?: StyleProp<ViewStyle>,
+  size: number;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 /**

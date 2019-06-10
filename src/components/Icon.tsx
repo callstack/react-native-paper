@@ -1,5 +1,3 @@
-/* @flow */
-
 import * as React from 'react';
 import { Image, Text, StyleSheet, I18nManager, Platform } from 'react-native';
 import { ImageSource } from 'react-native/Libraries/Image/ImageSource';

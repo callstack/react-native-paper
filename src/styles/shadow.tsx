@@ -1,4 +1,3 @@
-
 import * as Colors from './colors';
 import { Animated } from 'react-native';
 

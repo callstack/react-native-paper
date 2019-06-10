@@ -27,18 +27,18 @@ import { Theme } from '../types';
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
 type Route = Partial<{
-  key: string,
-  title: string,
-  icon: IconSource,
-  badge: string | number | boolean,
-  color: string,
-  accessibilityLabel: string,
-  testID: string,
+  key: string;
+  title: string;
+  icon: IconSource;
+  badge: string | number | boolean;
+  color: string;
+  accessibilityLabel: string;
+  testID: string;
 }>;
 
 type NavigationState<T extends Route> = {
-  index: number,
-  routes: Array<T>,
+  index: number;
+  routes: Array<T>;
 };
 
 type Props<T> = {
@@ -46,11 +46,11 @@ type Props<T> = {
    * Whether the shifting style is used, the active tab appears wider and the inactive tabs won't have a label.
    * By default, this is `true` when you have more than 3 tabs.
    */
-  shifting?: boolean,
+  shifting?: boolean;
   /**
    * Whether to show labels in tabs. When `false`, only icons will be displayed.
    */
-  labeled?: boolean,
+  labeled?: boolean;
   /**
    * State for the bottom navigation. The state should contain the following properties:
    *
@@ -83,12 +83,12 @@ type Props<T> = {
    *
    * `BottomNavigation` is a controlled component, which means the `index` needs to be updated via the `onIndexChange` callback.
    */
-  navigationState: NavigationState<T>,
+  navigationState: NavigationState<T>;
   /**
    * Callback which is called on tab change, receives the index of the new tab as argument.
    * The navigation state needs to be updated when it's called, otherwise the change is dropped.
    */
-  onIndexChange: (index: number) => void,
+  onIndexChange: (index: number) => void;
   /**
    * Callback which returns a react element to render as the page for the tab. Receives an object containing the route as the argument:
    *
@@ -125,64 +125,64 @@ type Props<T> = {
    * ```
    */
   renderScene: (props: {
-    route: T,
-    jumpTo: (key: string) => void,
-  }) => React.ReactNode | null,
+    route: T;
+    jumpTo: (key: string) => void;
+  }) => React.ReactNode | null;
   /**
    * Callback which returns a React Element to be used as tab icon.
    */
   renderIcon?: (props: {
-    route: T,
-    focused: boolean,
-    color: string,
-  }) => React.ReactNode,
+    route: T;
+    focused: boolean;
+    color: string;
+  }) => React.ReactNode;
   /**
    * Callback which React Element to be used as tab label.
    */
   renderLabel?: (props: {
-    route: T,
-    focused: boolean,
-    color: string,
-  }) => React.ReactNode,
+    route: T;
+    focused: boolean;
+    color: string;
+  }) => React.ReactNode;
   /**
    * Get label text for the tab, uses `route.title` by default. Use `renderLabel` to replace label component.
    */
-  getLabelText?: (props: { route: T }) => string,
+  getLabelText?: (props: { route: T }) => string;
   /**
    * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
    * Uses `route.accessibilityLabel` by default.
    */
-  getAccessibilityLabel?: (props: { route: T }) => string | null,
+  getAccessibilityLabel?: (props: { route: T }) => string | null;
   /**
    * Get the id to locate this tab button in tests, uses `route.testID` by default.
    */
-  getTestID?: (props: { route: T }) => string | null,
+  getTestID?: (props: { route: T }) => string | null;
   /**
    * Get badge for the tab, uses `route.badge` by default.
    */
-  getBadge?: (props: { route: T }) => boolean | number | string,
+  getBadge?: (props: { route: T }) => boolean | number | string;
   /**
   /**
    * Get color for the tab, uses `route.color` by default.
    */
-  getColor?: (props: { route: T }) => string,
+  getColor?: (props: { route: T }) => string;
   /**
    * Function to execute on tab press. It receives the route for the pressed tab, useful for things like scroll to top.
    */
-  onTabPress?: (props: { route: T }) => void,
+  onTabPress?: (props: { route: T }) => void;
   /**
    * Custom color for icon and label in the active tab.
    */
-  activeColor?: string,
+  activeColor?: string;
   /**
    * Custom color for icon and label in the inactive tab.
    */
-  inactiveColor?: string,
+  inactiveColor?: string;
   /**
    * Whether the bottom navigation bar is hidden when keyboard is shown.
    * On Android, this works best when [`windowSoftInputMode`](https://developer.android.com/guide/topics/manifest/activity-element#wsoft) is set to `adjustResize`.
    */
-  keyboardHidesNavigationBar?: boolean,
+  keyboardHidesNavigationBar?: boolean;
   /**
    * Style for the bottom navigation bar.
    * You can set a bottom padding here if you have a translucent navigation bar on Android:
@@ -191,62 +191,62 @@ type Props<T> = {
    * barStyle={{ paddingBottom: 48 }}
    * ```
    */
-  barStyle?: StyleProp<ViewStyle>,
-  style?: StyleProp<ViewStyle>,
+  barStyle?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 type State = {
   /**
    * Visibility of the navigation bar, visible state is 1 and invisible is 0.
    */
-  visible: Animated.Value,
+  visible: Animated.Value;
   /**
    * Active state of individual tab items, active state is 1 and inactve state is 0.
    */
-  tabs: Animated.Value[],
+  tabs: Animated.Value[];
   /**
    * The top offset for each tab item to position it offscreen.
    * Placing items offscreen helps to save memory usage for inactive screens with removeClippedSubviews.
    * We use animated values for this to prevent unnecesary re-renders.
    */
-  offsets: Animated.Value[],
+  offsets: Animated.Value[];
   /**
    * Index of the currently active tab. Used for setting the background color.
    * Use don't use the color as an animated value directly, because `setValue` seems to be buggy with colors.
    */
-  index: Animated.Value,
+  index: Animated.Value;
   /**
    * Animation for the touch, used to determine it's scale and opacity.
    */
-  touch: Animated.Value,
+  touch: Animated.Value;
   /**
    * Animation for the background color ripple, used to determine it's scale and opacity.
    */
-  ripple: Animated.Value,
+  ripple: Animated.Value;
   /**
    * Layout of the navigation bar. The width is used to determine the size and position of the ripple.
    */
-  layout: { height: number, width: number, measured: boolean },
+  layout: { height: number; width: number; measured: boolean };
   /**
    * Currently active index. Used only for getDerivedStateFromProps.
    */
-  current: number,
+  current: number;
   /**
    * Previously active index. Used to determine the position of the ripple.
    */
-  previous: number,
+  previous: number;
   /**
    * List of loaded tabs, tabs will be loaded when navigated to.
    */
-  loaded: number[],
+  loaded: number[];
   /**
    * Trak whether the keyboard is visible to show and hide the navigation bar.
    */
-  keyboard: boolean,
+  keyboard: boolean;
 };
 
 const MIN_RIPPLE_SCALE = 0.001; // Minimum scale is not 0 due to bug with animation
@@ -321,7 +321,10 @@ class SceneComponent extends React.PureComponent<any> {
  * }
  * ```
  */
-class BottomNavigation<T extends Route> extends React.Component<Props<T>, State> {
+class BottomNavigation<T extends Route> extends React.Component<
+  Props<T>,
+  State
+> {
   /**
    * Function which takes a map of route keys to components.
    * Pure components are used to minmize re-rendering of the pages.
@@ -329,11 +332,17 @@ class BottomNavigation<T extends Route> extends React.Component<Props<T>, State>
    */
   static SceneMap(scenes: {
     [key: string]: React.ComponentType<{
-      route: Route,
-      jumpTo: (key: string) => void,
-    }>,
+      route: Route;
+      jumpTo: (key: string) => void;
+    }>;
   }) {
-    return ({ route, jumpTo }: {route: Route, jumpTo: (key: string) => void}) => (
+    return ({
+      route,
+      jumpTo,
+    }: {
+      route: Route;
+      jumpTo: (key: string) => void;
+    }) => (
       <SceneComponent
         key={route.key}
         component={scenes[route.key]}
@@ -348,7 +357,7 @@ class BottomNavigation<T extends Route> extends React.Component<Props<T>, State>
     keyboardHidesNavigationBar: true,
   };
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(nextProps, prevState: State) {
     const { index, routes } = nextProps.navigationState;
 
     // Re-create animated values if routes have been added/removed
@@ -383,7 +392,7 @@ class BottomNavigation<T extends Route> extends React.Component<Props<T>, State>
     return nextState;
   }
 
-  constructor(props) {
+  constructor(props: Props<T>) {
     super(props);
 
     const { index } = this.props.navigationState;
@@ -417,7 +426,7 @@ class BottomNavigation<T extends Route> extends React.Component<Props<T>, State>
     }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props<T>) {
     if (prevProps.navigationState.index === this.props.navigationState.index) {
       return;
     }
@@ -555,11 +564,12 @@ class BottomNavigation<T extends Route> extends React.Component<Props<T>, State>
       renderScene,
       renderIcon,
       renderLabel,
-      getLabelText = ({ route }: {route: Route}) => route.title,
-      getBadge = ({ route }: {route: Route}) => route.badge,
-      getColor = ({ route }: {route: Route}) => route.color,
-      getAccessibilityLabel = ({ route }: {route: Route}) => route.accessibilityLabel,
-      getTestID = ({ route }: {route: Route}) => route.testID,
+      getLabelText = ({ route }: { route: Route }) => route.title,
+      getBadge = ({ route }: { route: Route }) => route.badge,
+      getColor = ({ route }: { route: Route }) => route.color,
+      getAccessibilityLabel = ({ route }: { route: Route }) =>
+        route.accessibilityLabel,
+      getTestID = ({ route }: { route: Route }) => route.testID,
       activeColor,
       inactiveColor,
       keyboardHidesNavigationBar,
@@ -797,7 +807,7 @@ class BottomNavigation<T extends Route> extends React.Component<Props<T>, State>
                             })
                           ) : (
                             <Icon
-                              source={(route).icon}
+                              source={route.icon}
                               color={activeTintColor}
                               size={24}
                             />
@@ -971,11 +981,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'center',
     backgroundColor: 'transparent',
-    ...((Platform.OS === 'web'
+    ...(Platform.OS === 'web'
       ? {
           whiteSpace: 'nowrap',
         }
-      : null)),
+      : null),
   },
   badgeContainer: {
     position: 'absolute',

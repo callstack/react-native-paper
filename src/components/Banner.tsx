@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet, Animated } from 'react-native';
-import { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { View, ViewStyle, StyleSheet, StyleProp, Animated } from 'react-native';
 import Surface from './Surface';
 import Text from './Typography/Text';
 import Button from './Button';
@@ -36,7 +35,7 @@ type Props = $RemoveChildren<typeof Surface> & {
     label: string,
     onPress: () => void,
   }>,
-  style?: ViewStyleProp,
+  style?: StyleProp<ViewStyle>,
   /**
    * @optional
    */
@@ -120,7 +119,7 @@ class Banner extends React.Component<Props, State> {
     },
   };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props) {
     if (prevProps.visible !== this.props.visible) {
       this._toggle();
     }

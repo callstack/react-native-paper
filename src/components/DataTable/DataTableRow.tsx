@@ -1,7 +1,6 @@
 import * as React from 'react';
 import color from 'color';
-import { StyleSheet, StyleProp, View } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
 import TouchableRipple from '../TouchableRipple';
 import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
@@ -11,16 +10,16 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Content of the `DataTableRow`.
    */
-  children: React.ReactNode,
+  children: React.ReactNode;
   /**
    * Function to execute on press.
    */
-  onPress?: () => void,
-  style?: StyleProp<ViewStyle>,
+  onPress?: () => void;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 class DataTableRow extends React.Component<Props> {

@@ -1,6 +1,3 @@
-
-/* @flow */
-
 import * as React from 'react';
 import { Animated, View, StyleSheet } from 'react-native';
 import color from 'color';
@@ -13,31 +10,31 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Status of checkbox.
    */
-  status: 'checked' | 'unchecked' | 'indeterminate',
+  status: 'checked' | 'unchecked' | 'indeterminate';
   /**
    * Whether checkbox is disabled.
    */
-  disabled?: boolean,
+  disabled?: boolean;
   /**
    * Function to execute on press.
    */
-  onPress?: () => void,
+  onPress?: () => void;
   /**
    * Custom color for unchecked checkbox.
    */
-  uncheckedColor?: string,
+  uncheckedColor?: string;
   /**
    * Custom color for checkbox.
    */
-  color?: string,
+  color?: string;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 type State = {
-  scaleAnim: Animated.Value,
+  scaleAnim: Animated.Value;
 };
 
 /**
@@ -116,8 +113,8 @@ class CheckboxAndroid extends React.Component<Props, State> {
     const icon = indeterminate
       ? 'indeterminate-check-box'
       : checked
-        ? 'check-box'
-        : 'check-box-outline-blank';
+      ? 'check-box'
+      : 'check-box-outline-blank';
 
     return (
       <TouchableRipple
@@ -135,7 +132,7 @@ class CheckboxAndroid extends React.Component<Props, State> {
       >
         <Animated.View style={{ transform: [{ scale: this.state.scaleAnim }] }}>
           <Icon
-						allowFontScaling={false}
+            allowFontScaling={false}
             source={icon}
             size={24}
             color={checkboxColor}

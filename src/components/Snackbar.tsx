@@ -1,6 +1,11 @@
 import * as React from 'react';
-import { StyleSheet, Animated, SafeAreaView, StyleProp } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import {
+  Animated,
+  SafeAreaView,
+  StyleProp,
+  StyleSheet,
+  ViewStyle,
+} from 'react-native';
 
 import Button from './Button';
 import Surface from './Surface';
@@ -13,39 +18,39 @@ type Props = {
   /**
    * Whether the Snackbar is currently visible.
    */
-  visible: boolean,
+  visible: boolean;
   /**
    * Label and press callback for the action button. It should contain the following properties:
    * - `label` - Label of the action button
    * - `onPress` - Callback that is called when action button is pressed.
    */
   action?: {
-    label: string,
-    accessibilityLabel?: string,
-    onPress: () => void,
-  },
+    label: string;
+    accessibilityLabel?: string;
+    onPress: () => void;
+  };
   /**
    * The duration for which the Snackbar is shown.
    */
-  duration?: number,
+  duration?: number;
   /**
    * Callback called when Snackbar is dismissed. The `visible` prop needs to be updated when this is called.
    */
-  onDismiss: () => void,
+  onDismiss: () => void;
   /**
    * Text content of the Snackbar.
    */
-  children: React.ReactNode,
-  style?: StyleProp<ViewStyle>,
+  children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 type State = {
-  opacity: Animated.Value,
-  hidden: boolean,
+  opacity: Animated.Value;
+  hidden: boolean;
 };
 
 const DURATION_SHORT = 4000;
@@ -135,14 +140,16 @@ class Snackbar extends React.Component<Props, State> {
     }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props) {
     if (prevProps.visible !== this.props.visible) {
       this._toggle();
     }
   }
 
   componentWillUnmount() {
-    clearTimeout(this._hideTimeout);
+    if(this._hideTimeout) {
+      clearTimeout(this._hideTimeout);
+    }
   }
 
   _toggle = () => {
@@ -154,7 +161,9 @@ class Snackbar extends React.Component<Props, State> {
   };
 
   _show = () => {
-    clearTimeout(this._hideTimeout);
+    if(this._hideTimeout) {
+      clearTimeout(this._hideTimeout);
+    }
     this.setState({
       hidden: false,
     });
@@ -177,7 +186,9 @@ class Snackbar extends React.Component<Props, State> {
   };
 
   _hide = () => {
-    clearTimeout(this._hideTimeout);
+    if(this._hideTimeout) {
+      clearTimeout(this._hideTimeout);
+    }
 
     Animated.timing(this.state.opacity, {
       toValue: 0,
@@ -190,7 +201,7 @@ class Snackbar extends React.Component<Props, State> {
     });
   };
 
-  _hideTimeout: TimeoutID;
+  _hideTimeout?: number;
 
   render() {
     const { children, visible, action, onDismiss, theme, style } = this.props;

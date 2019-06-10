@@ -1,4 +1,3 @@
-
 import color from 'color';
 import DefaultTheme from './DefaultTheme';
 import {

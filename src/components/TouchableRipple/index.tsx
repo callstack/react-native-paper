@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { TouchableWithoutFeedback, View, StyleSheet, StyleProp } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { TouchableWithoutFeedback, View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 import color from 'color';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';

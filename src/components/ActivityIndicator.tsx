@@ -1,6 +1,13 @@
 import * as React from 'react';
-import { Animated, Easing, Platform, StyleSheet, StyleProp, View } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import {
+  Animated,
+  Easing,
+  Platform,
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewStyle,
+} from 'react-native';
 import { withTheme } from '../core/theming';
 import { Theme } from '../types';
 
@@ -8,29 +15,29 @@ type Props = React.ComponentProps<typeof View> & {
   /**
    * Whether to show the indicator or hide it.
    */
-  animating: boolean,
+  animating: boolean;
   /**
    * The color of the spinner.
    */
-  color?: string,
+  color?: string;
   /**
    * Size of the indicator.
    */
-  size: 'small' | 'large' | number,
+  size: 'small' | 'large' | number;
   /**
    * Whether the indicator should hide when not animating.
    */
-  hidesWhenStopped: boolean,
-  style?: StyleProp<ViewStyle>,
+  hidesWhenStopped: boolean;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 type State = {
-  timer: Animated.Value,
-  fade: Animated.Value,
+  timer: Animated.Value;
+  fade: Animated.Value;
 };
 
 const DURATION = 2400;

@@ -1,13 +1,12 @@
 import * as React from 'react';
-import { View, StyleSheet, StyleProp } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 
 type Props = React.ComponentProps<typeof View> & {
   /**
    * Content of the `DialogScrollArea`.
    */
-  children: React.ReactNode,
-  style?: StyleProp<ViewStyle>,
+  children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
 };
 
 /**

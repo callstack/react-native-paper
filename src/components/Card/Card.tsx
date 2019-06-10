@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {
+  StyleProp,
+  StyleSheet,
   Animated,
-  View,
   TouchableWithoutFeedback,
-	StyleSheet,
-	StyleProp,
+  View,
+  ViewStyle,
 } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import CardContent from './CardContent';
 import CardActions from './CardActions';
 import CardCover from './CardCover';
@@ -19,36 +19,36 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Resting elevation of the card which controls the drop shadow.
    */
-  elevation?: number,
+  elevation?: number;
   /**
    * Function to execute on long press.
    */
-  onLongPress?: () => void,
+  onLongPress?: () => void;
   /**
    * Function to execute on press.
    */
-  onPress?: () => void,
+  onPress?: () => void;
   /**
    * Content of the `Card`.
    */
-  children: React.ReactNode,
-  style?: StyleProp<ViewStyle>,
+  children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
   /**
    * Pass down testID from card props to touchable
    */
-  testID?: string,
+  testID?: string;
   /**
    * Pass down accessible from card props to touchable
    */
-  accessible?: boolean,
+  accessible?: boolean;
 };
 
 type State = {
-  elevation: Animated.Value,
+  elevation: Animated.Value;
 };
 
 /**
@@ -97,7 +97,7 @@ class Card extends React.Component<Props, State> {
   };
 
   state = {
-    /* $FlowFixMe: somehow default props are not respected */
+    // @ts-ignore
     elevation: new Animated.Value(this.props.elevation),
   };
 
@@ -110,7 +110,7 @@ class Card extends React.Component<Props, State> {
 
   _handlePressOut = () => {
     Animated.timing(this.state.elevation, {
-      /* $FlowFixMe: somehow default props are not respected */
+      // @ts-ignore
       toValue: this.props.elevation,
       duration: 150,
     }).start();
@@ -131,13 +131,12 @@ class Card extends React.Component<Props, State> {
     const { elevation } = this.state;
     const { roundness } = theme;
     const total = React.Children.count(children);
-    const siblings = React.Children.map(
-      children,
-      child =>
-        React.isValidElement(child) && child.type
+    const siblings = React.Children.map(children, child =>
+      React.isValidElement(child) && child.type
+        ? 
           // @ts-ignore
-          ? child.type.displayName
-          : null
+          child.type.displayName
+        : null
     );
     return (
       <Surface
@@ -155,16 +154,14 @@ class Card extends React.Component<Props, State> {
           accessible={accessible}
         >
           <View style={styles.innerContainer}>
-            {React.Children.map(
-              children,
-              (child, index) =>
-                React.isValidElement(child)
-                  ? React.cloneElement(child, {
-                      index,
-                      total,
-                      siblings,
-                    })
-                  : child
+            {React.Children.map(children, (child, index) =>
+              React.isValidElement(child)
+                ? React.cloneElement(child, {
+                    index,
+                    total,
+                    siblings,
+                  })
+                : child
             )}
           </View>
         </TouchableWithoutFeedback>

@@ -16,9 +16,9 @@ export type RenderProps = {
   numberOfLines: number | null | undefined;
   value: string | null | undefined;
 };
-type TextInputTypesWithoutMode = $Diff<
+type TextInputTypesWithoutMode = Omit<
   TextInputProps,
-  { mode?: 'flat' | 'outlined' }
+  'mode'
 >;
 export type State = {
   labeled: Animated.Value;

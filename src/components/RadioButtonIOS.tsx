@@ -1,5 +1,3 @@
-/* @flow */
-
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import color from 'color';
@@ -12,27 +10,27 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Value of the radio button
    */
-  value: string,
+  value: string;
   /**
    * Status of radio button.
    */
-  status?: 'checked' | 'unchecked',
+  status?: 'checked' | 'unchecked';
   /**
    * Whether radio is disabled.
    */
-  disabled?: boolean,
+  disabled?: boolean;
   /**
    * Function to execute on press.
    */
-  onPress?: () => void,
+  onPress?: () => void;
   /**
    * Custom color for radio.
    */
-  color?: string,
+  color?: string;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 /**

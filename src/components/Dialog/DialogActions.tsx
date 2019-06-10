@@ -1,13 +1,12 @@
 import * as React from 'react';
-import { StyleSheet, StyleProp, View } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
 
 type Props = React.ComponentProps<typeof View> & {
   /**
    * Content of the `DialogActions`.
    */
-  children: React.ReactNode,
-  style?: StyleProp<ViewStyle>,
+  children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
 };
 
 /**
@@ -48,14 +47,12 @@ class DialogActions extends React.Component<Props> {
   render() {
     return (
       <View {...this.props} style={[styles.container, this.props.style]}>
-        {React.Children.map(
-          this.props.children,
-          child =>
-            React.isValidElement(child)
-              ? React.cloneElement(child, {
-                  compact: true,
-                })
-              : child
+        {React.Children.map(this.props.children, child =>
+          React.isValidElement(child)
+            ? React.cloneElement(child, {
+                compact: true,
+              })
+            : child
         )}
       </View>
     );

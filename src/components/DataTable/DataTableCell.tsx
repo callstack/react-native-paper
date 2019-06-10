@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, StyleProp } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple';
 import { $RemoveChildren } from '../../types';
@@ -9,16 +8,16 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Content of the `DataTableCell`.
    */
-  children: React.ReactNode,
+  children: React.ReactNode;
   /**
    * Align the text to the right. Generally monetary or number fields are aligned to right.
    */
-  numeric?: boolean,
+  numeric?: boolean;
   /**
    * Function to execute on press.
    */
-  onPress?: () => void,
-  style?: StyleProp<ViewStyle>,
+  onPress?: () => void;
+  style?: StyleProp<ViewStyle>;
 };
 
 class DataTableCell extends React.Component<Props> {

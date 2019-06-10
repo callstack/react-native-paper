@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { View, Platform, StyleSheet, StyleProp } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { View, ViewStyle, Platform, StyleSheet, StyleProp } from 'react-native';
 import color from 'color';
 
 import AppbarContent from './AppbarContent';
@@ -16,16 +15,16 @@ type Props = Partial<React.ComponentProps<typeof View>> & {
   /**
    * Whether the background color is a dark color. A dark appbar will render light text and vice-versa.
    */
-  dark?: boolean,
+  dark?: boolean;
   /**
    * Content of the `Appbar`.
    */
-  children: React.ReactNode,
+  children: React.ReactNode;
   /**
    * @optional
    */
-  theme: Theme,
-  style?: StyleProp<ViewStyle>,
+  theme: Theme;
+  style?: StyleProp<ViewStyle>;
 };
 
 export const DEFAULT_APPBAR_HEIGHT = 56;
@@ -85,7 +84,7 @@ class Appbar extends React.Component<Props> {
     const { backgroundColor = colors.primary, ...restStyle } =
       StyleSheet.flatten(style) || {};
 
-    let isDark;
+    let isDark: boolean;
 
     if (typeof dark === 'boolean') {
       isDark = dark;
@@ -136,13 +135,13 @@ class Appbar extends React.Component<Props> {
               return child;
             }
 
-            const props: { color?: string, style?: StyleProp<ViewStyle> } = {
+            const props: { color?: string; style?: StyleProp<ViewStyle> } = {
               color:
                 typeof child.props.color !== 'undefined'
                   ? child.props.color
                   : isDark
-                    ? white
-                    : black,
+                  ? white
+                  : black,
             };
 
             if (child.type === AppbarContent) {

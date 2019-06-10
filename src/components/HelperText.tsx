@@ -1,43 +1,42 @@
-
-/* @flow */
-
 import * as React from 'react';
 import color from 'color';
-import { Animated, StyleSheet, StyleProp } from 'react-native';
-import { TextStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { Animated, StyleSheet, StyleProp, TextStyle } from 'react-native';
 import Text from './Typography/Text';
 import { withTheme } from '../core/theming';
 import { Theme } from '../types';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
-type Props = Omit<Omit<React.ComponentProps<typeof Text>, 'padding'>, 'type'> & {
+type Props = Omit<
+  Omit<React.ComponentProps<typeof Text>, 'padding'>,
+  'type'
+> & {
   /**
    * Type of the helper text.
    */
-  type: 'error' | 'info',
+  type: 'error' | 'info';
   /**
    * Whether to display the helper text.
    */
-  visible?: boolean,
+  visible?: boolean;
   /**
    * Whether to apply padding to the helper text.
    */
-  padding?: 'none' | 'normal',
+  padding?: 'none' | 'normal';
   /**
    * Text content of the HelperText.
    */
-  children: React.ReactNode,
-  style?: StyleProp<TextStyle>,
+  children: React.ReactNode;
+  style?: StyleProp<TextStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 type State = {
-  shown: Animated.Value,
-  textHeight: number,
+  shown: Animated.Value;
+  textHeight: number;
 };
 
 /**
@@ -90,7 +89,7 @@ class HelperText extends React.PureComponent<Props, State> {
     textHeight: 0,
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: Props, prevState: State) {
     if (
       prevProps.visible !== this.props.visible ||
       prevState.textHeight !== this.state.textHeight

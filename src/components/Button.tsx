@@ -1,16 +1,15 @@
 import * as React from 'react';
-import { Animated, View, StyleSheet, StyleProp } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { Animated, View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 import color from 'color';
 
 import ActivityIndicator from './ActivityIndicator';
-import Icon from './Icon';
+import Icon, { IconSource } from './Icon';
 import Surface from './Surface';
 import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
-import { IconSource } from './Icon';
+
 import { Theme } from '../types';
 
 type Props = React.ComponentProps<typeof Surface> & {
@@ -20,61 +19,61 @@ type Props = React.ComponentProps<typeof Surface> & {
    * - `outlined` - button with an outline (medium emphasis)
    * - `contained` - button with a background color and elevation shadow (high emphasis)
    */
-  mode?: 'text' | 'outlined' | 'contained',
+  mode?: 'text' | 'outlined' | 'contained';
   /**
    * Whether the color is a dark color. A dark button will render light text and vice-versa. Only applicable for `contained` mode.
    */
-  dark?: boolean,
+  dark?: boolean;
   /**
    * Use a compact look, useful for `text` buttons in a row.
    */
-  compact?: boolean,
+  compact?: boolean;
   /**
    * Custom text color for flat button, or background color for contained button.
    */
-  color?: string,
+  color?: string;
   /**
    * Whether to show a loading indicator.
    */
-  loading?: boolean,
+  loading?: boolean;
   /**
    * Icon to display for the `Button`.
    */
-  icon?: IconSource,
+  icon?: IconSource;
   /**
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
-  disabled?: boolean,
+  disabled?: boolean;
   /**
    * Label text of the button.
    */
-  children: React.ReactNode,
+  children: React.ReactNode;
   /**
    * Make the label text uppercased. Note that this won't work if you pass React elements as children.
    */
-  uppercase: boolean,
+  uppercase: boolean;
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
-  accessibilityLabel?: string,
+  accessibilityLabel?: string;
   /**
    * Function to execute on press.
    */
-  onPress?: () => void,
+  onPress?: () => void;
   /**
    * Style of button's inner content.
    * Use this prop to apply custom height and width.
    */
-  contentStyle?: StyleProp<ViewStyle>,
-  style?: StyleProp<ViewStyle>,
+  contentStyle?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 type State = {
-  elevation: Animated.Value,
+  elevation: Animated.Value;
 };
 
 /**
@@ -273,12 +272,10 @@ class Button extends React.Component<Props, State> {
                 font,
               ]}
             >
-              {React.Children.map(
-                children,
-                child =>
-                  typeof child === 'string' && uppercase
-                    ? child.toUpperCase()
-                    : child
+              {React.Children.map(children, child =>
+                typeof child === 'string' && uppercase
+                  ? child.toUpperCase()
+                  : child
               )}
             </Text>
           </View>

@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, StyleProp } from 'react-native';
-import { TextStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { StyleSheet, StyleProp, TextStyle } from 'react-native';
 import Title from '../Typography/Title';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
@@ -9,12 +8,12 @@ type Props = React.ComponentProps<typeof Title> & {
   /**
    * Title text for the `DialogTitle`.
    */
-  children: React.ReactNode,
-  style?: StyleProp<TextStyle>,
+  children: React.ReactNode;
+  style?: StyleProp<TextStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 /**

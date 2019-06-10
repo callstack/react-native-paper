@@ -1,36 +1,36 @@
 import color from 'color';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import Icon from '../Icon';
+import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import { black, white } from '../../styles/colors';
 import { Theme } from '../../types';
-import { IconSource } from '../Icon';
+
 
 type Props = {
   /**
    * Title text for the `MenuItem`.
    */
-  title: React.ReactNode,
+  title: React.ReactNode;
   /**
    * Icon to display for the `MenuItem`.
    */
-  icon?: IconSource,
+  icon?: IconSource;
   /**
    * Whether the 'item' is disabled. A disabled 'item' is greyed out and `onPress` is not called on touch.
    */
-  disabled?: boolean,
+  disabled?: boolean;
   /**
    * Function to execute on press.
    */
-  onPress?: () => void,
+  onPress?: () => void;
   /**
    * @optional
    */
-  theme: Theme,
-  style?: any,
+  theme: Theme;
+  style?: any;
 };
 
 /**

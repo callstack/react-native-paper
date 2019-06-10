@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import {
   View,
@@ -199,39 +198,37 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
 
             <InputLabel parentState={parentState} labelProps={labelProps} />
 
-            {render(
-              ({
-                ...rest,
-                ref: innerRef,
-                onChangeText,
-                placeholder: label
-                  ? parentState.placeholder
-                  : this.props.placeholder,
-                placeholderTextColor: placeholderColor,
-                editable: !disabled && editable,
-                selectionColor:
-                  typeof selectionColor === 'undefined'
-                    ? activeColor
-                    : selectionColor,
-                onFocus,
-                onBlur,
-                underlineColorAndroid: 'transparent',
-                multiline,
-                style: [
-                  styles.input,
-                  !multiline || (multiline && height)
-                    ? { height: inputHeight }
-                    : {},
-                  paddingOut,
-                  {
-                    fontSize,
-                    color: inputTextColor,
-                    ...font,
-                    textAlignVertical: multiline && height ? 'top' : 'center',
-                  },
-                ],
-              } as RenderProps)
-            )}
+            {render({
+              ...rest,
+              ref: innerRef,
+              onChangeText,
+              placeholder: label
+                ? parentState.placeholder
+                : this.props.placeholder,
+              placeholderTextColor: placeholderColor,
+              editable: !disabled && editable,
+              selectionColor:
+                typeof selectionColor === 'undefined'
+                  ? activeColor
+                  : selectionColor,
+              onFocus,
+              onBlur,
+              underlineColorAndroid: 'transparent',
+              multiline,
+              style: [
+                styles.input,
+                !multiline || (multiline && height)
+                  ? { height: inputHeight }
+                  : {},
+                paddingOut,
+                {
+                  fontSize,
+                  color: inputTextColor,
+                  ...font,
+                  textAlignVertical: multiline && height ? 'top' : 'center',
+                },
+              ],
+            } as RenderProps)}
           </View>
         </View>
       </View>

@@ -1,10 +1,13 @@
 import color from 'color';
 import * as React from 'react';
-import { View, StyleSheet, StyleProp } from 'react-native';
 import {
-  ViewStyle,
+  StyleProp,
+  StyleSheet,
   TextStyle,
-} from 'react-native/Libraries/StyleSheet/StyleSheet';
+  View,
+  ViewStyle,
+} from 'react-native';
+
 import TouchableRipple from '../TouchableRipple';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
@@ -14,47 +17,47 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Title text for the list item.
    */
-  title: React.ReactNode,
+  title: React.ReactNode;
   /**
    * Description text for the list item.
    */
-  description?: React.ReactNode,
+  description?: React.ReactNode;
   /**
    * Callback which returns a React element to display on the left side.
    */
-  left?: (props: { color: string }) => React.ReactNode,
+  left?: (props: { color: string }) => React.ReactNode;
   /**
    * Callback which returns a React element to display on the right side.
    */
-  right?: (props: { color: string }) => React.ReactNode,
+  right?: (props: { color: string }) => React.ReactNode;
   /**
    * Function to execute on press.
    */
-  onPress?: () => void,
+  onPress?: () => void;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
   /**
    * Style that is passed to the wrapping TouchableRipple element.
    */
-  style?: StyleProp<ViewStyle>,
+  style?: StyleProp<ViewStyle>;
   /**
    * Style that is passed to Title element.
    */
-  titleStyle?: StyleProp<TextStyle>,
+  titleStyle?: StyleProp<TextStyle>;
   /**
    * Style that is passed to Description element.
    */
-  descriptionStyle?: StyleProp<TextStyle>,
+  descriptionStyle?: StyleProp<TextStyle>;
   /**
    * Ellipsize Mode for the Title
    */
-  titleEllipsizeMode?: 'head' | 'middle' | 'tail' | 'clip',
+  titleEllipsizeMode?: 'head' | 'middle' | 'tail' | 'clip';
   /**
    * Ellipsize Mode for the Description
    */
-  descriptionEllipsizeMode?: 'head' | 'middle' | 'tail' | 'clip',
+  descriptionEllipsizeMode?: 'head' | 'middle' | 'tail' | 'clip';
 };
 
 /**
@@ -121,7 +124,10 @@ class ListItem extends React.Component<Props> {
                 color: descriptionColor,
                 style: description
                   ? styles.iconMarginLeft
-                  : { ...styles.iconMarginLeft as Object, ...styles.marginVerticalNone as Object },
+                  : {
+                      ...(styles.iconMarginLeft as Object),
+                      ...(styles.marginVerticalNone as Object),
+                    },
               })
             : null}
           <View style={[styles.item, styles.content]} pointerEvents="none">
@@ -153,7 +159,10 @@ class ListItem extends React.Component<Props> {
                 color: descriptionColor,
                 style: description
                   ? styles.iconMarginRight
-                  : { ...styles.iconMarginRight as Object, ...styles.marginVerticalNone as Object },
+                  : {
+                      ...(styles.iconMarginRight as Object),
+                      ...(styles.marginVerticalNone as Object),
+                    },
               })
             : null}
         </View>

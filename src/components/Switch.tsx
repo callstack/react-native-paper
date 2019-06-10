@@ -2,8 +2,13 @@
 
 import * as React from 'react';
 import { grey400, grey800, grey50, white, black } from '../styles/colors';
-import { Switch as NativeSwitch, Platform, NativeModules, StyleProp } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import {
+  NativeModules,
+  Platform,
+  StyleProp,
+  Switch as NativeSwitch,
+  ViewStyle,
+} from 'react-native';
 import setColor from 'color';
 import { withTheme } from '../core/theming';
 import { Theme } from '../types';
@@ -16,24 +21,24 @@ type Props = React.ComponentProps<typeof NativeSwitch> & {
   /**
    * Disable toggling the switch.
    */
-  disabled?: boolean,
+  disabled?: boolean;
   /**
    * Value of the switch, true means 'on', false means 'off'.
    */
-  value?: boolean,
+  value?: boolean;
   /**
    * Custom color for switch.
    */
-  color?: string,
+  color?: string;
   /**
    * Callback called with the new value when it changes.
    */
-  onValueChange?: Function,
-  style?: StyleProp<ViewStyle>,
+  onValueChange?: Function;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 /**
@@ -99,44 +104,44 @@ class Switch extends React.Component<Props> {
       Platform.OS === 'ios'
         ? checkedColor
         : disabled
-          ? theme.dark
-            ? setColor(white)
-                .alpha(0.1)
-                .rgb()
-                .string()
-            : setColor(black)
-                .alpha(0.12)
-                .rgb()
-                .string()
-          : setColor(checkedColor)
-              .alpha(0.5)
+        ? theme.dark
+          ? setColor(white)
+              .alpha(0.1)
               .rgb()
-              .string();
+              .string()
+          : setColor(black)
+              .alpha(0.12)
+              .rgb()
+              .string()
+        : setColor(checkedColor)
+            .alpha(0.5)
+            .rgb()
+            .string();
 
     const thumbTintColor =
       Platform.OS === 'ios'
         ? undefined
         : disabled
-          ? theme.dark
-            ? grey800
-            : grey400
-          : value
-            ? checkedColor
-            : theme.dark
-              ? grey400
-              : grey50;
+        ? theme.dark
+          ? grey800
+          : grey400
+        : value
+        ? checkedColor
+        : theme.dark
+        ? grey400
+        : grey50;
 
     const props =
       version && version.major === 0 && version.minor <= 56
-        ? ({
+        ? {
             onTintColor,
             thumbTintColor,
-          })
+          }
         : {
             thumbColor: thumbTintColor,
             trackColor: {
-							true: onTintColor,
-							false: '',
+              true: onTintColor,
+              false: '',
             },
           };
 

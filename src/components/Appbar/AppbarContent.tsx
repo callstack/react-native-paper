@@ -1,16 +1,14 @@
-
 import * as React from 'react';
 import {
-  View,
-  StyleSheet,
   Platform,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
   TouchableWithoutFeedback,
+  View,
+  ViewStyle,
 } from 'react-native';
 import color from 'color';
-import {
-  TextStyleProp,
-  ViewStyleProp,
-} from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 import Text from '../Typography/Text';
 
@@ -23,32 +21,32 @@ type Props = $RemoveChildren<typeof View> & {
   /**
    * Custom color for the text.
    */
-  color?: string,
+  color?: string;
   /**
    * Text for the title.
    */
-  title: React.ReactNode,
+  title: React.ReactNode;
   /**
    * Style for the title.
    */
-  titleStyle?: TextStyleProp,
+  titleStyle?: StyleProp<TextStyle>;
   /**
    * Text for the subtitle.
    */
-  subtitle?: React.ReactNode,
+  subtitle?: React.ReactNode;
   /**
    * Style for the subtitle.
    */
-  subtitleStyle?: TextStyleProp,
+  subtitleStyle?: StyleProp<TextStyle>;
   /**
    * Function to execute on press.
    */
-  onPress?: () => void,
-  style?: ViewStyleProp,
+  onPress?: () => void;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 /**
@@ -91,7 +89,7 @@ class AppbarContent extends React.Component<Props> {
             numberOfLines={1}
             accessibilityTraits="header"
             accessibilityRole={
-              Platform.OS === 'web' ? 'heading' as 'header' : 'header'
+              Platform.OS === 'web' ? ('heading' as 'header') : 'header'
             }
           >
             {title}

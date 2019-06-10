@@ -1,7 +1,6 @@
 import color from 'color';
 import * as React from 'react';
-import { Animated, View, StyleSheet, StyleProp } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { Animated, View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 import ActivityIndicator from '../ActivityIndicator';
 import FABGroup from './FABGroup';
 import Surface from '../Surface';
@@ -17,49 +16,49 @@ type Props = $RemoveChildren<typeof Surface> & {
   /**
    * Icon to display for the `FAB`.
    */
-  icon: IconSource,
+  icon: IconSource;
   /**
    * Optional label for extended `FAB`.
    */
-  label?: string,
+  label?: string;
   /**
    * Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.
    * Uses `label` by default if specified.
    */
-  accessibilityLabel?: string,
+  accessibilityLabel?: string;
   /**
    *  Whether FAB is mini-sized, used to create visual continuity with other elements. This has no effect if `label` is specified.
    */
-  small?: boolean,
+  small?: boolean;
   /**
    * Custom color for the `FAB`.
    */
-  color?: string,
+  color?: string;
   /**
    * Whether `FAB` is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
-  disabled?: boolean,
+  disabled?: boolean;
   /**
    * Whether `FAB` is currently visible.
    */
-  visible: boolean,
+  visible?: boolean;
   /**
    * Whether to show a loading indicator.
    */
-  loading?: boolean,
+  loading?: boolean;
   /**
    * Function to execute on press.
    */
-  onPress?: () => void,
-  style?: StyleProp<ViewStyle>,
+  onPress?: () => void;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 type State = {
-  visibility: Animated.Value,
+  visibility: Animated.Value;
 };
 
 /**
@@ -109,7 +108,7 @@ class FAB extends React.Component<Props, State> {
     visibility: new Animated.Value(this.props.visible ? 1 : 0),
   };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props) {
     if (this.props.visible === prevProps.visible) {
       return;
     }

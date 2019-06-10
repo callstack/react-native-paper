@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, Image, StyleProp } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { StyleSheet, View, ViewStyle, Image, StyleProp } from 'react-native';
 import { withTheme } from '../../core/theming';
 import { grey200 } from '../../styles/colors';
 import { Theme } from '../../types';
@@ -9,16 +8,16 @@ type Props = React.ComponentProps<typeof Image> & {
   /**
    * @internal
    */
-  index?: number,
+  index?: number;
   /**
    * @internal
    */
-  total?: number,
-  style?: StyleProp<ViewStyle>,
+  total?: number;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 /**
@@ -82,8 +81,8 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    height: null,
-    width: null,
+    height: undefined,
+    width: undefined,
     padding: 16,
     justifyContent: 'flex-end',
     resizeMode: 'cover',

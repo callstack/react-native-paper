@@ -1,8 +1,12 @@
-/* @flow */
-
 import * as React from 'react';
-import { Animated, Platform, StyleSheet, View, StyleProp } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import {
+  Animated,
+  Platform,
+  StyleSheet,
+  View,
+  ViewStyle,
+  StyleProp,
+} from 'react-native';
 import setColor from 'color';
 import { withTheme } from '../core/theming';
 import { Theme } from '../types';
@@ -11,30 +15,30 @@ type Props = {
   /**
    * Progress value (between 0 and 1).
    */
-  progress?: number,
+  progress?: number;
   /**
    * Color of the progress bar. The background color will be calculated based on this but you can change it by passing `backgroundColor` to `style` prop.
    */
-  color?: string,
+  color?: string;
   /**
    * If the progress bar will show indeterminate progress.
    */
-  indeterminate?: boolean,
+  indeterminate?: boolean;
   /**
    * Whether to show the ProgressBar (true, the default) or hide it (false).
    */
-  visible?: boolean,
-  style?: StyleProp<ViewStyle>,
+  visible?: boolean;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 type State = {
-  width: number,
-  fade: Animated.Value,
-  timer: Animated.Value,
+  width: number;
+  fade: Animated.Value;
+  timer: Animated.Value;
 };
 
 const INDETERMINATE_DURATION = 2000;

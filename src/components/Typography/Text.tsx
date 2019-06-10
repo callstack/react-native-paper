@@ -1,20 +1,23 @@
-
 import * as React from 'react';
-import { Text as NativeText, I18nManager, StyleProp } from 'react-native';
-import { TextStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import {
+  Text as NativeText,
+  TextStyle,
+  I18nManager,
+  StyleProp,
+} from 'react-native';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 
 type Props = React.ComponentProps<typeof NativeText> & {
-  style?: StyleProp<TextStyle>,
+  style?: StyleProp<TextStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 /**
- * Text component which follows styles from the theme. 
+ * Text component which follows styles from the theme.
  *
  * @extends Text props https://facebook.github.io/react-native/docs/text.html#props
  */

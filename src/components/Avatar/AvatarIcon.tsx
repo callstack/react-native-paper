@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet, StyleProp } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 import color from 'color';
 import Icon from '../Icon';
 import { withTheme } from '../../core/theming';

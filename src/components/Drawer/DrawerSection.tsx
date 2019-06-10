@@ -1,27 +1,25 @@
-
 import color from 'color';
 import * as React from 'react';
-import { View, StyleSheet, StyleProp } from 'react-native';
+import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 import Text from '../Typography/Text';
 import Divider from '../Divider';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 type Props = React.ComponentProps<typeof View> & {
   /**
    * Title to show as the header for the section.
    */
-  title?: string,
+  title?: string;
   /**
    * Content of the `Drawer.Section`.
    */
-  children: React.ReactNode,
-  style?: StyleProp<ViewStyle>,
+  children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 /**

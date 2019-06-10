@@ -1,24 +1,21 @@
-/* @flow */
-
 import * as React from 'react';
 import {
   View,
-	StyleSheet,
-	StyleProp,
+  ViewStyle,
+  StyleSheet,
+  StyleProp,
   Animated,
   TouchableWithoutFeedback,
   Platform,
 } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import color from 'color';
-import Icon from './Icon';
+import Icon, { IconSource } from './Icon';
 import Surface from './Surface';
 import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple';
 import { withTheme } from '../core/theming';
 import { black, white } from '../styles/colors';
 import { Theme } from '../types';
-import { IconSource } from './Icon';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
@@ -26,56 +23,56 @@ type Props = React.ComponentProps<typeof Surface> & {
    * - `flat` - flat chip without outline.
    * - `outlined` - chip with an outline.
    */
-  mode?: 'flat' | 'outlined',
+  mode?: 'flat' | 'outlined';
   /**
    * Text content of the `Chip`.
    */
-  children: React.ReactNode,
+  children: React.ReactNode;
   /**
    * Icon to display for the `Chip`. Both icon and avatar cannot be specified.
    */
-  icon?: IconSource,
+  icon?: IconSource;
   /**
    * Avatar to display for the `Chip`. Both icon and avatar cannot be specified.
    */
-  avatar?: React.ReactNode,
+  avatar?: React.ReactNode;
   /**
    * Whether chip is selected.
    */
-  selected?: boolean,
+  selected?: boolean;
   /**
    * Whether to style the chip color as selected.
    */
-  selectedColor?: string,
+  selectedColor?: string;
   /**
    * Whether the chip is disabled. A disabled chip is greyed out and `onPress` is not called on touch.
    */
-  disabled?: boolean,
+  disabled?: boolean;
   /**
    * Accessibility label for the chip. This is read by the screen reader when the user taps the chip.
    */
-  accessibilityLabel?: string,
+  accessibilityLabel?: string;
   /**
    * Function to execute on press.
    */
-  onPress?: () => void,
+  onPress?: () => void;
   /**
    * Function to execute on close button press. The close button appears only when this prop is specified.
    */
-  onClose?: () => void,
-  style?: StyleProp<ViewStyle>,
+  onClose?: () => void;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
   /**
    * Pass down testID from chip props to touchable for Detox tests.
    */
-  testID?: string,
+  testID?: string;
 };
 
 type State = {
-  elevation: Animated.Value,
+  elevation: Animated.Value;
 };
 
 /**
@@ -152,8 +149,8 @@ class Chip extends React.Component<Props, State> {
       backgroundColor = mode === 'outlined'
         ? colors.surface
         : dark
-          ? '#383838'
-          : '#ebebeb',
+        ? '#383838'
+        : '#ebebeb',
       borderRadius = 16,
     } = StyleSheet.flatten(style) || {};
 

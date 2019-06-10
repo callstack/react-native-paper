@@ -1,7 +1,6 @@
 import color from 'color';
 import * as React from 'react';
-import { View, StyleSheet, StyleProp } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 import TouchableRipple from '../TouchableRipple';
 import Icon from '../Icon';
 import Text from '../Typography/Text';
@@ -12,38 +11,38 @@ type Props = {
   /**
    * Title text for the list accordion.
    */
-  title: React.ReactNode,
+  title: React.ReactNode;
   /**
    * Description text for the list accordion.
    */
-  description?: React.ReactNode,
+  description?: React.ReactNode;
   /**
    * Callback which returns a React element to display on the left side.
    */
-  left?: (props: { color: string }) => React.ReactNode,
+  left?: (props: { color: string }) => React.ReactNode;
   /**
    * Whether the accordion is expanded
    * If this prop is provided, the accordion will behave as a "controlled component".
    * You'll need to update this prop when you want to toggle the component or on `onPress`.
    */
-  expanded?: boolean,
+  expanded?: boolean;
   /**
    * Function to execute on press.
    */
-  onPress?: () => void,
+  onPress?: () => void;
   /**
    * Content of the section.
    */
-  children: React.ReactNode,
+  children: React.ReactNode;
   /**
    * @optional
    */
-  theme: Theme,
-  style?: StyleProp<ViewStyle>,
+  theme: Theme;
+  style?: StyleProp<ViewStyle>;
 };
 
 type State = {
-  expanded: boolean,
+  expanded: boolean;
 };
 
 /**
@@ -174,7 +173,7 @@ class ListAccordion extends React.Component<Props, State> {
                 </Text>
               )}
             </View>
-            <View style={[styles.item, description && styles.multiline]}>
+            <View style={[styles.item, description ? styles.multiline : undefined ]}>
               <Icon
                 source={expanded ? 'keyboard-arrow-up' : 'keyboard-arrow-down'}
                 color={titleColor}

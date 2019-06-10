@@ -1,9 +1,12 @@
 import * as React from 'react';
-import { StyleSheet, View, StyleProp } from 'react-native';
 import {
+  StyleProp,
+  StyleSheet,
   TextStyle,
+  View,
   ViewStyle,
-} from 'react-native/Libraries/StyleSheet/StyleSheet';
+} from 'react-native';
+
 import { withTheme } from '../../core/theming';
 import Caption from './../Typography/Caption';
 import Title from './../Typography/Title';

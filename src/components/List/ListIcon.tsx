@@ -1,18 +1,17 @@
 import * as React from 'react';
-import { View, StyleSheet, StyleProp } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 import Icon, { IconSource } from '../Icon';
 
 type Props = {
   /**
    * Icon to show.
    */
-  icon: IconSource,
+  icon: IconSource;
   /**
    * Color for the icon.
    */
-  color: string,
-  style?: StyleProp<ViewStyle>,
+  color: string;
+  style?: StyleProp<ViewStyle>;
 };
 
 /**

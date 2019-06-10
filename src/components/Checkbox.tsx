@@ -1,5 +1,3 @@
-/* @flow */
-
 import * as React from 'react';
 import { Platform } from 'react-native';
 import CheckboxAndroid from './CheckboxAndroid';
@@ -11,27 +9,27 @@ type Props = {
   /**
    * Status of checkbox.
    */
-  status: 'checked' | 'unchecked' | 'indeterminate',
+  status: 'checked' | 'unchecked' | 'indeterminate';
   /**
    * Whether checkbox is disabled.
    */
-  disabled?: boolean,
+  disabled?: boolean;
   /**
    * Function to execute on press.
    */
-  onPress?: () => void,
+  onPress?: () => void;
   /**
    * Custom color for unchecked checkbox.
    */
-  uncheckedColor?: string,
+  uncheckedColor?: string;
   /**
    * Custom color for checkbox.
    */
-  color?: string,
+  color?: string;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 /**

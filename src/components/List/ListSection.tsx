@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet, StyleProp } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 import ListSubheader from './ListSubheader';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
@@ -9,16 +8,16 @@ type Props = React.ComponentProps<typeof View> & {
   /**
    * Title text for the section.
    */
-  title?: string,
+  title?: string;
   /**
    * Content of the section.
    */
-  children: React.ReactNode,
+  children: React.ReactNode;
   /**
    * @optional
    */
-  theme: Theme,
-  style?: StyleProp<ViewStyle>,
+  theme: Theme;
+  style?: StyleProp<ViewStyle>;
 };
 
 /**

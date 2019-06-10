@@ -1,51 +1,48 @@
-/* @flow */
-
 import * as React from 'react';
-import { View, StyleSheet, StyleProp } from 'react-native';
+import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 import color from 'color';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 import TouchableRipple from './TouchableRipple';
-import Icon from './Icon';
+import Icon, { IconSource } from './Icon';
 import CrossFadeIcon from './CrossFadeIcon';
 import { withTheme } from '../core/theming';
-import { IconSource } from './Icon';
+
 import { Theme, $RemoveChildren } from '../types';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Icon to display.
    */
-  icon: IconSource,
+  icon: IconSource;
   /**
    * Color of the icon.
    */
-  color?: string,
+  color?: string;
   /**
    * Size of the icon.
    */
-  size?: number,
+  size?: number;
   /**
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
-  disabled?: boolean,
+  disabled?: boolean;
   /**
    * Whether an icon change is animated.
    */
-  animated?: boolean,
+  animated?: boolean;
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
-  accessibilityLabel?: string,
+  accessibilityLabel?: string;
   /**
    * Function to execute on press.
    */
-  onPress?: () => void,
-  style?: StyleProp<ViewStyle>,
+  onPress?: () => void;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 /**

@@ -1,25 +1,24 @@
 import * as React from 'react';
-import { StyleSheet, StyleProp, View } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
 
 type Props = React.ComponentProps<typeof View> & {
   /**
    * Items inside the `Card.Content`.
    */
-  children: React.ReactNode,
+  children: React.ReactNode;
   /**
    * @internal
    */
-  index?: number,
+  index?: number;
   /**
    * @internal
    */
-  total?: number,
+  total?: number;
   /**
    * @internal
    */
-  siblings?: Array<string>,
-  style?: StyleProp<ViewStyle>,
+  siblings?: Array<string>;
+  style?: StyleProp<ViewStyle>;
 };
 
 /**

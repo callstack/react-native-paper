@@ -3,9 +3,9 @@ import { View, StyleSheet } from 'react-native';
 
 type State = {
   portals: Array<{
-    key: number,
-    children: React.ReactNode,
-  }>,
+    key: number;
+    children: React.ReactNode;
+  }>;
 };
 
 /**

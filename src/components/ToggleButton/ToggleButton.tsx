@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, StyleProp } from 'react-native';
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import { withTheme } from '../../core/theming';
 import color from 'color';
 import IconButton from '../IconButton';
@@ -15,40 +14,40 @@ type Props = {
   /**
    * Icon to display for the `ToggleButton`.
    */
-  icon: IconSource,
+  icon: IconSource;
   /**
    * Size of the icon.
    */
-  size?: number,
+  size?: number;
   /**
    * Custom text color for button.
    */
-  color?: string,
+  color?: string;
   /**
    * Whether the button is disabled.
    */
-  disabled?: boolean,
+  disabled?: boolean;
   /**
    * Accessibility label for the `ToggleButton`. This is read by the screen reader when the user taps the button.
    */
-  accessibilityLabel?: string,
+  accessibilityLabel?: string;
   /**
    * Function to execute on press.
    */
-  onPress?: (value: string | null) => void,
+  onPress?: (value: string | null) => void;
   /**
    * Value of button.
    */
-  value?: string,
+  value?: string;
   /**
    * Status of button.
    */
-  status?: 'checked' | 'unchecked',
-  style?: StyleProp<ViewStyle>,
+  status?: 'checked' | 'unchecked';
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 /**
@@ -107,7 +106,7 @@ class ToggleButton extends React.Component<Props> {
 
     return (
       <ToggleButtonGroupContext.Consumer>
-        {(context: { value: string, onValueChange: Function } | null) => {
+        {(context: { value: string; onValueChange: Function } | null) => {
           let backgroundColor;
 
           const checked: boolean | null =
@@ -125,7 +124,7 @@ class ToggleButton extends React.Component<Props> {
             <IconButton
               borderless={false}
               icon={icon}
-              onPress={e => {
+              onPress={(e) => {
                 if (onPress) {
                   onPress(e);
                 }
