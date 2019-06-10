@@ -1,9 +1,7 @@
-/* @flow */
-
 import * as React from 'react';
 import renderer from 'react-test-renderer';
 import { Text } from 'react-native';
-import Snackbar from '../Snackbar';
+import Snackbar from '../Snackbar.tsx';
 
 // Make sure any animation finishes before checking the snapshot results
 jest.mock('Animated', () => {

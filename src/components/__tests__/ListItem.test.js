@@ -1,10 +1,8 @@
-/* @flow */
-
 import * as React from 'react';
 import renderer from 'react-test-renderer';
 import { Text } from 'react-native';
-import ListItem from '../List/ListItem';
-import ListIcon from '../List/ListIcon';
+import ListItem from '../List/ListItem.tsx';
+import ListIcon from '../List/ListIcon.tsx';
 
 it('renders list item with title and description', () => {
   const tree = renderer
