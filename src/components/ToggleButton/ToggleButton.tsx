@@ -124,7 +124,7 @@ class ToggleButton extends React.Component<Props> {
             <IconButton
               borderless={false}
               icon={icon}
-              onPress={(e) => {
+              onPress={(e: string | null) => {
                 if (onPress) {
                   onPress(e);
                 }

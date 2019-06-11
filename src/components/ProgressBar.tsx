@@ -6,6 +6,7 @@ import {
   View,
   ViewStyle,
   StyleProp,
+  LayoutChangeEvent,
 } from 'react-native';
 import setColor from 'color';
 import { withTheme } from '../core/theming';
@@ -75,7 +76,7 @@ class ProgressBar extends React.Component<Props, State> {
     fade: new Animated.Value(0),
   };
 
-  indeterminateAnimation = null;
+  indeterminateAnimation: Animated.CompositeAnimation | null = null;
 
   componentDidUpdate() {
     const { visible } = this.props;
@@ -87,7 +88,7 @@ class ProgressBar extends React.Component<Props, State> {
     }
   }
 
-  _onLayout = event => {
+  _onLayout = (event: LayoutChangeEvent) => {
     const { visible } = this.props;
     const { width: previousWidth } = this.state;
 
@@ -126,13 +127,11 @@ class ProgressBar extends React.Component<Props, State> {
       // Reset timer to the beginning
       timer.setValue(0);
 
-      // $FlowFixMe
       Animated.loop(this.indeterminateAnimation).start();
     } else {
       Animated.timing(timer, {
         duration: 200,
-        // $FlowFixMe
-        toValue: progress,
+        toValue: progress ? progress : 0,
         useNativeDriver: true,
         isInteraction: false,
       }).start();

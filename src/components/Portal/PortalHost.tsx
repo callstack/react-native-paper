@@ -18,8 +18,8 @@ export type PortalMethods = {
   unmount: (key: number) => void;
 };
 
-export const PortalContext: Context<PortalMethods | null> = createReactContext(
-  null
+export const PortalContext: Context<PortalMethods> = createReactContext(
+  null as any
 );
 
 /**
@@ -55,23 +55,24 @@ export default class PortalHost extends React.Component<Props> {
 
     while (queue.length && manager) {
       const action = queue.pop();
-
-      // eslint-disable-next-line default-case
-      switch (action.type) {
-        case 'mount':
-          manager.mount(action.key, action.children);
-          break;
-        case 'update':
-          manager.update(action.key, action.children);
-          break;
-        case 'unmount':
-          manager.unmount(action.key);
-          break;
+      if (action) {
+        // eslint-disable-next-line default-case
+        switch (action.type) {
+          case 'mount':
+            manager.mount(action.key, action.children);
+            break;
+          case 'update':
+            manager.update(action.key, action.children);
+            break;
+          case 'unmount':
+            manager.unmount(action.key);
+            break;
+        }
       }
     }
   }
 
-  _setManager = (manager?: Object) => {
+  _setManager = (manager: PortalManager | undefined | null) => {
     this._manager = manager;
   };
 
@@ -97,10 +98,10 @@ export default class PortalHost extends React.Component<Props> {
       );
 
       if (index > -1) {
-        /* $FlowFixMe */
+        // @ts-ignore
         this._queue[index] = op;
       } else {
-        this._queue.push(op);
+        this._queue.push(op as Operation);
       }
     }
   };
@@ -115,7 +116,7 @@ export default class PortalHost extends React.Component<Props> {
 
   _nextKey = 0;
   _queue: Operation[] = [];
-  _manager?: PortalManager;
+  _manager: PortalManager | null | undefined;
 
   render() {
     return (

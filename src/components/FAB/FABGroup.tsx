@@ -261,7 +261,7 @@ class FABGroup extends React.Component<Props, State> {
                         transform: [{ scale: scales[i] }],
                         opacity: opacities[i],
                       },
-                    ]}
+                    ] as StyleProp<ViewStyle>}
                     onPress={() => {
                       it.onPress();
                       this._close();
@@ -289,7 +289,7 @@ class FABGroup extends React.Component<Props, State> {
                       backgroundColor: theme.colors.surface,
                     },
                     it.style,
-                  ]}
+                  ] as StyleProp<ViewStyle>}
                   onPress={() => {
                     it.onPress();
                     this._close();

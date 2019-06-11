@@ -4,7 +4,9 @@ import * as React from 'react';
 import { Text, StyleSheet } from 'react-native';
 import StyledText from './StyledText';
 
-type Props = React.ComponentProps<typeof Text>;
+type Props = React.ComponentProps<typeof Text> & {
+  children: React.ReactNode;
+};
 
 /**
  * Typography component for showing a title.

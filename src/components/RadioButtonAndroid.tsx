@@ -21,7 +21,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (param?: any) => void;
   /**
    * Custom color for unchecked radio.
    */
@@ -66,7 +66,7 @@ class RadioButtonAndroid extends React.Component<Props, State> {
     radioAnim: new Animated.Value(1),
   };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props) {
     if (prevProps.status === this.props.status) {
       return;
     }

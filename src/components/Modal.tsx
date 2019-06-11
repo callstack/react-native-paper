@@ -18,32 +18,32 @@ type Props = {
   /**
    * Determines whether clicking outside the modal dismiss it.
    */
-  dismissable?: boolean,
+  dismissable?: boolean;
   /**
    * Callback that is called when the user dismisses the modal.
    */
-  onDismiss?: () => void,
+  onDismiss?: () => void;
   /**
    * Determines Whether the modal is visible.
    */
-  visible: boolean,
+  visible: boolean;
   /**
    * Content of the `Modal`.
    */
-  children: React.ReactNode,
+  children: React.ReactNode;
   /**
    * Style for the content of the modal
    */
-  contentContainerStyle?: StyleProp<ViewStyle>,
+  contentContainerStyle?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 type State = {
-  opacity: Animated.Value,
-  rendered: boolean,
+  opacity: Animated.Value;
+  rendered: boolean;
 };
 
 /**
@@ -199,7 +199,7 @@ class Modal extends React.Component<Props, State> {
               { opacity: this.state.opacity },
               styles.content,
               contentContainerStyle,
-            ]}
+            ] as StyleProp<ViewStyle>}
           >
             {children}
           </Surface>
@@ -209,6 +209,7 @@ class Modal extends React.Component<Props, State> {
   }
 }
 
+// @ts-ignore
 polyfill(Modal);
 
 export default withTheme(Modal);

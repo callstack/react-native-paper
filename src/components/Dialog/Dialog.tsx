@@ -79,7 +79,7 @@ type Props = {
  * }
  * ```
  */
-class Dialog extends React.Component<Props, void> {
+class Dialog extends React.Component<Props> {
   // @component ./DialogContent.js
   static Content = DialogContent;
   // @component ./DialogActions.js

@@ -5,7 +5,8 @@ import { Text, TextStyle, StyleSheet, StyleProp } from 'react-native';
 import StyledText from './StyledText';
 
 type Props = React.ComponentProps<typeof Text> & {
-  style?: StyleProp<TextStyle>,
+  style?: StyleProp<TextStyle>;
+  children: React.ReactNode;
 };
 
 /**

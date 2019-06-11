@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { Animated, TextInput as NativeTextInput, Platform } from 'react-native';
+import { Animated, TextInput as NativeTextInput, Platform, LayoutChangeEvent } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
 
 import TextInputOutlined from './TextInputOutlined';
@@ -195,7 +195,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     },
   };
 
-  ref: NativeTextInput | null;
+  ref: NativeTextInput | undefined | null;
 
   componentDidUpdate(prevProps: TextInputProps, prevState: State) {
     if (
@@ -239,11 +239,15 @@ class TextInput extends React.Component<TextInputProps, State> {
   }
 
   componentWillUnmount() {
-    clearTimeout(this._timer);
+    if (this._timer) {
+      clearTimeout(this._timer);
+    }
   }
 
   _showPlaceholder = () => {
-    clearTimeout(this._timer);
+    if (this._timer) {
+      clearTimeout(this._timer);
+    }
 
     // Set the placeholder in a delay to offset the label animation
     // If we show it immediately, they'll overlap and look ugly
@@ -261,8 +265,8 @@ class TextInput extends React.Component<TextInputProps, State> {
       placeholder: '',
     });
 
-  _timer: number;
-  _root: NativeTextInput | null;
+  _timer: NodeJS.Timeout | undefined;
+  _root: NativeTextInput | undefined | null;
 
   _showError = () => {
     Animated.timing(this.state.error, {
@@ -310,7 +314,7 @@ class TextInput extends React.Component<TextInputProps, State> {
       }),
     }).start();
 
-  _handleFocus = (args: Object) => {
+  _handleFocus = (args: any) => {
     if (this.props.disabled || !this.props.editable) {
       return;
     }
@@ -343,7 +347,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     this.props.onChangeText && this.props.onChangeText(value);
   };
 
-  _onLayoutAnimatedText = e => {
+  _onLayoutAnimatedText = (e: LayoutChangeEvent) => {
     this.setState({
       labelLayout: {
         width: e.nativeEvent.layout.width,
@@ -420,6 +424,7 @@ class TextInput extends React.Component<TextInputProps, State> {
   }
 }
 
+// @ts-ignore
 polyfill(TextInput);
 
 export default withTheme(TextInput);

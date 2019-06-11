@@ -25,11 +25,24 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Callback which returns a React element to display on the left side.
    */
-  left?: (props: { color: string }) => React.ReactNode;
+  left?: (props: {
+    color: string;
+    style: {
+      marginLeft: number;
+      marginRight: number;
+      marginVertical?: number;
+    };
+  }) => React.ReactNode;
   /**
    * Callback which returns a React element to display on the right side.
    */
-  right?: (props: { color: string }) => React.ReactNode;
+  right: (props: {
+    color: string;
+    style?: {
+      marginRight: number;
+      marginVertical?: number;
+    };
+  }) => React.ReactNode;
   /**
    * Function to execute on press.
    */
@@ -125,8 +138,8 @@ class ListItem extends React.Component<Props> {
                 style: description
                   ? styles.iconMarginLeft
                   : {
-                      ...(styles.iconMarginLeft as Object),
-                      ...(styles.marginVerticalNone as Object),
+                      ...styles.iconMarginLeft,
+                      ...styles.marginVerticalNone,
                     },
               })
             : null}
@@ -160,8 +173,8 @@ class ListItem extends React.Component<Props> {
                 style: description
                   ? styles.iconMarginRight
                   : {
-                      ...(styles.iconMarginRight as Object),
-                      ...(styles.marginVerticalNone as Object),
+                      ...styles.iconMarginRight,
+                      ...styles.marginVerticalNone,
                     },
               })
             : null}

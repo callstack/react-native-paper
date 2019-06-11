@@ -38,8 +38,11 @@ type Props = React.ComponentProps<typeof Appbar> & {
 };
 
 const DEFAULT_STATUSBAR_HEIGHT_EXPO =
+  // @ts-ignore
   global.__expo && global.__expo.Constants
-    ? global.__expo.Constants.statusBarHeight
+    ? 
+      // @ts-ignore
+      global.__expo.Constants.statusBarHeight
     : 0;
 const DEFAULT_STATUSBAR_HEIGHT = Platform.select({
   android: DEFAULT_STATUSBAR_HEIGHT_EXPO,

@@ -392,7 +392,7 @@ class Menu extends React.Component<Props, State> {
           >
             <Animated.View style={{ transform: positionTransforms }}>
               <Surface
-                style={[styles.shadowMenuContainer, shadowMenuContainerStyle]}
+                style={[styles.shadowMenuContainer, shadowMenuContainerStyle] as StyleProp<ViewStyle>}
               >
                 {children}
               </Surface>

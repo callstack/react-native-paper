@@ -189,7 +189,7 @@ class FAB extends React.Component<Props, State> {
           styles.container,
           disabled && styles.disabled,
           style,
-        ]}
+        ] as StyleProp<ViewStyle>}
         pointerEvents={visible ? 'auto' : 'none'}
       >
         <TouchableRipple

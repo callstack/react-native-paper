@@ -30,7 +30,7 @@ export type State = {
 };
 export type ChildTextInputProps = {
   parentState: State;
-  innerRef: (ref: NativeTextInput | null | undefined) => undefined;
+  innerRef: (ref: NativeTextInput | null | undefined) => void;
   onFocus?: (args: any) => undefined;
   onBlur?: (args: any) => undefined;
   onChangeText?: (value: string) => undefined;
