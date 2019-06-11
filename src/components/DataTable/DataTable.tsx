@@ -10,8 +10,8 @@ type Props = React.ComponentProps<typeof View> & {
   /**
    * Content of the `DataTable`.
    */
-  children: React.ReactNode,
-  style?: StyleProp<ViewStyle>,
+  children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
 };
 
 /**
