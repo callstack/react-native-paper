@@ -2,9 +2,10 @@
 
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import ListItem from '../List/ListItem';
 import ListIcon from '../List/ListIcon';
+import Chip from '../Chip';
 
 it('renders list item with title and description', () => {
   const tree = renderer
@@ -45,6 +46,50 @@ it('renders list item with left and right items', () => {
         description="Item description"
         left={() => <Text>GG</Text>}
         right={props => <ListIcon {...props} icon="folder" />}
+      />
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders list item with custom title and description styles', () => {
+  const tree = renderer
+    .create(
+      <ListItem
+        title="First Item"
+        description="Item description"
+        titleStyle={{ fontSize: 20 }}
+        descriptionStyle={{ color: 'red' }}
+      />
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders list item with custom description', () => {
+  const tree = renderer
+    .create(
+      <ListItem
+        title="List Item with custom description"
+        description={({ ellipsizeMode, color: descriptionColor, fontSize }) => (
+          <View>
+            <Text
+              numberOfLines={2}
+              ellipsizeMode={ellipsizeMode}
+              style={{ color: descriptionColor, fontSize }}
+            >
+              React Native Paper is a high-quality, standard-compliant Design
+              Design library that has you covered in all major use-cases.
+            </Text>
+            <View>
+              <Chip icon="picture-as-pdf" onPress={() => {}}>
+                DOCS.pdf
+              </Chip>
+            </View>
+          </View>
+        )}
       />
     )
     .toJSON();

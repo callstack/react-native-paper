@@ -3,6 +3,8 @@
 import * as React from 'react';
 import { FlatList } from 'react-native';
 import { List, Divider, withTheme, type Theme } from 'react-native-paper';
+import ActivityIndicatorExample from './Examples/ActivityIndicatorExample';
+
 import AppbarExample from './Examples/AppbarExample';
 import AvatarExample from './Examples/AvatarExample';
 import BadgeExample from './Examples/BadgeExample';
@@ -19,6 +21,7 @@ import FABExample from './Examples/FABExample';
 import IconButtonExample from './Examples/IconButtonExample';
 import ListAccordionExample from './Examples/ListAccordionExample';
 import ListSectionExample from './Examples/ListSectionExample';
+import MenuExample from './Examples/MenuExample';
 import ProgressBarExample from './Examples/ProgressBarExample';
 import RadioButtonExample from './Examples/RadioButtonExample';
 import RadioButtonGroupExample from './Examples/RadioButtonGroupExample';
@@ -37,6 +40,7 @@ type Props = {
 };
 
 export const examples = {
+  activityIndicator: ActivityIndicatorExample,
   appbar: AppbarExample,
   avatar: AvatarExample,
   badge: BadgeExample,
@@ -53,6 +57,7 @@ export const examples = {
   iconButton: IconButtonExample,
   listAccordion: ListAccordionExample,
   listSection: ListSectionExample,
+  menu: MenuExample,
   progressbar: ProgressBarExample,
   radio: RadioButtonExample,
   radioGroup: RadioButtonGroupExample,

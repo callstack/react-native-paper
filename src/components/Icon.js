@@ -10,21 +10,33 @@ try {
   // Optionally require vector-icons
   MaterialIcons = require('react-native-vector-icons/MaterialIcons').default;
 } catch (e) {
-  // eslint-disable-next-line no-console
-  console.error(e);
-
   if (global.__expo && global.__expo.Icon && global.__expo.Icon.MaterialIcons) {
     // Snack doesn't properly bundle vector icons from subpath
     // Use icons from the __expo global if available
     MaterialIcons = global.__expo.Icon.MaterialIcons;
   } else {
+    let isErrorLogged = false;
+
     // Fallback component for icons
     MaterialIcons = ({ name, color, size, ...rest }) => {
-      // eslint-disable-next-line no-console
-      console.warn(
-        `Tried to use the icon '${name}' in a component from 'react-native-paper', but 'react-native-vector-icons' could not be loaded.`,
-        `To remove this warning, try installing 'react-native-vector-icons' or use another method to specify icon: https://callstack.github.io/react-native-paper/icons.html.`
-      );
+      /* eslint-disable no-console */
+
+      if (!isErrorLogged) {
+        if (
+          !/(Cannot find module|Module not found|Cannot resolve module)/.test(
+            e.message
+          )
+        ) {
+          console.error(e);
+        }
+
+        console.warn(
+          `Tried to use the icon '${name}' in a component from 'react-native-paper', but 'react-native-vector-icons' could not be loaded.`,
+          `To remove this warning, try installing 'react-native-vector-icons' or use another method to specify icon: https://callstack.github.io/react-native-paper/icons.html.`
+        );
+
+        isErrorLogged = true;
+      }
 
       return (
         <Text

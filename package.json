@@ -1,6 +1,6 @@
 {
   "name": "react-native-paper",
-  "version": "2.7.0",
+  "version": "2.16.0",
   "description": "Material design for React Native",
   "main": "src/index.js",
   "typings": "typings/index.d.ts",
@@ -11,6 +11,7 @@
     "types.js",
     "babel.js"
   ],
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/callstack/react-native-paper.git"
@@ -32,7 +33,8 @@
   ],
   "scripts": {
     "flow": "flow",
-    "typescript": "node ./scripts/generate-ts-tests.js && tsc --noEmit --skipLibCheck --jsx react ./__ts-tests__/*",
+    "typescript": "tsc --noEmit --skipLibCheck --jsx react ./__ts-tests__/*",
+    "typescript:generate": "node ./scripts/generate-ts-tests.js",
     "lint": "eslint .",
     "test": "jest",
     "prepare": "node ./scripts/generate-mappings",
@@ -40,12 +42,6 @@
     "bootstrap": "yarn && yarn --cwd example && yarn --cwd docs",
     "docs": "yarn --cwd docs",
     "example": "yarn --cwd example"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "node ./scripts/validate-commit-message.js $HUSKY_GIT_PARAMS",
-      "pre-commit": "yarn lint && yarn flow && yarn typescript && yarn test"
-    }
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -55,18 +51,22 @@
     "color": "^2.0.1",
     "create-react-context": "^0.2.3",
     "hoist-non-react-statics": "^3.1.0",
-    "react-lifecycles-compat": "^3.0.4"
+    "react-lifecycles-compat": "^3.0.4",
+    "react-native-safe-area-view": "^0.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/runtime": "^7.1.2",
+    "@commitlint/config-conventional": "^7.5.0",
     "@types/react": "^16.4.18",
     "@types/react-native": "^0.57.7",
+    "all-contributors-cli": "^6.1.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "babel-test": "^0.1.1",
     "chalk": "^2.4.1",
+    "commitlint": "^7.5.2",
     "conventional-changelog-cli": "^2.0.11",
     "dedent": "^0.7.0",
     "eslint": "^4.19.1",
@@ -75,7 +75,7 @@
     "eslint-plugin-react-native": "^3.5.0",
     "flow-bin": "~0.78.0",
     "glob": "^7.1.3",
-    "husky": "^1.1.3",
+    "husky": "^1.3.1",
     "jest": "^23.6.0",
     "jest-file-snapshot": "^0.3.2",
     "metro-react-native-babel-preset": "^0.49.0",
@@ -95,8 +95,18 @@
     "react-native": "*",
     "react-native-vector-icons": "*"
   },
+  "resolutions": {
+    "**/babel-core": "7.0.0-bridge.0"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "yarn lint && yarn flow check && yarn typescript && yarn test"
+    }
+  },
   "jest": {
     "preset": "react-native",
+    "cacheDirectory": "./cache/jest",
     "modulePathIgnorePatterns": [
       "<rootDir>/example/node_modules"
     ],
@@ -104,8 +114,14 @@
       "__fixtures__\\/[^/]+\\/(output|error)\\.js"
     ]
   },
-  "resolutions": {
-    "**/babel-core": "7.0.0-bridge.0"
-  },
-  "sideEffects": false
+  "greenkeeper": {
+    "ignore": [
+      "expo",
+      "flow-bin",
+      "react",
+      "react-dom",
+      "react-native",
+      "react-test-renderer"
+    ]
+  }
 }

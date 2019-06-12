@@ -2,13 +2,14 @@
 
 exports[`renders extended FAB 1`] = `
 <View
+  pointerEvents="auto"
   style={
     Object {
       "backgroundColor": "#03dac4",
       "borderRadius": 28,
       "elevation": 6,
       "opacity": 1,
-      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 5,
         "width": 0,
@@ -22,7 +23,6 @@ exports[`renders extended FAB 1`] = `
       ],
     }
   }
-  visible={true}
 >
   <View
     accessibilityLabel="Add items"
@@ -36,9 +36,14 @@ exports[`renders extended FAB 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
-        "borderRadius": 28,
-      }
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 28,
+        },
+      ]
     }
   >
     <View
@@ -154,13 +159,14 @@ exports[`renders extended FAB 1`] = `
 
 exports[`renders normal FAB 1`] = `
 <View
+  pointerEvents="auto"
   style={
     Object {
       "backgroundColor": "#03dac4",
       "borderRadius": 28,
       "elevation": 6,
       "opacity": 1,
-      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 5,
         "width": 0,
@@ -174,7 +180,6 @@ exports[`renders normal FAB 1`] = `
       ],
     }
   }
-  visible={true}
 >
   <View
     accessibilityRole="button"
@@ -187,9 +192,14 @@ exports[`renders normal FAB 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
-        "borderRadius": 28,
-      }
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 28,
+        },
+      ]
     }
   >
     <View
@@ -282,13 +292,14 @@ exports[`renders normal FAB 1`] = `
 
 exports[`renders small FAB 1`] = `
 <View
+  pointerEvents="auto"
   style={
     Object {
       "backgroundColor": "#03dac4",
       "borderRadius": 28,
       "elevation": 6,
       "opacity": 1,
-      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 5,
         "width": 0,
@@ -302,7 +313,6 @@ exports[`renders small FAB 1`] = `
       ],
     }
   }
-  visible={true}
 >
   <View
     accessibilityRole="button"
@@ -315,9 +325,14 @@ exports[`renders small FAB 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
-        "borderRadius": 28,
-      }
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 28,
+        },
+      ]
     }
   >
     <View

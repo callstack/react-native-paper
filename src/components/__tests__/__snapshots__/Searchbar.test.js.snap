@@ -9,7 +9,7 @@ exports[`renders with placeholder 1`] = `
       "borderRadius": 4,
       "elevation": 4,
       "flexDirection": "row",
-      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 3,
         "width": 0,
@@ -40,15 +40,21 @@ exports[`renders with placeholder 1`] = `
     style={
       Array [
         Object {
-          "alignItems": "center",
-          "borderRadius": 18,
-          "height": 36,
-          "justifyContent": "center",
-          "margin": 6,
-          "width": 36,
+          "overflow": "hidden",
         },
-        undefined,
-        undefined,
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderRadius": 18,
+            "height": 36,
+            "justifyContent": "center",
+            "margin": 6,
+            "overflow": "visible",
+            "width": 36,
+          },
+          undefined,
+          undefined,
+        ],
       ]
     }
   >
@@ -106,6 +112,7 @@ exports[`renders with placeholder 1`] = `
           "alignSelf": "stretch",
           "flex": 1,
           "fontSize": 18,
+          "minWidth": 0,
           "paddingLeft": 8,
           "textAlign": "left",
         },
@@ -113,6 +120,7 @@ exports[`renders with placeholder 1`] = `
           "color": "#000000",
           "fontFamily": "Helvetica Neue",
         },
+        undefined,
       ]
     }
     underlineColorAndroid="transparent"
@@ -143,17 +151,23 @@ exports[`renders with placeholder 1`] = `
     style={
       Array [
         Object {
-          "alignItems": "center",
-          "borderRadius": 18,
-          "height": 36,
-          "justifyContent": "center",
-          "margin": 6,
-          "width": 36,
+          "overflow": "hidden",
         },
-        Object {
-          "opacity": 0.32,
-        },
-        undefined,
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderRadius": 18,
+            "height": 36,
+            "justifyContent": "center",
+            "margin": 6,
+            "overflow": "visible",
+            "width": 36,
+          },
+          Object {
+            "opacity": 0.32,
+          },
+          undefined,
+        ],
       ]
     }
   >
@@ -208,7 +222,7 @@ exports[`renders with text 1`] = `
       "borderRadius": 4,
       "elevation": 4,
       "flexDirection": "row",
-      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 3,
         "width": 0,
@@ -239,15 +253,21 @@ exports[`renders with text 1`] = `
     style={
       Array [
         Object {
-          "alignItems": "center",
-          "borderRadius": 18,
-          "height": 36,
-          "justifyContent": "center",
-          "margin": 6,
-          "width": 36,
+          "overflow": "hidden",
         },
-        undefined,
-        undefined,
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderRadius": 18,
+            "height": 36,
+            "justifyContent": "center",
+            "margin": 6,
+            "overflow": "visible",
+            "width": 36,
+          },
+          undefined,
+          undefined,
+        ],
       ]
     }
   >
@@ -305,6 +325,7 @@ exports[`renders with text 1`] = `
           "alignSelf": "stretch",
           "flex": 1,
           "fontSize": 18,
+          "minWidth": 0,
           "paddingLeft": 8,
           "textAlign": "left",
         },
@@ -312,6 +333,7 @@ exports[`renders with text 1`] = `
           "color": "#000000",
           "fontFamily": "Helvetica Neue",
         },
+        undefined,
       ]
     }
     underlineColorAndroid="transparent"
@@ -338,15 +360,21 @@ exports[`renders with text 1`] = `
     style={
       Array [
         Object {
-          "alignItems": "center",
-          "borderRadius": 18,
-          "height": 36,
-          "justifyContent": "center",
-          "margin": 6,
-          "width": 36,
+          "overflow": "hidden",
         },
-        false,
-        undefined,
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderRadius": 18,
+            "height": 36,
+            "justifyContent": "center",
+            "margin": 6,
+            "overflow": "visible",
+            "width": 36,
+          },
+          false,
+          undefined,
+        ],
       ]
     }
   >

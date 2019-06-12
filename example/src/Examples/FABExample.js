@@ -65,6 +65,15 @@ class ButtonExample extends React.Component<Props, State> {
             visible={this.state.visible}
             disabled
           />
+
+          <FAB
+            icon="cancel"
+            label="Loading FAB"
+            style={styles.fab}
+            onPress={() => {}}
+            visible={this.state.visible}
+            loading
+          />
           <Portal>
             <FAB.Group
               open={this.state.open}

@@ -7,6 +7,7 @@ import {
   Animated,
   TouchableWithoutFeedback,
   StatusBar,
+  SafeAreaView,
 } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
 import color from 'color';
@@ -29,7 +30,7 @@ type Props = {|
    * - `onPress`: callback that is called when `FAB` is pressed (required)
    */
   actions: Array<{
-    icon: string,
+    icon: IconSource,
     label?: string,
     color?: string,
     accessibilityLabel?: string,
@@ -246,80 +247,82 @@ class FABGroup extends React.Component<Props, State> {
             ]}
           />
         </TouchableWithoutFeedback>
-        <View pointerEvents={open ? 'box-none' : 'none'}>
-          {actions.map((it, i) => (
-            <View
-              key={i} // eslint-disable-line react/no-array-index-key
-              style={styles.item}
-              pointerEvents="box-none"
-            >
-              {it.label && (
-                <Card
+        <SafeAreaView pointerEvents="box-none" style={styles.safeArea}>
+          <View pointerEvents={open ? 'box-none' : 'none'}>
+            {actions.map((it, i) => (
+              <View
+                key={i} // eslint-disable-line react/no-array-index-key
+                style={styles.item}
+                pointerEvents="box-none"
+              >
+                {it.label && (
+                  <Card
+                    style={[
+                      styles.label,
+                      {
+                        transform: [{ scale: scales[i] }],
+                        opacity: opacities[i],
+                      },
+                    ]}
+                    onPress={() => {
+                      it.onPress();
+                      this._close();
+                    }}
+                    accessibilityLabel={
+                      it.accessibilityLabel !== 'undefined'
+                        ? it.accessibilityLabel
+                        : it.label
+                    }
+                    accessibilityTraits="button"
+                    accessibilityComponentType="button"
+                    accessibilityRole="button"
+                  >
+                    <Text style={{ color: labelColor }}>{it.label}</Text>
+                  </Card>
+                )}
+                <FAB
+                  small
+                  icon={it.icon}
+                  color={it.color}
                   style={[
-                    styles.label,
                     {
                       transform: [{ scale: scales[i] }],
                       opacity: opacities[i],
+                      backgroundColor: theme.colors.surface,
                     },
+                    it.style,
                   ]}
                   onPress={() => {
                     it.onPress();
                     this._close();
                   }}
                   accessibilityLabel={
-                    it.accessibilityLabel !== 'undefined'
+                    typeof it.accessibilityLabel !== 'undefined'
                       ? it.accessibilityLabel
                       : it.label
                   }
                   accessibilityTraits="button"
                   accessibilityComponentType="button"
                   accessibilityRole="button"
-                >
-                  <Text style={{ color: labelColor }}>{it.label}</Text>
-                </Card>
-              )}
-              <FAB
-                small
-                icon={it.icon}
-                color={it.color}
-                style={[
-                  {
-                    transform: [{ scale: scales[i] }],
-                    opacity: opacities[i],
-                    backgroundColor: theme.colors.surface,
-                  },
-                  it.style,
-                ]}
-                onPress={() => {
-                  it.onPress();
-                  this._close();
-                }}
-                accessibilityLabel={
-                  typeof it.accessibilityLabel !== 'undefined'
-                    ? it.accessibilityLabel
-                    : it.label
-                }
-                accessibilityTraits="button"
-                accessibilityComponentType="button"
-                accessibilityRole="button"
-              />
-            </View>
-          ))}
-        </View>
-        <FAB
-          onPress={() => {
-            onPress && onPress();
-            this._toggle();
-          }}
-          icon={icon}
-          color={this.props.color}
-          accessibilityLabel={accessibilityLabel}
-          accessibilityTraits="button"
-          accessibilityComponentType="button"
-          accessibilityRole="button"
-          style={[styles.fab, fabStyle]}
-          visible={visible}
-        />
+                />
+              </View>
+            ))}
+          </View>
+          <FAB
+            onPress={() => {
+              onPress && onPress();
+              this._toggle();
+            }}
+            icon={icon}
+            color={this.props.color}
+            accessibilityLabel={accessibilityLabel}
+            accessibilityTraits="button"
+            accessibilityComponentType="button"
+            accessibilityRole="button"
+            style={[styles.fab, fabStyle]}
+            visible={visible}
+          />
+        </SafeAreaView>
       </View>
     );
   }
@@ -330,9 +333,11 @@ polyfill(FABGroup);
 export default withTheme(FABGroup);
 
 const styles = StyleSheet.create({
+  safeArea: {
+    alignItems: 'flex-end',
+  },
   container: {
     ...StyleSheet.absoluteFillObject,
-    alignItems: 'flex-end',
     justifyContent: 'flex-end',
   },
   fab: {

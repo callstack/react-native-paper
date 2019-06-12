@@ -3,7 +3,6 @@
 import * as React from 'react';
 import { Animated, View, StyleSheet } from 'react-native';
 import color from 'color';
-import { RadioButtonContext } from './RadioButtonGroup';
 import TouchableRipple from './TouchableRipple';
 import { withTheme } from '../core/theming';
 import type { Theme, $RemoveChildren } from '../types';
@@ -92,89 +91,78 @@ class RadioButtonAndroid extends React.Component<Props, State> {
   }
 
   render() {
+    const { disabled, onPress, theme, ...rest } = this.props;
+    const checkedColor = this.props.color || theme.colors.accent;
+    const uncheckedColor =
+      this.props.uncheckedColor ||
+      color(theme.colors.text)
+        .alpha(theme.dark ? 0.7 : 0.54)
+        .rgb()
+        .string();
+
+    let rippleColor, radioColor;
+
+    const checked = this.props.status === 'checked';
+
+    if (disabled) {
+      rippleColor = color(theme.colors.text)
+        .alpha(0.16)
+        .rgb()
+        .string();
+      radioColor = theme.colors.disabled;
+    } else {
+      rippleColor = color(checkedColor)
+        .fade(0.32)
+        .rgb()
+        .string();
+      radioColor = checked ? checkedColor : uncheckedColor;
+    }
+
     return (
-      <RadioButtonContext.Consumer>
-        {context => {
-          const { disabled, onPress, theme, ...rest } = this.props;
-          const checkedColor = this.props.color || theme.colors.accent;
-          const uncheckedColor =
-            this.props.uncheckedColor ||
-            color(theme.colors.text)
-              .alpha(theme.dark ? 0.7 : 0.54)
-              .rgb()
-              .string();
-
-          let rippleColor, radioColor;
-
-          const checked = context
-            ? context.value === this.props.value
-            : this.props.status === 'checked';
-
-          if (disabled) {
-            rippleColor = color(theme.colors.text)
-              .alpha(0.16)
-              .rgb()
-              .string();
-            radioColor = theme.colors.disabled;
-          } else {
-            rippleColor = color(checkedColor)
-              .fade(0.32)
-              .rgb()
-              .string();
-            radioColor = checked ? checkedColor : uncheckedColor;
-          }
-
-          return (
-            <TouchableRipple
-              {...rest}
-              borderless
-              rippleColor={rippleColor}
-              onPress={
-                disabled
-                  ? undefined
-                  : () => {
-                      context && context.onValueChange(this.props.value);
-                      onPress && onPress();
-                    }
+      <TouchableRipple
+        {...rest}
+        borderless
+        rippleColor={rippleColor}
+        onPress={
+          disabled
+            ? undefined
+            : () => {
+                onPress && onPress(this.props.value);
               }
-              accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
-              accessibilityComponentType={
-                checked ? 'radiobutton_checked' : 'radiobutton_unchecked'
-              }
-              accessibilityRole="button"
-              accessibilityStates={disabled ? ['disabled'] : undefined}
-              accessibilityLiveRegion="polite"
-              style={styles.container}
-            >
+        }
+        accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
+        accessibilityComponentType={
+          checked ? 'radiobutton_checked' : 'radiobutton_unchecked'
+        }
+        accessibilityRole="button"
+        accessibilityStates={disabled ? ['disabled'] : undefined}
+        accessibilityLiveRegion="polite"
+        style={styles.container}
+      >
+        <Animated.View
+          style={[
+            styles.radio,
+            {
+              borderColor: radioColor,
+              borderWidth: this.state.borderAnim,
+            },
+          ]}
+        >
+          {checked ? (
+            <View style={[StyleSheet.absoluteFill, styles.radioContainer]}>
               <Animated.View
                 style={[
-                  styles.radio,
+                  styles.dot,
                   {
-                    borderColor: radioColor,
-                    borderWidth: this.state.borderAnim,
+                    backgroundColor: radioColor,
+                    transform: [{ scale: this.state.radioAnim }],
                   },
                 ]}
-              >
-                {checked ? (
-                  <View
-                    style={[StyleSheet.absoluteFill, styles.radioContainer]}
-                  >
-                    <Animated.View
-                      style={[
-                        styles.dot,
-                        {
-                          backgroundColor: radioColor,
-                          transform: [{ scale: this.state.radioAnim }],
-                        },
-                      ]}
-                    />
-                  </View>
-                ) : null}
-              </Animated.View>
-            </TouchableRipple>
-          );
-        }}
-      </RadioButtonContext.Consumer>
+              />
+            </View>
+          ) : null}
+        </Animated.View>
+      </TouchableRipple>
     );
   }
 }

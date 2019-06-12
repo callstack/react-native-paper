@@ -7,6 +7,9 @@ import Text from './Typography/Text';
 import Button from './Button';
 import { withTheme } from '../core/theming';
 import type { Theme, $RemoveChildren } from '../types';
+import shadow from '../styles/shadow';
+
+const ELEVATION = 1;
 
 type Props = $RemoveChildren<typeof Surface> & {|
   /**
@@ -162,48 +165,63 @@ class Banner extends React.Component<Props, State> {
       theme,
       ...rest
     } = this.props;
+    const { position, layout } = this.state;
 
-    const height = Animated.multiply(
-      this.state.position,
-      this.state.layout.height
-    );
+    // The banner animation has 2 parts:
+    // 1. Blank spacer element which animates its height to move the content
+    // 2. Actual banner which animates its translateY
+    // In initial render, we position everything normally and measure the height of the banner
+    // Once we have the height, we apply the height to the spacer and switch the banner to position: absolute
+    // We need this because we need to move the content below as if banner's height was being animated
+    // However we can't animated banner's height directly as it'll also resize the content inside
+    const height = Animated.multiply(position, layout.height);
 
     const translateY = Animated.multiply(
-      Animated.add(this.state.position, -1),
-      this.state.layout.height
+      Animated.add(position, -1),
+      layout.height
     );
 
     return (
-      <Surface {...rest} style={[styles.container, style]}>
-        <Animated.View style={{ height }} />
-        <Animated.View
-          onLayout={this._handleLayout}
-          style={
-            this.state.layout.measured || !this.props.visible
-              ? [styles.absolute, { transform: [{ translateY }] }]
-              : null
-          }
-        >
-          <View style={styles.content}>
-            {image ? (
-              <View style={styles.image}>{image({ size: 40 })}</View>
-            ) : null}
-            <Text style={styles.message}>{children}</Text>
-          </View>
-          <View style={styles.actions}>
-            {actions.map(({ label, ...others }, i) => (
-              <Button
-                key={/* eslint-disable-line react/no-array-index-key */ i}
-                compact
-                mode="text"
-                style={styles.button}
-                {...others}
-              >
-                {label}
-              </Button>
-            ))}
-          </View>
-        </Animated.View>
+      <Surface {...rest} style={[styles.container, shadow(ELEVATION), style]}>
+        <View style={styles.wrapper}>
+          <Animated.View style={{ height }} />
+          <Animated.View
+            onLayout={this._handleLayout}
+            style={[
+              layout.measured || !visible
+                ? // If we have measured banner's height or it's invisible,
+                  // Position it absolutely, the layout will be taken care of the spacer
+                  [styles.absolute, { transform: [{ translateY }] }]
+                : // Otherwise position it normally
+                  null,
+              !layout.measured && !visible
+                ? // If we haven't measured banner's height yet and it's invisible,
+                  // hide it with opacity: 0 so user doesn't see it
+                  { opacity: 0 }
+                : null,
+            ]}
+          >
+            <View style={styles.content}>
+              {image ? (
+                <View style={styles.image}>{image({ size: 40 })}</View>
+              ) : null}
+              <Text style={styles.message}>{children}</Text>
+            </View>
+            <View style={styles.actions}>
+              {actions.map(({ label, ...others }, i) => (
+                <Button
+                  key={/* eslint-disable-line react/no-array-index-key */ i}
+                  compact
+                  mode="text"
+                  style={styles.button}
+                  {...others}
+                >
+                  {label}
+                </Button>
+              ))}
+            </View>
+          </Animated.View>
+        </View>
       </Surface>
     );
   }
@@ -211,7 +229,10 @@ class Banner extends React.Component<Props, State> {
 
 const styles = StyleSheet.create({
   container: {
-    elevation: 1,
+    elevation: ELEVATION,
+  },
+  wrapper: {
+    overflow: 'hidden',
   },
   absolute: {
     position: 'absolute',

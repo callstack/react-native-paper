@@ -18,7 +18,7 @@ type Props = {|
   /**
    * Callback that is called when the user dismisses the dialog.
    */
-  onDismiss: () => mixed,
+  onDismiss?: () => mixed,
   /**
    * Determines Whether the dialog is visible.
    */

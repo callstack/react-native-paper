@@ -13,20 +13,20 @@ The core team works directly on GitHub and all work is public.
 > **Working on your first pull request?** You can learn how from this *free* series: [How to Contribute to an Open Source Project on GitHub](https://egghead.io/series/how-to-contribute-to-an-open-source-project-on-github).
 
 1. Fork the repo and create your branch from `master` (a guide on [how to fork a repository](https://help.github.com/articles/fork-a-repo/)).
-2. Run `yarn bootstrap` to setup the developement environment.
+2. Run `yarn bootstrap` to setup the development environment.
 3. Do the changes you want and test them out in the example app before sending a pull request.
 
 ### Commit message convention
 
-We prefix our commit messages with one of the following to signify the kind of change:
+We follow the [conventional commits specification](https://www.conventionalcommits.org/en) for our commit messages:
 
 * `fix`: bug fixes, e.g. fix Button color on DarkTheme.
 * `feat`: new features, e.g. add Snackbar component.
-* `refactor`: code/structure refactor, e.g. new structure folder for components.
+* `refactor`: code refactor, e.g. new folder structure for components.
 * `docs`: changes into documentation, e.g. add usage example for Button.
 * `test`: adding or updating tests, eg unit, snapshot testing.
 * `chore`: tooling changes, e.g. change circleci config.
-* `BREAKING`: for changes that break existing usage, e.g. change API of a component.
+* `BREAKING CHANGE`: for changes that break existing usage, e.g. change API of a component.
 
 Our pre-commit hooks verify that your commit message matches this format when committing.
 
@@ -35,9 +35,9 @@ Our pre-commit hooks verify that your commit message matches this format when co
 We use `flow` for type checking, `eslint` with `prettier` for linting and formatting the code, and `jest` for testing. Our pre-commit hooks verify that the linter and tests pass when commiting. You can also run the following commands manually:
 
 * `yarn flow`: run flow on all files.
-* `yarn typescript`: run tests for typescript.
-* `yarn lint`: run eslint and prettier.
-* `yarn test`: run unit tests.
+* `yarn typescript`: run tests for typescript definitions.
+* `yarn lint`: lint files with eslint and prettier.
+* `yarn test`: run unit tests with jest.
 
 ### Sending a pull request
 

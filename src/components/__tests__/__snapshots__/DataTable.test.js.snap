@@ -12,13 +12,16 @@ exports[`renders data table cell 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "flexDirection": "row",
-      },
-      undefined,
-      undefined,
+      false,
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+        },
+        undefined,
+        undefined,
+      ],
     ]
   }
 >
@@ -216,15 +219,21 @@ exports[`renders data table pagination 1`] = `
     style={
       Array [
         Object {
-          "alignItems": "center",
-          "borderRadius": 18,
-          "height": 36,
-          "justifyContent": "center",
-          "margin": 6,
-          "width": 36,
+          "overflow": "hidden",
         },
-        false,
-        undefined,
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderRadius": 18,
+            "height": 36,
+            "justifyContent": "center",
+            "margin": 6,
+            "overflow": "visible",
+            "width": 36,
+          },
+          false,
+          undefined,
+        ],
       ]
     }
   >
@@ -288,15 +297,21 @@ exports[`renders data table pagination 1`] = `
     style={
       Array [
         Object {
-          "alignItems": "center",
-          "borderRadius": 18,
-          "height": 36,
-          "justifyContent": "center",
-          "margin": 6,
-          "width": 36,
+          "overflow": "hidden",
         },
-        false,
-        undefined,
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderRadius": 18,
+            "height": 36,
+            "justifyContent": "center",
+            "margin": 6,
+            "overflow": "visible",
+            "width": 36,
+          },
+          false,
+          undefined,
+        ],
       ]
     }
   >
@@ -401,15 +416,21 @@ exports[`renders data table pagination with label 1`] = `
     style={
       Array [
         Object {
-          "alignItems": "center",
-          "borderRadius": 18,
-          "height": 36,
-          "justifyContent": "center",
-          "margin": 6,
-          "width": 36,
+          "overflow": "hidden",
         },
-        false,
-        undefined,
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderRadius": 18,
+            "height": 36,
+            "justifyContent": "center",
+            "margin": 6,
+            "overflow": "visible",
+            "width": 36,
+          },
+          false,
+          undefined,
+        ],
       ]
     }
   >
@@ -473,15 +494,21 @@ exports[`renders data table pagination with label 1`] = `
     style={
       Array [
         Object {
-          "alignItems": "center",
-          "borderRadius": 18,
-          "height": 36,
-          "justifyContent": "center",
-          "margin": 6,
-          "width": 36,
+          "overflow": "hidden",
         },
-        false,
-        undefined,
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderRadius": 18,
+            "height": 36,
+            "justifyContent": "center",
+            "margin": 6,
+            "overflow": "visible",
+            "width": 36,
+          },
+          false,
+          undefined,
+        ],
       ]
     }
   >
@@ -739,15 +766,18 @@ exports[`renders right aligned data table cell 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "flexDirection": "row",
-      },
-      Object {
-        "justifyContent": "flex-end",
-      },
-      undefined,
+      false,
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+        },
+        Object {
+          "justifyContent": "flex-end",
+        },
+        undefined,
+      ],
     ]
   }
 >

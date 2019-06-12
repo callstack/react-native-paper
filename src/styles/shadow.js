@@ -1,10 +1,8 @@
 /* @flow */
 
-import * as Colors from './colors';
 import { Animated } from 'react-native';
 
 type Shadow = {
-  shadowColor: Animated.Interpolation,
   shadowOffset: {
     width: Animated.Value,
     height: Animated.Interpolation,
@@ -32,15 +30,7 @@ export default function shadow(elevation: ?number | Animated.Value): Shadow {
     outputRange: [0, 0.75, 1.5, 3, 8, 24],
   });
 
-  // We cannot use strings in Animated.Value
-  // Hence we need to interpolate all inputs to the same color
-  const shadowColor = animatedElevation.interpolate({
-    inputRange,
-    outputRange: inputRange.map(() => Colors.black),
-  });
-
   return {
-    shadowColor,
     shadowOffset: {
       width,
       height,

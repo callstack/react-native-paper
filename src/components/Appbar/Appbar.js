@@ -8,6 +8,7 @@ import AppbarContent from './AppbarContent';
 import AppbarAction from './AppbarAction';
 import AppbarBackAction from './AppbarBackAction';
 import AppbarHeader from './AppbarHeader';
+import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import { black, white } from '../../styles/colors';
 import type { Theme } from '../../types';
@@ -124,12 +125,20 @@ class Appbar extends React.Component<Props> {
     }
 
     return (
-      <View style={[{ backgroundColor }, styles.appbar, restStyle]} {...rest}>
+      <Surface
+        style={[{ backgroundColor }, styles.appbar, restStyle]}
+        {...rest}
+      >
         {shouldAddLeftSpacing ? <View style={styles.spacing} /> : null}
         {React.Children.toArray(children)
           .filter(child => child != null && typeof child !== 'boolean')
           .map((child, i) => {
-            if (!React.isValidElement(child)) {
+            if (
+              !React.isValidElement(child) ||
+              ![AppbarContent, AppbarAction, AppbarBackAction].includes(
+                child.type
+              )
+            ) {
               return child;
             }
 
@@ -154,7 +163,7 @@ class Appbar extends React.Component<Props> {
             return React.cloneElement(child, props);
           })}
         {shouldAddRightSpacing ? <View style={styles.spacing} /> : null}
-      </View>
+      </Surface>
     );
   }
 }

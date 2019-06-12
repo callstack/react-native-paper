@@ -1,11 +1,11 @@
 /* @flow */
 
-import color from 'color';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import Text from '../Typography/Text';
+import ListSubheader from './ListSubheader';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
+import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 type Props = React.ElementConfig<typeof View> & {
   /**
@@ -20,6 +20,10 @@ type Props = React.ElementConfig<typeof View> & {
    * @optional
    */
   theme: Theme,
+  /**
+   * Style that is passed to Title element.
+   */
+  titleStyle?: TextStyleProp,
   style?: any,
 };
 
@@ -35,17 +39,18 @@ type Props = React.ElementConfig<typeof View> & {
  * import * as React from 'react';
  * import { List } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
+ * class MyComponent extends React.Component {
  *   render() {
  *     return (
- *       <List.Section title="Some title">
+ *       <List.Section>
+ *         <List.Subheader>Some title</List.Subheader>
  *         <List.Item
  *           title="First Item"
  *           left={() => <List.Icon icon="folder" />}
  *        />
  *         <List.Item
  *           title="Second Item"
- *           left={() => <List.Icon icon="folder" />}
+ *           left={() => <List.Icon color="#000" icon="folder" />}
  *        />
  *      </List.Section>
  *     );
@@ -59,25 +64,11 @@ class ListSection extends React.Component<Props> {
   static displayName = 'List.Section';
 
   render() {
-    const { children, title, theme, style, ...rest } = this.props;
-    const { colors, fonts } = theme;
-
-    const titleColor = color(colors.text)
-      .alpha(0.54)
-      .rgb()
-      .string();
-    const fontFamily = fonts.medium;
+    const { children, title, titleStyle, style, ...rest } = this.props;
 
     return (
       <View {...rest} style={[styles.container, style]}>
-        {title && (
-          <Text
-            numberOfLines={1}
-            style={[styles.title, { color: titleColor, fontFamily }]}
-          >
-            {title}
-          </Text>
-        )}
+        {title && <ListSubheader style={titleStyle}>{title}</ListSubheader>}
         {children}
       </View>
     );
@@ -87,10 +78,6 @@ class ListSection extends React.Component<Props> {
 const styles = StyleSheet.create({
   container: {
     marginVertical: 8,
-  },
-  title: {
-    marginVertical: 13,
-    marginHorizontal: 16,
   },
 });
 

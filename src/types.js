@@ -35,3 +35,5 @@ export type $RemoveChildren<T> = $Diff<
   React.ElementConfig<T>,
   { children: any }
 >;
+
+export type EllipsizeProp = 'head' | 'middle' | 'tail' | 'clip';
