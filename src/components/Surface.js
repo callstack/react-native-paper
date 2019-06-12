@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
-import * as Colors from '../styles/colors';
 import shadow from '../styles/shadow';
 import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
@@ -65,7 +64,7 @@ class Surface extends React.Component<Props> {
       <Animated.View
         {...rest}
         style={[
-          { backgroundColor: theme.colors.surface, shadowColor: Colors.black },
+          { backgroundColor: theme.colors.surface },
           shadow(elevation),
           style,
         ]}
