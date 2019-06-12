@@ -37,6 +37,9 @@ export default createStackNavigator(
   },
   {
     navigationOptions: ({ navigation }) => ({
+      gestureResponseDistance: {
+        horizontal: 45,
+      },
       header: (
         <Appbar.Header>
           <Appbar.Action icon="menu" onPress={() => navigation.openDrawer()} />

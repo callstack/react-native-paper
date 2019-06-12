@@ -64,6 +64,8 @@ const styles = StyleSheet.create({
     borderTopWidth: StyleSheet.hairlineWidth,
     borderBottomWidth: StyleSheet.hairlineWidth,
     paddingHorizontal: 24,
+    flexGrow: 1,
+    flexShrink: 1,
   },
 });
 

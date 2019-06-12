@@ -9,8 +9,8 @@ import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
-import type { Theme } from '../types';
 import type { IconSource } from './Icon';
+import type { Theme } from '../types';
 
 type Props = React.ElementConfig<typeof Surface> & {|
   /**
@@ -60,6 +60,11 @@ type Props = React.ElementConfig<typeof Surface> & {|
    * Function to execute on press.
    */
   onPress?: () => mixed,
+  /**
+   * Style of button's inner content.
+   * Use this prop to apply custom height and width.
+   */
+  contentStyle?: any,
   style?: any,
   /**
    * @optional
@@ -146,6 +151,7 @@ class Button extends React.Component<Props, State> {
       onPress,
       style,
       theme,
+      contentStyle,
       ...rest
     } = this.props;
     const { colors, roundness } = theme;
@@ -215,7 +221,8 @@ class Button extends React.Component<Props, State> {
     };
     const touchableStyle = { borderRadius: roundness };
     const textStyle = { color: textColor, fontFamily };
-    const elevation = disabled ? 0 : this.state.elevation;
+    const elevation =
+      disabled || mode !== 'contained' ? 0 : this.state.elevation;
 
     return (
       <Surface
@@ -243,7 +250,7 @@ class Button extends React.Component<Props, State> {
           rippleColor={rippleColor}
           style={touchableStyle}
         >
-          <View style={styles.content}>
+          <View style={[styles.content, contentStyle]}>
             {icon && loading !== true ? (
               <View style={styles.icon}>
                 <Icon source={icon} size={16} color={textColor} />

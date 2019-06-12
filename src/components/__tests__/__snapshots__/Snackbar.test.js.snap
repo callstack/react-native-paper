@@ -26,7 +26,7 @@ exports[`renders snackbar with Text as a child 1`] = `
         "justifyContent": "space-between",
         "margin": 8,
         "opacity": 1,
-        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 5,
           "width": 0,
@@ -97,7 +97,7 @@ exports[`renders snackbar with action button 1`] = `
         "justifyContent": "space-between",
         "margin": 8,
         "opacity": 1,
-        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 5,
           "width": 0,
@@ -150,7 +150,7 @@ exports[`renders snackbar with action button 1`] = `
           "marginHorizontal": 8,
           "marginVertical": 6,
           "minWidth": "auto",
-          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowColor": "#000000",
           "shadowOffset": Object {
             "height": 0,
             "width": 0,
@@ -171,18 +171,26 @@ exports[`renders snackbar with action button 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
-            "borderRadius": 4,
-          }
+          Array [
+            Object {
+              "overflow": "hidden",
+            },
+            Object {
+              "borderRadius": 4,
+            },
+          ]
         }
       >
         <View
           style={
-            Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "center",
-            }
+            Array [
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "center",
+              },
+              undefined,
+            ]
           }
         >
           <Text
@@ -249,7 +257,7 @@ exports[`renders snackbar with content 1`] = `
         "justifyContent": "space-between",
         "margin": 8,
         "opacity": 1,
-        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 5,
           "width": 0,

@@ -30,7 +30,6 @@ type Props = {|
  *
  * export default class MyComponent extends React.Component {
  *   render() {
- *     const { visible } = this.state;
  *     return (
  *       <Portal>
  *         <Text>This is rendered at a different place</Text>

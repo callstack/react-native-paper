@@ -20,7 +20,12 @@ class ChipExample extends React.Component<Props> {
       >
         <List.Section title="Flat chip">
           <View style={styles.row}>
-            <Chip onPress={() => {}} style={styles.chip}>
+            <Chip
+              mode="outlined"
+              selected
+              onPress={() => {}}
+              style={styles.chip}
+            >
               Simple
             </Chip>
             <Chip onPress={() => {}} onClose={() => {}} style={styles.chip}>
@@ -137,6 +142,49 @@ class ChipExample extends React.Component<Props> {
             </Chip>
           </View>
         </List.Section>
+        <List.Section title="Custom chip">
+          <View style={styles.row}>
+            <Chip
+              selected
+              onPress={() => {}}
+              style={[styles.chip, { backgroundColor: 'rgba(128,0,128,0.2)' }]}
+              selectedColor="#800080"
+            >
+              Flat selected chip with custom color
+            </Chip>
+            <Chip
+              onPress={() => {}}
+              style={styles.chip}
+              selectedColor="#800080"
+            >
+              Flat unselected chip with custom color
+            </Chip>
+            <Chip
+              selected
+              mode="outlined"
+              onPress={() => {}}
+              style={[styles.chip, { backgroundColor: 'rgba(128,0,128, 0.2)' }]}
+              selectedColor="#800080"
+            >
+              Outlined selected chip with custom color
+            </Chip>
+            <Chip
+              mode="outlined"
+              onPress={() => {}}
+              style={styles.chip}
+              selectedColor="#800080"
+            >
+              Outlined unselected chip with custom color
+            </Chip>
+            <Chip
+              onPress={() => {}}
+              style={styles.chip}
+              textStyle={styles.tiny}
+            >
+              With custom size
+            </Chip>
+          </View>
+        </List.Section>
       </ScrollView>
     );
   }
@@ -153,6 +201,13 @@ const styles = StyleSheet.create({
   },
   chip: {
     margin: 4,
+  },
+  tiny: {
+    marginVertical: 2,
+    marginRight: 2,
+    marginLeft: 2,
+    minHeight: 19,
+    lineHeight: 19,
   },
 });
 

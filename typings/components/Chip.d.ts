@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { StyleProp, TextStyle } from 'react-native';
 import { ThemeShape, IconSource } from '../types';
 
 export interface ChipProps {
@@ -7,10 +8,12 @@ export interface ChipProps {
   icon?: IconSource;
   avatar?: React.ReactNode;
   selected?: boolean;
+  selectedColor?: string;
   disabled?: boolean;
   accessibilityLabel?: string;
   onPress?: () => any;
   onClose?: () => any;
+  textStyle?: StyleProp<TextStyle>;
   style?: any;
   theme?: ThemeShape;
   testID?: string;

@@ -9,8 +9,10 @@ export interface ButtonProps extends TouchableRippleProps {
   dark?: boolean;
   compact?: boolean;
   loading?: boolean;
-  style?: StyleProp<ViewStyle>;
   icon?: IconSource;
+  uppercase?: boolean;
+  contentStyle?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
   theme?: ThemeShape;
 }
 

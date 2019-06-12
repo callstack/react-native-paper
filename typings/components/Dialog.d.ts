@@ -15,7 +15,7 @@ export interface DialogTitleProps extends DialogBaseProps {
 
 export interface DialogProps {
   dismissable?: boolean;
-  onDismiss: () => any;
+  onDismiss?: () => any;
   visible: boolean;
   children: React.ReactNode;
   style?: any;

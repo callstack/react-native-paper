@@ -4,6 +4,7 @@ import * as List from './components/List';
 import * as Drawer from './components/Drawer';
 
 export * from './types';
+export * from './components/ActivityIndicator';
 export * from './components/Appbar';
 export * from './components/Badge';
 export * from './components/Banner';
@@ -19,6 +20,7 @@ export * from './components/Divider';
 export * from './components/FAB';
 export * from './components/HelperText';
 export * from './components/IconButton';
+export * from './components/Menu'
 export * from './components/Modal';
 export * from './components/Portal';
 export * from './components/ProgressBar';

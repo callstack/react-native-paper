@@ -6,12 +6,12 @@ import {
   View,
   Animated,
   TouchableWithoutFeedback,
-  SafeAreaView,
   StyleSheet,
   Platform,
   Keyboard,
 } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
+import SafeAreaView from 'react-native-safe-area-view';
 import color from 'color';
 import Icon from './Icon';
 import Surface from './Surface';
@@ -252,7 +252,7 @@ const FAR_FAR_AWAY = 9999;
 
 const Touchable = TouchableRipple.supported
   ? TouchableRipple
-  : ({ style, children, borderless, rippleColor, ...rest }) => (
+  : ({ style, children, borderless, centered, rippleColor, ...rest }) => (
       <TouchableWithoutFeedback {...rest}>
         <View style={style}>{children}</View>
       </TouchableWithoutFeedback>
@@ -500,14 +500,22 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
     });
   };
 
-  _handleLayout = e =>
+  _handleLayout = e => {
+    const { layout } = this.state;
+    const { height, width } = e.nativeEvent.layout;
+
+    if (height === layout.height && width === layout.width) {
+      return;
+    }
+
     this.setState({
       layout: {
-        height: e.nativeEvent.layout.height,
-        width: e.nativeEvent.layout.width,
+        height,
+        width,
         measured: true,
       },
     });
+  };
 
   _handleTabPress = (index: number) => {
     const { navigationState, onTabPress, onIndexChange } = this.props;
@@ -587,7 +595,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
             .rgb()
             .string();
 
-    const touchColor = color(textColor)
+    const touchColor = color(activeColor)
       .alpha(0.12)
       .rgb()
       .string();
@@ -673,6 +681,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
         >
           <Animated.View style={[styles.barContent, { backgroundColor }]}>
             <SafeAreaView
+              forceInset={{ top: 'never', bottom: 'always' }}
               style={[styles.items, { maxWidth: maxTabWidth * routes.length }]}
             >
               {shifting ? (
@@ -749,6 +758,7 @@ class BottomNavigation<T: *> extends React.Component<Props<T>, State> {
                   <Touchable
                     key={route.key}
                     borderless
+                    centered
                     rippleColor={touchColor}
                     onPress={() => this._handleTabPress(index)}
                     testID={getTestID({ route })}

@@ -2,9 +2,7 @@
 
 import path from 'path';
 import fs from 'fs';
-import { build, serve } from 'component-docs';
 
-const task = process.argv[2];
 const root = path.join(__dirname, '..');
 const dist = path.join(__dirname, 'dist');
 const assets = [
@@ -15,7 +13,7 @@ const assets = [
 ];
 const styles = [path.join(__dirname, 'assets', 'styles.css')];
 const scripts = [path.join(__dirname, 'assets', 'snack.js')];
-const github = 'https://github.com/callstack/react-native-paper/edit/master';
+const github = 'https://github.com/callstack/react-native-paper/edit/master/';
 
 if (!fs.existsSync(dist)) {
   fs.mkdirSync(dist);
@@ -106,8 +104,9 @@ function getPages() {
   return [...docs, { type: 'separator' }, ...components];
 }
 
-const options = {
+module.exports = {
   root,
+  logo: 'images/sidebar-logo.svg',
   assets,
   styles,
   scripts,
@@ -115,9 +114,3 @@ const options = {
   output: dist,
   github,
 };
-
-if (task !== 'build') {
-  serve(options);
-} else {
-  build(options);
-}

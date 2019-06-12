@@ -12,10 +12,15 @@ exports[`renders checked Checkbox with color 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
-      "borderRadius": 18,
-      "padding": 6,
-    }
+    Array [
+      Object {
+        "overflow": "hidden",
+      },
+      Object {
+        "borderRadius": 18,
+        "padding": 6,
+      },
+    ]
   }
 >
   <View
@@ -75,10 +80,15 @@ exports[`renders checked Checkbox with onPress 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
-      "borderRadius": 18,
-      "padding": 6,
-    }
+    Array [
+      Object {
+        "overflow": "hidden",
+      },
+      Object {
+        "borderRadius": 18,
+        "padding": 6,
+      },
+    ]
   }
 >
   <View
@@ -138,10 +148,15 @@ exports[`renders indeterminate Checkbox 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
-      "borderRadius": 18,
-      "padding": 6,
-    }
+    Array [
+      Object {
+        "overflow": "hidden",
+      },
+      Object {
+        "borderRadius": 18,
+        "padding": 6,
+      },
+    ]
   }
 >
   <View
@@ -201,10 +216,15 @@ exports[`renders indeterminate Checkbox with color 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
-      "borderRadius": 18,
-      "padding": 6,
-    }
+    Array [
+      Object {
+        "overflow": "hidden",
+      },
+      Object {
+        "borderRadius": 18,
+        "padding": 6,
+      },
+    ]
   }
 >
   <View
@@ -264,10 +284,15 @@ exports[`renders unchecked Checkbox with color 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
-      "borderRadius": 18,
-      "padding": 6,
-    }
+    Array [
+      Object {
+        "overflow": "hidden",
+      },
+      Object {
+        "borderRadius": 18,
+        "padding": 6,
+      },
+    ]
   }
 >
   <View
@@ -327,10 +352,15 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
-      "borderRadius": 18,
-      "padding": 6,
-    }
+    Array [
+      Object {
+        "overflow": "hidden",
+      },
+      Object {
+        "borderRadius": 18,
+        "padding": 6,
+      },
+    ]
   }
 >
   <View

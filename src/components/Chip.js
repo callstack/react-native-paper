@@ -38,9 +38,13 @@ type Props = React.ElementConfig<typeof Surface> & {|
    */
   avatar?: React.Node,
   /**
-   * Whether to style the chip as selected.
+   * Whether chip is selected.
    */
   selected?: boolean,
+  /**
+   * Whether to style the chip color as selected.
+   */
+  selectedColor?: string,
   /**
    * Whether the chip is disabled. A disabled chip is greyed out and `onPress` is not called on touch.
    */
@@ -57,6 +61,10 @@ type Props = React.ElementConfig<typeof Surface> & {|
    * Function to execute on close button press. The close button appears only when this prop is specified.
    */
   onClose?: () => mixed,
+  /**
+   * Style of chip's text
+   */
+  textStyle?: any,
   style?: any,
   /**
    * @optional
@@ -134,9 +142,11 @@ class Chip extends React.Component<Props, State> {
       accessibilityLabel,
       onPress,
       onClose,
+      textStyle,
       style,
       theme,
       testID,
+      selectedColor,
       ...rest
     } = this.props;
     const { dark, colors } = theme;
@@ -147,24 +157,29 @@ class Chip extends React.Component<Props, State> {
         : dark
           ? '#383838'
           : '#ebebeb',
+      borderRadius = 16,
     } = StyleSheet.flatten(style) || {};
 
     const borderColor =
       mode === 'outlined'
-        ? color(dark ? white : black)
+        ? color(
+            selectedColor !== undefined
+              ? selectedColor
+              : color(dark ? white : black)
+          )
             .alpha(0.29)
             .rgb()
             .string()
         : backgroundColor;
     const textColor = disabled
       ? colors.disabled
-      : color(colors.text)
+      : color(selectedColor !== undefined ? selectedColor : colors.text)
           .alpha(0.87)
           .rgb()
           .string();
     const iconColor = disabled
       ? colors.disabled
-      : color(colors.text)
+      : color(selectedColor !== undefined ? selectedColor : colors.text)
           .alpha(0.54)
           .rgb()
           .string();
@@ -174,6 +189,13 @@ class Chip extends React.Component<Props, State> {
     )
       .rgb()
       .string();
+
+    const underlayColor = selectedColor
+      ? color(selectedColor)
+          .fade(0.5)
+          .rgb()
+          .string()
+      : selectedBackgroundColor;
 
     const accessibilityTraits = ['button'];
     const accessibilityStates = [];
@@ -198,6 +220,7 @@ class Chip extends React.Component<Props, State> {
               ? selectedBackgroundColor
               : backgroundColor,
             borderColor,
+            borderRadius,
           },
           style,
         ]}
@@ -206,11 +229,11 @@ class Chip extends React.Component<Props, State> {
         <TouchableRipple
           borderless
           delayPressIn={0}
-          style={styles.touchable}
+          style={{ borderRadius }}
           onPress={onPress}
           onPressIn={this._handlePressIn}
           onPressOut={this._handlePressOut}
-          underlayColor={selectedBackgroundColor}
+          underlayColor={underlayColor}
           disabled={disabled}
           accessibilityLabel={accessibilityLabel}
           accessibilityTraits={accessibilityTraits}
@@ -256,6 +279,7 @@ class Chip extends React.Component<Props, State> {
                   marginRight: onClose ? 4 : 8,
                   marginLeft: avatar || icon || selected ? 4 : 8,
                 },
+                textStyle,
               ]}
             >
               {(children: any)}
@@ -280,12 +304,8 @@ class Chip extends React.Component<Props, State> {
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 16,
     borderWidth: StyleSheet.hairlineWidth,
     borderStyle: 'solid',
-  },
-  touchable: {
-    borderRadius: 16,
   },
   content: {
     flexDirection: 'row',

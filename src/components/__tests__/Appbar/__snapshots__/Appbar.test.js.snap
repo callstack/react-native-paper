@@ -1,0 +1,539 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Appbar does not pass any additional props to Searchbar 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#6200ee",
+      "elevation": 4,
+      "flexDirection": "row",
+      "height": 56,
+      "paddingHorizontal": 4,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 3,
+        "width": 0,
+      },
+      "shadowOpacity": 0.24,
+      "shadowRadius": 4,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffff",
+        "borderRadius": 4,
+        "elevation": 4,
+        "flexDirection": "row",
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 3,
+          "width": 0,
+        },
+        "shadowOpacity": 0.24,
+        "shadowRadius": 4,
+      }
+    }
+  >
+    <View
+      accessibilityRole="button"
+      accessible={true}
+      hitSlop={
+        Object {
+          "bottom": 6,
+          "left": 6,
+          "right": 6,
+          "top": 6,
+        }
+      }
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          Array [
+            Object {
+              "alignItems": "center",
+              "borderRadius": 18,
+              "height": 36,
+              "justifyContent": "center",
+              "margin": 6,
+              "overflow": "visible",
+              "width": 36,
+            },
+            undefined,
+            undefined,
+          ],
+        ]
+      }
+    >
+      <View
+        style={null}
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          allowFontScaling={false}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          style={
+            Array [
+              Object {
+                "color": "rgba(0, 0, 0, 0.54)",
+                "fontSize": 24,
+              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+    </View>
+    <TextInput
+      accessibilityRole="search"
+      accessibilityTraits="search"
+      allowFontScaling={true}
+      keyboardAppearance="light"
+      placeholder="Search"
+      placeholderTextColor="rgba(0, 0, 0, 0.54)"
+      returnKeyType="search"
+      selectionColor="#6200ee"
+      style={
+        Array [
+          Object {
+            "alignSelf": "stretch",
+            "flex": 1,
+            "fontSize": 18,
+            "minWidth": 0,
+            "paddingLeft": 8,
+            "textAlign": "left",
+          },
+          Object {
+            "color": "#000000",
+            "fontFamily": "Helvetica Neue",
+          },
+          undefined,
+        ]
+      }
+      underlineColorAndroid="transparent"
+    />
+    <View
+      accessibilityRole="button"
+      accessibilityStates={
+        Array [
+          "disabled",
+        ]
+      }
+      accessible={true}
+      hitSlop={
+        Object {
+          "bottom": 6,
+          "left": 6,
+          "right": 6,
+          "top": 6,
+        }
+      }
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          Array [
+            Object {
+              "alignItems": "center",
+              "borderRadius": 18,
+              "height": 36,
+              "justifyContent": "center",
+              "margin": 6,
+              "overflow": "visible",
+              "width": 36,
+            },
+            Object {
+              "opacity": 0.32,
+            },
+            undefined,
+          ],
+        ]
+      }
+    >
+      <View
+        style={null}
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          allowFontScaling={false}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          style={
+            Array [
+              Object {
+                "color": "rgba(255, 255, 255, 0)",
+                "fontSize": 24,
+              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and AppbarAction 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#6200ee",
+      "elevation": 4,
+      "flexDirection": "row",
+      "height": 56,
+      "paddingHorizontal": 4,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 3,
+        "width": 0,
+      },
+      "shadowOpacity": 0.24,
+      "shadowRadius": 4,
+    }
+  }
+>
+  <View
+    accessibilityLabel="Back"
+    accessibilityRole="button"
+    accessible={true}
+    hitSlop={
+      Object {
+        "bottom": 6,
+        "left": 6,
+        "right": 6,
+        "top": 6,
+      }
+    }
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderRadius": 18,
+            "height": 36,
+            "justifyContent": "center",
+            "margin": 6,
+            "overflow": "visible",
+            "width": 36,
+          },
+          undefined,
+          undefined,
+        ],
+      ]
+    }
+  >
+    <View
+      style={null}
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 24,
+              "width": 24,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "opacity": 1,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+              "transform": Array [
+                Object {
+                  "rotate": "0deg",
+                },
+              ],
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "justifyContent": "center",
+                },
+                Object {
+                  "height": 24,
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                  "width": 24,
+                },
+              ]
+            }
+          >
+            <Image
+              source={
+                Object {
+                  "testUri": "../../../src/assets/back-chevron.png",
+                }
+              }
+              style={
+                Array [
+                  Object {
+                    "height": 21,
+                    "resizeMode": "contain",
+                    "width": 21,
+                  },
+                  Object {
+                    "tintColor": "#ffffff",
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+  <View
+    accessible={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "flex": 1,
+          "paddingHorizontal": 12,
+        },
+        Array [
+          Object {
+            "marginLeft": 8,
+          },
+          Object {
+            "alignItems": "center",
+          },
+          undefined,
+        ],
+      ]
+    }
+  >
+    <Text
+      accessibilityRole="header"
+      accessibilityTraits="header"
+      numberOfLines={1}
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontFamily": "Helvetica Neue",
+            "textAlign": "left",
+            "writingDirection": "ltr",
+          },
+          Array [
+            Object {
+              "color": "#ffffff",
+              "fontFamily": "Helvetica Neue",
+            },
+            Object {
+              "fontSize": 17,
+            },
+            undefined,
+          ],
+        ]
+      }
+    >
+      Examples
+    </Text>
+  </View>
+  <View
+    accessibilityRole="button"
+    accessible={true}
+    hitSlop={
+      Object {
+        "bottom": 6,
+        "left": 6,
+        "right": 6,
+        "top": 6,
+      }
+    }
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderRadius": 18,
+            "height": 36,
+            "justifyContent": "center",
+            "margin": 6,
+            "overflow": "visible",
+            "width": 36,
+          },
+          undefined,
+          undefined,
+        ],
+      ]
+    }
+  >
+    <View
+      style={null}
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 24,
+              "width": 24,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "opacity": 1,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+              "transform": Array [
+                Object {
+                  "rotate": "0deg",
+                },
+              ],
+            }
+          }
+        >
+          <Text
+            accessibilityElementsHidden={true}
+            allowFontScaling={false}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            style={
+              Array [
+                Object {
+                  "color": "#ffffff",
+                  "fontSize": 24,
+                },
+                Array [
+                  Object {
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+                Object {
+                  "fontFamily": "Material Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
+              ]
+            }
+          >
+            
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

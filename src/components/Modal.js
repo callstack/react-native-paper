@@ -22,7 +22,7 @@ type Props = {|
   /**
    * Callback that is called when the user dismisses the modal.
    */
-  onDismiss: () => mixed,
+  onDismiss?: () => mixed,
   /**
    * Determines Whether the modal is visible.
    */
@@ -53,7 +53,7 @@ type State = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Modal, Portal, Text } from 'react-native-paper';
+ * import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
@@ -66,11 +66,19 @@ type State = {
  *   render() {
  *     const { visible } = this.state;
  *     return (
- *       <Portal>
- *         <Modal visible={visible} onDismiss={this._hideModal}>
- *           <Text>Example Modal</Text>
- *         </Modal>
- *       </Portal>
+ *      <Provider>
+ *        <Portal>
+ *          <Modal visible={visible} onDismiss={this._hideModal}>
+ *            <Text>Example Modal</Text>
+ *          </Modal>
+ *          <Button
+ *            style={{ marginTop: 30 }}
+ *            onPress={this._showModal}
+ *          >
+ *            Show
+ *          </Button>
+ *        </Portal>
+ *      </Provider>
  *     );
  *   }
  * }
@@ -116,11 +124,13 @@ class Modal extends React.Component<Props, State> {
   };
 
   _showModal = () => {
+    BackHandler.removeEventListener('hardwareBackPress', this._handleBack);
     BackHandler.addEventListener('hardwareBackPress', this._handleBack);
     Animated.timing(this.state.opacity, {
       toValue: 1,
       duration: 280,
       easing: Easing.ease,
+      useNativeDriver: true,
     }).start();
   };
 
@@ -130,7 +140,11 @@ class Modal extends React.Component<Props, State> {
       toValue: 0,
       duration: 280,
       easing: Easing.ease,
-    }).start(() => {
+      useNativeDriver: true,
+    }).start(({ finished }) => {
+      if (!finished) {
+        return;
+      }
       if (this.props.visible && this.props.onDismiss) {
         this.props.onDismiss();
       }
@@ -143,6 +157,10 @@ class Modal extends React.Component<Props, State> {
       }
     });
   };
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this._handleBack);
+  }
 
   render() {
     if (!this.state.rendered) return null;
@@ -165,9 +183,8 @@ class Modal extends React.Component<Props, State> {
             ]}
           />
         </TouchableWithoutFeedback>
-        <View style={styles.wrapper}>
+        <View pointerEvents="box-none" style={styles.wrapper}>
           <Surface
-            pointerEvents="box-none"
             style={[
               { opacity: this.state.opacity },
               styles.content,

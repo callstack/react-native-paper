@@ -30,11 +30,24 @@ type Props = React.ElementConfig<typeof TextInput> & {|
    * Callback to execute if we want the left icon to act as button.
    */
   onIconPress?: () => mixed,
+  /**
+   * Set style of the TextInput component inside the searchbar
+   */
+  inputStyle?: any,
   style?: any,
+
   /**
    * @optional
    */
   theme: Theme,
+  /**
+   * Custom color for icon, default will be derived from theme
+   */
+  iconColor?: string,
+  /**
+   * Custom icon for clear button, default will be icon close
+   */
+  clearIcon?: IconSource,
 |};
 
 /**
@@ -118,17 +131,22 @@ class Searchbar extends React.Component<Props> {
       value,
       theme,
       style,
+      iconColor: customIconColor,
+      clearIcon,
+      inputStyle,
       ...rest
     } = this.props;
     const { colors, roundness, dark, fonts } = theme;
     const textColor = colors.text;
     const fontFamily = fonts.regular;
-    const iconColor = dark
-      ? textColor
-      : color(textColor)
-          .alpha(0.54)
-          .rgb()
-          .string();
+    const iconColor =
+      customIconColor ||
+      (dark
+        ? textColor
+        : color(textColor)
+            .alpha(0.54)
+            .rgb()
+            .string());
     const rippleColor = color(textColor)
       .alpha(0.32)
       .rgb()
@@ -150,7 +168,7 @@ class Searchbar extends React.Component<Props> {
           icon={icon || 'search'}
         />
         <TextInput
-          style={[styles.input, { color: textColor, fontFamily }]}
+          style={[styles.input, { color: textColor, fontFamily }, inputStyle]}
           placeholder={placeholder || ''}
           placeholderTextColor={colors.placeholder}
           selectionColor={colors.primary}
@@ -171,7 +189,7 @@ class Searchbar extends React.Component<Props> {
           color={value ? iconColor : 'rgba(255, 255, 255, 0)'}
           rippleColor={rippleColor}
           onPress={this._handleClearPress}
-          icon="close"
+          icon={clearIcon || 'close'}
           accessibilityTraits="button"
           accessibilityComponentType="button"
           accessibilityRole="button"
@@ -192,6 +210,7 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
     alignSelf: 'stretch',
     textAlign: I18nManager.isRTL ? 'right' : 'left',
+    minWidth: 0,
   },
 });
 

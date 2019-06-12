@@ -27,17 +27,23 @@ exports[`renders disabled icon button 1`] = `
   style={
     Array [
       Object {
-        "alignItems": "center",
-        "borderRadius": 18,
-        "height": 36,
-        "justifyContent": "center",
-        "margin": 6,
-        "width": 36,
+        "overflow": "hidden",
       },
-      Object {
-        "opacity": 0.32,
-      },
-      undefined,
+      Array [
+        Object {
+          "alignItems": "center",
+          "borderRadius": 18,
+          "height": 36,
+          "justifyContent": "center",
+          "margin": 6,
+          "overflow": "visible",
+          "width": 36,
+        },
+        Object {
+          "opacity": 0.32,
+        },
+        undefined,
+      ],
     ]
   }
 >
@@ -104,15 +110,21 @@ exports[`renders icon button by default 1`] = `
   style={
     Array [
       Object {
-        "alignItems": "center",
-        "borderRadius": 18,
-        "height": 36,
-        "justifyContent": "center",
-        "margin": 6,
-        "width": 36,
+        "overflow": "hidden",
       },
-      undefined,
-      undefined,
+      Array [
+        Object {
+          "alignItems": "center",
+          "borderRadius": 18,
+          "height": 36,
+          "justifyContent": "center",
+          "margin": 6,
+          "overflow": "visible",
+          "width": 36,
+        },
+        undefined,
+        undefined,
+      ],
     ]
   }
 >
@@ -179,15 +191,21 @@ exports[`renders icon button with color 1`] = `
   style={
     Array [
       Object {
-        "alignItems": "center",
-        "borderRadius": 18,
-        "height": 36,
-        "justifyContent": "center",
-        "margin": 6,
-        "width": 36,
+        "overflow": "hidden",
       },
-      undefined,
-      undefined,
+      Array [
+        Object {
+          "alignItems": "center",
+          "borderRadius": 18,
+          "height": 36,
+          "justifyContent": "center",
+          "margin": 6,
+          "overflow": "visible",
+          "width": 36,
+        },
+        undefined,
+        undefined,
+      ],
     ]
   }
 >
@@ -254,15 +272,21 @@ exports[`renders icon button with size 1`] = `
   style={
     Array [
       Object {
-        "alignItems": "center",
-        "borderRadius": 18,
-        "height": 36,
-        "justifyContent": "center",
-        "margin": 6,
-        "width": 36,
+        "overflow": "hidden",
       },
-      undefined,
-      undefined,
+      Array [
+        Object {
+          "alignItems": "center",
+          "borderRadius": 18,
+          "height": 36,
+          "justifyContent": "center",
+          "margin": 6,
+          "overflow": "visible",
+          "width": 36,
+        },
+        undefined,
+        undefined,
+      ],
     ]
   }
 >
@@ -329,15 +353,21 @@ exports[`renders icon change animated 1`] = `
   style={
     Array [
       Object {
-        "alignItems": "center",
-        "borderRadius": 18,
-        "height": 36,
-        "justifyContent": "center",
-        "margin": 6,
-        "width": 36,
+        "overflow": "hidden",
       },
-      undefined,
-      undefined,
+      Array [
+        Object {
+          "alignItems": "center",
+          "borderRadius": 18,
+          "height": 36,
+          "justifyContent": "center",
+          "margin": 6,
+          "overflow": "visible",
+          "width": 36,
+        },
+        undefined,
+        undefined,
+      ],
     ]
   }
 >

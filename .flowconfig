@@ -25,6 +25,7 @@
 .*/node_modules/@expo/traveling-fastlane-darwin/.*
 
 [untyped]
+<PROJECT_ROOT>/node_modules/react-native-safe-area-view
 <PROJECT_ROOT>/example/node_modules/react-native
 
 [include]
