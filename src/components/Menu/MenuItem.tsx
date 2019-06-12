@@ -76,7 +76,7 @@ class MenuItem extends React.Component<Props> {
             </View>
           ) : null}
           <View
-            style={[styles.item, styles.content, icon && styles.widthWithIcon]}
+            style={[styles.item, styles.content, icon ? styles.widthWithIcon : null]}
             pointerEvents="none"
           >
             <Text

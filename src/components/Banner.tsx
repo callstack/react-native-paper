@@ -180,7 +180,7 @@ class Banner extends React.Component<Props, State> {
     );
 
     return (
-      <Surface {...rest} style={[styles.container, shadow(ELEVATION), style]}>
+      <Surface {...rest} style={[styles.container, shadow(ELEVATION) as ViewStyle, style]}>
         <View style={styles.wrapper}>
           <Animated.View style={{ height }} />
           <Animated.View

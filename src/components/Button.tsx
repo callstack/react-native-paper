@@ -51,7 +51,7 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Make the label text uppercased. Note that this won't work if you pass React elements as children.
    */
-  uppercase: boolean;
+  uppercase?: boolean;
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
@@ -110,7 +110,7 @@ type State = {
  */
 class Button extends React.Component<Props, State> {
   static defaultProps = {
-    mode: 'text',
+    mode: 'text' as 'text',
     uppercase: true,
   };
 
@@ -221,7 +221,7 @@ class Button extends React.Component<Props, State> {
     };
     const touchableStyle = { borderRadius: roundness };
     const textStyle = { color: textColor, ...font };
-    const elevation =
+    const elevation=
       disabled || mode !== 'contained' ? 0 : this.state.elevation;
 
     return (
@@ -230,7 +230,7 @@ class Button extends React.Component<Props, State> {
         style={[
           styles.button,
           compact && styles.compact,
-          { elevation },
+          { elevation } as ViewStyle,
           buttonStyle,
           style,
         ]}

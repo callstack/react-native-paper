@@ -1,12 +1,14 @@
 import * as React from 'react';
 import {
+  AccessibilityState,
+  AccessibilityTrait,
+  Animated,
+  Platform,
+  StyleProp,
+  StyleSheet,
+  TouchableWithoutFeedback,
   View,
   ViewStyle,
-  StyleSheet,
-  StyleProp,
-  Animated,
-  TouchableWithoutFeedback,
-  Platform,
 } from 'react-native';
 import color from 'color';
 import Icon, { IconSource } from './Icon';
@@ -103,7 +105,7 @@ type State = {
  */
 class Chip extends React.Component<Props, State> {
   static defaultProps = {
-    mode: 'flat',
+    mode: 'flat' as 'flat',
     disabled: false,
     selected: false,
   };
@@ -191,8 +193,8 @@ class Chip extends React.Component<Props, State> {
           .string()
       : selectedBackgroundColor;
 
-    const accessibilityTraits = ['button'];
-    const accessibilityStates = [];
+    const accessibilityTraits: AccessibilityTrait[] = ['button'];
+    const accessibilityStates: AccessibilityState[] = [];
 
     if (selected) {
       accessibilityTraits.push('selected');
@@ -217,7 +219,7 @@ class Chip extends React.Component<Props, State> {
             borderRadius,
           },
           style,
-        ]}
+        ] as StyleProp<ViewStyle>}
         {...rest}
       >
         <TouchableRipple

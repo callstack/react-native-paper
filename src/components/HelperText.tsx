@@ -1,6 +1,6 @@
 import * as React from 'react';
 import color from 'color';
-import { Animated, StyleSheet, StyleProp, TextStyle } from 'react-native';
+import { Animated, StyleSheet, StyleProp, TextStyle, LayoutChangeEvent } from 'react-native';
 import Text from './Typography/Text';
 import { withTheme } from '../core/theming';
 import { Theme } from '../types';
@@ -118,7 +118,7 @@ class HelperText extends React.PureComponent<Props, State> {
     }).start();
   };
 
-  _handleTextLayout = e => {
+  _handleTextLayout = (e: LayoutChangeEvent) => {
     this.props.onLayout && this.props.onLayout(e);
     this.setState({
       textHeight: e.nativeEvent.layout.height,

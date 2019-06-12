@@ -1,4 +1,3 @@
-/* @flow */
 /* eslint-disable react/no-multi-comp */
 
 import * as React from 'react';
@@ -11,8 +10,8 @@ import {
   Platform,
   Keyboard,
   ViewStyle,
+  LayoutChangeEvent,
 } from 'react-native';
-import { polyfill } from 'react-lifecycles-compat';
 import SafeAreaView from 'react-native-safe-area-view';
 import color from 'color';
 import Icon, { IconSource } from './Icon';
@@ -152,11 +151,11 @@ type Props<T> = {
    * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
    * Uses `route.accessibilityLabel` by default.
    */
-  getAccessibilityLabel?: (props: { route: T }) => string | null;
+  getAccessibilityLabel: (props: { route: T }) => string | undefined;
   /**
    * Get the id to locate this tab button in tests, uses `route.testID` by default.
    */
-  getTestID?: (props: { route: T }) => string | null;
+  getTestID: (props: { route: T }) => string | undefined;
   /**
    * Get badge for the tab, uses `route.badge` by default.
    */
@@ -255,9 +254,10 @@ const MAX_TAB_WIDTH = 168;
 const BAR_HEIGHT = 56;
 const FAR_FAR_AWAY = 9999;
 
+// @ts-ignore
 const Touchable = TouchableRipple.supported
   ? TouchableRipple
-  : ({ style, children, borderless, centered, rippleColor, ...rest }) => (
+  : ({ style, children, borderless, centered, rippleColor, ...rest }: any) => (
       <TouchableWithoutFeedback {...rest}>
         <View style={style}>{children}</View>
       </TouchableWithoutFeedback>
@@ -345,7 +345,7 @@ class BottomNavigation<T extends Route> extends React.Component<
     }) => (
       <SceneComponent
         key={route.key}
-        component={scenes[route.key]}
+        component={scenes[route.key ? route.key : '']}
         route={route}
         jumpTo={jumpTo}
       />
@@ -357,18 +357,20 @@ class BottomNavigation<T extends Route> extends React.Component<
     keyboardHidesNavigationBar: true,
   };
 
-  static getDerivedStateFromProps(nextProps, prevState: State) {
+  static getDerivedStateFromProps(nextProps: any, prevState: State) {
     const { index, routes } = nextProps.navigationState;
 
     // Re-create animated values if routes have been added/removed
     // Preserve previous animated values if they exist, so we don't break animations
     const tabs = routes.map(
       // focused === 1, unfocused === 0
-      (_, i) => prevState.tabs[i] || new Animated.Value(i === index ? 1 : 0)
+      (_: any, i: number) =>
+        prevState.tabs[i] || new Animated.Value(i === index ? 1 : 0)
     );
     const offsets = routes.map(
       // offscreen === 1, normal === 0
-      (_, i) => prevState.offsets[i] || new Animated.Value(i === index ? 0 : 1)
+      (_: any, i: number) =>
+        prevState.offsets[i] || new Animated.Value(i === index ? 0 : 1)
     );
 
     const nextState = {
@@ -514,7 +516,7 @@ class BottomNavigation<T extends Route> extends React.Component<
     });
   };
 
-  _handleLayout = e => {
+  _handleLayout = (e: LayoutChangeEvent) => {
     const { layout } = this.state;
     const { height, width } = e.nativeEvent.layout;
 
@@ -669,26 +671,28 @@ class BottomNavigation<T extends Route> extends React.Component<
           })}
         </View>
         <Surface
-          style={[
-            styles.bar,
-            keyboardHidesNavigationBar
-              ? {
-                  // When the keyboard is shown, slide down the navigation bar
-                  transform: [
-                    {
-                      translateY: this.state.visible.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [this.state.layout.height, 0],
-                      }),
-                    },
-                  ],
-                  // Absolutely position the navigation bar so that the content is below it
-                  // This is needed to avoid gap at bottom when the navigation bar is hidden
-                  position: this.state.keyboard ? 'absolute' : null,
-                }
-              : null,
-            barStyle,
-          ]}
+          style={
+            [
+              styles.bar,
+              keyboardHidesNavigationBar
+                ? {
+                    // When the keyboard is shown, slide down the navigation bar
+                    transform: [
+                      {
+                        translateY: this.state.visible.interpolate({
+                          inputRange: [0, 1],
+                          outputRange: [this.state.layout.height, 0],
+                        }),
+                      },
+                    ],
+                    // Absolutely position the navigation bar so that the content is below it
+                    // This is needed to avoid gap at bottom when the navigation bar is hidden
+                    position: this.state.keyboard ? 'absolute' : null,
+                  }
+                : null,
+              barStyle,
+            ] as StyleProp<ViewStyle>
+          }
           pointerEvents={
             keyboardHidesNavigationBar && this.state.keyboard ? 'none' : 'auto'
           }
@@ -807,7 +811,7 @@ class BottomNavigation<T extends Route> extends React.Component<
                             })
                           ) : (
                             <Icon
-                              source={route.icon}
+                              source={route.icon as IconSource}
                               color={activeTintColor}
                               size={24}
                             />
@@ -827,7 +831,7 @@ class BottomNavigation<T extends Route> extends React.Component<
                             })
                           ) : (
                             <Icon
-                              source={route.icon}
+                              source={route.icon as IconSource}
                               color={inactiveTintColor}
                               size={24}
                             />
@@ -923,8 +927,6 @@ class BottomNavigation<T extends Route> extends React.Component<
     );
   }
 }
-
-polyfill(BottomNavigation);
 
 export default withTheme(BottomNavigation);
 

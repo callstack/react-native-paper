@@ -3,7 +3,7 @@
     "browser": true
   },
 
-  "extends": ["callstack-io"],
+  "extends": ["@callstack"],
 
   "plugins": ["react-native"],
 
@@ -12,14 +12,6 @@
     "no-multi-assign": "off",
     "no-nested-ternary": "off",
     "global-require": "off",
-
-    "flowtype/define-flow-type": "error",
-    "flowtype/no-weak-types": "off",
-    "flowtype/require-variable-type": "off",
-    "flowtype/sort-keys": "off",
-    "flowtype/type-id-match": "off",
-    "flowtype/use-flow-type": "error",
-    "flowtype/valid-syntax": "error",
 
     "import/no-extraneous-dependencies": "off",
     "import/first": "off",

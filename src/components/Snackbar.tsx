@@ -233,7 +233,7 @@ class Snackbar extends React.Component<Props, State> {
               ],
             },
             style,
-          ]}
+          ] as StyleProp<ViewStyle>}
         >
           <Text style={[styles.content, { marginRight: action ? 0 : 16 }]}>
             {children}

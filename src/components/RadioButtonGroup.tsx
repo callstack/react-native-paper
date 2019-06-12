@@ -16,13 +16,13 @@ type Props = {
   children: React.ReactNode;
 };
 
-type RadioButtonContextType = {
+export type RadioButtonContextType = {
   value: string;
   onValueChange: (item: string) => void;
 };
 
-export const RadioButtonContext: Context<RadioButtonContextType | null> = createReactContext(
-  null
+export const RadioButtonContext: Context<RadioButtonContextType> = createReactContext(
+  null as any
 );
 
 /**

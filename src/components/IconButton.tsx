@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { View, ViewStyle, StyleSheet, StyleProp, GestureResponderEvent } from 'react-native';
+import {
+  View,
+  ViewStyle,
+  StyleSheet,
+  StyleProp,
+  GestureResponderEvent,
+} from 'react-native';
 import color from 'color';
 
 import TouchableRipple from './TouchableRipple';
@@ -110,6 +116,7 @@ const IconButton = ({
       accessibilityStates={disabled ? ['disabled'] : undefined}
       disabled={disabled}
       hitSlop={
+        // @ts-ignore - this should be fixed in react-theme-providersince withTheme() is not forwarding static property types
         TouchableRipple.supported
           ? { top: 10, left: 10, bottom: 10, right: 10 }
           : { top: 6, left: 6, bottom: 6, right: 6 }
@@ -124,6 +131,7 @@ const IconButton = ({
 };
 
 const styles = StyleSheet.create({
+  // @ts-ignore - this should be fixed in react-theme-providersince withTheme() is not forwarding static property types
   container: TouchableRipple.supported
     ? {
         height: 28,

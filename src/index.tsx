@@ -1,5 +1,3 @@
-/* @flow */
-
 import * as Colors from './styles/colors';
 import { Theme as _Theme } from './types';
 

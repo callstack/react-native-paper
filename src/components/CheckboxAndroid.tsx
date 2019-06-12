@@ -59,7 +59,7 @@ class CheckboxAndroid extends React.Component<Props, State> {
     scaleAnim: new Animated.Value(1),
   };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props) {
     if (prevProps.status === this.props.status) {
       return;
     }

@@ -1,8 +1,5 @@
-/* @flow */
-
 import * as React from 'react';
 import { Animated, TextInput as NativeTextInput, Platform, LayoutChangeEvent } from 'react-native';
-import { polyfill } from 'react-lifecycles-compat';
 
 import TextInputOutlined from './TextInputOutlined';
 import TextInputFlat from './TextInputFlat';
@@ -163,8 +160,8 @@ export type TextInputProps = React.ComponentProps<typeof NativeTextInput> & {
 
 class TextInput extends React.Component<TextInputProps, State> {
   static defaultProps = {
-    mode: 'flat',
-    padding: 'normal',
+    mode: 'flat' as 'flat',
+    padding: 'normal' as 'normal',
     dense: false,
     disabled: false,
     error: false,
@@ -265,7 +262,7 @@ class TextInput extends React.Component<TextInputProps, State> {
       placeholder: '',
     });
 
-  _timer: NodeJS.Timeout | undefined;
+  _timer?: number;
   _root: NativeTextInput | undefined | null;
 
   _showError = () => {

@@ -9,7 +9,6 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { polyfill } from 'react-lifecycles-compat';
 import Surface from './Surface';
 import { withTheme } from '../core/theming';
 import { Theme } from '../types';
@@ -208,9 +207,6 @@ class Modal extends React.Component<Props, State> {
     );
   }
 }
-
-// @ts-ignore
-polyfill(Modal);
 
 export default withTheme(Modal);
 

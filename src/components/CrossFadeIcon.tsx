@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
-import { polyfill } from 'react-lifecycles-compat';
 import Icon, { isValidIcon, isEqualIcon, IconSource } from './Icon';
 
 import { withTheme } from '../core/theming';
@@ -27,7 +26,7 @@ type Props = {
 
 type State = {
   currentIcon: IconSource;
-  previousIcon: IconSource | undefined;
+  previousIcon: IconSource | null;
   fade: Animated.Value;
 };
 
@@ -43,13 +42,13 @@ class CrossFadeIcon extends React.Component<Props, State> {
     };
   }
 
-  state = {
+  state: State = {
     currentIcon: this.props.source,
     previousIcon: null,
     fade: new Animated.Value(1),
   };
 
-  componentDidUpdate(prevProps: Props, prevState: State) {
+  componentDidUpdate(_: Props, prevState: State) {
     const { previousIcon } = this.state;
     const {
       theme: {
@@ -132,8 +131,6 @@ class CrossFadeIcon extends React.Component<Props, State> {
     );
   }
 }
-
-polyfill(CrossFadeIcon);
 
 export default withTheme(CrossFadeIcon);
 

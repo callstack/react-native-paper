@@ -1,21 +1,23 @@
 import * as React from 'react';
-import { Image, Text, StyleSheet, I18nManager, Platform } from 'react-native';
-import { ImageSource } from 'react-native/Libraries/Image/ImageSource';
+import { Image, Text, StyleSheet, I18nManager, Platform, ImageSourcePropType} from 'react-native';
 
-let MaterialIcons;
+let MaterialIcons: any;
 
 try {
   // Optionally require vector-icons
   MaterialIcons = require('react-native-vector-icons/MaterialIcons').default;
 } catch (e) {
+  // @ts-ignore
   if (global.__expo && global.__expo.Icon && global.__expo.Icon.MaterialIcons) {
     // Snack doesn't properly bundle vector icons from subpath
     // Use icons from the __expo global if available
+    // @ts-ignore
     MaterialIcons = global.__expo.Icon.MaterialIcons;
   } else {
     let isErrorLogged = false;
 
     // Fallback component for icons
+    // @ts-ignore
     MaterialIcons = ({ name, color, size, ...rest }) => {
       /* eslint-disable no-console */
 
@@ -49,7 +51,7 @@ try {
   }
 }
 
-type IconSourceBase = string | ImageSource;
+type IconSourceBase = string | ImageSourcePropType;
 
 export type IconSource =
   | IconSourceBase
@@ -101,15 +103,20 @@ export const isEqualIcon = (a: any, b: any) =>
 
 const Icon = ({ source, color, size, ...rest }: Props) => {
   const direction =
+    // @ts-ignore
     typeof source === 'object' && source.direction && source.source
+      // @ts-ignore
       ? source.direction === 'auto'
         ? I18nManager.isRTL
           ? 'rtl'
           : 'ltr'
+          // @ts-ignore
         : source.direction
       : null;
   const s =
+   // @ts-ignore
     typeof source === 'object' && source.direction && source.source
+      // @ts-ignore
       ? source.source
       : source;
 

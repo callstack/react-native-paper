@@ -8,7 +8,6 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { polyfill } from 'react-lifecycles-compat';
 import color from 'color';
 import FAB from './FAB';
 import Text from '../Typography/Text';
@@ -325,9 +324,6 @@ class FABGroup extends React.Component<Props, State> {
     );
   }
 }
-
-// @ts-ignore
-polyfill(FABGroup);
 
 export default withTheme(FABGroup);
 

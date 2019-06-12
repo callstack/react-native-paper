@@ -15,7 +15,7 @@ type Props = React.ComponentProps<typeof View> & {
   /**
    * Whether to show the indicator or hide it.
    */
-  animating: boolean;
+  animating?: boolean;
   /**
    * The color of the spinner.
    */
@@ -27,7 +27,7 @@ type Props = React.ComponentProps<typeof View> & {
   /**
    * Whether the indicator should hide when not animating.
    */
-  hidesWhenStopped: boolean;
+  hidesWhenStopped?: boolean;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -65,7 +65,7 @@ const DURATION = 2400;
 class ActivityIndicator extends React.Component<Props, State> {
   static defaultProps = {
     animating: true,
-    size: 'small',
+    size: 'small' as 'small',
     hidesWhenStopped: true,
   };
 
@@ -76,7 +76,7 @@ class ActivityIndicator extends React.Component<Props, State> {
     ),
   };
 
-  rotation = null;
+  rotation?: Animated.CompositeAnimation = undefined;
 
   componentDidMount() {
     const { animating } = this.props;
@@ -177,11 +177,11 @@ class ActivityIndicator extends React.Component<Props, State> {
             // Thanks to https://github.com/n4kz/react-native-indicators for the great work
             const inputRange = Array.from(
               new Array(frames),
-              (frame, frameIndex) => frameIndex / (frames - 1)
+              (_, frameIndex) => frameIndex / (frames - 1)
             );
             const outputRange = Array.from(
               new Array(frames),
-              (frame, frameIndex) => {
+              (_, frameIndex) => {
                 let progress = (2 * frameIndex) / (frames - 1);
                 const rotation = index ? +(360 - 15) : -(180 - 15);
 
