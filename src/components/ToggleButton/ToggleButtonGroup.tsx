@@ -23,8 +23,8 @@ type ToggleButtonContextType = {
   onValueChange: (item: string) => void,
 };
 
-export const ToggleButtonGroupContext: Context<ToggleButtonContextType | null> = createReactContext(
-  null
+export const ToggleButtonGroupContext: Context<ToggleButtonContextType> = createReactContext(
+  null as any
 );
 
 /**
@@ -70,7 +70,9 @@ class ToggleButtonGroup extends React.Component<Props> {
         }}
       >
         {React.Children.map(children, (child, i) => {
+          // @ts-ignore
           if (child && child.type === ToggleButton) {
+            // @ts-ignore
             return React.cloneElement(child, {
               style: [
                 styles.button,
@@ -79,6 +81,7 @@ class ToggleButtonGroup extends React.Component<Props> {
                   : i === count - 1
                     ? styles.last
                     : styles.middle,
+                // @ts-ignore
                 child.props.style,
               ],
             });

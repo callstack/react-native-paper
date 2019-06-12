@@ -28,7 +28,7 @@ type Props = React.ComponentProps<typeof TouchableWithoutFeedback> & {
   theme: Theme;
 };
 
-class TouchableRipple extends React.Component<Props, void> {
+class TouchableRipple extends React.Component<Props> {
   static defaultProps = {
     borderless: false,
   };

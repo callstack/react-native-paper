@@ -11,6 +11,7 @@ import color from 'color';
 import Text from '../Typography/Text';
 import InputLabel from './InputLabel';
 import { RenderProps, ChildTextInputProps } from './types';
+import { Theme, Font } from '../../types';
 
 import {
   MAXIMIZED_LABEL_FONT_SIZE,
@@ -71,7 +72,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       StyleSheet.flatten(style) || {};
 
     const { fontSize: fontSizeStyle, height, ...viewStyle } =
-      StyleSheet.flatten(style) || {};
+      StyleSheet.flatten(style);
     const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
 
     let inputTextColor,
@@ -126,11 +127,11 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       console.warn('Currently we support only numbers in height prop');
 
     const paddingSettings = {
-      height: +height || undefined,
+      height: +height,
       labelHalfHeight,
       offset: LABEL_PADDING_TOP,
-      multiline,
-      dense,
+      multiline: multiline ? multiline : null,
+      dense: dense ? dense : null,
       topPosition,
       fontSize,
       label,
@@ -238,7 +239,14 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
 
 export default TextInputOutlined;
 
-const Outline = ({ theme, hasActiveOutline, activeColor, outlineColor }) => (
+type OutlineType = {
+  activeColor: string;
+  hasActiveOutline: boolean | undefined;
+  outlineColor: string | undefined;
+  theme: Theme;
+};
+
+const Outline = ({ theme, hasActiveOutline, activeColor, outlineColor }: OutlineType) => (
   <View
     pointerEvents="none"
     style={[
@@ -252,7 +260,16 @@ const Outline = ({ theme, hasActiveOutline, activeColor, outlineColor }) => (
   />
 );
 
-const OutlinedLabel = ({ parentState, label, backgroundColor, font }) =>
+type OutlinedLabel = {
+  backgroundColor: string;
+  font: Font;
+  label?: string;
+  parentState: {
+    labeled: Animated.Value;
+  }
+};
+
+const OutlinedLabel = ({ parentState, label, backgroundColor, font }: OutlinedLabel) =>
   label ? (
     // The input label stays on top of the outline
     // The background of the label covers the outline so it looks cut off

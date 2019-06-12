@@ -72,7 +72,7 @@ type Props = React.ComponentProps<typeof TouchableWithoutFeedback> & {
  * export default MyComponent;
  * ```
  */
-class TouchableRipple extends React.Component<Props, void> {
+class TouchableRipple extends React.Component<Props> {
   static defaultProps = {
     borderless: false,
   };
@@ -82,7 +82,7 @@ class TouchableRipple extends React.Component<Props, void> {
    */
   static supported = true;
 
-  _handlePressIn = e => {
+  _handlePressIn = (e: any) => {
     const { centered, rippleColor, onPressIn, theme } = this.props;
 
     onPressIn && onPressIn(e);
@@ -186,16 +186,18 @@ class TouchableRipple extends React.Component<Props, void> {
     });
   };
 
-  _handlePressOut = e => {
+  _handlePressOut = (e: any) => {
     this.props.onPressOut && this.props.onPressOut(e);
 
-    const containers = e.currentTarget.querySelectorAll('[data-paper-ripple]');
+    const containers = e.currentTarget.querySelectorAll('[data-paper-ripple]') as HTMLElement[];
 
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        containers.forEach(container => {
+        containers.forEach((container) => {
+          // @ts-ignore
           const ripple = container.firstChild;
 
+          // @ts-ignore
           Object.assign(ripple.style, {
             transitionDuration: '250ms',
             opacity: 0,
@@ -203,6 +205,7 @@ class TouchableRipple extends React.Component<Props, void> {
 
           // Finally remove the span after the transition
           setTimeout(() => {
+            // @ts-ignore
             const { parentNode } = container;
 
             if (parentNode) {

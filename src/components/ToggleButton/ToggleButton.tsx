@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, StyleProp, ViewStyle } from 'react-native';
+import { StyleSheet, StyleProp, ViewStyle, GestureResponderEvent } from 'react-native';
 import { withTheme } from '../../core/theming';
 import color from 'color';
 import IconButton from '../IconButton';
@@ -34,7 +34,7 @@ type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: (value: string | null) => void;
+  onPress?: (value?: GestureResponderEvent) => void;
   /**
    * Value of button.
    */
@@ -124,7 +124,7 @@ class ToggleButton extends React.Component<Props> {
             <IconButton
               borderless={false}
               icon={icon}
-              onPress={(e: string | null) => {
+              onPress={(e?: GestureResponderEvent) => {
                 if (onPress) {
                   onPress(e);
                 }

@@ -2,19 +2,20 @@ import { TextInput as NativeTextInput, Animated } from 'react-native';
 import { TextInputProps } from './TextInput';
 
 export type RenderProps = {
-  ref: (a: any) => undefined;
-  onChangeText: (a: string) => undefined | null | undefined;
-  placeholder: string | null | undefined;
-  placeholderTextColor: string | null | undefined;
-  editable: boolean | null | undefined;
-  selectionColor: string | null | undefined;
-  onFocus: () => unknown | null | undefined;
-  onBlur: () => unknown | null | undefined;
-  underlineColorAndroid: string | null | undefined;
+  ref: (a:  NativeTextInput | null | undefined) => void;
+  onChangeText?: (a: string) => void;
+  placeholder?: string;
+  placeholderTextColor?: string;
+  editable?: boolean;
+  selectionColor?: string;
+  onFocus?: (args: any) => void;
+  onBlur?: (args: any) => void;
+  underlineColorAndroid?: string;
   style: any;
-  multiline: boolean | null | undefined;
-  numberOfLines: number | null | undefined;
-  value: string | null | undefined;
+  multiline?: boolean;
+  numberOfLines?: number;
+  value?: string;
+  adjustsFontSizeToFit?: boolean;
 };
 type TextInputTypesWithoutMode = Omit<
   TextInputProps,
@@ -31,12 +32,13 @@ export type State = {
 export type ChildTextInputProps = {
   parentState: State;
   innerRef: (ref: NativeTextInput | null | undefined) => void;
-  onFocus?: (args: any) => undefined;
-  onBlur?: (args: any) => undefined;
-  onChangeText?: (value: string) => undefined;
-  onLayoutAnimatedText?: (e: any) => undefined;
+  onFocus?: (args: any) => void;
+  onBlur?: (args: any) => void;
+  onChangeText?: (value: string) => void;
+  onLayoutAnimatedText: (args: any) => void;
 } & TextInputTypesWithoutMode;
 export type LabelProps = {
+  mode?: 'flat' | 'outlined';
   placeholderStyle: any;
   placeholderOpacity: number | Animated.Value;
   baseLabelTranslateX: number;
@@ -51,7 +53,7 @@ export type LabelProps = {
   label?: string | null | undefined;
   hasActiveOutline: boolean | null | undefined;
   activeColor: string;
-  onLayoutAnimatedText: () => unknown | null | undefined;
   error: boolean | null | undefined;
+  onLayoutAnimatedText: (args: any) => void;
 };
 export type InputLabelProps = { parentState: State; labelProps: LabelProps };

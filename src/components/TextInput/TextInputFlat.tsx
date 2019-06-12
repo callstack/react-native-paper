@@ -73,7 +73,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
     const paddingOffset = padding !== 'none' ? styles.paddingOffset : null;
 
     const { fontSize: fontSizeStyle, height, ...viewStyle } =
-      StyleSheet.flatten(style) || {};
+      StyleSheet.flatten(style);
     const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
 
     let inputTextColor, activeColor, underlineColorCustom, placeholderColor;
@@ -143,11 +143,11 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       console.warn('Currently we support only numbers in height prop');
 
     const paddingSettings = {
-      height: +height || undefined,
+      height: +height || null,
       labelHalfHeight,
       offset: INPUT_OFFSET,
-      multiline,
-      dense,
+      multiline: multiline ? multiline : null,
+      dense: dense ? dense : null,
       topPosition,
       fontSize,
       label,
@@ -222,7 +222,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
             ref: innerRef,
             onChangeText,
             adjustsFontSizeToFit: true,
-            placeholder: label
+            placeholder: label && parentState.placeholder
               ? parentState.placeholder
               : this.props.placeholder,
             placeholderTextColor: placeholderColor,
@@ -256,13 +256,26 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
 
 export default TextInputFlat;
 
+type UnderlineProps = {
+  parentState: {
+    focused: boolean;
+  };
+  error?: boolean;
+  colors: {
+    error: string
+  };
+  activeColor: string;
+  underlineColorCustom?: string
+};
+
+
 const Underline = ({
   parentState,
   error,
   colors,
   activeColor,
   underlineColorCustom,
-}) => {
+}: UnderlineProps) => {
   let backgroundColor = parentState.focused
     ? activeColor
     : underlineColorCustom;
