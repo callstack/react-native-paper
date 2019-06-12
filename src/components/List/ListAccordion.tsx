@@ -173,7 +173,9 @@ class ListAccordion extends React.Component<Props, State> {
                 </Text>
               )}
             </View>
-            <View style={[styles.item, description ? styles.multiline : undefined ]}>
+            <View
+              style={[styles.item, description ? styles.multiline : undefined]}
+            >
               <Icon
                 source={expanded ? 'keyboard-arrow-up' : 'keyboard-arrow-down'}
                 color={titleColor}

@@ -9,8 +9,8 @@ type Props = React.ComponentProps<typeof Text> & {
   /**
    * @optional
    */
-  theme: Theme,
-  style?: StyleProp<TextStyle>,
+  theme: Theme;
+  style?: StyleProp<TextStyle>;
 };
 
 /**

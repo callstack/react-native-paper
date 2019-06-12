@@ -2,7 +2,7 @@ import { TextInput as NativeTextInput, Animated } from 'react-native';
 import { TextInputProps } from './TextInput';
 
 export type RenderProps = {
-  ref: (a:  NativeTextInput | null | undefined) => void;
+  ref: (a: NativeTextInput | null | undefined) => void;
   onChangeText?: (a: string) => void;
   placeholder?: string;
   placeholderTextColor?: string;
@@ -17,10 +17,7 @@ export type RenderProps = {
   value?: string;
   adjustsFontSizeToFit?: boolean;
 };
-type TextInputTypesWithoutMode = Omit<
-  TextInputProps,
-  'mode'
->;
+type TextInputTypesWithoutMode = Omit<TextInputProps, 'mode'>;
 export type State = {
   labeled: Animated.Value;
   error: Animated.Value;

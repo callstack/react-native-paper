@@ -11,20 +11,20 @@ type Props = {
   /**
    * Icon to display for the `Avatar`.
    */
-  icon: IconSource,
+  icon: IconSource;
   /**
    * Size of the avatar.
    */
-  size: number,
+  size: number;
   /**
    * Custom color for the icon.
    */
-  color?: string,
-  style?: StyleProp<ViewStyle>,
+  color?: string;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 /**

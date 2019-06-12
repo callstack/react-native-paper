@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
-import RadioButtonGroup, { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
+import RadioButtonGroup, {
+  RadioButtonContext,
+  RadioButtonContextType,
+} from './RadioButtonGroup';
 import RadioButtonAndroid from './RadioButtonAndroid';
 import RadioButtonIOS from './RadioButtonIOS';
 import { withTheme } from '../core/theming';

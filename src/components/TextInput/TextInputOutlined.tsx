@@ -50,6 +50,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       label,
       error,
       selectionColor,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       underlineColor,
       dense,
       style,
@@ -71,8 +72,11 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
     const { backgroundColor = colors.background } =
       StyleSheet.flatten(style) || {};
 
-    const { fontSize: fontSizeStyle, height, ...viewStyle } =
-      StyleSheet.flatten(style);
+    const {
+      fontSize: fontSizeStyle,
+      height,
+      ...viewStyle
+    } = StyleSheet.flatten(style);
     const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
 
     let inputTextColor,
@@ -246,11 +250,17 @@ type OutlineType = {
   theme: Theme;
 };
 
-const Outline = ({ theme, hasActiveOutline, activeColor, outlineColor }: OutlineType) => (
+const Outline = ({
+  theme,
+  hasActiveOutline,
+  activeColor,
+  outlineColor,
+}: OutlineType) => (
   <View
     pointerEvents="none"
     style={[
       styles.outline,
+      // eslint-disable-next-line react-native/no-inline-styles
       {
         borderRadius: theme.roundness,
         borderWidth: hasActiveOutline ? 2 : 1,
@@ -266,10 +276,15 @@ type OutlinedLabel = {
   label?: string;
   parentState: {
     labeled: Animated.Value;
-  }
+  };
 };
 
-const OutlinedLabel = ({ parentState, label, backgroundColor, font }: OutlinedLabel) =>
+const OutlinedLabel = ({
+  parentState,
+  label,
+  backgroundColor,
+  font,
+}: OutlinedLabel) =>
   label ? (
     // The input label stays on top of the outline
     // The background of the label covers the outline so it looks cut off

@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { Animated, TextInput as NativeTextInput, Platform, LayoutChangeEvent } from 'react-native';
+import {
+  Animated,
+  TextInput as NativeTextInput,
+  Platform,
+  LayoutChangeEvent,
+} from 'react-native';
 
 import TextInputOutlined from './TextInputOutlined';
 import TextInputFlat from './TextInputFlat';
@@ -420,8 +425,5 @@ class TextInput extends React.Component<TextInputProps, State> {
     );
   }
 }
-
-// @ts-ignore
-polyfill(TextInput);
 
 export default withTheme(TextInput);

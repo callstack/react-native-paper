@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { StyleSheet, StyleProp, ViewStyle, GestureResponderEvent } from 'react-native';
+import {
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+  GestureResponderEvent,
+} from 'react-native';
 import { withTheme } from '../../core/theming';
 import color from 'color';
 import IconButton from '../IconButton';

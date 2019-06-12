@@ -257,7 +257,8 @@ const FAR_FAR_AWAY = 9999;
 // @ts-ignore
 const Touchable = TouchableRipple.supported
   ? TouchableRipple
-  : ({ style, children, borderless, centered, rippleColor, ...rest }: any) => (
+  : // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    ({ style, children, borderless, centered, rippleColor, ...rest }: any) => (
       <TouchableWithoutFeedback {...rest}>
         <View style={style}>{children}</View>
       </TouchableWithoutFeedback>

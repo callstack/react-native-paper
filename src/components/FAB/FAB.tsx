@@ -176,20 +176,22 @@ class FAB extends React.Component<Props, State> {
     return (
       <Surface
         {...rest}
-        style={[
-          {
-            backgroundColor,
-            opacity: visibility,
-            transform: [
-              {
-                scale: visibility,
-              },
-            ],
-          },
-          styles.container,
-          disabled && styles.disabled,
-          style,
-        ] as StyleProp<ViewStyle>}
+        style={
+          [
+            {
+              backgroundColor,
+              opacity: visibility,
+              transform: [
+                {
+                  scale: visibility,
+                },
+              ],
+            },
+            styles.container,
+            disabled && styles.disabled,
+            style,
+          ] as StyleProp<ViewStyle>
+        }
         pointerEvents={visible ? 'auto' : 'none'}
       >
         <TouchableRipple

@@ -17,32 +17,32 @@ type Props = React.ComponentProps<typeof TouchableWithoutFeedback> & {
   /**
    * Text content of the `DataTableTitle`.
    */
-  children: React.ReactNode,
+  children: React.ReactNode;
   /**
    * Align the text to the right. Generally monetary or number fields are aligned to right.
    */
-  numeric?: boolean,
+  numeric?: boolean;
   /**
    * Direction of sorting. An arrow indicating the direction is displayed when this is given.
    */
-  sortDirection?: 'ascending' | 'descending',
+  sortDirection?: 'ascending' | 'descending';
   /**
    * The number of lines to show.
    */
-  numberOfLines?: number,
+  numberOfLines?: number;
   /**
    * Function to execute on press.
    */
-  onPress?: () => void,
-  style?: StyleProp<ViewStyle>,
+  onPress?: () => void;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 type State = {
-  spinAnim: Animated.Value,
+  spinAnim: Animated.Value;
 };
 
 class DataTableTitle extends React.Component<Props, State> {

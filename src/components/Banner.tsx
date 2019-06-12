@@ -13,15 +13,15 @@ type Props = $RemoveChildren<typeof Surface> & {
   /**
    * Whether banner is currently visible.
    */
-  visible: boolean,
+  visible: boolean;
   /**
    * Content that will be displayed inside banner.
    */
-  children: string,
+  children: string;
   /**
    * Callback that returns an image to display inside banner.
    */
-  image?: (props: { size: number }) => React.ReactNode,
+  image?: (props: { size: number }) => React.ReactNode;
   /**
    * Action items to shown in the banner.
    * An action item should contain the following properties:
@@ -32,33 +32,33 @@ type Props = $RemoveChildren<typeof Surface> & {
    * To customize button you can pass other props that button component takes.
    */
   actions: Array<{
-    label: string,
-    onPress: () => void,
-  }>,
-  style?: StyleProp<ViewStyle>,
+    label: string;
+    onPress: () => void;
+  }>;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 type State = {
-  position: Animated.Value,
+  position: Animated.Value;
   layout: {
-    height: number,
-    measured: boolean,
-  },
+    height: number;
+    measured: boolean;
+  };
 };
 
 type NativeEvent = {
   nativeEvent: {
     layout: {
-      x: number,
-      y: number,
-      width: number,
-      height: number,
-    },
-  },
+      x: number;
+      y: number;
+      width: number;
+      height: number;
+    };
+  };
 };
 
 /**
@@ -160,6 +160,7 @@ class Banner extends React.Component<Props, State> {
       children,
       actions,
       style,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       theme,
       ...rest
     } = this.props;
@@ -180,7 +181,10 @@ class Banner extends React.Component<Props, State> {
     );
 
     return (
-      <Surface {...rest} style={[styles.container, shadow(ELEVATION) as ViewStyle, style]}>
+      <Surface
+        {...rest}
+        style={[styles.container, shadow(ELEVATION) as ViewStyle, style]}
+      >
         <View style={styles.wrapper}>
           <Animated.View style={{ height }} />
           <Animated.View

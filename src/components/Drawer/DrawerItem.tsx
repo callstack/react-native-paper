@@ -7,7 +7,6 @@ import TouchableRipple from '../TouchableRipple';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 
-
 type Props = {
   /**
    * The label text of the item.

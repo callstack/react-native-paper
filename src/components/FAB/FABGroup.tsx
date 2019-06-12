@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {
-	StyleProp,
-	StyleSheet,
+  StyleProp,
+  StyleSheet,
   Animated,
   SafeAreaView,
   TouchableWithoutFeedback,
@@ -28,61 +28,61 @@ type Props = {
    * - `onPress`: callback that is called when `FAB` is pressed (required)
    */
   actions: Array<{
-    icon: IconSource,
-    label?: string,
-    color?: string,
-    accessibilityLabel?: string,
-    style?: StyleProp<ViewStyle>,
-    onPress: () => void,
-  }>,
+    icon: IconSource;
+    label?: string;
+    color?: string;
+    accessibilityLabel?: string;
+    style?: StyleProp<ViewStyle>;
+    onPress: () => void;
+  }>;
   /**
    * Icon to display for the `FAB`.
    * You can toggle it based on whether the speed dial is open to display a different icon.
    */
-  icon: IconSource,
+  icon: IconSource;
   /**
    * Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.
    */
-  accessibilityLabel?: string,
+  accessibilityLabel?: string;
   /**
    * Custom color for the `FAB`.
    */
-  color?: string,
+  color?: string;
   /**
    * Function to execute on pressing the `FAB`.
    */
-  onPress?: () => void,
+  onPress?: () => void;
   /**
    * Whether the speed dial is open.
    */
-  open: boolean,
+  open: boolean;
   /**
    * Callback which is called on opening and closing the speed dial.
    * The open state needs to be updated when it's called, otherwise the change is dropped.
    */
-  onStateChange: (state: { open: boolean }) => void,
+  onStateChange: (state: { open: boolean }) => void;
   /**
    * Whether `FAB` is currently visible.
    */
-  visible: boolean,
+  visible: boolean;
   /**
    * Style for the group. You can use it to pass additional styles if you need.
    * For example, you can set an additional padding if you have a tab bar at the bottom.
    */
-  style?: StyleProp<ViewStyle>,
+  style?: StyleProp<ViewStyle>;
   /**
    * Style for the FAB. It allows to pass the FAB button styles, such as backgroundColor.
    */
-  fabStyle?: StyleProp<ViewStyle>,
+  fabStyle?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 type State = {
-  backdrop: Animated.Value,
-  animations: Animated.Value[],
+  backdrop: Animated.Value;
+  animations: Animated.Value[];
 };
 
 /**
@@ -220,14 +220,13 @@ class FABGroup extends React.Component<Props, State> {
       : this.state.backdrop;
 
     const opacities = this.state.animations;
-    const scales = opacities.map(
-      opacity =>
-        open
-          ? opacity.interpolate({
-              inputRange: [0, 1],
-              outputRange: [0.8, 1],
-            })
-          : 1
+    const scales = opacities.map(opacity =>
+      open
+        ? opacity.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0.8, 1],
+          })
+        : 1
     );
 
     return (
@@ -254,13 +253,15 @@ class FABGroup extends React.Component<Props, State> {
               >
                 {it.label && (
                   <Card
-                    style={[
-                      styles.label,
-                      {
-                        transform: [{ scale: scales[i] }],
-                        opacity: opacities[i],
-                      },
-                    ] as StyleProp<ViewStyle>}
+                    style={
+                      [
+                        styles.label,
+                        {
+                          transform: [{ scale: scales[i] }],
+                          opacity: opacities[i],
+                        },
+                      ] as StyleProp<ViewStyle>
+                    }
                     onPress={() => {
                       it.onPress();
                       this._close();
@@ -281,14 +282,16 @@ class FABGroup extends React.Component<Props, State> {
                   small
                   icon={it.icon}
                   color={it.color}
-                  style={[
-                    {
-                      transform: [{ scale: scales[i] }],
-                      opacity: opacities[i],
-                      backgroundColor: theme.colors.surface,
-                    },
-                    it.style,
-                  ] as StyleProp<ViewStyle>}
+                  style={
+                    [
+                      {
+                        transform: [{ scale: scales[i] }],
+                        opacity: opacities[i],
+                        backgroundColor: theme.colors.surface,
+                      },
+                      it.style,
+                    ] as StyleProp<ViewStyle>
+                  }
                   onPress={() => {
                     it.onPress();
                     this._close();

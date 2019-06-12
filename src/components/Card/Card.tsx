@@ -119,6 +119,7 @@ class Card extends React.Component<Props, State> {
   render() {
     const {
       children,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       elevation: cardElevation,
       onLongPress,
       onPress,
@@ -133,9 +134,7 @@ class Card extends React.Component<Props, State> {
     const total = React.Children.count(children);
     const siblings = React.Children.map(children, child =>
       React.isValidElement(child) && child.type
-        ? 
-          // @ts-ignore
-          child.type.displayName
+        ? (child.type as any).displayName
         : null
     );
     return (

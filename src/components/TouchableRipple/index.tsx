@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { TouchableWithoutFeedback, View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
+import {
+  TouchableWithoutFeedback,
+  View,
+  ViewStyle,
+  StyleSheet,
+  StyleProp,
+} from 'react-native';
 import color from 'color';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
@@ -8,45 +14,45 @@ type Props = React.ComponentProps<typeof TouchableWithoutFeedback> & {
   /**
    * Whether to render the ripple outside the view bounds.
    */
-  borderless?: boolean,
+  borderless?: boolean;
   /**
    * Type of background drawabale to display the feedback (Android).
    * https://facebook.github.io/react-native/docs/touchablenativefeedback.html#background
    */
-  background?: Object,
+  background?: Object;
   /**
    * Whether to start the ripple at the center (Web).
    */
-  centered?: boolean,
+  centered?: boolean;
   /**
    * Whether to prevent interaction with the touchable.
    */
-  disabled?: boolean,
+  disabled?: boolean;
   /**
    * Function to execute on press. If not set, will cause the touchable to be disabled.
    */
-  onPress?: () => void | null,
+  onPress?: () => void | null;
   /**
    * Function to execute on long press.
    */
-  onLongPress?: () => void,
+  onLongPress?: () => void;
   /**
    * Color of the ripple effect (Android >= 5.0 and Web).
    */
-  rippleColor?: string,
+  rippleColor?: string;
   /**
    * Color of the underlay for the highlight effect (Android < 5.0 and iOS).
    */
-  underlayColor?: string,
+  underlayColor?: string;
   /**
    * Content of the `TouchableRipple`.
    */
-  children: React.ReactNode,
-  style?: StyleProp<ViewStyle>,
+  children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 /**
@@ -189,11 +195,13 @@ class TouchableRipple extends React.Component<Props> {
   _handlePressOut = (e: any) => {
     this.props.onPressOut && this.props.onPressOut(e);
 
-    const containers = e.currentTarget.querySelectorAll('[data-paper-ripple]') as HTMLElement[];
+    const containers = e.currentTarget.querySelectorAll(
+      '[data-paper-ripple]'
+    ) as HTMLElement[];
 
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        containers.forEach((container) => {
+        containers.forEach(container => {
           // @ts-ignore
           const ripple = container.firstChild;
 
@@ -218,6 +226,7 @@ class TouchableRipple extends React.Component<Props> {
   };
 
   render() {
+    /* eslint-disable @typescript-eslint/no-unused-vars */
     const {
       style,
       background,
@@ -229,6 +238,7 @@ class TouchableRipple extends React.Component<Props> {
       theme,
       ...rest
     } = this.props;
+    /* eslint-enable @typescript-eslint/no-unused-vars */
 
     const disabled = disabledProp || !this.props.onPress;
 

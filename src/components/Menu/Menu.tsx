@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {
-	Platform,
-	StyleProp,
-	StyleSheet,
+  Platform,
+  StyleProp,
+  StyleSheet,
   Animated,
   BackHandler,
   Dimensions,
@@ -24,35 +24,34 @@ type Props = {
   /**
    * Whether the Menu is currently visible.
    */
-  visible: boolean,
+  visible: boolean;
   /**
    * The anchor to open the menu from. In most cases, it will be a button that opens the manu.
    */
-  anchor: React.ReactNode,
+  anchor: React.ReactNode;
   /**
    * Callback called when Menu is dismissed. The `visible` prop needs to be updated when this is called.
    */
-  onDismiss: () => void,
+  onDismiss: () => void;
   /**
    * Content of the `Menu`.
    */
-  children: React.ReactNode,
-  style?: StyleProp<ViewStyle>,
+  children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 type State = {
-  top: number,
-  left: number,
-  menuLayout: LayoutRectangle,
-  anchorLayout: LayoutRectangle,
-  opacityAnimation: Animated.Value,
-  scaleAnimation: Animated.ValueXY,
+  top: number;
+  left: number;
+  menuLayout: LayoutRectangle;
+  anchorLayout: LayoutRectangle;
+  opacityAnimation: Animated.Value;
+  scaleAnimation: Animated.ValueXY;
 };
-
 
 // Minimum padding between the edge of the screen and the menu
 const SCREEN_INDENT = 8;
@@ -193,19 +192,19 @@ class Menu extends React.Component<Props, State> {
       return;
     }
 
-    this.setState((state) =>
-      ({
+    this.setState(
+      state => ({
         left: anchorLayout.x,
         top: anchorLayout.y,
         anchorLayout: {
-					x: state.anchorLayout.x,
-					y: state.anchorLayout.y,
+          x: state.anchorLayout.x,
+          y: state.anchorLayout.y,
           height: anchorLayout.height,
           width: anchorLayout.width,
         },
         menuLayout: {
-					x: state.menuLayout.x,
-					y: state.menuLayout.y,
+          x: state.menuLayout.x,
+          y: state.menuLayout.y,
           width: menuLayout.width,
           height: menuLayout.height,
         },
@@ -392,7 +391,12 @@ class Menu extends React.Component<Props, State> {
           >
             <Animated.View style={{ transform: positionTransforms }}>
               <Surface
-                style={[styles.shadowMenuContainer, shadowMenuContainerStyle] as StyleProp<ViewStyle>}
+                style={
+                  [
+                    styles.shadowMenuContainer,
+                    shadowMenuContainerStyle,
+                  ] as StyleProp<ViewStyle>
+                }
               >
                 {children}
               </Surface>

@@ -8,7 +8,6 @@ import { withTheme } from '../../core/theming';
 import { black, white } from '../../styles/colors';
 import { Theme } from '../../types';
 
-
 type Props = {
   /**
    * Title text for the `MenuItem`.
@@ -76,7 +75,11 @@ class MenuItem extends React.Component<Props> {
             </View>
           ) : null}
           <View
-            style={[styles.item, styles.content, icon ? styles.widthWithIcon : null]}
+            style={[
+              styles.item,
+              styles.content,
+              icon ? styles.widthWithIcon : null,
+            ]}
             pointerEvents="none"
           >
             <Text

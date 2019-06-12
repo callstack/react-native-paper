@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { Image, Text, StyleSheet, I18nManager, Platform, ImageSourcePropType} from 'react-native';
+import {
+  Image,
+  Text,
+  StyleSheet,
+  I18nManager,
+  Platform,
+  ImageSourcePropType,
+} from 'react-native';
 
 let MaterialIcons: any;
 
@@ -55,17 +62,17 @@ type IconSourceBase = string | ImageSourcePropType;
 
 export type IconSource =
   | IconSourceBase
-  | Readonly<{ source: IconSourceBase, direction: 'rtl' | 'ltr' | 'auto' }>
+  | Readonly<{ source: IconSourceBase; direction: 'rtl' | 'ltr' | 'auto' }>
   | ((props: IconProps) => React.ReactNode);
 
 type IconProps = {
-  color: string,
-	size: number,
-	allowFontScaling?: boolean,
+  color: string;
+  size: number;
+  allowFontScaling?: boolean;
 };
 
 type Props = IconProps & {
-	source: IconSource,
+  source: any;
 };
 
 const isImageSource = (source: any) =>
@@ -105,30 +112,27 @@ const Icon = ({ source, color, size, ...rest }: Props) => {
   const direction =
     // @ts-ignore
     typeof source === 'object' && source.direction && source.source
-      // @ts-ignore
       ? source.direction === 'auto'
         ? I18nManager.isRTL
           ? 'rtl'
           : 'ltr'
-          // @ts-ignore
         : source.direction
       : null;
   const s =
-   // @ts-ignore
+    // @ts-ignore
     typeof source === 'object' && source.direction && source.source
-      // @ts-ignore
       ? source.source
       : source;
 
   const accessibilityProps =
     Platform.OS === 'web'
-      ? ({
+      ? {
           role: 'img',
           focusable: false,
-        })
+        }
       : {
           accessibilityElementsHidden: true,
-          importantForAccessibility: 'no-hide-descendants' as "no-hide-descendants",
+          importantForAccessibility: 'no-hide-descendants' as 'no-hide-descendants',
         };
 
   if (isImageSource(s)) {
@@ -140,6 +144,7 @@ const Icon = ({ source, color, size, ...rest }: Props) => {
           {
             transform: [{ scaleX: direction === 'rtl' ? -1 : 1 }],
           },
+          // eslint-disable-next-line react-native/no-inline-styles
           {
             width: size,
             height: size,

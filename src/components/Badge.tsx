@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Animated, StyleSheet, StyleProp, TextInput, ViewStyle } from 'react-native';
+import {
+  Animated,
+  StyleSheet,
+  StyleProp,
+  TextInput,
+  ViewStyle,
+} from 'react-native';
 import color from 'color';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
@@ -9,24 +15,24 @@ type Props = React.ComponentProps<typeof TextInput> & {
   /**
    * Whether the badge is visible
    */
-  visible: boolean,
+  visible: boolean;
   /**
    * Content of the `Badge`.
    */
-  children?: string | number,
+  children?: string | number;
   /**
    * Size of the `Badge`.
    */
-  size: number,
-  style?: StyleProp<ViewStyle>,
+  size: number;
+  style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme,
+  theme: Theme;
 };
 
 type State = {
-  opacity: Animated.Value,
+  opacity: Animated.Value;
 };
 
 /**

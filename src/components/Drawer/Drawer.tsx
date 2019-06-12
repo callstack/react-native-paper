@@ -1,4 +1,3 @@
-
 // @component ./DrawerItem.js
 export { default as Item } from './DrawerItem';
 

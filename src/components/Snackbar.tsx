@@ -147,7 +147,7 @@ class Snackbar extends React.Component<Props, State> {
   }
 
   componentWillUnmount() {
-    if(this._hideTimeout) {
+    if (this._hideTimeout) {
       clearTimeout(this._hideTimeout);
     }
   }
@@ -161,7 +161,7 @@ class Snackbar extends React.Component<Props, State> {
   };
 
   _show = () => {
-    if(this._hideTimeout) {
+    if (this._hideTimeout) {
       clearTimeout(this._hideTimeout);
     }
     this.setState({
@@ -186,7 +186,7 @@ class Snackbar extends React.Component<Props, State> {
   };
 
   _hide = () => {
-    if(this._hideTimeout) {
+    if (this._hideTimeout) {
       clearTimeout(this._hideTimeout);
     }
 
@@ -216,24 +216,26 @@ class Snackbar extends React.Component<Props, State> {
         <Surface
           pointerEvents="box-none"
           accessibilityLiveRegion="polite"
-          style={[
-            styles.container,
-            {
-              borderRadius: roundness,
-              opacity: this.state.opacity,
-              transform: [
-                {
-                  scale: visible
-                    ? this.state.opacity.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [0.9, 1],
-                      })
-                    : 1,
-                },
-              ],
-            },
-            style,
-          ] as StyleProp<ViewStyle>}
+          style={
+            [
+              styles.container,
+              {
+                borderRadius: roundness,
+                opacity: this.state.opacity,
+                transform: [
+                  {
+                    scale: visible
+                      ? this.state.opacity.interpolate({
+                          inputRange: [0, 1],
+                          outputRange: [0.9, 1],
+                        })
+                      : 1,
+                  },
+                ],
+              },
+              style,
+            ] as StyleProp<ViewStyle>
+          }
         >
           <Text style={[styles.content, { marginRight: action ? 0 : 16 }]}>
             {children}

@@ -146,8 +146,10 @@ class ActivityIndicator extends React.Component<Props, State> {
   render() {
     const { fade, timer } = this.state;
     const {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       animating,
       color: indicatorColor,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       hidesWhenStopped,
       size: indicatorSize,
       style,

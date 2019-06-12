@@ -7,25 +7,25 @@ type Props = {
   /**
    * Function to execute on selection change.
    */
-  onValueChange: (value: string) => void,
+  onValueChange: (value: string) => void;
   /**
    * Value of the currently selected toggle button.
    */
-  value: string,
+  value: string;
   /**
    * React elements containing toggle buttons.
    */
-  children: React.ReactNode,
+  children: React.ReactNode;
 };
 
 type ToggleButtonContextType = {
-  value: string,
-  onValueChange: (item: string) => void,
+  value: string;
+  onValueChange: (item: string) => void;
 };
 
-export const ToggleButtonGroupContext: Context<ToggleButtonContextType> = createReactContext(
-  null as any
-);
+export const ToggleButtonGroupContext: Context<
+  ToggleButtonContextType
+> = createReactContext(null as any);
 
 /**
  * Toggle group allows to control a group of toggle buttons.
@@ -79,8 +79,8 @@ class ToggleButtonGroup extends React.Component<Props> {
                 i === 0
                   ? styles.first
                   : i === count - 1
-                    ? styles.last
-                    : styles.middle,
+                  ? styles.last
+                  : styles.middle,
                 // @ts-ignore
                 child.props.style,
               ],

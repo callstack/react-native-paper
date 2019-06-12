@@ -194,11 +194,13 @@ class Modal extends React.Component<Props, State> {
         </TouchableWithoutFeedback>
         <View pointerEvents="box-none" style={styles.wrapper}>
           <Surface
-            style={[
-              { opacity: this.state.opacity },
-              styles.content,
-              contentContainerStyle,
-            ] as StyleProp<ViewStyle>}
+            style={
+              [
+                { opacity: this.state.opacity },
+                styles.content,
+                contentContainerStyle,
+              ] as StyleProp<ViewStyle>
+            }
           >
             {children}
           </Surface>

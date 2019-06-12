@@ -221,7 +221,7 @@ class Button extends React.Component<Props, State> {
     };
     const touchableStyle = { borderRadius: roundness };
     const textStyle = { color: textColor, ...font };
-    const elevation=
+    const elevation =
       disabled || mode !== 'contained' ? 0 : this.state.elevation;
 
     return (

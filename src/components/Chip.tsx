@@ -208,18 +208,20 @@ class Chip extends React.Component<Props, State> {
 
     return (
       <Surface
-        style={[
-          styles.container,
-          {
-            elevation: Platform.OS === 'android' ? this.state.elevation : 0,
-            backgroundColor: selected
-              ? selectedBackgroundColor
-              : backgroundColor,
-            borderColor,
-            borderRadius,
-          },
-          style,
-        ] as StyleProp<ViewStyle>}
+        style={
+          [
+            styles.container,
+            {
+              elevation: Platform.OS === 'android' ? this.state.elevation : 0,
+              backgroundColor: selected
+                ? selectedBackgroundColor
+                : backgroundColor,
+              borderColor,
+              borderRadius,
+            },
+            style,
+          ] as StyleProp<ViewStyle>
+        }
         {...rest}
       >
         <TouchableRipple

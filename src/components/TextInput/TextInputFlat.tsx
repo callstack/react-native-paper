@@ -72,8 +72,11 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
     const hasActiveOutline = parentState.focused || error;
     const paddingOffset = padding !== 'none' ? styles.paddingOffset : null;
 
-    const { fontSize: fontSizeStyle, height, ...viewStyle } =
-      StyleSheet.flatten(style);
+    const {
+      fontSize: fontSizeStyle,
+      height,
+      ...viewStyle
+    } = StyleSheet.flatten(style);
     const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
 
     let inputTextColor, activeColor, underlineColorCustom, placeholderColor;
@@ -222,9 +225,10 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
             ref: innerRef,
             onChangeText,
             adjustsFontSizeToFit: true,
-            placeholder: label && parentState.placeholder
-              ? parentState.placeholder
-              : this.props.placeholder,
+            placeholder:
+              label && parentState.placeholder
+                ? parentState.placeholder
+                : this.props.placeholder,
             placeholderTextColor: placeholderColor,
             editable: !disabled && editable,
             selectionColor:
@@ -262,12 +266,11 @@ type UnderlineProps = {
   };
   error?: boolean;
   colors: {
-    error: string
+    error: string;
   };
   activeColor: string;
-  underlineColorCustom?: string
+  underlineColorCustom?: string;
 };
-
 
 const Underline = ({
   parentState,

@@ -1,4 +1,3 @@
-
 // @component ./ListAccordion.js
 export { default as Accordion } from './ListAccordion';
 

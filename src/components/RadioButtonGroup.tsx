@@ -21,9 +21,9 @@ export type RadioButtonContextType = {
   onValueChange: (item: string) => void;
 };
 
-export const RadioButtonContext: Context<RadioButtonContextType> = createReactContext(
-  null as any
-);
+export const RadioButtonContext: Context<
+  RadioButtonContextType
+> = createReactContext(null as any);
 
 /**
  * Radio button group allows to control a group of radio buttons.
