@@ -67,17 +67,19 @@ type State = {
  *   render() {
  *     const { visible } = this.state;
  *     return (
- *       <Portal>
- *         <Modal visible={visible} onDismiss={this._hideModal}>
- *           <Text>Example Modal</Text>
- *         </Modal>
- *         <Button
- *           style={{ marginTop: 30 }}
- *           onPress={this._showModal}
- *         >
- *           Show
- *         </Button>
- *       </Portal>
+ *       <Provider>
+ *          <Portal>
+ *            <Modal visible={visible} onDismiss={this._hideModal}>
+ *              <Text>Example Modal</Text>
+ *            </Modal>
+ *            <Button
+ *              style={{ marginTop: 30 }}
+ *              onPress={this._showModal}
+ *            >
+ *              Show
+ *            </Button>
+ *          </Portal>
+ *       </Provider>
  *     );
  *   }
  * }
