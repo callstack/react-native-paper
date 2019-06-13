@@ -40,14 +40,13 @@ jobs:
       - persist_to_workspace:
           root: .
           paths: .
-  lint-and-ts:
+  lint:
       <<: *defaults
       steps:
         - attach_workspace:
             at: ~/react-native-paper
         - run: |
             yarn lint
-            yarn typescript
   typescript:
       <<: *defaults
       steps:
@@ -106,7 +105,7 @@ workflows:
   build-and-test:
     jobs:
       - install-dependencies
-      - lint-and-ts:
+      - lint:
           requires:
             - install-dependencies
       - typescript:
