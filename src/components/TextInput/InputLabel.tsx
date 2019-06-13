@@ -1,10 +1,8 @@
 import React from 'react';
 import { Animated, StyleSheet } from 'react-native';
-import Text from '../Typography/Text';
+import AnimatedText from '../Typography/AnimatedText';
 
 import { InputLabelProps } from './types';
-
-const AnimatedText = Animated.createAnimatedComponent(Text);
 
 const InputLabel = (props: InputLabelProps) => {
   const { parentState } = props;

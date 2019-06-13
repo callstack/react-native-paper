@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import PortalManager from './PortalManager';
-import createReactContext, { Context } from 'create-react-context';
 
 type Props = {
   children: React.ReactNode;
@@ -18,9 +17,7 @@ export type PortalMethods = {
   unmount: (key: number) => void;
 };
 
-export const PortalContext: Context<PortalMethods> = createReactContext(
-  null as any
-);
+export const PortalContext = React.createContext<PortalMethods>(null as any);
 
 /**
  * Portal host renders all of its children `Portal` elements.

@@ -220,38 +220,41 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
         >
           <InputLabel parentState={parentState} labelProps={labelProps} />
 
-          {render({
-            ...rest,
-            ref: innerRef,
-            onChangeText,
-            adjustsFontSizeToFit: true,
-            placeholder:
-              label && parentState.placeholder
-                ? parentState.placeholder
-                : this.props.placeholder,
-            placeholderTextColor: placeholderColor,
-            editable: !disabled && editable,
-            selectionColor:
-              typeof selectionColor === 'undefined'
-                ? activeColor
-                : selectionColor,
-            onFocus,
-            onBlur,
-            underlineColorAndroid: 'transparent',
-            multiline,
-            style: [
-              styles.input,
-              paddingOffset,
-              !multiline || (multiline && height) ? { height: flatHeight } : {},
-              paddingFlat,
-              {
-                fontSize,
-                color: inputTextColor,
-                ...font,
-                textAlignVertical: multiline && height ? 'top' : 'center',
-              },
-            ],
-          })}
+          {render &&
+            render({
+              ...rest,
+              ref: innerRef,
+              onChangeText,
+              adjustsFontSizeToFit: true,
+              placeholder:
+                label && parentState.placeholder
+                  ? parentState.placeholder
+                  : this.props.placeholder,
+              placeholderTextColor: placeholderColor,
+              editable: !disabled && editable,
+              selectionColor:
+                typeof selectionColor === 'undefined'
+                  ? activeColor
+                  : selectionColor,
+              onFocus,
+              onBlur,
+              underlineColorAndroid: 'transparent',
+              multiline,
+              style: [
+                styles.input,
+                paddingOffset,
+                !multiline || (multiline && height)
+                  ? { height: flatHeight }
+                  : {},
+                paddingFlat,
+                {
+                  fontSize,
+                  color: inputTextColor,
+                  ...font,
+                  textAlignVertical: multiline && height ? 'top' : 'center',
+                },
+              ],
+            })}
         </View>
       </View>
     );

@@ -99,7 +99,7 @@ export type TextInputProps = React.ComponentProps<typeof NativeTextInput> & {
    * />
    * ```
    */
-  render: (props: RenderProps) => React.ReactNode;
+  render?: (props: RenderProps) => React.ReactNode;
   /**
    * Value of the text input.
    */

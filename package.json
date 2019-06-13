@@ -45,7 +45,6 @@
   "dependencies": {
     "@callstack/react-theme-provider": "^3.0.0",
     "color": "^2.0.1",
-    "create-react-context": "^0.2.3",
     "hoist-non-react-statics": "^3.1.0",
     "react-native-safe-area-view": "^0.12.0"
   },
@@ -83,8 +82,8 @@
     "jest-file-snapshot": "^0.3.2",
     "metro-react-native-babel-preset": "^0.54.0",
     "prettier": "^1.14.3",
-    "react": "16.6.0-alpha.8af6728",
-    "react-dom": "16.6.0-alpha.8af6728",
+    "react": "16.8.3",
+    "react-dom": "16.8.3",
     "react-native": "^0.59.8",
     "react-native-testing-library": "^1.5.0",
     "react-native-vector-icons": "~6.0.2",

@@ -1,11 +1,9 @@
-/* @flow */
-
 import * as React from 'react';
-import { Text, TextStyle, StyleSheet, StyleProp } from 'react-native';
+import { TextProps, StyleSheet } from 'react-native';
 import StyledText from './StyledText';
 
-type Props = React.ComponentProps<typeof Text> & {
-  style?: StyleProp<TextStyle>;
+type Props = TextProps & {
+  children: React.ReactNode;
 };
 
 /**

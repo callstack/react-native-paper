@@ -39,7 +39,7 @@ type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: (value?: GestureResponderEvent) => void;
+  onPress?: (value?: GestureResponderEvent | string) => void;
   /**
    * Value of button.
    */
@@ -129,7 +129,7 @@ class ToggleButton extends React.Component<Props> {
             <IconButton
               borderless={false}
               icon={icon}
-              onPress={(e?: GestureResponderEvent) => {
+              onPress={(e?: GestureResponderEvent | string) => {
                 if (onPress) {
                   onPress(e);
                 }

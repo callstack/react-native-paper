@@ -1,5 +1,4 @@
 import * as React from 'react';
-import createReactContext, { Context } from 'create-react-context';
 
 type Props = {
   /**
@@ -21,9 +20,9 @@ export type RadioButtonContextType = {
   onValueChange: (item: string) => void;
 };
 
-export const RadioButtonContext: Context<
-  RadioButtonContextType
-> = createReactContext(null as any);
+export const RadioButtonContext = React.createContext<RadioButtonContextType>(
+  null as any
+);
 
 /**
  * Radio button group allows to control a group of radio buttons.

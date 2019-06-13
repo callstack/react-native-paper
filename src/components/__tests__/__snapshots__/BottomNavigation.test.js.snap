@@ -3184,12 +3184,16 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         "textAlign": "left",
                         "writingDirection": "ltr",
                       },
-                      Object {
-                        "backgroundColor": "transparent",
-                        "color": "#FBF7DB",
-                        "fontSize": 12,
-                        "textAlign": "center",
-                      },
+                      Array [
+                        Object {
+                          "backgroundColor": "transparent",
+                          "fontSize": 12,
+                          "textAlign": "center",
+                        },
+                        Object {
+                          "color": "#FBF7DB",
+                        },
+                      ],
                     ]
                   }
                 >
@@ -3218,12 +3222,16 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         "textAlign": "left",
                         "writingDirection": "ltr",
                       },
-                      Object {
-                        "backgroundColor": "transparent",
-                        "color": "#853D4B",
-                        "fontSize": 12,
-                        "textAlign": "center",
-                      },
+                      Array [
+                        Object {
+                          "backgroundColor": "transparent",
+                          "fontSize": 12,
+                          "textAlign": "center",
+                        },
+                        Object {
+                          "color": "#853D4B",
+                        },
+                      ],
                     ]
                   }
                 >
@@ -3444,12 +3452,16 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         "textAlign": "left",
                         "writingDirection": "ltr",
                       },
-                      Object {
-                        "backgroundColor": "transparent",
-                        "color": "#FBF7DB",
-                        "fontSize": 12,
-                        "textAlign": "center",
-                      },
+                      Array [
+                        Object {
+                          "backgroundColor": "transparent",
+                          "fontSize": 12,
+                          "textAlign": "center",
+                        },
+                        Object {
+                          "color": "#FBF7DB",
+                        },
+                      ],
                     ]
                   }
                 >
@@ -3478,12 +3490,16 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         "textAlign": "left",
                         "writingDirection": "ltr",
                       },
-                      Object {
-                        "backgroundColor": "transparent",
-                        "color": "#853D4B",
-                        "fontSize": 12,
-                        "textAlign": "center",
-                      },
+                      Array [
+                        Object {
+                          "backgroundColor": "transparent",
+                          "fontSize": 12,
+                          "textAlign": "center",
+                        },
+                        Object {
+                          "color": "#853D4B",
+                        },
+                      ],
                     ]
                   }
                 >
@@ -3704,12 +3720,16 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         "textAlign": "left",
                         "writingDirection": "ltr",
                       },
-                      Object {
-                        "backgroundColor": "transparent",
-                        "color": "#FBF7DB",
-                        "fontSize": 12,
-                        "textAlign": "center",
-                      },
+                      Array [
+                        Object {
+                          "backgroundColor": "transparent",
+                          "fontSize": 12,
+                          "textAlign": "center",
+                        },
+                        Object {
+                          "color": "#FBF7DB",
+                        },
+                      ],
                     ]
                   }
                 >
@@ -3738,12 +3758,16 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         "textAlign": "left",
                         "writingDirection": "ltr",
                       },
-                      Object {
-                        "backgroundColor": "transparent",
-                        "color": "#853D4B",
-                        "fontSize": 12,
-                        "textAlign": "center",
-                      },
+                      Array [
+                        Object {
+                          "backgroundColor": "transparent",
+                          "fontSize": 12,
+                          "textAlign": "center",
+                        },
+                        Object {
+                          "color": "#853D4B",
+                        },
+                      ],
                     ]
                   }
                 >
@@ -4099,12 +4123,16 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                         "textAlign": "left",
                         "writingDirection": "ltr",
                       },
-                      Object {
-                        "backgroundColor": "transparent",
-                        "color": "#FBF7DB",
-                        "fontSize": 12,
-                        "textAlign": "center",
-                      },
+                      Array [
+                        Object {
+                          "backgroundColor": "transparent",
+                          "fontSize": 12,
+                          "textAlign": "center",
+                        },
+                        Object {
+                          "color": "#FBF7DB",
+                        },
+                      ],
                     ]
                   }
                 >
@@ -4325,12 +4353,16 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                         "textAlign": "left",
                         "writingDirection": "ltr",
                       },
-                      Object {
-                        "backgroundColor": "transparent",
-                        "color": "#FBF7DB",
-                        "fontSize": 12,
-                        "textAlign": "center",
-                      },
+                      Array [
+                        Object {
+                          "backgroundColor": "transparent",
+                          "fontSize": 12,
+                          "textAlign": "center",
+                        },
+                        Object {
+                          "color": "#FBF7DB",
+                        },
+                      ],
                     ]
                   }
                 >
@@ -4551,12 +4583,16 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                         "textAlign": "left",
                         "writingDirection": "ltr",
                       },
-                      Object {
-                        "backgroundColor": "transparent",
-                        "color": "#FBF7DB",
-                        "fontSize": 12,
-                        "textAlign": "center",
-                      },
+                      Array [
+                        Object {
+                          "backgroundColor": "transparent",
+                          "fontSize": 12,
+                          "textAlign": "center",
+                        },
+                        Object {
+                          "color": "#FBF7DB",
+                        },
+                      ],
                     ]
                   }
                 >
@@ -4892,12 +4928,16 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         "textAlign": "left",
                         "writingDirection": "ltr",
                       },
-                      Object {
-                        "backgroundColor": "transparent",
-                        "color": "#ffffff",
-                        "fontSize": 12,
-                        "textAlign": "center",
-                      },
+                      Array [
+                        Object {
+                          "backgroundColor": "transparent",
+                          "fontSize": 12,
+                          "textAlign": "center",
+                        },
+                        Object {
+                          "color": "#ffffff",
+                        },
+                      ],
                     ]
                   }
                 >
@@ -4926,12 +4966,16 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         "textAlign": "left",
                         "writingDirection": "ltr",
                       },
-                      Object {
-                        "backgroundColor": "transparent",
-                        "color": "rgba(255, 255, 255, 0.5)",
-                        "fontSize": 12,
-                        "textAlign": "center",
-                      },
+                      Array [
+                        Object {
+                          "backgroundColor": "transparent",
+                          "fontSize": 12,
+                          "textAlign": "center",
+                        },
+                        Object {
+                          "color": "rgba(255, 255, 255, 0.5)",
+                        },
+                      ],
                     ]
                   }
                 >
@@ -5152,12 +5196,16 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         "textAlign": "left",
                         "writingDirection": "ltr",
                       },
-                      Object {
-                        "backgroundColor": "transparent",
-                        "color": "#ffffff",
-                        "fontSize": 12,
-                        "textAlign": "center",
-                      },
+                      Array [
+                        Object {
+                          "backgroundColor": "transparent",
+                          "fontSize": 12,
+                          "textAlign": "center",
+                        },
+                        Object {
+                          "color": "#ffffff",
+                        },
+                      ],
                     ]
                   }
                 >
@@ -5186,12 +5234,16 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         "textAlign": "left",
                         "writingDirection": "ltr",
                       },
-                      Object {
-                        "backgroundColor": "transparent",
-                        "color": "rgba(255, 255, 255, 0.5)",
-                        "fontSize": 12,
-                        "textAlign": "center",
-                      },
+                      Array [
+                        Object {
+                          "backgroundColor": "transparent",
+                          "fontSize": 12,
+                          "textAlign": "center",
+                        },
+                        Object {
+                          "color": "rgba(255, 255, 255, 0.5)",
+                        },
+                      ],
                     ]
                   }
                 >
@@ -5412,12 +5464,16 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         "textAlign": "left",
                         "writingDirection": "ltr",
                       },
-                      Object {
-                        "backgroundColor": "transparent",
-                        "color": "#ffffff",
-                        "fontSize": 12,
-                        "textAlign": "center",
-                      },
+                      Array [
+                        Object {
+                          "backgroundColor": "transparent",
+                          "fontSize": 12,
+                          "textAlign": "center",
+                        },
+                        Object {
+                          "color": "#ffffff",
+                        },
+                      ],
                     ]
                   }
                 >
@@ -5446,12 +5502,16 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         "textAlign": "left",
                         "writingDirection": "ltr",
                       },
-                      Object {
-                        "backgroundColor": "transparent",
-                        "color": "rgba(255, 255, 255, 0.5)",
-                        "fontSize": 12,
-                        "textAlign": "center",
-                      },
+                      Array [
+                        Object {
+                          "backgroundColor": "transparent",
+                          "fontSize": 12,
+                          "textAlign": "center",
+                        },
+                        Object {
+                          "color": "rgba(255, 255, 255, 0.5)",
+                        },
+                      ],
                     ]
                   }
                 >
@@ -5807,12 +5867,16 @@ exports[`renders shifting bottom navigation 1`] = `
                         "textAlign": "left",
                         "writingDirection": "ltr",
                       },
-                      Object {
-                        "backgroundColor": "transparent",
-                        "color": "#ffffff",
-                        "fontSize": 12,
-                        "textAlign": "center",
-                      },
+                      Array [
+                        Object {
+                          "backgroundColor": "transparent",
+                          "fontSize": 12,
+                          "textAlign": "center",
+                        },
+                        Object {
+                          "color": "#ffffff",
+                        },
+                      ],
                     ]
                   }
                 >
@@ -6033,12 +6097,16 @@ exports[`renders shifting bottom navigation 1`] = `
                         "textAlign": "left",
                         "writingDirection": "ltr",
                       },
-                      Object {
-                        "backgroundColor": "transparent",
-                        "color": "#ffffff",
-                        "fontSize": 12,
-                        "textAlign": "center",
-                      },
+                      Array [
+                        Object {
+                          "backgroundColor": "transparent",
+                          "fontSize": 12,
+                          "textAlign": "center",
+                        },
+                        Object {
+                          "color": "#ffffff",
+                        },
+                      ],
                     ]
                   }
                 >
@@ -6259,12 +6327,16 @@ exports[`renders shifting bottom navigation 1`] = `
                         "textAlign": "left",
                         "writingDirection": "ltr",
                       },
-                      Object {
-                        "backgroundColor": "transparent",
-                        "color": "#ffffff",
-                        "fontSize": 12,
-                        "textAlign": "center",
-                      },
+                      Array [
+                        Object {
+                          "backgroundColor": "transparent",
+                          "fontSize": 12,
+                          "textAlign": "center",
+                        },
+                        Object {
+                          "color": "#ffffff",
+                        },
+                      ],
                     ]
                   }
                 >
@@ -6485,12 +6557,16 @@ exports[`renders shifting bottom navigation 1`] = `
                         "textAlign": "left",
                         "writingDirection": "ltr",
                       },
-                      Object {
-                        "backgroundColor": "transparent",
-                        "color": "#ffffff",
-                        "fontSize": 12,
-                        "textAlign": "center",
-                      },
+                      Array [
+                        Object {
+                          "backgroundColor": "transparent",
+                          "fontSize": 12,
+                          "textAlign": "center",
+                        },
+                        Object {
+                          "color": "#ffffff",
+                        },
+                      ],
                     ]
                   }
                 >
@@ -6711,12 +6787,16 @@ exports[`renders shifting bottom navigation 1`] = `
                         "textAlign": "left",
                         "writingDirection": "ltr",
                       },
-                      Object {
-                        "backgroundColor": "transparent",
-                        "color": "#ffffff",
-                        "fontSize": 12,
-                        "textAlign": "center",
-                      },
+                      Array [
+                        Object {
+                          "backgroundColor": "transparent",
+                          "fontSize": 12,
+                          "textAlign": "center",
+                        },
+                        Object {
+                          "color": "#ffffff",
+                        },
+                      ],
                     ]
                   }
                 >

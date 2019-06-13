@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import createReactContext, { Context } from 'create-react-context';
 import ToggleButton from './ToggleButton';
 
 type Props = {
@@ -23,9 +22,9 @@ type ToggleButtonContextType = {
   onValueChange: (item: string) => void;
 };
 
-export const ToggleButtonGroupContext: Context<
+export const ToggleButtonGroupContext = React.createContext<
   ToggleButtonContextType
-> = createReactContext(null as any);
+>(null as any);
 
 /**
  * Toggle group allows to control a group of toggle buttons.

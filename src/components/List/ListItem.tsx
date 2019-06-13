@@ -36,7 +36,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Callback which returns a React element to display on the right side.
    */
-  right: (props: {
+  right?: (props: {
     color: string;
     style?: {
       marginRight: number;

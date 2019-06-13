@@ -7,6 +7,7 @@ import StyledText from './StyledText';
 
 type Props = React.ComponentProps<typeof Text> & {
   style?: StyleProp<TextStyle>;
+  children: React.ReactNode;
 };
 
 /**

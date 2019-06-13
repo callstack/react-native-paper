@@ -23,8 +23,6 @@ import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
 import { Theme } from '../types';
 
-const AnimatedText = Animated.createAnimatedComponent(Text);
-
 type Route = Partial<{
   key: string;
   title: string;
@@ -151,11 +149,11 @@ type Props<T> = {
    * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
    * Uses `route.accessibilityLabel` by default.
    */
-  getAccessibilityLabel: (props: { route: T }) => string | undefined;
+  getAccessibilityLabel?: (props: { route: T }) => string | undefined;
   /**
    * Get the id to locate this tab button in tests, uses `route.testID` by default.
    */
-  getTestID: (props: { route: T }) => string | undefined;
+  getTestID?: (props: { route: T }) => string | undefined;
   /**
    * Get badge for the tab, uses `route.badge` by default.
    */
@@ -878,14 +876,14 @@ class BottomNavigation<T extends Route> extends React.Component<
                                 color: activeTintColor,
                               })
                             ) : (
-                              <AnimatedText
+                              <Text
                                 style={[
                                   styles.label,
                                   { color: activeTintColor },
                                 ]}
                               >
                                 {getLabelText({ route })}
-                              </AnimatedText>
+                              </Text>
                             )}
                           </Animated.View>
                           {shifting ? null : (
@@ -902,14 +900,14 @@ class BottomNavigation<T extends Route> extends React.Component<
                                   color: inactiveTintColor,
                                 })
                               ) : (
-                                <AnimatedText
+                                <Text
                                   style={[
                                     styles.label,
                                     { color: inactiveTintColor },
                                   ]}
                                 >
                                   {getLabelText({ route })}
-                                </AnimatedText>
+                                </Text>
                               )}
                             </Animated.View>
                           )}

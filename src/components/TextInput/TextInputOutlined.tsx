@@ -8,7 +8,7 @@ import {
   Platform,
 } from 'react-native';
 import color from 'color';
-import Text from '../Typography/Text';
+import AnimatedText from '../Typography/AnimatedText';
 import InputLabel from './InputLabel';
 import { RenderProps, ChildTextInputProps } from './types';
 import { Theme, Font } from '../../types';
@@ -26,8 +26,6 @@ import {
   calculatePadding,
   adjustPaddingOut,
 } from './helpers';
-
-const AnimatedText = Animated.createAnimatedComponent(Text);
 
 const OUTLINE_MINIMIZED_LABEL_Y_OFFSET = -6;
 const LABEL_PADDING_TOP = 8;
@@ -203,37 +201,38 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
 
             <InputLabel parentState={parentState} labelProps={labelProps} />
 
-            {render({
-              ...rest,
-              ref: innerRef,
-              onChangeText,
-              placeholder: label
-                ? parentState.placeholder
-                : this.props.placeholder,
-              placeholderTextColor: placeholderColor,
-              editable: !disabled && editable,
-              selectionColor:
-                typeof selectionColor === 'undefined'
-                  ? activeColor
-                  : selectionColor,
-              onFocus,
-              onBlur,
-              underlineColorAndroid: 'transparent',
-              multiline,
-              style: [
-                styles.input,
-                !multiline || (multiline && height)
-                  ? { height: inputHeight }
-                  : {},
-                paddingOut,
-                {
-                  fontSize,
-                  color: inputTextColor,
-                  ...font,
-                  textAlignVertical: multiline && height ? 'top' : 'center',
-                },
-              ],
-            } as RenderProps)}
+            {render &&
+              render({
+                ...rest,
+                ref: innerRef,
+                onChangeText,
+                placeholder: label
+                  ? parentState.placeholder
+                  : this.props.placeholder,
+                placeholderTextColor: placeholderColor,
+                editable: !disabled && editable,
+                selectionColor:
+                  typeof selectionColor === 'undefined'
+                    ? activeColor
+                    : selectionColor,
+                onFocus,
+                onBlur,
+                underlineColorAndroid: 'transparent',
+                multiline,
+                style: [
+                  styles.input,
+                  !multiline || (multiline && height)
+                    ? { height: inputHeight }
+                    : {},
+                  paddingOut,
+                  {
+                    fontSize,
+                    color: inputTextColor,
+                    ...font,
+                    textAlignVertical: multiline && height ? 'top' : 'center',
+                  },
+                ],
+              } as RenderProps)}
           </View>
         </View>
       </View>

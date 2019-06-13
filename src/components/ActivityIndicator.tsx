@@ -23,7 +23,7 @@ type Props = React.ComponentProps<typeof View> & {
   /**
    * Size of the indicator.
    */
-  size: 'small' | 'large' | number;
+  size?: 'small' | 'large' | number;
   /**
    * Whether the indicator should hide when not animating.
    */
@@ -162,7 +162,9 @@ class ActivityIndicator extends React.Component<Props, State> {
         ? indicatorSize === 'small'
           ? 24
           : 48
-        : indicatorSize;
+        : indicatorSize
+        ? indicatorSize
+        : 24;
 
     const frames = (60 * DURATION) / 1000;
     const easing = Easing.bezier(0.4, 0.0, 0.7, 1.0);

@@ -7,14 +7,12 @@ import {
   TextStyle,
   LayoutChangeEvent,
 } from 'react-native';
-import Text from './Typography/Text';
+import AnimatedText from './Typography/AnimatedText';
 import { withTheme } from '../core/theming';
 import { Theme } from '../types';
 
-const AnimatedText = Animated.createAnimatedComponent(Text);
-
 type Props = Omit<
-  Omit<React.ComponentProps<typeof Text>, 'padding'>,
+  Omit<React.ComponentProps<typeof Animated.Text>, 'padding'>,
   'type'
 > & {
   /**
