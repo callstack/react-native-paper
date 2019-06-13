@@ -342,7 +342,7 @@ function (_React$Component) {
         name: "inlineCode",
         components: components,
         parentName: "li"
-      }, "rtl"), " - flips the icon so that it is rtl, this is regradless of the device language."), React.createElement(_tag.MDXTag, {
+      }, "rtl"), " - flips the icon so that it is rtl, this is regardless of the device language."), React.createElement(_tag.MDXTag, {
         name: "li",
         components: components,
         parentName: "ol"
