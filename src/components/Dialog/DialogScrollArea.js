@@ -19,8 +19,8 @@ type Props = React.ElementConfig<typeof View> & {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { ScrollView, Text } from 'react-native';
- * import { Dialog, Portal } from 'react-native-paper';
+ * import { ScrollView } from 'react-native';
+ * import { Dialog, Portal, Text } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
