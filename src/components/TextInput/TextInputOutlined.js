@@ -138,7 +138,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       label,
       scale: fontScale,
       isAndroid: Platform.OS === 'android',
-      styles: dense ? styles.inputOutlinedDense : styles.inputOutlined,
+      styles: StyleSheet.flatten(dense ? styles.inputOutlinedDense : styles.inputOutlined),
     };
 
     const pad = calculatePadding(paddingSettings);
