@@ -8,8 +8,6 @@ import AppbarContent, {
 } from './AppbarContent';
 import AppbarAction from './AppbarAction';
 import AppbarBackAction from './AppbarBackAction';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import AppbarHeader, { AppbarHeader as _AppbarHeader } from './AppbarHeader';
 import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import { black, white } from '../../styles/colors';
@@ -78,8 +76,6 @@ class Appbar extends React.Component<Props> {
   static Action = AppbarAction;
   // @component ./AppbarBackAction.tsx
   static BackAction = AppbarBackAction;
-  // @component ./AppbarHeader.tsx
-  static Header = AppbarHeader;
 
   render() {
     const { children, dark, style, theme, ...rest } = this.props;
