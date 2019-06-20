@@ -24,7 +24,7 @@ type Props = {
    */
   visible: boolean,
   /**
-   * The anchor to open the menu from. In most cases, it will be a button that opens the manu.
+   * The anchor to open the menu from. In most cases, it will be a button that opens the menu.
    */
   anchor: React.Node,
   /**
