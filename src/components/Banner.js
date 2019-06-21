@@ -38,6 +38,11 @@ type Props = $RemoveChildren<typeof Surface> & {|
     label: string,
     onPress: () => mixed,
   }>,
+  /**
+   * Style of banner's inner content.
+   * Use this prop to apply custom width for wide layouts.
+   */
+  contentStyle?: ViewStyleProp,
   style?: ViewStyleProp,
   /**
    * @optional
@@ -162,6 +167,7 @@ class Banner extends React.Component<Props, State> {
       image,
       children,
       actions,
+      contentStyle,
       style,
       theme,
       ...rest
@@ -184,7 +190,7 @@ class Banner extends React.Component<Props, State> {
 
     return (
       <Surface {...rest} style={[styles.container, shadow(ELEVATION), style]}>
-        <View style={styles.wrapper}>
+        <View style={[styles.wrapper, contentStyle]}>
           <Animated.View style={{ height }} />
           <Animated.View
             onLayout={this._handleLayout}
