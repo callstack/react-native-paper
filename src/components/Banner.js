@@ -240,6 +240,8 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     overflow: 'hidden',
+    alignSelf: 'center',
+    width: '100%',
   },
   absolute: {
     position: 'absolute',
