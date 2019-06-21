@@ -11,6 +11,7 @@ export interface BannerProps extends SurfaceProps {
   visible: boolean;
   image?: (props: { size: number }) => React.ReactNode;
   actions: BannerAction[];
+  contentStyle?: StyleProp<ViewStyle>;
 }
 
 export declare class Banner extends React.Component<BannerProps> {}
