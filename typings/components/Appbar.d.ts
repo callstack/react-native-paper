@@ -3,7 +3,7 @@ import { StyleProp, TextStyle, ViewStyle, ViewProps, TouchableNativeFeedbackProp
 import { IconSource, ThemeShape } from '../types';
 import { TouchableRipplePropsWithoutChildren } from './TouchableRipple';
 
-export interface AppbarContentProps {
+export interface AppbarContentProps extends TouchableRipplePropsWithoutChildren {
   color?: string;
   title: React.ReactNode;
   titleStyle?: StyleProp<TextStyle>;
