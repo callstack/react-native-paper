@@ -53,6 +53,10 @@ export type TextInputProps = {|
    */
   underlineColor?: string,
   /**
+   * Height of the underline in FlatInput.
+   */
+  underlineHeight?: number,
+  /**
    * Whether to apply padding to label and input.
    */
   padding?: 'none' | 'normal',

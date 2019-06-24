@@ -54,6 +54,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       error,
       selectionColor,
       underlineColor,
+      underlineHeight,
       padding,
       dense,
       style,
@@ -206,6 +207,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
         <Underline
           parentState={parentState}
           underlineColorCustom={underlineColorCustom}
+          underlineHeight={underlineHeight}
           error={error}
           colors={colors}
           activeColor={activeColor}
@@ -268,6 +270,7 @@ const Underline = ({
   colors,
   activeColor,
   underlineColorCustom,
+  underlineHeight,
 }) => {
   let backgroundColor = parentState.focused
     ? activeColor
@@ -282,6 +285,7 @@ const Underline = ({
           // Underlines is thinner when input is not focused
           transform: [{ scaleY: parentState.focused ? 1 : 0.5 }],
         },
+        underlineHeight !== undefined && { height: underlineHeight },
       ]}
     />
   );
