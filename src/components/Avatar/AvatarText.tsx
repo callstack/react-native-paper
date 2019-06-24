@@ -6,6 +6,8 @@ import { withTheme } from '../../core/theming';
 import { white } from '../../styles/colors';
 import { Theme } from '../../types';
 
+const defaultSize = 64;
+
 type Props = {
   /**
    * Initials to show as the text in the `Avatar`.
@@ -14,7 +16,7 @@ type Props = {
   /**
    * Size of the avatar.
    */
-  size: number;
+  size?: number;
   /**
    * Custom color for the text.
    */
@@ -49,11 +51,11 @@ class AvatarText extends React.Component<Props> {
   static displayName = 'Avatar.Text';
 
   static defaultProps = {
-    size: 64,
+    size: defaultSize,
   };
 
   render() {
-    const { label, size, style, theme } = this.props;
+    const { label, size = defaultSize, style, theme } = this.props;
 
     const { backgroundColor = theme.colors.primary, ...restStyle } =
       StyleSheet.flatten(style) || {};

@@ -43,7 +43,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@callstack/react-theme-provider": "^3.0.0",
+    "@callstack/react-theme-provider": "^3.0.2",
     "color": "^2.0.1",
     "hoist-non-react-statics": "^3.1.0",
     "react-native-safe-area-view": "^0.12.0"
@@ -57,6 +57,7 @@
     "@types/color": "^2.0.1",
     "@types/jest": "^24.0.13",
     "@types/node": "^12.0.4",
+    "@types/reach__router": "^1.2.4",
     "@types/react": "^16.8.19",
     "@types/react-dom": "^16.8.4",
     "@types/react-native": "^0.57.61",

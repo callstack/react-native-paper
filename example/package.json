@@ -12,7 +12,7 @@
   },
   "main": "node_modules/expo/AppEntry.js",
   "dependencies": {
-    "@callstack/react-theme-provider": "^3.0.0",
+    "@callstack/react-theme-provider": "^3.0.2",
     "@reach/router": "^1.2.1",
     "expo": "^33.0.5",
     "file-loader": "^4.0.0",

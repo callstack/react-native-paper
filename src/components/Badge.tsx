@@ -11,6 +11,8 @@ import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
 import { Theme } from '../types';
 
+const defaultSize = 20;
+
 type Props = React.ComponentProps<typeof TextInput> & {
   /**
    * Whether the badge is visible
@@ -23,7 +25,7 @@ type Props = React.ComponentProps<typeof TextInput> & {
   /**
    * Size of the `Badge`.
    */
-  size: number;
+  size?: number;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -54,7 +56,7 @@ type State = {
 class Badge extends React.Component<Props, State> {
   static defaultProps = {
     visible: true,
-    size: 20,
+    size: defaultSize,
   };
 
   state = {
@@ -74,7 +76,7 @@ class Badge extends React.Component<Props, State> {
   }
 
   render() {
-    const { children, size, style, theme } = this.props;
+    const { children, size = defaultSize, style, theme } = this.props;
     const { opacity } = this.state;
 
     const { backgroundColor = theme.colors.notification, ...restStyle } =

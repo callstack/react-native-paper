@@ -34,7 +34,7 @@ type Props = React.ComponentProps<typeof Appbar> & {
    */
   theme: Theme;
   style?: StyleProp<ViewStyle>;
-  __expo: any;
+  __expo?: any;
 };
 
 // @ts-ignore

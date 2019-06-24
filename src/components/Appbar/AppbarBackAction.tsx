@@ -11,29 +11,32 @@ import {
 
 import AppbarAction from './AppbarAction';
 
-type Props = React.ComponentProps<typeof AppbarAction> & {
-  /**
-   *  Custom color for back icon.
-   */
-  color?: string;
-  /**
-   * Optional icon size.
-   */
-  size?: number;
-  /**
-   * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
-   */
-  disabled?: boolean;
-  /**
-   * Accessibility label for the button. This is read by the screen reader when the user taps the button.
-   */
-  accessibilityLabel?: string;
-  /**
-   * Function to execute on press.
-   */
-  onPress?: () => void;
-  style?: StyleProp<ViewStyle>;
-};
+type Props = Omit<
+  React.ComponentProps<typeof AppbarAction> & {
+    /**
+     *  Custom color for back icon.
+     */
+    color?: string;
+    /**
+     * Optional icon size.
+     */
+    size?: number;
+    /**
+     * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
+     */
+    disabled?: boolean;
+    /**
+     * Accessibility label for the button. This is read by the screen reader when the user taps the button.
+     */
+    accessibilityLabel?: string;
+    /**
+     * Function to execute on press.
+     */
+    onPress?: () => void;
+    style?: StyleProp<ViewStyle>;
+  },
+  'icon'
+>;
 
 /**
  * A component used to display a back button in the appbar.

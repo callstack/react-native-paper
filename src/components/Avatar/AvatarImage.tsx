@@ -10,6 +10,8 @@ import {
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 
+const defaultSize = 64;
+
 type Props = {
   /**
    * Image to display for the `Avatar`.
@@ -18,7 +20,7 @@ type Props = {
   /**
    * Size of the avatar.
    */
-  size: number;
+  size?: number;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -49,11 +51,11 @@ class AvatarImage extends React.Component<Props> {
   static displayName = 'Avatar.Image';
 
   static defaultProps = {
-    size: 64,
+    size: defaultSize,
   };
 
   render() {
-    const { size, source, style, theme } = this.props;
+    const { size = defaultSize, source, style, theme } = this.props;
     const { colors } = theme;
 
     const { backgroundColor = colors.primary } =

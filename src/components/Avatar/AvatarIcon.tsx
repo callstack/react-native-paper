@@ -7,6 +7,8 @@ import { white } from '../../styles/colors';
 import { Theme } from '../../types';
 import { IconSource } from './../Icon';
 
+const defaultSize = 64;
+
 type Props = {
   /**
    * Icon to display for the `Avatar`.
@@ -15,7 +17,7 @@ type Props = {
   /**
    * Size of the avatar.
    */
-  size: number;
+  size?: number;
   /**
    * Custom color for the icon.
    */
@@ -50,11 +52,11 @@ class Avatar extends React.Component<Props> {
   static displayName = 'Avatar.Icon';
 
   static defaultProps = {
-    size: 64,
+    size: defaultSize,
   };
 
   render() {
-    const { icon, size, style, theme } = this.props;
+    const { icon, size = defaultSize, style, theme } = this.props;
 
     const { backgroundColor = theme.colors.primary, ...restStyle } =
       StyleSheet.flatten(style) || {};

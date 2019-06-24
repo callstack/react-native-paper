@@ -868,11 +868,12 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@callstack/react-theme-provider@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@callstack/react-theme-provider/-/react-theme-provider-3.0.0.tgz#9cc2ade9f0dfe31b4ee5eb69a65c499e6fc8ca59"
-  integrity sha512-hiDBe1wjvgDsIt9/WKsl7QkmISJzCBFksCPK1564UpfaEl6v3/t89+bR9PjZ6Aldp4egNus7DJzVzOl5XSTIBQ==
+"@callstack/react-theme-provider@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@callstack/react-theme-provider/-/react-theme-provider-3.0.2.tgz#28316dae317ff9807fff8cece7ebe3404b1758fa"
+  integrity sha512-WrsyFlhjXjKe7T8LPVEjLc2zysyxHv9gfpmGcvb/xUkqjh0q8rCQbgqThP1pJ2ySPtslKktq69jxxKtPJmtoRQ==
   dependencies:
+    "@types/hoist-non-react-statics" "^3.3.1"
     deepmerge "^3.2.0"
     hoist-non-react-statics "^3.3.0"
 
@@ -1546,6 +1547,14 @@
     "@types/events" "*"
     "@types/minimatch" "*"
     "@types/node" "*"
+
+"@types/hoist-non-react-statics@^3.3.1":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz#1124aafe5118cb591977aeb1ceaaed1070eb039f"
+  integrity sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==
+  dependencies:
+    "@types/react" "*"
+    hoist-non-react-statics "^3.3.0"
 
 "@types/invariant@^2.2.29":
   version "2.2.29"

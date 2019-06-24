@@ -9,7 +9,7 @@ const DialogWithLoadingIndicator = ({
   close,
 }: {
   visible: boolean;
-  close: Function;
+  close: () => void;
 }) => (
   <Portal>
     <Dialog onDismiss={close} visible={visible}>
