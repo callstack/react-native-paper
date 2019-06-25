@@ -153,7 +153,10 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
     const baseLabelTranslateY =
       -labelHalfHeight - (topPosition + OUTLINE_MINIMIZED_LABEL_Y_OFFSET);
 
-    const placeholderOpacity = hasActiveOutline ? parentState.labeled : 1;
+    const placeholderOpacity = parentState.labeled.interpolate({
+      inputRange: [0, 1],
+      outputRange: [hasActiveOutline ? 0 : 1, 1],
+    });
 
     const labelProps = {
       label,
