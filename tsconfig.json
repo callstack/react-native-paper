@@ -23,5 +23,5 @@
     "strict": true,
     "target": "esnext"
   },
-  "exclude": ["typings/**/*", "lib/**/*"]
+  "exclude": ["lib/**/*"]
 }

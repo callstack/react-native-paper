@@ -35,7 +35,7 @@
     "test": "jest",
     "prepare": "bob build && node ./scripts/generate-mappings.js",
     "release": "release-it",
-    "bootstrap": "yarn && yarn --cwd example && yarn --cwd docs",
+    "bootstrap": "yarn --cwd example && yarn --cwd docs && yarn",
     "docs": "yarn --cwd docs",
     "example": "yarn --cwd example"
   },
@@ -45,7 +45,6 @@
   "dependencies": {
     "@callstack/react-theme-provider": "^3.0.2",
     "color": "^2.0.1",
-    "hoist-non-react-statics": "^3.1.0",
     "react-native-safe-area-view": "^0.12.0"
   },
   "devDependencies": {
@@ -58,7 +57,6 @@
     "@types/jest": "^24.0.13",
     "@types/node": "^12.0.4",
     "@types/reach__router": "^1.2.4",
-    "@types/react": "^16.8.22",
     "@types/react-dom": "^16.8.4",
     "@types/react-native": "^0.57.61",
     "@types/react-native-vector-icons": "^6.4.1",
@@ -131,6 +129,9 @@
     "targets": [
       "module",
       "typescript"
+    ],
+    "files": [
+      "src/"
     ]
   }
 }
