@@ -90,3 +90,5 @@ const styles = StyleSheet.create({
 });
 
 export default withTheme(CardCover);
+
+export { CardCover };

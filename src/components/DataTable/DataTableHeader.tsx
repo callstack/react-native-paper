@@ -45,3 +45,5 @@ const styles = StyleSheet.create({
 });
 
 export default withTheme(DataTableHeader);
+
+export { DataTableHeader };

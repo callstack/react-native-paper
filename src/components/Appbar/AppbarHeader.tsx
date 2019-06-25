@@ -146,3 +146,5 @@ const styles = StyleSheet.create({
 });
 
 export default withTheme(AppbarHeader);
+
+export { AppbarHeader };

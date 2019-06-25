@@ -18,7 +18,8 @@ import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
-import MenuItem from './MenuItem';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import MenuItem, { MenuItem as _MenuItem } from './MenuItem';
 
 type Props = {
   /**

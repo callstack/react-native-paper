@@ -187,3 +187,5 @@ const styles = StyleSheet.create({
 });
 
 export default withTheme(RadioButtonAndroid);
+
+export { RadioButtonAndroid };

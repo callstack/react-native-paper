@@ -107,3 +107,5 @@ const styles = StyleSheet.create({
 });
 
 export default withTheme(CheckboxIOS);
+
+export { CheckboxIOS };

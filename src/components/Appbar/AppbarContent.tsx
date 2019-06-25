@@ -122,3 +122,5 @@ const styles = StyleSheet.create({
 });
 
 export default withTheme(AppbarContent);
+
+export { AppbarContent };

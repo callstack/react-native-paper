@@ -76,3 +76,5 @@ const styles = StyleSheet.create({
 });
 
 export default withTheme(DialogTitle);
+
+export { DialogTitle };

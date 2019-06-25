@@ -170,3 +170,5 @@ const styles = StyleSheet.create({
 });
 
 export default withTheme(CheckboxAndroid);
+
+export { CheckboxAndroid };

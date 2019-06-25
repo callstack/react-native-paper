@@ -330,6 +330,8 @@ class FABGroup extends React.Component<Props, State> {
 
 export default withTheme(FABGroup);
 
+export { FABGroup };
+
 const styles = StyleSheet.create({
   safeArea: {
     alignItems: 'flex-end',

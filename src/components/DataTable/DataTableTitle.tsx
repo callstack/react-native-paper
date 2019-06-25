@@ -149,3 +149,5 @@ const styles = StyleSheet.create({
 });
 
 export default withTheme(DataTableTitle);
+
+export { DataTableTitle };

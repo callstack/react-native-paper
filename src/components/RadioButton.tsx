@@ -4,8 +4,14 @@ import RadioButtonGroup, {
   RadioButtonContext,
   RadioButtonContextType,
 } from './RadioButtonGroup';
-import RadioButtonAndroid from './RadioButtonAndroid';
-import RadioButtonIOS from './RadioButtonIOS';
+import RadioButtonAndroid, {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  RadioButtonAndroid as _RadioButtonAndroid,
+} from './RadioButtonAndroid';
+import RadioButtonIOS, {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  RadioButtonIOS as _RadioButtonIOS,
+} from './RadioButtonIOS';
 import { withTheme } from '../core/theming';
 import { Theme } from '../types';
 

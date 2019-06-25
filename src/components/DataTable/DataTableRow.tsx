@@ -58,3 +58,5 @@ const styles = StyleSheet.create({
 });
 
 export default withTheme(DataTableRow);
+
+export { DataTableRow };

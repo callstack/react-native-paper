@@ -178,3 +178,5 @@ const styles = StyleSheet.create({
 });
 
 export default withTheme(CardTitle);
+
+export { CardTitle };

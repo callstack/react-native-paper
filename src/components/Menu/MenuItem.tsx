@@ -128,3 +128,5 @@ const styles = StyleSheet.create({
 });
 
 export default withTheme(MenuItem);
+
+export { MenuItem };

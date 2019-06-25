@@ -85,3 +85,5 @@ const styles = StyleSheet.create({
 });
 
 export default withTheme(DataTablePagination);
+
+export { DataTablePagination };

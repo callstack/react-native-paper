@@ -115,3 +115,5 @@ const styles = StyleSheet.create({
 });
 
 export default withTheme(RadioButtonIOS);
+
+export { RadioButtonIOS };

@@ -2,10 +2,14 @@ import * as React from 'react';
 import { View, ViewStyle, Platform, StyleSheet, StyleProp } from 'react-native';
 import color from 'color';
 
-import AppbarContent from './AppbarContent';
+import AppbarContent, {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  AppbarContent as _AppbarContent,
+} from './AppbarContent';
 import AppbarAction from './AppbarAction';
 import AppbarBackAction from './AppbarBackAction';
-import AppbarHeader from './AppbarHeader';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import AppbarHeader, { AppbarHeader as _AppbarHeader } from './AppbarHeader';
 import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import { black, white } from '../../styles/colors';
