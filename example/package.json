@@ -44,7 +44,7 @@
   },
   "resolutions": {
     "**/color": "2.0.1",
-    "**/hoist-non-react-statics": "2.5.0",
+    "**/hoist-non-react-statics": "3.3.0",
     "**/react-lifecycles-compat": "3.0.4",
     "**/react": "16.8.3"
   }
