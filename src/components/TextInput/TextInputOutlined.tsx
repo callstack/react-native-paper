@@ -27,6 +27,7 @@ import {
   calculatePadding,
   adjustPaddingOut,
   Padding,
+  interpolatePlaceholder,
 } from './helpers';
 
 const OUTLINE_MINIMIZED_LABEL_Y_OFFSET = -6;
@@ -153,10 +154,10 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
     const baseLabelTranslateY =
       -labelHalfHeight - (topPosition + OUTLINE_MINIMIZED_LABEL_Y_OFFSET);
 
-    const placeholderOpacity = parentState.labeled.interpolate({
-      inputRange: [0, 1],
-      outputRange: [hasActiveOutline ? 0 : 1, 1],
-    });
+    const placeholderOpacity = interpolatePlaceholder(
+      parentState.labeled,
+      hasActiveOutline
+    );
 
     const labelProps = {
       label,
