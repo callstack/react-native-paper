@@ -171,4 +171,5 @@ const styles = StyleSheet.create({
 
 export default withTheme(CheckboxAndroid);
 
+// @component-docs ignore-next-line
 export { CheckboxAndroid };

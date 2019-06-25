@@ -129,4 +129,5 @@ const styles = StyleSheet.create({
 
 export default withTheme(MenuItem);
 
+// @component-docs ignore-next-line
 export { MenuItem };

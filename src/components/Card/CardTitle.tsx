@@ -179,4 +179,5 @@ const styles = StyleSheet.create({
 
 export default withTheme(CardTitle);
 
+// @component-docs ignore-next-line
 export { CardTitle };

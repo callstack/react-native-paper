@@ -122,4 +122,5 @@ const styles = StyleSheet.create({
 
 export default withTheme(AppbarContent);
 
+// @component-docs ignore-next-line
 export { AppbarContent };

@@ -77,4 +77,5 @@ const styles = StyleSheet.create({
 
 export default withTheme(DialogTitle);
 
+// @component-docs ignore-next-line
 export { DialogTitle };
