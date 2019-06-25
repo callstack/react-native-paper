@@ -16,6 +16,7 @@ let AntDesign,
   Octicons,
   Zocial,
   SimpleLineIcons;
+
 const IconSets = {
   AntDesign,
   Entypo,
@@ -97,6 +98,7 @@ export type IconSource =
 type IconProps = {
   color: string,
   size: number,
+  type?: ?string,
 };
 
 type Props = IconProps & {
@@ -136,7 +138,7 @@ export const isValidIcon = (source: any) =>
 export const isEqualIcon = (a: any, b: any) =>
   a === b || getIconId(a) === getIconId(b);
 
-const Icon = ({ source, color, size, ...rest }: Props) => {
+const Icon = ({ source, color, size, type, ...rest }: Props) => {
   const direction =
     typeof source === 'object' && source.direction && source.source
       ? source.direction === 'auto'
@@ -161,10 +163,6 @@ const Icon = ({ source, color, size, ...rest }: Props) => {
           importantForAccessibility: 'no-hide-descendants',
         };
 
-  let ChoosenIcon =
-    source.type != null ? IconSets[source.type] : IconSets.MaterialIcons;
-  if (ChoosenIcon == null) ChoosenIcon = IconSets.MaterialIcons;
-
   if (isImageSource(s)) {
     return (
       <Image
@@ -185,6 +183,8 @@ const Icon = ({ source, color, size, ...rest }: Props) => {
       />
     );
   } else if (typeof s === 'string') {
+    const ChoosenIcon = IconSets[type || 'MaterialIcons'] || MaterialIcons;
+
     return (
       <ChoosenIcon
         {...rest}
