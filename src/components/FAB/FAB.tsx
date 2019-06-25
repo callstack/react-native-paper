@@ -98,7 +98,7 @@ type State = {
  * ```
  */
 class FAB extends React.Component<Props, State> {
-  // @component ./FABGroup.js
+  // @component ./FABGroup.tsx
   static Group = FABGroup;
 
   static defaultProps = {

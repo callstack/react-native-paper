@@ -113,7 +113,7 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
  * ```
  */
 class Menu extends React.Component<Props, State> {
-  // @component ./MenuItem.js
+  // @component ./MenuItem.tsx
   static Item = MenuItem;
 
   state = {

@@ -81,13 +81,13 @@ type Props = {
  * ```
  */
 class Dialog extends React.Component<Props> {
-  // @component ./DialogContent.js
+  // @component ./DialogContent.tsx
   static Content = DialogContent;
-  // @component ./DialogActions.js
+  // @component ./DialogActions.tsx
   static Actions = DialogActions;
-  // @component ./DialogTitle.js
+  // @component ./DialogTitle.tsx
   static Title = DialogTitle;
-  // @component ./DialogScrollArea.js
+  // @component ./DialogScrollArea.tsx
   static ScrollArea = DialogScrollArea;
 
   static defaultProps = {

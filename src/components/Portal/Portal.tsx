@@ -37,7 +37,7 @@ type Props = {
  * ```
  */
 class Portal extends React.Component<Props> {
-  // @component ./PortalHost.js
+  // @component ./PortalHost.tsx
   static Host = PortalHost;
 
   render() {

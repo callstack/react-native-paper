@@ -81,10 +81,10 @@ type Props = {
  * ```
  */
 class Checkbox extends React.Component<Props> {
-  // @component ./CheckboxAndroid.js
+  // @component ./CheckboxAndroid.tsx
   static Android = CheckboxAndroid;
 
-  // @component ./CheckboxIOS.js
+  // @component ./CheckboxIOS.tsx
   static IOS = CheckboxIOS;
 
   render() {

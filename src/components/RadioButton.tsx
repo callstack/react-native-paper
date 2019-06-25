@@ -101,13 +101,13 @@ type Props = {
  * ```
  */
 class RadioButton extends React.Component<Props> {
-  // @component ./RadioButtonGroup.js
+  // @component ./RadioButtonGroup.tsx
   static Group = RadioButtonGroup;
 
-  // @component ./RadioButtonAndroid.js
+  // @component ./RadioButtonAndroid.tsx
   static Android = RadioButtonAndroid;
 
-  // @component ./RadioButtonIOS.js
+  // @component ./RadioButtonIOS.tsx
   static IOS = RadioButtonIOS;
 
   handlePress = (context: RadioButtonContextType) => {

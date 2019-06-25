@@ -85,13 +85,13 @@ type State = {
  * ```
  */
 class Card extends React.Component<Props, State> {
-  // @component ./CardContent.js
+  // @component ./CardContent.tsx
   static Content = CardContent;
-  // @component ./CardActions.js
+  // @component ./CardActions.tsx
   static Actions = CardActions;
-  // @component ./CardCover.js
+  // @component ./CardCover.tsx
   static Cover = CardCover;
-  // @component ./CardTitle.js
+  // @component ./CardTitle.tsx
   static Title = CardTitle;
 
   static defaultProps = {

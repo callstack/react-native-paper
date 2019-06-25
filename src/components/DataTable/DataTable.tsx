@@ -74,19 +74,19 @@ type Props = React.ComponentProps<typeof View> & {
  * ```
  */
 class DataTable extends React.Component<Props> {
-  // @component ./DataTableHeader.js
+  // @component ./DataTableHeader.tsx
   static Header = DataTableHeader;
 
-  // @component ./DataTableTitle.js
+  // @component ./DataTableTitle.tsx
   static Title = DataTableTitle;
 
-  // @component ./DataTableRow.js
+  // @component ./DataTableRow.tsx
   static Row = DataTableRow;
 
-  // @component ./DataTableCell.js
+  // @component ./DataTableCell.tsx
   static Cell = DataTableCell;
 
-  // @component ./DataTablePagination.js
+  // @component ./DataTablePagination.tsx
   static Pagination = DataTablePagination;
 
   render() {

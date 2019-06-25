@@ -72,13 +72,13 @@ export const DEFAULT_APPBAR_HEIGHT = 56;
  * ```
  */
 class Appbar extends React.Component<Props> {
-  // @component ./AppbarContent.js
+  // @component ./AppbarContent.tsx
   static Content = AppbarContent;
-  // @component ./AppbarAction.js
+  // @component ./AppbarAction.tsx
   static Action = AppbarAction;
-  // @component ./AppbarBackAction.js
+  // @component ./AppbarBackAction.tsx
   static BackAction = AppbarBackAction;
-  // @component ./AppbarHeader.js
+  // @component ./AppbarHeader.tsx
   static Header = AppbarHeader;
 
   render() {

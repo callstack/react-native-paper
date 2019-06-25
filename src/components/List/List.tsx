@@ -1,14 +1,14 @@
-// @component ./ListAccordion.js
+// @component ./ListAccordion.tsx
 export { default as Accordion } from './ListAccordion';
 
-// @component ./ListIcon.js
+// @component ./ListIcon.tsx
 export { default as Icon } from './ListIcon';
 
-// @component ./ListItem.js
+// @component ./ListItem.tsx
 export { default as Item } from './ListItem';
 
-// @component ./ListSection.js
+// @component ./ListSection.tsx
 export { default as Section } from './ListSection';
 
-// @component ./ListSubheader.js
+// @component ./ListSubheader.tsx
 export { default as Subheader } from './ListSubheader';

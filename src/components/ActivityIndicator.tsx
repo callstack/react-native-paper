@@ -63,9 +63,9 @@ const DURATION = 2400;
  * ```
  */
 class ActivityIndicator extends React.Component<Props, State> {
-  static defaultProps = {
+  static defaultProps: Partial<Props> = {
     animating: true,
-    size: 'small' as 'small',
+    size: 'small',
     hidesWhenStopped: true,
   };
 
@@ -76,7 +76,7 @@ class ActivityIndicator extends React.Component<Props, State> {
     ),
   };
 
-  rotation?: Animated.CompositeAnimation = undefined;
+  rotation: Animated.CompositeAnimation | undefined = undefined;
 
   componentDidMount() {
     const { animating } = this.props;
