@@ -26,6 +26,7 @@ import {
   calculateInputHeight,
   calculatePadding,
   adjustPaddingOut,
+  Padding,
 } from './helpers';
 
 const OUTLINE_MINIMIZED_LABEL_Y_OFFSET = -6;
@@ -142,13 +143,11 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       isAndroid: Platform.OS === 'android',
       styles: StyleSheet.flatten(
         dense ? styles.inputOutlinedDense : styles.inputOutlined
-      ),
+      ) as Padding,
     };
 
-    // $FlowFixMe
     const pad = calculatePadding(paddingSettings);
 
-    // $FlowFixMe
     const paddingOut = adjustPaddingOut({ ...paddingSettings, pad });
 
     const baseLabelTranslateY =

@@ -18,7 +18,7 @@ type AdjProps = PaddingProps & {
   pad: number;
 };
 
-type Padding = { paddingTop: number; paddingBottom: number };
+export type Padding = { paddingTop: number; paddingBottom: number };
 
 export const calculateLabelTopPosition = (
   labelHeight: number,

@@ -24,6 +24,7 @@ import {
   calculateInputHeight,
   calculatePadding,
   adjustPaddingFlat,
+  Padding,
 } from './helpers';
 
 const MINIMIZED_LABEL_Y_OFFSET = -18;
@@ -159,13 +160,11 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       isAndroid: Platform.OS === 'android',
       styles: StyleSheet.flatten(
         dense ? styles.inputFlatDense : styles.inputFlat
-      ),
+      ) as Padding,
     };
 
-    // $FlowFixMe
     const pad = calculatePadding(paddingSettings);
 
-    // $FlowFixMe
     const paddingFlat = adjustPaddingFlat({
       ...paddingSettings,
       pad,
