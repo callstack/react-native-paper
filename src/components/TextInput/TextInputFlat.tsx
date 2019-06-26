@@ -6,6 +6,7 @@ import {
   StyleSheet,
   I18nManager,
   Platform,
+  TextStyle,
 } from 'react-native';
 import color from 'color';
 import InputLabel from './InputLabel';
@@ -76,7 +77,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       fontSize: fontSizeStyle,
       height,
       ...viewStyle
-    } = StyleSheet.flatten(style);
+    } = (StyleSheet.flatten(style) || {}) as TextStyle;
     const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
 
     let inputTextColor, activeColor, underlineColorCustom, placeholderColor;
@@ -146,7 +147,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       console.warn('Currently we support only numbers in height prop');
 
     const paddingSettings = {
-      height: +height || null,
+      height: height ? +height : null,
       labelHalfHeight,
       offset: INPUT_OFFSET,
       multiline: multiline ? multiline : null,
@@ -226,10 +227,10 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
               ref: innerRef,
               onChangeText,
               adjustsFontSizeToFit: true,
-              placeholder:
-                label && parentState.placeholder
-                  ? parentState.placeholder
-                  : this.props.placeholder,
+              // @ts-ignore
+              placeholder: label
+                ? parentState.placeholder
+                : this.props.placeholder,
               placeholderTextColor: placeholderColor,
               editable: !disabled && editable,
               selectionColor:

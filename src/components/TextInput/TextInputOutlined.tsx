@@ -6,6 +6,7 @@ import {
   StyleSheet,
   I18nManager,
   Platform,
+  TextStyle,
 } from 'react-native';
 import color from 'color';
 import AnimatedText from '../Typography/AnimatedText';
@@ -74,7 +75,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       fontSize: fontSizeStyle,
       height,
       ...viewStyle
-    } = StyleSheet.flatten(style);
+    } = (StyleSheet.flatten(style) || {}) as TextStyle;
     const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
 
     let inputTextColor,
@@ -129,7 +130,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       console.warn('Currently we support only numbers in height prop');
 
     const paddingSettings = {
-      height: +height,
+      height: height ? +height : null,
       labelHalfHeight,
       offset: LABEL_PADDING_TOP,
       multiline: multiline ? multiline : null,
