@@ -65,17 +65,19 @@ type State = {
  *   render() {
  *     const { visible } = this.state;
  *     return (
- *       <Portal>
- *         <Modal visible={visible} onDismiss={this._hideModal}>
- *           <Text>Example Modal</Text>
- *         </Modal>
- *         <Button
- *           style={{ marginTop: 30 }}
- *           onPress={this._showModal}
- *         >
- *           Show
- *         </Button>
- *       </Portal>
+ *       <Provider>
+ *          <Portal>
+ *            <Modal visible={visible} onDismiss={this._hideModal}>
+ *              <Text>Example Modal</Text>
+ *            </Modal>
+ *            <Button
+ *              style={{ marginTop: 30 }}
+ *              onPress={this._showModal}
+ *            >
+ *              Show
+ *            </Button>
+ *          </Portal>
+ *       </Provider>
  *     );
  *   }
  * }
@@ -178,6 +180,7 @@ class Modal extends React.Component<Props, State> {
     const { colors } = theme;
     return (
       <Animated.View
+        pointerEvents={this.props.visible ? 'auto' : 'none'}
         accessibilityViewIsModal
         accessibilityLiveRegion="polite"
         style={StyleSheet.absoluteFill}
