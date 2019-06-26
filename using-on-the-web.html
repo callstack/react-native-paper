@@ -26,7 +26,7 @@
 <p>Install <a href="https://github.com/timarney/react-app-rewired"><code>react-app-rewired</code></a> to override <code>webpack</code> configuration:</p>
 <pre><code class="language-sh">yarn add --dev react-app-rewired</code></pre>
 <p><a href="#2-configure-babel-loader">Configure <code>babel-loader</code></a> using a new file called <code>config-overrides.js</code>:</p>
-<pre><code class="language-js">module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token function">override</span><span class="token punctuation">(</span>config<span class="token punctuation">,</span> env<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre><code class="language-js">module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token function">override</span><span class="token punctuation">(</span><span class="token parameter">config<span class="token punctuation">,</span> env</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   config<span class="token punctuation">.</span>module<span class="token punctuation">.</span>rules<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
     test<span class="token punctuation">:</span> <span class="token regex">/\.js$/</span><span class="token punctuation">,</span>
     exclude<span class="token punctuation">:</span> <span class="token regex">/node_modules[/\\](?!react-native-paper|react-native-vector-icons|react-native-safe-area-view)/</span><span class="token punctuation">,</span>
@@ -117,7 +117,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>App<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
 
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">&gt;</span></span><span class="token style language-css">
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
     <span class="token selector">html, body, #root</span> <span class="token punctuation">{</span>
       <span class="token property">height</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
@@ -126,11 +126,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
       <span class="token property">flex-direction</span><span class="token punctuation">:</span> column<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+  </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>root<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>app.bundle.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>app.bundle.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span></code></pre>
 <p>Now we're ready to start configuring the project.</p>
 <h2 id="configure-webpack">
@@ -207,12 +207,12 @@ module<span class="token punctuation">.</span>exports <span class="token operato
           </a>
         Load the Material icons</h2>
 <p>If you followed the getting started guide, you should have the following code in your root component:</p>
-<pre><code class="language-js"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>PaperProvider</span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
-  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>App</span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
-</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>PaperProvider</span><span class="token punctuation">&gt;</span></span></code></pre>
+<pre><code class="language-js"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PaperProvider</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">App</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PaperProvider</span></span><span class="token punctuation">&gt;</span></span></code></pre>
 <p>Now we need tweak this section to load the Material icons from the <a href="https://github.com/oblador/react-native-vector-icons"><code>react-native-vector-icons</code></a> library:</p>
-<pre><code class="language-js"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>PaperProvider</span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
-  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>React.Fragment</span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+<pre><code class="language-js"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PaperProvider</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">React.Fragment</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
     </span><span class="token punctuation">{</span>Platform<span class="token punctuation">.</span><span class="token constant">OS</span> <span class="token operator">===</span> <span class="token string">'web'</span> <span class="token operator">?</span> <span class="token punctuation">(</span>
       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">{`
         @font-face {
@@ -221,9 +221,9 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         }
       `}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
     <span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">}</span><span class="token plain-text">
-    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>App</span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
-  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>React.Fragment</span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
-</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>PaperProvider</span><span class="token punctuation">&gt;</span></span></code></pre>
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">App</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">React.Fragment</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PaperProvider</span></span><span class="token punctuation">&gt;</span></span></code></pre>
 <p>Remember to import <code>Platform</code> from <code>react-native</code> at the top:</p>
 <pre><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> Platform <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native'</span><span class="token punctuation">;</span></code></pre>
 <p>You can also load these fonts using <a href="https://github.com/webpack-contrib/css-loader"><code>css-loader</code></a> if you prefer.</p>
