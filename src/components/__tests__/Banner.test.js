@@ -1,9 +1,7 @@
-/* @flow */
-
 import * as React from 'react';
 import renderer from 'react-test-renderer';
 import { Image } from 'react-native';
-import Banner from '../Banner';
+import Banner from '../Banner.tsx';
 
 jest.useFakeTimers();
 

@@ -9,7 +9,6 @@ import {
   DefaultTheme,
   type Theme,
 } from 'react-native-paper';
-import createReactContext from 'create-react-context';
 import { createDrawerNavigator } from 'react-navigation';
 import RootNavigator from './RootNavigator';
 import DrawerItems from './DrawerItems';
@@ -19,7 +18,7 @@ type State = {
   rtl: boolean,
 };
 
-const PreferencesContext: any = createReactContext();
+const PreferencesContext: any = React.createContext();
 
 const App = createDrawerNavigator(
   { Home: { screen: RootNavigator } },

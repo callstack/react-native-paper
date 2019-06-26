@@ -1,9 +1,7 @@
-/* @flow */
-
 import * as React from 'react';
 import { View } from 'react-native';
 import renderer from 'react-test-renderer';
-import ProgressBar from '../ProgressBar';
+import ProgressBar from '../ProgressBar.tsx';
 
 jest.useFakeTimers();
 

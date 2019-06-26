@@ -2,6 +2,7 @@
 
 exports[`renders disabled switch 1`] = `
 <RCTSwitch
+  accessibilityRole="button"
   disabled={true}
   onChange={[Function]}
   onResponderTerminationRequest={[Function]}
@@ -13,12 +14,14 @@ exports[`renders disabled switch 1`] = `
       "width": 51,
     }
   }
+  tintColor=""
   value={true}
 />
 `;
 
 exports[`renders off switch 1`] = `
 <RCTSwitch
+  accessibilityRole="button"
   onChange={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
@@ -29,12 +32,14 @@ exports[`renders off switch 1`] = `
       "width": 51,
     }
   }
+  tintColor=""
   value={false}
 />
 `;
 
 exports[`renders on switch 1`] = `
 <RCTSwitch
+  accessibilityRole="button"
   onChange={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
@@ -45,12 +50,14 @@ exports[`renders on switch 1`] = `
       "width": 51,
     }
   }
+  tintColor=""
   value={true}
 />
 `;
 
 exports[`renders switch with color 1`] = `
 <RCTSwitch
+  accessibilityRole="button"
   onChange={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
@@ -61,6 +68,7 @@ exports[`renders switch with color 1`] = `
       "width": 51,
     }
   }
+  tintColor=""
   value={true}
 />
 `;
