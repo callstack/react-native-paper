@@ -116,4 +116,5 @@ const styles = StyleSheet.create({
 
 export default withTheme(RadioButtonIOS);
 
+// @component-docs ignore-next-line
 export { RadioButtonIOS };

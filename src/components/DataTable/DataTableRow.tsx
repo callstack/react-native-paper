@@ -59,4 +59,5 @@ const styles = StyleSheet.create({
 
 export default withTheme(DataTableRow);
 
+// @component-docs ignore-next-line
 export { DataTableRow };

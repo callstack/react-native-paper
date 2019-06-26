@@ -150,4 +150,5 @@ const styles = StyleSheet.create({
 
 export default withTheme(DataTableTitle);
 
+// @component-docs ignore-next-line
 export { DataTableTitle };

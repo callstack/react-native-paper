@@ -332,6 +332,7 @@ class FABGroup extends React.Component<Props, State> {
 
 export default withTheme(FABGroup);
 
+// @component-docs ignore-next-line
 export { FABGroup };
 
 const styles = StyleSheet.create({

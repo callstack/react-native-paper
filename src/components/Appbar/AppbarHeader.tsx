@@ -38,7 +38,7 @@ type Props = React.ComponentProps<typeof Appbar> & {
 };
 
 // @ts-ignore
-const expo = global.__expo as any;
+const expo = global.__expo;
 
 const DEFAULT_STATUSBAR_HEIGHT_EXPO =
   expo && expo.Constants ? expo.Constants.statusBarHeight : 0;
@@ -147,4 +147,5 @@ const styles = StyleSheet.create({
 
 export default withTheme(AppbarHeader);
 
+// @component-docs ignore-next-line
 export { AppbarHeader };

@@ -46,4 +46,5 @@ const styles = StyleSheet.create({
 
 export default withTheme(DataTableHeader);
 
+// @component-docs ignore-next-line
 export { DataTableHeader };

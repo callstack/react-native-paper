@@ -33,12 +33,12 @@ type Route = Partial<{
   testID: string;
 }>;
 
-type NavigationState<T extends Route> = {
+type NavigationState = {
   index: number;
-  routes: Array<T>;
+  routes: Route[];
 };
 
-type Props<T> = {
+type Props = {
   /**
    * Whether the shifting style is used, the active tab appears wider and the inactive tabs won't have a label.
    * By default, this is `true` when you have more than 3 tabs.
@@ -80,7 +80,7 @@ type Props<T> = {
    *
    * `BottomNavigation` is a controlled component, which means the `index` needs to be updated via the `onIndexChange` callback.
    */
-  navigationState: NavigationState<T>;
+  navigationState: NavigationState;
   /**
    * Callback which is called on tab change, receives the index of the new tab as argument.
    * The navigation state needs to be updated when it's called, otherwise the change is dropped.
@@ -122,14 +122,14 @@ type Props<T> = {
    * ```
    */
   renderScene: (props: {
-    route: T;
+    route: Route;
     jumpTo: (key: string) => void;
   }) => React.ReactNode | null;
   /**
    * Callback which returns a React Element to be used as tab icon.
    */
   renderIcon?: (props: {
-    route: T;
+    route: Route;
     focused: boolean;
     color: string;
   }) => React.ReactNode;
@@ -137,36 +137,35 @@ type Props<T> = {
    * Callback which React Element to be used as tab label.
    */
   renderLabel?: (props: {
-    route: T;
+    route: Route;
     focused: boolean;
     color: string;
   }) => React.ReactNode;
   /**
    * Get label text for the tab, uses `route.title` by default. Use `renderLabel` to replace label component.
    */
-  getLabelText?: (props: { route: T }) => string;
+  getLabelText?: (props: { route: Route }) => string;
   /**
    * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
    * Uses `route.accessibilityLabel` by default.
    */
-  getAccessibilityLabel?: (props: { route: T }) => string | undefined;
+  getAccessibilityLabel?: (props: { route: Route }) => string | undefined;
   /**
    * Get the id to locate this tab button in tests, uses `route.testID` by default.
    */
-  getTestID?: (props: { route: T }) => string | undefined;
+  getTestID?: (props: { route: Route }) => string | undefined;
   /**
    * Get badge for the tab, uses `route.badge` by default.
    */
-  getBadge?: (props: { route: T }) => boolean | number | string;
-  /**
+  getBadge?: (props: { route: Route }) => boolean | number | string;
   /**
    * Get color for the tab, uses `route.color` by default.
    */
-  getColor?: (props: { route: T }) => string;
+  getColor?: (props: { route: Route }) => string;
   /**
    * Function to execute on tab press. It receives the route for the pressed tab, useful for things like scroll to top.
    */
-  onTabPress?: (props: { route: T }) => void;
+  onTabPress?: (props: { route: Route }) => void;
   /**
    * Custom color for icon and label in the active tab.
    */
@@ -320,10 +319,7 @@ class SceneComponent extends React.PureComponent<any> {
  * }
  * ```
  */
-class BottomNavigation<T extends Route> extends React.Component<
-  Props<T>,
-  State
-> {
+class BottomNavigation extends React.Component<Props, State> {
   /**
    * Function which takes a map of route keys to components.
    * Pure components are used to minmize re-rendering of the pages.
@@ -393,7 +389,7 @@ class BottomNavigation<T extends Route> extends React.Component<
     return nextState;
   }
 
-  constructor(props: Props<T>) {
+  constructor(props: Props) {
     super(props);
 
     const { index } = this.props.navigationState;
@@ -427,7 +423,7 @@ class BottomNavigation<T extends Route> extends React.Component<
     }
   }
 
-  componentDidUpdate(prevProps: Props<T>) {
+  componentDidUpdate(prevProps: Props) {
     if (prevProps.navigationState.index === this.props.navigationState.index) {
       return;
     }

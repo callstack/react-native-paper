@@ -86,4 +86,5 @@ const styles = StyleSheet.create({
 
 export default withTheme(DataTablePagination);
 
+// @component-docs ignore-next-line
 export { DataTablePagination };

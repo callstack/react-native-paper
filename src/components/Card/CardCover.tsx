@@ -91,4 +91,5 @@ const styles = StyleSheet.create({
 
 export default withTheme(CardCover);
 
+// @component-docs ignore-next-line
 export { CardCover };
