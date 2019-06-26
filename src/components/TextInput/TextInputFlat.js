@@ -155,11 +155,15 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       label,
       scale: fontScale,
       isAndroid: Platform.OS === 'android',
-      styles: dense ? styles.inputFlatDense : styles.inputFlat,
+      styles: StyleSheet.flatten(
+        dense ? styles.inputFlatDense : styles.inputFlat
+      ),
     };
 
+    // $FlowFixMe
     const pad = calculatePadding(paddingSettings);
 
+    // $FlowFixMe
     const paddingFlat = adjustPaddingFlat({
       ...paddingSettings,
       pad,
