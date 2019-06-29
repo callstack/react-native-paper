@@ -45,6 +45,7 @@ class ButtonExample extends React.Component<Props, State> {
           <FAB
             icon="favorite"
             style={styles.fab}
+            iconSize={40}
             onPress={() => {}}
             visible={this.state.visible}
           />
