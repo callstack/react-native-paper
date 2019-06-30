@@ -57,6 +57,10 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   accessibilityLabel?: string;
   /**
+   * Font size if the children are string
+   */
+  fontSize?: number;
+  /**
    * Function to execute on press.
    */
   onPress?: () => void;
@@ -147,6 +151,7 @@ class Button extends React.Component<Props, State> {
       color: buttonColor,
       children,
       uppercase,
+      fontSize,
       accessibilityLabel,
       onPress,
       style,
@@ -220,7 +225,7 @@ class Button extends React.Component<Props, State> {
       borderRadius: roundness,
     };
     const touchableStyle = { borderRadius: roundness };
-    const textStyle = { color: textColor, ...font };
+    const textStyle = { color: textColor, fontSize, ...font };
     const elevation =
       disabled || mode !== 'contained' ? 0 : this.state.elevation;
 
