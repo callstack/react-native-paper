@@ -473,6 +473,7 @@ class Menu extends React.Component<Props, State> {
               collapsable={false}
               accessibilityViewIsModal={visible}
               style={[styles.wrapper, positionStyle, style]}
+              pointerEvents={visible ? 'box-none' : 'none'}
             >
               <Animated.View style={{ transform: positionTransforms }}>
                 <Surface
