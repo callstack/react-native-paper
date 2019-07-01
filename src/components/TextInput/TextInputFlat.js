@@ -193,10 +193,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
               style={[
                 styles.placeholder,
                 {
-                  paddingHorizontal:
-                    transparent
-                    ? 0
-                    : LABEL_PADDING_HORIZONTAL,
+                  paddingHorizontal: transparent ? 0 : LABEL_PADDING_HORIZONTAL,
                 },
                 styles.placeholderFlat,
                 labelStyle,
@@ -216,10 +213,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
               style={[
                 styles.placeholder,
                 {
-                  paddingHorizontal:
-                    transparent
-                    ? 0
-                    : LABEL_PADDING_HORIZONTAL,
+                  paddingHorizontal: transparent ? 0 : LABEL_PADDING_HORIZONTAL,
                 },
                 styles.placeholderFlat,
                 labelStyle,
