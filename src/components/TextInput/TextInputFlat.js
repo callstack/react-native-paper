@@ -82,13 +82,13 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       containerStyle = {
         backgroundColor: theme.dark
           ? color(colors.background)
-            .lighten(0.24)
-            .rgb()
-            .string()
+              .lighten(0.24)
+              .rgb()
+              .string()
           : color(colors.background)
-            .darken(0.06)
-            .rgb()
-            .string(),
+              .darken(0.06)
+              .rgb()
+              .string(),
         borderTopLeftRadius: theme.roundness,
         borderTopRightRadius: theme.roundness,
       };
@@ -140,10 +140,12 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
               baseLabelTranslateX > 0
                 ? baseLabelTranslateX +
                   labelHalfWidth / LABEL_PADDING_HORIZONTAL -
-                  RANDOM_VALUE_TO_CENTER_LABEL - labelHorizontalPadding
+                  RANDOM_VALUE_TO_CENTER_LABEL -
+                  labelHorizontalPadding
                 : baseLabelTranslateX -
                   labelHalfWidth / LABEL_PADDING_HORIZONTAL +
-                  RANDOM_VALUE_TO_CENTER_LABEL - labelHorizontalPadding,
+                  RANDOM_VALUE_TO_CENTER_LABEL -
+                  labelHorizontalPadding,
               0,
             ],
           }),
@@ -249,7 +251,9 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
                 ? styles.inputFlatWithLabel
                 : styles.inputFlatWithoutLabel,
               {
-                paddingHorizontal: transparent ? 0 : styles.input.paddingHorizontal,
+                paddingHorizontal: transparent
+                  ? 0
+                  : styles.input.paddingHorizontal,
               },
               {
                 color: inputTextColor,
