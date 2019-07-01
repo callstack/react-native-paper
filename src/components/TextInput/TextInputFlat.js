@@ -153,10 +153,6 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       ],
     };
 
-    if (transparent) {
-      labelStyle.paddingHorizontal = 0;
-    }
-
     return (
       <View style={[containerStyle, style]}>
         <Animated.View
@@ -196,6 +192,11 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
               onLayout={onLayoutAnimatedText}
               style={[
                 styles.placeholder,
+                {
+                  paddingHorizontal: transparent
+                    ? 0
+                    : style.placeholder.paddingHorizontal,
+                },
                 styles.placeholderFlat,
                 labelStyle,
                 {
@@ -213,6 +214,11 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
             <AnimatedText
               style={[
                 styles.placeholder,
+                {
+                  paddingHorizontal: transparent
+                    ? 0
+                    : style.placeholder.paddingHorizontal,
+                },
                 styles.placeholderFlat,
                 labelStyle,
                 {
