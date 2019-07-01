@@ -65,7 +65,7 @@ class Surface extends React.Component<Props> {
         {...rest}
         style={[
           { backgroundColor: theme.colors.surface },
-          elevation && shadow(elevation),
+          shadow(elevation),
           style,
         ]}
       />
