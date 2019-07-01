@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
-import ToggleButton from './ToggleButton';
+import { View, StyleProp, ViewStyle } from 'react-native';
 
 type Props = {
   /**
@@ -15,6 +14,7 @@ type Props = {
    * React elements containing toggle buttons.
    */
   children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
 };
 
 type ToggleButtonContextType = {
@@ -58,8 +58,7 @@ class ToggleButtonGroup extends React.Component<Props> {
   static displayName = 'ToggleButton.Group';
 
   render() {
-    const { value, onValueChange, children } = this.props;
-    const count = React.Children.count(children);
+    const { value, onValueChange, children, style } = this.props;
 
     return (
       <ToggleButtonGroupContext.Provider
@@ -68,51 +67,10 @@ class ToggleButtonGroup extends React.Component<Props> {
           onValueChange,
         }}
       >
-        {React.Children.map(children, (child, i) => {
-          // @ts-ignore
-          if (child && child.type === ToggleButton) {
-            // @ts-ignore
-            return React.cloneElement(child, {
-              style: [
-                styles.button,
-                i === 0
-                  ? styles.first
-                  : i === count - 1
-                  ? styles.last
-                  : styles.middle,
-                // @ts-ignore
-                child.props.style,
-              ],
-            });
-          }
-
-          return child;
-        })}
+        <View style={style}>{children}</View>
       </ToggleButtonGroupContext.Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  button: {
-    borderWidth: StyleSheet.hairlineWidth,
-  },
-
-  first: {
-    borderTopRightRadius: 0,
-    borderBottomRightRadius: 0,
-  },
-
-  middle: {
-    borderRadius: 0,
-    borderLeftWidth: 0,
-  },
-
-  last: {
-    borderLeftWidth: 0,
-    borderTopLeftRadius: 0,
-    borderBottomLeftRadius: 0,
-  },
-});
 
 export default ToggleButtonGroup;

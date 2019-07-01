@@ -34,7 +34,7 @@ class ToggleButtonExample extends React.Component<Props, State> {
     return (
       <View style={[styles.container, { backgroundColor: background }]}>
         <List.Section title="Single">
-          <View style={styles.row}>
+          <View style={styles.padding}>
             <ToggleButton
               icon="android"
               value="android"
@@ -48,86 +48,84 @@ class ToggleButtonExample extends React.Component<Props, State> {
           </View>
         </List.Section>
         <List.Section title="Group">
-          <View style={styles.toggleGroup}>
-            <ToggleButton.Group
-              value={this.state.first}
-              onValueChange={(value: string) =>
-                this.setState({
-                  first: value,
-                })
-              }
-            >
-              <ToggleButton disabled icon="format-italic" value="italic" />
-              <ToggleButton icon="format-bold" value="bold" />
-              <ToggleButton icon="format-underlined" value="underlined" />
-              <ToggleButton icon="format-color-text" value="format-color" />
-            </ToggleButton.Group>
-          </View>
+          <ToggleButton.Row
+            value={this.state.first}
+            onValueChange={(value: string) =>
+              this.setState({
+                first: value,
+              })
+            }
+            style={styles.padding}
+          >
+            <ToggleButton disabled icon="format-italic" value="italic" />
+            <ToggleButton icon="format-bold" value="bold" />
+            <ToggleButton icon="format-underlined" value="underlined" />
+            <ToggleButton icon="format-color-text" value="format-color" />
+          </ToggleButton.Row>
         </List.Section>
         <List.Section title="Custom">
-          <View style={styles.group}>
-            <ToggleButton.Group
-              value={this.state.fruit}
-              onValueChange={(value: string) =>
-                this.setState({
-                  fruit: value,
-                })
-              }
+          <ToggleButton.Group
+            value={this.state.fruit}
+            onValueChange={(value: string) =>
+              this.setState({
+                fruit: value,
+              })
+            }
+            style={[styles.padding, styles.row]}
+          >
+            <ImageBackground
+              style={{
+                width: 143,
+                height: 153,
+                margin: 2,
+              }}
+              source={{
+                uri:
+                  'https://images.pexels.com/photos/1068534/pexels-photo-1068534.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+              }}
             >
-              <ImageBackground
+              <ToggleButton
+                value="watermelon"
+                size={24}
                 style={{
-                  width: 143,
-                  height: 153,
-                  margin: 2,
+                  position: 'absolute',
+                  right: 0,
                 }}
-                source={{
-                  uri:
-                    'https://images.pexels.com/photos/1068534/pexels-photo-1068534.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
-                }}
-              >
-                <ToggleButton
-                  value="watermelon"
-                  size={24}
-                  style={{
-                    position: 'absolute',
-                    right: 0,
-                  }}
-                  color="white"
-                  icon={
-                    this.state.fruit === 'watermelon'
-                      ? 'favorite'
-                      : 'favorite-border'
-                  }
-                />
-              </ImageBackground>
-              <ImageBackground
+                color="white"
+                icon={
+                  this.state.fruit === 'watermelon'
+                    ? 'favorite'
+                    : 'favorite-border'
+                }
+              />
+            </ImageBackground>
+            <ImageBackground
+              style={{
+                width: 143,
+                height: 153,
+                margin: 2,
+              }}
+              source={{
+                uri:
+                  'https://images.pexels.com/photos/46174/strawberries-berries-fruit-freshness-46174.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+              }}
+            >
+              <ToggleButton
+                value="strawberries"
+                size={24}
                 style={{
-                  width: 143,
-                  height: 153,
-                  margin: 2,
+                  position: 'absolute',
+                  right: 0,
                 }}
-                source={{
-                  uri:
-                    'https://images.pexels.com/photos/46174/strawberries-berries-fruit-freshness-46174.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
-                }}
-              >
-                <ToggleButton
-                  value="strawberries"
-                  size={24}
-                  style={{
-                    position: 'absolute',
-                    right: 0,
-                  }}
-                  color="white"
-                  icon={
-                    this.state.fruit === 'strawberries'
-                      ? 'favorite'
-                      : 'favorite-border'
-                  }
-                />
-              </ImageBackground>
-            </ToggleButton.Group>
-          </View>
+                color="white"
+                icon={
+                  this.state.fruit === 'strawberries'
+                    ? 'favorite'
+                    : 'favorite-border'
+                }
+              />
+            </ImageBackground>
+          </ToggleButton.Group>
         </List.Section>
       </View>
     );
@@ -138,18 +136,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  toggleGroup: {
-    flexDirection: 'row',
+  padding: {
     paddingHorizontal: 16,
-  },
-  group: {
-    flexDirection: 'row',
-    marginLeft: 5,
   },
   row: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    paddingHorizontal: 16,
   },
 });
 
