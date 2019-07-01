@@ -57,6 +57,10 @@ export type TextInputProps = {|
    */
   multiline?: boolean,
   /**
+   * Whether the input should be transparent.
+   */
+  transparent?: boolean,
+  /**
    * The number of lines to show in the input (Android only).
    */
   numberOfLines?: number,
