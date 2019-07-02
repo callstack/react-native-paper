@@ -64,68 +64,69 @@ class ToggleButtonExample extends React.Component<Props, State> {
           </ToggleButton.Row>
         </List.Section>
         <List.Section title="Custom">
-          <ToggleButton.Group
-            value={this.state.fruit}
-            onValueChange={(value: string) =>
-              this.setState({
-                fruit: value,
-              })
-            }
-            style={[styles.padding, styles.row]}
-          >
-            <ImageBackground
-              style={{
-                width: 143,
-                height: 153,
-                margin: 2,
-              }}
-              source={{
-                uri:
-                  'https://images.pexels.com/photos/1068534/pexels-photo-1068534.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
-              }}
+          <View style={[styles.padding, styles.row]}>
+            <ToggleButton.Group
+              value={this.state.fruit}
+              onValueChange={(value: string) =>
+                this.setState({
+                  fruit: value,
+                })
+              }
             >
-              <ToggleButton
-                value="watermelon"
-                size={24}
+              <ImageBackground
                 style={{
-                  position: 'absolute',
-                  right: 0,
+                  width: 143,
+                  height: 153,
+                  margin: 2,
                 }}
-                color="white"
-                icon={
-                  this.state.fruit === 'watermelon'
-                    ? 'favorite'
-                    : 'favorite-border'
-                }
-              />
-            </ImageBackground>
-            <ImageBackground
-              style={{
-                width: 143,
-                height: 153,
-                margin: 2,
-              }}
-              source={{
-                uri:
-                  'https://images.pexels.com/photos/46174/strawberries-berries-fruit-freshness-46174.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
-              }}
-            >
-              <ToggleButton
-                value="strawberries"
-                size={24}
+                source={{
+                  uri:
+                    'https://images.pexels.com/photos/1068534/pexels-photo-1068534.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+                }}
+              >
+                <ToggleButton
+                  value="watermelon"
+                  size={24}
+                  style={{
+                    position: 'absolute',
+                    right: 0,
+                  }}
+                  color="white"
+                  icon={
+                    this.state.fruit === 'watermelon'
+                      ? 'favorite'
+                      : 'favorite-border'
+                  }
+                />
+              </ImageBackground>
+              <ImageBackground
                 style={{
-                  position: 'absolute',
-                  right: 0,
+                  width: 143,
+                  height: 153,
+                  margin: 2,
                 }}
-                color="white"
-                icon={
-                  this.state.fruit === 'strawberries'
-                    ? 'favorite'
-                    : 'favorite-border'
-                }
-              />
-            </ImageBackground>
-          </ToggleButton.Group>
+                source={{
+                  uri:
+                    'https://images.pexels.com/photos/46174/strawberries-berries-fruit-freshness-46174.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+                }}
+              >
+                <ToggleButton
+                  value="strawberries"
+                  size={24}
+                  style={{
+                    position: 'absolute',
+                    right: 0,
+                  }}
+                  color="white"
+                  icon={
+                    this.state.fruit === 'strawberries'
+                      ? 'favorite'
+                      : 'favorite-border'
+                  }
+                />
+              </ImageBackground>
+            </ToggleButton.Group>
+          </View>
         </List.Section>
       </View>
     );

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { View, StyleProp, ViewStyle } from 'react-native';
 
 type Props = {
   /**
@@ -14,7 +13,6 @@ type Props = {
    * React elements containing toggle buttons.
    */
   children: React.ReactNode;
-  style?: StyleProp<ViewStyle>;
 };
 
 type ToggleButtonContextType = {
@@ -58,7 +56,7 @@ class ToggleButtonGroup extends React.Component<Props> {
   static displayName = 'ToggleButton.Group';
 
   render() {
-    const { value, onValueChange, children, style } = this.props;
+    const { value, onValueChange, children } = this.props;
 
     return (
       <ToggleButtonGroupContext.Provider
@@ -67,7 +65,7 @@ class ToggleButtonGroup extends React.Component<Props> {
           onValueChange,
         }}
       >
-        <View style={style}>{children}</View>
+        {children}
       </ToggleButtonGroupContext.Provider>
     );
   }
