@@ -19,7 +19,7 @@ type Props = {
 };
 
 /**
- * Toggle row renders buttons in a row and applies predefined styles.
+ * Toggle button row renders a group of toggle buttons in a row.
  *
  *
  * ## Usage
