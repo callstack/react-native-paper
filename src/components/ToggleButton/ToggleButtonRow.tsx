@@ -21,7 +21,6 @@ type Props = {
 /**
  * Toggle button row renders a group of toggle buttons in a row.
  *
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

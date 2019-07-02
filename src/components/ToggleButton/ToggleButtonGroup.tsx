@@ -25,7 +25,8 @@ export const ToggleButtonGroupContext = React.createContext<
 >(null as any);
 
 /**
- * Toggle group allows to control a group of toggle buttons.
+ * Toggle group allows to control a group of toggle buttons.</br>
+ * It doesn't change the appearance of the toggle buttons. If you want to group them in a row, checkout <a href="/toggle-button-row.html">`ToggleButton.Row`</a>.
  *
  * ## Usage
  * ```js
