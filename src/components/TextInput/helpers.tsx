@@ -1,5 +1,3 @@
-// @flow
-
 import { Animated } from 'react-native';
 
 type PaddingProps = {
@@ -217,7 +215,7 @@ export const adjustPaddingFlat = ({
 
 export const interpolatePlaceholder = (
   labeled: Animated.Value,
-  hasActiveOutline: ?boolean
+  hasActiveOutline: boolean | undefined
 ) =>
   labeled.interpolate({
     inputRange: [0, 1],
