@@ -164,9 +164,9 @@ export type TextInputProps = React.ComponentProps<typeof NativeTextInput> & {
  */
 
 class TextInput extends React.Component<TextInputProps, State> {
-  static defaultProps = {
-    mode: 'flat' as 'flat',
-    padding: 'normal' as 'normal',
+  static defaultProps: Partial<TextInputProps> = {
+    mode: 'flat',
+    padding: 'normal',
     dense: false,
     disabled: false,
     error: false,

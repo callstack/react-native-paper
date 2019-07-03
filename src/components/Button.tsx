@@ -109,8 +109,8 @@ type State = {
  * ```
  */
 class Button extends React.Component<Props, State> {
-  static defaultProps = {
-    mode: 'text' as 'text',
+  static defaultProps: Partial<Props> = {
+    mode: 'text',
     uppercase: true,
   };
 
