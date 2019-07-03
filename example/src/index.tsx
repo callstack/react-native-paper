@@ -12,7 +12,7 @@ type State = {
   theme: Theme;
 };
 
-const PreferencesContext: any = React.createContext(null as any);
+const PreferencesContext = React.createContext<any>(null);
 
 export default class PaperExample extends React.Component<{}, State> {
   state = {
