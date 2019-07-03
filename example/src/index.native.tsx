@@ -1,24 +1,36 @@
-/* @flow */
-
-import { KeepAwake, Util } from 'expo';
+import { Updates } from 'expo';
+import { useKeepAwake } from 'expo-keep-awake';
 import * as React from 'react';
-import { StatusBar, I18nManager, AsyncStorage, Platform } from 'react-native';
+import {
+  StatusBar,
+  I18nManager,
+  AsyncStorage,
+  Platform,
+  YellowBox,
+} from 'react-native';
 import {
   Provider as PaperProvider,
   DarkTheme,
   DefaultTheme,
-  type Theme,
+  Theme,
 } from 'react-native-paper';
 import { createDrawerNavigator } from 'react-navigation';
 import RootNavigator from './RootNavigator';
 import DrawerItems from './DrawerItems';
 
 type State = {
-  theme: Theme,
-  rtl: boolean,
+  theme: Theme;
+  rtl: boolean;
 };
 
-const PreferencesContext: any = React.createContext();
+YellowBox.ignoreWarnings(['Require cycle:']);
+
+const PreferencesContext = React.createContext<any>(undefined);
+
+const KeepAwake = () => {
+  useKeepAwake();
+  return null;
+};
 
 const App = createDrawerNavigator(
   { Home: { screen: RootNavigator } },
@@ -52,7 +64,7 @@ export default class PaperExample extends React.Component<{}, State> {
 
     try {
       const prefString = await AsyncStorage.getItem('preferences');
-      const preferences = JSON.parse(prefString);
+      const preferences = JSON.parse(prefString || '');
 
       if (preferences) {
         // eslint-disable-next-line react/no-did-mount-set-state
@@ -98,7 +110,7 @@ export default class PaperExample extends React.Component<{}, State> {
         await this._savePreferences();
 
         I18nManager.forceRTL(this.state.rtl);
-        Util.reload();
+        Updates.reloadFromCache();
       }
     );
 

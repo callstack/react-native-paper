@@ -4752,7 +4752,7 @@ expo-intent-launcher@~5.0.1:
   resolved "https://registry.yarnpkg.com/expo-intent-launcher/-/expo-intent-launcher-5.0.1.tgz#906fa3bcf13bf4607a9ac88e323ce0ac427b54cf"
   integrity sha512-fvcwkKBcDwKo6JxTGRM3112zgmPbuPtmQx6TdJWuRPJTBWmeCAG2AelohMt1+xzqpnJxnkXEXET2WoMuI+BXvw==
 
-expo-keep-awake@~5.0.1:
+expo-keep-awake@^5.0.1, expo-keep-awake@~5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/expo-keep-awake/-/expo-keep-awake-5.0.1.tgz#15aeffd9de673f7eaf145449883e8d83f7d7a799"
   integrity sha512-DPWAqgxbmLyJoCXPbDXbj+1XFjP/ulv4AYzvi1a+jsvZRU2uiFdho0w269Y++DLCQf30vbuu3zs5HiaJGU43fA==
