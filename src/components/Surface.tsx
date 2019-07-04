@@ -56,14 +56,14 @@ class Surface extends React.Component<Props> {
   render() {
     const { style, theme, ...rest } = this.props;
     const flattenedStyles = StyleSheet.flatten(style) || {};
-    const { elevation }: any = flattenedStyles;
+    const { elevation }: ViewStyle = flattenedStyles;
 
     return (
       <Animated.View
         {...rest}
         style={[
           { backgroundColor: theme.colors.surface },
-          elevation && shadow(elevation),
+          shadow(elevation),
           style,
         ]}
       />

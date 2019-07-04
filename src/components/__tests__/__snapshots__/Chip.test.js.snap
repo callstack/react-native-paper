@@ -10,6 +10,13 @@ exports[`renders chip with close button 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0.5,
       "elevation": 0,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.24,
+      "shadowRadius": 0,
     }
   }
 >
@@ -185,6 +192,13 @@ exports[`renders chip with icon 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0.5,
       "elevation": 0,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.24,
+      "shadowRadius": 0,
     }
   }
 >
@@ -309,6 +323,13 @@ exports[`renders chip with onPress 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0.5,
       "elevation": 0,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.24,
+      "shadowRadius": 0,
     }
   }
 >
@@ -388,6 +409,13 @@ exports[`renders outlined disabled chip 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0.5,
       "elevation": 0,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.24,
+      "shadowRadius": 0,
     }
   }
 >
@@ -471,6 +499,13 @@ exports[`renders selected chip 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0.5,
       "elevation": 0,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.24,
+      "shadowRadius": 0,
     }
   }
 >
