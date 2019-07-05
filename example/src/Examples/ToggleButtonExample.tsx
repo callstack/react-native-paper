@@ -1,5 +1,3 @@
-/* @flow */
-
 import * as React from 'react';
 import { View, StyleSheet, ImageBackground } from 'react-native';
 import { withTheme, ToggleButton, List, Theme } from 'react-native-paper';

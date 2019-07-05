@@ -1,5 +1,3 @@
-/* @flow */
-
 import * as React from 'react';
 import { Text, StyleSheet } from 'react-native';
 import StyledText from './StyledText';

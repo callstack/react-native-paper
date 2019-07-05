@@ -1,5 +1,3 @@
-// @flow
-
 type PaddingProps = {
   height: number | null;
   labelHalfHeight: number;

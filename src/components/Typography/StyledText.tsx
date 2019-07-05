@@ -1,5 +1,3 @@
-/* @flow */
-
 import color from 'color';
 import * as React from 'react';
 import { I18nManager, StyleProp, TextStyle } from 'react-native';
