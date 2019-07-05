@@ -223,16 +223,9 @@ class Tooltip extends React.Component<Props, State> {
 
   render() {
     const { children, title, style, ...rest } = this.props;
-    const childElement = React.Children.only(children) as
-      | React.ReactElement
-      | null
-      | undefined;
+    const childElement = React.Children.only(children) as React.ReactElement;
 
     const { tooltipVisible, tooltipOpacity } = this.state;
-
-    if (!childElement) {
-      throw Error('Tooltip component requires only one direct child');
-    }
 
     return (
       <View style={style}>
