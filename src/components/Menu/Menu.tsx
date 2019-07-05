@@ -47,6 +47,10 @@ type Props = {
    * Content of the `Menu`.
    */
   children: React.ReactNode;
+  /**
+   * Style of menu's inner content.
+   */
+  contentStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -330,6 +334,7 @@ class Menu extends React.Component<Props, State> {
     const {
       visible,
       anchor,
+      contentStyle,
       style,
       children,
       theme,
@@ -481,6 +486,7 @@ class Menu extends React.Component<Props, State> {
                     [
                       styles.shadowMenuContainer,
                       shadowMenuContainerStyle,
+                      contentStyle,
                     ] as StyleProp<ViewStyle>
                   }
                 >
