@@ -1,5 +1,3 @@
-/* @flow */
-
 import * as React from 'react';
 import {
   Dimensions,
@@ -7,47 +5,48 @@ import {
   StyleSheet,
   UIManager,
   View,
+  StyleProp,
+  ViewStyle,
+  LayoutChangeEvent,
 } from 'react-native';
 import * as Colors from '../styles/colors';
 import { APPROX_STATUSBAR_HEIGHT } from '../constants';
 import Text from './Typography/Text';
 import Portal from './Portal/Portal';
-import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
-import type { LayoutEvent } from 'react-native/Libraries/Types/CoreEventTypes';
 
-type Props = {|
+type Props = {
   /**
    * Tooltip title.
    */
-  title: string,
+  title: string;
   /**
    * Tooltip reference node.
    */
-  children: React.Node,
+  children: React.ReactNode;
   /**
    * Delay in ms before onLongPress is called.
    */
-  delayLongPress?: number,
+  delayLongPress?: number;
   /**
    * Style that is passed to the children wrapper.
    */
-  style?: ViewStyleProp,
-|};
+  style?: StyleProp<ViewStyle>;
+};
 
 type State = {
   childrenLayout: {
-    x: number,
-    y: number,
-    width: number,
-    height: number,
-  },
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  };
   tooltipLayout: {
-    width: number,
-    height: number,
-  },
-  tooltipVisible: boolean,
-  tooltipOpacity: number,
-  tooltipMeasured: boolean,
+    width: number;
+    height: number;
+  };
+  tooltipVisible: boolean;
+  tooltipOpacity: number;
+  tooltipMeasured: boolean;
 };
 
 /**
@@ -72,8 +71,8 @@ type State = {
  * ```
  */
 class Tooltip extends React.Component<Props, State> {
-  _longPressTimeout: TimeoutID;
-  _children: React.Node;
+  _longPressTimeout: number | undefined;
+  _children: React.ReactNode;
 
   static defaultProps = { delayLongPress: 500 };
 
@@ -110,23 +109,36 @@ class Tooltip extends React.Component<Props, State> {
   _getChildrenPosition() {
     if (!this._children) return;
 
+    // @ts-ignore
     const target = findNodeHandle(this._children);
 
+    if (!target) return;
+
     setTimeout(() => {
-      UIManager.measure(target, (_x, _y, width, height, pageX, pageY) => {
-        this.setState({
-          childrenLayout: {
-            x: pageX,
-            y: pageY,
-            width,
-            height,
-          },
-        });
-      });
+      UIManager.measure(
+        target,
+        (
+          _x: number,
+          _y: number,
+          width: number,
+          height: number,
+          pageX: number,
+          pageY: number
+        ) => {
+          this.setState({
+            childrenLayout: {
+              x: pageX,
+              y: pageY,
+              width,
+              height,
+            },
+          });
+        }
+      );
     }, 500);
   }
 
-  _handleTooltipLayout = ({ nativeEvent: { layout } }: LayoutEvent) => {
+  _handleTooltipLayout = ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
     const { tooltipMeasured } = this.state;
 
     if (!tooltipMeasured)
@@ -211,8 +223,16 @@ class Tooltip extends React.Component<Props, State> {
 
   render() {
     const { children, title, style, ...rest } = this.props;
-    const childElement = React.Children.only(children);
+    const childElement = React.Children.only(children) as
+      | React.ReactElement
+      | null
+      | undefined;
+
     const { tooltipVisible, tooltipOpacity } = this.state;
+
+    if (!childElement) {
+      throw Error('Tooltip component requires only one direct child');
+    }
 
     return (
       <View style={style}>
@@ -240,7 +260,7 @@ class Tooltip extends React.Component<Props, State> {
         >
           {React.cloneElement(childElement, {
             onLongPress: () => {}, // Prevent touchable to trigger onPress after onLongPress
-            ref: el => {
+            ref: (el: React.ReactNode) => {
               this._children = el;
             },
             ...rest,
