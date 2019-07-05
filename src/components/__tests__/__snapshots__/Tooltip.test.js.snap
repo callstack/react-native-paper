@@ -78,7 +78,8 @@ Array [
           Array [
             Object {
               "color": "#000000",
-              "fontFamily": "Helvetica Neue",
+              "fontFamily": "System",
+              "fontWeight": "400",
               "textAlign": "left",
               "writingDirection": "ltr",
             },

@@ -4,10 +4,6 @@ import { View } from 'react-native';
 import Tooltip from '../Tooltip';
 import Provider from '../../core/Provider';
 
-jest.mock('react-native/Libraries/ReactNative/UIManager', () => ({
-  measure: () => {},
-}));
-
 jest.useFakeTimers();
 
 describe('Tooltip', () => {
