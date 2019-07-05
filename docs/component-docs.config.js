@@ -19,8 +19,11 @@ if (!fs.existsSync(dist)) {
   fs.mkdirSync(dist);
 }
 
+require.extensions['.ts'] = require.extensions['.js'];
+require.extensions['.tsx'] = require.extensions['.js'];
+
 function getType(file: string) {
-  if (file.endsWith('.js')) {
+  if (/\.(js|tsx?)$/.test(file)) {
     return 'custom';
   } else if (file.endsWith('.mdx')) {
     return 'mdx';
@@ -30,7 +33,7 @@ function getType(file: string) {
 
 function getPages() {
   const components = fs
-    .readFileSync(path.join(__dirname, '../src/index.js'))
+    .readFileSync(path.join(__dirname, '../src/index.tsx'))
     .toString()
     .split('\n')
     .map(line =>
@@ -42,7 +45,7 @@ function getPages() {
     .filter(line => line.startsWith('./components/'))
     .map(line => {
       const file = require.resolve(path.join(__dirname, '../src', line));
-      if (file.endsWith('/index.js')) {
+      if (/\/index\.(js|tsx?)$/.test(file)) {
         const matches = fs
           .readFileSync(file)
           .toString()
@@ -64,7 +67,7 @@ function getPages() {
         acc.push(file);
       }
 
-      const match = content.match(/\/\/ @component (.\/\w+\.js)/gm);
+      const match = content.match(/\/\/ @component (.\/\w+\.(js|tsx?))/gm);
 
       if (match && match.length) {
         const componentFiles = match.map(line => {

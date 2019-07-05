@@ -21,6 +21,7 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
       Array [
         Object {
           "alignSelf": "center",
+          "maxWidth": 960,
           "overflow": "hidden",
           "width": "100%",
         },
@@ -117,6 +118,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
       Array [
         Object {
           "alignSelf": "center",
+          "maxWidth": 960,
           "overflow": "hidden",
           "width": "100%",
         },
@@ -309,6 +311,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
       Array [
         Object {
           "alignSelf": "center",
+          "maxWidth": 960,
           "overflow": "hidden",
           "width": "100%",
         },
@@ -566,6 +569,7 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
       Array [
         Object {
           "alignSelf": "center",
+          "maxWidth": 960,
           "overflow": "hidden",
           "width": "100%",
         },
@@ -671,6 +675,7 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
       Array [
         Object {
           "alignSelf": "center",
+          "maxWidth": 960,
           "overflow": "hidden",
           "width": "100%",
         },

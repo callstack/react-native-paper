@@ -1,8 +1,6 @@
-/* @flow */
-
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import DrawerItem from '../Drawer/DrawerItem';
+import DrawerItem from '../Drawer/DrawerItem.tsx';
 
 it('renders basic DrawerItem', () => {
   const tree = renderer

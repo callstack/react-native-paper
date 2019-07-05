@@ -3,15 +3,16 @@
 const path = require('path');
 const fs = require('fs');
 const types = require('babel-types');
-const babylon = require('babylon');
+const parser = require('@babel/parser');
 
-const output = path.join(__dirname, '../dist/mappings.json');
-const source = fs.readFileSync(require.resolve('..'), 'utf8');
-const ast = babylon.parse(source, {
+const root = path.resolve(__dirname, '..');
+const output = path.join(root, 'dist/mappings.json');
+const source = fs.readFileSync(path.resolve(root, 'src', 'index.tsx'), 'utf8');
+const ast = parser.parse(source, {
   sourceType: 'module',
   plugins: [
     'jsx',
-    'flow',
+    'typescript',
     'objectRestSpread',
     'classProperties',
     'asyncGenerators',
@@ -19,10 +20,7 @@ const ast = babylon.parse(source, {
 });
 
 const relative = (value /* : string */) =>
-  path.relative(
-    path.resolve(__dirname, '..'),
-    path.resolve(path.dirname(require.resolve('..')), value)
-  );
+  path.relative(root, path.resolve(path.dirname(root, 'lib', 'module'), value));
 
 const mappings = ast.program.body.reduce((acc, declaration, index, self) => {
   if (types.isExportNamedDeclaration(declaration)) {

@@ -3,7 +3,7 @@
     "browser": true
   },
 
-  "extends": ["callstack-io"],
+  "extends": ["@callstack"],
 
   "plugins": ["react-native"],
 
@@ -13,18 +13,23 @@
     "no-nested-ternary": "off",
     "global-require": "off",
 
-    "flowtype/define-flow-type": "error",
-    "flowtype/no-weak-types": "off",
-    "flowtype/require-variable-type": "off",
-    "flowtype/sort-keys": "off",
-    "flowtype/type-id-match": "off",
-    "flowtype/use-flow-type": "error",
-    "flowtype/valid-syntax": "error",
-
     "import/no-extraneous-dependencies": "off",
     "import/first": "off",
 
     "react-native/no-unused-styles": "error",
-    "react-native/split-platform-components": "off"
+    "react-native/split-platform-components": "off",
+    "react-native/no-raw-text": "off"
+  },
+
+  "settings": {
+    "import/extensions": [".js", ".ts", ".tsx"],
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".ts", ".tsx"]
+      }
+    }
   }
 }

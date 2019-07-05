@@ -1,9 +1,7 @@
-/* @flow */
-
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import Menu from '../Menu/Menu';
-import Button from '../Button';
+import Menu from '../Menu/Menu.tsx';
+import Button from '../Button.tsx';
 
 it('renders visible menu', () => {
   const tree = renderer

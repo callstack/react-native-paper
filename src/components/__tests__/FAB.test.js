@@ -1,8 +1,6 @@
-/* @flow */
-
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import FAB from '../FAB/FAB';
+import FAB from '../FAB/FAB.tsx';
 
 it('renders normal FAB', () => {
   const tree = renderer.create(<FAB onPress={() => {}} icon="add" />).toJSON();

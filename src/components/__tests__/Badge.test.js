@@ -1,9 +1,7 @@
-/* @flow */
-
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import Badge from '../Badge';
-import { red500 } from '../../styles/colors';
+import Badge from '../Badge.tsx';
+import { red500 } from '../../styles/colors.tsx';
 
 it('renders badge', () => {
   const tree = renderer.create(<Badge />).toJSON();

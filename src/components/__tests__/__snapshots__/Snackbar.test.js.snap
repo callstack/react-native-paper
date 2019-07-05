@@ -4,6 +4,7 @@ exports[`renders not visible snackbar with content wrapper but no actual content
 
 exports[`renders snackbar with Text as a child 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   pointerEvents="box-none"
   style={
     Object {
@@ -76,6 +77,7 @@ exports[`renders snackbar with Text as a child 1`] = `
 
 exports[`renders snackbar with action button 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   pointerEvents="box-none"
   style={
     Object {
@@ -233,6 +235,7 @@ exports[`renders snackbar with action button 1`] = `
 
 exports[`renders snackbar with content 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   pointerEvents="box-none"
   style={
     Object {
