@@ -8,6 +8,7 @@ import { Theme, $RemoveChildren } from '../types';
 import shadow from '../styles/shadow';
 
 const ELEVATION = 1;
+const DEFAULT_MAX_WIDTH = 960;
 
 type Props = $RemoveChildren<typeof Surface> & {
   /**
@@ -35,6 +36,11 @@ type Props = $RemoveChildren<typeof Surface> & {
     label: string;
     onPress: () => void;
   }>;
+  /**
+   * Style of banner's inner content.
+   * Use this prop to apply custom width for wide layouts.
+   */
+  contentStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -159,6 +165,7 @@ class Banner extends React.Component<Props, State> {
       image,
       children,
       actions,
+      contentStyle,
       style,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       theme,
@@ -185,7 +192,7 @@ class Banner extends React.Component<Props, State> {
         {...rest}
         style={[styles.container, shadow(ELEVATION) as ViewStyle, style]}
       >
-        <View style={styles.wrapper}>
+        <View style={[styles.wrapper, contentStyle]}>
           <Animated.View style={{ height }} />
           <Animated.View
             onLayout={this._handleLayout}
@@ -235,6 +242,9 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     overflow: 'hidden',
+    alignSelf: 'center',
+    width: '100%',
+    maxWidth: DEFAULT_MAX_WIDTH,
   },
   absolute: {
     position: 'absolute',
