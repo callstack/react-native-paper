@@ -1,9 +1,7 @@
-/* @flow */
-
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import IconButton from '../IconButton';
-import { pink500 } from '../../styles/colors';
+import IconButton from '../IconButton.tsx';
+import { pink500 } from '../../styles/colors.tsx';
 
 it('renders icon button by default', () => {
   const tree = renderer.create(<IconButton icon="add-a-photo" />).toJSON();

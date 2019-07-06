@@ -1,10 +1,8 @@
-/* @flow */
-
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import ListAccordion from '../List/ListAccordion';
-import ListItem from '../List/ListItem';
-import ListIcon from '../List/ListIcon';
+import ListAccordion from '../List/ListAccordion.tsx';
+import ListItem from '../List/ListItem.tsx';
+import ListIcon from '../List/ListIcon.tsx';
 
 it('renders list accordion with children', () => {
   const tree = renderer
@@ -58,6 +56,23 @@ it('renders expanded accordion', () => {
   const tree = renderer
     .create(
       <ListAccordion title="Accordion item 1" expanded>
+        <ListItem title="List item 1" />
+      </ListAccordion>
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders list accordion with custom title and description styles', () => {
+  const tree = renderer
+    .create(
+      <ListAccordion
+        title="Accordion item 1"
+        description="Describes the expandable list item"
+        titleStyle={{ color: 'red' }}
+        descriptionStyle={{ color: 'red' }}
+      >
         <ListItem title="List item 1" />
       </ListAccordion>
     )

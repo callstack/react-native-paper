@@ -8,10 +8,13 @@ module.exports = {
     filename: 'app.bundle.js',
   },
   devtool: 'source-map',
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|tsx?)$/,
         exclude: /node_modules[/\\](?!react-native-vector-icons|react-native-safe-area-view)/,
         use: {
           loader: 'babel-loader',
@@ -27,6 +30,7 @@ module.exports = {
               ],
               '@babel/preset-react',
               '@babel/preset-flow',
+              '@babel/preset-typescript',
             ],
             plugins: [
               '@babel/plugin-proposal-class-properties',

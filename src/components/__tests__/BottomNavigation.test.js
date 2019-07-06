@@ -1,8 +1,8 @@
-/* @flow */
-
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import BottomNavigation from '../BottomNavigation';
+import BottomNavigation from '../BottomNavigation.tsx';
+
+jest.useFakeTimers();
 
 jest.mock('Animated', () => {
   const ActualAnimated = jest.requireActual('Animated');

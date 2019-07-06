@@ -112,6 +112,7 @@ exports[`renders chip with close button 1`] = `
                 "marginLeft": 4,
                 "marginRight": 4,
               },
+              undefined,
             ],
           ]
         }
@@ -286,6 +287,7 @@ exports[`renders chip with icon 1`] = `
                 "marginLeft": 4,
                 "marginRight": 8,
               },
+              undefined,
             ],
           ]
         }
@@ -364,6 +366,7 @@ exports[`renders chip with onPress 1`] = `
                 "marginLeft": 8,
                 "marginRight": 8,
               },
+              undefined,
             ],
           ]
         }
@@ -446,6 +449,7 @@ exports[`renders outlined disabled chip 1`] = `
                 "marginLeft": 8,
                 "marginRight": 8,
               },
+              undefined,
             ],
           ]
         }
@@ -573,6 +577,7 @@ exports[`renders selected chip 1`] = `
                 "marginLeft": 4,
                 "marginRight": 8,
               },
+              undefined,
             ],
           ]
         }

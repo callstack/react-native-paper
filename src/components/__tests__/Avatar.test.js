@@ -1,8 +1,6 @@
-/* @flow */
-
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import * as Avatar from '../Avatar/Avatar';
+import * as Avatar from '../Avatar/Avatar.tsx';
 
 it('renders avatar with text', () => {
   const tree = renderer.create(<Avatar.Text label="XD" />).toJSON();
