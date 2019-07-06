@@ -1,5 +1,6 @@
+/* eslint-disable no-console */
 import React from 'react';
-import { shallow, render, fireEvent } from 'react-native-testing-library';
+import { render, fireEvent } from 'react-native-testing-library';
 import { View } from 'react-native';
 import Tooltip from '../Tooltip';
 import Provider from '../../core/Provider';
@@ -7,6 +8,15 @@ import Provider from '../../core/Provider';
 jest.useFakeTimers();
 
 describe('Tooltip', () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'error');
+    console.error.mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    console.error.mockRestore();
+  });
+
   it('renders properly', () => {
     const tree = render(
       <Tooltip title="Tooltip View">
@@ -34,7 +44,7 @@ describe('Tooltip', () => {
 
   it('raises an error when tooltip does not wrap a child', () => {
     expect(() => {
-      shallow(<Tooltip title="Tooltip View" />);
+      render(<Tooltip title="Tooltip View" />);
     }).toThrow(/expected to receive a single React element child/);
   });
 });

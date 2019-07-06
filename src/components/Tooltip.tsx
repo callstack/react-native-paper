@@ -13,6 +13,8 @@ import * as Colors from '../styles/colors';
 import { APPROX_STATUSBAR_HEIGHT } from '../constants';
 import Text from './Typography/Text';
 import Portal from './Portal/Portal';
+import { withTheme } from '../core/theming';
+import { Theme } from '../types';
 
 type Props = {
   /**
@@ -30,7 +32,15 @@ type Props = {
   /**
    * Style that is passed to the children wrapper.
    */
+  wrapperStyle?: StyleProp<ViewStyle>;
+  /**
+   * Style that is passed to the tooltip.
+   */
   style?: StyleProp<ViewStyle>;
+  /**
+   * @optional
+   */
+  theme: Theme;
 };
 
 type State = {
@@ -93,20 +103,22 @@ class Tooltip extends React.Component<Props, State> {
   };
 
   componentDidMount() {
-    Dimensions.addEventListener('change', this._getChildrenPosition.bind(this));
+    Dimensions.addEventListener('change', this._setChildrenPosition);
 
-    this._getChildrenPosition();
+    this._setChildrenPosition();
   }
 
   componentWillUnmount() {
-    Dimensions.removeEventListener(
-      'change',
-      this._getChildrenPosition.bind(this)
-    );
+    Dimensions.removeEventListener('change', this._setChildrenPosition);
+
     this._clearTimeouts();
   }
 
-  _getChildrenPosition() {
+  _setChildrenRef = (element: React.ReactNode) => {
+    this._children = element;
+  };
+
+  _setChildrenPosition = () => {
     if (!this._children) return;
 
     // @ts-ignore
@@ -136,7 +148,7 @@ class Tooltip extends React.Component<Props, State> {
         }
       );
     }, 500);
-  }
+  };
 
   _handleTooltipLayout = ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
     const { tooltipMeasured } = this.state;
@@ -152,11 +164,17 @@ class Tooltip extends React.Component<Props, State> {
       });
   };
 
-  _showTooltip = () => this.setState({ tooltipVisible: true });
+  _showTooltip() {
+    this.setState({ tooltipVisible: true });
+  }
 
-  _hideTooltip = () => this.setState({ tooltipVisible: false });
+  _hideTooltip() {
+    this.setState({ tooltipVisible: false });
+  }
 
-  _clearTimeouts = () => clearTimeout(this._longPressTimeout);
+  _clearTimeouts() {
+    clearTimeout(this._longPressTimeout);
+  }
 
   _handleTouchStart = () => {
     const { delayLongPress } = this.props;
@@ -181,54 +199,82 @@ class Tooltip extends React.Component<Props, State> {
     this._hideTooltip();
   };
 
-  _getTooltipXPosition = () => {
+  _overflowLeft(centerDistanceFromChildren: number) {
+    return centerDistanceFromChildren < 0;
+  }
+
+  _overflowRight(centerDistanceFromChildren: number) {
     const {
-      childrenLayout: { x, width },
       tooltipLayout: { width: tooltipWidth },
     } = this.state;
 
-    const centerDistanceFromChildren = x + (width - tooltipWidth) / 2;
     const { width: layoutWidth } = Dimensions.get('window');
 
-    // Does it overflow to the right? If so, subtracts tooltipWidth
-    if (centerDistanceFromChildren + tooltipWidth > layoutWidth) {
-      return x + width - tooltipWidth;
-    }
-    // Does it overflow to the left? If so, starts from children start position
-    else if (centerDistanceFromChildren < 0) {
-      return x;
-    }
+    return centerDistanceFromChildren + tooltipWidth > layoutWidth;
+  }
 
-    return centerDistanceFromChildren;
-  };
-
-  _getTooltipYPosition = () => {
+  _overflowBottom() {
     const {
-      childrenLayout: { y, height },
+      childrenLayout: { y: childrenY, height: childrenHeight },
       tooltipLayout: { height: tooltipHeight },
     } = this.state;
 
     const { height: layoutHeight } = Dimensions.get('window');
 
-    // Does it overflow to the bottom? If so, subtracts the tooltip height,
+    return (
+      childrenY + childrenHeight + tooltipHeight + APPROX_STATUSBAR_HEIGHT >
+      layoutHeight
+    );
+  }
+
+  _getTooltipXPosition() {
+    const {
+      childrenLayout: { x: childrenX, width: childrenWidth },
+      tooltipLayout: { width: tooltipWidth },
+    } = this.state;
+
+    const centerDistanceFromChildren =
+      childrenX + (childrenWidth - tooltipWidth) / 2;
+
+    if (this._overflowRight(centerDistanceFromChildren)) {
+      return childrenX + childrenWidth - tooltipWidth;
+    }
+    // Does it overflow to the left? If so, starts from children start position
+    else if (this._overflowLeft(centerDistanceFromChildren)) {
+      return childrenX;
+    }
+
+    return centerDistanceFromChildren;
+  }
+
+  _getTooltipYPosition() {
+    const {
+      childrenLayout: { y: childrenY },
+      tooltipLayout: { height: tooltipHeight },
+    } = this.state;
+
+    // If so, subtracts the tooltip height,
     // the marginTop applied to the tooltip and the status bar height.
-    if (y + height + tooltipHeight + APPROX_STATUSBAR_HEIGHT > layoutHeight) {
+    if (this._overflowBottom()) {
       return (
-        y - tooltipHeight - styles.tooltip.marginTop - APPROX_STATUSBAR_HEIGHT
+        childrenY -
+        tooltipHeight -
+        styles.tooltip.marginTop -
+        APPROX_STATUSBAR_HEIGHT
       );
     }
 
-    return y + tooltipHeight;
-  };
+    return childrenY + tooltipHeight;
+  }
 
   render() {
-    const { children, title, style, ...rest } = this.props;
+    const { children, title, wrapperStyle, style, theme, ...rest } = this.props;
     const childElement = React.Children.only(children) as React.ReactElement;
 
     const { tooltipVisible, tooltipOpacity } = this.state;
 
     return (
-      <View style={style}>
+      <View style={wrapperStyle}>
         <Portal>
           {tooltipVisible && (
             <View
@@ -238,7 +284,9 @@ class Tooltip extends React.Component<Props, State> {
                   opacity: tooltipOpacity,
                   left: this._getTooltipXPosition(),
                   top: this._getTooltipYPosition(),
+                  borderRadius: theme.roundness,
                 },
+                style,
               ]}
               onLayout={this._handleTooltipLayout}
             >
@@ -253,10 +301,8 @@ class Tooltip extends React.Component<Props, State> {
         >
           {React.cloneElement(childElement, {
             onLongPress: () => {}, // Prevent touchable to trigger onPress after onLongPress
-            ref: (el: React.ReactNode) => {
-              this._children = el;
-            },
             ...rest,
+            ref: this._setChildrenRef,
           })}
         </View>
       </View>
@@ -268,7 +314,6 @@ const styles = StyleSheet.create({
   tooltip: {
     alignSelf: 'flex-start',
     backgroundColor: Colors.grey700,
-    borderRadius: 4,
     marginTop: 24,
     maxWidth: 300,
     paddingVertical: 4,
@@ -276,4 +321,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Tooltip;
+export default withTheme(Tooltip);

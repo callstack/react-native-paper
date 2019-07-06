@@ -59,17 +59,18 @@ Array [
           Object {
             "alignSelf": "flex-start",
             "backgroundColor": "#616161",
-            "borderRadius": 4,
             "marginTop": 24,
             "maxWidth": 300,
             "paddingHorizontal": 8,
             "paddingVertical": 4,
           },
           Object {
+            "borderRadius": 4,
             "left": 0,
             "opacity": 0,
             "top": 0,
           },
+          undefined,
         ]
       }
     >

@@ -133,7 +133,7 @@ class AppbarExample extends React.Component<Props> {
             <Appbar.Action icon="delete" onPress={() => {}} />
           </Tooltip>
         </Appbar>
-        <Tooltip title="Reply" style={styles.fab}>
+        <Tooltip title="Reply" wrapperStyle={styles.fab}>
           <FAB icon="reply" onPress={() => {}} />
         </Tooltip>
       </View>
