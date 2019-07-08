@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
+import { Theme, $Omit } from '../../types';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -54,7 +54,7 @@ type Props = {
   theme: Theme;
 };
 
-type Layout = Omit<Omit<LayoutRectangle, 'x'>, 'y'>;
+type Layout = $Omit<$Omit<LayoutRectangle, 'x'>, 'y'>;
 
 type State = {
   rendered: boolean;
