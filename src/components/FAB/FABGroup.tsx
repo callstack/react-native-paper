@@ -16,25 +16,7 @@ import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 import { IconSource } from '../Icon';
 
-type Props = {
-  /**
-   * Action items to display in the form of a speed dial.
-   * An action item should contain the following properties:
-   * - `icon`: icon to display (required)
-   * - `label`: optional label text
-   * - `accessibilityLabel`: accessibility label for the action, uses label by default if specified
-   * - `color`: custom icon color of the action item
-   * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
-   * - `onPress`: callback that is called when `FAB` is pressed (required)
-   */
-  actions: Array<{
-    icon: IconSource;
-    label?: string;
-    color?: string;
-    accessibilityLabel?: string;
-    style?: StyleProp<ViewStyle>;
-    onPress: () => void;
-  }>;
+type Props = React.ComponentProps<typeof View> & {
   /**
    * Icon to display for the `FAB`.
    * You can toggle it based on whether the speed dial is open to display a different icon.
@@ -65,6 +47,12 @@ type Props = {
    * Whether `FAB` is currently visible.
    */
   visible: boolean;
+  /**
+   * Content of the `FABGroup`.
+   */
+  children:
+    | React.ReactComponentElement<typeof FAB>
+    | React.ReactComponentElement<typeof FAB>[];
   /**
    * Style for the group. You can use it to pass additional styles if you need.
    * For example, you can set an additional padding if you have a tab bar at the bottom.
@@ -110,12 +98,6 @@ type State = {
  *            <FAB.Group
  *              open={this.state.open}
  *              icon={this.state.open ? 'today' : 'add'}
- *              actions={[
- *                { icon: 'add', onPress: () => console.log('Pressed add') },
- *                { icon: 'star', label: 'Star', onPress: () => console.log('Pressed star')},
- *                { icon: 'email', label: 'Email', onPress: () => console.log('Pressed email') },
- *                { icon: 'bell', label: 'Remind', onPress: () => console.log('Pressed notifications') },
- *              ]}
  *              onStateChange={({ open }) => this.setState({ open })}
  *              onPress={() => {
  *                if (this.state.open) {
@@ -123,6 +105,30 @@ type State = {
  *                }
  *              }}
  *            />
+ *            <FAB
+ *              small
+ *              icon="plus"
+ *              onPress={() => console.log('Pressed add')}
+ *             />
+ *             <FAB
+ *              small
+ *              icon="star"
+ *              label="Star"
+ *              onPress={() => console.log('Pressed star')}
+ *             />
+ *             <FAB
+ *              small
+ *              icon="email"
+ *              label="Email"
+ *              onPress={() => console.log('Pressed email')}
+ *             />
+ *             <FAB
+ *              small
+ *              icon="bell"
+ *              label="Remind"
+ *              onPress={() => console.log('Pressed notifications')}
+ *             />
+ *            </FAB.Group>
  *          </Portal>
  *       </Provider>
  *     );
@@ -135,7 +141,8 @@ class FABGroup extends React.Component<Props, State> {
 
   static getDerivedStateFromProps(nextProps: Props, prevState: State) {
     return {
-      animations: nextProps.actions.map(
+      animations: React.Children.map(
+        nextProps.children,
         (_, i) =>
           prevState.animations[i] || new Animated.Value(nextProps.open ? 1 : 0)
       ),
@@ -196,7 +203,6 @@ class FABGroup extends React.Component<Props, State> {
 
   render() {
     const {
-      actions,
       icon,
       open,
       onPress,
@@ -205,6 +211,7 @@ class FABGroup extends React.Component<Props, State> {
       style,
       fabStyle,
       visible,
+      children,
     } = this.props;
     const { colors } = theme;
 
@@ -247,13 +254,13 @@ class FABGroup extends React.Component<Props, State> {
         </TouchableWithoutFeedback>
         <SafeAreaView pointerEvents="box-none" style={styles.safeArea}>
           <View pointerEvents={open ? 'box-none' : 'none'}>
-            {actions.map((it, i) => (
+            {React.Children.map(children, (child, i) => (
               <View
                 key={i} // eslint-disable-line react/no-array-index-key
                 style={styles.item}
                 pointerEvents="box-none"
               >
-                {it.label && (
+                {React.isValidElement(child) && child.props.label && (
                   <Card
                     style={
                       [
@@ -265,48 +272,46 @@ class FABGroup extends React.Component<Props, State> {
                       ] as StyleProp<ViewStyle>
                     }
                     onPress={() => {
-                      it.onPress();
+                      child.props.onPress();
                       this._close();
                     }}
                     accessibilityLabel={
-                      it.accessibilityLabel !== 'undefined'
-                        ? it.accessibilityLabel
-                        : it.label
+                      child.props.accessibilityLabel !== 'undefined'
+                        ? child.props.accessibilityLabel
+                        : child.props.label
                     }
                     accessibilityTraits="button"
                     accessibilityComponentType="button"
                     accessibilityRole="button"
                   >
-                    <Text style={{ color: labelColor }}>{it.label}</Text>
+                    <Text style={{ color: labelColor }}>
+                      {child.props.label}
+                    </Text>
                   </Card>
                 )}
-                <FAB
-                  small
-                  icon={it.icon}
-                  color={it.color}
-                  style={
-                    [
+                {React.isValidElement(child) &&
+                  React.cloneElement(child, {
+                    label: null,
+                    style: [
                       {
                         transform: [{ scale: scales[i] }],
                         opacity: opacities[i],
                         backgroundColor: theme.colors.surface,
                       },
-                      it.style,
-                    ] as StyleProp<ViewStyle>
-                  }
-                  onPress={() => {
-                    it.onPress();
-                    this._close();
-                  }}
-                  accessibilityLabel={
-                    typeof it.accessibilityLabel !== 'undefined'
-                      ? it.accessibilityLabel
-                      : it.label
-                  }
-                  accessibilityTraits="button"
-                  accessibilityComponentType="button"
-                  accessibilityRole="button"
-                />
+                      child.props.style,
+                    ] as StyleProp<ViewStyle>,
+                    onPress: () => {
+                      child.props.onPress();
+                      this._close();
+                    },
+                    accessibilityLabel:
+                      typeof child.props.accessibilityLabel !== 'undefined'
+                        ? child.props.accessibilityLabel
+                        : child.props.label,
+                    accessibilityTraits: 'button',
+                    accessibilityComponentType: 'button',
+                    accessibilityRole: 'button',
+                  })}
               </View>
             ))}
           </View>
