@@ -25,6 +25,7 @@ type Props = {
    * - `accessibilityLabel`: accessibility label for the action, uses label by default if specified
    * - `color`: custom icon color of the action item
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
+   * - `labelStyle`: pass additional styles for the fab item's label, for example `backgroundColor`
    * - `onPress`: callback that is called when `FAB` is pressed (required)
    */
   actions: Array<{
@@ -33,6 +34,7 @@ type Props = {
     color?: string;
     accessibilityLabel?: string;
     style?: StyleProp<ViewStyle>;
+    labelStyle?: StyleProp<ViewStyle>;
     onPress: () => void;
   }>;
   /**
@@ -262,6 +264,7 @@ class FABGroup extends React.Component<Props, State> {
                           transform: [{ scale: scales[i] }],
                           opacity: opacities[i],
                         },
+                        it.labelStyle,
                       ] as StyleProp<ViewStyle>
                     }
                     onPress={() => {
