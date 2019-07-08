@@ -61,17 +61,17 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
       Object {
         "backgroundColor": "#ffffff",
         "bottom": 0,
-        "elevation": 8,
+        "elevation": 4,
         "left": 0,
         "position": null,
         "right": 0,
         "shadowColor": "#000000",
         "shadowOffset": Object {
-          "height": 7,
+          "height": 3,
           "width": 0,
         },
         "shadowOpacity": 0.24,
-        "shadowRadius": 8,
+        "shadowRadius": 4,
         "transform": Array [
           Object {
             "translateY": 0,
@@ -734,17 +734,17 @@ exports[`hides labels in shifting bottom navigation 1`] = `
       Object {
         "backgroundColor": "#ffffff",
         "bottom": 0,
-        "elevation": 8,
+        "elevation": 4,
         "left": 0,
         "position": null,
         "right": 0,
         "shadowColor": "#000000",
         "shadowOffset": Object {
-          "height": 7,
+          "height": 3,
           "width": 0,
         },
         "shadowOpacity": 0.24,
-        "shadowRadius": 8,
+        "shadowRadius": 4,
         "transform": Array [
           Object {
             "translateY": 0,
@@ -1427,17 +1427,17 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
       Object {
         "backgroundColor": "#ffffff",
         "bottom": 0,
-        "elevation": 8,
+        "elevation": 4,
         "left": 0,
         "position": null,
         "right": 0,
         "shadowColor": "#000000",
         "shadowOffset": Object {
-          "height": 7,
+          "height": 3,
           "width": 0,
         },
         "shadowOpacity": 0.24,
-        "shadowRadius": 8,
+        "shadowRadius": 4,
         "transform": Array [
           Object {
             "translateY": 0,
@@ -2040,17 +2040,17 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
       Object {
         "backgroundColor": "#ffffff",
         "bottom": 0,
-        "elevation": 8,
+        "elevation": 4,
         "left": 0,
         "position": null,
         "right": 0,
         "shadowColor": "#000000",
         "shadowOffset": Object {
-          "height": 7,
+          "height": 3,
           "width": 0,
         },
         "shadowOpacity": 0.24,
-        "shadowRadius": 8,
+        "shadowRadius": 4,
         "transform": Array [
           Object {
             "translateY": 0,
@@ -2925,17 +2925,17 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
       Object {
         "backgroundColor": "#E96A82",
         "bottom": 0,
-        "elevation": 8,
+        "elevation": 4,
         "left": 0,
         "position": null,
         "right": 0,
         "shadowColor": "#000000",
         "shadowOffset": Object {
-          "height": 7,
+          "height": 3,
           "width": 0,
         },
         "shadowOpacity": 0.24,
-        "shadowRadius": 8,
+        "shadowRadius": 4,
         "transform": Array [
           Object {
             "translateY": 0,
@@ -3844,17 +3844,17 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
       Object {
         "backgroundColor": "#E96A82",
         "bottom": 0,
-        "elevation": 8,
+        "elevation": 4,
         "left": 0,
         "position": null,
         "right": 0,
         "shadowColor": "#000000",
         "shadowOffset": Object {
-          "height": 7,
+          "height": 3,
           "width": 0,
         },
         "shadowOpacity": 0.24,
-        "shadowRadius": 8,
+        "shadowRadius": 4,
         "transform": Array [
           Object {
             "translateY": 0,
@@ -4669,17 +4669,17 @@ exports[`renders non-shifting bottom navigation 1`] = `
       Object {
         "backgroundColor": "#ffffff",
         "bottom": 0,
-        "elevation": 8,
+        "elevation": 4,
         "left": 0,
         "position": null,
         "right": 0,
         "shadowColor": "#000000",
         "shadowOffset": Object {
-          "height": 7,
+          "height": 3,
           "width": 0,
         },
         "shadowOpacity": 0.24,
-        "shadowRadius": 8,
+        "shadowRadius": 4,
         "transform": Array [
           Object {
             "translateY": 0,
@@ -5588,17 +5588,17 @@ exports[`renders shifting bottom navigation 1`] = `
       Object {
         "backgroundColor": "#ffffff",
         "bottom": 0,
-        "elevation": 8,
+        "elevation": 4,
         "left": 0,
         "position": null,
         "right": 0,
         "shadowColor": "#000000",
         "shadowOffset": Object {
-          "height": 7,
+          "height": 3,
           "width": 0,
         },
         "shadowOpacity": 0.24,
-        "shadowRadius": 8,
+        "shadowRadius": 4,
         "transform": Array [
           Object {
             "translateY": 0,

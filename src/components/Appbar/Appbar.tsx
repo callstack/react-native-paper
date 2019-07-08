@@ -14,12 +14,18 @@ import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import { black, white } from '../../styles/colors';
 import { Theme } from '../../types';
+import overlay from '../../styles/overlay';
 
 type Props = Partial<React.ComponentProps<typeof View>> & {
   /**
    * Whether the background color is a dark color. A dark appbar will render light text and vice-versa.
    */
   dark?: boolean;
+  /**
+   * Pass `true` if you want Appbar to use theme primary color even in dark mode.
+   * By default in dark mode Appbar use surface color.
+   */
+  primary?: boolean;
   /**
    * Content of the `Appbar`.
    */
@@ -82,11 +88,15 @@ class Appbar extends React.Component<Props> {
   static Header = AppbarHeader;
 
   render() {
-    const { children, dark, style, theme, ...rest } = this.props;
+    const { children, dark, style, theme, primary, ...rest } = this.props;
 
-    const { colors } = theme;
-    const { backgroundColor = colors.primary, ...restStyle } =
-      StyleSheet.flatten(style) || {};
+    const { colors, dark: isDarkTheme } = theme;
+    const {
+      backgroundColor = isDarkTheme && !primary
+        ? overlay(4, colors.surface)
+        : colors.primary,
+      ...restStyle
+    } = StyleSheet.flatten(style) || {};
 
     let isDark: boolean;
 
@@ -102,7 +112,6 @@ class Appbar extends React.Component<Props> {
     let shouldCenterContent = false;
     let shouldAddLeftSpacing = false;
     let shouldAddRightSpacing = false;
-
     if (Platform.OS === 'ios') {
       let hasAppbarContent = false;
       let leftItemsCount = 0;
@@ -125,7 +134,6 @@ class Appbar extends React.Component<Props> {
       shouldAddLeftSpacing = shouldCenterContent && leftItemsCount === 0;
       shouldAddRightSpacing = shouldCenterContent && rightItemsCount === 0;
     }
-
     return (
       <Surface
         style={[{ backgroundColor }, styles.appbar, restStyle]}
@@ -165,7 +173,6 @@ class Appbar extends React.Component<Props> {
                 child.props.style,
               ];
             }
-
             return React.cloneElement(child, props);
           })}
         {shouldAddRightSpacing ? <View style={styles.spacing} /> : null}

@@ -5,13 +5,15 @@ import {
   View,
   SafeAreaView,
   ViewStyle,
+  StatusBar,
 } from 'react-native';
-
+import overlay from '../../styles/overlay';
 import Appbar, { DEFAULT_APPBAR_HEIGHT } from './Appbar';
 import shadow from '../../styles/shadow';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
+import color from 'color';
 
 type Props = React.ComponentProps<typeof Appbar> & {
   /**
@@ -25,6 +27,11 @@ type Props = React.ComponentProps<typeof Appbar> & {
    * Pass `0` or a custom value to disable the default behaviour, and customize the height.
    */
   statusBarHeight?: number;
+  /**
+   * Pass `true` if you want Appbar to use theme primary color even in dark mode.
+   * By default in dark mode Appbar use surface color.
+   */
+  primary?: boolean;
   /**
    * Content of the header.
    */
@@ -89,21 +96,34 @@ class AppbarHeader extends React.Component<Props> {
       // Don't use default props since we check it to know whether we should use SafeAreaView
       statusBarHeight = APPROX_STATUSBAR_HEIGHT,
       style,
+      primary,
+      dark,
       ...rest
     } = this.props;
-
-    const { colors } = rest.theme;
+    const { dark: isDarkTheme, colors } = rest.theme;
     const {
       height = DEFAULT_APPBAR_HEIGHT,
       elevation = 4,
+      backgroundColor = isDarkTheme && !primary
+        ? overlay(4, colors.surface)
+        : colors.primary,
       zIndex = 0,
-      backgroundColor = colors.primary,
       ...restStyle
     } = StyleSheet.flatten(style) || {};
 
     // Let the user override the behaviour
     const Wrapper =
       typeof this.props.statusBarHeight === 'number' ? View : SafeAreaView;
+    let isDark;
+    if (typeof dark === 'boolean') {
+      isDark = dark;
+    } else {
+      isDark =
+        backgroundColor === 'transparent'
+          ? false
+          : !color(backgroundColor).light();
+    }
+    StatusBar.setBarStyle(isDark ? 'light-content' : 'dark-content');
 
     return (
       <Wrapper
@@ -121,6 +141,8 @@ class AppbarHeader extends React.Component<Props> {
             styles.appbar,
             restStyle,
           ]}
+          dark={dark}
+          primary={primary}
           {...rest}
         />
       </Wrapper>

@@ -11,7 +11,6 @@ import Button from './Button';
 import Surface from './Surface';
 import Text from './Typography/Text';
 import { withTheme } from '../core/theming';
-import { white } from '../styles/colors';
 import { Theme } from '../types';
 
 type Props = {
@@ -59,7 +58,7 @@ const DURATION_LONG = 10000;
 
 /**
  * Snackbars provide brief feedback about an operation through a message at the bottom of the screen.
- *
+ * Sncakbar uses onSurface color from theme so, if theme is light snackbar will be black and if theme is dark snackbar will have white background
  * <div class="screenshots">
  *   <img class="medium" src="screenshots/snackbar.gif" />
  * </div>
@@ -233,11 +232,18 @@ class Snackbar extends React.Component<Props, State> {
                   },
                 ],
               },
+              { backgroundColor: colors.onSurface },
               style,
             ] as StyleProp<ViewStyle>
           }
         >
-          <Text style={[styles.content, { marginRight: action ? 0 : 16 }]}>
+          <Text
+            style={[
+              styles.content,
+              { marginRight: action ? 0 : 16 },
+              { color: colors.surface },
+            ]}
+          >
             {children}
           </Text>
           {action ? (
@@ -269,7 +275,6 @@ const styles = StyleSheet.create({
   },
   container: {
     elevation: 6,
-    backgroundColor: '#323232',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -277,7 +282,6 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   content: {
-    color: white,
     marginLeft: 16,
     marginVertical: 14,
     flexWrap: 'wrap',
