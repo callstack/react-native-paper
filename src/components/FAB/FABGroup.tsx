@@ -26,6 +26,7 @@ type Props = {
    * - `color`: custom icon color of the action item
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
    * - `onPress`: callback that is called when `FAB` is pressed (required)
+   * - `key`: key used by React in case the actions order is not constant
    */
   actions: Array<{
     icon: IconSource;
@@ -34,6 +35,7 @@ type Props = {
     accessibilityLabel?: string;
     style?: StyleProp<ViewStyle>;
     onPress: () => void;
+    key?: string;
   }>;
   /**
    * Icon to display for the `FAB`.
@@ -249,7 +251,7 @@ class FABGroup extends React.Component<Props, State> {
           <View pointerEvents={open ? 'box-none' : 'none'}>
             {actions.map((it, i) => (
               <View
-                key={i} // eslint-disable-line react/no-array-index-key
+                key={it.key ? it.key : i} // eslint-disable-line react/no-array-index-key
                 style={styles.item}
                 pointerEvents="box-none"
               >
