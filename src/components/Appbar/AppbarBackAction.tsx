@@ -8,10 +8,10 @@ import {
   StyleProp,
   ViewStyle,
 } from 'react-native';
-
+import { $Omit } from './../../types';
 import AppbarAction from './AppbarAction';
 
-type Props = Omit<
+type Props = $Omit<
   React.ComponentProps<typeof AppbarAction> & {
     /**
      *  Custom color for back icon.

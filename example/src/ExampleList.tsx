@@ -1,5 +1,3 @@
-/* @flow */
-
 import * as React from 'react';
 import { FlatList } from 'react-native';
 import { List, Divider, withTheme, Theme } from 'react-native-paper';

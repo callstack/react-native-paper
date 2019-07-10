@@ -9,10 +9,10 @@ import {
 } from 'react-native';
 import AnimatedText from './Typography/AnimatedText';
 import { withTheme } from '../core/theming';
-import { Theme } from '../types';
+import { Theme, $Omit } from '../types';
 
-type Props = Omit<
-  Omit<React.ComponentProps<typeof Animated.Text>, 'padding'>,
+type Props = $Omit<
+  $Omit<React.ComponentProps<typeof Animated.Text>, 'padding'>,
   'type'
 > & {
   /**

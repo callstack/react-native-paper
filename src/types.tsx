@@ -1,5 +1,3 @@
-/* @flow */
-
 import * as React from 'react';
 
 export type Font = {
@@ -46,7 +44,8 @@ export type Theme = {
   };
 };
 
-export type $RemoveChildren<T extends React.ComponentType<any>> = Omit<
+export type $Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
+export type $RemoveChildren<T extends React.ComponentType<any>> = $Omit<
   React.ComponentProps<T>,
   'children'
 >;

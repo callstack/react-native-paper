@@ -15,6 +15,7 @@
     "@callstack/react-theme-provider": "^3.0.2",
     "@reach/router": "^1.2.1",
     "expo": "^33.0.5",
+    "expo-keep-awake": "^5.0.1",
     "file-loader": "^4.0.0",
     "react": "16.8.3",
     "react-art": "^16.7.0",

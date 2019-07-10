@@ -109,8 +109,8 @@ type State = {
  * ```
  */
 class Chip extends React.Component<Props, State> {
-  static defaultProps = {
-    mode: 'flat' as 'flat',
+  static defaultProps: Partial<Props> = {
+    mode: 'flat',
     disabled: false,
     selected: false,
   };

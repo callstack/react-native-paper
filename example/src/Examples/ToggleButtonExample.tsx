@@ -1,5 +1,3 @@
-/* @flow */
-
 import * as React from 'react';
 import { View, StyleSheet, ImageBackground } from 'react-native';
 import { withTheme, ToggleButton, List, Theme } from 'react-native-paper';
@@ -34,7 +32,7 @@ class ToggleButtonExample extends React.Component<Props, State> {
     return (
       <View style={[styles.container, { backgroundColor: background }]}>
         <List.Section title="Single">
-          <View style={styles.row}>
+          <View style={styles.padding}>
             <ToggleButton
               icon="android"
               value="android"
@@ -48,24 +46,23 @@ class ToggleButtonExample extends React.Component<Props, State> {
           </View>
         </List.Section>
         <List.Section title="Group">
-          <View style={styles.toggleGroup}>
-            <ToggleButton.Group
-              value={this.state.first}
-              onValueChange={(value: string) =>
-                this.setState({
-                  first: value,
-                })
-              }
-            >
-              <ToggleButton disabled icon="format-italic" value="italic" />
-              <ToggleButton icon="format-bold" value="bold" />
-              <ToggleButton icon="format-underlined" value="underlined" />
-              <ToggleButton icon="format-color-text" value="format-color" />
-            </ToggleButton.Group>
-          </View>
+          <ToggleButton.Row
+            value={this.state.first}
+            onValueChange={(value: string) =>
+              this.setState({
+                first: value,
+              })
+            }
+            style={styles.padding}
+          >
+            <ToggleButton disabled icon="format-italic" value="italic" />
+            <ToggleButton icon="format-bold" value="bold" />
+            <ToggleButton icon="format-underlined" value="underlined" />
+            <ToggleButton icon="format-color-text" value="format-color" />
+          </ToggleButton.Row>
         </List.Section>
         <List.Section title="Custom">
-          <View style={styles.group}>
+          <View style={[styles.padding, styles.row]}>
             <ToggleButton.Group
               value={this.state.fruit}
               onValueChange={(value: string) =>
@@ -138,18 +135,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  toggleGroup: {
-    flexDirection: 'row',
+  padding: {
     paddingHorizontal: 16,
-  },
-  group: {
-    flexDirection: 'row',
-    marginLeft: 5,
   },
   row: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    paddingHorizontal: 16,
   },
 });
 

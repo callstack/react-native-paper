@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
-import ToggleButton from './ToggleButton';
 
 type Props = {
   /**
@@ -27,7 +25,8 @@ export const ToggleButtonGroupContext = React.createContext<
 >(null as any);
 
 /**
- * Toggle group allows to control a group of toggle buttons.
+ * Toggle group allows to control a group of toggle buttons.</br>
+ * It doesn't change the appearance of the toggle buttons. If you want to group them in a row, checkout <a href="/toggle-button-row.html">`ToggleButton.Row`</a>.
  *
  * ## Usage
  * ```js
@@ -59,7 +58,6 @@ class ToggleButtonGroup extends React.Component<Props> {
 
   render() {
     const { value, onValueChange, children } = this.props;
-    const count = React.Children.count(children);
 
     return (
       <ToggleButtonGroupContext.Provider
@@ -68,51 +66,10 @@ class ToggleButtonGroup extends React.Component<Props> {
           onValueChange,
         }}
       >
-        {React.Children.map(children, (child, i) => {
-          // @ts-ignore
-          if (child && child.type === ToggleButton) {
-            // @ts-ignore
-            return React.cloneElement(child, {
-              style: [
-                styles.button,
-                i === 0
-                  ? styles.first
-                  : i === count - 1
-                  ? styles.last
-                  : styles.middle,
-                // @ts-ignore
-                child.props.style,
-              ],
-            });
-          }
-
-          return child;
-        })}
+        {children}
       </ToggleButtonGroupContext.Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  button: {
-    borderWidth: StyleSheet.hairlineWidth,
-  },
-
-  first: {
-    borderTopRightRadius: 0,
-    borderBottomRightRadius: 0,
-  },
-
-  middle: {
-    borderRadius: 0,
-    borderLeftWidth: 0,
-  },
-
-  last: {
-    borderLeftWidth: 0,
-    borderTopLeftRadius: 0,
-    borderBottomLeftRadius: 0,
-  },
-});
 
 export default ToggleButtonGroup;
