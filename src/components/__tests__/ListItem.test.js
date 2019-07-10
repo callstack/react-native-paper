@@ -94,3 +94,18 @@ it('renders list item with custom description', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('renders with a description with typeof number', () => {
+  const tree = renderer
+    .create(
+      <ListItem
+        title="First Item"
+        description={123}
+        titleStyle={{ fontSize: 20 }}
+        descriptionStyle={{ color: 'red' }}
+      />
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});

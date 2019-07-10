@@ -116,7 +116,13 @@ class ListItem extends React.Component<Props> {
   ) {
     const { descriptionEllipsizeMode, descriptionStyle } = this.props;
 
-    return typeof description === 'string' ? (
+    return typeof description === 'function' ? (
+      description({
+        ellipsizeMode: descriptionEllipsizeMode,
+        color: descriptionColor,
+        fontSize: styles.description.fontSize,
+      })
+    ) : (
       <Text
         numberOfLines={2}
         ellipsizeMode={descriptionEllipsizeMode}
@@ -128,14 +134,6 @@ class ListItem extends React.Component<Props> {
       >
         {description}
       </Text>
-    ) : (
-      description &&
-        typeof description === 'function' &&
-        description({
-          ellipsizeMode: descriptionEllipsizeMode,
-          color: descriptionColor,
-          fontSize: styles.description.fontSize,
-        })
     );
   }
 
@@ -187,7 +185,9 @@ class ListItem extends React.Component<Props> {
             >
               {title}
             </Text>
-            {this.renderDescription(descriptionColor, description)}
+            {description
+              ? this.renderDescription(descriptionColor, description)
+              : null}
           </View>
           {right
             ? right({
