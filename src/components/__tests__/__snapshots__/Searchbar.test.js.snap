@@ -45,12 +45,14 @@ exports[`renders with placeholder 1`] = `
         Array [
           Object {
             "alignItems": "center",
-            "borderRadius": 18,
-            "height": 36,
             "justifyContent": "center",
             "margin": 6,
-            "overflow": "visible",
-            "width": 36,
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 17,
+            "height": 34,
+            "width": 34,
           },
           undefined,
           undefined,
@@ -158,12 +160,14 @@ exports[`renders with placeholder 1`] = `
         Array [
           Object {
             "alignItems": "center",
-            "borderRadius": 18,
-            "height": 36,
             "justifyContent": "center",
             "margin": 6,
-            "overflow": "visible",
-            "width": 36,
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 17,
+            "height": 34,
+            "width": 34,
           },
           Object {
             "opacity": 0.32,
@@ -260,12 +264,14 @@ exports[`renders with text 1`] = `
         Array [
           Object {
             "alignItems": "center",
-            "borderRadius": 18,
-            "height": 36,
             "justifyContent": "center",
             "margin": 6,
-            "overflow": "visible",
-            "width": 36,
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 17,
+            "height": 34,
+            "width": 34,
           },
           undefined,
           undefined,
@@ -369,12 +375,14 @@ exports[`renders with text 1`] = `
         Array [
           Object {
             "alignItems": "center",
-            "borderRadius": 18,
-            "height": 36,
             "justifyContent": "center",
             "margin": 6,
-            "overflow": "visible",
-            "width": 36,
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 17,
+            "height": 34,
+            "width": 34,
           },
           false,
           undefined,

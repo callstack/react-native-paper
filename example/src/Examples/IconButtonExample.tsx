@@ -25,6 +25,20 @@ class ButtonExample extends React.Component<Props, State> {
           color={Colors.green500}
           onPress={() => {}}
         />
+        <IconButton icon="add-a-photo" size={36} onPress={() => {}} />
+        <IconButton
+          icon="add-shopping-cart"
+          size={36}
+          onPress={() => {}}
+          style={{ backgroundColor: Colors.lightGreen200 }}
+        />
+        <IconButton icon="chrome-reader-mode" size={60} onPress={() => {}} />
+        <IconButton
+          icon="settings-input-composite"
+          size={60}
+          color={Colors.green500}
+          onPress={() => {}}
+        />
       </View>
     );
   }

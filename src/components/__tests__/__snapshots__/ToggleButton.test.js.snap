@@ -30,12 +30,14 @@ exports[`renders disabled toggle button 1`] = `
       Array [
         Object {
           "alignItems": "center",
-          "borderRadius": 18,
-          "height": 36,
           "justifyContent": "center",
           "margin": 6,
-          "overflow": "visible",
-          "width": 36,
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 17,
+          "height": 34,
+          "width": 34,
         },
         Object {
           "opacity": 0.32,
@@ -123,12 +125,14 @@ exports[`renders toggle button 1`] = `
       Array [
         Object {
           "alignItems": "center",
-          "borderRadius": 18,
-          "height": 36,
           "justifyContent": "center",
           "margin": 6,
-          "overflow": "visible",
-          "width": 36,
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 17,
+          "height": 34,
+          "width": 34,
         },
         undefined,
         Array [
@@ -219,12 +223,14 @@ exports[`renders unchecked toggle button 1`] = `
       Array [
         Object {
           "alignItems": "center",
-          "borderRadius": 18,
-          "height": 36,
           "justifyContent": "center",
           "margin": 6,
-          "overflow": "visible",
-          "width": 36,
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 17,
+          "height": 34,
+          "width": 34,
         },
         Object {
           "opacity": 0.32,

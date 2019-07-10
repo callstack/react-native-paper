@@ -53,6 +53,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
 
 /**
  * An icon button is a button which displays only an icon without a label.
+ * By default button is 10px bigger than the icon.
  *
  * <div class="screenshots">
  *   <figure>
@@ -101,14 +102,19 @@ const IconButton = ({
     .rgb()
     .string();
   const IconComponent = animated ? CrossFadeIcon : Icon;
-
+  const buttonSize = size + 10;
   return (
     <TouchableRipple
       borderless
       centered
       onPress={onPress}
       rippleColor={rippleColor}
-      style={[styles.container, disabled && styles.disabled, style]}
+      style={[
+        styles.container,
+        { width: buttonSize, height: buttonSize, borderRadius: buttonSize / 2 },
+        disabled && styles.disabled,
+        style,
+      ]}
       accessibilityLabel={accessibilityLabel}
       accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
       accessibilityComponentType="button"
@@ -132,24 +138,12 @@ const IconButton = ({
 
 const styles = StyleSheet.create({
   // @ts-ignore - this should be fixed in react-theme-providersince withTheme() is not forwarding static property types
-  container: TouchableRipple.supported
-    ? {
-        height: 28,
-        width: 28,
-        margin: 10,
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'visible',
-      }
-    : {
-        borderRadius: 36 / 2,
-        height: 36,
-        width: 36,
-        margin: 6,
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'visible',
-      },
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    margin: 6,
+  },
   disabled: {
     opacity: 0.32,
   },

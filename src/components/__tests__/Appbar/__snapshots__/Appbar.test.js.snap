@@ -64,12 +64,14 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           Array [
             Object {
               "alignItems": "center",
-              "borderRadius": 18,
-              "height": 36,
               "justifyContent": "center",
               "margin": 6,
-              "overflow": "visible",
-              "width": 36,
+              "overflow": "hidden",
+            },
+            Object {
+              "borderRadius": 17,
+              "height": 34,
+              "width": 34,
             },
             undefined,
             undefined,
@@ -177,12 +179,14 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           Array [
             Object {
               "alignItems": "center",
-              "borderRadius": 18,
-              "height": 36,
               "justifyContent": "center",
               "margin": 6,
-              "overflow": "visible",
-              "width": 36,
+              "overflow": "hidden",
+            },
+            Object {
+              "borderRadius": 17,
+              "height": 34,
+              "width": 34,
             },
             Object {
               "opacity": 0.32,
