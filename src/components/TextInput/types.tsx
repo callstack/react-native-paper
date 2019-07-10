@@ -38,7 +38,7 @@ export type ChildTextInputProps = {
 export type LabelProps = {
   mode?: 'flat' | 'outlined';
   placeholderStyle: any;
-  placeholderOpacity: number | Animated.Value;
+  placeholderOpacity: number | Animated.Value | Animated.AnimatedInterpolation;
   baseLabelTranslateX: number;
   baseLabelTranslateY: number;
   wiggleOffsetX: number;

@@ -25,6 +25,7 @@ import {
   calculatePadding,
   adjustPaddingFlat,
   Padding,
+  interpolatePlaceholder,
 } from './helpers';
 
 const MINIMIZED_LABEL_Y_OFFSET = -18;
@@ -174,7 +175,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       -labelHalfHeight - (topPosition + MINIMIZED_LABEL_Y_OFFSET);
 
     const placeholderOpacity = hasActiveOutline
-      ? parentState.labeled
+      ? interpolatePlaceholder(parentState.labeled, hasActiveOutline)
       : parentState.labelLayout.measured
       ? 1
       : 0;

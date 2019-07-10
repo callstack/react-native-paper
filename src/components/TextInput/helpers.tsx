@@ -1,3 +1,5 @@
+import { Animated } from 'react-native';
+
 type PaddingProps = {
   height: number | null;
   labelHalfHeight: number;
@@ -210,3 +212,12 @@ export const adjustPaddingFlat = ({
     paddingBottom: Math.max(0, bottomResult),
   };
 };
+
+export const interpolatePlaceholder = (
+  labeled: Animated.Value,
+  hasActiveOutline: boolean | undefined
+) =>
+  labeled.interpolate({
+    inputRange: [0, 1],
+    outputRange: [hasActiveOutline ? 0 : 1, 1],
+  });
