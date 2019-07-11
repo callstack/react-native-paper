@@ -303,7 +303,6 @@ class Menu extends React.Component<Props, State> {
     );
   };
 
-
   _hide = () => {
     this._removeListeners();
 
