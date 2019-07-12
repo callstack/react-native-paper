@@ -44,7 +44,7 @@
     "webpack-dev-server": "^3.1.14"
   },
   "resolutions": {
-    "**/color": "2.0.1",
+    "**/color": "3.1.2",
     "**/hoist-non-react-statics": "3.3.0",
     "**/react-lifecycles-compat": "3.0.4",
     "**/react": "16.8.3"
