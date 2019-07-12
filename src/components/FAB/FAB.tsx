@@ -164,7 +164,7 @@ class FAB extends React.Component<Props, State> {
         .rgb()
         .string();
     } else {
-      foregroundColor = !color(backgroundColor).light()
+      foregroundColor = !color(backgroundColor).isLight()
         ? white
         : 'rgba(0, 0, 0, .54)';
     }

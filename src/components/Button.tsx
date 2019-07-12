@@ -199,7 +199,7 @@ class Button extends React.Component<Props, State> {
         isDark =
           backgroundColor === 'transparent'
             ? false
-            : !color(backgroundColor).light();
+            : !color(backgroundColor).isLight();
       }
 
       textColor = isDark ? white : black;
