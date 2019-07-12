@@ -286,16 +286,17 @@ class Menu extends React.Component<Props, State> {
       () => {
         this._attachListeners();
 
+        const { animation } = this.props.theme;
         Animated.parallel([
           Animated.timing(this.state.scaleAnimation, {
             toValue: { x: menuLayout.width, y: menuLayout.height },
-            duration: ANIMATION_DURATION,
+            duration: ANIMATION_DURATION * animation.scale,
             easing: EASING,
             useNativeDriver: true,
           }),
           Animated.timing(this.state.opacityAnimation, {
             toValue: 1,
-            duration: ANIMATION_DURATION,
+            duration: ANIMATION_DURATION * animation.scale,
             easing: EASING,
             useNativeDriver: true,
           }),
@@ -311,9 +312,10 @@ class Menu extends React.Component<Props, State> {
   _hide = () => {
     this._removeListeners();
 
+    const { animation } = this.props.theme;
     Animated.timing(this.state.opacityAnimation, {
       toValue: 0,
-      duration: ANIMATION_DURATION,
+      duration: ANIMATION_DURATION * animation.scale,
       easing: EASING,
       useNativeDriver: true,
     }).start(finished => {
