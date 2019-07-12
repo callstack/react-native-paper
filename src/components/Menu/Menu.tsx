@@ -262,7 +262,7 @@ class Menu extends React.Component<Props, State> {
       !anchorLayout.width ||
       !anchorLayout.height
     ) {
-      setTimeout(this._show, ANIMATION_DURATION);
+      requestAnimationFrame(this._show);
       return;
     }
 
