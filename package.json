@@ -30,7 +30,7 @@
     "bootstrap"
   ],
   "scripts": {
-    "typescript": "tsc --noEmit",
+    "typescript": "tsc --noEmit && tsc --project example --noEmit",
     "lint": "eslint --ext '.js,.ts,.tsx' .",
     "test": "jest",
     "prepare": "bob build && node ./scripts/generate-mappings.js",
