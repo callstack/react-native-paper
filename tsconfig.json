@@ -23,5 +23,5 @@
     "strict": true,
     "target": "esnext"
   },
-  "exclude": ["lib/**/*"]
+  "exclude": ["lib/**/*", "example/**/*"]
 }
