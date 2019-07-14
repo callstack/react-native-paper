@@ -94,7 +94,7 @@ class DataTableTitle extends React.Component<Props, State> {
 
     const icon = sortDirection ? (
       <Animated.View style={[styles.icon, { transform: [{ rotate: spin }] }]}>
-        <Icon source="arrow-downward" size={16} color={theme.colors.text} />
+        <Icon source="arrow-down" size={16} color={theme.colors.text} />
       </Animated.View>
     ) : null;
 

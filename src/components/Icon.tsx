@@ -7,27 +7,34 @@ import {
   Platform,
   ImageSourcePropType,
 } from 'react-native';
+import { Consumer as SettingsConsumer } from '../core/settings';
 
-let MaterialIcons: any;
+let MaterialCommunityIcons: any;
 
 try {
   // Optionally require vector-icons
-  MaterialIcons = require('react-native-vector-icons/MaterialIcons').default;
+  MaterialCommunityIcons = require('react-native-vector-icons/MaterialCommunityIcons')
+    .default;
 } catch (e) {
-  // @ts-ignore
-  if (global.__expo && global.__expo.Icon && global.__expo.Icon.MaterialIcons) {
+  if (
+    // @ts-ignore
+    global.__expo &&
+    // @ts-ignore
+    global.__expo.Icon &&
+    // @ts-ignore
+    global.__expo.Icon.MaterialCommunityIcons
+  ) {
     // Snack doesn't properly bundle vector icons from subpath
     // Use icons from the __expo global if available
     // @ts-ignore
-    MaterialIcons = global.__expo.Icon.MaterialIcons;
+    MaterialCommunityIcons = global.__expo.Icon.MaterialCommunityIcons;
   } else {
     let isErrorLogged = false;
 
     // Fallback component for icons
     // @ts-ignore
-    MaterialIcons = ({ name, color, size, ...rest }) => {
+    MaterialCommunityIcons = ({ name, color, size, ...rest }) => {
       /* eslint-disable no-console */
-
       if (!isErrorLogged) {
         if (
           !/(Cannot find module|Module not found|Cannot resolve module)/.test(
@@ -157,20 +164,38 @@ const Icon = ({ source, color, size, ...rest }: Props) => {
     );
   } else if (typeof s === 'string') {
     return (
-      <MaterialIcons
-        {...rest}
-        name={s}
-        color={color}
-        size={size}
-        style={[
-          {
-            transform: [{ scaleX: direction === 'rtl' ? -1 : 1 }],
-          },
-          styles.icon,
-        ]}
-        pointerEvents="none"
-        {...accessibilityProps}
-      />
+      <SettingsConsumer>
+        {({ icon }) => {
+          return icon ? (
+            icon({
+              name: s,
+              color,
+              size,
+              style: {
+                transform: [{ scaleX: direction === 'rtl' ? -1 : 1 }],
+                ...styles.icon,
+              },
+              pointerEvents: 'none',
+              accessibilityProps,
+            })
+          ) : (
+            <MaterialCommunityIcons
+              {...rest}
+              name={s}
+              color={color}
+              size={size}
+              style={[
+                {
+                  transform: [{ scaleX: direction === 'rtl' ? -1 : 1 }],
+                },
+                styles.icon,
+              ]}
+              pointerEvents="none"
+              {...accessibilityProps}
+            />
+          );
+        }}
+      </SettingsConsumer>
     );
   } else if (typeof s === 'function') {
     return s({ color, size, direction });

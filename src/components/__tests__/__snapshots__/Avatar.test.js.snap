@@ -42,7 +42,7 @@ exports[`renders avatar with icon 1`] = `
           },
         ],
         Object {
-          "fontFamily": "Material Icons",
+          "fontFamily": "Material Design Icons",
           "fontStyle": "normal",
           "fontWeight": "normal",
         },
@@ -50,7 +50,7 @@ exports[`renders avatar with icon 1`] = `
       ]
     }
   >
-    
+    ?
   </Text>
 </View>
 `;
@@ -97,7 +97,7 @@ exports[`renders avatar with icon and custom background color 1`] = `
           },
         ],
         Object {
-          "fontFamily": "Material Icons",
+          "fontFamily": "Material Design Icons",
           "fontStyle": "normal",
           "fontWeight": "normal",
         },
@@ -105,7 +105,7 @@ exports[`renders avatar with icon and custom background color 1`] = `
       ]
     }
   >
-    
+    ?
   </Text>
 </View>
 `;

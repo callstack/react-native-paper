@@ -79,7 +79,7 @@ class BannerExample extends React.Component<Props, State> {
         <SafeAreaView>
           <View>
             <FAB
-              icon="visibility"
+              icon="eye"
               label={this.state.visible ? 'Hide banner' : 'Show banner'}
               style={styles.fab}
               onPress={() =>

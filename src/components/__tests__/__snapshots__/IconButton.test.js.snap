@@ -76,7 +76,7 @@ exports[`renders disabled icon button 1`] = `
             },
           ],
           Object {
-            "fontFamily": "Material Icons",
+            "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
@@ -84,7 +84,7 @@ exports[`renders disabled icon button 1`] = `
         ]
       }
     >
-      
+      ?
     </Text>
   </View>
 </View>
@@ -160,7 +160,7 @@ exports[`renders icon button by default 1`] = `
             },
           ],
           Object {
-            "fontFamily": "Material Icons",
+            "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
@@ -168,7 +168,7 @@ exports[`renders icon button by default 1`] = `
         ]
       }
     >
-      
+      ?
     </Text>
   </View>
 </View>
@@ -244,7 +244,7 @@ exports[`renders icon button with color 1`] = `
             },
           ],
           Object {
-            "fontFamily": "Material Icons",
+            "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
@@ -252,7 +252,7 @@ exports[`renders icon button with color 1`] = `
         ]
       }
     >
-      
+      ?
     </Text>
   </View>
 </View>
@@ -328,7 +328,7 @@ exports[`renders icon button with size 1`] = `
             },
           ],
           Object {
-            "fontFamily": "Material Icons",
+            "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
@@ -336,7 +336,7 @@ exports[`renders icon button with size 1`] = `
         ]
       }
     >
-      
+      ?
     </Text>
   </View>
 </View>
@@ -443,7 +443,7 @@ exports[`renders icon change animated 1`] = `
                 },
               ],
               Object {
-                "fontFamily": "Material Icons",
+                "fontFamily": "Material Design Icons",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
@@ -451,7 +451,7 @@ exports[`renders icon change animated 1`] = `
             ]
           }
         >
-          
+          ?
         </Text>
       </View>
     </View>

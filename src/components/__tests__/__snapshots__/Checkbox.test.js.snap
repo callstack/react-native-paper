@@ -55,7 +55,7 @@ exports[`renders checked Checkbox with color 1`] = `
             },
           ],
           Object {
-            "fontFamily": "Material Icons",
+            "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
@@ -63,7 +63,7 @@ exports[`renders checked Checkbox with color 1`] = `
         ]
       }
     >
-      
+      
     </Text>
   </View>
 </View>
@@ -124,7 +124,7 @@ exports[`renders checked Checkbox with onPress 1`] = `
             },
           ],
           Object {
-            "fontFamily": "Material Icons",
+            "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
@@ -132,7 +132,7 @@ exports[`renders checked Checkbox with onPress 1`] = `
         ]
       }
     >
-      
+      
     </Text>
   </View>
 </View>
@@ -193,7 +193,7 @@ exports[`renders indeterminate Checkbox 1`] = `
             },
           ],
           Object {
-            "fontFamily": "Material Icons",
+            "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
@@ -201,7 +201,7 @@ exports[`renders indeterminate Checkbox 1`] = `
         ]
       }
     >
-      
+      
     </Text>
   </View>
 </View>
@@ -262,7 +262,7 @@ exports[`renders indeterminate Checkbox with color 1`] = `
             },
           ],
           Object {
-            "fontFamily": "Material Icons",
+            "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
@@ -270,7 +270,7 @@ exports[`renders indeterminate Checkbox with color 1`] = `
         ]
       }
     >
-      
+      
     </Text>
   </View>
 </View>
@@ -331,7 +331,7 @@ exports[`renders unchecked Checkbox with color 1`] = `
             },
           ],
           Object {
-            "fontFamily": "Material Icons",
+            "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
@@ -339,7 +339,7 @@ exports[`renders unchecked Checkbox with color 1`] = `
         ]
       }
     >
-      
+      
     </Text>
   </View>
 </View>
@@ -400,7 +400,7 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
             },
           ],
           Object {
-            "fontFamily": "Material Icons",
+            "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
@@ -408,7 +408,7 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
         ]
       }
     >
-      
+      
     </Text>
   </View>
 </View>

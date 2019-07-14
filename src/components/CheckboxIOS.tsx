@@ -70,7 +70,7 @@ class CheckboxIOS extends React.Component<Props> {
         .string();
     }
 
-    const icon = indeterminate ? 'remove' : 'done';
+    const icon = indeterminate ? 'minus' : 'check';
 
     return (
       <TouchableRipple
