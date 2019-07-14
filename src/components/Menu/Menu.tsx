@@ -169,7 +169,7 @@ class Menu extends React.Component<Props, State> {
   _anchor?: View | null = null;
   _menu?: View | null = null;
 
-  _isAnchorCoords = !React.isValidElement(this.props.anchor);
+  _isAnchorCoord = !React.isValidElement(this.props.anchor);
 
   _measureMenuLayout = () =>
     new Promise<LayoutRectangle>(resolve => {
@@ -183,7 +183,7 @@ class Menu extends React.Component<Props, State> {
   _measureAnchorLayout = () =>
     new Promise<LayoutRectangle>(resolve => {
       const { anchor } = this.props;
-      if (this._isAnchorCoords) {
+      if (this._isAnchorCoord) {
         // @ts-ignore
         resolve({ x: anchor.x, y: anchor.y, width: 0, height: 0 });
       }
@@ -271,8 +271,8 @@ class Menu extends React.Component<Props, State> {
       !windowLayout.height ||
       !menuLayout.width ||
       !menuLayout.height ||
-      (!anchorLayout.width && !this._isAnchorCoords) ||
-      (!anchorLayout.height && !this._isAnchorCoords)
+      (!anchorLayout.width && !this._isAnchorCoord) ||
+      (!anchorLayout.height && !this._isAnchorCoord)
     ) {
       requestAnimationFrame(this._show);
       return;
@@ -475,7 +475,7 @@ class Menu extends React.Component<Props, State> {
         }}
         collapsable={false}
       >
-        {this._isAnchorCoords ? null : anchor}
+        {this._isAnchorCoord ? null : anchor}
         {rendered ? (
           <Portal>
             <TouchableWithoutFeedback onPress={onDismiss}>
