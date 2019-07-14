@@ -186,6 +186,7 @@ class Menu extends React.Component<Props, State> {
       if (this._isAnchorCoord) {
         // @ts-ignore
         resolve({ x: anchor.x, y: anchor.y, width: 0, height: 0 });
+        return;
       }
 
       if (this._anchor) {
@@ -464,7 +465,7 @@ class Menu extends React.Component<Props, State> {
     };
 
     const positionStyle = {
-      top: top + additionalVerticalValue,
+      top: this._isAnchorCoord ? top : top + additionalVerticalValue,
       ...(I18nManager.isRTL ? { right: left } : { left }),
     };
 
