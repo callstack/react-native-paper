@@ -31,7 +31,7 @@ type Props = {
   /**
    * The anchor to open the menu from. In most cases, it will be a button that opens the menu.
    */
-  anchor: React.ReactNode;
+  anchor: React.ReactNode | { x: number; y: number };
   /**
    * Extra margin to add at the top of the menu to account for translucent status bar on Android.
    * If you are using Expo, we assume translucent status bar and set a height for status bar automatically.
@@ -169,6 +169,8 @@ class Menu extends React.Component<Props, State> {
   _anchor?: View | null = null;
   _menu?: View | null = null;
 
+  _isAnchorCoords = !React.isValidElement(this.props.anchor);
+
   _measureMenuLayout = () =>
     new Promise<LayoutRectangle>(resolve => {
       if (this._menu) {
@@ -180,6 +182,12 @@ class Menu extends React.Component<Props, State> {
 
   _measureAnchorLayout = () =>
     new Promise<LayoutRectangle>(resolve => {
+      const { anchor } = this.props;
+      if (this._isAnchorCoords) {
+        // @ts-ignore
+        resolve({ x: anchor.x, y: anchor.y, width: 0, height: 0 });
+      }
+
       if (this._anchor) {
         this._anchor.measureInWindow((x, y, width, height) => {
           resolve({ x, y, width, height });
@@ -263,8 +271,8 @@ class Menu extends React.Component<Props, State> {
       !windowLayout.height ||
       !menuLayout.width ||
       !menuLayout.height ||
-      !anchorLayout.width ||
-      !anchorLayout.height
+      (!anchorLayout.width && !this._isAnchorCoords) ||
+      (!anchorLayout.height && !this._isAnchorCoords)
     ) {
       requestAnimationFrame(this._show);
       return;
@@ -467,7 +475,7 @@ class Menu extends React.Component<Props, State> {
         }}
         collapsable={false}
       >
-        {anchor}
+        {this._isAnchorCoords ? null : anchor}
         {rendered ? (
           <Portal>
             <TouchableWithoutFeedback onPress={onDismiss}>
