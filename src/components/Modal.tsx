@@ -6,8 +6,8 @@ import {
   StyleProp,
   StyleSheet,
   TouchableWithoutFeedback,
-  View,
   ViewStyle,
+  SafeAreaView,
 } from 'react-native';
 import Surface from './Surface';
 import { withTheme } from '../core/theming';
@@ -195,7 +195,7 @@ class Modal extends React.Component<Props, State> {
             ]}
           />
         </TouchableWithoutFeedback>
-        <View pointerEvents="box-none" style={styles.wrapper}>
+        <SafeAreaView pointerEvents="box-none" style={styles.wrapper}>
           <Surface
             style={
               [
@@ -207,7 +207,7 @@ class Modal extends React.Component<Props, State> {
           >
             {children}
           </Surface>
-        </View>
+        </SafeAreaView>
       </Animated.View>
     );
   }
