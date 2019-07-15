@@ -7,6 +7,8 @@ import {
 } from 'react-native';
 import { TextInput, HelperText, withTheme, Theme } from 'react-native-paper';
 
+const MAX_LENGTH = 20;
+
 type Props = {
   theme: Theme;
 };
@@ -26,6 +28,7 @@ type State = {
   flatTextArea: string;
   outlinedMultiline: string;
   outlinedTextArea: string;
+  maxLengthName: string;
 };
 
 class TextInputExample extends React.Component<Props, State> {
@@ -46,6 +49,7 @@ class TextInputExample extends React.Component<Props, State> {
     flatTextArea: '',
     outlinedMultiline: '',
     outlinedTextArea: '',
+    maxLengthName: '',
   };
 
   _isUsernameValid = (name: string) => /^[a-zA-Z]*$/.test(name);
@@ -200,6 +204,28 @@ class TextInputExample extends React.Component<Props, State> {
           </View>
           <View style={styles.inputContainerStyle}>
             <TextInput
+              label="Input with helper text and character counter"
+              placeholder="Enter username, only letters"
+              value={this.state.maxLengthName}
+              error={!this._isUsernameValid(this.state.maxLengthName)}
+              onChangeText={maxLengthName => this.setState({ maxLengthName })}
+              maxLength={MAX_LENGTH}
+            />
+            <View style={styles.helpersWrapper}>
+              <HelperText
+                type="error"
+                visible={!this._isUsernameValid(this.state.maxLengthName)}
+                style={styles.helper}
+              >
+                Error: Numbers and special characters are not allowed
+              </HelperText>
+              <HelperText visible style={styles.counterHelper}>
+                {this.state.maxLengthName.length} / {MAX_LENGTH}
+              </HelperText>
+            </View>
+          </View>
+          <View style={styles.inputContainerStyle}>
+            <TextInput
               label="Input with no padding"
               style={{ backgroundColor: 'transparent' }}
               padding="none"
@@ -227,8 +253,18 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 8,
   },
+  helpersWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   wrapper: {
     flex: 1,
+  },
+  helper: {
+    flexShrink: 1,
+  },
+  counterHelper: {
+    textAlign: 'right',
   },
   inputContainerStyle: {
     margin: 8,
