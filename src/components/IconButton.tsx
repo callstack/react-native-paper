@@ -53,7 +53,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
 
 /**
  * An icon button is a button which displays only an icon without a label.
- * By default button is 10px bigger than the icon.
+ * By default button has 150% size of the icon.
  *
  * <div class="screenshots">
  *   <figure>
@@ -102,7 +102,7 @@ const IconButton = ({
     .rgb()
     .string();
   const IconComponent = animated ? CrossFadeIcon : Icon;
-  const buttonSize = size + 10;
+  const buttonSize = size * 1.5;
   return (
     <TouchableRipple
       borderless

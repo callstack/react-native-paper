@@ -33,12 +33,6 @@ class ButtonExample extends React.Component<Props, State> {
           style={{ backgroundColor: Colors.lightGreen200 }}
         />
         <IconButton icon="chrome-reader-mode" size={60} onPress={() => {}} />
-        <IconButton
-          icon="settings-input-composite"
-          size={60}
-          color={Colors.green500}
-          onPress={() => {}}
-        />
       </View>
     );
   }

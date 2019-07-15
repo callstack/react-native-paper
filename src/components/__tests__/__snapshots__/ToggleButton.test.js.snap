@@ -35,9 +35,9 @@ exports[`renders disabled toggle button 1`] = `
           "overflow": "hidden",
         },
         Object {
-          "borderRadius": 17,
-          "height": 34,
-          "width": 34,
+          "borderRadius": 18,
+          "height": 36,
+          "width": 36,
         },
         Object {
           "opacity": 0.32,
@@ -130,9 +130,9 @@ exports[`renders toggle button 1`] = `
           "overflow": "hidden",
         },
         Object {
-          "borderRadius": 17,
-          "height": 34,
-          "width": 34,
+          "borderRadius": 18,
+          "height": 36,
+          "width": 36,
         },
         undefined,
         Array [
@@ -228,9 +228,9 @@ exports[`renders unchecked toggle button 1`] = `
           "overflow": "hidden",
         },
         Object {
-          "borderRadius": 17,
-          "height": 34,
-          "width": 34,
+          "borderRadius": 18,
+          "height": 36,
+          "width": 36,
         },
         Object {
           "opacity": 0.32,
