@@ -1,4 +1,8 @@
-import { TextInput as NativeTextInput, Animated } from 'react-native';
+import {
+  TextInput as NativeTextInput,
+  Animated,
+  TextStyle,
+} from 'react-native';
 import { TextInputProps } from './TextInput';
 import { $Omit } from './../../types';
 
@@ -44,6 +48,7 @@ export type LabelProps = {
   wiggleOffsetX: number;
   labelScale: number;
   fontSize: number;
+  fontWeight: TextStyle['fontWeight'];
   font: any;
   topPosition: number;
   paddingOffset?: { paddingHorizontal: number } | null | undefined;

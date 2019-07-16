@@ -73,6 +73,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
 
     const {
       fontSize: fontSizeStyle,
+      fontWeight,
       height,
       backgroundColor = colors.background,
       ...viewStyle
@@ -168,6 +169,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       baseLabelTranslateX,
       font,
       fontSize,
+      fontWeight,
       labelScale,
       wiggleOffsetX: LABEL_WIGGLE_X_OFFSET,
       topPosition,
@@ -232,9 +234,10 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
                     : {},
                   paddingOut,
                   {
-                    fontSize,
-                    color: inputTextColor,
                     ...font,
+                    fontSize,
+                    fontWeight,
+                    color: inputTextColor,
                     textAlignVertical: multiline && height ? 'top' : 'center',
                   },
                 ],
