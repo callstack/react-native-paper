@@ -15,7 +15,9 @@ import { Theme } from '../../types';
 const BLUR_ANIMATION_DURATION = 180;
 const FOCUS_ANIMATION_DURATION = 150;
 
-export type TextInputProps = React.ComponentPropsWithRef<typeof NativeTextInput> & {
+export type TextInputProps = React.ComponentPropsWithRef<
+  typeof NativeTextInput
+> & {
   /**
    * Mode of the TextInput.
    * - `flat` - flat input with an underline.
@@ -395,6 +397,7 @@ class TextInput extends React.Component<TextInputProps, State> {
   }
 
   render() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { mode, padding, ref: outerRef, ...rest } = this.props;
 
     return mode === 'outlined' ? (
