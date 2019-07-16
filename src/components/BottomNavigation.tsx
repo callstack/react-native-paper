@@ -579,12 +579,12 @@ class BottomNavigation extends React.Component<Props, State> {
 
     const { layout, loaded } = this.state;
     const { routes } = navigationState;
-    const { colors } = theme;
+    const { colors, dark: isDarkTheme } = theme;
 
     const shifting = this._isShifting();
 
     const {
-      backgroundColor: approxBackgroundColor = theme.dark
+      backgroundColor: approxBackgroundColor = isDarkTheme
         ? overlay(styles.bar.elevation)
         : colors.primary,
     } = StyleSheet.flatten(barStyle) || {};

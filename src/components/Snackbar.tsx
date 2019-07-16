@@ -58,7 +58,7 @@ const DURATION_LONG = 10000;
 
 /**
  * Snackbars provide brief feedback about an operation through a message at the bottom of the screen.
- * Sncakbar uses onSurface color from theme so, if theme is light snackbar will be black and if theme is dark snackbar will have white background
+ * Sncakbar by default use onSurface color from theme
  * <div class="screenshots">
  *   <img class="medium" src="screenshots/snackbar.gif" />
  * </div>

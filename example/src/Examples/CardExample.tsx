@@ -28,7 +28,7 @@ class CardExample extends React.Component<Props> {
         style={[styles.container, { backgroundColor: background }]}
         contentContainerStyle={styles.content}
       >
-        <Card elevation={1} style={styles.card}>
+        <Card style={styles.card}>
           <Card.Cover
             source={require('../../assets/images/wrecked-ship.jpg')}
           />
@@ -42,14 +42,14 @@ class CardExample extends React.Component<Props> {
             </Paragraph>
           </Card.Content>
         </Card>
-        <Card elevation={1} style={styles.card}>
+        <Card style={styles.card}>
           <Card.Cover source={require('../../assets/images/forest.jpg')} />
           <Card.Actions>
             <Button onPress={() => {}}>Share</Button>
             <Button onPress={() => {}}>Explore</Button>
           </Card.Actions>
         </Card>
-        <Card elevation={1} style={styles.card}>
+        <Card style={styles.card}>
           <Card.Title
             title="Berries that are trimmed at the end"
             subtitle="Omega Ruby"
@@ -68,7 +68,7 @@ class CardExample extends React.Component<Props> {
             </Paragraph>
           </Card.Content>
         </Card>
-        <Card elevation={1} style={styles.card}>
+        <Card style={styles.card}>
           <Card.Cover
             source={require('../../assets/images/strawberries.jpg')}
           />
@@ -81,7 +81,6 @@ class CardExample extends React.Component<Props> {
           />
         </Card>
         <Card
-          elevation={1}
           style={styles.card}
           onPress={() => {
             Alert.alert('The Chameleon is Pressed');
@@ -96,7 +95,6 @@ class CardExample extends React.Component<Props> {
           </Card.Content>
         </Card>
         <Card
-          elevation={1}
           style={styles.card}
           onLongPress={() => {
             Alert.alert('The City is Long Pressed');

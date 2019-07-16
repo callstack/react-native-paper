@@ -62,7 +62,7 @@ class Surface extends React.Component<Props> {
   render() {
     const { style, theme, ...rest } = this.props;
     const flattenedStyles = StyleSheet.flatten(style) || {};
-    const { elevation }: ViewStyle = flattenedStyles;
+    const { elevation = 4 }: ViewStyle = flattenedStyles;
     const { dark: isDarkTheme, colors } = theme;
     return (
       <Animated.View
@@ -71,7 +71,7 @@ class Surface extends React.Component<Props> {
           { backgroundColor: colors.surface },
           elevation && shadow(elevation),
           isDarkTheme && {
-            backgroundColor: overlay(elevation._value || elevation),
+            backgroundColor: overlay(elevation),
           },
           style,
         ]}
