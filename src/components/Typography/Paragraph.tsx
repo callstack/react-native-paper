@@ -6,6 +6,8 @@ type Props = TextProps & {
   children: React.ReactNode;
 };
 
+// @component-group Typography
+
 /**
  * Typography component for showing a paragraph.
  *
