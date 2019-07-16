@@ -395,7 +395,7 @@ class TextInput extends React.Component<TextInputProps, State> {
   }
 
   render() {
-    const { mode, padding, ...rest } = this.props;
+    const { mode, padding, ref: outerRef, ...rest } = this.props;
 
     return mode === 'outlined' ? (
       <TextInputOutlined
