@@ -62,9 +62,11 @@ function getPages() {
     })
     .reduce((acc, file) => {
       const content = fs.readFileSync(file).toString();
+      const groupMatch = /\/\/ @component-group (\w+)/gm.exec(content);
+      const group = groupMatch ? groupMatch[1] : undefined;
 
       if (/import \* as React/.test(content)) {
-        acc.push(file);
+        acc.push({ file, group });
       }
 
       const match = content.match(/\/\/ @component (.\/\w+\.(js|tsx?))/gm);
@@ -72,15 +74,18 @@ function getPages() {
       if (match && match.length) {
         const componentFiles = match.map(line => {
           const fileName = line.split(' ')[2];
-          return require.resolve(
-            path.join(
-              file
-                .split('/')
-                .slice(0, -1)
-                .join('/'),
-              fileName
-            )
-          );
+          return {
+            group,
+            file: require.resolve(
+              path.join(
+                file
+                  .split('/')
+                  .slice(0, -1)
+                  .join('/'),
+                fileName
+              )
+            ),
+          };
         });
 
         acc.push(...componentFiles);
@@ -88,13 +93,16 @@ function getPages() {
 
       return acc;
     }, [])
-    .filter((name, index, self) => self.indexOf(name) === index)
+    .filter(
+      (info, index, self) =>
+        index === self.findIndex(other => info.file === other.file)
+    )
     .sort((a, b) => {
-      const nameA = a.split('/').pop();
-      const nameB = b.split('/').pop();
+      const nameA = a.file.split('/').pop();
+      const nameB = b.file.split('/').pop();
       return nameA.localeCompare(nameB);
     })
-    .map(file => ({ file, type: 'component' }));
+    .map(info => ({ ...info, type: 'component' }));
 
   const docs = fs
     .readdirSync(path.join(__dirname, 'pages'))
