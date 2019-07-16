@@ -102,6 +102,11 @@ function getPages() {
       const nameB = b.file.split('/').pop();
       return nameA.localeCompare(nameB);
     })
+    .sort((a, b) => {
+      const nameA = (a.group || a.file).split('/').pop();
+      const nameB = (b.group || b.file).split('/').pop();
+      return nameA.localeCompare(nameB);
+    })
     .map(info => ({ ...info, type: 'component' }));
 
   const docs = fs
