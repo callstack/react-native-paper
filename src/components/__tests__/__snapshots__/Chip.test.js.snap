@@ -109,6 +109,8 @@ exports[`renders chip with close button 1`] = `
               },
               Object {
                 "color": "rgba(0, 0, 0, 0.87)",
+                "fontFamily": "System",
+                "fontWeight": "400",
                 "marginLeft": 4,
                 "marginRight": 4,
               },
@@ -284,6 +286,8 @@ exports[`renders chip with icon 1`] = `
               },
               Object {
                 "color": "rgba(0, 0, 0, 0.87)",
+                "fontFamily": "System",
+                "fontWeight": "400",
                 "marginLeft": 4,
                 "marginRight": 8,
               },
@@ -363,6 +367,8 @@ exports[`renders chip with onPress 1`] = `
               },
               Object {
                 "color": "rgba(0, 0, 0, 0.87)",
+                "fontFamily": "System",
+                "fontWeight": "400",
                 "marginLeft": 8,
                 "marginRight": 8,
               },
@@ -446,6 +452,8 @@ exports[`renders outlined disabled chip 1`] = `
               },
               Object {
                 "color": "rgba(0, 0, 0, 0.26)",
+                "fontFamily": "System",
+                "fontWeight": "400",
                 "marginLeft": 8,
                 "marginRight": 8,
               },
@@ -574,6 +582,8 @@ exports[`renders selected chip 1`] = `
               },
               Object {
                 "color": "rgba(0, 0, 0, 0.87)",
+                "fontFamily": "System",
+                "fontWeight": "400",
                 "marginLeft": 4,
                 "marginRight": 8,
               },

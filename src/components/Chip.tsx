@@ -279,6 +279,7 @@ class Chip extends React.Component<Props, State> {
               style={[
                 styles.text,
                 {
+                  ...theme.fonts.regular,
                   color: textColor,
                   marginRight: onClose ? 4 : 8,
                   marginLeft: avatar || icon || selected ? 4 : 8,
