@@ -32,11 +32,13 @@ exports[`renders disabled icon button 1`] = `
       Array [
         Object {
           "alignItems": "center",
-          "borderRadius": 18,
-          "height": 36,
           "justifyContent": "center",
           "margin": 6,
-          "overflow": "visible",
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 18,
+          "height": 36,
           "width": 36,
         },
         Object {
@@ -115,11 +117,13 @@ exports[`renders icon button by default 1`] = `
       Array [
         Object {
           "alignItems": "center",
-          "borderRadius": 18,
-          "height": 36,
           "justifyContent": "center",
           "margin": 6,
-          "overflow": "visible",
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 18,
+          "height": 36,
           "width": 36,
         },
         undefined,
@@ -196,11 +200,13 @@ exports[`renders icon button with color 1`] = `
       Array [
         Object {
           "alignItems": "center",
-          "borderRadius": 18,
-          "height": 36,
           "justifyContent": "center",
           "margin": 6,
-          "overflow": "visible",
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 18,
+          "height": 36,
           "width": 36,
         },
         undefined,
@@ -277,12 +283,14 @@ exports[`renders icon button with size 1`] = `
       Array [
         Object {
           "alignItems": "center",
-          "borderRadius": 18,
-          "height": 36,
           "justifyContent": "center",
           "margin": 6,
-          "overflow": "visible",
-          "width": 36,
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 22.5,
+          "height": 45,
+          "width": 45,
         },
         undefined,
         undefined,
@@ -358,11 +366,13 @@ exports[`renders icon change animated 1`] = `
       Array [
         Object {
           "alignItems": "center",
-          "borderRadius": 18,
-          "height": 36,
           "justifyContent": "center",
           "margin": 6,
-          "overflow": "visible",
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 18,
+          "height": 36,
           "width": 36,
         },
         undefined,

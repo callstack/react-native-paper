@@ -45,11 +45,13 @@ exports[`renders with placeholder 1`] = `
         Array [
           Object {
             "alignItems": "center",
-            "borderRadius": 18,
-            "height": 36,
             "justifyContent": "center",
             "margin": 6,
-            "overflow": "visible",
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 18,
+            "height": 36,
             "width": 36,
           },
           undefined,
@@ -158,11 +160,13 @@ exports[`renders with placeholder 1`] = `
         Array [
           Object {
             "alignItems": "center",
-            "borderRadius": 18,
-            "height": 36,
             "justifyContent": "center",
             "margin": 6,
-            "overflow": "visible",
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 18,
+            "height": 36,
             "width": 36,
           },
           Object {
@@ -260,11 +264,13 @@ exports[`renders with text 1`] = `
         Array [
           Object {
             "alignItems": "center",
-            "borderRadius": 18,
-            "height": 36,
             "justifyContent": "center",
             "margin": 6,
-            "overflow": "visible",
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 18,
+            "height": 36,
             "width": 36,
           },
           undefined,
@@ -369,11 +375,13 @@ exports[`renders with text 1`] = `
         Array [
           Object {
             "alignItems": "center",
-            "borderRadius": 18,
-            "height": 36,
             "justifyContent": "center",
             "margin": 6,
-            "overflow": "visible",
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 18,
+            "height": 36,
             "width": 36,
           },
           false,
