@@ -240,8 +240,7 @@ class Snackbar extends React.Component<Props, State> {
           <Text
             style={[
               styles.content,
-              { marginRight: action ? 0 : 16 },
-              { color: colors.surface },
+              { marginRight: action ? 0 : 16, color: colors.surface },
             ]}
           >
             {children}

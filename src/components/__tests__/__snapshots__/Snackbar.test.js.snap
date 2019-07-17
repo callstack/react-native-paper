@@ -60,10 +60,8 @@ exports[`renders snackbar with Text as a child 1`] = `
               "marginVertical": 14,
             },
             Object {
-              "marginRight": 16,
-            },
-            Object {
               "color": "#ffffff",
+              "marginRight": 16,
             },
           ],
         ]
@@ -135,10 +133,8 @@ exports[`renders snackbar with action button 1`] = `
               "marginVertical": 14,
             },
             Object {
-              "marginRight": 0,
-            },
-            Object {
               "color": "#ffffff",
+              "marginRight": 0,
             },
           ],
         ]
@@ -295,10 +291,8 @@ exports[`renders snackbar with content 1`] = `
               "marginVertical": 14,
             },
             Object {
-              "marginRight": 16,
-            },
-            Object {
               "color": "#ffffff",
+              "marginRight": 16,
             },
           ],
         ]
