@@ -2,9 +2,9 @@ import * as React from 'react';
 import { StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple';
-import { $RemoveChildren } from '../../types';
+import { $RemoveChildren, $Omit } from '../../types';
 
-type Props = $RemoveChildren<typeof TouchableRipple> & {
+type Props = $Omit<$RemoveChildren<typeof TouchableRipple>, 'children'> & {
   /**
    * Content of the `DataTableCell`.
    */
