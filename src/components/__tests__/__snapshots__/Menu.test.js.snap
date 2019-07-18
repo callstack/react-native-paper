@@ -19,6 +19,7 @@ exports[`renders not visible menu 1`] = `
   >
     <View
       accessibilityRole="button"
+      accessibilityStates={Array []}
       accessible={true}
       isTVSelectable={true}
       onResponderGrant={[Function]}
@@ -109,6 +110,7 @@ exports[`renders visible menu 1`] = `
   >
     <View
       accessibilityRole="button"
+      accessibilityStates={Array []}
       accessible={true}
       isTVSelectable={true}
       onResponderGrant={[Function]}

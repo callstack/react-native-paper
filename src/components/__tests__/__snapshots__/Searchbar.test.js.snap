@@ -21,6 +21,7 @@ exports[`renders with placeholder 1`] = `
 >
   <View
     accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     hitSlop={
       Object {
@@ -240,6 +241,7 @@ exports[`renders with text 1`] = `
 >
   <View
     accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     hitSlop={
       Object {
@@ -351,6 +353,7 @@ exports[`renders with text 1`] = `
   />
   <View
     accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     hitSlop={
       Object {

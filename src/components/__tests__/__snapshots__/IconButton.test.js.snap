@@ -93,6 +93,7 @@ exports[`renders disabled icon button 1`] = `
 exports[`renders icon button by default 1`] = `
 <View
   accessibilityRole="button"
+  accessibilityStates={Array []}
   accessible={true}
   hitSlop={
     Object {
@@ -176,6 +177,7 @@ exports[`renders icon button by default 1`] = `
 exports[`renders icon button with color 1`] = `
 <View
   accessibilityRole="button"
+  accessibilityStates={Array []}
   accessible={true}
   hitSlop={
     Object {
@@ -259,6 +261,7 @@ exports[`renders icon button with color 1`] = `
 exports[`renders icon button with size 1`] = `
 <View
   accessibilityRole="button"
+  accessibilityStates={Array []}
   accessible={true}
   hitSlop={
     Object {
@@ -342,6 +345,7 @@ exports[`renders icon button with size 1`] = `
 exports[`renders icon change animated 1`] = `
 <View
   accessibilityRole="button"
+  accessibilityStates={Array []}
   accessible={true}
   hitSlop={
     Object {

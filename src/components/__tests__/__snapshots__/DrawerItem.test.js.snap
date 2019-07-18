@@ -18,6 +18,7 @@ exports[`renders DrawerItem with icon 1`] = `
 >
   <View
     accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -247,6 +248,7 @@ exports[`renders basic DrawerItem 1`] = `
 >
   <View
     accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
