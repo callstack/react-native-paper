@@ -119,9 +119,7 @@ export default class PaperExample extends React.Component<{}, State> {
     return (
       <PaperProvider
         settings={{
-          icon: ({ accessibilityProps, ...props }) => (
-            <Icon {...props} {...accessibilityProps} />
-          ),
+          icon: ({ ...props }) => <Icon {...props} />,
         }}
         theme={this.state.theme}
       >
