@@ -35,7 +35,7 @@ class AppbarExample extends React.Component<Props> {
       header: (
         <Appbar.Header
           primary={params.showTopPrimary}
-          style={params.showCustomColor && { backgroundColor: '#ffff00' }}
+          style={params.showCustomColor ? { backgroundColor: '#ffff00' } : null}
         >
           {params.showLeftIcon && (
             <Appbar.BackAction onPress={() => navigation.goBack()} />

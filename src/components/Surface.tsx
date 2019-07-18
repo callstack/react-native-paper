@@ -68,11 +68,10 @@ class Surface extends React.Component<Props> {
       <Animated.View
         {...rest}
         style={[
-          { backgroundColor: colors.surface },
-          elevation && shadow(elevation),
-          isDarkTheme && {
-            backgroundColor: overlay(elevation),
+          {
+            backgroundColor: isDarkTheme ? overlay(elevation) : colors.surface,
           },
+          elevation && shadow(elevation),
           style,
         ]}
       />
