@@ -536,7 +536,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                   },
                 ],
                 Object {
-                  "fontFamily": "Material Icons",
+                  "fontFamily": "Material Design Icons",
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
@@ -544,7 +544,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
               ]
             }
           >
-            
+            
           </Text>
         </View>
       </View>

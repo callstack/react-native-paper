@@ -176,7 +176,7 @@ exports[`renders button with icon 1`] = `
             ]
           }
         >
-          ?
+          
         </Text>
       </View>
       <Text

@@ -4,9 +4,7 @@ import ToggleButton from '../ToggleButton/ToggleButton.tsx';
 
 it('renders toggle button', () => {
   const tree = renderer
-    .create(
-      <ToggleButton status="checked" onPress={() => {}} icon="favorite" />
-    )
+    .create(<ToggleButton status="checked" onPress={() => {}} icon="heart" />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -20,7 +18,7 @@ it('renders disabled toggle button', () => {
         value="toggle"
         status="checked"
         onValueChange={() => {}}
-        icon="favorite"
+        icon="heart"
       />
     )
     .toJSON();
@@ -35,7 +33,7 @@ it('renders unchecked toggle button', () => {
         disabled
         status="unchecked"
         onValueChange={() => {}}
-        icon="favorite"
+        icon="heart"
       />
     )
     .toJSON();

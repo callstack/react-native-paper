@@ -196,7 +196,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -244,7 +244,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -382,7 +382,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -430,7 +430,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -568,7 +568,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -616,7 +616,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -889,7 +889,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -937,7 +937,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -1075,7 +1075,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -1123,7 +1123,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -1261,7 +1261,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -1309,7 +1309,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -1533,7 +1533,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 <icon
                   color="#ffffff"
                 >
-                  3d-rotation
+                  magnify
                 </icon>
               </View>
               <View
@@ -1552,7 +1552,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 <icon
                   color="rgba(255, 255, 255, 0.5)"
                 >
-                  3d-rotation
+                  magnify
                 </icon>
               </View>
               <View
@@ -1699,7 +1699,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 <icon
                   color="#ffffff"
                 >
-                  ac-unit
+                  camera
                 </icon>
               </View>
               <View
@@ -1718,7 +1718,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 <icon
                   color="rgba(255, 255, 255, 0.5)"
                 >
-                  ac-unit
+                  camera
                 </icon>
               </View>
               <View
@@ -1865,7 +1865,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 <icon
                   color="#ffffff"
                 >
-                  access-alarm
+                  inbox
                 </icon>
               </View>
               <View
@@ -1884,7 +1884,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 <icon
                   color="rgba(255, 255, 255, 0.5)"
                 >
-                  access-alarm
+                  inbox
                 </icon>
               </View>
               <View
@@ -2166,7 +2166,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 <icon
                   color="#ffffff"
                 >
-                  3d-rotation
+                  magnify
                 </icon>
               </View>
               <View
@@ -2185,7 +2185,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 <icon
                   color="rgba(255, 255, 255, 0.5)"
                 >
-                  3d-rotation
+                  magnify
                 </icon>
               </View>
               <View
@@ -2316,7 +2316,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 <icon
                   color="#ffffff"
                 >
-                  ac-unit
+                  camera
                 </icon>
               </View>
               <View
@@ -2335,7 +2335,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 <icon
                   color="rgba(255, 255, 255, 0.5)"
                 >
-                  ac-unit
+                  camera
                 </icon>
               </View>
               <View
@@ -2466,7 +2466,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 <icon
                   color="#ffffff"
                 >
-                  access-alarm
+                  inbox
                 </icon>
               </View>
               <View
@@ -2485,7 +2485,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 <icon
                   color="rgba(255, 255, 255, 0.5)"
                 >
-                  access-alarm
+                  inbox
                 </icon>
               </View>
               <View
@@ -2616,7 +2616,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 <icon
                   color="#ffffff"
                 >
-                  access-alarms
+                  heart
                 </icon>
               </View>
               <View
@@ -2635,7 +2635,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 <icon
                   color="rgba(255, 255, 255, 0.5)"
                 >
-                  access-alarms
+                  heart
                 </icon>
               </View>
               <View
@@ -2766,7 +2766,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 <icon
                   color="#ffffff"
                 >
-                  access-time
+                  shopping-music
                 </icon>
               </View>
               <View
@@ -2785,7 +2785,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 <icon
                   color="rgba(255, 255, 255, 0.5)"
                 >
-                  access-time
+                  shopping-music
                 </icon>
               </View>
               <View
@@ -3060,7 +3060,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -3108,7 +3108,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -3328,7 +3328,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -3376,7 +3376,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -3596,7 +3596,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -3644,7 +3644,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -3999,7 +3999,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -4047,7 +4047,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -4229,7 +4229,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -4277,7 +4277,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -4459,7 +4459,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -4507,7 +4507,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -4804,7 +4804,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -4852,7 +4852,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -5072,7 +5072,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -5120,7 +5120,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -5340,7 +5340,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -5388,7 +5388,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -5743,7 +5743,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -5791,7 +5791,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -5973,7 +5973,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -6021,7 +6021,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -6203,7 +6203,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -6251,7 +6251,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -6433,7 +6433,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -6481,7 +6481,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -6663,7 +6663,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View
@@ -6711,7 +6711,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     ]
                   }
                 >
-                  ?
+                  
                 </Text>
               </View>
               <View

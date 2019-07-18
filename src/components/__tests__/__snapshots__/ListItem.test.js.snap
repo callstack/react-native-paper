@@ -167,7 +167,7 @@ exports[`renders list item with custom description 1`] = `
                       ]
                     }
                   >
-                    ?
+                    
                   </Text>
                 </View>
                 <Text

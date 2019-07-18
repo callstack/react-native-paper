@@ -86,7 +86,7 @@ exports[`renders chip with close button 1`] = `
             ]
           }
         >
-          ?
+          
         </Text>
       </View>
       <Text
@@ -263,7 +263,7 @@ exports[`renders chip with icon 1`] = `
             ]
           }
         >
-          ?
+          
         </Text>
       </View>
       <Text
