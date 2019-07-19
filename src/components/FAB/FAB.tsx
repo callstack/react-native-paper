@@ -204,7 +204,7 @@ class FAB extends React.Component<Props, State> {
           accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
           accessibilityComponentType="button"
           accessibilityRole="button"
-          accessibilityStates={disabled ? ['disabled'] : undefined}
+          accessibilityStates={disabled ? ['disabled'] : []}
           style={styles.touchable}
         >
           <View

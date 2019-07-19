@@ -40,6 +40,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
   >
     <View
       accessibilityRole="button"
+      accessibilityStates={Array []}
       accessible={true}
       hitSlop={
         Object {
