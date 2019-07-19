@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View, ScrollView, StyleSheet, Image } from 'react-native';
 import { Chip, List, withTheme, Theme } from 'react-native-paper';
+import color from 'color';
 
 type Props = {
   theme: Theme;
@@ -145,15 +146,23 @@ class ChipExample extends React.Component<Props> {
             <Chip
               selected
               onPress={() => {}}
-              style={[styles.chip, { backgroundColor: 'rgba(128,0,128,0.2)' }]}
-              selectedColor="#800080"
+              style={[
+                styles.chip,
+                {
+                  backgroundColor: color(colors.primary)
+                    .alpha(0.2)
+                    .rgb()
+                    .string(),
+                },
+              ]}
+              selectedColor={colors.primary}
             >
               Flat selected chip with custom color
             </Chip>
             <Chip
               onPress={() => {}}
               style={styles.chip}
-              selectedColor="#800080"
+              selectedColor={colors.primary}
             >
               Flat unselected chip with custom color
             </Chip>
@@ -161,8 +170,16 @@ class ChipExample extends React.Component<Props> {
               selected
               mode="outlined"
               onPress={() => {}}
-              style={[styles.chip, { backgroundColor: 'rgba(128,0,128, 0.2)' }]}
-              selectedColor="#800080"
+              style={[
+                styles.chip,
+                {
+                  backgroundColor: color(colors.primary)
+                    .alpha(0.2)
+                    .rgb()
+                    .string(),
+                },
+              ]}
+              selectedColor={colors.primary}
             >
               Outlined selected chip with custom color
             </Chip>
@@ -170,7 +187,7 @@ class ChipExample extends React.Component<Props> {
               mode="outlined"
               onPress={() => {}}
               style={styles.chip}
-              selectedColor="#800080"
+              selectedColor={colors.primary}
             >
               Outlined unselected chip with custom color
             </Chip>

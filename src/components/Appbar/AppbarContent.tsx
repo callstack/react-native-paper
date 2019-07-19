@@ -13,7 +13,7 @@ import color from 'color';
 import Text from '../Typography/Text';
 
 import { withTheme } from '../../core/theming';
-import { black } from '../../styles/colors';
+import { white } from '../../styles/colors';
 
 import { Theme, $RemoveChildren } from '../../types';
 
@@ -57,7 +57,7 @@ class AppbarContent extends React.Component<Props> {
 
   render() {
     const {
-      color: titleColor = black,
+      color: titleColor = white,
       subtitle,
       subtitleStyle,
       onPress,
