@@ -121,7 +121,7 @@ class AppbarHeader extends React.Component<Props> {
       isDark =
         backgroundColor === 'transparent'
           ? false
-          : !color(backgroundColor).light();
+          : !color(backgroundColor).isLight();
     }
     StatusBar.setBarStyle(isDark ? 'light-content' : 'dark-content');
 
