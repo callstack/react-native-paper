@@ -263,6 +263,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
   <View
     accessibilityLabel="Back"
     accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     hitSlop={
       Object {
@@ -287,11 +288,13 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         Array [
           Object {
             "alignItems": "center",
-            "borderRadius": 18,
-            "height": 36,
             "justifyContent": "center",
             "margin": 6,
-            "overflow": "visible",
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 18,
+            "height": 36,
             "width": 36,
           },
           undefined,
@@ -435,6 +438,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
   </View>
   <View
     accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     hitSlop={
       Object {
@@ -459,11 +463,13 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         Array [
           Object {
             "alignItems": "center",
-            "borderRadius": 18,
-            "height": 36,
             "justifyContent": "center",
             "margin": 6,
-            "overflow": "visible",
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 18,
+            "height": 36,
             "width": 36,
           },
           undefined,
