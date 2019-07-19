@@ -106,7 +106,7 @@ class Appbar extends React.Component<Props> {
       isDark =
         backgroundColor === 'transparent'
           ? false
-          : !color(backgroundColor).light();
+          : !color(backgroundColor).isLight();
     }
 
     let shouldCenterContent = false;

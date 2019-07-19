@@ -598,7 +598,7 @@ class BottomNavigation extends React.Component<Props, State> {
         })
       : approxBackgroundColor;
 
-    const isDark = !color(approxBackgroundColor).light();
+    const isDark = !color(approxBackgroundColor).isLight();
 
     const textColor = isDark ? white : black;
     const activeTintColor =

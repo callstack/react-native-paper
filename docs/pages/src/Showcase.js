@@ -56,7 +56,9 @@ export default class Showcase extends React.Component<{}> {
         </p>
         <Gallery>
           {data.map(item => {
-            const tintColor = color(item.color).light() ? '#000000' : '#FFFFFF';
+            const tintColor = color(item.color).isLight()
+              ? '#000000'
+              : '#FFFFFF';
             return (
               <div key={item.image}>
                 <ImageContainer>

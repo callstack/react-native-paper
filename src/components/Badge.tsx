@@ -81,7 +81,7 @@ class Badge extends React.Component<Props, State> {
 
     const { backgroundColor = theme.colors.notification, ...restStyle } =
       StyleSheet.flatten(style) || {};
-    const textColor = color(backgroundColor).light() ? black : white;
+    const textColor = color(backgroundColor).isLight() ? black : white;
 
     const borderRadius = size / 2;
 
