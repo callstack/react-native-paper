@@ -180,6 +180,7 @@ exports[`renders avatar with text 1`] = `
             "fontSize": 32,
             "lineHeight": 64,
           },
+          undefined,
         ],
       ]
     }
@@ -228,6 +229,7 @@ exports[`renders avatar with text and custom background color 1`] = `
             "fontSize": 32,
             "lineHeight": 64,
           },
+          undefined,
         ],
       ]
     }
@@ -276,6 +278,7 @@ exports[`renders avatar with text and custom colors 1`] = `
             "fontSize": 32,
             "lineHeight": 64,
           },
+          undefined,
         ],
       ]
     }
@@ -324,6 +327,7 @@ exports[`renders avatar with text and custom size 1`] = `
             "fontSize": 48,
             "lineHeight": 96,
           },
+          undefined,
         ],
       ]
     }
