@@ -34,7 +34,7 @@ type Props = {
   /**
    * Style for the title.
    */
-  textStyle?: StyleProp<TextStyle>;
+  labelStyle?: StyleProp<TextStyle>;
   /**
    * @optional
    */
@@ -68,7 +68,7 @@ class AvatarText extends React.Component<Props> {
   };
 
   render() {
-    const { label, size = defaultSize, style, theme, textStyle } = this.props;
+    const { label, size = defaultSize, style, theme, labelStyle } = this.props;
 
     const { backgroundColor = theme.colors.primary, ...restStyle } =
       StyleSheet.flatten(style) || {};
@@ -97,7 +97,7 @@ class AvatarText extends React.Component<Props> {
               fontSize: size / 2,
               lineHeight: size,
             },
-            textStyle,
+            labelStyle,
           ]}
           numberOfLines={1}
         >
