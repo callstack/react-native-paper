@@ -16,6 +16,8 @@ type Props = React.ComponentProps<typeof NativeText> & {
   theme: Theme;
 };
 
+// @component-group Typography
+
 /**
  * Text component which follows styles from the theme.
  *

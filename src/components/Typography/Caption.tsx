@@ -7,6 +7,8 @@ type Props = React.ComponentProps<typeof Text> & {
   children: React.ReactNode;
 };
 
+// @component-group Typography
+
 /**
  * Typography component for showing a caption.
  *
