@@ -224,10 +224,6 @@ class ChipExample extends React.Component<Props, State> {
         <Snackbar
           visible={this.state.visible}
           onDismiss={() => this.setState({ visible: false })}
-          action={{
-            label: 'Undo',
-            onPress: () => {},
-          }}
           duration={Snackbar.DURATION_SHORT}
         >
           onLongPress activated!
