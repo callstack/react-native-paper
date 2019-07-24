@@ -9,7 +9,6 @@ import {
   Consumer as SettingsConsumer,
   accessibilityProps,
 } from '../core/settings';
-import MaterialCommunityIcon from './MaterialCommunityIcon';
 
 type IconSourceBase = string | ImageSourcePropType;
 
@@ -61,8 +60,7 @@ export const isValidIcon = (source: any) =>
 export const isEqualIcon = (a: any, b: any) =>
   a === b || getIconId(a) === getIconId(b);
 
-// @ts-ignore
-const Icon = ({ source, color, size, internal, ...rest }: Props) => {
+const Icon = ({ source, color, size, ...rest }: Props) => {
   const direction =
     // @ts-ignore
     typeof source === 'object' && source.direction && source.source
@@ -98,7 +96,7 @@ const Icon = ({ source, color, size, internal, ...rest }: Props) => {
         {...accessibilityProps}
       />
     );
-  } else if (typeof s === 'string' && !internal) {
+  } else if (typeof s === 'string') {
     return (
       <SettingsConsumer>
         {({ icon }) => {
@@ -111,8 +109,6 @@ const Icon = ({ source, color, size, internal, ...rest }: Props) => {
         }}
       </SettingsConsumer>
     );
-  } else if (typeof s === 'string' && internal) {
-    return <MaterialCommunityIcon name={s} color={color} size={size} />;
   } else if (typeof s === 'function') {
     return s({ color, size, direction });
   }

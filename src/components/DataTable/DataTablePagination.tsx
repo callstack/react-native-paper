@@ -53,23 +53,17 @@ class DataTablePagination extends React.Component<Props> {
         <Text style={[styles.label, { color: labelColor }]} numberOfLines={1}>
           {label}
         </Text>
-        {/*
-            // @ts-ignore */}
         <IconButton
           icon="chevron-left"
           color={theme.colors.text}
           disabled={page === 0}
           onPress={() => onPageChange(page - 1)}
-          internal
         />
-        {/*
-            // @ts-ignore */}
         <IconButton
           icon="chevron-right"
           color={theme.colors.text}
           disabled={page === numberOfPages - 1}
           onPress={() => onPageChange(page + 1)}
-          internal
         />
       </View>
     );

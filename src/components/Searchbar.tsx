@@ -165,15 +165,12 @@ class Searchbar extends React.Component<Props> {
           style,
         ]}
       >
-        {/*
-            // @ts-ignore */}
         <IconButton
           borderless
           rippleColor={rippleColor}
           onPress={onIconPress}
           color={iconColor}
           icon={icon || 'magnify'}
-          internal={icon ? false : true}
         />
         <TextInput
           style={[styles.input, { color: textColor, ...font }, inputStyle]}
@@ -191,8 +188,6 @@ class Searchbar extends React.Component<Props> {
           value={value}
           {...rest}
         />
-        {/*
-            // @ts-ignore */}
         <IconButton
           borderless
           disabled={!value}
@@ -200,7 +195,6 @@ class Searchbar extends React.Component<Props> {
           rippleColor={rippleColor}
           onPress={this._handleClearPress}
           icon={clearIcon || 'close'}
-          internal={clearIcon ? false : true}
           accessibilityTraits="button"
           accessibilityComponentType="button"
           accessibilityRole="button"

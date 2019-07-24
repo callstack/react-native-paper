@@ -84,14 +84,28 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         style={null}
       >
         <Text
+          accessibilityElementsHidden={true}
           allowFontScaling={false}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
           style={
             Array [
               Object {
                 "color": "rgba(0, 0, 0, 0.54)",
                 "fontSize": 24,
               },
-              undefined,
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
               Object {
                 "fontFamily": "Material Design Icons",
                 "fontStyle": "normal",
@@ -187,14 +201,28 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         style={null}
       >
         <Text
+          accessibilityElementsHidden={true}
           allowFontScaling={false}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
           style={
             Array [
               Object {
                 "color": "rgba(255, 255, 255, 0)",
                 "fontSize": 24,
               },
-              undefined,
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
               Object {
                 "fontFamily": "Material Design Icons",
                 "fontStyle": "normal",

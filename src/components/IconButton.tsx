@@ -93,8 +93,6 @@ const IconButton = ({
   animated = false,
   theme,
   style,
-  // @ts-ignore
-  internal,
   ...rest
 }: Props) => {
   const iconColor =
@@ -132,14 +130,7 @@ const IconButton = ({
       {...rest}
     >
       <View>
-        {/*
-            // @ts-ignore */}
-        <IconComponent
-          color={iconColor}
-          source={icon}
-          size={size}
-          internal={internal}
-        />
+        <IconComponent color={iconColor} source={icon} size={size} />
       </View>
     </TouchableRipple>
   );
