@@ -1,10 +1,17 @@
 import * as React from 'react';
-import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
+import {
+  StyleSheet,
+  StyleProp,
+  View,
+  ViewStyle,
+  I18nManager,
+} from 'react-native';
 import color from 'color';
 import IconButton from '../IconButton';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
+import MaterialCommunityIcon from '../MaterialCommunityIcon';
 
 type Props = React.ComponentProps<typeof View> & {
   /**
@@ -54,13 +61,27 @@ class DataTablePagination extends React.Component<Props> {
           {label}
         </Text>
         <IconButton
-          icon="chevron-left"
+          icon={({ size, color }) => (
+            <MaterialCommunityIcon
+              name="chevron-left"
+              color={color}
+              size={size}
+              direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+            />
+          )}
           color={theme.colors.text}
           disabled={page === 0}
           onPress={() => onPageChange(page - 1)}
         />
         <IconButton
-          icon="chevron-right"
+          icon={({ size, color }) => (
+            <MaterialCommunityIcon
+              name="chevron-right"
+              color={color}
+              size={size}
+              direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+            />
+          )}
           color={theme.colors.text}
           disabled={page === numberOfPages - 1}
           onPress={() => onPageChange(page + 1)}

@@ -5,10 +5,8 @@ import {
   Platform,
   ImageSourcePropType,
 } from 'react-native';
-import {
-  Consumer as SettingsConsumer,
-  accessibilityProps,
-} from '../core/settings';
+import { Consumer as SettingsConsumer } from '../core/settings';
+import { accessibilityProps } from './MaterialCommunityIcon';
 
 type IconSourceBase = string | ImageSourcePropType;
 
