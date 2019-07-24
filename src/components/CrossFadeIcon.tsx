@@ -72,7 +72,8 @@ class CrossFadeIcon extends React.Component<Props, State> {
   }
 
   render() {
-    const { color, size } = this.props;
+    // @ts-ignore
+    const { color, size, internal } = this.props;
     const opacityPrev = this.state.fade;
     const opacityNext = this.state.previousIcon
       ? this.state.fade.interpolate({
@@ -113,7 +114,15 @@ class CrossFadeIcon extends React.Component<Props, State> {
               },
             ]}
           >
-            <Icon source={this.state.previousIcon} size={size} color={color} />
+            {/*
+            // @ts-ignore */}
+            <Icon
+              source={this.state.previousIcon}
+              size={size}
+              color={color}
+              // @ts-ignore
+              internal={this.props.source.internal || internal}
+            />
           </Animated.View>
         ) : null}
         <Animated.View
@@ -125,7 +134,15 @@ class CrossFadeIcon extends React.Component<Props, State> {
             },
           ]}
         >
-          <Icon source={this.state.currentIcon} size={size} color={color} />
+          {/*
+            // @ts-ignore */}
+          <Icon
+            source={this.state.currentIcon}
+            size={size}
+            color={color}
+            // @ts-ignore
+            internal={this.props.source.internal || internal}
+          />
         </Animated.View>
       </View>
     );

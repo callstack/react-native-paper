@@ -71,7 +71,12 @@ class AppbarBackAction extends React.Component<Props> {
                   />
                 </View>
               )
-            : { source: 'arrow-left', direction: 'auto' }
+            : {
+                source: 'arrow-left',
+                direction: 'auto',
+                // @ts-ignore
+                internal: true,
+              }
         }
       />
     );
