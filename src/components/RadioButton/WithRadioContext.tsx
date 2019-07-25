@@ -35,7 +35,7 @@ const withRadioContext = (RadioComponent: React.ComponentType<Props>) => {
     const handlePress = () => {
       const { onPress, value } = props;
 
-      context ? context.onValueChange(value) : onPress;
+      context ? context.onValueChange(value) : onPress && onPress();
     };
 
     const isChecked = () => {
