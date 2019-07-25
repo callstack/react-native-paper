@@ -56,6 +56,11 @@ type Props = {
    * Style that is passed to Description element.
    */
   descriptionStyle?: StyleProp<TextStyle>;
+  /**
+   * Truncate description text such that the total number of lines does not
+   * exceed this number.
+   */
+  descriptionNumberOfLines?: number;
 };
 
 type State = {
@@ -142,6 +147,7 @@ class ListAccordion extends React.Component<Props, State> {
       theme,
       titleStyle,
       descriptionStyle,
+      descriptionNumberOfLines,
       style,
     } = this.props;
     const titleColor = color(theme.colors.text)
@@ -188,7 +194,9 @@ class ListAccordion extends React.Component<Props, State> {
               </Text>
               {description && (
                 <Text
-                  numberOfLines={2}
+                  numberOfLines={
+                    descriptionNumberOfLines ? descriptionNumberOfLines : 2
+                  }
                   style={[
                     styles.description,
                     {
