@@ -72,12 +72,12 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   descriptionStyle?: StyleProp<TextStyle>;
   /**
-   * Truncate title text such that the total number of lines does not
+   * Truncate Title text such that the total number of lines does not
    * exceed this number.
    */
   titleNumberOfLines?: number;
   /**
-   * Truncate description text such that the total number of lines does not
+   * Truncate Description text such that the total number of lines does not
    * exceed this number.
    */
   descriptionNumberOfLines?: number;
