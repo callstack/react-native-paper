@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Animated, View, StyleSheet } from 'react-native';
 import color from 'color';
-import TouchableRipple from './TouchableRipple';
-import { withTheme } from '../core/theming';
-import { Theme, $RemoveChildren } from '../types';
+import TouchableRipple from '../TouchableRipple';
+import { withTheme } from '../../core/theming';
+import { Theme, $RemoveChildren } from '../../types';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**

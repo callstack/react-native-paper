@@ -48,7 +48,11 @@ class RadioButtonGroupExample extends React.Component<Props, State> {
           </View>
           <View style={styles.row}>
             <Paragraph>Second</Paragraph>
-            <RadioButton value="second" />
+            <RadioButton.Android value="second" />
+          </View>
+          <View style={styles.row}>
+            <Paragraph>Third</Paragraph>
+            <RadioButton.IOS value="third" />
           </View>
         </RadioButton.Group>
       </View>

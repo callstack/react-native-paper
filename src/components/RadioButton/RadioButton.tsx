@@ -1,19 +1,14 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
-import RadioButtonGroup, {
-  RadioButtonContext,
-  RadioButtonContextType,
-} from './RadioButtonGroup';
-import RadioButtonAndroid, {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  RadioButtonAndroid as _RadioButtonAndroid,
-} from './RadioButtonAndroid';
-import RadioButtonIOS, {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  RadioButtonIOS as _RadioButtonIOS,
-} from './RadioButtonIOS';
-import { withTheme } from '../core/theming';
-import { Theme } from '../types';
+import RadioButtonGroup from './RadioButtonGroup';
+import RadioButtonAndroid from './RadioButtonAndroid';
+import RadioButtonIOS from './RadioButtonIOS';
+import { withTheme } from '../../core/theming';
+import { Theme } from '../../types';
+import WithRadioContext from './WithRadioContext';
+
+const RadioButtonAndroidWithContext = WithRadioContext(RadioButtonAndroid);
+const RadioButtonIOSWithContext = WithRadioContext(RadioButtonIOS);
 
 type Props = {
   /**
@@ -105,38 +100,18 @@ class RadioButton extends React.Component<Props> {
   static Group = RadioButtonGroup;
 
   // @component ./RadioButtonAndroid.tsx
-  static Android = RadioButtonAndroid;
+  static Android = RadioButtonAndroidWithContext;
 
   // @component ./RadioButtonIOS.tsx
-  static IOS = RadioButtonIOS;
-
-  handlePress = (context: RadioButtonContextType) => {
-    const { onPress } = this.props;
-    const onValueChange = context ? context.onValueChange : () => {};
-
-    onPress ? onPress() : onValueChange(this.props.value);
-  };
-
-  isChecked = (context: RadioButtonContextType) =>
-    context.value === this.props.value ? 'checked' : 'unchecked';
+  static IOS = RadioButtonIOSWithContext;
 
   render() {
     const Button = Platform.select({
-      default: RadioButtonAndroid,
+      default: RadioButtonAndroidWithContext,
       ios: RadioButtonIOS,
     });
 
-    return (
-      <RadioButtonContext.Consumer>
-        {context => (
-          <Button
-            {...this.props}
-            status={this.props.status || (context && this.isChecked(context))}
-            onPress={() => this.handlePress(context)}
-          />
-        )}
-      </RadioButtonContext.Consumer>
-    );
+    return <Button {...this.props} />;
   }
 }
 
