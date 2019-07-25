@@ -72,6 +72,11 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   descriptionStyle?: StyleProp<TextStyle>;
   /**
+   * Truncate title text such that the total number of lines does not
+   * exceed this number.
+   */
+  titleNumberOfLines?: number;
+  /**
    * Truncate description text such that the total number of lines does not
    * exceed this number.
    */
@@ -155,6 +160,7 @@ class ListItem extends React.Component<Props> {
       theme,
       style,
       titleStyle,
+      titleNumberOfLines,
       titleEllipsizeMode,
       ...rest
     } = this.props;
@@ -188,7 +194,7 @@ class ListItem extends React.Component<Props> {
           <View style={[styles.item, styles.content]} pointerEvents="none">
             <Text
               ellipsizeMode={titleEllipsizeMode}
-              numberOfLines={1}
+              numberOfLines={titleNumberOfLines ? titleNumberOfLines : 1}
               style={[styles.title, { color: titleColor }, titleStyle]}
             >
               {title}
