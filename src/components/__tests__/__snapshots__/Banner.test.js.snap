@@ -214,6 +214,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
         >
           <View
             accessibilityRole="button"
+            accessibilityStates={Array []}
             accessible={true}
             isTVSelectable={true}
             onResponderGrant={[Function]}
@@ -386,6 +387,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
         >
           <View
             accessibilityRole="button"
+            accessibilityStates={Array []}
             accessible={true}
             isTVSelectable={true}
             onResponderGrant={[Function]}
@@ -472,6 +474,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
         >
           <View
             accessibilityRole="button"
+            accessibilityStates={Array []}
             accessible={true}
             isTVSelectable={true}
             onResponderGrant={[Function]}

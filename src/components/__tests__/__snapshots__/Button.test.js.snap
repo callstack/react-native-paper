@@ -16,6 +16,7 @@ exports[`renders button with color 1`] = `
 >
   <View
     accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -102,6 +103,7 @@ exports[`renders button with icon 1`] = `
 >
   <View
     accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -239,6 +241,7 @@ exports[`renders contained contained with mode 1`] = `
 >
   <View
     accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -416,6 +419,7 @@ exports[`renders loading button 1`] = `
 >
   <View
     accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -685,6 +689,7 @@ exports[`renders outlined button with mode 1`] = `
 >
   <View
     accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -771,6 +776,7 @@ exports[`renders text button by default 1`] = `
 >
   <View
     accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -857,6 +863,7 @@ exports[`renders text button with mode 1`] = `
 >
   <View
     accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}

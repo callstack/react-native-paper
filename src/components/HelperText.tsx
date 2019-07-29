@@ -36,6 +36,10 @@ type Props = $Omit<
    * @optional
    */
   theme: Theme;
+  /**
+   * TestID used for testing purposes
+   */
+  testID?: string;
 };
 
 type State = {

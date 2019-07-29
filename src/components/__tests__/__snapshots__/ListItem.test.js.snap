@@ -190,6 +190,8 @@ exports[`renders list item with custom description 1`] = `
                         },
                         Object {
                           "color": "rgba(0, 0, 0, 0.87)",
+                          "fontFamily": "System",
+                          "fontWeight": "400",
                           "marginLeft": 4,
                           "marginRight": 8,
                         },

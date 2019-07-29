@@ -30,11 +30,13 @@ exports[`renders disabled toggle button 1`] = `
       Array [
         Object {
           "alignItems": "center",
-          "borderRadius": 18,
-          "height": 36,
           "justifyContent": "center",
           "margin": 6,
-          "overflow": "visible",
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 18,
+          "height": 36,
           "width": 36,
         },
         Object {
@@ -101,6 +103,7 @@ exports[`renders disabled toggle button 1`] = `
 exports[`renders toggle button 1`] = `
 <View
   accessibilityRole="button"
+  accessibilityStates={Array []}
   accessible={true}
   hitSlop={
     Object {
@@ -123,11 +126,13 @@ exports[`renders toggle button 1`] = `
       Array [
         Object {
           "alignItems": "center",
-          "borderRadius": 18,
-          "height": 36,
           "justifyContent": "center",
           "margin": 6,
-          "overflow": "visible",
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 18,
+          "height": 36,
           "width": 36,
         },
         undefined,
@@ -219,11 +224,13 @@ exports[`renders unchecked toggle button 1`] = `
       Array [
         Object {
           "alignItems": "center",
-          "borderRadius": 18,
-          "height": 36,
           "justifyContent": "center",
           "margin": 6,
-          "overflow": "visible",
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 18,
+          "height": 36,
           "width": 36,
         },
         Object {

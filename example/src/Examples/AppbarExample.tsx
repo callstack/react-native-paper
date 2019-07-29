@@ -20,6 +20,8 @@ const initialParams = {
   showSubtitle: true,
   showSearchIcon: true,
   showMoreIcon: true,
+  showBottomPrimary: false,
+  showTopPrimary: false,
 };
 
 const MORE_ICON = Platform.OS === 'ios' ? 'more-horiz' : 'more-vert';
@@ -31,7 +33,10 @@ class AppbarExample extends React.Component<Props> {
 
     return {
       header: (
-        <Appbar.Header>
+        <Appbar.Header
+          primary={params.showTopPrimary}
+          style={params.showCustomColor ? { backgroundColor: '#ffff00' } : null}
+        >
           {params.showLeftIcon && (
             <Appbar.BackAction onPress={() => navigation.goBack()} />
           )}
@@ -112,7 +117,40 @@ class AppbarExample extends React.Component<Props> {
             }
           />
         </View>
-        <Appbar style={styles.bottom}>
+        <View style={styles.row}>
+          <Paragraph>Custom Color</Paragraph>
+          <Switch
+            value={params.showCustomColor}
+            onValueChange={value =>
+              navigation.setParams({
+                showCustomColor: value,
+              })
+            }
+          />
+        </View>
+        <View style={styles.row}>
+          <Paragraph>Bottom bar primary (dark theme)</Paragraph>
+          <Switch
+            value={params.showBottomPrimary}
+            onValueChange={value =>
+              navigation.setParams({
+                showBottomPrimary: value,
+              })
+            }
+          />
+        </View>
+        <View style={styles.row}>
+          <Paragraph>Header bar primary (dark theme)</Paragraph>
+          <Switch
+            value={params.showTopPrimary}
+            onValueChange={value =>
+              navigation.setParams({
+                showTopPrimary: value,
+              })
+            }
+          />
+        </View>
+        <Appbar style={styles.bottom} primary={params.showBottomPrimary}>
           <Appbar.Action icon="archive" onPress={() => {}} />
           <Appbar.Action icon="mail" onPress={() => {}} />
           <Appbar.Action icon="label" onPress={() => {}} />

@@ -204,6 +204,7 @@ exports[`renders data table pagination 1`] = `
   />
   <View
     accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     hitSlop={
       Object {
@@ -228,11 +229,13 @@ exports[`renders data table pagination 1`] = `
         Array [
           Object {
             "alignItems": "center",
-            "borderRadius": 18,
-            "height": 36,
             "justifyContent": "center",
             "margin": 6,
-            "overflow": "visible",
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 18,
+            "height": 36,
             "width": 36,
           },
           false,
@@ -282,6 +285,7 @@ exports[`renders data table pagination 1`] = `
   </View>
   <View
     accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     hitSlop={
       Object {
@@ -306,11 +310,13 @@ exports[`renders data table pagination 1`] = `
         Array [
           Object {
             "alignItems": "center",
-            "borderRadius": 18,
-            "height": 36,
             "justifyContent": "center",
             "margin": 6,
-            "overflow": "visible",
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 18,
+            "height": 36,
             "width": 36,
           },
           false,
@@ -402,6 +408,7 @@ exports[`renders data table pagination with label 1`] = `
   </Text>
   <View
     accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     hitSlop={
       Object {
@@ -426,11 +433,13 @@ exports[`renders data table pagination with label 1`] = `
         Array [
           Object {
             "alignItems": "center",
-            "borderRadius": 18,
-            "height": 36,
             "justifyContent": "center",
             "margin": 6,
-            "overflow": "visible",
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 18,
+            "height": 36,
             "width": 36,
           },
           false,
@@ -480,6 +489,7 @@ exports[`renders data table pagination with label 1`] = `
   </View>
   <View
     accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     hitSlop={
       Object {
@@ -504,11 +514,13 @@ exports[`renders data table pagination with label 1`] = `
         Array [
           Object {
             "alignItems": "center",
-            "borderRadius": 18,
-            "height": 36,
             "justifyContent": "center",
             "margin": 6,
-            "overflow": "visible",
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 18,
+            "height": 36,
             "width": 36,
           },
           false,

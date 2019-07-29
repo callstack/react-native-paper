@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
+import {
+  View,
+  ViewStyle,
+  StyleSheet,
+  StyleProp,
+  TextStyle,
+} from 'react-native';
 import color from 'color';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
@@ -21,7 +27,14 @@ type Props = {
    * Custom color for the text.
    */
   color?: string;
+  /**
+   * Style for text container
+   */
   style?: StyleProp<ViewStyle>;
+  /**
+   * Style for the title.
+   */
+  labelStyle?: StyleProp<TextStyle>;
   /**
    * @optional
    */
@@ -55,13 +68,13 @@ class AvatarText extends React.Component<Props> {
   };
 
   render() {
-    const { label, size = defaultSize, style, theme } = this.props;
+    const { label, size = defaultSize, style, theme, labelStyle } = this.props;
 
     const { backgroundColor = theme.colors.primary, ...restStyle } =
       StyleSheet.flatten(style) || {};
     const textColor =
       this.props.color ||
-      (color(backgroundColor).light() ? 'rgba(0, 0, 0, .54)' : white);
+      (color(backgroundColor).isLight() ? 'rgba(0, 0, 0, .54)' : white);
 
     return (
       <View
@@ -84,6 +97,7 @@ class AvatarText extends React.Component<Props> {
               fontSize: size / 2,
               lineHeight: size,
             },
+            labelStyle,
           ]}
           numberOfLines={1}
         >

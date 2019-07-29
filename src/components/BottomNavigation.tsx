@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import color from 'color';
+import overlay from '../styles/overlay';
 import Icon, { IconSource } from './Icon';
 import Surface from './Surface';
 import Badge from './Badge';
@@ -578,12 +579,15 @@ class BottomNavigation extends React.Component<Props, State> {
 
     const { layout, loaded } = this.state;
     const { routes } = navigationState;
-    const { colors } = theme;
+    const { colors, dark: isDarkTheme } = theme;
 
     const shifting = this._isShifting();
 
-    const { backgroundColor: approxBackgroundColor = colors.primary } =
-      StyleSheet.flatten(barStyle) || {};
+    const {
+      backgroundColor: approxBackgroundColor = isDarkTheme
+        ? overlay(styles.bar.elevation)
+        : colors.primary,
+    } = StyleSheet.flatten(barStyle) || {};
 
     const backgroundColor = shifting
       ? this.state.index.interpolate({
@@ -594,7 +598,7 @@ class BottomNavigation extends React.Component<Props, State> {
         })
       : approxBackgroundColor;
 
-    const isDark = !color(approxBackgroundColor).light();
+    const isDark = !color(approxBackgroundColor).isLight();
 
     const textColor = isDark ? white : black;
     const activeTintColor =
@@ -937,7 +941,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    elevation: 8,
+    elevation: 4,
   },
   barContent: {
     alignItems: 'center',

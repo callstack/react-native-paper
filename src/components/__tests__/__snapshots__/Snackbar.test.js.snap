@@ -20,7 +20,7 @@ exports[`renders snackbar with Text as a child 1`] = `
     style={
       Object {
         "alignItems": "center",
-        "backgroundColor": "#323232",
+        "backgroundColor": "#000000",
         "borderRadius": 4,
         "elevation": 6,
         "flexDirection": "row",
@@ -54,13 +54,13 @@ exports[`renders snackbar with Text as a child 1`] = `
           },
           Array [
             Object {
-              "color": "#ffffff",
               "flex": 1,
               "flexWrap": "wrap",
               "marginLeft": 16,
               "marginVertical": 14,
             },
             Object {
+              "color": "#ffffff",
               "marginRight": 16,
             },
           ],
@@ -93,7 +93,7 @@ exports[`renders snackbar with action button 1`] = `
     style={
       Object {
         "alignItems": "center",
-        "backgroundColor": "#323232",
+        "backgroundColor": "#000000",
         "borderRadius": 4,
         "elevation": 6,
         "flexDirection": "row",
@@ -127,13 +127,13 @@ exports[`renders snackbar with action button 1`] = `
           },
           Array [
             Object {
-              "color": "#ffffff",
               "flex": 1,
               "flexWrap": "wrap",
               "marginLeft": 16,
               "marginVertical": 14,
             },
             Object {
+              "color": "#ffffff",
               "marginRight": 0,
             },
           ],
@@ -159,6 +159,7 @@ exports[`renders snackbar with action button 1`] = `
     >
       <View
         accessibilityRole="button"
+        accessibilityStates={Array []}
         accessible={true}
         isTVSelectable={true}
         onResponderGrant={[Function]}
@@ -251,7 +252,7 @@ exports[`renders snackbar with content 1`] = `
     style={
       Object {
         "alignItems": "center",
-        "backgroundColor": "#323232",
+        "backgroundColor": "#000000",
         "borderRadius": 4,
         "elevation": 6,
         "flexDirection": "row",
@@ -285,13 +286,13 @@ exports[`renders snackbar with content 1`] = `
           },
           Array [
             Object {
-              "color": "#ffffff",
               "flex": 1,
               "flexWrap": "wrap",
               "marginLeft": 16,
               "marginVertical": 14,
             },
             Object {
+              "color": "#ffffff",
               "marginRight": 16,
             },
           ],

@@ -199,7 +199,7 @@ class Button extends React.Component<Props, State> {
         isDark =
           backgroundColor === 'transparent'
             ? false
-            : !color(backgroundColor).light();
+            : !color(backgroundColor).isLight();
       }
 
       textColor = isDark ? white : black;
@@ -245,7 +245,7 @@ class Button extends React.Component<Props, State> {
           accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
           accessibilityComponentType="button"
           accessibilityRole="button"
-          accessibilityStates={disabled ? ['disabled'] : undefined}
+          accessibilityStates={disabled ? ['disabled'] : []}
           disabled={disabled}
           rippleColor={rippleColor}
           style={touchableStyle}

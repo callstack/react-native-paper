@@ -14,6 +14,8 @@ const DefaultTheme: Theme = {
     surface: white,
     error: '#B00020',
     text: black,
+    onBackground: '#000000',
+    onSurface: '#000000',
     disabled: color(black)
       .alpha(0.26)
       .rgb()

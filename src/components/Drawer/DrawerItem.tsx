@@ -84,7 +84,7 @@ class DrawerItem extends React.Component<Props> {
           accessibilityTraits={active ? ['button', 'selected'] : 'button'}
           accessibilityComponentType="button"
           accessibilityRole="button"
-          accessibilityStates={active ? ['selected'] : undefined}
+          accessibilityStates={active ? ['selected'] : []}
         >
           <View style={styles.wrapper}>
             {icon ? (

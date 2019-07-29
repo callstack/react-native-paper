@@ -36,3 +36,21 @@ it('renders not visible menu', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('renders menu with content styles', () => {
+  const tree = renderer
+    .create(
+      <Menu
+        visible
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+        contentStyle={{ borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
+      >
+        <Menu.Item onPress={jest.fn()} title="Undo" />
+        <Menu.Item onPress={jest.fn()} title="Redo" />
+      </Menu>
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});

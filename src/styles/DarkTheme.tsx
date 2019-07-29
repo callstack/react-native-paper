@@ -1,13 +1,6 @@
 import color from 'color';
 import DefaultTheme from './DefaultTheme';
-import {
-  black,
-  white,
-  grey800,
-  lightBlue500,
-  redA400,
-  pinkA100,
-} from './colors';
+import { black, white, pinkA100 } from './colors';
 import { Theme } from '../types';
 
 const DarkTheme: Theme = {
@@ -15,13 +8,16 @@ const DarkTheme: Theme = {
   dark: true,
   colors: {
     ...DefaultTheme.colors,
-    primary: lightBlue500,
-    background: '#242424',
-    surface: grey800,
-    error: redA400,
+    primary: '#BB86FC',
+    accent: '#03dac6',
+    background: '#121212',
+    surface: '#121212',
+    error: '#CF6679',
+    onBackground: '#FFFFFF',
+    onSurface: '#FFFFFF',
     text: white,
     disabled: color(white)
-      .alpha(0.3)
+      .alpha(0.38)
       .rgb()
       .string(),
     placeholder: color(white)

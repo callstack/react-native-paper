@@ -62,7 +62,7 @@ class Avatar extends React.Component<Props> {
       StyleSheet.flatten(style) || {};
     const textColor =
       this.props.color ||
-      (color(backgroundColor).light() ? 'rgba(0, 0, 0, .54)' : white);
+      (color(backgroundColor).isLight() ? 'rgba(0, 0, 0, .54)' : white);
 
     return (
       <View
