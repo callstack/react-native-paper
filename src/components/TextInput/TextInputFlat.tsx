@@ -9,7 +9,7 @@ import {
   TextStyle,
 } from 'react-native';
 import color from 'color';
-import InputLabel from './InputLabel';
+import InputLabel from './Label/InputLabel';
 import { RenderProps, ChildTextInputProps } from './types';
 
 import {
