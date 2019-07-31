@@ -54,8 +54,11 @@ const LabelBackground = ({
           style={[
             placeholderStyle,
             labelStyle,
+            styles.outlinedLabel,
             {
               top: topPosition + 1,
+              backgroundColor,
+              opacity,
               transform: [
                 ...labelStyle.transform,
                 {
@@ -65,11 +68,6 @@ const LabelBackground = ({
                   }),
                 },
               ],
-            },
-            styles.outlinedLabel || {},
-            {
-              backgroundColor,
-              opacity,
             },
           ]}
           numberOfLines={1}
