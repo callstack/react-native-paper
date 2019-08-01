@@ -53,6 +53,7 @@
     "@callstack/eslint-config": "^6.1.0",
     "@commitlint/config-conventional": "^7.5.0",
     "@react-native-community/bob": "^0.4.1",
+    "@release-it/conventional-changelog": "^1.1.0",
     "@types/color": "^3.0.0",
     "@types/jest": "^24.0.13",
     "@types/node": "^12.0.4",
@@ -86,7 +87,7 @@
     "react-native-testing-library": "^1.5.0",
     "react-native-vector-icons": "~6.0.2",
     "react-test-renderer": "16.8.3",
-    "release-it": "^7.6.2",
+    "release-it": "^12.3.3",
     "rimraf": "^2.6.2",
     "typescript": "^3.5.1"
   },
