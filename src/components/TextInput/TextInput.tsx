@@ -253,6 +253,7 @@ class TextInput extends React.Component<TextInputProps, State> {
 
     // Set the placeholder in a delay to offset the label animation
     // If we show it immediately, they'll overlap and look ugly
+    // @ts-ignore
     this._timer = setTimeout(
       () =>
         this.setState({

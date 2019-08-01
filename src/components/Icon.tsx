@@ -1,62 +1,12 @@
 import * as React from 'react';
 import {
   Image,
-  Text,
-  StyleSheet,
   I18nManager,
   Platform,
   ImageSourcePropType,
 } from 'react-native';
-
-let MaterialIcons: any;
-
-try {
-  // Optionally require vector-icons
-  MaterialIcons = require('react-native-vector-icons/MaterialIcons').default;
-} catch (e) {
-  // @ts-ignore
-  if (global.__expo && global.__expo.Icon && global.__expo.Icon.MaterialIcons) {
-    // Snack doesn't properly bundle vector icons from subpath
-    // Use icons from the __expo global if available
-    // @ts-ignore
-    MaterialIcons = global.__expo.Icon.MaterialIcons;
-  } else {
-    let isErrorLogged = false;
-
-    // Fallback component for icons
-    // @ts-ignore
-    MaterialIcons = ({ name, color, size, ...rest }) => {
-      /* eslint-disable no-console */
-
-      if (!isErrorLogged) {
-        if (
-          !/(Cannot find module|Module not found|Cannot resolve module)/.test(
-            e.message
-          )
-        ) {
-          console.error(e);
-        }
-
-        console.warn(
-          `Tried to use the icon '${name}' in a component from 'react-native-paper', but 'react-native-vector-icons' could not be loaded.`,
-          `To remove this warning, try installing 'react-native-vector-icons' or use another method to specify icon: https://callstack.github.io/react-native-paper/icons.html.`
-        );
-
-        isErrorLogged = true;
-      }
-
-      return (
-        <Text
-          {...rest}
-          style={[styles.icon, { color, fontSize: size }]}
-          pointerEvents="none"
-        >
-          □
-        </Text>
-      );
-    };
-  }
-}
+import { Consumer as SettingsConsumer } from '../core/settings';
+import { accessibilityProps } from './MaterialCommunityIcon';
 
 type IconSourceBase = string | ImageSourcePropType;
 
@@ -124,17 +74,6 @@ const Icon = ({ source, color, size, ...rest }: Props) => {
       ? source.source
       : source;
 
-  const accessibilityProps =
-    Platform.OS === 'web'
-      ? {
-          role: 'img',
-          focusable: false,
-        }
-      : {
-          accessibilityElementsHidden: true,
-          importantForAccessibility: 'no-hide-descendants' as 'no-hide-descendants',
-        };
-
   if (isImageSource(s)) {
     return (
       <Image
@@ -157,20 +96,16 @@ const Icon = ({ source, color, size, ...rest }: Props) => {
     );
   } else if (typeof s === 'string') {
     return (
-      <MaterialIcons
-        {...rest}
-        name={s}
-        color={color}
-        size={size}
-        style={[
-          {
-            transform: [{ scaleX: direction === 'rtl' ? -1 : 1 }],
-          },
-          styles.icon,
-        ]}
-        pointerEvents="none"
-        {...accessibilityProps}
-      />
+      <SettingsConsumer>
+        {({ icon }) => {
+          return icon({
+            name: s,
+            color,
+            size,
+            direction,
+          });
+        }}
+      </SettingsConsumer>
     );
   } else if (typeof s === 'function') {
     return s({ color, size, direction });
@@ -180,9 +115,3 @@ const Icon = ({ source, color, size, ...rest }: Props) => {
 };
 
 export default Icon;
-
-const styles = StyleSheet.create({
-  icon: {
-    backgroundColor: 'transparent',
-  },
-});

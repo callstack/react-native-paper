@@ -35,7 +35,7 @@ class ActivityIndicatorExample extends React.Component<Props, State> {
         <View style={styles.row}>
           <FAB
             small
-            icon={this.state.animating ? 'pause' : 'play-arrow'}
+            icon={this.state.animating ? 'pause' : 'play'}
             onPress={() => {
               this.setState({
                 animating: !this.state.animating,

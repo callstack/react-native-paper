@@ -55,7 +55,7 @@ class CardExample extends React.Component<Props> {
             subtitle="Omega Ruby"
             left={(props: any) => <Avatar.Icon {...props} icon="folder" />}
             right={(props: any) => (
-              <IconButton {...props} icon="more-vert" onPress={() => {}} />
+              <IconButton {...props} icon="dots-vertical" onPress={() => {}} />
             )}
           />
           <Card.Content>
@@ -76,7 +76,7 @@ class CardExample extends React.Component<Props> {
             title="Just Strawberries"
             subtitle="... and only Strawberries"
             right={(props: any) => (
-              <IconButton {...props} icon="expand-more" onPress={() => {}} />
+              <IconButton {...props} icon="chevron-down" onPress={() => {}} />
             )}
           />
         </Card>
@@ -103,7 +103,7 @@ class CardExample extends React.Component<Props> {
           <Card.Cover source={require('../../assets/images/city.jpg')} />
           <Card.Title
             title="Long Pressable City"
-            left={props => <Avatar.Icon {...props} icon="location-city" />}
+            left={props => <Avatar.Icon {...props} icon="city" />}
           />
           <Card.Content>
             <Paragraph>

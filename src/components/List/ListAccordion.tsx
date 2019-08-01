@@ -205,7 +205,7 @@ class ListAccordion extends React.Component<Props, State> {
               style={[styles.item, description ? styles.multiline : undefined]}
             >
               <Icon
-                source={expanded ? 'keyboard-arrow-up' : 'keyboard-arrow-down'}
+                source={expanded ? 'chevron-up' : 'chevron-down'}
                 color={titleColor}
                 size={24}
               />

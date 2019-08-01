@@ -73,7 +73,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
  *
  * const MyComponent = () => (
  *   <IconButton
- *     icon="add-a-photo"
+ *     icon="camera"
  *     color={Colors.red500}
  *     size={20}
  *     onPress={() => console.log('Pressed')}

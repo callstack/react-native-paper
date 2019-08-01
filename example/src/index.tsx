@@ -68,8 +68,8 @@ export default class PaperExample extends React.Component<{}, State> {
           <React.Fragment>
             <style type="text/css">{`
               @font-face {
-                font-family: 'MaterialIcons';
-                src: url(${require('react-native-vector-icons/Fonts/MaterialIcons.ttf')}) format('truetype');
+                font-family: 'MaterialCommunityIcons';
+                src: url(${require('react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf')}) format('truetype');
               }
             `}</style>
             <App />

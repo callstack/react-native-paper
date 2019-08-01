@@ -168,7 +168,7 @@ exports[`renders button with icon 1`] = `
                 },
               ],
               Object {
-                "fontFamily": "Material Icons",
+                "fontFamily": "Material Design Icons",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
@@ -176,7 +176,7 @@ exports[`renders button with icon 1`] = `
             ]
           }
         >
-          
+          
         </Text>
       </View>
       <Text

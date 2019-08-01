@@ -14,6 +14,7 @@ import Surface from './Surface';
 import { withTheme } from '../core/theming';
 import { Theme } from '../types';
 import { IconSource } from './Icon';
+import MaterialCommunityIcon from './MaterialCommunityIcon';
 
 type Props = React.ComponentProps<typeof TextInput> & {
   /**
@@ -170,7 +171,17 @@ class Searchbar extends React.Component<Props> {
           rippleColor={rippleColor}
           onPress={onIconPress}
           color={iconColor}
-          icon={icon || 'search'}
+          icon={
+            icon ||
+            (({ size, color }) => (
+              <MaterialCommunityIcon
+                name="magnify"
+                color={color}
+                size={size}
+                direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+              />
+            ))
+          }
         />
         <TextInput
           style={[styles.input, { color: textColor, ...font }, inputStyle]}
@@ -194,7 +205,17 @@ class Searchbar extends React.Component<Props> {
           color={value ? iconColor : 'rgba(255, 255, 255, 0)'}
           rippleColor={rippleColor}
           onPress={this._handleClearPress}
-          icon={clearIcon || 'close'}
+          icon={
+            clearIcon ||
+            (({ size, color }) => (
+              <MaterialCommunityIcon
+                name="close"
+                color={color}
+                size={size}
+                direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+              />
+            ))
+          }
           accessibilityTraits="button"
           accessibilityComponentType="button"
           accessibilityRole="button"
