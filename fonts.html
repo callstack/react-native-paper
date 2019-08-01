@@ -12,16 +12,25 @@
             </svg>
           </a>
         Installing custom fonts</h2>
-<p>The easiest way to install custom fonts to your RN project is do as follow:</p>
+<p>The easiest way to install custom fonts to your RN project is do as follows:</p>
 <ol>
-<li><p>Define path to asssets directory with fonts in project '<code>package.json</code>'</p>
+<li><p>Define path to asssets directory with fonts in project:</p>
 <p>Example:</p>
-<pre><code class="language-js"><span class="token operator">...</span>
+<pre><code class="language-js"><span class="token comment">// React Native &lt; 0.60 package.json</span>
+<span class="token operator">...</span>
  <span class="token string">"rnpm"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
    <span class="token string">"assets"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
      <span class="token string">"fonts"</span>
    <span class="token punctuation">]</span>
  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token operator">...</span>
+
+<span class="token comment">// React Native &gt;= 0.60 react-native.config.js</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token operator">...</span>
+<span class="token string">"assets"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+ <span class="token string">"fonts"</span>
+<span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token operator">...</span></code></pre>
 <p>Note: fonts is a folder with .ttf files</p>
 </li>
