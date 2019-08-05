@@ -18,6 +18,7 @@ const InputLabel = (props: InputLabelProps) => {
     baseLabelTranslateY,
     font,
     fontSize,
+    fontWeight,
     placeholderOpacity,
     wiggleOffsetX,
     labelScale,
@@ -41,6 +42,7 @@ const InputLabel = (props: InputLabelProps) => {
   const labelStyle = {
     ...font,
     fontSize,
+    fontWeight,
     transform: [
       {
         // Wiggle the label when there's an error
