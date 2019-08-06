@@ -111,7 +111,6 @@ exports[`renders list section with custom title style 1`] = `
       }
     >
       <View
-        pointerEvents="box-none"
         style={
           Array [
             Object {
@@ -129,40 +128,57 @@ exports[`renders list section with custom title style 1`] = `
           ]
         }
       >
-        <Text
-          accessibilityElementsHidden={true}
-          allowFontScaling={false}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
+        <View
+          accessible={true}
+          isTVSelectable={true}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Array [
-              Object {
-                "color": "rgba(0, 0, 0, 0.54)",
-                "fontSize": 24,
-              },
-              Array [
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
+              false,
+              undefined,
             ]
           }
         >
-          
-        </Text>
+          <Text
+            accessibilityElementsHidden={true}
+            allowFontScaling={false}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            style={
+              Array [
+                Object {
+                  "color": "rgba(0, 0, 0, 0.54)",
+                  "fontSize": 24,
+                },
+                Array [
+                  Object {
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+                Object {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
+              ]
+            }
+          >
+            
+          </Text>
+        </View>
       </View>
       <View
         pointerEvents="none"
@@ -236,7 +252,6 @@ exports[`renders list section with custom title style 1`] = `
       }
     >
       <View
-        pointerEvents="box-none"
         style={
           Array [
             Object {
@@ -254,40 +269,57 @@ exports[`renders list section with custom title style 1`] = `
           ]
         }
       >
-        <Text
-          accessibilityElementsHidden={true}
-          allowFontScaling={false}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
+        <View
+          accessible={true}
+          isTVSelectable={true}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Array [
-              Object {
-                "color": "rgba(0, 0, 0, 0.54)",
-                "fontSize": 24,
-              },
-              Array [
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
+              false,
+              undefined,
             ]
           }
         >
-          
-        </Text>
+          <Text
+            accessibilityElementsHidden={true}
+            allowFontScaling={false}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            style={
+              Array [
+                Object {
+                  "color": "rgba(0, 0, 0, 0.54)",
+                  "fontSize": 24,
+                },
+                Array [
+                  Object {
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+                Object {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
+              ]
+            }
+          >
+            
+          </Text>
+        </View>
       </View>
       <View
         pointerEvents="none"
@@ -444,7 +476,6 @@ exports[`renders list section with subheader 1`] = `
       }
     >
       <View
-        pointerEvents="box-none"
         style={
           Array [
             Object {
@@ -462,40 +493,57 @@ exports[`renders list section with subheader 1`] = `
           ]
         }
       >
-        <Text
-          accessibilityElementsHidden={true}
-          allowFontScaling={false}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
+        <View
+          accessible={true}
+          isTVSelectable={true}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Array [
-              Object {
-                "color": "rgba(0, 0, 0, 0.54)",
-                "fontSize": 24,
-              },
-              Array [
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
+              false,
+              undefined,
             ]
           }
         >
-          
-        </Text>
+          <Text
+            accessibilityElementsHidden={true}
+            allowFontScaling={false}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            style={
+              Array [
+                Object {
+                  "color": "rgba(0, 0, 0, 0.54)",
+                  "fontSize": 24,
+                },
+                Array [
+                  Object {
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+                Object {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
+              ]
+            }
+          >
+            
+          </Text>
+        </View>
       </View>
       <View
         pointerEvents="none"
@@ -569,7 +617,6 @@ exports[`renders list section with subheader 1`] = `
       }
     >
       <View
-        pointerEvents="box-none"
         style={
           Array [
             Object {
@@ -587,40 +634,57 @@ exports[`renders list section with subheader 1`] = `
           ]
         }
       >
-        <Text
-          accessibilityElementsHidden={true}
-          allowFontScaling={false}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
+        <View
+          accessible={true}
+          isTVSelectable={true}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Array [
-              Object {
-                "color": "rgba(0, 0, 0, 0.54)",
-                "fontSize": 24,
-              },
-              Array [
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
+              false,
+              undefined,
             ]
           }
         >
-          
-        </Text>
+          <Text
+            accessibilityElementsHidden={true}
+            allowFontScaling={false}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            style={
+              Array [
+                Object {
+                  "color": "rgba(0, 0, 0, 0.54)",
+                  "fontSize": 24,
+                },
+                Array [
+                  Object {
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+                Object {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
+              ]
+            }
+          >
+            
+          </Text>
+        </View>
       </View>
       <View
         pointerEvents="none"
@@ -749,7 +813,6 @@ exports[`renders list section without subheader 1`] = `
       }
     >
       <View
-        pointerEvents="box-none"
         style={
           Array [
             Object {
@@ -767,40 +830,57 @@ exports[`renders list section without subheader 1`] = `
           ]
         }
       >
-        <Text
-          accessibilityElementsHidden={true}
-          allowFontScaling={false}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
+        <View
+          accessible={true}
+          isTVSelectable={true}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Array [
-              Object {
-                "color": "rgba(0, 0, 0, 0.54)",
-                "fontSize": 24,
-              },
-              Array [
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
+              false,
+              undefined,
             ]
           }
         >
-          
-        </Text>
+          <Text
+            accessibilityElementsHidden={true}
+            allowFontScaling={false}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            style={
+              Array [
+                Object {
+                  "color": "rgba(0, 0, 0, 0.54)",
+                  "fontSize": 24,
+                },
+                Array [
+                  Object {
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+                Object {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
+              ]
+            }
+          >
+            
+          </Text>
+        </View>
       </View>
       <View
         pointerEvents="none"
@@ -874,7 +954,6 @@ exports[`renders list section without subheader 1`] = `
       }
     >
       <View
-        pointerEvents="box-none"
         style={
           Array [
             Object {
@@ -892,40 +971,57 @@ exports[`renders list section without subheader 1`] = `
           ]
         }
       >
-        <Text
-          accessibilityElementsHidden={true}
-          allowFontScaling={false}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
+        <View
+          accessible={true}
+          isTVSelectable={true}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Array [
-              Object {
-                "color": "rgba(0, 0, 0, 0.54)",
-                "fontSize": 24,
-              },
-              Array [
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
+              false,
+              undefined,
             ]
           }
         >
-          
-        </Text>
+          <Text
+            accessibilityElementsHidden={true}
+            allowFontScaling={false}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            style={
+              Array [
+                Object {
+                  "color": "rgba(0, 0, 0, 0.54)",
+                  "fontSize": 24,
+                },
+                Array [
+                  Object {
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+                Object {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
+              ]
+            }
+          >
+            
+          </Text>
+        </View>
       </View>
       <View
         pointerEvents="none"

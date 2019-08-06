@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 import Icon, { IconSource } from '../Icon';
+import TouchableRipple from '../TouchableRipple';
 
 type Props = {
   /**
@@ -11,6 +12,10 @@ type Props = {
    * Color for the icon.
    */
   color: string;
+  /**
+   * Function to execute on press.
+   */
+  onPress?: () => void;
   style?: StyleProp<ViewStyle>;
 };
 
@@ -33,11 +38,13 @@ export default class ListIcon extends React.Component<Props> {
   static displayName = 'List.Icon';
 
   render() {
-    const { icon, color: iconColor, style } = this.props;
+    const { icon, color: iconColor, onPress, style } = this.props;
 
     return (
-      <View style={[styles.item, style]} pointerEvents="box-none">
-        <Icon source={icon} size={24} color={iconColor} />
+      <View style={[styles.item, style]}>
+        <TouchableRipple onPress={onPress}>
+          <Icon source={icon} size={24} color={iconColor} />
+        </TouchableRipple>
       </View>
     );
   }

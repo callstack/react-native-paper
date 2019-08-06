@@ -13,8 +13,14 @@ type Props = {
   theme: Theme;
 };
 
-class ListSectionExample extends React.Component<Props> {
+type State = {
+  listControlExampleSelected: boolean;
+};
+
+class ListSectionExample extends React.Component<Props, State> {
   static title = 'List.Section';
+
+  state = { listControlExampleSelected: false };
 
   render() {
     const {
@@ -22,6 +28,9 @@ class ListSectionExample extends React.Component<Props> {
         colors: { background },
       },
     } = this.props;
+
+    const { listControlExampleSelected } = this.state;
+
     return (
       <ScrollView style={[styles.container, { backgroundColor: background }]}>
         <List.Section>
@@ -124,6 +133,31 @@ class ListSectionExample extends React.Component<Props> {
                 </View>
               </View>
             )}
+          />
+        </List.Section>
+        <Divider />
+        <List.Section>
+          <List.Subheader>List controls</List.Subheader>
+          <List.Item
+            left={() => (
+              <Image
+                source={require('../../assets/images/email-icon.png')}
+                style={styles.image}
+              />
+            )}
+            right={props => (
+              <List.Icon
+                {...props}
+                icon={listControlExampleSelected ? 'star' : 'star-outline'}
+                onPress={() =>
+                  this.setState(prevState => ({
+                    listControlExampleSelected: !prevState.listControlExampleSelected,
+                  }))
+                }
+              />
+            )}
+            title="List item 1"
+            description="Describes item 1. Example of list control."
           />
         </List.Section>
       </ScrollView>
