@@ -18,13 +18,7 @@ jest.mock('Animated', () => {
   };
 });
 
-const icons = [
-  '3d-rotation',
-  'ac-unit',
-  'access-alarm',
-  'access-alarms',
-  'access-time',
-];
+const icons = ['magnify', 'camera', 'inbox', 'heart', 'shopping-music'];
 
 const createState = (index, length) => ({
   index,

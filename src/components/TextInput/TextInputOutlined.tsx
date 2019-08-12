@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   View,
-  Animated,
   TextInput as NativeTextInput,
   StyleSheet,
   I18nManager,
@@ -9,16 +8,16 @@ import {
   TextStyle,
 } from 'react-native';
 import color from 'color';
-import AnimatedText from '../Typography/AnimatedText';
-import InputLabel from './InputLabel';
+
+import InputLabel from './Label/InputLabel';
+import LabelBackground from './Label/LabelBackground';
 import { RenderProps, ChildTextInputProps } from './types';
-import { Theme, Font } from '../../types';
+import { Theme } from '../../types';
 
 import {
   MAXIMIZED_LABEL_FONT_SIZE,
   MINIMIZED_LABEL_FONT_SIZE,
   LABEL_WIGGLE_X_OFFSET,
-  LABEL_PADDING_HORIZONTAL,
 } from './constants';
 
 import {
@@ -34,6 +33,7 @@ const OUTLINE_MINIMIZED_LABEL_Y_OFFSET = -6;
 const LABEL_PADDING_TOP = 8;
 const MIN_HEIGHT = 64;
 const MIN_DENSE_HEIGHT = 48;
+const INPUT_PADDING_HORIZONTAL = 14;
 
 class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
   static defaultProps = {
@@ -70,12 +70,12 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
     const { colors, fonts } = theme;
     const font = fonts.regular;
     const hasActiveOutline = parentState.focused || error;
-    const { backgroundColor = colors.background } =
-      StyleSheet.flatten(style) || {};
 
     const {
       fontSize: fontSizeStyle,
+      fontWeight,
       height,
+      backgroundColor = colors.background,
       ...viewStyle
     } = (StyleSheet.flatten(style) || {}) as TextStyle;
     const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
@@ -169,12 +169,14 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       baseLabelTranslateX,
       font,
       fontSize,
+      fontWeight,
       labelScale,
       wiggleOffsetX: LABEL_WIGGLE_X_OFFSET,
       topPosition,
       hasActiveOutline,
       activeColor,
       placeholderColor,
+      backgroundColor,
     };
 
     const minHeight = height || (dense ? MIN_DENSE_HEIGHT : MIN_HEIGHT);
@@ -192,6 +194,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
             hasActiveOutline={hasActiveOutline}
             activeColor={activeColor}
             outlineColor={outlineColor}
+            backgroundColor={backgroundColor}
           />
           <View
             style={{
@@ -200,14 +203,11 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
               minHeight,
             }}
           >
-            <OutlinedLabel
+            <InputLabel
               parentState={parentState}
-              label={label}
-              backgroundColor={backgroundColor}
-              font={font}
+              labelProps={labelProps}
+              labelBackground={LabelBackground}
             />
-
-            <InputLabel parentState={parentState} labelProps={labelProps} />
 
             {render &&
               render({
@@ -234,9 +234,10 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
                     : {},
                   paddingOut,
                   {
-                    fontSize,
-                    color: inputTextColor,
                     ...font,
+                    fontSize,
+                    fontWeight,
+                    color: inputTextColor,
                     textAlignVertical: multiline && height ? 'top' : 'center',
                   },
                 ],
@@ -254,6 +255,7 @@ type OutlineType = {
   activeColor: string;
   hasActiveOutline: boolean | undefined;
   outlineColor: string | undefined;
+  backgroundColor: string | undefined;
   theme: Theme;
 };
 
@@ -262,6 +264,7 @@ const Outline = ({
   hasActiveOutline,
   activeColor,
   outlineColor,
+  backgroundColor,
 }: OutlineType) => (
   <View
     pointerEvents="none"
@@ -269,6 +272,7 @@ const Outline = ({
       styles.outline,
       // eslint-disable-next-line react-native/no-inline-styles
       {
+        backgroundColor,
         borderRadius: theme.roundness,
         borderWidth: hasActiveOutline ? 2 : 1,
         borderColor: hasActiveOutline ? activeColor : outlineColor,
@@ -277,62 +281,11 @@ const Outline = ({
   />
 );
 
-type OutlinedLabel = {
-  backgroundColor: string;
-  font: Font;
-  label?: string;
-  parentState: {
-    labeled: Animated.Value;
-  };
-};
-
-const OutlinedLabel = ({
-  parentState,
-  label,
-  backgroundColor,
-  font,
-}: OutlinedLabel) =>
-  label ? (
-    // The input label stays on top of the outline
-    // The background of the label covers the outline so it looks cut off
-    // To achieve the effect, we position the actual label with a background on top of it
-    // We set the color of the text to transparent so only the background is visible
-    <AnimatedText
-      pointerEvents="none"
-      style={[
-        styles.outlinedLabelBackground,
-        {
-          backgroundColor,
-          ...font,
-          fontSize: MINIMIZED_LABEL_FONT_SIZE,
-          // Hide the background when scale will be 0
-          // There's a bug in RN which makes scale: 0 act weird
-          opacity: parentState.labeled.interpolate({
-            inputRange: [0, 0.9, 1],
-            outputRange: [1, 1, 0],
-          }),
-          transform: [
-            {
-              // Animate the scale when label is moved up
-              scaleX: parentState.labeled.interpolate({
-                inputRange: [0, 1],
-                outputRange: [1, 0],
-              }),
-            },
-          ],
-        },
-      ]}
-      numberOfLines={1}
-    >
-      {label}
-    </AnimatedText>
-  ) : null;
-
 const styles = StyleSheet.create({
   placeholder: {
     position: 'absolute',
     left: 0,
-    paddingHorizontal: LABEL_PADDING_HORIZONTAL,
+    paddingHorizontal: INPUT_PADDING_HORIZONTAL,
   },
   outline: {
     position: 'absolute',
@@ -341,16 +294,9 @@ const styles = StyleSheet.create({
     top: 6,
     bottom: 0,
   },
-  outlinedLabelBackground: {
-    position: 'absolute',
-    top: 0,
-    left: 8,
-    paddingHorizontal: 4,
-    color: 'transparent',
-  },
   input: {
     flexGrow: 1,
-    paddingHorizontal: 12,
+    paddingHorizontal: INPUT_PADDING_HORIZONTAL,
     margin: 0,
     textAlign: I18nManager.isRTL ? 'right' : 'left',
     zIndex: 1,

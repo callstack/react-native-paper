@@ -1,11 +1,11 @@
 import React from 'react';
 import { Animated, StyleSheet } from 'react-native';
-import AnimatedText from '../Typography/AnimatedText';
+import AnimatedText from '../../Typography/AnimatedText';
 
-import { InputLabelProps } from './types';
+import { InputLabelProps } from '../types';
 
 const InputLabel = (props: InputLabelProps) => {
-  const { parentState } = props;
+  const { parentState, labelBackground } = props;
 
   const {
     label,
@@ -18,6 +18,7 @@ const InputLabel = (props: InputLabelProps) => {
     baseLabelTranslateY,
     font,
     fontSize,
+    fontWeight,
     placeholderOpacity,
     wiggleOffsetX,
     labelScale,
@@ -41,6 +42,7 @@ const InputLabel = (props: InputLabelProps) => {
   const labelStyle = {
     ...font,
     fontSize,
+    fontWeight,
     transform: [
       {
         // Wiggle the label when there's an error
@@ -85,6 +87,12 @@ const InputLabel = (props: InputLabelProps) => {
         labelTranslationX,
       ]}
     >
+      {labelBackground &&
+        labelBackground({
+          parentState,
+          labelStyle,
+          labelProps: props.labelProps,
+        })}
       <AnimatedText
         onLayout={onLayoutAnimatedText}
         style={[

@@ -80,7 +80,7 @@ type State = {
  *   <FAB
  *     style={styles.fab}
  *     small
- *     icon="add"
+ *     icon="plus"
  *     onPress={() => console.log('Pressed')}
  *   />
  * );

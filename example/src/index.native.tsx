@@ -14,6 +14,7 @@ import {
   DefaultTheme,
   Theme,
 } from 'react-native-paper';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createDrawerNavigator } from 'react-navigation';
 import RootNavigator from './RootNavigator';
 import DrawerItems from './DrawerItems';
@@ -116,7 +117,12 @@ export default class PaperExample extends React.Component<{}, State> {
 
   render() {
     return (
-      <PaperProvider theme={this.state.theme}>
+      <PaperProvider
+        settings={{
+          icon: ({ ...props }) => <Icon {...props} />,
+        }}
+        theme={this.state.theme}
+      >
         <PreferencesContext.Provider
           value={{
             theme: this._toggleTheme,

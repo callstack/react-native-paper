@@ -82,7 +82,7 @@ it('renders list item with custom description', () => {
               Design library that has you covered in all major use-cases.
             </Text>
             <View>
-              <Chip icon="picture-as-pdf" onPress={() => {}}>
+              <Chip icon="file-pdf" onPress={() => {}}>
                 DOCS.pdf
               </Chip>
             </View>

@@ -106,7 +106,7 @@ type State = {
  * import { Chip } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Chip icon="info" onPress={() => console.log('Pressed')}>Example Chip</Chip>
+ *   <Chip icon="information" onPress={() => console.log('Pressed')}>Example Chip</Chip>
  * );
  *
  * export default MyComponent;
@@ -274,7 +274,7 @@ class Chip extends React.Component<Props, State> {
                 ]}
               >
                 <Icon
-                  source={icon || 'done'}
+                  source={icon || 'check'}
                   color={avatar ? white : iconColor}
                   size={18}
                 />

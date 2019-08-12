@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { $Omit } from './../../types';
 import AppbarAction from './AppbarAction';
+import MaterialCommunityIcon from '../MaterialCommunityIcon';
 
 type Props = $Omit<
   React.ComponentProps<typeof AppbarAction> & {
@@ -52,26 +53,31 @@ class AppbarBackAction extends React.Component<Props> {
     return (
       <AppbarAction
         {...this.props}
-        icon={
-          Platform.OS === 'ios'
-            ? ({ size, color }: { size: number; color: string }) => (
-                <View
-                  style={[
-                    styles.wrapper,
-                    {
-                      width: size,
-                      height: size,
-                      transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }],
-                    },
-                  ]}
-                >
-                  <Image
-                    source={require('../../assets/back-chevron.png')}
-                    style={[styles.icon, { tintColor: color }]}
-                  />
-                </View>
-              )
-            : { source: 'arrow-back', direction: 'auto' }
+        icon={({ size, color }: { size: number; color: string }) =>
+          Platform.OS === 'ios' ? (
+            <View
+              style={[
+                styles.wrapper,
+                {
+                  width: size,
+                  height: size,
+                  transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }],
+                },
+              ]}
+            >
+              <Image
+                source={require('../../assets/back-chevron.png')}
+                style={[styles.icon, { tintColor: color }]}
+              />
+            </View>
+          ) : (
+            <MaterialCommunityIcon
+              name="arrow-left"
+              color={color}
+              size={size}
+              direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+            />
+          )
         }
       />
     );

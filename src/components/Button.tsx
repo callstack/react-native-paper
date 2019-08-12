@@ -100,7 +100,7 @@ type State = {
  * import { Button } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Button icon="add-a-photo" mode="contained" onPress={() => console.log('Pressed')}>
+ *   <Button icon="camera" mode="contained" onPress={() => console.log('Pressed')}>
  *     Press me
  *   </Button>
  * );

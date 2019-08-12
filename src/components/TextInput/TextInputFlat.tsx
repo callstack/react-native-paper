@@ -9,7 +9,7 @@ import {
   TextStyle,
 } from 'react-native';
 import color from 'color';
-import InputLabel from './InputLabel';
+import InputLabel from './Label/InputLabel';
 import { RenderProps, ChildTextInputProps } from './types';
 
 import {
@@ -77,6 +77,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
 
     const {
       fontSize: fontSizeStyle,
+      fontWeight,
       height,
       ...viewStyle
     } = (StyleSheet.flatten(style) || {}) as TextStyle;
@@ -190,6 +191,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       baseLabelTranslateX,
       font,
       fontSize,
+      fontWeight,
       labelScale,
       wiggleOffsetX: LABEL_WIGGLE_X_OFFSET,
       topPosition,
@@ -252,9 +254,10 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
                   : {},
                 paddingFlat,
                 {
-                  fontSize,
-                  color: inputTextColor,
                   ...font,
+                  fontSize,
+                  fontWeight,
+                  color: inputTextColor,
                   textAlignVertical: multiline && height ? 'top' : 'center',
                 },
               ],

@@ -27,7 +27,7 @@ const DrawerItemsData = [
   { label: 'Inbox', icon: 'inbox', key: 0 },
   { label: 'Starred', icon: 'star', key: 1 },
   { label: 'Sent mail', icon: 'send', key: 2 },
-  { label: 'Colored label', icon: 'color-lens', key: 3 },
+  { label: 'Colored label', icon: 'palette', key: 3 },
   { label: 'A very long title that will be truncated', icon: 'delete', key: 4 },
 ];
 

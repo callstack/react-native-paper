@@ -19,7 +19,7 @@ type Props = {
   navigation: any;
 };
 
-const MORE_ICON = Platform.OS === 'ios' ? 'more-horiz' : 'more-vert';
+const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
 class MenuExample extends React.Component<Props, State> {
   static navigationOptions = {
