@@ -53,7 +53,6 @@ export const RadioButtonContext = React.createContext<RadioButtonContextType>(
  *           <RadioButton value="second" />
  *         </View>
  *       </RadioButton.Group>
- *     )
  *   }
  * }
  *```
