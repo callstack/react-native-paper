@@ -18,12 +18,12 @@ Many components such as `Button` accept an `icon` prop which is used to display 
 
 ### 1. An icon name
 
-You can pass the name of an icon from [`MaterialIcon`](https://material.io/icons/). This will use the [`react-native-vector-icons`](https://github.com/oblador/react-native-vector-icons) library to display the icon.
+You can pass the name of an icon from [`MaterialCommunityIcons`](https://materialdesignicons.com). This will use the [`react-native-vector-icons`](https://github.com/oblador/react-native-vector-icons) library to display the icon.
 
 Example:
 
 ```js
-<Button icon="add-a-photo">
+<Button icon="camera">
   Press me
 </Button>
 ```
@@ -69,6 +69,26 @@ Example:
 >
   Press me
 </Button>
+```
+
+### 4. Use custom icons
+
+If you want to use other icons than `MaterialCommunityIcons` you need to import your icons and pass it to `settings` prop within `PaperProvider`.
+
+Example:
+
+```js
+import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
+// ...
+
+      <PaperProvider
+        settings={{
+          icon: props => <AwesomeIcon {...props} />,
+        }}
+        theme={this.state.theme}
+      >
+        // ...
+      </PaperProvider>
 ```
 
 ## RTL support
