@@ -83,7 +83,7 @@ import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
       <PaperProvider
         settings={{
-          icon: ({ ...props }) => <AwesomeIcon {...props} />,
+          icon: props => <AwesomeIcon {...props} />,
         }}
         theme={this.state.theme}
       >
