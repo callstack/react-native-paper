@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { styled } from 'linaria/react';
-import icons from 'react-native-vector-icons/glyphmaps/MaterialIcons.json';
+import icons from 'react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json';
 
 type State = {
   query: string,
@@ -97,7 +97,7 @@ const IconContainer = styled.button`
 const Icon = styled.span`
   display: block;
   margin: 16px;
-  font-family: 'MaterialIcons';
+  font-family: 'MaterialCommunityIcons';
   font-size: 48px;
 `;
 
