@@ -71,6 +71,26 @@ Example:
 </Button>
 ```
 
+### 4. Use custom icons
+
+If you want to use other icons than `MaterialCommunityIcons` you need to import your icons and pass it to `settings` prop within `PaperProvider`.
+
+Example:
+
+```js
+import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
+// ...
+
+      <PaperProvider
+        settings={{
+          icon: ({ ...props }) => <AwesomeIcon {...props} />,
+        }}
+        theme={this.state.theme}
+      >
+        // ...
+      </PaperProvider>
+```
+
 ## RTL support
 
 If you want your icon to behave properly in a RTL environment, you can pass an object to the `icon` prop with shape: `{ source: { uri: 'https://path.to' }, direction : 'rtl' }`. `source` can be any of the values that the `icon` prop accepts in [option 1](#1.-an-icon-name) and [option 2](#2.-an-image-source). For `direction` you have few options:
