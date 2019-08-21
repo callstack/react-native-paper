@@ -169,7 +169,7 @@ exports[`renders chip with close button 1`] = `
             ]
           }
         >
-          
+          
         </Text>
       </View>
     </View>

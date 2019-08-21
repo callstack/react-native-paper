@@ -217,7 +217,7 @@ class FAB extends React.Component<Props, State> {
             {icon && loading !== true ? (
               <CrossFadeIcon source={icon} size={24} color={foregroundColor} />
             ) : null}
-            {loading && label ? (
+            {loading ? (
               <ActivityIndicator size={18} color={foregroundColor} />
             ) : null}
             {label ? (

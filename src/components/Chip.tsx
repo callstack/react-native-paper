@@ -302,7 +302,7 @@ class Chip extends React.Component<Props, State> {
                 accessibilityComponentType="button"
               >
                 <View style={styles.icon}>
-                  <Icon source="cancel" size={16} color={iconColor} />
+                  <Icon source="close-circle" size={16} color={iconColor} />
                 </View>
               </TouchableWithoutFeedback>
             ) : null}

@@ -72,9 +72,18 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   descriptionStyle?: StyleProp<TextStyle>;
   /**
+   * Truncate Title text such that the total number of lines does not
+   * exceed this number.
+   */
+  titleNumberOfLines?: number;
+  /**
+   * Truncate Description text such that the total number of lines does not
+   * exceed this number.
+   */
+  descriptionNumberOfLines?: number;
+  /**
    * Ellipsize Mode for the Title
    */
-
   titleEllipsizeMode?: EllipsizeProp;
   /**
    * Ellipsize Mode for the Description
@@ -110,11 +119,20 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
 class ListItem extends React.Component<Props> {
   static displayName = 'List.Item';
 
+  static defaultProps: Partial<Props> = {
+    titleNumberOfLines: 1,
+    descriptionNumberOfLines: 2,
+  };
+
   renderDescription(
     descriptionColor: string,
     description?: Description | null
   ) {
-    const { descriptionEllipsizeMode, descriptionStyle } = this.props;
+    const {
+      descriptionEllipsizeMode,
+      descriptionStyle,
+      descriptionNumberOfLines,
+    } = this.props;
 
     return typeof description === 'function' ? (
       description({
@@ -124,7 +142,7 @@ class ListItem extends React.Component<Props> {
       })
     ) : (
       <Text
-        numberOfLines={2}
+        numberOfLines={descriptionNumberOfLines}
         ellipsizeMode={descriptionEllipsizeMode}
         style={[
           styles.description,
@@ -147,6 +165,7 @@ class ListItem extends React.Component<Props> {
       theme,
       style,
       titleStyle,
+      titleNumberOfLines,
       titleEllipsizeMode,
       ...rest
     } = this.props;
@@ -180,7 +199,7 @@ class ListItem extends React.Component<Props> {
           <View style={[styles.item, styles.content]} pointerEvents="none">
             <Text
               ellipsizeMode={titleEllipsizeMode}
-              numberOfLines={1}
+              numberOfLines={titleNumberOfLines}
               style={[styles.title, { color: titleColor }, titleStyle]}
             >
               {title}
