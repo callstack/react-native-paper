@@ -78,13 +78,15 @@ class ProgressBar extends React.Component<Props, State> {
 
   indeterminateAnimation: Animated.CompositeAnimation | null = null;
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps:Props) {
     const { visible } = this.props;
 
-    if (visible) {
-      this._startAnimation();
-    } else {
-      this._stopAnimation();
+    if (visible !== prevProps.visible) {
+      if (visible) {
+        this._startAnimation();
+      } else {
+        this._stopAnimation();
+      }
     }
   }
 
