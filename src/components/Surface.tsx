@@ -32,6 +32,7 @@ type Props = React.ComponentProps<typeof View> & {
  *   <img src="screenshots/surface-dark-1.png" />
  *   <img src="screenshots/surface-dark-2.png" />
  * </div>
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
