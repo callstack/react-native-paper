@@ -27,7 +27,7 @@ type Props = {
   /**
    * Size of the icon.
    */
-  iconSize: number; 
+  iconSize?: number; 
   /**
    * Function to execute on press.
    */
@@ -59,7 +59,7 @@ class DrawerItem extends React.Component<Props> {
   static displayName = 'Drawer.Item';
 
   render() {
-    const { icon, label, active, theme, style, onPress,rippleColor, labelStyle, iconSize = 24,  ...rest } = this.props;
+    const { icon, label, active, theme, style, onPress,rippleColor, labelStyle, iconSize,  ...rest } = this.props;
     const { colors, roundness } = theme;
     const backgroundColor = active
       ? color(colors.primary)
@@ -98,7 +98,7 @@ class DrawerItem extends React.Component<Props> {
         >
           <View style={styles.wrapper}>
             {icon ? (
-              <Icon source={icon} size={iconSize} color={contentColor} />
+              <Icon source={icon} size={iconSize || 24} color={contentColor} />
             ) : null}
             <Text
               numberOfLines={1}

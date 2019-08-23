@@ -102,6 +102,7 @@ exports[`renders DrawerItem with icon 1`] = `
                 "fontWeight": "500",
                 "marginLeft": 32,
               },
+              undefined,
             ],
           ]
         }
@@ -219,6 +220,7 @@ exports[`renders active DrawerItem 1`] = `
                 "fontWeight": "500",
                 "marginLeft": 32,
               },
+              undefined,
             ],
           ]
         }
@@ -298,6 +300,7 @@ exports[`renders basic DrawerItem 1`] = `
                 "fontWeight": "500",
                 "marginLeft": 0,
               },
+              undefined,
             ],
           ]
         }
