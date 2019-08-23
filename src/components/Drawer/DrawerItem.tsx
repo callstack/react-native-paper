@@ -1,6 +1,12 @@
 import color from 'color';
 import * as React from 'react';
-import { View, StyleSheet, StyleProp, ViewStyle, TextStyle } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+  TextStyle,
+} from 'react-native';
 import Text from '../Typography/Text';
 import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple';
@@ -27,13 +33,13 @@ type Props = {
   /**
    * Size of the icon.
    */
-  iconSize?: number; 
+  iconSize?: number;
   /**
    * Function to execute on press.
    */
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
-  labelStyle?: StyleProp<TextStyle>
+  labelStyle?: StyleProp<TextStyle>;
   /**
    * @optional
    */
@@ -59,7 +65,18 @@ class DrawerItem extends React.Component<Props> {
   static displayName = 'Drawer.Item';
 
   render() {
-    const { icon, label, active, theme, style, onPress,rippleColor, labelStyle, iconSize,  ...rest } = this.props;
+    const {
+      icon,
+      label,
+      active,
+      theme,
+      style,
+      onPress,
+      rippleColor,
+      labelStyle,
+      iconSize,
+      ...rest
+    } = this.props;
     const { colors, roundness } = theme;
     const backgroundColor = active
       ? color(colors.primary)
