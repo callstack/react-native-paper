@@ -54,15 +54,7 @@ class BannerExample extends React.Component<Props, State> {
                 },
               },
             ]}
-            image={({ size }) => (
-              <Image
-                source={require('../../assets/images/email-icon.png')}
-                style={{
-                  width: size,
-                  height: size,
-                }}
-              />
-            )}
+            icon={require('../../assets/images/email-icon.png')}
             visible={this.state.visible}
           >
             Two line text string with two actions. One to two lines is
