@@ -13,6 +13,11 @@ import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 
+import {
+  ListAccordionGroupContext,
+  ListAccordionGroupContextType,
+} from './ListAccordionGroup';
+
 type Props = {
   /**
    * Title text for the list accordion.
@@ -66,6 +71,10 @@ type Props = {
    * exceed this number.
    */
   descriptionNumberOfLines?: number;
+  /**
+   * Id is used for distinguishing specific accordion when using List.AccordionGroup. Property is required when using List.AccordionGroup and has no impact on behavior when using standalone List.Accordion.
+   */
+  id?: string | number;
 };
 
 type State = {
@@ -160,6 +169,7 @@ class ListAccordion extends React.Component<Props, State> {
       titleNumberOfLines,
       descriptionNumberOfLines,
       style,
+      id,
     } = this.props;
     const titleColor = color(theme.colors.text)
       .alpha(0.87)
@@ -170,82 +180,105 @@ class ListAccordion extends React.Component<Props, State> {
       .rgb()
       .string();
 
-    const expanded =
+    const expandedInternal =
       this.props.expanded !== undefined
         ? this.props.expanded
         : this.state.expanded;
 
     return (
-      <View>
-        <TouchableRipple
-          style={[styles.container, style]}
-          onPress={this._handlePress}
-          accessibilityTraits="button"
-          accessibilityComponentType="button"
-          accessibilityRole="button"
-        >
-          <View style={styles.row} pointerEvents="none">
-            {left
-              ? left({
-                  color: expanded ? theme.colors.primary : descriptionColor,
-                })
-              : null}
-            <View style={[styles.item, styles.content]}>
-              <Text
-                numberOfLines={titleNumberOfLines}
-                style={[
-                  styles.title,
-                  {
-                    color: expanded ? theme.colors.primary : titleColor,
-                  },
-                  titleStyle,
-                ]}
+      <ListAccordionGroupContext.Consumer>
+        {(groupContext: ListAccordionGroupContextType) => {
+          if (groupContext !== null && !id) {
+            throw new Error(
+              'List.Accordion is used inside a List.AccordionGroup without specifying an id prop.'
+            );
+          }
+          const expanded = groupContext
+            ? groupContext.expandedId === id
+            : expandedInternal;
+          const handlePress =
+            groupContext && id !== undefined
+              ? () => groupContext.onAccordionPress(id)
+              : this._handlePress;
+          return (
+            <View>
+              <TouchableRipple
+                style={[styles.container, style]}
+                onPress={handlePress}
+                accessibilityTraits="button"
+                accessibilityComponentType="button"
+                accessibilityRole="button"
               >
-                {title}
-              </Text>
-              {description && (
-                <Text
-                  numberOfLines={descriptionNumberOfLines}
-                  style={[
-                    styles.description,
-                    {
-                      color: descriptionColor,
-                    },
-                    descriptionStyle,
-                  ]}
-                >
-                  {description}
-                </Text>
-              )}
-            </View>
-            <View
-              style={[styles.item, description ? styles.multiline : undefined]}
-            >
-              <Icon
-                source={expanded ? 'chevron-up' : 'chevron-down'}
-                color={titleColor}
-                size={24}
-              />
-            </View>
-          </View>
-        </TouchableRipple>
-        {expanded
-          ? React.Children.map(children, child => {
-              if (
-                left &&
-                React.isValidElement(child) &&
-                !child.props.left &&
-                !child.props.right
-              ) {
-                return React.cloneElement(child, {
-                  style: [styles.child, child.props.style],
-                });
-              }
+                <View style={styles.row} pointerEvents="none">
+                  {left
+                    ? left({
+                        color: expanded
+                          ? theme.colors.primary
+                          : descriptionColor,
+                      })
+                    : null}
+                  <View style={[styles.item, styles.content]}>
+                    <Text
+                      numberOfLines={titleNumberOfLines}
+                      style={[
+                        styles.title,
+                        {
+                          color: expanded ? theme.colors.primary : titleColor,
+                        },
+                        titleStyle,
+                      ]}
+                    >
+                      {title}
+                    </Text>
+                    {description && (
+                      <Text
+                        numberOfLines={descriptionNumberOfLines}
+                        style={[
+                          styles.description,
+                          {
+                            color: descriptionColor,
+                          },
+                          descriptionStyle,
+                        ]}
+                      >
+                        {description}
+                      </Text>
+                    )}
+                  </View>
+                  <View
+                    style={[
+                      styles.item,
+                      description ? styles.multiline : undefined,
+                    ]}
+                  >
+                    <Icon
+                      source={expanded ? 'chevron-up' : 'chevron-down'}
+                      color={titleColor}
+                      size={24}
+                    />
+                  </View>
+                </View>
+              </TouchableRipple>
+              {expanded
+                ? React.Children.map(children, child => {
+                    if (
+                      left &&
+                      React.isValidElement(child) &&
+                      !child.props.left &&
+                      !child.props.right
+                    ) {
+                      return React.cloneElement(child, {
+                        style: [styles.child, child.props.style],
+                      });
+                    }
 
-              return child;
-            })
-          : null}
-      </View>
+                    return child;
+                  })
+                : null}
+            </View>
+          );
+        }}
+      </ListAccordionGroupContext.Consumer>
     );
   }
 }
