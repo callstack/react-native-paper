@@ -119,6 +119,11 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
 class ListItem extends React.Component<Props> {
   static displayName = 'List.Item';
 
+  static defaultProps: Partial<Props> = {
+    titleNumberOfLines: 1,
+    descriptionNumberOfLines: 2,
+  };
+
   renderDescription(
     descriptionColor: string,
     description?: Description | null
@@ -137,7 +142,7 @@ class ListItem extends React.Component<Props> {
       })
     ) : (
       <Text
-        numberOfLines={descriptionNumberOfLines ? descriptionNumberOfLines : 2}
+        numberOfLines={descriptionNumberOfLines}
         ellipsizeMode={descriptionEllipsizeMode}
         style={[
           styles.description,
@@ -194,7 +199,7 @@ class ListItem extends React.Component<Props> {
           <View style={[styles.item, styles.content]} pointerEvents="none">
             <Text
               ellipsizeMode={titleEllipsizeMode}
-              numberOfLines={titleNumberOfLines ? titleNumberOfLines : 1}
+              numberOfLines={titleNumberOfLines}
               style={[styles.title, { color: titleColor }, titleStyle]}
             >
               {title}

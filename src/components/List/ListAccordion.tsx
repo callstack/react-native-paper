@@ -127,6 +127,11 @@ type State = {
 class ListAccordion extends React.Component<Props, State> {
   static displayName = 'List.Accordion';
 
+  static defaultProps: Partial<Props> = {
+    titleNumberOfLines: 1,
+    descriptionNumberOfLines: 2,
+  };
+
   state = {
     expanded: this.props.expanded || false,
   };
@@ -187,7 +192,7 @@ class ListAccordion extends React.Component<Props, State> {
               : null}
             <View style={[styles.item, styles.content]}>
               <Text
-                numberOfLines={titleNumberOfLines ? titleNumberOfLines : 1}
+                numberOfLines={titleNumberOfLines}
                 style={[
                   styles.title,
                   {
@@ -200,9 +205,7 @@ class ListAccordion extends React.Component<Props, State> {
               </Text>
               {description && (
                 <Text
-                  numberOfLines={
-                    descriptionNumberOfLines ? descriptionNumberOfLines : 2
-                  }
+                  numberOfLines={descriptionNumberOfLines}
                   style={[
                     styles.description,
                     {
