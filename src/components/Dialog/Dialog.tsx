@@ -19,9 +19,13 @@ type Props = {
    */
   onDismiss?: () => void;
   /**
-   * Determines Whether the dialog is visible.
+   * Determines whether the dialog is visible.
    */
   visible: boolean;
+  /**
+   * Determines whether the view resizes when the keyboard is visible.
+   */
+  keyboardAware?: boolean;
   /**
    * Content of the `Dialog`.
    */
@@ -93,6 +97,7 @@ class Dialog extends React.Component<Props> {
   static defaultProps = {
     dismissable: true,
     visible: false,
+    keyboardAware: false,
   };
 
   render() {
@@ -103,6 +108,7 @@ class Dialog extends React.Component<Props> {
       visible,
       style,
       theme,
+      keyboardAware,
     } = this.props;
 
     return (
@@ -110,6 +116,7 @@ class Dialog extends React.Component<Props> {
         dismissable={dismissable}
         onDismiss={onDismiss}
         visible={visible}
+        keyboardAware={keyboardAware}
         contentContainerStyle={[
           {
             borderRadius: theme.roundness,

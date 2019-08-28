@@ -3,12 +3,13 @@ import {
   Animated,
   BackHandler,
   Easing,
+  KeyboardAvoidingView,
   StyleProp,
   StyleSheet,
   TouchableWithoutFeedback,
   ViewStyle,
+  View,
 } from 'react-native';
-import SafeAreaView from 'react-native-safe-area-view';
 import Surface from './Surface';
 import { withTheme } from '../core/theming';
 import { Theme } from '../types';
@@ -26,6 +27,10 @@ type Props = {
    * Determines Whether the modal is visible.
    */
   visible: boolean;
+  /**
+   * Determines whether the view resizes when the keyboard is visible.
+   */
+  keyboardAware?: boolean;
   /**
    * Content of the `Modal`.
    */
@@ -88,6 +93,7 @@ class Modal extends React.Component<Props, State> {
   static defaultProps = {
     dismissable: true,
     visible: false,
+    keyboardAware: false,
   };
 
   static getDerivedStateFromProps(nextProps: Props, prevState: State) {
@@ -176,26 +182,42 @@ class Modal extends React.Component<Props, State> {
   render() {
     if (!this.state.rendered) return null;
 
-    const { children, dismissable, theme, contentContainerStyle } = this.props;
+    const {
+      children,
+      dismissable,
+      keyboardAware,
+      theme,
+      contentContainerStyle,
+    } = this.props;
+
     const { colors } = theme;
+
+    const SurfaceWrapper = keyboardAware ? KeyboardAvoidingView : View;
+
     return (
       <Animated.View
         pointerEvents={this.props.visible ? 'auto' : 'none'}
         accessibilityViewIsModal
         accessibilityLiveRegion="polite"
-        style={StyleSheet.absoluteFill}
+        style={styles.container}
       >
         <TouchableWithoutFeedback
           onPress={dismissable ? this._hideModal : undefined}
         >
-          <Animated.View
+          <View
             style={[
               styles.backdrop,
-              { backgroundColor: colors.backdrop, opacity: this.state.opacity },
+              {
+                backgroundColor: colors.backdrop,
+              },
             ]}
           />
         </TouchableWithoutFeedback>
-        <SafeAreaView style={styles.wrapper}>
+        <SurfaceWrapper
+          style={styles.wrapper}
+          pointerEvents={'box-none'}
+          behavior="padding"
+        >
           <Surface
             style={
               [
@@ -207,7 +229,7 @@ class Modal extends React.Component<Props, State> {
           >
             {children}
           </Surface>
-        </SafeAreaView>
+        </SurfaceWrapper>
       </Animated.View>
     );
   }
@@ -216,6 +238,9 @@ class Modal extends React.Component<Props, State> {
 export default withTheme(Modal);
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   backdrop: {
     flex: 1,
   },

@@ -5,3 +5,4 @@ export {
 export { default as DialogWithLongText } from './DialogWithLongText';
 export { default as DialogWithRadioBtns } from './DialogWithRadioBtns';
 export { default as UndismissableDialog } from './UndismissableDialog';
+export { default as KeyboardAwareDialog } from './KeyboardAwareDialog';
