@@ -257,7 +257,7 @@ class Snackbar extends React.Component<Props, State> {
               compact
               mode="text"
             >
-              {action.label.toUpperCase()}
+              {action.label}
             </Button>
           ) : null}
         </Surface>
