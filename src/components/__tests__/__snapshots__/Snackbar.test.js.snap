@@ -213,6 +213,9 @@ exports[`renders snackbar with action button 1`] = `
                     "marginHorizontal": 8,
                   },
                   Object {
+                    "textTransform": "uppercase",
+                  },
+                  Object {
                     "color": "#03dac4",
                     "fontFamily": "System",
                     "fontWeight": "500",
@@ -225,7 +228,7 @@ exports[`renders snackbar with action button 1`] = `
               ]
             }
           >
-            UNDO
+            Undo
           </Text>
         </View>
       </View>

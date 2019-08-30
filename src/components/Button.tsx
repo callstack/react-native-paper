@@ -268,15 +268,12 @@ class Button extends React.Component<Props, State> {
               style={[
                 styles.label,
                 compact && styles.compactLabel,
+                uppercase && styles.uppercaseLabel,
                 textStyle,
                 font,
               ]}
             >
-              {React.Children.map(children, child =>
-                typeof child === 'string' && uppercase
-                  ? child.toUpperCase()
-                  : child
-              )}
+              {children}
             </Text>
           </View>
         </TouchableRipple>
@@ -311,6 +308,9 @@ const styles = StyleSheet.create({
   },
   compactLabel: {
     marginHorizontal: 8,
+  },
+  uppercaseLabel: {
+    textTransform: 'uppercase',
   },
 });
 
