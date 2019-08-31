@@ -5,9 +5,9 @@
   "main": "lib/module/index.js",
   "types": "lib/typescript/src/index.d.ts",
   "files": [
-    "src",
     "lib",
-    "dist"
+    "dist",
+    "babel.js"
   ],
   "sideEffects": false,
   "repository": {
