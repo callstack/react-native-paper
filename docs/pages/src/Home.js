@@ -12,7 +12,9 @@ export default class Home extends React.Component<{}> {
     super(props);
     this.state = { isDark: false };
   }
+
   render() {
+    const { isDark } = this.state;
     return (
       <Container>
         <Banner>
@@ -51,15 +53,16 @@ export default class Home extends React.Component<{}> {
               GitHub
             </Button>
           </Buttons>
-          <Label>
-            <input
+          <Label
+            class="switch-wrap"
+            style={{ backgroundColor: isDark ? '#000' : '#6200ee' }}
+          >
+            <Input
               type="checkbox"
-              checked={this.state.isDark}
-              onChange={() => {
-                this.setState({ isDark: !this.state.isDark });
-              }}
+              checked={isDark}
+              onChange={() => this.setState({ isDark: !isDark })}
             />
-            {' Dark Theme'}
+            <Switch class="switch"></Switch>
           </Label>
           {this.state.isDark ? (
             <Gallery>
@@ -90,12 +93,12 @@ export default class Home extends React.Component<{}> {
 const PRIMARY_COLOR = '#6200ee';
 const RESTING_SHADOW = '0 1px 3px rgba(0, 0, 0, 0.12)';
 
-const Label = styled.label`
-  font-size: 13px;
-  font-weight: 600;
-  text-align: center;
-  text-transform: uppercase;
-`;
+// const Label = styled.label`
+//   font-size: 13px;
+//   font-weight: 600;
+//   text-align: center;
+//   text-transform: uppercase;
+// `;
 const Banner = styled.p`
   margin: 0;
   padding: 12px;
@@ -193,6 +196,54 @@ const Gallery = styled.div`
     margin: 16px;
   }
 `;
+
+const Label = styled.label`
+  cursor: pointer  
+  background: #6200ee
+  padding: 3px 
+  width: 33px 
+  height: 20px 
+  border-radius: 33.5px 
+  display: grid
+  
+`;
+
+const Input = styled.input`
+  position: absolute 
+  opacity: 0 
+  width: 0 
+  height: 0 
+  &:checked + .switch {
+    grid-template-columns: 1fr 1fr 0fr;
+  }
+  &:checked + .switch::after {
+    background-color: #fff;
+  }
+}
+`;
+const Switch = styled.div`
+  height: 14px;
+  width: 26px;
+  display: grid;
+  grid-template-columns: 0fr 1fr 1fr;
+  transition: 0.2s;
+  &:after {
+    content: '';
+    border-radius: 50%;
+    background: #fff;
+    grid-column: 2;
+    transition: background 0.2s;
+  }
+`;
+
+// input:checked {
+//   + .switch {
+//     grid-template-columns: 1fr 1fr 0fr;
+//     &::after {
+//       background-color: #52cf71;
+//     }
+//   }
+// }
 
 const screenshots = [
   'gallery/button.png',
