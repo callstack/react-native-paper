@@ -8,6 +8,10 @@ import { Link } from 'component-docs/components';
 import Content from './components/Content';
 
 export default class Home extends React.Component<{}> {
+  constructor(props) {
+    super(props);
+    this.state = { isDark: false };
+  }
   render() {
     return (
       <Container>
@@ -47,12 +51,36 @@ export default class Home extends React.Component<{}> {
               GitHub
             </Button>
           </Buttons>
-          <Gallery>
-            {screenshots.map((image, i) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <img key={i} src={image} alt="" />
-            ))}
-          </Gallery>
+          <Label>
+            <input
+              type="checkbox"
+              checked={this.state.isDark}
+              onChange={() => {
+                this.setState({ isDark: !this.state.isDark });
+              }}
+            />
+            {' Dark Theme'}
+          </Label>
+          {this.state.isDark ? (
+            <Gallery>
+              {screenshotsDark.map((image, i) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <img
+                  style={{ boxShadow: ' 0 0 0 #fff' }}
+                  key={i}
+                  src={image}
+                  alt=""
+                />
+              ))}
+            </Gallery>
+          ) : (
+            <Gallery>
+              {screenshots.map((image, i) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <img key={i} src={image} alt="" />
+              ))}
+            </Gallery>
+          )}
         </Content>
       </Container>
     );
@@ -62,6 +90,12 @@ export default class Home extends React.Component<{}> {
 const PRIMARY_COLOR = '#6200ee';
 const RESTING_SHADOW = '0 1px 3px rgba(0, 0, 0, 0.12)';
 
+const Label = styled.label`
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+`;
 const Banner = styled.p`
   margin: 0;
   padding: 12px;
@@ -148,7 +182,7 @@ const Gallery = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
-  margin: 48px -16px;
+  margin: 0px -16px;
   min-width: 0;
 
   > img {
@@ -173,4 +207,18 @@ const screenshots = [
   'gallery/typography.png',
   'gallery/bottom-navigation.png',
   'gallery/fab.png',
+];
+const screenshotsDark = [
+  'gallery/button-dark.png',
+  'gallery/input-dark.png',
+  'gallery/card-dark.png',
+  'gallery/appbar-dark.png',
+  'gallery/searchbar-dark.png',
+  'gallery/snackbar-dark.png',
+  'gallery/chip-dark.png',
+  'gallery/list-dark.png',
+  'gallery/list-accordion-dark.png',
+  'gallery/typography-dark.png',
+  'gallery/bottom-navigation-dark.png',
+  'gallery/fab-dark.png',
 ];
