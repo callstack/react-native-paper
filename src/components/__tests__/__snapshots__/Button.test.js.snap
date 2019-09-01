@@ -79,6 +79,7 @@ exports[`renders button with color 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
+              undefined,
             ],
           ]
         }
@@ -213,6 +214,7 @@ exports[`renders button with icon 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
+              undefined,
             ],
           ]
         }
@@ -310,6 +312,7 @@ exports[`renders contained contained with mode 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
+              undefined,
             ],
           ]
         }
@@ -404,6 +407,7 @@ exports[`renders disabled button 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
+              undefined,
             ],
           ]
         }
@@ -677,6 +681,7 @@ exports[`renders loading button 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
+              undefined,
             ],
           ]
         }
@@ -767,6 +772,7 @@ exports[`renders outlined button with mode 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
+              undefined,
             ],
           ]
         }
@@ -857,6 +863,7 @@ exports[`renders text button by default 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
+              undefined,
             ],
           ]
         }
@@ -947,6 +954,7 @@ exports[`renders text button with mode 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
+              undefined,
             ],
           ]
         }

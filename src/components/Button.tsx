@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { Animated, View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
+import {
+  Animated,
+  View,
+  ViewStyle,
+  StyleSheet,
+  StyleProp,
+  TextStyle,
+} from 'react-native';
 import color from 'color';
 
 import ActivityIndicator from './ActivityIndicator';
@@ -66,6 +73,10 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   contentStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
+  /**
+   * Style for the button text.
+   */
+  labelStyle?: StyleProp<TextStyle>;
   /**
    * @optional
    */
@@ -152,6 +163,7 @@ class Button extends React.Component<Props, State> {
       style,
       theme,
       contentStyle,
+      labelStyle,
       ...rest
     } = this.props;
     const { colors, roundness } = theme;
@@ -271,6 +283,7 @@ class Button extends React.Component<Props, State> {
                 uppercase && styles.uppercaseLabel,
                 textStyle,
                 font,
+                labelStyle,
               ]}
             >
               {children}

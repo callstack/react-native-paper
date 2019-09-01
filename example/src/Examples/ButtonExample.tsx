@@ -80,6 +80,17 @@ class ButtonExample extends React.Component<Props, State> {
             >
               Loading
             </Button>
+            <Button
+              mode="outlined"
+              onPress={() => {}}
+              style={styles.button}
+              labelStyle={{
+                fontWeight: '800',
+                fontSize: 18,
+              }}
+            >
+              Custom Font
+            </Button>
           </View>
         </List.Section>
         <List.Section title="Contained button">
