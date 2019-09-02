@@ -3,6 +3,7 @@ import { View, ViewStyle, StyleSheet, StyleProp, Animated } from 'react-native';
 import Surface from './Surface';
 import Text from './Typography/Text';
 import Button from './Button';
+import Icon, { IconSource } from './Icon';
 import { withTheme } from '../core/theming';
 import { Theme, $RemoveChildren } from '../types';
 import shadow from '../styles/shadow';
@@ -20,9 +21,9 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   children: string;
   /**
-   * Callback that returns an image to display inside banner.
+   * Icon to display for the `Banner`. Can be an image.
    */
-  image?: (props: { size: number }) => React.ReactNode;
+  icon?: IconSource;
   /**
    * Action items to shown in the banner.
    * An action item should contain the following properties:
@@ -162,7 +163,7 @@ class Banner extends React.Component<Props, State> {
   render() {
     const {
       visible,
-      image,
+      icon,
       children,
       actions,
       contentStyle,
@@ -186,7 +187,6 @@ class Banner extends React.Component<Props, State> {
       Animated.add(position, -1),
       layout.height
     );
-
     return (
       <Surface
         {...rest}
@@ -211,8 +211,12 @@ class Banner extends React.Component<Props, State> {
             ]}
           >
             <View style={styles.content}>
-              {image ? (
-                <View style={styles.image}>{image({ size: 40 })}</View>
+              {icon ? (
+                <View style={styles.icon}>
+                  {/* 
+                  // @ts-ignore */}
+                  <Icon source={icon} size={40} />
+                </View>
               ) : null}
               <Text style={styles.message}>{children}</Text>
             </View>
@@ -258,7 +262,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     marginBottom: 0,
   },
-  image: {
+  icon: {
     margin: 8,
   },
   message: {
