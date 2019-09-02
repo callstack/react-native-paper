@@ -4,7 +4,7 @@
 import * as React from 'react';
 import { styled } from 'linaria/react';
 import { Link } from 'component-docs/components';
-
+import ThemeIcon from '../../components/theme-icon';
 import Content from './components/Content';
 
 export default class Home extends React.Component<{}> {
@@ -53,17 +53,20 @@ export default class Home extends React.Component<{}> {
               GitHub
             </Button>
           </Buttons>
-          <Label
-            class="switch-wrap"
-            style={{ backgroundColor: isDark ? '#000' : '#6200ee' }}
-          >
-            <Input
-              type="checkbox"
-              checked={isDark}
-              onChange={() => this.setState({ isDark: !isDark })}
-            />
-            <Switch class="switch"></Switch>
-          </Label>
+          <ThemeSwitch>
+            <Label
+              class="switch-wrap"
+              style={{ backgroundColor: isDark ? '#000' : '#6200ee' }}
+            >
+              <Input
+                type="checkbox"
+                checked={isDark}
+                onChange={() => this.setState({ isDark: !isDark })}
+              />
+              <Switch class="switch"></Switch>
+            </Label>
+            <ThemeIcon type={isDark ? 'dark' : 'light'} />
+          </ThemeSwitch>
           {this.state.isDark ? (
             <Gallery>
               {screenshotsDark.map((image, i) => (
@@ -93,12 +96,6 @@ export default class Home extends React.Component<{}> {
 const PRIMARY_COLOR = '#6200ee';
 const RESTING_SHADOW = '0 1px 3px rgba(0, 0, 0, 0.12)';
 
-// const Label = styled.label`
-//   font-size: 13px;
-//   font-weight: 600;
-//   text-align: center;
-//   text-transform: uppercase;
-// `;
 const Banner = styled.p`
   margin: 0;
   padding: 12px;
@@ -205,9 +202,12 @@ const Label = styled.label`
   height: 20px 
   border-radius: 33.5px 
   display: grid
-  
+  margin-right: 5px
 `;
-
+const ThemeSwitch = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 const Input = styled.input`
   position: absolute 
   opacity: 0 
@@ -215,9 +215,6 @@ const Input = styled.input`
   height: 0 
   &:checked + .switch {
     grid-template-columns: 1fr 1fr 0fr;
-  }
-  &:checked + .switch::after {
-    background-color: #fff;
   }
 }
 `;
@@ -235,15 +232,6 @@ const Switch = styled.div`
     transition: background 0.2s;
   }
 `;
-
-// input:checked {
-//   + .switch {
-//     grid-template-columns: 1fr 1fr 0fr;
-//     &::after {
-//       background-color: #52cf71;
-//     }
-//   }
-// }
 
 const screenshots = [
   'gallery/button.png',
