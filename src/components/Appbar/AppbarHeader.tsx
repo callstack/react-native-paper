@@ -129,8 +129,8 @@ class AppbarHeader extends React.Component<Props> {
       <Wrapper
         style={
           [
-            { backgroundColor, zIndex, elevation },
-            shadow(elevation),
+            { backgroundColor, zIndex },
+            elevation && shadow(elevation),
           ] as StyleProp<ViewStyle>
         }
       >
