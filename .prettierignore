@@ -1,4 +1,4 @@
-# NOTE: Should match .prettierignore
+# NOTE: Should match .eslintignore
 
 node_modules/
 flow-typed/

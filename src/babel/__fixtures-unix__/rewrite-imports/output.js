@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Text } from 'react-native';
 import PaperProvider from "react-native-paper/../core/Provider";
 import BottomNavigation from "react-native-paper/../components/BottomNavigation";
