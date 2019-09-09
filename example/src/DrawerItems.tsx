@@ -6,7 +6,6 @@ import {
   Switch,
   TouchableRipple,
   Text,
-  Colors,
   Theme,
 } from 'react-native-paper';
 
@@ -49,13 +48,14 @@ class DrawerItems extends React.Component<Props, State> {
             <Drawer.Item
               {...props}
               key={props.key}
-              theme={
-                props.key === 3
-                  ? { colors: { primary: Colors.tealA200 } }
-                  : undefined
-              }
               active={this.state.drawerItemIndex === index}
               onPress={() => this._setDrawerItem(index)}
+              iconSize={index === 4 ? 27 : 24}
+              labelStyle={{
+                fontWeight:
+                  this.state.drawerItemIndex === index ? 'bold' : '400',
+              }}
+              rippleColor="transparent"
             />
           ))}
         </Drawer.Section>
