@@ -1,6 +1,6 @@
 {
   "name": "react-native-paper",
-  "version": "3.0.0-alpha.4",
+  "version": "3.0.0-alpha.5",
   "description": "Material design for React Native",
   "main": "lib/module/index.js",
   "types": "lib/typescript/src/index.d.ts",
