@@ -1,10 +1,13 @@
-const mappings = require('../../dist/mappings.json');
+const mappingsPath =
+  process.env.NODE_ENV === 'test'
+    ? `../../lib/mappings.json`
+    : `../../mappings.json`;
+const mappings = require(mappingsPath);
 
 const SKIP = Symbol('SKIP');
 
 module.exports = function rewire(babel) {
   const t = babel.types;
-
   return {
     visitor: {
       ImportDeclaration(path) {
