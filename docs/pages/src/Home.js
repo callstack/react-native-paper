@@ -4,11 +4,17 @@
 import * as React from 'react';
 import { styled } from 'linaria/react';
 import { Link } from 'component-docs/components';
-
+import ThemeIcon from '../../components/theme-icon';
 import Content from './components/Content';
 
 export default class Home extends React.Component<{}> {
+  constructor(props) {
+    super(props);
+    this.state = { isDark: false };
+  }
+
   render() {
+    const { isDark } = this.state;
     return (
       <Container>
         <Banner>
@@ -47,12 +53,40 @@ export default class Home extends React.Component<{}> {
               GitHub
             </Button>
           </Buttons>
-          <Gallery>
-            {screenshots.map((image, i) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <img key={i} src={image} alt="" />
-            ))}
-          </Gallery>
+          <ThemeSwitch>
+            <Label
+              class="switch-wrap"
+              style={{ backgroundColor: isDark ? '#000' : '#6200ee' }}
+            >
+              <Input
+                type="checkbox"
+                checked={isDark}
+                onChange={() => this.setState({ isDark: !isDark })}
+              />
+              <Switch class="switch"></Switch>
+            </Label>
+            <ThemeIcon type={isDark ? 'dark' : 'light'} />
+          </ThemeSwitch>
+          {this.state.isDark ? (
+            <Gallery>
+              {screenshotsDark.map((image, i) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <img
+                  style={{ boxShadow: ' 0 0 0 #fff' }}
+                  key={i}
+                  src={image}
+                  alt=""
+                />
+              ))}
+            </Gallery>
+          ) : (
+            <Gallery>
+              {screenshots.map((image, i) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <img key={i} src={image} alt="" />
+              ))}
+            </Gallery>
+          )}
         </Content>
       </Container>
     );
@@ -148,7 +182,7 @@ const Gallery = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
-  margin: 48px -16px;
+  margin: 0px -16px;
   min-width: 0;
 
   > img {
@@ -157,6 +191,45 @@ const Gallery = styled.div`
     max-height: 480px;
     width: auto;
     margin: 16px;
+  }
+`;
+
+const Label = styled.label`
+  cursor: pointer  
+  background: #6200ee
+  padding: 3px 
+  width: 33px 
+  height: 20px 
+  border-radius: 33.5px 
+  display: grid
+  margin-right: 5px
+`;
+const ThemeSwitch = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+const Input = styled.input`
+  position: absolute 
+  opacity: 0 
+  width: 0 
+  height: 0 
+  &:checked + .switch {
+    grid-template-columns: 1fr 1fr 0fr;
+  }
+}
+`;
+const Switch = styled.div`
+  height: 14px;
+  width: 26px;
+  display: grid;
+  grid-template-columns: 0fr 1fr 1fr;
+  transition: 0.2s;
+  &:after {
+    content: '';
+    border-radius: 50%;
+    background: #fff;
+    grid-column: 2;
+    transition: background 0.2s;
   }
 `;
 
@@ -173,4 +246,18 @@ const screenshots = [
   'gallery/typography.png',
   'gallery/bottom-navigation.png',
   'gallery/fab.png',
+];
+const screenshotsDark = [
+  'gallery/button-dark.png',
+  'gallery/input-dark.png',
+  'gallery/card-dark.png',
+  'gallery/appbar-dark.png',
+  'gallery/searchbar-dark.png',
+  'gallery/snackbar-dark.png',
+  'gallery/chip-dark.png',
+  'gallery/list-dark.png',
+  'gallery/list-accordion-dark.png',
+  'gallery/typography-dark.png',
+  'gallery/bottom-navigation-dark.png',
+  'gallery/fab-dark.png',
 ];
