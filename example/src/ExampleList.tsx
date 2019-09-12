@@ -18,6 +18,7 @@ import DividerExample from './Examples/DividerExample';
 import FABExample from './Examples/FABExample';
 import IconButtonExample from './Examples/IconButtonExample';
 import ListAccordionExample from './Examples/ListAccordionExample';
+import ListAccordionExampleGroup from './Examples/ListAccordionGroupExample';
 import ListSectionExample from './Examples/ListSectionExample';
 import MenuExample from './Examples/MenuExample';
 import ProgressBarExample from './Examples/ProgressBarExample';
@@ -54,6 +55,7 @@ export const examples: { [key: string]: any } = {
   fab: FABExample,
   iconButton: IconButtonExample,
   listAccordion: ListAccordionExample,
+  listAccordionGroup: ListAccordionExampleGroup,
   listSection: ListSectionExample,
   menu: MenuExample,
   progressbar: ProgressBarExample,
