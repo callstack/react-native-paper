@@ -2,7 +2,7 @@
 
 # Based on domenic's tutorial: https://gist.github.com/domenic/ec8b0fc8ab45f39403dd
 
-set -e # Exit with nonzero exit code if anything fails
+set -euxo pipefail # Exit with nonzero exit code if anything fails
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
