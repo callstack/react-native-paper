@@ -36,6 +36,11 @@ git checkout 1.0
 yarn
 yarn build
 
+# Build the docs for 2.0
+git checkout 2.0
+yarn
+yarn build
+
 # Push the built docs
 cd dist
 
