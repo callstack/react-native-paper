@@ -1,10 +1,5 @@
 import * as React from 'react';
-import {
-  Text as NativeText,
-  TextStyle,
-  I18nManager,
-  StyleProp,
-} from 'react-native';
+import { Text as NativeText, TextStyle, StyleProp } from 'react-native';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 
@@ -35,7 +30,6 @@ class Text extends React.Component<Props> {
 
   render() {
     const { style, theme, ...rest } = this.props;
-    const writingDirection = I18nManager.isRTL ? 'rtl' : 'ltr';
 
     return (
       <NativeText
@@ -48,7 +42,6 @@ class Text extends React.Component<Props> {
             ...theme.fonts.regular,
             color: theme.colors.text,
             textAlign: 'left',
-            writingDirection,
           },
           style,
         ]}

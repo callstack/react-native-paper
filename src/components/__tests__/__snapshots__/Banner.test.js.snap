@@ -71,7 +71,6 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "400",
                 "textAlign": "left",
-                "writingDirection": "ltr",
               },
               Object {
                 "flex": 1,
@@ -157,7 +156,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "400",
                 "textAlign": "left",
-                "writingDirection": "ltr",
               },
               Object {
                 "flex": 1,
@@ -235,7 +233,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                       "fontFamily": "System",
                       "fontWeight": "400",
                       "textAlign": "left",
-                      "writingDirection": "ltr",
                     },
                     Array [
                       Object {
@@ -334,7 +331,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "400",
                 "textAlign": "left",
-                "writingDirection": "ltr",
               },
               Object {
                 "flex": 1,
@@ -412,7 +408,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                       "fontFamily": "System",
                       "fontWeight": "400",
                       "textAlign": "left",
-                      "writingDirection": "ltr",
                     },
                     Array [
                       Object {
@@ -503,7 +498,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                       "fontFamily": "System",
                       "fontWeight": "400",
                       "textAlign": "left",
-                      "writingDirection": "ltr",
                     },
                     Array [
                       Object {
@@ -603,7 +597,6 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "400",
                 "textAlign": "left",
-                "writingDirection": "ltr",
               },
               Object {
                 "flex": 1,
@@ -688,7 +681,6 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
                 "fontFamily": "System",
                 "fontWeight": "400",
                 "textAlign": "left",
-                "writingDirection": "ltr",
               },
               Object {
                 "flex": 1,

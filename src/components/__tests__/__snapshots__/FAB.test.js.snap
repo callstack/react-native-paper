@@ -138,7 +138,6 @@ exports[`renders extended FAB 1`] = `
               "fontFamily": "System",
               "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {

@@ -417,7 +417,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             "fontFamily": "System",
             "fontWeight": "400",
             "textAlign": "left",
-            "writingDirection": "ltr",
           },
           Array [
             Object {

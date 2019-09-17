@@ -60,7 +60,6 @@ exports[`renders menu with content styles 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "400",
                 "textAlign": "left",
-                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -155,7 +154,6 @@ exports[`renders not visible menu 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "400",
                 "textAlign": "left",
-                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -250,7 +248,6 @@ exports[`renders visible menu 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "400",
                 "textAlign": "left",
-                "writingDirection": "ltr",
               },
               Array [
                 Object {

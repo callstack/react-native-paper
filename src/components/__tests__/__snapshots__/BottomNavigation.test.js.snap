@@ -3182,7 +3182,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         "fontFamily": "System",
                         "fontWeight": "400",
                         "textAlign": "left",
-                        "writingDirection": "ltr",
                       },
                       Array [
                         Object {
@@ -3220,7 +3219,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         "fontFamily": "System",
                         "fontWeight": "400",
                         "textAlign": "left",
-                        "writingDirection": "ltr",
                       },
                       Array [
                         Object {
@@ -3450,7 +3448,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         "fontFamily": "System",
                         "fontWeight": "400",
                         "textAlign": "left",
-                        "writingDirection": "ltr",
                       },
                       Array [
                         Object {
@@ -3488,7 +3485,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         "fontFamily": "System",
                         "fontWeight": "400",
                         "textAlign": "left",
-                        "writingDirection": "ltr",
                       },
                       Array [
                         Object {
@@ -3718,7 +3714,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         "fontFamily": "System",
                         "fontWeight": "400",
                         "textAlign": "left",
-                        "writingDirection": "ltr",
                       },
                       Array [
                         Object {
@@ -3756,7 +3751,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         "fontFamily": "System",
                         "fontWeight": "400",
                         "textAlign": "left",
-                        "writingDirection": "ltr",
                       },
                       Array [
                         Object {
@@ -4121,7 +4115,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                         "fontFamily": "System",
                         "fontWeight": "400",
                         "textAlign": "left",
-                        "writingDirection": "ltr",
                       },
                       Array [
                         Object {
@@ -4351,7 +4344,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                         "fontFamily": "System",
                         "fontWeight": "400",
                         "textAlign": "left",
-                        "writingDirection": "ltr",
                       },
                       Array [
                         Object {
@@ -4581,7 +4573,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                         "fontFamily": "System",
                         "fontWeight": "400",
                         "textAlign": "left",
-                        "writingDirection": "ltr",
                       },
                       Array [
                         Object {
@@ -4926,7 +4917,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         "fontFamily": "System",
                         "fontWeight": "400",
                         "textAlign": "left",
-                        "writingDirection": "ltr",
                       },
                       Array [
                         Object {
@@ -4964,7 +4954,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         "fontFamily": "System",
                         "fontWeight": "400",
                         "textAlign": "left",
-                        "writingDirection": "ltr",
                       },
                       Array [
                         Object {
@@ -5194,7 +5183,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         "fontFamily": "System",
                         "fontWeight": "400",
                         "textAlign": "left",
-                        "writingDirection": "ltr",
                       },
                       Array [
                         Object {
@@ -5232,7 +5220,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         "fontFamily": "System",
                         "fontWeight": "400",
                         "textAlign": "left",
-                        "writingDirection": "ltr",
                       },
                       Array [
                         Object {
@@ -5462,7 +5449,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         "fontFamily": "System",
                         "fontWeight": "400",
                         "textAlign": "left",
-                        "writingDirection": "ltr",
                       },
                       Array [
                         Object {
@@ -5500,7 +5486,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         "fontFamily": "System",
                         "fontWeight": "400",
                         "textAlign": "left",
-                        "writingDirection": "ltr",
                       },
                       Array [
                         Object {
@@ -5865,7 +5850,6 @@ exports[`renders shifting bottom navigation 1`] = `
                         "fontFamily": "System",
                         "fontWeight": "400",
                         "textAlign": "left",
-                        "writingDirection": "ltr",
                       },
                       Array [
                         Object {
@@ -6095,7 +6079,6 @@ exports[`renders shifting bottom navigation 1`] = `
                         "fontFamily": "System",
                         "fontWeight": "400",
                         "textAlign": "left",
-                        "writingDirection": "ltr",
                       },
                       Array [
                         Object {
@@ -6325,7 +6308,6 @@ exports[`renders shifting bottom navigation 1`] = `
                         "fontFamily": "System",
                         "fontWeight": "400",
                         "textAlign": "left",
-                        "writingDirection": "ltr",
                       },
                       Array [
                         Object {
@@ -6555,7 +6537,6 @@ exports[`renders shifting bottom navigation 1`] = `
                         "fontFamily": "System",
                         "fontWeight": "400",
                         "textAlign": "left",
-                        "writingDirection": "ltr",
                       },
                       Array [
                         Object {
@@ -6785,7 +6766,6 @@ exports[`renders shifting bottom navigation 1`] = `
                         "fontFamily": "System",
                         "fontWeight": "400",
                         "textAlign": "left",
-                        "writingDirection": "ltr",
                       },
                       Array [
                         Object {

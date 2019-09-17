@@ -61,7 +61,6 @@ exports[`renders list section with custom title style 1`] = `
           "fontFamily": "System",
           "fontWeight": "400",
           "textAlign": "left",
-          "writingDirection": "ltr",
         },
         Array [
           Object {
@@ -188,7 +187,6 @@ exports[`renders list section with custom title style 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "400",
                 "textAlign": "left",
-                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -313,7 +311,6 @@ exports[`renders list section with custom title style 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "400",
                 "textAlign": "left",
-                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -396,7 +393,6 @@ exports[`renders list section with subheader 1`] = `
           "fontFamily": "System",
           "fontWeight": "400",
           "textAlign": "left",
-          "writingDirection": "ltr",
         },
         Array [
           Object {
@@ -521,7 +517,6 @@ exports[`renders list section with subheader 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "400",
                 "textAlign": "left",
-                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -646,7 +641,6 @@ exports[`renders list section with subheader 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "400",
                 "textAlign": "left",
-                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -826,7 +820,6 @@ exports[`renders list section without subheader 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "400",
                 "textAlign": "left",
-                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -951,7 +944,6 @@ exports[`renders list section without subheader 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "400",
                 "textAlign": "left",
-                "writingDirection": "ltr",
               },
               Array [
                 Object {

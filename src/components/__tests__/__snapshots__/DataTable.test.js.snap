@@ -34,7 +34,6 @@ exports[`renders data table cell 1`] = `
           "fontFamily": "System",
           "fontWeight": "400",
           "textAlign": "left",
-          "writingDirection": "ltr",
         },
         null,
       ]
@@ -92,7 +91,6 @@ exports[`renders data table header 1`] = `
             "fontFamily": "System",
             "fontWeight": "400",
             "textAlign": "left",
-            "writingDirection": "ltr",
           },
           Array [
             Object {
@@ -142,7 +140,6 @@ exports[`renders data table header 1`] = `
             "fontFamily": "System",
             "fontWeight": "400",
             "textAlign": "left",
-            "writingDirection": "ltr",
           },
           Array [
             Object {
@@ -188,7 +185,6 @@ exports[`renders data table pagination 1`] = `
           "fontFamily": "System",
           "fontWeight": "400",
           "textAlign": "left",
-          "writingDirection": "ltr",
         },
         Array [
           Object {
@@ -390,7 +386,6 @@ exports[`renders data table pagination with label 1`] = `
           "fontFamily": "System",
           "fontWeight": "400",
           "textAlign": "left",
-          "writingDirection": "ltr",
         },
         Array [
           Object {
@@ -650,7 +645,6 @@ exports[`renders data table title with press handler 1`] = `
           "fontFamily": "System",
           "fontWeight": "400",
           "textAlign": "left",
-          "writingDirection": "ltr",
         },
         Array [
           Object {
@@ -751,7 +745,6 @@ exports[`renders data table title with sort icon 1`] = `
           "fontFamily": "System",
           "fontWeight": "400",
           "textAlign": "left",
-          "writingDirection": "ltr",
         },
         Array [
           Object {
@@ -809,7 +802,6 @@ exports[`renders right aligned data table cell 1`] = `
           "fontFamily": "System",
           "fontWeight": "400",
           "textAlign": "left",
-          "writingDirection": "ltr",
         },
         null,
       ]
@@ -853,7 +845,6 @@ exports[`renders right aligned data table title 1`] = `
           "fontFamily": "System",
           "fontWeight": "400",
           "textAlign": "left",
-          "writingDirection": "ltr",
         },
         Array [
           Object {
