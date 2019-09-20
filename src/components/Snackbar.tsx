@@ -66,8 +66,8 @@ const DURATION_LONG = 10000;
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { StyleSheet } from 'react-native';
- * import { Snackbar } from 'react-native-paper';
+ * import { View, StyleSheet } from 'react-native';
+ * import { Button, Snackbar } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
