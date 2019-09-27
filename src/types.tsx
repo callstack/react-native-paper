@@ -24,6 +24,7 @@ export type Fonts = {
 };
 
 export type Theme = {
+  useSurfaceOverlay?: boolean;
   dark: boolean;
   roundness: number;
   colors: {

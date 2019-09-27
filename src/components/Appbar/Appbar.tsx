@@ -90,10 +90,12 @@ class Appbar extends React.Component<Props> {
   render() {
     const { children, dark, style, theme, primary, ...rest } = this.props;
 
-    const { colors, dark: isDarkTheme } = theme;
+    const { colors, dark: isDarkTheme, useSurfaceOverlay } = theme;
     const {
       backgroundColor = isDarkTheme && !primary
-        ? overlay(4, colors.surface)
+        ? useSurfaceOverlay
+          ? overlay(4, colors.surface)
+          : colors.surface
         : colors.primary,
       ...restStyle
     } = StyleSheet.flatten(style) || {};

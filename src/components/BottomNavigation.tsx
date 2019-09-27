@@ -194,6 +194,11 @@ type Props = {
    * @optional
    */
   theme: Theme;
+  /**
+   * Pass `true` if you want BottomNavigation to use theme primary color even in dark mode.
+   * By default in dark mode BottomNavigation use surface color.
+   */
+  primary?: boolean;
 };
 
 type State = {
@@ -575,17 +580,20 @@ class BottomNavigation extends React.Component<Props, State> {
       labeled,
       style,
       theme,
+      primary,
     } = this.props;
 
     const { layout, loaded } = this.state;
     const { routes } = navigationState;
-    const { colors, dark: isDarkTheme } = theme;
+    const { colors, dark: isDarkTheme, useSurfaceOverlay } = theme;
 
     const shifting = this._isShifting();
 
     const {
-      backgroundColor: approxBackgroundColor = isDarkTheme
-        ? overlay(styles.bar.elevation)
+      backgroundColor: approxBackgroundColor = isDarkTheme && !primary
+        ? useSurfaceOverlay
+          ? overlay(styles.bar.elevation, colors.surface)
+          : colors.surface
         : colors.primary,
     } = StyleSheet.flatten(barStyle) || {};
 
