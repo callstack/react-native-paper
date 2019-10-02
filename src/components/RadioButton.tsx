@@ -114,7 +114,7 @@ class RadioButton extends React.Component<Props> {
     const { onPress } = this.props;
     const { onValueChange } = context;
 
-    onPress || onValueChange(this.props.value);
+    onPress ? onPress() : onValueChange(this.props.value);
   };
 
   isChecked = (context: RadioButtonContextType) =>
