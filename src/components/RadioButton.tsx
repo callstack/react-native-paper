@@ -112,7 +112,7 @@ class RadioButton extends React.Component<Props> {
 
   handlePress = (context: RadioButtonContextType) => {
     const { onPress } = this.props;
-    const { onValueChange } = context;
+    const onValueChange = context ? context.onValueChange : () => {};
 
     onPress ? onPress() : onValueChange(this.props.value);
   };
@@ -132,7 +132,7 @@ class RadioButton extends React.Component<Props> {
           <Button
             {...this.props}
             status={this.props.status || (context && this.isChecked(context))}
-            onPress={() => context && this.handlePress(context)}
+            onPress={() => this.handlePress(context)}
           />
         )}
       </RadioButtonContext.Consumer>
