@@ -20,8 +20,7 @@ const initialParams = {
   showSubtitle: true,
   showSearchIcon: true,
   showMoreIcon: true,
-  showBottomPrimary: false,
-  showTopPrimary: false,
+  showExactTheme: false,
 };
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
@@ -34,8 +33,10 @@ class AppbarExample extends React.Component<Props> {
     return {
       header: (
         <Appbar.Header
-          primary={params.showTopPrimary}
           style={params.showCustomColor ? { backgroundColor: '#ffff00' } : null}
+          theme={{
+            mode: params.showExactTheme ? 'exact' : 'adaptive',
+          }}
         >
           {params.showLeftIcon && (
             <Appbar.BackAction onPress={() => navigation.goBack()} />
@@ -129,28 +130,33 @@ class AppbarExample extends React.Component<Props> {
           />
         </View>
         <View style={styles.row}>
-          <Paragraph>Bottom bar primary (dark theme)</Paragraph>
+          <Paragraph>Adaptive Dark Theme</Paragraph>
           <Switch
-            value={params.showBottomPrimary}
+            value={!params.showExactTheme}
             onValueChange={value =>
               navigation.setParams({
-                showBottomPrimary: value,
+                showExactTheme: !value,
               })
             }
           />
         </View>
         <View style={styles.row}>
-          <Paragraph>Header bar primary (dark theme)</Paragraph>
+          <Paragraph>Exact Dark Theme</Paragraph>
           <Switch
-            value={params.showTopPrimary}
+            value={params.showExactTheme}
             onValueChange={value =>
               navigation.setParams({
-                showTopPrimary: value,
+                showExactTheme: value,
               })
             }
           />
         </View>
-        <Appbar style={styles.bottom} primary={params.showBottomPrimary}>
+        <Appbar
+          style={[styles.bottom]}
+          theme={{
+            mode: params.showExactTheme ? 'exact' : 'adaptive',
+          }}
+        >
           <Appbar.Action icon="archive" onPress={() => {}} />
           <Appbar.Action icon="email" onPress={() => {}} />
           <Appbar.Action icon="label" onPress={() => {}} />

@@ -6,6 +6,7 @@ import { Theme } from '../types';
 const DarkTheme: Theme = {
   ...DefaultTheme,
   dark: true,
+  mode: 'adaptive',
   colors: {
     ...DefaultTheme.colors,
     primary: '#BB86FC',

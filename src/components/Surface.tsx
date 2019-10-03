@@ -19,8 +19,9 @@ type Props = React.ComponentProps<typeof View> & {
 
 /**
  * Surface is a basic container that can give depth to an element with elevation shadow.
- * On dark theme surface is constructed by also placing a semi-transparent white overlay over a component surface.
- * A overlay and/or shadow can be applied by specifying the `elevation` property both on Android and iOS.
+ * On dark theme with `adaptive` mode, surface is constructed by also placing a semi-transparent white overlay over a component surface.
+ * See [Dark Theme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more informations.
+ * Overlay and/or shadow can be applied by specifying the `elevation` property both on Android and iOS.
  *
  * <div class="screenshots">
  *   <img src="screenshots/surface-1.png" />
@@ -64,13 +65,16 @@ class Surface extends React.Component<Props> {
     const { style, theme, ...rest } = this.props;
     const flattenedStyles = StyleSheet.flatten(style) || {};
     const { elevation = 4 }: ViewStyle = flattenedStyles;
-    const { dark: isDarkTheme, colors } = theme;
+    const { dark: isDarkTheme, mode, colors } = theme;
     return (
       <Animated.View
         {...rest}
         style={[
           {
-            backgroundColor: isDarkTheme ? overlay(elevation) : colors.surface,
+            backgroundColor:
+              isDarkTheme && mode === 'adaptive'
+                ? overlay(elevation, colors.surface)
+                : colors.surface,
           },
           elevation && shadow(elevation),
           style,

@@ -22,11 +22,6 @@ type Props = Partial<React.ComponentProps<typeof View>> & {
    */
   dark?: boolean;
   /**
-   * Pass `true` if you want Appbar to use theme primary color even in dark mode.
-   * By default in dark mode Appbar use surface color.
-   */
-  primary?: boolean;
-  /**
    * Content of the `Appbar`.
    */
   children: React.ReactNode;
@@ -43,6 +38,9 @@ export const DEFAULT_APPBAR_HEIGHT = 56;
  * A component to display action items in a bar. It can be placed at the top or bottom.
  * The top bar usually contains the screen title, controls such as navigation buttons, menu button etc.
  * The bottom bar usually provides access to a drawer and up to four actions.
+ *
+ * By default Appbar uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
+ * See [Dark Theme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more informations
  *
  * <div class="screenshots">
  *   <img class="medium" src="screenshots/appbar.png" />
@@ -88,18 +86,22 @@ class Appbar extends React.Component<Props> {
   static Header = AppbarHeader;
 
   render() {
-    const { children, dark, style, theme, primary, ...rest } = this.props;
+    const { children, dark, style, theme, ...rest } = this.props;
 
-    const { colors, dark: isDarkTheme } = theme;
+    const { colors, dark: isDarkTheme, mode } = theme;
     const {
-      backgroundColor = isDarkTheme && !primary
-        ? overlay(4, colors.surface)
-        : colors.primary,
+      backgroundColor: customBackground,
+      elevation = 4,
       ...restStyle
-    } = StyleSheet.flatten(style) || {};
+    }: ViewStyle = StyleSheet.flatten(style) || {};
 
     let isDark: boolean;
 
+    const backgroundColor = customBackground
+      ? customBackground
+      : isDarkTheme && mode === 'adaptive'
+      ? overlay(elevation, colors.surface)
+      : colors.primary;
     if (typeof dark === 'boolean') {
       isDark = dark;
     } else {
@@ -136,7 +138,7 @@ class Appbar extends React.Component<Props> {
     }
     return (
       <Surface
-        style={[{ backgroundColor }, styles.appbar, restStyle]}
+        style={[{ backgroundColor }, styles.appbar, { elevation }, restStyle]}
         {...rest}
       >
         {shouldAddLeftSpacing ? <View style={styles.spacing} /> : null}

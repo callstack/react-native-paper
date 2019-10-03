@@ -2948,7 +2948,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#E96A82",
+          "backgroundColor": "#FFFFFF",
           "overflow": "hidden",
         }
       }
@@ -3861,7 +3861,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "rgba(233, 106, 130, 1)",
+          "backgroundColor": "rgba(255, 255, 255, 1)",
           "overflow": "hidden",
         }
       }

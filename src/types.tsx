@@ -25,6 +25,7 @@ export type Fonts = {
 
 export type Theme = {
   dark: boolean;
+  mode?: 'adaptive' | 'exact';
   roundness: number;
   colors: {
     primary: string;
