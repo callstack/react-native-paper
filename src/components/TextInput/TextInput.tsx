@@ -10,7 +10,7 @@ import TextInputOutlined from './TextInputOutlined';
 import TextInputFlat from './TextInputFlat';
 import { withTheme } from '../../core/theming';
 import { RenderProps, State } from './types';
-import { Theme } from '../../types';
+import { Theme, $Omit } from '../../types';
 
 const BLUR_ANIMATION_DURATION = 180;
 const FOCUS_ANIMATION_DURATION = 150;
@@ -398,8 +398,10 @@ class TextInput extends React.Component<TextInputProps, State> {
   }
 
   render() {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { mode, padding, ref: outerRef, ...rest } = this.props;
+    const { mode, padding, ...rest } = this.props as $Omit<
+      TextInputProps,
+      'ref'
+    >;
 
     return mode === 'outlined' ? (
       <TextInputOutlined
