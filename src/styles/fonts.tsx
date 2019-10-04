@@ -58,7 +58,7 @@ const fontConfig = {
   },
 };
 
-export default function configureFont(
+export default function configureFonts(
   config?: { [platform in PlatformOSType | 'default']?: Fonts }
 ): Fonts {
   const fonts = Platform.select({ ...fontConfig, ...config }) as Fonts;
