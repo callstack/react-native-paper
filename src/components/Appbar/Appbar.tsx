@@ -138,6 +138,7 @@ class Appbar extends React.Component<Props> {
     }
     return (
       <Surface
+        //@ts-ignore
         style={[{ backgroundColor }, styles.appbar, { elevation }, restStyle]}
         {...rest}
       >

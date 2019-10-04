@@ -597,6 +597,7 @@ class BottomNavigation extends React.Component<Props, State> {
     const backgroundColor = shifting
       ? this.state.index.interpolate({
           inputRange: routes.map((_, i) => i),
+          //@ts-ignore
           outputRange: routes.map(
             route => getColor({ route }) || approxBackgroundColor
           ),
@@ -616,7 +617,7 @@ class BottomNavigation extends React.Component<Props, State> {
             .rgb()
             .string();
 
-    const touchColor = color(activeColor)
+    const touchColor = color(activeTintColor)
       .alpha(0.12)
       .rgb()
       .string();

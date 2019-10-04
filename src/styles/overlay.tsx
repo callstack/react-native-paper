@@ -1,10 +1,23 @@
 import color from 'color';
+import { Animated } from 'react-native';
 import DarkTheme from './DarkTheme';
 
 export default function overlay(
-  elevation: number = 1,
+  elevation: number | Animated.Value = 1,
   surfaceColor: string = DarkTheme.colors.surface
 ) {
+  if (elevation instanceof Animated.Value) {
+    const inputRange = [0, 1, 2, 3, 8, 24];
+    return elevation.interpolate({
+      inputRange,
+      outputRange: inputRange.map(elevation => {
+        return calculateColor(surfaceColor, elevation);
+      }),
+    });
+  }
+  return calculateColor(surfaceColor, elevation);
+}
+function calculateColor(surfaceColor: string, elevation: number) {
   let overlayTransparency: number;
   if (elevation >= 1 && elevation <= 24) {
     overlayTransparency = elevationOverlayTransparency[elevation];
@@ -13,12 +26,10 @@ export default function overlay(
   } else {
     overlayTransparency = elevationOverlayTransparency[1];
   }
-  const backgroundColor = color(surfaceColor)
+  return color(surfaceColor)
     .mix(color('white'), overlayTransparency * 0.01)
     .hex();
-  return backgroundColor;
 }
-
 const elevationOverlayTransparency: { [id: number]: number } = {
   1: 5,
   2: 7,
