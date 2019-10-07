@@ -97,7 +97,7 @@ class AppbarHeader extends React.Component<Props> {
     const { dark: isDarkTheme, colors, mode } = rest.theme;
     const {
       height = DEFAULT_APPBAR_HEIGHT,
-      elevation = 0,
+      elevation = 4,
       backgroundColor: customBackground,
       zIndex = 0,
       ...restStyle
