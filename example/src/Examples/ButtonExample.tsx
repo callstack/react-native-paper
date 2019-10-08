@@ -35,7 +35,10 @@ class ButtonExample extends React.Component<Props, State> {
             <Button disabled onPress={() => {}} style={styles.button}>
               Disabled
             </Button>
-            <Button icon="camera" onPress={() => {}} style={styles.button}>
+            <Button iconStart="camera" onPress={() => {}} style={styles.button}>
+              Icon
+            </Button>
+            <Button iconEnd="camera" onPress={() => {}} style={styles.button}>
               Icon
             </Button>
             <Button loading onPress={() => {}} style={styles.button}>
@@ -66,7 +69,7 @@ class ButtonExample extends React.Component<Props, State> {
             </Button>
             <Button
               mode="outlined"
-              icon="camera"
+              iconStart="camera"
               onPress={() => {}}
               style={styles.button}
             >
@@ -116,7 +119,7 @@ class ButtonExample extends React.Component<Props, State> {
             </Button>
             <Button
               mode="contained"
-              icon="camera"
+              iconStart="camera"
               onPress={() => {}}
               style={styles.button}
             >
@@ -136,7 +139,7 @@ class ButtonExample extends React.Component<Props, State> {
           <View style={styles.row}>
             <Button
               mode="outlined"
-              icon={{
+              iconStart={{
                 uri:
                   'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400',
               }}
@@ -147,7 +150,7 @@ class ButtonExample extends React.Component<Props, State> {
             </Button>
             <Button
               mode="outlined"
-              icon={require('../../assets/images/favorite.png')}
+              iconStart={require('../../assets/images/favorite.png')}
               onPress={() => {}}
               style={styles.button}
             >
@@ -155,7 +158,7 @@ class ButtonExample extends React.Component<Props, State> {
             </Button>
             <Button
               mode="outlined"
-              icon={({ size }) => (
+              iconStart={({ size }) => (
                 <Image
                   source={require('../../assets/images/chameleon.jpg')}
                   style={{ width: size, height: size, borderRadius: size / 2 }}

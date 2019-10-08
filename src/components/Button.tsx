@@ -44,9 +44,13 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   loading?: boolean;
   /**
-   * Icon to display for the `Button`.
+   * Icon to display before the `Button` text.
    */
-  icon?: IconSource;
+  iconStart?: IconSource;
+  /**
+   * Icon to display after the `Button` text.
+   */
+  iconEnd?: IconSource;
   /**
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
@@ -154,7 +158,8 @@ class Button extends React.Component<Props, State> {
       mode,
       dark,
       loading,
-      icon,
+      iconStart,
+      iconEnd,
       color: buttonColor,
       children,
       uppercase,
@@ -267,16 +272,16 @@ class Button extends React.Component<Props, State> {
           style={touchableStyle}
         >
           <View style={[styles.content, contentStyle]}>
-            {icon && loading !== true ? (
-              <View style={styles.icon}>
-                <Icon source={icon} size={16} color={textColor} />
+            {iconStart && loading !== true ? (
+              <View style={styles.iconLeft}>
+                <Icon source={iconStart} size={16} color={textColor} />
               </View>
             ) : null}
             {loading ? (
               <ActivityIndicator
                 size={16}
                 color={textColor}
-                style={styles.icon}
+                style={styles.iconLeft}
               />
             ) : null}
             <Text
@@ -292,6 +297,11 @@ class Button extends React.Component<Props, State> {
             >
               {children}
             </Text>
+            {iconEnd && loading !== true ? (
+              <View style={styles.iconRight}>
+                <Icon source={iconEnd} size={16} color={textColor} />
+              </View>
+            ) : null}
           </View>
         </TouchableRipple>
       </Surface>
@@ -312,10 +322,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  icon: {
+  iconLeft: {
     width: 16,
     marginLeft: 12,
     marginRight: -4,
+  },
+  iconRight: {
+    width: 16,
+    marginRight: 12,
+    marginLeft: -4,
   },
   label: {
     textAlign: 'center',
