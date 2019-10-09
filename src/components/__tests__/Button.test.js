@@ -35,7 +35,7 @@ it('renders contained contained with mode', () => {
 
 it('renders button with icon', () => {
   const tree = renderer
-    .create(<Button icon="camera">Icon Button</Button>)
+    .create(<Button iconStart="camera">Icon Button</Button>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
