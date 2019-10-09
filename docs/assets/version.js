@@ -46,7 +46,7 @@ function appendVersionBanner() {
       outline-offset: -3px;
     }
 
-    .menu-button:focus + div > ul {
+    .menu-button:focus > ul {
       opacity: 1;
       pointer-events: auto;
     }
@@ -65,8 +65,8 @@ function appendVersionBanner() {
       z-index: 2;
       margin: 0;
       padding: 0;
-      left: -42px;
-      top: 8px;
+      left: 0;
+      top: 30px;
       list-style: none;
       flex-direction: column;
       background-color: #f8f9fa;
@@ -113,16 +113,18 @@ function appendVersionBanner() {
     </style>
     <div class="banner">
       Looking for the documentation for previous version? You can find it 
-      <button class="menu-button">
+      <div tabindex="0" class="menu-button" role="button" aria-haspopup="true">
         here
-      </button>
-      <div class="menu-wrapper">
-        <ul class="list">
+        <ul class="list" role="menu">
           <li class="list-item">
-            <a class="link" href="${createUrlForVersion('1.0')}">v1.x</a>
+            <a class="link" href="${createUrlForVersion(
+              '1.0'
+            )}" role="menuitem">v1.x</a>
           </li>
           <li class="list-item">
-            <a class="link" href="${createUrlForVersion('2.0')}">v2.x</a>
+            <a class="link" href="${createUrlForVersion(
+              '2.0'
+            )}" role="menuitem">v2.x</a>
           </li>
         </ul>
       </div>
