@@ -10,7 +10,7 @@ type Props = {
   /**
    * Color for the icon.
    */
-  color: string;
+  color?: string;
   style?: StyleProp<ViewStyle>;
 };
 
