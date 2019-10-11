@@ -275,6 +275,9 @@ class SceneComponent extends React.PureComponent<any> {
  *
  * For integration with React Navigation, you can use [react-navigation-material-bottom-tab-navigator](https://github.com/react-navigation/react-navigation-material-bottom-tab-navigator).
  *
+ * By default Bottom navigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
+ * See [Dark Theme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more informations
+ *
  * <div class="screenshots">
  *   <img class="medium" src="screenshots/bottom-navigation.gif" />
  * </div>
@@ -579,19 +582,22 @@ class BottomNavigation extends React.Component<Props, State> {
 
     const { layout, loaded } = this.state;
     const { routes } = navigationState;
-    const { colors, dark: isDarkTheme } = theme;
+    const { colors, dark: isDarkTheme, mode } = theme;
 
     const shifting = this._isShifting();
 
-    const {
-      backgroundColor: approxBackgroundColor = isDarkTheme
-        ? overlay(styles.bar.elevation)
-        : colors.primary,
-    } = StyleSheet.flatten(barStyle) || {};
+    const { backgroundColor: customBackground, elevation = 4 }: ViewStyle =
+      StyleSheet.flatten(barStyle) || {};
+
+    const approxBackgroundColor =
+      customBackground || (isDarkTheme && mode === 'adaptive')
+        ? overlay(elevation, colors.surface)
+        : colors.primary;
 
     const backgroundColor = shifting
       ? this.state.index.interpolate({
           inputRange: routes.map((_, i) => i),
+          //@ts-ignore
           outputRange: routes.map(
             route => getColor({ route }) || approxBackgroundColor
           ),
@@ -611,7 +617,7 @@ class BottomNavigation extends React.Component<Props, State> {
             .rgb()
             .string();
 
-    const touchColor = color(activeColor)
+    const touchColor = color(activeColor || activeTintColor)
       .alpha(0.12)
       .rgb()
       .string();
