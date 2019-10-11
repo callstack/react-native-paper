@@ -36,7 +36,7 @@
     <span class="token operator">...</span>DefaultTheme<span class="token punctuation">.</span>colors<span class="token punctuation">,</span>
     primary<span class="token punctuation">:</span> <span class="token string">'#3498db'</span><span class="token punctuation">,</span>
     accent<span class="token punctuation">:</span> <span class="token string">'#f1c40f'</span><span class="token punctuation">,</span>
-  <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -50,6 +50,7 @@
 <p>A theme usually contains the following properties:</p>
 <ul>
 <li><code>dark</code> (<code>boolean</code>): whether this is a dark theme or light theme.</li>
+<li><code>mode</code> (<code>'adaptive' | 'exact'</code>): color mode for dark theme (See <a href="#dark-theme">Dark Theme</a>).</li>
 <li><code>roundness</code> (<code>number</code>): roundness of common elements, such as buttons.</li>
 <li><code>colors</code> (<code>object</code>): various colors used throughout different elements.<ul>
 <li><code>primary</code> - primary color for your app, usually your brand color.</li>
@@ -123,6 +124,20 @@
   <span class="token keyword">return</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Button</span></span> <span class="token attr-name">theme</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> fonts<span class="token punctuation">:</span> <span class="token punctuation">{</span> medium<span class="token punctuation">:</span> <span class="token string">'Open Sans'</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">}</span></span> <span class="token spread"><span class="token punctuation">{</span><span class="token punctuation">...</span><span class="token attr-value">props</span><span class="token punctuation">}</span></span> <span class="token punctuation">/&gt;</span></span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
 <p>Now you can use your <code>FancyButton</code> component everywhere instead of using <code>Button</code> from Paper.</p>
+<h2 id="dark-theme">
+          <a class="anchor" href="#dark-theme">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Dark Theme</h2>
+<p>Since 3.0 We adapt Dark theme to follow <a href="https://material.io/design/color/dark-theme.html">Material design guidelines</a>. <br />
+In opposition to light theme, dark theme by default uses <code>surface</code> colour instead of <code>primary</code> on large components like <code>AppBar</code> or <code>BottomNavigation</code>.<br />
+The Dark theme adds a white overlay with opacity depending on elevation of surfaces. It uses it for the better accentuation of surface elevation. Using only shadow is highly imperceptible on dark surfaces.</p>
+<p>We are aware that users often use Dark theme in their own ways and they maybe don't want to use default dark theme features from guidelines<br />
+That's why if you are using the dark mode you can switch between two types of dark theme <code>mode</code>:</p>
+<p><code>exact</code> where everything is like it was before. Appbar and BottomNavigation will still use primary colour by default<br />
+<code>adaptive</code> where we follow <a href="https://material.io/design/color/dark-theme.html">Material design guidelines</a>, the surface will use white overlay with opacity to show elevation, <code>Appbar</code> and <code>BottomNavigation</code> will use surface colour as a background.</p>
 <h2 id="gotchas">
           <a class="anchor" href="#gotchas">
             <svg width="16" height="16">
