@@ -7,22 +7,28 @@ import {
 } from 'react-native';
 import { Consumer as SettingsConsumer } from '../core/settings';
 import { accessibilityProps } from './MaterialCommunityIcon';
+import { withTheme } from '../core/theming';
+import { Theme } from '../types';
 
 type IconSourceBase = string | ImageSourcePropType;
 
 export type IconSource =
   | IconSourceBase
   | Readonly<{ source: IconSourceBase; direction: 'rtl' | 'ltr' | 'auto' }>
-  | ((props: IconProps) => React.ReactNode);
+  | ((props: IconProps & { color: string }) => React.ReactNode);
 
 type IconProps = {
-  color: string;
   size: number;
   allowFontScaling?: boolean;
 };
 
 type Props = IconProps & {
+  color?: string;
   source: any;
+  /**
+   * @optional
+   */
+  theme: Theme;
 };
 
 const isImageSource = (source: any) =>
@@ -58,7 +64,7 @@ export const isValidIcon = (source: any) =>
 export const isEqualIcon = (a: any, b: any) =>
   a === b || getIconId(a) === getIconId(b);
 
-const Icon = ({ source, color, size, ...rest }: Props) => {
+const Icon = ({ source, color, size, theme, ...rest }: Props) => {
   const direction =
     // @ts-ignore
     typeof source === 'object' && source.direction && source.source
@@ -73,6 +79,7 @@ const Icon = ({ source, color, size, ...rest }: Props) => {
     typeof source === 'object' && source.direction && source.source
       ? source.source
       : source;
+  const iconColor = color || theme.colors.text;
 
   if (isImageSource(s)) {
     return (
@@ -100,7 +107,7 @@ const Icon = ({ source, color, size, ...rest }: Props) => {
         {({ icon }) => {
           return icon({
             name: s,
-            color,
+            color: iconColor,
             size,
             direction,
           });
@@ -108,10 +115,10 @@ const Icon = ({ source, color, size, ...rest }: Props) => {
       </SettingsConsumer>
     );
   } else if (typeof s === 'function') {
-    return s({ color, size, direction });
+    return s({ color: iconColor, size, direction });
   }
 
   return null;
 };
 
-export default Icon;
+export default withTheme(Icon);
