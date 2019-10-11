@@ -1,8 +1,8 @@
 import color from 'color';
 import { black, white, pinkA400 } from './colors';
-import fonts from './fonts';
+import configureFonts from './fonts';
 
-import { Theme, Fonts } from '../types';
+import { Theme } from '../types';
 
 const DefaultTheme: Theme = {
   dark: false,
@@ -30,7 +30,7 @@ const DefaultTheme: Theme = {
       .string(),
     notification: pinkA400,
   },
-  fonts: fonts as Fonts,
+  fonts: configureFonts(),
   animation: {
     scale: 1.0,
   },
