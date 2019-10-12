@@ -30,6 +30,7 @@ type Props = {
    */
   visible?: boolean;
   style?: StyleProp<ViewStyle>;
+  progressBarStyle?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
@@ -157,7 +158,7 @@ class ProgressBar extends React.Component<Props, State> {
   }
 
   render() {
-    const { color, indeterminate, style, theme } = this.props;
+    const { color, indeterminate, style, progressBarStyle, theme } = this.props;
     const { fade, timer, width } = this.state;
     const tintColor = color || theme.colors.primary;
     const trackTintColor = setColor(tintColor)
@@ -218,6 +219,7 @@ class ProgressBar extends React.Component<Props, State> {
                   },
                 ],
               },
+              progressBarStyle
             ]}
           />
         </Animated.View>
