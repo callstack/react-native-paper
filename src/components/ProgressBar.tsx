@@ -219,7 +219,7 @@ class ProgressBar extends React.Component<Props, State> {
                   },
                 ],
               },
-              progressBarStyle
+              progressBarStyle,
             ]}
           />
         </Animated.View>
