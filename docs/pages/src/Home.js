@@ -17,10 +17,6 @@ export default class Home extends React.Component<{}> {
     const { isDark } = this.state;
     return (
       <Container>
-        <Banner>
-          Looking for the documentation for version 1.0? You can find it{' '}
-          <a href="1.0">here</a>.
-        </Banner>
         <Content>
           <h1>
             Cross-platform{' '}
@@ -95,19 +91,6 @@ export default class Home extends React.Component<{}> {
 
 const PRIMARY_COLOR = '#6200ee';
 const RESTING_SHADOW = '0 1px 3px rgba(0, 0, 0, 0.12)';
-
-const Banner = styled.p`
-  margin: 0;
-  padding: 12px;
-  margin: 24px;
-  border-radius: 3px;
-  text-align: center;
-  background-color: #f8f9fa;
-
-  @media (max-width: 640px) {
-    margin-top: 72px;
-  }
-`;
 
 const Highlighted = styled.a`
   color: ${PRIMARY_COLOR};
