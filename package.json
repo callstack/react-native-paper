@@ -42,7 +42,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@callstack/react-theme-provider": "^3.0.2",
+    "@callstack/react-theme-provider": "^3.0.5",
     "color": "^3.1.2",
     "react-native-safe-area-view": "^0.12.0"
   },
