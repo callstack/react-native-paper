@@ -24,15 +24,15 @@ import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
 import { Theme } from '../types';
 
-type Route = Partial<{
+type Route = {
   key: string;
-  title: string;
-  icon: IconSource;
-  badge: string | number | boolean;
-  color: string;
-  accessibilityLabel: string;
-  testID: string;
-}>;
+  title?: string;
+  icon?: IconSource;
+  badge?: string | number | boolean;
+  color?: string;
+  accessibilityLabel?: string;
+  testID?: string;
+};
 
 type NavigationState = {
   index: number;
@@ -158,11 +158,11 @@ type Props = {
   /**
    * Get badge for the tab, uses `route.badge` by default.
    */
-  getBadge?: (props: { route: Route }) => boolean | number | string;
+  getBadge?: (props: { route: Route }) => boolean | number | string | undefined;
   /**
    * Get color for the tab, uses `route.color` by default.
    */
-  getColor?: (props: { route: Route }) => string;
+  getColor?: (props: { route: Route }) => string | undefined;
   /**
    * Function to execute on tab press. It receives the route for the pressed tab, useful for things like scroll to top.
    */
