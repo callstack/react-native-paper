@@ -56,10 +56,6 @@ export type TextInputProps = React.ComponentPropsWithRef<
    */
   underlineColor?: string;
   /**
-   * Whether to apply padding to label and input.
-   */
-  padding?: 'none' | 'normal';
-  /**
    * Sets min height with densed layout. For `TextInput` in `flat` mode
    * height is `64dp` or in dense layout - `52dp` with label or `40dp` without label.
    * For `TextInput` in `outlined` mode
@@ -110,6 +106,8 @@ export type TextInputProps = React.ComponentPropsWithRef<
    * Pass `fontSize` prop to modify the font size inside `TextInput`.
    * Pass `height` prop to set `TextInput` height. When `height` is passed,
    * `dense` prop will affect only input's `paddingVertical`.
+   * Pass `paddingHorizontal` to modify horizontal padding.
+   * This can be used to get MD Guidelines v1 TextInput look.
    */
   style?: any;
   /**
@@ -168,7 +166,6 @@ export type TextInputProps = React.ComponentPropsWithRef<
 class TextInput extends React.Component<TextInputProps, State> {
   static defaultProps: Partial<TextInputProps> = {
     mode: 'flat',
-    padding: 'normal',
     dense: false,
     disabled: false,
     error: false,
@@ -398,10 +395,7 @@ class TextInput extends React.Component<TextInputProps, State> {
   }
 
   render() {
-    const { mode, padding, ...rest } = this.props as $Omit<
-      TextInputProps,
-      'ref'
-    >;
+    const { mode, ...rest } = this.props as $Omit<TextInputProps, 'ref'>;
 
     return mode === 'outlined' ? (
       <TextInputOutlined
@@ -422,7 +416,6 @@ class TextInput extends React.Component<TextInputProps, State> {
         innerRef={ref => {
           this._root = ref;
         }}
-        padding={padding}
         onFocus={this._handleFocus}
         onBlur={this._handleBlur}
         onChangeText={this._handleChangeText}

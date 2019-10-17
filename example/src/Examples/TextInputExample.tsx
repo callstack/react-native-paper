@@ -227,8 +227,7 @@ class TextInputExample extends React.Component<Props, State> {
           <View style={styles.inputContainerStyle}>
             <TextInput
               label="Input with no padding"
-              style={{ backgroundColor: 'transparent' }}
-              padding="none"
+              style={{ backgroundColor: 'transparent', paddingHorizontal: 0 }}
               placeholder="Enter username, only letters"
               value={this.state.nameNoPadding}
               error={!this._isUsernameValid(this.state.nameNoPadding)}

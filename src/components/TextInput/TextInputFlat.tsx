@@ -55,7 +55,6 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       error,
       selectionColor,
       underlineColor,
-      padding,
       dense,
       style,
       theme,
@@ -73,15 +72,19 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
     const { colors, fonts } = theme;
     const font = fonts.regular;
     const hasActiveOutline = parentState.focused || error;
-    const paddingOffset = padding !== 'none' ? styles.paddingOffset : null;
 
     const {
       fontSize: fontSizeStyle,
       fontWeight,
       height,
+      paddingHorizontal,
       ...viewStyle
     } = (StyleSheet.flatten(style) || {}) as TextStyle;
     const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
+    const paddingOffset = (paddingHorizontal !== undefined &&
+    typeof paddingHorizontal === 'number'
+      ? { paddingHorizontal }
+      : styles.paddingOffset) as { paddingHorizontal: number };
 
     let inputTextColor, activeColor, underlineColorCustom, placeholderColor;
 
@@ -123,10 +126,8 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
 
     const baseLabelTranslateX =
       (I18nManager.isRTL ? 1 : -1) *
-      (labelHalfWidth -
-        (labelScale * labelWidth) / 2 -
-        (fontSize - MINIMIZED_LABEL_FONT_SIZE) * labelScale +
-        (!paddingOffset ? (1 - labelScale) * LABEL_PADDING_HORIZONTAL : 0));
+        (labelHalfWidth - (labelScale * labelWidth) / 2) +
+      (1 - labelScale) * paddingOffset.paddingHorizontal;
 
     const minInputHeight = dense
       ? (label ? MIN_DENSE_HEIGHT_WL : MIN_DENSE_HEIGHT) -
