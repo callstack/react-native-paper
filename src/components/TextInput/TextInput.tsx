@@ -106,6 +106,8 @@ export type TextInputProps = React.ComponentPropsWithRef<
    * Pass `fontSize` prop to modify the font size inside `TextInput`.
    * Pass `height` prop to set `TextInput` height. When `height` is passed,
    * `dense` prop will affect only input's `paddingVertical`.
+   * Pass `paddingHorizontal` to modify horizontal padding.
+   * This can be used to get MD Guidelines v1 TextInput look.
    */
   style?: any;
   /**
