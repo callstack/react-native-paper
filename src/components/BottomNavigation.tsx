@@ -589,10 +589,11 @@ class BottomNavigation extends React.Component<Props, State> {
     const { backgroundColor: customBackground, elevation = 4 }: ViewStyle =
       StyleSheet.flatten(barStyle) || {};
 
-    const approxBackgroundColor =
-      customBackground || (isDarkTheme && mode === 'adaptive')
-        ? overlay(elevation, colors.surface)
-        : colors.primary;
+    const approxBackgroundColor = customBackground
+      ? customBackground
+      : isDarkTheme && mode === 'adaptive'
+      ? overlay(elevation, colors.surface)
+      : colors.primary;
 
     const backgroundColor = shifting
       ? this.state.index.interpolate({
