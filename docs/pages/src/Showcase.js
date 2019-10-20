@@ -36,6 +36,14 @@ const data: Data[] = [
     image: 'showcase/darkhackernews.png',
     ios: 'https://itunes.apple.com/us/app/dark-hacker-news/id1459946382?mt=8',
   },
+  {
+    color: '#0ba360',
+    name: 'PandaDeals',
+    image: 'showcase/pandadeals.png',
+    android:
+      'https://play.google.com/store/apps/details?id=com.mattkoboski.couponsapp',
+    ios: 'https://apps.apple.com/pl/app/pandadeals/id1468755918',
+  },
 ];
 
 export default class Showcase extends React.Component<{}> {
