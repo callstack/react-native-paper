@@ -47,7 +47,7 @@ export default class BottomNavigationExample extends React.Component<
   state = {
     index: 0,
     routes: [
-      { key: 'album', title: 'Album', icon: 'image-album', color: '#272727' },
+      { key: 'album', title: 'Album', icon: 'image-album' },
       {
         key: 'library',
         title: 'Library',
