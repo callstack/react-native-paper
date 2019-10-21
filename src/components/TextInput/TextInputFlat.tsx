@@ -321,7 +321,7 @@ const styles = StyleSheet.create({
     height: 2,
   },
   input: {
-    flex: 1,
+    flexGrow: 1,
     margin: 0,
     textAlign: I18nManager.isRTL ? 'right' : 'left',
     zIndex: 1,
