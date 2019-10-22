@@ -84,7 +84,9 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
     const paddingOffset = (paddingHorizontal !== undefined &&
     typeof paddingHorizontal === 'number'
       ? { paddingHorizontal }
-      : styles.paddingOffset) as { paddingHorizontal: number };
+      : StyleSheet.flatten(styles.paddingOffset)) as {
+      paddingHorizontal: number;
+    };
 
     let inputTextColor, activeColor, underlineColorCustom, placeholderColor;
 
