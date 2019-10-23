@@ -5,6 +5,7 @@ import {
   Platform,
   GestureResponderEvent,
 } from 'react-native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import {
   Menu,
   Appbar,
@@ -25,16 +26,12 @@ type State = {
 
 type Props = {
   theme: Theme;
-  navigation: any;
+  navigation: StackNavigationProp<{}>;
 };
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
 class MenuExample extends React.Component<Props, State> {
-  static navigationOptions = {
-    header: null,
-  };
-
   state = {
     visible1: false,
     visible2: false,
@@ -74,6 +71,10 @@ class MenuExample extends React.Component<Props, State> {
     } = this.props;
 
     const { visible1, visible2, visible3, contextualMenuCoord } = this.state;
+
+    navigation.setOptions({
+      headerShown: false,
+    });
 
     return (
       <View style={styles.screen}>

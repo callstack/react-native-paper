@@ -74,10 +74,6 @@ export const examples: { [key: string]: any } = {
 const data = Object.keys(examples).map(id => ({ id, data: examples[id] }));
 
 class ExampleList extends React.Component<Props> {
-  static navigationOptions = {
-    title: 'Examples',
-  };
-
   _renderItem = ({ item }: any) => (
     <List.Item
       title={item.data.title}

@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, I18nManager, Platform, YellowBox } from 'react-native';
+import { Updates } from 'expo';
+import { useKeepAwake } from 'expo-keep-awake';
+import { InitialState } from '@react-navigation/core';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationNativeContainer } from '@react-navigation/native';
 import {
   Provider as PaperProvider,
   DarkTheme,
@@ -7,75 +12,142 @@ import {
   Theme,
 } from 'react-native-paper';
 import App from './RootNavigator';
+import DrawerItems from './DrawerItems';
 
-type State = {
-  theme: Theme;
-};
+YellowBox.ignoreWarnings(['Require cycle:']);
+
+const PERSISTENCE_KEY = 'NAVIGATION_STATE';
+const PREFERENCES_KEY = 'APP_PREFERENCES';
 
 const PreferencesContext = React.createContext<any>(null);
 
-export default class PaperExample extends React.Component<{}, State> {
-  state = {
-    theme: DefaultTheme,
-  };
+const DrawerContent = () => {
+  return (
+    <PreferencesContext.Consumer>
+      {preferences => (
+        <DrawerItems
+          toggleTheme={preferences.toggleTheme}
+          toggleRTL={preferences.toggleRtl}
+          isRTL={preferences.rtl}
+          isDarkTheme={preferences.theme === DarkTheme}
+        />
+      )}
+    </PreferencesContext.Consumer>
+  );
+};
 
-  async componentDidMount() {
-    try {
-      const prefString = await AsyncStorage.getItem('preferences');
-      const preferences = JSON.parse(prefString || '');
+const Drawer = createDrawerNavigator<{ Home: undefined }>();
 
-      if (preferences) {
-        // eslint-disable-next-line react/no-did-mount-set-state
-        this.setState({
-          theme: preferences.theme === 'dark' ? DarkTheme : DefaultTheme,
-        });
+export default function PaperExample() {
+  useKeepAwake();
+
+  const [isReady, setIsReady] = React.useState(false);
+  const [initialState, setInitialState] = React.useState<
+    InitialState | undefined
+  >();
+
+  const [theme, setTheme] = React.useState<Theme>(DefaultTheme);
+  const [rtl, setRtl] = React.useState<boolean>(I18nManager.isRTL);
+
+  React.useEffect(() => {
+    const restoreState = async () => {
+      try {
+        const savedStateString = await AsyncStorage.getItem(PERSISTENCE_KEY);
+        const state = JSON.parse(savedStateString || '');
+
+        setInitialState(state);
+      } catch (e) {
+        // ignore error
+      } finally {
+        setIsReady(true);
       }
-    } catch (e) {
-      // ignore error
+    };
+
+    if (!isReady) {
+      restoreState();
     }
+  }, [isReady]);
+
+  React.useEffect(() => {
+    const restorePrefs = async () => {
+      try {
+        const prefString = await AsyncStorage.getItem(PREFERENCES_KEY);
+        const preferences = JSON.parse(prefString || '');
+
+        if (preferences) {
+          // eslint-disable-next-line react/no-did-mount-set-state
+          setTheme(preferences.theme === 'dark' ? DarkTheme : DefaultTheme);
+
+          if (typeof preferences.rtl === 'boolean') {
+            setRtl(preferences.rtl);
+          }
+        }
+      } catch (e) {
+        // ignore error
+      }
+    };
+
+    restorePrefs();
+  }, []);
+
+  React.useEffect(() => {
+    const savePrefs = async () => {
+      try {
+        await AsyncStorage.setItem(
+          PREFERENCES_KEY,
+          JSON.stringify({
+            theme: theme === DarkTheme ? 'dark' : 'light',
+            rtl,
+          })
+        );
+      } catch (e) {
+        // ignore error
+      }
+
+      if (I18nManager.isRTL !== rtl) {
+        I18nManager.forceRTL(rtl);
+        Updates.reloadFromCache();
+      }
+    };
+
+    savePrefs();
+  }, [rtl, theme]);
+
+  const preferences = React.useMemo(
+    () => ({
+      toggleTheme: () =>
+        setTheme(theme => (theme === DefaultTheme ? DarkTheme : DefaultTheme)),
+      toggleRtl: () => setRtl(rtl => !rtl),
+      rtl,
+      theme,
+    }),
+    [rtl, theme]
+  );
+
+  if (!isReady) {
+    return null;
   }
 
-  _savePreferences = async () => {
-    try {
-      AsyncStorage.setItem(
-        'preferences',
-        JSON.stringify({
-          theme: this.state.theme === DarkTheme ? 'dark' : 'light',
-        })
-      );
-    } catch (e) {
-      // ignore error
-    }
-  };
-
-  _toggleTheme = () =>
-    this.setState(
-      state => ({
-        theme: state.theme === DarkTheme ? DefaultTheme : DarkTheme,
-      }),
-      this._savePreferences
-    );
-
-  render() {
-    return (
-      <PaperProvider theme={this.state.theme}>
-        <PreferencesContext.Provider
-          value={{
-            theme: this._toggleTheme,
-            isDarkTheme: this.state.theme === DarkTheme,
-          }}
-        >
-          <React.Fragment>
-            <style type="text/css">{`
-              @font-face {
-                font-family: 'MaterialCommunityIcons';
-                src: url(${require('react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf')}) format('truetype');
-              }
-            `}</style>
-            <App />
-          </React.Fragment>
-        </PreferencesContext.Provider>
-      </PaperProvider>
-    );
-  }
+  return (
+    <PaperProvider theme={theme}>
+      <PreferencesContext.Provider value={preferences}>
+        <React.Fragment>
+          <NavigationNativeContainer
+            initialState={initialState}
+            onStateChange={state =>
+              AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
+            }
+          >
+            {Platform.OS === 'web' ? (
+              <App />
+            ) : (
+              <Drawer.Navigator contentComponent={DrawerContent}>
+                <Drawer.Screen name="Home" component={App} />
+              </Drawer.Navigator>
+            )}
+          </NavigationNativeContainer>
+        </React.Fragment>
+      </PreferencesContext.Provider>
+    </PaperProvider>
+  );
 }
