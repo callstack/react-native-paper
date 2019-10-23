@@ -190,9 +190,9 @@ class FABGroup extends React.Component<Props, State> {
     }
   }
 
-  _close = () => this.props.onStateChange({ open: false });
+  private close = () => this.props.onStateChange({ open: false });
 
-  _toggle = () => this.props.onStateChange({ open: !this.props.open });
+  private toggle = () => this.props.onStateChange({ open: !this.props.open });
 
   render() {
     const {
@@ -233,7 +233,7 @@ class FABGroup extends React.Component<Props, State> {
 
     return (
       <View pointerEvents="box-none" style={[styles.container, style]}>
-        <TouchableWithoutFeedback onPress={this._close}>
+        <TouchableWithoutFeedback onPress={this.close}>
           <Animated.View
             pointerEvents={open ? 'auto' : 'none'}
             style={[
@@ -266,7 +266,7 @@ class FABGroup extends React.Component<Props, State> {
                     }
                     onPress={() => {
                       it.onPress();
-                      this._close();
+                      this.close();
                     }}
                     accessibilityLabel={
                       it.accessibilityLabel !== 'undefined'
@@ -296,7 +296,7 @@ class FABGroup extends React.Component<Props, State> {
                   }
                   onPress={() => {
                     it.onPress();
-                    this._close();
+                    this.close();
                   }}
                   accessibilityLabel={
                     typeof it.accessibilityLabel !== 'undefined'
@@ -313,7 +313,7 @@ class FABGroup extends React.Component<Props, State> {
           <FAB
             onPress={() => {
               onPress && onPress();
-              this._toggle();
+              this.toggle();
             }}
             icon={icon}
             color={this.props.color}

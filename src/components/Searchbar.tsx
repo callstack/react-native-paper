@@ -88,45 +88,45 @@ type Props = React.ComponentProps<typeof TextInput> & {
  * ```
  */
 class Searchbar extends React.Component<Props> {
-  _handleClearPress = () => {
+  private handleClearPress = () => {
     this.clear();
     this.props.onChangeText && this.props.onChangeText('');
   };
 
-  _root: TextInput | undefined | null;
+  private root: TextInput | undefined | null;
 
   /**
    * @internal
    */ setNativeProps(args: Object) {
-    return this._root && this._root.setNativeProps(args);
+    return this.root && this.root.setNativeProps(args);
   }
 
   /**
    * Returns `true` if the input is currently focused, `false` otherwise.
    */
   isFocused() {
-    return this._root && this._root.isFocused();
+    return this.root && this.root.isFocused();
   }
 
   /**
    * Removes all text from the TextInput.
    */
   clear() {
-    return this._root && this._root.clear();
+    return this.root && this.root.clear();
   }
 
   /**
    * Focuses the input.
    */
   focus() {
-    return this._root && this._root.focus();
+    return this.root && this.root.focus();
   }
 
   /**
    * Removes focus from the input.
    */
   blur() {
-    return this._root && this._root.blur();
+    return this.root && this.root.blur();
   }
 
   render() {
@@ -194,7 +194,7 @@ class Searchbar extends React.Component<Props> {
           accessibilityTraits="search"
           accessibilityRole="search"
           ref={c => {
-            this._root = c;
+            this.root = c;
           }}
           value={value}
           {...rest}
@@ -204,7 +204,7 @@ class Searchbar extends React.Component<Props> {
           disabled={!value}
           color={value ? iconColor : 'rgba(255, 255, 255, 0)'}
           rippleColor={rippleColor}
-          onPress={this._handleClearPress}
+          onPress={this.handleClearPress}
           icon={
             clearIcon ||
             (({ size, color }) => (

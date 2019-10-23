@@ -88,7 +88,7 @@ class TouchableRipple extends React.Component<Props> {
    */
   static supported = true;
 
-  _handlePressIn = (e: any) => {
+  private handlePressIn = (e: any) => {
     const { centered, rippleColor, onPressIn, theme } = this.props;
 
     onPressIn && onPressIn(e);
@@ -192,7 +192,7 @@ class TouchableRipple extends React.Component<Props> {
     });
   };
 
-  _handlePressOut = (e: any) => {
+  private handlePressOut = (e: any) => {
     this.props.onPressOut && this.props.onPressOut(e);
 
     const containers = e.currentTarget.querySelectorAll(
@@ -245,8 +245,8 @@ class TouchableRipple extends React.Component<Props> {
     return (
       <TouchableWithoutFeedback
         {...rest}
-        onPressIn={this._handlePressIn}
-        onPressOut={this._handlePressOut}
+        onPressIn={this.handlePressIn}
+        onPressOut={this.handlePressOut}
         disabled={disabled}
       >
         <View

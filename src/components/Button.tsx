@@ -129,7 +129,7 @@ class Button extends React.Component<Props, State> {
     elevation: new Animated.Value(this.props.mode === 'contained' ? 2 : 0),
   };
 
-  _handlePressIn = () => {
+  private handlePressIn = () => {
     if (this.props.mode === 'contained') {
       Animated.timing(this.state.elevation, {
         toValue: 8,
@@ -138,7 +138,7 @@ class Button extends React.Component<Props, State> {
     }
   };
 
-  _handlePressOut = () => {
+  private handlePressOut = () => {
     if (this.props.mode === 'contained') {
       Animated.timing(this.state.elevation, {
         toValue: 2,
@@ -255,8 +255,8 @@ class Button extends React.Component<Props, State> {
           borderless
           delayPressIn={0}
           onPress={onPress}
-          onPressIn={this._handlePressIn}
-          onPressOut={this._handlePressOut}
+          onPressIn={this.handlePressIn}
+          onPressOut={this.handlePressOut}
           accessibilityLabel={accessibilityLabel}
           accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
           accessibilityComponentType="button"

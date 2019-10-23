@@ -3,29 +3,29 @@
   "version": "0.0.1",
   "description": "Documentation for React Native Paper",
   "private": true,
+  "author": "",
+  "license": "MIT",
   "scripts": {
     "start": "component-docs serve",
     "build": "component-docs build",
     "clean": "del dist/",
     "prestart": "yarn clean"
   },
-  "devDependencies": {
-    "@babel/node": "^7.2.2",
-    "@babel/plugin-proposal-class-properties": "^7.2.3",
-    "@babel/preset-env": "^7.4.5",
-    "@babel/preset-flow": "^7.0.0",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/preset-typescript": "^7.3.3",
-    "del-cli": "^1.1.0",
-    "file-loader": "^1.1.11",
-    "metro-react-native-babel-preset": "^0.54.1",
-    "url-loader": "^1.0.1"
-  },
-  "author": "",
-  "license": "MIT",
   "dependencies": {
     "color": "^3.1.2",
-    "component-docs": "^0.20.2",
+    "component-docs": "^0.20.3",
     "linaria": "^1.2.4"
+  },
+  "devDependencies": {
+    "@babel/node": "^7.6.3",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.6.3",
+    "@babel/preset-typescript": "^7.6.0",
+    "del-cli": "^3.0.0",
+    "file-loader": "^4.2.0",
+    "metro-react-native-babel-preset": "^0.56.0",
+    "url-loader": "^2.2.0"
   }
 }

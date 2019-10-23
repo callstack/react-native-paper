@@ -123,14 +123,14 @@ class Chip extends React.Component<Props, State> {
     elevation: new Animated.Value(0),
   };
 
-  _handlePressIn = () => {
+  private handlePressIn = () => {
     Animated.timing(this.state.elevation, {
       toValue: 4,
       duration: 200,
     }).start();
   };
 
-  _handlePressOut = () => {
+  private handlePressOut = () => {
     Animated.timing(this.state.elevation, {
       toValue: 0,
       duration: 150,
@@ -241,8 +241,8 @@ class Chip extends React.Component<Props, State> {
           style={{ borderRadius }}
           onPress={onPress}
           onLongPress={onLongPress}
-          onPressIn={this._handlePressIn}
-          onPressOut={this._handlePressOut}
+          onPressIn={this.handlePressIn}
+          onPressOut={this.handlePressOut}
           underlayColor={underlayColor}
           disabled={disabled}
           accessibilityLabel={accessibilityLabel}

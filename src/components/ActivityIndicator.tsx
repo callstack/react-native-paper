@@ -93,7 +93,7 @@ class ActivityIndicator extends React.Component<Props, State> {
     });
 
     if (animating) {
-      this._startRotation();
+      this.startRotation();
     }
   }
 
@@ -103,7 +103,7 @@ class ActivityIndicator extends React.Component<Props, State> {
 
     if (animating !== prevProps.animating) {
       if (animating) {
-        this._startRotation();
+        this.startRotation();
       } else if (hidesWhenStopped) {
         // Hide indicator first and then stop rotation
         Animated.timing(fade, {
@@ -111,14 +111,14 @@ class ActivityIndicator extends React.Component<Props, State> {
           toValue: 0,
           useNativeDriver: true,
           isInteraction: false,
-        }).start(this._stopRotation.bind(this));
+        }).start(this.stopRotation.bind(this));
       } else {
-        this._stopRotation();
+        this.stopRotation();
       }
     }
   }
 
-  _startRotation = () => {
+  private startRotation = () => {
     const { fade, timer } = this.state;
 
     // Show indicator
@@ -137,7 +137,7 @@ class ActivityIndicator extends React.Component<Props, State> {
     }
   };
 
-  _stopRotation = () => {
+  private stopRotation = () => {
     if (this.rotation) {
       this.rotation.stop();
     }

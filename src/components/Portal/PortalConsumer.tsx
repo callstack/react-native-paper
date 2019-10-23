@@ -8,29 +8,29 @@ type Props = {
 
 export default class PortalConsumer extends React.Component<Props> {
   async componentDidMount() {
-    this._checkManager();
+    this.checkManager();
 
     // Delay updating to prevent React from going to infinite loop
     await Promise.resolve();
 
-    this._key = this.props.manager.mount(this.props.children);
+    this.key = this.props.manager.mount(this.props.children);
   }
 
   componentDidUpdate() {
-    this._checkManager();
+    this.checkManager();
 
-    this.props.manager.update(this._key, this.props.children);
+    this.props.manager.update(this.key, this.props.children);
   }
 
   componentWillUnmount() {
-    this._checkManager();
+    this.checkManager();
 
-    this.props.manager.unmount(this._key);
+    this.props.manager.unmount(this.key);
   }
 
-  _key: any;
+  private key: any;
 
-  _checkManager() {
+  private checkManager() {
     if (!this.props.manager) {
       throw new Error(
         'Looks like you forgot to wrap your root component with `Provider` component from `react-native-paper`.\n\n' +
@@ -39,6 +39,7 @@ export default class PortalConsumer extends React.Component<Props> {
       );
     }
   }
+
   render() {
     return null;
   }

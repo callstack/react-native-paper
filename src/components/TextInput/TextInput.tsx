@@ -208,9 +208,9 @@ class TextInput extends React.Component<TextInputProps, State> {
       // The label should be minimized if the text input is focused, or has text
       // In minimized mode, the label moves up and becomes small
       if (this.state.value || this.state.focused || this.props.error) {
-        this._minmizeLabel();
+        this.minmizeLabel();
       } else {
-        this._restoreLabel();
+        this.restoreLabel();
       }
     }
 
@@ -223,37 +223,37 @@ class TextInput extends React.Component<TextInputProps, State> {
       // We don't show placeholder if there's a label because the label acts as placeholder
       // When focused, the label moves up, so we can show a placeholder
       if (this.state.focused || this.props.error || !this.props.label) {
-        this._showPlaceholder();
+        this.showPlaceholder();
       } else {
-        this._hidePlaceholder();
+        this.hidePlaceholder();
       }
     }
 
     if (prevProps.error !== this.props.error) {
       // When the input has an error, we wiggle the label and apply error styles
       if (this.props.error) {
-        this._showError();
+        this.showError();
       } else {
-        this._hideError();
+        this.hideError();
       }
     }
   }
 
   componentWillUnmount() {
-    if (this._timer) {
-      clearTimeout(this._timer);
+    if (this.timer) {
+      clearTimeout(this.timer);
     }
   }
 
-  _showPlaceholder = () => {
-    if (this._timer) {
-      clearTimeout(this._timer);
+  private showPlaceholder = () => {
+    if (this.timer) {
+      clearTimeout(this.timer);
     }
 
     // Set the placeholder in a delay to offset the label animation
     // If we show it immediately, they'll overlap and look ugly
     // @ts-ignore
-    this._timer = setTimeout(
+    this.timer = setTimeout(
       () =>
         this.setState({
           placeholder: this.props.placeholder,
@@ -262,15 +262,15 @@ class TextInput extends React.Component<TextInputProps, State> {
     );
   };
 
-  _hidePlaceholder = () =>
+  private hidePlaceholder = () =>
     this.setState({
       placeholder: '',
     });
 
-  _timer?: number;
-  _root: NativeTextInput | undefined | null;
+  private timer?: number;
+  private root: NativeTextInput | undefined | null;
 
-  _showError = () => {
+  private showError = () => {
     Animated.timing(this.state.error, {
       toValue: 1,
       duration: FOCUS_ANIMATION_DURATION,
@@ -279,10 +279,10 @@ class TextInput extends React.Component<TextInputProps, State> {
         ios: false,
         default: true,
       }),
-    }).start(this._showPlaceholder);
+    }).start(this.showPlaceholder);
   };
 
-  _hideError = () => {
+  private hideError = () => {
     Animated.timing(this.state.error, {
       toValue: 0,
       duration: BLUR_ANIMATION_DURATION,
@@ -294,7 +294,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     }).start();
   };
 
-  _restoreLabel = () =>
+  private restoreLabel = () =>
     Animated.timing(this.state.labeled, {
       toValue: 1,
       duration: FOCUS_ANIMATION_DURATION,
@@ -305,7 +305,7 @@ class TextInput extends React.Component<TextInputProps, State> {
       }),
     }).start();
 
-  _minmizeLabel = () =>
+  private minmizeLabel = () =>
     Animated.timing(this.state.labeled, {
       toValue: 0,
       duration: BLUR_ANIMATION_DURATION,
@@ -316,7 +316,7 @@ class TextInput extends React.Component<TextInputProps, State> {
       }),
     }).start();
 
-  _handleFocus = (args: any) => {
+  private handleFocus = (args: any) => {
     if (this.props.disabled || !this.props.editable) {
       return;
     }
@@ -328,7 +328,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     }
   };
 
-  _handleBlur = (args: Object) => {
+  private handleBlur = (args: Object) => {
     if (this.props.disabled || !this.props.editable) {
       return;
     }
@@ -340,7 +340,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     }
   };
 
-  _handleChangeText = (value: string) => {
+  private handleChangeText = (value: string) => {
     if (!this.props.editable) {
       return;
     }
@@ -349,7 +349,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     this.props.onChangeText && this.props.onChangeText(value);
   };
 
-  _onLayoutAnimatedText = (e: LayoutChangeEvent) => {
+  private handleLayoutAnimatedText = (e: LayoutChangeEvent) => {
     this.setState({
       labelLayout: {
         width: e.nativeEvent.layout.width,
@@ -363,35 +363,35 @@ class TextInput extends React.Component<TextInputProps, State> {
    * @internal
    */
   setNativeProps(args: Object) {
-    return this._root && this._root.setNativeProps(args);
+    return this.root && this.root.setNativeProps(args);
   }
 
   /**
    * Returns `true` if the input is currently focused, `false` otherwise.
    */
   isFocused() {
-    return this._root && this._root.isFocused();
+    return this.root && this.root.isFocused();
   }
 
   /**
    * Removes all text from the TextInput.
    */
   clear() {
-    return this._root && this._root.clear();
+    return this.root && this.root.clear();
   }
 
   /**
    * Focuses the input.
    */
   focus() {
-    return this._root && this._root.focus();
+    return this.root && this.root.focus();
   }
 
   /**
    * Removes focus from the input.
    */
   blur() {
-    return this._root && this._root.blur();
+    return this.root && this.root.blur();
   }
 
   render() {
@@ -402,24 +402,24 @@ class TextInput extends React.Component<TextInputProps, State> {
         {...rest}
         parentState={this.state}
         innerRef={ref => {
-          this._root = ref;
+          this.root = ref;
         }}
-        onFocus={this._handleFocus}
-        onBlur={this._handleBlur}
-        onChangeText={this._handleChangeText}
-        onLayoutAnimatedText={this._onLayoutAnimatedText}
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
+        onChangeText={this.handleChangeText}
+        onLayoutAnimatedText={this.handleLayoutAnimatedText}
       />
     ) : (
       <TextInputFlat
         {...rest}
         parentState={this.state}
         innerRef={ref => {
-          this._root = ref;
+          this.root = ref;
         }}
-        onFocus={this._handleFocus}
-        onBlur={this._handleBlur}
-        onChangeText={this._handleChangeText}
-        onLayoutAnimatedText={this._onLayoutAnimatedText}
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
+        onChangeText={this.handleChangeText}
+        onLayoutAnimatedText={this.handleLayoutAnimatedText}
       />
     );
   }

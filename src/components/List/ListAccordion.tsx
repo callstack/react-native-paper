@@ -145,7 +145,7 @@ class ListAccordion extends React.Component<Props, State> {
     expanded: this.props.expanded || false,
   };
 
-  _handlePress = () => {
+  private handlePress = () => {
     this.props.onPress && this.props.onPress();
 
     if (this.props.expanded === undefined) {
@@ -199,7 +199,7 @@ class ListAccordion extends React.Component<Props, State> {
           const handlePress =
             groupContext && id !== undefined
               ? () => groupContext.onAccordionPress(id)
-              : this._handlePress;
+              : this.handlePress;
           return (
             <View>
               <TouchableRipple
