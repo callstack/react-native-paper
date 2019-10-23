@@ -5,6 +5,7 @@ const fs = require('fs');
 const types = require('babel-types');
 const parser = require('@babel/parser');
 
+const packageJson = require('../package.json');
 const root = path.resolve(__dirname, '..');
 const output = path.join(root, 'lib/mappings.json');
 const source = fs.readFileSync(path.resolve(root, 'src', 'index.tsx'), 'utf8');
@@ -20,7 +21,7 @@ const ast = parser.parse(source, {
 });
 
 const relative = (value /* : string */) =>
-  path.relative(root, path.resolve(path.dirname(require.resolve('..')), value));
+  path.relative(root, path.resolve(path.dirname(packageJson.module), value));
 
 const mappings = ast.program.body.reduce((acc, declaration, index, self) => {
   if (types.isExportNamedDeclaration(declaration)) {
