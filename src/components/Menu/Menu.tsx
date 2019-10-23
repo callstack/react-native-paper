@@ -207,7 +207,7 @@ class Menu extends React.Component<Props, State> {
     }
   };
 
-  _isBrowser = () => 'document' in global;
+  _isBrowser = () => Platform.OS === 'web' && 'document' in global;
 
   _focusFirstDOMNode = (el: View | null | undefined) => {
     if (el && this._isBrowser()) {
