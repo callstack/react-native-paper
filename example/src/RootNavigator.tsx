@@ -1,87 +1,51 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
 import { Appbar } from 'react-native-paper';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createSimpleNavigator } from './SimpleNavigator';
 import ExampleList, { examples } from './ExampleList';
-import { Router, navigate } from '@reach/router';
+import { Platform } from '@unimodules/core';
 
-const Home = (props: any) => (
-  <View style={styles.container}>
-    <Appbar.Header>
-      <Appbar.Content title="Examples" />
-    </Appbar.Header>
-    <ExampleList navigation={props.navigation} />
-  </View>
-);
+const Stack: ReturnType<typeof createStackNavigator> =
+  Platform.OS === 'web'
+    ? (createSimpleNavigator() as any)
+    : createStackNavigator();
 
-const routes = Object.keys(examples)
-  .map(id => ({ id, item: examples[id] }))
-  // @ts-ignore
-  .reduce((acc, { id, item }) => {
-    const Comp: any = item;
-
-    const Screen = (props: any) => {
-      const options =
-        typeof Comp.navigationOptions === 'function'
-          ? Comp.navigationOptions(props)
-          : Comp.navigationOptions;
-
-      return (
-        <View style={styles.container}>
-          {options && typeof options.header !== 'undefined' ? (
-            options.header
-          ) : (
-            <Appbar.Header>
-              <Appbar.BackAction onPress={() => props.navigation.goBack()} />
-              <Appbar.Content title={(Comp as any).title} />
-            </Appbar.Header>
-          )}
-          <Comp {...props} navigation={props.navigation} />
-        </View>
-      );
-    };
-
-    return [...acc, { id, Screen }];
-  }, []);
-
-export default class App extends React.Component<{}, any> {
-  state = {
-    navigation: {
-      navigate,
-      goBack: () => window.history.back(),
-      state: {
-        params: {},
-      },
-      setParams: (params: any) => {
-        this.setState((state: any) => ({
-          navigation: {
-            ...state.navigation,
-            state: {
-              ...state.navigation.state,
-              params: {
-                ...state.navigation.state.params,
-                ...params,
-              },
-            },
-          },
-        }));
-      },
-    },
-  };
-
-  render() {
-    return (
-      <Router>
-        <Home key="/" path="/" navigation={this.state.navigation} />
-        {routes.map(({ id, Screen }: any) => (
-          <Screen key={id} path={id} navigation={this.state.navigation} />
-        ))}
-      </Router>
-    );
-  }
+export default function Root() {
+  return (
+    <Stack.Navigator
+      headerMode="screen"
+      screenOptions={{
+        header: ({ navigation, scene, previous }) => (
+          <Appbar.Header>
+            {previous ? (
+              <Appbar.BackAction onPress={() => navigation.goBack()} />
+            ) : (
+              <Appbar.Action
+                icon="menu"
+                onPress={() =>
+                  ((navigation as any) as DrawerNavigationProp<{}>).openDrawer()
+                }
+              />
+            )}
+            <Appbar.Content title={scene.descriptor.options.title} />
+          </Appbar.Header>
+        ),
+      }}
+    >
+      <Stack.Screen
+        name="Home"
+        component={ExampleList}
+        options={{ title: 'Examples' }}
+      />
+      {Object.keys(examples).map(id => (
+        <Stack.Screen
+          key={id}
+          name={id}
+          component={examples[id]}
+          options={{ title: examples[id].title }}
+        />
+      ))}
+    </Stack.Navigator>
+  );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    height: '100vh',
-  },
-});
