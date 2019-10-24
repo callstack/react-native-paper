@@ -83,26 +83,26 @@ class ProgressBar extends React.Component<Props, State> {
 
     if (progress !== prevProps.progress || visible !== prevProps.visible) {
       if (visible) {
-        this._startAnimation();
+        this.startAnimation();
       } else {
-        this._stopAnimation();
+        this.stopAnimation();
       }
     }
   }
 
-  _onLayout = (event: LayoutChangeEvent) => {
+  private onLayout = (event: LayoutChangeEvent) => {
     const { visible } = this.props;
     const { width: previousWidth } = this.state;
 
     this.setState({ width: event.nativeEvent.layout.width }, () => {
       // Start animation the very first time when previously the width was unclear
       if (visible && previousWidth === 0) {
-        this._startAnimation();
+        this.startAnimation();
       }
     });
   };
 
-  _startAnimation() {
+  private startAnimation = () => {
     const { indeterminate, progress } = this.props;
     const { fade, timer } = this.state;
 
@@ -138,9 +138,9 @@ class ProgressBar extends React.Component<Props, State> {
         isInteraction: false,
       }).start();
     }
-  }
+  };
 
-  _stopAnimation() {
+  private stopAnimation = () => {
     const { fade } = this.state;
 
     // Stop indeterminate animation
@@ -154,7 +154,7 @@ class ProgressBar extends React.Component<Props, State> {
       useNativeDriver: true,
       isInteraction: false,
     }).start();
-  }
+  };
 
   render() {
     const { color, indeterminate, style, theme } = this.props;
@@ -166,7 +166,7 @@ class ProgressBar extends React.Component<Props, State> {
       .string();
 
     return (
-      <View onLayout={this._onLayout}>
+      <View onLayout={this.onLayout}>
         <Animated.View
           style={[
             styles.container,

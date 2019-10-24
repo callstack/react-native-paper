@@ -135,33 +135,33 @@ class Snackbar extends React.Component<Props, State> {
 
   componentDidMount() {
     if (this.props.visible) {
-      this._show();
+      this.show();
     }
   }
 
   componentDidUpdate(prevProps: Props) {
     if (prevProps.visible !== this.props.visible) {
-      this._toggle();
+      this.toggle();
     }
   }
 
   componentWillUnmount() {
-    if (this._hideTimeout) {
-      clearTimeout(this._hideTimeout);
+    if (this.hideTimeout) {
+      clearTimeout(this.hideTimeout);
     }
   }
 
-  _toggle = () => {
+  private toggle = () => {
     if (this.props.visible) {
-      this._show();
+      this.show();
     } else {
-      this._hide();
+      this.hide();
     }
   };
 
-  _show = () => {
-    if (this._hideTimeout) {
-      clearTimeout(this._hideTimeout);
+  private show = () => {
+    if (this.hideTimeout) {
+      clearTimeout(this.hideTimeout);
     }
     this.setState({
       hidden: false,
@@ -178,15 +178,15 @@ class Snackbar extends React.Component<Props, State> {
           duration === Number.NEGATIVE_INFINITY;
 
         if (finished && !isInfinity) {
-          this._hideTimeout = setTimeout(this.props.onDismiss, duration);
+          this.hideTimeout = setTimeout(this.props.onDismiss, duration);
         }
       }
     });
   };
 
-  _hide = () => {
-    if (this._hideTimeout) {
-      clearTimeout(this._hideTimeout);
+  private hide = () => {
+    if (this.hideTimeout) {
+      clearTimeout(this.hideTimeout);
     }
 
     Animated.timing(this.state.opacity, {
@@ -200,7 +200,7 @@ class Snackbar extends React.Component<Props, State> {
     });
   };
 
-  _hideTimeout?: number;
+  private hideTimeout?: number;
 
   render() {
     const { children, visible, action, onDismiss, theme, style } = this.props;

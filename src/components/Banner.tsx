@@ -128,32 +128,32 @@ class Banner extends React.Component<Props, State> {
 
   componentDidUpdate(prevProps: Props) {
     if (prevProps.visible !== this.props.visible) {
-      this._toggle();
+      this.toggle();
     }
   }
 
-  _handleLayout = ({ nativeEvent }: NativeEvent) => {
+  private handleLayout = ({ nativeEvent }: NativeEvent) => {
     const { height } = nativeEvent.layout;
 
     this.setState({ layout: { height, measured: true } });
   };
 
-  _toggle = () => {
+  private toggle = () => {
     if (this.props.visible) {
-      this._show();
+      this.show();
     } else {
-      this._hide();
+      this.hide();
     }
   };
 
-  _show = () => {
+  private show = () => {
     Animated.timing(this.state.position, {
       duration: 250,
       toValue: 1,
     }).start();
   };
 
-  _hide = () => {
+  private hide = () => {
     Animated.timing(this.state.position, {
       duration: 200,
       toValue: 0,
@@ -195,7 +195,7 @@ class Banner extends React.Component<Props, State> {
         <View style={[styles.wrapper, contentStyle]}>
           <Animated.View style={{ height }} />
           <Animated.View
-            onLayout={this._handleLayout}
+            onLayout={this.handleLayout}
             style={[
               layout.measured || !visible
                 ? // If we have measured banner's height or it's invisible,
@@ -213,7 +213,7 @@ class Banner extends React.Component<Props, State> {
             <View style={styles.content}>
               {icon ? (
                 <View style={styles.icon}>
-                  {/* 
+                  {/*
                   // @ts-ignore */}
                   <Icon source={icon} size={40} />
                 </View>

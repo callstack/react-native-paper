@@ -108,29 +108,29 @@ class Modal extends React.Component<Props, State> {
   componentDidUpdate(prevProps: Props) {
     if (prevProps.visible !== this.props.visible) {
       if (this.props.visible) {
-        this._showModal();
+        this.showModal();
       } else {
-        this._hideModal();
+        this.hideModal();
       }
     }
   }
 
-  _handleBack = () => {
+  private handleBack = () => {
     if (this.props.dismissable) {
-      this._hideModal();
+      this.hideModal();
     }
     return true;
   };
 
-  _showModal = () => {
+  private showModal = () => {
     const {
       theme: {
         animation: { scale },
       },
     } = this.props;
 
-    BackHandler.removeEventListener('hardwareBackPress', this._handleBack);
-    BackHandler.addEventListener('hardwareBackPress', this._handleBack);
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBack);
+    BackHandler.addEventListener('hardwareBackPress', this.handleBack);
     Animated.timing(this.state.opacity, {
       toValue: 1,
       duration: scale * 280,
@@ -139,14 +139,14 @@ class Modal extends React.Component<Props, State> {
     }).start();
   };
 
-  _hideModal = () => {
+  private hideModal = () => {
     const {
       theme: {
         animation: { scale },
       },
     } = this.props;
 
-    BackHandler.removeEventListener('hardwareBackPress', this._handleBack);
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBack);
     Animated.timing(this.state.opacity, {
       toValue: 0,
       duration: scale * 280,
@@ -160,7 +160,7 @@ class Modal extends React.Component<Props, State> {
         this.props.onDismiss();
       }
       if (this.props.visible) {
-        this._showModal();
+        this.showModal();
       } else {
         this.setState({
           rendered: false,
@@ -170,7 +170,7 @@ class Modal extends React.Component<Props, State> {
   };
 
   componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this._handleBack);
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBack);
   }
 
   render() {
@@ -186,7 +186,7 @@ class Modal extends React.Component<Props, State> {
         style={StyleSheet.absoluteFill}
       >
         <TouchableWithoutFeedback
-          onPress={dismissable ? this._hideModal : undefined}
+          onPress={dismissable ? this.hideModal : undefined}
         >
           <Animated.View
             style={[

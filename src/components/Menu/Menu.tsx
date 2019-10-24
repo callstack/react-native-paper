@@ -157,60 +157,60 @@ class Menu extends React.Component<Props, State> {
 
   componentDidUpdate(prevProps: Props) {
     if (prevProps.visible !== this.props.visible) {
-      this._updateVisibility();
+      this.updateVisibility();
     }
   }
 
   componentWillUnmount() {
-    this._removeListeners();
+    this.removeListeners();
   }
 
-  _anchor?: View | null = null;
-  _menu?: View | null = null;
+  private anchor?: View | null = null;
+  private menu?: View | null = null;
 
-  _isAnchorCoord = () => !React.isValidElement(this.props.anchor);
+  private isAnchorCoord = () => !React.isValidElement(this.props.anchor);
 
-  _measureMenuLayout = () =>
+  private measureMenuLayout = () =>
     new Promise<LayoutRectangle>(resolve => {
-      if (this._menu) {
-        this._menu.measureInWindow((x, y, width, height) => {
+      if (this.menu) {
+        this.menu.measureInWindow((x, y, width, height) => {
           resolve({ x, y, width, height });
         });
       }
     });
 
-  _measureAnchorLayout = () =>
+  private measureAnchorLayout = () =>
     new Promise<LayoutRectangle>(resolve => {
       const { anchor } = this.props;
-      if (this._isAnchorCoord()) {
+      if (this.isAnchorCoord()) {
         // @ts-ignore
         resolve({ x: anchor.x, y: anchor.y, width: 0, height: 0 });
         return;
       }
 
-      if (this._anchor) {
-        this._anchor.measureInWindow((x, y, width, height) => {
+      if (this.anchor) {
+        this.anchor.measureInWindow((x, y, width, height) => {
           resolve({ x, y, width, height });
         });
       }
     });
 
-  _updateVisibility = async () => {
+  private updateVisibility = async () => {
     // Menu is rendered in Portal, which updates items asynchronously
     // We need to do the same here so that the ref is up-to-date
     await Promise.resolve();
 
     if (this.props.visible) {
-      this._show();
+      this.show();
     } else {
-      this._hide();
+      this.hide();
     }
   };
 
-  _isBrowser = () => Platform.OS === 'web' && 'document' in global;
+  private isBrowser = () => Platform.OS === 'web' && 'document' in global;
 
-  _focusFirstDOMNode = (el: View | null | undefined) => {
-    if (el && this._isBrowser()) {
+  private focusFirstDOMNode = (el: View | null | undefined) => {
+    if (el && this.isBrowser()) {
       // When in the browser, we want to focus the first focusable item on toggle
       // For example, when menu is shown, focus the first item in the menu
       // And when menu is dismissed, send focus back to the button to resume tabbing
@@ -224,40 +224,39 @@ class Menu extends React.Component<Props, State> {
     }
   };
 
-  _handleDismiss = () => {
+  private handleDismiss = () => {
     if (this.props.visible) {
       this.props.onDismiss();
     }
     return true;
   };
 
-  _handleKeypress = (e: KeyboardEvent) => {
+  private handleKeypress = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       this.props.onDismiss();
     }
   };
 
-  _attachListeners = () => {
-    BackHandler.addEventListener('hardwareBackPress', this._handleDismiss);
-    Dimensions.addEventListener('change', this._handleDismiss);
+  private attachListeners = () => {
+    BackHandler.addEventListener('hardwareBackPress', this.handleDismiss);
+    Dimensions.addEventListener('change', this.handleDismiss);
 
-    this._isBrowser() &&
-      document.addEventListener('keyup', this._handleKeypress);
+    this.isBrowser() && document.addEventListener('keyup', this.handleKeypress);
   };
 
-  _removeListeners = () => {
-    BackHandler.removeEventListener('hardwareBackPress', this._handleDismiss);
-    Dimensions.removeEventListener('change', this._handleDismiss);
+  private removeListeners = () => {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleDismiss);
+    Dimensions.removeEventListener('change', this.handleDismiss);
 
-    this._isBrowser() &&
-      document.removeEventListener('keyup', this._handleKeypress);
+    this.isBrowser() &&
+      document.removeEventListener('keyup', this.handleKeypress);
   };
 
-  _show = async () => {
+  private show = async () => {
     const windowLayout = Dimensions.get('window');
     const [menuLayout, anchorLayout] = await Promise.all([
-      this._measureMenuLayout(),
-      this._measureAnchorLayout(),
+      this.measureMenuLayout(),
+      this.measureAnchorLayout(),
     ]);
 
     // When visible is true for first render
@@ -271,10 +270,10 @@ class Menu extends React.Component<Props, State> {
       !windowLayout.height ||
       !menuLayout.width ||
       !menuLayout.height ||
-      (!anchorLayout.width && !this._isAnchorCoord()) ||
-      (!anchorLayout.height && !this._isAnchorCoord())
+      (!anchorLayout.width && !this.isAnchorCoord()) ||
+      (!anchorLayout.height && !this.isAnchorCoord())
     ) {
-      requestAnimationFrame(this._show);
+      requestAnimationFrame(this.show);
       return;
     }
 
@@ -292,7 +291,7 @@ class Menu extends React.Component<Props, State> {
         },
       }),
       () => {
-        this._attachListeners();
+        this.attachListeners();
 
         const { animation } = this.props.theme;
         Animated.parallel([
@@ -310,15 +309,15 @@ class Menu extends React.Component<Props, State> {
           }),
         ]).start(({ finished }) => {
           if (finished) {
-            this._focusFirstDOMNode(this._menu);
+            this.focusFirstDOMNode(this.menu);
           }
         });
       }
     );
   };
 
-  _hide = () => {
-    this._removeListeners();
+  private hide = () => {
+    this.removeListeners();
 
     const { animation } = this.props.theme;
     Animated.timing(this.state.opacityAnimation, {
@@ -330,7 +329,7 @@ class Menu extends React.Component<Props, State> {
       if (finished) {
         this.setState({ menuLayout: { width: 0, height: 0 } });
         this.state.scaleAnimation.setValue({ x: 0, y: 0 });
-        this._focusFirstDOMNode(this._anchor);
+        this.focusFirstDOMNode(this.anchor);
         this.setState({ rendered: false });
       }
     });
@@ -523,18 +522,18 @@ class Menu extends React.Component<Props, State> {
     };
 
     const positionStyle = {
-      top: this._isAnchorCoord() ? top : top + additionalVerticalValue,
+      top: this.isAnchorCoord() ? top : top + additionalVerticalValue,
       ...(I18nManager.isRTL ? { right: left } : { left }),
     };
 
     return (
       <View
         ref={ref => {
-          this._anchor = ref;
+          this.anchor = ref;
         }}
         collapsable={false}
       >
-        {this._isAnchorCoord() ? null : anchor}
+        {this.isAnchorCoord() ? null : anchor}
         {rendered ? (
           <Portal>
             <TouchableWithoutFeedback onPress={onDismiss}>
@@ -542,7 +541,7 @@ class Menu extends React.Component<Props, State> {
             </TouchableWithoutFeedback>
             <View
               ref={ref => {
-                this._menu = ref;
+                this.menu = ref;
               }}
               collapsable={false}
               accessibilityViewIsModal={visible}

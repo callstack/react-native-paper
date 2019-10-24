@@ -61,9 +61,9 @@ type Props = React.ComponentProps<typeof Appbar> & {
  * export default class MyComponent extends React.Component {
  *   _goBack = () => console.log('Went back');
  *
- *   _onSearch = () => console.log('Searching');
+ *   _handleSearch = () => console.log('Searching');
  *
- *   _onMore = () => console.log('Shown more');
+ *   _handleMore = () => console.log('Shown more');
  *
  *   render() {
  *     return (
@@ -75,8 +75,8 @@ type Props = React.ComponentProps<typeof Appbar> & {
  *           title="Title"
  *           subtitle="Subtitle"
  *         />
- *         <Appbar.Action icon="search" onPress={this._onSearch} />
- *         <Appbar.Action icon="more-vert" onPress={this._onMore} />
+ *         <Appbar.Action icon="search" onPress={this._handleSearch} />
+ *         <Appbar.Action icon="more-vert" onPress={this._handleMore} />
  *       </Appbar.Header>
  *     );
  *   }

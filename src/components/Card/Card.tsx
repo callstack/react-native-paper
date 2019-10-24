@@ -103,14 +103,14 @@ class Card extends React.Component<Props, State> {
     elevation: new Animated.Value(this.props.elevation),
   };
 
-  _handlePressIn = () => {
+  private handlePressIn = () => {
     Animated.timing(this.state.elevation, {
       toValue: 8,
       duration: 150,
     }).start();
   };
 
-  _handlePressOut = () => {
+  private handlePressOut = () => {
     Animated.timing(this.state.elevation, {
       // @ts-ignore
       toValue: this.props.elevation,
@@ -149,8 +149,8 @@ class Card extends React.Component<Props, State> {
           disabled={!(onPress || onLongPress)}
           onLongPress={onLongPress}
           onPress={onPress}
-          onPressIn={onPress ? this._handlePressIn : undefined}
-          onPressOut={onPress ? this._handlePressOut : undefined}
+          onPressIn={onPress ? this.handlePressIn : undefined}
+          onPressOut={onPress ? this.handlePressOut : undefined}
           testID={testID}
           accessible={accessible}
         >

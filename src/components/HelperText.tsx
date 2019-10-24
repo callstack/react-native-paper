@@ -103,14 +103,14 @@ class HelperText extends React.PureComponent<Props, State> {
       prevState.textHeight !== this.state.textHeight
     ) {
       if (this.props.visible) {
-        this._showText();
+        this.showText();
       } else {
-        this._hideText();
+        this.hideText();
       }
     }
   }
 
-  _showText = () => {
+  private showText = () => {
     Animated.timing(this.state.shown, {
       toValue: 1,
       duration: 150,
@@ -118,7 +118,7 @@ class HelperText extends React.PureComponent<Props, State> {
     }).start();
   };
 
-  _hideText = () => {
+  private hideText = () => {
     Animated.timing(this.state.shown, {
       toValue: 0,
       duration: 180,
@@ -126,7 +126,7 @@ class HelperText extends React.PureComponent<Props, State> {
     }).start();
   };
 
-  _handleTextLayout = (e: LayoutChangeEvent) => {
+  private handleTextLayout = (e: LayoutChangeEvent) => {
     this.props.onLayout && this.props.onLayout(e);
     this.setState({
       textHeight: e.nativeEvent.layout.height,
@@ -156,7 +156,7 @@ class HelperText extends React.PureComponent<Props, State> {
 
     return (
       <AnimatedText
-        onLayout={this._handleTextLayout}
+        onLayout={this.handleTextLayout}
         style={[
           styles.text,
           padding !== 'none' ? styles.padding : {},

@@ -416,14 +416,14 @@ class BottomNavigation extends React.Component<Props, State> {
   componentDidMount() {
     // Workaround for native animated bug in react-native@^0.57
     // Context: https://github.com/callstack/react-native-paper/pull/637
-    this._animateToCurrentIndex();
+    this.animateToCurrentIndex();
 
     if (Platform.OS === 'ios') {
-      Keyboard.addListener('keyboardWillShow', this._handleKeyboardShow);
-      Keyboard.addListener('keyboardWillHide', this._handleKeyboardHide);
+      Keyboard.addListener('keyboardWillShow', this.handleKeyboardShow);
+      Keyboard.addListener('keyboardWillHide', this.handleKeyboardHide);
     } else {
-      Keyboard.addListener('keyboardDidShow', this._handleKeyboardShow);
-      Keyboard.addListener('keyboardDidHide', this._handleKeyboardHide);
+      Keyboard.addListener('keyboardDidShow', this.handleKeyboardShow);
+      Keyboard.addListener('keyboardDidHide', this.handleKeyboardHide);
     }
   }
 
@@ -442,20 +442,20 @@ class BottomNavigation extends React.Component<Props, State> {
       }
     });
 
-    this._animateToCurrentIndex();
+    this.animateToCurrentIndex();
   }
 
   componentWillUnmount() {
     if (Platform.OS === 'ios') {
-      Keyboard.removeListener('keyboardWillShow', this._handleKeyboardShow);
-      Keyboard.removeListener('keyboardWillHide', this._handleKeyboardHide);
+      Keyboard.removeListener('keyboardWillShow', this.handleKeyboardShow);
+      Keyboard.removeListener('keyboardWillHide', this.handleKeyboardHide);
     } else {
-      Keyboard.removeListener('keyboardDidShow', this._handleKeyboardShow);
-      Keyboard.removeListener('keyboardDidHide', this._handleKeyboardHide);
+      Keyboard.removeListener('keyboardDidShow', this.handleKeyboardShow);
+      Keyboard.removeListener('keyboardDidHide', this.handleKeyboardHide);
     }
   }
 
-  _handleKeyboardShow = () =>
+  private handleKeyboardShow = () =>
     this.setState({ keyboard: true }, () =>
       Animated.timing(this.state.visible, {
         toValue: 0,
@@ -464,7 +464,7 @@ class BottomNavigation extends React.Component<Props, State> {
       }).start()
     );
 
-  _handleKeyboardHide = () =>
+  private handleKeyboardHide = () =>
     Animated.timing(this.state.visible, {
       toValue: 1,
       duration: 100,
@@ -473,8 +473,8 @@ class BottomNavigation extends React.Component<Props, State> {
       this.setState({ keyboard: false });
     });
 
-  _animateToCurrentIndex = () => {
-    const shifting = this._isShifting();
+  private animateToCurrentIndex = () => {
+    const shifting = this.isShifting();
     const { routes, index } = this.props.navigationState;
 
     // Reset the ripple to avoid glitch if it's currently animating
@@ -515,7 +515,7 @@ class BottomNavigation extends React.Component<Props, State> {
     });
   };
 
-  _handleLayout = (e: LayoutChangeEvent) => {
+  private handleLayout = (e: LayoutChangeEvent) => {
     const { layout } = this.state;
     const { height, width } = e.nativeEvent.layout;
 
@@ -532,7 +532,7 @@ class BottomNavigation extends React.Component<Props, State> {
     });
   };
 
-  _handleTabPress = (index: number) => {
+  private handleTabPress = (index: number) => {
     const { navigationState, onTabPress, onIndexChange } = this.props;
 
     if (onTabPress) {
@@ -546,7 +546,7 @@ class BottomNavigation extends React.Component<Props, State> {
     }
   };
 
-  _jumpTo = (key: string) => {
+  private jumpTo = (key: string) => {
     const index = this.props.navigationState.routes.findIndex(
       route => route.key === key
     );
@@ -554,7 +554,7 @@ class BottomNavigation extends React.Component<Props, State> {
     this.props.onIndexChange(index);
   };
 
-  _isShifting = () =>
+  private isShifting = () =>
     typeof this.props.shifting === 'boolean'
       ? this.props.shifting
       : this.props.navigationState.routes.length > 3;
@@ -584,7 +584,7 @@ class BottomNavigation extends React.Component<Props, State> {
     const { routes } = navigationState;
     const { colors, dark: isDarkTheme, mode } = theme;
 
-    const shifting = this._isShifting();
+    const shifting = this.isShifting();
 
     const { backgroundColor: customBackground, elevation = 4 }: ViewStyle =
       StyleSheet.flatten(barStyle) || {};
@@ -669,7 +669,7 @@ class BottomNavigation extends React.Component<Props, State> {
                 <Animated.View style={[styles.content, { top }]}>
                   {renderScene({
                     route,
-                    jumpTo: this._jumpTo,
+                    jumpTo: this.jumpTo,
                   })}
                 </Animated.View>
               </Animated.View>
@@ -702,7 +702,7 @@ class BottomNavigation extends React.Component<Props, State> {
           pointerEvents={
             keyboardHidesNavigationBar && this.state.keyboard ? 'none' : 'auto'
           }
-          onLayout={this._handleLayout}
+          onLayout={this.handleLayout}
         >
           <Animated.View style={[styles.barContent, { backgroundColor }]}>
             <SafeAreaView
@@ -785,7 +785,7 @@ class BottomNavigation extends React.Component<Props, State> {
                     borderless
                     centered
                     rippleColor={touchColor}
-                    onPress={() => this._handleTabPress(index)}
+                    onPress={() => this.handleTabPress(index)}
                     testID={getTestID({ route })}
                     accessibilityLabel={getAccessibilityLabel({ route })}
                     accessibilityTraits={
