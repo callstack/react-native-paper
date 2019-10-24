@@ -56,14 +56,14 @@
 <p>Change your script in <code>package.json</code>:</p>
 <pre><code class="language-diff">/* package.json */
 
-  "scripts": {
-<span class="token deleted">-   "start": "react-scripts start",</span>
-<span class="token inserted">+   "start": "react-app-rewired start",</span>
-<span class="token deleted">-   "build": "react-scripts build",</span>
-<span class="token inserted">+   "build": "react-app-rewired build",</span>
-<span class="token deleted">-   "test": "react-scripts test --env=jsdom",</span>
-<span class="token inserted">+   "test": "react-app-rewired test --env=jsdom"</span>
-}</code></pre>
+<span class="token unchanged">  "scripts": {
+</span><span class="token deleted-sign deleted">-   "start": "react-scripts start",
+</span><span class="token inserted-sign inserted">+   "start": "react-app-rewired start",
+</span><span class="token deleted-sign deleted">-   "build": "react-scripts build",
+</span><span class="token inserted-sign inserted">+   "build": "react-app-rewired build",
+</span><span class="token deleted-sign deleted">-   "test": "react-scripts test --env=jsdom",
+</span><span class="token inserted-sign inserted">+   "test": "react-app-rewired test --env=jsdom"
+</span>}</code></pre>
 <h3 id="custom-webpack-setup">
           <a class="anchor" href="#custom-webpack-setup">
             <svg width="16" height="16">
