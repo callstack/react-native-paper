@@ -4,6 +4,7 @@ exports[`renders portal with siblings 1`] = `
 Array [
   <View
     collapsable={false}
+    pointerEvents="box-none"
     style={
       Object {
         "flex": 1,
