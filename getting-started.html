@@ -17,6 +17,7 @@
 <p>If you're on a vanilla React Native project, you also need to install and link <a href="https://github.com/oblador/react-native-vector-icons">react-native-vector-icons</a>.</p>
 <pre><code class="language-sh">yarn add react-native-vector-icons
 react-native link react-native-vector-icons</code></pre>
+<p>Note: If you are using react-native version 0.60 or higher you don't need to link <a href="https://github.com/oblador/react-native-vector-icons">react-native-vector-icons</a>.</p>
 <p>If you don't want to install vector icons, you can use <a href="https://github.com/satya164/babel-plugin-optional-require">babel-plugin-optional-require</a> to opt-out.</p>
 <p>If you use Expo, you don't need to install vector icons. But if you have a <code>babel.config.js</code> or <code>.babelrc</code> file, make sure that it includes <code>babel-preset-expo</code>.</p>
 <p>To get smaller bundle size by excluding modules you don't use, you can use our optional babel plugin. The plugin automatically rewrites the import statements so that only the modules you use are imported instead of the whole library. Add <code>react-native-paper/babel</code> to the <code>plugins</code> section in your <code>babel.config.js</code> for production environment. It should look like this:</p>
