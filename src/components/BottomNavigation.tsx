@@ -587,7 +587,16 @@ class BottomNavigation extends React.Component<Props, State> {
       theme,
     } = this.props;
 
-    const { layout, loaded } = this.state;
+    const {
+      layout,
+      loaded,
+      index,
+      visible,
+      ripple,
+      keyboard,
+      tabs,
+      offsets,
+    } = this.state;
     const { routes } = navigationState;
     const { colors, dark: isDarkTheme, mode } = theme;
 
@@ -603,7 +612,7 @@ class BottomNavigation extends React.Component<Props, State> {
       : colors.primary;
 
     const backgroundColor = shifting
-      ? this.state.index.interpolate({
+      ? index.interpolate({
           inputRange: routes.map((_, i) => i),
           //@ts-ignore
           outputRange: routes.map(
@@ -631,11 +640,12 @@ class BottomNavigation extends React.Component<Props, State> {
       .string();
 
     const maxTabWidth = routes.length > 3 ? MIN_TAB_WIDTH : MAX_TAB_WIDTH;
-    const tabWidth = Math.min(
-      // Account for horizontal padding around the items
-      (layout.width * 4) / routes.length,
-      maxTabWidth
-    );
+    const maxTabBarWidth = maxTabWidth * routes.length;
+
+    const tabBarWidth = Math.min(layout.width, maxTabBarWidth);
+    const tabWidth = tabBarWidth / routes.length;
+
+    const rippleSize = layout.width / 4;
 
     return (
       <View
@@ -649,8 +659,8 @@ class BottomNavigation extends React.Component<Props, State> {
               return null;
             }
 
-            const opacity = this.state.tabs[index];
-            const top = this.state.offsets[index].interpolate({
+            const opacity = tabs[index];
+            const top = offsets[index].interpolate({
               inputRange: [0, 1],
               outputRange: [0, FAR_FAR_AWAY],
             });
@@ -692,29 +702,29 @@ class BottomNavigation extends React.Component<Props, State> {
                     // When the keyboard is shown, slide down the navigation bar
                     transform: [
                       {
-                        translateY: this.state.visible.interpolate({
+                        translateY: visible.interpolate({
                           inputRange: [0, 1],
-                          outputRange: [this.state.layout.height, 0],
+                          outputRange: [layout.height, 0],
                         }),
                       },
                     ],
                     // Absolutely position the navigation bar so that the content is below it
                     // This is needed to avoid gap at bottom when the navigation bar is hidden
-                    position: this.state.keyboard ? 'absolute' : null,
+                    position: keyboard ? 'absolute' : null,
                   }
                 : null,
               barStyle,
             ] as StyleProp<ViewStyle>
           }
           pointerEvents={
-            keyboardHidesNavigationBar && this.state.keyboard ? 'none' : 'auto'
+            keyboardHidesNavigationBar && keyboard ? 'none' : 'auto'
           }
           onLayout={this.handleLayout}
         >
           <Animated.View style={[styles.barContent, { backgroundColor }]}>
             <SafeAreaView
               forceInset={{ top: 'never', bottom: 'always' }}
-              style={[styles.items, { maxWidth: maxTabWidth * routes.length }]}
+              style={[styles.items, { maxWidth: maxTabBarWidth }]}
             >
               {shifting ? (
                 <Animated.View
@@ -724,27 +734,26 @@ class BottomNavigation extends React.Component<Props, State> {
                     {
                       // Since we have a single ripple, we have to reposition it so that it appears to expand from active tab.
                       // We need to move it from the top to center of the navigation bar and from the left to the active tab.
-                      top: BAR_HEIGHT / 2 - layout.width / 8,
+                      top: (BAR_HEIGHT - rippleSize) / 2,
                       left:
-                        navigationState.index * tabWidth +
-                        tabWidth / 2 -
-                        layout.width / 8,
-                      height: layout.width / 4,
-                      width: layout.width / 4,
-                      borderRadius: layout.width / 2,
+                        tabWidth * (navigationState.index + 0.5) -
+                        rippleSize / 2,
+                      height: rippleSize,
+                      width: rippleSize,
+                      borderRadius: rippleSize / 2,
                       backgroundColor: getColor({
                         route: routes[navigationState.index],
                       }),
                       transform: [
                         {
                           // Scale to twice the size  to ensure it covers the whole navigation bar
-                          scale: this.state.ripple.interpolate({
+                          scale: ripple.interpolate({
                             inputRange: [0, 1],
                             outputRange: [0, 8],
                           }),
                         },
                       ],
-                      opacity: this.state.ripple.interpolate({
+                      opacity: ripple.interpolate({
                         inputRange: [0, MIN_RIPPLE_SCALE, 0.3, 1],
                         outputRange: [0, 0, 1, 1],
                       }),
@@ -754,7 +763,7 @@ class BottomNavigation extends React.Component<Props, State> {
               ) : null}
               {routes.map((route, index) => {
                 const focused = navigationState.index === index;
-                const active = this.state.tabs[index];
+                const active = tabs[index];
 
                 // Scale the label up
                 const scale =
