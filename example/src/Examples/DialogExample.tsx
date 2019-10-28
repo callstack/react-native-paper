@@ -50,19 +50,45 @@ class DialogExample extends React.Component<Props, State> {
         colors: { background },
       },
     } = this.props;
+
     const { visible1, visible2, visible3, visible4, visible5 } = this.state;
+
     return (
       <View style={[styles.container, { backgroundColor: background }]}>
-        <Button onPress={this._openDialog1}>Show Dialog with long text</Button>
-        <Button onPress={this._openDialog2}>
-          Show Dialog with radio buttons
+        <Button
+          mode="outlined"
+          onPress={this._openDialog1}
+          style={styles.button}
+        >
+          Long text
         </Button>
-        <Button onPress={this._openDialog3}>
-          Show Dialog with loading indicator
+        <Button
+          mode="outlined"
+          onPress={this._openDialog2}
+          style={styles.button}
+        >
+          Radio buttons
         </Button>
-        <Button onPress={this._openDialog4}>Show undismissable Dialog</Button>
-        <Button onPress={this._openDialog5}>
-          Show Dialog with custom colors
+        <Button
+          mode="outlined"
+          onPress={this._openDialog3}
+          style={styles.button}
+        >
+          Progress indicator
+        </Button>
+        <Button
+          mode="outlined"
+          onPress={this._openDialog4}
+          style={styles.button}
+        >
+          Undismissable Dialog
+        </Button>
+        <Button
+          mode="outlined"
+          onPress={this._openDialog5}
+          style={styles.button}
+        >
+          Custom colors
         </Button>
         <DialogWithLongText visible={visible1} close={this._closeDialog1} />
         <DialogWithRadioBtns visible={visible2} close={this._closeDialog2} />
@@ -81,7 +107,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.grey200,
-    padding: 16,
+    padding: 12,
+  },
+  button: {
+    margin: 4,
   },
 });
 
