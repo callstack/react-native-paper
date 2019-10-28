@@ -176,6 +176,12 @@ type Props = {
    */
   inactiveColor?: string;
   /**
+   * Whether animation is enabled for scenes transitions in `shifting` mode.
+   * By default, the scenes cross-fade during tab change when `shifting` is enabled.
+   * Specify `sceneAnimationEnabled` as `false` to disable the animation.
+   */
+  sceneAnimationEnabled?: boolean;
+  /**
    * Whether the bottom navigation bar is hidden when keyboard is shown.
    * On Android, this works best when [`windowSoftInputMode`](https://developer.android.com/guide/topics/manifest/activity-element#wsoft) is set to `adjustResize`.
    */
@@ -475,7 +481,8 @@ class BottomNavigation extends React.Component<Props, State> {
 
   private animateToCurrentIndex = () => {
     const shifting = this.isShifting();
-    const { routes, index } = this.props.navigationState;
+    const { sceneAnimationEnabled, navigationState } = this.props;
+    const { routes, index } = navigationState;
 
     // Reset the ripple to avoid glitch if it's currently animating
     this.state.ripple.setValue(MIN_RIPPLE_SCALE);
@@ -489,7 +496,7 @@ class BottomNavigation extends React.Component<Props, State> {
       ...routes.map((_, i) =>
         Animated.timing(this.state.tabs[i], {
           toValue: i === index ? 1 : 0,
-          duration: shifting ? 150 : 75,
+          duration: shifting && sceneAnimationEnabled !== false ? 150 : 0,
           useNativeDriver: true,
         })
       ),
