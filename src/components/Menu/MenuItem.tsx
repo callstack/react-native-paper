@@ -1,6 +1,6 @@
 import color from 'color';
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ViewStyle, StyleProp } from 'react-native';
 import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple';
 import Text from '../Typography/Text';
@@ -29,7 +29,7 @@ type Props = {
    * @optional
    */
   theme: Theme;
-  style?: any;
+  style?: StyleProp<ViewStyle>;
 };
 
 /**
