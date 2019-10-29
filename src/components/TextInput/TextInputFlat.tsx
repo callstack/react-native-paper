@@ -88,7 +88,11 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       paddingHorizontal: number;
     };
 
-    let inputTextColor, activeColor, underlineColorCustom, placeholderColor;
+    let inputTextColor,
+      activeColor,
+      underlineColorCustom,
+      placeholderColor,
+      errorColor;
 
     if (disabled) {
       inputTextColor = activeColor = color(colors.text)
@@ -101,6 +105,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       inputTextColor = colors.text;
       activeColor = error ? colors.error : colors.primary;
       placeholderColor = colors.placeholder;
+      errorColor = colors.error;
       underlineColorCustom = underlineColor || colors.disabled;
     }
 
@@ -202,6 +207,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       hasActiveOutline,
       activeColor,
       placeholderColor,
+      errorColor,
     };
 
     const minHeight =

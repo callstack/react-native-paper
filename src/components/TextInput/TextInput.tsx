@@ -184,10 +184,10 @@ class TextInput extends React.Component<TextInputProps, State> {
   }
 
   state = {
-    labeled: new Animated.Value(this.props.value || this.props.error ? 0 : 1),
+    labeled: new Animated.Value(this.props.value ? 0 : 1),
     error: new Animated.Value(this.props.error ? 1 : 0),
     focused: false,
-    placeholder: this.props.error ? this.props.placeholder : '',
+    placeholder: '',
     value: this.props.value || this.props.defaultValue,
     labelLayout: {
       measured: false,
@@ -202,13 +202,12 @@ class TextInput extends React.Component<TextInputProps, State> {
     if (
       prevState.focused !== this.state.focused ||
       prevState.value !== this.state.value ||
-      prevProps.error !== this.props.error ||
       this.props.defaultValue
     ) {
       // The label should be minimized if the text input is focused, or has text
       // In minimized mode, the label moves up and becomes small
-      if (this.state.value || this.state.focused || this.props.error) {
-        this.minmizeLabel();
+      if (this.state.value || this.state.focused) {
+        this.minimizeLabel();
       } else {
         this.restoreLabel();
       }
@@ -216,13 +215,12 @@ class TextInput extends React.Component<TextInputProps, State> {
 
     if (
       prevState.focused !== this.state.focused ||
-      prevProps.label !== this.props.label ||
-      prevProps.error !== this.props.error
+      prevProps.label !== this.props.label
     ) {
-      // Show placeholder text only if the input is focused, or has error, or there's no label
+      // Show placeholder text only if the input is focused, or there's no label
       // We don't show placeholder if there's a label because the label acts as placeholder
       // When focused, the label moves up, so we can show a placeholder
-      if (this.state.focused || this.props.error || !this.props.label) {
+      if (this.state.focused || !this.props.label) {
         this.showPlaceholder();
       } else {
         this.hidePlaceholder();
@@ -305,7 +303,7 @@ class TextInput extends React.Component<TextInputProps, State> {
       }),
     }).start();
 
-  private minmizeLabel = () =>
+  private minimizeLabel = () =>
     Animated.timing(this.state.labeled, {
       toValue: 0,
       duration: BLUR_ANIMATION_DURATION,
