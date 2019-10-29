@@ -45,6 +45,8 @@ type State = {
   rendered: boolean;
 };
 
+const DEFAULT_DURATION = 220;
+
 /**
  * The Modal component is a simple way to present content above an enclosing view.
  * To render the `Modal` above other components, you'll need to wrap it with the [`Portal`](portal.html) component.
@@ -123,42 +125,40 @@ class Modal extends React.Component<Props, State> {
   };
 
   private showModal = () => {
-    const {
-      theme: {
-        animation: { scale },
-      },
-    } = this.props;
-
     BackHandler.removeEventListener('hardwareBackPress', this.handleBack);
     BackHandler.addEventListener('hardwareBackPress', this.handleBack);
-    Animated.timing(this.state.opacity, {
+
+    const { opacity } = this.state;
+    const { scale } = this.props.theme.animation;
+
+    Animated.timing(opacity, {
       toValue: 1,
-      duration: scale * 280,
-      easing: Easing.ease,
+      duration: scale * DEFAULT_DURATION,
+      easing: Easing.out(Easing.cubic),
       useNativeDriver: true,
     }).start();
   };
 
   private hideModal = () => {
-    const {
-      theme: {
-        animation: { scale },
-      },
-    } = this.props;
-
     BackHandler.removeEventListener('hardwareBackPress', this.handleBack);
-    Animated.timing(this.state.opacity, {
+
+    const { opacity } = this.state;
+    const { scale } = this.props.theme.animation;
+
+    Animated.timing(opacity, {
       toValue: 0,
-      duration: scale * 280,
-      easing: Easing.ease,
+      duration: scale * DEFAULT_DURATION,
+      easing: Easing.out(Easing.cubic),
       useNativeDriver: true,
     }).start(({ finished }) => {
       if (!finished) {
         return;
       }
+
       if (this.props.visible && this.props.onDismiss) {
         this.props.onDismiss();
       }
+
       if (this.props.visible) {
         this.showModal();
       } else {
@@ -174,7 +174,9 @@ class Modal extends React.Component<Props, State> {
   }
 
   render() {
-    if (!this.state.rendered) return null;
+    const { rendered, opacity } = this.state;
+
+    if (!rendered) return null;
 
     const { children, dismissable, theme, contentContainerStyle } = this.props;
     const { colors } = theme;
@@ -191,18 +193,16 @@ class Modal extends React.Component<Props, State> {
           <Animated.View
             style={[
               styles.backdrop,
-              { backgroundColor: colors.backdrop, opacity: this.state.opacity },
+              { backgroundColor: colors.backdrop, opacity },
             ]}
           />
         </TouchableWithoutFeedback>
         <SafeAreaView style={styles.wrapper}>
           <Surface
             style={
-              [
-                { opacity: this.state.opacity },
-                styles.content,
-                contentContainerStyle,
-              ] as StyleProp<ViewStyle>
+              [{ opacity }, styles.content, contentContainerStyle] as StyleProp<
+                ViewStyle
+              >
             }
           >
             {children}
