@@ -18,72 +18,87 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
 >
   <View
     style={
-      Object {
-        "height": 0,
-      }
-    }
-  />
-  <View
-    onLayout={[Function]}
-    style={
-      Object {
-        "opacity": 0,
-        "position": "absolute",
-        "top": 0,
-        "transform": Array [
-          Object {
-            "translateY": -0,
-          },
-        ],
-        "width": "100%",
-      }
+      Array [
+        Object {
+          "alignSelf": "center",
+          "maxWidth": 960,
+          "overflow": "hidden",
+          "width": "100%",
+        },
+        undefined,
+      ]
     }
   >
     <View
       style={
         Object {
-          "flexDirection": "row",
-          "justifyContent": "flex-start",
-          "marginBottom": 0,
-          "marginHorizontal": 8,
-          "marginTop": 16,
-        }
-      }
-    >
-      <Text
-        style={
-          Array [
-            Object {
-              "color": "#000000",
-              "fontFamily": "Helvetica Neue",
-              "textAlign": "left",
-              "writingDirection": "ltr",
-            },
-            Object {
-              "flex": 1,
-              "margin": 8,
-            },
-          ]
-        }
-      >
-        Two line text string with two actions. One to two lines is preferable on mobile.
-      </Text>
-    </View>
-    <View
-      style={
-        Object {
-          "flexDirection": "row",
-          "justifyContent": "flex-end",
-          "margin": 4,
+          "height": 0,
         }
       }
     />
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "opacity": 0,
+          "position": "absolute",
+          "top": 0,
+          "transform": Array [
+            Object {
+              "translateY": -0,
+            },
+          ],
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "marginBottom": 0,
+            "marginHorizontal": 8,
+            "marginTop": 16,
+          }
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "System",
+                "fontWeight": "400",
+                "textAlign": "left",
+              },
+              Object {
+                "flex": 1,
+                "margin": 8,
+              },
+            ]
+          }
+        >
+          Two line text string with two actions. One to two lines is preferable on mobile.
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "margin": 4,
+          }
+        }
+      />
+    </View>
   </View>
 </View>
 `;
 
 exports[`renders visible banner, with action buttons and with image 1`] = `
 <View
+  image={[Function]}
   style={
     Object {
       "backgroundColor": "#ffffff",
@@ -100,162 +115,155 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
 >
   <View
     style={
-      Object {
-        "height": 0,
-      }
+      Array [
+        Object {
+          "alignSelf": "center",
+          "maxWidth": 960,
+          "overflow": "hidden",
+          "width": "100%",
+        },
+        undefined,
+      ]
     }
-  />
-  <View
-    onLayout={[Function]}
-    style={Object {}}
   >
     <View
       style={
         Object {
-          "flexDirection": "row",
-          "justifyContent": "flex-start",
-          "marginBottom": 0,
-          "marginHorizontal": 8,
-          "marginTop": 16,
+          "height": 0,
         }
       }
-    >
-      <View
-        style={
-          Object {
-            "margin": 8,
-          }
-        }
-      >
-        <Image
-          source={
-            Object {
-              "uri": "https://callstack.com/images/team/Satya.png",
-            }
-          }
-          style={
-            Object {
-              "height": 40,
-              "width": 40,
-            }
-          }
-        />
-      </View>
-      <Text
-        style={
-          Array [
-            Object {
-              "color": "#000000",
-              "fontFamily": "Helvetica Neue",
-              "textAlign": "left",
-              "writingDirection": "ltr",
-            },
-            Object {
-              "flex": 1,
-              "margin": 8,
-            },
-          ]
-        }
-      >
-        Two line text string with two actions. One to two lines is preferable on mobile.
-      </Text>
-    </View>
+    />
     <View
-      style={
-        Object {
-          "flexDirection": "row",
-          "justifyContent": "flex-end",
-          "margin": 4,
-        }
-      }
+      onLayout={[Function]}
+      style={Object {}}
     >
       <View
         style={
           Object {
-            "backgroundColor": "transparent",
-            "borderColor": "transparent",
-            "borderRadius": 4,
-            "borderStyle": "solid",
-            "borderWidth": 0,
-            "elevation": 0,
-            "margin": 4,
-            "minWidth": "auto",
-            "shadowColor": "#000000",
-            "shadowOffset": Object {
-              "height": 0,
-              "width": 0,
-            },
-            "shadowOpacity": 0.24,
-            "shadowRadius": 0,
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "marginBottom": 0,
+            "marginHorizontal": 8,
+            "marginTop": 16,
           }
         }
       >
-        <View
-          accessibilityRole="button"
-          accessible={true}
-          isTVSelectable={true}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
+        <Text
           style={
             Array [
               Object {
-                "overflow": "hidden",
+                "color": "#000000",
+                "fontFamily": "System",
+                "fontWeight": "400",
+                "textAlign": "left",
               },
               Object {
-                "borderRadius": 4,
+                "flex": 1,
+                "margin": 8,
               },
             ]
           }
         >
+          Two line text string with two actions. One to two lines is preferable on mobile.
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "margin": 4,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "transparent",
+              "borderRadius": 4,
+              "borderStyle": "solid",
+              "borderWidth": 0,
+              "elevation": 0,
+              "margin": 4,
+              "minWidth": "auto",
+            }
+          }
+        >
           <View
+            accessibilityRole="button"
+            accessibilityStates={Array []}
+            accessible={true}
+            isTVSelectable={true}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "alignItems": "center",
-                  "flexDirection": "row",
-                  "justifyContent": "center",
+                  "overflow": "hidden",
                 },
-                undefined,
+                Object {
+                  "borderRadius": 4,
+                },
               ]
             }
           >
-            <Text
-              numberOfLines={1}
+            <View
               style={
                 Array [
                   Object {
-                    "color": "#000000",
-                    "fontFamily": "Helvetica Neue",
-                    "textAlign": "left",
-                    "writingDirection": "ltr",
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "center",
                   },
-                  Array [
-                    Object {
-                      "letterSpacing": 1,
-                      "marginHorizontal": 16,
-                      "marginVertical": 9,
-                      "textAlign": "center",
-                    },
-                    Object {
-                      "marginHorizontal": 8,
-                    },
-                    Object {
-                      "color": "#6200ee",
-                      "fontFamily": "HelveticaNeue-Medium",
-                    },
-                    Object {
-                      "fontFamily": "HelveticaNeue-Medium",
-                    },
-                  ],
+                  undefined,
                 ]
               }
             >
-              FIRST
-            </Text>
+              <Text
+                numberOfLines={1}
+                style={
+                  Array [
+                    Object {
+                      "color": "#000000",
+                      "fontFamily": "System",
+                      "fontWeight": "400",
+                      "textAlign": "left",
+                    },
+                    Array [
+                      Object {
+                        "letterSpacing": 1,
+                        "marginHorizontal": 16,
+                        "marginVertical": 9,
+                        "textAlign": "center",
+                      },
+                      Object {
+                        "marginHorizontal": 8,
+                      },
+                      Object {
+                        "textTransform": "uppercase",
+                      },
+                      Object {
+                        "color": "#6200ee",
+                        "fontFamily": "System",
+                        "fontWeight": "500",
+                      },
+                      Object {
+                        "fontFamily": "System",
+                        "fontWeight": "500",
+                      },
+                      undefined,
+                    ],
+                  ]
+                }
+              >
+                first
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -282,231 +290,245 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
 >
   <View
     style={
-      Object {
-        "height": 0,
-      }
+      Array [
+        Object {
+          "alignSelf": "center",
+          "maxWidth": 960,
+          "overflow": "hidden",
+          "width": "100%",
+        },
+        undefined,
+      ]
     }
-  />
-  <View
-    onLayout={[Function]}
-    style={Object {}}
   >
     <View
       style={
         Object {
-          "flexDirection": "row",
-          "justifyContent": "flex-start",
-          "marginBottom": 0,
-          "marginHorizontal": 8,
-          "marginTop": 16,
+          "height": 0,
         }
       }
-    >
-      <Text
-        style={
-          Array [
-            Object {
-              "color": "#000000",
-              "fontFamily": "Helvetica Neue",
-              "textAlign": "left",
-              "writingDirection": "ltr",
-            },
-            Object {
-              "flex": 1,
-              "margin": 8,
-            },
-          ]
-        }
-      >
-        Two line text string with two actions. One to two lines is preferable on mobile.
-      </Text>
-    </View>
+    />
     <View
-      style={
-        Object {
-          "flexDirection": "row",
-          "justifyContent": "flex-end",
-          "margin": 4,
-        }
-      }
+      onLayout={[Function]}
+      style={Object {}}
     >
       <View
         style={
           Object {
-            "backgroundColor": "transparent",
-            "borderColor": "transparent",
-            "borderRadius": 4,
-            "borderStyle": "solid",
-            "borderWidth": 0,
-            "elevation": 0,
-            "margin": 4,
-            "minWidth": "auto",
-            "shadowColor": "#000000",
-            "shadowOffset": Object {
-              "height": 0,
-              "width": 0,
-            },
-            "shadowOpacity": 0.24,
-            "shadowRadius": 0,
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "marginBottom": 0,
+            "marginHorizontal": 8,
+            "marginTop": 16,
           }
         }
       >
-        <View
-          accessibilityRole="button"
-          accessible={true}
-          isTVSelectable={true}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
+        <Text
           style={
             Array [
               Object {
-                "overflow": "hidden",
+                "color": "#000000",
+                "fontFamily": "System",
+                "fontWeight": "400",
+                "textAlign": "left",
               },
               Object {
-                "borderRadius": 4,
+                "flex": 1,
+                "margin": 8,
               },
             ]
           }
         >
-          <View
-            style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "flexDirection": "row",
-                  "justifyContent": "center",
-                },
-                undefined,
-              ]
-            }
-          >
-            <Text
-              numberOfLines={1}
-              style={
-                Array [
-                  Object {
-                    "color": "#000000",
-                    "fontFamily": "Helvetica Neue",
-                    "textAlign": "left",
-                    "writingDirection": "ltr",
-                  },
-                  Array [
-                    Object {
-                      "letterSpacing": 1,
-                      "marginHorizontal": 16,
-                      "marginVertical": 9,
-                      "textAlign": "center",
-                    },
-                    Object {
-                      "marginHorizontal": 8,
-                    },
-                    Object {
-                      "color": "#6200ee",
-                      "fontFamily": "HelveticaNeue-Medium",
-                    },
-                    Object {
-                      "fontFamily": "HelveticaNeue-Medium",
-                    },
-                  ],
-                ]
-              }
-            >
-              FIRST
-            </Text>
-          </View>
-        </View>
+          Two line text string with two actions. One to two lines is preferable on mobile.
+        </Text>
       </View>
       <View
         style={
           Object {
-            "backgroundColor": "transparent",
-            "borderColor": "transparent",
-            "borderRadius": 4,
-            "borderStyle": "solid",
-            "borderWidth": 0,
-            "elevation": 0,
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
             "margin": 4,
-            "minWidth": "auto",
-            "shadowColor": "#000000",
-            "shadowOffset": Object {
-              "height": 0,
-              "width": 0,
-            },
-            "shadowOpacity": 0.24,
-            "shadowRadius": 0,
           }
         }
       >
         <View
-          accessibilityRole="button"
-          accessible={true}
-          isTVSelectable={true}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
           style={
-            Array [
-              Object {
-                "overflow": "hidden",
-              },
-              Object {
-                "borderRadius": 4,
-              },
-            ]
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "transparent",
+              "borderRadius": 4,
+              "borderStyle": "solid",
+              "borderWidth": 0,
+              "elevation": 0,
+              "margin": 4,
+              "minWidth": "auto",
+            }
           }
         >
           <View
+            accessibilityRole="button"
+            accessibilityStates={Array []}
+            accessible={true}
+            isTVSelectable={true}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "alignItems": "center",
-                  "flexDirection": "row",
-                  "justifyContent": "center",
+                  "overflow": "hidden",
                 },
-                undefined,
+                Object {
+                  "borderRadius": 4,
+                },
               ]
             }
           >
-            <Text
-              numberOfLines={1}
+            <View
               style={
                 Array [
                   Object {
-                    "color": "#000000",
-                    "fontFamily": "Helvetica Neue",
-                    "textAlign": "left",
-                    "writingDirection": "ltr",
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "center",
                   },
-                  Array [
-                    Object {
-                      "letterSpacing": 1,
-                      "marginHorizontal": 16,
-                      "marginVertical": 9,
-                      "textAlign": "center",
-                    },
-                    Object {
-                      "marginHorizontal": 8,
-                    },
-                    Object {
-                      "color": "#6200ee",
-                      "fontFamily": "HelveticaNeue-Medium",
-                    },
-                    Object {
-                      "fontFamily": "HelveticaNeue-Medium",
-                    },
-                  ],
+                  undefined,
                 ]
               }
             >
-              SECOND
-            </Text>
+              <Text
+                numberOfLines={1}
+                style={
+                  Array [
+                    Object {
+                      "color": "#000000",
+                      "fontFamily": "System",
+                      "fontWeight": "400",
+                      "textAlign": "left",
+                    },
+                    Array [
+                      Object {
+                        "letterSpacing": 1,
+                        "marginHorizontal": 16,
+                        "marginVertical": 9,
+                        "textAlign": "center",
+                      },
+                      Object {
+                        "marginHorizontal": 8,
+                      },
+                      Object {
+                        "textTransform": "uppercase",
+                      },
+                      Object {
+                        "color": "#6200ee",
+                        "fontFamily": "System",
+                        "fontWeight": "500",
+                      },
+                      Object {
+                        "fontFamily": "System",
+                        "fontWeight": "500",
+                      },
+                      undefined,
+                    ],
+                  ]
+                }
+              >
+                first
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View
+          style={
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "transparent",
+              "borderRadius": 4,
+              "borderStyle": "solid",
+              "borderWidth": 0,
+              "elevation": 0,
+              "margin": 4,
+              "minWidth": "auto",
+            }
+          }
+        >
+          <View
+            accessibilityRole="button"
+            accessibilityStates={Array []}
+            accessible={true}
+            isTVSelectable={true}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Array [
+                Object {
+                  "overflow": "hidden",
+                },
+                Object {
+                  "borderRadius": 4,
+                },
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "center",
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <Text
+                numberOfLines={1}
+                style={
+                  Array [
+                    Object {
+                      "color": "#000000",
+                      "fontFamily": "System",
+                      "fontWeight": "400",
+                      "textAlign": "left",
+                    },
+                    Array [
+                      Object {
+                        "letterSpacing": 1,
+                        "marginHorizontal": 16,
+                        "marginVertical": 9,
+                        "textAlign": "center",
+                      },
+                      Object {
+                        "marginHorizontal": 8,
+                      },
+                      Object {
+                        "textTransform": "uppercase",
+                      },
+                      Object {
+                        "color": "#6200ee",
+                        "fontFamily": "System",
+                        "fontWeight": "500",
+                      },
+                      Object {
+                        "fontFamily": "System",
+                        "fontWeight": "500",
+                      },
+                      undefined,
+                    ],
+                  ]
+                }
+              >
+                second
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -517,6 +539,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
 
 exports[`renders visible banner, without action buttons and with image 1`] = `
 <View
+  image={[Function]}
   style={
     Object {
       "backgroundColor": "#ffffff",
@@ -533,75 +556,68 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
 >
   <View
     style={
-      Object {
-        "height": 0,
-      }
+      Array [
+        Object {
+          "alignSelf": "center",
+          "maxWidth": 960,
+          "overflow": "hidden",
+          "width": "100%",
+        },
+        undefined,
+      ]
     }
-  />
-  <View
-    onLayout={[Function]}
-    style={Object {}}
   >
     <View
       style={
         Object {
-          "flexDirection": "row",
-          "justifyContent": "flex-start",
-          "marginBottom": 0,
-          "marginHorizontal": 8,
-          "marginTop": 16,
+          "height": 0,
         }
       }
+    />
+    <View
+      onLayout={[Function]}
+      style={Object {}}
     >
       <View
         style={
           Object {
-            "margin": 8,
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "marginBottom": 0,
+            "marginHorizontal": 8,
+            "marginTop": 16,
           }
         }
       >
-        <Image
-          source={
-            Object {
-              "uri": "https://callstack.com/images/team/Satya.png",
-            }
-          }
+        <Text
           style={
-            Object {
-              "height": 40,
-              "width": 40,
-            }
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "System",
+                "fontWeight": "400",
+                "textAlign": "left",
+              },
+              Object {
+                "flex": 1,
+                "margin": 8,
+              },
+            ]
           }
-        />
+        >
+          Two line text string with two actions. One to two lines is preferable on mobile.
+        </Text>
       </View>
-      <Text
+      <View
         style={
-          Array [
-            Object {
-              "color": "#000000",
-              "fontFamily": "Helvetica Neue",
-              "textAlign": "left",
-              "writingDirection": "ltr",
-            },
-            Object {
-              "flex": 1,
-              "margin": 8,
-            },
-          ]
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "margin": 4,
+          }
         }
-      >
-        Two line text string with two actions. One to two lines is preferable on mobile.
-      </Text>
+      />
     </View>
-    <View
-      style={
-        Object {
-          "flexDirection": "row",
-          "justifyContent": "flex-end",
-          "margin": 4,
-        }
-      }
-    />
   </View>
 </View>
 `;
@@ -624,54 +640,68 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
 >
   <View
     style={
-      Object {
-        "height": 0,
-      }
+      Array [
+        Object {
+          "alignSelf": "center",
+          "maxWidth": 960,
+          "overflow": "hidden",
+          "width": "100%",
+        },
+        undefined,
+      ]
     }
-  />
-  <View
-    onLayout={[Function]}
-    style={Object {}}
   >
     <View
       style={
         Object {
-          "flexDirection": "row",
-          "justifyContent": "flex-start",
-          "marginBottom": 0,
-          "marginHorizontal": 8,
-          "marginTop": 16,
-        }
-      }
-    >
-      <Text
-        style={
-          Array [
-            Object {
-              "color": "#000000",
-              "fontFamily": "Helvetica Neue",
-              "textAlign": "left",
-              "writingDirection": "ltr",
-            },
-            Object {
-              "flex": 1,
-              "margin": 8,
-            },
-          ]
-        }
-      >
-        Two line text string with two actions. One to two lines is preferable on mobile.
-      </Text>
-    </View>
-    <View
-      style={
-        Object {
-          "flexDirection": "row",
-          "justifyContent": "flex-end",
-          "margin": 4,
+          "height": 0,
         }
       }
     />
+    <View
+      onLayout={[Function]}
+      style={Object {}}
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "marginBottom": 0,
+            "marginHorizontal": 8,
+            "marginTop": 16,
+          }
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "System",
+                "fontWeight": "400",
+                "textAlign": "left",
+              },
+              Object {
+                "flex": 1,
+                "margin": 8,
+              },
+            ]
+          }
+        >
+          Two line text string with two actions. One to two lines is preferable on mobile.
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "margin": 4,
+          }
+        }
+      />
+    </View>
   </View>
 </View>
 `;

@@ -4,6 +4,7 @@ exports[`renders not visible snackbar with content wrapper but no actual content
 
 exports[`renders snackbar with Text as a child 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   pointerEvents="box-none"
   style={
     Object {
@@ -19,7 +20,7 @@ exports[`renders snackbar with Text as a child 1`] = `
     style={
       Object {
         "alignItems": "center",
-        "backgroundColor": "#323232",
+        "backgroundColor": "#000000",
         "borderRadius": 4,
         "elevation": 6,
         "flexDirection": "row",
@@ -46,19 +47,19 @@ exports[`renders snackbar with Text as a child 1`] = `
         Array [
           Object {
             "color": "#000000",
-            "fontFamily": "Helvetica Neue",
+            "fontFamily": "System",
+            "fontWeight": "400",
             "textAlign": "left",
-            "writingDirection": "ltr",
           },
           Array [
             Object {
-              "color": "#ffffff",
               "flex": 1,
               "flexWrap": "wrap",
               "marginLeft": 16,
               "marginVertical": 14,
             },
             Object {
+              "color": "#ffffff",
               "marginRight": 16,
             },
           ],
@@ -75,6 +76,7 @@ exports[`renders snackbar with Text as a child 1`] = `
 
 exports[`renders snackbar with action button 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   pointerEvents="box-none"
   style={
     Object {
@@ -90,7 +92,7 @@ exports[`renders snackbar with action button 1`] = `
     style={
       Object {
         "alignItems": "center",
-        "backgroundColor": "#323232",
+        "backgroundColor": "#000000",
         "borderRadius": 4,
         "elevation": 6,
         "flexDirection": "row",
@@ -117,19 +119,19 @@ exports[`renders snackbar with action button 1`] = `
         Array [
           Object {
             "color": "#000000",
-            "fontFamily": "Helvetica Neue",
+            "fontFamily": "System",
+            "fontWeight": "400",
             "textAlign": "left",
-            "writingDirection": "ltr",
           },
           Array [
             Object {
-              "color": "#ffffff",
               "flex": 1,
               "flexWrap": "wrap",
               "marginLeft": 16,
               "marginVertical": 14,
             },
             Object {
+              "color": "#ffffff",
               "marginRight": 0,
             },
           ],
@@ -150,18 +152,12 @@ exports[`renders snackbar with action button 1`] = `
           "marginHorizontal": 8,
           "marginVertical": 6,
           "minWidth": "auto",
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 0,
         }
       }
     >
       <View
         accessibilityRole="button"
+        accessibilityStates={Array []}
         accessible={true}
         isTVSelectable={true}
         onResponderGrant={[Function]}
@@ -199,9 +195,9 @@ exports[`renders snackbar with action button 1`] = `
               Array [
                 Object {
                   "color": "#000000",
-                  "fontFamily": "Helvetica Neue",
+                  "fontFamily": "System",
+                  "fontWeight": "400",
                   "textAlign": "left",
-                  "writingDirection": "ltr",
                 },
                 Array [
                   Object {
@@ -214,17 +210,23 @@ exports[`renders snackbar with action button 1`] = `
                     "marginHorizontal": 8,
                   },
                   Object {
-                    "color": "#03dac4",
-                    "fontFamily": "HelveticaNeue-Medium",
+                    "textTransform": "uppercase",
                   },
                   Object {
-                    "fontFamily": "HelveticaNeue-Medium",
+                    "color": "#03dac4",
+                    "fontFamily": "System",
+                    "fontWeight": "500",
                   },
+                  Object {
+                    "fontFamily": "System",
+                    "fontWeight": "500",
+                  },
+                  undefined,
                 ],
               ]
             }
           >
-            UNDO
+            Undo
           </Text>
         </View>
       </View>
@@ -235,6 +237,7 @@ exports[`renders snackbar with action button 1`] = `
 
 exports[`renders snackbar with content 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   pointerEvents="box-none"
   style={
     Object {
@@ -250,7 +253,7 @@ exports[`renders snackbar with content 1`] = `
     style={
       Object {
         "alignItems": "center",
-        "backgroundColor": "#323232",
+        "backgroundColor": "#000000",
         "borderRadius": 4,
         "elevation": 6,
         "flexDirection": "row",
@@ -277,19 +280,19 @@ exports[`renders snackbar with content 1`] = `
         Array [
           Object {
             "color": "#000000",
-            "fontFamily": "Helvetica Neue",
+            "fontFamily": "System",
+            "fontWeight": "400",
             "textAlign": "left",
-            "writingDirection": "ltr",
           },
           Array [
             Object {
-              "color": "#ffffff",
               "flex": 1,
               "flexWrap": "wrap",
               "marginLeft": 16,
               "marginVertical": 14,
             },
             Object {
+              "color": "#ffffff",
               "marginRight": 16,
             },
           ],

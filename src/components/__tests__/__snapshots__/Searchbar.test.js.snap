@@ -21,6 +21,7 @@ exports[`renders with placeholder 1`] = `
 >
   <View
     accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     hitSlop={
       Object {
@@ -45,11 +46,13 @@ exports[`renders with placeholder 1`] = `
         Array [
           Object {
             "alignItems": "center",
-            "borderRadius": 18,
-            "height": 36,
             "justifyContent": "center",
             "margin": 6,
-            "overflow": "visible",
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 18,
+            "height": 36,
             "width": 36,
           },
           undefined,
@@ -85,7 +88,7 @@ exports[`renders with placeholder 1`] = `
               },
             ],
             Object {
-              "fontFamily": "Material Icons",
+              "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
@@ -93,7 +96,7 @@ exports[`renders with placeholder 1`] = `
           ]
         }
       >
-        
+        
       </Text>
     </View>
   </View>
@@ -104,6 +107,7 @@ exports[`renders with placeholder 1`] = `
     keyboardAppearance="light"
     placeholder="Search"
     placeholderTextColor="rgba(0, 0, 0, 0.54)"
+    rejectResponderTermination={true}
     returnKeyType="search"
     selectionColor="#6200ee"
     style={
@@ -118,7 +122,8 @@ exports[`renders with placeholder 1`] = `
         },
         Object {
           "color": "#000000",
-          "fontFamily": "Helvetica Neue",
+          "fontFamily": "System",
+          "fontWeight": "400",
         },
         undefined,
       ]
@@ -156,11 +161,13 @@ exports[`renders with placeholder 1`] = `
         Array [
           Object {
             "alignItems": "center",
-            "borderRadius": 18,
-            "height": 36,
             "justifyContent": "center",
             "margin": 6,
-            "overflow": "visible",
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 18,
+            "height": 36,
             "width": 36,
           },
           Object {
@@ -198,7 +205,7 @@ exports[`renders with placeholder 1`] = `
               },
             ],
             Object {
-              "fontFamily": "Material Icons",
+              "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
@@ -206,7 +213,7 @@ exports[`renders with placeholder 1`] = `
           ]
         }
       >
-        
+        
       </Text>
     </View>
   </View>
@@ -234,6 +241,7 @@ exports[`renders with text 1`] = `
 >
   <View
     accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     hitSlop={
       Object {
@@ -258,11 +266,13 @@ exports[`renders with text 1`] = `
         Array [
           Object {
             "alignItems": "center",
-            "borderRadius": 18,
-            "height": 36,
             "justifyContent": "center",
             "margin": 6,
-            "overflow": "visible",
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 18,
+            "height": 36,
             "width": 36,
           },
           undefined,
@@ -298,7 +308,7 @@ exports[`renders with text 1`] = `
               },
             ],
             Object {
-              "fontFamily": "Material Icons",
+              "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
@@ -306,7 +316,7 @@ exports[`renders with text 1`] = `
           ]
         }
       >
-        
+        
       </Text>
     </View>
   </View>
@@ -317,6 +327,7 @@ exports[`renders with text 1`] = `
     keyboardAppearance="light"
     placeholder="Search"
     placeholderTextColor="rgba(0, 0, 0, 0.54)"
+    rejectResponderTermination={true}
     returnKeyType="search"
     selectionColor="#6200ee"
     style={
@@ -331,7 +342,8 @@ exports[`renders with text 1`] = `
         },
         Object {
           "color": "#000000",
-          "fontFamily": "Helvetica Neue",
+          "fontFamily": "System",
+          "fontWeight": "400",
         },
         undefined,
       ]
@@ -341,6 +353,7 @@ exports[`renders with text 1`] = `
   />
   <View
     accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
     hitSlop={
       Object {
@@ -365,11 +378,13 @@ exports[`renders with text 1`] = `
         Array [
           Object {
             "alignItems": "center",
-            "borderRadius": 18,
-            "height": 36,
             "justifyContent": "center",
             "margin": 6,
-            "overflow": "visible",
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 18,
+            "height": 36,
             "width": 36,
           },
           false,
@@ -405,7 +420,7 @@ exports[`renders with text 1`] = `
               },
             ],
             Object {
-              "fontFamily": "Material Icons",
+              "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
@@ -413,7 +428,7 @@ exports[`renders with text 1`] = `
           ]
         }
       >
-        
+        
       </Text>
     </View>
   </View>

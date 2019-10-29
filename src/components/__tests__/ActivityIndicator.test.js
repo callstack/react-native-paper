@@ -1,10 +1,10 @@
-/* @flow */
-
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import ActivityIndicator from '../ActivityIndicator';
+import ActivityIndicator from '../ActivityIndicator.tsx';
 
 jest.useFakeTimers();
+
+jest.mock('NativeAnimatedHelper');
 
 it('renders indicator', () => {
   const tree = renderer.create(<ActivityIndicator animating />).toJSON();

@@ -1,5 +1,316 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`renders list item with custom description 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      false,
+      Array [
+        Object {
+          "padding": 8,
+        },
+        undefined,
+      ],
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      pointerEvents="none"
+      style={
+        Array [
+          Object {
+            "marginVertical": 6,
+            "paddingLeft": 8,
+          },
+          Object {
+            "flex": 1,
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "System",
+              "fontWeight": "400",
+              "textAlign": "left",
+            },
+            Array [
+              Object {
+                "fontSize": 16,
+              },
+              Object {
+                "color": "rgba(0, 0, 0, 0.87)",
+              },
+              undefined,
+            ],
+          ]
+        }
+      >
+        List Item with custom description
+      </Text>
+      <View>
+        <Text
+          numberOfLines={2}
+          style={
+            Object {
+              "color": "rgba(0, 0, 0, 0.54)",
+              "fontSize": 14,
+            }
+          }
+        >
+          React Native Paper is a high-quality, standard-compliant Design Design library that has you covered in all major use-cases.
+        </Text>
+        <View>
+          <View
+            style={
+              Object {
+                "backgroundColor": "#ebebeb",
+                "borderColor": "#ebebeb",
+                "borderRadius": 16,
+                "borderStyle": "solid",
+                "borderWidth": 0.5,
+                "elevation": 0,
+              }
+            }
+          >
+            <View
+              accessibilityRole="button"
+              accessibilityStates={Array []}
+              accessible={true}
+              isTVSelectable={true}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Array [
+                  Object {
+                    "overflow": "hidden",
+                  },
+                  Object {
+                    "borderRadius": 16,
+                  },
+                ]
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "paddingHorizontal": 4,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "padding": 4,
+                      },
+                      null,
+                    ]
+                  }
+                >
+                  <Text
+                    accessibilityElementsHidden={true}
+                    allowFontScaling={false}
+                    importantForAccessibility="no-hide-descendants"
+                    pointerEvents="none"
+                    style={
+                      Array [
+                        Object {
+                          "color": "rgba(0, 0, 0, 0.54)",
+                          "fontSize": 18,
+                        },
+                        Array [
+                          Object {
+                            "transform": Array [
+                              Object {
+                                "scaleX": 1,
+                              },
+                            ],
+                          },
+                          Object {
+                            "backgroundColor": "transparent",
+                          },
+                        ],
+                        Object {
+                          "fontFamily": "Material Design Icons",
+                          "fontStyle": "normal",
+                          "fontWeight": "normal",
+                        },
+                        Object {},
+                      ]
+                    }
+                  >
+                    
+                  </Text>
+                </View>
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Array [
+                      Object {
+                        "color": "#000000",
+                        "fontFamily": "System",
+                        "fontWeight": "400",
+                        "textAlign": "left",
+                      },
+                      Array [
+                        Object {
+                          "lineHeight": 24,
+                          "marginVertical": 4,
+                          "minHeight": 24,
+                          "textAlignVertical": "center",
+                        },
+                        Object {
+                          "color": "rgba(0, 0, 0, 0.87)",
+                          "fontFamily": "System",
+                          "fontWeight": "400",
+                          "marginLeft": 4,
+                          "marginRight": 8,
+                        },
+                        undefined,
+                      ],
+                    ]
+                  }
+                >
+                  DOCS.pdf
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders list item with custom title and description styles 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      false,
+      Array [
+        Object {
+          "padding": 8,
+        },
+        undefined,
+      ],
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      pointerEvents="none"
+      style={
+        Array [
+          Object {
+            "marginVertical": 6,
+            "paddingLeft": 8,
+          },
+          Object {
+            "flex": 1,
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "System",
+              "fontWeight": "400",
+              "textAlign": "left",
+            },
+            Array [
+              Object {
+                "fontSize": 16,
+              },
+              Object {
+                "color": "rgba(0, 0, 0, 0.87)",
+              },
+              Object {
+                "fontSize": 20,
+              },
+            ],
+          ]
+        }
+      >
+        First Item
+      </Text>
+      <Text
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "System",
+              "fontWeight": "400",
+              "textAlign": "left",
+            },
+            Array [
+              Object {
+                "fontSize": 14,
+              },
+              Object {
+                "color": "rgba(0, 0, 0, 0.54)",
+              },
+              Object {
+                "color": "red",
+              },
+            ],
+          ]
+        }
+      >
+        Item description
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
 exports[`renders list item with left and right items 1`] = `
 <View
   accessible={true}
@@ -37,7 +348,8 @@ exports[`renders list item with left and right items 1`] = `
       style={
         Array [
           Object {
-            "margin": 8,
+            "marginVertical": 6,
+            "paddingLeft": 8,
           },
           Object {
             "flex": 1,
@@ -52,9 +364,9 @@ exports[`renders list item with left and right items 1`] = `
           Array [
             Object {
               "color": "#000000",
-              "fontFamily": "Helvetica Neue",
+              "fontFamily": "System",
+              "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -63,6 +375,7 @@ exports[`renders list item with left and right items 1`] = `
               Object {
                 "color": "rgba(0, 0, 0, 0.87)",
               },
+              undefined,
             ],
           ]
         }
@@ -75,9 +388,9 @@ exports[`renders list item with left and right items 1`] = `
           Array [
             Object {
               "color": "#000000",
-              "fontFamily": "Helvetica Neue",
+              "fontFamily": "System",
+              "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -86,6 +399,7 @@ exports[`renders list item with left and right items 1`] = `
               Object {
                 "color": "rgba(0, 0, 0, 0.54)",
               },
+              undefined,
             ],
           ]
         }
@@ -104,7 +418,9 @@ exports[`renders list item with left and right items 1`] = `
             "margin": 8,
             "width": 40,
           },
-          undefined,
+          Object {
+            "marginRight": 0,
+          },
         ]
       }
     >
@@ -132,7 +448,7 @@ exports[`renders list item with left and right items 1`] = `
               },
             ],
             Object {
-              "fontFamily": "Material Icons",
+              "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
@@ -140,7 +456,7 @@ exports[`renders list item with left and right items 1`] = `
           ]
         }
       >
-        
+        
       </Text>
     </View>
   </View>
@@ -187,7 +503,11 @@ exports[`renders list item with left item 1`] = `
             "margin": 8,
             "width": 40,
           },
-          undefined,
+          Object {
+            "marginLeft": 0,
+            "marginRight": 16,
+            "marginVertical": 0,
+          },
         ]
       }
     >
@@ -215,7 +535,7 @@ exports[`renders list item with left item 1`] = `
               },
             ],
             Object {
-              "fontFamily": "Material Icons",
+              "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
@@ -223,7 +543,7 @@ exports[`renders list item with left item 1`] = `
           ]
         }
       >
-        
+        
       </Text>
     </View>
     <View
@@ -231,7 +551,8 @@ exports[`renders list item with left item 1`] = `
       style={
         Array [
           Object {
-            "margin": 8,
+            "marginVertical": 6,
+            "paddingLeft": 8,
           },
           Object {
             "flex": 1,
@@ -246,9 +567,9 @@ exports[`renders list item with left item 1`] = `
           Array [
             Object {
               "color": "#000000",
-              "fontFamily": "Helvetica Neue",
+              "fontFamily": "System",
+              "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -257,6 +578,7 @@ exports[`renders list item with left item 1`] = `
               Object {
                 "color": "rgba(0, 0, 0, 0.87)",
               },
+              undefined,
             ],
           ]
         }
@@ -302,7 +624,8 @@ exports[`renders list item with right item 1`] = `
       style={
         Array [
           Object {
-            "margin": 8,
+            "marginVertical": 6,
+            "paddingLeft": 8,
           },
           Object {
             "flex": 1,
@@ -317,9 +640,9 @@ exports[`renders list item with right item 1`] = `
           Array [
             Object {
               "color": "#000000",
-              "fontFamily": "Helvetica Neue",
+              "fontFamily": "System",
+              "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -328,6 +651,7 @@ exports[`renders list item with right item 1`] = `
               Object {
                 "color": "rgba(0, 0, 0, 0.87)",
               },
+              undefined,
             ],
           ]
         }
@@ -376,7 +700,8 @@ exports[`renders list item with title and description 1`] = `
       style={
         Array [
           Object {
-            "margin": 8,
+            "marginVertical": 6,
+            "paddingLeft": 8,
           },
           Object {
             "flex": 1,
@@ -391,9 +716,9 @@ exports[`renders list item with title and description 1`] = `
           Array [
             Object {
               "color": "#000000",
-              "fontFamily": "Helvetica Neue",
+              "fontFamily": "System",
+              "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -401,6 +726,106 @@ exports[`renders list item with title and description 1`] = `
               },
               Object {
                 "color": "rgba(0, 0, 0, 0.87)",
+              },
+              undefined,
+            ],
+          ]
+        }
+      >
+        First Item
+      </Text>
+      <Text
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "System",
+              "fontWeight": "400",
+              "textAlign": "left",
+            },
+            Array [
+              Object {
+                "fontSize": 14,
+              },
+              Object {
+                "color": "rgba(0, 0, 0, 0.54)",
+              },
+              undefined,
+            ],
+          ]
+        }
+      >
+        Description for first item
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders with a description with typeof number 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      false,
+      Array [
+        Object {
+          "padding": 8,
+        },
+        undefined,
+      ],
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      pointerEvents="none"
+      style={
+        Array [
+          Object {
+            "marginVertical": 6,
+            "paddingLeft": 8,
+          },
+          Object {
+            "flex": 1,
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "System",
+              "fontWeight": "400",
+              "textAlign": "left",
+            },
+            Array [
+              Object {
+                "fontSize": 16,
+              },
+              Object {
+                "color": "rgba(0, 0, 0, 0.87)",
+              },
+              Object {
+                "fontSize": 20,
               },
             ],
           ]
@@ -414,9 +839,9 @@ exports[`renders list item with title and description 1`] = `
           Array [
             Object {
               "color": "#000000",
-              "fontFamily": "Helvetica Neue",
+              "fontFamily": "System",
+              "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -425,11 +850,14 @@ exports[`renders list item with title and description 1`] = `
               Object {
                 "color": "rgba(0, 0, 0, 0.54)",
               },
+              Object {
+                "color": "red",
+              },
             ],
           ]
         }
       >
-        Description for first item
+        123
       </Text>
     </View>
   </View>

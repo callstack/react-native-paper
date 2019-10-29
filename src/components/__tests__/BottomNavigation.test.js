@@ -1,8 +1,8 @@
-/* @flow */
-
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import BottomNavigation from '../BottomNavigation';
+import BottomNavigation from '../BottomNavigation.tsx';
+
+jest.useFakeTimers();
 
 jest.mock('Animated', () => {
   const ActualAnimated = jest.requireActual('Animated');
@@ -18,13 +18,7 @@ jest.mock('Animated', () => {
   };
 });
 
-const icons = [
-  '3d-rotation',
-  'ac-unit',
-  'access-alarm',
-  'access-alarms',
-  'access-time',
-];
+const icons = ['magnify', 'camera', 'inbox', 'heart', 'shopping-music'];
 
 const createState = (index, length) => ({
   index,

@@ -1,8 +1,6 @@
-/* @flow */
-
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import Chip from '../Chip';
+import Chip from '../Chip.tsx';
 
 it('renders chip with onPress', () => {
   const tree = renderer
@@ -13,7 +11,9 @@ it('renders chip with onPress', () => {
 });
 
 it('renders chip with icon', () => {
-  const tree = renderer.create(<Chip icon="info">Example Chip</Chip>).toJSON();
+  const tree = renderer
+    .create(<Chip icon="information">Example Chip</Chip>)
+    .toJSON();
 
   expect(tree).toMatchSnapshot();
 });
@@ -21,7 +21,7 @@ it('renders chip with icon', () => {
 it('renders chip with close button', () => {
   const tree = renderer
     .create(
-      <Chip icon="info" onClose={() => {}}>
+      <Chip icon="information" onClose={() => {}}>
         Example Chip
       </Chip>
     )

@@ -1,9 +1,7 @@
-/* @flow */
-
 import * as React from 'react';
 import { render, waitForElement } from 'react-native-testing-library';
 import { Text } from 'react-native';
-import Portal from '../Portal/Portal';
+import Portal from '../Portal/Portal.tsx';
 
 it('renders portal with siblings', async () => {
   const { toJSON, getByTestId } = render(

@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DrawerSection renders properly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "marginBottom": 4,
+      },
+      undefined,
+    ]
+  }
+>
+  <View />
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "rgba(0, 0, 0, 0.12)",
+          "height": 0.5,
+        },
+        undefined,
+        Object {
+          "marginTop": 4,
+        },
+      ]
+    }
+  />
+</View>
+`;

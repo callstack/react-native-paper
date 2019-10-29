@@ -1,8 +1,6 @@
-/* @flow */
-
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import * as Avatar from '../Avatar/Avatar';
+import * as Avatar from '../Avatar/Avatar.tsx';
 
 it('renders avatar with text', () => {
   const tree = renderer.create(<Avatar.Text label="XD" />).toJSON();
@@ -33,14 +31,16 @@ it('renders avatar with text and custom colors', () => {
 });
 
 it('renders avatar with icon', () => {
-  const tree = renderer.create(<Avatar.Icon icon="info" />).toJSON();
+  const tree = renderer.create(<Avatar.Icon icon="information" />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders avatar with icon and custom background color', () => {
   const tree = renderer
-    .create(<Avatar.Icon style={{ backgroundColor: '#FF0000' }} icon="info" />)
+    .create(
+      <Avatar.Icon style={{ backgroundColor: '#FF0000' }} icon="information" />
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();

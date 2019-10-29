@@ -12,15 +12,21 @@ const assets = [
   path.join(__dirname, 'assets', 'images'),
 ];
 const styles = [path.join(__dirname, 'assets', 'styles.css')];
-const scripts = [path.join(__dirname, 'assets', 'snack.js')];
-const github = 'https://github.com/callstack/react-native-paper/edit/master';
+const scripts = [
+  path.join(__dirname, 'assets', 'snack.js'),
+  path.join(__dirname, 'assets', 'version.js'),
+];
+const github = 'https://github.com/callstack/react-native-paper/edit/master/';
 
 if (!fs.existsSync(dist)) {
   fs.mkdirSync(dist);
 }
 
+require.extensions['.ts'] = require.extensions['.js'];
+require.extensions['.tsx'] = require.extensions['.js'];
+
 function getType(file: string) {
-  if (file.endsWith('.js')) {
+  if (/\.(js|tsx?)$/.test(file)) {
     return 'custom';
   } else if (file.endsWith('.mdx')) {
     return 'mdx';
@@ -30,7 +36,7 @@ function getType(file: string) {
 
 function getPages() {
   const components = fs
-    .readFileSync(path.join(__dirname, '../src/index.js'))
+    .readFileSync(path.join(__dirname, '../src/index.tsx'))
     .toString()
     .split('\n')
     .map(line =>
@@ -42,7 +48,7 @@ function getPages() {
     .filter(line => line.startsWith('./components/'))
     .map(line => {
       const file = require.resolve(path.join(__dirname, '../src', line));
-      if (file.endsWith('/index.js')) {
+      if (/\/index\.(js|tsx?)$/.test(file)) {
         const matches = fs
           .readFileSync(file)
           .toString()
@@ -59,25 +65,30 @@ function getPages() {
     })
     .reduce((acc, file) => {
       const content = fs.readFileSync(file).toString();
+      const groupMatch = /\/\/ @component-group (\w+)/gm.exec(content);
+      const group = groupMatch ? groupMatch[1] : undefined;
 
       if (/import \* as React/.test(content)) {
-        acc.push(file);
+        acc.push({ file, group });
       }
 
-      const match = content.match(/\/\/ @component (.\/\w+\.js)/gm);
+      const match = content.match(/\/\/ @component (.\/\w+\.(js|tsx?))/gm);
 
       if (match && match.length) {
         const componentFiles = match.map(line => {
           const fileName = line.split(' ')[2];
-          return require.resolve(
-            path.join(
-              file
-                .split('/')
-                .slice(0, -1)
-                .join('/'),
-              fileName
-            )
-          );
+          return {
+            group,
+            file: require.resolve(
+              path.join(
+                file
+                  .split('/')
+                  .slice(0, -1)
+                  .join('/'),
+                fileName
+              )
+            ),
+          };
         });
 
         acc.push(...componentFiles);
@@ -85,13 +96,21 @@ function getPages() {
 
       return acc;
     }, [])
-    .filter((name, index, self) => self.indexOf(name) === index)
+    .filter(
+      (info, index, self) =>
+        index === self.findIndex(other => info.file === other.file)
+    )
     .sort((a, b) => {
-      const nameA = a.split('/').pop();
-      const nameB = b.split('/').pop();
+      const nameA = a.file.split('/').pop();
+      const nameB = b.file.split('/').pop();
       return nameA.localeCompare(nameB);
     })
-    .map(file => ({ file, type: 'component' }));
+    .sort((a, b) => {
+      const nameA = (a.group || a.file).split('/').pop();
+      const nameB = (b.group || b.file).split('/').pop();
+      return nameA.localeCompare(nameB);
+    })
+    .map(info => ({ ...info, type: 'component' }));
 
   const docs = fs
     .readdirSync(path.join(__dirname, 'pages'))

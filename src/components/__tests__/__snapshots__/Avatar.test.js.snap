@@ -42,7 +42,7 @@ exports[`renders avatar with icon 1`] = `
           },
         ],
         Object {
-          "fontFamily": "Material Icons",
+          "fontFamily": "Material Design Icons",
           "fontStyle": "normal",
           "fontWeight": "normal",
         },
@@ -50,7 +50,7 @@ exports[`renders avatar with icon 1`] = `
       ]
     }
   >
-    
+    
   </Text>
 </View>
 `;
@@ -97,7 +97,7 @@ exports[`renders avatar with icon and custom background color 1`] = `
           },
         ],
         Object {
-          "fontFamily": "Material Icons",
+          "fontFamily": "Material Design Icons",
           "fontStyle": "normal",
           "fontWeight": "normal",
         },
@@ -105,7 +105,7 @@ exports[`renders avatar with icon and custom background color 1`] = `
       ]
     }
   >
-    
+    
   </Text>
 </View>
 `;
@@ -165,9 +165,9 @@ exports[`renders avatar with text 1`] = `
       Array [
         Object {
           "color": "#000000",
-          "fontFamily": "Helvetica Neue",
+          "fontFamily": "System",
+          "fontWeight": "400",
           "textAlign": "left",
-          "writingDirection": "ltr",
         },
         Array [
           Object {
@@ -179,6 +179,7 @@ exports[`renders avatar with text 1`] = `
             "fontSize": 32,
             "lineHeight": 64,
           },
+          undefined,
         ],
       ]
     }
@@ -212,9 +213,9 @@ exports[`renders avatar with text and custom background color 1`] = `
       Array [
         Object {
           "color": "#000000",
-          "fontFamily": "Helvetica Neue",
+          "fontFamily": "System",
+          "fontWeight": "400",
           "textAlign": "left",
-          "writingDirection": "ltr",
         },
         Array [
           Object {
@@ -226,6 +227,7 @@ exports[`renders avatar with text and custom background color 1`] = `
             "fontSize": 32,
             "lineHeight": 64,
           },
+          undefined,
         ],
       ]
     }
@@ -259,9 +261,9 @@ exports[`renders avatar with text and custom colors 1`] = `
       Array [
         Object {
           "color": "#000000",
-          "fontFamily": "Helvetica Neue",
+          "fontFamily": "System",
+          "fontWeight": "400",
           "textAlign": "left",
-          "writingDirection": "ltr",
         },
         Array [
           Object {
@@ -273,6 +275,7 @@ exports[`renders avatar with text and custom colors 1`] = `
             "fontSize": 32,
             "lineHeight": 64,
           },
+          undefined,
         ],
       ]
     }
@@ -306,9 +309,9 @@ exports[`renders avatar with text and custom size 1`] = `
       Array [
         Object {
           "color": "#000000",
-          "fontFamily": "Helvetica Neue",
+          "fontFamily": "System",
+          "fontWeight": "400",
           "textAlign": "left",
-          "writingDirection": "ltr",
         },
         Array [
           Object {
@@ -320,6 +323,7 @@ exports[`renders avatar with text and custom size 1`] = `
             "fontSize": 48,
             "lineHeight": 96,
           },
+          undefined,
         ],
       ]
     }
