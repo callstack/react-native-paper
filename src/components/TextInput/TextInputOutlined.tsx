@@ -84,6 +84,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       activeColor,
       outlineColor,
       placeholderColor,
+      errorColor,
       containerStyle;
 
     if (disabled) {
@@ -96,6 +97,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       inputTextColor = colors.text;
       activeColor = error ? colors.error : colors.primary;
       placeholderColor = outlineColor = colors.placeholder;
+      errorColor = colors.error;
     }
 
     const labelScale = MINIMIZED_LABEL_FONT_SIZE / fontSize;
@@ -177,6 +179,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       activeColor,
       placeholderColor,
       backgroundColor,
+      errorColor,
     };
 
     const minHeight = height || (dense ? MIN_DENSE_HEIGHT : MIN_HEIGHT);
