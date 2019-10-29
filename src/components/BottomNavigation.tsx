@@ -648,10 +648,7 @@ class BottomNavigation extends React.Component<Props, State> {
     const rippleSize = layout.width / 4;
 
     return (
-      <View
-        style={[styles.container, style]}
-        pointerEvents={layout.measured ? 'auto' : 'none'}
-      >
+      <View style={[styles.container, style]}>
         <View style={[styles.content, { backgroundColor: colors.background }]}>
           {routes.map((route, index) => {
             if (!loaded.includes(index)) {
@@ -717,7 +714,11 @@ class BottomNavigation extends React.Component<Props, State> {
             ] as StyleProp<ViewStyle>
           }
           pointerEvents={
-            keyboardHidesNavigationBar && keyboard ? 'none' : 'auto'
+            layout.measured
+              ? keyboardHidesNavigationBar && keyboard
+                ? 'none'
+                : 'auto'
+              : 'none'
           }
           onLayout={this.handleLayout}
         >

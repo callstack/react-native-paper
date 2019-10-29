@@ -2,7 +2,6 @@
 
 exports[`hides labels in non-shifting bottom navigation 1`] = `
 <View
-  pointerEvents="none"
   style={
     Array [
       Object {
@@ -56,7 +55,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
   </View>
   <View
     onLayout={[Function]}
-    pointerEvents="auto"
+    pointerEvents="none"
     style={
       Object {
         "backgroundColor": "#ffffff",
@@ -675,7 +674,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
 
 exports[`hides labels in shifting bottom navigation 1`] = `
 <View
-  pointerEvents="none"
   style={
     Array [
       Object {
@@ -729,7 +727,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
   </View>
   <View
     onLayout={[Function]}
-    pointerEvents="auto"
+    pointerEvents="none"
     style={
       Object {
         "backgroundColor": "#ffffff",
@@ -1368,7 +1366,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
 
 exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
 <View
-  pointerEvents="none"
   style={
     Array [
       Object {
@@ -1422,7 +1419,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
   </View>
   <View
     onLayout={[Function]}
-    pointerEvents="auto"
+    pointerEvents="none"
     style={
       Object {
         "backgroundColor": "#ffffff",
@@ -1981,7 +1978,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
 
 exports[`renders custom icon and label in shifting bottom navigation 1`] = `
 <View
-  pointerEvents="none"
   style={
     Array [
       Object {
@@ -2035,7 +2031,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
   </View>
   <View
     onLayout={[Function]}
-    pointerEvents="auto"
+    pointerEvents="none"
     style={
       Object {
         "backgroundColor": "#ffffff",
@@ -2866,7 +2862,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
 
 exports[`renders custom icon and label with custom colors in non-shifting bottom navigation 1`] = `
 <View
-  pointerEvents="none"
   style={
     Array [
       Object {
@@ -2920,7 +2915,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
   </View>
   <View
     onLayout={[Function]}
-    pointerEvents="auto"
+    pointerEvents="none"
     style={
       Object {
         "backgroundColor": "#E96A82",
@@ -3779,7 +3774,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
 
 exports[`renders custom icon and label with custom colors in shifting bottom navigation 1`] = `
 <View
-  pointerEvents="none"
   style={
     Array [
       Object {
@@ -3833,7 +3827,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
   </View>
   <View
     onLayout={[Function]}
-    pointerEvents="auto"
+    pointerEvents="none"
     style={
       Object {
         "backgroundColor": "#E96A82",
@@ -4601,7 +4595,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
 
 exports[`renders non-shifting bottom navigation 1`] = `
 <View
-  pointerEvents="none"
   style={
     Array [
       Object {
@@ -4655,7 +4648,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
   </View>
   <View
     onLayout={[Function]}
-    pointerEvents="auto"
+    pointerEvents="none"
     style={
       Object {
         "backgroundColor": "#ffffff",
@@ -5514,7 +5507,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
 
 exports[`renders shifting bottom navigation 1`] = `
 <View
-  pointerEvents="none"
   style={
     Array [
       Object {
@@ -5568,7 +5560,7 @@ exports[`renders shifting bottom navigation 1`] = `
   </View>
   <View
     onLayout={[Function]}
-    pointerEvents="auto"
+    pointerEvents="none"
     style={
       Object {
         "backgroundColor": "#ffffff",
