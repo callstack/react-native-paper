@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, StyleProp, ViewStyle } from 'react-native';
+import { StyleSheet, StyleProp, ViewStyle, TextStyle } from 'react-native';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple';
 import { $RemoveChildren } from '../../types';
@@ -18,20 +18,26 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
+  /**
+   * Style of the text inside the cell
+   */
+  textStyle?: StyleProp<TextStyle>;
 };
 
 class DataTableCell extends React.Component<Props> {
   static displayName = 'DataTable.Cell';
 
   render() {
-    const { children, style, numeric, ...rest } = this.props;
+    const { children, style, numeric, textStyle, ...rest } = this.props;
 
     return (
-      <TouchableRipple
-        {...rest}
-        style={[styles.container, numeric && styles.right, style]}
-      >
-        <Text numberOfLines={1}>{children}</Text>
+      <TouchableRipple {...rest} style={[styles.container, style]}>
+        <Text
+          numberOfLines={1}
+          style={[styles.text, textStyle, numeric && styles.numeric]}
+        >
+          {children}
+        </Text>
       </TouchableRipple>
     );
   }
@@ -44,8 +50,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  right: {
-    justifyContent: 'flex-end',
+  numeric: {
+    textAlign: 'right',
+  },
+
+  text: {
+    flex: 1,
   },
 });
 
