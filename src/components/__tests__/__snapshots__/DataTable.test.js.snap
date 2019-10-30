@@ -20,7 +20,6 @@ exports[`renders data table cell 1`] = `
           "flexDirection": "row",
         },
         undefined,
-        undefined,
       ],
     ]
   }
@@ -35,7 +34,13 @@ exports[`renders data table cell 1`] = `
           "fontWeight": "400",
           "textAlign": "left",
         },
-        null,
+        Array [
+          Object {
+            "flex": 1,
+          },
+          undefined,
+          undefined,
+        ],
       ]
     }
   >
@@ -785,9 +790,6 @@ exports[`renders right aligned data table cell 1`] = `
           "flex": 1,
           "flexDirection": "row",
         },
-        Object {
-          "justifyContent": "flex-end",
-        },
         undefined,
       ],
     ]
@@ -803,7 +805,15 @@ exports[`renders right aligned data table cell 1`] = `
           "fontWeight": "400",
           "textAlign": "left",
         },
-        null,
+        Array [
+          Object {
+            "flex": 1,
+          },
+          undefined,
+          Object {
+            "textAlign": "right",
+          },
+        ],
       ]
     }
   >
