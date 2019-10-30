@@ -398,6 +398,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     return mode === 'outlined' ? (
       <TextInputOutlined
         {...rest}
+        value={this.state.value}
         parentState={this.state}
         innerRef={ref => {
           this.root = ref;
@@ -410,6 +411,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     ) : (
       <TextInputFlat
         {...rest}
+        value={this.state.value}
         parentState={this.state}
         innerRef={ref => {
           this.root = ref;
