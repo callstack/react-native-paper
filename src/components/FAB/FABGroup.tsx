@@ -78,6 +78,10 @@ type Props = {
    * @optional
    */
   theme: Theme;
+  /**
+   * Space between FAB group items
+   */
+  itemMargin?: number;
 };
 
 type State = {
@@ -205,6 +209,7 @@ class FABGroup extends React.Component<Props, State> {
       style,
       fabStyle,
       visible,
+      itemMargin,
     } = this.props;
     const { colors } = theme;
 
@@ -250,7 +255,7 @@ class FABGroup extends React.Component<Props, State> {
             {actions.map((it, i) => (
               <View
                 key={i} // eslint-disable-line react/no-array-index-key
-                style={styles.item}
+                style={[styles.item, { marginBottom: itemMargin || 16 }]}
                 pointerEvents="box-none"
               >
                 {it.label && (
@@ -361,7 +366,6 @@ const styles = StyleSheet.create({
   },
   item: {
     marginHorizontal: 24,
-    marginBottom: 16,
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
