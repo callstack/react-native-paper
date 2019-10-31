@@ -210,7 +210,10 @@ class TextInput extends React.Component<TextInputProps, State> {
   componentDidUpdate(prevProps: TextInputProps, prevState: State) {
     if (
       prevState.focused !== this.state.focused ||
-      prevState.value !== this.state.value
+      prevState.value !== this.state.value ||
+      // workaround for animated regression for react native > 0.61
+      // https://github.com/callstack/react-native-paper/pull/1440
+      prevState.labelLayout !== this.state.labelLayout
     ) {
       // The label should be minimized if the text input is focused, or has text
       // In minimized mode, the label moves up and becomes small
