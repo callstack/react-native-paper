@@ -43,7 +43,7 @@ type Props = {
    */
   color?: string;
   /**
-   * React elements containing radio buttons.
+   * React elements containing radio button children.
    */
   children?: React.ReactNode;
   /**

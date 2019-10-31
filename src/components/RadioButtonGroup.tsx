@@ -44,14 +44,12 @@ export const RadioButtonContext = React.createContext<RadioButtonContextType>(
  *         onValueChange={value => this.setState({ value })}
  *         value={this.state.value}
  *       >
- *         <View>
+ *         <RadioButton value="first">
  *           <Text>First</Text>
- *           <RadioButton value="first" />
- *         </View>
- *         <View>
+ *         </RadioButton>
+ *         <RadioButton value="second">
  *           <Text>Second</Text>
- *           <RadioButton value="second" />
- *         </View>
+ *         </RadioButton>
  *       </RadioButton.Group>
  *     )
  *   }
