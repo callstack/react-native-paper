@@ -57,6 +57,7 @@ export type LabelProps = {
   label?: string | null | undefined;
   hasActiveOutline: boolean | null | undefined;
   activeColor: string;
+  errorColor?: string;
   error: boolean | null | undefined;
   onLayoutAnimatedText: (args: any) => void;
 };
