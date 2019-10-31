@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform } from 'react-native';
+import { Platform, View, StyleSheet } from 'react-native';
 import RadioButtonGroup, {
   RadioButtonContext,
   RadioButtonContextType,
@@ -12,8 +12,10 @@ import RadioButtonIOS, {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   RadioButtonIOS as _RadioButtonIOS,
 } from './RadioButtonIOS';
+import TouchableRipple from './TouchableRipple';
 import { withTheme } from '../core/theming';
 import { Theme } from '../types';
+import color from 'color';
 
 type Props = {
   /**
@@ -40,6 +42,10 @@ type Props = {
    * Custom color for radio.
    */
   color?: string;
+  /**
+   * React elements containing radio buttons.
+   */
+  children?: React.ReactNode;
   /**
    * @optional
    */
@@ -125,19 +131,80 @@ class RadioButton extends React.Component<Props> {
       default: RadioButtonAndroid,
       ios: RadioButtonIOS,
     });
+    const { status, children, disabled, theme, ...rest } = this.props;
 
     return (
       <RadioButtonContext.Consumer>
-        {context => (
-          <Button
-            {...this.props}
-            status={this.props.status || (context && this.isChecked(context))}
-            onPress={() => this.handlePress(context)}
-          />
-        )}
+        {context => {
+          if (children) {
+            const checkedColor = disabled
+              ? theme.colors.disabled
+              : this.props.color || theme.colors.accent;
+
+            let rippleColor;
+
+            if (disabled) {
+              rippleColor = color(theme.colors.text)
+                .alpha(0.16)
+                .rgb()
+                .string();
+            } else {
+              rippleColor = color(checkedColor)
+                .fade(0.32)
+                .rgb()
+                .string();
+            }
+
+            return (
+              <TouchableRipple
+                borderless
+                rippleColor={rippleColor}
+                onPress={disabled ? undefined : () => this.handlePress(context)}
+                accessibilityTraits={
+                  disabled ? ['button', 'disabled'] : 'button'
+                }
+                accessibilityComponentType={
+                  status === 'checked'
+                    ? 'radiobutton_checked'
+                    : 'radiobutton_unchecked'
+                }
+                accessibilityRole="button"
+                accessibilityStates={disabled ? ['disabled'] : []}
+                accessibilityLiveRegion="polite"
+                style={styles.container}
+              >
+                <View style={styles.row}>
+                  <Button
+                    {...rest}
+                    status={status || (context && this.isChecked(context))}
+                  />
+                  {children}
+                </View>
+              </TouchableRipple>
+            );
+          }
+          return (
+            <Button
+              {...rest}
+              disabled={disabled}
+              status={status || (context && this.isChecked(context))}
+              onPress={() => this.handlePress(context)}
+            />
+          );
+        }}
       </RadioButtonContext.Consumer>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    borderRadius: 18,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+});
 
 export default withTheme(RadioButton);

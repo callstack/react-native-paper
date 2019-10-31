@@ -42,14 +42,12 @@ class RadioButtonGroupExample extends React.Component<Props, State> {
           value={this.state.value}
           onValueChange={(value: string) => this.setState({ value })}
         >
-          <View style={styles.row}>
+          <RadioButton value="first">
             <Paragraph>First</Paragraph>
-            <RadioButton value="first" />
-          </View>
-          <View style={styles.row}>
+          </RadioButton>
+          <RadioButton value="second">
             <Paragraph>Second</Paragraph>
-            <RadioButton value="second" />
-          </View>
+          </RadioButton>
         </RadioButton.Group>
       </View>
     );
@@ -61,13 +59,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.white,
     padding: 8,
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: 8,
-    paddingHorizontal: 16,
   },
 });
 
