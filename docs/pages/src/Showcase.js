@@ -44,6 +44,14 @@ const data: Data[] = [
       'https://play.google.com/store/apps/details?id=com.mattkoboski.couponsapp',
     ios: 'https://apps.apple.com/pl/app/pandadeals/id1468755918',
   },
+  {
+    color: '#A11E1E',
+    name: 'RaceCalendar',
+    image: 'showcase/racecalendar.png',
+    android:
+      'https://play.google.com/store/apps/details?id=in.micy.racecalendar',
+    ios: 'https://apps.apple.com/us/app/race-calendar/id1481539104',
+  },
 ];
 
 export default class Showcase extends React.Component<{}> {
