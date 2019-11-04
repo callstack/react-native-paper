@@ -3,11 +3,11 @@ import {
   StyleProp,
   StyleSheet,
   Animated,
-  SafeAreaView,
   TouchableWithoutFeedback,
   View,
   ViewStyle,
 } from 'react-native';
+import SafeAreaView from 'react-native-safe-area-view';
 import color from 'color';
 import FAB from './FAB';
 import Text from '../Typography/Text';

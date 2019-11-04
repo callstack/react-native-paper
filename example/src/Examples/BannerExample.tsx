@@ -4,11 +4,11 @@ import {
   StyleSheet,
   Image,
   ScrollView,
-  SafeAreaView,
   Dimensions,
   Platform,
 } from 'react-native';
 import { Banner, withTheme, FAB, Theme } from 'react-native-paper';
+import SafeAreaView from 'react-native-safe-area-view';
 
 type Props = {
   theme: Theme;

@@ -1,12 +1,6 @@
 import * as React from 'react';
-import {
-  Animated,
-  SafeAreaView,
-  StyleProp,
-  StyleSheet,
-  ViewStyle,
-} from 'react-native';
-
+import { Animated, StyleProp, StyleSheet, ViewStyle } from 'react-native';
+import SafeAreaView from 'react-native-safe-area-view';
 import Button from './Button';
 import Surface from './Surface';
 import Text from './Typography/Text';

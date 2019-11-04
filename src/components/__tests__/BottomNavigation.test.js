@@ -1,5 +1,6 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
+import { SafeAreaProvider } from 'react-native-safe-area-view';
 import BottomNavigation from '../BottomNavigation.tsx';
 
 jest.useFakeTimers();
@@ -32,12 +33,14 @@ const createState = (index, length) => ({
 it('renders shifting bottom navigation', () => {
   const tree = renderer
     .create(
-      <BottomNavigation
-        shifting
-        navigationState={createState(0, 5)}
-        onIndexChange={jest.fn()}
-        renderScene={({ route }) => route.title}
-      />
+      <SafeAreaProvider>
+        <BottomNavigation
+          shifting
+          navigationState={createState(0, 5)}
+          onIndexChange={jest.fn()}
+          renderScene={({ route }) => route.title}
+        />
+      </SafeAreaProvider>
     )
     .toJSON();
 
@@ -47,12 +50,14 @@ it('renders shifting bottom navigation', () => {
 it('renders non-shifting bottom navigation', () => {
   const tree = renderer
     .create(
-      <BottomNavigation
-        shifting={false}
-        navigationState={createState(0, 3)}
-        onIndexChange={jest.fn()}
-        renderScene={({ route }) => route.title}
-      />
+      <SafeAreaProvider>
+        <BottomNavigation
+          shifting={false}
+          navigationState={createState(0, 3)}
+          onIndexChange={jest.fn()}
+          renderScene={({ route }) => route.title}
+        />
+      </SafeAreaProvider>
     )
     .toJSON();
 
@@ -62,18 +67,20 @@ it('renders non-shifting bottom navigation', () => {
 it('renders custom icon and label in shifting bottom navigation', () => {
   const tree = renderer
     .create(
-      <BottomNavigation
-        shifting
-        navigationState={createState(0, 5)}
-        onIndexChange={jest.fn()}
-        renderScene={({ route }) => route.title}
-        renderIcon={({ route, color }) => (
-          <icon color={color}>{route.icon}</icon>
-        )}
-        renderLabel={({ route, color }) => (
-          <text color={color}>{route.label}</text>
-        )}
-      />
+      <SafeAreaProvider>
+        <BottomNavigation
+          shifting
+          navigationState={createState(0, 5)}
+          onIndexChange={jest.fn()}
+          renderScene={({ route }) => route.title}
+          renderIcon={({ route, color }) => (
+            <icon color={color}>{route.icon}</icon>
+          )}
+          renderLabel={({ route, color }) => (
+            <text color={color}>{route.label}</text>
+          )}
+        />
+      </SafeAreaProvider>
     )
     .toJSON();
 
@@ -83,18 +90,20 @@ it('renders custom icon and label in shifting bottom navigation', () => {
 it('renders custom icon and label in non-shifting bottom navigation', () => {
   const tree = renderer
     .create(
-      <BottomNavigation
-        shifting={false}
-        navigationState={createState(0, 3)}
-        onIndexChange={jest.fn()}
-        renderScene={({ route }) => route.title}
-        renderIcon={({ route, color }) => (
-          <icon color={color}>{route.icon}</icon>
-        )}
-        renderLabel={({ route, color }) => (
-          <text color={color}>{route.label}</text>
-        )}
-      />
+      <SafeAreaProvider>
+        <BottomNavigation
+          shifting={false}
+          navigationState={createState(0, 3)}
+          onIndexChange={jest.fn()}
+          renderScene={({ route }) => route.title}
+          renderIcon={({ route, color }) => (
+            <icon color={color}>{route.icon}</icon>
+          )}
+          renderLabel={({ route, color }) => (
+            <text color={color}>{route.label}</text>
+          )}
+        />
+      </SafeAreaProvider>
     )
     .toJSON();
 
@@ -104,15 +113,17 @@ it('renders custom icon and label in non-shifting bottom navigation', () => {
 it('renders custom icon and label with custom colors in shifting bottom navigation', () => {
   const tree = renderer
     .create(
-      <BottomNavigation
-        shifting
-        navigationState={createState(0, 3)}
-        onIndexChange={jest.fn()}
-        renderScene={({ route }) => route.title}
-        activeColor="#FBF7DB"
-        inactiveColor="#853D4B"
-        barStyle={{ backgroundColor: '#E96A82' }}
-      />
+      <SafeAreaProvider>
+        <BottomNavigation
+          shifting
+          navigationState={createState(0, 3)}
+          onIndexChange={jest.fn()}
+          renderScene={({ route }) => route.title}
+          activeColor="#FBF7DB"
+          inactiveColor="#853D4B"
+          barStyle={{ backgroundColor: '#E96A82' }}
+        />
+      </SafeAreaProvider>
     )
     .toJSON();
 
@@ -122,15 +133,17 @@ it('renders custom icon and label with custom colors in shifting bottom navigati
 it('renders custom icon and label with custom colors in non-shifting bottom navigation', () => {
   const tree = renderer
     .create(
-      <BottomNavigation
-        shifting={false}
-        navigationState={createState(0, 3)}
-        onIndexChange={jest.fn()}
-        renderScene={({ route }) => route.title}
-        activeColor="#FBF7DB"
-        inactiveColor="#853D4B"
-        barStyle={{ backgroundColor: '#E96A82' }}
-      />
+      <SafeAreaProvider>
+        <BottomNavigation
+          shifting={false}
+          navigationState={createState(0, 3)}
+          onIndexChange={jest.fn()}
+          renderScene={({ route }) => route.title}
+          activeColor="#FBF7DB"
+          inactiveColor="#853D4B"
+          barStyle={{ backgroundColor: '#E96A82' }}
+        />
+      </SafeAreaProvider>
     )
     .toJSON();
 
@@ -140,13 +153,15 @@ it('renders custom icon and label with custom colors in non-shifting bottom navi
 it('hides labels in shifting bottom navigation', () => {
   const tree = renderer
     .create(
-      <BottomNavigation
-        shifting
-        labeled={false}
-        navigationState={createState(0, 3)}
-        onIndexChange={jest.fn()}
-        renderScene={({ route }) => route.title}
-      />
+      <SafeAreaProvider>
+        <BottomNavigation
+          shifting
+          labeled={false}
+          navigationState={createState(0, 3)}
+          onIndexChange={jest.fn()}
+          renderScene={({ route }) => route.title}
+        />
+      </SafeAreaProvider>
     )
     .toJSON();
 
@@ -156,13 +171,15 @@ it('hides labels in shifting bottom navigation', () => {
 it('hides labels in non-shifting bottom navigation', () => {
   const tree = renderer
     .create(
-      <BottomNavigation
-        shifting={false}
-        labeled={false}
-        navigationState={createState(0, 3)}
-        onIndexChange={jest.fn()}
-        renderScene={({ route }) => route.title}
-      />
+      <SafeAreaProvider>
+        <BottomNavigation
+          shifting={false}
+          labeled={false}
+          navigationState={createState(0, 3)}
+          onIndexChange={jest.fn()}
+          renderScene={({ route }) => route.title}
+        />
+      </SafeAreaProvider>
     )
     .toJSON();
 

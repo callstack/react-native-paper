@@ -3,17 +3,17 @@ import {
   StyleSheet,
   StyleProp,
   View,
-  SafeAreaView,
   ViewStyle,
   StatusBar,
 } from 'react-native';
+import SafeAreaView from 'react-native-safe-area-view';
+import color from 'color';
 import overlay from '../../styles/overlay';
 import Appbar, { DEFAULT_APPBAR_HEIGHT } from './Appbar';
 import shadow from '../../styles/shadow';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
-import color from 'color';
 
 type Props = React.ComponentProps<typeof Appbar> & {
   /**
