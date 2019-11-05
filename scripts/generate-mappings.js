@@ -20,8 +20,9 @@ const ast = parser.parse(source, {
   ],
 });
 
+const index = path.dirname(packageJson.module);
 const relative = (value /* : string */) =>
-  path.relative(root, path.resolve(path.dirname(packageJson.module), value));
+  path.relative(root, path.resolve(index, value));
 
 const mappings = ast.program.body.reduce((acc, declaration, index, self) => {
   if (types.isExportNamedDeclaration(declaration)) {
@@ -59,4 +60,4 @@ const mappings = ast.program.body.reduce((acc, declaration, index, self) => {
 }, {});
 
 fs.existsSync(path.dirname(output)) || fs.mkdirSync(path.dirname(output));
-fs.writeFileSync(output, JSON.stringify(mappings, null, 2));
+fs.writeFileSync(output, JSON.stringify({ index, mappings }, null, 2));
