@@ -20,9 +20,9 @@ const ast = parser.parse(source, {
   ],
 });
 
-const index = path.dirname(packageJson.module);
+const index = packageJson.module;
 const relative = (value /* : string */) =>
-  path.relative(root, path.resolve(index, value));
+  path.relative(root, path.resolve(path.dirname(index), value));
 
 const mappings = ast.program.body.reduce((acc, declaration, index, self) => {
   if (types.isExportNamedDeclaration(declaration)) {
