@@ -60,4 +60,7 @@ const mappings = ast.program.body.reduce((acc, declaration, index, self) => {
 }, {});
 
 fs.existsSync(path.dirname(output)) || fs.mkdirSync(path.dirname(output));
-fs.writeFileSync(output, JSON.stringify({ index, mappings }, null, 2));
+fs.writeFileSync(
+  output,
+  JSON.stringify({ name: packageJson.name, index, mappings }, null, 2)
+);

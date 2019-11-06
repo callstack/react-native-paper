@@ -10,7 +10,12 @@ spawnSync('node', [
 ]);
 
 const { fixtures } = create({
-  plugins: [require.resolve('../index')],
+  plugins: [
+    [
+      require.resolve('../index'),
+      { mappings: require.resolve('../../../lib/mappings.json') },
+    ],
+  ],
 });
 
 fixtures('generate mappings', path.join(__dirname, '..', '__fixtures__'));
