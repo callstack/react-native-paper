@@ -100,7 +100,7 @@ type NativeEvent = {
  *             onPress: () => this.setState({ visible: false }),
  *           },
  *         ]}
- *         image={({ size }) =>
+ *         icon={({ size }) =>
  *           <Image
  *             source={{ uri: 'https://avatars3.githubusercontent.com/u/17571969?s=400&v=4' }}
  *             style={{
