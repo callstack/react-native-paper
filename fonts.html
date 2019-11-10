@@ -14,7 +14,7 @@
         Installing custom fonts</h2>
 <p>The easiest way to install custom fonts to your RN project is do as follows:</p>
 <ol>
-<li><p>Define path to asssets directory with fonts in project:</p>
+<li><p>Define path to assets directory with fonts in project:</p>
 <p>Example:</p>
 <pre><code class="language-js"><span class="token comment">// React Native &lt; 0.60 package.json</span>
 <span class="token operator">...</span>
@@ -52,7 +52,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         Configuring fonts in ThemeProvider</h2>
 <p>To create a custom font you need to prepare <code>fontConfig</code> where fonts are divided by platforms. 
 After you have to pass the <code>fontConfig</code> into <code>configureFonts</code> method in a custom theme. </p>
-<p>Note: To override font on all platforms use <code>deafult</code> key.</p>
+<p>Note: To override font on all platforms use <code>default</code> key.</p>
 <p>Check the <a href="https://github.com/callstack/react-native-paper/blob/master/src/styles/DefaultTheme.tsx">default theme</a> to see what customization options are supported.</p>
 <pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> configureFonts<span class="token punctuation">,</span> DefaultTheme<span class="token punctuation">,</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
