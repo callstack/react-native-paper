@@ -32,6 +32,7 @@ import TextExample from './Examples/TextExample';
 import TextInputExample from './Examples/TextInputExample';
 import ToggleButtonExample from './Examples/ToggleButtonExample';
 import TouchableRippleExample from './Examples/TouchableRippleExample';
+import RadioButtonGroupWithItemsExample from './Examples/RadioButtonGroupWithItemsExample';
 
 type Props = {
   theme: Theme;
@@ -61,6 +62,7 @@ export const examples: { [key: string]: any } = {
   progressbar: ProgressBarExample,
   radio: RadioButtonExample,
   radioGroup: RadioButtonGroupExample,
+  radioButtonGroupWithItemsExample: RadioButtonGroupWithItemsExample,
   searchbar: SearchbarExample,
   snackbar: SnackbarExample,
   surface: SurfaceExample,

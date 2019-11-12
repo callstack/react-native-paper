@@ -8,6 +8,7 @@ import RadioButtonAndroid, {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   RadioButtonAndroid as _RadioButtonAndroid,
 } from './RadioButtonAndroid';
+import RadioButtonItem from './RadioButtonItem';
 import RadioButtonIOS, {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   RadioButtonIOS as _RadioButtonIOS,
@@ -109,6 +110,9 @@ class RadioButton extends React.Component<Props> {
 
   // @component ./RadioButtonIOS.tsx
   static IOS = RadioButtonIOS;
+
+  // @component = ./RadioButtonItem.tsx
+  static Item = RadioButtonItem;
 
   handlePress = (context: RadioButtonContextType) => {
     const { onPress } = this.props;
