@@ -36,11 +36,8 @@ class RadioButtonGroupWithItemsExample extends React.Component<Props, State> {
           value={this.state.value}
           onValueChange={(value: string) => this.setState({ value })}
         >
-          <RadioButton.Item label="First item" value="first"></RadioButton.Item>
-          <RadioButton.Item
-            label="Second item"
-            value="second"
-          ></RadioButton.Item>
+          <RadioButton.Item label="First item" value="first" />
+          <RadioButton.Item label="Second item" value="second" />
         </RadioButton.Group>
       </View>
     );

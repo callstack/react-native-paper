@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import TouchableRipple from './TouchableRipple';
 import RadioButton from './RadioButton';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
@@ -21,10 +21,14 @@ type Props = {
    * Status of radio button.
    */
   status?: 'checked' | 'unchecked';
+  /**
+   * Additional styles for container View
+   */
+  style?: StyleProp<ViewStyle>;
 };
 
 /**
- * Radio button item allows you to press the whole row (item) instead of only the button.
+ * RadioButton.Item allows you to press the whole row (item) instead of only the RadioButton.
  *
  * ## Usage
  * ```js
@@ -43,8 +47,8 @@ type Props = {
  *         onValueChange={value => this.setState({ value })}
  *         value={this.state.value}
  *       >
- *           <RadioButtonItem label="First item" value="first" />
- *           <RadioButtonItem label="Second item" value="second" />
+ *           <RadioButton.Item label="First item" value="first" />
+ *           <RadioButton.Item label="Second item" value="second" />
  *       </RadioButton.Group>
  *     )
  *   }
@@ -65,13 +69,13 @@ class RadioButtonItem extends React.Component<Props> {
   };
 
   render() {
-    const { value, label } = this.props;
+    const { value, label, style } = this.props;
 
     return (
       <RadioButtonContext.Consumer>
         {context => (
           <TouchableRipple onPress={this.handlePress(context)}>
-            <View style={styles.container} pointerEvents="none">
+            <View style={[styles.container, style]} pointerEvents="none">
               <Text>{label}</Text>
               <RadioButton
                 value={value}

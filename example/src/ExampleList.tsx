@@ -62,7 +62,7 @@ export const examples: { [key: string]: any } = {
   progressbar: ProgressBarExample,
   radio: RadioButtonExample,
   radioGroup: RadioButtonGroupExample,
-  radioButtonGroupWithItemsExample: RadioButtonGroupWithItemsExample,
+  radioGroupWithItems: RadioButtonGroupWithItemsExample,
   searchbar: SearchbarExample,
   snackbar: SnackbarExample,
   surface: SurfaceExample,
