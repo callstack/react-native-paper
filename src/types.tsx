@@ -23,24 +23,26 @@ export type Fonts = {
   thin: Font;
 };
 
+export type ThemeColors = {
+  primary: string;
+  background: string;
+  surface: string;
+  accent: string;
+  error: string;
+  text: string;
+  onSurface: string;
+  onBackground: string;
+  disabled: string;
+  placeholder: string;
+  backdrop: string;
+  notification: string;
+};
+
 export type Theme = {
   dark: boolean;
   mode?: 'adaptive' | 'exact';
   roundness: number;
-  colors: {
-    primary: string;
-    background: string;
-    surface: string;
-    accent: string;
-    error: string;
-    text: string;
-    onSurface: string;
-    onBackground: string;
-    disabled: string;
-    placeholder: string;
-    backdrop: string;
-    notification: string;
-  };
+  colors: ThemeColors;
   fonts: Fonts;
   animation: {
     scale: number;
