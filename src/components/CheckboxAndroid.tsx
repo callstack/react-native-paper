@@ -37,6 +37,9 @@ type State = {
   scaleAnim: Animated.Value;
 };
 
+// From https://material.io/design/motion/speed.html#duration
+const ANIMATION_DURATION = 100;
+
 /**
  * Checkboxes allow the selection of multiple options from a set.
  * This component follows platform guidelines for Android.
@@ -65,14 +68,18 @@ class CheckboxAndroid extends React.Component<Props, State> {
     }
 
     const checked = this.props.status === 'checked';
+    const { animation } = this.props.theme;
+
     Animated.sequence([
       Animated.timing(this.state.scaleAnim, {
         toValue: 0.85,
-        duration: checked ? 200 : 0,
+        duration: checked ? ANIMATION_DURATION * animation.scale : 0,
       }),
       Animated.timing(this.state.scaleAnim, {
         toValue: 1,
-        duration: checked ? 200 : 350,
+        duration: checked
+          ? ANIMATION_DURATION * animation.scale
+          : ANIMATION_DURATION * animation.scale * 1.75,
       }),
     ]).start();
   }
