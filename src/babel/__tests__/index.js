@@ -1,3 +1,4 @@
+const os = require('os');
 const path = require('path');
 const { spawnSync } = require('child_process');
 const { create } = require('babel-test');
@@ -18,4 +19,10 @@ const { fixtures } = create({
   ],
 });
 
-fixtures('generate mappings', path.join(__dirname, '..', '__fixtures__'));
+// https://nodejs.org/dist/latest/docs/api/os.html#os_os_platform
+const platform = os.platform() === 'win32' ? 'windows' : 'unix';
+
+fixtures(
+  'generate mappings',
+  path.join(__dirname, '..', `__fixtures-${platform}__`)
+);
