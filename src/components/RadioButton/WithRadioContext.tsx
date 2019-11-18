@@ -1,35 +1,11 @@
 import React, { useContext } from 'react';
 import { RadioButtonContext } from './RadioButtonGroup';
+import { Props } from './RadioButton';
 
-type Props = {
-  /**
-   * Value of the radio button
-   */
-  value: string;
-  /**
-   * Status of radio button.
-   */
-  status?: 'checked' | 'unchecked';
-  /**
-   * Whether radio is disabled.
-   */
-  disabled?: boolean;
-  /**
-   * Function to execute on press.
-   */
-  onPress?: () => void;
-  /**
-   * Custom color for unchecked radio.
-   */
-  uncheckedColor?: string;
-  /**
-   * Custom color for radio.
-   */
-  color?: string;
-};
-
-const withRadioContext = (RadioComponent: React.ComponentType<Props>) => {
-  return (props: Props) => {
+const withRadioContext = (
+  RadioComponent: React.ComponentType<Omit<Props, 'theme'>>
+) => {
+  return (props: Omit<Props, 'theme'>) => {
     const context = useContext(RadioButtonContext);
 
     const handlePress = () => {

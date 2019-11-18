@@ -27,7 +27,7 @@ exports[`RadioButtonGroup renders properly 1`] = `
   <View
     style={
       Object {
-        "opacity": 0,
+        "opacity": 1,
       }
     }
   >
