@@ -92,6 +92,7 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/all-contri
   <tr>
     <td align="center"><a href="https://twitter.com/_panpawel"><img src="https://avatars3.githubusercontent.com/u/3886886?v=4" width="100px;" alt="Paweł Szymański"/><br /><sub><b>Paweł Szymański</b></sub></a><br /><a href="https://github.com/callstack/react-native-paper/commits?author=pan-pawel" title="Code">💻</a> <a href="https://github.com/callstack/react-native-paper/commits?author=pan-pawel" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/jaysbytes"><img src="https://avatars1.githubusercontent.com/u/11561585?v=4" width="100px;" alt="Kuba"/><br /><sub><b>Kuba</b></sub></a><br /><a href="https://github.com/callstack/react-native-paper/commits?author=jaysbytes" title="Code">💻</a> <a href="#ideas-jaysbytes" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/jbinda"><img src="https://avatars2.githubusercontent.com/u/21242757?v=4" width="100px;" alt="jbinda"/><br /><sub><b>jbinda</b></sub></a><br /><a href="https://github.com/callstack/react-native-paper/commits?author=jbinda" title="Code">💻</a> <a href="#ideas-jbinda" title="Ideas, Planning, & Feedback">🤔</a></td>
   </tr>
 </table>
 
