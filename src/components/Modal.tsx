@@ -197,7 +197,7 @@ class Modal extends React.Component<Props, State> {
             ]}
           />
         </TouchableWithoutFeedback>
-        <SafeAreaView style={styles.wrapper}>
+        <SafeAreaView style={styles.wrapper} pointerEvents="box-none">
           <Surface
             style={
               [{ opacity }, styles.content, contentContainerStyle] as StyleProp<
