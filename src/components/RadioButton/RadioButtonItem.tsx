@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, StyleProp, ViewStyle } from 'react-native';
-import TouchableRipple from './TouchableRipple';
-import RadioButton from './RadioButton';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
+import { handlePress } from './utils';
+import TouchableRipple from '../TouchableRipple';
+import RadioButton from './RadioButton';
 
-type Props = {
+export type Props = {
   /**
    * Value of the radio button.
    */
@@ -58,34 +59,29 @@ type Props = {
 class RadioButtonItem extends React.Component<Props> {
   static displayName = 'RadioButton.Item';
 
-  isChecked = (context: RadioButtonContextType) =>
-    context.value === this.props.value ? 'checked' : 'unchecked';
-
-  handlePress = (context: RadioButtonContextType) => () => {
-    const { onPress } = this.props;
-    const onValueChange = context ? context.onValueChange : () => {};
-
-    onPress ? onPress() : onValueChange(this.props.value);
-  };
-
   render() {
-    const { value, label, style } = this.props;
+    const { value, label, style, onPress, status } = this.props;
 
     return (
       <RadioButtonContext.Consumer>
-        {context => (
-          <TouchableRipple onPress={this.handlePress(context)}>
-            <View style={[styles.container, style]} pointerEvents="none">
-              <Text>{label}</Text>
-              <RadioButton
-                value={value}
-                status={
-                  this.props.status || (context && this.isChecked(context))
-                }
-              ></RadioButton>
-            </View>
-          </TouchableRipple>
-        )}
+        {(context?: RadioButtonContextType) => {
+          return (
+            <TouchableRipple
+              onPress={() =>
+                handlePress({
+                  onPress: onPress,
+                  onValueChange: context && context.onValueChange,
+                  value,
+                })
+              }
+            >
+              <View style={[styles.container, style]} pointerEvents="none">
+                <Text>{label}</Text>
+                <RadioButton value={value} status={status}></RadioButton>
+              </View>
+            </TouchableRipple>
+          );
+        }}
       </RadioButtonContext.Consumer>
     );
   }

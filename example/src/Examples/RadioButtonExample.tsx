@@ -14,7 +14,7 @@ type Props = {
 };
 
 type State = {
-  checked: 'normal' | 'custom';
+  checked: 'normal' | 'normal-ios' | 'custom';
 };
 
 class RadioButtonExample extends React.Component<Props, State> {
@@ -41,12 +41,27 @@ class RadioButtonExample extends React.Component<Props, State> {
       >
         <TouchableRipple onPress={() => this.setState({ checked: 'normal' })}>
           <View style={styles.row}>
-            <Paragraph>Normal</Paragraph>
+            <Paragraph>Normal - Android</Paragraph>
             <View pointerEvents="none">
-              <RadioButton
+              <RadioButton.Android
                 value="normal"
                 status={
                   this.state.checked === 'normal' ? 'checked' : 'unchecked'
+                }
+              />
+            </View>
+          </View>
+        </TouchableRipple>
+        <TouchableRipple
+          onPress={() => this.setState({ checked: 'normal-ios' })}
+        >
+          <View style={styles.row}>
+            <Paragraph>Normal 2 - IOS</Paragraph>
+            <View pointerEvents="none">
+              <RadioButton.IOS
+                value="normal-ios"
+                status={
+                  this.state.checked === 'normal-ios' ? 'checked' : 'unchecked'
                 }
               />
             </View>
