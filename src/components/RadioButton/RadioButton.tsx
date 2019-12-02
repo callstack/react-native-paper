@@ -3,19 +3,9 @@ import { Platform } from 'react-native';
 import RadioButtonGroup from './RadioButtonGroup';
 import RadioButtonAndroid from './RadioButtonAndroid';
 import RadioButtonIOS from './RadioButtonIOS';
-import RadioButtonItem, {
-  Props as RadioButtonItemProps,
-} from './RadioButtonItem';
+import RadioButtonItem from './RadioButtonItem';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
-import WithRadioContext from './WithRadioContext';
-
-const RadioButtonAndroidWithContext = WithRadioContext(RadioButtonAndroid);
-const RadioButtonIOSWithContext = WithRadioContext(RadioButtonIOS);
-// @ts-ignore
-const RadioButtonItemWithContext = WithRadioContext(RadioButtonItem) as (
-  props: RadioButtonItemProps
-) => JSX.Element;
 
 export type Props = {
   /**
@@ -107,18 +97,18 @@ class RadioButton extends React.Component<Props> {
   static Group = RadioButtonGroup;
 
   // @component ./RadioButtonAndroid.tsx
-  static Android = RadioButtonAndroidWithContext;
+  static Android = RadioButtonAndroid;
 
   // @component ./RadioButtonIOS.tsx
-  static IOS = RadioButtonIOSWithContext;
+  static IOS = RadioButtonIOS;
 
   // @component = ./RadioButtonItem.tsx
-  static Item = RadioButtonItemWithContext;
+  static Item = RadioButtonItem;
 
   render() {
     const Button = Platform.select({
-      default: RadioButtonAndroidWithContext,
-      ios: RadioButtonIOSWithContext,
+      default: RadioButtonAndroid,
+      ios: RadioButtonIOS,
     });
 
     return <Button {...this.props} />;

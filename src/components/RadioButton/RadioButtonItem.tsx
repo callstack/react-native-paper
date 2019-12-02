@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, StyleProp, ViewStyle } from 'react-native';
+import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
+import { handlePress } from './utils';
 import TouchableRipple from '../TouchableRipple';
 import RadioButton from './RadioButton';
 
@@ -61,12 +63,26 @@ class RadioButtonItem extends React.Component<Props> {
     const { value, label, style, onPress, status } = this.props;
 
     return (
-      <TouchableRipple onPress={onPress}>
-        <View style={[styles.container, style]} pointerEvents="none">
-          <Text>{label}</Text>
-          <RadioButton value={value} status={status}></RadioButton>
-        </View>
-      </TouchableRipple>
+      <RadioButtonContext.Consumer>
+        {(context?: RadioButtonContextType) => {
+          return (
+            <TouchableRipple
+              onPress={() =>
+                handlePress({
+                  onPress: onPress,
+                  onValueChange: context && context.onValueChange,
+                  value,
+                })
+              }
+            >
+              <View style={[styles.container, style]} pointerEvents="none">
+                <Text>{label}</Text>
+                <RadioButton value={value} status={status}></RadioButton>
+              </View>
+            </TouchableRipple>
+          );
+        }}
+      </RadioButtonContext.Consumer>
     );
   }
 }

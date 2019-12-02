@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import color from 'color';
+import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
+import { handlePress, isChecked } from './utils';
 import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple';
 import { withTheme } from '../../core/theming';
@@ -52,15 +54,13 @@ class RadioButtonIOS extends React.Component<Props> {
   static displayName = 'RadioButton.IOS';
 
   render() {
-    const { disabled, onPress, theme, ...rest } = this.props;
+    const { disabled, onPress, theme, status, value, ...rest } = this.props;
 
     const checkedColor = disabled
       ? theme.colors.disabled
       : this.props.color || theme.colors.accent;
 
-    let rippleColor;
-
-    const checked = this.props.status === 'checked';
+    let rippleColor: string;
 
     if (disabled) {
       rippleColor = color(theme.colors.text)
@@ -73,36 +73,54 @@ class RadioButtonIOS extends React.Component<Props> {
         .rgb()
         .string();
     }
+
     return (
-      <TouchableRipple
-        {...rest}
-        borderless
-        rippleColor={rippleColor}
-        onPress={
-          disabled
-            ? undefined
-            : () => {
-                onPress && onPress();
+      <RadioButtonContext.Consumer>
+        {(context?: RadioButtonContextType) => {
+          const checked =
+            isChecked({
+              contextValue: context && context.value,
+              status,
+              value,
+            }) === 'checked';
+
+          return (
+            <TouchableRipple
+              {...rest}
+              borderless
+              rippleColor={rippleColor}
+              onPress={
+                disabled
+                  ? undefined
+                  : () => {
+                      handlePress({
+                        onPress,
+                        value,
+                        onValueChange: context && context.onValueChange,
+                      });
+                    }
               }
-        }
-        accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
-        accessibilityComponentType={
-          checked ? 'radiobutton_checked' : 'radiobutton_unchecked'
-        }
-        accessibilityRole="button"
-        accessibilityStates={disabled ? ['disabled'] : []}
-        accessibilityLiveRegion="polite"
-        style={styles.container}
-      >
-        <View style={{ opacity: checked ? 1 : 0 }}>
-          <Icon
-            allowFontScaling={false}
-            source="check"
-            size={24}
-            color={checkedColor}
-          />
-        </View>
-      </TouchableRipple>
+              accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
+              accessibilityComponentType={
+                checked ? 'radiobutton_checked' : 'radiobutton_unchecked'
+              }
+              accessibilityRole="button"
+              accessibilityStates={disabled ? ['disabled'] : []}
+              accessibilityLiveRegion="polite"
+              style={styles.container}
+            >
+              <View style={{ opacity: checked ? 1 : 0 }}>
+                <Icon
+                  allowFontScaling={false}
+                  source="check"
+                  size={24}
+                  color={checkedColor}
+                />
+              </View>
+            </TouchableRipple>
+          );
+        }}
+      </RadioButtonContext.Consumer>
     );
   }
 }
