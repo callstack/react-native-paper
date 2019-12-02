@@ -8,6 +8,8 @@
 
 ---
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/callstack/react-native-paper.svg)](https://greenkeeper.io/)
+
 [![Build Status][build-badge]][build]
 [![Version][version-badge]][package]
 [![MIT License][license-badge]][license]
