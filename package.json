@@ -45,9 +45,6 @@
   "dependencies": {
     "@callstack/react-theme-provider": "^3.0.5",
     "color": "^3.1.2",
-    "create-react-context": "^0.2.3",
-    "hoist-non-react-statics": "^3.1.0",
-    "react-lifecycles-compat": "^3.0.4",
     "react-native-safe-area-view": "^0.13.1"
   },
   "devDependencies": {
