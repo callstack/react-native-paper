@@ -45,7 +45,7 @@
     "@babel/preset-typescript": "^7.3.3",
     "@types/react-navigation": "^2.13.10",
     "babel-plugin-module-resolver": "^3.1.1",
-    "babel-preset-expo": "^7.0.0",
+    "babel-preset-expo": "^8.0.0",
     "expo-cli": "^3.4.1"
   },
   "resolutions": {
