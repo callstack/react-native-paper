@@ -63,7 +63,7 @@
     "@types/react-native": "^0.57.61",
     "@types/react-native-vector-icons": "^6.4.1",
     "@typescript-eslint/eslint-plugin": "^2.10.0",
-    "@typescript-eslint/parser": "^1.10.2",
+    "@typescript-eslint/parser": "^2.10.0",
     "all-contributors-cli": "^6.1.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^7.0.0-bridge.0",
