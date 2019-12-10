@@ -147,7 +147,6 @@ exports[`renders expanded accordion 1`] = `
       }
     >
       <View
-        pointerEvents="none"
         style={
           Array [
             Object {
