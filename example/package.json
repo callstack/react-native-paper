@@ -20,7 +20,7 @@
     "@react-navigation/stack": "^5.0.0-alpha.29",
     "expo": "^35.0.0",
     "expo-font": "~7.0.0",
-    "expo-keep-awake": "~7.0.0",
+    "expo-keep-awake": "~8.0.0",
     "file-loader": "^4.0.0",
     "react": "16.8.3",
     "react-art": "^16.7.0",
