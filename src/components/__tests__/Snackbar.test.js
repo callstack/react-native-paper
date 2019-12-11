@@ -1,14 +1,20 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import { Text, Animated } from 'react-native';
+import { Text } from 'react-native';
 import Snackbar from '../Snackbar.tsx';
 
 // Make sure any animation finishes before checking the snapshot results
-Animated.timing = (value, config) => ({
-  start: callback => {
-    value.setValue(config.toValue);
-    callback && callback({ finished: true });
-  },
+jest.mock('react-native', () => {
+  const RN = jest.requireActual('react-native');
+
+  RN.Animated.timing = (value, config) => ({
+    start: callback => {
+      value.setValue(config.toValue);
+      callback && callback({ finished: true });
+    },
+  });
+
+  return RN;
 });
 
 it('renders snackbar with content', () => {
