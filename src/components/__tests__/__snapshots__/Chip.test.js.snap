@@ -17,7 +17,9 @@ exports[`renders chip with close button 1`] = `
     accessibilityRole="button"
     accessibilityStates={Array []}
     accessible={true}
+    focusable={false}
     isTVSelectable={true}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -121,9 +123,9 @@ exports[`renders chip with close button 1`] = `
         Example Chip
       </Text>
       <View
-        accessibilityComponentType="button"
-        accessibilityTraits="button"
         accessible={true}
+        focusable={true}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -193,7 +195,9 @@ exports[`renders chip with icon 1`] = `
     accessibilityRole="button"
     accessibilityStates={Array []}
     accessible={true}
+    focusable={false}
     isTVSelectable={true}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -318,7 +322,9 @@ exports[`renders chip with onPress 1`] = `
     accessibilityRole="button"
     accessibilityStates={Array []}
     accessible={true}
+    focusable={true}
     isTVSelectable={true}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -402,7 +408,9 @@ exports[`renders outlined disabled chip 1`] = `
       ]
     }
     accessible={true}
+    focusable={false}
     isTVSelectable={true}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -486,7 +494,9 @@ exports[`renders selected chip 1`] = `
       ]
     }
     accessible={true}
+    focusable={false}
     isTVSelectable={true}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}

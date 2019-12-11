@@ -4,12 +4,12 @@ import { RadioButtonContext } from '../../RadioButton/RadioButtonGroup';
 import RadioButton from '../../RadioButton/RadioButton';
 
 describe('RadioButton', () => {
-  afterEach(() => jest.resetModules());
+  // afterEach(() => jest.resetModules());
 
   describe('on default platform', () => {
-    beforeAll(() => {
-      jest.doMock('Platform', () => ({ select: objs => objs.default }));
-    });
+    // beforeAll(() => {
+    //   jest.doMock('Platform', () => ({ select: objs => objs.default }));
+    // });
 
     it('renders properly', () => {
       const tree = renderer.create(<RadioButton value="first" />).toJSON();
@@ -19,9 +19,9 @@ describe('RadioButton', () => {
   });
 
   describe('on ios platform', () => {
-    beforeAll(() => {
-      jest.doMock('Platform', () => ({ select: objs => objs.ios }));
-    });
+    // beforeAll(() => {
+    //   jest.doMock('Platform', () => ({ select: objs => objs.ios }));
+    // });
 
     it('renders properly', () => {
       const tree = renderer.create(<RadioButton value="first" />).toJSON();

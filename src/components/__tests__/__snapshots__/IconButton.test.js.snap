@@ -9,6 +9,7 @@ exports[`renders disabled icon button 1`] = `
     ]
   }
   accessible={true}
+  focusable={false}
   hitSlop={
     Object {
       "bottom": 6,
@@ -18,6 +19,7 @@ exports[`renders disabled icon button 1`] = `
     }
   }
   isTVSelectable={true}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -95,6 +97,7 @@ exports[`renders icon button by default 1`] = `
   accessibilityRole="button"
   accessibilityStates={Array []}
   accessible={true}
+  focusable={false}
   hitSlop={
     Object {
       "bottom": 6,
@@ -104,6 +107,7 @@ exports[`renders icon button by default 1`] = `
     }
   }
   isTVSelectable={true}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -179,6 +183,7 @@ exports[`renders icon button with color 1`] = `
   accessibilityRole="button"
   accessibilityStates={Array []}
   accessible={true}
+  focusable={false}
   hitSlop={
     Object {
       "bottom": 6,
@@ -188,6 +193,7 @@ exports[`renders icon button with color 1`] = `
     }
   }
   isTVSelectable={true}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -263,6 +269,7 @@ exports[`renders icon button with size 1`] = `
   accessibilityRole="button"
   accessibilityStates={Array []}
   accessible={true}
+  focusable={false}
   hitSlop={
     Object {
       "bottom": 6,
@@ -272,6 +279,7 @@ exports[`renders icon button with size 1`] = `
     }
   }
   isTVSelectable={true}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -347,6 +355,7 @@ exports[`renders icon change animated 1`] = `
   accessibilityRole="button"
   accessibilityStates={Array []}
   accessible={true}
+  focusable={false}
   hitSlop={
     Object {
       "bottom": 6,
@@ -356,6 +365,7 @@ exports[`renders icon change animated 1`] = `
     }
   }
   isTVSelectable={true}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}

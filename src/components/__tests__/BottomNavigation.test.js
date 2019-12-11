@@ -1,21 +1,13 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
+import { Animated } from 'react-native';
 import BottomNavigation from '../BottomNavigation.tsx';
 
-jest.useFakeTimers();
-
-jest.mock('Animated', () => {
-  const ActualAnimated = jest.requireActual('Animated');
-
-  return {
-    ...ActualAnimated,
-    timing: (value, config) => ({
-      start: callback => {
-        value.setValue(config.toValue);
-        callback && callback({ finished: true });
-      },
-    }),
-  };
+Animated.timing = (value, config) => ({
+  start: callback => {
+    value.setValue(config.toValue);
+    callback && callback({ finished: true });
+  },
 });
 
 const icons = ['magnify', 'camera', 'inbox', 'heart', 'shopping-music'];
