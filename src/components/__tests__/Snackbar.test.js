@@ -4,18 +4,17 @@ import { Text } from 'react-native';
 import Snackbar from '../Snackbar.tsx';
 
 // Make sure any animation finishes before checking the snapshot results
-jest.mock('Animated', () => {
-  const ActualAnimated = jest.requireActual('Animated');
+jest.mock('react-native', () => {
+  const RN = jest.requireActual('react-native');
 
-  return {
-    ...ActualAnimated,
-    timing: (value, config) => ({
-      start: callback => {
-        value.setValue(config.toValue);
-        callback && callback({ finished: true });
-      },
-    }),
-  };
+  RN.Animated.timing = (value, config) => ({
+    start: callback => {
+      value.setValue(config.toValue);
+      callback && callback({ finished: true });
+    },
+  });
+
+  return RN;
 });
 
 it('renders snackbar with content', () => {

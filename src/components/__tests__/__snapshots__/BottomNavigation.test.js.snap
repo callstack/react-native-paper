@@ -104,20 +104,15 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         }
       >
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits={
-            Array [
-              "button",
-              "selected",
-            ]
-          }
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -295,15 +290,15 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits="button"
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -481,15 +476,15 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits="button"
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -796,20 +791,15 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           }
         />
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits={
-            Array [
-              "button",
-              "selected",
-            ]
-          }
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -987,15 +977,15 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits="button"
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1173,15 +1163,15 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits="button"
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1468,20 +1458,15 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         }
       >
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits={
-            Array [
-              "button",
-              "selected",
-            ]
-          }
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1639,15 +1624,15 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits="button"
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1805,15 +1790,15 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits="button"
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -2100,20 +2085,15 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           }
         />
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits={
-            Array [
-              "button",
-              "selected",
-            ]
-          }
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -2255,15 +2235,15 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits="button"
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -2405,15 +2385,15 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits="button"
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -2555,15 +2535,15 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits="button"
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -2705,15 +2685,15 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits="button"
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -2964,20 +2944,15 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         }
       >
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits={
-            Array [
-              "button",
-              "selected",
-            ]
-          }
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -3235,15 +3210,15 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           </View>
         </View>
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits="button"
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -3501,15 +3476,15 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           </View>
         </View>
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits="button"
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -3896,20 +3871,15 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           }
         />
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits={
-            Array [
-              "button",
-              "selected",
-            ]
-          }
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -4130,15 +4100,15 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           </View>
         </View>
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits="button"
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -4359,15 +4329,15 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           </View>
         </View>
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits="button"
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -4697,20 +4667,15 @@ exports[`renders non-shifting bottom navigation 1`] = `
         }
       >
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits={
-            Array [
-              "button",
-              "selected",
-            ]
-          }
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -4968,15 +4933,15 @@ exports[`renders non-shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits="button"
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -5234,15 +5199,15 @@ exports[`renders non-shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits="button"
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -5629,20 +5594,15 @@ exports[`renders shifting bottom navigation 1`] = `
           }
         />
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits={
-            Array [
-              "button",
-              "selected",
-            ]
-          }
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -5863,15 +5823,15 @@ exports[`renders shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits="button"
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -6092,15 +6052,15 @@ exports[`renders shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits="button"
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -6321,15 +6281,15 @@ exports[`renders shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits="button"
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -6550,15 +6510,15 @@ exports[`renders shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityStates={
             Array [
               "selected",
             ]
           }
-          accessibilityTraits="button"
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}

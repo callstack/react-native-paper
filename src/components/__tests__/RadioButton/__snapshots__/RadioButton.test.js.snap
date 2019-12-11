@@ -5,7 +5,9 @@ exports[`RadioButton on default platform renders properly 1`] = `
   accessibilityRole="button"
   accessibilityStates={Array []}
   accessible={true}
+  focusable={true}
   isTVSelectable={true}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -19,6 +21,7 @@ exports[`RadioButton on default platform renders properly 1`] = `
       },
       Object {
         "borderRadius": 18,
+        "padding": 6,
       },
     ]
   }
@@ -26,15 +29,45 @@ exports[`RadioButton on default platform renders properly 1`] = `
   <View
     style={
       Object {
-        "borderColor": "rgba(0, 0, 0, 0.54)",
-        "borderRadius": 10,
-        "borderWidth": 2,
-        "height": 20,
-        "margin": 8,
-        "width": 20,
+        "opacity": 0,
       }
     }
-  />
+  >
+    <Text
+      accessibilityElementsHidden={true}
+      allowFontScaling={false}
+      importantForAccessibility="no-hide-descendants"
+      pointerEvents="none"
+      style={
+        Array [
+          Object {
+            "color": "#03dac4",
+            "fontSize": 24,
+          },
+          Array [
+            Object {
+              "transform": Array [
+                Object {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
+          Object {
+            "fontFamily": "Material Design Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          Object {},
+        ]
+      }
+    >
+      
+    </Text>
+  </View>
 </View>
 `;
 
@@ -43,7 +76,9 @@ exports[`RadioButton on ios platform renders properly 1`] = `
   accessibilityRole="button"
   accessibilityStates={Array []}
   accessible={true}
+  focusable={true}
   isTVSelectable={true}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -112,7 +147,9 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
   accessibilityRole="button"
   accessibilityStates={Array []}
   accessible={true}
+  focusable={true}
   isTVSelectable={true}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}

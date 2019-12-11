@@ -2,20 +2,18 @@ import * as React from 'react';
 import renderer from 'react-test-renderer';
 import BottomNavigation from '../BottomNavigation.tsx';
 
-jest.useFakeTimers();
+// Make sure any animation finishes before checking the snapshot results
+jest.mock('react-native', () => {
+  const RN = jest.requireActual('react-native');
 
-jest.mock('Animated', () => {
-  const ActualAnimated = jest.requireActual('Animated');
+  RN.Animated.timing = (value, config) => ({
+    start: callback => {
+      value.setValue(config.toValue);
+      callback && callback({ finished: true });
+    },
+  });
 
-  return {
-    ...ActualAnimated,
-    timing: (value, config) => ({
-      start: callback => {
-        value.setValue(config.toValue);
-        callback && callback({ finished: true });
-      },
-    }),
-  };
+  return RN;
 });
 
 const icons = ['magnify', 'camera', 'inbox', 'heart', 'shopping-music'];

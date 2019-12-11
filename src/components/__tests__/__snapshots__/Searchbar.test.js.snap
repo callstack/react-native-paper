@@ -23,6 +23,7 @@ exports[`renders with placeholder 1`] = `
     accessibilityRole="button"
     accessibilityStates={Array []}
     accessible={true}
+    focusable={false}
     hitSlop={
       Object {
         "bottom": 6,
@@ -32,6 +33,7 @@ exports[`renders with placeholder 1`] = `
       }
     }
     isTVSelectable={true}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -138,6 +140,7 @@ exports[`renders with placeholder 1`] = `
       ]
     }
     accessible={true}
+    focusable={true}
     hitSlop={
       Object {
         "bottom": 6,
@@ -147,6 +150,7 @@ exports[`renders with placeholder 1`] = `
       }
     }
     isTVSelectable={true}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -243,6 +247,7 @@ exports[`renders with text 1`] = `
     accessibilityRole="button"
     accessibilityStates={Array []}
     accessible={true}
+    focusable={false}
     hitSlop={
       Object {
         "bottom": 6,
@@ -252,6 +257,7 @@ exports[`renders with text 1`] = `
       }
     }
     isTVSelectable={true}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -355,6 +361,7 @@ exports[`renders with text 1`] = `
     accessibilityRole="button"
     accessibilityStates={Array []}
     accessible={true}
+    focusable={true}
     hitSlop={
       Object {
         "bottom": 6,
@@ -364,6 +371,7 @@ exports[`renders with text 1`] = `
       }
     }
     isTVSelectable={true}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}

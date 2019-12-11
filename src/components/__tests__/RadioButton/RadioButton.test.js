@@ -8,7 +8,15 @@ describe('RadioButton', () => {
 
   describe('on default platform', () => {
     beforeAll(() => {
-      jest.doMock('Platform', () => ({ select: objs => objs.default }));
+      jest.mock('react-native', () => {
+        const RN = jest.requireActual('react-native');
+
+        RN.Platform = () => ({
+          select: objs => objs.default,
+        });
+
+        return RN;
+      });
     });
 
     it('renders properly', () => {
@@ -20,7 +28,15 @@ describe('RadioButton', () => {
 
   describe('on ios platform', () => {
     beforeAll(() => {
-      jest.doMock('Platform', () => ({ select: objs => objs.ios }));
+      jest.mock('react-native', () => {
+        const RN = jest.requireActual('react-native');
+
+        RN.Platform = () => ({
+          select: objs => objs.ios,
+        });
+
+        return RN;
+      });
     });
 
     it('renders properly', () => {
