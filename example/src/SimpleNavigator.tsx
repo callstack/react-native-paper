@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {
-  createNavigator,
+  createNavigatorFactory,
   useNavigationBuilder,
   DefaultNavigatorOptions,
   NavigationProp,
   ParamListBase,
-} from '@react-navigation/core';
+} from '@react-navigation/native';
 import { StackRouter, StackNavigationState } from '@react-navigation/routers';
 
 export type SimpleNavigationProp = NavigationProp<
@@ -49,7 +49,7 @@ function SimpleNavigator(
   );
 }
 
-export const createSimpleNavigator = createNavigator<
+export const createSimpleNavigator = createNavigatorFactory<
   SimpleNavigatorOptions,
   typeof SimpleNavigator
 >(SimpleNavigator);

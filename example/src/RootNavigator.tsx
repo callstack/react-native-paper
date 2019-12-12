@@ -1,10 +1,10 @@
 import * as React from 'react';
+import { Platform } from 'react-native';
 import { Appbar } from 'react-native-paper';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createSimpleNavigator } from './SimpleNavigator';
 import ExampleList, { examples } from './ExampleList';
-import { Platform } from '@unimodules/core';
 
 const Stack: ReturnType<typeof createStackNavigator> =
   Platform.OS === 'web'
@@ -38,7 +38,7 @@ export default function Root() {
         component={ExampleList}
         options={{ title: 'Examples' }}
       />
-      {Object.keys(examples).map(id => (
+      {(Object.keys(examples) as Array<keyof typeof examples>).map(id => (
         <Stack.Screen
           key={id}
           name={id}

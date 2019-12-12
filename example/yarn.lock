@@ -2027,41 +2027,44 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/masked-view/-/masked-view-0.1.5.tgz#25421be6cd943a4b1660b62cfbcd45be8891462c"
   integrity sha512-Lj1DzfCmW0f4HnmHtEuX8Yy2f7cnUA8r5KGGUuDDGtQt1so6QJkKeUmsnLo2zYDtsF8due6hvIL06Vdo5xxuLQ==
 
-"@react-navigation/core@^5.0.0-alpha.17":
-  version "5.0.0-alpha.17"
-  resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.0.0-alpha.17.tgz#8dd24616a8779ea9ca4e0addfa11c04827171a14"
-  integrity sha512-vppLh/IPg/mN383xT7/rgpjWmTkFQdIX7f3aWTJRcX2GEZEAoQ9Q2GVw6Bd7RVfJBG9nysTtvWTDI/dZVXRiTg==
+"@react-navigation/core@^5.0.0-alpha.27":
+  version "5.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.0.0-alpha.27.tgz#40a209910e284635570d539eeb0bd6cecb9f8124"
+  integrity sha512-R/pIxAyJaORLlUFZlwenN92Llo4pyWNRZJ190JTHDqL5T17yD0jokXoketl3+CO+jUgwesZqy7M4pSiMdSiDqA==
   dependencies:
     escape-string-regexp "^2.0.0"
-    query-string "^6.8.3"
+    query-string "^6.9.0"
     shortid "^2.2.15"
-    use-subscription "^1.1.1"
+    use-subscription "^1.3.0"
 
-"@react-navigation/drawer@^5.0.0-alpha.16":
+"@react-navigation/drawer@^5.0.0-alpha.27":
+  version "5.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@react-navigation/drawer/-/drawer-5.0.0-alpha.27.tgz#c7ab6feb7b7b27a427e00118bc39d1bc5041a1e6"
+  integrity sha512-5EHwkShkxr53BuGxc/8++E1gNFPKBCd/yycQJG5gbTKcRjWLTLe1qe3qd2Y6GMgFUdItnJQMNmKJLbRGMPeD1A==
+  dependencies:
+    "@react-navigation/routers" "^5.0.0-alpha.16"
+
+"@react-navigation/native@^5.0.0-alpha.18":
+  version "5.0.0-alpha.18"
+  resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.0.0-alpha.18.tgz#d09212d16b813258ae438eb123b55e223e1cdaea"
+  integrity sha512-VqHts/HX7Nzw6pIEjUeDucCT2T98dgM3gqaZCIjkna4IPHfBH0RuT9hJYQuUGYuTBVdoMTSDfMJ3GvIU+7nIDQ==
+  dependencies:
+    "@react-navigation/core" "^5.0.0-alpha.27"
+
+"@react-navigation/routers@^5.0.0-alpha.16":
   version "5.0.0-alpha.16"
-  resolved "https://registry.yarnpkg.com/@react-navigation/drawer/-/drawer-5.0.0-alpha.16.tgz#7f861451b6b229dfb318c90bc79303a9be6d54dd"
-  integrity sha512-8++DvlIX1HJwk6E8sENGWTlZ/lI7XDbP0U2UQL1ooPBXLfA+23sx97+b2/35wH/VXldSB6m2fMrAeULTwkRIuA==
+  resolved "https://registry.yarnpkg.com/@react-navigation/routers/-/routers-5.0.0-alpha.16.tgz#58feae35ada96202126897d716c6942b25e29f5e"
+  integrity sha512-19riekFcniNqxk9bvflwLjjd6Tm01UEa1eJuQBisnIdiCbzLCZ77rltCoVh8BvgPU6TldZ/oKCRcq5z+KZcW6A==
   dependencies:
-    "@react-navigation/routers" "^5.0.0-alpha.9"
-
-"@react-navigation/native@^5.0.0-alpha.13":
-  version "5.0.0-alpha.13"
-  resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.0.0-alpha.13.tgz#fd0150bad0f5646724caa11e162588861c3e4a6b"
-  integrity sha512-Zn5RkqrY94c/vmlAplvUUjZ6SA5tyN8JTmzSbSV6IlSPvOgF+Tg9J6BTyFq/iO0nrCX2P4EtOZnv7htRGC33wg==
-
-"@react-navigation/routers@^5.0.0-alpha.9":
-  version "5.0.0-alpha.9"
-  resolved "https://registry.yarnpkg.com/@react-navigation/routers/-/routers-5.0.0-alpha.9.tgz#f91450e9211ae21fdf1d1a67848957c55f7c02a3"
-  integrity sha512-XaoukLDQxIgrLJyGnG95ArMrdz4IxMPehcsHdSK1sr2tJ88uYfMknLRbO+UNNxsJUAvtoX3+i17cbrixtNbVRw==
-  dependencies:
+    "@react-navigation/core" "^5.0.0-alpha.27"
     shortid "^2.2.15"
 
-"@react-navigation/stack@^5.0.0-alpha.29":
-  version "5.0.0-alpha.29"
-  resolved "https://registry.yarnpkg.com/@react-navigation/stack/-/stack-5.0.0-alpha.29.tgz#255548555614963a03c99c3dbda3c852f765f3e8"
-  integrity sha512-p2LS1YwDTPCwZCt4Bl2oD87tP83IHe+XkpebYkIJlgFXYtlfDirWKOX4tcQ2NkYJKHkkZKxs7RbFz3X0vT84xw==
+"@react-navigation/stack@^5.0.0-alpha.43":
+  version "5.0.0-alpha.43"
+  resolved "https://registry.yarnpkg.com/@react-navigation/stack/-/stack-5.0.0-alpha.43.tgz#2081d4520125b1c72a6f33f708a4ff78a0f33957"
+  integrity sha512-oi+KfYoTd0xUkTNJ6ic/8NdEbzUtyD+hqiTGd67UGL8OsLLaRmDhXe+8mmaWvb6uVg/m09y32Rh9QHktu3TX9A==
   dependencies:
-    "@react-navigation/routers" "^5.0.0-alpha.9"
+    "@react-navigation/routers" "^5.0.0-alpha.16"
 
 "@segment/loosely-validate-event@^2.0.0":
   version "2.0.0"
@@ -9913,10 +9916,10 @@ qs@6.7.0, qs@^6.5.0:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
   integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
 
-query-string@^6.8.3:
-  version "6.8.3"
-  resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.8.3.tgz#fd9fb7ffb068b79062b43383685611ee47777d4b"
-  integrity sha512-llcxWccnyaWlODe7A9hRjkvdCKamEKTh+wH8ITdTc3OhchaqUZteiSCX/2ablWHVrkVIe04dntnaZJ7BdyW0lQ==
+query-string@^6.9.0:
+  version "6.9.0"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.9.0.tgz#1c3b727c370cf00f177c99f328fda2108f8fa3dd"
+  integrity sha512-KG4bhCFYapExLsUHrFt+kQVEegF2agm4cpF/VNc6pZVthIfCc/GK8t8VyNIE3nyXG9DK3Tf2EGkxjR6/uRdYsA==
   dependencies:
     decode-uri-component "^0.2.0"
     split-on-first "^1.0.0"
@@ -12170,10 +12173,12 @@ url@0.11.0, url@^0.11.0:
     punycode "1.3.2"
     querystring "0.2.0"
 
-use-subscription@^1.1.1:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/use-subscription/-/use-subscription-1.2.0.tgz#2a6789ef2cb9c5d78990a728a28630673e82f709"
-  integrity sha512-gbBH3zEoZycCJBisWzRkZ9IjwlWys2udleYkkNYTZYLhKRwLQbzh2ZbHXzKDvgFyim0WN/ROpp2Z1AF8wiT7zA==
+use-subscription@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/use-subscription/-/use-subscription-1.3.0.tgz#3df13a798e826c8d462899423293289a3362e4e6"
+  integrity sha512-buZV7FUtnbOr+65dN7PHK7chHhQGfk/yjgqfpRLoWuHIAc4klAD/rdot2FsPNtFthN1ZydvA8tR/mWBMQ+/fDQ==
+  dependencies:
+    object-assign "^4.1.1"
 
 use@^3.1.0:
   version "3.1.1"
