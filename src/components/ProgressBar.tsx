@@ -7,6 +7,7 @@ import {
   ViewStyle,
   StyleProp,
   LayoutChangeEvent,
+  I18nManager,
 } from 'react-native';
 import setColor from 'color';
 import { withTheme } from '../core/theming';
@@ -44,6 +45,7 @@ type State = {
 
 const INDETERMINATE_DURATION = 2000;
 const INDETERMINATE_MAX_WIDTH = 0.6;
+const { isRTL } = I18nManager;
 
 /**
  * Progress bar is an indicator used to present progress of some activity in the app.
@@ -187,14 +189,17 @@ class ProgressBar extends React.Component<Props, State> {
                         ? {
                             inputRange: [0, 0.5, 1],
                             outputRange: [
-                              -0.5 * width,
-                              -0.5 * INDETERMINATE_MAX_WIDTH * width,
-                              0.7 * width,
+                              (isRTL ? 1 : -1) * 0.5 * width,
+                              (isRTL ? 1 : -1) *
+                                0.5 *
+                                INDETERMINATE_MAX_WIDTH *
+                                width,
+                              (isRTL ? -1 : 1) * 0.7 * width,
                             ],
                           }
                         : {
                             inputRange: [0, 1],
-                            outputRange: [-0.5 * width, 0],
+                            outputRange: [(isRTL ? 1 : -1) * 0.5 * width, 0],
                           }
                     ),
                   },
