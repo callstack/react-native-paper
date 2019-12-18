@@ -312,7 +312,7 @@ class FABGroup extends React.Component<Props, State> {
           </View>
           <FAB
             onPress={() => {
-              onPress && onPress();
+              onPress?.();
               this.toggle();
             }}
             icon={icon}

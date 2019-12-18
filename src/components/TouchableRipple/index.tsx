@@ -91,7 +91,7 @@ class TouchableRipple extends React.Component<Props> {
   private handlePressIn = (e: any) => {
     const { centered, rippleColor, onPressIn, theme } = this.props;
 
-    onPressIn && onPressIn(e);
+    onPressIn?.(e);
 
     const { dark, colors } = theme;
     const calculatedRippleColor =
