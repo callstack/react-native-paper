@@ -75,8 +75,8 @@ type Props = React.ComponentProps<typeof Appbar> & {
  *           title="Title"
  *           subtitle="Subtitle"
  *         />
- *         <Appbar.Action icon="search" onPress={this._handleSearch} />
- *         <Appbar.Action icon="more-vert" onPress={this._handleMore} />
+ *         <Appbar.Action icon="magnify" onPress={this._handleSearch} />
+ *         <Appbar.Action icon="dots-vertical" onPress={this._handleMore} />
  *       </Appbar.Header>
  *     );
  *   }
