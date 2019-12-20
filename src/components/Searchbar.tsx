@@ -15,6 +15,7 @@ import { withTheme } from '../core/theming';
 import { Theme } from '../types';
 import { IconSource } from './Icon';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
+import ActivityIndicator from './ActivityIndicator';
 
 type Props = React.ComponentProps<typeof TextInput> & {
   /**
@@ -55,6 +56,10 @@ type Props = React.ComponentProps<typeof TextInput> & {
    * Custom icon for clear button, default will be icon close
    */
   clearIcon?: IconSource;
+  /**
+   * Whether to show a loading indicator.
+   */
+  loading?: boolean;
 };
 
 /**
@@ -135,6 +140,7 @@ class Searchbar extends React.Component<Props> {
       onIconPress,
       icon,
       value,
+      loading,
       theme,
       style,
       iconColor: customIconColor,
@@ -199,27 +205,36 @@ class Searchbar extends React.Component<Props> {
           value={value}
           {...rest}
         />
-        <IconButton
-          borderless
-          disabled={!value}
-          color={value ? iconColor : 'rgba(255, 255, 255, 0)'}
-          rippleColor={rippleColor}
-          onPress={this.handleClearPress}
-          icon={
-            clearIcon ||
-            (({ size, color }) => (
-              <MaterialCommunityIcon
-                name="close"
-                color={color}
-                size={size}
-                direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
-              />
-            ))
-          }
-          accessibilityTraits="button"
-          accessibilityComponentType="button"
-          accessibilityRole="button"
-        />
+        {!loading && (
+          <IconButton
+            borderless
+            disabled={!value}
+            color={value ? iconColor : 'rgba(255, 255, 255, 0)'}
+            rippleColor={rippleColor}
+            onPress={this.handleClearPress}
+            icon={
+              clearIcon ||
+              (({ size, color }) => (
+                <MaterialCommunityIcon
+                  name="close"
+                  color={color}
+                  size={size}
+                  direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+                />
+              ))
+            }
+            accessibilityTraits="button"
+            accessibilityComponentType="button"
+            accessibilityRole="button"
+          />
+        )}
+        {loading && (
+          <ActivityIndicator
+            size={16}
+            color={textColor}
+            style={styles.loading}
+          />
+        )}
       </Surface>
     );
   }
@@ -237,6 +252,10 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     textAlign: I18nManager.isRTL ? 'right' : 'left',
     minWidth: 0,
+  },
+  loading: {
+    width: 36,
+    margin: 6,
   },
 });
 

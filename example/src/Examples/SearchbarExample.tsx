@@ -17,6 +17,7 @@ type State = {
   firstQuery: string;
   secondQuery: string;
   thirdQuery: string;
+  fourthQuery: string;
 };
 
 class SearchExample extends React.Component<Props, State> {
@@ -26,6 +27,7 @@ class SearchExample extends React.Component<Props, State> {
     firstQuery: '',
     secondQuery: '',
     thirdQuery: '',
+    fourthQuery: '',
   };
 
   render() {
@@ -60,6 +62,18 @@ class SearchExample extends React.Component<Props, State> {
           onIconPress={/* In real code, this will open the drawer */ () => {}}
           icon="menu"
           style={styles.searchbar}
+        />
+        <Caption style={styles.caption}>Loading indicator</Caption>
+        <Searchbar
+          placeholder="Search"
+          onChangeText={(query: string) =>
+            this.setState({ fourthQuery: query })
+          }
+          value={this.state.fourthQuery}
+          onIconPress={/* In real code, this will open the drawer */ () => {}}
+          icon="menu"
+          style={styles.searchbar}
+          loading
         />
       </View>
     );

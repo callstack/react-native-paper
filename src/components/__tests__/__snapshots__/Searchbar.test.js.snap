@@ -1,5 +1,323 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`renders with a loading indicator 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#ffffff",
+      "borderRadius": 4,
+      "elevation": 4,
+      "flexDirection": "row",
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 3,
+        "width": 0,
+      },
+      "shadowOpacity": 0.24,
+      "shadowRadius": 4,
+    }
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessibilityStates={Array []}
+    accessible={true}
+    focusable={false}
+    hitSlop={
+      Object {
+        "bottom": 6,
+        "left": 6,
+        "right": 6,
+        "top": 6,
+      }
+    }
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Array [
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+            "margin": 6,
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 18,
+            "height": 36,
+            "width": 36,
+          },
+          undefined,
+          undefined,
+        ],
+      ]
+    }
+  >
+    <View
+      style={null}
+    >
+      <Text
+        accessibilityElementsHidden={true}
+        allowFontScaling={false}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        style={
+          Array [
+            Object {
+              "color": "rgba(0, 0, 0, 0.54)",
+              "fontSize": 24,
+            },
+            Array [
+              Object {
+                "transform": Array [
+                  Object {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              Object {
+                "backgroundColor": "transparent",
+              },
+            ],
+            Object {
+              "fontFamily": "Material Design Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
+  </View>
+  <TextInput
+    accessibilityRole="search"
+    accessibilityTraits="search"
+    allowFontScaling={true}
+    keyboardAppearance="light"
+    placeholder="Search"
+    placeholderTextColor="rgba(0, 0, 0, 0.54)"
+    rejectResponderTermination={true}
+    returnKeyType="search"
+    selectionColor="#6200ee"
+    style={
+      Array [
+        Object {
+          "alignSelf": "stretch",
+          "flex": 1,
+          "fontSize": 18,
+          "minWidth": 0,
+          "paddingLeft": 8,
+          "textAlign": "left",
+        },
+        Object {
+          "color": "#000000",
+          "fontFamily": "System",
+          "fontWeight": "400",
+        },
+        undefined,
+      ]
+    }
+    underlineColorAndroid="transparent"
+    value="query"
+  />
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+        },
+        Object {
+          "margin": 6,
+          "width": 36,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Object {
+          "height": 16,
+          "opacity": 1,
+          "width": 16,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "bottom": 0,
+            "justifyContent": "center",
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "height": 16,
+              "transform": Array [
+                Object {
+                  "rotate": "45deg",
+                },
+              ],
+              "width": 16,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              Object {
+                "height": 8,
+                "overflow": "hidden",
+                "width": 16,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "height": 16,
+                  "transform": Array [
+                    Object {
+                      "translateY": 0,
+                    },
+                    Object {
+                      "rotate": "-165deg",
+                    },
+                  ],
+                  "width": 16,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  Object {
+                    "height": 8,
+                    "overflow": "hidden",
+                    "width": 16,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "borderColor": "#000000",
+                      "borderRadius": 8,
+                      "borderWidth": 1.6,
+                      "height": 16,
+                      "width": 16,
+                    }
+                  }
+                />
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "bottom": 0,
+            "justifyContent": "center",
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "height": 16,
+              "transform": Array [
+                Object {
+                  "rotate": "45deg",
+                },
+              ],
+              "width": 16,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              Object {
+                "height": 8,
+                "overflow": "hidden",
+                "top": 8,
+                "width": 16,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "height": 16,
+                  "transform": Array [
+                    Object {
+                      "translateY": -8,
+                    },
+                    Object {
+                      "rotate": "345deg",
+                    },
+                  ],
+                  "width": 16,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  Object {
+                    "height": 8,
+                    "overflow": "hidden",
+                    "width": 16,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "borderColor": "#000000",
+                      "borderRadius": 8,
+                      "borderWidth": 1.6,
+                      "height": 16,
+                      "width": 16,
+                    }
+                  }
+                />
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
 exports[`renders with placeholder 1`] = `
 <View
   style={

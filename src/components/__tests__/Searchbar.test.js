@@ -15,3 +15,11 @@ it('renders with text', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('renders with a loading indicator', () => {
+  const tree = renderer
+    .create(<Searchbar placeholder="Search" value="query" loading />)
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
