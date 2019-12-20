@@ -52,6 +52,13 @@ const data: Data[] = [
       'https://play.google.com/store/apps/details?id=in.micy.racecalendar',
     ios: 'https://apps.apple.com/us/app/race-calendar/id1481539104',
   },
+  {
+    color: '#4439A1',
+    name: 'myWAM',
+    image: 'showcase/mywam.png',
+    android:
+      'https://play.google.com/store/apps/details?id=com.atude.mywam',
+  },
 ];
 
 export default class Showcase extends React.Component<{}> {
