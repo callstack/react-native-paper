@@ -56,8 +56,7 @@ const data: Data[] = [
     color: '#4439A1',
     name: 'myWAM',
     image: 'showcase/mywam.png',
-    android:
-      'https://play.google.com/store/apps/details?id=com.atude.mywam',
+    android: 'https://play.google.com/store/apps/details?id=com.atude.mywam',
   },
 ];
 
