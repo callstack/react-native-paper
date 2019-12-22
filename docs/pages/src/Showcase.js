@@ -56,8 +56,7 @@ const data: Data[] = [
     color: '#4439A1',
     name: 'Unicore',
     image: 'showcase/unicore.png',
-    android:
-      'https://play.google.com/store/apps/details?id=com.atude.mywam',
+    android: 'https://play.google.com/store/apps/details?id=com.atude.mywam',
   },
 ];
 
