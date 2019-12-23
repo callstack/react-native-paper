@@ -107,7 +107,7 @@ class RadioButtonAndroid extends React.Component<Props, State> {
         {(context?: RadioButtonContextType) => {
           const checked =
             isChecked({
-              contextValue: context && context.value,
+              contextValue: context?.value,
               status,
               value,
             }) === 'checked';
@@ -137,7 +137,7 @@ class RadioButtonAndroid extends React.Component<Props, State> {
                   : () => {
                       handlePress({
                         onPress,
-                        onValueChange: context && context.onValueChange,
+                        onValueChange: context?.onValueChange,
                         value,
                       });
                     }

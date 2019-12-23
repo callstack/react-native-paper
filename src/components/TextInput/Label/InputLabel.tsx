@@ -88,12 +88,11 @@ const InputLabel = (props: InputLabelProps) => {
         labelTranslationX,
       ]}
     >
-      {labelBackground &&
-        labelBackground({
-          parentState,
-          labelStyle,
-          labelProps: props.labelProps,
-        })}
+      {labelBackground?.({
+        parentState,
+        labelStyle,
+        labelProps: props.labelProps,
+      })}
       <AnimatedText
         onLayout={onLayoutAnimatedText}
         style={[

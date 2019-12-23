@@ -70,7 +70,7 @@ class RadioButtonItem extends React.Component<Props> {
               onPress={() =>
                 handlePress({
                   onPress: onPress,
-                  onValueChange: context && context.onValueChange,
+                  onValueChange: context?.onValueChange,
                   value,
                 })
               }
