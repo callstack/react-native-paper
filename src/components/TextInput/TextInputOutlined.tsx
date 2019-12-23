@@ -53,6 +53,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       selectionColor,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       underlineColor,
+      outlineColor,
       dense,
       style,
       theme,
@@ -82,7 +83,6 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
 
     let inputTextColor,
       activeColor,
-      outlineColor,
       placeholderColor,
       errorColor,
       containerStyle;
@@ -92,11 +92,11 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
         .alpha(0.54)
         .rgb()
         .string();
-      placeholderColor = outlineColor = colors.disabled;
+      placeholderColor = colors.disabled;
     } else {
       inputTextColor = colors.text;
       activeColor = error ? colors.error : colors.primary;
-      placeholderColor = outlineColor = colors.placeholder;
+      placeholderColor = colors.placeholder;
       errorColor = colors.error;
     }
 
@@ -183,6 +183,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
     };
 
     const minHeight = height || (dense ? MIN_DENSE_HEIGHT : MIN_HEIGHT);
+    const defaultOutlineColor = disabled ? colors.disabled : colors.placeholder;
 
     return (
       <View style={[containerStyle, viewStyle]}>
@@ -196,7 +197,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
             theme={theme}
             hasActiveOutline={hasActiveOutline}
             activeColor={activeColor}
-            outlineColor={outlineColor}
+            outlineColor={outlineColor || defaultOutlineColor}
             backgroundColor={backgroundColor}
           />
           <View
