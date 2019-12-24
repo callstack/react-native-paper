@@ -220,7 +220,7 @@ class Menu extends React.Component<Props, State> {
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
       );
 
-      focusableNode && focusableNode.focus();
+      focusableNode?.focus();
     }
   };
 
