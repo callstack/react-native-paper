@@ -83,6 +83,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
 
     let inputTextColor,
       activeColor,
+      defaultOutlineColor,
       placeholderColor,
       errorColor,
       containerStyle;
@@ -92,11 +93,11 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
         .alpha(0.54)
         .rgb()
         .string();
-      placeholderColor = colors.disabled;
+      placeholderColor = defaultOutlineColor = colors.disabled;
     } else {
       inputTextColor = colors.text;
       activeColor = error ? colors.error : colors.primary;
-      placeholderColor = colors.placeholder;
+      placeholderColor = defaultOutlineColor = colors.placeholder;
       errorColor = colors.error;
     }
 
@@ -183,7 +184,6 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
     };
 
     const minHeight = height || (dense ? MIN_DENSE_HEIGHT : MIN_HEIGHT);
-    const defaultOutlineColor = disabled ? colors.disabled : colors.placeholder;
 
     return (
       <View style={[containerStyle, viewStyle]}>
