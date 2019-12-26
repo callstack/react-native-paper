@@ -1,6 +1,12 @@
 import color from 'color';
 import * as React from 'react';
-import { View, StyleSheet, ViewStyle, StyleProp } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TextStyle,
+  ViewStyle,
+  StyleProp,
+} from 'react-native';
 import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple';
 import Text from '../Typography/Text';
@@ -30,6 +36,7 @@ type Props = {
    */
   theme: Theme;
   style?: StyleProp<ViewStyle>;
+  titleStyle?: StyleProp<TextStyle>;
 };
 
 /**
@@ -41,7 +48,15 @@ class MenuItem extends React.Component<Props> {
   static displayName = 'Menu.Item';
 
   render() {
-    const { icon, title, disabled, onPress, theme, style } = this.props;
+    const {
+      icon,
+      title,
+      disabled,
+      onPress,
+      theme,
+      style,
+      titleStyle,
+    } = this.props;
 
     const disabledColor = color(theme.dark ? white : black)
       .alpha(0.32)
@@ -84,7 +99,7 @@ class MenuItem extends React.Component<Props> {
           >
             <Text
               numberOfLines={1}
-              style={[styles.title, { color: titleColor }]}
+              style={[styles.title, { color: titleColor }, titleStyle]}
             >
               {title}
             </Text>
