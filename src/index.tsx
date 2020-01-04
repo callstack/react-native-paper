@@ -17,8 +17,9 @@ export { default as configureFonts } from './styles/fonts';
 import * as Avatar from './components/Avatar/Avatar';
 import * as List from './components/List/List';
 import * as Drawer from './components/Drawer/Drawer';
+import * as Skeleton from './components/Skeleton/Skeleton';
 
-export { Avatar, List, Drawer };
+export { Avatar, List, Drawer, Skeleton };
 
 export { default as Badge } from './components/Badge';
 export { default as ActivityIndicator } from './components/ActivityIndicator';

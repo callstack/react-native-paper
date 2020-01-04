@@ -34,6 +34,7 @@ import TextExample from './Examples/TextExample';
 import TextInputExample from './Examples/TextInputExample';
 import ToggleButtonExample from './Examples/ToggleButtonExample';
 import TouchableRippleExample from './Examples/TouchableRippleExample';
+import SkeletonExample from './Examples/SkeletonExample';
 
 export const examples: Record<
   string,
@@ -69,6 +70,7 @@ export const examples: Record<
   textInput: TextInputExample,
   toggleButton: ToggleButtonExample,
   touchableRipple: TouchableRippleExample,
+  skeleton: SkeletonExample,
 };
 
 type Props = {
