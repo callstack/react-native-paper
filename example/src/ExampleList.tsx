@@ -26,6 +26,7 @@ import MenuExample from './Examples/MenuExample';
 import ProgressBarExample from './Examples/ProgressBarExample';
 import RadioButtonExample from './Examples/RadioButtonExample';
 import RadioButtonGroupExample from './Examples/RadioButtonGroupExample';
+import RatingExample from './Examples/RatingExample';
 import SearchbarExample from './Examples/SearchbarExample';
 import SnackbarExample from './Examples/SnackbarExample';
 import SurfaceExample from './Examples/SurfaceExample';
@@ -61,6 +62,7 @@ export const examples: Record<
   progressbar: ProgressBarExample,
   radio: RadioButtonExample,
   radioGroup: RadioButtonGroupExample,
+  rating: RatingExample,
   searchbar: SearchbarExample,
   snackbar: SnackbarExample,
   surface: SurfaceExample,
