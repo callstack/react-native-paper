@@ -70,7 +70,7 @@
     "babel-jest": "^24.3.1",
     "babel-test": "^0.1.1",
     "chalk": "^2.4.1",
-    "commitlint": "^7.5.2",
+    "commitlint": "^8.3.4",
     "conventional-changelog-cli": "^2.0.11",
     "dedent": "^0.7.0",
     "eslint": "^6.7.2",
