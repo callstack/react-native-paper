@@ -52,7 +52,7 @@
     "@babel/core": "^7.4.4",
     "@babel/runtime": "^7.4.4",
     "@callstack/eslint-config": "^9.0.0",
-    "@commitlint/config-conventional": "^7.5.0",
+    "@commitlint/config-conventional": "^8.3.4",
     "@react-native-community/bob": "^0.4.1",
     "@release-it/conventional-changelog": "^1.1.0",
     "@types/color": "^3.0.0",
