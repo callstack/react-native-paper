@@ -9,6 +9,10 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    * Content of the `DataTableCell`.
    */
   children: React.ReactNode;
+   /**
+   * The number of lines to show.
+   */
+  numberOfLines?: number,
   /**
    * Align the text to the right. Generally monetary or number fields are aligned to right.
    */
@@ -24,14 +28,14 @@ class DataTableCell extends React.Component<Props> {
   static displayName = 'DataTable.Cell';
 
   render() {
-    const { children, style, numeric, ...rest } = this.props;
+    const { children, style, numeric, numberOfLines, ...rest } = this.props;
 
     return (
       <TouchableRipple
         {...rest}
         style={[styles.container, numeric && styles.right, style]}
       >
-        <Text numberOfLines={1}>{children}</Text>
+        <Text numberOfLines={numberOfLines ? numberOfLines: 1}>{children}</Text>
       </TouchableRipple>
     );
   }
