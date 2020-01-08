@@ -35,7 +35,7 @@ class DataTableCell extends React.Component<Props> {
         {...rest}
         style={[styles.container, numeric && styles.right, style]}
       >
-        <Text numberOfLines={numberOfLines ? numberOfLines: 1}>{children}</Text>
+        <Text numberOfLines={!!numberOfLines ? numberOfLines: 1}>{children}</Text>
       </TouchableRipple>
     );
   }
