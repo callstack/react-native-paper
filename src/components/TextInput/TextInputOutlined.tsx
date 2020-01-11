@@ -13,6 +13,7 @@ import InputLabel from './Label/InputLabel';
 import LabelBackground from './Label/LabelBackground';
 import { RenderProps, ChildTextInputProps } from './types';
 import { Theme } from '../../types';
+import Text from '../Typography/Text';
 
 import {
   MAXIMIZED_LABEL_FONT_SIZE,
@@ -49,6 +50,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       disabled,
       editable,
       label,
+      prefixText,
       error,
       selectionColor,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -64,6 +66,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       onBlur,
       onChangeText,
       onLayoutAnimatedText,
+      value,
       ...rest
     } = this.props;
 
@@ -212,38 +215,58 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
               labelBackground={LabelBackground}
             />
 
-            {render?.({
-              ...rest,
-              ref: innerRef,
-              onChangeText,
-              placeholder: label
-                ? parentState.placeholder
-                : this.props.placeholder,
-              placeholderTextColor: placeholderColor,
-              editable: !disabled && editable,
-              selectionColor:
-                typeof selectionColor === 'undefined'
-                  ? activeColor
-                  : selectionColor,
-              onFocus,
-              onBlur,
-              underlineColorAndroid: 'transparent',
-              multiline,
-              style: [
-                styles.input,
-                !multiline || (multiline && height)
-                  ? { height: inputHeight }
-                  : {},
-                paddingOut,
-                {
-                  ...font,
-                  fontSize,
-                  fontWeight,
-                  color: inputTextColor,
-                  textAlignVertical: multiline ? 'top' : 'center',
-                },
-              ],
-            } as RenderProps)}
+            <View style={styles.inputContainer}>
+              {prefixText &&
+                (parentState.focused === true ||
+                  (typeof value === 'string' && value.length > 0)) && (
+                  <Text
+                    style={{
+                      ...styles.prefixLabel,
+                      paddingLeft: INPUT_PADDING_HORIZONTAL,
+                      fontSize,
+                      fontWeight,
+                      color: placeholderColor,
+                    }}
+                  >
+                    {prefixText}
+                  </Text>
+                )}
+
+              {render?.({
+                ...rest,
+                value,
+                ref: innerRef,
+                onChangeText,
+                placeholder: label
+                  ? parentState.placeholder
+                  : this.props.placeholder,
+                placeholderTextColor: placeholderColor,
+                editable: !disabled && editable,
+                selectionColor:
+                  typeof selectionColor === 'undefined'
+                    ? activeColor
+                    : selectionColor,
+                onFocus,
+                onBlur,
+                underlineColorAndroid: 'transparent',
+                multiline,
+                style: [
+                  styles.input,
+                  !multiline || (multiline && height)
+                    ? { height: inputHeight }
+                    : {},
+                  paddingOut,
+                  {
+                    ...font,
+                    fontSize,
+                    fontWeight,
+                    color: inputTextColor,
+                    textAlignVertical: multiline ? 'top' : 'center',
+                    paddingLeft: prefixText ? 0 : INPUT_PADDING_HORIZONTAL,
+                  },
+                ],
+              } as RenderProps)}
+            </View>
           </View>
         </View>
       </View>
@@ -310,5 +333,12 @@ const styles = StyleSheet.create({
   inputOutlinedDense: {
     paddingTop: 4,
     paddingBottom: 4,
+  },
+  inputContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  prefixLabel: {
+    alignSelf: 'center',
   },
 });

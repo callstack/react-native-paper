@@ -36,6 +36,10 @@ export type TextInputProps = React.ComponentPropsWithRef<
    */
   label?: string;
   /**
+   * The uneditable text prepended to the input
+   */
+  prefixText?: string;
+  /**
    * Placeholder for the input.
    */
   placeholder?: string;

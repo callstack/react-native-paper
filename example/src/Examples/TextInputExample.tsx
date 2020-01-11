@@ -187,6 +187,12 @@ class TextInputExample extends React.Component<Props, State> {
             style={styles.inputContainerStyle}
             label="Disabled outlined input"
           />
+          <TextInput label="Flat input with prefix text" prefixText="Tip: $" />
+          <TextInput
+            label="Outline input with prefix text"
+            mode="outlined"
+            prefixText="Tip: $"
+          />
           <View style={styles.inputContainerStyle}>
             <TextInput
               label="Input with helper text"

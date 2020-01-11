@@ -12,6 +12,8 @@ import color from 'color';
 import InputLabel from './Label/InputLabel';
 import { RenderProps, ChildTextInputProps } from './types';
 
+import Text from '../Typography/Text';
+
 import {
   MAXIMIZED_LABEL_FONT_SIZE,
   MINIMIZED_LABEL_FONT_SIZE,
@@ -52,6 +54,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       disabled,
       editable,
       label,
+      prefixText,
       error,
       selectionColor,
       underlineColor,
@@ -66,6 +69,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       onBlur,
       onChangeText,
       onLayoutAnimatedText,
+      value,
       ...rest
     } = this.props;
 
@@ -236,38 +240,60 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
         >
           <InputLabel parentState={parentState} labelProps={labelProps} />
 
-          {render?.({
-            ...rest,
-            ref: innerRef,
-            onChangeText,
-            // @ts-ignore
-            placeholder: label
-              ? parentState.placeholder
-              : this.props.placeholder,
-            placeholderTextColor: placeholderColor,
-            editable: !disabled && editable,
-            selectionColor:
-              typeof selectionColor === 'undefined'
-                ? activeColor
-                : selectionColor,
-            onFocus,
-            onBlur,
-            underlineColorAndroid: 'transparent',
-            multiline,
-            style: [
-              styles.input,
-              paddingOffset,
-              !multiline || (multiline && height) ? { height: flatHeight } : {},
-              paddingFlat,
-              {
-                ...font,
-                fontSize,
-                fontWeight,
-                color: inputTextColor,
-                textAlignVertical: multiline ? 'top' : 'center',
-              },
-            ],
-          })}
+          <View style={styles.inputContainer}>
+            {prefixText &&
+              (parentState.focused === true ||
+                (typeof value === 'string' && value.length > 0)) && (
+                <Text
+                  style={{
+                    ...styles.prefixLabel,
+                    ...paddingFlat,
+                    paddingLeft: LABEL_PADDING_HORIZONTAL,
+                    fontSize,
+                    fontWeight,
+                    color: placeholderColor,
+                  }}
+                >
+                  {prefixText}
+                </Text>
+              )}
+
+            {render?.({
+              ...rest,
+              ref: innerRef,
+              onChangeText,
+              // @ts-ignore
+              placeholder: label
+                ? parentState.placeholder
+                : this.props.placeholder,
+              placeholderTextColor: placeholderColor,
+              editable: !disabled && editable,
+              selectionColor:
+                typeof selectionColor === 'undefined'
+                  ? activeColor
+                  : selectionColor,
+              onFocus,
+              onBlur,
+              underlineColorAndroid: 'transparent',
+              multiline,
+              style: [
+                styles.input,
+                paddingOffset,
+                !multiline || (multiline && height)
+                  ? { height: flatHeight }
+                  : {},
+                paddingFlat,
+                {
+                  ...font,
+                  fontSize,
+                  fontWeight,
+                  color: inputTextColor,
+                  textAlignVertical: multiline ? 'top' : 'center',
+                  paddingLeft: prefixText ? 0 : paddingOffset.paddingHorizontal,
+                },
+              ],
+            })}
+          </View>
         </View>
       </View>
     );
@@ -341,5 +367,11 @@ const styles = StyleSheet.create({
   },
   paddingOffset: {
     paddingHorizontal: LABEL_PADDING_HORIZONTAL,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+  },
+  prefixLabel: {
+    alignSelf: 'center',
   },
 });
