@@ -112,6 +112,7 @@ export type TextInputProps = React.ComponentPropsWithRef<
   style?: any;
   /**
    * Pass a `Theme` to set the Theme Styling of this component
+   * @optional
    */
   theme?: Theme;
 };
