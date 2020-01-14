@@ -15,6 +15,7 @@ import CardExample from './Examples/CardExample';
 import CheckboxExample from './Examples/CheckboxExample';
 import ChipExample from './Examples/ChipExample';
 import DataTableExample from './Examples/DataTableExample';
+import DataTableColumnExample from './Examples/DataTableColumnExample';
 import DialogExample from './Examples/DialogExample';
 import DividerExample from './Examples/DividerExample';
 import FABExample from './Examples/FABExample';
@@ -50,6 +51,7 @@ export const examples: Record<
   checkbox: CheckboxExample,
   chip: ChipExample,
   dataTable: DataTableExample,
+  dataTableColumn: DataTableColumnExample,
   dialog: DialogExample,
   divider: DividerExample,
   fab: FABExample,

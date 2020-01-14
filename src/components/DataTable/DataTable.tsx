@@ -15,6 +15,11 @@ import DataTablePagination, {
 } from './DataTablePagination';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import DataTableRow, { DataTableRow as _DataTableRow } from './DataTableRow';
+import DataTableColumn, {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  DataTableColumn as _DataTableColumn,
+} from './DataTableColumn';
+import DataTableWrapper from './DataTableWrapper';
 
 type Props = React.ComponentProps<typeof View> & {
   /**
@@ -88,6 +93,12 @@ class DataTable extends React.Component<Props> {
 
   // @component ./DataTablePagination.tsx
   static Pagination = DataTablePagination;
+
+  // @component ./DataTableColumn.tsx
+  static Column = DataTableColumn;
+
+  // @component ./DataTableWrapper.tsx
+  static Wrapper = DataTableWrapper;
 
   render() {
     const { children, style, ...rest } = this.props;
