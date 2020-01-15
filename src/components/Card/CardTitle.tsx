@@ -114,14 +114,14 @@ class CardTitle extends React.Component<Props> {
       style,
       title,
       titleStyle,
-      titleNumberOfLines
+      titleNumberOfLines,
     } = this.props;
 
     return (
       <View
         style={[
           styles.container,
-          { height: subtitle || left || right ? 72 : 50 },
+          { minHeight: subtitle || left || right ? 72 : 50 },
           style,
         ]}
       >
@@ -148,7 +148,10 @@ class CardTitle extends React.Component<Props> {
           ) : null}
 
           {subtitle ? (
-            <Caption style={[styles.subtitle, subtitleStyle]} numberOfLines={subtitleNumberOfLines}>
+            <Caption
+              style={[styles.subtitle, subtitleStyle]}
+              numberOfLines={subtitleNumberOfLines}
+            >
               {subtitle}
             </Caption>
           ) : null}
@@ -179,7 +182,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    height: 50,
   },
 
   title: {
