@@ -13,7 +13,7 @@
   "main": "node_modules/expo/AppEntry.js",
   "dependencies": {
     "@callstack/react-theme-provider": "^3.0.2",
-    "@react-native-community/masked-view": "0.1.5",
+    "@react-native-community/masked-view": "0.1.6",
     "@react-navigation/drawer": "^5.0.0-alpha.27",
     "@react-navigation/native": "^5.0.0-alpha.18",
     "@react-navigation/stack": "^5.0.0-alpha.43",
