@@ -481,7 +481,7 @@ class BottomNavigation extends React.Component<Props, State> {
 
   private animateToCurrentIndex = () => {
     const shifting = this.isShifting();
-    const { sceneAnimationEnabled, navigationState } = this.props;
+    const { navigationState } = this.props;
     const { routes, index } = navigationState;
 
     // Reset the ripple to avoid glitch if it's currently animating
@@ -496,7 +496,7 @@ class BottomNavigation extends React.Component<Props, State> {
       ...routes.map((_, i) =>
         Animated.timing(this.state.tabs[i], {
           toValue: i === index ? 1 : 0,
-          duration: shifting && sceneAnimationEnabled !== false ? 150 : 0,
+          duration: shifting ? 150 : 0,
           useNativeDriver: true,
         })
       ),
@@ -585,6 +585,7 @@ class BottomNavigation extends React.Component<Props, State> {
       labeled,
       style,
       theme,
+      sceneAnimationEnabled,
     } = this.props;
 
     const {
@@ -655,14 +656,15 @@ class BottomNavigation extends React.Component<Props, State> {
               // Don't render a screen if we've never navigated to it
               return null;
             }
+            const focused = navigationState.index === index;
 
-            const opacity = tabs[index];
+            const opacity =
+              sceneAnimationEnabled !== false ? tabs[index] : focused ? 1 : 0;
+
             const top = offsets[index].interpolate({
               inputRange: [0, 1],
               outputRange: [0, FAR_FAR_AWAY],
             });
-
-            const focused = navigationState.index === index;
 
             return (
               <Animated.View
