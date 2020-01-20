@@ -75,13 +75,13 @@ export default class BottomNavigationExample extends React.Component<
       <BottomNavigation
         navigationState={this.state}
         onIndexChange={index => this.setState({ index })}
-        // @ts-ignore
         renderScene={BottomNavigation.SceneMap({
           album: PhotoGallery,
           library: PhotoGallery,
           favorites: PhotoGallery,
           purchased: PhotoGallery,
         })}
+        sceneAnimationEnabled={false}
       />
     );
   }
