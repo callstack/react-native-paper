@@ -280,9 +280,10 @@ class TextInput extends React.Component<TextInputProps, State> {
   private root: NativeTextInput | undefined | null;
 
   private showError = () => {
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.error, {
       toValue: 1,
-      duration: FOCUS_ANIMATION_DURATION,
+      duration: FOCUS_ANIMATION_DURATION * scale,
       // To prevent this - https://github.com/callstack/react-native-paper/issues/941
       useNativeDriver: Platform.select({
         ios: false,
@@ -292,9 +293,10 @@ class TextInput extends React.Component<TextInputProps, State> {
   };
 
   private hideError = () => {
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.error, {
       toValue: 0,
-      duration: BLUR_ANIMATION_DURATION,
+      duration: BLUR_ANIMATION_DURATION * scale,
       // To prevent this - https://github.com/callstack/react-native-paper/issues/941
       useNativeDriver: Platform.select({
         ios: false,
@@ -303,27 +305,31 @@ class TextInput extends React.Component<TextInputProps, State> {
     }).start();
   };
 
-  private restoreLabel = () =>
+  private restoreLabel = () => {
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.labeled, {
       toValue: 1,
-      duration: FOCUS_ANIMATION_DURATION,
+      duration: FOCUS_ANIMATION_DURATION * scale,
       // To prevent this - https://github.com/callstack/react-native-paper/issues/941
       useNativeDriver: Platform.select({
         ios: false,
         default: true,
       }),
     }).start();
+  };
 
-  private minimizeLabel = () =>
+  private minimizeLabel = () => {
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.labeled, {
       toValue: 0,
-      duration: BLUR_ANIMATION_DURATION,
+      duration: BLUR_ANIMATION_DURATION * scale,
       // To prevent this - https://github.com/callstack/react-native-paper/issues/941
       useNativeDriver: Platform.select({
         ios: false,
         default: true,
       }),
     }).start();
+  };
 
   private handleFocus = (args: any) => {
     if (this.props.disabled || !this.props.editable) {

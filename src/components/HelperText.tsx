@@ -111,17 +111,19 @@ class HelperText extends React.PureComponent<Props, State> {
   }
 
   private showText = () => {
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.shown, {
       toValue: 1,
-      duration: 150,
+      duration: 150 * scale,
       useNativeDriver: true,
     }).start();
   };
 
   private hideText = () => {
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.shown, {
       toValue: 0,
-      duration: 180,
+      duration: 180 * scale,
       useNativeDriver: true,
     }).start();
   };

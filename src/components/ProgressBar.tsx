@@ -105,12 +105,18 @@ class ProgressBar extends React.Component<Props, State> {
   };
 
   private startAnimation = () => {
-    const { indeterminate, progress } = this.props;
+    const {
+      indeterminate,
+      progress,
+      theme: {
+        animation: { scale },
+      },
+    } = this.props;
     const { fade, timer } = this.state;
 
     // Show progress bar
     Animated.timing(fade, {
-      duration: 200,
+      duration: 200 * scale,
       toValue: 1,
       useNativeDriver: true,
       isInteraction: false,
@@ -134,7 +140,7 @@ class ProgressBar extends React.Component<Props, State> {
       Animated.loop(this.indeterminateAnimation).start();
     } else {
       Animated.timing(timer, {
-        duration: 200,
+        duration: 200 * scale,
         toValue: progress ? progress : 0,
         useNativeDriver: true,
         isInteraction: false,
@@ -144,6 +150,7 @@ class ProgressBar extends React.Component<Props, State> {
 
   private stopAnimation = () => {
     const { fade } = this.state;
+    const { scale } = this.props.theme.animation;
 
     // Stop indeterminate animation
     if (this.indeterminateAnimation) {
@@ -151,7 +158,7 @@ class ProgressBar extends React.Component<Props, State> {
     }
 
     Animated.timing(fade, {
-      duration: 200,
+      duration: 200 * scale,
       toValue: 0,
       useNativeDriver: true,
       isInteraction: false,
