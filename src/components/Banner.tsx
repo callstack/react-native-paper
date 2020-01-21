@@ -147,15 +147,17 @@ class Banner extends React.Component<Props, State> {
   };
 
   private show = () => {
+    const { animation } = this.props.theme;
     Animated.timing(this.state.position, {
-      duration: 250,
+      duration: 250 * animation.scale,
       toValue: 1,
     }).start();
   };
 
   private hide = () => {
+    const { animation } = this.props.theme;
     Animated.timing(this.state.position, {
-      duration: 200,
+      duration: 200 * animation.scale,
       toValue: 0,
     }).start();
   };
