@@ -166,9 +166,10 @@ class Snackbar extends React.Component<Props, State> {
     this.setState({
       hidden: false,
     });
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.opacity, {
       toValue: 1,
-      duration: 200,
+      duration: 200 * scale,
       useNativeDriver: true,
     }).start(({ finished }) => {
       if (finished) {
@@ -188,10 +189,10 @@ class Snackbar extends React.Component<Props, State> {
     if (this.hideTimeout) {
       clearTimeout(this.hideTimeout);
     }
-
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.opacity, {
       toValue: 0,
-      duration: 100,
+      duration: 100 * scale,
       useNativeDriver: true,
     }).start(({ finished }) => {
       if (finished) {

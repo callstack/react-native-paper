@@ -152,20 +152,21 @@ class FABGroup extends React.Component<Props, State> {
       return;
     }
 
+    const { scale } = this.props.theme.animation;
     if (this.props.open) {
       Animated.parallel([
         Animated.timing(this.state.backdrop, {
           toValue: 1,
-          duration: 250,
+          duration: 250 * scale,
           useNativeDriver: true,
         }),
         Animated.stagger(
-          50,
+          50 * scale,
           this.state.animations
             .map(animation =>
               Animated.timing(animation, {
                 toValue: 1,
-                duration: 150,
+                duration: 150 * scale,
                 useNativeDriver: true,
               })
             )
@@ -176,13 +177,13 @@ class FABGroup extends React.Component<Props, State> {
       Animated.parallel([
         Animated.timing(this.state.backdrop, {
           toValue: 0,
-          duration: 200,
+          duration: 200 * scale,
           useNativeDriver: true,
         }),
         ...this.state.animations.map(animation =>
           Animated.timing(animation, {
             toValue: 0,
-            duration: 150,
+            duration: 150 * scale,
             useNativeDriver: true,
           })
         ),
