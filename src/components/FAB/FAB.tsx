@@ -110,6 +110,7 @@ class FAB extends React.Component<Props, State> {
   };
 
   componentDidUpdate(prevProps: Props) {
+    const { animation } = this.props.theme;
     if (this.props.visible === prevProps.visible) {
       return;
     }
@@ -117,13 +118,13 @@ class FAB extends React.Component<Props, State> {
     if (this.props.visible) {
       Animated.timing(this.state.visibility, {
         toValue: 1,
-        duration: 200,
+        duration: 200 * animation.scale,
         useNativeDriver: true,
       }).start();
     } else {
       Animated.timing(this.state.visibility, {
         toValue: 0,
-        duration: 150,
+        duration: 150 * animation.scale,
         useNativeDriver: true,
       }).start();
     }
