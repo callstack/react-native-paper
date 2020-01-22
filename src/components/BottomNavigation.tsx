@@ -39,6 +39,11 @@ type NavigationState = {
   routes: Route[];
 };
 
+type TabPressEvent = {
+  defaultPrevented: boolean;
+  preventDefault(): void;
+};
+
 type Props = {
   /**
    * Whether the shifting style is used, the active tab appears wider and the inactive tabs won't have a label.
@@ -166,7 +171,7 @@ type Props = {
   /**
    * Function to execute on tab press. It receives the route for the pressed tab, useful for things like scroll to top.
    */
-  onTabPress?: (props: { route: Route }) => void;
+  onTabPress?: (props: { route: Route } & TabPressEvent) => void;
   /**
    * Custom color for icon and label in the active tab.
    */
@@ -542,10 +547,18 @@ class BottomNavigation extends React.Component<Props, State> {
   private handleTabPress = (index: number) => {
     const { navigationState, onTabPress, onIndexChange } = this.props;
 
-    if (onTabPress) {
-      onTabPress({
-        route: navigationState.routes[index],
-      });
+    const event = {
+      route: navigationState.routes[index],
+      defaultPrevented: false,
+      preventDefault: () => {
+        event.defaultPrevented = true;
+      },
+    };
+
+    onTabPress?.(event);
+
+    if (event.defaultPrevented) {
+      return;
     }
 
     if (index !== navigationState.index) {
