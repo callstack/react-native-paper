@@ -417,6 +417,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
     <Text
       accessibilityRole="header"
       accessibilityTraits="header"
+      accessible={true}
       numberOfLines={1}
       style={
         Array [
