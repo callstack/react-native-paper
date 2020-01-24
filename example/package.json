@@ -32,7 +32,7 @@
     "react-native-safe-area-view": "^0.14.6",
     "react-native-screens": "2.0.0-alpha.24",
     "react-native-vector-icons": "^6.6.0",
-    "react-native-web": "^0.11.7",
+    "react-native-web": "^0.12.0",
     "typeface-roboto": "^0.0.54"
   },
   "devDependencies": {
