@@ -124,7 +124,11 @@
       "react",
       "react-dom",
       "react-native",
-      "react-test-renderer"
+      "react-test-renderer",
+      "@types/react-native",
+      "@types/jest",
+      "husky",
+      "eslint"
     ]
   },
   "@react-native-community/bob": {
