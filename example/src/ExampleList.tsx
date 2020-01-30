@@ -87,6 +87,7 @@ const data = Object.keys(examples).map(
 export default function ExampleList({ navigation }: Props) {
   const renderItem = ({ item }: { item: Item }) => (
     <List.Item
+      style={{ backgroundColor: '#BADA' }}
       title={item.data.title}
       onPress={() => navigation.navigate(item.id)}
     />
@@ -100,7 +101,7 @@ export default function ExampleList({ navigation }: Props) {
   return (
     <FlatList
       contentContainerStyle={{
-        backgroundColor: colors.background,
+        backgroundColor: 'red' || colors.background,
         paddingBottom: safeArea.bottom,
       }}
       ItemSeparatorComponent={Divider}
