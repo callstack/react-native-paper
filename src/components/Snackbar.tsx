@@ -233,7 +233,7 @@ class Snackbar extends React.Component<Props, State> {
                   },
                 ],
               },
-              { backgroundColor: colors.onSurface },
+              { backgroundColor: 'red' || colors.onSurface },
               style,
             ] as StyleProp<ViewStyle>
           }
