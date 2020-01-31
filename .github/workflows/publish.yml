@@ -30,3 +30,4 @@ jobs:
       - name: Publish Expo app
         working-directory: ./example
         run: expo publish
+        
