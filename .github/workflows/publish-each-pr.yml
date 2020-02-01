@@ -1,5 +1,6 @@
-name: Expo Review
+name: Expo Preview
 on: [pull_request]
+
 jobs:
   publish:
     name: Install and publish
@@ -24,7 +25,7 @@ jobs:
       - name: Get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      
+
       - name: Check yarn cache
         uses: actions/cache@v1
         with:
@@ -45,4 +46,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          msg: The mobile version of example app from this branch is ready! You can [see it here](https://expo.io/@react-native-paper/react-native-paper-example?release-channel=pr-${{ github.event.number }}).
+          msg: The mobile version of example app from this branch is ready! You can [see it here](https://expo.io/@react-native-paper/react-native-paper-example?release-channel=pr-${{ github.event.number }})<br><br><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=exp://exp.host/@react-native-paper/react-native-paper-example?release-channel=pr-${{ github.event.number }}" height="200px" width="200px">.
