@@ -466,27 +466,36 @@ class BottomNavigation extends React.Component<Props, State> {
     }
   }
 
-  private handleKeyboardShow = () =>
+  private handleKeyboardShow = () => {
+    const { scale } = this.props.theme.animation;
     this.setState({ keyboard: true }, () =>
       Animated.timing(this.state.visible, {
         toValue: 0,
-        duration: 150,
+        duration: 150 * scale,
         useNativeDriver: true,
       }).start()
     );
+  };
 
-  private handleKeyboardHide = () =>
+  private handleKeyboardHide = () => {
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.visible, {
       toValue: 1,
-      duration: 100,
+      duration: 100 * scale,
       useNativeDriver: true,
     }).start(() => {
       this.setState({ keyboard: false });
     });
+  };
 
   private animateToCurrentIndex = () => {
     const shifting = this.isShifting();
-    const { navigationState } = this.props;
+    const {
+      navigationState,
+      theme: {
+        animation: { scale },
+      },
+    } = this.props;
     const { routes, index } = navigationState;
 
     // Reset the ripple to avoid glitch if it's currently animating
@@ -495,13 +504,13 @@ class BottomNavigation extends React.Component<Props, State> {
     Animated.parallel([
       Animated.timing(this.state.ripple, {
         toValue: 1,
-        duration: shifting ? 400 : 0,
+        duration: shifting ? 400 * scale : 0,
         useNativeDriver: true,
       }),
       ...routes.map((_, i) =>
         Animated.timing(this.state.tabs[i], {
           toValue: i === index ? 1 : 0,
-          duration: shifting ? 150 : 0,
+          duration: shifting ? 150 * scale : 0,
           useNativeDriver: true,
         })
       ),

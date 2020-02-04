@@ -64,12 +64,17 @@ class Badge extends React.Component<Props, State> {
   };
 
   componentDidUpdate(prevProps: Props) {
-    const { visible } = this.props;
+    const {
+      visible,
+      theme: {
+        animation: { scale },
+      },
+    } = this.props;
 
     if (visible !== prevProps.visible) {
       Animated.timing(this.state.opacity, {
         toValue: visible ? 1 : 0,
-        duration: 150,
+        duration: 150 * scale,
         useNativeDriver: true,
       }).start();
     }

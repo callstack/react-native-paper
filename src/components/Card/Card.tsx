@@ -104,17 +104,19 @@ class Card extends React.Component<Props, State> {
   };
 
   private handlePressIn = () => {
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.elevation, {
       toValue: 8,
-      duration: 150,
+      duration: 150 * scale,
     }).start();
   };
 
   private handlePressOut = () => {
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.elevation, {
       // @ts-ignore
       toValue: this.props.elevation,
-      duration: 150,
+      duration: 150 * scale,
     }).start();
   };
 

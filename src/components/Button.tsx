@@ -131,18 +131,20 @@ class Button extends React.Component<Props, State> {
 
   private handlePressIn = () => {
     if (this.props.mode === 'contained') {
+      const { scale } = this.props.theme.animation;
       Animated.timing(this.state.elevation, {
         toValue: 8,
-        duration: 200,
+        duration: 200 * scale,
       }).start();
     }
   };
 
   private handlePressOut = () => {
     if (this.props.mode === 'contained') {
+      const { scale } = this.props.theme.animation;
       Animated.timing(this.state.elevation, {
         toValue: 2,
-        duration: 150,
+        duration: 150 * scale,
       }).start();
     }
   };
