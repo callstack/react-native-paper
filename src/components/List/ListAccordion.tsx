@@ -6,9 +6,10 @@ import {
   StyleSheet,
   StyleProp,
   TextStyle,
+  I18nManager,
 } from 'react-native';
 import TouchableRipple from '../TouchableRipple';
-import Icon from '../Icon';
+import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
@@ -251,10 +252,11 @@ class ListAccordion extends React.Component<Props, State> {
                       description ? styles.multiline : undefined,
                     ]}
                   >
-                    <Icon
-                      source={expanded ? 'chevron-up' : 'chevron-down'}
+                    <MaterialCommunityIcon
+                      name={expanded ? 'chevron-up' : 'chevron-down'}
                       color={titleColor}
                       size={24}
+                      direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
                     />
                   </View>
                 </View>

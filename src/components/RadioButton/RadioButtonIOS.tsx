@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, I18nManager } from 'react-native';
 import color from 'color';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
-import Icon from '../Icon';
+import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple';
 import { withTheme } from '../../core/theming';
 import { Theme, $RemoveChildren } from '../../types';
@@ -110,11 +110,12 @@ class RadioButtonIOS extends React.Component<Props> {
               style={styles.container}
             >
               <View style={{ opacity: checked ? 1 : 0 }}>
-                <Icon
+                <MaterialCommunityIcon
                   allowFontScaling={false}
-                  source="check"
+                  name="check"
                   size={24}
                   color={checkedColor}
+                  direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
                 />
               </View>
             </TouchableRipple>

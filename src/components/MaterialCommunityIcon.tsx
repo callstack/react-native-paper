@@ -6,6 +6,7 @@ export type IconProps = {
   color: string;
   size: number;
   direction: 'rtl' | 'ltr';
+  allowFontScaling?: boolean;
 };
 
 let MaterialCommunityIcons: any;
@@ -75,8 +76,15 @@ export const accessibilityProps =
         importantForAccessibility: 'no-hide-descendants' as 'no-hide-descendants',
       };
 
-const defaultIcon = ({ name, color, size, direction }: IconProps) => (
+const defaultIcon = ({
+  name,
+  color,
+  size,
+  direction,
+  allowFontScaling,
+}: IconProps) => (
   <MaterialCommunityIcons
+    allowFontScaling={allowFontScaling}
     name={name}
     color={color}
     size={size}
