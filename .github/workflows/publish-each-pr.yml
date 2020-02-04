@@ -41,9 +41,13 @@ jobs:
         working-directory: ./example
         run: expo publish --release-channel=pr-${{ github.event.number }}
 
+      - name: Get expo link
+        id: expo
+        run: echo "::set-output name=path::@react-native-paper/react-native-paper-example?release-channel=pr-${{ github.event.number }}"
+
       - name: Comment on PR
         uses: unsplash/comment-on-pr@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          msg: The mobile version of example app from this branch is ready! You can [see it here](https://expo.io/@react-native-paper/react-native-paper-example?release-channel=pr-${{ github.event.number }})<br><br><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=exp://exp.host/@react-native-paper/react-native-paper-example?release-channel=pr-${{ github.event.number }}" height="200px" width="200px">.
+          msg: The mobile version of example app from this branch is ready! You can [see it here](https://expo.io/${{ steps.expo.outputs.path }})<br><br><a href="https://exp.host/${{ steps.expo.outputs.path }}"><img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=exp://exp.host/${{ steps.expo.outputs.path }}" height="200px" width="200px"></a>.
