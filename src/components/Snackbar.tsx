@@ -142,8 +142,21 @@ class Snackbar extends React.Component<Props, State> {
   componentDidUpdate(prevProps: Props) {
     if (prevProps.visible !== this.props.visible) {
       this.toggle();
+    } else if (this.props.visible && prevProps.children !== this.props.children) {
+      if (this.hideTimeout) {
+        clearTimeout(this.hideTimeout);
+        const { duration } = this.props;
+        const isInfinity =
+          duration === Number.POSITIVE_INFINITY ||
+          duration === Number.NEGATIVE_INFINITY;
+
+        if (!isInfinity) {
+          this.hideTimeout = setTimeout(this.props.onDismiss, duration);
+        }
+      }
     }
   }
+
 
   componentWillUnmount() {
     if (this.hideTimeout) {
