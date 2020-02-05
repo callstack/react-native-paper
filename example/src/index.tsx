@@ -2,10 +2,7 @@ import * as React from 'react';
 import { AsyncStorage, I18nManager, Platform, YellowBox } from 'react-native';
 import { Updates } from 'expo';
 import { useKeepAwake } from 'expo-keep-awake';
-import {
-  InitialState,
-  NavigationNativeContainer,
-} from '@react-navigation/native';
+import { InitialState, NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import {
   Provider as PaperProvider,
@@ -136,7 +133,7 @@ export default function PaperExample() {
       <SafeAreaProvider>
         <PreferencesContext.Provider value={preferences}>
           <React.Fragment>
-            <NavigationNativeContainer
+            <NavigationContainer
               initialState={initialState}
               onStateChange={state =>
                 AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
@@ -149,7 +146,7 @@ export default function PaperExample() {
                   <Drawer.Screen name="Home" component={App} />
                 </Drawer.Navigator>
               )}
-            </NavigationNativeContainer>
+            </NavigationContainer>
           </React.Fragment>
         </PreferencesContext.Provider>
       </SafeAreaProvider>
