@@ -34,6 +34,7 @@ type Props = {
     accessibilityLabel?: string;
     style?: StyleProp<ViewStyle>;
     onPress: () => void;
+    testID?: string;
   }>;
   /**
    * Icon to display for the `FAB`.
@@ -79,7 +80,7 @@ type Props = {
    */
   theme: Theme;
   /**
-   * Pass down testID from Group props to FAB and child FABs with indices.
+   * Pass down testID from Group props to FAB.
    */
   testID?: string;
 };
@@ -311,7 +312,7 @@ class FABGroup extends React.Component<Props, State> {
                   accessibilityTraits="button"
                   accessibilityComponentType="button"
                   accessibilityRole="button"
-                  testID={`${testID}-${i}`}
+                  testID={it.testID}
                 />
               </View>
             ))}
