@@ -76,6 +76,10 @@ type Props = {
    * Id is used for distinguishing specific accordion when using List.AccordionGroup. Property is required when using List.AccordionGroup and has no impact on behavior when using standalone List.Accordion.
    */
   id?: string | number;
+  /**
+   * TestID used for testing purposes
+   */
+  testID?: string;
 };
 
 type State = {
@@ -171,6 +175,7 @@ class ListAccordion extends React.Component<Props, State> {
       descriptionNumberOfLines,
       style,
       id,
+      testID,
     } = this.props;
     const titleColor = color(theme.colors.text)
       .alpha(0.87)
@@ -209,6 +214,7 @@ class ListAccordion extends React.Component<Props, State> {
                 accessibilityTraits="button"
                 accessibilityComponentType="button"
                 accessibilityRole="button"
+                testID={testID}
               >
                 <View style={styles.row} pointerEvents="none">
                   {left
