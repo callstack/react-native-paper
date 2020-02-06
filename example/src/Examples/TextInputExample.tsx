@@ -78,13 +78,31 @@ class TextInputExample extends React.Component<Props, State> {
             placeholder="Type something"
             value={this.state.text}
             onChangeText={text => this.setState({ text })}
+            leftAdornment={
+              <TextInput.Icon
+                name="heart"
+                onPress={() => {
+                  console.log('!@# press left');
+                }}
+              />
+            }
+            rightAdornment={<TextInput.Affix text="/100" />}
           />
           <TextInput
             style={[styles.inputContainerStyle, styles.fontSize]}
             label="Flat input large font"
-            placeholder="Type something"
+            // placeholder="Type something"
             value={this.state.largeText}
             onChangeText={largeText => this.setState({ largeText })}
+            leftAdornment={<TextInput.Affix text="$" />}
+            rightAdornment={
+              <TextInput.Icon
+                name="heart"
+                onPress={() => {
+                  console.log('!@# press right');
+                }}
+              />
+            }
           />
           <TextInput
             style={styles.inputContainerStyle}
@@ -93,6 +111,7 @@ class TextInputExample extends React.Component<Props, State> {
             placeholder="Type something"
             value={this.state.flatDenseText}
             onChangeText={flatDenseText => this.setState({ flatDenseText })}
+            leftAdornment={<TextInput.Affix text="$" />}
           />
           <TextInput
             style={styles.inputContainerStyle}
@@ -129,6 +148,15 @@ class TextInputExample extends React.Component<Props, State> {
             placeholder="Type something"
             value={this.state.outlinedText}
             onChangeText={outlinedText => this.setState({ outlinedText })}
+            leftAdornment={
+              <TextInput.Icon
+                name="heart"
+                onPress={() => {
+                  console.log('!@# press left');
+                }}
+              />
+            }
+            rightAdornment={<TextInput.Affix text="/100" />}
           />
           <TextInput
             mode="outlined"
@@ -138,6 +166,15 @@ class TextInputExample extends React.Component<Props, State> {
             value={this.state.outlinedLargeText}
             onChangeText={outlinedLargeText =>
               this.setState({ outlinedLargeText })
+            }
+            leftAdornment={<TextInput.Affix text="$" />}
+            rightAdornment={
+              <TextInput.Icon
+                name="heart"
+                onPress={() => {
+                  console.log('!@# press right');
+                }}
+              />
             }
           />
           <TextInput
@@ -150,6 +187,7 @@ class TextInputExample extends React.Component<Props, State> {
             onChangeText={outlinedDenseText =>
               this.setState({ outlinedDenseText })
             }
+            leftAdornment={<TextInput.Affix text="$" />}
           />
           <TextInput
             mode="outlined"
@@ -196,7 +234,7 @@ class TextInputExample extends React.Component<Props, State> {
               onChangeText={name => this.setState({ name })}
             />
             <HelperText
-              type="error"
+              type="info"
               visible={!this._isUsernameValid(this.state.name)}
             >
               Error: Only letters are allowed
