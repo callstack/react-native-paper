@@ -66,3 +66,5 @@ const styles = StyleSheet.create({
 });
 
 export default withTheme(TextInputAffix);
+
+export { TextInputAffix };
