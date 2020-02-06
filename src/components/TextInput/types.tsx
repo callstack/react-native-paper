@@ -51,7 +51,11 @@ export type LabelProps = {
   fontWeight: TextStyle['fontWeight'];
   font: any;
   topPosition: number;
-  paddingOffset?: { paddingHorizontal: number } | null | undefined;
+  paddingOffset?:
+    | { paddingLeft: number; paddingRight: number }
+    | null
+    | undefined;
+  labelTranslationXOffset?: number;
   placeholderColor: string | null | undefined;
   backgroundColor?: string | null | undefined;
   label?: string | null | undefined;

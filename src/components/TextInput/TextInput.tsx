@@ -4,10 +4,15 @@ import {
   TextInput as NativeTextInput,
   Platform,
   LayoutChangeEvent,
+  // StyleProp,
+  // ViewStyle,
+  // TextStyle,
 } from 'react-native';
 
 import TextInputOutlined from './TextInputOutlined';
 import TextInputFlat from './TextInputFlat';
+import TextInputIcon from './Icon';
+import TextInputAffix from './Affix';
 import { withTheme } from '../../core/theming';
 import { RenderProps, State } from './types';
 import { Theme, $Omit } from '../../types';
@@ -27,6 +32,8 @@ export type TextInputProps = React.ComponentPropsWithRef<
    * This component render TextInputOutlined or TextInputFlat based on that props
    */
   mode?: 'flat' | 'outlined';
+  leftAdornment?: React.ReactNode;
+  rightAdornment?: React.ReactNode;
   /**
    * If true, user won't be able to interact with the component.
    */
@@ -164,6 +171,12 @@ export type TextInputProps = React.ComponentPropsWithRef<
  */
 
 class TextInput extends React.Component<TextInputProps, State> {
+  // @component ./Icon.tsx
+  static Icon = TextInputIcon;
+
+  // @component ./Affix.tsx
+  static Affix = TextInputAffix;
+
   static defaultProps: Partial<TextInputProps> = {
     mode: 'flat',
     dense: false,
