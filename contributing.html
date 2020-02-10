@@ -61,12 +61,11 @@
             </svg>
           </a>
         Linting and tests</h3>
-<p>We use <code>flow</code> for type checking, <code>eslint</code> with <code>prettier</code> for linting and formatting the code, and <code>jest</code> for testing. Our pre-commit hooks verify that the linter and tests pass when commiting. You can also run the following commands manually:</p>
+<p>We use <code>typescript</code> for type checking, <code>eslint</code> with <code>prettier</code> for linting and formatting the code, and <code>jest</code> for testing. Our pre-commit hooks verify that the linter and tests pass when commiting. You can also run the following commands manually:</p>
 <ul>
-<li><code>yarn flow</code>: run flow on all files.</li>
-<li><code>yarn typescript</code>: run tests for typescript definitions.</li>
-<li><code>yarn lint</code>: lint files with eslint and prettier.</li>
-<li><code>yarn test</code>: run unit tests with jest.</li>
+<li><code>yarn typescript</code>: type-check files with <code>tsc</code>.</li>
+<li><code>yarn lint</code>: lint files with <code>eslint</code> and <code>prettier</code>.</li>
+<li><code>yarn test</code>: run unit tests with <code>jest</code>.</li>
 </ul>
 <h3 id="sending-a-pull-request">
           <a class="anchor" href="#sending-a-pull-request">
@@ -78,7 +77,7 @@
 <p>When you're sending a pull request:</p>
 <ul>
 <li>Prefer small pull requests focused on one change.</li>
-<li>Verify that <code>flow</code>, <code>eslint</code> and all tests are passing.</li>
+<li>Verify that <code>typescript</code>, <code>eslint</code> and all tests are passing.</li>
 <li>Preview the documentation to make sure it looks good.</li>
 <li>Follow the pull request template when opening a pull request.</li>
 </ul>
@@ -106,7 +105,7 @@
             </svg>
           </a>
         Working on documentation</h3>
-<p>The documentation is automatically generated from the <a href="https://flowtype.org">flowtype</a> annotations in the components. You can add comments above the type annotations to add descriptions. To preview the generated documentation, run <code>yarn docs start</code> in the project root.</p>
+<p>The documentation is automatically generated from the <a href="https://www.typescriptlang.org/">TypeScript</a> annotations in the components. You can add comments above the type annotations to add descriptions. To preview the generated documentation, run <code>yarn docs start</code> in the project root.</p>
 <h3 id="publishing-a-release">
           <a class="anchor" href="#publishing-a-release">
             <svg width="16" height="16">

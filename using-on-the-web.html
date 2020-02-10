@@ -29,7 +29,7 @@
 <pre><code class="language-js">module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token function">override</span><span class="token punctuation">(</span><span class="token parameter">config<span class="token punctuation">,</span> env</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   config<span class="token punctuation">.</span>module<span class="token punctuation">.</span>rules<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
     test<span class="token punctuation">:</span> <span class="token regex">/\.js$/</span><span class="token punctuation">,</span>
-    exclude<span class="token punctuation">:</span> <span class="token regex">/node_modules[/\\](?!react-native-paper|react-native-vector-icons|react-native-safe-area-view)/</span><span class="token punctuation">,</span>
+    exclude<span class="token punctuation">:</span> <span class="token regex">/node_modules[/\\](?!react-native-vector-icons|react-native-safe-area-view)/</span><span class="token punctuation">,</span>
     use<span class="token punctuation">:</span> <span class="token punctuation">{</span>
       loader<span class="token punctuation">:</span> <span class="token string">"babel-loader"</span><span class="token punctuation">,</span>
       options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
@@ -41,7 +41,8 @@
         presets<span class="token punctuation">:</span> <span class="token punctuation">[</span>
           <span class="token punctuation">[</span><span class="token string">"@babel/preset-env"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> useBuiltIns<span class="token punctuation">:</span> <span class="token string">"usage"</span> <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
           <span class="token string">"@babel/preset-react"</span><span class="token punctuation">,</span>
-          <span class="token string">"@babel/preset-flow"</span>
+          <span class="token string">"@babel/preset-flow"</span><span class="token punctuation">,</span>
+          <span class="token string">"@babel/preset-typescript"</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
         plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
           <span class="token string">"@babel/plugin-proposal-class-properties"</span><span class="token punctuation">,</span>
@@ -160,11 +161,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         2. Configure <code>babel-loader</code></h3>
 <p>Next, we want to tell <code>babel-loader</code> to compile <code>react-native-paper</code> and <code>react-native-vector-icons</code>. We would also want to disable reading the babel configuration files to prevent any conflicts.</p>
 <p>First install the required dependencies:</p>
-<pre><code class="language-sh">yarn add --dev babel-loader @babel/preset-env @babel/preset-react @babel/preset-flow @babel/plugin-proposal-class-properties @babel/plugin-proposal-object-rest-spread</code></pre>
+<pre><code class="language-sh">yarn add --dev babel-loader @babel/preset-env @babel/preset-react @babel/preset-flow @babel/preset-typescript @babel/plugin-proposal-class-properties @babel/plugin-proposal-object-rest-spread</code></pre>
 <p>Now, add the following in the <code>module.rules</code> array in your webpack config:</p>
 <pre><code class="language-js"><span class="token punctuation">{</span>
   test<span class="token punctuation">:</span> <span class="token regex">/\.js$/</span><span class="token punctuation">,</span>
-  exclude<span class="token punctuation">:</span> <span class="token regex">/node_modules[/\\](?!react-native-paper|react-native-vector-icons|react-native-safe-area-view)/</span><span class="token punctuation">,</span>
+  exclude<span class="token punctuation">:</span> <span class="token regex">/node_modules[/\\](?!react-native-vector-icons|react-native-safe-area-view)/</span><span class="token punctuation">,</span>
   use<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     loader<span class="token punctuation">:</span> <span class="token string">'babel-loader'</span><span class="token punctuation">,</span>
     options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
@@ -177,6 +178,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         <span class="token punctuation">[</span><span class="token string">'@babel/preset-env'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> useBuiltIns<span class="token punctuation">:</span> <span class="token string">'usage'</span> <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
         <span class="token string">'@babel/preset-react'</span><span class="token punctuation">,</span>
         <span class="token string">'@babel/preset-flow'</span><span class="token punctuation">,</span>
+        <span class="token string">"@babel/preset-typescript"</span>
       <span class="token punctuation">]</span><span class="token punctuation">,</span>
       plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
         <span class="token string">'@babel/plugin-proposal-class-properties'</span><span class="token punctuation">,</span>
