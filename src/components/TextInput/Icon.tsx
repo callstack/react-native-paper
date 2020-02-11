@@ -10,6 +10,25 @@ type Props = {
 };
 
 export const ICON_SIZE = 24;
+const ICON_OFFSET = 12;
+
+export function renderIcon({
+  icon,
+  iconTopPosition,
+  side,
+}: {
+  icon: React.ReactNode;
+  iconTopPosition: number;
+  side: 'left' | 'right';
+}): React.ReactNode {
+  // @ts-ignore
+  return React.cloneElement(icon, {
+    style: {
+      top: iconTopPosition,
+      [side]: ICON_OFFSET,
+    },
+  });
+}
 
 class TextInputIcon extends React.Component<Props> {
   static displayName = 'TextInput.Icon';

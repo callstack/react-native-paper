@@ -13,8 +13,8 @@ import color from 'color';
 
 import InputLabel from './Label/InputLabel';
 import LabelBackground from './Label/LabelBackground';
-import TextInputAffix from './Affix';
-import TextInputIcon from './Icon';
+import TextInputAffix, { renderAffix } from './Affix';
+import TextInputIcon, { renderIcon } from './Icon';
 import { RenderProps, ChildTextInputProps } from './types';
 import { Theme } from '../../types';
 
@@ -150,8 +150,8 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, State> {
       onBlur,
       onChangeText,
       onLayoutAnimatedText,
-      leftAdornment,
-      rightAdornment,
+      left,
+      right,
       ...rest
     } = this.props;
 
@@ -199,11 +199,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, State> {
 
     let labelTranslationXOffset = 0;
 
-    if (
-      leftAdornment &&
-      React.isValidElement(leftAdornment) &&
-      leftAdornment.type === TextInputIcon
-    ) {
+    if (left && React.isValidElement(left) && left.type === TextInputIcon) {
       labelTranslationXOffset =
         (I18nManager.isRTL ? -1 : 1) * (ADORNMENT_SIZE + ADORNMENT_OFFSET - 8);
     }
@@ -211,18 +207,18 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, State> {
     let leftType: AdornmentType = null;
     let rightType: AdornmentType = null;
 
-    if (leftAdornment && React.isValidElement(leftAdornment)) {
-      if (leftAdornment.type === TextInputAffix) {
+    if (left && React.isValidElement(left)) {
+      if (left.type === TextInputAffix) {
         leftType = 'affix';
-      } else if (leftAdornment.type === TextInputIcon) {
+      } else if (left.type === TextInputIcon) {
         leftType = 'icon';
       }
     }
 
-    if (rightAdornment && React.isValidElement(rightAdornment)) {
-      if (rightAdornment.type === TextInputAffix) {
+    if (right && React.isValidElement(right)) {
+      if (right.type === TextInputAffix) {
         rightType = 'affix';
-      } else if (rightAdornment.type === TextInputIcon) {
+      } else if (right.type === TextInputIcon) {
         rightType = 'icon';
       }
     }
@@ -308,11 +304,11 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, State> {
         (this.state.leftHeight || this.state.rightHeight || 0)) /
       2;
 
-    const rightAffixWidth = rightAdornment
+    const rightAffixWidth = right
       ? this.state.rightWidth || ADORNMENT_SIZE
       : ADORNMENT_SIZE;
 
-    const leftAffixWidth = leftAdornment
+    const leftAffixWidth = left
       ? this.state.leftWidth || ADORNMENT_SIZE
       : ADORNMENT_SIZE;
 
@@ -376,36 +372,49 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, State> {
                 },
                 rightType
                   ? {
-                      marginRight: rightAffixWidth + ADORNMENT_OFFSET,
-                      paddingRight: rightType === 'affix' ? 0 : 8,
+                      paddingRight:
+                        rightAffixWidth +
+                        ADORNMENT_OFFSET +
+                        (rightType === 'affix' ? 0 : 8),
                     }
                   : {},
                 leftType
                   ? {
-                      marginLeft: leftAffixWidth + ADORNMENT_OFFSET,
-                      paddingLeft: leftType === 'affix' ? 0 : 8,
+                      paddingLeft:
+                        leftAffixWidth +
+                        ADORNMENT_OFFSET +
+                        (leftType === 'affix' ? 0 : 8),
                     }
                   : {},
               ],
             } as RenderProps)}
           </View>
           {leftType && leftType === 'icon'
-            ? this.renderIcon({ side: 'left', iconTopPosition })
+            ? renderIcon({ icon: left, side: 'left', iconTopPosition })
             : leftType && leftType === 'affix'
-            ? this.renderAffix({
+            ? renderAffix({
+                affix: left,
                 side: 'left',
                 textStyle: { ...font, fontSize, fontWeight },
                 affixTopPosition,
+                onLayout: this.handleAdornmentLayoutChange('left'),
+                visible: this.props.parentState.labeled,
               })
             : null}
 
           {rightType && rightType === 'icon'
-            ? this.renderIcon({ side: 'right', iconTopPosition })
+            ? renderIcon({
+                icon: right,
+                side: 'right',
+                iconTopPosition,
+              })
             : rightType && rightType === 'affix'
-            ? this.renderAffix({
+            ? renderAffix({
+                affix: right,
                 side: 'right',
                 textStyle: { ...font, fontSize, fontWeight },
                 affixTopPosition,
+                onLayout: this.handleAdornmentLayoutChange('right'),
               })
             : null}
         </View>
