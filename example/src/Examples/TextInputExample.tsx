@@ -73,12 +73,12 @@ class TextInputExample extends React.Component<Props, State> {
           removeClippedSubviews={false}
         >
           <TextInput
-            style={styles.inputContainerStyle}
+            style={[styles.inputContainerStyle, styles.fontSize]}
             label="Flat input"
             placeholder="Type something"
             value={this.state.text}
             onChangeText={text => this.setState({ text })}
-            leftAdornment={
+            left={
               <TextInput.Icon
                 name="heart"
                 onPress={() => {
@@ -86,7 +86,7 @@ class TextInputExample extends React.Component<Props, State> {
                 }}
               />
             }
-            rightAdornment={<TextInput.Affix text="/100" />}
+            right={<TextInput.Affix text="/100" />}
           />
           <TextInput
             style={[styles.inputContainerStyle, styles.fontSize]}
@@ -94,8 +94,8 @@ class TextInputExample extends React.Component<Props, State> {
             // placeholder="Type something"
             value={this.state.largeText}
             onChangeText={largeText => this.setState({ largeText })}
-            leftAdornment={<TextInput.Affix text="$" />}
-            rightAdornment={
+            left={<TextInput.Affix text="#" />}
+            right={
               <TextInput.Icon
                 name="heart"
                 onPress={() => {
@@ -111,7 +111,7 @@ class TextInputExample extends React.Component<Props, State> {
             placeholder="Type something"
             value={this.state.flatDenseText}
             onChangeText={flatDenseText => this.setState({ flatDenseText })}
-            leftAdornment={<TextInput.Affix text="$" />}
+            left={<TextInput.Affix text="#" />}
           />
           <TextInput
             style={styles.inputContainerStyle}
@@ -148,7 +148,7 @@ class TextInputExample extends React.Component<Props, State> {
             placeholder="Type something"
             value={this.state.outlinedText}
             onChangeText={outlinedText => this.setState({ outlinedText })}
-            leftAdornment={
+            left={
               <TextInput.Icon
                 name="heart"
                 onPress={() => {
@@ -156,7 +156,7 @@ class TextInputExample extends React.Component<Props, State> {
                 }}
               />
             }
-            rightAdornment={<TextInput.Affix text="/100" />}
+            right={<TextInput.Affix text="/100" />}
           />
           <TextInput
             mode="outlined"
@@ -167,8 +167,8 @@ class TextInputExample extends React.Component<Props, State> {
             onChangeText={outlinedLargeText =>
               this.setState({ outlinedLargeText })
             }
-            leftAdornment={<TextInput.Affix text="$" />}
-            rightAdornment={
+            left={<TextInput.Affix text="$" />}
+            right={
               <TextInput.Icon
                 name="heart"
                 onPress={() => {
@@ -187,7 +187,7 @@ class TextInputExample extends React.Component<Props, State> {
             onChangeText={outlinedDenseText =>
               this.setState({ outlinedDenseText })
             }
-            leftAdornment={<TextInput.Affix text="$" />}
+            left={<TextInput.Affix text="$" />}
           />
           <TextInput
             mode="outlined"
@@ -307,7 +307,7 @@ const styles = StyleSheet.create({
     margin: 8,
   },
   fontSize: {
-    fontSize: 24,
+    fontSize: 32,
   },
   textArea: {
     height: 80,

@@ -221,3 +221,22 @@ export const interpolatePlaceholder = (
     inputRange: [0, 1],
     outputRange: [hasActiveOutline ? 0 : 1, 1],
   });
+
+export function calculateFlatAffixTopPosition({
+  height,
+  paddingTop,
+  paddingBottom,
+  affixHeight,
+}: {
+  height: number;
+  paddingTop: number;
+  paddingBottom: number;
+  affixHeight: number;
+}): number {
+  const inputHeightWithoutPadding = height - paddingTop - paddingBottom;
+
+  const halfOfTheInputHeightDecreasedByAffixHeight =
+    (inputHeightWithoutPadding - affixHeight) / 2;
+
+  return paddingTop + halfOfTheInputHeightDecreasedByAffixHeight;
+}

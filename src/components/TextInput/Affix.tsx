@@ -13,6 +13,8 @@ import {
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 
+const AFFIX_OFFSET = 12;
+
 type Props = {
   text: string;
   onLayout?: (event: LayoutChangeEvent) => void;
@@ -24,6 +26,33 @@ type Props = {
    */
   theme: Theme;
 };
+
+export function renderAffix({
+  affix,
+  side,
+  textStyle,
+  affixTopPosition,
+  onLayout,
+  visible,
+}: {
+  affix: React.ReactNode;
+  side: 'left' | 'right';
+  textStyle: StyleProp<TextStyle>;
+  affixTopPosition: number | null;
+  onLayout?: (event: LayoutChangeEvent) => void;
+  visible?: Animated.Value;
+}): React.ReactNode {
+  //@ts-ignore
+  return React.cloneElement(affix, {
+    style: {
+      top: affixTopPosition,
+      [side]: AFFIX_OFFSET,
+    },
+    textStyle,
+    onLayout,
+    visible,
+  });
+}
 
 class TextInputAffix extends React.Component<Props> {
   static displayName = 'TextInput.Affix';
