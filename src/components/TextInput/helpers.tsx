@@ -240,3 +240,15 @@ export function calculateFlatAffixTopPosition({
 
   return paddingTop + halfOfTheInputHeightDecreasedByAffixHeight;
 }
+
+export function calculateOutlinedIconAndAffixTopPosition({
+  height,
+  affixHeight,
+  labelYOffset,
+}: {
+  height: number;
+  affixHeight: number;
+  labelYOffset: number;
+}): number {
+  return (height - affixHeight + labelYOffset) / 2;
+}

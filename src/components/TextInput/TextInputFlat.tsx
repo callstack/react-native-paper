@@ -6,7 +6,6 @@ import {
   StyleSheet,
   I18nManager,
   Platform,
-  LayoutChangeEvent,
   TextStyle,
 } from 'react-native';
 import color from 'color';
@@ -45,45 +44,15 @@ const INPUT_OFFSET = 8;
 const ADORNMENT_SIZE = 24;
 const ADORNMENT_OFFSET = 12;
 
-type State = {
-  leftWidth: number | null;
-  leftHeight: number | null;
-  rightWidth: number | null;
-  rightHeight: number | null;
-};
-
 type AdornmentType = 'icon' | 'affix' | null;
 
-class TextInputFlat extends React.Component<ChildTextInputProps, State> {
+class TextInputFlat extends React.Component<ChildTextInputProps> {
   static defaultProps = {
     disabled: false,
     error: false,
     multiline: false,
     editable: true,
     render: (props: RenderProps) => <NativeTextInput {...props} />,
-  };
-
-  state: State = {
-    leftHeight: null,
-    leftWidth: null,
-    rightHeight: null,
-    rightWidth: null,
-  };
-
-  handleAdornmentLayoutChange = (side: 'left' | 'right') => (
-    event: LayoutChangeEvent
-  ) => {
-    if (side === 'left') {
-      this.setState({
-        leftWidth: event.nativeEvent.layout.width,
-        leftHeight: event.nativeEvent.layout.height,
-      });
-    } else {
-      this.setState({
-        rightWidth: event.nativeEvent.layout.width,
-        rightHeight: event.nativeEvent.layout.height,
-      });
-    }
   };
 
   render() {
@@ -105,6 +74,8 @@ class TextInputFlat extends React.Component<ChildTextInputProps, State> {
       onBlur,
       onChangeText,
       onLayoutAnimatedText,
+      onLeftAffixLayoutChange,
+      onRightAffixLayoutChange,
       left,
       right,
       ...rest
@@ -288,30 +259,30 @@ class TextInputFlat extends React.Component<ChildTextInputProps, State> {
 
     const iconTopPosition = (flatHeight - ADORNMENT_SIZE) / 2;
 
-    const { leftHeight, rightHeight } = this.state;
+    const { leftLayout, rightLayout } = parentState;
 
-    const leftAffixTopPosition = leftHeight
+    const leftAffixTopPosition = leftLayout.height
       ? calculateFlatAffixTopPosition({
           height: flatHeight,
           ...paddingFlat,
-          affixHeight: leftHeight,
+          affixHeight: leftLayout.height,
         })
       : null;
 
-    const rightAffixTopPosition = rightHeight
+    const rightAffixTopPosition = rightLayout.height
       ? calculateFlatAffixTopPosition({
           height: flatHeight,
           ...paddingFlat,
-          affixHeight: rightHeight,
+          affixHeight: rightLayout.height,
         })
       : null;
 
     const rightAffixWidth = right
-      ? this.state.rightWidth || ADORNMENT_SIZE
+      ? rightLayout.width || ADORNMENT_SIZE
       : ADORNMENT_SIZE;
 
     const leftAffixWidth = left
-      ? this.state.leftWidth || ADORNMENT_SIZE
+      ? leftLayout.width || ADORNMENT_SIZE
       : ADORNMENT_SIZE;
 
     return (
@@ -393,7 +364,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, State> {
               side: 'left',
               textStyle: { ...font, fontSize, fontWeight },
               affixTopPosition: leftAffixTopPosition,
-              onLayout: this.handleAdornmentLayoutChange('left'),
+              onLayout: onLeftAffixLayoutChange,
               visible: this.props.parentState.labeled,
             })
           : null}
@@ -410,7 +381,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, State> {
               side: 'right',
               textStyle: { ...font, fontSize, fontWeight },
               affixTopPosition: rightAffixTopPosition,
-              onLayout: this.handleAdornmentLayoutChange('right'),
+              onLayout: onRightAffixLayoutChange,
             })
           : null}
       </View>

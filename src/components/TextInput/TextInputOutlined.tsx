@@ -6,8 +6,6 @@ import {
   I18nManager,
   Platform,
   TextStyle,
-  LayoutChangeEvent,
-  StyleProp,
 } from 'react-native';
 import color from 'color';
 
@@ -31,6 +29,7 @@ import {
   adjustPaddingOut,
   Padding,
   interpolatePlaceholder,
+  calculateOutlinedIconAndAffixTopPosition,
 } from './helpers';
 
 const OUTLINE_MINIMIZED_LABEL_Y_OFFSET = -6;
@@ -42,92 +41,15 @@ const INPUT_PADDING_HORIZONTAL = 14;
 const ADORNMENT_SIZE = 24;
 const ADORNMENT_OFFSET = 12;
 
-type State = {
-  leftWidth: number | null;
-  leftHeight: number | null;
-  rightWidth: number | null;
-  rightHeight: number | null;
-};
-
 type AdornmentType = 'icon' | 'affix' | null;
 
-class TextInputOutlined extends React.Component<ChildTextInputProps, State> {
+class TextInputOutlined extends React.Component<ChildTextInputProps> {
   static defaultProps = {
     disabled: false,
     error: false,
     multiline: false,
     editable: true,
     render: (props: RenderProps) => <NativeTextInput {...props} />,
-  };
-
-  state = {
-    leftHeight: null,
-    leftWidth: null,
-    rightHeight: null,
-    rightWidth: null,
-  };
-
-  handleAdornmentLayoutChange = (side: 'left' | 'right') => (
-    event: LayoutChangeEvent
-  ) => {
-    if (side === 'left') {
-      this.setState({
-        leftWidth: event.nativeEvent.layout.width,
-        leftHeight: event.nativeEvent.layout.height,
-      });
-    } else {
-      this.setState({
-        rightWidth: event.nativeEvent.layout.width,
-        rightHeight: event.nativeEvent.layout.height,
-      });
-    }
-  };
-
-  renderIcon = ({
-    side,
-    iconTopPosition,
-  }: {
-    iconTopPosition: number;
-    side: 'left' | 'right';
-  }) => {
-    if (side == 'left') {
-      // @ts-ignore
-      return React.cloneElement(this.props.leftAdornment, {
-        style: { top: iconTopPosition, left: ADORNMENT_OFFSET },
-      });
-    } else if (side == 'right') {
-      // @ts-ignore
-      return React.cloneElement(this.props.rightAdornment, {
-        style: { top: iconTopPosition, right: ADORNMENT_OFFSET },
-      });
-    }
-  };
-
-  renderAffix = ({
-    side,
-    textStyle,
-    affixTopPosition,
-  }: {
-    side: 'left' | 'right';
-    textStyle: StyleProp<TextStyle>;
-    affixTopPosition: number;
-  }) => {
-    if (side == 'left') {
-      // @ts-ignore
-      return React.cloneElement(this.props.leftAdornment, {
-        style: { top: affixTopPosition, left: ADORNMENT_OFFSET },
-        textStyle,
-        onLayout: this.handleAdornmentLayoutChange(side),
-        visible: this.props.parentState.labeled,
-      });
-    } else if (side == 'right') {
-      // @ts-ignore
-      return React.cloneElement(this.props.rightAdornment, {
-        style: { top: affixTopPosition, right: ADORNMENT_OFFSET },
-        textStyle,
-        onLayout: this.handleAdornmentLayoutChange(side),
-      });
-    }
   };
 
   render() {
@@ -150,6 +72,8 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, State> {
       onBlur,
       onChangeText,
       onLayoutAnimatedText,
+      onLeftAffixLayoutChange,
+      onRightAffixLayoutChange,
       left,
       right,
       ...rest
@@ -295,21 +219,32 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, State> {
     const minHeight = (height ||
       (dense ? MIN_DENSE_HEIGHT : MIN_HEIGHT)) as number;
 
-    const iconTopPosition =
-      (minHeight + LABEL_PADDING_TOP - ADORNMENT_SIZE) / 2;
+    const iconTopPosition = calculateOutlinedIconAndAffixTopPosition({
+      height: minHeight,
+      affixHeight: ADORNMENT_SIZE,
+      labelYOffset: -OUTLINE_MINIMIZED_LABEL_Y_OFFSET,
+    });
 
-    const affixTopPosition =
-      (minHeight +
-        LABEL_PADDING_TOP -
-        (this.state.leftHeight || this.state.rightHeight || 0)) /
-      2;
+    const { leftLayout, rightLayout } = parentState;
+
+    const leftAffixTopPosition = calculateOutlinedIconAndAffixTopPosition({
+      height: minHeight,
+      affixHeight: leftLayout.height || 0,
+      labelYOffset: -OUTLINE_MINIMIZED_LABEL_Y_OFFSET,
+    });
+
+    const rightAffixTopPosition = calculateOutlinedIconAndAffixTopPosition({
+      height: minHeight,
+      affixHeight: rightLayout.height || 0,
+      labelYOffset: -OUTLINE_MINIMIZED_LABEL_Y_OFFSET,
+    });
 
     const rightAffixWidth = right
-      ? this.state.rightWidth || ADORNMENT_SIZE
+      ? rightLayout.width || ADORNMENT_SIZE
       : ADORNMENT_SIZE;
 
     const leftAffixWidth = left
-      ? this.state.leftWidth || ADORNMENT_SIZE
+      ? leftLayout.width || ADORNMENT_SIZE
       : ADORNMENT_SIZE;
 
     return (
@@ -396,8 +331,8 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, State> {
                 affix: left,
                 side: 'left',
                 textStyle: { ...font, fontSize, fontWeight },
-                affixTopPosition,
-                onLayout: this.handleAdornmentLayoutChange('left'),
+                affixTopPosition: leftAffixTopPosition,
+                onLayout: onLeftAffixLayoutChange,
                 visible: this.props.parentState.labeled,
               })
             : null}
@@ -413,8 +348,8 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, State> {
                 affix: right,
                 side: 'right',
                 textStyle: { ...font, fontSize, fontWeight },
-                affixTopPosition,
-                onLayout: this.handleAdornmentLayoutChange('right'),
+                affixTopPosition: rightAffixTopPosition,
+                onLayout: onRightAffixLayoutChange,
               })
             : null}
         </View>
