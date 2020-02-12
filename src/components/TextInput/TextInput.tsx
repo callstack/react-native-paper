@@ -216,6 +216,14 @@ class TextInput extends React.Component<TextInputProps, State> {
       width: 0,
       height: 0,
     },
+    leftLayout: {
+      width: null,
+      height: null,
+    },
+    rightLayout: {
+      width: null,
+      height: null,
+    },
   };
 
   ref: NativeTextInput | undefined | null;
@@ -344,6 +352,24 @@ class TextInput extends React.Component<TextInputProps, State> {
     }).start();
   };
 
+  private onLeftAffixLayoutChange = (event: LayoutChangeEvent) => {
+    this.setState({
+      leftLayout: {
+        height: event.nativeEvent.layout.height,
+        width: event.nativeEvent.layout.width,
+      },
+    });
+  };
+
+  private onRightAffixLayoutChange = (event: LayoutChangeEvent) => {
+    this.setState({
+      rightLayout: {
+        width: event.nativeEvent.layout.width,
+        height: event.nativeEvent.layout.height,
+      },
+    });
+  };
+
   private handleFocus = (args: any) => {
     if (this.props.disabled || !this.props.editable) {
       return;
@@ -437,6 +463,8 @@ class TextInput extends React.Component<TextInputProps, State> {
         onBlur={this.handleBlur}
         onChangeText={this.handleChangeText}
         onLayoutAnimatedText={this.handleLayoutAnimatedText}
+        onLeftAffixLayoutChange={this.onLeftAffixLayoutChange}
+        onRightAffixLayoutChange={this.onRightAffixLayoutChange}
       />
     ) : (
       <TextInputFlat
@@ -450,6 +478,8 @@ class TextInput extends React.Component<TextInputProps, State> {
         onBlur={this.handleBlur}
         onChangeText={this.handleChangeText}
         onLayoutAnimatedText={this.handleLayoutAnimatedText}
+        onLeftAffixLayoutChange={this.onLeftAffixLayoutChange}
+        onRightAffixLayoutChange={this.onRightAffixLayoutChange}
       />
     );
   }
