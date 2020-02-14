@@ -48,6 +48,10 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   icon?: IconSource;
   /**
+   * Custom size for flat button icon.
+   */
+  iconSize?: number;
+  /**
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean;
@@ -163,6 +167,7 @@ class Button extends React.Component<Props, State> {
       dark,
       loading,
       icon,
+      iconSize = 16,
       color: buttonColor,
       children,
       uppercase,
@@ -278,13 +283,13 @@ class Button extends React.Component<Props, State> {
         >
           <View style={[styles.content, contentStyle]}>
             {icon && loading !== true ? (
-              <View style={styles.icon}>
-                <Icon source={icon} size={16} color={textColor} />
+              <View style={[styles.icon, { width: iconSize }]}>
+                <Icon source={icon} size={iconSize} color={textColor} />
               </View>
             ) : null}
             {loading ? (
               <ActivityIndicator
-                size={16}
+                size={iconSize}
                 color={textColor}
                 style={styles.icon}
               />
@@ -309,36 +314,36 @@ class Button extends React.Component<Props, State> {
   }
 }
 
-const styles = StyleSheet.create({
-  button: {
-    minWidth: 64,
-    borderStyle: 'solid',
-  },
-  compact: {
-    minWidth: 'auto',
-  },
-  content: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  icon: {
-    width: 16,
-    marginLeft: 12,
-    marginRight: -4,
-  },
-  label: {
-    textAlign: 'center',
-    letterSpacing: 1,
-    marginVertical: 9,
-    marginHorizontal: 16,
-  },
-  compactLabel: {
-    marginHorizontal: 8,
-  },
-  uppercaseLabel: {
-    textTransform: 'uppercase',
-  },
-});
+const styles =
+  StyleSheet.create({
+    button: {
+      minWidth: 64,
+      borderStyle: 'solid',
+    },
+    compact: {
+      minWidth: 'auto',
+    },
+    content: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    icon: {
+      marginLeft: 12,
+      marginRight: -4,
+    },
+    label: {
+      textAlign: 'center',
+      letterSpacing: 1,
+      marginVertical: 9,
+      marginHorizontal: 16,
+    },
+    compactLabel: {
+      marginHorizontal: 8,
+    },
+    uppercaseLabel: {
+      textTransform: 'uppercase',
+    },
+  });
 
 export default withTheme(Button);

@@ -117,6 +117,7 @@ class ButtonExample extends React.Component<Props, State> {
             <Button
               mode="contained"
               icon="camera"
+              iconSize={25}
               onPress={() => {}}
               style={styles.button}
             >
