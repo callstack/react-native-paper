@@ -41,6 +41,14 @@ it('renders button with icon', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('renders button with custom icon size', () => {
+  const tree = renderer
+    .create(<Button icon="camera" iconSize={25}>Icon Button</Button>)
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
 it('renders loading button', () => {
   const tree = renderer
     .create(<Button loading>Loading Button</Button>)
