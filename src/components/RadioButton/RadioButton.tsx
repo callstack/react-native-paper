@@ -102,7 +102,7 @@ class RadioButton extends React.Component<Props> {
   // @component ./RadioButtonIOS.tsx
   static IOS = RadioButtonIOS;
 
-  // @component = ./RadioButtonItem.tsx
+  // @component ./RadioButtonItem.tsx
   static Item = RadioButtonItem;
 
   render() {
