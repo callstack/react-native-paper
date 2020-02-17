@@ -29,7 +29,7 @@ class RadioButtonGroupExample extends React.Component<Props, State> {
   render() {
     const {
       theme: {
-        colors: { background },
+        colors: { background, primary },
       },
     } = this.props;
     return (
@@ -67,6 +67,11 @@ class RadioButtonGroupExample extends React.Component<Props, State> {
           >
             <RadioButton.Item label="First item" value="first" />
             <RadioButton.Item label="Second item" value="second" />
+            <RadioButton.Item
+              label="Third item"
+              value="third"
+              labelStyle={{ color: primary }}
+            />
           </RadioButton.Group>
         </List.Section>
       </View>
