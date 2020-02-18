@@ -30,6 +30,10 @@ type Props = React.ComponentProps<typeof TextInput> & {
    */
   icon?: IconSource;
   /**
+   * Resting elevation of the search bar which controls the drop shadow.
+   */
+  elevation?: number;
+  /**
    * Callback that is called when the text input's text changes.
    */
   onChangeText?: (query: string) => void;
@@ -137,12 +141,21 @@ class Searchbar extends React.Component<Props> {
       value,
       theme,
       style,
+      elevation: propsElevation,
       iconColor: customIconColor,
       clearIcon,
       inputStyle,
       ...rest
     } = this.props;
-    const { colors, roundness, dark, fonts } = theme;
+    const {
+      colors,
+      roundness,
+      dark,
+      fonts,
+      elevation: themeElevation = 4,
+    } = theme;
+
+    const elevation = propsElevation || themeElevation;
     const textColor = colors.text;
     const font = fonts.regular;
     const iconColor =
@@ -160,11 +173,14 @@ class Searchbar extends React.Component<Props> {
 
     return (
       <Surface
-        style={[
-          { borderRadius: roundness, elevation: 4 },
-          styles.container,
-          style,
-        ]}
+        style={
+          [
+            { borderRadius: roundness },
+            styles.container,
+            elevation && { elevation },
+            style,
+          ] as StyleProp<ViewStyle>
+        }
       >
         <IconButton
           borderless

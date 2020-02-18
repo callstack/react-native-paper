@@ -49,6 +49,10 @@ type Props = {
    */
   color?: string;
   /**
+   * Resting elevation of the FAB Group which controls the drop shadow.
+   */
+  elevation?: number;
+  /**
    * Function to execute on pressing the `FAB`.
    */
   onPress?: () => void;
@@ -203,11 +207,14 @@ class FABGroup extends React.Component<Props, State> {
       onPress,
       accessibilityLabel,
       theme,
+      elevation: propsElevation,
       style,
       fabStyle,
       visible,
     } = this.props;
-    const { colors } = theme;
+    const { colors, elevation: themeElevation = 6 } = theme;
+
+    const elevation = propsElevation || themeElevation;
 
     const labelColor = theme.dark
       ? colors.text
@@ -269,6 +276,7 @@ class FABGroup extends React.Component<Props, State> {
                       it.onPress();
                       this.close();
                     }}
+                    elevation={elevation}
                     accessibilityLabel={
                       it.accessibilityLabel !== 'undefined'
                         ? it.accessibilityLabel
@@ -299,6 +307,7 @@ class FABGroup extends React.Component<Props, State> {
                     it.onPress();
                     this.close();
                   }}
+                  elevation={elevation}
                   accessibilityLabel={
                     typeof it.accessibilityLabel !== 'undefined'
                       ? it.accessibilityLabel
@@ -318,6 +327,7 @@ class FABGroup extends React.Component<Props, State> {
             }}
             icon={icon}
             color={this.props.color}
+            elevation={elevation}
             accessibilityLabel={accessibilityLabel}
             accessibilityTraits="button"
             accessibilityComponentType="button"

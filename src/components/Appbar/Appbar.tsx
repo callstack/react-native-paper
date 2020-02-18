@@ -26,6 +26,10 @@ type Props = Partial<React.ComponentProps<typeof View>> & {
    */
   children: React.ReactNode;
   /**
+   * Resting elevation of the app bar which controls the drop shadow.
+   */
+  elevation?: number;
+  /**
    * @optional
    */
   theme: Theme;
@@ -86,14 +90,25 @@ class Appbar extends React.Component<Props> {
   static Header = AppbarHeader;
 
   render() {
-    const { children, dark, style, theme, ...rest } = this.props;
-
-    const { colors, dark: isDarkTheme, mode } = theme;
     const {
-      backgroundColor: customBackground,
-      elevation = 4,
-      ...restStyle
-    }: ViewStyle = StyleSheet.flatten(style) || {};
+      children,
+      dark,
+      style,
+      theme,
+      elevation: propsElevation,
+      ...rest
+    } = this.props;
+
+    const {
+      colors,
+      dark: isDarkTheme,
+      mode,
+      elevation: themeElevation = 4,
+    } = theme;
+    const { backgroundColor: customBackground, ...restStyle }: ViewStyle =
+      StyleSheet.flatten(style) || {};
+
+    const elevation = propsElevation || themeElevation;
 
     let isDark: boolean;
 
@@ -139,7 +154,12 @@ class Appbar extends React.Component<Props> {
     return (
       <Surface
         //@ts-ignore
-        style={[{ backgroundColor }, styles.appbar, { elevation }, restStyle]}
+        style={[
+          { backgroundColor },
+          styles.appbar,
+          elevation && { elevation },
+          restStyle,
+        ]}
         {...rest}
       >
         {shouldAddLeftSpacing ? <View style={styles.spacing} /> : null}
@@ -189,7 +209,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 4,
-    elevation: 4,
   },
   spacing: {
     width: 48,

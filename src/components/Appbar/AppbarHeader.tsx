@@ -28,6 +28,10 @@ type Props = React.ComponentProps<typeof Appbar> & {
    */
   statusBarHeight?: number;
   /**
+   * Resting elevation of the app bar header which controls the drop shadow.
+   */
+  elevation?: number;
+  /**
    * Content of the header.
    */
   children: React.ReactNode;
@@ -92,16 +96,25 @@ class AppbarHeader extends React.Component<Props> {
       statusBarHeight = APPROX_STATUSBAR_HEIGHT,
       style,
       dark,
+      elevation: propsElevation,
+      theme,
       ...rest
     } = this.props;
-    const { dark: isDarkTheme, colors, mode } = rest.theme;
+    const {
+      dark: isDarkTheme,
+      colors,
+      mode,
+      elevation: themeElevation,
+    } = theme;
     const {
       height = DEFAULT_APPBAR_HEIGHT,
-      elevation = 4,
       backgroundColor: customBackground,
       zIndex = 0,
       ...restStyle
     }: ViewStyle = StyleSheet.flatten(style) || {};
+
+    const elevation = propsElevation || themeElevation;
+
     const backgroundColor = customBackground
       ? customBackground
       : isDarkTheme && mode === 'adaptive'
@@ -125,7 +138,8 @@ class AppbarHeader extends React.Component<Props> {
       <Wrapper
         style={
           [
-            { backgroundColor, zIndex, elevation },
+            { backgroundColor, zIndex },
+            elevation && { elevation },
             shadow(elevation),
           ] as StyleProp<ViewStyle>
         }

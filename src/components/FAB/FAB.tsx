@@ -23,6 +23,10 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   label?: string;
   /**
+   * Resting elevation of the FAB which controls the drop shadow.
+   */
+  elevation?: number;
+  /**
    * Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.
    * Uses `label` by default if specified.
    */
@@ -143,9 +147,14 @@ class FAB extends React.Component<Props, State> {
       style,
       visible,
       loading,
+      elevation: propsElevation,
       ...rest
     } = this.props;
     const { visibility } = this.state;
+
+    const { elevation: themeElevation = 6 } = theme;
+
+    const elevation = propsElevation || themeElevation;
 
     const disabledColor = color(theme.dark ? white : black)
       .alpha(0.12)
@@ -190,6 +199,7 @@ class FAB extends React.Component<Props, State> {
               ],
             },
             styles.container,
+            elevation && { elevation },
             disabled && styles.disabled,
             style,
           ] as StyleProp<ViewStyle>

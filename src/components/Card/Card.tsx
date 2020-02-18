@@ -100,22 +100,30 @@ class Card extends React.Component<Props, State> {
 
   state = {
     // @ts-ignore
-    elevation: new Animated.Value(this.props.elevation),
+    elevation: new Animated.Value(
+      this.props.elevation || this.props.theme.elevation || 1
+    ),
   };
 
   private handlePressIn = () => {
     const { scale } = this.props.theme.animation;
+    const { elevation: propsElevation } = this.props;
+    const { elevation: themeElevation = 1 } = this.props.theme;
+    const elevation = propsElevation || themeElevation;
     Animated.timing(this.state.elevation, {
-      toValue: 8,
+      toValue: elevation + 8,
       duration: 150 * scale,
     }).start();
   };
 
   private handlePressOut = () => {
     const { scale } = this.props.theme.animation;
+    const { elevation: propsElevation } = this.props;
+    const { elevation: themeElevation = 1 } = this.props.theme;
+    const elevation = propsElevation || themeElevation;
     Animated.timing(this.state.elevation, {
       // @ts-ignore
-      toValue: this.props.elevation,
+      toValue: elevation,
       duration: 150 * scale,
     }).start();
   };
@@ -143,7 +151,11 @@ class Card extends React.Component<Props, State> {
     );
     return (
       <Surface
-        style={[{ borderRadius: roundness, elevation }, style]}
+        style={
+          [{ borderRadius: roundness, elevation }, style] as StyleProp<
+            ViewStyle
+          >
+        }
         {...rest}
       >
         <TouchableWithoutFeedback

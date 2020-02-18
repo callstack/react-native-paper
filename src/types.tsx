@@ -27,6 +27,7 @@ export type Theme = {
   dark: boolean;
   mode?: 'adaptive' | 'exact';
   roundness: number;
+  elevation?: number;
   colors: {
     primary: string;
     background: string;
