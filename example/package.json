@@ -20,7 +20,7 @@
     "expo": "^36.0.0",
     "expo-font": "~8.0.0",
     "expo-keep-awake": "~8.0.0",
-    "file-loader": "^4.0.0",
+    "file-loader": "^5.1.0",
     "react": "16.9.0",
     "react-art": "^16.7.0",
     "react-dom": "16.9.0",
