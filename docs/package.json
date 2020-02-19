@@ -24,7 +24,7 @@
     "@babel/preset-react": "^7.6.3",
     "@babel/preset-typescript": "^7.6.0",
     "del-cli": "^3.0.0",
-    "file-loader": "^4.2.0",
+    "file-loader": "^5.1.0",
     "metro-react-native-babel-preset": "^0.56.0",
     "url-loader": "^2.2.0"
   }
