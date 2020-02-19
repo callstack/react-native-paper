@@ -64,11 +64,11 @@ type Props = React.ComponentProps<typeof TextInput> & {
    */
   clearIcon?: IconSource;
   /**
-   * Number of lines to show in the input (Android only)
+   * The number of lines to show in the input (Android only).
    */
   numberOfLines?: number;
   /**
-   * Determines if input can have multiple lines
+   * Whether the input can have multiple lines..
    */
   multiline?: boolean;
 };
