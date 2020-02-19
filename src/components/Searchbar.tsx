@@ -96,6 +96,10 @@ type Props = React.ComponentProps<typeof TextInput> & {
  * ```
  */
 class Searchbar extends React.Component<Props> {
+  static defaultProps = {
+    searchAccessibilityLabel: 'search',
+    clearAccessibilityLabel: 'clear',
+  };
   private handleClearPress = () => {
     this.clear();
     this.props.onChangeText && this.props.onChangeText('');
