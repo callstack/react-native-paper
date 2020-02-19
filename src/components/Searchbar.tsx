@@ -214,7 +214,7 @@ class Searchbar extends React.Component<Props> {
           selectionColor={colors.primary}
           underlineColorAndroid="transparent"
           multiline={multiline || false}
-          numberOfLines={numberOfLines}
+          numberOfLines={numberOfLines || 1}
           returnKeyType="search"
           keyboardAppearance={dark ? 'dark' : 'light'}
           accessibilityTraits="search"
