@@ -153,8 +153,8 @@ class Searchbar extends React.Component<Props> {
       iconColor: customIconColor,
       inputStyle,
       onIconPress,
-      multiline,
-      numberOfLines,
+      multiline = false,
+      numberOfLines = 1,
       placeholder,
       searchAccessibilityLabel,
       style,
@@ -213,8 +213,8 @@ class Searchbar extends React.Component<Props> {
           placeholderTextColor={colors.placeholder}
           selectionColor={colors.primary}
           underlineColorAndroid="transparent"
-          multiline={multiline || false}
-          numberOfLines={numberOfLines || 1}
+          multiline={multiline}
+          numberOfLines={numberOfLines}
           returnKeyType="search"
           keyboardAppearance={dark ? 'dark' : 'light'}
           accessibilityTraits="search"
