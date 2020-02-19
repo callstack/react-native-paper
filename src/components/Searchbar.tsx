@@ -63,6 +63,14 @@ type Props = React.ComponentProps<typeof TextInput> & {
    * Custom icon for clear button, default will be icon close
    */
   clearIcon?: IconSource;
+  /**
+   * Number of lines to show in the input (Android only)
+   */
+  numberOfLines?: number;
+  /**
+   * Determines if input can have multiple lines
+   */
+  multiline?: boolean;
 };
 
 /**
@@ -145,6 +153,8 @@ class Searchbar extends React.Component<Props> {
       iconColor: customIconColor,
       inputStyle,
       onIconPress,
+      multiline,
+      numberOfLines,
       placeholder,
       searchAccessibilityLabel,
       style,
@@ -203,6 +213,8 @@ class Searchbar extends React.Component<Props> {
           placeholderTextColor={colors.placeholder}
           selectionColor={colors.primary}
           underlineColorAndroid="transparent"
+          multiline={multiline || false}
+          numberOfLines={numberOfLines}
           returnKeyType="search"
           keyboardAppearance={dark ? 'dark' : 'light'}
           accessibilityTraits="search"
