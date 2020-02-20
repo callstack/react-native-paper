@@ -105,7 +105,14 @@ const Icon = ({ source, color, size, theme, ...rest }: Props) => {
     return (
       <SettingsConsumer>
         {({ icon: Icon }) => {
-          return <Icon name={s} color={iconColor} size={size} direction={direction} />;
+          return (
+            <Icon
+              name={s}
+              color={iconColor}
+              size={size}
+              direction={direction}
+            />
+          );
         }}
       </SettingsConsumer>
     );
