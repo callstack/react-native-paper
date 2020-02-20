@@ -76,28 +76,30 @@ export const accessibilityProps =
         importantForAccessibility: 'no-hide-descendants' as 'no-hide-descendants',
       };
 
-const defaultIcon = ({
+const MaterialCommunityIcon = ({
   name,
   color,
   size,
   direction,
   allowFontScaling,
-}: IconProps) => (
-  <MaterialCommunityIcons
-    allowFontScaling={allowFontScaling}
-    name={name}
-    color={color}
-    size={size}
-    style={[
-      {
-        transform: [{ scaleX: direction === 'rtl' ? -1 : 1 }],
-      },
-      styles.icon,
-    ]}
-    pointerEvents="none"
-    {...accessibilityProps}
-  />
-);
+}: IconProps) => {
+  return (
+    <MaterialCommunityIcons
+      allowFontScaling={allowFontScaling}
+      name={name}
+      color={color}
+      size={size}
+      style={[
+        {
+          transform: [{ scaleX: direction === 'rtl' ? -1 : 1 }],
+        },
+        styles.icon,
+      ]}
+      pointerEvents="none"
+      {...accessibilityProps}
+    />
+  );
+};
 
 const styles = StyleSheet.create({
   icon: {
@@ -105,4 +107,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default defaultIcon;
+export default React.memo(MaterialCommunityIcon);
