@@ -4,7 +4,7 @@ import MaterialCommunityIcon, {
 } from '../components/MaterialCommunityIcon';
 
 export type Settings = {
-  icon: ({ name, color, size, direction }: IconProps) => React.ReactNode;
+  icon: React.FC<IconProps>;
 };
 
 export const { Provider, Consumer } = React.createContext<Settings>({
