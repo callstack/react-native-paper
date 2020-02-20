@@ -104,13 +104,8 @@ const Icon = ({ source, color, size, theme, ...rest }: Props) => {
   } else if (typeof s === 'string') {
     return (
       <SettingsConsumer>
-        {({ icon }) => {
-          return icon({
-            name: s,
-            color: iconColor,
-            size,
-            direction,
-          });
+        {({ icon: Icon }) => {
+          return <Icon name={s} color={iconColor} size={size} direction={direction} />;
         }}
       </SettingsConsumer>
     );
