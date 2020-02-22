@@ -14,15 +14,15 @@ type Props = {
 export default class Provider extends React.Component<Props> {
   render() {
     return (
-      <SettingsProvider
-        value={this.props.settings || { icon: MaterialCommunityIcon }}
-      >
-        <PortalHost>
+      <PortalHost>
+        <SettingsProvider
+          value={this.props.settings || { icon: MaterialCommunityIcon }}
+        >
           <ThemeProvider theme={this.props.theme}>
             {this.props.children}
           </ThemeProvider>
-        </PortalHost>
-      </SettingsProvider>
+        </SettingsProvider>
+      </PortalHost>
     );
   }
 }
