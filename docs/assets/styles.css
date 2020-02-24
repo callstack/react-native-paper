@@ -1,3 +1,10 @@
+:root {
+  --theme-primary-color: #6200ee;
+}
+:root .dark-mode {
+  --theme-primary-color: #6200ee;
+}
+
 a,
 a:hover {
   color: #6200ee;
