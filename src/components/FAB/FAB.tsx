@@ -32,7 +32,7 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   small?: boolean;
   /**
-   * Custom color for the `FAB`.
+   * Custom text color for the `FAB`.
    */
   color?: string;
   /**
