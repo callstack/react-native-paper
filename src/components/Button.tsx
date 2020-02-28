@@ -81,6 +81,11 @@ type Props = React.ComponentProps<typeof Surface> & {
    * @optional
    */
   theme: Theme;
+  /**
+   * testID to be used on tests.
+   * By default it will be "button".
+   */
+  testID?: string;
 };
 
 type State = {
@@ -166,6 +171,7 @@ class Button extends React.Component<Props, State> {
       theme,
       contentStyle,
       labelStyle,
+      testID = 'button',
       ...rest
     } = this.props;
     const { colors, roundness } = theme;
@@ -267,6 +273,7 @@ class Button extends React.Component<Props, State> {
           disabled={disabled}
           rippleColor={rippleColor}
           style={touchableStyle}
+          testID={testID}
         >
           <View style={[styles.content, contentStyle]}>
             {icon && loading !== true ? (

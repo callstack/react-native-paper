@@ -178,6 +178,7 @@ exports[`renders snackbar with action button 1`] = `
             },
           ]
         }
+        testID="button"
       >
         <View
           style={

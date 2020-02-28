@@ -64,3 +64,19 @@ it('renders button with color', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('renders button with testID by default', () => {
+  const tree = renderer
+    .create(<Button>Button with testID default</Button>)
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders button with custom testID', () => {
+  const tree = renderer
+    .create(<Button testID={'custom:testID'}>Button with custom testID</Button>)
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});

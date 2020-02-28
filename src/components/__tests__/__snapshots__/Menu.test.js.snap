@@ -40,6 +40,7 @@ exports[`renders menu with content styles 1`] = `
           },
         ]
       }
+      testID="button"
     >
       <View
         style={
@@ -136,6 +137,7 @@ exports[`renders not visible menu 1`] = `
           },
         ]
       }
+      testID="button"
     >
       <View
         style={
@@ -232,6 +234,7 @@ exports[`renders visible menu 1`] = `
           },
         ]
       }
+      testID="button"
     >
       <View
         style={
