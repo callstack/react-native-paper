@@ -103,22 +103,26 @@ type State = {
  *     open: false,
  *   };
  *
+ *   _onStateChange = ({ open }) => this.setState({ open });
+ *
  *   render() {
+ *     const { open } = this.state;
+ *
  *     return (
  *       <Provider>
  *          <Portal>
  *            <FAB.Group
- *              open={this.state.open}
- *              icon={this.state.open ? 'today' : 'add'}
+ *              open={open}
+ *              icon={open ? 'today' : 'add'}
  *              actions={[
  *                { icon: 'add', onPress: () => console.log('Pressed add') },
  *                { icon: 'star', label: 'Star', onPress: () => console.log('Pressed star')},
  *                { icon: 'email', label: 'Email', onPress: () => console.log('Pressed email') },
  *                { icon: 'bell', label: 'Remind', onPress: () => console.log('Pressed notifications') },
  *              ]}
- *              onStateChange={({ open }) => this.setState({ open })}
+ *              onStateChange={this._onStateChange}
  *              onPress={() => {
- *                if (this.state.open) {
+ *                if (open) {
  *                  // do something if the speed dial is open
  *                }
  *              }}

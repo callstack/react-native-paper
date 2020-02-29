@@ -74,18 +74,23 @@ const DURATION_LONG = 10000;
  *     visible: false,
  *   };
  *
+ *   _onToggleSnackBar = () => this.setState(state => ({ visible: !state.visible }));
+ *
+ *   _onDismissSnackBar = () => this.setState({ visible: false });
+ *
  *   render() {
  *     const { visible } = this.state;
+ *
  *     return (
  *       <View style={styles.container}>
  *         <Button
- *           onPress={() => this.setState(state => ({ visible: !state.visible }))}
+ *           onPress={this._onToggleSnackBar}
  *         >
- *           {this.state.visible ? 'Hide' : 'Show'}
+ *           {visible ? 'Hide' : 'Show'}
  *         </Button>
  *         <Snackbar
- *           visible={this.state.visible}
- *           onDismiss={() => this.setState({ visible: false })}
+ *           visible={visible}
+ *           onDismiss={this._onDismissSnackBar}
  *           action={{
  *             label: 'Undo',
  *             onPress: () => {
