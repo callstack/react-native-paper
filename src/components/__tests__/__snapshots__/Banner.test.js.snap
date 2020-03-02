@@ -213,7 +213,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                 },
               ]
             }
-            testID="button"
           >
             <View
               style={
@@ -391,7 +390,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                 },
               ]
             }
-            testID="button"
           >
             <View
               style={
@@ -484,7 +482,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                 },
               ]
             }
-            testID="button"
           >
             <View
               style={

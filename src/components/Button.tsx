@@ -83,7 +83,6 @@ type Props = React.ComponentProps<typeof Surface> & {
   theme: Theme;
   /**
    * testID to be used on tests.
-   * By default it will be "button".
    */
   testID?: string;
 };
@@ -171,7 +170,7 @@ class Button extends React.Component<Props, State> {
       theme,
       contentStyle,
       labelStyle,
-      testID = 'button',
+      testID,
       ...rest
     } = this.props;
     const { colors, roundness } = theme;
