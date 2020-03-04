@@ -5,6 +5,7 @@ import {
   StyleSheet,
   StyleProp,
   GestureResponderEvent,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import color from 'color';
 
@@ -24,6 +25,11 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    * Color of the icon.
    */
   color?: string;
+  
+  /**
+   * Disable ripple.
+   */
+  rippleDisabled?: boolean;
   /**
    * Size of the icon.
    */
@@ -93,6 +99,7 @@ const IconButton = ({
   animated = false,
   theme,
   style,
+  disabledRipple = false,
   ...rest
 }: Props) => {
   const iconColor =
@@ -103,8 +110,11 @@ const IconButton = ({
     .string();
   const IconComponent = animated ? CrossFadeIcon : Icon;
   const buttonSize = size * 1.5;
+  
+  const TouchableComponent = rippleDisabled ? TouchableWithoutFeedback : TouchableRipple
+  
   return (
-    <TouchableRipple
+    <TouchableComponent
       borderless
       centered
       onPress={onPress}
@@ -132,7 +142,7 @@ const IconButton = ({
       <View>
         <IconComponent color={iconColor} source={icon} size={size} />
       </View>
-    </TouchableRipple>
+    </TouchableComponent>
   );
 };
 
