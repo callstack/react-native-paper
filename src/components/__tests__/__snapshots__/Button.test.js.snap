@@ -144,11 +144,14 @@ exports[`renders button with icon 1`] = `
     >
       <View
         style={
-          Object {
-            "marginLeft": 12,
-            "marginRight": -4,
-            "width": 16,
-          }
+          Array [
+            Object {
+              "marginLeft": 12,
+              "marginRight": -4,
+              "width": 16,
+            },
+            undefined,
+          ]
         }
       >
         <Text
