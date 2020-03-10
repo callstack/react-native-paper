@@ -48,6 +48,10 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   icon?: IconSource;
   /**
+   * Color for the `Icon` in the `Button`.
+   */
+  iconColor?: string;
+  /**
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean;
@@ -166,6 +170,7 @@ class Button extends React.Component<Props, State> {
       theme,
       contentStyle,
       labelStyle,
+      iconColor,
       ...rest
     } = this.props;
     const { colors, roundness } = theme;
@@ -271,7 +276,7 @@ class Button extends React.Component<Props, State> {
           <View style={[styles.content, contentStyle]}>
             {icon && loading !== true ? (
               <View style={styles.icon}>
-                <Icon source={icon} size={16} color={textColor} />
+                <Icon source={icon} size={16} color={iconColor || textColor} />
               </View>
             ) : null}
             {loading ? (
