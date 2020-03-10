@@ -78,6 +78,10 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   labelStyle?: StyleProp<TextStyle>;
   /**
+   * Style for the icon.
+   */
+  iconStyle?: StyleProp<ViewStyle>;
+  /**
    * @optional
    */
   theme: Theme;
@@ -166,6 +170,7 @@ class Button extends React.Component<Props, State> {
       theme,
       contentStyle,
       labelStyle,
+      iconStyle,
       ...rest
     } = this.props;
     const { colors, roundness } = theme;
@@ -270,7 +275,7 @@ class Button extends React.Component<Props, State> {
         >
           <View style={[styles.content, contentStyle]}>
             {icon && loading !== true ? (
-              <View style={styles.icon}>
+              <View style={[styles.icon, iconStyle]}>
                 <Icon source={icon} size={16} color={textColor} />
               </View>
             ) : null}
