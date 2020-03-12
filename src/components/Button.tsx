@@ -276,7 +276,13 @@ class Button extends React.Component<Props, State> {
           <View style={[styles.content, contentStyle]}>
             {icon && loading !== true ? (
               <View style={[styles.icon, iconStyle]}>
-                <Icon source={icon} size={iconStyle && (iconStyle as TextStyle).fontSize || 16} color={iconStyle && (iconStyle as TextStyle).color || textColor} />
+                <Icon
+                  source={icon}
+                  size={(iconStyle && (iconStyle as TextStyle).fontSize) || 16}
+                  color={
+                    (iconStyle && (iconStyle as TextStyle).color) || textColor
+                  }
+                />
               </View>
             ) : null}
             {loading ? (
