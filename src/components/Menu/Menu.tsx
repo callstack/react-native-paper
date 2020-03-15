@@ -327,10 +327,9 @@ class Menu extends React.Component<Props, State> {
       useNativeDriver: true,
     }).start(finished => {
       if (finished) {
-        this.setState({ menuLayout: { width: 0, height: 0 } });
+        this.setState({ menuLayout: { width: 0, height: 0 }, rendered: false });
         this.state.scaleAnimation.setValue({ x: 0, y: 0 });
         this.focusFirstDOMNode(this.anchor);
-        this.setState({ rendered: false });
       }
     });
   };
