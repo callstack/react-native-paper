@@ -12,8 +12,8 @@ import {
   TouchableWithoutFeedback,
   View,
   ViewStyle,
-  ScrollView,
   findNodeHandle,
+  FlatList,
 } from 'react-native';
 
 import { withTheme } from '../../core/theming';
@@ -559,7 +559,12 @@ class Menu extends React.Component<Props, State> {
                   }
                 >
                   {(scrollableMenuHeight && (
-                    <ScrollView>{children}</ScrollView>
+                    <FlatList
+                      data={React.Children.toArray(children)}
+                      renderItem={({ item }) => (
+                        <React.Fragment>{item}</React.Fragment>
+                      )}
+                    />
                   )) || <React.Fragment>{children}</React.Fragment>}
                 </Surface>
               </Animated.View>
