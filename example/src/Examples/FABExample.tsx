@@ -22,7 +22,7 @@ class ButtonExample extends React.Component<Props, State> {
   render() {
     const {
       theme: {
-        colors: { background },
+        colors: { background, primary, accent },
       },
     } = this.props;
 
@@ -80,7 +80,15 @@ class ButtonExample extends React.Component<Props, State> {
                 { icon: 'plus', onPress: () => {} },
                 { icon: 'star', label: 'Star', onPress: () => {} },
                 { icon: 'email', label: 'Email', onPress: () => {} },
-                { icon: 'bell', label: 'Remind', onPress: () => {} },
+                {
+                  labelStyle: {
+                    backgroundColor: accent,
+                    color: primary,
+                  },
+                  icon: 'bell',
+                  label: 'Remind',
+                  onPress: () => {},
+                },
               ]}
               onStateChange={({ open }: { open: boolean }) =>
                 this.setState({ open })
