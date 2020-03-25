@@ -14,7 +14,8 @@
   "dependencies": {
     "color": "^3.1.2",
     "component-docs": "^0.20.3",
-    "linaria": "^1.2.4"
+    "linaria": "^1.2.4",
+    "react-native-vector-icons": "^6.6.0"
   },
   "devDependencies": {
     "@babel/node": "^7.6.3",
