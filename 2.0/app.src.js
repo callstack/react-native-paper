@@ -16,7 +16,7 @@ const render = () => {
       <App
         name={window.__INITIAL_PATH__}
         data={data}
-        github={"https://github.com/callstack/react-native-paper/edit/master/"}
+        github={"https://github.com/callstack/react-native-paper/edit/2.0/"}
         logo={"images/sidebar-logo.svg"}
       />,
       root
