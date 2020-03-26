@@ -4,6 +4,7 @@
 
 # VSCode
 .vscode/
+.history/
 jsconfig.json
 
 # Xcode
