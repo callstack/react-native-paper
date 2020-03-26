@@ -52,6 +52,6 @@ a:hover {
 
 @font-face {
   font-family: 'MaterialIcons';
-  src: url('../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf')
+  src: url('../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf')
     format('truetype');
 }
