@@ -13,13 +13,13 @@
   },
   "dependencies": {
     "color": "^3.1.2",
-    "component-docs": "^0.20.4",
+    "component-docs": "^0.20.3",
     "linaria": "^1.2.4",
     "react-native-vector-icons": "^6.6.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.4",
     "@babel/node": "^7.6.3",
+    "@babel/core": "^7.8.4",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.8.4",
     "@babel/preset-flow": "^7.8.3",
