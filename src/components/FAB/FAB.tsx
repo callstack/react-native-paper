@@ -56,6 +56,7 @@ type Props = $RemoveChildren<typeof Surface> & {
    * @optional
    */
   theme: Theme;
+  testID?: string;
 };
 
 type State = {
@@ -143,6 +144,7 @@ class FAB extends React.Component<Props, State> {
       style,
       visible,
       loading,
+      testID,
       ...rest
     } = this.props;
     const { visibility } = this.state;
@@ -207,6 +209,7 @@ class FAB extends React.Component<Props, State> {
           accessibilityRole="button"
           accessibilityStates={disabled ? ['disabled'] : []}
           style={styles.touchable}
+          testID={testID}
         >
           <View
             style={[
