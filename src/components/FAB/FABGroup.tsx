@@ -34,6 +34,7 @@ type Props = {
     accessibilityLabel?: string;
     style?: StyleProp<ViewStyle>;
     onPress: () => void;
+    testID?: string;
   }>;
   /**
    * Icon to display for the `FAB`.
@@ -78,6 +79,10 @@ type Props = {
    * @optional
    */
   theme: Theme;
+  /**
+   * Pass down testID from Group props to FAB.
+   */
+  testID?: string;
 };
 
 type State = {
@@ -206,6 +211,7 @@ class FABGroup extends React.Component<Props, State> {
       style,
       fabStyle,
       visible,
+      testID,
     } = this.props;
     const { colors } = theme;
 
@@ -307,6 +313,7 @@ class FABGroup extends React.Component<Props, State> {
                   accessibilityTraits="button"
                   accessibilityComponentType="button"
                   accessibilityRole="button"
+                  testID={it.testID}
                 />
               </View>
             ))}
@@ -324,6 +331,7 @@ class FABGroup extends React.Component<Props, State> {
             accessibilityRole="button"
             style={[styles.fab, fabStyle]}
             visible={visible}
+            testID={testID}
           />
         </SafeAreaView>
       </View>

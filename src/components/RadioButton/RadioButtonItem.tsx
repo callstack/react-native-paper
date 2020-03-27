@@ -1,9 +1,16 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, StyleProp, ViewStyle } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+  TextStyle,
+} from 'react-native';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress } from './utils';
 import TouchableRipple from '../TouchableRipple';
 import RadioButton from './RadioButton';
+import Text from '../Typography/Text';
 
 export type Props = {
   /**
@@ -23,9 +30,13 @@ export type Props = {
    */
   status?: 'checked' | 'unchecked';
   /**
-   * Additional styles for container View
+   * Additional styles for container View.
    */
   style?: StyleProp<ViewStyle>;
+  /**
+   * Style that is passed to Label element.
+   */
+  labelStyle?: StyleProp<TextStyle>;
 };
 
 /**
@@ -60,7 +71,7 @@ class RadioButtonItem extends React.Component<Props> {
   static displayName = 'RadioButton.Item';
 
   render() {
-    const { value, label, style, onPress, status } = this.props;
+    const { value, label, style, labelStyle, onPress, status } = this.props;
 
     return (
       <RadioButtonContext.Consumer>
@@ -76,7 +87,7 @@ class RadioButtonItem extends React.Component<Props> {
               }
             >
               <View style={[styles.container, style]} pointerEvents="none">
-                <Text>{label}</Text>
+                <Text style={[styles.label, labelStyle]}>{label}</Text>
                 <RadioButton value={value} status={status}></RadioButton>
               </View>
             </TouchableRipple>
@@ -96,5 +107,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 8,
     paddingHorizontal: 16,
+  },
+  label: {
+    fontSize: 16,
   },
 });
