@@ -124,8 +124,6 @@ workflows:
             branches:
               ignore: master
       - deploy-docs:
-          requires:
-            - install-dependencies
           filters:
             branches:
               only: master
