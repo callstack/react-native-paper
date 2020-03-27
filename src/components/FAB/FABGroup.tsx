@@ -287,34 +287,36 @@ class FABGroup extends React.Component<Props, State> {
                     <Text style={{ color: labelColor }}>{it.label}</Text>
                   </Card>
                 )}
-                <FAB
-                  small
-                  icon={it.icon}
-                  color={it.color}
-                  style={
-                    [
-                      {
-                        transform: [{ scale: scales[i] }],
-                        opacity: opacities[i],
-                        backgroundColor: theme.colors.surface,
-                      },
-                      it.style,
-                    ] as StyleProp<ViewStyle>
-                  }
-                  onPress={() => {
-                    it.onPress();
-                    this.close();
-                  }}
-                  accessibilityLabel={
-                    typeof it.accessibilityLabel !== 'undefined'
-                      ? it.accessibilityLabel
-                      : it.label
-                  }
-                  accessibilityTraits="button"
-                  accessibilityComponentType="button"
-                  accessibilityRole="button"
-                  testID={it.testID}
-                />
+                {(visible === undefined || visible) && (
+                  <FAB
+                    small
+                    icon={it.icon}
+                    color={it.color}
+                    style={
+                      [
+                        {
+                          transform: [{ scale: scales[i] }],
+                          opacity: opacities[i],
+                          backgroundColor: theme.colors.surface,
+                        },
+                        it.style,
+                      ] as StyleProp<ViewStyle>
+                    }
+                    onPress={() => {
+                      it.onPress();
+                      this.close();
+                    }}
+                    accessibilityLabel={
+                      typeof it.accessibilityLabel !== 'undefined'
+                        ? it.accessibilityLabel
+                        : it.label
+                    }
+                    accessibilityTraits="button"
+                    accessibilityComponentType="button"
+                    accessibilityRole="button"
+                    testID={it.testID}
+                  />
+                )}
               </View>
             ))}
           </View>
