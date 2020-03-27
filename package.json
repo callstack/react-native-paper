@@ -91,7 +91,7 @@
     "react-native-testing-library": "^1.5.0",
     "react-native-vector-icons": "~6.3.0",
     "react-test-renderer": "16.8.3",
-    "release-it": "^12.3.3",
+    "release-it": "^13.4.0",
     "rimraf": "^3.0.2",
     "typescript": "^3.7.1"
   },
