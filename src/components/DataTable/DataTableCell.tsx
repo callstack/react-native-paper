@@ -18,20 +18,26 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
+  /**
+   * Strict material ui guidelines only shows 1 line per cells
+   */
+  numberOfLines?: number;
 };
 
 class DataTableCell extends React.Component<Props> {
   static displayName = 'DataTable.Cell';
-
+  static defaultProps = {
+    numberOfLines: 1,
+  };
   render() {
-    const { children, style, numeric, ...rest } = this.props;
+    const { children, style, numeric, numberOfLines, ...rest } = this.props;
 
     return (
       <TouchableRipple
         {...rest}
         style={[styles.container, numeric && styles.right, style]}
       >
-        <Text numberOfLines={1}>{children}</Text>
+        <Text numberOfLines={numberOfLines}>{children}</Text>
       </TouchableRipple>
     );
   }
