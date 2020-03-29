@@ -3,6 +3,7 @@ import * as React from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import Text from '../Typography/Text';
 import Icon, { IconSource } from '../Icon';
+import ActivityIndicator from '../Icon';
 import TouchableRipple from '../TouchableRipple';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
@@ -33,6 +34,10 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    * @optional
    */
   theme: Theme;
+  /**
+   * Whether to show a loading indicator.
+   */
+  loading?: boolean;
 };
 
 /**
@@ -62,6 +67,7 @@ class DrawerItem extends React.Component<Props> {
       style,
       onPress,
       accessibilityLabel,
+      loading,
       ...rest
     } = this.props;
     const { colors, roundness } = theme;
@@ -101,9 +107,9 @@ class DrawerItem extends React.Component<Props> {
           accessibilityLabel={accessibilityLabel}
         >
           <View style={styles.wrapper}>
-            {icon ? (
+            {icon && (
               <Icon source={icon} size={24} color={contentColor} />
-            ) : null}
+            )}
             <Text
               numberOfLines={1}
               style={[
@@ -117,6 +123,13 @@ class DrawerItem extends React.Component<Props> {
             >
               {label}
             </Text>
+            {loading ? (
+              <ActivityIndicator
+                size={16}
+                color={contentColor}
+                style={styles.icon}
+              />
+            ) : null}
           </View>
         </TouchableRipple>
       </View>
@@ -136,6 +149,12 @@ const styles = StyleSheet.create({
   },
   label: {
     marginRight: 32,
+  },
+  icon: {
+    position: 'absolute',
+    width: 16,
+    marginRight: 12,
+    right: 0,
   },
 });
 
