@@ -7,7 +7,7 @@ import TouchableRipple from '../TouchableRipple';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 
-type Props = {
+type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * The label text of the item.
    */

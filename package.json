@@ -54,7 +54,7 @@
     "@babel/runtime": "^7.4.4",
     "@callstack/eslint-config": "^9.0.0",
     "@commitlint/config-conventional": "^8.3.4",
-    "@react-native-community/bob": "^0.9.2",
+    "@react-native-community/bob": "^0.10.0",
     "@release-it/conventional-changelog": "^1.1.0",
     "@types/color": "^3.0.0",
     "@types/jest": "^24.0.13",
@@ -91,7 +91,7 @@
     "react-native-testing-library": "^1.5.0",
     "react-native-vector-icons": "~6.3.0",
     "react-test-renderer": "16.8.3",
-    "release-it": "^12.3.3",
+    "release-it": "^13.4.0",
     "rimraf": "^3.0.2",
     "typescript": "^3.7.1"
   },
