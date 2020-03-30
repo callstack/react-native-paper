@@ -79,16 +79,18 @@ type Props = React.ComponentProps<typeof TextInput> & {
  *
  * export default class MyComponent extends React.Component {
  *   state = {
- *     firstQuery: '',
+ *     searchQuery: '',
  *   };
  *
+ *   _onChangeSearch = query => this.setState({ searchQuery: query });
+ *
  *   render() {
- *     const { firstQuery } = this.state;
+ *     const { searchQuery } = this.state;
  *     return (
  *       <Searchbar
  *         placeholder="Search"
- *         onChangeText={query => { this.setState({ firstQuery: query }); }}
- *         value={firstQuery}
+ *         onChangeText={this._onChangeSearch}
+ *         value={searchQuery}
  *       />
  *     );
  *   }

@@ -65,17 +65,25 @@ type State = {
  *     text: ''
  *   };
  *
+ *   _onChangeText = text => this.setState({ text });
+ *
+ *   _hasErrors = () => {
+ *     return !this.state.text.includes('@');
+ *   }
+ *
  *   render(){
+ *     const { text } = this.state;
+ *
  *     return (
  *       <View>
  *         <TextInput
  *           label="Email"
- *           value={this.state.text}
- *           onChangeText={text => this.setState({ text })}
+ *           value={text}
+ *           onChangeText={this._onChangeText}
  *         />
  *         <HelperText
  *           type="error"
- *           visible={!this.state.text.includes('@')}
+ *           visible={this._hasErrors()}
  *         >
  *           Email address is invalid!
  *         </HelperText>
