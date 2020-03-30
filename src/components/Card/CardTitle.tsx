@@ -30,6 +30,10 @@ type Props = React.ComponentProps<typeof View> & {
    */
   subtitleStyle?: StyleProp<TextStyle>;
   /**
+   * Number of line for the subtitle.
+   */
+  subtitleNumberOfLines?: number;
+  /**
    * Callback which returns a React element to display on the left side.
    */
   left?: (props: { size: number }) => React.ReactNode;
@@ -89,6 +93,10 @@ const LEFT_SIZE = 40;
 class CardTitle extends React.Component<Props> {
   static displayName = 'Card.Title';
 
+  static defaultProps = {
+    subtitleNumberOfLines: 1,
+  };
+
   render() {
     const {
       left,
@@ -97,6 +105,7 @@ class CardTitle extends React.Component<Props> {
       rightStyle,
       subtitle,
       subtitleStyle,
+      subtitleNumberOfLines,
       style,
       title,
       titleStyle,
@@ -106,7 +115,7 @@ class CardTitle extends React.Component<Props> {
       <View
         style={[
           styles.container,
-          { height: subtitle || left || right ? 72 : 50 },
+          { minHeight: subtitle || left || right ? 72 : 50 },
           style,
         ]}
       >
@@ -126,14 +135,16 @@ class CardTitle extends React.Component<Props> {
                 { marginBottom: subtitle ? 0 : 2 },
                 titleStyle,
               ]}
-              numberOfLines={1}
             >
               {title}
             </Title>
           ) : null}
 
           {subtitle ? (
-            <Caption style={[styles.subtitle, subtitleStyle]} numberOfLines={1}>
+            <Caption
+              style={[styles.subtitle, subtitleStyle]}
+              numberOfLines={subtitleNumberOfLines}
+            >
               {subtitle}
             </Caption>
           ) : null}
@@ -164,7 +175,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    height: 50,
   },
 
   title: {
