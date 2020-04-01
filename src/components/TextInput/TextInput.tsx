@@ -114,6 +114,10 @@ export type TextInputProps = React.ComponentPropsWithRef<
    * @optional
    */
   theme: Theme;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 /**

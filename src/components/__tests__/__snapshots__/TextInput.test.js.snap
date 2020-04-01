@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders on TextInput 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "rgb(231, 231, 231)",
+        "borderTopLeftRadius": 4,
+        "borderTopRightRadius": 4,
+      },
+      Object {},
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "rgba(0, 0, 0, 0.26)",
+        "bottom": 0,
+        "height": 2,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "transform": Array [
+          Object {
+            "scaleY": 0.5,
+          },
+        ],
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "minHeight": 64,
+        "paddingBottom": 0,
+        "paddingTop": 0,
+      }
+    }
+  >
+    <TextInput
+      allowFontScaling={true}
+      editable={true}
+      multiline={false}
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholderTextColor="rgba(0, 0, 0, 0.54)"
+      rejectResponderTermination={true}
+      selectionColor="#6200ee"
+      style={
+        Array [
+          Object {
+            "flexGrow": 1,
+            "margin": 0,
+            "textAlign": "left",
+            "zIndex": 1,
+          },
+          Object {
+            "paddingHorizontal": 12,
+          },
+          Object {
+            "height": 64,
+          },
+          Object {
+            "paddingBottom": 0,
+            "paddingTop": 0,
+          },
+          Object {
+            "color": "#000000",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": undefined,
+            "textAlignVertical": "center",
+          },
+        ]
+      }
+      testID="input"
+      underlineColorAndroid="transparent"
+    />
+  </View>
+</View>
+`;
