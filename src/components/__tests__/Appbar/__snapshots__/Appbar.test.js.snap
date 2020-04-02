@@ -43,7 +43,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
       accessibilityRole="button"
       accessibilityStates={Array []}
       accessible={true}
-      focusable={false}
+      focusable={true}
       hitSlop={
         Object {
           "bottom": 6,

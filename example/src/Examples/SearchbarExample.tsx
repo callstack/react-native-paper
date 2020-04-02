@@ -1,6 +1,12 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Colors, Caption, Searchbar, useTheme } from 'react-native-paper';
+import {
+  Colors,
+  Caption,
+  Searchbar,
+  useTheme,
+  ActivityIndicator,
+} from 'react-native-paper';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 type Props = {
@@ -21,6 +27,9 @@ const SearchExample = ({ navigation }: Props) => {
       <Searchbar
         placeholder="Search"
         onChangeText={(query: string) => setFirstQuery(query)}
+        iconRight={{
+          icon: ({ color }) => <ActivityIndicator animating color={color} />,
+        }}
         value={firstQuery}
         style={styles.searchbar}
       />

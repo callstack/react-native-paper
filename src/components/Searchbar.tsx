@@ -16,7 +16,21 @@ import { Theme } from '../types';
 import { IconSource } from './Icon';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 
+type Icon = {
+  icon?: IconSource;
+  iconColor?: string;
+  onIconPress?: () => void;
+};
+
 type Props = React.ComponentPropsWithRef<typeof TextInput> & {
+  /**
+   * Icon options for the left icon button.
+   */
+  iconLeft?: Icon;
+  /**
+   * Icon options for the right icon button.
+   */
+  iconRight?: Icon;
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
@@ -34,10 +48,12 @@ type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    */
   value: string;
   /**
+   * @deprecated
    * Icon name for the left icon button (see `onIconPress`).
    */
   icon?: IconSource;
   /**
+   * @deprecated
    * Callback that is called when the text input's text changes.
    */
   onChangeText?: (query: string) => void;
@@ -56,10 +72,12 @@ type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    */
   theme: Theme;
   /**
+   * @deprecated
    * Custom color for icon, default will be derived from theme
    */
   iconColor?: string;
   /**
+   * @deprecated
    * Custom icon for clear button, default will be icon close
    */
   clearIcon?: IconSource;
@@ -144,7 +162,15 @@ class Searchbar extends React.Component<Props> {
   }
 
   render() {
+    const defaultIcon = {
+      iconColor: undefined,
+      icon: undefined,
+      onIconPress: () => {},
+    };
+
     const {
+      iconLeft = defaultIcon,
+      iconRight = defaultIcon,
       clearAccessibilityLabel,
       clearIcon,
       icon,
@@ -158,6 +184,31 @@ class Searchbar extends React.Component<Props> {
       value,
       ...rest
     } = this.props;
+
+    if (onIconPress) {
+      console.warn(
+        'onIconPress prop has been deprecated since version v3.7.0. Use iconLeft.onIconPress instead.'
+      );
+    }
+
+    if (icon) {
+      console.warn(
+        'icon prop has been deprecated since version v3.7.0. Use iconLeft.icon instead.'
+      );
+    }
+
+    if (customIconColor) {
+      console.warn(
+        'iconColor prop has been deprecated since version v3.7.0. Use iconLeft.iconColor instead.'
+      );
+    }
+
+    if (clearIcon) {
+      console.warn(
+        'clearIcon prop has been deprecated since version v3.7.0. Use iconRight instead.'
+      );
+    }
+
     const { colors, roundness, dark, fonts } = theme;
     const textColor = colors.text;
     const font = fonts.regular;
@@ -174,6 +225,24 @@ class Searchbar extends React.Component<Props> {
       .rgb()
       .string();
 
+    const customIconColorLeft =
+      iconLeft?.iconColor ||
+      (dark
+        ? textColor
+        : color(textColor)
+            .alpha(0.54)
+            .rgb()
+            .string());
+
+    const customIconColorRight =
+      iconRight?.iconColor ||
+      (dark
+        ? textColor
+        : color(textColor)
+            .alpha(0.54)
+            .rgb()
+            .string());
+
     return (
       <Surface
         style={[
@@ -188,10 +257,11 @@ class Searchbar extends React.Component<Props> {
           accessibilityRole="button"
           borderless
           rippleColor={rippleColor}
-          onPress={onIconPress}
-          color={iconColor}
+          onPress={onIconPress || iconLeft.onIconPress}
+          color={iconColor || customIconColorLeft}
           icon={
             icon ||
+            iconLeft.icon ||
             (({ size, color }) => (
               <MaterialCommunityIcon
                 name="magnify"
@@ -219,28 +289,48 @@ class Searchbar extends React.Component<Props> {
           value={value}
           {...rest}
         />
-        <IconButton
-          borderless
-          disabled={!value}
-          accessibilityLabel={clearAccessibilityLabel}
-          color={value ? iconColor : 'rgba(255, 255, 255, 0)'}
-          rippleColor={rippleColor}
-          onPress={this.handleClearPress}
-          icon={
-            clearIcon ||
-            (({ size, color }) => (
-              <MaterialCommunityIcon
-                name="close"
-                color={color}
-                size={size}
-                direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
-              />
-            ))
-          }
-          accessibilityTraits="button"
-          accessibilityComponentType="button"
-          accessibilityRole="button"
-        />
+        {clearIcon || !iconRight.icon ? (
+          <IconButton
+            borderless
+            disabled={!value}
+            accessibilityLabel={clearAccessibilityLabel}
+            color={value ? iconColor : 'rgba(255, 255, 255, 0)'}
+            rippleColor={rippleColor}
+            onPress={this.handleClearPress}
+            icon={
+              clearIcon ||
+              (({ size, color }) => (
+                <MaterialCommunityIcon
+                  name="close"
+                  color={color}
+                  size={size}
+                  direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+                />
+              ))
+            }
+            accessibilityTraits="button"
+            accessibilityComponentType="button"
+            accessibilityRole="button"
+          />
+        ) : (
+          <IconButton
+            borderless
+            rippleColor={rippleColor}
+            onPress={iconRight.onIconPress}
+            color={customIconColorRight}
+            icon={
+              iconRight.icon ||
+              (({ size, color }) => (
+                <MaterialCommunityIcon
+                  name="close"
+                  color={color}
+                  size={size}
+                  direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+                />
+              ))
+            }
+          />
+        )}
       </Surface>
     );
   }
