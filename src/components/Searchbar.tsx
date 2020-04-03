@@ -18,6 +18,14 @@ import MaterialCommunityIcon from './MaterialCommunityIcon';
 
 type Props = React.ComponentProps<typeof TextInput> & {
   /**
+   * Accessibility label for the button. This is read by the screen reader when the user taps the button.
+   */
+  clearAccessibilityLabel?: string;
+  /**
+   * Accessibility label for the button. This is read by the screen reader when the user taps the button.
+   */
+  searchAccessibilityLabel?: string;
+  /**
    * Hint text shown when the input is empty.
    */
   placeholder?: string;
@@ -71,16 +79,18 @@ type Props = React.ComponentProps<typeof TextInput> & {
  *
  * export default class MyComponent extends React.Component {
  *   state = {
- *     firstQuery: '',
+ *     searchQuery: '',
  *   };
  *
+ *   _onChangeSearch = query => this.setState({ searchQuery: query });
+ *
  *   render() {
- *     const { firstQuery } = this.state;
+ *     const { searchQuery } = this.state;
  *     return (
  *       <Searchbar
  *         placeholder="Search"
- *         onChangeText={query => { this.setState({ firstQuery: query }); }}
- *         value={firstQuery}
+ *         onChangeText={this._onChangeSearch}
+ *         value={searchQuery}
  *       />
  *     );
  *   }
@@ -88,6 +98,10 @@ type Props = React.ComponentProps<typeof TextInput> & {
  * ```
  */
 class Searchbar extends React.Component<Props> {
+  static defaultProps = {
+    searchAccessibilityLabel: 'search',
+    clearAccessibilityLabel: 'clear',
+  };
   private handleClearPress = () => {
     this.clear();
     this.props.onChangeText && this.props.onChangeText('');
@@ -131,15 +145,17 @@ class Searchbar extends React.Component<Props> {
 
   render() {
     const {
-      placeholder,
-      onIconPress,
-      icon,
-      value,
-      theme,
-      style,
-      iconColor: customIconColor,
+      clearAccessibilityLabel,
       clearIcon,
+      icon,
+      iconColor: customIconColor,
       inputStyle,
+      onIconPress,
+      placeholder,
+      searchAccessibilityLabel,
+      style,
+      theme,
+      value,
       ...rest
     } = this.props;
     const { colors, roundness, dark, fonts } = theme;
@@ -167,6 +183,9 @@ class Searchbar extends React.Component<Props> {
         ]}
       >
         <IconButton
+          accessibilityTraits="button"
+          accessibilityComponentType="button"
+          accessibilityRole="button"
           borderless
           rippleColor={rippleColor}
           onPress={onIconPress}
@@ -182,6 +201,7 @@ class Searchbar extends React.Component<Props> {
               />
             ))
           }
+          accessibilityLabel={searchAccessibilityLabel}
         />
         <TextInput
           style={[styles.input, { color: textColor, ...font }, inputStyle]}
@@ -202,6 +222,7 @@ class Searchbar extends React.Component<Props> {
         <IconButton
           borderless
           disabled={!value}
+          accessibilityLabel={clearAccessibilityLabel}
           color={value ? iconColor : 'rgba(255, 255, 255, 0)'}
           rippleColor={rippleColor}
           onPress={this.handleClearPress}

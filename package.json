@@ -1,6 +1,6 @@
 {
   "name": "react-native-paper",
-  "version": "3.6.0",
+  "version": "3.7.0",
   "description": "Material design for React Native",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -70,7 +70,7 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^24.3.1",
     "babel-test": "^0.1.1",
-    "chalk": "^2.4.1",
+    "chalk": "^4.0.0",
     "commitlint": "^8.3.4",
     "conventional-changelog-cli": "^2.0.11",
     "dedent": "^0.7.0",
@@ -91,7 +91,7 @@
     "react-native-testing-library": "^1.5.0",
     "react-native-vector-icons": "~6.3.0",
     "react-test-renderer": "16.8.3",
-    "release-it": "^12.3.3",
+    "release-it": "^13.4.0",
     "rimraf": "^3.0.2",
     "typescript": "^3.7.1"
   },
