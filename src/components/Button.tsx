@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  Platform,
   Animated,
   View,
   ViewStyle,
@@ -139,7 +140,10 @@ class Button extends React.Component<Props, State> {
       Animated.timing(this.state.elevation, {
         toValue: 8,
         duration: 200 * scale,
-        useNativeDriver: true,
+        useNativeDriver: Platform.select({
+          ios: false,
+          default: true,
+        }),
       }).start();
     }
   };
@@ -150,7 +154,10 @@ class Button extends React.Component<Props, State> {
       Animated.timing(this.state.elevation, {
         toValue: 2,
         duration: 150 * scale,
-        useNativeDriver: true,
+        useNativeDriver: Platform.select({
+          ios: false,
+          default: true,
+        }),
       }).start();
     }
   };
