@@ -219,7 +219,7 @@ class TextInputExample extends React.Component<Props, State> {
               >
                 Error: Numbers and special characters are not allowed
               </HelperText>
-              <HelperText visible style={styles.counterHelper}>
+              <HelperText type="info" visible style={styles.counterHelper}>
                 {this.state.maxLengthName.length} / {MAX_LENGTH}
               </HelperText>
             </View>

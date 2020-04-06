@@ -207,16 +207,16 @@ class Chip extends React.Component<Props, State> {
       : selectedBackgroundColor;
 
     const accessibilityTraits: AccessibilityTrait[] = ['button'];
-    const accessibilityStates: AccessibilityState[] = [];
+    const accessibilityState: AccessibilityState = {};
 
     if (selected) {
       accessibilityTraits.push('selected');
-      accessibilityStates.push('selected');
+      accessibilityState.selected = true;
     }
 
     if (disabled) {
       accessibilityTraits.push('disabled');
-      accessibilityStates.push('disabled');
+      accessibilityState.disabled = true;
     }
 
     return (
@@ -251,7 +251,7 @@ class Chip extends React.Component<Props, State> {
           accessibilityTraits={accessibilityTraits}
           accessibilityComponentType="button"
           accessibilityRole="button"
-          accessibilityStates={accessibilityStates}
+          accessibilityState={accessibilityState}
           testID={testID}
         >
           <View style={styles.content}>
