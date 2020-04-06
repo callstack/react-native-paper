@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 
-import IconButton from '../IconButton';
+import IconButton from '../../IconButton';
 
 type Props = {
   name: string;
@@ -12,6 +12,19 @@ type Props = {
 export const ICON_SIZE = 24;
 const ICON_OFFSET = 12;
 
+/** *
+ *  TODO: add support for all IconButton props
+ * */
+// type Props = $RemoveChildren<typeof TouchableRipple> & {
+//     color?: string;
+//     disabled?: boolean;
+//     animated?: boolean;
+//     accessibilityLabel?: string;
+//     onPress?: (e: GestureResponderEvent) => void;
+//     style?: StyleProp<ViewStyle>;
+//     theme?: Theme;
+//   };
+
 export function renderIcon({
   icon,
   iconTopPosition,
@@ -21,6 +34,7 @@ export function renderIcon({
   iconTopPosition: number;
   side: 'left' | 'right';
 }): React.ReactNode {
+  /** Same cloning practice */
   // @ts-ignore
   return React.cloneElement(icon, {
     style: {
@@ -30,25 +44,21 @@ export function renderIcon({
   });
 }
 
-class TextInputIcon extends React.Component<Props> {
-  static displayName = 'TextInput.Icon';
+const TextInputIcon = ({ name, onPress, style }: Props) => {
+  return (
+    <View style={[styles.container, style]}>
+      <IconButton
+        icon={name}
+        style={styles.iconButton}
+        size={ICON_SIZE}
+        onPress={onPress}
+      />
+    </View>
+  );
+};
+TextInputIcon.displayName = 'TextInput.Icon';
 
-  render() {
-    const { name, onPress, style } = this.props;
-
-    return (
-      <View style={[styles.container, style]}>
-        <IconButton
-          icon={name}
-          style={styles.iconButton}
-          size={ICON_SIZE}
-          onPress={onPress}
-        />
-      </View>
-    );
-  }
-}
-
+/** So, some constants are used */
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
