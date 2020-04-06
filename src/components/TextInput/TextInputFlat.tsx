@@ -10,8 +10,11 @@ import {
 } from 'react-native';
 import color from 'color';
 import InputLabel from './Label/InputLabel';
-import TextInputAffix, { renderAffix } from './Affix';
-import TextInputIcon, { renderIcon } from './Icon';
+import InputAdornment, {
+  ADORNMENT_SIZE,
+  ADORNMENT_OFFSET,
+  InputAdornmentProps,
+} from './Adornment/InputAdornment';
 import { RenderProps, ChildTextInputProps } from './types';
 
 import {
@@ -30,6 +33,12 @@ import {
   interpolatePlaceholder,
   calculateFlatAffixTopPosition,
 } from './helpers';
+import {
+  getAdornmentConfig,
+  AdornmentType,
+  AdornmentSide,
+  getAdornmentStyleAdjustmentForNativeInput,
+} from './Adornment/InputAdornment';
 
 const MINIMIZED_LABEL_Y_OFFSET = -18;
 
@@ -40,11 +49,6 @@ const MIN_DENSE_HEIGHT_WL = 52;
 const MIN_DENSE_HEIGHT = 40;
 
 const INPUT_OFFSET = 8;
-
-const ADORNMENT_SIZE = 24;
-const ADORNMENT_OFFSET = 12;
-
-type AdornmentType = 'icon' | 'affix' | null;
 
 class TextInputFlat extends React.Component<ChildTextInputProps> {
   static defaultProps = {
@@ -97,35 +101,49 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
     let paddingLeft = LABEL_PADDING_HORIZONTAL;
     let paddingRight = LABEL_PADDING_HORIZONTAL;
 
-    let leftType: AdornmentType = null;
-    let rightType: AdornmentType = null;
-
     const isPaddingHorizontalPassed =
       paddingHorizontal !== undefined && typeof paddingHorizontal === 'number';
 
-    if (left && React.isValidElement(left)) {
-      if (left.type === TextInputAffix) {
-        leftType = 'affix';
-      } else if (left.type === TextInputIcon) {
-        leftType = 'icon';
-        paddingLeft = ADORNMENT_SIZE + ADORNMENT_OFFSET + INPUT_OFFSET;
-      }
-    }
+    const adornmentConfig = getAdornmentConfig({
+      left,
+      right,
+    });
 
-    if (right && React.isValidElement(right)) {
-      if (right.type === TextInputAffix) {
-        rightType = 'affix';
-        paddingRight = ADORNMENT_SIZE + ADORNMENT_OFFSET + INPUT_OFFSET;
-      } else if (right.type === TextInputIcon) {
-        rightType = 'icon';
-        paddingRight = ADORNMENT_SIZE + ADORNMENT_OFFSET + INPUT_OFFSET;
+    adornmentConfig.forEach(({ type, side }) => {
+      if (type === AdornmentType.Icon && side === AdornmentSide.Left) {
+        paddingLeft = ADORNMENT_SIZE + ADORNMENT_OFFSET + INPUT_OFFSET;
+      } else if (side === AdornmentSide.Right) {
+        if (type === AdornmentType.Affix) {
+          paddingRight = ADORNMENT_SIZE + ADORNMENT_OFFSET + INPUT_OFFSET;
+        } else if (type === AdornmentType.Icon) {
+          paddingRight = ADORNMENT_SIZE + ADORNMENT_OFFSET + INPUT_OFFSET;
+        }
       }
-    }
+    });
 
     if (isPaddingHorizontalPassed) {
       paddingLeft = paddingHorizontal as number;
       paddingRight = paddingHorizontal as number;
     }
+
+    const { leftLayout, rightLayout } = parentState;
+
+    const rightAffixWidth = right
+      ? rightLayout.width || ADORNMENT_SIZE
+      : ADORNMENT_SIZE;
+
+    const leftAffixWidth = left
+      ? leftLayout.width || ADORNMENT_SIZE
+      : ADORNMENT_SIZE;
+
+    const adornmentStyleAdjustmentForNativeInput = getAdornmentStyleAdjustmentForNativeInput(
+      {
+        adornmentConfig,
+        rightAffixWidth,
+        leftAffixWidth,
+        inputOffset: INPUT_OFFSET,
+      }
+    );
 
     let inputTextColor,
       activeColor,
@@ -192,9 +210,10 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
       multiline && height ? 0 : !height ? minInputHeight / 2 : 0
     );
 
-    if (height && typeof height !== 'number')
+    if (height && typeof height !== 'number') {
       // eslint-disable-next-line
       console.warn('Currently we support only numbers in height prop');
+    }
 
     const paddingSettings = {
       height: height ? +height : null,
@@ -228,6 +247,32 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
       ? 1
       : 0;
 
+    const minHeight =
+      height ||
+      (dense ? (label ? MIN_DENSE_HEIGHT_WL : MIN_DENSE_HEIGHT) : MIN_HEIGHT);
+
+    const flatHeight =
+      inputHeight +
+      (!height ? (dense ? LABEL_PADDING_TOP_DENSE : LABEL_PADDING_TOP) : 0);
+
+    const iconTopPosition = (flatHeight - ADORNMENT_SIZE) / 2;
+
+    const leftAffixTopPosition = leftLayout.height
+      ? calculateFlatAffixTopPosition({
+          height: flatHeight,
+          ...paddingFlat,
+          affixHeight: leftLayout.height,
+        })
+      : null;
+
+    const rightAffixTopPosition = rightLayout.height
+      ? calculateFlatAffixTopPosition({
+          height: flatHeight,
+          ...paddingFlat,
+          affixHeight: rightLayout.height,
+        })
+      : null;
+
     const labelProps = {
       label,
       onLayoutAnimatedText,
@@ -248,42 +293,30 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
       placeholderColor,
       errorColor,
     };
+    const affixTopPosition = {
+      [AdornmentSide.Left]: leftAffixTopPosition,
+      [AdornmentSide.Right]: rightAffixTopPosition,
+    };
+    const onAffixChange = {
+      [AdornmentSide.Left]: onLeftAffixLayoutChange,
+      [AdornmentSide.Right]: onRightAffixLayoutChange,
+    };
 
-    const minHeight =
-      height ||
-      (dense ? (label ? MIN_DENSE_HEIGHT_WL : MIN_DENSE_HEIGHT) : MIN_HEIGHT);
-
-    const flatHeight =
-      inputHeight +
-      (!height ? (dense ? LABEL_PADDING_TOP_DENSE : LABEL_PADDING_TOP) : 0);
-
-    const iconTopPosition = (flatHeight - ADORNMENT_SIZE) / 2;
-
-    const { leftLayout, rightLayout } = parentState;
-
-    const leftAffixTopPosition = leftLayout.height
-      ? calculateFlatAffixTopPosition({
-          height: flatHeight,
-          ...paddingFlat,
-          affixHeight: leftLayout.height,
-        })
-      : null;
-
-    const rightAffixTopPosition = rightLayout.height
-      ? calculateFlatAffixTopPosition({
-          height: flatHeight,
-          ...paddingFlat,
-          affixHeight: rightLayout.height,
-        })
-      : null;
-
-    const rightAffixWidth = right
-      ? rightLayout.width || ADORNMENT_SIZE
-      : ADORNMENT_SIZE;
-
-    const leftAffixWidth = left
-      ? leftLayout.width || ADORNMENT_SIZE
-      : ADORNMENT_SIZE;
+    let adornmentProps: InputAdornmentProps = {
+      adornmentConfig,
+      iconTopPosition,
+      affixTopPosition,
+      onAffixChange,
+    };
+    if (adornmentConfig.length) {
+      adornmentProps = {
+        ...adornmentProps,
+        left,
+        right,
+        textStyle: { ...font, fontSize, fontWeight },
+        visible: this.props.parentState.labeled,
+      };
+    }
 
     return (
       <View style={[styles.container, containerStyle, viewStyle]}>
@@ -332,58 +365,11 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
                 color: inputTextColor,
                 textAlignVertical: multiline ? 'top' : 'center',
               },
-              leftType
-                ? {
-                    paddingLeft:
-                      leftAffixWidth +
-                      ADORNMENT_OFFSET +
-                      (leftType === 'affix' ? 0 : INPUT_OFFSET),
-                  }
-                : {},
-              rightType
-                ? {
-                    paddingRight:
-                      rightAffixWidth +
-                      ADORNMENT_OFFSET +
-                      (rightType === 'affix' ? 0 : INPUT_OFFSET),
-                  }
-                : {},
+              ...adornmentStyleAdjustmentForNativeInput,
             ],
           })}
         </View>
-
-        {leftType && leftType === 'icon'
-          ? renderIcon({
-              icon: left,
-              side: 'left',
-              iconTopPosition,
-            })
-          : leftType && leftType === 'affix'
-          ? renderAffix({
-              affix: left,
-              side: 'left',
-              textStyle: { ...font, fontSize, fontWeight },
-              affixTopPosition: leftAffixTopPosition,
-              onLayout: onLeftAffixLayoutChange,
-              visible: this.props.parentState.labeled,
-            })
-          : null}
-
-        {rightType && rightType === 'icon'
-          ? renderIcon({
-              icon: right,
-              side: 'right',
-              iconTopPosition,
-            })
-          : rightType && rightType === 'affix'
-          ? renderAffix({
-              affix: right,
-              side: 'right',
-              textStyle: { ...font, fontSize, fontWeight },
-              affixTopPosition: rightAffixTopPosition,
-              onLayout: onRightAffixLayoutChange,
-            })
-          : null}
+        <InputAdornment {...adornmentProps} />
       </View>
     );
   }
