@@ -13,7 +13,6 @@ import {
 import { withTheme } from '../../../core/theming';
 import { Theme } from '../../../types';
 
-/** Probably those arbitrary MD-guidelines values Trens was talking about */
 const AFFIX_OFFSET = 12;
 
 type Props = {
@@ -28,17 +27,14 @@ type Props = {
   theme: Theme;
 };
 
-/** What does it do? - some cloning, but of what? */
 export function renderAffix({
   affix,
-  /** Side? */
   side,
   textStyle,
   affixTopPosition,
   onLayout,
   visible,
 }: {
-  /** Ok, so the affix is expected to be of type of React node */
   affix: React.ReactNode;
   side: 'left' | 'right';
   textStyle: StyleProp<TextStyle>;
@@ -46,12 +42,9 @@ export function renderAffix({
   onLayout?: (event: LayoutChangeEvent) => void;
   visible?: Animated.Value;
 }): React.ReactNode {
-  /** So, in my API, I accept the affix as the React Element, then I proceed to clone it, but why? */
-  /** It appears I accept some React Element to be displayed in my TextField, but then I must somehow impose my own styling over it, for it needs to be properly placed within the input */
   return React.cloneElement(
     //@ts-ignore
     affix,
-    /** props */
     {
       style: {
         top: affixTopPosition,
@@ -72,7 +65,6 @@ const TextInputAffix = ({
   theme,
   visible,
 }: Props) => {
-  /** Handle theme settings */
   const textColor = color(theme.colors.text)
     .alpha(theme.dark ? 0.7 : 0.54)
     .rgb()

@@ -34,7 +34,6 @@ export function renderIcon({
   iconTopPosition: number;
   side: 'left' | 'right';
 }): React.ReactNode {
-  /** Same cloning practice */
   // @ts-ignore
   return React.cloneElement(icon, {
     style: {
@@ -58,7 +57,6 @@ const TextInputIcon = ({ name, onPress, style }: Props) => {
 };
 TextInputIcon.displayName = 'TextInput.Icon';
 
-/** So, some constants are used */
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
