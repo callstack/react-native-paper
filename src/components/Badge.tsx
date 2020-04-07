@@ -7,7 +7,7 @@ import { Theme } from '../types';
 
 const defaultSize = 20;
 
-type Props = React.ComponentProps<typeof Text> & {
+type Props = React.ComponentPropsWithRef<typeof Text> & {
   /**
    * Whether the badge is visible
    */

@@ -13,7 +13,7 @@ import AppbarAction from './AppbarAction';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 
 type Props = $Omit<
-  React.ComponentProps<typeof AppbarAction> & {
+  React.ComponentPropsWithRef<typeof AppbarAction> & {
     /**
      *  Custom color for back icon.
      */
