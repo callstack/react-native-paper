@@ -139,6 +139,7 @@ class Button extends React.Component<Props, State> {
       Animated.timing(this.state.elevation, {
         toValue: 8,
         duration: 200 * scale,
+        useNativeDriver: false,
       }).start();
     }
   };
@@ -149,6 +150,7 @@ class Button extends React.Component<Props, State> {
       Animated.timing(this.state.elevation, {
         toValue: 2,
         duration: 150 * scale,
+        useNativeDriver: false,
       }).start();
     }
   };
