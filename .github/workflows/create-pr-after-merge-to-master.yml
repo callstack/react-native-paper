@@ -1,0 +1,19 @@
+name: Pull Request on Branch Push
+on:
+  push:
+    branches:
+      - gh-action-test
+jobs:
+  auto-pull-request:
+    name: PullRequestAction
+    runs-on: ubuntu-latest
+    steps:
+      - name: pull-request-action
+        uses: vsoch/pull-request-action@1.0.5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH_PREFIX: ""
+          PULL_REQUEST_BRANCH: "4.0"
+          PULL_REQUEST_BODY: "This PR is created automatically by pull-request-action.\n\nIt's supposed to keep master and 4.0 branches in sync by opening PR to 4.0 whenever something is pushed to master"
+          PULL_REQUEST_TITLE: "Sync 4.0 with master branch"
+          PULL_REQUEST_REVIEWERS: "Trancever Satya164"
