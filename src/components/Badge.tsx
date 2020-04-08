@@ -1,11 +1,5 @@
 import * as React from 'react';
-import {
-  Animated,
-  StyleSheet,
-  StyleProp,
-  TextInput,
-  ViewStyle,
-} from 'react-native';
+import { Animated, StyleSheet, StyleProp, Text, TextStyle } from 'react-native';
 import color from 'color';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
@@ -13,7 +7,7 @@ import { Theme } from '../types';
 
 const defaultSize = 20;
 
-type Props = React.ComponentProps<typeof TextInput> & {
+type Props = React.ComponentProps<typeof Text> & {
   /**
    * Whether the badge is visible
    */
@@ -26,7 +20,7 @@ type Props = React.ComponentProps<typeof TextInput> & {
    * Size of the `Badge`.
    */
   size?: number;
-  style?: StyleProp<ViewStyle>;
+  style?: StyleProp<TextStyle>;
   /**
    * @optional
    */

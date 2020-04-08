@@ -12,7 +12,7 @@ import { withTheme } from '../core/theming';
 import { Theme, $Omit } from '../types';
 
 type Props = $Omit<
-  $Omit<React.ComponentProps<typeof Animated.Text>, 'padding'>,
+  $Omit<React.ComponentProps<typeof AnimatedText>, 'padding'>,
   'type'
 > & {
   /**
@@ -137,6 +137,7 @@ class HelperText extends React.PureComponent<Props, State> {
   };
 
   private handleTextLayout = (e: LayoutChangeEvent) => {
+    //@ts-ignore Animated.Text typings are improved but something is still broken. It thinks onLayout is not callable.
     this.props.onLayout && this.props.onLayout(e);
     this.setState({
       textHeight: e.nativeEvent.layout.height,
