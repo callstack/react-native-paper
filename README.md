@@ -26,6 +26,8 @@
 
 Currently supported React Native version: `>= 0.50.3`
 
+Just for testing
+
 ## Try it out
 
 Run the [example app](https://snack.expo.io/@satya164/github.com-callstack-react-native-paper:example) with [Expo](https://expo.io/) to see it in action.
