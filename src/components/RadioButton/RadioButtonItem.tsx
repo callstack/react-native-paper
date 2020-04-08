@@ -6,6 +6,8 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
+import { Theme } from '../../types';
+import { withTheme } from '../../core/theming';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress } from './utils';
 import TouchableRipple from '../TouchableRipple';
@@ -37,6 +39,10 @@ export type Props = {
    * Style that is passed to Label element.
    */
   labelStyle?: StyleProp<TextStyle>;
+  /**
+   * @optional
+   */
+  theme: Theme;
 };
 
 /**
@@ -71,7 +77,15 @@ class RadioButtonItem extends React.Component<Props> {
   static displayName = 'RadioButton.Item';
 
   render() {
-    const { value, label, style, labelStyle, onPress, status } = this.props;
+    const {
+      value,
+      label,
+      style,
+      labelStyle,
+      onPress,
+      status,
+      theme: { colors },
+    } = this.props;
 
     return (
       <RadioButtonContext.Consumer>
@@ -87,7 +101,11 @@ class RadioButtonItem extends React.Component<Props> {
               }
             >
               <View style={[styles.container, style]} pointerEvents="none">
-                <Text style={[styles.label, labelStyle]}>{label}</Text>
+                <Text
+                  style={[styles.label, labelStyle, { color: colors.primary }]}
+                >
+                  {label}
+                </Text>
                 <RadioButton value={value} status={status}></RadioButton>
               </View>
             </TouchableRipple>
@@ -98,7 +116,10 @@ class RadioButtonItem extends React.Component<Props> {
   }
 }
 
-export default RadioButtonItem;
+export default withTheme(RadioButtonItem);
+
+// @component-docs ignore-next-line
+export { RadioButtonItem };
 
 const styles = StyleSheet.create({
   container: {
