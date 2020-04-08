@@ -12,7 +12,7 @@ import TextInputIcon from './Adornment/TextInputIcon';
 import TextInputAffix from './Adornment/TextInputAffix';
 import { withTheme } from '../../core/theming';
 import type { RenderProps, State } from './types';
-import type { $Omit } from '../../types';
+import type { $Omit, UnderlineColor } from '../../types';
 
 const BLUR_ANIMATION_DURATION = 180;
 const FOCUS_ANIMATION_DURATION = 150;
@@ -58,7 +58,7 @@ export type TextInputProps = React.ComponentPropsWithRef<
   /**
    * Underline color of the input.
    */
-  underlineColor?: string;
+  underlineColor?: UnderlineColor;
   /**
    * Outline color of the input.
    */
