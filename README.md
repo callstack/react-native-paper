@@ -26,7 +26,7 @@
 
 Currently supported React Native version: `>= 0.50.3`
 
-Just for testing
+Just for testing purposes
 
 ## Try it out
 
