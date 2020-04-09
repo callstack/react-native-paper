@@ -80,7 +80,7 @@ class TextInputExample extends React.Component<Props, State> {
             onChangeText={text => this.setState({ text })}
             left={
               <TextInput.Icon
-                name="heart"
+                icon="heart"
                 onPress={() => {
                   console.log('!@# press left');
                 }}
@@ -97,7 +97,7 @@ class TextInputExample extends React.Component<Props, State> {
             left={<TextInput.Affix text="#" />}
             right={
               <TextInput.Icon
-                name="heart"
+                icon="heart"
                 onPress={() => {
                   console.log('!@# press right');
                 }}
@@ -150,7 +150,7 @@ class TextInputExample extends React.Component<Props, State> {
             onChangeText={outlinedText => this.setState({ outlinedText })}
             left={
               <TextInput.Icon
-                name="heart"
+                icon="heart"
                 onPress={() => {
                   console.log('!@# press left');
                 }}
@@ -170,7 +170,7 @@ class TextInputExample extends React.Component<Props, State> {
             left={<TextInput.Affix text="$" />}
             right={
               <TextInput.Icon
-                name="heart"
+                icon="heart"
                 onPress={() => {
                   console.log('!@# press right');
                 }}

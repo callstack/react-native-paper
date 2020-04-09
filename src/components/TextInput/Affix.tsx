@@ -96,4 +96,5 @@ const styles = StyleSheet.create({
 
 export default withTheme(TextInputAffix);
 
+// @component-docs ignore-next-line
 export { TextInputAffix };

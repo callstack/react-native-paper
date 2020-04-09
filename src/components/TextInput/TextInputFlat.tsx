@@ -286,7 +286,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
       : ADORNMENT_SIZE;
 
     return (
-      <View style={[styles.container, containerStyle, viewStyle]}>
+      <View style={[containerStyle, viewStyle]}>
         <Underline
           parentState={parentState}
           underlineColorCustom={underlineColorCustom}
@@ -429,7 +429,6 @@ const Underline = ({
 };
 
 const styles = StyleSheet.create({
-  container: {},
   placeholder: {
     position: 'absolute',
     left: 0,
