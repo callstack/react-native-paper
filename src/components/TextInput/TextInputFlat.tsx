@@ -10,9 +10,9 @@ import {
 } from 'react-native';
 import color from 'color';
 import InputLabel from './Label/InputLabel';
-import InputAdornment, {
-  InputAdornmentProps,
-} from './Adornment/InputAdornment';
+import TextInputAdornment, {
+  TextInputAdornmentProps,
+} from './Adornment/TextInputAdornment';
 import { RenderProps, ChildTextInputProps } from './types';
 
 import {
@@ -36,7 +36,7 @@ import {
 import {
   getAdornmentConfig,
   getAdornmentStyleAdjustmentForNativeInput,
-} from './Adornment/InputAdornment';
+} from './Adornment/TextInputAdornment';
 import { AdornmentSide, AdornmentType } from './Adornment/types';
 
 const MINIMIZED_LABEL_Y_OFFSET = -18;
@@ -301,7 +301,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
       [AdornmentSide.Right]: onRightAffixLayoutChange,
     };
 
-    let adornmentProps: InputAdornmentProps = {
+    let adornmentProps: TextInputAdornmentProps = {
       adornmentConfig,
       iconTopPosition,
       affixTopPosition,
@@ -368,7 +368,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
             ],
           })}
         </View>
-        <InputAdornment {...adornmentProps} />
+        <TextInputAdornment {...adornmentProps} />
       </View>
     );
   }

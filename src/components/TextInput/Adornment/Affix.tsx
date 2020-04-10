@@ -39,7 +39,7 @@ const AffixContext = React.createContext<ContextState>({
   side: AdornmentSide.Left,
 });
 
-export function RenderAffix({
+export function AffixAdornment({
   affix,
   side,
   textStyle,

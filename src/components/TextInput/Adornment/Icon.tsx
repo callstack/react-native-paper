@@ -18,7 +18,7 @@ const StyleContext = React.createContext<{ style?: StyleProp<ViewStyle> }>({
   style: {},
 });
 
-export function RenderIcon({
+export function IconAdornment({
   icon,
   iconTopPosition,
   side,

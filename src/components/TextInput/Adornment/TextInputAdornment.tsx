@@ -1,38 +1,19 @@
 import React from 'react';
-import TextInputIcon, { renderIcon } from './Icon';
-import TextInputAffix, { renderAffix } from './Affix';
+import TextInputIcon, { IconAdornment } from './Icon';
+import TextInputAffix, { AffixAdornment } from './Affix';
+import { ADORNMENT_OFFSET } from '../constants';
 import {
   LayoutChangeEvent,
   TextStyle,
   StyleProp,
   Animated,
 } from 'react-native';
-
-export enum AdornmentType {
-  Icon = 'icon',
-  Affix = 'affix',
-}
-export enum AdornmentSide {
-  Right = 'right',
-  Left = 'left',
-}
-export enum InputMode {
-  Outlined = 'outlined',
-  Flat = 'flat',
-}
-export const ADORNMENT_SIZE = 24;
-export const ADORNMENT_OFFSET = 12;
-
-export type AdornmentConfig = {
-  side: AdornmentSide;
-  type: AdornmentType;
-};
-
-type AdornmentStyleAdjustmentForNativeInput = {
-  adornmentStyleAdjustmentForNativeInput: Array<
-    { paddingRight?: number; paddingLeft?: number } | {}
-  >;
-};
+import {
+  AdornmentConfig,
+  AdornmentSide,
+  AdornmentType,
+  AdornmentStyleAdjustmentForNativeInput,
+} from './types';
 
 export function getAdornmentConfig({
   left,
@@ -42,19 +23,11 @@ export function getAdornmentConfig({
   right?: React.ReactNode;
 }): Array<AdornmentConfig> {
   let adornmentConfig: any[] = [];
-  console.log('left', left);
-  console.log('right', right);
-  console.log('Boolean(left||right)', Boolean(left || right));
   if (left || right) {
     [
       { side: AdornmentSide.Left, adornment: left },
       { side: AdornmentSide.Right, adornment: right },
     ].forEach(({ side, adornment }) => {
-      console.log(
-        'adornment && React.isValidElement(adornment)',
-        adornment && React.isValidElement(adornment),
-        adornment
-      );
       if (adornment && React.isValidElement(adornment)) {
         let type;
         if (adornment.type === TextInputAffix) {
@@ -112,7 +85,7 @@ export function getAdornmentStyleAdjustmentForNativeInput({
   }
 }
 
-export interface InputAdornmentProps {
+export interface TextInputAdornmentProps {
   adornmentConfig: AdornmentConfig[];
   affixTopPosition: {
     [AdornmentSide.Left]: number | null;
@@ -129,7 +102,7 @@ export interface InputAdornmentProps {
   visible?: Animated.Value;
 }
 
-class InputAdornment extends React.Component<InputAdornmentProps> {
+class TextInputAdornment extends React.Component<TextInputAdornmentProps> {
   render() {
     const {
       adornmentConfig,
@@ -152,20 +125,27 @@ class InputAdornment extends React.Component<InputAdornmentProps> {
         }
 
         if (type === AdornmentType.Icon) {
-          return renderIcon({
-            icon: adornmentInputComponent,
-            side,
-            iconTopPosition,
-          });
+          return (
+            // @ts-ignore
+            <IconAdornment
+              key={side}
+              icon={adornmentInputComponent}
+              side={side}
+              iconTopPosition={iconTopPosition}
+            />
+          );
         } else if (type === AdornmentType.Affix) {
-          return renderAffix({
-            affix: adornmentInputComponent,
-            side,
-            textStyle,
-            affixTopPosition: affixTopPosition[side],
-            onLayout: onAffixChange[side],
-            visible,
-          });
+          return (
+            // @ts-ignore
+            <AffixAdornment
+              affix={adornmentInputComponent}
+              side={side}
+              textStyle={textStyle}
+              affixTopPosition={affixTopPosition[side]}
+              onLayout={onAffixChange[side]}
+              visible={visible}
+            />
+          );
         } else {
           return null;
         }
@@ -176,4 +156,4 @@ class InputAdornment extends React.Component<InputAdornmentProps> {
   }
 }
 
-export default InputAdornment;
+export default TextInputAdornment;

@@ -9,11 +9,11 @@ import {
 } from 'react-native';
 import color from 'color';
 import TextInputIcon from '../Icon';
-import InputAdornment, {
+import TextInputAdornment, {
   getAdornmentConfig,
   getAdornmentStyleAdjustmentForNativeInput,
-  InputAdornmentProps,
-} from './Adornment/InputAdornment';
+  TextInputAdornmentProps,
+} from './Adornment/TextInputAdornment';
 
 import InputLabel from './Label/InputLabel';
 import LabelBackground from './Label/LabelBackground';
@@ -248,7 +248,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
       [AdornmentSide.Right]: onRightAffixLayoutChange,
     };
 
-    let adornmentProps: InputAdornmentProps = {
+    let adornmentProps: TextInputAdornmentProps = {
       adornmentConfig,
       iconTopPosition,
       affixTopPosition,
@@ -325,7 +325,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
               ],
             } as RenderProps)}
           </View>
-          <InputAdornment {...adornmentProps} />
+          <TextInputAdornment {...adornmentProps} />
         </View>
       </View>
     );
