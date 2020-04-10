@@ -98,6 +98,7 @@ class CardTitle extends React.Component<Props> {
   static displayName = 'Card.Title';
 
   static defaultProps = {
+    titleNumberOfLines: 1,
     subtitleNumberOfLines: 1,
   };
 
