@@ -15,7 +15,7 @@ import { withTheme } from '../core/theming';
 
 import { Theme, $RemoveChildren } from '../types';
 
-type Props = $RemoveChildren<typeof TouchableRipple> & {
+export type IconButtonProps = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Icon to display.
    */
@@ -94,7 +94,7 @@ const IconButton = ({
   theme,
   style,
   ...rest
-}: Props) => {
+}: IconButtonProps) => {
   const iconColor =
     typeof customColor !== 'undefined' ? customColor : theme.colors.text;
   const rippleColor = color(iconColor)

@@ -11,8 +11,6 @@ import {
 import color from 'color';
 import InputLabel from './Label/InputLabel';
 import InputAdornment, {
-  ADORNMENT_SIZE,
-  ADORNMENT_OFFSET,
   InputAdornmentProps,
 } from './Adornment/InputAdornment';
 import { RenderProps, ChildTextInputProps } from './types';
@@ -22,6 +20,8 @@ import {
   MINIMIZED_LABEL_FONT_SIZE,
   LABEL_WIGGLE_X_OFFSET,
   LABEL_PADDING_HORIZONTAL,
+  ADORNMENT_SIZE,
+  ADORNMENT_OFFSET,
 } from './constants';
 
 import {
@@ -35,10 +35,9 @@ import {
 } from './helpers';
 import {
   getAdornmentConfig,
-  AdornmentType,
-  AdornmentSide,
   getAdornmentStyleAdjustmentForNativeInput,
 } from './Adornment/InputAdornment';
+import { AdornmentSide, AdornmentType } from './Adornment/types';
 
 const MINIMIZED_LABEL_Y_OFFSET = -18;
 
@@ -319,7 +318,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
     }
 
     return (
-      <View style={[styles.container, containerStyle, viewStyle]}>
+      <View style={[containerStyle, viewStyle]}>
         <Underline
           parentState={parentState}
           underlineColorCustom={underlineColorCustom}
@@ -415,7 +414,6 @@ const Underline = ({
 };
 
 const styles = StyleSheet.create({
-  container: {},
   placeholder: {
     position: 'absolute',
     left: 0,

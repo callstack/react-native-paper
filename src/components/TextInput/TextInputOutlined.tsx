@@ -10,8 +10,6 @@ import {
 import color from 'color';
 import TextInputIcon from '../Icon';
 import InputAdornment, {
-  ADORNMENT_SIZE,
-  ADORNMENT_OFFSET,
   getAdornmentConfig,
   getAdornmentStyleAdjustmentForNativeInput,
   InputAdornmentProps,
@@ -26,6 +24,8 @@ import {
   MAXIMIZED_LABEL_FONT_SIZE,
   MINIMIZED_LABEL_FONT_SIZE,
   LABEL_WIGGLE_X_OFFSET,
+  ADORNMENT_SIZE,
+  ADORNMENT_OFFSET,
 } from './constants';
 
 import {
@@ -37,7 +37,7 @@ import {
   interpolatePlaceholder,
   calculateOutlinedIconAndAffixTopPosition,
 } from './helpers';
-import { AdornmentSide } from './Adornment/InputAdornment';
+import { AdornmentSide } from './Adornment/types';
 
 const OUTLINE_MINIMIZED_LABEL_Y_OFFSET = -6;
 const LABEL_PADDING_TOP = 8;
