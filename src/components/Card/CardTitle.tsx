@@ -22,6 +22,10 @@ type Props = React.ComponentProps<typeof View> & {
    */
   titleStyle?: StyleProp<TextStyle>;
   /**
+   * Number of line for the title.
+   */
+  titleNumberOfLines?: number;
+  /**
    * Text for the subtitle. Note that this will only accept a string or `<Text>`-based node.
    */
   subtitle?: React.ReactNode;
@@ -109,6 +113,7 @@ class CardTitle extends React.Component<Props> {
       style,
       title,
       titleStyle,
+      titleNumberOfLines,
     } = this.props;
 
     return (
@@ -135,6 +140,7 @@ class CardTitle extends React.Component<Props> {
                 { marginBottom: subtitle ? 0 : 2 },
                 titleStyle,
               ]}
+              numberOfLines={titleNumberOfLines}
             >
               {title}
             </Title>
