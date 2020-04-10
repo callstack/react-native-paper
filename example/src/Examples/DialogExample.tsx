@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Colors, Button, withTheme, Theme } from 'react-native-paper';
+import { Colors, Button, useTheme } from 'react-native-paper';
 import {
   DialogWithCustomColors,
   DialogWithLoadingIndicator,
@@ -9,99 +9,56 @@ import {
   UndismissableDialog,
 } from './Dialogs';
 
-type State = {
-  visible1: boolean;
-  visible2: boolean;
-  visible3: boolean;
-  visible4: boolean;
-  visible5: boolean;
+const DialogExample = () => {
+  const [visible1, setVisible1] = React.useState<boolean>(false);
+  const [visible2, setVisible2] = React.useState<boolean>(false);
+  const [visible3, setVisible3] = React.useState<boolean>(false);
+  const [visible4, setVisible4] = React.useState<boolean>(false);
+  const [visible5, setVisible5] = React.useState<boolean>(false);
+
+  const _openDialog1 = () => setVisible1(true);
+  const _openDialog2 = () => setVisible2(true);
+  const _openDialog3 = () => setVisible3(true);
+  const _openDialog4 = () => setVisible4(true);
+  const _openDialog5 = () => setVisible5(true);
+
+  const _closeDialog1 = () => setVisible1(true);
+  const _closeDialog2 = () => setVisible2(true);
+  const _closeDialog3 = () => setVisible3(true);
+  const _closeDialog4 = () => setVisible4(true);
+  const _closeDialog5 = () => setVisible5(true);
+
+  const {
+    colors: { background },
+  } = useTheme();
+
+  return (
+    <View style={[styles.container, { backgroundColor: background }]}>
+      <Button mode="outlined" onPress={_openDialog1} style={styles.button}>
+        Long text
+      </Button>
+      <Button mode="outlined" onPress={_openDialog2} style={styles.button}>
+        Radio buttons
+      </Button>
+      <Button mode="outlined" onPress={_openDialog3} style={styles.button}>
+        Progress indicator
+      </Button>
+      <Button mode="outlined" onPress={_openDialog4} style={styles.button}>
+        Undismissable Dialog
+      </Button>
+      <Button mode="outlined" onPress={_openDialog5} style={styles.button}>
+        Custom colors
+      </Button>
+      <DialogWithLongText visible={visible1} close={_closeDialog1} />
+      <DialogWithRadioBtns visible={visible2} close={_closeDialog2} />
+      <DialogWithLoadingIndicator visible={visible3} close={_closeDialog3} />
+      <UndismissableDialog visible={visible4} close={_closeDialog4} />
+      <DialogWithCustomColors visible={visible5} close={_closeDialog5} />
+    </View>
+  );
 };
 
-type Props = {
-  theme: Theme;
-};
-
-class DialogExample extends React.Component<Props, State> {
-  static title = 'Dialog';
-
-  state = {
-    visible1: false,
-    visible2: false,
-    visible3: false,
-    visible4: false,
-    visible5: false,
-  };
-
-  _openDialog1 = () => this.setState({ visible1: true });
-  _openDialog2 = () => this.setState({ visible2: true });
-  _openDialog3 = () => this.setState({ visible3: true });
-  _openDialog4 = () => this.setState({ visible4: true });
-  _openDialog5 = () => this.setState({ visible5: true });
-
-  _closeDialog1 = () => this.setState({ visible1: false });
-  _closeDialog2 = () => this.setState({ visible2: false });
-  _closeDialog3 = () => this.setState({ visible3: false });
-  _closeDialog4 = () => this.setState({ visible4: false });
-  _closeDialog5 = () => this.setState({ visible5: false });
-
-  render() {
-    const {
-      theme: {
-        colors: { background },
-      },
-    } = this.props;
-
-    const { visible1, visible2, visible3, visible4, visible5 } = this.state;
-
-    return (
-      <View style={[styles.container, { backgroundColor: background }]}>
-        <Button
-          mode="outlined"
-          onPress={this._openDialog1}
-          style={styles.button}
-        >
-          Long text
-        </Button>
-        <Button
-          mode="outlined"
-          onPress={this._openDialog2}
-          style={styles.button}
-        >
-          Radio buttons
-        </Button>
-        <Button
-          mode="outlined"
-          onPress={this._openDialog3}
-          style={styles.button}
-        >
-          Progress indicator
-        </Button>
-        <Button
-          mode="outlined"
-          onPress={this._openDialog4}
-          style={styles.button}
-        >
-          Undismissable Dialog
-        </Button>
-        <Button
-          mode="outlined"
-          onPress={this._openDialog5}
-          style={styles.button}
-        >
-          Custom colors
-        </Button>
-        <DialogWithLongText visible={visible1} close={this._closeDialog1} />
-        <DialogWithRadioBtns visible={visible2} close={this._closeDialog2} />
-        <DialogWithLoadingIndicator
-          visible={visible3}
-          close={this._closeDialog3}
-        />
-        <UndismissableDialog visible={visible4} close={this._closeDialog4} />
-        <DialogWithCustomColors visible={visible5} close={this._closeDialog5} />
-      </View>
-    );
-  }
-}
+DialogExample.title = 'Dialog';
 
 const styles = StyleSheet.create({
   container: {
@@ -114,4 +71,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(DialogExample);
+export default DialogExample;
