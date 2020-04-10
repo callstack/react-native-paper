@@ -1,31 +1,24 @@
 import React from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 
-import IconButton from '../../IconButton';
+import IconButton, { IconButtonProps } from '../../IconButton';
+import { $Omit, Theme } from '../../../../src/types';
 
-type Props = {
+type Props = $Omit<IconButtonProps, 'icon' | 'theme'> & {
   name: string;
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
+  theme?: Theme;
 };
 
 export const ICON_SIZE = 24;
 const ICON_OFFSET = 12;
 
-/** *
- *  TODO: add support for all IconButton props
- * */
-// type Props = $RemoveChildren<typeof TouchableRipple> & {
-//     color?: string;
-//     disabled?: boolean;
-//     animated?: boolean;
-//     accessibilityLabel?: string;
-//     onPress?: (e: GestureResponderEvent) => void;
-//     style?: StyleProp<ViewStyle>;
-//     theme?: Theme;
-//   };
+const StyleContext = React.createContext<{ style?: StyleProp<ViewStyle> }>({
+  style: {},
+});
 
-export function renderIcon({
+export function RenderIcon({
   icon,
   iconTopPosition,
   side,
@@ -34,16 +27,18 @@ export function renderIcon({
   iconTopPosition: number;
   side: 'left' | 'right';
 }): React.ReactNode {
-  // @ts-ignore
-  return React.cloneElement(icon, {
-    style: {
-      top: iconTopPosition,
-      [side]: ICON_OFFSET,
-    },
-  });
+  const style = {
+    top: iconTopPosition,
+    [side]: ICON_OFFSET,
+  };
+
+  return (
+    <StyleContext.Provider value={{ style }}>{icon}</StyleContext.Provider>
+  );
 }
 
-const TextInputIcon = ({ name, onPress, style }: Props) => {
+const TextInputIcon = ({ name, onPress, ...rest }: Props) => {
+  const { style } = React.useContext(StyleContext);
   return (
     <View style={[styles.container, style]}>
       <IconButton
@@ -51,6 +46,7 @@ const TextInputIcon = ({ name, onPress, style }: Props) => {
         style={styles.iconButton}
         size={ICON_SIZE}
         onPress={onPress}
+        {...rest}
       />
     </View>
   );
