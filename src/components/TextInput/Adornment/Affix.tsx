@@ -40,6 +40,7 @@ const AffixContext = React.createContext<ContextState>({
 
 export const AffixAdornment: React.FunctionComponent<{
   affix: React.ReactNode;
+  testID: string;
 } & ContextState> = ({
   affix,
   side,

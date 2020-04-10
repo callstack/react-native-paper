@@ -133,6 +133,7 @@ const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
           if (type === AdornmentType.Icon) {
             return (
               <IconAdornment
+                testID={`${side}-icon-adornment`}
                 key={side}
                 icon={adornmentInputComponent}
                 side={side}
@@ -142,6 +143,7 @@ const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
           } else if (type === AdornmentType.Affix) {
             return (
               <AffixAdornment
+                testID={`${side}-affix-adornment`}
                 key={side}
                 affix={adornmentInputComponent}
                 side={side}

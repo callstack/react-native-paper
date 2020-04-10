@@ -19,6 +19,7 @@ const StyleContext = React.createContext<{ style?: StyleProp<ViewStyle> }>({
 });
 
 export const IconAdornment: React.FunctionComponent<{
+  testID: string;
   icon: React.ReactNode;
   iconTopPosition: number;
   side: 'left' | 'right';
