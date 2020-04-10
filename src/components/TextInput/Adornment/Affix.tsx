@@ -18,7 +18,6 @@ const AFFIX_OFFSET = 12;
 type Props = {
   text: string;
   onLayout?: (event: LayoutChangeEvent) => void;
-  visible?: Animated.Value;
   /**
    * @optional
    */
@@ -64,10 +63,14 @@ export const AffixAdornment: React.FunctionComponent<{
   );
 };
 
-const TextInputAffix = ({ text, theme, visible }: Props) => {
-  const { textStyle, onLayout, affixTopPosition, side } = React.useContext(
-    AffixContext
-  );
+const TextInputAffix = ({ text, theme }: Props) => {
+  const {
+    textStyle,
+    onLayout,
+    affixTopPosition,
+    side,
+    visible,
+  } = React.useContext(AffixContext);
   const textColor = color(theme.colors.text)
     .alpha(theme.dark ? 0.7 : 0.54)
     .rgb()

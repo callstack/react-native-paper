@@ -140,7 +140,6 @@ const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
               />
             );
           } else if (type === AdornmentType.Affix) {
-            console.log('visible, at affix', side, visible);
             return (
               <AffixAdornment
                 key={side}
