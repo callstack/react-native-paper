@@ -4,7 +4,6 @@ import {
   Text,
   StyleSheet,
   StyleProp,
-  ViewStyle,
   TextStyle,
   LayoutChangeEvent,
   Animated,
@@ -12,14 +11,13 @@ import {
 
 import { withTheme } from '../../../core/theming';
 import { Theme } from '../../../types';
+import { AdornmentSide } from './types';
 
 const AFFIX_OFFSET = 12;
 
 type Props = {
   text: string;
   onLayout?: (event: LayoutChangeEvent) => void;
-  style?: StyleProp<ViewStyle>;
-  textStyle?: StyleProp<TextStyle>;
   visible?: Animated.Value;
   /**
    * @optional
@@ -27,7 +25,21 @@ type Props = {
   theme: Theme;
 };
 
-export function renderAffix({
+type ContextState = {
+  affixTopPosition: number | null;
+  onLayout?: (event: LayoutChangeEvent) => void;
+  visible?: Animated.Value;
+  textStyle?: StyleProp<TextStyle>;
+  side: AdornmentSide;
+};
+
+const AffixContext = React.createContext<ContextState>({
+  textStyle: { fontFamily: '', color: '' },
+  affixTopPosition: null,
+  side: AdornmentSide.Left,
+});
+
+export function RenderAffix({
   affix,
   side,
   textStyle,
@@ -36,39 +48,35 @@ export function renderAffix({
   visible,
 }: {
   affix: React.ReactNode;
-  side: 'left' | 'right';
-  textStyle: StyleProp<TextStyle>;
-  affixTopPosition: number | null;
-  onLayout?: (event: LayoutChangeEvent) => void;
-  visible?: Animated.Value;
-}): React.ReactNode {
-  return React.cloneElement(
-    //@ts-ignore
-    affix,
-    {
-      style: {
-        top: affixTopPosition,
-        [side]: AFFIX_OFFSET,
-      },
-      textStyle,
-      onLayout,
-      visible,
-    }
+} & ContextState): React.ReactNode {
+  return (
+    <AffixContext.Provider
+      value={{
+        side,
+        textStyle,
+        affixTopPosition,
+        onLayout,
+        visible,
+      }}
+    >
+      {affix}
+    </AffixContext.Provider>
   );
 }
 
-const TextInputAffix = ({
-  text,
-  style,
-  textStyle,
-  onLayout,
-  theme,
-  visible,
-}: Props) => {
+const TextInputAffix = ({ text, theme, visible }: Props) => {
+  const { textStyle, onLayout, affixTopPosition, side } = React.useContext(
+    AffixContext
+  );
   const textColor = color(theme.colors.text)
     .alpha(theme.dark ? 0.7 : 0.54)
     .rgb()
     .string();
+
+  const style = {
+    top: affixTopPosition,
+    [side]: AFFIX_OFFSET,
+  };
 
   return (
     <Animated.View
