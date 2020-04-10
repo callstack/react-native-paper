@@ -8,13 +8,10 @@ import {
   // ViewStyle,
   // TextStyle,
 } from 'react-native';
-
 import TextInputOutlined from './TextInputOutlined';
 import TextInputFlat from './TextInputFlat';
-
 import TextInputIcon from './Adornment/Icon';
 import TextInputAffix from './Adornment/Affix';
-
 import { withTheme } from '../../core/theming';
 import { RenderProps, State } from './types';
 import { Theme, $Omit } from '../../types';
@@ -197,15 +194,15 @@ class TextInput extends React.Component<TextInputProps, State> {
           : prevState.value,
     };
   }
-  currentInputValue =
+  validInputValue =
     this.props.value !== undefined ? this.props.value : this.props.defaultValue;
 
   state = {
-    labeled: new Animated.Value(this.currentInputValue ? 0 : 1),
+    labeled: new Animated.Value(this.validInputValue ? 0 : 1),
     error: new Animated.Value(this.props.error ? 1 : 0),
     focused: false,
     placeholder: '',
-    value: this.currentInputValue,
+    value: this.validInputValue,
     labelLayout: {
       measured: false,
       width: 0,

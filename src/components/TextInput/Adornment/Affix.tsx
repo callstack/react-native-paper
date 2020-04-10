@@ -39,16 +39,16 @@ const AffixContext = React.createContext<ContextState>({
   side: AdornmentSide.Left,
 });
 
-export function AffixAdornment({
+export const AffixAdornment: React.FunctionComponent<{
+  affix: React.ReactNode;
+} & ContextState> = ({
   affix,
   side,
   textStyle,
   affixTopPosition,
   onLayout,
   visible,
-}: {
-  affix: React.ReactNode;
-} & ContextState): React.ReactNode {
+}) => {
   return (
     <AffixContext.Provider
       value={{
@@ -62,7 +62,7 @@ export function AffixAdornment({
       {affix}
     </AffixContext.Provider>
   );
-}
+};
 
 const TextInputAffix = ({ text, theme, visible }: Props) => {
   const { textStyle, onLayout, affixTopPosition, side } = React.useContext(

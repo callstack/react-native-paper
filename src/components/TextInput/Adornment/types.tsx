@@ -17,6 +17,6 @@ export type AdornmentConfig = {
 };
 export type AdornmentStyleAdjustmentForNativeInput = {
   adornmentStyleAdjustmentForNativeInput: Array<
-    { paddingRight?: number; paddingLeft?: number } | {}
+    { paddingRight: number; paddingLeft: number } | {}
   >;
 };

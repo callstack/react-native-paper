@@ -56,7 +56,7 @@ export function getAdornmentStyleAdjustmentForNativeInput({
   adornmentConfig: AdornmentConfig[];
   leftAffixWidth: number;
   rightAffixWidth: number;
-}): Array<AdornmentStyleAdjustmentForNativeInput | {}> | [{}] {
+}): AdornmentStyleAdjustmentForNativeInput | {} {
   if (adornmentConfig.length) {
     const adornmentStyleAdjustmentForNativeInput = adornmentConfig.map(
       ({ type, side }: AdornmentConfig) => {
@@ -67,19 +67,26 @@ export function getAdornmentStyleAdjustmentForNativeInput({
               ADORNMENT_OFFSET +
               (type === AdornmentType.Affix ? 0 : inputOffset),
           };
-        } else if (side === AdornmentSide.Right) {
+        } else {
           return {
             paddingRight:
               rightAffixWidth +
               ADORNMENT_OFFSET +
               (type === AdornmentType.Affix ? 0 : inputOffset),
           };
-        } else {
-          return {};
         }
       }
     );
-    return adornmentStyleAdjustmentForNativeInput;
+    const allStyleAdjustmentsMerged = adornmentStyleAdjustmentForNativeInput.reduce(
+      (mergedStyles, currentStyle) => {
+        return {
+          ...mergedStyles,
+          ...currentStyle,
+        };
+      },
+      {}
+    );
+    return allStyleAdjustmentsMerged;
   } else {
     return [{}];
   }
@@ -102,58 +109,58 @@ export interface TextInputAdornmentProps {
   visible?: Animated.Value;
 }
 
-class TextInputAdornment extends React.Component<TextInputAdornmentProps> {
-  render() {
-    const {
-      adornmentConfig,
-      left,
-      right,
-      onAffixChange,
-      textStyle,
-      affixTopPosition,
-      visible,
-      iconTopPosition,
-    } = this.props;
+const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
+  adornmentConfig,
+  left,
+  right,
+  onAffixChange,
+  textStyle,
+  affixTopPosition,
+  visible,
+  iconTopPosition,
+}) => {
+  if (adornmentConfig.length) {
+    return (
+      <>
+        {adornmentConfig.map(({ type, side }: AdornmentConfig) => {
+          let adornmentInputComponent;
+          if (side === AdornmentSide.Left) {
+            adornmentInputComponent = left;
+          } else if (side === AdornmentSide.Right) {
+            adornmentInputComponent = right;
+          }
 
-    if (adornmentConfig.length) {
-      return adornmentConfig.map(({ type, side }: AdornmentConfig) => {
-        let adornmentInputComponent;
-        if (side === AdornmentSide.Left) {
-          adornmentInputComponent = left;
-        } else if (side === AdornmentSide.Right) {
-          adornmentInputComponent = right;
-        }
-
-        if (type === AdornmentType.Icon) {
-          return (
-            // @ts-ignore
-            <IconAdornment
-              key={side}
-              icon={adornmentInputComponent}
-              side={side}
-              iconTopPosition={iconTopPosition}
-            />
-          );
-        } else if (type === AdornmentType.Affix) {
-          return (
-            // @ts-ignore
-            <AffixAdornment
-              affix={adornmentInputComponent}
-              side={side}
-              textStyle={textStyle}
-              affixTopPosition={affixTopPosition[side]}
-              onLayout={onAffixChange[side]}
-              visible={visible}
-            />
-          );
-        } else {
-          return null;
-        }
-      });
-    } else {
-      return null;
-    }
+          if (type === AdornmentType.Icon) {
+            return (
+              <IconAdornment
+                key={side}
+                icon={adornmentInputComponent}
+                side={side}
+                iconTopPosition={iconTopPosition}
+              />
+            );
+          } else if (type === AdornmentType.Affix) {
+            console.log('visible, at affix', side, visible);
+            return (
+              <AffixAdornment
+                key={side}
+                affix={adornmentInputComponent}
+                side={side}
+                textStyle={textStyle}
+                affixTopPosition={affixTopPosition[side]}
+                onLayout={onAffixChange[side]}
+                visible={visible}
+              />
+            );
+          } else {
+            return null;
+          }
+        })}
+      </>
+    );
+  } else {
+    return null;
   }
-}
+};
 
 export default TextInputAdornment;

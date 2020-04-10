@@ -18,15 +18,11 @@ const StyleContext = React.createContext<{ style?: StyleProp<ViewStyle> }>({
   style: {},
 });
 
-export function IconAdornment({
-  icon,
-  iconTopPosition,
-  side,
-}: {
+export const IconAdornment: React.FunctionComponent<{
   icon: React.ReactNode;
   iconTopPosition: number;
   side: 'left' | 'right';
-}): React.ReactNode {
+}> = ({ icon, iconTopPosition, side }) => {
   const style = {
     top: iconTopPosition,
     [side]: ICON_OFFSET,
@@ -35,7 +31,7 @@ export function IconAdornment({
   return (
     <StyleContext.Provider value={{ style }}>{icon}</StyleContext.Provider>
   );
-}
+};
 
 const TextInputIcon = ({ name, onPress, ...rest }: Props) => {
   const { style } = React.useContext(StyleContext);
