@@ -19,9 +19,8 @@ import {
   MAXIMIZED_LABEL_FONT_SIZE,
   MINIMIZED_LABEL_FONT_SIZE,
   LABEL_WIGGLE_X_OFFSET,
-  LABEL_PADDING_HORIZONTAL,
   ADORNMENT_SIZE,
-  ADORNMENT_OFFSET,
+  INPUT_OFFSET,
 } from './constants';
 
 import {
@@ -32,12 +31,13 @@ import {
   Padding,
   interpolatePlaceholder,
   calculateFlatAffixTopPosition,
+  calculateFlatInputHorizontalPadding,
 } from './helpers';
 import {
   getAdornmentConfig,
   getAdornmentStyleAdjustmentForNativeInput,
 } from './Adornment/TextInputAdornment';
-import { AdornmentSide, AdornmentType } from './Adornment/types';
+import { AdornmentSide } from './Adornment/types';
 
 const MINIMIZED_LABEL_Y_OFFSET = -18;
 
@@ -46,8 +46,6 @@ const LABEL_PADDING_TOP_DENSE = 24;
 const MIN_HEIGHT = 64;
 const MIN_DENSE_HEIGHT_WL = 52;
 const MIN_DENSE_HEIGHT = 40;
-
-const INPUT_OFFSET = 8;
 
 class TextInputFlat extends React.Component<ChildTextInputProps> {
   static defaultProps = {
@@ -97,9 +95,6 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
     } = (StyleSheet.flatten(style) || {}) as TextStyle;
     const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
 
-    let paddingLeft = LABEL_PADDING_HORIZONTAL;
-    let paddingRight = LABEL_PADDING_HORIZONTAL;
-
     const isPaddingHorizontalPassed =
       paddingHorizontal !== undefined && typeof paddingHorizontal === 'number';
 
@@ -108,16 +103,8 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
       right,
     });
 
-    adornmentConfig.forEach(({ type, side }) => {
-      if (type === AdornmentType.Icon && side === AdornmentSide.Left) {
-        paddingLeft = ADORNMENT_SIZE + ADORNMENT_OFFSET + INPUT_OFFSET;
-      } else if (side === AdornmentSide.Right) {
-        if (type === AdornmentType.Affix) {
-          paddingRight = ADORNMENT_SIZE + ADORNMENT_OFFSET + INPUT_OFFSET;
-        } else if (type === AdornmentType.Icon) {
-          paddingRight = ADORNMENT_SIZE + ADORNMENT_OFFSET + INPUT_OFFSET;
-        }
-      }
+    let { paddingLeft, paddingRight } = calculateFlatInputHorizontalPadding({
+      adornmentConfig,
     });
 
     if (isPaddingHorizontalPassed) {
