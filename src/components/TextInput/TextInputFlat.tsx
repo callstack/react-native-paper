@@ -1,34 +1,30 @@
 import * as React from 'react';
 import {
-  View,
-  Animated,
-  TextInput as NativeTextInput,
-  StyleSheet,
   I18nManager,
   Platform,
+  StyleSheet,
+  TextInput as NativeTextInput,
   TextStyle,
+  View,
 } from 'react-native';
-import color from 'color';
-import InputLabel from './Label/InputLabel';
-import { RenderProps, ChildTextInputProps } from './types';
-
 import {
+  LABEL_PADDING_HORIZONTAL,
+  LABEL_WIGGLE_X_OFFSET,
   MAXIMIZED_LABEL_FONT_SIZE,
   MINIMIZED_LABEL_FONT_SIZE,
-  LABEL_WIGGLE_X_OFFSET,
-  LABEL_PADDING_HORIZONTAL,
 } from './constants';
-
 import {
-  calculateLabelTopPosition,
-  calculateInputHeight,
-  calculatePadding,
   adjustPaddingFlat,
-  Padding,
+  calculateInputHeight,
+  calculateLabelTopPosition,
+  calculatePadding,
   interpolatePlaceholder,
+  Padding,
 } from './helpers';
+import InputLabel from './Label/InputLabel';
+import { ChildTextInputProps, RenderProps } from './types';
 
-const MINIMIZED_LABEL_Y_OFFSET = -18;
+const MINIMIZED_LABEL_Y_OFFSET = -15;
 
 const LABEL_PADDING_TOP = 30;
 const LABEL_PADDING_TOP_DENSE = 24;
@@ -49,12 +45,12 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
 
   render() {
     const {
+      forewordTheme,
       disabled,
       editable,
       label,
       error,
       selectionColor,
-      underlineColor,
       dense,
       style,
       theme,
@@ -90,38 +86,32 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
 
     let inputTextColor,
       activeColor,
-      underlineColorCustom,
+      labelColor,
       placeholderColor,
-      errorColor;
+      errorColor,
+      containerStyle;
 
     if (disabled) {
-      inputTextColor = activeColor = color(colors.text)
-        .alpha(0.54)
-        .rgb()
-        .string();
+      inputTextColor = activeColor = '#999';
       placeholderColor = colors.disabled;
-      underlineColorCustom = 'transparent';
+      labelColor = '#bbb';
+
+      containerStyle = {
+        backgroundColor: '#e5e5e5',
+        borderRadius: 10,
+      };
     } else {
       inputTextColor = colors.text;
       activeColor = error ? colors.error : colors.primary;
       placeholderColor = colors.placeholder;
       errorColor = colors.error;
-      underlineColorCustom = underlineColor || colors.disabled;
-    }
+      labelColor = '#777';
 
-    const containerStyle = {
-      backgroundColor: theme.dark
-        ? color(colors.background)
-            .lighten(0.24)
-            .rgb()
-            .string()
-        : color(colors.background)
-            .darken(0.06)
-            .rgb()
-            .string(),
-      borderTopLeftRadius: theme.roundness,
-      borderTopRightRadius: theme.roundness,
-    };
+      containerStyle = {
+        backgroundColor: forewordTheme === 'light' ? '#fff' : '#f3f3f3',
+        borderRadius: 10,
+      };
+    }
 
     const labelScale = MINIMIZED_LABEL_FONT_SIZE / fontSize;
     const fontScale = MAXIMIZED_LABEL_FONT_SIZE / fontSize;
@@ -206,7 +196,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       paddingOffset,
       hasActiveOutline,
       activeColor,
-      placeholderColor,
+      placeholderColor: labelColor,
       errorColor,
     };
 
@@ -220,13 +210,6 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
 
     return (
       <View style={[containerStyle, viewStyle]}>
-        <Underline
-          parentState={parentState}
-          underlineColorCustom={underlineColorCustom}
-          error={error}
-          colors={colors}
-          activeColor={activeColor}
-        />
         <View
           style={{
             paddingTop: 0,
@@ -276,54 +259,10 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
 
 export default TextInputFlat;
 
-type UnderlineProps = {
-  parentState: {
-    focused: boolean;
-  };
-  error?: boolean;
-  colors: {
-    error: string;
-  };
-  activeColor: string;
-  underlineColorCustom?: string;
-};
-
-const Underline = ({
-  parentState,
-  error,
-  colors,
-  activeColor,
-  underlineColorCustom,
-}: UnderlineProps) => {
-  let backgroundColor = parentState.focused
-    ? activeColor
-    : underlineColorCustom;
-  if (error) backgroundColor = colors.error;
-  return (
-    <Animated.View
-      style={[
-        styles.underline,
-        {
-          backgroundColor,
-          // Underlines is thinner when input is not focused
-          transform: [{ scaleY: parentState.focused ? 1 : 0.5 }],
-        },
-      ]}
-    />
-  );
-};
-
 const styles = StyleSheet.create({
   placeholder: {
     position: 'absolute',
     left: 0,
-  },
-  underline: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    height: 2,
   },
   input: {
     flexGrow: 1,
@@ -336,7 +275,7 @@ const styles = StyleSheet.create({
     paddingBottom: 4,
   },
   inputFlatDense: {
-    paddingTop: 22,
+    paddingTop: 19,
     paddingBottom: 2,
   },
   paddingOffset: {

@@ -103,6 +103,7 @@ const InputLabel = (props: InputLabelProps) => {
           labelStyle,
           paddingOffset || {},
           {
+            fontWeight: 'bold',
             color: activeColor,
             opacity: parentState.labeled.interpolate({
               inputRange: [0, 1],

@@ -18,6 +18,7 @@ const FOCUS_ANIMATION_DURATION = 150;
 export type TextInputProps = React.ComponentPropsWithRef<
   typeof NativeTextInput
 > & {
+  forewordTheme?: 'light' | 'dark';
   /**
    * Mode of the TextInput.
    * - `flat` - flat input with an underline.
