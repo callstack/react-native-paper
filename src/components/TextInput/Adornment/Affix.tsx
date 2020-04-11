@@ -11,7 +11,7 @@ import {
 
 import { withTheme } from '../../../core/theming';
 import { Theme } from '../../../types';
-import { AdornmentSide } from './types';
+import { AdornmentSide } from './enums';
 
 const AFFIX_OFFSET = 12;
 

@@ -8,7 +8,6 @@ import {
   TextStyle,
 } from 'react-native';
 import color from 'color';
-import TextInputIcon from '../Icon';
 import TextInputAdornment, {
   getAdornmentConfig,
   getAdornmentStyleAdjustmentForNativeInput,
@@ -37,7 +36,7 @@ import {
   interpolatePlaceholder,
   calculateOutlinedIconAndAffixTopPosition,
 } from './helpers';
-import { AdornmentSide } from './Adornment/types';
+import { AdornmentType, AdornmentSide } from './Adornment/enums';
 
 const OUTLINE_MINIMIZED_LABEL_Y_OFFSET = -6;
 const LABEL_PADDING_TOP = 8;
@@ -80,6 +79,8 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
       right,
       ...rest
     } = this.props;
+
+    const adornmentConfig = getAdornmentConfig({ left, right });
 
     const { colors, fonts } = theme;
     const font = fonts.regular;
@@ -124,8 +125,10 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
         (fontSize - MINIMIZED_LABEL_FONT_SIZE) * labelScale);
 
     let labelTranslationXOffset = 0;
-    const isAdornmentLeftIcon =
-      left && React.isValidElement(left) && left.type === TextInputIcon;
+    const isAdornmentLeftIcon = adornmentConfig.some(
+      ({ side, type }) =>
+        side === AdornmentSide.Left && type === AdornmentType.Icon
+    );
     if (isAdornmentLeftIcon) {
       labelTranslationXOffset =
         (I18nManager.isRTL ? -1 : 1) * (ADORNMENT_SIZE + ADORNMENT_OFFSET - 8);
@@ -200,7 +203,6 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
       errorColor,
       labelTranslationXOffset,
     };
-    const adornmentConfig = getAdornmentConfig({ left, right });
 
     const minHeight = (height ||
       (dense ? MIN_DENSE_HEIGHT : MIN_HEIGHT)) as number;

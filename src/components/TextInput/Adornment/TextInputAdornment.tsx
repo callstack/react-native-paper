@@ -10,10 +10,9 @@ import {
 } from 'react-native';
 import {
   AdornmentConfig,
-  AdornmentSide,
-  AdornmentType,
   AdornmentStyleAdjustmentForNativeInput,
 } from './types';
+import { AdornmentSide, AdornmentType } from './enums';
 
 export function getAdornmentConfig({
   left,
