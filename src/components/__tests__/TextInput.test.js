@@ -4,7 +4,7 @@ import TextInput from '../TextInput/TextInput';
 
 const affixTextValue = '/100';
 it('correctly renders left-side icon adornment, and right-side affix adornment', () => {
-  const { getByText, getByTestId } = render(
+  const { getByText, getByTestId, toJSON } = render(
     <TextInput
       label="Flat input"
       placeholder="Type something"
@@ -24,10 +24,11 @@ it('correctly renders left-side icon adornment, and right-side affix adornment',
   expect(() => getByText(affixTextValue)).not.toThrow();
   expect(() => getByTestId('left-icon-adornment')).not.toThrow();
   expect(() => getByTestId('right-affix-adornment')).not.toThrow();
+  expect(toJSON()).toMatchSnapshot();
 });
 
 it('correctly renders left-side icon adornment, and right-side affix adornment ', () => {
-  const { getByText, getByTestId } = render(
+  const { getByText, getByTestId, toJSON } = render(
     <TextInput
       label="Flat input"
       placeholder="Type something"
@@ -47,4 +48,5 @@ it('correctly renders left-side icon adornment, and right-side affix adornment '
   expect(() => getByText(affixTextValue)).not.toThrow();
   expect(() => getByTestId('right-icon-adornment')).not.toThrow();
   expect(() => getByTestId('left-affix-adornment')).not.toThrow();
+  expect(toJSON()).toMatchSnapshot();
 });
