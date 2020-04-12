@@ -18,6 +18,10 @@ type Props = {
    */
   source: ImageSourcePropType;
   /**
+   * Pass any props to the `Image`
+   */
+  imageProps?: object;
+  /**
    * Size of the avatar.
    */
   size?: number;
@@ -55,7 +59,7 @@ class AvatarImage extends React.Component<Props> {
   };
 
   render() {
-    const { size = defaultSize, source, style, theme } = this.props;
+    const { size = defaultSize, source, style, theme, imageProps } = this.props;
     const { colors } = theme;
 
     const { backgroundColor = colors.primary } =
@@ -76,6 +80,7 @@ class AvatarImage extends React.Component<Props> {
         <Image
           source={source}
           style={{ width: size, height: size, borderRadius: size / 2 }}
+          {...imageProps}
         />
       </View>
     );
