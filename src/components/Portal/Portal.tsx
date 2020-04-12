@@ -27,16 +27,31 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Portal, Text } from 'react-native-paper';
- *
+ * import { Provider, Portal, Text } from 'react-native-paper';
+ * import { View } from 'react-native';
+ * 
  * export default class MyComponent extends React.Component {
  *   render() {
  *     return (
- *       <Portal>
- *         <Text>This is rendered at a different place</Text>
- *       </Portal>
- *     );
- *   }
+ *       <Provider>
+ *       
+ *         <View style={{
+ *           flex: 1,
+ *           justifyContent: 'center',
+ *           alignContent: 'center'
+ *         }}>
+ *           <Text style={{
+ *             textAlign: 'center'
+ *           }}>This is rendered in the normal place</Text>
+ *         </View>
+ *       
+ *        <Portal>
+ *           <Text>This is rendered at a different place</Text>
+ *        </Portal>
+ *
+ *      </Provider>
+ *    );
+ *  }
  * }
  * ```
  */
