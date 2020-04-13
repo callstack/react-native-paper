@@ -4,6 +4,7 @@ import {
   View,
   ScrollView,
   KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import { TextInput, HelperText, withTheme, Theme } from 'react-native-paper';
 
@@ -29,6 +30,9 @@ type State = {
   outlinedMultiline: string;
   outlinedTextArea: string;
   maxLengthName: string;
+  alignVerticalTop: string;
+  alignVerticalCenter: string;
+  alignVerticalBottom: string;
 };
 
 class TextInputExample extends React.Component<Props, State> {
@@ -50,6 +54,9 @@ class TextInputExample extends React.Component<Props, State> {
     outlinedMultiline: '',
     outlinedTextArea: '',
     maxLengthName: '',
+    alignVerticalTop: 'this text should be aligned top',
+    alignVerticalCenter: 'this text should be aligned center',
+    alignVerticalBottom: 'this text should be aligned bottom',
   };
 
   _isUsernameValid = (name: string) => /^[a-zA-Z]*$/.test(name);
@@ -60,6 +67,41 @@ class TextInputExample extends React.Component<Props, State> {
         colors: { background },
       },
     } = this.props;
+
+    const verticalAlignExamples = (
+      <>
+        <TextInput
+          mode="outlined"
+          style={{ ...styles.inputContainerStyle, textAlignVertical: 'top' }}
+          label="Multiline vertical align top"
+          multiline
+          placeholder="Type something"
+          value={this.state.alignVerticalTop}
+          onChangeText={alignVerticalTop => this.setState({ alignVerticalTop })}
+        />
+        <TextInput
+          mode="outlined"
+          style={{ ...styles.inputContainerStyle, textAlignVertical: 'center' }}
+          label="Multiline vertical align center"
+          multiline
+          placeholder="Type something"
+          value={this.state.alignVerticalCenter}
+          onChangeText={alignVerticalCenter =>
+            this.setState({ alignVerticalCenter })
+          }
+        />
+        <TextInput
+          style={{ ...styles.inputContainerStyle, textAlignVertical: 'bottom' }}
+          label="Multiline vertical align bottom"
+          multiline
+          placeholder="Type something"
+          value={this.state.alignVerticalBottom}
+          onChangeText={alignVerticalBottom =>
+            this.setState({ alignVerticalBottom })
+          }
+        />
+      </>
+    );
 
     return (
       <KeyboardAvoidingView
@@ -224,6 +266,8 @@ class TextInputExample extends React.Component<Props, State> {
               </HelperText>
             </View>
           </View>
+          {// Since this prop is only effectful under Android.
+          Platform.OS == 'android' ? verticalAlignExamples : null}
           <View style={styles.inputContainerStyle}>
             <TextInput
               label="Input with no padding"
