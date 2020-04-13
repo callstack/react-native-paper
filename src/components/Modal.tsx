@@ -6,6 +6,7 @@ import {
   StyleProp,
   StyleSheet,
   TouchableWithoutFeedback,
+  View,
   ViewStyle,
 } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
@@ -26,6 +27,10 @@ type Props = {
    * Determines Whether the modal is visible.
    */
   visible: boolean;
+  /**
+   * Determines Whether the modal is wrapped in a SafeAreaView.
+   */
+  wrapInSafeArea?: boolean;
   /**
    * Content of the `Modal`.
    */
@@ -178,8 +183,15 @@ class Modal extends React.Component<Props, State> {
 
     if (!rendered) return null;
 
-    const { children, dismissable, theme, contentContainerStyle } = this.props;
+    const {
+      children,
+      dismissable,
+      wrapInSafeArea = true,
+      theme,
+      contentContainerStyle,
+    } = this.props;
     const { colors } = theme;
+    const Wrapper = wrapInSafeArea ? SafeAreaView : View;
     return (
       <Animated.View
         pointerEvents={this.props.visible ? 'auto' : 'none'}
@@ -198,7 +210,7 @@ class Modal extends React.Component<Props, State> {
             ]}
           />
         </TouchableWithoutFeedback>
-        <SafeAreaView style={styles.wrapper} pointerEvents="box-none">
+        <Wrapper style={styles.wrapper} pointerEvents="box-none">
           <Surface
             style={
               [{ opacity }, styles.content, contentContainerStyle] as StyleProp<
@@ -208,7 +220,7 @@ class Modal extends React.Component<Props, State> {
           >
             {children}
           </Surface>
-        </SafeAreaView>
+        </Wrapper>
       </Animated.View>
     );
   }
