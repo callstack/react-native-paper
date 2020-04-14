@@ -6,31 +6,46 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import { TextInput, HelperText, useTheme } from 'react-native-paper';
+import { inputReducer } from '../../utils';
 
 const MAX_LENGTH = 20;
 
+const initialState = {
+  text: '',
+  maxLengthName: '',
+};
+
 const TextInputExample = () => {
-  const [text, setText] = React.useState<string>('');
-  const [name, setName] = React.useState<string>('');
-  const [outlinedText, setOutlinedText] = React.useState<string>('');
-  const [largeText, setLargeText] = React.useState<string>('');
-  const [outlinedLargeText, setOutlinedLargeText] = React.useState<string>('');
-  const [nameNoPadding, setNameNoPadding] = React.useState<string>('');
-  const [flatDenseText, setFlatDenseText] = React.useState<string>('');
-  const [flatDense, setFlatDense] = React.useState<string>('');
-  const [outlinedDenseText, setOutlinedDenseText] = React.useState<string>('');
-  const [outlinedDense, setOutlinedDense] = React.useState<string>('');
-  const [flatMultiline, setFlatMultiline] = React.useState<string>('');
-  const [flatTextArea, setFlatTextArea] = React.useState<string>('');
-  const [outlinedMultiline, setOutlinedMultiline] = React.useState<string>('');
-  const [outlinedTextArea, setOutlinedTextArea] = React.useState<string>('');
-  const [maxLengthName, setMaxLengthName] = React.useState<string>('');
+  const [state, dispatch] = React.useReducer(inputReducer, initialState);
+  const {
+    text,
+    name,
+    outlinedText,
+    largeText,
+    outlinedLargeText,
+    nameNoPadding,
+    flatDenseText,
+    flatDense,
+    outlinedDenseText,
+    outlinedDense,
+    flatMultiline,
+    flatTextArea,
+    outlinedMultiline,
+    outlinedTextArea,
+    maxLengthName,
+  } = state;
 
   const _isUsernameValid = (name: string) => /^[a-zA-Z]*$/.test(name);
 
   const {
     colors: { background },
   } = useTheme();
+
+  const inputActionHandler = (type: string, payload: string) =>
+    dispatch({
+      type: type,
+      payload: payload,
+    });
 
   return (
     <KeyboardAvoidingView
@@ -48,14 +63,14 @@ const TextInputExample = () => {
           label="Flat input"
           placeholder="Type something"
           value={text}
-          onChangeText={text => setText(text)}
+          onChangeText={text => inputActionHandler('text', text)}
         />
         <TextInput
           style={[styles.inputContainerStyle, styles.fontSize]}
           label="Flat input large font"
           placeholder="Type something"
           value={largeText}
-          onChangeText={largeText => setLargeText(largeText)}
+          onChangeText={largeText => inputActionHandler('largeText', largeText)}
         />
         <TextInput
           style={styles.inputContainerStyle}
@@ -63,14 +78,16 @@ const TextInputExample = () => {
           label="Dense flat input"
           placeholder="Type something"
           value={flatDenseText}
-          onChangeText={flatDenseText => setFlatDenseText(flatDenseText)}
+          onChangeText={flatDenseText =>
+            inputActionHandler('flatDenseText', flatDenseText)
+          }
         />
         <TextInput
           style={styles.inputContainerStyle}
           dense
           placeholder="Dense flat input without label"
           value={flatDense}
-          onChangeText={flatDense => setFlatDense(flatDense)}
+          onChangeText={flatDense => inputActionHandler('flatDense', flatDense)}
         />
         <TextInput
           style={styles.inputContainerStyle}
@@ -78,7 +95,9 @@ const TextInputExample = () => {
           multiline
           placeholder="Type something"
           value={flatMultiline}
-          onChangeText={flatMultiline => setFlatMultiline(flatMultiline)}
+          onChangeText={flatMultiline =>
+            inputActionHandler('flatMultiline', flatMultiline)
+          }
         />
         <TextInput
           style={[styles.inputContainerStyle, styles.textArea]}
@@ -86,7 +105,9 @@ const TextInputExample = () => {
           multiline
           placeholder="Type something"
           value={flatTextArea}
-          onChangeText={flatTextArea => setFlatTextArea(flatTextArea)}
+          onChangeText={flatTextArea =>
+            inputActionHandler('flatTextArea', flatTextArea)
+          }
         />
         <TextInput
           disabled
@@ -99,7 +120,9 @@ const TextInputExample = () => {
           label="Outlined input"
           placeholder="Type something"
           value={outlinedText}
-          onChangeText={outlinedText => setOutlinedText(outlinedText)}
+          onChangeText={outlinedText =>
+            inputActionHandler('outlinedText', outlinedText)
+          }
         />
         <TextInput
           mode="outlined"
@@ -108,7 +131,7 @@ const TextInputExample = () => {
           placeholder="Type something"
           value={outlinedLargeText}
           onChangeText={outlinedLargeText =>
-            setOutlinedLargeText(outlinedLargeText)
+            inputActionHandler('outlinedLargeText', outlinedLargeText)
           }
         />
         <TextInput
@@ -119,7 +142,7 @@ const TextInputExample = () => {
           placeholder="Type something"
           value={outlinedDenseText}
           onChangeText={outlinedDenseText =>
-            setOutlinedDenseText(outlinedDenseText)
+            inputActionHandler('outlinedDenseText', outlinedDenseText)
           }
         />
         <TextInput
@@ -128,7 +151,9 @@ const TextInputExample = () => {
           dense
           placeholder="Dense outlined input without label"
           value={outlinedDense}
-          onChangeText={outlinedDense => setOutlinedDense(outlinedDense)}
+          onChangeText={outlinedDense =>
+            inputActionHandler('outlinedDense', outlinedDense)
+          }
         />
         <TextInput
           mode="outlined"
@@ -138,7 +163,7 @@ const TextInputExample = () => {
           placeholder="Type something"
           value={outlinedMultiline}
           onChangeText={outlinedMultiline =>
-            setOutlinedMultiline(outlinedMultiline)
+            inputActionHandler('outlinedMultiline', outlinedMultiline)
           }
         />
         <TextInput
@@ -149,7 +174,7 @@ const TextInputExample = () => {
           placeholder="Type something"
           value={outlinedTextArea}
           onChangeText={outlinedTextArea =>
-            setOutlinedTextArea(outlinedTextArea)
+            inputActionHandler('outlinedTextArea', outlinedTextArea)
           }
         />
         <TextInput
@@ -164,7 +189,7 @@ const TextInputExample = () => {
             placeholder="Enter username, only letters"
             value={name}
             error={!_isUsernameValid(name)}
-            onChangeText={name => setName(name)}
+            onChangeText={name => inputActionHandler('name', name)}
           />
           <HelperText type="error" visible={!_isUsernameValid(name)}>
             Error: Only letters are allowed
@@ -176,7 +201,9 @@ const TextInputExample = () => {
             placeholder="Enter username, only letters"
             value={maxLengthName}
             error={!_isUsernameValid(maxLengthName)}
-            onChangeText={maxLengthName => setMaxLengthName(maxLengthName)}
+            onChangeText={maxLengthName =>
+              inputActionHandler('maxLengthName', maxLengthName)
+            }
             maxLength={MAX_LENGTH}
           />
           <View style={styles.helpersWrapper}>
@@ -199,7 +226,9 @@ const TextInputExample = () => {
             placeholder="Enter username, only letters"
             value={nameNoPadding}
             error={!_isUsernameValid(nameNoPadding)}
-            onChangeText={nameNoPadding => setNameNoPadding(nameNoPadding)}
+            onChangeText={nameNoPadding =>
+              inputActionHandler('nameNoPadding', nameNoPadding)
+            }
           />
           <HelperText
             type="error"
