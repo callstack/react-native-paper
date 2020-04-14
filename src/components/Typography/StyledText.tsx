@@ -6,7 +6,7 @@ import Text from './Text';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 
-type Props = React.ComponentPropsWithRef<typeof Text> & {
+type Props = React.ComponentProps<typeof Text> & {
   alpha: number;
   family: 'regular' | 'medium' | 'light' | 'thin';
   style?: StyleProp<TextStyle>;

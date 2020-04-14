@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, StyleSheet, StyleProp, Text, TextStyle } from 'react-native';
+import { Animated, StyleSheet, StyleProp, TextStyle } from 'react-native';
 import color from 'color';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
@@ -7,7 +7,7 @@ import { Theme } from '../types';
 
 const defaultSize = 20;
 
-type Props = React.ComponentPropsWithRef<typeof Text> & {
+type Props = React.ComponentProps<typeof Animated.Text> & {
   /**
    * Whether the badge is visible
    */
@@ -21,6 +21,7 @@ type Props = React.ComponentPropsWithRef<typeof Text> & {
    */
   size?: number;
   style?: StyleProp<TextStyle>;
+  ref?: React.RefObject<typeof Animated.Text>;
   /**
    * @optional
    */
@@ -75,7 +76,15 @@ class Badge extends React.Component<Props, State> {
   }
 
   render() {
-    const { children, size = defaultSize, style, theme } = this.props;
+    const {
+      children,
+      size = defaultSize,
+      style,
+      theme,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      visible,
+      ...rest
+    } = this.props;
     const { opacity } = this.state;
 
     const { backgroundColor = theme.colors.notification, ...restStyle } =
@@ -102,6 +111,7 @@ class Badge extends React.Component<Props, State> {
           styles.container,
           restStyle,
         ]}
+        {...rest}
       >
         {children}
       </Animated.Text>

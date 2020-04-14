@@ -15,7 +15,7 @@ import { Theme } from '../../types';
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
 import color from 'color';
 
-type Props = React.ComponentPropsWithRef<typeof Appbar> & {
+type Props = React.ComponentProps<typeof Appbar> & {
   /**
    * Whether the background color is a dark color. A dark header will render light text and vice-versa.
    */

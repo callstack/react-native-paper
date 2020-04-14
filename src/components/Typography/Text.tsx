@@ -3,7 +3,7 @@ import { Text as NativeText, TextStyle, StyleProp } from 'react-native';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 
-type Props = React.ComponentPropsWithRef<typeof NativeText> & {
+type Props = React.ComponentProps<typeof NativeText> & {
   style?: StyleProp<TextStyle>;
   /**
    * @optional

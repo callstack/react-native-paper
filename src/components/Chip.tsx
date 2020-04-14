@@ -19,7 +19,7 @@ import { withTheme } from '../core/theming';
 import { black, white } from '../styles/colors';
 import { Theme } from '../types';
 
-type Props = React.ComponentPropsWithRef<typeof Surface> & {
+type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Mode of the chip.
    * - `flat` - flat chip without outline.

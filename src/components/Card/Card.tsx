@@ -17,7 +17,7 @@ import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 
-type Props = React.ComponentPropsWithRef<typeof Surface> & {
+type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Resting elevation of the card which controls the drop shadow.
    */

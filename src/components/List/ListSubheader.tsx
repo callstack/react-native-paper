@@ -5,7 +5,7 @@ import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 
-type Props = React.ComponentPropsWithRef<typeof Text> & {
+type Props = React.ComponentProps<typeof Text> & {
   /**
    * @optional
    */
