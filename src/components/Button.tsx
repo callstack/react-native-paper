@@ -48,6 +48,10 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   icon?: IconSource;
   /**
+   * Size of the icon's button.
+   */
+  iconSize?: number;
+  /**
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean;
@@ -163,6 +167,7 @@ class Button extends React.Component<Props, State> {
       dark,
       loading,
       icon,
+      iconSize,
       color: buttonColor,
       children,
       uppercase,
@@ -230,10 +235,7 @@ class Button extends React.Component<Props, State> {
       textColor = colors.primary;
     }
 
-    const rippleColor = color(textColor)
-      .alpha(0.32)
-      .rgb()
-      .string();
+    const rippleColor = color(textColor).alpha(0.32).rgb().string();
     const buttonStyle = {
       backgroundColor,
       borderColor,
@@ -279,7 +281,11 @@ class Button extends React.Component<Props, State> {
           <View style={[styles.content, contentStyle]}>
             {icon && loading !== true ? (
               <View style={styles.icon}>
-                <Icon source={icon} size={16} color={textColor} />
+                <Icon
+                  source={icon}
+                  size={iconSize ? iconSize : 16}
+                  color={textColor}
+                />
               </View>
             ) : null}
             {loading ? (
