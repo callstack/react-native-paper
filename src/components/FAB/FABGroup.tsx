@@ -97,22 +97,22 @@ type State = {
  * <div class="screenshots">
  *   <img src="screenshots/fab-group.png" />
  * </div>
- * 
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
  * import { FAB, Portal, Provider } from 'react-native-paper';
- * 
+ *
  * export default class MyComponent extends React.Component {
  *   state = {
  *     open: false,
  *   };
- * 
+ *
  *   _onStateChange = ({ open }) => this.setState({ open });
- * 
+ *
  *   render() {
  *     const { open } = this.state;
- * 
+ *
  *     return (
  *       <Provider>
  *          <Portal>
@@ -137,7 +137,7 @@ type State = {
  *     );
  *   }
  * }
- *  ```
+ * ```
  */
 class FABGroup extends React.Component<Props, State> {
   static displayName = 'FAB.Group';
