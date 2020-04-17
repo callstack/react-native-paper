@@ -1,27 +1,21 @@
 import * as React from 'react';
-import {
-  Image,
-  StyleSheet,
-  View,
-  ViewStyle,
-  StyleProp,
-  ImageSourcePropType,
-} from 'react-native';
+import { Image, StyleSheet, View, ViewStyle, StyleProp } from 'react-native';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 
 const defaultSize = 64;
 
-type Props = {
-  /**
-   * Image to display for the `Avatar`.
-   */
-  source: ImageSourcePropType;
+type Props = React.ComponentProps<typeof Image> & {
   /**
    * Size of the avatar.
    */
   size?: number;
   style?: StyleProp<ViewStyle>;
+  /**
+   * Override default image component. The default Image props are provided.
+   * @optional
+   */
+  ImageComponent?: React.ComponentType<any>;
   /**
    * @optional
    */
@@ -55,11 +49,20 @@ class AvatarImage extends React.Component<Props> {
   };
 
   render() {
-    const { size = defaultSize, source, style, theme } = this.props;
+    const {
+      size = defaultSize,
+      style,
+      theme,
+      ImageComponent,
+      source,
+      ...rest
+    } = this.props;
     const { colors } = theme;
 
     const { backgroundColor = colors.primary } =
       StyleSheet.flatten(style) || {};
+
+    const ImageOverridden = ImageComponent || Image;
 
     return (
       <View
@@ -73,7 +76,8 @@ class AvatarImage extends React.Component<Props> {
           style,
         ]}
       >
-        <Image
+        <ImageOverridden
+          {...rest}
           source={source}
           style={{ width: size, height: size, borderRadius: size / 2 }}
         />
