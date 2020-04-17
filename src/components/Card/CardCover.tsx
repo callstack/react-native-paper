@@ -15,6 +15,11 @@ type Props = React.ComponentProps<typeof Image> & {
   total?: number;
   style?: StyleProp<ViewStyle>;
   /**
+   * Override default image component. The default Image props are provided.
+   * @optional
+   */
+  ImageComponent?: React.ComponentType<any>;
+  /**
    * @optional
    */
   theme: Theme;
@@ -43,8 +48,10 @@ class CardCover extends React.Component<Props> {
   static displayName = 'Card.Cover';
 
   render() {
-    const { index, total, style, theme, ...rest } = this.props;
+    const { index, total, style, theme, ImageComponent, ...rest } = this.props;
     const { roundness } = theme;
+
+    const ImageOverridden = ImageComponent || Image;
 
     let coverStyle;
 
@@ -67,7 +74,7 @@ class CardCover extends React.Component<Props> {
 
     return (
       <View style={[styles.container, coverStyle, style]}>
-        <Image {...rest} style={[styles.image, coverStyle]} />
+        <ImageOverridden {...rest} style={[styles.image, coverStyle]} />
       </View>
     );
   }
