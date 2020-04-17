@@ -135,6 +135,7 @@ class CardTitle extends React.Component<Props> {
                 { marginBottom: subtitle ? 0 : 2 },
                 titleStyle,
               ]}
+              numberOfLines={1}
             >
               {title}
             </Title>
