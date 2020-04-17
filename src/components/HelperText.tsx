@@ -12,7 +12,7 @@ import { withTheme } from '../core/theming';
 import { Theme, $Omit } from '../types';
 
 type Props = $Omit<
-  $Omit<React.ComponentProps<typeof AnimatedText>, 'padding'>,
+  $Omit<React.ComponentPropsWithRef<typeof AnimatedText>, 'padding'>,
   'type'
 > & {
   /**

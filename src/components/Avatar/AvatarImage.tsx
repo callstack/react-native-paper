@@ -12,7 +12,7 @@ import { Theme } from '../../types';
 
 const defaultSize = 64;
 
-type Props = {
+type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Image to display for the `Avatar`.
    */
@@ -55,7 +55,7 @@ class AvatarImage extends React.Component<Props> {
   };
 
   render() {
-    const { size = defaultSize, source, style, theme } = this.props;
+    const { size = defaultSize, source, style, theme, ...rest } = this.props;
     const { colors } = theme;
 
     const { backgroundColor = colors.primary } =
@@ -72,6 +72,7 @@ class AvatarImage extends React.Component<Props> {
           },
           style,
         ]}
+        {...rest}
       >
         <Image
           source={source}
