@@ -1,11 +1,11 @@
 import * as React from 'react';
 import color from 'color';
-import { StyleProp, ViewStyle } from 'react-native';
+import { StyleProp, ViewStyle, TouchableWithoutFeedback } from 'react-native';
 import { black } from '../../styles/colors';
 import IconButton from '../IconButton';
 import { IconSource } from '../Icon';
 
-type Props = React.ComponentProps<typeof IconButton> & {
+type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
   /**
    *  Custom color for action icon.
    */
@@ -31,6 +31,7 @@ type Props = React.ComponentProps<typeof IconButton> & {
    */
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
+  ref?: React.RefObject<TouchableWithoutFeedback>;
 };
 
 /**

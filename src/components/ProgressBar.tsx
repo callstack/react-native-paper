@@ -13,7 +13,7 @@ import setColor from 'color';
 import { withTheme } from '../core/theming';
 import { Theme } from '../types';
 
-type Props = {
+type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Progress value (between 0 and 1).
    */
@@ -166,7 +166,17 @@ class ProgressBar extends React.Component<Props, State> {
   };
 
   render() {
-    const { color, indeterminate, style, theme } = this.props;
+    const {
+      color,
+      indeterminate,
+      style,
+      theme,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      progress,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      visible,
+      ...rest
+    } = this.props;
     const { fade, timer, width } = this.state;
     const tintColor = color || theme.colors.primary;
     const trackTintColor = setColor(tintColor)
@@ -175,7 +185,7 @@ class ProgressBar extends React.Component<Props, State> {
       .string();
 
     return (
-      <View onLayout={this.onLayout}>
+      <View onLayout={this.onLayout} {...rest}>
         <Animated.View
           style={[
             styles.container,

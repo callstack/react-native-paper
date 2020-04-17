@@ -11,7 +11,7 @@ import {
 import { withTheme } from '../core/theming';
 import { Theme } from '../types';
 
-type Props = React.ComponentProps<typeof View> & {
+type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Whether to show the indicator or hide it.
    */

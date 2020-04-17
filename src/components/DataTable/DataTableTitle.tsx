@@ -14,7 +14,7 @@ import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 
-type Props = React.ComponentProps<typeof TouchableWithoutFeedback> & {
+type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
   /**
    * Text content of the `DataTableTitle`.
    */
