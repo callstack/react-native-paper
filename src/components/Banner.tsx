@@ -43,6 +43,7 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   contentStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
+  ref?: React.RefObject<View>;
   /**
    * @optional
    */

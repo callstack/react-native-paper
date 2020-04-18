@@ -5,6 +5,7 @@ import {
   StyleProp,
   StyleSheet,
   ViewStyle,
+  View,
 } from 'react-native';
 
 import Button from './Button';
@@ -13,7 +14,7 @@ import Text from './Typography/Text';
 import { withTheme } from '../core/theming';
 import { Theme } from '../types';
 
-type Props = {
+type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Whether the Snackbar is currently visible.
    */
@@ -41,6 +42,7 @@ type Props = {
    */
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
+  ref?: React.RefObject<View>;
   /**
    * @optional
    */
@@ -209,7 +211,17 @@ class Snackbar extends React.Component<Props, State> {
   private hideTimeout?: number;
 
   render() {
-    const { children, visible, action, onDismiss, theme, style } = this.props;
+    const {
+      children,
+      visible,
+      action,
+      onDismiss,
+      theme,
+      style,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      duration,
+      ...rest
+    } = this.props;
     const { colors, roundness } = theme;
 
     if (this.state.hidden) {
@@ -242,6 +254,7 @@ class Snackbar extends React.Component<Props, State> {
               style,
             ] as StyleProp<ViewStyle>
           }
+          {...rest}
         >
           <Text
             style={[

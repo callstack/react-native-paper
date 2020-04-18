@@ -13,7 +13,7 @@ import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 
-type Props = React.ComponentProps<typeof View> & {
+type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * The currently visible page (starting with 0).
    */
