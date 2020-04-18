@@ -4,7 +4,10 @@ import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import IconButton from '../../IconButton';
 import { $Omit, Theme } from '../../../../src/types';
 
-type Props = $Omit<React.ComponentProps<typeof IconButton>, 'icon' | 'theme'> & {
+type Props = $Omit<
+  React.ComponentProps<typeof IconButton>,
+  'icon' | 'theme'
+> & {
   name: string;
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
