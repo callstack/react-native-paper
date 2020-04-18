@@ -94,7 +94,7 @@ const IconButton = ({
   theme,
   style,
   ...rest
-}: IconButtonProps) => {
+}: Props) => {
   const iconColor =
     typeof customColor !== 'undefined' ? customColor : theme.colors.text;
   const rippleColor = color(iconColor)
