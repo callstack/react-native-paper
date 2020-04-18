@@ -15,7 +15,7 @@ import { withTheme } from '../core/theming';
 
 import { Theme, $RemoveChildren } from '../types';
 
-export type IconButtonProps = $RemoveChildren<typeof TouchableRipple> & {
+type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Icon to display.
    */
