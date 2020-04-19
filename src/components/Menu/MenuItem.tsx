@@ -122,9 +122,11 @@ const iconWidth = 40;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 8,
+    paddingHorizontal: 8,
     minWidth,
     maxWidth,
+    height: 48,
+    justifyContent: 'center',
   },
   row: {
     flexDirection: 'row',
@@ -136,7 +138,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   item: {
-    margin: 8,
+    marginHorizontal: 8,
   },
   content: {
     justifyContent: 'center',
