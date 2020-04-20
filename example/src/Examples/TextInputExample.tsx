@@ -18,6 +18,7 @@ type State = {
   name: string;
   outlinedText: string;
   largeText: string;
+  flatTextPassword: string;
   outlinedLargeText: string;
   nameNoPadding: string;
   flatDenseText: string;
@@ -29,6 +30,11 @@ type State = {
   outlinedMultiline: string;
   outlinedTextArea: string;
   maxLengthName: string;
+  flatTextSecureEntry: boolean;
+  outlineTextSecureEntry: boolean;
+  iconsColor: {
+    [key: string]: string | undefined;
+  };
 };
 
 class TextInputExample extends React.Component<Props, State> {
@@ -39,7 +45,9 @@ class TextInputExample extends React.Component<Props, State> {
     name: '',
     outlinedText: '',
     largeText: '',
+    flatTextPassword: 'Password',
     outlinedLargeText: '',
+    outlinedTextPassword: 'Password',
     nameNoPadding: '',
     flatDenseText: '',
     flatDense: '',
@@ -50,9 +58,36 @@ class TextInputExample extends React.Component<Props, State> {
     outlinedMultiline: '',
     outlinedTextArea: '',
     maxLengthName: '',
+    flatTextSecureEntry: true,
+    outlineTextSecureEntry: true,
+    iconsColor: {
+      flatLeftIcon: undefined,
+      flatRightIcon: undefined,
+      outlineLeftIcon: undefined,
+      outlineRightIcon: undefined,
+    },
   };
 
   _isUsernameValid = (name: string) => /^[a-zA-Z]*$/.test(name);
+
+  _changeIconColor = (name: string) => {
+    const {
+      theme: {
+        colors: { accent },
+      },
+    } = this.props;
+
+    const { iconsColor: currentColors } = this.state;
+
+    const color = (currentColors as State['iconsColor'])[name];
+
+    const iconsColor = {
+      ...currentColors,
+      [name]: !color ? accent : undefined,
+    };
+
+    this.setState({ iconsColor });
+  };
 
   render() {
     const {
@@ -81,8 +116,9 @@ class TextInputExample extends React.Component<Props, State> {
             left={
               <TextInput.Icon
                 name="heart"
+                color={this.state.iconsColor['flatLeftIcon']}
                 onPress={() => {
-                  console.log('!@# press left');
+                  this._changeIconColor('flatLeftIcon');
                 }}
               />
             }
@@ -91,16 +127,37 @@ class TextInputExample extends React.Component<Props, State> {
           <TextInput
             style={[styles.inputContainerStyle, styles.fontSize]}
             label="Flat input large font"
-            // placeholder="Type something"
+            placeholder="Type something"
             value={this.state.largeText}
             onChangeText={largeText => this.setState({ largeText })}
             left={<TextInput.Affix text="#" />}
             right={
               <TextInput.Icon
                 name="heart"
+                color={this.state.iconsColor['flatRightIcon']}
                 onPress={() => {
-                  console.log('!@# press right');
+                  this._changeIconColor('flatRightIcon');
                 }}
+              />
+            }
+          />
+          <TextInput
+            style={[styles.inputContainerStyle, styles.fontSize]}
+            label="Flat input large font"
+            placeholder="Type something"
+            value={this.state.flatTextPassword}
+            onChangeText={flatTextPassword =>
+              this.setState({ flatTextPassword })
+            }
+            secureTextEntry={this.state.flatTextSecureEntry}
+            right={
+              <TextInput.Icon
+                name={this.state.flatTextSecureEntry ? 'eye' : 'eye-off'}
+                onPress={() =>
+                  this.setState({
+                    flatTextSecureEntry: !this.state.flatTextSecureEntry,
+                  })
+                }
               />
             }
           />
@@ -151,8 +208,9 @@ class TextInputExample extends React.Component<Props, State> {
             left={
               <TextInput.Icon
                 name="heart"
+                color={this.state.iconsColor['outlineLeftIcon']}
                 onPress={() => {
-                  console.log('!@# press left');
+                  this._changeIconColor('outlineLeftIcon');
                 }}
               />
             }
@@ -171,9 +229,31 @@ class TextInputExample extends React.Component<Props, State> {
             right={
               <TextInput.Icon
                 name="heart"
+                color={this.state.iconsColor['outlineRightIcon']}
                 onPress={() => {
-                  console.log('!@# press right');
+                  this._changeIconColor('outlineRightIcon');
                 }}
+              />
+            }
+          />
+          <TextInput
+            mode="outlined"
+            style={[styles.inputContainerStyle, styles.fontSize]}
+            label="Outlined large font"
+            placeholder="Type something"
+            value={this.state.outlinedTextPassword}
+            onChangeText={outlinedLargeText =>
+              this.setState({ outlinedLargeText })
+            }
+            secureTextEntry={this.state.outlineTextSecureEntry}
+            right={
+              <TextInput.Icon
+                name={this.state.outlineTextSecureEntry ? 'eye' : 'eye-off'}
+                onPress={() =>
+                  this.setState({
+                    outlineTextSecureEntry: !this.state.outlineTextSecureEntry,
+                  })
+                }
               />
             }
           />
