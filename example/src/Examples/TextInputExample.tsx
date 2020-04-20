@@ -119,7 +119,6 @@ class TextInputExample extends React.Component<Props, State> {
                 color={this.state.iconsColor['flatLeftIcon']}
                 onPress={() => {
                   this._changeIconColor('flatLeftIcon');
-                  console.warn('dd');
                 }}
               />
             }
