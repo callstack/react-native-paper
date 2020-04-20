@@ -108,7 +108,7 @@ class TextInputExample extends React.Component<Props, State> {
           removeClippedSubviews={false}
         >
           <TextInput
-            style={[styles.inputContainerStyle, styles.fontSize]}
+            style={styles.inputContainerStyle}
             label="Flat input"
             placeholder="Type something"
             value={this.state.text}
@@ -119,6 +119,7 @@ class TextInputExample extends React.Component<Props, State> {
                 color={this.state.iconsColor['flatLeftIcon']}
                 onPress={() => {
                   this._changeIconColor('flatLeftIcon');
+                  console.warn('dd');
                 }}
               />
             }
