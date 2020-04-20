@@ -4,9 +4,6 @@ import {
   TextInput as NativeTextInput,
   Platform,
   LayoutChangeEvent,
-  // StyleProp,
-  // ViewStyle,
-  // TextStyle,
 } from 'react-native';
 import TextInputOutlined from './TextInputOutlined';
 import TextInputFlat from './TextInputFlat';
@@ -170,10 +167,10 @@ export type TextInputProps = React.ComponentPropsWithRef<
  */
 
 class TextInput extends React.Component<TextInputProps, State> {
-  // @component ./Icon.tsx
+  // @component ./Adornment/Icon.tsx
   static Icon = TextInputIcon;
 
-  // @component ./Affix.tsx
+  // @component ./Adornment/Affix.tsx
   static Affix = TextInputAffix;
 
   static defaultProps: Partial<TextInputProps> = {
