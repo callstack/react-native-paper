@@ -66,10 +66,9 @@ type Props = {
  *
  *   render() {
  *     return(
- *       <Checkbox.Group>
- *           <Checkbox.Item label="First item" status="checked" />
- *           <Checkbox.Item label="Second item" value="unchecked" />
- *       </Checkbox.Group>
+ *       <View>
+ *           <Checkbox.Item label="Item" status="checked" />
+ *       </View>
  *     )
  *   }
  * }

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
-import CheckboxGroup from './CheckboxGroup';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import CheckboxIOS, { CheckboxIOS as _CheckboxIOS } from './CheckboxIOS';
 import CheckboxAndroid, {
@@ -82,9 +81,6 @@ type Props = {
  * ```
  */
 class Checkbox extends React.Component<Props> {
-  // @component ./CheckboxGroup.tsx
-  static Group = CheckboxGroup;
-
   // @component ./CheckboxAndroid.tsx
   static Android = CheckboxAndroid;
 
