@@ -17,35 +17,60 @@ type Props = $Omit<
 export const ICON_SIZE = 24;
 const ICON_OFFSET = 12;
 
-const StyleContext = React.createContext<{ style?: StyleProp<ViewStyle> }>({
+type StyleContextType = {
+  style: StyleProp<ViewStyle>;
+  isTextInputFocused: boolean;
+  forceFocus: () => void;
+};
+
+const StyleContext = React.createContext<StyleContextType>({
   style: {},
+  isTextInputFocused: false,
+  forceFocus: () => {},
 });
 
 export const IconAdornment: React.FunctionComponent<{
   testID: string;
   icon: React.ReactNode;
-  iconTopPosition: number;
+  topPosition: number;
   side: 'left' | 'right';
-}> = ({ icon, iconTopPosition, side }) => {
+} & Omit<StyleContextType, 'style'>> = ({
+  icon,
+  topPosition,
+  side,
+  isTextInputFocused,
+  forceFocus,
+}) => {
   const style = {
-    top: iconTopPosition,
+    top: topPosition,
     [side]: ICON_OFFSET,
   };
+  const contextState = { style, isTextInputFocused, forceFocus: forceFocus };
 
   return (
-    <StyleContext.Provider value={{ style }}>{icon}</StyleContext.Provider>
+    <StyleContext.Provider value={contextState}>{icon}</StyleContext.Provider>
   );
 };
 
 const TextInputIcon = ({ name, onPress, ...rest }: Props) => {
-  const { style } = React.useContext(StyleContext);
+  const { style, isTextInputFocused, forceFocus } = React.useContext(
+    StyleContext
+  );
+
+  const onPressWithFocusControl = React.useCallback(() => {
+    if (!isTextInputFocused) {
+      forceFocus();
+    }
+    onPress?.();
+  }, [forceFocus, isTextInputFocused, onPress]);
+
   return (
     <View style={[styles.container, style]}>
       <IconButton
         icon={name}
         style={styles.iconButton}
         size={ICON_SIZE}
-        onPress={onPress}
+        onPress={onPressWithFocusControl}
         {...rest}
       />
     </View>

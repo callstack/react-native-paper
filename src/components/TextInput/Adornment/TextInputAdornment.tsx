@@ -96,20 +96,24 @@ const captalize = (text: string) =>
   text.charAt(0).toUpperCase() + text.slice(1);
 
 export interface TextInputAdornmentProps {
+  forceFocus: () => void;
   adornmentConfig: AdornmentConfig[];
-  affixTopPosition: {
-    [AdornmentSide.Left]: number | null;
-    [AdornmentSide.Right]: number | null;
+  topPosition: {
+    [AdornmentType.Affix]: {
+      [AdornmentSide.Left]: number | null;
+      [AdornmentSide.Right]: number | null;
+    };
+    [AdornmentType.Icon]: number;
   };
   onAffixChange: {
     [AdornmentSide.Left]: (event: LayoutChangeEvent) => void;
     [AdornmentSide.Right]: (event: LayoutChangeEvent) => void;
   };
-  iconTopPosition: number;
   left?: React.ReactNode;
   right?: React.ReactNode;
   textStyle?: StyleProp<TextStyle>;
   visible?: Animated.Value;
+  isTextInputFocused: boolean;
 }
 
 const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
@@ -118,40 +122,44 @@ const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
   right,
   onAffixChange,
   textStyle,
-  affixTopPosition,
   visible,
-  iconTopPosition,
+  topPosition,
+  isTextInputFocused,
+  forceFocus,
 }) => {
   if (adornmentConfig.length) {
     return (
       <>
         {adornmentConfig.map(({ type, side }: AdornmentConfig) => {
-          let adornmentInputComponent;
+          let inputAdornmentComponent;
           if (side === AdornmentSide.Left) {
-            adornmentInputComponent = left;
+            inputAdornmentComponent = left;
           } else if (side === AdornmentSide.Right) {
-            adornmentInputComponent = right;
+            inputAdornmentComponent = right;
           }
 
+          const commonProps = {
+            key: side,
+            side: side,
+            testID: `${side}-${type}-adornment`,
+            isTextInputFocused,
+          };
           if (type === AdornmentType.Icon) {
             return (
               <IconAdornment
-                testID={`${side}-icon-adornment`}
-                key={side}
-                icon={adornmentInputComponent}
-                side={side}
-                iconTopPosition={iconTopPosition}
+                {...commonProps}
+                icon={inputAdornmentComponent}
+                topPosition={topPosition[AdornmentType.Icon]}
+                forceFocus={forceFocus}
               />
             );
           } else if (type === AdornmentType.Affix) {
             return (
               <AffixAdornment
-                testID={`${side}-affix-adornment`}
-                key={side}
-                affix={adornmentInputComponent}
-                side={side}
+                {...commonProps}
+                topPosition={topPosition[AdornmentType.Affix][side]}
+                affix={inputAdornmentComponent}
                 textStyle={textStyle}
-                affixTopPosition={affixTopPosition[side]}
                 onLayout={onAffixChange[side]}
                 visible={visible}
               />

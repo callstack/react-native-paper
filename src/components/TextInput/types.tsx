@@ -37,8 +37,9 @@ export type State = {
 export type ChildTextInputProps = {
   parentState: State;
   innerRef: (ref: NativeTextInput | null | undefined) => void;
-  onFocus?: (args: any) => void;
+  onFocus: (args: any) => void;
   onBlur?: (args: any) => void;
+  forceFocus: () => void;
   onChangeText?: (value: string) => void;
   onLayoutAnimatedText: (args: any) => void;
   onLeftAffixLayoutChange: (event: LayoutChangeEvent) => void;
