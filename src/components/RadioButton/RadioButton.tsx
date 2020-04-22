@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
-import RadioButtonGroup from './RadioButtonGroup';
 import RadioButtonAndroid from './RadioButtonAndroid';
 import RadioButtonIOS from './RadioButtonIOS';
-import RadioButtonItem from './RadioButtonItem';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 
@@ -92,19 +90,7 @@ export type Props = {
  * }
  * ```
  */
-class RadioButton extends React.Component<Props> {
-  // @component ./RadioButtonGroup.tsx
-  static Group = RadioButtonGroup;
-
-  // @component ./RadioButtonAndroid.tsx
-  static Android = RadioButtonAndroid;
-
-  // @component ./RadioButtonIOS.tsx
-  static IOS = RadioButtonIOS;
-
-  // @component ./RadioButtonItem.tsx
-  static Item = RadioButtonItem;
-
+export class RadioButton extends React.Component<Props> {
   render() {
     const Button = Platform.select({
       default: RadioButtonAndroid,

@@ -2,8 +2,6 @@ import color from 'color';
 import * as React from 'react';
 import { Animated, View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 import ActivityIndicator from '../ActivityIndicator';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import FABGroup, { FABGroup as _FABGroup } from './FABGroup';
 import Surface from '../Surface';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Text from '../Typography/Text';
@@ -98,10 +96,7 @@ type State = {
  * export default MyComponent;
  * ```
  */
-class FAB extends React.Component<Props, State> {
-  // @component ./FABGroup.tsx
-  static Group = FABGroup;
-
+export class FAB extends React.Component<Props, State> {
   static defaultProps = {
     visible: true,
   };

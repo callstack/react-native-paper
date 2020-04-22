@@ -11,7 +11,6 @@ import IconButton from '../IconButton';
 import ToggleButtonGroup, {
   ToggleButtonGroupContext,
 } from './ToggleButtonGroup';
-import ToggleButtonRow from './ToggleButtonRow';
 import { black, white } from '../../styles/colors';
 import { IconSource } from '../Icon';
 import { Theme } from '../../types';
@@ -95,12 +94,9 @@ type Props = {
  * }
  * ```
  */
-class ToggleButton extends React.Component<Props> {
+export class ToggleButton extends React.Component<Props> {
   // @component ./ToggleButtonGroup.tsx
   static Group = ToggleButtonGroup;
-
-  // @component ./ToggleButtonRow.tsx
-  static Row = ToggleButtonRow;
 
   render() {
     const {
