@@ -47,108 +47,99 @@ type Props = {
  * A component to show a single list item inside a Menu.
  *
  */
+function MenuItem({
+  icon,
+  title,
+  disabled,
+  onPress,
+  theme,
+  style,
+  testID,
+  titleStyle,
+  minWidth = 112,
+  maxWidth = 280,
+  iconWidth = 40,
+){
+  const styles = StyleSheet.create({
+    container: {
+      paddingHorizontal: 8,
+      minWidth,
+      maxWidth,
+      height: 48,
+      justifyContent: 'center',
+    },
+    row: {
+      flexDirection: 'row',
+    },
+    icon: {
+      width: iconWidth,
+    },
+    title: {
+      fontSize: 16,
+    },
+    item: {
+      marginHorizontal: 8,
+    },
+    content: {
+      justifyContent: 'center',
+      minWidth: minWidth - 16,
+      maxWidth: maxWidth - 16,
+    },
+    widthWithIcon: {
+      maxWidth: maxWidth - (iconWidth + 48),
+    },
+  });
+  const disabledColor = color(theme.dark ? white : black)
+    .alpha(0.32)
+    .rgb()
+    .string();
 
-class MenuItem extends React.Component<Props> {
-  static displayName = 'Menu.Item';
+  const titleColor = disabled
+    ? disabledColor
+    : color(theme.colors.text)
+        .alpha(0.87)
+        .rgb()
+        .string();
 
-  render() {
-    const {
-      icon,
-      title,
-      disabled,
-      onPress,
-      theme,
-      style,
-      testID,
-      titleStyle,
-    } = this.props;
+  const iconColor = disabled
+    ? disabledColor
+    : color(theme.colors.text)
+        .alpha(0.54)
+        .rgb()
+        .string();
 
-    const disabledColor = color(theme.dark ? white : black)
-      .alpha(0.32)
-      .rgb()
-      .string();
-
-    const titleColor = disabled
-      ? disabledColor
-      : color(theme.colors.text)
-          .alpha(0.87)
-          .rgb()
-          .string();
-
-    const iconColor = disabled
-      ? disabledColor
-      : color(theme.colors.text)
-          .alpha(0.54)
-          .rgb()
-          .string();
-
-    return (
-      <TouchableRipple
-        style={[styles.container, style]}
-        onPress={onPress}
-        disabled={disabled}
-        testID={testID}
-      >
-        <View style={styles.row}>
-          {icon ? (
-            <View style={[styles.item, styles.icon]} pointerEvents="box-none">
-              <Icon source={icon} size={24} color={iconColor} />
-            </View>
-          ) : null}
-          <View
-            style={[
-              styles.item,
-              styles.content,
-              icon ? styles.widthWithIcon : null,
-            ]}
-            pointerEvents="none"
-          >
-            <Text
-              numberOfLines={1}
-              style={[styles.title, { color: titleColor }, titleStyle]}
-            >
-              {title}
-            </Text>
+  return (
+    <TouchableRipple
+      style={[styles.container, style]}
+      onPress={onPress}
+      disabled={disabled}
+      testID={testID}
+    >
+      <View style={styles.row}>
+        {icon ? (
+          <View style={[styles.item, styles.icon]} pointerEvents="box-none">
+            <Icon source={icon} size={24} color={iconColor} />
           </View>
+        ) : null}
+        <View
+          style={[
+            styles.item,
+            styles.content,
+            icon ? styles.widthWithIcon : null,
+          ]}
+          pointerEvents="none"
+        >
+          <Text
+            numberOfLines={1}
+            style={[styles.title, { color: titleColor }, titleStyle]}
+          >
+            {title}
+          </Text>
         </View>
-      </TouchableRipple>
-    );
-  }
+      </View>
+    </TouchableRipple>
+  );
 }
-
-const minWidth = 112;
-const maxWidth = 280;
-const iconWidth = 40;
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 8,
-    minWidth,
-    maxWidth,
-    height: 48,
-    justifyContent: 'center',
-  },
-  row: {
-    flexDirection: 'row',
-  },
-  icon: {
-    width: iconWidth,
-  },
-  title: {
-    fontSize: 16,
-  },
-  item: {
-    marginHorizontal: 8,
-  },
-  content: {
-    justifyContent: 'center',
-    minWidth: minWidth - 16,
-    maxWidth: maxWidth - 16,
-  },
-  widthWithIcon: {
-    maxWidth: maxWidth - (iconWidth + 48),
-  },
-});
 
 export default withTheme(MenuItem);
 
