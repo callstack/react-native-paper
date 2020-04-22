@@ -7,6 +7,7 @@ import {
   TextStyle,
   StyleProp,
   Animated,
+  Platform,
 } from 'react-native';
 import {
   AdornmentConfig,
@@ -59,21 +60,21 @@ export function getAdornmentStyleAdjustmentForNativeInput({
   if (adornmentConfig.length) {
     const adornmentStyleAdjustmentForNativeInput = adornmentConfig.map(
       ({ type, side }: AdornmentConfig) => {
-        if (side === AdornmentSide.Left) {
-          return {
-            paddingLeft:
-              leftAffixWidth +
-              ADORNMENT_OFFSET +
-              (type === AdornmentType.Affix ? 0 : inputOffset),
-          };
-        } else {
-          return {
-            paddingRight:
-              rightAffixWidth +
-              ADORNMENT_OFFSET +
-              (type === AdornmentType.Affix ? 0 : inputOffset),
-          };
-        }
+        const isWeb = Platform.OS !== 'ios' && Platform.OS !== 'android';
+        const isLeftSide = side === AdornmentSide.Left;
+        const offset =
+          (isLeftSide ? leftAffixWidth : rightAffixWidth) + ADORNMENT_OFFSET;
+        const paddingKey = `padding${captalize(side)}`;
+
+        if (isWeb) return { [paddingKey]: offset };
+
+        const isAffix = type === AdornmentType.Affix;
+        const marginKey = `margin${captalize(side)}`;
+
+        return {
+          [marginKey]: isAffix ? 0 : offset,
+          [paddingKey]: isAffix ? offset : inputOffset,
+        };
       }
     );
     const allStyleAdjustmentsMerged = adornmentStyleAdjustmentForNativeInput.reduce(
@@ -90,6 +91,9 @@ export function getAdornmentStyleAdjustmentForNativeInput({
     return [{}];
   }
 }
+
+const captalize = (text: string) =>
+  text.charAt(0).toUpperCase() + text.slice(1);
 
 export interface TextInputAdornmentProps {
   adornmentConfig: AdornmentConfig[];

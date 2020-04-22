@@ -161,8 +161,10 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "textAlignVertical": "center",
           },
           Object {
+            "marginLeft": 0,
+            "marginRight": 36,
             "paddingLeft": 36,
-            "paddingRight": 44,
+            "paddingRight": 8,
           },
         ]
       }
@@ -467,7 +469,9 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "textAlignVertical": "center",
           },
           Object {
-            "paddingLeft": 44,
+            "marginLeft": 36,
+            "marginRight": 0,
+            "paddingLeft": 8,
             "paddingRight": 36,
           },
         ]
