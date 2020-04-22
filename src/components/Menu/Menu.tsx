@@ -540,7 +540,7 @@ class Menu extends React.Component<Props, State> {
         {this.isAnchorCoord() ? null : anchor}
         {rendered ? (
           <Portal>
-            {!noBackdrop && (
+            {noBackdrop ? null : (
               <TouchableWithoutFeedback onPress={onDismiss}>
                 <View style={StyleSheet.absoluteFill} />
               </TouchableWithoutFeedback>
