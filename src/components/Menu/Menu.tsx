@@ -57,6 +57,10 @@ type Props = {
    * @optional
    */
   theme: Theme;
+  /**
+   * Whether the Menu has an invisible back drop overlay for closing
+   */
+  noBackdrop: boolean;
 };
 
 type Layout = $Omit<$Omit<LayoutRectangle, 'x'>, 'y'>;
@@ -344,6 +348,7 @@ class Menu extends React.Component<Props, State> {
       theme,
       statusBarHeight,
       onDismiss,
+      noBackdrop,
     } = this.props;
 
     const {
@@ -535,9 +540,11 @@ class Menu extends React.Component<Props, State> {
         {this.isAnchorCoord() ? null : anchor}
         {rendered ? (
           <Portal>
-            <TouchableWithoutFeedback onPress={onDismiss}>
-              <View style={StyleSheet.absoluteFill} />
-            </TouchableWithoutFeedback>
+            {!noBackdrop && (
+              <TouchableWithoutFeedback onPress={onDismiss}>
+                <View style={StyleSheet.absoluteFill} />
+              </TouchableWithoutFeedback>
+            )}
             <View
               ref={ref => {
                 this.menu = ref;
