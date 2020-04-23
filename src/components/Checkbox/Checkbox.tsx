@@ -6,6 +6,7 @@ import CheckboxAndroid, {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   CheckboxAndroid as _CheckboxAndroid,
 } from './CheckboxAndroid';
+import CheckboxItem from './CheckboxItem';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 
@@ -81,6 +82,9 @@ type Props = {
  * ```
  */
 class Checkbox extends React.Component<Props> {
+  // @component ./CheckboxItem.tsx
+  static Item = CheckboxItem;
+
   // @component ./CheckboxAndroid.tsx
   static Android = CheckboxAndroid;
 
