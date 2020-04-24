@@ -1,74 +1,43 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import {
-  ActivityIndicator,
-  Colors,
-  FAB,
-  withTheme,
-  Theme,
-} from 'react-native-paper';
+import { ActivityIndicator, Colors, FAB, useTheme } from 'react-native-paper';
 
-type Props = {
-  theme: Theme;
-};
+const ActivityIndicatorExample = () => {
+  const [animating, setAnimating] = React.useState<boolean>(true);
+  const {
+    colors: { background },
+  } = useTheme();
 
-type State = {
-  animating: boolean;
-};
-
-class ActivityIndicatorExample extends React.Component<Props, State> {
-  static title = 'Activity Indicator';
-
-  state = {
-    animating: true,
-  };
-
-  render() {
-    const {
-      theme: {
-        colors: { background },
-      },
-    } = this.props;
-
-    return (
-      <View style={[styles.container, { backgroundColor: background }]}>
-        <View style={styles.row}>
-          <FAB
-            small
-            icon={this.state.animating ? 'pause' : 'play'}
-            onPress={() => {
-              this.setState({
-                animating: !this.state.animating,
-              });
-            }}
-          />
-        </View>
-
-        <View style={styles.row}>
-          <ActivityIndicator animating={this.state.animating} />
-        </View>
-
-        <View style={styles.row}>
-          <ActivityIndicator
-            animating={this.state.animating}
-            hidesWhenStopped={false}
-          />
-        </View>
-
-        <View style={styles.row}>
-          <ActivityIndicator animating={this.state.animating} size="large" />
-        </View>
-
-        <View style={styles.row}>
-          <ActivityIndicator
-            animating={this.state.animating}
-            color={Colors.red500}
-          />
-        </View>
+  return (
+    <View style={[styles.container, { backgroundColor: background }]}>
+      <View style={styles.row}>
+        <FAB
+          small
+          icon={animating ? 'pause' : 'play'}
+          onPress={() => setAnimating(!animating)}
+        />
       </View>
-    );
-  }
-}
+
+      <View style={styles.row}>
+        <ActivityIndicator animating={animating} />
+      </View>
+
+      <View style={styles.row}>
+        <ActivityIndicator animating={animating} hidesWhenStopped={false} />
+      </View>
+
+      <View style={styles.row}>
+        <ActivityIndicator animating={animating} size="large" />
+      </View>
+
+      <View style={styles.row}>
+        <ActivityIndicator animating={animating} color={Colors.red500} />
+      </View>
+    </View>
+  );
+};
+
+ActivityIndicatorExample.title = 'Activity Indicator';
 
 const styles = StyleSheet.create({
   container: {
@@ -83,4 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(ActivityIndicatorExample);
+export default ActivityIndicatorExample;
