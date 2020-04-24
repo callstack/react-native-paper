@@ -4,6 +4,7 @@ import {
   View,
   ScrollView,
   KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import { TextInput, HelperText, useTheme } from 'react-native-paper';
 import { inputReducer } from '../../utils';
@@ -13,6 +14,24 @@ const MAX_LENGTH = 20;
 const initialState = {
   text: '',
   maxLengthName: '',
+};
+
+type AvoidingViewProps = {
+  children: React.ReactNode;
+};
+
+const TextInputAvoidingView = ({ children }: AvoidingViewProps) => {
+  return Platform.OS === 'ios' ? (
+    <KeyboardAvoidingView
+      style={styles.wrapper}
+      behavior="padding"
+      keyboardVerticalOffset={80}
+    >
+      {children}
+    </KeyboardAvoidingView>
+  ) : (
+    <>{children}</>
+  );
 };
 
 const TextInputExample = () => {
@@ -48,11 +67,7 @@ const TextInputExample = () => {
     });
 
   return (
-    <KeyboardAvoidingView
-      style={styles.wrapper}
-      behavior="padding"
-      keyboardVerticalOffset={80}
-    >
+    <TextInputAvoidingView>
       <ScrollView
         style={[styles.container, { backgroundColor: background }]}
         keyboardShouldPersistTaps={'always'}
@@ -239,7 +254,7 @@ const TextInputExample = () => {
           </HelperText>
         </View>
       </ScrollView>
-    </KeyboardAvoidingView>
+    </TextInputAvoidingView>
   );
 };
 
