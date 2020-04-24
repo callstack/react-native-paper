@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { StyleSheet, View, I18nManager } from 'react-native';
 import color from 'color';
-import MaterialCommunityIcon from './MaterialCommunityIcon';
-import TouchableRipple from './TouchableRipple';
-import { withTheme } from '../core/theming';
-import { Theme, $RemoveChildren } from '../types';
+import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import TouchableRipple from '../TouchableRipple';
+import { withTheme } from '../../core/theming';
+import { Theme, $RemoveChildren } from '../../types';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
