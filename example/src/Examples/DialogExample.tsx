@@ -9,24 +9,17 @@ import {
   UndismissableDialog,
 } from './Dialogs';
 
+type ButtonVisibility = {
+  [key: string]: boolean | undefined;
+};
+
 const DialogExample = () => {
-  const [visible1, setVisible1] = React.useState<boolean>(false);
-  const [visible2, setVisible2] = React.useState<boolean>(false);
-  const [visible3, setVisible3] = React.useState<boolean>(false);
-  const [visible4, setVisible4] = React.useState<boolean>(false);
-  const [visible5, setVisible5] = React.useState<boolean>(false);
+  const [visible, setVisible] = React.useState<ButtonVisibility>({});
 
-  const _openDialog1 = () => setVisible1(true);
-  const _openDialog2 = () => setVisible2(true);
-  const _openDialog3 = () => setVisible3(true);
-  const _openDialog4 = () => setVisible4(true);
-  const _openDialog5 = () => setVisible5(true);
+  const _toggleDialog = (name: string) => () =>
+    setVisible({ ...visible, [name]: !visible[name] });
 
-  const _closeDialog1 = () => setVisible1(true);
-  const _closeDialog2 = () => setVisible2(true);
-  const _closeDialog3 = () => setVisible3(true);
-  const _closeDialog4 = () => setVisible4(true);
-  const _closeDialog5 = () => setVisible5(true);
+  const _getVisible = (name: string) => !!visible[name];
 
   const {
     colors: { background },
@@ -34,26 +27,61 @@ const DialogExample = () => {
 
   return (
     <View style={[styles.container, { backgroundColor: background }]}>
-      <Button mode="outlined" onPress={_openDialog1} style={styles.button}>
+      <Button
+        mode="outlined"
+        onPress={_toggleDialog('dialog1')}
+        style={styles.button}
+      >
         Long text
       </Button>
-      <Button mode="outlined" onPress={_openDialog2} style={styles.button}>
+      <Button
+        mode="outlined"
+        onPress={_toggleDialog('dialog2')}
+        style={styles.button}
+      >
         Radio buttons
       </Button>
-      <Button mode="outlined" onPress={_openDialog3} style={styles.button}>
+      <Button
+        mode="outlined"
+        onPress={_toggleDialog('dialog3')}
+        style={styles.button}
+      >
         Progress indicator
       </Button>
-      <Button mode="outlined" onPress={_openDialog4} style={styles.button}>
+      <Button
+        mode="outlined"
+        onPress={_toggleDialog('dialog4')}
+        style={styles.button}
+      >
         Undismissable Dialog
       </Button>
-      <Button mode="outlined" onPress={_openDialog5} style={styles.button}>
+      <Button
+        mode="outlined"
+        onPress={_toggleDialog('dialog5')}
+        style={styles.button}
+      >
         Custom colors
       </Button>
-      <DialogWithLongText visible={visible1} close={_closeDialog1} />
-      <DialogWithRadioBtns visible={visible2} close={_closeDialog2} />
-      <DialogWithLoadingIndicator visible={visible3} close={_closeDialog3} />
-      <UndismissableDialog visible={visible4} close={_closeDialog4} />
-      <DialogWithCustomColors visible={visible5} close={_closeDialog5} />
+      <DialogWithLongText
+        visible={_getVisible('dialog1')}
+        close={_toggleDialog('dialog1')}
+      />
+      <DialogWithRadioBtns
+        visible={_getVisible('dialog2')}
+        close={_toggleDialog('dialog2')}
+      />
+      <DialogWithLoadingIndicator
+        visible={_getVisible('dialog3')}
+        close={_toggleDialog('dialog3')}
+      />
+      <UndismissableDialog
+        visible={_getVisible('dialog4')}
+        close={_toggleDialog('dialog4')}
+      />
+      <DialogWithCustomColors
+        visible={_getVisible('dialog5')}
+        close={_toggleDialog('dialog5')}
+      />
     </View>
   );
 };

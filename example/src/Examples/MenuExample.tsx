@@ -22,23 +22,22 @@ type Props = {
   navigation: StackNavigationProp<{}>;
 };
 
+type MenuVisibility = {
+  [key: string]: boolean | undefined;
+};
+
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
 const MenuExample = ({ navigation }: Props) => {
-  const [visible1, setVisible1] = React.useState<boolean>(false);
-  const [visible2, setVisible2] = React.useState<boolean>(false);
-  const [visible3, setVisible3] = React.useState<boolean>(false);
+  const [visible, setVisible] = React.useState<MenuVisibility>({});
   const [contextualMenuCoord, setContextualMenuCoor] = React.useState<
     ContextualMenuCoord
   >({ x: 0, y: 0 });
 
-  const _openMenu1 = () => setVisible1(true);
-  const _openMenu2 = () => setVisible2(true);
-  const _openMenu3 = () => setVisible3(true);
+  const _toggleMenu = (name: string) => () =>
+    setVisible({ ...visible, [name]: !visible[name] });
 
-  const _closeMenu1 = () => setVisible1(false);
-  const _closeMenu2 = () => setVisible2(false);
-  const _closeMenu3 = () => setVisible3(false);
+  const _getVisible = (name: string) => !!visible[name];
 
   const _handleLongPress = (event: GestureResponderEvent) => {
     const { nativeEvent } = event;
@@ -46,7 +45,7 @@ const MenuExample = ({ navigation }: Props) => {
       x: nativeEvent.pageX,
       y: nativeEvent.pageY,
     });
-    _openMenu3();
+    setVisible({ menu3: true });
   };
 
   const {
@@ -63,13 +62,13 @@ const MenuExample = ({ navigation }: Props) => {
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title="Menu" />
         <Menu
-          visible={visible1}
-          onDismiss={_closeMenu1}
+          visible={_getVisible('menu1')}
+          onDismiss={_toggleMenu('menu1')}
           anchor={
             <Appbar.Action
               icon={MORE_ICON}
               color="white"
-              onPress={_openMenu1}
+              onPress={_toggleMenu('menu1')}
             />
           }
         >
@@ -84,10 +83,10 @@ const MenuExample = ({ navigation }: Props) => {
       <View style={[styles.container, { backgroundColor: background }]}>
         <View style={styles.alignCenter}>
           <Menu
-            visible={visible2}
-            onDismiss={_closeMenu2}
+            visible={_getVisible('menu2')}
+            onDismiss={_toggleMenu('menu2')}
             anchor={
-              <Button mode="outlined" onPress={_openMenu2}>
+              <Button mode="outlined" onPress={_toggleMenu('menu2')}>
                 Menu with icons
               </Button>
             }
@@ -111,8 +110,8 @@ const MenuExample = ({ navigation }: Props) => {
           </Menu>
         </View>
         <Menu
-          visible={visible3}
-          onDismiss={_closeMenu3}
+          visible={_getVisible('menu3')}
+          onDismiss={_toggleMenu('menu3')}
           anchor={contextualMenuCoord}
         >
           <Menu.Item onPress={() => {}} title="Item 1" />
@@ -123,8 +122,7 @@ const MenuExample = ({ navigation }: Props) => {
         <List.Section style={styles.list} title="Contextual menu">
           <TouchableRipple
             onPress={() => {}}
-            // @ts-ignore
-            onLongPress={_handleLongPress}
+            onLongPress={() => _handleLongPress}
           >
             <List.Item
               title="List item"
