@@ -31,6 +31,24 @@ type Props = IconProps & {
   theme: Theme;
 };
 
+/**
+ * ## Usage
+ * ```js
+ * import * as React from 'react';
+ * import { Icon, Colors } from 'react-native-paper';
+ *
+ * const MyComponent = () => (
+ *   <Icon
+ *     source="camera"
+ *     color={Colors.red500}
+ *     size={20}
+ *   />
+ * );
+ *
+ * export default MyComponent;
+ * ```
+ */
+
 const isImageSource = (source: any) =>
   // source is an object with uri
   (typeof source === 'object' &&

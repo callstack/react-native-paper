@@ -18,6 +18,7 @@ import DataTableExample from './Examples/DataTableExample';
 import DialogExample from './Examples/DialogExample';
 import DividerExample from './Examples/DividerExample';
 import FABExample from './Examples/FABExample';
+import IconExample from './Examples/IconExample';
 import IconButtonExample from './Examples/IconButtonExample';
 import ListAccordionExample from './Examples/ListAccordionExample';
 import ListAccordionExampleGroup from './Examples/ListAccordionGroupExample';
@@ -53,6 +54,7 @@ export const examples: Record<
   dialog: DialogExample,
   divider: DividerExample,
   fab: FABExample,
+  icon: IconExample,
   iconButton: IconButtonExample,
   listAccordion: ListAccordionExample,
   listAccordionGroup: ListAccordionExampleGroup,
