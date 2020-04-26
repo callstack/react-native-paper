@@ -234,7 +234,10 @@ class Snackbar extends React.Component<Props, State> {
     }
 
     return (
-      <SafeAreaView pointerEvents="box-none" style={[styles.wrapper, wrapperStyle]}>
+      <SafeAreaView 
+        pointerEvents="box-none" 
+        style={[styles.wrapper, wrapperStyle]}
+      >
         <Surface
           pointerEvents="box-none"
           accessibilityLiveRegion="polite"
