@@ -92,7 +92,7 @@ class CheckboxIOS extends React.Component<Props> {
             name={icon}
             size={24}
             color={checkedColor}
-            direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+            direction="ltr"
           />
         </View>
       </TouchableRipple>

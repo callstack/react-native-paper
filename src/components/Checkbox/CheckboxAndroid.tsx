@@ -145,7 +145,7 @@ class CheckboxAndroid extends React.Component<Props, State> {
             name={icon}
             size={24}
             color={checkboxColor}
-            direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+            direction="ltr"
           />
           <View style={[StyleSheet.absoluteFill, styles.fillContainer]}>
             <Animated.View
