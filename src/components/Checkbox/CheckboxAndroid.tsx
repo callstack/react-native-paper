@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, View, StyleSheet, I18nManager } from 'react-native';
+import { Animated, View, StyleSheet } from 'react-native';
 import color from 'color';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple';
