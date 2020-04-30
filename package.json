@@ -59,7 +59,6 @@
     "@types/color": "^3.0.0",
     "@types/jest": "^24.0.13",
     "@types/node": "^13.1.0",
-    "@types/reach__router": "^1.2.4",
     "@types/react-dom": "^16.8.4",
     "@types/react-native": "^0.57.61",
     "@types/react-native-vector-icons": "^6.4.1",
@@ -93,7 +92,7 @@
     "react-test-renderer": "16.8.3",
     "release-it": "^13.4.0",
     "rimraf": "^3.0.2",
-    "typescript": "^3.7.1"
+    "typescript": "^3.8.3"
   },
   "peerDependencies": {
     "react": "*",
