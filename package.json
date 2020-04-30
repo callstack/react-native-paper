@@ -1,6 +1,6 @@
 {
   "name": "react-native-paper",
-  "version": "3.8.0",
+  "version": "3.9.0",
   "description": "Material design for React Native",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
