@@ -130,10 +130,9 @@ class AppbarHeader extends React.Component<Props> {
           ] as StyleProp<ViewStyle>
         }
       >
-        {/* $FlowFixMe: There seems to be conflict between Appbar's props and Header's props */}
         <Appbar
-          //@ts-ignore
           style={[
+            //@ts-ignore
             { height, backgroundColor, marginTop: statusBarHeight },
             styles.appbar,
             restStyle,

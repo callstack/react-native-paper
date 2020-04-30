@@ -54,6 +54,7 @@ android/keystores/debug.keystore
 # Build
 #
 dist/
+web-build/
 
 # Release
 #
