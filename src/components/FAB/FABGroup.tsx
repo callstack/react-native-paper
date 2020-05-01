@@ -61,7 +61,7 @@ type Props = {
    * Callback which is called on opening and closing the speed dial.
    * The open state needs to be updated when it's called, otherwise the change is dropped.
    */
-  onStateChange: (state: { open: boolean }) => void;
+  onStateChange: (state: { open: boolean, origin: 'action' | 'backdrop' }) => void;
   /**
    * Whether `FAB` is currently visible.
    */
@@ -200,9 +200,9 @@ class FABGroup extends React.Component<Props, State> {
     }
   }
 
-  private close = () => this.props.onStateChange({ open: false });
+  private close = (origin: 'backdrop' | 'action' = 'backdrop') => this.props.onStateChange({ open: false, origin });
 
-  private toggle = () => this.props.onStateChange({ open: !this.props.open });
+  private toggle = () => this.props.onStateChange({ open: !this.props.open, origin: 'action' });
 
   render() {
     const {
@@ -277,7 +277,7 @@ class FABGroup extends React.Component<Props, State> {
                     }
                     onPress={() => {
                       it.onPress();
-                      this.close();
+                      this.close('action');
                     }}
                     accessibilityLabel={
                       it.accessibilityLabel !== 'undefined'
@@ -307,7 +307,7 @@ class FABGroup extends React.Component<Props, State> {
                   }
                   onPress={() => {
                     it.onPress();
-                    this.close();
+                    this.close('action');
                   }}
                   accessibilityLabel={
                     typeof it.accessibilityLabel !== 'undefined'
