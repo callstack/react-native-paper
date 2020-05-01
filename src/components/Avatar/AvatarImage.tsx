@@ -6,6 +6,7 @@ import {
   ViewStyle,
   StyleProp,
   ImageSourcePropType,
+  ImageProps,
 } from 'react-native';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
@@ -18,9 +19,9 @@ type Props = {
    */
   source: ImageSourcePropType;
   /**
-   * Pass any props to the `Image`
+   * Pass any image props to the `Image`
    */
-  imageProps?: object;
+  imageProps?: ImageProps;
   /**
    * Size of the avatar.
    */
