@@ -96,7 +96,7 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { View } from 'react-native';
+ * import { View, TouchableWithoutFeedback, StyleSheet } from 'react-native';
  * import { Button, Paragraph, Menu, Divider, Provider } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
@@ -123,6 +123,11 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
  *             anchor={
  *               <Button onPress={this._openMenu}>Show menu</Button>
  *             }
+ *             renderBackdrop={(dismiss) => (
+ *               <TouchableWithoutFeedback onPress={onDismiss}>
+ *                 <View style={StyleSheet.absoluteFill} />
+ *               </TouchableWithoutFeedback>
+ *             )}
  *           >
  *             <Menu.Item onPress={() => {}} title="Item 1" />
  *             <Menu.Item onPress={() => {}} title="Item 2" />
