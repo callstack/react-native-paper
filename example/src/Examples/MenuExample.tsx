@@ -4,6 +4,8 @@ import {
   StyleSheet,
   Platform,
   GestureResponderEvent,
+  TouchableWithoutFeedback as TouchableWithoutFeedbackRN,
+  TouchableOpacity as TouchableOpacityRN,
 } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import {
@@ -15,6 +17,12 @@ import {
   List,
   TouchableRipple,
 } from 'react-native-paper';
+import {
+  TapGestureHandler,
+  TouchableOpacity as TouchableOpacityRNGH,
+  TouchableWithoutFeedback as TouchableWithoutFeedbackRNGH,
+} from 'react-native-gesture-handler';
+import Animated from 'react-native-reanimated';
 
 type ContextualMenuCoord = { x: number; y: number };
 
@@ -55,6 +63,9 @@ const MenuExample = ({ navigation }: Props) => {
   navigation.setOptions({
     headerShown: false,
   });
+
+  const TouchableOpacity =
+    Platform.OS === 'android' ? TouchableOpacityRNGH : TouchableOpacityRN;
 
   return (
     <View style={styles.screen}>
@@ -130,12 +141,50 @@ const MenuExample = ({ navigation }: Props) => {
             />
           </TouchableRipple>
         </List.Section>
+        <TapGestureHandler>
+          <Animated.View>
+            <Menu
+              visible={_getVisible('menu4')}
+              onDismiss={_toggleMenu('menu4')}
+              renderBackdrop={onDismiss =>
+                Platform.OS === 'android' ? (
+                  // use react-native-gesture-handler to still get onPress event on android
+                  <TouchableWithoutFeedbackRNGH
+                    onPress={onDismiss}
+                    containerStyle={styles.backdrop}
+                  />
+                ) : (
+                  <TouchableWithoutFeedbackRN onPress={onDismiss}>
+                    <View style={styles.backdrop} />
+                  </TouchableWithoutFeedbackRN>
+                )
+              }
+              anchor={
+                // react-native-gesture-handler touchable used on android, so this would steal
+                // the onPress event from the react-native default backdrop touchable
+                <TouchableOpacity onPress={_toggleMenu('menu4')}>
+                  <List.Item
+                    title="List item"
+                    description="Press me to open a menu with a custom backdrop"
+                  />
+                </TouchableOpacity>
+              }
+            >
+              <Menu.Item onPress={() => {}} title="Item 1" />
+              <Menu.Item onPress={() => {}} title="Item 2" />
+              <Divider />
+              <Menu.Item onPress={() => {}} title="Item 3" disabled />
+            </Menu>
+          </Animated.View>
+        </TapGestureHandler>
       </View>
     </View>
   );
 };
 
 MenuExample.title = 'Menu';
+
+const backdropColor = '#00000066';
 
 const styles = StyleSheet.create({
   screen: {
@@ -150,6 +199,14 @@ const styles = StyleSheet.create({
   },
   alignCenter: {
     alignItems: 'center',
+  },
+  backdrop: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    backgroundColor: backdropColor,
   },
 });
 
