@@ -48,6 +48,13 @@ export type Props = {
 /**
  * RadioButton.Item allows you to press the whole row (item) instead of only the RadioButton.
  *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/radio-item.ios.png" />
+ *     <figcaption>Pressed</figcaption>
+ *   </figure>
+ * </div>
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
