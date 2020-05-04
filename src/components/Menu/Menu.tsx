@@ -45,6 +45,13 @@ type Props = {
    */
   onDismiss: () => void;
   /**
+   * Provide a custom component to render as a backdrop behind the opened menu.
+   * onDismiss callback has to be wired manual if a custom backdrop component is provided.
+   * The given onDismiss callback is passed through as an argument for convenience.
+   * Falls back to a transparent fullscreen TouchableWithoutFeedback from 'react-native'.
+   */
+  renderBackdrop?: (onDismiss: () => void) => React.ReactNode;
+  /**
    * Content of the `Menu`.
    */
   children: React.ReactNode;
@@ -344,6 +351,7 @@ class Menu extends React.Component<Props, State> {
       theme,
       statusBarHeight,
       onDismiss,
+      renderBackdrop,
     } = this.props;
 
     const {
@@ -535,9 +543,13 @@ class Menu extends React.Component<Props, State> {
         {this.isAnchorCoord() ? null : anchor}
         {rendered ? (
           <Portal>
-            <TouchableWithoutFeedback onPress={onDismiss}>
-              <View style={StyleSheet.absoluteFill} />
-            </TouchableWithoutFeedback>
+            {renderBackdrop ? (
+              renderBackdrop(onDismiss)
+            ) : (
+              <TouchableWithoutFeedback onPress={onDismiss}>
+                <View style={StyleSheet.absoluteFill} />
+              </TouchableWithoutFeedback>
+            )}
             <View
               ref={ref => {
                 this.menu = ref;
