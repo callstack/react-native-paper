@@ -24,10 +24,18 @@ export const ListAccordionGroupContext = React.createContext<
   ListAccordionGroupContextType
 >(null);
 
+type State = {
+  expandedId: string | number | undefined;
+};
+
 /**
  * List.AccordionGroup allows to control a group of List Accordions. Id prop for List.Accordion is required in order to group to work.
  * List.AccordionGroup can be controlled or uncontrolled component. Example shows uncontrolled version.
  * At most one Accordion will be expanded in given time.
+ *
+ * <div class="screenshots">
+ *   <img class="medium" src="screenshots/list-accordion-group.png" />
+ * </div>
  *
  * ## Usage
  * ```js
@@ -57,11 +65,6 @@ export const ListAccordionGroupContext = React.createContext<
  * }
  *```
  */
-
-type State = {
-  expandedId: string | number | undefined;
-};
-
 class ListAccordionGroup extends React.Component<Props, State> {
   static displayName = 'List.AccordionGroup';
 
