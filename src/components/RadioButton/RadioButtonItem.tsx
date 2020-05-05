@@ -109,7 +109,7 @@ class RadioButtonItem extends React.Component<Props> {
             >
               <View style={[styles.container, style]} pointerEvents="none">
                 <Text
-                  style={[styles.label, labelStyle, { color: colors.primary }]}
+                  style={[styles.label, { color: colors.text }, labelStyle]}
                 >
                   {label}
                 </Text>
