@@ -76,7 +76,7 @@ type Props = {
  */
 
 class CheckboxItem extends React.Component<Props> {
-  static displayName = 'RadioButton.Item';
+  static displayName = 'Checkbox.Item';
 
   render() {
     const {
