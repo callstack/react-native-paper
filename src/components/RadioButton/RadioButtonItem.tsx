@@ -28,6 +28,14 @@ export type Props = {
    */
   onPress?: () => void;
   /**
+   * Custom color for unchecked radio.
+   */
+  uncheckedColor?: string;
+  /**
+   * Custom color for radio.
+   */
+  color?: string;
+  /**
    * Status of radio button.
    */
   status?: 'checked' | 'unchecked';
@@ -47,6 +55,13 @@ export type Props = {
 
 /**
  * RadioButton.Item allows you to press the whole row (item) instead of only the RadioButton.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/radio-item.ios.png" />
+ *     <figcaption>Pressed</figcaption>
+ *   </figure>
+ * </div>
  *
  * ## Usage
  * ```js
@@ -83,6 +98,8 @@ class RadioButtonItem extends React.Component<Props> {
       style,
       labelStyle,
       onPress,
+      color,
+      uncheckedColor,
       status,
       theme: { colors },
     } = this.props;
@@ -102,11 +119,16 @@ class RadioButtonItem extends React.Component<Props> {
             >
               <View style={[styles.container, style]} pointerEvents="none">
                 <Text
-                  style={[styles.label, labelStyle, { color: colors.primary }]}
+                  style={[styles.label, { color: colors.text }, labelStyle]}
                 >
                   {label}
                 </Text>
-                <RadioButton value={value} status={status}></RadioButton>
+                <RadioButton
+                  value={value}
+                  status={status}
+                  color={color}
+                  uncheckedColor={uncheckedColor}
+                />
               </View>
             </TouchableRipple>
           );
