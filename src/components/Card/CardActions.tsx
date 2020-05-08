@@ -12,10 +12,22 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
 /**
  * A component to show a list of actions inside a Card.
  *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/card-actions.png" />
+ *   </figure>
+ * </div>
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/card-action-example.png" />
+ *   </figure>
+ * </div>
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Button, Card } from 'react-native-paper';
+ * import { Card, Button } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <Card>

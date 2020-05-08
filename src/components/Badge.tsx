@@ -36,6 +36,17 @@ type State = {
  * Badges are small status descriptors for UI elements.
  * A badge consists of a small circle, typically containing a number or other short set of characters, that appears in proximity to another object.
  *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img src="screenshots/text-badges.png" />
+ *     <figcaption>Text Badge</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/dot-badges.png" />
+ *     <figcaption>Dot Badge</figcaption>
+ *   </figure>
+ * </div>
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
