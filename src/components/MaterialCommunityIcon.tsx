@@ -56,6 +56,7 @@ try {
         <Text
           {...rest}
           style={[styles.icon, { color, fontSize: size }]}
+          // @ts-ignore
           pointerEvents="none"
         >
           □

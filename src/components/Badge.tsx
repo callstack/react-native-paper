@@ -38,12 +38,12 @@ type State = {
  *
  * <div class="screenshots">
  *   <figure>
- *     <img src="screenshots/text-badges.png" />
- *     <figcaption>Text Badge</figcaption>
+ *     <img class="small" src="screenshots/badge-1.png" />
+ *     <figcaption>Badge with content</figcaption>
  *   </figure>
  *   <figure>
- *     <img src="screenshots/dot-badges.png" />
- *     <figcaption>Dot Badge</figcaption>
+ *     <img class="small" src="screenshots/badge-2.png" />
+ *     <figcaption>Badge without content</figcaption>
  *   </figure>
  * </div>
  *

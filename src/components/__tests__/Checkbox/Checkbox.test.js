@@ -1,6 +1,6 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import Checkbox from '../Checkbox.tsx';
+import Checkbox from '../../Checkbox/Checkbox';
 
 it('renders checked Checkbox with onPress', () => {
   const tree = renderer

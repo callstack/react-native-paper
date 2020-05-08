@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Animated, View, StyleSheet, I18nManager } from 'react-native';
+import { Animated, View, StyleSheet } from 'react-native';
 import color from 'color';
-import MaterialCommunityIcon from './MaterialCommunityIcon';
-import TouchableRipple from './TouchableRipple';
-import { withTheme } from '../core/theming';
-import { Theme, $RemoveChildren } from '../types';
+import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import TouchableRipple from '../TouchableRipple';
+import { withTheme } from '../../core/theming';
+import { Theme, $RemoveChildren } from '../../types';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -145,7 +145,7 @@ class CheckboxAndroid extends React.Component<Props, State> {
             name={icon}
             size={24}
             color={checkboxColor}
-            direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+            direction="ltr"
           />
           <View style={[StyleSheet.absoluteFill, styles.fillContainer]}>
             <Animated.View
