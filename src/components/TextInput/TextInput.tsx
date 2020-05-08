@@ -74,6 +74,10 @@ export type TextInputProps = React.ComponentPropsWithRef<
   /**
    * Callback that is called when the text input is focused.
    */
+  secureTextEntry?: boolean;
+  /**
+   * Callback used to secure password(hide) when text is typed.
+   */
   onFocus?: (args: any) => void;
   /**
    * Callback that is called when the text input is blurred.
