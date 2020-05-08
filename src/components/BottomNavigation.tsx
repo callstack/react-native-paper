@@ -47,6 +47,7 @@ type TabPressEvent = {
 
 type TouchableProps = TouchableWithoutFeedbackProps & {
   key: string;
+  route: Route;
   children: React.ReactNode;
   borderless?: boolean;
   centered?: boolean;
@@ -277,20 +278,30 @@ const MAX_TAB_WIDTH = 168;
 const BAR_HEIGHT = 56;
 const FAR_FAR_AWAY = 9999;
 
-const Touchable = TouchableRipple.supported
-  ? TouchableRipple
-  : ({
-      style,
-      children,
-      borderless: _0,
-      centered: _1,
-      rippleColor: _2,
-      ...rest
-    }: TouchableProps) => (
-      <TouchableWithoutFeedback {...rest}>
-        <View style={style}>{children}</View>
-      </TouchableWithoutFeedback>
-    );
+const Touchable = ({
+  route: _0,
+  style,
+  children,
+  borderless,
+  centered,
+  rippleColor,
+  ...rest
+}: TouchableProps) =>
+  TouchableRipple.supported ? (
+    <TouchableRipple
+      {...rest}
+      borderless={borderless}
+      centered={centered}
+      rippleColor={rippleColor}
+      style={style}
+    >
+      {children}
+    </TouchableRipple>
+  ) : (
+    <TouchableWithoutFeedback {...rest}>
+      <View style={style}>{children}</View>
+    </TouchableWithoutFeedback>
+  );
 
 class SceneComponent extends React.PureComponent<any> {
   render() {
@@ -842,6 +853,7 @@ class BottomNavigation extends React.Component<Props, State> {
 
                 return renderTouchable({
                   key: route.key,
+                  route,
                   borderless: true,
                   centered: true,
                   rippleColor: touchColor,
