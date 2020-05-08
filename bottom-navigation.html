@@ -119,6 +119,8 @@ The <code>jumpTo</code> method can be used to navigate to other tabs programmati
   focused: boolean;
   color: string;
 }) =&gt; React.ReactNode</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Callback which React Element to be used as tab label.</p>
+</div></div><div class="PropInfo_p1eats2g"><a name="renderTouchable" href="#renderTouchable" class="PropLabel_psi127e"><code>renderTouchable</code></a><div class="PropItem_pwdtv5j"><span>Type: </span><code>(props: TouchableProps) =&gt; React.ReactNode</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Callback which returns a React element to be used as the touchable for the tab item.
+Renders a <code>TouchableRipple</code> on Android and <code>TouchableWithoutFeedback</code> with <code>View</code> on iOS.</p>
 </div></div><div class="PropInfo_p1eats2g"><a name="getLabelText" href="#getLabelText" class="PropLabel_psi127e"><code>getLabelText</code></a><div class="PropItem_pwdtv5j"><span>Type: </span><code>(props: { route: Route }) =&gt; string</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Get label text for the tab, uses <code>route.title</code> by default. Use <code>renderLabel</code> to replace label component.</p>
 </div></div><div class="PropInfo_p1eats2g"><a name="getAccessibilityLabel" href="#getAccessibilityLabel" class="PropLabel_psi127e"><code>getAccessibilityLabel</code></a><div class="PropItem_pwdtv5j"><span>Type: </span><code>(props: { route: Route }) =&gt; string | undefined</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
 Uses <code>route.accessibilityLabel</code> by default.</p>
