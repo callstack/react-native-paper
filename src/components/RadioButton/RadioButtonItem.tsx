@@ -24,6 +24,10 @@ export type Props = {
    */
   label: string;
   /**
+   * Whether radio is disabled.
+   */
+  disabled?: boolean;
+  /**
    * Function to execute on press.
    */
   onPress?: () => void;
@@ -98,6 +102,7 @@ class RadioButtonItem extends React.Component<Props> {
       style,
       labelStyle,
       onPress,
+      disabled,
       color,
       uncheckedColor,
       status,
@@ -109,12 +114,15 @@ class RadioButtonItem extends React.Component<Props> {
         {(context?: RadioButtonContextType) => {
           return (
             <TouchableRipple
-              onPress={() =>
-                handlePress({
-                  onPress: onPress,
-                  onValueChange: context?.onValueChange,
-                  value,
-                })
+              onPress={
+                disabled
+                  ? undefined
+                  : () =>
+                      handlePress({
+                        onPress: onPress,
+                        onValueChange: context?.onValueChange,
+                        value,
+                      })
               }
             >
               <View style={[styles.container, style]} pointerEvents="none">
@@ -125,6 +133,7 @@ class RadioButtonItem extends React.Component<Props> {
                 </Text>
                 <RadioButton
                   value={value}
+                  disabled={disabled}
                   status={status}
                   color={color}
                   uncheckedColor={uncheckedColor}
