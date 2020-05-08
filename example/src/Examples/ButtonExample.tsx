@@ -70,12 +70,13 @@ const ButtonExample = () => {
             Loading
           </Button>
           <Button
+            icon="heart"
             mode="outlined"
             onPress={() => {}}
             style={styles.button}
             labelStyle={{
               fontWeight: '800',
-              fontSize: 18,
+              fontSize: 24,
             }}
           >
             Custom Font
