@@ -79,6 +79,7 @@ class RadioButtonAndroid extends React.Component<Props, State> {
       Animated.timing(this.state.radioAnim, {
         toValue: 1,
         duration: 150 * scale,
+        useNativeDriver: false,
       }).start();
     } else {
       this.state.borderAnim.setValue(10);
@@ -86,6 +87,7 @@ class RadioButtonAndroid extends React.Component<Props, State> {
       Animated.timing(this.state.borderAnim, {
         toValue: BORDER_WIDTH,
         duration: 150 * scale,
+        useNativeDriver: false,
       }).start();
     }
   }
