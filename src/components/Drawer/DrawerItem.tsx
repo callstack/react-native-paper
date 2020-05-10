@@ -13,6 +13,10 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   label: string;
   /**
+   * The opacity of the item's label
+   */
+  labelOpacity?: number;
+  /**
    * Icon to display for the `DrawerItem`.
    */
   icon?: IconSource;
@@ -57,6 +61,7 @@ class DrawerItem extends React.Component<Props> {
     const {
       icon,
       label,
+      labelOpacity,
       active,
       theme,
       style,
@@ -74,7 +79,7 @@ class DrawerItem extends React.Component<Props> {
     const contentColor = active
       ? colors.primary
       : color(colors.text)
-          .alpha(0.68)
+          .alpha(labelOpacity || 0.68)
           .rgb()
           .string();
     const font = theme.fonts.medium;
