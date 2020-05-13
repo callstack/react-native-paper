@@ -5,7 +5,6 @@ import {
   View,
   SafeAreaView,
   ViewStyle,
-  StatusBar,
 } from 'react-native';
 import overlay from '../../styles/overlay';
 import Appbar, { DEFAULT_APPBAR_HEIGHT } from './Appbar';
@@ -13,7 +12,6 @@ import shadow from '../../styles/shadow';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
-import color from 'color';
 
 type Props = React.ComponentProps<typeof Appbar> & {
   /**
@@ -110,16 +108,6 @@ class AppbarHeader extends React.Component<Props> {
     // Let the user override the behaviour
     const Wrapper =
       typeof this.props.statusBarHeight === 'number' ? View : SafeAreaView;
-    let isDark;
-    if (typeof dark === 'boolean') {
-      isDark = dark;
-    } else {
-      isDark =
-        backgroundColor === 'transparent'
-          ? false
-          : !color(backgroundColor).isLight();
-    }
-    StatusBar.setBarStyle(isDark ? 'light-content' : 'dark-content');
 
     return (
       <Wrapper
@@ -130,10 +118,9 @@ class AppbarHeader extends React.Component<Props> {
           ] as StyleProp<ViewStyle>
         }
       >
-        {/* $FlowFixMe: There seems to be conflict between Appbar's props and Header's props */}
         <Appbar
-          //@ts-ignore
           style={[
+            //@ts-ignore
             { height, backgroundColor, marginTop: statusBarHeight },
             styles.appbar,
             restStyle,

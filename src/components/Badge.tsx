@@ -1,11 +1,5 @@
 import * as React from 'react';
-import {
-  Animated,
-  StyleSheet,
-  StyleProp,
-  TextInput,
-  ViewStyle,
-} from 'react-native';
+import { Animated, StyleSheet, StyleProp, TextStyle } from 'react-native';
 import color from 'color';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
@@ -13,7 +7,7 @@ import { Theme } from '../types';
 
 const defaultSize = 20;
 
-type Props = React.ComponentProps<typeof TextInput> & {
+type Props = React.ComponentProps<typeof Animated.Text> & {
   /**
    * Whether the badge is visible
    */
@@ -26,7 +20,8 @@ type Props = React.ComponentProps<typeof TextInput> & {
    * Size of the `Badge`.
    */
   size?: number;
-  style?: StyleProp<ViewStyle>;
+  style?: StyleProp<TextStyle>;
+  ref?: React.RefObject<typeof Animated.Text>;
   /**
    * @optional
    */
@@ -40,6 +35,17 @@ type State = {
 /**
  * Badges are small status descriptors for UI elements.
  * A badge consists of a small circle, typically containing a number or other short set of characters, that appears in proximity to another object.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="small" src="screenshots/badge-1.png" />
+ *     <figcaption>Badge with content</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img class="small" src="screenshots/badge-2.png" />
+ *     <figcaption>Badge without content</figcaption>
+ *   </figure>
+ * </div>
  *
  * ## Usage
  * ```js
@@ -81,7 +87,15 @@ class Badge extends React.Component<Props, State> {
   }
 
   render() {
-    const { children, size = defaultSize, style, theme } = this.props;
+    const {
+      children,
+      size = defaultSize,
+      style,
+      theme,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      visible,
+      ...rest
+    } = this.props;
     const { opacity } = this.state;
 
     const { backgroundColor = theme.colors.notification, ...restStyle } =
@@ -108,6 +122,7 @@ class Badge extends React.Component<Props, State> {
           styles.container,
           restStyle,
         ]}
+        {...rest}
       >
         {children}
       </Animated.Text>

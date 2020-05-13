@@ -6,6 +6,8 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
+import { Theme } from '../../types';
+import { withTheme } from '../../core/theming';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress } from './utils';
 import TouchableRipple from '../TouchableRipple';
@@ -22,9 +24,21 @@ export type Props = {
    */
   label: string;
   /**
+   * Whether radio is disabled.
+   */
+  disabled?: boolean;
+  /**
    * Function to execute on press.
    */
   onPress?: () => void;
+  /**
+   * Custom color for unchecked radio.
+   */
+  uncheckedColor?: string;
+  /**
+   * Custom color for radio.
+   */
+  color?: string;
   /**
    * Status of radio button.
    */
@@ -37,10 +51,21 @@ export type Props = {
    * Style that is passed to Label element.
    */
   labelStyle?: StyleProp<TextStyle>;
+  /**
+   * @optional
+   */
+  theme: Theme;
 };
 
 /**
  * RadioButton.Item allows you to press the whole row (item) instead of only the RadioButton.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/radio-item.ios.png" />
+ *     <figcaption>Pressed</figcaption>
+ *   </figure>
+ * </div>
  *
  * ## Usage
  * ```js
@@ -71,24 +96,48 @@ class RadioButtonItem extends React.Component<Props> {
   static displayName = 'RadioButton.Item';
 
   render() {
-    const { value, label, style, labelStyle, onPress, status } = this.props;
+    const {
+      value,
+      label,
+      style,
+      labelStyle,
+      onPress,
+      disabled,
+      color,
+      uncheckedColor,
+      status,
+      theme: { colors },
+    } = this.props;
 
     return (
       <RadioButtonContext.Consumer>
         {(context?: RadioButtonContextType) => {
           return (
             <TouchableRipple
-              onPress={() =>
-                handlePress({
-                  onPress: onPress,
-                  onValueChange: context?.onValueChange,
-                  value,
-                })
+              onPress={
+                disabled
+                  ? undefined
+                  : () =>
+                      handlePress({
+                        onPress: onPress,
+                        onValueChange: context?.onValueChange,
+                        value,
+                      })
               }
             >
               <View style={[styles.container, style]} pointerEvents="none">
-                <Text style={[styles.label, labelStyle]}>{label}</Text>
-                <RadioButton value={value} status={status}></RadioButton>
+                <Text
+                  style={[styles.label, { color: colors.text }, labelStyle]}
+                >
+                  {label}
+                </Text>
+                <RadioButton
+                  value={value}
+                  disabled={disabled}
+                  status={status}
+                  color={color}
+                  uncheckedColor={uncheckedColor}
+                />
               </View>
             </TouchableRipple>
           );
@@ -98,7 +147,10 @@ class RadioButtonItem extends React.Component<Props> {
   }
 }
 
-export default RadioButtonItem;
+export default withTheme(RadioButtonItem);
+
+// @component-docs ignore-next-line
+export { RadioButtonItem };
 
 const styles = StyleSheet.create({
   container: {

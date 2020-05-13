@@ -1,6 +1,12 @@
 import color from 'color';
 import * as React from 'react';
-import { View, StyleSheet, ViewStyle, StyleProp } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TextStyle,
+  ViewStyle,
+  StyleProp,
+} from 'react-native';
 import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple';
 import Text from '../Typography/Text';
@@ -30,6 +36,7 @@ type Props = {
    */
   theme: Theme;
   style?: StyleProp<ViewStyle>;
+  titleStyle?: StyleProp<TextStyle>;
   /**
    * TestID used for testing purposes
    */
@@ -45,7 +52,16 @@ class MenuItem extends React.Component<Props> {
   static displayName = 'Menu.Item';
 
   render() {
-    const { icon, title, disabled, onPress, theme, style, testID } = this.props;
+    const {
+      icon,
+      title,
+      disabled,
+      onPress,
+      theme,
+      style,
+      testID,
+      titleStyle,
+    } = this.props;
 
     const disabledColor = color(theme.dark ? white : black)
       .alpha(0.32)
@@ -89,7 +105,7 @@ class MenuItem extends React.Component<Props> {
           >
             <Text
               numberOfLines={1}
-              style={[styles.title, { color: titleColor }]}
+              style={[styles.title, { color: titleColor }, titleStyle]}
             >
               {title}
             </Text>
@@ -106,9 +122,11 @@ const iconWidth = 40;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 8,
+    paddingHorizontal: 8,
     minWidth,
     maxWidth,
+    height: 48,
+    justifyContent: 'center',
   },
   row: {
     flexDirection: 'row',
@@ -120,7 +138,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   item: {
-    margin: 8,
+    marginHorizontal: 8,
   },
   content: {
     justifyContent: 'center',

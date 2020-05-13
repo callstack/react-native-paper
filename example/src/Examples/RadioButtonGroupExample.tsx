@@ -2,82 +2,66 @@ import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import {
   Colors,
-  withTheme,
   RadioButton,
   Paragraph,
   List,
-  Theme,
+  useTheme,
 } from 'react-native-paper';
 
-type Props = {
-  theme: Theme;
+const RadioButtonGroupExample = () => {
+  const [value, setValue] = React.useState<string>('first');
+  const [value2, setValue2] = React.useState<string>('first');
+
+  const {
+    colors: { background, primary },
+  } = useTheme();
+  return (
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: background,
+        },
+      ]}
+    >
+      <List.Section title="With RadioButton">
+        <RadioButton.Group
+          value={value}
+          onValueChange={(value: string) => setValue(value)}
+        >
+          <View style={styles.row}>
+            <Paragraph>First</Paragraph>
+            <RadioButton value="first" />
+          </View>
+          <View style={styles.row}>
+            <Paragraph>Second</Paragraph>
+            <RadioButton.Android value="second" />
+          </View>
+          <View style={styles.row}>
+            <Paragraph>Third</Paragraph>
+            <RadioButton.IOS value="third" />
+          </View>
+        </RadioButton.Group>
+      </List.Section>
+      <List.Section title="With RadioButton.Item">
+        <RadioButton.Group
+          value={value2}
+          onValueChange={(value: string) => setValue2(value)}
+        >
+          <RadioButton.Item label="First item" value="first" />
+          <RadioButton.Item label="Second item" value="second" />
+          <RadioButton.Item
+            label="Third item"
+            value="third"
+            labelStyle={{ color: primary }}
+          />
+        </RadioButton.Group>
+      </List.Section>
+    </View>
+  );
 };
 
-type State = {
-  value: string;
-  value2: string;
-};
-
-class RadioButtonGroupExample extends React.Component<Props, State> {
-  static title = 'Radio Button Group';
-
-  state = {
-    value: 'first',
-    value2: 'first',
-  };
-
-  render() {
-    const {
-      theme: {
-        colors: { background, primary },
-      },
-    } = this.props;
-    return (
-      <View
-        style={[
-          styles.container,
-          {
-            backgroundColor: background,
-          },
-        ]}
-      >
-        <List.Section title="With RadioButton">
-          <RadioButton.Group
-            value={this.state.value}
-            onValueChange={(value: string) => this.setState({ value })}
-          >
-            <View style={styles.row}>
-              <Paragraph>First</Paragraph>
-              <RadioButton value="first" />
-            </View>
-            <View style={styles.row}>
-              <Paragraph>Second</Paragraph>
-              <RadioButton.Android value="second" />
-            </View>
-            <View style={styles.row}>
-              <Paragraph>Third</Paragraph>
-              <RadioButton.IOS value="third" />
-            </View>
-          </RadioButton.Group>
-        </List.Section>
-        <List.Section title="With RadioButton.Item">
-          <RadioButton.Group
-            value={this.state.value2}
-            onValueChange={(value: string) => this.setState({ value2: value })}
-          >
-            <RadioButton.Item label="First item" value="first" />
-            <RadioButton.Item label="Second item" value="second" />
-            <RadioButton.Item
-              label="Third item"
-              value="third"
-              labelStyle={{ color: primary }}
-            />
-          </RadioButton.Group>
-        </List.Section>
-      </View>
-    );
-  }
-}
+RadioButtonGroupExample.title = 'Radio Button Group';
 
 const styles = StyleSheet.create({
   container: {
@@ -94,4 +78,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(RadioButtonGroupExample);
+export default RadioButtonGroupExample;

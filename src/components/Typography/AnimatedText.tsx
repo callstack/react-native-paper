@@ -3,7 +3,7 @@ import { Animated, TextStyle, I18nManager, StyleProp } from 'react-native';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 
-type Props = React.ComponentProps<typeof Animated.Text> & {
+type Props = React.ComponentPropsWithRef<typeof Animated.Text> & {
   style?: StyleProp<TextStyle>;
   /**
    * @optional

@@ -6,34 +6,27 @@ import {
   Paragraph,
   Subheading,
   Title,
-  withTheme,
-  Theme,
+  useTheme,
 } from 'react-native-paper';
 
-type Props = {
-  theme: Theme;
+const TextExample = () => {
+  const {
+    colors: { background },
+  } = useTheme();
+
+  return (
+    <View style={[styles.container, { backgroundColor: background }]}>
+      <Caption style={styles.text}>Caption</Caption>
+      <Paragraph style={styles.text}>Paragraph</Paragraph>
+      <Subheading style={styles.text}>Subheading</Subheading>
+      <Title style={styles.text}>Title</Title>
+      <Headline style={styles.text}>Headline</Headline>
+    </View>
+  );
 };
 
-class TextExample extends React.Component<Props> {
-  static title = 'Typography';
+TextExample.title = 'Typography';
 
-  render() {
-    const {
-      theme: {
-        colors: { background },
-      },
-    } = this.props;
-    return (
-      <View style={[styles.container, { backgroundColor: background }]}>
-        <Caption style={styles.text}>Caption</Caption>
-        <Paragraph style={styles.text}>Paragraph</Paragraph>
-        <Subheading style={styles.text}>Subheading</Subheading>
-        <Title style={styles.text}>Title</Title>
-        <Headline style={styles.text}>Headline</Headline>
-      </View>
-    );
-  }
-}
 const styles = StyleSheet.create({
   container: {
     padding: 16,
@@ -44,4 +37,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(TextExample);
+export default TextExample;

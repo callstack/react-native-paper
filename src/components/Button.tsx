@@ -81,6 +81,10 @@ type Props = React.ComponentProps<typeof Surface> & {
    * @optional
    */
   theme: Theme;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 type State = {
@@ -135,6 +139,7 @@ class Button extends React.Component<Props, State> {
       Animated.timing(this.state.elevation, {
         toValue: 8,
         duration: 200 * scale,
+        useNativeDriver: false,
       }).start();
     }
   };
@@ -145,6 +150,7 @@ class Button extends React.Component<Props, State> {
       Animated.timing(this.state.elevation, {
         toValue: 2,
         duration: 150 * scale,
+        useNativeDriver: false,
       }).start();
     }
   };
@@ -166,6 +172,7 @@ class Button extends React.Component<Props, State> {
       theme,
       contentStyle,
       labelStyle,
+      testID,
       ...rest
     } = this.props;
     const { colors, roundness } = theme;
@@ -238,6 +245,10 @@ class Button extends React.Component<Props, State> {
         ? StyleSheet.flatten(style).borderRadius || roundness
         : roundness,
     };
+
+    const { color: customLabelColor, fontSize: customLabelSize } =
+      StyleSheet.flatten(labelStyle) || {};
+
     const textStyle = { color: textColor, ...font };
     const elevation =
       disabled || mode !== 'contained' ? 0 : this.state.elevation;
@@ -267,17 +278,22 @@ class Button extends React.Component<Props, State> {
           disabled={disabled}
           rippleColor={rippleColor}
           style={touchableStyle}
+          testID={testID}
         >
           <View style={[styles.content, contentStyle]}>
             {icon && loading !== true ? (
               <View style={styles.icon}>
-                <Icon source={icon} size={16} color={textColor} />
+                <Icon
+                  source={icon}
+                  size={customLabelSize || 16}
+                  color={customLabelColor || textColor}
+                />
               </View>
             ) : null}
             {loading ? (
               <ActivityIndicator
-                size={16}
-                color={textColor}
+                size={customLabelSize || 16}
+                color={customLabelColor || textColor}
                 style={styles.icon}
               />
             ) : null}
@@ -315,7 +331,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   icon: {
-    width: 16,
     marginLeft: 12,
     marginRight: -4,
   },

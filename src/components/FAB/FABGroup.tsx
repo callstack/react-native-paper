@@ -34,6 +34,7 @@ type Props = {
     accessibilityLabel?: string;
     style?: StyleProp<ViewStyle>;
     onPress: () => void;
+    testID?: string;
   }>;
   /**
    * Icon to display for the `FAB`.
@@ -78,6 +79,10 @@ type Props = {
    * @optional
    */
   theme: Theme;
+  /**
+   * Pass down testID from Group props to FAB.
+   */
+  testID?: string;
 };
 
 type State = {
@@ -103,22 +108,26 @@ type State = {
  *     open: false,
  *   };
  *
+ *   _onStateChange = ({ open }) => this.setState({ open });
+ *
  *   render() {
+ *     const { open } = this.state;
+ *
  *     return (
  *       <Provider>
  *          <Portal>
  *            <FAB.Group
- *              open={this.state.open}
- *              icon={this.state.open ? 'today' : 'add'}
+ *              open={open}
+ *              icon={open ? 'calendar-today' : 'plus'}
  *              actions={[
- *                { icon: 'add', onPress: () => console.log('Pressed add') },
+ *                { icon: 'plus', onPress: () => console.log('Pressed add') },
  *                { icon: 'star', label: 'Star', onPress: () => console.log('Pressed star')},
  *                { icon: 'email', label: 'Email', onPress: () => console.log('Pressed email') },
  *                { icon: 'bell', label: 'Remind', onPress: () => console.log('Pressed notifications') },
  *              ]}
- *              onStateChange={({ open }) => this.setState({ open })}
+ *              onStateChange={this._onStateChange}
  *              onPress={() => {
- *                if (this.state.open) {
+ *                if (open) {
  *                  // do something if the speed dial is open
  *                }
  *              }}
@@ -206,6 +215,7 @@ class FABGroup extends React.Component<Props, State> {
       style,
       fabStyle,
       visible,
+      testID,
     } = this.props;
     const { colors } = theme;
 
@@ -252,7 +262,7 @@ class FABGroup extends React.Component<Props, State> {
               <View
                 key={i} // eslint-disable-line react/no-array-index-key
                 style={styles.item}
-                pointerEvents="box-none"
+                pointerEvents={open ? 'box-none' : 'none'}
               >
                 {it.label && (
                   <Card
@@ -307,6 +317,8 @@ class FABGroup extends React.Component<Props, State> {
                   accessibilityTraits="button"
                   accessibilityComponentType="button"
                   accessibilityRole="button"
+                  testID={it.testID}
+                  visible={open}
                 />
               </View>
             ))}
@@ -324,6 +336,7 @@ class FABGroup extends React.Component<Props, State> {
             accessibilityRole="button"
             style={[styles.fab, fabStyle]}
             visible={visible}
+            testID={testID}
           />
         </SafeAreaView>
       </View>

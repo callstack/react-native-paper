@@ -128,6 +128,7 @@ class Chip extends React.Component<Props, State> {
     Animated.timing(this.state.elevation, {
       toValue: 4,
       duration: 200 * scale,
+      useNativeDriver: false,
     }).start();
   };
 
@@ -136,6 +137,7 @@ class Chip extends React.Component<Props, State> {
     Animated.timing(this.state.elevation, {
       toValue: 0,
       duration: 150 * scale,
+      useNativeDriver: false,
     }).start();
   };
 

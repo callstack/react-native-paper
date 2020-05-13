@@ -4,6 +4,7 @@
 
 # VSCode
 .vscode/
+.history/
 jsconfig.json
 
 # Xcode
@@ -53,6 +54,7 @@ android/keystores/debug.keystore
 # Build
 #
 dist/
+web-build/
 
 # Release
 #

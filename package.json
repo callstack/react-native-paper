@@ -1,10 +1,11 @@
 {
   "name": "react-native-paper",
-  "version": "3.6.0",
+  "version": "3.10.1",
   "description": "Material design for React Native",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
   "react-native": "lib/module/index.js",
+  "source": "src/index.tsx",
   "types": "lib/typescript/src/index.d.ts",
   "files": [
     "src",
@@ -47,19 +48,18 @@
   "dependencies": {
     "@callstack/react-theme-provider": "^3.0.5",
     "color": "^3.1.2",
-    "react-native-safe-area-view": "^0.14.6"
+    "react-native-safe-area-view": "^0.14.9"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
     "@babel/runtime": "^7.4.4",
     "@callstack/eslint-config": "^9.0.0",
     "@commitlint/config-conventional": "^8.3.4",
-    "@react-native-community/bob": "^0.9.2",
+    "@react-native-community/bob": "^0.10.0",
     "@release-it/conventional-changelog": "^1.1.0",
     "@types/color": "^3.0.0",
     "@types/jest": "^24.0.13",
     "@types/node": "^13.1.0",
-    "@types/reach__router": "^1.2.4",
     "@types/react-dom": "^16.8.4",
     "@types/react-native": "^0.57.61",
     "@types/react-native-vector-icons": "^6.4.1",
@@ -70,7 +70,7 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^24.3.1",
     "babel-test": "^0.1.1",
-    "chalk": "^2.4.1",
+    "chalk": "^4.0.0",
     "commitlint": "^8.3.4",
     "conventional-changelog-cli": "^2.0.11",
     "dedent": "^0.7.0",
@@ -91,9 +91,9 @@
     "react-native-testing-library": "^1.5.0",
     "react-native-vector-icons": "~6.3.0",
     "react-test-renderer": "16.8.3",
-    "release-it": "^12.3.3",
+    "release-it": "^13.4.0",
     "rimraf": "^3.0.2",
-    "typescript": "^3.7.1"
+    "typescript": "^3.8.3"
   },
   "peerDependencies": {
     "react": "*",

@@ -16,7 +16,7 @@ import { black, white } from '../../styles/colors';
 import { Theme } from '../../types';
 import overlay from '../../styles/overlay';
 
-type Props = Partial<React.ComponentProps<typeof View>> & {
+type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
   /**
    * Whether the background color is a dark color. A dark appbar will render light text and vice-versa.
    */

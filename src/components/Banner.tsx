@@ -43,6 +43,7 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   contentStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
+  ref?: React.RefObject<View>;
   /**
    * @optional
    */
@@ -151,6 +152,7 @@ class Banner extends React.Component<Props, State> {
     Animated.timing(this.state.position, {
       duration: 250 * scale,
       toValue: 1,
+      useNativeDriver: false,
     }).start();
   };
 
@@ -159,6 +161,7 @@ class Banner extends React.Component<Props, State> {
     Animated.timing(this.state.position, {
       duration: 200 * scale,
       toValue: 0,
+      useNativeDriver: false,
     }).start();
   };
 
