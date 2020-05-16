@@ -179,6 +179,13 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
 
     const minHeight = height || (dense ? MIN_DENSE_HEIGHT : MIN_HEIGHT);
 
+    const inputStyles = StyleSheet.create({
+      container: {
+        paddingTop: LABEL_PADDING_TOP,
+        paddingBottom: 0,
+        minHeight,
+      },
+    });
     return (
       <View style={viewStyle}>
         {/*
@@ -195,11 +202,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
             backgroundColor={backgroundColor}
           />
           <View
-            style={{
-              paddingTop: LABEL_PADDING_TOP,
-              paddingBottom: 0,
-              minHeight,
-            }}
+            style={inputStyles.container}
           >
             <InputLabel
               parentState={parentState}
