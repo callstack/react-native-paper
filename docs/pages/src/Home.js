@@ -3,7 +3,7 @@
 
 import * as React from 'react';
 import { styled } from 'linaria/react';
-import { Link } from 'component-docs/components';
+import { Link, Header } from 'component-docs/components';
 import ThemeIcon from '../../components/theme-icon';
 import Content from './components/Content';
 
@@ -17,6 +17,7 @@ export default class Home extends React.Component<{}> {
     const { isDark } = this.state;
     return (
       <Container>
+        <Header logo="images/sidebar-logo.svg" />
         <Content>
           <h1>
             Cross-platform{' '}

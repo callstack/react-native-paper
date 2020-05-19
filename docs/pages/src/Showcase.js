@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { styled } from 'linaria/react';
 import color from 'color';
+import { Header } from 'component-docs/components';
 
 import GooglePlayIcon from '../../components/google-play-icon';
 import IphoneIcon from '../../components/iphone-icon';
@@ -71,6 +72,7 @@ export default class Showcase extends React.Component<{}> {
   render() {
     return (
       <Container>
+        <Header logo="images/sidebar-logo.svg" />
         <Content>
           <h1>Who&apos;s using Paper?</h1>
           <p>
