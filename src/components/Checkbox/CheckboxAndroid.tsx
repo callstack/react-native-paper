@@ -74,14 +74,14 @@ class CheckboxAndroid extends React.Component<Props, State> {
       Animated.timing(this.state.scaleAnim, {
         toValue: 0.85,
         duration: checked ? ANIMATION_DURATION * animation.scale : 0,
-        useNativeDriver: false,
+        useNativeDriver: true,
       }),
       Animated.timing(this.state.scaleAnim, {
         toValue: 1,
         duration: checked
           ? ANIMATION_DURATION * animation.scale
           : ANIMATION_DURATION * animation.scale * 1.75,
-        useNativeDriver: false,
+        useNativeDriver: true,
       }),
     ]).start();
   }
