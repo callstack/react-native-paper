@@ -135,7 +135,7 @@ export default class Showcase extends React.Component<{}> {
 }
 
 const Container = styled.div`
-  width: 100%;
+  flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 `;

@@ -104,7 +104,7 @@ const Highlighted = styled.a`
 `;
 
 const Container = styled.div`
-  width: 100%;
+  flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 `;
