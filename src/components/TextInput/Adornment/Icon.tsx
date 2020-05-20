@@ -45,7 +45,7 @@ export const IconAdornment: React.FunctionComponent<{
     top: topPosition,
     [side]: ICON_OFFSET,
   };
-  const contextState = { style, isTextInputFocused, forceFocus: forceFocus };
+  const contextState = { style, isTextInputFocused, forceFocus };
 
   return (
     <StyleContext.Provider value={contextState}>{icon}</StyleContext.Provider>
