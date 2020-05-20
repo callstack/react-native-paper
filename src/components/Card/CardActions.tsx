@@ -18,12 +18,6 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  *   </figure>
  * </div>
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/card-action-example.png" />
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
