@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {
-  AccessibilityState,
+  AccessibilityStates,
   AccessibilityTrait,
   Animated,
   Platform,
@@ -205,7 +205,7 @@ class Chip extends React.Component<Props, State> {
       : selectedBackgroundColor;
 
     const accessibilityTraits: AccessibilityTrait[] = ['button'];
-    const accessibilityStates: AccessibilityState[] = [];
+    const accessibilityStates: AccessibilityStates[] = [];
 
     if (selected) {
       accessibilityTraits.push('selected');

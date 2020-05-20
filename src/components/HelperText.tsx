@@ -127,6 +127,7 @@ class HelperText extends React.PureComponent<Props, State> {
   };
 
   private handleTextLayout = (e: LayoutChangeEvent) => {
+    // @ts-ignore
     this.props.onLayout && this.props.onLayout(e);
     this.setState({
       textHeight: e.nativeEvent.layout.height,

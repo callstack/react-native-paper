@@ -76,7 +76,9 @@ class Badge extends React.Component<Props, State> {
   }
 
   render() {
-    const { children, size = defaultSize, style, theme } = this.props;
+    const { children, size = defaultSize, theme } = this.props;
+    /** Type for this.props.style was somehow altered after upgrading to "@types/react-native": "^0.61.4", and was throwing some strange errors, the following is a workaround */
+    const style: StyleProp<ViewStyle> = this.props.style;
     const { opacity } = this.state;
 
     const { backgroundColor = theme.colors.notification, ...restStyle } =
