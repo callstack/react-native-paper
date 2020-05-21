@@ -1,0 +1,17 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Getting Started
+    url: https://callstack.github.io/react-native-paper/getting-started.html
+    about: Read how to get started with react-native-paper.
+  - name: Documentation
+    url: https://callstack.github.io/react-native-paper/index.html
+    about: Read the official documentation.
+  - name: Example
+    url: https://snack.expo.io/@satya164/github.com-callstack-react-native-paper:example
+    about: See the official example app.
+  - name: Contributing guide
+    url: https://github.com/callstack/react-native-paper/blob/master/CONTRIBUTING.md
+    about: See our contributing guide.
+  - name: Expo
+    url: https://www.expo.io/
+    about: Official Expo website.
