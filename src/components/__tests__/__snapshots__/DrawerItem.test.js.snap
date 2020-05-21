@@ -18,7 +18,11 @@ exports[`renders DrawerItem with icon 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "selected": undefined,
+      }
+    }
     accessible={true}
     focusable={false}
     isTVSelectable={true}
@@ -132,10 +136,10 @@ exports[`renders active DrawerItem 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={
-      Array [
-        "selected",
-      ]
+    accessibilityState={
+      Object {
+        "selected": true,
+      }
     }
     accessible={true}
     focusable={false}
@@ -250,7 +254,11 @@ exports[`renders basic DrawerItem 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "selected": undefined,
+      }
+    }
     accessible={true}
     focusable={true}
     isTVSelectable={true}

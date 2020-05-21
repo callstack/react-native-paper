@@ -3,7 +3,11 @@
 exports[`RadioButton on default platform renders properly 1`] = `
 <View
   accessibilityRole="button"
-  accessibilityStates={Array []}
+  accessibilityState={
+    Object {
+      "disabled": undefined,
+    }
+  }
   accessible={true}
   focusable={true}
   isTVSelectable={true}
@@ -74,7 +78,11 @@ exports[`RadioButton on default platform renders properly 1`] = `
 exports[`RadioButton on ios platform renders properly 1`] = `
 <View
   accessibilityRole="button"
-  accessibilityStates={Array []}
+  accessibilityState={
+    Object {
+      "disabled": undefined,
+    }
+  }
   accessible={true}
   focusable={true}
   isTVSelectable={true}
@@ -145,7 +153,11 @@ exports[`RadioButton on ios platform renders properly 1`] = `
 exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider renders properly 1`] = `
 <View
   accessibilityRole="button"
-  accessibilityStates={Array []}
+  accessibilityState={
+    Object {
+      "disabled": undefined,
+    }
+  }
   accessible={true}
   focusable={true}
   isTVSelectable={true}

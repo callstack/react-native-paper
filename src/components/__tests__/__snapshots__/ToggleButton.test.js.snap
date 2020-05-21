@@ -3,10 +3,10 @@
 exports[`renders disabled toggle button 1`] = `
 <View
   accessibilityRole="button"
-  accessibilityStates={
-    Array [
-      "disabled",
-    ]
+  accessibilityState={
+    Object {
+      "disabled": true,
+    }
   }
   accessible={true}
   focusable={true}
@@ -105,7 +105,11 @@ exports[`renders disabled toggle button 1`] = `
 exports[`renders toggle button 1`] = `
 <View
   accessibilityRole="button"
-  accessibilityStates={Array []}
+  accessibilityState={
+    Object {
+      "disabled": undefined,
+    }
+  }
   accessible={true}
   focusable={true}
   hitSlop={
@@ -201,10 +205,10 @@ exports[`renders toggle button 1`] = `
 exports[`renders unchecked toggle button 1`] = `
 <View
   accessibilityRole="button"
-  accessibilityStates={
-    Array [
-      "disabled",
-    ]
+  accessibilityState={
+    Object {
+      "disabled": true,
+    }
   }
   accessible={true}
   focusable={true}

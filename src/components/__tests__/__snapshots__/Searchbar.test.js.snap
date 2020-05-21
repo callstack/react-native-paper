@@ -22,7 +22,11 @@ exports[`renders with placeholder 1`] = `
   <View
     accessibilityLabel="search"
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
     accessible={true}
     focusable={false}
     hitSlop={
@@ -136,10 +140,10 @@ exports[`renders with placeholder 1`] = `
   <View
     accessibilityLabel="clear"
     accessibilityRole="button"
-    accessibilityStates={
-      Array [
-        "disabled",
-      ]
+    accessibilityState={
+      Object {
+        "disabled": true,
+      }
     }
     accessible={true}
     focusable={true}
@@ -248,7 +252,11 @@ exports[`renders with text 1`] = `
   <View
     accessibilityLabel="search"
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
     accessible={true}
     focusable={false}
     hitSlop={
@@ -363,7 +371,11 @@ exports[`renders with text 1`] = `
   <View
     accessibilityLabel="clear"
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": false,
+      }
+    }
     accessible={true}
     focusable={true}
     hitSlop={

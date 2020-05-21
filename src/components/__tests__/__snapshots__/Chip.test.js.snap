@@ -15,7 +15,12 @@ exports[`renders chip with close button 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityState={Object {}}
+    accessibilityState={
+      Object {
+        "disabled": false,
+        "selected": false,
+      }
+    }
     accessible={true}
     focusable={false}
     isTVSelectable={true}
@@ -193,7 +198,12 @@ exports[`renders chip with icon 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityState={Object {}}
+    accessibilityState={
+      Object {
+        "disabled": false,
+        "selected": false,
+      }
+    }
     accessible={true}
     focusable={false}
     isTVSelectable={true}
@@ -320,7 +330,12 @@ exports[`renders chip with onPress 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityState={Object {}}
+    accessibilityState={
+      Object {
+        "disabled": false,
+        "selected": false,
+      }
+    }
     accessible={true}
     focusable={true}
     isTVSelectable={true}
@@ -405,6 +420,7 @@ exports[`renders outlined disabled chip 1`] = `
     accessibilityState={
       Object {
         "disabled": true,
+        "selected": false,
       }
     }
     accessible={true}
@@ -490,6 +506,7 @@ exports[`renders selected chip 1`] = `
     accessibilityRole="button"
     accessibilityState={
       Object {
+        "disabled": false,
         "selected": true,
       }
     }
