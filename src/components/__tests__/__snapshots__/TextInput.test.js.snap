@@ -221,7 +221,11 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
   >
     <View
       accessibilityRole="button"
-      accessibilityStates={Array []}
+      accessibilityState={
+        Object {
+          "disabled": undefined,
+        }
+      }
       accessible={true}
       focusable={true}
       hitSlop={
@@ -499,7 +503,11 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
   >
     <View
       accessibilityRole="button"
-      accessibilityStates={Array []}
+      accessibilityState={
+        Object {
+          "disabled": undefined,
+        }
+      }
       accessible={true}
       focusable={true}
       hitSlop={

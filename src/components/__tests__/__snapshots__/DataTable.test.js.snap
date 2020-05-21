@@ -206,7 +206,11 @@ exports[`renders data table pagination 1`] = `
   />
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": false,
+      }
+    }
     accessible={true}
     focusable={true}
     hitSlop={
@@ -289,7 +293,11 @@ exports[`renders data table pagination 1`] = `
   </View>
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": false,
+      }
+    }
     accessible={true}
     focusable={true}
     hitSlop={
@@ -413,7 +421,11 @@ exports[`renders data table pagination with label 1`] = `
   </Text>
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": false,
+      }
+    }
     accessible={true}
     focusable={true}
     hitSlop={
@@ -496,7 +508,11 @@ exports[`renders data table pagination with label 1`] = `
   </View>
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": false,
+      }
+    }
     accessible={true}
     focusable={true}
     hitSlop={

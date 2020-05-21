@@ -865,7 +865,7 @@ class BottomNavigation extends React.Component<Props, State> {
                     : 'button',
                   accessibilityComponentType: 'button',
                   accessibilityRole: 'button',
-                  accessibilityStates: ['selected'],
+                  accessibilityState: { selected: true },
                   style: styles.item,
                   children: (
                     <View pointerEvents="none">

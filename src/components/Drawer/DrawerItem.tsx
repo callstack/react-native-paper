@@ -97,7 +97,7 @@ class DrawerItem extends React.Component<Props> {
           accessibilityTraits={active ? ['button', 'selected'] : 'button'}
           accessibilityComponentType="button"
           accessibilityRole="button"
-          accessibilityStates={active ? ['selected'] : []}
+          accessibilityState={{ selected: active }}
           accessibilityLabel={accessibilityLabel}
         >
           <View style={styles.wrapper}>
