@@ -43,20 +43,20 @@ export default class Provider extends React.Component<Props> {
   };
 
   render() {
-    const theme = this.props.theme
+    const { children, settings, theme: providedTheme } = this.props;
+    const { reduceMotionEnabled } = this.state;
+    const theme = !providedTheme
       ? Object.assign(DefaultTheme, {
           animation: {
-            scale: this.state.reduceMotionEnabled ? 0 : 1,
+            scale: reduceMotionEnabled ? 0 : 1,
           },
         })
-      : this.props.theme;
+      : providedTheme;
 
     return (
       <PortalHost>
-        <SettingsProvider
-          value={this.props.settings || { icon: MaterialCommunityIcon }}
-        >
-          <ThemeProvider theme={theme}>{this.props.children}</ThemeProvider>
+        <SettingsProvider value={settings || { icon: MaterialCommunityIcon }}>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
         </SettingsProvider>
       </PortalHost>
     );
