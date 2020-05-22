@@ -54,7 +54,27 @@ type Props = $RemoveChildren<typeof View> & {
 };
 
 /**
- * A component used to display a title and optional subtitle in a appbar.
+ * A component used to display a title and optional subtitle in an appbar.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/appbar-content.png" />
+ *   </figure>
+ * </div>
+ *
+ * ## Usage
+ * ```js
+ * import * as React from 'react';
+ * import { Appbar } from 'react-native-paper';
+ *
+ * const MyComponent = () => (
+ *     <Appbar.Header>
+ *        <Appbar.Content title="Title" subtitle={'Subtitle'} />
+ *     </Appbar.Header>
+ * );
+ *
+ * export default MyComponent;
+ * ```
  */
 class AppbarContent extends React.Component<Props> {
   static displayName = 'Appbar.Content';

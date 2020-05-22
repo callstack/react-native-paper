@@ -12,6 +12,13 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
 /**
  * A component to show content in a Dialog.
  *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/dialog-content.png" />
+ *   </figure>
+ * </div>
+ *
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';

@@ -41,6 +41,35 @@ type Props = $Omit<
 
 /**
  * A component used to display a back button in the appbar.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/appbar-backaction-android.png" />
+ *     <figcaption>Android</figcaption>
+ *   </figure>
+ * </div>
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/appbar-backaction-ios.png" />
+ *     <figcaption>iOS</figcaption>
+ *   </figure>
+ * </div>
+ *
+ * ## Usage
+ * ```js
+ * import * as React from 'react';
+ * import { Appbar } from 'react-native-paper';
+ *
+ *
+ * const MyComponent = () => (
+ *     <Appbar.Header>
+ *       <Appbar.BackAction onPress={() => {}} />
+ *     </Appbar.Header>
+ * );
+ *
+ * export default MyComponent;
+ * ```
  */
 class AppbarBackAction extends React.Component<Props> {
   static displayName = 'Appbar.BackAction';
