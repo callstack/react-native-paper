@@ -12,7 +12,7 @@ import Caption from './../Typography/Caption';
 import Title from './../Typography/Title';
 import { Theme } from '../../types';
 
-type Props = React.ComponentProps<typeof View> & {
+type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Text for the title. Note that this will only accept a string or `<Text>`-based node.
    */
@@ -29,6 +29,10 @@ type Props = React.ComponentProps<typeof View> & {
    * Style for the subtitle.
    */
   subtitleStyle?: StyleProp<TextStyle>;
+  /**
+   * Number of line for the subtitle.
+   */
+  subtitleNumberOfLines?: number;
   /**
    * Callback which returns a React element to display on the left side.
    */
@@ -89,6 +93,10 @@ const LEFT_SIZE = 40;
 class CardTitle extends React.Component<Props> {
   static displayName = 'Card.Title';
 
+  static defaultProps = {
+    subtitleNumberOfLines: 1,
+  };
+
   render() {
     const {
       left,
@@ -97,6 +105,7 @@ class CardTitle extends React.Component<Props> {
       rightStyle,
       subtitle,
       subtitleStyle,
+      subtitleNumberOfLines,
       style,
       title,
       titleStyle,
@@ -106,7 +115,7 @@ class CardTitle extends React.Component<Props> {
       <View
         style={[
           styles.container,
-          { height: subtitle || left || right ? 72 : 50 },
+          { minHeight: subtitle || left || right ? 72 : 50 },
           style,
         ]}
       >
@@ -133,7 +142,10 @@ class CardTitle extends React.Component<Props> {
           ) : null}
 
           {subtitle ? (
-            <Caption style={[styles.subtitle, subtitleStyle]} numberOfLines={1}>
+            <Caption
+              style={[styles.subtitle, subtitleStyle]}
+              numberOfLines={subtitleNumberOfLines}
+            >
               {subtitle}
             </Caption>
           ) : null}
@@ -164,7 +176,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    height: 50,
   },
 
   title: {

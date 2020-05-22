@@ -31,6 +31,10 @@ type Props = $RemoveChildren<typeof View> & {
    */
   titleStyle?: StyleProp<TextStyle>;
   /**
+   * Reference for the title.
+   */
+  titleRef?: React.RefObject<Text>;
+  /**
    * Text for the subtitle.
    */
   subtitle?: React.ReactNode;
@@ -62,6 +66,7 @@ class AppbarContent extends React.Component<Props> {
       subtitleStyle,
       onPress,
       style,
+      titleRef,
       titleStyle,
       theme,
       title,
@@ -75,9 +80,10 @@ class AppbarContent extends React.Component<Props> {
       .string();
 
     return (
-      <TouchableWithoutFeedback onPress={onPress}>
+      <TouchableWithoutFeedback onPress={onPress} disabled={!onPress}>
         <View style={[styles.container, style]} {...rest}>
           <Text
+            ref={titleRef}
             style={[
               {
                 color: titleColor,
@@ -87,6 +93,7 @@ class AppbarContent extends React.Component<Props> {
               titleStyle,
             ]}
             numberOfLines={1}
+            accessible
             accessibilityTraits="header"
             // @ts-ignore
             accessibilityRole={Platform.OS === 'web' ? 'heading' : 'header'}

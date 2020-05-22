@@ -124,16 +124,20 @@ class Chip extends React.Component<Props, State> {
   };
 
   private handlePressIn = () => {
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.elevation, {
       toValue: 4,
-      duration: 200,
+      duration: 200 * scale,
+      useNativeDriver: true,
     }).start();
   };
 
   private handlePressOut = () => {
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.elevation, {
       toValue: 0,
-      duration: 150,
+      duration: 150 * scale,
+      useNativeDriver: true,
     }).start();
   };
 

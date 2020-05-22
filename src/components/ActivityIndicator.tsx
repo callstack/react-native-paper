@@ -11,7 +11,7 @@ import {
 import { withTheme } from '../core/theming';
 import { Theme } from '../types';
 
-type Props = React.ComponentProps<typeof View> & {
+type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Whether to show the indicator or hide it.
    */
@@ -98,7 +98,13 @@ class ActivityIndicator extends React.Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props) {
-    const { animating, hidesWhenStopped } = this.props;
+    const {
+      animating,
+      hidesWhenStopped,
+      theme: {
+        animation: { scale },
+      },
+    } = this.props;
     const { fade } = this.state;
 
     if (animating !== prevProps.animating) {
@@ -107,7 +113,7 @@ class ActivityIndicator extends React.Component<Props, State> {
       } else if (hidesWhenStopped) {
         // Hide indicator first and then stop rotation
         Animated.timing(fade, {
-          duration: 200,
+          duration: 200 * scale,
           toValue: 0,
           useNativeDriver: true,
           isInteraction: false,
@@ -120,10 +126,11 @@ class ActivityIndicator extends React.Component<Props, State> {
 
   private startRotation = () => {
     const { fade, timer } = this.state;
+    const { scale } = this.props.theme.animation;
 
     // Show indicator
     Animated.timing(fade, {
-      duration: 200,
+      duration: 200 * scale,
       toValue: 1,
       isInteraction: false,
       useNativeDriver: true,

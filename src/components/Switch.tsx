@@ -15,7 +15,7 @@ const version = NativeModules.PlatformConstants
   ? NativeModules.PlatformConstants.reactNativeVersion
   : undefined;
 
-type Props = React.ComponentProps<typeof NativeSwitch> & {
+type Props = React.ComponentPropsWithRef<typeof NativeSwitch> & {
   /**
    * Disable toggling the switch.
    */
@@ -71,14 +71,14 @@ type Props = React.ComponentProps<typeof NativeSwitch> & {
  *     isSwitchOn: false,
  *   };
  *
+ *   _onToggleSwitch = () => this.setState(state => ({ isSwitchOn: !state.isSwitchOn }));
+ *
  *   render() {
  *     const { isSwitchOn } = this.state;
  *     return (
  *       <Switch
  *         value={isSwitchOn}
- *         onValueChange={() =>
- *           { this.setState({ isSwitchOn: !isSwitchOn }); }
- *         }
+ *         onValueChange={this._onToggleSwitch}
  *       />
  *     );
  *   }

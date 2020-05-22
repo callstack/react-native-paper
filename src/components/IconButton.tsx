@@ -5,6 +5,7 @@ import {
   StyleSheet,
   StyleProp,
   GestureResponderEvent,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import color from 'color';
 
@@ -45,6 +46,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   onPress?: (e: GestureResponderEvent) => void;
   style?: StyleProp<ViewStyle>;
+  ref?: React.RefObject<TouchableWithoutFeedback>;
   /**
    * @optional
    */

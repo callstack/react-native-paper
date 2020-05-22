@@ -3,7 +3,7 @@ import {
   Animated,
   StyleSheet,
   StyleProp,
-  TextInput,
+  TextStyle,
   ViewStyle,
 } from 'react-native';
 import color from 'color';
@@ -13,7 +13,7 @@ import { Theme } from '../types';
 
 const defaultSize = 20;
 
-type Props = React.ComponentProps<typeof TextInput> & {
+type Props = React.ComponentProps<typeof Animated.Text> & {
   /**
    * Whether the badge is visible
    */
@@ -26,7 +26,8 @@ type Props = React.ComponentProps<typeof TextInput> & {
    * Size of the `Badge`.
    */
   size?: number;
-  style?: StyleProp<ViewStyle>;
+  style?: StyleProp<TextStyle>;
+  ref?: React.RefObject<typeof Animated.Text>;
   /**
    * @optional
    */
@@ -40,6 +41,17 @@ type State = {
 /**
  * Badges are small status descriptors for UI elements.
  * A badge consists of a small circle, typically containing a number or other short set of characters, that appears in proximity to another object.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="small" src="screenshots/badge-1.png" />
+ *     <figcaption>Badge with content</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img class="small" src="screenshots/badge-2.png" />
+ *     <figcaption>Badge without content</figcaption>
+ *   </figure>
+ * </div>
  *
  * ## Usage
  * ```js
@@ -64,19 +76,31 @@ class Badge extends React.Component<Props, State> {
   };
 
   componentDidUpdate(prevProps: Props) {
-    const { visible } = this.props;
+    const {
+      visible,
+      theme: {
+        animation: { scale },
+      },
+    } = this.props;
 
     if (visible !== prevProps.visible) {
       Animated.timing(this.state.opacity, {
         toValue: visible ? 1 : 0,
-        duration: 150,
+        duration: 150 * scale,
         useNativeDriver: true,
       }).start();
     }
   }
 
   render() {
-    const { children, size = defaultSize, theme } = this.props;
+    const {
+      children,
+      size = defaultSize,
+      theme,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      visible,
+      ...rest
+    } = this.props;
     /** Type for this.props.style was somehow altered after upgrading to "@types/react-native": "^0.61.4", and was throwing some strange errors, the following is a workaround */
     const style: StyleProp<ViewStyle> = this.props.style;
     const { opacity } = this.state;
@@ -105,6 +129,7 @@ class Badge extends React.Component<Props, State> {
           styles.container,
           restStyle,
         ]}
+        {...rest}
       >
         {children}
       </Animated.Text>

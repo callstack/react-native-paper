@@ -29,6 +29,7 @@ rm -f dist/*.{html,css,js,json,map} || :
 rmdir dist/* || :
 
 # Run our build script.
+yarn
 yarn build
 
 # Build the docs for 1.0

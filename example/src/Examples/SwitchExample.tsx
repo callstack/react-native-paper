@@ -5,131 +5,95 @@ import {
   Switch,
   Colors,
   TouchableRipple,
-  withTheme,
-  Theme,
+  useTheme,
 } from 'react-native-paper';
 
-type Props = {
-  theme: Theme;
-};
+const SwitchExample = () => {
+  const [valueNormal, setNormalValue] = React.useState<boolean>(true);
+  const [valueCustom, setCustomValue] = React.useState<boolean>(true);
 
-type State = {
-  valueNormal: boolean;
-  valueCustom: boolean;
-};
+  const {
+    colors: { background },
+  } = useTheme();
 
-class SwitchExample extends React.Component<Props, State> {
-  static title = 'Switch';
+  const switchValueNormalLabel = `switch ${
+    valueNormal === true ? 'on' : 'off'
+  }`;
+  const switchValueCustomlLabel = `switch ${
+    valueCustom === true ? 'on' : 'off'
+  }`;
 
-  state = {
-    valueNormal: true,
-    valueCustom: true,
-  };
-
-  render() {
-    const {
-      theme: {
-        colors: { background },
-      },
-    } = this.props;
-    const switchValueNormalLabel = `switch ${
-      this.state.valueNormal === true ? 'on' : 'off'
-    }`;
-
-    const switchValueCustomlLabel = `switch ${
-      this.state.valueCustom === true ? 'on' : 'off'
-    }`;
-
-    return Platform.OS === 'android' ? (
-      <View
-        style={[
-          styles.container,
-          {
-            backgroundColor: background,
-          },
-        ]}
-      >
-        <TouchableRipple
-          onPress={() =>
-            this.setState(state => ({
-              valueNormal: !state.valueNormal,
-            }))
-          }
-        >
-          <View style={styles.row}>
-            <Paragraph>Normal {switchValueNormalLabel}</Paragraph>
-            <View pointerEvents="none">
-              <Switch value={this.state.valueNormal} />
-            </View>
-          </View>
-        </TouchableRipple>
-        <TouchableRipple
-          onPress={() =>
-            this.setState(state => ({
-              valueCustom: !state.valueCustom,
-            }))
-          }
-        >
-          <View style={styles.row}>
-            <Paragraph>Custom {switchValueCustomlLabel}</Paragraph>
-            <View pointerEvents="none">
-              <Switch value={this.state.valueCustom} color={Colors.blue500} />
-            </View>
-          </View>
-        </TouchableRipple>
-        <View style={styles.row}>
-          <Paragraph>Switch on (disabled)</Paragraph>
-          <Switch disabled value />
-        </View>
-        <View style={styles.row}>
-          <Paragraph>Switch off (disabled)</Paragraph>
-          <Switch disabled />
-        </View>
-      </View>
-    ) : (
-      <View
-        style={[
-          styles.container,
-          {
-            backgroundColor: background,
-          },
-        ]}
-      >
+  return Platform.OS === 'android' ? (
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: background,
+        },
+      ]}
+    >
+      <TouchableRipple onPress={() => setNormalValue(!valueNormal)}>
         <View style={styles.row}>
           <Paragraph>Normal {switchValueNormalLabel}</Paragraph>
-          <Switch
-            value={this.state.valueNormal}
-            onValueChange={() =>
-              this.setState(state => ({
-                valueNormal: !state.valueNormal,
-              }))
-            }
-          />
+          <View pointerEvents="none">
+            <Switch value={valueNormal} />
+          </View>
         </View>
+      </TouchableRipple>
+      <TouchableRipple onPress={() => setCustomValue(!valueCustom)}>
         <View style={styles.row}>
           <Paragraph>Custom {switchValueCustomlLabel}</Paragraph>
-          <Switch
-            value={this.state.valueCustom}
-            onValueChange={() =>
-              this.setState(state => ({
-                valueCustom: !state.valueCustom,
-              }))
-            }
-            color={Colors.blue500}
-          />
+          <View pointerEvents="none">
+            <Switch value={valueCustom} color={Colors.blue500} />
+          </View>
         </View>
-        <View style={styles.row}>
-          <Paragraph>Switch on (disabled)</Paragraph>
-          <Switch value disabled />
-        </View>
-        <View style={styles.row}>
-          <Paragraph>Switch off (disabled)</Paragraph>
-          <Switch value={false} disabled />
-        </View>
+      </TouchableRipple>
+      <View style={styles.row}>
+        <Paragraph>Switch on (disabled)</Paragraph>
+        <Switch disabled value />
       </View>
-    );
-  }
-}
+      <View style={styles.row}>
+        <Paragraph>Switch off (disabled)</Paragraph>
+        <Switch disabled />
+      </View>
+    </View>
+  ) : (
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: background,
+        },
+      ]}
+    >
+      <View style={styles.row}>
+        <Paragraph>Normal {switchValueNormalLabel}</Paragraph>
+        <Switch
+          value={valueNormal}
+          onValueChange={() => setNormalValue(!valueNormal)}
+        />
+      </View>
+      <View style={styles.row}>
+        <Paragraph>Custom {switchValueCustomlLabel}</Paragraph>
+        <Switch
+          value={valueCustom}
+          onValueChange={() => setCustomValue(!valueCustom)}
+          color={Colors.blue500}
+        />
+      </View>
+      <View style={styles.row}>
+        <Paragraph>Switch on (disabled)</Paragraph>
+        <Switch value disabled />
+      </View>
+      <View style={styles.row}>
+        <Paragraph>Switch off (disabled)</Paragraph>
+        <Switch value={false} disabled />
+      </View>
+    </View>
+  );
+};
+
+SwitchExample.title = 'Switch';
 
 const styles = StyleSheet.create({
   container: {
@@ -146,4 +110,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(SwitchExample);
+export default SwitchExample;

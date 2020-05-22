@@ -49,7 +49,7 @@ export type Theme = {
 
 export type $Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 export type $RemoveChildren<T extends React.ComponentType<any>> = $Omit<
-  React.ComponentProps<T>,
+  React.ComponentPropsWithoutRef<T>,
   'children'
 >;
 

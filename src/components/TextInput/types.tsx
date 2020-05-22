@@ -2,6 +2,7 @@ import {
   TextInput as NativeTextInput,
   Animated,
   TextStyle,
+  LayoutChangeEvent,
 } from 'react-native';
 import { TextInputProps } from './TextInput';
 import { $Omit } from './../../types';
@@ -30,6 +31,8 @@ export type State = {
   placeholder: string | null | undefined;
   value: string | null | undefined;
   labelLayout: { measured: boolean; width: number; height: number };
+  leftLayout: { height: number | null; width: number | null };
+  rightLayout: { height: number | null; width: number | null };
 };
 export type ChildTextInputProps = {
   parentState: State;
@@ -38,6 +41,8 @@ export type ChildTextInputProps = {
   onBlur?: (args: any) => void;
   onChangeText?: (value: string) => void;
   onLayoutAnimatedText: (args: any) => void;
+  onLeftAffixLayoutChange: (event: LayoutChangeEvent) => void;
+  onRightAffixLayoutChange: (event: LayoutChangeEvent) => void;
 } & TextInputTypesWithoutMode;
 export type LabelProps = {
   mode?: 'flat' | 'outlined';
@@ -51,7 +56,11 @@ export type LabelProps = {
   fontWeight: TextStyle['fontWeight'];
   font: any;
   topPosition: number;
-  paddingOffset?: { paddingHorizontal: number } | null | undefined;
+  paddingOffset?:
+    | { paddingLeft: number; paddingRight: number }
+    | null
+    | undefined;
+  labelTranslationXOffset?: number;
   placeholderColor: string | null | undefined;
   backgroundColor?: string | null | undefined;
   label?: string | null | undefined;

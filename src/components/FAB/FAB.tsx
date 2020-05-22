@@ -32,7 +32,7 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   small?: boolean;
   /**
-   * Custom color for the `FAB`.
+   * Custom color for the icon and label of the `FAB`.
    */
   color?: string;
   /**
@@ -56,6 +56,7 @@ type Props = $RemoveChildren<typeof Surface> & {
    * @optional
    */
   theme: Theme;
+  testID?: string;
 };
 
 type State = {
@@ -110,6 +111,7 @@ class FAB extends React.Component<Props, State> {
   };
 
   componentDidUpdate(prevProps: Props) {
+    const { scale } = this.props.theme.animation;
     if (this.props.visible === prevProps.visible) {
       return;
     }
@@ -117,13 +119,13 @@ class FAB extends React.Component<Props, State> {
     if (this.props.visible) {
       Animated.timing(this.state.visibility, {
         toValue: 1,
-        duration: 200,
+        duration: 200 * scale,
         useNativeDriver: true,
       }).start();
     } else {
       Animated.timing(this.state.visibility, {
         toValue: 0,
-        duration: 150,
+        duration: 150 * scale,
         useNativeDriver: true,
       }).start();
     }
@@ -142,6 +144,7 @@ class FAB extends React.Component<Props, State> {
       style,
       visible,
       loading,
+      testID,
       ...rest
     } = this.props;
     const { visibility } = this.state;
@@ -206,6 +209,7 @@ class FAB extends React.Component<Props, State> {
           accessibilityRole="button"
           accessibilityStates={disabled ? ['disabled'] : []}
           style={styles.touchable}
+          testID={testID}
         >
           <View
             style={[

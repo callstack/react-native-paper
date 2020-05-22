@@ -6,14 +6,15 @@ import {
   TouchableWithoutFeedback,
   View,
   ViewStyle,
+  I18nManager,
 } from 'react-native';
 import color from 'color';
-import Icon from '../Icon';
+import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 
-type Props = React.ComponentProps<typeof TouchableWithoutFeedback> & {
+type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
   /**
    * Text content of the `DataTableTitle`.
    */
@@ -94,7 +95,12 @@ class DataTableTitle extends React.Component<Props, State> {
 
     const icon = sortDirection ? (
       <Animated.View style={[styles.icon, { transform: [{ rotate: spin }] }]}>
-        <Icon source="arrow-down" size={16} color={theme.colors.text} />
+        <MaterialCommunityIcon
+          name="arrow-down"
+          size={16}
+          color={theme.colors.text}
+          direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+        />
       </Animated.View>
     ) : null;
 
