@@ -7,11 +7,14 @@ exports[`renders snackbar with Text as a child 1`] = `
   emulateUnlessSupported={true}
   pointerEvents="box-none"
   style={
-    Object {
-      "bottom": 0,
-      "position": "absolute",
-      "width": "100%",
-    }
+    Array [
+      Object {
+        "bottom": 0,
+        "position": "absolute",
+        "width": "100%",
+      },
+      undefined,
+    ]
   }
 >
   <View
@@ -79,11 +82,14 @@ exports[`renders snackbar with action button 1`] = `
   emulateUnlessSupported={true}
   pointerEvents="box-none"
   style={
-    Object {
-      "bottom": 0,
-      "position": "absolute",
-      "width": "100%",
-    }
+    Array [
+      Object {
+        "bottom": 0,
+        "position": "absolute",
+        "width": "100%",
+      },
+      undefined,
+    ]
   }
 >
   <View
@@ -242,11 +248,14 @@ exports[`renders snackbar with content 1`] = `
   emulateUnlessSupported={true}
   pointerEvents="box-none"
   style={
-    Object {
-      "bottom": 0,
-      "position": "absolute",
-      "width": "100%",
-    }
+    Array [
+      Object {
+        "bottom": 0,
+        "position": "absolute",
+        "width": "100%",
+      },
+      undefined,
+    ]
   }
 >
   <View

@@ -4,7 +4,7 @@ import { withTheme } from '../../core/theming';
 import { grey200 } from '../../styles/colors';
 import { Theme } from '../../types';
 
-type Props = React.ComponentProps<typeof Image> & {
+type Props = React.ComponentPropsWithRef<typeof Image> & {
   /**
    * @internal
    */

@@ -12,7 +12,7 @@ import { withTheme } from '../core/theming';
 import { Theme, $Omit } from '../types';
 
 type Props = $Omit<
-  $Omit<React.ComponentProps<typeof Animated.Text>, 'padding'>,
+  $Omit<React.ComponentPropsWithRef<typeof AnimatedText>, 'padding'>,
   'type'
 > & {
   /**
@@ -65,17 +65,25 @@ type State = {
  *     text: ''
  *   };
  *
+ *   _onChangeText = text => this.setState({ text });
+ *
+ *   _hasErrors = () => {
+ *     return !this.state.text.includes('@');
+ *   }
+ *
  *   render(){
+ *     const { text } = this.state;
+ *
  *     return (
  *       <View>
  *         <TextInput
  *           label="Email"
- *           value={this.state.text}
- *           onChangeText={text => this.setState({ text })}
+ *           value={text}
+ *           onChangeText={this._onChangeText}
  *         />
  *         <HelperText
  *           type="error"
- *           visible={!this.state.text.includes('@')}
+ *           visible={this._hasErrors()}
  *         >
  *           Email address is invalid!
  *         </HelperText>
@@ -111,23 +119,25 @@ class HelperText extends React.PureComponent<Props, State> {
   }
 
   private showText = () => {
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.shown, {
       toValue: 1,
-      duration: 150,
+      duration: 150 * scale,
       useNativeDriver: true,
     }).start();
   };
 
   private hideText = () => {
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.shown, {
       toValue: 0,
-      duration: 180,
+      duration: 180 * scale,
       useNativeDriver: true,
     }).start();
   };
 
   private handleTextLayout = (e: LayoutChangeEvent) => {
-    // @ts-ignore
+    //@ts-ignore Animated.Text typings are improved but something is still broken. It thinks onLayout is not callable.
     this.props.onLayout && this.props.onLayout(e);
     this.setState({
       textHeight: e.nativeEvent.layout.height,

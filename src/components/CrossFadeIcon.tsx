@@ -68,6 +68,7 @@ class CrossFadeIcon extends React.Component<Props, State> {
     Animated.timing(this.state.fade, {
       duration: scale * 200,
       toValue: 0,
+      useNativeDriver: true,
     }).start();
   }
 

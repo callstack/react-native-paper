@@ -72,20 +72,20 @@ class RadioButtonAndroid extends React.Component<Props, State> {
     if (prevProps.status === this.props.status) {
       return;
     }
-
+    const { scale } = this.props.theme.animation;
     if (this.props.status === 'checked') {
       this.state.radioAnim.setValue(1.2);
 
       Animated.timing(this.state.radioAnim, {
         toValue: 1,
-        duration: 150,
+        duration: 150 * scale,
       }).start();
     } else {
       this.state.borderAnim.setValue(10);
 
       Animated.timing(this.state.borderAnim, {
         toValue: BORDER_WIDTH,
-        duration: 150,
+        duration: 150 * scale,
       }).start();
     }
   }

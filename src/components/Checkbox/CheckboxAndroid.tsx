@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Animated, View, StyleSheet } from 'react-native';
 import color from 'color';
-import Icon from './Icon';
-import TouchableRipple from './TouchableRipple';
-import { withTheme } from '../core/theming';
-import { Theme, $RemoveChildren } from '../types';
+import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import TouchableRipple from '../TouchableRipple';
+import { withTheme } from '../../core/theming';
+import { Theme, $RemoveChildren } from '../../types';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -74,12 +74,14 @@ class CheckboxAndroid extends React.Component<Props, State> {
       Animated.timing(this.state.scaleAnim, {
         toValue: 0.85,
         duration: checked ? ANIMATION_DURATION * animation.scale : 0,
+        useNativeDriver: false,
       }),
       Animated.timing(this.state.scaleAnim, {
         toValue: 1,
         duration: checked
           ? ANIMATION_DURATION * animation.scale
           : ANIMATION_DURATION * animation.scale * 1.75,
+        useNativeDriver: false,
       }),
     ]).start();
   }
@@ -138,11 +140,12 @@ class CheckboxAndroid extends React.Component<Props, State> {
         style={styles.container}
       >
         <Animated.View style={{ transform: [{ scale: this.state.scaleAnim }] }}>
-          <Icon
+          <MaterialCommunityIcon
             allowFontScaling={false}
-            source={icon}
+            name={icon}
             size={24}
             color={checkboxColor}
+            direction="ltr"
           />
           <View style={[StyleSheet.absoluteFill, styles.fillContainer]}>
             <Animated.View

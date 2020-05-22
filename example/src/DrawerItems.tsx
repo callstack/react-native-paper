@@ -2,25 +2,18 @@ import * as React from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
 import {
   Drawer,
-  withTheme,
   Switch,
   TouchableRipple,
   Text,
   Colors,
-  Theme,
+  useTheme,
 } from 'react-native-paper';
 
 type Props = {
-  theme: Theme;
   toggleTheme: () => void;
   toggleRTL: () => void;
   isRTL: boolean;
   isDarkTheme: boolean;
-};
-
-type State = {
-  open: boolean;
-  drawerItemIndex: number;
 };
 
 const DrawerItemsData = [
@@ -31,57 +24,52 @@ const DrawerItemsData = [
   { label: 'A very long title that will be truncated', icon: 'delete', key: 4 },
 ];
 
-class DrawerItems extends React.Component<Props, State> {
-  state = {
-    open: false,
-    drawerItemIndex: 0,
-  };
+const DrawerItems = ({ toggleTheme, toggleRTL, isRTL, isDarkTheme }: Props) => {
+  const [drawerItemIndex, setDrawerItemIndex] = React.useState<number>(0);
 
-  _setDrawerItem = (index: number) => this.setState({ drawerItemIndex: index });
+  const _setDrawerItem = (index: number) => setDrawerItemIndex(index);
 
-  render() {
-    const { colors } = this.props.theme;
+  const { colors } = useTheme();
 
-    return (
-      <View style={[styles.drawerContent, { backgroundColor: colors.surface }]}>
-        <Drawer.Section title="Example items">
-          {DrawerItemsData.map((props, index) => (
-            <Drawer.Item
-              {...props}
-              key={props.key}
-              theme={
-                props.key === 3
-                  ? { colors: { primary: Colors.tealA200 } }
-                  : undefined
-              }
-              active={this.state.drawerItemIndex === index}
-              onPress={() => this._setDrawerItem(index)}
-            />
-          ))}
-        </Drawer.Section>
+  return (
+    <View style={[styles.drawerContent, { backgroundColor: colors.surface }]}>
+      <Drawer.Section title="Example items">
+        {DrawerItemsData.map((props, index) => (
+          <Drawer.Item
+            {...props}
+            key={props.key}
+            theme={
+              props.key === 3
+                ? { colors: { primary: Colors.tealA200 } }
+                : undefined
+            }
+            active={drawerItemIndex === index}
+            onPress={() => _setDrawerItem(index)}
+          />
+        ))}
+      </Drawer.Section>
 
-        <Drawer.Section title="Preferences">
-          <TouchableRipple onPress={this.props.toggleTheme}>
-            <View style={styles.preference}>
-              <Text>Dark Theme</Text>
-              <View pointerEvents="none">
-                <Switch value={this.props.isDarkTheme} />
-              </View>
+      <Drawer.Section title="Preferences">
+        <TouchableRipple onPress={toggleTheme}>
+          <View style={styles.preference}>
+            <Text>Dark Theme</Text>
+            <View pointerEvents="none">
+              <Switch value={isDarkTheme} />
             </View>
-          </TouchableRipple>
-          <TouchableRipple onPress={this.props.toggleRTL}>
-            <View style={styles.preference}>
-              <Text>RTL</Text>
-              <View pointerEvents="none">
-                <Switch value={this.props.isRTL} />
-              </View>
+          </View>
+        </TouchableRipple>
+        <TouchableRipple onPress={toggleRTL}>
+          <View style={styles.preference}>
+            <Text>RTL</Text>
+            <View pointerEvents="none">
+              <Switch value={isRTL} />
             </View>
-          </TouchableRipple>
-        </Drawer.Section>
-      </View>
-    );
-  }
-}
+          </View>
+        </TouchableRipple>
+      </Drawer.Section>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   drawerContent: {
@@ -96,4 +84,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(DrawerItems);
+export default DrawerItems;

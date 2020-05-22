@@ -1,12 +1,13 @@
 {
   "name": "react-native-paper",
-  "version": "3.4.0",
+  "version": "4.0.0-alpha.0",
   "description": "Material design for React Native",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
   "react-native": "lib/module/index.js",
   "types": "lib/typescript/src/index.d.ts",
   "files": [
+    "src",
     "lib",
     "babel.js"
   ],
@@ -46,19 +47,18 @@
   "dependencies": {
     "@callstack/react-theme-provider": "^3.0.5",
     "color": "^3.1.2",
-    "react-native-safe-area-view": "^0.14.6"
+    "react-native-safe-area-view": "^0.14.9"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
     "@babel/runtime": "^7.4.4",
     "@callstack/eslint-config": "^9.0.0",
-    "@commitlint/config-conventional": "^7.5.0",
-    "@react-native-community/bob": "^0.4.1",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@react-native-community/bob": "^0.10.0",
     "@release-it/conventional-changelog": "^1.1.0",
     "@types/color": "^3.0.0",
     "@types/jest": "^24.0.13",
-    "@types/node": "^12.0.4",
-    "@types/reach__router": "^1.2.4",
+    "@types/node": "^13.1.0",
     "@types/react-dom": "^16.8.4",
     "@types/react-native": "^0.61.4",
     "@types/react-native-vector-icons": "^6.4.1",
@@ -69,8 +69,8 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^24.3.1",
     "babel-test": "^0.1.1",
-    "chalk": "^2.4.1",
-    "commitlint": "^7.5.2",
+    "chalk": "^4.0.0",
+    "commitlint": "^8.3.4",
     "conventional-changelog-cli": "^2.0.11",
     "dedent": "^0.7.0",
     "eslint": "^6.7.2",
@@ -90,9 +90,9 @@
     "react-native-testing-library": "^1.5.0",
     "react-native-vector-icons": "~6.3.0",
     "react-test-renderer": "16.8.3",
-    "release-it": "^12.3.3",
-    "rimraf": "^2.6.2",
-    "typescript": "^3.7.1"
+    "release-it": "^13.4.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.8.3"
   },
   "peerDependencies": {
     "react": "*",
@@ -123,7 +123,11 @@
       "react",
       "react-dom",
       "react-native",
-      "react-test-renderer"
+      "react-test-renderer",
+      "@types/react-native",
+      "@types/jest",
+      "husky",
+      "eslint"
     ]
   },
   "@react-native-community/bob": {

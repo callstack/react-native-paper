@@ -20,6 +20,7 @@ exports[`renders with placeholder 1`] = `
   }
 >
   <View
+    accessibilityLabel="search"
     accessibilityRole="button"
     accessibilityStates={Array []}
     accessible={true}
@@ -133,6 +134,7 @@ exports[`renders with placeholder 1`] = `
     underlineColorAndroid="transparent"
   />
   <View
+    accessibilityLabel="clear"
     accessibilityRole="button"
     accessibilityStates={
       Array [
@@ -244,6 +246,7 @@ exports[`renders with text 1`] = `
   }
 >
   <View
+    accessibilityLabel="search"
     accessibilityRole="button"
     accessibilityStates={Array []}
     accessible={true}
@@ -358,6 +361,7 @@ exports[`renders with text 1`] = `
     value="query"
   />
   <View
+    accessibilityLabel="clear"
     accessibilityRole="button"
     accessibilityStates={Array []}
     accessible={true}

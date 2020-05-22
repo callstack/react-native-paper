@@ -5,6 +5,7 @@ import {
   View,
   Animated,
   TouchableWithoutFeedback,
+  TouchableWithoutFeedbackProps,
   StyleSheet,
   StyleProp,
   Platform,
@@ -37,6 +38,20 @@ type Route = {
 type NavigationState = {
   index: number;
   routes: Route[];
+};
+
+type TabPressEvent = {
+  defaultPrevented: boolean;
+  preventDefault(): void;
+};
+
+type TouchableProps = TouchableWithoutFeedbackProps & {
+  key: string;
+  route: Route;
+  children: React.ReactNode;
+  borderless?: boolean;
+  centered?: boolean;
+  rippleColor?: string;
 };
 
 type Props = {
@@ -143,6 +158,11 @@ type Props = {
     color: string;
   }) => React.ReactNode;
   /**
+   * Callback which returns a React element to be used as the touchable for the tab item.
+   * Renders a `TouchableRipple` on Android and `TouchableWithoutFeedback` with `View` on iOS.
+   */
+  renderTouchable?: (props: TouchableProps) => React.ReactNode;
+  /**
    * Get label text for the tab, uses `route.title` by default. Use `renderLabel` to replace label component.
    */
   getLabelText?: (props: { route: Route }) => string;
@@ -166,7 +186,7 @@ type Props = {
   /**
    * Function to execute on tab press. It receives the route for the pressed tab, useful for things like scroll to top.
    */
-  onTabPress?: (props: { route: Route }) => void;
+  onTabPress?: (props: { route: Route } & TabPressEvent) => void;
   /**
    * Custom color for icon and label in the active tab.
    */
@@ -258,15 +278,30 @@ const MAX_TAB_WIDTH = 168;
 const BAR_HEIGHT = 56;
 const FAR_FAR_AWAY = 9999;
 
-// @ts-ignore
-const Touchable = TouchableRipple.supported
-  ? TouchableRipple
-  : // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    ({ style, children, borderless, centered, rippleColor, ...rest }: any) => (
-      <TouchableWithoutFeedback {...rest}>
-        <View style={style}>{children}</View>
-      </TouchableWithoutFeedback>
-    );
+const Touchable = ({
+  route: _0,
+  style,
+  children,
+  borderless,
+  centered,
+  rippleColor,
+  ...rest
+}: TouchableProps) =>
+  TouchableRipple.supported ? (
+    <TouchableRipple
+      {...rest}
+      borderless={borderless}
+      centered={centered}
+      rippleColor={rippleColor}
+      style={style}
+    >
+      {children}
+    </TouchableRipple>
+  ) : (
+    <TouchableWithoutFeedback {...rest}>
+      <View style={style}>{children}</View>
+    </TouchableWithoutFeedback>
+  );
 
 class SceneComponent extends React.PureComponent<any> {
   render() {
@@ -461,27 +496,36 @@ class BottomNavigation extends React.Component<Props, State> {
     }
   }
 
-  private handleKeyboardShow = () =>
+  private handleKeyboardShow = () => {
+    const { scale } = this.props.theme.animation;
     this.setState({ keyboard: true }, () =>
       Animated.timing(this.state.visible, {
         toValue: 0,
-        duration: 150,
+        duration: 150 * scale,
         useNativeDriver: true,
       }).start()
     );
+  };
 
-  private handleKeyboardHide = () =>
+  private handleKeyboardHide = () => {
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.visible, {
       toValue: 1,
-      duration: 100,
+      duration: 100 * scale,
       useNativeDriver: true,
     }).start(() => {
       this.setState({ keyboard: false });
     });
+  };
 
   private animateToCurrentIndex = () => {
     const shifting = this.isShifting();
-    const { sceneAnimationEnabled, navigationState } = this.props;
+    const {
+      navigationState,
+      theme: {
+        animation: { scale },
+      },
+    } = this.props;
     const { routes, index } = navigationState;
 
     // Reset the ripple to avoid glitch if it's currently animating
@@ -490,13 +534,13 @@ class BottomNavigation extends React.Component<Props, State> {
     Animated.parallel([
       Animated.timing(this.state.ripple, {
         toValue: 1,
-        duration: shifting ? 400 : 0,
+        duration: shifting ? 400 * scale : 0,
         useNativeDriver: true,
       }),
       ...routes.map((_, i) =>
         Animated.timing(this.state.tabs[i], {
           toValue: i === index ? 1 : 0,
-          duration: shifting && sceneAnimationEnabled !== false ? 150 : 0,
+          duration: shifting ? 150 * scale : 0,
           useNativeDriver: true,
         })
       ),
@@ -542,10 +586,18 @@ class BottomNavigation extends React.Component<Props, State> {
   private handleTabPress = (index: number) => {
     const { navigationState, onTabPress, onIndexChange } = this.props;
 
-    if (onTabPress) {
-      onTabPress({
-        route: navigationState.routes[index],
-      });
+    const event = {
+      route: navigationState.routes[index],
+      defaultPrevented: false,
+      preventDefault: () => {
+        event.defaultPrevented = true;
+      },
+    };
+
+    onTabPress?.(event);
+
+    if (event.defaultPrevented) {
+      return;
     }
 
     if (index !== navigationState.index) {
@@ -572,6 +624,7 @@ class BottomNavigation extends React.Component<Props, State> {
       renderScene,
       renderIcon,
       renderLabel,
+      renderTouchable = (props: TouchableProps) => <Touchable {...props} />,
       getLabelText = ({ route }: { route: Route }) => route.title,
       getBadge = ({ route }: { route: Route }) => route.badge,
       getColor = ({ route }: { route: Route }) => route.color,
@@ -585,6 +638,7 @@ class BottomNavigation extends React.Component<Props, State> {
       labeled,
       style,
       theme,
+      sceneAnimationEnabled,
     } = this.props;
 
     const {
@@ -655,14 +709,15 @@ class BottomNavigation extends React.Component<Props, State> {
               // Don't render a screen if we've never navigated to it
               return null;
             }
+            const focused = navigationState.index === index;
 
-            const opacity = tabs[index];
+            const opacity =
+              sceneAnimationEnabled !== false ? tabs[index] : focused ? 1 : 0;
+
             const top = offsets[index].interpolate({
               inputRange: [0, 1],
               outputRange: [0, FAR_FAR_AWAY],
             });
-
-            const focused = navigationState.index === index;
 
             return (
               <Animated.View
@@ -796,23 +851,23 @@ class BottomNavigation extends React.Component<Props, State> {
 
                 const badge = getBadge({ route });
 
-                return (
-                  <Touchable
-                    key={route.key}
-                    borderless
-                    centered
-                    rippleColor={touchColor}
-                    onPress={() => this.handleTabPress(index)}
-                    testID={getTestID({ route })}
-                    accessibilityLabel={getAccessibilityLabel({ route })}
-                    accessibilityTraits={
-                      focused ? ['button', 'selected'] : 'button'
-                    }
-                    accessibilityComponentType="button"
-                    accessibilityRole="button"
-                    accessibilityStates={['selected']}
-                    style={styles.item}
-                  >
+                return renderTouchable({
+                  key: route.key,
+                  route,
+                  borderless: true,
+                  centered: true,
+                  rippleColor: touchColor,
+                  onPress: () => this.handleTabPress(index),
+                  testID: getTestID({ route }),
+                  accessibilityLabel: getAccessibilityLabel({ route }),
+                  accessibilityTraits: focused
+                    ? ['button', 'selected']
+                    : 'button',
+                  accessibilityComponentType: 'button',
+                  accessibilityRole: 'button',
+                  accessibilityStates: ['selected'],
+                  style: styles.item,
+                  children: (
                     <View pointerEvents="none">
                       <Animated.View
                         style={[
@@ -940,8 +995,8 @@ class BottomNavigation extends React.Component<Props, State> {
                         <View style={styles.labelContainer} />
                       )}
                     </View>
-                  </Touchable>
-                );
+                  ),
+                });
               })}
             </SafeAreaView>
           </Animated.View>

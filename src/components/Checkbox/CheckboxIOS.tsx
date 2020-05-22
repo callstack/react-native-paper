@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import color from 'color';
-import Icon from './Icon';
-import TouchableRipple from './TouchableRipple';
-import { withTheme } from '../core/theming';
-import { Theme, $RemoveChildren } from '../types';
+import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import TouchableRipple from '../TouchableRipple';
+import { withTheme } from '../../core/theming';
+import { Theme, $RemoveChildren } from '../../types';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -87,11 +87,12 @@ class CheckboxIOS extends React.Component<Props> {
         style={styles.container}
       >
         <View style={{ opacity: indeterminate || checked ? 1 : 0 }}>
-          <Icon
+          <MaterialCommunityIcon
             allowFontScaling={false}
-            source={icon}
+            name={icon}
             size={24}
             color={checkedColor}
+            direction="ltr"
           />
         </View>
       </TouchableRipple>

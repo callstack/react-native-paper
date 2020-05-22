@@ -66,9 +66,11 @@ type State = {
  * import * as React from 'react';
  * import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
  *
+ * const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
+ *
  * const MyComponent = () => (
  *   <Card>
- *     <Card.Title title="Card Title" subtitle="Card Subtitle" left={(props) => <Avatar.Icon {...props} icon="folder" />} />
+ *     <Card.Title title="Card Title" subtitle="Card Subtitle" left={LeftContent} />
  *     <Card.Content>
  *       <Title>Card title</Title>
  *       <Paragraph>Card content</Paragraph>
@@ -104,17 +106,21 @@ class Card extends React.Component<Props, State> {
   };
 
   private handlePressIn = () => {
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.elevation, {
       toValue: 8,
-      duration: 150,
+      duration: 150 * scale,
+      useNativeDriver: true,
     }).start();
   };
 
   private handlePressOut = () => {
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.elevation, {
       // @ts-ignore
       toValue: this.props.elevation,
-      duration: 150,
+      duration: 150 * scale,
+      useNativeDriver: true,
     }).start();
   };
 
@@ -174,6 +180,7 @@ class Card extends React.Component<Props, State> {
 const styles = StyleSheet.create({
   innerContainer: {
     flexGrow: 1,
+    flexShrink: 1,
   },
 });
 

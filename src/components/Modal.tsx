@@ -188,6 +188,7 @@ class Modal extends React.Component<Props, State> {
         style={StyleSheet.absoluteFill}
       >
         <TouchableWithoutFeedback
+          disabled={!dismissable}
           onPress={dismissable ? this.hideModal : undefined}
         >
           <Animated.View
