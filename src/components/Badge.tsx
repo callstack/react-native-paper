@@ -1,11 +1,5 @@
 import * as React from 'react';
-import {
-  Animated,
-  StyleSheet,
-  StyleProp,
-  TextStyle,
-  ViewStyle,
-} from 'react-native';
+import { Animated, StyleSheet, StyleProp, TextStyle } from 'react-native';
 import color from 'color';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
@@ -96,13 +90,12 @@ class Badge extends React.Component<Props, State> {
     const {
       children,
       size = defaultSize,
+      style,
       theme,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       visible,
       ...rest
     } = this.props;
-    /** Type for this.props.style was somehow altered after upgrading to "@types/react-native": "^0.61.4", and was throwing some strange errors, the following is a workaround */
-    const style: StyleProp<ViewStyle> = this.props.style;
     const { opacity } = this.state;
 
     const { backgroundColor = theme.colors.notification, ...restStyle } =
