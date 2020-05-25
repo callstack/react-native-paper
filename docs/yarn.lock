@@ -2568,10 +2568,10 @@ commondir@^1.0.1:
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
   integrity sha1-3dgA2gxmEnOTzKWVDqloo6rxJTs=
 
-component-docs@^0.20.5:
-  version "0.20.5"
-  resolved "https://registry.yarnpkg.com/component-docs/-/component-docs-0.20.5.tgz#4cc1db022ed83f5ecab8bfc69fcf904a56d8ab97"
-  integrity sha512-RwYYa4KC2S9DR+EGRXyMjRyhzIo18F0RadtEvDf7HMkZPzB7zP/RAO4EFkuW0x9zTbdSE4YCdxtV23XDkAO1oA==
+component-docs@^0.22.0:
+  version "0.22.0"
+  resolved "https://registry.yarnpkg.com/component-docs/-/component-docs-0.22.0.tgz#2b2c21392413c3ed68944e050e66273a22c6d034"
+  integrity sha512-Z36nxHg8LD8ZTEDyybGYN3121BF4Nc5EzKc44ofgCNo+a3I3cWOm3oeaTvkRWV2G5u84+6qc9Nsvw9fgkDfyvA==
   dependencies:
     "@babel/core" "^7.8.4"
     "@babel/plugin-proposal-class-properties" "^7.8.3"
