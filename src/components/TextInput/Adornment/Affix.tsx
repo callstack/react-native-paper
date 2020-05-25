@@ -25,7 +25,7 @@ type Props = {
 };
 
 type ContextState = {
-  affixTopPosition: number | null;
+  topPosition: number | null;
   onLayout?: (event: LayoutChangeEvent) => void;
   visible?: Animated.Value;
   textStyle?: StyleProp<TextStyle>;
@@ -34,7 +34,7 @@ type ContextState = {
 
 const AffixContext = React.createContext<ContextState>({
   textStyle: { fontFamily: '', color: '' },
-  affixTopPosition: null,
+  topPosition: null,
   side: AdornmentSide.Left,
 });
 
@@ -45,7 +45,7 @@ export const AffixAdornment: React.FunctionComponent<{
   affix,
   side,
   textStyle,
-  affixTopPosition,
+  topPosition,
   onLayout,
   visible,
 }) => {
@@ -54,7 +54,7 @@ export const AffixAdornment: React.FunctionComponent<{
       value={{
         side,
         textStyle,
-        affixTopPosition,
+        topPosition,
         onLayout,
         visible,
       }}
@@ -65,20 +65,16 @@ export const AffixAdornment: React.FunctionComponent<{
 };
 
 const TextInputAffix = ({ text, theme }: Props) => {
-  const {
-    textStyle,
-    onLayout,
-    affixTopPosition,
-    side,
-    visible,
-  } = React.useContext(AffixContext);
+  const { textStyle, onLayout, topPosition, side, visible } = React.useContext(
+    AffixContext
+  );
   const textColor = color(theme.colors.text)
     .alpha(theme.dark ? 0.7 : 0.54)
     .rgb()
     .string();
 
   const style = {
-    top: affixTopPosition,
+    top: topPosition,
     [side]: AFFIX_OFFSET,
   };
 
