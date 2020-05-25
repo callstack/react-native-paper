@@ -34,21 +34,12 @@ type Props = {
  *   render() {
  *     return (
  *       <Provider>
- *       
- *         <View style={{
- *           flex: 1,
- *           justifyContent: 'center',
- *           alignContent: 'center'
- *         }}>
- *           <Text style={{
- *             textAlign: 'center'
- *           }}>This is rendered in the normal place</Text>
+ *         <View>
+ *           <Text>This is rendered in the normal place</Text>
  *         </View>
- *       
  *        <Portal>
  *           <Text>This is rendered at a different place</Text>
  *        </Portal>
- *
  *      </Provider>
  *    );
  *  }
