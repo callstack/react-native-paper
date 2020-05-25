@@ -600,6 +600,7 @@ exports[`renders loading button 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "height": 16,
