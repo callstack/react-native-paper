@@ -13,6 +13,7 @@ exports[`renders colored indicator 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "height": 24,
@@ -195,6 +196,7 @@ exports[`renders hidden indicator 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "height": 24,
@@ -377,6 +379,7 @@ exports[`renders indicator 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "height": 24,
@@ -559,6 +562,7 @@ exports[`renders large indicator 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "height": 48,
