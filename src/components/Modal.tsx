@@ -30,7 +30,7 @@ type Props = {
   /**
    * Determines Whether the modal is wrapped in a SafeAreaView.
    */
-  wrapInSafeArea?: boolean;
+  wrapInSafeAreaView?: boolean;
   /**
    * Content of the `Modal`.
    */
@@ -192,12 +192,12 @@ class Modal extends React.Component<Props, State> {
     const {
       children,
       dismissable,
-      wrapInSafeArea = true,
+      wrapInSafeAreaView = true,
       theme,
       contentContainerStyle,
     } = this.props;
     const { colors } = theme;
-    const Wrapper = wrapInSafeArea ? SafeAreaView : View;
+    const Wrapper = wrapInSafeAreaView ? SafeAreaView : View;
     return (
       <Animated.View
         pointerEvents={this.props.visible ? 'auto' : 'none'}
