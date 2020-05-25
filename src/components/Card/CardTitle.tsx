@@ -12,7 +12,7 @@ import Caption from './../Typography/Caption';
 import Title from './../Typography/Title';
 import { Theme } from '../../types';
 
-type Props = React.ComponentProps<typeof View> & {
+type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Text for the title. Note that this will only accept a string or `<Text>`-based node.
    */
@@ -135,6 +135,7 @@ class CardTitle extends React.Component<Props> {
                 { marginBottom: subtitle ? 0 : 2 },
                 titleStyle,
               ]}
+              numberOfLines={1}
             >
               {title}
             </Title>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
 
-type Props = React.ComponentProps<typeof View> & {
+type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Items inside the `Card.Content`.
    */
@@ -23,6 +23,13 @@ type Props = React.ComponentProps<typeof View> & {
 
 /**
  * A component to show content inside a Card.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/card-content-example.png" />
+ *   </figure>
+ * </div>
+ *
  *
  * ## Usage
  * ```js

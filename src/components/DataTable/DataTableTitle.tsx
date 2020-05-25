@@ -14,7 +14,7 @@ import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 
-type Props = React.ComponentProps<typeof TouchableWithoutFeedback> & {
+type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
   /**
    * Text content of the `DataTableTitle`.
    */
@@ -45,6 +45,40 @@ type Props = React.ComponentProps<typeof TouchableWithoutFeedback> & {
 type State = {
   spinAnim: Animated.Value;
 };
+
+/**
+ * A component to display title in table header.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/data-table-header.png" />
+ *   </figure>
+ * </div>
+ *
+ *
+ * ## Usage
+ * ```js
+ * import * as React from 'react';
+ * import { DataTable } from 'react-native-paper';
+ *
+ * const MyComponent = () => (
+ *       <DataTable>
+ *         <DataTable.Header>
+ *           <DataTable.Title
+ *             sortDirection='descending'
+ *           >
+ *             Dessert
+ *           </DataTable.Title>
+ *           <DataTable.Title numeric>Calories</DataTable.Title>
+ *           <DataTable.Title numeric>Fat (g)</DataTable.Title>
+ *         </DataTable.Header>
+ *       </DataTable>
+ *   </Card>
+ * );
+ *
+ * export default MyComponent;
+ * ```
+ */
 
 class DataTableTitle extends React.Component<Props, State> {
   static displayName = 'DataTable.Title';

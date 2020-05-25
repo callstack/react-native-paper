@@ -4,7 +4,7 @@ import Title from '../Typography/Title';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 
-type Props = React.ComponentProps<typeof Title> & {
+type Props = React.ComponentPropsWithRef<typeof Title> & {
   /**
    * Title text for the `DialogTitle`.
    */
@@ -18,6 +18,12 @@ type Props = React.ComponentProps<typeof Title> & {
 
 /**
  * A component to show a title in a Dialog.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/dialog-title.png" />
+ *   </figure>
+ * </div>
  *
  * ## Usage
  * ```js

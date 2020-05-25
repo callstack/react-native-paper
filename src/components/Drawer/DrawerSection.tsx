@@ -6,7 +6,7 @@ import Divider from '../Divider';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 
-type Props = React.ComponentProps<typeof View> & {
+type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Title to show as the header for the section.
    */
@@ -25,34 +25,35 @@ type Props = React.ComponentProps<typeof View> & {
 /**
  * A component to group content inside a navigation drawer.
  *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/drawer-section.png" />
+ *   </figure>
+ * </div>
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
  * import { Drawer } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     active: 'first',
- *   };
+ * export default function MyComponent = () => {
  *
- *   render() {
- *     const { active } = this.state;
+ *     const [active, setActive] = React.useState(false);
  *
  *     return (
  *       <Drawer.Section title="Some title">
  *         <Drawer.Item
  *           label="First Item"
  *           active={active === 'first'}
- *           onPress={() => { this.setState({ active: 'first' }); }}
+ *           onPress={() =>  setActive('first')}
  *         />
  *         <Drawer.Item
  *           label="Second Item"
  *           active={active === 'second'}
- *           onPress={() => { this.setState({ active: 'second' }); }}
+ *           onPress={() =>  setActive('second')}
  *         />
  *      </Drawer.Section>
  *     );
- *   }
  * }
  * ```
  */

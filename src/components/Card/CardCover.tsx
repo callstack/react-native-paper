@@ -4,7 +4,7 @@ import { withTheme } from '../../core/theming';
 import { grey200 } from '../../styles/colors';
 import { Theme } from '../../types';
 
-type Props = React.ComponentProps<typeof Image> & {
+type Props = React.ComponentPropsWithRef<typeof Image> & {
   /**
    * @internal
    */
@@ -22,6 +22,12 @@ type Props = React.ComponentProps<typeof Image> & {
 
 /**
  * A component to show a cover image inside a Card.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/card-cover.png" />
+ *   </figure>
+ * </div>
  *
  * ## Usage
  * ```js

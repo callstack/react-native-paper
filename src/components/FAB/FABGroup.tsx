@@ -118,9 +118,9 @@ type State = {
  *          <Portal>
  *            <FAB.Group
  *              open={open}
- *              icon={open ? 'today' : 'add'}
+ *              icon={open ? 'calendar-today' : 'plus'}
  *              actions={[
- *                { icon: 'add', onPress: () => console.log('Pressed add') },
+ *                { icon: 'plus', onPress: () => console.log('Pressed add') },
  *                { icon: 'star', label: 'Star', onPress: () => console.log('Pressed star')},
  *                { icon: 'email', label: 'Email', onPress: () => console.log('Pressed email') },
  *                { icon: 'bell', label: 'Remind', onPress: () => console.log('Pressed notifications') },
@@ -262,7 +262,7 @@ class FABGroup extends React.Component<Props, State> {
               <View
                 key={i} // eslint-disable-line react/no-array-index-key
                 style={styles.item}
-                pointerEvents="box-none"
+                pointerEvents={open ? 'box-none' : 'none'}
               >
                 {it.label && (
                   <Card
@@ -318,6 +318,7 @@ class FABGroup extends React.Component<Props, State> {
                   accessibilityComponentType="button"
                   accessibilityRole="button"
                   testID={it.testID}
+                  visible={open}
                 />
               </View>
             ))}

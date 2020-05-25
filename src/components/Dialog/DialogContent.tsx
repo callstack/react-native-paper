@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 
-type Props = React.ComponentProps<typeof View> & {
+type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Content of the `DialogContent`.
    */
@@ -11,6 +11,13 @@ type Props = React.ComponentProps<typeof View> & {
 
 /**
  * A component to show content in a Dialog.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/dialog-content.png" />
+ *   </figure>
+ * </div>
+ *
  *
  * ## Usage
  * ```js

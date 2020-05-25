@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
 
-type Props = React.ComponentProps<typeof View> & {
+type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Content of the `DialogActions`.
    */
@@ -11,6 +11,12 @@ type Props = React.ComponentProps<typeof View> & {
 
 /**
  * A component to show a list of actions in a Dialog.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/dialog-actions.png" />
+ *   </figure>
+ * </div>
  *
  * ## Usage
  * ```js

@@ -11,7 +11,7 @@ import {
 import { withTheme } from '../core/theming';
 import { Theme } from '../types';
 
-type Props = React.ComponentProps<typeof View> & {
+type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Whether to show the indicator or hide it.
    */
@@ -183,7 +183,10 @@ class ActivityIndicator extends React.Component<Props, State> {
 
     return (
       <View style={[styles.container, style]} {...rest}>
-        <Animated.View style={[{ width: size, height: size, opacity: fade }]}>
+        <Animated.View
+          style={[{ width: size, height: size, opacity: fade }]}
+          collapsable={false}
+        >
           {[0, 1].map(index => {
             // Thanks to https://github.com/n4kz/react-native-indicators for the great work
             const inputRange = Array.from(

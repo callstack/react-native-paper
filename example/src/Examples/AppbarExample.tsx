@@ -16,7 +16,7 @@ type Props = {
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
-export default function AppbarExample({ navigation }: Props) {
+const AppbarExample = ({ navigation }: Props) => {
   const { colors } = useTheme();
 
   const [showLeftIcon, setShowLeftIcon] = React.useState(true);
@@ -85,9 +85,11 @@ export default function AppbarExample({ navigation }: Props) {
       <FAB icon="reply" onPress={() => {}} style={styles.fab} />
     </View>
   );
-}
+};
 
 AppbarExample.title = 'Appbar';
+
+export default AppbarExample;
 
 const styles = StyleSheet.create({
   container: {
