@@ -17,6 +17,12 @@ type Props = {
 /**
  * A component to show an icon in a list item.
  *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/list-icon.png" />
+ *   </figure>
+ * </div>
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -24,6 +30,8 @@ type Props = {
  *
  * const MyComponent = () => (
  *   <List.Icon color={Colors.blue500} icon="folder" />
+ *   <List.Icon color={Colors.blue500} icon="equal" />
+ *   <List.Icon color={Colors.blue500} icon="calendar" />
  * );
  *
  * export default MyComponent;
