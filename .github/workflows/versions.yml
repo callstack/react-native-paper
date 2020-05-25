@@ -15,7 +15,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           packages: |
             react-native
-            eact-native-paper
+            react-native-paper
             expo
             npm
             yarn
