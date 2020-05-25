@@ -119,6 +119,7 @@ class AppbarHeader extends React.Component<Props> {
         }
       >
         <Appbar
+          //@ts-ignore
           style={[
             //@ts-ignore
             { height, backgroundColor, marginTop: statusBarHeight },
