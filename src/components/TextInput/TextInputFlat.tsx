@@ -37,7 +37,7 @@ import {
   getAdornmentConfig,
   getAdornmentStyleAdjustmentForNativeInput,
 } from './Adornment/TextInputAdornment';
-import { AdornmentSide } from './Adornment/enums';
+import { AdornmentSide, AdornmentType } from './Adornment/enums';
 
 const MINIMIZED_LABEL_Y_OFFSET = -18;
 
@@ -72,6 +72,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
       parentState,
       innerRef,
       onFocus,
+      forceFocus,
       onBlur,
       onChangeText,
       onLayoutAnimatedText,
@@ -290,9 +291,13 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
 
     let adornmentProps: TextInputAdornmentProps = {
       adornmentConfig,
-      iconTopPosition,
-      affixTopPosition,
+      forceFocus,
+      topPosition: {
+        [AdornmentType.Affix]: affixTopPosition,
+        [AdornmentType.Icon]: iconTopPosition,
+      },
       onAffixChange,
+      isTextInputFocused: this.props.parentState.focused,
     };
     if (adornmentConfig.length) {
       adornmentProps = {

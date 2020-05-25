@@ -70,6 +70,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
       parentState,
       innerRef,
       onFocus,
+      forceFocus,
       onBlur,
       onChangeText,
       onLayoutAnimatedText,
@@ -252,9 +253,13 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
 
     let adornmentProps: TextInputAdornmentProps = {
       adornmentConfig,
-      iconTopPosition,
-      affixTopPosition,
+      forceFocus,
+      topPosition: {
+        [AdornmentType.Icon]: iconTopPosition,
+        [AdornmentType.Affix]: affixTopPosition,
+      },
       onAffixChange,
+      isTextInputFocused: parentState.focused,
     };
     if (adornmentConfig.length) {
       adornmentProps = {
