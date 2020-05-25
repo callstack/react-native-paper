@@ -121,7 +121,7 @@ const IconButton = ({
       accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
       accessibilityComponentType="button"
       accessibilityRole="button"
-      accessibilityStates={disabled ? ['disabled'] : []}
+      accessibilityState={{ disabled }}
       disabled={disabled}
       hitSlop={
         // @ts-ignore - this should be fixed in react-theme-providersince withTheme() is not forwarding static property types

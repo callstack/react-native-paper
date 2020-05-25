@@ -27,7 +27,11 @@ exports[`renders extended FAB 1`] = `
   <View
     accessibilityLabel="Add items"
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
     accessible={true}
     focusable={true}
     isTVSelectable={true}
@@ -187,7 +191,11 @@ exports[`renders normal FAB 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
     accessible={true}
     focusable={true}
     isTVSelectable={true}
@@ -323,7 +331,11 @@ exports[`renders small FAB 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
     accessible={true}
     focusable={true}
     isTVSelectable={true}

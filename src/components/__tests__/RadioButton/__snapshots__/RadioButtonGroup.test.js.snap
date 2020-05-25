@@ -3,7 +3,11 @@
 exports[`RadioButtonGroup renders properly 1`] = `
 <View
   accessibilityRole="button"
-  accessibilityStates={Array []}
+  accessibilityState={
+    Object {
+      "disabled": undefined,
+    }
+  }
   accessible={true}
   focusable={true}
   isTVSelectable={true}

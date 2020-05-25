@@ -96,7 +96,12 @@ exports[`renders list item with custom description 1`] = `
           >
             <View
               accessibilityRole="button"
-              accessibilityState={Object {}}
+              accessibilityState={
+                Object {
+                  "disabled": false,
+                  "selected": false,
+                }
+              }
               accessible={true}
               focusable={true}
               isTVSelectable={true}

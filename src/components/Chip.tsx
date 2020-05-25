@@ -209,16 +209,17 @@ class Chip extends React.Component<Props, State> {
       : selectedBackgroundColor;
 
     const accessibilityTraits: AccessibilityTrait[] = ['button'];
-    const accessibilityState: AccessibilityState = {};
+    const accessibilityState: AccessibilityState = {
+      selected,
+      disabled,
+    };
 
     if (selected) {
       accessibilityTraits.push('selected');
-      accessibilityState.selected = true;
     }
 
     if (disabled) {
       accessibilityTraits.push('disabled');
-      accessibilityState.disabled = true;
     }
 
     return (
