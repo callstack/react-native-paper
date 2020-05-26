@@ -38,17 +38,20 @@ jobs:
             yarn install --frozen-lockfile
       - save_cache:
           key: dependencies-{{ checksum "package.json" }}
-          paths: node_modules
+          paths: 
+            - node_modules
       - save_cache:
           key: dependencies-docs-{{ checksum "docs/package.json" }}
-          paths: docs/node_modules
+          paths: 
+            - docs/node_modules
       - save_cache:
           key: dependencies-example-{{ checksum "example/package.json" }}
-          paths: example/node_modules
+          paths: 
+            - example/node_modules
       - persist_to_workspace:
           root: .
-          paths: .
-
+          paths: 
+            - .
   lint:
     executor: default
     steps:
@@ -84,7 +87,8 @@ jobs:
           path: coverage
           destination: coverage
       - save_cache:
-          paths: ./cache/jest
+          paths: 
+            - ./cache/jest
           key: jest-cache-{{ .Branch }}
 
   build-package:
