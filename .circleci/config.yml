@@ -24,10 +24,6 @@ jobs:
             - dependencies-
       - restore_cache:
           keys:
-            - dependencies-docs-{{ checksum "docs/package.json" }}
-            - dependencies-docs-
-      - restore_cache:
-          keys:
             - dependencies-example-{{ checksum "example/package.json" }}
             - dependencies-example-
       - run:
