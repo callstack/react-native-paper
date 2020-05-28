@@ -97,6 +97,8 @@ type State = {
  * ```
  */
 export class FAB extends React.Component<Props, State> {
+  static displayName = 'FAB';
+
   static defaultProps = {
     visible: true,
   };
