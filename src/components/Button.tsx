@@ -48,6 +48,10 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   icon?: IconSource;
   /**
+   * Size for the icon and the loading indicator.
+   */
+  iconSize?: number;
+  /**
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean;
@@ -163,6 +167,7 @@ class Button extends React.Component<Props, State> {
       dark,
       loading,
       icon,
+      iconSize,
       color: buttonColor,
       children,
       uppercase,
@@ -285,14 +290,14 @@ class Button extends React.Component<Props, State> {
               <View style={styles.icon}>
                 <Icon
                   source={icon}
-                  size={customLabelSize || 16}
+                  size={iconSize || customLabelSize || 16}
                   color={customLabelColor || textColor}
                 />
               </View>
             ) : null}
             {loading ? (
               <ActivityIndicator
-                size={customLabelSize || 16}
+                size={iconSize || customLabelSize || 16}
                 color={customLabelColor || textColor}
                 style={styles.icon}
               />
