@@ -36,7 +36,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
 };
 
 /**
- * Radio buttons allow the selection a single option from a set.
+ * Radio buttons allow the selection of a single option from a set.
  * This component follows platform guidelines for iOS.
  *
  * <div class="screenshots">
