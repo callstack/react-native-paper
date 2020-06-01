@@ -103,7 +103,8 @@ jobs:
       - run:
           name: Build docs
           command: |
-            cd docs && yarn && yarn build && cd ..
+            cd docs && yarn && yarn build
+            cd ..
             bash .circleci/comment-artifacts.sh
       - store_artifacts:
           path: docs/dist
