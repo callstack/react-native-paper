@@ -7,32 +7,38 @@ assignees: ''
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+<!-- Issues that don't use this template are likely to be closed. -->
+<!-- Please search the existing issues and read the documentation before opening an issue. -->
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+### Current behaviour
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+<!-- What's currently happening? -->
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+### Expected behaviour
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+<!-- What do you expect to happen? If there is an error, provide the complete error message with stack trace. -->
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+### Code sample
 
-**Additional context**
-Add any other context about the problem here.
+<!-- Provide a complete code sample that could be run to reproduce the issue, ideally on snack.expo.io or in a github repo. -->
+
+### Screenshots (if applicable)
+
+<!-- Include screenshots if there's a bug in the layout. -->
+
+### What have you tried
+
+<!-- List down the steps you have tried to fix or identify the issue and links to any related issues you found. -->
+
+### Your Environment
+
+| software              | version
+| --------------------- | -------
+| ios or android        |
+| react-native          |
+| react-native-paper    |
+| node                  |
+| npm or yarn           |
+| expo sdk              |
+
+<!-- Add expo sdk version along with snack that reproduces the issue -->
