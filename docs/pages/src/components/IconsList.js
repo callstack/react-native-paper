@@ -99,11 +99,13 @@ const Icon = styled.span`
   margin: 16px;
   font-family: 'MaterialCommunityIcons';
   font-size: 48px;
+  color: var(--theme-text-color);
 `;
 
 const IconName = styled.span`
   display: block;
   font-size: 12px;
+  color: var(--theme-text-color);
 `;
 
 const Results = styled.div`
