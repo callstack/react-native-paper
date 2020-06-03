@@ -132,4 +132,5 @@ module.exports = {
   pages: getPages,
   output: dist,
   github,
+  title: '[title] · React Native Paper',
 };
