@@ -4,11 +4,11 @@ type Props = {
   /**
    * Function to execute on selection change.
    */
-  onValueChange: (value: string) => void;
+  onValueChange: (value: string | number) => void;
   /**
    * Value of the currently selected radio button.
    */
-  value: string;
+  value: string | number;
   /**
    * React elements containing radio buttons.
    */
@@ -16,8 +16,8 @@ type Props = {
 };
 
 export type RadioButtonContextType = {
-  value: string;
-  onValueChange: (item: string) => void;
+  value: string | number;
+  onValueChange: (item: string | number) => void;
 };
 
 export const RadioButtonContext = React.createContext<RadioButtonContextType>(
@@ -26,17 +26,6 @@ export const RadioButtonContext = React.createContext<RadioButtonContextType>(
 
 /**
  * Radio button group allows to control a group of radio buttons.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/radio-button-group-android.gif" />
- *  <figcaption>Android</figcaption>
- *   </figure>
- *   <figure>
- *     <img class="medium" src="screenshots/radio-button-group-ios.gif" />
- *  <figcaption>iOS</figcaption>
- *   </figure>
- * </div>
  *
  * ## Usage
  * ```js

@@ -9,8 +9,8 @@ import {
 } from 'react-native-paper';
 
 const RadioButtonGroupExample = () => {
-  const [value, setValue] = React.useState<string>('first');
-  const [value2, setValue2] = React.useState<string>('first');
+  const [value, setValue] = React.useState<string | number>('first');
+  const [value2, setValue2] = React.useState<string | number>('first');
 
   const {
     colors: { background, primary },
@@ -27,7 +27,7 @@ const RadioButtonGroupExample = () => {
       <List.Section title="With RadioButton">
         <RadioButton.Group
           value={value}
-          onValueChange={(value: string) => setValue(value)}
+          onValueChange={(value: string | number) => setValue(value)}
         >
           <View style={styles.row}>
             <Paragraph>First</Paragraph>
@@ -46,7 +46,7 @@ const RadioButtonGroupExample = () => {
       <List.Section title="With RadioButton.Item">
         <RadioButton.Group
           value={value2}
-          onValueChange={(value: string) => setValue2(value)}
+          onValueChange={(value: string | number) => setValue2(value)}
         >
           <RadioButton.Item label="First item" value="first" />
           <RadioButton.Item label="Second item" value="second" />

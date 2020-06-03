@@ -4,8 +4,8 @@ export const handlePress = ({
   onValueChange,
 }: {
   onPress?: () => void;
-  value: string;
-  onValueChange?: (value: string) => void;
+  value: string | number;
+  onValueChange?: (value: string | number) => void;
 }) => {
   onValueChange ? onValueChange(value) : onPress?.();
 };
@@ -15,9 +15,9 @@ export const isChecked = ({
   status,
   contextValue,
 }: {
-  value: string;
+  value: string | number;
   status?: 'checked' | 'unchecked';
-  contextValue?: string;
+  contextValue?: string | number;
 }) => {
   if (contextValue) {
     return contextValue === value ? 'checked' : 'unchecked';

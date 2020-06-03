@@ -12,7 +12,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Value of the radio button
    */
-  value: string;
+  value: string | number;
   /**
    * Status of radio button.
    */
