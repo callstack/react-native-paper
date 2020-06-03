@@ -126,6 +126,7 @@ function getPages() {
 module.exports = {
   root,
   logo: 'images/sidebar-logo.svg',
+  favicon: 'images/paper.ico',
   assets,
   styles,
   scripts,
