@@ -18,7 +18,7 @@ const render = () => {
         data={data}
         github={"https://github.com/callstack/react-native-paper/edit/master/"}
         logo={"images/sidebar-logo.svg"}
-        title={undefined}
+        title={"[title] · React Native Paper"}
       />,
       root
     );
