@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "color": "^3.1.2",
-    "component-docs": "^0.22.0",
+    "component-docs": "^0.23.0",
     "linaria": "^1.2.4",
     "react-native-vector-icons": "^6.6.0"
   },
