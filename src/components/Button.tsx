@@ -78,6 +78,10 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   labelStyle?: StyleProp<TextStyle>;
   /**
+   * Maximum number of lines for the label.
+   */
+  numberOfLines?: number;
+  /**
    * @optional
    */
   theme: Theme;
@@ -172,6 +176,7 @@ class Button extends React.Component<Props, State> {
       theme,
       contentStyle,
       labelStyle,
+      numberOfLines,
       testID,
       ...rest
     } = this.props;
@@ -298,7 +303,7 @@ class Button extends React.Component<Props, State> {
               />
             ) : null}
             <Text
-              numberOfLines={1}
+              numberOfLines={numberOfLines || 1}
               style={[
                 styles.label,
                 compact && styles.compactLabel,
