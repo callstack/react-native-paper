@@ -171,6 +171,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     error: false,
     multiline: false,
     editable: true,
+    showUnderline: true,
     render: (props: RenderProps) => <NativeTextInput {...props} />,
   };
 
