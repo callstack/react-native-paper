@@ -7,15 +7,14 @@ jobs:
   check-versions:
     runs-on: ubuntu-latest
     steps:
-      - name: check-out-repository
-        uses: actions/checkout@v2
-
-      - uses: react-navigation/check-versions-action@master
+      - uses: react-navigation/check-versions-action@v1.0.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          packages: |
+          required-packages: |
             react-native
             react-native-paper
+            react-native-vector-icons
+          optional-packages: |
             expo
             npm
             yarn
