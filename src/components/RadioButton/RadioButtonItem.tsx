@@ -24,9 +24,21 @@ export type Props = {
    */
   label: string;
   /**
+   * Whether radio is disabled.
+   */
+  disabled?: boolean;
+  /**
    * Function to execute on press.
    */
   onPress?: () => void;
+  /**
+   * Custom color for unchecked radio.
+   */
+  uncheckedColor?: string;
+  /**
+   * Custom color for radio.
+   */
+  color?: string;
   /**
    * Status of radio button.
    */
@@ -47,6 +59,13 @@ export type Props = {
 
 /**
  * RadioButton.Item allows you to press the whole row (item) instead of only the RadioButton.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/radio-item.ios.png" />
+ *     <figcaption>Pressed</figcaption>
+ *   </figure>
+ * </div>
  *
  * ## Usage
  * ```js
@@ -83,6 +102,9 @@ class RadioButtonItem extends React.Component<Props> {
       style,
       labelStyle,
       onPress,
+      disabled,
+      color,
+      uncheckedColor,
       status,
       theme: { colors },
     } = this.props;
@@ -92,21 +114,30 @@ class RadioButtonItem extends React.Component<Props> {
         {(context?: RadioButtonContextType) => {
           return (
             <TouchableRipple
-              onPress={() =>
-                handlePress({
-                  onPress: onPress,
-                  onValueChange: context?.onValueChange,
-                  value,
-                })
+              onPress={
+                disabled
+                  ? undefined
+                  : () =>
+                      handlePress({
+                        onPress: onPress,
+                        onValueChange: context?.onValueChange,
+                        value,
+                      })
               }
             >
               <View style={[styles.container, style]} pointerEvents="none">
                 <Text
-                  style={[styles.label, labelStyle, { color: colors.primary }]}
+                  style={[styles.label, { color: colors.text }, labelStyle]}
                 >
                   {label}
                 </Text>
-                <RadioButton value={value} status={status}></RadioButton>
+                <RadioButton
+                  value={value}
+                  disabled={disabled}
+                  status={status}
+                  color={color}
+                  uncheckedColor={uncheckedColor}
+                />
               </View>
             </TouchableRipple>
           );

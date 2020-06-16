@@ -1,0 +1,21 @@
+name: Check versions
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  check-versions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check-out-repository
+        uses: actions/checkout@v2
+
+      - uses: react-navigation/check-versions-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          packages: |
+            react-native
+            react-native-paper
+            expo
+            npm
+            yarn

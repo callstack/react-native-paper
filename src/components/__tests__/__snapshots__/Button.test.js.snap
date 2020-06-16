@@ -16,7 +16,11 @@ exports[`renders button with color 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
     accessible={true}
     focusable={false}
     isTVSelectable={true}
@@ -108,7 +112,11 @@ exports[`renders button with custom testID 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
     accessible={true}
     focusable={false}
     isTVSelectable={true}
@@ -201,7 +209,11 @@ exports[`renders button with icon 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
     accessible={true}
     focusable={false}
     isTVSelectable={true}
@@ -240,7 +252,6 @@ exports[`renders button with icon 1`] = `
           Object {
             "marginLeft": 12,
             "marginRight": -4,
-            "width": 16,
           }
         }
       >
@@ -344,7 +355,11 @@ exports[`renders contained contained with mode 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
     accessible={true}
     focusable={false}
     isTVSelectable={true}
@@ -436,10 +451,10 @@ exports[`renders disabled button 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={
-      Array [
-        "disabled",
-      ]
+    accessibilityState={
+      Object {
+        "disabled": true,
+      }
     }
     accessible={true}
     focusable={false}
@@ -532,7 +547,11 @@ exports[`renders loading button 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
     accessible={true}
     focusable={false}
     isTVSelectable={true}
@@ -576,12 +595,12 @@ exports[`renders loading button 1`] = `
             Object {
               "marginLeft": 12,
               "marginRight": -4,
-              "width": 16,
             },
           ]
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "height": 16,
@@ -807,7 +826,11 @@ exports[`renders outlined button with mode 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
     accessible={true}
     focusable={false}
     isTVSelectable={true}
@@ -899,7 +922,11 @@ exports[`renders text button by default 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
     accessible={true}
     focusable={false}
     isTVSelectable={true}
@@ -991,7 +1018,11 @@ exports[`renders text button with mode 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
     accessible={true}
     focusable={false}
     isTVSelectable={true}

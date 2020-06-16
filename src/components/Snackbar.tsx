@@ -41,6 +41,10 @@ type Props = React.ComponentProps<typeof Surface> & {
    * Text content of the Snackbar.
    */
   children: React.ReactNode;
+  /**
+   * Style for the wrapper of the snackbar
+   */
+  wrapperStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
   ref?: React.RefObject<View>;
   /**
@@ -218,6 +222,7 @@ class Snackbar extends React.Component<Props, State> {
       onDismiss,
       theme,
       style,
+      wrapperStyle,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       duration,
       ...rest
@@ -229,7 +234,10 @@ class Snackbar extends React.Component<Props, State> {
     }
 
     return (
-      <SafeAreaView pointerEvents="box-none" style={styles.wrapper}>
+      <SafeAreaView
+        pointerEvents="box-none"
+        style={[styles.wrapper, wrapperStyle]}
+      >
         <Surface
           pointerEvents="box-none"
           accessibilityLiveRegion="polite"

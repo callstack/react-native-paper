@@ -1,3 +1,12 @@
+---
+name: Bug report
+about: Create a report to help us improve
+title: ''
+labels: ''
+assignees: ''
+
+---
+
 <!-- Issues that don't use this template are likely to be closed. -->
 <!-- Please search the existing issues and read the documentation before opening an issue. -->
 

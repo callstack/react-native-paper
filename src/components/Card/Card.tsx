@@ -110,7 +110,7 @@ class Card extends React.Component<Props, State> {
     Animated.timing(this.state.elevation, {
       toValue: 8,
       duration: 150 * scale,
-      useNativeDriver: false,
+      useNativeDriver: true,
     }).start();
   };
 
@@ -120,7 +120,7 @@ class Card extends React.Component<Props, State> {
       // @ts-ignore
       toValue: this.props.elevation,
       duration: 150 * scale,
-      useNativeDriver: false,
+      useNativeDriver: true,
     }).start();
   };
 

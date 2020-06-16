@@ -128,7 +128,7 @@ class Chip extends React.Component<Props, State> {
     Animated.timing(this.state.elevation, {
       toValue: 4,
       duration: 200 * scale,
-      useNativeDriver: false,
+      useNativeDriver: true,
     }).start();
   };
 
@@ -137,7 +137,7 @@ class Chip extends React.Component<Props, State> {
     Animated.timing(this.state.elevation, {
       toValue: 0,
       duration: 150 * scale,
-      useNativeDriver: false,
+      useNativeDriver: true,
     }).start();
   };
 
@@ -209,16 +209,17 @@ class Chip extends React.Component<Props, State> {
       : selectedBackgroundColor;
 
     const accessibilityTraits: AccessibilityTrait[] = ['button'];
-    const accessibilityStates: AccessibilityState[] = [];
+    const accessibilityState: AccessibilityState = {
+      selected,
+      disabled,
+    };
 
     if (selected) {
       accessibilityTraits.push('selected');
-      accessibilityStates.push('selected');
     }
 
     if (disabled) {
       accessibilityTraits.push('disabled');
-      accessibilityStates.push('disabled');
     }
 
     return (
@@ -253,7 +254,7 @@ class Chip extends React.Component<Props, State> {
           accessibilityTraits={accessibilityTraits}
           accessibilityComponentType="button"
           accessibilityRole="button"
-          accessibilityStates={accessibilityStates}
+          accessibilityState={accessibilityState}
           testID={testID}
         >
           <View style={styles.content}>
