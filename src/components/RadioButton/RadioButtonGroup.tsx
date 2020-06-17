@@ -44,29 +44,28 @@ export const RadioButtonContext = React.createContext<RadioButtonContextType>(
  * import { View } from 'react-native';
  * import { RadioButton, Text } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
+ * const MyComponent = () => {
+ *   const [state, setState] = React.useState({
  *     value: 'first',
- *   };
+ *   });
  *
- *   render() {
- *     return(
- *       <RadioButton.Group
- *         onValueChange={value => this.setState({ value })}
- *         value={this.state.value}
- *       >
- *         <View>
- *           <Text>First</Text>
- *           <RadioButton value="first" />
- *         </View>
- *         <View>
- *           <Text>Second</Text>
- *           <RadioButton value="second" />
- *         </View>
- *       </RadioButton.Group>
- *     )
- *   }
- * }
+ *   const { value } = state;
+ *
+ *   return (
+ *     <RadioButton.Group onValueChange={value => setState({ value })} value={value}>
+ *       <View>
+ *         <Text>First</Text>
+ *         <RadioButton value="first" />
+ *       </View>
+ *       <View>
+ *         <Text>Second</Text>
+ *         <RadioButton value="second" />
+ *       </View>
+ *     </RadioButton.Group>
+ *   );
+ * };
+ *
+ * export default MyComponent;
  *```
  */
 class RadioButtonGroup extends React.Component<Props> {

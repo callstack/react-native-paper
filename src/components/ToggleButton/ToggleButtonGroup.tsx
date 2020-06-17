@@ -37,26 +37,26 @@ export const ToggleButtonGroupContext = React.createContext<
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { View } from 'react-native';
  * import { ToggleButton } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
+ * const MyComponent = () => {
+ *   const [state, setState] = React.useState({
  *     value: 'left',
- *   };
+ *   });
  *
- *   render() {
- *     return(
- *       <ToggleButton.Group
- *         onValueChange={value => this.setState({ value })}
- *         value={this.state.value}
- *       >
- *           <ToggleButton icon="format-align-left" value="left" />
- *           <ToggleButton icon="format-align-right" value="right" />
- *       </ToggleButton.Group>
- *     )
- *   }
- * }
+ *   const { value } = state;
+ *
+ *   return (
+ *     <ToggleButton.Group
+ *       onValueChange={value => setState({ value })}
+ *       value={value}>
+ *       <ToggleButton icon="format-align-left" value="left" />
+ *       <ToggleButton icon="format-align-right" value="right" />
+ *     </ToggleButton.Group>
+ *   );
+ * };
+ *
+ * export default MyComponent;
  *```
  */
 class ToggleButtonGroup extends React.Component<Props> {

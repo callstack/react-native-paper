@@ -69,30 +69,31 @@ type Props = {
  * import * as React from 'react';
  * import { ToggleButton } from 'react-native-paper';
  *
- * export default class ToggleButtonExample extends React.Component {
- *   state = {
+ * const ToggleButtonExample = () => {
+ *   const [state, setState] = React.useState({
  *     status: 'checked',
+ *   });
+ *
+ *   const _onButtonToggle = value => {
+ *     setState({
+ *       status: value === 'checked' ? 'unchecked' : 'checked',
+ *     });
  *   };
  *
- *   _onButtonToggle = value => {
- *      this.setState({
- *        status: value === 'checked'
- *          ? 'unchecked'
- *          : 'checked',
- *      });
- *   }
+ *   const { status } = state;
  *
- *   render() {
- *     return (
- *       <ToggleButton
- *         icon="bluetooth"
- *         value="bluetooth"
- *         status={this.state.status}
- *         onPress={this._onButtonToggle}
- *       />
- *     );
- *   }
- * }
+ *   return (
+ *     <ToggleButton
+ *       icon="bluetooth"
+ *       value="bluetooth"
+ *       status={status}
+ *       onPress={_onButtonToggle}
+ *     />
+ *   );
+ * };
+ *
+ * export default ToggleButtonExample;
+ *
  * ```
  */
 class ToggleButton extends React.Component<Props> {

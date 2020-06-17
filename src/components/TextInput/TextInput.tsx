@@ -143,21 +143,23 @@ export type TextInputProps = React.ComponentPropsWithRef<
  * import * as React from 'react';
  * import { TextInput } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     text: ''
- *   };
+ * const MyComponent = () => {
+ *   const [state, setState] = React.useState({
+ *     text: '',
+ *   });
  *
- *   render(){
- *     return (
- *       <TextInput
- *         label='Email'
- *         value={this.state.text}
- *         onChangeText={text => this.setState({ text })}
- *       />
- *     );
- *   }
- * }
+ *   const { text } = state;
+ *
+ *   return (
+ *     <TextInput
+ *       label="Email"
+ *       value={text}
+ *       onChangeText={text => setState({ text })}
+ *     />
+ *   );
+ * };
+ *
+ * export default MyComponent;
  * ```
  *
  * @extends TextInput props https://facebook.github.io/react-native/docs/textinput.html#props

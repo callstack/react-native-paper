@@ -76,25 +76,27 @@ type Props = React.ComponentPropsWithRef<typeof TextInput> & {
  * ```js
  * import * as React from 'react';
  * import { Searchbar } from 'react-native-paper';
- *
- * export default class MyComponent extends React.Component {
- *   state = {
+ * 
+ * const MyComponent = () => {
+ *   const [state, setState] = React.useState({
  *     searchQuery: '',
- *   };
- *
- *   _onChangeSearch = query => this.setState({ searchQuery: query });
- *
- *   render() {
- *     const { searchQuery } = this.state;
- *     return (
- *       <Searchbar
- *         placeholder="Search"
- *         onChangeText={this._onChangeSearch}
- *         value={searchQuery}
- *       />
- *     );
- *   }
- * }
+ *   });
+ * 
+ *   const _onChangeSearch = query => setState({ searchQuery: query });
+ * 
+ *   const { searchQuery } = state;
+ * 
+ *   return (
+ *     <Searchbar
+ *       placeholder="Search"
+ *       onChangeText={_onChangeSearch}
+ *       value={searchQuery}
+ *     />
+ *   );
+ * };
+ * 
+ * export default MyComponent;
+
  * ```
  */
 class Searchbar extends React.Component<Props> {

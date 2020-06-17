@@ -60,37 +60,30 @@ type State = {
  * import { View } from 'react-native';
  * import { HelperText, TextInput } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     text: ''
+ * const MyComponent = () => {
+ *   const [state, setState] = React.useState({
+ *     text: '',
+ *   });
+ *
+ *   const { text } = state;
+ *
+ *    const _onChangeText = text => setState({ text });
+ *
+ *   const _hasErrors = () => {
+ *     return !text.includes('@');
  *   };
  *
- *   _onChangeText = text => this.setState({ text });
+ *  return (
+ *     <View>
+ *       <TextInput label="Email" value={text} onChangeText={_onChangeText} />
+ *       <HelperText type="error" visible={_hasErrors()}>
+ *         Email address is invalid!
+ *       </HelperText>
+ *     </View>
+ *   );
+ * };
  *
- *   _hasErrors = () => {
- *     return !this.state.text.includes('@');
- *   }
- *
- *   render(){
- *     const { text } = this.state;
- *
- *     return (
- *       <View>
- *         <TextInput
- *           label="Email"
- *           value={text}
- *           onChangeText={this._onChangeText}
- *         />
- *         <HelperText
- *           type="error"
- *           visible={this._hasErrors()}
- *         >
- *           Email address is invalid!
- *         </HelperText>
- *       </View>
- *     );
- *   }
- * }
+ * export default MyComponent;
  * ```
  */
 class HelperText extends React.PureComponent<Props, State> {

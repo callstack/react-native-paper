@@ -62,33 +62,31 @@ const DEFAULT_DURATION = 220;
  * import * as React from 'react';
  * import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
+ * const MyComponent = () => {
+ *   const [state, setState] = React.useState({
  *     visible: false,
- *   };
+ *   });
  *
- *   _showModal = () => this.setState({ visible: true });
- *   _hideModal = () => this.setState({ visible: false });
+ *   const { visible } = state;
  *
- *   render() {
- *     const { visible } = this.state;
- *     return (
- *       <Provider>
- *          <Portal>
- *            <Modal visible={visible} onDismiss={this._hideModal}>
- *              <Text>Example Modal</Text>
- *            </Modal>
- *            <Button
- *              style={{ marginTop: 30 }}
- *              onPress={this._showModal}
- *            >
- *              Show
- *            </Button>
- *          </Portal>
- *       </Provider>
- *     );
- *   }
- * }
+ *   const _showModal = () => setState({ visible: true });
+ *   const _hideModal = () => setState({ visible: false });
+ *
+ *   return (
+ *     <Provider>
+ *       <Portal>
+ *         <Modal visible={visible} onDismiss={_hideModal}>
+ *           <Text>Example Modal</Text>
+ *         </Modal>
+ *         <Button style={{marginTop: 30}} onPress={_showModal}>
+ *           Show
+ *         </Button>
+ *       </Portal>
+ *     </Provider>
+ *   );
+ * };
+ *
+ * export default MyComponent;
  * ```
  */
 

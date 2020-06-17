@@ -70,26 +70,24 @@ export type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { View } from 'react-native';
- * import { RadioButton, Text } from 'react-native-paper';
+ * import { RadioButton } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
+ * const MyComponent = () => {
+ *   const [state, setState] = React.useState({
  *     value: 'first',
- *   };
+ *   });
  *
- *   render() {
- *     return(
- *       <RadioButton.Group
- *         onValueChange={value => this.setState({ value })}
- *         value={this.state.value}
- *       >
- *           <RadioButton.Item label="First item" value="first" />
- *           <RadioButton.Item label="Second item" value="second" />
- *       </RadioButton.Group>
- *     )
- *   }
- * }
+ *   const { value } = state;
+ *
+ *   return (
+ *     <RadioButton.Group onValueChange={value => setState({ value })} value={value}>
+ *       <RadioButton.Item label="First item" value="first" />
+ *       <RadioButton.Item label="Second item" value="second" />
+ *     </RadioButton.Group>
+ *   );
+ * };
+ *
+ * export default MyComponent;
  *```
  */
 class RadioButtonItem extends React.Component<Props> {

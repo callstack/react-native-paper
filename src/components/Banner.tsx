@@ -82,40 +82,39 @@ type NativeEvent = {
  * import { Image } from 'react-native';
  * import { Banner } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     visible: true,
- *   };
+ * const MyComponent = () => {
+ *   const [state, setState] = React.useState({ visible: true });
  *
- *   render() {
- *     return (
- *       <Banner
- *         visible={this.state.visible}
- *         actions={[
- *           {
- *             label: 'Fix it',
- *             onPress: () => this.setState({ visible: false }),
- *           },
- *           {
- *             label: 'Learn more',
- *             onPress: () => this.setState({ visible: false }),
- *           },
- *         ]}
- *         icon={({ size }) =>
- *           <Image
- *             source={{ uri: 'https://avatars3.githubusercontent.com/u/17571969?s=400&v=4' }}
- *             style={{
- *               width: size,
- *               height: size,
- *             }}
- *           />
- *         }
- *       >
- *         There was a problem processing a transaction on your credit card.
- *       </Banner>
- *     );
- *   }
- * }
+ *   return (
+ *     <Banner
+ *       visible={state.visible}
+ *       actions={[
+ *         {
+ *           label: 'Fix it',
+ *           onPress: () => setState({ visible: false }),
+ *         },
+ *         {
+ *           label: 'Learn more',
+ *           onPress: () => setState({ visible: false }),
+ *         },
+ *       ]}
+ *       icon={({size}) => (
+ *         <Image
+ *           source={{
+ *             uri: 'https://avatars3.githubusercontent.com/u/17571969?s=400&v=4',
+ *           }}
+ *           style={{
+ *             width: size,
+ *             height: size,
+ *           }}
+ *         />
+ *       )}>
+ *       There was a problem processing a transaction on your credit card.
+ *     </Banner>
+ *   );
+ * };
+ *
+ * export default MyComponent;
  * ```
  */
 class Banner extends React.Component<Props, State> {

@@ -48,36 +48,32 @@ type Props = {
  * import { View } from 'react-native';
  * import { Button, Paragraph, Dialog, Portal } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     visible: false,
- *   };
+ * const MyComponent = () => {
+ *   const [state, setState] = React.useState({ visible: false });
  *
- *   _showDialog = () => this.setState({ visible: true });
+ *   const _showDialog = () => setState({ visible: true });
  *
- *   _hideDialog = () => this.setState({ visible: false });
+ *   const _hideDialog = () => setState({ visible: false });
  *
- *   render() {
- *     return (
- *       <View>
- *         <Button onPress={this._showDialog}>Show Dialog</Button>
- *         <Portal>
- *           <Dialog
- *              visible={this.state.visible}
- *              onDismiss={this._hideDialog}>
- *             <Dialog.Title>Alert</Dialog.Title>
- *             <Dialog.Content>
- *               <Paragraph>This is simple dialog</Paragraph>
- *             </Dialog.Content>
- *             <Dialog.Actions>
- *               <Button onPress={this._hideDialog}>Done</Button>
- *             </Dialog.Actions>
- *           </Dialog>
- *         </Portal>
- *       </View>
- *     );
- *   }
- * }
+ *   return (
+ *     <View>
+ *       <Button onPress={_showDialog}>Show Dialog</Button>
+ *       <Portal>
+ *         <Dialog visible={state.visible} onDismiss={_hideDialog}>
+ *           <Dialog.Title>Alert</Dialog.Title>
+ *           <Dialog.Content>
+ *             <Paragraph>This is simple dialog</Paragraph>
+ *           </Dialog.Content>
+ *           <Dialog.Actions>
+ *             <Button onPress={_hideDialog}>Done</Button>
+ *           </Dialog.Actions>
+ *         </Dialog>
+ *       </Portal>
+ *     </View>
+ *   );
+ * };
+ *
+ * export default MyComponent;
  * ```
  */
 class Dialog extends React.Component<Props> {

@@ -30,26 +30,25 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { View } from 'react-native';
  * import { ToggleButton } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
+ * const MyComponent = () => {
+ *   const [state, setState] = React.useState({
  *     value: 'left',
- *   };
+ *   });
  *
- *   render() {
- *     return(
- *       <ToggleButton.Row
- *         onValueChange={value => this.setState({ value })}
- *         value={this.state.value}
- *       >
- *           <ToggleButton icon="format-align-left" value="left" />
- *           <ToggleButton icon="format-align-right" value="right" />
- *       </ToggleButton.Row>
- *     )
- *   }
- * }
+ *   const { value } = state;
+ *
+ *   return (
+ *     <ToggleButton.Row onValueChange={value => setState({ value })} value={value}>
+ *       <ToggleButton icon="format-align-left" value="left" />
+ *       <ToggleButton icon="format-align-right" value="right" />
+ *     </ToggleButton.Row>
+ *   );
+ * };
+ *
+ * export default MyComponent;
+ *
  *```
  */
 class ToggleButtonRow extends React.Component<Props> {
