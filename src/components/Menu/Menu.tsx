@@ -44,6 +44,13 @@ type Props = {
    * Callback called when Menu is dismissed. The `visible` prop needs to be updated when this is called.
    */
   onDismiss: () => void;
+  /*
+   * Determines whether to capture touches ouside the menu surface whilst open. If set to `dismiss`, this
+   * is the standard setting, where touches will be captured and trigger the `onDismiss` function. If set
+   * to `ignore`, touches will not be captured ouside the menu surface at all. Alternatively, you can pass
+   * a custom function to handle captured touches.
+   */
+  handleExternalTouches?: 'dismiss' | 'ignore' | (() => void);
   /**
    * Content of the `Menu`.
    */
@@ -344,6 +351,7 @@ class Menu extends React.Component<Props, State> {
       theme,
       statusBarHeight,
       onDismiss,
+      handleExternalTouches,
     } = this.props;
 
     const {
@@ -535,9 +543,17 @@ class Menu extends React.Component<Props, State> {
         {this.isAnchorCoord() ? null : anchor}
         {rendered ? (
           <Portal>
-            <TouchableWithoutFeedback onPress={onDismiss}>
-              <View style={StyleSheet.absoluteFill} />
-            </TouchableWithoutFeedback>
+            {handleExternalTouches !== 'ignore' && (
+              <TouchableWithoutFeedback
+                onPress={
+                  typeof handleExternalTouches === 'function'
+                    ? handleExternalTouches
+                    : onDismiss
+                }
+              >
+                <View style={StyleSheet.absoluteFill} />
+              </TouchableWithoutFeedback>
+            )}
             <View
               ref={ref => {
                 this.menu = ref;
