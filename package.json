@@ -4,9 +4,8 @@
   "description": "Material design for React Native",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
-  "react-native": "lib/module/index.js",
+  "react-native": "src/index.tsx",
   "source": "src/index.tsx",
-  "types": "lib/typescript/src/index.d.ts",
   "files": [
     "src",
     "lib",
