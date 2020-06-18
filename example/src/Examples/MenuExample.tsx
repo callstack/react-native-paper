@@ -122,7 +122,7 @@ const MenuExample = ({ navigation }: Props) => {
         <List.Section style={styles.list} title="Contextual menu">
           <TouchableRipple
             onPress={() => {}}
-            onLongPress={() => _handleLongPress}
+            onLongPress={_handleLongPress}
           >
             <List.Item
               title="List item"
