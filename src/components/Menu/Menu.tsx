@@ -93,15 +93,11 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
  * import { Button, Menu, Divider, Provider } from 'react-native-paper';
  *
  * const MyComponent = () => {
- *   const [state, setState] = React.useState({
- *     visible: false,
- *   });
+ *   const [visible, setVisible] = React.useState(false);
  *
- *   const { visible } = state;
+ *   const openMenu = () => setVisible(true);
  *
- *   const _openMenu = () => setState({ visible: true });
- *
- *   const _closeMenu = () => setState({ visible: false });
+ *   const closeMenu = () => setVisible(false);
  *
  *   return (
  *     <Provider>
@@ -113,8 +109,8 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
  *         }}>
  *         <Menu
  *           visible={visible}
- *           onDismiss={_closeMenu}
- *           anchor={<Button onPress={_openMenu}>Show menu</Button>}>
+ *           onDismiss={closeMenu}
+ *           anchor={<Button onPress={openMenu}>Show menu</Button>}>
  *           <Menu.Item onPress={() => {}} title="Item 1" />
  *           <Menu.Item onPress={() => {}} title="Item 2" />
  *           <Divider />

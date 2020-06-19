@@ -106,7 +106,7 @@ type State = {
  * const MyComponent = () => {
  *   const [state, setState] = React.useState({ open: false });
  *
- *   const _onStateChange = ({ open }) => setState({ open });
+ *   const onStateChange = ({ open }) => setState({ open });
  *
  *   const { open } = state;
  *
@@ -134,7 +134,7 @@ type State = {
  *               onPress: () => console.log('Pressed notifications'),
  *             },
  *           ]}
- *           onStateChange={_onStateChange}
+ *           onStateChange={onStateChange}
  *           onPress={() => {
  *             if (open) {
  *               // do something if the speed dial is open

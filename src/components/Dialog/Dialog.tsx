@@ -49,23 +49,23 @@ type Props = {
  * import { Button, Paragraph, Dialog, Portal } from 'react-native-paper';
  *
  * const MyComponent = () => {
- *   const [state, setState] = React.useState({ visible: false });
+ *   const [visible, setVisible] = React.useState(false);
  *
- *   const _showDialog = () => setState({ visible: true });
+ *   const showDialog = () => setVisible(true);
  *
- *   const _hideDialog = () => setState({ visible: false });
+ *   const hideDialog = () => setVisible(false);
  *
  *   return (
  *     <View>
- *       <Button onPress={_showDialog}>Show Dialog</Button>
+ *       <Button onPress={showDialog}>Show Dialog</Button>
  *       <Portal>
- *         <Dialog visible={state.visible} onDismiss={_hideDialog}>
+ *         <Dialog visible={visible} onDismiss={hideDialog}>
  *           <Dialog.Title>Alert</Dialog.Title>
  *           <Dialog.Content>
  *             <Paragraph>This is simple dialog</Paragraph>
  *           </Dialog.Content>
  *           <Dialog.Actions>
- *             <Button onPress={_hideDialog}>Done</Button>
+ *             <Button onPress={hideDialog}>Done</Button>
  *           </Dialog.Actions>
  *         </Dialog>
  *       </Portal>

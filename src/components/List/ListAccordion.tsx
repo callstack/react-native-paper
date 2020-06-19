@@ -101,14 +101,9 @@ type State = {
  * import { List } from 'react-native-paper';
  *
  * const MyComponent = () => {
- *   const [state, setState] = React.useState({ expanded: true });
+ *   const [expanded, setExpanded] = React.useState(true);
  *
- *   const { expanded } = state;
- *
- *   const _handlePress = () =>
- *     setState({
- *       expanded: !expanded,
- *     });
+ *   const handlePress = () => setExpanded(!expanded);
  *
  *   return (
  *     <List.Section title="Accordions">
@@ -123,7 +118,7 @@ type State = {
  *         title="Controlled Accordion"
  *         left={props => <List.Icon {...props} icon="folder" />}
  *         expanded={expanded}
- *         onPress={_handlePress}>
+ *         onPress={handlePress}>
  *         <List.Item title="First item" />
  *         <List.Item title="Second item" />
  *       </List.Accordion>

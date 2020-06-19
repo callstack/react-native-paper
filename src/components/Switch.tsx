@@ -67,15 +67,11 @@ type Props = React.ComponentPropsWithRef<typeof NativeSwitch> & {
  * import { Switch } from 'react-native-paper';
  *
  * const MyComponent = () => {
- *   const [state, setState] = React.useState({
- *     isSwitchOn: false,
- *   });
+ *   const [isSwitchOn, setIsSwitchOn] = React.useState(false);
  *
- *   const { isSwitchOn } = state;
+ *   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
  *
- *   const _onToggleSwitch = () => setState({ isSwitchOn: !isSwitchOn });
- *
- *   return <Switch value={isSwitchOn} onValueChange={_onToggleSwitch} />;
+ *   return <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />;
  * };
  *
  * export default MyComponent;

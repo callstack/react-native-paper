@@ -33,14 +33,10 @@ type Props = {
  * import { ToggleButton } from 'react-native-paper';
  *
  * const MyComponent = () => {
- *   const [state, setState] = React.useState({
- *     value: 'left',
- *   });
- *
- *   const { value } = state;
+ *   const [value, setValue] = React.useState('left');
  *
  *   return (
- *     <ToggleButton.Row onValueChange={value => setState({ value })} value={value}>
+ *     <ToggleButton.Row onValueChange={value => setValue(value)} value={value}>
  *       <ToggleButton icon="format-align-left" value="left" />
  *       <ToggleButton icon="format-align-right" value="right" />
  *     </ToggleButton.Row>

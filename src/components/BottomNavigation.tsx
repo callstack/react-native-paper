@@ -337,16 +337,16 @@ class SceneComponent extends React.PureComponent<any> {
  * const MyComponent = () => {
  *   const [state, setState] = React.useState({
  *     index: 0,
- *     routes: [
+ *     routes: [  
  *       { key: 'music', title: 'Music', icon: 'queue-music' },
  *       { key: 'albums', title: 'Albums', icon: 'album' },
  *       { key: 'recents', title: 'Recents', icon: 'history' },
  *     ],
  *   });
  *
- *   const _handleIndexChange = index => setState({ ...state, index });
+ *   const handleIndexChange = index => setState({ ...state, index });
  *
- *   const _renderScene = BottomNavigation.SceneMap({
+ *   const renderScene = BottomNavigation.SceneMap({
  *     music: MusicRoute,
  *     albums: AlbumsRoute,
  *     recents: RecentsRoute,
@@ -355,8 +355,8 @@ class SceneComponent extends React.PureComponent<any> {
  *   return (
  *     <BottomNavigation
  *       navigationState={state}
- *       onIndexChange={_handleIndexChange}
- *       renderScene={_renderScene}
+ *       onIndexChange={handleIndexChange}
+ *       renderScene={renderScene}
  *     />
  *   );
  * };

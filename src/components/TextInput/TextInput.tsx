@@ -144,17 +144,13 @@ export type TextInputProps = React.ComponentPropsWithRef<
  * import { TextInput } from 'react-native-paper';
  *
  * const MyComponent = () => {
- *   const [state, setState] = React.useState({
- *     text: '',
- *   });
- *
- *   const { text } = state;
+ *   const [text, setText] = React.useState('');
  *
  *   return (
  *     <TextInput
  *       label="Email"
  *       value={text}
- *       onChangeText={text => setState({ text })}
+ *       onChangeText={text => setText(text)}
  *     />
  *   );
  * };

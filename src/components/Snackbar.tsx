@@ -76,22 +76,18 @@ const DURATION_LONG = 10000;
  * import { Button, Snackbar } from 'react-native-paper';
  *
  * const MyComponent = () => {
- *   const [state, setState] = React.useState({
- *     visible: false,
- *   });
+ *   const [visible, setVisible] = React.useState(false);
  *
- *   const { visible } = state;
+ *   const onToggleSnackBar = () => setVisible(!visible);
  *
- *   const _onToggleSnackBar = () => setState({ visible: !visible });
- *
- *   const _onDismissSnackBar = () => setState({ visible: false });
+ *   const onDismissSnackBar = () => setVisible(false);
  *
  *   return (
  *     <View style={styles.container}>
- *       <Button onPress={_onToggleSnackBar}>{visible ? 'Hide' : 'Show'}</Button>
+ *       <Button onPress={onToggleSnackBar}>{visible ? 'Hide' : 'Show'}</Button>
  *       <Snackbar
  *         visible={visible}
- *         onDismiss={_onDismissSnackBar}
+ *         onDismiss={onDismissSnackBar}
  *         action={{
  *           label: 'Undo',
  *           onPress: () => {

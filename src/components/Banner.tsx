@@ -81,21 +81,21 @@ type NativeEvent = {
  * import * as React from 'react';
  * import { Image } from 'react-native';
  * import { Banner } from 'react-native-paper';
- *
+ * 
  * const MyComponent = () => {
- *   const [state, setState] = React.useState({ visible: true });
- *
+ *   const [visible, setVisible] = React.useState(true);
+ * 
  *   return (
  *     <Banner
- *       visible={state.visible}
+ *       visible={visible}
  *       actions={[
  *         {
  *           label: 'Fix it',
- *           onPress: () => setState({ visible: false }),
+ *           onPress: () => setVisible(false),
  *         },
  *         {
  *           label: 'Learn more',
- *           onPress: () => setState({ visible: false }),
+ *           onPress: () => setVisible(false),
  *         },
  *       ]}
  *       icon={({size}) => (
@@ -113,7 +113,7 @@ type NativeEvent = {
  *     </Banner>
  *   );
  * };
- *
+ * 
  * export default MyComponent;
  * ```
  */

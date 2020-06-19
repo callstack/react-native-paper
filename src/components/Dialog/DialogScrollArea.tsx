@@ -26,15 +26,13 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * import { Dialog, Portal, Text } from 'react-native-paper';
  *
  * const MyComponent = () => {
- *   const [state, setState] = React.useState({ visible: false });
+ *   const [visible, setVisible] = React.useState(false);
  *
- *   const _hideDialog = () => setState({ visible: false });
- *
- *   const { visible } = state;
+ *   const hideDialog = () => setVisible(false);
  *
  *   return (
  *     <Portal>
- *       <Dialog visible={visible} onDismiss={_hideDialog}>
+ *       <Dialog visible={visible} onDismiss={hideDialog}>
  *         <Dialog.ScrollArea>
  *           <ScrollView contentContainerStyle={{paddingHorizontal: 24}}>
  *             <Text>This is a scrollable area</Text>

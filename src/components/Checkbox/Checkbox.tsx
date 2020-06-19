@@ -65,15 +65,13 @@ type Props = {
  * import { Checkbox } from 'react-native-paper';
  *
  * const MyComponent = () => {
- *   const [state, setState] = React.useState({ checked: false });
- *
- *   const { checked } = state;
+ *   const [checked, setChecked] = React.useState(false);
  *
  *   return (
  *     <Checkbox
  *       status={checked ? 'checked' : 'unchecked'}
  *       onPress={() => {
- *         setState({ checked: !checked });
+ *         setChecked(!checked);
  *       }}
  *     />
  *   );

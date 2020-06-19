@@ -70,24 +70,18 @@ type Props = {
  * import { ToggleButton } from 'react-native-paper';
  *
  * const ToggleButtonExample = () => {
- *   const [state, setState] = React.useState({
- *     status: 'checked',
- *   });
+ *   const [status, setStatus] = React.useState('checked');
  *
- *   const _onButtonToggle = value => {
- *     setState({
- *       status: value === 'checked' ? 'unchecked' : 'checked',
- *     });
+ *   const onButtonToggle = value => {
+ *     setStatus(status === 'checked' ? 'unchecked' : 'checked');
  *   };
- *
- *   const { status } = state;
  *
  *   return (
  *     <ToggleButton
  *       icon="bluetooth"
  *       value="bluetooth"
  *       status={status}
- *       onPress={_onButtonToggle}
+ *       onPress={onButtonToggle}
  *     />
  *   );
  * };

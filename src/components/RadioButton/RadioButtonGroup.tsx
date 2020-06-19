@@ -45,14 +45,10 @@ export const RadioButtonContext = React.createContext<RadioButtonContextType>(
  * import { RadioButton, Text } from 'react-native-paper';
  *
  * const MyComponent = () => {
- *   const [state, setState] = React.useState({
- *     value: 'first',
- *   });
- *
- *   const { value } = state;
+ *   const [value, setValue] = React.useState('first');
  *
  *   return (
- *     <RadioButton.Group onValueChange={value => setState({ value })} value={value}>
+ *     <RadioButton.Group onValueChange={value => setValue(value)} value={value}>
  *       <View>
  *         <Text>First</Text>
  *         <RadioButton value="first" />

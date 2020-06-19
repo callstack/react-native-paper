@@ -67,27 +67,19 @@ export type Props = {
  * import { RadioButton } from 'react-native-paper';
  *
  * const MyComponent = () => {
- *   const [state, setState] = React.useState({
- *     checked: 'first',
- *   });
- *
- *   const { checked } = state;
+ *   const [checked, setChecked] = React.useState('first');
  *
  *   return (
  *     <View>
  *       <RadioButton
  *         value="first"
  *         status={ checked === 'first' ? 'checked' : 'unchecked' }
- *         onPress={() => {
- *           setState({ checked: 'first' });
- *         }}
+ *         onPress={() => setChecked('first')}
  *       />
  *       <RadioButton
  *         value="second"
  *         status={ checked === 'second' ? 'checked' : 'unchecked' }
- *         onPress={() => {
- *           setState({ checked: 'second' });
- *         }}
+ *         onPress={() => setChecked('second')}
  *       />
  *     </View>
  *   );
