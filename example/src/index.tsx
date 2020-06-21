@@ -13,6 +13,15 @@ import App from './RootNavigator';
 import DrawerItems from './DrawerItems';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+// Add new typescript properties to the theme
+declare global {
+  namespace ReactNativePaper {
+    interface Theme {
+      userDefinedThemeProperty: string;
+    }
+  }
+}
+
 YellowBox.ignoreWarnings(['Require cycle:']);
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
