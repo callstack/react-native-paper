@@ -12,7 +12,6 @@ import Button from './Button';
 import Surface from './Surface';
 import Text from './Typography/Text';
 import { withTheme } from '../core/theming';
-import { Theme } from '../types';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
@@ -50,7 +49,7 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 type State = {

@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import AnimatedText from './Typography/AnimatedText';
 import { withTheme } from '../core/theming';
-import { Theme, $Omit } from '../types';
+import { $Omit } from '../types';
 
 type Props = $Omit<
   $Omit<React.ComponentPropsWithRef<typeof AnimatedText>, 'padding'>,
@@ -35,7 +35,7 @@ type Props = $Omit<
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
   /**
    * TestID used for testing purposes
    */

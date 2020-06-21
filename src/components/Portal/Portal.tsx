@@ -6,7 +6,6 @@ import {
   Consumer as SettingsConsumer,
 } from '../../core/settings';
 import { ThemeProvider, withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 
 type Props = {
   /**
@@ -16,7 +15,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**

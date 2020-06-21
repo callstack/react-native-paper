@@ -15,7 +15,6 @@ import CardCover, { CardCover as _CardCover } from './CardCover';
 import CardTitle, { CardTitle as _CardTitle } from './CardTitle';
 import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
@@ -38,7 +37,7 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
   /**
    * Pass down testID from card props to touchable
    */

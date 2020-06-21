@@ -2,7 +2,6 @@ import * as React from 'react';
 import { StyleSheet, View, ViewStyle, Image, StyleProp } from 'react-native';
 import { withTheme } from '../../core/theming';
 import { grey200 } from '../../styles/colors';
-import { Theme } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof Image> & {
   /**
@@ -17,7 +16,7 @@ type Props = React.ComponentPropsWithRef<typeof Image> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**

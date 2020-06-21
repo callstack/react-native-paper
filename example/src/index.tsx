@@ -8,7 +8,6 @@ import {
   Provider as PaperProvider,
   DarkTheme,
   DefaultTheme,
-  Theme,
 } from 'react-native-paper';
 import App from './RootNavigator';
 import DrawerItems from './DrawerItems';
@@ -46,7 +45,9 @@ export default function PaperExample() {
     InitialState | undefined
   >();
 
-  const [theme, setTheme] = React.useState<Theme>(DefaultTheme);
+  const [theme, setTheme] = React.useState<ReactNativePaper.Theme>(
+    DefaultTheme
+  );
   const [rtl, setRtl] = React.useState<boolean>(I18nManager.isRTL);
 
   React.useEffect(() => {

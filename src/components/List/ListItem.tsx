@@ -11,7 +11,7 @@ import {
 import TouchableRipple from '../TouchableRipple';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
-import { Theme, $RemoveChildren, EllipsizeProp } from '../../types';
+import { $RemoveChildren, EllipsizeProp } from '../../types';
 
 type Description =
   | React.ReactNode
@@ -58,7 +58,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
   /**
    * Style that is passed to the wrapping TouchableRipple element.
    */

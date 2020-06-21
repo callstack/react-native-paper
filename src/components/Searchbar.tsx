@@ -12,7 +12,6 @@ import color from 'color';
 import IconButton from './IconButton';
 import Surface from './Surface';
 import { withTheme } from '../core/theming';
-import { Theme } from '../types';
 import { IconSource } from './Icon';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 
@@ -54,7 +53,7 @@ type Props = React.ComponentPropsWithRef<typeof TextInput> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
   /**
    * Custom color for icon, default will be derived from theme
    */

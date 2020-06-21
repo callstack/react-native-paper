@@ -13,7 +13,6 @@ import FAB from './FAB';
 import Text from '../Typography/Text';
 import Card from '../Card/Card';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 import { IconSource } from '../Icon';
 
 type Props = {
@@ -78,7 +77,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
   /**
    * Pass down testID from Group props to FAB.
    */

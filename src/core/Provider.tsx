@@ -4,12 +4,11 @@ import { ThemeProvider } from './theming';
 import { Provider as SettingsProvider, Settings } from './settings';
 import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
 import PortalHost from '../components/Portal/PortalHost';
-import { Theme } from '../types';
 import DefaultTheme from '../styles/DefaultTheme';
 
 type Props = {
   children: React.ReactNode;
-  theme?: Theme;
+  theme?: ReactNativePaper.Theme;
   settings?: Settings;
 };
 export default class Provider extends React.Component<Props> {

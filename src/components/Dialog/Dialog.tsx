@@ -7,7 +7,6 @@ import DialogActions from './DialogActions';
 import DialogTitle, { DialogTitle as _DialogTitle } from './DialogTitle';
 import DialogScrollArea from './DialogScrollArea';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 
 type Props = {
   /**
@@ -30,7 +29,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**

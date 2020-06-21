@@ -10,7 +10,6 @@ import overlay from '../../styles/overlay';
 import Appbar, { DEFAULT_APPBAR_HEIGHT } from './Appbar';
 import shadow from '../../styles/shadow';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
 
 type Props = React.ComponentProps<typeof Appbar> & {
@@ -32,7 +31,7 @@ type Props = React.ComponentProps<typeof Appbar> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
   style?: StyleProp<ViewStyle>;
 };
 

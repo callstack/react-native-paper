@@ -4,7 +4,7 @@ import color from 'color';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple';
 import { withTheme } from '../../core/theming';
-import { Theme, $RemoveChildren } from '../../types';
+import { $RemoveChildren } from '../../types';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -30,7 +30,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 type State = {

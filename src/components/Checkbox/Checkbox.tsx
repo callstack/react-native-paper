@@ -8,7 +8,6 @@ import CheckboxAndroid, {
 } from './CheckboxAndroid';
 import CheckboxItem from './CheckboxItem';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 
 type Props = {
   /**
@@ -34,7 +33,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**

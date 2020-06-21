@@ -15,7 +15,7 @@ import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import { white } from '../../styles/colors';
 
-import { Theme, $RemoveChildren } from '../../types';
+import { $RemoveChildren } from '../../types';
 
 type Props = $RemoveChildren<typeof View> & {
   /**
@@ -50,7 +50,7 @@ type Props = $RemoveChildren<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**

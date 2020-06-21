@@ -17,7 +17,6 @@ import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple';
 import { withTheme } from '../core/theming';
 import { black, white } from '../styles/colors';
-import { Theme } from '../types';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
@@ -75,7 +74,7 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
   /**
    * Pass down testID from chip props to touchable for Detox tests.
    */

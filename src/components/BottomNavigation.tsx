@@ -23,7 +23,6 @@ import TouchableRipple from './TouchableRipple';
 import Text from './Typography/Text';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
-import { Theme } from '../types';
 
 type Route = {
   key: string;
@@ -219,7 +218,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 type State = {
