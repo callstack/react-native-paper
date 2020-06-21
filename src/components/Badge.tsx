@@ -105,6 +105,7 @@ class Badge extends React.Component<Props, State> {
     const borderRadius = size / 2;
 
     return (
+      // @ts-ignore
       <Animated.Text
         numberOfLines={1}
         style={[

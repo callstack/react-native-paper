@@ -166,6 +166,7 @@ class HelperText extends React.PureComponent<Props, State> {
             .string();
 
     return (
+      // @ts-ignore
       <AnimatedText
         onLayout={this.handleTextLayout}
         style={[
