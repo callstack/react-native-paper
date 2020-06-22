@@ -45,7 +45,7 @@ export default class Provider extends React.Component<Props> {
     const { children, settings, theme: providedTheme } = this.props;
     const { reduceMotionEnabled } = this.state;
     const theme = !providedTheme
-      ? Object.assign(DefaultTheme, {
+      ? Object.assign(DefaultTheme as ReactNativePaper.Theme, {
           animation: {
             scale: reduceMotionEnabled ? 0 : 1,
           },

@@ -27,6 +27,16 @@ YellowBox.ignoreWarnings(['Require cycle:']);
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
 
+const CustomDarkTheme = {
+  ...DarkTheme,
+  userDefinedThemeProperty: '',
+};
+
+const CustomDefaultTheme = {
+  ...DefaultTheme,
+  userDefinedThemeProperty: '',
+};
+
 const PreferencesContext = React.createContext<any>(null);
 
 const DrawerContent = () => {
@@ -55,7 +65,7 @@ export default function PaperExample() {
   >();
 
   const [theme, setTheme] = React.useState<ReactNativePaper.Theme>(
-    DefaultTheme
+    CustomDefaultTheme
   );
   const [rtl, setRtl] = React.useState<boolean>(I18nManager.isRTL);
 
@@ -86,7 +96,9 @@ export default function PaperExample() {
 
         if (preferences) {
           // eslint-disable-next-line react/no-did-mount-set-state
-          setTheme(preferences.theme === 'dark' ? DarkTheme : DefaultTheme);
+          setTheme(
+            preferences.theme === 'dark' ? CustomDarkTheme : CustomDefaultTheme
+          );
 
           if (typeof preferences.rtl === 'boolean') {
             setRtl(preferences.rtl);
@@ -126,7 +138,9 @@ export default function PaperExample() {
   const preferences = React.useMemo(
     () => ({
       toggleTheme: () =>
-        setTheme(theme => (theme === DefaultTheme ? DarkTheme : DefaultTheme)),
+        setTheme(theme =>
+          theme === CustomDefaultTheme ? CustomDarkTheme : CustomDefaultTheme
+        ),
       toggleRtl: () => setRtl(rtl => !rtl),
       rtl,
       theme,

@@ -23,6 +23,36 @@ export type Fonts = {
   thin: Font;
 };
 
+type Colors = {
+  primary: string;
+  background: string;
+  surface: string;
+  accent: string;
+  error: string;
+  text: string;
+  onSurface: string;
+  onBackground: string;
+  disabled: string;
+  placeholder: string;
+  backdrop: string;
+  notification: string;
+};
+
+type Mode = 'adaptive' | 'exact';
+
+type Animation = {
+  scale: number;
+};
+
+export type Theme = {
+  dark: boolean;
+  mode?: Mode;
+  roundness: number;
+  colors: Colors;
+  fonts: Fonts;
+  animation: Animation;
+};
+
 export type $Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 export type $RemoveChildren<T extends React.ComponentType<any>> = $Omit<
   React.ComponentPropsWithoutRef<T>,
@@ -35,26 +65,11 @@ declare global {
   namespace ReactNativePaper {
     interface Theme {
       dark: boolean;
-      mode?: 'adaptive' | 'exact';
+      mode?: Mode;
       roundness: number;
-      colors: {
-        primary: string;
-        background: string;
-        surface: string;
-        accent: string;
-        error: string;
-        text: string;
-        onSurface: string;
-        onBackground: string;
-        disabled: string;
-        placeholder: string;
-        backdrop: string;
-        notification: string;
-      };
+      colors: Colors;
       fonts: Fonts;
-      animation: {
-        scale: number;
-      };
+      animation: Animation;
     }
   }
 }

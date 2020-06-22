@@ -1,8 +1,9 @@
 import color from 'color';
 import { black, white, pinkA400 } from './colors';
 import configureFonts from './fonts';
+import { Theme } from '../types';
 
-const DefaultTheme: ReactNativePaper.Theme = {
+const DefaultTheme: Theme = {
   dark: false,
   roundness: 4,
   colors: {
