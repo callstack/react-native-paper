@@ -16,13 +16,13 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 // Add new typescript properties to the theme
 declare global {
   namespace ReactNativePaper {
-    interface Fonts {
-      superLight: Font;
+    interface ThemeFonts {
+      superLight: ThemeFont;
     }
-    interface Colors {
+    interface ThemeColors {
       customColor: string;
     }
-    interface Animation {
+    interface ThemeAnimation {
       customProperty: number;
     }
     interface Theme {

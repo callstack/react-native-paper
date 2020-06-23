@@ -59,7 +59,7 @@ export type EllipsizeProp = 'head' | 'middle' | 'tail' | 'clip';
 
 declare global {
   namespace ReactNativePaper {
-    interface Font {
+    interface ThemeFont {
       fontFamily: string;
       fontWeight?:
         | 'normal'
@@ -74,13 +74,13 @@ declare global {
         | '800'
         | '900';
     }
-    interface Fonts {
-      regular: Font;
-      medium: Font;
-      light: Font;
-      thin: Font;
+    interface ThemeFonts {
+      regular: ThemeFont;
+      medium: ThemeFont;
+      light: ThemeFont;
+      thin: ThemeFont;
     }
-    interface Colors {
+    interface ThemeColors {
       primary: string;
       background: string;
       surface: string;
@@ -95,7 +95,7 @@ declare global {
       notification: string;
     }
 
-    interface Animation {
+    interface ThemeAnimation {
       scale: number;
     }
 
@@ -103,9 +103,9 @@ declare global {
       dark: boolean;
       mode?: Mode;
       roundness: number;
-      colors: Colors;
-      fonts: Fonts;
-      animation: Animation;
+      colors: ThemeColors;
+      fonts: ThemeFonts;
+      animation: ThemeAnimation;
     }
   }
 }
