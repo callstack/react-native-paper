@@ -66,6 +66,12 @@ const data: Data[] = [
     android: 'https://play.google.com/store/apps/details?id=in.micy.tracksnz',
     ios: 'https://apps.apple.com/nz/app/tracks-nz/id1488245855',
   },
+  {
+    color: '#b985fc',
+    name: 'Astrale',
+    image: 'showcase/astrale.png',
+    android: 'https://play.google.com/store/apps/details?id=josep.astrale',
+  },
 ];
 
 export default class Showcase extends React.Component<{}> {
