@@ -16,6 +16,15 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 // Add new typescript properties to the theme
 declare global {
   namespace ReactNativePaper {
+    interface Fonts {
+      superLight: Font;
+    }
+    interface Colors {
+      customColor: string;
+    }
+    interface Animation {
+      customProperty: number;
+    }
     interface Theme {
       userDefinedThemeProperty: string;
     }
@@ -27,14 +36,38 @@ YellowBox.ignoreWarnings(['Require cycle:']);
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
 
-const CustomDarkTheme = {
+const CustomDarkTheme: ReactNativePaper.Theme = {
   ...DarkTheme,
+  colors: {
+    ...DarkTheme.colors,
+    customColor: '#BADA55',
+  },
+  fonts: {
+    ...DarkTheme.fonts,
+    superLight: { ...DarkTheme.fonts['light'] },
+  },
   userDefinedThemeProperty: '',
+  animation: {
+    ...DarkTheme.animation,
+    customProperty: 1,
+  },
 };
 
 const CustomDefaultTheme = {
   ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    customColor: '#BADA55',
+  },
+  fonts: {
+    ...DefaultTheme.fonts,
+    superLight: { ...DefaultTheme.fonts['light'] },
+  },
   userDefinedThemeProperty: '',
+  animation: {
+    ...DefaultTheme.animation,
+    customProperty: 1,
+  },
 };
 
 const PreferencesContext = React.createContext<any>(null);

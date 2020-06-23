@@ -23,34 +23,30 @@ export type Fonts = {
   thin: Font;
 };
 
-type Colors = {
-  primary: string;
-  background: string;
-  surface: string;
-  accent: string;
-  error: string;
-  text: string;
-  onSurface: string;
-  onBackground: string;
-  disabled: string;
-  placeholder: string;
-  backdrop: string;
-  notification: string;
-};
-
 type Mode = 'adaptive' | 'exact';
-
-type Animation = {
-  scale: number;
-};
 
 export type Theme = {
   dark: boolean;
   mode?: Mode;
   roundness: number;
-  colors: Colors;
+  colors: {
+    primary: string;
+    background: string;
+    surface: string;
+    accent: string;
+    error: string;
+    text: string;
+    onSurface: string;
+    onBackground: string;
+    disabled: string;
+    placeholder: string;
+    backdrop: string;
+    notification: string;
+  };
   fonts: Fonts;
-  animation: Animation;
+  animation: {
+    scale: number;
+  };
 };
 
 export type $Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
@@ -63,6 +59,46 @@ export type EllipsizeProp = 'head' | 'middle' | 'tail' | 'clip';
 
 declare global {
   namespace ReactNativePaper {
+    interface Font {
+      fontFamily: string;
+      fontWeight?:
+        | 'normal'
+        | 'bold'
+        | '100'
+        | '200'
+        | '300'
+        | '400'
+        | '500'
+        | '600'
+        | '700'
+        | '800'
+        | '900';
+    }
+    interface Fonts {
+      regular: Font;
+      medium: Font;
+      light: Font;
+      thin: Font;
+    }
+    interface Colors {
+      primary: string;
+      background: string;
+      surface: string;
+      accent: string;
+      error: string;
+      text: string;
+      onSurface: string;
+      onBackground: string;
+      disabled: string;
+      placeholder: string;
+      backdrop: string;
+      notification: string;
+    }
+
+    interface Animation {
+      scale: number;
+    }
+
     interface Theme {
       dark: boolean;
       mode?: Mode;
