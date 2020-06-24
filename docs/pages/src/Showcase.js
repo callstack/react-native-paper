@@ -111,7 +111,7 @@ export default class Showcase extends React.Component<{}> {
                       >
                         {item.name}
                       </AppName>
-                      <BadgeContainer>                        
+                      <BadgeContainer>
                         <a
                           href={item.android || null}
                           target="_blank"
