@@ -111,16 +111,7 @@ export default class Showcase extends React.Component<{}> {
                       >
                         {item.name}
                       </AppName>
-                      <BadgeContainer>
-                        <a
-                          href={item.github || null}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{ opacity: item.github ? 1 : 0.4 }}
-                        >
-                          <GithubIcon color={tintColor} />
-                        </a>
-                        <Separation />
+                      <BadgeContainer>                        
                         <a
                           href={item.android || null}
                           target="_blank"
@@ -137,6 +128,15 @@ export default class Showcase extends React.Component<{}> {
                           style={{ opacity: item.ios ? 1 : 0.4 }}
                         >
                           <IphoneIcon color={tintColor} />
+                        </a>
+                        <Separation />
+                        <a
+                          href={item.github || null}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ opacity: item.github ? 1 : 0.4 }}
+                        >
+                          <GithubIcon color={tintColor} />
                         </a>
                       </BadgeContainer>
                     </Info>
