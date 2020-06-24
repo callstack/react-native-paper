@@ -1,0 +1,190 @@
+{
+  "name": "react-native-paper",
+  "index": "src/index.tsx",
+  "mappings": {
+    "Colors": {
+      "path": "src/styles/colors",
+      "name": "*"
+    },
+    "useTheme": {
+      "path": "src/core/theming",
+      "name": "useTheme"
+    },
+    "withTheme": {
+      "path": "src/core/theming",
+      "name": "withTheme"
+    },
+    "ThemeProvider": {
+      "path": "src/core/theming",
+      "name": "ThemeProvider"
+    },
+    "Provider": {
+      "path": "src/core/Provider",
+      "name": "default"
+    },
+    "DefaultTheme": {
+      "path": "src/styles/DefaultTheme",
+      "name": "default"
+    },
+    "DarkTheme": {
+      "path": "src/styles/DarkTheme",
+      "name": "default"
+    },
+    "shadow": {
+      "path": "src/styles/shadow",
+      "name": "default"
+    },
+    "overlay": {
+      "path": "src/styles/overlay",
+      "name": "default"
+    },
+    "configureFonts": {
+      "path": "src/styles/fonts",
+      "name": "default"
+    },
+    "Avatar": {
+      "path": "src/components/Avatar/Avatar",
+      "name": "*"
+    },
+    "List": {
+      "path": "src/components/List/List",
+      "name": "*"
+    },
+    "Drawer": {
+      "path": "src/components/Drawer/Drawer",
+      "name": "*"
+    },
+    "Badge": {
+      "path": "src/components/Badge",
+      "name": "default"
+    },
+    "ActivityIndicator": {
+      "path": "src/components/ActivityIndicator",
+      "name": "default"
+    },
+    "Banner": {
+      "path": "src/components/Banner",
+      "name": "default"
+    },
+    "BottomNavigation": {
+      "path": "src/components/BottomNavigation",
+      "name": "default"
+    },
+    "Button": {
+      "path": "src/components/Button",
+      "name": "default"
+    },
+    "Card": {
+      "path": "src/components/Card/Card",
+      "name": "default"
+    },
+    "Checkbox": {
+      "path": "src/components/Checkbox/Checkbox",
+      "name": "default"
+    },
+    "Chip": {
+      "path": "src/components/Chip",
+      "name": "default"
+    },
+    "DataTable": {
+      "path": "src/components/DataTable/DataTable",
+      "name": "default"
+    },
+    "Dialog": {
+      "path": "src/components/Dialog/Dialog",
+      "name": "default"
+    },
+    "Divider": {
+      "path": "src/components/Divider",
+      "name": "default"
+    },
+    "FAB": {
+      "path": "src/components/FAB/FAB",
+      "name": "default"
+    },
+    "HelperText": {
+      "path": "src/components/HelperText",
+      "name": "default"
+    },
+    "IconButton": {
+      "path": "src/components/IconButton",
+      "name": "default"
+    },
+    "Menu": {
+      "path": "src/components/Menu/Menu",
+      "name": "default"
+    },
+    "Modal": {
+      "path": "src/components/Modal",
+      "name": "default"
+    },
+    "Portal": {
+      "path": "src/components/Portal/Portal",
+      "name": "default"
+    },
+    "ProgressBar": {
+      "path": "src/components/ProgressBar",
+      "name": "default"
+    },
+    "RadioButton": {
+      "path": "src/components/RadioButton/RadioButton",
+      "name": "default"
+    },
+    "Searchbar": {
+      "path": "src/components/Searchbar",
+      "name": "default"
+    },
+    "Snackbar": {
+      "path": "src/components/Snackbar",
+      "name": "default"
+    },
+    "Surface": {
+      "path": "src/components/Surface",
+      "name": "default"
+    },
+    "Switch": {
+      "path": "src/components/Switch",
+      "name": "default"
+    },
+    "Appbar": {
+      "path": "src/components/Appbar/Appbar",
+      "name": "default"
+    },
+    "TouchableRipple": {
+      "path": "src/components/TouchableRipple",
+      "name": "default"
+    },
+    "TextInput": {
+      "path": "src/components/TextInput/TextInput",
+      "name": "default"
+    },
+    "ToggleButton": {
+      "path": "src/components/ToggleButton/ToggleButton",
+      "name": "default"
+    },
+    "Caption": {
+      "path": "src/components/Typography/Caption",
+      "name": "default"
+    },
+    "Headline": {
+      "path": "src/components/Typography/Headline",
+      "name": "default"
+    },
+    "Paragraph": {
+      "path": "src/components/Typography/Paragraph",
+      "name": "default"
+    },
+    "Subheading": {
+      "path": "src/components/Typography/Subheading",
+      "name": "default"
+    },
+    "Title": {
+      "path": "src/components/Typography/Title",
+      "name": "default"
+    },
+    "Text": {
+      "path": "src/components/Typography/Text",
+      "name": "default"
+    }
+  }
+}

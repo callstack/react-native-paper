@@ -1,6 +1,6 @@
 {
   "name": "react-native-paper-fb-only-do-not-use",
-  "version": "4.0.0",
+  "version": "4.0.0-alpha.1",
   "description": "Material design for React Native",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
