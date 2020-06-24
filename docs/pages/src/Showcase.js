@@ -8,6 +8,7 @@ import { Header } from 'component-docs/components';
 import GooglePlayIcon from '../../components/google-play-icon';
 import IphoneIcon from '../../components/iphone-icon';
 import Content from './components/Content';
+import GithubIcon from '../../components/github-icon';
 
 type Data = {
   color: string,
@@ -70,6 +71,7 @@ const data: Data[] = [
     color: '#b985fc',
     name: 'Astrale',
     image: 'showcase/astrale.png',
+    github: 'https://github.com/jvidalv/astrale',
     android: 'https://play.google.com/store/apps/details?id=josep.astrale',
   },
 ];
@@ -110,6 +112,15 @@ export default class Showcase extends React.Component<{}> {
                         {item.name}
                       </AppName>
                       <BadgeContainer>
+                        <a
+                          href={item.github || null}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ opacity: item.github ? 1 : 0.4 }}
+                        >
+                          <GithubIcon color={tintColor} />
+                        </a>
+                        <Separation />
                         <a
                           href={item.android || null}
                           target="_blank"
