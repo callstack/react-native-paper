@@ -1,15 +1,14 @@
 {
-  "name": "react-native-paper",
-  "version": "4.0.0-alpha.1",
+  "name": "react-native-paper-fb-only-do-not-use",
+  "version": "4.0.0",
   "description": "Material design for React Native",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
-  "react-native": "lib/module/index.js",
+  "react-native": "src/index.tsx",
   "source": "src/index.tsx",
   "types": "lib/typescript/src/index.d.ts",
   "files": [
     "src",
-    "lib",
     "babel.js"
   ],
   "sideEffects": false,
