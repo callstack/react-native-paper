@@ -57,6 +57,10 @@ type Props = {
    * @optional
    */
   theme: Theme;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 type Layout = $Omit<$Omit<LayoutRectangle, 'x'>, 'y'>;
@@ -253,6 +257,8 @@ class Menu extends React.Component<Props, State> {
   };
 
   private show = async () => {
+    this.removeListeners();
+    this.attachListeners();
     const windowLayout = Dimensions.get('window');
     const [menuLayout, anchorLayout] = await Promise.all([
       this.measureMenuLayout(),
@@ -291,8 +297,6 @@ class Menu extends React.Component<Props, State> {
         },
       }),
       () => {
-        this.attachListeners();
-
         const { animation } = this.props.theme;
         Animated.parallel([
           Animated.timing(this.state.scaleAnimation, {
@@ -344,6 +348,7 @@ class Menu extends React.Component<Props, State> {
       theme,
       statusBarHeight,
       onDismiss,
+      testID,
     } = this.props;
 
     const {
@@ -546,6 +551,7 @@ class Menu extends React.Component<Props, State> {
               accessibilityViewIsModal={visible}
               style={[styles.wrapper, positionStyle, style]}
               pointerEvents={visible ? 'box-none' : 'none'}
+              testID={testID}
             >
               <Animated.View style={{ transform: positionTransforms }}>
                 <Surface
