@@ -12,9 +12,6 @@
       "color": "#000000"
     },
     "packagerOpts": {
-      "assetExts": [
-        "ttf"
-      ],
       "config": "./metro.config.js",
       "projectRoots": ""
     },
