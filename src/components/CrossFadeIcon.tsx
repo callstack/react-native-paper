@@ -3,7 +3,6 @@ import { Animated, StyleSheet, View } from 'react-native';
 import Icon, { isValidIcon, isEqualIcon, IconSource } from './Icon';
 
 import { withTheme } from '../core/theming';
-import { Theme } from '../types';
 
 type Props = {
   /**
@@ -21,7 +20,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 type State = {

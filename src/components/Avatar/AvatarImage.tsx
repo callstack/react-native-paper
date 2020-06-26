@@ -8,7 +8,6 @@ import {
   ImageSourcePropType,
 } from 'react-native';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 
 const defaultSize = 64;
 
@@ -25,7 +24,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**

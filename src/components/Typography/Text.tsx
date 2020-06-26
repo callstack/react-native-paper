@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { Text as NativeText, TextStyle, StyleProp } from 'react-native';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 
 type Props = React.ComponentProps<typeof NativeText> & {
   style?: StyleProp<TextStyle>;
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 // @component-group Typography

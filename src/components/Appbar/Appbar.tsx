@@ -13,7 +13,6 @@ import AppbarHeader, { AppbarHeader as _AppbarHeader } from './AppbarHeader';
 import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import { black, white } from '../../styles/colors';
-import { Theme } from '../../types';
 import overlay from '../../styles/overlay';
 
 type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
@@ -28,7 +27,7 @@ type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
   style?: StyleProp<ViewStyle>;
 };
 

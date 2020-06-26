@@ -10,7 +10,6 @@ import {
 
 import CheckBox from './Checkbox';
 import Text from '../Typography/Text';
-import { Theme } from '../../types';
 import TouchableRipple from '../TouchableRipple';
 import { withTheme } from '../../core/theming';
 
@@ -50,7 +49,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**

@@ -6,7 +6,6 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
-import { Theme } from '../../types';
 import { withTheme } from '../../core/theming';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress } from './utils';
@@ -54,7 +53,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**

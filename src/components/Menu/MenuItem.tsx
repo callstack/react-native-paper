@@ -12,7 +12,6 @@ import TouchableRipple from '../TouchableRipple';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import { black, white } from '../../styles/colors';
-import { Theme } from '../../types';
 
 type Props = {
   /**
@@ -34,7 +33,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
   style?: StyleProp<ViewStyle>;
   titleStyle?: StyleProp<TextStyle>;
   /**

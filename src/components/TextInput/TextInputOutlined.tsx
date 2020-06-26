@@ -17,7 +17,6 @@ import TextInputAdornment, {
 import InputLabel from './Label/InputLabel';
 import LabelBackground from './Label/LabelBackground';
 import { RenderProps, ChildTextInputProps } from './types';
-import { Theme } from '../../types';
 
 import {
   MAXIMIZED_LABEL_FONT_SIZE,
@@ -346,7 +345,7 @@ type OutlineType = {
   hasActiveOutline: boolean | undefined;
   outlineColor: string | undefined;
   backgroundColor: string | undefined;
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 const Outline = ({

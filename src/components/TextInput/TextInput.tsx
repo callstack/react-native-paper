@@ -11,7 +11,7 @@ import TextInputIcon from './Adornment/Icon';
 import TextInputAffix from './Adornment/Affix';
 import { withTheme } from '../../core/theming';
 import { RenderProps, State } from './types';
-import { Theme, $Omit } from '../../types';
+import { $Omit } from '../../types';
 
 const BLUR_ANIMATION_DURATION = 180;
 const FOCUS_ANIMATION_DURATION = 150;
@@ -116,7 +116,7 @@ export type TextInputProps = React.ComponentPropsWithRef<
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**

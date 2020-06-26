@@ -12,7 +12,6 @@ import color from 'color';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
   /**
@@ -39,7 +38,7 @@ type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 type State = {

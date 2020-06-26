@@ -5,7 +5,6 @@ import Text from '../Typography/Text';
 import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -32,7 +31,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**

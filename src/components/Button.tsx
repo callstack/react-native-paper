@@ -17,8 +17,6 @@ import TouchableRipple from './TouchableRipple';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
 
-import { Theme } from '../types';
-
 type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Mode of the button. You can change the mode to adjust the styling to give it desired emphasis.
@@ -80,7 +78,7 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
   /**
    * testID to be used on tests.
    */

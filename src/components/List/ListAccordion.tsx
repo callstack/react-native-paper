@@ -12,7 +12,6 @@ import TouchableRipple from '../TouchableRipple';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 
 import {
   ListAccordionGroupContext,
@@ -49,7 +48,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
   /**
    * Style that is passed to the wrapping TouchableRipple element.
    */

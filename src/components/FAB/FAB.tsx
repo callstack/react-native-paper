@@ -10,7 +10,7 @@ import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple';
 import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
-import { Theme, $RemoveChildren } from '../../types';
+import { $RemoveChildren } from '../../types';
 import { IconSource } from './../Icon';
 
 type Props = $RemoveChildren<typeof Surface> & {
@@ -55,7 +55,7 @@ type Props = $RemoveChildren<typeof Surface> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
   testID?: string;
 };
 

@@ -8,7 +8,6 @@ import {
 import { Consumer as SettingsConsumer } from '../core/settings';
 import { accessibilityProps } from './MaterialCommunityIcon';
 import { withTheme } from '../core/theming';
-import { Theme } from '../types';
 
 type IconSourceBase = string | ImageSourcePropType;
 
@@ -28,7 +27,7 @@ type Props = IconProps & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 const isImageSource = (source: any) =>

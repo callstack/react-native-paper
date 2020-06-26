@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 
 import IconButton from '../../IconButton';
-import { $Omit, Theme } from '../../../../src/types';
+import { $Omit } from '../../../../src/types';
 
 type Props = $Omit<
   React.ComponentProps<typeof IconButton>,
@@ -11,7 +11,7 @@ type Props = $Omit<
   name: string;
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
-  theme?: Theme;
+  theme?: ReactNativePaper.Theme;
 };
 
 export const ICON_SIZE = 24;

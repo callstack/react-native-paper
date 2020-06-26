@@ -10,7 +10,6 @@ import Color from 'color';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import { white } from '../../styles/colors';
-import { Theme } from '../../types';
 
 const defaultSize = 64;
 
@@ -38,7 +37,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**

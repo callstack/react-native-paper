@@ -10,7 +10,6 @@ import color from 'color';
 import IconButton from '../IconButton';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
@@ -34,7 +33,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**

@@ -4,13 +4,12 @@ import { I18nManager, StyleProp, TextStyle } from 'react-native';
 
 import Text from './Text';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 
 type Props = React.ComponentProps<typeof Text> & {
   alpha: number;
   family: 'regular' | 'medium' | 'light' | 'thin';
   style?: StyleProp<TextStyle>;
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 class StyledText extends React.Component<Props> {
