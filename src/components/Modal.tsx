@@ -64,9 +64,9 @@ const DEFAULT_DURATION = 220;
  *
  * const MyComponent = () => {
  *   const [visible, setVisible] = React.useState(false);
- * 
+ *
  *   const showModal = () => setVisible(true);
- * 
+ *
  *   const hideModal = () => setVisible(false);
  *
  *   return (
