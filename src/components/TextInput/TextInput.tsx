@@ -4,6 +4,8 @@ import {
   TextInput as NativeTextInput,
   Platform,
   LayoutChangeEvent,
+  StyleProp,
+  TextStyle,
 } from 'react-native';
 import TextInputOutlined from './TextInputOutlined';
 import TextInputFlat from './TextInputFlat';
@@ -112,7 +114,7 @@ export type TextInputProps = React.ComponentPropsWithRef<
    * Pass `paddingHorizontal` to modify horizontal padding.
    * This can be used to get MD Guidelines v1 TextInput look.
    */
-  style?: any;
+  style?: StyleProp<TextStyle>;
   /**
    * @optional
    */
