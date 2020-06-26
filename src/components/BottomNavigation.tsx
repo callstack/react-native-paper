@@ -337,7 +337,7 @@ class SceneComponent extends React.PureComponent<any> {
  * const MyComponent = () => {
  *   const [state, setState] = React.useState({
  *     index: 0,
- *     routes: [  
+ *     routes: [
  *       { key: 'music', title: 'Music', icon: 'queue-music' },
  *       { key: 'albums', title: 'Albums', icon: 'album' },
  *       { key: 'recents', title: 'Recents', icon: 'history' },
