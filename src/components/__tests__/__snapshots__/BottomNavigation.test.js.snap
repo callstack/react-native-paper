@@ -89,6 +89,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
       }
     >
       <View
+        forwardedRef={[Function]}
         onLayout={[Function]}
         pointerEvents="box-none"
         style={
@@ -756,6 +757,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
       }
     >
       <View
+        forwardedRef={[Function]}
         onLayout={[Function]}
         pointerEvents="box-none"
         style={
@@ -1443,6 +1445,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
       }
     >
       <View
+        forwardedRef={[Function]}
         onLayout={[Function]}
         pointerEvents="box-none"
         style={
@@ -2050,6 +2053,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
       }
     >
       <View
+        forwardedRef={[Function]}
         onLayout={[Function]}
         pointerEvents="box-none"
         style={
@@ -2929,6 +2933,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
       }
     >
       <View
+        forwardedRef={[Function]}
         onLayout={[Function]}
         pointerEvents="box-none"
         style={
@@ -3836,6 +3841,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
       }
     >
       <View
+        forwardedRef={[Function]}
         onLayout={[Function]}
         pointerEvents="box-none"
         style={
@@ -4652,6 +4658,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
       }
     >
       <View
+        forwardedRef={[Function]}
         onLayout={[Function]}
         pointerEvents="box-none"
         style={
@@ -5559,6 +5566,7 @@ exports[`renders shifting bottom navigation 1`] = `
       }
     >
       <View
+        forwardedRef={[Function]}
         onLayout={[Function]}
         pointerEvents="box-none"
         style={

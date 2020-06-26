@@ -87,7 +87,7 @@
     "prettier": "^2.0.5",
     "react": "16.11.0",
     "react-dom": "16.11.0",
-    "react-native": "^0.61.4",
+    "react-native": "^0.62.0",
     "react-native-testing-library": "^1.5.0",
     "react-native-vector-icons": "~6.3.0",
     "react-test-renderer": "16.11.0",
