@@ -31,6 +31,10 @@ export type Props = {
    */
   onPress?: () => void;
   /**
+   * Accessibility label for the touchable. This is read by the screen reader when the user taps the touchable.
+   */
+  accessibilityLabel?: string;
+  /**
    * Custom color for unchecked radio.
    */
   uncheckedColor?: string;
@@ -106,6 +110,7 @@ class RadioButtonItem extends React.Component<Props> {
       uncheckedColor,
       status,
       theme: { colors },
+      accessibilityLabel,
     } = this.props;
 
     return (
@@ -123,6 +128,7 @@ class RadioButtonItem extends React.Component<Props> {
                         value,
                       })
               }
+              accessibilityLabel={accessibilityLabel}
             >
               <View style={[styles.container, style]} pointerEvents="none">
                 <Text
