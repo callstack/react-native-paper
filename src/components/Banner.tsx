@@ -113,7 +113,7 @@ type NativeEvent = {
  *     </Banner>
  *   );
  * };
- * 
+ *
  * export default MyComponent;
  * ```
  */
