@@ -75,41 +75,30 @@ const DURATION_LONG = 10000;
  * import { View, StyleSheet } from 'react-native';
  * import { Button, Snackbar } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     visible: false,
- *   };
+ * const MyComponent = () => {
+ *   const [visible, setVisible] = React.useState(false);
  *
- *   _onToggleSnackBar = () => this.setState(state => ({ visible: !state.visible }));
+ *   const onToggleSnackBar = () => setVisible(!visible);
  *
- *   _onDismissSnackBar = () => this.setState({ visible: false });
+ *   const onDismissSnackBar = () => setVisible(false);
  *
- *   render() {
- *     const { visible } = this.state;
- *
- *     return (
- *       <View style={styles.container}>
- *         <Button
- *           onPress={this._onToggleSnackBar}
- *         >
- *           {visible ? 'Hide' : 'Show'}
- *         </Button>
- *         <Snackbar
- *           visible={visible}
- *           onDismiss={this._onDismissSnackBar}
- *           action={{
- *             label: 'Undo',
- *             onPress: () => {
- *               // Do something
- *             },
- *           }}
- *         >
- *           Hey there! I'm a Snackbar.
- *         </Snackbar>
- *       </View>
- *     );
- *   }
- * }
+ *   return (
+ *     <View style={styles.container}>
+ *       <Button onPress={onToggleSnackBar}>{visible ? 'Hide' : 'Show'}</Button>
+ *       <Snackbar
+ *         visible={visible}
+ *         onDismiss={onDismissSnackBar}
+ *         action={{
+ *           label: 'Undo',
+ *           onPress: () => {
+ *             // Do something
+ *           },
+ *         }}>
+ *         Hey there! I'm a Snackbar.
+ *       </Snackbar>
+ *     </View>
+ *   );
+ * };
  *
  * const styles = StyleSheet.create({
  *   container: {
@@ -117,6 +106,8 @@ const DURATION_LONG = 10000;
  *     justifyContent: 'space-between',
  *   },
  * });
+ *
+ * export default MyComponent;
  * ```
  */
 class Snackbar extends React.Component<Props, State> {
