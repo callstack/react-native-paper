@@ -63,21 +63,20 @@ type Props = {
  * import * as React from 'react';
  * import { Checkbox } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     checked: false,
- *   };
+ * const MyComponent = () => {
+ *   const [checked, setChecked] = React.useState(false);
  *
- *   render() {
- *     const { checked } = this.state;
- *     return (
- *       <Checkbox
- *         status={checked ? 'checked' : 'unchecked'}
- *         onPress={() => { this.setState({ checked: !checked }); }}
- *       />
- *     );
- *   }
- * }
+ *   return (
+ *     <Checkbox
+ *       status={checked ? 'checked' : 'unchecked'}
+ *       onPress={() => {
+ *         setChecked(!checked);
+ *       }}
+ *     />
+ *   );
+ * };
+ *
+ * export default MyComponent;
  * ```
  */
 class Checkbox extends React.Component<Props> {

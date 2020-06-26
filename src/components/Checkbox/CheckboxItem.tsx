@@ -59,18 +59,15 @@ type Props = {
  * ```js
  * import * as React from 'react';
  * import { View } from 'react-native';
- * import { Checkbox, Text } from 'react-native-paper';
+ * import { Checkbox } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
+ * const MyComponent = () => (
+ *   <View>
+ *     <Checkbox.Item label="Item" status="checked" />
+ *   </View>
+ * );
  *
- *   render() {
- *     return(
- *       <View>
- *           <Checkbox.Item label="Item" status="checked" />
- *       </View>
- *     )
- *   }
- * }
+ * export default MyComponent;
  *```
  */
 

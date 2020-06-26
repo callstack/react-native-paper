@@ -102,40 +102,50 @@ type State = {
  * import * as React from 'react';
  * import { FAB, Portal, Provider } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     open: false,
- *   };
+ * const MyComponent = () => {
+ *   const [state, setState] = React.useState({ open: false });
  *
- *   _onStateChange = ({ open }) => this.setState({ open });
+ *   const onStateChange = ({ open }) => setState({ open });
  *
- *   render() {
- *     const { open } = this.state;
+ *   const { open } = state;
  *
- *     return (
- *       <Provider>
- *          <Portal>
- *            <FAB.Group
- *              open={open}
- *              icon={open ? 'calendar-today' : 'plus'}
- *              actions={[
- *                { icon: 'plus', onPress: () => console.log('Pressed add') },
- *                { icon: 'star', label: 'Star', onPress: () => console.log('Pressed star')},
- *                { icon: 'email', label: 'Email', onPress: () => console.log('Pressed email') },
- *                { icon: 'bell', label: 'Remind', onPress: () => console.log('Pressed notifications') },
- *              ]}
- *              onStateChange={this._onStateChange}
- *              onPress={() => {
- *                if (open) {
- *                  // do something if the speed dial is open
- *                }
- *              }}
- *            />
- *          </Portal>
- *       </Provider>
- *     );
- *   }
- * }
+ *   return (
+ *     <Provider>
+ *       <Portal>
+ *         <FAB.Group
+ *           open={open}
+ *           icon={open ? 'calendar-today' : 'plus'}
+ *           actions={[
+ *             { icon: 'plus', onPress: () => console.log('Pressed add') },
+ *             {
+ *               icon: 'star',
+ *               label: 'Star',
+ *               onPress: () => console.log('Pressed star'),
+ *             },
+ *             {
+ *               icon: 'email',
+ *               label: 'Email',
+ *               onPress: () => console.log('Pressed email'),
+ *             },
+ *             {
+ *               icon: 'bell',
+ *               label: 'Remind',
+ *               onPress: () => console.log('Pressed notifications'),
+ *             },
+ *           ]}
+ *           onStateChange={onStateChange}
+ *           onPress={() => {
+ *             if (open) {
+ *               // do something if the speed dial is open
+ *             }
+ *           }}
+ *         />
+ *       </Portal>
+ *     </Provider>
+ *   );
+ * };
+ *
+ * export default MyComponent;
  * ```
  */
 class FABGroup extends React.Component<Props, State> {

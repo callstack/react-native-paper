@@ -51,39 +51,39 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * import * as React from 'react';
  * import { DataTable } from 'react-native-paper';
  *
+ * const itemsPerPage = 2;
  *
- *   const itemsPerPage = 2;
+ * const items = [
+ *   {
+ *     key: 1,
+ *     name: 'Page 1',
+ *   },
+ *   {
+ *     key: 2,
+ *     name: 'Page 2',
+ *   },
+ *   {
+ *     key: 3,
+ *     name: 'Page 3',
+ *   },
+ * ];
  *
- *   const items = [
- *    {
- *      key: 1,
- *      name: 'Page 1',
- *    },
- *    {
- *      key: 2,
- *      name: 'Page 2',
- *    },
- *    {
- *      key: 3,
- *      name: 'Page 3',
- *    }
- *  ];
- *
- * const MyComponent = () => (
- *
+ * const MyComponent = () => {
  *   const [page, setPage] = React.useState(0);
  *   const from = page * itemsPerPage;
  *   const to = (page + 1) * itemsPerPage;
  *
- *      <DataTable>
- *        <DataTable.Pagination
- *          page={page}
- *          numberOfPages={Math.floor(items.length / itemsPerPage)}
- *          onPageChange={page => setPage(page)}
- *          label={`${from + 1}-${to} of ${items.length}`}
- *        />
- *      </DataTable>
- * );
+ *   return (
+ *     <DataTable>
+ *       <DataTable.Pagination
+ *         page={page}
+ *         numberOfPages={Math.floor(items.length / itemsPerPage)}
+ *         onPageChange={page => setPage(page)}
+ *         label={`${from + 1}-${to} of ${items.length}`}
+ *       />
+ *     </DataTable>
+ *   );
+ * };
  *
  * export default MyComponent;
  * ```
