@@ -394,6 +394,7 @@ class BottomNavigation extends React.Component<Props, State> {
   static defaultProps = {
     labeled: true,
     keyboardHidesNavigationBar: true,
+    sceneAnimationEnabled: false,
   };
 
   static getDerivedStateFromProps(nextProps: any, prevState: State) {
@@ -710,8 +711,11 @@ class BottomNavigation extends React.Component<Props, State> {
             }
             const focused = navigationState.index === index;
 
-            const opacity =
-              sceneAnimationEnabled !== false ? tabs[index] : focused ? 1 : 0;
+            const opacity = sceneAnimationEnabled
+              ? tabs[index]
+              : focused
+              ? 1
+              : 0;
 
             const top = offsets[index].interpolate({
               inputRange: [0, 1],
