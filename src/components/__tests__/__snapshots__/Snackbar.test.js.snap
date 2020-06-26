@@ -170,7 +170,6 @@ exports[`renders snackbar with action button 1`] = `
         }
         accessible={true}
         focusable={true}
-        isTVSelectable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}

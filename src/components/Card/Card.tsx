@@ -146,6 +146,7 @@ class Card extends React.Component<Props, State> {
     );
     return (
       <Surface
+        // @ts-ignore
         style={[{ borderRadius: roundness, elevation }, style]}
         {...rest}
       >

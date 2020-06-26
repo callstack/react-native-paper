@@ -56,7 +56,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           "top": 6,
         }
       }
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -87,9 +86,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         ]
       }
     >
-      <View
-        style={null}
-      >
+      <View>
         <Text
           accessibilityElementsHidden={true}
           allowFontScaling={false}
@@ -174,7 +171,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           "top": 6,
         }
       }
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -207,9 +203,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         ]
       }
     >
-      <View
-        style={null}
-      >
+      <View>
         <Text
           accessibilityElementsHidden={true}
           allowFontScaling={false}
@@ -288,7 +282,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         "top": 6,
       }
     }
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -319,9 +312,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       ]
     }
   >
-    <View
-      style={null}
-    >
+    <View>
       <View
         style={
           Array [
@@ -471,7 +462,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         "top": 6,
       }
     }
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -502,9 +492,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       ]
     }
   >
-    <View
-      style={null}
-    >
+    <View>
       <View
         style={
           Array [

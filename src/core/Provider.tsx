@@ -1,19 +1,27 @@
 import * as React from 'react';
-import { AccessibilityInfo } from 'react-native';
+import { AccessibilityInfo, Appearance, ColorSchemeName } from 'react-native';
 import { ThemeProvider } from './theming';
 import { Provider as SettingsProvider, Settings } from './settings';
 import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
 import PortalHost from '../components/Portal/PortalHost';
 import DefaultTheme from '../styles/DefaultTheme';
+import DarkTheme from '../styles/DarkTheme';
 
 type Props = {
   children: React.ReactNode;
   theme?: ReactNativePaper.Theme;
   settings?: Settings;
 };
-export default class Provider extends React.Component<Props> {
+
+type State = {
+  colorScheme: ColorSchemeName;
+  reduceMotionEnabled: boolean;
+};
+
+export default class Provider extends React.Component<Props, State> {
   state = {
     reduceMotionEnabled: false,
+    colorScheme: Appearance?.getColorScheme() || 'light',
   };
 
   async componentDidMount() {
@@ -22,6 +30,7 @@ export default class Provider extends React.Component<Props> {
       this.updateReduceMotionSettingsInfo
     );
     this.updateReduceMotionSettingsInfo();
+    Appearance.addChangeListener(this.handleAppearanceChange);
   }
 
   componentWillUnmount() {
@@ -29,7 +38,33 @@ export default class Provider extends React.Component<Props> {
       'reduceMotionChanged',
       this.updateReduceMotionSettingsInfo
     );
+    Appearance?.removeChangeListener(this.handleAppearanceChange);
   }
+
+  private handleAppearanceChange = (
+    preferences: Appearance.AppearancePreferences
+  ) => {
+    const { colorScheme } = preferences;
+    this.setState({ colorScheme });
+  };
+
+  private getTheme = () => {
+    const { theme: providedTheme } = this.props;
+    const { reduceMotionEnabled } = this.state;
+
+    if (providedTheme) {
+      return providedTheme;
+    } else {
+      const theme =
+        this.state.colorScheme === 'light' ? DefaultTheme : DarkTheme;
+
+      return Object.assign(theme as ReactNativePaper.Theme, {
+        animation: {
+          scale: reduceMotionEnabled ? 0 : 1,
+        },
+      });
+    }
+  };
 
   private updateReduceMotionSettingsInfo = async () => {
     try {
@@ -42,20 +77,12 @@ export default class Provider extends React.Component<Props> {
   };
 
   render() {
-    const { children, settings, theme: providedTheme } = this.props;
-    const { reduceMotionEnabled } = this.state;
-    const theme = !providedTheme
-      ? Object.assign(DefaultTheme as ReactNativePaper.Theme, {
-          animation: {
-            scale: reduceMotionEnabled ? 0 : 1,
-          },
-        })
-      : providedTheme;
+    const { children, settings } = this.props;
 
     return (
       <PortalHost>
         <SettingsProvider value={settings || { icon: MaterialCommunityIcon }}>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          <ThemeProvider theme={this.getTheme()}>{children}</ThemeProvider>
         </SettingsProvider>
       </PortalHost>
     );

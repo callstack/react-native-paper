@@ -23,7 +23,6 @@ exports[`renders chip with close button 1`] = `
     }
     accessible={true}
     focusable={false}
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -206,7 +205,6 @@ exports[`renders chip with icon 1`] = `
     }
     accessible={true}
     focusable={false}
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -338,7 +336,6 @@ exports[`renders chip with onPress 1`] = `
     }
     accessible={true}
     focusable={true}
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -425,7 +422,6 @@ exports[`renders outlined disabled chip 1`] = `
     }
     accessible={true}
     focusable={false}
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -512,7 +508,6 @@ exports[`renders selected chip 1`] = `
     }
     accessible={true}
     focusable={false}
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}

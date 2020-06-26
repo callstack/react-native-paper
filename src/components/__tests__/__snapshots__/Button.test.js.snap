@@ -23,7 +23,6 @@ exports[`renders button with color 1`] = `
     }
     accessible={true}
     focusable={false}
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -119,7 +118,6 @@ exports[`renders button with custom testID 1`] = `
     }
     accessible={true}
     focusable={false}
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -216,7 +214,6 @@ exports[`renders button with icon 1`] = `
     }
     accessible={true}
     focusable={false}
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -362,7 +359,6 @@ exports[`renders contained contained with mode 1`] = `
     }
     accessible={true}
     focusable={false}
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -458,7 +454,6 @@ exports[`renders disabled button 1`] = `
     }
     accessible={true}
     focusable={false}
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -554,7 +549,6 @@ exports[`renders loading button 1`] = `
     }
     accessible={true}
     focusable={false}
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -833,7 +827,6 @@ exports[`renders outlined button with mode 1`] = `
     }
     accessible={true}
     focusable={false}
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -929,7 +922,6 @@ exports[`renders text button by default 1`] = `
     }
     accessible={true}
     focusable={false}
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -1025,7 +1017,6 @@ exports[`renders text button with mode 1`] = `
     }
     accessible={true}
     focusable={false}
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
