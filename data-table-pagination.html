@@ -42,39 +42,39 @@
 <pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> DataTable <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
 
+<span class="token keyword">const</span> itemsPerPage <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
 
-  <span class="token keyword">const</span> itemsPerPage <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> items <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    key<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    name<span class="token punctuation">:</span> <span class="token string">'Page 1'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    key<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+    name<span class="token punctuation">:</span> <span class="token string">'Page 2'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    key<span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+    name<span class="token punctuation">:</span> <span class="token string">'Page 3'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-  <span class="token keyword">const</span> items <span class="token operator">=</span> <span class="token punctuation">[</span>
-   <span class="token punctuation">{</span>
-     key<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-     name<span class="token punctuation">:</span> <span class="token string">'Page 1'</span><span class="token punctuation">,</span>
-   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-   <span class="token punctuation">{</span>
-     key<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
-     name<span class="token punctuation">:</span> <span class="token string">'Page 2'</span><span class="token punctuation">,</span>
-   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-   <span class="token punctuation">{</span>
-     key<span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
-     name<span class="token punctuation">:</span> <span class="token string">'Page 3'</span><span class="token punctuation">,</span>
-   <span class="token punctuation">}</span>
- <span class="token punctuation">]</span><span class="token punctuation">;</span>
-
-<span class="token keyword">const</span> <span class="token function-variable function">MyComponent</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>
-
+<span class="token keyword">const</span> <span class="token function-variable function">MyComponent</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
   <span class="token keyword">const</span> <span class="token punctuation">[</span>page<span class="token punctuation">,</span> setPage<span class="token punctuation">]</span> <span class="token operator">=</span> React<span class="token punctuation">.</span><span class="token function">useState</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">const</span> <span class="token keyword">from</span> <span class="token operator">=</span> page <span class="token operator">*</span> itemsPerPage<span class="token punctuation">;</span>
   <span class="token keyword">const</span> to <span class="token operator">=</span> <span class="token punctuation">(</span>page <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> itemsPerPage<span class="token punctuation">;</span>
 
-     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">DataTable</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
-       </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">DataTable.Pagination</span></span>
-         <span class="token attr-name">page</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>page<span class="token punctuation">}</span></span>
-         <span class="token attr-name">numberOfPages</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span>items<span class="token punctuation">.</span>length <span class="token operator">/</span> itemsPerPage<span class="token punctuation">)</span><span class="token punctuation">}</span></span>
-         <span class="token attr-name">onPageChange</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token parameter">page</span> <span class="token operator">=&gt;</span> <span class="token function">setPage</span><span class="token punctuation">(</span>page<span class="token punctuation">)</span><span class="token punctuation">}</span></span>
-         <span class="token attr-name">label</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">from</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">-</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>to<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> of </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>items<span class="token punctuation">.</span>length<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">}</span></span>
-       <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
-     </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">DataTable</span></span><span class="token punctuation">&gt;</span></span>
-<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">DataTable</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">DataTable.Pagination</span></span>
+        <span class="token attr-name">page</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>page<span class="token punctuation">}</span></span>
+        <span class="token attr-name">numberOfPages</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span>items<span class="token punctuation">.</span>length <span class="token operator">/</span> itemsPerPage<span class="token punctuation">)</span><span class="token punctuation">}</span></span>
+        <span class="token attr-name">onPageChange</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token parameter">page</span> <span class="token operator">=&gt;</span> <span class="token function">setPage</span><span class="token punctuation">(</span>page<span class="token punctuation">)</span><span class="token punctuation">}</span></span>
+        <span class="token attr-name">label</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">from</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">-</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>to<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> of </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>items<span class="token punctuation">.</span>length<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">}</span></span>
+      <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">DataTable</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> MyComponent<span class="token punctuation">;</span></code></pre>
 </div><h2>Props</h2><div class="PropInfo_p1eats2g"><a name="page" href="#page" class="PropLabel_psi127e"><code>page</code> (required)</a><div class="PropItem_pwdtv5j"><span>Type: </span><code>number</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>The currently visible page (starting with 0).</p>

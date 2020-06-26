@@ -40,40 +40,39 @@
 <span class="token keyword">import</span> <span class="token punctuation">{</span> Image <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> Banner <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
 
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">MyComponent</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
-  state <span class="token operator">=</span> <span class="token punctuation">{</span>
-    visible<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token function-variable function">MyComponent</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>visible<span class="token punctuation">,</span> setVisible<span class="token punctuation">]</span> <span class="token operator">=</span> React<span class="token punctuation">.</span><span class="token function">useState</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> <span class="token punctuation">(</span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Banner</span></span>
-        <span class="token attr-name">visible</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>visible<span class="token punctuation">}</span></span>
-        <span class="token attr-name">actions</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span>
-          <span class="token punctuation">{</span>
-            label<span class="token punctuation">:</span> <span class="token string">'Fix it'</span><span class="token punctuation">,</span>
-            <span class="token function-variable function">onPress</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> visible<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-          <span class="token punctuation">}</span><span class="token punctuation">,</span>
-          <span class="token punctuation">{</span>
-            label<span class="token punctuation">:</span> <span class="token string">'Learn more'</span><span class="token punctuation">,</span>
-            <span class="token function-variable function">onPress</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> visible<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-          <span class="token punctuation">}</span><span class="token punctuation">,</span>
-        <span class="token punctuation">]</span><span class="token punctuation">}</span></span>
-        <span class="token attr-name">icon</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> size <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
-          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Image</span></span>
-            <span class="token attr-name">source</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> uri<span class="token punctuation">:</span> <span class="token string">'https://avatars3.githubusercontent.com/u/17571969?s=400&amp;v=4'</span> <span class="token punctuation">}</span><span class="token punctuation">}</span></span>
-            <span class="token attr-name">style</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span>
-              width<span class="token punctuation">:</span> size<span class="token punctuation">,</span>
-              height<span class="token punctuation">:</span> size<span class="token punctuation">,</span>
-            <span class="token punctuation">}</span><span class="token punctuation">}</span></span>
-          <span class="token punctuation">/&gt;</span></span>
-        <span class="token punctuation">}</span></span>
-      <span class="token punctuation">&gt;</span></span><span class="token plain-text">
-        There was a problem processing a transaction on your credit card.
-      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Banner</span></span><span class="token punctuation">&gt;</span></span>
-    <span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Banner</span></span>
+      <span class="token attr-name">visible</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>visible<span class="token punctuation">}</span></span>
+      <span class="token attr-name">actions</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          label<span class="token punctuation">:</span> <span class="token string">'Fix it'</span><span class="token punctuation">,</span>
+          <span class="token function-variable function">onPress</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">setVisible</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          label<span class="token punctuation">:</span> <span class="token string">'Learn more'</span><span class="token punctuation">,</span>
+          <span class="token function-variable function">onPress</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">setVisible</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">]</span><span class="token punctuation">}</span></span>
+      <span class="token attr-name">icon</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span>size<span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Image</span></span>
+          <span class="token attr-name">source</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span>
+            uri<span class="token punctuation">:</span> <span class="token string">'https://avatars3.githubusercontent.com/u/17571969?s=400&amp;v=4'</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">}</span></span>
+          <span class="token attr-name">style</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span>
+            width<span class="token punctuation">:</span> size<span class="token punctuation">,</span>
+            height<span class="token punctuation">:</span> size<span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">}</span></span>
+        <span class="token punctuation">/&gt;</span></span>
+      <span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      There was a problem processing a transaction on your credit card.
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Banner</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> MyComponent<span class="token punctuation">;</span></code></pre>
 </div><h2>Props</h2><div class="PropInfo_p1eats2g"><a name="visible" href="#visible" class="PropLabel_psi127e"><code>visible</code> (required)</a><div class="PropItem_pwdtv5j"><span>Type: </span><code>boolean</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Whether banner is currently visible.</p>
 </div></div><div class="PropInfo_p1eats2g"><a name="children" href="#children" class="PropLabel_psi127e"><code>children</code> (required)</a><div class="PropItem_pwdtv5j"><span>Type: </span><code>string</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Content that will be displayed inside banner.</p>
 </div></div><div class="PropInfo_p1eats2g"><a name="icon" href="#icon" class="PropLabel_psi127e"><code>icon</code></a><div class="PropItem_pwdtv5j"><span>Type: </span><code>IconSource</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Icon to display for the <code>Banner</code>. Can be an image.</p>

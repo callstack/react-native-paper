@@ -54,21 +54,20 @@
 <pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> Checkbox <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
 
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">MyComponent</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
-  state <span class="token operator">=</span> <span class="token punctuation">{</span>
-    checked<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
-  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token function-variable function">MyComponent</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>checked<span class="token punctuation">,</span> setChecked<span class="token punctuation">]</span> <span class="token operator">=</span> React<span class="token punctuation">.</span><span class="token function">useState</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">const</span> <span class="token punctuation">{</span> checked <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token punctuation">(</span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Checkbox</span></span>
-        <span class="token attr-name">status</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>checked <span class="token operator">?</span> <span class="token string">'checked'</span> <span class="token punctuation">:</span> <span class="token string">'unchecked'</span><span class="token punctuation">}</span></span>
-        <span class="token attr-name">onPress</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> checked<span class="token punctuation">:</span> <span class="token operator">!</span>checked <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">}</span></span>
-      <span class="token punctuation">/&gt;</span></span>
-    <span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Checkbox</span></span>
+      <span class="token attr-name">status</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>checked <span class="token operator">?</span> <span class="token string">'checked'</span> <span class="token punctuation">:</span> <span class="token string">'unchecked'</span><span class="token punctuation">}</span></span>
+      <span class="token attr-name">onPress</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token function">setChecked</span><span class="token punctuation">(</span><span class="token operator">!</span>checked<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">}</span></span>
+    <span class="token punctuation">/&gt;</span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> MyComponent<span class="token punctuation">;</span></code></pre>
 </div><h2>Props</h2><div class="PropInfo_p1eats2g"><a name="status" href="#status" class="PropLabel_psi127e"><code>status</code> (required)</a><div class="PropItem_pwdtv5j"><span>Type: </span><code>&#x27;checked&#x27; | &#x27;unchecked&#x27; | &#x27;indeterminate&#x27;</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Status of checkbox.</p>
 </div></div><div class="PropInfo_p1eats2g"><a name="disabled" href="#disabled" class="PropLabel_psi127e"><code>disabled</code></a><div class="PropItem_pwdtv5j"><span>Type: </span><code>boolean</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Whether checkbox is disabled.</p>
 </div></div><div class="PropInfo_p1eats2g"><a name="onPress" href="#onPress" class="PropLabel_psi127e"><code>onPress</code></a><div class="PropItem_pwdtv5j"><span>Type: </span><code>() =&gt; void</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Function to execute on press.</p>

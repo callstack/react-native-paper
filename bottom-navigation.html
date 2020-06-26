@@ -49,34 +49,34 @@ See <a href="https://callstack.github.io/react-native-paper/theming.html#dark-th
 
 <span class="token keyword">const</span> <span class="token function-variable function">RecentsRoute</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Text</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Recents</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Text</span></span><span class="token punctuation">&gt;</span></span><span class="token punctuation">;</span>
 
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">MyComponent</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
-  state <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token keyword">const</span> <span class="token function-variable function">MyComponent</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>state<span class="token punctuation">,</span> setState<span class="token punctuation">]</span> <span class="token operator">=</span> React<span class="token punctuation">.</span><span class="token function">useState</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
     index<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
     routes<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span> key<span class="token punctuation">:</span> <span class="token string">'music'</span><span class="token punctuation">,</span> title<span class="token punctuation">:</span> <span class="token string">'Music'</span><span class="token punctuation">,</span> icon<span class="token punctuation">:</span> <span class="token string">'queue-music'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">{</span> key<span class="token punctuation">:</span> <span class="token string">'albums'</span><span class="token punctuation">,</span> title<span class="token punctuation">:</span> <span class="token string">'Albums'</span><span class="token punctuation">,</span> icon<span class="token punctuation">:</span> <span class="token string">'album'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">{</span> key<span class="token punctuation">:</span> <span class="token string">'recents'</span><span class="token punctuation">,</span> title<span class="token punctuation">:</span> <span class="token string">'Recents'</span><span class="token punctuation">,</span> icon<span class="token punctuation">:</span> <span class="token string">'history'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
-  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  <span class="token function-variable function">_handleIndexChange</span> <span class="token operator">=</span> <span class="token parameter">index</span> <span class="token operator">=&gt;</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> index <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> <span class="token function-variable function">handleIndexChange</span> <span class="token operator">=</span> <span class="token parameter">index</span> <span class="token operator">=&gt;</span> <span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token operator">...</span>state<span class="token punctuation">,</span> index <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  _renderScene <span class="token operator">=</span> BottomNavigation<span class="token punctuation">.</span><span class="token function">SceneMap</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token keyword">const</span> renderScene <span class="token operator">=</span> BottomNavigation<span class="token punctuation">.</span><span class="token function">SceneMap</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
     music<span class="token punctuation">:</span> MusicRoute<span class="token punctuation">,</span>
     albums<span class="token punctuation">:</span> AlbumsRoute<span class="token punctuation">,</span>
     recents<span class="token punctuation">:</span> RecentsRoute<span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> <span class="token punctuation">(</span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">BottomNavigation</span></span>
-        <span class="token attr-name">navigationState</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">}</span></span>
-        <span class="token attr-name">onIndexChange</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>_handleIndexChange<span class="token punctuation">}</span></span>
-        <span class="token attr-name">renderScene</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>_renderScene<span class="token punctuation">}</span></span>
-      <span class="token punctuation">/&gt;</span></span>
-    <span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">BottomNavigation</span></span>
+      <span class="token attr-name">navigationState</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>state<span class="token punctuation">}</span></span>
+      <span class="token attr-name">onIndexChange</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>handleIndexChange<span class="token punctuation">}</span></span>
+      <span class="token attr-name">renderScene</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>renderScene<span class="token punctuation">}</span></span>
+    <span class="token punctuation">/&gt;</span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> MyComponent<span class="token punctuation">;</span></code></pre>
 </div><h2>Props</h2><div class="PropInfo_p1eats2g"><a name="shifting" href="#shifting" class="PropLabel_psi127e"><code>shifting</code></a><div class="PropItem_pwdtv5j"><span>Type: </span><code>boolean</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Whether the shifting style is used, the active tab appears wider and the inactive tabs won't have a label.
 By default, this is <code>true</code> when you have more than 3 tabs.</p>
 </div></div><div class="PropInfo_p1eats2g"><a name="labeled" href="#labeled" class="PropLabel_psi127e"><code>labeled</code></a><div class="PropItem_pwdtv5j"><span>Type: </span><code>boolean</code></div><div class="PropItem_pwdtv5j"><span>Default value: </span><code>true</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Whether to show labels in tabs. When <code>false</code>, only icons will be displayed.</p>

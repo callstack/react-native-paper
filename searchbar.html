@@ -39,24 +39,22 @@
 <pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> Searchbar <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
 
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">MyComponent</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
-  state <span class="token operator">=</span> <span class="token punctuation">{</span>
-    searchQuery<span class="token punctuation">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
-  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token function-variable function">MyComponent</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>searchQuery<span class="token punctuation">,</span> setSearchQuery<span class="token punctuation">]</span> <span class="token operator">=</span> React<span class="token punctuation">.</span><span class="token function">useState</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  <span class="token function-variable function">_onChangeSearch</span> <span class="token operator">=</span> <span class="token parameter">query</span> <span class="token operator">=&gt;</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> searchQuery<span class="token punctuation">:</span> query <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> <span class="token function-variable function">onChangeSearch</span> <span class="token operator">=</span> <span class="token parameter">query</span> <span class="token operator">=&gt;</span> <span class="token function">setSearchQuery</span><span class="token punctuation">(</span>query<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">const</span> <span class="token punctuation">{</span> searchQuery <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token punctuation">(</span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Searchbar</span></span>
-        <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Search<span class="token punctuation">"</span></span>
-        <span class="token attr-name">onChangeText</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>_onChangeSearch<span class="token punctuation">}</span></span>
-        <span class="token attr-name">value</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>searchQuery<span class="token punctuation">}</span></span>
-      <span class="token punctuation">/&gt;</span></span>
-    <span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Searchbar</span></span>
+      <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Search<span class="token punctuation">"</span></span>
+      <span class="token attr-name">onChangeText</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>onChangeSearch<span class="token punctuation">}</span></span>
+      <span class="token attr-name">value</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>searchQuery<span class="token punctuation">}</span></span>
+    <span class="token punctuation">/&gt;</span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> MyComponent<span class="token punctuation">;</span>
+</code></pre>
 </div><h2>Props</h2><div class="PropInfo_p1eats2g"><a name="clearAccessibilityLabel" href="#clearAccessibilityLabel" class="PropLabel_psi127e"><code>clearAccessibilityLabel</code></a><div class="PropItem_pwdtv5j"><span>Type: </span><code>string</code></div><div class="PropItem_pwdtv5j"><span>Default value: </span><code>&#x27;clear&#x27;</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Accessibility label for the button. This is read by the screen reader when the user taps the button.</p>
 </div></div><div class="PropInfo_p1eats2g"><a name="searchAccessibilityLabel" href="#searchAccessibilityLabel" class="PropLabel_psi127e"><code>searchAccessibilityLabel</code></a><div class="PropItem_pwdtv5j"><span>Type: </span><code>string</code></div><div class="PropItem_pwdtv5j"><span>Default value: </span><code>&#x27;search&#x27;</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Accessibility label for the button. This is read by the screen reader when the user taps the button.</p>
 </div></div><div class="PropInfo_p1eats2g"><a name="placeholder" href="#placeholder" class="PropLabel_psi127e"><code>placeholder</code></a><div class="PropItem_pwdtv5j"><span>Type: </span><code>string</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Hint text shown when the input is empty.</p>
