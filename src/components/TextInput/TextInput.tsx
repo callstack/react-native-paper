@@ -303,7 +303,9 @@ class TextInput extends React.Component<TextInputProps, State> {
         ios: false,
         default: true,
       }),
-    }).start(this.hidePlaceholder);
+    }).start(({ finished }) => {
+      if (finished) this.showPlaceholder();
+    });
   };
 
   private hideError = () => {
