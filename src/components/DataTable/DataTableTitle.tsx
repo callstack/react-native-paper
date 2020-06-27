@@ -117,10 +117,7 @@ class DataTableTitle extends React.Component<Props, State> {
       ...rest
     } = this.props;
 
-    const textColor = color(theme.colors.text)
-      .alpha(0.6)
-      .rgb()
-      .string();
+    const textColor = color(theme.colors.text).alpha(0.6).rgb().string();
 
     const spin = this.state.spinAnim.interpolate({
       inputRange: [0, 1],

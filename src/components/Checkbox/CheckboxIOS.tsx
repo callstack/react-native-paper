@@ -59,15 +59,9 @@ class CheckboxIOS extends React.Component<Props> {
     let rippleColor;
 
     if (disabled) {
-      rippleColor = color(theme.colors.text)
-        .alpha(0.16)
-        .rgb()
-        .string();
+      rippleColor = color(theme.colors.text).alpha(0.16).rgb().string();
     } else {
-      rippleColor = color(checkedColor)
-        .fade(0.32)
-        .rgb()
-        .string();
+      rippleColor = color(checkedColor).fade(0.32).rgb().string();
     }
 
     const icon = indeterminate ? 'minus' : 'check';

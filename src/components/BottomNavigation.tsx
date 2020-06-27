@@ -683,10 +683,7 @@ class BottomNavigation extends React.Component<Props, State> {
     const inactiveTintColor =
       typeof inactiveColor !== 'undefined'
         ? inactiveColor
-        : color(textColor)
-            .alpha(0.5)
-            .rgb()
-            .string();
+        : color(textColor).alpha(0.5).rgb().string();
 
     const touchColor = color(activeColor || activeTintColor)
       .alpha(0.12)

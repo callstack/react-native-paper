@@ -103,10 +103,7 @@ class DataTablePagination extends React.Component<Props> {
       theme,
       ...rest
     } = this.props;
-    const labelColor = color(theme.colors.text)
-      .alpha(0.6)
-      .rgb()
-      .string();
+    const labelColor = color(theme.colors.text).alpha(0.6).rgb().string();
 
     return (
       <View {...rest} style={[styles.container, style]}>

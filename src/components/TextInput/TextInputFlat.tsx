@@ -111,14 +111,8 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
 
     const containerStyle = {
       backgroundColor: theme.dark
-        ? color(colors.background)
-            .lighten(0.24)
-            .rgb()
-            .string()
-        : color(colors.background)
-            .darken(0.06)
-            .rgb()
-            .string(),
+        ? color(colors.background).lighten(0.24).rgb().string()
+        : color(colors.background).darken(0.06).rgb().string(),
       borderTopLeftRadius: theme.roundness,
       borderTopRightRadius: theme.roundness,
     };

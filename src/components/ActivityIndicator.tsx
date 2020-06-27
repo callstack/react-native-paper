@@ -205,8 +205,9 @@ class ActivityIndicator extends React.Component<Props, State> {
 
                 const direction = index ? -1 : +1;
 
-                return `${direction * (180 - 30) * easing(progress) +
-                  rotation}deg`;
+                return `${
+                  direction * (180 - 30) * easing(progress) + rotation
+                }deg`;
               }
             );
 

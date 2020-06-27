@@ -56,9 +56,7 @@ const DataTableExample = () => {
   const sortedItems = items
     .slice()
     .sort((item1, item2) =>
-      (sortAscending
-      ? item1.name < item2.name
-      : item2.name < item1.name)
+      (sortAscending ? item1.name < item2.name : item2.name < item1.name)
         ? 1
         : -1
     );

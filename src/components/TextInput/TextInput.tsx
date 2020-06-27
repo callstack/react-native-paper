@@ -185,9 +185,11 @@ class TextInput extends React.Component<TextInputProps, State> {
 
   state = {
     labeled: new Animated.Value(
-      (this.props.value !== undefined
-      ? this.props.value
-      : this.props.defaultValue)
+      (
+        this.props.value !== undefined
+          ? this.props.value
+          : this.props.defaultValue
+      )
         ? 0
         : 1
     ),

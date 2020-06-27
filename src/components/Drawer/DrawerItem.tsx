@@ -76,17 +76,11 @@ class DrawerItem extends React.Component<Props> {
     } = this.props;
     const { colors, roundness } = theme;
     const backgroundColor = active
-      ? color(colors.primary)
-          .alpha(0.12)
-          .rgb()
-          .string()
+      ? color(colors.primary).alpha(0.12).rgb().string()
       : 'transparent';
     const contentColor = active
       ? colors.primary
-      : color(colors.text)
-          .alpha(0.68)
-          .rgb()
-          .string();
+      : color(colors.text).alpha(0.68).rgb().string();
     const font = theme.fonts.medium;
     const labelMargin = icon ? 32 : 0;
 

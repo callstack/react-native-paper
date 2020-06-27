@@ -230,10 +230,7 @@ class Button extends React.Component<Props, State> {
       textColor = colors.primary;
     }
 
-    const rippleColor = color(textColor)
-      .alpha(0.32)
-      .rgb()
-      .string();
+    const rippleColor = color(textColor).alpha(0.32).rgb().string();
     const buttonStyle = {
       backgroundColor,
       borderColor,
