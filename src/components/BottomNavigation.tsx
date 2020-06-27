@@ -334,34 +334,30 @@ class SceneComponent extends React.PureComponent<any> {
  *
  * const RecentsRoute = () => <Text>Recents</Text>;
  *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     index: 0,
- *     routes: [
- *       { key: 'music', title: 'Music', icon: 'queue-music' },
- *       { key: 'albums', title: 'Albums', icon: 'album' },
- *       { key: 'recents', title: 'Recents', icon: 'history' },
- *     ],
- *   };
+ * const MyComponent = () => {
+ *   const [index, setIndex] = React.useState(0);
+ *   const [routes] = React.useState([
+ *     { key: 'music', title: 'Music', icon: 'queue-music' },
+ *     { key: 'albums', title: 'Albums', icon: 'album' },
+ *     { key: 'recents', title: 'Recents', icon: 'history' },
+ *   ]);
  *
- *   _handleIndexChange = index => this.setState({ index });
- *
- *   _renderScene = BottomNavigation.SceneMap({
+ *   const renderScene = BottomNavigation.SceneMap({
  *     music: MusicRoute,
  *     albums: AlbumsRoute,
  *     recents: RecentsRoute,
  *   });
  *
- *   render() {
- *     return (
- *       <BottomNavigation
- *         navigationState={this.state}
- *         onIndexChange={this._handleIndexChange}
- *         renderScene={this._renderScene}
- *       />
- *     );
- *   }
- * }
+ *   return (
+ *     <BottomNavigation
+ *       navigationState={{ index, routes }}
+ *       onIndexChange={setIndex}
+ *       renderScene={renderScene}
+ *     />
+ *   );
+ * };
+ *
+ * export default MyComponent;
  * ```
  */
 class BottomNavigation extends React.Component<Props, State> {

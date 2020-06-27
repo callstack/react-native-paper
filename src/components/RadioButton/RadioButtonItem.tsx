@@ -32,6 +32,10 @@ export type Props = {
    */
   onPress?: () => void;
   /**
+   * Accessibility label for the touchable. This is read by the screen reader when the user taps the touchable.
+   */
+  accessibilityLabel?: string;
+  /**
    * Custom color for unchecked radio.
    */
   uncheckedColor?: string;
@@ -70,26 +74,20 @@ export type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { View } from 'react-native';
- * import { RadioButton, Text } from 'react-native-paper';
+ * import { RadioButton } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     value: 'first',
- *   };
+ * const MyComponent = () => {
+ *   const [value, setValue] = React.useState('first');
  *
- *   render() {
- *     return(
- *       <RadioButton.Group
- *         onValueChange={value => this.setState({ value })}
- *         value={this.state.value}
- *       >
- *           <RadioButton.Item label="First item" value="first" />
- *           <RadioButton.Item label="Second item" value="second" />
- *       </RadioButton.Group>
- *     )
- *   }
- * }
+ *   return (
+ *     <RadioButton.Group onValueChange={value => setValue(value)} value={value}>
+ *       <RadioButton.Item label="First item" value="first" />
+ *       <RadioButton.Item label="Second item" value="second" />
+ *     </RadioButton.Group>
+ *   );
+ * };
+ *
+ * export default MyComponent;
  *```
  */
 class RadioButtonItem extends React.Component<Props> {
@@ -107,6 +105,7 @@ class RadioButtonItem extends React.Component<Props> {
       uncheckedColor,
       status,
       theme: { colors },
+      accessibilityLabel,
     } = this.props;
 
     return (
@@ -124,6 +123,7 @@ class RadioButtonItem extends React.Component<Props> {
                         value,
                       })
               }
+              accessibilityLabel={accessibilityLabel}
             >
               <View style={[styles.container, style]} pointerEvents="none">
                 <Text

@@ -29,15 +29,13 @@ type Props = {
  * import * as React from 'react';
  * import { Portal, Text } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   render() {
- *     return (
- *       <Portal>
- *         <Text>This is rendered at a different place</Text>
- *       </Portal>
- *     );
- *   }
- * }
+ * const MyComponent = () => (
+ *   <Portal>
+ *     <Text>This is rendered at a different place</Text>
+ *   </Portal>
+ * );
+ *
+ * export default MyComponent;
  * ```
  */
 class Portal extends React.Component<Props> {

@@ -38,7 +38,7 @@ const PhotoGallery = ({ route }: Route) => {
 };
 
 const BottomNavigationExample = () => {
-  const [index, setIndex] = React.useState<number>(0);
+  const [index, setIndex] = React.useState(0);
   const [routes] = React.useState<RoutesState>([
     { key: 'album', title: 'Album', icon: 'image-album', color: '#6200ee' },
     {
@@ -65,14 +65,13 @@ const BottomNavigationExample = () => {
   return (
     <BottomNavigation
       navigationState={{ index, routes }}
-      onIndexChange={index => setIndex(index)}
+      onIndexChange={setIndex}
       renderScene={BottomNavigation.SceneMap({
         album: PhotoGallery,
         library: PhotoGallery,
         favorites: PhotoGallery,
         purchased: PhotoGallery,
       })}
-      sceneAnimationEnabled={false}
     />
   );
 };
