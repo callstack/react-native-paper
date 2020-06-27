@@ -27,21 +27,21 @@ const relative = (value /* : string */) =>
 const mappings = ast.program.body.reduce((acc, declaration, index, self) => {
   if (types.isExportNamedDeclaration(declaration)) {
     if (declaration.source) {
-      declaration.specifiers.forEach(specifier => {
+      declaration.specifiers.forEach((specifier) => {
         acc[specifier.exported.name] = {
           path: relative(declaration.source.value),
           name: specifier.local.name,
         };
       });
     } else {
-      declaration.specifiers.forEach(specifier => {
+      declaration.specifiers.forEach((specifier) => {
         const name = specifier.exported.name;
 
-        self.forEach(it => {
+        self.forEach((it) => {
           if (
             types.isImportDeclaration(it) &&
             it.specifiers.some(
-              s =>
+              (s) =>
                 types.isImportNamespaceSpecifier(s) &&
                 s.local.name === specifier.local.name
             )

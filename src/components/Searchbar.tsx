@@ -205,7 +205,7 @@ class Searchbar extends React.Component<Props> {
           keyboardAppearance={dark ? 'dark' : 'light'}
           accessibilityTraits="search"
           accessibilityRole="search"
-          ref={c => {
+          ref={(c) => {
             this.root = c;
           }}
           value={value}

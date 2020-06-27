@@ -49,9 +49,9 @@ class Portal extends React.Component<Props> {
 
     return (
       <SettingsConsumer>
-        {settings => (
+        {(settings) => (
           <PortalContext.Consumer>
-            {manager => (
+            {(manager) => (
               <PortalConsumer manager={manager as PortalMethods}>
                 <SettingsProvider value={settings}>
                   <ThemeProvider theme={theme}>{children}</ThemeProvider>

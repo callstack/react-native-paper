@@ -28,7 +28,7 @@ const PhotoGallery = ({ route }: Route) => {
 
   return (
     <ScrollView contentContainerStyle={styles.content}>
-      {PHOTOS.map(uri => (
+      {PHOTOS.map((uri) => (
         <View key={uri} style={styles.item}>
           <Image source={{ uri }} style={styles.photo} />
         </View>
@@ -65,7 +65,7 @@ const BottomNavigationExample = () => {
   return (
     <BottomNavigation
       navigationState={{ index, routes }}
-      onIndexChange={index => setIndex(index)}
+      onIndexChange={(index) => setIndex(index)}
       renderScene={BottomNavigation.SceneMap({
         album: PhotoGallery,
         library: PhotoGallery,

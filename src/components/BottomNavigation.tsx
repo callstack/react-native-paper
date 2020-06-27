@@ -607,7 +607,7 @@ class BottomNavigation extends React.Component<Props, State> {
 
   private jumpTo = (key: string) => {
     const index = this.props.navigationState.routes.findIndex(
-      route => route.key === key
+      (route) => route.key === key
     );
 
     this.props.onIndexChange(index);
@@ -670,7 +670,7 @@ class BottomNavigation extends React.Component<Props, State> {
           inputRange: routes.map((_, i) => i),
           //@ts-ignore
           outputRange: routes.map(
-            route => getColor({ route }) || approxBackgroundColor
+            (route) => getColor({ route }) || approxBackgroundColor
           ),
         })
       : approxBackgroundColor;

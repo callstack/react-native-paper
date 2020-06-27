@@ -140,7 +140,7 @@ class Card extends React.Component<Props, State> {
     const { elevation } = this.state;
     const { roundness } = theme;
     const total = React.Children.count(children);
-    const siblings = React.Children.map(children, child =>
+    const siblings = React.Children.map(children, (child) =>
       React.isValidElement(child) && child.type
         ? (child.type as any).displayName
         : null

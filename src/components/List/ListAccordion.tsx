@@ -156,7 +156,7 @@ class ListAccordion extends React.Component<Props, State> {
     if (this.props.expanded === undefined) {
       // Only update state of the `expanded` prop was not passed
       // If it was passed, the component will act as a controlled component
-      this.setState(state => ({
+      this.setState((state) => ({
         expanded: !state.expanded,
       }));
     }
@@ -265,7 +265,7 @@ class ListAccordion extends React.Component<Props, State> {
                 </View>
               </TouchableRipple>
               {expanded
-                ? React.Children.map(children, child => {
+                ? React.Children.map(children, (child) => {
                     if (
                       left &&
                       React.isValidElement(child) &&

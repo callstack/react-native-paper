@@ -91,7 +91,7 @@ export default class PortalHost extends React.Component<Props> {
     } else {
       const op = { type: 'mount', key, children };
       const index = this.queue.findIndex(
-        o => o.type === 'mount' || (o.type === 'update' && o.key === key)
+        (o) => o.type === 'mount' || (o.type === 'update' && o.key === key)
       );
 
       if (index > -1) {
