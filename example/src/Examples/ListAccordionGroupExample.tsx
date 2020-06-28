@@ -21,7 +21,7 @@ const ListAccordionGroupExample = () => {
       <List.AccordionGroup>
         <List.Section title="Uncontrolled Accordion Group example">
           <List.Accordion
-            left={props => <List.Icon {...props} icon="folder" />}
+            left={(props) => <List.Icon {...props} icon="folder" />}
             title="Expandable list item"
             id="1"
           >
@@ -29,14 +29,14 @@ const ListAccordionGroupExample = () => {
             <List.Item title="List item 2" />
           </List.Accordion>
           <List.Accordion
-            left={props => <List.Icon {...props} icon="folder" />}
+            left={(props) => <List.Icon {...props} icon="folder" />}
             title="Expandable list item 2"
             id="2"
           >
             <List.Item title="List item 1" />
           </List.Accordion>
           <List.Accordion
-            left={props => <List.Icon {...props} icon="folder" />}
+            left={(props) => <List.Icon {...props} icon="folder" />}
             title="Expandable list item 2"
             id="3"
           >
@@ -50,7 +50,7 @@ const ListAccordionGroupExample = () => {
       >
         <List.Section title="Controlled Accordion Group example">
           <List.Accordion
-            left={props => <List.Icon {...props} icon="folder" />}
+            left={(props) => <List.Icon {...props} icon="folder" />}
             title="Expandable list item"
             id="1"
           >
@@ -58,14 +58,14 @@ const ListAccordionGroupExample = () => {
             <List.Item title="List item 2" />
           </List.Accordion>
           <List.Accordion
-            left={props => <List.Icon {...props} icon="folder" />}
+            left={(props) => <List.Icon {...props} icon="folder" />}
             title="Expandable list item 2"
             id="2"
           >
             <List.Item title="List item 1" />
           </List.Accordion>
           <List.Accordion
-            left={props => <List.Icon {...props} icon="folder" />}
+            left={(props) => <List.Icon {...props} icon="folder" />}
             title="Expandable list item 2"
             id="3"
           >

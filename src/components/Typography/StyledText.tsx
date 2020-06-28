@@ -15,10 +15,7 @@ type Props = React.ComponentProps<typeof Text> & {
 class StyledText extends React.Component<Props> {
   render() {
     const { theme, alpha, family, style, ...rest } = this.props;
-    const textColor = color(theme.colors.text)
-      .alpha(alpha)
-      .rgb()
-      .string();
+    const textColor = color(theme.colors.text).alpha(alpha).rgb().string();
     const font = theme.fonts[family];
     const writingDirection = I18nManager.isRTL ? 'rtl' : 'ltr';
 

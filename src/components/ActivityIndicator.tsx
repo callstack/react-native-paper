@@ -186,7 +186,7 @@ class ActivityIndicator extends React.Component<Props, State> {
           style={[{ width: size, height: size, opacity: fade }]}
           collapsable={false}
         >
-          {[0, 1].map(index => {
+          {[0, 1].map((index) => {
             // Thanks to https://github.com/n4kz/react-native-indicators for the great work
             const inputRange = Array.from(
               new Array(frames),
@@ -204,8 +204,9 @@ class ActivityIndicator extends React.Component<Props, State> {
 
                 const direction = index ? -1 : +1;
 
-                return `${direction * (180 - 30) * easing(progress) +
-                  rotation}deg`;
+                return `${
+                  direction * (180 - 30) * easing(progress) + rotation
+                }deg`;
               }
             );
 

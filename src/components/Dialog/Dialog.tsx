@@ -115,7 +115,7 @@ class Dialog extends React.Component<Props> {
         ]}
       >
         {React.Children.toArray(children)
-          .filter(child => child != null && typeof child !== 'boolean')
+          .filter((child) => child != null && typeof child !== 'boolean')
           .map((child, i) => {
             if (
               i === 0 &&

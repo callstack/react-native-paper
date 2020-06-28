@@ -11,11 +11,11 @@ it('renders list section without subheader', () => {
       <ListSection>
         <ListItem
           title="First Item"
-          left={props => <ListIcon {...props} icon="folder" />}
+          left={(props) => <ListIcon {...props} icon="folder" />}
         />
         <ListItem
           title="Second Item"
-          left={props => <ListIcon {...props} icon="folder" />}
+          left={(props) => <ListIcon {...props} icon="folder" />}
         />
       </ListSection>
     )
@@ -31,11 +31,11 @@ it('renders list section with subheader', () => {
         <ListSubheader>Some title</ListSubheader>
         <ListItem
           title="First Item"
-          left={props => <ListIcon {...props} icon="folder" />}
+          left={(props) => <ListIcon {...props} icon="folder" />}
         />
         <ListItem
           title="Second Item"
-          left={props => <ListIcon {...props} icon="folder" />}
+          left={(props) => <ListIcon {...props} icon="folder" />}
         />
       </ListSection>
     )
@@ -50,11 +50,11 @@ it('renders list section with custom title style', () => {
       <ListSection title="Some title" titleStyle={{ color: 'red' }}>
         <ListItem
           title="First Item"
-          left={props => <ListIcon {...props} icon="folder" />}
+          left={(props) => <ListIcon {...props} icon="folder" />}
         />
         <ListItem
           title="Second Item"
-          left={props => <ListIcon {...props} icon="folder" />}
+          left={(props) => <ListIcon {...props} icon="folder" />}
         />
       </ListSection>
     )

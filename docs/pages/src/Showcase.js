@@ -95,7 +95,7 @@ export default class Showcase extends React.Component<{}> {
             to add your app to this list.
           </p>
           <Gallery>
-            {data.map(item => {
+            {data.map((item) => {
               const tintColor = color(item.color).isLight()
                 ? '#000000'
                 : '#FFFFFF';

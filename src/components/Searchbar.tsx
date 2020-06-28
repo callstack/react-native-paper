@@ -160,16 +160,8 @@ class Searchbar extends React.Component<Props> {
     const font = fonts.regular;
     const iconColor =
       customIconColor ||
-      (dark
-        ? textColor
-        : color(textColor)
-            .alpha(0.54)
-            .rgb()
-            .string());
-    const rippleColor = color(textColor)
-      .alpha(0.32)
-      .rgb()
-      .string();
+      (dark ? textColor : color(textColor).alpha(0.54).rgb().string());
+    const rippleColor = color(textColor).alpha(0.32).rgb().string();
 
     return (
       <Surface
@@ -210,7 +202,7 @@ class Searchbar extends React.Component<Props> {
           keyboardAppearance={dark ? 'dark' : 'light'}
           accessibilityTraits="search"
           accessibilityRole="search"
-          ref={c => {
+          ref={(c) => {
             this.root = c;
           }}
           value={value}

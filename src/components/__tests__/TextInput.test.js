@@ -9,7 +9,7 @@ it('correctly renders left-side icon adornment, and right-side affix adornment',
       label="Flat input"
       placeholder="Type something"
       value={'Some test value'}
-      onChangeText={text => this.setState({ text })}
+      onChangeText={(text) => this.setState({ text })}
       left={
         <TextInput.Icon
           name="heart"
@@ -33,7 +33,7 @@ it('correctly renders left-side icon adornment, and right-side affix adornment '
       label="Flat input"
       placeholder="Type something"
       value={'Some test value'}
-      onChangeText={text => this.setState({ text })}
+      onChangeText={(text) => this.setState({ text })}
       left={<TextInput.Affix text={affixTextValue} />}
       right={
         <TextInput.Icon

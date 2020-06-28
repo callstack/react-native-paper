@@ -12,7 +12,7 @@ describe('RadioButton', () => {
         const RN = jest.requireActual('react-native');
 
         RN.Platform = () => ({
-          select: objs => objs.default,
+          select: (objs) => objs.default,
         });
 
         return RN;
@@ -32,7 +32,7 @@ describe('RadioButton', () => {
         const RN = jest.requireActual('react-native');
 
         RN.Platform = () => ({
-          select: objs => objs.ios,
+          select: (objs) => objs.ios,
         });
 
         return RN;

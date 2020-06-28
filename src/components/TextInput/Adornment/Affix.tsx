@@ -37,17 +37,12 @@ const AffixContext = React.createContext<ContextState>({
   side: AdornmentSide.Left,
 });
 
-export const AffixAdornment: React.FunctionComponent<{
-  affix: React.ReactNode;
-  testID: string;
-} & ContextState> = ({
-  affix,
-  side,
-  textStyle,
-  topPosition,
-  onLayout,
-  visible,
-}) => {
+export const AffixAdornment: React.FunctionComponent<
+  {
+    affix: React.ReactNode;
+    testID: string;
+  } & ContextState
+> = ({ affix, side, textStyle, topPosition, onLayout, visible }) => {
   return (
     <AffixContext.Provider
       value={{

@@ -122,7 +122,7 @@ class Appbar extends React.Component<Props> {
       let leftItemsCount = 0;
       let rightItemsCount = 0;
 
-      React.Children.forEach(children, child => {
+      React.Children.forEach(children, (child) => {
         if (React.isValidElement(child)) {
           if (child.type === AppbarContent) {
             hasAppbarContent = true;
@@ -147,7 +147,7 @@ class Appbar extends React.Component<Props> {
       >
         {shouldAddLeftSpacing ? <View style={styles.spacing} /> : null}
         {React.Children.toArray(children)
-          .filter(child => child != null && typeof child !== 'boolean')
+          .filter((child) => child != null && typeof child !== 'boolean')
           .map((child, i) => {
             if (
               !React.isValidElement(child) ||
