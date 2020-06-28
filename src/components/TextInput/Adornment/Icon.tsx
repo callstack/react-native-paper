@@ -29,18 +29,14 @@ const StyleContext = React.createContext<StyleContextType>({
   forceFocus: () => {},
 });
 
-export const IconAdornment: React.FunctionComponent<{
-  testID: string;
-  icon: React.ReactNode;
-  topPosition: number;
-  side: 'left' | 'right';
-} & Omit<StyleContextType, 'style'>> = ({
-  icon,
-  topPosition,
-  side,
-  isTextInputFocused,
-  forceFocus,
-}) => {
+export const IconAdornment: React.FunctionComponent<
+  {
+    testID: string;
+    icon: React.ReactNode;
+    topPosition: number;
+    side: 'left' | 'right';
+  } & Omit<StyleContextType, 'style'>
+> = ({ icon, topPosition, side, isTextInputFocused, forceFocus }) => {
   const style = {
     top: topPosition,
     [side]: ICON_OFFSET,

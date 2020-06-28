@@ -12,7 +12,7 @@ const SurfaceExample = () => {
       style={[styles.container, { backgroundColor: background }]}
       contentContainerStyle={styles.content}
     >
-      {[1, 2, 4, 6, 12].map(i => (
+      {[1, 2, 4, 6, 12].map((i) => (
         <Surface key={i} style={[styles.surface, { elevation: i }]}>
           <Text>{i}</Text>
         </Surface>

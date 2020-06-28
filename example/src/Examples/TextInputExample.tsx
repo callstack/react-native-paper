@@ -125,7 +125,7 @@ const TextInputExample = () => {
           label="Flat input"
           placeholder="Type something"
           value={text}
-          onChangeText={text => inputActionHandler('text', text)}
+          onChangeText={(text) => inputActionHandler('text', text)}
           left={
             <TextInput.Icon
               name="heart"
@@ -142,7 +142,9 @@ const TextInputExample = () => {
           label="Flat input large font"
           placeholder="Type something"
           value={largeText}
-          onChangeText={largeText => inputActionHandler('largeText', largeText)}
+          onChangeText={(largeText) =>
+            inputActionHandler('largeText', largeText)
+          }
           left={<TextInput.Affix text="#" />}
           right={
             <TextInput.Icon
@@ -159,7 +161,7 @@ const TextInputExample = () => {
           label="Flat input large font"
           placeholder="Type something"
           value={flatTextPassword}
-          onChangeText={flatTextPassword =>
+          onChangeText={(flatTextPassword) =>
             inputActionHandler('flatTextPassword', flatTextPassword)
           }
           secureTextEntry={flatTextSecureEntry}
@@ -181,7 +183,7 @@ const TextInputExample = () => {
           label="Dense flat input"
           placeholder="Type something"
           value={flatDenseText}
-          onChangeText={flatDenseText =>
+          onChangeText={(flatDenseText) =>
             inputActionHandler('flatDenseText', flatDenseText)
           }
           left={<TextInput.Affix text="#" />}
@@ -191,7 +193,9 @@ const TextInputExample = () => {
           dense
           placeholder="Dense flat input without label"
           value={flatDense}
-          onChangeText={flatDense => inputActionHandler('flatDense', flatDense)}
+          onChangeText={(flatDense) =>
+            inputActionHandler('flatDense', flatDense)
+          }
         />
         <TextInput
           style={styles.inputContainerStyle}
@@ -199,7 +203,7 @@ const TextInputExample = () => {
           multiline
           placeholder="Type something"
           value={flatMultiline}
-          onChangeText={flatMultiline =>
+          onChangeText={(flatMultiline) =>
             inputActionHandler('flatMultiline', flatMultiline)
           }
         />
@@ -209,7 +213,7 @@ const TextInputExample = () => {
           multiline
           placeholder="Type something"
           value={flatTextArea}
-          onChangeText={flatTextArea =>
+          onChangeText={(flatTextArea) =>
             inputActionHandler('flatTextArea', flatTextArea)
           }
         />
@@ -224,7 +228,7 @@ const TextInputExample = () => {
           label="Outlined input"
           placeholder="Type something"
           value={outlinedText}
-          onChangeText={outlinedText =>
+          onChangeText={(outlinedText) =>
             inputActionHandler('outlinedText', outlinedText)
           }
           left={
@@ -244,7 +248,7 @@ const TextInputExample = () => {
           label="Outlined large font"
           placeholder="Type something"
           value={outlinedLargeText}
-          onChangeText={outlinedLargeText =>
+          onChangeText={(outlinedLargeText) =>
             inputActionHandler('outlinedLargeText', outlinedLargeText)
           }
           left={<TextInput.Affix text="$" />}
@@ -264,7 +268,7 @@ const TextInputExample = () => {
           label="Outlined large font"
           placeholder="Type something"
           value={outlinedTextPassword}
-          onChangeText={outlinedTextPassword =>
+          onChangeText={(outlinedTextPassword) =>
             inputActionHandler('outlinedTextPassword', outlinedTextPassword)
           }
           secureTextEntry={outlineTextSecureEntry}
@@ -287,7 +291,7 @@ const TextInputExample = () => {
           label="Dense outlined input"
           placeholder="Type something"
           value={outlinedDenseText}
-          onChangeText={outlinedDenseText =>
+          onChangeText={(outlinedDenseText) =>
             inputActionHandler('outlinedDenseText', outlinedDenseText)
           }
           left={<TextInput.Affix text="$" />}
@@ -298,7 +302,7 @@ const TextInputExample = () => {
           dense
           placeholder="Dense outlined input without label"
           value={outlinedDense}
-          onChangeText={outlinedDense =>
+          onChangeText={(outlinedDense) =>
             inputActionHandler('outlinedDense', outlinedDense)
           }
         />
@@ -309,7 +313,7 @@ const TextInputExample = () => {
           multiline
           placeholder="Type something"
           value={outlinedMultiline}
-          onChangeText={outlinedMultiline =>
+          onChangeText={(outlinedMultiline) =>
             inputActionHandler('outlinedMultiline', outlinedMultiline)
           }
         />
@@ -320,7 +324,7 @@ const TextInputExample = () => {
           multiline
           placeholder="Type something"
           value={outlinedTextArea}
-          onChangeText={outlinedTextArea =>
+          onChangeText={(outlinedTextArea) =>
             inputActionHandler('outlinedTextArea', outlinedTextArea)
           }
         />
@@ -336,7 +340,7 @@ const TextInputExample = () => {
             placeholder="Enter username, only letters"
             value={name}
             error={!_isUsernameValid(name)}
-            onChangeText={name => inputActionHandler('name', name)}
+            onChangeText={(name) => inputActionHandler('name', name)}
           />
           <HelperText type="error" visible={!_isUsernameValid(name)}>
             Error: Only letters are allowed
@@ -348,7 +352,7 @@ const TextInputExample = () => {
             placeholder="Enter username, only letters"
             value={maxLengthName}
             error={!_isUsernameValid(maxLengthName)}
-            onChangeText={maxLengthName =>
+            onChangeText={(maxLengthName) =>
               inputActionHandler('maxLengthName', maxLengthName)
             }
             maxLength={MAX_LENGTH}
@@ -373,7 +377,7 @@ const TextInputExample = () => {
             placeholder="Enter username, only letters"
             value={nameNoPadding}
             error={!_isUsernameValid(nameNoPadding)}
-            onChangeText={nameNoPadding =>
+            onChangeText={(nameNoPadding) =>
               inputActionHandler('nameNoPadding', nameNoPadding)
             }
           />

@@ -78,10 +78,7 @@ export default class AppbarAction extends React.Component<Props> {
 
   render() {
     const {
-      color: iconColor = color(black)
-        .alpha(0.54)
-        .rgb()
-        .string(),
+      color: iconColor = color(black).alpha(0.54).rgb().string(),
       icon,
       disabled,
       onPress,

@@ -75,7 +75,7 @@ const PreferencesContext = React.createContext<any>(null);
 const DrawerContent = () => {
   return (
     <PreferencesContext.Consumer>
-      {preferences => (
+      {(preferences) => (
         <DrawerItems
           toggleTheme={preferences.toggleTheme}
           toggleRTL={preferences.toggleRtl}
@@ -171,10 +171,10 @@ export default function PaperExample() {
   const preferences = React.useMemo(
     () => ({
       toggleTheme: () =>
-        setTheme(theme =>
+        setTheme((theme) =>
           theme === CustomDefaultTheme ? CustomDarkTheme : CustomDefaultTheme
         ),
-      toggleRtl: () => setRtl(rtl => !rtl),
+      toggleRtl: () => setRtl((rtl) => !rtl),
       rtl,
       theme,
     }),
@@ -192,7 +192,7 @@ export default function PaperExample() {
           <React.Fragment>
             <NavigationContainer
               initialState={initialState}
-              onStateChange={state =>
+              onStateChange={(state) =>
                 AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
               }
             >

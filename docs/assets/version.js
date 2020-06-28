@@ -152,7 +152,7 @@ function appendVersionBanner() {
 
 appendVersionBanner();
 
-var mutationObserver = new MutationObserver(mutations => {
+var mutationObserver = new MutationObserver((mutations) => {
   mutations.forEach(appendVersionBanner);
 });
 

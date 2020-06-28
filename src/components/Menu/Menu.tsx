@@ -166,7 +166,7 @@ class Menu extends React.Component<Props, State> {
   private isAnchorCoord = () => !React.isValidElement(this.props.anchor);
 
   private measureMenuLayout = () =>
-    new Promise<LayoutRectangle>(resolve => {
+    new Promise<LayoutRectangle>((resolve) => {
       if (this.menu) {
         this.menu.measureInWindow((x, y, width, height) => {
           resolve({ x, y, width, height });
@@ -175,7 +175,7 @@ class Menu extends React.Component<Props, State> {
     });
 
   private measureAnchorLayout = () =>
-    new Promise<LayoutRectangle>(resolve => {
+    new Promise<LayoutRectangle>((resolve) => {
       const { anchor } = this.props;
       if (this.isAnchorCoord()) {
         // @ts-ignore
@@ -522,7 +522,7 @@ class Menu extends React.Component<Props, State> {
 
     return (
       <View
-        ref={ref => {
+        ref={(ref) => {
           this.anchor = ref;
         }}
         collapsable={false}
@@ -534,7 +534,7 @@ class Menu extends React.Component<Props, State> {
               <View style={StyleSheet.absoluteFill} />
             </TouchableWithoutFeedback>
             <View
-              ref={ref => {
+              ref={(ref) => {
                 this.menu = ref;
               }}
               collapsable={false}

@@ -452,7 +452,7 @@ class TextInput extends React.Component<TextInputProps, State> {
         {...rest}
         value={this.state.value}
         parentState={this.state}
-        innerRef={ref => {
+        innerRef={(ref) => {
           this.root = ref;
         }}
         onFocus={this.handleFocus}
@@ -468,7 +468,7 @@ class TextInput extends React.Component<TextInputProps, State> {
         {...rest}
         value={this.state.value}
         parentState={this.state}
-        innerRef={ref => {
+        innerRef={(ref) => {
           this.root = ref;
         }}
         onFocus={this.handleFocus}

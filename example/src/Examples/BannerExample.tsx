@@ -41,7 +41,7 @@ const BannerExample = () => {
           on mobile.
         </Banner>
         <View style={styles.grid}>
-          {PHOTOS.map(uri => (
+          {PHOTOS.map((uri) => (
             <View key={uri} style={styles.item}>
               <Image source={{ uri }} style={styles.photo} />
             </View>

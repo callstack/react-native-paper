@@ -101,16 +101,10 @@ class CheckboxAndroid extends React.Component<Props, State> {
     let rippleColor, checkboxColor;
 
     if (disabled) {
-      rippleColor = color(theme.colors.text)
-        .alpha(0.16)
-        .rgb()
-        .string();
+      rippleColor = color(theme.colors.text).alpha(0.16).rgb().string();
       checkboxColor = theme.colors.disabled;
     } else {
-      rippleColor = color(checkedColor)
-        .fade(0.32)
-        .rgb()
-        .string();
+      rippleColor = color(checkedColor).fade(0.32).rgb().string();
       checkboxColor = checked ? checkedColor : uncheckedColor;
     }
 

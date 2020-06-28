@@ -35,10 +35,7 @@ class ListSubheader extends React.Component<Props> {
     const { style, theme, ...rest } = this.props;
     const { colors, fonts } = theme;
     const font = fonts.medium;
-    const textColor = color(colors.text)
-      .alpha(0.54)
-      .rgb()
-      .string();
+    const textColor = color(colors.text).alpha(0.54).rgb().string();
 
     return (
       <Text

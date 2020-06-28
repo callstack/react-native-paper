@@ -33,7 +33,7 @@ export default function Root() {
         component={ExampleList}
         options={{ title: 'Examples' }}
       />
-      {(Object.keys(examples) as Array<keyof typeof examples>).map(id => (
+      {(Object.keys(examples) as Array<keyof typeof examples>).map((id) => (
         <Stack.Screen
           key={id}
           name={id}

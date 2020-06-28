@@ -41,7 +41,7 @@ class CardActions extends React.Component<Props> {
   render() {
     return (
       <View {...this.props} style={[styles.container, this.props.style]}>
-        {React.Children.map(this.props.children, child =>
+        {React.Children.map(this.props.children, (child) =>
           React.isValidElement(child)
             ? React.cloneElement(child, {
                 compact: child.props.compact !== false,

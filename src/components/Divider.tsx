@@ -63,17 +63,11 @@ class Divider extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   light: {
-    backgroundColor: color(black)
-      .alpha(0.12)
-      .rgb()
-      .string(),
+    backgroundColor: color(black).alpha(0.12).rgb().string(),
     height: StyleSheet.hairlineWidth,
   },
   dark: {
-    backgroundColor: color(white)
-      .alpha(0.12)
-      .rgb()
-      .string(),
+    backgroundColor: color(white).alpha(0.12).rgb().string(),
     height: StyleSheet.hairlineWidth,
   },
   inset: {
