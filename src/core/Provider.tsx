@@ -58,8 +58,9 @@ export default class Provider extends React.Component<Props, State> {
       const theme =
         this.state.colorScheme === 'light' ? DefaultTheme : DarkTheme;
 
-      return Object.assign(theme as ReactNativePaper.Theme, {
+      return Object.assign({}, theme as ReactNativePaper.Theme, {
         animation: {
+          ...theme.animation,
           scale: reduceMotionEnabled ? 0 : 1,
         },
       });
