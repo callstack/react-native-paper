@@ -55,20 +55,17 @@ export default class Provider extends React.Component<Props, State> {
     if (providedTheme) {
       return providedTheme;
     } else {
-      const theme =
-        colorScheme === 'light'
-          ? (DefaultTheme as ReactNativePaper.Theme)
-          : (DarkTheme as ReactNativePaper.Theme);
-      return Object.assign(
-        {},
-        {
-          ...theme,
-          animation: {
-            ...theme.animation,
-            scale: reduceMotionEnabled ? 0 : 1,
-          },
-        }
-      );
+      const theme = (colorScheme === 'light'
+        ? DefaultTheme
+        : DarkTheme) as ReactNativePaper.Theme;
+
+      return {
+        ...theme,
+        animation: {
+          ...theme.animation,
+          scale: reduceMotionEnabled ? 0 : 1,
+        },
+      };
     }
   };
 
