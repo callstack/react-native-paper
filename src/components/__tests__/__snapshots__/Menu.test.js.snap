@@ -26,7 +26,6 @@ exports[`renders menu with content styles 1`] = `
       }
       accessible={true}
       focusable={false}
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -126,7 +125,6 @@ exports[`renders not visible menu 1`] = `
       }
       accessible={true}
       focusable={false}
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -226,7 +224,6 @@ exports[`renders visible menu 1`] = `
       }
       accessible={true}
       focusable={false}
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}

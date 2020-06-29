@@ -4,7 +4,6 @@ exports[`renders data table cell 1`] = `
 <View
   accessible={true}
   focusable={false}
-  isTVSelectable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -37,7 +36,7 @@ exports[`renders data table cell 1`] = `
           "fontWeight": "400",
           "textAlign": "left",
         },
-        null,
+        undefined,
       ]
     }
   >
@@ -221,7 +220,6 @@ exports[`renders data table pagination 1`] = `
         "top": 6,
       }
     }
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -252,9 +250,7 @@ exports[`renders data table pagination 1`] = `
       ]
     }
   >
-    <View
-      style={null}
-    >
+    <View>
       <Text
         accessibilityElementsHidden={true}
         allowFontScaling={false}
@@ -308,7 +304,6 @@ exports[`renders data table pagination 1`] = `
         "top": 6,
       }
     }
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -339,9 +334,7 @@ exports[`renders data table pagination 1`] = `
       ]
     }
   >
-    <View
-      style={null}
-    >
+    <View>
       <Text
         accessibilityElementsHidden={true}
         allowFontScaling={false}
@@ -436,7 +429,6 @@ exports[`renders data table pagination with label 1`] = `
         "top": 6,
       }
     }
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -467,9 +459,7 @@ exports[`renders data table pagination with label 1`] = `
       ]
     }
   >
-    <View
-      style={null}
-    >
+    <View>
       <Text
         accessibilityElementsHidden={true}
         allowFontScaling={false}
@@ -523,7 +513,6 @@ exports[`renders data table pagination with label 1`] = `
         "top": 6,
       }
     }
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -554,9 +543,7 @@ exports[`renders data table pagination with label 1`] = `
       ]
     }
   >
-    <View
-      style={null}
-    >
+    <View>
       <Text
         accessibilityElementsHidden={true}
         allowFontScaling={false}
@@ -804,7 +791,6 @@ exports[`renders right aligned data table cell 1`] = `
 <View
   accessible={true}
   focusable={false}
-  isTVSelectable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -839,7 +825,7 @@ exports[`renders right aligned data table cell 1`] = `
           "fontWeight": "400",
           "textAlign": "left",
         },
-        null,
+        undefined,
       ]
     }
   >

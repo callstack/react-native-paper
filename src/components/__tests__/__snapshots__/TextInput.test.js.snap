@@ -236,7 +236,6 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           "top": 6,
         }
       }
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -269,9 +268,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         ]
       }
     >
-      <View
-        style={null}
-      >
+      <View>
         <Text
           accessibilityElementsHidden={true}
           allowFontScaling={false}
@@ -518,7 +515,6 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           "top": 6,
         }
       }
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -551,9 +547,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         ]
       }
     >
-      <View
-        style={null}
-      >
+      <View>
         <Text
           accessibilityElementsHidden={true}
           allowFontScaling={false}
