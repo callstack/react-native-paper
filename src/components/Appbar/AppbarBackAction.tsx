@@ -8,7 +8,7 @@ import {
   StyleProp,
   ViewStyle,
 } from 'react-native';
-import { $Omit } from './../../types';
+import type { $Omit } from './../../types';
 import AppbarAction from './AppbarAction';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 

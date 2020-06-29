@@ -13,7 +13,7 @@ import ToggleButtonGroup, {
 } from './ToggleButtonGroup';
 import ToggleButtonRow from './ToggleButtonRow';
 import { black, white } from '../../styles/colors';
-import { IconSource } from '../Icon';
+import type { IconSource } from '../Icon';
 
 type Props = {
   /**

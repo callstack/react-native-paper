@@ -1,4 +1,4 @@
-import { AdornmentSide, AdornmentType } from './enums';
+import type { AdornmentSide, AdornmentType } from './enums';
 
 export type AdornmentConfig = {
   side: AdornmentSide;

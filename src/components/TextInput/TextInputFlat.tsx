@@ -13,7 +13,7 @@ import InputLabel from './Label/InputLabel';
 import TextInputAdornment, {
   TextInputAdornmentProps,
 } from './Adornment/TextInputAdornment';
-import { RenderProps, ChildTextInputProps } from './types';
+import type { RenderProps, ChildTextInputProps } from './types';
 
 import {
   MAXIMIZED_LABEL_FONT_SIZE,

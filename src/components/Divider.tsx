@@ -3,7 +3,7 @@ import color from 'color';
 import { StyleSheet, View, ViewStyle, StyleProp } from 'react-native';
 import { withTheme } from '../core/theming';
 import { black, white } from '../styles/colors';
-import { $RemoveChildren } from '../types';
+import type { $RemoveChildren } from '../types';
 
 type Props = $RemoveChildren<typeof View> & {
   /**
