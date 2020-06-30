@@ -60,7 +60,7 @@ export const DEFAULT_APPBAR_HEIGHT = 56;
  *     <Appbar.Action icon="mail" onPress={() => console.log('Pressed mail')} />
  *     <Appbar.Action icon="label" onPress={() => console.log('Pressed label')} />
  *     <Appbar.Action
- *       icon="delete"]=
+ *       icon="delete"
  *       onPress={() => console.log('Pressed delete')}
  *     />
  *   </Appbar>
