@@ -14,7 +14,7 @@ import Icon, { IconSource } from './Icon';
 import CrossFadeIcon from './CrossFadeIcon';
 import { withTheme } from '../core/theming';
 
-import { $RemoveChildren } from '../types';
+import type { $RemoveChildren } from '../types';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**

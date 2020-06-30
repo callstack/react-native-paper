@@ -1,11 +1,11 @@
-import {
+import type {
   TextInput as NativeTextInput,
   Animated,
   TextStyle,
   LayoutChangeEvent,
 } from 'react-native';
-import { TextInputProps } from './TextInput';
-import { $Omit } from './../../types';
+import type { TextInputProps } from './TextInput';
+import type { $Omit } from './../../types';
 
 export type RenderProps = {
   ref: (a: NativeTextInput | null | undefined) => void;

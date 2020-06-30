@@ -11,7 +11,7 @@ import {
 import TouchableRipple from '../TouchableRipple';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
-import { $RemoveChildren, EllipsizeProp } from '../../types';
+import type { $RemoveChildren, EllipsizeProp } from '../../types';
 
 type Description =
   | React.ReactNode

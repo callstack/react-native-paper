@@ -10,8 +10,8 @@ import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple';
 import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
-import { $RemoveChildren } from '../../types';
-import { IconSource } from './../Icon';
+import type { $RemoveChildren } from '../../types';
+import type { IconSource } from './../Icon';
 
 type Props = $RemoveChildren<typeof Surface> & {
   /**

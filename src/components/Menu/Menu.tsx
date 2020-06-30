@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 
 import { withTheme } from '../../core/theming';
-import { $Omit } from '../../types';
+import type { $Omit } from '../../types';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

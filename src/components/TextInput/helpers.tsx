@@ -1,5 +1,5 @@
-import { Animated } from 'react-native';
-import { AdornmentConfig } from './Adornment/types';
+import type { Animated } from 'react-native';
+import type { AdornmentConfig } from './Adornment/types';
 import {
   LABEL_PADDING_HORIZONTAL,
   ADORNMENT_OFFSET,

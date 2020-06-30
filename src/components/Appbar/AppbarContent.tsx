@@ -15,7 +15,7 @@ import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import { white } from '../../styles/colors';
 
-import { $RemoveChildren } from '../../types';
+import type { $RemoveChildren } from '../../types';
 
 type Props = $RemoveChildren<typeof View> & {
   /**

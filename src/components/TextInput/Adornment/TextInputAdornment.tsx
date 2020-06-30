@@ -9,7 +9,7 @@ import {
   Animated,
   Platform,
 } from 'react-native';
-import {
+import type {
   AdornmentConfig,
   AdornmentStyleAdjustmentForNativeInput,
 } from './types';

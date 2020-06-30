@@ -5,7 +5,7 @@ import {
   Platform,
   GestureResponderEvent,
 } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
+import type { StackNavigationProp } from '@react-navigation/stack';
 import {
   Menu,
   Appbar,

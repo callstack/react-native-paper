@@ -12,7 +12,7 @@ import color from 'color';
 import IconButton from './IconButton';
 import Surface from './Surface';
 import { withTheme } from '../core/theming';
-import { IconSource } from './Icon';
+import type { IconSource } from './Icon';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 
 type Props = React.ComponentPropsWithRef<typeof TextInput> & {
@@ -75,12 +75,12 @@ type Props = React.ComponentPropsWithRef<typeof TextInput> & {
  * ```js
  * import * as React from 'react';
  * import { Searchbar } from 'react-native-paper';
- * 
+ *
  * const MyComponent = () => {
  *   const [searchQuery, setSearchQuery] = React.useState('');
- * 
+ *
  *   const onChangeSearch = query => setSearchQuery(query);
- * 
+ *
  *   return (
  *     <Searchbar
  *       placeholder="Search"
@@ -89,7 +89,7 @@ type Props = React.ComponentPropsWithRef<typeof TextInput> & {
  *     />
  *   );
  * };
- * 
+ *
  * export default MyComponent;
 
  * ```

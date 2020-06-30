@@ -1,5 +1,5 @@
 import { Platform, PlatformOSType } from 'react-native';
-import { Fonts } from '../types';
+import type { Fonts } from '../types';
 
 const fontConfig = {
   web: {

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple';
-import { $RemoveChildren } from '../../types';
+import type { $RemoveChildren } from '../../types';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**

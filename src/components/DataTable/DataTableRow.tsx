@@ -4,7 +4,7 @@ import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
 import TouchableRipple from '../TouchableRipple';
 import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
-import { $RemoveChildren } from '../../types';
+import type { $RemoveChildren } from '../../types';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**

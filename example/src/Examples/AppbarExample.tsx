@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Platform, StyleSheet } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
+import type { StackNavigationProp } from '@react-navigation/stack';
 import {
   Colors,
   Appbar,

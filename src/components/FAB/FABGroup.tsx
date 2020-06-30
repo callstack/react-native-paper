@@ -13,7 +13,7 @@ import FAB from './FAB';
 import Text from '../Typography/Text';
 import Card from '../Card/Card';
 import { withTheme } from '../../core/theming';
-import { IconSource } from '../Icon';
+import type { IconSource } from '../Icon';
 
 type Props = {
   /**

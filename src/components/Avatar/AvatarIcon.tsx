@@ -4,7 +4,7 @@ import color from 'color';
 import Icon from '../Icon';
 import { withTheme } from '../../core/theming';
 import { white } from '../../styles/colors';
-import { IconSource } from './../Icon';
+import type { IconSource } from './../Icon';
 
 const defaultSize = 64;
 

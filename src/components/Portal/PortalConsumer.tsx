@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PortalMethods } from './PortalHost';
+import type { PortalMethods } from './PortalHost';
 
 type Props = {
   manager: PortalMethods;

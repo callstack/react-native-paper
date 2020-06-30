@@ -12,8 +12,8 @@ import TextInputFlat from './TextInputFlat';
 import TextInputIcon from './Adornment/Icon';
 import TextInputAffix from './Adornment/Affix';
 import { withTheme } from '../../core/theming';
-import { RenderProps, State } from './types';
-import { $Omit } from '../../types';
+import type { RenderProps, State } from './types';
+import type { $Omit } from '../../types';
 
 const BLUR_ANIMATION_DURATION = 180;
 const FOCUS_ANIMATION_DURATION = 150;

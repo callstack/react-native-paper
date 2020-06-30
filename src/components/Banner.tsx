@@ -5,7 +5,7 @@ import Text from './Typography/Text';
 import Button from './Button';
 import Icon, { IconSource } from './Icon';
 import { withTheme } from '../core/theming';
-import { $RemoveChildren } from '../types';
+import type { $RemoveChildren } from '../types';
 import shadow from '../styles/shadow';
 
 const ELEVATION = 1;

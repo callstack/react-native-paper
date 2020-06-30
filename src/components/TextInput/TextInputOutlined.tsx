@@ -16,7 +16,7 @@ import TextInputAdornment, {
 
 import InputLabel from './Label/InputLabel';
 import LabelBackground from './Label/LabelBackground';
-import { RenderProps, ChildTextInputProps } from './types';
+import type { RenderProps, ChildTextInputProps } from './types';
 
 import {
   MAXIMIZED_LABEL_FONT_SIZE,
