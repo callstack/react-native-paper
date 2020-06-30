@@ -119,12 +119,10 @@ class TouchableRipple extends React.Component<Props> {
       touchX = dimensions.width / 2;
       touchY = dimensions.height / 2;
     } else {
-      const startX = e.nativeEvent.touches
-        ? e.nativeEvent.touches[0].pageX
-        : e.pageX;
-      const startY = e.nativeEvent.touches
-        ? e.nativeEvent.touches[0].pageY
-        : e.pageY;
+      const { changedTouches, touches } = e.nativeEvent;
+      const touch = touches?.[0] || changedTouches?.[0];
+      const startX = touch.pageX || e.pageX;
+      const startY = touch.pageY || e.pageY;
 
       touchX = startX - dimensions.left;
       touchY = startY - dimensions.top;
