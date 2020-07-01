@@ -78,7 +78,7 @@ class AvatarImage extends React.Component<Props> {
   };
 
   render() {
-    const { size = defaultSize, source, style, theme, ...rest } = this.props;
+    const { size = defaultSize, render, source, style, theme, ...rest } = this.props;
     const { colors } = theme;
 
     const { backgroundColor = colors.primary } =
