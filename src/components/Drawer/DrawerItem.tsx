@@ -1,11 +1,13 @@
-import color from 'color';
 import * as React from 'react';
-import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
-import Text from '../Typography/Text';
+
 import Icon, { IconSource } from '../Icon';
-import TouchableRipple from '../TouchableRipple';
-import { withTheme } from '../../core/theming';
+import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+
+import Text from '../Typography/Text';
 import { Theme } from '../../types';
+import TouchableRipple from '../TouchableRipple';
+import color from 'color';
+import { withTheme } from '../../core/theming';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -61,7 +63,7 @@ class DrawerItem extends React.Component<Props> {
     const {
       icon,
       label,
-      labelOpacity,
+      labelOpacity = 0.68,
       active,
       theme,
       style,
@@ -79,7 +81,7 @@ class DrawerItem extends React.Component<Props> {
     const contentColor = active
       ? colors.primary
       : color(colors.text)
-          .alpha(labelOpacity || 0.68)
+          .alpha(labelOpacity)
           .rgb()
           .string();
     const font = theme.fonts.medium;
