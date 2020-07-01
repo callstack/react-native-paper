@@ -8,7 +8,7 @@ import {
   useTheme,
 } from 'react-native-paper';
 
-type State = 'normal' | 'normal-ios' | 'custom';
+type State = 'normal' | 'normal-ios' | 'normal-item' | 'custom';
 
 const RadioButtonExample = () => {
   const [checked, setChecked] = React.useState<State>('normal');
@@ -59,6 +59,12 @@ const RadioButtonExample = () => {
           </View>
         </View>
       </TouchableRipple>
+      <RadioButton.Item
+        label="Normal 3 - Item"
+        value="normal-item"
+        status={checked === 'normal-item' ? 'checked' : 'unchecked'}
+        onPress={() => setChecked('normal-item')}
+      />
       <View style={styles.row}>
         <Paragraph>Checked (Disabled)</Paragraph>
         <RadioButton value="first" status="checked" disabled />
@@ -67,6 +73,18 @@ const RadioButtonExample = () => {
         <Paragraph>Unchecked (Disabled)</Paragraph>
         <RadioButton value="second" status="unchecked" disabled />
       </View>
+      <RadioButton.Item
+        label="Checked - Item (Disabled)"
+        value="third"
+        status="checked"
+        disabled
+      />
+      <RadioButton.Item
+        label="Unchecked - Item (Disabled)"
+        value="fourth"
+        status="unchecked"
+        disabled
+      />
     </View>
   );
 };

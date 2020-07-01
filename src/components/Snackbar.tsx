@@ -41,6 +41,10 @@ type Props = React.ComponentProps<typeof Surface> & {
    * Text content of the Snackbar.
    */
   children: React.ReactNode;
+  /**
+   * Style for the wrapper of the snackbar
+   */
+  wrapperStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
   ref?: React.RefObject<View>;
   /**
@@ -71,41 +75,30 @@ const DURATION_LONG = 10000;
  * import { View, StyleSheet } from 'react-native';
  * import { Button, Snackbar } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     visible: false,
- *   };
+ * const MyComponent = () => {
+ *   const [visible, setVisible] = React.useState(false);
  *
- *   _onToggleSnackBar = () => this.setState(state => ({ visible: !state.visible }));
+ *   const onToggleSnackBar = () => setVisible(!visible);
  *
- *   _onDismissSnackBar = () => this.setState({ visible: false });
+ *   const onDismissSnackBar = () => setVisible(false);
  *
- *   render() {
- *     const { visible } = this.state;
- *
- *     return (
- *       <View style={styles.container}>
- *         <Button
- *           onPress={this._onToggleSnackBar}
- *         >
- *           {visible ? 'Hide' : 'Show'}
- *         </Button>
- *         <Snackbar
- *           visible={visible}
- *           onDismiss={this._onDismissSnackBar}
- *           action={{
- *             label: 'Undo',
- *             onPress: () => {
- *               // Do something
- *             },
- *           }}
- *         >
- *           Hey there! I'm a Snackbar.
- *         </Snackbar>
- *       </View>
- *     );
- *   }
- * }
+ *   return (
+ *     <View style={styles.container}>
+ *       <Button onPress={onToggleSnackBar}>{visible ? 'Hide' : 'Show'}</Button>
+ *       <Snackbar
+ *         visible={visible}
+ *         onDismiss={onDismissSnackBar}
+ *         action={{
+ *           label: 'Undo',
+ *           onPress: () => {
+ *             // Do something
+ *           },
+ *         }}>
+ *         Hey there! I'm a Snackbar.
+ *       </Snackbar>
+ *     </View>
+ *   );
+ * };
  *
  * const styles = StyleSheet.create({
  *   container: {
@@ -113,6 +106,8 @@ const DURATION_LONG = 10000;
  *     justifyContent: 'space-between',
  *   },
  * });
+ *
+ * export default MyComponent;
  * ```
  */
 class Snackbar extends React.Component<Props, State> {
@@ -218,6 +213,7 @@ class Snackbar extends React.Component<Props, State> {
       onDismiss,
       theme,
       style,
+      wrapperStyle,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       duration,
       ...rest
@@ -229,7 +225,10 @@ class Snackbar extends React.Component<Props, State> {
     }
 
     return (
-      <SafeAreaView pointerEvents="box-none" style={styles.wrapper}>
+      <SafeAreaView
+        pointerEvents="box-none"
+        style={[styles.wrapper, wrapperStyle]}
+      >
         <Surface
           pointerEvents="box-none"
           accessibilityLiveRegion="polite"

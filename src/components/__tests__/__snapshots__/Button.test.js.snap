@@ -240,7 +240,6 @@ exports[`renders button with icon 1`] = `
           Object {
             "marginLeft": 12,
             "marginRight": -4,
-            "width": 16,
           }
         }
       >
@@ -576,12 +575,12 @@ exports[`renders loading button 1`] = `
             Object {
               "marginLeft": 12,
               "marginRight": -4,
-              "width": 16,
             },
           ]
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "height": 16,

@@ -59,7 +59,9 @@ const getIconId = (source: any) => {
 };
 
 export const isValidIcon = (source: any) =>
-  typeof source === 'string' || isImageSource(source);
+  typeof source === 'string' ||
+  typeof source === 'function' ||
+  isImageSource(source);
 
 export const isEqualIcon = (a: any, b: any) =>
   a === b || getIconId(a) === getIconId(b);

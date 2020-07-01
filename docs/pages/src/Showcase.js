@@ -3,10 +3,12 @@
 import * as React from 'react';
 import { styled } from 'linaria/react';
 import color from 'color';
+import { Header } from 'component-docs/components';
 
 import GooglePlayIcon from '../../components/google-play-icon';
 import IphoneIcon from '../../components/iphone-icon';
 import Content from './components/Content';
+import GithubIcon from '../../components/github-icon';
 
 type Data = {
   color: string,
@@ -65,12 +67,20 @@ const data: Data[] = [
     android: 'https://play.google.com/store/apps/details?id=in.micy.tracksnz',
     ios: 'https://apps.apple.com/nz/app/tracks-nz/id1488245855',
   },
+  {
+    color: '#b985fc',
+    name: 'Astrale',
+    image: 'showcase/astrale.png',
+    github: 'https://github.com/jvidalv/astrale',
+    android: 'https://play.google.com/store/apps/details?id=josep.astrale',
+  },
 ];
 
 export default class Showcase extends React.Component<{}> {
   render() {
     return (
       <Container>
+        <Header logo="images/sidebar-logo.svg" />
         <Content>
           <h1>Who&apos;s using Paper?</h1>
           <p>
@@ -119,6 +129,15 @@ export default class Showcase extends React.Component<{}> {
                         >
                           <IphoneIcon color={tintColor} />
                         </a>
+                        <Separation />
+                        <a
+                          href={item.github || null}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ opacity: item.github ? 1 : 0.4 }}
+                        >
+                          <GithubIcon color={tintColor} />
+                        </a>
                       </BadgeContainer>
                     </Info>
                   </ImageContainer>
@@ -133,7 +152,7 @@ export default class Showcase extends React.Component<{}> {
 }
 
 const Container = styled.div`
-  width: 100%;
+  flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 `;
