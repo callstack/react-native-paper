@@ -6,11 +6,14 @@ import {
   ViewStyle,
   StyleProp,
   ImageSourcePropType,
+  ImageProps,
 } from 'react-native';
 import { withTheme } from '../../core/theming';
 import { Theme } from '../../types';
 
 const defaultSize = 64;
+
+type RenderProps = ImageProps
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -21,6 +24,25 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    * Size of the avatar.
    */
   size?: number;
+  /**
+   *
+   * Callback to render a custom image component such as `react-native-expo-image-cache`
+   * instead of the default `Image` component from `react-native`.
+   *
+   * Example:
+   * ```js
+   * <Avatar.Image
+   *   source={{ uri: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png' }}
+   *   render={props =>
+   *     <CachedImage
+   *       {...props}
+   *       uri={props.source.uri}
+   *     />
+   *   }
+   * />
+   * ```
+   */
+  render?: (props: RenderProps) => React.ReactNode;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -52,6 +74,7 @@ class AvatarImage extends React.Component<Props> {
 
   static defaultProps = {
     size: defaultSize,
+    render: (props: RenderProps) => <Image {...props} />,
   };
 
   render() {
@@ -74,10 +97,10 @@ class AvatarImage extends React.Component<Props> {
         ]}
         {...rest}
       >
-        <Image
-          source={source}
-          style={{ width: size, height: size, borderRadius: size / 2 }}
-        />
+        {render?.({
+          source,
+          style: { width: size, height: size, borderRadius: size / 2 },
+        )}
       </View>
     );
   }
