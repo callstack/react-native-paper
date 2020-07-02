@@ -134,7 +134,7 @@ class Menu extends React.Component<Props, State> {
 
   static defaultProps = {
     statusBarHeight: APPROX_STATUSBAR_HEIGHT,
-    overlayAccessibilityLabel: 'Close menu',
+    dismissAccessibilityLabel: 'Close menu',
   };
 
   static getDerivedStateFromProps(nextProps: Props, prevState: State) {
