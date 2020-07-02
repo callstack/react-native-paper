@@ -1,14 +1,17 @@
 import * as React from 'react';
+
 import {
   Image,
+  ImageSourcePropType,
+  StyleProp,
   StyleSheet,
   View,
   ViewStyle,
-  StyleProp,
-  ImageSourcePropType,
 } from 'react-native';
-import { withTheme } from '../../core/theming';
+
+import AvatarText from './AvatarText';
 import { Theme } from '../../types';
+import { withTheme } from '../../core/theming';
 
 const defaultSize = 64;
 
@@ -17,6 +20,10 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    * Image to display for the `Avatar`.
    */
   source: ImageSourcePropType;
+  /**
+   * Alternative text to avatar.
+   */
+  alt?: string;
   /**
    * Size of the avatar.
    */
@@ -43,7 +50,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * import { Avatar } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Avatar.Image size={24} source={require('../assets/avatar.png')} />
+ *   <Avatar.Image size={24} alt="avatar" source={require('../assets/avatar.png')} />
  * );
  * ```
  */
@@ -52,16 +59,24 @@ class AvatarImage extends React.Component<Props> {
 
   static defaultProps = {
     size: defaultSize,
+    alt: '',
   };
 
   render() {
-    const { size = defaultSize, source, style, theme, ...rest } = this.props;
+    const {
+      alt = '',
+      size = defaultSize,
+      source,
+      style,
+      theme,
+      ...rest
+    } = this.props;
     const { colors } = theme;
 
     const { backgroundColor = colors.primary } =
       StyleSheet.flatten(style) || {};
 
-    return (
+    return source ? (
       <View
         style={[
           {
@@ -79,6 +94,8 @@ class AvatarImage extends React.Component<Props> {
           style={{ width: size, height: size, borderRadius: size / 2 }}
         />
       </View>
+    ) : (
+      <AvatarText size={size} label={alt} />
     );
   }
 }
