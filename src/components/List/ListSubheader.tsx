@@ -24,11 +24,7 @@ type Props = React.ComponentProps<typeof Text> & {
  * import * as React from 'react';
  * import { List } from 'react-native-paper';
  *
- * class MyComponent extends React.Component {
- *  render () {
- *    return <List.Subheader>My List Title</List.Subheader>;
- *  }
- * }
+ * const MyComponent = () => <List.Subheader>My List Title</List.Subheader>;
  *
  * export default MyComponent;
  * ```

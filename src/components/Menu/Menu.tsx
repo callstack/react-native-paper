@@ -97,16 +97,14 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
  * ```js
  * import * as React from 'react';
  * import { View, TouchableWithoutFeedback, StyleSheet } from 'react-native';
- * import { Button, Paragraph, Menu, Divider, Provider } from 'react-native-paper';
+ * import { Button, Menu, Divider, Provider } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     visible: false,
- *   };
+ * const MyComponent = () => {
+ *   const [visible, setVisible] = React.useState(false);
  *
- *   _openMenu = () => this.setState({ visible: true });
+ *   const openMenu = () => setVisible(true);
  *
- *   _closeMenu = () => this.setState({ visible: false });
+ *   const closeMenu = () => setVisible(false);
  *
  *   render() {
  *     return (
@@ -118,10 +116,10 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
  *             justifyContent: 'center'
  *           }}>
  *           <Menu
- *             visible={this.state.visible}
- *             onDismiss={this._closeMenu}
+ *             visible={visible}
+ *             onDismiss={closeMenu}
  *             anchor={
- *               <Button onPress={this._openMenu}>Show menu</Button>
+ *               <Button onPress={openMenu}>Show menu</Button>
  *             }
  *             renderBackdrop={(dismiss) => (
  *               <TouchableWithoutFeedback onPress={onDismiss}>
@@ -337,7 +335,7 @@ class Menu extends React.Component<Props, State> {
       duration: ANIMATION_DURATION * animation.scale,
       easing: EASING,
       useNativeDriver: true,
-    }).start(finished => {
+    }).start(({ finished }) => {
       if (finished) {
         this.setState({ menuLayout: { width: 0, height: 0 }, rendered: false });
         this.state.scaleAnimation.setValue({ x: 0, y: 0 });

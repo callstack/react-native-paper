@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, I18nManager } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import color from 'color';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
@@ -115,7 +115,7 @@ class RadioButtonIOS extends React.Component<Props> {
                   name="check"
                   size={24}
                   color={checkedColor}
-                  direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+                  direction="ltr"
                 />
               </View>
             </TouchableRipple>

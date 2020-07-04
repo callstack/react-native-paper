@@ -37,6 +37,59 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   theme: Theme;
 };
 
+/**
+ * A component to show pagination for data table.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/data-table-pagination.png" />
+ *   </figure>
+ * </div>
+ *
+ *
+ * ## Usage
+ * ```js
+ * import * as React from 'react';
+ * import { DataTable } from 'react-native-paper';
+ *
+ * const itemsPerPage = 2;
+ *
+ * const items = [
+ *   {
+ *     key: 1,
+ *     name: 'Page 1',
+ *   },
+ *   {
+ *     key: 2,
+ *     name: 'Page 2',
+ *   },
+ *   {
+ *     key: 3,
+ *     name: 'Page 3',
+ *   },
+ * ];
+ *
+ * const MyComponent = () => {
+ *   const [page, setPage] = React.useState(0);
+ *   const from = page * itemsPerPage;
+ *   const to = (page + 1) * itemsPerPage;
+ *
+ *   return (
+ *     <DataTable>
+ *       <DataTable.Pagination
+ *         page={page}
+ *         numberOfPages={Math.floor(items.length / itemsPerPage)}
+ *         onPageChange={page => setPage(page)}
+ *         label={`${from + 1}-${to} of ${items.length}`}
+ *       />
+ *     </DataTable>
+ *   );
+ * };
+ *
+ * export default MyComponent;
+ * ```
+ */
+
 class DataTablePagination extends React.Component<Props> {
   static displayName = 'DataTable.Pagination';
 

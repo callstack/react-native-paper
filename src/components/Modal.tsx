@@ -51,38 +51,39 @@ const DEFAULT_DURATION = 220;
  * The Modal component is a simple way to present content above an enclosing view.
  * To render the `Modal` above other components, you'll need to wrap it with the [`Portal`](portal.html) component.
  *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/modal.gif" />
+ *   </figure>
+ * </div>
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
  * import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     visible: false,
- *   };
+ * const MyComponent = () => {
+ *   const [visible, setVisible] = React.useState(false);
  *
- *   _showModal = () => this.setState({ visible: true });
- *   _hideModal = () => this.setState({ visible: false });
+ *   const showModal = () => setVisible(true);
  *
- *   render() {
- *     const { visible } = this.state;
- *     return (
- *       <Provider>
- *          <Portal>
- *            <Modal visible={visible} onDismiss={this._hideModal}>
- *              <Text>Example Modal</Text>
- *            </Modal>
- *            <Button
- *              style={{ marginTop: 30 }}
- *              onPress={this._showModal}
- *            >
- *              Show
- *            </Button>
- *          </Portal>
- *       </Provider>
- *     );
- *   }
- * }
+ *   const hideModal = () => setVisible(false);
+ *
+ *   return (
+ *     <Provider>
+ *       <Portal>
+ *         <Modal visible={visible} onDismiss={hideModal}>
+ *           <Text>Example Modal</Text>
+ *         </Modal>
+ *         <Button style={{marginTop: 30}} onPress={showModal}>
+ *           Show
+ *         </Button>
+ *       </Portal>
+ *     </Provider>
+ *   );
+ * };
+ *
+ * export default MyComponent;
  * ```
  */
 

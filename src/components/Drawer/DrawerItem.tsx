@@ -38,13 +38,23 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
 /**
  * A component used to show an action item with an icon and a label in a navigation drawer.
  *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/drawer-item.png" />
+ *   </figure>
+ * </div>
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
  * import { Drawer } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Drawer.Item label="First Item" />
+ *    <Drawer.Item
+ *      style={{ backgroundColor: '#64ffda' }}
+ *      icon="star"
+ *      label="First Item"
+ *    />
  * );
  *
  * export default MyComponent;

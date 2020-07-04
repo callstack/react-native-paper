@@ -22,6 +22,34 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   theme: Theme;
 };
 
+/**
+ * A component to show a single row inside of a table.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/data-table-row-cell.png" />
+ *   </figure>
+ * </div>
+ *
+ *
+ * ## Usage
+ * ```js
+ * import * as React from 'react';
+ * import { DataTable } from 'react-native-paper';
+ *
+ * const MyComponent = () => (
+ *      <DataTable.Row>
+ *        <DataTable.Cell numeric>1</DataTable.Cell>
+ *        <DataTable.Cell numeric>2</DataTable.Cell>
+ *        <DataTable.Cell numeric>3</DataTable.Cell>
+ *        <DataTable.Cell numeric>4</DataTable.Cell>
+ *      </DataTable.Row>
+ * );
+ *
+ * export default MyComponent;
+ * ```
+ */
+
 class DataTableRow extends React.Component<Props> {
   static displayName = 'DataTable.Row';
 

@@ -126,10 +126,12 @@ function getPages() {
 module.exports = {
   root,
   logo: 'images/sidebar-logo.svg',
+  favicon: 'images/favicon.ico',
   assets,
   styles,
   scripts,
   pages: getPages,
   output: dist,
   github,
+  title: '[title] · React Native Paper',
 };

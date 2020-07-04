@@ -21,29 +21,30 @@ type Props = {
 /**
  * Toggle button row renders a group of toggle buttons in a row.
  *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/toggle-button-row.gif" />
+ *   </figure>
+ * </div>
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { View } from 'react-native';
  * import { ToggleButton } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     value: 'left',
- *   };
+ * const MyComponent = () => {
+ *   const [value, setValue] = React.useState('left');
  *
- *   render() {
- *     return(
- *       <ToggleButton.Row
- *         onValueChange={value => this.setState({ value })}
- *         value={this.state.value}
- *       >
- *           <ToggleButton icon="format-align-left" value="left" />
- *           <ToggleButton icon="format-align-right" value="right" />
- *       </ToggleButton.Row>
- *     )
- *   }
- * }
+ *   return (
+ *     <ToggleButton.Row onValueChange={value => setValue(value)} value={value}>
+ *       <ToggleButton icon="format-align-left" value="left" />
+ *       <ToggleButton icon="format-align-right" value="right" />
+ *     </ToggleButton.Row>
+ *   );
+ * };
+ *
+ * export default MyComponent;
+ *
  *```
  */
 class ToggleButtonRow extends React.Component<Props> {

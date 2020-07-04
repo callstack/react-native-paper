@@ -5,6 +5,7 @@ import {
   View,
   Animated,
   TouchableWithoutFeedback,
+  TouchableWithoutFeedbackProps,
   StyleSheet,
   StyleProp,
   Platform,
@@ -42,6 +43,15 @@ type NavigationState = {
 type TabPressEvent = {
   defaultPrevented: boolean;
   preventDefault(): void;
+};
+
+type TouchableProps = TouchableWithoutFeedbackProps & {
+  key: string;
+  route: Route;
+  children: React.ReactNode;
+  borderless?: boolean;
+  centered?: boolean;
+  rippleColor?: string;
 };
 
 type Props = {
@@ -147,6 +157,11 @@ type Props = {
     focused: boolean;
     color: string;
   }) => React.ReactNode;
+  /**
+   * Callback which returns a React element to be used as the touchable for the tab item.
+   * Renders a `TouchableRipple` on Android and `TouchableWithoutFeedback` with `View` on iOS.
+   */
+  renderTouchable?: (props: TouchableProps) => React.ReactNode;
   /**
    * Get label text for the tab, uses `route.title` by default. Use `renderLabel` to replace label component.
    */
@@ -263,15 +278,30 @@ const MAX_TAB_WIDTH = 168;
 const BAR_HEIGHT = 56;
 const FAR_FAR_AWAY = 9999;
 
-// @ts-ignore
-const Touchable = TouchableRipple.supported
-  ? TouchableRipple
-  : // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    ({ style, children, borderless, centered, rippleColor, ...rest }: any) => (
-      <TouchableWithoutFeedback {...rest}>
-        <View style={style}>{children}</View>
-      </TouchableWithoutFeedback>
-    );
+const Touchable = ({
+  route: _0,
+  style,
+  children,
+  borderless,
+  centered,
+  rippleColor,
+  ...rest
+}: TouchableProps) =>
+  TouchableRipple.supported ? (
+    <TouchableRipple
+      {...rest}
+      borderless={borderless}
+      centered={centered}
+      rippleColor={rippleColor}
+      style={style}
+    >
+      {children}
+    </TouchableRipple>
+  ) : (
+    <TouchableWithoutFeedback {...rest}>
+      <View style={style}>{children}</View>
+    </TouchableWithoutFeedback>
+  );
 
 class SceneComponent extends React.PureComponent<any> {
   render() {
@@ -304,34 +334,30 @@ class SceneComponent extends React.PureComponent<any> {
  *
  * const RecentsRoute = () => <Text>Recents</Text>;
  *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     index: 0,
- *     routes: [
- *       { key: 'music', title: 'Music', icon: 'queue-music' },
- *       { key: 'albums', title: 'Albums', icon: 'album' },
- *       { key: 'recents', title: 'Recents', icon: 'history' },
- *     ],
- *   };
+ * const MyComponent = () => {
+ *   const [index, setIndex] = React.useState(0);
+ *   const [routes] = React.useState([
+ *     { key: 'music', title: 'Music', icon: 'queue-music' },
+ *     { key: 'albums', title: 'Albums', icon: 'album' },
+ *     { key: 'recents', title: 'Recents', icon: 'history' },
+ *   ]);
  *
- *   _handleIndexChange = index => this.setState({ index });
- *
- *   _renderScene = BottomNavigation.SceneMap({
+ *   const renderScene = BottomNavigation.SceneMap({
  *     music: MusicRoute,
  *     albums: AlbumsRoute,
  *     recents: RecentsRoute,
  *   });
  *
- *   render() {
- *     return (
- *       <BottomNavigation
- *         navigationState={this.state}
- *         onIndexChange={this._handleIndexChange}
- *         renderScene={this._renderScene}
- *       />
- *     );
- *   }
- * }
+ *   return (
+ *     <BottomNavigation
+ *       navigationState={{ index, routes }}
+ *       onIndexChange={setIndex}
+ *       renderScene={renderScene}
+ *     />
+ *   );
+ * };
+ *
+ * export default MyComponent;
  * ```
  */
 class BottomNavigation extends React.Component<Props, State> {
@@ -594,6 +620,7 @@ class BottomNavigation extends React.Component<Props, State> {
       renderScene,
       renderIcon,
       renderLabel,
+      renderTouchable = (props: TouchableProps) => <Touchable {...props} />,
       getLabelText = ({ route }: { route: Route }) => route.title,
       getBadge = ({ route }: { route: Route }) => route.badge,
       getColor = ({ route }: { route: Route }) => route.color,
@@ -820,23 +847,23 @@ class BottomNavigation extends React.Component<Props, State> {
 
                 const badge = getBadge({ route });
 
-                return (
-                  <Touchable
-                    key={route.key}
-                    borderless
-                    centered
-                    rippleColor={touchColor}
-                    onPress={() => this.handleTabPress(index)}
-                    testID={getTestID({ route })}
-                    accessibilityLabel={getAccessibilityLabel({ route })}
-                    accessibilityTraits={
-                      focused ? ['button', 'selected'] : 'button'
-                    }
-                    accessibilityComponentType="button"
-                    accessibilityRole="button"
-                    accessibilityStates={['selected']}
-                    style={styles.item}
-                  >
+                return renderTouchable({
+                  key: route.key,
+                  route,
+                  borderless: true,
+                  centered: true,
+                  rippleColor: touchColor,
+                  onPress: () => this.handleTabPress(index),
+                  testID: getTestID({ route }),
+                  accessibilityLabel: getAccessibilityLabel({ route }),
+                  accessibilityTraits: focused
+                    ? ['button', 'selected']
+                    : 'button',
+                  accessibilityComponentType: 'button',
+                  accessibilityRole: 'button',
+                  accessibilityStates: ['selected'],
+                  style: styles.item,
+                  children: (
                     <View pointerEvents="none">
                       <Animated.View
                         style={[
@@ -964,8 +991,8 @@ class BottomNavigation extends React.Component<Props, State> {
                         <View style={styles.labelContainer} />
                       )}
                     </View>
-                  </Touchable>
-                );
+                  ),
+                });
               })}
             </SafeAreaView>
           </Animated.View>

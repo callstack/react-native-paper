@@ -25,35 +25,38 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
 /**
  * A component to group content inside a navigation drawer.
  *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/drawer-section.png" />
+ *   </figure>
+ * </div>
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
  * import { Drawer } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     active: 'first',
- *   };
+ * const MyComponent = () => {
+ *   const [active, setActive] = React.useState('');
  *
- *   render() {
- *     const { active } = this.state;
  *
- *     return (
- *       <Drawer.Section title="Some title">
- *         <Drawer.Item
- *           label="First Item"
- *           active={active === 'first'}
- *           onPress={() => { this.setState({ active: 'first' }); }}
- *         />
- *         <Drawer.Item
- *           label="Second Item"
- *           active={active === 'second'}
- *           onPress={() => { this.setState({ active: 'second' }); }}
- *         />
- *      </Drawer.Section>
- *     );
- *   }
- * }
+ *   return (
+ *     <Drawer.Section title="Some title">
+ *       <Drawer.Item
+ *         label="First Item"
+ *         active={active === 'first'}
+ *         onPress={() => setActive('first')}
+ *       />
+ *       <Drawer.Item
+ *         label="Second Item"
+ *         active={active === 'second'}
+ *         onPress={() => setActive('second')}
+ *       />
+ *     </Drawer.Section>
+ *   );
+ * };
+ *
+ * export default MyComponent;
  * ```
  */
 class DrawerSection extends React.Component<Props> {
