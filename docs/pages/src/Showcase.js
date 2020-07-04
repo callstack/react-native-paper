@@ -74,6 +74,18 @@ const data: Data[] = [
     github: 'https://github.com/jvidalv/astrale',
     android: 'https://play.google.com/store/apps/details?id=josep.astrale',
   },
+  {
+    color: '#BB86FC',
+    name: 'ezeBP',
+    image: 'showcase/ezebp.jpg',
+    android: 'https://play.google.com/store/apps/details?id=com.smashappz.ezebp,
+  },
+  {
+    color: '#BB86FC',
+    name: 'ezeCBT',
+    image: 'showcase/ezecbt.jpg',
+    android: 'https://play.google.com/store/apps/details?id=com.smashappz.ezecbt',
+  },
 ];
 
 export default class Showcase extends React.Component<{}> {
