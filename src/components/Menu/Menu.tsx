@@ -47,7 +47,7 @@ type Props = {
   /**
    * Accessibility label for the overlay. This is read by the screen reader when the user taps outside the menu.
    */
-  dismissAccessibilityLabel?: string;
+  overlayAccessibilityLabel?: string;
   /**
    * Content of the `Menu`.
    */
@@ -134,7 +134,7 @@ class Menu extends React.Component<Props, State> {
 
   static defaultProps = {
     statusBarHeight: APPROX_STATUSBAR_HEIGHT,
-    dismissAccessibilityLabel: 'Close menu',
+    overlayAccessibilityLabel: 'Close menu',
   };
 
   static getDerivedStateFromProps(nextProps: Props, prevState: State) {
@@ -344,7 +344,7 @@ class Menu extends React.Component<Props, State> {
       theme,
       statusBarHeight,
       onDismiss,
-      dismissAccessibilityLabel,
+      overlayAccessibilityLabel,
     } = this.props;
 
     const {
@@ -537,7 +537,7 @@ class Menu extends React.Component<Props, State> {
         {rendered ? (
           <Portal>
             <TouchableWithoutFeedback
-              accessibilityLabel={dismissAccessibilityLabel}
+              accessibilityLabel={overlayAccessibilityLabel}
               accessibilityRole="button"
               onPress={onDismiss}
             >
