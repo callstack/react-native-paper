@@ -197,6 +197,17 @@ const ChipExample = () => {
             >
               With custom size
             </Chip>
+            <Chip
+              onPress={() => {}}
+              onClose={() => {}}
+              style={{ flex: 1 }}
+              textStyle={{ flex: -1 }}
+              ellipsizeMode="middle"
+            >
+              With a very big text: React Native Paper is a high-quality,
+              standard-compliant Material Design library that has you covered in
+              all major use-cases.
+            </Chip>
           </View>
         </List.Section>
       </ScrollView>
