@@ -7,6 +7,7 @@
     "version": "1.0.0",
     "orientation": "default",
     "primaryColor": "#cccccc",
+    "userInterfaceStyle": "automatic",
     "notification": {
       "icon": "https://s3.amazonaws.com/exp-us-standard/placeholder-push-icon-blue-circle.png",
       "color": "#000000"

@@ -80,7 +80,7 @@ const DrawerContent = () => {
           toggleTheme={preferences.toggleTheme}
           toggleRTL={preferences.toggleRtl}
           isRTL={preferences.rtl}
-          isDarkTheme={preferences.theme === DarkTheme}
+          isDarkTheme={preferences.theme.dark}
         />
       )}
     </PreferencesContext.Consumer>
