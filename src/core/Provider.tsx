@@ -21,7 +21,7 @@ type State = {
 export default class Provider extends React.Component<Props, State> {
   state = {
     reduceMotionEnabled: false,
-    colorScheme: Appearance?.getColorScheme() || 'light',
+    colorScheme: Appearance.getColorScheme() || 'light',
   };
 
   async componentDidMount() {
@@ -38,7 +38,7 @@ export default class Provider extends React.Component<Props, State> {
       'reduceMotionChanged',
       this.updateReduceMotionSettingsInfo
     );
-    Appearance?.removeChangeListener(this.handleAppearanceChange);
+    Appearance.removeChangeListener(this.handleAppearanceChange);
   }
 
   private handleAppearanceChange = (
