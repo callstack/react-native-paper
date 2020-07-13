@@ -55,9 +55,9 @@ export default class Provider extends React.Component<Props, State> {
     if (providedTheme) {
       return providedTheme;
     } else {
-      const theme = (colorScheme === 'light'
-        ? DefaultTheme
-        : DarkTheme) as ReactNativePaper.Theme;
+      const theme = (colorScheme === 'dark'
+        ? DarkTheme
+        : DefaultTheme) as ReactNativePaper.Theme;
 
       return {
         ...theme,
