@@ -12,7 +12,6 @@ import TouchableRipple from '../TouchableRipple';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 
 import {
   ListAccordionGroupContext,
@@ -49,7 +48,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
   /**
    * Style that is passed to the wrapping TouchableRipple element.
    */
@@ -147,7 +146,7 @@ class ListAccordion extends React.Component<Props, State> {
     if (this.props.expanded === undefined) {
       // Only update state of the `expanded` prop was not passed
       // If it was passed, the component will act as a controlled component
-      this.setState(state => ({
+      this.setState((state) => ({
         expanded: !state.expanded,
       }));
     }
@@ -168,10 +167,7 @@ class ListAccordion extends React.Component<Props, State> {
       id,
       testID,
     } = this.props;
-    const titleColor = color(theme.colors.text)
-      .alpha(0.87)
-      .rgb()
-      .string();
+    const titleColor = color(theme.colors.text).alpha(0.87).rgb().string();
     const descriptionColor = color(theme.colors.text)
       .alpha(0.54)
       .rgb()
@@ -259,7 +255,7 @@ class ListAccordion extends React.Component<Props, State> {
                 </View>
               </TouchableRipple>
               {expanded
-                ? React.Children.map(children, child => {
+                ? React.Children.map(children, (child) => {
                     if (
                       left &&
                       React.isValidElement(child) &&

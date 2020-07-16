@@ -13,8 +13,7 @@ import FAB from './FAB';
 import Text from '../Typography/Text';
 import Card from '../Card/Card';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
-import { IconSource } from '../Icon';
+import type { IconSource } from '../Icon';
 
 type Props = {
   /**
@@ -78,7 +77,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
   /**
    * Pass down testID from Group props to FAB.
    */
@@ -182,7 +181,7 @@ class FABGroup extends React.Component<Props, State> {
         Animated.stagger(
           50 * scale,
           this.state.animations
-            .map(animation =>
+            .map((animation) =>
               Animated.timing(animation, {
                 toValue: 1,
                 duration: 150 * scale,
@@ -199,7 +198,7 @@ class FABGroup extends React.Component<Props, State> {
           duration: 200 * scale,
           useNativeDriver: true,
         }),
-        ...this.state.animations.map(animation =>
+        ...this.state.animations.map((animation) =>
           Animated.timing(animation, {
             toValue: 0,
             duration: 150 * scale,
@@ -231,10 +230,7 @@ class FABGroup extends React.Component<Props, State> {
 
     const labelColor = theme.dark
       ? colors.text
-      : color(colors.text)
-          .fade(0.54)
-          .rgb()
-          .string();
+      : color(colors.text).fade(0.54).rgb().string();
     const backdropOpacity = open
       ? this.state.backdrop.interpolate({
           inputRange: [0, 0.5, 1],
@@ -243,7 +239,7 @@ class FABGroup extends React.Component<Props, State> {
       : this.state.backdrop;
 
     const opacities = this.state.animations;
-    const scales = opacities.map(opacity =>
+    const scales = opacities.map((opacity) =>
       open
         ? opacity.interpolate({
             inputRange: [0, 1],

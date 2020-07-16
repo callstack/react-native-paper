@@ -12,7 +12,6 @@ import color from 'color';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
   /**
@@ -39,7 +38,7 @@ type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 type State = {
@@ -117,10 +116,7 @@ class DataTableTitle extends React.Component<Props, State> {
       ...rest
     } = this.props;
 
-    const textColor = color(theme.colors.text)
-      .alpha(0.6)
-      .rgb()
-      .string();
+    const textColor = color(theme.colors.text).alpha(0.6).rgb().string();
 
     const spin = this.state.spinAnim.interpolate({
       inputRange: [0, 1],

@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { StyleSheet, View, I18nManager } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import color from 'color';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple';
 import { withTheme } from '../../core/theming';
-import { Theme, $RemoveChildren } from '../../types';
+import type { $RemoveChildren } from '../../types';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -32,7 +32,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**
@@ -63,15 +63,9 @@ class RadioButtonIOS extends React.Component<Props> {
     let rippleColor: string;
 
     if (disabled) {
-      rippleColor = color(theme.colors.text)
-        .alpha(0.16)
-        .rgb()
-        .string();
+      rippleColor = color(theme.colors.text).alpha(0.16).rgb().string();
     } else {
-      rippleColor = color(checkedColor)
-        .fade(0.32)
-        .rgb()
-        .string();
+      rippleColor = color(checkedColor).fade(0.32).rgb().string();
     }
 
     return (
@@ -105,7 +99,7 @@ class RadioButtonIOS extends React.Component<Props> {
                 checked ? 'radiobutton_checked' : 'radiobutton_unchecked'
               }
               accessibilityRole="button"
-              accessibilityStates={disabled ? ['disabled'] : []}
+              accessibilityState={{ disabled }}
               accessibilityLiveRegion="polite"
               style={styles.container}
             >
@@ -115,7 +109,7 @@ class RadioButtonIOS extends React.Component<Props> {
                   name="check"
                   size={24}
                   color={checkedColor}
-                  direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+                  direction="ltr"
                 />
               </View>
             </TouchableRipple>

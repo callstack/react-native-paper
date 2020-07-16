@@ -5,7 +5,6 @@ import Text from '../Typography/Text';
 import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -32,7 +31,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**
@@ -76,17 +75,11 @@ class DrawerItem extends React.Component<Props> {
     } = this.props;
     const { colors, roundness } = theme;
     const backgroundColor = active
-      ? color(colors.primary)
-          .alpha(0.12)
-          .rgb()
-          .string()
+      ? color(colors.primary).alpha(0.12).rgb().string()
       : 'transparent';
     const contentColor = active
       ? colors.primary
-      : color(colors.text)
-          .alpha(0.68)
-          .rgb()
-          .string();
+      : color(colors.text).alpha(0.68).rgb().string();
     const font = theme.fonts.medium;
     const labelMargin = icon ? 32 : 0;
 
@@ -107,7 +100,7 @@ class DrawerItem extends React.Component<Props> {
           accessibilityTraits={active ? ['button', 'selected'] : 'button'}
           accessibilityComponentType="button"
           accessibilityRole="button"
-          accessibilityStates={active ? ['selected'] : []}
+          accessibilityState={{ selected: active }}
           accessibilityLabel={accessibilityLabel}
         >
           <View style={styles.wrapper}>

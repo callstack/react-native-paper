@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import setColor from 'color';
 import { withTheme } from '../core/theming';
-import { Theme } from '../types';
 
 const version = NativeModules.PlatformConstants
   ? NativeModules.PlatformConstants.reactNativeVersion
@@ -36,7 +35,7 @@ type Props = React.ComponentPropsWithRef<typeof NativeSwitch> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**
@@ -95,18 +94,9 @@ class Switch extends React.Component<Props> {
         ? checkedColor
         : disabled
         ? theme.dark
-          ? setColor(white)
-              .alpha(0.1)
-              .rgb()
-              .string()
-          : setColor(black)
-              .alpha(0.12)
-              .rgb()
-              .string()
-        : setColor(checkedColor)
-            .alpha(0.5)
-            .rgb()
-            .string();
+          ? setColor(white).alpha(0.1).rgb().string()
+          : setColor(black).alpha(0.12).rgb().string()
+        : setColor(checkedColor).alpha(0.5).rgb().string();
 
     const thumbTintColor =
       Platform.OS === 'ios'

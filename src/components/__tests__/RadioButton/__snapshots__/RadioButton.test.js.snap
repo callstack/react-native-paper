@@ -2,11 +2,15 @@
 
 exports[`RadioButton on default platform renders properly 1`] = `
 <View
+  accessibilityLiveRegion="polite"
   accessibilityRole="button"
-  accessibilityStates={Array []}
+  accessibilityState={
+    Object {
+      "disabled": undefined,
+    }
+  }
   accessible={true}
   focusable={true}
-  isTVSelectable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -73,11 +77,15 @@ exports[`RadioButton on default platform renders properly 1`] = `
 
 exports[`RadioButton on ios platform renders properly 1`] = `
 <View
+  accessibilityLiveRegion="polite"
   accessibilityRole="button"
-  accessibilityStates={Array []}
+  accessibilityState={
+    Object {
+      "disabled": undefined,
+    }
+  }
   accessible={true}
   focusable={true}
-  isTVSelectable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -144,11 +152,15 @@ exports[`RadioButton on ios platform renders properly 1`] = `
 
 exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider renders properly 1`] = `
 <View
+  accessibilityLiveRegion="polite"
   accessibilityRole="button"
-  accessibilityStates={Array []}
+  accessibilityState={
+    Object {
+      "disabled": undefined,
+    }
+  }
   accessible={true}
   focusable={true}
-  isTVSelectable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}

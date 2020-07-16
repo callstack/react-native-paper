@@ -11,7 +11,7 @@ import {
 import TouchableRipple from '../TouchableRipple';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
-import { Theme, $RemoveChildren, EllipsizeProp } from '../../types';
+import type { $RemoveChildren, EllipsizeProp } from '../../types';
 
 type Description =
   | React.ReactNode
@@ -58,7 +58,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
   /**
    * Style that is passed to the wrapping TouchableRipple element.
    */
@@ -169,10 +169,7 @@ class ListItem extends React.Component<Props> {
       titleEllipsizeMode,
       ...rest
     } = this.props;
-    const titleColor = color(theme.colors.text)
-      .alpha(0.87)
-      .rgb()
-      .string();
+    const titleColor = color(theme.colors.text).alpha(0.87).rgb().string();
     const descriptionColor = color(theme.colors.text)
       .alpha(0.54)
       .rgb()

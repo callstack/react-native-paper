@@ -12,7 +12,6 @@ import {
 import SafeAreaView from 'react-native-safe-area-view';
 import Surface from './Surface';
 import { withTheme } from '../core/theming';
-import { Theme } from '../types';
 
 type Props = {
   /**
@@ -42,7 +41,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 type State = {

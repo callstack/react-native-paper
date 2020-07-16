@@ -12,7 +12,6 @@ import TouchableRipple from '../TouchableRipple';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import { black, white } from '../../styles/colors';
-import { Theme } from '../../types';
 
 type Props = {
   /**
@@ -34,7 +33,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
   style?: StyleProp<ViewStyle>;
   titleStyle?: StyleProp<TextStyle>;
   /**
@@ -94,17 +93,11 @@ class MenuItem extends React.Component<Props> {
 
     const titleColor = disabled
       ? disabledColor
-      : color(theme.colors.text)
-          .alpha(0.87)
-          .rgb()
-          .string();
+      : color(theme.colors.text).alpha(0.87).rgb().string();
 
     const iconColor = disabled
       ? disabledColor
-      : color(theme.colors.text)
-          .alpha(0.54)
-          .rgb()
-          .string();
+      : color(theme.colors.text).alpha(0.54).rgb().string();
 
     return (
       <TouchableRipple

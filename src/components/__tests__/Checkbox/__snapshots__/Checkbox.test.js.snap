@@ -2,11 +2,15 @@
 
 exports[`renders checked Checkbox with color 1`] = `
 <View
+  accessibilityLiveRegion="polite"
   accessibilityRole="button"
-  accessibilityStates={Array []}
+  accessibilityState={
+    Object {
+      "disabled": undefined,
+    }
+  }
   accessible={true}
   focusable={false}
-  isTVSelectable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -73,11 +77,15 @@ exports[`renders checked Checkbox with color 1`] = `
 
 exports[`renders checked Checkbox with onPress 1`] = `
 <View
+  accessibilityLiveRegion="polite"
   accessibilityRole="button"
-  accessibilityStates={Array []}
+  accessibilityState={
+    Object {
+      "disabled": undefined,
+    }
+  }
   accessible={true}
   focusable={true}
-  isTVSelectable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -144,11 +152,15 @@ exports[`renders checked Checkbox with onPress 1`] = `
 
 exports[`renders indeterminate Checkbox 1`] = `
 <View
+  accessibilityLiveRegion="polite"
   accessibilityRole="button"
-  accessibilityStates={Array []}
+  accessibilityState={
+    Object {
+      "disabled": undefined,
+    }
+  }
   accessible={true}
   focusable={true}
-  isTVSelectable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -215,11 +227,15 @@ exports[`renders indeterminate Checkbox 1`] = `
 
 exports[`renders indeterminate Checkbox with color 1`] = `
 <View
+  accessibilityLiveRegion="polite"
   accessibilityRole="button"
-  accessibilityStates={Array []}
+  accessibilityState={
+    Object {
+      "disabled": undefined,
+    }
+  }
   accessible={true}
   focusable={false}
-  isTVSelectable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -286,11 +302,15 @@ exports[`renders indeterminate Checkbox with color 1`] = `
 
 exports[`renders unchecked Checkbox with color 1`] = `
 <View
+  accessibilityLiveRegion="polite"
   accessibilityRole="button"
-  accessibilityStates={Array []}
+  accessibilityState={
+    Object {
+      "disabled": undefined,
+    }
+  }
   accessible={true}
   focusable={false}
-  isTVSelectable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -357,11 +377,15 @@ exports[`renders unchecked Checkbox with color 1`] = `
 
 exports[`renders unchecked Checkbox with onPress 1`] = `
 <View
+  accessibilityLiveRegion="polite"
   accessibilityRole="button"
-  accessibilityStates={Array []}
+  accessibilityState={
+    Object {
+      "disabled": undefined,
+    }
+  }
   accessible={true}
   focusable={true}
-  isTVSelectable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}

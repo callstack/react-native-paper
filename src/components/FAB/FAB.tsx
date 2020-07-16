@@ -10,8 +10,8 @@ import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple';
 import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
-import { Theme, $RemoveChildren } from '../../types';
-import { IconSource } from './../Icon';
+import type { $RemoveChildren } from '../../types';
+import type { IconSource } from './../Icon';
 
 type Props = $RemoveChildren<typeof Surface> & {
   /**
@@ -55,7 +55,7 @@ type Props = $RemoveChildren<typeof Surface> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
   testID?: string;
 };
 
@@ -172,10 +172,7 @@ class FAB extends React.Component<Props, State> {
         : 'rgba(0, 0, 0, .54)';
     }
 
-    const rippleColor = color(foregroundColor)
-      .alpha(0.32)
-      .rgb()
-      .string();
+    const rippleColor = color(foregroundColor).alpha(0.32).rgb().string();
 
     return (
       <Surface
@@ -207,7 +204,7 @@ class FAB extends React.Component<Props, State> {
           accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
           accessibilityComponentType="button"
           accessibilityRole="button"
-          accessibilityStates={disabled ? ['disabled'] : []}
+          accessibilityState={{ disabled }}
           style={styles.touchable}
           testID={testID}
         >

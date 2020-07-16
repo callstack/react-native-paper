@@ -7,13 +7,36 @@ import {
   Platform,
 } from 'react-native';
 import { TextInput, HelperText, useTheme } from 'react-native-paper';
-import { inputReducer } from '../../utils';
+import { inputReducer, State } from '../../utils';
 
 const MAX_LENGTH = 20;
 
-const initialState = {
+const initialState: State = {
   text: '',
+  name: '',
+  outlinedText: '',
+  largeText: '',
+  flatTextPassword: 'Password',
+  outlinedLargeText: '',
+  outlinedTextPassword: '',
+  nameNoPadding: '',
+  flatDenseText: '',
+  flatDense: '',
+  outlinedDenseText: '',
+  outlinedDense: '',
+  flatMultiline: '',
+  flatTextArea: '',
+  outlinedMultiline: '',
+  outlinedTextArea: '',
   maxLengthName: '',
+  flatTextSecureEntry: true,
+  outlineTextSecureEntry: true,
+  iconsColor: {
+    flatLeftIcon: undefined,
+    flatRightIcon: undefined,
+    outlineLeftIcon: undefined,
+    outlineRightIcon: undefined,
+  },
 };
 
 type AvoidingViewProps = {
@@ -41,7 +64,9 @@ const TextInputExample = () => {
     name,
     outlinedText,
     largeText,
+    flatTextPassword,
     outlinedLargeText,
+    outlinedTextPassword,
     nameNoPadding,
     flatDenseText,
     flatDense,
@@ -52,12 +77,20 @@ const TextInputExample = () => {
     outlinedMultiline,
     outlinedTextArea,
     maxLengthName,
+    flatTextSecureEntry,
+    outlineTextSecureEntry,
+    iconsColor: {
+      flatLeftIcon,
+      flatRightIcon,
+      outlineLeftIcon,
+      outlineRightIcon,
+    },
   } = state;
 
   const _isUsernameValid = (name: string) => /^[a-zA-Z]*$/.test(name);
 
   const {
-    colors: { background },
+    colors: { background, accent },
   } = useTheme();
 
   const inputActionHandler = (type: string, payload: string) =>
@@ -65,6 +98,20 @@ const TextInputExample = () => {
       type: type,
       payload: payload,
     });
+
+  const changeIconColor = (name: keyof State['iconsColor']) => {
+    const color = state.iconsColor[name];
+
+    const colors = {
+      ...state.iconsColor,
+      [name]: !color ? accent : undefined,
+    };
+
+    dispatch({
+      type: 'iconsColor',
+      payload: colors,
+    });
+  };
 
   return (
     <TextInputAvoidingView>
@@ -79,6 +126,16 @@ const TextInputExample = () => {
           placeholder="Type something"
           value={text}
           onChangeText={text => inputActionHandler('text', text)}
+          left={
+            <TextInput.Icon
+              name="heart"
+              color={flatLeftIcon}
+              onPress={() => {
+                changeIconColor('flatLeftIcon');
+              }}
+            />
+          }
+          right={<TextInput.Affix text="/100" />}
         />
         <TextInput
           style={[styles.inputContainerStyle, styles.fontSize]}
@@ -86,6 +143,37 @@ const TextInputExample = () => {
           placeholder="Type something"
           value={largeText}
           onChangeText={largeText => inputActionHandler('largeText', largeText)}
+          left={<TextInput.Affix text="#" />}
+          right={
+            <TextInput.Icon
+              name="heart"
+              color={flatRightIcon}
+              onPress={() => {
+                changeIconColor('flatRightIcon');
+              }}
+            />
+          }
+        />
+        <TextInput
+          style={[styles.inputContainerStyle, styles.fontSize]}
+          label="Flat input large font"
+          placeholder="Type something"
+          value={flatTextPassword}
+          onChangeText={flatTextPassword =>
+            inputActionHandler('flatTextPassword', flatTextPassword)
+          }
+          secureTextEntry={flatTextSecureEntry}
+          right={
+            <TextInput.Icon
+              name={flatTextSecureEntry ? 'eye' : 'eye-off'}
+              onPress={() =>
+                dispatch({
+                  type: 'flatTextSecureEntry',
+                  payload: !flatTextSecureEntry,
+                })
+              }
+            />
+          }
         />
         <TextInput
           style={styles.inputContainerStyle}
@@ -96,6 +184,7 @@ const TextInputExample = () => {
           onChangeText={flatDenseText =>
             inputActionHandler('flatDenseText', flatDenseText)
           }
+          left={<TextInput.Affix text="#" />}
         />
         <TextInput
           style={styles.inputContainerStyle}
@@ -138,6 +227,16 @@ const TextInputExample = () => {
           onChangeText={outlinedText =>
             inputActionHandler('outlinedText', outlinedText)
           }
+          left={
+            <TextInput.Icon
+              name="heart"
+              color={outlineLeftIcon}
+              onPress={() => {
+                changeIconColor('outlineLeftIcon');
+              }}
+            />
+          }
+          right={<TextInput.Affix text="/100" />}
         />
         <TextInput
           mode="outlined"
@@ -147,6 +246,38 @@ const TextInputExample = () => {
           value={outlinedLargeText}
           onChangeText={outlinedLargeText =>
             inputActionHandler('outlinedLargeText', outlinedLargeText)
+          }
+          left={<TextInput.Affix text="$" />}
+          right={
+            <TextInput.Icon
+              name="heart"
+              color={outlineRightIcon}
+              onPress={() => {
+                changeIconColor('outlineRightIcon');
+              }}
+            />
+          }
+        />
+        <TextInput
+          mode="outlined"
+          style={[styles.inputContainerStyle, styles.fontSize]}
+          label="Outlined large font"
+          placeholder="Type something"
+          value={outlinedTextPassword}
+          onChangeText={outlinedTextPassword =>
+            inputActionHandler('outlinedTextPassword', outlinedTextPassword)
+          }
+          secureTextEntry={outlineTextSecureEntry}
+          right={
+            <TextInput.Icon
+              name={outlineTextSecureEntry ? 'eye' : 'eye-off'}
+              onPress={() =>
+                dispatch({
+                  type: 'outlineTextSecureEntry',
+                  payload: !outlineTextSecureEntry,
+                })
+              }
+            />
           }
         />
         <TextInput
@@ -159,6 +290,7 @@ const TextInputExample = () => {
           onChangeText={outlinedDenseText =>
             inputActionHandler('outlinedDenseText', outlinedDenseText)
           }
+          left={<TextInput.Affix text="$" />}
         />
         <TextInput
           mode="outlined"
@@ -282,7 +414,7 @@ const styles = StyleSheet.create({
     margin: 8,
   },
   fontSize: {
-    fontSize: 24,
+    fontSize: 32,
   },
   textArea: {
     height: 80,

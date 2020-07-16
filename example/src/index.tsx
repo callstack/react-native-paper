@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { AsyncStorage, I18nManager, Platform, YellowBox } from 'react-native';
+import { I18nManager, Platform, YellowBox } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { Updates } from 'expo';
 import { useKeepAwake } from 'expo-keep-awake';
 import { InitialState, NavigationContainer } from '@react-navigation/native';
@@ -8,28 +9,79 @@ import {
   Provider as PaperProvider,
   DarkTheme,
   DefaultTheme,
-  Theme,
 } from 'react-native-paper';
 import App from './RootNavigator';
 import DrawerItems from './DrawerItems';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+// Add new typescript properties to the theme
+declare global {
+  namespace ReactNativePaper {
+    interface ThemeFonts {
+      superLight: ThemeFont;
+    }
+    interface ThemeColors {
+      customColor: string;
+    }
+    interface ThemeAnimation {
+      customProperty: number;
+    }
+    interface Theme {
+      userDefinedThemeProperty: string;
+    }
+  }
+}
 
 YellowBox.ignoreWarnings(['Require cycle:']);
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
 
+const CustomDarkTheme: ReactNativePaper.Theme = {
+  ...DarkTheme,
+  colors: {
+    ...DarkTheme.colors,
+    customColor: '#BADA55',
+  },
+  fonts: {
+    ...DarkTheme.fonts,
+    superLight: { ...DarkTheme.fonts['light'] },
+  },
+  userDefinedThemeProperty: '',
+  animation: {
+    ...DarkTheme.animation,
+    customProperty: 1,
+  },
+};
+
+const CustomDefaultTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    customColor: '#BADA55',
+  },
+  fonts: {
+    ...DefaultTheme.fonts,
+    superLight: { ...DefaultTheme.fonts['light'] },
+  },
+  userDefinedThemeProperty: '',
+  animation: {
+    ...DefaultTheme.animation,
+    customProperty: 1,
+  },
+};
+
 const PreferencesContext = React.createContext<any>(null);
 
 const DrawerContent = () => {
   return (
     <PreferencesContext.Consumer>
-      {preferences => (
+      {(preferences) => (
         <DrawerItems
           toggleTheme={preferences.toggleTheme}
           toggleRTL={preferences.toggleRtl}
           isRTL={preferences.rtl}
-          isDarkTheme={preferences.theme === DarkTheme}
+          isDarkTheme={preferences.theme.dark}
         />
       )}
     </PreferencesContext.Consumer>
@@ -46,7 +98,9 @@ export default function PaperExample() {
     InitialState | undefined
   >();
 
-  const [theme, setTheme] = React.useState<Theme>(DefaultTheme);
+  const [theme, setTheme] = React.useState<ReactNativePaper.Theme>(
+    CustomDefaultTheme
+  );
   const [rtl, setRtl] = React.useState<boolean>(I18nManager.isRTL);
 
   React.useEffect(() => {
@@ -76,7 +130,9 @@ export default function PaperExample() {
 
         if (preferences) {
           // eslint-disable-next-line react/no-did-mount-set-state
-          setTheme(preferences.theme === 'dark' ? DarkTheme : DefaultTheme);
+          setTheme(
+            preferences.theme === 'dark' ? CustomDarkTheme : CustomDefaultTheme
+          );
 
           if (typeof preferences.rtl === 'boolean') {
             setRtl(preferences.rtl);
@@ -116,8 +172,10 @@ export default function PaperExample() {
   const preferences = React.useMemo(
     () => ({
       toggleTheme: () =>
-        setTheme(theme => (theme === DefaultTheme ? DarkTheme : DefaultTheme)),
-      toggleRtl: () => setRtl(rtl => !rtl),
+        setTheme((theme) =>
+          theme === CustomDefaultTheme ? CustomDarkTheme : CustomDefaultTheme
+        ),
+      toggleRtl: () => setRtl((rtl) => !rtl),
       rtl,
       theme,
     }),
@@ -135,7 +193,7 @@ export default function PaperExample() {
           <React.Fragment>
             <NavigationContainer
               initialState={initialState}
-              onStateChange={state =>
+              onStateChange={(state) =>
                 AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
               }
             >

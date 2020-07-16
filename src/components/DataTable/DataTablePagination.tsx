@@ -10,7 +10,6 @@ import color from 'color';
 import IconButton from '../IconButton';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
@@ -34,7 +33,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**
@@ -103,10 +102,7 @@ class DataTablePagination extends React.Component<Props> {
       theme,
       ...rest
     } = this.props;
-    const labelColor = color(theme.colors.text)
-      .alpha(0.6)
-      .rgb()
-      .string();
+    const labelColor = color(theme.colors.text).alpha(0.6).rgb().string();
 
     return (
       <View {...rest} style={[styles.container, style]}>

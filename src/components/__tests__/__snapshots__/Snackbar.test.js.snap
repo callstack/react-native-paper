@@ -163,10 +163,13 @@ exports[`renders snackbar with action button 1`] = `
     >
       <View
         accessibilityRole="button"
-        accessibilityStates={Array []}
+        accessibilityState={
+          Object {
+            "disabled": undefined,
+          }
+        }
         accessible={true}
         focusable={true}
-        isTVSelectable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}

@@ -13,8 +13,7 @@ import ToggleButtonGroup, {
 } from './ToggleButtonGroup';
 import ToggleButtonRow from './ToggleButtonRow';
 import { black, white } from '../../styles/colors';
-import { IconSource } from '../Icon';
-import { Theme } from '../../types';
+import type { IconSource } from '../Icon';
 
 type Props = {
   /**
@@ -53,7 +52,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**

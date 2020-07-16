@@ -4,7 +4,6 @@ import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 import Text from '../Typography/Text';
 import Divider from '../Divider';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -19,7 +18,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**
@@ -65,10 +64,7 @@ class DrawerSection extends React.Component<Props> {
   render() {
     const { children, title, theme, style, ...rest } = this.props;
     const { colors, fonts } = theme;
-    const titleColor = color(colors.text)
-      .alpha(0.54)
-      .rgb()
-      .string();
+    const titleColor = color(colors.text).alpha(0.54).rgb().string();
     const font = fonts.medium;
 
     return (

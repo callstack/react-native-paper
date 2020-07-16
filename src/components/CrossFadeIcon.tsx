@@ -3,7 +3,6 @@ import { Animated, StyleSheet, View } from 'react-native';
 import Icon, { isValidIcon, isEqualIcon, IconSource } from './Icon';
 
 import { withTheme } from '../core/theming';
-import { Theme } from '../types';
 
 type Props = {
   /**
@@ -21,7 +20,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 type State = {
@@ -68,7 +67,7 @@ class CrossFadeIcon extends React.Component<Props, State> {
     Animated.timing(this.state.fade, {
       duration: scale * 200,
       toValue: 0,
-      useNativeDriver: false,
+      useNativeDriver: true,
     }).start();
   }
 

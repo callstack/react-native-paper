@@ -15,7 +15,7 @@ import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import { white } from '../../styles/colors';
 
-import { Theme, $RemoveChildren } from '../../types';
+import type { $RemoveChildren } from '../../types';
 
 type Props = $RemoveChildren<typeof View> & {
   /**
@@ -50,7 +50,7 @@ type Props = $RemoveChildren<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**
@@ -94,10 +94,7 @@ class AppbarContent extends React.Component<Props> {
     } = this.props;
     const { fonts } = theme;
 
-    const subtitleColor = color(titleColor)
-      .alpha(0.7)
-      .rgb()
-      .string();
+    const subtitleColor = color(titleColor).alpha(0.7).rgb().string();
 
     return (
       <TouchableWithoutFeedback onPress={onPress} disabled={!onPress}>

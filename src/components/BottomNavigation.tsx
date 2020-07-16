@@ -23,7 +23,6 @@ import TouchableRipple from './TouchableRipple';
 import Text from './Typography/Text';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
-import { Theme } from '../types';
 
 type Route = {
   key: string;
@@ -219,7 +218,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 type State = {
@@ -391,6 +390,7 @@ class BottomNavigation extends React.Component<Props, State> {
   static defaultProps = {
     labeled: true,
     keyboardHidesNavigationBar: true,
+    sceneAnimationEnabled: false,
   };
 
   static getDerivedStateFromProps(nextProps: any, prevState: State) {
@@ -707,8 +707,11 @@ class BottomNavigation extends React.Component<Props, State> {
             }
             const focused = navigationState.index === index;
 
-            const opacity =
-              sceneAnimationEnabled !== false ? tabs[index] : focused ? 1 : 0;
+            const opacity = sceneAnimationEnabled
+              ? tabs[index]
+              : focused
+              ? 1
+              : 0;
 
             const top = offsets[index].interpolate({
               inputRange: [0, 1],
@@ -861,7 +864,7 @@ class BottomNavigation extends React.Component<Props, State> {
                     : 'button',
                   accessibilityComponentType: 'button',
                   accessibilityRole: 'button',
-                  accessibilityStates: ['selected'],
+                  accessibilityState: { selected: true },
                   style: styles.item,
                   children: (
                     <View pointerEvents="none">

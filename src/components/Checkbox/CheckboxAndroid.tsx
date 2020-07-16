@@ -4,7 +4,7 @@ import color from 'color';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple';
 import { withTheme } from '../../core/theming';
-import { Theme, $RemoveChildren } from '../../types';
+import type { $RemoveChildren } from '../../types';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -30,7 +30,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 type State = {
@@ -101,16 +101,10 @@ class CheckboxAndroid extends React.Component<Props, State> {
     let rippleColor, checkboxColor;
 
     if (disabled) {
-      rippleColor = color(theme.colors.text)
-        .alpha(0.16)
-        .rgb()
-        .string();
+      rippleColor = color(theme.colors.text).alpha(0.16).rgb().string();
       checkboxColor = theme.colors.disabled;
     } else {
-      rippleColor = color(checkedColor)
-        .fade(0.32)
-        .rgb()
-        .string();
+      rippleColor = color(checkedColor).fade(0.32).rgb().string();
       checkboxColor = checked ? checkedColor : uncheckedColor;
     }
 
@@ -135,7 +129,7 @@ class CheckboxAndroid extends React.Component<Props, State> {
         accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
         accessibilityComponentType="button"
         accessibilityRole="button"
-        accessibilityStates={disabled ? ['disabled'] : []}
+        accessibilityState={{ disabled }}
         accessibilityLiveRegion="polite"
         style={styles.container}
       >

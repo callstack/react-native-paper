@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FlatList } from 'react-native';
 import { List, Divider, useTheme } from 'react-native-paper';
 import { useSafeArea } from 'react-native-safe-area-context';
-import { StackNavigationProp } from '@react-navigation/stack';
+import type { StackNavigationProp } from '@react-navigation/stack';
 
 import ActivityIndicatorExample from './Examples/ActivityIndicatorExample';
 import AppbarExample from './Examples/AppbarExample';
@@ -34,6 +34,7 @@ import TextExample from './Examples/TextExample';
 import TextInputExample from './Examples/TextInputExample';
 import ToggleButtonExample from './Examples/ToggleButtonExample';
 import TouchableRippleExample from './Examples/TouchableRippleExample';
+import ThemeExample from './Examples/ThemeExample';
 
 export const examples: Record<
   string,
@@ -69,6 +70,7 @@ export const examples: Record<
   textInput: TextInputExample,
   toggleButton: ToggleButtonExample,
   touchableRipple: TouchableRippleExample,
+  theme: ThemeExample,
 };
 
 type Props = {

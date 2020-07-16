@@ -4,6 +4,7 @@ import renderer from 'react-test-renderer';
 import ProgressBar from '../ProgressBar.tsx';
 
 jest.useFakeTimers();
+jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
 
 const layoutEvent = {
   nativeEvent: {

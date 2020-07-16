@@ -3,13 +3,12 @@ import { StyleSheet, StyleProp, TextStyle } from 'react-native';
 import color from 'color';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 
 type Props = React.ComponentProps<typeof Text> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
   /**
    * Style that is passed to Text element.
    */
@@ -36,10 +35,7 @@ class ListSubheader extends React.Component<Props> {
     const { style, theme, ...rest } = this.props;
     const { colors, fonts } = theme;
     const font = fonts.medium;
-    const textColor = color(colors.text)
-      .alpha(0.54)
-      .rgb()
-      .string();
+    const textColor = color(colors.text).alpha(0.54).rgb().string();
 
     return (
       <Text

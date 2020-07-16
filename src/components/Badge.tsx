@@ -3,7 +3,6 @@ import { Animated, StyleSheet, StyleProp, TextStyle } from 'react-native';
 import color from 'color';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
-import { Theme } from '../types';
 
 const defaultSize = 20;
 
@@ -25,7 +24,7 @@ type Props = React.ComponentProps<typeof Animated.Text> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 type State = {
@@ -105,6 +104,7 @@ class Badge extends React.Component<Props, State> {
     const borderRadius = size / 2;
 
     return (
+      // @ts-ignore
       <Animated.Text
         numberOfLines={1}
         style={[

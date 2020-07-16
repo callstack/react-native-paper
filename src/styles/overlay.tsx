@@ -10,7 +10,7 @@ export default function overlay(
     const inputRange = [0, 1, 2, 3, 8, 24];
     return elevation.interpolate({
       inputRange,
-      outputRange: inputRange.map(elevation => {
+      outputRange: inputRange.map((elevation) => {
         return calculateColor(surfaceColor, elevation);
       }),
     });

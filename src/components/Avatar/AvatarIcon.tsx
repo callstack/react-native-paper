@@ -4,8 +4,7 @@ import color from 'color';
 import Icon from '../Icon';
 import { withTheme } from '../../core/theming';
 import { white } from '../../styles/colors';
-import { Theme } from '../../types';
-import { IconSource } from './../Icon';
+import type { IconSource } from './../Icon';
 
 const defaultSize = 64;
 
@@ -26,7 +25,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**

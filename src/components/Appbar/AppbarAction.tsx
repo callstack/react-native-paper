@@ -1,9 +1,13 @@
 import * as React from 'react';
 import color from 'color';
-import { StyleProp, ViewStyle, TouchableWithoutFeedback } from 'react-native';
+import type {
+  StyleProp,
+  ViewStyle,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import { black } from '../../styles/colors';
 import IconButton from '../IconButton';
-import { IconSource } from '../Icon';
+import type { IconSource } from '../Icon';
 
 type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
   /**
@@ -78,10 +82,7 @@ export default class AppbarAction extends React.Component<Props> {
 
   render() {
     const {
-      color: iconColor = color(black)
-        .alpha(0.54)
-        .rgb()
-        .string(),
+      color: iconColor = color(black).alpha(0.54).rgb().string(),
       icon,
       disabled,
       onPress,

@@ -3,7 +3,7 @@ import color from 'color';
 import { StyleSheet, View, ViewStyle, StyleProp } from 'react-native';
 import { withTheme } from '../core/theming';
 import { black, white } from '../styles/colors';
-import { Theme, $RemoveChildren } from '../types';
+import type { $RemoveChildren } from '../types';
 
 type Props = $RemoveChildren<typeof View> & {
   /**
@@ -14,7 +14,7 @@ type Props = $RemoveChildren<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**
@@ -63,17 +63,11 @@ class Divider extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   light: {
-    backgroundColor: color(black)
-      .alpha(0.12)
-      .rgb()
-      .string(),
+    backgroundColor: color(black).alpha(0.12).rgb().string(),
     height: StyleSheet.hairlineWidth,
   },
   dark: {
-    backgroundColor: color(white)
-      .alpha(0.12)
-      .rgb()
-      .string(),
+    backgroundColor: color(white).alpha(0.12).rgb().string(),
     height: StyleSheet.hairlineWidth,
   },
   inset: {

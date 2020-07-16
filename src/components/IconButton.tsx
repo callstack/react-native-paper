@@ -14,7 +14,7 @@ import Icon, { IconSource } from './Icon';
 import CrossFadeIcon from './CrossFadeIcon';
 import { withTheme } from '../core/theming';
 
-import { Theme, $RemoveChildren } from '../types';
+import type { $RemoveChildren } from '../types';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -50,7 +50,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**
@@ -99,10 +99,7 @@ const IconButton = ({
 }: Props) => {
   const iconColor =
     typeof customColor !== 'undefined' ? customColor : theme.colors.text;
-  const rippleColor = color(iconColor)
-    .alpha(0.32)
-    .rgb()
-    .string();
+  const rippleColor = color(iconColor).alpha(0.32).rgb().string();
   const IconComponent = animated ? CrossFadeIcon : Icon;
   const buttonSize = size * 1.5;
   return (
@@ -121,7 +118,7 @@ const IconButton = ({
       accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
       accessibilityComponentType="button"
       accessibilityRole="button"
-      accessibilityStates={disabled ? ['disabled'] : []}
+      accessibilityState={{ disabled }}
       disabled={disabled}
       hitSlop={
         // @ts-ignore - this should be fixed in react-theme-providersince withTheme() is not forwarding static property types

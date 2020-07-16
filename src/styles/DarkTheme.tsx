@@ -1,7 +1,7 @@
 import color from 'color';
 import DefaultTheme from './DefaultTheme';
 import { black, white, pinkA100 } from './colors';
-import { Theme } from '../types';
+import type { Theme } from '../types';
 
 const DarkTheme: Theme = {
   ...DefaultTheme,
@@ -17,18 +17,9 @@ const DarkTheme: Theme = {
     onBackground: '#FFFFFF',
     onSurface: '#FFFFFF',
     text: white,
-    disabled: color(white)
-      .alpha(0.38)
-      .rgb()
-      .string(),
-    placeholder: color(white)
-      .alpha(0.54)
-      .rgb()
-      .string(),
-    backdrop: color(black)
-      .alpha(0.5)
-      .rgb()
-      .string(),
+    disabled: color(white).alpha(0.38).rgb().string(),
+    placeholder: color(white).alpha(0.54).rgb().string(),
+    backdrop: color(black).alpha(0.5).rgb().string(),
     notification: pinkA100,
   },
 };

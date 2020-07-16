@@ -5,7 +5,6 @@ import RadioButtonAndroid from './RadioButtonAndroid';
 import RadioButtonIOS from './RadioButtonIOS';
 import RadioButtonItem from './RadioButtonItem';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 
 export type Props = {
   /**
@@ -35,7 +34,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**

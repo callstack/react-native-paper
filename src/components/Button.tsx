@@ -17,8 +17,6 @@ import TouchableRipple from './TouchableRipple';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
 
-import { Theme } from '../types';
-
 type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Mode of the button. You can change the mode to adjust the styling to give it desired emphasis.
@@ -80,7 +78,7 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
   /**
    * testID to be used on tests.
    */
@@ -139,7 +137,7 @@ class Button extends React.Component<Props, State> {
       Animated.timing(this.state.elevation, {
         toValue: 8,
         duration: 200 * scale,
-        useNativeDriver: false,
+        useNativeDriver: true,
       }).start();
     }
   };
@@ -150,7 +148,7 @@ class Button extends React.Component<Props, State> {
       Animated.timing(this.state.elevation, {
         toValue: 2,
         duration: 150 * scale,
-        useNativeDriver: false,
+        useNativeDriver: true,
       }).start();
     }
   };
@@ -230,10 +228,7 @@ class Button extends React.Component<Props, State> {
       textColor = colors.primary;
     }
 
-    const rippleColor = color(textColor)
-      .alpha(0.32)
-      .rgb()
-      .string();
+    const rippleColor = color(textColor).alpha(0.32).rgb().string();
     const buttonStyle = {
       backgroundColor,
       borderColor,
@@ -274,7 +269,7 @@ class Button extends React.Component<Props, State> {
           accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
           accessibilityComponentType="button"
           accessibilityRole="button"
-          accessibilityStates={disabled ? ['disabled'] : []}
+          accessibilityState={{ disabled }}
           disabled={disabled}
           rippleColor={rippleColor}
           style={touchableStyle}

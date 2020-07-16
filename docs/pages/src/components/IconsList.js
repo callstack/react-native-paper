@@ -20,7 +20,7 @@ export default class IconsList extends React.Component<{}, State> {
       const query = this.state.query.toLowerCase();
 
       return iconNames.filter(
-        item =>
+        (item) =>
           item.includes(query.replace(/\s/g, '-')) ||
           item.replace(/-/g, '').includes(query)
       );
@@ -54,7 +54,7 @@ export default class IconsList extends React.Component<{}, State> {
         />
         {searchResults.length ? (
           <Results>
-            {searchResults.map(name => (
+            {searchResults.map((name) => (
               <IconContainer
                 key={name}
                 type="button"

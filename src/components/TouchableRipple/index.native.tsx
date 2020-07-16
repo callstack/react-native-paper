@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import color from 'color';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 const ANDROID_VERSION_PIE = 28;
@@ -25,7 +24,7 @@ type Props = React.ComponentProps<typeof TouchableWithoutFeedback> & {
   underlayColor?: string;
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 class TouchableRipple extends React.Component<Props> {
@@ -95,10 +94,7 @@ class TouchableRipple extends React.Component<Props> {
         underlayColor={
           underlayColor != null
             ? underlayColor
-            : color(calculatedRippleColor)
-                .fade(0.5)
-                .rgb()
-                .string()
+            : color(calculatedRippleColor).fade(0.5).rgb().string()
         }
       >
         {React.Children.only(children)}

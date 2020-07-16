@@ -22,7 +22,7 @@ const BadgeExample = () => {
         <Paragraph style={styles.label}>Show badges</Paragraph>
         <Switch
           value={visible}
-          onValueChange={visible => setVisible(visible)}
+          onValueChange={(visible) => setVisible(visible)}
         />
       </View>
       <List.Section title="Text">

@@ -2,7 +2,7 @@
 
 exports[`renders disabled switch 1`] = `
 <RCTSwitch
-  accessibilityRole="button"
+  accessibilityRole="switch"
   disabled={true}
   onChange={[Function]}
   onResponderTerminationRequest={[Function]}
@@ -21,7 +21,7 @@ exports[`renders disabled switch 1`] = `
 
 exports[`renders off switch 1`] = `
 <RCTSwitch
-  accessibilityRole="button"
+  accessibilityRole="switch"
   onChange={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
@@ -39,7 +39,7 @@ exports[`renders off switch 1`] = `
 
 exports[`renders on switch 1`] = `
 <RCTSwitch
-  accessibilityRole="button"
+  accessibilityRole="switch"
   onChange={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
@@ -57,7 +57,7 @@ exports[`renders on switch 1`] = `
 
 exports[`renders switch with color 1`] = `
 <RCTSwitch
-  accessibilityRole="button"
+  accessibilityRole="switch"
   onChange={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}

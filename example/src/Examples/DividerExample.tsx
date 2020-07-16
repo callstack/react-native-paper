@@ -13,7 +13,7 @@ const DividerExample = () => {
     <FlatList
       style={{ backgroundColor: background }}
       renderItem={({ item }) => <List.Item title={item} />}
-      keyExtractor={item => item}
+      keyExtractor={(item) => item}
       ItemSeparatorComponent={Divider}
       data={items}
     />

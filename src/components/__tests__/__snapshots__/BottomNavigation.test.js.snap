@@ -89,6 +89,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
       }
     >
       <View
+        forwardedRef={[Function]}
         onLayout={[Function]}
         pointerEvents="box-none"
         style={
@@ -105,10 +106,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
       >
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -291,10 +292,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         </View>
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -477,10 +478,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         </View>
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -756,6 +757,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
       }
     >
       <View
+        forwardedRef={[Function]}
         onLayout={[Function]}
         pointerEvents="box-none"
         style={
@@ -792,10 +794,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         />
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -978,10 +980,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         </View>
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -1164,10 +1166,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         </View>
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -1443,6 +1445,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
       }
     >
       <View
+        forwardedRef={[Function]}
         onLayout={[Function]}
         pointerEvents="box-none"
         style={
@@ -1459,10 +1462,10 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
       >
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -1625,10 +1628,10 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         </View>
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -1791,10 +1794,10 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         </View>
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -2050,6 +2053,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
       }
     >
       <View
+        forwardedRef={[Function]}
         onLayout={[Function]}
         pointerEvents="box-none"
         style={
@@ -2086,10 +2090,10 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         />
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -2236,10 +2240,10 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         </View>
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -2386,10 +2390,10 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         </View>
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -2536,10 +2540,10 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         </View>
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -2686,10 +2690,10 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         </View>
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -2929,6 +2933,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
       }
     >
       <View
+        forwardedRef={[Function]}
         onLayout={[Function]}
         pointerEvents="box-none"
         style={
@@ -2945,10 +2950,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
       >
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -3211,10 +3216,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         </View>
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -3477,10 +3482,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         </View>
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -3836,6 +3841,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
       }
     >
       <View
+        forwardedRef={[Function]}
         onLayout={[Function]}
         pointerEvents="box-none"
         style={
@@ -3872,10 +3878,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         />
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -4101,10 +4107,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         </View>
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -4330,10 +4336,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         </View>
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -4652,6 +4658,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
       }
     >
       <View
+        forwardedRef={[Function]}
         onLayout={[Function]}
         pointerEvents="box-none"
         style={
@@ -4668,10 +4675,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
       >
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -4934,10 +4941,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
         </View>
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -5200,10 +5207,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
         </View>
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -5559,6 +5566,7 @@ exports[`renders shifting bottom navigation 1`] = `
       }
     >
       <View
+        forwardedRef={[Function]}
         onLayout={[Function]}
         pointerEvents="box-none"
         style={
@@ -5595,10 +5603,10 @@ exports[`renders shifting bottom navigation 1`] = `
         />
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -5824,10 +5832,10 @@ exports[`renders shifting bottom navigation 1`] = `
         </View>
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -6053,10 +6061,10 @@ exports[`renders shifting bottom navigation 1`] = `
         </View>
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -6282,10 +6290,10 @@ exports[`renders shifting bottom navigation 1`] = `
         </View>
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}
@@ -6511,10 +6519,10 @@ exports[`renders shifting bottom navigation 1`] = `
         </View>
         <View
           accessibilityRole="button"
-          accessibilityStates={
-            Array [
-              "selected",
-            ]
+          accessibilityState={
+            Object {
+              "selected": true,
+            }
           }
           accessible={true}
           focusable={true}

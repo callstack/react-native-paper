@@ -40,7 +40,7 @@ module.exports = function rewire(babel, options) {
               );
             } else {
               const previous = declarations.find(
-                d => d.source.value === path.node.source.value
+                (d) => d.source.value === path.node.source.value
               );
 
               if (previous) {

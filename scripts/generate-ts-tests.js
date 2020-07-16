@@ -9,17 +9,17 @@ const EXAMPLE_REGEX = /(## Usage\n \* ```js)([\S\s]*?)(```)/g;
 const JS_EXT = '.js';
 const TS_TEST_EXT = '.test.tsx';
 
-const transformContent = content =>
+const transformContent = (content) =>
   content
     .replace("'react-native-paper'", "'..'")
     .split('\n')
-    .map(e => e.slice(3))
+    .map((e) => e.slice(3))
     .join('\n');
 
 const getFiles = () =>
   glob
     .sync(SOURCE_FILES_PATTERN)
-    .map(filePath => {
+    .map((filePath) => {
       const content = readFileSync(filePath, 'utf-8');
       const match = EXAMPLE_REGEX.exec(content);
       // JS regexp is stateful, you need to reset lastIndex each time
@@ -33,10 +33,10 @@ const getFiles = () =>
     })
     .filter(Boolean);
 
-const writeFiles = files => {
+const writeFiles = (files) => {
   mkdirSync(DESTINATION_DIR);
 
-  files.forEach(f =>
+  files.forEach((f) =>
     writeFileSync(
       path.join(
         DESTINATION_DIR,

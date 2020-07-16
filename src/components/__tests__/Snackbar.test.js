@@ -8,7 +8,7 @@ jest.mock('react-native', () => {
   const RN = jest.requireActual('react-native');
 
   RN.Animated.timing = (value, config) => ({
-    start: callback => {
+    start: (callback) => {
       value.setValue(config.toValue);
       callback && callback({ finished: true });
     },

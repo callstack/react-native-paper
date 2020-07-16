@@ -17,7 +17,6 @@ import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple';
 import { withTheme } from '../core/theming';
 import { black, white } from '../styles/colors';
-import { Theme } from '../types';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
@@ -75,7 +74,7 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
   /**
    * Pass down testID from chip props to touchable for Detox tests.
    */
@@ -128,7 +127,7 @@ class Chip extends React.Component<Props, State> {
     Animated.timing(this.state.elevation, {
       toValue: 4,
       duration: 200 * scale,
-      useNativeDriver: false,
+      useNativeDriver: true,
     }).start();
   };
 
@@ -137,7 +136,7 @@ class Chip extends React.Component<Props, State> {
     Animated.timing(this.state.elevation, {
       toValue: 0,
       duration: 150 * scale,
-      useNativeDriver: false,
+      useNativeDriver: true,
     }).start();
   };
 
@@ -202,23 +201,21 @@ class Chip extends React.Component<Props, State> {
       .string();
 
     const underlayColor = selectedColor
-      ? color(selectedColor)
-          .fade(0.5)
-          .rgb()
-          .string()
+      ? color(selectedColor).fade(0.5).rgb().string()
       : selectedBackgroundColor;
 
     const accessibilityTraits: AccessibilityTrait[] = ['button'];
-    const accessibilityStates: AccessibilityState[] = [];
+    const accessibilityState: AccessibilityState = {
+      selected,
+      disabled,
+    };
 
     if (selected) {
       accessibilityTraits.push('selected');
-      accessibilityStates.push('selected');
     }
 
     if (disabled) {
       accessibilityTraits.push('disabled');
-      accessibilityStates.push('disabled');
     }
 
     return (
@@ -253,7 +250,7 @@ class Chip extends React.Component<Props, State> {
           accessibilityTraits={accessibilityTraits}
           accessibilityComponentType="button"
           accessibilityRole="button"
-          accessibilityStates={accessibilityStates}
+          accessibilityState={accessibilityState}
           testID={testID}
         >
           <View style={styles.content}>
