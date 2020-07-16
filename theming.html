@@ -96,8 +96,85 @@
 <li><code>thin</code></li>
 </ul>
 </li>
+<li><code>animation</code> (<code>object</code>)<ul>
+<li><code>scale</code> - scale for all animations</li>
+</ul>
+</li>
 </ul>
 <p>When creating a custom theme, you will need to provide all of these properties.</p>
+<p>If you don't use custom theme, Paper will automatically turn animations on/off, depending on device settings.</p>
+<p>Otherwise, your custom theme will need to handle it manually, using React Native's <a href="https://reactnative.dev/docs/0.54/accessibilityinfo">AccessibilityInfo API</a>;</p>
+<h2 id="extending-the-theme">
+          <a class="anchor" href="#extending-the-theme">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Extending the theme</h2>
+<p>Keeping your own properties in the the theme is fully supported by our library:</p>
+<pre><code class="language-tsx">import * as React from 'react';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import App from './src/App';
+
+const theme = {
+  ...DefaultTheme,
+  // Specify custom property
+  myOwnProperty: true,
+  // Specify custom property in nested object
+  colors: {
+    myOwnColor: '#BADA55',
+  }
+};
+
+export default function Main() {
+  return (
+    &lt;PaperProvider theme={theme}&gt;
+      &lt;App /&gt;
+    &lt;/PaperProvider&gt;
+  );
+}</code></pre>
+<h3 id="typescript">
+          <a class="anchor" href="#typescript">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Typescript</h3>
+<p>By default it won't work well with typescript, but we can take advantage of <code>global augmentations</code> and specify the new properties that we added to the theme:</p>
+<pre><code class="language-tsx">import * as React from 'react';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import App from './src/App';
+
+declare global {
+  namespace ReactNativePaper {
+    interface ThemeColors {
+      myOwnColor: string;
+    }
+
+    interface Theme {
+      myOwnProperty: boolean;
+    }
+  }
+}
+
+const theme = {
+  ...DefaultTheme,
+  // Specify custom property
+  myOwnProperty: true,
+    // Specify custom property in nested object
+  colors: {
+    myOwnColor: '#BADA55',
+  }
+};
+
+export default function Main() {
+  return (
+    &lt;PaperProvider theme={theme}&gt;
+      &lt;App /&gt;
+    &lt;/PaperProvider&gt;
+  );
+}</code></pre>
+<p>As you can see, custom properties e.q. <code>myOwnColor</code> defined in nested object e.g. <code>colors</code> needs to be declared in its own interface. You'll find more information in our <a href="https://github.com/callstack/react-native-paper/blob/master/example/src/index.tsx">example app</a> where we have it implemented.</p>
 <h2 id="applying-a-theme-to-a-paper-component">
           <a class="anchor" href="#applying-a-theme-to-a-paper-component">
             <svg width="16" height="16">
