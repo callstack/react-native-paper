@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { AsyncStorage, I18nManager, Platform, YellowBox } from 'react-native';
+import { I18nManager, Platform, YellowBox } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { Updates } from 'expo';
 import { useKeepAwake } from 'expo-keep-awake';
 import { InitialState, NavigationContainer } from '@react-navigation/native';
