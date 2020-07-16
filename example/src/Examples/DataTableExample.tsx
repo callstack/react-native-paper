@@ -56,9 +56,7 @@ const DataTableExample = () => {
   const sortedItems = items
     .slice()
     .sort((item1, item2) =>
-      (sortAscending
-      ? item1.name < item2.name
-      : item2.name < item1.name)
+      (sortAscending ? item1.name < item2.name : item2.name < item1.name)
         ? 1
         : -1
     );
@@ -85,7 +83,7 @@ const DataTableExample = () => {
             <DataTable.Title numeric>Fat (g)</DataTable.Title>
           </DataTable.Header>
 
-          {sortedItems.slice(from, to).map(item => (
+          {sortedItems.slice(from, to).map((item) => (
             <DataTable.Row key={item.key}>
               <DataTable.Cell style={styles.first}>{item.name}</DataTable.Cell>
               <DataTable.Cell numeric>{item.calories}</DataTable.Cell>
@@ -96,7 +94,7 @@ const DataTableExample = () => {
           <DataTable.Pagination
             page={page}
             numberOfPages={Math.floor(sortedItems.length / itemsPerPage)}
-            onPageChange={page => setPage(page)}
+            onPageChange={(page) => setPage(page)}
             label={`${from + 1}-${to} of ${sortedItems.length}`}
           />
         </DataTable>
