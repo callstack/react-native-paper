@@ -13,6 +13,7 @@
   "main": "node_modules/expo/AppEntry.js",
   "dependencies": {
     "@expo/vector-icons": "^10.2.0",
+    "@react-native-community/async-storage": "~1.11.0",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/drawer": "^5.6.1",
     "@react-navigation/native": "^5.2.1",
@@ -30,7 +31,7 @@
     "react-native-safe-area-context": "3.0.2",
     "react-native-screens": "~2.9.0",
     "react-native-vector-icons": "^6.6.0",
-    "react-native-web": "~0.11.7",
+    "react-native-web": "~0.13.0",
     "typeface-roboto": "^0.0.54"
   },
   "devDependencies": {
