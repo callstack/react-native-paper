@@ -1,1 +1,1 @@
-module.exports = require('./lib/module/babel/index.js');
+module.exports = require('./src/babel/index.js');

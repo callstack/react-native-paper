@@ -13,7 +13,7 @@ const { fixtures } = create({
   plugins: [
     [
       require.resolve('../index'),
-      { mappings: require.resolve('../../../lib/mappings.json') },
+      { mappings: require.resolve('../../../mappings.json') },
     ],
   ],
 });

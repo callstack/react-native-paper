@@ -1,5 +1,5 @@
 {
-  "name": "react-native-paper",
+  "name": "react-native-paper-light",
   "version": "4.0.0",
   "description": "Material design for React Native",
   "main": "lib/commonjs/index.js",
@@ -9,7 +9,6 @@
   "types": "lib/typescript/src/index.d.ts",
   "files": [
     "src",
-    "lib",
     "babel.js"
   ],
   "sideEffects": false,

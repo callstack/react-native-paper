@@ -7,7 +7,7 @@ const parser = require('@babel/parser');
 
 const packageJson = require('../package.json');
 const root = path.resolve(__dirname, '..');
-const output = path.join(root, 'lib/mappings.json');
+const output = path.join(root, 'mappings.json');
 const source = fs.readFileSync(path.resolve(root, 'src', 'index.tsx'), 'utf8');
 const ast = parser.parse(source, {
   sourceType: 'module',
@@ -20,7 +20,7 @@ const ast = parser.parse(source, {
   ],
 });
 
-const index = packageJson.module;
+const index = packageJson.source;
 const relative = (value /* : string */) =>
   path.relative(root, path.resolve(path.dirname(index), value));
 
@@ -62,5 +62,5 @@ const mappings = ast.program.body.reduce((acc, declaration, index, self) => {
 fs.existsSync(path.dirname(output)) || fs.mkdirSync(path.dirname(output));
 fs.writeFileSync(
   output,
-  JSON.stringify({ name: packageJson.name, index, mappings }, null, 2)
+  JSON.stringify({ name: 'react-native-paper', index, mappings }, null, 2)
 );
