@@ -55,6 +55,17 @@ describe('Provider', () => {
     );
   });
 
+  it('uses default theme, if Appearance module is not defined', () => {
+    jest.mock('react-native/Libraries/Utilities/Appearance', () => {
+      return null;
+    });
+    const { getByTestId } = render(createProvider(null));
+    expect(Appearance).toEqual(null);
+    expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
+      DefaultTheme
+    );
+  });
+
   it.each`
     label              | theme           | colorScheme
     ${'default theme'} | ${DefaultTheme} | ${'light'}
