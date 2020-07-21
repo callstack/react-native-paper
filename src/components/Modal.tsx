@@ -22,6 +22,10 @@ type Props = {
    */
   onDismiss?: () => void;
   /**
+   * Accessibility label for the overlay. This is read by the screen reader when the user taps outside the modal.
+   */
+  overlayAccessibilityLabel?: string;
+  /**
    * Determines Whether the modal is visible.
    */
   visible: boolean;
@@ -90,6 +94,7 @@ class Modal extends React.Component<Props, State> {
   static defaultProps = {
     dismissable: true,
     visible: false,
+    overlayAccessibilityLabel: 'Close modal',
   };
 
   static getDerivedStateFromProps(nextProps: Props, prevState: State) {
@@ -178,7 +183,13 @@ class Modal extends React.Component<Props, State> {
 
     if (!rendered) return null;
 
-    const { children, dismissable, theme, contentContainerStyle } = this.props;
+    const {
+      children,
+      dismissable,
+      theme,
+      contentContainerStyle,
+      overlayAccessibilityLabel,
+    } = this.props;
     const { colors } = theme;
     return (
       <Animated.View
@@ -186,8 +197,11 @@ class Modal extends React.Component<Props, State> {
         accessibilityViewIsModal
         accessibilityLiveRegion="polite"
         style={StyleSheet.absoluteFill}
+        onAccessibilityEscape={this.hideModal}
       >
         <TouchableWithoutFeedback
+          accessibilityLabel={overlayAccessibilityLabel}
+          accessibilityRole="button"
           disabled={!dismissable}
           onPress={dismissable ? this.hideModal : undefined}
         >
