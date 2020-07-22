@@ -1060,6 +1060,7 @@ const styles = StyleSheet.create({
     ...(Platform.OS === 'web'
       ? {
           whiteSpace: 'nowrap',
+          alignSelf: 'center'
         }
       : null),
   },
