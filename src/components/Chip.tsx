@@ -11,7 +11,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import color from 'color';
-import Icon, { IconSource } from './Icon';
+import Icon, { IconSource, Props as IconProps } from './Icon';
 import Surface from './Surface';
 import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple';
@@ -33,6 +33,10 @@ type Props = React.ComponentProps<typeof Surface> & {
    * Icon to display for the `Chip`. Both icon and avatar cannot be specified.
    */
   icon?: IconSource;
+  /**
+   * Props to forward through to `Chip`.
+   */
+  IconProps?: Partial<IconProps>;
   /**
    * Avatar to display for the `Chip`. Both icon and avatar cannot be specified.
    */
@@ -145,6 +149,7 @@ class Chip extends React.Component<Props, State> {
       mode,
       children,
       icon,
+      IconProps,
       avatar,
       selected,
       disabled,
@@ -278,6 +283,7 @@ class Chip extends React.Component<Props, State> {
                   source={icon || 'check'}
                   color={avatar ? white : iconColor}
                   size={18}
+                  {...IconProps}
                 />
               </View>
             ) : null}

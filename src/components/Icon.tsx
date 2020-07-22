@@ -21,7 +21,7 @@ type IconProps = {
   allowFontScaling?: boolean;
 };
 
-type Props = IconProps & {
+export type Props = IconProps & {
   color?: string;
   source: any;
   /**
