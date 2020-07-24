@@ -1,5 +1,11 @@
 import React from 'react';
-import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+  GestureResponderEvent,
+} from 'react-native';
 
 import IconButton from '../../IconButton';
 import type { $Omit } from '../../../../src/types';
@@ -9,7 +15,8 @@ type Props = $Omit<
   'icon' | 'theme'
 > & {
   name: string;
-  onPress?: () => void;
+  onPress?: (e: GestureResponderEvent) => void;
+  autoFocus?: Boolean;
   style?: StyleProp<ViewStyle>;
   theme?: ReactNativePaper.Theme;
 };
@@ -48,17 +55,20 @@ export const IconAdornment: React.FunctionComponent<
   );
 };
 
-const TextInputIcon = ({ name, onPress, ...rest }: Props) => {
+const TextInputIcon = ({ name, onPress, autoFocus, ...rest }: Props) => {
   const { style, isTextInputFocused, forceFocus } = React.useContext(
     StyleContext
   );
 
-  const onPressWithFocusControl = React.useCallback(() => {
-    if (!isTextInputFocused) {
-      forceFocus();
-    }
-    onPress?.();
-  }, [forceFocus, isTextInputFocused, onPress]);
+  const onPressWithFocusControl = React.useCallback(
+    (e: GestureResponderEvent) => {
+      if (autoFocus && !isTextInputFocused) {
+        forceFocus();
+      }
+      onPress?.(e);
+    },
+    [autoFocus, forceFocus, isTextInputFocused, onPress]
+  );
 
   return (
     <View style={[styles.container, style]}>
@@ -73,6 +83,10 @@ const TextInputIcon = ({ name, onPress, ...rest }: Props) => {
   );
 };
 TextInputIcon.displayName = 'TextInput.Icon';
+
+TextInputIcon.defaultProps = {
+  autoFocus: true,
+};
 
 const styles = StyleSheet.create({
   container: {

@@ -5,8 +5,15 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
+  GestureResponderEvent,
 } from 'react-native';
-import { TextInput, HelperText, useTheme } from 'react-native-paper';
+import {
+  TextInput,
+  HelperText,
+  useTheme,
+  Menu,
+  Divider,
+} from 'react-native-paper';
 import { inputReducer, State } from '../../utils';
 
 const MAX_LENGTH = 20;
@@ -57,8 +64,15 @@ const TextInputAvoidingView = ({ children }: AvoidingViewProps) => {
   );
 };
 
+type ContextualMenuCoord = { x: number; y: number };
+
 const TextInputExample = () => {
   const [state, dispatch] = React.useReducer(inputReducer, initialState);
+  const [menuVisible, setMenuVisible] = React.useState<boolean>(false);
+  const [contextualMenuCoord, setContextualMenuCoord] = React.useState<
+    ContextualMenuCoord
+  >({ x: 0, y: 0 });
+
   const {
     text,
     name,
@@ -111,6 +125,15 @@ const TextInputExample = () => {
       type: 'iconsColor',
       payload: colors,
     });
+  };
+
+  const handleIconPress = (event: GestureResponderEvent) => {
+    const { nativeEvent } = event;
+    setContextualMenuCoord({
+      x: nativeEvent.pageX,
+      y: nativeEvent.pageY,
+    });
+    setMenuVisible(true);
   };
 
   return (
@@ -388,6 +411,30 @@ const TextInputExample = () => {
           >
             Error: Only letters are allowed
           </HelperText>
+        </View>
+        <View style={styles.inputContainerStyle}>
+          <TextInput
+            label="Input opening a menu"
+            value={name}
+            right={
+              <TextInput.Icon
+                name="chevron-down"
+                color={flatRightIcon}
+                onPress={handleIconPress}
+                autoFocus={false}
+              />
+            }
+          />
+          <Menu
+            visible={menuVisible}
+            onDismiss={() => setMenuVisible(false)}
+            anchor={contextualMenuCoord}
+          >
+            <Menu.Item onPress={() => {}} title="Item 1" />
+            <Menu.Item onPress={() => {}} title="Item 2" />
+            <Divider />
+            <Menu.Item onPress={() => {}} title="Item 3" disabled />
+          </Menu>
         </View>
       </ScrollView>
     </TextInputAvoidingView>
