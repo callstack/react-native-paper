@@ -23,7 +23,15 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Alternative text to avatar.
    */
-  alt?: string;
+  accessibilityLabel?: string;
+  /**
+   * Boolean to indicate erros with the image
+   */
+  onError?: boolean;
+  /**
+   * Boolean to indicate the image is loading
+   */
+  onLoad?: boolean;
   /**
    * Size of the avatar.
    */
@@ -50,7 +58,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * import { Avatar } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Avatar.Image size={24} alt="avatar" source={require('../assets/avatar.png')} />
+ *   <Avatar.Image size={24} accessibilityLabel="avatar" source={require('../assets/avatar.png')} />
  * );
  * ```
  */
@@ -59,12 +67,16 @@ class AvatarImage extends React.Component<Props> {
 
   static defaultProps = {
     size: defaultSize,
-    alt: '',
+    accessibilityLabel: '',
+    onError: false,
+    onLoad: false,
   };
 
   render() {
     const {
-      alt = '',
+      accessibilityLabel = '',
+      onError,
+      onLoad,
       size = defaultSize,
       source,
       style,
@@ -76,7 +88,9 @@ class AvatarImage extends React.Component<Props> {
     const { backgroundColor = colors.primary } =
       StyleSheet.flatten(style) || {};
 
-    return source ? (
+    return onLoad || onError ? (
+      <AvatarText size={size} label={accessibilityLabel} />
+    ) : (
       <View
         style={[
           {
@@ -94,8 +108,6 @@ class AvatarImage extends React.Component<Props> {
           style={{ width: size, height: size, borderRadius: size / 2 }}
         />
       </View>
-    ) : (
-      <AvatarText size={size} label={alt} />
     );
   }
 }
