@@ -74,6 +74,14 @@ const data: Data[] = [
     github: 'https://github.com/jvidalv/astrale',
     android: 'https://play.google.com/store/apps/details?id=josep.astrale',
   },
+  {
+    color: '#29337a',
+    name: 'Lyra Collect',
+    image: 'showcase/lyracollect.png',
+    android:
+      'https://play.google.com/store/apps/details?id=com.lyra.lyracollect',
+    ios: 'https://apps.apple.com/fr/app/lyra-collect/id1469527737',
+  },
 ];
 
 export default class Showcase extends React.Component<{}> {

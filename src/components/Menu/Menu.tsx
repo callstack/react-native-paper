@@ -551,7 +551,6 @@ class Menu extends React.Component<Props, State> {
               accessibilityViewIsModal={visible}
               style={[styles.wrapper, positionStyle, style]}
               pointerEvents={visible ? 'box-none' : 'none'}
-              // @ts-ignore - FIX ME
               onAccessibilityEscape={onDismiss}
             >
               <Animated.View style={{ transform: positionTransforms }}>
