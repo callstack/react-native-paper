@@ -316,7 +316,7 @@ class SceneComponent extends React.PureComponent<any> {
  * For integration with React Navigation, you can use [react-navigation-material-bottom-tab-navigator](https://github.com/react-navigation/react-navigation-material-bottom-tab-navigator).
  *
  * By default Bottom navigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
- * See [Dark Theme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more informations
+ * See [Dark Theme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more information.
  *
  * <div class="screenshots">
  *   <img class="medium" src="screenshots/bottom-navigation.gif" />
