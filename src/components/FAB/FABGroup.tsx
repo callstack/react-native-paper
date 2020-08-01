@@ -228,9 +228,7 @@ class FABGroup extends React.Component<Props, State> {
     } = this.props;
     const { colors } = theme;
 
-    const labelColor = theme.dark
-      ? colors.text
-      : color(colors.text).fade(0.54).rgb().string();
+    const labelColor = colors.text;
     const backdropOpacity = open
       ? this.state.backdrop.interpolate({
           inputRange: [0, 0.5, 1],
