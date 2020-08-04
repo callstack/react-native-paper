@@ -7,7 +7,7 @@ import FABGroup, { FABGroup as _FABGroup } from './FABGroup';
 import Surface from '../Surface';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Text from '../Typography/Text';
-import TouchableRipple from '../TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren } from '../../types';

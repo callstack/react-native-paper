@@ -13,7 +13,7 @@ import ActivityIndicator from './ActivityIndicator';
 import Icon, { IconSource } from './Icon';
 import Surface from './Surface';
 import Text from './Typography/Text';
-import TouchableRipple from './TouchableRipple';
+import TouchableRipple from './TouchableRipple/TouchableRipple';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
 

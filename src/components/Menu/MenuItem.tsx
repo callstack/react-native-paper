@@ -8,7 +8,7 @@ import {
   StyleProp,
 } from 'react-native';
 import Icon, { IconSource } from '../Icon';
-import TouchableRipple from '../TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import { black, white } from '../../styles/colors';
