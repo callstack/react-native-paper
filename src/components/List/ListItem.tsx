@@ -8,7 +8,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import TouchableRipple from '../TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren, EllipsizeProp } from '../../types';

@@ -7,7 +7,7 @@ import FABGroup, { FABGroup as _FABGroup } from './FABGroup';
 import Surface from '../Surface';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Text from '../Typography/Text';
-import TouchableRipple from '../TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren } from '../../types';
@@ -51,6 +51,10 @@ type Props = $RemoveChildren<typeof Surface> & {
    * Function to execute on press.
    */
   onPress?: () => void;
+  /**
+   * Function to execute on long press.
+   */
+  onLongPress?: () => void;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -140,6 +144,7 @@ class FAB extends React.Component<Props, State> {
       color: customColor,
       disabled,
       onPress,
+      onLongPress,
       theme,
       style,
       visible,
@@ -198,6 +203,7 @@ class FAB extends React.Component<Props, State> {
         <TouchableRipple
           borderless
           onPress={onPress}
+          onLongPress={onLongPress}
           rippleColor={rippleColor}
           disabled={disabled}
           accessibilityLabel={accessibilityLabel}
