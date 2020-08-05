@@ -10,7 +10,7 @@ import {
 
 import CheckBox from './Checkbox';
 import Text from '../Typography/Text';
-import TouchableRipple from '../TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 
 type Props = {

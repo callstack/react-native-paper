@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import color from 'color';
 
-import TouchableRipple from './TouchableRipple';
+import TouchableRipple from './TouchableRipple/TouchableRipple';
 import Icon, { IconSource } from './Icon';
 import CrossFadeIcon from './CrossFadeIcon';
 import { withTheme } from '../core/theming';

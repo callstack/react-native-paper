@@ -19,7 +19,7 @@ import overlay from '../styles/overlay';
 import Icon, { IconSource } from './Icon';
 import Surface from './Surface';
 import Badge from './Badge';
-import TouchableRipple from './TouchableRipple';
+import TouchableRipple from './TouchableRipple/TouchableRipple';
 import Text from './Typography/Text';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';

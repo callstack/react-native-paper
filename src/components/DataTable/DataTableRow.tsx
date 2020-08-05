@@ -1,7 +1,7 @@
 import * as React from 'react';
 import color from 'color';
 import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
-import TouchableRipple from '../TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren } from '../../types';
