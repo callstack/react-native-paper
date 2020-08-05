@@ -88,7 +88,7 @@ class CheckboxItem extends React.Component<Props> {
     return (
       <TouchableRipple onPress={onPress}>
         <View style={[styles.container, style]} pointerEvents="none">
-          <Text style={[styles.label, labelStyle, { color: colors.primary }]}>
+          <Text style={[styles.label, { color: colors.primary }, labelStyle]}>
             {label}
           </Text>
           <CheckBox status={status} {...props}></CheckBox>
