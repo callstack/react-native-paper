@@ -103,7 +103,7 @@
 </ul>
 <p>When creating a custom theme, you will need to provide all of these properties.</p>
 <p>If you don't use custom theme, Paper will automatically turn animations on/off, depending on device settings.</p>
-<p>Otherwise, your custom theme will need to handle it manually, using React Native's <a href="https://reactnative.dev/docs/0.54/accessibilityinfo">AccessibilityInfo API</a>;</p>
+<p>Otherwise, your custom theme will need to handle it manually, using React Native's <a href="https://reactnative.dev/docs/accessibilityinfo">AccessibilityInfo API</a>;</p>
 <h2 id="extending-the-theme">
           <a class="anchor" href="#extending-the-theme">
             <svg width="16" height="16">
@@ -112,27 +112,27 @@
           </a>
         Extending the theme</h2>
 <p>Keeping your own properties in the the theme is fully supported by our library:</p>
-<pre><code class="language-tsx">import * as React from 'react';
-import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
-import App from './src/App';
+<pre><code class="language-ts"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> DefaultTheme<span class="token punctuation">,</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./src/App'</span><span class="token punctuation">;</span>
 
-const theme = {
-  ...DefaultTheme,
-  // Specify custom property
-  myOwnProperty: true,
-  // Specify custom property in nested object
-  colors: {
-    myOwnColor: '#BADA55',
-  }
-};
+<span class="token keyword">const</span> theme <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>DefaultTheme<span class="token punctuation">,</span>
+  <span class="token comment">// Specify custom property</span>
+  myOwnProperty<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token comment">// Specify custom property in nested object</span>
+  colors<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    myOwnColor<span class="token punctuation">:</span> <span class="token string">'#BADA55'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-export default function Main() {
-  return (
-    &lt;PaperProvider theme={theme}&gt;
-      &lt;App /&gt;
-    &lt;/PaperProvider&gt;
-  );
-}</code></pre>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>PaperProvider theme<span class="token operator">=</span><span class="token punctuation">{</span>theme<span class="token punctuation">}</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>App <span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>PaperProvider<span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <h3 id="typescript">
           <a class="anchor" href="#typescript">
             <svg width="16" height="16">
@@ -141,39 +141,39 @@ export default function Main() {
           </a>
         Typescript</h3>
 <p>By default it won't work well with typescript, but we can take advantage of <code>global augmentations</code> and specify the new properties that we added to the theme:</p>
-<pre><code class="language-tsx">import * as React from 'react';
-import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
-import App from './src/App';
+<pre><code class="language-ts"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> DefaultTheme<span class="token punctuation">,</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./src/App'</span><span class="token punctuation">;</span>
 
-declare global {
-  namespace ReactNativePaper {
-    interface ThemeColors {
-      myOwnColor: string;
-    }
+<span class="token keyword">declare</span> global <span class="token punctuation">{</span>
+  <span class="token keyword">namespace</span> ReactNativePaper <span class="token punctuation">{</span>
+    <span class="token keyword">interface</span> <span class="token class-name">ThemeColors</span> <span class="token punctuation">{</span>
+      myOwnColor<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    interface Theme {
-      myOwnProperty: boolean;
-    }
-  }
-}
+    <span class="token keyword">interface</span> <span class="token class-name">Theme</span> <span class="token punctuation">{</span>
+      myOwnProperty<span class="token punctuation">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-const theme = {
-  ...DefaultTheme,
-  // Specify custom property
-  myOwnProperty: true,
-    // Specify custom property in nested object
-  colors: {
-    myOwnColor: '#BADA55',
-  }
-};
+<span class="token keyword">const</span> theme <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>DefaultTheme<span class="token punctuation">,</span>
+  <span class="token comment">// Specify custom property</span>
+  myOwnProperty<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token comment">// Specify custom property in nested object</span>
+  colors<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    myOwnColor<span class="token punctuation">:</span> <span class="token string">'#BADA55'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-export default function Main() {
-  return (
-    &lt;PaperProvider theme={theme}&gt;
-      &lt;App /&gt;
-    &lt;/PaperProvider&gt;
-  );
-}</code></pre>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>PaperProvider theme<span class="token operator">=</span><span class="token punctuation">{</span>theme<span class="token punctuation">}</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>App <span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>PaperProvider<span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>As you can see, custom properties e.q. <code>myOwnColor</code> defined in nested object e.g. <code>colors</code> needs to be declared in its own interface. You'll find more information in our <a href="https://github.com/callstack/react-native-paper/blob/master/example/src/index.tsx">example app</a> where we have it implemented.</p>
 <h2 id="applying-a-theme-to-a-paper-component">
           <a class="anchor" href="#applying-a-theme-to-a-paper-component">
