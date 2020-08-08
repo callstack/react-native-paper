@@ -49,7 +49,16 @@ type Props = React.ComponentProps<typeof Surface> & {
 };
 
 type State = {
+  /**
+   * Default animated value
+   */
   elevation: Animated.Value;
+
+  /**
+   * Dark adaptive animated value, used in case of toggling the theme,
+   * it prevents animating the background with native drivers inside Surface
+   */
+  elevationDarkAdaptive: Animated.Value;
 };
 
 /**
@@ -102,7 +111,28 @@ class Card extends React.Component<Props, State> {
   state = {
     // @ts-ignore
     elevation: new Animated.Value(this.props.elevation),
+    // @ts-ignore
+    elevationDarkAdaptive: new Animated.Value(this.props.elevation),
   };
+
+  componentDidUpdate(prevProps: Props) {
+    /**
+     * Resets animations values if updating to dark adaptive mode,
+     * otherwise, any card that is in the middle of animation while
+     * toggling the theme will stay at that animated value until
+     * the next press-in
+     */
+
+    const { dark: isDark, mode } = this.props.theme;
+    const { dark: wasDark } = prevProps.theme;
+    const { elevation, elevationDarkAdaptive } = this.state;
+    if (isDark && mode === 'adaptive' && isDark !== wasDark) {
+      // @ts-ignore
+      elevation.setValue(this.props.elevation);
+      // @ts-ignore
+      elevationDarkAdaptive.setValue(this.props.elevation);
+    }
+  }
 
   private handlePressIn = () => {
     const {
@@ -110,11 +140,20 @@ class Card extends React.Component<Props, State> {
       mode,
       animation: { scale },
     } = this.props.theme;
-    Animated.timing(this.state.elevation, {
-      toValue: 8,
-      duration: 150 * scale,
-      useNativeDriver: !dark || mode === 'exact',
-    }).start();
+
+    if (dark && mode === 'adaptive') {
+      Animated.timing(this.state.elevationDarkAdaptive, {
+        toValue: 8,
+        duration: 150 * scale,
+        useNativeDriver: false,
+      }).start();
+    } else {
+      Animated.timing(this.state.elevation, {
+        toValue: 8,
+        duration: 150 * scale,
+        useNativeDriver: true,
+      }).start();
+    }
   };
 
   private handlePressOut = () => {
@@ -123,12 +162,22 @@ class Card extends React.Component<Props, State> {
       mode,
       animation: { scale },
     } = this.props.theme;
-    Animated.timing(this.state.elevation, {
-      // @ts-ignore
-      toValue: this.props.elevation,
-      duration: 150 * scale,
-      useNativeDriver: !dark || mode === 'exact',
-    }).start();
+
+    if (dark && mode === 'adaptive') {
+      Animated.timing(this.state.elevationDarkAdaptive, {
+        // @ts-ignore
+        toValue: this.props.elevation,
+        duration: 150 * scale,
+        useNativeDriver: false,
+      }).start();
+    } else {
+      Animated.timing(this.state.elevation, {
+        // @ts-ignore
+        toValue: this.props.elevation,
+        duration: 150 * scale,
+        useNativeDriver: true,
+      }).start();
+    }
   };
 
   render() {
@@ -144,7 +193,7 @@ class Card extends React.Component<Props, State> {
       accessible,
       ...rest
     } = this.props;
-    const { elevation } = this.state;
+    const { elevation, elevationDarkAdaptive } = this.state;
     const { roundness } = theme;
     const total = React.Children.count(children);
     const siblings = React.Children.map(children, (child) =>
@@ -152,10 +201,17 @@ class Card extends React.Component<Props, State> {
         ? (child.type as any).displayName
         : null
     );
+    const computedElevation =
+      theme.dark && theme.mode === 'adaptive'
+        ? elevationDarkAdaptive
+        : elevation;
     return (
       <Surface
-        // @ts-ignore
-        style={[{ borderRadius: roundness, elevation }, style]}
+        style={[
+          // @ts-ignore
+          { borderRadius: roundness, elevation: computedElevation },
+          style,
+        ]}
         {...rest}
       >
         <TouchableWithoutFeedback
