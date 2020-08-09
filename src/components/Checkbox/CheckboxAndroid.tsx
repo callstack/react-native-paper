@@ -42,7 +42,8 @@ const ANIMATION_DURATION = 100;
 
 /**
  * Checkboxes allow the selection of multiple options from a set.
- * This component follows platform guidelines for Android.
+ * This component follows platform guidelines for Android, but can be used
+ * on any platform.
  *
  * <div class="screenshots">
  *   <figure>
