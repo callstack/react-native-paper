@@ -122,11 +122,10 @@ class Card extends React.Component<Props, State> {
      * toggling the theme will stay at that animated value until
      * the next press-in
      */
-
     const { dark: isDark, mode } = this.props.theme;
     const { dark: wasDark } = prevProps.theme;
     const { elevation, elevationDarkAdaptive } = this.state;
-    if (isDark && mode === 'adaptive' && isDark !== wasDark) {
+    if (isDark && mode === 'adaptive' && !wasDark) {
       // @ts-ignore
       elevation.setValue(this.props.elevation);
       // @ts-ignore
