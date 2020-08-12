@@ -7,6 +7,7 @@ import DialogActions from './DialogActions';
 import DialogTitle, { DialogTitle as _DialogTitle } from './DialogTitle';
 import DialogScrollArea from './DialogScrollArea';
 import { withTheme } from '../../core/theming';
+import overlay from '../../styles/overlay';
 
 type Props = {
   /**
@@ -31,6 +32,8 @@ type Props = {
    */
   theme: ReactNativePaper.Theme;
 };
+
+const DIALOG_ELEVATION: number = 24
 
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
@@ -108,7 +111,9 @@ class Dialog extends React.Component<Props> {
         contentContainerStyle={[
           {
             borderRadius: theme.roundness,
-            backgroundColor: theme.colors.surface,
+            backgroundColor: theme.dark
+              ? (overlay(DIALOG_ELEVATION, theme.colors.surface) as string)
+              : theme.colors.surface,
           },
           styles.container,
           style,
@@ -146,7 +151,7 @@ const styles = StyleSheet.create({
      */
     marginVertical: Platform.OS === 'android' ? 44 : 0,
     marginHorizontal: 26,
-    elevation: 24,
+    elevation: DIALOG_ELEVATION,
     justifyContent: 'flex-start',
   },
 });
