@@ -111,9 +111,10 @@ class Dialog extends React.Component<Props> {
         contentContainerStyle={[
           {
             borderRadius: theme.roundness,
-            backgroundColor: theme.dark
-              ? (overlay(DIALOG_ELEVATION, theme.colors.surface) as string)
-              : theme.colors.surface,
+            backgroundColor:
+              theme.dark && theme.mode === 'adaptive'
+                ? (overlay(DIALOG_ELEVATION, theme.colors.surface) as string)
+                : theme.colors.surface,
           },
           styles.container,
           style,
