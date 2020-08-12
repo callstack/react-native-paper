@@ -33,7 +33,7 @@ type Props = {
   theme: ReactNativePaper.Theme;
 };
 
-const DIALOG_ELEVATION: number = 24
+const DIALOG_ELEVATION: number = 24;
 
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
