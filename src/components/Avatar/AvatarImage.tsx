@@ -44,6 +44,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * const MyComponent = () => (
  *   <Avatar.Image size={24} source={require('../assets/avatar.png')} />
  * );
+ * export default MyComponent
  * ```
  */
 class AvatarImage extends React.Component<Props> {
