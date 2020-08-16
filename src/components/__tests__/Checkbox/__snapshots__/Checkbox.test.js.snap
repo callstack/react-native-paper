@@ -3,9 +3,10 @@
 exports[`renders checked Checkbox with color 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="button"
+  accessibilityRole="checkbox"
   accessibilityState={
     Object {
+      "checked": true,
       "disabled": undefined,
     }
   }
@@ -78,9 +79,10 @@ exports[`renders checked Checkbox with color 1`] = `
 exports[`renders checked Checkbox with onPress 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="button"
+  accessibilityRole="checkbox"
   accessibilityState={
     Object {
+      "checked": true,
       "disabled": undefined,
     }
   }
@@ -153,9 +155,10 @@ exports[`renders checked Checkbox with onPress 1`] = `
 exports[`renders indeterminate Checkbox 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="button"
+  accessibilityRole="checkbox"
   accessibilityState={
     Object {
+      "checked": false,
       "disabled": undefined,
     }
   }
@@ -228,9 +231,10 @@ exports[`renders indeterminate Checkbox 1`] = `
 exports[`renders indeterminate Checkbox with color 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="button"
+  accessibilityRole="checkbox"
   accessibilityState={
     Object {
+      "checked": false,
       "disabled": undefined,
     }
   }
@@ -303,9 +307,10 @@ exports[`renders indeterminate Checkbox with color 1`] = `
 exports[`renders unchecked Checkbox with color 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="button"
+  accessibilityRole="checkbox"
   accessibilityState={
     Object {
+      "checked": true,
       "disabled": undefined,
     }
   }
@@ -378,9 +383,10 @@ exports[`renders unchecked Checkbox with color 1`] = `
 exports[`renders unchecked Checkbox with onPress 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="button"
+  accessibilityRole="checkbox"
   accessibilityState={
     Object {
+      "checked": false,
       "disabled": undefined,
     }
   }
