@@ -29,9 +29,9 @@ type State = {
 };
 
 /**
- * List.AccordionGroup allows to control a group of List Accordions. Id prop for List.Accordion is required in order to group to work.
- * List.AccordionGroup can be controlled or uncontrolled component. Example shows uncontrolled version.
- * At most one Accordion will be expanded in given time.
+ * List.AccordionGroup allows to control a group of List Accordions. `id` prop for List.Accordion is required in order for group to work.
+ * List.AccordionGroup can be a controlled or uncontrolled component. The example shows the uncontrolled version.
+ * At most one Accordion can be expanded at a given time.
  *
  * <div class="screenshots">
  *   <img class="medium" src="screenshots/list-accordion-group.png" />
