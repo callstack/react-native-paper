@@ -31,7 +31,8 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
 
 /**
  * Checkboxes allow the selection of multiple options from a set.
- * This component follows platform guidelines for iOS.
+ * This component follows platform guidelines for iOS, but can be used
+ * on any platform.
  *
  * <div class="screenshots">
  *   <figure>

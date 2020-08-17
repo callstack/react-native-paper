@@ -47,7 +47,8 @@ const BORDER_WIDTH = 2;
 
 /**
  * Radio buttons allow the selection a single option from a set.
- * This component follows platform guidelines for Android.
+ * This component follows platform guidelines for Android, but can be used
+ * on any platform.
  *
  * <div class="screenshots">
  *   <figure>
