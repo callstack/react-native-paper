@@ -38,7 +38,7 @@
             </svg>
           </a>
         Applying a theme to the whole app</h2>
-<p>To support custom themes, paper exports a <code>Provider</code> component. You need to wrap your root component with the provider to be able to support themes.</p>
+<p>To support custom themes, paper exports a <code>Provider</code> component. You need to wrap your root component with the provider to be able to support themes:</p>
 <pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./src/App'</span><span class="token punctuation">;</span>
@@ -102,8 +102,8 @@
 </li>
 </ul>
 <p>When creating a custom theme, you will need to provide all of these properties.</p>
-<p>If you don't use custom theme, Paper will automatically turn animations on/off, depending on device settings.</p>
-<p>Otherwise, your custom theme will need to handle it manually, using React Native's <a href="https://reactnative.dev/docs/accessibilityinfo">AccessibilityInfo API</a>;</p>
+<p>If you don't use a custom theme, Paper will automatically turn animations on/off, depending on device settings.</p>
+<p>Otherwise, your custom theme will need to handle it manually, using React Native's <a href="https://reactnative.dev/docs/accessibilityinfo">AccessibilityInfo API</a>.</p>
 <h2 id="extending-the-theme">
           <a class="anchor" href="#extending-the-theme">
             <svg width="16" height="16">
@@ -111,8 +111,8 @@
             </svg>
           </a>
         Extending the theme</h2>
-<p>Keeping your own properties in the the theme is fully supported by our library:</p>
-<pre><code class="language-ts"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<p>Keeping your own properties in the theme is fully supported by our library:</p>
+<pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> DefaultTheme<span class="token punctuation">,</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./src/App'</span><span class="token punctuation">;</span>
 
@@ -128,9 +128,9 @@
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> <span class="token punctuation">(</span>
-    <span class="token operator">&lt;</span>PaperProvider theme<span class="token operator">=</span><span class="token punctuation">{</span>theme<span class="token punctuation">}</span><span class="token operator">&gt;</span>
-      <span class="token operator">&lt;</span>App <span class="token operator">/</span><span class="token operator">&gt;</span>
-    <span class="token operator">&lt;</span><span class="token operator">/</span>PaperProvider<span class="token operator">&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PaperProvider</span></span> <span class="token attr-name">theme</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>theme<span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">App</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PaperProvider</span></span><span class="token punctuation">&gt;</span></span>
   <span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
 <h3 id="typescript">
@@ -139,8 +139,8 @@
               <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
             </svg>
           </a>
-        Typescript</h3>
-<p>By default it won't work well with typescript, but we can take advantage of <code>global augmentations</code> and specify the new properties that we added to the theme:</p>
+        TypeScript</h3>
+<p>By default it won't work well with TypeScript, but we can take advantage of <code>global augmentations</code> and specify the new properties that we added to the theme:</p>
 <pre><code class="language-ts"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> DefaultTheme<span class="token punctuation">,</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./src/App'</span><span class="token punctuation">;</span>
@@ -174,7 +174,7 @@
     <span class="token operator">&lt;</span><span class="token operator">/</span>PaperProvider<span class="token operator">&gt;</span>
   <span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
-<p>As you can see, custom properties e.q. <code>myOwnColor</code> defined in nested object e.g. <code>colors</code> needs to be declared in its own interface. You'll find more information in our <a href="https://github.com/callstack/react-native-paper/blob/master/example/src/index.tsx">example app</a> where we have it implemented.</p>
+<p>As you can see, custom properties e.g. <code>myOwnColor</code> defined in nested object e.g. <code>colors</code> needs to be declared in its own interface. You'll find more information in our <a href="https://github.com/callstack/react-native-paper/blob/master/example/src/index.tsx">example app</a> where we have it implemented.</p>
 <h2 id="applying-a-theme-to-a-paper-component">
           <a class="anchor" href="#applying-a-theme-to-a-paper-component">
             <svg width="16" height="16">
@@ -182,7 +182,7 @@
             </svg>
           </a>
         Applying a theme to a paper component</h2>
-<p>If you want to change the theme for a certain component from the library, you can directly pass the <code>theme</code> prop to the component. The theme passed as the prop is merged with the theme from the <code>Provider</code>.</p>
+<p>If you want to change the theme for a certain component from the library, you can directly pass the <code>theme</code> prop to the component. The theme passed as the prop is merged with the theme from the <code>Provider</code>:</p>
 <pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> Button <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
 
@@ -200,7 +200,7 @@
             </svg>
           </a>
         Using the theme in your own components</h2>
-<p>To access the theme in your own components, you can use the <code>withTheme</code> HOC exported from the library. If you wrap your component with the HOC, you'll receive the theme as a prop.</p>
+<p>To access the theme in your own components, you can use the <code>withTheme</code> HOC exported from the library. If you wrap your component with the HOC, you'll receive the theme as a prop:</p>
 <pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> withTheme <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
 
@@ -211,7 +211,7 @@
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">withTheme</span><span class="token punctuation">(</span>MyComponent<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>Components wrapped with <code>withTheme</code> support the theme from the <code>Provider</code> as well as from the <code>theme</code> prop.</p>
-<p>You can also use the <code>useTheme</code> hook.</p>
+<p>You can also use the <code>useTheme</code> hook:</p>
 <pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> useTheme <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
 
@@ -226,7 +226,7 @@
             </svg>
           </a>
         Customizing all instances of a component</h2>
-<p>Sometimes you want to style a component in a different way everywhere and don't want to change the properties in the theme so that other components are not affected. For example, say you want to change the font for all your buttons, but don't want to change <code>theme.fonts.medium</code> because it affects other components.</p>
+<p>Sometimes you want to style a component in a different way everywhere but don't want to change the properties in the theme so that other components are not affected. For example, say you want to change the font for all your buttons, but don't want to change <code>theme.fonts.medium</code> because it affects other components.</p>
 <p>We don't have an API to do this, because you can already do it with components:</p>
 <pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> Button <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
@@ -242,13 +242,15 @@
             </svg>
           </a>
         Dark Theme</h2>
-<p>Since 3.0 We adapt Dark theme to follow <a href="https://material.io/design/color/dark-theme.html">Material design guidelines</a>. <br />
-In opposition to light theme, dark theme by default uses <code>surface</code> colour instead of <code>primary</code> on large components like <code>AppBar</code> or <code>BottomNavigation</code>.<br />
-The Dark theme adds a white overlay with opacity depending on elevation of surfaces. It uses it for the better accentuation of surface elevation. Using only shadow is highly imperceptible on dark surfaces.</p>
-<p>We are aware that users often use Dark theme in their own ways and they maybe don't want to use default dark theme features from guidelines<br />
-That's why if you are using the dark mode you can switch between two types of dark theme <code>mode</code>:</p>
-<p><code>exact</code> where everything is like it was before. Appbar and BottomNavigation will still use primary colour by default<br />
-<code>adaptive</code> where we follow <a href="https://material.io/design/color/dark-theme.html">Material design guidelines</a>, the surface will use white overlay with opacity to show elevation, <code>Appbar</code> and <code>BottomNavigation</code> will use surface colour as a background.</p>
+<p>Since 3.0 we adapt dark theme to follow <a href="https://material.io/design/color/dark-theme.html">Material design guidelines</a>. <br />
+In contrast to light theme, dark theme by default uses <code>surface</code> colour instead of <code>primary</code> on large components like <code>AppBar</code> or <code>BottomNavigation</code>.<br />
+The dark theme adds a white overlay with opacity depending on elevation of surfaces. It uses it for the better accentuation of surface elevation. Using only shadow is highly imperceptible on dark surfaces.</p>
+<p>We are aware that users often use dark theme in their own ways and may not want to use the default dark theme features from the guidelines.<br />
+That's why if you are using dark theme you can switch between two dark theme <code>mode</code>s:</p>
+<ul>
+<li><code>exact</code> where everything is like it was before. <code>Appbar</code> and <code>BottomNavigation</code> will still use primary colour by default.<br /></li>
+<li><code>adaptive</code> where we follow <a href="https://material.io/design/color/dark-theme.html">Material design guidelines</a>, the surface will use white overlay with opacity to show elevation, <code>Appbar</code> and <code>BottomNavigation</code> will use surface colour as a background.</li>
+</ul>
 <h2 id="gotchas">
           <a class="anchor" href="#gotchas">
             <svg width="16" height="16">

@@ -60,15 +60,14 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token operator">...</span></code></pre>
 <p>Note: fonts is a folder with .ttf files</p>
 </li>
-<li><p>Place your fonts files in your assets folder</p>
+<li><p>Place your font files in your assets folder.</p>
 </li>
-<li><p>Link fonts files using '<code>react-native link</code>' command</p>
+<li><p>Link font files using '<code>react-native link</code>' command.</p>
 </li>
-<li><p>Restart your project to refresh changes</p>
-</li>
-<li><p>You are able to use fontFamily based on fonts files</p>
+<li><p>Restart your project to refresh changes.</p>
 </li>
 </ol>
+<p>Now, you are able to use <code>fontFamily</code> from font files.</p>
 <h2 id="configuring-fonts-in-themeprovider">
           <a class="anchor" href="#configuring-fonts-in-themeprovider">
             <svg width="16" height="16">
@@ -77,7 +76,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
           </a>
         Configuring fonts in ThemeProvider</h2>
 <p>To create a custom font you need to prepare <code>fontConfig</code> where fonts are divided by platforms. 
-After you have to pass the <code>fontConfig</code> into <code>configureFonts</code> method in a custom theme. </p>
+After that, you have to pass the <code>fontConfig</code> into <code>configureFonts</code> method in a custom theme. </p>
 <p>Note: To override font on all platforms use <code>default</code> key.</p>
 <p>Check the <a href="https://github.com/callstack/react-native-paper/blob/master/src/styles/DefaultTheme.tsx">default theme</a> to see what customization options are supported.</p>
 <pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
