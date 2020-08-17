@@ -128,8 +128,8 @@ class CheckboxAndroid extends React.Component<Props, State> {
         disabled={disabled}
         accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
         accessibilityComponentType="button"
-        accessibilityRole="button"
-        accessibilityState={{ disabled }}
+        accessibilityRole="checkbox"
+        accessibilityState={{ disabled, checked }}
         accessibilityLiveRegion="polite"
         style={styles.container}
       >
