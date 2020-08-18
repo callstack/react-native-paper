@@ -21,6 +21,10 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   titleStyle?: StyleProp<TextStyle>;
   /**
+   * Number of lines for the title.
+   */
+  titleNumberOfLines?: number;
+  /**
    * Text for the subtitle. Note that this will only accept a string or `<Text>`-based node.
    */
   subtitle?: React.ReactNode;
@@ -29,7 +33,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   subtitleStyle?: StyleProp<TextStyle>;
   /**
-   * Number of line for the subtitle.
+   * Number of lines for the subtitle.
    */
   subtitleNumberOfLines?: number;
   /**
@@ -94,6 +98,7 @@ class CardTitle extends React.Component<Props> {
 
   static defaultProps = {
     subtitleNumberOfLines: 1,
+    titleNumberOfLines: 1,
   };
 
   render() {
@@ -108,6 +113,7 @@ class CardTitle extends React.Component<Props> {
       style,
       title,
       titleStyle,
+      titleNumberOfLines,
     } = this.props;
 
     return (
@@ -134,7 +140,7 @@ class CardTitle extends React.Component<Props> {
                 { marginBottom: subtitle ? 0 : 2 },
                 titleStyle,
               ]}
-              numberOfLines={1}
+              numberOfLines={titleNumberOfLines}
             >
               {title}
             </Title>
