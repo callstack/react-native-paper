@@ -90,6 +90,7 @@ exports[`renders list item with custom description 1`] = `
                 "borderStyle": "solid",
                 "borderWidth": 0.5,
                 "elevation": 0,
+                "flexDirection": "row",
               }
             }
           >
@@ -134,6 +135,7 @@ exports[`renders list item with custom description 1`] = `
                   style={
                     Array [
                       Object {
+                        "alignSelf": "center",
                         "padding": 4,
                       },
                       null,

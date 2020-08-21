@@ -22,7 +22,12 @@ const ChipExample = () => {
             >
               Simple
             </Chip>
-            <Chip onPress={() => {}} onClose={() => {}} style={styles.chip}>
+            <Chip
+              onPress={() => {}}
+              onClose={() => {}}
+              style={styles.chip}
+              closeIconAccessibilityLabel="Close icon accessibility label"
+            >
               Close button
             </Chip>
             <Chip
