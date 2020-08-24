@@ -8,8 +8,8 @@ import {
   GestureResponderEvent,
   unstable_createElement
 } from "react-native";
-
-import color from "color";
+import color from 'color';
+import { withTheme } from '../../core/theming';
 
 type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
   /**
@@ -321,4 +321,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default TouchableRipple;
+export default withTheme(TouchableRipple);
