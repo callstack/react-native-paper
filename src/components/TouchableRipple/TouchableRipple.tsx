@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   TouchableWithoutFeedback,
   View,
@@ -6,9 +6,10 @@ import {
   StyleSheet,
   StyleProp,
   GestureResponderEvent,
-} from 'react-native';
-import color from 'color';
-import { withTheme } from '../../core/theming';
+  unstable_createElement
+} from "react-native";
+
+import color from "color";
 
 type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
   /**
@@ -84,32 +85,49 @@ type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
  * export default MyComponent;
  * ```
  */
-class TouchableRipple extends React.Component<Props> {
-  static defaultProps = {
-    borderless: false,
-  };
 
-  /**
-   * Whether ripple effect is supported.
-   */
-  static supported = true;
+const RIPPLE_DURATION = 250;
 
-  private handlePressIn = (e: any) => {
-    const { centered, rippleColor, onPressIn, theme } = this.props;
 
-    onPressIn?.(e);
+const ViewWithAnimationEnd = (props) => unstable_createElement("div", props);
 
-    const { dark, colors } = theme;
-    const calculatedRippleColor =
+function TouchableRipple(props: Props) {
+  const {
+    style,
+    background,
+    borderless = false,
+    disabled: disabledProp,
+    rippleColor,
+    underlayColor,
+    children,
+    theme,
+    onPressIn,
+    onPressOut,
+    centered,
+    ...rest
+  } = props;
+  const { dark, colors } = theme;
+  const [rippleArray, setRippleArray] = React.useState<any>([]);
+  const calculatedRippleColor = React.useMemo(
+    () =>
       rippleColor ||
       color(colors.text)
         .alpha(dark ? 0.32 : 0.2)
         .rgb()
-        .string();
+        .string(),
+    [rippleColor, colors, dark]
+  );
 
+  const handlePressIn = (e: any) => {
+    onPressIn?.(e);
     const button = e.currentTarget;
-    const style = window.getComputedStyle(button);
     const dimensions = button.getBoundingClientRect();
+
+    const size = centered
+      ? // If ripple is always centered, we don't need to make it too big
+        Math.min(dimensions.width, dimensions.height) * 1.25
+      : // Otherwise make it twice as big so clicking on one end spreads ripple to other
+        Math.max(dimensions.width, dimensions.height) * 2;
 
     let touchX;
     let touchY;
@@ -124,149 +142,183 @@ class TouchableRipple extends React.Component<Props> {
       touchY = touch.locationY ?? e.pageY;
     }
 
-    // Get the size of the button to determine how big the ripple should be
-    const size = centered
-      ? // If ripple is always centered, we don't need to make it too big
-        Math.min(dimensions.width, dimensions.height) * 1.25
-      : // Otherwise make it twice as big so clicking on one end spreads ripple to other
-        Math.max(dimensions.width, dimensions.height) * 2;
+    const animationDuration = `${Math.min(size * 1.5, 350)}ms`;
 
-    // Create a container for our ripple effect so we don't need to change the parent's style
-    const container = document.createElement('span');
+    const newRipple = {
+      style: {
+        backgroundColor: calculatedRippleColor,
+        left: touchX,
+        top: touchY,
+        width: size,
+        height: size,
+        animationDuration
+      },
+      animationType: "in"
+    };
 
-    container.setAttribute('data-paper-ripple', '');
-
-    Object.assign(container.style, {
-      position: 'absolute',
-      pointerEvents: 'none',
-      top: '0',
-      left: '0',
-      right: '0',
-      bottom: '0',
-      borderTopLeftRadius: style.borderTopLeftRadius,
-      borderTopRightRadius: style.borderTopRightRadius,
-      borderBottomRightRadius: style.borderBottomRightRadius,
-      borderBottomLeftRadius: style.borderBottomLeftRadius,
-      overflow: centered ? 'visible' : 'hidden',
-    });
-
-    // Create span to show the ripple effect
-    const ripple = document.createElement('span');
-
-    Object.assign(ripple.style, {
-      position: 'absolute',
-      pointerEvents: 'none',
-      backgroundColor: calculatedRippleColor,
-      borderRadius: '50%',
-
-      /* Transition configuration */
-      transitionProperty: 'transform opacity',
-      transitionDuration: `${Math.min(size * 1.5, 350)}ms`,
-      transitionTimingFunction: 'linear',
-      transformOrigin: 'center',
-
-      /* We'll animate these properties */
-      transform: 'translate3d(-50%, -50%, 0) scale3d(0.1, 0.1, 0.1)',
-      opacity: '0.5',
-
-      // Position the ripple where cursor was
-      left: `${touchX}px`,
-      top: `${touchY}px`,
-      width: `${size}px`,
-      height: `${size}px`,
-    });
-
-    // Finally, append it to DOM
-    container.appendChild(ripple);
-    button.appendChild(container);
-
-    // rAF runs in the same frame as the event handler
-    // Use double rAF to ensure the transition class is added in next frame
-    // This will make sure that the transition animation is triggered
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        Object.assign(ripple.style, {
-          transform: 'translate3d(-50%, -50%, 0) scale3d(1, 1, 1)',
-          opacity: '1',
-        });
-      });
-    });
+    setRippleArray([...rippleArray, newRipple]);
   };
 
-  private handlePressOut = (e: any) => {
-    this.props.onPressOut && this.props.onPressOut(e);
-
-    const containers = e.currentTarget.querySelectorAll(
-      '[data-paper-ripple]'
-    ) as HTMLElement[];
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        containers.forEach((container) => {
-          // @ts-ignore
-          const ripple = container.firstChild;
-
-          // @ts-ignore
-          Object.assign(ripple.style, {
-            transitionDuration: '250ms',
-            opacity: 0,
-          });
-
-          // Finally remove the span after the transition
-          setTimeout(() => {
-            // @ts-ignore
-            const { parentNode } = container;
-
-            if (parentNode) {
-              parentNode.removeChild(container);
-            }
-          }, 500);
-        });
-      });
-    });
+  const onAnimationEnd = (ripple: any) => {
+    if (ripple.animationType === "out") {
+      setRippleArray((prev) => prev.filter((p) => p !== ripple));
+    }
   };
 
-  render() {
-    /* eslint-disable @typescript-eslint/no-unused-vars */
-    const {
-      style,
-      background,
-      borderless,
-      disabled: disabledProp,
-      rippleColor,
-      underlayColor,
-      children,
-      theme,
-      ...rest
-    } = this.props;
-    /* eslint-enable @typescript-eslint/no-unused-vars */
+  const handlePressOut = (e: any) => {
+    props.onPressOut && props.onPressOut(e);
 
-    const disabled = disabledProp || !this.props.onPress;
-
-    return (
-      <TouchableWithoutFeedback
-        {...rest}
-        onPressIn={this.handlePressIn}
-        onPressOut={this.handlePressOut}
-        disabled={disabled}
-      >
-        <View
-          style={[styles.touchable, borderless && styles.borderless, style]}
-        >
-          {React.Children.only(children)}
-        </View>
-      </TouchableWithoutFeedback>
+    setRippleArray((prev) =>
+      prev.map((p, i) =>
+        i === prev.length - 1 ? { ...p, animationType: "out" } : p
+      )
     );
-  }
+  };
+
+  const disabled = disabledProp || !props.onPress;
+
+  const rippleContainerStyle = React.useMemo(() => {
+    const flattenStyles = StyleSheet.flatten(style);
+    return pickRadiusStyles(flattenStyles);
+  }, [style]);
+
+  return (
+    <TouchableWithoutFeedback
+      {...rest}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
+      disabled={disabled}
+    >
+      <View style={[styles.touchable, borderless && styles.borderless, style]}>
+        {React.Children.only(children)}
+        <View
+          style={[
+            styles.rippleContainer,
+            rippleContainerStyle,
+            { overflow: centered ? "visible" : "hidden" }
+          ]}
+          pointerEvents="none"
+        >
+          {rippleArray.map((ripple, index) => {
+            const { animationType, style } = ripple;
+            const rippleStyle: any[] =
+              animationType === "in"
+                ? [styles.ripple, styles.animatedIn, styles.rippleIn, style]
+                : [styles.ripple, styles.animatedOut, styles.rippleOut, style];
+            return (
+              <ViewWithAnimationEnd
+                key={index}
+                onAnimationEnd={() => onAnimationEnd(ripple)}
+                style={rippleStyle}
+              />
+            );
+          })}
+        </View>
+      </View>
+    </TouchableWithoutFeedback>
+  );
 }
+
+function pickRadiusStyles({
+  borderBottomEndRadius,
+  borderBottomLeftRadius,
+  borderBottomRightRadius,
+  borderBottomStartRadius,
+  borderRadius,
+  borderTopEndRadius,
+  borderTopLeftRadius,
+  borderTopRightRadius,
+  borderTopStartRadius
+}: ViewStyle) {
+  return {
+    borderBottomEndRadius,
+    borderBottomLeftRadius,
+    borderBottomRightRadius,
+    borderBottomStartRadius,
+    borderRadius,
+    borderTopEndRadius,
+    borderTopLeftRadius,
+    borderTopRightRadius,
+    borderTopStartRadius
+  };
+}
+
+const fromRippleStyle = {
+  opacity: 0.5,
+  transform: [
+    { translateY: "-50%" as any },
+    { translateX: "-50%" as any },
+    { scale: "0.1" as any }
+  ]
+};
+
+const toRippleStyle = {
+  opacity: 1,
+  transform: [
+    { translateY: "-50%" as any },
+    { translateX: "-50%" as any },
+    { scale: "1" as any }
+  ]
+};
+
+const toRippleOutStyle = {
+  opacity: 0,
+  transform: [
+    { translateY: "-50%" as any },
+    { translateX: "-50%" as any },
+    { scale: "1" as any }
+  ]
+};
 
 const styles = StyleSheet.create({
   touchable: {
-    position: 'relative',
+    position: "relative"
   },
   borderless: {
-    overflow: 'hidden',
+    overflow: "hidden"
   },
+  rippleContainer: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    overflow: "hidden"
+  },
+  ripple: {
+    position: "absolute",
+    //@ts-ignore
+    willChange: "transform, opacity, scale, left, top" as any,
+    borderRadius: "50%" as any,
+    transformOrigin: "center"
+  },
+  animatedIn: {
+    //@ts-ignore
+    animationDuration: `${RIPPLE_DURATION}ms`,
+    animationTimingFunction: "linear"
+  },
+  animatedOut: {
+    //@ts-ignore
+    animationDuration: `${RIPPLE_DURATION}ms`,
+    animationTimingFunction: "linear"
+  },
+
+  rippleIn: {
+    ...toRippleStyle,
+    //@ts-ignore
+    animationKeyframes: {
+      from: fromRippleStyle,
+      to: toRippleStyle
+    }
+  },
+  rippleOut: {
+    ...toRippleOutStyle,
+    //@ts-ignore
+    animationKeyframes: {
+      from: toRippleStyle,
+      to: toRippleOutStyle
+    }
+  }
 });
 
-export default withTheme(TouchableRipple);
+export default TouchableRipple;
