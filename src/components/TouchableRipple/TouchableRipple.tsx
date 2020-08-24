@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   TouchableWithoutFeedback,
   View,
@@ -6,8 +6,8 @@ import {
   StyleSheet,
   StyleProp,
   GestureResponderEvent,
-  unstable_createElement
-} from "react-native";
+  unstable_createElement,
+} from 'react-native';
 import color from 'color';
 import { withTheme } from '../../core/theming';
 
@@ -88,8 +88,7 @@ type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
 
 const RIPPLE_DURATION = 250;
 
-
-const ViewWithAnimationEnd = (props) => unstable_createElement("div", props);
+const ViewWithAnimationEnd = (props) => unstable_createElement('div', props);
 
 function TouchableRipple(props: Props) {
   const {
@@ -151,16 +150,16 @@ function TouchableRipple(props: Props) {
         top: touchY,
         width: size,
         height: size,
-        animationDuration
+        animationDuration,
       },
-      animationType: "in"
+      animationType: 'in',
     };
 
     setRippleArray([...rippleArray, newRipple]);
   };
 
   const onAnimationEnd = (ripple: any) => {
-    if (ripple.animationType === "out") {
+    if (ripple.animationType === 'out') {
       setRippleArray((prev) => prev.filter((p) => p !== ripple));
     }
   };
@@ -170,7 +169,7 @@ function TouchableRipple(props: Props) {
 
     setRippleArray((prev) =>
       prev.map((p, i) =>
-        i === prev.length - 1 ? { ...p, animationType: "out" } : p
+        i === prev.length - 1 ? { ...p, animationType: 'out' } : p
       )
     );
   };
@@ -195,14 +194,14 @@ function TouchableRipple(props: Props) {
           style={[
             styles.rippleContainer,
             rippleContainerStyle,
-            { overflow: centered ? "visible" : "hidden" }
+            { overflow: centered ? 'visible' : 'hidden' },
           ]}
-          pointerEvents="none"
+          pointerEvents='none'
         >
           {rippleArray.map((ripple, index) => {
             const { animationType, style } = ripple;
             const rippleStyle: any[] =
-              animationType === "in"
+              animationType === 'in'
                 ? [styles.ripple, styles.animatedIn, styles.rippleIn, style]
                 : [styles.ripple, styles.animatedOut, styles.rippleOut, style];
             return (
@@ -228,7 +227,7 @@ function pickRadiusStyles({
   borderTopEndRadius,
   borderTopLeftRadius,
   borderTopRightRadius,
-  borderTopStartRadius
+  borderTopStartRadius,
 }: ViewStyle) {
   return {
     borderBottomEndRadius,
@@ -239,68 +238,69 @@ function pickRadiusStyles({
     borderTopEndRadius,
     borderTopLeftRadius,
     borderTopRightRadius,
-    borderTopStartRadius
+    borderTopStartRadius,
   };
 }
 
 const fromRippleStyle = {
   opacity: 0.5,
   transform: [
-    { translateY: "-50%" as any },
-    { translateX: "-50%" as any },
-    { scale: "0.1" as any }
-  ]
+    { translateY: '-50%' as any },
+    { translateX: '-50%' as any },
+    { scale: '0.1' as any },
+  ],
 };
 
 const toRippleStyle = {
   opacity: 1,
   transform: [
-    { translateY: "-50%" as any },
-    { translateX: "-50%" as any },
-    { scale: "1" as any }
-  ]
+    { translateY: '-50%' as any },
+    { translateX: '-50%' as any },
+    { scale: '1' as any },
+  ],
 };
 
 const toRippleOutStyle = {
   opacity: 0,
   transform: [
-    { translateY: "-50%" as any },
-    { translateX: "-50%" as any },
-    { scale: "1" as any }
-  ]
+    { translateY: '-50%' as any },
+    { translateX: '-50%' as any },
+    { scale: '1' as any },
+  ],
 };
 
 const styles = StyleSheet.create({
   touchable: {
-    position: "relative"
+    position: 'relative',
   },
   borderless: {
-    overflow: "hidden"
+    overflow: 'hidden',
   },
   rippleContainer: {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     right: 0,
     bottom: 0,
     left: 0,
-    overflow: "hidden"
+    overflow: 'hidden',
   },
   ripple: {
-    position: "absolute",
+    position: 'absolute',
     //@ts-ignore
-    willChange: "transform, opacity, scale, left, top" as any,
-    borderRadius: "50%" as any,
-    transformOrigin: "center"
+    willChange: 'transform, opacity, scale, left, top' as any,
+    borderRadius: '50%' as any,
+    transformOrigin: 'center',
   },
   animatedIn: {
     //@ts-ignore
     animationDuration: `${RIPPLE_DURATION}ms`,
-    animationTimingFunction: "linear"
+    animationTimingFunction: 'linear',
   },
   animatedOut: {
     //@ts-ignore
     animationDuration: `${RIPPLE_DURATION}ms`,
-    animationTimingFunction: "linear"
+
+    animationTimingFunction: 'linear',
   },
 
   rippleIn: {
@@ -308,17 +308,17 @@ const styles = StyleSheet.create({
     //@ts-ignore
     animationKeyframes: {
       from: fromRippleStyle,
-      to: toRippleStyle
-    }
+      to: toRippleStyle,
+    },
   },
   rippleOut: {
     ...toRippleOutStyle,
     //@ts-ignore
     animationKeyframes: {
       from: toRippleStyle,
-      to: toRippleOutStyle
-    }
-  }
+      to: toRippleOutStyle,
+    },
+  },
 });
 
 export default withTheme(TouchableRipple);
