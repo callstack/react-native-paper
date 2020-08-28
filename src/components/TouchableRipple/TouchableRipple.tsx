@@ -114,12 +114,14 @@ class TouchableRipple extends React.Component<Props> {
     let touchX;
     let touchY;
 
-    if (centered) {
+    const { changedTouches, touches } = e.nativeEvent;
+    const touch = touches?.[0] ?? changedTouches?.[0];
+
+    // If centered or it was pressed using keyboard - enter or space
+    if (centered || !touch) {
       touchX = dimensions.width / 2;
       touchY = dimensions.height / 2;
     } else {
-      const { changedTouches, touches } = e.nativeEvent;
-      const touch = touches?.[0] ?? changedTouches?.[0];
       touchX = touch.locationX ?? e.pageX;
       touchY = touch.locationY ?? e.pageY;
     }
