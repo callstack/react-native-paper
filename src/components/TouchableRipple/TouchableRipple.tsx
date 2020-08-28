@@ -111,8 +111,6 @@ class TouchableRipple extends React.Component<Props> {
     const style = window.getComputedStyle(button);
     const dimensions = button.getBoundingClientRect();
 
-    console.log('!@#', { style, dimensions });
-
     let touchX;
     let touchY;
 
