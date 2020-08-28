@@ -111,17 +111,21 @@ class TouchableRipple extends React.Component<Props> {
     const style = window.getComputedStyle(button);
     const dimensions = button.getBoundingClientRect();
 
+    console.log('!@#', { style, dimensions });
+
     let touchX;
     let touchY;
 
-    if (centered) {
+    const { changedTouches, touches } = e.nativeEvent;
+
+    // If centered or it was pressed using keyboard - enter or space
+    if (centered || (!changedTouches && !touches)) {
       touchX = dimensions.width / 2;
       touchY = dimensions.height / 2;
     } else {
-      const { changedTouches, touches } = e.nativeEvent;
       const touch = touches?.[0] ?? changedTouches?.[0];
-      touchX = touch.locationX ?? e.pageX;
-      touchY = touch.locationY ?? e.pageY;
+      touchX = touch?.locationX ?? e.pageX;
+      touchY = touch?.locationY ?? e.pageY;
     }
 
     // Get the size of the button to determine how big the ripple should be
