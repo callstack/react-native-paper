@@ -8,6 +8,7 @@ import {
   ImageSourcePropType,
 } from 'react-native';
 import { withTheme } from '../../core/theming';
+import AvatarText from './AvatarText';
 
 const defaultSize = 64;
 
@@ -16,6 +17,18 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    * Image to display for the `Avatar`.
    */
   source: ImageSourcePropType;
+  /**
+   * Alternative text to avatar.
+   */
+  accessibilityLabel?: string;
+  /**
+   * Boolean to indicate erros with the image
+   */
+  onError?: boolean;
+  /**
+   * Boolean to indicate the image is loading
+   */
+  onLoad?: boolean;
   /**
    * Size of the avatar.
    */
@@ -42,7 +55,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * import { Avatar } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Avatar.Image size={24} source={require('../assets/avatar.png')} />
+ *   <Avatar.Image size={24}  accessibilityLabel="avatar" source={require('../assets/avatar.png')} />
  * );
  * export default MyComponent
  * ```
@@ -52,16 +65,29 @@ class AvatarImage extends React.Component<Props> {
 
   static defaultProps = {
     size: defaultSize,
+    accessibilityLabel: '',
+    onError: false,
+    onLoad: false,
   };
 
   render() {
-    const { size = defaultSize, source, style, theme, ...rest } = this.props;
+    const {
+      accessibilityLabel = '',
+      onError,
+      onLoad,
+      size = defaultSize,
+      source,
+      style,
+      theme,
+      ...rest
+    } = this.props;
+
     const { colors } = theme;
 
     const { backgroundColor = colors.primary } =
       StyleSheet.flatten(style) || {};
 
-    return (
+    return onLoad || onError ? (
       <View
         style={[
           {
@@ -79,6 +105,8 @@ class AvatarImage extends React.Component<Props> {
           style={{ width: size, height: size, borderRadius: size / 2 }}
         />
       </View>
+    ) : (
+      <AvatarText size={size} label={accessibilityLabel} />
     );
   }
 }
