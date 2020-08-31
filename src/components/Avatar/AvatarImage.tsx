@@ -1,11 +1,12 @@
 import * as React from 'react';
 import {
   Image,
+  ImageProps,
+  ImageSourcePropType,
   StyleSheet,
   View,
   ViewStyle,
   StyleProp,
-  ImageSourcePropType,
 } from 'react-native';
 import { withTheme } from '../../core/theming';
 
@@ -16,6 +17,10 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    * Image to display for the `Avatar`.
    */
   source: ImageSourcePropType;
+  /**
+   * Props for the `Image`
+   */
+  imageProps?: ImageProps;
   /**
    * Size of the avatar.
    */
@@ -55,7 +60,14 @@ class AvatarImage extends React.Component<Props> {
   };
 
   render() {
-    const { size = defaultSize, source, style, theme, ...rest } = this.props;
+    const {
+      size = defaultSize,
+      source,
+      style,
+      theme,
+      imageProps,
+      ...rest
+    } = this.props;
     const { colors } = theme;
 
     const { backgroundColor = colors.primary } =
@@ -77,6 +89,7 @@ class AvatarImage extends React.Component<Props> {
         <Image
           source={source}
           style={{ width: size, height: size, borderRadius: size / 2 }}
+          {...imageProps}
         />
       </View>
     );
