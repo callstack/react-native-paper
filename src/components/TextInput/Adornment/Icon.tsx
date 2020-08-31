@@ -10,7 +10,7 @@ type Props = $Omit<
 > & {
   name: string;
   onPress?: () => void;
-  forceTextInputFocus?: Boolean;
+  forceTextInputFocus?: boolean;
   style?: StyleProp<ViewStyle>;
   theme?: ReactNativePaper.Theme;
 };
