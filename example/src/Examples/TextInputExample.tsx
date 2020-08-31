@@ -174,6 +174,7 @@ const TextInputExample = () => {
                   payload: !flatTextSecureEntry,
                 })
               }
+              forceTextInputFocus={false}
             />
           }
         />
