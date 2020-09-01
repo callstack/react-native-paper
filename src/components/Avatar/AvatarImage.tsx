@@ -13,7 +13,7 @@ const defaultSize = 64;
 
 export type AvatarImageSource =
   | ImageSourcePropType
-  | (props: { size: number }) => React.ReactNode;
+  | ((props: { size: number }) => React.ReactNode);
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
