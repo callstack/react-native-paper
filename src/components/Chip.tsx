@@ -11,7 +11,9 @@ import {
   ViewStyle,
 } from 'react-native';
 import color from 'color';
-import Icon, { IconSource } from './Icon';
+import type { IconSource } from './Icon';
+import Icon from './Icon';
+import MaterialCommunityIcon from './MaterialCommunityIcon';
 import Surface from './Surface';
 import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple/TouchableRipple';
@@ -286,11 +288,20 @@ class Chip extends React.Component<Props, State> {
                   avatar ? [styles.avatar, styles.avatarSelected] : null,
                 ]}
               >
-                <Icon
-                  source={icon || 'check'}
-                  color={avatar ? white : iconColor}
-                  size={18}
-                />
+                {icon ? (
+                  <Icon
+                    source={icon}
+                    color={avatar ? white : iconColor}
+                    size={18}
+                  />
+                ) : (
+                  <MaterialCommunityIcon
+                    name="check"
+                    color={avatar ? white : iconColor}
+                    size={18}
+                    direction="ltr"
+                  />
+                )}
               </View>
             ) : null}
             <Text
@@ -320,7 +331,12 @@ class Chip extends React.Component<Props, State> {
             accessibilityLabel={closeIconAccessibilityLabel}
           >
             <View style={[styles.icon, styles.closeIcon]}>
-              <Icon source="close-circle" size={16} color={iconColor} />
+              <MaterialCommunityIcon
+                name="close-circle"
+                size={16}
+                color={iconColor}
+                direction="ltr"
+              />
             </View>
           </TouchableWithoutFeedback>
         ) : null}
