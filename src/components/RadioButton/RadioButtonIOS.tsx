@@ -4,7 +4,7 @@ import color from 'color';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import TouchableRipple from '../TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren } from '../../types';
 
@@ -37,7 +37,8 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
 
 /**
  * Radio buttons allow the selection a single option from a set.
- * This component follows platform guidelines for iOS.
+ * This component follows platform guidelines for iOS, but can be used
+ * on any platform.
  *
  * <div class="screenshots">
  *   <figure>

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import color from 'color';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import TouchableRipple from '../TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren } from '../../types';
 
@@ -31,7 +31,8 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
 
 /**
  * Checkboxes allow the selection of multiple options from a set.
- * This component follows platform guidelines for iOS.
+ * This component follows platform guidelines for iOS, but can be used
+ * on any platform.
  *
  * <div class="screenshots">
  *   <figure>
@@ -75,8 +76,8 @@ class CheckboxIOS extends React.Component<Props> {
         disabled={disabled}
         accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
         accessibilityComponentType="button"
-        accessibilityRole="button"
-        accessibilityState={{ disabled }}
+        accessibilityRole="checkbox"
+        accessibilityState={{ disabled, checked }}
         accessibilityLiveRegion="polite"
         style={styles.container}
       >

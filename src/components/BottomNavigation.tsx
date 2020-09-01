@@ -19,7 +19,7 @@ import overlay from '../styles/overlay';
 import Icon, { IconSource } from './Icon';
 import Surface from './Surface';
 import Badge from './Badge';
-import TouchableRipple from './TouchableRipple';
+import TouchableRipple from './TouchableRipple/TouchableRipple';
 import Text from './Typography/Text';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
@@ -316,7 +316,7 @@ class SceneComponent extends React.PureComponent<any> {
  * For integration with React Navigation, you can use [react-navigation-material-bottom-tab-navigator](https://github.com/react-navigation/react-navigation-material-bottom-tab-navigator).
  *
  * By default Bottom navigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
- * See [Dark Theme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more informations
+ * See [Dark Theme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more information.
  *
  * <div class="screenshots">
  *   <img class="medium" src="screenshots/bottom-navigation.gif" />
@@ -1060,6 +1060,7 @@ const styles = StyleSheet.create({
     ...(Platform.OS === 'web'
       ? {
           whiteSpace: 'nowrap',
+          alignSelf: 'center',
         }
       : null),
   },

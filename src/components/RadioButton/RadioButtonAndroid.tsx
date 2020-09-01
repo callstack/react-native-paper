@@ -3,7 +3,7 @@ import { Animated, View, StyleSheet } from 'react-native';
 import color from 'color';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
-import TouchableRipple from '../TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren } from '../../types';
 
@@ -47,7 +47,8 @@ const BORDER_WIDTH = 2;
 
 /**
  * Radio buttons allow the selection a single option from a set.
- * This component follows platform guidelines for Android.
+ * This component follows platform guidelines for Android, but can be used
+ * on any platform.
  *
  * <div class="screenshots">
  *   <figure>

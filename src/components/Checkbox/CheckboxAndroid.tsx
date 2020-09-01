@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Animated, View, StyleSheet } from 'react-native';
 import color from 'color';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import TouchableRipple from '../TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren } from '../../types';
 
@@ -42,7 +42,8 @@ const ANIMATION_DURATION = 100;
 
 /**
  * Checkboxes allow the selection of multiple options from a set.
- * This component follows platform guidelines for Android.
+ * This component follows platform guidelines for Android, but can be used
+ * on any platform.
  *
  * <div class="screenshots">
  *   <figure>
@@ -128,8 +129,8 @@ class CheckboxAndroid extends React.Component<Props, State> {
         disabled={disabled}
         accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
         accessibilityComponentType="button"
-        accessibilityRole="button"
-        accessibilityState={{ disabled }}
+        accessibilityRole="checkbox"
+        accessibilityState={{ disabled, checked }}
         accessibilityLiveRegion="polite"
         style={styles.container}
       >

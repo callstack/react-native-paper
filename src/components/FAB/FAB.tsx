@@ -6,8 +6,9 @@ import ActivityIndicator from '../ActivityIndicator';
 import FABGroup, { FABGroup as _FABGroup } from './FABGroup';
 import Surface from '../Surface';
 import CrossFadeIcon from '../CrossFadeIcon';
+import Icon from '../Icon';
 import Text from '../Typography/Text';
-import TouchableRipple from '../TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren } from '../../types';
@@ -27,6 +28,10 @@ type Props = $RemoveChildren<typeof Surface> & {
    * Uses `label` by default if specified.
    */
   accessibilityLabel?: string;
+  /**
+   * Whether an icon change is animated.
+   */
+  animated?: boolean;
   /**
    *  Whether FAB is mini-sized, used to create visual continuity with other elements. This has no effect if `label` is specified.
    */
@@ -51,6 +56,10 @@ type Props = $RemoveChildren<typeof Surface> & {
    * Function to execute on press.
    */
   onPress?: () => void;
+  /**
+   * Function to execute on long press.
+   */
+  onLongPress?: () => void;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -137,9 +146,11 @@ class FAB extends React.Component<Props, State> {
       icon,
       label,
       accessibilityLabel = label,
+      animated = true,
       color: customColor,
       disabled,
       onPress,
+      onLongPress,
       theme,
       style,
       visible,
@@ -148,6 +159,8 @@ class FAB extends React.Component<Props, State> {
       ...rest
     } = this.props;
     const { visibility } = this.state;
+
+    const IconComponent = animated ? CrossFadeIcon : Icon;
 
     const disabledColor = color(theme.dark ? white : black)
       .alpha(0.12)
@@ -198,6 +211,7 @@ class FAB extends React.Component<Props, State> {
         <TouchableRipple
           borderless
           onPress={onPress}
+          onLongPress={onLongPress}
           rippleColor={rippleColor}
           disabled={disabled}
           accessibilityLabel={accessibilityLabel}
@@ -216,7 +230,7 @@ class FAB extends React.Component<Props, State> {
             pointerEvents="none"
           >
             {icon && loading !== true ? (
-              <CrossFadeIcon source={icon} size={24} color={foregroundColor} />
+              <IconComponent source={icon} size={24} color={foregroundColor} />
             ) : null}
             {loading ? (
               <ActivityIndicator size={18} color={foregroundColor} />

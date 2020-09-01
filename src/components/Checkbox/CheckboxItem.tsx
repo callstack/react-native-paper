@@ -10,7 +10,7 @@ import {
 
 import CheckBox from './Checkbox';
 import Text from '../Typography/Text';
-import TouchableRipple from '../TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 
 type Props = {
@@ -88,7 +88,7 @@ class CheckboxItem extends React.Component<Props> {
     return (
       <TouchableRipple onPress={onPress}>
         <View style={[styles.container, style]} pointerEvents="none">
-          <Text style={[styles.label, labelStyle, { color: colors.primary }]}>
+          <Text style={[styles.label, { color: colors.primary }, labelStyle]}>
             {label}
           </Text>
           <CheckBox status={status} {...props}></CheckBox>

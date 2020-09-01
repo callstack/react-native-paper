@@ -10,6 +10,7 @@ exports[`renders chip with close button 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0.5,
       "elevation": 0,
+      "flexDirection": "row",
     }
   }
 >
@@ -54,6 +55,7 @@ exports[`renders chip with close button 1`] = `
         style={
           Array [
             Object {
+              "alignSelf": "center",
               "padding": 4,
             },
             null,
@@ -117,7 +119,7 @@ exports[`renders chip with close button 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "400",
                 "marginLeft": 4,
-                "marginRight": 4,
+                "marginRight": 0,
               },
               undefined,
             ],
@@ -126,58 +128,66 @@ exports[`renders chip with close button 1`] = `
       >
         Example Chip
       </Text>
-      <View
-        accessible={true}
-        focusable={true}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        style={
+    </View>
+  </View>
+  <View
+    accessibilityLabel="Close"
+    accessibilityRole="button"
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignSelf": "center",
+          "padding": 4,
+        },
+        Object {
+          "marginRight": 4,
+        },
+      ]
+    }
+  >
+    <Text
+      accessibilityElementsHidden={true}
+      allowFontScaling={false}
+      importantForAccessibility="no-hide-descendants"
+      pointerEvents="none"
+      style={
+        Array [
           Object {
-            "padding": 4,
-          }
-        }
-      >
-        <Text
-          accessibilityElementsHidden={true}
-          allowFontScaling={false}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          style={
-            Array [
-              Object {
-                "color": "rgba(0, 0, 0, 0.54)",
-                "fontSize": 16,
-              },
-              Array [
+            "color": "rgba(0, 0, 0, 0.54)",
+            "fontSize": 16,
+          },
+          Array [
+            Object {
+              "transform": Array [
                 Object {
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
+                  "scaleX": 1,
                 },
               ],
-              Object {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
-            ]
-          }
-        >
-          
-        </Text>
-      </View>
-    </View>
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
+          Object {
+            "fontFamily": "Material Design Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          Object {},
+        ]
+      }
+    >
+      
+    </Text>
   </View>
 </View>
 `;
@@ -192,6 +202,7 @@ exports[`renders chip with icon 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0.5,
       "elevation": 0,
+      "flexDirection": "row",
     }
   }
 >
@@ -236,6 +247,7 @@ exports[`renders chip with icon 1`] = `
         style={
           Array [
             Object {
+              "alignSelf": "center",
               "padding": 4,
             },
             null,
@@ -323,6 +335,7 @@ exports[`renders chip with onPress 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0.5,
       "elevation": 0,
+      "flexDirection": "row",
     }
   }
 >
@@ -409,6 +422,7 @@ exports[`renders outlined disabled chip 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0.5,
       "elevation": 0,
+      "flexDirection": "row",
     }
   }
 >
@@ -495,6 +509,7 @@ exports[`renders selected chip 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0.5,
       "elevation": 0,
+      "flexDirection": "row",
     }
   }
 >
@@ -539,6 +554,7 @@ exports[`renders selected chip 1`] = `
         style={
           Array [
             Object {
+              "alignSelf": "center",
               "padding": 4,
             },
             null,

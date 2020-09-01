@@ -77,6 +77,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
       onRightAffixLayoutChange,
       left,
       right,
+      placeholderTextColor,
       ...rest
     } = this.props;
 
@@ -304,7 +305,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
               placeholder: label
                 ? parentState.placeholder
                 : this.props.placeholder,
-              placeholderTextColor: placeholderColor,
+              placeholderTextColor: placeholderTextColor || placeholderColor,
               editable: !disabled && editable,
               selectionColor:
                 typeof selectionColor === 'undefined'

@@ -72,7 +72,6 @@ type State = {
  *           <DataTable.Title numeric>Fat (g)</DataTable.Title>
  *         </DataTable.Header>
  *       </DataTable>
- *   </Card>
  * );
  *
  * export default MyComponent;
