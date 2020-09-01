@@ -267,7 +267,7 @@ class Chip extends React.Component<Props, State> {
           accessibilityState={accessibilityState}
           testID={testID}
         >
-          <View style={styles.content}>
+          <View style={[styles.content, { paddingRight: onClose ? 32 : 4 }]}>
             {avatar && !icon ? (
               <View
                 style={[styles.avatarWrapper, disabled && { opacity: 0.26 }]}
@@ -323,22 +323,24 @@ class Chip extends React.Component<Props, State> {
           </View>
         </TouchableRipple>
         {onClose ? (
-          <TouchableWithoutFeedback
-            onPress={onClose}
-            accessibilityTraits="button"
-            accessibilityComponentType="button"
-            accessibilityRole="button"
-            accessibilityLabel={closeIconAccessibilityLabel}
-          >
-            <View style={[styles.icon, styles.closeIcon]}>
-              <MaterialCommunityIcon
-                name="close-circle"
-                size={16}
-                color={iconColor}
-                direction="ltr"
-              />
-            </View>
-          </TouchableWithoutFeedback>
+          <View style={styles.closeButtonStyle}>
+            <TouchableWithoutFeedback
+              onPress={onClose}
+              accessibilityTraits="button"
+              accessibilityComponentType="button"
+              accessibilityRole="button"
+              accessibilityLabel={closeIconAccessibilityLabel}
+            >
+              <View style={[styles.icon, styles.closeIcon]}>
+                <MaterialCommunityIcon
+                  name="close-circle"
+                  size={16}
+                  color={iconColor}
+                  direction="ltr"
+                />
+              </View>
+            </TouchableWithoutFeedback>
+          </View>
         ) : null}
       </Surface>
     );
@@ -354,7 +356,8 @@ const styles = StyleSheet.create({
   content: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 4,
+    paddingLeft: 4,
+    position: 'relative',
   },
   icon: {
     padding: 4,
@@ -382,6 +385,13 @@ const styles = StyleSheet.create({
     top: 4,
     left: 4,
     backgroundColor: 'rgba(0, 0, 0, .29)',
+  },
+  closeButtonStyle: {
+    position: 'absolute',
+    right: 0,
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
