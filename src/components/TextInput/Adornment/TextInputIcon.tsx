@@ -30,7 +30,7 @@ const StyleContext = React.createContext<StyleContextType>({
   forceFocus: () => {},
 });
 
-export const IconAdornment: React.FunctionComponent<
+const IconAdornment: React.FunctionComponent<
   {
     testID: string;
     icon: React.ReactNode;
@@ -98,3 +98,6 @@ const styles = StyleSheet.create({
 });
 
 export default TextInputIcon;
+
+// @component-docs ignore-next-line
+export { IconAdornment };
