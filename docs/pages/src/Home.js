@@ -32,7 +32,7 @@ export default class Home extends React.Component<{}> {
             guidelines.
           </p>
           <a
-            href="https://snack.expo.io/@satya164/github.com-callstack-react-native-paper:example"
+            href="https://snack.expo.io/@react-native-paper/github.com-callstack-react-native-paper:example"
             target="_blank"
             rel="noopener noreferrer"
           >
