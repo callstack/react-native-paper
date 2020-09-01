@@ -13,11 +13,13 @@ const defaultSize = 64;
 
 export type AvatarImageSource =
   | ImageSourcePropType
-  | ((props: { size: number }) => React.ReactNode);
+  | (props: { size: number }) => React.ReactNode;
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Image to display for the `Avatar`.
+   * It accepts a standard React Native Image `source` prop
+   * Or a function that returns an `Image`.
    */
   source: AvatarImageSource;
   /**
