@@ -44,11 +44,17 @@ exports[`renders chip with close button 1`] = `
   >
     <View
       style={
-        Object {
-          "alignItems": "center",
-          "flexDirection": "row",
-          "paddingHorizontal": 4,
-        }
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "paddingLeft": 4,
+            "position": "relative",
+          },
+          Object {
+            "paddingRight": 32,
+          },
+        ]
       }
     >
       <View
@@ -131,63 +137,75 @@ exports[`renders chip with close button 1`] = `
     </View>
   </View>
   <View
-    accessibilityLabel="Close"
-    accessibilityRole="button"
-    accessible={true}
-    focusable={true}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "alignSelf": "center",
-          "padding": 4,
-        },
-        Object {
-          "marginRight": 4,
-        },
-      ]
+      Object {
+        "alignItems": "center",
+        "height": "100%",
+        "justifyContent": "center",
+        "position": "absolute",
+        "right": 0,
+      }
     }
   >
-    <Text
-      accessibilityElementsHidden={true}
-      allowFontScaling={false}
-      importantForAccessibility="no-hide-descendants"
-      pointerEvents="none"
+    <View
+      accessibilityLabel="Close"
+      accessibilityRole="button"
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Array [
           Object {
-            "color": "rgba(0, 0, 0, 0.54)",
-            "fontSize": 16,
+            "alignSelf": "center",
+            "padding": 4,
           },
-          Array [
-            Object {
-              "transform": Array [
-                Object {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            Object {
-              "backgroundColor": "transparent",
-            },
-          ],
           Object {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
+            "marginRight": 4,
           },
-          Object {},
         ]
       }
     >
-      
-    </Text>
+      <Text
+        accessibilityElementsHidden={true}
+        allowFontScaling={false}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        style={
+          Array [
+            Object {
+              "color": "rgba(0, 0, 0, 0.54)",
+              "fontSize": 16,
+            },
+            Array [
+              Object {
+                "transform": Array [
+                  Object {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              Object {
+                "backgroundColor": "transparent",
+              },
+            ],
+            Object {
+              "fontFamily": "Material Design Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
   </View>
 </View>
 `;
@@ -236,11 +254,17 @@ exports[`renders chip with icon 1`] = `
   >
     <View
       style={
-        Object {
-          "alignItems": "center",
-          "flexDirection": "row",
-          "paddingHorizontal": 4,
-        }
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "paddingLeft": 4,
+            "position": "relative",
+          },
+          Object {
+            "paddingRight": 4,
+          },
+        ]
       }
     >
       <View
@@ -369,11 +393,17 @@ exports[`renders chip with onPress 1`] = `
   >
     <View
       style={
-        Object {
-          "alignItems": "center",
-          "flexDirection": "row",
-          "paddingHorizontal": 4,
-        }
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "paddingLeft": 4,
+            "position": "relative",
+          },
+          Object {
+            "paddingRight": 4,
+          },
+        ]
       }
     >
       <Text
@@ -456,11 +486,17 @@ exports[`renders outlined disabled chip 1`] = `
   >
     <View
       style={
-        Object {
-          "alignItems": "center",
-          "flexDirection": "row",
-          "paddingHorizontal": 4,
-        }
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "paddingLeft": 4,
+            "position": "relative",
+          },
+          Object {
+            "paddingRight": 4,
+          },
+        ]
       }
     >
       <Text
@@ -543,11 +579,17 @@ exports[`renders selected chip 1`] = `
   >
     <View
       style={
-        Object {
-          "alignItems": "center",
-          "flexDirection": "row",
-          "paddingHorizontal": 4,
-        }
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "paddingLeft": 4,
+            "position": "relative",
+          },
+          Object {
+            "paddingRight": 4,
+          },
+        ]
       }
     >
       <View
