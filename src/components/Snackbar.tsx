@@ -52,11 +52,6 @@ type Props = React.ComponentProps<typeof Surface> & {
   theme: ReactNativePaper.Theme;
 };
 
-type State = {
-  opacity: Animated.Value;
-  hidden: boolean;
-};
-
 const DURATION_SHORT = 4000;
 const DURATION_MEDIUM = 7000;
 const DURATION_LONG = 10000;
@@ -109,179 +104,156 @@ const DURATION_LONG = 10000;
  * export default MyComponent;
  * ```
  */
-class Snackbar extends React.Component<Props, State> {
-  /**
-   * Show the Snackbar for a short duration.
-   */
-  static DURATION_SHORT = DURATION_SHORT;
+const Snackbar = ({
+  visible,
+  action,
+  duration = DURATION_MEDIUM,
+  onDismiss,
+  children,
+  wrapperStyle,
+  style,
+  theme,
+  ...rest
+}: Props) => {
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [opacity, setOpacity] = React.useState<Animated.Value>(
+    new Animated.Value(0.0)
+  );
+  const [hidden, setHidden] = React.useState<boolean>(!visible);
 
-  /**
-   * Show the Snackbar for a medium duration.
-   */
-  static DURATION_MEDIUM = DURATION_MEDIUM;
+  let hideTimeout: ReturnType<typeof setTimeout>;
 
-  /**
-   * Show the Snackbar for a long duration.
-   */
-  static DURATION_LONG = DURATION_LONG;
+  React.useEffect(() => {
+    if (visible) show();
 
-  static defaultProps = {
-    duration: DURATION_MEDIUM,
-  };
+    return () => {
+      if (hideTimeout) clearTimeout(hideTimeout);
+    };
+  }, []);
 
-  state = {
-    opacity: new Animated.Value(0.0),
-    hidden: !this.props.visible,
-  };
+  React.useEffect(() => {
+    toggle();
+  }, [visible]);
 
-  componentDidMount() {
-    if (this.props.visible) {
-      this.show();
-    }
-  }
-
-  componentDidUpdate(prevProps: Props) {
-    if (prevProps.visible !== this.props.visible) {
-      this.toggle();
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.hideTimeout) {
-      clearTimeout(this.hideTimeout);
-    }
-  }
-
-  private toggle = () => {
-    if (this.props.visible) {
-      this.show();
+  const toggle = () => {
+    if (visible) {
+      show();
     } else {
-      this.hide();
+      hide();
     }
   };
 
-  private show = () => {
-    if (this.hideTimeout) {
-      clearTimeout(this.hideTimeout);
-    }
-    this.setState({
-      hidden: false,
-    });
-    const { scale } = this.props.theme.animation;
-    Animated.timing(this.state.opacity, {
+  const show = () => {
+    if (hideTimeout) clearTimeout(hideTimeout);
+    setHidden(false);
+    const { scale } = theme.animation;
+    Animated.timing(opacity, {
       toValue: 1,
       duration: 200 * scale,
       useNativeDriver: true,
     }).start(({ finished }) => {
       if (finished) {
-        const { duration } = this.props;
         const isInfinity =
           duration === Number.POSITIVE_INFINITY ||
           duration === Number.NEGATIVE_INFINITY;
 
         if (finished && !isInfinity) {
-          this.hideTimeout = setTimeout(this.props.onDismiss, duration);
+          hideTimeout = setTimeout(onDismiss, duration);
         }
       }
     });
   };
 
-  private hide = () => {
-    if (this.hideTimeout) {
-      clearTimeout(this.hideTimeout);
-    }
-    const { scale } = this.props.theme.animation;
-    Animated.timing(this.state.opacity, {
+  const hide = () => {
+    if (hideTimeout) clearTimeout(hideTimeout);
+    const { scale } = theme.animation;
+    Animated.timing(opacity, {
       toValue: 0,
       duration: 100 * scale,
       useNativeDriver: true,
     }).start(({ finished }) => {
-      if (finished) {
-        this.setState({ hidden: true });
-      }
+      if (finished) setHidden(true);
     });
   };
 
-  private hideTimeout?: number;
+  const { colors, roundness } = theme;
 
-  render() {
-    const {
-      children,
-      visible,
-      action,
-      onDismiss,
-      theme,
-      style,
-      wrapperStyle,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      duration,
-      ...rest
-    } = this.props;
-    const { colors, roundness } = theme;
+  if (hidden) return null;
 
-    if (this.state.hidden) {
-      return null;
-    }
-
-    return (
-      <SafeAreaView
+  return (
+    <SafeAreaView
+      pointerEvents="box-none"
+      style={[styles.wrapper, wrapperStyle]}
+    >
+      <Surface
         pointerEvents="box-none"
-        style={[styles.wrapper, wrapperStyle]}
+        accessibilityLiveRegion="polite"
+        style={
+          [
+            styles.container,
+            {
+              borderRadius: roundness,
+              opacity: opacity,
+              transform: [
+                {
+                  scale: visible
+                    ? opacity.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0.9, 1],
+                      })
+                    : 1,
+                },
+              ],
+            },
+            { backgroundColor: colors.onSurface },
+            style,
+          ] as StyleProp<ViewStyle>
+        }
+        {...rest}
       >
-        <Surface
-          pointerEvents="box-none"
-          accessibilityLiveRegion="polite"
-          style={
-            [
-              styles.container,
-              {
-                borderRadius: roundness,
-                opacity: this.state.opacity,
-                transform: [
-                  {
-                    scale: visible
-                      ? this.state.opacity.interpolate({
-                          inputRange: [0, 1],
-                          outputRange: [0.9, 1],
-                        })
-                      : 1,
-                  },
-                ],
-              },
-              { backgroundColor: colors.onSurface },
-              style,
-            ] as StyleProp<ViewStyle>
-          }
-          {...rest}
+        <Text
+          style={[
+            styles.content,
+            { marginRight: action ? 0 : 16, color: colors.surface },
+          ]}
         >
-          <Text
-            style={[
-              styles.content,
-              { marginRight: action ? 0 : 16, color: colors.surface },
-            ]}
+          {children}
+        </Text>
+        {action ? (
+          <Button
+            accessibilityLabel={action.accessibilityLabel}
+            onPress={() => {
+              action.onPress();
+              onDismiss();
+            }}
+            style={styles.button}
+            color={colors.accent}
+            compact
+            mode="text"
           >
-            {children}
-          </Text>
-          {action ? (
-            <Button
-              accessibilityLabel={action.accessibilityLabel}
-              onPress={() => {
-                action.onPress();
-                onDismiss();
-              }}
-              style={styles.button}
-              color={colors.accent}
-              compact
-              mode="text"
-            >
-              {action.label}
-            </Button>
-          ) : null}
-        </Surface>
-      </SafeAreaView>
-    );
-  }
-}
+            {action.label}
+          </Button>
+        ) : null}
+      </Surface>
+    </SafeAreaView>
+  );
+};
+
+/**
+ * Show the Snackbar for a short duration.
+ */
+Snackbar.DURATION_SHORT = DURATION_SHORT;
+
+/**
+ * Show the Snackbar for a medium duration.
+ */
+Snackbar.DURATION_MEDIUM = DURATION_MEDIUM;
+
+/**
+ * Show the Snackbar for a long duration.
+ */
+Snackbar.DURATION_LONG = DURATION_LONG;
 
 const styles = StyleSheet.create({
   wrapper: {
