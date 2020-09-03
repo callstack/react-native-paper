@@ -43,23 +43,19 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * export default MyComponent;
  * ```
  */
-class DialogActions extends React.Component<Props> {
-  static displayName = 'Dialog.Actions';
+const DialogActions = (props: Props) => (
+  <View {...props} style={[styles.container, props.style]}>
+    {React.Children.map(props.children, (child) =>
+      React.isValidElement(child)
+        ? React.cloneElement(child, {
+            compact: true,
+          })
+        : child
+    )}
+  </View>
+);
 
-  render() {
-    return (
-      <View {...this.props} style={[styles.container, this.props.style]}>
-        {React.Children.map(this.props.children, (child) =>
-          React.isValidElement(child)
-            ? React.cloneElement(child, {
-                compact: true,
-              })
-            : child
-        )}
-      </View>
-    );
-  }
-}
+DialogActions.displayName = 'Dialog.Actions';
 
 const styles = StyleSheet.create({
   container: {
