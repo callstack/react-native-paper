@@ -75,58 +75,54 @@ type Props = React.ComponentProps<typeof Appbar> & {
  * export default MyComponent;
  * ```
  */
-class AppbarHeader extends React.Component<Props> {
-  static displayName = 'Appbar.Header';
+const AppbarHeader = ({
+  // Don't use default props since we check it to know whether we should use SafeAreaView
+  statusBarHeight = APPROX_STATUSBAR_HEIGHT,
+  style,
+  dark,
+  ...rest
+}: Props) => {
+  const { dark: isDarkTheme, colors, mode } = rest.theme;
+  const {
+    height = DEFAULT_APPBAR_HEIGHT,
+    elevation = 4,
+    backgroundColor: customBackground,
+    zIndex = 0,
+    ...restStyle
+  }: ViewStyle = StyleSheet.flatten(style) || {};
+  const backgroundColor = customBackground
+    ? customBackground
+    : isDarkTheme && mode === 'adaptive'
+    ? overlay(elevation, colors.surface)
+    : colors.primary;
+  // Let the user override the behaviour
+  const Wrapper = typeof statusBarHeight === 'number' ? View : SafeAreaView;
 
-  render() {
-    const {
-      // Don't use default props since we check it to know whether we should use SafeAreaView
-      statusBarHeight = APPROX_STATUSBAR_HEIGHT,
-      style,
-      dark,
-      ...rest
-    } = this.props;
-    const { dark: isDarkTheme, colors, mode } = rest.theme;
-    const {
-      height = DEFAULT_APPBAR_HEIGHT,
-      elevation = 4,
-      backgroundColor: customBackground,
-      zIndex = 0,
-      ...restStyle
-    }: ViewStyle = StyleSheet.flatten(style) || {};
-    const backgroundColor = customBackground
-      ? customBackground
-      : isDarkTheme && mode === 'adaptive'
-      ? overlay(elevation, colors.surface)
-      : colors.primary;
-    // Let the user override the behaviour
-    const Wrapper =
-      typeof this.props.statusBarHeight === 'number' ? View : SafeAreaView;
-
-    return (
-      <Wrapper
-        style={
-          [
-            { backgroundColor, zIndex, elevation },
-            shadow(elevation),
-          ] as StyleProp<ViewStyle>
-        }
-      >
-        <Appbar
+  return (
+    <Wrapper
+      style={
+        [
+          { backgroundColor, zIndex, elevation },
+          shadow(elevation),
+        ] as StyleProp<ViewStyle>
+      }
+    >
+      <Appbar
+        //@ts-ignore
+        style={[
           //@ts-ignore
-          style={[
-            //@ts-ignore
-            { height, backgroundColor, marginTop: statusBarHeight },
-            styles.appbar,
-            restStyle,
-          ]}
-          dark={dark}
-          {...rest}
-        />
-      </Wrapper>
-    );
-  }
-}
+          { height, backgroundColor, marginTop: statusBarHeight },
+          styles.appbar,
+          restStyle,
+        ]}
+        dark={dark}
+        {...rest}
+      />
+    </Wrapper>
+  );
+};
+
+AppbarHeader.displayName = 'Appbar.Header';
 
 const styles = StyleSheet.create({
   appbar: {
