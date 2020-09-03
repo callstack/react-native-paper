@@ -122,13 +122,13 @@ const Snackbar = ({
   );
   const [hidden, setHidden] = React.useState<boolean>(!visible);
 
-  let hideTimeout: ReturnType<typeof setTimeout>;
+  const hideTimeout = React.useRef<NodeJS.Timeout | undefined>(undefined);
 
   React.useEffect(() => {
     if (visible) show();
 
     return () => {
-      if (hideTimeout) clearTimeout(hideTimeout);
+      if (hideTimeout.current) clearTimeout(hideTimeout.current);
     };
   }, []);
 
@@ -145,7 +145,7 @@ const Snackbar = ({
   };
 
   const show = () => {
-    if (hideTimeout) clearTimeout(hideTimeout);
+    if (hideTimeout.current) clearTimeout(hideTimeout.current);
     setHidden(false);
     const { scale } = theme.animation;
     Animated.timing(opacity, {
@@ -159,14 +159,14 @@ const Snackbar = ({
           duration === Number.NEGATIVE_INFINITY;
 
         if (finished && !isInfinity) {
-          hideTimeout = setTimeout(onDismiss, duration);
+          hideTimeout.current = setTimeout(onDismiss, duration);
         }
       }
     });
   };
 
   const hide = () => {
-    if (hideTimeout) clearTimeout(hideTimeout);
+    if (hideTimeout.current) clearTimeout(hideTimeout.current);
     const { scale } = theme.animation;
     Animated.timing(opacity, {
       toValue: 0,
