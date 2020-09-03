@@ -79,23 +79,20 @@ type Props = {
  * export default MyComponent;
  * ```
  */
-class Checkbox extends React.Component<Props> {
-  // @component ./CheckboxItem.tsx
-  static Item = CheckboxItem;
+const Checkbox = (props: Props) =>
+  Platform.OS === 'ios' ? (
+    <CheckboxIOS {...props} />
+  ) : (
+    <CheckboxAndroid {...props} />
+  );
 
-  // @component ./CheckboxAndroid.tsx
-  static Android = CheckboxAndroid;
+// @component ./CheckboxItem.tsx
+Checkbox.Item = CheckboxItem;
 
-  // @component ./CheckboxIOS.tsx
-  static IOS = CheckboxIOS;
+// @component ./CheckboxAndroid.tsx
+Checkbox.Android = CheckboxAndroid;
 
-  render() {
-    return Platform.OS === 'ios' ? (
-      <CheckboxIOS {...this.props} />
-    ) : (
-      <CheckboxAndroid {...this.props} />
-    );
-  }
-}
+// @component ./CheckboxIOS.tsx
+Checkbox.IOS = CheckboxIOS;
 
 export default withTheme(Checkbox);
