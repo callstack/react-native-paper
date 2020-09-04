@@ -169,7 +169,6 @@ const FABGroup = ({
   const [animations, setAnimations] = React.useState<Animated.Value[]>([]);
 
   if (actions !== prevActions || open !== prevOpen) {
-    console.log('update animation');
     setAnimations(
       actions.map((_, i) => animations[i] || new Animated.Value(open ? 1 : 0))
     );
