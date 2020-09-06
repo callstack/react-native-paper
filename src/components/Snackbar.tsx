@@ -125,23 +125,18 @@ const Snackbar = ({
   const hideTimeout = React.useRef<NodeJS.Timeout | undefined>(undefined);
 
   React.useEffect(() => {
-    if (visible) show();
-
     return () => {
       if (hideTimeout.current) clearTimeout(hideTimeout.current);
     };
   }, []);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     toggle();
   }, [visible]);
 
   const toggle = () => {
-    if (visible) {
-      show();
-    } else {
-      hide();
-    }
+    if (visible) show();
+    else hide();
   };
 
   const show = () => {

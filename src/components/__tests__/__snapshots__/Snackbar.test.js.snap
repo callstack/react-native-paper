@@ -29,7 +29,7 @@ exports[`renders snackbar with Text as a child 1`] = `
         "flexDirection": "row",
         "justifyContent": "space-between",
         "margin": 8,
-        "opacity": 0,
+        "opacity": 1,
         "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 5,
@@ -39,7 +39,7 @@ exports[`renders snackbar with Text as a child 1`] = `
         "shadowRadius": 6,
         "transform": Array [
           Object {
-            "scale": 0.9,
+            "scale": 1,
           },
         ],
       }
@@ -273,7 +273,7 @@ exports[`renders snackbar with content 1`] = `
         "flexDirection": "row",
         "justifyContent": "space-between",
         "margin": 8,
-        "opacity": 0,
+        "opacity": 1,
         "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 5,
@@ -283,7 +283,7 @@ exports[`renders snackbar with content 1`] = `
         "shadowRadius": 6,
         "transform": Array [
           Object {
-            "scale": 0.9,
+            "scale": 1,
           },
         ],
       }
