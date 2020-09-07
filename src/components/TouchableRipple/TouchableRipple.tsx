@@ -84,18 +84,21 @@ type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
  * export default MyComponent;
  * ```
  */
-class TouchableRipple extends React.Component<Props> {
-  static defaultProps = {
-    borderless: false,
-  };
-
-  /**
-   * Whether ripple effect is supported.
-   */
-  static supported = true;
-
-  private handlePressIn = (e: any) => {
-    const { centered, rippleColor, onPressIn, theme } = this.props;
+const TouchableRipple = ({
+  /* eslint-disable @typescript-eslint/no-unused-vars */
+  style,
+  background,
+  borderless = false,
+  disabled: disabledProp,
+  rippleColor,
+  underlayColor,
+  children,
+  theme,
+  ...rest
+}: /* eslint-disable @typescript-eslint/no-unused-vars */
+Props) => {
+  const handlePressIn = (e: any) => {
+    const { centered, onPressIn } = rest;
 
     onPressIn?.(e);
 
@@ -195,8 +198,8 @@ class TouchableRipple extends React.Component<Props> {
     });
   };
 
-  private handlePressOut = (e: any) => {
-    this.props.onPressOut && this.props.onPressOut(e);
+  const handlePressOut = (e: any) => {
+    rest.onPressOut?.(e);
 
     const containers = e.currentTarget.querySelectorAll(
       '[data-paper-ripple]'
@@ -205,7 +208,6 @@ class TouchableRipple extends React.Component<Props> {
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         containers.forEach((container) => {
-          // @ts-ignore
           const ripple = container.firstChild;
 
           // @ts-ignore
@@ -216,7 +218,6 @@ class TouchableRipple extends React.Component<Props> {
 
           // Finally remove the span after the transition
           setTimeout(() => {
-            // @ts-ignore
             const { parentNode } = container;
 
             if (parentNode) {
@@ -228,39 +229,26 @@ class TouchableRipple extends React.Component<Props> {
     });
   };
 
-  render() {
-    /* eslint-disable @typescript-eslint/no-unused-vars */
-    const {
-      style,
-      background,
-      borderless,
-      disabled: disabledProp,
-      rippleColor,
-      underlayColor,
-      children,
-      theme,
-      ...rest
-    } = this.props;
-    /* eslint-enable @typescript-eslint/no-unused-vars */
+  const disabled = disabledProp || !rest.onPress;
 
-    const disabled = disabledProp || !this.props.onPress;
+  return (
+    <TouchableWithoutFeedback
+      {...rest}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
+      disabled={disabled}
+    >
+      <View style={[styles.touchable, borderless && styles.borderless, style]}>
+        {React.Children.only(children)}
+      </View>
+    </TouchableWithoutFeedback>
+  );
+};
 
-    return (
-      <TouchableWithoutFeedback
-        {...rest}
-        onPressIn={this.handlePressIn}
-        onPressOut={this.handlePressOut}
-        disabled={disabled}
-      >
-        <View
-          style={[styles.touchable, borderless && styles.borderless, style]}
-        >
-          {React.Children.only(children)}
-        </View>
-      </TouchableWithoutFeedback>
-    );
-  }
-}
+/**
+ * Whether ripple effect is supported.
+ */
+TouchableRipple.supported = true;
 
 const styles = StyleSheet.create({
   touchable: {
