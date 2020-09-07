@@ -89,80 +89,77 @@ type Props = {
  *
  * ```
  */
-class ToggleButton extends React.Component<Props> {
-  // @component ./ToggleButtonGroup.tsx
-  static Group = ToggleButtonGroup;
+const ToggleButton = ({
+  icon,
+  size,
+  theme,
+  accessibilityLabel,
+  disabled,
+  style,
+  value,
+  status,
+  onPress,
+  ...rest
+}: Props) => {
+  const borderRadius = theme.roundness;
 
-  // @component ./ToggleButtonRow.tsx
-  static Row = ToggleButtonRow;
+  return (
+    <ToggleButtonGroupContext.Consumer>
+      {(context: { value: string; onValueChange: Function } | null) => {
+        let backgroundColor;
 
-  render() {
-    const {
-      icon,
-      size,
-      theme,
-      accessibilityLabel,
-      disabled,
-      style,
-      value,
-      status,
-      onPress,
-      ...rest
-    } = this.props;
-    const borderRadius = theme.roundness;
+        const checked: boolean | null =
+          (context && context.value === value) || status === 'checked';
 
-    return (
-      <ToggleButtonGroupContext.Consumer>
-        {(context: { value: string; onValueChange: Function } | null) => {
-          let backgroundColor;
+        if (checked) {
+          backgroundColor = theme.dark
+            ? 'rgba(255, 255, 255, .12)'
+            : 'rgba(0, 0, 0, .08)';
+        } else {
+          backgroundColor = 'transparent';
+        }
 
-          const checked: boolean | null =
-            (context && context.value === value) || status === 'checked';
+        return (
+          <IconButton
+            borderless={false}
+            icon={icon}
+            onPress={(e?: GestureResponderEvent | string) => {
+              if (onPress) {
+                onPress(e);
+              }
 
-          if (checked) {
-            backgroundColor = theme.dark
-              ? 'rgba(255, 255, 255, .12)'
-              : 'rgba(0, 0, 0, .08)';
-          } else {
-            backgroundColor = 'transparent';
-          }
+              if (context) {
+                context.onValueChange(!checked ? value : null);
+              }
+            }}
+            size={size}
+            accessibilityLabel={accessibilityLabel}
+            disabled={disabled}
+            style={[
+              styles.content,
+              {
+                backgroundColor,
+                borderRadius,
+                borderColor: color(theme.dark ? white : black)
+                  .alpha(0.29)
+                  .rgb()
+                  .string(),
+              },
+              style,
+            ]}
+            {...rest}
+          />
+        );
+      }}
+    </ToggleButtonGroupContext.Consumer>
+  );
+};
 
-          return (
-            <IconButton
-              borderless={false}
-              icon={icon}
-              onPress={(e?: GestureResponderEvent | string) => {
-                if (onPress) {
-                  onPress(e);
-                }
+// @component ./ToggleButtonGroup.tsx
+ToggleButton.Group = ToggleButtonGroup;
 
-                if (context) {
-                  context.onValueChange(!checked ? value : null);
-                }
-              }}
-              size={size}
-              accessibilityLabel={accessibilityLabel}
-              disabled={disabled}
-              style={[
-                styles.content,
-                {
-                  backgroundColor,
-                  borderRadius,
-                  borderColor: color(theme.dark ? white : black)
-                    .alpha(0.29)
-                    .rgb()
-                    .string(),
-                },
-                style,
-              ]}
-              {...rest}
-            />
-          );
-        }}
-      </ToggleButtonGroupContext.Consumer>
-    );
-  }
-}
+// @component ./ToggleButtonRow.tsx
+ToggleButton.Row = ToggleButtonRow;
 
 const styles = StyleSheet.create({
   content: {

@@ -55,23 +55,17 @@ export const ToggleButtonGroupContext = React.createContext<
  * export default MyComponent;
  *```
  */
-class ToggleButtonGroup extends React.Component<Props> {
-  static displayName = 'ToggleButton.Group';
+const ToggleButtonGroup = ({ value, onValueChange, children }: Props) => (
+  <ToggleButtonGroupContext.Provider
+    value={{
+      value,
+      onValueChange,
+    }}
+  >
+    {children}
+  </ToggleButtonGroupContext.Provider>
+);
 
-  render() {
-    const { value, onValueChange, children } = this.props;
-
-    return (
-      <ToggleButtonGroupContext.Provider
-        value={{
-          value,
-          onValueChange,
-        }}
-      >
-        {children}
-      </ToggleButtonGroupContext.Provider>
-    );
-  }
-}
+ToggleButtonGroup.displayName = 'ToggleButton.Group';
 
 export default ToggleButtonGroup;
