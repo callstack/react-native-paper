@@ -90,7 +90,7 @@ const HelperText = ({
     new Animated.Value(visible ? 1 : 0)
   );
 
-  const textHeight = React.useRef<number>(0);
+  let { current: textHeight } = React.useRef<number>(0);
 
   React.useEffect(() => {
     if (visible) showText();
@@ -118,7 +118,7 @@ const HelperText = ({
   const handleTextLayout = (e: LayoutChangeEvent) => {
     //@ts-ignore Animated.Text typings are improved but something is still broken. It thinks onLayout is not callable.
     onLayout?.(e);
-    textHeight.current = e.nativeEvent.layout.height;
+    textHeight = e.nativeEvent.layout.height;
   };
 
   const { colors, dark } = theme;
@@ -147,7 +147,7 @@ const HelperText = ({
                   {
                     translateY: shown.interpolate({
                       inputRange: [0, 1],
-                      outputRange: [-textHeight.current / 2, 0],
+                      outputRange: [-textHeight / 2, 0],
                     }),
                   },
                 ]
