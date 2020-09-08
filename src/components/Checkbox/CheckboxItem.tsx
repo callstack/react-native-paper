@@ -50,6 +50,10 @@ type Props = {
    * @optional
    */
   theme: ReactNativePaper.Theme;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 /**
@@ -78,9 +82,10 @@ const CheckboxItem = ({
   onPress,
   labelStyle,
   theme: { colors },
+  testID,
   ...props
 }: Props) => (
-  <TouchableRipple onPress={onPress}>
+  <TouchableRipple onPress={onPress} testID={testID}>
     <View style={[styles.container, style]} pointerEvents="none">
       <Text style={[styles.label, { color: colors.primary }, labelStyle]}>
         {label}
