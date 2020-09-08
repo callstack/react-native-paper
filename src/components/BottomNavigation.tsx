@@ -164,7 +164,7 @@ type Props = {
   /**
    * Get label text for the tab, uses `route.title` by default. Use `renderLabel` to replace label component.
    */
-  getLabelText?: (props: { route: Route }) => string;
+  getLabelText?: (props: { route: Route }) => string | undefined;
   /**
    * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
    * Uses `route.accessibilityLabel` by default.
@@ -221,56 +221,6 @@ type Props = {
   theme: ReactNativePaper.Theme;
 };
 
-type State = {
-  /**
-   * Visibility of the navigation bar, visible state is 1 and invisible is 0.
-   */
-  visible: Animated.Value;
-  /**
-   * Active state of individual tab items, active state is 1 and inactve state is 0.
-   */
-  tabs: Animated.Value[];
-  /**
-   * The top offset for each tab item to position it offscreen.
-   * Placing items offscreen helps to save memory usage for inactive screens with removeClippedSubviews.
-   * We use animated values for this to prevent unnecesary re-renders.
-   */
-  offsets: Animated.Value[];
-  /**
-   * Index of the currently active tab. Used for setting the background color.
-   * Use don't use the color as an animated value directly, because `setValue` seems to be buggy with colors.
-   */
-  index: Animated.Value;
-  /**
-   * Animation for the touch, used to determine it's scale and opacity.
-   */
-  touch: Animated.Value;
-  /**
-   * Animation for the background color ripple, used to determine it's scale and opacity.
-   */
-  ripple: Animated.Value;
-  /**
-   * Layout of the navigation bar. The width is used to determine the size and position of the ripple.
-   */
-  layout: { height: number; width: number; measured: boolean };
-  /**
-   * Currently active index. Used only for getDerivedStateFromProps.
-   */
-  current: number;
-  /**
-   * Previously active index. Used to determine the position of the ripple.
-   */
-  previous: number;
-  /**
-   * List of loaded tabs, tabs will be loaded when navigated to.
-   */
-  loaded: number[];
-  /**
-   * Trak whether the keyboard is visible to show and hide the navigation bar.
-   */
-  keyboard: boolean;
-};
-
 const MIN_RIPPLE_SCALE = 0.001; // Minimum scale is not 0 due to bug with animation
 const MIN_TAB_WIDTH = 96;
 const MAX_TAB_WIDTH = 168;
@@ -302,12 +252,8 @@ const Touchable = ({
     </TouchableWithoutFeedback>
   );
 
-class SceneComponent extends React.PureComponent<any> {
-  render() {
-    const { component, ...rest } = this.props;
-    return React.createElement(component, rest);
-  }
-}
+const SceneComponent = ({ component, ...rest }: any) =>
+  React.createElement(component, rest);
 
 /**
  * Bottom navigation provides quick navigation between top-level views of an app with a bottom navigation bar.
@@ -359,200 +305,241 @@ class SceneComponent extends React.PureComponent<any> {
  * export default MyComponent;
  * ```
  */
-class BottomNavigation extends React.Component<Props, State> {
+const BottomNavigation = ({
+  navigationState,
+  renderScene,
+  renderIcon,
+  renderLabel,
+  renderTouchable = (props: TouchableProps) => <Touchable {...props} />,
+  getLabelText = ({ route }: { route: Route }) => route.title,
+  getBadge = ({ route }: { route: Route }) => route.badge,
+  getColor = ({ route }: { route: Route }) => route.color,
+  getAccessibilityLabel = ({ route }: { route: Route }) =>
+    route.accessibilityLabel,
+  getTestID = ({ route }: { route: Route }) => route.testID,
+  activeColor,
+  inactiveColor,
+  keyboardHidesNavigationBar = true,
+  barStyle,
+  labeled = true,
+  style,
+  theme,
+  sceneAnimationEnabled = false,
+  onTabPress,
+  onIndexChange,
+  shifting: shiftingProp,
+}: Props) => {
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   /**
-   * Function which takes a map of route keys to components.
-   * Pure components are used to minmize re-rendering of the pages.
-   * This drastically improves the animation performance.
+   * Visibility of the navigation bar, visible state is 1 and invisible is 0.
    */
-  static SceneMap(scenes: {
-    [key: string]: React.ComponentType<{
-      route: Route;
-      jumpTo: (key: string) => void;
-    }>;
-  }) {
-    return ({
-      route,
-      jumpTo,
-    }: {
-      route: Route;
-      jumpTo: (key: string) => void;
-    }) => (
-      <SceneComponent
-        key={route.key}
-        component={scenes[route.key ? route.key : '']}
-        route={route}
-        jumpTo={jumpTo}
-      />
-    );
-  }
+  // @ts-ignore
+  const [visible, setVisible] = React.useState<Animated.Value>(
+    new Animated.Value(1)
+  );
 
-  static defaultProps = {
-    labeled: true,
-    keyboardHidesNavigationBar: true,
-    sceneAnimationEnabled: false,
-  };
-
-  static getDerivedStateFromProps(nextProps: any, prevState: State) {
-    const { index, routes } = nextProps.navigationState;
-
-    // Re-create animated values if routes have been added/removed
-    // Preserve previous animated values if they exist, so we don't break animations
-    const tabs = routes.map(
+  /**
+   * Active state of individual tab items, active state is 1 and inactve state is 0.
+   */
+  const [tabs, setTabs] = React.useState<Animated.Value[]>(() =>
+    [...navigationState.routes].map(
       // focused === 1, unfocused === 0
       (_: any, i: number) =>
-        prevState.tabs[i] || new Animated.Value(i === index ? 1 : 0)
-    );
-    const offsets = routes.map(
+        new Animated.Value(i === navigationState.index ? 1 : 0)
+    )
+  );
+
+  /**
+   * The top offset for each tab item to position it offscreen.
+   * Placing items offscreen helps to save memory usage for inactive screens with removeClippedSubviews.
+   * We use animated values for this to prevent unnecesary re-renders.
+   */
+  const [offsets, setOffsets] = React.useState<Animated.Value[]>(() =>
+    navigationState.routes.map(
       // offscreen === 1, normal === 0
       (_: any, i: number) =>
-        prevState.offsets[i] || new Animated.Value(i === index ? 0 : 1)
+        new Animated.Value(i === navigationState.index ? 0 : 1)
+    )
+  );
+  /**
+   * Index of the currently active tab. Used for setting the background color.
+   * Use don't use the color as an animated value directly, because `setValue` seems to be buggy with colors.
+   */
+  // @ts-ignore
+  const [index, setIndex] = React.useState<Animated.Value>(
+    new Animated.Value(navigationState.index)
+  );
+  /**
+   * Animation for the background color ripple, used to determine it's scale and opacity.
+   */
+  // @ts-ignore
+  const [ripple, setRipple] = React.useState<Animated.Value>(
+    new Animated.Value(MIN_RIPPLE_SCALE)
+  );
+  /**
+   * Layout of the navigation bar. The width is used to determine the size and position of the ripple.
+   */
+  const [layout, setlayout] = React.useState<{
+    height: number;
+    width: number;
+    measured: boolean;
+  }>({ height: 0, width: 0, measured: false });
+  /**
+   * Currently active index. Used only for getDerivedStateFromProps.
+   */
+  const [current, setCurrent] = React.useState<number>(navigationState.index);
+  /**
+   * Previously active index. Used to determine the position of the ripple.
+   */
+  // @ts-ignore
+  const [previous, setPrevious] = React.useState<number>(0);
+  /**
+   * List of loaded tabs, tabs will be loaded when navigated to.
+   */
+  const [loaded, setLoaded] = React.useState<number[]>([navigationState.index]);
+  /**
+   * Trak whether the keyboard is visible to show and hide the navigation bar.
+   */
+  const [keyboard, setKeyboard] = React.useState<boolean>(false);
+
+  const [prevNavigationState, setPrevNavigationState] = React.useState<
+    NavigationState
+  >();
+  /* eslint-enable @typescript-eslint/no-unused-vars */
+
+  if (prevNavigationState !== navigationState) {
+    // Re-create animated values if routes have been added/removed
+    // Preserve previous animated values if they exist, so we don't break animations
+    const newTabs = [...navigationState.routes].map(
+      // focused === 1, unfocused === 0
+      (_: any, i: number) =>
+        tabs[i] || new Animated.Value(i === navigationState.index ? 1 : 0)
+    );
+    setTabs(newTabs);
+    console.log(
+      'tabs after',
+      tabs,
+      navigationState.routes.map(
+        // focused === 1, unfocused === 0
+        (_: any, i: number) =>
+          tabs[i] || new Animated.Value(i === navigationState.index ? 1 : 0)
+      )
+    );
+    setOffsets(
+      navigationState.routes.map(
+        // offscreen === 1, normal === 0
+        (_: any, i: number) =>
+          offsets[i] || new Animated.Value(i === navigationState.index ? 0 : 1)
+      )
     );
 
-    const nextState = {
-      tabs,
-      offsets,
-    };
-
-    if (index !== prevState.current) {
-      /* $FlowFixMe */
-      Object.assign(nextState, {
-        // Store the current index in state so that we can later check if the index has changed
-        current: index,
-        previous: prevState.current,
-        // Set the current tab to be loaded if it was not loaded before
-        loaded: prevState.loaded.includes(index)
-          ? prevState.loaded
-          : [...prevState.loaded, index],
-      });
-    }
-
-    return nextState;
+    setPrevNavigationState(navigationState);
   }
 
-  constructor(props: Props) {
-    super(props);
-
-    const { index } = this.props.navigationState;
-
-    this.state = {
-      visible: new Animated.Value(1),
-      tabs: [],
-      offsets: [],
-      index: new Animated.Value(index),
-      ripple: new Animated.Value(MIN_RIPPLE_SCALE),
-      touch: new Animated.Value(MIN_RIPPLE_SCALE),
-      layout: { height: 0, width: 0, measured: false },
-      current: index,
-      previous: 0,
-      loaded: [index],
-      keyboard: false,
-    };
-  }
-
-  componentDidMount() {
+  React.useEffect(() => {
     // Workaround for native animated bug in react-native@^0.57
     // Context: https://github.com/callstack/react-native-paper/pull/637
-    this.animateToCurrentIndex();
+    animateToCurrentIndex();
 
     if (Platform.OS === 'ios') {
-      Keyboard.addListener('keyboardWillShow', this.handleKeyboardShow);
-      Keyboard.addListener('keyboardWillHide', this.handleKeyboardHide);
+      Keyboard.addListener('keyboardWillShow', handleKeyboardShow);
+      Keyboard.addListener('keyboardWillHide', handleKeyboardHide);
     } else {
-      Keyboard.addListener('keyboardDidShow', this.handleKeyboardShow);
-      Keyboard.addListener('keyboardDidHide', this.handleKeyboardHide);
-    }
-  }
-
-  componentDidUpdate(prevProps: Props) {
-    if (prevProps.navigationState.index === this.props.navigationState.index) {
-      return;
+      Keyboard.addListener('keyboardDidShow', handleKeyboardShow);
+      Keyboard.addListener('keyboardDidHide', handleKeyboardHide);
     }
 
+    return () => {
+      if (Platform.OS === 'ios') {
+        Keyboard.removeListener('keyboardWillShow', handleKeyboardShow);
+        Keyboard.removeListener('keyboardWillHide', handleKeyboardHide);
+      } else {
+        Keyboard.removeListener('keyboardDidShow', handleKeyboardShow);
+        Keyboard.removeListener('keyboardDidHide', handleKeyboardHide);
+      }
+    };
+  }, []);
+
+  React.useEffect(() => {
     // Reset offsets of previous and current tabs before animation
-    this.state.offsets.forEach((offset, i) => {
-      if (
-        i === this.props.navigationState.index ||
-        i === prevProps.navigationState.index
-      ) {
+    offsets.forEach((offset, i) => {
+      if (i === navigationState.index || i === prevNavigationState?.index) {
         offset.setValue(0);
       }
     });
 
-    this.animateToCurrentIndex();
-  }
+    if (navigationState.index !== current) {
+      setPrevious(current);
+      // Store the current index in state so that we can later check if the index has changed
+      setCurrent(navigationState.index);
 
-  componentWillUnmount() {
-    if (Platform.OS === 'ios') {
-      Keyboard.removeListener('keyboardWillShow', this.handleKeyboardShow);
-      Keyboard.removeListener('keyboardWillHide', this.handleKeyboardHide);
-    } else {
-      Keyboard.removeListener('keyboardDidShow', this.handleKeyboardShow);
-      Keyboard.removeListener('keyboardDidHide', this.handleKeyboardHide);
+      // Set the current tab to be loaded if it was not loaded before
+      setLoaded(
+        loaded.includes(navigationState.index)
+          ? loaded
+          : [...loaded, navigationState.index]
+      );
     }
-  }
 
-  private handleKeyboardShow = () => {
-    const { scale } = this.props.theme.animation;
-    this.setState({ keyboard: true }, () =>
-      Animated.timing(this.state.visible, {
-        toValue: 0,
-        duration: 150 * scale,
-        useNativeDriver: true,
-      }).start()
-    );
+    animateToCurrentIndex();
+  }, [navigationState.index]);
+
+  const handleKeyboardShow = async () => {
+    const { scale } = theme.animation;
+    await setKeyboard(true);
+    Animated.timing(visible, {
+      toValue: 0,
+      duration: 150 * scale,
+      useNativeDriver: true,
+    }).start();
   };
 
-  private handleKeyboardHide = () => {
-    const { scale } = this.props.theme.animation;
-    Animated.timing(this.state.visible, {
+  const handleKeyboardHide = () => {
+    const { scale } = theme.animation;
+    Animated.timing(visible, {
       toValue: 1,
       duration: 100 * scale,
       useNativeDriver: true,
     }).start(() => {
-      this.setState({ keyboard: false });
+      setKeyboard(false);
     });
   };
 
-  private animateToCurrentIndex = () => {
-    const shifting = this.isShifting();
+  const animateToCurrentIndex = () => {
+    const shifting = isShifting();
     const {
-      navigationState,
-      theme: {
-        animation: { scale },
-      },
-    } = this.props;
-    const { routes, index } = navigationState;
+      animation: { scale },
+    } = theme;
 
     // Reset the ripple to avoid glitch if it's currently animating
-    this.state.ripple.setValue(MIN_RIPPLE_SCALE);
+    ripple.setValue(MIN_RIPPLE_SCALE);
 
     Animated.parallel([
-      Animated.timing(this.state.ripple, {
+      Animated.timing(ripple, {
         toValue: 1,
         duration: shifting ? 400 * scale : 0,
         useNativeDriver: true,
       }),
-      ...routes.map((_, i) =>
-        Animated.timing(this.state.tabs[i], {
-          toValue: i === index ? 1 : 0,
+      ...navigationState.routes.map((_, i) =>
+        Animated.timing(tabs[i], {
+          toValue: i === navigationState.index ? 1 : 0,
           duration: shifting ? 150 * scale : 0,
           useNativeDriver: true,
         })
       ),
     ]).start(({ finished }) => {
       // Workaround a bug in native animations where this is reset after first animation
-      this.state.tabs.map((tab, i) => tab.setValue(i === index ? 1 : 0));
+      tabs.map((tab, i) => tab.setValue(i === navigationState.index ? 1 : 0));
 
       // Update the index to change bar's bacground color and then hide the ripple
-      this.state.index.setValue(index);
-      this.state.ripple.setValue(MIN_RIPPLE_SCALE);
+      index.setValue(navigationState.index);
+      ripple.setValue(MIN_RIPPLE_SCALE);
 
       if (finished) {
         // Position all inactive screens offscreen to save memory usage
         // Only do it when animation has finished to avoid glitches mid-transition if switching fast
-        this.state.offsets.forEach((offset, i) => {
-          if (i === index) {
+        offsets.forEach((offset, i) => {
+          if (i === navigationState.index) {
             offset.setValue(0);
           } else {
             offset.setValue(1);
@@ -562,26 +549,21 @@ class BottomNavigation extends React.Component<Props, State> {
     });
   };
 
-  private handleLayout = (e: LayoutChangeEvent) => {
-    const { layout } = this.state;
+  const handleLayout = (e: LayoutChangeEvent) => {
     const { height, width } = e.nativeEvent.layout;
 
     if (height === layout.height && width === layout.width) {
       return;
     }
 
-    this.setState({
-      layout: {
-        height,
-        width,
-        measured: true,
-      },
+    setlayout({
+      height,
+      width,
+      measured: true,
     });
   };
 
-  private handleTabPress = (index: number) => {
-    const { navigationState, onTabPress, onIndexChange } = this.props;
-
+  const handleTabPress = (index: number) => {
     const event = {
       route: navigationState.routes[index],
       defaultPrevented: false,
@@ -601,406 +583,388 @@ class BottomNavigation extends React.Component<Props, State> {
     }
   };
 
-  private jumpTo = (key: string) => {
-    const index = this.props.navigationState.routes.findIndex(
+  const jumpTo = (key: string) => {
+    const index = navigationState.routes.findIndex(
       (route) => route.key === key
     );
 
-    this.props.onIndexChange(index);
+    onIndexChange(index);
   };
 
-  private isShifting = () =>
-    typeof this.props.shifting === 'boolean'
-      ? this.props.shifting
-      : this.props.navigationState.routes.length > 3;
+  const isShifting = () =>
+    typeof shiftingProp === 'boolean'
+      ? shiftingProp
+      : navigationState.routes.length > 3;
 
-  render() {
-    const {
-      navigationState,
-      renderScene,
-      renderIcon,
-      renderLabel,
-      renderTouchable = (props: TouchableProps) => <Touchable {...props} />,
-      getLabelText = ({ route }: { route: Route }) => route.title,
-      getBadge = ({ route }: { route: Route }) => route.badge,
-      getColor = ({ route }: { route: Route }) => route.color,
-      getAccessibilityLabel = ({ route }: { route: Route }) =>
-        route.accessibilityLabel,
-      getTestID = ({ route }: { route: Route }) => route.testID,
-      activeColor,
-      inactiveColor,
-      keyboardHidesNavigationBar,
-      barStyle,
-      labeled,
-      style,
-      theme,
-      sceneAnimationEnabled,
-    } = this.props;
+  const { routes } = navigationState;
+  const { colors, dark: isDarkTheme, mode } = theme;
 
-    const {
-      layout,
-      loaded,
-      index,
-      visible,
-      ripple,
-      keyboard,
-      tabs,
-      offsets,
-    } = this.state;
-    const { routes } = navigationState;
-    const { colors, dark: isDarkTheme, mode } = theme;
+  const shifting = isShifting();
 
-    const shifting = this.isShifting();
+  const { backgroundColor: customBackground, elevation = 4 }: ViewStyle =
+    StyleSheet.flatten(barStyle) || {};
 
-    const { backgroundColor: customBackground, elevation = 4 }: ViewStyle =
-      StyleSheet.flatten(barStyle) || {};
+  const approxBackgroundColor = customBackground
+    ? customBackground
+    : isDarkTheme && mode === 'adaptive'
+    ? overlay(elevation, colors.surface)
+    : colors.primary;
 
-    const approxBackgroundColor = customBackground
-      ? customBackground
-      : isDarkTheme && mode === 'adaptive'
-      ? overlay(elevation, colors.surface)
-      : colors.primary;
+  const backgroundColor = shifting
+    ? index.interpolate({
+        inputRange: routes.map((_, i) => i),
+        //@ts-ignore
+        outputRange: routes.map(
+          (route) => getColor({ route }) || approxBackgroundColor
+        ),
+      })
+    : approxBackgroundColor;
 
-    const backgroundColor = shifting
-      ? index.interpolate({
-          inputRange: routes.map((_, i) => i),
-          //@ts-ignore
-          outputRange: routes.map(
-            (route) => getColor({ route }) || approxBackgroundColor
-          ),
-        })
-      : approxBackgroundColor;
+  const isDark = !color(approxBackgroundColor).isLight();
 
-    const isDark = !color(approxBackgroundColor).isLight();
+  const textColor = isDark ? white : black;
+  const activeTintColor =
+    typeof activeColor !== 'undefined' ? activeColor : textColor;
+  const inactiveTintColor =
+    typeof inactiveColor !== 'undefined'
+      ? inactiveColor
+      : color(textColor).alpha(0.5).rgb().string();
 
-    const textColor = isDark ? white : black;
-    const activeTintColor =
-      typeof activeColor !== 'undefined' ? activeColor : textColor;
-    const inactiveTintColor =
-      typeof inactiveColor !== 'undefined'
-        ? inactiveColor
-        : color(textColor).alpha(0.5).rgb().string();
+  const touchColor = color(activeColor || activeTintColor)
+    .alpha(0.12)
+    .rgb()
+    .string();
 
-    const touchColor = color(activeColor || activeTintColor)
-      .alpha(0.12)
-      .rgb()
-      .string();
+  const maxTabWidth = routes.length > 3 ? MIN_TAB_WIDTH : MAX_TAB_WIDTH;
+  const maxTabBarWidth = maxTabWidth * routes.length;
 
-    const maxTabWidth = routes.length > 3 ? MIN_TAB_WIDTH : MAX_TAB_WIDTH;
-    const maxTabBarWidth = maxTabWidth * routes.length;
+  const tabBarWidth = Math.min(layout.width, maxTabBarWidth);
+  const tabWidth = tabBarWidth / routes.length;
 
-    const tabBarWidth = Math.min(layout.width, maxTabBarWidth);
-    const tabWidth = tabBarWidth / routes.length;
+  const rippleSize = layout.width / 4;
 
-    const rippleSize = layout.width / 4;
+  return (
+    <View style={[styles.container, style]}>
+      <View style={[styles.content, { backgroundColor: colors.background }]}>
+        {routes.map((route, index) => {
+          if (!loaded.includes(index)) {
+            // Don't render a screen if we've never navigated to it
+            return null;
+          }
+          const focused = navigationState.index === index;
 
-    return (
-      <View style={[styles.container, style]}>
-        <View style={[styles.content, { backgroundColor: colors.background }]}>
-          {routes.map((route, index) => {
-            if (!loaded.includes(index)) {
-              // Don't render a screen if we've never navigated to it
-              return null;
-            }
-            const focused = navigationState.index === index;
+          const opacity = sceneAnimationEnabled ? tabs[index] : focused ? 1 : 0;
 
-            const opacity = sceneAnimationEnabled
-              ? tabs[index]
-              : focused
-              ? 1
-              : 0;
+          const top = offsets[index].interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, FAR_FAR_AWAY],
+          });
 
-            const top = offsets[index].interpolate({
-              inputRange: [0, 1],
-              outputRange: [0, FAR_FAR_AWAY],
-            });
-
-            return (
-              <Animated.View
-                key={route.key}
-                pointerEvents={focused ? 'auto' : 'none'}
-                accessibilityElementsHidden={!focused}
-                importantForAccessibility={
-                  focused ? 'auto' : 'no-hide-descendants'
-                }
-                style={[StyleSheet.absoluteFill, { opacity }]}
-                collapsable={false}
-                removeClippedSubviews={
-                  // On iOS, set removeClippedSubviews to true only when not focused
-                  // This is an workaround for a bug where the clipped view never re-appears
-                  Platform.OS === 'ios' ? navigationState.index !== index : true
-                }
-              >
-                <Animated.View style={[styles.content, { top }]}>
-                  {renderScene({
-                    route,
-                    jumpTo: this.jumpTo,
-                  })}
-                </Animated.View>
+          return (
+            <Animated.View
+              key={route.key}
+              pointerEvents={focused ? 'auto' : 'none'}
+              accessibilityElementsHidden={!focused}
+              importantForAccessibility={
+                focused ? 'auto' : 'no-hide-descendants'
+              }
+              style={[StyleSheet.absoluteFill, { opacity }]}
+              collapsable={false}
+              removeClippedSubviews={
+                // On iOS, set removeClippedSubviews to true only when not focused
+                // This is an workaround for a bug where the clipped view never re-appears
+                Platform.OS === 'ios' ? navigationState.index !== index : true
+              }
+            >
+              <Animated.View style={[styles.content, { top }]}>
+                {renderScene({
+                  route,
+                  jumpTo: jumpTo,
+                })}
               </Animated.View>
-            );
-          })}
-        </View>
-        <Surface
-          style={
-            [
-              styles.bar,
-              keyboardHidesNavigationBar
-                ? {
-                    // When the keyboard is shown, slide down the navigation bar
+            </Animated.View>
+          );
+        })}
+      </View>
+      <Surface
+        style={
+          [
+            styles.bar,
+            keyboardHidesNavigationBar
+              ? {
+                  // When the keyboard is shown, slide down the navigation bar
+                  transform: [
+                    {
+                      translateY: visible.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [layout.height, 0],
+                      }),
+                    },
+                  ],
+                  // Absolutely position the navigation bar so that the content is below it
+                  // This is needed to avoid gap at bottom when the navigation bar is hidden
+                  position: keyboard ? 'absolute' : null,
+                }
+              : null,
+            barStyle,
+          ] as StyleProp<ViewStyle>
+        }
+        pointerEvents={
+          layout.measured
+            ? keyboardHidesNavigationBar && keyboard
+              ? 'none'
+              : 'auto'
+            : 'none'
+        }
+        onLayout={handleLayout}
+      >
+        <Animated.View style={[styles.barContent, { backgroundColor }]}>
+          <SafeAreaView
+            forceInset={{ top: 'never', bottom: 'always' }}
+            style={[styles.items, { maxWidth: maxTabBarWidth }]}
+          >
+            {shifting ? (
+              <Animated.View
+                pointerEvents="none"
+                style={[
+                  styles.ripple,
+                  {
+                    // Since we have a single ripple, we have to reposition it so that it appears to expand from active tab.
+                    // We need to move it from the top to center of the navigation bar and from the left to the active tab.
+                    top: (BAR_HEIGHT - rippleSize) / 2,
+                    left:
+                      tabWidth * (navigationState.index + 0.5) - rippleSize / 2,
+                    height: rippleSize,
+                    width: rippleSize,
+                    borderRadius: rippleSize / 2,
+                    backgroundColor: getColor({
+                      route: routes[navigationState.index],
+                    }),
                     transform: [
                       {
-                        translateY: visible.interpolate({
+                        // Scale to twice the size  to ensure it covers the whole navigation bar
+                        scale: ripple.interpolate({
                           inputRange: [0, 1],
-                          outputRange: [layout.height, 0],
+                          outputRange: [0, 8],
                         }),
                       },
                     ],
-                    // Absolutely position the navigation bar so that the content is below it
-                    // This is needed to avoid gap at bottom when the navigation bar is hidden
-                    position: keyboard ? 'absolute' : null,
-                  }
-                : null,
-              barStyle,
-            ] as StyleProp<ViewStyle>
-          }
-          pointerEvents={
-            layout.measured
-              ? keyboardHidesNavigationBar && keyboard
-                ? 'none'
-                : 'auto'
-              : 'none'
-          }
-          onLayout={this.handleLayout}
-        >
-          <Animated.View style={[styles.barContent, { backgroundColor }]}>
-            <SafeAreaView
-              forceInset={{ top: 'never', bottom: 'always' }}
-              style={[styles.items, { maxWidth: maxTabBarWidth }]}
-            >
-              {shifting ? (
-                <Animated.View
-                  pointerEvents="none"
-                  style={[
-                    styles.ripple,
-                    {
-                      // Since we have a single ripple, we have to reposition it so that it appears to expand from active tab.
-                      // We need to move it from the top to center of the navigation bar and from the left to the active tab.
-                      top: (BAR_HEIGHT - rippleSize) / 2,
-                      left:
-                        tabWidth * (navigationState.index + 0.5) -
-                        rippleSize / 2,
-                      height: rippleSize,
-                      width: rippleSize,
-                      borderRadius: rippleSize / 2,
-                      backgroundColor: getColor({
-                        route: routes[navigationState.index],
-                      }),
-                      transform: [
-                        {
-                          // Scale to twice the size  to ensure it covers the whole navigation bar
-                          scale: ripple.interpolate({
-                            inputRange: [0, 1],
-                            outputRange: [0, 8],
-                          }),
-                        },
-                      ],
-                      opacity: ripple.interpolate({
-                        inputRange: [0, MIN_RIPPLE_SCALE, 0.3, 1],
-                        outputRange: [0, 0, 1, 1],
-                      }),
-                    },
-                  ]}
-                />
-              ) : null}
-              {routes.map((route, index) => {
-                const focused = navigationState.index === index;
-                const active = tabs[index];
+                    opacity: ripple.interpolate({
+                      inputRange: [0, MIN_RIPPLE_SCALE, 0.3, 1],
+                      outputRange: [0, 0, 1, 1],
+                    }),
+                  },
+                ]}
+              />
+            ) : null}
+            {routes.map((route, index) => {
+              const focused = navigationState.index === index;
+              const active = tabs[index];
 
-                // Scale the label up
-                const scale =
-                  labeled && shifting
-                    ? active.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [0.5, 1],
-                      })
-                    : 1;
+              // Scale the label up
+              const scale =
+                labeled && shifting
+                  ? active.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [0.5, 1],
+                    })
+                  : 1;
 
-                // Move down the icon to account for no-label in shifting and smaller label in non-shifting.
-                const translateY = labeled
-                  ? shifting
-                    ? active.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [7, 0],
-                      })
-                    : 0
-                  : 7;
+              // Move down the icon to account for no-label in shifting and smaller label in non-shifting.
+              const translateY = labeled
+                ? shifting
+                  ? active.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [7, 0],
+                    })
+                  : 0
+                : 7;
 
-                // We render the active icon and label on top of inactive ones and cross-fade them on change.
-                // This trick gives the illusion that we are animating between active and inactive colors.
-                // This is to ensure that we can use native driver, as colors cannot be animated with native driver.
-                const activeOpacity = active;
-                const inactiveOpacity = active.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [1, 0],
-                });
+              // We render the active icon and label on top of inactive ones and cross-fade them on change.
+              // This trick gives the illusion that we are animating between active and inactive colors.
+              // This is to ensure that we can use native driver, as colors cannot be animated with native driver.
+              const activeOpacity = active;
+              const inactiveOpacity = active.interpolate({
+                inputRange: [0, 1],
+                outputRange: [1, 0],
+              });
 
-                const badge = getBadge({ route });
+              const badge = getBadge({ route });
 
-                return renderTouchable({
-                  key: route.key,
-                  route,
-                  borderless: true,
-                  centered: true,
-                  rippleColor: touchColor,
-                  onPress: () => this.handleTabPress(index),
-                  testID: getTestID({ route }),
-                  accessibilityLabel: getAccessibilityLabel({ route }),
-                  accessibilityTraits: focused
-                    ? ['button', 'selected']
-                    : 'button',
-                  accessibilityComponentType: 'button',
-                  accessibilityRole: 'button',
-                  accessibilityState: { selected: true },
-                  style: styles.item,
-                  children: (
-                    <View pointerEvents="none">
+              return renderTouchable({
+                key: route.key,
+                route,
+                borderless: true,
+                centered: true,
+                rippleColor: touchColor,
+                onPress: () => handleTabPress(index),
+                testID: getTestID({ route }),
+                accessibilityLabel: getAccessibilityLabel({ route }),
+                accessibilityTraits: focused
+                  ? ['button', 'selected']
+                  : 'button',
+                accessibilityComponentType: 'button',
+                accessibilityRole: 'button',
+                accessibilityState: { selected: true },
+                style: styles.item,
+                children: (
+                  <View pointerEvents="none">
+                    <Animated.View
+                      style={[
+                        styles.iconContainer,
+                        { transform: [{ translateY }] },
+                      ]}
+                    >
+                      <Animated.View
+                        style={[styles.iconWrapper, { opacity: activeOpacity }]}
+                      >
+                        {renderIcon ? (
+                          renderIcon({
+                            route,
+                            focused: true,
+                            color: activeTintColor,
+                          })
+                        ) : (
+                          <Icon
+                            source={route.icon as IconSource}
+                            color={activeTintColor}
+                            size={24}
+                          />
+                        )}
+                      </Animated.View>
                       <Animated.View
                         style={[
-                          styles.iconContainer,
-                          { transform: [{ translateY }] },
+                          styles.iconWrapper,
+                          { opacity: inactiveOpacity },
+                        ]}
+                      >
+                        {renderIcon ? (
+                          renderIcon({
+                            route,
+                            focused: false,
+                            color: inactiveTintColor,
+                          })
+                        ) : (
+                          <Icon
+                            source={route.icon as IconSource}
+                            color={inactiveTintColor}
+                            size={24}
+                          />
+                        )}
+                      </Animated.View>
+                      <View
+                        style={[
+                          styles.badgeContainer,
+                          {
+                            right:
+                              (badge != null && typeof badge !== 'boolean'
+                                ? String(badge).length * -2
+                                : 0) - 2,
+                          },
+                        ]}
+                      >
+                        {typeof badge === 'boolean' ? (
+                          <Badge visible={badge} size={8} />
+                        ) : (
+                          <Badge visible={badge != null} size={16}>
+                            {badge}
+                          </Badge>
+                        )}
+                      </View>
+                    </Animated.View>
+                    {labeled ? (
+                      <Animated.View
+                        style={[
+                          styles.labelContainer,
+                          { transform: [{ scale }] },
                         ]}
                       >
                         <Animated.View
                           style={[
-                            styles.iconWrapper,
+                            styles.labelWrapper,
                             { opacity: activeOpacity },
                           ]}
                         >
-                          {renderIcon ? (
-                            renderIcon({
+                          {renderLabel ? (
+                            renderLabel({
                               route,
                               focused: true,
                               color: activeTintColor,
                             })
                           ) : (
-                            <Icon
-                              source={route.icon as IconSource}
-                              color={activeTintColor}
-                              size={24}
-                            />
+                            <Text
+                              style={[styles.label, { color: activeTintColor }]}
+                            >
+                              {getLabelText({ route })}
+                            </Text>
                           )}
                         </Animated.View>
-                        <Animated.View
-                          style={[
-                            styles.iconWrapper,
-                            { opacity: inactiveOpacity },
-                          ]}
-                        >
-                          {renderIcon ? (
-                            renderIcon({
-                              route,
-                              focused: false,
-                              color: inactiveTintColor,
-                            })
-                          ) : (
-                            <Icon
-                              source={route.icon as IconSource}
-                              color={inactiveTintColor}
-                              size={24}
-                            />
-                          )}
-                        </Animated.View>
-                        <View
-                          style={[
-                            styles.badgeContainer,
-                            {
-                              right:
-                                (badge != null && typeof badge !== 'boolean'
-                                  ? String(badge).length * -2
-                                  : 0) - 2,
-                            },
-                          ]}
-                        >
-                          {typeof badge === 'boolean' ? (
-                            <Badge visible={badge} size={8} />
-                          ) : (
-                            <Badge visible={badge != null} size={16}>
-                              {badge}
-                            </Badge>
-                          )}
-                        </View>
-                      </Animated.View>
-                      {labeled ? (
-                        <Animated.View
-                          style={[
-                            styles.labelContainer,
-                            { transform: [{ scale }] },
-                          ]}
-                        >
+                        {shifting ? null : (
                           <Animated.View
                             style={[
                               styles.labelWrapper,
-                              { opacity: activeOpacity },
+                              { opacity: inactiveOpacity },
                             ]}
                           >
                             {renderLabel ? (
                               renderLabel({
                                 route,
-                                focused: true,
-                                color: activeTintColor,
+                                focused: false,
+                                color: inactiveTintColor,
                               })
                             ) : (
                               <Text
                                 style={[
                                   styles.label,
-                                  { color: activeTintColor },
+                                  { color: inactiveTintColor },
                                 ]}
                               >
                                 {getLabelText({ route })}
                               </Text>
                             )}
                           </Animated.View>
-                          {shifting ? null : (
-                            <Animated.View
-                              style={[
-                                styles.labelWrapper,
-                                { opacity: inactiveOpacity },
-                              ]}
-                            >
-                              {renderLabel ? (
-                                renderLabel({
-                                  route,
-                                  focused: false,
-                                  color: inactiveTintColor,
-                                })
-                              ) : (
-                                <Text
-                                  style={[
-                                    styles.label,
-                                    { color: inactiveTintColor },
-                                  ]}
-                                >
-                                  {getLabelText({ route })}
-                                </Text>
-                              )}
-                            </Animated.View>
-                          )}
-                        </Animated.View>
-                      ) : (
-                        <View style={styles.labelContainer} />
-                      )}
-                    </View>
-                  ),
-                });
-              })}
-            </SafeAreaView>
-          </Animated.View>
-        </Surface>
-      </View>
-    );
-  }
-}
+                        )}
+                      </Animated.View>
+                    ) : (
+                      <View style={styles.labelContainer} />
+                    )}
+                  </View>
+                ),
+              });
+            })}
+          </SafeAreaView>
+        </Animated.View>
+      </Surface>
+    </View>
+  );
+};
+
+/**
+ * Function which takes a map of route keys to components.
+ * Pure components are used to minmize re-rendering of the pages.
+ * This drastically improves the animation performance.
+ */
+BottomNavigation.SceneMap = (scenes: {
+  [key: string]: React.ComponentType<{
+    route: Route;
+    jumpTo: (key: string) => void;
+  }>;
+}) => {
+  return ({
+    route,
+    jumpTo,
+  }: {
+    route: Route;
+    jumpTo: (key: string) => void;
+  }) => (
+    <SceneComponent
+      key={route.key}
+      component={scenes[route.key ? route.key : '']}
+      route={route}
+      jumpTo={jumpTo}
+    />
+  );
+};
 
 export default withTheme(BottomNavigation);
 
