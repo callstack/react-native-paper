@@ -86,11 +86,10 @@ const HelperText = ({
   padding = 'normal',
   ...rest
 }: Props) => {
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [shown, setShown] = React.useState<Animated.Value>(
+  const { current: shown } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
+
   const [textHeight, setTextHeight] = React.useState<number>(0);
 
   React.useEffect(() => {
