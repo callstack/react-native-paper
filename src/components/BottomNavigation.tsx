@@ -410,7 +410,7 @@ const BottomNavigation = ({
     setPrevNavigationState(navigationState);
   }
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     // Workaround for native animated bug in react-native@^0.57
     // Context: https://github.com/callstack/react-native-paper/pull/637
     animateToCurrentIndex();
@@ -434,7 +434,7 @@ const BottomNavigation = ({
     };
   }, []);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     // Reset offsets of previous and current tabs before animation
     offsets.forEach((offset, i) => {
       if (i === navigationState.index || i === prevNavigationState?.index) {
