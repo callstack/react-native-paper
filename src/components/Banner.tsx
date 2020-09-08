@@ -119,9 +119,7 @@ const Banner = ({
   theme,
   ...rest
 }: Props) => {
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [position, setPosition] = React.useState<Animated.Value>(
+  const { current: position } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
   const [layout, setLayout] = React.useState<{
@@ -133,17 +131,13 @@ const Banner = ({
   });
 
   React.useEffect(() => {
-    toggle();
+    if (visible) show();
+    else hide();
   }, [visible]);
 
   const handleLayout = ({ nativeEvent }: NativeEvent) => {
     const { height } = nativeEvent.layout;
     setLayout({ height, measured: true });
-  };
-
-  const toggle = () => {
-    if (visible) show();
-    else hide();
   };
 
   const show = () => {
