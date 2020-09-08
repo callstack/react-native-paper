@@ -410,7 +410,7 @@ const BottomNavigation = ({
     setPrevNavigationState(navigationState);
   }
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     // Workaround for native animated bug in react-native@^0.57
     // Context: https://github.com/callstack/react-native-paper/pull/637
     animateToCurrentIndex();
