@@ -252,9 +252,9 @@ const Touchable = ({
     </TouchableWithoutFeedback>
   );
 
-const SceneComponent = ({ component, ...rest }: any) =>
-  React.createElement(component, rest);
-
+const SceneComponent = React.memo(({ component, ...rest }: any) =>
+  React.createElement(component, rest)
+);
 /**
  * Bottom navigation provides quick navigation between top-level views of an app with a bottom navigation bar.
  * It is primarily designed for use on mobile.
@@ -329,32 +329,29 @@ const BottomNavigation = ({
   onIndexChange,
   shifting: shiftingProp,
 }: Props) => {
-  /* eslint-disable @typescript-eslint/no-unused-vars */
   /**
    * Visibility of the navigation bar, visible state is 1 and invisible is 0.
    */
-  // @ts-ignore
-  const [visible, setVisible] = React.useState<Animated.Value>(
+  const { current: visible } = React.useRef<Animated.Value>(
     new Animated.Value(1)
   );
 
   /**
    * Active state of individual tab items, active state is 1 and inactve state is 0.
    */
-  const [tabs, setTabs] = React.useState<Animated.Value[]>(() =>
-    [...navigationState.routes].map(
+  let { current: tabs } = React.useRef<Animated.Value[]>(
+    navigationState.routes.map(
       // focused === 1, unfocused === 0
       (_: any, i: number) =>
         new Animated.Value(i === navigationState.index ? 1 : 0)
     )
   );
-
   /**
    * The top offset for each tab item to position it offscreen.
    * Placing items offscreen helps to save memory usage for inactive screens with removeClippedSubviews.
    * We use animated values for this to prevent unnecesary re-renders.
    */
-  const [offsets, setOffsets] = React.useState<Animated.Value[]>(() =>
+  let { current: offsets } = React.useRef<Animated.Value[]>(
     navigationState.routes.map(
       // offscreen === 1, normal === 0
       (_: any, i: number) =>
@@ -363,17 +360,15 @@ const BottomNavigation = ({
   );
   /**
    * Index of the currently active tab. Used for setting the background color.
-   * Use don't use the color as an animated value directly, because `setValue` seems to be buggy with colors.
+   * We don't use the color as an animated value directly, because `setValue` seems to be buggy with colors.
    */
-  // @ts-ignore
-  const [index, setIndex] = React.useState<Animated.Value>(
+  const { current: index } = React.useRef<Animated.Value>(
     new Animated.Value(navigationState.index)
   );
   /**
    * Animation for the background color ripple, used to determine it's scale and opacity.
    */
-  // @ts-ignore
-  const [ripple, setRipple] = React.useState<Animated.Value>(
+  const { current: ripple } = React.useRef<Animated.Value>(
     new Animated.Value(MIN_RIPPLE_SCALE)
   );
   /**
@@ -384,15 +379,6 @@ const BottomNavigation = ({
     width: number;
     measured: boolean;
   }>({ height: 0, width: 0, measured: false });
-  /**
-   * Currently active index. Used only for getDerivedStateFromProps.
-   */
-  const [current, setCurrent] = React.useState<number>(navigationState.index);
-  /**
-   * Previously active index. Used to determine the position of the ripple.
-   */
-  // @ts-ignore
-  const [previous, setPrevious] = React.useState<number>(0);
   /**
    * List of loaded tabs, tabs will be loaded when navigated to.
    */
@@ -405,24 +391,20 @@ const BottomNavigation = ({
   const [prevNavigationState, setPrevNavigationState] = React.useState<
     NavigationState
   >();
-  /* eslint-enable @typescript-eslint/no-unused-vars */
 
   if (prevNavigationState !== navigationState) {
     // Re-create animated values if routes have been added/removed
     // Preserve previous animated values if they exist, so we don't break animations
-    setTabs(
-      navigationState.routes.map(
-        // focused === 1, unfocused === 0
-        (_: any, i: number) =>
-          tabs[i] || new Animated.Value(i === navigationState.index ? 1 : 0)
-      )
+    tabs = navigationState.routes.map(
+      // focused === 1, unfocused === 0
+      (_: any, i: number) =>
+        tabs[i] || new Animated.Value(i === navigationState.index ? 1 : 0)
     );
-    setOffsets(
-      navigationState.routes.map(
-        // offscreen === 1, normal === 0
-        (_: any, i: number) =>
-          offsets[i] || new Animated.Value(i === navigationState.index ? 0 : 1)
-      )
+
+    offsets = navigationState.routes.map(
+      // offscreen === 1, normal === 0
+      (_: any, i: number) =>
+        offsets[i] || new Animated.Value(i === navigationState.index ? 0 : 1)
     );
 
     setPrevNavigationState(navigationState);
@@ -460,25 +442,18 @@ const BottomNavigation = ({
       }
     });
 
-    if (navigationState.index !== current) {
-      setPrevious(current);
-      // Store the current index in state so that we can later check if the index has changed
-      setCurrent(navigationState.index);
-
-      // Set the current tab to be loaded if it was not loaded before
-      setLoaded(
-        loaded.includes(navigationState.index)
-          ? loaded
-          : [...loaded, navigationState.index]
-      );
-    }
+    setLoaded(
+      loaded.includes(navigationState.index)
+        ? loaded
+        : [...loaded, navigationState.index]
+    );
 
     animateToCurrentIndex();
   }, [navigationState.index]);
 
-  const handleKeyboardShow = async () => {
+  const handleKeyboardShow = () => {
     const { scale } = theme.animation;
-    await setKeyboard(true);
+    setKeyboard(true);
     Animated.timing(visible, {
       toValue: 0,
       duration: 150 * scale,
@@ -669,10 +644,7 @@ const BottomNavigation = ({
               }
             >
               <Animated.View style={[styles.content, { top }]}>
-                {renderScene({
-                  route,
-                  jumpTo: jumpTo,
-                })}
+                {renderScene({ route, jumpTo })}
               </Animated.View>
             </Animated.View>
           );
