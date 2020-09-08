@@ -31,6 +31,10 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    * @optional
    */
   theme: ReactNativePaper.Theme;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 // From https://material.io/design/motion/speed.html#duration
@@ -57,6 +61,7 @@ const CheckboxAndroid = ({
   theme,
   disabled,
   onPress,
+  testID,
   ...rest
 }: Props) => {
   // @ts-ignore
@@ -129,6 +134,7 @@ const CheckboxAndroid = ({
       accessibilityState={{ disabled, checked }}
       accessibilityLiveRegion="polite"
       style={styles.container}
+      testID={testID}
     >
       <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
         <MaterialCommunityIcon
