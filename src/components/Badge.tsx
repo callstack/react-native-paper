@@ -62,9 +62,7 @@ const Badge = ({
   visible = true,
   ...rest
 }: Props) => {
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [opacity, setOpacity] = React.useState<Animated.Value>(
+  const { current: opacity } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
 
