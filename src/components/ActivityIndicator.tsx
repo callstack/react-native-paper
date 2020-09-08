@@ -65,14 +65,10 @@ const ActivityIndicator = ({
   theme,
   ...rest
 }: Props) => {
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [timer, setTimer] = React.useState<Animated.Value>(
+  const { current: timer } = React.useRef<Animated.Value>(
     new Animated.Value(0)
   );
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [fade, setFade] = React.useState<Animated.Value>(
+  const { current: fade } = React.useRef<Animated.Value>(
     new Animated.Value(!animating && hidesWhenStopped ? 0 : 1)
   );
 
