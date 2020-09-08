@@ -64,14 +64,11 @@ const RadioButtonAndroid = ({
   status,
   ...rest
 }: Props) => {
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [borderAnim, setBorderAnim] = React.useState<Animated.Value>(
+  const { current: borderAnim } = React.useRef<Animated.Value>(
     new Animated.Value(BORDER_WIDTH)
   );
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [radioAnim, setRadioAnim] = React.useState<Animated.Value>(
+
+  const { current: radioAnim } = React.useRef<Animated.Value>(
     new Animated.Value(1)
   );
 
