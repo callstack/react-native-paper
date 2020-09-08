@@ -410,15 +410,7 @@ const BottomNavigation = ({
   if (prevNavigationState !== navigationState) {
     // Re-create animated values if routes have been added/removed
     // Preserve previous animated values if they exist, so we don't break animations
-    const newTabs = [...navigationState.routes].map(
-      // focused === 1, unfocused === 0
-      (_: any, i: number) =>
-        tabs[i] || new Animated.Value(i === navigationState.index ? 1 : 0)
-    );
-    setTabs(newTabs);
-    console.log(
-      'tabs after',
-      tabs,
+    setTabs(
       navigationState.routes.map(
         // focused === 1, unfocused === 0
         (_: any, i: number) =>
