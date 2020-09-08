@@ -64,9 +64,7 @@ const CheckboxAndroid = ({
   testID,
   ...rest
 }: Props) => {
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [scaleAnim, setScaleAnim] = React.useState<Animated.Value>(
+  const { current: scaleAnim } = React.useRef<Animated.Value>(
     new Animated.Value(1)
   );
 
