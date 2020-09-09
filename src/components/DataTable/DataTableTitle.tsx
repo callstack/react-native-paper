@@ -84,9 +84,7 @@ const DataTableTitle = ({
   numberOfLines = 1,
   ...rest
 }: Props) => {
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [spinAnim, setSpinAnim] = React.useState<Animated.Value>(
+  const { current: spinAnim } = React.useRef<Animated.Value>(
     new Animated.Value(sortDirection === 'ascending' ? 0 : 1)
   );
 
