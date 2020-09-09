@@ -115,9 +115,7 @@ const Snackbar = ({
   theme,
   ...rest
 }: Props) => {
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [opacity, setOpacity] = React.useState<Animated.Value>(
+  const { current: opacity } = React.useRef<Animated.Value>(
     new Animated.Value(0.0)
   );
   const [hidden, setHidden] = React.useState<boolean>(!visible);
@@ -131,13 +129,9 @@ const Snackbar = ({
   }, []);
 
   React.useLayoutEffect(() => {
-    toggle();
-  }, [visible]);
-
-  const toggle = () => {
     if (visible) show();
     else hide();
-  };
+  }, [visible]);
 
   const show = () => {
     if (hideTimeout.current) clearTimeout(hideTimeout.current);
