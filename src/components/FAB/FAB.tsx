@@ -120,9 +120,7 @@ const FAB = ({
   testID,
   ...rest
 }: Props) => {
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [visibility, setVisibility] = React.useState<Animated.Value>(
+  const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
 

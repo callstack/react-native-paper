@@ -157,27 +157,25 @@ const FABGroup = ({
   onStateChange,
   color: colorProp,
 }: Props) => {
-  const [prevActions, setPrevActions] = React.useState(actions);
-  const [prevOpen, setPrevOpen] = React.useState<boolean | undefined>(
-    undefined
-  );
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [backdrop, setBackdrop] = React.useState<Animated.Value>(
+  const { current: backdrop } = React.useRef<Animated.Value>(
     new Animated.Value(0)
   );
-  const [animations, setAnimations] = React.useState<Animated.Value[]>([]);
+  let { current: animations } = React.useRef<Animated.Value[]>(
+    actions.map((_) => new Animated.Value(open ? 1 : 0))
+  );
 
-  if (actions !== prevActions || open !== prevOpen) {
-    setAnimations(
-      actions.map((_, i) => animations[i] || new Animated.Value(open ? 1 : 0))
+  React.useLayoutEffect(() => {
+    animations = actions.map(
+      (_, i) => animations[i] || new Animated.Value(open ? 1 : 0)
     );
-    if (actions !== prevActions) setPrevActions(actions);
-    if (open !== prevOpen) setPrevOpen(open);
-  }
+  }, [actions]);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     const { scale } = theme.animation;
+    animations = actions.map(
+      (_, i) => animations[i] || new Animated.Value(open ? 1 : 0)
+    );
+
     if (open) {
       Animated.parallel([
         Animated.timing(backdrop, {
