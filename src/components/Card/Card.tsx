@@ -92,9 +92,7 @@ const Card = ({
   accessible,
   ...rest
 }: Props) => {
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [elevation, setElevation] = React.useState<Animated.Value>(
+  const { current: elevation } = React.useRef<Animated.Value>(
     new Animated.Value(cardElevation)
   );
 
