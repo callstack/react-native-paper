@@ -85,18 +85,16 @@ type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
  * ```
  */
 const TouchableRipple = ({
-  /* eslint-disable @typescript-eslint/no-unused-vars */
   style,
-  background,
+  background: _background,
   borderless = false,
   disabled: disabledProp,
   rippleColor,
-  underlayColor,
+  underlayColor: _underlayColor,
   children,
   theme,
   ...rest
-}: /* eslint-disable @typescript-eslint/no-unused-vars */
-Props) => {
+}: Props) => {
   const handlePressIn = (e: any) => {
     const { centered, onPressIn } = rest;
 
