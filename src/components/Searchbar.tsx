@@ -64,6 +64,14 @@ type Props = React.ComponentPropsWithRef<typeof TextInput> & {
   clearIcon?: IconSource;
 };
 
+interface TextInputHandles {
+  focus(): void; // Focuses the input.
+  clear(): void; //Removes all text from the TextInput.
+  blur(): void; // Removes focus from the input.
+  isFocused(): boolean; // Returns `true` if the input is currently focused, `false` otherwise.
+  setNativeProps(args: Object): void;
+}
+
 /**
  * Searchbar is a simple input box where users can type search queries.
  *
@@ -94,146 +102,116 @@ type Props = React.ComponentPropsWithRef<typeof TextInput> & {
 
  * ```
  */
-class Searchbar extends React.Component<Props> {
-  static defaultProps = {
-    searchAccessibilityLabel: 'search',
-    clearAccessibilityLabel: 'clear',
+const Searchbar: React.RefForwardingComponent<TextInputHandles, Props> = (
+  {
+    clearAccessibilityLabel = 'clear',
+    clearIcon,
+    icon,
+    iconColor: customIconColor,
+    inputStyle,
+    onIconPress,
+    placeholder,
+    searchAccessibilityLabel = 'search',
+    style,
+    theme,
+    value,
+    ...rest
+  }: Props,
+  ref
+) => {
+  const root = React.useRef<TextInput | undefined | null>();
+
+  React.useImperativeHandle(ref, () => ({
+    focus: () => root.current?.focus(),
+    clear: () => root.current?.clear(),
+    setNativeProps: (args: Object) => root.current?.setNativeProps(args),
+    isFocused: () => root.current?.isFocused() || false,
+    blur: () => root.current?.blur(),
+  }));
+
+  const handleClearPress = () => {
+    root.current?.clear();
+    rest.onChangeText?.('');
   };
-  private handleClearPress = () => {
-    this.clear();
-    this.props.onChangeText && this.props.onChangeText('');
-  };
 
-  private root: TextInput | undefined | null;
+  const { colors, roundness, dark, fonts } = theme;
+  const textColor = colors.text;
+  const font = fonts.regular;
+  const iconColor =
+    customIconColor ||
+    (dark ? textColor : color(textColor).alpha(0.54).rgb().string());
+  const rippleColor = color(textColor).alpha(0.32).rgb().string();
 
-  /**
-   * @internal
-   */ setNativeProps(args: Object) {
-    return this.root && this.root.setNativeProps(args);
-  }
-
-  /**
-   * Returns `true` if the input is currently focused, `false` otherwise.
-   */
-  isFocused() {
-    return this.root && this.root.isFocused();
-  }
-
-  /**
-   * Removes all text from the TextInput.
-   */
-  clear() {
-    return this.root && this.root.clear();
-  }
-
-  /**
-   * Focuses the input.
-   */
-  focus() {
-    return this.root && this.root.focus();
-  }
-
-  /**
-   * Removes focus from the input.
-   */
-  blur() {
-    return this.root && this.root.blur();
-  }
-
-  render() {
-    const {
-      clearAccessibilityLabel,
-      clearIcon,
-      icon,
-      iconColor: customIconColor,
-      inputStyle,
-      onIconPress,
-      placeholder,
-      searchAccessibilityLabel,
-      style,
-      theme,
-      value,
-      ...rest
-    } = this.props;
-    const { colors, roundness, dark, fonts } = theme;
-    const textColor = colors.text;
-    const font = fonts.regular;
-    const iconColor =
-      customIconColor ||
-      (dark ? textColor : color(textColor).alpha(0.54).rgb().string());
-    const rippleColor = color(textColor).alpha(0.32).rgb().string();
-
-    return (
-      <Surface
-        style={[
-          { borderRadius: roundness, elevation: 4 },
-          styles.container,
-          style,
-        ]}
-      >
-        <IconButton
-          accessibilityTraits="button"
-          accessibilityComponentType="button"
-          accessibilityRole="button"
-          borderless
-          rippleColor={rippleColor}
-          onPress={onIconPress}
-          color={iconColor}
-          icon={
-            icon ||
-            (({ size, color }) => (
-              <MaterialCommunityIcon
-                name="magnify"
-                color={color}
-                size={size}
-                direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
-              />
-            ))
-          }
-          accessibilityLabel={searchAccessibilityLabel}
-        />
-        <TextInput
-          style={[styles.input, { color: textColor, ...font }, inputStyle]}
-          placeholder={placeholder || ''}
-          placeholderTextColor={colors.placeholder}
-          selectionColor={colors.primary}
-          underlineColorAndroid="transparent"
-          returnKeyType="search"
-          keyboardAppearance={dark ? 'dark' : 'light'}
-          accessibilityTraits="search"
-          accessibilityRole="search"
-          ref={(c) => {
-            this.root = c;
-          }}
-          value={value}
-          {...rest}
-        />
-        <IconButton
-          borderless
-          disabled={!value}
-          accessibilityLabel={clearAccessibilityLabel}
-          color={value ? iconColor : 'rgba(255, 255, 255, 0)'}
-          rippleColor={rippleColor}
-          onPress={this.handleClearPress}
-          icon={
-            clearIcon ||
-            (({ size, color }) => (
-              <MaterialCommunityIcon
-                name="close"
-                color={color}
-                size={size}
-                direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
-              />
-            ))
-          }
-          accessibilityTraits="button"
-          accessibilityComponentType="button"
-          accessibilityRole="button"
-        />
-      </Surface>
-    );
-  }
-}
+  return (
+    <Surface
+      style={[
+        { borderRadius: roundness, elevation: 4 },
+        styles.container,
+        style,
+      ]}
+    >
+      <IconButton
+        accessibilityTraits="button"
+        accessibilityComponentType="button"
+        accessibilityRole="button"
+        borderless
+        rippleColor={rippleColor}
+        onPress={onIconPress}
+        color={iconColor}
+        icon={
+          icon ||
+          (({ size, color }) => (
+            <MaterialCommunityIcon
+              name="magnify"
+              color={color}
+              size={size}
+              direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+            />
+          ))
+        }
+        accessibilityLabel={searchAccessibilityLabel}
+      />
+      <TextInput
+        style={[styles.input, { color: textColor, ...font }, inputStyle]}
+        placeholder={placeholder || ''}
+        placeholderTextColor={colors.placeholder}
+        selectionColor={colors.primary}
+        underlineColorAndroid="transparent"
+        returnKeyType="search"
+        keyboardAppearance={dark ? 'dark' : 'light'}
+        accessibilityTraits="search"
+        accessibilityRole="search"
+        ref={(c) => {
+          root.current = c;
+        }}
+        value={value}
+        {...rest}
+      />
+      <IconButton
+        borderless
+        disabled={!value}
+        accessibilityLabel={clearAccessibilityLabel}
+        color={value ? iconColor : 'rgba(255, 255, 255, 0)'}
+        rippleColor={rippleColor}
+        onPress={handleClearPress}
+        icon={
+          clearIcon ||
+          (({ size, color }) => (
+            <MaterialCommunityIcon
+              name="close"
+              color={color}
+              size={size}
+              direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+            />
+          ))
+        }
+        accessibilityTraits="button"
+        accessibilityComponentType="button"
+        accessibilityRole="button"
+      />
+    </Surface>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -250,4 +228,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Searchbar);
+export default withTheme(React.forwardRef(Searchbar));
