@@ -24,15 +24,17 @@ type Props = {
 };
 
 const CrossFadeIcon = ({ color, size, source, theme }: Props) => {
-  const [currentIcon, setCurrentIcon] = React.useState<IconSource>(source);
+  const [currentIcon, setCurrentIcon] = React.useState<IconSource>(
+    () => source
+  );
   const [previousIcon, setPreviousIcon] = React.useState<IconSource | null>(
     null
   );
   const { current: fade } = React.useRef<Animated.Value>(new Animated.Value(1));
 
   if (currentIcon !== source) {
-    setPreviousIcon(currentIcon);
-    setCurrentIcon(source);
+    setPreviousIcon(() => currentIcon);
+    setCurrentIcon(() => source);
   }
 
   React.useEffect(() => {
