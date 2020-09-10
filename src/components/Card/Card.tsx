@@ -34,6 +34,7 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
+  innerContainerStyle?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
@@ -139,6 +140,7 @@ class Card extends React.Component<Props, State> {
       onLongPress,
       onPress,
       style,
+      innerContainerStyle,
       theme,
       testID,
       accessible,
@@ -168,7 +170,7 @@ class Card extends React.Component<Props, State> {
           testID={testID}
           accessible={accessible}
         >
-          <View style={styles.innerContainer}>
+          <View style={[styles.innerContainer, innerContainerStyle]}>
             {React.Children.map(children, (child, index) =>
               React.isValidElement(child)
                 ? React.cloneElement(child, {
