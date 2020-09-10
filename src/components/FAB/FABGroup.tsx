@@ -24,6 +24,7 @@ type Props = {
    * - `accessibilityLabel`: accessibility label for the action, uses label by default if specified
    * - `color`: custom icon color of the action item
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
+   * - `small`: should render small or standard `FAB`. Defaults to `true`
    * - `onPress`: callback that is called when `FAB` is pressed (required)
    */
   actions: Array<{
@@ -32,6 +33,7 @@ type Props = {
     color?: string;
     accessibilityLabel?: string;
     style?: StyleProp<ViewStyle>;
+    small?: boolean;
     onPress: () => void;
     testID?: string;
   }>;
@@ -131,6 +133,7 @@ type State = {
  *               icon: 'bell',
  *               label: 'Remind',
  *               onPress: () => console.log('Pressed notifications'),
+ *               small: false,
  *             },
  *           ]}
  *           onStateChange={onStateChange}
@@ -267,7 +270,13 @@ class FABGroup extends React.Component<Props, State> {
             {actions.map((it, i) => (
               <View
                 key={i} // eslint-disable-line react/no-array-index-key
-                style={styles.item}
+                style={[
+                  styles.item,
+                  {
+                    marginHorizontal:
+                      typeof it.small === 'undefined' || it.small ? 24 : 16,
+                  },
+                ]}
                 pointerEvents={open ? 'box-none' : 'none'}
               >
                 {it.label && (
@@ -281,6 +290,7 @@ class FABGroup extends React.Component<Props, State> {
                         },
                       ] as StyleProp<ViewStyle>
                     }
+                    innerContainerStyle={styles.labelInnerContainer}
                     onPress={() => {
                       it.onPress();
                       this.close();
@@ -298,7 +308,7 @@ class FABGroup extends React.Component<Props, State> {
                   </Card>
                 )}
                 <FAB
-                  small
+                  small={typeof it.small !== 'undefined' ? it.small : true}
                   icon={it.icon}
                   color={it.color}
                   style={
@@ -379,8 +389,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     elevation: 2,
   },
+  labelInnerContainer: {
+    flexGrow: 0,
+    flexShrink: 0,
+  },
   item: {
-    marginHorizontal: 24,
     marginBottom: 16,
     flexDirection: 'row',
     justifyContent: 'flex-end',
