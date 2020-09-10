@@ -3,7 +3,10 @@ import renderer from 'react-test-renderer';
 import Menu from '../Menu/Menu.tsx';
 import Button from '../Button.tsx';
 
-it('renders visible menu', () => {
+jest.useFakeTimers();
+jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
+
+it('renders visible menu', async () => {
   const tree = renderer
     .create(
       <Menu
@@ -20,7 +23,7 @@ it('renders visible menu', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders not visible menu', () => {
+it('renders not visible menu', async () => {
   const tree = renderer
     .create(
       <Menu
@@ -37,7 +40,7 @@ it('renders not visible menu', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders menu with content styles', () => {
+it('renders menu with content styles', async () => {
   const tree = renderer
     .create(
       <Menu
