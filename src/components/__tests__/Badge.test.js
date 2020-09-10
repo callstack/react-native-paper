@@ -3,6 +3,9 @@ import renderer from 'react-test-renderer';
 import Badge from '../Badge.tsx';
 import { red500 } from '../../styles/colors.tsx';
 
+jest.useFakeTimers();
+jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
+
 it('renders badge', () => {
   const tree = renderer.create(<Badge />).toJSON();
 
