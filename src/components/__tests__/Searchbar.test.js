@@ -2,6 +2,8 @@ import * as React from 'react';
 import renderer from 'react-test-renderer';
 import Searchbar from '../Searchbar.tsx';
 
+jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
+
 it('renders with placeholder', () => {
   const tree = renderer.create(<Searchbar placeholder="Search" />).toJSON();
 
