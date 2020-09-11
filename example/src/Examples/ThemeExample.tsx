@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
 import { useTheme, Paragraph } from 'react-native-paper';
 import { Provider as PaperProvider } from 'react-native-paper';
+import * as React from 'react';
+import { StyleSheet, View } from 'react-native';
 
 const Content = () => {
   const theme = useTheme();

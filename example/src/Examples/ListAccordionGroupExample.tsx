@@ -1,6 +1,6 @@
+import { List, useTheme } from 'react-native-paper';
 import * as React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import { List, useTheme } from 'react-native-paper';
 
 type State = string | number | undefined;
 

@@ -8,10 +8,10 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import CheckBox from './Checkbox';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
+import CheckBox from './Checkbox';
 
 type Props = {
   /**

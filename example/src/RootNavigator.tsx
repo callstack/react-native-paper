@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { Appbar } from 'react-native-paper';
+import * as React from 'react';
 import type { DrawerNavigationProp } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 import ExampleList, { examples } from './ExampleList';

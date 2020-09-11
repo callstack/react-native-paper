@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { AccessibilityInfo, Appearance, ColorSchemeName } from 'react-native';
-import { ThemeProvider } from './theming';
-import { Provider as SettingsProvider, Settings } from './settings';
 import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
 import PortalHost from '../components/Portal/PortalHost';
 import DefaultTheme from '../styles/DefaultTheme';
 import DarkTheme from '../styles/DarkTheme';
+import { Provider as SettingsProvider, Settings } from './settings';
+import { ThemeProvider } from './theming';
 
 type Props = {
   children: React.ReactNode;

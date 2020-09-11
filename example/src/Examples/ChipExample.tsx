@@ -1,6 +1,6 @@
+import { Chip, List, useTheme, Snackbar } from 'react-native-paper';
 import * as React from 'react';
 import { View, ScrollView, StyleSheet, Image } from 'react-native';
-import { Chip, List, useTheme, Snackbar } from 'react-native-paper';
 import color from 'color';
 
 const ChipExample = () => {

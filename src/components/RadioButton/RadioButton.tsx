@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
+import { withTheme } from '../../core/theming';
 import RadioButtonGroup from './RadioButtonGroup';
 import RadioButtonAndroid from './RadioButtonAndroid';
 import RadioButtonIOS from './RadioButtonIOS';
 import RadioButtonItem from './RadioButtonItem';
-import { withTheme } from '../../core/theming';
 
 export type Props = {
   /**

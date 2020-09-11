@@ -1,7 +1,4 @@
 import React from 'react';
-import TextInputIcon, { IconAdornment } from './TextInputIcon';
-import TextInputAffix, { AffixAdornment } from './TextInputAffix';
-import { ADORNMENT_OFFSET, OUTLINED_INPUT_OFFSET } from '../constants';
 import {
   LayoutChangeEvent,
   TextStyle,
@@ -9,6 +6,9 @@ import {
   Animated,
   Platform,
 } from 'react-native';
+import { ADORNMENT_OFFSET, OUTLINED_INPUT_OFFSET } from '../constants';
+import TextInputIcon, { IconAdornment } from './TextInputIcon';
+import TextInputAffix, { AffixAdornment } from './TextInputAffix';
 import type {
   AdornmentConfig,
   AdornmentStyleAdjustmentForNativeInput,

@@ -179,12 +179,12 @@ const Gallery = styled.div`
 `;
 
 const Label = styled.label`
-  cursor: pointer  
+  cursor: pointer
   background: #6200ee
-  padding: 3px 
-  width: 33px 
-  height: 20px 
-  border-radius: 33.5px 
+  padding: 3px
+  width: 33px
+  height: 20px
+  border-radius: 33.5px
   display: grid
   margin-right: 5px
 `;
@@ -193,10 +193,10 @@ const ThemeSwitch = styled.div`
   flex-direction: row;
 `;
 const Input = styled.input`
-  position: absolute 
-  opacity: 0 
-  width: 0 
-  height: 0 
+  position: absolute
+  opacity: 0
+  width: 0
+  height: 0
   &:checked + .switch {
     grid-template-columns: 1fr 1fr 0fr;
   }

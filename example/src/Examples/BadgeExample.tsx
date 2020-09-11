@@ -1,5 +1,3 @@
-import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
 import {
   Badge,
   IconButton,
@@ -9,6 +7,8 @@ import {
   Colors,
   useTheme,
 } from 'react-native-paper';
+import * as React from 'react';
+import { View, StyleSheet } from 'react-native';
 
 const BadgeExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);

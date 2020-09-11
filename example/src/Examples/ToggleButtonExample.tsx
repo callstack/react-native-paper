@@ -1,6 +1,6 @@
+import { ToggleButton, List, useTheme } from 'react-native-paper';
 import * as React from 'react';
 import { View, StyleSheet, ImageBackground } from 'react-native';
-import { ToggleButton, List, useTheme } from 'react-native-paper';
 
 type StatusState = 'checked' | 'unchecked';
 

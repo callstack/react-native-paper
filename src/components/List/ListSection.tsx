@@ -6,8 +6,8 @@ import {
   StyleProp,
   TextStyle,
 } from 'react-native';
-import ListSubheader from './ListSubheader';
 import { withTheme } from '../../core/theming';
+import ListSubheader from './ListSubheader';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**

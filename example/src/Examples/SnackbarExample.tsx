@@ -1,6 +1,6 @@
+import { Snackbar, Colors, Button, useTheme } from 'react-native-paper';
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Snackbar, Colors, Button, useTheme } from 'react-native-paper';
 
 const SnackbarExample = () => {
   const [visible, setVisible] = React.useState<boolean>(false);

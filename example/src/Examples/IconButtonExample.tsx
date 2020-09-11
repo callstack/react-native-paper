@@ -1,6 +1,6 @@
+import { IconButton, Colors, useTheme } from 'react-native-paper';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { IconButton, Colors, useTheme } from 'react-native-paper';
 
 const ButtonExample = () => {
   const { colors } = useTheme();

@@ -1,6 +1,6 @@
+import { Avatar, List, Colors, useTheme } from 'react-native-paper';
 import * as React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
-import { Avatar, List, Colors, useTheme } from 'react-native-paper';
 
 const AvatarExample = () => {
   const { colors } = useTheme();

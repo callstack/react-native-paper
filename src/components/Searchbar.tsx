@@ -9,9 +9,9 @@ import {
 } from 'react-native';
 
 import color from 'color';
+import { withTheme } from '../core/theming';
 import IconButton from './IconButton';
 import Surface from './Surface';
-import { withTheme } from '../core/theming';
 import type { IconSource } from './Icon';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 

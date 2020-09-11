@@ -1,5 +1,3 @@
-import * as React from 'react';
-import { ScrollView, View, StyleSheet } from 'react-native';
 import {
   Subheading,
   Button,
@@ -8,6 +6,8 @@ import {
   RadioButton,
   TouchableRipple,
 } from 'react-native-paper';
+import * as React from 'react';
+import { ScrollView, View, StyleSheet } from 'react-native';
 
 type Props = {
   visible: boolean;

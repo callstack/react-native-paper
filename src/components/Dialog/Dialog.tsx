@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { StyleSheet, Platform, StyleProp, ViewStyle } from 'react-native';
 import Modal from '../Modal';
+import { withTheme } from '../../core/theming';
+import overlay from '../../styles/overlay';
 import DialogContent from './DialogContent';
 import DialogActions from './DialogActions';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import DialogTitle, { DialogTitle as _DialogTitle } from './DialogTitle';
 import DialogScrollArea from './DialogScrollArea';
-import { withTheme } from '../../core/theming';
-import overlay from '../../styles/overlay';
 
 type Props = {
   /**

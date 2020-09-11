@@ -1,3 +1,4 @@
+import { Banner, FAB, useTheme } from 'react-native-paper';
 import * as React from 'react';
 import {
   View,
@@ -8,7 +9,6 @@ import {
   Dimensions,
   Platform,
 } from 'react-native';
-import { Banner, FAB, useTheme } from 'react-native-paper';
 
 const PHOTOS = Array.from({ length: 24 }).map(
   (_, i) => `https://unsplash.it/300/300/?random&__id=${i}`

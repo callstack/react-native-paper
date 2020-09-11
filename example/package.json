@@ -12,6 +12,7 @@
   },
   "main": "node_modules/expo/AppEntry.js",
   "dependencies": {
+    "@babel/core":"^7.11.6",
     "@expo/vector-icons": "^10.2.0",
     "@react-native-community/async-storage": "~1.11.0",
     "@react-native-community/masked-view": "0.1.10",

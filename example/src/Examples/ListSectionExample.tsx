@@ -1,6 +1,6 @@
+import { List, Text, Chip, Divider, useTheme } from 'react-native-paper';
 import * as React from 'react';
 import { ScrollView, StyleSheet, Image, View } from 'react-native';
-import { List, Text, Chip, Divider, useTheme } from 'react-native-paper';
 
 const ListSectionExample = () => {
   const {

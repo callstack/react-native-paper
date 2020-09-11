@@ -1,3 +1,4 @@
+import { BottomNavigation } from 'react-native-paper';
 import * as React from 'react';
 import {
   ScrollView,
@@ -7,7 +8,6 @@ import {
   StyleSheet,
   Platform,
 } from 'react-native';
-import { BottomNavigation } from 'react-native-paper';
 
 type RoutesState = Array<{
   key: string;

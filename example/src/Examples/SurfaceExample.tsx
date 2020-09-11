@@ -1,6 +1,6 @@
+import { Text, Surface, useTheme } from 'react-native-paper';
 import * as React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import { Text, Surface, useTheme } from 'react-native-paper';
 
 const SurfaceExample = () => {
   const {

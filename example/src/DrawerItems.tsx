@@ -1,5 +1,3 @@
-import * as React from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
 import {
   Drawer,
   Switch,
@@ -8,6 +6,8 @@ import {
   Colors,
   useTheme,
 } from 'react-native-paper';
+import * as React from 'react';
+import { View, StyleSheet, Platform } from 'react-native';
 
 type Props = {
   toggleTheme: () => void;

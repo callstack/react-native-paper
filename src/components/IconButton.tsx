@@ -9,12 +9,11 @@ import {
 } from 'react-native';
 import color from 'color';
 
+import { withTheme } from '../core/theming';
+import type { $RemoveChildren } from '../types';
 import TouchableRipple from './TouchableRipple/TouchableRipple';
 import Icon, { IconSource } from './Icon';
 import CrossFadeIcon from './CrossFadeIcon';
-import { withTheme } from '../core/theming';
-
-import type { $RemoveChildren } from '../types';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**

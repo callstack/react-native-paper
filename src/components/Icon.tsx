@@ -6,8 +6,8 @@ import {
   ImageSourcePropType,
 } from 'react-native';
 import { Consumer as SettingsConsumer } from '../core/settings';
-import { accessibilityProps } from './MaterialCommunityIcon';
 import { withTheme } from '../core/theming';
+import { accessibilityProps } from './MaterialCommunityIcon';
 
 type IconSourceBase = string | ImageSourcePropType;
 
@@ -84,6 +84,7 @@ const Icon = ({ source, color, size, theme, ...rest }: Props) => {
 
   if (isImageSource(s)) {
     return (
+      // eslint-disable-next-line react-native-a11y/has-valid-accessibility-ignores-invert-colors
       <Image
         {...rest}
         source={s}

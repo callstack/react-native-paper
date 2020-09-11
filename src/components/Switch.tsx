@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { grey400, grey800, grey50, white, black } from '../styles/colors';
 import {
   NativeModules,
   Platform,
@@ -8,6 +7,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import setColor from 'color';
+import { grey400, grey800, grey50, white, black } from '../styles/colors';
 import { withTheme } from '../core/theming';
 
 const version = NativeModules.PlatformConstants

@@ -1,6 +1,6 @@
+import { Colors, Caption, Searchbar, useTheme } from 'react-native-paper';
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Colors, Caption, Searchbar, useTheme } from 'react-native-paper';
 import type { StackNavigationProp } from '@react-navigation/stack';
 
 type Props = {

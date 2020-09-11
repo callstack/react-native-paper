@@ -1,6 +1,6 @@
+import { List, Divider, useTheme } from 'react-native-paper';
 import * as React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import { List, Divider, useTheme } from 'react-native-paper';
 
 const ListAccordionExample = () => {
   const [expanded, setExpanded] = React.useState<boolean>(true);

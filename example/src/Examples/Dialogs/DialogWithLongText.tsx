@@ -1,6 +1,6 @@
+import { Paragraph, Button, Portal, Dialog } from 'react-native-paper';
 import * as React from 'react';
 import { Dimensions, ScrollView } from 'react-native';
-import { Paragraph, Button, Portal, Dialog } from 'react-native-paper';
 
 const DialogWithLongText = ({
   visible,

@@ -1,6 +1,6 @@
+import { ActivityIndicator, Colors, FAB, useTheme } from 'react-native-paper';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { ActivityIndicator, Colors, FAB, useTheme } from 'react-native-paper';
 
 const ActivityIndicatorExample = () => {
   const [animating, setAnimating] = React.useState<boolean>(true);

@@ -2,6 +2,10 @@ import * as React from 'react';
 import { View, ViewStyle, Platform, StyleSheet, StyleProp } from 'react-native';
 import color from 'color';
 
+import Surface from '../Surface';
+import { withTheme } from '../../core/theming';
+import { black, white } from '../../styles/colors';
+import overlay from '../../styles/overlay';
 import AppbarContent, {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   AppbarContent as _AppbarContent,
@@ -10,10 +14,6 @@ import AppbarAction from './AppbarAction';
 import AppbarBackAction from './AppbarBackAction';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import AppbarHeader, { AppbarHeader as _AppbarHeader } from './AppbarHeader';
-import Surface from '../Surface';
-import { withTheme } from '../../core/theming';
-import { black, white } from '../../styles/colors';
-import overlay from '../../styles/overlay';
 
 type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
   /**

@@ -1,6 +1,6 @@
+import { Paragraph, Colors, Portal, Dialog } from 'react-native-paper';
 import * as React from 'react';
 import { ActivityIndicator, Platform, View } from 'react-native';
-import { Paragraph, Colors, Portal, Dialog } from 'react-native-paper';
 
 const isIOS = Platform.OS === 'ios';
 

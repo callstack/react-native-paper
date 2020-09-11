@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
+import { withTheme } from '../../core/theming';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import CheckboxIOS, { CheckboxIOS as _CheckboxIOS } from './CheckboxIOS';
 import CheckboxAndroid, {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   CheckboxAndroid as _CheckboxAndroid,
 } from './CheckboxAndroid';
+
 import CheckboxItem from './CheckboxItem';
-import { withTheme } from '../../core/theming';
 
 type Props = {
   /**

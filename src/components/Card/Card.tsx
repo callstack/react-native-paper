@@ -7,14 +7,14 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+import Surface from '../Surface';
+import { withTheme } from '../../core/theming';
 import CardContent from './CardContent';
 import CardActions from './CardActions';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import CardCover, { CardCover as _CardCover } from './CardCover';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import CardTitle, { CardTitle as _CardTitle } from './CardTitle';
-import Surface from '../Surface';
-import { withTheme } from '../../core/theming';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**

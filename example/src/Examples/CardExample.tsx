@@ -1,5 +1,3 @@
-import * as React from 'react';
-import { Alert, ScrollView, StyleSheet } from 'react-native';
 import {
   Avatar,
   Paragraph,
@@ -8,6 +6,8 @@ import {
   IconButton,
   useTheme,
 } from 'react-native-paper';
+import * as React from 'react';
+import { Alert, ScrollView, StyleSheet } from 'react-native';
 
 const CardExample = () => {
   const {

@@ -27,6 +27,8 @@ DerivedData
 *.xcuserstate
 project.xcworkspace
 
+.eslintcache
+
 # Android/IJ
 #
 .idea

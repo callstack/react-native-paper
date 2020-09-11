@@ -1,6 +1,6 @@
+import { Colors, FAB, Portal, useTheme } from 'react-native-paper';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Colors, FAB, Portal, useTheme } from 'react-native-paper';
 
 const ButtonExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);

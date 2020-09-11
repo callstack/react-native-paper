@@ -7,11 +7,11 @@ import {
   TextStyle,
 } from 'react-native';
 import { withTheme } from '../../core/theming';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import Text from '../Typography/Text';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress } from './utils';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import RadioButton from './RadioButton';
-import Text from '../Typography/Text';
 
 export type Props = {
   /**

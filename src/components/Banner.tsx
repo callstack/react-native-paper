@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { View, ViewStyle, StyleSheet, StyleProp, Animated } from 'react-native';
+import { withTheme } from '../core/theming';
+import type { $RemoveChildren } from '../types';
+import shadow from '../styles/shadow';
 import Surface from './Surface';
 import Text from './Typography/Text';
 import Button from './Button';
 import Icon, { IconSource } from './Icon';
-import { withTheme } from '../core/theming';
-import type { $RemoveChildren } from '../types';
-import shadow from '../styles/shadow';
 
 const ELEVATION = 1;
 const DEFAULT_MAX_WIDTH = 960;

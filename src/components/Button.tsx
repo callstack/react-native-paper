@@ -9,13 +9,13 @@ import {
 } from 'react-native';
 import color from 'color';
 
+import { black, white } from '../styles/colors';
+import { withTheme } from '../core/theming';
 import ActivityIndicator from './ActivityIndicator';
 import Icon, { IconSource } from './Icon';
 import Surface from './Surface';
 import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple/TouchableRipple';
-import { black, white } from '../styles/colors';
-import { withTheme } from '../core/theming';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**

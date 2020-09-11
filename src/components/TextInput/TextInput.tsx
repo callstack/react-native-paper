@@ -7,13 +7,13 @@ import {
   StyleProp,
   TextStyle,
 } from 'react-native';
+import { withTheme } from '../../core/theming';
+import type { $Omit } from '../../types';
 import TextInputOutlined from './TextInputOutlined';
 import TextInputFlat from './TextInputFlat';
 import TextInputIcon from './Adornment/TextInputIcon';
 import TextInputAffix from './Adornment/TextInputAffix';
-import { withTheme } from '../../core/theming';
 import type { RenderProps, State } from './types';
-import type { $Omit } from '../../types';
 
 const BLUR_ANIMATION_DURATION = 180;
 const FOCUS_ANIMATION_DURATION = 150;

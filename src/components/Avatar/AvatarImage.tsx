@@ -80,6 +80,7 @@ const AvatarImage = ({
       {typeof source === 'function' && source({ size })}
       {typeof source !== 'function' && (
         <Image
+          accessibilityIgnoresInvertColors
           source={source}
           style={{ width: size, height: size, borderRadius: size / 2 }}
         />

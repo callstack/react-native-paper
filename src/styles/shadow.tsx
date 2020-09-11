@@ -1,5 +1,5 @@
-import * as Colors from './colors';
 import { Animated } from 'react-native';
+import * as Colors from './colors';
 
 const SHADOW_COLOR = Colors.black;
 const SHADOW_OPACITY = 0.24;

@@ -9,8 +9,8 @@ import {
   ViewStyle,
 } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
-import Surface from './Surface';
 import { withTheme } from '../core/theming';
+import Surface from './Surface';
 
 type Props = {
   /**

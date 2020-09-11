@@ -1,6 +1,6 @@
+import { DataTable, Card, useTheme } from 'react-native-paper';
 import * as React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import { DataTable, Card, useTheme } from 'react-native-paper';
 
 type ItemsState = Array<{
   key: number;

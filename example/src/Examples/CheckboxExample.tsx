@@ -1,5 +1,3 @@
-import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
 import {
   Paragraph,
   Checkbox,
@@ -7,6 +5,8 @@ import {
   TouchableRipple,
   useTheme,
 } from 'react-native-paper';
+import * as React from 'react';
+import { View, StyleSheet } from 'react-native';
 
 const CheckboxExample = () => {
   const [checkedNormal, setCheckedNormal] = React.useState<boolean>(true);

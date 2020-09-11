@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { Paragraph, Button, Portal, Dialog, Colors } from 'react-native-paper';
+import * as React from 'react';
 
 const DialogWithCustomColors = ({
   visible,

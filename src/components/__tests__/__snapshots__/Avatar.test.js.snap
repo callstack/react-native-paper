@@ -125,6 +125,7 @@ exports[`renders avatar with image 1`] = `
   }
 >
   <Image
+    accessibilityIgnoresInvertColors={true}
     source={
       Object {
         "src": "avatar.png",

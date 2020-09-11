@@ -16,13 +16,13 @@ import {
 import SafeAreaView from 'react-native-safe-area-view';
 import color from 'color';
 import overlay from '../styles/overlay';
+import { black, white } from '../styles/colors';
+import { withTheme } from '../core/theming';
 import Icon, { IconSource } from './Icon';
 import Surface from './Surface';
 import Badge from './Badge';
 import TouchableRipple from './TouchableRipple/TouchableRipple';
 import Text from './Typography/Text';
-import { black, white } from '../styles/colors';
-import { withTheme } from '../core/theming';
 
 type Route = {
   key: string;

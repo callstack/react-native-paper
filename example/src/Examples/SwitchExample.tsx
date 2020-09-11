@@ -1,5 +1,3 @@
-import * as React from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
 import {
   Paragraph,
   Switch,
@@ -7,6 +5,8 @@ import {
   TouchableRipple,
   useTheme,
 } from 'react-native-paper';
+import * as React from 'react';
+import { View, StyleSheet, Platform } from 'react-native';
 
 const SwitchExample = () => {
   const [valueNormal, setNormalValue] = React.useState<boolean>(true);

@@ -5,8 +5,6 @@
 
   "extends": ["@callstack"],
 
-  "plugins": ["react-native"],
-
   "rules": {
     "one-var": "off",
     "no-multi-assign": "off",
@@ -18,7 +16,8 @@
 
     "react-native/no-unused-styles": "error",
     "react-native/split-platform-components": "off",
-    "react-native/no-raw-text": "off"
+    "react-native/no-raw-text": "off",
+    "react-native-a11y/has-accessibility-hint": "warn"
   },
 
   "settings": {
@@ -31,5 +30,26 @@
         "extensions": [".js", ".ts", ".tsx"]
       }
     }
-  }
+  },
+  "overrides": [
+    {
+      "files": ["docs/**/*"],
+      "rules": {
+        "react-native-a11y/has-valid-accessibility-ignores-invert-colors": "off"
+      }
+    },
+    {
+      // "example/**/*" doesn't work because reasons, seems like an ESLint bug
+      "files": ["**/Examples/**/*"],
+      "rules": {
+        "react-native-a11y/has-valid-accessibility-ignores-invert-colors": "off"
+      }
+    },
+    {
+      "files": ["**/__tests__/**/*"],
+      "rules": {
+        "react-native-a11y/has-valid-accessibility-ignores-invert-colors": "off"
+      }
+    }
+  ]
 }

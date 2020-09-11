@@ -364,6 +364,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             }
           >
             <Image
+              accessibilityIgnoresInvertColors={false}
               source={
                 Object {
                   "testUri": "../../../src/assets/back-chevron.png",

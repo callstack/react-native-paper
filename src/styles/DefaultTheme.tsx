@@ -1,7 +1,7 @@
 import color from 'color';
+import type { Theme } from '../types';
 import { black, white, pinkA400 } from './colors';
 import configureFonts from './fonts';
-import type { Theme } from '../types';
 
 const DefaultTheme: Theme = {
   dark: false,

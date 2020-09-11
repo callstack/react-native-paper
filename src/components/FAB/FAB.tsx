@@ -2,8 +2,6 @@ import color from 'color';
 import * as React from 'react';
 import { Animated, View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 import ActivityIndicator from '../ActivityIndicator';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import FABGroup, { FABGroup as _FABGroup } from './FABGroup';
 import Surface from '../Surface';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon from '../Icon';
@@ -12,6 +10,8 @@ import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren } from '../../types';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- for component-docs
+import FABGroup, { FABGroup as _FABGroup } from './FABGroup';
 import type { IconSource } from './../Icon';
 import type { AccessibilityState } from 'react-native';
 

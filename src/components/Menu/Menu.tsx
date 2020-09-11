@@ -20,9 +20,8 @@ import { withTheme } from '../../core/theming';
 import type { $Omit } from '../../types';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import MenuItem, { MenuItem as _MenuItem } from './MenuItem';
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
+import MenuItem from './MenuItem';
 
 type Props = {
   /**

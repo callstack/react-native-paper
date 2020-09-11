@@ -15,6 +15,7 @@ const AppbarBackIcon = ({ size, color }: { size: number; color: string }) =>
       ]}
     >
       <Image
+        accessibilityIgnoresInvertColors={false}
         source={require('../../assets/back-chevron.png')}
         style={[styles.icon, { tintColor: color }]}
       />
