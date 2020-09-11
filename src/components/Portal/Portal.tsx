@@ -37,29 +37,23 @@ type Props = {
  * export default MyComponent;
  * ```
  */
-class Portal extends React.Component<Props> {
-  // @component ./PortalHost.tsx
-  static Host = PortalHost;
-
-  render() {
-    const { children, theme } = this.props;
-
-    return (
-      <SettingsConsumer>
-        {(settings) => (
-          <PortalContext.Consumer>
-            {(manager) => (
-              <PortalConsumer manager={manager as PortalMethods}>
-                <SettingsProvider value={settings}>
-                  <ThemeProvider theme={theme}>{children}</ThemeProvider>
-                </SettingsProvider>
-              </PortalConsumer>
-            )}
-          </PortalContext.Consumer>
+const Portal = ({ children, theme }: Props) => (
+  <SettingsConsumer>
+    {(settings) => (
+      <PortalContext.Consumer>
+        {(manager) => (
+          <PortalConsumer manager={manager as PortalMethods}>
+            <SettingsProvider value={settings}>
+              <ThemeProvider theme={theme}>{children}</ThemeProvider>
+            </SettingsProvider>
+          </PortalConsumer>
         )}
-      </SettingsConsumer>
-    );
-  }
-}
+      </PortalContext.Consumer>
+    )}
+  </SettingsConsumer>
+);
+
+// @component ./PortalHost.tsx
+Portal.Host = PortalHost;
 
 export default withTheme(Portal);

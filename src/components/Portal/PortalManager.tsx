@@ -1,54 +1,56 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-type State = {
-  portals: Array<{
-    key: number;
-    children: React.ReactNode;
-  }>;
+export type PortalManagerMethods = {
+  mount: (key: number, children: React.ReactNode) => void;
+  update: (key: number, children: React.ReactNode) => void;
+  unmount: (key: number) => void;
 };
 
 /**
  * Portal host is the component which actually renders all Portals.
  */
-export default class PortalManager extends React.PureComponent<{}, State> {
-  state: State = {
-    portals: [],
-  };
+const PortalManager: React.RefForwardingComponent<PortalManagerMethods, {}> = (
+  _,
+  ref
+): any => {
+  const [portals, setPortals] = React.useState<
+    Array<{
+      key: number;
+      children: React.ReactNode;
+    }>
+  >([]);
+  React.useImperativeHandle(
+    ref,
+    (): PortalManagerMethods => ({
+      mount: (key: number, children: React.ReactNode) =>
+        setPortals((portals) => [...portals, { key, children }]),
+      update: (key: number, children: React.ReactNode) =>
+        setPortals((portals) =>
+          portals.map((item) => {
+            if (item.key === key) {
+              return { ...item, children };
+            }
+            return item;
+          })
+        ),
+      unmount: (key: number) =>
+        setPortals((portals) => portals.filter((item) => item.key !== key)),
+    })
+  );
 
-  mount = (key: number, children: React.ReactNode) => {
-    this.setState((state) => ({
-      portals: [...state.portals, { key, children }],
-    }));
-  };
+  return portals.map(({ key, children }) => (
+    <View
+      key={key}
+      collapsable={
+        false /* Need collapsable=false here to clip the elevations, otherwise they appear above sibling components */
+      }
+      pointerEvents="box-none"
+      style={StyleSheet.absoluteFill}
+    >
+      {children}
+    </View>
+  ));
+};
 
-  update = (key: number, children: React.ReactNode) =>
-    this.setState((state) => ({
-      portals: state.portals.map((item) => {
-        if (item.key === key) {
-          return { ...item, children };
-        }
-        return item;
-      }),
-    }));
-
-  unmount = (key: number) =>
-    this.setState((state) => ({
-      portals: state.portals.filter((item) => item.key !== key),
-    }));
-
-  render() {
-    return this.state.portals.map(({ key, children }) => (
-      <View
-        key={key}
-        collapsable={
-          false /* Need collapsable=false here to clip the elevations, otherwise they appear above sibling components */
-        }
-        pointerEvents="box-none"
-        style={StyleSheet.absoluteFill}
-      >
-        {children}
-      </View>
-    ));
-  }
-}
+export default React.forwardRef(PortalManager);

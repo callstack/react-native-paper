@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import PortalManager from './PortalManager';
+import PortalManager, { PortalManagerMethods } from './PortalManager';
 
 type Props = {
   children: React.ReactNode;
@@ -17,7 +17,7 @@ export type PortalMethods = {
   unmount: (key: number) => void;
 };
 
-export const PortalContext = React.createContext<PortalMethods>(null as any);
+export const PortalContext = React.createContext<PortalMethods | null>(null);
 
 /**
  * Portal host renders all of its children `Portal` elements.
@@ -41,13 +41,14 @@ export const PortalContext = React.createContext<PortalMethods>(null as any);
  *
  * Here any `Portal` elements under `<App />` are rendered alongside `<App />` and will appear above `<App />` like a `Modal`.
  */
-export default class PortalHost extends React.Component<Props> {
-  static displayName = 'Portal.Host';
+const PortalHost = ({ children }: Props) => {
+  let { current: nextKey } = React.useRef<number>(0);
+  const { current: queue } = React.useRef<Operation[]>([]);
+  let { current: manager } = React.useRef<
+    PortalManagerMethods | null | undefined
+  >();
 
-  componentDidMount() {
-    const manager = this.manager;
-    const queue = this.queue;
-
+  React.useEffect(() => {
     while (queue.length && manager) {
       const action = queue.pop();
       if (action) {
@@ -65,79 +66,77 @@ export default class PortalHost extends React.Component<Props> {
         }
       }
     }
-  }
+  }, []);
 
-  private setManager = (manager: PortalManager | undefined | null) => {
-    this.manager = manager;
+  const setManager = (newManager: PortalManagerMethods | undefined | null) => {
+    manager = newManager;
   };
 
-  private mount = (children: React.ReactNode) => {
-    const key = this.nextKey++;
+  const mount = (children: React.ReactNode) => {
+    const key = nextKey++;
 
-    if (this.manager) {
-      this.manager.mount(key, children);
+    if (manager) {
+      manager.mount(key, children);
     } else {
-      this.queue.push({ type: 'mount', key, children });
+      queue.push({ type: 'mount', key, children });
     }
 
     return key;
   };
 
-  private update = (key: number, children: React.ReactNode) => {
-    if (this.manager) {
-      this.manager.update(key, children);
+  const update = (key: number, children: React.ReactNode) => {
+    if (manager) {
+      manager.update(key, children);
     } else {
-      const op = { type: 'mount', key, children };
-      const index = this.queue.findIndex(
+      const op: Operation = { type: 'mount', key, children };
+      const index = queue.findIndex(
         (o) => o.type === 'mount' || (o.type === 'update' && o.key === key)
       );
 
       if (index > -1) {
         // @ts-ignore
-        this.queue[index] = op;
+        queue[index] = op;
       } else {
-        this.queue.push(op as Operation);
+        queue.push(op);
       }
     }
   };
 
-  private unmount = (key: number) => {
-    if (this.manager) {
-      this.manager.unmount(key);
+  const unmount = (key: number) => {
+    if (manager) {
+      manager.unmount(key);
     } else {
-      this.queue.push({ type: 'unmount', key });
+      queue.push({ type: 'unmount', key });
     }
   };
 
-  private nextKey = 0;
-  private queue: Operation[] = [];
-  private manager: PortalManager | null | undefined;
-
-  render() {
-    return (
-      <PortalContext.Provider
-        value={{
-          mount: this.mount,
-          update: this.update,
-          unmount: this.unmount,
-        }}
+  return (
+    <PortalContext.Provider
+      value={{
+        mount,
+        update,
+        unmount,
+      }}
+    >
+      {/* Need collapsable=false here to clip the elevations, otherwise they appear above Portal components */}
+      <View
+        style={styles.container}
+        collapsable={false}
+        pointerEvents="box-none"
       >
-        {/* Need collapsable=false here to clip the elevations, otherwise they appear above Portal components */}
-        <View
-          style={styles.container}
-          collapsable={false}
-          pointerEvents="box-none"
-        >
-          {this.props.children}
-        </View>
-        <PortalManager ref={this.setManager} />
-      </PortalContext.Provider>
-    );
-  }
-}
+        {children}
+      </View>
+      <PortalManager ref={setManager} />
+    </PortalContext.Provider>
+  );
+};
+
+PortalHost.displayName = 'Portal.Host';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
 });
+
+export default PortalHost;
