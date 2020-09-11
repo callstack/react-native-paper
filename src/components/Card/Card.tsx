@@ -11,9 +11,9 @@ import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import CardContent from './CardContent';
 import CardActions from './CardActions';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- for component-docs
 import CardCover, { CardCover as _CardCover } from './CardCover';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- for component-docs
 import CardTitle, { CardTitle as _CardTitle } from './CardTitle';
 
 type Props = React.ComponentProps<typeof Surface> & {

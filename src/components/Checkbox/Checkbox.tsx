@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
 import { withTheme } from '../../core/theming';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- for component-docs
 import CheckboxIOS, { CheckboxIOS as _CheckboxIOS } from './CheckboxIOS';
 import CheckboxAndroid, {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- for component-docs
   CheckboxAndroid as _CheckboxAndroid,
 } from './CheckboxAndroid';
 

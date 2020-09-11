@@ -5,7 +5,7 @@ import { withTheme } from '../../core/theming';
 import overlay from '../../styles/overlay';
 import DialogContent from './DialogContent';
 import DialogActions from './DialogActions';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- for component-docs
 import DialogTitle, { DialogTitle as _DialogTitle } from './DialogTitle';
 import DialogScrollArea from './DialogScrollArea';
 

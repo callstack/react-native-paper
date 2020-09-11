@@ -7,12 +7,12 @@ import { withTheme } from '../../core/theming';
 import { black, white } from '../../styles/colors';
 import overlay from '../../styles/overlay';
 import AppbarContent, {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- for component-docs
   AppbarContent as _AppbarContent,
 } from './AppbarContent';
 import AppbarAction from './AppbarAction';
 import AppbarBackAction from './AppbarBackAction';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- for component-docs
 import AppbarHeader, { AppbarHeader as _AppbarHeader } from './AppbarHeader';
 
 type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
