@@ -23,7 +23,6 @@ const StyledText = ({ theme, alpha, family, style, ...rest }: Props) => {
       style={[
         { color: textColor, ...font, textAlign: 'left', writingDirection },
         style,
-        style,
       ]}
     />
   );
