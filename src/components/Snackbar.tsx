@@ -270,6 +270,9 @@ class Snackbar extends React.Component<Props, State> {
                 onDismiss();
               }}
               style={styles.button}
+                /**
+                * Change the color of the text of the action of the snackbar passing a theme prop.
+                */
               color={colors.accent}
               compact
               mode="text"
