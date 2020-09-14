@@ -76,42 +76,7 @@ const ActivityIndicator = ({
     undefined
   );
 
-  React.useEffect(() => {
-    // Circular animation in loop
-    rotation.current = Animated.timing(timer, {
-      duration: DURATION,
-      easing: Easing.linear,
-      // Animated.loop does not work if useNativeDriver is true on web
-      useNativeDriver: Platform.OS !== 'web',
-      toValue: 1,
-      isInteraction: false,
-    });
-
-    if (animating) {
-      startRotation();
-    }
-  }, []);
-
-  React.useEffect(() => {
-    const {
-      animation: { scale },
-    } = theme;
-    if (animating) {
-      startRotation();
-    } else if (hidesWhenStopped) {
-      // Hide indicator first and then stop rotation
-      Animated.timing(fade, {
-        duration: 200 * scale,
-        toValue: 0,
-        useNativeDriver: true,
-        isInteraction: false,
-      }).start(stopRotation);
-    } else {
-      stopRotation();
-    }
-  }, [animating]);
-
-  const startRotation = () => {
+  const startRotation = React.useCallback(() => {
     const { scale } = theme.animation;
 
     // Show indicator
@@ -128,13 +93,44 @@ const ActivityIndicator = ({
       // $FlowFixMe
       Animated.loop(rotation.current).start();
     }
-  };
+  }, [theme.animation, fade, timer]);
 
   const stopRotation = () => {
     if (rotation.current) {
       rotation.current.stop();
     }
   };
+
+  React.useEffect(() => {
+    const {
+      animation: { scale },
+    } = theme;
+    if (rotation.current === undefined) {
+      // Circular animation in loop
+      rotation.current = Animated.timing(timer, {
+        duration: DURATION,
+        easing: Easing.linear,
+        // Animated.loop does not work if useNativeDriver is true on web
+        useNativeDriver: Platform.OS !== 'web',
+        toValue: 1,
+        isInteraction: false,
+      });
+    }
+
+    if (animating) {
+      startRotation();
+    } else if (hidesWhenStopped) {
+      // Hide indicator first and then stop rotation
+      Animated.timing(fade, {
+        duration: 200 * scale,
+        toValue: 0,
+        useNativeDriver: true,
+        isInteraction: false,
+      }).start(stopRotation);
+    } else {
+      stopRotation();
+    }
+  }, [animating, fade, hidesWhenStopped, startRotation, theme, timer]);
 
   const color = indicatorColor || theme.colors.primary;
   const size =
