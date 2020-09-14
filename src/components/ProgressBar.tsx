@@ -75,24 +75,11 @@ const ProgressBar = ({
   const [width, setWidth] = React.useState<number>(0);
   const [prevWidth, setPrevWidth] = React.useState<number>(0);
 
-  let {
-    current: indeterminateAnimation,
-  } = React.useRef<Animated.CompositeAnimation | null>(null);
+  const indeterminateAnimation = React.useRef<Animated.CompositeAnimation | null>(
+    null
+  );
 
-  React.useEffect(() => {
-    // Start animation the very first time when previously the width was unclear
-    if (visible && prevWidth === 0) {
-      startAnimation();
-    } else if (visible) startAnimation();
-    else stopAnimation();
-  });
-
-  const onLayout = (event: LayoutChangeEvent) => {
-    setPrevWidth(width);
-    setWidth(event.nativeEvent.layout.width);
-  };
-
-  const startAnimation = () => {
+  const startAnimation = React.useCallback(() => {
     const { scale } = theme.animation;
 
     // Show progress bar
@@ -105,8 +92,8 @@ const ProgressBar = ({
 
     // Animate progress bar
     if (indeterminate) {
-      if (!indeterminateAnimation) {
-        indeterminateAnimation = Animated.timing(timer, {
+      if (!indeterminateAnimation.current) {
+        indeterminateAnimation.current = Animated.timing(timer, {
           duration: INDETERMINATE_DURATION,
           toValue: 1,
           // Animated.loop does not work if useNativeDriver is true on web
@@ -118,7 +105,7 @@ const ProgressBar = ({
       // Reset timer to the beginning
       timer.setValue(0);
 
-      Animated.loop(indeterminateAnimation).start();
+      Animated.loop(indeterminateAnimation.current).start();
     } else {
       Animated.timing(timer, {
         duration: 200 * scale,
@@ -127,14 +114,14 @@ const ProgressBar = ({
         isInteraction: false,
       }).start();
     }
-  };
+  }, [theme.animation, timer, progress, indeterminate, fade]);
 
-  const stopAnimation = () => {
+  const stopAnimation = React.useCallback(() => {
     const { scale } = theme.animation;
 
     // Stop indeterminate animation
-    if (indeterminateAnimation) {
-      indeterminateAnimation.stop();
+    if (indeterminateAnimation.current) {
+      indeterminateAnimation.current.stop();
     }
 
     Animated.timing(fade, {
@@ -143,6 +130,23 @@ const ProgressBar = ({
       useNativeDriver: true,
       isInteraction: false,
     }).start();
+  }, [fade, theme.animation]);
+
+  React.useEffect(() => {
+    if (visible) startAnimation();
+    else stopAnimation();
+  }, [progress, visible, startAnimation, stopAnimation]);
+
+  React.useEffect(() => {
+    // Start animation the very first time when previously the width was unclear
+    if (visible && prevWidth === 0) {
+      startAnimation();
+    }
+  }, [width, prevWidth, startAnimation, visible]);
+
+  const onLayout = (event: LayoutChangeEvent) => {
+    setPrevWidth(width);
+    setWidth(event.nativeEvent.layout.width);
   };
 
   const tintColor = color || theme.colors.primary;
