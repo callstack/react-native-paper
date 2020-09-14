@@ -160,20 +160,15 @@ const FABGroup = ({
   const { current: backdrop } = React.useRef<Animated.Value>(
     new Animated.Value(0)
   );
-  let { current: animations } = React.useRef<Animated.Value[]>(
+  const animations = React.useRef<Animated.Value[]>(
     actions.map((_) => new Animated.Value(open ? 1 : 0))
   );
 
-  React.useLayoutEffect(() => {
-    animations = actions.map(
-      (_, i) => animations[i] || new Animated.Value(open ? 1 : 0)
-    );
-  }, [actions]);
+  const { scale } = theme.animation;
 
   React.useLayoutEffect(() => {
-    const { scale } = theme.animation;
-    animations = actions.map(
-      (_, i) => animations[i] || new Animated.Value(open ? 1 : 0)
+    animations.current = actions.map(
+      (_, i) => animations.current[i] || new Animated.Value(open ? 1 : 0)
     );
 
     if (open) {
@@ -185,7 +180,7 @@ const FABGroup = ({
         }),
         Animated.stagger(
           50 * scale,
-          animations
+          animations.current
             .map((animation) =>
               Animated.timing(animation, {
                 toValue: 1,
@@ -203,7 +198,7 @@ const FABGroup = ({
           duration: 200 * scale,
           useNativeDriver: true,
         }),
-        ...animations.map((animation) =>
+        ...animations.current.map((animation) =>
           Animated.timing(animation, {
             toValue: 0,
             duration: 150 * scale,
@@ -212,7 +207,7 @@ const FABGroup = ({
         ),
       ]).start();
     }
-  }, [open]);
+  }, [open, actions, backdrop, scale]);
 
   const close = () => onStateChange({ open: false });
 
@@ -230,7 +225,7 @@ const FABGroup = ({
       })
     : backdrop;
 
-  const opacities = animations;
+  const opacities = animations.current;
   const scales = opacities.map((opacity) =>
     open
       ? opacity.interpolate({

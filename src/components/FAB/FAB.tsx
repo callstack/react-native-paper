@@ -123,9 +123,9 @@ const FAB = ({
   const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
+  const { scale } = theme.animation;
 
   React.useEffect(() => {
-    const { scale } = theme.animation;
     if (visible) {
       Animated.timing(visibility, {
         toValue: 1,
@@ -139,7 +139,7 @@ const FAB = ({
         useNativeDriver: true,
       }).start();
     }
-  }, [visible]);
+  }, [visible, scale, visibility]);
 
   const IconComponent = animated ? CrossFadeIcon : Icon;
 
