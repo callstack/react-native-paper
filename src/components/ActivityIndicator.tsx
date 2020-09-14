@@ -76,9 +76,11 @@ const ActivityIndicator = ({
     undefined
   );
 
-  const startRotation = React.useCallback(() => {
-    const { scale } = theme.animation;
+  const {
+    animation: { scale },
+  } = theme;
 
+  const startRotation = React.useCallback(() => {
     // Show indicator
     Animated.timing(fade, {
       duration: 200 * scale,
@@ -93,7 +95,7 @@ const ActivityIndicator = ({
       // $FlowFixMe
       Animated.loop(rotation.current).start();
     }
-  }, [theme.animation, fade, timer]);
+  }, [scale, fade, timer]);
 
   const stopRotation = () => {
     if (rotation.current) {
@@ -102,9 +104,6 @@ const ActivityIndicator = ({
   };
 
   React.useEffect(() => {
-    const {
-      animation: { scale },
-    } = theme;
     if (rotation.current === undefined) {
       // Circular animation in loop
       rotation.current = Animated.timing(timer, {
@@ -130,7 +129,7 @@ const ActivityIndicator = ({
     } else {
       stopRotation();
     }
-  }, [animating, fade, hidesWhenStopped, startRotation, theme, timer]);
+  }, [animating, fade, hidesWhenStopped, startRotation, scale, timer]);
 
   const color = indicatorColor || theme.colors.primary;
   const size =
