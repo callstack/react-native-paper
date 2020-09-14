@@ -79,9 +79,9 @@ const ProgressBar = ({
     null
   );
 
-  const startAnimation = React.useCallback(() => {
-    const { scale } = theme.animation;
+  const { scale } = theme.animation;
 
+  const startAnimation = React.useCallback(() => {
     // Show progress bar
     Animated.timing(fade, {
       duration: 200 * scale,
@@ -114,11 +114,9 @@ const ProgressBar = ({
         isInteraction: false,
       }).start();
     }
-  }, [theme.animation, timer, progress, indeterminate, fade]);
+  }, [scale, timer, progress, indeterminate, fade]);
 
   const stopAnimation = React.useCallback(() => {
-    const { scale } = theme.animation;
-
     // Stop indeterminate animation
     if (indeterminateAnimation.current) {
       indeterminateAnimation.current.stop();
@@ -130,7 +128,7 @@ const ProgressBar = ({
       useNativeDriver: true,
       isInteraction: false,
     }).start();
-  }, [fade, theme.animation]);
+  }, [fade, scale]);
 
   React.useEffect(() => {
     if (visible) startAnimation();
