@@ -75,7 +75,7 @@ const Badge = ({
       duration: 150 * scale,
       useNativeDriver: true,
     }).start();
-  }, [visible]);
+  }, [visible, opacity, theme]);
 
   const { backgroundColor = theme.colors.notification, ...restStyle } =
     StyleSheet.flatten(style) || {};
