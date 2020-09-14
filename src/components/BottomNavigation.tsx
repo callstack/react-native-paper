@@ -1,5 +1,3 @@
-/* eslint-disable react/no-multi-comp */
-
 import * as React from 'react';
 import {
   View,
@@ -329,6 +327,9 @@ const BottomNavigation = ({
   onIndexChange,
   shifting: shiftingProp,
 }: Props) => {
+  const {
+    animation: { scale },
+  } = theme;
   /**
    * Visibility of the navigation bar, visible state is 1 and invisible is 0.
    */
@@ -410,59 +411,16 @@ const BottomNavigation = ({
     setPrevNavigationState(navigationState);
   }
 
-  React.useEffect(() => {
-    // Workaround for native animated bug in react-native@^0.57
-    // Context: https://github.com/callstack/react-native-paper/pull/637
-    animateToCurrentIndex();
-
-    if (Platform.OS === 'ios') {
-      Keyboard.addListener('keyboardWillShow', handleKeyboardShow);
-      Keyboard.addListener('keyboardWillHide', handleKeyboardHide);
-    } else {
-      Keyboard.addListener('keyboardDidShow', handleKeyboardShow);
-      Keyboard.addListener('keyboardDidHide', handleKeyboardHide);
-    }
-
-    return () => {
-      if (Platform.OS === 'ios') {
-        Keyboard.removeListener('keyboardWillShow', handleKeyboardShow);
-        Keyboard.removeListener('keyboardWillHide', handleKeyboardHide);
-      } else {
-        Keyboard.removeListener('keyboardDidShow', handleKeyboardShow);
-        Keyboard.removeListener('keyboardDidHide', handleKeyboardHide);
-      }
-    };
-  }, []);
-
-  React.useLayoutEffect(() => {
-    // Reset offsets of previous and current tabs before animation
-    offsets.forEach((offset, i) => {
-      if (i === navigationState.index || i === prevNavigationState?.index) {
-        offset.setValue(0);
-      }
-    });
-
-    setLoaded(
-      loaded.includes(navigationState.index)
-        ? loaded
-        : [...loaded, navigationState.index]
-    );
-
-    animateToCurrentIndex();
-  }, [navigationState.index]);
-
-  const handleKeyboardShow = () => {
-    const { scale } = theme.animation;
+  const handleKeyboardShow = React.useCallback(() => {
     setKeyboard(true);
     Animated.timing(visible, {
       toValue: 0,
       duration: 150 * scale,
       useNativeDriver: true,
     }).start();
-  };
+  }, [scale, visible]);
 
-  const handleKeyboardHide = () => {
-    const { scale } = theme.animation;
+  const handleKeyboardHide = React.useCallback(() => {
     Animated.timing(visible, {
       toValue: 1,
       duration: 100 * scale,
@@ -470,13 +428,18 @@ const BottomNavigation = ({
     }).start(() => {
       setKeyboard(false);
     });
-  };
+  }, [scale, visible]);
 
-  const animateToCurrentIndex = () => {
+  const isShifting = React.useCallback(
+    () =>
+      typeof shiftingProp === 'boolean'
+        ? shiftingProp
+        : navigationState.routes.length > 3,
+    [navigationState.routes.length, shiftingProp]
+  );
+
+  const animateToCurrentIndex = React.useCallback(() => {
     const shifting = isShifting();
-    const {
-      animation: { scale },
-    } = theme;
 
     // Reset the ripple to avoid glitch if it's currently animating
     ripple.setValue(MIN_RIPPLE_SCALE);
@@ -514,7 +477,63 @@ const BottomNavigation = ({
         });
       }
     });
-  };
+  }, [
+    index,
+    isShifting,
+    navigationState.index,
+    navigationState.routes,
+    offsets,
+    ripple,
+    scale,
+    tabs,
+  ]);
+
+  React.useEffect(() => {
+    // Workaround for native animated bug in react-native@^0.57
+    // Context: https://github.com/callstack/react-native-paper/pull/637
+    animateToCurrentIndex();
+
+    if (Platform.OS === 'ios') {
+      Keyboard.addListener('keyboardWillShow', handleKeyboardShow);
+      Keyboard.addListener('keyboardWillHide', handleKeyboardHide);
+    } else {
+      Keyboard.addListener('keyboardDidShow', handleKeyboardShow);
+      Keyboard.addListener('keyboardDidHide', handleKeyboardHide);
+    }
+
+    return () => {
+      if (Platform.OS === 'ios') {
+        Keyboard.removeListener('keyboardWillShow', handleKeyboardShow);
+        Keyboard.removeListener('keyboardWillHide', handleKeyboardHide);
+      } else {
+        Keyboard.removeListener('keyboardDidShow', handleKeyboardShow);
+        Keyboard.removeListener('keyboardDidHide', handleKeyboardHide);
+      }
+    };
+  }, [animateToCurrentIndex, handleKeyboardHide, handleKeyboardShow]);
+
+  React.useLayoutEffect(() => {
+    // Reset offsets of previous and current tabs before animation
+    offsets.forEach((offset, i) => {
+      if (i === navigationState.index || i === prevNavigationState?.index) {
+        offset.setValue(0);
+      }
+    });
+
+    setLoaded(
+      loaded.includes(navigationState.index)
+        ? loaded
+        : [...loaded, navigationState.index]
+    );
+
+    animateToCurrentIndex();
+  }, [
+    navigationState.index,
+    animateToCurrentIndex,
+    loaded,
+    offsets,
+    prevNavigationState,
+  ]);
 
   const handleLayout = (e: LayoutChangeEvent) => {
     const { height, width } = e.nativeEvent.layout;
@@ -557,11 +576,6 @@ const BottomNavigation = ({
 
     onIndexChange(index);
   };
-
-  const isShifting = () =>
-    typeof shiftingProp === 'boolean'
-      ? shiftingProp
-      : navigationState.routes.length > 3;
 
   const { routes } = navigationState;
   const { colors, dark: isDarkTheme, mode } = theme;
