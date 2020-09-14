@@ -66,16 +66,17 @@ const Badge = ({
     new Animated.Value(visible ? 1 : 0)
   );
 
+  const {
+    animation: { scale },
+  } = theme;
+
   React.useEffect(() => {
-    const {
-      animation: { scale },
-    } = theme;
     Animated.timing(opacity, {
       toValue: visible ? 1 : 0,
       duration: 150 * scale,
       useNativeDriver: true,
     }).start();
-  }, [visible, opacity, theme]);
+  }, [visible, opacity, scale]);
 
   const { backgroundColor = theme.colors.notification, ...restStyle } =
     StyleSheet.flatten(style) || {};
