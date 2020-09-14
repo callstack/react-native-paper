@@ -47,41 +47,38 @@ type Props = {
  *
  *```
  */
-class ToggleButtonRow extends React.Component<Props> {
-  static displayName = 'ToggleButton.Row';
+const ToggleButtonRow = ({ value, onValueChange, children, style }: Props) => {
+  const count = React.Children.count(children);
 
-  render() {
-    const { value, onValueChange, children, style } = this.props;
-    const count = React.Children.count(children);
-
-    return (
-      <ToggleButton.Group value={value} onValueChange={onValueChange}>
-        <View style={[styles.row, style]}>
-          {React.Children.map(children, (child, i) => {
+  return (
+    <ToggleButton.Group value={value} onValueChange={onValueChange}>
+      <View style={[styles.row, style]}>
+        {React.Children.map(children, (child, i) => {
+          // @ts-ignore
+          if (child && child.type === ToggleButton) {
             // @ts-ignore
-            if (child && child.type === ToggleButton) {
-              // @ts-ignore
-              return React.cloneElement(child, {
-                style: [
-                  styles.button,
-                  i === 0
-                    ? styles.first
-                    : i === count - 1
-                    ? styles.last
-                    : styles.middle,
-                  // @ts-ignore
-                  child.props.style,
-                ],
-              });
-            }
+            return React.cloneElement(child, {
+              style: [
+                styles.button,
+                i === 0
+                  ? styles.first
+                  : i === count - 1
+                  ? styles.last
+                  : styles.middle,
+                // @ts-ignore
+                child.props.style,
+              ],
+            });
+          }
 
-            return child;
-          })}
-        </View>
-      </ToggleButton.Group>
-    );
-  }
-}
+          return child;
+        })}
+      </View>
+    </ToggleButton.Group>
+  );
+};
+
+ToggleButtonRow.displayName = 'ToggleButton.Row';
 
 const styles = StyleSheet.create({
   row: {
