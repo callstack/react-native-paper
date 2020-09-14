@@ -21,18 +21,16 @@ const Text: React.RefForwardingComponent<{}, Props> = (
   { style, theme, ...rest }: Props,
   ref
 ) => {
-  let { current: root } = React.useRef<NativeText | undefined | null>();
+  const root = React.useRef<NativeText | null>(null);
 
   React.useImperativeHandle(ref, () => ({
-    setNativeProps: (args: Object) => root?.setNativeProps(args),
+    setNativeProps: (args: Object) => root.current?.setNativeProps(args),
   }));
 
   return (
     <NativeText
       {...rest}
-      ref={(c) => {
-        root = c;
-      }}
+      ref={root}
       style={[
         {
           ...theme.fonts.regular,
