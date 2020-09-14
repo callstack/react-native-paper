@@ -66,7 +66,7 @@ const PortalHost = ({ children }: Props) => {
         }
       }
     }
-  }, []);
+  }, [manager, queue]);
 
   const setManager = (newManager: PortalManagerMethods | undefined | null) => {
     manager = newManager;
