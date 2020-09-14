@@ -80,16 +80,12 @@ const ProgressBar = ({
   } = React.useRef<Animated.CompositeAnimation | null>(null);
 
   React.useEffect(() => {
-    if (visible) startAnimation();
-    else stopAnimation();
-  }, [progress, visible]);
-
-  React.useEffect(() => {
     // Start animation the very first time when previously the width was unclear
     if (visible && prevWidth === 0) {
       startAnimation();
-    }
-  }, [width]);
+    } else if (visible) startAnimation();
+    else stopAnimation();
+  });
 
   const onLayout = (event: LayoutChangeEvent) => {
     setPrevWidth(width);
