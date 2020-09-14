@@ -64,18 +64,11 @@ export const RadioButtonContext = React.createContext<RadioButtonContextType>(
  * export default MyComponent;
  *```
  */
-class RadioButtonGroup extends React.Component<Props> {
-  static displayName = 'RadioButton.Group';
+const RadioButtonGroup = ({ value, onValueChange, children }: Props) => (
+  <RadioButtonContext.Provider value={{ value, onValueChange }}>
+    {children}
+  </RadioButtonContext.Provider>
+);
 
-  render() {
-    const { value, onValueChange, children } = this.props;
-
-    return (
-      <RadioButtonContext.Provider value={{ value, onValueChange }}>
-        {children}
-      </RadioButtonContext.Provider>
-    );
-  }
-}
-
+RadioButtonGroup.displayName = 'RadioButton.Group';
 export default RadioButtonGroup;

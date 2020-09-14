@@ -87,27 +87,25 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
-class RadioButton extends React.Component<Props> {
-  // @component ./RadioButtonGroup.tsx
-  static Group = RadioButtonGroup;
+const RadioButton = (props: Props) => {
+  const Button = Platform.select({
+    default: RadioButtonAndroid,
+    ios: RadioButtonIOS,
+  });
 
-  // @component ./RadioButtonAndroid.tsx
-  static Android = RadioButtonAndroid;
+  return <Button {...props} />;
+};
 
-  // @component ./RadioButtonIOS.tsx
-  static IOS = RadioButtonIOS;
+// @component ./RadioButtonGroup.tsx
+RadioButton.Group = RadioButtonGroup;
 
-  // @component ./RadioButtonItem.tsx
-  static Item = RadioButtonItem;
+// @component ./RadioButtonAndroid.tsx
+RadioButton.Android = RadioButtonAndroid;
 
-  render() {
-    const Button = Platform.select({
-      default: RadioButtonAndroid,
-      ios: RadioButtonIOS,
-    });
+// @component ./RadioButtonIOS.tsx
+RadioButton.IOS = RadioButtonIOS;
 
-    return <Button {...this.props} />;
-  }
-}
+// @component ./RadioButtonItem.tsx
+RadioButton.Item = RadioButtonItem;
 
 export default withTheme(RadioButton);
