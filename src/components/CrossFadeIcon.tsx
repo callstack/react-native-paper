@@ -48,7 +48,7 @@ const CrossFadeIcon = ({ color, size, source, theme }: Props) => {
         useNativeDriver: true,
       }).start();
     }
-  }, [previousIcon]);
+  }, [previousIcon, fade, theme.animation]);
 
   const opacityPrev = fade;
   const opacityNext = previousIcon
