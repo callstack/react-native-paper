@@ -122,6 +122,8 @@ const Snackbar = ({
 
   const hideTimeout = React.useRef<NodeJS.Timeout | undefined>(undefined);
 
+  const { scale } = theme.animation;
+
   React.useEffect(() => {
     return () => {
       if (hideTimeout.current) clearTimeout(hideTimeout.current);
@@ -129,42 +131,38 @@ const Snackbar = ({
   }, []);
 
   React.useLayoutEffect(() => {
-    if (visible) show();
-    else hide();
-  }, [visible]);
+    if (visible) {
+      // show
+      if (hideTimeout.current) clearTimeout(hideTimeout.current);
+      setHidden(false);
+      Animated.timing(opacity, {
+        toValue: 1,
+        duration: 200 * scale,
+        useNativeDriver: true,
+      }).start(({ finished }) => {
+        if (finished) {
+          const isInfinity =
+            duration === Number.POSITIVE_INFINITY ||
+            duration === Number.NEGATIVE_INFINITY;
 
-  const show = () => {
-    if (hideTimeout.current) clearTimeout(hideTimeout.current);
-    setHidden(false);
-    const { scale } = theme.animation;
-    Animated.timing(opacity, {
-      toValue: 1,
-      duration: 200 * scale,
-      useNativeDriver: true,
-    }).start(({ finished }) => {
-      if (finished) {
-        const isInfinity =
-          duration === Number.POSITIVE_INFINITY ||
-          duration === Number.NEGATIVE_INFINITY;
-
-        if (finished && !isInfinity) {
-          hideTimeout.current = setTimeout(onDismiss, duration);
+          if (finished && !isInfinity) {
+            hideTimeout.current = setTimeout(onDismiss, duration);
+          }
         }
-      }
-    });
-  };
+      });
+    } else {
+      // hide
+      if (hideTimeout.current) clearTimeout(hideTimeout.current);
 
-  const hide = () => {
-    if (hideTimeout.current) clearTimeout(hideTimeout.current);
-    const { scale } = theme.animation;
-    Animated.timing(opacity, {
-      toValue: 0,
-      duration: 100 * scale,
-      useNativeDriver: true,
-    }).start(({ finished }) => {
-      if (finished) setHidden(true);
-    });
-  };
+      Animated.timing(opacity, {
+        toValue: 0,
+        duration: 100 * scale,
+        useNativeDriver: true,
+      }).start(({ finished }) => {
+        if (finished) setHidden(true);
+      });
+    }
+  }, [visible, duration, opacity, scale, onDismiss]);
 
   const { colors, roundness } = theme;
 
