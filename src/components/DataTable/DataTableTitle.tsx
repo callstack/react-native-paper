@@ -94,7 +94,7 @@ const DataTableTitle = ({
       duration: 150,
       useNativeDriver: true,
     }).start();
-  }, [sortDirection]);
+  }, [sortDirection, spinAnim]);
 
   const textColor = color(theme.colors.text).alpha(0.6).rgb().string();
 
