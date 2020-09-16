@@ -99,14 +99,22 @@ const Modal = ({
   );
   const [rendered, setRendered] = React.useState<boolean>(visible);
 
+  const {
+    animation: { scale },
+    colors,
+  } = theme;
+
   React.useEffect(() => {
-    if (visible) showModal();
-    else hideModal();
+    if (visible) {
+      showModal();
+    } else {
+      hideModal();
+    }
 
     if (visible && !rendered) {
       setRendered(true);
     }
-  }, [visible]);
+  }, [visible, rendered]);
 
   const handleBack = () => {
     if (dismissable) {
@@ -119,8 +127,6 @@ const Modal = ({
     BackHandler.removeEventListener('hardwareBackPress', handleBack);
     BackHandler.addEventListener('hardwareBackPress', handleBack);
 
-    const { scale } = theme.animation;
-
     Animated.timing(opacity, {
       toValue: 1,
       duration: scale * DEFAULT_DURATION,
@@ -131,8 +137,6 @@ const Modal = ({
 
   const hideModal = () => {
     BackHandler.removeEventListener('hardwareBackPress', handleBack);
-
-    const { scale } = theme.animation;
 
     Animated.timing(opacity, {
       toValue: 0,
@@ -148,8 +152,11 @@ const Modal = ({
         onDismiss();
       }
 
-      if (visible) showModal();
-      else setRendered(false);
+      if (visible) {
+        showModal();
+      } else {
+        setRendered(false);
+      }
     });
   };
 
@@ -160,7 +167,6 @@ const Modal = ({
 
   if (!rendered) return null;
 
-  const { colors } = theme;
   return (
     <Animated.View
       pointerEvents={visible ? 'auto' : 'none'}
