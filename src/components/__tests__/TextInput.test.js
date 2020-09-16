@@ -17,6 +17,8 @@ const style = StyleSheet.create({
   },
 });
 
+jest.useFakeTimers();
+
 const affixTextValue = '/100';
 it('correctly renders left-side icon adornment, and right-side affix adornment', () => {
   const { getByText, getByTestId, toJSON } = render(
