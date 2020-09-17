@@ -34,11 +34,6 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   theme: ReactNativePaper.Theme;
 };
 
-type State = {
-  timer: Animated.Value;
-  fade: Animated.Value;
-};
-
 const DURATION = 2400;
 
 /**
@@ -61,72 +56,31 @@ const DURATION = 2400;
  * export default MyComponent;
  * ```
  */
-class ActivityIndicator extends React.Component<Props, State> {
-  static defaultProps: Partial<Props> = {
-    animating: true,
-    size: 'small',
-    hidesWhenStopped: true,
-  };
+const ActivityIndicator = ({
+  animating = true,
+  color: indicatorColor,
+  hidesWhenStopped = true,
+  size: indicatorSize = 'small',
+  style,
+  theme,
+  ...rest
+}: Props) => {
+  const { current: timer } = React.useRef<Animated.Value>(
+    new Animated.Value(0)
+  );
+  const { current: fade } = React.useRef<Animated.Value>(
+    new Animated.Value(!animating && hidesWhenStopped ? 0 : 1)
+  );
 
-  state = {
-    timer: new Animated.Value(0),
-    fade: new Animated.Value(
-      !this.props.animating && this.props.hidesWhenStopped ? 0 : 1
-    ),
-  };
+  const rotation = React.useRef<Animated.CompositeAnimation | undefined>(
+    undefined
+  );
 
-  rotation: Animated.CompositeAnimation | undefined = undefined;
+  const {
+    animation: { scale },
+  } = theme;
 
-  componentDidMount() {
-    const { animating } = this.props;
-    const { timer } = this.state;
-
-    // Circular animation in loop
-    this.rotation = Animated.timing(timer, {
-      duration: DURATION,
-      easing: Easing.linear,
-      // Animated.loop does not work if useNativeDriver is true on web
-      useNativeDriver: Platform.OS !== 'web',
-      toValue: 1,
-      isInteraction: false,
-    });
-
-    if (animating) {
-      this.startRotation();
-    }
-  }
-
-  componentDidUpdate(prevProps: Props) {
-    const {
-      animating,
-      hidesWhenStopped,
-      theme: {
-        animation: { scale },
-      },
-    } = this.props;
-    const { fade } = this.state;
-
-    if (animating !== prevProps.animating) {
-      if (animating) {
-        this.startRotation();
-      } else if (hidesWhenStopped) {
-        // Hide indicator first and then stop rotation
-        Animated.timing(fade, {
-          duration: 200 * scale,
-          toValue: 0,
-          useNativeDriver: true,
-          isInteraction: false,
-        }).start(this.stopRotation.bind(this));
-      } else {
-        this.stopRotation();
-      }
-    }
-  }
-
-  private startRotation = () => {
-    const { fade, timer } = this.state;
-    const { scale } = this.props.theme.animation;
-
+  const startRotation = React.useCallback(() => {
     // Show indicator
     Animated.timing(fade, {
       duration: 200 * scale,
@@ -136,141 +90,147 @@ class ActivityIndicator extends React.Component<Props, State> {
     }).start();
 
     // Circular animation in loop
-    if (this.rotation) {
+    if (rotation.current) {
       timer.setValue(0);
       // $FlowFixMe
-      Animated.loop(this.rotation).start();
+      Animated.loop(rotation.current).start();
+    }
+  }, [scale, fade, timer]);
+
+  const stopRotation = () => {
+    if (rotation.current) {
+      rotation.current.stop();
     }
   };
 
-  private stopRotation = () => {
-    if (this.rotation) {
-      this.rotation.stop();
+  React.useEffect(() => {
+    if (rotation.current === undefined) {
+      // Circular animation in loop
+      rotation.current = Animated.timing(timer, {
+        duration: DURATION,
+        easing: Easing.linear,
+        // Animated.loop does not work if useNativeDriver is true on web
+        useNativeDriver: Platform.OS !== 'web',
+        toValue: 1,
+        isInteraction: false,
+      });
     }
+
+    if (animating) {
+      startRotation();
+    } else if (hidesWhenStopped) {
+      // Hide indicator first and then stop rotation
+      Animated.timing(fade, {
+        duration: 200 * scale,
+        toValue: 0,
+        useNativeDriver: true,
+        isInteraction: false,
+      }).start(stopRotation);
+    } else {
+      stopRotation();
+    }
+  }, [animating, fade, hidesWhenStopped, startRotation, scale, timer]);
+
+  const color = indicatorColor || theme.colors.primary;
+  const size =
+    typeof indicatorSize === 'string'
+      ? indicatorSize === 'small'
+        ? 24
+        : 48
+      : indicatorSize
+      ? indicatorSize
+      : 24;
+
+  const frames = (60 * DURATION) / 1000;
+  const easing = Easing.bezier(0.4, 0.0, 0.7, 1.0);
+  const containerStyle = {
+    width: size,
+    height: size / 2,
+    overflow: 'hidden',
   };
 
-  render() {
-    const { fade, timer } = this.state;
-    const {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      animating,
-      color: indicatorColor,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      hidesWhenStopped,
-      size: indicatorSize,
-      style,
-      theme,
-      ...rest
-    } = this.props;
-    const color = indicatorColor || theme.colors.primary;
-    const size =
-      typeof indicatorSize === 'string'
-        ? indicatorSize === 'small'
-          ? 24
-          : 48
-        : indicatorSize
-        ? indicatorSize
-        : 24;
+  return (
+    <View style={[styles.container, style]} {...rest}>
+      <Animated.View
+        style={[{ width: size, height: size, opacity: fade }]}
+        collapsable={false}
+      >
+        {[0, 1].map((index) => {
+          // Thanks to https://github.com/n4kz/react-native-indicators for the great work
+          const inputRange = Array.from(
+            new Array(frames),
+            (_, frameIndex) => frameIndex / (frames - 1)
+          );
+          const outputRange = Array.from(new Array(frames), (_, frameIndex) => {
+            let progress = (2 * frameIndex) / (frames - 1);
+            const rotation = index ? +(360 - 15) : -(180 - 15);
 
-    const frames = (60 * DURATION) / 1000;
-    const easing = Easing.bezier(0.4, 0.0, 0.7, 1.0);
-    const containerStyle = {
-      width: size,
-      height: size / 2,
-      overflow: 'hidden',
-    };
+            if (progress > 1.0) {
+              progress = 2.0 - progress;
+            }
 
-    return (
-      <View style={[styles.container, style]} {...rest}>
-        <Animated.View
-          style={[{ width: size, height: size, opacity: fade }]}
-          collapsable={false}
-        >
-          {[0, 1].map((index) => {
-            // Thanks to https://github.com/n4kz/react-native-indicators for the great work
-            const inputRange = Array.from(
-              new Array(frames),
-              (_, frameIndex) => frameIndex / (frames - 1)
-            );
-            const outputRange = Array.from(
-              new Array(frames),
-              (_, frameIndex) => {
-                let progress = (2 * frameIndex) / (frames - 1);
-                const rotation = index ? +(360 - 15) : -(180 - 15);
+            const direction = index ? -1 : +1;
 
-                if (progress > 1.0) {
-                  progress = 2.0 - progress;
-                }
+            return `${direction * (180 - 30) * easing(progress) + rotation}deg`;
+          });
 
-                const direction = index ? -1 : +1;
+          const layerStyle = {
+            width: size,
+            height: size,
+            transform: [
+              {
+                rotate: timer.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [`${0 + 30 + 15}deg`, `${2 * 360 + 30 + 15}deg`],
+                }),
+              },
+            ],
+          };
 
-                return `${
-                  direction * (180 - 30) * easing(progress) + rotation
-                }deg`;
-              }
-            );
+          const viewportStyle = {
+            width: size,
+            height: size,
+            transform: [
+              {
+                translateY: index ? -size / 2 : 0,
+              },
+              {
+                rotate: timer.interpolate({ inputRange, outputRange }),
+              },
+            ],
+          };
 
-            const layerStyle = {
-              width: size,
-              height: size,
-              transform: [
-                {
-                  rotate: timer.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [
-                      `${0 + 30 + 15}deg`,
-                      `${2 * 360 + 30 + 15}deg`,
-                    ],
-                  }),
-                },
-              ],
-            };
+          const offsetStyle = index ? { top: size / 2 } : null;
 
-            const viewportStyle = {
-              width: size,
-              height: size,
-              transform: [
-                {
-                  translateY: index ? -size / 2 : 0,
-                },
-                {
-                  rotate: timer.interpolate({ inputRange, outputRange }),
-                },
-              ],
-            };
+          const lineStyle = {
+            width: size,
+            height: size,
+            borderColor: color,
+            borderWidth: size / 10,
+            borderRadius: size / 2,
+          };
 
-            const offsetStyle = index ? { top: size / 2 } : null;
-
-            const lineStyle = {
-              width: size,
-              height: size,
-              borderColor: color,
-              borderWidth: size / 10,
-              borderRadius: size / 2,
-            };
-
-            return (
-              <Animated.View key={index} style={[styles.layer]}>
-                <Animated.View style={layerStyle}>
-                  <Animated.View
-                    style={[containerStyle, offsetStyle]}
-                    collapsable={false}
-                  >
-                    <Animated.View style={viewportStyle}>
-                      <Animated.View style={containerStyle} collapsable={false}>
-                        <Animated.View style={lineStyle} />
-                      </Animated.View>
+          return (
+            <Animated.View key={index} style={[styles.layer]}>
+              <Animated.View style={layerStyle}>
+                <Animated.View
+                  style={[containerStyle, offsetStyle]}
+                  collapsable={false}
+                >
+                  <Animated.View style={viewportStyle}>
+                    <Animated.View style={containerStyle} collapsable={false}>
+                      <Animated.View style={lineStyle} />
                     </Animated.View>
                   </Animated.View>
                 </Animated.View>
               </Animated.View>
-            );
-          })}
-        </Animated.View>
-      </View>
-    );
-  }
-}
+            </Animated.View>
+          );
+        })}
+      </Animated.View>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
