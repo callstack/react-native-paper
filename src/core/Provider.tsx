@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { AccessibilityInfo, Appearance, ColorSchemeName } from 'react-native';
 import { ThemeProvider } from './theming';
-import { Provider as SettingsProvider, Settings } from './settings';
+import { Settings, SettingsContext } from './settings';
 import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
 import PortalHost from '../components/Portal/PortalHost';
 import DefaultTheme from '../styles/DefaultTheme';
@@ -79,9 +79,11 @@ const Provider = ({ ...props }: Props) => {
   const { children, settings } = props;
   return (
     <PortalHost>
-      <SettingsProvider value={settings || { icon: MaterialCommunityIcon }}>
+      <SettingsContext.Provider
+        value={settings || { icon: MaterialCommunityIcon }}
+      >
         <ThemeProvider theme={getTheme()}>{children}</ThemeProvider>
-      </SettingsProvider>
+      </SettingsContext.Provider>
     </PortalHost>
   );
 };

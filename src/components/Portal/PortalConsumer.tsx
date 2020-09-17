@@ -7,7 +7,7 @@ type Props = {
 };
 
 const PortalConsumer = ({ manager, children }: Props) => {
-  const [key, setKey] = React.useState<number | undefined>(undefined);
+  let key = React.useRef<number>();
 
   const checkManager = React.useCallback(() => {
     if (!manager) {
@@ -25,26 +25,26 @@ const PortalConsumer = ({ manager, children }: Props) => {
     // Delay updating to prevent React from going to infinite loop
     await Promise.resolve();
 
-    setKey(manager?.mount(children));
+    key.current = manager?.mount(children);
   }, [manager, checkManager, children]);
 
   React.useEffect(() => {
-    if (key === undefined) onInit();
+    if (key.current === undefined) onInit();
     else {
       checkManager();
 
-      manager?.update(key, children);
+      manager?.update(key.current, children);
     }
-  }, [checkManager, key, manager, onInit, children]);
+  }, [checkManager, manager, onInit, children]);
 
   React.useEffect(() => {
     return () => {
-      if (key !== undefined) {
+      if (key.current !== undefined) {
         checkManager();
-        manager?.unmount(key);
+        manager?.unmount(key.current);
       }
     };
-  }, [key, checkManager, manager]);
+  }, [checkManager, manager]);
   return null;
 };
 

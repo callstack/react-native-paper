@@ -5,7 +5,7 @@ import {
   Platform,
   ImageSourcePropType,
 } from 'react-native';
-import { Consumer as SettingsConsumer } from '../core/settings';
+import { SettingsContext } from '../core/settings';
 import { accessibilityProps } from './MaterialCommunityIcon';
 import { withTheme } from '../core/theming';
 
@@ -82,6 +82,8 @@ const Icon = ({ source, color, size, theme, ...rest }: Props) => {
       : source;
   const iconColor = color || theme.colors.text;
 
+  const { icon } = React.useContext(SettingsContext);
+
   if (isImageSource(s)) {
     return (
       <Image
@@ -103,18 +105,12 @@ const Icon = ({ source, color, size, theme, ...rest }: Props) => {
       />
     );
   } else if (typeof s === 'string') {
-    return (
-      <SettingsConsumer>
-        {({ icon }) => {
-          return icon({
-            name: s,
-            color: iconColor,
-            size,
-            direction,
-          });
-        }}
-      </SettingsConsumer>
-    );
+    return icon({
+      name: s,
+      color: iconColor,
+      size,
+      direction,
+    });
   } else if (typeof s === 'function') {
     return s({ color: iconColor, size, direction });
   }
