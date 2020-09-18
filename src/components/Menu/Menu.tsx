@@ -343,9 +343,6 @@ const Menu = ({
       }
     });
   }, [
-    left,
-    top,
-    anchorLayout,
     menuLayout,
     attachListeners,
     focusFirstDOMNode,
