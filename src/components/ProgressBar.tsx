@@ -140,7 +140,7 @@ const ProgressBar = ({
     if (visible && prevWidth === 0) {
       startAnimation();
     }
-  }, [width, prevWidth, startAnimation, visible]);
+  }, [prevWidth, startAnimation, visible]);
 
   const onLayout = (event: LayoutChangeEvent) => {
     setPrevWidth(width);
