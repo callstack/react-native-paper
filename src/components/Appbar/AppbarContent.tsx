@@ -108,7 +108,7 @@ const AppbarContent = ({
           numberOfLines={1}
           accessible
           accessibilityTraits="header"
-          // @ts-ignore
+          // @ts-ignore Type '"heading"' is not assignable to type ...
           accessibilityRole={Platform.OS === 'web' ? 'heading' : 'header'}
         >
           {title}

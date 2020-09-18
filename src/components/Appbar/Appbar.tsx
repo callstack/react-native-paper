@@ -129,7 +129,7 @@ const Appbar = ({ children, dark, style, theme, ...rest }: Props) => {
   }
   return (
     <Surface
-      //@ts-ignore
+      //@ts-ignore Types of property 'backgroundColor' are incompatible.
       style={[{ backgroundColor }, styles.appbar, { elevation }, restStyle]}
       {...rest}
     >
@@ -143,7 +143,7 @@ const Appbar = ({ children, dark, style, theme, ...rest }: Props) => {
               AppbarContent,
               AppbarAction,
               AppbarBackAction,
-              // @ts-ignore
+              // @ts-ignore Type 'string' is not assignable to type
             ].includes(child.type)
           ) {
             return child;

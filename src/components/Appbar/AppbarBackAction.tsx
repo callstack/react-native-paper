@@ -64,7 +64,6 @@ type Props = $Omit<
  * ```
  */
 const AppbarBackAction = ({ accessibilityLabel = 'Back', ...rest }: Props) => (
-  // @ts-ignore
   <AppbarAction
     accessibilityLabel={accessibilityLabel}
     {...rest}
