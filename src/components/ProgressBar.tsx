@@ -133,7 +133,7 @@ const ProgressBar = ({
   React.useEffect(() => {
     if (visible) startAnimation();
     else stopAnimation();
-  }, [progress, visible, startAnimation, stopAnimation]);
+  }, [visible, startAnimation, stopAnimation]);
 
   React.useEffect(() => {
     // Start animation the very first time when previously the width was unclear
