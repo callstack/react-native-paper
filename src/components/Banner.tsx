@@ -130,32 +130,29 @@ const Banner = ({
     measured: false,
   });
 
+  const { scale } = theme.animation;
+
   React.useEffect(() => {
-    if (visible) show();
-    else hide();
-  }, [visible]);
+    if (visible) {
+      // show
+      Animated.timing(position, {
+        duration: 250 * scale,
+        toValue: 1,
+        useNativeDriver: false,
+      }).start();
+    } else {
+      // hide
+      Animated.timing(position, {
+        duration: 200 * scale,
+        toValue: 0,
+        useNativeDriver: false,
+      }).start();
+    }
+  }, [visible, position, scale]);
 
   const handleLayout = ({ nativeEvent }: NativeEvent) => {
     const { height } = nativeEvent.layout;
     setLayout({ height, measured: true });
-  };
-
-  const show = () => {
-    const { scale } = theme.animation;
-    Animated.timing(position, {
-      duration: 250 * scale,
-      toValue: 1,
-      useNativeDriver: false,
-    }).start();
-  };
-
-  const hide = () => {
-    const { scale } = theme.animation;
-    Animated.timing(position, {
-      duration: 200 * scale,
-      toValue: 0,
-      useNativeDriver: false,
-    }).start();
   };
 
   // The banner animation has 2 parts:

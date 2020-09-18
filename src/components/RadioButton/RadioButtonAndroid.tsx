@@ -72,8 +72,9 @@ const RadioButtonAndroid = ({
     new Animated.Value(1)
   );
 
+  const { scale } = theme.animation;
+
   React.useEffect(() => {
-    const { scale } = theme.animation;
     if (status === 'checked') {
       radioAnim.setValue(1.2);
 
@@ -91,7 +92,7 @@ const RadioButtonAndroid = ({
         useNativeDriver: false,
       }).start();
     }
-  }, [status]);
+  }, [status, borderAnim, radioAnim, scale]);
 
   const checkedColor = rest.color || theme.colors.accent;
   const uncheckedColor =
