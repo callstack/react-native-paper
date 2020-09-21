@@ -11,6 +11,7 @@ import {
 import SafeAreaView from 'react-native-safe-area-view';
 import Surface from './Surface';
 import { withTheme } from '../core/theming';
+import overlay from '../styles/overlay';
 
 type Props = {
   /**
@@ -43,7 +44,9 @@ type Props = {
   theme: ReactNativePaper.Theme;
 };
 
-const DEFAULT_DURATION = 220;
+const DEFAULT_DURATION: number = 220;
+
+const MODAL_ELEVATION: number = 24;
 
 /**
  * The Modal component is a simple way to present content above an enclosing view.
@@ -191,9 +194,18 @@ const Modal = ({
       <SafeAreaView style={styles.wrapper} pointerEvents="box-none">
         <Surface
           style={
-            [{ opacity }, styles.content, contentContainerStyle] as StyleProp<
-              ViewStyle
-            >
+            [
+              { opacity },
+              styles.content,
+              {
+                borderRadius: theme.roundness,
+                backgroundColor:
+                  theme.dark && theme.mode === 'adaptive'
+                    ? (overlay(MODAL_ELEVATION, theme.colors.surface) as string)
+                    : theme.colors.surface,
+              },
+              contentContainerStyle,
+            ] as StyleProp<ViewStyle>
           }
         >
           {children}
