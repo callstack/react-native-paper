@@ -31,10 +31,10 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    * @optional
    */
   theme: ReactNativePaper.Theme;
-};
-
-type State = {
-  scaleAnim: Animated.Value;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 // From https://material.io/design/motion/speed.html#duration
@@ -56,106 +56,110 @@ const ANIMATION_DURATION = 100;
  *   </figure>
  * </div>
  */
-class CheckboxAndroid extends React.Component<Props, State> {
-  static displayName = 'Checkbox.Android';
+const CheckboxAndroid = ({
+  status,
+  theme,
+  disabled,
+  onPress,
+  testID,
+  ...rest
+}: Props) => {
+  const { current: scaleAnim } = React.useRef<Animated.Value>(
+    new Animated.Value(1)
+  );
 
-  state = {
-    scaleAnim: new Animated.Value(1),
-  };
+  const {
+    animation: { scale },
+  } = theme;
 
-  componentDidUpdate(prevProps: Props) {
-    if (prevProps.status === this.props.status) {
-      return;
-    }
-
-    const checked = this.props.status === 'checked';
-    const { animation } = this.props.theme;
+  React.useEffect(() => {
+    const checked = status === 'checked';
 
     Animated.sequence([
-      Animated.timing(this.state.scaleAnim, {
+      Animated.timing(scaleAnim, {
         toValue: 0.85,
-        duration: checked ? ANIMATION_DURATION * animation.scale : 0,
+        duration: checked ? ANIMATION_DURATION * scale : 0,
         useNativeDriver: false,
       }),
-      Animated.timing(this.state.scaleAnim, {
+      Animated.timing(scaleAnim, {
         toValue: 1,
         duration: checked
-          ? ANIMATION_DURATION * animation.scale
-          : ANIMATION_DURATION * animation.scale * 1.75,
+          ? ANIMATION_DURATION * scale
+          : ANIMATION_DURATION * scale * 1.75,
         useNativeDriver: false,
       }),
     ]).start();
+  }, [status, scaleAnim, scale]);
+
+  const checked = status === 'checked';
+  const indeterminate = status === 'indeterminate';
+  const checkedColor = rest.color || theme.colors.accent;
+  const uncheckedColor =
+    rest.uncheckedColor ||
+    color(theme.colors.text)
+      .alpha(theme.dark ? 0.7 : 0.54)
+      .rgb()
+      .string();
+
+  let rippleColor, checkboxColor;
+
+  if (disabled) {
+    rippleColor = color(theme.colors.text).alpha(0.16).rgb().string();
+    checkboxColor = theme.colors.disabled;
+  } else {
+    rippleColor = color(checkedColor).fade(0.32).rgb().string();
+    checkboxColor = checked ? checkedColor : uncheckedColor;
   }
 
-  render() {
-    const { status, disabled, onPress, theme, ...rest } = this.props;
-    const checked = status === 'checked';
-    const indeterminate = status === 'indeterminate';
-    const checkedColor = this.props.color || theme.colors.accent;
-    const uncheckedColor =
-      this.props.uncheckedColor ||
-      color(theme.colors.text)
-        .alpha(theme.dark ? 0.7 : 0.54)
-        .rgb()
-        .string();
+  const borderWidth = scaleAnim.interpolate({
+    inputRange: [0.8, 1],
+    outputRange: [7, 0],
+  });
 
-    let rippleColor, checkboxColor;
+  const icon = indeterminate
+    ? 'minus-box'
+    : checked
+    ? 'checkbox-marked'
+    : 'checkbox-blank-outline';
 
-    if (disabled) {
-      rippleColor = color(theme.colors.text).alpha(0.16).rgb().string();
-      checkboxColor = theme.colors.disabled;
-    } else {
-      rippleColor = color(checkedColor).fade(0.32).rgb().string();
-      checkboxColor = checked ? checkedColor : uncheckedColor;
-    }
-
-    const borderWidth = this.state.scaleAnim.interpolate({
-      inputRange: [0.8, 1],
-      outputRange: [7, 0],
-    });
-
-    const icon = indeterminate
-      ? 'minus-box'
-      : checked
-      ? 'checkbox-marked'
-      : 'checkbox-blank-outline';
-
-    return (
-      <TouchableRipple
-        {...rest}
-        borderless
-        rippleColor={rippleColor}
-        onPress={onPress}
-        disabled={disabled}
-        accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
-        accessibilityComponentType="button"
-        accessibilityRole="checkbox"
-        accessibilityState={{ disabled, checked }}
-        accessibilityLiveRegion="polite"
-        style={styles.container}
-      >
-        <Animated.View style={{ transform: [{ scale: this.state.scaleAnim }] }}>
-          <MaterialCommunityIcon
-            allowFontScaling={false}
-            name={icon}
-            size={24}
-            color={checkboxColor}
-            direction="ltr"
+  return (
+    <TouchableRipple
+      {...rest}
+      borderless
+      rippleColor={rippleColor}
+      onPress={onPress}
+      disabled={disabled}
+      accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
+      accessibilityComponentType="button"
+      accessibilityRole="checkbox"
+      accessibilityState={{ disabled, checked }}
+      accessibilityLiveRegion="polite"
+      style={styles.container}
+      testID={testID}
+    >
+      <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
+        <MaterialCommunityIcon
+          allowFontScaling={false}
+          name={icon}
+          size={24}
+          color={checkboxColor}
+          direction="ltr"
+        />
+        <View style={[StyleSheet.absoluteFill, styles.fillContainer]}>
+          <Animated.View
+            style={[
+              styles.fill,
+              { borderColor: checkboxColor },
+              { borderWidth },
+            ]}
           />
-          <View style={[StyleSheet.absoluteFill, styles.fillContainer]}>
-            <Animated.View
-              style={[
-                styles.fill,
-                { borderColor: checkboxColor },
-                { borderWidth },
-              ]}
-            />
-          </View>
-        </Animated.View>
-      </TouchableRipple>
-    );
-  }
-}
+        </View>
+      </Animated.View>
+    </TouchableRipple>
+  );
+};
+
+CheckboxAndroid.displayName = 'Checkbox.Android';
 
 const styles = StyleSheet.create({
   container: {

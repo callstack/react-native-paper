@@ -27,6 +27,10 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    * @optional
    */
   theme: ReactNativePaper.Theme;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 /**
@@ -45,55 +49,60 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
  *   </figure>
  * </div>
  */
-class CheckboxIOS extends React.Component<Props> {
-  static displayName = 'Checkbox.IOS';
+const CheckboxIOS = ({
+  status,
+  disabled,
+  onPress,
+  theme,
+  testID,
+  ...rest
+}: Props) => {
+  const checked = status === 'checked';
+  const indeterminate = status === 'indeterminate';
 
-  render() {
-    const { status, disabled, onPress, theme, ...rest } = this.props;
-    const checked = status === 'checked';
-    const indeterminate = status === 'indeterminate';
+  const checkedColor = disabled
+    ? theme.colors.disabled
+    : rest.color || theme.colors.accent;
 
-    const checkedColor = disabled
-      ? theme.colors.disabled
-      : this.props.color || theme.colors.accent;
+  let rippleColor;
 
-    let rippleColor;
-
-    if (disabled) {
-      rippleColor = color(theme.colors.text).alpha(0.16).rgb().string();
-    } else {
-      rippleColor = color(checkedColor).fade(0.32).rgb().string();
-    }
-
-    const icon = indeterminate ? 'minus' : 'check';
-
-    return (
-      <TouchableRipple
-        {...rest}
-        borderless
-        rippleColor={rippleColor}
-        onPress={onPress}
-        disabled={disabled}
-        accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
-        accessibilityComponentType="button"
-        accessibilityRole="checkbox"
-        accessibilityState={{ disabled, checked }}
-        accessibilityLiveRegion="polite"
-        style={styles.container}
-      >
-        <View style={{ opacity: indeterminate || checked ? 1 : 0 }}>
-          <MaterialCommunityIcon
-            allowFontScaling={false}
-            name={icon}
-            size={24}
-            color={checkedColor}
-            direction="ltr"
-          />
-        </View>
-      </TouchableRipple>
-    );
+  if (disabled) {
+    rippleColor = color(theme.colors.text).alpha(0.16).rgb().string();
+  } else {
+    rippleColor = color(checkedColor).fade(0.32).rgb().string();
   }
-}
+
+  const icon = indeterminate ? 'minus' : 'check';
+
+  return (
+    <TouchableRipple
+      {...rest}
+      borderless
+      rippleColor={rippleColor}
+      onPress={onPress}
+      disabled={disabled}
+      accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
+      accessibilityComponentType="button"
+      accessibilityRole="checkbox"
+      accessibilityState={{ disabled, checked }}
+      accessibilityLiveRegion="polite"
+      style={styles.container}
+      testID={testID}
+    >
+      <View style={{ opacity: indeterminate || checked ? 1 : 0 }}>
+        <MaterialCommunityIcon
+          allowFontScaling={false}
+          name={icon}
+          size={24}
+          color={checkedColor}
+          direction="ltr"
+        />
+      </View>
+    </TouchableRipple>
+  );
+};
+
+CheckboxIOS.displayName = 'Checkbox.IOS';
 
 const styles = StyleSheet.create({
   container: {

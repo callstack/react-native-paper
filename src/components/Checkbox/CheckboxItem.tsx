@@ -50,6 +50,10 @@ type Props = {
    * @optional
    */
   theme: ReactNativePaper.Theme;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 /**
@@ -71,32 +75,27 @@ type Props = {
  *```
  */
 
-class CheckboxItem extends React.Component<Props> {
-  static displayName = 'Checkbox.Item';
+const CheckboxItem = ({
+  style,
+  status,
+  label,
+  onPress,
+  labelStyle,
+  theme: { colors },
+  testID,
+  ...props
+}: Props) => (
+  <TouchableRipple onPress={onPress} testID={testID}>
+    <View style={[styles.container, style]} pointerEvents="none">
+      <Text style={[styles.label, { color: colors.primary }, labelStyle]}>
+        {label}
+      </Text>
+      <CheckBox status={status} {...props}></CheckBox>
+    </View>
+  </TouchableRipple>
+);
 
-  render() {
-    const {
-      style,
-      status,
-      label,
-      onPress,
-      labelStyle,
-      theme: { colors },
-      ...props
-    } = this.props;
-
-    return (
-      <TouchableRipple onPress={onPress}>
-        <View style={[styles.container, style]} pointerEvents="none">
-          <Text style={[styles.label, { color: colors.primary }, labelStyle]}>
-            {label}
-          </Text>
-          <CheckBox status={status} {...props}></CheckBox>
-        </View>
-      </TouchableRipple>
-    );
-  }
-}
+CheckboxItem.displayName = 'Checkbox.Item';
 
 export default withTheme(CheckboxItem);
 

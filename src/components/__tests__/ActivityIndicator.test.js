@@ -2,6 +2,7 @@ import * as React from 'react';
 import renderer from 'react-test-renderer';
 import ActivityIndicator from '../ActivityIndicator.tsx';
 
+jest.useFakeTimers();
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
 
 it('renders indicator', () => {

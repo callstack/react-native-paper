@@ -43,17 +43,13 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * export default MyComponent;
  * ```
  */
-class DialogContent extends React.Component<Props> {
-  static displayName = 'Dialog.Content';
+const DialogContent = (props: Props) => (
+  <View {...props} style={[styles.container, props.style]}>
+    {props.children}
+  </View>
+);
 
-  render() {
-    return (
-      <View {...this.props} style={[styles.container, this.props.style]}>
-        {this.props.children}
-      </View>
-    );
-  }
-}
+DialogContent.displayName = 'Dialog.Content';
 
 const styles = StyleSheet.create({
   container: {

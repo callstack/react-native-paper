@@ -43,7 +43,7 @@ describe('Provider', () => {
     jest.resetModules();
   });
 
-  it('handles theme change', () => {
+  it('handles theme change', async () => {
     mockAppearance();
     const { getByTestId } = render(createProvider(null));
     expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
@@ -55,7 +55,7 @@ describe('Provider', () => {
     );
   });
 
-  it('uses default theme, if Appearance module is not defined', () => {
+  it('uses default theme, if Appearance module is not defined', async () => {
     jest.mock('react-native/Libraries/Utilities/Appearance', () => {
       return null;
     });
@@ -72,7 +72,7 @@ describe('Provider', () => {
     ${'dark theme'}    | ${DarkTheme}    | ${'dark'}
   `(
     'provides $label for $colorScheme color scheme',
-    ({ theme, colorScheme }) => {
+    async ({ theme, colorScheme }) => {
       mockAppearance();
       Appearance.getColorScheme.mockReturnValue(colorScheme);
       const { getByTestId } = render(createProvider());
@@ -82,7 +82,7 @@ describe('Provider', () => {
     }
   );
 
-  it('uses provided custom theme', () => {
+  it('uses provided custom theme', async () => {
     mockAppearance();
     const customTheme = {
       ...DefaultTheme,
