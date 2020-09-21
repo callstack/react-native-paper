@@ -14,6 +14,8 @@ type Props = {
   style?: StyleProp<ViewStyle>;
 };
 
+const ICON_SIZE = 24;
+
 /**
  * A component to show an icon in a list item.
  *
@@ -39,7 +41,7 @@ type Props = {
  */
 const ListIcon = ({ icon, color: iconColor, style }: Props) => (
   <View style={[styles.item, style]} pointerEvents="box-none">
-    <Icon source={icon} size={24} color={iconColor} />
+    <Icon source={icon} size={ICON_SIZE} color={iconColor} />
   </View>
 );
 
