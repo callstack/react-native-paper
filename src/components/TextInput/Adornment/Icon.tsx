@@ -3,12 +3,13 @@ import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 
 import IconButton from '../../IconButton';
 import type { $Omit } from '../../../../src/types';
+import type { IconSource } from '../../Icon';
 
 type Props = $Omit<
   React.ComponentProps<typeof IconButton>,
   'icon' | 'theme'
 > & {
-  name: string;
+  name: IconSource;
   onPress?: () => void;
   forceTextInputFocus?: boolean;
   style?: StyleProp<ViewStyle>;
