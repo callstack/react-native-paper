@@ -59,4 +59,14 @@ describe('RadioButton', () => {
       expect(tree).toMatchSnapshot();
     });
   });
+
+  describe('RadioButton with custom testID', () => {
+    it('rendrs properly', () => {
+      const tree = renderer
+        .create(<RadioButton value="first" testID={'custom:testID'} />)
+        .toJSON();
+
+      expect(tree).toMatchSnapshot();
+    });
+  });
 });
