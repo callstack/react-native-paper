@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RadioButton RadioButton with custom testID rendrs properly 1`] = `
+exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
 <View
   accessibilityLiveRegion="polite"
   accessibilityRole="button"

@@ -61,7 +61,7 @@ describe('RadioButton', () => {
   });
 
   describe('RadioButton with custom testID', () => {
-    it('rendrs properly', () => {
+    it('renders properly', () => {
       const tree = renderer
         .create(<RadioButton value="first" testID={'custom:testID'} />)
         .toJSON();
