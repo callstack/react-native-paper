@@ -150,7 +150,12 @@ const ActivityIndicator = ({
   };
 
   return (
-    <View style={[styles.container, style]} {...rest}>
+    <View
+      style={[styles.container, style]}
+      {...rest}
+      accessible
+      accessibilityRole="progressbar"
+    >
       <Animated.View
         style={[{ width: size, height: size, opacity: fade }]}
         collapsable={false}

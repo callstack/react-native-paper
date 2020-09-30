@@ -3,9 +3,10 @@
 exports[`RadioButton on default platform renders properly 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="button"
+  accessibilityRole="radio"
   accessibilityState={
     Object {
+      "checked": false,
       "disabled": undefined,
     }
   }
@@ -78,9 +79,10 @@ exports[`RadioButton on default platform renders properly 1`] = `
 exports[`RadioButton on ios platform renders properly 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="button"
+  accessibilityRole="radio"
   accessibilityState={
     Object {
+      "checked": false,
       "disabled": undefined,
     }
   }
@@ -153,9 +155,10 @@ exports[`RadioButton on ios platform renders properly 1`] = `
 exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider renders properly 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="button"
+  accessibilityRole="radio"
   accessibilityState={
     Object {
+      "checked": false,
       "disabled": undefined,
     }
   }

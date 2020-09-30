@@ -142,8 +142,8 @@ const RadioButtonAndroid = ({
             accessibilityComponentType={
               checked ? 'radiobutton_checked' : 'radiobutton_unchecked'
             }
-            accessibilityRole="button"
-            accessibilityState={{ disabled }}
+            accessibilityRole="radio"
+            accessibilityState={{ disabled, checked }}
             accessibilityLiveRegion="polite"
             style={styles.container}
           >

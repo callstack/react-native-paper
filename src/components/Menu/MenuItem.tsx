@@ -105,6 +105,8 @@ class MenuItem extends React.Component<Props> {
         onPress={onPress}
         disabled={disabled}
         testID={testID}
+        accessibilityRole="menuitem"
+        accessibilityState={{ disabled }}
       >
         <View style={styles.row}>
           {icon ? (
