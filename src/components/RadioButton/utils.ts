@@ -7,7 +7,8 @@ export const handlePress = ({
   value: string;
   onValueChange?: (value: string) => void;
 }) => {
-  onValueChange ? onValueChange(value) : onPress?.();
+  onValueChange && onValueChange(value);
+  onPress && onPress();
 };
 
 export const isChecked = ({
