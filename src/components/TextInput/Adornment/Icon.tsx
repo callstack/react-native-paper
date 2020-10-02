@@ -53,7 +53,7 @@ const TextInputIcon = ({
   name,
   onPress,
   forceTextInputFocus,
-  ...rest
+  color,
 }: Props) => {
   const { style, isTextInputFocused, forceFocus } = React.useContext(
     StyleContext
@@ -73,7 +73,7 @@ const TextInputIcon = ({
         style={styles.iconButton}
         size={ICON_SIZE}
         onPress={onPressWithFocusControl}
-        {...rest}
+        color={color}
       />
     </View>
   );

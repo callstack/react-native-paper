@@ -51,19 +51,25 @@ export function getAdornmentStyleAdjustmentForNativeInput({
   leftAffixWidth,
   rightAffixWidth,
   inputOffset = 0,
+  outlinedMode,
 }: {
   inputOffset?: number;
   adornmentConfig: AdornmentConfig[];
   leftAffixWidth: number;
   rightAffixWidth: number;
+  outlinedMode?: boolean;
 }): AdornmentStyleAdjustmentForNativeInput | {} {
   if (adornmentConfig.length) {
     const adornmentStyleAdjustmentForNativeInput = adornmentConfig.map(
       ({ type, side }: AdornmentConfig) => {
         const isWeb = Platform.OS !== 'ios' && Platform.OS !== 'android';
         const isLeftSide = side === AdornmentSide.Left;
+        const inputModeAdornemntOffset = outlinedMode
+          ? ADORNMENT_OFFSET + 8
+          : ADORNMENT_OFFSET;
         const offset =
-          (isLeftSide ? leftAffixWidth : rightAffixWidth) + ADORNMENT_OFFSET;
+          (isLeftSide ? leftAffixWidth : rightAffixWidth) +
+          inputModeAdornemntOffset;
         const paddingKey = `padding${captalize(side)}`;
 
         if (isWeb) return { [paddingKey]: offset };
