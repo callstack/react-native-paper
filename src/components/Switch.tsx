@@ -117,6 +117,12 @@ class Switch extends React.Component<Props> {
             onTintColor,
             thumbTintColor,
           }
+        : Platform.OS === 'web'
+        ? {
+            activeTrackColor: onTintColor,
+            thumbColor: thumbTintColor,
+            activeThumbColor: checkedColor,
+          }
         : {
             thumbColor: thumbTintColor,
             trackColor: {
