@@ -8,10 +8,12 @@ type IconsColor = {
   flatRightIcon: string | undefined;
   outlineLeftIcon: string | undefined;
   outlineRightIcon: string | undefined;
+  customIcon: string | undefined;
 };
 
 export type State = {
   text: string;
+  customIconText: string;
   name: string;
   outlinedText: string;
   largeText: string;
