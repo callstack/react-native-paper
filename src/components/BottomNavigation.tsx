@@ -66,7 +66,7 @@ type Props = {
   /**
    * State for the bottom navigation. The state should contain the following properties:
    *
-   * - `index`: a number reprsenting the index of the active route in the `routes` array
+   * - `index`: a number representing the index of the active route in the `routes` array
    * - `routes`: an array containing a list of route objects used for rendering the tabs
    *
    * Each route object should contain the following properties:
@@ -227,13 +227,13 @@ type State = {
    */
   visible: Animated.Value;
   /**
-   * Active state of individual tab items, active state is 1 and inactve state is 0.
+   * Active state of individual tab items, active state is 1 and inactive state is 0.
    */
   tabs: Animated.Value[];
   /**
    * The top offset for each tab item to position it offscreen.
    * Placing items offscreen helps to save memory usage for inactive screens with removeClippedSubviews.
-   * We use animated values for this to prevent unnecesary re-renders.
+   * We use animated values for this to prevent unnecessary re-renders.
    */
   offsets: Animated.Value[];
   /**
@@ -266,7 +266,7 @@ type State = {
    */
   loaded: number[];
   /**
-   * Trak whether the keyboard is visible to show and hide the navigation bar.
+   * Track whether the keyboard is visible to show and hide the navigation bar.
    */
   keyboard: boolean;
 };
@@ -362,7 +362,7 @@ class SceneComponent extends React.PureComponent<any> {
 class BottomNavigation extends React.Component<Props, State> {
   /**
    * Function which takes a map of route keys to components.
-   * Pure components are used to minmize re-rendering of the pages.
+   * Pure components are used to minimize re-rendering of the pages.
    * This drastically improves the animation performance.
    */
   static SceneMap(scenes: {
@@ -544,7 +544,7 @@ class BottomNavigation extends React.Component<Props, State> {
       // Workaround a bug in native animations where this is reset after first animation
       this.state.tabs.map((tab, i) => tab.setValue(i === index ? 1 : 0));
 
-      // Update the index to change bar's bacground color and then hide the ripple
+      // Update the index to change bar's background color and then hide the ripple
       this.state.index.setValue(index);
       this.state.ripple.setValue(MIN_RIPPLE_SCALE);
 
