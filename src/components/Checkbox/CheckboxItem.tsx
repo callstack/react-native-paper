@@ -90,7 +90,7 @@ const CheckboxItem = ({
       <Text style={[styles.label, { color: theme.colors.primary }, labelStyle]}>
         {label}
       </Text>
-      <CheckBox status={status} {...props}></CheckBox>
+      <CheckBox status={status} theme={theme} {...props}></CheckBox>
     </View>
   </TouchableRipple>
 );
