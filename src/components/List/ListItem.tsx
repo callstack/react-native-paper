@@ -82,11 +82,15 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   descriptionNumberOfLines?: number;
   /**
-   * Ellipsize Mode for the Title
+   * Ellipsize Mode for the Title.  One of `'head'`, `'middle'`, `'tail'`, `'clip'`.
+   *
+   * See [`ellipsizeMode`](https://reactnative.dev/docs/text#ellipsizemode)
    */
   titleEllipsizeMode?: EllipsizeProp;
   /**
-   * Ellipsize Mode for the Description
+   * Ellipsize Mode for the Description.  One of `'head'`, `'middle'`, `'tail'`, `'clip'`.
+   *
+   * See [`ellipsizeMode`](https://reactnative.dev/docs/text#ellipsizemode)
    */
   descriptionEllipsizeMode?: EllipsizeProp;
 };
