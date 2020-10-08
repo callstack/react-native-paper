@@ -254,17 +254,13 @@ type State = {
    */
   layout: { height: number; width: number; measured: boolean };
   /**
-   * Currently active index. Used only for getDerivedStateFromProps.
+   * key of the currently active route. Used only for getDerivedStateFromProps.
    */
-  current: number;
+  current: string;
   /**
-   * Previously active index. Used to determine the position of the ripple.
+   * List of keys of the loaded tabs, tabs will be loaded when navigated to.
    */
-  previous: number;
-  /**
-   * List of loaded tabs, tabs will be loaded when navigated to.
-   */
-  loaded: number[];
+  loaded: string[];
   /**
    * Track whether the keyboard is visible to show and hide the navigation bar.
    */
@@ -393,7 +389,10 @@ class BottomNavigation extends React.Component<Props, State> {
     sceneAnimationEnabled: false,
   };
 
-  static getDerivedStateFromProps(nextProps: any, prevState: State) {
+  static getDerivedStateFromProps(
+    nextProps: Props,
+    prevState: State
+  ): Partial<State> {
     const { index, routes } = nextProps.navigationState;
 
     // Re-create animated values if routes have been added/removed
@@ -414,26 +413,28 @@ class BottomNavigation extends React.Component<Props, State> {
       offsets,
     };
 
-    if (index !== prevState.current) {
-      /* $FlowFixMe */
-      Object.assign(nextState, {
-        // Store the current index in state so that we can later check if the index has changed
-        current: index,
-        previous: prevState.current,
-        // Set the current tab to be loaded if it was not loaded before
-        loaded: prevState.loaded.includes(index)
-          ? prevState.loaded
-          : [...prevState.loaded, index],
-      });
+    const focusedKey = routes[index].key;
+
+    if (focusedKey === prevState.current) {
+      return nextState;
     }
 
-    return nextState;
+    return {
+      ...nextState,
+      // Store the current index in state so that we can later check if the index has changed
+      current: focusedKey,
+      // Set the current tab to be loaded if it was not loaded before
+      loaded: prevState.loaded.includes(focusedKey)
+        ? prevState.loaded
+        : [...prevState.loaded, focusedKey],
+    };
   }
 
   constructor(props: Props) {
     super(props);
 
-    const { index } = this.props.navigationState;
+    const { routes, index } = this.props.navigationState;
+    const focusedKey = routes[index].key;
 
     this.state = {
       visible: new Animated.Value(1),
@@ -443,9 +444,8 @@ class BottomNavigation extends React.Component<Props, State> {
       ripple: new Animated.Value(MIN_RIPPLE_SCALE),
       touch: new Animated.Value(MIN_RIPPLE_SCALE),
       layout: { height: 0, width: 0, measured: false },
-      current: index,
-      previous: 0,
-      loaded: [index],
+      current: focusedKey,
+      loaded: [focusedKey],
       keyboard: false,
     };
   }
@@ -698,7 +698,7 @@ class BottomNavigation extends React.Component<Props, State> {
       <View style={[styles.container, style]}>
         <View style={[styles.content, { backgroundColor: colors.background }]}>
           {routes.map((route, index) => {
-            if (!loaded.includes(index)) {
+            if (!loaded.includes(route.key)) {
               // Don't render a screen if we've never navigated to it
               return null;
             }
@@ -1053,6 +1053,7 @@ const styles = StyleSheet.create({
   labelWrapper: {
     ...StyleSheet.absoluteFillObject,
   },
+  // eslint-disable-next-line react-native/no-color-literals
   label: {
     fontSize: 12,
     textAlign: 'center',
