@@ -13,7 +13,7 @@ import type {
   AdornmentConfig,
   AdornmentStyleAdjustmentForNativeInput,
 } from './types';
-import { AdornmentSide, AdornmentType } from './enums';
+import { AdornmentSide, AdornmentType, InputMode } from './enums';
 
 export function getAdornmentConfig({
   left,
@@ -51,22 +51,21 @@ export function getAdornmentStyleAdjustmentForNativeInput({
   leftAffixWidth,
   rightAffixWidth,
   inputOffset = 0,
-  outlinedMode,
+  mode,
 }: {
   inputOffset?: number;
   adornmentConfig: AdornmentConfig[];
   leftAffixWidth: number;
   rightAffixWidth: number;
-  outlinedMode?: boolean;
+  mode?: 'outlined' | 'flat';
 }): AdornmentStyleAdjustmentForNativeInput | {} {
   if (adornmentConfig.length) {
     const adornmentStyleAdjustmentForNativeInput = adornmentConfig.map(
       ({ type, side }: AdornmentConfig) => {
         const isWeb = Platform.OS !== 'ios' && Platform.OS !== 'android';
         const isLeftSide = side === AdornmentSide.Left;
-        const inputModeAdornemntOffset = outlinedMode
-          ? ADORNMENT_OFFSET + 8
-          : ADORNMENT_OFFSET;
+        const inputModeAdornemntOffset =
+          mode === InputMode.Outlined ? ADORNMENT_OFFSET + 8 : ADORNMENT_OFFSET;
         const offset =
           (isLeftSide ? leftAffixWidth : rightAffixWidth) +
           inputModeAdornemntOffset;

@@ -240,7 +240,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
         adornmentConfig,
         rightAffixWidth,
         leftAffixWidth,
-        outlinedMode: true,
+        mode: 'outlined',
       }
     );
     const affixTopPosition = {
