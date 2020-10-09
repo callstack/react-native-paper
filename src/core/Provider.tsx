@@ -17,7 +17,7 @@ const Provider = ({ ...props }: Props) => {
   const colorSchemeName =
     (!props.theme && Appearance?.getColorScheme()) || 'light';
 
-  const [reduceMotionEnabled, setreduceMotionEnabled] = React.useState<boolean>(
+  const [reduceMotionEnabled, setReduceMotionEnabled] = React.useState<boolean>(
     false
   );
   const [colorScheme, setColorScheme] = React.useState<ColorSchemeName>(
@@ -31,32 +31,22 @@ const Provider = ({ ...props }: Props) => {
     setColorScheme(colorScheme);
   };
 
-  const updateReduceMotionSettingsInfo = async () => {
-    try {
-      const reduceMotionEnabled = await AccessibilityInfo.isReduceMotionEnabled();
-      if (reduceMotionEnabled) {
-        setreduceMotionEnabled(reduceMotionEnabled);
-      }
-    } catch (err) {
-      console.warn(err);
-    }
-  };
-
   React.useEffect(() => {
-    AccessibilityInfo.addEventListener(
-      'reduceMotionChanged',
-      updateReduceMotionSettingsInfo
-    );
-
-    updateReduceMotionSettingsInfo();
-
-    return () => {
-      AccessibilityInfo.removeEventListener(
+    if (!props.theme) {
+      AccessibilityInfo.addEventListener(
         'reduceMotionChanged',
-        updateReduceMotionSettingsInfo
+        (reduceMotionEnabled) => setReduceMotionEnabled(reduceMotionEnabled)
       );
+    }
+    return () => {
+      if (!props.theme) {
+        AccessibilityInfo.removeEventListener(
+          'reduceMotionChanged',
+          (reduceMotionEnabled) => setReduceMotionEnabled(reduceMotionEnabled)
+        );
+      }
     };
-  }, []);
+  }, [props.theme]);
 
   React.useEffect(() => {
     if (!props.theme) Appearance?.addChangeListener(handleAppearanceChange);

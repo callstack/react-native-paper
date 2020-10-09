@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Appearance, View } from 'react-native';
+import { Appearance, AccessibilityInfo, View } from 'react-native';
 import { render, act } from 'react-native-testing-library';
 import Provider from '../Provider';
 import { useTheme } from '../theming';
@@ -53,6 +53,27 @@ describe('Provider', () => {
       DefaultTheme
     );
     act(() => Appearance.__internalListeners[0]({ colorScheme: 'dark' }));
+    expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
+      DarkTheme
+    );
+  });
+
+  it('should set AccessibilityInfo listeners, if there is no theme', async () => {
+    mockAppearance();
+    const { getByTestId } = render(createProvider(null));
+
+    expect(AccessibilityInfo.addEventListener).toHaveBeenCalled();
+    expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
+      DefaultTheme
+    );
+  });
+
+  it('should not set AccessibilityInfo listeners, if there is no theme', async () => {
+    mockAppearance();
+    const { getByTestId } = render(createProvider(DarkTheme));
+
+    expect(AccessibilityInfo.addEventListener).not.toHaveBeenCalled();
+    expect(AccessibilityInfo.removeEventListener).not.toHaveBeenCalled();
     expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
       DarkTheme
     );
