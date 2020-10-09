@@ -731,7 +731,15 @@ class BottomNavigation extends React.Component<Props, State> {
                   Platform.OS === 'ios' ? navigationState.index !== index : true
                 }
               >
-                <Animated.View style={[styles.content, { top }]}>
+                <Animated.View
+                  style={[
+                    styles.content,
+                    { top },
+                    Platform.OS === 'web'
+                      ? { display: loaded.includes(index) ? 'flex' : 'none' }
+                      : null,
+                  ]}
+                >
                   {renderScene({
                     route,
                     jumpTo: this.jumpTo,
