@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Appearance, View } from 'react-native';
-import { render } from 'react-native-testing-library';
+import { render, act } from 'react-native-testing-library';
 import Provider from '../Provider';
 import { useTheme } from '../theming';
 import DarkTheme from '../../styles/DarkTheme';
@@ -15,6 +15,9 @@ const mockAppearance = () => {
     return {
       ...realApp,
       addChangeListener: jest.fn((cb) => {
+        listeners.push(cb);
+      }),
+      removeChangeListener: jest.fn((cb) => {
         listeners.push(cb);
       }),
       getColorScheme: jest.fn(() => {
@@ -49,9 +52,31 @@ describe('Provider', () => {
     expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
       DefaultTheme
     );
-    Appearance.__internalListeners[0]({ colorScheme: 'dark' });
+    act(() => Appearance.__internalListeners[0]({ colorScheme: 'dark' }));
     expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
       DarkTheme
+    );
+  });
+
+  it('should set Appearance listeners, if there is no theme', async () => {
+    mockAppearance();
+    const { getByTestId } = render(createProvider(null));
+
+    expect(Appearance.addChangeListener).toHaveBeenCalled();
+    act(() => Appearance.__internalListeners[0]({ colorScheme: 'dark' }));
+    expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
+      DarkTheme
+    );
+  });
+
+  it('should not set Appearance listeners, if the theme is passed', async () => {
+    mockAppearance();
+    const { getByTestId } = render(createProvider(DefaultTheme));
+
+    expect(Appearance.addChangeListener).not.toHaveBeenCalled();
+    expect(Appearance.removeChangeListener).not.toHaveBeenCalled();
+    expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
+      DefaultTheme
     );
   });
 

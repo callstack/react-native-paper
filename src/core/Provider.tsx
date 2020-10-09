@@ -13,44 +13,61 @@ type Props = {
   settings?: Settings;
 };
 
-type State = {
-  colorScheme: ColorSchemeName;
-  reduceMotionEnabled: boolean;
-};
+const Provider = ({ ...props }: Props) => {
+  const colorSchemeName =
+    (!props.theme && Appearance?.getColorScheme()) || 'light';
 
-export default class Provider extends React.Component<Props, State> {
-  state = {
-    reduceMotionEnabled: false,
-    colorScheme: Appearance?.getColorScheme() || 'light',
-  };
+  const [reduceMotionEnabled, setreduceMotionEnabled] = React.useState<boolean>(
+    false
+  );
+  const [colorScheme, setColorScheme] = React.useState<ColorSchemeName>(
+    colorSchemeName
+  );
 
-  async componentDidMount() {
-    AccessibilityInfo.addEventListener(
-      'reduceMotionChanged',
-      this.updateReduceMotionSettingsInfo
-    );
-    this.updateReduceMotionSettingsInfo();
-    Appearance?.addChangeListener(this.handleAppearanceChange);
-  }
-
-  componentWillUnmount() {
-    AccessibilityInfo.removeEventListener(
-      'reduceMotionChanged',
-      this.updateReduceMotionSettingsInfo
-    );
-    Appearance?.removeChangeListener(this.handleAppearanceChange);
-  }
-
-  private handleAppearanceChange = (
+  const handleAppearanceChange = (
     preferences: Appearance.AppearancePreferences
   ) => {
     const { colorScheme } = preferences;
-    this.setState({ colorScheme });
+    setColorScheme(colorScheme);
   };
 
-  private getTheme = () => {
-    const { theme: providedTheme } = this.props;
-    const { reduceMotionEnabled, colorScheme } = this.state;
+  const updateReduceMotionSettingsInfo = async () => {
+    try {
+      const reduceMotionEnabled = await AccessibilityInfo.isReduceMotionEnabled();
+      if (reduceMotionEnabled) {
+        setreduceMotionEnabled(reduceMotionEnabled);
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+
+  React.useEffect(() => {
+    AccessibilityInfo.addEventListener(
+      'reduceMotionChanged',
+      updateReduceMotionSettingsInfo
+    );
+
+    updateReduceMotionSettingsInfo();
+
+    return () => {
+      AccessibilityInfo.removeEventListener(
+        'reduceMotionChanged',
+        updateReduceMotionSettingsInfo
+      );
+    };
+  }, []);
+
+  React.useEffect(() => {
+    if (!props.theme) Appearance?.addChangeListener(handleAppearanceChange);
+    return () => {
+      if (!props.theme)
+        Appearance?.removeChangeListener(handleAppearanceChange);
+    };
+  }, [props.theme]);
+
+  const getTheme = () => {
+    const { theme: providedTheme } = props;
 
     if (providedTheme) {
       return providedTheme;
@@ -69,25 +86,14 @@ export default class Provider extends React.Component<Props, State> {
     }
   };
 
-  private updateReduceMotionSettingsInfo = async () => {
-    try {
-      const reduceMotionEnabled = await AccessibilityInfo.isReduceMotionEnabled();
+  const { children, settings } = props;
+  return (
+    <PortalHost>
+      <SettingsProvider value={settings || { icon: MaterialCommunityIcon }}>
+        <ThemeProvider theme={getTheme()}>{children}</ThemeProvider>
+      </SettingsProvider>
+    </PortalHost>
+  );
+};
 
-      this.setState({ reduceMotionEnabled });
-    } catch (err) {
-      console.warn(err);
-    }
-  };
-
-  render() {
-    const { children, settings } = this.props;
-
-    return (
-      <PortalHost>
-        <SettingsProvider value={settings || { icon: MaterialCommunityIcon }}>
-          <ThemeProvider theme={this.getTheme()}>{children}</ThemeProvider>
-        </SettingsProvider>
-      </PortalHost>
-    );
-  }
-}
+export default Provider;
