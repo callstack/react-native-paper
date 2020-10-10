@@ -3164,6 +3164,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -3201,6 +3202,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -3432,6 +3434,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -3469,6 +3472,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -3700,6 +3704,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -3737,6 +3742,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -4098,6 +4104,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -4329,6 +4336,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -4560,6 +4568,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -4901,6 +4910,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -4938,6 +4948,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -5169,6 +5180,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -5206,6 +5218,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -5437,6 +5450,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -5474,6 +5488,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -5835,6 +5850,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -6066,6 +6082,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -6297,6 +6314,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -6528,6 +6546,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -6759,6 +6778,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {

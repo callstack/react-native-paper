@@ -106,6 +106,7 @@ exports[`renders chip with close button 1`] = `
       </View>
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -318,6 +319,7 @@ exports[`renders chip with icon 1`] = `
       </View>
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -411,6 +413,7 @@ exports[`renders chip with onPress 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -504,6 +507,7 @@ exports[`renders outlined disabled chip 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -644,6 +648,7 @@ exports[`renders selected chip 1`] = `
       </View>
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {

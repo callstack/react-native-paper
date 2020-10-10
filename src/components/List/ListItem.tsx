@@ -16,6 +16,7 @@ import type { $RemoveChildren, EllipsizeProp } from '../../types';
 type Description =
   | React.ReactNode
   | ((props: {
+      selectable: boolean;
       ellipsizeMode: EllipsizeProp | undefined;
       color: string;
       fontSize: number;
@@ -144,12 +145,14 @@ const ListItem = ({
   ) => {
     return typeof description === 'function' ? (
       description({
+        selectable: false,
         ellipsizeMode: descriptionEllipsizeMode,
         color: descriptionColor,
         fontSize: styles.description.fontSize,
       })
     ) : (
       <Text
+        selectable={false}
         numberOfLines={descriptionNumberOfLines}
         ellipsizeMode={descriptionEllipsizeMode}
         style={[
@@ -186,6 +189,7 @@ const ListItem = ({
           : null}
         <View style={[styles.item, styles.content]}>
           <Text
+            selectable={false}
             ellipsizeMode={titleEllipsizeMode}
             numberOfLines={titleNumberOfLines}
             style={[styles.title, { color: titleColor }, titleStyle]}

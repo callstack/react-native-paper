@@ -89,6 +89,7 @@ exports[`renders DrawerItem with icon 1`] = `
       </Text>
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -207,6 +208,7 @@ exports[`renders active DrawerItem 1`] = `
       </Text>
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -290,6 +292,7 @@ exports[`renders basic DrawerItem 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {

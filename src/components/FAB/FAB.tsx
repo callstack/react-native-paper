@@ -229,6 +229,7 @@ const FAB = ({
           ) : null}
           {label ? (
             <Text
+              selectable={false}
               style={[
                 styles.label,
                 uppercase && styles.uppercaseLabel,

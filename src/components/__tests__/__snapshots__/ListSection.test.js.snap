@@ -181,6 +181,7 @@ exports[`renders list section with custom title style 1`] = `
       >
         <Text
           numberOfLines={1}
+          selectable={false}
           style={
             Array [
               Object {
@@ -306,6 +307,7 @@ exports[`renders list section with custom title style 1`] = `
       >
         <Text
           numberOfLines={1}
+          selectable={false}
           style={
             Array [
               Object {
@@ -513,6 +515,7 @@ exports[`renders list section with subheader 1`] = `
       >
         <Text
           numberOfLines={1}
+          selectable={false}
           style={
             Array [
               Object {
@@ -638,6 +641,7 @@ exports[`renders list section with subheader 1`] = `
       >
         <Text
           numberOfLines={1}
+          selectable={false}
           style={
             Array [
               Object {
@@ -818,6 +822,7 @@ exports[`renders list section without subheader 1`] = `
       >
         <Text
           numberOfLines={1}
+          selectable={false}
           style={
             Array [
               Object {
@@ -943,6 +948,7 @@ exports[`renders list section without subheader 1`] = `
       >
         <Text
           numberOfLines={1}
+          selectable={false}
           style={
             Array [
               Object {

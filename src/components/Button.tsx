@@ -291,6 +291,7 @@ const Button = ({
             />
           ) : null}
           <Text
+            selectable={false}
             numberOfLines={1}
             style={[
               styles.label,
