@@ -182,7 +182,7 @@ function TouchableRipple({
         <View
           style={[
             styles.touchable,
-            borderless && styles.borderless,
+            borderless && styles.overflowHidden,
             getInteractionStyle(interactionState, style),
           ]}
         >
@@ -191,7 +191,8 @@ function TouchableRipple({
           )}
           <View
             style={[
-              styles.rippleContainer,
+              StyleSheet.absoluteFill,
+              styles.overflowHidden,
               rippleContainerStyle,
               centered ? styles.overflowVisible : styles.overflowHidden,
             ]}
@@ -210,17 +211,6 @@ function TouchableRipple({
 const styles = StyleSheet.create({
   touchable: {
     position: 'relative',
-  },
-  borderless: {
-    overflow: 'hidden',
-  },
-  rippleContainer: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    overflow: 'hidden',
   },
   overflowVisible: {
     overflow: 'visible',

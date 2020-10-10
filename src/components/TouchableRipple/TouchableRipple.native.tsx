@@ -79,7 +79,9 @@ const TouchableRipple = ({
 };
 
 const styles = StyleSheet.create({
-  touchable: {},
+  touchable: {
+    position: 'relative',
+  },
   borderless: {
     overflow: 'hidden',
   },
