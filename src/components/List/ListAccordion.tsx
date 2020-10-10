@@ -127,7 +127,7 @@ class ListAccordion extends React.Component<Props, State> {
     if (this.props.expanded === undefined) {
       // Only update state of the `expanded` prop was not passed
       // If it was passed, the component will act as a controlled component
-      this.setState(state => ({
+      this.setState((state) => ({
         expanded: !state.expanded,
       }));
     }
@@ -144,10 +144,7 @@ class ListAccordion extends React.Component<Props, State> {
       descriptionStyle,
       style,
     } = this.props;
-    const titleColor = color(theme.colors.text)
-      .alpha(0.87)
-      .rgb()
-      .string();
+    const titleColor = color(theme.colors.text).alpha(0.87).rgb().string();
     const descriptionColor = color(theme.colors.text)
       .alpha(0.54)
       .rgb()
@@ -175,6 +172,7 @@ class ListAccordion extends React.Component<Props, State> {
               : null}
             <View style={[styles.item, styles.content]}>
               <Text
+                selectable={false}
                 numberOfLines={1}
                 style={[
                   styles.title,
@@ -188,6 +186,7 @@ class ListAccordion extends React.Component<Props, State> {
               </Text>
               {description && (
                 <Text
+                  selectable={false}
                   numberOfLines={2}
                   style={[
                     styles.description,
@@ -213,7 +212,7 @@ class ListAccordion extends React.Component<Props, State> {
           </View>
         </TouchableRipple>
         {expanded
-          ? React.Children.map(children, child => {
+          ? React.Children.map(children, (child) => {
               if (
                 left &&
                 React.isValidElement(child) &&

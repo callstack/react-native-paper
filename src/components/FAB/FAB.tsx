@@ -169,10 +169,7 @@ class FAB extends React.Component<Props, State> {
         : 'rgba(0, 0, 0, .54)';
     }
 
-    const rippleColor = color(foregroundColor)
-      .alpha(0.32)
-      .rgb()
-      .string();
+    const rippleColor = color(foregroundColor).alpha(0.32).rgb().string();
 
     return (
       <Surface
@@ -222,6 +219,7 @@ class FAB extends React.Component<Props, State> {
             ) : null}
             {label ? (
               <Text
+                selectable={false}
                 style={[
                   styles.label,
                   { color: foregroundColor, ...theme.fonts.medium },
