@@ -1,29 +1,25 @@
 import * as React from 'react';
-import {
-  BackgroundPropType,
-  StyleProp,
-  Platform,
-  TouchableHighlight,
-  TouchableNativeFeedback,
-  TouchableWithoutFeedback,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { StyleSheet, Pressable, View, Platform } from 'react-native';
 import color from 'color';
 import { withTheme } from '../../core/theming';
+import {
+  getInteractionChildren,
+  getInteractionStyle,
+  InteractionChildrenType,
+  InteractionState,
+  InteractionStyleType,
+  useRadiusStyles,
+} from './utils';
 
-const ANDROID_VERSION_LOLLIPOP = 21;
-const ANDROID_VERSION_PIE = 28;
-
-type Props = React.ComponentProps<typeof TouchableWithoutFeedback> & {
+type Props = React.ComponentProps<typeof Pressable> & {
   borderless?: boolean;
-  background?: BackgroundPropType;
+  background?: string;
   disabled?: boolean;
   onPress?: () => void | null;
   rippleColor?: string;
   underlayColor?: string;
-  children: React.ReactNode;
-  style?: StyleProp<ViewStyle>;
+  children: InteractionChildrenType;
+  style?: InteractionStyleType;
   theme: ReactNativePaper.Theme;
 };
 
@@ -47,49 +43,46 @@ const TouchableRipple = ({
       .rgb()
       .string();
 
-  // A workaround for ripple on Android P is to use useForeground + overflow: 'hidden'
-  // https://github.com/facebook/react-native/issues/6480
-  const useForeground =
-    Platform.OS === 'android' &&
-    Platform.Version >= ANDROID_VERSION_PIE &&
-    borderless;
-
-  if (TouchableRipple.supported) {
-    return (
-      <TouchableNativeFeedback
-        {...rest}
-        disabled={disabled}
-        useForeground={useForeground}
-        background={
-          background != null
-            ? background
-            : TouchableNativeFeedback.Ripple(calculatedRippleColor, borderless)
-        }
-      >
-        <View style={[borderless && { overflow: 'hidden' }, style]}>
-          {React.Children.only(children)}
-        </View>
-      </TouchableNativeFeedback>
-    );
-  }
+  const rippleContainerStyle = useRadiusStyles(style);
 
   return (
-    <TouchableHighlight
+    <Pressable
       {...rest}
       disabled={disabled}
-      style={[borderless && { overflow: 'hidden' }, style]}
-      underlayColor={
-        underlayColor != null
-          ? underlayColor
-          : color(calculatedRippleColor).fade(0.5).rgb().string()
-      }
+      android_ripple={{
+        color: background != null ? background : calculatedRippleColor,
+        borderless,
+      }}
+      style={[
+        styles.touchable,
+        borderless && styles.borderless,
+        rippleContainerStyle,
+      ]}
     >
-      {React.Children.only(children)}
-    </TouchableHighlight>
+      {(interactionState: InteractionState) => (
+        <View style={getInteractionStyle(interactionState, style)}>
+          {React.Children.only(
+            getInteractionChildren(interactionState, children)
+          )}
+          {interactionState.pressed && Platform.OS !== 'android' ? (
+            <View
+              style={[
+                StyleSheet.absoluteFill,
+                { backgroundColor: underlayColor || rippleColor },
+              ]}
+            />
+          ) : null}
+        </View>
+      )}
+    </Pressable>
   );
 };
 
-TouchableRipple.supported =
-  Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_LOLLIPOP;
+const styles = StyleSheet.create({
+  touchable: {},
+  borderless: {
+    overflow: 'hidden',
+  },
+});
 
 export default withTheme(TouchableRipple);

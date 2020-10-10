@@ -1,30 +1,22 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   Pressable,
   View,
-  ViewStyle,
   StyleSheet,
-  StyleProp,
   GestureResponderEvent,
-  //@ts-ignore
-  unstable_createElement
-} from "react-native";
-import color from "color";
+} from 'react-native';
+import color from 'color';
 import { withTheme } from '../../core/theming';
-
-type InteractionState = {
-  hovered?: boolean;
-  focused?: boolean;
-  pressed: boolean;
-};
-
-type StyleType =
-  | StyleProp<ViewStyle>
-  | ((interactionState: InteractionState) => StyleProp<ViewStyle>);
-
-type ChildrenType =
-  | React.ReactNode
-  | ((interactionState: InteractionState) => React.ReactNode);
+import type { RippleType } from './Ripple';
+import Ripple, { RippleStatus } from './Ripple';
+import {
+  getInteractionChildren,
+  getInteractionStyle,
+  InteractionChildrenType,
+  InteractionState,
+  InteractionStyleType,
+  useRadiusStyles,
+} from './utils';
 
 type Props = React.ComponentPropsWithRef<typeof Pressable> & {
   /**
@@ -63,8 +55,8 @@ type Props = React.ComponentPropsWithRef<typeof Pressable> & {
   /**
    * Content of the `TouchableRipple`.
    */
-  children: ChildrenType;
-  style?: StyleType;
+  children: InteractionChildrenType;
+  style?: InteractionStyleType;
   /**
    * @optional
    */
@@ -101,51 +93,30 @@ type Props = React.ComponentPropsWithRef<typeof Pressable> & {
  * ```
  */
 
-const RIPPLE_DURATION = 250;
-const colors = {
-  text: "#000"
-};
-const dark = false;
-
-function getStyle(interactionState: InteractionState, s: StyleType) {
-  return typeof s === "function" ? s(interactionState) : s;
-}
-
-function getChildren(interactionState: InteractionState, c: ChildrenType) {
-  return typeof c === "function" ? c(interactionState) : c;
-}
-
-function TouchableRipple(props: Props) {
-  const {
-    style,
-    background,
-    borderless = false,
-    disabled: disabledProp,
-    rippleColor,
-    underlayColor,
-    children,
-    theme,
-    onPressIn,
-    onPressOut,
-    centered,
-    theme,
-    ...rest
-  } = props;
-
-  const calculatedRippleColor = React.useMemo(
-    () =>
-      rippleColor ||
-      color(colors.text)
-        .alpha(dark ? 0.32 : 0.2)
-        .rgb()
-        .string(),
-    [rippleColor]
-  );
+function TouchableRipple({
+  style,
+  background: _background,
+  borderless = false,
+  disabled: disabledProp,
+  rippleColor,
+  underlayColor: _underlayColor,
+  children,
+  centered,
+  theme,
+  ...rest
+}: Props) {
+  const calculatedRippleColor =
+    rippleColor ||
+    color(theme.colors.text)
+      .alpha(theme.dark ? 0.32 : 0.2)
+      .rgb()
+      .string();
   const [rippleArray, setRippleArray] = React.useState<RippleType[]>([]);
-  const handlePressIn = (e: any) => {
-    onPressIn?.(e);
+  const handlePressIn = (e: GestureResponderEvent) => {
+    rest.onPressIn?.(e);
     const button = e.currentTarget;
-    const dimensions = button.getBoundingClientRect();
+
+    const dimensions = (button as any).getBoundingClientRect();
 
     let touchX;
     let touchY;
@@ -157,8 +128,8 @@ function TouchableRipple(props: Props) {
       touchX = dimensions.width / 2;
       touchY = dimensions.height / 2;
     } else {
-      touchX = touch.locationX ?? e.pageX;
-      touchY = touch.locationY ?? e.pageY;
+      touchX = touch.locationX ?? (e as any).pageX;
+      touchY = touch.locationY ?? (e as any).pageY;
     }
 
     const size = centered
@@ -173,10 +144,10 @@ function TouchableRipple(props: Props) {
         left: touchX,
         top: touchY,
         width: size,
-        height: size
+        height: size,
       },
       animationDuration: Math.min(size * 1.5, 350),
-      status: RippleStatus.Pressed
+      status: RippleStatus.Pressed,
     };
 
     setRippleArray([...rippleArray, newRipple]);
@@ -186,8 +157,8 @@ function TouchableRipple(props: Props) {
     setRippleArray((prev) => prev.filter((p) => p !== ripple));
   };
 
-  const handlePressOut = (e: any) => {
-    props.onPressOut && props.onPressOut(e);
+  const handlePressOut = (e: GestureResponderEvent) => {
+    rest.onPressOut?.(e);
 
     setRippleArray((prev) =>
       prev.map((p, i) =>
@@ -196,14 +167,9 @@ function TouchableRipple(props: Props) {
     );
   };
 
-  const disabled = disabledProp || !props.onPress;
+  const disabled = disabledProp || !rest.onPress;
 
-  const rippleContainerStyle = React.useMemo(() => {
-    const flattenStyles = StyleSheet.flatten(
-      getStyle({ pressed: false }, style)
-    );
-    return pickRadiusStyles(flattenStyles);
-  }, [style]);
+  const rippleContainerStyle = useRadiusStyles(style);
 
   return (
     <Pressable
@@ -212,20 +178,22 @@ function TouchableRipple(props: Props) {
       onPressOut={handlePressOut}
       disabled={disabled}
     >
-      {(interactionState) => (
+      {(interactionState: InteractionState) => (
         <View
           style={[
             styles.touchable,
             borderless && styles.borderless,
-            getStyle(interactionState, style)
+            getInteractionStyle(interactionState, style),
           ]}
         >
-          {React.Children.only(getChildren(interactionState, children))}
+          {React.Children.only(
+            getInteractionChildren(interactionState, children)
+          )}
           <View
             style={[
               styles.rippleContainer,
               rippleContainerStyle,
-              { overflow: centered ? "visible" : "hidden" }
+              centered ? styles.overflowVisible : styles.overflowHidden,
             ]}
             pointerEvents="none"
           >
@@ -241,168 +209,25 @@ function TouchableRipple(props: Props) {
 
 const styles = StyleSheet.create({
   touchable: {
-    position: "relative"
+    position: 'relative',
   },
   borderless: {
-    overflow: "hidden"
+    overflow: 'hidden',
   },
   rippleContainer: {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     right: 0,
     bottom: 0,
     left: 0,
-    overflow: "hidden"
-  }
-});
-
-type RippleStatusType = "pressed" | "not_pressed";
-const RippleStatus: { [key: string]: RippleStatusType } = {
-  Pressed: "pressed",
-  NotPressed: "not_pressed"
-};
-
-type RippleType = {
-  style: {
-    backgroundColor: string;
-    left: number;
-    top: number;
-    width: number;
-    height: number;
-  };
-  animationDuration: number;
-  status: RippleStatusType;
-};
-
-const Div = (props) => unstable_createElement("div", props);
-function Ripple({
-  onRemove,
-  ripple,
-  ripple: { status, animationDuration, style }
-}: {
-  ripple: RippleType;
-  onRemove: (ripple: RippleType) => any;
-}) {
-  const onAnimationEnd = () => {
-    if (status === RippleStatus.NotPressed) {
-      onRemove(ripple);
-    }
-  };
-
-  return (
-    <Div
-      style={[
-        rippleStyles.container,
-        status === RippleStatus.Pressed ? rippleStyles.show : rippleStyles.hide
-      ]}
-    >
-      <Div
-        onAnimationEnd={onAnimationEnd}
-        style={[
-          rippleStyles.ripple,
-          rippleStyles.animated,
-          rippleStyles.rippleIn,
-          style,
-          {
-            animationDuration: `${animationDuration}ms`
-          }
-        ]}
-      />
-    </Div>
-  );
-}
-
-function pickRadiusStyles({
-  borderBottomEndRadius,
-  borderBottomLeftRadius,
-  borderBottomRightRadius,
-  borderBottomStartRadius,
-  borderRadius,
-  borderTopEndRadius,
-  borderTopLeftRadius,
-  borderTopRightRadius,
-  borderTopStartRadius
-}: ViewStyle) {
-  return {
-    borderBottomEndRadius,
-    borderBottomLeftRadius,
-    borderBottomRightRadius,
-    borderBottomStartRadius,
-    borderRadius,
-    borderTopEndRadius,
-    borderTopLeftRadius,
-    borderTopRightRadius,
-    borderTopStartRadius
-  };
-}
-
-const fromRippleStyle = {
-  transform: [
-    { translateY: "-50%" as any },
-    { translateX: "-50%" as any },
-    { scale: "0.1" as any }
-  ]
-};
-
-const toRippleStyle = {
-  transform: [
-    { translateY: "-50%" as any },
-    { translateX: "-50%" as any },
-    { scale: "1" as any }
-  ]
-};
-
-const toRippleOutStyle = {
-  transform: [
-    { translateY: "-50%" as any },
-    { translateX: "-50%" as any },
-    { scale: "1" as any }
-  ]
-};
-
-const rippleStyles = StyleSheet.create({
-  ripple: {
-    position: "absolute",
-    //@ts-ignore
-    willChange: "transform" as any,
-    borderRadius: "50%" as any,
-    transformOrigin: "center"
+    overflow: 'hidden',
   },
-  animated: {
-    //@ts-ignore
-    animationDuration: `${RIPPLE_DURATION}ms`,
-    animationTimingFunction: "linear"
+  overflowVisible: {
+    overflow: 'visible',
   },
-
-  rippleIn: {
-    ...toRippleStyle,
-    //@ts-ignore
-    animationKeyframes: {
-      "0%": fromRippleStyle,
-      "100%": toRippleStyle
-    }
+  overflowHidden: {
+    overflow: 'hidden',
   },
-  rippleOut: {
-    ...toRippleOutStyle,
-    //@ts-ignore
-    animationKeyframes: {
-      "0%": toRippleStyle,
-      "100%": toRippleOutStyle
-    }
-  },
-  container: {
-    //@ts-ignore
-    transitionDuration: `250ms`,
-    willChange: "opacity" as any,
-    transitionProperty: "opacity",
-    transitionTimingFunction: "linear"
-  },
-  show: {
-    opacity: 0.5
-  },
-  hide: {
-    opacity: 0
-  }
 });
 
 /**
