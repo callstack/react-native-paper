@@ -9,8 +9,8 @@ import {
   //@ts-ignore
   unstable_createElement
 } from "react-native";
-
 import color from "color";
+import { withTheme } from '../../core/theming';
 
 type InteractionState = {
   hovered?: boolean;
