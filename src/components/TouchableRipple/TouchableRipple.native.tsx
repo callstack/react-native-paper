@@ -42,9 +42,7 @@ const TouchableRipple = ({
       .alpha(dark ? 0.32 : 0.2)
       .rgb()
       .string();
-
   const rippleContainerStyle = useRadiusStyles(style);
-
   return (
     <Pressable
       {...rest}
@@ -53,14 +51,14 @@ const TouchableRipple = ({
         color: background != null ? background : calculatedRippleColor,
         borderless,
       }}
-      style={[
+      style={(interactionState: InteractionState) => [
         styles.touchable,
         borderless && styles.borderless,
-        rippleContainerStyle,
+        getInteractionStyle(interactionState, style),
       ]}
     >
       {(interactionState: InteractionState) => (
-        <View style={getInteractionStyle(interactionState, style)}>
+        <>
           {React.Children.only(
             getInteractionChildren(interactionState, children)
           )}
@@ -68,11 +66,12 @@ const TouchableRipple = ({
             <View
               style={[
                 StyleSheet.absoluteFill,
-                { backgroundColor: underlayColor || rippleColor },
+                rippleContainerStyle,
+                { backgroundColor: underlayColor || calculatedRippleColor },
               ]}
             />
           ) : null}
-        </View>
+        </>
       )}
     </Pressable>
   );

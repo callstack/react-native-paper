@@ -168,31 +168,27 @@ function TouchableRipple({
   };
 
   const disabled = disabledProp || !rest.onPress;
-
   const rippleContainerStyle = useRadiusStyles(style);
-
   return (
     <Pressable
       {...rest}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
       disabled={disabled}
+      style={(interactionState: InteractionState) => [
+        styles.touchable,
+        borderless && styles.overflowHidden,
+        getInteractionStyle(interactionState, style),
+      ]}
     >
-      {(interactionState: InteractionState) => (
-        <View
-          style={[
-            styles.touchable,
-            borderless && styles.overflowHidden,
-            getInteractionStyle(interactionState, style),
-          ]}
-        >
+      {(interactionState) => (
+        <>
           {React.Children.only(
             getInteractionChildren(interactionState, children)
           )}
           <View
             style={[
               StyleSheet.absoluteFill,
-              styles.overflowHidden,
               rippleContainerStyle,
               centered ? styles.overflowVisible : styles.overflowHidden,
             ]}
@@ -202,7 +198,7 @@ function TouchableRipple({
               <Ripple key={index} ripple={ripple} onRemove={onRemove} />
             ))}
           </View>
-        </View>
+        </>
       )}
     </Pressable>
   );

@@ -1,4 +1,4 @@
-import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
+import { StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import * as React from 'react';
 
 export type InteractionState = {
@@ -48,7 +48,7 @@ export function pickRadiusStyles({
   borderTopLeftRadius,
   borderTopRightRadius,
   borderTopStartRadius,
-}: ViewStyle) {
+}: ViewStyle = {}) {
   return {
     borderBottomEndRadius,
     borderBottomLeftRadius,

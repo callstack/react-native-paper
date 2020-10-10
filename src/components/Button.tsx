@@ -249,7 +249,6 @@ const Button = ({
     >
       <TouchableRipple
         borderless
-        delayPressIn={0}
         onPress={onPress}
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
