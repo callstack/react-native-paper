@@ -28,6 +28,29 @@ const mockAppearance = () => {
   });
 };
 
+const mockAccessibilityInfo = () => {
+  jest.mock(
+    'react-native/Libraries/Components/AccessibilityInfo/AccessibilityInfo',
+    () => {
+      const realApp = jest.requireActual(
+        'react-native/Libraries/Components/AccessibilityInfo/AccessibilityInfo'
+      );
+
+      const listeners = [];
+      return {
+        realApp,
+        addEventListener: jest.fn((event, cb) => {
+          listeners.push(cb);
+        }),
+        removeEventListener: jest.fn((cb) => {
+          listeners.push(cb);
+        }),
+        __internalListeners: listeners,
+      };
+    }
+  );
+};
+
 const FakeChild = () => {
   const theme = useTheme();
   return <View testID="provider-child-view" theme={theme} />;
@@ -60,15 +83,26 @@ describe('Provider', () => {
 
   it('should set AccessibilityInfo listeners, if there is no theme', async () => {
     mockAppearance();
-    const { getByTestId } = render(createProvider(null));
+    mockAccessibilityInfo();
+
+    const { rerender, getByTestId } = render(createProvider(null));
 
     expect(AccessibilityInfo.addEventListener).toHaveBeenCalled();
-    expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
-      DefaultTheme
+    act(() =>
+      AccessibilityInfo.__internalListeners[0]({
+        reduceMotionEnabled: true,
+      })
     );
+
+    expect(
+      getByTestId('provider-child-view').props.theme.animation.scale
+    ).toStrictEqual(0);
+
+    rerender(createProvider(DefaultTheme));
+    expect(AccessibilityInfo.removeEventListener).toHaveBeenCalled();
   });
 
-  it('should not set AccessibilityInfo listeners, if there is no theme', async () => {
+  it('should not set AccessibilityInfo listeners, if there is a theme', async () => {
     mockAppearance();
     const { getByTestId } = render(createProvider(DarkTheme));
 

@@ -35,14 +35,14 @@ const Provider = ({ ...props }: Props) => {
     if (!props.theme) {
       AccessibilityInfo.addEventListener(
         'reduceMotionChanged',
-        (reduceMotionEnabled) => setReduceMotionEnabled(reduceMotionEnabled)
+        setReduceMotionEnabled
       );
     }
     return () => {
       if (!props.theme) {
         AccessibilityInfo.removeEventListener(
           'reduceMotionChanged',
-          (reduceMotionEnabled) => setReduceMotionEnabled(reduceMotionEnabled)
+          setReduceMotionEnabled
         );
       }
     };
