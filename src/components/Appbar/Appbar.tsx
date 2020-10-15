@@ -31,7 +31,11 @@ type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
   style?: StyleProp<ViewStyle>;
 };
 
-export const DEFAULT_APPBAR_HEIGHT = 56;
+export const DEFAULT_APPBAR_HEIGHT = Platform.select({
+  ios: 44,
+  android: 56,
+  default: 64,
+});
 
 /**
  * A component to display action items in a bar. It can be placed at the top or bottom.

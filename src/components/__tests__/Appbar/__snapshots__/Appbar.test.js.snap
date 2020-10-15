@@ -8,7 +8,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
       "backgroundColor": "#6200ee",
       "elevation": 4,
       "flexDirection": "row",
-      "height": 56,
+      "height": 44,
       "paddingHorizontal": 4,
       "shadowColor": "#000000",
       "shadowOffset": Object {
@@ -252,7 +252,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       "backgroundColor": "#6200ee",
       "elevation": 4,
       "flexDirection": "row",
-      "height": 56,
+      "height": 44,
       "paddingHorizontal": 4,
       "shadowColor": "#000000",
       "shadowOffset": Object {
