@@ -19,6 +19,7 @@ export type Font = {
 export type Fonts = {
   regular: Font;
   medium: Font;
+  bold: Font;
   light: Font;
   thin: Font;
 };
@@ -77,6 +78,7 @@ declare global {
     interface ThemeFonts {
       regular: ThemeFont;
       medium: ThemeFont;
+      bold: ThemeFont;
       light: ThemeFont;
       thin: ThemeFont;
     }

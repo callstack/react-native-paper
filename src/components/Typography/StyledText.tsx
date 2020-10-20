@@ -7,7 +7,7 @@ import { withTheme } from '../../core/theming';
 
 type Props = React.ComponentProps<typeof Text> & {
   alpha: number;
-  family: 'regular' | 'medium' | 'light' | 'thin';
+  family: 'regular' | 'medium' | 'bold' | 'light' | 'thin';
   style?: StyleProp<TextStyle>;
   theme: ReactNativePaper.Theme;
 };

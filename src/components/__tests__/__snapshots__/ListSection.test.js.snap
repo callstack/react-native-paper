@@ -31,6 +31,10 @@ exports[`renders list section with custom title style 1`] = `
       },
       "dark": false,
       "fonts": Object {
+        "bold": Object {
+          "fontFamily": "System",
+          "fontWeight": "700",
+        },
         "light": Object {
           "fontFamily": "System",
           "fontWeight": "300",
@@ -363,6 +367,10 @@ exports[`renders list section with subheader 1`] = `
       },
       "dark": false,
       "fonts": Object {
+        "bold": Object {
+          "fontFamily": "System",
+          "fontWeight": "700",
+        },
         "light": Object {
           "fontFamily": "System",
           "fontWeight": "300",
@@ -693,6 +701,10 @@ exports[`renders list section without subheader 1`] = `
       },
       "dark": false,
       "fonts": Object {
+        "bold": Object {
+          "fontFamily": "System",
+          "fontWeight": "700",
+        },
         "light": Object {
           "fontFamily": "System",
           "fontWeight": "300",
