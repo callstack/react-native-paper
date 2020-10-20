@@ -181,7 +181,12 @@ class ProgressBar extends React.Component<Props, State> {
     const trackTintColor = setColor(tintColor).alpha(0.38).rgb().string();
 
     return (
-      <View onLayout={this.onLayout} {...rest}>
+      <View
+        onLayout={this.onLayout}
+        {...rest}
+        accessible
+        accessibilityRole="progressbar"
+      >
         <Animated.View
           style={[
             styles.container,
