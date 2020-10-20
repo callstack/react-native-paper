@@ -3,9 +3,10 @@
 exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="button"
+  accessibilityRole="radio"
   accessibilityState={
     Object {
+      "checked": false,
       "disabled": undefined,
     }
   }
