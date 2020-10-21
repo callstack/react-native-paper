@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyleSheet, StyleProp, TextStyle } from 'react-native';
 import Title from '../Typography/Title';
 import { withTheme } from '../../core/theming';
+import type { SetPropAsOptional } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof Title> & {
   /**
@@ -69,6 +70,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 24,
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type DialogTitleProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(DialogTitle);
 

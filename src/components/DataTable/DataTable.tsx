@@ -16,7 +16,7 @@ import DataTablePagination, {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import DataTableRow, { DataTableRow as _DataTableRow } from './DataTableRow';
 
-type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Content of the `DataTable`.
    */

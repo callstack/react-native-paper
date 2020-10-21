@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Text as NativeText, TextStyle, StyleProp } from 'react-native';
+import type { SetPropAsOptional } from '../../types';
 import { withTheme } from '../../core/theming';
 
 type Props = React.ComponentProps<typeof NativeText> & {
@@ -48,5 +49,8 @@ class Text extends React.Component<Props> {
     );
   }
 }
+
+// Set the theme to be optional as it should be provided through withTheme
+export type TextProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(Text);

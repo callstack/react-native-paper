@@ -14,6 +14,7 @@ import Surface from './Surface';
 import { withTheme } from '../core/theming';
 import type { IconSource } from './Icon';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
+import type { SetPropAsOptional } from '../types';
 
 type Props = React.ComponentPropsWithRef<typeof TextInput> & {
   /**
@@ -249,5 +250,8 @@ const styles = StyleSheet.create({
     minWidth: 0,
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type SearchbarProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(Searchbar);

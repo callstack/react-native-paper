@@ -12,6 +12,7 @@ import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import { black, white } from '../../styles/colors';
+import type { SetPropAsOptional } from '../../types';
 
 type Props = {
   /**
@@ -171,6 +172,9 @@ const styles = StyleSheet.create({
     maxWidth: maxWidth - (iconWidth + 48),
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type MenuItemProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(MenuItem);
 

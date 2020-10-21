@@ -12,6 +12,7 @@ import { handlePress } from './utils';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import RadioButton from './RadioButton';
 import Text from '../Typography/Text';
+import type { SetPropAsOptional } from '../../types';
 
 export type Props = {
   /**
@@ -143,6 +144,9 @@ const RadioButtonItem = ({
 );
 
 RadioButtonItem.displayName = 'RadioButton.Item';
+
+// Set the theme to be optional as it should be provided through withTheme
+export type RadioButtonProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(RadioButtonItem);
 

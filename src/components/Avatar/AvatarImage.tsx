@@ -7,6 +7,7 @@ import {
   ViewStyle,
   StyleProp,
 } from 'react-native';
+import type { SetPropAsOptional } from '../../types';
 import { withTheme } from '../../core/theming';
 
 const defaultSize = 64;
@@ -91,5 +92,8 @@ class AvatarImage extends React.Component<Props> {
     );
   }
 }
+
+// Set the theme to be optional as it should be provided through withTheme
+export type AvatarImageProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(AvatarImage);

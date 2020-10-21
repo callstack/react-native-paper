@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-type Props = {
+export type Props = {
   /**
    * Function to execute on selection change.
    */

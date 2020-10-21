@@ -8,6 +8,7 @@ import CheckboxAndroid, {
 } from './CheckboxAndroid';
 import CheckboxItem from './CheckboxItem';
 import { withTheme } from '../../core/theming';
+import type { SetPropAsOptional } from '../../types';
 
 type Props = {
   /**
@@ -98,5 +99,8 @@ Checkbox.Android = CheckboxAndroid;
 
 // @component ./CheckboxIOS.tsx
 Checkbox.IOS = CheckboxIOS;
+
+// Set the theme to be optional as it should be provided through withTheme
+export type CheckboxProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(Checkbox);

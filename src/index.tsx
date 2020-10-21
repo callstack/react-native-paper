@@ -17,37 +17,85 @@ import * as Drawer from './components/Drawer/Drawer';
 
 export { Avatar, List, Drawer };
 
-export { default as Badge } from './components/Badge';
-export { default as ActivityIndicator } from './components/ActivityIndicator';
-export { default as Banner } from './components/Banner';
-export { default as BottomNavigation } from './components/BottomNavigation';
-export { default as Button } from './components/Button';
-export { default as Card } from './components/Card/Card';
-export { default as Checkbox } from './components/Checkbox/Checkbox';
-export { default as Chip } from './components/Chip';
-export { default as DataTable } from './components/DataTable/DataTable';
-export { default as Dialog } from './components/Dialog/Dialog';
-export { default as Divider } from './components/Divider';
-export { default as FAB } from './components/FAB/FAB';
-export { default as HelperText } from './components/HelperText';
-export { default as IconButton } from './components/IconButton';
-export { default as Menu } from './components/Menu/Menu';
-export { default as Modal } from './components/Modal';
-export { default as Portal } from './components/Portal/Portal';
-export { default as ProgressBar } from './components/ProgressBar';
-export { default as RadioButton } from './components/RadioButton/RadioButton';
-export { default as Searchbar } from './components/Searchbar';
-export { default as Snackbar } from './components/Snackbar';
-export { default as Surface } from './components/Surface';
-export { default as Switch } from './components/Switch';
-export { default as Appbar } from './components/Appbar/Appbar';
-export { default as TouchableRipple } from './components/TouchableRipple/TouchableRipple';
-export { default as TextInput } from './components/TextInput/TextInput';
-export { default as ToggleButton } from './components/ToggleButton/ToggleButton';
+export { default as Badge, BadgeProps } from './components/Badge';
+export {
+  default as ActivityIndicator,
+  ActivityIndicatorProps,
+} from './components/ActivityIndicator';
+export { default as Banner, BannerProps } from './components/Banner';
+export {
+  default as BottomNavigation,
+  BottomNavigationProps,
+} from './components/BottomNavigation';
+export { default as Button, ButtonProps } from './components/Button';
+export { default as Card, CardProps } from './components/Card/Card';
+export {
+  default as Checkbox,
+  CheckboxProps,
+} from './components/Checkbox/Checkbox';
+export { default as Chip, ChipProps } from './components/Chip';
+export {
+  default as DataTable,
+  Props as DataTableProps,
+} from './components/DataTable/DataTable';
+export { default as Dialog, DialogProps } from './components/Dialog/Dialog';
+export { default as Divider, DividerProps } from './components/Divider';
+export { default as FAB, FABProps } from './components/FAB/FAB';
+export {
+  default as HelperText,
+  HelperTextProps,
+} from './components/HelperText';
+export {
+  default as IconButton,
+  IconButtonProps,
+} from './components/IconButton';
+export { default as Menu, MenuProps } from './components/Menu/Menu';
+export { default as Modal, ModalProps } from './components/Modal';
+export { default as Portal, PortalProps } from './components/Portal/Portal';
+export {
+  default as ProgressBar,
+  ProgressBarProps,
+} from './components/ProgressBar';
+export {
+  default as RadioButton,
+  RadioButtonProps,
+} from './components/RadioButton/RadioButton';
+export { default as Searchbar, SearchbarProps } from './components/Searchbar';
+export { default as Snackbar, SnackbarProps } from './components/Snackbar';
+export { default as Surface, SurfaceProps } from './components/Surface';
+export { default as Switch, SwitchProps } from './components/Switch';
+export { default as Appbar, AppBarProps } from './components/Appbar/Appbar';
+export {
+  default as TouchableRipple,
+  TouchableRippleProps,
+} from './components/TouchableRipple/TouchableRipple';
+export {
+  default as TextInput,
+  TextInputProps,
+} from './components/TextInput/TextInput';
+export {
+  default as ToggleButton,
+  ToggleButtonProps,
+} from './components/ToggleButton/ToggleButton';
 
-export { default as Caption } from './components/Typography/Caption';
-export { default as Headline } from './components/Typography/Headline';
-export { default as Paragraph } from './components/Typography/Paragraph';
-export { default as Subheading } from './components/Typography/Subheading';
-export { default as Title } from './components/Typography/Title';
-export { default as Text } from './components/Typography/Text';
+export {
+  default as Caption,
+  Props as CaptionProps,
+} from './components/Typography/Caption';
+export {
+  default as Headline,
+  Props as HeadlineProps,
+} from './components/Typography/Headline';
+export {
+  default as Paragraph,
+  Props as ParagraphProps,
+} from './components/Typography/Paragraph';
+export {
+  default as Subheading,
+  Props as SubheadingProps,
+} from './components/Typography/Subheading';
+export {
+  default as Title,
+  Props as TitleProps,
+} from './components/Typography/Title';
+export { default as Text, TextProps } from './components/Typography/Text';

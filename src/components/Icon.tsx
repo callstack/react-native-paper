@@ -8,20 +8,21 @@ import {
 import { Consumer as SettingsConsumer } from '../core/settings';
 import { accessibilityProps } from './MaterialCommunityIcon';
 import { withTheme } from '../core/theming';
+import type { SetPropAsOptional } from '../types';
 
 type IconSourceBase = string | ImageSourcePropType;
 
 export type IconSource =
   | IconSourceBase
   | Readonly<{ source: IconSourceBase; direction: 'rtl' | 'ltr' | 'auto' }>
-  | ((props: IconProps & { color: string }) => React.ReactNode);
+  | ((props: IconBaseProps & { color: string }) => React.ReactNode);
 
-type IconProps = {
+type IconBaseProps = {
   size: number;
   allowFontScaling?: boolean;
 };
 
-type Props = IconProps & {
+type Props = IconBaseProps & {
   color?: string;
   source: any;
   /**
@@ -121,5 +122,8 @@ const Icon = ({ source, color, size, theme, ...rest }: Props) => {
 
   return null;
 };
+
+// Set the theme to be optional as it should be provided through withTheme
+export type IconProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(Icon);

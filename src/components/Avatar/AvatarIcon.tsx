@@ -5,6 +5,7 @@ import Icon from '../Icon';
 import { withTheme } from '../../core/theming';
 import { white } from '../../styles/colors';
 import type { IconSource } from './../Icon';
+import type { SetPropAsOptional } from '../../types';
 
 const defaultSize = 64;
 
@@ -89,5 +90,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type AvatarIconProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(Avatar);

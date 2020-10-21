@@ -11,6 +11,7 @@ import {
 import SafeAreaView from 'react-native-safe-area-view';
 import Surface from './Surface';
 import { withTheme } from '../core/theming';
+import type { SetPropAsOptional } from '../types';
 
 type Props = {
   /**
@@ -227,6 +228,9 @@ class Modal extends React.Component<Props, State> {
     );
   }
 }
+
+// Set the theme to be optional as it should be provided through withTheme
+export type ModalProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(Modal);
 

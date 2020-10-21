@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { PortalMethods } from './PortalHost';
 
-type Props = {
+export type Props = {
   manager: PortalMethods;
   children: React.ReactNode;
 };

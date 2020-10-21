@@ -4,8 +4,8 @@ import type {
   TextStyle,
   LayoutChangeEvent,
 } from 'react-native';
-import type { TextInputProps } from './TextInput';
-import type { $Omit } from './../../types';
+import type { TextInputProps as TextInputBaseProps } from './TextInput';
+import type { $Omit, SetPropAsOptional } from './../../types';
 
 export type RenderProps = {
   ref: (a: NativeTextInput | null | undefined) => void;
@@ -23,7 +23,7 @@ export type RenderProps = {
   value?: string;
   adjustsFontSizeToFit?: boolean;
 };
-type TextInputTypesWithoutMode = $Omit<TextInputProps, 'mode'>;
+type TextInputTypesWithoutMode = $Omit<TextInputBaseProps, 'mode'>;
 export type State = {
   labeled: Animated.Value;
   error: Animated.Value;
@@ -81,3 +81,6 @@ export type LabelBackgroundProps = {
   labelStyle: any;
   parentState: State;
 };
+
+// Set the theme to be optional as it should be provided through withTheme
+export type TextInputProps = SetPropAsOptional<TextInputBaseProps, 'theme'>;

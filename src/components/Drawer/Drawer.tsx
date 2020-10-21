@@ -1,5 +1,5 @@
 // @component ./DrawerItem.tsx
-export { default as Item } from './DrawerItem';
+export { default as Item, DrawerItemProps } from './DrawerItem';
 
 // @component ./DrawerSection.tsx
-export { default as Section } from './DrawerSection';
+export { default as Section, DrawerSectionProps } from './DrawerSection';

@@ -3,6 +3,7 @@ import { StyleSheet, StyleProp, TextStyle } from 'react-native';
 import color from 'color';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
+import type { SetPropAsOptional } from '../../types';
 
 type Props = React.ComponentProps<typeof Text> & {
   /**
@@ -53,5 +54,8 @@ const styles = StyleSheet.create({
     paddingVertical: 13,
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type ListSubheaderProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(ListSubheader);

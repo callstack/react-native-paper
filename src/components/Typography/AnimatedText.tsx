@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Animated, TextStyle, I18nManager, StyleProp } from 'react-native';
+import type { SetPropAsOptional } from '../../types';
 import { withTheme } from '../../core/theming';
 
 type Props = React.ComponentPropsWithRef<typeof Animated.Text> & {
@@ -34,5 +35,8 @@ function AnimatedText({ style, theme, ...rest }: Props) {
     />
   );
 }
+
+// Set the theme to be optional as it should be provided through withTheme
+export type AnimatedTextProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(AnimatedText);

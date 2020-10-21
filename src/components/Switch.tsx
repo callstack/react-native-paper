@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import setColor from 'color';
 import { withTheme } from '../core/theming';
+import type { SetPropAsOptional } from '../types';
 
 const version = NativeModules.PlatformConstants
   ? NativeModules.PlatformConstants.reactNativeVersion
@@ -132,5 +133,8 @@ const Switch = ({
     />
   );
 };
+
+// Set the theme to be optional as it should be provided through withTheme
+export type SwitchProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(Switch);

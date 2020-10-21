@@ -10,6 +10,7 @@ import Color from 'color';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import { white } from '../../styles/colors';
+import type { SetPropAsOptional } from '../../types';
 
 const defaultSize = 64;
 
@@ -126,5 +127,7 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
   },
 });
+// Set the theme to be optional as it should be provided through withTheme
+export type AvatarTextProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(AvatarText);

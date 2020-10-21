@@ -12,6 +12,7 @@ import CheckBox from './Checkbox';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
+import type { SetPropAsOptional } from '../../types';
 
 type Props = {
   /**
@@ -96,6 +97,9 @@ const CheckboxItem = ({
 );
 
 CheckboxItem.displayName = 'Checkbox.Item';
+
+// Set the theme to be optional as it should be provided through withTheme
+export type CheckboxItemProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(CheckboxItem);
 

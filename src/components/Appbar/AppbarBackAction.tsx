@@ -4,7 +4,7 @@ import AppbarAction from './AppbarAction';
 import AppbarBackIcon from './AppbarBackIcon';
 import type { StyleProp, ViewStyle } from 'react-native';
 
-type Props = $Omit<
+export type Props = $Omit<
   React.ComponentPropsWithoutRef<typeof AppbarAction>,
   'icon'
 > & {

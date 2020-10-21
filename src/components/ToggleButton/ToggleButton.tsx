@@ -14,6 +14,7 @@ import ToggleButtonGroup, {
 import ToggleButtonRow from './ToggleButtonRow';
 import { black, white } from '../../styles/colors';
 import type { IconSource } from '../Icon';
+import type { SetPropAsOptional } from '../../types';
 
 type Props = {
   /**
@@ -169,5 +170,8 @@ const styles = StyleSheet.create({
     margin: 0,
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type ToggleButtonProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(ToggleButton);

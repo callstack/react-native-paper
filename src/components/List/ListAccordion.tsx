@@ -17,6 +17,7 @@ import {
   ListAccordionGroupContext,
   ListAccordionGroupContextType,
 } from './ListAccordionGroup';
+import type { SetPropAsOptional } from '../../types';
 
 type Props = {
   /**
@@ -308,5 +309,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type ListAccordionProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(ListAccordion);

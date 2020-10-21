@@ -11,7 +11,7 @@ import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
-import type { $RemoveChildren } from '../../types';
+import type { $RemoveChildren, SetPropAsOptional } from '../../types';
 import type { IconSource } from './../Icon';
 
 type Props = $RemoveChildren<typeof Surface> & {
@@ -294,5 +294,8 @@ const styles = StyleSheet.create({
     elevation: 0,
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type FABProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(FAB);

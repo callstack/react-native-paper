@@ -3,6 +3,7 @@ import { Animated, StyleSheet, StyleProp, TextStyle } from 'react-native';
 import color from 'color';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
+import type { SetPropAsOptional } from '../types';
 
 const defaultSize = 20;
 
@@ -109,6 +110,9 @@ const Badge = ({
     </Animated.Text>
   );
 };
+
+// Set the theme to be optional as it should be provided through withTheme
+export type BadgeProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(Badge);
 

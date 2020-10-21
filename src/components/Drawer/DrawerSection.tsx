@@ -4,6 +4,7 @@ import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 import Text from '../Typography/Text';
 import Divider from '../Divider';
 import { withTheme } from '../../core/theming';
+import type { SetPropAsOptional } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -95,5 +96,8 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type DrawerSectionProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(DrawerSection);

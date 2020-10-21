@@ -11,6 +11,7 @@ import Appbar, { DEFAULT_APPBAR_HEIGHT } from './Appbar';
 import shadow from '../../styles/shadow';
 import { withTheme } from '../../core/theming';
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
+import type { SetPropAsOptional } from '../../types';
 
 type Props = React.ComponentProps<typeof Appbar> & {
   /**
@@ -133,6 +134,9 @@ const styles = StyleSheet.create({
     elevation: 0,
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type AppBarHeaderProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(AppbarHeader);
 

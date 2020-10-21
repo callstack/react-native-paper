@@ -11,6 +11,7 @@ import IconButton from '../IconButton';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import type { SetPropAsOptional } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -153,6 +154,9 @@ const styles = StyleSheet.create({
     marginRight: 44,
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type DataTablePaginationProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(DataTablePagination);
 

@@ -19,7 +19,7 @@ import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple/TouchableRipple';
 import { withTheme } from '../core/theming';
 import { black, white } from '../styles/colors';
-import type { EllipsizeProp } from '../types';
+import type { EllipsizeProp, SetPropAsOptional } from '../types';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
@@ -376,5 +376,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type ChipProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(Chip);

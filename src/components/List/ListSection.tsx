@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import ListSubheader from './ListSubheader';
 import { withTheme } from '../../core/theming';
+import type { SetPropAsOptional } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -75,5 +76,8 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type ListSectionProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(ListSection);

@@ -8,6 +8,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+import type { SetPropAsOptional } from '../types';
 import { withTheme } from '../core/theming';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
@@ -250,5 +251,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type ActivityIndicatorProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(ActivityIndicator);

@@ -12,6 +12,7 @@ import Button from './Button';
 import Surface from './Surface';
 import Text from './Typography/Text';
 import { withTheme } from '../core/theming';
+import type { SetPropAsOptional } from '../types';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
@@ -267,5 +268,8 @@ const styles = StyleSheet.create({
     marginVertical: 6,
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type SnackbarProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(Snackbar);

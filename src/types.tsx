@@ -109,3 +109,9 @@ declare global {
     }
   }
 }
+
+export type SetPropAsOptional<T, K extends string | number | symbol> = Omit<
+  T,
+  K
+> &
+  { [P in Extract<keyof T, K>]?: T[P] };

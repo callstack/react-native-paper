@@ -3,7 +3,7 @@ import color from 'color';
 import { StyleSheet, View, ViewStyle, StyleProp } from 'react-native';
 import { withTheme } from '../core/theming';
 import { black, white } from '../styles/colors';
-import type { $RemoveChildren } from '../types';
+import type { $RemoveChildren, SetPropAsOptional } from '../types';
 
 type Props = $RemoveChildren<typeof View> & {
   /**
@@ -71,5 +71,8 @@ const styles = StyleSheet.create({
     marginLeft: 72,
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type DividerProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(Divider);

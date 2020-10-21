@@ -15,7 +15,7 @@ import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import { white } from '../../styles/colors';
 
-import type { $RemoveChildren } from '../../types';
+import type { $RemoveChildren, SetPropAsOptional } from '../../types';
 
 type Props = $RemoveChildren<typeof View> & {
   /**
@@ -143,6 +143,9 @@ const styles = StyleSheet.create({
     fontSize: Platform.OS === 'ios' ? 11 : 14,
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type AppBarContentProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(AppbarContent);
 

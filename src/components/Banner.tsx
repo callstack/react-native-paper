@@ -5,7 +5,7 @@ import Text from './Typography/Text';
 import Button from './Button';
 import Icon, { IconSource } from './Icon';
 import { withTheme } from '../core/theming';
-import type { $RemoveChildren } from '../types';
+import type { $RemoveChildren, SetPropAsOptional } from '../types';
 import shadow from '../styles/shadow';
 
 const ELEVATION = 1;
@@ -256,5 +256,8 @@ const styles = StyleSheet.create({
     margin: 4,
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type BannerProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(Banner);

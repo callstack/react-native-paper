@@ -8,6 +8,7 @@ import DialogTitle, { DialogTitle as _DialogTitle } from './DialogTitle';
 import DialogScrollArea from './DialogScrollArea';
 import { withTheme } from '../../core/theming';
 import overlay from '../../styles/overlay';
+import type { SetPropAsOptional } from '../../types';
 
 type Props = {
   /**
@@ -145,5 +146,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type DialogProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(Dialog);

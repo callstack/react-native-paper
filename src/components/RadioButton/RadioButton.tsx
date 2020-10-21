@@ -5,6 +5,7 @@ import RadioButtonAndroid from './RadioButtonAndroid';
 import RadioButtonIOS from './RadioButtonIOS';
 import RadioButtonItem from './RadioButtonItem';
 import { withTheme } from '../../core/theming';
+import type { SetPropAsOptional } from '../../types';
 
 export type Props = {
   /**
@@ -111,5 +112,8 @@ RadioButton.IOS = RadioButtonIOS;
 
 // @component ./RadioButtonItem.tsx
 RadioButton.Item = RadioButtonItem;
+
+// Set the theme to be optional as it should be provided through withTheme
+export type RadioButtonProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(RadioButton);

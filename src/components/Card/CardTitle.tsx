@@ -6,6 +6,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+import type { SetPropAsOptional } from '../../types';
 
 import { withTheme } from '../../core/theming';
 import Caption from './../Typography/Caption';
@@ -183,6 +184,9 @@ const styles = StyleSheet.create({
     marginVertical: 0,
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type CardTitleProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(CardTitle);
 

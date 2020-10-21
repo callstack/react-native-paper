@@ -4,7 +4,7 @@ import color from 'color';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
-import type { $RemoveChildren } from '../../types';
+import type { $RemoveChildren, SetPropAsOptional } from '../../types';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -177,6 +177,9 @@ const styles = StyleSheet.create({
     width: 14,
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type CheckboxAndroidProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(CheckboxAndroid);
 

@@ -2,7 +2,12 @@ import * as React from 'react';
 import { Platform, I18nManager, View, Image, StyleSheet } from 'react-native';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 
-const AppbarBackIcon = ({ size, color }: { size: number; color: string }) =>
+export type Props = {
+  size: number;
+  color: string;
+};
+
+const AppbarBackIcon = ({ size, color }: Props) =>
   Platform.OS === 'ios' ? (
     <View
       style={[

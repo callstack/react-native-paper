@@ -3,6 +3,7 @@ import { Animated, StyleSheet, View } from 'react-native';
 import Icon, { isValidIcon, isEqualIcon, IconSource } from './Icon';
 
 import { withTheme } from '../core/theming';
+import type { SetPropAsOptional } from '../types';
 
 type Props = {
   /**
@@ -131,6 +132,9 @@ class CrossFadeIcon extends React.Component<Props, State> {
     );
   }
 }
+
+// Set the theme to be optional as it should be provided through withTheme
+export type CrossFadeIconProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(CrossFadeIcon);
 

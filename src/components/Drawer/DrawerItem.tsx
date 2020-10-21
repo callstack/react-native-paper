@@ -5,6 +5,7 @@ import Text from '../Typography/Text';
 import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
+import type { SetPropAsOptional } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -136,5 +137,8 @@ const styles = StyleSheet.create({
     marginRight: 32,
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type DrawerItemProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(DrawerItem);

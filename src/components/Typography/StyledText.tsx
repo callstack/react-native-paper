@@ -4,6 +4,7 @@ import { I18nManager, StyleProp, TextStyle } from 'react-native';
 
 import Text from './Text';
 import { withTheme } from '../../core/theming';
+import type { SetPropAsOptional } from '../../types';
 
 type Props = React.ComponentProps<typeof Text> & {
   alpha: number;
@@ -31,5 +32,8 @@ class StyledText extends React.Component<Props> {
     );
   }
 }
+
+// Set the theme to be optional as it should be provided through withTheme
+export type StyledTextProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(StyledText);

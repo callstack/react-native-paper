@@ -14,7 +14,7 @@ import Icon, { IconSource } from './Icon';
 import CrossFadeIcon from './CrossFadeIcon';
 import { withTheme } from '../core/theming';
 
-import type { $RemoveChildren } from '../types';
+import type { $RemoveChildren, SetPropAsOptional } from '../types';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -147,5 +147,8 @@ const styles = StyleSheet.create({
     opacity: 0.32,
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type IconButtonProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(IconButton);

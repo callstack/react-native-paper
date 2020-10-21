@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import AnimatedText from './Typography/AnimatedText';
 import { withTheme } from '../core/theming';
-import type { $Omit } from '../types';
+import type { $Omit, SetPropAsOptional } from '../types';
 
 type Props = $Omit<
   $Omit<React.ComponentPropsWithRef<typeof AnimatedText>, 'padding'>,
@@ -168,5 +168,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type HelperTextProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(HelperText);

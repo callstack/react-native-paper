@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleSheet, View, StyleProp, ViewStyle } from 'react-native';
 import ToggleButton from './ToggleButton';
 
-type Props = {
+export type Props = {
   /**
    * Function to execute on selection change.
    */

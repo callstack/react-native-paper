@@ -3,6 +3,7 @@ import { Animated, StyleSheet, View, StyleProp, ViewStyle } from 'react-native';
 import shadow from '../styles/shadow';
 import { withTheme } from '../core/theming';
 import overlay from '../styles/overlay';
+import type { SetPropAsOptional } from '../types';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -80,5 +81,8 @@ const Surface = ({ style, theme, ...rest }: Props) => {
     />
   );
 };
+
+// Set the theme to be optional as it should be provided through withTheme
+export type SurfaceProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(Surface);

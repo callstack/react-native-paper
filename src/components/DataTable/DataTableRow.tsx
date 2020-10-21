@@ -4,7 +4,7 @@ import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
-import type { $RemoveChildren } from '../../types';
+import type { $RemoveChildren, SetPropAsOptional } from '../../types';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -84,6 +84,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type DataTableRowProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(DataTableRow);
 

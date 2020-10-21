@@ -12,6 +12,7 @@ import color from 'color';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
+import type { SetPropAsOptional } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
   /**
@@ -182,6 +183,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type DataTableTitleProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(DataTableTitle);
 

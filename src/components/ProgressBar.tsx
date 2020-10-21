@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import setColor from 'color';
 import { withTheme } from '../core/theming';
+import type { SetPropAsOptional } from '../types';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -259,5 +260,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type ProgressBarProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(ProgressBar);

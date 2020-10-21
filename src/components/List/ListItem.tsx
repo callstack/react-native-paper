@@ -11,7 +11,11 @@ import {
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
-import type { $RemoveChildren, EllipsizeProp } from '../../types';
+import type {
+  $RemoveChildren,
+  EllipsizeProp,
+  SetPropAsOptional,
+} from '../../types';
 
 type Description =
   | React.ReactNode
@@ -251,5 +255,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type ListItemProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(ListItem);

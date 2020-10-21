@@ -15,6 +15,7 @@ import CardCover, { CardCover as _CardCover } from './CardCover';
 import CardTitle, { CardTitle as _CardTitle } from './CardTitle';
 import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
+import type { SetPropAsOptional } from '../../types';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
@@ -176,5 +177,8 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type CardProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(Card);

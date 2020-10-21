@@ -14,6 +14,7 @@ import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import { black, white } from '../../styles/colors';
 import overlay from '../../styles/overlay';
+import type { SetPropAsOptional } from '../../types';
 
 type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
   /**
@@ -198,5 +199,8 @@ const styles = StyleSheet.create({
     width: 48,
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type AppBarProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(Appbar);

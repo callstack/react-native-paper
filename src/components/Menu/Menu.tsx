@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 
 import { withTheme } from '../../core/theming';
-import type { $Omit } from '../../types';
+import type { $Omit, SetPropAsOptional } from '../../types';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -586,5 +586,8 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type MenuProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(Menu);

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View, ViewStyle, Image, StyleProp } from 'react-native';
+import type { SetPropAsOptional } from '../../types';
 import { withTheme } from '../../core/theming';
 import { grey200 } from '../../styles/colors';
 
@@ -89,6 +90,8 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
 });
+// Set the theme to be optional as it should be provided through withTheme
+export type CardCoverProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(CardCover);
 

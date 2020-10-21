@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import color from 'color';
 import { withTheme } from '../../core/theming';
+import type { SetPropAsOptional } from '../../types';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 const ANDROID_VERSION_PIE = 28;
@@ -91,5 +92,8 @@ const TouchableRipple = ({
 
 TouchableRipple.supported =
   Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_LOLLIPOP;
+
+// Set the theme to be optional as it should be provided through withTheme
+export type TouchableRippleProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(TouchableRipple);

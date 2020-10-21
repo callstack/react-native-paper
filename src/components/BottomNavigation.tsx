@@ -23,6 +23,7 @@ import TouchableRipple from './TouchableRipple/TouchableRipple';
 import Text from './Typography/Text';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
+import type { SetPropAsOptional } from '../types';
 
 type Route = {
   key: string;
@@ -1001,6 +1002,9 @@ class BottomNavigation extends React.Component<Props, State> {
     );
   }
 }
+
+// Set the theme to be optional as it should be provided through withTheme
+export type BottomNavigationProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(BottomNavigation);
 

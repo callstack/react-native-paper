@@ -6,6 +6,7 @@ import {
   Consumer as SettingsConsumer,
 } from '../../core/settings';
 import { ThemeProvider, withTheme } from '../../core/theming';
+import type { SetPropAsOptional } from '../../types';
 
 type Props = {
   /**
@@ -61,5 +62,8 @@ class Portal extends React.Component<Props> {
     );
   }
 }
+
+// Set the theme to be optional as it should be provided through withTheme
+export type PortalProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(Portal);

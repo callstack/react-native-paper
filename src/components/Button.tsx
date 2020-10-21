@@ -16,6 +16,7 @@ import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple/TouchableRipple';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
+import type { SetPropAsOptional } from '../types';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
@@ -329,5 +330,8 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
 });
+
+// Set the theme to be optional as it should be provided through withTheme
+export type ButtonProps = SetPropAsOptional<Props, 'theme'>;
 
 export default withTheme(Button);
