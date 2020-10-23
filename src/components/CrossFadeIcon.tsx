@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
-import Icon, { isValidIcon, IconSource } from './Icon';
+import Icon, { isValidIcon, IconSource, isEqualIcon } from './Icon';
 
 import { withTheme } from '../core/theming';
 
@@ -34,13 +34,22 @@ const CrossFadeIcon = ({ color, size, source, theme }: Props) => {
 
   const { scale } = theme.animation;
 
+  const previousPreviousIconRef = React.useRef<IconSource | null>();
+  React.useEffect(() => {
+    previousPreviousIconRef.current = previousIcon;
+  });
+  const previousPreviousIcon = previousPreviousIconRef.current;
+
   if (currentIcon !== source) {
     setPreviousIcon(() => currentIcon);
     setCurrentIcon(() => source);
   }
 
   React.useEffect(() => {
-    if (isValidIcon(previousIcon)) {
+    if (
+      isValidIcon(previousIcon) &&
+      !isEqualIcon(previousIcon, previousPreviousIcon)
+    ) {
       fade.setValue(1);
 
       Animated.timing(fade, {
