@@ -50,6 +50,7 @@ export function getAdornmentStyleAdjustmentForNativeInput({
   adornmentConfig,
   leftAffixWidth,
   rightAffixWidth,
+  paddingHorizontal,
   inputOffset = 0,
   mode,
 }: {
@@ -58,6 +59,7 @@ export function getAdornmentStyleAdjustmentForNativeInput({
   leftAffixWidth: number;
   rightAffixWidth: number;
   mode?: 'outlined' | 'flat';
+  paddingHorizontal?: number | string;
 }): AdornmentStyleAdjustmentForNativeInput | {} {
   if (adornmentConfig.length) {
     const adornmentStyleAdjustmentForNativeInput = adornmentConfig.map(
@@ -68,10 +70,13 @@ export function getAdornmentStyleAdjustmentForNativeInput({
           mode === InputMode.Outlined
             ? ADORNMENT_OFFSET + OUTLINED_INPUT_OFFSET
             : ADORNMENT_OFFSET;
-        const offset =
-          (isLeftSide ? leftAffixWidth : rightAffixWidth) +
-          inputModeAdornemntOffset;
         const paddingKey = `padding${captalize(side)}`;
+        const affixWidth = isLeftSide ? leftAffixWidth : rightAffixWidth;
+        const padding =
+          typeof paddingHorizontal === 'number'
+            ? paddingHorizontal
+            : inputModeAdornemntOffset;
+        const offset = affixWidth + padding;
 
         if (isWeb) return { [paddingKey]: offset };
 
@@ -121,6 +126,7 @@ export interface TextInputAdornmentProps {
   textStyle?: StyleProp<TextStyle>;
   visible?: Animated.Value;
   isTextInputFocused: boolean;
+  paddingHorizontal?: number | string;
 }
 
 const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
@@ -133,6 +139,7 @@ const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
   topPosition,
   isTextInputFocused,
   forceFocus,
+  paddingHorizontal,
 }) => {
   if (adornmentConfig.length) {
     return (
@@ -150,6 +157,7 @@ const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
             side: side,
             testID: `${side}-${type}-adornment`,
             isTextInputFocused,
+            paddingHorizontal,
           };
           if (type === AdornmentType.Icon) {
             return (

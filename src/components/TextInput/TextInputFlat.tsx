@@ -130,6 +130,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
         adornmentConfig,
         rightAffixWidth,
         leftAffixWidth,
+        paddingHorizontal,
         inputOffset: FLAT_INPUT_OFFSET,
       }
     );
@@ -286,6 +287,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
     };
 
     let adornmentProps: TextInputAdornmentProps = {
+      paddingHorizontal,
       adornmentConfig,
       forceFocus,
       topPosition: {
