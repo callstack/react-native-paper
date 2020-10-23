@@ -71,8 +71,8 @@ const ListAccordionGroup = ({
   >(undefined);
 
   const onAccordionPressDefault = (newExpandedId: string | number) => {
-    setExpandedId(() =>
-      expandedId === newExpandedId ? undefined : newExpandedId
+    setExpandedId((currentExpandedId) =>
+      currentExpandedId === newExpandedId ? undefined : newExpandedId
     );
   };
 
