@@ -110,11 +110,7 @@ const Modal = ({
     } else {
       hideModal();
     }
-
-    if (visible && !rendered) {
-      setRendered(true);
-    }
-  }, [visible, rendered]);
+  }, [visible]);
 
   const handleBack = () => {
     if (dismissable) {
@@ -166,6 +162,10 @@ const Modal = ({
   }, []);
 
   if (!rendered) return null;
+
+  if (visible && !rendered) {
+    setRendered(true);
+  }
 
   return (
     <Animated.View
