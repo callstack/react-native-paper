@@ -3,9 +3,6 @@ import renderer from 'react-test-renderer';
 import Button from '../Button.tsx';
 import { pink500 } from '../../styles/colors.tsx';
 
-jest.useFakeTimers();
-jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
-
 it('renders text button by default', () => {
   const tree = renderer.create(<Button>Text Button</Button>).toJSON();
 

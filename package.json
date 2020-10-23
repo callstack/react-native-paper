@@ -108,6 +108,7 @@
   },
   "jest": {
     "preset": "react-native",
+    "setupFiles": ["<rootDir>/testSetup.js"],
     "cacheDirectory": "./cache/jest",
     "modulePathIgnorePatterns": [
       "<rootDir>/example/node_modules",
