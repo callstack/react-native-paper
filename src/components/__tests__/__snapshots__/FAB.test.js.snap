@@ -149,6 +149,9 @@ exports[`renders extended FAB 1`] = `
                 "marginHorizontal": 8,
               },
               Object {
+                "textTransform": "uppercase",
+              },
+              Object {
                 "color": "rgba(0, 0, 0, .54)",
                 "fontFamily": "System",
                 "fontWeight": "500",
@@ -157,7 +160,7 @@ exports[`renders extended FAB 1`] = `
           ]
         }
       >
-        ADD ITEMS
+        Add items
       </Text>
     </View>
   </View>

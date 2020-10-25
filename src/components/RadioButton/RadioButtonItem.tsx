@@ -58,6 +58,10 @@ export type Props = {
    * @optional
    */
   theme: ReactNativePaper.Theme;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 /**
@@ -101,6 +105,7 @@ const RadioButtonItem = ({
   status,
   theme: { colors },
   accessibilityLabel,
+  testID,
 }: Props) => (
   <RadioButtonContext.Consumer>
     {(context?: RadioButtonContextType) => {
@@ -117,6 +122,7 @@ const RadioButtonItem = ({
                   })
           }
           accessibilityLabel={accessibilityLabel}
+          testID={testID}
         >
           <View style={[styles.container, style]} pointerEvents="none">
             <Text style={[styles.label, { color: colors.text }, labelStyle]}>

@@ -36,6 +36,10 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    * @optional
    */
   theme: ReactNativePaper.Theme;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 const BORDER_WIDTH = 2;
@@ -62,6 +66,7 @@ const RadioButtonAndroid = ({
   theme,
   value,
   status,
+  testID,
   ...rest
 }: Props) => {
   const { current: borderAnim } = React.useRef<Animated.Value>(
@@ -142,10 +147,11 @@ const RadioButtonAndroid = ({
             accessibilityComponentType={
               checked ? 'radiobutton_checked' : 'radiobutton_unchecked'
             }
-            accessibilityRole="button"
-            accessibilityState={{ disabled }}
+            accessibilityRole="radio"
+            accessibilityState={{ disabled, checked }}
             accessibilityLiveRegion="polite"
             style={styles.container}
+            testID={testID}
           >
             <Animated.View
               style={[
