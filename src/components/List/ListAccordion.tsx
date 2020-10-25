@@ -137,7 +137,7 @@ const ListAccordion = ({
   onPress,
   expanded: expandedProp,
 }: Props) => {
-  const [expandedState, setExpanded] = React.useState<boolean>(
+  const [expanded, setExpanded] = React.useState<boolean>(
     expandedProp || false
   );
 
@@ -147,15 +147,14 @@ const ListAccordion = ({
     if (expandedProp === undefined) {
       // Only update state of the `expanded` prop was not passed
       // If it was passed, the component will act as a controlled component
-      setExpanded(!expandedState);
+      setExpanded((expanded) => !expanded);
     }
   };
 
   const titleColor = color(theme.colors.text).alpha(0.87).rgb().string();
   const descriptionColor = color(theme.colors.text).alpha(0.54).rgb().string();
 
-  const expandedInternal =
-    expandedProp !== undefined ? expandedProp : expandedState;
+  const expandedInternal = expandedProp !== undefined ? expandedProp : expanded;
 
   const groupContext = React.useContext(ListAccordionGroupContext);
   if (groupContext !== null && !id) {
@@ -163,7 +162,7 @@ const ListAccordion = ({
       'List.Accordion is used inside a List.AccordionGroup without specifying an id prop.'
     );
   }
-  const expanded = groupContext
+  const isExpanded = groupContext
     ? groupContext.expandedId === id
     : expandedInternal;
   const handlePress =
@@ -183,7 +182,7 @@ const ListAccordion = ({
         <View style={styles.row} pointerEvents="none">
           {left
             ? left({
-                color: expanded ? theme.colors.primary : descriptionColor,
+                color: isExpanded ? theme.colors.primary : descriptionColor,
               })
             : null}
           <View style={[styles.item, styles.content]}>
@@ -192,7 +191,7 @@ const ListAccordion = ({
               style={[
                 styles.title,
                 {
-                  color: expanded ? theme.colors.primary : titleColor,
+                  color: isExpanded ? theme.colors.primary : titleColor,
                 },
                 titleStyle,
               ]}
@@ -218,7 +217,7 @@ const ListAccordion = ({
             style={[styles.item, description ? styles.multiline : undefined]}
           >
             <MaterialCommunityIcon
-              name={expanded ? 'chevron-up' : 'chevron-down'}
+              name={isExpanded ? 'chevron-up' : 'chevron-down'}
               color={titleColor}
               size={24}
               direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
@@ -226,7 +225,7 @@ const ListAccordion = ({
           </View>
         </View>
       </TouchableRipple>
-      {expanded
+      {isExpanded
         ? React.Children.map(children, (child) => {
             if (
               left &&
