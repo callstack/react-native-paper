@@ -37,7 +37,7 @@ const CrossFadeIcon = ({ color, size, source, theme }: Props) => {
   const previousPreviousIconRef = React.useRef<IconSource | null>();
   React.useEffect(() => {
     previousPreviousIconRef.current = previousIcon;
-  });
+  }, [previousIcon]);
   const previousPreviousIcon = previousPreviousIconRef.current;
 
   if (currentIcon !== source) {
