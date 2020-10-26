@@ -3,8 +3,6 @@ import renderer from 'react-test-renderer';
 import Appbar from '../../Appbar/Appbar';
 import Searchbar from '../../Searchbar';
 
-jest.useFakeTimers();
-
 describe('Appbar', () => {
   it('does not pass any additional props to Searchbar', () => {
     const tree = renderer

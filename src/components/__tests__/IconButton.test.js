@@ -3,9 +3,6 @@ import renderer from 'react-test-renderer';
 import IconButton from '../IconButton.tsx';
 import { pink500 } from '../../styles/colors.tsx';
 
-jest.useFakeTimers();
-jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
-
 it('renders icon button by default', () => {
   const tree = renderer.create(<IconButton icon="camera" />).toJSON();
 
