@@ -93,74 +93,65 @@ const LEFT_SIZE = 40;
  * export default MyComponent;
  * ```
  */
-class CardTitle extends React.Component<Props> {
-  static displayName = 'Card.Title';
+const CardTitle = ({
+  title,
+  titleStyle,
+  titleNumberOfLines = 1,
+  subtitle,
+  subtitleStyle,
+  subtitleNumberOfLines = 1,
+  left,
+  leftStyle,
+  right,
+  rightStyle,
+  style,
+}: Props) => {
+  return (
+    <View
+      style={[
+        styles.container,
+        { minHeight: subtitle || left || right ? 72 : 50 },
+        style,
+      ]}
+    >
+      {left ? (
+        <View style={[styles.left, leftStyle]}>
+          {left({
+            size: LEFT_SIZE,
+          })}
+        </View>
+      ) : null}
 
-  static defaultProps = {
-    subtitleNumberOfLines: 1,
-    titleNumberOfLines: 1,
-  };
-
-  render() {
-    const {
-      left,
-      leftStyle,
-      right,
-      rightStyle,
-      subtitle,
-      subtitleStyle,
-      subtitleNumberOfLines,
-      style,
-      title,
-      titleStyle,
-      titleNumberOfLines,
-    } = this.props;
-
-    return (
-      <View
-        style={[
-          styles.container,
-          { minHeight: subtitle || left || right ? 72 : 50 },
-          style,
-        ]}
-      >
-        {left ? (
-          <View style={[styles.left, leftStyle]}>
-            {left({
-              size: LEFT_SIZE,
-            })}
-          </View>
+      <View style={[styles.titles]}>
+        {title ? (
+          <Title
+            style={[
+              styles.title,
+              { marginBottom: subtitle ? 0 : 2 },
+              titleStyle,
+            ]}
+            numberOfLines={titleNumberOfLines}
+          >
+            {title}
+          </Title>
         ) : null}
 
-        <View style={[styles.titles]}>
-          {title ? (
-            <Title
-              style={[
-                styles.title,
-                { marginBottom: subtitle ? 0 : 2 },
-                titleStyle,
-              ]}
-              numberOfLines={titleNumberOfLines}
-            >
-              {title}
-            </Title>
-          ) : null}
-
-          {subtitle ? (
-            <Caption
-              style={[styles.subtitle, subtitleStyle]}
-              numberOfLines={subtitleNumberOfLines}
-            >
-              {subtitle}
-            </Caption>
-          ) : null}
-        </View>
-
-        <View style={rightStyle}>{right ? right({ size: 24 }) : null}</View>
+        {subtitle ? (
+          <Caption
+            style={[styles.subtitle, subtitleStyle]}
+            numberOfLines={subtitleNumberOfLines}
+          >
+            {subtitle}
+          </Caption>
+        ) : null}
       </View>
-    );
-  }
-}
+
+      <View style={rightStyle}>{right ? right({ size: 24 }) : null}</View>
+    </View>
+  );
+};
+
+CardTitle.displayName = 'Card.Title';
 
 const styles = StyleSheet.create({
   container: {

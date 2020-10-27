@@ -27,6 +27,10 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    * @optional
    */
   theme: ReactNativePaper.Theme;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 /**
@@ -45,7 +49,14 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
  *   </figure>
  * </div>
  */
-const CheckboxIOS = ({ status, disabled, onPress, theme, ...rest }: Props) => {
+const CheckboxIOS = ({
+  status,
+  disabled,
+  onPress,
+  theme,
+  testID,
+  ...rest
+}: Props) => {
   const checked = status === 'checked';
   const indeterminate = status === 'indeterminate';
 
@@ -76,6 +87,7 @@ const CheckboxIOS = ({ status, disabled, onPress, theme, ...rest }: Props) => {
       accessibilityState={{ disabled, checked }}
       accessibilityLiveRegion="polite"
       style={styles.container}
+      testID={testID}
     >
       <View style={{ opacity: indeterminate || checked ? 1 : 0 }}>
         <MaterialCommunityIcon

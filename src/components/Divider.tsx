@@ -44,22 +44,19 @@ type Props = $RemoveChildren<typeof View> & {
  * export default MyComponent;
  * ```
  */
-class Divider extends React.Component<Props> {
-  render() {
-    const { inset, style, theme, ...rest } = this.props;
-    const { dark: isDarkTheme } = theme;
-    return (
-      <View
-        {...rest}
-        style={[
-          isDarkTheme ? styles.dark : styles.light,
-          inset && styles.inset,
-          style,
-        ]}
-      />
-    );
-  }
-}
+const Divider = ({ inset, style, theme, ...rest }: Props) => {
+  const { dark: isDarkTheme } = theme;
+  return (
+    <View
+      {...rest}
+      style={[
+        isDarkTheme ? styles.dark : styles.light,
+        inset && styles.inset,
+        style,
+      ]}
+    />
+  );
+};
 
 const styles = StyleSheet.create({
   light: {
