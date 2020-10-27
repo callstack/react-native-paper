@@ -2,8 +2,6 @@ import * as React from 'react';
 import renderer from 'react-test-renderer';
 import FAB from '../FAB/FAB.tsx';
 
-jest.useFakeTimers();
-
 it('renders normal FAB', () => {
   const tree = renderer.create(<FAB onPress={() => {}} icon="plus" />).toJSON();
 
