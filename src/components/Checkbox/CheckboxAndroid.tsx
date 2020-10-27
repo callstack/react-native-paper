@@ -68,25 +68,28 @@ const CheckboxAndroid = ({
     new Animated.Value(1)
   );
 
+  const {
+    animation: { scale },
+  } = theme;
+
   React.useEffect(() => {
     const checked = status === 'checked';
-    const { animation } = theme;
 
     Animated.sequence([
       Animated.timing(scaleAnim, {
         toValue: 0.85,
-        duration: checked ? ANIMATION_DURATION * animation.scale : 0,
+        duration: checked ? ANIMATION_DURATION * scale : 0,
         useNativeDriver: false,
       }),
       Animated.timing(scaleAnim, {
         toValue: 1,
         duration: checked
-          ? ANIMATION_DURATION * animation.scale
-          : ANIMATION_DURATION * animation.scale * 1.75,
+          ? ANIMATION_DURATION * scale
+          : ANIMATION_DURATION * scale * 1.75,
         useNativeDriver: false,
       }),
     ]).start();
-  }, [status]);
+  }, [status, scaleAnim, scale]);
 
   const checked = status === 'checked';
   const indeterminate = status === 'indeterminate';
