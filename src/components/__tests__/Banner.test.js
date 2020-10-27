@@ -3,8 +3,6 @@ import renderer from 'react-test-renderer';
 import { Image } from 'react-native';
 import Banner from '../Banner.tsx';
 
-jest.useFakeTimers();
-
 it('renders hidden banner, without action buttons and without image', () => {
   const tree = renderer
     .create(

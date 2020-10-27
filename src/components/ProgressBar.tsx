@@ -151,7 +151,12 @@ const ProgressBar = ({
   const trackTintColor = setColor(tintColor).alpha(0.38).rgb().string();
 
   return (
-    <View onLayout={onLayout} {...rest}>
+    <View
+      onLayout={onLayout}
+      {...rest}
+      accessible
+      accessibilityRole="progressbar"
+    >
       <Animated.View
         style={[
           styles.container,

@@ -42,11 +42,6 @@ type Props = $Omit<
   testID?: string;
 };
 
-type State = {
-  shown: Animated.Value;
-  textHeight: number;
-};
-
 /**
  * Helper text is used in conjuction with input elements to provide additional hints for the user.
  *
@@ -82,109 +77,87 @@ type State = {
  * export default MyComponent;
  * ```
  */
-class HelperText extends React.PureComponent<Props, State> {
-  static defaultProps: Partial<Props> = {
-    type: 'info',
-    padding: 'normal',
-    visible: true,
-  };
+const HelperText = ({
+  style,
+  type = 'info',
+  visible = true,
+  theme,
+  onLayout,
+  padding = 'normal',
+  ...rest
+}: Props) => {
+  const { current: shown } = React.useRef<Animated.Value>(
+    new Animated.Value(visible ? 1 : 0)
+  );
 
-  state = {
-    shown: new Animated.Value(this.props.visible ? 1 : 0),
-    textHeight: 0,
-  };
+  let { current: textHeight } = React.useRef<number>(0);
 
-  componentDidUpdate(prevProps: Props, prevState: State) {
-    if (
-      prevProps.visible !== this.props.visible ||
-      prevState.textHeight !== this.state.textHeight
-    ) {
-      if (this.props.visible) {
-        this.showText();
-      } else {
-        this.hideText();
-      }
+  const { scale } = theme.animation;
+
+  React.useEffect(() => {
+    if (visible) {
+      // show text
+      Animated.timing(shown, {
+        toValue: 1,
+        duration: 150 * scale,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      // hide text
+      Animated.timing(shown, {
+        toValue: 0,
+        duration: 180 * scale,
+        useNativeDriver: true,
+      }).start();
     }
-  }
+  }, [visible, scale, shown]);
 
-  private showText = () => {
-    const { scale } = this.props.theme.animation;
-    Animated.timing(this.state.shown, {
-      toValue: 1,
-      duration: 150 * scale,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  private hideText = () => {
-    const { scale } = this.props.theme.animation;
-    Animated.timing(this.state.shown, {
-      toValue: 0,
-      duration: 180 * scale,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  private handleTextLayout = (e: LayoutChangeEvent) => {
+  const handleTextLayout = (e: LayoutChangeEvent) => {
     //@ts-ignore Animated.Text typings are improved but something is still broken. It thinks onLayout is not callable.
-    this.props.onLayout && this.props.onLayout(e);
-    this.setState({
-      textHeight: e.nativeEvent.layout.height,
-    });
+    onLayout?.(e);
+    textHeight = e.nativeEvent.layout.height;
   };
 
-  render() {
-    const {
-      style,
-      type,
-      visible,
-      theme,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      onLayout,
-      padding,
-      ...rest
-    } = this.props;
-    const { colors, dark } = theme;
+  const { colors, dark } = theme;
 
-    const textColor =
-      this.props.type === 'error'
-        ? colors.error
-        : color(colors.text)
-            .alpha(dark ? 0.7 : 0.54)
-            .rgb()
-            .string();
+  const textColor =
+    type === 'error'
+      ? colors.error
+      : color(colors.text)
+          .alpha(dark ? 0.7 : 0.54)
+          .rgb()
+          .string();
 
-    return (
-      // @ts-ignore
-      <AnimatedText
-        onLayout={this.handleTextLayout}
-        style={[
-          styles.text,
-          padding !== 'none' ? styles.padding : {},
-          {
-            color: textColor,
-            opacity: this.state.shown,
-            transform:
-              visible && type === 'error'
-                ? [
-                    {
-                      translateY: this.state.shown.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [-this.state.textHeight / 2, 0],
-                      }),
-                    },
-                  ]
-                : [],
-          },
-          style,
-        ]}
-        {...rest}
-      >
-        {this.props.children}
-      </AnimatedText>
-    );
-  }
-}
+  return (
+    // @ts-ignore
+    <AnimatedText
+      onLayout={handleTextLayout}
+      style={[
+        styles.text,
+        padding !== 'none' ? styles.padding : {},
+        {
+          color: textColor,
+          opacity: shown,
+          transform:
+            visible && type === 'error'
+              ? [
+                  {
+                    translateY: shown.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [-textHeight / 2, 0],
+                    }),
+                  },
+                ]
+              : [],
+        },
+        style,
+      ]}
+      {...rest}
+    >
+      {rest.children}
+    </AnimatedText>
+  );
+};
 
 const styles = StyleSheet.create({
   text: {
