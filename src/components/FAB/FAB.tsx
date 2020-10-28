@@ -24,6 +24,10 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   label?: string;
   /**
+   * Make the label text uppercased.
+   */
+  uppercase?: boolean;
+  /**
    * Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.
    * Uses `label` by default if specified.
    */
@@ -116,6 +120,7 @@ const FAB = ({
   theme,
   style,
   visible = true,
+  uppercase = true,
   loading,
   testID,
   ...rest
@@ -220,10 +225,11 @@ const FAB = ({
             <Text
               style={[
                 styles.label,
+                uppercase && styles.uppercaseLabel,
                 { color: foregroundColor, ...theme.fonts.medium },
               ]}
             >
-              {label.toUpperCase()}
+              {label}
             </Text>
           ) : null}
         </View>
@@ -262,6 +268,9 @@ const styles = StyleSheet.create({
   },
   label: {
     marginHorizontal: 8,
+  },
+  uppercaseLabel: {
+    textTransform: 'uppercase',
   },
   disabled: {
     elevation: 0,

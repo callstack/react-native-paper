@@ -78,68 +78,57 @@ const DIALOG_ELEVATION: number = 24;
  * export default MyComponent;
  * ```
  */
-class Dialog extends React.Component<Props> {
-  // @component ./DialogContent.tsx
-  static Content = DialogContent;
-  // @component ./DialogActions.tsx
-  static Actions = DialogActions;
-  // @component ./DialogTitle.tsx
-  static Title = DialogTitle;
-  // @component ./DialogScrollArea.tsx
-  static ScrollArea = DialogScrollArea;
-
-  static defaultProps = {
-    dismissable: true,
-    visible: false,
-  };
-
-  render() {
-    const {
-      children,
-      dismissable,
-      onDismiss,
-      visible,
+const Dialog = ({
+  children,
+  dismissable = true,
+  onDismiss,
+  visible = false,
+  style,
+  theme,
+}: Props) => (
+  <Modal
+    dismissable={dismissable}
+    onDismiss={onDismiss}
+    visible={visible}
+    contentContainerStyle={[
+      {
+        borderRadius: theme.roundness,
+        backgroundColor:
+          theme.dark && theme.mode === 'adaptive'
+            ? (overlay(DIALOG_ELEVATION, theme.colors.surface) as string)
+            : theme.colors.surface,
+      },
+      styles.container,
       style,
-      theme,
-    } = this.props;
+    ]}
+  >
+    {React.Children.toArray(children)
+      .filter((child) => child != null && typeof child !== 'boolean')
+      .map((child, i) => {
+        if (
+          i === 0 &&
+          React.isValidElement(child) &&
+          child.type === DialogContent
+        ) {
+          // Dialog content is the first item, so we add a top padding
+          return React.cloneElement(child, {
+            style: [{ paddingTop: 24 }, child.props.style],
+          });
+        }
 
-    return (
-      <Modal
-        dismissable={dismissable}
-        onDismiss={onDismiss}
-        visible={visible}
-        contentContainerStyle={[
-          {
-            borderRadius: theme.roundness,
-            backgroundColor:
-              theme.dark && theme.mode === 'adaptive'
-                ? (overlay(DIALOG_ELEVATION, theme.colors.surface) as string)
-                : theme.colors.surface,
-          },
-          styles.container,
-          style,
-        ]}
-      >
-        {React.Children.toArray(children)
-          .filter((child) => child != null && typeof child !== 'boolean')
-          .map((child, i) => {
-            if (
-              i === 0 &&
-              React.isValidElement(child) &&
-              child.type === DialogContent
-            ) {
-              // Dialog content is the first item, so we add a top padding
-              return React.cloneElement(child, {
-                style: [{ paddingTop: 24 }, child.props.style],
-              });
-            }
+        return child;
+      })}
+  </Modal>
+);
 
-            return child;
-          })}
-      </Modal>
-    );
-  }
-}
+// @component ./DialogContent.tsx
+Dialog.Content = DialogContent;
+// @component ./DialogActions.tsx
+Dialog.Actions = DialogActions;
+// @component ./DialogTitle.tsx
+Dialog.Title = DialogTitle;
+// @component ./DialogScrollArea.tsx
+Dialog.ScrollArea = DialogScrollArea;
 
 const styles = StyleSheet.create({
   container: {

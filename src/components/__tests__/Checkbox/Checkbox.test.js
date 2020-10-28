@@ -49,3 +49,11 @@ it('renders indeterminate Checkbox with color', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('renders Checkbox with custom testID', () => {
+  const tree = renderer
+    .create(<Checkbox status="checked" testID={'custom:testID'} />)
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});

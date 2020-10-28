@@ -59,28 +59,26 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * });
  * ```
  */
-class Surface extends React.Component<Props> {
-  render() {
-    const { style, theme, ...rest } = this.props;
-    const flattenedStyles = StyleSheet.flatten(style) || {};
-    const { elevation = 4 }: ViewStyle = flattenedStyles;
-    const { dark: isDarkTheme, mode, colors } = theme;
-    return (
-      // @ts-ignore
-      <Animated.View
-        {...rest}
-        style={[
-          {
-            backgroundColor:
-              isDarkTheme && mode === 'adaptive'
-                ? overlay(elevation, colors.surface)
-                : colors.surface,
-          },
-          elevation && shadow(elevation),
-          style,
-        ]}
-      />
-    );
-  }
-}
+const Surface = ({ style, theme, ...rest }: Props) => {
+  const flattenedStyles = StyleSheet.flatten(style) || {};
+  const { elevation = 4 }: ViewStyle = flattenedStyles;
+  const { dark: isDarkTheme, mode, colors } = theme;
+  return (
+    // @ts-ignore
+    <Animated.View
+      {...rest}
+      style={[
+        {
+          backgroundColor:
+            isDarkTheme && mode === 'adaptive'
+              ? overlay(elevation, colors.surface)
+              : colors.surface,
+        },
+        elevation && shadow(elevation),
+        style,
+      ]}
+    />
+  );
+};
+
 export default withTheme(Surface);
