@@ -2,6 +2,8 @@
 
 exports[`renders colored progress bar 1`] = `
 <View
+  accessibilityRole="progressbar"
+  accessible={true}
   onLayout={[Function]}
 >
   <View
@@ -37,6 +39,8 @@ exports[`renders colored progress bar 1`] = `
 
 exports[`renders hidden progress bar 1`] = `
 <View
+  accessibilityRole="progressbar"
+  accessible={true}
   onLayout={[Function]}
 >
   <View
@@ -72,6 +76,8 @@ exports[`renders hidden progress bar 1`] = `
 
 exports[`renders indeterminate progress bar 1`] = `
 <View
+  accessibilityRole="progressbar"
+  accessible={true}
   onLayout={[Function]}
 >
   <View
@@ -107,6 +113,8 @@ exports[`renders indeterminate progress bar 1`] = `
 
 exports[`renders progress bar with specific progress 1`] = `
 <View
+  accessibilityRole="progressbar"
+  accessible={true}
   onLayout={[Function]}
 >
   <View

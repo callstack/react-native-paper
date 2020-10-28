@@ -27,80 +27,69 @@ type Props = React.ComponentProps<typeof TouchableWithoutFeedback> & {
   theme: ReactNativePaper.Theme;
 };
 
-class TouchableRipple extends React.Component<Props> {
-  static defaultProps = {
-    borderless: false,
-  };
+const TouchableRipple = ({
+  style,
+  background,
+  borderless = false,
+  disabled: disabledProp,
+  rippleColor,
+  underlayColor,
+  children,
+  theme,
+  ...rest
+}: Props) => {
+  const { dark, colors } = theme;
+  const disabled = disabledProp || !rest.onPress;
+  const calculatedRippleColor =
+    rippleColor ||
+    color(colors.text)
+      .alpha(dark ? 0.32 : 0.2)
+      .rgb()
+      .string();
 
-  static supported =
-    Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_LOLLIPOP;
+  // A workaround for ripple on Android P is to use useForeground + overflow: 'hidden'
+  // https://github.com/facebook/react-native/issues/6480
+  const useForeground =
+    Platform.OS === 'android' &&
+    Platform.Version >= ANDROID_VERSION_PIE &&
+    borderless;
 
-  render() {
-    const {
-      style,
-      background,
-      borderless,
-      disabled: disabledProp,
-      rippleColor,
-      underlayColor,
-      children,
-      theme,
-      ...rest
-    } = this.props;
-
-    const { dark, colors } = theme;
-    const disabled = disabledProp || !this.props.onPress;
-    const calculatedRippleColor =
-      rippleColor ||
-      color(colors.text)
-        .alpha(dark ? 0.32 : 0.2)
-        .rgb()
-        .string();
-
-    // A workaround for ripple on Android P is to use useForeground + overflow: 'hidden'
-    // https://github.com/facebook/react-native/issues/6480
-    const useForeground =
-      Platform.OS === 'android' &&
-      Platform.Version >= ANDROID_VERSION_PIE &&
-      borderless;
-
-    if (TouchableRipple.supported) {
-      return (
-        <TouchableNativeFeedback
-          {...rest}
-          disabled={disabled}
-          useForeground={useForeground}
-          background={
-            background != null
-              ? background
-              : TouchableNativeFeedback.Ripple(
-                  calculatedRippleColor,
-                  borderless
-                )
-          }
-        >
-          <View style={[borderless && { overflow: 'hidden' }, style]}>
-            {React.Children.only(children)}
-          </View>
-        </TouchableNativeFeedback>
-      );
-    }
-
+  if (TouchableRipple.supported) {
     return (
-      <TouchableHighlight
+      <TouchableNativeFeedback
         {...rest}
         disabled={disabled}
-        style={[borderless && { overflow: 'hidden' }, style]}
-        underlayColor={
-          underlayColor != null
-            ? underlayColor
-            : color(calculatedRippleColor).fade(0.5).rgb().string()
+        useForeground={useForeground}
+        background={
+          background != null
+            ? background
+            : TouchableNativeFeedback.Ripple(calculatedRippleColor, borderless)
         }
       >
-        {React.Children.only(children)}
-      </TouchableHighlight>
+        <View style={[borderless && { overflow: 'hidden' }, style]}>
+          {React.Children.only(children)}
+        </View>
+      </TouchableNativeFeedback>
     );
   }
-}
+
+  return (
+    <TouchableHighlight
+      {...rest}
+      disabled={disabled}
+      style={[borderless && { overflow: 'hidden' }, style]}
+      underlayColor={
+        underlayColor != null
+          ? underlayColor
+          : color(calculatedRippleColor).fade(0.5).rgb().string()
+      }
+    >
+      {React.Children.only(children)}
+    </TouchableHighlight>
+  );
+};
+
+TouchableRipple.supported =
+  Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_LOLLIPOP;
 
 export default withTheme(TouchableRipple);

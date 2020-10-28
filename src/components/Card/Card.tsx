@@ -48,10 +48,6 @@ type Props = React.ComponentProps<typeof Surface> & {
   accessible?: boolean;
 };
 
-type State = {
-  elevation: Animated.Value;
-};
-
 /**
  * A card is a sheet of material that serves as an entry point to more detailed information.
  *
@@ -85,105 +81,94 @@ type State = {
  * export default MyComponent;
  * ```
  */
-class Card extends React.Component<Props, State> {
-  // @component ./CardContent.tsx
-  static Content = CardContent;
-  // @component ./CardActions.tsx
-  static Actions = CardActions;
-  // @component ./CardCover.tsx
-  static Cover = CardCover;
-  // @component ./CardTitle.tsx
-  static Title = CardTitle;
+const Card = ({
+  elevation: cardElevation = 1,
+  onLongPress,
+  onPress,
+  children,
+  style,
+  theme,
+  testID,
+  accessible,
+  ...rest
+}: Props) => {
+  const { current: elevation } = React.useRef<Animated.Value>(
+    new Animated.Value(cardElevation)
+  );
 
-  static defaultProps = {
-    elevation: 1,
-  };
-
-  state = {
-    // @ts-ignore
-    elevation: new Animated.Value(this.props.elevation),
-  };
-
-  private handlePressIn = () => {
+  const handlePressIn = () => {
     const {
       dark,
       mode,
       animation: { scale },
-    } = this.props.theme;
-    Animated.timing(this.state.elevation, {
+    } = theme;
+    Animated.timing(elevation, {
       toValue: 8,
       duration: 150 * scale,
       useNativeDriver: !dark || mode === 'exact',
     }).start();
   };
 
-  private handlePressOut = () => {
+  const handlePressOut = () => {
     const {
       dark,
       mode,
       animation: { scale },
-    } = this.props.theme;
-    Animated.timing(this.state.elevation, {
-      // @ts-ignore
-      toValue: this.props.elevation,
+    } = theme;
+    Animated.timing(elevation, {
+      toValue: cardElevation,
       duration: 150 * scale,
       useNativeDriver: !dark || mode === 'exact',
     }).start();
   };
 
-  render() {
-    const {
-      children,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      elevation: cardElevation,
-      onLongPress,
-      onPress,
-      style,
-      theme,
-      testID,
-      accessible,
-      ...rest
-    } = this.props;
-    const { elevation } = this.state;
-    const { roundness } = theme;
-    const total = React.Children.count(children);
-    const siblings = React.Children.map(children, (child) =>
-      React.isValidElement(child) && child.type
-        ? (child.type as any).displayName
-        : null
-    );
-    return (
-      <Surface
-        // @ts-ignore
-        style={[{ borderRadius: roundness, elevation }, style]}
-        {...rest}
+  const { roundness } = theme;
+  const total = React.Children.count(children);
+  const siblings = React.Children.map(children, (child) =>
+    React.isValidElement(child) && child.type
+      ? (child.type as any).displayName
+      : null
+  );
+  return (
+    <Surface
+      // @ts-ignore
+      style={[{ borderRadius: roundness, elevation }, style]}
+      {...rest}
+    >
+      <TouchableWithoutFeedback
+        delayPressIn={0}
+        disabled={!(onPress || onLongPress)}
+        onLongPress={onLongPress}
+        onPress={onPress}
+        onPressIn={onPress ? handlePressIn : undefined}
+        onPressOut={onPress ? handlePressOut : undefined}
+        testID={testID}
+        accessible={accessible}
       >
-        <TouchableWithoutFeedback
-          delayPressIn={0}
-          disabled={!(onPress || onLongPress)}
-          onLongPress={onLongPress}
-          onPress={onPress}
-          onPressIn={onPress ? this.handlePressIn : undefined}
-          onPressOut={onPress ? this.handlePressOut : undefined}
-          testID={testID}
-          accessible={accessible}
-        >
-          <View style={styles.innerContainer}>
-            {React.Children.map(children, (child, index) =>
-              React.isValidElement(child)
-                ? React.cloneElement(child, {
-                    index,
-                    total,
-                    siblings,
-                  })
-                : child
-            )}
-          </View>
-        </TouchableWithoutFeedback>
-      </Surface>
-    );
-  }
-}
+        <View style={styles.innerContainer}>
+          {React.Children.map(children, (child, index) =>
+            React.isValidElement(child)
+              ? React.cloneElement(child, {
+                  index,
+                  total,
+                  siblings,
+                })
+              : child
+          )}
+        </View>
+      </TouchableWithoutFeedback>
+    </Surface>
+  );
+};
+
+// @component ./CardContent.tsx
+Card.Content = CardContent;
+// @component ./CardActions.tsx
+Card.Actions = CardActions;
+// @component ./CardCover.tsx
+Card.Cover = CardCover;
+// @component ./CardTitle.tsx
+Card.Title = CardTitle;
 
 const styles = StyleSheet.create({
   innerContainer: {

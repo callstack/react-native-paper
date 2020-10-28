@@ -50,27 +50,22 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
  * ```
  */
 
-class DataTableRow extends React.Component<Props> {
-  static displayName = 'DataTable.Row';
+const DataTableRow = ({ onPress, style, theme, children, ...rest }: Props) => {
+  const borderBottomColor = color(theme.dark ? white : black)
+    .alpha(0.12)
+    .rgb()
+    .string();
 
-  render() {
-    const { onPress, style, theme, ...rest } = this.props;
-    const borderBottomColor = color(theme.dark ? white : black)
-      .alpha(0.12)
-      .rgb()
-      .string();
-
-    return (
-      <TouchableRipple
-        {...rest}
-        onPress={onPress}
-        style={[styles.container, { borderBottomColor }, style]}
-      >
-        <View style={styles.content}>{this.props.children}</View>
-      </TouchableRipple>
-    );
-  }
-}
+  return (
+    <TouchableRipple
+      {...rest}
+      onPress={onPress}
+      style={[styles.container, { borderBottomColor }, style]}
+    >
+      <View style={styles.content}>{children}</View>
+    </TouchableRipple>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

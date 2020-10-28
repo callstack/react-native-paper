@@ -196,6 +196,9 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "fontSize": 16,
             "fontWeight": undefined,
           },
+          Object {
+            "color": "#FF0000",
+          },
         ]
       }
     >
@@ -608,6 +611,9 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
+          },
+          Object {
+            "color": "#FF0000",
           },
         ]
       }
