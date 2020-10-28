@@ -58,33 +58,30 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * export default MyComponent;
  * ```
  */
-class DrawerSection extends React.Component<Props> {
-  static displayName = 'Drawer.Section';
+const DrawerSection = ({ children, title, theme, style, ...rest }: Props) => {
+  const { colors, fonts } = theme;
+  const titleColor = color(colors.text).alpha(0.54).rgb().string();
+  const font = fonts.medium;
 
-  render() {
-    const { children, title, theme, style, ...rest } = this.props;
-    const { colors, fonts } = theme;
-    const titleColor = color(colors.text).alpha(0.54).rgb().string();
-    const font = fonts.medium;
+  return (
+    <View style={[styles.container, style]} {...rest}>
+      {title && (
+        <View style={styles.titleContainer}>
+          <Text
+            numberOfLines={1}
+            style={{ color: titleColor, ...font, marginLeft: 16 }}
+          >
+            {title}
+          </Text>
+        </View>
+      )}
+      {children}
+      <Divider style={styles.divider} />
+    </View>
+  );
+};
 
-    return (
-      <View style={[styles.container, style]} {...rest}>
-        {title && (
-          <View style={styles.titleContainer}>
-            <Text
-              numberOfLines={1}
-              style={{ color: titleColor, ...font, marginLeft: 16 }}
-            >
-              {title}
-            </Text>
-          </View>
-        )}
-        {children}
-        <Divider style={styles.divider} />
-      </View>
-    );
-  }
-}
+DrawerSection.displayName = 'Drawer.Section';
 
 const styles = StyleSheet.create({
   container: {
