@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import TextInputOutlined from './TextInputOutlined';
 import TextInputFlat from './TextInputFlat';
-import TextInputIcon from './Adornment/Icon';
-import TextInputAffix from './Adornment/Affix';
+import TextInputIcon from './Adornment/TextInputIcon';
+import TextInputAffix from './Adornment/TextInputAffix';
 import { withTheme } from '../../core/theming';
 import type { RenderProps, State } from './types';
 import type { $Omit } from '../../types';
@@ -167,10 +167,10 @@ export type TextInputProps = React.ComponentPropsWithRef<
  */
 
 class TextInput extends React.Component<TextInputProps, State> {
-  // @component ./Adornment/Icon.tsx
+  // @component ./Adornment/TextInputIcon.tsx
   static Icon = TextInputIcon;
 
-  // @component ./Adornment/Affix.tsx
+  // @component ./Adornment/TextInputAffix.tsx
   static Affix = TextInputAffix;
 
   static defaultProps: Partial<TextInputProps> = {
