@@ -75,13 +75,15 @@ type Props = React.ComponentProps<typeof Appbar> & {
  * export default MyComponent;
  * ```
  */
-const AppbarHeader = ({
-  // Don't use default props since we check it to know whether we should use SafeAreaView
-  statusBarHeight = APPROX_STATUSBAR_HEIGHT,
-  style,
-  dark,
-  ...rest
-}: Props) => {
+const AppbarHeader = (props: Props) => {
+  const {
+    // Don't use default props since we check it to know whether we should use SafeAreaView
+    statusBarHeight = APPROX_STATUSBAR_HEIGHT,
+    style,
+    dark,
+    ...rest
+  } = props;
+
   const { dark: isDarkTheme, colors, mode } = rest.theme;
   const {
     height = DEFAULT_APPBAR_HEIGHT,
@@ -96,8 +98,8 @@ const AppbarHeader = ({
     ? overlay(elevation, colors.surface)
     : colors.primary;
   // Let the user override the behaviour
-  const Wrapper = typeof statusBarHeight === 'number' ? View : SafeAreaView;
-
+  const Wrapper =
+    typeof props.statusBarHeight === 'number' ? View : SafeAreaView;
   return (
     <Wrapper
       style={
