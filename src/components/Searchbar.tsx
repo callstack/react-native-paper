@@ -120,12 +120,11 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
     const root = React.useRef<TextInput>(null);
 
     React.useImperativeHandle(ref, () => ({
-      focus: root && root.current!.focus,
-      clear: root && root.current!.clear,
-      setNativeProps: (args: Object) =>
-        root && root.current!.setNativeProps(args),
-      isFocused: root && root.current!.isFocused,
-      blur: root && root.current!.blur,
+      focus: root.current!.focus,
+      clear: root.current!.clear,
+      setNativeProps: (args: Object) => root.current!.setNativeProps(args),
+      isFocused: root.current!.isFocused,
+      blur: root.current!.blur,
     }));
 
     const handleClearPress = () => {
