@@ -1,7 +1,7 @@
 import React from 'react';
 import TextInputIcon, { IconAdornment } from './Icon';
 import TextInputAffix, { AffixAdornment } from './Affix';
-import { ADORNMENT_OFFSET } from '../constants';
+import { ADORNMENT_OFFSET, OUTLINED_INPUT_OFFSET } from '../constants';
 import {
   LayoutChangeEvent,
   TextStyle,
@@ -65,7 +65,9 @@ export function getAdornmentStyleAdjustmentForNativeInput({
         const isWeb = Platform.OS !== 'ios' && Platform.OS !== 'android';
         const isLeftSide = side === AdornmentSide.Left;
         const inputModeAdornemntOffset =
-          mode === InputMode.Outlined ? ADORNMENT_OFFSET + 8 : ADORNMENT_OFFSET;
+          mode === InputMode.Outlined
+            ? ADORNMENT_OFFSET + OUTLINED_INPUT_OFFSET
+            : ADORNMENT_OFFSET;
         const offset =
           (isLeftSide ? leftAffixWidth : rightAffixWidth) +
           inputModeAdornemntOffset;
