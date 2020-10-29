@@ -1,6 +1,6 @@
 import React from 'react';
-import TextInputIcon, { IconAdornment } from './Icon';
-import TextInputAffix, { AffixAdornment } from './Affix';
+import TextInputIcon, { IconAdornment } from './TextInputIcon';
+import TextInputAffix, { AffixAdornment } from './TextInputAffix';
 import { ADORNMENT_OFFSET, OUTLINED_INPUT_OFFSET } from '../constants';
 import {
   LayoutChangeEvent,

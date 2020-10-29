@@ -134,6 +134,7 @@ const ToggleButton = ({
             }}
             size={size}
             accessibilityLabel={accessibilityLabel}
+            accessibilityState={{ disabled, selected: checked }}
             disabled={disabled}
             style={[
               styles.content,

@@ -53,43 +53,41 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * export default MyComponent
  * ```
  */
-class AvatarImage extends React.Component<Props> {
-  static displayName = 'Avatar.Image';
+const AvatarImage = ({
+  size = defaultSize,
+  source,
+  style,
+  theme,
+  ...rest
+}: Props) => {
+  const { colors } = theme;
 
-  static defaultProps = {
-    size: defaultSize,
-  };
+  const { backgroundColor = colors.primary } = StyleSheet.flatten(style) || {};
 
-  render() {
-    const { size = defaultSize, source, style, theme, ...rest } = this.props;
-    const { colors } = theme;
+  return (
+    <View
+      style={[
+        {
+          width: size,
+          height: size,
+          borderRadius: size / 2,
+          backgroundColor,
+        },
+        style,
+      ]}
+      {...rest}
+    >
+      {typeof source === 'function' && source({ size })}
+      {typeof source !== 'function' && (
+        <Image
+          source={source}
+          style={{ width: size, height: size, borderRadius: size / 2 }}
+        />
+      )}
+    </View>
+  );
+};
 
-    const { backgroundColor = colors.primary } =
-      StyleSheet.flatten(style) || {};
-
-    return (
-      <View
-        style={[
-          {
-            width: size,
-            height: size,
-            borderRadius: size / 2,
-            backgroundColor,
-          },
-          style,
-        ]}
-        {...rest}
-      >
-        {typeof source === 'function' && source({ size })}
-        {typeof source !== 'function' && (
-          <Image
-            source={source}
-            style={{ width: size, height: size, borderRadius: size / 2 }}
-          />
-        )}
-      </View>
-    );
-  }
-}
+AvatarImage.displayName = 'Avatar.Image';
 
 export default withTheme(AvatarImage);

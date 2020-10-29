@@ -17,6 +17,7 @@ const AFFIX_OFFSET = 12;
 type Props = {
   text: string;
   onLayout?: (event: LayoutChangeEvent) => void;
+  textStyle?: StyleProp<TextStyle>;
   /**
    * @optional
    */
@@ -37,7 +38,7 @@ const AffixContext = React.createContext<ContextState>({
   side: AdornmentSide.Left,
 });
 
-export const AffixAdornment: React.FunctionComponent<
+const AffixAdornment: React.FunctionComponent<
   {
     affix: React.ReactNode;
     testID: string;
@@ -58,7 +59,7 @@ export const AffixAdornment: React.FunctionComponent<
   );
 };
 
-const TextInputAffix = ({ text, theme }: Props) => {
+const TextInputAffix = ({ text, textStyle: labelStyle, theme }: Props) => {
   const { textStyle, onLayout, topPosition, side, visible } = React.useContext(
     AffixContext
   );
@@ -87,7 +88,7 @@ const TextInputAffix = ({ text, theme }: Props) => {
       ]}
       onLayout={onLayout}
     >
-      <Text style={[{ color: textColor }, textStyle]}>{text}</Text>
+      <Text style={[{ color: textColor }, textStyle, labelStyle]}>{text}</Text>
     </Animated.View>
   );
 };
@@ -104,4 +105,4 @@ const styles = StyleSheet.create({
 export default withTheme(TextInputAffix);
 
 // @component-docs ignore-next-line
-export { TextInputAffix };
+export { TextInputAffix, AffixAdornment };

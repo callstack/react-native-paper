@@ -28,24 +28,21 @@ type Props = React.ComponentProps<typeof Text> & {
  * export default MyComponent;
  * ```
  */
-class ListSubheader extends React.Component<Props> {
-  static displayName = 'List.Subheader';
+const ListSubheader = ({ style, theme, ...rest }: Props) => {
+  const { colors, fonts } = theme;
+  const font = fonts.medium;
+  const textColor = color(colors.text).alpha(0.54).rgb().string();
 
-  render() {
-    const { style, theme, ...rest } = this.props;
-    const { colors, fonts } = theme;
-    const font = fonts.medium;
-    const textColor = color(colors.text).alpha(0.54).rgb().string();
+  return (
+    <Text
+      numberOfLines={1}
+      {...rest}
+      style={[styles.container, { color: textColor, ...font }, style]}
+    />
+  );
+};
 
-    return (
-      <Text
-        numberOfLines={1}
-        {...rest}
-        style={[styles.container, { color: textColor, ...font }, style]}
-      />
-    );
-  }
-}
+ListSubheader.displayName = 'List.Subheader';
 
 const styles = StyleSheet.create({
   container: {
