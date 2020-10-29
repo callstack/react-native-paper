@@ -161,16 +161,25 @@ const FABGroup = ({
     new Animated.Value(0)
   );
   const animations = React.useRef<Animated.Value[]>(
-    actions.map((_) => new Animated.Value(open ? 1 : 0))
+    actions.map(() => new Animated.Value(open ? 1 : 0))
   );
+
+  const [prevActions, setPrevActions] = React.useState<
+    | {
+        icon: IconSource;
+        label?: string;
+        color?: string;
+        accessibilityLabel?: string;
+        style?: StyleProp<ViewStyle>;
+        onPress: () => void;
+        testID?: string;
+      }[]
+    | null
+  >(null);
 
   const { scale } = theme.animation;
 
-  React.useLayoutEffect(() => {
-    animations.current = actions.map(
-      (_, i) => animations.current[i] || new Animated.Value(open ? 1 : 0)
-    );
-
+  React.useEffect(() => {
     if (open) {
       Animated.parallel([
         Animated.timing(backdrop, {
@@ -234,6 +243,13 @@ const FABGroup = ({
         })
       : 1
   );
+
+  if (JSON.stringify(actions) !== JSON.stringify(prevActions)) {
+    animations.current = actions.map(
+      (_, i) => animations.current[i] || new Animated.Value(open ? 1 : 0)
+    );
+    setPrevActions(actions);
+  }
 
   return (
     <View pointerEvents="box-none" style={[styles.container, style]}>
