@@ -244,7 +244,7 @@ const FABGroup = ({
       : 1
   );
 
-  if (JSON.stringify(actions) !== JSON.stringify(prevActions)) {
+  if (actions.length !== prevActions?.length) {
     animations.current = actions.map(
       (_, i) => animations.current[i] || new Animated.Value(open ? 1 : 0)
     );
