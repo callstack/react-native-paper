@@ -92,6 +92,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -209,6 +210,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -529,6 +531,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
+            selectable={false}
             style={
               Array [
                 Object {

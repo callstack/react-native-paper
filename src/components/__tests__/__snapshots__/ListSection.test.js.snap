@@ -134,6 +134,7 @@ exports[`renders list section with custom title style 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -259,6 +260,7 @@ exports[`renders list section with custom title style 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -466,6 +468,7 @@ exports[`renders list section with subheader 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -591,6 +594,7 @@ exports[`renders list section with subheader 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -771,6 +775,7 @@ exports[`renders list section without subheader 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -896,6 +901,7 @@ exports[`renders list section without subheader 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {

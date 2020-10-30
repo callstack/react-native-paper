@@ -154,6 +154,7 @@ exports[`renders list item with custom description 1`] = `
                     allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
+                    selectable={false}
                     style={
                       Array [
                         Object {
@@ -449,6 +450,7 @@ exports[`renders list item with left and right items 1`] = `
         allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
+        selectable={false}
         style={
           Array [
             Object {
@@ -537,6 +539,7 @@ exports[`renders list item with left item 1`] = `
         allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
+        selectable={false}
         style={
           Array [
             Object {

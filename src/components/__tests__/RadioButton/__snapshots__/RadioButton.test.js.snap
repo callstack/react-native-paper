@@ -44,6 +44,7 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
       allowFontScaling={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
+      selectable={false}
       style={
         Array [
           Object {
@@ -120,6 +121,7 @@ exports[`RadioButton on default platform renders properly 1`] = `
       allowFontScaling={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
+      selectable={false}
       style={
         Array [
           Object {
@@ -196,6 +198,7 @@ exports[`RadioButton on ios platform renders properly 1`] = `
       allowFontScaling={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
+      selectable={false}
       style={
         Array [
           Object {
@@ -272,6 +275,7 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
       allowFontScaling={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
+      selectable={false}
       style={
         Array [
           Object {

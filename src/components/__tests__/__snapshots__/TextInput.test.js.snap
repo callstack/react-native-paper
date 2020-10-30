@@ -277,6 +277,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -556,6 +557,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {

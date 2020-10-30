@@ -47,6 +47,7 @@ exports[`RadioButtonGroup renders properly 1`] = `
         allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
+        selectable={false}
         style={
           Array [
             Object {

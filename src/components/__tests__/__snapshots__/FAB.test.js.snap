@@ -103,6 +103,7 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
             allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
+            selectable={false}
             style={
               Array [
                 Object {
@@ -235,6 +236,7 @@ exports[`renders disabled FAB 1`] = `
             allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
+            selectable={false}
             style={
               Array [
                 Object {
@@ -375,6 +377,7 @@ exports[`renders extended FAB 1`] = `
             allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
+            selectable={false}
             style={
               Array [
                 Object {
@@ -796,6 +799,7 @@ exports[`renders normal FAB 1`] = `
             allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
+            selectable={false}
             style={
               Array [
                 Object {
@@ -935,6 +939,7 @@ exports[`renders not visible FAB 1`] = `
             allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
+            selectable={false}
             style={
               Array [
                 Object {
@@ -1074,6 +1079,7 @@ exports[`renders small FAB 1`] = `
             allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
+            selectable={false}
             style={
               Array [
                 Object {
@@ -1213,6 +1219,7 @@ exports[`renders visible FAB 1`] = `
             allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
+            selectable={false}
             style={
               Array [
                 Object {
