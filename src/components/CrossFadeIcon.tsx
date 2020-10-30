@@ -34,11 +34,6 @@ const CrossFadeIcon = ({ color, size, source, theme }: Props) => {
 
   const { scale } = theme.animation;
 
-  const previousPreviousIconRef = React.useRef<IconSource | null>();
-  React.useEffect(() => {
-    previousPreviousIconRef.current = previousIcon;
-  }, [previousIcon]);
-
   if (currentIcon !== source) {
     setPreviousIcon(() => currentIcon);
     setCurrentIcon(() => source);
@@ -47,7 +42,7 @@ const CrossFadeIcon = ({ color, size, source, theme }: Props) => {
   React.useEffect(() => {
     if (
       isValidIcon(previousIcon) &&
-      !isEqualIcon(previousIcon, previousPreviousIconRef.current)
+      !isEqualIcon(previousIcon, currentIcon)
     ) {
       fade.setValue(1);
 
@@ -57,7 +52,7 @@ const CrossFadeIcon = ({ color, size, source, theme }: Props) => {
         useNativeDriver: true,
       }).start();
     }
-  }, [previousIcon, fade, scale]);
+  }, [currentIcon, previousIcon, fade, scale]);
 
   const opacityPrev = fade;
   const opacityNext = previousIcon
