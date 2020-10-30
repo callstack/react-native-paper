@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
   View,
   ViewStyle,
+  ColorValue,
 } from 'react-native';
 import color from 'color';
 import FAB from './FAB';
@@ -29,7 +30,7 @@ type Props = {
   actions: Array<{
     icon: IconSource;
     label?: string;
-    color?: string;
+    color?: ColorValue;
     accessibilityLabel?: string;
     style?: StyleProp<ViewStyle>;
     onPress: () => void;
@@ -47,7 +48,7 @@ type Props = {
   /**
    * Custom color for the `FAB`.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * Function to execute on pressing the `FAB`.
    */

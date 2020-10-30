@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { ColorValue, StyleSheet, View } from 'react-native';
 import color from 'color';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
@@ -28,7 +28,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Custom color for radio.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * @optional
    */
@@ -73,7 +73,10 @@ const RadioButtonIOS = ({
   if (disabled) {
     rippleColor = color(theme.colors.text).alpha(0.16).rgb().string();
   } else {
-    rippleColor = color(checkedColor).fade(0.32).rgb().string();
+    rippleColor = color(checkedColor as string)
+      .fade(0.32)
+      .rgb()
+      .string();
   }
 
   return (

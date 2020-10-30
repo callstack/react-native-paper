@@ -6,6 +6,7 @@ import {
   I18nManager,
   ViewStyle,
   TextStyle,
+  ColorValue,
 } from 'react-native';
 
 import color from 'color';
@@ -57,7 +58,7 @@ type Props = React.ComponentPropsWithRef<typeof TextInput> & {
   /**
    * Custom color for icon, default will be derived from theme
    */
-  iconColor?: string;
+  iconColor?: ColorValue;
   /**
    * Custom icon for clear button, default will be icon close
    */

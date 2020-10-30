@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
+import {
+  View,
+  ViewStyle,
+  StyleSheet,
+  StyleProp,
+  ColorValue,
+} from 'react-native';
 import color from 'color';
 import Icon from '../Icon';
 import { withTheme } from '../../core/theming';
@@ -20,7 +26,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Custom color for the icon.
    */
-  color?: string;
+  color?: ColorValue;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -52,7 +58,7 @@ const Avatar = ({ icon, size = defaultSize, style, theme, ...rest }: Props) => {
     StyleSheet.flatten(style) || {};
   const textColor =
     rest.color ||
-    (color(backgroundColor).isLight() ? 'rgba(0, 0, 0, .54)' : white);
+    (color(backgroundColor as string).isLight() ? 'rgba(0, 0, 0, .54)' : white);
 
   return (
     <View

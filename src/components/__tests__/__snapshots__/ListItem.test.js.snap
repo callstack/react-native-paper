@@ -3,8 +3,10 @@
 exports[`renders list item with custom description 1`] = `
 <View
   accessible={true}
-  focusable={false}
+  focusable={true}
+  onBlur={[Function]}
   onClick={[Function]}
+  onFocus={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -13,6 +15,9 @@ exports[`renders list item with custom description 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
+      Object {
+        "position": "relative",
+      },
       false,
       Array [
         Object {
@@ -95,6 +100,7 @@ exports[`renders list item with custom description 1`] = `
             }
           >
             <View
+              accessibilityComponentType="button"
               accessibilityRole="button"
               accessibilityState={
                 Object {
@@ -102,9 +108,16 @@ exports[`renders list item with custom description 1`] = `
                   "selected": false,
                 }
               }
+              accessibilityTraits={
+                Array [
+                  "button",
+                ]
+              }
               accessible={true}
               focusable={true}
+              onBlur={[Function]}
               onClick={[Function]}
+              onFocus={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -113,6 +126,9 @@ exports[`renders list item with custom description 1`] = `
               onStartShouldSetResponder={[Function]}
               style={
                 Array [
+                  Object {
+                    "position": "relative",
+                  },
                   Object {
                     "overflow": "hidden",
                   },
@@ -227,8 +243,10 @@ exports[`renders list item with custom description 1`] = `
 exports[`renders list item with custom title and description styles 1`] = `
 <View
   accessible={true}
-  focusable={false}
+  focusable={true}
+  onBlur={[Function]}
   onClick={[Function]}
+  onFocus={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -237,6 +255,9 @@ exports[`renders list item with custom title and description styles 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
+      Object {
+        "position": "relative",
+      },
       false,
       Array [
         Object {
@@ -328,8 +349,10 @@ exports[`renders list item with custom title and description styles 1`] = `
 exports[`renders list item with left and right items 1`] = `
 <View
   accessible={true}
-  focusable={false}
+  focusable={true}
+  onBlur={[Function]}
   onClick={[Function]}
+  onFocus={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -338,6 +361,9 @@ exports[`renders list item with left and right items 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
+      Object {
+        "position": "relative",
+      },
       false,
       Array [
         Object {
@@ -480,8 +506,10 @@ exports[`renders list item with left and right items 1`] = `
 exports[`renders list item with left item 1`] = `
 <View
   accessible={true}
-  focusable={false}
+  focusable={true}
+  onBlur={[Function]}
   onClick={[Function]}
+  onFocus={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -490,6 +518,9 @@ exports[`renders list item with left item 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
+      Object {
+        "position": "relative",
+      },
       false,
       Array [
         Object {
@@ -607,8 +638,10 @@ exports[`renders list item with left item 1`] = `
 exports[`renders list item with right item 1`] = `
 <View
   accessible={true}
-  focusable={false}
+  focusable={true}
+  onBlur={[Function]}
   onClick={[Function]}
+  onFocus={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -617,6 +650,9 @@ exports[`renders list item with right item 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
+      Object {
+        "position": "relative",
+      },
       false,
       Array [
         Object {
@@ -683,8 +719,10 @@ exports[`renders list item with right item 1`] = `
 exports[`renders list item with title and description 1`] = `
 <View
   accessible={true}
-  focusable={false}
+  focusable={true}
+  onBlur={[Function]}
   onClick={[Function]}
+  onFocus={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -693,6 +731,9 @@ exports[`renders list item with title and description 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
+      Object {
+        "position": "relative",
+      },
       false,
       Array [
         Object {
@@ -780,8 +821,10 @@ exports[`renders list item with title and description 1`] = `
 exports[`renders with a description with typeof number 1`] = `
 <View
   accessible={true}
-  focusable={false}
+  focusable={true}
+  onBlur={[Function]}
   onClick={[Function]}
+  onFocus={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -790,6 +833,9 @@ exports[`renders with a description with typeof number 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
+      Object {
+        "position": "relative",
+      },
       false,
       Array [
         Object {

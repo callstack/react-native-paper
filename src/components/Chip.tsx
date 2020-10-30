@@ -3,6 +3,7 @@ import {
   AccessibilityState,
   AccessibilityTrait,
   Animated,
+  ColorValue,
   Platform,
   StyleProp,
   StyleSheet,
@@ -47,7 +48,7 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Whether to style the chip color as selected.
    */
-  selectedColor?: string;
+  selectedColor?: ColorValue;
   /**
    * Whether the chip is disabled. A disabled chip is greyed out and `onPress` is not called on touch.
    */
@@ -175,7 +176,7 @@ const Chip = ({
     mode === 'outlined'
       ? color(
           selectedColor !== undefined
-            ? selectedColor
+            ? (selectedColor as string)
             : color(dark ? white : black)
         )
           .alpha(0.29)
@@ -184,25 +185,32 @@ const Chip = ({
       : backgroundColor;
   const textColor = disabled
     ? colors.disabled
-    : color(selectedColor !== undefined ? selectedColor : colors.text)
+    : color(
+        selectedColor !== undefined ? (selectedColor as string) : colors.text
+      )
         .alpha(0.87)
         .rgb()
         .string();
   const iconColor = disabled
     ? colors.disabled
-    : color(selectedColor !== undefined ? selectedColor : colors.text)
+    : color(
+        selectedColor !== undefined ? (selectedColor as string) : colors.text
+      )
         .alpha(0.54)
         .rgb()
         .string();
   const selectedBackgroundColor = (dark
-    ? color(backgroundColor).lighten(mode === 'outlined' ? 0.2 : 0.4)
-    : color(backgroundColor).darken(mode === 'outlined' ? 0.08 : 0.2)
+    ? color(backgroundColor as string).lighten(mode === 'outlined' ? 0.2 : 0.4)
+    : color(backgroundColor as string).darken(mode === 'outlined' ? 0.08 : 0.2)
   )
     .rgb()
     .string();
 
   const underlayColor = selectedColor
-    ? color(selectedColor).fade(0.5).rgb().string()
+    ? color(selectedColor as string)
+        .fade(0.5)
+        .rgb()
+        .string()
     : selectedBackgroundColor;
 
   const accessibilityTraits: AccessibilityTrait[] = ['button'];
@@ -239,7 +247,6 @@ const Chip = ({
     >
       <TouchableRipple
         borderless
-        delayPressIn={0}
         style={{ borderRadius }}
         onPress={onPress}
         onLongPress={onLongPress}

@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Animated, StyleSheet, StyleProp, TextStyle } from 'react-native';
+import {
+  Animated,
+  StyleSheet,
+  StyleProp,
+  TextStyle,
+  ViewStyle,
+} from 'react-native';
 import color from 'color';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
@@ -19,7 +25,7 @@ type Props = React.ComponentProps<typeof Animated.Text> & {
    * Size of the `Badge`.
    */
   size?: number;
-  style?: StyleProp<TextStyle>;
+  style?: StyleProp<TextStyle> & StyleProp<ViewStyle>;
   ref?: React.RefObject<typeof Animated.Text>;
   /**
    * @optional
@@ -79,13 +85,12 @@ const Badge = ({
   }, [visible, opacity, scale]);
 
   const { backgroundColor = theme.colors.notification, ...restStyle } =
-    StyleSheet.flatten(style) || {};
-  const textColor = color(backgroundColor).isLight() ? black : white;
+    (StyleSheet.flatten(style) as ViewStyle) || ({} as ViewStyle);
+  const textColor = color(backgroundColor as string).isLight() ? black : white;
 
   const borderRadius = size / 2;
 
   return (
-    // @ts-ignore
     <Animated.Text
       numberOfLines={1}
       style={[

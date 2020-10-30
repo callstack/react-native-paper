@@ -4,6 +4,7 @@ import {
   I18nManager,
   Platform,
   ImageSourcePropType,
+  ColorValue,
 } from 'react-native';
 import { Consumer as SettingsConsumer } from '../core/settings';
 import { accessibilityProps } from './MaterialCommunityIcon';
@@ -14,7 +15,7 @@ type IconSourceBase = string | ImageSourcePropType;
 export type IconSource =
   | IconSourceBase
   | Readonly<{ source: IconSourceBase; direction: 'rtl' | 'ltr' | 'auto' }>
-  | ((props: IconProps & { color: string }) => React.ReactNode);
+  | ((props: IconProps & { color: ColorValue }) => React.ReactNode);
 
 type IconProps = {
   size: number;
@@ -22,7 +23,7 @@ type IconProps = {
 };
 
 type Props = IconProps & {
-  color?: string;
+  color?: ColorValue;
   source: any;
   /**
    * @optional

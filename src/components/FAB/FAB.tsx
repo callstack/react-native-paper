@@ -1,6 +1,13 @@
 import color from 'color';
 import * as React from 'react';
-import { Animated, View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
+import {
+  Animated,
+  View,
+  ViewStyle,
+  StyleSheet,
+  StyleProp,
+  ColorValue,
+} from 'react-native';
 import ActivityIndicator from '../ActivityIndicator';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import FABGroup, { FABGroup as _FABGroup } from './FABGroup';
@@ -43,7 +50,7 @@ type Props = $RemoveChildren<typeof Surface> & {
   /**
    * Custom color for the icon and label of the `FAB`.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * Whether `FAB` is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
@@ -186,12 +193,15 @@ class FAB extends React.Component<Props, State> {
         .rgb()
         .string();
     } else {
-      foregroundColor = !color(backgroundColor).isLight()
+      foregroundColor = !color(backgroundColor as string).isLight()
         ? white
         : 'rgba(0, 0, 0, .54)';
     }
 
-    const rippleColor = color(foregroundColor).alpha(0.32).rgb().string();
+    const rippleColor = color(foregroundColor as string)
+      .alpha(0.32)
+      .rgb()
+      .string();
 
     return (
       <Surface

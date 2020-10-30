@@ -3,21 +3,24 @@ import type {
   Animated,
   TextStyle,
   LayoutChangeEvent,
+  ColorValue,
+  ViewStyle,
 } from 'react-native';
 import type { TextInputProps } from './TextInput';
 import type { $Omit } from './../../types';
+import type { StyleProp } from 'react-native';
 
 export type RenderProps = {
   ref: (a: NativeTextInput | null | undefined) => void;
   onChangeText?: (a: string) => void;
   placeholder?: string;
-  placeholderTextColor?: string;
+  placeholderTextColor?: ColorValue;
   editable?: boolean;
-  selectionColor?: string;
+  selectionColor?: ColorValue;
   onFocus?: (args: any) => void;
   onBlur?: (args: any) => void;
   underlineColorAndroid?: string;
-  style: any;
+  style: StyleProp<TextStyle>;
   multiline?: boolean;
   numberOfLines?: number;
   value?: string;
@@ -47,7 +50,7 @@ export type ChildTextInputProps = {
 } & TextInputTypesWithoutMode;
 export type LabelProps = {
   mode?: 'flat' | 'outlined';
-  placeholderStyle: any;
+  placeholderStyle: StyleProp<TextStyle>;
   placeholderOpacity: number | Animated.Value | Animated.AnimatedInterpolation;
   baseLabelTranslateX: number;
   baseLabelTranslateY: number;
@@ -62,12 +65,12 @@ export type LabelProps = {
     | null
     | undefined;
   labelTranslationXOffset?: number;
-  placeholderColor: string | null | undefined;
-  backgroundColor?: string | null | undefined;
+  placeholderColor: ColorValue | undefined;
+  backgroundColor?: ColorValue | undefined;
   label?: string | null | undefined;
   hasActiveOutline: boolean | null | undefined;
   activeColor: string;
-  errorColor?: string;
+  errorColor?: ColorValue;
   error: boolean | null | undefined;
   onLayoutAnimatedText: (args: any) => void;
 };
@@ -78,6 +81,6 @@ export type InputLabelProps = {
 };
 export type LabelBackgroundProps = {
   labelProps: LabelProps;
-  labelStyle: any;
+  labelStyle: StyleProp<TextStyle> & StyleProp<ViewStyle>;
   parentState: State;
 };

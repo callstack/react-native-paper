@@ -6,6 +6,7 @@ import {
   I18nManager,
   Platform,
   TextStyle,
+  ColorValue,
 } from 'react-native';
 import color from 'color';
 import TextInputAdornment, {
@@ -16,7 +17,7 @@ import TextInputAdornment, {
 
 import InputLabel from './Label/InputLabel';
 import LabelBackground from './Label/LabelBackground';
-import type { RenderProps, ChildTextInputProps } from './types';
+import type { RenderProps, ChildTextInputProps, LabelProps } from './types';
 
 import {
   MAXIMIZED_LABEL_FONT_SIZE,
@@ -184,7 +185,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
       ? 1
       : 0;
 
-    const labelProps = {
+    const labelProps: LabelProps = {
       label,
       onLayoutAnimatedText,
       placeholderOpacity,
@@ -347,7 +348,7 @@ type OutlineType = {
   activeColor: string;
   hasActiveOutline: boolean | undefined;
   outlineColor: string | undefined;
-  backgroundColor: string | undefined;
+  backgroundColor: ColorValue | undefined;
   theme: ReactNativePaper.Theme;
 };
 

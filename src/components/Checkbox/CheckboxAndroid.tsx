@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, View, StyleSheet } from 'react-native';
+import { Animated, View, StyleSheet, ColorValue } from 'react-native';
 import color from 'color';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -22,11 +22,11 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Custom color for unchecked checkbox.
    */
-  uncheckedColor?: string;
+  uncheckedColor?: ColorValue;
   /**
    * Custom color for checkbox.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * @optional
    */
@@ -107,7 +107,10 @@ const CheckboxAndroid = ({
     rippleColor = color(theme.colors.text).alpha(0.16).rgb().string();
     checkboxColor = theme.colors.disabled;
   } else {
-    rippleColor = color(checkedColor).fade(0.32).rgb().string();
+    rippleColor = color(checkedColor as string)
+      .fade(0.32)
+      .rgb()
+      .string();
     checkboxColor = checked ? checkedColor : uncheckedColor;
   }
 

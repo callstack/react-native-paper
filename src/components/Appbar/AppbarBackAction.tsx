@@ -2,7 +2,7 @@ import * as React from 'react';
 import type { $Omit } from './../../types';
 import AppbarAction from './AppbarAction';
 import AppbarBackIcon from './AppbarBackIcon';
-import type { StyleProp, ViewStyle } from 'react-native';
+import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 
 type Props = $Omit<
   React.ComponentPropsWithoutRef<typeof AppbarAction>,
@@ -11,7 +11,7 @@ type Props = $Omit<
   /**
    *  Custom color for back icon.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * Optional icon size.
    */

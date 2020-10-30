@@ -162,15 +162,19 @@ exports[`renders snackbar with action button 1`] = `
       }
     >
       <View
+        accessibilityComponentType="button"
         accessibilityRole="button"
         accessibilityState={
           Object {
             "disabled": undefined,
           }
         }
+        accessibilityTraits="button"
         accessible={true}
         focusable={true}
+        onBlur={[Function]}
         onClick={[Function]}
+        onFocus={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -179,6 +183,9 @@ exports[`renders snackbar with action button 1`] = `
         onStartShouldSetResponder={[Function]}
         style={
           Array [
+            Object {
+              "position": "relative",
+            },
             Object {
               "overflow": "hidden",
             },

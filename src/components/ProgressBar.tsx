@@ -8,6 +8,7 @@ import {
   StyleProp,
   LayoutChangeEvent,
   I18nManager,
+  ColorValue,
 } from 'react-native';
 import setColor from 'color';
 import { withTheme } from '../core/theming';
@@ -20,7 +21,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Color of the progress bar. The background color will be calculated based on this but you can change it by passing `backgroundColor` to `style` prop.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * If the progress bar will show indeterminate progress.
    */
@@ -148,7 +149,10 @@ const ProgressBar = ({
   };
 
   const tintColor = color || theme.colors.primary;
-  const trackTintColor = setColor(tintColor).alpha(0.38).rgb().string();
+  const trackTintColor = setColor(tintColor as string)
+    .alpha(0.38)
+    .rgb()
+    .string();
 
   return (
     <View

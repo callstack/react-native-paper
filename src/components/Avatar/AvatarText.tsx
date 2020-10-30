@@ -5,6 +5,7 @@ import {
   StyleSheet,
   StyleProp,
   TextStyle,
+  ColorValue,
 } from 'react-native';
 import Color from 'color';
 import Text from '../Typography/Text';
@@ -25,7 +26,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Custom color for the text.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * Style for text container
    */
@@ -71,7 +72,8 @@ const AvatarText = ({
   const { backgroundColor = theme.colors.primary, ...restStyle } =
     StyleSheet.flatten(style) || {};
   const textColor =
-    color || (Color(backgroundColor).isLight() ? 'rgba(0, 0, 0, .54)' : white);
+    color ||
+    (Color(backgroundColor as string).isLight() ? 'rgba(0, 0, 0, .54)' : white);
 
   return (
     <View

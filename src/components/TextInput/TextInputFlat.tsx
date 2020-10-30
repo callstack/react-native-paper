@@ -7,6 +7,7 @@ import {
   I18nManager,
   Platform,
   TextStyle,
+  ColorValue,
 } from 'react-native';
 import color from 'color';
 import InputLabel from './Label/InputLabel';
@@ -245,7 +246,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
           ...paddingFlat,
           affixHeight: leftLayout.height,
         })
-      : null;
+      : undefined;
 
     const rightAffixTopPosition = rightLayout.height
       ? calculateFlatAffixTopPosition({
@@ -253,7 +254,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
           ...paddingFlat,
           affixHeight: rightLayout.height,
         })
-      : null;
+      : undefined;
 
     const labelProps = {
       label,
@@ -372,7 +373,7 @@ type UnderlineProps = {
     error: string;
   };
   activeColor: string;
-  underlineColorCustom?: string;
+  underlineColorCustom?: ColorValue;
 };
 
 const Underline = ({

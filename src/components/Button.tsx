@@ -6,6 +6,7 @@ import {
   StyleSheet,
   StyleProp,
   TextStyle,
+  ColorValue,
 } from 'react-native';
 import color from 'color';
 
@@ -36,7 +37,7 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Custom text color for flat button, or background color for contained button.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * Whether to show a loading indicator.
    */
@@ -207,7 +208,7 @@ const Button = ({
       isDark =
         backgroundColor === 'transparent'
           ? false
-          : !color(backgroundColor).isLight();
+          : !color(backgroundColor as string).isLight();
     }
 
     textColor = isDark ? white : black;
@@ -217,8 +218,12 @@ const Button = ({
     textColor = colors.primary;
   }
 
-  const rippleColor = color(textColor).alpha(0.32).rgb().string();
-  const buttonStyle = {
+  const rippleColor = color(textColor as string)
+    .alpha(0.32)
+    .rgb()
+    .string();
+
+  const buttonStyle: ViewStyle = {
     backgroundColor,
     borderColor,
     borderWidth,

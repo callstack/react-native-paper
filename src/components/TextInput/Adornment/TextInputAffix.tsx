@@ -25,7 +25,7 @@ type Props = {
 };
 
 type ContextState = {
-  topPosition: number | null;
+  topPosition: number | undefined;
   onLayout?: (event: LayoutChangeEvent) => void;
   visible?: Animated.Value;
   textStyle?: StyleProp<TextStyle>;
@@ -34,7 +34,7 @@ type ContextState = {
 
 const AffixContext = React.createContext<ContextState>({
   textStyle: { fontFamily: '', color: '' },
-  topPosition: null,
+  topPosition: undefined,
   side: AdornmentSide.Left,
 });
 

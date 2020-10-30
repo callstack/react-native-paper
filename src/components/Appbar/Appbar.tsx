@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { View, ViewStyle, Platform, StyleSheet, StyleProp } from 'react-native';
+import {
+  View,
+  ViewStyle,
+  Platform,
+  StyleSheet,
+  StyleProp,
+  ColorValue,
+} from 'react-native';
 import color from 'color';
 
 import AppbarContent, {
@@ -99,7 +106,7 @@ const Appbar = ({ children, dark, style, theme, ...rest }: Props) => {
     isDark =
       backgroundColor === 'transparent'
         ? false
-        : !color(backgroundColor).isLight();
+        : !color(backgroundColor as string).isLight();
   }
 
   let shouldCenterContent = false;
@@ -149,7 +156,7 @@ const Appbar = ({ children, dark, style, theme, ...rest }: Props) => {
             return child;
           }
 
-          const props: { color?: string; style?: StyleProp<ViewStyle> } = {
+          const props: { color?: ColorValue; style?: StyleProp<ViewStyle> } = {
             color:
               typeof child.props.color !== 'undefined'
                 ? child.props.color

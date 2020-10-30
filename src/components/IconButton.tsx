@@ -6,6 +6,7 @@ import {
   StyleProp,
   GestureResponderEvent,
   TouchableWithoutFeedback,
+  ColorValue,
 } from 'react-native';
 import color from 'color';
 
@@ -24,7 +25,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Color of the icon.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * Size of the icon.
    */
@@ -101,7 +102,10 @@ const IconButton = ({
 }: Props) => {
   const iconColor =
     typeof customColor !== 'undefined' ? customColor : theme.colors.text;
-  const rippleColor = color(iconColor).alpha(0.32).rgb().string();
+  const rippleColor = color(iconColor as string)
+    .alpha(0.32)
+    .rgb()
+    .string();
   const IconComponent = animated ? CrossFadeIcon : Icon;
   const buttonSize = size * 1.5;
   return (

@@ -107,8 +107,8 @@ export interface TextInputAdornmentProps {
   adornmentConfig: AdornmentConfig[];
   topPosition: {
     [AdornmentType.Affix]: {
-      [AdornmentSide.Left]: number | null;
-      [AdornmentSide.Right]: number | null;
+      [AdornmentSide.Left]: number | undefined;
+      [AdornmentSide.Right]: number | undefined;
     };
     [AdornmentType.Icon]: number;
   };

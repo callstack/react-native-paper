@@ -6,6 +6,7 @@ import {
   LayoutChangeEvent,
   StyleProp,
   TextStyle,
+  ColorValue,
 } from 'react-native';
 import TextInputOutlined from './TextInputOutlined';
 import TextInputFlat from './TextInputFlat';
@@ -55,11 +56,11 @@ export type TextInputProps = React.ComponentPropsWithRef<
   /**
    * Selection color of the input
    */
-  selectionColor?: string;
+  selectionColor?: ColorValue;
   /**
    * Underline color of the input.
    */
-  underlineColor?: string;
+  underlineColor?: ColorValue;
   /**
    * Sets min height with densed layout. For `TextInput` in `flat` mode
    * height is `64dp` or in dense layout - `52dp` with label or `40dp` without label.
@@ -163,7 +164,7 @@ export type TextInputProps = React.ComponentPropsWithRef<
  * export default MyComponent;
  * ```
  *
- * @extends TextInput props https://facebook.github.io/react-native/docs/textinput.html#props
+ * @extends TextInput props https://reactnative.dev/docs/textinput.html#props
  */
 
 class TextInput extends React.Component<TextInputProps, State> {

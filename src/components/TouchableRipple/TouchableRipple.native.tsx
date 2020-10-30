@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { StyleSheet, Pressable, View, Platform } from 'react-native';
+import {
+  StyleSheet,
+  Pressable,
+  View,
+  Platform,
+  ColorValue,
+} from 'react-native';
 import color from 'color';
 import { withTheme } from '../../core/theming';
 import {
@@ -16,8 +22,8 @@ type Props = React.ComponentProps<typeof Pressable> & {
   background?: string;
   disabled?: boolean;
   onPress?: () => void | null;
-  rippleColor?: string;
-  underlayColor?: string;
+  rippleColor?: ColorValue;
+  underlayColor?: ColorValue;
   children: InteractionChildrenType;
   style?: InteractionStyleType;
   theme: ReactNativePaper.Theme;

@@ -4,6 +4,7 @@ import {
   ViewProps,
   //@ts-ignore
   unstable_createElement,
+  ColorValue,
 } from 'react-native';
 import * as React from 'react';
 
@@ -11,7 +12,7 @@ type RippleStatusType = 'pressed' | 'not_pressed';
 
 export type RippleType = {
   style: {
-    backgroundColor: string;
+    backgroundColor: ColorValue;
     left: number;
     top: number;
     width: number;

@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { StyleSheet, Text, Platform } from 'react-native';
+import { StyleSheet, Text, Platform, ColorValue } from 'react-native';
 
 export type IconProps = {
   name: string;
-  color: string;
+  color: ColorValue;
   size: number;
   direction: 'rtl' | 'ltr';
   allowFontScaling?: boolean;

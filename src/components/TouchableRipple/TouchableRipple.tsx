@@ -4,6 +4,7 @@ import {
   View,
   StyleSheet,
   GestureResponderEvent,
+  ColorValue,
 } from 'react-native';
 import color from 'color';
 import { withTheme } from '../../core/theming';
@@ -24,8 +25,8 @@ type Props = React.ComponentPropsWithRef<typeof Pressable> & {
    */
   borderless?: boolean;
   /**
-   * Type of background drawabale to display the feedback (Android).
-   * https://facebook.github.io/react-native/docs/touchablenativefeedback.html#background
+   * Type of background drawable to display the feedback (Android).
+   * https://reactnative.dev/docs/touchablenativefeedback.html#background
    */
   background?: Object;
   /**
@@ -35,7 +36,7 @@ type Props = React.ComponentPropsWithRef<typeof Pressable> & {
   /**
    * Whether to prevent interaction with the touchable.
    */
-  disabled?: boolean;
+  disabled?: boolean | null;
   /**
    * Function to execute on press. If not set, will cause the touchable to be disabled.
    */
@@ -47,11 +48,11 @@ type Props = React.ComponentPropsWithRef<typeof Pressable> & {
   /**
    * Color of the ripple effect (Android >= 5.0 and Web).
    */
-  rippleColor?: string;
+  rippleColor?: ColorValue;
   /**
    * Color of the underlay for the highlight effect (Android < 5.0 and iOS).
    */
-  underlayColor?: string;
+  underlayColor?: ColorValue;
   /**
    * Content of the `TouchableRipple`.
    */
@@ -114,6 +115,7 @@ function TouchableRipple({
       .rgb()
       .string();
   const [rippleArray, setRippleArray] = React.useState<RippleType[]>([]);
+
   const handlePressIn = (e: GestureResponderEvent) => {
     rest.onPressIn?.(e);
     const button = e.currentTarget;
@@ -183,7 +185,7 @@ function TouchableRipple({
         getInteractionStyle(interactionState, style),
       ]}
     >
-      {(interactionState) => (
+      {(interactionState: InteractionState) => (
         <>
           {React.Children.only(
             getInteractionChildren(interactionState, children)

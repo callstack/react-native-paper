@@ -40,14 +40,15 @@
     "release": "release-it",
     "bootstrap": "yarn --cwd example && yarn --cwd docs && yarn",
     "docs": "yarn --cwd docs",
-    "example": "yarn --cwd example"
+    "example": "yarn --cwd example",
+    "prettier": "./node_modules/.bin/prettier --write './src/**/*.{tsx,ts,js,css,html}'"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
     "@callstack/react-theme-provider": "^3.0.5",
-    "color": "^3.1.2",
+    "color": "^3.1.3",
     "react-native-safe-area-view": "^0.14.9"
   },
   "devDependencies": {
@@ -60,8 +61,8 @@
     "@types/color": "^3.0.0",
     "@types/jest": "^24.0.13",
     "@types/node": "^13.1.0",
-    "@types/react-dom": "^16.8.4",
-    "@types/react-native": "^0.63.0",
+    "@types/react-dom": "^16.9.9",
+    "@types/react-native": "^0.63.30",
     "@types/react-native-vector-icons": "^6.4.1",
     "@typescript-eslint/eslint-plugin": "^2.12.0",
     "@typescript-eslint/parser": "^2.12.0",
@@ -85,15 +86,15 @@
     "jest-file-snapshot": "^0.3.2",
     "metro-react-native-babel-preset": "^0.59.0",
     "prettier": "^2.0.5",
-    "react": "16.11.0",
-    "react-dom": "16.11.0",
-    "react-native": "^0.63.0",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-native": "^0.63.3",
     "react-native-testing-library": "^1.5.0",
     "react-native-vector-icons": "~6.3.0",
-    "react-test-renderer": "16.11.0",
+    "react-test-renderer": "16.13.1",
     "release-it": "^13.4.0",
     "rimraf": "^3.0.2",
-    "typescript": "^3.8.3"
+    "typescript": "^4.0.5"
   },
   "peerDependencies": {
     "react": "*",
@@ -108,7 +109,9 @@
   },
   "jest": {
     "preset": "react-native",
-    "setupFiles": ["<rootDir>/testSetup.js"],
+    "setupFiles": [
+      "<rootDir>/testSetup.js"
+    ],
     "cacheDirectory": "./cache/jest",
     "modulePathIgnorePatterns": [
       "<rootDir>/example/node_modules",

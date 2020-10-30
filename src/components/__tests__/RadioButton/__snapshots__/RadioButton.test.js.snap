@@ -79,6 +79,7 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
 
 exports[`RadioButton on default platform renders properly 1`] = `
 <View
+  accessibilityComponentType="radiobutton_unchecked"
   accessibilityLiveRegion="polite"
   accessibilityRole="radio"
   accessibilityState={
@@ -87,9 +88,12 @@ exports[`RadioButton on default platform renders properly 1`] = `
       "disabled": undefined,
     }
   }
+  accessibilityTraits="button"
   accessible={true}
   focusable={true}
+  onBlur={[Function]}
   onClick={[Function]}
+  onFocus={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -98,6 +102,9 @@ exports[`RadioButton on default platform renders properly 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
+      Object {
+        "position": "relative",
+      },
       Object {
         "overflow": "hidden",
       },

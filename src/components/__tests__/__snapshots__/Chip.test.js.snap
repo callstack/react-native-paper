@@ -15,6 +15,7 @@ exports[`renders chip with close button 1`] = `
   }
 >
   <View
+    accessibilityComponentType="button"
     accessibilityRole="button"
     accessibilityState={
       Object {
@@ -22,9 +23,16 @@ exports[`renders chip with close button 1`] = `
         "selected": false,
       }
     }
+    accessibilityTraits={
+      Array [
+        "button",
+      ]
+    }
     accessible={true}
-    focusable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -33,6 +41,9 @@ exports[`renders chip with close button 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        Object {
+          "position": "relative",
+        },
         Object {
           "overflow": "hidden",
         },
@@ -225,6 +236,7 @@ exports[`renders chip with icon 1`] = `
   }
 >
   <View
+    accessibilityComponentType="button"
     accessibilityRole="button"
     accessibilityState={
       Object {
@@ -232,9 +244,16 @@ exports[`renders chip with icon 1`] = `
         "selected": false,
       }
     }
+    accessibilityTraits={
+      Array [
+        "button",
+      ]
+    }
     accessible={true}
-    focusable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -243,6 +262,9 @@ exports[`renders chip with icon 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        Object {
+          "position": "relative",
+        },
         Object {
           "overflow": "hidden",
         },
@@ -364,6 +386,7 @@ exports[`renders chip with onPress 1`] = `
   }
 >
   <View
+    accessibilityComponentType="button"
     accessibilityRole="button"
     accessibilityState={
       Object {
@@ -371,9 +394,16 @@ exports[`renders chip with onPress 1`] = `
         "selected": false,
       }
     }
+    accessibilityTraits={
+      Array [
+        "button",
+      ]
+    }
     accessible={true}
     focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -382,6 +412,9 @@ exports[`renders chip with onPress 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        Object {
+          "position": "relative",
+        },
         Object {
           "overflow": "hidden",
         },
@@ -457,6 +490,7 @@ exports[`renders outlined disabled chip 1`] = `
   }
 >
   <View
+    accessibilityComponentType="button"
     accessibilityRole="button"
     accessibilityState={
       Object {
@@ -464,9 +498,17 @@ exports[`renders outlined disabled chip 1`] = `
         "selected": false,
       }
     }
+    accessibilityTraits={
+      Array [
+        "button",
+        "disabled",
+      ]
+    }
     accessible={true}
-    focusable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -475,6 +517,9 @@ exports[`renders outlined disabled chip 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        Object {
+          "position": "relative",
+        },
         Object {
           "overflow": "hidden",
         },
@@ -550,6 +595,7 @@ exports[`renders selected chip 1`] = `
   }
 >
   <View
+    accessibilityComponentType="button"
     accessibilityRole="button"
     accessibilityState={
       Object {
@@ -557,9 +603,17 @@ exports[`renders selected chip 1`] = `
         "selected": true,
       }
     }
+    accessibilityTraits={
+      Array [
+        "button",
+        "selected",
+      ]
+    }
     accessible={true}
-    focusable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -568,6 +622,9 @@ exports[`renders selected chip 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        Object {
+          "position": "relative",
+        },
         Object {
           "overflow": "hidden",
         },

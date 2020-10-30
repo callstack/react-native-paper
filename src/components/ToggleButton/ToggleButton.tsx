@@ -4,6 +4,7 @@ import {
   StyleProp,
   ViewStyle,
   GestureResponderEvent,
+  ColorValue,
 } from 'react-native';
 import { withTheme } from '../../core/theming';
 import color from 'color';
@@ -27,7 +28,7 @@ type Props = {
   /**
    * Custom text color for button.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * Whether the button is disabled.
    */

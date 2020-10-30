@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform } from 'react-native';
+import { ColorValue, Platform } from 'react-native';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import CheckboxIOS, { CheckboxIOS as _CheckboxIOS } from './CheckboxIOS';
 import CheckboxAndroid, {
@@ -25,11 +25,11 @@ type Props = {
   /**
    * Custom color for unchecked checkbox.
    */
-  uncheckedColor?: string;
+  uncheckedColor?: ColorValue;
   /**
    * Custom color for checkbox.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * @optional
    */

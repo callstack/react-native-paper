@@ -15,15 +15,19 @@ exports[`renders button with color 1`] = `
   }
 >
   <View
+    accessibilityComponentType="button"
     accessibilityRole="button"
     accessibilityState={
       Object {
         "disabled": undefined,
       }
     }
+    accessibilityTraits="button"
     accessible={true}
-    focusable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -32,6 +36,9 @@ exports[`renders button with color 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        Object {
+          "position": "relative",
+        },
         Object {
           "overflow": "hidden",
         },
@@ -110,15 +117,19 @@ exports[`renders button with custom testID 1`] = `
   }
 >
   <View
+    accessibilityComponentType="button"
     accessibilityRole="button"
     accessibilityState={
       Object {
         "disabled": undefined,
       }
     }
+    accessibilityTraits="button"
     accessible={true}
-    focusable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -127,6 +138,9 @@ exports[`renders button with custom testID 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        Object {
+          "position": "relative",
+        },
         Object {
           "overflow": "hidden",
         },
@@ -206,15 +220,19 @@ exports[`renders button with icon 1`] = `
   }
 >
   <View
+    accessibilityComponentType="button"
     accessibilityRole="button"
     accessibilityState={
       Object {
         "disabled": undefined,
       }
     }
+    accessibilityTraits="button"
     accessible={true}
-    focusable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -223,6 +241,9 @@ exports[`renders button with icon 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        Object {
+          "position": "relative",
+        },
         Object {
           "overflow": "hidden",
         },
@@ -351,15 +372,19 @@ exports[`renders contained contained with mode 1`] = `
   }
 >
   <View
+    accessibilityComponentType="button"
     accessibilityRole="button"
     accessibilityState={
       Object {
         "disabled": undefined,
       }
     }
+    accessibilityTraits="button"
     accessible={true}
-    focusable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -368,6 +393,9 @@ exports[`renders contained contained with mode 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        Object {
+          "position": "relative",
+        },
         Object {
           "overflow": "hidden",
         },
@@ -446,15 +474,24 @@ exports[`renders disabled button 1`] = `
   }
 >
   <View
+    accessibilityComponentType="button"
     accessibilityRole="button"
     accessibilityState={
       Object {
         "disabled": true,
       }
     }
+    accessibilityTraits={
+      Array [
+        "button",
+        "disabled",
+      ]
+    }
     accessible={true}
-    focusable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -463,6 +500,9 @@ exports[`renders disabled button 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        Object {
+          "position": "relative",
+        },
         Object {
           "overflow": "hidden",
         },
@@ -541,15 +581,19 @@ exports[`renders loading button 1`] = `
   }
 >
   <View
+    accessibilityComponentType="button"
     accessibilityRole="button"
     accessibilityState={
       Object {
         "disabled": undefined,
       }
     }
+    accessibilityTraits="button"
     accessible={true}
-    focusable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -558,6 +602,9 @@ exports[`renders loading button 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        Object {
+          "position": "relative",
+        },
         Object {
           "overflow": "hidden",
         },
@@ -821,15 +868,19 @@ exports[`renders outlined button with mode 1`] = `
   }
 >
   <View
+    accessibilityComponentType="button"
     accessibilityRole="button"
     accessibilityState={
       Object {
         "disabled": undefined,
       }
     }
+    accessibilityTraits="button"
     accessible={true}
-    focusable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -838,6 +889,9 @@ exports[`renders outlined button with mode 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        Object {
+          "position": "relative",
+        },
         Object {
           "overflow": "hidden",
         },
@@ -916,15 +970,19 @@ exports[`renders text button by default 1`] = `
   }
 >
   <View
+    accessibilityComponentType="button"
     accessibilityRole="button"
     accessibilityState={
       Object {
         "disabled": undefined,
       }
     }
+    accessibilityTraits="button"
     accessible={true}
-    focusable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -933,6 +991,9 @@ exports[`renders text button by default 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        Object {
+          "position": "relative",
+        },
         Object {
           "overflow": "hidden",
         },
@@ -1011,15 +1072,19 @@ exports[`renders text button with mode 1`] = `
   }
 >
   <View
+    accessibilityComponentType="button"
     accessibilityRole="button"
     accessibilityState={
       Object {
         "disabled": undefined,
       }
     }
+    accessibilityTraits="button"
     accessible={true}
-    focusable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1028,6 +1093,9 @@ exports[`renders text button with mode 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        Object {
+          "position": "relative",
+        },
         Object {
           "overflow": "hidden",
         },

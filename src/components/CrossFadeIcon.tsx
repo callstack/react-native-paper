@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import { Animated, ColorValue, StyleSheet, View } from 'react-native';
 import Icon, { isValidIcon, IconSource, isEqualIcon } from './Icon';
 
 import { withTheme } from '../core/theming';
@@ -12,7 +12,7 @@ type Props = {
   /**
    * Color of the icon.
    */
-  color: string;
+  color: ColorValue;
   /**
    * Size of the icon.
    */

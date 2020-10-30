@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform } from 'react-native';
+import { ColorValue, Platform } from 'react-native';
 import RadioButtonGroup from './RadioButtonGroup';
 import RadioButtonAndroid from './RadioButtonAndroid';
 import RadioButtonIOS from './RadioButtonIOS';
@@ -26,11 +26,11 @@ export type Props = {
   /**
    * Custom color for unchecked radio.
    */
-  uncheckedColor?: string;
+  uncheckedColor?: ColorValue;
   /**
    * Custom color for radio.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * @optional
    */

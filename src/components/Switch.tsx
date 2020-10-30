@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { grey400, grey800, grey50, white, black } from '../styles/colors';
 import {
+  ColorValue,
   NativeModules,
   Platform,
   StyleProp,
   Switch as NativeSwitch,
+  SwitchProps,
   ViewStyle,
 } from 'react-native';
 import setColor from 'color';
@@ -26,7 +28,7 @@ type Props = React.ComponentPropsWithRef<typeof NativeSwitch> & {
   /**
    * Custom color for switch.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * Callback called with the new value when it changes.
    */
@@ -93,7 +95,10 @@ const Switch = ({
       ? theme.dark
         ? setColor(white).alpha(0.1).rgb().string()
         : setColor(black).alpha(0.12).rgb().string()
-      : setColor(checkedColor).alpha(0.5).rgb().string();
+      : setColor(checkedColor as string)
+          .alpha(0.5)
+          .rgb()
+          .string();
 
   const thumbTintColor =
     Platform.OS === 'ios'
@@ -108,7 +113,7 @@ const Switch = ({
       ? grey400
       : grey50;
 
-  const props =
+  const props: SwitchProps =
     version && version.major === 0 && version.minor <= 56
       ? {
           onTintColor,
@@ -116,6 +121,7 @@ const Switch = ({
         }
       : Platform.OS === 'web'
       ? {
+          //@ts-ignore
           activeTrackColor: onTintColor,
           thumbColor: thumbTintColor,
           activeThumbColor: checkedColor,

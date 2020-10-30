@@ -39,6 +39,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
     }
   >
     <View
+      accessibilityComponentType="button"
       accessibilityLabel="search"
       accessibilityRole="button"
       accessibilityState={
@@ -46,8 +47,10 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           "disabled": undefined,
         }
       }
+      accessibilityTraits="button"
       accessible={true}
-      focusable={false}
+      centered={true}
+      focusable={true}
       hitSlop={
         Object {
           "bottom": 6,
@@ -56,7 +59,9 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           "top": 6,
         }
       }
+      onBlur={[Function]}
       onClick={[Function]}
+      onFocus={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -65,6 +70,9 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
       onStartShouldSetResponder={[Function]}
       style={
         Array [
+          Object {
+            "position": "relative",
+          },
           Object {
             "overflow": "hidden",
           },
@@ -154,6 +162,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
       underlineColorAndroid="transparent"
     />
     <View
+      accessibilityComponentType="button"
       accessibilityLabel="clear"
       accessibilityRole="button"
       accessibilityState={
@@ -161,7 +170,9 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           "disabled": true,
         }
       }
+      accessibilityTraits="button"
       accessible={true}
+      centered={true}
       focusable={true}
       hitSlop={
         Object {
@@ -171,7 +182,9 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           "top": 6,
         }
       }
+      onBlur={[Function]}
       onClick={[Function]}
+      onFocus={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -180,6 +193,9 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
       onStartShouldSetResponder={[Function]}
       style={
         Array [
+          Object {
+            "position": "relative",
+          },
           Object {
             "overflow": "hidden",
           },
@@ -265,6 +281,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
   }
 >
   <View
+    accessibilityComponentType="button"
     accessibilityLabel="Back"
     accessibilityRole="button"
     accessibilityState={
@@ -272,7 +289,9 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         "disabled": undefined,
       }
     }
+    accessibilityTraits="button"
     accessible={true}
+    centered={true}
     focusable={true}
     hitSlop={
       Object {
@@ -282,7 +301,9 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         "top": 6,
       }
     }
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -291,6 +312,9 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        Object {
+          "position": "relative",
+        },
         Object {
           "overflow": "hidden",
         },
@@ -446,13 +470,16 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
     </Text>
   </View>
   <View
+    accessibilityComponentType="button"
     accessibilityRole="button"
     accessibilityState={
       Object {
         "disabled": undefined,
       }
     }
+    accessibilityTraits="button"
     accessible={true}
+    centered={true}
     focusable={true}
     hitSlop={
       Object {
@@ -462,7 +489,9 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         "top": 6,
       }
     }
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -471,6 +500,9 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        Object {
+          "position": "relative",
+        },
         Object {
           "overflow": "hidden",
         },

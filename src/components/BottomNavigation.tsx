@@ -12,6 +12,7 @@ import {
   Keyboard,
   ViewStyle,
   LayoutChangeEvent,
+  ColorValue,
 } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import color from 'color';
@@ -29,7 +30,7 @@ type Route = {
   title?: string;
   icon?: IconSource;
   badge?: string | number | boolean;
-  color?: string;
+  color?: ColorValue;
   accessibilityLabel?: string;
   testID?: string;
 };
@@ -50,7 +51,7 @@ type TouchableProps = TouchableWithoutFeedbackProps & {
   children: React.ReactNode;
   borderless?: boolean;
   centered?: boolean;
-  rippleColor?: string;
+  rippleColor?: ColorValue;
 };
 
 type Props = {
@@ -146,7 +147,7 @@ type Props = {
   renderIcon?: (props: {
     route: Route;
     focused: boolean;
-    color: string;
+    color: ColorValue;
   }) => React.ReactNode;
   /**
    * Callback which React Element to be used as tab label.
@@ -154,7 +155,7 @@ type Props = {
   renderLabel?: (props: {
     route: Route;
     focused: boolean;
-    color: string;
+    color: ColorValue;
   }) => React.ReactNode;
   /**
    * Callback which returns a React element to be used as the touchable for the tab item.
@@ -189,11 +190,11 @@ type Props = {
   /**
    * Custom color for icon and label in the active tab.
    */
-  activeColor?: string;
+  activeColor?: ColorValue;
   /**
    * Custom color for icon and label in the inactive tab.
    */
-  inactiveColor?: string;
+  inactiveColor?: ColorValue;
   /**
    * Whether animation is enabled for scenes transitions in `shifting` mode.
    * By default, the scenes cross-fade during tab change when `shifting` is enabled.
@@ -671,7 +672,7 @@ class BottomNavigation extends React.Component<Props, State> {
         })
       : approxBackgroundColor;
 
-    const isDark = !color(approxBackgroundColor).isLight();
+    const isDark = !color(approxBackgroundColor as string).isLight();
 
     const textColor = isDark ? white : black;
     const activeTintColor =
@@ -681,7 +682,7 @@ class BottomNavigation extends React.Component<Props, State> {
         ? inactiveColor
         : color(textColor).alpha(0.5).rgb().string();
 
-    const touchColor = color(activeColor || activeTintColor)
+    const touchColor = color((activeColor || activeTintColor) as string)
       .alpha(0.12)
       .rgb()
       .string();

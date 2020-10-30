@@ -8,12 +8,13 @@ import type {
 import { black } from '../../styles/colors';
 import IconButton from '../IconButton';
 import type { IconSource } from '../Icon';
+import type { ColorValue } from 'react-native';
 
 type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
   /**
    *  Custom color for action icon.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * Name of the icon to show.
    */

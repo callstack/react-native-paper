@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  ColorValue,
   Platform,
   StyleProp,
   StyleSheet,
@@ -21,7 +22,7 @@ type Props = $RemoveChildren<typeof View> & {
   /**
    * Custom color for the text.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * Text for the title.
    */
@@ -90,7 +91,10 @@ const AppbarContent = ({
 }: Props) => {
   const { fonts } = theme;
 
-  const subtitleColor = color(titleColor).alpha(0.7).rgb().string();
+  const subtitleColor = color(titleColor as string)
+    .alpha(0.7)
+    .rgb()
+    .string();
 
   return (
     <TouchableWithoutFeedback onPress={onPress} disabled={!onPress}>

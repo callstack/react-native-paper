@@ -17,15 +17,19 @@ exports[`renders DrawerItem with icon 1`] = `
   }
 >
   <View
+    accessibilityComponentType="button"
     accessibilityRole="button"
     accessibilityState={
       Object {
         "selected": undefined,
       }
     }
+    accessibilityTraits="button"
     accessible={true}
-    focusable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -34,6 +38,9 @@ exports[`renders DrawerItem with icon 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        Object {
+          "position": "relative",
+        },
         Object {
           "overflow": "hidden",
         },
@@ -134,15 +141,24 @@ exports[`renders active DrawerItem 1`] = `
   }
 >
   <View
+    accessibilityComponentType="button"
     accessibilityRole="button"
     accessibilityState={
       Object {
         "selected": true,
       }
     }
+    accessibilityTraits={
+      Array [
+        "button",
+        "selected",
+      ]
+    }
     accessible={true}
-    focusable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -151,6 +167,9 @@ exports[`renders active DrawerItem 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        Object {
+          "position": "relative",
+        },
         Object {
           "overflow": "hidden",
         },
@@ -251,15 +270,19 @@ exports[`renders basic DrawerItem 1`] = `
   }
 >
   <View
+    accessibilityComponentType="button"
     accessibilityRole="button"
     accessibilityState={
       Object {
         "selected": undefined,
       }
     }
+    accessibilityTraits="button"
     accessible={true}
     focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -268,6 +291,9 @@ exports[`renders basic DrawerItem 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        Object {
+          "position": "relative",
+        },
         Object {
           "overflow": "hidden",
         },

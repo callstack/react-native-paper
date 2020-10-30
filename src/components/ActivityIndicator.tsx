@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  ColorValue,
   Easing,
   Platform,
   StyleProp,
@@ -18,7 +19,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * The color of the spinner.
    */
-  color?: string;
+  color?: ColorValue | undefined;
   /**
    * Size of the indicator.
    */
@@ -143,7 +144,7 @@ const ActivityIndicator = ({
 
   const frames = (60 * DURATION) / 1000;
   const easing = Easing.bezier(0.4, 0.0, 0.7, 1.0);
-  const containerStyle = {
+  const containerStyle: ViewStyle = {
     width: size,
     height: size / 2,
     overflow: 'hidden',
@@ -207,7 +208,7 @@ const ActivityIndicator = ({
 
           const offsetStyle = index ? { top: size / 2 } : null;
 
-          const lineStyle = {
+          const lineStyle: ViewStyle = {
             width: size,
             height: size,
             borderColor: color,
