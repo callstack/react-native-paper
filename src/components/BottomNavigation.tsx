@@ -271,7 +271,7 @@ const MIN_RIPPLE_SCALE = 0.001; // Minimum scale is not 0 due to bug with animat
 const MIN_TAB_WIDTH = 96;
 const MAX_TAB_WIDTH = 168;
 const BAR_HEIGHT = 56;
-const FAR_FAR_AWAY = 9999;
+const FAR_FAR_AWAY = Platform.OS === 'web' ? 0 : 9999;
 
 const Touchable = ({
   route: _0,
@@ -731,7 +731,19 @@ class BottomNavigation extends React.Component<Props, State> {
                   Platform.OS === 'ios' ? navigationState.index !== index : true
                 }
               >
-                <Animated.View style={[styles.content, { top }]}>
+                <Animated.View
+                  style={[
+                    styles.content,
+                    { top },
+                    Platform.OS === 'web'
+                      ? {
+                          display: loaded.includes(index.toString())
+                            ? 'flex'
+                            : 'none',
+                        }
+                      : null,
+                  ]}
+                >
                   {renderScene({
                     route,
                     jumpTo: this.jumpTo,

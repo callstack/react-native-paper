@@ -1,7 +1,7 @@
 import React from 'react';
-import TextInputIcon, { IconAdornment } from './Icon';
-import TextInputAffix, { AffixAdornment } from './Affix';
-import { ADORNMENT_OFFSET } from '../constants';
+import TextInputIcon, { IconAdornment } from './TextInputIcon';
+import TextInputAffix, { AffixAdornment } from './TextInputAffix';
+import { ADORNMENT_OFFSET, OUTLINED_INPUT_OFFSET } from '../constants';
 import {
   LayoutChangeEvent,
   TextStyle,
@@ -13,7 +13,7 @@ import type {
   AdornmentConfig,
   AdornmentStyleAdjustmentForNativeInput,
 } from './types';
-import { AdornmentSide, AdornmentType } from './enums';
+import { AdornmentSide, AdornmentType, InputMode } from './enums';
 
 export function getAdornmentConfig({
   left,
@@ -51,19 +51,26 @@ export function getAdornmentStyleAdjustmentForNativeInput({
   leftAffixWidth,
   rightAffixWidth,
   inputOffset = 0,
+  mode,
 }: {
   inputOffset?: number;
   adornmentConfig: AdornmentConfig[];
   leftAffixWidth: number;
   rightAffixWidth: number;
+  mode?: 'outlined' | 'flat';
 }): AdornmentStyleAdjustmentForNativeInput | {} {
   if (adornmentConfig.length) {
     const adornmentStyleAdjustmentForNativeInput = adornmentConfig.map(
       ({ type, side }: AdornmentConfig) => {
         const isWeb = Platform.OS !== 'ios' && Platform.OS !== 'android';
         const isLeftSide = side === AdornmentSide.Left;
+        const inputModeAdornemntOffset =
+          mode === InputMode.Outlined
+            ? ADORNMENT_OFFSET + OUTLINED_INPUT_OFFSET
+            : ADORNMENT_OFFSET;
         const offset =
-          (isLeftSide ? leftAffixWidth : rightAffixWidth) + ADORNMENT_OFFSET;
+          (isLeftSide ? leftAffixWidth : rightAffixWidth) +
+          inputModeAdornemntOffset;
         const paddingKey = `padding${captalize(side)}`;
 
         if (isWeb) return { [paddingKey]: offset };

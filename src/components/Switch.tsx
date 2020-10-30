@@ -114,6 +114,12 @@ const Switch = ({
           onTintColor,
           thumbTintColor,
         }
+      : Platform.OS === 'web'
+      ? {
+          activeTrackColor: onTintColor,
+          thumbColor: thumbTintColor,
+          activeThumbColor: checkedColor,
+        }
       : {
           thumbColor: thumbTintColor,
           trackColor: {

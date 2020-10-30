@@ -6,6 +6,7 @@ exports[`renders disabled toggle button 1`] = `
   accessibilityState={
     Object {
       "disabled": true,
+      "selected": true,
     }
   }
   accessible={true}
@@ -105,6 +106,7 @@ exports[`renders toggle button 1`] = `
   accessibilityState={
     Object {
       "disabled": undefined,
+      "selected": true,
     }
   }
   accessible={true}
@@ -202,6 +204,7 @@ exports[`renders unchecked toggle button 1`] = `
   accessibilityState={
     Object {
       "disabled": true,
+      "selected": false,
     }
   }
   accessible={true}

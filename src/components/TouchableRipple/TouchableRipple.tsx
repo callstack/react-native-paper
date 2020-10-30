@@ -91,6 +91,8 @@ type Props = React.ComponentPropsWithRef<typeof Pressable> & {
  *
  * export default MyComponent;
  * ```
+ *
+ * @extends TouchableWithoutFeedback props https://reactnative.dev/docs/touchablewithoutfeedback#props
  */
 
 function TouchableRipple({

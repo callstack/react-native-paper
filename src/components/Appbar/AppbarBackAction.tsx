@@ -63,16 +63,14 @@ type Props = $Omit<
  * export default MyComponent;
  * ```
  */
-class AppbarBackAction extends React.Component<Props> {
-  static displayName = 'Appbar.BackAction';
+const AppbarBackAction = ({ accessibilityLabel = 'Back', ...rest }: Props) => (
+  <AppbarAction
+    accessibilityLabel={accessibilityLabel}
+    {...rest}
+    icon={AppbarBackIcon}
+  />
+);
 
-  static defaultProps = {
-    accessibilityLabel: 'Back',
-  };
-
-  render() {
-    return <AppbarAction {...this.props} icon={AppbarBackIcon} />;
-  }
-}
+AppbarBackAction.displayName = 'Appbar.BackAction';
 
 export default AppbarBackAction;
