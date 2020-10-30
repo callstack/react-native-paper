@@ -5,3 +5,5 @@ export const LABEL_PADDING_HORIZONTAL = 12;
 export const ADORNMENT_SIZE = 24;
 export const ADORNMENT_OFFSET = 12;
 export const FLAT_INPUT_OFFSET = 8;
+// extra space to avoid overlapping input's text and icon
+export const OUTLINED_INPUT_OFFSET = 8;
