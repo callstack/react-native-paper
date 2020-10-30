@@ -40,10 +40,7 @@ const CrossFadeIcon = ({ color, size, source, theme }: Props) => {
   }
 
   React.useEffect(() => {
-    if (
-      isValidIcon(previousIcon) &&
-      !isEqualIcon(previousIcon, currentIcon)
-    ) {
+    if (isValidIcon(previousIcon) && !isEqualIcon(previousIcon, currentIcon)) {
       fade.setValue(1);
 
       Animated.timing(fade, {
