@@ -9,7 +9,6 @@ exports[`renders caption applying style 1`] = `
         "fontFamily": "System",
         "fontWeight": "400",
         "textAlign": "left",
-        "writingDirection": "ltr",
       },
       Array [
         Object {
@@ -60,7 +59,6 @@ exports[`renders caption with children as content 1`] = `
         "fontFamily": "System",
         "fontWeight": "400",
         "textAlign": "left",
-        "writingDirection": "ltr",
       },
       Array [
         Object {

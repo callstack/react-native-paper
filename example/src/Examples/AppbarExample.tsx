@@ -1,166 +1,95 @@
 import * as React from 'react';
 import { View, Platform, StyleSheet } from 'react-native';
+import type { StackNavigationProp } from '@react-navigation/stack';
 import {
   Colors,
   Appbar,
   FAB,
   Switch,
   Paragraph,
-  withTheme,
-  Theme,
+  useTheme,
 } from 'react-native-paper';
 
 type Props = {
-  navigation: any;
-  theme: Theme;
-};
-
-const initialParams = {
-  showLeftIcon: true,
-  showSubtitle: true,
-  showSearchIcon: true,
-  showMoreIcon: true,
-  showBottomPrimary: false,
-  showTopPrimary: false,
+  navigation: StackNavigationProp<{}>;
 };
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
-class AppbarExample extends React.Component<Props> {
-  static title = 'Appbar';
-  static navigationOptions = ({ navigation }: any) => {
-    const params = { ...initialParams, ...navigation.state.params };
+const AppbarExample = ({ navigation }: Props) => {
+  const { colors } = useTheme();
 
-    return {
-      header: (
-        <Appbar.Header
-          primary={params.showTopPrimary}
-          style={params.showCustomColor ? { backgroundColor: '#ffff00' } : null}
-        >
-          {params.showLeftIcon && (
-            <Appbar.BackAction onPress={() => navigation.goBack()} />
-          )}
-          <Appbar.Content
-            title="Title"
-            subtitle={params.showSubtitle ? 'Subtitle' : null}
-          />
-          {params.showSearchIcon && (
-            <Appbar.Action icon="magnify" onPress={() => {}} />
-          )}
-          {params.showMoreIcon && (
-            <Appbar.Action icon={MORE_ICON} onPress={() => {}} />
-          )}
-        </Appbar.Header>
-      ),
-    };
-  };
+  const [showLeftIcon, setShowLeftIcon] = React.useState(true);
+  const [showSubtitle, setShowSubtitle] = React.useState(true);
+  const [showSearchIcon, setShowSearchIcon] = React.useState(true);
+  const [showMoreIcon, setShowMoreIcon] = React.useState(true);
+  const [showCustomColor, setShowCustomColor] = React.useState(false);
+  const [showExactTheme, setShowExactTheme] = React.useState(false);
 
-  render() {
-    const {
-      navigation,
-      theme: {
-        colors: { background },
-      },
-    } = this.props;
-    const params = { ...initialParams, ...navigation.state.params };
-
-    return (
-      <View
-        style={[
-          styles.container,
-          {
-            backgroundColor: background,
-          },
-        ]}
+  navigation.setOptions({
+    header: () => (
+      <Appbar.Header
+        style={showCustomColor ? { backgroundColor: '#ffff00' } : null}
+        theme={{
+          mode: showExactTheme ? 'exact' : 'adaptive',
+        }}
       >
-        <View style={styles.row}>
-          <Paragraph>Left icon</Paragraph>
-          <Switch
-            value={params.showLeftIcon}
-            onValueChange={value =>
-              navigation.setParams({
-                showLeftIcon: value,
-              })
-            }
-          />
-        </View>
-        <View style={styles.row}>
-          <Paragraph>Subtitle</Paragraph>
-          <Switch
-            value={params.showSubtitle}
-            onValueChange={value =>
-              navigation.setParams({
-                showSubtitle: value,
-              })
-            }
-          />
-        </View>
-        <View style={styles.row}>
-          <Paragraph>Search icon</Paragraph>
-          <Switch
-            value={params.showSearchIcon}
-            onValueChange={value =>
-              navigation.setParams({
-                showSearchIcon: value,
-              })
-            }
-          />
-        </View>
-        <View style={styles.row}>
-          <Paragraph>More icon</Paragraph>
-          <Switch
-            value={params.showMoreIcon}
-            onValueChange={value =>
-              navigation.setParams({
-                showMoreIcon: value,
-              })
-            }
-          />
-        </View>
-        <View style={styles.row}>
-          <Paragraph>Custom Color</Paragraph>
-          <Switch
-            value={params.showCustomColor}
-            onValueChange={value =>
-              navigation.setParams({
-                showCustomColor: value,
-              })
-            }
-          />
-        </View>
-        <View style={styles.row}>
-          <Paragraph>Bottom bar primary (dark theme)</Paragraph>
-          <Switch
-            value={params.showBottomPrimary}
-            onValueChange={value =>
-              navigation.setParams({
-                showBottomPrimary: value,
-              })
-            }
-          />
-        </View>
-        <View style={styles.row}>
-          <Paragraph>Header bar primary (dark theme)</Paragraph>
-          <Switch
-            value={params.showTopPrimary}
-            onValueChange={value =>
-              navigation.setParams({
-                showTopPrimary: value,
-              })
-            }
-          />
-        </View>
-        <Appbar style={styles.bottom} primary={params.showBottomPrimary}>
-          <Appbar.Action icon="archive" onPress={() => {}} />
-          <Appbar.Action icon="email" onPress={() => {}} />
-          <Appbar.Action icon="label" onPress={() => {}} />
-          <Appbar.Action icon="delete" onPress={() => {}} />
-        </Appbar>
-        <FAB icon="reply" onPress={() => {}} style={styles.fab} />
+        {showLeftIcon && (
+          <Appbar.BackAction onPress={() => navigation.goBack()} />
+        )}
+        <Appbar.Content
+          title="Title"
+          subtitle={showSubtitle ? 'Subtitle' : null}
+        />
+        {showSearchIcon && <Appbar.Action icon="magnify" onPress={() => {}} />}
+        {showMoreIcon && <Appbar.Action icon={MORE_ICON} onPress={() => {}} />}
+      </Appbar.Header>
+    ),
+  });
+
+  return (
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
+      <View style={styles.row}>
+        <Paragraph>Left icon</Paragraph>
+        <Switch value={showLeftIcon} onValueChange={setShowLeftIcon} />
       </View>
-    );
-  }
-}
+      <View style={styles.row}>
+        <Paragraph>Subtitle</Paragraph>
+        <Switch value={showSubtitle} onValueChange={setShowSubtitle} />
+      </View>
+      <View style={styles.row}>
+        <Paragraph>Search icon</Paragraph>
+        <Switch value={showSearchIcon} onValueChange={setShowSearchIcon} />
+      </View>
+      <View style={styles.row}>
+        <Paragraph>More icon</Paragraph>
+        <Switch value={showMoreIcon} onValueChange={setShowMoreIcon} />
+      </View>
+      <View style={styles.row}>
+        <Paragraph>Custom Color</Paragraph>
+        <Switch value={showCustomColor} onValueChange={setShowCustomColor} />
+      </View>
+      <View style={styles.row}>
+        <Paragraph>Exact Dark Theme</Paragraph>
+        <Switch value={showExactTheme} onValueChange={setShowExactTheme} />
+      </View>
+      <Appbar
+        style={[styles.bottom]}
+        theme={{ mode: showExactTheme ? 'exact' : 'adaptive' }}
+      >
+        <Appbar.Action icon="archive" onPress={() => {}} />
+        <Appbar.Action icon="email" onPress={() => {}} />
+        <Appbar.Action icon="label" onPress={() => {}} />
+        <Appbar.Action icon="delete" onPress={() => {}} />
+      </Appbar>
+      <FAB icon="reply" onPress={() => {}} style={styles.fab} />
+    </View>
+  );
+};
+
+AppbarExample.title = 'Appbar';
+
+export default AppbarExample;
 
 const styles = StyleSheet.create({
   container: {
@@ -187,5 +116,3 @@ const styles = StyleSheet.create({
     bottom: 28,
   },
 });
-
-export default withTheme(AppbarExample);

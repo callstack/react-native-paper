@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { FlatList } from 'react-native';
-import { List, Divider, withTheme, Theme } from 'react-native-paper';
-import ActivityIndicatorExample from './Examples/ActivityIndicatorExample';
+import { List, Divider, useTheme } from 'react-native-paper';
+import { useSafeArea } from 'react-native-safe-area-context';
+import type { StackNavigationProp } from '@react-navigation/stack';
 
+import ActivityIndicatorExample from './Examples/ActivityIndicatorExample';
 import AppbarExample from './Examples/AppbarExample';
 import AvatarExample from './Examples/AvatarExample';
 import BadgeExample from './Examples/BadgeExample';
@@ -18,6 +20,7 @@ import DividerExample from './Examples/DividerExample';
 import FABExample from './Examples/FABExample';
 import IconButtonExample from './Examples/IconButtonExample';
 import ListAccordionExample from './Examples/ListAccordionExample';
+import ListAccordionExampleGroup from './Examples/ListAccordionGroupExample';
 import ListSectionExample from './Examples/ListSectionExample';
 import MenuExample from './Examples/MenuExample';
 import ProgressBarExample from './Examples/ProgressBarExample';
@@ -31,13 +34,12 @@ import TextExample from './Examples/TextExample';
 import TextInputExample from './Examples/TextInputExample';
 import ToggleButtonExample from './Examples/ToggleButtonExample';
 import TouchableRippleExample from './Examples/TouchableRippleExample';
+import ThemeExample from './Examples/ThemeExample';
 
-type Props = {
-  theme: Theme;
-  navigation: any;
-};
-
-export const examples: { [key: string]: any } = {
+export const examples: Record<
+  string,
+  React.ComponentType<any> & { title: string }
+> = {
   activityIndicator: ActivityIndicatorExample,
   appbar: AppbarExample,
   avatar: AvatarExample,
@@ -54,6 +56,7 @@ export const examples: { [key: string]: any } = {
   fab: FABExample,
   iconButton: IconButtonExample,
   listAccordion: ListAccordionExample,
+  listAccordionGroup: ListAccordionExampleGroup,
   listSection: ListSectionExample,
   menu: MenuExample,
   progressbar: ProgressBarExample,
@@ -67,41 +70,45 @@ export const examples: { [key: string]: any } = {
   textInput: TextInputExample,
   toggleButton: ToggleButtonExample,
   touchableRipple: TouchableRippleExample,
+  theme: ThemeExample,
 };
 
-const data = Object.keys(examples).map(id => ({ id, data: examples[id] }));
+type Props = {
+  navigation: StackNavigationProp<{ [key: string]: undefined }>;
+};
 
-class ExampleList extends React.Component<Props> {
-  static navigationOptions = {
-    title: 'Examples',
-  };
+type Item = {
+  id: string;
+  data: typeof examples[string];
+};
 
-  _renderItem = ({ item }: any) => (
+const data = Object.keys(examples).map(
+  (id): Item => ({ id, data: examples[id] })
+);
+
+export default function ExampleList({ navigation }: Props) {
+  const renderItem = ({ item }: { item: Item }) => (
     <List.Item
       title={item.data.title}
-      onPress={() => this.props.navigation.navigate(item.id)}
+      onPress={() => navigation.navigate(item.id)}
     />
   );
 
-  _keyExtractor = (item: { id: string }) => item.id;
+  const keyExtractor = (item: { id: string }) => item.id;
 
-  render() {
-    const {
-      theme: {
-        colors: { background },
-      },
-    } = this.props;
+  const { colors } = useTheme();
+  const safeArea = useSafeArea();
 
-    return (
-      <FlatList
-        contentContainerStyle={{ backgroundColor: background }}
-        ItemSeparatorComponent={Divider}
-        renderItem={this._renderItem}
-        keyExtractor={this._keyExtractor}
-        data={data}
-      />
-    );
-  }
+  return (
+    <FlatList
+      contentContainerStyle={{
+        backgroundColor: colors.background,
+        paddingBottom: safeArea.bottom,
+      }}
+      ItemSeparatorComponent={Divider}
+      renderItem={renderItem}
+      keyExtractor={keyExtractor}
+      data={data}
+    />
+  );
 }
-
-export default withTheme(ExampleList);

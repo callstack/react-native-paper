@@ -7,88 +7,60 @@ import {
   Paragraph,
   Switch,
   Colors,
-  withTheme,
-  Theme,
+  useTheme,
 } from 'react-native-paper';
 
-type Props = {
-  theme: Theme;
-};
+const BadgeExample = () => {
+  const [visible, setVisible] = React.useState<boolean>(true);
+  const {
+    colors: { background },
+  } = useTheme();
 
-type State = {
-  visible: boolean;
-};
-
-class BadgeExample extends React.Component<Props, State> {
-  static title = 'Badge';
-
-  state = {
-    visible: true,
-  };
-
-  render() {
-    const {
-      theme: {
-        colors: { background },
-      },
-    } = this.props;
-
-    return (
-      <View style={[styles.container, { backgroundColor: background }]}>
-        <View style={[styles.row, styles.item]}>
-          <Paragraph style={styles.label}>Show badges</Paragraph>
-          <Switch
-            value={this.state.visible}
-            onValueChange={visible => this.setState({ visible })}
-          />
-        </View>
-        <List.Section title="Text">
-          <View style={styles.row}>
-            <View style={styles.item}>
-              <IconButton
-                icon="palette-swatch"
-                size={36}
-                style={styles.button}
-              />
-              <Badge visible={this.state.visible} style={styles.badge}>
-                12
-              </Badge>
-            </View>
-            <View style={styles.item}>
-              <IconButton icon="inbox" size={36} style={styles.button} />
-              <Badge
-                visible={this.state.visible}
-                style={[styles.badge, { backgroundColor: Colors.blue500 }]}
-              >
-                999+
-              </Badge>
-            </View>
-          </View>
-        </List.Section>
-        <List.Section title="Dot">
-          <View style={styles.row}>
-            <View style={styles.item}>
-              <IconButton icon="book-open" size={36} style={styles.button} />
-              <Badge
-                visible={this.state.visible}
-                style={styles.badge}
-                size={8}
-              />
-            </View>
-            <View style={styles.item}>
-              <IconButton icon="receipt" size={36} style={styles.button} />
-              <Badge
-                visible={this.state.visible}
-                style={styles.badge}
-                size={8}
-              />
-            </View>
-          </View>
-        </List.Section>
+  return (
+    <View style={[styles.container, { backgroundColor: background }]}>
+      <View style={[styles.row, styles.item]}>
+        <Paragraph style={styles.label}>Show badges</Paragraph>
+        <Switch
+          value={visible}
+          onValueChange={(visible) => setVisible(visible)}
+        />
       </View>
-    );
-  }
-}
+      <List.Section title="Text">
+        <View style={styles.row}>
+          <View style={styles.item}>
+            <IconButton icon="palette-swatch" size={36} style={styles.button} />
+            <Badge visible={visible} style={styles.badge}>
+              12
+            </Badge>
+          </View>
+          <View style={styles.item}>
+            <IconButton icon="inbox" size={36} style={styles.button} />
+            <Badge
+              visible={visible}
+              style={[styles.badge, { backgroundColor: Colors.blue500 }]}
+            >
+              999+
+            </Badge>
+          </View>
+        </View>
+      </List.Section>
+      <List.Section title="Dot">
+        <View style={styles.row}>
+          <View style={styles.item}>
+            <IconButton icon="book-open" size={36} style={styles.button} />
+            <Badge visible={visible} style={styles.badge} size={8} />
+          </View>
+          <View style={styles.item}>
+            <IconButton icon="receipt" size={36} style={styles.button} />
+            <Badge visible={visible} style={styles.badge} size={8} />
+          </View>
+        </View>
+      </List.Section>
+    </View>
+  );
+};
+
+BadgeExample.title = 'Badge';
 
 const styles = StyleSheet.create({
   container: {
@@ -114,4 +86,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(BadgeExample);
+export default BadgeExample;

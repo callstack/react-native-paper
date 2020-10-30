@@ -1,3 +1,10 @@
+:root {
+  --theme-primary-color: #6200ee;
+}
+:root .dark-mode {
+  --theme-primary-color: #6200ee;
+}
+
 a,
 a:hover {
   color: #6200ee;
@@ -52,6 +59,6 @@ a:hover {
 
 @font-face {
   font-family: 'MaterialCommunityIcons';
-  src: url('../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf')
+  src: url('../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf')
     format('truetype');
 }

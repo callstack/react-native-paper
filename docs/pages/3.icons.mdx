@@ -8,13 +8,13 @@ import IconsList from './src/components/IconsList.js'
 
 ## Configuring icons
 
-Many of the components require the [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons) library to render correctly. If you're using Expo, you don't need to do anything extra, but if it's vanilla React Native project, you need link the library as described in the getting started guide.
+Many of the components require the [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons) library to render correctly. If you're using Expo, you don't need to do anything extra, but if it's a vanilla React Native project, you need link the library as described in the getting started guide.
 
-If you opted out of vector icons support using [babel-plugin-optional-require](https://github.com/satya164/babel-plugin-optional-require), you won't be able to use icon names for the icon prop anymore. Some components may not look correct without vector icons and might need extra configuration.
+If you opted out of vector icons support using [babel-plugin-optional-require](https://github.com/satya164/babel-plugin-optional-require), you won't be able to use icon names for the icon prop. Some components may not look correct without vector icons and might need extra configuration.
 
 ## Using the `icon` prop
 
-Many components such as `Button` accept an `icon` prop which is used to display an icon. The `icon` prop supports the following type of values:
+Many components such as `Button` accept an `icon` prop which is used to display an icon. The `icon` prop supports the following types of values:
 
 ### 1. An icon name
 
@@ -54,7 +54,7 @@ Local image:
 
 ### 3. A render function
 
-You can pass a function which returns a react element to be used an icon. The function receives an object with `size` and `color` properties as it's argument. element is used as is without any modification. However, it might get clipped if the provided element's size are bigger than what the component renders. It's upto you to make sure that the size of the element is correct.
+You can pass a function which returns a react element to be used an icon. The function receives an object with `size` and `color` properties as its arguments. The element is used as is without any modification. However, it might get clipped if the provided element's size is bigger than what the component renders. It's up to you to make sure that the size of the element is correct.
 
 Example:
 
@@ -73,7 +73,7 @@ Example:
 
 ### 4. Use custom icons
 
-If you want to use other icons than `MaterialCommunityIcons` you need to import your icons and pass it to `settings` prop within `PaperProvider`.
+If you want to use icons other than `MaterialCommunityIcons` you need to import the icons and pass it to the `settings` prop within `PaperProvider`.
 
 Example:
 
@@ -93,7 +93,7 @@ import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 ## RTL support
 
-If you want your icon to behave properly in a RTL environment, you can pass an object to the `icon` prop with shape: `{ source: { uri: 'https://path.to' }, direction : 'rtl' }`. `source` can be any of the values that the `icon` prop accepts in [option 1](#1.-an-icon-name) and [option 2](#2.-an-image-source). For `direction` you have few options:
+If you want your icon to behave properly in a RTL environment, you can pass an object to the `icon` prop with shape: `{ source: { uri: 'https://path.to' }, direction : 'rtl' }`. `source` can be any of the values that the `icon` prop accepts in [option 1](#1.-an-icon-name) and [option 2](#2.-an-image-source). For `direction` you have a few options:
 
 1. `auto` - uses the device language to determine if icon should be displayed from rtl. Uses the `I18nManager` module to get this info.
 2. `rtl` - flips the icon so that it is rtl, this is regardless of the device language.

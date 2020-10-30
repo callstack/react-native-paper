@@ -20,7 +20,7 @@ it('renders list item with left item', () => {
     .create(
       <ListItem
         title="First Item"
-        left={props => <ListIcon {...props} icon="folder" />}
+        left={(props) => <ListIcon {...props} icon="folder" />}
       />
     )
     .toJSON();
@@ -43,7 +43,7 @@ it('renders list item with left and right items', () => {
         title="First Item"
         description="Item description"
         left={() => <Text>GG</Text>}
-        right={props => <ListIcon {...props} icon="folder" />}
+        right={(props) => <ListIcon {...props} icon="folder" />}
       />
     )
     .toJSON();

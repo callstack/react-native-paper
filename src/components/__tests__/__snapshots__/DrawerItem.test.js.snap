@@ -18,9 +18,14 @@ exports[`renders DrawerItem with icon 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "selected": undefined,
+      }
+    }
     accessible={true}
-    isTVSelectable={true}
+    focusable={false}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -83,6 +88,7 @@ exports[`renders DrawerItem with icon 1`] = `
       </Text>
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -90,7 +96,6 @@ exports[`renders DrawerItem with icon 1`] = `
               "fontFamily": "System",
               "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -131,13 +136,14 @@ exports[`renders active DrawerItem 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={
-      Array [
-        "selected",
-      ]
+    accessibilityState={
+      Object {
+        "selected": true,
+      }
     }
     accessible={true}
-    isTVSelectable={true}
+    focusable={false}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -200,6 +206,7 @@ exports[`renders active DrawerItem 1`] = `
       </Text>
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -207,7 +214,6 @@ exports[`renders active DrawerItem 1`] = `
               "fontFamily": "System",
               "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -248,9 +254,14 @@ exports[`renders basic DrawerItem 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "selected": undefined,
+      }
+    }
     accessible={true}
-    isTVSelectable={true}
+    focusable={true}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -279,6 +290,7 @@ exports[`renders basic DrawerItem 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -286,7 +298,6 @@ exports[`renders basic DrawerItem 1`] = `
               "fontFamily": "System",
               "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {

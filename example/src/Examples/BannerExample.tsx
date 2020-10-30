@@ -8,90 +8,61 @@ import {
   Dimensions,
   Platform,
 } from 'react-native';
-import { Banner, withTheme, FAB, Theme } from 'react-native-paper';
-
-type Props = {
-  theme: Theme;
-};
-
-type State = {
-  visible: boolean;
-};
+import { Banner, FAB, useTheme } from 'react-native-paper';
 
 const PHOTOS = Array.from({ length: 24 }).map(
   (_, i) => `https://unsplash.it/300/300/?random&__id=${i}`
 );
 
-class BannerExample extends React.Component<Props, State> {
-  static title = 'Banner';
+const BannerExample = () => {
+  const [visible, setVisible] = React.useState<boolean>(true);
+  const {
+    colors: { background },
+  } = useTheme();
 
-  state = {
-    visible: true,
-  };
+  return (
+    <View style={[styles.container, { backgroundColor: background }]}>
+      <ScrollView>
+        <Banner
+          actions={[
+            {
+              label: 'Fix it',
+              onPress: () => setVisible(false),
+            },
+            {
+              label: 'Learn more',
+              onPress: () => setVisible(false),
+            },
+          ]}
+          icon={require('../../assets/images/email-icon.png')}
+          visible={visible}
+        >
+          Two line text string with two actions. One to two lines is preferable
+          on mobile.
+        </Banner>
+        <View style={styles.grid}>
+          {PHOTOS.map((uri) => (
+            <View key={uri} style={styles.item}>
+              <Image source={{ uri }} style={styles.photo} />
+            </View>
+          ))}
+        </View>
+      </ScrollView>
+      <SafeAreaView>
+        <View>
+          <FAB
+            icon="eye"
+            label={visible ? 'Hide banner' : 'Show banner'}
+            style={styles.fab}
+            onPress={() => setVisible(!visible)}
+          />
+        </View>
+      </SafeAreaView>
+    </View>
+  );
+};
 
-  render() {
-    const {
-      theme: {
-        colors: { background },
-      },
-    } = this.props;
-
-    return (
-      <View style={[styles.container, { backgroundColor: background }]}>
-        <ScrollView>
-          <Banner
-            actions={[
-              {
-                label: 'Fix it',
-                onPress: () => {
-                  this.setState({ visible: false });
-                },
-              },
-              {
-                label: 'Learn more',
-                onPress: () => {
-                  this.setState({ visible: false });
-                },
-              },
-            ]}
-            image={({ size }) => (
-              <Image
-                source={require('../../assets/images/email-icon.png')}
-                style={{
-                  width: size,
-                  height: size,
-                }}
-              />
-            )}
-            visible={this.state.visible}
-          >
-            Two line text string with two actions. One to two lines is
-            preferable on mobile.
-          </Banner>
-          <View style={styles.grid}>
-            {PHOTOS.map(uri => (
-              <View key={uri} style={styles.item}>
-                <Image source={{ uri }} style={styles.photo} />
-              </View>
-            ))}
-          </View>
-        </ScrollView>
-        <SafeAreaView>
-          <View>
-            <FAB
-              icon="eye"
-              label={this.state.visible ? 'Hide banner' : 'Show banner'}
-              style={styles.fab}
-              onPress={() =>
-                this.setState(state => ({ visible: !state.visible }))
-              }
-            />
-          </View>
-        </SafeAreaView>
-      </View>
-    );
-  }
-}
+BannerExample.title = 'Banner';
 
 const styles = StyleSheet.create({
   container: {
@@ -137,4 +108,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(BannerExample);
+export default BannerExample;

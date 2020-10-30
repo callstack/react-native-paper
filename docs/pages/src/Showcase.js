@@ -3,10 +3,12 @@
 import * as React from 'react';
 import { styled } from 'linaria/react';
 import color from 'color';
+import { Header } from 'component-docs/components';
 
 import GooglePlayIcon from '../../components/google-play-icon';
 import IphoneIcon from '../../components/iphone-icon';
 import Content from './components/Content';
+import GithubIcon from '../../components/github-icon';
 
 type Data = {
   color: string,
@@ -36,70 +38,132 @@ const data: Data[] = [
     image: 'showcase/darkhackernews.png',
     ios: 'https://itunes.apple.com/us/app/dark-hacker-news/id1459946382?mt=8',
   },
+  {
+    color: '#0ba360',
+    name: 'PandaDeals',
+    image: 'showcase/pandadeals.png',
+    android:
+      'https://play.google.com/store/apps/details?id=com.mattkoboski.couponsapp',
+    ios: 'https://apps.apple.com/pl/app/pandadeals/id1468755918',
+  },
+  {
+    color: '#A11E1E',
+    name: 'RaceCalendar',
+    image: 'showcase/racecalendar.png',
+    android:
+      'https://play.google.com/store/apps/details?id=in.micy.racecalendar',
+    ios: 'https://apps.apple.com/us/app/race-calendar/id1481539104',
+  },
+  {
+    color: '#4439A1',
+    name: 'Unicore',
+    image: 'showcase/unicore.png',
+    android: 'https://play.google.com/store/apps/details?id=com.atude.mywam',
+  },
+  {
+    color: '#19402E',
+    name: 'TracksNZ',
+    image: 'showcase/tracksnz.png',
+    android: 'https://play.google.com/store/apps/details?id=in.micy.tracksnz',
+    ios: 'https://apps.apple.com/nz/app/tracks-nz/id1488245855',
+  },
+  {
+    color: '#b985fc',
+    name: 'Astrale',
+    image: 'showcase/astrale.png',
+    github: 'https://github.com/jvidalv/astrale',
+    android: 'https://play.google.com/store/apps/details?id=josep.astrale',
+  },
+  {
+    color: '#29337a',
+    name: 'Lyra Collect',
+    image: 'showcase/lyracollect.png',
+    android:
+      'https://play.google.com/store/apps/details?id=com.lyra.lyracollect',
+    ios: 'https://apps.apple.com/fr/app/lyra-collect/id1469527737',
+  },
 ];
 
 export default class Showcase extends React.Component<{}> {
   render() {
     return (
-      <Content>
-        <h1>Who&apos;s using Paper?</h1>
-        <p>
-          Check out these apps built using Paper. Send us a{' '}
-          <a
-            href="https://github.com/callstack/react-native-paper/pulls"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            pull request
-          </a>{' '}
-          to add your app to this list.
-        </p>
-        <Gallery>
-          {data.map(item => {
-            const tintColor = color(item.color).isLight()
-              ? '#000000'
-              : '#FFFFFF';
-            return (
-              <div key={item.image}>
-                <ImageContainer>
-                  <Image src={item.image} alt="" />
-                  <Info style={{ backgroundColor: item.color }}>
-                    <AppName
-                      style={{
-                        color: tintColor,
-                      }}
-                    >
-                      {item.name}
-                    </AppName>
-                    <BadgeContainer>
-                      <a
-                        href={item.android || null}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ opacity: item.android ? 1 : 0.4 }}
+      <Container>
+        <Header logo="images/sidebar-logo.svg" />
+        <Content>
+          <h1>Who&apos;s using Paper?</h1>
+          <p>
+            Check out these apps built using Paper. Send us a{' '}
+            <a
+              href="https://github.com/callstack/react-native-paper/pulls"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              pull request
+            </a>{' '}
+            to add your app to this list.
+          </p>
+          <Gallery>
+            {data.map((item) => {
+              const tintColor = color(item.color).isLight()
+                ? '#000000'
+                : '#FFFFFF';
+              return (
+                <div key={item.image}>
+                  <ImageContainer>
+                    <Image src={item.image} alt="" />
+                    <Info style={{ backgroundColor: item.color }}>
+                      <AppName
+                        style={{
+                          color: tintColor,
+                        }}
                       >
-                        <GooglePlayIcon color={tintColor} />
-                      </a>
-                      <Separation />
-                      <a
-                        href={item.ios || null}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ opacity: item.ios ? 1 : 0.4 }}
-                      >
-                        <IphoneIcon color={tintColor} />
-                      </a>
-                    </BadgeContainer>
-                  </Info>
-                </ImageContainer>
-              </div>
-            );
-          })}
-        </Gallery>
-      </Content>
+                        {item.name}
+                      </AppName>
+                      <BadgeContainer>
+                        <a
+                          href={item.android || null}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ opacity: item.android ? 1 : 0.4 }}
+                        >
+                          <GooglePlayIcon color={tintColor} />
+                        </a>
+                        <Separation />
+                        <a
+                          href={item.ios || null}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ opacity: item.ios ? 1 : 0.4 }}
+                        >
+                          <IphoneIcon color={tintColor} />
+                        </a>
+                        <Separation />
+                        <a
+                          href={item.github || null}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ opacity: item.github ? 1 : 0.4 }}
+                        >
+                          <GithubIcon color={tintColor} />
+                        </a>
+                      </BadgeContainer>
+                    </Info>
+                  </ImageContainer>
+                </div>
+              );
+            })}
+          </Gallery>
+        </Content>
+      </Container>
     );
   }
 }
+
+const Container = styled.div`
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+`;
 
 const AppName = styled.h3`
   font-size: 16px;

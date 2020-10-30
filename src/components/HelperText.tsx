@@ -9,10 +9,10 @@ import {
 } from 'react-native';
 import AnimatedText from './Typography/AnimatedText';
 import { withTheme } from '../core/theming';
-import { Theme, $Omit } from '../types';
+import type { $Omit } from '../types';
 
 type Props = $Omit<
-  $Omit<React.ComponentProps<typeof Animated.Text>, 'padding'>,
+  $Omit<React.ComponentPropsWithRef<typeof AnimatedText>, 'padding'>,
   'type'
 > & {
   /**
@@ -35,16 +35,11 @@ type Props = $Omit<
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
   /**
    * TestID used for testing purposes
    */
   testID?: string;
-};
-
-type State = {
-  shown: Animated.Value;
-  textHeight: number;
 };
 
 /**
@@ -60,130 +55,109 @@ type State = {
  * import { View } from 'react-native';
  * import { HelperText, TextInput } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     text: ''
+ * const MyComponent = () => {
+ *   const [text, setText] = React.useState('');
+ *
+ *    const onChangeText = text => setText(text);
+ *
+ *   const hasErrors = () => {
+ *     return !text.includes('@');
  *   };
  *
- *   render(){
- *     return (
- *       <View>
- *         <TextInput
- *           label="Email"
- *           value={this.state.text}
- *           onChangeText={text => this.setState({ text })}
- *         />
- *         <HelperText
- *           type="error"
- *           visible={!this.state.text.includes('@')}
- *         >
- *           Email address is invalid!
- *         </HelperText>
- *       </View>
- *     );
- *   }
- * }
+ *  return (
+ *     <View>
+ *       <TextInput label="Email" value={text} onChangeText={onChangeText} />
+ *       <HelperText type="error" visible={hasErrors()}>
+ *         Email address is invalid!
+ *       </HelperText>
+ *     </View>
+ *   );
+ * };
+ *
+ * export default MyComponent;
  * ```
  */
-class HelperText extends React.PureComponent<Props, State> {
-  static defaultProps: Partial<Props> = {
-    type: 'info',
-    padding: 'normal',
-    visible: true,
-  };
+const HelperText = ({
+  style,
+  type = 'info',
+  visible = true,
+  theme,
+  onLayout,
+  padding = 'normal',
+  ...rest
+}: Props) => {
+  const { current: shown } = React.useRef<Animated.Value>(
+    new Animated.Value(visible ? 1 : 0)
+  );
 
-  state = {
-    shown: new Animated.Value(this.props.visible ? 1 : 0),
-    textHeight: 0,
-  };
+  let { current: textHeight } = React.useRef<number>(0);
 
-  componentDidUpdate(prevProps: Props, prevState: State) {
-    if (
-      prevProps.visible !== this.props.visible ||
-      prevState.textHeight !== this.state.textHeight
-    ) {
-      if (this.props.visible) {
-        this._showText();
-      } else {
-        this._hideText();
-      }
+  const { scale } = theme.animation;
+
+  React.useEffect(() => {
+    if (visible) {
+      // show text
+      Animated.timing(shown, {
+        toValue: 1,
+        duration: 150 * scale,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      // hide text
+      Animated.timing(shown, {
+        toValue: 0,
+        duration: 180 * scale,
+        useNativeDriver: true,
+      }).start();
     }
-  }
+  }, [visible, scale, shown]);
 
-  _showText = () => {
-    Animated.timing(this.state.shown, {
-      toValue: 1,
-      duration: 150,
-      useNativeDriver: true,
-    }).start();
+  const handleTextLayout = (e: LayoutChangeEvent) => {
+    //@ts-ignore Animated.Text typings are improved but something is still broken. It thinks onLayout is not callable.
+    onLayout?.(e);
+    textHeight = e.nativeEvent.layout.height;
   };
 
-  _hideText = () => {
-    Animated.timing(this.state.shown, {
-      toValue: 0,
-      duration: 180,
-      useNativeDriver: true,
-    }).start();
-  };
+  const { colors, dark } = theme;
 
-  _handleTextLayout = (e: LayoutChangeEvent) => {
-    this.props.onLayout && this.props.onLayout(e);
-    this.setState({
-      textHeight: e.nativeEvent.layout.height,
-    });
-  };
+  const textColor =
+    type === 'error'
+      ? colors.error
+      : color(colors.text)
+          .alpha(dark ? 0.7 : 0.54)
+          .rgb()
+          .string();
 
-  render() {
-    const {
-      style,
-      type,
-      visible,
-      theme,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      onLayout,
-      padding,
-      ...rest
-    } = this.props;
-    const { colors, dark } = theme;
-
-    const textColor =
-      this.props.type === 'error'
-        ? colors.error
-        : color(colors.text)
-            .alpha(dark ? 0.7 : 0.54)
-            .rgb()
-            .string();
-
-    return (
-      <AnimatedText
-        onLayout={this._handleTextLayout}
-        style={[
-          styles.text,
-          padding !== 'none' ? styles.padding : {},
-          {
-            color: textColor,
-            opacity: this.state.shown,
-            transform:
-              visible && type === 'error'
-                ? [
-                    {
-                      translateY: this.state.shown.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [-this.state.textHeight / 2, 0],
-                      }),
-                    },
-                  ]
-                : [],
-          },
-          style,
-        ]}
-        {...rest}
-      >
-        {this.props.children}
-      </AnimatedText>
-    );
-  }
-}
+  return (
+    // @ts-ignore
+    <AnimatedText
+      onLayout={handleTextLayout}
+      style={[
+        styles.text,
+        padding !== 'none' ? styles.padding : {},
+        {
+          color: textColor,
+          opacity: shown,
+          transform:
+            visible && type === 'error'
+              ? [
+                  {
+                    translateY: shown.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [-textHeight / 2, 0],
+                    }),
+                  },
+                ]
+              : [],
+        },
+        style,
+      ]}
+      {...rest}
+    >
+      {rest.children}
+    </AnimatedText>
+  );
+};
 
 const styles = StyleSheet.create({
   text: {

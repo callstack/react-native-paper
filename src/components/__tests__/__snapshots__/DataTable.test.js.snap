@@ -3,7 +3,8 @@
 exports[`renders data table cell 1`] = `
 <View
   accessible={true}
-  isTVSelectable={true}
+  focusable={false}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -34,9 +35,8 @@ exports[`renders data table cell 1`] = `
           "fontFamily": "System",
           "fontWeight": "400",
           "textAlign": "left",
-          "writingDirection": "ltr",
         },
-        null,
+        undefined,
       ]
     }
   >
@@ -64,6 +64,8 @@ exports[`renders data table header 1`] = `
 >
   <View
     accessible={true}
+    focusable={false}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -92,7 +94,6 @@ exports[`renders data table header 1`] = `
             "fontFamily": "System",
             "fontWeight": "400",
             "textAlign": "left",
-            "writingDirection": "ltr",
           },
           Array [
             Object {
@@ -114,6 +115,8 @@ exports[`renders data table header 1`] = `
   </View>
   <View
     accessible={true}
+    focusable={false}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -142,7 +145,6 @@ exports[`renders data table header 1`] = `
             "fontFamily": "System",
             "fontWeight": "400",
             "textAlign": "left",
-            "writingDirection": "ltr",
           },
           Array [
             Object {
@@ -188,7 +190,6 @@ exports[`renders data table pagination 1`] = `
           "fontFamily": "System",
           "fontWeight": "400",
           "textAlign": "left",
-          "writingDirection": "ltr",
         },
         Array [
           Object {
@@ -204,8 +205,13 @@ exports[`renders data table pagination 1`] = `
   />
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": false,
+      }
+    }
     accessible={true}
+    focusable={true}
     hitSlop={
       Object {
         "bottom": 6,
@@ -214,7 +220,7 @@ exports[`renders data table pagination 1`] = `
         "top": 6,
       }
     }
-    isTVSelectable={true}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -244,9 +250,7 @@ exports[`renders data table pagination 1`] = `
       ]
     }
   >
-    <View
-      style={null}
-    >
+    <View>
       <Text
         accessibilityElementsHidden={true}
         allowFontScaling={false}
@@ -285,8 +289,13 @@ exports[`renders data table pagination 1`] = `
   </View>
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": false,
+      }
+    }
     accessible={true}
+    focusable={true}
     hitSlop={
       Object {
         "bottom": 6,
@@ -295,7 +304,7 @@ exports[`renders data table pagination 1`] = `
         "top": 6,
       }
     }
-    isTVSelectable={true}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -325,9 +334,7 @@ exports[`renders data table pagination 1`] = `
       ]
     }
   >
-    <View
-      style={null}
-    >
+    <View>
       <Text
         accessibilityElementsHidden={true}
         allowFontScaling={false}
@@ -390,7 +397,6 @@ exports[`renders data table pagination with label 1`] = `
           "fontFamily": "System",
           "fontWeight": "400",
           "textAlign": "left",
-          "writingDirection": "ltr",
         },
         Array [
           Object {
@@ -408,8 +414,13 @@ exports[`renders data table pagination with label 1`] = `
   </Text>
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": false,
+      }
+    }
     accessible={true}
+    focusable={true}
     hitSlop={
       Object {
         "bottom": 6,
@@ -418,7 +429,7 @@ exports[`renders data table pagination with label 1`] = `
         "top": 6,
       }
     }
-    isTVSelectable={true}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -448,9 +459,7 @@ exports[`renders data table pagination with label 1`] = `
       ]
     }
   >
-    <View
-      style={null}
-    >
+    <View>
       <Text
         accessibilityElementsHidden={true}
         allowFontScaling={false}
@@ -489,8 +498,13 @@ exports[`renders data table pagination with label 1`] = `
   </View>
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": false,
+      }
+    }
     accessible={true}
+    focusable={true}
     hitSlop={
       Object {
         "bottom": 6,
@@ -499,7 +513,7 @@ exports[`renders data table pagination with label 1`] = `
         "top": 6,
       }
     }
-    isTVSelectable={true}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -529,9 +543,7 @@ exports[`renders data table pagination with label 1`] = `
       ]
     }
   >
-    <View
-      style={null}
-    >
+    <View>
       <Text
         accessibilityElementsHidden={true}
         allowFontScaling={false}
@@ -574,6 +586,8 @@ exports[`renders data table pagination with label 1`] = `
 exports[`renders data table title with press handler 1`] = `
 <View
   accessible={true}
+  focusable={true}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -650,7 +664,6 @@ exports[`renders data table title with press handler 1`] = `
           "fontFamily": "System",
           "fontWeight": "400",
           "textAlign": "left",
-          "writingDirection": "ltr",
         },
         Array [
           Object {
@@ -675,6 +688,8 @@ exports[`renders data table title with press handler 1`] = `
 exports[`renders data table title with sort icon 1`] = `
 <View
   accessible={true}
+  focusable={false}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -751,7 +766,6 @@ exports[`renders data table title with sort icon 1`] = `
           "fontFamily": "System",
           "fontWeight": "400",
           "textAlign": "left",
-          "writingDirection": "ltr",
         },
         Array [
           Object {
@@ -776,7 +790,8 @@ exports[`renders data table title with sort icon 1`] = `
 exports[`renders right aligned data table cell 1`] = `
 <View
   accessible={true}
-  isTVSelectable={true}
+  focusable={false}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -809,9 +824,8 @@ exports[`renders right aligned data table cell 1`] = `
           "fontFamily": "System",
           "fontWeight": "400",
           "textAlign": "left",
-          "writingDirection": "ltr",
         },
-        null,
+        undefined,
       ]
     }
   >
@@ -823,6 +837,8 @@ exports[`renders right aligned data table cell 1`] = `
 exports[`renders right aligned data table title 1`] = `
 <View
   accessible={true}
+  focusable={false}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -853,7 +869,6 @@ exports[`renders right aligned data table title 1`] = `
           "fontFamily": "System",
           "fontWeight": "400",
           "textAlign": "left",
-          "writingDirection": "ltr",
         },
         Array [
           Object {

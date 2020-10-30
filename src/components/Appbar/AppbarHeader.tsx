@@ -5,15 +5,12 @@ import {
   View,
   SafeAreaView,
   ViewStyle,
-  StatusBar,
 } from 'react-native';
 import overlay from '../../styles/overlay';
 import Appbar, { DEFAULT_APPBAR_HEIGHT } from './Appbar';
 import shadow from '../../styles/shadow';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
-import color from 'color';
 
 type Props = React.ComponentProps<typeof Appbar> & {
   /**
@@ -28,18 +25,13 @@ type Props = React.ComponentProps<typeof Appbar> & {
    */
   statusBarHeight?: number;
   /**
-   * Pass `true` if you want Appbar to use theme primary color even in dark mode.
-   * By default in dark mode Appbar use surface color.
-   */
-  primary?: boolean;
-  /**
    * Content of the header.
    */
   children: React.ReactNode;
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
   style?: StyleProp<ViewStyle>;
 };
 
@@ -63,92 +55,75 @@ type Props = React.ComponentProps<typeof Appbar> & {
  * import * as React from 'react';
  * import { Appbar } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   _goBack = () => console.log('Went back');
+ * const MyComponent = () => {
+ *   const _goBack = () => console.log('Went back');
  *
- *   _onSearch = () => console.log('Searching');
+ *   const _handleSearch = () => console.log('Searching');
  *
- *   _onMore = () => console.log('Shown more');
+ *   const _handleMore = () => console.log('Shown more');
  *
- *   render() {
- *     return (
- *       <Appbar.Header>
- *         <Appbar.BackAction
- *           onPress={this._goBack}
- *         />
- *         <Appbar.Content
- *           title="Title"
- *           subtitle="Subtitle"
- *         />
- *         <Appbar.Action icon="search" onPress={this._onSearch} />
- *         <Appbar.Action icon="more-vert" onPress={this._onMore} />
- *       </Appbar.Header>
- *     );
- *   }
- * }
+ *   return (
+ *     <Appbar.Header>
+ *       <Appbar.BackAction onPress={_goBack} />
+ *       <Appbar.Content title="Title" subtitle="Subtitle" />
+ *       <Appbar.Action icon="magnify" onPress={_handleSearch} />
+ *       <Appbar.Action icon="dots-vertical" onPress={_handleMore} />
+ *     </Appbar.Header>
+ *   );
+ * };
+ *
+ * export default MyComponent;
  * ```
  */
-class AppbarHeader extends React.Component<Props> {
-  static displayName = 'Appbar.Header';
+const AppbarHeader = (props: Props) => {
+  const {
+    // Don't use default props since we check it to know whether we should use SafeAreaView
+    statusBarHeight = APPROX_STATUSBAR_HEIGHT,
+    style,
+    dark,
+    ...rest
+  } = props;
 
-  render() {
-    const {
-      // Don't use default props since we check it to know whether we should use SafeAreaView
-      statusBarHeight = APPROX_STATUSBAR_HEIGHT,
-      style,
-      primary,
-      dark,
-      ...rest
-    } = this.props;
-    const { dark: isDarkTheme, colors } = rest.theme;
-    const {
-      height = DEFAULT_APPBAR_HEIGHT,
-      elevation = 4,
-      backgroundColor = isDarkTheme && !primary
-        ? overlay(4, colors.surface)
-        : colors.primary,
-      zIndex = 0,
-      ...restStyle
-    } = StyleSheet.flatten(style) || {};
+  const { dark: isDarkTheme, colors, mode } = rest.theme;
+  const {
+    height = DEFAULT_APPBAR_HEIGHT,
+    elevation = 4,
+    backgroundColor: customBackground,
+    zIndex = 0,
+    ...restStyle
+  }: ViewStyle = StyleSheet.flatten(style) || {};
+  const backgroundColor = customBackground
+    ? customBackground
+    : isDarkTheme && mode === 'adaptive'
+    ? overlay(elevation, colors.surface)
+    : colors.primary;
+  // Let the user override the behaviour
+  const Wrapper =
+    typeof props.statusBarHeight === 'number' ? View : SafeAreaView;
+  return (
+    <Wrapper
+      style={
+        [
+          { backgroundColor, zIndex, elevation },
+          shadow(elevation),
+        ] as StyleProp<ViewStyle>
+      }
+    >
+      <Appbar
+        style={[
+          //@ts-ignore Types of property 'backgroundColor' are incompatible.
+          { height, backgroundColor, marginTop: statusBarHeight },
+          styles.appbar,
+          restStyle,
+        ]}
+        dark={dark}
+        {...rest}
+      />
+    </Wrapper>
+  );
+};
 
-    // Let the user override the behaviour
-    const Wrapper =
-      typeof this.props.statusBarHeight === 'number' ? View : SafeAreaView;
-    let isDark;
-    if (typeof dark === 'boolean') {
-      isDark = dark;
-    } else {
-      isDark =
-        backgroundColor === 'transparent'
-          ? false
-          : !color(backgroundColor).isLight();
-    }
-    StatusBar.setBarStyle(isDark ? 'light-content' : 'dark-content');
-
-    return (
-      <Wrapper
-        style={
-          [
-            { backgroundColor, zIndex },
-            elevation && shadow(elevation),
-          ] as StyleProp<ViewStyle>
-        }
-      >
-        {/* $FlowFixMe: There seems to be conflict between Appbar's props and Header's props */}
-        <Appbar
-          style={[
-            { height, backgroundColor, marginTop: statusBarHeight },
-            styles.appbar,
-            restStyle,
-          ]}
-          dark={dark}
-          primary={primary}
-          {...rest}
-        />
-      </Wrapper>
-    );
-  }
-}
+AppbarHeader.displayName = 'Appbar.Header';
 
 const styles = StyleSheet.create({
   appbar: {

@@ -10,9 +10,8 @@ import {
 import { withTheme } from '../../core/theming';
 import Caption from './../Typography/Caption';
 import Title from './../Typography/Title';
-import { Theme } from '../../types';
 
-type Props = React.ComponentProps<typeof View> & {
+type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Text for the title. Note that this will only accept a string or `<Text>`-based node.
    */
@@ -22,6 +21,10 @@ type Props = React.ComponentProps<typeof View> & {
    */
   titleStyle?: StyleProp<TextStyle>;
   /**
+   * Number of lines for the title.
+   */
+  titleNumberOfLines?: number;
+  /**
    * Text for the subtitle. Note that this will only accept a string or `<Text>`-based node.
    */
   subtitle?: React.ReactNode;
@@ -29,6 +32,10 @@ type Props = React.ComponentProps<typeof View> & {
    * Style for the subtitle.
    */
   subtitleStyle?: StyleProp<TextStyle>;
+  /**
+   * Number of lines for the subtitle.
+   */
+  subtitleNumberOfLines?: number;
   /**
    * Callback which returns a React element to display on the left side.
    */
@@ -57,7 +64,7 @@ type Props = React.ComponentProps<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 const LEFT_SIZE = 40;
@@ -86,64 +93,65 @@ const LEFT_SIZE = 40;
  * export default MyComponent;
  * ```
  */
-class CardTitle extends React.Component<Props> {
-  static displayName = 'Card.Title';
+const CardTitle = ({
+  title,
+  titleStyle,
+  titleNumberOfLines = 1,
+  subtitle,
+  subtitleStyle,
+  subtitleNumberOfLines = 1,
+  left,
+  leftStyle,
+  right,
+  rightStyle,
+  style,
+}: Props) => {
+  return (
+    <View
+      style={[
+        styles.container,
+        { minHeight: subtitle || left || right ? 72 : 50 },
+        style,
+      ]}
+    >
+      {left ? (
+        <View style={[styles.left, leftStyle]}>
+          {left({
+            size: LEFT_SIZE,
+          })}
+        </View>
+      ) : null}
 
-  render() {
-    const {
-      left,
-      leftStyle,
-      right,
-      rightStyle,
-      subtitle,
-      subtitleStyle,
-      style,
-      title,
-      titleStyle,
-    } = this.props;
-
-    return (
-      <View
-        style={[
-          styles.container,
-          { height: subtitle || left || right ? 72 : 50 },
-          style,
-        ]}
-      >
-        {left ? (
-          <View style={[styles.left, leftStyle]}>
-            {left({
-              size: LEFT_SIZE,
-            })}
-          </View>
+      <View style={[styles.titles]}>
+        {title ? (
+          <Title
+            style={[
+              styles.title,
+              { marginBottom: subtitle ? 0 : 2 },
+              titleStyle,
+            ]}
+            numberOfLines={titleNumberOfLines}
+          >
+            {title}
+          </Title>
         ) : null}
 
-        <View style={[styles.titles]}>
-          {title ? (
-            <Title
-              style={[
-                styles.title,
-                { marginBottom: subtitle ? 0 : 2 },
-                titleStyle,
-              ]}
-              numberOfLines={1}
-            >
-              {title}
-            </Title>
-          ) : null}
-
-          {subtitle ? (
-            <Caption style={[styles.subtitle, subtitleStyle]} numberOfLines={1}>
-              {subtitle}
-            </Caption>
-          ) : null}
-        </View>
-
-        <View style={rightStyle}>{right ? right({ size: 24 }) : null}</View>
+        {subtitle ? (
+          <Caption
+            style={[styles.subtitle, subtitleStyle]}
+            numberOfLines={subtitleNumberOfLines}
+          >
+            {subtitle}
+          </Caption>
+        ) : null}
       </View>
-    );
-  }
-}
+
+      <View style={rightStyle}>{right ? right({ size: 24 }) : null}</View>
+    </View>
+  );
+};
+
+CardTitle.displayName = 'Card.Title';
 
 const styles = StyleSheet.create({
   container: {
@@ -164,7 +172,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    height: 50,
   },
 
   title: {

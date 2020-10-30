@@ -6,15 +6,14 @@ import {
   StyleProp,
   TextStyle,
 } from 'react-native';
-import color from 'color';
+import Color from 'color';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import { white } from '../../styles/colors';
-import { Theme } from '../../types';
 
 const defaultSize = 64;
 
-type Props = {
+type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Initials to show as the text in the `Avatar`.
    */
@@ -38,7 +37,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**
@@ -60,53 +59,53 @@ type Props = {
  * );
  * ```
  */
-class AvatarText extends React.Component<Props> {
-  static displayName = 'Avatar.Text';
+const AvatarText = ({
+  label,
+  size = defaultSize,
+  style,
+  theme,
+  labelStyle,
+  color,
+  ...rest
+}: Props) => {
+  const { backgroundColor = theme.colors.primary, ...restStyle } =
+    StyleSheet.flatten(style) || {};
+  const textColor =
+    color || (Color(backgroundColor).isLight() ? 'rgba(0, 0, 0, .54)' : white);
 
-  static defaultProps = {
-    size: defaultSize,
-  };
-
-  render() {
-    const { label, size = defaultSize, style, theme, labelStyle } = this.props;
-
-    const { backgroundColor = theme.colors.primary, ...restStyle } =
-      StyleSheet.flatten(style) || {};
-    const textColor =
-      this.props.color ||
-      (color(backgroundColor).isLight() ? 'rgba(0, 0, 0, .54)' : white);
-
-    return (
-      <View
+  return (
+    <View
+      style={[
+        {
+          width: size,
+          height: size,
+          borderRadius: size / 2,
+          backgroundColor,
+        },
+        styles.container,
+        restStyle,
+      ]}
+      {...rest}
+    >
+      <Text
         style={[
+          styles.text,
           {
-            width: size,
-            height: size,
-            borderRadius: size / 2,
-            backgroundColor,
+            color: textColor,
+            fontSize: size / 2,
+            lineHeight: size,
           },
-          styles.container,
-          restStyle,
+          labelStyle,
         ]}
+        numberOfLines={1}
       >
-        <Text
-          style={[
-            styles.text,
-            {
-              color: textColor,
-              fontSize: size / 2,
-              lineHeight: size,
-            },
-            labelStyle,
-          ]}
-          numberOfLines={1}
-        >
-          {label}
-        </Text>
-      </View>
-    );
-  }
-}
+        {label}
+      </Text>
+    </View>
+  );
+};
+
+AvatarText.displayName = 'Avatar.Text';
 
 const styles = StyleSheet.create({
   container: {

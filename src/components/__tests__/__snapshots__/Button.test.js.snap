@@ -16,9 +16,14 @@ exports[`renders button with color 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
     accessible={true}
-    isTVSelectable={true}
+    focusable={false}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -50,6 +55,7 @@ exports[`renders button with color 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -57,7 +63,6 @@ exports[`renders button with color 1`] = `
               "fontFamily": "System",
               "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -68,6 +73,9 @@ exports[`renders button with color 1`] = `
               },
               undefined,
               Object {
+                "textTransform": "uppercase",
+              },
+              Object {
                 "color": "#e91e63",
                 "fontFamily": "System",
                 "fontWeight": "500",
@@ -76,11 +84,109 @@ exports[`renders button with color 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
+              undefined,
             ],
           ]
         }
       >
-        CUSTOM BUTTON
+        Custom Button
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders button with custom testID 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "transparent",
+      "borderColor": "transparent",
+      "borderRadius": 4,
+      "borderStyle": "solid",
+      "borderWidth": 0,
+      "elevation": 0,
+      "minWidth": 64,
+    }
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
+    accessible={true}
+    focusable={false}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 4,
+        },
+      ]
+    }
+    testID="custom:testID"
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        selectable={false}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "System",
+              "fontWeight": "400",
+              "textAlign": "left",
+            },
+            Array [
+              Object {
+                "letterSpacing": 1,
+                "marginHorizontal": 16,
+                "marginVertical": 9,
+                "textAlign": "center",
+              },
+              undefined,
+              Object {
+                "textTransform": "uppercase",
+              },
+              Object {
+                "color": "#6200ee",
+                "fontFamily": "System",
+                "fontWeight": "500",
+              },
+              Object {
+                "fontFamily": "System",
+                "fontWeight": "500",
+              },
+              undefined,
+            ],
+          ]
+        }
+      >
+        Button with custom testID
       </Text>
     </View>
   </View>
@@ -103,9 +209,14 @@ exports[`renders button with icon 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
     accessible={true}
-    isTVSelectable={true}
+    focusable={false}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -140,7 +251,6 @@ exports[`renders button with icon 1`] = `
           Object {
             "marginLeft": 12,
             "marginRight": -4,
-            "width": 16,
           }
         }
       >
@@ -181,6 +291,7 @@ exports[`renders button with icon 1`] = `
       </View>
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -188,7 +299,6 @@ exports[`renders button with icon 1`] = `
               "fontFamily": "System",
               "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -199,6 +309,9 @@ exports[`renders button with icon 1`] = `
               },
               undefined,
               Object {
+                "textTransform": "uppercase",
+              },
+              Object {
                 "color": "#6200ee",
                 "fontFamily": "System",
                 "fontWeight": "500",
@@ -207,11 +320,12 @@ exports[`renders button with icon 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
+              undefined,
             ],
           ]
         }
       >
-        ICON BUTTON
+        Icon Button
       </Text>
     </View>
   </View>
@@ -241,9 +355,14 @@ exports[`renders contained contained with mode 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
     accessible={true}
-    isTVSelectable={true}
+    focusable={false}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -275,6 +394,7 @@ exports[`renders contained contained with mode 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -282,7 +402,6 @@ exports[`renders contained contained with mode 1`] = `
               "fontFamily": "System",
               "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -293,6 +412,9 @@ exports[`renders contained contained with mode 1`] = `
               },
               undefined,
               Object {
+                "textTransform": "uppercase",
+              },
+              Object {
                 "color": "#ffffff",
                 "fontFamily": "System",
                 "fontWeight": "500",
@@ -301,11 +423,12 @@ exports[`renders contained contained with mode 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
+              undefined,
             ],
           ]
         }
       >
-        CONTAINED BUTTON
+        Contained Button
       </Text>
     </View>
   </View>
@@ -328,13 +451,14 @@ exports[`renders disabled button 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={
-      Array [
-        "disabled",
-      ]
+    accessibilityState={
+      Object {
+        "disabled": true,
+      }
     }
     accessible={true}
-    isTVSelectable={true}
+    focusable={false}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -366,6 +490,7 @@ exports[`renders disabled button 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -373,7 +498,6 @@ exports[`renders disabled button 1`] = `
               "fontFamily": "System",
               "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -384,6 +508,9 @@ exports[`renders disabled button 1`] = `
               },
               undefined,
               Object {
+                "textTransform": "uppercase",
+              },
+              Object {
                 "color": "rgba(0, 0, 0, 0.32)",
                 "fontFamily": "System",
                 "fontWeight": "500",
@@ -392,11 +519,12 @@ exports[`renders disabled button 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
+              undefined,
             ],
           ]
         }
       >
-        DISABLED BUTTON
+        Disabled Button
       </Text>
     </View>
   </View>
@@ -419,9 +547,14 @@ exports[`renders loading button 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
     accessible={true}
-    isTVSelectable={true}
+    focusable={false}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -452,6 +585,8 @@ exports[`renders loading button 1`] = `
       }
     >
       <View
+        accessibilityRole="progressbar"
+        accessible={true}
         style={
           Array [
             Object {
@@ -461,12 +596,12 @@ exports[`renders loading button 1`] = `
             Object {
               "marginLeft": 12,
               "marginRight": -4,
-              "width": 16,
             },
           ]
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "height": 16,
@@ -636,6 +771,7 @@ exports[`renders loading button 1`] = `
       </View>
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -643,7 +779,6 @@ exports[`renders loading button 1`] = `
               "fontFamily": "System",
               "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -654,6 +789,9 @@ exports[`renders loading button 1`] = `
               },
               undefined,
               Object {
+                "textTransform": "uppercase",
+              },
+              Object {
                 "color": "#6200ee",
                 "fontFamily": "System",
                 "fontWeight": "500",
@@ -662,11 +800,12 @@ exports[`renders loading button 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
+              undefined,
             ],
           ]
         }
       >
-        LOADING BUTTON
+        Loading Button
       </Text>
     </View>
   </View>
@@ -689,9 +828,14 @@ exports[`renders outlined button with mode 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
     accessible={true}
-    isTVSelectable={true}
+    focusable={false}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -723,6 +867,7 @@ exports[`renders outlined button with mode 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -730,7 +875,6 @@ exports[`renders outlined button with mode 1`] = `
               "fontFamily": "System",
               "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -741,6 +885,9 @@ exports[`renders outlined button with mode 1`] = `
               },
               undefined,
               Object {
+                "textTransform": "uppercase",
+              },
+              Object {
                 "color": "#6200ee",
                 "fontFamily": "System",
                 "fontWeight": "500",
@@ -749,11 +896,12 @@ exports[`renders outlined button with mode 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
+              undefined,
             ],
           ]
         }
       >
-        OUTLINED BUTTON
+        Outlined Button
       </Text>
     </View>
   </View>
@@ -776,9 +924,14 @@ exports[`renders text button by default 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
     accessible={true}
-    isTVSelectable={true}
+    focusable={false}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -810,6 +963,7 @@ exports[`renders text button by default 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -817,7 +971,6 @@ exports[`renders text button by default 1`] = `
               "fontFamily": "System",
               "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -828,6 +981,9 @@ exports[`renders text button by default 1`] = `
               },
               undefined,
               Object {
+                "textTransform": "uppercase",
+              },
+              Object {
                 "color": "#6200ee",
                 "fontFamily": "System",
                 "fontWeight": "500",
@@ -836,11 +992,12 @@ exports[`renders text button by default 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
+              undefined,
             ],
           ]
         }
       >
-        TEXT BUTTON
+        Text Button
       </Text>
     </View>
   </View>
@@ -863,9 +1020,14 @@ exports[`renders text button with mode 1`] = `
 >
   <View
     accessibilityRole="button"
-    accessibilityStates={Array []}
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
     accessible={true}
-    isTVSelectable={true}
+    focusable={false}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -897,6 +1059,7 @@ exports[`renders text button with mode 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -904,7 +1067,6 @@ exports[`renders text button with mode 1`] = `
               "fontFamily": "System",
               "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -915,6 +1077,9 @@ exports[`renders text button with mode 1`] = `
               },
               undefined,
               Object {
+                "textTransform": "uppercase",
+              },
+              Object {
                 "color": "#6200ee",
                 "fontFamily": "System",
                 "fontWeight": "500",
@@ -923,11 +1088,12 @@ exports[`renders text button with mode 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
+              undefined,
             ],
           ]
         }
       >
-        TEXT BUTTON
+        Text Button
       </Text>
     </View>
   </View>

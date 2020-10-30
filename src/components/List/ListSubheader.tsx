@@ -3,13 +3,12 @@ import { StyleSheet, StyleProp, TextStyle } from 'react-native';
 import color from 'color';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 
 type Props = React.ComponentProps<typeof Text> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
   /**
    * Style that is passed to Text element.
    */
@@ -24,36 +23,26 @@ type Props = React.ComponentProps<typeof Text> & {
  * import * as React from 'react';
  * import { List } from 'react-native-paper';
  *
- * class MyComponent extends React.Component {
- *  render () {
- *    return <List.Subheader>My List Title</List.Subheader>;
- *  }
- * }
+ * const MyComponent = () => <List.Subheader>My List Title</List.Subheader>;
  *
  * export default MyComponent;
  * ```
  */
-class ListSubheader extends React.Component<Props> {
-  static displayName = 'List.Subheader';
+const ListSubheader = ({ style, theme, ...rest }: Props) => {
+  const { colors, fonts } = theme;
+  const font = fonts.medium;
+  const textColor = color(colors.text).alpha(0.54).rgb().string();
 
-  render() {
-    const { style, theme, ...rest } = this.props;
-    const { colors, fonts } = theme;
-    const font = fonts.medium;
-    const textColor = color(colors.text)
-      .alpha(0.54)
-      .rgb()
-      .string();
+  return (
+    <Text
+      numberOfLines={1}
+      {...rest}
+      style={[styles.container, { color: textColor, ...font }, style]}
+    />
+  );
+};
 
-    return (
-      <Text
-        numberOfLines={1}
-        {...rest}
-        style={[styles.container, { color: textColor, ...font }, style]}
-      />
-    );
-  }
-}
+ListSubheader.displayName = 'List.Subheader';
 
 const styles = StyleSheet.create({
   container: {

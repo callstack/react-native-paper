@@ -54,7 +54,7 @@ function appendSnackLink() {
 
 appendSnackLink();
 
-var mutationObserver = new MutationObserver(mutations => {
+var mutationObserver = new MutationObserver((mutations) => {
   mutations.forEach(appendSnackLink);
 });
 

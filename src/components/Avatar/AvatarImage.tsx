@@ -1,22 +1,27 @@
 import * as React from 'react';
 import {
   Image,
+  ImageSourcePropType,
   StyleSheet,
   View,
   ViewStyle,
   StyleProp,
-  ImageSourcePropType,
 } from 'react-native';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 
 const defaultSize = 64;
 
-type Props = {
+export type AvatarImageSource =
+  | ImageSourcePropType
+  | ((props: { size: number }) => React.ReactNode);
+
+type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Image to display for the `Avatar`.
+   * It accepts a standard React Native Image `source` prop
+   * Or a function that returns an `Image`.
    */
-  source: ImageSourcePropType;
+  source: AvatarImageSource;
   /**
    * Size of the avatar.
    */
@@ -25,7 +30,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**
@@ -45,41 +50,44 @@ type Props = {
  * const MyComponent = () => (
  *   <Avatar.Image size={24} source={require('../assets/avatar.png')} />
  * );
+ * export default MyComponent
  * ```
  */
-class AvatarImage extends React.Component<Props> {
-  static displayName = 'Avatar.Image';
+const AvatarImage = ({
+  size = defaultSize,
+  source,
+  style,
+  theme,
+  ...rest
+}: Props) => {
+  const { colors } = theme;
 
-  static defaultProps = {
-    size: defaultSize,
-  };
+  const { backgroundColor = colors.primary } = StyleSheet.flatten(style) || {};
 
-  render() {
-    const { size = defaultSize, source, style, theme } = this.props;
-    const { colors } = theme;
-
-    const { backgroundColor = colors.primary } =
-      StyleSheet.flatten(style) || {};
-
-    return (
-      <View
-        style={[
-          {
-            width: size,
-            height: size,
-            borderRadius: size / 2,
-            backgroundColor,
-          },
-          style,
-        ]}
-      >
+  return (
+    <View
+      style={[
+        {
+          width: size,
+          height: size,
+          borderRadius: size / 2,
+          backgroundColor,
+        },
+        style,
+      ]}
+      {...rest}
+    >
+      {typeof source === 'function' && source({ size })}
+      {typeof source !== 'function' && (
         <Image
           source={source}
           style={{ width: size, height: size, borderRadius: size / 2 }}
         />
-      </View>
-    );
-  }
-}
+      )}
+    </View>
+  );
+};
+
+AvatarImage.displayName = 'Avatar.Image';
 
 export default withTheme(AvatarImage);

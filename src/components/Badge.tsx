@@ -1,19 +1,12 @@
 import * as React from 'react';
-import {
-  Animated,
-  StyleSheet,
-  StyleProp,
-  TextInput,
-  ViewStyle,
-} from 'react-native';
+import { Animated, StyleSheet, StyleProp, TextStyle } from 'react-native';
 import color from 'color';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
-import { Theme } from '../types';
 
 const defaultSize = 20;
 
-type Props = React.ComponentProps<typeof TextInput> & {
+type Props = React.ComponentProps<typeof Animated.Text> & {
   /**
    * Whether the badge is visible
    */
@@ -26,20 +19,28 @@ type Props = React.ComponentProps<typeof TextInput> & {
    * Size of the `Badge`.
    */
   size?: number;
-  style?: StyleProp<ViewStyle>;
+  style?: StyleProp<TextStyle>;
+  ref?: React.RefObject<typeof Animated.Text>;
   /**
    * @optional
    */
-  theme: Theme;
-};
-
-type State = {
-  opacity: Animated.Value;
+  theme: ReactNativePaper.Theme;
 };
 
 /**
  * Badges are small status descriptors for UI elements.
  * A badge consists of a small circle, typically containing a number or other short set of characters, that appears in proximity to another object.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="small" src="screenshots/badge-1.png" />
+ *     <figcaption>Badge with content</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img class="small" src="screenshots/badge-2.png" />
+ *     <figcaption>Badge without content</figcaption>
+ *   </figure>
+ * </div>
  *
  * ## Usage
  * ```js
@@ -53,62 +54,61 @@ type State = {
  * export default MyComponent;
  * ```
  */
-class Badge extends React.Component<Props, State> {
-  static defaultProps = {
-    visible: true,
-    size: defaultSize,
-  };
+const Badge = ({
+  children,
+  size = defaultSize,
+  style,
+  theme,
+  visible = true,
+  ...rest
+}: Props) => {
+  const { current: opacity } = React.useRef<Animated.Value>(
+    new Animated.Value(visible ? 1 : 0)
+  );
 
-  state = {
-    opacity: new Animated.Value(this.props.visible ? 1 : 0),
-  };
+  const {
+    animation: { scale },
+  } = theme;
 
-  componentDidUpdate(prevProps: Props) {
-    const { visible } = this.props;
+  React.useEffect(() => {
+    Animated.timing(opacity, {
+      toValue: visible ? 1 : 0,
+      duration: 150 * scale,
+      useNativeDriver: true,
+    }).start();
+  }, [visible, opacity, scale]);
 
-    if (visible !== prevProps.visible) {
-      Animated.timing(this.state.opacity, {
-        toValue: visible ? 1 : 0,
-        duration: 150,
-        useNativeDriver: true,
-      }).start();
-    }
-  }
+  const { backgroundColor = theme.colors.notification, ...restStyle } =
+    StyleSheet.flatten(style) || {};
+  const textColor = color(backgroundColor).isLight() ? black : white;
 
-  render() {
-    const { children, size = defaultSize, style, theme } = this.props;
-    const { opacity } = this.state;
+  const borderRadius = size / 2;
 
-    const { backgroundColor = theme.colors.notification, ...restStyle } =
-      StyleSheet.flatten(style) || {};
-    const textColor = color(backgroundColor).isLight() ? black : white;
-
-    const borderRadius = size / 2;
-
-    return (
-      <Animated.Text
-        numberOfLines={1}
-        style={[
-          {
-            opacity,
-            backgroundColor,
-            color: textColor,
-            fontSize: size * 0.5,
-            ...theme.fonts.regular,
-            lineHeight: size,
-            height: size,
-            minWidth: size,
-            borderRadius,
-          },
-          styles.container,
-          restStyle,
-        ]}
-      >
-        {children}
-      </Animated.Text>
-    );
-  }
-}
+  return (
+    // @ts-ignore
+    <Animated.Text
+      numberOfLines={1}
+      style={[
+        {
+          opacity,
+          backgroundColor,
+          color: textColor,
+          fontSize: size * 0.5,
+          ...theme.fonts.regular,
+          lineHeight: size,
+          height: size,
+          minWidth: size,
+          borderRadius,
+        },
+        styles.container,
+        restStyle,
+      ]}
+      {...rest}
+    >
+      {children}
+    </Animated.Text>
+  );
+};
 
 export default withTheme(Badge);
 

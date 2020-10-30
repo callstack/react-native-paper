@@ -3,12 +3,13 @@
 exports[`renders disabled icon button 1`] = `
 <View
   accessibilityRole="button"
-  accessibilityStates={
-    Array [
-      "disabled",
-    ]
+  accessibilityState={
+    Object {
+      "disabled": true,
+    }
   }
   accessible={true}
+  focusable={false}
   hitSlop={
     Object {
       "bottom": 6,
@@ -17,7 +18,7 @@ exports[`renders disabled icon button 1`] = `
       "top": 6,
     }
   }
-  isTVSelectable={true}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -49,9 +50,7 @@ exports[`renders disabled icon button 1`] = `
     ]
   }
 >
-  <View
-    style={null}
-  >
+  <View>
     <Text
       accessibilityElementsHidden={true}
       allowFontScaling={false}
@@ -93,8 +92,13 @@ exports[`renders disabled icon button 1`] = `
 exports[`renders icon button by default 1`] = `
 <View
   accessibilityRole="button"
-  accessibilityStates={Array []}
+  accessibilityState={
+    Object {
+      "disabled": undefined,
+    }
+  }
   accessible={true}
+  focusable={false}
   hitSlop={
     Object {
       "bottom": 6,
@@ -103,7 +107,7 @@ exports[`renders icon button by default 1`] = `
       "top": 6,
     }
   }
-  isTVSelectable={true}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -133,9 +137,7 @@ exports[`renders icon button by default 1`] = `
     ]
   }
 >
-  <View
-    style={null}
-  >
+  <View>
     <Text
       accessibilityElementsHidden={true}
       allowFontScaling={false}
@@ -177,8 +179,13 @@ exports[`renders icon button by default 1`] = `
 exports[`renders icon button with color 1`] = `
 <View
   accessibilityRole="button"
-  accessibilityStates={Array []}
+  accessibilityState={
+    Object {
+      "disabled": undefined,
+    }
+  }
   accessible={true}
+  focusable={false}
   hitSlop={
     Object {
       "bottom": 6,
@@ -187,7 +194,7 @@ exports[`renders icon button with color 1`] = `
       "top": 6,
     }
   }
-  isTVSelectable={true}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -217,9 +224,7 @@ exports[`renders icon button with color 1`] = `
     ]
   }
 >
-  <View
-    style={null}
-  >
+  <View>
     <Text
       accessibilityElementsHidden={true}
       allowFontScaling={false}
@@ -261,8 +266,13 @@ exports[`renders icon button with color 1`] = `
 exports[`renders icon button with size 1`] = `
 <View
   accessibilityRole="button"
-  accessibilityStates={Array []}
+  accessibilityState={
+    Object {
+      "disabled": undefined,
+    }
+  }
   accessible={true}
+  focusable={false}
   hitSlop={
     Object {
       "bottom": 6,
@@ -271,7 +281,7 @@ exports[`renders icon button with size 1`] = `
       "top": 6,
     }
   }
-  isTVSelectable={true}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -301,9 +311,7 @@ exports[`renders icon button with size 1`] = `
     ]
   }
 >
-  <View
-    style={null}
-  >
+  <View>
     <Text
       accessibilityElementsHidden={true}
       allowFontScaling={false}
@@ -345,8 +353,13 @@ exports[`renders icon button with size 1`] = `
 exports[`renders icon change animated 1`] = `
 <View
   accessibilityRole="button"
-  accessibilityStates={Array []}
+  accessibilityState={
+    Object {
+      "disabled": undefined,
+    }
+  }
   accessible={true}
+  focusable={false}
   hitSlop={
     Object {
       "bottom": 6,
@@ -355,7 +368,7 @@ exports[`renders icon change animated 1`] = `
       "top": 6,
     }
   }
-  isTVSelectable={true}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -385,9 +398,7 @@ exports[`renders icon change animated 1`] = `
     ]
   }
 >
-  <View
-    style={null}
-  >
+  <View>
     <View
       style={
         Array [

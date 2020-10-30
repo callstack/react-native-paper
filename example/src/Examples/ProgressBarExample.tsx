@@ -5,87 +5,67 @@ import {
   ProgressBar,
   Paragraph,
   Colors,
-  withTheme,
-  Theme,
+  useTheme,
 } from 'react-native-paper';
 
-type Props = {
-  theme: Theme;
-};
+const ProgressBarExample = () => {
+  const [visible, setVisible] = React.useState<boolean>(true);
+  const [progress, setProgress] = React.useState<number>(0.3);
 
-type State = {
-  progress: number;
-  visible: boolean;
-};
+  const {
+    colors: { background },
+  } = useTheme();
 
-class ProgressBarExample extends React.Component<Props, State> {
-  static title = 'Progress Bar';
+  return (
+    <View style={[styles.container, { backgroundColor: background }]}>
+      <Button onPress={() => setVisible(!visible)}>Toggle visible</Button>
+      <Button onPress={() => setProgress(Math.random())}>
+        Random progress
+      </Button>
 
-  state = {
-    progress: 0.3,
-    visible: true,
-  };
-
-  render() {
-    const {
-      theme: {
-        colors: { background },
-      },
-    } = this.props;
-
-    return (
-      <View style={[styles.container, { backgroundColor: background }]}>
-        <Button onPress={() => this.setState({ visible: !this.state.visible })}>
-          Toggle visible
-        </Button>
-        <Button onPress={() => this.setState({ progress: Math.random() })}>
-          Random progress
-        </Button>
-
-        <View style={styles.row}>
-          <Paragraph>Default ProgressBar </Paragraph>
-          <ProgressBar
-            progress={this.state.progress}
-            visible={this.state.visible}
-          />
-        </View>
-
-        <View style={styles.row}>
-          <Paragraph>Indeterminate ProgressBar</Paragraph>
-          <ProgressBar indeterminate visible={this.state.visible} />
-        </View>
-
-        <View style={styles.row}>
-          <Paragraph>ProgressBar with custom color</Paragraph>
-          <ProgressBar
-            progress={this.state.progress}
-            visible={this.state.visible}
-            color={Colors.red800}
-          />
-        </View>
-
-        <View style={styles.row}>
-          <Paragraph>ProgressBar with custom background color</Paragraph>
-          <ProgressBar
-            progress={this.state.progress}
-            visible={this.state.visible}
-            color={Colors.red800}
-            style={{ backgroundColor: Colors.teal500 }}
-          />
-        </View>
-
-        <View style={styles.row}>
-          <Paragraph>ProgressBar with custom height</Paragraph>
-          <ProgressBar
-            progress={this.state.progress}
-            visible={this.state.visible}
-            style={{ height: 20 }}
-          />
-        </View>
+      <View style={styles.row}>
+        <Paragraph>Default ProgressBar </Paragraph>
+        <ProgressBar progress={progress} visible={visible} />
       </View>
-    );
-  }
-}
+
+      <View style={styles.row}>
+        <Paragraph>Indeterminate ProgressBar</Paragraph>
+        <ProgressBar indeterminate visible={visible} />
+      </View>
+
+      <View style={styles.row}>
+        <Paragraph>ProgressBar with custom color</Paragraph>
+        <ProgressBar
+          progress={progress}
+          visible={visible}
+          color={Colors.red800}
+        />
+      </View>
+
+      <View style={styles.row}>
+        <Paragraph>ProgressBar with custom background color</Paragraph>
+        <ProgressBar
+          progress={progress}
+          visible={visible}
+          color={Colors.red800}
+          style={{ backgroundColor: Colors.teal500 }}
+        />
+      </View>
+
+      <View style={styles.row}>
+        <Paragraph>ProgressBar with custom height</Paragraph>
+        <ProgressBar
+          progress={progress}
+          visible={visible}
+          style={{ height: 20 }}
+        />
+      </View>
+    </View>
+  );
+};
+
+ProgressBarExample.title = 'Progress Bar';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -97,4 +77,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(ProgressBarExample);
+export default ProgressBarExample;

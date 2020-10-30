@@ -4,18 +4,23 @@ import {
   TextInput as NativeTextInput,
   Platform,
   LayoutChangeEvent,
+  StyleProp,
+  TextStyle,
 } from 'react-native';
-
 import TextInputOutlined from './TextInputOutlined';
 import TextInputFlat from './TextInputFlat';
+import TextInputIcon from './Adornment/TextInputIcon';
+import TextInputAffix from './Adornment/TextInputAffix';
 import { withTheme } from '../../core/theming';
-import { RenderProps, State } from './types';
-import { Theme } from '../../types';
+import type { RenderProps, State } from './types';
+import type { $Omit } from '../../types';
 
 const BLUR_ANIMATION_DURATION = 180;
 const FOCUS_ANIMATION_DURATION = 150;
 
-export type TextInputProps = React.ComponentProps<typeof NativeTextInput> & {
+export type TextInputProps = React.ComponentPropsWithRef<
+  typeof NativeTextInput
+> & {
   /**
    * Mode of the TextInput.
    * - `flat` - flat input with an underline.
@@ -25,6 +30,8 @@ export type TextInputProps = React.ComponentProps<typeof NativeTextInput> & {
    * This component render TextInputOutlined or TextInputFlat based on that props
    */
   mode?: 'flat' | 'outlined';
+  left?: React.ReactNode;
+  right?: React.ReactNode;
   /**
    * If true, user won't be able to interact with the component.
    */
@@ -53,10 +60,6 @@ export type TextInputProps = React.ComponentProps<typeof NativeTextInput> & {
    * Underline color of the input.
    */
   underlineColor?: string;
-  /**
-   * Whether to apply padding to label and input.
-   */
-  padding?: 'none' | 'normal';
   /**
    * Sets min height with densed layout. For `TextInput` in `flat` mode
    * height is `64dp` or in dense layout - `52dp` with label or `40dp` without label.
@@ -108,12 +111,14 @@ export type TextInputProps = React.ComponentProps<typeof NativeTextInput> & {
    * Pass `fontSize` prop to modify the font size inside `TextInput`.
    * Pass `height` prop to set `TextInput` height. When `height` is passed,
    * `dense` prop will affect only input's `paddingVertical`.
+   * Pass `paddingHorizontal` to modify horizontal padding.
+   * This can be used to get MD Guidelines v1 TextInput look.
    */
-  style?: any;
+  style?: StyleProp<TextStyle>;
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**
@@ -143,30 +148,33 @@ export type TextInputProps = React.ComponentProps<typeof NativeTextInput> & {
  * import * as React from 'react';
  * import { TextInput } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     text: ''
- *   };
+ * const MyComponent = () => {
+ *   const [text, setText] = React.useState('');
  *
- *   render(){
- *     return (
- *       <TextInput
- *         label='Email'
- *         value={this.state.text}
- *         onChangeText={text => this.setState({ text })}
- *       />
- *     );
- *   }
- * }
+ *   return (
+ *     <TextInput
+ *       label="Email"
+ *       value={text}
+ *       onChangeText={text => setText(text)}
+ *     />
+ *   );
+ * };
+ *
+ * export default MyComponent;
  * ```
  *
  * @extends TextInput props https://facebook.github.io/react-native/docs/textinput.html#props
  */
 
 class TextInput extends React.Component<TextInputProps, State> {
+  // @component ./Adornment/TextInputIcon.tsx
+  static Icon = TextInputIcon;
+
+  // @component ./Adornment/TextInputAffix.tsx
+  static Affix = TextInputAffix;
+
   static defaultProps: Partial<TextInputProps> = {
     mode: 'flat',
-    padding: 'normal',
     dense: false,
     disabled: false,
     error: false,
@@ -183,78 +191,92 @@ class TextInput extends React.Component<TextInputProps, State> {
           : prevState.value,
     };
   }
+  validInputValue =
+    this.props.value !== undefined ? this.props.value : this.props.defaultValue;
 
   state = {
-    labeled: new Animated.Value(this.props.value || this.props.error ? 0 : 1),
+    labeled: new Animated.Value(this.validInputValue ? 0 : 1),
     error: new Animated.Value(this.props.error ? 1 : 0),
     focused: false,
-    placeholder: this.props.error ? this.props.placeholder : '',
-    value: this.props.value || this.props.defaultValue,
+    placeholder: '',
+    value: this.validInputValue,
     labelLayout: {
       measured: false,
       width: 0,
       height: 0,
+    },
+    leftLayout: {
+      width: null,
+      height: null,
+    },
+    rightLayout: {
+      width: null,
+      height: null,
     },
   };
 
   ref: NativeTextInput | undefined | null;
 
   componentDidUpdate(prevProps: TextInputProps, prevState: State) {
+    const isFocusChanged = prevState.focused !== this.state.focused;
+    const isValueChanged = prevState.value !== this.state.value;
+    const isLabelLayoutChanged =
+      prevState.labelLayout !== this.state.labelLayout;
+    const isLabelChanged = prevProps.label !== this.props.label;
+    const isErrorChanged = prevProps.error !== this.props.error;
+
     if (
-      prevState.focused !== this.state.focused ||
-      prevState.value !== this.state.value ||
-      prevProps.error !== this.props.error ||
-      this.props.defaultValue
+      isFocusChanged ||
+      isValueChanged ||
+      // workaround for animated regression for react native > 0.61
+      // https://github.com/callstack/react-native-paper/pull/1440
+      isLabelLayoutChanged
     ) {
       // The label should be minimized if the text input is focused, or has text
       // In minimized mode, the label moves up and becomes small
-      if (this.state.value || this.state.focused || this.props.error) {
-        this._minmizeLabel();
+      if (this.state.value || this.state.focused) {
+        this.minimizeLabel();
       } else {
-        this._restoreLabel();
+        this.restoreLabel();
       }
     }
 
-    if (
-      prevState.focused !== this.state.focused ||
-      prevProps.label !== this.props.label ||
-      prevProps.error !== this.props.error
-    ) {
-      // Show placeholder text only if the input is focused, or has error, or there's no label
+    if (isFocusChanged || isLabelChanged) {
+      // Show placeholder text only if the input is focused, or there's no label
       // We don't show placeholder if there's a label because the label acts as placeholder
       // When focused, the label moves up, so we can show a placeholder
-      if (this.state.focused || this.props.error || !this.props.label) {
-        this._showPlaceholder();
+      if (this.state.focused || !this.props.label) {
+        this.showPlaceholder();
       } else {
-        this._hidePlaceholder();
+        this.hidePlaceholder();
       }
     }
 
-    if (prevProps.error !== this.props.error) {
+    if (isErrorChanged) {
       // When the input has an error, we wiggle the label and apply error styles
       if (this.props.error) {
-        this._showError();
+        this.showError();
       } else {
-        this._hideError();
+        this.hideError();
       }
     }
   }
 
   componentWillUnmount() {
-    if (this._timer) {
-      clearTimeout(this._timer);
+    if (this.timer) {
+      clearTimeout(this.timer);
     }
   }
 
-  _showPlaceholder = () => {
-    if (this._timer) {
-      clearTimeout(this._timer);
+  private showPlaceholder = () => {
+    if (this.timer) {
+      clearTimeout(this.timer);
     }
 
     // Set the placeholder in a delay to offset the label animation
     // If we show it immediately, they'll overlap and look ugly
     // @ts-ignore
-    this._timer = setTimeout(
+    this.timer = setTimeout(
       () =>
         this.setState({
           placeholder: this.props.placeholder,
@@ -263,30 +285,32 @@ class TextInput extends React.Component<TextInputProps, State> {
     );
   };
 
-  _hidePlaceholder = () =>
+  private hidePlaceholder = () =>
     this.setState({
       placeholder: '',
     });
 
-  _timer?: number;
-  _root: NativeTextInput | undefined | null;
+  private timer?: number;
+  private root: NativeTextInput | undefined | null;
 
-  _showError = () => {
+  private showError = () => {
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.error, {
       toValue: 1,
-      duration: FOCUS_ANIMATION_DURATION,
+      duration: FOCUS_ANIMATION_DURATION * scale,
       // To prevent this - https://github.com/callstack/react-native-paper/issues/941
       useNativeDriver: Platform.select({
         ios: false,
         default: true,
       }),
-    }).start(this._showPlaceholder);
+    }).start(this.hidePlaceholder);
   };
 
-  _hideError = () => {
+  private hideError = () => {
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.error, {
       toValue: 0,
-      duration: BLUR_ANIMATION_DURATION,
+      duration: BLUR_ANIMATION_DURATION * scale,
       // To prevent this - https://github.com/callstack/react-native-paper/issues/941
       useNativeDriver: Platform.select({
         ios: false,
@@ -295,29 +319,51 @@ class TextInput extends React.Component<TextInputProps, State> {
     }).start();
   };
 
-  _restoreLabel = () =>
+  private restoreLabel = () => {
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.labeled, {
       toValue: 1,
-      duration: FOCUS_ANIMATION_DURATION,
+      duration: FOCUS_ANIMATION_DURATION * scale,
       // To prevent this - https://github.com/callstack/react-native-paper/issues/941
       useNativeDriver: Platform.select({
         ios: false,
         default: true,
       }),
     }).start();
+  };
 
-  _minmizeLabel = () =>
+  private minimizeLabel = () => {
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.labeled, {
       toValue: 0,
-      duration: BLUR_ANIMATION_DURATION,
+      duration: BLUR_ANIMATION_DURATION * scale,
       // To prevent this - https://github.com/callstack/react-native-paper/issues/941
       useNativeDriver: Platform.select({
         ios: false,
         default: true,
       }),
     }).start();
+  };
 
-  _handleFocus = (args: any) => {
+  private onLeftAffixLayoutChange = (event: LayoutChangeEvent) => {
+    this.setState({
+      leftLayout: {
+        height: event.nativeEvent.layout.height,
+        width: event.nativeEvent.layout.width,
+      },
+    });
+  };
+
+  private onRightAffixLayoutChange = (event: LayoutChangeEvent) => {
+    this.setState({
+      rightLayout: {
+        width: event.nativeEvent.layout.width,
+        height: event.nativeEvent.layout.height,
+      },
+    });
+  };
+
+  private handleFocus = (args: any) => {
     if (this.props.disabled || !this.props.editable) {
       return;
     }
@@ -329,7 +375,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     }
   };
 
-  _handleBlur = (args: Object) => {
+  private handleBlur = (args: Object) => {
     if (this.props.disabled || !this.props.editable) {
       return;
     }
@@ -341,7 +387,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     }
   };
 
-  _handleChangeText = (value: string) => {
+  private handleChangeText = (value: string) => {
     if (!this.props.editable) {
       return;
     }
@@ -350,7 +396,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     this.props.onChangeText && this.props.onChangeText(value);
   };
 
-  _onLayoutAnimatedText = (e: LayoutChangeEvent) => {
+  private handleLayoutAnimatedText = (e: LayoutChangeEvent) => {
     this.setState({
       labelLayout: {
         width: e.nativeEvent.layout.width,
@@ -360,68 +406,78 @@ class TextInput extends React.Component<TextInputProps, State> {
     });
   };
 
+  forceFocus = () => {
+    return this.root?.focus();
+  };
+
   /**
    * @internal
    */
   setNativeProps(args: Object) {
-    return this._root && this._root.setNativeProps(args);
+    return this.root && this.root.setNativeProps(args);
   }
 
   /**
    * Returns `true` if the input is currently focused, `false` otherwise.
    */
   isFocused() {
-    return this._root && this._root.isFocused();
+    return this.root && this.root.isFocused();
   }
 
   /**
    * Removes all text from the TextInput.
    */
   clear() {
-    return this._root && this._root.clear();
+    return this.root && this.root.clear();
   }
 
   /**
    * Focuses the input.
    */
   focus() {
-    return this._root && this._root.focus();
+    return this.root && this.root.focus();
   }
 
   /**
    * Removes focus from the input.
    */
   blur() {
-    return this._root && this._root.blur();
+    return this.root && this.root.blur();
   }
-
   render() {
-    const { mode, padding, ...rest } = this.props;
+    const { mode, ...rest } = this.props as $Omit<TextInputProps, 'ref'>;
 
     return mode === 'outlined' ? (
       <TextInputOutlined
         {...rest}
+        value={this.state.value}
         parentState={this.state}
-        innerRef={ref => {
-          this._root = ref;
+        innerRef={(ref) => {
+          this.root = ref;
         }}
-        onFocus={this._handleFocus}
-        onBlur={this._handleBlur}
-        onChangeText={this._handleChangeText}
-        onLayoutAnimatedText={this._onLayoutAnimatedText}
+        onFocus={this.handleFocus}
+        forceFocus={this.forceFocus}
+        onBlur={this.handleBlur}
+        onChangeText={this.handleChangeText}
+        onLayoutAnimatedText={this.handleLayoutAnimatedText}
+        onLeftAffixLayoutChange={this.onLeftAffixLayoutChange}
+        onRightAffixLayoutChange={this.onRightAffixLayoutChange}
       />
     ) : (
       <TextInputFlat
         {...rest}
+        value={this.state.value}
         parentState={this.state}
-        innerRef={ref => {
-          this._root = ref;
+        innerRef={(ref) => {
+          this.root = ref;
         }}
-        padding={padding}
-        onFocus={this._handleFocus}
-        onBlur={this._handleBlur}
-        onChangeText={this._handleChangeText}
-        onLayoutAnimatedText={this._onLayoutAnimatedText}
+        onFocus={this.handleFocus}
+        forceFocus={this.forceFocus}
+        onBlur={this.handleBlur}
+        onChangeText={this.handleChangeText}
+        onLayoutAnimatedText={this.handleLayoutAnimatedText}
+        onLeftAffixLayoutChange={this.onLeftAffixLayoutChange}
+        onRightAffixLayoutChange={this.onRightAffixLayoutChange}
       />
     );
   }

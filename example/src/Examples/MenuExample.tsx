@@ -1,81 +1,92 @@
 import * as React from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Platform,
+  GestureResponderEvent,
+} from 'react-native';
+import type { StackNavigationProp } from '@react-navigation/stack';
 import {
   Menu,
   Appbar,
   Divider,
   Button,
-  withTheme,
-  Theme,
+  useTheme,
+  List,
+  TouchableRipple,
 } from 'react-native-paper';
 
-type State = {
-  visible1: boolean;
-  visible2: boolean;
-};
+type ContextualMenuCoord = { x: number; y: number };
 
 type Props = {
-  theme: Theme;
-  navigation: any;
+  navigation: StackNavigationProp<{}>;
+};
+
+type MenuVisibility = {
+  [key: string]: boolean | undefined;
 };
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
-class MenuExample extends React.Component<Props, State> {
-  static navigationOptions = {
-    header: null,
+const MenuExample = ({ navigation }: Props) => {
+  const [visible, setVisible] = React.useState<MenuVisibility>({});
+  const [contextualMenuCoord, setContextualMenuCoor] = React.useState<
+    ContextualMenuCoord
+  >({ x: 0, y: 0 });
+
+  const _toggleMenu = (name: string) => () =>
+    setVisible({ ...visible, [name]: !visible[name] });
+
+  const _getVisible = (name: string) => !!visible[name];
+
+  const _handleLongPress = (event: GestureResponderEvent) => {
+    const { nativeEvent } = event;
+    setContextualMenuCoor({
+      x: nativeEvent.pageX,
+      y: nativeEvent.pageY,
+    });
+    setVisible({ menu3: true });
   };
 
-  state = {
-    visible1: false,
-    visible2: false,
-  };
+  const {
+    colors: { background },
+  } = useTheme();
 
-  static title = 'Menu';
+  navigation.setOptions({
+    headerShown: false,
+  });
 
-  _openMenu1 = () => this.setState({ visible1: true });
-  _openMenu2 = () => this.setState({ visible2: true });
-
-  _closeMenu1 = () => this.setState({ visible1: false });
-  _closeMenu2 = () => this.setState({ visible2: false });
-
-  render() {
-    const {
-      theme: {
-        colors: { background },
-      },
-    } = this.props;
-
-    return (
-      <View style={styles.screen}>
-        <Appbar.Header>
-          <Appbar.BackAction onPress={() => this.props.navigation.goBack()} />
-          <Appbar.Content title="Menu" />
+  return (
+    <View style={styles.screen}>
+      <Appbar.Header>
+        <Appbar.BackAction onPress={() => navigation.goBack()} />
+        <Appbar.Content title="Menu" />
+        <Menu
+          visible={_getVisible('menu1')}
+          onDismiss={_toggleMenu('menu1')}
+          anchor={
+            <Appbar.Action
+              icon={MORE_ICON}
+              color="white"
+              onPress={_toggleMenu('menu1')}
+            />
+          }
+        >
+          <Menu.Item onPress={() => {}} title="Undo" />
+          <Menu.Item onPress={() => {}} title="Redo" />
+          <Divider />
+          <Menu.Item onPress={() => {}} title="Cut" disabled />
+          <Menu.Item onPress={() => {}} title="Copy" disabled />
+          <Menu.Item onPress={() => {}} title="Paste" />
+        </Menu>
+      </Appbar.Header>
+      <View style={[styles.container, { backgroundColor: background }]}>
+        <View style={styles.alignCenter}>
           <Menu
-            visible={this.state.visible1}
-            onDismiss={this._closeMenu1}
+            visible={_getVisible('menu2')}
+            onDismiss={_toggleMenu('menu2')}
             anchor={
-              <Appbar.Action
-                icon={MORE_ICON}
-                color="white"
-                onPress={this._openMenu1}
-              />
-            }
-          >
-            <Menu.Item onPress={() => {}} title="Undo" />
-            <Menu.Item onPress={() => {}} title="Redo" />
-            <Divider />
-            <Menu.Item onPress={() => {}} title="Cut" disabled />
-            <Menu.Item onPress={() => {}} title="Copy" disabled />
-            <Menu.Item onPress={() => {}} title="Paste" />
-          </Menu>
-        </Appbar.Header>
-        <View style={[styles.container, { backgroundColor: background }]}>
-          <Menu
-            visible={this.state.visible2}
-            onDismiss={this._closeMenu2}
-            anchor={
-              <Button mode="outlined" onPress={this._openMenu2}>
+              <Button mode="outlined" onPress={_toggleMenu('menu2')}>
                 Menu with icons
               </Button>
             }
@@ -98,10 +109,30 @@ class MenuExample extends React.Component<Props, State> {
             <Menu.Item icon="content-paste" onPress={() => {}} title="Paste" />
           </Menu>
         </View>
+        <Menu
+          visible={_getVisible('menu3')}
+          onDismiss={_toggleMenu('menu3')}
+          anchor={contextualMenuCoord}
+        >
+          <Menu.Item onPress={() => {}} title="Item 1" />
+          <Menu.Item onPress={() => {}} title="Item 2" />
+          <Divider />
+          <Menu.Item onPress={() => {}} title="Item 3" disabled />
+        </Menu>
+        <List.Section style={styles.list} title="Contextual menu">
+          <TouchableRipple onPress={() => {}} onLongPress={_handleLongPress}>
+            <List.Item
+              title="List item"
+              description="Long press me to open contextual menu"
+            />
+          </TouchableRipple>
+        </List.Section>
       </View>
-    );
-  }
-}
+    </View>
+  );
+};
+
+MenuExample.title = 'Menu';
 
 const styles = StyleSheet.create({
   screen: {
@@ -109,9 +140,14 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    alignItems: 'center',
     paddingTop: 48,
+  },
+  list: {
+    marginTop: 48,
+  },
+  alignCenter: {
+    alignItems: 'center',
   },
 });
 
-export default withTheme(MenuExample);
+export default MenuExample;

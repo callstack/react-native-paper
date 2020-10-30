@@ -1,26 +1,25 @@
-const mappings = require('../../dist/mappings.json');
-
 const SKIP = Symbol('SKIP');
 
-module.exports = function rewire(babel) {
+module.exports = function rewire(babel, options) {
   const t = babel.types;
+
+  const { name, index, mappings } = require(options.mappings ||
+    '../../mappings.json');
 
   return {
     visitor: {
       ImportDeclaration(path) {
-        if (
-          path.node.source.value !== 'react-native-paper' ||
-          path.node[SKIP]
-        ) {
+        if (path.node.source.value !== name || path.node[SKIP]) {
           return;
         }
 
+        path.node.source.value = `${name}/${index}`;
         path.replaceWithMultiple(
           path.node.specifiers.reduce((declarations, specifier) => {
             const mapping = mappings[specifier.imported.name];
 
             if (mapping) {
-              const alias = `${path.node.source.value}/${mapping.path}`;
+              const alias = `${name}/${mapping.path}`;
               const identifier = t.identifier(specifier.local.name);
 
               let s;
@@ -41,7 +40,7 @@ module.exports = function rewire(babel) {
               );
             } else {
               const previous = declarations.find(
-                d => d.source.value === path.node.source.value
+                (d) => d.source.value === path.node.source.value
               );
 
               if (previous) {

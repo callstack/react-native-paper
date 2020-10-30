@@ -10,13 +10,17 @@ import {
 } from 'react-native';
 import color from 'color';
 import InputLabel from './Label/InputLabel';
-import { RenderProps, ChildTextInputProps } from './types';
+import TextInputAdornment, {
+  TextInputAdornmentProps,
+} from './Adornment/TextInputAdornment';
+import type { RenderProps, ChildTextInputProps } from './types';
 
 import {
   MAXIMIZED_LABEL_FONT_SIZE,
   MINIMIZED_LABEL_FONT_SIZE,
   LABEL_WIGGLE_X_OFFSET,
-  LABEL_PADDING_HORIZONTAL,
+  ADORNMENT_SIZE,
+  FLAT_INPUT_OFFSET,
 } from './constants';
 
 import {
@@ -26,7 +30,14 @@ import {
   adjustPaddingFlat,
   Padding,
   interpolatePlaceholder,
+  calculateFlatAffixTopPosition,
+  calculateFlatInputHorizontalPadding,
 } from './helpers';
+import {
+  getAdornmentConfig,
+  getAdornmentStyleAdjustmentForNativeInput,
+} from './Adornment/TextInputAdornment';
+import { AdornmentSide, AdornmentType } from './Adornment/enums';
 
 const MINIMIZED_LABEL_Y_OFFSET = -18;
 
@@ -36,9 +47,7 @@ const MIN_HEIGHT = 64;
 const MIN_DENSE_HEIGHT_WL = 52;
 const MIN_DENSE_HEIGHT = 40;
 
-const INPUT_OFFSET = 8;
-
-class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
+class TextInputFlat extends React.Component<ChildTextInputProps> {
   static defaultProps = {
     disabled: false,
     error: false,
@@ -55,7 +64,6 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       error,
       selectionColor,
       underlineColor,
-      padding,
       dense,
       style,
       theme,
@@ -64,26 +72,72 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       parentState,
       innerRef,
       onFocus,
+      forceFocus,
       onBlur,
       onChangeText,
       onLayoutAnimatedText,
+      onLeftAffixLayoutChange,
+      onRightAffixLayoutChange,
+      left,
+      right,
+      placeholderTextColor,
       ...rest
     } = this.props;
 
     const { colors, fonts } = theme;
     const font = fonts.regular;
     const hasActiveOutline = parentState.focused || error;
-    const paddingOffset = padding !== 'none' ? styles.paddingOffset : null;
 
     const {
       fontSize: fontSizeStyle,
       fontWeight,
       height,
+      paddingHorizontal,
       ...viewStyle
     } = (StyleSheet.flatten(style) || {}) as TextStyle;
     const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
 
-    let inputTextColor, activeColor, underlineColorCustom, placeholderColor;
+    const isPaddingHorizontalPassed =
+      paddingHorizontal !== undefined && typeof paddingHorizontal === 'number';
+
+    const adornmentConfig = getAdornmentConfig({
+      left,
+      right,
+    });
+
+    let { paddingLeft, paddingRight } = calculateFlatInputHorizontalPadding({
+      adornmentConfig,
+    });
+
+    if (isPaddingHorizontalPassed) {
+      paddingLeft = paddingHorizontal as number;
+      paddingRight = paddingHorizontal as number;
+    }
+
+    const { leftLayout, rightLayout } = parentState;
+
+    const rightAffixWidth = right
+      ? rightLayout.width || ADORNMENT_SIZE
+      : ADORNMENT_SIZE;
+
+    const leftAffixWidth = left
+      ? leftLayout.width || ADORNMENT_SIZE
+      : ADORNMENT_SIZE;
+
+    const adornmentStyleAdjustmentForNativeInput = getAdornmentStyleAdjustmentForNativeInput(
+      {
+        adornmentConfig,
+        rightAffixWidth,
+        leftAffixWidth,
+        inputOffset: FLAT_INPUT_OFFSET,
+      }
+    );
+
+    let inputTextColor,
+      activeColor,
+      underlineColorCustom,
+      placeholderColor,
+      errorColor;
 
     if (disabled) {
       inputTextColor = activeColor = color(colors.text)
@@ -96,19 +150,14 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       inputTextColor = colors.text;
       activeColor = error ? colors.error : colors.primary;
       placeholderColor = colors.placeholder;
+      errorColor = colors.error;
       underlineColorCustom = underlineColor || colors.disabled;
     }
 
     const containerStyle = {
       backgroundColor: theme.dark
-        ? color(colors.background)
-            .lighten(0.24)
-            .rgb()
-            .string()
-        : color(colors.background)
-            .darken(0.06)
-            .rgb()
-            .string(),
+        ? color(colors.background).lighten(0.24).rgb().string()
+        : color(colors.background).darken(0.06).rgb().string(),
       borderTopLeftRadius: theme.roundness,
       borderTopRightRadius: theme.roundness,
     };
@@ -123,10 +172,8 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
 
     const baseLabelTranslateX =
       (I18nManager.isRTL ? 1 : -1) *
-      (labelHalfWidth -
-        (labelScale * labelWidth) / 2 -
-        (fontSize - MINIMIZED_LABEL_FONT_SIZE) * labelScale +
-        (!paddingOffset ? (1 - labelScale) * LABEL_PADDING_HORIZONTAL : 0));
+        (labelHalfWidth - (labelScale * labelWidth) / 2) +
+      (1 - labelScale) * (I18nManager.isRTL ? -1 : 1) * paddingLeft;
 
     const minInputHeight = dense
       ? (label ? MIN_DENSE_HEIGHT_WL : MIN_DENSE_HEIGHT) -
@@ -145,14 +192,15 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       multiline && height ? 0 : !height ? minInputHeight / 2 : 0
     );
 
-    if (height && typeof height !== 'number')
+    if (height && typeof height !== 'number') {
       // eslint-disable-next-line
       console.warn('Currently we support only numbers in height prop');
+    }
 
     const paddingSettings = {
       height: height ? +height : null,
       labelHalfHeight,
-      offset: INPUT_OFFSET,
+      offset: FLAT_INPUT_OFFSET,
       multiline: multiline ? multiline : null,
       dense: dense ? dense : null,
       topPosition,
@@ -181,6 +229,32 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       ? 1
       : 0;
 
+    const minHeight =
+      height ||
+      (dense ? (label ? MIN_DENSE_HEIGHT_WL : MIN_DENSE_HEIGHT) : MIN_HEIGHT);
+
+    const flatHeight =
+      inputHeight +
+      (!height ? (dense ? LABEL_PADDING_TOP_DENSE : LABEL_PADDING_TOP) : 0);
+
+    const iconTopPosition = (flatHeight - ADORNMENT_SIZE) / 2;
+
+    const leftAffixTopPosition = leftLayout.height
+      ? calculateFlatAffixTopPosition({
+          height: flatHeight,
+          ...paddingFlat,
+          affixHeight: leftLayout.height,
+        })
+      : null;
+
+    const rightAffixTopPosition = rightLayout.height
+      ? calculateFlatAffixTopPosition({
+          height: flatHeight,
+          ...paddingFlat,
+          affixHeight: rightLayout.height,
+        })
+      : null;
+
     const labelProps = {
       label,
       onLayoutAnimatedText,
@@ -195,19 +269,40 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       labelScale,
       wiggleOffsetX: LABEL_WIGGLE_X_OFFSET,
       topPosition,
-      paddingOffset,
+      paddingOffset: { paddingLeft, paddingRight },
       hasActiveOutline,
       activeColor,
       placeholderColor,
+      errorColor,
+    };
+    const affixTopPosition = {
+      [AdornmentSide.Left]: leftAffixTopPosition,
+      [AdornmentSide.Right]: rightAffixTopPosition,
+    };
+    const onAffixChange = {
+      [AdornmentSide.Left]: onLeftAffixLayoutChange,
+      [AdornmentSide.Right]: onRightAffixLayoutChange,
     };
 
-    const minHeight =
-      height ||
-      (dense ? (label ? MIN_DENSE_HEIGHT_WL : MIN_DENSE_HEIGHT) : MIN_HEIGHT);
-
-    const flatHeight =
-      inputHeight +
-      (!height ? (dense ? LABEL_PADDING_TOP_DENSE : LABEL_PADDING_TOP) : 0);
+    let adornmentProps: TextInputAdornmentProps = {
+      adornmentConfig,
+      forceFocus,
+      topPosition: {
+        [AdornmentType.Affix]: affixTopPosition,
+        [AdornmentType.Icon]: iconTopPosition,
+      },
+      onAffixChange,
+      isTextInputFocused: this.props.parentState.focused,
+    };
+    if (adornmentConfig.length) {
+      adornmentProps = {
+        ...adornmentProps,
+        left,
+        right,
+        textStyle: { ...font, fontSize, fontWeight },
+        visible: this.props.parentState.labeled,
+      };
+    }
 
     return (
       <View style={[containerStyle, viewStyle]}>
@@ -226,43 +321,41 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
           }}
         >
           <InputLabel parentState={parentState} labelProps={labelProps} />
-
-          {render &&
-            render({
-              ...rest,
-              ref: innerRef,
-              onChangeText,
-              // @ts-ignore
-              placeholder: label
-                ? parentState.placeholder
-                : this.props.placeholder,
-              placeholderTextColor: placeholderColor,
-              editable: !disabled && editable,
-              selectionColor:
-                typeof selectionColor === 'undefined'
-                  ? activeColor
-                  : selectionColor,
-              onFocus,
-              onBlur,
-              underlineColorAndroid: 'transparent',
-              multiline,
-              style: [
-                styles.input,
-                paddingOffset,
-                !multiline || (multiline && height)
-                  ? { height: flatHeight }
-                  : {},
-                paddingFlat,
-                {
-                  ...font,
-                  fontSize,
-                  fontWeight,
-                  color: inputTextColor,
-                  textAlignVertical: multiline && height ? 'top' : 'center',
-                },
-              ],
-            })}
+          {render?.({
+            ...rest,
+            ref: innerRef,
+            onChangeText,
+            // @ts-ignore
+            placeholder: label
+              ? parentState.placeholder
+              : this.props.placeholder,
+            placeholderTextColor: placeholderTextColor || placeholderColor,
+            editable: !disabled && editable,
+            selectionColor:
+              typeof selectionColor === 'undefined'
+                ? activeColor
+                : selectionColor,
+            onFocus,
+            onBlur,
+            underlineColorAndroid: 'transparent',
+            multiline,
+            style: [
+              styles.input,
+              { paddingLeft, paddingRight },
+              !multiline || (multiline && height) ? { height: flatHeight } : {},
+              paddingFlat,
+              {
+                ...font,
+                fontSize,
+                fontWeight,
+                color: inputTextColor,
+                textAlignVertical: multiline ? 'top' : 'center',
+              },
+              adornmentStyleAdjustmentForNativeInput,
+            ],
+          })}
         </View>
+        <TextInputAdornment {...adornmentProps} />
       </View>
     );
   }
@@ -320,7 +413,7 @@ const styles = StyleSheet.create({
     height: 2,
   },
   input: {
-    flex: 1,
+    flexGrow: 1,
     margin: 0,
     textAlign: I18nManager.isRTL ? 'right' : 'left',
     zIndex: 1,
@@ -332,8 +425,5 @@ const styles = StyleSheet.create({
   inputFlatDense: {
     paddingTop: 22,
     paddingBottom: 2,
-  },
-  paddingOffset: {
-    paddingHorizontal: LABEL_PADDING_HORIZONTAL,
   },
 });

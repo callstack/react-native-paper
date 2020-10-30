@@ -8,7 +8,7 @@ it('renders list accordion with children', () => {
   const tree = renderer
     .create(
       <ListAccordion
-        left={props => <ListIcon {...props} icon="folder" />}
+        left={(props) => <ListIcon {...props} icon="folder" />}
         title="Expandable list item"
       >
         <ListItem title="First Item" />
@@ -38,11 +38,11 @@ it('renders list accordion with left items', () => {
   const tree = renderer
     .create(
       <ListAccordion
-        left={props => <ListIcon {...props} icon="star" />}
+        left={(props) => <ListIcon {...props} icon="star" />}
         title="Accordion item 1"
       >
         <ListItem
-          left={props => <ListIcon {...props} icon="thumb-up" />}
+          left={(props) => <ListIcon {...props} icon="thumb-up" />}
           title="List item 1"
         />
       </ListAccordion>

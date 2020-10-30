@@ -7,7 +7,7 @@ import DialogActions from './DialogActions';
 import DialogTitle, { DialogTitle as _DialogTitle } from './DialogTitle';
 import DialogScrollArea from './DialogScrollArea';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
+import overlay from '../../styles/overlay';
 
 type Props = {
   /**
@@ -30,8 +30,10 @@ type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
+
+const DIALOG_ELEVATION: number = 24;
 
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
@@ -48,97 +50,85 @@ type Props = {
  * import { View } from 'react-native';
  * import { Button, Paragraph, Dialog, Portal } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     visible: false,
- *   };
+ * const MyComponent = () => {
+ *   const [visible, setVisible] = React.useState(false);
  *
- *   _showDialog = () => this.setState({ visible: true });
+ *   const showDialog = () => setVisible(true);
  *
- *   _hideDialog = () => this.setState({ visible: false });
+ *   const hideDialog = () => setVisible(false);
  *
- *   render() {
- *     return (
- *       <View>
- *         <Button onPress={this._showDialog}>Show Dialog</Button>
- *         <Portal>
- *           <Dialog
- *              visible={this.state.visible}
- *              onDismiss={this._hideDialog}>
- *             <Dialog.Title>Alert</Dialog.Title>
- *             <Dialog.Content>
- *               <Paragraph>This is simple dialog</Paragraph>
- *             </Dialog.Content>
- *             <Dialog.Actions>
- *               <Button onPress={this._hideDialog}>Done</Button>
- *             </Dialog.Actions>
- *           </Dialog>
- *         </Portal>
- *       </View>
- *     );
- *   }
- * }
+ *   return (
+ *     <View>
+ *       <Button onPress={showDialog}>Show Dialog</Button>
+ *       <Portal>
+ *         <Dialog visible={visible} onDismiss={hideDialog}>
+ *           <Dialog.Title>Alert</Dialog.Title>
+ *           <Dialog.Content>
+ *             <Paragraph>This is simple dialog</Paragraph>
+ *           </Dialog.Content>
+ *           <Dialog.Actions>
+ *             <Button onPress={hideDialog}>Done</Button>
+ *           </Dialog.Actions>
+ *         </Dialog>
+ *       </Portal>
+ *     </View>
+ *   );
+ * };
+ *
+ * export default MyComponent;
  * ```
  */
-class Dialog extends React.Component<Props> {
-  // @component ./DialogContent.tsx
-  static Content = DialogContent;
-  // @component ./DialogActions.tsx
-  static Actions = DialogActions;
-  // @component ./DialogTitle.tsx
-  static Title = DialogTitle;
-  // @component ./DialogScrollArea.tsx
-  static ScrollArea = DialogScrollArea;
-
-  static defaultProps = {
-    dismissable: true,
-    visible: false,
-  };
-
-  render() {
-    const {
-      children,
-      dismissable,
-      onDismiss,
-      visible,
+const Dialog = ({
+  children,
+  dismissable = true,
+  onDismiss,
+  visible = false,
+  style,
+  theme,
+}: Props) => (
+  <Modal
+    dismissable={dismissable}
+    onDismiss={onDismiss}
+    visible={visible}
+    contentContainerStyle={[
+      {
+        borderRadius: theme.roundness,
+        backgroundColor:
+          theme.dark && theme.mode === 'adaptive'
+            ? (overlay(DIALOG_ELEVATION, theme.colors.surface) as string)
+            : theme.colors.surface,
+      },
+      styles.container,
       style,
-      theme,
-    } = this.props;
+    ]}
+  >
+    {React.Children.toArray(children)
+      .filter((child) => child != null && typeof child !== 'boolean')
+      .map((child, i) => {
+        if (
+          i === 0 &&
+          React.isValidElement(child) &&
+          child.type === DialogContent
+        ) {
+          // Dialog content is the first item, so we add a top padding
+          return React.cloneElement(child, {
+            style: [{ paddingTop: 24 }, child.props.style],
+          });
+        }
 
-    return (
-      <Modal
-        dismissable={dismissable}
-        onDismiss={onDismiss}
-        visible={visible}
-        contentContainerStyle={[
-          {
-            borderRadius: theme.roundness,
-            backgroundColor: theme.colors.surface,
-          },
-          styles.container,
-          style,
-        ]}
-      >
-        {React.Children.toArray(children)
-          .filter(child => child != null && typeof child !== 'boolean')
-          .map((child, i) => {
-            if (
-              i === 0 &&
-              React.isValidElement(child) &&
-              child.type === DialogContent
-            ) {
-              // Dialog content is the first item, so we add a top padding
-              return React.cloneElement(child, {
-                style: [{ paddingTop: 24 }, child.props.style],
-              });
-            }
+        return child;
+      })}
+  </Modal>
+);
 
-            return child;
-          })}
-      </Modal>
-    );
-  }
-}
+// @component ./DialogContent.tsx
+Dialog.Content = DialogContent;
+// @component ./DialogActions.tsx
+Dialog.Actions = DialogActions;
+// @component ./DialogTitle.tsx
+Dialog.Title = DialogTitle;
+// @component ./DialogScrollArea.tsx
+Dialog.ScrollArea = DialogScrollArea;
 
 const styles = StyleSheet.create({
   container: {
@@ -151,7 +141,7 @@ const styles = StyleSheet.create({
      */
     marginVertical: Platform.OS === 'android' ? 44 : 0,
     marginHorizontal: 26,
-    elevation: 24,
+    elevation: DIALOG_ELEVATION,
     justifyContent: 'flex-start',
   },
 });

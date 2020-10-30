@@ -12,7 +12,10 @@ const assets = [
   path.join(__dirname, 'assets', 'images'),
 ];
 const styles = [path.join(__dirname, 'assets', 'styles.css')];
-const scripts = [path.join(__dirname, 'assets', 'snack.js')];
+const scripts = [
+  path.join(__dirname, 'assets', 'snack.js'),
+  path.join(__dirname, 'assets', 'version.js'),
+];
 const github = 'https://github.com/callstack/react-native-paper/edit/master/';
 
 if (!fs.existsSync(dist)) {
@@ -36,14 +39,9 @@ function getPages() {
     .readFileSync(path.join(__dirname, '../src/index.tsx'))
     .toString()
     .split('\n')
-    .map(line =>
-      line
-        .split(' ')
-        .pop()
-        .replace(/('|;)/g, '')
-    )
-    .filter(line => line.startsWith('./components/'))
-    .map(line => {
+    .map((line) => line.split(' ').pop().replace(/('|;)/g, ''))
+    .filter((line) => line.startsWith('./components/'))
+    .map((line) => {
       const file = require.resolve(path.join(__dirname, '../src', line));
       if (/\/index\.(js|tsx?)$/.test(file)) {
         const matches = fs
@@ -51,10 +49,7 @@ function getPages() {
           .toString()
           .match(/export \{ default \} from .+/);
         if (matches && matches.length) {
-          const name = matches[0]
-            .split(' ')
-            .pop()
-            .replace(/('|;)/g, '');
+          const name = matches[0].split(' ').pop().replace(/('|;)/g, '');
           return require.resolve(path.join(__dirname, '../src', line, name));
         }
       }
@@ -69,21 +64,15 @@ function getPages() {
         acc.push({ file, group });
       }
 
-      const match = content.match(/\/\/ @component (.\/\w+\.(js|tsx?))/gm);
+      const match = content.match(/\/\/ @component (.+\/\w+\.(js|tsx?))/gm);
 
       if (match && match.length) {
-        const componentFiles = match.map(line => {
+        const componentFiles = match.map((line) => {
           const fileName = line.split(' ')[2];
           return {
             group,
             file: require.resolve(
-              path.join(
-                file
-                  .split('/')
-                  .slice(0, -1)
-                  .join('/'),
-                fileName
-              )
+              path.join(file.split('/').slice(0, -1).join('/'), fileName)
             ),
           };
         });
@@ -95,7 +84,7 @@ function getPages() {
     }, [])
     .filter(
       (info, index, self) =>
-        index === self.findIndex(other => info.file === other.file)
+        index === self.findIndex((other) => info.file === other.file)
     )
     .sort((a, b) => {
       const nameA = a.file.split('/').pop();
@@ -107,12 +96,12 @@ function getPages() {
       const nameB = (b.group || b.file).split('/').pop();
       return nameA.localeCompare(nameB);
     })
-    .map(info => ({ ...info, type: 'component' }));
+    .map((info) => ({ ...info, type: 'component' }));
 
   const docs = fs
     .readdirSync(path.join(__dirname, 'pages'))
-    .filter(file => file.includes('.'))
-    .map(file => ({
+    .filter((file) => file.includes('.'))
+    .map((file) => ({
       file: path.join(__dirname, 'pages', file),
       type: getType(file),
     }));
@@ -123,10 +112,12 @@ function getPages() {
 module.exports = {
   root,
   logo: 'images/sidebar-logo.svg',
+  favicon: 'images/favicon.ico',
   assets,
   styles,
   scripts,
   pages: getPages,
   output: dist,
   github,
+  title: '[title] · React Native Paper',
 };

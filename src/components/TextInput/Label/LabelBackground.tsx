@@ -3,7 +3,7 @@ import { Animated, StyleSheet } from 'react-native';
 
 import AnimatedText from '../../Typography/AnimatedText';
 
-import { LabelBackgroundProps } from '../types';
+import type { LabelBackgroundProps } from '../types';
 
 const LabelBackground = ({
   parentState,

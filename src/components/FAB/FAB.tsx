@@ -6,12 +6,13 @@ import ActivityIndicator from '../ActivityIndicator';
 import FABGroup, { FABGroup as _FABGroup } from './FABGroup';
 import Surface from '../Surface';
 import CrossFadeIcon from '../CrossFadeIcon';
+import Icon from '../Icon';
 import Text from '../Typography/Text';
-import TouchableRipple from '../TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
-import { Theme, $RemoveChildren } from '../../types';
-import { IconSource } from './../Icon';
+import type { $RemoveChildren } from '../../types';
+import type { IconSource } from './../Icon';
 
 type Props = $RemoveChildren<typeof Surface> & {
   /**
@@ -23,16 +24,24 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   label?: string;
   /**
+   * Make the label text uppercased.
+   */
+  uppercase?: boolean;
+  /**
    * Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.
    * Uses `label` by default if specified.
    */
   accessibilityLabel?: string;
   /**
+   * Whether an icon change is animated.
+   */
+  animated?: boolean;
+  /**
    *  Whether FAB is mini-sized, used to create visual continuity with other elements. This has no effect if `label` is specified.
    */
   small?: boolean;
   /**
-   * Custom color for the `FAB`.
+   * Custom color for the icon and label of the `FAB`.
    */
   color?: string;
   /**
@@ -51,11 +60,16 @@ type Props = $RemoveChildren<typeof Surface> & {
    * Function to execute on press.
    */
   onPress?: () => void;
+  /**
+   * Function to execute on long press.
+   */
+  onLongPress?: () => void;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
+  testID?: string;
 };
 
 type State = {
@@ -102,6 +116,7 @@ class FAB extends React.Component<Props, State> {
   static Group = FABGroup;
 
   static defaultProps = {
+    uppercase: true,
     visible: true,
   };
 
@@ -110,6 +125,7 @@ class FAB extends React.Component<Props, State> {
   };
 
   componentDidUpdate(prevProps: Props) {
+    const { scale } = this.props.theme.animation;
     if (this.props.visible === prevProps.visible) {
       return;
     }
@@ -117,13 +133,13 @@ class FAB extends React.Component<Props, State> {
     if (this.props.visible) {
       Animated.timing(this.state.visibility, {
         toValue: 1,
-        duration: 200,
+        duration: 200 * scale,
         useNativeDriver: true,
       }).start();
     } else {
       Animated.timing(this.state.visibility, {
         toValue: 0,
-        duration: 150,
+        duration: 150 * scale,
         useNativeDriver: true,
       }).start();
     }
@@ -134,17 +150,23 @@ class FAB extends React.Component<Props, State> {
       small,
       icon,
       label,
+      uppercase,
       accessibilityLabel = label,
+      animated = true,
       color: customColor,
       disabled,
       onPress,
+      onLongPress,
       theme,
       style,
       visible,
       loading,
+      testID,
       ...rest
     } = this.props;
     const { visibility } = this.state;
+
+    const IconComponent = animated ? CrossFadeIcon : Icon;
 
     const disabledColor = color(theme.dark ? white : black)
       .alpha(0.12)
@@ -169,10 +191,7 @@ class FAB extends React.Component<Props, State> {
         : 'rgba(0, 0, 0, .54)';
     }
 
-    const rippleColor = color(foregroundColor)
-      .alpha(0.32)
-      .rgb()
-      .string();
+    const rippleColor = color(foregroundColor).alpha(0.32).rgb().string();
 
     return (
       <Surface
@@ -198,14 +217,16 @@ class FAB extends React.Component<Props, State> {
         <TouchableRipple
           borderless
           onPress={onPress}
+          onLongPress={onLongPress}
           rippleColor={rippleColor}
           disabled={disabled}
           accessibilityLabel={accessibilityLabel}
           accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
           accessibilityComponentType="button"
           accessibilityRole="button"
-          accessibilityStates={disabled ? ['disabled'] : []}
+          accessibilityState={{ disabled }}
           style={styles.touchable}
+          testID={testID}
         >
           <View
             style={[
@@ -215,9 +236,9 @@ class FAB extends React.Component<Props, State> {
             pointerEvents="none"
           >
             {icon && loading !== true ? (
-              <CrossFadeIcon source={icon} size={24} color={foregroundColor} />
+              <IconComponent source={icon} size={24} color={foregroundColor} />
             ) : null}
-            {loading && label ? (
+            {loading ? (
               <ActivityIndicator size={18} color={foregroundColor} />
             ) : null}
             {label ? (
@@ -225,10 +246,11 @@ class FAB extends React.Component<Props, State> {
                 selectable={false}
                 style={[
                   styles.label,
+                  uppercase && styles.uppercaseLabel,
                   { color: foregroundColor, ...theme.fonts.medium },
                 ]}
               >
-                {label.toUpperCase()}
+                {label}
               </Text>
             ) : null}
           </View>
@@ -265,6 +287,9 @@ const styles = StyleSheet.create({
   },
   label: {
     marginHorizontal: 8,
+  },
+  uppercaseLabel: {
+    textTransform: 'uppercase',
   },
   disabled: {
     elevation: 0,

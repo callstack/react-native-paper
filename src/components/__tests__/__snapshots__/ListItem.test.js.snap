@@ -3,7 +3,8 @@
 exports[`renders list item with custom description 1`] = `
 <View
   accessible={true}
-  isTVSelectable={true}
+  focusable={false}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -30,7 +31,6 @@ exports[`renders list item with custom description 1`] = `
     }
   >
     <View
-      pointerEvents="none"
       style={
         Array [
           Object {
@@ -46,6 +46,7 @@ exports[`renders list item with custom description 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -53,7 +54,6 @@ exports[`renders list item with custom description 1`] = `
               "fontFamily": "System",
               "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -91,14 +91,21 @@ exports[`renders list item with custom description 1`] = `
                 "borderStyle": "solid",
                 "borderWidth": 0.5,
                 "elevation": 0,
+                "flexDirection": "row",
               }
             }
           >
             <View
               accessibilityRole="button"
-              accessibilityStates={Array []}
+              accessibilityState={
+                Object {
+                  "disabled": false,
+                  "selected": false,
+                }
+              }
               accessible={true}
-              isTVSelectable={true}
+              focusable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -118,17 +125,24 @@ exports[`renders list item with custom description 1`] = `
             >
               <View
                 style={
-                  Object {
-                    "alignItems": "center",
-                    "flexDirection": "row",
-                    "paddingHorizontal": 4,
-                  }
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "paddingLeft": 4,
+                      "position": "relative",
+                    },
+                    Object {
+                      "paddingRight": 4,
+                    },
+                  ]
                 }
               >
                 <View
                   style={
                     Array [
                       Object {
+                        "alignSelf": "center",
                         "padding": 4,
                       },
                       null,
@@ -172,6 +186,7 @@ exports[`renders list item with custom description 1`] = `
                 </View>
                 <Text
                   numberOfLines={1}
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -179,7 +194,6 @@ exports[`renders list item with custom description 1`] = `
                         "fontFamily": "System",
                         "fontWeight": "400",
                         "textAlign": "left",
-                        "writingDirection": "ltr",
                       },
                       Array [
                         Object {
@@ -215,7 +229,8 @@ exports[`renders list item with custom description 1`] = `
 exports[`renders list item with custom title and description styles 1`] = `
 <View
   accessible={true}
-  isTVSelectable={true}
+  focusable={false}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -242,7 +257,6 @@ exports[`renders list item with custom title and description styles 1`] = `
     }
   >
     <View
-      pointerEvents="none"
       style={
         Array [
           Object {
@@ -258,6 +272,7 @@ exports[`renders list item with custom title and description styles 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -265,7 +280,6 @@ exports[`renders list item with custom title and description styles 1`] = `
               "fontFamily": "System",
               "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -285,6 +299,7 @@ exports[`renders list item with custom title and description styles 1`] = `
       </Text>
       <Text
         numberOfLines={2}
+        selectable={false}
         style={
           Array [
             Object {
@@ -292,7 +307,6 @@ exports[`renders list item with custom title and description styles 1`] = `
               "fontFamily": "System",
               "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -318,7 +332,8 @@ exports[`renders list item with custom title and description styles 1`] = `
 exports[`renders list item with left and right items 1`] = `
 <View
   accessible={true}
-  isTVSelectable={true}
+  focusable={false}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -348,7 +363,6 @@ exports[`renders list item with left and right items 1`] = `
       GG
     </Text>
     <View
-      pointerEvents="none"
       style={
         Array [
           Object {
@@ -364,6 +378,7 @@ exports[`renders list item with left and right items 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -371,7 +386,6 @@ exports[`renders list item with left and right items 1`] = `
               "fontFamily": "System",
               "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -389,6 +403,7 @@ exports[`renders list item with left and right items 1`] = `
       </Text>
       <Text
         numberOfLines={2}
+        selectable={false}
         style={
           Array [
             Object {
@@ -396,7 +411,6 @@ exports[`renders list item with left and right items 1`] = `
               "fontFamily": "System",
               "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -472,7 +486,8 @@ exports[`renders list item with left and right items 1`] = `
 exports[`renders list item with left item 1`] = `
 <View
   accessible={true}
-  isTVSelectable={true}
+  focusable={false}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -553,7 +568,6 @@ exports[`renders list item with left item 1`] = `
       </Text>
     </View>
     <View
-      pointerEvents="none"
       style={
         Array [
           Object {
@@ -569,6 +583,7 @@ exports[`renders list item with left item 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -576,7 +591,6 @@ exports[`renders list item with left item 1`] = `
               "fontFamily": "System",
               "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -600,7 +614,8 @@ exports[`renders list item with left item 1`] = `
 exports[`renders list item with right item 1`] = `
 <View
   accessible={true}
-  isTVSelectable={true}
+  focusable={false}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -627,7 +642,6 @@ exports[`renders list item with right item 1`] = `
     }
   >
     <View
-      pointerEvents="none"
       style={
         Array [
           Object {
@@ -643,6 +657,7 @@ exports[`renders list item with right item 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -650,7 +665,6 @@ exports[`renders list item with right item 1`] = `
               "fontFamily": "System",
               "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -677,7 +691,8 @@ exports[`renders list item with right item 1`] = `
 exports[`renders list item with title and description 1`] = `
 <View
   accessible={true}
-  isTVSelectable={true}
+  focusable={false}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -704,7 +719,6 @@ exports[`renders list item with title and description 1`] = `
     }
   >
     <View
-      pointerEvents="none"
       style={
         Array [
           Object {
@@ -720,6 +734,7 @@ exports[`renders list item with title and description 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -727,7 +742,6 @@ exports[`renders list item with title and description 1`] = `
               "fontFamily": "System",
               "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -745,6 +759,7 @@ exports[`renders list item with title and description 1`] = `
       </Text>
       <Text
         numberOfLines={2}
+        selectable={false}
         style={
           Array [
             Object {
@@ -752,7 +767,6 @@ exports[`renders list item with title and description 1`] = `
               "fontFamily": "System",
               "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -776,7 +790,8 @@ exports[`renders list item with title and description 1`] = `
 exports[`renders with a description with typeof number 1`] = `
 <View
   accessible={true}
-  isTVSelectable={true}
+  focusable={false}
+  onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -803,7 +818,6 @@ exports[`renders with a description with typeof number 1`] = `
     }
   >
     <View
-      pointerEvents="none"
       style={
         Array [
           Object {
@@ -819,6 +833,7 @@ exports[`renders with a description with typeof number 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -826,7 +841,6 @@ exports[`renders with a description with typeof number 1`] = `
               "fontFamily": "System",
               "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -846,6 +860,7 @@ exports[`renders with a description with typeof number 1`] = `
       </Text>
       <Text
         numberOfLines={2}
+        selectable={false}
         style={
           Array [
             Object {
@@ -853,7 +868,6 @@ exports[`renders with a description with typeof number 1`] = `
               "fontFamily": "System",
               "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {

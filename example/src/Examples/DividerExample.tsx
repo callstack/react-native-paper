@@ -1,25 +1,19 @@
 import * as React from 'react';
 import { FlatList } from 'react-native';
-import { Divider, List, withTheme, Theme } from 'react-native-paper';
-
-type Props = {
-  theme: Theme;
-};
+import { Divider, List, useTheme } from 'react-native-paper';
 
 const items = ['Apple', 'Banana', 'Coconut', 'Lemon', 'Mango', 'Peach'];
 
-const DividerExample = (props: Props) => {
+const DividerExample = () => {
   const {
-    theme: {
-      colors: { background },
-    },
-  } = props;
+    colors: { background },
+  } = useTheme();
 
   return (
     <FlatList
       style={{ backgroundColor: background }}
       renderItem={({ item }) => <List.Item title={item} />}
-      keyExtractor={item => item}
+      keyExtractor={(item) => item}
       ItemSeparatorComponent={Divider}
       data={items}
     />
@@ -28,4 +22,4 @@ const DividerExample = (props: Props) => {
 
 DividerExample.title = 'Divider';
 
-export default withTheme(DividerExample);
+export default DividerExample;

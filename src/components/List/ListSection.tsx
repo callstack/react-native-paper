@@ -8,9 +8,8 @@ import {
 } from 'react-native';
 import ListSubheader from './ListSubheader';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 
-type Props = React.ComponentProps<typeof View> & {
+type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Title text for the section.
    */
@@ -22,7 +21,7 @@ type Props = React.ComponentProps<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
   /**
    * Style that is passed to Title element.
    */
@@ -42,41 +41,34 @@ type Props = React.ComponentProps<typeof View> & {
  * import * as React from 'react';
  * import { List } from 'react-native-paper';
  *
- * class MyComponent extends React.Component {
- *   render() {
- *     return (
- *       <List.Section>
- *         <List.Subheader>Some title</List.Subheader>
- *         <List.Item
- *           title="First Item"
- *           left={() => <List.Icon icon="folder" />}
- *        />
- *         <List.Item
- *           title="Second Item"
- *           left={() => <List.Icon color="#000" icon="folder" />}
- *        />
- *      </List.Section>
- *     );
- *   }
- * }
+ * const MyComponent = () => (
+ *   <List.Section>
+ *     <List.Subheader>Some title</List.Subheader>
+ *     <List.Item title="First Item" left={() => <List.Icon icon="folder" />} />
+ *     <List.Item
+ *       title="Second Item"
+ *       left={() => <List.Icon color="#000" icon="folder" />}
+ *     />
+ *   </List.Section>
+ * );
  *
  * export default MyComponent;
  * ```
  */
-class ListSection extends React.Component<Props> {
-  static displayName = 'List.Section';
+const ListSection = ({
+  children,
+  title,
+  titleStyle,
+  style,
+  ...rest
+}: Props) => (
+  <View {...rest} style={[styles.container, style]}>
+    {title && <ListSubheader style={titleStyle}>{title}</ListSubheader>}
+    {children}
+  </View>
+);
 
-  render() {
-    const { children, title, titleStyle, style, ...rest } = this.props;
-
-    return (
-      <View {...rest} style={[styles.container, style]}>
-        {title && <ListSubheader style={titleStyle}>{title}</ListSubheader>}
-        {children}
-      </View>
-    );
-  }
-}
+ListSection.displayName = 'List.Section';
 
 const styles = StyleSheet.create({
   container: {

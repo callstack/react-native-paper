@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
 
-type Props = React.ComponentProps<typeof View> & {
+type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Items inside the `Card.Content`.
    */
@@ -24,6 +24,13 @@ type Props = React.ComponentProps<typeof View> & {
 /**
  * A component to show content inside a Card.
  *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/card-content-example.png" />
+ *   </figure>
+ * </div>
+ *
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -41,48 +48,45 @@ type Props = React.ComponentProps<typeof View> & {
  * export default MyComponent;
  * ```
  */
-class CardContent extends React.Component<Props> {
-  static displayName = 'Card.Content';
+const CardContent = ({ index, total, siblings, style, ...rest }: Props) => {
+  const cover = 'withTheme(CardCover)';
+  const title = 'withTheme(CardTitle)';
 
-  render() {
-    const { index, total, siblings, style, ...rest } = this.props;
-    const cover = 'withTheme(CardCover)';
-    const title = 'withTheme(CardTitle)';
+  let contentStyle, prev, next;
 
-    let contentStyle, prev, next;
+  if (typeof index === 'number' && siblings) {
+    prev = siblings[index - 1];
+    next = siblings[index + 1];
+  }
 
-    if (typeof index === 'number' && siblings) {
-      prev = siblings[index - 1];
-      next = siblings[index + 1];
-    }
-
-    if (
-      (prev === cover && next === cover) ||
-      (prev === title && next === title) ||
-      total === 1
-    ) {
+  if (
+    (prev === cover && next === cover) ||
+    (prev === title && next === title) ||
+    total === 1
+  ) {
+    contentStyle = styles.only;
+  } else if (index === 0) {
+    if (next === cover || next === title) {
       contentStyle = styles.only;
-    } else if (index === 0) {
-      if (next === cover || next === title) {
-        contentStyle = styles.only;
-      } else {
-        contentStyle = styles.first;
-      }
-    } else if (typeof total === 'number' && index === total - 1) {
-      if (prev === cover || prev === title) {
-        contentStyle = styles.only;
-      } else {
-        contentStyle = styles.last;
-      }
-    } else if (prev === cover || prev === title) {
+    } else {
       contentStyle = styles.first;
-    } else if (next === cover || next === title) {
+    }
+  } else if (typeof total === 'number' && index === total - 1) {
+    if (prev === cover || prev === title) {
+      contentStyle = styles.only;
+    } else {
       contentStyle = styles.last;
     }
-
-    return <View {...rest} style={[styles.container, contentStyle, style]} />;
+  } else if (prev === cover || prev === title) {
+    contentStyle = styles.first;
+  } else if (next === cover || next === title) {
+    contentStyle = styles.last;
   }
-}
+
+  return <View {...rest} style={[styles.container, contentStyle, style]} />;
+};
+
+CardContent.displayName = 'Card.Content';
 
 const styles = StyleSheet.create({
   container: {

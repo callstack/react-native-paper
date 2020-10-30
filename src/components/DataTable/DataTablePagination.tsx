@@ -10,10 +10,9 @@ import color from 'color';
 import IconButton from '../IconButton';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 
-type Props = React.ComponentProps<typeof View> & {
+type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * The currently visible page (starting with 0).
    */
@@ -34,62 +33,109 @@ type Props = React.ComponentProps<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
-class DataTablePagination extends React.Component<Props> {
-  static displayName = 'DataTable.Pagination';
+/**
+ * A component to show pagination for data table.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/data-table-pagination.png" />
+ *   </figure>
+ * </div>
+ *
+ *
+ * ## Usage
+ * ```js
+ * import * as React from 'react';
+ * import { DataTable } from 'react-native-paper';
+ *
+ * const itemsPerPage = 2;
+ *
+ * const items = [
+ *   {
+ *     key: 1,
+ *     name: 'Page 1',
+ *   },
+ *   {
+ *     key: 2,
+ *     name: 'Page 2',
+ *   },
+ *   {
+ *     key: 3,
+ *     name: 'Page 3',
+ *   },
+ * ];
+ *
+ * const MyComponent = () => {
+ *   const [page, setPage] = React.useState(0);
+ *   const from = page * itemsPerPage;
+ *   const to = (page + 1) * itemsPerPage;
+ *
+ *   return (
+ *     <DataTable>
+ *       <DataTable.Pagination
+ *         page={page}
+ *         numberOfPages={Math.floor(items.length / itemsPerPage)}
+ *         onPageChange={page => setPage(page)}
+ *         label={`${from + 1}-${to} of ${items.length}`}
+ *       />
+ *     </DataTable>
+ *   );
+ * };
+ *
+ * export default MyComponent;
+ * ```
+ */
 
-  render() {
-    const {
-      label,
-      page,
-      numberOfPages,
-      onPageChange,
-      style,
-      theme,
-      ...rest
-    } = this.props;
-    const labelColor = color(theme.colors.text)
-      .alpha(0.6)
-      .rgb()
-      .string();
+const DataTablePagination = ({
+  label,
+  page,
+  numberOfPages,
+  onPageChange,
+  style,
+  theme,
+  ...rest
+}: Props) => {
+  const labelColor = color(theme.colors.text).alpha(0.6).rgb().string();
 
-    return (
-      <View {...rest} style={[styles.container, style]}>
-        <Text style={[styles.label, { color: labelColor }]} numberOfLines={1}>
-          {label}
-        </Text>
-        <IconButton
-          icon={({ size, color }) => (
-            <MaterialCommunityIcon
-              name="chevron-left"
-              color={color}
-              size={size}
-              direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
-            />
-          )}
-          color={theme.colors.text}
-          disabled={page === 0}
-          onPress={() => onPageChange(page - 1)}
-        />
-        <IconButton
-          icon={({ size, color }) => (
-            <MaterialCommunityIcon
-              name="chevron-right"
-              color={color}
-              size={size}
-              direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
-            />
-          )}
-          color={theme.colors.text}
-          disabled={page === numberOfPages - 1}
-          onPress={() => onPageChange(page + 1)}
-        />
-      </View>
-    );
-  }
-}
+  return (
+    <View {...rest} style={[styles.container, style]}>
+      <Text style={[styles.label, { color: labelColor }]} numberOfLines={1}>
+        {label}
+      </Text>
+      <IconButton
+        icon={({ size, color }) => (
+          <MaterialCommunityIcon
+            name="chevron-left"
+            color={color}
+            size={size}
+            direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+          />
+        )}
+        color={theme.colors.text}
+        disabled={page === 0}
+        onPress={() => onPageChange(page - 1)}
+      />
+      <IconButton
+        icon={({ size, color }) => (
+          <MaterialCommunityIcon
+            name="chevron-right"
+            color={color}
+            size={size}
+            direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+          />
+        )}
+        color={theme.colors.text}
+        disabled={page === numberOfPages - 1}
+        onPress={() => onPageChange(page + 1)}
+      />
+    </View>
+  );
+};
+
+DataTablePagination.displayName = 'DataTable.Pagination';
 
 const styles = StyleSheet.create({
   container: {

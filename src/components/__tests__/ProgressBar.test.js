@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { View } from 'react-native';
+import { act } from 'react-native-testing-library';
 import renderer from 'react-test-renderer';
 import ProgressBar from '../ProgressBar.tsx';
-
-jest.useFakeTimers();
 
 const layoutEvent = {
   nativeEvent: {
@@ -15,28 +14,35 @@ const layoutEvent = {
 
 it('renders progress bar with specific progress', () => {
   const tree = renderer.create(<ProgressBar progress={0.2} />);
-  tree.root.findByType(View).props.onLayout(layoutEvent);
+  act(() => {
+    tree.root.findByType(View).props.onLayout(layoutEvent);
+  });
 
   expect(tree.toJSON()).toMatchSnapshot();
 });
 
 it('renders hidden progress bar', () => {
   const tree = renderer.create(<ProgressBar progress={0.2} visible={false} />);
-  tree.root.findByType(View).props.onLayout(layoutEvent);
+  act(() => {
+    tree.root.findByType(View).props.onLayout(layoutEvent);
+  });
 
   expect(tree.toJSON()).toMatchSnapshot();
 });
 
 it('renders colored progress bar', () => {
   const tree = renderer.create(<ProgressBar progress={0.2} color="red" />);
-  tree.root.findByType(View).props.onLayout(layoutEvent);
+  act(() => {
+    tree.root.findByType(View).props.onLayout(layoutEvent);
+  });
 
   expect(tree.toJSON()).toMatchSnapshot();
 });
 
 it('renders indeterminate progress bar', () => {
   const tree = renderer.create(<ProgressBar indeterminate />);
-  tree.root.findByType(View).props.onLayout(layoutEvent);
-
+  act(() => {
+    tree.root.findByType(View).props.onLayout(layoutEvent);
+  });
   expect(tree.toJSON()).toMatchSnapshot();
 });

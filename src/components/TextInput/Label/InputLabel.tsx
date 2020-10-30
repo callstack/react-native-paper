@@ -2,7 +2,7 @@ import React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 import AnimatedText from '../../Typography/AnimatedText';
 
-import { InputLabelProps } from '../types';
+import type { InputLabelProps } from '../types';
 
 const InputLabel = (props: InputLabelProps) => {
   const { parentState, labelBackground } = props;
@@ -25,6 +25,8 @@ const InputLabel = (props: InputLabelProps) => {
     topPosition,
     paddingOffset,
     placeholderColor,
+    errorColor,
+    labelTranslationXOffset,
   } = props.labelProps;
 
   const labelTranslationX = {
@@ -33,7 +35,7 @@ const InputLabel = (props: InputLabelProps) => {
         // Offset label scale since RN doesn't support transform origin
         translateX: parentState.labeled.interpolate({
           inputRange: [0, 1],
-          outputRange: [baseLabelTranslateX, 0],
+          outputRange: [baseLabelTranslateX, labelTranslationXOffset || 0],
         }),
       },
     ],
@@ -87,12 +89,11 @@ const InputLabel = (props: InputLabelProps) => {
         labelTranslationX,
       ]}
     >
-      {labelBackground &&
-        labelBackground({
-          parentState,
-          labelStyle,
-          labelProps: props.labelProps,
-        })}
+      {labelBackground?.({
+        parentState,
+        labelStyle,
+        labelProps: props.labelProps,
+      })}
       <AnimatedText
         onLayout={onLayoutAnimatedText}
         style={[
@@ -123,7 +124,7 @@ const InputLabel = (props: InputLabelProps) => {
           labelStyle,
           paddingOffset,
           {
-            color: placeholderColor,
+            color: error && errorColor ? errorColor : placeholderColor,
             opacity: placeholderOpacity,
           },
         ]}

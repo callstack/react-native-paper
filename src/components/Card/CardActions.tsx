@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
 
-type Props = React.ComponentProps<typeof View> & {
+type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Items inside the `CardActions`.
    */
@@ -12,10 +12,16 @@ type Props = React.ComponentProps<typeof View> & {
 /**
  * A component to show a list of actions inside a Card.
  *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/card-actions.png" />
+ *   </figure>
+ * </div>
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Button, Card } from 'react-native-paper';
+ * import { Card, Button } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <Card>
@@ -29,23 +35,19 @@ type Props = React.ComponentProps<typeof View> & {
  * export default MyComponent;
  * ```
  */
-class CardActions extends React.Component<Props> {
-  static displayName = 'Card.Actions';
+const CardActions = (props: Props) => (
+  <View {...props} style={[styles.container, props.style]}>
+    {React.Children.map(props.children, (child) =>
+      React.isValidElement(child)
+        ? React.cloneElement(child, {
+            compact: child.props.compact !== false,
+          })
+        : child
+    )}
+  </View>
+);
 
-  render() {
-    return (
-      <View {...this.props} style={[styles.container, this.props.style]}>
-        {React.Children.map(this.props.children, child =>
-          React.isValidElement(child)
-            ? React.cloneElement(child, {
-                compact: child.props.compact !== false,
-              })
-            : child
-        )}
-      </View>
-    );
-  }
-}
+CardActions.displayName = 'Card.Actions';
 
 const styles = StyleSheet.create({
   container: {

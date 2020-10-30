@@ -15,7 +15,7 @@ import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import { white } from '../../styles/colors';
 
-import { Theme, $RemoveChildren } from '../../types';
+import type { $RemoveChildren } from '../../types';
 
 type Props = $RemoveChildren<typeof View> & {
   /**
@@ -30,6 +30,10 @@ type Props = $RemoveChildren<typeof View> & {
    * Style for the title.
    */
   titleStyle?: StyleProp<TextStyle>;
+  /**
+   * Reference for the title.
+   */
+  titleRef?: React.RefObject<Text>;
   /**
    * Text for the subtitle.
    */
@@ -46,66 +50,83 @@ type Props = $RemoveChildren<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**
- * A component used to display a title and optional subtitle in a appbar.
+ * A component used to display a title and optional subtitle in an appbar.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/appbar-content.png" />
+ *   </figure>
+ * </div>
+ *
+ * ## Usage
+ * ```js
+ * import * as React from 'react';
+ * import { Appbar } from 'react-native-paper';
+ *
+ * const MyComponent = () => (
+ *     <Appbar.Header>
+ *        <Appbar.Content title="Title" subtitle={'Subtitle'} />
+ *     </Appbar.Header>
+ * );
+ *
+ * export default MyComponent;
+ * ```
  */
-class AppbarContent extends React.Component<Props> {
-  static displayName = 'Appbar.Content';
+const AppbarContent = ({
+  color: titleColor = white,
+  subtitle,
+  subtitleStyle,
+  onPress,
+  style,
+  titleRef,
+  titleStyle,
+  theme,
+  title,
+  ...rest
+}: Props) => {
+  const { fonts } = theme;
 
-  render() {
-    const {
-      color: titleColor = white,
-      subtitle,
-      subtitleStyle,
-      onPress,
-      style,
-      titleStyle,
-      theme,
-      title,
-      ...rest
-    } = this.props;
-    const { fonts } = theme;
+  const subtitleColor = color(titleColor).alpha(0.7).rgb().string();
 
-    const subtitleColor = color(titleColor)
-      .alpha(0.7)
-      .rgb()
-      .string();
-
-    return (
-      <TouchableWithoutFeedback onPress={onPress}>
-        <View style={[styles.container, style]} {...rest}>
+  return (
+    <TouchableWithoutFeedback onPress={onPress} disabled={!onPress}>
+      <View style={[styles.container, style]} {...rest}>
+        <Text
+          ref={titleRef}
+          style={[
+            {
+              color: titleColor,
+              ...(Platform.OS === 'ios' ? fonts.regular : fonts.medium),
+            },
+            styles.title,
+            titleStyle,
+          ]}
+          numberOfLines={1}
+          accessible
+          accessibilityTraits="header"
+          // @ts-ignore Type '"heading"' is not assignable to type ...
+          accessibilityRole={Platform.OS === 'web' ? 'heading' : 'header'}
+        >
+          {title}
+        </Text>
+        {subtitle ? (
           <Text
-            style={[
-              {
-                color: titleColor,
-                ...(Platform.OS === 'ios' ? fonts.regular : fonts.medium),
-              },
-              styles.title,
-              titleStyle,
-            ]}
+            style={[styles.subtitle, { color: subtitleColor }, subtitleStyle]}
             numberOfLines={1}
-            accessibilityTraits="header"
-            // @ts-ignore
-            accessibilityRole={Platform.OS === 'web' ? 'heading' : 'header'}
           >
-            {title}
+            {subtitle}
           </Text>
-          {subtitle ? (
-            <Text
-              style={[styles.subtitle, { color: subtitleColor }, subtitleStyle]}
-              numberOfLines={1}
-            >
-              {subtitle}
-            </Text>
-          ) : null}
-        </View>
-      </TouchableWithoutFeedback>
-    );
-  }
-}
+        ) : null}
+      </View>
+    </TouchableWithoutFeedback>
+  );
+};
+
+AppbarContent.displayName = 'Appbar.Content';
 
 const styles = StyleSheet.create({
   container: {

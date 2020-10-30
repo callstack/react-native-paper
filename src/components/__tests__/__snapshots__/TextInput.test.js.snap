@@ -1,0 +1,625 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`correctly renders left-side icon adornment, and right-side affix adornment  1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "rgb(231, 231, 231)",
+        "borderTopLeftRadius": 4,
+        "borderTopRightRadius": 4,
+      },
+      Object {},
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "rgba(0, 0, 0, 0.26)",
+        "bottom": 0,
+        "height": 2,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "transform": Array [
+          Object {
+            "scaleY": 0.5,
+          },
+        ],
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "minHeight": 64,
+        "paddingBottom": 0,
+        "paddingTop": 0,
+      }
+    }
+  >
+    <View
+      pointerEvents="none"
+      style={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "opacity": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "transform": Array [
+            Object {
+              "translateX": 3,
+            },
+          ],
+        }
+      }
+    >
+      <Text
+        numberOfLines={1}
+        onLayout={[Function]}
+        style={
+          Object {
+            "color": "#6200ee",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": undefined,
+            "left": 0,
+            "opacity": 0,
+            "paddingLeft": 12,
+            "paddingRight": 44,
+            "position": "absolute",
+            "textAlign": "left",
+            "top": 34,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+              Object {
+                "translateY": -16,
+              },
+              Object {
+                "scale": 0.75,
+              },
+            ],
+            "writingDirection": "ltr",
+          }
+        }
+      >
+        Flat input
+      </Text>
+      <Text
+        numberOfLines={1}
+        style={
+          Object {
+            "color": "rgba(0, 0, 0, 0.54)",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": undefined,
+            "left": 0,
+            "opacity": 0,
+            "paddingLeft": 12,
+            "paddingRight": 44,
+            "position": "absolute",
+            "textAlign": "left",
+            "top": 34,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+              Object {
+                "translateY": -16,
+              },
+              Object {
+                "scale": 0.75,
+              },
+            ],
+            "writingDirection": "ltr",
+          }
+        }
+      >
+        Flat input
+      </Text>
+    </View>
+    <TextInput
+      allowFontScaling={true}
+      editable={true}
+      multiline={false}
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder=""
+      placeholderTextColor="rgba(0, 0, 0, 0.54)"
+      rejectResponderTermination={true}
+      selectionColor="#6200ee"
+      style={
+        Array [
+          Object {
+            "flexGrow": 1,
+            "margin": 0,
+            "textAlign": "left",
+            "zIndex": 1,
+          },
+          Object {
+            "paddingLeft": 12,
+            "paddingRight": 44,
+          },
+          Object {
+            "height": 64,
+          },
+          Object {
+            "paddingBottom": 4,
+            "paddingTop": 24,
+          },
+          Object {
+            "color": "#000000",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": undefined,
+            "textAlignVertical": "center",
+          },
+          Object {
+            "marginLeft": 0,
+            "marginRight": 36,
+            "paddingLeft": 36,
+            "paddingRight": 8,
+          },
+        ]
+      }
+      underlineColorAndroid="transparent"
+      value="Some test value"
+    />
+  </View>
+  <View
+    onLayout={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "left": 12,
+        "opacity": 1,
+        "position": "absolute",
+        "top": null,
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "rgba(0, 0, 0, 0.54)",
+          },
+          Object {
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": undefined,
+          },
+          Object {
+            "color": "#FF0000",
+          },
+        ]
+      }
+    >
+      /100
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "height": 24,
+          "justifyContent": "center",
+          "position": "absolute",
+          "width": 24,
+        },
+        Object {
+          "right": 12,
+          "top": 20,
+        },
+      ]
+    }
+  >
+    <View
+      accessibilityRole="button"
+      accessibilityState={
+        Object {
+          "disabled": undefined,
+        }
+      }
+      accessible={true}
+      focusable={true}
+      hitSlop={
+        Object {
+          "bottom": 6,
+          "left": 6,
+          "right": 6,
+          "top": 6,
+        }
+      }
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+              "margin": 6,
+              "overflow": "hidden",
+            },
+            Object {
+              "borderRadius": 18,
+              "height": 36,
+              "width": 36,
+            },
+            undefined,
+            Object {
+              "margin": 0,
+            },
+          ],
+        ]
+      }
+    >
+      <View>
+        <Text
+          accessibilityElementsHidden={true}
+          allowFontScaling={false}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontSize": 24,
+              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`correctly renders left-side icon adornment, and right-side affix adornment 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "rgb(231, 231, 231)",
+        "borderTopLeftRadius": 4,
+        "borderTopRightRadius": 4,
+      },
+      Object {},
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "rgba(0, 0, 0, 0.26)",
+        "bottom": 0,
+        "height": 2,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "transform": Array [
+          Object {
+            "scaleY": 0.5,
+          },
+        ],
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "minHeight": 64,
+        "paddingBottom": 0,
+        "paddingTop": 0,
+      }
+    }
+  >
+    <View
+      pointerEvents="none"
+      style={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "opacity": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "transform": Array [
+            Object {
+              "translateX": 11,
+            },
+          ],
+        }
+      }
+    >
+      <Text
+        numberOfLines={1}
+        onLayout={[Function]}
+        style={
+          Object {
+            "color": "#6200ee",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": undefined,
+            "left": 0,
+            "opacity": 0,
+            "paddingLeft": 44,
+            "paddingRight": 44,
+            "position": "absolute",
+            "textAlign": "left",
+            "top": 34,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+              Object {
+                "translateY": -16,
+              },
+              Object {
+                "scale": 0.75,
+              },
+            ],
+            "writingDirection": "ltr",
+          }
+        }
+      >
+        Flat input
+      </Text>
+      <Text
+        numberOfLines={1}
+        style={
+          Object {
+            "color": "rgba(0, 0, 0, 0.54)",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": undefined,
+            "left": 0,
+            "opacity": 0,
+            "paddingLeft": 44,
+            "paddingRight": 44,
+            "position": "absolute",
+            "textAlign": "left",
+            "top": 34,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+              Object {
+                "translateY": -16,
+              },
+              Object {
+                "scale": 0.75,
+              },
+            ],
+            "writingDirection": "ltr",
+          }
+        }
+      >
+        Flat input
+      </Text>
+    </View>
+    <TextInput
+      allowFontScaling={true}
+      editable={true}
+      multiline={false}
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder=""
+      placeholderTextColor="rgba(0, 0, 0, 0.54)"
+      rejectResponderTermination={true}
+      selectionColor="#6200ee"
+      style={
+        Array [
+          Object {
+            "flexGrow": 1,
+            "margin": 0,
+            "textAlign": "left",
+            "zIndex": 1,
+          },
+          Object {
+            "paddingLeft": 44,
+            "paddingRight": 44,
+          },
+          Object {
+            "height": 64,
+          },
+          Object {
+            "paddingBottom": 4,
+            "paddingTop": 24,
+          },
+          Object {
+            "color": "#000000",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": undefined,
+            "textAlignVertical": "center",
+          },
+          Object {
+            "marginLeft": 36,
+            "marginRight": 0,
+            "paddingLeft": 8,
+            "paddingRight": 36,
+          },
+        ]
+      }
+      underlineColorAndroid="transparent"
+      value="Some test value"
+    />
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "height": 24,
+          "justifyContent": "center",
+          "position": "absolute",
+          "width": 24,
+        },
+        Object {
+          "left": 12,
+          "top": 20,
+        },
+      ]
+    }
+  >
+    <View
+      accessibilityRole="button"
+      accessibilityState={
+        Object {
+          "disabled": undefined,
+        }
+      }
+      accessible={true}
+      focusable={true}
+      hitSlop={
+        Object {
+          "bottom": 6,
+          "left": 6,
+          "right": 6,
+          "top": 6,
+        }
+      }
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+              "margin": 6,
+              "overflow": "hidden",
+            },
+            Object {
+              "borderRadius": 18,
+              "height": 36,
+              "width": 36,
+            },
+            undefined,
+            Object {
+              "margin": 0,
+            },
+          ],
+        ]
+      }
+    >
+      <View>
+        <Text
+          accessibilityElementsHidden={true}
+          allowFontScaling={false}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontSize": 24,
+              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    onLayout={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "opacity": 1,
+        "position": "absolute",
+        "right": 12,
+        "top": null,
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "rgba(0, 0, 0, 0.54)",
+          },
+          Object {
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": undefined,
+          },
+          Object {
+            "color": "#FF0000",
+          },
+        ]
+      }
+    >
+      /100
+    </Text>
+  </View>
+</View>
+`;

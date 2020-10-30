@@ -8,21 +8,30 @@
     "start": "expo start",
     "android": "expo android",
     "ios": "expo ios",
-    "web": "webpack-dev-server --open"
+    "web": "expo start:web"
   },
   "main": "node_modules/expo/AppEntry.js",
   "dependencies": {
-    "@callstack/react-theme-provider": "^3.0.2",
-    "@reach/router": "^1.2.1",
-    "expo": "^33.0.5",
-    "expo-keep-awake": "^5.0.1",
+    "@expo/vector-icons": "^10.2.0",
+    "@react-native-community/async-storage": "~1.11.0",
+    "@react-native-community/masked-view": "0.1.10",
+    "@react-navigation/drawer": "^5.6.1",
+    "@react-navigation/native": "^5.2.1",
+    "@react-navigation/stack": "^5.2.16",
+    "expo": "^38.0.0",
+    "expo-font": "~8.2.1",
+    "expo-keep-awake": "~8.2.1",
+    "expo-splash-screen": "~0.3.1",
     "file-loader": "^4.0.0",
-    "react": "16.8.3",
-    "react-art": "^16.7.0",
-    "react-lifecycles-compat": "^3.0.4",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
-    "react-native-web": "^0.11.4",
-    "react-navigation": "^2.18.2",
+    "react": "16.11.0",
+    "react-dom": "16.11.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.0.tar.gz",
+    "react-native-gesture-handler": "~1.6.0",
+    "react-native-reanimated": "~1.9.0",
+    "react-native-safe-area-context": "3.0.2",
+    "react-native-screens": "~2.9.0",
+    "react-native-vector-icons": "^6.6.0",
+    "react-native-web": "~0.13.0",
     "typeface-roboto": "^0.0.54"
   },
   "devDependencies": {
@@ -32,21 +41,8 @@
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
-    "@types/react-navigation": "^2.13.10",
-    "babel-loader": "^8.0.5",
-    "babel-plugin-module-resolver": "^3.1.1",
-    "babel-preset-expo": "^5.0.0",
-    "css-loader": "^3.0.0",
-    "expo-cli": "^2.3.8",
-    "style-loader": "^0.23.1",
-    "webpack": "^4.29.0",
-    "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "^3.1.14"
-  },
-  "resolutions": {
-    "**/color": "3.1.2",
-    "**/hoist-non-react-statics": "3.3.0",
-    "**/react-lifecycles-compat": "3.0.4",
-    "**/react": "16.8.3"
+    "babel-plugin-module-resolver": "^4.0.0",
+    "babel-preset-expo": "^8.2.3",
+    "expo-cli": "^3.4.1"
   }
 }

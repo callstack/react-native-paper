@@ -9,13 +9,12 @@ import {
 } from 'react-native';
 import setColor from 'color';
 import { withTheme } from '../core/theming';
-import { Theme } from '../types';
 
 const version = NativeModules.PlatformConstants
   ? NativeModules.PlatformConstants.reactNativeVersion
   : undefined;
 
-type Props = React.ComponentProps<typeof NativeSwitch> & {
+type Props = React.ComponentPropsWithRef<typeof NativeSwitch> & {
   /**
    * Disable toggling the switch.
    */
@@ -36,7 +35,7 @@ type Props = React.ComponentProps<typeof NativeSwitch> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**
@@ -66,93 +65,78 @@ type Props = React.ComponentProps<typeof NativeSwitch> & {
  * import * as React from 'react';
  * import { Switch } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     isSwitchOn: false,
- *   };
+ * const MyComponent = () => {
+ *   const [isSwitchOn, setIsSwitchOn] = React.useState(false);
  *
- *   render() {
- *     const { isSwitchOn } = this.state;
- *     return (
- *       <Switch
- *         value={isSwitchOn}
- *         onValueChange={() =>
- *           { this.setState({ isSwitchOn: !isSwitchOn }); }
- *         }
- *       />
- *     );
- *   }
- * }
+ *   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+ *
+ *   return <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />;
+ * };
+ *
+ * export default MyComponent;
  * ```
  */
-class Switch extends React.Component<Props> {
-  render() {
-    const {
-      value,
-      disabled,
-      onValueChange,
-      color,
-      theme,
-      ...rest
-    } = this.props;
+const Switch = ({
+  value,
+  disabled,
+  onValueChange,
+  color,
+  theme,
+  ...rest
+}: Props) => {
+  const checkedColor = color || theme.colors.accent;
 
-    const checkedColor = color || theme.colors.accent;
+  const onTintColor =
+    Platform.OS === 'ios'
+      ? checkedColor
+      : disabled
+      ? theme.dark
+        ? setColor(white).alpha(0.1).rgb().string()
+        : setColor(black).alpha(0.12).rgb().string()
+      : setColor(checkedColor).alpha(0.5).rgb().string();
 
-    const onTintColor =
-      Platform.OS === 'ios'
-        ? checkedColor
-        : disabled
-        ? theme.dark
-          ? setColor(white)
-              .alpha(0.1)
-              .rgb()
-              .string()
-          : setColor(black)
-              .alpha(0.12)
-              .rgb()
-              .string()
-        : setColor(checkedColor)
-            .alpha(0.5)
-            .rgb()
-            .string();
+  const thumbTintColor =
+    Platform.OS === 'ios'
+      ? undefined
+      : disabled
+      ? theme.dark
+        ? grey800
+        : grey400
+      : value
+      ? checkedColor
+      : theme.dark
+      ? grey400
+      : grey50;
 
-    const thumbTintColor =
-      Platform.OS === 'ios'
-        ? undefined
-        : disabled
-        ? theme.dark
-          ? grey800
-          : grey400
-        : value
-        ? checkedColor
-        : theme.dark
-        ? grey400
-        : grey50;
+  const props =
+    version && version.major === 0 && version.minor <= 56
+      ? {
+          onTintColor,
+          thumbTintColor,
+        }
+      : Platform.OS === 'web'
+      ? {
+          activeTrackColor: onTintColor,
+          thumbColor: thumbTintColor,
+          activeThumbColor: checkedColor,
+        }
+      : {
+          thumbColor: thumbTintColor,
+          trackColor: {
+            true: onTintColor,
+            false: '',
+          },
+        };
 
-    const props =
-      version && version.major === 0 && version.minor <= 56
-        ? {
-            onTintColor,
-            thumbTintColor,
-          }
-        : {
-            thumbColor: thumbTintColor,
-            trackColor: {
-              true: onTintColor,
-              false: '',
-            },
-          };
-
-    return (
-      <NativeSwitch
-        value={value}
-        disabled={disabled}
-        onValueChange={disabled ? undefined : onValueChange}
-        {...props}
-        {...rest}
-      />
-    );
-  }
-}
+  return (
+    <NativeSwitch
+      value={value}
+      disabled={disabled}
+      onValueChange={disabled ? undefined : onValueChange}
+      {...props}
+      {...rest}
+    />
+  );
+};
 
 export default withTheme(Switch);

@@ -9,27 +9,26 @@ import {
 } from 'react-native';
 import { BottomNavigation } from 'react-native-paper';
 
-type State = {
-  index: number;
-  routes: Array<{
-    key: string;
-    title: string;
-    icon: string;
-    color?: string;
-    badge?: boolean;
-    getAccessibilityLabel?: string;
-    getTestID?: string;
-  }>;
-};
+type RoutesState = Array<{
+  key: string;
+  title: string;
+  icon: string;
+  color?: string;
+  badge?: boolean;
+  getAccessibilityLabel?: string;
+  getTestID?: string;
+}>;
 
-const PhotoGallery = ({ route }: any) => {
+type Route = { route: { key: string } };
+
+const PhotoGallery = ({ route }: Route) => {
   const PHOTOS = Array.from({ length: 24 }).map(
     (_, i) => `https://unsplash.it/300/300/?random&__id=${route.key}${i}`
   );
 
   return (
     <ScrollView contentContainerStyle={styles.content}>
-      {PHOTOS.map(uri => (
+      {PHOTOS.map((uri) => (
         <View key={uri} style={styles.item}>
           <Image source={{ uri }} style={styles.photo} />
         </View>
@@ -38,54 +37,48 @@ const PhotoGallery = ({ route }: any) => {
   );
 };
 
-export default class BottomNavigationExample extends React.Component<
-  {},
-  State
-> {
-  static title = 'Bottom Navigation';
+const BottomNavigationExample = () => {
+  const [index, setIndex] = React.useState(0);
+  const [routes] = React.useState<RoutesState>([
+    { key: 'album', title: 'Album', icon: 'image-album', color: '#6200ee' },
+    {
+      key: 'library',
+      title: 'Library',
+      icon: 'inbox',
+      color: '#2962ff',
+      badge: true,
+    },
+    {
+      key: 'favorites',
+      title: 'Favorites',
+      icon: 'heart',
+      color: '#00796b',
+    },
+    {
+      key: 'purchased',
+      title: 'Purchased',
+      icon: 'shopping-music',
+      color: '#c51162',
+    },
+  ]);
 
-  state = {
-    index: 0,
-    routes: [
-      { key: 'album', title: 'Album', icon: 'image-album' },
-      {
-        key: 'library',
-        title: 'Library',
-        icon: 'inbox',
-        color: '#2962ff',
-        badge: true,
-      },
-      {
-        key: 'favorites',
-        title: 'Favorites',
-        icon: 'heart',
-        color: '#00796b',
-      },
-      {
-        key: 'purchased',
-        title: 'Purchased',
-        icon: 'shopping-music',
-        color: '#c51162',
-      },
-    ],
-  };
+  return (
+    <BottomNavigation
+      navigationState={{ index, routes }}
+      onIndexChange={setIndex}
+      renderScene={BottomNavigation.SceneMap({
+        album: PhotoGallery,
+        library: PhotoGallery,
+        favorites: PhotoGallery,
+        purchased: PhotoGallery,
+      })}
+    />
+  );
+};
 
-  render() {
-    return (
-      <BottomNavigation
-        navigationState={this.state}
-        onIndexChange={index => this.setState({ index })}
-        // @ts-ignore
-        renderScene={BottomNavigation.SceneMap({
-          album: PhotoGallery,
-          library: PhotoGallery,
-          favorites: PhotoGallery,
-          purchased: PhotoGallery,
-        })}
-      />
-    );
-  }
-}
+BottomNavigationExample.title = 'Bottom Navigation';
+
+export default BottomNavigationExample;
 
 const styles = StyleSheet.create({
   ...Platform.select({

@@ -11,7 +11,6 @@ import {
 import SafeAreaView from 'react-native-safe-area-view';
 import Surface from './Surface';
 import { withTheme } from '../core/theming';
-import { Theme } from '../types';
 
 type Props = {
   /**
@@ -22,6 +21,10 @@ type Props = {
    * Callback that is called when the user dismisses the modal.
    */
   onDismiss?: () => void;
+  /**
+   * Accessibility label for the overlay. This is read by the screen reader when the user taps outside the modal.
+   */
+  overlayAccessibilityLabel?: string;
   /**
    * Determines Whether the modal is visible.
    */
@@ -37,7 +40,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 type State = {
@@ -45,42 +48,45 @@ type State = {
   rendered: boolean;
 };
 
+const DEFAULT_DURATION = 220;
+
 /**
  * The Modal component is a simple way to present content above an enclosing view.
  * To render the `Modal` above other components, you'll need to wrap it with the [`Portal`](portal.html) component.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/modal.gif" />
+ *   </figure>
+ * </div>
  *
  * ## Usage
  * ```js
  * import * as React from 'react';
  * import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     visible: false,
- *   };
+ * const MyComponent = () => {
+ *   const [visible, setVisible] = React.useState(false);
  *
- *   _showModal = () => this.setState({ visible: true });
- *   _hideModal = () => this.setState({ visible: false });
+ *   const showModal = () => setVisible(true);
+ *   const hideModal = () => setVisible(false);
+ *   const containerStyle = {backgroundColor: 'white', padding: 20};
  *
- *   render() {
- *     const { visible } = this.state;
- *     return (
- *       <Provider>
- *          <Portal>
- *            <Modal visible={visible} onDismiss={this._hideModal}>
- *              <Text>Example Modal</Text>
- *            </Modal>
- *            <Button
- *              style={{ marginTop: 30 }}
- *              onPress={this._showModal}
- *            >
- *              Show
- *            </Button>
- *          </Portal>
- *       </Provider>
- *     );
- *   }
- * }
+ *   return (
+ *     <Provider>
+ *       <Portal>
+ *         <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
+ *           <Text>Example Modal.  Click outside this area to dismiss.</Text>
+ *         </Modal>
+ *       </Portal>
+ *       <Button style={{marginTop: 30}} onPress={showModal}>
+ *         Show
+ *       </Button>
+ *     </Provider>
+ *   );
+ * };
+ *
+ * export default MyComponent;
  * ```
  */
 
@@ -88,6 +94,7 @@ class Modal extends React.Component<Props, State> {
   static defaultProps = {
     dismissable: true,
     visible: false,
+    overlayAccessibilityLabel: 'Close modal',
   };
 
   static getDerivedStateFromProps(nextProps: Props, prevState: State) {
@@ -108,59 +115,57 @@ class Modal extends React.Component<Props, State> {
   componentDidUpdate(prevProps: Props) {
     if (prevProps.visible !== this.props.visible) {
       if (this.props.visible) {
-        this._showModal();
+        this.showModal();
       } else {
-        this._hideModal();
+        this.hideModal();
       }
     }
   }
 
-  _handleBack = () => {
+  private handleBack = () => {
     if (this.props.dismissable) {
-      this._hideModal();
+      this.hideModal();
     }
     return true;
   };
 
-  _showModal = () => {
-    const {
-      theme: {
-        animation: { scale },
-      },
-    } = this.props;
+  private showModal = () => {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBack);
+    BackHandler.addEventListener('hardwareBackPress', this.handleBack);
 
-    BackHandler.removeEventListener('hardwareBackPress', this._handleBack);
-    BackHandler.addEventListener('hardwareBackPress', this._handleBack);
-    Animated.timing(this.state.opacity, {
+    const { opacity } = this.state;
+    const { scale } = this.props.theme.animation;
+
+    Animated.timing(opacity, {
       toValue: 1,
-      duration: scale * 280,
-      easing: Easing.ease,
+      duration: scale * DEFAULT_DURATION,
+      easing: Easing.out(Easing.cubic),
       useNativeDriver: true,
     }).start();
   };
 
-  _hideModal = () => {
-    const {
-      theme: {
-        animation: { scale },
-      },
-    } = this.props;
+  private hideModal = () => {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBack);
 
-    BackHandler.removeEventListener('hardwareBackPress', this._handleBack);
-    Animated.timing(this.state.opacity, {
+    const { opacity } = this.state;
+    const { scale } = this.props.theme.animation;
+
+    Animated.timing(opacity, {
       toValue: 0,
-      duration: scale * 280,
-      easing: Easing.ease,
+      duration: scale * DEFAULT_DURATION,
+      easing: Easing.out(Easing.cubic),
       useNativeDriver: true,
     }).start(({ finished }) => {
       if (!finished) {
         return;
       }
+
       if (this.props.visible && this.props.onDismiss) {
         this.props.onDismiss();
       }
+
       if (this.props.visible) {
-        this._showModal();
+        this.showModal();
       } else {
         this.setState({
           rendered: false,
@@ -170,13 +175,21 @@ class Modal extends React.Component<Props, State> {
   };
 
   componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this._handleBack);
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBack);
   }
 
   render() {
-    if (!this.state.rendered) return null;
+    const { rendered, opacity } = this.state;
 
-    const { children, dismissable, theme, contentContainerStyle } = this.props;
+    if (!rendered) return null;
+
+    const {
+      children,
+      dismissable,
+      theme,
+      contentContainerStyle,
+      overlayAccessibilityLabel,
+    } = this.props;
     const { colors } = theme;
     return (
       <Animated.View
@@ -184,25 +197,27 @@ class Modal extends React.Component<Props, State> {
         accessibilityViewIsModal
         accessibilityLiveRegion="polite"
         style={StyleSheet.absoluteFill}
+        onAccessibilityEscape={this.hideModal}
       >
         <TouchableWithoutFeedback
-          onPress={dismissable ? this._hideModal : undefined}
+          accessibilityLabel={overlayAccessibilityLabel}
+          accessibilityRole="button"
+          disabled={!dismissable}
+          onPress={dismissable ? this.hideModal : undefined}
         >
           <Animated.View
             style={[
               styles.backdrop,
-              { backgroundColor: colors.backdrop, opacity: this.state.opacity },
+              { backgroundColor: colors.backdrop, opacity },
             ]}
           />
         </TouchableWithoutFeedback>
-        <SafeAreaView style={styles.wrapper}>
+        <SafeAreaView style={styles.wrapper} pointerEvents="box-none">
           <Surface
             style={
-              [
-                { opacity: this.state.opacity },
-                styles.content,
-                contentContainerStyle,
-              ] as StyleProp<ViewStyle>
+              [{ opacity }, styles.content, contentContainerStyle] as StyleProp<
+                ViewStyle
+              >
             }
           >
             {children}

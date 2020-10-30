@@ -2,7 +2,7 @@
 
 # Based on domenic's tutorial: https://gist.github.com/domenic/ec8b0fc8ab45f39403dd
 
-set -e # Exit with nonzero exit code if anything fails
+set -euxo pipefail # Exit with nonzero exit code if anything fails
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -29,10 +29,16 @@ rm -f dist/*.{html,css,js,json,map} || :
 rmdir dist/* || :
 
 # Run our build script.
+yarn
 yarn build
 
 # Build the docs for 1.0
 git checkout 1.0
+yarn
+yarn build
+
+# Build the docs for 2.0
+git checkout 2.0
 yarn
 yarn build
 
@@ -43,15 +49,16 @@ cd dist
 git config user.name "$COMMIT_AUTHOR_NAME"
 git config user.email "$COMMIT_AUTHOR_EMAIL"
 
+git add -A .
+
 # If there are no changes to the compiled dist (e.g. this is a README update) then just bail.
-if git diff --quiet; then
+if git diff --cached --quiet; then
     echo "No changes to the output on this push; exiting."
     exit 0
 fi
 
 # Commit the "changes", i.e. the new version.
 # The delta will show diffs between new and old versions.
-git add -A .
 git commit -m "Deploy to GitHub Pages: ${SHA}"
 
 # Now that we're all set up, we can push.

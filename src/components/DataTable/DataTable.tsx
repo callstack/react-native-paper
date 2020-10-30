@@ -16,7 +16,7 @@ import DataTablePagination, {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import DataTableRow, { DataTableRow as _DataTableRow } from './DataTableRow';
 
-type Props = React.ComponentProps<typeof View> & {
+type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Content of the `DataTable`.
    */
@@ -39,66 +39,60 @@ type Props = React.ComponentProps<typeof View> & {
  * import * as React from 'react';
  * import { DataTable } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   render() {
- *     return (
- *       <DataTable>
- *         <DataTable.Header>
- *           <DataTable.Title>Dessert</DataTable.Title>
- *           <DataTable.Title numeric>Calories</DataTable.Title>
- *           <DataTable.Title numeric>Fat</DataTable.Title>
- *         </DataTable.Header>
+ * const MyComponent = () => (
+ *   <DataTable>
+ *     <DataTable.Header>
+ *       <DataTable.Title>Dessert</DataTable.Title>
+ *       <DataTable.Title numeric>Calories</DataTable.Title>
+ *       <DataTable.Title numeric>Fat</DataTable.Title>
+ *     </DataTable.Header>
  *
- *         <DataTable.Row>
- *           <DataTable.Cell>Frozen yogurt</DataTable.Cell>
- *           <DataTable.Cell numeric>159</DataTable.Cell>
- *           <DataTable.Cell numeric>6.0</DataTable.Cell>
- *         </DataTable.Row>
+ *     <DataTable.Row>
+ *       <DataTable.Cell>Frozen yogurt</DataTable.Cell>
+ *       <DataTable.Cell numeric>159</DataTable.Cell>
+ *       <DataTable.Cell numeric>6.0</DataTable.Cell>
+ *     </DataTable.Row>
  *
- *         <DataTable.Row>
- *           <DataTable.Cell>Ice cream sandwich</DataTable.Cell>
- *           <DataTable.Cell numeric>237</DataTable.Cell>
- *           <DataTable.Cell numeric>8.0</DataTable.Cell>
- *         </DataTable.Row>
+ *     <DataTable.Row>
+ *       <DataTable.Cell>Ice cream sandwich</DataTable.Cell>
+ *       <DataTable.Cell numeric>237</DataTable.Cell>
+ *       <DataTable.Cell numeric>8.0</DataTable.Cell>
+ *     </DataTable.Row>
  *
- *         <DataTable.Pagination
- *           page={1}
- *           numberOfPages={3}
- *           onPageChange={(page) => { console.log(page); }}
- *           label="1-2 of 6"
- *         />
- *       </DataTable>
- *     );
- *   }
- * }
+ *     <DataTable.Pagination
+ *       page={1}
+ *       numberOfPages={3}
+ *       onPageChange={page => {
+ *         console.log(page);
+ *       }}
+ *       label="1-2 of 6"
+ *     />
+ *   </DataTable>
+ * );
+ *
+ * export default MyComponent;
  * ```
  */
-class DataTable extends React.Component<Props> {
-  // @component ./DataTableHeader.tsx
-  static Header = DataTableHeader;
+const DataTable = ({ children, style, ...rest }: Props) => (
+  <View {...rest} style={[styles.container, style]}>
+    {children}
+  </View>
+);
 
-  // @component ./DataTableTitle.tsx
-  static Title = DataTableTitle;
+// @component ./DataTableHeader.tsx
+DataTable.Header = DataTableHeader;
 
-  // @component ./DataTableRow.tsx
-  static Row = DataTableRow;
+// @component ./DataTableTitle.tsx
+DataTable.Title = DataTableTitle;
 
-  // @component ./DataTableCell.tsx
-  static Cell = DataTableCell;
+// @component ./DataTableRow.tsx
+DataTable.Row = DataTableRow;
 
-  // @component ./DataTablePagination.tsx
-  static Pagination = DataTablePagination;
+// @component ./DataTableCell.tsx
+DataTable.Cell = DataTableCell;
 
-  render() {
-    const { children, style, ...rest } = this.props;
-
-    return (
-      <View {...rest} style={[styles.container, style]}>
-        {children}
-      </View>
-    );
-  }
-}
+// @component ./DataTablePagination.tsx
+DataTable.Pagination = DataTablePagination;
 
 const styles = StyleSheet.create({
   container: {

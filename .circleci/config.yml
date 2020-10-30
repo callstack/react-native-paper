@@ -1,107 +1,128 @@
-version: 2
+version: 2.1
 
-defaults: &defaults
-  docker:
-    - image: circleci/node:10
-  working_directory: ~/react-native-paper
+executors:
+  default:
+    docker:
+      - image: circleci/node:10
+    working_directory: ~/react-native-paper
+
+commands:
+  attach_project:
+    steps:
+      - attach_workspace:
+          at: ~/react-native-paper
 
 jobs:
   install-dependencies:
-    <<: *defaults
+    executor: default
     steps:
       - checkout
-      - attach_workspace:
-          at: ~/react-native-paper
+      - attach_project
       - restore_cache:
           keys:
             - dependencies-{{ checksum "package.json" }}
             - dependencies-
       - restore_cache:
           keys:
-            - dependencies-docs-{{ checksum "docs/package.json" }}
-            - dependencies-docs-
-      - restore_cache:
-          keys:
             - dependencies-example-{{ checksum "example/package.json" }}
             - dependencies-example-
-      - run: |
-          yarn install --cwd example --frozen-lockfile
-          yarn install --cwd docs --frozen-lockfile
-          yarn install --frozen-lockfile
+      - run:
+          name: Install dependencies
+          command: |
+            yarn install --cwd example --frozen-lockfile
+            yarn install --cwd docs --frozen-lockfile
+            yarn install --frozen-lockfile
       - save_cache:
           key: dependencies-{{ checksum "package.json" }}
-          paths: node_modules
+          paths: 
+            - node_modules
       - save_cache:
           key: dependencies-docs-{{ checksum "docs/package.json" }}
-          paths: docs/node_modules
+          paths: 
+            - docs/node_modules
       - save_cache:
           key: dependencies-example-{{ checksum "example/package.json" }}
-          paths: example/node_modules
+          paths: 
+            - example/node_modules
       - persist_to_workspace:
           root: .
-          paths: .
+          paths: 
+            - .
   lint:
-      <<: *defaults
-      steps:
-        - attach_workspace:
-            at: ~/react-native-paper
-        - run: |
+    executor: default
+    steps:
+      - attach_project
+      - run:
+          name: Lint files
+          command: |
             yarn lint
+
   typescript:
-      <<: *defaults
-      steps:
-        - attach_workspace:
-            at: ~/react-native-paper
-        - run: yarn typescript
-  build-package:
-      <<: *defaults
-      steps:
-        - attach_workspace:
-            at: ~/react-native-paper
-        - run: yarn prepare
+    executor: default
+    steps:
+      - attach_project
+      - run:
+          name: Typecheck files
+          command: |
+            yarn typescript
+
   unit-tests:
-      <<: *defaults
-      steps:
-        - attach_workspace:
-            at: ~/react-native-paper
-        - restore_cache:
-            name: Restoring Jest Cache
-            keys:
+    executor: default
+    steps:
+      - attach_project
+      - restore_cache:
+          name: Restore Jest Cache
+          keys:
             - jest-cache-{{ .Branch }}
             - jest-cache
-        - run: yarn test --maxWorkers=2 --coverage
-        - store_artifacts:
-            path: coverage
-            destination: coverage
-        - save_cache:
-            paths:
+      - run:
+          name: Run unit tests
+          command: |
+            yarn test --maxWorkers=2 --coverage
+      - store_artifacts:
+          path: coverage
+          destination: coverage
+      - save_cache:
+          paths: 
             - ./cache/jest
-            key: jest-cache-{{ .Branch }}
+          key: jest-cache-{{ .Branch }}
+
+  build-package:
+    executor: default
+    steps:
+      - attach_project
+      - run:
+          name: Build package
+          command: |
+            yarn prepare
+
   build-docs:
-      <<: *defaults
-      steps:
-        - attach_workspace:
-            at: ~/react-native-paper
-        - run: |
+    executor: default
+    steps:
+      - attach_project
+      - run:
+          name: Build docs
+          command: |
             cd docs && yarn build && cd ..
             bash .circleci/comment-artifacts.sh
-        - store_artifacts:
-            path: docs/dist
-            destination: docs
+      - store_artifacts:
+          path: docs/dist
+          destination: docs
+
   deploy-docs:
-      <<: *defaults
-      steps:
-        - checkout
-        - attach_workspace:
-            at: ~/react-native-paper
-        - add_ssh_keys:
-            fingerprints:
-              - "2f:b4:ed:e1:25:88:5c:4a:03:c2:16:40:56:70:29:29"
-        - run: |
+    executor: default
+    steps:
+      - checkout
+      - attach_project
+      - add_ssh_keys:
+          fingerprints:
+            - '2f:b4:ed:e1:25:88:5c:4a:03:c2:16:40:56:70:29:29'
+      - run:
+          name: Deploy docs to GitHub pages
+          command: |
             bash .circleci/deploy-docs.sh
 
 workflows:
-  version: 2
   build-and-test:
     jobs:
       - install-dependencies
@@ -124,8 +145,6 @@ workflows:
             branches:
               ignore: master
       - deploy-docs:
-          requires:
-            - install-dependencies
           filters:
             branches:
               only: master

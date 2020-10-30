@@ -3,11 +3,10 @@ import * as React from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import Text from '../Typography/Text';
 import Icon, { IconSource } from '../Icon';
-import TouchableRipple from '../TouchableRipple';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 
-type Props = {
+type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * The label text of the item.
    */
@@ -24,15 +23,25 @@ type Props = {
    * Function to execute on press.
    */
   onPress?: () => void;
+  /**
+   * Accessibility label for the button. This is read by the screen reader when the user taps the button.
+   */
+  accessibilityLabel?: string;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**
  * A component used to show an action item with an icon and a label in a navigation drawer.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/drawer-item.png" />
+ *   </figure>
+ * </div>
  *
  * ## Usage
  * ```js
@@ -40,76 +49,79 @@ type Props = {
  * import { Drawer } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Drawer.Item label="First Item" />
+ *    <Drawer.Item
+ *      style={{ backgroundColor: '#64ffda' }}
+ *      icon="star"
+ *      label="First Item"
+ *    />
  * );
  *
  * export default MyComponent;
  * ```
  */
-class DrawerItem extends React.Component<Props> {
-  static displayName = 'Drawer.Item';
+const DrawerItem = ({
+  icon,
+  label,
+  active,
+  theme,
+  style,
+  onPress,
+  accessibilityLabel,
+  ...rest
+}: Props) => {
+  const { colors, roundness } = theme;
+  const backgroundColor = active
+    ? color(colors.primary).alpha(0.12).rgb().string()
+    : 'transparent';
+  const contentColor = active
+    ? colors.primary
+    : color(colors.text).alpha(0.68).rgb().string();
+  const font = theme.fonts.medium;
+  const labelMargin = icon ? 32 : 0;
 
-  render() {
-    const { icon, label, active, theme, style, onPress, ...rest } = this.props;
-    const { colors, roundness } = theme;
-    const backgroundColor = active
-      ? color(colors.primary)
-          .alpha(0.12)
-          .rgb()
-          .string()
-      : 'transparent';
-    const contentColor = active
-      ? colors.primary
-      : color(colors.text)
-          .alpha(0.68)
-          .rgb()
-          .string();
-    const font = theme.fonts.medium;
-    const labelMargin = icon ? 32 : 0;
-
-    return (
-      <View
-        {...rest}
-        style={[
-          styles.container,
-          { backgroundColor, borderRadius: roundness },
-          style,
-        ]}
+  return (
+    <View
+      {...rest}
+      style={[
+        styles.container,
+        { backgroundColor, borderRadius: roundness },
+        style,
+      ]}
+    >
+      <TouchableRipple
+        borderless
+        delayPressIn={0}
+        onPress={onPress}
+        style={{ borderRadius: roundness }}
+        accessibilityTraits={active ? ['button', 'selected'] : 'button'}
+        accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityState={{ selected: active }}
+        accessibilityLabel={accessibilityLabel}
       >
-        <TouchableRipple
-          borderless
-          delayPressIn={0}
-          onPress={onPress}
-          style={{ borderRadius: roundness }}
-          accessibilityTraits={active ? ['button', 'selected'] : 'button'}
-          accessibilityComponentType="button"
-          accessibilityRole="button"
-          accessibilityStates={active ? ['selected'] : []}
-        >
-          <View style={styles.wrapper}>
-            {icon ? (
-              <Icon source={icon} size={24} color={contentColor} />
-            ) : null}
-            <Text
-              selectable={false}
-              numberOfLines={1}
-              style={[
-                styles.label,
-                {
-                  color: contentColor,
-                  ...font,
-                  marginLeft: labelMargin,
-                },
-              ]}
-            >
-              {label}
-            </Text>
-          </View>
-        </TouchableRipple>
-      </View>
-    );
-  }
-}
+        <View style={styles.wrapper}>
+          {icon ? <Icon source={icon} size={24} color={contentColor} /> : null}
+          <Text
+            selectable={false}
+            numberOfLines={1}
+            style={[
+              styles.label,
+              {
+                color: contentColor,
+                ...font,
+                marginLeft: labelMargin,
+              },
+            ]}
+          >
+            {label}
+          </Text>
+        </View>
+      </TouchableRipple>
+    </View>
+  );
+};
+
+DrawerItem.displayName = 'Drawer.Item';
 
 const styles = StyleSheet.create({
   container: {

@@ -13,8 +13,7 @@ import FAB from './FAB';
 import Text from '../Typography/Text';
 import Card from '../Card/Card';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
-import { IconSource } from '../Icon';
+import type { IconSource } from '../Icon';
 
 type Props = {
   /**
@@ -34,6 +33,7 @@ type Props = {
     accessibilityLabel?: string;
     style?: StyleProp<ViewStyle>;
     onPress: () => void;
+    testID?: string;
   }>;
   /**
    * Icon to display for the `FAB`.
@@ -77,7 +77,11 @@ type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
+  /**
+   * Pass down testID from Group props to FAB.
+   */
+  testID?: string;
 };
 
 type State = {
@@ -98,36 +102,50 @@ type State = {
  * import * as React from 'react';
  * import { FAB, Portal, Provider } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     open: false,
- *   };
+ * const MyComponent = () => {
+ *   const [state, setState] = React.useState({ open: false });
  *
- *   render() {
- *     return (
- *       <Provider>
- *          <Portal>
- *            <FAB.Group
- *              open={this.state.open}
- *              icon={this.state.open ? 'today' : 'add'}
- *              actions={[
- *                { icon: 'add', onPress: () => console.log('Pressed add') },
- *                { icon: 'star', label: 'Star', onPress: () => console.log('Pressed star')},
- *                { icon: 'email', label: 'Email', onPress: () => console.log('Pressed email') },
- *                { icon: 'bell', label: 'Remind', onPress: () => console.log('Pressed notifications') },
- *              ]}
- *              onStateChange={({ open }) => this.setState({ open })}
- *              onPress={() => {
- *                if (this.state.open) {
- *                  // do something if the speed dial is open
- *                }
- *              }}
- *            />
- *          </Portal>
- *       </Provider>
- *     );
- *   }
- * }
+ *   const onStateChange = ({ open }) => setState({ open });
+ *
+ *   const { open } = state;
+ *
+ *   return (
+ *     <Provider>
+ *       <Portal>
+ *         <FAB.Group
+ *           open={open}
+ *           icon={open ? 'calendar-today' : 'plus'}
+ *           actions={[
+ *             { icon: 'plus', onPress: () => console.log('Pressed add') },
+ *             {
+ *               icon: 'star',
+ *               label: 'Star',
+ *               onPress: () => console.log('Pressed star'),
+ *             },
+ *             {
+ *               icon: 'email',
+ *               label: 'Email',
+ *               onPress: () => console.log('Pressed email'),
+ *             },
+ *             {
+ *               icon: 'bell',
+ *               label: 'Remind',
+ *               onPress: () => console.log('Pressed notifications'),
+ *             },
+ *           ]}
+ *           onStateChange={onStateChange}
+ *           onPress={() => {
+ *             if (open) {
+ *               // do something if the speed dial is open
+ *             }
+ *           }}
+ *         />
+ *       </Portal>
+ *     </Provider>
+ *   );
+ * };
+ *
+ * export default MyComponent;
  * ```
  */
 class FABGroup extends React.Component<Props, State> {
@@ -152,20 +170,21 @@ class FABGroup extends React.Component<Props, State> {
       return;
     }
 
+    const { scale } = this.props.theme.animation;
     if (this.props.open) {
       Animated.parallel([
         Animated.timing(this.state.backdrop, {
           toValue: 1,
-          duration: 250,
+          duration: 250 * scale,
           useNativeDriver: true,
         }),
         Animated.stagger(
-          50,
+          50 * scale,
           this.state.animations
-            .map(animation =>
+            .map((animation) =>
               Animated.timing(animation, {
                 toValue: 1,
-                duration: 150,
+                duration: 150 * scale,
                 useNativeDriver: true,
               })
             )
@@ -176,13 +195,13 @@ class FABGroup extends React.Component<Props, State> {
       Animated.parallel([
         Animated.timing(this.state.backdrop, {
           toValue: 0,
-          duration: 200,
+          duration: 200 * scale,
           useNativeDriver: true,
         }),
-        ...this.state.animations.map(animation =>
+        ...this.state.animations.map((animation) =>
           Animated.timing(animation, {
             toValue: 0,
-            duration: 150,
+            duration: 150 * scale,
             useNativeDriver: true,
           })
         ),
@@ -190,9 +209,9 @@ class FABGroup extends React.Component<Props, State> {
     }
   }
 
-  _close = () => this.props.onStateChange({ open: false });
+  private close = () => this.props.onStateChange({ open: false });
 
-  _toggle = () => this.props.onStateChange({ open: !this.props.open });
+  private toggle = () => this.props.onStateChange({ open: !this.props.open });
 
   render() {
     const {
@@ -205,15 +224,13 @@ class FABGroup extends React.Component<Props, State> {
       style,
       fabStyle,
       visible,
+      testID,
     } = this.props;
     const { colors } = theme;
 
     const labelColor = theme.dark
       ? colors.text
-      : color(colors.text)
-          .fade(0.54)
-          .rgb()
-          .string();
+      : color(colors.text).fade(0.54).rgb().string();
     const backdropOpacity = open
       ? this.state.backdrop.interpolate({
           inputRange: [0, 0.5, 1],
@@ -222,7 +239,7 @@ class FABGroup extends React.Component<Props, State> {
       : this.state.backdrop;
 
     const opacities = this.state.animations;
-    const scales = opacities.map(opacity =>
+    const scales = opacities.map((opacity) =>
       open
         ? opacity.interpolate({
             inputRange: [0, 1],
@@ -233,7 +250,7 @@ class FABGroup extends React.Component<Props, State> {
 
     return (
       <View pointerEvents="box-none" style={[styles.container, style]}>
-        <TouchableWithoutFeedback onPress={this._close}>
+        <TouchableWithoutFeedback onPress={this.close}>
           <Animated.View
             pointerEvents={open ? 'auto' : 'none'}
             style={[
@@ -251,7 +268,7 @@ class FABGroup extends React.Component<Props, State> {
               <View
                 key={i} // eslint-disable-line react/no-array-index-key
                 style={styles.item}
-                pointerEvents="box-none"
+                pointerEvents={open ? 'box-none' : 'none'}
               >
                 {it.label && (
                   <Card
@@ -266,7 +283,7 @@ class FABGroup extends React.Component<Props, State> {
                     }
                     onPress={() => {
                       it.onPress();
-                      this._close();
+                      this.close();
                     }}
                     accessibilityLabel={
                       it.accessibilityLabel !== 'undefined'
@@ -296,7 +313,7 @@ class FABGroup extends React.Component<Props, State> {
                   }
                   onPress={() => {
                     it.onPress();
-                    this._close();
+                    this.close();
                   }}
                   accessibilityLabel={
                     typeof it.accessibilityLabel !== 'undefined'
@@ -306,14 +323,16 @@ class FABGroup extends React.Component<Props, State> {
                   accessibilityTraits="button"
                   accessibilityComponentType="button"
                   accessibilityRole="button"
+                  testID={it.testID}
+                  visible={open}
                 />
               </View>
             ))}
           </View>
           <FAB
             onPress={() => {
-              onPress && onPress();
-              this._toggle();
+              onPress?.();
+              this.toggle();
             }}
             icon={icon}
             color={this.props.color}
@@ -323,6 +342,7 @@ class FABGroup extends React.Component<Props, State> {
             accessibilityRole="button"
             style={[styles.fab, fabStyle]}
             visible={visible}
+            testID={testID}
           />
         </SafeAreaView>
       </View>

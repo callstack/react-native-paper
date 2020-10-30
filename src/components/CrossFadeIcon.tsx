@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
-import Icon, { isValidIcon, isEqualIcon, IconSource } from './Icon';
+import Icon, { isValidIcon, IconSource, isEqualIcon } from './Icon';
 
 import { withTheme } from '../core/theming';
-import { Theme } from '../types';
 
 type Props = {
   /**
@@ -21,116 +20,102 @@ type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
-type State = {
-  currentIcon: IconSource;
-  previousIcon: IconSource | null;
-  fade: Animated.Value;
-};
+const CrossFadeIcon = ({ color, size, source, theme }: Props) => {
+  const [currentIcon, setCurrentIcon] = React.useState<IconSource>(
+    () => source
+  );
+  const [previousIcon, setPreviousIcon] = React.useState<IconSource | null>(
+    null
+  );
+  const { current: fade } = React.useRef<Animated.Value>(new Animated.Value(1));
 
-class CrossFadeIcon extends React.Component<Props, State> {
-  static getDerivedStateFromProps(nextProps: Props, nextState: State) {
-    if (nextState.currentIcon === nextProps.source) {
-      return null;
-    }
+  const { scale } = theme.animation;
 
-    return {
-      currentIcon: nextProps.source,
-      previousIcon: nextState.currentIcon,
-    };
+  const previousPreviousIconRef = React.useRef<IconSource | null>();
+  React.useEffect(() => {
+    previousPreviousIconRef.current = previousIcon;
+  }, [previousIcon]);
+
+  if (currentIcon !== source) {
+    setPreviousIcon(() => currentIcon);
+    setCurrentIcon(() => source);
   }
 
-  state: State = {
-    currentIcon: this.props.source,
-    previousIcon: null,
-    fade: new Animated.Value(1),
-  };
-
-  componentDidUpdate(_: Props, prevState: State) {
-    const { previousIcon } = this.state;
-    const {
-      theme: {
-        animation: { scale },
-      },
-    } = this.props;
-
+  React.useEffect(() => {
     if (
-      !isValidIcon(previousIcon) ||
-      isEqualIcon(previousIcon, prevState.previousIcon)
+      isValidIcon(previousIcon) &&
+      !isEqualIcon(previousIcon, previousPreviousIconRef.current)
     ) {
-      return;
+      fade.setValue(1);
+
+      Animated.timing(fade, {
+        duration: scale * 200,
+        toValue: 0,
+        useNativeDriver: true,
+      }).start();
     }
+  }, [previousIcon, fade, scale]);
 
-    this.state.fade.setValue(1);
+  const opacityPrev = fade;
+  const opacityNext = previousIcon
+    ? fade.interpolate({
+        inputRange: [0, 1],
+        outputRange: [1, 0],
+      })
+    : 1;
 
-    Animated.timing(this.state.fade, {
-      duration: scale * 200,
-      toValue: 0,
-    }).start();
-  }
+  const rotatePrev = fade.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['-90deg', '0deg'],
+  });
 
-  render() {
-    const { color, size } = this.props;
-    const opacityPrev = this.state.fade;
-    const opacityNext = this.state.previousIcon
-      ? this.state.fade.interpolate({
-          inputRange: [0, 1],
-          outputRange: [1, 0],
-        })
-      : 1;
+  const rotateNext = previousIcon
+    ? fade.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['0deg', '-180deg'],
+      })
+    : '0deg';
 
-    const rotatePrev = this.state.fade.interpolate({
-      inputRange: [0, 1],
-      outputRange: ['-90deg', '0deg'],
-    });
-
-    const rotateNext = this.state.previousIcon
-      ? this.state.fade.interpolate({
-          inputRange: [0, 1],
-          outputRange: ['0deg', '-180deg'],
-        })
-      : '0deg';
-
-    return (
-      <View
-        style={[
-          styles.content,
-          {
-            height: size,
-            width: size,
-          },
-        ]}
-      >
-        {this.state.previousIcon ? (
-          <Animated.View
-            style={[
-              styles.icon,
-              {
-                opacity: opacityPrev,
-                transform: [{ rotate: rotatePrev }],
-              },
-            ]}
-          >
-            <Icon source={this.state.previousIcon} size={size} color={color} />
-          </Animated.View>
-        ) : null}
+  return (
+    <View
+      style={[
+        styles.content,
+        {
+          height: size,
+          width: size,
+        },
+      ]}
+    >
+      {previousIcon ? (
         <Animated.View
           style={[
             styles.icon,
             {
-              opacity: opacityNext,
-              transform: [{ rotate: rotateNext }],
+              opacity: opacityPrev,
+              transform: [{ rotate: rotatePrev }],
             },
           ]}
         >
-          <Icon source={this.state.currentIcon} size={size} color={color} />
+          <Icon source={previousIcon} size={size} color={color} />
         </Animated.View>
-      </View>
-    );
-  }
-}
+      ) : null}
+      <Animated.View
+        style={[
+          styles.icon,
+          {
+            opacity: opacityNext,
+            transform: [{ rotate: rotateNext }],
+          },
+        ]}
+      >
+        <Icon source={currentIcon} size={size} color={color} />
+      </Animated.View>
+    </View>
+  );
+};
 
 export default withTheme(CrossFadeIcon);
 

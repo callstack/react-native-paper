@@ -2,9 +2,8 @@ import * as React from 'react';
 import { StyleSheet, StyleProp, TextStyle } from 'react-native';
 import Title from '../Typography/Title';
 import { withTheme } from '../../core/theming';
-import { Theme } from '../../types';
 
-type Props = React.ComponentProps<typeof Title> & {
+type Props = React.ComponentPropsWithRef<typeof Title> & {
   /**
    * Title text for the `DialogTitle`.
    */
@@ -13,59 +12,55 @@ type Props = React.ComponentProps<typeof Title> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: ReactNativePaper.Theme;
 };
 
 /**
  * A component to show a title in a Dialog.
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/dialog-title.png" />
+ *   </figure>
+ * </div>
  *
  * ## Usage
  * ```js
  * import * as React from 'react';
  * import { Paragraph, Dialog, Portal } from 'react-native-paper';
  *
- * export default class MyComponent extends React.Component {
- *   state = {
- *     visible: false,
- *   };
+ * const MyComponent = () => {
+ *   const [visible, setVisible] = React.useState(false);
  *
- *   _hideDialog = () => this.setState({ visible: false });
+ *   const hideDialog = () => setVisible(false);
  *
- *   render() {
- *     return (
- *       <Portal>
- *         <Dialog
- *           visible={this.state.visible}
- *           onDismiss={this._hideDialog}>
- *           <Dialog.Title>This is a title</Dialog.Title>
- *           <Dialog.Content>
- *             <Paragraph>This is simple dialog</Paragraph>
- *           </Dialog.Content>
- *         </Dialog>
- *       </Portal>
- *     );
- *   }
- * }
+ *   return (
+ *     <Portal>
+ *       <Dialog visible={visible} onDismiss={hideDialog}>
+ *         <Dialog.Title>This is a title</Dialog.Title>
+ *         <Dialog.Content>
+ *           <Paragraph>This is simple dialog</Paragraph>
+ *         </Dialog.Content>
+ *       </Dialog>
+ *     </Portal>
+ *   );
+ * };
+ *
+ * export default MyComponent;
  * ```
  */
-class DialogTitle extends React.Component<Props> {
-  static displayName = 'Dialog.Title';
+const DialogTitle = ({ children, theme, style, ...rest }: Props) => (
+  <Title
+    accessibilityTraits="header"
+    accessibilityRole="header"
+    style={[styles.text, { color: theme.colors.text }, style]}
+    {...rest}
+  >
+    {children}
+  </Title>
+);
 
-  render() {
-    const { children, theme, style, ...rest } = this.props;
-
-    return (
-      <Title
-        accessibilityTraits="header"
-        accessibilityRole="header"
-        style={[styles.text, { color: theme.colors.text }, style]}
-        {...rest}
-      >
-        {children}
-      </Title>
-    );
-  }
-}
+DialogTitle.displayName = 'Dialog.Title';
 
 const styles = StyleSheet.create({
   text: {
