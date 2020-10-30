@@ -4,7 +4,7 @@ import { RadioButtonContext } from '../../RadioButton/RadioButtonGroup';
 import RadioButton from '../../RadioButton/RadioButton';
 
 describe('RadioButton', () => {
-  afterEach(() => jest.resetModules());
+  // afterEach(() => jest.resetModules());
 
   describe('on default platform', () => {
     beforeAll(() => {
