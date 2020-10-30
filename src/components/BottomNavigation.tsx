@@ -545,7 +545,7 @@ class BottomNavigation extends React.Component<Props, State> {
 
   _jumpTo = (key: string) => {
     const index = this.props.navigationState.routes.findIndex(
-      (route) => route.key === key
+      route => route.key === key
     );
 
     this.props.onIndexChange(index);
@@ -593,7 +593,7 @@ class BottomNavigation extends React.Component<Props, State> {
       ? this.state.index.interpolate({
           inputRange: routes.map((_, i) => i),
           outputRange: routes.map(
-            (route) => getColor({ route }) || approxBackgroundColor
+            route => getColor({ route }) || approxBackgroundColor
           ),
         })
       : approxBackgroundColor;
@@ -606,9 +606,15 @@ class BottomNavigation extends React.Component<Props, State> {
     const inactiveTintColor =
       typeof inactiveColor !== 'undefined'
         ? inactiveColor
-        : color(textColor).alpha(0.5).rgb().string();
+        : color(textColor)
+            .alpha(0.5)
+            .rgb()
+            .string();
 
-    const touchColor = color(activeColor).alpha(0.12).rgb().string();
+    const touchColor = color(activeColor)
+      .alpha(0.12)
+      .rgb()
+      .string();
 
     const maxTabWidth = routes.length > 3 ? MIN_TAB_WIDTH : MAX_TAB_WIDTH;
     const tabWidth = Math.min(

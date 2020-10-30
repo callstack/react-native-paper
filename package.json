@@ -37,7 +37,8 @@
     "release": "release-it",
     "bootstrap": "yarn --cwd example && yarn --cwd docs && yarn",
     "docs": "yarn --cwd docs",
-    "example": "yarn --cwd example"
+    "example": "yarn --cwd example",
+    "prettier": "./node_modules/.bin/prettier --write '**/*.{tsx,ts,js,css,html}'"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"

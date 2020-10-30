@@ -130,7 +130,7 @@ class Appbar extends React.Component<Props> {
       });
 
       shouldCenterContent =
-        hasAppbarContent && (leftItemsCount < 2 && rightItemsCount < 2);
+        hasAppbarContent && leftItemsCount < 2 && rightItemsCount < 2;
       shouldAddLeftSpacing = shouldCenterContent && leftItemsCount === 0;
       shouldAddRightSpacing = shouldCenterContent && rightItemsCount === 0;
     }

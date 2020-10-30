@@ -153,7 +153,10 @@ class ListItem extends React.Component<Props> {
       titleEllipsizeMode,
       ...rest
     } = this.props;
-    const titleColor = color(theme.colors.text).alpha(0.87).rgb().string();
+    const titleColor = color(theme.colors.text)
+      .alpha(0.87)
+      .rgb()
+      .string();
     const descriptionColor = color(theme.colors.text)
       .alpha(0.54)
       .rgb()

@@ -23,7 +23,6 @@ declare module 'eslint-config-callstack-io' {
  * needed.
  */
 
-
 // Filename aliases
 declare module 'eslint-config-callstack-io/index' {
   declare module.exports: $Exports<'eslint-config-callstack-io'>;

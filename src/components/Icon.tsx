@@ -29,8 +29,8 @@ const isImageSource = (source: any) =>
   // source is an object with uri
   (typeof source === 'object' &&
     source !== null &&
-    (Object.prototype.hasOwnProperty.call(source, 'uri') &&
-      typeof source.uri === 'string')) ||
+    Object.prototype.hasOwnProperty.call(source, 'uri') &&
+    typeof source.uri === 'string') ||
   // source is a module, e.g. - require('image')
   typeof source === 'number' ||
   // image url on web
@@ -43,8 +43,8 @@ const getIconId = (source: any) => {
   if (
     typeof source === 'object' &&
     source !== null &&
-    (Object.prototype.hasOwnProperty.call(source, 'uri') &&
-      typeof source.uri === 'string')
+    Object.prototype.hasOwnProperty.call(source, 'uri') &&
+    typeof source.uri === 'string'
   ) {
     return source.uri;
   }
