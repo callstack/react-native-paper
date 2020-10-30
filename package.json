@@ -1,14 +1,10 @@
 {
-  "name": "react-native-paper",
-  "version": "4.3.0",
+  "name": "react-native-paper-light",
+  "version": "4.0.0",
   "description": "Material design for React Native",
   "main": "lib/commonjs/index.js",
-  "module": "lib/module/index.js",
-  "react-native": "src/index.tsx",
-  "source": "src/index.tsx",
   "types": "lib/typescript/src/index.d.ts",
   "files": [
-    "src",
     "lib",
     "babel.js"
   ],
@@ -138,9 +134,7 @@
     "source": "src",
     "output": "lib",
     "targets": [
-      "commonjs",
-      "module",
-      "typescript"
+      "commonjs"
     ],
     "files": [
       "src/"

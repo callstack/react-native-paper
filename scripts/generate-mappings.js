@@ -20,7 +20,7 @@ const ast = parser.parse(source, {
   ],
 });
 
-const index = packageJson.module;
+const index = packageJson.main;
 const relative = (value /* : string */) =>
   path.relative(root, path.resolve(path.dirname(index), value));
 
@@ -62,5 +62,5 @@ const mappings = ast.program.body.reduce((acc, declaration, index, self) => {
 fs.existsSync(path.dirname(output)) || fs.mkdirSync(path.dirname(output));
 fs.writeFileSync(
   output,
-  JSON.stringify({ name: packageJson.name, index, mappings }, null, 2)
+  JSON.stringify({ name: 'react-native-paper', index, mappings }, null, 2)
 );
