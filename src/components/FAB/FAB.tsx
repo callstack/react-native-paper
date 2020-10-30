@@ -13,6 +13,7 @@ import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren } from '../../types';
 import type { IconSource } from './../Icon';
+import type { AccessibilityState } from 'react-native';
 
 type Props = $RemoveChildren<typeof Surface> & {
   /**
@@ -32,6 +33,10 @@ type Props = $RemoveChildren<typeof Surface> & {
    * Uses `label` by default if specified.
    */
   accessibilityLabel?: string;
+  /**
+   * Accessibility state for the FAB. This is read by the screen reader when the user taps the FAB.
+   */
+  accessibilityState?: AccessibilityState;
   /**
    * Whether an icon change is animated.
    */
@@ -152,6 +157,7 @@ class FAB extends React.Component<Props, State> {
       label,
       uppercase,
       accessibilityLabel = label,
+      accessibilityState,
       animated = true,
       color: customColor,
       disabled,
@@ -224,7 +230,7 @@ class FAB extends React.Component<Props, State> {
           accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
           accessibilityComponentType="button"
           accessibilityRole="button"
-          accessibilityState={{ disabled }}
+          accessibilityState={{ ...accessibilityState, disabled }}
           style={styles.touchable}
           testID={testID}
         >
