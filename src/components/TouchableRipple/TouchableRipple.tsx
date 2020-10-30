@@ -90,10 +90,32 @@ type Props = React.ComponentPropsWithRef<typeof Pressable> & {
  *   </TouchableRipple>
  * );
  *
+ * const MyComponentWithHover = () => (
+ *   <TouchableRipple
+ *     onPress={() => console.log('Pressed')}
+ *     rippleColor="rgba(0, 0, 0, .32)"
+ *     style={({ pressed, focused, hovered }) => [
+ *       styles.normal,
+ *       pressed && styles.pressed,
+ *       focused && styles.focused,
+ *       hovered && styles.hovered,
+ *     ]}
+ *   >
+ *     {({ pressed, focused, hovered }) => (
+ *       <Text>
+ *         State:
+ *         {[pressed && 'pressed', focused && 'focused', hovered && 'hovered']
+ *           .filter((n) => n)
+ *           .join(',')}
+ *       </Text>
+ *     )}
+ *   </TouchableRipple>
+ * );
+ *
  * export default MyComponent;
  * ```
  *
- * @extends TouchableWithoutFeedback props https://reactnative.dev/docs/touchablewithoutfeedback#props
+ * @extends Pressable props https://reactnative.dev/docs/pressable#props
  */
 
 function TouchableRipple({
