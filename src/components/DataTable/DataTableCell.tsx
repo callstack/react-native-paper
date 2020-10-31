@@ -48,22 +48,16 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
  * ```
  */
 
-class DataTableCell extends React.Component<Props> {
-  static displayName = 'DataTable.Cell';
+const DataTableCell = ({ children, style, numeric, ...rest }: Props) => (
+  <TouchableRipple
+    {...rest}
+    style={[styles.container, numeric && styles.right, style]}
+  >
+    <Text numberOfLines={1}>{children}</Text>
+  </TouchableRipple>
+);
 
-  render() {
-    const { children, style, numeric, ...rest } = this.props;
-
-    return (
-      <TouchableRipple
-        {...rest}
-        style={[styles.container, numeric && styles.right, style]}
-      >
-        <Text numberOfLines={1}>{children}</Text>
-      </TouchableRipple>
-    );
-  }
-}
+DataTableCell.displayName = 'DataTable.Cell';
 
 const styles = StyleSheet.create({
   container: {

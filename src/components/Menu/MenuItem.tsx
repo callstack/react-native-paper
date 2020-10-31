@@ -35,6 +35,7 @@ type Props = {
    */
   theme: ReactNativePaper.Theme;
   style?: StyleProp<ViewStyle>;
+  contentStyle?: StyleProp<ViewStyle>;
   titleStyle?: StyleProp<TextStyle>;
   /**
    * TestID used for testing purposes
@@ -82,6 +83,7 @@ class MenuItem extends React.Component<Props> {
       onPress,
       theme,
       style,
+      contentStyle,
       testID,
       titleStyle,
     } = this.props;
@@ -105,6 +107,8 @@ class MenuItem extends React.Component<Props> {
         onPress={onPress}
         disabled={disabled}
         testID={testID}
+        accessibilityRole="menuitem"
+        accessibilityState={{ disabled }}
       >
         <View style={styles.row}>
           {icon ? (
@@ -117,6 +121,7 @@ class MenuItem extends React.Component<Props> {
               styles.item,
               styles.content,
               icon ? styles.widthWithIcon : null,
+              contentStyle,
             ]}
             pointerEvents="none"
           >

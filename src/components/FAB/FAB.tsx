@@ -13,6 +13,7 @@ import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren } from '../../types';
 import type { IconSource } from './../Icon';
+import type { AccessibilityState } from 'react-native';
 
 type Props = $RemoveChildren<typeof Surface> & {
   /**
@@ -24,10 +25,18 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   label?: string;
   /**
+   * Make the label text uppercased.
+   */
+  uppercase?: boolean;
+  /**
    * Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.
    * Uses `label` by default if specified.
    */
   accessibilityLabel?: string;
+  /**
+   * Accessibility state for the FAB. This is read by the screen reader when the user taps the FAB.
+   */
+  accessibilityState?: AccessibilityState;
   /**
    * Whether an icon change is animated.
    */
@@ -112,6 +121,7 @@ class FAB extends React.Component<Props, State> {
   static Group = FABGroup;
 
   static defaultProps = {
+    uppercase: true,
     visible: true,
   };
 
@@ -145,7 +155,9 @@ class FAB extends React.Component<Props, State> {
       small,
       icon,
       label,
+      uppercase,
       accessibilityLabel = label,
+      accessibilityState,
       animated = true,
       color: customColor,
       disabled,
@@ -218,7 +230,7 @@ class FAB extends React.Component<Props, State> {
           accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
           accessibilityComponentType="button"
           accessibilityRole="button"
-          accessibilityState={{ disabled }}
+          accessibilityState={{ ...accessibilityState, disabled }}
           style={styles.touchable}
           testID={testID}
         >
@@ -239,10 +251,11 @@ class FAB extends React.Component<Props, State> {
               <Text
                 style={[
                   styles.label,
+                  uppercase && styles.uppercaseLabel,
                   { color: foregroundColor, ...theme.fonts.medium },
                 ]}
               >
-                {label.toUpperCase()}
+                {label}
               </Text>
             ) : null}
           </View>
@@ -279,6 +292,9 @@ const styles = StyleSheet.create({
   },
   label: {
     marginHorizontal: 8,
+  },
+  uppercaseLabel: {
+    textTransform: 'uppercase',
   },
   disabled: {
     elevation: 0,
