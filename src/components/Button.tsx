@@ -66,6 +66,10 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   onPress?: () => void;
   /**
+   * Function to execute on long press.
+   */
+  onLongPress?: () => void;
+  /**
    * Style of button's inner content.
    * Use this prop to apply custom height and width.
    */
@@ -129,6 +133,7 @@ const Button = ({
   uppercase = true,
   accessibilityLabel,
   onPress,
+  onLongPress,
   style,
   theme,
   contentStyle,
@@ -251,6 +256,7 @@ const Button = ({
         borderless
         delayPressIn={0}
         onPress={onPress}
+        onLongPress={onLongPress}
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
         accessibilityLabel={accessibilityLabel}
