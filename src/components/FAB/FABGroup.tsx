@@ -41,6 +41,10 @@ type Props = {
    */
   icon: IconSource;
   /**
+   * Optional label for extended `FAB`.
+   */
+  label?: string;
+  /**
    * Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.
    */
   accessibilityLabel?: string;
@@ -146,6 +150,7 @@ type Props = {
 const FABGroup = ({
   actions,
   icon,
+  label,
   open,
   onPress,
   accessibilityLabel,
@@ -338,6 +343,7 @@ const FABGroup = ({
             toggle();
           }}
           icon={icon}
+          label={label}
           color={colorProp}
           accessibilityLabel={accessibilityLabel}
           accessibilityTraits="button"
