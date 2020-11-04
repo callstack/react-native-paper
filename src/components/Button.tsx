@@ -273,7 +273,7 @@ class Button extends React.Component<Props, State> {
           borderless
           delayPressIn={0}
           onPress={onPress}
-          onLongPress = {onLongPress}
+          onLongPress={onLongPress}
           onPressIn={this.handlePressIn}
           onPressOut={this.handlePressOut}
           accessibilityLabel={accessibilityLabel}
