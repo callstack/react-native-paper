@@ -120,7 +120,7 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
  */
 const Menu = ({
   visible,
-  anchor: anchorProp,
+  anchor,
   contentStyle,
   style,
   children,
@@ -146,6 +146,8 @@ const Menu = ({
   const { current: scaleAnimation } = React.useRef<Animated.ValueXY>(
     new Animated.ValueXY({ x: 0, y: 0 })
   );
+  const anchorRef = React.useRef<View | null>(null);
+  const menuRef = React.useRef<View | null>(null);
 
   const {
     animation: { scale },
@@ -182,17 +184,9 @@ const Menu = ({
     [onDismiss]
   );
 
-  const removeListeners = React.useCallback(() => {
-    BackHandler.removeEventListener('hardwareBackPress', handleDismiss);
-    Dimensions.removeEventListener('change', handleDismiss);
-
-    isBrowser() && document.removeEventListener('keyup', handleKeypress);
-  }, [handleDismiss, handleKeypress]);
-
-  const isAnchorCoord = React.useCallback(
-    () => !React.isValidElement(anchorProp),
-    [anchorProp]
-  );
+  const isAnchorCoord = React.useCallback(() => !React.isValidElement(anchor), [
+    anchor,
+  ]);
 
   const measureAnchorLayout = React.useCallback(
     () =>
@@ -200,23 +194,32 @@ const Menu = ({
         if (isAnchorCoord()) {
           resolve({
             // @ts-ignore
-            x: anchorProp.x,
+            x: anchor.x,
             // @ts-ignore
-            y: anchorProp.y,
+            y: anchor.y,
             width: 0,
             height: 0,
           });
           return;
         }
 
-        if (anchor.current) {
-          anchor.current.measureInWindow((x, y, width, height) => {
+        if (anchorRef.current) {
+          anchorRef.current.measureInWindow((x, y, width, height) => {
             resolve({ x, y, width, height });
           });
         }
       }),
-    [anchorProp, isAnchorCoord]
+    [anchor, isAnchorCoord]
   );
+
+  const measureMenuLayout = () =>
+    new Promise<LayoutRectangle>((resolve) => {
+      if (menuRef.current) {
+        menuRef.current.measureInWindow((x, y, width, height) => {
+          resolve({ x, y, width, height });
+        });
+      }
+    });
 
   const show = React.useCallback(async () => {
     const windowLayout = Dimensions.get('window');
@@ -254,6 +257,20 @@ const Menu = ({
     }));
   }, [isAnchorCoord, measureAnchorLayout]);
 
+  const attachListeners = React.useCallback(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleDismiss);
+    Dimensions.addEventListener('change', handleDismiss);
+
+    isBrowser() && document.addEventListener('keyup', handleKeypress);
+  }, [handleDismiss, handleKeypress]);
+
+  const removeListeners = React.useCallback(() => {
+    BackHandler.removeEventListener('hardwareBackPress', handleDismiss);
+    Dimensions.removeEventListener('change', handleDismiss);
+
+    isBrowser() && document.removeEventListener('keyup', handleKeypress);
+  }, [handleDismiss, handleKeypress]);
+
   const updateVisibility = React.useCallback(async () => {
     // Menu is rendered in Portal, which updates items asynchronously
     // We need to do the same here so that the ref is up-to-date
@@ -274,7 +291,7 @@ const Menu = ({
           setMenuLayout({ width: 0, height: 0 });
           setRendered(false);
           scaleAnimation.setValue({ x: 0, y: 0 });
-          focusFirstDOMNode(anchor.current);
+          focusFirstDOMNode(anchorRef.current);
         }
       });
     }
@@ -301,26 +318,7 @@ const Menu = ({
     };
   }, [removeListeners]);
 
-  const anchor = React.useRef<View | null>(null);
-  const menu = React.useRef<View | null>(null);
-
-  const measureMenuLayout = () =>
-    new Promise<LayoutRectangle>((resolve) => {
-      if (menu.current) {
-        menu.current.measureInWindow((x, y, width, height) => {
-          resolve({ x, y, width, height });
-        });
-      }
-    });
-
   const isBrowser = () => Platform.OS === 'web' && 'document' in global;
-
-  const attachListeners = React.useCallback(() => {
-    BackHandler.addEventListener('hardwareBackPress', handleDismiss);
-    Dimensions.addEventListener('change', handleDismiss);
-
-    isBrowser() && document.addEventListener('keyup', handleKeypress);
-  }, [handleDismiss, handleKeypress]);
 
   React.useEffect(() => {
     attachListeners();
@@ -339,7 +337,7 @@ const Menu = ({
       }),
     ]).start(({ finished }) => {
       if (finished) {
-        focusFirstDOMNode(menu.current);
+        focusFirstDOMNode(menuRef.current);
       }
     });
   }, [
@@ -524,8 +522,8 @@ const Menu = ({
   };
 
   return (
-    <View ref={anchor} collapsable={false}>
-      {isAnchorCoord() ? null : anchorProp}
+    <View ref={anchorRef} collapsable={false}>
+      {isAnchorCoord() ? null : anchor}
       {rendered ? (
         <Portal>
           <TouchableWithoutFeedback
@@ -536,7 +534,7 @@ const Menu = ({
             <View style={StyleSheet.absoluteFill} />
           </TouchableWithoutFeedback>
           <View
-            ref={menu}
+            ref={menuRef}
             collapsable={false}
             accessibilityViewIsModal={visible}
             style={[styles.wrapper, positionStyle, style]}

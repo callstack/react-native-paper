@@ -3,9 +3,6 @@ import renderer from 'react-test-renderer';
 import Menu from '../Menu/Menu.tsx';
 import Button from '../Button.tsx';
 
-jest.useFakeTimers();
-jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
-
 it('renders visible menu', async () => {
   const tree = renderer
     .create(
