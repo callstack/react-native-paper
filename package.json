@@ -1,6 +1,6 @@
 {
   "name": "react-native-paper",
-  "version": "4.2.0",
+  "version": "4.3.1",
   "description": "Material design for React Native",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -108,7 +108,9 @@
   },
   "jest": {
     "preset": "react-native",
-    "setupFiles": ["<rootDir>/testSetup.js"],
+    "setupFiles": [
+      "<rootDir>/testSetup.js"
+    ],
     "cacheDirectory": "./cache/jest",
     "modulePathIgnorePatterns": [
       "<rootDir>/example/node_modules",

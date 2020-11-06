@@ -38,7 +38,7 @@ const AffixContext = React.createContext<ContextState>({
   side: AdornmentSide.Left,
 });
 
-export const AffixAdornment: React.FunctionComponent<
+const AffixAdornment: React.FunctionComponent<
   {
     affix: React.ReactNode;
     testID: string;
@@ -105,4 +105,4 @@ const styles = StyleSheet.create({
 export default withTheme(TextInputAffix);
 
 // @component-docs ignore-next-line
-export { TextInputAffix };
+export { TextInputAffix, AffixAdornment };

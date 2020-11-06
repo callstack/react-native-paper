@@ -343,6 +343,7 @@ class FABGroup extends React.Component<Props, State> {
             style={[styles.fab, fabStyle]}
             visible={visible}
             testID={testID}
+            accessibilityState={{ expanded: open }}
           />
         </SafeAreaView>
       </View>
