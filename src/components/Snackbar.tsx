@@ -12,6 +12,23 @@ import Button from './Button';
 import Surface from './Surface';
 import Text from './Typography/Text';
 import { withTheme } from '../core/theming';
+import IconButton from './IconButton';
+import type { IconSource } from './Icon';
+
+interface Action {
+  accessibilityLabel?: string;
+  onPress: () => void;
+}
+
+interface ActionWithLabel extends Action {
+  label: string;
+  icon?: never;
+}
+
+interface ActionWithIcon extends Action {
+  icon: IconSource;
+  label?: never;
+}
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
@@ -20,14 +37,13 @@ type Props = React.ComponentProps<typeof Surface> & {
   visible: boolean;
   /**
    * Label and press callback for the action button. It should contain the following properties:
-   * - `label` - Label of the action button
    * - `onPress` - Callback that is called when action button is pressed.
+   *
+   * and one of the following:
+   * - `label` - Label of the action button
+   * - `icon` - Icon Source for `<IconButton />`
    */
-  action?: {
-    label: string;
-    accessibilityLabel?: string;
-    onPress: () => void;
-  };
+  action?: ActionWithLabel | ActionWithIcon;
   /**
    * The duration for which the Snackbar is shown.
    */
@@ -262,7 +278,7 @@ class Snackbar extends React.Component<Props, State> {
           >
             {children}
           </Text>
-          {action ? (
+          {action?.label ? (
             <Button
               accessibilityLabel={action.accessibilityLabel}
               onPress={() => {
@@ -276,6 +292,17 @@ class Snackbar extends React.Component<Props, State> {
             >
               {action.label}
             </Button>
+          ) : action?.icon ? (
+            <IconButton
+              icon={action.icon}
+              accessibilityLabel={action.accessibilityLabel}
+              onPress={() => {
+                action.onPress();
+                onDismiss();
+              }}
+              color={colors.accent}
+              style={styles.button}
+            />
           ) : null}
         </Surface>
       </SafeAreaView>
