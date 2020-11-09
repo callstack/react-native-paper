@@ -7,12 +7,14 @@ import {
   Platform,
 } from 'react-native';
 import { TextInput, HelperText, useTheme } from 'react-native-paper';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { inputReducer, State } from '../../utils';
 
 const MAX_LENGTH = 20;
 
 const initialState: State = {
   text: '',
+  customIconText: '',
   name: '',
   outlinedText: '',
   largeText: '',
@@ -36,6 +38,7 @@ const initialState: State = {
     flatRightIcon: undefined,
     outlineLeftIcon: undefined,
     outlineRightIcon: undefined,
+    customIcon: undefined,
   },
 };
 
@@ -61,6 +64,7 @@ const TextInputExample = () => {
   const [state, dispatch] = React.useReducer(inputReducer, initialState);
   const {
     text,
+    customIconText,
     name,
     outlinedText,
     largeText,
@@ -84,6 +88,7 @@ const TextInputExample = () => {
       flatRightIcon,
       outlineLeftIcon,
       outlineRightIcon,
+      customIcon,
     },
   } = state;
 
@@ -174,6 +179,29 @@ const TextInputExample = () => {
                   payload: !flatTextSecureEntry,
                 })
               }
+              forceTextInputFocus={false}
+            />
+          }
+        />
+        <TextInput
+          style={styles.inputContainerStyle}
+          label="Flat input with custom icon"
+          placeholder="Type something"
+          value={customIconText}
+          onChangeText={(text) => inputActionHandler('customIconText', text)}
+          right={<TextInput.Affix text="/100" />}
+          left={
+            <TextInput.Icon
+              name={() => (
+                <Icon
+                  name="heart"
+                  size={24}
+                  color={customIcon}
+                  onPress={() => {
+                    changeIconColor('customIcon');
+                  }}
+                />
+              )}
             />
           }
         />

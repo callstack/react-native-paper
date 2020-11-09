@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Appearance, View } from 'react-native';
-import { render } from 'react-native-testing-library';
+import { Appearance, AccessibilityInfo, View } from 'react-native';
+import { render, act } from 'react-native-testing-library';
 import Provider from '../Provider';
 import { useTheme } from '../theming';
 import DarkTheme from '../../styles/DarkTheme';
@@ -17,12 +17,38 @@ const mockAppearance = () => {
       addChangeListener: jest.fn((cb) => {
         listeners.push(cb);
       }),
+      removeChangeListener: jest.fn((cb) => {
+        listeners.push(cb);
+      }),
       getColorScheme: jest.fn(() => {
         return 'light';
       }),
       __internalListeners: listeners,
     };
   });
+};
+
+const mockAccessibilityInfo = () => {
+  jest.mock(
+    'react-native/Libraries/Components/AccessibilityInfo/AccessibilityInfo',
+    () => {
+      const realApp = jest.requireActual(
+        'react-native/Libraries/Components/AccessibilityInfo/AccessibilityInfo'
+      );
+
+      const listeners = [];
+      return {
+        realApp,
+        addEventListener: jest.fn((event, cb) => {
+          listeners.push(cb);
+        }),
+        removeEventListener: jest.fn((cb) => {
+          listeners.push(cb);
+        }),
+        __internalListeners: listeners,
+      };
+    }
+  );
 };
 
 const FakeChild = () => {
@@ -43,19 +69,73 @@ describe('Provider', () => {
     jest.resetModules();
   });
 
-  it('handles theme change', () => {
+  it('handles theme change', async () => {
     mockAppearance();
     const { getByTestId } = render(createProvider(null));
     expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
       DefaultTheme
     );
-    Appearance.__internalListeners[0]({ colorScheme: 'dark' });
+    act(() => Appearance.__internalListeners[0]({ colorScheme: 'dark' }));
     expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
       DarkTheme
     );
   });
 
-  it('uses default theme, if Appearance module is not defined', () => {
+  it('should set AccessibilityInfo listeners, if there is no theme', async () => {
+    mockAppearance();
+    mockAccessibilityInfo();
+
+    const { rerender, getByTestId } = render(createProvider(null));
+
+    expect(AccessibilityInfo.addEventListener).toHaveBeenCalled();
+    act(() =>
+      AccessibilityInfo.__internalListeners[0]({
+        reduceMotionEnabled: true,
+      })
+    );
+
+    expect(
+      getByTestId('provider-child-view').props.theme.animation.scale
+    ).toStrictEqual(0);
+
+    rerender(createProvider(DefaultTheme));
+    expect(AccessibilityInfo.removeEventListener).toHaveBeenCalled();
+  });
+
+  it('should not set AccessibilityInfo listeners, if there is a theme', async () => {
+    mockAppearance();
+    const { getByTestId } = render(createProvider(DarkTheme));
+
+    expect(AccessibilityInfo.addEventListener).not.toHaveBeenCalled();
+    expect(AccessibilityInfo.removeEventListener).not.toHaveBeenCalled();
+    expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
+      DarkTheme
+    );
+  });
+
+  it('should set Appearance listeners, if there is no theme', async () => {
+    mockAppearance();
+    const { getByTestId } = render(createProvider(null));
+
+    expect(Appearance.addChangeListener).toHaveBeenCalled();
+    act(() => Appearance.__internalListeners[0]({ colorScheme: 'dark' }));
+    expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
+      DarkTheme
+    );
+  });
+
+  it('should not set Appearance listeners, if the theme is passed', async () => {
+    mockAppearance();
+    const { getByTestId } = render(createProvider(DefaultTheme));
+
+    expect(Appearance.addChangeListener).not.toHaveBeenCalled();
+    expect(Appearance.removeChangeListener).not.toHaveBeenCalled();
+    expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
+      DefaultTheme
+    );
+  });
+
+  it('uses default theme, if Appearance module is not defined', async () => {
     jest.mock('react-native/Libraries/Utilities/Appearance', () => {
       return null;
     });
@@ -72,7 +152,7 @@ describe('Provider', () => {
     ${'dark theme'}    | ${DarkTheme}    | ${'dark'}
   `(
     'provides $label for $colorScheme color scheme',
-    ({ theme, colorScheme }) => {
+    async ({ theme, colorScheme }) => {
       mockAppearance();
       Appearance.getColorScheme.mockReturnValue(colorScheme);
       const { getByTestId } = render(createProvider());
@@ -82,7 +162,7 @@ describe('Provider', () => {
     }
   );
 
-  it('uses provided custom theme', () => {
+  it('uses provided custom theme', async () => {
     mockAppearance();
     const customTheme = {
       ...DefaultTheme,

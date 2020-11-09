@@ -26,7 +26,7 @@ export const ToggleButtonGroupContext = React.createContext<
 
 /**
  * Toggle group allows to control a group of toggle buttons.</br>
- * It doesn't change the appearance of the toggle buttons. If you want to group them in a row, checkout <a href="/toggle-button-row.html">`ToggleButton.Row`</a>.
+ * It doesn't change the appearance of the toggle buttons. If you want to group them in a row, check out <a href="react-native-paper/toggle-button-row.html">`ToggleButton.Row`</a>.
  *
  * <div class="screenshots">
  *   <figure>
@@ -55,23 +55,17 @@ export const ToggleButtonGroupContext = React.createContext<
  * export default MyComponent;
  *```
  */
-class ToggleButtonGroup extends React.Component<Props> {
-  static displayName = 'ToggleButton.Group';
+const ToggleButtonGroup = ({ value, onValueChange, children }: Props) => (
+  <ToggleButtonGroupContext.Provider
+    value={{
+      value,
+      onValueChange,
+    }}
+  >
+    {children}
+  </ToggleButtonGroupContext.Provider>
+);
 
-  render() {
-    const { value, onValueChange, children } = this.props;
-
-    return (
-      <ToggleButtonGroupContext.Provider
-        value={{
-          value,
-          onValueChange,
-        }}
-      >
-        {children}
-      </ToggleButtonGroupContext.Provider>
-    );
-  }
-}
+ToggleButtonGroup.displayName = 'ToggleButton.Group';
 
 export default ToggleButtonGroup;

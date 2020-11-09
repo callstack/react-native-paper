@@ -83,19 +83,22 @@ type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
  *
  * export default MyComponent;
  * ```
+ *
+ * @extends TouchableWithoutFeedback props https://reactnative.dev/docs/touchablewithoutfeedback#props
  */
-class TouchableRipple extends React.Component<Props> {
-  static defaultProps = {
-    borderless: false,
-  };
-
-  /**
-   * Whether ripple effect is supported.
-   */
-  static supported = true;
-
-  private handlePressIn = (e: any) => {
-    const { centered, rippleColor, onPressIn, theme } = this.props;
+const TouchableRipple = ({
+  style,
+  background: _background,
+  borderless = false,
+  disabled: disabledProp,
+  rippleColor,
+  underlayColor: _underlayColor,
+  children,
+  theme,
+  ...rest
+}: Props) => {
+  const handlePressIn = (e: any) => {
+    const { centered, onPressIn } = rest;
 
     onPressIn?.(e);
 
@@ -114,17 +117,16 @@ class TouchableRipple extends React.Component<Props> {
     let touchX;
     let touchY;
 
-    if (centered) {
+    const { changedTouches, touches } = e.nativeEvent;
+    const touch = touches?.[0] ?? changedTouches?.[0];
+
+    // If centered or it was pressed using keyboard - enter or space
+    if (centered || !touch) {
       touchX = dimensions.width / 2;
       touchY = dimensions.height / 2;
     } else {
-      const { changedTouches, touches } = e.nativeEvent;
-      const touch = touches?.[0] ?? changedTouches?.[0];
-      const startX = touch.pageX ?? e.pageX;
-      const startY = touch.pageY ?? e.pageY;
-
-      touchX = startX - dimensions.left;
-      touchY = startY - dimensions.top;
+      touchX = touch.locationX ?? e.pageX;
+      touchY = touch.locationY ?? e.pageY;
     }
 
     // Get the size of the button to determine how big the ripple should be
@@ -196,8 +198,8 @@ class TouchableRipple extends React.Component<Props> {
     });
   };
 
-  private handlePressOut = (e: any) => {
-    this.props.onPressOut && this.props.onPressOut(e);
+  const handlePressOut = (e: any) => {
+    rest.onPressOut?.(e);
 
     const containers = e.currentTarget.querySelectorAll(
       '[data-paper-ripple]'
@@ -206,7 +208,6 @@ class TouchableRipple extends React.Component<Props> {
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         containers.forEach((container) => {
-          // @ts-ignore
           const ripple = container.firstChild;
 
           // @ts-ignore
@@ -217,7 +218,6 @@ class TouchableRipple extends React.Component<Props> {
 
           // Finally remove the span after the transition
           setTimeout(() => {
-            // @ts-ignore
             const { parentNode } = container;
 
             if (parentNode) {
@@ -229,39 +229,26 @@ class TouchableRipple extends React.Component<Props> {
     });
   };
 
-  render() {
-    /* eslint-disable @typescript-eslint/no-unused-vars */
-    const {
-      style,
-      background,
-      borderless,
-      disabled: disabledProp,
-      rippleColor,
-      underlayColor,
-      children,
-      theme,
-      ...rest
-    } = this.props;
-    /* eslint-enable @typescript-eslint/no-unused-vars */
+  const disabled = disabledProp || !rest.onPress;
 
-    const disabled = disabledProp || !this.props.onPress;
+  return (
+    <TouchableWithoutFeedback
+      {...rest}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
+      disabled={disabled}
+    >
+      <View style={[styles.touchable, borderless && styles.borderless, style]}>
+        {React.Children.only(children)}
+      </View>
+    </TouchableWithoutFeedback>
+  );
+};
 
-    return (
-      <TouchableWithoutFeedback
-        {...rest}
-        onPressIn={this.handlePressIn}
-        onPressOut={this.handlePressOut}
-        disabled={disabled}
-      >
-        <View
-          style={[styles.touchable, borderless && styles.borderless, style]}
-        >
-          {React.Children.only(children)}
-        </View>
-      </TouchableWithoutFeedback>
-    );
-  }
-}
+/**
+ * Whether ripple effect is supported.
+ */
+TouchableRipple.supported = true;
 
 const styles = StyleSheet.create({
   touchable: {

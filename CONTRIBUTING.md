@@ -52,7 +52,7 @@ When you're working on a component:
 * Follow the guidelines described in the [official material design docs](https://material.io/guidelines/).
 * Write a brief description of every prop when defining `type Props` to aid with documentation.
 * Provide an example usage for the component (check other components to get a idea).
-* Update the type definitions for Flow and Typescript if you changed an API or added a component.
+* Update the type definitions for Flow and TypeScript if you changed an API or added a component.
 
 ### Running the example
 

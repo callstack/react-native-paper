@@ -49,24 +49,18 @@ type Props = React.ComponentPropsWithRef<typeof Title> & {
  * export default MyComponent;
  * ```
  */
-class DialogTitle extends React.Component<Props> {
-  static displayName = 'Dialog.Title';
+const DialogTitle = ({ children, theme, style, ...rest }: Props) => (
+  <Title
+    accessibilityTraits="header"
+    accessibilityRole="header"
+    style={[styles.text, { color: theme.colors.text }, style]}
+    {...rest}
+  >
+    {children}
+  </Title>
+);
 
-  render() {
-    const { children, theme, style, ...rest } = this.props;
-
-    return (
-      <Title
-        accessibilityTraits="header"
-        accessibilityRole="header"
-        style={[styles.text, { color: theme.colors.text }, style]}
-        {...rest}
-      >
-        {children}
-      </Title>
-    );
-  }
-}
+DialogTitle.displayName = 'Dialog.Title';
 
 const styles = StyleSheet.create({
   text: {

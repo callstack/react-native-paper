@@ -580,6 +580,8 @@ exports[`renders loading button 1`] = `
       }
     >
       <View
+        accessibilityRole="progressbar"
+        accessible={true}
         style={
           Array [
             Object {
