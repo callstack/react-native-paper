@@ -343,6 +343,7 @@ const FABGroup = ({
           accessibilityTraits="button"
           accessibilityComponentType="button"
           accessibilityRole="button"
+          accessibilityState={{ expanded: open }}
           style={[styles.fab, fabStyle]}
           visible={visible}
           testID={testID}
