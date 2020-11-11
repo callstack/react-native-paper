@@ -172,6 +172,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -220,6 +221,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -358,6 +360,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -406,6 +409,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -544,6 +548,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -592,6 +597,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -860,6 +866,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -908,6 +915,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -1046,6 +1054,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -1094,6 +1103,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -1232,6 +1242,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -1280,6 +1291,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -3016,6 +3028,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -3064,6 +3077,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -3282,6 +3296,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -3330,6 +3345,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -3548,6 +3564,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -3596,6 +3613,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -3944,6 +3962,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -3992,6 +4011,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -4173,6 +4193,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -4221,6 +4242,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -4402,6 +4424,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -4450,6 +4473,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -4741,6 +4765,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -4789,6 +4814,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -5007,6 +5033,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -5055,6 +5082,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -5273,6 +5301,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -5321,6 +5350,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -5669,6 +5699,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -5717,6 +5748,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -5898,6 +5930,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -5946,6 +5979,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -6127,6 +6161,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -6175,6 +6210,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -6356,6 +6392,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -6404,6 +6441,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -6585,6 +6623,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -6633,6 +6672,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,

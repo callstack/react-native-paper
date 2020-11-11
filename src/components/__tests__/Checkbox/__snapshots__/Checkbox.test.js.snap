@@ -52,6 +52,7 @@ exports[`renders Checkbox with custom testID 1`] = `
           },
           Array [
             Object {
+              "lineHeight": 24,
               "transform": Array [
                 Object {
                   "scaleX": 1,
@@ -128,6 +129,7 @@ exports[`renders checked Checkbox with color 1`] = `
           },
           Array [
             Object {
+              "lineHeight": 24,
               "transform": Array [
                 Object {
                   "scaleX": 1,
@@ -204,6 +206,7 @@ exports[`renders checked Checkbox with onPress 1`] = `
           },
           Array [
             Object {
+              "lineHeight": 24,
               "transform": Array [
                 Object {
                   "scaleX": 1,
@@ -280,6 +283,7 @@ exports[`renders indeterminate Checkbox 1`] = `
           },
           Array [
             Object {
+              "lineHeight": 24,
               "transform": Array [
                 Object {
                   "scaleX": 1,
@@ -356,6 +360,7 @@ exports[`renders indeterminate Checkbox with color 1`] = `
           },
           Array [
             Object {
+              "lineHeight": 24,
               "transform": Array [
                 Object {
                   "scaleX": 1,
@@ -432,6 +437,7 @@ exports[`renders unchecked Checkbox with color 1`] = `
           },
           Array [
             Object {
+              "lineHeight": 24,
               "transform": Array [
                 Object {
                   "scaleX": 1,
@@ -508,6 +514,7 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
           },
           Array [
             Object {
+              "lineHeight": 24,
               "transform": Array [
                 Object {
                   "scaleX": 1,
