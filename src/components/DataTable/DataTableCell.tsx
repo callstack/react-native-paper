@@ -13,6 +13,10 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    * Align the text to the right. Generally monetary or number fields are aligned to right.
    */
   numeric?: boolean;
+   /**
+   * The number of lines to show.
+   */  
+  numberOfLines?: number;  
   /**
    * Function to execute on press.
    */
@@ -48,12 +52,12 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
  * ```
  */
 
-const DataTableCell = ({ children, style, numeric, ...rest }: Props) => (
+const DataTableCell = ({ children, style, numeric, numberOfLines = 1, ...rest }: Props) => (
   <TouchableRipple
     {...rest}
     style={[styles.container, numeric && styles.right, style]}
   >
-    <Text numberOfLines={1}>{children}</Text>
+    <Text numberOfLines={numberOfLines}>{children}</Text>
   </TouchableRipple>
 );
 
