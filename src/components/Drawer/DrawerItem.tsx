@@ -90,7 +90,6 @@ const DrawerItem = ({
     >
       <TouchableRipple
         borderless
-        delayPressIn={0}
         onPress={onPress}
         style={{ borderRadius: roundness }}
         accessibilityTraits={active ? ['button', 'selected'] : 'button'}

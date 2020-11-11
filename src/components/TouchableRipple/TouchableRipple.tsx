@@ -95,6 +95,7 @@ const TouchableRipple = ({
   underlayColor: _underlayColor,
   children,
   theme,
+  delayPressIn = 0,
   ...rest
 }: Props) => {
   const handlePressIn = (e: any) => {
@@ -233,6 +234,7 @@ const TouchableRipple = ({
 
   return (
     <TouchableWithoutFeedback
+      delayPressIn={delayPressIn}
       {...rest}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}

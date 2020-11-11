@@ -254,7 +254,6 @@ const Button = ({
     >
       <TouchableRipple
         borderless
-        delayPressIn={0}
         onPress={onPress}
         onLongPress={onLongPress}
         onPressIn={handlePressIn}

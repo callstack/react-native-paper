@@ -239,7 +239,6 @@ const Chip = ({
     >
       <TouchableRipple
         borderless
-        delayPressIn={0}
         style={{ borderRadius }}
         onPress={onPress}
         onLongPress={onLongPress}

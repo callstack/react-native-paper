@@ -36,6 +36,7 @@ const TouchableRipple = ({
   underlayColor,
   children,
   theme,
+  delayPressIn = 0,
   ...rest
 }: Props) => {
   const { dark, colors } = theme;
@@ -57,6 +58,7 @@ const TouchableRipple = ({
   if (TouchableRipple.supported) {
     return (
       <TouchableNativeFeedback
+        delayPressIn={delayPressIn}
         {...rest}
         disabled={disabled}
         useForeground={useForeground}
