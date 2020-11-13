@@ -77,9 +77,17 @@ const RadioButtonAndroid = ({
     new Animated.Value(1)
   );
 
+  const isFirstRendering = React.useRef<boolean>(true);
+
   const { scale } = theme.animation;
 
   React.useEffect(() => {
+    // Do not run animation on very first rendering
+    if (isFirstRendering.current) {
+      isFirstRendering.current = false;
+      return;
+    }
+
     if (status === 'checked') {
       radioAnim.setValue(1.2);
 
