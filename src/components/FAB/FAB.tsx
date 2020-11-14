@@ -1,6 +1,7 @@
 import color from 'color';
 import * as React from 'react';
 import { Animated, View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
+import type { AccessibilityState } from 'react-native';
 import ActivityIndicator from '../ActivityIndicator';
 import Surface from '../Surface';
 import CrossFadeIcon from '../CrossFadeIcon';
@@ -13,7 +14,6 @@ import type { $RemoveChildren } from '../../types';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars -- for component-docs
 import FABGroup, { FABGroup as _FABGroup } from './FABGroup';
 import type { IconSource } from './../Icon';
-import type { AccessibilityState } from 'react-native';
 
 type Props = $RemoveChildren<typeof Surface> & {
   /**
@@ -178,7 +178,7 @@ const FAB = ({
   }
 
   const rippleColor = color(foregroundColor).alpha(0.32).rgb().string();
-
+  const accessibilityStateWithDisabled = { ...accessibilityState, disabled };
   return (
     <Surface
       {...rest}
@@ -210,7 +210,7 @@ const FAB = ({
         accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
         accessibilityComponentType="button"
         accessibilityRole="button"
-        accessibilityState={{ ...accessibilityState, disabled }}
+        accessibilityState={accessibilityStateWithDisabled} // eslint-disable-line react-native-a11y/has-valid-accessibility-state -- bug
         style={styles.touchable}
         testID={testID}
       >
