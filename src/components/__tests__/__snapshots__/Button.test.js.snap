@@ -265,6 +265,7 @@ exports[`renders button with icon 1`] = `
               },
               Array [
                 Object {
+                  "lineHeight": 16,
                   "transform": Array [
                     Object {
                       "scaleX": 1,

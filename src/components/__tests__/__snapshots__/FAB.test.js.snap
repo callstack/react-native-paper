@@ -111,6 +111,7 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
                 },
                 Array [
                   Object {
+                    "lineHeight": 24,
                     "transform": Array [
                       Object {
                         "scaleX": 1,
@@ -243,6 +244,7 @@ exports[`renders disabled FAB 1`] = `
                 },
                 Array [
                   Object {
+                    "lineHeight": 24,
                     "transform": Array [
                       Object {
                         "scaleX": 1,
@@ -383,6 +385,7 @@ exports[`renders extended FAB 1`] = `
                 },
                 Array [
                   Object {
+                    "lineHeight": 24,
                     "transform": Array [
                       Object {
                         "scaleX": 1,
@@ -803,6 +806,7 @@ exports[`renders normal FAB 1`] = `
                 },
                 Array [
                   Object {
+                    "lineHeight": 24,
                     "transform": Array [
                       Object {
                         "scaleX": 1,
@@ -942,6 +946,7 @@ exports[`renders not visible FAB 1`] = `
                 },
                 Array [
                   Object {
+                    "lineHeight": 24,
                     "transform": Array [
                       Object {
                         "scaleX": 1,
@@ -1081,6 +1086,7 @@ exports[`renders small FAB 1`] = `
                 },
                 Array [
                   Object {
+                    "lineHeight": 24,
                     "transform": Array [
                       Object {
                         "scaleX": 1,
@@ -1220,6 +1226,7 @@ exports[`renders visible FAB 1`] = `
                 },
                 Array [
                   Object {
+                    "lineHeight": 24,
                     "transform": Array [
                       Object {
                         "scaleX": 1,
