@@ -60,20 +60,14 @@ declare module 'babel-preset-react-native/index.js' {
   declare module.exports: $Exports<'babel-preset-react-native'>;
 }
 declare module 'babel-preset-react-native/lib/resolvePlugins.js' {
-  declare module.exports: $Exports<
-    'babel-preset-react-native/lib/resolvePlugins'
-  >;
+  declare module.exports: $Exports<'babel-preset-react-native/lib/resolvePlugins'>;
 }
 declare module 'babel-preset-react-native/plugins.js' {
   declare module.exports: $Exports<'babel-preset-react-native/plugins'>;
 }
 declare module 'babel-preset-react-native/transforms/transform-dynamic-import.js' {
-  declare module.exports: $Exports<
-    'babel-preset-react-native/transforms/transform-dynamic-import'
-  >;
+  declare module.exports: $Exports<'babel-preset-react-native/transforms/transform-dynamic-import'>;
 }
 declare module 'babel-preset-react-native/transforms/transform-symbol-member.js' {
-  declare module.exports: $Exports<
-    'babel-preset-react-native/transforms/transform-symbol-member'
-  >;
+  declare module.exports: $Exports<'babel-preset-react-native/transforms/transform-symbol-member'>;
 }

@@ -1421,37 +1421,25 @@ declare module 'eslint/lib/cli.js' {
   declare module.exports: $Exports<'eslint/lib/cli'>;
 }
 declare module 'eslint/lib/code-path-analysis/code-path-analyzer.js' {
-  declare module.exports: $Exports<
-    'eslint/lib/code-path-analysis/code-path-analyzer'
-  >;
+  declare module.exports: $Exports<'eslint/lib/code-path-analysis/code-path-analyzer'>;
 }
 declare module 'eslint/lib/code-path-analysis/code-path-segment.js' {
-  declare module.exports: $Exports<
-    'eslint/lib/code-path-analysis/code-path-segment'
-  >;
+  declare module.exports: $Exports<'eslint/lib/code-path-analysis/code-path-segment'>;
 }
 declare module 'eslint/lib/code-path-analysis/code-path-state.js' {
-  declare module.exports: $Exports<
-    'eslint/lib/code-path-analysis/code-path-state'
-  >;
+  declare module.exports: $Exports<'eslint/lib/code-path-analysis/code-path-state'>;
 }
 declare module 'eslint/lib/code-path-analysis/code-path.js' {
   declare module.exports: $Exports<'eslint/lib/code-path-analysis/code-path'>;
 }
 declare module 'eslint/lib/code-path-analysis/debug-helpers.js' {
-  declare module.exports: $Exports<
-    'eslint/lib/code-path-analysis/debug-helpers'
-  >;
+  declare module.exports: $Exports<'eslint/lib/code-path-analysis/debug-helpers'>;
 }
 declare module 'eslint/lib/code-path-analysis/fork-context.js' {
-  declare module.exports: $Exports<
-    'eslint/lib/code-path-analysis/fork-context'
-  >;
+  declare module.exports: $Exports<'eslint/lib/code-path-analysis/fork-context'>;
 }
 declare module 'eslint/lib/code-path-analysis/id-generator.js' {
-  declare module.exports: $Exports<
-    'eslint/lib/code-path-analysis/id-generator'
-  >;
+  declare module.exports: $Exports<'eslint/lib/code-path-analysis/id-generator'>;
 }
 declare module 'eslint/lib/config.js' {
   declare module.exports: $Exports<'eslint/lib/config'>;
@@ -1601,9 +1589,7 @@ declare module 'eslint/lib/rules/complexity.js' {
   declare module.exports: $Exports<'eslint/lib/rules/complexity'>;
 }
 declare module 'eslint/lib/rules/computed-property-spacing.js' {
-  declare module.exports: $Exports<
-    'eslint/lib/rules/computed-property-spacing'
-  >;
+  declare module.exports: $Exports<'eslint/lib/rules/computed-property-spacing'>;
 }
 declare module 'eslint/lib/rules/consistent-return.js' {
   declare module.exports: $Exports<'eslint/lib/rules/consistent-return'>;
@@ -1708,9 +1694,7 @@ declare module 'eslint/lib/rules/lines-around-directive.js' {
   declare module.exports: $Exports<'eslint/lib/rules/lines-around-directive'>;
 }
 declare module 'eslint/lib/rules/lines-between-class-members.js' {
-  declare module.exports: $Exports<
-    'eslint/lib/rules/lines-between-class-members'
-  >;
+  declare module.exports: $Exports<'eslint/lib/rules/lines-between-class-members'>;
 }
 declare module 'eslint/lib/rules/max-depth.js' {
   declare module.exports: $Exports<'eslint/lib/rules/max-depth'>;
@@ -2049,9 +2033,7 @@ declare module 'eslint/lib/rules/no-sequences.js' {
   declare module.exports: $Exports<'eslint/lib/rules/no-sequences'>;
 }
 declare module 'eslint/lib/rules/no-shadow-restricted-names.js' {
-  declare module.exports: $Exports<
-    'eslint/lib/rules/no-shadow-restricted-names'
-  >;
+  declare module.exports: $Exports<'eslint/lib/rules/no-shadow-restricted-names'>;
 }
 declare module 'eslint/lib/rules/no-shadow.js' {
   declare module.exports: $Exports<'eslint/lib/rules/no-shadow'>;
@@ -2069,9 +2051,7 @@ declare module 'eslint/lib/rules/no-tabs.js' {
   declare module.exports: $Exports<'eslint/lib/rules/no-tabs'>;
 }
 declare module 'eslint/lib/rules/no-template-curly-in-string.js' {
-  declare module.exports: $Exports<
-    'eslint/lib/rules/no-template-curly-in-string'
-  >;
+  declare module.exports: $Exports<'eslint/lib/rules/no-template-curly-in-string'>;
 }
 declare module 'eslint/lib/rules/no-ternary.js' {
   declare module.exports: $Exports<'eslint/lib/rules/no-ternary'>;
@@ -2101,9 +2081,7 @@ declare module 'eslint/lib/rules/no-unexpected-multiline.js' {
   declare module.exports: $Exports<'eslint/lib/rules/no-unexpected-multiline'>;
 }
 declare module 'eslint/lib/rules/no-unmodified-loop-condition.js' {
-  declare module.exports: $Exports<
-    'eslint/lib/rules/no-unmodified-loop-condition'
-  >;
+  declare module.exports: $Exports<'eslint/lib/rules/no-unmodified-loop-condition'>;
 }
 declare module 'eslint/lib/rules/no-unneeded-ternary.js' {
   declare module.exports: $Exports<'eslint/lib/rules/no-unneeded-ternary'>;
@@ -2160,17 +2138,13 @@ declare module 'eslint/lib/rules/no-warning-comments.js' {
   declare module.exports: $Exports<'eslint/lib/rules/no-warning-comments'>;
 }
 declare module 'eslint/lib/rules/no-whitespace-before-property.js' {
-  declare module.exports: $Exports<
-    'eslint/lib/rules/no-whitespace-before-property'
-  >;
+  declare module.exports: $Exports<'eslint/lib/rules/no-whitespace-before-property'>;
 }
 declare module 'eslint/lib/rules/no-with.js' {
   declare module.exports: $Exports<'eslint/lib/rules/no-with'>;
 }
 declare module 'eslint/lib/rules/nonblock-statement-body-position.js' {
-  declare module.exports: $Exports<
-    'eslint/lib/rules/nonblock-statement-body-position'
-  >;
+  declare module.exports: $Exports<'eslint/lib/rules/nonblock-statement-body-position'>;
 }
 declare module 'eslint/lib/rules/object-curly-newline.js' {
   declare module.exports: $Exports<'eslint/lib/rules/object-curly-newline'>;
@@ -2185,9 +2159,7 @@ declare module 'eslint/lib/rules/object-shorthand.js' {
   declare module.exports: $Exports<'eslint/lib/rules/object-shorthand'>;
 }
 declare module 'eslint/lib/rules/one-var-declaration-per-line.js' {
-  declare module.exports: $Exports<
-    'eslint/lib/rules/one-var-declaration-per-line'
-  >;
+  declare module.exports: $Exports<'eslint/lib/rules/one-var-declaration-per-line'>;
 }
 declare module 'eslint/lib/rules/one-var.js' {
   declare module.exports: $Exports<'eslint/lib/rules/one-var'>;
@@ -2202,9 +2174,7 @@ declare module 'eslint/lib/rules/padded-blocks.js' {
   declare module.exports: $Exports<'eslint/lib/rules/padded-blocks'>;
 }
 declare module 'eslint/lib/rules/padding-line-between-statements.js' {
-  declare module.exports: $Exports<
-    'eslint/lib/rules/padding-line-between-statements'
-  >;
+  declare module.exports: $Exports<'eslint/lib/rules/padding-line-between-statements'>;
 }
 declare module 'eslint/lib/rules/prefer-arrow-callback.js' {
   declare module.exports: $Exports<'eslint/lib/rules/prefer-arrow-callback'>;
@@ -2219,9 +2189,7 @@ declare module 'eslint/lib/rules/prefer-numeric-literals.js' {
   declare module.exports: $Exports<'eslint/lib/rules/prefer-numeric-literals'>;
 }
 declare module 'eslint/lib/rules/prefer-promise-reject-errors.js' {
-  declare module.exports: $Exports<
-    'eslint/lib/rules/prefer-promise-reject-errors'
-  >;
+  declare module.exports: $Exports<'eslint/lib/rules/prefer-promise-reject-errors'>;
 }
 declare module 'eslint/lib/rules/prefer-reflect.js' {
   declare module.exports: $Exports<'eslint/lib/rules/prefer-reflect'>;
@@ -2278,9 +2246,7 @@ declare module 'eslint/lib/rules/space-before-blocks.js' {
   declare module.exports: $Exports<'eslint/lib/rules/space-before-blocks'>;
 }
 declare module 'eslint/lib/rules/space-before-function-paren.js' {
-  declare module.exports: $Exports<
-    'eslint/lib/rules/space-before-function-paren'
-  >;
+  declare module.exports: $Exports<'eslint/lib/rules/space-before-function-paren'>;
 }
 declare module 'eslint/lib/rules/space-in-parens.js' {
   declare module.exports: $Exports<'eslint/lib/rules/space-in-parens'>;
@@ -2343,14 +2309,10 @@ declare module 'eslint/lib/timing.js' {
   declare module.exports: $Exports<'eslint/lib/timing'>;
 }
 declare module 'eslint/lib/token-store/backward-token-comment-cursor.js' {
-  declare module.exports: $Exports<
-    'eslint/lib/token-store/backward-token-comment-cursor'
-  >;
+  declare module.exports: $Exports<'eslint/lib/token-store/backward-token-comment-cursor'>;
 }
 declare module 'eslint/lib/token-store/backward-token-cursor.js' {
-  declare module.exports: $Exports<
-    'eslint/lib/token-store/backward-token-cursor'
-  >;
+  declare module.exports: $Exports<'eslint/lib/token-store/backward-token-cursor'>;
 }
 declare module 'eslint/lib/token-store/cursor.js' {
   declare module.exports: $Exports<'eslint/lib/token-store/cursor'>;
@@ -2365,14 +2327,10 @@ declare module 'eslint/lib/token-store/filter-cursor.js' {
   declare module.exports: $Exports<'eslint/lib/token-store/filter-cursor'>;
 }
 declare module 'eslint/lib/token-store/forward-token-comment-cursor.js' {
-  declare module.exports: $Exports<
-    'eslint/lib/token-store/forward-token-comment-cursor'
-  >;
+  declare module.exports: $Exports<'eslint/lib/token-store/forward-token-comment-cursor'>;
 }
 declare module 'eslint/lib/token-store/forward-token-cursor.js' {
-  declare module.exports: $Exports<
-    'eslint/lib/token-store/forward-token-cursor'
-  >;
+  declare module.exports: $Exports<'eslint/lib/token-store/forward-token-cursor'>;
 }
 declare module 'eslint/lib/token-store/index.js' {
   declare module.exports: $Exports<'eslint/lib/token-store/index'>;
@@ -2381,9 +2339,7 @@ declare module 'eslint/lib/token-store/limit-cursor.js' {
   declare module.exports: $Exports<'eslint/lib/token-store/limit-cursor'>;
 }
 declare module 'eslint/lib/token-store/padded-token-cursor.js' {
-  declare module.exports: $Exports<
-    'eslint/lib/token-store/padded-token-cursor'
-  >;
+  declare module.exports: $Exports<'eslint/lib/token-store/padded-token-cursor'>;
 }
 declare module 'eslint/lib/token-store/skip-cursor.js' {
   declare module.exports: $Exports<'eslint/lib/token-store/skip-cursor'>;

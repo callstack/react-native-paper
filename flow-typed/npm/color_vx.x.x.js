@@ -23,6 +23,7 @@ declare module 'color' {
  * needed.
  */
 
+
 // Filename aliases
 declare module 'color/index' {
   declare module.exports: $Exports<'color'>;

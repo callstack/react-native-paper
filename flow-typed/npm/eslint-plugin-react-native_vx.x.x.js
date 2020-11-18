@@ -58,37 +58,23 @@ declare module 'eslint-plugin-react-native/index.js' {
   declare module.exports: $Exports<'eslint-plugin-react-native'>;
 }
 declare module 'eslint-plugin-react-native/lib/rules/no-color-literals.js' {
-  declare module.exports: $Exports<
-    'eslint-plugin-react-native/lib/rules/no-color-literals'
-  >;
+  declare module.exports: $Exports<'eslint-plugin-react-native/lib/rules/no-color-literals'>;
 }
 declare module 'eslint-plugin-react-native/lib/rules/no-inline-styles.js' {
-  declare module.exports: $Exports<
-    'eslint-plugin-react-native/lib/rules/no-inline-styles'
-  >;
+  declare module.exports: $Exports<'eslint-plugin-react-native/lib/rules/no-inline-styles'>;
 }
 declare module 'eslint-plugin-react-native/lib/rules/no-unused-styles.js' {
-  declare module.exports: $Exports<
-    'eslint-plugin-react-native/lib/rules/no-unused-styles'
-  >;
+  declare module.exports: $Exports<'eslint-plugin-react-native/lib/rules/no-unused-styles'>;
 }
 declare module 'eslint-plugin-react-native/lib/rules/split-platform-components.js' {
-  declare module.exports: $Exports<
-    'eslint-plugin-react-native/lib/rules/split-platform-components'
-  >;
+  declare module.exports: $Exports<'eslint-plugin-react-native/lib/rules/split-platform-components'>;
 }
 declare module 'eslint-plugin-react-native/lib/util/Components.js' {
-  declare module.exports: $Exports<
-    'eslint-plugin-react-native/lib/util/Components'
-  >;
+  declare module.exports: $Exports<'eslint-plugin-react-native/lib/util/Components'>;
 }
 declare module 'eslint-plugin-react-native/lib/util/stylesheet.js' {
-  declare module.exports: $Exports<
-    'eslint-plugin-react-native/lib/util/stylesheet'
-  >;
+  declare module.exports: $Exports<'eslint-plugin-react-native/lib/util/stylesheet'>;
 }
 declare module 'eslint-plugin-react-native/lib/util/variable.js' {
-  declare module.exports: $Exports<
-    'eslint-plugin-react-native/lib/util/variable'
-  >;
+  declare module.exports: $Exports<'eslint-plugin-react-native/lib/util/variable'>;
 }

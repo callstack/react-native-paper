@@ -43,15 +43,11 @@ declare module 'enzyme-adapter-react-16/build/index.js' {
   declare module.exports: $Exports<'enzyme-adapter-react-16/build/index'>;
 }
 declare module 'enzyme-adapter-react-16/build/ReactSixteenAdapter.js' {
-  declare module.exports: $Exports<
-    'enzyme-adapter-react-16/build/ReactSixteenAdapter'
-  >;
+  declare module.exports: $Exports<'enzyme-adapter-react-16/build/ReactSixteenAdapter'>;
 }
 declare module 'enzyme-adapter-react-16/src/index.js' {
   declare module.exports: $Exports<'enzyme-adapter-react-16/src/index'>;
 }
 declare module 'enzyme-adapter-react-16/src/ReactSixteenAdapter.js' {
-  declare module.exports: $Exports<
-    'enzyme-adapter-react-16/src/ReactSixteenAdapter'
-  >;
+  declare module.exports: $Exports<'enzyme-adapter-react-16/src/ReactSixteenAdapter'>;
 }

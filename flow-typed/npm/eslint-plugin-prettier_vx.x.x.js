@@ -28,7 +28,5 @@ declare module 'eslint-plugin-prettier/eslint-plugin-prettier' {
 
 // Filename aliases
 declare module 'eslint-plugin-prettier/eslint-plugin-prettier.js' {
-  declare module.exports: $Exports<
-    'eslint-plugin-prettier/eslint-plugin-prettier'
-  >;
+  declare module.exports: $Exports<'eslint-plugin-prettier/eslint-plugin-prettier'>;
 }
