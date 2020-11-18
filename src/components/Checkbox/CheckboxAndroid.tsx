@@ -67,12 +67,19 @@ const CheckboxAndroid = ({
   const { current: scaleAnim } = React.useRef<Animated.Value>(
     new Animated.Value(1)
   );
+  const isFirstRendering = React.useRef<boolean>(true);
 
   const {
     animation: { scale },
   } = theme;
 
   React.useEffect(() => {
+    // Do not run animation on very first rendering
+    if (isFirstRendering.current) {
+      isFirstRendering.current = false;
+      return;
+    }
+
     const checked = status === 'checked';
 
     Animated.sequence([

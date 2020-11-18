@@ -66,6 +66,7 @@ exports[`renders DrawerItem with icon 1`] = `
             },
             Array [
               Object {
+                "lineHeight": 24,
                 "transform": Array [
                   Object {
                     "scaleX": 1,
@@ -185,6 +186,7 @@ exports[`renders active DrawerItem 1`] = `
             },
             Array [
               Object {
+                "lineHeight": 24,
                 "transform": Array [
                   Object {
                     "scaleX": 1,

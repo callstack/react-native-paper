@@ -82,6 +82,7 @@ exports[`renders with placeholder 1`] = `
             },
             Array [
               Object {
+                "lineHeight": 24,
                 "transform": Array [
                   Object {
                     "scaleX": 1,
@@ -200,6 +201,7 @@ exports[`renders with placeholder 1`] = `
             },
             Array [
               Object {
+                "lineHeight": 24,
                 "transform": Array [
                   Object {
                     "scaleX": 1,
@@ -308,6 +310,7 @@ exports[`renders with text 1`] = `
             },
             Array [
               Object {
+                "lineHeight": 24,
                 "transform": Array [
                   Object {
                     "scaleX": 1,
@@ -425,6 +428,7 @@ exports[`renders with text 1`] = `
             },
             Array [
               Object {
+                "lineHeight": 24,
                 "transform": Array [
                   Object {
                     "scaleX": 1,

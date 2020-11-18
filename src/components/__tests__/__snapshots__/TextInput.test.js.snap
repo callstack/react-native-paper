@@ -286,6 +286,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
               },
               Array [
                 Object {
+                  "lineHeight": 24,
                   "transform": Array [
                     Object {
                       "scaleX": 1,
@@ -566,6 +567,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
               },
               Array [
                 Object {
+                  "lineHeight": 24,
                   "transform": Array [
                     Object {
                       "scaleX": 1,

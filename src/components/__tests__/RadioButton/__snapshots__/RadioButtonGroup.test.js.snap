@@ -56,6 +56,7 @@ exports[`RadioButtonGroup renders properly 1`] = `
             },
             Array [
               Object {
+                "lineHeight": 24,
                 "transform": Array [
                   Object {
                     "scaleX": 1,

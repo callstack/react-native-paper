@@ -163,6 +163,7 @@ exports[`renders list item with custom description 1`] = `
                         },
                         Array [
                           Object {
+                            "lineHeight": 18,
                             "transform": Array [
                               Object {
                                 "scaleX": 1,
@@ -459,6 +460,7 @@ exports[`renders list item with left and right items 1`] = `
             },
             Array [
               Object {
+                "lineHeight": 24,
                 "transform": Array [
                   Object {
                     "scaleX": 1,
@@ -548,6 +550,7 @@ exports[`renders list item with left item 1`] = `
             },
             Array [
               Object {
+                "lineHeight": 24,
                 "transform": Array [
                   Object {
                     "scaleX": 1,
