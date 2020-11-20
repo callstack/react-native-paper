@@ -92,6 +92,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
       fontWeight,
       height,
       backgroundColor = colors.background,
+      textAlign,
       ...viewStyle
     } = (StyleSheet.flatten(style) || {}) as TextStyle;
     const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
@@ -329,6 +330,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
                   fontWeight,
                   color: inputTextColor,
                   textAlignVertical: multiline ? 'top' : 'center',
+                  textAlign,
                 },
                 adornmentStyleAdjustmentForNativeInput,
               ],
