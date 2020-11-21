@@ -737,7 +737,7 @@ class BottomNavigation extends React.Component<Props, State> {
                     { top },
                     Platform.OS === 'web'
                       ? {
-                          display: loaded.includes(route.key) ? 'flex' : 'none',
+                          display: focused ? 'flex' : 'none',
                         }
                       : null,
                   ]}
