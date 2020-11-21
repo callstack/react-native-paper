@@ -610,6 +610,11 @@ const BottomNavigation = ({
             outputRange: [0, FAR_FAR_AWAY],
           });
 
+          const web =
+            Platform.OS === 'web'
+              ? { display: focused ? 'flex' : 'none' }
+              : undefined;
+
           return (
             <Animated.View
               key={route.key}
@@ -618,7 +623,7 @@ const BottomNavigation = ({
               importantForAccessibility={
                 focused ? 'auto' : 'no-hide-descendants'
               }
-              style={[StyleSheet.absoluteFill, { opacity }]}
+              style={[StyleSheet.absoluteFill, { opacity }, web]}
               collapsable={false}
               removeClippedSubviews={
                 // On iOS, set removeClippedSubviews to true only when not focused
