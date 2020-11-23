@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 
 import CheckBox from './Checkbox';
+import CheckboxAndroid from './CheckboxAndroid';
+import CheckboxIOS from './CheckboxIOS';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
@@ -54,6 +56,11 @@ type Props = {
    * testID to be used on tests.
    */
   testID?: string;
+  /**
+   * Whether the Android or iOS checkbox components should be used.
+   * Left undefined, the checkbox will be based on whatever the system is.
+   */
+  mode?: 'android' | 'ios';
 };
 
 /**
@@ -83,17 +90,33 @@ const CheckboxItem = ({
   labelStyle,
   theme,
   testID,
+  mode,
   ...props
-}: Props) => (
-  <TouchableRipple onPress={onPress} testID={testID}>
-    <View style={[styles.container, style]} pointerEvents="none">
-      <Text style={[styles.label, { color: theme.colors.primary }, labelStyle]}>
-        {label}
-      </Text>
-      <CheckBox status={status} theme={theme} {...props}></CheckBox>
-    </View>
-  </TouchableRipple>
-);
+}: Props) => {
+  const checkboxProps = { ...props, status, theme };
+  let checkbox;
+
+  if (mode === 'android') {
+    checkbox = <CheckboxAndroid {...checkboxProps} />;
+  } else if (mode === 'ios') {
+    checkbox = <CheckboxIOS {...checkboxProps} />;
+  } else {
+    checkbox = <CheckBox {...checkboxProps} />;
+  }
+
+  return (
+    <TouchableRipple onPress={onPress} testID={testID}>
+      <View style={[styles.container, style]} pointerEvents="none">
+        <Text
+          style={[styles.label, { color: theme.colors.primary }, labelStyle]}
+        >
+          {label}
+        </Text>
+        {checkbox}
+      </View>
+    </TouchableRipple>
+  );
+};
 
 CheckboxItem.displayName = 'Checkbox.Item';
 
