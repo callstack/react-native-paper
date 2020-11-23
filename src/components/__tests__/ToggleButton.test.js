@@ -1,6 +1,6 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import ToggleButton from '../ToggleButton/ToggleButton.tsx';
+import ToggleButton from '../ToggleButton';
 
 it('renders toggle button', () => {
   const tree = renderer

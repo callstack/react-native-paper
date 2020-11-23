@@ -6,7 +6,6 @@ import CheckboxAndroid, {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   CheckboxAndroid as _CheckboxAndroid,
 } from './CheckboxAndroid';
-import CheckboxItem from './CheckboxItem';
 import { withTheme } from '../../core/theming';
 
 type Props = {
@@ -89,14 +88,5 @@ const Checkbox = (props: Props) =>
   ) : (
     <CheckboxAndroid {...props} />
   );
-
-// @component ./CheckboxItem.tsx
-Checkbox.Item = CheckboxItem;
-
-// @component ./CheckboxAndroid.tsx
-Checkbox.Android = CheckboxAndroid;
-
-// @component ./CheckboxIOS.tsx
-Checkbox.IOS = CheckboxIOS;
 
 export default withTheme(Checkbox);

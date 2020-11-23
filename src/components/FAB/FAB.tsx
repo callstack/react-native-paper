@@ -2,8 +2,6 @@ import color from 'color';
 import * as React from 'react';
 import { Animated, View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 import ActivityIndicator from '../ActivityIndicator';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import FABGroup, { FABGroup as _FABGroup } from './FABGroup';
 import Surface from '../Surface';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon from '../Icon';
@@ -243,9 +241,6 @@ const FAB = ({
     </Surface>
   );
 };
-
-// @component ./FABGroup.tsx
-FAB.Group = FABGroup;
 
 const styles = StyleSheet.create({
   container: {

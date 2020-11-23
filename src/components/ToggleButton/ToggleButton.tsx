@@ -11,7 +11,6 @@ import IconButton from '../IconButton';
 import ToggleButtonGroup, {
   ToggleButtonGroupContext,
 } from './ToggleButtonGroup';
-import ToggleButtonRow from './ToggleButtonRow';
 import { black, white } from '../../styles/colors';
 import type { IconSource } from '../Icon';
 
@@ -158,10 +157,6 @@ const ToggleButton = ({
 
 // @component ./ToggleButtonGroup.tsx
 ToggleButton.Group = ToggleButtonGroup;
-
-// @component ./ToggleButtonRow.tsx
-ToggleButton.Row = ToggleButtonRow;
-
 const styles = StyleSheet.create({
   content: {
     width: 42,

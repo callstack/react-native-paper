@@ -8,8 +8,6 @@ import AppbarContent, {
 } from './AppbarContent';
 import AppbarAction from './AppbarAction';
 import AppbarBackAction from './AppbarBackAction';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import AppbarHeader, { AppbarHeader as _AppbarHeader } from './AppbarHeader';
 import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import { black, white } from '../../styles/colors';
@@ -172,15 +170,6 @@ const Appbar = ({ children, dark, style, theme, ...rest }: Props) => {
     </Surface>
   );
 };
-
-// @component ./AppbarContent.tsx
-Appbar.Content = AppbarContent;
-// @component ./AppbarAction.tsx
-Appbar.Action = AppbarAction;
-// @component ./AppbarBackAction.tsx
-Appbar.BackAction = AppbarBackAction;
-// @component ./AppbarHeader.tsx
-Appbar.Header = AppbarHeader;
 
 const styles = StyleSheet.create({
   appbar: {
