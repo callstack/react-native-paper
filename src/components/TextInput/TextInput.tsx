@@ -376,7 +376,7 @@ class TextInput extends React.Component<TextInputProps, State> {
   };
 
   private handleBlur = (args: Object) => {
-    if (this.props.disabled || !this.props.editable) {
+    if (!this.props.editable) {
       return;
     }
 
