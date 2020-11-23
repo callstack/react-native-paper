@@ -57,8 +57,8 @@ type Props = {
    */
   testID?: string;
   /**
-   * Whether the Android or iOS checkbox components should be used.
-   * Left undefined, the checkbox will be based on whatever the system is.
+   * Whether `<Checkbox.Android />` or `<Checkbox.IOS />` should be used.
+   * Left undefined `<Checkbox />` will be used.
    */
   mode?: 'android' | 'ios';
 };
