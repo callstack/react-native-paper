@@ -13,6 +13,7 @@ import BottomNavigationExample from './Examples/BottomNavigationExample';
 import ButtonExample from './Examples/ButtonExample';
 import CardExample from './Examples/CardExample';
 import CheckboxExample from './Examples/CheckboxExample';
+import CheckboxItemExample from './Examples/CheckboxItemExample';
 import ChipExample from './Examples/ChipExample';
 import DataTableExample from './Examples/DataTableExample';
 import DialogExample from './Examples/DialogExample';
@@ -49,6 +50,7 @@ export const examples: Record<
   button: ButtonExample,
   card: CardExample,
   checkbox: CheckboxExample,
+  checkboxItem: CheckboxItemExample,
   chip: ChipExample,
   dataTable: DataTableExample,
   dialog: DialogExample,
