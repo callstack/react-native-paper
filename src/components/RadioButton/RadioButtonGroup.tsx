@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { View } from 'react-native';
 
 type Props = {
   /**
@@ -48,7 +49,7 @@ export const RadioButtonContext = React.createContext<RadioButtonContextType>(
  *   const [value, setValue] = React.useState('first');
  *
  *   return (
- *     <RadioButton.Group onValueChange={value => setValue(value)} value={value}>
+ *     <RadioButton.Group onValueChange={newValue => setValue(newValue)} value={value}>
  *       <View>
  *         <Text>First</Text>
  *         <RadioButton value="first" />
@@ -64,18 +65,13 @@ export const RadioButtonContext = React.createContext<RadioButtonContextType>(
  * export default MyComponent;
  *```
  */
-class RadioButtonGroup extends React.Component<Props> {
-  static displayName = 'RadioButton.Group';
+const RadioButtonGroup = ({ value, onValueChange, children }: Props) => (
+  <RadioButtonContext.Provider value={{ value, onValueChange }}>
+    <View accessible accessibilityRole="radiogroup">
+      {children}
+    </View>
+  </RadioButtonContext.Provider>
+);
 
-  render() {
-    const { value, onValueChange, children } = this.props;
-
-    return (
-      <RadioButtonContext.Provider value={{ value, onValueChange }}>
-        {children}
-      </RadioButtonContext.Provider>
-    );
-  }
-}
-
+RadioButtonGroup.displayName = 'RadioButton.Group';
 export default RadioButtonGroup;

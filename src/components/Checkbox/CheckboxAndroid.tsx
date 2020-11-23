@@ -31,6 +31,10 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    * @optional
    */
   theme: ReactNativePaper.Theme;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 // From https://material.io/design/motion/speed.html#duration
@@ -57,33 +61,42 @@ const CheckboxAndroid = ({
   theme,
   disabled,
   onPress,
+  testID,
   ...rest
 }: Props) => {
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [scaleAnim, setScaleAnim] = React.useState<Animated.Value>(
+  const { current: scaleAnim } = React.useRef<Animated.Value>(
     new Animated.Value(1)
   );
+  const isFirstRendering = React.useRef<boolean>(true);
+
+  const {
+    animation: { scale },
+  } = theme;
 
   React.useEffect(() => {
+    // Do not run animation on very first rendering
+    if (isFirstRendering.current) {
+      isFirstRendering.current = false;
+      return;
+    }
+
     const checked = status === 'checked';
-    const { animation } = theme;
 
     Animated.sequence([
       Animated.timing(scaleAnim, {
         toValue: 0.85,
-        duration: checked ? ANIMATION_DURATION * animation.scale : 0,
+        duration: checked ? ANIMATION_DURATION * scale : 0,
         useNativeDriver: false,
       }),
       Animated.timing(scaleAnim, {
         toValue: 1,
         duration: checked
-          ? ANIMATION_DURATION * animation.scale
-          : ANIMATION_DURATION * animation.scale * 1.75,
+          ? ANIMATION_DURATION * scale
+          : ANIMATION_DURATION * scale * 1.75,
         useNativeDriver: false,
       }),
     ]).start();
-  }, [status]);
+  }, [status, scaleAnim, scale]);
 
   const checked = status === 'checked';
   const indeterminate = status === 'indeterminate';
@@ -129,6 +142,7 @@ const CheckboxAndroid = ({
       accessibilityState={{ disabled, checked }}
       accessibilityLiveRegion="polite"
       style={styles.container}
+      testID={testID}
     >
       <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
         <MaterialCommunityIcon

@@ -2,7 +2,6 @@ import * as React from 'react';
 import renderer from 'react-test-renderer';
 import BottomNavigation from '../BottomNavigation.tsx';
 
-jest.useFakeTimers();
 // Make sure any animation finishes before checking the snapshot results
 jest.mock('react-native', () => {
   const RN = jest.requireActual('react-native');

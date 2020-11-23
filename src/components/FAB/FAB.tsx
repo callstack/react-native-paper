@@ -13,6 +13,7 @@ import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren } from '../../types';
 import type { IconSource } from './../Icon';
+import type { AccessibilityState } from 'react-native';
 
 type Props = $RemoveChildren<typeof Surface> & {
   /**
@@ -24,10 +25,18 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   label?: string;
   /**
+   * Make the label text uppercased.
+   */
+  uppercase?: boolean;
+  /**
    * Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.
    * Uses `label` by default if specified.
    */
   accessibilityLabel?: string;
+  /**
+   * Accessibility state for the FAB. This is read by the screen reader when the user taps the FAB.
+   */
+  accessibilityState?: AccessibilityState;
   /**
    * Whether an icon change is animated.
    */
@@ -68,10 +77,6 @@ type Props = $RemoveChildren<typeof Surface> & {
   testID?: string;
 };
 
-type State = {
-  visibility: Animated.Value;
-};
-
 /**
  * A floating action button represents the primary action in an application.
  *
@@ -107,150 +112,140 @@ type State = {
  * export default MyComponent;
  * ```
  */
-class FAB extends React.Component<Props, State> {
-  // @component ./FABGroup.tsx
-  static Group = FABGroup;
+const FAB = ({
+  small,
+  icon,
+  label,
+  accessibilityLabel = label,
+  accessibilityState,
+  animated = true,
+  color: customColor,
+  disabled,
+  onPress,
+  onLongPress,
+  theme,
+  style,
+  visible = true,
+  uppercase = true,
+  loading,
+  testID,
+  ...rest
+}: Props) => {
+  const { current: visibility } = React.useRef<Animated.Value>(
+    new Animated.Value(visible ? 1 : 0)
+  );
+  const { scale } = theme.animation;
 
-  static defaultProps = {
-    visible: true,
-  };
-
-  state = {
-    visibility: new Animated.Value(this.props.visible ? 1 : 0),
-  };
-
-  componentDidUpdate(prevProps: Props) {
-    const { scale } = this.props.theme.animation;
-    if (this.props.visible === prevProps.visible) {
-      return;
-    }
-
-    if (this.props.visible) {
-      Animated.timing(this.state.visibility, {
+  React.useEffect(() => {
+    if (visible) {
+      Animated.timing(visibility, {
         toValue: 1,
         duration: 200 * scale,
         useNativeDriver: true,
       }).start();
     } else {
-      Animated.timing(this.state.visibility, {
+      Animated.timing(visibility, {
         toValue: 0,
         duration: 150 * scale,
         useNativeDriver: true,
       }).start();
     }
-  }
+  }, [visible, scale, visibility]);
 
-  render() {
-    const {
-      small,
-      icon,
-      label,
-      accessibilityLabel = label,
-      animated = true,
-      color: customColor,
-      disabled,
-      onPress,
-      onLongPress,
-      theme,
-      style,
-      visible,
-      loading,
-      testID,
-      ...rest
-    } = this.props;
-    const { visibility } = this.state;
+  const IconComponent = animated ? CrossFadeIcon : Icon;
 
-    const IconComponent = animated ? CrossFadeIcon : Icon;
+  const disabledColor = color(theme.dark ? white : black)
+    .alpha(0.12)
+    .rgb()
+    .string();
 
-    const disabledColor = color(theme.dark ? white : black)
-      .alpha(0.12)
+  const { backgroundColor = disabled ? disabledColor : theme.colors.accent } =
+    StyleSheet.flatten(style) || {};
+
+  let foregroundColor;
+
+  if (typeof customColor !== 'undefined') {
+    foregroundColor = customColor;
+  } else if (disabled) {
+    foregroundColor = color(theme.dark ? white : black)
+      .alpha(0.32)
       .rgb()
       .string();
-
-    const { backgroundColor = disabled ? disabledColor : theme.colors.accent } =
-      StyleSheet.flatten(style) || {};
-
-    let foregroundColor;
-
-    if (typeof customColor !== 'undefined') {
-      foregroundColor = customColor;
-    } else if (disabled) {
-      foregroundColor = color(theme.dark ? white : black)
-        .alpha(0.32)
-        .rgb()
-        .string();
-    } else {
-      foregroundColor = !color(backgroundColor).isLight()
-        ? white
-        : 'rgba(0, 0, 0, .54)';
-    }
-
-    const rippleColor = color(foregroundColor).alpha(0.32).rgb().string();
-
-    return (
-      <Surface
-        {...rest}
-        style={
-          [
-            {
-              backgroundColor,
-              opacity: visibility,
-              transform: [
-                {
-                  scale: visibility,
-                },
-              ],
-            },
-            styles.container,
-            disabled && styles.disabled,
-            style,
-          ] as StyleProp<ViewStyle>
-        }
-        pointerEvents={visible ? 'auto' : 'none'}
-      >
-        <TouchableRipple
-          borderless
-          onPress={onPress}
-          onLongPress={onLongPress}
-          rippleColor={rippleColor}
-          disabled={disabled}
-          accessibilityLabel={accessibilityLabel}
-          accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
-          accessibilityComponentType="button"
-          accessibilityRole="button"
-          accessibilityState={{ disabled }}
-          style={styles.touchable}
-          testID={testID}
-        >
-          <View
-            style={[
-              styles.content,
-              label ? styles.extended : small ? styles.small : styles.standard,
-            ]}
-            pointerEvents="none"
-          >
-            {icon && loading !== true ? (
-              <IconComponent source={icon} size={24} color={foregroundColor} />
-            ) : null}
-            {loading ? (
-              <ActivityIndicator size={18} color={foregroundColor} />
-            ) : null}
-            {label ? (
-              <Text
-                style={[
-                  styles.label,
-                  { color: foregroundColor, ...theme.fonts.medium },
-                ]}
-              >
-                {label.toUpperCase()}
-              </Text>
-            ) : null}
-          </View>
-        </TouchableRipple>
-      </Surface>
-    );
+  } else {
+    foregroundColor = !color(backgroundColor).isLight()
+      ? white
+      : 'rgba(0, 0, 0, .54)';
   }
-}
+
+  const rippleColor = color(foregroundColor).alpha(0.32).rgb().string();
+
+  return (
+    <Surface
+      {...rest}
+      style={
+        [
+          {
+            backgroundColor,
+            opacity: visibility,
+            transform: [
+              {
+                scale: visibility,
+              },
+            ],
+          },
+          styles.container,
+          disabled && styles.disabled,
+          style,
+        ] as StyleProp<ViewStyle>
+      }
+      pointerEvents={visible ? 'auto' : 'none'}
+    >
+      <TouchableRipple
+        borderless
+        onPress={onPress}
+        onLongPress={onLongPress}
+        rippleColor={rippleColor}
+        disabled={disabled}
+        accessibilityLabel={accessibilityLabel}
+        accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
+        accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityState={{ ...accessibilityState, disabled }}
+        style={styles.touchable}
+        testID={testID}
+      >
+        <View
+          style={[
+            styles.content,
+            label ? styles.extended : small ? styles.small : styles.standard,
+          ]}
+          pointerEvents="none"
+        >
+          {icon && loading !== true ? (
+            <IconComponent source={icon} size={24} color={foregroundColor} />
+          ) : null}
+          {loading ? (
+            <ActivityIndicator size={18} color={foregroundColor} />
+          ) : null}
+          {label ? (
+            <Text
+              style={[
+                styles.label,
+                uppercase && styles.uppercaseLabel,
+                { color: foregroundColor, ...theme.fonts.medium },
+              ]}
+            >
+              {label}
+            </Text>
+          ) : null}
+        </View>
+      </TouchableRipple>
+    </Surface>
+  );
+};
+
+// @component ./FABGroup.tsx
+FAB.Group = FABGroup;
 
 const styles = StyleSheet.create({
   container: {
@@ -279,6 +274,9 @@ const styles = StyleSheet.create({
   },
   label: {
     marginHorizontal: 8,
+  },
+  uppercaseLabel: {
+    textTransform: 'uppercase',
   },
   disabled: {
     elevation: 0,

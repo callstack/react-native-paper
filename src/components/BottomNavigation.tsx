@@ -64,7 +64,7 @@ type Props = {
   /**
    * State for the bottom navigation. The state should contain the following properties:
    *
-   * - `index`: a number reprsenting the index of the active route in the `routes` array
+   * - `index`: a number representing the index of the active route in the `routes` array
    * - `routes`: an array containing a list of route objects used for rendering the tabs
    *
    * Each route object should contain the following properties:
@@ -223,7 +223,7 @@ const MIN_RIPPLE_SCALE = 0.001; // Minimum scale is not 0 due to bug with animat
 const MIN_TAB_WIDTH = 96;
 const MAX_TAB_WIDTH = 168;
 const BAR_HEIGHT = 56;
-const FAR_FAR_AWAY = 9999;
+const FAR_FAR_AWAY = Platform.OS === 'web' ? 0 : 9999;
 
 const Touchable = ({
   route: _0,
@@ -330,6 +330,11 @@ const BottomNavigation = ({
   const {
     animation: { scale },
   } = theme;
+
+  const focusedKey = React.useMemo(
+    () => navigationState.routes[navigationState.index].key,
+    [navigationState.routes, navigationState.index]
+  );
   /**
    * Visibility of the navigation bar, visible state is 1 and invisible is 0.
    */
@@ -338,27 +343,15 @@ const BottomNavigation = ({
   );
 
   /**
-   * Active state of individual tab items, active state is 1 and inactve state is 0.
+   * Active state of individual tab items, active state is 1 and inactive state is 0.
    */
-  let { current: tabs } = React.useRef<Animated.Value[]>(
-    navigationState.routes.map(
-      // focused === 1, unfocused === 0
-      (_: any, i: number) =>
-        new Animated.Value(i === navigationState.index ? 1 : 0)
-    )
-  );
+  const tabs = React.useRef<Animated.Value[]>([]);
   /**
    * The top offset for each tab item to position it offscreen.
    * Placing items offscreen helps to save memory usage for inactive screens with removeClippedSubviews.
-   * We use animated values for this to prevent unnecesary re-renders.
+   * We use animated values for this to prevent unnecessary re-renders.
    */
-  let { current: offsets } = React.useRef<Animated.Value[]>(
-    navigationState.routes.map(
-      // offscreen === 1, normal === 0
-      (_: any, i: number) =>
-        new Animated.Value(i === navigationState.index ? 0 : 1)
-    )
-  );
+  const offsets = React.useRef<Animated.Value[]>([]);
   /**
    * Index of the currently active tab. Used for setting the background color.
    * We don't use the color as an animated value directly, because `setValue` seems to be buggy with colors.
@@ -373,6 +366,10 @@ const BottomNavigation = ({
     new Animated.Value(MIN_RIPPLE_SCALE)
   );
   /**
+   * key of the currently active route.
+   */
+  let { current: current } = React.useRef<string>(focusedKey);
+  /**
    * Layout of the navigation bar. The width is used to determine the size and position of the ripple.
    */
   const [layout, setlayout] = React.useState<{
@@ -383,32 +380,47 @@ const BottomNavigation = ({
   /**
    * List of loaded tabs, tabs will be loaded when navigated to.
    */
-  const [loaded, setLoaded] = React.useState<number[]>([navigationState.index]);
+  const [loaded, setLoaded] = React.useState<string[]>([focusedKey]);
+
   /**
-   * Trak whether the keyboard is visible to show and hide the navigation bar.
+   * Track whether the keyboard is visible to show and hide the navigation bar.
    */
   const [keyboard, setKeyboard] = React.useState<boolean>(false);
 
-  const [prevNavigationState, setPrevNavigationState] = React.useState<
-    NavigationState
-  >();
+  const prevNavigationState = React.useRef<NavigationState>();
 
-  if (prevNavigationState !== navigationState) {
+  if (
+    prevNavigationState.current?.index !== navigationState.index ||
+    prevNavigationState.current?.routes.length !== navigationState.routes.length
+  ) {
     // Re-create animated values if routes have been added/removed
     // Preserve previous animated values if they exist, so we don't break animations
-    tabs = navigationState.routes.map(
+    tabs.current = navigationState.routes.map(
       // focused === 1, unfocused === 0
       (_: any, i: number) =>
-        tabs[i] || new Animated.Value(i === navigationState.index ? 1 : 0)
+        tabs.current[i] ||
+        new Animated.Value(i === navigationState.index ? 1 : 0)
     );
 
-    offsets = navigationState.routes.map(
+    offsets.current = navigationState.routes.map(
       // offscreen === 1, normal === 0
       (_: any, i: number) =>
-        offsets[i] || new Animated.Value(i === navigationState.index ? 0 : 1)
+        offsets.current[i] ||
+        new Animated.Value(i === navigationState.index ? 0 : 1)
     );
 
-    setPrevNavigationState(navigationState);
+    const currentFocusedKey = navigationState.routes[navigationState.index].key;
+
+    if (current !== currentFocusedKey) {
+      // Store the current index in state so that we can later check if the index has changed
+      current = currentFocusedKey;
+      if (!loaded.includes(currentFocusedKey)) {
+        // Set the current tab to be loaded if it was not loaded before
+        setLoaded((loaded) => [...loaded, currentFocusedKey]);
+      }
+    }
+
+    prevNavigationState.current = navigationState;
   }
 
   const handleKeyboardShow = React.useCallback(() => {
@@ -451,7 +463,7 @@ const BottomNavigation = ({
         useNativeDriver: true,
       }),
       ...navigationState.routes.map((_, i) =>
-        Animated.timing(tabs[i], {
+        Animated.timing(tabs.current[i], {
           toValue: i === navigationState.index ? 1 : 0,
           duration: shifting ? 150 * scale : 0,
           useNativeDriver: true,
@@ -459,16 +471,18 @@ const BottomNavigation = ({
       ),
     ]).start(({ finished }) => {
       // Workaround a bug in native animations where this is reset after first animation
-      tabs.map((tab, i) => tab.setValue(i === navigationState.index ? 1 : 0));
+      tabs.current.map((tab, i) =>
+        tab.setValue(i === navigationState.index ? 1 : 0)
+      );
 
-      // Update the index to change bar's bacground color and then hide the ripple
+      // Update the index to change bar's background color and then hide the ripple
       index.setValue(navigationState.index);
       ripple.setValue(MIN_RIPPLE_SCALE);
 
       if (finished) {
         // Position all inactive screens offscreen to save memory usage
         // Only do it when animation has finished to avoid glitches mid-transition if switching fast
-        offsets.forEach((offset, i) => {
+        offsets.current.forEach((offset, i) => {
           if (i === navigationState.index) {
             offset.setValue(0);
           } else {
@@ -482,10 +496,8 @@ const BottomNavigation = ({
     isShifting,
     navigationState.index,
     navigationState.routes,
-    offsets,
     ripple,
     scale,
-    tabs,
   ]);
 
   React.useEffect(() => {
@@ -514,26 +526,17 @@ const BottomNavigation = ({
 
   React.useLayoutEffect(() => {
     // Reset offsets of previous and current tabs before animation
-    offsets.forEach((offset, i) => {
-      if (i === navigationState.index || i === prevNavigationState?.index) {
+    offsets.current.forEach((offset, i) => {
+      if (
+        i === navigationState.index ||
+        i === prevNavigationState.current?.index
+      ) {
         offset.setValue(0);
       }
     });
 
-    setLoaded(
-      loaded.includes(navigationState.index)
-        ? loaded
-        : [...loaded, navigationState.index]
-    );
-
     animateToCurrentIndex();
-  }, [
-    navigationState.index,
-    animateToCurrentIndex,
-    loaded,
-    offsets,
-    prevNavigationState,
-  ]);
+  }, [navigationState.index, animateToCurrentIndex]);
 
   const handleLayout = (e: LayoutChangeEvent) => {
     const { height, width } = e.nativeEvent.layout;
@@ -628,15 +631,19 @@ const BottomNavigation = ({
     <View style={[styles.container, style]}>
       <View style={[styles.content, { backgroundColor: colors.background }]}>
         {routes.map((route, index) => {
-          if (!loaded.includes(index)) {
+          if (!loaded.includes(route.key)) {
             // Don't render a screen if we've never navigated to it
             return null;
           }
           const focused = navigationState.index === index;
 
-          const opacity = sceneAnimationEnabled ? tabs[index] : focused ? 1 : 0;
+          const opacity = sceneAnimationEnabled
+            ? tabs.current[index]
+            : focused
+            ? 1
+            : 0;
 
-          const top = offsets[index].interpolate({
+          const top = offsets.current[index].interpolate({
             inputRange: [0, 1],
             outputRange: [0, FAR_FAR_AWAY],
           });
@@ -657,7 +664,17 @@ const BottomNavigation = ({
                 Platform.OS === 'ios' ? navigationState.index !== index : true
               }
             >
-              <Animated.View style={[styles.content, { top }]}>
+              <Animated.View
+                style={[
+                  styles.content,
+                  { top },
+                  Platform.OS === 'web'
+                    ? {
+                        display: loaded.includes(route.key) ? 'flex' : 'none',
+                      }
+                    : null,
+                ]}
+              >
                 {renderScene({ route, jumpTo })}
               </Animated.View>
             </Animated.View>
@@ -737,7 +754,7 @@ const BottomNavigation = ({
             ) : null}
             {routes.map((route, index) => {
               const focused = navigationState.index === index;
-              const active = tabs[index];
+              const active = tabs.current[index];
 
               // Scale the label up
               const scale =
@@ -919,7 +936,7 @@ const BottomNavigation = ({
 
 /**
  * Function which takes a map of route keys to components.
- * Pure components are used to minmize re-rendering of the pages.
+ * Pure components are used to minimize re-rendering of the pages.
  * This drastically improves the animation performance.
  */
 BottomNavigation.SceneMap = (scenes: {
@@ -995,6 +1012,7 @@ const styles = StyleSheet.create({
   labelWrapper: {
     ...StyleSheet.absoluteFillObject,
   },
+  // eslint-disable-next-line react-native/no-color-literals
   label: {
     fontSize: 12,
     textAlign: 'center',

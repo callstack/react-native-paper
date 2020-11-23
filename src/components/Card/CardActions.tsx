@@ -35,23 +35,19 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * export default MyComponent;
  * ```
  */
-class CardActions extends React.Component<Props> {
-  static displayName = 'Card.Actions';
+const CardActions = (props: Props) => (
+  <View {...props} style={[styles.container, props.style]}>
+    {React.Children.map(props.children, (child) =>
+      React.isValidElement(child)
+        ? React.cloneElement(child, {
+            compact: child.props.compact !== false,
+          })
+        : child
+    )}
+  </View>
+);
 
-  render() {
-    return (
-      <View {...this.props} style={[styles.container, this.props.style]}>
-        {React.Children.map(this.props.children, (child) =>
-          React.isValidElement(child)
-            ? React.cloneElement(child, {
-                compact: child.props.compact !== false,
-              })
-            : child
-        )}
-      </View>
-    );
-  }
-}
+CardActions.displayName = 'Card.Actions';
 
 const styles = StyleSheet.create({
   container: {

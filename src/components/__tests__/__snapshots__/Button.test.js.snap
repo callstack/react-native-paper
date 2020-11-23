@@ -265,6 +265,7 @@ exports[`renders button with icon 1`] = `
               },
               Array [
                 Object {
+                  "lineHeight": 16,
                   "transform": Array [
                     Object {
                       "scaleX": 1,
@@ -580,6 +581,8 @@ exports[`renders loading button 1`] = `
       }
     >
       <View
+        accessibilityRole="progressbar"
+        accessible={true}
         style={
           Array [
             Object {

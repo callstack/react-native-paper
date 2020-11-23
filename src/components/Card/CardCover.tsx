@@ -44,40 +44,36 @@ type Props = React.ComponentPropsWithRef<typeof Image> & {
  *
  * @extends Image props https://facebook.github.io/react-native/docs/image.html#props
  */
-class CardCover extends React.Component<Props> {
-  static displayName = 'Card.Cover';
+const CardCover = ({ index, total, style, theme, ...rest }: Props) => {
+  const { roundness } = theme;
 
-  render() {
-    const { index, total, style, theme, ...rest } = this.props;
-    const { roundness } = theme;
+  let coverStyle;
 
-    let coverStyle;
-
-    if (index === 0) {
-      if (total === 1) {
-        coverStyle = {
-          borderRadius: roundness,
-        };
-      } else {
-        coverStyle = {
-          borderTopLeftRadius: roundness,
-          borderTopRightRadius: roundness,
-        };
-      }
-    } else if (typeof total === 'number' && index === total - 1) {
+  if (index === 0) {
+    if (total === 1) {
       coverStyle = {
-        borderBottomLeftRadius: roundness,
+        borderRadius: roundness,
+      };
+    } else {
+      coverStyle = {
+        borderTopLeftRadius: roundness,
+        borderTopRightRadius: roundness,
       };
     }
-
-    return (
-      <View style={[styles.container, coverStyle, style]}>
-        <Image {...rest} style={[styles.image, coverStyle]} />
-      </View>
-    );
+  } else if (typeof total === 'number' && index === total - 1) {
+    coverStyle = {
+      borderBottomLeftRadius: roundness,
+    };
   }
-}
 
+  return (
+    <View style={[styles.container, coverStyle, style]}>
+      <Image {...rest} style={[styles.image, coverStyle]} />
+    </View>
+  );
+};
+
+CardCover.displayName = 'Card.Cover';
 const styles = StyleSheet.create({
   container: {
     height: 195,
