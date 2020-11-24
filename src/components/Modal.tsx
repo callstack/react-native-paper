@@ -104,26 +104,14 @@ const Modal = ({
     colors,
   } = theme;
 
-  React.useEffect(() => {
-    if (visible) {
-      showModal();
-    } else {
-      hideModal();
-    }
-
-    if (visible && !rendered) {
-      setRendered(true);
-    }
-  }, [visible, rendered]);
-
-  const handleBack = () => {
+  const handleBack = React.useCallback(() => {
     if (dismissable) {
       hideModal();
     }
     return true;
-  };
+  }, [dismissable]);
 
-  const showModal = () => {
+  const showModal = React.useCallback(() => {
     BackHandler.removeEventListener('hardwareBackPress', handleBack);
     BackHandler.addEventListener('hardwareBackPress', handleBack);
 
@@ -133,9 +121,9 @@ const Modal = ({
       easing: Easing.out(Easing.cubic),
       useNativeDriver: true,
     }).start();
-  };
+  }, [handleBack, opacity, scale]);
 
-  const hideModal = () => {
+  const hideModal = React.useCallback(() => {
     BackHandler.removeEventListener('hardwareBackPress', handleBack);
 
     Animated.timing(opacity, {
@@ -158,12 +146,24 @@ const Modal = ({
         setRendered(false);
       }
     });
-  };
+  }, [opacity, scale, visible, onDismiss, showModal, handleBack]);
 
   React.useEffect(() => {
     return () =>
       BackHandler.removeEventListener('hardwareBackPress', handleBack);
-  }, []);
+  }, [handleBack]);
+
+  React.useEffect(() => {
+    if (visible) {
+      showModal();
+    } else {
+      hideModal();
+    }
+  }, [visible, showModal, hideModal]);
+
+  if (visible && !rendered) {
+    setRendered(true);
+  }
 
   if (!rendered) return null;
 
