@@ -81,6 +81,7 @@ exports[`renders chip with close button 1`] = `
               },
               Array [
                 Object {
+                  "lineHeight": 18,
                   "transform": Array [
                     Object {
                       "scaleX": 1,
@@ -184,6 +185,7 @@ exports[`renders chip with close button 1`] = `
             },
             Array [
               Object {
+                "lineHeight": 16,
                 "transform": Array [
                   Object {
                     "scaleX": 1,
@@ -291,6 +293,7 @@ exports[`renders chip with icon 1`] = `
               },
               Array [
                 Object {
+                  "lineHeight": 18,
                   "transform": Array [
                     Object {
                       "scaleX": 1,
@@ -616,6 +619,7 @@ exports[`renders selected chip 1`] = `
               },
               Array [
                 Object {
+                  "lineHeight": 18,
                   "transform": Array [
                     Object {
                       "scaleX": 1,

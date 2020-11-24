@@ -100,6 +100,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
               },
               Array [
                 Object {
+                  "lineHeight": 24,
                   "transform": Array [
                     Object {
                       "scaleX": 1,
@@ -217,6 +218,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
               },
               Array [
                 Object {
+                  "lineHeight": 24,
                   "transform": Array [
                     Object {
                       "scaleX": 1,
@@ -537,6 +539,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                 },
                 Array [
                   Object {
+                    "lineHeight": 24,
                     "transform": Array [
                       Object {
                         "scaleX": 1,
