@@ -66,7 +66,7 @@ export type Props = {
   testID?: string;
   /**
    * Whether `<RadioButton.Android />` or `<RadioButton.IOS />` should be used.
-   * Left undefined `<Checkbox />` will be used.
+   * Left undefined `<RadioButton />` will be used.
    */
   mode?: 'android' | 'ios';
 };
