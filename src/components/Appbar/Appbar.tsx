@@ -2,10 +2,12 @@ import * as React from 'react';
 import { View, ViewStyle, Platform, StyleSheet, StyleProp } from 'react-native';
 import color from 'color';
 
-import { AppbarContent } from './AppbarElements';
-import { AppbarAction } from './AppbarElements';
-import { AppbarBackAction } from './AppbarElements';
-import { AppbarHeader } from './AppbarElements';
+import {
+  AppbarContent,
+  AppbarAction,
+  AppbarBackAction,
+  AppbarHeader,
+} from './AppbarElements';
 import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import { black, white } from '../../styles/colors';
