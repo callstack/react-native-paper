@@ -1,0 +1,371 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`can render the Android radio button on different platforms 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      false,
+      undefined,
+    ]
+  }
+>
+  <View
+    pointerEvents="none"
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        },
+        undefined,
+      ]
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontFamily": "System",
+            "fontWeight": "400",
+            "textAlign": "left",
+          },
+          Array [
+            Object {
+              "fontSize": 16,
+            },
+            Object {
+              "color": "#000000",
+            },
+            undefined,
+          ],
+        ]
+      }
+    >
+      iOS Checkbox
+    </Text>
+    <View
+      accessibilityLiveRegion="polite"
+      accessibilityRole="radio"
+      accessibilityState={
+        Object {
+          "checked": false,
+          "disabled": undefined,
+        }
+      }
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 18,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "borderColor": "rgba(0, 0, 0, 0.54)",
+            "borderRadius": 10,
+            "borderWidth": 2,
+            "height": 20,
+            "margin": 8,
+            "width": 20,
+          }
+        }
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`can render the iOS radio button on different platforms 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      false,
+      undefined,
+    ]
+  }
+>
+  <View
+    pointerEvents="none"
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        },
+        undefined,
+      ]
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontFamily": "System",
+            "fontWeight": "400",
+            "textAlign": "left",
+          },
+          Array [
+            Object {
+              "fontSize": 16,
+            },
+            Object {
+              "color": "#000000",
+            },
+            undefined,
+          ],
+        ]
+      }
+    >
+      iOS Radio button
+    </Text>
+    <View
+      accessibilityLiveRegion="polite"
+      accessibilityRole="radio"
+      accessibilityState={
+        Object {
+          "checked": false,
+          "disabled": undefined,
+        }
+      }
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 18,
+            "padding": 6,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "opacity": 0,
+          }
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          allowFontScaling={false}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          style={
+            Array [
+              Object {
+                "color": "#03dac4",
+                "fontSize": 24,
+              },
+              Array [
+                Object {
+                  "lineHeight": 24,
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders unchecked 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      false,
+      undefined,
+    ]
+  }
+>
+  <View
+    pointerEvents="none"
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingHorizontal": 16,
+          "paddingVertical": 8,
+        },
+        undefined,
+      ]
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontFamily": "System",
+            "fontWeight": "400",
+            "textAlign": "left",
+          },
+          Array [
+            Object {
+              "fontSize": 16,
+            },
+            Object {
+              "color": "#000000",
+            },
+            undefined,
+          ],
+        ]
+      }
+    >
+      Unchecked Button
+    </Text>
+    <View
+      accessibilityLiveRegion="polite"
+      accessibilityRole="radio"
+      accessibilityState={
+        Object {
+          "checked": false,
+          "disabled": undefined,
+        }
+      }
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 18,
+            "padding": 6,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "opacity": 0,
+          }
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          allowFontScaling={false}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          style={
+            Array [
+              Object {
+                "color": "#03dac4",
+                "fontSize": 24,
+              },
+              Array [
+                Object {
+                  "lineHeight": 24,
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
