@@ -53,7 +53,7 @@ const DataTableCell = ({ children, style, numeric, ...rest }: Props) => (
     {...rest}
     style={[styles.container, numeric && styles.right, style]}
   >
-    <Text numberOfLines={1}>{children}</Text>
+    <Text>{children}</Text>
   </TouchableRipple>
 );
 

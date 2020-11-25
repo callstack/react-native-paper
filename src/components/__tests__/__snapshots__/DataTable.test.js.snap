@@ -27,7 +27,6 @@ exports[`renders data table cell 1`] = `
   }
 >
   <Text
-    numberOfLines={1}
     style={
       Array [
         Object {
@@ -822,7 +821,6 @@ exports[`renders right aligned data table cell 1`] = `
   }
 >
   <Text
-    numberOfLines={1}
     style={
       Array [
         Object {
