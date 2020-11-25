@@ -185,13 +185,15 @@ const ListItem = ({
             })
           : null}
         <View style={[styles.item, styles.content]}>
-          <Text
-            ellipsizeMode={titleEllipsizeMode}
-            numberOfLines={titleNumberOfLines}
-            style={[styles.title, { color: titleColor }, titleStyle]}
-          >
-            {title}
-          </Text>
+          {title
+            ? <Text
+                ellipsizeMode={titleEllipsizeMode}
+                numberOfLines={titleNumberOfLines}
+                style={[styles.title, { color: titleColor }, titleStyle]}
+              >
+                {title}
+              </Text>
+            : null}
           {description
             ? renderDescription(descriptionColor, description)
             : null}
