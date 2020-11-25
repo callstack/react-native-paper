@@ -1,7 +1,6 @@
 import * as React from 'react';
 import type { $Omit } from './../../types';
-import { AppbarAction } from './AppbarElements';
-import { AppbarBackIcon } from './AppbarElements';
+import { AppbarAction, AppbarBackIcon } from './AppbarElements';
 import type { StyleProp, ViewStyle } from 'react-native';
 
 type Props = $Omit<
