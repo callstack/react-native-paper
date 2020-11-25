@@ -1,6 +1,6 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import FAB from '../FAB';
+import FAB from '../FAB/FAB';
 
 it('renders normal FAB', () => {
   const tree = renderer.create(<FAB onPress={() => {}} icon="plus" />).toJSON();

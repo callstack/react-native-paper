@@ -12,6 +12,7 @@ import { withTheme } from '../../core/theming';
 import type { $RemoveChildren } from '../../types';
 import type { IconSource } from './../Icon';
 import type { AccessibilityState } from 'react-native';
+import { FABGroup } from './FABElements';
 
 type Props = $RemoveChildren<typeof Surface> & {
   /**
@@ -242,6 +243,9 @@ const FAB = ({
   );
 };
 
+// @component ./FABGroup.tsx
+FAB.Group = FABGroup;
+
 const styles = StyleSheet.create({
   container: {
     borderRadius: 28,
@@ -279,3 +283,8 @@ const styles = StyleSheet.create({
 });
 
 export default withTheme(FAB);
+
+// @component-docs ignore-next-line
+const FABWithTheme = withTheme(FAB);
+// @component-docs ignore-next-line
+export { FABWithTheme as FAB };
