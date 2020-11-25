@@ -43,7 +43,7 @@ export { default as Switch } from './components/Switch';
 export { default as Appbar } from './components/Appbar/Appbar';
 export { default as TouchableRipple } from './components/TouchableRipple/TouchableRipple';
 export { default as TextInput } from './components/TextInput/TextInput';
-export { default as ToggleButton } from './components/ToggleButton';
+export { default as ToggleButton } from './components/ToggleButton/ToggleButton';
 
 export { default as Caption } from './components/Typography/Caption';
 export { default as Headline } from './components/Typography/Headline';

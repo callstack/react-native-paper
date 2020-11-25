@@ -69,3 +69,6 @@ const ToggleButtonGroup = ({ value, onValueChange, children }: Props) => (
 ToggleButtonGroup.displayName = 'ToggleButton.Group';
 
 export default ToggleButtonGroup;
+
+// @component-docs ignore-next-line
+export { ToggleButtonGroup };
