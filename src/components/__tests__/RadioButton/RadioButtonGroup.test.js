@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import RadioButton from '../../RadioButton';
+import RadioButton from '../../RadioButton/RadioButton';
 
 describe('RadioButtonGroup', () => {
   it('renders properly', () => {

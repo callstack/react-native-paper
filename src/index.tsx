@@ -35,7 +35,7 @@ export { default as Menu } from './components/Menu/Menu';
 export { default as Modal } from './components/Modal';
 export { default as Portal } from './components/Portal/Portal';
 export { default as ProgressBar } from './components/ProgressBar';
-export { default as RadioButton } from './components/RadioButton';
+export { default as RadioButton } from './components/RadioButton/RadioButton';
 export { default as Searchbar } from './components/Searchbar';
 export { default as Snackbar } from './components/Snackbar';
 export { default as Surface } from './components/Surface';
