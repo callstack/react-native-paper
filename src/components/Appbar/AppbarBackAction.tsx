@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { $Omit } from './../../types';
-import AppbarAction from './AppbarAction';
-import AppbarBackIcon from './AppbarBackIcon';
+import { AppbarAction } from './AppbarElements';
+import { AppbarBackIcon } from './AppbarElements';
 import type { StyleProp, ViewStyle } from 'react-native';
 
 type Props = $Omit<
@@ -74,3 +74,6 @@ const AppbarBackAction = ({ accessibilityLabel = 'Back', ...rest }: Props) => (
 AppbarBackAction.displayName = 'Appbar.BackAction';
 
 export default AppbarBackAction;
+
+// @component-docs ignore-next-line
+export { AppbarBackAction };

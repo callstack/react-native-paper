@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Appbar from '../../Appbar';
+import Appbar from '../../Appbar/Appbar';
 import Searchbar from '../../Searchbar';
 
 describe('Appbar', () => {
