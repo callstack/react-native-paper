@@ -251,6 +251,8 @@ That's why if you are using dark theme you can switch between two dark theme <co
 <li><code>exact</code> where everything is like it was before. <code>Appbar</code> and <code>BottomNavigation</code> will still use primary colour by default.<br /></li>
 <li><code>adaptive</code> where we follow <a href="https://material.io/design/color/dark-theme.html">Material design guidelines</a>, the surface will use white overlay with opacity to show elevation, <code>Appbar</code> and <code>BottomNavigation</code> will use surface colour as a background.</li>
 </ul>
+<p>If you don't use a custom theme, Paper will automatically change between the default theme and the default dark theme, depending on device settings.</p>
+<p>Otherwise, your custom theme will need to handle it manually, using React Native's <a href="https://reactnative.dev/docs/appearance">Appearance API</a>.</p>
 <h2 id="gotchas">
           <a class="anchor" href="#gotchas">
             <svg width="16" height="16">
