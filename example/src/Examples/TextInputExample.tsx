@@ -417,6 +417,23 @@ const TextInputExample = () => {
             Error: Only letters are allowed
           </HelperText>
         </View>
+        <View style={styles.inputContainerStyle}>
+          <TextInput
+            label="Input with text align center"
+            style={{
+              textAlign: 'center',
+            }}
+          />
+        </View>
+        <View style={styles.inputContainerStyle}>
+          <TextInput
+            mode="outlined"
+            label="Outlined input with text align center"
+            style={{
+              textAlign: 'center',
+            }}
+          />
+        </View>
       </ScrollView>
     </TextInputAvoidingView>
   );
