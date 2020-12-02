@@ -5,6 +5,7 @@ import {
   StyleProp,
   ViewStyle,
   TextStyle,
+  GestureResponderEvent,
 } from 'react-native';
 import { withTheme } from '../../core/theming';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
@@ -31,7 +32,7 @@ export type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   /**
    * Accessibility label for the touchable. This is read by the screen reader when the user taps the touchable.
    */
@@ -134,11 +135,12 @@ const RadioButtonItem = ({
             onPress={
               disabled
                 ? undefined
-                : () =>
+                : (event) =>
                     handlePress({
-                      onPress: onPress,
+                      onPress,
                       onValueChange: context?.onValueChange,
                       value,
+                      event,
                     })
             }
             accessibilityLabel={accessibilityLabel}

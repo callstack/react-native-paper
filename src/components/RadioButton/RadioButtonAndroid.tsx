@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { Animated, View, StyleSheet } from 'react-native';
+import {
+  Animated,
+  View,
+  StyleSheet,
+  GestureResponderEvent,
+} from 'react-native';
 import color from 'color';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
@@ -23,7 +28,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Function to execute on press.
    */
-  onPress?: (param?: any) => void;
+  onPress?: (event: GestureResponderEvent) => void;
   /**
    * Custom color for unchecked radio.
    */
@@ -143,11 +148,12 @@ const RadioButtonAndroid = ({
             onPress={
               disabled
                 ? undefined
-                : () => {
+                : (event) => {
                     handlePress({
                       onPress,
                       onValueChange: context?.onValueChange,
                       value,
+                      event,
                     });
                   }
             }

@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import {
+  GestureResponderEvent,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -31,7 +32,7 @@ type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   /**
    * Custom color for unchecked checkbox.
    */

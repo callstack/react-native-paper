@@ -4,6 +4,7 @@ import type {
   StyleProp,
   ViewStyle,
   TouchableWithoutFeedback,
+  GestureResponderEvent,
 } from 'react-native';
 import { black } from '../../styles/colors';
 import IconButton from '../IconButton';
@@ -33,7 +34,7 @@ type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   style?: StyleProp<ViewStyle>;
   ref?: React.RefObject<TouchableWithoutFeedback>;
 };

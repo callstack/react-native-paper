@@ -7,6 +7,7 @@ import {
   View,
   ViewStyle,
   I18nManager,
+  GestureResponderEvent,
 } from 'react-native';
 import color from 'color';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -33,7 +34,7 @@ type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional

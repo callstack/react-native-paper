@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
   View,
   ViewStyle,
+  GestureResponderEvent,
 } from 'react-native';
 import color from 'color';
 import FAB from './FAB';
@@ -32,7 +33,7 @@ type Props = {
     color?: string;
     accessibilityLabel?: string;
     style?: StyleProp<ViewStyle>;
-    onPress: () => void;
+    onPress: (event: GestureResponderEvent) => void;
     testID?: string;
   }>;
   /**
@@ -51,7 +52,7 @@ type Props = {
   /**
    * Function to execute on pressing the `FAB`.
    */
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   /**
    * Whether the speed dial is open.
    */
@@ -171,7 +172,7 @@ const FABGroup = ({
         color?: string;
         accessibilityLabel?: string;
         style?: StyleProp<ViewStyle>;
-        onPress: () => void;
+        onPress: (event: GestureResponderEvent) => void;
         testID?: string;
       }[]
     | null
@@ -284,8 +285,8 @@ const FABGroup = ({
                       },
                     ] as StyleProp<ViewStyle>
                   }
-                  onPress={() => {
-                    it.onPress();
+                  onPress={(e) => {
+                    it.onPress(e);
                     close();
                   }}
                   accessibilityLabel={
@@ -314,8 +315,8 @@ const FABGroup = ({
                     it.style,
                   ] as StyleProp<ViewStyle>
                 }
-                onPress={() => {
-                  it.onPress();
+                onPress={(e) => {
+                  it.onPress(e);
                   close();
                 }}
                 accessibilityLabel={
@@ -333,8 +334,8 @@ const FABGroup = ({
           ))}
         </View>
         <FAB
-          onPress={() => {
-            onPress?.();
+          onPress={(e) => {
+            onPress?.(e);
             toggle();
           }}
           icon={icon}

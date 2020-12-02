@@ -1,6 +1,13 @@
 import color from 'color';
 import * as React from 'react';
-import { Animated, View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
+import {
+  Animated,
+  View,
+  ViewStyle,
+  StyleSheet,
+  StyleProp,
+  GestureResponderEvent,
+} from 'react-native';
 import ActivityIndicator from '../ActivityIndicator';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import FABGroup, { FABGroup as _FABGroup } from './FABGroup';
@@ -64,11 +71,11 @@ type Props = $RemoveChildren<typeof Surface> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   /**
    * Function to execute on long press.
    */
-  onLongPress?: () => void;
+  onLongPress?: (event: GestureResponderEvent) => void;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
