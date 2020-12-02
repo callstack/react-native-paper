@@ -41,6 +41,21 @@ it('renders button with icon', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('renders button with icon in reverse order', () => {
+  const tree = renderer
+    .create(
+      <Button
+        icon="chevron-right"
+        contentStyle={{ flexDirection: 'row-reverse' }}
+      >
+        Right Icon
+      </Button>
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
 it('renders loading button', () => {
   const tree = renderer
     .create(<Button loading>Loading Button</Button>)
