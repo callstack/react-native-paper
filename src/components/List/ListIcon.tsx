@@ -31,9 +31,11 @@ const ICON_SIZE = 24;
  * import { List, Colors } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <List.Icon color={Colors.blue500} icon="folder" />
- *   <List.Icon color={Colors.blue500} icon="equal" />
- *   <List.Icon color={Colors.blue500} icon="calendar" />
+ *   <>
+ *     <List.Icon color={Colors.blue500} icon="folder" />
+ *     <List.Icon color={Colors.blue500} icon="equal" />
+ *     <List.Icon color={Colors.blue500} icon="calendar" />
+ *   </>
  * );
  *
  * export default MyComponent;
