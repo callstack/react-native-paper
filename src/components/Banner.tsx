@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { View, ViewStyle, StyleSheet, StyleProp, Animated } from 'react-native';
+import {
+  View,
+  ViewStyle,
+  StyleSheet,
+  StyleProp,
+  Animated,
+  GestureResponderEvent,
+} from 'react-native';
 import Surface from './Surface';
 import Text from './Typography/Text';
 import Button from './Button';
@@ -35,7 +42,7 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   actions: Array<{
     label: string;
-    onPress: () => void;
+    onPress: (event: GestureResponderEvent) => void;
   }>;
   /**
    * Style of banner's inner content.

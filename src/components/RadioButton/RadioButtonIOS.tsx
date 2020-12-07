@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ColorValue, StyleSheet, View } from 'react-native';
+import { ColorValue, GestureResponderEvent, StyleSheet, View } from 'react-native';
 import color from 'color';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
@@ -24,7 +24,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   /**
    * Custom color for radio.
    */
@@ -97,11 +97,12 @@ const RadioButtonIOS = ({
             onPress={
               disabled
                 ? undefined
-                : () => {
+                : (event) => {
                     handlePress({
                       onPress,
                       value,
                       onValueChange: context?.onValueChange,
+                      event,
                     });
                   }
             }

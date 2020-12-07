@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   View,
   ViewStyle,
+  GestureResponderEvent,
 } from 'react-native';
 import CardContent from './CardContent';
 import CardActions from './CardActions';
@@ -24,11 +25,11 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Function to execute on long press.
    */
-  onLongPress?: () => void;
+  onLongPress?: (event: GestureResponderEvent) => void;
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   /**
    * Content of the `Card`.
    */

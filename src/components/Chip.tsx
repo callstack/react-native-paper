@@ -4,6 +4,7 @@ import {
   AccessibilityTrait,
   Animated,
   ColorValue,
+  GestureResponderEvent,
   Platform,
   StyleProp,
   StyleSheet,
@@ -64,11 +65,11 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   /**
    * Function to execute on long press.
    */
-  onLongPress?: () => void;
+  onLongPress?: (event: GestureResponderEvent) => void;
   /**
    * Function to execute on close button press. The close button appears only when this prop is specified.
    */
@@ -295,6 +296,7 @@ const Chip = ({
             </View>
           ) : null}
           <Text
+            selectable={false}
             numberOfLines={1}
             style={[
               styles.text,

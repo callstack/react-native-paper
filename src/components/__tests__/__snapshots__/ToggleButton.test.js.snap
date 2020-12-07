@@ -81,6 +81,7 @@ exports[`renders disabled toggle button 1`] = `
       allowFontScaling={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
+      selectable={false}
       style={
         Array [
           Object {
@@ -89,6 +90,7 @@ exports[`renders disabled toggle button 1`] = `
           },
           Array [
             Object {
+              "lineHeight": 24,
               "transform": Array [
                 Object {
                   "scaleX": 1,
@@ -187,6 +189,7 @@ exports[`renders toggle button 1`] = `
       allowFontScaling={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
+      selectable={false}
       style={
         Array [
           Object {
@@ -195,6 +198,7 @@ exports[`renders toggle button 1`] = `
           },
           Array [
             Object {
+              "lineHeight": 24,
               "transform": Array [
                 Object {
                   "scaleX": 1,
@@ -301,6 +305,7 @@ exports[`renders unchecked toggle button 1`] = `
       allowFontScaling={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
+      selectable={false}
       style={
         Array [
           Object {
@@ -309,6 +314,7 @@ exports[`renders unchecked toggle button 1`] = `
           },
           Array [
             Object {
+              "lineHeight": 24,
               "transform": Array [
                 Object {
                   "scaleX": 1,

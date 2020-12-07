@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Animated, View, StyleSheet, ColorValue } from 'react-native';
+import {
+  Animated,
+  View,
+  StyleSheet,
+  GestureResponderEvent,
+  ColorValue,
+} from 'react-native';
 import color from 'color';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
@@ -23,7 +29,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Function to execute on press.
    */
-  onPress?: (param?: any) => void;
+  onPress?: (event: GestureResponderEvent) => void;
   /**
    * Custom color for unchecked radio.
    */
@@ -77,9 +83,17 @@ const RadioButtonAndroid = ({
     new Animated.Value(1)
   );
 
+  const isFirstRendering = React.useRef<boolean>(true);
+
   const { scale } = theme.animation;
 
   React.useEffect(() => {
+    // Do not run animation on very first rendering
+    if (isFirstRendering.current) {
+      isFirstRendering.current = false;
+      return;
+    }
+
     if (status === 'checked') {
       radioAnim.setValue(1.2);
 
@@ -138,11 +152,12 @@ const RadioButtonAndroid = ({
             onPress={
               disabled
                 ? undefined
-                : () => {
+                : (event) => {
                     handlePress({
                       onPress,
                       onValueChange: context?.onValueChange,
                       value,
+                      event,
                     });
                   }
             }

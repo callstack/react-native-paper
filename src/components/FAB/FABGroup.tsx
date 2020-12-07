@@ -8,6 +8,7 @@ import {
   View,
   ViewStyle,
   ColorValue,
+  GestureResponderEvent,
 } from 'react-native';
 import color from 'color';
 import FAB from './FAB';
@@ -33,7 +34,7 @@ type Props = {
     color?: ColorValue;
     accessibilityLabel?: string;
     style?: StyleProp<ViewStyle>;
-    onPress: () => void;
+    onPress: (event: GestureResponderEvent) => void;
     testID?: string;
   }>;
   /**
@@ -52,7 +53,7 @@ type Props = {
   /**
    * Function to execute on pressing the `FAB`.
    */
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   /**
    * Whether the speed dial is open.
    */
@@ -83,11 +84,6 @@ type Props = {
    * Pass down testID from Group props to FAB.
    */
   testID?: string;
-};
-
-type State = {
-  backdrop: Animated.Value;
-  animations: Animated.Value[];
 };
 
 /**
@@ -149,39 +145,53 @@ type State = {
  * export default MyComponent;
  * ```
  */
-class FABGroup extends React.Component<Props, State> {
-  static displayName = 'FAB.Group';
+const FABGroup = ({
+  actions,
+  icon,
+  open,
+  onPress,
+  accessibilityLabel,
+  theme,
+  style,
+  fabStyle,
+  visible,
+  testID,
+  onStateChange,
+  color: colorProp,
+}: Props) => {
+  const { current: backdrop } = React.useRef<Animated.Value>(
+    new Animated.Value(0)
+  );
+  const animations = React.useRef<Animated.Value[]>(
+    actions.map(() => new Animated.Value(open ? 1 : 0))
+  );
 
-  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
-    return {
-      animations: nextProps.actions.map(
-        (_, i) =>
-          prevState.animations[i] || new Animated.Value(nextProps.open ? 1 : 0)
-      ),
-    };
-  }
+  const [prevActions, setPrevActions] = React.useState<
+    | {
+        icon: IconSource;
+        label?: string;
+        color?: string;
+        accessibilityLabel?: string;
+        style?: StyleProp<ViewStyle>;
+        onPress: (event: GestureResponderEvent) => void;
+        testID?: string;
+      }[]
+    | null
+  >(null);
 
-  state: State = {
-    backdrop: new Animated.Value(0),
-    animations: [],
-  };
+  const { scale } = theme.animation;
 
-  componentDidUpdate(prevProps: Props) {
-    if (this.props.open === prevProps.open) {
-      return;
-    }
-
-    const { scale } = this.props.theme.animation;
-    if (this.props.open) {
+  React.useEffect(() => {
+    if (open) {
       Animated.parallel([
-        Animated.timing(this.state.backdrop, {
+        Animated.timing(backdrop, {
           toValue: 1,
           duration: 250 * scale,
           useNativeDriver: true,
         }),
         Animated.stagger(
           50 * scale,
-          this.state.animations
+          animations.current
             .map((animation) =>
               Animated.timing(animation, {
                 toValue: 1,
@@ -194,12 +204,12 @@ class FABGroup extends React.Component<Props, State> {
       ]).start();
     } else {
       Animated.parallel([
-        Animated.timing(this.state.backdrop, {
+        Animated.timing(backdrop, {
           toValue: 0,
           duration: 200 * scale,
           useNativeDriver: true,
         }),
-        ...this.state.animations.map((animation) =>
+        ...animations.current.map((animation) =>
           Animated.timing(animation, {
             toValue: 0,
             duration: 150 * scale,
@@ -208,149 +218,144 @@ class FABGroup extends React.Component<Props, State> {
         ),
       ]).start();
     }
+  }, [open, actions, backdrop, scale]);
+
+  const close = () => onStateChange({ open: false });
+
+  const toggle = () => onStateChange({ open: !open });
+
+  const { colors } = theme;
+
+  const labelColor = theme.dark
+    ? colors.text
+    : color(colors.text).fade(0.54).rgb().string();
+  const backdropOpacity = open
+    ? backdrop.interpolate({
+        inputRange: [0, 0.5, 1],
+        outputRange: [0, 1, 1],
+      })
+    : backdrop;
+
+  const opacities = animations.current;
+  const scales = opacities.map((opacity) =>
+    open
+      ? opacity.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0.8, 1],
+        })
+      : 1
+  );
+
+  if (actions.length !== prevActions?.length) {
+    animations.current = actions.map(
+      (_, i) => animations.current[i] || new Animated.Value(open ? 1 : 0)
+    );
+    setPrevActions(actions);
   }
 
-  private close = () => this.props.onStateChange({ open: false });
-
-  private toggle = () => this.props.onStateChange({ open: !this.props.open });
-
-  render() {
-    const {
-      actions,
-      icon,
-      open,
-      onPress,
-      accessibilityLabel,
-      theme,
-      style,
-      fabStyle,
-      visible,
-      testID,
-    } = this.props;
-    const { colors } = theme;
-
-    const labelColor = theme.dark
-      ? colors.text
-      : color(colors.text).fade(0.54).rgb().string();
-    const backdropOpacity = open
-      ? this.state.backdrop.interpolate({
-          inputRange: [0, 0.5, 1],
-          outputRange: [0, 1, 1],
-        })
-      : this.state.backdrop;
-
-    const opacities = this.state.animations;
-    const scales = opacities.map((opacity) =>
-      open
-        ? opacity.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0.8, 1],
-          })
-        : 1
-    );
-
-    return (
-      <View pointerEvents="box-none" style={[styles.container, style]}>
-        <TouchableWithoutFeedback onPress={this.close}>
-          <Animated.View
-            pointerEvents={open ? 'auto' : 'none'}
-            style={[
-              styles.backdrop,
-              {
-                opacity: backdropOpacity,
-                backgroundColor: colors.backdrop,
-              },
-            ]}
-          />
-        </TouchableWithoutFeedback>
-        <SafeAreaView pointerEvents="box-none" style={styles.safeArea}>
-          <View pointerEvents={open ? 'box-none' : 'none'}>
-            {actions.map((it, i) => (
-              <View
-                key={i} // eslint-disable-line react/no-array-index-key
-                style={styles.item}
-                pointerEvents={open ? 'box-none' : 'none'}
-              >
-                {it.label && (
-                  <Card
-                    style={
-                      [
-                        styles.label,
-                        {
-                          transform: [{ scale: scales[i] }],
-                          opacity: opacities[i],
-                        },
-                      ] as StyleProp<ViewStyle>
-                    }
-                    onPress={() => {
-                      it.onPress();
-                      this.close();
-                    }}
-                    accessibilityLabel={
-                      it.accessibilityLabel !== 'undefined'
-                        ? it.accessibilityLabel
-                        : it.label
-                    }
-                    accessibilityTraits="button"
-                    accessibilityComponentType="button"
-                    accessibilityRole="button"
-                  >
-                    <Text style={{ color: labelColor }}>{it.label}</Text>
-                  </Card>
-                )}
-                <FAB
-                  small
-                  icon={it.icon}
-                  color={it.color}
+  return (
+    <View pointerEvents="box-none" style={[styles.container, style]}>
+      <TouchableWithoutFeedback onPress={close}>
+        <Animated.View
+          pointerEvents={open ? 'auto' : 'none'}
+          style={[
+            styles.backdrop,
+            {
+              opacity: backdropOpacity,
+              backgroundColor: colors.backdrop,
+            },
+          ]}
+        />
+      </TouchableWithoutFeedback>
+      <SafeAreaView pointerEvents="box-none" style={styles.safeArea}>
+        <View pointerEvents={open ? 'box-none' : 'none'}>
+          {actions.map((it, i) => (
+            <View
+              key={i} // eslint-disable-line react/no-array-index-key
+              style={styles.item}
+              pointerEvents={open ? 'box-none' : 'none'}
+            >
+              {it.label && (
+                <Card
                   style={
                     [
+                      styles.label,
                       {
                         transform: [{ scale: scales[i] }],
                         opacity: opacities[i],
-                        backgroundColor: theme.colors.surface,
                       },
-                      it.style,
                     ] as StyleProp<ViewStyle>
                   }
-                  onPress={() => {
-                    it.onPress();
-                    this.close();
+                  onPress={(e) => {
+                    it.onPress(e);
+                    close();
                   }}
                   accessibilityLabel={
-                    typeof it.accessibilityLabel !== 'undefined'
+                    it.accessibilityLabel !== 'undefined'
                       ? it.accessibilityLabel
                       : it.label
                   }
                   accessibilityTraits="button"
                   accessibilityComponentType="button"
                   accessibilityRole="button"
-                  testID={it.testID}
-                  visible={open}
-                />
-              </View>
-            ))}
-          </View>
-          <FAB
-            onPress={() => {
-              onPress?.();
-              this.toggle();
-            }}
-            icon={icon}
-            color={this.props.color}
-            accessibilityLabel={accessibilityLabel}
-            accessibilityTraits="button"
-            accessibilityComponentType="button"
-            accessibilityRole="button"
-            style={[styles.fab, fabStyle]}
-            visible={visible}
-            testID={testID}
-            accessibilityState={{ expanded: open }}
-          />
-        </SafeAreaView>
-      </View>
-    );
-  }
-}
+                >
+                  <Text style={{ color: labelColor }}>{it.label}</Text>
+                </Card>
+              )}
+              <FAB
+                small
+                icon={it.icon}
+                color={it.color}
+                style={
+                  [
+                    {
+                      transform: [{ scale: scales[i] }],
+                      opacity: opacities[i],
+                      backgroundColor: theme.colors.surface,
+                    },
+                    it.style,
+                  ] as StyleProp<ViewStyle>
+                }
+                onPress={(e) => {
+                  it.onPress(e);
+                  close();
+                }}
+                accessibilityLabel={
+                  typeof it.accessibilityLabel !== 'undefined'
+                    ? it.accessibilityLabel
+                    : it.label
+                }
+                accessibilityTraits="button"
+                accessibilityComponentType="button"
+                accessibilityRole="button"
+                testID={it.testID}
+                visible={open}
+              />
+            </View>
+          ))}
+        </View>
+        <FAB
+          onPress={(e) => {
+            onPress?.(e);
+            toggle();
+          }}
+          icon={icon}
+          color={colorProp}
+          accessibilityLabel={accessibilityLabel}
+          accessibilityTraits="button"
+          accessibilityComponentType="button"
+          accessibilityRole="button"
+          accessibilityState={{ expanded: open }}
+          style={[styles.fab, fabStyle]}
+          visible={visible}
+          testID={testID}
+        />
+      </SafeAreaView>
+    </View>
+  );
+};
+
+FABGroup.displayName = 'FAB.Group';
 
 export default withTheme(FABGroup);
 

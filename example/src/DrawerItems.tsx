@@ -52,7 +52,7 @@ const DrawerItems = ({ toggleTheme, toggleRTL, isRTL, isDarkTheme }: Props) => {
       <Drawer.Section title="Preferences">
         <TouchableRipple onPress={toggleTheme}>
           <View style={styles.preference}>
-            <Text>Dark Theme</Text>
+            <Text selectable={false}>Dark Theme</Text>
             <View pointerEvents="none">
               <Switch value={isDarkTheme} />
             </View>
@@ -60,7 +60,7 @@ const DrawerItems = ({ toggleTheme, toggleRTL, isRTL, isDarkTheme }: Props) => {
         </TouchableRipple>
         <TouchableRipple onPress={toggleRTL}>
           <View style={styles.preference}>
-            <Text>RTL</Text>
+            <Text selectable={false}>RTL</Text>
             <View pointerEvents="none">
               <Switch value={isRTL} />
             </View>

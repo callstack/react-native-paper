@@ -1,6 +1,7 @@
 import color from 'color';
 import * as React from 'react';
 import {
+  GestureResponderEvent,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -16,6 +17,7 @@ import type { $RemoveChildren, EllipsizeProp } from '../../types';
 type Description =
   | React.ReactNode
   | ((props: {
+      selectable: boolean;
       ellipsizeMode: EllipsizeProp | undefined;
       color: string;
       fontSize: number;
@@ -54,7 +56,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   /**
    * @optional
    */
@@ -144,12 +146,14 @@ const ListItem = ({
   ) => {
     return typeof description === 'function' ? (
       description({
+        selectable: false,
         ellipsizeMode: descriptionEllipsizeMode,
         color: descriptionColor,
         fontSize: styles.description.fontSize,
       })
     ) : (
       <Text
+        selectable={false}
         numberOfLines={descriptionNumberOfLines}
         ellipsizeMode={descriptionEllipsizeMode}
         style={[
@@ -186,6 +190,7 @@ const ListItem = ({
           : null}
         <View style={[styles.item, styles.content]}>
           <Text
+            selectable={false}
             ellipsizeMode={titleEllipsizeMode}
             numberOfLines={titleNumberOfLines}
             style={[styles.title, { color: titleColor }, titleStyle]}

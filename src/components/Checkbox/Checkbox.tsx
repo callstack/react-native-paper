@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { ColorValue, Platform } from 'react-native';
+
+import { GestureResponderEvent, ColorValue, Platform } from 'react-native';
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import CheckboxIOS, { CheckboxIOS as _CheckboxIOS } from './CheckboxIOS';
 import CheckboxAndroid, {
@@ -21,7 +23,7 @@ type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   /**
    * Custom color for unchecked checkbox.
    */

@@ -1,6 +1,12 @@
 import color from 'color';
 import * as React from 'react';
-import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+  GestureResponderEvent,
+} from 'react-native';
 import Text from '../Typography/Text';
 import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -22,7 +28,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
@@ -101,6 +107,7 @@ const DrawerItem = ({
         <View style={styles.wrapper}>
           {icon ? <Icon source={icon} size={24} color={contentColor} /> : null}
           <Text
+            selectable={false}
             numberOfLines={1}
             style={[
               styles.label,

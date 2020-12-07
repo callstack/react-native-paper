@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { Animated, View, StyleSheet, ColorValue } from 'react-native';
+
+import {
+  Animated,
+  View,
+  StyleSheet,
+  GestureResponderEvent,
+  ColorValue,
+} from 'react-native';
+
 import color from 'color';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -18,7 +26,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   /**
    * Custom color for unchecked checkbox.
    */
@@ -67,12 +75,19 @@ const CheckboxAndroid = ({
   const { current: scaleAnim } = React.useRef<Animated.Value>(
     new Animated.Value(1)
   );
+  const isFirstRendering = React.useRef<boolean>(true);
 
   const {
     animation: { scale },
   } = theme;
 
   React.useEffect(() => {
+    // Do not run animation on very first rendering
+    if (isFirstRendering.current) {
+      isFirstRendering.current = false;
+      return;
+    }
+
     const checked = status === 'checked';
 
     Animated.sequence([

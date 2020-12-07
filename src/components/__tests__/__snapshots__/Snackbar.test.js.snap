@@ -209,6 +209,7 @@ exports[`renders snackbar with action button 1`] = `
         >
           <Text
             numberOfLines={1}
+            selectable={false}
             style={
               Array [
                 Object {

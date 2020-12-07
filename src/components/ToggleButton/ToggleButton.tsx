@@ -40,7 +40,7 @@ type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: (value?: GestureResponderEvent | string) => void;
+  onPress?: (event: GestureResponderEvent) => void;
   /**
    * Value of button.
    */
@@ -124,7 +124,7 @@ const ToggleButton = ({
           <IconButton
             borderless={false}
             icon={icon}
-            onPress={(e?: GestureResponderEvent | string) => {
+            onPress={(e) => {
               if (onPress) {
                 onPress(e);
               }

@@ -34,7 +34,9 @@ const SwitchExample = () => {
     >
       <TouchableRipple onPress={() => setNormalValue(!valueNormal)}>
         <View style={styles.row}>
-          <Paragraph>Normal {switchValueNormalLabel}</Paragraph>
+          <Paragraph selectable={false}>
+            Normal {switchValueNormalLabel}
+          </Paragraph>
           <View pointerEvents="none">
             <Switch value={valueNormal} />
           </View>
@@ -42,7 +44,9 @@ const SwitchExample = () => {
       </TouchableRipple>
       <TouchableRipple onPress={() => setCustomValue(!valueCustom)}>
         <View style={styles.row}>
-          <Paragraph>Custom {switchValueCustomlLabel}</Paragraph>
+          <Paragraph selectable={false}>
+            Custom {switchValueCustomlLabel}
+          </Paragraph>
           <View pointerEvents="none">
             <Switch value={valueCustom} color={Colors.blue500} />
           </View>

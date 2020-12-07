@@ -64,6 +64,7 @@ exports[`renders DrawerItem with icon 1`] = `
         allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
+        selectable={false}
         style={
           Array [
             Object {
@@ -72,6 +73,7 @@ exports[`renders DrawerItem with icon 1`] = `
             },
             Array [
               Object {
+                "lineHeight": 24,
                 "transform": Array [
                   Object {
                     "scaleX": 1,
@@ -95,6 +97,7 @@ exports[`renders DrawerItem with icon 1`] = `
       </Text>
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -193,6 +196,7 @@ exports[`renders active DrawerItem 1`] = `
         allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
+        selectable={false}
         style={
           Array [
             Object {
@@ -201,6 +205,7 @@ exports[`renders active DrawerItem 1`] = `
             },
             Array [
               Object {
+                "lineHeight": 24,
                 "transform": Array [
                   Object {
                     "scaleX": 1,
@@ -224,6 +229,7 @@ exports[`renders active DrawerItem 1`] = `
       </Text>
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -314,6 +320,7 @@ exports[`renders basic DrawerItem 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {

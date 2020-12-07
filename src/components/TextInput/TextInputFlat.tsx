@@ -94,6 +94,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
       fontWeight,
       height,
       paddingHorizontal,
+      textAlign,
       ...viewStyle
     } = (StyleSheet.flatten(style) || {}) as TextStyle;
     const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
@@ -351,6 +352,11 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
                 fontWeight,
                 color: inputTextColor,
                 textAlignVertical: multiline ? 'top' : 'center',
+                textAlign: textAlign
+                  ? textAlign
+                  : I18nManager.isRTL
+                  ? 'right'
+                  : 'left',
               },
               adornmentStyleAdjustmentForNativeInput,
             ],
@@ -416,7 +422,6 @@ const styles = StyleSheet.create({
   input: {
     flexGrow: 1,
     margin: 0,
-    textAlign: I18nManager.isRTL ? 'right' : 'left',
     zIndex: 1,
   },
   inputFlat: {

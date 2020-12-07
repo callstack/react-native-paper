@@ -7,6 +7,7 @@ import {
   StyleProp,
   TextStyle,
   ColorValue,
+  GestureResponderEvent,
 } from 'react-native';
 import color from 'color';
 
@@ -65,10 +66,14 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
+  /**
+   * Function to execute on long press.
+   */
+  onLongPress?: (event: GestureResponderEvent) => void;
   /**
    * Style of button's inner content.
-   * Use this prop to apply custom height and width.
+   * Use this prop to apply custom height and width and to set the icon on the right with `flexDirection: 'row-reverse'`.
    */
   contentStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
@@ -130,6 +135,7 @@ const Button = ({
   uppercase = true,
   accessibilityLabel,
   onPress,
+  onLongPress,
   style,
   theme,
   contentStyle,
@@ -240,6 +246,10 @@ const Button = ({
 
   const textStyle = { color: textColor, ...font };
   const elevationRes = disabled || mode !== 'contained' ? 0 : elevation;
+  const iconStyle =
+    StyleSheet.flatten(contentStyle)?.flexDirection === 'row-reverse'
+      ? styles.iconReverse
+      : styles.icon;
 
   return (
     <Surface
@@ -255,6 +265,7 @@ const Button = ({
       <TouchableRipple
         borderless
         onPress={onPress}
+        onLongPress={onLongPress}
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
         accessibilityLabel={accessibilityLabel}
@@ -269,7 +280,7 @@ const Button = ({
       >
         <View style={[styles.content, contentStyle]}>
           {icon && loading !== true ? (
-            <View style={styles.icon}>
+            <View style={iconStyle}>
               <Icon
                 source={icon}
                 size={customLabelSize || 16}
@@ -281,10 +292,11 @@ const Button = ({
             <ActivityIndicator
               size={customLabelSize || 16}
               color={customLabelColor || textColor}
-              style={styles.icon}
+              style={iconStyle}
             />
           ) : null}
           <Text
+            selectable={false}
             numberOfLines={1}
             style={[
               styles.label,
@@ -319,6 +331,10 @@ const styles = StyleSheet.create({
   icon: {
     marginLeft: 12,
     marginRight: -4,
+  },
+  iconReverse: {
+    marginRight: 12,
+    marginLeft: -4,
   },
   label: {
     textAlign: 'center',

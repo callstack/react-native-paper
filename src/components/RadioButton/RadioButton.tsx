@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ColorValue, Platform } from 'react-native';
+import { ColorValue, GestureResponderEvent, Platform } from 'react-native';
 import RadioButtonGroup from './RadioButtonGroup';
 import RadioButtonAndroid from './RadioButtonAndroid';
 import RadioButtonIOS from './RadioButtonIOS';
@@ -22,7 +22,7 @@ export type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   /**
    * Custom color for unchecked radio.
    */

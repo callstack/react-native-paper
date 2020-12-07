@@ -139,6 +139,7 @@ exports[`renders list section with custom title style 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -147,6 +148,7 @@ exports[`renders list section with custom title style 1`] = `
               },
               Array [
                 Object {
+                  "lineHeight": 24,
                   "transform": Array [
                     Object {
                       "scaleX": 1,
@@ -185,6 +187,7 @@ exports[`renders list section with custom title style 1`] = `
       >
         <Text
           numberOfLines={1}
+          selectable={false}
           style={
             Array [
               Object {
@@ -268,6 +271,7 @@ exports[`renders list section with custom title style 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -276,6 +280,7 @@ exports[`renders list section with custom title style 1`] = `
               },
               Array [
                 Object {
+                  "lineHeight": 24,
                   "transform": Array [
                     Object {
                       "scaleX": 1,
@@ -314,6 +319,7 @@ exports[`renders list section with custom title style 1`] = `
       >
         <Text
           numberOfLines={1}
+          selectable={false}
           style={
             Array [
               Object {
@@ -479,6 +485,7 @@ exports[`renders list section with subheader 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -487,6 +494,7 @@ exports[`renders list section with subheader 1`] = `
               },
               Array [
                 Object {
+                  "lineHeight": 24,
                   "transform": Array [
                     Object {
                       "scaleX": 1,
@@ -525,6 +533,7 @@ exports[`renders list section with subheader 1`] = `
       >
         <Text
           numberOfLines={1}
+          selectable={false}
           style={
             Array [
               Object {
@@ -608,6 +617,7 @@ exports[`renders list section with subheader 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -616,6 +626,7 @@ exports[`renders list section with subheader 1`] = `
               },
               Array [
                 Object {
+                  "lineHeight": 24,
                   "transform": Array [
                     Object {
                       "scaleX": 1,
@@ -654,6 +665,7 @@ exports[`renders list section with subheader 1`] = `
       >
         <Text
           numberOfLines={1}
+          selectable={false}
           style={
             Array [
               Object {
@@ -792,6 +804,7 @@ exports[`renders list section without subheader 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -800,6 +813,7 @@ exports[`renders list section without subheader 1`] = `
               },
               Array [
                 Object {
+                  "lineHeight": 24,
                   "transform": Array [
                     Object {
                       "scaleX": 1,
@@ -838,6 +852,7 @@ exports[`renders list section without subheader 1`] = `
       >
         <Text
           numberOfLines={1}
+          selectable={false}
           style={
             Array [
               Object {
@@ -921,6 +936,7 @@ exports[`renders list section without subheader 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -929,6 +945,7 @@ exports[`renders list section without subheader 1`] = `
               },
               Array [
                 Object {
+                  "lineHeight": 24,
                   "transform": Array [
                     Object {
                       "scaleX": 1,
@@ -967,6 +984,7 @@ exports[`renders list section without subheader 1`] = `
       >
         <Text
           numberOfLines={1}
+          selectable={false}
           style={
             Array [
               Object {

@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { StyleSheet, StyleProp, ViewStyle } from 'react-native';
+import {
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+  GestureResponderEvent,
+} from 'react-native';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { $RemoveChildren } from '../../types';
@@ -16,7 +21,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   style?: StyleProp<ViewStyle>;
 };
 
@@ -46,6 +51,9 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
  *
  * export default MyComponent;
  * ```
+ *
+ * If you want to support multiline text, please use View instead, as multiline text doesn't comply with
+ * MD Guidelines (https://github.com/callstack/react-native-paper/issues/2381).
  */
 
 const DataTableCell = ({ children, style, numeric, ...rest }: Props) => (

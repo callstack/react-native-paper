@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   ColorValue,
+  GestureResponderEvent,
   Platform,
   StyleProp,
   StyleSheet,
@@ -46,7 +47,7 @@ type Props = $RemoveChildren<typeof View> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional

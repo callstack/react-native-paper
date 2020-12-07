@@ -1,5 +1,11 @@
 import React from 'react';
-import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+  GestureResponderEvent,
+} from 'react-native';
 
 import IconButton from '../../IconButton';
 import type { $Omit } from '../../../../src/types';
@@ -10,7 +16,7 @@ type Props = $Omit<
   'icon' | 'theme'
 > & {
   name: IconSource;
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   forceTextInputFocus?: boolean;
   style?: StyleProp<ViewStyle>;
   theme?: ReactNativePaper.Theme;
@@ -60,12 +66,15 @@ const TextInputIcon = ({
     StyleContext
   );
 
-  const onPressWithFocusControl = React.useCallback(() => {
-    if (forceTextInputFocus && !isTextInputFocused) {
-      forceFocus();
-    }
-    onPress?.();
-  }, [forceTextInputFocus, forceFocus, isTextInputFocused, onPress]);
+  const onPressWithFocusControl = React.useCallback(
+    (event: GestureResponderEvent) => {
+      if (forceTextInputFocus && !isTextInputFocused) {
+        forceFocus();
+      }
+      onPress?.(event);
+    },
+    [forceTextInputFocus, forceFocus, isTextInputFocused, onPress]
+  );
 
   return (
     <View style={[styles.container, style]}>

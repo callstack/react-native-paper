@@ -5,6 +5,8 @@ import {
   View,
   Platform,
   ColorValue,
+  ViewStyle,
+  GestureResponderEvent,
 } from 'react-native';
 import color from 'color';
 import { withTheme } from '../../core/theming';
@@ -21,11 +23,11 @@ type Props = React.ComponentProps<typeof Pressable> & {
   borderless?: boolean;
   background?: string;
   disabled?: boolean;
-  onPress?: () => void | null;
+  onPress?: (event: GestureResponderEvent) => void | null;
   rippleColor?: ColorValue;
   underlayColor?: ColorValue;
-  children: InteractionChildrenType;
-  style?: InteractionStyleType;
+  children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
   theme: ReactNativePaper.Theme;
 };
 
