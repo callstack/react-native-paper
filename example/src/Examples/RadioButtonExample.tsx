@@ -38,7 +38,7 @@ const RadioButtonExample = () => {
       </TouchableRipple>
       <TouchableRipple onPress={() => setChecked('normal-ios')}>
         <View style={styles.row}>
-          <Paragraph>Normal 2 - IOS</Paragraph>
+          <Paragraph selectable={false}>Normal 2 - IOS</Paragraph>
           <View pointerEvents="none">
             <RadioButton.IOS
               value="normal-ios"
@@ -49,7 +49,7 @@ const RadioButtonExample = () => {
       </TouchableRipple>
       <TouchableRipple onPress={() => setChecked('custom')}>
         <View style={styles.row}>
-          <Paragraph>Custom</Paragraph>
+          <Paragraph selectable={false}>Custom</Paragraph>
           <View pointerEvents="none">
             <RadioButton
               value="custom"

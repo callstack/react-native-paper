@@ -15,7 +15,7 @@ const RippleExample = () => {
         rippleColor="rgba(0, 0, 0, .32)"
       >
         <View pointerEvents="none">
-          <Paragraph>Press anywhere</Paragraph>
+          <Paragraph selectable={false}>Press anywhere</Paragraph>
         </View>
       </TouchableRipple>
     </View>

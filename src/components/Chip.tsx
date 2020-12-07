@@ -289,6 +289,7 @@ const Chip = ({
             </View>
           ) : null}
           <Text
+            selectable={false}
             numberOfLines={1}
             style={[
               styles.text,

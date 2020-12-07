@@ -77,7 +77,7 @@ type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
  *     onPress={() => console.log('Pressed')}
  *     rippleColor="rgba(0, 0, 0, .32)"
  *   >
- *     <Text>Press anywhere</Text>
+ *     <Text selectable={false}>Press anywhere</Text>
  *   </TouchableRipple>
  * );
  *

@@ -109,6 +109,7 @@ const CheckboxItem = ({
     <TouchableRipple onPress={onPress} testID={testID}>
       <View style={[styles.container, style]} pointerEvents="none">
         <Text
+          selectable={false}
           style={[styles.label, { color: theme.colors.primary }, labelStyle]}
         >
           {label}

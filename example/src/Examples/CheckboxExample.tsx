@@ -27,7 +27,7 @@ const CheckboxExample = () => {
     >
       <TouchableRipple onPress={() => setCheckedNormal(!checkedNormal)}>
         <View style={styles.row}>
-          <Paragraph>Normal</Paragraph>
+          <Paragraph selectable={false}>Normal</Paragraph>
           <View pointerEvents="none">
             <Checkbox status={checkedNormal ? 'checked' : 'unchecked'} />
           </View>
@@ -36,7 +36,7 @@ const CheckboxExample = () => {
 
       <TouchableRipple onPress={() => setCheckedCustom(!checkedCustom)}>
         <View style={styles.row}>
-          <Paragraph>Custom</Paragraph>
+          <Paragraph selectable={false}>Custom</Paragraph>
           <View pointerEvents="none">
             <Checkbox
               color={Colors.blue500}
@@ -48,7 +48,7 @@ const CheckboxExample = () => {
 
       <TouchableRipple onPress={() => setIndeterminate(!indeterminate)}>
         <View style={styles.row}>
-          <Paragraph>Indeterminate</Paragraph>
+          <Paragraph selectable={false}>Indeterminate</Paragraph>
           <View pointerEvents="none">
             <Checkbox status={indeterminate ? 'indeterminate' : 'unchecked'} />
           </View>

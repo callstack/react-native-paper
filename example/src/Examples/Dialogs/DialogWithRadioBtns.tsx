@@ -34,7 +34,9 @@ const DialogWithRadioBtns = ({ visible, close }: Props) => {
                       status={checked === 'normal' ? 'checked' : 'unchecked'}
                     />
                   </View>
-                  <Subheading style={styles.text}>Option 1</Subheading>
+                  <Subheading style={styles.text} selectable={false}>
+                    Option 1
+                  </Subheading>
                 </View>
               </TouchableRipple>
               <TouchableRipple onPress={() => setChecked('second')}>
@@ -45,7 +47,9 @@ const DialogWithRadioBtns = ({ visible, close }: Props) => {
                       status={checked === 'second' ? 'checked' : 'unchecked'}
                     />
                   </View>
-                  <Subheading style={styles.text}>Option 2</Subheading>
+                  <Subheading style={styles.text} selectable={false}>
+                    Option 2
+                  </Subheading>
                 </View>
               </TouchableRipple>
               <TouchableRipple onPress={() => setChecked('third')}>
@@ -56,7 +60,9 @@ const DialogWithRadioBtns = ({ visible, close }: Props) => {
                       status={checked === 'third' ? 'checked' : 'unchecked'}
                     />
                   </View>
-                  <Subheading style={styles.text}>Option 3</Subheading>
+                  <Subheading style={styles.text} selectable={false}>
+                    Option 3
+                  </Subheading>
                 </View>
               </TouchableRipple>
               <TouchableRipple onPress={() => setChecked('fourth')}>
@@ -67,7 +73,9 @@ const DialogWithRadioBtns = ({ visible, close }: Props) => {
                       status={checked === 'fourth' ? 'checked' : 'unchecked'}
                     />
                   </View>
-                  <Subheading style={styles.text}>Option 4</Subheading>
+                  <Subheading style={styles.text} selectable={false}>
+                    Option 4
+                  </Subheading>
                 </View>
               </TouchableRipple>
             </View>

@@ -34,6 +34,7 @@ exports[`can render the Android checkbox on different platforms 1`] = `
     }
   >
     <Text
+      selectable={false}
       style={
         Array [
           Object {
@@ -104,6 +105,7 @@ exports[`can render the Android checkbox on different platforms 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -202,6 +204,7 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
     }
   >
     <Text
+      selectable={false}
       style={
         Array [
           Object {
@@ -266,6 +269,7 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -336,6 +340,7 @@ exports[`renders unchecked 1`] = `
     }
   >
     <Text
+      selectable={false}
       style={
         Array [
           Object {
@@ -400,6 +405,7 @@ exports[`renders unchecked 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {

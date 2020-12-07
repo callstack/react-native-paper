@@ -97,6 +97,7 @@ const defaultIcon = ({
       styles.icon,
     ]}
     pointerEvents="none"
+    selectable={false}
     {...accessibilityProps}
   />
 );

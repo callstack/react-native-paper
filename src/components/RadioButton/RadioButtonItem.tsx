@@ -147,7 +147,10 @@ const RadioButtonItem = ({
             testID={testID}
           >
             <View style={[styles.container, style]} pointerEvents="none">
-              <Text style={[styles.label, { color: colors.text }, labelStyle]}>
+              <Text
+                selectable={false}
+                style={[styles.label, { color: colors.text }, labelStyle]}
+              >
                 {label}
               </Text>
               {radioButton}

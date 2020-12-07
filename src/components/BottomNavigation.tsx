@@ -962,6 +962,7 @@ class BottomNavigation extends React.Component<Props, State> {
                               })
                             ) : (
                               <Text
+                                selectable={false}
                                 style={[
                                   styles.label,
                                   { color: activeTintColor },
@@ -986,6 +987,7 @@ class BottomNavigation extends React.Component<Props, State> {
                                 })
                               ) : (
                                 <Text
+                                  selectable={false}
                                   style={[
                                     styles.label,
                                     { color: inactiveTintColor },
