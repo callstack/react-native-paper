@@ -21,7 +21,7 @@ const ToggleButtonExample = () => {
             icon="android"
             value="android"
             status={status}
-            onPress={(status) =>
+            onPress={() =>
               setStatus(status === 'checked' ? 'unchecked' : 'checked')
             }
           />

@@ -6,6 +6,7 @@ import {
   StyleSheet,
   StyleProp,
   TextStyle,
+  GestureResponderEvent,
 } from 'react-native';
 import color from 'color';
 
@@ -64,11 +65,11 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   /**
    * Function to execute on long press.
    */
-  onLongPress?: () => void;
+  onLongPress?: (event: GestureResponderEvent) => void;
   /**
    * Style of button's inner content.
    * Use this prop to apply custom height and width and to set the icon on the right with `flexDirection: 'row-reverse'`.

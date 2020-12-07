@@ -1,6 +1,7 @@
 import color from 'color';
 import * as React from 'react';
 import {
+  GestureResponderEvent,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -54,7 +55,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   /**
    * @optional
    */

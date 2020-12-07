@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ViewStyle,
   View,
+  GestureResponderEvent,
 } from 'react-native';
 
 import Button from './Button';
@@ -26,7 +27,7 @@ type Props = React.ComponentProps<typeof Surface> & {
   action?: {
     label: string;
     accessibilityLabel?: string;
-    onPress: () => void;
+    onPress: (event: GestureResponderEvent) => void;
   };
   /**
    * The duration for which the Snackbar is shown.
@@ -210,8 +211,8 @@ const Snackbar = ({
         {action ? (
           <Button
             accessibilityLabel={action.accessibilityLabel}
-            onPress={() => {
-              action.onPress();
+            onPress={(e) => {
+              action.onPress(e);
               onDismiss();
             }}
             style={styles.button}

@@ -6,6 +6,7 @@ import {
   I18nManager,
   ViewStyle,
   TextStyle,
+  GestureResponderEvent,
 } from 'react-native';
 
 import color from 'color';
@@ -43,7 +44,7 @@ type Props = React.ComponentPropsWithRef<typeof TextInput> & {
   /**
    * Callback to execute if we want the left icon to act as button.
    */
-  onIconPress?: () => void;
+  onIconPress?: (event: GestureResponderEvent) => void;
   /**
    * Set style of the TextInput component inside the searchbar
    */

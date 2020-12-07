@@ -1,6 +1,12 @@
 import * as React from 'react';
 import color from 'color';
-import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
+import {
+  StyleSheet,
+  StyleProp,
+  View,
+  ViewStyle,
+  GestureResponderEvent,
+} from 'react-native';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
@@ -14,7 +20,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional

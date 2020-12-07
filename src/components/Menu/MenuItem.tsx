@@ -6,6 +6,7 @@ import {
   TextStyle,
   ViewStyle,
   StyleProp,
+  GestureResponderEvent,
 } from 'react-native';
 import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -29,7 +30,7 @@ type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   /**
    * @optional
    */

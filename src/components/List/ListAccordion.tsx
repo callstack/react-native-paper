@@ -7,6 +7,7 @@ import {
   StyleProp,
   TextStyle,
   I18nManager,
+  GestureResponderEvent,
 } from 'react-native';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -37,7 +38,7 @@ type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   /**
    * Content of the section.
    */
@@ -141,8 +142,8 @@ const ListAccordion = ({
     expandedProp || false
   );
 
-  const handlePressAction = () => {
-    onPress?.();
+  const handlePressAction = (e: GestureResponderEvent) => {
+    onPress?.(e);
 
     if (expandedProp === undefined) {
       // Only update state of the `expanded` prop was not passed

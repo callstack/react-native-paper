@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   View,
   ViewStyle,
+  GestureResponderEvent,
 } from 'react-native';
 import color from 'color';
 import { withTheme } from '../../core/theming';
@@ -19,7 +20,7 @@ type Props = React.ComponentProps<typeof TouchableWithoutFeedback> & {
   borderless?: boolean;
   background?: BackgroundPropType;
   disabled?: boolean;
-  onPress?: () => void | null;
+  onPress?: (event: GestureResponderEvent) => void | null;
   rippleColor?: string;
   underlayColor?: string;
   children: React.ReactNode;
