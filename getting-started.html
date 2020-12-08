@@ -43,6 +43,7 @@
 <p>or</p>
 <pre><code class="language-sh">npm install react-native-paper</code></pre>
 <p>If you're on a vanilla React Native project, you also need to install and link <a href="https://github.com/oblador/react-native-vector-icons">react-native-vector-icons</a>.</p>
+<p>Specifically <code>MaterialCommunityIcons</code> icon pack needs to be included in the project, because some components use those internally (e.g. <code>AppBar.BackAction</code> on Android). </p>
 <pre><code class="language-sh">yarn add react-native-vector-icons
 react-native link react-native-vector-icons</code></pre>
 <p>If you don't want to install vector icons, you can use <a href="https://github.com/satya164/babel-plugin-optional-require">babel-plugin-optional-require</a> to opt-out.</p>
