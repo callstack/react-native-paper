@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
-import RadioButtonGroup from './RadioButtonGroup';
-import RadioButtonAndroid from './RadioButtonAndroid';
-import RadioButtonIOS from './RadioButtonIOS';
-import RadioButtonItem from './RadioButtonItem';
+import {
+  RadioButtonAndroid,
+  RadioButtonGroup,
+  RadioButtonIOS,
+  RadioButtonItem,
+} from './RadioButtonElements';
 import { withTheme } from '../../core/theming';
 
 export type Props = {
@@ -113,3 +115,8 @@ RadioButton.IOS = RadioButtonIOS;
 RadioButton.Item = RadioButtonItem;
 
 export default withTheme(RadioButton);
+
+// @component-docs ignore-next-line
+const RadioButtonWithTheme = withTheme(RadioButton);
+// @component-docs ignore-next-line
+export { RadioButtonWithTheme as RadioButton };

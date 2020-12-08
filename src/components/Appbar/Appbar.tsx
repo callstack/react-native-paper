@@ -2,14 +2,12 @@ import * as React from 'react';
 import { View, ViewStyle, Platform, StyleSheet, StyleProp } from 'react-native';
 import color from 'color';
 
-import AppbarContent, {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  AppbarContent as _AppbarContent,
-} from './AppbarContent';
-import AppbarAction from './AppbarAction';
-import AppbarBackAction from './AppbarBackAction';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import AppbarHeader, { AppbarHeader as _AppbarHeader } from './AppbarHeader';
+import {
+  AppbarContent,
+  AppbarAction,
+  AppbarBackAction,
+  AppbarHeader,
+} from './AppbarElements';
 import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import { black, white } from '../../styles/colors';
@@ -196,3 +194,8 @@ const styles = StyleSheet.create({
 });
 
 export default withTheme(Appbar);
+
+// @component-docs ignore-next-line
+const AppbarWithTheme = withTheme(Appbar);
+// @component-docs ignore-next-line
+export { AppbarWithTheme as Appbar };

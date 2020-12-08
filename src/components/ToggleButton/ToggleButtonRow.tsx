@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View, StyleProp, ViewStyle } from 'react-native';
-import ToggleButton from './ToggleButton';
+import { ToggleButton } from './ToggleButtonElements';
 
 type Props = {
   /**
@@ -106,3 +106,6 @@ const styles = StyleSheet.create({
 });
 
 export default ToggleButtonRow;
+
+// @component-docs ignore-next-line
+export { ToggleButtonRow };

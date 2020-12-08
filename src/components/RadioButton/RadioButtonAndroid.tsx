@@ -217,4 +217,6 @@ const styles = StyleSheet.create({
 export default withTheme(RadioButtonAndroid);
 
 // @component-docs ignore-next-line
-export { RadioButtonAndroid };
+const RadioButtonAndroidWithTheme = withTheme(RadioButtonAndroid);
+// @component-docs ignore-next-line
+export { RadioButtonAndroidWithTheme as RadioButtonAndroid };

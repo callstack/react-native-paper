@@ -9,7 +9,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import color from 'color';
-import FAB from './FAB';
+import { FAB } from './FABElements';
 import Text from '../Typography/Text';
 import Card from '../Card/Card';
 import { withTheme } from '../../core/theming';
@@ -358,7 +358,9 @@ FABGroup.displayName = 'FAB.Group';
 export default withTheme(FABGroup);
 
 // @component-docs ignore-next-line
-export { FABGroup };
+const FABGroupWithTheme = withTheme(FABGroup);
+// @component-docs ignore-next-line
+export { FABGroupWithTheme as FABGroup };
 
 const styles = StyleSheet.create({
   safeArea: {

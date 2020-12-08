@@ -8,9 +8,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import CheckBox from './Checkbox';
-import CheckboxAndroid from './CheckboxAndroid';
-import CheckboxIOS from './CheckboxIOS';
+import { Checkbox, CheckboxAndroid, CheckboxIOS } from './CheckboxElements';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
@@ -101,7 +99,7 @@ const CheckboxItem = ({
   } else if (mode === 'ios') {
     checkbox = <CheckboxIOS {...checkboxProps} />;
   } else {
-    checkbox = <CheckBox {...checkboxProps} />;
+    checkbox = <Checkbox {...checkboxProps} />;
   }
 
   return (
@@ -123,7 +121,9 @@ CheckboxItem.displayName = 'Checkbox.Item';
 export default withTheme(CheckboxItem);
 
 // @component-docs ignore-next-line
-export { CheckboxItem };
+const CheckboxItemWithTheme = withTheme(CheckboxItem);
+// @component-docs ignore-next-line
+export { CheckboxItemWithTheme as CheckboxItem };
 
 const styles = StyleSheet.create({
   container: {
