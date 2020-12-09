@@ -16,7 +16,7 @@ const AppbarBackIcon = ({ size, color }: { size: number; color: string }) =>
     >
       <Image
         source={require('../../assets/back-chevron.png')}
-        style={[styles.icon, { tintColor: color }]}
+        style={[styles.icon, { tintColor: color, width: size, height: size }]}
       />
     </View>
   ) : (
@@ -34,8 +34,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   icon: {
-    height: 21,
-    width: 21,
     resizeMode: 'contain',
   },
 });
