@@ -1,7 +1,11 @@
 import React from 'react';
 import TextInputIcon, { IconAdornment } from './TextInputIcon';
 import TextInputAffix, { AffixAdornment } from './TextInputAffix';
-import { ADORNMENT_OFFSET, OUTLINED_INPUT_OFFSET } from '../constants';
+import {
+  ADORNMENT_OFFSET,
+  OUTLINED_INPUT_OFFSET,
+  FLAT_WEB_ICON_OFFSET,
+} from '../constants';
 import {
   LayoutChangeEvent,
   TextStyle,
@@ -78,7 +82,14 @@ export function getAdornmentStyleAdjustmentForNativeInput({
             : inputModeAdornemntOffset;
         const offset = affixWidth + padding;
 
-        if (isWeb) return { [paddingKey]: offset };
+        if (isWeb)
+          return {
+            [paddingKey]:
+              offset +
+              (type === AdornmentType.Icon && mode === InputMode.Flat
+                ? FLAT_WEB_ICON_OFFSET
+                : 0),
+          };
 
         const isAffix = type === AdornmentType.Affix;
         const marginKey = `margin${captalize(side)}`;
