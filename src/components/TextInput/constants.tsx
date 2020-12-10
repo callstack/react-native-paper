@@ -7,5 +7,3 @@ export const ADORNMENT_OFFSET = 12;
 export const FLAT_INPUT_OFFSET = 8;
 // extra space to avoid overlapping input's text and icon
 export const OUTLINED_INPUT_OFFSET = 8;
-// extra space for icons in Flat TextInput on web
-export const FLAT_WEB_ICON_OFFSET = 8;

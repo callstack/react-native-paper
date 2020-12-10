@@ -1,17 +1,12 @@
 import React from 'react';
 import TextInputIcon, { IconAdornment } from './TextInputIcon';
 import TextInputAffix, { AffixAdornment } from './TextInputAffix';
-import {
-  ADORNMENT_OFFSET,
-  OUTLINED_INPUT_OFFSET,
-  FLAT_WEB_ICON_OFFSET,
-} from '../constants';
-import {
+import { ADORNMENT_OFFSET, OUTLINED_INPUT_OFFSET } from '../constants';
+import type {
   LayoutChangeEvent,
   TextStyle,
   StyleProp,
   Animated,
-  Platform,
 } from 'react-native';
 import type {
   AdornmentConfig,
@@ -68,7 +63,6 @@ export function getAdornmentStyleAdjustmentForNativeInput({
   if (adornmentConfig.length) {
     const adornmentStyleAdjustmentForNativeInput = adornmentConfig.map(
       ({ type, side }: AdornmentConfig) => {
-        const isWeb = Platform.OS !== 'ios' && Platform.OS !== 'android';
         const isLeftSide = side === AdornmentSide.Left;
         const inputModeAdornemntOffset =
           mode === InputMode.Outlined
@@ -81,15 +75,6 @@ export function getAdornmentStyleAdjustmentForNativeInput({
             ? paddingHorizontal
             : inputModeAdornemntOffset;
         const offset = affixWidth + padding;
-
-        if (isWeb)
-          return {
-            [paddingKey]:
-              offset +
-              (type === AdornmentType.Icon && mode === InputMode.Flat
-                ? FLAT_WEB_ICON_OFFSET
-                : 0),
-          };
 
         const isAffix = type === AdornmentType.Affix;
         const marginKey = `margin${captalize(side)}`;
