@@ -78,6 +78,7 @@
     "eslint-config-callstack-io": "^1.1.1",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react-native": "^3.5.0",
+    "expo-constants": "^9.3.5",
     "flow-bin": "0.92.0",
     "glob": "^7.1.3",
     "husky": "^1.3.1",
