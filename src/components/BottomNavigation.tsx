@@ -13,7 +13,7 @@ import {
   ViewStyle,
   LayoutChangeEvent,
 } from 'react-native';
-import SafeAreaView from 'react-native-safe-area-view';
+import { getBottomSpace } from 'react-native-iphone-x-helper';
 import color from 'color';
 import overlay from '../styles/overlay';
 import Icon, { IconSource } from './Icon';
@@ -271,6 +271,7 @@ const MIN_RIPPLE_SCALE = 0.001; // Minimum scale is not 0 due to bug with animat
 const MIN_TAB_WIDTH = 96;
 const MAX_TAB_WIDTH = 168;
 const BAR_HEIGHT = 56;
+const BOTTOM_INSET = getBottomSpace();
 const FAR_FAR_AWAY = Platform.OS === 'web' ? 0 : 9999;
 
 const Touchable = ({
@@ -784,9 +785,11 @@ class BottomNavigation extends React.Component<Props, State> {
           onLayout={this.handleLayout}
         >
           <Animated.View style={[styles.barContent, { backgroundColor }]}>
-            <SafeAreaView
-              forceInset={{ top: 'never', bottom: 'always' }}
-              style={[styles.items, { maxWidth: maxTabBarWidth }]}
+            <View
+              style={[
+                styles.items,
+                { marginBottom: BOTTOM_INSET, maxWidth: maxTabBarWidth },
+              ]}
             >
               {shifting ? (
                 <Animated.View
@@ -1006,7 +1009,7 @@ class BottomNavigation extends React.Component<Props, State> {
                   ),
                 });
               })}
-            </SafeAreaView>
+            </View>
           </Animated.View>
         </Surface>
       </View>
