@@ -55,7 +55,7 @@
 <pre><code class="language-js">module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token function">override</span><span class="token punctuation">(</span><span class="token parameter">config<span class="token punctuation">,</span> env</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   config<span class="token punctuation">.</span>module<span class="token punctuation">.</span>rules<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
     test<span class="token punctuation">:</span> <span class="token regex">/\.js$/</span><span class="token punctuation">,</span>
-    exclude<span class="token punctuation">:</span> <span class="token regex">/node_modules[/\\](?!react-native-vector-icons|react-native-safe-area-view)/</span><span class="token punctuation">,</span>
+    exclude<span class="token punctuation">:</span> <span class="token regex">/node_modules[/\\](?!react-native-vector-icons)/</span><span class="token punctuation">,</span>
     use<span class="token punctuation">:</span> <span class="token punctuation">{</span>
       loader<span class="token punctuation">:</span> <span class="token string">"babel-loader"</span><span class="token punctuation">,</span>
       options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
@@ -191,7 +191,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Now, add the following in the <code>module.rules</code> array in your webpack config:</p>
 <pre><code class="language-js"><span class="token punctuation">{</span>
   test<span class="token punctuation">:</span> <span class="token regex">/\.js$/</span><span class="token punctuation">,</span>
-  exclude<span class="token punctuation">:</span> <span class="token regex">/node_modules[/\\](?!react-native-vector-icons|react-native-safe-area-view)/</span><span class="token punctuation">,</span>
+  exclude<span class="token punctuation">:</span> <span class="token regex">/node_modules[/\\](?!react-native-vector-icons)/</span><span class="token punctuation">,</span>
   use<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     loader<span class="token punctuation">:</span> <span class="token string">'babel-loader'</span><span class="token punctuation">,</span>
     options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
