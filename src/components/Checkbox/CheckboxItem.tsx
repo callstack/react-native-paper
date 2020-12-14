@@ -106,7 +106,7 @@ const CheckboxItem = ({
     <TouchableRipple onPress={onPress} testID={testID}>
       <View style={[styles.container, style]} pointerEvents="none">
         <Text
-          style={[styles.label, { color: theme.colors.primary }, labelStyle]}
+          style={[styles.label, { color: theme.colors.text }, labelStyle]}
         >
           {label}
         </Text>
