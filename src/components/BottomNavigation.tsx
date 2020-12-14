@@ -9,7 +9,6 @@ import {
   Platform,
   Keyboard,
   ViewStyle,
-  LayoutChangeEvent,
 } from 'react-native';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 import color from 'color';
@@ -21,6 +20,9 @@ import TouchableRipple from './TouchableRipple/TouchableRipple';
 import Text from './Typography/Text';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
+import useAnimatedValue from '../utils/useAnimatedValue';
+import useAnimatedValueArray from '../utils/useAnimatedValueArray';
+import useLayout from '../utils/useLayout';
 
 type Route = {
   key: string;
@@ -254,6 +256,7 @@ const Touchable = ({
 const SceneComponent = React.memo(({ component, ...rest }: any) =>
   React.createElement(component, rest)
 );
+
 /**
  * Bottom navigation provides quick navigation between top-level views of an app with a bottom navigation bar.
  * It is primarily designed for use on mobile.
@@ -326,186 +329,147 @@ const BottomNavigation = ({
   sceneAnimationEnabled = false,
   onTabPress,
   onIndexChange,
-  shifting: shiftingProp,
+  shifting = navigationState.routes.length > 3,
 }: Props) => {
-  const {
-    animation: { scale },
-  } = theme;
+  const { scale } = theme.animation;
 
-  const focusedKey = React.useMemo(
-    () => navigationState.routes[navigationState.index].key,
-    [navigationState.routes, navigationState.index]
-  );
+  const focusedKey = navigationState.routes[navigationState.index].key;
+
   /**
    * Visibility of the navigation bar, visible state is 1 and invisible is 0.
    */
-  const { current: visible } = React.useRef<Animated.Value>(
-    new Animated.Value(1)
-  );
+  const visibleAnim = useAnimatedValue(1);
 
   /**
    * Active state of individual tab items, active state is 1 and inactive state is 0.
    */
-  const tabs = React.useRef<Animated.Value[]>([]);
+  const tabsAnims = useAnimatedValueArray(
+    navigationState.routes.map(
+      // focused === 1, unfocused === 0
+      (_, i) => (i === navigationState.index ? 1 : 0)
+    )
+  );
+
   /**
    * The top offset for each tab item to position it offscreen.
    * Placing items offscreen helps to save memory usage for inactive screens with removeClippedSubviews.
    * We use animated values for this to prevent unnecessary re-renders.
    */
-  const offsets = React.useRef<Animated.Value[]>([]);
+  const offsetsAnims = useAnimatedValueArray(
+    navigationState.routes.map(
+      // offscreen === 1, normal === 0
+      (_, i) => (i === navigationState.index ? 0 : 1)
+    )
+  );
+
   /**
    * Index of the currently active tab. Used for setting the background color.
    * We don't use the color as an animated value directly, because `setValue` seems to be buggy with colors.
    */
-  const { current: index } = React.useRef<Animated.Value>(
-    new Animated.Value(navigationState.index)
-  );
+  const indexAnim = useAnimatedValue(navigationState.index);
+
   /**
    * Animation for the background color ripple, used to determine it's scale and opacity.
    */
-  const { current: ripple } = React.useRef<Animated.Value>(
-    new Animated.Value(MIN_RIPPLE_SCALE)
-  );
-  /**
-   * key of the currently active route.
-   */
-  let { current: current } = React.useRef<string>(focusedKey);
+  const rippleAnim = useAnimatedValue(MIN_RIPPLE_SCALE);
+
   /**
    * Layout of the navigation bar. The width is used to determine the size and position of the ripple.
    */
-  const [layout, setlayout] = React.useState<{
-    height: number;
-    width: number;
-    measured: boolean;
-  }>({ height: 0, width: 0, measured: false });
+  const [layout, onLayout] = useLayout();
+
   /**
    * List of loaded tabs, tabs will be loaded when navigated to.
    */
   const [loaded, setLoaded] = React.useState<string[]>([focusedKey]);
 
+  if (!loaded.includes(focusedKey)) {
+    // Set the current tab to be loaded if it was not loaded before
+    setLoaded((loaded) => [...loaded, focusedKey]);
+  }
+
   /**
    * Track whether the keyboard is visible to show and hide the navigation bar.
    */
-  const [keyboard, setKeyboard] = React.useState<boolean>(false);
-
-  const prevNavigationState = React.useRef<NavigationState>();
-
-  if (
-    prevNavigationState.current?.index !== navigationState.index ||
-    prevNavigationState.current?.routes.length !== navigationState.routes.length
-  ) {
-    // Re-create animated values if routes have been added/removed
-    // Preserve previous animated values if they exist, so we don't break animations
-    tabs.current = navigationState.routes.map(
-      // focused === 1, unfocused === 0
-      (_: any, i: number) =>
-        tabs.current[i] ||
-        new Animated.Value(i === navigationState.index ? 1 : 0)
-    );
-
-    offsets.current = navigationState.routes.map(
-      // offscreen === 1, normal === 0
-      (_: any, i: number) =>
-        offsets.current[i] ||
-        new Animated.Value(i === navigationState.index ? 0 : 1)
-    );
-
-    const currentFocusedKey = navigationState.routes[navigationState.index].key;
-
-    if (current !== currentFocusedKey) {
-      // Store the current index in state so that we can later check if the index has changed
-      current = currentFocusedKey;
-      if (!loaded.includes(currentFocusedKey)) {
-        // Set the current tab to be loaded if it was not loaded before
-        setLoaded((loaded) => [...loaded, currentFocusedKey]);
-      }
-    }
-
-    prevNavigationState.current = navigationState;
-  }
+  const [keyboardVisible, setKeyboardVisible] = React.useState(false);
 
   const handleKeyboardShow = React.useCallback(() => {
-    setKeyboard(true);
-    Animated.timing(visible, {
+    setKeyboardVisible(true);
+    Animated.timing(visibleAnim, {
       toValue: 0,
       duration: 150 * scale,
       useNativeDriver: true,
     }).start();
-  }, [scale, visible]);
+  }, [scale, visibleAnim]);
 
   const handleKeyboardHide = React.useCallback(() => {
-    Animated.timing(visible, {
+    Animated.timing(visibleAnim, {
       toValue: 1,
       duration: 100 * scale,
       useNativeDriver: true,
     }).start(() => {
-      setKeyboard(false);
+      setKeyboardVisible(false);
     });
-  }, [scale, visible]);
+  }, [scale, visibleAnim]);
 
-  const isShifting = React.useCallback(
-    () =>
-      typeof shiftingProp === 'boolean'
-        ? shiftingProp
-        : navigationState.routes.length > 3,
-    [navigationState.routes.length, shiftingProp]
-  );
+  const animateToIndex = React.useCallback(
+    (index: number) => {
+      // Reset the ripple to avoid glitch if it's currently animating
+      rippleAnim.setValue(MIN_RIPPLE_SCALE);
 
-  const animateToCurrentIndex = React.useCallback(() => {
-    const shifting = isShifting();
-
-    // Reset the ripple to avoid glitch if it's currently animating
-    ripple.setValue(MIN_RIPPLE_SCALE);
-
-    Animated.parallel([
-      Animated.timing(ripple, {
-        toValue: 1,
-        duration: shifting ? 400 * scale : 0,
-        useNativeDriver: true,
-      }),
-      ...navigationState.routes.map((_, i) =>
-        Animated.timing(tabs.current[i], {
-          toValue: i === navigationState.index ? 1 : 0,
-          duration: shifting ? 150 * scale : 0,
+      Animated.parallel([
+        Animated.timing(rippleAnim, {
+          toValue: 1,
+          duration: shifting ? 400 * scale : 0,
           useNativeDriver: true,
-        })
-      ),
-    ]).start(({ finished }) => {
-      // Workaround a bug in native animations where this is reset after first animation
-      tabs.current.map((tab, i) =>
-        tab.setValue(i === navigationState.index ? 1 : 0)
-      );
+        }),
+        ...navigationState.routes.map((_, i) =>
+          Animated.timing(tabsAnims[i], {
+            toValue: i === index ? 1 : 0,
+            duration: shifting ? 150 * scale : 0,
+            useNativeDriver: true,
+          })
+        ),
+      ]).start(({ finished }) => {
+        // Workaround a bug in native animations where this is reset after first animation
+        tabsAnims.map((tab, i) => tab.setValue(i === index ? 1 : 0));
 
-      // Update the index to change bar's background color and then hide the ripple
-      index.setValue(navigationState.index);
-      ripple.setValue(MIN_RIPPLE_SCALE);
+        // Update the index to change bar's background color and then hide the ripple
+        indexAnim.setValue(index);
+        rippleAnim.setValue(MIN_RIPPLE_SCALE);
 
-      if (finished) {
-        // Position all inactive screens offscreen to save memory usage
-        // Only do it when animation has finished to avoid glitches mid-transition if switching fast
-        offsets.current.forEach((offset, i) => {
-          if (i === navigationState.index) {
-            offset.setValue(0);
-          } else {
-            offset.setValue(1);
-          }
-        });
-      }
-    });
-  }, [
-    index,
-    isShifting,
-    navigationState.index,
-    navigationState.routes,
-    ripple,
-    scale,
-  ]);
+        if (finished) {
+          // Position all inactive screens offscreen to save memory usage
+          // Only do it when animation has finished to avoid glitches mid-transition if switching fast
+          offsetsAnims.forEach((offset, i) => {
+            if (i === index) {
+              offset.setValue(0);
+            } else {
+              offset.setValue(1);
+            }
+          });
+        }
+      });
+    },
+    [
+      indexAnim,
+      shifting,
+      navigationState.routes,
+      offsetsAnims,
+      rippleAnim,
+      scale,
+      tabsAnims,
+    ]
+  );
 
   React.useEffect(() => {
     // Workaround for native animated bug in react-native@^0.57
     // Context: https://github.com/callstack/react-native-paper/pull/637
-    animateToCurrentIndex();
+    animateToIndex(navigationState.index);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
+  React.useEffect(() => {
     if (Platform.OS === 'ios') {
       Keyboard.addListener('keyboardWillShow', handleKeyboardShow);
       Keyboard.addListener('keyboardWillHide', handleKeyboardHide);
@@ -523,11 +487,13 @@ const BottomNavigation = ({
         Keyboard.removeListener('keyboardDidHide', handleKeyboardHide);
       }
     };
-  }, [animateToCurrentIndex, handleKeyboardHide, handleKeyboardShow]);
+  }, [handleKeyboardHide, handleKeyboardShow]);
 
-  React.useLayoutEffect(() => {
+  const prevNavigationState = React.useRef<NavigationState>();
+
+  React.useEffect(() => {
     // Reset offsets of previous and current tabs before animation
-    offsets.current.forEach((offset, i) => {
+    offsetsAnims.forEach((offset, i) => {
       if (
         i === navigationState.index ||
         i === prevNavigationState.current?.index
@@ -536,22 +502,8 @@ const BottomNavigation = ({
       }
     });
 
-    animateToCurrentIndex();
-  }, [navigationState.index, animateToCurrentIndex]);
-
-  const handleLayout = (e: LayoutChangeEvent) => {
-    const { height, width } = e.nativeEvent.layout;
-
-    if (height === layout.height && width === layout.width) {
-      return;
-    }
-
-    setlayout({
-      height,
-      width,
-      measured: true,
-    });
-  };
+    animateToIndex(navigationState.index);
+  }, [navigationState.index, animateToIndex, offsetsAnims]);
 
   const handleTabPress = (index: number) => {
     const event = {
@@ -573,18 +525,19 @@ const BottomNavigation = ({
     }
   };
 
-  const jumpTo = (key: string) => {
-    const index = navigationState.routes.findIndex(
-      (route) => route.key === key
-    );
+  const jumpTo = React.useCallback(
+    (key: string) => {
+      const index = navigationState.routes.findIndex(
+        (route) => route.key === key
+      );
 
-    onIndexChange(index);
-  };
+      onIndexChange(index);
+    },
+    [navigationState.routes, onIndexChange]
+  );
 
   const { routes } = navigationState;
   const { colors, dark: isDarkTheme, mode } = theme;
-
-  const shifting = isShifting();
 
   const { backgroundColor: customBackground, elevation = 4 }: ViewStyle =
     StyleSheet.flatten(barStyle) || {};
@@ -596,7 +549,7 @@ const BottomNavigation = ({
     : colors.primary;
 
   const backgroundColor = shifting
-    ? index.interpolate({
+    ? indexAnim.interpolate({
         inputRange: routes.map((_, i) => i),
         //@ts-ignore
         outputRange: routes.map(
@@ -636,15 +589,16 @@ const BottomNavigation = ({
             // Don't render a screen if we've never navigated to it
             return null;
           }
+
           const focused = navigationState.index === index;
 
           const opacity = sceneAnimationEnabled
-            ? tabs.current[index]
+            ? tabsAnims[index]
             : focused
             ? 1
             : 0;
 
-          const top = offsets.current[index].interpolate({
+          const top = offsetsAnims[index].interpolate({
             inputRange: [0, 1],
             outputRange: [0, FAR_FAR_AWAY],
           });
@@ -665,17 +619,7 @@ const BottomNavigation = ({
                 Platform.OS === 'ios' ? navigationState.index !== index : true
               }
             >
-              <Animated.View
-                style={[
-                  styles.content,
-                  { top },
-                  Platform.OS === 'web'
-                    ? {
-                        display: loaded.includes(route.key) ? 'flex' : 'none',
-                      }
-                    : null,
-                ]}
-              >
+              <Animated.View style={[styles.content, { top }]}>
                 {renderScene({ route, jumpTo })}
               </Animated.View>
             </Animated.View>
@@ -691,7 +635,7 @@ const BottomNavigation = ({
                   // When the keyboard is shown, slide down the navigation bar
                   transform: [
                     {
-                      translateY: visible.interpolate({
+                      translateY: visibleAnim.interpolate({
                         inputRange: [0, 1],
                         outputRange: [layout.height, 0],
                       }),
@@ -699,7 +643,7 @@ const BottomNavigation = ({
                   ],
                   // Absolutely position the navigation bar so that the content is below it
                   // This is needed to avoid gap at bottom when the navigation bar is hidden
-                  position: keyboard ? 'absolute' : null,
+                  position: keyboardVisible ? 'absolute' : null,
                 }
               : null,
             barStyle,
@@ -707,12 +651,12 @@ const BottomNavigation = ({
         }
         pointerEvents={
           layout.measured
-            ? keyboardHidesNavigationBar && keyboard
+            ? keyboardHidesNavigationBar && keyboardVisible
               ? 'none'
               : 'auto'
             : 'none'
         }
-        onLayout={handleLayout}
+        onLayout={onLayout}
       >
         <Animated.View style={[styles.barContent, { backgroundColor }]}>
           <View
@@ -741,13 +685,13 @@ const BottomNavigation = ({
                     transform: [
                       {
                         // Scale to twice the size  to ensure it covers the whole navigation bar
-                        scale: ripple.interpolate({
+                        scale: rippleAnim.interpolate({
                           inputRange: [0, 1],
                           outputRange: [0, 8],
                         }),
                       },
                     ],
-                    opacity: ripple.interpolate({
+                    opacity: rippleAnim.interpolate({
                       inputRange: [0, MIN_RIPPLE_SCALE, 0.3, 1],
                       outputRange: [0, 0, 1, 1],
                     }),
@@ -757,7 +701,7 @@ const BottomNavigation = ({
             ) : null}
             {routes.map((route, index) => {
               const focused = navigationState.index === index;
-              const active = tabs.current[index];
+              const active = tabsAnims[index];
 
               // Scale the label up
               const scale =
