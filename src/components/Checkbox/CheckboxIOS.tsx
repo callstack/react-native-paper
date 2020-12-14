@@ -114,4 +114,6 @@ const styles = StyleSheet.create({
 export default withTheme(CheckboxIOS);
 
 // @component-docs ignore-next-line
-export { CheckboxIOS };
+const CheckboxIOSWithTheme = withTheme(CheckboxIOS);
+// @component-docs ignore-next-line
+export { CheckboxIOSWithTheme as CheckboxIOS };

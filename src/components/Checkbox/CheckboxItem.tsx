@@ -8,7 +8,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import CheckBox from './Checkbox';
+import { Checkbox, CheckboxAndroid, CheckboxIOS } from './CheckboxElements';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
@@ -54,6 +54,11 @@ type Props = {
    * testID to be used on tests.
    */
   testID?: string;
+  /**
+   * Whether `<Checkbox.Android />` or `<Checkbox.IOS />` should be used.
+   * Left undefined `<Checkbox />` will be used.
+   */
+  mode?: 'android' | 'ios';
 };
 
 /**
@@ -83,24 +88,42 @@ const CheckboxItem = ({
   labelStyle,
   theme,
   testID,
+  mode,
   ...props
-}: Props) => (
-  <TouchableRipple onPress={onPress} testID={testID}>
-    <View style={[styles.container, style]} pointerEvents="none">
-      <Text style={[styles.label, { color: theme.colors.primary }, labelStyle]}>
-        {label}
-      </Text>
-      <CheckBox status={status} theme={theme} {...props}></CheckBox>
-    </View>
-  </TouchableRipple>
-);
+}: Props) => {
+  const checkboxProps = { ...props, status, theme };
+  let checkbox;
+
+  if (mode === 'android') {
+    checkbox = <CheckboxAndroid {...checkboxProps} />;
+  } else if (mode === 'ios') {
+    checkbox = <CheckboxIOS {...checkboxProps} />;
+  } else {
+    checkbox = <Checkbox {...checkboxProps} />;
+  }
+
+  return (
+    <TouchableRipple onPress={onPress} testID={testID}>
+      <View style={[styles.container, style]} pointerEvents="none">
+        <Text
+          style={[styles.label, { color: theme.colors.primary }, labelStyle]}
+        >
+          {label}
+        </Text>
+        {checkbox}
+      </View>
+    </TouchableRipple>
+  );
+};
 
 CheckboxItem.displayName = 'Checkbox.Item';
 
 export default withTheme(CheckboxItem);
 
 // @component-docs ignore-next-line
-export { CheckboxItem };
+const CheckboxItemWithTheme = withTheme(CheckboxItem);
+// @component-docs ignore-next-line
+export { CheckboxItemWithTheme as CheckboxItem };
 
 const styles = StyleSheet.create({
   container: {

@@ -30,6 +30,7 @@ type ContextState = {
   visible?: Animated.Value;
   textStyle?: StyleProp<TextStyle>;
   side: AdornmentSide;
+  paddingHorizontal?: number | string;
 };
 
 const AffixContext = React.createContext<ContextState>({
@@ -43,7 +44,15 @@ const AffixAdornment: React.FunctionComponent<
     affix: React.ReactNode;
     testID: string;
   } & ContextState
-> = ({ affix, side, textStyle, topPosition, onLayout, visible }) => {
+> = ({
+  affix,
+  side,
+  textStyle,
+  topPosition,
+  onLayout,
+  visible,
+  paddingHorizontal,
+}) => {
   return (
     <AffixContext.Provider
       value={{
@@ -52,6 +61,7 @@ const AffixAdornment: React.FunctionComponent<
         topPosition,
         onLayout,
         visible,
+        paddingHorizontal,
       }}
     >
       {affix}
@@ -60,17 +70,25 @@ const AffixAdornment: React.FunctionComponent<
 };
 
 const TextInputAffix = ({ text, textStyle: labelStyle, theme }: Props) => {
-  const { textStyle, onLayout, topPosition, side, visible } = React.useContext(
-    AffixContext
-  );
+  const {
+    textStyle,
+    onLayout,
+    topPosition,
+    side,
+    visible,
+    paddingHorizontal,
+  } = React.useContext(AffixContext);
   const textColor = color(theme.colors.text)
     .alpha(theme.dark ? 0.7 : 0.54)
     .rgb()
     .string();
 
+  const offset =
+    typeof paddingHorizontal === 'number' ? paddingHorizontal : AFFIX_OFFSET;
+
   const style = {
     top: topPosition,
-    [side]: AFFIX_OFFSET,
+    [side]: offset,
   };
 
   return (

@@ -34,9 +34,9 @@ type Props = $RemoveChildren<typeof View> & {
  *
  * const MyComponent = () => (
  *   <View>
- *     <Text>Apple</Text>
+ *     <Text>Lemon</Text>
  *     <Divider />
- *     <Text>Orange</Text>
+ *     <Text>Mango</Text>
  *     <Divider />
  *   </View>
  * );

@@ -2,8 +2,6 @@ import color from 'color';
 import * as React from 'react';
 import { Animated, View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 import ActivityIndicator from '../ActivityIndicator';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import FABGroup, { FABGroup as _FABGroup } from './FABGroup';
 import Surface from '../Surface';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon from '../Icon';
@@ -14,6 +12,7 @@ import { withTheme } from '../../core/theming';
 import type { $RemoveChildren } from '../../types';
 import type { IconSource } from './../Icon';
 import type { AccessibilityState } from 'react-native';
+import { FABGroup } from './FABElements';
 
 type Props = $RemoveChildren<typeof Surface> & {
   /**
@@ -229,6 +228,7 @@ const FAB = ({
           ) : null}
           {label ? (
             <Text
+              selectable={false}
               style={[
                 styles.label,
                 uppercase && styles.uppercaseLabel,
@@ -284,3 +284,8 @@ const styles = StyleSheet.create({
 });
 
 export default withTheme(FAB);
+
+// @component-docs ignore-next-line
+const FABWithTheme = withTheme(FAB);
+// @component-docs ignore-next-line
+export { FABWithTheme as FAB };

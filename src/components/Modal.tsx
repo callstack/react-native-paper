@@ -7,8 +7,12 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   ViewStyle,
+  View,
 } from 'react-native';
-import SafeAreaView from 'react-native-safe-area-view';
+import {
+  getStatusBarHeight,
+  getBottomSpace,
+} from 'react-native-iphone-x-helper';
 import Surface from './Surface';
 import { withTheme } from '../core/theming';
 
@@ -49,6 +53,8 @@ type State = {
 };
 
 const DEFAULT_DURATION = 220;
+const TOP_INSET = getStatusBarHeight(true);
+const BOTTOM_INSET = getBottomSpace();
 
 /**
  * The Modal component is a simple way to present content above an enclosing view.
@@ -89,7 +95,6 @@ const DEFAULT_DURATION = 220;
  * export default MyComponent;
  * ```
  */
-
 class Modal extends React.Component<Props, State> {
   static defaultProps = {
     dismissable: true,
@@ -212,7 +217,13 @@ class Modal extends React.Component<Props, State> {
             ]}
           />
         </TouchableWithoutFeedback>
-        <SafeAreaView style={styles.wrapper} pointerEvents="box-none">
+        <View
+          style={[
+            styles.wrapper,
+            { marginTop: TOP_INSET, marginBottom: BOTTOM_INSET },
+          ]}
+          pointerEvents="box-none"
+        >
           <Surface
             style={
               [{ opacity }, styles.content, contentContainerStyle] as StyleProp<
@@ -222,7 +233,7 @@ class Modal extends React.Component<Props, State> {
           >
             {children}
           </Surface>
-        </SafeAreaView>
+        </View>
       </Animated.View>
     );
   }

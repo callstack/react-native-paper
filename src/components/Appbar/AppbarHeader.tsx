@@ -7,7 +7,8 @@ import {
   ViewStyle,
 } from 'react-native';
 import overlay from '../../styles/overlay';
-import Appbar, { DEFAULT_APPBAR_HEIGHT } from './Appbar';
+import { Appbar } from './AppbarElements';
+import { DEFAULT_APPBAR_HEIGHT } from './Appbar';
 import shadow from '../../styles/shadow';
 import { withTheme } from '../../core/theming';
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
@@ -134,4 +135,6 @@ const styles = StyleSheet.create({
 export default withTheme(AppbarHeader);
 
 // @component-docs ignore-next-line
-export { AppbarHeader };
+const AppbarHeaderWithTheme = withTheme(AppbarHeader);
+// @component-docs ignore-next-line
+export { AppbarHeaderWithTheme as AppbarHeader };

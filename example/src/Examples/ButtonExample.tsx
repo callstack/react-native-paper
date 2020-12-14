@@ -30,6 +30,14 @@ const ButtonExample = () => {
           <Button loading onPress={() => {}} style={styles.button}>
             Loading
           </Button>
+          <Button
+            icon="camera"
+            onPress={() => {}}
+            style={styles.button}
+            contentStyle={{ flexDirection: 'row-reverse' }}
+          >
+            Icon right
+          </Button>
         </View>
       </List.Section>
       <List.Section title="Outlined button">

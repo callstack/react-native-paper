@@ -231,6 +231,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
             >
               <Text
                 numberOfLines={1}
+                selectable={false}
                 style={
                   Array [
                     Object {
@@ -411,6 +412,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
             >
               <Text
                 numberOfLines={1}
+                selectable={false}
                 style={
                   Array [
                     Object {
@@ -506,6 +508,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
             >
               <Text
                 numberOfLines={1}
+                selectable={false}
                 style={
                   Array [
                     Object {

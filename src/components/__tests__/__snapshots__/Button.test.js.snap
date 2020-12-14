@@ -55,6 +55,7 @@ exports[`renders button with color 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -151,6 +152,7 @@ exports[`renders button with custom testID 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -290,6 +292,7 @@ exports[`renders button with icon 1`] = `
       </View>
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -324,6 +327,148 @@ exports[`renders button with icon 1`] = `
         }
       >
         Icon Button
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders button with icon in reverse order 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "transparent",
+      "borderColor": "transparent",
+      "borderRadius": 4,
+      "borderStyle": "solid",
+      "borderWidth": 0,
+      "elevation": 0,
+      "minWidth": 64,
+    }
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
+    accessible={true}
+    focusable={false}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 4,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+          },
+          Object {
+            "flexDirection": "row-reverse",
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "marginLeft": -4,
+            "marginRight": 12,
+          }
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          allowFontScaling={false}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          style={
+            Array [
+              Object {
+                "color": "#6200ee",
+                "fontSize": 16,
+              },
+              Array [
+                Object {
+                  "lineHeight": 16,
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+      <Text
+        numberOfLines={1}
+        selectable={false}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "System",
+              "fontWeight": "400",
+              "textAlign": "left",
+            },
+            Array [
+              Object {
+                "letterSpacing": 1,
+                "marginHorizontal": 16,
+                "marginVertical": 9,
+                "textAlign": "center",
+              },
+              undefined,
+              Object {
+                "textTransform": "uppercase",
+              },
+              Object {
+                "color": "#6200ee",
+                "fontFamily": "System",
+                "fontWeight": "500",
+              },
+              Object {
+                "fontFamily": "System",
+                "fontWeight": "500",
+              },
+              undefined,
+            ],
+          ]
+        }
+      >
+        Right Icon
       </Text>
     </View>
   </View>
@@ -392,6 +537,7 @@ exports[`renders contained contained with mode 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -487,6 +633,7 @@ exports[`renders disabled button 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -767,6 +914,7 @@ exports[`renders loading button 1`] = `
       </View>
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -862,6 +1010,7 @@ exports[`renders outlined button with mode 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -957,6 +1106,7 @@ exports[`renders text button by default 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -1052,6 +1202,7 @@ exports[`renders text button with mode 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {

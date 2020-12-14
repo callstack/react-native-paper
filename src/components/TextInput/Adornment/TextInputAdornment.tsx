@@ -2,12 +2,11 @@ import React from 'react';
 import TextInputIcon, { IconAdornment } from './TextInputIcon';
 import TextInputAffix, { AffixAdornment } from './TextInputAffix';
 import { ADORNMENT_OFFSET, OUTLINED_INPUT_OFFSET } from '../constants';
-import {
+import type {
   LayoutChangeEvent,
   TextStyle,
   StyleProp,
   Animated,
-  Platform,
 } from 'react-native';
 import type {
   AdornmentConfig,
@@ -50,6 +49,7 @@ export function getAdornmentStyleAdjustmentForNativeInput({
   adornmentConfig,
   leftAffixWidth,
   rightAffixWidth,
+  paddingHorizontal,
   inputOffset = 0,
   mode,
 }: {
@@ -58,22 +58,23 @@ export function getAdornmentStyleAdjustmentForNativeInput({
   leftAffixWidth: number;
   rightAffixWidth: number;
   mode?: 'outlined' | 'flat';
+  paddingHorizontal?: number | string;
 }): AdornmentStyleAdjustmentForNativeInput | {} {
   if (adornmentConfig.length) {
     const adornmentStyleAdjustmentForNativeInput = adornmentConfig.map(
       ({ type, side }: AdornmentConfig) => {
-        const isWeb = Platform.OS !== 'ios' && Platform.OS !== 'android';
         const isLeftSide = side === AdornmentSide.Left;
         const inputModeAdornemntOffset =
           mode === InputMode.Outlined
             ? ADORNMENT_OFFSET + OUTLINED_INPUT_OFFSET
             : ADORNMENT_OFFSET;
-        const offset =
-          (isLeftSide ? leftAffixWidth : rightAffixWidth) +
-          inputModeAdornemntOffset;
         const paddingKey = `padding${captalize(side)}`;
-
-        if (isWeb) return { [paddingKey]: offset };
+        const affixWidth = isLeftSide ? leftAffixWidth : rightAffixWidth;
+        const padding =
+          typeof paddingHorizontal === 'number'
+            ? paddingHorizontal
+            : inputModeAdornemntOffset;
+        const offset = affixWidth + padding;
 
         const isAffix = type === AdornmentType.Affix;
         const marginKey = `margin${captalize(side)}`;
@@ -121,6 +122,7 @@ export interface TextInputAdornmentProps {
   textStyle?: StyleProp<TextStyle>;
   visible?: Animated.Value;
   isTextInputFocused: boolean;
+  paddingHorizontal?: number | string;
 }
 
 const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
@@ -133,6 +135,7 @@ const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
   topPosition,
   isTextInputFocused,
   forceFocus,
+  paddingHorizontal,
 }) => {
   if (adornmentConfig.length) {
     return (
@@ -150,6 +153,7 @@ const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
             side: side,
             testID: `${side}-${type}-adornment`,
             isTextInputFocused,
+            paddingHorizontal,
           };
           if (type === AdornmentType.Icon) {
             return (

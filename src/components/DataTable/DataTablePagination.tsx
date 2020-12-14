@@ -128,7 +128,7 @@ const DataTablePagination = ({
           />
         )}
         color={theme.colors.text}
-        disabled={page === numberOfPages - 1}
+        disabled={numberOfPages === 0 || page === numberOfPages - 1}
         onPress={() => onPageChange(page + 1)}
       />
     </View>

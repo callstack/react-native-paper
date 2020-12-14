@@ -1,12 +1,12 @@
 {
   "name": "react-native-paper",
-  "version": "4.4.0",
+  "version": "4.5.0",
   "description": "Material design for React Native",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
   "react-native": "src/index.tsx",
   "source": "src/index.tsx",
-  "types": "lib/typescript/src/index.d.ts",
+  "types": "lib/typescript/index.d.ts",
   "files": [
     "src",
     "lib",
@@ -48,7 +48,7 @@
   "dependencies": {
     "@callstack/react-theme-provider": "^3.0.5",
     "color": "^3.1.2",
-    "react-native-safe-area-view": "^0.14.9"
+    "react-native-iphone-x-helper": "^1.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",
@@ -78,6 +78,7 @@
     "eslint-config-callstack-io": "^1.1.1",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react-native": "^3.5.0",
+    "expo-constants": "^9.3.5",
     "flow-bin": "0.92.0",
     "glob": "^7.1.3",
     "husky": "^1.3.1",
@@ -140,7 +141,12 @@
     "targets": [
       "commonjs",
       "module",
-      "typescript"
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
     ],
     "files": [
       "src/"
