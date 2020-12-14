@@ -6,7 +6,7 @@
   "module": "lib/module/index.js",
   "react-native": "src/index.tsx",
   "source": "src/index.tsx",
-  "types": "lib/typescript/src/index.d.ts",
+  "types": "lib/typescript/index.d.ts",
   "files": [
     "src",
     "lib",
@@ -141,7 +141,12 @@
     "targets": [
       "commonjs",
       "module",
-      "typescript"
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
     ],
     "files": [
       "src/"
