@@ -82,7 +82,7 @@ const data: Data[] = [
       'https://play.google.com/store/apps/details?id=com.lyra.lyracollect',
     ios: 'https://apps.apple.com/fr/app/lyra-collect/id1469527737',
   },
-    {
+  {
     color: '#673AB7',
     name: 'Rozy - Stay connected',
     image: 'showcase/rozy.png',
