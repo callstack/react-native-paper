@@ -657,7 +657,7 @@ exports[`renders data table title with press handler 1`] = `
         ]
       }
     >
-      
+      
     </Text>
   </View>
   <Text
@@ -760,7 +760,7 @@ exports[`renders data table title with sort icon 1`] = `
         ]
       }
     >
-      
+      
     </Text>
   </View>
   <Text
