@@ -282,10 +282,13 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             </View>
             <View
               style={
-                Object {
-                  "height": 16,
-                  "paddingBottom": 2,
-                }
+                Array [
+                  Object {
+                    "height": 16,
+                    "paddingBottom": 2,
+                  },
+                  undefined,
+                ]
               }
             />
           </View>
@@ -470,10 +473,13 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             </View>
             <View
               style={
-                Object {
-                  "height": 16,
-                  "paddingBottom": 2,
-                }
+                Array [
+                  Object {
+                    "height": 16,
+                    "paddingBottom": 2,
+                  },
+                  undefined,
+                ]
               }
             />
           </View>
@@ -658,10 +664,13 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             </View>
             <View
               style={
-                Object {
-                  "height": 16,
-                  "paddingBottom": 2,
-                }
+                Array [
+                  Object {
+                    "height": 16,
+                    "paddingBottom": 2,
+                  },
+                  undefined,
+                ]
               }
             />
           </View>
@@ -974,10 +983,13 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             </View>
             <View
               style={
-                Object {
-                  "height": 16,
-                  "paddingBottom": 2,
-                }
+                Array [
+                  Object {
+                    "height": 16,
+                    "paddingBottom": 2,
+                  },
+                  undefined,
+                ]
               }
             />
           </View>
@@ -1162,10 +1174,13 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             </View>
             <View
               style={
-                Object {
-                  "height": 16,
-                  "paddingBottom": 2,
-                }
+                Array [
+                  Object {
+                    "height": 16,
+                    "paddingBottom": 2,
+                  },
+                  undefined,
+                ]
               }
             />
           </View>
@@ -1350,10 +1365,13 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             </View>
             <View
               style={
-                Object {
-                  "height": 16,
-                  "paddingBottom": 2,
-                }
+                Array [
+                  Object {
+                    "height": 16,
+                    "paddingBottom": 2,
+                  },
+                  undefined,
+                ]
               }
             />
           </View>
