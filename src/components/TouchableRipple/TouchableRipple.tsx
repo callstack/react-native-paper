@@ -17,7 +17,7 @@ type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
   borderless?: boolean;
   /**
    * Type of background drawabale to display the feedback (Android).
-   * https://facebook.github.io/react-native/docs/touchablenativefeedback.html#background
+   * https://reactnative.dev/docs/touchablenativefeedback#background
    */
   background?: Object;
   /**
