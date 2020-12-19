@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useLayoutEffect} from 'react';
 import { View, Platform, StyleSheet } from 'react-native';
 import type { StackNavigationProp } from '@react-navigation/stack';
 import {
@@ -26,26 +26,33 @@ const AppbarExample = ({ navigation }: Props) => {
   const [showCustomColor, setShowCustomColor] = React.useState(false);
   const [showExactTheme, setShowExactTheme] = React.useState(false);
 
-  navigation.setOptions({
-    header: () => (
-      <Appbar.Header
-        style={showCustomColor ? { backgroundColor: '#ffff00' } : null}
-        theme={{
-          mode: showExactTheme ? 'exact' : 'adaptive',
-        }}
-      >
-        {showLeftIcon && (
-          <Appbar.BackAction onPress={() => navigation.goBack()} />
-        )}
-        <Appbar.Content
-          title="Title"
-          subtitle={showSubtitle ? 'Subtitle' : null}
-        />
-        {showSearchIcon && <Appbar.Action icon="magnify" onPress={() => {}} />}
-        {showMoreIcon && <Appbar.Action icon={MORE_ICON} onPress={() => {}} />}
-      </Appbar.Header>
-    ),
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      header: () => (
+        <Appbar.Header
+          style={showCustomColor ? { backgroundColor: '#ffff00' } : null}
+          theme={{
+            mode: showExactTheme ? 'exact' : 'adaptive',
+          }}
+        >
+          {showLeftIcon && (
+            <Appbar.BackAction onPress={() => navigation.goBack()} />
+          )}
+          <Appbar.Content
+            title='Title'
+            subtitle={showSubtitle ? 'Subtitle' : null}
+          />
+          {showSearchIcon && (
+            <Appbar.Action icon='magnify' onPress={() => {}} />
+          )}
+          {showMoreIcon && (
+            <Appbar.Action icon={MORE_ICON} onPress={() => {}} />
+          )}
+        </Appbar.Header>
+      ),
+    });
   });
+
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -71,18 +78,21 @@ const AppbarExample = ({ navigation }: Props) => {
       </View>
       <View style={styles.row}>
         <Paragraph>Exact Dark Theme</Paragraph>
-        <Switch value={showExactTheme} onValueChange={setShowExactTheme} />
+        <Switch
+          value={showExactTheme}
+          onValueChange={(showExactTheme) => setShowExactTheme(showExactTheme)}
+        />
       </View>
       <Appbar
         style={[styles.bottom]}
         theme={{ mode: showExactTheme ? 'exact' : 'adaptive' }}
       >
-        <Appbar.Action icon="archive" onPress={() => {}} />
-        <Appbar.Action icon="email" onPress={() => {}} />
-        <Appbar.Action icon="label" onPress={() => {}} />
-        <Appbar.Action icon="delete" onPress={() => {}} />
+        <Appbar.Action icon='archive' onPress={() => {}} />
+        <Appbar.Action icon='email' onPress={() => {}} />
+        <Appbar.Action icon='label' onPress={() => {}} />
+        <Appbar.Action icon='delete' onPress={() => {}} />
       </Appbar>
-      <FAB icon="reply" onPress={() => {}} style={styles.fab} />
+      <FAB icon='reply' onPress={() => {}} style={styles.fab} />
     </View>
   );
 };
@@ -95,7 +105,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.white,
-    paddingVertical: 8,
+    //paddingVertical: 8,
   },
   row: {
     flexDirection: 'row',
@@ -108,11 +118,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    bottom: 0,
+    bottom: 24,
   },
   fab: {
     position: 'absolute',
     right: 16,
-    bottom: 28,
+    bottom: 98,
   },
 });

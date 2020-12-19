@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { I18nManager, Platform } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import { Updates } from 'expo';
+import * as Updates from 'expo-updates';
 import { useKeepAwake } from 'expo-keep-awake';
 import { InitialState, NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -160,7 +160,7 @@ export default function PaperExample() {
 
       if (I18nManager.isRTL !== rtl) {
         I18nManager.forceRTL(rtl);
-        Updates.reloadFromCache();
+        Updates.reloadAsync();
       }
     };
 

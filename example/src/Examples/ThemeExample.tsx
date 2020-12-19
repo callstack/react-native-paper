@@ -4,10 +4,10 @@ import { useTheme, Paragraph } from 'react-native-paper';
 import { Provider as PaperProvider } from 'react-native-paper';
 
 const Content = () => {
-  const theme = useTheme();
+  const { colors } = useTheme();
   return (
     <View
-      style={[styles.container, { backgroundColor: theme.colors.background }]}
+      style={[styles.container, { backgroundColor: colors.background }]}
     >
       <Paragraph style={styles.paragraph}>
         React Native Paper automatically adapts theme based on system
@@ -22,9 +22,7 @@ const Content = () => {
 
 const ThemeExample = () => {
   return (
-    <PaperProvider>
-      <Content />
-    </PaperProvider>
+    <Content />
   );
 };
 ThemeExample.title = 'Theme';

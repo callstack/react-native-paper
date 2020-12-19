@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useLayoutEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -51,9 +51,10 @@ const MenuExample = ({ navigation }: Props) => {
   const {
     colors: { background },
   } = useTheme();
-
-  navigation.setOptions({
-    headerShown: false,
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerShown: false,
+    });
   });
 
   return (
