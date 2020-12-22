@@ -9,7 +9,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import color from 'color';
-import { FAB } from './FABElements';
+import FAB from './FAB';
 import Text from '../Typography/Text';
 import Card from '../Card/Card';
 import { withTheme } from '../../core/theming';
