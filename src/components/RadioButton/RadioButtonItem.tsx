@@ -10,7 +10,7 @@ import { withTheme } from '../../core/theming';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress } from './utils';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { RadioButton } from './RadioButtonElements';
+import RadioButton from './RadioButtonComponent';
 import Text from '../Typography/Text';
 import RadioButtonAndroid from './RadioButtonAndroid';
 import RadioButtonIOS from './RadioButtonIOS';

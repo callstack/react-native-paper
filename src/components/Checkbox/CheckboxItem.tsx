@@ -8,7 +8,9 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { Checkbox, CheckboxAndroid, CheckboxIOS } from './CheckboxElements';
+import CheckboxIOS from './CheckboxIOS';
+import CheckboxAndroid from './CheckboxAndroid';
+import Checkbox from './CheckboxComponent';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
