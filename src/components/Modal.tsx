@@ -18,6 +18,10 @@ import { withTheme } from '../core/theming';
 
 type Props = {
   /**
+   * Determine whether the insets are applied.
+   */
+  disableSafeAreaInsets?: boolean;
+  /**
    * Determines whether clicking outside the modal dismiss it.
    */
   dismissable?: boolean;
@@ -98,6 +102,7 @@ const BOTTOM_INSET = getBottomSpace();
 class Modal extends React.Component<Props, State> {
   static defaultProps = {
     dismissable: true,
+    disableSafeAreaInsets: false,
     visible: false,
     overlayAccessibilityLabel: 'Close modal',
   };
@@ -191,6 +196,7 @@ class Modal extends React.Component<Props, State> {
     const {
       children,
       dismissable,
+      disableSafeAreaInsets,
       theme,
       contentContainerStyle,
       overlayAccessibilityLabel,
@@ -220,7 +226,10 @@ class Modal extends React.Component<Props, State> {
         <View
           style={[
             styles.wrapper,
-            { marginTop: TOP_INSET, marginBottom: BOTTOM_INSET },
+            !disableSafeAreaInsets && {
+              marginTop: TOP_INSET,
+              marginBottom: BOTTOM_INSET,
+            },
           ]}
           pointerEvents="box-none"
         >
