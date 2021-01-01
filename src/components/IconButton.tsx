@@ -90,7 +90,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
 const IconButton = ({
   icon,
   color: customColor,
-  size = 24,
+  size = 26,
   accessibilityLabel,
   disabled,
   onPress,
