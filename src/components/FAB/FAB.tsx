@@ -1,4 +1,4 @@
-import { FAB as FABComponent } from './FABComponent';
+import FABComponent from './FABComponent';
 import FABGroup from './FABGroup';
 
 const FAB = Object.assign(FABComponent, {

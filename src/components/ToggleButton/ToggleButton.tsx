@@ -1,4 +1,4 @@
-import { ToggleButton as ToggleButtonComponent } from './ToggleButtonComponent';
+import ToggleButtonComponent from './ToggleButtonComponent';
 import ToggleButtonGroup from './ToggleButtonGroup';
 import ToggleButtonRow from './ToggleButtonRow';
 

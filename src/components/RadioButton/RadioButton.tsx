@@ -1,4 +1,4 @@
-import { RadioButton as RadioButtonComponent } from './RadioButtonComponent';
+import RadioButtonComponent from './RadioButtonComponent';
 import RadioButtonGroup from './RadioButtonGroup';
 import RadioButtonAndroid from './RadioButtonAndroid';
 import RadioButtonIOS from './RadioButtonIOS';

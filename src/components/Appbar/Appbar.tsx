@@ -1,4 +1,4 @@
-import { Appbar as AppbarComponent } from './AppbarComponent';
+import AppbarComponent from './AppbarComponent';
 import AppbarContent from './AppbarContent';
 import AppbarAction from './AppbarAction';
 import AppbarBackAction from './AppbarBackAction';

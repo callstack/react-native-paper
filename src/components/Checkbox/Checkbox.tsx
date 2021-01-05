@@ -1,4 +1,4 @@
-import { Checkbox as CheckboxComponent } from './CheckboxComponent';
+import CheckboxComponent from './CheckboxComponent';
 import CheckboxItem from './CheckboxItem';
 import CheckboxAndroid from './CheckboxAndroid';
 import CheckboxIOS from './CheckboxIOS';
