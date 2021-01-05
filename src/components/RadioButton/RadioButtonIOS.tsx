@@ -33,6 +33,10 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    * @optional
    */
   theme: ReactNativePaper.Theme;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 /**
@@ -57,6 +61,7 @@ const RadioButtonIOS = ({
   theme,
   status,
   value,
+  testID,
   ...rest
 }: Props) => {
   const checkedColor = disabled
@@ -101,10 +106,11 @@ const RadioButtonIOS = ({
             accessibilityComponentType={
               checked ? 'radiobutton_checked' : 'radiobutton_unchecked'
             }
-            accessibilityRole="button"
-            accessibilityState={{ disabled }}
+            accessibilityRole="radio"
+            accessibilityState={{ disabled, checked }}
             accessibilityLiveRegion="polite"
             style={styles.container}
+            testID={testID}
           >
             <View style={{ opacity: checked ? 1 : 0 }}>
               <MaterialCommunityIcon
@@ -134,4 +140,6 @@ const styles = StyleSheet.create({
 export default withTheme(RadioButtonIOS);
 
 // @component-docs ignore-next-line
-export { RadioButtonIOS };
+const RadioButtonIOSWithTheme = withTheme(RadioButtonIOS);
+// @component-docs ignore-next-line
+export { RadioButtonIOSWithTheme as RadioButtonIOS };

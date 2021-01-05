@@ -46,24 +46,21 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
  *
  * export default MyComponent;
  * ```
+ *
+ * If you want to support multiline text, please use View instead, as multiline text doesn't comply with
+ * MD Guidelines (https://github.com/callstack/react-native-paper/issues/2381).
  */
 
-class DataTableCell extends React.Component<Props> {
-  static displayName = 'DataTable.Cell';
+const DataTableCell = ({ children, style, numeric, ...rest }: Props) => (
+  <TouchableRipple
+    {...rest}
+    style={[styles.container, numeric && styles.right, style]}
+  >
+    <Text numberOfLines={1}>{children}</Text>
+  </TouchableRipple>
+);
 
-  render() {
-    const { children, style, numeric, ...rest } = this.props;
-
-    return (
-      <TouchableRipple
-        {...rest}
-        style={[styles.container, numeric && styles.right, style]}
-      >
-        <Text numberOfLines={1}>{children}</Text>
-      </TouchableRipple>
-    );
-  }
-}
+DataTableCell.displayName = 'DataTable.Cell';
 
 const styles = StyleSheet.create({
   container: {

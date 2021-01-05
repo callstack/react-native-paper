@@ -92,28 +92,25 @@ const HelperText = ({
 
   let { current: textHeight } = React.useRef<number>(0);
 
+  const { scale } = theme.animation;
+
   React.useEffect(() => {
-    if (visible) showText();
-    else hideText();
-  }, [visible]);
-
-  const showText = () => {
-    const { scale } = theme.animation;
-    Animated.timing(shown, {
-      toValue: 1,
-      duration: 150 * scale,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const hideText = () => {
-    const { scale } = theme.animation;
-    Animated.timing(shown, {
-      toValue: 0,
-      duration: 180 * scale,
-      useNativeDriver: true,
-    }).start();
-  };
+    if (visible) {
+      // show text
+      Animated.timing(shown, {
+        toValue: 1,
+        duration: 150 * scale,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      // hide text
+      Animated.timing(shown, {
+        toValue: 0,
+        duration: 180 * scale,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [visible, scale, shown]);
 
   const handleTextLayout = (e: LayoutChangeEvent) => {
     //@ts-ignore Animated.Text typings are improved but something is still broken. It thinks onLayout is not callable.

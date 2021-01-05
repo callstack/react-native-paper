@@ -55,20 +55,20 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * export default MyComponent;
  * ```
  */
-class ListSection extends React.Component<Props> {
-  static displayName = 'List.Section';
+const ListSection = ({
+  children,
+  title,
+  titleStyle,
+  style,
+  ...rest
+}: Props) => (
+  <View {...rest} style={[styles.container, style]}>
+    {title && <ListSubheader style={titleStyle}>{title}</ListSubheader>}
+    {children}
+  </View>
+);
 
-  render() {
-    const { children, title, titleStyle, style, ...rest } = this.props;
-
-    return (
-      <View {...rest} style={[styles.container, style]}>
-        {title && <ListSubheader style={titleStyle}>{title}</ListSubheader>}
-        {children}
-      </View>
-    );
-  }
-}
+ListSection.displayName = 'List.Section';
 
 const styles = StyleSheet.create({
   container: {

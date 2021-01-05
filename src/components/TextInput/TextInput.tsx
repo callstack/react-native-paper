@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import TextInputOutlined from './TextInputOutlined';
 import TextInputFlat from './TextInputFlat';
-import TextInputIcon from './Adornment/Icon';
-import TextInputAffix from './Adornment/Affix';
+import TextInputIcon from './Adornment/TextInputIcon';
+import TextInputAffix from './Adornment/TextInputAffix';
 import { withTheme } from '../../core/theming';
 import type { RenderProps, State } from './types';
 import type { $Omit } from '../../types';
@@ -163,14 +163,14 @@ export type TextInputProps = React.ComponentPropsWithRef<
  * export default MyComponent;
  * ```
  *
- * @extends TextInput props https://facebook.github.io/react-native/docs/textinput.html#props
+ * @extends TextInput props https://reactnative.dev/docs/textinput#props
  */
 
 class TextInput extends React.Component<TextInputProps, State> {
-  // @component ./Adornment/Icon.tsx
+  // @component ./Adornment/TextInputIcon.tsx
   static Icon = TextInputIcon;
 
-  // @component ./Adornment/Affix.tsx
+  // @component ./Adornment/TextInputAffix.tsx
   static Affix = TextInputAffix;
 
   static defaultProps: Partial<TextInputProps> = {
@@ -303,7 +303,7 @@ class TextInput extends React.Component<TextInputProps, State> {
         ios: false,
         default: true,
       }),
-    }).start(this.hidePlaceholder);
+    }).start();
   };
 
   private hideError = () => {
@@ -376,7 +376,7 @@ class TextInput extends React.Component<TextInputProps, State> {
   };
 
   private handleBlur = (args: Object) => {
-    if (this.props.disabled || !this.props.editable) {
+    if (!this.props.editable) {
       return;
     }
 

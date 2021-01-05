@@ -2,14 +2,12 @@ import * as React from 'react';
 import { View, ViewStyle, Platform, StyleSheet, StyleProp } from 'react-native';
 import color from 'color';
 
-import AppbarContent, {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  AppbarContent as _AppbarContent,
-} from './AppbarContent';
-import AppbarAction from './AppbarAction';
-import AppbarBackAction from './AppbarBackAction';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import AppbarHeader, { AppbarHeader as _AppbarHeader } from './AppbarHeader';
+import {
+  AppbarContent,
+  AppbarAction,
+  AppbarBackAction,
+  AppbarHeader,
+} from './AppbarElements';
 import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import { black, white } from '../../styles/colors';
@@ -78,113 +76,109 @@ export const DEFAULT_APPBAR_HEIGHT = 56;
  * });
  * ```
  */
-class Appbar extends React.Component<Props> {
-  // @component ./AppbarContent.tsx
-  static Content = AppbarContent;
-  // @component ./AppbarAction.tsx
-  static Action = AppbarAction;
-  // @component ./AppbarBackAction.tsx
-  static BackAction = AppbarBackAction;
-  // @component ./AppbarHeader.tsx
-  static Header = AppbarHeader;
+const Appbar = ({ children, dark, style, theme, ...rest }: Props) => {
+  const { colors, dark: isDarkTheme, mode } = theme;
+  const {
+    backgroundColor: customBackground,
+    elevation = 4,
+    ...restStyle
+  }: ViewStyle = StyleSheet.flatten(style) || {};
 
-  render() {
-    const { children, dark, style, theme, ...rest } = this.props;
+  let isDark: boolean;
 
-    const { colors, dark: isDarkTheme, mode } = theme;
-    const {
-      backgroundColor: customBackground,
-      elevation = 4,
-      ...restStyle
-    }: ViewStyle = StyleSheet.flatten(style) || {};
-
-    let isDark: boolean;
-
-    const backgroundColor = customBackground
-      ? customBackground
-      : isDarkTheme && mode === 'adaptive'
-      ? overlay(elevation, colors.surface)
-      : colors.primary;
-    if (typeof dark === 'boolean') {
-      isDark = dark;
-    } else {
-      isDark =
-        backgroundColor === 'transparent'
-          ? false
-          : !color(backgroundColor).isLight();
-    }
-
-    let shouldCenterContent = false;
-    let shouldAddLeftSpacing = false;
-    let shouldAddRightSpacing = false;
-    if (Platform.OS === 'ios') {
-      let hasAppbarContent = false;
-      let leftItemsCount = 0;
-      let rightItemsCount = 0;
-
-      React.Children.forEach(children, (child) => {
-        if (React.isValidElement(child)) {
-          if (child.type === AppbarContent) {
-            hasAppbarContent = true;
-          } else if (hasAppbarContent) {
-            rightItemsCount++;
-          } else {
-            leftItemsCount++;
-          }
-        }
-      });
-
-      shouldCenterContent =
-        hasAppbarContent && leftItemsCount < 2 && rightItemsCount < 2;
-      shouldAddLeftSpacing = shouldCenterContent && leftItemsCount === 0;
-      shouldAddRightSpacing = shouldCenterContent && rightItemsCount === 0;
-    }
-    return (
-      <Surface
-        //@ts-ignore
-        style={[{ backgroundColor }, styles.appbar, { elevation }, restStyle]}
-        {...rest}
-      >
-        {shouldAddLeftSpacing ? <View style={styles.spacing} /> : null}
-        {React.Children.toArray(children)
-          .filter((child) => child != null && typeof child !== 'boolean')
-          .map((child, i) => {
-            if (
-              !React.isValidElement(child) ||
-              ![
-                AppbarContent,
-                AppbarAction,
-                AppbarBackAction,
-                // @ts-ignore
-              ].includes(child.type)
-            ) {
-              return child;
-            }
-
-            const props: { color?: string; style?: StyleProp<ViewStyle> } = {
-              color:
-                typeof child.props.color !== 'undefined'
-                  ? child.props.color
-                  : isDark
-                  ? white
-                  : black,
-            };
-
-            if (child.type === AppbarContent) {
-              props.style = [
-                // Since content is not first item, add extra left margin
-                i !== 0 && { marginLeft: 8 },
-                shouldCenterContent && { alignItems: 'center' },
-                child.props.style,
-              ];
-            }
-            return React.cloneElement(child, props);
-          })}
-        {shouldAddRightSpacing ? <View style={styles.spacing} /> : null}
-      </Surface>
-    );
+  const backgroundColor = customBackground
+    ? customBackground
+    : isDarkTheme && mode === 'adaptive'
+    ? overlay(elevation, colors.surface)
+    : colors.primary;
+  if (typeof dark === 'boolean') {
+    isDark = dark;
+  } else {
+    isDark =
+      backgroundColor === 'transparent'
+        ? false
+        : !color(backgroundColor).isLight();
   }
-}
+
+  let shouldCenterContent = false;
+  let shouldAddLeftSpacing = false;
+  let shouldAddRightSpacing = false;
+  if (Platform.OS === 'ios') {
+    let hasAppbarContent = false;
+    let leftItemsCount = 0;
+    let rightItemsCount = 0;
+
+    React.Children.forEach(children, (child) => {
+      if (React.isValidElement(child)) {
+        if (child.type === AppbarContent) {
+          hasAppbarContent = true;
+        } else if (hasAppbarContent) {
+          rightItemsCount++;
+        } else {
+          leftItemsCount++;
+        }
+      }
+    });
+
+    shouldCenterContent =
+      hasAppbarContent && leftItemsCount < 2 && rightItemsCount < 2;
+    shouldAddLeftSpacing = shouldCenterContent && leftItemsCount === 0;
+    shouldAddRightSpacing = shouldCenterContent && rightItemsCount === 0;
+  }
+  return (
+    <Surface
+      //@ts-ignore Types of property 'backgroundColor' are incompatible.
+      style={[{ backgroundColor }, styles.appbar, { elevation }, restStyle]}
+      {...rest}
+    >
+      {shouldAddLeftSpacing ? <View style={styles.spacing} /> : null}
+      {React.Children.toArray(children)
+        .filter((child) => child != null && typeof child !== 'boolean')
+        .map((child, i) => {
+          if (
+            !React.isValidElement(child) ||
+            ![
+              AppbarContent,
+              AppbarAction,
+              AppbarBackAction,
+              // @ts-ignore Type 'string' is not assignable to type
+            ].includes(child.type)
+          ) {
+            return child;
+          }
+
+          const props: { color?: string; style?: StyleProp<ViewStyle> } = {
+            color:
+              typeof child.props.color !== 'undefined'
+                ? child.props.color
+                : isDark
+                ? white
+                : black,
+          };
+
+          if (child.type === AppbarContent) {
+            props.style = [
+              // Since content is not first item, add extra left margin
+              i !== 0 && { marginLeft: 8 },
+              shouldCenterContent && { alignItems: 'center' },
+              child.props.style,
+            ];
+          }
+          return React.cloneElement(child, props);
+        })}
+      {shouldAddRightSpacing ? <View style={styles.spacing} /> : null}
+    </Surface>
+  );
+};
+
+// @component ./AppbarContent.tsx
+Appbar.Content = AppbarContent;
+// @component ./AppbarAction.tsx
+Appbar.Action = AppbarAction;
+// @component ./AppbarBackAction.tsx
+Appbar.BackAction = AppbarBackAction;
+// @component ./AppbarHeader.tsx
+Appbar.Header = AppbarHeader;
 
 const styles = StyleSheet.create({
   appbar: {
@@ -200,3 +194,8 @@ const styles = StyleSheet.create({
 });
 
 export default withTheme(Appbar);
+
+// @component-docs ignore-next-line
+const AppbarWithTheme = withTheme(Appbar);
+// @component-docs ignore-next-line
+export { AppbarWithTheme as Appbar };

@@ -59,62 +59,53 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * );
  * ```
  */
-class AvatarText extends React.Component<Props> {
-  static displayName = 'Avatar.Text';
+const AvatarText = ({
+  label,
+  size = defaultSize,
+  style,
+  theme,
+  labelStyle,
+  color,
+  ...rest
+}: Props) => {
+  const { backgroundColor = theme.colors.primary, ...restStyle } =
+    StyleSheet.flatten(style) || {};
+  const textColor =
+    color || (Color(backgroundColor).isLight() ? 'rgba(0, 0, 0, .54)' : white);
 
-  static defaultProps = {
-    size: defaultSize,
-  };
-
-  render() {
-    const {
-      label,
-      size = defaultSize,
-      style,
-      theme,
-      labelStyle,
-      color,
-      ...rest
-    } = this.props;
-
-    const { backgroundColor = theme.colors.primary, ...restStyle } =
-      StyleSheet.flatten(style) || {};
-    const textColor =
-      color ||
-      (Color(backgroundColor).isLight() ? 'rgba(0, 0, 0, .54)' : white);
-
-    return (
-      <View
+  return (
+    <View
+      style={[
+        {
+          width: size,
+          height: size,
+          borderRadius: size / 2,
+          backgroundColor,
+        },
+        styles.container,
+        restStyle,
+      ]}
+      {...rest}
+    >
+      <Text
         style={[
+          styles.text,
           {
-            width: size,
-            height: size,
-            borderRadius: size / 2,
-            backgroundColor,
+            color: textColor,
+            fontSize: size / 2,
+            lineHeight: size,
           },
-          styles.container,
-          restStyle,
+          labelStyle,
         ]}
-        {...rest}
+        numberOfLines={1}
       >
-        <Text
-          style={[
-            styles.text,
-            {
-              color: textColor,
-              fontSize: size / 2,
-              lineHeight: size,
-            },
-            labelStyle,
-          ]}
-          numberOfLines={1}
-        >
-          {label}
-        </Text>
-      </View>
-    );
-  }
-}
+        {label}
+      </Text>
+    </View>
+  );
+};
+
+AvatarText.displayName = 'Avatar.Text';
 
 const styles = StyleSheet.create({
   container: {

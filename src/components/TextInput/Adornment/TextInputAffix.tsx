@@ -17,6 +17,7 @@ const AFFIX_OFFSET = 12;
 type Props = {
   text: string;
   onLayout?: (event: LayoutChangeEvent) => void;
+  textStyle?: StyleProp<TextStyle>;
   /**
    * @optional
    */
@@ -29,6 +30,7 @@ type ContextState = {
   visible?: Animated.Value;
   textStyle?: StyleProp<TextStyle>;
   side: AdornmentSide;
+  paddingHorizontal?: number | string;
 };
 
 const AffixContext = React.createContext<ContextState>({
@@ -37,12 +39,20 @@ const AffixContext = React.createContext<ContextState>({
   side: AdornmentSide.Left,
 });
 
-export const AffixAdornment: React.FunctionComponent<
+const AffixAdornment: React.FunctionComponent<
   {
     affix: React.ReactNode;
     testID: string;
   } & ContextState
-> = ({ affix, side, textStyle, topPosition, onLayout, visible }) => {
+> = ({
+  affix,
+  side,
+  textStyle,
+  topPosition,
+  onLayout,
+  visible,
+  paddingHorizontal,
+}) => {
   return (
     <AffixContext.Provider
       value={{
@@ -51,6 +61,7 @@ export const AffixAdornment: React.FunctionComponent<
         topPosition,
         onLayout,
         visible,
+        paddingHorizontal,
       }}
     >
       {affix}
@@ -58,18 +69,26 @@ export const AffixAdornment: React.FunctionComponent<
   );
 };
 
-const TextInputAffix = ({ text, theme }: Props) => {
-  const { textStyle, onLayout, topPosition, side, visible } = React.useContext(
-    AffixContext
-  );
+const TextInputAffix = ({ text, textStyle: labelStyle, theme }: Props) => {
+  const {
+    textStyle,
+    onLayout,
+    topPosition,
+    side,
+    visible,
+    paddingHorizontal,
+  } = React.useContext(AffixContext);
   const textColor = color(theme.colors.text)
     .alpha(theme.dark ? 0.7 : 0.54)
     .rgb()
     .string();
 
+  const offset =
+    typeof paddingHorizontal === 'number' ? paddingHorizontal : AFFIX_OFFSET;
+
   const style = {
     top: topPosition,
-    [side]: AFFIX_OFFSET,
+    [side]: offset,
   };
 
   return (
@@ -87,7 +106,7 @@ const TextInputAffix = ({ text, theme }: Props) => {
       ]}
       onLayout={onLayout}
     >
-      <Text style={[{ color: textColor }, textStyle]}>{text}</Text>
+      <Text style={[{ color: textColor }, textStyle, labelStyle]}>{text}</Text>
     </Animated.View>
   );
 };
@@ -104,4 +123,4 @@ const styles = StyleSheet.create({
 export default withTheme(TextInputAffix);
 
 // @component-docs ignore-next-line
-export { TextInputAffix };
+export { TextInputAffix, AffixAdornment };

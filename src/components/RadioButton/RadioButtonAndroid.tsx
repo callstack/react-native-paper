@@ -36,6 +36,10 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    * @optional
    */
   theme: ReactNativePaper.Theme;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 const BORDER_WIDTH = 2;
@@ -62,6 +66,7 @@ const RadioButtonAndroid = ({
   theme,
   value,
   status,
+  testID,
   ...rest
 }: Props) => {
   const { current: borderAnim } = React.useRef<Animated.Value>(
@@ -72,8 +77,17 @@ const RadioButtonAndroid = ({
     new Animated.Value(1)
   );
 
+  const isFirstRendering = React.useRef<boolean>(true);
+
+  const { scale } = theme.animation;
+
   React.useEffect(() => {
-    const { scale } = theme.animation;
+    // Do not run animation on very first rendering
+    if (isFirstRendering.current) {
+      isFirstRendering.current = false;
+      return;
+    }
+
     if (status === 'checked') {
       radioAnim.setValue(1.2);
 
@@ -91,7 +105,7 @@ const RadioButtonAndroid = ({
         useNativeDriver: false,
       }).start();
     }
-  }, [status]);
+  }, [status, borderAnim, radioAnim, scale]);
 
   const checkedColor = rest.color || theme.colors.accent;
   const uncheckedColor =
@@ -141,10 +155,11 @@ const RadioButtonAndroid = ({
             accessibilityComponentType={
               checked ? 'radiobutton_checked' : 'radiobutton_unchecked'
             }
-            accessibilityRole="button"
-            accessibilityState={{ disabled }}
+            accessibilityRole="radio"
+            accessibilityState={{ disabled, checked }}
             accessibilityLiveRegion="polite"
             style={styles.container}
+            testID={testID}
           >
             <Animated.View
               style={[
@@ -202,4 +217,6 @@ const styles = StyleSheet.create({
 export default withTheme(RadioButtonAndroid);
 
 // @component-docs ignore-next-line
-export { RadioButtonAndroid };
+const RadioButtonAndroidWithTheme = withTheme(RadioButtonAndroid);
+// @component-docs ignore-next-line
+export { RadioButtonAndroidWithTheme as RadioButtonAndroid };

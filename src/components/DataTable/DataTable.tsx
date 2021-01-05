@@ -73,32 +73,26 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * export default MyComponent;
  * ```
  */
-class DataTable extends React.Component<Props> {
-  // @component ./DataTableHeader.tsx
-  static Header = DataTableHeader;
+const DataTable = ({ children, style, ...rest }: Props) => (
+  <View {...rest} style={[styles.container, style]}>
+    {children}
+  </View>
+);
 
-  // @component ./DataTableTitle.tsx
-  static Title = DataTableTitle;
+// @component ./DataTableHeader.tsx
+DataTable.Header = DataTableHeader;
 
-  // @component ./DataTableRow.tsx
-  static Row = DataTableRow;
+// @component ./DataTableTitle.tsx
+DataTable.Title = DataTableTitle;
 
-  // @component ./DataTableCell.tsx
-  static Cell = DataTableCell;
+// @component ./DataTableRow.tsx
+DataTable.Row = DataTableRow;
 
-  // @component ./DataTablePagination.tsx
-  static Pagination = DataTablePagination;
+// @component ./DataTableCell.tsx
+DataTable.Cell = DataTableCell;
 
-  render() {
-    const { children, style, ...rest } = this.props;
-
-    return (
-      <View {...rest} style={[styles.container, style]}>
-        {children}
-      </View>
-    );
-  }
-}
+// @component ./DataTablePagination.tsx
+DataTable.Pagination = DataTablePagination;
 
 const styles = StyleSheet.create({
   container: {

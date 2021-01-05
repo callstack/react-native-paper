@@ -1,7 +1,6 @@
 import * as React from 'react';
 import type { $Omit } from './../../types';
-import AppbarAction from './AppbarAction';
-import AppbarBackIcon from './AppbarBackIcon';
+import { AppbarAction, AppbarBackIcon } from './AppbarElements';
 import type { StyleProp, ViewStyle } from 'react-native';
 
 type Props = $Omit<
@@ -63,16 +62,17 @@ type Props = $Omit<
  * export default MyComponent;
  * ```
  */
-class AppbarBackAction extends React.Component<Props> {
-  static displayName = 'Appbar.BackAction';
+const AppbarBackAction = ({ accessibilityLabel = 'Back', ...rest }: Props) => (
+  <AppbarAction
+    accessibilityLabel={accessibilityLabel}
+    {...rest}
+    icon={AppbarBackIcon}
+  />
+);
 
-  static defaultProps = {
-    accessibilityLabel: 'Back',
-  };
-
-  render() {
-    return <AppbarAction {...this.props} icon={AppbarBackIcon} />;
-  }
-}
+AppbarBackAction.displayName = 'Appbar.BackAction';
 
 export default AppbarBackAction;
+
+// @component-docs ignore-next-line
+export { AppbarBackAction };

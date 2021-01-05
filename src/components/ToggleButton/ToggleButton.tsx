@@ -8,12 +8,10 @@ import {
 import { withTheme } from '../../core/theming';
 import color from 'color';
 import IconButton from '../IconButton';
-import ToggleButtonGroup, {
-  ToggleButtonGroupContext,
-} from './ToggleButtonGroup';
-import ToggleButtonRow from './ToggleButtonRow';
+import { ToggleButtonGroupContext } from './ToggleButtonGroup';
 import { black, white } from '../../styles/colors';
 import type { IconSource } from '../Icon';
+import { ToggleButtonRow, ToggleButtonGroup } from './ToggleButtonElements';
 
 type Props = {
   /**
@@ -134,6 +132,7 @@ const ToggleButton = ({
             }}
             size={size}
             accessibilityLabel={accessibilityLabel}
+            accessibilityState={{ disabled, selected: checked }}
             disabled={disabled}
             style={[
               styles.content,
@@ -170,3 +169,8 @@ const styles = StyleSheet.create({
 });
 
 export default withTheme(ToggleButton);
+
+// @component-docs ignore-next-line
+const ToggleButtonWithTheme = withTheme(ToggleButton);
+// @component-docs ignore-next-line
+export { ToggleButtonWithTheme as ToggleButton };

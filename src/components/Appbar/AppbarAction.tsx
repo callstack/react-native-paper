@@ -73,33 +73,30 @@ type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
  * export default MyComponent;
  * ```
  */
-export default class AppbarAction extends React.Component<Props> {
-  static displayName = 'Appbar.Action';
+const AppbarAction = ({
+  size = 24,
+  color: iconColor = color(black).alpha(0.54).rgb().string(),
+  icon,
+  disabled,
+  onPress,
+  accessibilityLabel,
+  ...rest
+}: Props) => (
+  <IconButton
+    size={size}
+    onPress={onPress}
+    color={iconColor}
+    icon={icon}
+    disabled={disabled}
+    accessibilityLabel={accessibilityLabel}
+    animated
+    {...rest}
+  />
+);
 
-  static defaultProps = {
-    size: 24,
-  };
+AppbarAction.displayName = 'Appbar.Action';
 
-  render() {
-    const {
-      color: iconColor = color(black).alpha(0.54).rgb().string(),
-      icon,
-      disabled,
-      onPress,
-      accessibilityLabel,
-      ...rest
-    } = this.props;
+export default AppbarAction;
 
-    return (
-      <IconButton
-        onPress={onPress}
-        color={iconColor}
-        icon={icon}
-        disabled={disabled}
-        accessibilityLabel={accessibilityLabel}
-        animated
-        {...rest}
-      />
-    );
-  }
-}
+// @component-docs ignore-next-line
+export { AppbarAction };

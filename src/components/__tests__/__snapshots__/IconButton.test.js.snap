@@ -56,6 +56,7 @@ exports[`renders disabled icon button 1`] = `
       allowFontScaling={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
+      selectable={false}
       style={
         Array [
           Object {
@@ -64,6 +65,7 @@ exports[`renders disabled icon button 1`] = `
           },
           Array [
             Object {
+              "lineHeight": 24,
               "transform": Array [
                 Object {
                   "scaleX": 1,
@@ -143,6 +145,7 @@ exports[`renders icon button by default 1`] = `
       allowFontScaling={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
+      selectable={false}
       style={
         Array [
           Object {
@@ -151,6 +154,7 @@ exports[`renders icon button by default 1`] = `
           },
           Array [
             Object {
+              "lineHeight": 24,
               "transform": Array [
                 Object {
                   "scaleX": 1,
@@ -230,6 +234,7 @@ exports[`renders icon button with color 1`] = `
       allowFontScaling={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
+      selectable={false}
       style={
         Array [
           Object {
@@ -238,6 +243,7 @@ exports[`renders icon button with color 1`] = `
           },
           Array [
             Object {
+              "lineHeight": 24,
               "transform": Array [
                 Object {
                   "scaleX": 1,
@@ -317,6 +323,7 @@ exports[`renders icon button with size 1`] = `
       allowFontScaling={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
+      selectable={false}
       style={
         Array [
           Object {
@@ -325,6 +332,7 @@ exports[`renders icon button with size 1`] = `
           },
           Array [
             Object {
+              "lineHeight": 30,
               "transform": Array [
                 Object {
                   "scaleX": 1,
@@ -435,6 +443,7 @@ exports[`renders icon change animated 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -443,6 +452,7 @@ exports[`renders icon change animated 1`] = `
               },
               Array [
                 Object {
+                  "lineHeight": 24,
                   "transform": Array [
                     Object {
                       "scaleX": 1,

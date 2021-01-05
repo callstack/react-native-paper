@@ -3,12 +3,13 @@ import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 
 import IconButton from '../../IconButton';
 import type { $Omit } from '../../../../src/types';
+import type { IconSource } from '../../Icon';
 
 type Props = $Omit<
   React.ComponentProps<typeof IconButton>,
   'icon' | 'theme'
 > & {
-  name: string;
+  name: IconSource;
   onPress?: () => void;
   forceTextInputFocus?: boolean;
   style?: StyleProp<ViewStyle>;
@@ -30,7 +31,7 @@ const StyleContext = React.createContext<StyleContextType>({
   forceFocus: () => {},
 });
 
-export const IconAdornment: React.FunctionComponent<
+const IconAdornment: React.FunctionComponent<
   {
     testID: string;
     icon: React.ReactNode;
@@ -98,3 +99,6 @@ const styles = StyleSheet.create({
 });
 
 export default TextInputIcon;
+
+// @component-docs ignore-next-line
+export { IconAdornment };

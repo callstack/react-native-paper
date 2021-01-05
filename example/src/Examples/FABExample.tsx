@@ -43,7 +43,14 @@ const ButtonExample = () => {
           visible={visible}
           disabled
         />
-
+        <FAB
+          icon="format-letter-case"
+          label="Mixed case"
+          style={styles.fab}
+          onPress={() => {}}
+          visible={visible}
+          uppercase={false}
+        />
         <FAB
           icon="cancel"
           label="Loading FAB"

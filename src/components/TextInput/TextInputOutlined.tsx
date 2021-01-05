@@ -92,6 +92,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
       fontWeight,
       height,
       backgroundColor = colors.background,
+      textAlign,
       ...viewStyle
     } = (StyleSheet.flatten(style) || {}) as TextStyle;
     const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
@@ -178,10 +179,11 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
     const baseLabelTranslateY =
       -labelHalfHeight - (topPosition + OUTLINE_MINIMIZED_LABEL_Y_OFFSET);
 
-    const placeholderOpacity = interpolatePlaceholder(
-      parentState.labeled,
-      hasActiveOutline
-    );
+    const placeholderOpacity = hasActiveOutline
+      ? interpolatePlaceholder(parentState.labeled, hasActiveOutline)
+      : parentState.labelLayout.measured
+      ? 1
+      : 0;
 
     const labelProps = {
       label,
@@ -240,6 +242,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
         adornmentConfig,
         rightAffixWidth,
         leftAffixWidth,
+        mode: 'outlined',
       }
     );
     const affixTopPosition = {
@@ -327,6 +330,11 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
                   fontWeight,
                   color: inputTextColor,
                   textAlignVertical: multiline ? 'top' : 'center',
+                  textAlign: textAlign
+                    ? textAlign
+                    : I18nManager.isRTL
+                    ? 'right'
+                    : 'left',
                 },
                 adornmentStyleAdjustmentForNativeInput,
               ],
@@ -388,7 +396,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     paddingHorizontal: INPUT_PADDING_HORIZONTAL,
     margin: 0,
-    textAlign: I18nManager.isRTL ? 'right' : 'left',
     zIndex: 1,
   },
   inputOutlined: {

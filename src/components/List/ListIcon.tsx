@@ -14,6 +14,8 @@ type Props = {
   style?: StyleProp<ViewStyle>;
 };
 
+const ICON_SIZE = 24;
+
 /**
  * A component to show an icon in a list item.
  *
@@ -29,27 +31,21 @@ type Props = {
  * import { List, Colors } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <List.Icon color={Colors.blue500} icon="folder" />
- *   <List.Icon color={Colors.blue500} icon="equal" />
- *   <List.Icon color={Colors.blue500} icon="calendar" />
+ *   <>
+ *     <List.Icon color={Colors.blue500} icon="folder" />
+ *     <List.Icon color={Colors.blue500} icon="equal" />
+ *     <List.Icon color={Colors.blue500} icon="calendar" />
+ *   </>
  * );
  *
  * export default MyComponent;
  * ```
  */
-export default class ListIcon extends React.Component<Props> {
-  static displayName = 'List.Icon';
-
-  render() {
-    const { icon, color: iconColor, style } = this.props;
-
-    return (
-      <View style={[styles.item, style]} pointerEvents="box-none">
-        <Icon source={icon} size={24} color={iconColor} />
-      </View>
-    );
-  }
-}
+const ListIcon = ({ icon, color: iconColor, style }: Props) => (
+  <View style={[styles.item, style]} pointerEvents="box-none">
+    <Icon source={icon} size={ICON_SIZE} color={iconColor} />
+  </View>
+);
 
 const styles = StyleSheet.create({
   item: {
@@ -60,3 +56,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+ListIcon.displayName = 'List.Icon';
+
+export default ListIcon;

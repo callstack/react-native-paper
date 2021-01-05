@@ -64,7 +64,7 @@ function getPages() {
         acc.push({ file, group });
       }
 
-      const match = content.match(/\/\/ @component (.\/\w+\.(js|tsx?))/gm);
+      const match = content.match(/\/\/ @component (.+\/\w+\.(js|tsx?))/gm);
 
       if (match && match.length) {
         const componentFiles = match.map((line) => {
