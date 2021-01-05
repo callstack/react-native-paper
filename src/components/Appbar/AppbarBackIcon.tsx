@@ -2,8 +2,10 @@ import * as React from 'react';
 import { Platform, I18nManager, View, Image, StyleSheet } from 'react-native';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 
-const AppbarBackIcon = ({ size, color }: { size: number; color: string }) =>
-  Platform.OS === 'ios' ? (
+const AppbarBackIcon = ({ size, color }: { size: number; color: string }) => {
+  const iosIconSize = size - 3;
+
+  return Platform.OS === 'ios' ? (
     <View
       style={[
         styles.wrapper,
@@ -16,7 +18,10 @@ const AppbarBackIcon = ({ size, color }: { size: number; color: string }) =>
     >
       <Image
         source={require('../../assets/back-chevron.png')}
-        style={[styles.icon, { tintColor: color }]}
+        style={[
+          styles.icon,
+          { tintColor: color, width: iosIconSize, height: iosIconSize },
+        ]}
       />
     </View>
   ) : (
@@ -27,6 +32,7 @@ const AppbarBackIcon = ({ size, color }: { size: number; color: string }) =>
       direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
     />
   );
+};
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -34,8 +40,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   icon: {
-    height: 21,
-    width: 21,
     resizeMode: 'contain',
   },
 });

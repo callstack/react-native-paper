@@ -374,12 +374,12 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
               style={
                 Array [
                   Object {
-                    "height": 21,
                     "resizeMode": "contain",
-                    "width": 21,
                   },
                   Object {
+                    "height": 21,
                     "tintColor": "#ffffff",
+                    "width": 21,
                   },
                 ]
               }
