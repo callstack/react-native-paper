@@ -34,7 +34,6 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
-  innerContainerStyle?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
@@ -88,7 +87,6 @@ const Card = ({
   onPress,
   children,
   style,
-  innerContainerStyle,
   theme,
   testID,
   accessible,
@@ -147,7 +145,7 @@ const Card = ({
         testID={testID}
         accessible={accessible}
       >
-        <View style={[styles.innerContainer, innerContainerStyle]}>
+        <View style={styles.innerContainer}>
           {React.Children.map(children, (child, index) =>
             React.isValidElement(child)
               ? React.cloneElement(child, {

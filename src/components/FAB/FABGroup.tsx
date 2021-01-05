@@ -24,7 +24,7 @@ type Props = {
    * - `accessibilityLabel`: accessibility label for the action, uses label by default if specified
    * - `color`: custom icon color of the action item
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
-   * - `small`: boolean describing weather small or normal sized FAB is rendered. Defaults to `true`
+   * - `small`: boolean describing whether small or normal sized FAB is rendered. Defaults to `true`
    * - `onPress`: callback that is called when `FAB` is pressed (required)
    */
   actions: Array<{
@@ -283,32 +283,33 @@ const FABGroup = ({
               pointerEvents={open ? 'box-none' : 'none'}
             >
               {it.label && (
-                <Card
-                  style={
-                    [
-                      styles.label,
-                      {
-                        transform: [{ scale: scales[i] }],
-                        opacity: opacities[i],
-                      },
-                    ] as StyleProp<ViewStyle>
-                  }
-                  innerContainerStyle={styles.labelInnerContainer}
-                  onPress={() => {
-                    it.onPress();
-                    close();
-                  }}
-                  accessibilityLabel={
-                    it.accessibilityLabel !== 'undefined'
-                      ? it.accessibilityLabel
-                      : it.label
-                  }
-                  accessibilityTraits="button"
-                  accessibilityComponentType="button"
-                  accessibilityRole="button"
-                >
-                  <Text style={{ color: labelColor }}>{it.label}</Text>
-                </Card>
+                <View>
+                  <Card
+                    style={
+                      [
+                        styles.label,
+                        {
+                          transform: [{ scale: scales[i] }],
+                          opacity: opacities[i],
+                        },
+                      ] as StyleProp<ViewStyle>
+                    }
+                    onPress={() => {
+                      it.onPress();
+                      close();
+                    }}
+                    accessibilityLabel={
+                      it.accessibilityLabel !== 'undefined'
+                        ? it.accessibilityLabel
+                        : it.label
+                    }
+                    accessibilityTraits="button"
+                    accessibilityComponentType="button"
+                    accessibilityRole="button"
+                  >
+                    <Text style={{ color: labelColor }}>{it.label}</Text>
+                  </Card>
+                </View>
               )}
               <FAB
                 small={typeof it.small !== 'undefined' ? it.small : true}
@@ -395,10 +396,6 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     marginHorizontal: 16,
     elevation: 2,
-  },
-  labelInnerContainer: {
-    flexGrow: 0,
-    flexShrink: 0,
   },
   item: {
     marginBottom: 16,
