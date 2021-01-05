@@ -45,6 +45,7 @@ try {
         style={[styles.icon, { color, fontSize: size }]}
         // @ts-ignore
         pointerEvents="none"
+        selectable={false}
       >
         □
       </Text>
@@ -83,6 +84,7 @@ const defaultIcon = ({
       styles.icon,
     ]}
     pointerEvents="none"
+    selectable={false}
     {...accessibilityProps}
   />
 );
