@@ -178,9 +178,6 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
         {...(theme.isV3 && { elevation })}
       >
         <IconButton
-          // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-          accessibilityTraits="button"
-          accessibilityComponentType="button"
           accessibilityRole="button"
           borderless
           rippleColor={rippleColor}
@@ -217,8 +214,6 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
           underlineColorAndroid="transparent"
           returnKeyType="search"
           keyboardAppearance={dark ? 'dark' : 'light'}
-          // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-          accessibilityTraits="search"
           accessibilityRole="search"
           ref={root}
           value={value}
@@ -242,9 +237,6 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
               />
             ))
           }
-          // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-          accessibilityTraits="button"
-          accessibilityComponentType="button"
           accessibilityRole="button"
         />
       </Surface>

@@ -273,9 +273,6 @@ const Button = ({
         onPressOut={handlePressOut}
         accessibilityLabel={accessibilityLabel}
         accessibilityHint={accessibilityHint}
-        // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-        accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
-        accessibilityComponentType="button"
         accessibilityRole="button"
         accessibilityState={{ disabled }}
         accessible={accessible}
