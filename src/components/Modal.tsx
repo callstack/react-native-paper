@@ -42,6 +42,11 @@ type Props = {
    */
   contentContainerStyle?: StyleProp<ViewStyle>;
   /**
+   * Style for the wrapper of the modal.
+   * Use this prop to change the default wrapper style or to override safe area insets with marginTop and marginBottom.
+   */
+  style?: StyleProp<ViewStyle>;
+  /**
    * @optional
    */
   theme: ReactNativePaper.Theme;
@@ -191,6 +196,7 @@ class Modal extends React.Component<Props, State> {
     const {
       children,
       dismissable,
+      style,
       theme,
       contentContainerStyle,
       overlayAccessibilityLabel,
@@ -221,6 +227,7 @@ class Modal extends React.Component<Props, State> {
           style={[
             styles.wrapper,
             { marginTop: TOP_INSET, marginBottom: BOTTOM_INSET },
+            style,
           ]}
           pointerEvents="box-none"
         >
