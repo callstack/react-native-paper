@@ -75,13 +75,13 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * const MyComponent = () => {
  *   const [page, setPage] = React.useState(0);
  *   const from = page * itemsPerPage;
- *   const to = (page + 1) * itemsPerPage;
+ *   const to = Math.min((page + 1) * itemsPerPage, items.length);
  *
  *   return (
  *     <DataTable>
  *       <DataTable.Pagination
  *         page={page}
- *         numberOfPages={Math.floor(items.length / itemsPerPage)}
+ *         numberOfPages={Math.ceil(items.length / itemsPerPage)}
  *         onPageChange={page => setPage(page)}
  *         label={`${from + 1}-${to} of ${items.length}`}
  *         showFastPagination

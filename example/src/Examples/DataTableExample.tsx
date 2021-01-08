@@ -62,7 +62,7 @@ const DataTableExample = () => {
     );
   const itemsPerPage = 2;
   const from = page * itemsPerPage;
-  const to = (page + 1) * itemsPerPage;
+  const to = Math.min((page + 1) * itemsPerPage, items.length);
 
   return (
     <ScrollView
@@ -93,7 +93,7 @@ const DataTableExample = () => {
 
           <DataTable.Pagination
             page={page}
-            numberOfPages={Math.floor(sortedItems.length / itemsPerPage)}
+            numberOfPages={Math.ceil(sortedItems.length / itemsPerPage)}
             onPageChange={(page) => setPage(page)}
             label={`${from + 1}-${to} of ${sortedItems.length}`}
             showFastPagination
