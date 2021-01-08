@@ -22,6 +22,10 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   numberOfPages: number;
   /**
+   * Whether to show fast forward and fast rewind buttons in pagination. False by default
+   */
+  showFastPagination?: boolean;
+  /**
    * Label text to display
    */
   label?: React.ReactNode;
@@ -80,6 +84,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  *         numberOfPages={Math.floor(items.length / itemsPerPage)}
  *         onPageChange={page => setPage(page)}
  *         label={`${from + 1}-${to} of ${items.length}`}
+ *         showFastPagination
  *       />
  *     </DataTable>
  *   );
@@ -96,6 +101,7 @@ const DataTablePagination = ({
   onPageChange,
   style,
   theme,
+  showFastPagination = false,
   ...rest
 }: Props) => {
   const labelColor = color(theme.colors.text).alpha(0.6).rgb().string();
@@ -105,6 +111,21 @@ const DataTablePagination = ({
       <Text style={[styles.label, { color: labelColor }]} numberOfLines={1}>
         {label}
       </Text>
+      {showFastPagination ? (
+        <IconButton
+          icon={({ size, color }) => (
+            <MaterialCommunityIcon
+              name="page-first"
+              color={color}
+              size={size}
+              direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+            />
+          )}
+          color={theme.colors.text}
+          disabled={page === 0}
+          onPress={() => onPageChange(0)}
+        />
+      ) : null}
       <IconButton
         icon={({ size, color }) => (
           <MaterialCommunityIcon
@@ -131,6 +152,21 @@ const DataTablePagination = ({
         disabled={numberOfPages === 0 || page === numberOfPages - 1}
         onPress={() => onPageChange(page + 1)}
       />
+      {showFastPagination ? (
+        <IconButton
+          icon={({ size, color }) => (
+            <MaterialCommunityIcon
+              name="page-last"
+              color={color}
+              size={size}
+              direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+            />
+          )}
+          color={theme.colors.text}
+          disabled={numberOfPages === 0 || page === numberOfPages - 1}
+          onPress={() => onPageChange(numberOfPages - 1)}
+        />
+      ) : null}
     </View>
   );
 };
