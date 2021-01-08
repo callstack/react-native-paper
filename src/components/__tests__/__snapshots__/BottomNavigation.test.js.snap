@@ -162,6 +162,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -211,6 +212,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -350,6 +352,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -399,6 +402,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -538,6 +542,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -587,6 +592,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -854,6 +860,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -903,6 +910,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -1042,6 +1050,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -1091,6 +1100,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -1230,6 +1240,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -1279,6 +1290,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -3010,6 +3022,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -3059,6 +3072,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -3279,6 +3293,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -3328,6 +3343,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -3548,6 +3564,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -3597,6 +3614,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -3945,6 +3963,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -3994,6 +4013,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -4176,6 +4196,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -4225,6 +4246,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -4407,6 +4429,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -4456,6 +4479,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -4746,6 +4770,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -4795,6 +4820,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -5015,6 +5041,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -5064,6 +5091,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -5284,6 +5312,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -5333,6 +5362,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -5681,6 +5711,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -5730,6 +5761,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -5912,6 +5944,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -5961,6 +5994,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -6143,6 +6177,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -6192,6 +6227,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -6374,6 +6410,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -6423,6 +6460,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -6605,6 +6643,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -6654,6 +6693,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {

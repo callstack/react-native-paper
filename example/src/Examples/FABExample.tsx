@@ -67,7 +67,12 @@ const ButtonExample = () => {
               { icon: 'plus', onPress: () => {} },
               { icon: 'star', label: 'Star', onPress: () => {} },
               { icon: 'email', label: 'Email', onPress: () => {} },
-              { icon: 'bell', label: 'Remind', onPress: () => {} },
+              {
+                icon: 'bell',
+                label: 'Remind',
+                onPress: () => {},
+                small: false,
+              },
             ]}
             onStateChange={({ open }: { open: boolean }) => setOpen(open)}
             onPress={() => {

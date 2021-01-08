@@ -6,7 +6,7 @@ set -euxo pipefail # Exit with nonzero exit code if anything fails
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-SOURCE_BRANCH="master"
+SOURCE_BRANCH="main"
 TARGET_BRANCH="gh-pages"
 
 cd $DIR/../docs

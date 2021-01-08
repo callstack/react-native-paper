@@ -1,6 +1,6 @@
 {
   "name": "react-native-paper",
-  "version": "4.5.0",
+  "version": "4.6.0",
   "description": "Material design for React Native",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -55,7 +55,6 @@
     "@babel/runtime": "^7.10.3",
     "@callstack/eslint-config": "^9.0.0",
     "@commitlint/config-conventional": "^8.3.4",
-    "@react-native-community/bob": "^0.16.0",
     "@release-it/conventional-changelog": "^1.1.0",
     "@types/color": "^3.0.0",
     "@types/jest": "^24.0.13",
@@ -89,6 +88,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "^0.63.0",
+    "react-native-builder-bob": "^0.17.1",
     "react-native-testing-library": "^1.5.0",
     "react-native-vector-icons": "~6.3.0",
     "react-test-renderer": "16.13.1",
@@ -135,7 +135,7 @@
       "eslint"
     ]
   },
-  "@react-native-community/bob": {
+  "react-native-builder-bob": {
     "source": "src",
     "output": "lib",
     "targets": [

@@ -23,6 +23,7 @@ exports[`renders avatar with icon 1`] = `
     allowFontScaling={false}
     importantForAccessibility="no-hide-descendants"
     pointerEvents="none"
+    selectable={false}
     style={
       Array [
         Object {
@@ -79,6 +80,7 @@ exports[`renders avatar with icon and custom background color 1`] = `
     allowFontScaling={false}
     importantForAccessibility="no-hide-descendants"
     pointerEvents="none"
+    selectable={false}
     style={
       Array [
         Object {
