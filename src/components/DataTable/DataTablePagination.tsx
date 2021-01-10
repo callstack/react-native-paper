@@ -11,6 +11,9 @@ import IconButton from '../IconButton';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import Menu from '../Menu/Menu';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import TextInput from '../TextInput/TextInput';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -21,6 +24,18 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    * The total number of pages.
    */
   numberOfPages: number;
+  /**
+   * Options for a number of rows per page to choose from
+   */
+  optionsPerPage?: Array<number>;
+  /**
+   * The current number of rows per page
+   */
+  itemsPerPage?: number;
+  /**
+   * The function to set the number of rows per page
+   */
+  setItemsPerPage?: (itemsPerPage: number) => void;
   /**
    * Whether to show fast forward and fast rewind buttons in pagination. False by default
    */
@@ -55,7 +70,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * import * as React from 'react';
  * import { DataTable } from 'react-native-paper';
  *
- * const itemsPerPage = 2;
+ * const optionsPerPage = [2, 3, 4];
  *
  * const items = [
  *   {
@@ -74,8 +89,13 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  *
  * const MyComponent = () => {
  *   const [page, setPage] = React.useState(0);
+ *   const [itemsPerPage, setItemsPerPage] = React.useState(optionsPerPage[0]);
  *   const from = page * itemsPerPage;
  *   const to = Math.min((page + 1) * itemsPerPage, items.length);
+ *
+ *   React.useEffect(() => {
+ *      setPage(0);
+ *   }, [itemsPerPage]);
  *
  *   return (
  *     <DataTable>
@@ -85,6 +105,9 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  *         onPageChange={page => setPage(page)}
  *         label={`${from + 1}-${to} of ${items.length}`}
  *         showFastPagination
+ *         optionsPerPage={optionsPerPage}
+ *         itemsPerPage={itemsPerPage}
+ *         setItemsPerPage={setItemsPerPage}
  *       />
  *     </DataTable>
  *   );
@@ -102,12 +125,58 @@ const DataTablePagination = ({
   style,
   theme,
   showFastPagination = false,
+  optionsPerPage,
+  itemsPerPage,
+  setItemsPerPage,
   ...rest
 }: Props) => {
+  const [showSelect, toggleSelect] = React.useState(false);
   const labelColor = color(theme.colors.text).alpha(0.6).rgb().string();
 
   return (
     <View {...rest} style={[styles.container, style]}>
+      {optionsPerPage && itemsPerPage && setItemsPerPage ? (
+        <>
+          <Text
+            style={[styles.label, styles.optionsLabel, { color: labelColor }]}
+            numberOfLines={1}
+          >
+            Rows per page
+          </Text>
+          <Menu
+            visible={showSelect}
+            onDismiss={() => toggleSelect(!showSelect)}
+            anchor={
+              <TouchableRipple onPress={() => toggleSelect(true)}>
+                <View pointerEvents={'none'} style={styles.select}>
+                  <TextInput
+                    value={`${itemsPerPage}`}
+                    pointerEvents={'none'}
+                    right={<TextInput.Icon name={'menu-down'} />}
+                    mode={'outlined'}
+                    style={styles.centerText}
+                  />
+                </View>
+              </TouchableRipple>
+            }
+          >
+            {optionsPerPage.map((option) => (
+              <Menu.Item
+                key={option}
+                titleStyle={{
+                  color:
+                    option === itemsPerPage ? theme.colors.primary : undefined,
+                }}
+                onPress={() => {
+                  setItemsPerPage?.(option);
+                  toggleSelect(false);
+                }}
+                title={option}
+              />
+            ))}
+          </Menu>
+        </>
+      ) : null}
       <Text style={[styles.label, { color: labelColor }]} numberOfLines={1}>
         {label}
       </Text>
@@ -185,6 +254,14 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginRight: 44,
   },
+  optionsLabel: {
+    marginRight: 16,
+  },
+  select: {
+    marginRight: 44,
+    width: 100,
+  },
+  centerText: { textAlign: 'center' },
 });
 
 export default withTheme(DataTablePagination);
