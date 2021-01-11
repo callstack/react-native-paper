@@ -8,7 +8,7 @@
 
 ---
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/callstack/react-native-paper.svg)](https://greenkeeper.io/)
+[![Greenkeeper badge](https://badges.greenkeeper.io/callstack/react-native-paper.svg)](https://greenkeeper.io/) [![Meercode CI Score](https://meercode.io/badge/callstack/react-native-paper?type=ci-score&branch=main)](https://meercode.io/callstack/react-native-paper)
 
 [![Build Status][build-badge]][build]
 [![Version][version-badge]][package]
