@@ -50,7 +50,7 @@ const DataTableExample = () => {
       fat: 0,
     },
   ]);
-  const [optionsPerPage] = React.useState([2, 3, 4]);
+  const [optionsPerPage] = React.useState([2, 3, 4, 200]);
   const [itemsPerPage, setItemsPerPage] = React.useState(optionsPerPage[0]);
   const {
     colors: { background },
@@ -105,6 +105,7 @@ const DataTableExample = () => {
             itemsPerPage={itemsPerPage}
             setItemsPerPage={setItemsPerPage}
             showFastPagination
+            optionsLabel={'Rows per page'}
           />
         </DataTable>
       </Card>

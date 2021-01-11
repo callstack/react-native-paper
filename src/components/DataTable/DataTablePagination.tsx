@@ -12,8 +12,7 @@ import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Menu from '../Menu/Menu';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import TextInput from '../TextInput/TextInput';
+import Button from '../Button';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -24,6 +23,10 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    * The total number of pages.
    */
   numberOfPages: number;
+  /**
+   * Label text for oprions select to display
+   */
+  optionsLabel?: React.ReactNode;
   /**
    * Options for a number of rows per page to choose from
    */
@@ -108,6 +111,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  *         optionsPerPage={optionsPerPage}
  *         itemsPerPage={itemsPerPage}
  *         setItemsPerPage={setItemsPerPage}
+ *         optionsLabel={'Rows per page'}
  *       />
  *     </DataTable>
  *   );
@@ -128,6 +132,7 @@ const DataTablePagination = ({
   optionsPerPage,
   itemsPerPage,
   setItemsPerPage,
+  optionsLabel,
   ...rest
 }: Props) => {
   const [showSelect, toggleSelect] = React.useState(false);
@@ -138,26 +143,24 @@ const DataTablePagination = ({
       {optionsPerPage && itemsPerPage && setItemsPerPage ? (
         <>
           <Text
-            style={[styles.label, styles.optionsLabel, { color: labelColor }]}
+            style={[styles.optionsLabel, { color: labelColor }]}
             numberOfLines={1}
           >
-            Rows per page
+            {optionsLabel}
           </Text>
           <Menu
             visible={showSelect}
             onDismiss={() => toggleSelect(!showSelect)}
             anchor={
-              <TouchableRipple onPress={() => toggleSelect(true)}>
-                <View pointerEvents={'none'} style={styles.select}>
-                  <TextInput
-                    value={`${itemsPerPage}`}
-                    pointerEvents={'none'}
-                    right={<TextInput.Icon name={'menu-down'} />}
-                    mode={'outlined'}
-                    style={styles.centerText}
-                  />
-                </View>
-              </TouchableRipple>
+              <Button
+                mode="outlined"
+                onPress={() => toggleSelect(true)}
+                style={styles.button}
+                icon={'menu-down'}
+                contentStyle={styles.contentStyle}
+              >
+                {`${itemsPerPage}`}
+              </Button>
             }
           >
             {optionsPerPage.map((option) => (
@@ -177,14 +180,29 @@ const DataTablePagination = ({
           </Menu>
         </>
       ) : null}
-      <Text style={[styles.label, { color: labelColor }]} numberOfLines={1}>
+      <Text style={[styles.label, { color: labelColor }]} numberOfLines={2}>
         {label}
       </Text>
-      {showFastPagination ? (
+      <View style={styles.iconsConrainer}>
+        {showFastPagination ? (
+          <IconButton
+            icon={({ size, color }) => (
+              <MaterialCommunityIcon
+                name="page-first"
+                color={color}
+                size={size}
+                direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+              />
+            )}
+            color={theme.colors.text}
+            disabled={page === 0}
+            onPress={() => onPageChange(0)}
+          />
+        ) : null}
         <IconButton
           icon={({ size, color }) => (
             <MaterialCommunityIcon
-              name="page-first"
+              name="chevron-left"
               color={color}
               size={size}
               direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
@@ -192,40 +210,12 @@ const DataTablePagination = ({
           )}
           color={theme.colors.text}
           disabled={page === 0}
-          onPress={() => onPageChange(0)}
+          onPress={() => onPageChange(page - 1)}
         />
-      ) : null}
-      <IconButton
-        icon={({ size, color }) => (
-          <MaterialCommunityIcon
-            name="chevron-left"
-            color={color}
-            size={size}
-            direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
-          />
-        )}
-        color={theme.colors.text}
-        disabled={page === 0}
-        onPress={() => onPageChange(page - 1)}
-      />
-      <IconButton
-        icon={({ size, color }) => (
-          <MaterialCommunityIcon
-            name="chevron-right"
-            color={color}
-            size={size}
-            direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
-          />
-        )}
-        color={theme.colors.text}
-        disabled={numberOfPages === 0 || page === numberOfPages - 1}
-        onPress={() => onPageChange(page + 1)}
-      />
-      {showFastPagination ? (
         <IconButton
           icon={({ size, color }) => (
             <MaterialCommunityIcon
-              name="page-last"
+              name="chevron-right"
               color={color}
               size={size}
               direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
@@ -233,9 +223,24 @@ const DataTablePagination = ({
           )}
           color={theme.colors.text}
           disabled={numberOfPages === 0 || page === numberOfPages - 1}
-          onPress={() => onPageChange(numberOfPages - 1)}
+          onPress={() => onPageChange(page + 1)}
         />
-      ) : null}
+        {showFastPagination ? (
+          <IconButton
+            icon={({ size, color }) => (
+              <MaterialCommunityIcon
+                name="page-last"
+                color={color}
+                size={size}
+                direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+              />
+            )}
+            color={theme.colors.text}
+            disabled={numberOfPages === 0 || page === numberOfPages - 1}
+            onPress={() => onPageChange(numberOfPages - 1)}
+          />
+        ) : null}
+      </View>
     </View>
   );
 };
@@ -248,20 +253,26 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingLeft: 16,
+    flexWrap: 'wrap',
   },
-
   label: {
     fontSize: 12,
     marginRight: 44,
   },
   optionsLabel: {
+    fontSize: 12,
     marginRight: 16,
   },
-  select: {
+  button: {
+    textAlign: 'center',
     marginRight: 44,
-    width: 100,
   },
-  centerText: { textAlign: 'center' },
+  iconsConrainer: {
+    flexDirection: 'row',
+  },
+  contentStyle: {
+    flexDirection: 'row-reverse',
+  },
 });
 
 export default withTheme(DataTablePagination);
