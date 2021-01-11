@@ -17,7 +17,7 @@
       "android",
       "ios"
     ],
-    "owner": "paper@callstack.com",
+    "owner": "react-native-paper",
     "ios": {
       "bundleIdentifier": "com.callstack.reactnativepaperexample",
       "buildNumber": "1.0.0"
@@ -25,6 +25,10 @@
     "android": {
       "package": "com.callstack.reactnativepaperexample",
       "versionCode": 1
-    }
+    },
+    "permissions": [
+      "READ_EXTERNAL_STORAGE",
+      "WRITE_EXTERNAL_STORAGE"
+    ]
   }
 }
