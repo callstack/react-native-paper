@@ -24,7 +24,7 @@
     },
     "android": {
       "package": "com.callstack.reactnativepaperexample",
-      "versionCode": 2,
+      "versionCode": 3,
       "permissions": [
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE"
