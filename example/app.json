@@ -32,7 +32,7 @@
     },
     "splash": {
       "image": "./assets/images/splash.png",
-      "backgroundColor": "#FFFFFF",
+      "backgroundColor": "#6200EE",
       "resizeMode": "cover"
     }
   }
