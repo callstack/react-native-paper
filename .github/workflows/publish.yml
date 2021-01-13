@@ -20,8 +20,8 @@ jobs:
         uses: expo/expo-github-action@v5
         with:
           expo-version: 3.x
-          expo-username: ${{ secrets.EXPO_CLI_USERNAME }}
-          expo-password: ${{ secrets.EXPO_CLI_PASSWORD }}
+          expo-username: ${{ secrets.EXPO_CLI_USERNAME_PAPER }}
+          expo-password: ${{ secrets.EXPO_CLI_PASSWORD_PAPER }}
           expo-cache: true
 
       - name: Get yarn cache
