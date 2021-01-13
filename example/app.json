@@ -24,11 +24,16 @@
     },
     "android": {
       "package": "com.callstack.reactnativepaperexample",
-      "versionCode": 3,
+      "versionCode": 4,
       "permissions": [
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE"
-      ]
+      ],
+      "icon": "./assets/images/paper-icon.png",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/android-icon.png",
+        "backgroundColor": "#6200EE"
+      }
     },
     "splash": {
       "image": "./assets/images/splash.png",
