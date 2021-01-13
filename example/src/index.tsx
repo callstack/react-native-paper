@@ -14,6 +14,7 @@ import App from './RootNavigator';
 import DrawerItems from './DrawerItems';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+
 // Add new typescript properties to the theme
 declare global {
   namespace ReactNativePaper {
