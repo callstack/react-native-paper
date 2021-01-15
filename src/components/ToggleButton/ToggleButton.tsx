@@ -11,7 +11,6 @@ import IconButton from '../IconButton';
 import { ToggleButtonGroupContext } from './ToggleButtonGroup';
 import { black, white } from '../../styles/colors';
 import type { IconSource } from '../Icon';
-import { ToggleButtonRow, ToggleButtonGroup } from './ToggleButtonElements';
 
 type Props = {
   /**
@@ -153,12 +152,6 @@ const ToggleButton = ({
     </ToggleButtonGroupContext.Consumer>
   );
 };
-
-// @component ./ToggleButtonGroup.tsx
-ToggleButton.Group = ToggleButtonGroup;
-
-// @component ./ToggleButtonRow.tsx
-ToggleButton.Row = ToggleButtonRow;
 
 const styles = StyleSheet.create({
   content: {
