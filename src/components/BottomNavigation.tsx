@@ -55,8 +55,10 @@ type TouchableProps = TouchableWithoutFeedbackProps & {
 
 type Props = {
   /**
-   * Whether the shifting style is used, the active tab appears wider and the inactive tabs won't have a label.
+   * Whether the shifting style is used, the active tab icon shifts up to show the label and the inactive tabs won't have a label.
+   *
    * By default, this is `true` when you have more than 3 tabs.
+   * Pass `shifting={false}` to explicitly disable this animation, or `shifting={true}` to always use this animation.
    */
   shifting?: boolean;
   /**
@@ -206,8 +208,13 @@ type Props = {
    */
   keyboardHidesNavigationBar?: boolean;
   /**
-   * Style for the bottom navigation bar.
-   * You can set a bottom padding here if you have a translucent navigation bar on Android:
+   * Style for the bottom navigation bar.  You can pass a custom background color here:
+   *
+   * ```js
+   * barStyle={{ backgroundColor: '#694fad' }}
+   * ```
+   *
+   * If you have a translucent navigation bar on Android, you can also set a bottom padding here:
    *
    * ```js
    * barStyle={{ paddingBottom: 48 }}
