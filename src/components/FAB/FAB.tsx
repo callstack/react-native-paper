@@ -12,7 +12,6 @@ import { withTheme } from '../../core/theming';
 import type { $RemoveChildren } from '../../types';
 import type { IconSource } from './../Icon';
 import type { AccessibilityState } from 'react-native';
-import { FABGroup } from './FABElements';
 
 type Props = $RemoveChildren<typeof Surface> & {
   /**
@@ -243,9 +242,6 @@ const FAB = ({
     </Surface>
   );
 };
-
-// @component ./FABGroup.tsx
-FAB.Group = FABGroup;
 
 const styles = StyleSheet.create({
   container: {

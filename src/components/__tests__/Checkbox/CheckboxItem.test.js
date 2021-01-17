@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
 import renderer from 'react-test-renderer';
-import Checkbox from '../../Checkbox/Checkbox';
+import Checkbox from '../../Checkbox';
 
 it('renders unchecked', () => {
   const tree = renderer
