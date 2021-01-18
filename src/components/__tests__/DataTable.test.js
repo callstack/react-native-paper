@@ -1,5 +1,6 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
+import { render } from 'react-native-testing-library';
 import DataTable from '../DataTable/DataTable.tsx';
 
 it('renders data table header', () => {
@@ -88,4 +89,63 @@ it('renders data table pagination with label', () => {
     .toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('renders data table pagination with fast-forward buttons', () => {
+  const { getAllByA11yLabel, toJSON } = render(
+    <DataTable.Pagination
+      page={3}
+      numberOfPages={15}
+      onPageChange={() => {}}
+      label="11-20 of 150"
+      showFastPagination
+    />
+  );
+
+  expect(() => getAllByA11yLabel('page-first')).not.toThrow();
+  expect(() => getAllByA11yLabel('page-last')).not.toThrow();
+  expect(toJSON()).toMatchSnapshot();
+});
+
+it('renders data table pagination without options select', () => {
+  const { getAllByA11yLabel } = render(
+    <DataTable.Pagination
+      page={3}
+      numberOfPages={15}
+      onPageChange={() => {}}
+      label="11-20 of 150"
+      showFastPagination
+    />
+  );
+
+  expect(() => getAllByA11yLabel('Options Select')).toThrow();
+});
+
+it('renders data table pagination with options select', () => {
+  jest.mock(
+    '../../utils/useLayout',
+    () =>
+      function useLayout() {
+        return [{ width: 600 }, jest.fn];
+      }
+  );
+
+  const { /* getAllByA11yLabel, */ toJSON } = render(
+    <DataTable.Pagination
+      page={3}
+      numberOfPages={15}
+      onPageChange={() => {}}
+      label="11-20 of 150"
+      showFastPagination
+      optionsPerPage={[2, 4, 6]}
+      itemsPerPage={2}
+      setItemsPerPage={() => {}}
+      optionsLabel={'Rows per page'}
+    />
+  );
+
+  // expect(() => getAllByA11yLabel('Options Select')).not.toThrow();
+  // expect(() => getAllByA11yLabel('optionsLabel')).not.toThrow();
+
+  expect(toJSON()).toMatchSnapshot();
 });

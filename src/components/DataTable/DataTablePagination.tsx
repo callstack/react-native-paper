@@ -13,6 +13,7 @@ import { withTheme } from '../../core/theming';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Menu from '../Menu/Menu';
 import Button from '../Button';
+import useLayout from '../../utils/useLayout';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -27,6 +28,10 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    * Label text for oprions select to display
    */
   optionsLabel?: React.ReactNode;
+  /**
+   * AccessibilityLabel for optionsLabel
+   */
+  optionsAccessibilityLabel?: string;
   /**
    * Options for a number of rows per page to choose from
    */
@@ -133,18 +138,27 @@ const DataTablePagination = ({
   itemsPerPage,
   setItemsPerPage,
   optionsLabel,
+  optionsAccessibilityLabel,
   ...rest
 }: Props) => {
   const [showSelect, toggleSelect] = React.useState(false);
   const labelColor = color(theme.colors.text).alpha(0.6).rgb().string();
+  const [layout, onLayout] = useLayout();
 
   return (
-    <View {...rest} style={[styles.container, style]}>
-      {optionsPerPage && itemsPerPage && setItemsPerPage ? (
-        <>
+    <View {...rest} style={[styles.container, style]} onLayout={onLayout}>
+      {optionsPerPage &&
+      itemsPerPage &&
+      setItemsPerPage &&
+      layout.width > 400 ? (
+        <View
+          accessibilityLabel="Options Select"
+          style={styles.optionsContainer}
+        >
           <Text
-            style={[styles.optionsLabel, { color: labelColor }]}
-            numberOfLines={1}
+            style={[styles.label, { color: labelColor }]}
+            numberOfLines={3}
+            accessibilityLabel={optionsAccessibilityLabel || 'optionsLabel'}
           >
             {optionsLabel}
           </Text>
@@ -178,9 +192,13 @@ const DataTablePagination = ({
               />
             ))}
           </Menu>
-        </>
+        </View>
       ) : null}
-      <Text style={[styles.label, { color: labelColor }]} numberOfLines={2}>
+      <Text
+        style={[styles.label, { color: labelColor }]}
+        numberOfLines={3}
+        accessibilityLabel="label"
+      >
         {label}
       </Text>
       <View style={styles.iconsConrainer}>
@@ -197,6 +215,7 @@ const DataTablePagination = ({
             color={theme.colors.text}
             disabled={page === 0}
             onPress={() => onPageChange(0)}
+            accessibilityLabel="page-first"
           />
         ) : null}
         <IconButton
@@ -211,6 +230,7 @@ const DataTablePagination = ({
           color={theme.colors.text}
           disabled={page === 0}
           onPress={() => onPageChange(page - 1)}
+          accessibilityLabel="chevron-left"
         />
         <IconButton
           icon={({ size, color }) => (
@@ -224,6 +244,7 @@ const DataTablePagination = ({
           color={theme.colors.text}
           disabled={numberOfPages === 0 || page === numberOfPages - 1}
           onPress={() => onPageChange(page + 1)}
+          accessibilityLabel="chevron-right"
         />
         {showFastPagination ? (
           <IconButton
@@ -238,6 +259,7 @@ const DataTablePagination = ({
             color={theme.colors.text}
             disabled={numberOfPages === 0 || page === numberOfPages - 1}
             onPress={() => onPageChange(numberOfPages - 1)}
+            accessibilityLabel="page-last"
           />
         ) : null}
       </View>
@@ -253,19 +275,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingLeft: 16,
-    flexWrap: 'wrap',
+  },
+  optionsContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   label: {
-    fontSize: 12,
-    marginRight: 44,
-  },
-  optionsLabel: {
     fontSize: 12,
     marginRight: 16,
   },
   button: {
     textAlign: 'center',
-    marginRight: 44,
+    marginRight: 16,
   },
   iconsConrainer: {
     flexDirection: 'row',
