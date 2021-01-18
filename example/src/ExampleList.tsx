@@ -36,6 +36,7 @@ import TextInputExample from './Examples/TextInputExample';
 import ToggleButtonExample from './Examples/ToggleButtonExample';
 import TouchableRippleExample from './Examples/TouchableRippleExample';
 import ThemeExample from './Examples/ThemeExample';
+import RadioButtonItemExample from './Examples/RadioButtonItemExample';
 
 export const examples: Record<
   string,
@@ -64,6 +65,7 @@ export const examples: Record<
   progressbar: ProgressBarExample,
   radio: RadioButtonExample,
   radioGroup: RadioButtonGroupExample,
+  radioItem: RadioButtonItemExample,
   searchbar: SearchbarExample,
   snackbar: SnackbarExample,
   surface: SurfaceExample,

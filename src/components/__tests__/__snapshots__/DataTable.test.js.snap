@@ -256,6 +256,7 @@ exports[`renders data table pagination 1`] = `
         allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
+        selectable={false}
         style={
           Array [
             Object {
@@ -341,6 +342,7 @@ exports[`renders data table pagination 1`] = `
         allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
+        selectable={false}
         style={
           Array [
             Object {
@@ -467,6 +469,7 @@ exports[`renders data table pagination with label 1`] = `
         allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
+        selectable={false}
         style={
           Array [
             Object {
@@ -552,6 +555,7 @@ exports[`renders data table pagination with label 1`] = `
         allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
+        selectable={false}
         style={
           Array [
             Object {
@@ -629,6 +633,7 @@ exports[`renders data table title with press handler 1`] = `
       allowFontScaling={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
+      selectable={false}
       style={
         Array [
           Object {
@@ -657,7 +662,7 @@ exports[`renders data table title with press handler 1`] = `
         ]
       }
     >
-      
+      
     </Text>
   </View>
   <Text
@@ -732,6 +737,7 @@ exports[`renders data table title with sort icon 1`] = `
       allowFontScaling={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
+      selectable={false}
       style={
         Array [
           Object {
@@ -760,7 +766,7 @@ exports[`renders data table title with sort icon 1`] = `
         ]
       }
     >
-      
+      
     </Text>
   </View>
   <Text

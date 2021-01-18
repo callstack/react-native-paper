@@ -37,7 +37,7 @@ import {
   getAdornmentConfig,
   getAdornmentStyleAdjustmentForNativeInput,
 } from './Adornment/TextInputAdornment';
-import { AdornmentSide, AdornmentType } from './Adornment/enums';
+import { AdornmentSide, AdornmentType, InputMode } from './Adornment/enums';
 
 const MINIMIZED_LABEL_Y_OFFSET = -18;
 
@@ -93,6 +93,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
       fontWeight,
       height,
       paddingHorizontal,
+      textAlign,
       ...viewStyle
     } = (StyleSheet.flatten(style) || {}) as TextStyle;
     const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
@@ -129,7 +130,9 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
         adornmentConfig,
         rightAffixWidth,
         leftAffixWidth,
+        paddingHorizontal,
         inputOffset: FLAT_INPUT_OFFSET,
+        mode: InputMode.Flat,
       }
     );
 
@@ -285,6 +288,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
     };
 
     let adornmentProps: TextInputAdornmentProps = {
+      paddingHorizontal,
       adornmentConfig,
       forceFocus,
       topPosition: {
@@ -350,6 +354,11 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
                 fontWeight,
                 color: inputTextColor,
                 textAlignVertical: multiline ? 'top' : 'center',
+                textAlign: textAlign
+                  ? textAlign
+                  : I18nManager.isRTL
+                  ? 'right'
+                  : 'left',
               },
               adornmentStyleAdjustmentForNativeInput,
             ],
@@ -415,7 +424,6 @@ const styles = StyleSheet.create({
   input: {
     flexGrow: 1,
     margin: 0,
-    textAlign: I18nManager.isRTL ? 'right' : 'left',
     zIndex: 1,
   },
   inputFlat: {

@@ -25,7 +25,7 @@ const CheckboxExample = () => {
         onPress={() => setCheckedDefault(!checkedDefault)}
       />
       <Checkbox.Item
-        label="Android"
+        label="Material Design"
         mode="android"
         status={checkedAndroid ? 'checked' : 'unchecked'}
         onPress={() => setCheckedAndroid(!checkedAndroid)}

@@ -163,7 +163,7 @@ export type TextInputProps = React.ComponentPropsWithRef<
  * export default MyComponent;
  * ```
  *
- * @extends TextInput props https://facebook.github.io/react-native/docs/textinput.html#props
+ * @extends TextInput props https://reactnative.dev/docs/textinput#props
  */
 
 class TextInput extends React.Component<TextInputProps, State> {

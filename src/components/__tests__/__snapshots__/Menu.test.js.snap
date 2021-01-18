@@ -58,6 +58,7 @@ exports[`renders menu with content styles 1`] = `
       >
         <Text
           numberOfLines={1}
+          selectable={false}
           style={
             Array [
               Object {
@@ -157,6 +158,7 @@ exports[`renders not visible menu 1`] = `
       >
         <Text
           numberOfLines={1}
+          selectable={false}
           style={
             Array [
               Object {
@@ -256,6 +258,7 @@ exports[`renders visible menu 1`] = `
       >
         <Text
           numberOfLines={1}
+          selectable={false}
           style={
             Array [
               Object {

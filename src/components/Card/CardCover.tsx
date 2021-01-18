@@ -42,7 +42,7 @@ type Props = React.ComponentPropsWithRef<typeof Image> & {
  * export default MyComponent;
  * ```
  *
- * @extends Image props https://facebook.github.io/react-native/docs/image.html#props
+ * @extends Image props https://reactnative.dev/docs/image#props
  */
 const CardCover = ({ index, total, style, theme, ...rest }: Props) => {
   const { roundness } = theme;

@@ -75,3 +75,6 @@ const RadioButtonGroup = ({ value, onValueChange, children }: Props) => (
 
 RadioButtonGroup.displayName = 'RadioButton.Group';
 export default RadioButtonGroup;
+
+// @component-docs ignore-next-line
+export { RadioButtonGroup };

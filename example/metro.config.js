@@ -7,7 +7,11 @@ const pak = require('../package.json');
 
 const root = path.resolve(__dirname, '..');
 
-const modules = ['@expo/vector-icons', ...Object.keys(pak.peerDependencies)];
+const modules = [
+  '@expo/vector-icons',
+  'expo-constants',
+  ...Object.keys(pak.peerDependencies),
+];
 
 module.exports = {
   projectRoot: __dirname,

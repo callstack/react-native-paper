@@ -12,8 +12,8 @@ The core team works directly on GitHub and all work is public.
 
 > **Working on your first pull request?** You can learn how from this *free* series: [How to Contribute to an Open Source Project on GitHub](https://egghead.io/series/how-to-contribute-to-an-open-source-project-on-github).
 
-1. Fork the repo and create your branch from `master` (a guide on [how to fork a repository](https://help.github.com/articles/fork-a-repo/)).
-2. Run `yarn bootstrap` to setup the development environment.
+1. Fork the repo and create your branch from `main` (a guide on [how to fork a repository](https://help.github.com/articles/fork-a-repo/)).
+2. Run `yarn` to setup the development environment.
 3. Do the changes you want and test them out in the example app before sending a pull request.
 
 ### Commit message convention
@@ -68,7 +68,7 @@ The documentation is automatically generated from the [TypeScript](https://www.t
 
 ### Publishing a release
 
-We use [release-it](https://github.com/webpro/release-it) to automate our release. If you have publish access to the NPM package, run the following from the master branch to publish a new release:
+We use [release-it](https://github.com/webpro/release-it) to automate our release. If you have publish access to the NPM package, run the following from the main branch to publish a new release:
 
 ```sh
 yarn release

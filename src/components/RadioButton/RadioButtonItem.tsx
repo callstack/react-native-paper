@@ -12,6 +12,8 @@ import { handlePress } from './utils';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import RadioButton from './RadioButton';
 import Text from '../Typography/Text';
+import RadioButtonAndroid from './RadioButtonAndroid';
+import RadioButtonIOS from './RadioButtonIOS';
 
 export type Props = {
   /**
@@ -62,6 +64,11 @@ export type Props = {
    * testID to be used on tests.
    */
   testID?: string;
+  /**
+   * Whether `<RadioButton.Android />` or `<RadioButton.IOS />` should be used.
+   * Left undefined `<RadioButton />` will be used.
+   */
+  mode?: 'android' | 'ios';
 };
 
 /**
@@ -106,48 +113,58 @@ const RadioButtonItem = ({
   theme: { colors },
   accessibilityLabel,
   testID,
-}: Props) => (
-  <RadioButtonContext.Consumer>
-    {(context?: RadioButtonContextType) => {
-      return (
-        <TouchableRipple
-          onPress={
-            disabled
-              ? undefined
-              : () =>
-                  handlePress({
-                    onPress: onPress,
-                    onValueChange: context?.onValueChange,
-                    value,
-                  })
-          }
-          accessibilityLabel={accessibilityLabel}
-          testID={testID}
-        >
-          <View style={[styles.container, style]} pointerEvents="none">
-            <Text style={[styles.label, { color: colors.text }, labelStyle]}>
-              {label}
-            </Text>
-            <RadioButton
-              value={value}
-              disabled={disabled}
-              status={status}
-              color={color}
-              uncheckedColor={uncheckedColor}
-            />
-          </View>
-        </TouchableRipple>
-      );
-    }}
-  </RadioButtonContext.Consumer>
-);
+  mode,
+}: Props) => {
+  const radioButtonProps = { value, disabled, status, color, uncheckedColor };
+  let radioButton: any;
+
+  if (mode === 'android') {
+    radioButton = <RadioButtonAndroid {...radioButtonProps} />;
+  } else if (mode === 'ios') {
+    radioButton = <RadioButtonIOS {...radioButtonProps} />;
+  } else {
+    radioButton = <RadioButton {...radioButtonProps} />;
+  }
+
+  return (
+    <RadioButtonContext.Consumer>
+      {(context?: RadioButtonContextType) => {
+        return (
+          <TouchableRipple
+            onPress={
+              disabled
+                ? undefined
+                : () =>
+                    handlePress({
+                      onPress: onPress,
+                      onValueChange: context?.onValueChange,
+                      value,
+                    })
+            }
+            accessibilityLabel={accessibilityLabel}
+            testID={testID}
+          >
+            <View style={[styles.container, style]} pointerEvents="none">
+              <Text style={[styles.label, { color: colors.text }, labelStyle]}>
+                {label}
+              </Text>
+              {radioButton}
+            </View>
+          </TouchableRipple>
+        );
+      }}
+    </RadioButtonContext.Consumer>
+  );
+};
 
 RadioButtonItem.displayName = 'RadioButton.Item';
 
 export default withTheme(RadioButtonItem);
 
 // @component-docs ignore-next-line
-export { RadioButtonItem };
+const RadioButtonItemWithTheme = withTheme(RadioButtonItem);
+// @component-docs ignore-next-line
+export { RadioButtonItemWithTheme as RadioButtonItem };
 
 const styles = StyleSheet.create({
   container: {
@@ -159,5 +176,6 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
+    flex: 1,
   },
 });

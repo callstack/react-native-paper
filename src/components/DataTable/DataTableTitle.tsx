@@ -106,7 +106,7 @@ const DataTableTitle = ({
   const icon = sortDirection ? (
     <Animated.View style={[styles.icon, { transform: [{ rotate: spin }] }]}>
       <MaterialCommunityIcon
-        name="arrow-down"
+        name="arrow-up"
         size={16}
         color={theme.colors.text}
         direction={I18nManager.isRTL ? 'rtl' : 'ltr'}

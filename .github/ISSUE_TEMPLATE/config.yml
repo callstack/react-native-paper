@@ -10,7 +10,7 @@ contact_links:
     url: https://snack.expo.io/@react-native-paper/github.com-callstack-react-native-paper:example
     about: See the official example app.
   - name: Contributing guide
-    url: https://github.com/callstack/react-native-paper/blob/master/CONTRIBUTING.md
+    url: https://github.com/callstack/react-native-paper/blob/main/CONTRIBUTING.md
     about: See our contributing guide.
   - name: Discord channel
     url: https://discord.com/channels/426714625279524876/438316503113138176

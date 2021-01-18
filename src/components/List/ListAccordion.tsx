@@ -39,6 +39,10 @@ type Props = {
    */
   onPress?: () => void;
   /**
+   * Function to execute on long press.
+   */
+  onLongPress?: () => void;
+  /**
    * Content of the section.
    */
   children: React.ReactNode;
@@ -135,6 +139,7 @@ const ListAccordion = ({
   id,
   testID,
   onPress,
+  onLongPress,
   expanded: expandedProp,
 }: Props) => {
   const [expanded, setExpanded] = React.useState<boolean>(
@@ -174,6 +179,7 @@ const ListAccordion = ({
       <TouchableRipple
         style={[styles.container, style]}
         onPress={handlePress}
+        onLongPress={onLongPress}
         accessibilityTraits="button"
         accessibilityComponentType="button"
         accessibilityRole="button"
@@ -187,6 +193,7 @@ const ListAccordion = ({
             : null}
           <View style={[styles.item, styles.content]}>
             <Text
+              selectable={false}
               numberOfLines={titleNumberOfLines}
               style={[
                 styles.title,
@@ -200,6 +207,7 @@ const ListAccordion = ({
             </Text>
             {description && (
               <Text
+                selectable={false}
                 numberOfLines={descriptionNumberOfLines}
                 style={[
                   styles.description,

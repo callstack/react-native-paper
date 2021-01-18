@@ -7,8 +7,12 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   ViewStyle,
+  View,
 } from 'react-native';
-import SafeAreaView from 'react-native-safe-area-view';
+import {
+  getStatusBarHeight,
+  getBottomSpace,
+} from 'react-native-iphone-x-helper';
 import Surface from './Surface';
 import { withTheme } from '../core/theming';
 
@@ -38,12 +42,19 @@ type Props = {
    */
   contentContainerStyle?: StyleProp<ViewStyle>;
   /**
+   * Style for the wrapper of the modal.
+   * Use this prop to change the default wrapper style or to override safe area insets with marginTop and marginBottom.
+   */
+  style?: StyleProp<ViewStyle>;
+  /**
    * @optional
    */
   theme: ReactNativePaper.Theme;
 };
 
 const DEFAULT_DURATION = 220;
+const TOP_INSET = getStatusBarHeight(true);
+const BOTTOM_INSET = getBottomSpace();
 
 /**
  * The Modal component is a simple way to present content above an enclosing view.
@@ -84,7 +95,6 @@ const DEFAULT_DURATION = 220;
  * export default MyComponent;
  * ```
  */
-
 const Modal = ({
   children,
   dismissable = true,
@@ -93,6 +103,7 @@ const Modal = ({
   overlayAccessibilityLabel = 'Close modal',
   visible = false,
   onDismiss,
+  style,
 }: Props) => {
   const { current: opacity } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
@@ -188,7 +199,14 @@ const Modal = ({
           ]}
         />
       </TouchableWithoutFeedback>
-      <SafeAreaView style={styles.wrapper} pointerEvents="box-none">
+      <View
+        style={[
+          styles.wrapper,
+          { marginTop: TOP_INSET, marginBottom: BOTTOM_INSET },
+          style,
+        ]}
+        pointerEvents="box-none"
+      >
         <Surface
           style={
             [{ opacity }, styles.content, contentContainerStyle] as StyleProp<
@@ -198,7 +216,7 @@ const Modal = ({
         >
           {children}
         </Surface>
-      </SafeAreaView>
+      </View>
     </Animated.View>
   );
 };

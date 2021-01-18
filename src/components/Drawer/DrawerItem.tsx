@@ -102,6 +102,7 @@ const DrawerItem = ({
         <View style={styles.wrapper}>
           {icon ? <Icon source={icon} size={24} color={contentColor} /> : null}
           <Text
+            selectable={false}
             numberOfLines={1}
             style={[
               styles.label,
