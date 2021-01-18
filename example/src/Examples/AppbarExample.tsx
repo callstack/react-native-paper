@@ -26,26 +26,40 @@ const AppbarExample = ({ navigation }: Props) => {
   const [showCustomColor, setShowCustomColor] = React.useState(false);
   const [showExactTheme, setShowExactTheme] = React.useState(false);
 
-  navigation.setOptions({
-    header: () => (
-      <Appbar.Header
-        style={showCustomColor ? { backgroundColor: '#ffff00' } : null}
-        theme={{
-          mode: showExactTheme ? 'exact' : 'adaptive',
-        }}
-      >
-        {showLeftIcon && (
-          <Appbar.BackAction onPress={() => navigation.goBack()} />
-        )}
-        <Appbar.Content
-          title="Title"
-          subtitle={showSubtitle ? 'Subtitle' : null}
-        />
-        {showSearchIcon && <Appbar.Action icon="magnify" onPress={() => {}} />}
-        {showMoreIcon && <Appbar.Action icon={MORE_ICON} onPress={() => {}} />}
-      </Appbar.Header>
-    ),
-  });
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      header: () => (
+        <Appbar.Header
+          style={showCustomColor ? { backgroundColor: '#ffff00' } : null}
+          theme={{
+            mode: showExactTheme ? 'exact' : 'adaptive',
+          }}
+        >
+          {showLeftIcon && (
+            <Appbar.BackAction onPress={() => navigation.goBack()} />
+          )}
+          <Appbar.Content
+            title="Title"
+            subtitle={showSubtitle ? 'Subtitle' : null}
+          />
+          {showSearchIcon && (
+            <Appbar.Action icon="magnify" onPress={() => {}} />
+          )}
+          {showMoreIcon && (
+            <Appbar.Action icon={MORE_ICON} onPress={() => {}} />
+          )}
+        </Appbar.Header>
+      ),
+    });
+  }, [
+    navigation,
+    showLeftIcon,
+    showSubtitle,
+    showSearchIcon,
+    showMoreIcon,
+    showCustomColor,
+    showExactTheme,
+  ]);
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>

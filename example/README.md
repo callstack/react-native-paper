@@ -6,7 +6,7 @@ You can run the React Native app with [this Snack](https://snack.expo.io/@react-
 
 If you want to run the example from the repo,
 
-- Clone the repository and run `yarn bootstrap` in the root
+- Clone the repository and run `yarn` in the root
 - Run `yarn example start` to start the packager
 - Follow the instructions to open it with the [Expo app](https://expo.io/)
 
@@ -14,5 +14,5 @@ If you want to run the example from the repo,
 
 You can also run the example app as a web app using [react-native-web](https://github.com/necolas/react-native-web),
 
-- Clone the repository and run `yarn bootstrap` in the root
+- Clone the repository and run `yarn` in the root
 - Run `yarn example web` to start the webpack server and open the app in your browser

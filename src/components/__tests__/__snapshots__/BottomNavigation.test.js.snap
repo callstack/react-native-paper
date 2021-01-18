@@ -89,19 +89,17 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
       }
     >
       <View
-        forwardedRef={[Function]}
-        onLayout={[Function]}
-        pointerEvents="box-none"
         style={
-          Object {
-            "flexDirection": "row",
-            "maxWidth": 504,
-            "paddingBottom": 0,
-            "paddingLeft": 0,
-            "paddingRight": 0,
-            "paddingTop": 0,
-            "width": "100%",
-          }
+          Array [
+            Object {
+              "flexDirection": "row",
+              "width": "100%",
+            },
+            Object {
+              "marginBottom": 0,
+              "maxWidth": 504,
+            },
+          ]
         }
       >
         <View
@@ -164,6 +162,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -172,6 +171,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -212,6 +212,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -220,6 +221,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -350,6 +352,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -358,6 +361,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -398,6 +402,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -406,6 +411,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -536,6 +542,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -544,6 +551,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -584,6 +592,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -592,6 +601,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -757,19 +767,17 @@ exports[`hides labels in shifting bottom navigation 1`] = `
       }
     >
       <View
-        forwardedRef={[Function]}
-        onLayout={[Function]}
-        pointerEvents="box-none"
         style={
-          Object {
-            "flexDirection": "row",
-            "maxWidth": 504,
-            "paddingBottom": 0,
-            "paddingLeft": 0,
-            "paddingRight": 0,
-            "paddingTop": 0,
-            "width": "100%",
-          }
+          Array [
+            Object {
+              "flexDirection": "row",
+              "width": "100%",
+            },
+            Object {
+              "marginBottom": 0,
+              "maxWidth": 504,
+            },
+          ]
         }
       >
         <View
@@ -852,6 +860,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -860,6 +869,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -900,6 +910,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -908,6 +919,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -1038,6 +1050,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -1046,6 +1059,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -1086,6 +1100,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -1094,6 +1109,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -1224,6 +1240,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -1232,6 +1249,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -1272,6 +1290,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -1280,6 +1299,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -1445,19 +1465,17 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
       }
     >
       <View
-        forwardedRef={[Function]}
-        onLayout={[Function]}
-        pointerEvents="box-none"
         style={
-          Object {
-            "flexDirection": "row",
-            "maxWidth": 504,
-            "paddingBottom": 0,
-            "paddingLeft": 0,
-            "paddingRight": 0,
-            "paddingTop": 0,
-            "width": "100%",
-          }
+          Array [
+            Object {
+              "flexDirection": "row",
+              "width": "100%",
+            },
+            Object {
+              "marginBottom": 0,
+              "maxWidth": 504,
+            },
+          ]
         }
       >
         <View
@@ -2053,19 +2071,17 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
       }
     >
       <View
-        forwardedRef={[Function]}
-        onLayout={[Function]}
-        pointerEvents="box-none"
         style={
-          Object {
-            "flexDirection": "row",
-            "maxWidth": 480,
-            "paddingBottom": 0,
-            "paddingLeft": 0,
-            "paddingRight": 0,
-            "paddingTop": 0,
-            "width": "100%",
-          }
+          Array [
+            Object {
+              "flexDirection": "row",
+              "width": "100%",
+            },
+            Object {
+              "marginBottom": 0,
+              "maxWidth": 480,
+            },
+          ]
         }
       >
         <View
@@ -2933,19 +2949,17 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
       }
     >
       <View
-        forwardedRef={[Function]}
-        onLayout={[Function]}
-        pointerEvents="box-none"
         style={
-          Object {
-            "flexDirection": "row",
-            "maxWidth": 504,
-            "paddingBottom": 0,
-            "paddingLeft": 0,
-            "paddingRight": 0,
-            "paddingTop": 0,
-            "width": "100%",
-          }
+          Array [
+            Object {
+              "flexDirection": "row",
+              "width": "100%",
+            },
+            Object {
+              "marginBottom": 0,
+              "maxWidth": 504,
+            },
+          ]
         }
       >
         <View
@@ -3008,6 +3022,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -3016,6 +3031,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -3056,6 +3072,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -3064,6 +3081,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -3187,6 +3205,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -3274,6 +3293,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -3282,6 +3302,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -3322,6 +3343,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -3330,6 +3352,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -3453,6 +3476,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -3540,6 +3564,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -3548,6 +3573,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -3588,6 +3614,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -3596,6 +3623,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -3719,6 +3747,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -3841,19 +3870,17 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
       }
     >
       <View
-        forwardedRef={[Function]}
-        onLayout={[Function]}
-        pointerEvents="box-none"
         style={
-          Object {
-            "flexDirection": "row",
-            "maxWidth": 504,
-            "paddingBottom": 0,
-            "paddingLeft": 0,
-            "paddingRight": 0,
-            "paddingTop": 0,
-            "width": "100%",
-          }
+          Array [
+            Object {
+              "flexDirection": "row",
+              "width": "100%",
+            },
+            Object {
+              "marginBottom": 0,
+              "maxWidth": 504,
+            },
+          ]
         }
       >
         <View
@@ -3936,6 +3963,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -3944,6 +3972,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -3984,6 +4013,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -3992,6 +4022,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -4165,6 +4196,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -4173,6 +4205,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -4213,6 +4246,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -4221,6 +4255,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -4394,6 +4429,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -4402,6 +4438,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -4442,6 +4479,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -4450,6 +4488,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -4658,19 +4697,17 @@ exports[`renders non-shifting bottom navigation 1`] = `
       }
     >
       <View
-        forwardedRef={[Function]}
-        onLayout={[Function]}
-        pointerEvents="box-none"
         style={
-          Object {
-            "flexDirection": "row",
-            "maxWidth": 504,
-            "paddingBottom": 0,
-            "paddingLeft": 0,
-            "paddingRight": 0,
-            "paddingTop": 0,
-            "width": "100%",
-          }
+          Array [
+            Object {
+              "flexDirection": "row",
+              "width": "100%",
+            },
+            Object {
+              "marginBottom": 0,
+              "maxWidth": 504,
+            },
+          ]
         }
       >
         <View
@@ -4733,6 +4770,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -4741,6 +4779,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -4781,6 +4820,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -4789,6 +4829,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -4912,6 +4953,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -4999,6 +5041,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -5007,6 +5050,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -5047,6 +5091,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -5055,6 +5100,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -5178,6 +5224,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -5265,6 +5312,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -5273,6 +5321,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -5313,6 +5362,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -5321,6 +5371,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -5444,6 +5495,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -5566,19 +5618,17 @@ exports[`renders shifting bottom navigation 1`] = `
       }
     >
       <View
-        forwardedRef={[Function]}
-        onLayout={[Function]}
-        pointerEvents="box-none"
         style={
-          Object {
-            "flexDirection": "row",
-            "maxWidth": 480,
-            "paddingBottom": 0,
-            "paddingLeft": 0,
-            "paddingRight": 0,
-            "paddingTop": 0,
-            "width": "100%",
-          }
+          Array [
+            Object {
+              "flexDirection": "row",
+              "width": "100%",
+            },
+            Object {
+              "marginBottom": 0,
+              "maxWidth": 480,
+            },
+          ]
         }
       >
         <View
@@ -5661,6 +5711,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -5669,6 +5720,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -5709,6 +5761,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -5717,6 +5770,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -5890,6 +5944,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -5898,6 +5953,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -5938,6 +5994,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -5946,6 +6003,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -6119,6 +6177,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -6127,6 +6186,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -6167,6 +6227,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -6175,6 +6236,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -6348,6 +6410,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -6356,6 +6419,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -6396,6 +6460,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -6404,6 +6469,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -6577,6 +6643,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -6585,6 +6652,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,
@@ -6625,6 +6693,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
+                  selectable={false}
                   style={
                     Array [
                       Object {
@@ -6633,6 +6702,7 @@ exports[`renders shifting bottom navigation 1`] = `
                       },
                       Array [
                         Object {
+                          "lineHeight": 24,
                           "transform": Array [
                             Object {
                               "scaleX": 1,

@@ -51,10 +51,11 @@ const MenuExample = ({ navigation }: Props) => {
   const {
     colors: { background },
   } = useTheme();
-
-  navigation.setOptions({
-    headerShown: false,
-  });
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerShown: false,
+    });
+  }, [navigation]);
 
   return (
     <View style={styles.screen}>

@@ -6,12 +6,9 @@
     "privacy": "public",
     "version": "1.0.0",
     "orientation": "default",
-    "primaryColor": "#cccccc",
+    "primaryColor": "#6200EE",
     "userInterfaceStyle": "automatic",
-    "notification": {
-      "icon": "https://s3.amazonaws.com/exp-us-standard/placeholder-push-icon-blue-circle.png",
-      "color": "#000000"
-    },
+    "icon": "./assets/images/paper-icon.png",
     "packagerOpts": {
       "config": "./metro.config.js",
       "projectRoots": ""
@@ -19,6 +16,29 @@
     "platforms": [
       "android",
       "ios"
-    ]
+    ],
+    "owner": "react-native-paper",
+    "ios": {
+      "bundleIdentifier": "com.callstack.reactnativepaperexample",
+      "buildNumber": "3.0.0"
+    },
+    "android": {
+      "package": "com.callstack.reactnativepaperexample",
+      "versionCode": 4,
+      "permissions": [
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ],
+      "icon": "./assets/images/paper-icon.png",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/android-icon.png",
+        "backgroundColor": "#6200EE"
+      }
+    },
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "backgroundColor": "#6200EE",
+      "resizeMode": "cover"
+    }
   }
 }

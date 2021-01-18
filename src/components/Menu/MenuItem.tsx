@@ -121,6 +121,7 @@ const MenuItem = ({
           pointerEvents="none"
         >
           <Text
+            selectable={false}
             numberOfLines={1}
             style={[styles.title, { color: titleColor }, titleStyle]}
           >

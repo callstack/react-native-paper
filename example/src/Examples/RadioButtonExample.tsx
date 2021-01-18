@@ -27,7 +27,7 @@ const RadioButtonExample = () => {
     >
       <TouchableRipple onPress={() => setChecked('normal')}>
         <View style={styles.row}>
-          <Paragraph>Normal - Android</Paragraph>
+          <Paragraph>Normal - Material Design</Paragraph>
           <View pointerEvents="none">
             <RadioButton.Android
               value="normal"

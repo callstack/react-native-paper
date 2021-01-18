@@ -13,7 +13,7 @@ type Props = React.ComponentPropsWithRef<typeof Animated.Text> & {
 /**
  * Text component which follows styles from the theme.
  *
- * @extends Text props https://facebook.github.io/react-native/docs/text.html#props
+ * @extends Text props https://reactnative.dev/docs/text#props
  */
 function AnimatedText({ style, theme, ...rest }: Props) {
   const writingDirection = I18nManager.isRTL ? 'rtl' : 'ltr';

@@ -143,8 +143,8 @@ workflows:
             - install-dependencies
           filters:
             branches:
-              ignore: master
+              ignore: main
       - deploy-docs:
           filters:
             branches:
-              only: master
+              only: main

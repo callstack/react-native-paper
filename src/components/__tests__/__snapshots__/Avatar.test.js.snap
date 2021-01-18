@@ -23,6 +23,7 @@ exports[`renders avatar with icon 1`] = `
     allowFontScaling={false}
     importantForAccessibility="no-hide-descendants"
     pointerEvents="none"
+    selectable={false}
     style={
       Array [
         Object {
@@ -31,6 +32,7 @@ exports[`renders avatar with icon 1`] = `
         },
         Array [
           Object {
+            "lineHeight": 38.4,
             "transform": Array [
               Object {
                 "scaleX": 1,
@@ -78,6 +80,7 @@ exports[`renders avatar with icon and custom background color 1`] = `
     allowFontScaling={false}
     importantForAccessibility="no-hide-descendants"
     pointerEvents="none"
+    selectable={false}
     style={
       Array [
         Object {
@@ -86,6 +89,7 @@ exports[`renders avatar with icon and custom background color 1`] = `
         },
         Array [
           Object {
+            "lineHeight": 38.4,
             "transform": Array [
               Object {
                 "scaleX": 1,

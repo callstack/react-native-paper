@@ -73,6 +73,7 @@ exports[`renders chip with close button 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -81,6 +82,7 @@ exports[`renders chip with close button 1`] = `
               },
               Array [
                 Object {
+                  "lineHeight": 18,
                   "transform": Array [
                     Object {
                       "scaleX": 1,
@@ -105,6 +107,7 @@ exports[`renders chip with close button 1`] = `
       </View>
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -176,6 +179,7 @@ exports[`renders chip with close button 1`] = `
         allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
+        selectable={false}
         style={
           Array [
             Object {
@@ -184,6 +188,7 @@ exports[`renders chip with close button 1`] = `
             },
             Array [
               Object {
+                "lineHeight": 16,
                 "transform": Array [
                   Object {
                     "scaleX": 1,
@@ -283,6 +288,7 @@ exports[`renders chip with icon 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -291,6 +297,7 @@ exports[`renders chip with icon 1`] = `
               },
               Array [
                 Object {
+                  "lineHeight": 18,
                   "transform": Array [
                     Object {
                       "scaleX": 1,
@@ -315,6 +322,7 @@ exports[`renders chip with icon 1`] = `
       </View>
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -408,6 +416,7 @@ exports[`renders chip with onPress 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -501,6 +510,7 @@ exports[`renders outlined disabled chip 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
@@ -608,6 +618,7 @@ exports[`renders selected chip 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -616,6 +627,7 @@ exports[`renders selected chip 1`] = `
               },
               Array [
                 Object {
+                  "lineHeight": 18,
                   "transform": Array [
                     Object {
                       "scaleX": 1,
@@ -640,6 +652,7 @@ exports[`renders selected chip 1`] = `
       </View>
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {

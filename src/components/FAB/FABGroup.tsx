@@ -24,6 +24,7 @@ type Props = {
    * - `accessibilityLabel`: accessibility label for the action, uses label by default if specified
    * - `color`: custom icon color of the action item
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
+   * - `small`: boolean describing whether small or normal sized FAB is rendered. Defaults to `true`
    * - `onPress`: callback that is called when `FAB` is pressed (required)
    */
   actions: Array<{
@@ -32,6 +33,7 @@ type Props = {
     color?: string;
     accessibilityLabel?: string;
     style?: StyleProp<ViewStyle>;
+    small?: boolean;
     onPress: () => void;
     testID?: string;
   }>;
@@ -84,11 +86,6 @@ type Props = {
   testID?: string;
 };
 
-type State = {
-  backdrop: Animated.Value;
-  animations: Animated.Value[];
-};
-
 /**
  * A component to display a stack of FABs with related actions in a speed dial.
  * To render the group above other components, you'll need to wrap it with the [`Portal`](portal.html) component.
@@ -131,6 +128,7 @@ type State = {
  *               icon: 'bell',
  *               label: 'Remind',
  *               onPress: () => console.log('Pressed notifications'),
+ *               small: false,
  *             },
  *           ]}
  *           onStateChange={onStateChange}
@@ -148,39 +146,53 @@ type State = {
  * export default MyComponent;
  * ```
  */
-class FABGroup extends React.Component<Props, State> {
-  static displayName = 'FAB.Group';
+const FABGroup = ({
+  actions,
+  icon,
+  open,
+  onPress,
+  accessibilityLabel,
+  theme,
+  style,
+  fabStyle,
+  visible,
+  testID,
+  onStateChange,
+  color: colorProp,
+}: Props) => {
+  const { current: backdrop } = React.useRef<Animated.Value>(
+    new Animated.Value(0)
+  );
+  const animations = React.useRef<Animated.Value[]>(
+    actions.map(() => new Animated.Value(open ? 1 : 0))
+  );
 
-  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
-    return {
-      animations: nextProps.actions.map(
-        (_, i) =>
-          prevState.animations[i] || new Animated.Value(nextProps.open ? 1 : 0)
-      ),
-    };
-  }
+  const [prevActions, setPrevActions] = React.useState<
+    | {
+        icon: IconSource;
+        label?: string;
+        color?: string;
+        accessibilityLabel?: string;
+        style?: StyleProp<ViewStyle>;
+        onPress: () => void;
+        testID?: string;
+      }[]
+    | null
+  >(null);
 
-  state: State = {
-    backdrop: new Animated.Value(0),
-    animations: [],
-  };
+  const { scale } = theme.animation;
 
-  componentDidUpdate(prevProps: Props) {
-    if (this.props.open === prevProps.open) {
-      return;
-    }
-
-    const { scale } = this.props.theme.animation;
-    if (this.props.open) {
+  React.useEffect(() => {
+    if (open) {
       Animated.parallel([
-        Animated.timing(this.state.backdrop, {
+        Animated.timing(backdrop, {
           toValue: 1,
           duration: 250 * scale,
           useNativeDriver: true,
         }),
         Animated.stagger(
           50 * scale,
-          this.state.animations
+          animations.current
             .map((animation) =>
               Animated.timing(animation, {
                 toValue: 1,
@@ -193,12 +205,12 @@ class FABGroup extends React.Component<Props, State> {
       ]).start();
     } else {
       Animated.parallel([
-        Animated.timing(this.state.backdrop, {
+        Animated.timing(backdrop, {
           toValue: 0,
           duration: 200 * scale,
           useNativeDriver: true,
         }),
-        ...this.state.animations.map((animation) =>
+        ...animations.current.map((animation) =>
           Animated.timing(animation, {
             toValue: 0,
             duration: 150 * scale,
@@ -207,70 +219,71 @@ class FABGroup extends React.Component<Props, State> {
         ),
       ]).start();
     }
+  }, [open, actions, backdrop, scale]);
+
+  const close = () => onStateChange({ open: false });
+
+  const toggle = () => onStateChange({ open: !open });
+
+  const { colors } = theme;
+
+  const labelColor = theme.dark
+    ? colors.text
+    : color(colors.text).fade(0.54).rgb().string();
+  const backdropOpacity = open
+    ? backdrop.interpolate({
+        inputRange: [0, 0.5, 1],
+        outputRange: [0, 1, 1],
+      })
+    : backdrop;
+
+  const opacities = animations.current;
+  const scales = opacities.map((opacity) =>
+    open
+      ? opacity.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0.8, 1],
+        })
+      : 1
+  );
+
+  if (actions.length !== prevActions?.length) {
+    animations.current = actions.map(
+      (_, i) => animations.current[i] || new Animated.Value(open ? 1 : 0)
+    );
+    setPrevActions(actions);
   }
 
-  private close = () => this.props.onStateChange({ open: false });
-
-  private toggle = () => this.props.onStateChange({ open: !this.props.open });
-
-  render() {
-    const {
-      actions,
-      icon,
-      open,
-      onPress,
-      accessibilityLabel,
-      theme,
-      style,
-      fabStyle,
-      visible,
-      testID,
-    } = this.props;
-    const { colors } = theme;
-
-    const labelColor = theme.dark
-      ? colors.text
-      : color(colors.text).fade(0.54).rgb().string();
-    const backdropOpacity = open
-      ? this.state.backdrop.interpolate({
-          inputRange: [0, 0.5, 1],
-          outputRange: [0, 1, 1],
-        })
-      : this.state.backdrop;
-
-    const opacities = this.state.animations;
-    const scales = opacities.map((opacity) =>
-      open
-        ? opacity.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0.8, 1],
-          })
-        : 1
-    );
-
-    return (
-      <View pointerEvents="box-none" style={[styles.container, style]}>
-        <TouchableWithoutFeedback onPress={this.close}>
-          <Animated.View
-            pointerEvents={open ? 'auto' : 'none'}
-            style={[
-              styles.backdrop,
-              {
-                opacity: backdropOpacity,
-                backgroundColor: colors.backdrop,
-              },
-            ]}
-          />
-        </TouchableWithoutFeedback>
-        <SafeAreaView pointerEvents="box-none" style={styles.safeArea}>
-          <View pointerEvents={open ? 'box-none' : 'none'}>
-            {actions.map((it, i) => (
-              <View
-                key={i} // eslint-disable-line react/no-array-index-key
-                style={styles.item}
-                pointerEvents={open ? 'box-none' : 'none'}
-              >
-                {it.label && (
+  return (
+    <View pointerEvents="box-none" style={[styles.container, style]}>
+      <TouchableWithoutFeedback onPress={close}>
+        <Animated.View
+          pointerEvents={open ? 'auto' : 'none'}
+          style={[
+            styles.backdrop,
+            {
+              opacity: backdropOpacity,
+              backgroundColor: colors.backdrop,
+            },
+          ]}
+        />
+      </TouchableWithoutFeedback>
+      <SafeAreaView pointerEvents="box-none" style={styles.safeArea}>
+        <View pointerEvents={open ? 'box-none' : 'none'}>
+          {actions.map((it, i) => (
+            <View
+              key={i} // eslint-disable-line react/no-array-index-key
+              style={[
+                styles.item,
+                {
+                  marginHorizontal:
+                    typeof it.small === 'undefined' || it.small ? 24 : 16,
+                },
+              ]}
+              pointerEvents={open ? 'box-none' : 'none'}
+            >
+              {it.label && (
+                <View>
                   <Card
                     style={
                       [
@@ -283,7 +296,7 @@ class FABGroup extends React.Component<Props, State> {
                     }
                     onPress={() => {
                       it.onPress();
-                      this.close();
+                      close();
                     }}
                     accessibilityLabel={
                       it.accessibilityLabel !== 'undefined'
@@ -296,65 +309,69 @@ class FABGroup extends React.Component<Props, State> {
                   >
                     <Text style={{ color: labelColor }}>{it.label}</Text>
                   </Card>
-                )}
-                <FAB
-                  small
-                  icon={it.icon}
-                  color={it.color}
-                  style={
-                    [
-                      {
-                        transform: [{ scale: scales[i] }],
-                        opacity: opacities[i],
-                        backgroundColor: theme.colors.surface,
-                      },
-                      it.style,
-                    ] as StyleProp<ViewStyle>
-                  }
-                  onPress={() => {
-                    it.onPress();
-                    this.close();
-                  }}
-                  accessibilityLabel={
-                    typeof it.accessibilityLabel !== 'undefined'
-                      ? it.accessibilityLabel
-                      : it.label
-                  }
-                  accessibilityTraits="button"
-                  accessibilityComponentType="button"
-                  accessibilityRole="button"
-                  testID={it.testID}
-                  visible={open}
-                />
-              </View>
-            ))}
-          </View>
-          <FAB
-            onPress={() => {
-              onPress?.();
-              this.toggle();
-            }}
-            icon={icon}
-            color={this.props.color}
-            accessibilityLabel={accessibilityLabel}
-            accessibilityTraits="button"
-            accessibilityComponentType="button"
-            accessibilityRole="button"
-            style={[styles.fab, fabStyle]}
-            visible={visible}
-            testID={testID}
-            accessibilityState={{ expanded: open }}
-          />
-        </SafeAreaView>
-      </View>
-    );
-  }
-}
+                </View>
+              )}
+              <FAB
+                small={typeof it.small !== 'undefined' ? it.small : true}
+                icon={it.icon}
+                color={it.color}
+                style={
+                  [
+                    {
+                      transform: [{ scale: scales[i] }],
+                      opacity: opacities[i],
+                      backgroundColor: theme.colors.surface,
+                    },
+                    it.style,
+                  ] as StyleProp<ViewStyle>
+                }
+                onPress={() => {
+                  it.onPress();
+                  close();
+                }}
+                accessibilityLabel={
+                  typeof it.accessibilityLabel !== 'undefined'
+                    ? it.accessibilityLabel
+                    : it.label
+                }
+                accessibilityTraits="button"
+                accessibilityComponentType="button"
+                accessibilityRole="button"
+                testID={it.testID}
+                visible={open}
+              />
+            </View>
+          ))}
+        </View>
+        <FAB
+          onPress={() => {
+            onPress?.();
+            toggle();
+          }}
+          icon={icon}
+          color={colorProp}
+          accessibilityLabel={accessibilityLabel}
+          accessibilityTraits="button"
+          accessibilityComponentType="button"
+          accessibilityRole="button"
+          accessibilityState={{ expanded: open }}
+          style={[styles.fab, fabStyle]}
+          visible={visible}
+          testID={testID}
+        />
+      </SafeAreaView>
+    </View>
+  );
+};
+
+FABGroup.displayName = 'FAB.Group';
 
 export default withTheme(FABGroup);
 
 // @component-docs ignore-next-line
-export { FABGroup };
+const FABGroupWithTheme = withTheme(FABGroup);
+// @component-docs ignore-next-line
+export { FABGroupWithTheme as FABGroup };
 
 const styles = StyleSheet.create({
   safeArea: {
@@ -381,7 +398,6 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   item: {
-    marginHorizontal: 24,
     marginBottom: 16,
     flexDirection: 'row',
     justifyContent: 'flex-end',

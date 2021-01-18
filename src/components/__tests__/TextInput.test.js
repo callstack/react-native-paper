@@ -60,3 +60,28 @@ it('correctly renders left-side icon adornment, and right-side affix adornment '
   expect(() => getByTestId('left-affix-adornment')).not.toThrow();
   expect(toJSON()).toMatchSnapshot();
 });
+
+it('correctly applies default textAlign based on default RTL', () => {
+  const { toJSON } = render(
+    <TextInput
+      label="Flat input"
+      placeholder="Type something"
+      value={'Some test value'}
+    />
+  );
+
+  expect(toJSON()).toMatchSnapshot();
+});
+
+it('correctly applies textAlign center', () => {
+  const { toJSON } = render(
+    <TextInput
+      label="Flat input"
+      placeholder="Type something"
+      value={'Some test value'}
+      style={{ textAlign: 'center' }}
+    />
+  );
+
+  expect(toJSON()).toMatchSnapshot();
+});

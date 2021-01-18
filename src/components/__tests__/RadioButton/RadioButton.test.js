@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { RadioButtonContext } from '../../RadioButton/RadioButtonGroup';
-import RadioButton from '../../RadioButton/RadioButton';
+import RadioButton from '../../RadioButton';
 
 describe('RadioButton', () => {
   afterEach(() => jest.resetModules());

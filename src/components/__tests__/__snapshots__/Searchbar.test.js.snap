@@ -73,6 +73,7 @@ exports[`renders with placeholder 1`] = `
         allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
+        selectable={false}
         style={
           Array [
             Object {
@@ -81,6 +82,7 @@ exports[`renders with placeholder 1`] = `
             },
             Array [
               Object {
+                "lineHeight": 24,
                 "transform": Array [
                   Object {
                     "scaleX": 1,
@@ -190,6 +192,7 @@ exports[`renders with placeholder 1`] = `
         allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
+        selectable={false}
         style={
           Array [
             Object {
@@ -198,6 +201,7 @@ exports[`renders with placeholder 1`] = `
             },
             Array [
               Object {
+                "lineHeight": 24,
                 "transform": Array [
                   Object {
                     "scaleX": 1,
@@ -297,6 +301,7 @@ exports[`renders with text 1`] = `
         allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
+        selectable={false}
         style={
           Array [
             Object {
@@ -305,6 +310,7 @@ exports[`renders with text 1`] = `
             },
             Array [
               Object {
+                "lineHeight": 24,
                 "transform": Array [
                   Object {
                     "scaleX": 1,
@@ -413,6 +419,7 @@ exports[`renders with text 1`] = `
         allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
+        selectable={false}
         style={
           Array [
             Object {
@@ -421,6 +428,7 @@ exports[`renders with text 1`] = `
             },
             Array [
               Object {
+                "lineHeight": 24,
                 "transform": Array [
                   Object {
                     "scaleX": 1,

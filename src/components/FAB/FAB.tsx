@@ -2,8 +2,6 @@ import color from 'color';
 import * as React from 'react';
 import { Animated, View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 import ActivityIndicator from '../ActivityIndicator';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import FABGroup, { FABGroup as _FABGroup } from './FABGroup';
 import Surface from '../Surface';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon from '../Icon';
@@ -77,10 +75,6 @@ type Props = $RemoveChildren<typeof Surface> & {
   testID?: string;
 };
 
-type State = {
-  visibility: Animated.Value;
-};
-
 /**
  * A floating action button represents the primary action in an application.
  *
@@ -116,154 +110,138 @@ type State = {
  * export default MyComponent;
  * ```
  */
-class FAB extends React.Component<Props, State> {
-  // @component ./FABGroup.tsx
-  static Group = FABGroup;
+const FAB = ({
+  small,
+  icon,
+  label,
+  accessibilityLabel = label,
+  accessibilityState,
+  animated = true,
+  color: customColor,
+  disabled,
+  onPress,
+  onLongPress,
+  theme,
+  style,
+  visible = true,
+  uppercase = true,
+  loading,
+  testID,
+  ...rest
+}: Props) => {
+  const { current: visibility } = React.useRef<Animated.Value>(
+    new Animated.Value(visible ? 1 : 0)
+  );
+  const { scale } = theme.animation;
 
-  static defaultProps = {
-    uppercase: true,
-    visible: true,
-  };
-
-  state = {
-    visibility: new Animated.Value(this.props.visible ? 1 : 0),
-  };
-
-  componentDidUpdate(prevProps: Props) {
-    const { scale } = this.props.theme.animation;
-    if (this.props.visible === prevProps.visible) {
-      return;
-    }
-
-    if (this.props.visible) {
-      Animated.timing(this.state.visibility, {
+  React.useEffect(() => {
+    if (visible) {
+      Animated.timing(visibility, {
         toValue: 1,
         duration: 200 * scale,
         useNativeDriver: true,
       }).start();
     } else {
-      Animated.timing(this.state.visibility, {
+      Animated.timing(visibility, {
         toValue: 0,
         duration: 150 * scale,
         useNativeDriver: true,
       }).start();
     }
-  }
+  }, [visible, scale, visibility]);
 
-  render() {
-    const {
-      small,
-      icon,
-      label,
-      uppercase,
-      accessibilityLabel = label,
-      accessibilityState,
-      animated = true,
-      color: customColor,
-      disabled,
-      onPress,
-      onLongPress,
-      theme,
-      style,
-      visible,
-      loading,
-      testID,
-      ...rest
-    } = this.props;
-    const { visibility } = this.state;
+  const IconComponent = animated ? CrossFadeIcon : Icon;
 
-    const IconComponent = animated ? CrossFadeIcon : Icon;
+  const disabledColor = color(theme.dark ? white : black)
+    .alpha(0.12)
+    .rgb()
+    .string();
 
-    const disabledColor = color(theme.dark ? white : black)
-      .alpha(0.12)
+  const { backgroundColor = disabled ? disabledColor : theme.colors.accent } =
+    StyleSheet.flatten(style) || {};
+
+  let foregroundColor;
+
+  if (typeof customColor !== 'undefined') {
+    foregroundColor = customColor;
+  } else if (disabled) {
+    foregroundColor = color(theme.dark ? white : black)
+      .alpha(0.32)
       .rgb()
       .string();
-
-    const { backgroundColor = disabled ? disabledColor : theme.colors.accent } =
-      StyleSheet.flatten(style) || {};
-
-    let foregroundColor;
-
-    if (typeof customColor !== 'undefined') {
-      foregroundColor = customColor;
-    } else if (disabled) {
-      foregroundColor = color(theme.dark ? white : black)
-        .alpha(0.32)
-        .rgb()
-        .string();
-    } else {
-      foregroundColor = !color(backgroundColor).isLight()
-        ? white
-        : 'rgba(0, 0, 0, .54)';
-    }
-
-    const rippleColor = color(foregroundColor).alpha(0.32).rgb().string();
-
-    return (
-      <Surface
-        {...rest}
-        style={
-          [
-            {
-              backgroundColor,
-              opacity: visibility,
-              transform: [
-                {
-                  scale: visibility,
-                },
-              ],
-            },
-            styles.container,
-            disabled && styles.disabled,
-            style,
-          ] as StyleProp<ViewStyle>
-        }
-        pointerEvents={visible ? 'auto' : 'none'}
-      >
-        <TouchableRipple
-          borderless
-          onPress={onPress}
-          onLongPress={onLongPress}
-          rippleColor={rippleColor}
-          disabled={disabled}
-          accessibilityLabel={accessibilityLabel}
-          accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
-          accessibilityComponentType="button"
-          accessibilityRole="button"
-          accessibilityState={{ ...accessibilityState, disabled }}
-          style={styles.touchable}
-          testID={testID}
-        >
-          <View
-            style={[
-              styles.content,
-              label ? styles.extended : small ? styles.small : styles.standard,
-            ]}
-            pointerEvents="none"
-          >
-            {icon && loading !== true ? (
-              <IconComponent source={icon} size={24} color={foregroundColor} />
-            ) : null}
-            {loading ? (
-              <ActivityIndicator size={18} color={foregroundColor} />
-            ) : null}
-            {label ? (
-              <Text
-                style={[
-                  styles.label,
-                  uppercase && styles.uppercaseLabel,
-                  { color: foregroundColor, ...theme.fonts.medium },
-                ]}
-              >
-                {label}
-              </Text>
-            ) : null}
-          </View>
-        </TouchableRipple>
-      </Surface>
-    );
+  } else {
+    foregroundColor = !color(backgroundColor).isLight()
+      ? white
+      : 'rgba(0, 0, 0, .54)';
   }
-}
+
+  const rippleColor = color(foregroundColor).alpha(0.32).rgb().string();
+
+  return (
+    <Surface
+      {...rest}
+      style={
+        [
+          {
+            backgroundColor,
+            opacity: visibility,
+            transform: [
+              {
+                scale: visibility,
+              },
+            ],
+          },
+          styles.container,
+          disabled && styles.disabled,
+          style,
+        ] as StyleProp<ViewStyle>
+      }
+      pointerEvents={visible ? 'auto' : 'none'}
+    >
+      <TouchableRipple
+        borderless
+        onPress={onPress}
+        onLongPress={onLongPress}
+        rippleColor={rippleColor}
+        disabled={disabled}
+        accessibilityLabel={accessibilityLabel}
+        accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
+        accessibilityComponentType="button"
+        accessibilityRole="button"
+        accessibilityState={{ ...accessibilityState, disabled }}
+        style={styles.touchable}
+        testID={testID}
+      >
+        <View
+          style={[
+            styles.content,
+            label ? styles.extended : small ? styles.small : styles.standard,
+          ]}
+          pointerEvents="none"
+        >
+          {icon && loading !== true ? (
+            <IconComponent source={icon} size={24} color={foregroundColor} />
+          ) : null}
+          {loading ? (
+            <ActivityIndicator size={18} color={foregroundColor} />
+          ) : null}
+          {label ? (
+            <Text
+              selectable={false}
+              style={[
+                styles.label,
+                uppercase && styles.uppercaseLabel,
+                { color: foregroundColor, ...theme.fonts.medium },
+              ]}
+            >
+              {label}
+            </Text>
+          ) : null}
+        </View>
+      </TouchableRipple>
+    </Surface>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -302,3 +280,8 @@ const styles = StyleSheet.create({
 });
 
 export default withTheme(FAB);
+
+// @component-docs ignore-next-line
+const FABWithTheme = withTheme(FAB);
+// @component-docs ignore-next-line
+export { FABWithTheme as FAB };

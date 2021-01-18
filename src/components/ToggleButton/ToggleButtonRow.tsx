@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View, StyleProp, ViewStyle } from 'react-native';
+import ToggleButtonGroup from './ToggleButtonGroup';
 import ToggleButton from './ToggleButton';
 
 type Props = {
@@ -51,7 +52,7 @@ const ToggleButtonRow = ({ value, onValueChange, children, style }: Props) => {
   const count = React.Children.count(children);
 
   return (
-    <ToggleButton.Group value={value} onValueChange={onValueChange}>
+    <ToggleButtonGroup value={value} onValueChange={onValueChange}>
       <View style={[styles.row, style]}>
         {React.Children.map(children, (child, i) => {
           // @ts-ignore
@@ -74,7 +75,7 @@ const ToggleButtonRow = ({ value, onValueChange, children, style }: Props) => {
           return child;
         })}
       </View>
-    </ToggleButton.Group>
+    </ToggleButtonGroup>
   );
 };
 
@@ -106,3 +107,6 @@ const styles = StyleSheet.create({
 });
 
 export default ToggleButtonRow;
+
+// @component-docs ignore-next-line
+export { ToggleButtonRow };
