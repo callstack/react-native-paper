@@ -44,6 +44,7 @@ exports[`can render the Android radio button on different platforms 1`] = `
           },
           Array [
             Object {
+              "flex": 1,
               "fontSize": 16,
             },
             Object {
@@ -146,6 +147,7 @@ exports[`can render the iOS radio button on different platforms 1`] = `
           },
           Array [
             Object {
+              "flex": 1,
               "fontSize": 16,
             },
             Object {
@@ -281,6 +283,7 @@ exports[`renders unchecked 1`] = `
           },
           Array [
             Object {
+              "flex": 1,
               "fontSize": 16,
             },
             Object {

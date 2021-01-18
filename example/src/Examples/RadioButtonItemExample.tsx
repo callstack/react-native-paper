@@ -26,7 +26,7 @@ const RadioButtonItemExample = () => {
         value="default"
       />
       <RadioButton.Item
-        label="Android"
+        label="Material Design"
         mode="android"
         status={checkedAndroid ? 'checked' : 'unchecked'}
         onPress={() => setCheckedAndroid(!checkedAndroid)}
