@@ -1,6 +1,6 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import { render } from 'react-native-testing-library';
+import { render, fireEvent } from 'react-native-testing-library';
 import DataTable from '../DataTable/DataTable.tsx';
 
 it('renders data table header', () => {
@@ -92,7 +92,7 @@ it('renders data table pagination with label', () => {
 });
 
 it('renders data table pagination with fast-forward buttons', () => {
-  const { getAllByA11yLabel, toJSON } = render(
+  const { getByA11yLabel, toJSON } = render(
     <DataTable.Pagination
       page={3}
       numberOfPages={15}
@@ -102,13 +102,13 @@ it('renders data table pagination with fast-forward buttons', () => {
     />
   );
 
-  expect(() => getAllByA11yLabel('page-first')).not.toThrow();
-  expect(() => getAllByA11yLabel('page-last')).not.toThrow();
+  expect(() => getByA11yLabel('page-first')).not.toThrow();
+  expect(() => getByA11yLabel('page-last')).not.toThrow();
   expect(toJSON()).toMatchSnapshot();
 });
 
 it('renders data table pagination without options select', () => {
-  const { getAllByA11yLabel } = render(
+  const { getByA11yLabel } = render(
     <DataTable.Pagination
       page={3}
       numberOfPages={15}
@@ -118,7 +118,7 @@ it('renders data table pagination without options select', () => {
     />
   );
 
-  expect(() => getAllByA11yLabel('Options Select')).toThrow();
+  expect(() => getByA11yLabel('Options Select')).toThrow();
 });
 
 it('renders data table pagination with options select', () => {
@@ -130,7 +130,7 @@ it('renders data table pagination with options select', () => {
       }
   );
 
-  const { /* getAllByA11yLabel, */ toJSON } = render(
+  const { getByA11yLabel, toJSON } = render(
     <DataTable.Pagination
       page={3}
       numberOfPages={15}
@@ -144,8 +144,16 @@ it('renders data table pagination with options select', () => {
     />
   );
 
-  // expect(() => getAllByA11yLabel('Options Select')).not.toThrow();
-  // expect(() => getAllByA11yLabel('optionsLabel')).not.toThrow();
+  fireEvent(getByA11yLabel('pagination-container'), 'layout', {
+    nativeEvent: {
+      layout: {
+        width: 500,
+      },
+    },
+  });
+
+  expect(() => getByA11yLabel('Options Select')).not.toThrow();
+  expect(() => getByA11yLabel('optionsLabel')).not.toThrow();
 
   expect(toJSON()).toMatchSnapshot();
 });

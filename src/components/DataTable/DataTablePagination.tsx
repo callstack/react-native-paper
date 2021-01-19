@@ -146,7 +146,12 @@ const DataTablePagination = ({
   const [layout, onLayout] = useLayout();
 
   return (
-    <View {...rest} style={[styles.container, style]} onLayout={onLayout}>
+    <View
+      {...rest}
+      style={[styles.container, style]}
+      onLayout={onLayout}
+      accessibilityLabel="pagination-container"
+    >
       {optionsPerPage &&
       itemsPerPage &&
       setItemsPerPage &&
