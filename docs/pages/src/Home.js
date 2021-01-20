@@ -31,13 +31,33 @@ export default class Home extends React.Component<{}> {
             components for React Native, following Google’s Material Design
             guidelines.
           </p>
-          <a
-            href="https://snack.expo.io/@react-native-paper/github.com-callstack-react-native-paper:example"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Try the demo on Snack
-          </a>
+          <p>
+            Try the demo on{' '}
+            <a
+              href="https://snack.expo.io/@react-native-paper/github.com-callstack-react-native-paper:example"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Snack
+            </a>
+            ,{' '}
+            <a
+              href="https://apps.apple.com/app/react-native-paper/id1548934513"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              iOS
+            </a>{' '}
+            or{' '}
+            <a
+              href="https://play.google.com/store/apps/details?id=com.callstack.reactnativepaperexample"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Android
+            </a>
+            .
+          </p>
           <Buttons>
             <Button className="primary" as={Link} to="getting-started">
               Get started
