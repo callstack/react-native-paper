@@ -6,6 +6,7 @@ import {
   StyleSheet,
   StyleProp,
   GestureResponderEvent,
+  Platform,
 } from 'react-native';
 import color from 'color';
 import { withTheme } from '../../core/theming';
@@ -253,6 +254,7 @@ TouchableRipple.supported = true;
 const styles = StyleSheet.create({
   touchable: {
     position: 'relative',
+    ...(Platform.OS === 'web' && { cursor: 'pointer' }),
   },
   borderless: {
     overflow: 'hidden',

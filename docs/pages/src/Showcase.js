@@ -20,6 +20,15 @@ type Data = {
 
 const data: Data[] = [
   {
+    color: '#6200EE',
+    name: 'Paper Example App',
+    image: 'showcase/paper.png',
+    android:
+      'https://play.google.com/store/apps/details?id=com.callstack.reactnativepaperexample',
+    ios: 'https://apps.apple.com/app/react-native-paper/id1548934513',
+    github: 'https://github.com/callstack/react-native-paper/tree/main/example',
+  },
+  {
     color: '#673AB7',
     name: 'Showman',
     image: 'showcase/showman.png',
