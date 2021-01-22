@@ -14,12 +14,7 @@ const ChipExample = () => {
       >
         <List.Section title="Flat chip">
           <View style={styles.row}>
-            <Chip
-              mode="outlined"
-              selected
-              onPress={() => {}}
-              style={styles.chip}
-            >
+            <Chip selected onPress={() => {}} style={styles.chip}>
               Simple
             </Chip>
             <Chip
