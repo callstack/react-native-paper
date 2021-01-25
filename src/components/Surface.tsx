@@ -64,7 +64,6 @@ const Surface = ({ style, theme, ...rest }: Props) => {
   const { elevation = 4 }: ViewStyle = flattenedStyles;
   const { dark: isDarkTheme, mode, colors } = theme;
   return (
-    // @ts-ignore
     <Animated.View
       {...rest}
       style={[
@@ -74,7 +73,7 @@ const Surface = ({ style, theme, ...rest }: Props) => {
               ? overlay(elevation, colors.surface)
               : colors.surface,
         },
-        elevation && shadow(elevation),
+        elevation ? shadow(elevation) : null,
         style,
       ]}
     />

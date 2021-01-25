@@ -247,6 +247,7 @@ const Touchable = ({
   TouchableRipple.supported ? (
     <TouchableRipple
       {...rest}
+      disabled={rest.disabled || undefined}
       borderless={borderless}
       centered={centered}
       rippleColor={rippleColor}
@@ -565,7 +566,7 @@ const BottomNavigation = ({
       })
     : approxBackgroundColor;
 
-  const isDark = !color(approxBackgroundColor).isLight();
+  const isDark = !color(approxBackgroundColor as string).isLight();
 
   const textColor = isDark ? white : black;
   const activeTintColor =
@@ -749,6 +750,7 @@ const BottomNavigation = ({
                 onPress: () => handleTabPress(index),
                 testID: getTestID({ route }),
                 accessibilityLabel: getAccessibilityLabel({ route }),
+                // @ts-ignore
                 accessibilityTraits: focused
                   ? ['button', 'selected']
                   : 'button',

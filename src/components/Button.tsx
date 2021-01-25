@@ -265,6 +265,7 @@ const Button = ({
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
         accessibilityLabel={accessibilityLabel}
+        // @ts-ignore
         accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
         accessibilityComponentType="button"
         accessibilityRole="button"
@@ -281,14 +282,14 @@ const Button = ({
               <Icon
                 source={icon}
                 size={customLabelSize || 16}
-                color={customLabelColor || textColor}
+                color={(customLabelColor || textColor) as string}
               />
             </View>
           ) : null}
           {loading ? (
             <ActivityIndicator
               size={customLabelSize || 16}
-              color={customLabelColor || textColor}
+              color={(customLabelColor || textColor) as string}
               style={iconStyle}
             />
           ) : null}

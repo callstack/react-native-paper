@@ -180,6 +180,7 @@ const ListAccordion = ({
         style={[styles.container, style]}
         onPress={handlePress}
         onLongPress={onLongPress}
+        // @ts-ignore
         accessibilityTraits="button"
         accessibilityComponentType="button"
         accessibilityRole="button"

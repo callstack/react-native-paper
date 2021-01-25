@@ -117,6 +117,7 @@ const IconButton = ({
         style,
       ]}
       accessibilityLabel={accessibilityLabel}
+      // @ts-ignore
       accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
       accessibilityComponentType="button"
       accessibilityRole="button"

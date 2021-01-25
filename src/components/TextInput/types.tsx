@@ -8,7 +8,7 @@ import type { TextInputProps } from './TextInput';
 import type { $Omit } from './../../types';
 
 export type RenderProps = {
-  ref: (a: NativeTextInput | null | undefined) => void;
+  ref: (a?: NativeTextInput | null) => void;
   onChangeText?: (a: string) => void;
   placeholder?: string;
   placeholderTextColor?: string;
@@ -28,15 +28,15 @@ export type State = {
   labeled: Animated.Value;
   error: Animated.Value;
   focused: boolean;
-  placeholder: string | null | undefined;
-  value: string | null | undefined;
+  placeholder?: string | null;
+  value?: string | null;
   labelLayout: { measured: boolean; width: number; height: number };
   leftLayout: { height: number | null; width: number | null };
   rightLayout: { height: number | null; width: number | null };
 };
 export type ChildTextInputProps = {
   parentState: State;
-  innerRef: (ref: NativeTextInput | null | undefined) => void;
+  innerRef: (ref?: NativeTextInput | null) => void;
   onFocus?: (args: any) => void;
   onBlur?: (args: any) => void;
   forceFocus: () => void;
@@ -57,18 +57,15 @@ export type LabelProps = {
   fontWeight: TextStyle['fontWeight'];
   font: any;
   topPosition: number;
-  paddingOffset?:
-    | { paddingLeft: number; paddingRight: number }
-    | null
-    | undefined;
+  paddingOffset?: { paddingLeft: number; paddingRight: number } | null;
   labelTranslationXOffset?: number;
-  placeholderColor: string | null | undefined;
-  backgroundColor?: string | null | undefined;
-  label?: string | null | undefined;
-  hasActiveOutline: boolean | null | undefined;
+  placeholderColor: string | null;
+  backgroundColor?: TextStyle['backgroundColor'];
+  label?: string | null;
+  hasActiveOutline?: boolean | null;
   activeColor: string;
   errorColor?: string;
-  error: boolean | null | undefined;
+  error?: boolean | null;
   onLayoutAnimatedText: (args: any) => void;
 };
 export type InputLabelProps = {

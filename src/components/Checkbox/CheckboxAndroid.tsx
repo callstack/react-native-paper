@@ -136,6 +136,7 @@ const CheckboxAndroid = ({
       rippleColor={rippleColor}
       onPress={onPress}
       disabled={disabled}
+      // @ts-ignore
       accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
       accessibilityComponentType="button"
       accessibilityRole="checkbox"

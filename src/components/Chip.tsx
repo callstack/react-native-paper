@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   AccessibilityState,
+  // @ts-ignore
   AccessibilityTrait,
   Animated,
   Platform,
@@ -195,8 +196,8 @@ const Chip = ({
         .rgb()
         .string();
   const selectedBackgroundColor = (dark
-    ? color(backgroundColor).lighten(mode === 'outlined' ? 0.2 : 0.4)
-    : color(backgroundColor).darken(mode === 'outlined' ? 0.08 : 0.2)
+    ? color(backgroundColor as string).lighten(mode === 'outlined' ? 0.2 : 0.4)
+    : color(backgroundColor as string).darken(mode === 'outlined' ? 0.08 : 0.2)
   )
     .rgb()
     .string();
@@ -248,6 +249,7 @@ const Chip = ({
         underlayColor={underlayColor}
         disabled={disabled}
         accessibilityLabel={accessibilityLabel}
+        // @ts-ignore
         accessibilityTraits={accessibilityTraits}
         accessibilityComponentType="button"
         accessibilityRole="button"
@@ -310,6 +312,7 @@ const Chip = ({
         <View style={styles.closeButtonStyle}>
           <TouchableWithoutFeedback
             onPress={onClose}
+            // @ts-ignore
             accessibilityTraits="button"
             accessibilityComponentType="button"
             accessibilityRole="button"

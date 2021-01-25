@@ -85,6 +85,7 @@ const Badge = ({
     }).start();
   }, [visible, opacity, scale]);
 
+  // @ts-ignore
   const { backgroundColor = theme.colors.notification, ...restStyle } =
     StyleSheet.flatten(style) || {};
   const textColor = color(backgroundColor).isLight() ? black : white;
@@ -92,7 +93,6 @@ const Badge = ({
   const borderRadius = size / 2;
 
   return (
-    // @ts-ignore
     <Animated.Text
       numberOfLines={1}
       style={[

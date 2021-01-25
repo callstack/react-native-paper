@@ -153,6 +153,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
         ]}
       >
         <IconButton
+          // @ts-ignore
           accessibilityTraits="button"
           accessibilityComponentType="button"
           accessibilityRole="button"
@@ -181,6 +182,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
           underlineColorAndroid="transparent"
           returnKeyType="search"
           keyboardAppearance={dark ? 'dark' : 'light'}
+          // @ts-ignore
           accessibilityTraits="search"
           accessibilityRole="search"
           ref={root}
@@ -205,6 +207,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
               />
             ))
           }
+          // @ts-ignore
           accessibilityTraits="button"
           accessibilityComponentType="button"
           accessibilityRole="button"

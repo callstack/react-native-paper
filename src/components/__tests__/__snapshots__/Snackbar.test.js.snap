@@ -52,6 +52,8 @@ exports[`renders snackbar with Text as a child 1`] = `
             "color": "#000000",
             "fontFamily": "System",
             "fontWeight": "400",
+          },
+          Object {
             "textAlign": "left",
           },
           Array [
@@ -127,6 +129,8 @@ exports[`renders snackbar with action button 1`] = `
             "color": "#000000",
             "fontFamily": "System",
             "fontWeight": "400",
+          },
+          Object {
             "textAlign": "left",
           },
           Array [
@@ -209,6 +213,8 @@ exports[`renders snackbar with action button 1`] = `
                   "color": "#000000",
                   "fontFamily": "System",
                   "fontWeight": "400",
+                },
+                Object {
                   "textAlign": "left",
                 },
                 Array [
@@ -297,6 +303,8 @@ exports[`renders snackbar with content 1`] = `
             "color": "#000000",
             "fontFamily": "System",
             "fontWeight": "400",
+          },
+          Object {
             "textAlign": "left",
           },
           Array [

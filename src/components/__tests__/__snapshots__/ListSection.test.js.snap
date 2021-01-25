@@ -60,6 +60,8 @@ exports[`renders list section with custom title style 1`] = `
           "color": "#000000",
           "fontFamily": "System",
           "fontWeight": "400",
+        },
+        Object {
           "textAlign": "left",
         },
         Array [
@@ -189,6 +191,8 @@ exports[`renders list section with custom title style 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Array [
@@ -316,6 +320,8 @@ exports[`renders list section with custom title style 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Array [
@@ -398,6 +404,8 @@ exports[`renders list section with subheader 1`] = `
           "color": "#000000",
           "fontFamily": "System",
           "fontWeight": "400",
+        },
+        Object {
           "textAlign": "left",
         },
         Array [
@@ -525,6 +533,8 @@ exports[`renders list section with subheader 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Array [
@@ -652,6 +662,8 @@ exports[`renders list section with subheader 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Array [
@@ -834,6 +846,8 @@ exports[`renders list section without subheader 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Array [
@@ -961,6 +975,8 @@ exports[`renders list section without subheader 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Array [

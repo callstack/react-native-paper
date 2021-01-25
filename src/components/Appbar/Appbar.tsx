@@ -94,7 +94,8 @@ const Appbar = ({ children, dark, style, theme, ...rest }: Props) => {
     isDark =
       backgroundColor === 'transparent'
         ? false
-        : !color(backgroundColor).isLight();
+        : // @ts-ignore
+          !color(backgroundColor).isLight();
   }
 
   let shouldCenterContent = false;

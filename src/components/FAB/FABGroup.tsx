@@ -303,6 +303,7 @@ const FABGroup = ({
                         ? it.accessibilityLabel
                         : it.label
                     }
+                    // @ts-ignore
                     accessibilityTraits="button"
                     accessibilityComponentType="button"
                     accessibilityRole="button"
@@ -334,6 +335,7 @@ const FABGroup = ({
                     ? it.accessibilityLabel
                     : it.label
                 }
+                // @ts-ignore
                 accessibilityTraits="button"
                 accessibilityComponentType="button"
                 accessibilityRole="button"
@@ -351,6 +353,7 @@ const FABGroup = ({
           icon={icon}
           color={colorProp}
           accessibilityLabel={accessibilityLabel}
+          // @ts-ignore
           accessibilityTraits="button"
           accessibilityComponentType="button"
           accessibilityRole="button"

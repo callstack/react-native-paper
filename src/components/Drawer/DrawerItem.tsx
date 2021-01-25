@@ -93,6 +93,7 @@ const DrawerItem = ({
         delayPressIn={0}
         onPress={onPress}
         style={{ borderRadius: roundness }}
+        // @ts-ignore
         accessibilityTraits={active ? ['button', 'selected'] : 'button'}
         accessibilityComponentType="button"
         accessibilityRole="button"

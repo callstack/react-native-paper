@@ -287,17 +287,20 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
             hasActiveOutline={hasActiveOutline}
             activeColor={activeColor}
             outlineColor={outlineColor}
-            backgroundColor={backgroundColor}
+            backgroundColor={backgroundColor as string}
           />
           <View
-            style={{
-              paddingTop: LABEL_PADDING_TOP,
-              paddingBottom: 0,
-              minHeight,
-            }}
+            style={[
+              styles.labelContainer,
+              {
+                paddingTop: LABEL_PADDING_TOP,
+                minHeight,
+              },
+            ]}
           >
             <InputLabel
               parentState={parentState}
+              // @ts-ignore
               labelProps={labelProps}
               labelBackground={LabelBackground}
             />
@@ -391,6 +394,9 @@ const styles = StyleSheet.create({
     right: 0,
     top: 6,
     bottom: 0,
+  },
+  labelContainer: {
+    paddingBottom: 0,
   },
   input: {
     flexGrow: 1,

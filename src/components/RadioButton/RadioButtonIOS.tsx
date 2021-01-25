@@ -102,6 +102,7 @@ const RadioButtonIOS = ({
                     });
                   }
             }
+            // @ts-ignore
             accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
             accessibilityComponentType={
               checked ? 'radiobutton_checked' : 'radiobutton_unchecked'
