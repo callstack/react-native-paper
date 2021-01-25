@@ -146,6 +146,7 @@ const Snackbar = ({
             duration === Number.NEGATIVE_INFINITY;
 
           if (finished && !isInfinity) {
+            // @ts-ignore setTimeout incompatible with clearTimeout
             hideTimeout.current = setTimeout(onDismiss, duration);
           }
         }
