@@ -93,7 +93,7 @@ const DrawerItem = ({
         delayPressIn={0}
         onPress={onPress}
         style={{ borderRadius: roundness }}
-        // @ts-ignore
+        // @ts-ignore We keep old a11y props for backwards compat with old RN versions
         accessibilityTraits={active ? ['button', 'selected'] : 'button'}
         accessibilityComponentType="button"
         accessibilityRole="button"

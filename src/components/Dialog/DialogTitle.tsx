@@ -51,7 +51,7 @@ type Props = React.ComponentPropsWithRef<typeof Title> & {
  */
 const DialogTitle = ({ children, theme, style, ...rest }: Props) => (
   <Title
-    // @ts-ignore
+    // @ts-ignore We keep old a11y props for backwards compat with old RN versions
     accessibilityTraits="header"
     accessibilityRole="header"
     style={[styles.text, { color: theme.colors.text }, style]}

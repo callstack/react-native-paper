@@ -180,7 +180,7 @@ const ListAccordion = ({
         style={[styles.container, style]}
         onPress={handlePress}
         onLongPress={onLongPress}
-        // @ts-ignore
+        // @ts-ignore We keep old a11y props for backwards compat with old RN versions
         accessibilityTraits="button"
         accessibilityComponentType="button"
         accessibilityRole="button"

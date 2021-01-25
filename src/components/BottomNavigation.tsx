@@ -750,7 +750,7 @@ const BottomNavigation = ({
                 onPress: () => handleTabPress(index),
                 testID: getTestID({ route }),
                 accessibilityLabel: getAccessibilityLabel({ route }),
-                // @ts-ignore
+                // @ts-ignore We keep old a11y props for backwards compat with old RN versions
                 accessibilityTraits: focused
                   ? ['button', 'selected']
                   : 'button',
