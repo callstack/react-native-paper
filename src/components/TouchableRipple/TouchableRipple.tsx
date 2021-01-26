@@ -54,6 +54,7 @@ type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
    * @optional
    */
   theme: ReactNativePaper.Theme;
+  forwardRef?: ((instance: TouchableWithoutFeedback | null) => void) | React.RefObject<TouchableWithoutFeedback> | null | undefined;
 };
 
 /**
@@ -99,7 +100,7 @@ const TouchableRipple = ({
   ...rest
 }: Props) => {
   const handlePressIn = (e: any) => {
-    const { centered, onPressIn } = rest;
+    const { centered, onPressIn} = rest;
 
     onPressIn?.(e);
 
@@ -238,6 +239,7 @@ const TouchableRipple = ({
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
       disabled={disabled}
+      ref={rest.forwardRef}
     >
       <View style={[styles.touchable, borderless && styles.borderless, style]}>
         {React.Children.only(children)}

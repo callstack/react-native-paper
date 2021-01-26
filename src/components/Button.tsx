@@ -6,6 +6,7 @@ import {
   StyleSheet,
   StyleProp,
   TextStyle,
+  TouchableWithoutFeedback
 } from 'react-native';
 import color from 'color';
 
@@ -87,6 +88,8 @@ type Props = React.ComponentProps<typeof Surface> & {
    * testID to be used on tests.
    */
   testID?: string;
+  forwardRef?: ((instance: TouchableWithoutFeedback | null) => void) | React.RefObject<TouchableWithoutFeedback> | null | undefined;
+
 };
 
 /**
@@ -274,6 +277,7 @@ const Button = ({
         rippleColor={rippleColor}
         style={touchableStyle}
         testID={testID}
+        ref={rest.forwardRef}
       >
         <View style={[styles.content, contentStyle]}>
           {icon && loading !== true ? (
