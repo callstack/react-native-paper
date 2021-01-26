@@ -45,6 +45,10 @@ type Props = {
    */
   onDismiss: () => void;
   /**
+   * Whether the `anchor` should be focused when `onDimiss` has finished animating
+   */
+  focusAnchorOnDismiss?: boolean;
+  /**
    * Accessibility label for the overlay. This is read by the screen reader when the user taps outside the menu.
    */
   overlayAccessibilityLabel?: string;
@@ -329,7 +333,9 @@ class Menu extends React.Component<Props, State> {
       if (finished) {
         this.setState({ menuLayout: { width: 0, height: 0 }, rendered: false });
         this.state.scaleAnimation.setValue({ x: 0, y: 0 });
-        this.focusFirstDOMNode(this.anchor);
+        if (this.props.focusAnchorOnDismiss ?? true) {
+          this.focusFirstDOMNode(this.anchor);
+        }
       }
     });
   };
