@@ -93,7 +93,7 @@ const DataTableExample = () => {
 
           <DataTable.Pagination
             page={page}
-            numberOfPages={Math.floor(sortedItems.length / itemsPerPage)}
+            numberOfPages={Math.round(sortedItems.length / itemsPerPage)}
             onPageChange={(page) => setPage(page)}
             label={`${from + 1}-${to} of ${sortedItems.length}`}
           />
