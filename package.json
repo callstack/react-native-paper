@@ -43,7 +43,7 @@
     "example": "yarn --cwd example"
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://npm.pkg.github.com/"
   },
   "dependencies": {
     "@callstack/react-theme-provider": "^3.0.5",
