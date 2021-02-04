@@ -1,6 +1,9 @@
 import * as React from 'react';
 import type { StyleProp, ViewStyle } from 'react-native';
 import { withTheme } from '../../core/theming';
+import { DropdownContext } from './Dropdown';
+import * as List from '../List/List';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
 export interface Props<T> {
   /**
@@ -10,49 +13,24 @@ export interface Props<T> {
   /**
    * @optional
    */
-  theme?: ReactNativePaper.Theme;
+  theme: ReactNativePaper.Theme;
   /**
    * Value represented by the dropdown option
    */
   value: T | null;
   /**
-   * Required unique key
+   * Custom component to display instead of the label
    */
-  optionKey: React.Key;
-  /**
-   * Title that will be shown in the dropdown menu when opened
-   */
-  title?: React.ReactNode;
-  /**
-   * Description will appear below the title when the menu is open
-   */
-  description?: React.ReactNode;
+  children?: React.ReactNode;
   /**
    * Label that will show if the current option is selected.
    * If undefined the title prop will be used instead
    */
   label?: string;
   /**
-   * Callback which returns a React element to display on the right side.
+   * Render custom label that will appear on the Dropdown when this option is selected
    */
-  right?: (props: {
-    color: string;
-    style?: {
-      marginRight: number;
-      marginVertical?: number;
-    };
-  }) => React.ReactNode;
-  /**
-   * Callback which returns a React element to display on the left side.
-   */
-  left?: (props: {
-    color: string;
-    style: {
-      marginLeft: number;
-      marginRight: number;
-      marginVertical?: number;
-    };
-  }) => React.ReactNode;
+  renderLabel?: () => React.ReactNode;
 }
 
 /**
@@ -88,15 +66,29 @@ export interface Props<T> {
  * export default MyComponent;
  * ```
  */
-class DropdownOption<T> extends React.Component<
-  Props<T> & { theme: ReactNativePaper.Theme }
-> {
-  static displayName = 'Dropdown.Option';
+function DropdownOption<T = any>(props: Props<T>) {
+  const { children, label, style } = props;
+  const context = React.useContext(DropdownContext);
 
-  // eslint-disable-next-line react/require-render-return
-  render(): React.ReactNode {
-    throw new Error('<DropdownOption/> must be a direct child to <Dropdown/>');
+  if (!context) {
+    throw new Error('Dropdown.Option is used outside a Dropdown.');
   }
+
+  if (!children) {
+    return (
+      <List.Item
+        style={style}
+        title={label}
+        onPress={() => context.onSelect(props)}
+      />
+    );
+  }
+
+  return (
+    <TouchableRipple onPress={() => context.onSelect(props)}>
+      {children}
+    </TouchableRipple>
+  );
 }
 
 export default withTheme(DropdownOption);

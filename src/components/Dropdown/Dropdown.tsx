@@ -1,20 +1,15 @@
 import * as React from 'react';
-import {
-  Platform,
-  ScrollView,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
-import * as List from '../List/List';
+import { Platform, StyleSheet, View } from 'react-native';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import IconButton from '../IconButton';
-import Portal from '../Portal/Portal';
-import Dialog from '../Dialog/Dialog';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import DropdownOption, { Props as OptionProps } from './DropdownOption';
+import DropdownContent from './DropdownContent';
+import HelperText from '../HelperText';
+import * as List from '../List/List';
+import Portal from '../Portal/Portal';
 
 type Props<T> = {
   /**
@@ -28,9 +23,7 @@ type Props<T> = {
   /**
    * One or multiple Dropdown.Option elements
    */
-  children?:
-    | React.ReactElement<OptionProps<T>>[]
-    | React.ReactElement<OptionProps<T>>;
+  children: React.ReactNode;
   /**
    * Only for web, maximum height of the dropdown popup
    */
@@ -44,7 +37,7 @@ type Props<T> = {
    * The option having this key will be selected
    * If undefined the currently selected option will remain selected
    */
-  selectedKey?: React.Key | null;
+  selectedValue?: T | null;
   /**
    * This message will appear when the required prop is set to true and the number of children is zero
    */
@@ -52,48 +45,40 @@ type Props<T> = {
   /**
    * The label of the unselect option
    */
-  unselectLabel?: string;
-  /**
-   * Callback which returns a React element to display on the left side of the unselect option
-   */
-  unselectIcon?: (props: {
-    color: string;
-    style: {
-      marginLeft: number;
-      marginRight: number;
-      marginVertical?: number;
-    };
-  }) => React.ReactNode;
+  renderNoneOption?: () => React.ReactNode;
   /**
    * @optional
    */
   theme: ReactNativePaper.Theme;
 };
 
-type State = {
+type State<T> = {
   coordinates: { top: number; left: number; width: number };
   isOpen: boolean;
-  selectedKey: React.Key | null;
+  selectedOption: OptionProps<T> | null;
 };
 
 const DEFAULT_EMPTY_DROPDOWN_LABEL = 'No available options';
 const DEFAULT_PLACEHOLDER_LABEL = 'Select an option';
-const DEFAULT_MAX_HEIGHT = 350;
 const DROPDOWN_NULL_OPTION_KEY = 'DROPDOWN_NULL_OPTION_KEY';
 
-const DropdownChild = <T extends any>(props: {
-  props: OptionProps<T>;
-  onPress: () => void;
-}) => (
-  <List.Item
-    style={props.props.style}
-    title={props.props.title}
-    description={props.props.description}
-    right={props.props.right}
-    onPress={props.onPress}
-    left={props.props.left}
-    theme={props.props.theme}
-  />
+export type DropdownProps<T> = {
+  closeMenu(): void;
+  onSelect(option: OptionProps<T> | null): void;
+  setSelectedValue(option: OptionProps<T> | null): void;
+  maxHeight?: number;
+  required: boolean;
+  emptyDropdownLabel: string;
+  selectedValue?: T;
+  dropdownCoordinates: {
+    top: number;
+    left: number;
+    width: number;
+  };
+};
+
+export const DropdownContext = React.createContext<DropdownProps<any>>(
+  null as any
 );
 
 /**
@@ -138,15 +123,18 @@ const DropdownChild = <T extends any>(props: {
  * export default MyComponent;
  * ```
  */
-class Dropdown<T> extends React.Component<Props<T>, State> {
+class Dropdown<T = any> extends React.Component<Props<T>, State<T>> {
   static displayName = 'Dropdown';
 
   // @component ./DropdownOption.tsx
   static Option = DropdownOption;
 
   static getDerivedStateFromProps<T>(nextProps: Props<T>) {
-    if (nextProps.selectedKey !== undefined) {
-      return { selectedOption: nextProps.selectedKey };
+    if (nextProps.selectedValue !== undefined) {
+      const selectedOption = React.Children.toArray(nextProps.children)
+        .map((child) => (child as any)?.props)
+        .find((props) => props?.value === nextProps.selectedValue);
+      return { selectedOption };
     }
     return null;
   }
@@ -159,9 +147,64 @@ class Dropdown<T> extends React.Component<Props<T>, State> {
     this.popupViewRef = React.createRef();
     this.state = {
       isOpen: false,
-      selectedKey: props.selectedKey ?? null,
       coordinates: { top: 0, left: 0, width: 0 },
+      selectedOption: null,
     };
+  }
+
+  public openMenu = () => this.setMenuOpen(true);
+
+  public closeMenu = () => this.setMenuOpen(false);
+
+  public toggleMenuOpen = () => this.setMenuOpen(!this.state.isOpen);
+
+  render() {
+    const theme = this.props.theme;
+    return (
+      <View ref={this.popupViewRef}>
+        <TouchableRipple borderless onPress={this.toggleMenuOpen}>
+          <Surface
+            style={[
+              styles.container,
+              {
+                borderRadius: theme.roundness,
+                borderColor: this.state.isOpen
+                  ? theme.colors.primary
+                  : theme.colors.backdrop,
+              },
+            ]}
+          >
+            <View style={styles.label}>{this.renderLabel()}</View>
+            <IconButton
+              style={styles.icon}
+              icon="menu-down"
+              onPress={this.toggleMenuOpen}
+            />
+          </Surface>
+        </TouchableRipple>
+        {this.state.isOpen && (
+          <Portal>
+            <DropdownContext.Provider
+              value={{
+                setSelectedValue: (option: OptionProps<T> | null) =>
+                  this.setState({ selectedOption: option }),
+                selectedValue: this.props.selectedValue,
+                maxHeight: this.props.maxHeight,
+                closeMenu: this.closeMenu,
+                dropdownCoordinates: this.state.coordinates,
+                emptyDropdownLabel:
+                  this.props.emptyDropdownMessage ??
+                  DEFAULT_EMPTY_DROPDOWN_LABEL,
+                required: this.props.required ?? false,
+                onSelect: this.onSelect,
+              }}
+            >
+              <DropdownContent>{this.renderOptions()}</DropdownContent>
+            </DropdownContext.Provider>
+          </Portal>
+        )}
+      </View>
+    );
   }
 
   private setMenuOpen = (open: boolean) => {
@@ -180,154 +223,74 @@ class Dropdown<T> extends React.Component<Props<T>, State> {
     this.setState({ isOpen: open });
   };
 
-  public openMenu = () => this.setMenuOpen(true);
+  private onSelect = (option: OptionProps<T> | null) => {
+    this.closeMenu();
+    this.setState({ selectedOption: option });
+    if (this.props.onSelect) {
+      this.props.onSelect(option ? option.value : null);
+    }
+  };
 
-  public closeMenu = () => this.setMenuOpen(false);
-
-  public toggleMenuOpen = () => this.setMenuOpen(!this.state.isOpen);
-
-  public options = () =>
-    React.Children.map<OptionProps<T>, React.ReactElement<OptionProps<T>>>(
-      this.props.children ?? [],
-      (child) => child.props
-    );
-
-  public selectedOption = () =>
-    this.options().find(
-      (option) => option.optionKey === this.state.selectedKey
-    ) ?? null;
-
-  private renderOptions = (options: OptionProps<T>[]) => {
+  private renderOptions = () => {
     const {
+      required,
       emptyDropdownMessage = DEFAULT_EMPTY_DROPDOWN_LABEL,
-      unselectLabel = this.props.placeholder ?? DEFAULT_PLACEHOLDER_LABEL,
-      unselectIcon,
-      required = false,
-      onSelect,
+      renderNoneOption,
+      placeholder = DEFAULT_PLACEHOLDER_LABEL,
     } = this.props;
+    const options = React.Children.toArray(this.props.children);
 
-    let optionsList = options.map((option) => (
-      <DropdownChild
-        key={option.optionKey}
-        props={option}
-        onPress={() => {
-          this.setState({ selectedKey: option.optionKey });
-          this.closeMenu();
-          if (onSelect) {
-            onSelect(option.value);
-          }
-        }}
-      />
-    ));
-
-    if (!required) {
-      optionsList.unshift(
-        <DropdownChild
-          key={DROPDOWN_NULL_OPTION_KEY}
-          props={{
-            value: undefined,
-            optionKey: DROPDOWN_NULL_OPTION_KEY,
-            label: unselectLabel,
-            title: unselectLabel,
-            left: unselectIcon,
-            style: styles.unselectOption,
-          }}
-          onPress={() => {
-            this.setState({ selectedKey: null });
-            this.closeMenu();
-            if (onSelect) {
-              onSelect(null);
-            }
-          }}
-        />
-      );
-    } else if (options.length === 0) {
-      optionsList.push(
-        <List.Item
-          key={DROPDOWN_NULL_OPTION_KEY}
-          disabled
-          title={emptyDropdownMessage}
-        />
-      );
-    }
-    return optionsList;
-  };
-
-  private optionLabel = (option: OptionProps<T> | null) => {
-    if (option) {
-      return option.label ?? option.title;
-    }
-    return this.props.placeholder ?? DEFAULT_PLACEHOLDER_LABEL;
-  };
-
-  render() {
-    const { maxHeight = DEFAULT_MAX_HEIGHT, theme } = this.props;
-    const selectedOption = this.selectedOption();
-    const options = this.options();
-
-    let optionsChildren = this.renderOptions(options);
-
-    return (
-      <View ref={this.popupViewRef}>
-        <TouchableRipple borderless onPress={this.toggleMenuOpen}>
-          <Surface
-            style={[
-              styles.container,
-              {
-                borderRadius: theme.roundness,
-                borderColor: this.state.isOpen
-                  ? theme.colors.primary
-                  : theme.colors.backdrop,
-              },
-            ]}
+    if (!required && options.length === 0) {
+      options.push(<HelperText type="info">{emptyDropdownMessage}</HelperText>);
+    } else if (!required) {
+      const noneOption = renderNoneOption?.call(this);
+      if (!noneOption || typeof noneOption === 'string') {
+        options.unshift(
+          <List.Item
+            key={DROPDOWN_NULL_OPTION_KEY}
+            style={styles.unselectOption}
+            title={noneOption ?? placeholder}
+            onPress={() => this.onSelect(null)}
+          />
+        );
+      } else {
+        options.unshift(
+          <TouchableRipple
+            key={DROPDOWN_NULL_OPTION_KEY}
+            onPress={() => this.onSelect(null)}
           >
-            <Text
-              style={[
-                styles.text,
-                {
-                  color: selectedOption
-                    ? theme.colors.text
-                    : theme.colors.placeholder,
-                },
-              ]}
-            >
-              {this.optionLabel(selectedOption)}
-            </Text>
-            <IconButton
-              style={styles.icon}
-              icon="menu-down"
-              onPress={this.toggleMenuOpen}
-            />
-          </Surface>
-        </TouchableRipple>
-        <Portal>
-          {Platform.select({
-            web: this.state.isOpen && (
-              <TouchableWithoutFeedback
-                style={styles.modalContainer}
-                onPress={this.closeMenu}
-              >
-                <View style={styles.modal}>
-                  <Surface
-                    style={[this.state.coordinates, styles.modalContent]}
-                  >
-                    <ScrollView style={{ maxHeight: maxHeight }}>
-                      {optionsChildren}
-                    </ScrollView>
-                  </Surface>
-                </View>
-              </TouchableWithoutFeedback>
-            ),
-            default: (
-              <Dialog visible={this.state.isOpen} onDismiss={this.closeMenu}>
-                <ScrollView>{optionsChildren}</ScrollView>
-              </Dialog>
-            ),
-          })}
-        </Portal>
-      </View>
-    );
-  }
+            {noneOption}
+          </TouchableRipple>
+        );
+      }
+    }
+
+    return options;
+  };
+
+  private renderLabel = () => {
+    const { selectedOption } = this.state;
+    const { theme, placeholder = DEFAULT_PLACEHOLDER_LABEL } = this.props;
+
+    if (selectedOption?.renderLabel) {
+      return selectedOption.renderLabel();
+    } else {
+      return (
+        <Text
+          style={[
+            styles.text,
+            {
+              color: selectedOption
+                ? theme.colors.text
+                : theme.colors.placeholder,
+            },
+          ]}
+        >
+          {selectedOption ? selectedOption.label : placeholder}
+        </Text>
+      );
+    }
+  };
 }
 
 const styles = StyleSheet.create({
@@ -338,25 +301,13 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   text: {
-    flex: 1,
     paddingHorizontal: 10,
   },
   icon: {
     margin: 2.5,
   },
-  modalContainer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-  modal: {
-    width: '100%',
-    height: '100%',
-  },
-  modalContent: {
-    position: 'relative',
+  label: {
+    flex: 1,
   },
   unselectOption: {
     opacity: 0.5,

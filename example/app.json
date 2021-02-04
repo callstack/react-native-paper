@@ -17,7 +17,6 @@
       "android",
       "ios"
     ],
-    "owner": "react-native-paper",
     "ios": {
       "bundleIdentifier": "com.callstack.reactnativepaperexample",
       "buildNumber": "3.0.0"

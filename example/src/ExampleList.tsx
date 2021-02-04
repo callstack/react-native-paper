@@ -57,6 +57,7 @@ export const examples: Record<
   dataTable: DataTableExample,
   dialog: DialogExample,
   divider: DividerExample,
+  dropdown: DropdownExample,
   fab: FABExample,
   iconButton: IconButtonExample,
   listAccordion: ListAccordionExample,
@@ -76,7 +77,6 @@ export const examples: Record<
   toggleButton: ToggleButtonExample,
   touchableRipple: TouchableRippleExample,
   theme: ThemeExample,
-  dropdown: DropdownExample,
 };
 
 type Props = {
