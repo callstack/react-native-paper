@@ -21,7 +21,10 @@ export interface Props<T> {
   /**
    * Custom component to display instead of the label
    */
-  children?: React.ReactNode;
+  render?: (props: {
+    onPress: () => void;
+    disabled: boolean;
+  }) => React.ReactNode;
   /**
    * Label that will show if the current option is selected.
    * If undefined the title prop will be used instead
@@ -31,6 +34,10 @@ export interface Props<T> {
    * Render custom label that will appear on the Dropdown when this option is selected
    */
   renderLabel?: () => React.ReactNode;
+  /**
+   * Whether the option is disabled or not
+   */
+  disabled?: boolean;
 }
 
 /**
@@ -67,26 +74,29 @@ export interface Props<T> {
  * ```
  */
 function DropdownOption<T = any>(props: Props<T>) {
-  const { children, label, style } = props;
+  const { render, label, style, disabled = false } = props;
   const context = React.useContext(DropdownContext);
 
   if (!context) {
     throw new Error('Dropdown.Option is used outside a Dropdown.');
   }
 
-  if (!children) {
+  const onSelect = () => context.onSelect(props);
+
+  if (!render) {
     return (
       <List.Item
+        disabled={disabled}
         style={style}
         title={label}
-        onPress={() => context.onSelect(props)}
+        onPress={onSelect}
       />
     );
   }
 
   return (
-    <TouchableRipple onPress={() => context.onSelect(props)}>
-      {children}
+    <TouchableRipple onPress={onSelect}>
+      {render({ onPress: onSelect, disabled })}
     </TouchableRipple>
   );
 }

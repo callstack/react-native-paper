@@ -1,5 +1,10 @@
 import Surface from '../Surface';
-import { ScrollView, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import React, { useContext } from 'react';
 import { DropdownContext } from './Dropdown';
 
@@ -17,13 +22,12 @@ const DropdownContent = (props: Props) => {
   } = useContext(DropdownContext);
 
   return (
-    <TouchableWithoutFeedback
-      style={[StyleSheet.absoluteFill]}
-      onPress={closeMenu}
-    >
-      <Surface style={[dropdownCoordinates, { maxHeight }]}>
-        <ScrollView>{props.children}</ScrollView>
-      </Surface>
+    <TouchableWithoutFeedback onPress={closeMenu}>
+      <View style={[StyleSheet.absoluteFill]}>
+        <Surface style={[dropdownCoordinates, { maxHeight }]}>
+          <ScrollView>{props.children}</ScrollView>
+        </Surface>
+      </View>
     </TouchableWithoutFeedback>
   );
 };

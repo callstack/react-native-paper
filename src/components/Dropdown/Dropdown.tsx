@@ -23,7 +23,7 @@ type Props<T> = {
   /**
    * One or multiple Dropdown.Option elements
    */
-  children: React.ReactNode;
+  children?: React.ReactNode;
   /**
    * Only for web, maximum height of the dropdown popup
    */
@@ -45,7 +45,11 @@ type Props<T> = {
   /**
    * The label of the unselect option
    */
-  renderNoneOption?: () => React.ReactNode;
+  renderNoneOption?: (props: {
+    onPress: () => void;
+    style: { opacity: number };
+    key: React.Key;
+  }) => React.ReactNode;
   /**
    * @optional
    */
@@ -241,9 +245,17 @@ class Dropdown<T = any> extends React.Component<Props<T>, State<T>> {
     const options = React.Children.toArray(this.props.children);
 
     if (!required && options.length === 0) {
-      options.push(<HelperText type="info">{emptyDropdownMessage}</HelperText>);
+      options.push(
+        <List.Item
+          title={<HelperText type="info">{emptyDropdownMessage}</HelperText>}
+        />
+      );
     } else if (!required) {
-      const noneOption = renderNoneOption?.call(this);
+      const noneOption = renderNoneOption?.call(this, {
+        onPress: () => this.onSelect(null),
+        style: styles.unselectOption,
+        key: DROPDOWN_NULL_OPTION_KEY,
+      });
       if (!noneOption || typeof noneOption === 'string') {
         options.unshift(
           <List.Item
@@ -254,14 +266,7 @@ class Dropdown<T = any> extends React.Component<Props<T>, State<T>> {
           />
         );
       } else {
-        options.unshift(
-          <TouchableRipple
-            key={DROPDOWN_NULL_OPTION_KEY}
-            onPress={() => this.onSelect(null)}
-          >
-            {noneOption}
-          </TouchableRipple>
-        );
+        options.unshift(noneOption);
       }
     }
 

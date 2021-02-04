@@ -41,29 +41,200 @@ exports[`renders an empty dropdown 1`] = `
         }
       }
     >
-      <Text
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "System",
+                "fontWeight": "400",
+                "textAlign": "left",
+              },
+              Array [
+                Object {
+                  "paddingHorizontal": 10,
+                },
+                Object {
+                  "color": "rgba(0, 0, 0, 0.54)",
+                },
+              ],
+            ]
+          }
+        >
+          Nothing here!
+        </Text>
+      </View>
+      <View
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": undefined,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        hitSlop={
+          Object {
+            "bottom": 6,
+            "left": 6,
+            "right": 6,
+            "top": 6,
+          }
+        }
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
         style={
           Array [
             Object {
-              "color": "#000000",
-              "fontFamily": "System",
-              "fontWeight": "400",
-              "textAlign": "left",
+              "overflow": "hidden",
             },
             Array [
               Object {
-                "flex": 1,
-                "paddingHorizontal": 10,
+                "alignItems": "center",
+                "justifyContent": "center",
+                "margin": 6,
+                "overflow": "hidden",
               },
               Object {
-                "color": "rgba(0, 0, 0, 0.54)",
+                "borderRadius": 18,
+                "height": 36,
+                "width": 36,
+              },
+              undefined,
+              Object {
+                "margin": 2.5,
               },
             ],
           ]
         }
       >
-        Nothing here!
-      </Text>
+        <View>
+          <Text
+            accessibilityElementsHidden={true}
+            allowFontScaling={false}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
+              Array [
+                Object {
+                  "color": "#000000",
+                  "fontSize": 24,
+                },
+                Array [
+                  Object {
+                    "lineHeight": 24,
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+                Object {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
+              ]
+            }
+          >
+            
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders dropdown with custom content 1`] = `
+<View>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffff",
+          "borderColor": "rgba(0, 0, 0, 0.5)",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "elevation": 1,
+          "flexDirection": "row",
+          "shadowColor": "#000000",
+          "shadowOffset": Object {
+            "height": 0.5,
+            "width": 0,
+          },
+          "shadowOpacity": 0.24,
+          "shadowRadius": 0.75,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "System",
+                "fontWeight": "400",
+                "textAlign": "left",
+              },
+              Array [
+                Object {
+                  "paddingHorizontal": 10,
+                },
+                Object {
+                  "color": "rgba(0, 0, 0, 0.54)",
+                },
+              ],
+            ]
+          }
+        >
+          Select an option
+        </Text>
+      </View>
       <View
         accessibilityRole="button"
         accessibilityState={
@@ -198,29 +369,36 @@ exports[`renders dropdown with multiple options 1`] = `
         }
       }
     >
-      <Text
+      <View
         style={
-          Array [
-            Object {
-              "color": "#000000",
-              "fontFamily": "System",
-              "fontWeight": "400",
-              "textAlign": "left",
-            },
-            Array [
-              Object {
-                "flex": 1,
-                "paddingHorizontal": 10,
-              },
-              Object {
-                "color": "rgba(0, 0, 0, 0.54)",
-              },
-            ],
-          ]
+          Object {
+            "flex": 1,
+          }
         }
       >
-        Select an option
-      </Text>
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "System",
+                "fontWeight": "400",
+                "textAlign": "left",
+              },
+              Array [
+                Object {
+                  "paddingHorizontal": 10,
+                },
+                Object {
+                  "color": "rgba(0, 0, 0, 0.54)",
+                },
+              ],
+            ]
+          }
+        >
+          Select an option
+        </Text>
+      </View>
       <View
         accessibilityRole="button"
         accessibilityState={
@@ -314,4 +492,4 @@ exports[`renders dropdown with multiple options 1`] = `
 </View>
 `;
 
-exports[`throws an error when Dropdown.Option is used outside dropdown 1`] = `"<DropdownOption/> must be a direct child to <Dropdown/>"`;
+exports[`throws an error when Dropdown.Option is used outside dropdown 1`] = `"Dropdown.Option is used outside a Dropdown."`;
