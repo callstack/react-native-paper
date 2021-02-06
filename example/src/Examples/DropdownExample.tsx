@@ -5,12 +5,14 @@ import {
   IconButton,
   useTheme,
   Divider,
+  Switch,
 } from 'react-native-paper';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 const DropdownExample = () => {
   const theme = useTheme();
   const [selectedValue, setSelectedValue] = useState<number | null>(1);
+  const [mode, setMode] = useState<'modal' | 'floating'>('floating');
 
   return (
     <ScrollView style={{ backgroundColor: theme.colors.background }}>
@@ -101,6 +103,33 @@ const DropdownExample = () => {
             <Dropdown.Option key={1} value={1} label="Option 1" />
             <Dropdown.Option key={2} value={2} label="Option 2" />
             <Dropdown.Option key={3} value={3} label="Option 3" />
+          </Dropdown>
+        </View>
+      </List.Section>
+      <List.Section>
+        <List.Item
+          title="Floating dropdown mode"
+          description="Use floating dropdown instead of modal"
+          right={() => (
+            <Switch
+              value={mode === 'floating'}
+              onValueChange={() =>
+                setMode(mode === 'modal' ? 'floating' : 'modal')
+              }
+            />
+          )}
+        />
+        <View style={styles.dropdown}>
+          <Dropdown mode={mode}>
+            <Dropdown.Option value={1} label="Option 1" />
+            <Dropdown.Option value={2} label="Option 2" />
+            <Dropdown.Option value={3} label="Option 3" />
+            <Dropdown.Option value={4} label="Option 4" />
+            <Dropdown.Option value={5} label="Option 5" />
+            <Dropdown.Option value={6} label="Option 6" />
+            <Dropdown.Option value={7} label="Option 7" />
+            <Dropdown.Option value={8} label="Option 8" />
+            <Dropdown.Option value={9} label="Option 9" />
           </Dropdown>
         </View>
       </List.Section>

@@ -1,35 +1,34 @@
-import Surface from '../Surface';
-import {
-  ScrollView,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
-import React, { useContext } from 'react';
+import React from 'react';
 import { DropdownContext } from './Dropdown';
+import DropdownContentModal from './DropdownContentModal';
+import DropdownContentFloating from './DropdownContentFloating';
 
 type Props = {
   children: React.ReactNode;
+  visible: boolean;
 };
 
-const DEFAULT_MAX_HEIGHT = 350;
-
 const DropdownContent = (props: Props) => {
-  const {
-    closeMenu,
-    dropdownCoordinates,
-    maxHeight = DEFAULT_MAX_HEIGHT,
-  } = useContext(DropdownContext);
+  const context = React.useContext(DropdownContext);
 
-  return (
-    <TouchableWithoutFeedback onPress={closeMenu}>
-      <View style={[StyleSheet.absoluteFill]}>
-        <Surface style={[dropdownCoordinates, { maxHeight }]}>
-          <ScrollView>{props.children}</ScrollView>
-        </Surface>
-      </View>
-    </TouchableWithoutFeedback>
-  );
+  if (!context) return null;
+
+  const { mode } = context;
+
+  switch (mode) {
+    case 'floating':
+      return (
+        <DropdownContentFloating {...props}>
+          {props.children}
+        </DropdownContentFloating>
+      );
+    case 'modal':
+      return (
+        <DropdownContentModal {...props}>{props.children}</DropdownContentModal>
+      );
+    default:
+      throw new Error('Unkown mode ' + mode);
+  }
 };
 
 export default DropdownContent;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import { Dimensions, Platform, StyleSheet, View } from 'react-native';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import IconButton from '../IconButton';
@@ -9,8 +9,16 @@ import DropdownContent from './DropdownContent';
 import HelperText from '../HelperText';
 import * as List from '../List/List';
 import Portal from '../Portal/Portal';
+import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
 
 type Props<T> = {
+  /**
+   * Extra padding to add at the top of header to account for translucent status bar.
+   * This is automatically handled on iOS >= 11 including iPhone X using `SafeAreaView`.
+   * If you are using Expo, we assume translucent status bar and set a height for status bar automatically.
+   * Pass `0` or a custom value to disable the default behaviour, and customize the height.
+   */
+  statusBarHeight?: number;
   /**
    * Placeholder label when there is no selected value
    */
@@ -49,6 +57,11 @@ type Props<T> = {
     style: { color: string };
     key: React.Key;
   }) => React.ReactNode;
+  /**
+   * A dropdown can be either be rendered inside a modal or inside a floating menu
+   * The default value is 'floating' if the platform is web and 'modal' otherwise
+   */
+  mode?: 'modal' | 'floating';
 };
 
 type OptionProps<T> = {
@@ -60,19 +73,22 @@ type OptionProps<T> = {
 const DEFAULT_EMPTY_DROPDOWN_LABEL = 'No available options';
 const DEFAULT_PLACEHOLDER_LABEL = 'Select an option';
 const DROPDOWN_NULL_OPTION_KEY = 'DROPDOWN_NULL_OPTION_KEY';
+const DEFAULT_MAX_HEIGHT = 350;
 
 export type DropdownContextProps<T> = {
   closeMenu(): void;
   selectOption(option: OptionProps<T> | null): void;
-  maxHeight?: number;
   required: boolean;
   emptyDropdownLabel: string;
   selectedValue?: T;
   dropdownCoordinates: {
-    top: number;
+    top?: number;
+    bottom?: number;
     left: number;
     width: number;
+    maxHeight?: number;
   };
+  mode: 'modal' | 'floating';
 };
 
 export type DropdownRefAttributes<T> = {
@@ -140,27 +156,40 @@ const Dropdown = React.forwardRef(function <T>(
   {
     children,
     emptyDropdownLabel = DEFAULT_EMPTY_DROPDOWN_LABEL,
-    maxHeight,
+    maxHeight = DEFAULT_MAX_HEIGHT,
     onSelect,
     placeholder = DEFAULT_PLACEHOLDER_LABEL,
     renderNoneOption,
     required = false,
     selectedValue,
+    mode = Platform.select({ web: 'floating', default: 'modal' }),
+    statusBarHeight = APPROX_STATUSBAR_HEIGHT,
   }: Props<T>,
   ref:
     | ((instance: DropdownRefAttributes<T> | null) => void)
     | React.MutableRefObject<DropdownRefAttributes<T> | null>
     | null
 ) {
+  const computedStatusBarHeight = Platform.select({
+    android: statusBarHeight,
+    default: 0,
+  });
   const theme = useTheme();
-  const rootViewRef = React.useRef<View>(null);
+  const anchorRef = React.useRef<View>(null);
+  const menuRef = React.useRef<View>(null);
   const [isMenuOpen, setMenuOpen] = React.useState(false);
-  const [dropdownCoordinates, setCoordinates] = React.useState({
-    top: 0,
+  const [dropdownCoordinates, setMenuPosition] = React.useState<{
+    top?: number;
+    bottom?: number;
+    left: number;
+    width: number;
+    maxHeight?: number;
+  }>({
     left: 0,
     width: 0,
   });
   const [selected, setSelected] = React.useState<OptionProps<T> | null>(null);
+  const windowHeight = Dimensions.get('window').height;
 
   const toggleMenuOpen = () => {
     if (isMenuOpen) {
@@ -173,16 +202,19 @@ const Dropdown = React.forwardRef(function <T>(
   const closeMenu = () => setMenuOpen(false);
 
   const openMenu = () => {
-    if (Platform.OS === 'web') {
-      rootViewRef.current?.measure((_x, _y, width, height, pageX, pageY) =>
-        setCoordinates({
+    if (mode === 'floating') {
+      anchorRef.current?.measureInWindow((x, y, width, height) => {
+        let top = y + height + computedStatusBarHeight;
+        setMenuPosition({
+          left: x,
           width: width,
-          left: pageX,
-          top: pageY + height,
-        })
-      );
+          top: top,
+          bottom: 48,
+          maxHeight: Math.min(maxHeight, windowHeight - top),
+        });
+      });
     }
-    setMenuOpen(true);
+    requestAnimationFrame(() => setMenuOpen(true));
   };
 
   const renderLabel = () => {
@@ -258,7 +290,7 @@ const Dropdown = React.forwardRef(function <T>(
   }));
 
   return (
-    <View ref={rootViewRef}>
+    <View ref={anchorRef} collapsable={false}>
       <TouchableRipple borderless onPress={toggleMenuOpen}>
         <Surface
           style={[
@@ -274,28 +306,28 @@ const Dropdown = React.forwardRef(function <T>(
           <View style={styles.label}>{renderLabel()}</View>
           <IconButton
             style={styles.icon}
-            icon="menu-down"
+            icon={isMenuOpen && mode === 'floating' ? 'menu-up' : 'menu-down'}
             onPress={toggleMenuOpen}
           />
         </Surface>
       </TouchableRipple>
-      {isMenuOpen && (
-        <Portal>
-          <DropdownContext.Provider
-            value={{
-              selectedValue: selected?.value,
-              maxHeight,
-              dropdownCoordinates,
-              emptyDropdownLabel,
-              required,
-              closeMenu,
-              selectOption,
-            }}
-          >
-            <DropdownContent>{renderOptions()}</DropdownContent>
-          </DropdownContext.Provider>
-        </Portal>
-      )}
+      <Portal>
+        <DropdownContext.Provider
+          value={{
+            selectedValue: selected?.value,
+            dropdownCoordinates,
+            emptyDropdownLabel,
+            required,
+            closeMenu,
+            selectOption,
+            mode,
+          }}
+        >
+          <DropdownContent visible={isMenuOpen}>
+            <View ref={menuRef}>{renderOptions()}</View>
+          </DropdownContent>
+        </DropdownContext.Provider>
+      </Portal>
     </View>
   );
 }) as (<T = any>(
@@ -306,7 +338,7 @@ const Dropdown = React.forwardRef(function <T>(
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    borderWidth: 1,
+    borderWidth: 1.2,
     alignItems: 'center',
     elevation: 1,
   },
