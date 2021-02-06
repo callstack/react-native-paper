@@ -1,11 +1,17 @@
-import Dropdown from './Dropdown';
+import DropdownComponent from './Dropdown';
 import DropdownOption from './DropdownOption';
 
-export default Object.assign(
+type DropdownExport = typeof DropdownComponent & {
+  Option: typeof DropdownOption;
+};
+
+const Dropdown: DropdownExport = Object.assign(
   // @component ./Dropdown.tsx
-  Dropdown,
+  DropdownComponent,
   {
     // @component ./DropdownOption.tsx
     Option: DropdownOption,
   }
 );
+
+export default Dropdown;

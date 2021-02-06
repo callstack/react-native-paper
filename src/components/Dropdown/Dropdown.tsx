@@ -298,10 +298,10 @@ const Dropdown = React.forwardRef(function <T>(
       )}
     </View>
   );
-}) as <T = any>(
+}) as (<T = any>(
   props: Props<T>,
   ref: React.RefObject<DropdownRefAttributes<T>>
-) => JSX.Element;
+) => JSX.Element) & { displayName: string };
 
 const styles = StyleSheet.create({
   container: {
@@ -320,5 +320,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+Dropdown.displayName = 'Dropdown';
 
 export default Dropdown;

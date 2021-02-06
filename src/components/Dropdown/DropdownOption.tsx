@@ -104,4 +104,6 @@ function DropdownOption<T = any>(props: Props<T>) {
   );
 }
 
+DropdownOption.displayName = 'Dropdown.Option';
+
 export default withTheme(DropdownOption);
