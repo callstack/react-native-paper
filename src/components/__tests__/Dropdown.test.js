@@ -1,6 +1,6 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import Dropdown from '../Dropdown/Dropdown';
+import Dropdown from '../Dropdown';
 import Text from '../Typography/Text';
 
 it('renders an empty dropdown', () => {

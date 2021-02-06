@@ -4,8 +4,7 @@ import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import IconButton from '../IconButton';
 import Text from '../Typography/Text';
-import { withTheme } from '../../core/theming';
-import DropdownOption, { Props as OptionProps } from './DropdownOption';
+import { useTheme } from '../../core/theming';
 import DropdownContent from './DropdownContent';
 import HelperText from '../HelperText';
 import * as List from '../List/List';
@@ -41,35 +40,30 @@ type Props<T> = {
   /**
    * This message will appear when the required prop is set to true and the number of children is zero
    */
-  emptyDropdownMessage?: string;
+  emptyDropdownLabel?: string;
   /**
    * The label of the unselect option
    */
   renderNoneOption?: (props: {
     onPress: () => void;
-    style: { opacity: number };
+    style: { color: string };
     key: React.Key;
   }) => React.ReactNode;
-  /**
-   * @optional
-   */
-  theme: ReactNativePaper.Theme;
 };
 
-type State<T> = {
-  coordinates: { top: number; left: number; width: number };
-  isOpen: boolean;
-  selectedOption: OptionProps<T> | null;
+type OptionProps<T> = {
+  value: T | null;
+  renderLabel?: () => React.ReactNode;
+  label?: string;
 };
 
 const DEFAULT_EMPTY_DROPDOWN_LABEL = 'No available options';
 const DEFAULT_PLACEHOLDER_LABEL = 'Select an option';
 const DROPDOWN_NULL_OPTION_KEY = 'DROPDOWN_NULL_OPTION_KEY';
 
-export type DropdownProps<T> = {
+export type DropdownContextProps<T> = {
   closeMenu(): void;
-  onSelect(option: OptionProps<T> | null): void;
-  setSelectedValue(option: OptionProps<T> | null): void;
+  selectOption(option: OptionProps<T> | null): void;
   maxHeight?: number;
   required: boolean;
   emptyDropdownLabel: string;
@@ -81,9 +75,24 @@ export type DropdownProps<T> = {
   };
 };
 
-export const DropdownContext = React.createContext<DropdownProps<any>>(
+export type DropdownRefAttributes<T> = {
+  openMenu: () => void;
+  closeMenu: () => void;
+  selectOption: (value: T | null) => void;
+};
+
+export const DropdownContext = React.createContext<DropdownContextProps<any>>(
   null as any
 );
+
+function findSelectedOption<T extends any>(
+  value: T | null,
+  children?: React.ReactNode
+) {
+  return React.Children.toArray(children)
+    .map((child) => (child as any)?.props)
+    .find((props) => props?.value === value);
+}
 
 /**
  * Dropdowns present a list of options from which a user can select one option.
@@ -113,8 +122,8 @@ export const DropdownContext = React.createContext<DropdownProps<any>>(
  *         {options.map(option => (
  *           <Dropdown.Option
  *            value={option}
- *            optionKey={value.id}
- *            title={value.name}
+ *            key={value.id}
+ *            label={value.name}
  *           />
  *         ))}
  *       </Dropdown>
@@ -127,176 +136,172 @@ export const DropdownContext = React.createContext<DropdownProps<any>>(
  * export default MyComponent;
  * ```
  */
-class Dropdown<T = any> extends React.Component<Props<T>, State<T>> {
-  static displayName = 'Dropdown';
+const Dropdown = React.forwardRef(function <T>(
+  {
+    children,
+    emptyDropdownLabel = DEFAULT_EMPTY_DROPDOWN_LABEL,
+    maxHeight,
+    onSelect,
+    placeholder = DEFAULT_PLACEHOLDER_LABEL,
+    renderNoneOption,
+    required = false,
+    selectedValue,
+  }: Props<T>,
+  ref:
+    | ((instance: DropdownRefAttributes<T> | null) => void)
+    | React.MutableRefObject<DropdownRefAttributes<T> | null>
+    | null
+) {
+  const theme = useTheme();
+  const rootViewRef = React.useRef<View>(null);
+  const [isMenuOpen, setMenuOpen] = React.useState(false);
+  const [dropdownCoordinates, setCoordinates] = React.useState({
+    top: 0,
+    left: 0,
+    width: 0,
+  });
+  const [selected, setSelected] = React.useState<OptionProps<T> | null>(null);
 
-  // @component ./DropdownOption.tsx
-  static Option = DropdownOption;
-
-  static getDerivedStateFromProps<T>(nextProps: Props<T>) {
-    if (nextProps.selectedValue !== undefined) {
-      const selectedOption = React.Children.toArray(nextProps.children)
-        .map((child) => (child as any)?.props)
-        .find((props) => props?.value === nextProps.selectedValue);
-      return { selectedOption };
+  const toggleMenuOpen = () => {
+    if (isMenuOpen) {
+      closeMenu();
+    } else {
+      openMenu();
     }
-    return null;
-  }
+  };
 
-  popupViewRef: React.RefObject<View>;
+  const closeMenu = () => setMenuOpen(false);
 
-  constructor(props: Props<T>) {
-    super(props);
-
-    this.popupViewRef = React.createRef();
-    this.state = {
-      isOpen: false,
-      coordinates: { top: 0, left: 0, width: 0 },
-      selectedOption: null,
-    };
-  }
-
-  public openMenu = () => this.setMenuOpen(true);
-
-  public closeMenu = () => this.setMenuOpen(false);
-
-  public toggleMenuOpen = () => this.setMenuOpen(!this.state.isOpen);
-
-  render() {
-    const theme = this.props.theme;
-    return (
-      <View ref={this.popupViewRef}>
-        <TouchableRipple borderless onPress={this.toggleMenuOpen}>
-          <Surface
-            style={[
-              styles.container,
-              {
-                borderRadius: theme.roundness,
-                borderColor: this.state.isOpen
-                  ? theme.colors.primary
-                  : theme.colors.backdrop,
-              },
-            ]}
-          >
-            <View style={styles.label}>{this.renderLabel()}</View>
-            <IconButton
-              style={styles.icon}
-              icon="menu-down"
-              onPress={this.toggleMenuOpen}
-            />
-          </Surface>
-        </TouchableRipple>
-        {this.state.isOpen && (
-          <Portal>
-            <DropdownContext.Provider
-              value={{
-                setSelectedValue: (option: OptionProps<T> | null) =>
-                  this.setState({ selectedOption: option }),
-                selectedValue: this.props.selectedValue,
-                maxHeight: this.props.maxHeight,
-                closeMenu: this.closeMenu,
-                dropdownCoordinates: this.state.coordinates,
-                emptyDropdownLabel:
-                  this.props.emptyDropdownMessage ??
-                  DEFAULT_EMPTY_DROPDOWN_LABEL,
-                required: this.props.required ?? false,
-                onSelect: this.onSelect,
-              }}
-            >
-              <DropdownContent>{this.renderOptions()}</DropdownContent>
-            </DropdownContext.Provider>
-          </Portal>
-        )}
-      </View>
-    );
-  }
-
-  private setMenuOpen = (open: boolean) => {
+  const openMenu = () => {
     if (Platform.OS === 'web') {
-      this.popupViewRef?.current?.measure(
-        (_x, _y, width, height, pageX, pageY) =>
-          this.setState({
-            coordinates: {
-              width: width,
-              left: pageX,
-              top: pageY + height,
-            },
-          })
+      rootViewRef.current?.measure((_x, _y, width, height, pageX, pageY) =>
+        setCoordinates({
+          width: width,
+          left: pageX,
+          top: pageY + height,
+        })
       );
     }
-    this.setState({ isOpen: open });
+    setMenuOpen(true);
   };
 
-  private onSelect = (option: OptionProps<T> | null) => {
-    this.closeMenu();
-    this.setState({ selectedOption: option });
-    if (this.props.onSelect) {
-      this.props.onSelect(option ? option.value : null);
-    }
-  };
-
-  private renderOptions = () => {
-    const {
-      required,
-      emptyDropdownMessage = DEFAULT_EMPTY_DROPDOWN_LABEL,
-      renderNoneOption,
-      placeholder = DEFAULT_PLACEHOLDER_LABEL,
-    } = this.props;
-    const options = React.Children.toArray(this.props.children);
-
-    if (!required && options.length === 0) {
-      options.push(
-        <List.Item
-          title={<HelperText type="info">{emptyDropdownMessage}</HelperText>}
-        />
-      );
-    } else if (!required) {
-      const noneOption = renderNoneOption?.call(this, {
-        onPress: () => this.onSelect(null),
-        style: styles.unselectOption,
-        key: DROPDOWN_NULL_OPTION_KEY,
-      });
-      if (!noneOption || typeof noneOption === 'string') {
-        options.unshift(
-          <List.Item
-            key={DROPDOWN_NULL_OPTION_KEY}
-            style={styles.unselectOption}
-            title={noneOption ?? placeholder}
-            onPress={() => this.onSelect(null)}
-          />
-        );
-      } else {
-        options.unshift(noneOption);
-      }
-    }
-
-    return options;
-  };
-
-  private renderLabel = () => {
-    const { selectedOption } = this.state;
-    const { theme, placeholder = DEFAULT_PLACEHOLDER_LABEL } = this.props;
-
-    if (selectedOption?.renderLabel) {
-      return selectedOption.renderLabel();
+  const renderLabel = () => {
+    if (selected?.renderLabel) {
+      return selected.renderLabel();
     } else {
       return (
         <Text
           style={[
             styles.text,
             {
-              color: selectedOption
-                ? theme.colors.text
-                : theme.colors.placeholder,
+              color: selected ? theme.colors.text : theme.colors.placeholder,
             },
           ]}
         >
-          {selectedOption ? selectedOption.label : placeholder}
+          {selected ? selected.label : placeholder}
         </Text>
       );
     }
   };
-}
+
+  const selectOption = (option: OptionProps<T> | null) => {
+    closeMenu();
+    setSelected(option);
+    if (onSelect) {
+      onSelect(option ? option.value : null);
+    }
+  };
+
+  const renderOptions = () => {
+    const options = React.Children.toArray(children);
+    if (!required && options.length === 0) {
+      options.push(
+        <List.Item
+          key={DROPDOWN_NULL_OPTION_KEY}
+          title={<HelperText type="info">{emptyDropdownLabel}</HelperText>}
+        />
+      );
+    } else if (!required) {
+      const noneOption = renderNoneOption
+        ? renderNoneOption({
+            onPress: () => selectOption(null),
+            style: { color: theme.colors.placeholder },
+            key: DROPDOWN_NULL_OPTION_KEY,
+          })
+        : undefined;
+      if (!noneOption || typeof noneOption === 'string') {
+        options.unshift(
+          <List.Item
+            key={DROPDOWN_NULL_OPTION_KEY}
+            titleStyle={{ color: theme.colors.placeholder }}
+            title={noneOption ?? placeholder}
+            onPress={() => selectOption(null)}
+          />
+        );
+      } else {
+        options.unshift(noneOption);
+      }
+    }
+    return options;
+  };
+
+  React.useEffect(() => {
+    if (selectedValue) {
+      setSelected(findSelectedOption(selectedValue, children));
+    }
+  }, [children, selectedValue]);
+
+  React.useImperativeHandle(ref, () => ({
+    closeMenu,
+    openMenu,
+    selectOption: (value) => setSelected(findSelectedOption(value, children)),
+  }));
+
+  return (
+    <View ref={rootViewRef}>
+      <TouchableRipple borderless onPress={toggleMenuOpen}>
+        <Surface
+          style={[
+            styles.container,
+            {
+              borderRadius: theme.roundness,
+              borderColor: isMenuOpen
+                ? theme.colors.primary
+                : theme.colors.backdrop,
+            },
+          ]}
+        >
+          <View style={styles.label}>{renderLabel()}</View>
+          <IconButton
+            style={styles.icon}
+            icon="menu-down"
+            onPress={toggleMenuOpen}
+          />
+        </Surface>
+      </TouchableRipple>
+      {isMenuOpen && (
+        <Portal>
+          <DropdownContext.Provider
+            value={{
+              selectedValue: selected?.value,
+              maxHeight,
+              dropdownCoordinates,
+              emptyDropdownLabel,
+              required,
+              closeMenu,
+              selectOption,
+            }}
+          >
+            <DropdownContent>{renderOptions()}</DropdownContent>
+          </DropdownContext.Provider>
+        </Portal>
+      )}
+    </View>
+  );
+}) as <T = any>(
+  props: Props<T>,
+  ref: React.RefObject<DropdownRefAttributes<T>>
+) => JSX.Element;
 
 const styles = StyleSheet.create({
   container: {
@@ -314,9 +319,6 @@ const styles = StyleSheet.create({
   label: {
     flex: 1,
   },
-  unselectOption: {
-    opacity: 0.5,
-  },
 });
 
-export default withTheme(Dropdown);
+export default Dropdown;

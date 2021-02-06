@@ -28,6 +28,7 @@ export { default as Chip } from './components/Chip';
 export { default as DataTable } from './components/DataTable/DataTable';
 export { default as Dialog } from './components/Dialog/Dialog';
 export { default as Divider } from './components/Divider';
+export { default as Dropdown } from './components/Dropdown';
 export { default as FAB } from './components/FAB';
 export { default as HelperText } from './components/HelperText';
 export { default as IconButton } from './components/IconButton';
@@ -44,8 +45,6 @@ export { default as Appbar } from './components/Appbar';
 export { default as TouchableRipple } from './components/TouchableRipple/TouchableRipple';
 export { default as TextInput } from './components/TextInput/TextInput';
 export { default as ToggleButton } from './components/ToggleButton';
-export { default as Dropdown } from './components/Dropdown/Dropdown';
-
 export { default as Caption } from './components/Typography/Caption';
 export { default as Headline } from './components/Typography/Headline';
 export { default as Paragraph } from './components/Typography/Paragraph';

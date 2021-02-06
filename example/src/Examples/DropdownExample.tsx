@@ -10,7 +10,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 
 const DropdownExample = () => {
   const theme = useTheme();
-  const [selectedValue, setSelectedValue] = useState(1);
+  const [selectedValue, setSelectedValue] = useState<number | null>(1);
 
   return (
     <ScrollView style={{ backgroundColor: theme.colors.background }}>
@@ -41,7 +41,9 @@ const DropdownExample = () => {
           <Dropdown
             renderNoneOption={(props) => (
               <List.Item
-                {...props}
+                key={props.key}
+                onPress={props.onPress}
+                titleStyle={props.style}
                 left={() => <IconButton icon="minus-circle" />}
                 title="None"
               />
@@ -94,7 +96,7 @@ const DropdownExample = () => {
           <Dropdown
             required
             selectedValue={selectedValue}
-            onSelect={(value: any) => setSelectedValue(value)}
+            onSelect={setSelectedValue}
           >
             <Dropdown.Option key={1} value={1} label="Option 1" />
             <Dropdown.Option key={2} value={2} label="Option 2" />
@@ -104,10 +106,15 @@ const DropdownExample = () => {
       </List.Section>
       <List.Section title="Empty dropdown">
         <View style={styles.dropdown}>
-          <Dropdown
-            selectedValue={selectedValue}
-            onSelect={(value: any) => setSelectedValue(value)}
-          />
+          <Dropdown />
+        </View>
+      </List.Section>
+      <List.Section title="Dropdown with a disabled option">
+        <View style={styles.dropdown}>
+          <Dropdown>
+            <Dropdown.Option value={1} disabled label="Disabled Option" />
+            <Dropdown.Option value={2} label="Enabled Option" />
+          </Dropdown>
         </View>
       </List.Section>
     </ScrollView>

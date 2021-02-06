@@ -19,7 +19,7 @@ export interface Props<T> {
    */
   value: T | null;
   /**
-   * Custom component to display instead of the label
+   * Custom component to display inside the dropdown instead of the label
    */
   render?: (props: {
     onPress: () => void;
@@ -27,11 +27,11 @@ export interface Props<T> {
   }) => React.ReactNode;
   /**
    * Label that will show if the current option is selected.
-   * If undefined the title prop will be used instead
    */
   label?: string;
   /**
-   * Render custom label that will appear on the Dropdown when this option is selected
+   * Render custom label that will appear on the Dropdown when this option is selected.
+   * This will override the label property.
    */
   renderLabel?: () => React.ReactNode;
   /**
@@ -60,10 +60,8 @@ export interface Props<T> {
  *       <Dropdown>
  *         <Dropdown.Option
  *          value={1}
- *          optionKey={1}
- *          title="Option 1"
- *          left={() => <IconButton icon="emoticon"/>}
- *          label="Option 1 is selected!"
+ *          key={1}
+ *          label="Option 1"
  *         />
  *       </Dropdown>
  *     </Provider>
@@ -81,27 +79,29 @@ function DropdownOption<T = any>(props: Props<T>) {
     throw new Error('Dropdown.Option is used outside a Dropdown.');
   }
 
-  const onSelect = () => context.onSelect(props);
+  const selectOption = () => context.selectOption(props);
 
   if (!render) {
     return (
       <List.Item
+        titleStyle={{
+          color: props.disabled
+            ? props.theme.colors.disabled
+            : props.theme.colors.text,
+        }}
         disabled={disabled}
         style={style}
         title={label}
-        onPress={onSelect}
+        onPress={selectOption}
       />
     );
   }
 
   return (
-    <TouchableRipple onPress={onSelect}>
-      {render({ onPress: onSelect, disabled })}
+    <TouchableRipple onPress={selectOption}>
+      {render({ onPress: selectOption, disabled })}
     </TouchableRipple>
   );
 }
 
 export default withTheme(DropdownOption);
-
-// @component-docs ignore-next-line
-export { DropdownOption };
