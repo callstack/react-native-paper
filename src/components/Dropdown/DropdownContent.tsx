@@ -11,7 +11,9 @@ type Props = {
 const DropdownContent = (props: Props) => {
   const context = React.useContext(DropdownContext);
 
-  if (!context) return null;
+  if (!context) {
+    return null;
+  }
 
   const { mode } = context;
 
@@ -27,7 +29,7 @@ const DropdownContent = (props: Props) => {
         <DropdownContentModal {...props}>{props.children}</DropdownContentModal>
       );
     default:
-      throw new Error('Unkown mode ' + mode);
+      throw new Error('Unknown mode ' + mode);
   }
 };
 

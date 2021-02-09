@@ -16,7 +16,7 @@ const DropdownExample = () => {
 
   return (
     <ScrollView style={{ backgroundColor: theme.colors.background }}>
-      <List.Section title="Dropdown with custom labels">
+      <List.Section title="Dropdown">
         <View style={styles.dropdown}>
           <Dropdown
             placeholder="Pick a snack"
@@ -107,19 +107,21 @@ const DropdownExample = () => {
         </View>
       </List.Section>
       <List.Section>
-        <List.Item
-          title="Floating dropdown mode"
-          description="Use floating dropdown instead of modal"
-          right={() => (
-            <Switch
-              value={mode === 'floating'}
-              onValueChange={() =>
-                setMode(mode === 'modal' ? 'floating' : 'modal')
-              }
-            />
-          )}
-        />
-        <View style={styles.dropdown}>
+        <View style={styles.field}>
+          <List.Item
+            title="Floating dropdown mode"
+            description="Use floating dropdown instead of modal"
+            right={() => (
+              <Switch
+                value={mode === 'floating'}
+                onValueChange={() =>
+                  setMode(mode === 'modal' ? 'floating' : 'modal')
+                }
+              />
+            )}
+          />
+        </View>
+        <View style={[styles.dropdown, styles.field]}>
           <Dropdown mode={mode}>
             <Dropdown.Option value={1} label="Option 1" />
             <Dropdown.Option value={2} label="Option 2" />
@@ -146,6 +148,28 @@ const DropdownExample = () => {
           </Dropdown>
         </View>
       </List.Section>
+      <List.Section title="Dropdown Variants">
+        <View style={[styles.dropdown, styles.field]}>
+          <Dropdown inputMode="flat" label="Default flat">
+            <Dropdown.Option value={1} label="Option" />
+          </Dropdown>
+        </View>
+        <View style={[styles.dropdown, styles.field]}>
+          <Dropdown inputMode="outlined" label="Default outlined">
+            <Dropdown.Option value={1} label="Option" />
+          </Dropdown>
+        </View>
+        <View style={[styles.dropdown, styles.field]}>
+          <Dropdown inputMode="flat" dense label="Dense flat">
+            <Dropdown.Option value={1} label="Option" />
+          </Dropdown>
+        </View>
+        <View style={[styles.dropdown, styles.field]}>
+          <Dropdown inputMode="outlined" dense label="Dense outlined">
+            <Dropdown.Option value={1} label="Option" />
+          </Dropdown>
+        </View>
+      </List.Section>
     </ScrollView>
   );
 };
@@ -155,6 +179,9 @@ DropdownExample.title = 'Dropdown';
 const styles = StyleSheet.create({
   dropdown: {
     paddingHorizontal: 8,
+  },
+  field: {
+    paddingBottom: 8,
   },
 });
 

@@ -4,6 +4,7 @@ import { withTheme } from '../../core/theming';
 import { DropdownContext } from './Dropdown';
 import * as List from '../List/List';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { RenderProps } from '../TextInput/types';
 
 export interface Props<T> {
   /**
@@ -33,7 +34,7 @@ export interface Props<T> {
    * Render custom label that will appear on the Dropdown when this option is selected.
    * This will override the label property.
    */
-  renderLabel?: () => React.ReactNode;
+  renderLabel?: (props: RenderProps) => React.ReactNode;
   /**
    * Whether the option is disabled or not
    */

@@ -1,28 +1,24 @@
 import * as React from 'react';
-import { Dimensions, Platform, StyleSheet, View } from 'react-native';
-import Surface from '../Surface';
+import {
+  BackHandler,
+  Dimensions,
+  Platform,
+  StyleProp,
+  TextStyle,
+  View,
+} from 'react-native';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import IconButton from '../IconButton';
-import Text from '../Typography/Text';
 import { useTheme } from '../../core/theming';
 import DropdownContent from './DropdownContent';
 import HelperText from '../HelperText';
 import * as List from '../List/List';
 import Portal from '../Portal/Portal';
-import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
+import TextInput from '../TextInput/TextInput';
+import type { RenderProps } from '../TextInput/types';
 
 type Props<T> = {
-  /**
-   * Extra padding to add at the top of header to account for translucent status bar.
-   * This is automatically handled on iOS >= 11 including iPhone X using `SafeAreaView`.
-   * If you are using Expo, we assume translucent status bar and set a height for status bar automatically.
-   * Pass `0` or a custom value to disable the default behaviour, and customize the height.
-   */
-  statusBarHeight?: number;
-  /**
-   * Placeholder label when there is no selected value
-   */
   placeholder?: string;
+  label?: string;
   /**
    * Required flag removes the possibility for the user to unselect a value once it's selected
    */
@@ -62,18 +58,21 @@ type Props<T> = {
    * The default value is 'floating' if the platform is web and 'modal' otherwise
    */
   mode?: 'modal' | 'floating';
+  inputMode?: 'outlined' | 'flat';
+  dense?: boolean;
+  inputStyle?: StyleProp<TextStyle>;
 };
 
 type OptionProps<T> = {
   value: T | null;
-  renderLabel?: () => React.ReactNode;
+  renderLabel?: (props: RenderProps) => React.ReactNode;
   label?: string;
 };
 
 const DEFAULT_EMPTY_DROPDOWN_LABEL = 'No available options';
 const DEFAULT_PLACEHOLDER_LABEL = 'Select an option';
 const DROPDOWN_NULL_OPTION_KEY = 'DROPDOWN_NULL_OPTION_KEY';
-const DEFAULT_MAX_HEIGHT = 350;
+// const DEFAULT_MAX_HEIGHT = Infinity;
 
 export type DropdownContextProps<T> = {
   closeMenu(): void;
@@ -81,14 +80,8 @@ export type DropdownContextProps<T> = {
   required: boolean;
   emptyDropdownLabel: string;
   selectedValue?: T;
-  dropdownCoordinates: {
-    top?: number;
-    bottom?: number;
-    left: number;
-    width: number;
-    maxHeight?: number;
-  };
   mode: 'modal' | 'floating';
+  anchor: View | null;
 };
 
 export type DropdownRefAttributes<T> = {
@@ -156,85 +149,32 @@ const Dropdown = React.forwardRef(function <T>(
   {
     children,
     emptyDropdownLabel = DEFAULT_EMPTY_DROPDOWN_LABEL,
-    maxHeight = DEFAULT_MAX_HEIGHT,
+    // maxHeight = DEFAULT_MAX_HEIGHT,
     onSelect,
     placeholder = DEFAULT_PLACEHOLDER_LABEL,
+    label,
     renderNoneOption,
     required = false,
     selectedValue,
     mode = Platform.select({ web: 'floating', default: 'modal' }),
-    statusBarHeight = APPROX_STATUSBAR_HEIGHT,
+    inputMode,
+    dense,
+    inputStyle,
   }: Props<T>,
   ref:
     | ((instance: DropdownRefAttributes<T> | null) => void)
     | React.MutableRefObject<DropdownRefAttributes<T> | null>
     | null
 ) {
-  const computedStatusBarHeight = Platform.select({
-    android: statusBarHeight,
-    default: 0,
-  });
   const theme = useTheme();
   const anchorRef = React.useRef<View>(null);
   const menuRef = React.useRef<View>(null);
   const [isMenuOpen, setMenuOpen] = React.useState(false);
-  const [dropdownCoordinates, setMenuPosition] = React.useState<{
-    top?: number;
-    bottom?: number;
-    left: number;
-    width: number;
-    maxHeight?: number;
-  }>({
-    left: 0,
-    width: 0,
-  });
   const [selected, setSelected] = React.useState<OptionProps<T> | null>(null);
-  const windowHeight = Dimensions.get('window').height;
-
-  const toggleMenuOpen = () => {
-    if (isMenuOpen) {
-      closeMenu();
-    } else {
-      openMenu();
-    }
-  };
 
   const closeMenu = () => setMenuOpen(false);
 
-  const openMenu = () => {
-    if (mode === 'floating') {
-      anchorRef.current?.measureInWindow((x, y, width, height) => {
-        let top = y + height + computedStatusBarHeight;
-        setMenuPosition({
-          left: x,
-          width: width,
-          top: top,
-          bottom: 48,
-          maxHeight: Math.min(maxHeight, windowHeight - top),
-        });
-      });
-    }
-    requestAnimationFrame(() => setMenuOpen(true));
-  };
-
-  const renderLabel = () => {
-    if (selected?.renderLabel) {
-      return selected.renderLabel();
-    } else {
-      return (
-        <Text
-          style={[
-            styles.text,
-            {
-              color: selected ? theme.colors.text : theme.colors.placeholder,
-            },
-          ]}
-        >
-          {selected ? selected.label : placeholder}
-        </Text>
-      );
-    }
-  };
+  const openMenu = () => setMenuOpen(true);
 
   const selectOption = (option: OptionProps<T> | null) => {
     closeMenu();
@@ -283,6 +223,36 @@ const Dropdown = React.forwardRef(function <T>(
     }
   }, [children, selectedValue]);
 
+  React.useEffect(() => {
+    if (isMenuOpen) {
+      const isBrowser = () => Platform.OS === 'web' && 'document' in global;
+
+      const handleDismiss = () => {
+        closeMenu();
+        return true;
+      };
+
+      const handleKeypress = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          closeMenu();
+        }
+      };
+
+      BackHandler.addEventListener('hardwareBackPress', handleDismiss);
+      Dimensions.addEventListener('change', handleDismiss);
+      isBrowser() && document.addEventListener('keyup', handleKeypress);
+
+      return () => {
+        BackHandler.removeEventListener('hardwareBackPress', handleDismiss);
+        Dimensions.removeEventListener('change', handleDismiss);
+
+        isBrowser() && document.removeEventListener('keyup', handleKeypress);
+      };
+    }
+
+    return undefined;
+  }, [isMenuOpen]);
+
   React.useImperativeHandle(ref, () => ({
     closeMenu,
     openMenu,
@@ -291,40 +261,37 @@ const Dropdown = React.forwardRef(function <T>(
 
   return (
     <View ref={anchorRef} collapsable={false}>
-      <TouchableRipple borderless onPress={toggleMenuOpen}>
-        <Surface
-          style={[
-            styles.container,
-            {
-              borderRadius: theme.roundness,
-              borderColor: isMenuOpen
-                ? theme.colors.primary
-                : theme.colors.backdrop,
-            },
-          ]}
-        >
-          <View style={styles.label}>{renderLabel()}</View>
-          <IconButton
-            style={styles.icon}
-            icon={isMenuOpen && mode === 'floating' ? 'menu-up' : 'menu-down'}
-            onPress={toggleMenuOpen}
-          />
-        </Surface>
+      <TouchableRipple borderless onPress={openMenu}>
+        <TextInput
+          render={selected?.renderLabel}
+          style={inputStyle}
+          dense={dense}
+          focusable={true}
+          mode={inputMode}
+          editable={false}
+          value={selected?.label ?? ''}
+          label={label}
+          placeholder={placeholder}
+          onFocus={openMenu}
+          right={<TextInput.Icon name="menu-down" onPress={openMenu} />}
+        />
       </TouchableRipple>
       <Portal>
         <DropdownContext.Provider
           value={{
             selectedValue: selected?.value,
-            dropdownCoordinates,
             emptyDropdownLabel,
             required,
             closeMenu,
             selectOption,
             mode,
+            anchor: anchorRef.current,
           }}
         >
           <DropdownContent visible={isMenuOpen}>
-            <View ref={menuRef}>{renderOptions()}</View>
+            <View ref={menuRef} collapsable={false}>
+              {renderOptions()}
+            </View>
           </DropdownContent>
         </DropdownContext.Provider>
       </Portal>
@@ -334,24 +301,6 @@ const Dropdown = React.forwardRef(function <T>(
   props: Props<T>,
   ref: React.RefObject<DropdownRefAttributes<T>>
 ) => JSX.Element) & { displayName: string };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    borderWidth: 1.2,
-    alignItems: 'center',
-    elevation: 1,
-  },
-  text: {
-    paddingHorizontal: 10,
-  },
-  icon: {
-    margin: 2.5,
-  },
-  label: {
-    flex: 1,
-  },
-});
 
 Dropdown.displayName = 'Dropdown';
 

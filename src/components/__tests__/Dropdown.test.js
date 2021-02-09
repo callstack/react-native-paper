@@ -44,3 +44,23 @@ it('throws an error when Dropdown.Option is used outside dropdown', () => {
 
   expect(render).toThrowErrorMatchingSnapshot();
 });
+
+it('renders in floating mode', () => {
+  const tree = renderer.create(
+    <Dropdown mode="floating">
+      <Dropdown.Option key={1} value={1} label="Option 1" />
+    </Dropdown>
+  );
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders in modal mode', () => {
+  const tree = renderer.create(
+    <Dropdown mode="modal">
+      <Dropdown.Option key={1} value={1} label="Option 1" />
+    </Dropdown>
+  );
+
+  expect(tree).toMatchSnapshot();
+});
