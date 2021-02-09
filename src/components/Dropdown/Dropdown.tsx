@@ -17,36 +17,37 @@ import TextInput from '../TextInput/TextInput';
 import type { RenderProps } from '../TextInput/types';
 
 type Props<T> = {
+  /**
+   * Placeholder for the dropdown.
+   */
   placeholder?: string;
+  /**
+   * The text to use for the floating label.
+   */
   label?: string;
   /**
-   * Required flag removes the possibility for the user to unselect a value once it's selected
+   * Required flag removes the possibility for the user to unselect a value once it's selected.
    */
   required?: boolean;
   /**
-   * One or multiple Dropdown.Option elements
+   * One or multiple Dropdown.Option elements.
    */
   children?: React.ReactNode;
   /**
-   * Only for web, maximum height of the dropdown popup
-   */
-  maxHeight?: number;
-  /**
-   * Triggered when on of the options is selected or when unselected
-   * @param selected the selected option value or null if nothing is selected
+   * Triggered when one of the options is selected or when unselected.
    */
   onSelect?: (selected: T | null) => void;
   /**
    * The option having this key will be selected
-   * If undefined the currently selected option will remain selected
+   * If undefined the currently selected option will remain selected.
    */
   selectedValue?: T | null;
   /**
-   * This message will appear when the required prop is set to true and the number of children is zero
+   * This message will appear when the required prop is set to true and the number of children is zero.
    */
   emptyDropdownLabel?: string;
   /**
-   * The label of the unselect option
+   * The label of the unselect option.
    */
   renderNoneOption?: (props: {
     onPress: () => void;
@@ -58,9 +59,35 @@ type Props<T> = {
    * The default value is 'floating' if the platform is web and 'modal' otherwise
    */
   mode?: 'modal' | 'floating';
+  /**
+   * Mode of the TextInput.
+   * - `flat` - flat input with an underline.
+   * - `outlined` - input with an outline.
+   *
+   * In `outlined` mode, the background color of the label is derived from `colors.background` in theme or the `backgroundColor` style.
+   * This component render TextInputOutlined or TextInputFlat based on that props
+   */
   inputMode?: 'outlined' | 'flat';
+  /**
+   * Sets min height with densed layout. For `TextInput` in `flat` mode
+   * height is `64dp` or in dense layout - `52dp` with label or `40dp` without label.
+   * For `TextInput` in `outlined` mode
+   * height is `56dp` or in dense layout - `40dp` regardless of label.
+   * When you apply `heigh` prop in style the `dense` prop affects only `paddingVertical` inside `TextInput`
+   */
   dense?: boolean;
+  /**
+   * Pass `fontSize` prop to modify the font size inside `TextInput`.
+   * Pass `height` prop to set `TextInput` height. When `height` is passed,
+   * `dense` prop will affect only input's `paddingVertical`.
+   * Pass `paddingHorizontal` to modify horizontal padding.
+   * This can be used to get MD Guidelines v1 TextInput look.
+   */
   inputStyle?: StyleProp<TextStyle>;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 type OptionProps<T> = {

@@ -16,11 +16,11 @@ export interface Props<T> {
    */
   theme: ReactNativePaper.Theme;
   /**
-   * Value represented by the dropdown option
+   * Value represented by the dropdown option.
    */
   value: T | null;
   /**
-   * Custom component to display inside the dropdown instead of the label
+   * Custom component to display inside the dropdown instead of the label.
    */
   render?: (props: {
     onPress: () => void;
@@ -36,9 +36,13 @@ export interface Props<T> {
    */
   renderLabel?: (props: RenderProps) => React.ReactNode;
   /**
-   * Whether the option is disabled or not
+   * Whether the option is disabled or not.
    */
   disabled?: boolean;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 }
 
 /**
