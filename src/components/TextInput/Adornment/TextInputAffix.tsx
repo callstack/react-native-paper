@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import color from 'color';
 import {
   Text,
@@ -14,15 +14,15 @@ import { AdornmentSide } from './enums';
 
 const AFFIX_OFFSET = 12;
 
-type Props = {
-  text: string;
+type Props = PropsWithChildren<{
+  text?: string;
   onLayout?: (event: LayoutChangeEvent) => void;
   textStyle?: StyleProp<TextStyle>;
   /**
    * @optional
    */
   theme: ReactNativePaper.Theme;
-};
+}>;
 
 type ContextState = {
   topPosition: number | null;
@@ -69,7 +69,12 @@ const AffixAdornment: React.FunctionComponent<
   );
 };
 
-const TextInputAffix = ({ text, textStyle: labelStyle, theme }: Props) => {
+const TextInputAffix = ({
+  text = '',
+  textStyle: labelStyle,
+  theme,
+  children,
+}: Props) => {
   const {
     textStyle,
     onLayout,
@@ -106,7 +111,11 @@ const TextInputAffix = ({ text, textStyle: labelStyle, theme }: Props) => {
       ]}
       onLayout={onLayout}
     >
-      <Text style={[{ color: textColor }, textStyle, labelStyle]}>{text}</Text>
+      {children ?? (
+        <Text style={[{ color: textColor }, textStyle, labelStyle]}>
+          {text}
+        </Text>
+      )}
     </Animated.View>
   );
 };
