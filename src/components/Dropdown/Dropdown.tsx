@@ -240,13 +240,19 @@ const Dropdown = React.forwardRef(function <T>(
 
       BackHandler.addEventListener('hardwareBackPress', handleDismiss);
       Dimensions.addEventListener('change', handleDismiss);
-      isBrowser() && document.addEventListener('keyup', handleKeypress);
+      if (isBrowser()) {
+        document.addEventListener('keyup', handleKeypress);
+        document.addEventListener('click', handleDismiss);
+      }
 
       return () => {
         BackHandler.removeEventListener('hardwareBackPress', handleDismiss);
         Dimensions.removeEventListener('change', handleDismiss);
 
-        isBrowser() && document.removeEventListener('keyup', handleKeypress);
+        if (isBrowser()) {
+          document.removeEventListener('keyup', handleKeypress);
+          document.removeEventListener('click', handleDismiss);
+        }
       };
     }
 

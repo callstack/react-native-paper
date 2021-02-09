@@ -38,13 +38,33 @@ const ANIMATION_DURATION = 250;
 // From the 'Standard easing' section of https://material.io/design/motion/speed.html#easing
 const EASING = Easing.bezier(0.4, 0, 0.2, 1);
 
+const measureLayout = (view: View, statusBarHeight: number) => {
+  // I don't know why but on Android measure function is wrong by 24
+  const additionalVerticalValue = Platform.select({
+    android: statusBarHeight,
+    default: 0,
+  });
+
+  return new Promise<LayoutRectangle>((resolve) => {
+    view.measureInWindow((x, y, width, height) =>
+      resolve({
+        x,
+        y: y + additionalVerticalValue,
+        width,
+        height,
+      })
+    );
+  });
+};
+
 const DropdownContentFloating = ({
   children,
   visible,
   theme,
   statusBarHeight = APPROX_STATUSBAR_HEIGHT,
 }: Props) => {
-  const { closeMenu, anchor } = React.useContext(DropdownContext);
+  const context = React.useContext(DropdownContext);
+  const { closeMenu, anchor } = context;
   const windowHeight = Dimensions.get('window').height;
   const menuRef = React.useRef<View>(null);
   const [menuLayout, setMenuLayout] = React.useState<Layout>({
@@ -65,26 +85,17 @@ const DropdownContentFloating = ({
   const { animation } = theme;
   const scaleAnimation = useRef(new Animated.Value(0)).current;
 
-  // I don't know why but on Android measure function is wrong by 24
-  const additionalVerticalValue = Platform.select({
-    android: statusBarHeight,
-    default: 0,
-  });
-
-  const measureLayout = (view: View) => {
-    return new Promise<LayoutRectangle>((resolve) => {
-      view.measureInWindow((x, y, width, height) =>
-        resolve({ x, y, width, height })
-      );
-    });
-  };
+  const scrollTop =
+    Platform.OS === 'web' ? document.documentElement.scrollTop : 0;
 
   React.useEffect(() => {
     const show = async () => {
       if (visible) {
         const [menuLayout, anchorLayout] = await Promise.all([
-          menuRef.current ? measureLayout(menuRef.current) : undefined,
-          anchor ? measureLayout(anchor) : undefined,
+          menuRef.current
+            ? measureLayout(menuRef.current, statusBarHeight)
+            : undefined,
+          anchor ? measureLayout(anchor, statusBarHeight) : undefined,
         ]);
 
         if (
@@ -97,9 +108,9 @@ const DropdownContentFloating = ({
           return;
         }
 
-        let anchorY = anchorLayout.y + additionalVerticalValue;
-        const spaceAbove = anchorY - DROPDOWN_SCREEN_INDENT;
-        const spaceBelow = windowHeight - anchorY - DROPDOWN_SCREEN_INDENT;
+        const spaceAbove = anchorLayout.y - DROPDOWN_SCREEN_INDENT;
+        const spaceBelow =
+          windowHeight - anchorLayout.y - DROPDOWN_SCREEN_INDENT;
 
         const aboveAnchor =
           menuLayout.height > spaceBelow && spaceAbove > spaceBelow;
@@ -109,14 +120,13 @@ const DropdownContentFloating = ({
         setMenuPosition({
           left: anchorLayout.x,
           top: aboveAnchor
-            ? anchorY -
-              Math.min(menuLayout.height, spaceAbove) +
-              DROPDOWN_SCREEN_INDENT
-            : anchorY + anchorLayout.height,
+            ? anchorLayout.y -
+              Math.min(menuLayout.height, spaceAbove - DROPDOWN_SCREEN_INDENT)
+            : anchorLayout.y + anchorLayout.height,
           maxHeight: aboveAnchor
-            ? Math.min(menuLayout.height, spaceAbove) - DROPDOWN_SCREEN_INDENT
+            ? Math.min(menuLayout.height, spaceAbove - DROPDOWN_SCREEN_INDENT)
             : windowHeight -
-              (anchorY + anchorLayout.height) -
+              (anchorLayout.y + anchorLayout.height) -
               DROPDOWN_SCREEN_INDENT,
           width: anchorLayout.width,
         });
@@ -141,54 +151,70 @@ const DropdownContentFloating = ({
     windowHeight,
     anchor,
     visible,
-    additionalVerticalValue,
-    rendered,
+    statusBarHeight,
     scaleAnimation,
     animation.scale,
+    scrollTop,
   ]);
 
-  const scaleTransforms = [
-    {
-      translateY: scaleAnimation.interpolate({
-        inputRange: [0, menuLayout.height],
-        outputRange: [(isAboveAnchor ? 1 : -1) * (menuLayout.height / 2), 0],
-      }),
-    },
-    {
-      scaleY: scaleAnimation.interpolate({
-        inputRange: [0, menuLayout.height],
-        outputRange: [0, 1],
-      }),
-    },
-  ];
+  const animatedViewStyle = {
+    transform: [
+      {
+        translateY: scaleAnimation.interpolate({
+          inputRange: [0, menuLayout.height],
+          outputRange: [(isAboveAnchor ? 1 : -1) * (menuLayout.height / 2), 0],
+        }),
+      },
+      {
+        scaleY: scaleAnimation.interpolate({
+          inputRange: [0, menuLayout.height],
+          outputRange: [0, 1],
+        }),
+      },
+    ],
+  };
+
+  let menuView = (
+    <View
+      ref={menuRef}
+      style={[
+        styles.menu,
+        Platform.OS !== 'web' && styles.expand,
+        rendered ? menuPosition : styles.invisible,
+        !visible && styles.hidden,
+      ]}
+    >
+      <Animated.View style={[styles.expand, animatedViewStyle]}>
+        <Surface
+          style={[
+            styles.container,
+            isAboveAnchor
+              ? {
+                  borderTopLeftRadius: theme.roundness,
+                  borderTopRightRadius: theme.roundness,
+                }
+              : {
+                  borderBottomRightRadius: theme.roundness,
+                  borderBottomLeftRadius: theme.roundness,
+                },
+          ]}
+        >
+          <ScrollView style={styles.expand}>{children}</ScrollView>
+        </Surface>
+      </Animated.View>
+    </View>
+  );
 
   return (
     <TouchableWithoutFeedback onPress={closeMenu}>
-      <View style={visible ? StyleSheet.absoluteFill : styles.hidden}>
-        <View ref={menuRef} style={rendered ? menuPosition : styles.invisible}>
-          <Animated.View
-            style={{
-              transform: scaleTransforms,
-            }}
-          >
-            <Surface
-              style={[
-                styles.container,
-                isAboveAnchor
-                  ? {
-                      borderTopLeftRadius: theme.roundness,
-                      borderTopRightRadius: theme.roundness,
-                    }
-                  : {
-                      borderBottomRightRadius: theme.roundness,
-                      borderBottomLeftRadius: theme.roundness,
-                    },
-              ]}
-            >
-              {rendered ? <ScrollView>{children}</ScrollView> : children}
-            </Surface>
-          </Animated.View>
-        </View>
+      <View
+        style={[
+          { transform: [{ translateY: scrollTop }] },
+          visible ? StyleSheet.absoluteFill : styles.hidden,
+        ]}
+        collapsable={false}
+      >
+        {menuView}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -197,12 +223,19 @@ const DropdownContentFloating = ({
 const styles = StyleSheet.create({
   container: {
     elevation: 8,
+    flex: 1,
   },
   hidden: {
     display: 'none',
   },
   invisible: {
     opacity: 0,
+  },
+  menu: {
+    overflow: 'hidden',
+  },
+  expand: {
+    flex: 1,
   },
 });
 
