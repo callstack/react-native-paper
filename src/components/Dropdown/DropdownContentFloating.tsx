@@ -174,37 +174,6 @@ const DropdownContentFloating = ({
     ],
   };
 
-  let menuView = (
-    <View
-      ref={menuRef}
-      style={[
-        styles.menu,
-        Platform.OS !== 'web' && styles.expand,
-        rendered ? menuPosition : styles.invisible,
-        !visible && styles.hidden,
-      ]}
-    >
-      <Animated.View style={[styles.expand, animatedViewStyle]}>
-        <Surface
-          style={[
-            styles.container,
-            isAboveAnchor
-              ? {
-                  borderTopLeftRadius: theme.roundness,
-                  borderTopRightRadius: theme.roundness,
-                }
-              : {
-                  borderBottomRightRadius: theme.roundness,
-                  borderBottomLeftRadius: theme.roundness,
-                },
-          ]}
-        >
-          <ScrollView style={styles.expand}>{children}</ScrollView>
-        </Surface>
-      </Animated.View>
-    </View>
-  );
-
   return (
     <TouchableWithoutFeedback onPress={closeMenu}>
       <View
@@ -214,7 +183,36 @@ const DropdownContentFloating = ({
         ]}
         collapsable={false}
       >
-        {menuView}
+        {
+          <View
+            ref={menuRef}
+            style={[
+              styles.menu,
+              Platform.OS !== 'web' && styles.expand,
+              rendered ? menuPosition : styles.invisible,
+              !visible && styles.hidden,
+            ]}
+          >
+            <Animated.View style={[styles.expand, animatedViewStyle]}>
+              <Surface
+                style={[
+                  styles.container,
+                  isAboveAnchor
+                    ? {
+                        borderTopLeftRadius: theme.roundness,
+                        borderTopRightRadius: theme.roundness,
+                      }
+                    : {
+                        borderBottomRightRadius: theme.roundness,
+                        borderBottomLeftRadius: theme.roundness,
+                      },
+                ]}
+              >
+                <ScrollView style={styles.expand}>{children}</ScrollView>
+              </Surface>
+            </Animated.View>
+          </View>
+        }
       </View>
     </TouchableWithoutFeedback>
   );
