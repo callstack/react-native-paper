@@ -25,7 +25,6 @@ function AnimatedText({ style, theme, ...rest }: Props) {
   const writingDirection = I18nManager.isRTL ? 'rtl' : 'ltr';
 
   return (
-    //@ts-ignore
     <Animated.Text
       {...rest}
       style={[

@@ -168,7 +168,10 @@ class Menu extends React.Component<Props, State> {
   private anchor?: View | null = null;
   private menu?: View | null = null;
 
-  private isAnchorCoord = () => !React.isValidElement(this.props.anchor);
+  private isCoordinate = (anchor: any): anchor is { x: number; y: number } =>
+    !React.isValidElement(anchor) &&
+    typeof anchor?.x === 'number' &&
+    typeof anchor?.y === 'number';
 
   private measureMenuLayout = () =>
     new Promise<LayoutRectangle>((resolve) => {
@@ -182,8 +185,7 @@ class Menu extends React.Component<Props, State> {
   private measureAnchorLayout = () =>
     new Promise<LayoutRectangle>((resolve) => {
       const { anchor } = this.props;
-      if (this.isAnchorCoord()) {
-        // @ts-ignore
+      if (this.isCoordinate(anchor)) {
         resolve({ x: anchor.x, y: anchor.y, width: 0, height: 0 });
         return;
       }
@@ -270,8 +272,8 @@ class Menu extends React.Component<Props, State> {
       !windowLayout.height ||
       !menuLayout.width ||
       !menuLayout.height ||
-      (!anchorLayout.width && !this.isAnchorCoord()) ||
-      (!anchorLayout.height && !this.isAnchorCoord())
+      (!anchorLayout.width && !this.isCoordinate(this.props.anchor)) ||
+      (!anchorLayout.height && !this.isCoordinate(this.props.anchor))
     ) {
       requestAnimationFrame(this.show);
       return;
@@ -522,7 +524,7 @@ class Menu extends React.Component<Props, State> {
     };
 
     const positionStyle = {
-      top: this.isAnchorCoord() ? top : top + additionalVerticalValue,
+      top: this.isCoordinate(anchor) ? top : top + additionalVerticalValue,
       ...(I18nManager.isRTL ? { right: left } : { left }),
     };
 
@@ -533,7 +535,7 @@ class Menu extends React.Component<Props, State> {
         }}
         collapsable={false}
       >
-        {this.isAnchorCoord() ? null : anchor}
+        {this.isCoordinate(anchor) ? null : anchor}
         {rendered ? (
           <Portal>
             <TouchableWithoutFeedback

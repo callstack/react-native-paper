@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Animated, StyleSheet, StyleProp, TextStyle } from 'react-native';
-import color from 'color';
-import { black, white } from '../styles/colors';
+import { white, black } from '../styles/colors';
 import { withTheme } from '../core/theming';
+import getContrastingColor from '../utils/getContrastingColor';
 
 const defaultSize = 20;
 
@@ -85,10 +85,12 @@ const Badge = ({
     }).start();
   }, [visible, opacity, scale]);
 
-  // @ts-ignore
-  const { backgroundColor = theme.colors.notification, ...restStyle } =
-    StyleSheet.flatten(style) || {};
-  const textColor = color(backgroundColor).isLight() ? black : white;
+  const {
+    backgroundColor = theme.colors.notification,
+    ...restStyle
+  } = (StyleSheet.flatten(style) || {}) as TextStyle;
+
+  const textColor = getContrastingColor(backgroundColor, white, black);
 
   const borderRadius = size / 2;
 

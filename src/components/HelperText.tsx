@@ -113,7 +113,6 @@ const HelperText = ({
   }, [visible, scale, shown]);
 
   const handleTextLayout = (e: LayoutChangeEvent) => {
-    //@ts-ignore Animated.Text typings are improved but something is still broken. It thinks onLayout is not callable.
     onLayout?.(e);
     textHeight = e.nativeEvent.layout.height;
   };
@@ -129,7 +128,6 @@ const HelperText = ({
           .string();
 
   return (
-    // @ts-ignore
     <AnimatedText
       onLayout={handleTextLayout}
       style={[

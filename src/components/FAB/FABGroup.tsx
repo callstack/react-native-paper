@@ -303,7 +303,7 @@ const FABGroup = ({
                         ? it.accessibilityLabel
                         : it.label
                     }
-                    // @ts-ignore We keep old a11y props for backwards compat with old RN versions
+                    // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
                     accessibilityTraits="button"
                     accessibilityComponentType="button"
                     accessibilityRole="button"
@@ -335,7 +335,7 @@ const FABGroup = ({
                     ? it.accessibilityLabel
                     : it.label
                 }
-                // @ts-ignore We keep old a11y props for backwards compat with old RN versions
+                // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
                 accessibilityTraits="button"
                 accessibilityComponentType="button"
                 accessibilityRole="button"
@@ -353,7 +353,7 @@ const FABGroup = ({
           icon={icon}
           color={colorProp}
           accessibilityLabel={accessibilityLabel}
-          // @ts-ignore We keep old a11y props for backwards compat with old RN versions
+          // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
           accessibilityTraits="button"
           accessibilityComponentType="button"
           accessibilityRole="button"

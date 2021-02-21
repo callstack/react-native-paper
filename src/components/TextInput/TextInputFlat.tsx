@@ -330,12 +330,10 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
             ...rest,
             ref: innerRef,
             onChangeText,
-            // @ts-ignore
             placeholder: label
               ? parentState.placeholder
               : this.props.placeholder,
-            placeholderTextColor: (placeholderTextColor ||
-              placeholderColor) as string,
+            placeholderTextColor: placeholderTextColor ?? placeholderColor,
             editable: !disabled && editable,
             selectionColor:
               typeof selectionColor === 'undefined'

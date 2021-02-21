@@ -1,17 +1,25 @@
 import color from 'color';
 import * as React from 'react';
-import { Animated, View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
+import {
+  Animated,
+  View,
+  ViewStyle,
+  StyleSheet,
+  StyleProp,
+  AccessibilityState,
+} from 'react-native';
 import ActivityIndicator from '../ActivityIndicator';
 import Surface from '../Surface';
 import CrossFadeIcon from '../CrossFadeIcon';
-import Icon from '../Icon';
+import Icon, { IconSource } from '../Icon';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
+import getContrastingColor from '../../utils/getContrastingColor';
 import type { $RemoveChildren } from '../../types';
-import type { IconSource } from './../Icon';
-import type { AccessibilityState } from 'react-native';
+
+getContrastingColor;
 
 type Props = $RemoveChildren<typeof Surface> & {
   /**
@@ -157,8 +165,9 @@ const FAB = ({
     .rgb()
     .string();
 
-  const { backgroundColor = disabled ? disabledColor : theme.colors.accent } =
-    StyleSheet.flatten(style) || {};
+  const {
+    backgroundColor = disabled ? disabledColor : theme.colors.accent,
+  } = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
   let foregroundColor;
 
@@ -170,9 +179,11 @@ const FAB = ({
       .rgb()
       .string();
   } else {
-    foregroundColor = !color(backgroundColor as string).isLight()
-      ? white
-      : 'rgba(0, 0, 0, .54)';
+    foregroundColor = getContrastingColor(
+      backgroundColor,
+      white,
+      'rgba(0, 0, 0, .54)'
+    );
   }
 
   const rippleColor = color(foregroundColor).alpha(0.32).rgb().string();
@@ -205,7 +216,7 @@ const FAB = ({
         rippleColor={rippleColor}
         disabled={disabled}
         accessibilityLabel={accessibilityLabel}
-        // @ts-ignore We keep old a11y props for backwards compat with old RN versions
+        // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
         accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
         accessibilityComponentType="button"
         accessibilityRole="button"

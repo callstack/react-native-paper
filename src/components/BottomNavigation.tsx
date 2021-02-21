@@ -559,14 +559,18 @@ const BottomNavigation = ({
   const backgroundColor = shifting
     ? indexAnim.interpolate({
         inputRange: routes.map((_, i) => i),
-        //@ts-ignore
+        // FIXME: does outputRange support ColorValue or just strings?
+        // @ts-expect-error
         outputRange: routes.map(
           (route) => getColor({ route }) || approxBackgroundColor
         ),
       })
     : approxBackgroundColor;
 
-  const isDark = !color(approxBackgroundColor as string).isLight();
+  const isDark =
+    typeof approxBackgroundColor === 'string'
+      ? !color(approxBackgroundColor).isLight()
+      : true;
 
   const textColor = isDark ? white : black;
   const activeTintColor =
@@ -750,7 +754,7 @@ const BottomNavigation = ({
                 onPress: () => handleTabPress(index),
                 testID: getTestID({ route }),
                 accessibilityLabel: getAccessibilityLabel({ route }),
-                // @ts-ignore We keep old a11y props for backwards compat with old RN versions
+                // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
                 accessibilityTraits: focused
                   ? ['button', 'selected']
                   : 'button',
