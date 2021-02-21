@@ -275,14 +275,13 @@ class TextInput extends React.Component<TextInputProps, State> {
 
     // Set the placeholder in a delay to offset the label animation
     // If we show it immediately, they'll overlap and look ugly
-    // @ts-ignore
-    this.timer = setTimeout(
+    this.timer = (setTimeout(
       () =>
         this.setState({
           placeholder: this.props.placeholder,
         }),
       50
-    );
+    ) as unknown) as NodeJS.Timeout;
   };
 
   private hidePlaceholder = () =>
@@ -290,7 +289,7 @@ class TextInput extends React.Component<TextInputProps, State> {
       placeholder: '',
     });
 
-  private timer?: number;
+  private timer?: NodeJS.Timeout;
   private root: NativeTextInput | undefined | null;
 
   private showError = () => {

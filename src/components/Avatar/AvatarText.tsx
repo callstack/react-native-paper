@@ -6,10 +6,10 @@ import {
   StyleProp,
   TextStyle,
 } from 'react-native';
-import Color from 'color';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import { white } from '../../styles/colors';
+import getContrastingColor from '../../utils/getContrastingColor';
 
 const defaultSize = 64;
 
@@ -65,13 +65,14 @@ const AvatarText = ({
   style,
   theme,
   labelStyle,
-  color,
+  color: customColor,
   ...rest
 }: Props) => {
   const { backgroundColor = theme.colors.primary, ...restStyle } =
     StyleSheet.flatten(style) || {};
   const textColor =
-    color || (Color(backgroundColor).isLight() ? 'rgba(0, 0, 0, .54)' : white);
+    customColor ??
+    getContrastingColor(backgroundColor, white, 'rgba(0, 0, 0, .54)');
 
   return (
     <View

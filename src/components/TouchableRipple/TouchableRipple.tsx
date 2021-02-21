@@ -209,9 +209,8 @@ const TouchableRipple = ({
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         containers.forEach((container) => {
-          const ripple = container.firstChild;
+          const ripple = container.firstChild as HTMLSpanElement;
 
-          // @ts-ignore
           Object.assign(ripple.style, {
             transitionDuration: '250ms',
             opacity: 0,

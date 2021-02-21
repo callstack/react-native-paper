@@ -117,13 +117,13 @@ const IconButton = ({
         style,
       ]}
       accessibilityLabel={accessibilityLabel}
+      // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
       accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
       accessibilityComponentType="button"
       accessibilityRole="button"
       accessibilityState={{ disabled }}
       disabled={disabled}
       hitSlop={
-        // @ts-ignore - this should be fixed in react-theme-providersince withTheme() is not forwarding static property types
         TouchableRipple.supported
           ? { top: 10, left: 10, bottom: 10, right: 10 }
           : { top: 6, left: 6, bottom: 6, right: 6 }
@@ -138,7 +138,6 @@ const IconButton = ({
 };
 
 const styles = StyleSheet.create({
-  // @ts-ignore - this should be fixed in react-theme-providersince withTheme() is not forwarding static property types
   container: {
     alignItems: 'center',
     justifyContent: 'center',

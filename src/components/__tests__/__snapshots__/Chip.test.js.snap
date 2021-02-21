@@ -114,6 +114,8 @@ exports[`renders chip with close button 1`] = `
               "color": "#000000",
               "fontFamily": "System",
               "fontWeight": "400",
+            },
+            Object {
               "textAlign": "left",
             },
             Array [
@@ -329,6 +331,8 @@ exports[`renders chip with icon 1`] = `
               "color": "#000000",
               "fontFamily": "System",
               "fontWeight": "400",
+            },
+            Object {
               "textAlign": "left",
             },
             Array [
@@ -423,6 +427,8 @@ exports[`renders chip with onPress 1`] = `
               "color": "#000000",
               "fontFamily": "System",
               "fontWeight": "400",
+            },
+            Object {
               "textAlign": "left",
             },
             Array [
@@ -517,6 +523,8 @@ exports[`renders outlined disabled chip 1`] = `
               "color": "#000000",
               "fontFamily": "System",
               "fontWeight": "400",
+            },
+            Object {
               "textAlign": "left",
             },
             Array [
@@ -659,6 +667,8 @@ exports[`renders selected chip 1`] = `
               "color": "#000000",
               "fontFamily": "System",
               "fontWeight": "400",
+            },
+            Object {
               "textAlign": "left",
             },
             Array [

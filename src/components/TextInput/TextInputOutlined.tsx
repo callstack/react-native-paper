@@ -6,6 +6,7 @@ import {
   I18nManager,
   Platform,
   TextStyle,
+  ColorValue,
 } from 'react-native';
 import color from 'color';
 import TextInputAdornment, {
@@ -202,7 +203,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
       hasActiveOutline,
       activeColor,
       placeholderColor,
-      backgroundColor,
+      backgroundColor: backgroundColor as ColorValue,
       errorColor,
       labelTranslationXOffset,
     };
@@ -290,11 +291,13 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
             backgroundColor={backgroundColor}
           />
           <View
-            style={{
-              paddingTop: LABEL_PADDING_TOP,
-              paddingBottom: 0,
-              minHeight,
-            }}
+            style={[
+              styles.labelContainer,
+              {
+                paddingTop: LABEL_PADDING_TOP,
+                minHeight,
+              },
+            ]}
           >
             <InputLabel
               parentState={parentState}
@@ -349,11 +352,11 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
 
 export default TextInputOutlined;
 
-type OutlineType = {
+type OutlineProps = {
   activeColor: string;
-  hasActiveOutline: boolean | undefined;
-  outlineColor: string | undefined;
-  backgroundColor: string | undefined;
+  hasActiveOutline?: boolean;
+  outlineColor?: string;
+  backgroundColor: ColorValue;
   theme: ReactNativePaper.Theme;
 };
 
@@ -363,7 +366,7 @@ const Outline = ({
   activeColor,
   outlineColor,
   backgroundColor,
-}: OutlineType) => (
+}: OutlineProps) => (
   <View
     pointerEvents="none"
     style={[
@@ -391,6 +394,9 @@ const styles = StyleSheet.create({
     right: 0,
     top: 6,
     bottom: 0,
+  },
+  labelContainer: {
+    paddingBottom: 0,
   },
   input: {
     flexGrow: 1,

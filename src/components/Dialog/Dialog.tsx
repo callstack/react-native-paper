@@ -95,7 +95,7 @@ const Dialog = ({
         borderRadius: theme.roundness,
         backgroundColor:
           theme.dark && theme.mode === 'adaptive'
-            ? (overlay(DIALOG_ELEVATION, theme.colors.surface) as string)
+            ? overlay(DIALOG_ELEVATION, theme.colors.surface)
             : theme.colors.surface,
       },
       styles.container,

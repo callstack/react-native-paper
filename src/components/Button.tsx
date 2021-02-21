@@ -171,7 +171,10 @@ const Button = ({
   const { colors, roundness } = theme;
   const font = theme.fonts.medium;
 
-  let backgroundColor, borderColor, textColor, borderWidth;
+  let backgroundColor: string,
+    borderColor: string,
+    textColor: string,
+    borderWidth: number;
 
   if (mode === 'contained') {
     if (disabled) {
@@ -232,7 +235,8 @@ const Button = ({
   };
   const touchableStyle = {
     borderRadius: style
-      ? StyleSheet.flatten(style).borderRadius || roundness
+      ? ((StyleSheet.flatten(style) || {}) as ViewStyle).borderRadius ||
+        roundness
       : roundness,
   };
 
@@ -265,6 +269,7 @@ const Button = ({
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
         accessibilityLabel={accessibilityLabel}
+        // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
         accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
         accessibilityComponentType="button"
         accessibilityRole="button"
@@ -280,15 +285,23 @@ const Button = ({
             <View style={iconStyle}>
               <Icon
                 source={icon}
-                size={customLabelSize || 16}
-                color={customLabelColor || textColor}
+                size={customLabelSize ?? 16}
+                color={
+                  typeof customLabelColor === 'string'
+                    ? customLabelColor
+                    : textColor
+                }
               />
             </View>
           ) : null}
           {loading ? (
             <ActivityIndicator
-              size={customLabelSize || 16}
-              color={customLabelColor || textColor}
+              size={customLabelSize ?? 16}
+              color={
+                typeof customLabelColor === 'string'
+                  ? customLabelColor
+                  : textColor
+              }
               style={iconStyle}
             />
           ) : null}

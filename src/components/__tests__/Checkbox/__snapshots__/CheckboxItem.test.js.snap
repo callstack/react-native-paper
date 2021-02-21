@@ -40,6 +40,8 @@ exports[`can render the Android checkbox on different platforms 1`] = `
             "color": "#000000",
             "fontFamily": "System",
             "fontWeight": "400",
+          },
+          Object {
             "textAlign": "left",
           },
           Array [
@@ -210,6 +212,8 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
             "color": "#000000",
             "fontFamily": "System",
             "fontWeight": "400",
+          },
+          Object {
             "textAlign": "left",
           },
           Array [
@@ -346,6 +350,8 @@ exports[`renders unchecked 1`] = `
             "color": "#000000",
             "fontFamily": "System",
             "fontWeight": "400",
+          },
+          Object {
             "textAlign": "left",
           },
           Array [

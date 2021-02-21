@@ -7,6 +7,7 @@ import {
   TextStyle,
   LayoutChangeEvent,
   Animated,
+  ViewStyle,
 } from 'react-native';
 
 import { withTheme } from '../../../core/theming';
@@ -89,7 +90,7 @@ const TextInputAffix = ({ text, textStyle: labelStyle, theme }: Props) => {
   const style = {
     top: topPosition,
     [side]: offset,
-  };
+  } as ViewStyle;
 
   return (
     <Animated.View

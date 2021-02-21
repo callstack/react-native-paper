@@ -146,7 +146,10 @@ const Snackbar = ({
             duration === Number.NEGATIVE_INFINITY;
 
           if (finished && !isInfinity) {
-            hideTimeout.current = setTimeout(onDismiss, duration);
+            hideTimeout.current = (setTimeout(
+              onDismiss,
+              duration
+            ) as unknown) as NodeJS.Timeout;
           }
         }
       });

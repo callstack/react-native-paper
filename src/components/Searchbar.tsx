@@ -4,6 +4,7 @@ import {
   StyleProp,
   TextInput,
   I18nManager,
+  TextInputProps,
   ViewStyle,
   TextStyle,
 } from 'react-native';
@@ -119,17 +120,31 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
   ) => {
     const root = React.useRef<TextInput>(null);
 
-    React.useImperativeHandle(ref, () => ({
-      // @ts-ignore
-      focus: root.current?.focus,
-      // @ts-ignore
-      clear: root.current?.clear,
-      setNativeProps: (args: Object) => root.current?.setNativeProps(args),
-      // @ts-ignore
-      isFocused: root.current?.isFocused,
-      // @ts-ignore
-      blur: root.current?.blur,
-    }));
+    React.useImperativeHandle(ref, () => {
+      const input = root.current;
+
+      if (input) {
+        return {
+          focus: input.focus,
+          clear: input.clear,
+          setNativeProps: (args: TextInputProps) => input.setNativeProps(args),
+          isFocused: input.isFocused,
+          blur: input.blur,
+        };
+      }
+
+      const noop = () => {
+        throw new Error('TextInput is not available');
+      };
+
+      return {
+        focus: noop,
+        clear: noop,
+        setNativeProps: noop,
+        isFocused: noop,
+        blur: noop,
+      };
+    });
 
     const handleClearPress = () => {
       root.current?.clear();
@@ -153,6 +168,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
         ]}
       >
         <IconButton
+          // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
           accessibilityTraits="button"
           accessibilityComponentType="button"
           accessibilityRole="button"
@@ -181,6 +197,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
           underlineColorAndroid="transparent"
           returnKeyType="search"
           keyboardAppearance={dark ? 'dark' : 'light'}
+          // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
           accessibilityTraits="search"
           accessibilityRole="search"
           ref={root}
@@ -205,6 +222,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
               />
             ))
           }
+          // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
           accessibilityTraits="button"
           accessibilityComponentType="button"
           accessibilityRole="button"
