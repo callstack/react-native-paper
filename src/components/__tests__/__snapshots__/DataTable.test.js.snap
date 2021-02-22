@@ -34,6 +34,8 @@ exports[`renders data table cell 1`] = `
           "color": "#000000",
           "fontFamily": "System",
           "fontWeight": "400",
+        },
+        Object {
           "textAlign": "left",
         },
         undefined,
@@ -93,6 +95,8 @@ exports[`renders data table header 1`] = `
             "color": "#000000",
             "fontFamily": "System",
             "fontWeight": "400",
+          },
+          Object {
             "textAlign": "left",
           },
           Array [
@@ -144,6 +148,8 @@ exports[`renders data table header 1`] = `
             "color": "#000000",
             "fontFamily": "System",
             "fontWeight": "400",
+          },
+          Object {
             "textAlign": "left",
           },
           Array [
@@ -189,6 +195,8 @@ exports[`renders data table pagination 1`] = `
           "color": "#000000",
           "fontFamily": "System",
           "fontWeight": "400",
+        },
+        Object {
           "textAlign": "left",
         },
         Array [
@@ -400,6 +408,8 @@ exports[`renders data table pagination with label 1`] = `
           "color": "#000000",
           "fontFamily": "System",
           "fontWeight": "400",
+        },
+        Object {
           "textAlign": "left",
         },
         Array [
@@ -673,6 +683,8 @@ exports[`renders data table title with press handler 1`] = `
           "color": "#000000",
           "fontFamily": "System",
           "fontWeight": "400",
+        },
+        Object {
           "textAlign": "left",
         },
         Array [
@@ -777,6 +789,8 @@ exports[`renders data table title with sort icon 1`] = `
           "color": "#000000",
           "fontFamily": "System",
           "fontWeight": "400",
+        },
+        Object {
           "textAlign": "left",
         },
         Array [
@@ -835,6 +849,8 @@ exports[`renders right aligned data table cell 1`] = `
           "color": "#000000",
           "fontFamily": "System",
           "fontWeight": "400",
+        },
+        Object {
           "textAlign": "left",
         },
         undefined,
@@ -880,6 +896,8 @@ exports[`renders right aligned data table title 1`] = `
           "color": "#000000",
           "fontFamily": "System",
           "fontWeight": "400",
+        },
+        Object {
           "textAlign": "left",
         },
         Array [

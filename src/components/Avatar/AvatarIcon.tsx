@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
-import color from 'color';
-import Icon from '../Icon';
+import Icon, { IconSource } from '../Icon';
 import { withTheme } from '../../core/theming';
 import { white } from '../../styles/colors';
-import type { IconSource } from './../Icon';
+import getContrastingColor from '../../utils/getContrastingColor';
 
 const defaultSize = 64;
 
@@ -51,8 +50,8 @@ const Avatar = ({ icon, size = defaultSize, style, theme, ...rest }: Props) => {
   const { backgroundColor = theme.colors.primary, ...restStyle } =
     StyleSheet.flatten(style) || {};
   const textColor =
-    rest.color ||
-    (color(backgroundColor).isLight() ? 'rgba(0, 0, 0, .54)' : white);
+    rest.color ??
+    getContrastingColor(backgroundColor, white, 'rgba(0, 0, 0, .54)');
 
   return (
     <View

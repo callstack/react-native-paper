@@ -1,6 +1,6 @@
 import color from 'color';
 import * as React from 'react';
-import { I18nManager, StyleProp, TextStyle } from 'react-native';
+import { I18nManager, StyleProp, TextStyle, StyleSheet } from 'react-native';
 
 import Text from './Text';
 import { withTheme } from '../../core/theming';
@@ -21,11 +21,18 @@ const StyledText = ({ theme, alpha, family, style, ...rest }: Props) => {
     <Text
       {...rest}
       style={[
-        { color: textColor, ...font, textAlign: 'left', writingDirection },
+        styles.text,
+        { color: textColor, ...font, writingDirection },
         style,
       ]}
     />
   );
 };
+
+const styles = StyleSheet.create({
+  text: {
+    textAlign: 'left',
+  },
+});
 
 export default withTheme(StyledText);

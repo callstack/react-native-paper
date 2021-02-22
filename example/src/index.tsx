@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { I18nManager, Platform } from 'react-native';
+import { I18nManager, Platform, StatusBar } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Updates } from 'expo';
 import { useKeepAwake } from 'expo-keep-awake';
@@ -202,6 +202,7 @@ export default function PaperExample() {
                   <Drawer.Screen name="Home" component={App} />
                 </Drawer.Navigator>
               )}
+              <StatusBar barStyle="light-content" />
             </NavigationContainer>
           </React.Fragment>
         </PreferencesContext.Provider>

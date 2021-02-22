@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   View,
   ViewStyle,
+  StyleSheet,
 } from 'react-native';
 import color from 'color';
 import { withTheme } from '../../core/theming';
@@ -66,7 +67,7 @@ const TouchableRipple = ({
             : TouchableNativeFeedback.Ripple(calculatedRippleColor, borderless)
         }
       >
-        <View style={[borderless && { overflow: 'hidden' }, style]}>
+        <View style={[borderless && styles.overflowHidden, style]}>
           {React.Children.only(children)}
         </View>
       </TouchableNativeFeedback>
@@ -77,7 +78,7 @@ const TouchableRipple = ({
     <TouchableHighlight
       {...rest}
       disabled={disabled}
-      style={[borderless && { overflow: 'hidden' }, style]}
+      style={[borderless && styles.overflowHidden, style]}
       underlayColor={
         underlayColor != null
           ? underlayColor
@@ -91,5 +92,11 @@ const TouchableRipple = ({
 
 TouchableRipple.supported =
   Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_LOLLIPOP;
+
+const styles = StyleSheet.create({
+  overflowHidden: {
+    overflow: 'hidden',
+  },
+});
 
 export default withTheme(TouchableRipple);

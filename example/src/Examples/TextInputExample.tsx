@@ -98,7 +98,7 @@ const TextInputExample = () => {
     colors: { background, accent },
   } = useTheme();
 
-  const inputActionHandler = (type: string, payload: string) =>
+  const inputActionHandler = (type: keyof State, payload: string) =>
     dispatch({
       type: type,
       payload: payload,

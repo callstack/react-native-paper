@@ -247,6 +247,7 @@ const Touchable = ({
   TouchableRipple.supported ? (
     <TouchableRipple
       {...rest}
+      disabled={rest.disabled || undefined}
       borderless={borderless}
       centered={centered}
       rippleColor={rippleColor}
@@ -558,14 +559,18 @@ const BottomNavigation = ({
   const backgroundColor = shifting
     ? indexAnim.interpolate({
         inputRange: routes.map((_, i) => i),
-        //@ts-ignore
+        // FIXME: does outputRange support ColorValue or just strings?
+        // @ts-expect-error
         outputRange: routes.map(
           (route) => getColor({ route }) || approxBackgroundColor
         ),
       })
     : approxBackgroundColor;
 
-  const isDark = !color(approxBackgroundColor).isLight();
+  const isDark =
+    typeof approxBackgroundColor === 'string'
+      ? !color(approxBackgroundColor).isLight()
+      : true;
 
   const textColor = isDark ? white : black;
   const activeTintColor =
@@ -749,6 +754,7 @@ const BottomNavigation = ({
                 onPress: () => handleTabPress(index),
                 testID: getTestID({ route }),
                 accessibilityLabel: getAccessibilityLabel({ route }),
+                // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
                 accessibilityTraits: focused
                   ? ['button', 'selected']
                   : 'button',

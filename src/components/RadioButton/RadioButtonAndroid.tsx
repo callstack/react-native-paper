@@ -151,6 +151,7 @@ const RadioButtonAndroid = ({
                     });
                   }
             }
+            // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
             accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
             accessibilityComponentType={
               checked ? 'radiobutton_checked' : 'radiobutton_unchecked'

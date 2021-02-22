@@ -2,12 +2,18 @@ import color from 'color';
 import { Animated } from 'react-native';
 import DarkTheme from './DarkTheme';
 
-export default function overlay(
-  elevation: number | Animated.Value = 1,
+const isAnimatedValue = (
+  it: number | Animated.AnimatedInterpolation
+): it is Animated.Value => it instanceof Animated.Value;
+
+export default function overlay<T extends Animated.Value | number>(
+  elevation: T,
   surfaceColor: string = DarkTheme.colors.surface
-) {
-  if (elevation instanceof Animated.Value) {
+): T extends number ? string : Animated.AnimatedInterpolation {
+  if (isAnimatedValue(elevation)) {
     const inputRange = [0, 1, 2, 3, 8, 24];
+
+    // @ts-expect-error: TS doesn't seem to refine the type correctly
     return elevation.interpolate({
       inputRange,
       outputRange: inputRange.map((elevation) => {
@@ -15,9 +21,12 @@ export default function overlay(
       }),
     });
   }
+
+  // @ts-expect-error: TS doesn't seem to refine the type correctly
   return calculateColor(surfaceColor, elevation);
 }
-function calculateColor(surfaceColor: string, elevation: number) {
+
+function calculateColor(surfaceColor: string, elevation: number = 1) {
   let overlayTransparency: number;
   if (elevation >= 1 && elevation <= 24) {
     overlayTransparency = elevationOverlayTransparency[elevation];
@@ -30,7 +39,8 @@ function calculateColor(surfaceColor: string, elevation: number) {
     .mix(color('white'), overlayTransparency * 0.01)
     .hex();
 }
-const elevationOverlayTransparency: { [id: number]: number } = {
+
+const elevationOverlayTransparency: Record<string, number> = {
   1: 5,
   2: 7,
   3: 8,

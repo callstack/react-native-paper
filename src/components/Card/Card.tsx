@@ -130,11 +130,7 @@ const Card = ({
       : null
   );
   return (
-    <Surface
-      // @ts-ignore
-      style={[{ borderRadius: roundness, elevation }, style]}
-      {...rest}
-    >
+    <Surface style={[{ borderRadius: roundness, elevation }, style]} {...rest}>
       <TouchableWithoutFeedback
         delayPressIn={0}
         disabled={!(onPress || onLongPress)}

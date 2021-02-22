@@ -108,7 +108,7 @@ const AppbarContent = ({
           numberOfLines={1}
           accessible
           accessibilityTraits="header"
-          // @ts-ignore Type '"heading"' is not assignable to type ...
+          // @ts-expect-error React Native doesn't accept 'heading' as it's web-only
           accessibilityRole={Platform.OS === 'web' ? 'heading' : 'header'}
         >
           {title}
