@@ -14,7 +14,7 @@ import {
   getBottomSpace,
 } from 'react-native-iphone-x-helper';
 import Surface from './Surface';
-import { withTheme } from '../core/theming';
+import { useTheme } from '../core/theming';
 
 type Props = {
   /**
@@ -46,15 +46,6 @@ type Props = {
    * Use this prop to change the default wrapper style or to override safe area insets with marginTop and marginBottom.
    */
   style?: StyleProp<ViewStyle>;
-  /**
-   * @optional
-   */
-  theme: ReactNativePaper.Theme;
-};
-
-type State = {
-  opacity: Animated.Value;
-  rendered: boolean;
 };
 
 const DEFAULT_DURATION = 220;
@@ -100,51 +91,41 @@ const BOTTOM_INSET = getBottomSpace();
  * export default MyComponent;
  * ```
  */
-class Modal extends React.Component<Props, State> {
-  static defaultProps = {
-    dismissable: true,
-    visible: false,
-    overlayAccessibilityLabel: 'Close modal',
-  };
+const Modal: React.FC<Props> = ({
+  dismissable = true,
+  visible = false,
+  overlayAccessibilityLabel = 'Close modal',
+  onDismiss,
+  children,
+  contentContainerStyle,
+  style,
+}) => {
+  const visibleRef = React.useRef(visible);
 
-  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
-    if (nextProps.visible && !prevState.rendered) {
-      return {
-        rendered: true,
-      };
+  visibleRef.current = visible;
+
+  const { colors, animation } = useTheme();
+
+  const [opacity] = React.useState(new Animated.Value(visible ? 1 : 0));
+
+  const [rendered, setRendered] = React.useState(visible);
+
+  React.useLayoutEffect(() => {
+    if (visible && !rendered) {
+      setRendered(true);
     }
+  }, [visible, rendered]);
 
-    return null;
-  }
+  // Must be done like this in order to handle cyclical function reference
+  // Must be () => () => due to functional API
+  const [handleBack, setHandleBack] = React.useState<() => boolean>(() => () =>
+    false
+  );
 
-  state = {
-    opacity: new Animated.Value(this.props.visible ? 1 : 0),
-    rendered: this.props.visible,
-  };
+  const showModal = React.useCallback(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBack);
 
-  componentDidUpdate(prevProps: Props) {
-    if (prevProps.visible !== this.props.visible) {
-      if (this.props.visible) {
-        this.showModal();
-      } else {
-        this.hideModal();
-      }
-    }
-  }
-
-  private handleBack = () => {
-    if (this.props.dismissable) {
-      this.hideModal();
-    }
-    return true;
-  };
-
-  private showModal = () => {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBack);
-    BackHandler.addEventListener('hardwareBackPress', this.handleBack);
-
-    const { opacity } = this.state;
-    const { scale } = this.props.theme.animation;
+    const { scale } = animation;
 
     Animated.timing(opacity, {
       toValue: 1,
@@ -152,13 +133,20 @@ class Modal extends React.Component<Props, State> {
       easing: Easing.out(Easing.cubic),
       useNativeDriver: true,
     }).start();
-  };
 
-  private hideModal = () => {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBack);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', handleBack);
+    };
+  }, [animation, handleBack, opacity]);
 
-    const { opacity } = this.state;
-    const { scale } = this.props.theme.animation;
+  // Cyclical dep requires me to lazily initialize/call this otherwise we get stuck
+  // in infinite loop
+  const hideModalRef = React.useRef<() => void>(() => () => {});
+
+  const hideModal = React.useCallback(() => {
+    BackHandler.removeEventListener('hardwareBackPress', handleBack);
+
+    const { scale } = animation;
 
     Animated.timing(opacity, {
       toValue: 0,
@@ -170,83 +158,90 @@ class Modal extends React.Component<Props, State> {
         return;
       }
 
-      if (this.props.visible && this.props.onDismiss) {
-        this.props.onDismiss();
+      if (visible && onDismiss) {
+        onDismiss();
       }
 
-      if (this.props.visible) {
-        this.showModal();
+      if (visibleRef.current) {
+        showModal();
       } else {
-        this.setState({
-          rendered: false,
-        });
+        setRendered(false);
       }
     });
-  };
+  }, [animation, visible, handleBack, onDismiss, opacity, showModal]);
 
-  componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBack);
-  }
+  hideModalRef.current = hideModal;
 
-  render() {
-    const { rendered, opacity } = this.state;
+  // Handle before initial render to avoid re-rendering issues
+  React.useLayoutEffect(() => {
+    // Must be () => () => due to functional API
+    setHandleBack(() => () => {
+      if (dismissable) {
+        hideModalRef.current();
+      }
+      return true;
+    });
+  }, [dismissable, hideModalRef]);
 
-    if (!rendered) return null;
+  const prevVisible = React.useRef<boolean | null>(null);
 
-    const {
-      children,
-      dismissable,
-      style,
-      theme,
-      contentContainerStyle,
-      overlayAccessibilityLabel,
-    } = this.props;
-    const { colors } = theme;
-    return (
-      <Animated.View
-        pointerEvents={this.props.visible ? 'auto' : 'none'}
-        accessibilityViewIsModal
-        accessibilityLiveRegion="polite"
-        style={StyleSheet.absoluteFill}
-        onAccessibilityEscape={this.hideModal}
+  React.useEffect(() => {
+    if (prevVisible.current !== visible) {
+      if (visible) {
+        showModal();
+      } else {
+        hideModal();
+      }
+    }
+    prevVisible.current = visible;
+  }, [prevVisible, visible, showModal, hideModal]);
+
+  if (!rendered) return null;
+
+  return (
+    <Animated.View
+      pointerEvents={visible ? 'auto' : 'none'}
+      accessibilityViewIsModal
+      accessibilityLiveRegion="polite"
+      style={StyleSheet.absoluteFill}
+      onAccessibilityEscape={hideModal}
+    >
+      <TouchableWithoutFeedback
+        accessibilityLabel={overlayAccessibilityLabel}
+        accessibilityRole="button"
+        disabled={!dismissable}
+        onPress={dismissable ? hideModal : undefined}
       >
-        <TouchableWithoutFeedback
-          accessibilityLabel={overlayAccessibilityLabel}
-          accessibilityRole="button"
-          disabled={!dismissable}
-          onPress={dismissable ? this.hideModal : undefined}
-        >
-          <Animated.View
-            style={[
-              styles.backdrop,
-              { backgroundColor: colors.backdrop, opacity },
-            ]}
-          />
-        </TouchableWithoutFeedback>
-        <View
+        <Animated.View
           style={[
-            styles.wrapper,
-            { marginTop: TOP_INSET, marginBottom: BOTTOM_INSET },
-            style,
+            styles.backdrop,
+            { backgroundColor: colors.backdrop, opacity },
           ]}
-          pointerEvents="box-none"
+        />
+      </TouchableWithoutFeedback>
+      <View
+        style={[
+          styles.wrapper,
+          { marginTop: TOP_INSET, marginBottom: BOTTOM_INSET },
+          style,
+        ]}
+        pointerEvents="box-none"
+      >
+        <Surface
+          style={
+            [{ opacity }, styles.content, contentContainerStyle] as StyleProp<
+              ViewStyle
+            >
+          }
         >
-          <Surface
-            style={
-              [{ opacity }, styles.content, contentContainerStyle] as StyleProp<
-                ViewStyle
-              >
-            }
-          >
-            {children}
-          </Surface>
-        </View>
-      </Animated.View>
-    );
-  }
-}
+          {children}
+        </Surface>
+      </View>
+    </Animated.View>
+  );
+};
 
-export default withTheme(Modal);
+export default Modal;
 
 const styles = StyleSheet.create({
   backdrop: {
