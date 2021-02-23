@@ -15,6 +15,7 @@ import {
 } from 'react-native-iphone-x-helper';
 import Surface from './Surface';
 import { useTheme } from '../core/theming';
+import useAnimatedValue from '../utils/useAnimatedValue';
 
 type Props = {
   /**
@@ -91,7 +92,7 @@ const BOTTOM_INSET = getBottomSpace();
  * export default MyComponent;
  * ```
  */
-const Modal: React.FC<Props> = ({
+export default function Modal({
   dismissable = true,
   visible = false,
   overlayAccessibilityLabel = 'Close modal',
@@ -99,31 +100,46 @@ const Modal: React.FC<Props> = ({
   children,
   contentContainerStyle,
   style,
-}) => {
+}: Props) {
   const visibleRef = React.useRef(visible);
 
   visibleRef.current = visible;
 
   const { colors, animation } = useTheme();
 
-  const [opacity] = React.useState(new Animated.Value(visible ? 1 : 0));
+  const opacity = useAnimatedValue(visible ? 1 : 0);
 
   const [rendered, setRendered] = React.useState(visible);
 
-  React.useLayoutEffect(() => {
-    if (visible && !rendered) {
-      setRendered(true);
+  if (visible && !rendered) {
+    setRendered(true);
+  }
+
+  /**
+   * Must use `function` instead of `const` to make cyclical handleBack/hideModal reference work.
+   * Utilizes function name hoisting
+   */
+  function handleBack() {
+    if (dismissable) {
+      hideModal();
     }
-  }, [visible, rendered]);
+    return true;
+  }
 
-  // Must be done like this in order to handle cyclical function reference
-  // Must be () => () => due to functional API
-  const [handleBack, setHandleBack] = React.useState<() => boolean>(() => () =>
-    false
-  );
+  /**
+   * If we don't use a "ref" to keep track of the exact version of the handleBack function we're removing from the event
+   * listener, what will happen is that `handleBack`'s reference in memory will change between `showModal` and `hideModal`
+   * (due to a potential re-render of `visible` being set) being called, leaving the event in-tact and not removing properly
+   */
+  const handleBackToRemove = React.useRef<() => boolean>(() => true);
 
-  const showModal = React.useCallback(() => {
+  function showModal() {
+    BackHandler.removeEventListener(
+      'hardwareBackPress',
+      handleBackToRemove.current
+    );
     BackHandler.addEventListener('hardwareBackPress', handleBack);
+    handleBackToRemove.current = handleBack;
 
     const { scale } = animation;
 
@@ -133,18 +149,14 @@ const Modal: React.FC<Props> = ({
       easing: Easing.out(Easing.cubic),
       useNativeDriver: true,
     }).start();
+  }
 
-    return () => {
-      BackHandler.removeEventListener('hardwareBackPress', handleBack);
-    };
-  }, [animation, handleBack, opacity]);
-
-  // Cyclical dep requires me to lazily initialize/call this otherwise we get stuck
-  // in infinite loop
-  const hideModalRef = React.useRef<() => void>(() => () => {});
-
-  const hideModal = React.useCallback(() => {
-    BackHandler.removeEventListener('hardwareBackPress', handleBack);
+  function hideModal() {
+    BackHandler.removeEventListener(
+      'hardwareBackPress',
+      handleBackToRemove.current
+    );
+    handleBackToRemove.current = () => true;
 
     const { scale } = animation;
 
@@ -168,20 +180,7 @@ const Modal: React.FC<Props> = ({
         setRendered(false);
       }
     });
-  }, [animation, visible, handleBack, onDismiss, opacity, showModal]);
-
-  hideModalRef.current = hideModal;
-
-  // Handle before initial render to avoid re-rendering issues
-  React.useLayoutEffect(() => {
-    // Must be () => () => due to functional API
-    setHandleBack(() => () => {
-      if (dismissable) {
-        hideModalRef.current();
-      }
-      return true;
-    });
-  }, [dismissable, hideModalRef]);
+  }
 
   const prevVisible = React.useRef<boolean | null>(null);
 
@@ -194,7 +193,7 @@ const Modal: React.FC<Props> = ({
       }
     }
     prevVisible.current = visible;
-  }, [prevVisible, visible, showModal, hideModal]);
+  });
 
   if (!rendered) return null;
 
@@ -239,9 +238,7 @@ const Modal: React.FC<Props> = ({
       </View>
     </Animated.View>
   );
-};
-
-export default Modal;
+}
 
 const styles = StyleSheet.create({
   backdrop: {
