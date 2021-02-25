@@ -47,6 +47,14 @@ type Props = React.ComponentPropsWithRef<typeof TextInput> & {
   /**
    * Set style of the TextInput component inside the searchbar
    */
+  onFocus?: () => void;
+  /**
+   * Callback that is called when the text input is focused.
+   */
+  onBlur?: () => void;
+  /**
+   * Callback that is called when the text input is blurred.
+   */
   inputStyle?: StyleProp<TextStyle>;
   style?: StyleProp<ViewStyle>;
 
