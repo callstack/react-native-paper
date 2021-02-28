@@ -23,7 +23,7 @@ type Props = React.ComponentProps<typeof Surface> & {
    * - `label` - Label of the action button
    * - `onPress` - Callback that is called when action button is pressed.
    */
-  action?: React.ComponentProps<typeof Button> & {
+  action?: Omit<React.ComponentProps<typeof Button>, 'children'> & {
     label: string;
   };
   /**
