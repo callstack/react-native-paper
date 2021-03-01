@@ -15,6 +15,7 @@ import CrossFadeIcon from './CrossFadeIcon';
 import { withTheme } from '../core/theming';
 
 import type { $RemoveChildren } from '../types';
+import ActivityIndicator from './ActivityIndicator';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -33,6 +34,10 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean;
+  /**
+   * Whether to show a loading indicator.
+   */
+  loading?: boolean;
   /**
    * Whether an icon change is animated.
    */
@@ -93,6 +98,7 @@ const IconButton = ({
   size = 24,
   accessibilityLabel,
   disabled,
+  loading,
   onPress,
   animated = false,
   theme,
@@ -131,7 +137,11 @@ const IconButton = ({
       {...rest}
     >
       <View>
-        <IconComponent color={iconColor} source={icon} size={size} />
+        {loading ? (
+          <ActivityIndicator color={iconColor} size={size} />
+        ) : (
+          <IconComponent color={iconColor} size={size} source={icon} />
+        )}
       </View>
     </TouchableRipple>
   );

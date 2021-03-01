@@ -21,7 +21,8 @@ const ButtonExample = () => {
         onPress={() => {}}
         style={{ backgroundColor: Colors.lightGreen200 }}
       />
-      <IconButton icon="heart" size={60} onPress={() => {}} />
+      <IconButton icon="heart" size={48} onPress={() => {}} />
+      <IconButton icon="heart" size={48} onPress={() => {}} loading />
     </View>
   );
 };
