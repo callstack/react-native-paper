@@ -41,6 +41,7 @@ type Props = {
    * TestID used for testing purposes
    */
   testID?: string;
+  accessibilityLabel?: string;
 };
 
 /**
@@ -86,6 +87,7 @@ class MenuItem extends React.Component<Props> {
       contentStyle,
       testID,
       titleStyle,
+      accessibilityLabel,
     } = this.props;
 
     const disabledColor = color(theme.dark ? white : black)
@@ -107,6 +109,7 @@ class MenuItem extends React.Component<Props> {
         onPress={onPress}
         disabled={disabled}
         testID={testID}
+        accessibilityLabel={accessibilityLabel}
         accessibilityRole="menuitem"
         accessibilityState={{ disabled }}
       >
