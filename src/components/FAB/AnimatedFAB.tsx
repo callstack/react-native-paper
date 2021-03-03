@@ -226,7 +226,6 @@ const AnimatedFAB = ({
       style={
         [
           {
-            backgroundColor: 'red',
             opacity: visibility,
             transform: [
               {
