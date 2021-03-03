@@ -262,9 +262,6 @@ const AnimatedFAB = ({
           accessibilityState={{ ...accessibilityState, disabled }}
           style={[styles.touchable, styles.standard]}
           testID={testID}
-          hitSlop={{
-            left: textWidth + 1.5 * SIZE,
-          }}
         >
           <View>
             <Animated.View
@@ -283,7 +280,8 @@ const AnimatedFAB = ({
                       },
                     ],
                     width: textWidth + 1.5 * SIZE,
-                    right: totalWidth,
+                    left: animateFromRight ? -totalWidth : undefined,
+                    right: !animateFromRight ? totalWidth : undefined,
                     backgroundColor,
                   },
                 ]}
@@ -314,7 +312,8 @@ const AnimatedFAB = ({
         pointerEvents="none"
         style={[
           animateFromRight
-            ? { right: isIconStatic ? SIZE : SIZE / 2 }
+            ? // eslint-disable-next-line react-native/no-inline-styles
+              { right: isIconStatic ? 0 : -SIZE / 2 }
             : { left: isIconStatic ? SIZE : SIZE / 2 },
           {
             width: textWidth,
@@ -347,7 +346,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     borderRadius: SIZE / 2,
     elevation: 6,
-    right: 16,
+    right: 390 / 2 + SIZE / 2,
     bottom: 32,
   },
   innerWrapper: {
@@ -355,7 +354,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     overflow: 'hidden',
     borderRadius: SIZE / 2,
-    right: 0,
+    right: -SIZE,
   },
   touchable: {
     borderRadius: SIZE / 2,
@@ -370,7 +369,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: SIZE,
     width: SIZE,
-    right: 0,
+    right: -SIZE,
   },
   moveIconFromLeft: {
     left: 0,

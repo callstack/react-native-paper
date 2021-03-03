@@ -382,6 +382,8 @@ const AnimatedFABExample = () => {
         uppercase={false}
         onPress={() => console.log('Pressed')}
         visible={visible}
+        animateFrom="right"
+        iconMode="dynamic"
       />
     </>
   );
