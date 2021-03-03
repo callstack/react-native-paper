@@ -37,11 +37,13 @@ import ToggleButtonExample from './Examples/ToggleButtonExample';
 import TouchableRippleExample from './Examples/TouchableRippleExample';
 import ThemeExample from './Examples/ThemeExample';
 import RadioButtonItemExample from './Examples/RadioButtonItemExample';
+import AnimatedFABExample from './Examples/AnimatedFABExample';
 
 export const examples: Record<
   string,
   React.ComponentType<any> & { title: string }
 > = {
+  animatedFAB: AnimatedFABExample,
   activityIndicator: ActivityIndicatorExample,
   appbar: AppbarExample,
   avatar: AvatarExample,
