@@ -181,19 +181,16 @@ const AnimatedFAB = ({
       {
         property: opacityLabel,
         toValue: !extended ? 0 : 1,
-        duration: extended ? 250 : 100,
-        delay: extended ? 100 : 0,
       },
     ];
 
     Animated.parallel(
       animations
         .filter(({ exclude }) => !exclude)
-        .map(({ property, toValue, duration = 250, delay = 0 }) => {
+        .map(({ property, toValue }) => {
           return Animated.timing(property, {
             toValue,
-            duration: duration * scale,
-            delay: delay * scale,
+            duration: 150 * scale,
             useNativeDriver: true,
             easing: Easing.linear,
           });
@@ -248,6 +245,8 @@ const AnimatedFAB = ({
               },
             ],
           },
+          styles.standard,
+          styles.innerContainer,
         ]}
       >
         <TouchableRipple
@@ -265,6 +264,7 @@ const AnimatedFAB = ({
         >
           <View>
             <Animated.View
+              pointerEvents="box-none"
               style={[
                 styles.innerWrapper,
                 !animateFromRight && styles.leftInnerWrapper,
@@ -304,32 +304,46 @@ const AnimatedFAB = ({
         <Icon source={icon} size={24} color={white} />
       </Animated.View>
 
-      <AnimatedText
-        numberOfLines={1}
-        //@ts-ignore
-        onTextLayout={onTextLayout}
-        ellipsizeMode={'tail'}
-        pointerEvents="none"
-        style={[
-          animateFromRight
-            ? // eslint-disable-next-line react-native/no-inline-styles
-              { right: isIconStatic ? 0 : -SIZE / 2 }
-            : { left: isIconStatic ? SIZE : SIZE / 2 },
-          {
-            width: textWidth,
-            top: SIZE / 2 - textHeight / 2,
-            opacity: opacityLabel,
-          },
-          styles.label,
-          uppercase && styles.uppercaseLabel,
-          {
-            color: foregroundColor,
-            ...theme.fonts.medium,
-          },
-        ]}
-      >
-        {label}
-      </AnimatedText>
+      <View pointerEvents="none">
+        <AnimatedText
+          numberOfLines={1}
+          //@ts-ignore
+          onTextLayout={onTextLayout}
+          ellipsizeMode={'tail'}
+          style={[
+            animateFromRight
+              ? // eslint-disable-next-line react-native/no-inline-styles
+                { right: isIconStatic ? 0 : -SIZE / 2 }
+              : { left: isIconStatic ? SIZE : SIZE / 2 },
+            {
+              width: textWidth,
+              top: SIZE / 2 - textHeight / 2,
+              opacity: opacityLabel.interpolate({
+                inputRange: [0, 0.7, 1],
+                outputRange: [0, 0, 1],
+              }),
+              transform: [
+                {
+                  translateX: translateFAB.interpolate({
+                    inputRange: animateFromRight
+                      ? [totalWidth, 0]
+                      : [0, totalWidth],
+                    outputRange: animateFromRight ? [0, SIZE] : [-SIZE, 0],
+                  }),
+                },
+              ],
+            },
+            styles.label,
+            uppercase && styles.uppercaseLabel,
+            {
+              color: foregroundColor,
+              ...theme.fonts.medium,
+            },
+          ]}
+        >
+          {label}
+        </AnimatedText>
+      </View>
     </Surface>
   );
 };
@@ -347,7 +361,10 @@ const styles = StyleSheet.create({
     borderRadius: SIZE / 2,
     elevation: 6,
     right: 390 / 2 + SIZE / 2,
-    bottom: 32,
+    bottom: 150,
+  },
+  innerContainer: {
+    position: 'absolute',
   },
   innerWrapper: {
     position: 'absolute',
