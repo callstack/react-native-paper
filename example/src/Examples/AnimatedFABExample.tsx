@@ -384,6 +384,7 @@ const AnimatedFABExample = () => {
         visible={visible}
         animateFrom="right"
         iconMode="dynamic"
+        style={styles.fabStyle}
       />
     </>
   );
@@ -433,6 +434,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginRight: 8,
     flex: 1,
+  },
+  fabStyle: {
+    right: 16,
+    bottom: 32,
+    position: 'absolute',
   },
 });
 
