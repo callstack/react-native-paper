@@ -7,6 +7,9 @@ import {
   StyleSheet,
   StyleProp,
   Easing,
+  ScrollView,
+  Text,
+  Platform,
 } from 'react-native';
 import Surface from '../Surface';
 import Icon from '../Icon';
@@ -217,6 +220,20 @@ const AnimatedFAB = ({
     }
   };
 
+  const getSidesPosition = () => {
+    if (animateFromRight) {
+      return {
+        left: -totalWidth,
+        right: undefined,
+      };
+    } else {
+      return {
+        left: undefined,
+        right: totalWidth,
+      };
+    }
+  };
+
   return (
     <Surface
       {...rest}
@@ -246,10 +263,10 @@ const AnimatedFAB = ({
             ],
           },
           styles.standard,
-          styles.innerContainer,
         ]}
       >
         <TouchableRipple
+          borderless
           onPress={onPress}
           onLongPress={onLongPress}
           rippleColor={rippleColor}
@@ -262,44 +279,35 @@ const AnimatedFAB = ({
           style={[styles.touchable, styles.standard]}
           testID={testID}
         >
-          <View>
+          <Animated.View pointerEvents="box-none" style={[styles.innerWrapper]}>
             <Animated.View
-              pointerEvents="box-none"
               style={[
-                styles.innerWrapper,
-                !animateFromRight && styles.leftInnerWrapper,
+                styles.standard,
+                {
+                  transform: [
+                    {
+                      translateX: translateFAB,
+                    },
+                  ],
+                  width: textWidth + 1.5 * SIZE,
+                  backgroundColor,
+                },
+                getSidesPosition(),
               ]}
-            >
-              <Animated.View
-                style={[
-                  styles.standard,
-                  {
-                    transform: [
-                      {
-                        translateX: translateFAB,
-                      },
-                    ],
-                    width: textWidth + 1.5 * SIZE,
-                    left: animateFromRight ? -totalWidth : undefined,
-                    right: !animateFromRight ? totalWidth : undefined,
-                    backgroundColor,
-                  },
-                ]}
-              />
-            </Animated.View>
-          </View>
+            />
+          </Animated.View>
         </TouchableRipple>
       </Animated.View>
 
       <Animated.View
-        pointerEvents="none"
         style={[
           styles.iconWrapper,
-          !animateFromRight && styles.moveIconFromLeft,
           {
             transform: [{ translateX: translateIcon }],
           },
+          getSidesPosition(),
         ]}
+        pointerEvents="none"
       >
         <Icon source={icon} size={24} color={white} />
       </Animated.View>
@@ -308,16 +316,16 @@ const AnimatedFAB = ({
         <AnimatedText
           numberOfLines={1}
           //@ts-ignore
-          onTextLayout={onTextLayout}
+          onTextLayout={Platform.OS === 'ios' ? onTextLayout : undefined}
           ellipsizeMode={'tail'}
           style={[
             animateFromRight
               ? // eslint-disable-next-line react-native/no-inline-styles
-                { right: isIconStatic ? 0 : -SIZE / 2 }
+                { right: isIconStatic ? SIZE : SIZE / 2 }
               : { left: isIconStatic ? SIZE : SIZE / 2 },
             {
               width: textWidth,
-              top: SIZE / 2 - textHeight / 2,
+              top: -SIZE / 2 - textHeight / 2,
               opacity: opacityLabel.interpolate({
                 inputRange: [0, 0.7, 1],
                 outputRange: [0, 0, 1],
@@ -344,6 +352,13 @@ const AnimatedFAB = ({
           {label}
         </AnimatedText>
       </View>
+
+      {Platform.OS !== 'ios' && (
+        <ScrollView style={styles.textPlaceholderContainer}>
+          {/* @ts-ignore */}
+          <Text onTextLayout={onTextLayout}>{label}</Text>
+        </ScrollView>
+      )}
     </Surface>
   );
 };
@@ -358,27 +373,17 @@ const styles = StyleSheet.create({
   },
   container: {
     position: 'absolute',
+    backgroundColor: 'transparent',
     borderRadius: SIZE / 2,
     elevation: 6,
-    right: 390 / 2 + SIZE / 2,
-    bottom: 150,
-  },
-  innerContainer: {
-    position: 'absolute',
   },
   innerWrapper: {
-    position: 'absolute',
     flexDirection: 'row',
     overflow: 'hidden',
     borderRadius: SIZE / 2,
-    right: -SIZE,
   },
   touchable: {
     borderRadius: SIZE / 2,
-  },
-  leftInnerWrapper: {
-    left: 0,
-    right: undefined,
   },
   iconWrapper: {
     alignItems: 'center',
@@ -386,18 +391,16 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: SIZE,
     width: SIZE,
-    right: -SIZE,
-  },
-  moveIconFromLeft: {
-    left: 0,
-    right: undefined,
   },
   label: {
     position: 'absolute',
-    zIndex: 2,
   },
   uppercaseLabel: {
     textTransform: 'uppercase',
+  },
+  textPlaceholderContainer: {
+    height: 0,
+    position: 'absolute',
   },
 });
 
