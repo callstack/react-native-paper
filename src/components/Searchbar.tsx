@@ -125,11 +125,11 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
 
       if (input) {
         return {
-          focus: input.focus,
-          clear: input.clear,
+          focus: () => input.focus(),
+          clear: () => input.clear(),
           setNativeProps: (args: TextInputProps) => input.setNativeProps(args),
-          isFocused: input.isFocused,
-          blur: input.blur,
+          isFocused: () => input.isFocused(),
+          blur: () => input.blur(),
         };
       }
 
