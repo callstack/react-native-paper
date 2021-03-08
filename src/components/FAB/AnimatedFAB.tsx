@@ -85,6 +85,7 @@ type Props = $RemoveChildren<typeof Surface> & {
 };
 
 const SIZE = 56;
+const BORDER_RADIUS = SIZE / 2;
 const SCALE = 0.9;
 
 const AnimatedFAB = ({
@@ -106,7 +107,6 @@ const AnimatedFAB = ({
   iconMode = 'dynamic',
   ...rest
 }: Props) => {
-  const isIOS = Platform.OS === 'ios';
   const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
@@ -165,8 +165,8 @@ const AnimatedFAB = ({
   const extendedWidth = textWidth + 1.5 * SIZE;
 
   const distance = animateFromRight
-    ? -textWidth - SIZE / 2
-    : textWidth + SIZE / 2;
+    ? -textWidth - BORDER_RADIUS
+    : textWidth + BORDER_RADIUS;
 
   React.useEffect(() => {
     Animated.timing(animFAB, {
@@ -213,6 +213,7 @@ const AnimatedFAB = ({
                 scale: visibility,
               },
             ],
+            elevation: Platform.OS === 'ios' ? 6 : 0,
           },
           styles.container,
           disabled && styles.disabled,
@@ -235,44 +236,101 @@ const AnimatedFAB = ({
           styles.standard,
         ]}
       >
-        <TouchableRipple
-          borderless
-          onPress={onPress}
-          onLongPress={onLongPress}
-          rippleColor={rippleColor}
-          disabled={disabled}
-          accessibilityLabel={accessibilityLabel}
-          accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
-          accessibilityComponentType="button"
-          accessibilityRole="button"
-          accessibilityState={{ ...accessibilityState, disabled }}
-          style={[styles.touchable, styles.standard]}
-          testID={testID}
-        >
-          <Animated.View pointerEvents="box-none" style={[styles.innerWrapper]}>
-            <Animated.View
-              style={[
-                styles.standard,
-                {
-                  transform: [
-                    {
-                      translateX: animFAB,
-                    },
-                  ],
-                  width: extendedWidth,
-                  backgroundColor,
-                },
-                getSidesPosition(),
-              ]}
-            />
+        <View style={[StyleSheet.absoluteFill, styles.shadowWrapper]}>
+          <Animated.View
+            pointerEvents="none"
+            style={[
+              StyleSheet.absoluteFill,
+              styles.shadow,
+              {
+                width: extendedWidth,
+                opacity: animFAB.interpolate({
+                  inputRange: [distance, 0.9 * distance, 0],
+                  outputRange: [1, 0.15, 0],
+                }),
+              },
+            ]}
+          />
+          <Animated.View
+            pointerEvents="none"
+            style={[
+              StyleSheet.absoluteFill,
+              styles.shadow,
+              {
+                opacity: animFAB.interpolate({
+                  inputRange: [distance, 0.9 * distance, 0],
+                  outputRange: [0, 0.85, 1],
+                }),
+                width: SIZE,
+                borderRadius: animFAB.interpolate({
+                  inputRange: [distance, 0],
+                  outputRange: [SIZE / (extendedWidth / SIZE), BORDER_RADIUS],
+                }),
+                transform: [
+                  {
+                    translateX: animFAB.interpolate({
+                      inputRange: [distance, 0],
+                      outputRange: [Math.abs(distance) / 2, Math.abs(distance)],
+                    }),
+                  },
+                  {
+                    scaleX: animFAB.interpolate({
+                      inputRange: [distance, 0],
+                      outputRange: [extendedWidth / SIZE, 1],
+                    }),
+                  },
+                ],
+              },
+            ]}
+          />
+        </View>
+        <Animated.View pointerEvents="box-none" style={[styles.innerWrapper]}>
+          <Animated.View
+            style={[
+              styles.standard,
+              {
+                transform: [
+                  {
+                    translateX: animFAB,
+                  },
+                ],
+                width: extendedWidth,
+                backgroundColor,
+              },
+              getSidesPosition(),
+            ]}
+          >
+            <TouchableRipple
+              borderless
+              onPress={onPress}
+              onLongPress={onLongPress}
+              rippleColor={rippleColor}
+              disabled={disabled}
+              accessibilityLabel={accessibilityLabel}
+              accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
+              accessibilityComponentType="button"
+              accessibilityRole="button"
+              accessibilityState={{ ...accessibilityState, disabled }}
+              testID={testID}
+              style={styles.touchable}
+            >
+              <View
+                style={[
+                  styles.standard,
+                  {
+                    width: extendedWidth,
+                  },
+                ]}
+              />
+            </TouchableRipple>
           </Animated.View>
-        </TouchableRipple>
+        </Animated.View>
       </Animated.View>
 
       <Animated.View
         style={[
           styles.iconWrapper,
-          !isIconStatic && {
+          {
             transform: [{ translateX: animFAB }],
           },
           getSidesPosition(),
@@ -286,16 +344,16 @@ const AnimatedFAB = ({
         <AnimatedText
           numberOfLines={1}
           //@ts-ignore
-          onTextLayout={isIOS ? onTextLayout : undefined}
+          onTextLayout={Platform.OS === 'ios' ? onTextLayout : undefined}
           ellipsizeMode={'tail'}
           style={[
             animateFromRight
               ? // eslint-disable-next-line react-native/no-inline-styles
-                { right: isIconStatic ? SIZE : SIZE / 2 }
-              : { left: isIconStatic ? SIZE : SIZE / 2 },
+                { right: isIconStatic ? SIZE : BORDER_RADIUS }
+              : { left: isIconStatic ? SIZE : BORDER_RADIUS },
             {
               width: textWidth,
-              top: -SIZE / 2 - textHeight / 2,
+              top: -BORDER_RADIUS - textHeight / 2,
               opacity: animFAB.interpolate({
                 inputRange: animateFromRight
                   ? [distance, 0.7 * distance, 0]
@@ -325,7 +383,7 @@ const AnimatedFAB = ({
         </AnimatedText>
       </View>
 
-      {!isIOS && (
+      {Platform.OS !== 'ios' && (
         <ScrollView style={styles.textPlaceholderContainer}>
           {/* @ts-ignore */}
           <Text onTextLayout={onTextLayout}>{label}</Text>
@@ -338,7 +396,7 @@ const AnimatedFAB = ({
 const styles = StyleSheet.create({
   standard: {
     height: SIZE,
-    borderRadius: SIZE / 2,
+    borderRadius: BORDER_RADIUS,
   },
   disabled: {
     elevation: 0,
@@ -346,16 +404,22 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     backgroundColor: 'transparent',
-    borderRadius: SIZE / 2,
-    elevation: 6,
+    borderRadius: BORDER_RADIUS,
   },
   innerWrapper: {
     flexDirection: 'row',
     overflow: 'hidden',
-    borderRadius: SIZE / 2,
+    borderRadius: BORDER_RADIUS,
+  },
+  shadowWrapper: {
+    elevation: 0,
+  },
+  shadow: {
+    elevation: 6,
+    borderRadius: BORDER_RADIUS,
   },
   touchable: {
-    borderRadius: SIZE / 2,
+    borderRadius: BORDER_RADIUS,
   },
   iconWrapper: {
     alignItems: 'center',
