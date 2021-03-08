@@ -107,6 +107,9 @@ const AnimatedFAB = ({
   iconMode = 'dynamic',
   ...rest
 }: Props) => {
+  const isIOS = Platform.OS === 'ios';
+  const animateFromRight = animateFrom === 'right';
+  const isIconStatic = iconMode === 'static';
   const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
@@ -117,9 +120,6 @@ const AnimatedFAB = ({
 
   const [textWidth, setTextWidth] = React.useState<number>(0);
   const [textHeight, setTextHeight] = React.useState<number>(0);
-
-  const animateFromRight = animateFrom === 'right';
-  const isIconStatic = iconMode === 'static';
 
   React.useEffect(() => {
     if (visible) {
@@ -213,7 +213,7 @@ const AnimatedFAB = ({
                 scale: visibility,
               },
             ],
-            elevation: Platform.OS === 'ios' ? 6 : 0,
+            elevation: isIOS ? 6 : 0,
           },
           styles.container,
           disabled && styles.disabled,
@@ -344,7 +344,7 @@ const AnimatedFAB = ({
         <AnimatedText
           numberOfLines={1}
           //@ts-ignore
-          onTextLayout={Platform.OS === 'ios' ? onTextLayout : undefined}
+          onTextLayout={isIOS ? onTextLayout : undefined}
           ellipsizeMode={'tail'}
           style={[
             animateFromRight
@@ -383,7 +383,7 @@ const AnimatedFAB = ({
         </AnimatedText>
       </View>
 
-      {Platform.OS !== 'ios' && (
+      {!isIOS && (
         <ScrollView style={styles.textPlaceholderContainer}>
           {/* @ts-ignore */}
           <Text onTextLayout={onTextLayout}>{label}</Text>
