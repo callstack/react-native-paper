@@ -85,6 +85,7 @@ type Props = $RemoveChildren<typeof Surface> & {
 };
 
 const SIZE = 56;
+const SCALE = 0.9;
 
 const AnimatedFAB = ({
   icon,
@@ -105,14 +106,13 @@ const AnimatedFAB = ({
   iconMode = 'dynamic',
   ...rest
 }: Props) => {
+  const isIOS = Platform.OS === 'ios';
   const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
-  const { current: scaleFAB } = React.useRef(new Animated.Value(1));
-  const { current: translateFAB } = React.useRef(new Animated.Value(0));
-  const { current: translateIcon } = React.useRef(new Animated.Value(0));
-  const { current: opacityLabel } = React.useRef(new Animated.Value(0));
-
+  const { current: animFAB } = React.useRef<Animated.Value>(
+    new Animated.Value(0)
+  );
   const { scale } = theme.animation;
 
   const [textWidth, setTextWidth] = React.useState<number>(0);
@@ -162,53 +162,20 @@ const AnimatedFAB = ({
 
   const rippleColor = color(foregroundColor).alpha(0.32).rgb().string();
 
-  const totalWidth = animateFromRight
+  const extendedWidth = textWidth + 1.5 * SIZE;
+
+  const distance = animateFromRight
     ? -textWidth - SIZE / 2
     : textWidth + SIZE / 2;
 
   React.useEffect(() => {
-    const animations = [
-      {
-        property: scaleFAB,
-        toValue: !extended ? 1 : 0.9,
-      },
-      {
-        property: translateFAB,
-        toValue: !extended ? 0 : totalWidth,
-      },
-      {
-        property: translateIcon,
-        toValue: !extended ? 0 : totalWidth,
-        exclude: isIconStatic,
-      },
-      {
-        property: opacityLabel,
-        toValue: !extended ? 0 : 1,
-      },
-    ];
-
-    Animated.parallel(
-      animations
-        .filter(({ exclude }) => !exclude)
-        .map(({ property, toValue }) => {
-          return Animated.timing(property, {
-            toValue,
-            duration: 150 * scale,
-            useNativeDriver: true,
-            easing: Easing.linear,
-          });
-        })
-    ).start();
-  }, [
-    extended,
-    scaleFAB,
-    opacityLabel,
-    totalWidth,
-    translateIcon,
-    translateFAB,
-    scale,
-    isIconStatic,
-  ]);
+    Animated.timing(animFAB, {
+      toValue: !extended ? 0 : distance,
+      duration: 150 * scale,
+      useNativeDriver: true,
+      easing: Easing.linear,
+    }).start();
+  }, [animFAB, scale, distance, extended]);
 
   const onTextLayout = ({ nativeEvent }: TextLayoutEvent) => {
     const currentWidth = Math.ceil(nativeEvent.lines[0].width);
@@ -223,13 +190,13 @@ const AnimatedFAB = ({
   const getSidesPosition = () => {
     if (animateFromRight) {
       return {
-        left: -totalWidth,
+        left: -distance,
         right: undefined,
       };
     } else {
       return {
         left: undefined,
-        right: totalWidth,
+        right: distance,
       };
     }
   };
@@ -258,7 +225,10 @@ const AnimatedFAB = ({
           {
             transform: [
               {
-                scaleY: scaleFAB,
+                scaleY: animFAB.interpolate({
+                  inputRange: animateFromRight ? [distance, 0] : [0, distance],
+                  outputRange: animateFromRight ? [SCALE, 1] : [1, SCALE],
+                }),
               },
             ],
           },
@@ -286,10 +256,10 @@ const AnimatedFAB = ({
                 {
                   transform: [
                     {
-                      translateX: translateFAB,
+                      translateX: animFAB,
                     },
                   ],
-                  width: textWidth + 1.5 * SIZE,
+                  width: extendedWidth,
                   backgroundColor,
                 },
                 getSidesPosition(),
@@ -302,8 +272,8 @@ const AnimatedFAB = ({
       <Animated.View
         style={[
           styles.iconWrapper,
-          {
-            transform: [{ translateX: translateIcon }],
+          !isIconStatic && {
+            transform: [{ translateX: animFAB }],
           },
           getSidesPosition(),
         ]}
@@ -316,7 +286,7 @@ const AnimatedFAB = ({
         <AnimatedText
           numberOfLines={1}
           //@ts-ignore
-          onTextLayout={Platform.OS === 'ios' ? onTextLayout : undefined}
+          onTextLayout={isIOS ? onTextLayout : undefined}
           ellipsizeMode={'tail'}
           style={[
             animateFromRight
@@ -326,16 +296,18 @@ const AnimatedFAB = ({
             {
               width: textWidth,
               top: -SIZE / 2 - textHeight / 2,
-              opacity: opacityLabel.interpolate({
-                inputRange: [0, 0.7, 1],
-                outputRange: [0, 0, 1],
+              opacity: animFAB.interpolate({
+                inputRange: animateFromRight
+                  ? [distance, 0.7 * distance, 0]
+                  : [0, 0.7 * distance, distance],
+                outputRange: animateFromRight ? [1, 0, 0] : [0, 0, 1],
               }),
               transform: [
                 {
-                  translateX: translateFAB.interpolate({
+                  translateX: animFAB.interpolate({
                     inputRange: animateFromRight
-                      ? [totalWidth, 0]
-                      : [0, totalWidth],
+                      ? [distance, 0]
+                      : [0, distance],
                     outputRange: animateFromRight ? [0, SIZE] : [-SIZE, 0],
                   }),
                 },
@@ -353,7 +325,7 @@ const AnimatedFAB = ({
         </AnimatedText>
       </View>
 
-      {Platform.OS !== 'ios' && (
+      {!isIOS && (
         <ScrollView style={styles.textPlaceholderContainer}>
           {/* @ts-ignore */}
           <Text onTextLayout={onTextLayout}>{label}</Text>
