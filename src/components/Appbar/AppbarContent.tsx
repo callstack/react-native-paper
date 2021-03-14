@@ -134,10 +134,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   title: {
-    fontSize: Platform.OS === 'ios' ? 17 : 20,
+    ...Platform.select({
+      ios: {
+        fontSize: 17,
+      },
+      android: {
+        fontSize: 20,
+      },
+    }),
   },
   subtitle: {
-    fontSize: Platform.OS === 'ios' ? 11 : 14,
+    ...Platform.select({
+      ios: {
+        fontSize: 11,
+      },
+      android: {
+        fontSize: 14,
+      },
+    }),
   },
 });
 
