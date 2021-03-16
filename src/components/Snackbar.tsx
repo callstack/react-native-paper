@@ -33,6 +33,10 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   duration?: number;
   /**
+   * When numberOfLines is set, this prop defines how many lines snackbar can show.
+   */
+   numberOfLines?: number;
+  /**
    * Callback called when Snackbar is dismissed. The `visible` prop needs to be updated when this is called.
    */
   onDismiss: () => void;
@@ -113,6 +117,7 @@ const Snackbar = ({
   wrapperStyle,
   style,
   theme,
+  numberOfLines = 0, // 0 represents it can have any number of lines
   ...rest
 }: Props) => {
   const { current: opacity } = React.useRef<Animated.Value>(
@@ -207,6 +212,7 @@ const Snackbar = ({
             styles.content,
             { marginRight: action ? 0 : 16, color: colors.surface },
           ]}
+          numberOfLines={numberOfLines}
         >
           {children}
         </Text>
