@@ -46,6 +46,7 @@ exports[`renders snackbar with Text as a child 1`] = `
     }
   >
     <Text
+      numberOfLines={0}
       style={
         Array [
           Object {
@@ -123,6 +124,7 @@ exports[`renders snackbar with action button 1`] = `
     }
   >
     <Text
+      numberOfLines={0}
       style={
         Array [
           Object {
@@ -297,6 +299,7 @@ exports[`renders snackbar with content 1`] = `
     }
   >
     <Text
+      numberOfLines={0}
       style={
         Array [
           Object {
