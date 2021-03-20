@@ -29,6 +29,10 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   uncheckedColor?: string;
   /**
+   * Custom border color for radio border.
+   */
+  radioBorderColor?: string;
+  /**
    * Custom color for radio.
    */
   color?: string;
@@ -37,12 +41,21 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   theme: ReactNativePaper.Theme;
   /**
+   * Custom border width for radio.
+   */
+  borderWidth?: number;
+  /**
+   * Custom dot size for radio.
+   */
+  dotSize?: number;
+  /**
    * testID to be used on tests.
    */
   testID?: string;
 };
 
-const BORDER_WIDTH = 2;
+const BORDER_WIDTH = 1;
+const DOT_SIZE = 10;
 
 /**
  * Radio buttons allow the selection a single option from a set.
@@ -70,7 +83,7 @@ const RadioButtonAndroid = ({
   ...rest
 }: Props) => {
   const { current: borderAnim } = React.useRef<Animated.Value>(
-    new Animated.Value(BORDER_WIDTH)
+    new Animated.Value(rest.borderWidth ? rest.borderWidth : BORDER_WIDTH)
   );
 
   const { current: radioAnim } = React.useRef<Animated.Value>(
@@ -100,7 +113,7 @@ const RadioButtonAndroid = ({
       borderAnim.setValue(10);
 
       Animated.timing(borderAnim, {
-        toValue: BORDER_WIDTH,
+        toValue: rest.borderWidth ? rest.borderWidth : BORDER_WIDTH,
         duration: 150 * scale,
         useNativeDriver: false,
       }).start();
@@ -115,7 +128,7 @@ const RadioButtonAndroid = ({
       .rgb()
       .string();
 
-  let rippleColor: string, radioColor: string;
+  let rippleColor: string, radioColor: string, radioBorderColor: string;
 
   return (
     <RadioButtonContext.Consumer>
@@ -134,6 +147,8 @@ const RadioButtonAndroid = ({
           rippleColor = color(checkedColor).fade(0.32).rgb().string();
           radioColor = checked ? checkedColor : uncheckedColor;
         }
+
+        radioBorderColor = rest.radioBorderColor || radioColor;
 
         return (
           <TouchableRipple
@@ -166,7 +181,7 @@ const RadioButtonAndroid = ({
               style={[
                 styles.radio,
                 {
-                  borderColor: radioColor,
+                  borderColor: radioBorderColor,
                   borderWidth: borderAnim,
                 },
               ]}
@@ -175,8 +190,12 @@ const RadioButtonAndroid = ({
                 <View style={[StyleSheet.absoluteFill, styles.radioContainer]}>
                   <Animated.View
                     style={[
-                      styles.dot,
                       {
+                        height: rest.dotSize || DOT_SIZE,
+                        width: rest.dotSize || DOT_SIZE,
+                        borderRadius: rest.dotSize
+                          ? rest.dotSize / 2
+                          : DOT_SIZE / 2,
                         backgroundColor: radioColor,
                         transform: [{ scale: radioAnim }],
                       },
@@ -207,11 +226,6 @@ const styles = StyleSheet.create({
     width: 20,
     borderRadius: 10,
     margin: 8,
-  },
-  dot: {
-    height: 10,
-    width: 10,
-    borderRadius: 5,
   },
 });
 
