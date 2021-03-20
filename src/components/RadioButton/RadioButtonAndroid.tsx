@@ -54,7 +54,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   testID?: string;
 };
 
-const BORDER_WIDTH = 1;
+const BORDER_WIDTH = 2;
 const DOT_SIZE = 10;
 
 /**
