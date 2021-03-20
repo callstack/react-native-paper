@@ -26,11 +26,6 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   color?: string;
   /**
-   * Ripple Color of the icon.
-   */
-  rippleColor?: string;
-
-  /**
    * Size of the icon.
    */
   size?: number;
