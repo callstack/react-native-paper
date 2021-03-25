@@ -760,7 +760,7 @@ const BottomNavigation = ({
                   : 'button',
                 accessibilityComponentType: 'button',
                 accessibilityRole: 'button',
-                accessibilityState: { selected: true },
+                accessibilityState: { selected: focused },
                 style: styles.item,
                 children: (
                   <View pointerEvents="none">
