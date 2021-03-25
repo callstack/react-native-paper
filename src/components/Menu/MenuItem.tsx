@@ -41,6 +41,9 @@ type Props = {
    * TestID used for testing purposes
    */
   testID?: string;
+  /**
+   * Accessibility label for the Touchable. This is read by the screen reader when the user taps the component.
+   */
   accessibilityLabel?: string;
 };
 
