@@ -436,10 +436,6 @@ pre code, pre tt {
   --theme-primary-color: #6200ee;
 }
 
-a {
-  text-decoration: none;
-}
-
 a,
 a:hover {
   color: #6200ee;
