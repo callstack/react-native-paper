@@ -21,6 +21,7 @@ import type { IconSource } from './../Icon';
 import type { AccessibilityState, TextLayoutEvent } from 'react-native';
 import { white, black } from '../../styles/colors';
 import AnimatedText from '../Typography/AnimatedText';
+import getContrastingColor from '../../utils/getContrastingColor';
 
 type Props = $RemoveChildren<typeof Surface> & {
   /**
@@ -352,7 +353,7 @@ const AnimatedFAB = ({
                 { right: isIconStatic ? SIZE : BORDER_RADIUS }
               : { left: isIconStatic ? SIZE : BORDER_RADIUS },
             {
-              width: textWidth,
+              minWidth: textWidth,
               top: -BORDER_RADIUS - textHeight / 2,
               opacity: animFAB.interpolate({
                 inputRange: animateFromRight
