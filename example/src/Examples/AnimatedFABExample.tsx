@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList, Animated, Platform } from 'react-native';
 import type { NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
 import {
   Colors,
@@ -281,6 +281,40 @@ const DATA = [
   },
 ];
 
+type CustomFABProps = {
+  animatedValue: Animated.Value;
+  visible: boolean;
+  extended: boolean;
+};
+
+const isIOS = Platform.OS === 'ios';
+
+const CustomFAB = ({ animatedValue, visible, extended }: CustomFABProps) => {
+  const [isExtended, setIsExtended] = React.useState(true);
+
+  React.useEffect(() => {
+    if (!isIOS) {
+      animatedValue.addListener(({ value }: { value: number }) =>
+        setIsExtended(value > 0 ? true : false)
+      );
+    } else setIsExtended(extended);
+  }, [animatedValue, extended]);
+
+  return (
+    <AnimatedFAB
+      icon={'pencil'}
+      label={'Create'}
+      extended={isExtended}
+      uppercase={false}
+      onPress={() => console.log('Pressed')}
+      visible={visible}
+      animateFrom="right"
+      iconMode="dynamic"
+      style={styles.fabStyle}
+    />
+  );
+};
+
 const AnimatedFABExample = () => {
   const {
     colors: { background },
@@ -289,6 +323,10 @@ const AnimatedFABExample = () => {
   const [scrollPosition, setScrollPosition] = React.useState<number>(0);
   const [extended, setExtended] = React.useState<boolean>(false);
   const [visible, setVisible] = React.useState<boolean>(true);
+
+  const { current: velocity } = React.useRef<Animated.Value>(
+    new Animated.Value(0)
+  );
 
   const renderItem = ({ item }: { item: Item }) => {
     return (
@@ -343,6 +381,10 @@ const AnimatedFABExample = () => {
   const onScroll = ({
     nativeEvent,
   }: NativeSyntheticEvent<NativeScrollEvent>) => {
+    if (!isIOS) {
+      return velocity.setValue(nativeEvent?.velocity?.y ?? 0);
+    }
+
     const currentScrollPosition = Math.floor(nativeEvent.contentOffset.y);
 
     const scrollHeight =
@@ -375,16 +417,10 @@ const AnimatedFABExample = () => {
         ]}
         onScroll={onScroll}
       />
-      <AnimatedFAB
-        icon={'pencil'}
-        label={'Create'}
-        extended={extended}
-        uppercase={false}
-        onPress={() => console.log('Pressed')}
+      <CustomFAB
         visible={visible}
-        animateFrom="right"
-        iconMode="dynamic"
-        style={styles.fabStyle}
+        animatedValue={velocity}
+        extended={extended}
       />
     </>
   );
