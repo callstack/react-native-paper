@@ -178,7 +178,11 @@ const RadioButtonAndroid = ({
             accessibilityRole="radio"
             accessibilityState={{ disabled, checked }}
             accessibilityLiveRegion="polite"
-            style={styles.container}
+            style={{
+              borderRadius: rest.radioSize
+                ? rest.radioSize / 2 + 10
+                : RADIO_SIZE / 2 + 10,
+            }}
             testID={testID}
           >
             <Animated.View
@@ -189,7 +193,9 @@ const RadioButtonAndroid = ({
                   borderWidth: borderAnim,
                   height: rest.radioSize || RADIO_SIZE,
                   width: rest.radioSize || RADIO_SIZE,
-                  borderRadius: rest.radioSize ? rest.radioSize / 2 : RADIO_SIZE / 2,
+                  borderRadius: rest.radioSize
+                    ? rest.radioSize / 2
+                    : RADIO_SIZE / 2,
                 },
               ]}
             >
@@ -221,9 +227,6 @@ const RadioButtonAndroid = ({
 RadioButtonAndroid.displayName = 'RadioButton.Android';
 
 const styles = StyleSheet.create({
-  container: {
-    borderRadius: 18,
-  },
   radioContainer: {
     alignItems: 'center',
     justifyContent: 'center',

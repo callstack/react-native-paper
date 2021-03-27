@@ -35,11 +35,13 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    * testID to be used on tests.
    */
   testID?: string;
+  size?: number;
+  children?: any;
 };
 
 // From https://material.io/design/motion/speed.html#duration
 const ANIMATION_DURATION = 100;
-
+const CHECK_BOX_SIZE = 24;
 /**
  * Checkboxes allow the selection of multiple options from a set.
  * This component follows platform guidelines for Android, but can be used
@@ -61,7 +63,9 @@ const CheckboxAndroid = ({
   theme,
   disabled,
   onPress,
+  size,
   testID,
+  children,
   ...rest
 }: Props) => {
   const { current: scaleAnim } = React.useRef<Animated.Value>(
@@ -127,7 +131,7 @@ const CheckboxAndroid = ({
     ? 'minus-box'
     : checked
     ? 'checkbox-marked'
-    : 'checkbox-blank-outline';
+    : 'square-outline';
 
   return (
     <TouchableRipple
@@ -146,13 +150,17 @@ const CheckboxAndroid = ({
       testID={testID}
     >
       <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
-        <MaterialCommunityIcon
-          allowFontScaling={false}
-          name={icon}
-          size={24}
-          color={checkboxColor}
-          direction="ltr"
-        />
+        {children ? (
+          children
+        ) : (
+          <MaterialCommunityIcon
+            allowFontScaling={false}
+            name={icon}
+            size={size || CHECK_BOX_SIZE}
+            color={checkboxColor}
+            direction="ltr"
+          />
+        )}
         <View style={[StyleSheet.absoluteFill, styles.fillContainer]}>
           <Animated.View
             style={[
