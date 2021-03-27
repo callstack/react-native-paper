@@ -101,7 +101,8 @@ const IconButton = ({
 }: Props) => {
   const iconColor =
     typeof customColor !== 'undefined' ? customColor : theme.colors.text;
-  const rippleColor = color(iconColor).alpha(0.32).rgb().string();
+  const rippleColor =
+    rest.rippleColor || color(iconColor).alpha(0.32).rgb().string();
   const IconComponent = animated ? CrossFadeIcon : Icon;
   const buttonSize = size * 1.5;
   return (
