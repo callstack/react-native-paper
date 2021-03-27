@@ -128,6 +128,8 @@ const TextInputExample = () => {
         <TextInput
           style={styles.inputContainerStyle}
           label="Flat input"
+          focusBorderWidth={2}
+          focusBorderColor={'red'}
           placeholder="Type something"
           value={text}
           onChangeText={(text) => inputActionHandler('text', text)}
@@ -143,6 +145,8 @@ const TextInputExample = () => {
           right={<TextInput.Affix text="/100" />}
         />
         <TextInput
+          focusBorderWidth={2}
+          focusBorderColor={'red'}
           style={[styles.inputContainerStyle, styles.fontSize]}
           label="Flat input large font"
           placeholder="Type something"
@@ -239,6 +243,7 @@ const TextInputExample = () => {
           style={[styles.inputContainerStyle, styles.textArea]}
           label="Flat input text area"
           multiline
+          numberOfLines={4}
           placeholder="Type something"
           value={flatTextArea}
           onChangeText={(flatTextArea) =>
@@ -466,7 +471,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
   },
   textArea: {
-    height: 80,
+    height: 180,
   },
 });
 

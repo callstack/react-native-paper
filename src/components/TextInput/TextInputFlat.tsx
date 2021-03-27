@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   View,
-  Animated,
   TextInput as NativeTextInput,
   StyleSheet,
   I18nManager,
@@ -63,7 +62,10 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
       label,
       error,
       selectionColor,
-      underlineColor,
+      borderColor,
+      borderWidth,
+      focusBorderColor,
+      focusBorderWidth,
       dense,
       style,
       theme,
@@ -136,11 +138,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
       }
     );
 
-    let inputTextColor,
-      activeColor,
-      underlineColorCustom,
-      placeholderColor,
-      errorColor;
+    let inputTextColor, activeColor, placeholderColor, errorColor;
 
     if (disabled) {
       inputTextColor = activeColor = color(colors.text)
@@ -148,21 +146,22 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
         .rgb()
         .string();
       placeholderColor = colors.disabled;
-      underlineColorCustom = 'transparent';
     } else {
       inputTextColor = colors.text;
       activeColor = error ? colors.error : colors.primary;
       placeholderColor = colors.placeholder;
       errorColor = colors.error;
-      underlineColorCustom = underlineColor || colors.disabled;
     }
 
     const containerStyle = {
       backgroundColor: theme.dark
         ? color(colors.background).lighten(0.24).rgb().string()
         : color(colors.background).darken(0.06).rgb().string(),
-      borderTopLeftRadius: theme.roundness,
-      borderTopRightRadius: theme.roundness,
+      borderRadius: theme.roundness,
+      borderColor: parentState.focused
+        ? focusBorderColor
+        : borderColor || 'transparent',
+      borderWidth: parentState.focused ? focusBorderWidth : borderWidth || 0,
     };
 
     const labelScale = MINIMIZED_LABEL_FONT_SIZE / fontSize;
@@ -192,7 +191,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
     const topPosition = calculateLabelTopPosition(
       labelHeight,
       inputHeight,
-      multiline && height ? 0 : !height ? minInputHeight / 2 : 0
+      multiline && height ? -height/2 + 30 : !height ? minInputHeight / 2 : 0
     );
 
     if (height && typeof height !== 'number') {
@@ -310,13 +309,6 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
 
     return (
       <View style={[containerStyle, viewStyle]}>
-        <Underline
-          parentState={parentState}
-          underlineColorCustom={underlineColorCustom}
-          error={error}
-          colors={colors}
-          activeColor={activeColor}
-        />
         <View
           style={[
             styles.labelContainer,
@@ -372,54 +364,10 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
 
 export default TextInputFlat;
 
-type UnderlineProps = {
-  parentState: {
-    focused: boolean;
-  };
-  error?: boolean;
-  colors: {
-    error: string;
-  };
-  activeColor: string;
-  underlineColorCustom?: string;
-};
-
-const Underline = ({
-  parentState,
-  error,
-  colors,
-  activeColor,
-  underlineColorCustom,
-}: UnderlineProps) => {
-  let backgroundColor = parentState.focused
-    ? activeColor
-    : underlineColorCustom;
-  if (error) backgroundColor = colors.error;
-  return (
-    <Animated.View
-      style={[
-        styles.underline,
-        {
-          backgroundColor,
-          // Underlines is thinner when input is not focused
-          transform: [{ scaleY: parentState.focused ? 1 : 0.5 }],
-        },
-      ]}
-    />
-  );
-};
-
 const styles = StyleSheet.create({
   placeholder: {
     position: 'absolute',
     left: 0,
-  },
-  underline: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    height: 2,
   },
   labelContainer: {
     paddingTop: 0,

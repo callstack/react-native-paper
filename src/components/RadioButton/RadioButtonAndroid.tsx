@@ -49,14 +49,18 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   dotSize?: number;
   /**
+   * Custom size for radio.
+   */
+  radioSize?: number;
+  /**
    * testID to be used on tests.
    */
   testID?: string;
 };
 
-const BORDER_WIDTH = 2;
-const DOT_SIZE = 10;
-
+const BORDER_WIDTH = 1;
+const DOT_SIZE = 16;
+const RADIO_SIZE = 22;
 /**
  * Radio buttons allow the selection a single option from a set.
  * This component follows platform guidelines for Android, but can be used
@@ -183,6 +187,9 @@ const RadioButtonAndroid = ({
                 {
                   borderColor: radioBorderColor,
                   borderWidth: borderAnim,
+                  height: rest.radioSize || RADIO_SIZE,
+                  width: rest.radioSize || RADIO_SIZE,
+                  borderRadius: rest.radioSize ? rest.radioSize / 2 : RADIO_SIZE / 2,
                 },
               ]}
             >
@@ -222,8 +229,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   radio: {
-    height: 20,
-    width: 20,
     borderRadius: 10,
     margin: 8,
   },
