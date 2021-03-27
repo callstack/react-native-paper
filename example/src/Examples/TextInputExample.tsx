@@ -466,6 +466,8 @@ const styles = StyleSheet.create({
   },
   inputContainerStyle: {
     margin: 8,
+    borderColor: 'red',
+    borderWidth: 1,
   },
   fontSize: {
     fontSize: 32,

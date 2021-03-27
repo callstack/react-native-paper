@@ -152,9 +152,6 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
     }
 
     const containerStyle = {
-      backgroundColor: theme.dark
-        ? color(colors.background).lighten(0.24).rgb().string()
-        : color(colors.background).darken(0.06).rgb().string(),
       borderRadius: theme.roundness,
       borderColor: parentState.focused ? focusBorderColor : 'transparent',
       borderWidth: parentState.focused ? focusBorderWidth : 2,
@@ -304,55 +301,59 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
     }
 
     return (
-      <View style={[viewStyle, containerStyle]}>
-        <View
-          style={[
-            styles.labelContainer,
-            {
-              minHeight,
-            },
-          ]}
-        >
-          <InputLabel parentState={parentState} labelProps={labelProps} />
-          {render?.({
-            ...rest,
-            ref: innerRef,
-            onChangeText,
-            placeholder: label
-              ? parentState.placeholder
-              : this.props.placeholder,
-            placeholderTextColor: placeholderTextColor ?? placeholderColor,
-            editable: !disabled && editable,
-            selectionColor:
-              typeof selectionColor === 'undefined'
-                ? activeColor
-                : selectionColor,
-            onFocus,
-            onBlur,
-            underlineColorAndroid: 'transparent',
-            multiline,
-            style: [
-              styles.input,
-              { paddingLeft, paddingRight },
-              !multiline || (multiline && height) ? { height: flatHeight } : {},
-              paddingFlat,
+      <View style={[viewStyle, { borderRadius: theme.roundness }]}>
+        <View style={[containerStyle]}>
+          <View
+            style={[
+              styles.labelContainer,
               {
-                ...font,
-                fontSize,
-                fontWeight,
-                color: inputTextColor,
-                textAlignVertical: multiline ? 'top' : 'center',
-                textAlign: textAlign
-                  ? textAlign
-                  : I18nManager.isRTL
-                  ? 'right'
-                  : 'left',
+                minHeight,
               },
-              adornmentStyleAdjustmentForNativeInput,
-            ],
-          })}
+            ]}
+          >
+            <InputLabel parentState={parentState} labelProps={labelProps} />
+            {render?.({
+              ...rest,
+              ref: innerRef,
+              onChangeText,
+              placeholder: label
+                ? parentState.placeholder
+                : this.props.placeholder,
+              placeholderTextColor: placeholderTextColor ?? placeholderColor,
+              editable: !disabled && editable,
+              selectionColor:
+                typeof selectionColor === 'undefined'
+                  ? activeColor
+                  : selectionColor,
+              onFocus,
+              onBlur,
+              underlineColorAndroid: 'transparent',
+              multiline,
+              style: [
+                styles.input,
+                { paddingLeft, paddingRight },
+                !multiline || (multiline && height)
+                  ? { height: flatHeight }
+                  : {},
+                paddingFlat,
+                {
+                  ...font,
+                  fontSize,
+                  fontWeight,
+                  color: inputTextColor,
+                  textAlignVertical: multiline ? 'top' : 'center',
+                  textAlign: textAlign
+                    ? textAlign
+                    : I18nManager.isRTL
+                    ? 'right'
+                    : 'left',
+                },
+                adornmentStyleAdjustmentForNativeInput,
+              ],
+            })}
+          </View>
+          <TextInputAdornment {...adornmentProps} />
         </View>
-        <TextInputAdornment {...adornmentProps} />
       </View>
     );
   }
