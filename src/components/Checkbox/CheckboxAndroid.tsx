@@ -133,6 +133,7 @@ const CheckboxAndroid = ({
     ? 'checkbox-marked'
     : 'square-outline';
 
+  const checkboxSize = size || CHECK_BOX_SIZE;
   return (
     <TouchableRipple
       {...rest}
@@ -146,7 +147,12 @@ const CheckboxAndroid = ({
       accessibilityRole="checkbox"
       accessibilityState={{ disabled, checked }}
       accessibilityLiveRegion="polite"
-      style={styles.container}
+      style={{
+        height: checkboxSize + 12,
+        width: checkboxSize + 12,
+        borderRadius: checkboxSize,
+        padding: 6,
+      }}
       testID={testID}
     >
       <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
@@ -156,7 +162,7 @@ const CheckboxAndroid = ({
           <MaterialCommunityIcon
             allowFontScaling={false}
             name={icon}
-            size={size || CHECK_BOX_SIZE}
+            size={checkboxSize}
             color={checkboxColor}
             direction="ltr"
           />
@@ -164,8 +170,11 @@ const CheckboxAndroid = ({
         <View style={[StyleSheet.absoluteFill, styles.fillContainer]}>
           <Animated.View
             style={[
-              styles.fill,
-              { borderColor: checkboxColor },
+              {
+                borderColor: checkboxColor,
+                height: checkboxSize - 10,
+                width: checkboxSize - 10,
+              },
               { borderWidth },
             ]}
           />
