@@ -15,8 +15,6 @@ export type RenderProps = {
   placeholderTextColor?: ColorValue;
   editable?: boolean;
   selectionColor?: string;
-  borderColor?: string;
-  borderWidth?: string;
   focusBorderColor?: string;
   focusBorderWidth?: string;
   onFocus?: (args: any) => void;

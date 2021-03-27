@@ -62,8 +62,6 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
       label,
       error,
       selectionColor,
-      borderColor,
-      borderWidth,
       focusBorderColor,
       focusBorderWidth,
       dense,
@@ -158,10 +156,8 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
         ? color(colors.background).lighten(0.24).rgb().string()
         : color(colors.background).darken(0.06).rgb().string(),
       borderRadius: theme.roundness,
-      borderColor: parentState.focused
-        ? focusBorderColor
-        : borderColor || 'transparent',
-      borderWidth: parentState.focused ? focusBorderWidth : borderWidth || 0,
+      borderColor: parentState.focused ? focusBorderColor : 'transparent',
+      borderWidth: parentState.focused ? focusBorderWidth : 2,
     };
 
     const labelScale = MINIMIZED_LABEL_FONT_SIZE / fontSize;
@@ -191,7 +187,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
     const topPosition = calculateLabelTopPosition(
       labelHeight,
       inputHeight,
-      multiline && height ? -height/2 + 30 : !height ? minInputHeight / 2 : 0
+      multiline && height ? -height / 2 + 30 : !height ? minInputHeight / 2 : 0
     );
 
     if (height && typeof height !== 'number') {

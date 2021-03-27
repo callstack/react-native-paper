@@ -119,8 +119,6 @@ export type TextInputProps = React.ComponentPropsWithRef<
    * @optional
    */
   theme: ReactNativePaper.Theme;
-  borderColor?: string;
-  borderWidth?: number;
   focusBorderColor?: string;
   focusBorderWidth?: number;
 };
