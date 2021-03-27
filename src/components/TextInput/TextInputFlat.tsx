@@ -304,7 +304,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
     }
 
     return (
-      <View style={[containerStyle, viewStyle]}>
+      <View style={[viewStyle, containerStyle]}>
         <View
           style={[
             styles.labelContainer,
