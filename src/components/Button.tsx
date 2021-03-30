@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  Animated,
   View,
   ViewStyle,
   StyleSheet,
@@ -87,6 +86,7 @@ type Props = React.ComponentProps<typeof Surface> & {
    * testID to be used on tests.
    */
   testID?: string;
+  rippleColor?: string;
 };
 
 /**
@@ -140,13 +140,9 @@ const Button = ({
   labelStyle,
   testID,
   accessible,
-  ...rest
+  rippleColor,
 }: Props) => {
-  const { current: elevation } = React.useRef<Animated.Value>(
-    new Animated.Value(mode === 'contained' ? 2 : 0)
-  );
-
-  const handlePressIn = () => {
+  /*const handlePressIn = () => {
     if (mode === 'contained') {
       const { scale } = theme.animation;
       Animated.timing(elevation, {
@@ -166,15 +162,12 @@ const Button = ({
         useNativeDriver: true,
       }).start();
     }
-  };
+  };*/
 
   const { colors, roundness } = theme;
   const font = theme.fonts.medium;
 
-  let backgroundColor: string,
-    borderColor: string,
-    textColor: string,
-    borderWidth: number;
+  let backgroundColor: string, textColor: string;
 
   if (mode === 'contained') {
     if (disabled) {
@@ -189,17 +182,6 @@ const Button = ({
     }
   } else {
     backgroundColor = 'transparent';
-  }
-
-  if (mode === 'outlined') {
-    borderColor = color(theme.dark ? white : black)
-      .alpha(0.29)
-      .rgb()
-      .string();
-    borderWidth = StyleSheet.hairlineWidth;
-  } else {
-    borderColor = 'transparent';
-    borderWidth = 0;
   }
 
   if (disabled) {
@@ -226,13 +208,9 @@ const Button = ({
     textColor = colors.primary;
   }
 
-  const rippleColor = color(textColor).alpha(0.32).rgb().string();
-  const buttonStyle = {
-    backgroundColor,
-    borderColor,
-    borderWidth,
-    borderRadius: roundness,
-  };
+  const touchableRippleColor =
+    rippleColor || color(textColor).alpha(0.32).rgb().string();
+
   const touchableStyle = {
     borderRadius: style
       ? ((StyleSheet.flatten(style) || {}) as ViewStyle).borderRadius ||
@@ -244,95 +222,76 @@ const Button = ({
     StyleSheet.flatten(labelStyle) || {};
 
   const textStyle = { color: textColor, ...font };
-  const elevationRes = disabled || mode !== 'contained' ? 0 : elevation;
   const iconStyle =
     StyleSheet.flatten(contentStyle)?.flexDirection === 'row-reverse'
       ? styles.iconReverse
       : styles.icon;
 
   return (
-    <Surface
-      {...rest}
-      style={[
-        styles.button,
-        compact && styles.compact,
-        { elevation: elevationRes } as ViewStyle,
-        buttonStyle,
-        style,
-      ]}
+    <TouchableRipple
+      borderless
+      delayPressIn={0}
+      onPress={onPress}
+      onLongPress={onLongPress}
+      //onPressIn={handlePressIn}
+      //onPressOut={handlePressOut}
+      accessibilityLabel={accessibilityLabel}
+      // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
+      accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
+      accessibilityComponentType="button"
+      accessibilityRole="button"
+      accessibilityState={{ disabled }}
+      accessible={accessible}
+      disabled={disabled}
+      rippleColor={touchableRippleColor}
+      style={touchableStyle}
+      testID={testID}
     >
-      <TouchableRipple
-        borderless
-        delayPressIn={0}
-        onPress={onPress}
-        onLongPress={onLongPress}
-        onPressIn={handlePressIn}
-        onPressOut={handlePressOut}
-        accessibilityLabel={accessibilityLabel}
-        // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-        accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
-        accessibilityComponentType="button"
-        accessibilityRole="button"
-        accessibilityState={{ disabled }}
-        accessible={accessible}
-        disabled={disabled}
-        rippleColor={rippleColor}
-        style={touchableStyle}
-        testID={testID}
-      >
-        <View style={[styles.content, contentStyle]}>
-          {icon && loading !== true ? (
-            <View style={iconStyle}>
-              <Icon
-                source={icon}
-                size={customLabelSize ?? 16}
-                color={
-                  typeof customLabelColor === 'string'
-                    ? customLabelColor
-                    : textColor
-                }
-              />
-            </View>
-          ) : null}
-          {loading ? (
-            <ActivityIndicator
+      <View style={[styles.content, contentStyle]}>
+        {icon && loading !== true ? (
+          <View style={iconStyle}>
+            <Icon
+              source={icon}
               size={customLabelSize ?? 16}
               color={
                 typeof customLabelColor === 'string'
                   ? customLabelColor
                   : textColor
               }
-              style={iconStyle}
             />
-          ) : null}
-          <Text
-            selectable={false}
-            numberOfLines={1}
-            style={[
-              styles.label,
-              compact && styles.compactLabel,
-              uppercase && styles.uppercaseLabel,
-              textStyle,
-              font,
-              labelStyle,
-            ]}
-          >
-            {children}
-          </Text>
-        </View>
-      </TouchableRipple>
-    </Surface>
+          </View>
+        ) : null}
+        {loading ? (
+          <ActivityIndicator
+            size={customLabelSize ?? 16}
+            color={
+              typeof customLabelColor === 'string'
+                ? customLabelColor
+                : textColor
+            }
+            style={iconStyle}
+          />
+        ) : null}
+        <Text
+          selectable={false}
+          numberOfLines={1}
+          style={[
+            styles.label,
+            compact && styles.compactLabel,
+            uppercase && styles.uppercaseLabel,
+            textStyle,
+            font,
+            labelStyle,
+          ]}
+        >
+          {children}
+        </Text>
+      </View>
+    </TouchableRipple>
   );
 };
 
 const styles = StyleSheet.create({
-  button: {
-    minWidth: 64,
-    borderStyle: 'solid',
-  },
-  compact: {
-    minWidth: 'auto',
-  },
   content: {
     flexDirection: 'row',
     alignItems: 'center',
