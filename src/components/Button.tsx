@@ -10,13 +10,12 @@ import color from 'color';
 
 import ActivityIndicator from './ActivityIndicator';
 import Icon, { IconSource } from './Icon';
-import Surface from './Surface';
 import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple/TouchableRipple';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
 
-type Props = React.ComponentProps<typeof Surface> & {
+type Props = React.ComponentProps<typeof TouchableRipple> & {
   /**
    * Mode of the button. You can change the mode to adjust the styling to give it desired emphasis.
    * - `text` - flat button without background or outline (low emphasis)
