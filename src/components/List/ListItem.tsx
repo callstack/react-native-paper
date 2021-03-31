@@ -94,6 +94,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    * See [`ellipsizeMode`](https://reactnative.dev/docs/text#ellipsizemode)
    */
   descriptionEllipsizeMode?: EllipsizeProp;
+  rippleColor?: string;
 };
 
 /**
@@ -137,6 +138,7 @@ const ListItem = ({
   titleEllipsizeMode,
   descriptionEllipsizeMode,
   descriptionStyle,
+  rippleColor,
   ...rest
 }: Props) => {
   const renderDescription = (
@@ -172,6 +174,7 @@ const ListItem = ({
   return (
     <TouchableRipple
       {...rest}
+      rippleColor={rippleColor}
       style={[styles.container, style]}
       onPress={onPress}
     >
