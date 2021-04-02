@@ -29,6 +29,8 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    * Size of the icon.
    */
   size?: number;
+
+  buttonSize?: number;
   /**
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
@@ -91,6 +93,7 @@ const IconButton = ({
   icon,
   color: customColor,
   size = 24,
+  buttonSize,
   accessibilityLabel,
   disabled,
   onPress,
@@ -104,7 +107,7 @@ const IconButton = ({
   const rippleColor =
     rest.rippleColor || color(iconColor).alpha(0.32).rgb().string();
   const IconComponent = animated ? CrossFadeIcon : Icon;
-  const buttonSize = size * 1.5;
+  const BUTTON_SIZE = buttonSize || size * 1.5;
   return (
     <TouchableRipple
       borderless
@@ -113,7 +116,11 @@ const IconButton = ({
       rippleColor={rippleColor}
       style={[
         styles.container,
-        { width: buttonSize, height: buttonSize, borderRadius: buttonSize / 2 },
+        {
+          width: BUTTON_SIZE,
+          height: BUTTON_SIZE,
+          borderRadius: BUTTON_SIZE / 2,
+        },
         disabled && styles.disabled,
         style,
       ]}
