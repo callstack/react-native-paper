@@ -14,6 +14,8 @@ import TextInputAffix from './Adornment/TextInputAffix';
 import { withTheme } from '../../core/theming';
 import type { RenderProps, State } from './types';
 import type { $Omit } from '../../types';
+import emojiRegex from 'emoji-regex';
+const emoji = emojiRegex();
 
 const BLUR_ANIMATION_DURATION = 180;
 const FOCUS_ANIMATION_DURATION = 150;
@@ -121,6 +123,9 @@ export type TextInputProps = React.ComponentPropsWithRef<
   theme: ReactNativePaper.Theme;
   focusBorderColor?: string;
   focusBorderWidth?: number;
+  trimLeft?: boolean;
+  removeSpace?: boolean;
+  lowerCase?: boolean;
 };
 
 /**
@@ -388,13 +393,67 @@ class TextInput extends React.Component<TextInputProps, State> {
     }
   };
 
+  private transformInput = (value: string) => {
+    let newValue = value;
+
+    if (this.props.trimLeft && value) {
+      newValue = value.trimLeft();
+      if (newValue.length > 1) {
+        newValue = newValue.replace(/\s+/g, ' ');
+      }
+    }
+
+    if (this.props.removeSpace) {
+      newValue = newValue.replace(/\s/g, '');
+    }
+
+    if (this.props.lowerCase) {
+      newValue = newValue.toLowerCase();
+    }
+
+    if (this.props.keyboardType === 'ascii-capable') {
+      newValue = newValue.replace(emoji, '');
+    }
+
+    if (this.props.keyboardType === 'decimal-pad') {
+      if ((value.match(/,/g) || []).length > 1) {
+        return null;
+      }
+
+      if (value.includes(',')) {
+        const valueSplit = value.split(',');
+        const decimalLength = valueSplit[1].length;
+        const leftDecimalLength = valueSplit[0].length;
+
+        if (
+          (this.props.maxLength &&
+            leftDecimalLength > this.props.maxLength - 3) ||
+          decimalLength > 2
+        ) {
+          return null;
+        }
+      } else if (
+        this.props.maxLength &&
+        value.length > this.props.maxLength - 3
+      ) {
+        return null;
+      }
+
+      newValue = newValue.replace(/[^0-9,]/g, '');
+    }
+
+    return newValue;
+  };
+
   private handleChangeText = (value: string) => {
     if (!this.props.editable) {
       return;
     }
-
-    this.setState({ value });
-    this.props.onChangeText && this.props.onChangeText(value);
+    const newValue = this.transformInput(value);
+    if (newValue) {
+      this.setState({ value: newValue });
+      this.props.onChangeText && this.props.onChangeText(newValue);
+    }
   };
 
   private handleLayoutAnimatedText = (e: LayoutChangeEvent) => {

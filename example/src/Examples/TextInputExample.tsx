@@ -128,11 +128,14 @@ const TextInputExample = () => {
         <TextInput
           style={styles.inputContainerStyle}
           label="Flat input"
+          maxLength={10}
           focusBorderWidth={2}
           focusBorderColor={'red'}
           placeholder="Type something"
           value={text}
           onChangeText={(text) => inputActionHandler('text', text)}
+          removeSpace={true}
+          keyboardType={'decimal-pad'}
           left={
             <TextInput.Icon
               name="heart"
