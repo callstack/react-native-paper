@@ -450,7 +450,7 @@ class TextInput extends React.Component<TextInputProps, State> {
       return;
     }
     const newValue = this.transformInput(value);
-    if (newValue) {
+    if (newValue !== null) {
       this.setState({ value: newValue });
       this.props.onChangeText && this.props.onChangeText(newValue);
     }
