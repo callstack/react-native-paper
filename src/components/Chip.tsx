@@ -136,7 +136,6 @@ const Chip = ({
   ellipsizeMode,
   ...rest
 }: Props) => {
-
   const { dark, colors } = theme;
   const defaultBackgroundColor =
     mode === 'outlined' ? colors.surface : dark ? '#383838' : '#ebebeb';
