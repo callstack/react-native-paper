@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   AccessibilityState,
-  Platform,
   StyleProp,
   StyleSheet,
   TouchableWithoutFeedback,
@@ -204,7 +203,6 @@ const Chip = ({
         [
           styles.container,
           {
-            elevation: Platform.OS === 'android' ? elevation : 0,
             backgroundColor: selected
               ? selectedBackgroundColor
               : backgroundColor,
