@@ -164,7 +164,6 @@ const Chip = ({
   const iconColor = disabled
     ? colors.disabled
     : color(selectedColor !== undefined ? selectedColor : colors.text)
-        .alpha(0.54)
         .rgb()
         .string();
 
