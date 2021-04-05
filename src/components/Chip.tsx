@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   AccessibilityState,
-  Animated,
   Platform,
   StyleProp,
   StyleSheet,
@@ -137,27 +136,6 @@ const Chip = ({
   ellipsizeMode,
   ...rest
 }: Props) => {
-  const { current: elevation } = React.useRef<Animated.Value>(
-    new Animated.Value(0)
-  );
-
-  const handlePressIn = () => {
-    const { scale } = theme.animation;
-    Animated.timing(elevation, {
-      toValue: 4,
-      duration: 200 * scale,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const handlePressOut = () => {
-    const { scale } = theme.animation;
-    Animated.timing(elevation, {
-      toValue: 0,
-      duration: 150 * scale,
-      useNativeDriver: true,
-    }).start();
-  };
 
   const { dark, colors } = theme;
   const defaultBackgroundColor =
@@ -245,8 +223,6 @@ const Chip = ({
         style={{ borderRadius }}
         onPress={onPress}
         onLongPress={onLongPress}
-        onPressIn={handlePressIn}
-        onPressOut={handlePressOut}
         underlayColor={underlayColor}
         disabled={disabled}
         accessibilityLabel={accessibilityLabel}
