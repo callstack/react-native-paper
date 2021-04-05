@@ -203,6 +203,7 @@ const Chip = ({
         [
           styles.container,
           {
+            elevation: 0,
             backgroundColor: selected
               ? selectedBackgroundColor
               : backgroundColor,
