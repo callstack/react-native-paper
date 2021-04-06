@@ -179,7 +179,7 @@ const Chip = ({
     .string();
 
   const underlayColor = selectedColor
-    ? color(selectedColor).fade(0.5).rgb().string()
+    ? color(selectedColor).fade(0.2).rgb().string()
     : selectedBackgroundColor;
 
   const accessibilityTraits = ['button'];
