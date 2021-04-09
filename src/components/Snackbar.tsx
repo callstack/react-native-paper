@@ -23,10 +23,8 @@ type Props = React.ComponentProps<typeof Surface> & {
    * - `label` - Label of the action button
    * - `onPress` - Callback that is called when action button is pressed.
    */
-  action?: {
+  action?: Omit<React.ComponentProps<typeof Button>, 'children'> & {
     label: string;
-    accessibilityLabel?: string;
-    onPress: () => void;
   };
   /**
    * The duration for which the Snackbar is shown.
@@ -171,6 +169,13 @@ const Snackbar = ({
 
   if (hidden) return null;
 
+  const {
+    style: actionStyle,
+    label: actionLabel,
+    onPress: onPressAction,
+    ...actionProps
+  } = action || {};
+
   return (
     <SafeAreaView
       pointerEvents="box-none"
@@ -212,17 +217,17 @@ const Snackbar = ({
         </Text>
         {action ? (
           <Button
-            accessibilityLabel={action.accessibilityLabel}
             onPress={() => {
-              action.onPress();
+              onPressAction?.();
               onDismiss();
             }}
-            style={styles.button}
+            style={[styles.button, actionStyle]}
             color={colors.accent}
             compact
             mode="text"
+            {...actionProps}
           >
-            {action.label}
+            {actionLabel}
           </Button>
         ) : null}
       </Surface>

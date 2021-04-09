@@ -185,6 +185,7 @@ const ListAccordion = ({
         accessibilityComponentType="button"
         accessibilityRole="button"
         testID={testID}
+        borderless
       >
         <View style={styles.row} pointerEvents="none">
           {left
