@@ -83,7 +83,7 @@ function MenuItem({
   contentStyle,
   testID,
   titleStyle,
-  accessibilityLabel
+  accessibilityLabel,
 }: Props) {
   const theme = useTheme();
 
