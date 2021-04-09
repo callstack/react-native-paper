@@ -40,6 +40,10 @@ type Props = {
    * TestID used for testing purposes
    */
   testID?: string;
+  /**
+   * Accessibility label for the Touchable. This is read by the screen reader when the user taps the component.
+   */
+  accessibilityLabel?: string;
 };
 
 /**
@@ -79,6 +83,7 @@ function MenuItem({
   contentStyle,
   testID,
   titleStyle,
+  accessibilityLabel,
 }: Props) {
   const theme = useTheme();
 
@@ -101,6 +106,7 @@ function MenuItem({
       onPress={onPress}
       disabled={disabled}
       testID={testID}
+      accessibilityLabel={accessibilityLabel}
       accessibilityRole="menuitem"
       accessibilityState={{ disabled }}
     >
