@@ -7,6 +7,7 @@ import {
   TextInputProps,
   ViewStyle,
   TextStyle,
+  View,
 } from 'react-native';
 
 import color from 'color';
@@ -63,6 +64,7 @@ type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    * Custom icon for clear button, default will be icon close
    */
   clearIcon?: IconSource;
+  filterComponent?: React.ReactNode;
 };
 
 type TextInputHandles = Pick<
@@ -105,6 +107,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
     {
       clearAccessibilityLabel = 'clear',
       clearIcon,
+      filterComponent,
       icon,
       iconColor: customIconColor,
       inputStyle,
@@ -204,29 +207,33 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
           value={value}
           {...rest}
         />
-        <IconButton
-          borderless
-          disabled={!value}
-          accessibilityLabel={clearAccessibilityLabel}
-          color={value ? iconColor : 'rgba(255, 255, 255, 0)'}
-          rippleColor={rippleColor}
-          onPress={handleClearPress}
-          icon={
-            clearIcon ||
-            (({ size, color }) => (
-              <MaterialCommunityIcon
-                name="close"
-                color={color}
-                size={size}
-                direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
-              />
-            ))
-          }
-          // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-          accessibilityTraits="button"
-          accessibilityComponentType="button"
-          accessibilityRole="button"
-        />
+        {filterComponent ? (
+          filterComponent
+        ) : (
+          <IconButton
+            borderless
+            disabled={!value}
+            accessibilityLabel={clearAccessibilityLabel}
+            color={value ? iconColor : 'rgba(255, 255, 255, 0)'}
+            rippleColor={rippleColor}
+            onPress={handleClearPress}
+            icon={
+              clearIcon ||
+              (({ size, color }) => (
+                <MaterialCommunityIcon
+                  name="close"
+                  color={color}
+                  size={size}
+                  direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+                />
+              ))
+            }
+            // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
+            accessibilityTraits="button"
+            accessibilityComponentType="button"
+            accessibilityRole="button"
+          />
+        )}
       </Surface>
     );
   }
