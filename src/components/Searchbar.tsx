@@ -7,7 +7,6 @@ import {
   TextInputProps,
   ViewStyle,
   TextStyle,
-  View,
 } from 'react-native';
 
 import color from 'color';
