@@ -24,7 +24,9 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Function to execute on long press.
    */
-  onLongPress?: React.ComponentProps<typeof TouchableWithoutFeedback>['onLongPress'];
+  onLongPress?: React.ComponentProps<
+    typeof TouchableWithoutFeedback
+  >['onLongPress'];
   /**
    * Function to execute on press.
    */
