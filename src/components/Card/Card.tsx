@@ -24,11 +24,11 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Function to execute on long press.
    */
-  onLongPress?: () => void;
+  onLongPress?: React.ComponentProps<typeof TouchableWithoutFeedback>['onLongPress'];
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: React.ComponentProps<typeof TouchableWithoutFeedback>['onPress'];
   /**
    * Content of the `Card`.
    */
