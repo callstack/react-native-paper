@@ -111,7 +111,6 @@ const AppbarHeader = (props: Props) => {
     >
       <Appbar
         style={[
-          //@ts-ignore Types of property 'backgroundColor' are incompatible.
           { height, backgroundColor, marginTop: statusBarHeight },
           styles.appbar,
           restStyle,

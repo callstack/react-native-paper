@@ -146,7 +146,7 @@ const ActivityIndicator = ({
   const containerStyle = {
     width: size,
     height: size / 2,
-    overflow: 'hidden',
+    overflow: 'hidden' as const,
   };
 
   return (

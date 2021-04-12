@@ -69,7 +69,7 @@ const DrawerSection = ({ children, title, theme, style, ...rest }: Props) => {
         <View style={styles.titleContainer}>
           <Text
             numberOfLines={1}
-            style={{ color: titleColor, ...font, marginLeft: 16 }}
+            style={[{ color: titleColor, ...font }, styles.title]}
           >
             {title}
           </Text>
@@ -90,6 +90,9 @@ const styles = StyleSheet.create({
   titleContainer: {
     height: 40,
     justifyContent: 'center',
+  },
+  title: {
+    marginLeft: 16,
   },
   divider: {
     marginTop: 4,

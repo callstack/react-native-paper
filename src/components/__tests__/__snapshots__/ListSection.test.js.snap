@@ -22,7 +22,6 @@ exports[`renders list section with custom title style 1`] = `
         "disabled": "rgba(0, 0, 0, 0.26)",
         "error": "#B00020",
         "notification": "#f50057",
-        "onBackground": "#000000",
         "onSurface": "#000000",
         "placeholder": "rgba(0, 0, 0, 0.54)",
         "primary": "#6200ee",
@@ -60,6 +59,8 @@ exports[`renders list section with custom title style 1`] = `
           "color": "#000000",
           "fontFamily": "System",
           "fontWeight": "400",
+        },
+        Object {
           "textAlign": "left",
         },
         Array [
@@ -189,6 +190,8 @@ exports[`renders list section with custom title style 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Array [
@@ -316,6 +319,8 @@ exports[`renders list section with custom title style 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Array [
@@ -360,7 +365,6 @@ exports[`renders list section with subheader 1`] = `
         "disabled": "rgba(0, 0, 0, 0.26)",
         "error": "#B00020",
         "notification": "#f50057",
-        "onBackground": "#000000",
         "onSurface": "#000000",
         "placeholder": "rgba(0, 0, 0, 0.54)",
         "primary": "#6200ee",
@@ -398,6 +402,8 @@ exports[`renders list section with subheader 1`] = `
           "color": "#000000",
           "fontFamily": "System",
           "fontWeight": "400",
+        },
+        Object {
           "textAlign": "left",
         },
         Array [
@@ -525,6 +531,8 @@ exports[`renders list section with subheader 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Array [
@@ -652,6 +660,8 @@ exports[`renders list section with subheader 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Array [
@@ -696,7 +706,6 @@ exports[`renders list section without subheader 1`] = `
         "disabled": "rgba(0, 0, 0, 0.26)",
         "error": "#B00020",
         "notification": "#f50057",
-        "onBackground": "#000000",
         "onSurface": "#000000",
         "placeholder": "rgba(0, 0, 0, 0.54)",
         "primary": "#6200ee",
@@ -834,6 +843,8 @@ exports[`renders list section without subheader 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Array [
@@ -961,6 +972,8 @@ exports[`renders list section without subheader 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Array [

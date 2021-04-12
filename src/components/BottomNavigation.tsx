@@ -247,6 +247,7 @@ const Touchable = ({
   TouchableRipple.supported ? (
     <TouchableRipple
       {...rest}
+      disabled={rest.disabled || undefined}
       borderless={borderless}
       centered={centered}
       rippleColor={rippleColor}
@@ -268,7 +269,7 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
  * Bottom navigation provides quick navigation between top-level views of an app with a bottom navigation bar.
  * It is primarily designed for use on mobile.
  *
- * For integration with React Navigation, you can use [react-navigation-material-bottom-tab-navigator](https://github.com/react-navigation/react-navigation-material-bottom-tab-navigator).
+ * For integration with React Navigation, you can use [react-navigation-material-bottom-tabs](https://github.com/react-navigation/react-navigation/tree/main/packages/material-bottom-tabs) and consult [createMaterialBottomTabNavigator](https://reactnavigation.org/docs/material-bottom-tab-navigator/) documentation.
  *
  * By default Bottom navigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
  * See [Dark Theme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more information.
@@ -558,14 +559,18 @@ const BottomNavigation = ({
   const backgroundColor = shifting
     ? indexAnim.interpolate({
         inputRange: routes.map((_, i) => i),
-        //@ts-ignore
+        // FIXME: does outputRange support ColorValue or just strings?
+        // @ts-expect-error
         outputRange: routes.map(
           (route) => getColor({ route }) || approxBackgroundColor
         ),
       })
     : approxBackgroundColor;
 
-  const isDark = !color(approxBackgroundColor).isLight();
+  const isDark =
+    typeof approxBackgroundColor === 'string'
+      ? !color(approxBackgroundColor).isLight()
+      : true;
 
   const textColor = isDark ? white : black;
   const activeTintColor =
@@ -749,12 +754,13 @@ const BottomNavigation = ({
                 onPress: () => handleTabPress(index),
                 testID: getTestID({ route }),
                 accessibilityLabel: getAccessibilityLabel({ route }),
+                // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
                 accessibilityTraits: focused
                   ? ['button', 'selected']
                   : 'button',
                 accessibilityComponentType: 'button',
                 accessibilityRole: 'button',
-                accessibilityState: { selected: true },
+                accessibilityState: { selected: focused },
                 style: styles.item,
                 children: (
                   <View pointerEvents="none">

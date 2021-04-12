@@ -20,6 +20,15 @@ type Data = {
 
 const data: Data[] = [
   {
+    color: '#6200EE',
+    name: 'Paper Example App',
+    image: 'showcase/paper.png',
+    android:
+      'https://play.google.com/store/apps/details?id=com.callstack.reactnativepaperexample',
+    ios: 'https://apps.apple.com/app/react-native-paper/id1548934513',
+    github: 'https://github.com/callstack/react-native-paper/tree/main/example',
+  },
+  {
     color: '#673AB7',
     name: 'Showman',
     image: 'showcase/showman.png',
@@ -88,6 +97,14 @@ const data: Data[] = [
     image: 'showcase/rozy.png',
     ios: 'https://apps.apple.com/us/app/rozy/id1511264722',
     android: 'https://play.google.com/store/apps/details?id=com.rozy_app.rozy',
+  },
+  {
+    color: '#CC0E00',
+    name: 'Zoomapto - Find Nearby Restaurants',
+    image: 'showcase/zoomapto.png',
+    github: 'https://github.com/frederic11/Zoomapto',
+    android:
+      'https://play.google.com/store/apps/details?id=com.frederictech.zoomapto',
   },
 ];
 

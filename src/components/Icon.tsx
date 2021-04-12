@@ -67,7 +67,6 @@ export const isEqualIcon = (a: any, b: any) =>
 
 const Icon = ({ source, color, size, theme, ...rest }: Props) => {
   const direction =
-    // @ts-ignore
     typeof source === 'object' && source.direction && source.source
       ? source.direction === 'auto'
         ? I18nManager.isRTL
@@ -76,7 +75,6 @@ const Icon = ({ source, color, size, theme, ...rest }: Props) => {
         : source.direction
       : null;
   const s =
-    // @ts-ignore
     typeof source === 'object' && source.direction && source.source
       ? source.source
       : source;

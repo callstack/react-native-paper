@@ -9,7 +9,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    * Content of the `Surface`.
    */
   children: React.ReactNode;
-  style?: StyleProp<ViewStyle>;
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * @optional
    */
@@ -60,11 +60,9 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * ```
  */
 const Surface = ({ style, theme, ...rest }: Props) => {
-  const flattenedStyles = StyleSheet.flatten(style) || {};
-  const { elevation = 4 }: ViewStyle = flattenedStyles;
+  const { elevation = 4 } = (StyleSheet.flatten(style) || {}) as ViewStyle;
   const { dark: isDarkTheme, mode, colors } = theme;
   return (
-    // @ts-ignore
     <Animated.View
       {...rest}
       style={[
@@ -74,7 +72,7 @@ const Surface = ({ style, theme, ...rest }: Props) => {
               ? overlay(elevation, colors.surface)
               : colors.surface,
         },
-        elevation && shadow(elevation),
+        elevation ? shadow(elevation) : null,
         style,
       ]}
     />

@@ -65,6 +65,8 @@ exports[`renders menu with content styles 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Array [
@@ -165,6 +167,8 @@ exports[`renders not visible menu 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Array [
@@ -265,6 +269,8 @@ exports[`renders visible menu 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Array [

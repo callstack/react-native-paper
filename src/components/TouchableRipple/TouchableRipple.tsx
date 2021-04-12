@@ -6,6 +6,7 @@ import {
   StyleSheet,
   StyleProp,
   GestureResponderEvent,
+  Platform,
 } from 'react-native';
 import color from 'color';
 import { withTheme } from '../../core/theming';
@@ -208,9 +209,8 @@ const TouchableRipple = ({
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         containers.forEach((container) => {
-          const ripple = container.firstChild;
+          const ripple = container.firstChild as HTMLSpanElement;
 
-          // @ts-ignore
           Object.assign(ripple.style, {
             transitionDuration: '250ms',
             opacity: 0,
@@ -253,6 +253,7 @@ TouchableRipple.supported = true;
 const styles = StyleSheet.create({
   touchable: {
     position: 'relative',
+    ...(Platform.OS === 'web' && { cursor: 'pointer' }),
   },
   borderless: {
     overflow: 'hidden',

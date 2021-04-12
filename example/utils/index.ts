@@ -1,6 +1,6 @@
-type ReducerAction = {
-  payload: string | boolean | IconsColor;
-  type: string;
+type ReducerAction<T extends keyof State> = {
+  payload: State[T];
+  type: T;
 };
 
 type IconsColor = {
@@ -35,10 +35,12 @@ export type State = {
   iconsColor: IconsColor;
 };
 
-export function inputReducer(state: State, action: ReducerAction) {
+export function inputReducer<T extends keyof State>(
+  state: State,
+  action: ReducerAction<T>
+) {
   switch (action.type) {
     case action.type:
-      //@ts-ignore
       state[action.type] = action.payload;
       return { ...state };
     default:

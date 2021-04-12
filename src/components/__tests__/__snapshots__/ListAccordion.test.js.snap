@@ -15,7 +15,9 @@ exports[`renders expanded accordion 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
-        false,
+        Object {
+          "overflow": "hidden",
+        },
         Array [
           Object {
             "padding": 8,
@@ -56,6 +58,8 @@ exports[`renders expanded accordion 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Array [
@@ -174,6 +178,8 @@ exports[`renders expanded accordion 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Array [
@@ -211,7 +217,9 @@ exports[`renders list accordion with children 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
-        false,
+        Object {
+          "overflow": "hidden",
+        },
         Array [
           Object {
             "padding": 8,
@@ -304,6 +312,8 @@ exports[`renders list accordion with children 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Array [
@@ -388,7 +398,9 @@ exports[`renders list accordion with custom title and description styles 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
-        false,
+        Object {
+          "overflow": "hidden",
+        },
         Array [
           Object {
             "padding": 8,
@@ -429,6 +441,8 @@ exports[`renders list accordion with custom title and description styles 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Array [
@@ -456,6 +470,8 @@ exports[`renders list accordion with custom title and description styles 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Array [
@@ -546,7 +562,9 @@ exports[`renders list accordion with left items 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
-        false,
+        Object {
+          "overflow": "hidden",
+        },
         Array [
           Object {
             "padding": 8,
@@ -639,6 +657,8 @@ exports[`renders list accordion with left items 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Array [
@@ -723,7 +743,9 @@ exports[`renders multiline list accordion 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
-        false,
+        Object {
+          "overflow": "hidden",
+        },
         Array [
           Object {
             "padding": 8,
@@ -764,6 +786,8 @@ exports[`renders multiline list accordion 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Array [
@@ -789,6 +813,8 @@ exports[`renders multiline list accordion 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Array [

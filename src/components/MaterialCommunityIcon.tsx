@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Text, Platform } from 'react-native';
+import { StyleSheet, Text, Platform, TextProps, ViewProps } from 'react-native';
 
 export type IconProps = {
   name: string;
@@ -9,7 +9,14 @@ export type IconProps = {
   allowFontScaling?: boolean;
 };
 
-let MaterialCommunityIcons: any;
+let MaterialCommunityIcons: React.ComponentType<
+  TextProps & {
+    name: string;
+    color: string;
+    size: number;
+    pointerEvents?: ViewProps['pointerEvents'];
+  }
+>;
 
 try {
   // Optionally require vector-icons
@@ -19,7 +26,6 @@ try {
   let isErrorLogged = false;
 
   // Fallback component for icons
-  // @ts-ignore
   MaterialCommunityIcons = ({ name, color, size, ...rest }) => {
     /* eslint-disable no-console */
     if (!isErrorLogged) {
@@ -43,7 +49,7 @@ try {
       <Text
         {...rest}
         style={[styles.icon, { color, fontSize: size }]}
-        // @ts-ignore
+        // @ts-expect-error: Text doesn't support this, but it seems to affect TouchableNativeFeedback
         pointerEvents="none"
         selectable={false}
       >

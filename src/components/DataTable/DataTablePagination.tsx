@@ -155,7 +155,7 @@ const DataTablePagination = ({
       {optionsPerPage &&
       itemsPerPage &&
       setItemsPerPage &&
-      layout.width > 400 ? (
+      layout.width > 480 ? (
         <View
           accessibilityLabel="Options Select"
           style={styles.optionsContainer}

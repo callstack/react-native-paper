@@ -296,7 +296,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           accessibilityRole="button"
           accessibilityState={
             Object {
-              "selected": true,
+              "selected": false,
             }
           }
           accessible={true}
@@ -486,7 +486,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           accessibilityRole="button"
           accessibilityState={
             Object {
-              "selected": true,
+              "selected": false,
             }
           }
           accessible={true}
@@ -994,7 +994,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           accessibilityRole="button"
           accessibilityState={
             Object {
-              "selected": true,
+              "selected": false,
             }
           }
           accessible={true}
@@ -1184,7 +1184,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           accessibilityRole="button"
           accessibilityState={
             Object {
-              "selected": true,
+              "selected": false,
             }
           }
           accessible={true}
@@ -1648,7 +1648,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           accessibilityRole="button"
           accessibilityState={
             Object {
-              "selected": true,
+              "selected": false,
             }
           }
           accessible={true}
@@ -1814,7 +1814,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           accessibilityRole="button"
           accessibilityState={
             Object {
-              "selected": true,
+              "selected": false,
             }
           }
           accessible={true}
@@ -2258,7 +2258,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           accessibilityRole="button"
           accessibilityState={
             Object {
-              "selected": true,
+              "selected": false,
             }
           }
           accessible={true}
@@ -2408,7 +2408,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           accessibilityRole="button"
           accessibilityState={
             Object {
-              "selected": true,
+              "selected": false,
             }
           }
           accessible={true}
@@ -2558,7 +2558,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           accessibilityRole="button"
           accessibilityState={
             Object {
-              "selected": true,
+              "selected": false,
             }
           }
           accessible={true}
@@ -2708,7 +2708,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           accessibilityRole="button"
           accessibilityState={
             Object {
-              "selected": true,
+              "selected": false,
             }
           }
           accessible={true}
@@ -3174,6 +3174,8 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
@@ -3212,6 +3214,8 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
@@ -3237,7 +3241,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           accessibilityRole="button"
           accessibilityState={
             Object {
-              "selected": true,
+              "selected": false,
             }
           }
           accessible={true}
@@ -3445,6 +3449,8 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
@@ -3483,6 +3489,8 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
@@ -3508,7 +3516,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           accessibilityRole="button"
           accessibilityState={
             Object {
-              "selected": true,
+              "selected": false,
             }
           }
           accessible={true}
@@ -3716,6 +3724,8 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
@@ -3754,6 +3764,8 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
@@ -4115,6 +4127,8 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
@@ -4140,7 +4154,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           accessibilityRole="button"
           accessibilityState={
             Object {
-              "selected": true,
+              "selected": false,
             }
           }
           accessible={true}
@@ -4348,6 +4362,8 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
@@ -4373,7 +4389,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           accessibilityRole="button"
           accessibilityState={
             Object {
-              "selected": true,
+              "selected": false,
             }
           }
           accessible={true}
@@ -4581,6 +4597,8 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
@@ -4922,6 +4940,8 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
@@ -4960,6 +4980,8 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
@@ -4985,7 +5007,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
           accessibilityRole="button"
           accessibilityState={
             Object {
-              "selected": true,
+              "selected": false,
             }
           }
           accessible={true}
@@ -5193,6 +5215,8 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
@@ -5231,6 +5255,8 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
@@ -5256,7 +5282,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
           accessibilityRole="button"
           accessibilityState={
             Object {
-              "selected": true,
+              "selected": false,
             }
           }
           accessible={true}
@@ -5464,6 +5490,8 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
@@ -5502,6 +5530,8 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
@@ -5863,6 +5893,8 @@ exports[`renders shifting bottom navigation 1`] = `
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
@@ -5888,7 +5920,7 @@ exports[`renders shifting bottom navigation 1`] = `
           accessibilityRole="button"
           accessibilityState={
             Object {
-              "selected": true,
+              "selected": false,
             }
           }
           accessible={true}
@@ -6096,6 +6128,8 @@ exports[`renders shifting bottom navigation 1`] = `
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
@@ -6121,7 +6155,7 @@ exports[`renders shifting bottom navigation 1`] = `
           accessibilityRole="button"
           accessibilityState={
             Object {
-              "selected": true,
+              "selected": false,
             }
           }
           accessible={true}
@@ -6329,6 +6363,8 @@ exports[`renders shifting bottom navigation 1`] = `
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
@@ -6354,7 +6390,7 @@ exports[`renders shifting bottom navigation 1`] = `
           accessibilityRole="button"
           accessibilityState={
             Object {
-              "selected": true,
+              "selected": false,
             }
           }
           accessible={true}
@@ -6562,6 +6598,8 @@ exports[`renders shifting bottom navigation 1`] = `
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
@@ -6587,7 +6625,7 @@ exports[`renders shifting bottom navigation 1`] = `
           accessibilityRole="button"
           accessibilityState={
             Object {
-              "selected": true,
+              "selected": false,
             }
           }
           accessible={true}
@@ -6795,6 +6833,8 @@ exports[`renders shifting bottom navigation 1`] = `
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [

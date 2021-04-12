@@ -97,6 +97,8 @@ exports[`renders DrawerItem with icon 1`] = `
               "color": "#000000",
               "fontFamily": "System",
               "fontWeight": "400",
+            },
+            Object {
               "textAlign": "left",
             },
             Array [
@@ -217,6 +219,8 @@ exports[`renders active DrawerItem 1`] = `
               "color": "#000000",
               "fontFamily": "System",
               "fontWeight": "400",
+            },
+            Object {
               "textAlign": "left",
             },
             Array [
@@ -301,6 +305,8 @@ exports[`renders basic DrawerItem 1`] = `
               "color": "#000000",
               "fontFamily": "System",
               "fontWeight": "400",
+            },
+            Object {
               "textAlign": "left",
             },
             Array [

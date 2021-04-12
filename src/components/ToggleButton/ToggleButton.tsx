@@ -102,7 +102,7 @@ const ToggleButton = ({
 
   return (
     <ToggleButtonGroupContext.Consumer>
-      {(context: { value: string; onValueChange: Function } | null) => {
+      {(context: { value: string | null; onValueChange: Function } | null) => {
         let backgroundColor;
 
         const checked: boolean | null =

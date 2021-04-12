@@ -318,22 +318,22 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
           activeColor={activeColor}
         />
         <View
-          style={{
-            paddingTop: 0,
-            paddingBottom: 0,
-            minHeight,
-          }}
+          style={[
+            styles.labelContainer,
+            {
+              minHeight,
+            },
+          ]}
         >
           <InputLabel parentState={parentState} labelProps={labelProps} />
           {render?.({
             ...rest,
             ref: innerRef,
             onChangeText,
-            // @ts-ignore
             placeholder: label
               ? parentState.placeholder
               : this.props.placeholder,
-            placeholderTextColor: placeholderTextColor || placeholderColor,
+            placeholderTextColor: placeholderTextColor ?? placeholderColor,
             editable: !disabled && editable,
             selectionColor:
               typeof selectionColor === 'undefined'
@@ -360,6 +360,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
                   ? 'right'
                   : 'left',
               },
+              Platform.OS === 'web' && { outline: 'none' },
               adornmentStyleAdjustmentForNativeInput,
             ],
           })}
@@ -420,6 +421,10 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     height: 2,
+  },
+  labelContainer: {
+    paddingTop: 0,
+    paddingBottom: 0,
   },
   input: {
     flexGrow: 1,

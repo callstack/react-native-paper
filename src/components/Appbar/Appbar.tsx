@@ -94,7 +94,9 @@ const Appbar = ({ children, dark, style, theme, ...rest }: Props) => {
     isDark =
       backgroundColor === 'transparent'
         ? false
-        : !color(backgroundColor).isLight();
+        : typeof backgroundColor === 'string'
+        ? !color(backgroundColor).isLight()
+        : true;
   }
 
   let shouldCenterContent = false;
@@ -124,7 +126,6 @@ const Appbar = ({ children, dark, style, theme, ...rest }: Props) => {
   }
   return (
     <Surface
-      //@ts-ignore Types of property 'backgroundColor' are incompatible.
       style={[{ backgroundColor }, styles.appbar, { elevation }, restStyle]}
       {...rest}
     >
@@ -134,12 +135,10 @@ const Appbar = ({ children, dark, style, theme, ...rest }: Props) => {
         .map((child, i) => {
           if (
             !React.isValidElement(child) ||
-            ![
-              AppbarContent,
-              AppbarAction,
-              AppbarBackAction,
-              // @ts-ignore Type 'string' is not assignable to type
-            ].includes(child.type)
+            ![AppbarContent, AppbarAction, AppbarBackAction].includes(
+              // @ts-expect-error: TypeScript complains about the type of type but it doesn't matter
+              child.type
+            )
           ) {
             return child;
           }
