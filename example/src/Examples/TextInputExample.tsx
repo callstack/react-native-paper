@@ -95,7 +95,7 @@ const TextInputExample = () => {
   const _isUsernameValid = (name: string) => /^[a-zA-Z]*$/.test(name);
 
   const {
-    colors: { background, accent },
+    colors: { background, accent, primary },
   } = useTheme();
 
   const inputActionHandler = (type: keyof State, payload: string) =>
@@ -215,6 +215,12 @@ const TextInputExample = () => {
             inputActionHandler('flatDenseText', flatDenseText)
           }
           left={<TextInput.Affix text="#" />}
+          right={
+            <TextInput.Icon
+              name="chevron-up"
+              color={(focused) => (focused ? primary : undefined)}
+            />
+          }
         />
         <TextInput
           style={styles.inputContainerStyle}

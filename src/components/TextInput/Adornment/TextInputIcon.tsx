@@ -7,11 +7,12 @@ import type { IconSource } from '../../Icon';
 
 type Props = $Omit<
   React.ComponentProps<typeof IconButton>,
-  'icon' | 'theme'
+  'icon' | 'theme' | 'color'
 > & {
   name: IconSource;
   onPress?: () => void;
   forceTextInputFocus?: boolean;
+  color?: ((isTextInputFocused: boolean) => string | undefined) | string;
   style?: StyleProp<ViewStyle>;
   theme?: ReactNativePaper.Theme;
 };
@@ -54,6 +55,7 @@ const TextInputIcon = ({
   name,
   onPress,
   forceTextInputFocus,
+  color,
   ...rest
 }: Props) => {
   const { style, isTextInputFocused, forceFocus } = React.useContext(
@@ -74,6 +76,7 @@ const TextInputIcon = ({
         style={styles.iconButton}
         size={ICON_SIZE}
         onPress={onPressWithFocusControl}
+        color={typeof color === 'function' ? color(isTextInputFocused) : color}
         {...rest}
       />
     </View>
