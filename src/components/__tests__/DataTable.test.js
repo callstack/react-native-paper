@@ -1,6 +1,6 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import { render, fireEvent } from 'react-native-testing-library';
+import { render } from 'react-native-testing-library';
 import DataTable from '../DataTable/DataTable.tsx';
 
 it('renders data table header', () => {
@@ -76,14 +76,14 @@ it('renders data table pagination', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders data table pagination with label', () => {
+it('renders data table pagination with currentPaginationlabel', () => {
   const tree = renderer
     .create(
       <DataTable.Pagination
         page={3}
         numberOfPages={15}
         onPageChange={() => {}}
-        label="11-20 of 150"
+        currentPaginationlabel="11-20 of 150"
       />
     )
     .toJSON();
@@ -97,8 +97,8 @@ it('renders data table pagination with fast-forward buttons', () => {
       page={3}
       numberOfPages={15}
       onPageChange={() => {}}
-      label="11-20 of 150"
-      showFastPagination
+      currentPaginationlabel="11-20 of 150"
+      showFastPaginationControls
     />
   );
 
@@ -113,8 +113,8 @@ it('renders data table pagination without options select', () => {
       page={3}
       numberOfPages={15}
       onPageChange={() => {}}
-      label="11-20 of 150"
-      showFastPagination
+      currentPaginationlabel="11-20 of 150"
+      showFastPaginationControls
     />
   );
 
@@ -122,38 +122,22 @@ it('renders data table pagination without options select', () => {
 });
 
 it('renders data table pagination with options select', () => {
-  jest.mock(
-    '../../utils/useLayout',
-    () =>
-      function useLayout() {
-        return [{ width: 600 }, jest.fn];
-      }
-  );
-
   const { getByA11yLabel, toJSON } = render(
     <DataTable.Pagination
       page={3}
       numberOfPages={15}
       onPageChange={() => {}}
-      label="11-20 of 150"
-      showFastPagination
-      optionsPerPage={[2, 4, 6]}
-      itemsPerPage={2}
-      setItemsPerPage={() => {}}
-      optionsLabel={'Rows per page'}
+      currentPaginationlabel="11-20 of 150"
+      showFastPaginationControls
+      numberOfItemsPerPageList={[2, 4, 6]}
+      numberOfItemsPerPage={2}
+      onItemsPerPageChange={() => {}}
+      selectPageDropdownLabel={'Rows per page'}
     />
   );
 
-  fireEvent(getByA11yLabel('pagination-container'), 'layout', {
-    nativeEvent: {
-      layout: {
-        width: 500,
-      },
-    },
-  });
-
   expect(() => getByA11yLabel('Options Select')).not.toThrow();
-  expect(() => getByA11yLabel('optionsLabel')).not.toThrow();
+  expect(() => getByA11yLabel('selectPageDropdownLabel')).not.toThrow();
 
   expect(toJSON()).toMatchSnapshot();
 });

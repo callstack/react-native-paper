@@ -50,8 +50,10 @@ const DataTableExample = () => {
       fat: 0,
     },
   ]);
-  const [optionsPerPage] = React.useState([2, 3, 4, 200]);
-  const [itemsPerPage, setItemsPerPage] = React.useState(optionsPerPage[0]);
+  const [numberOfItemsPerPageList] = React.useState([2, 3, 4, 200]);
+  const [itemsPerPage, onItemsPerPageChange] = React.useState(
+    numberOfItemsPerPageList[0]
+  );
   const {
     colors: { background },
   } = useTheme();
@@ -100,12 +102,14 @@ const DataTableExample = () => {
             page={page}
             numberOfPages={Math.ceil(sortedItems.length / itemsPerPage)}
             onPageChange={(page) => setPage(page)}
-            label={`${from + 1}-${to} of ${sortedItems.length}`}
-            optionsPerPage={optionsPerPage}
-            itemsPerPage={itemsPerPage}
-            setItemsPerPage={setItemsPerPage}
-            showFastPagination
-            optionsLabel={'Rows per page'}
+            currentPaginationlabel={`${from + 1}-${to} of ${
+              sortedItems.length
+            }`}
+            numberOfItemsPerPageList={numberOfItemsPerPageList}
+            numberOfItemsPerPage={itemsPerPage}
+            onItemsPerPageChange={onItemsPerPageChange}
+            showFastPaginationControls
+            selectPageDropdownLabel={'Rows per page'}
           />
         </DataTable>
       </Card>

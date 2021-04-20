@@ -13,7 +13,6 @@ import { withTheme } from '../../core/theming';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Menu from '../Menu/Menu';
 import Button from '../Button';
-import useLayout from '../../utils/useLayout';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -25,33 +24,33 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   numberOfPages: number;
   /**
-   * Label text for oprions select to display
+   * Label text for select page dropdown to display.
    */
-  optionsLabel?: React.ReactNode;
+  selectPageDropdownLabel?: React.ReactNode;
   /**
-   * AccessibilityLabel for optionsLabel
+   * AccessibilityLabel for `selectPageDropdownLabel`.
    */
-  optionsAccessibilityLabel?: string;
+  selectPageDropdownAccessibilityLabel?: string;
   /**
-   * Options for a number of rows per page to choose from
+   * Options for a number of rows per page to choose from.
    */
-  optionsPerPage?: Array<number>;
+  numberOfItemsPerPageList?: Array<number>;
   /**
-   * The current number of rows per page
+   * The current number of rows per page.
    */
-  itemsPerPage?: number;
+  numberOfItemsPerPage?: number;
   /**
-   * The function to set the number of rows per page
+   * The function to set the number of rows per page.
    */
-  setItemsPerPage?: (itemsPerPage: number) => void;
+  onItemsPerPageChange?: (numberOfItemsPerPage: number) => void;
   /**
-   * Whether to show fast forward and fast rewind buttons in pagination. False by default
+   * Whether to show fast forward and fast rewind buttons in pagination. False by default.
    */
-  showFastPagination?: boolean;
+  showFastPaginationControls?: boolean;
   /**
-   * Label text to display
+   * Label text to display which indicates current pagination.
    */
-  label?: React.ReactNode;
+  currentPaginationlabel?: React.ReactNode;
   /**
    * Function to execute on page change.
    */
@@ -78,7 +77,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * import * as React from 'react';
  * import { DataTable } from 'react-native-paper';
  *
- * const optionsPerPage = [2, 3, 4];
+ * const numberOfItemsPerPageList = [2, 3, 4];
  *
  * const items = [
  *   {
@@ -97,26 +96,26 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  *
  * const MyComponent = () => {
  *   const [page, setPage] = React.useState(0);
- *   const [itemsPerPage, setItemsPerPage] = React.useState(optionsPerPage[0]);
- *   const from = page * itemsPerPage;
- *   const to = Math.min((page + 1) * itemsPerPage, items.length);
+ *   const [numberOfItemsPerPage, onItemsPerPageChange] = React.useState(numberOfItemsPerPageList[0]);
+ *   const from = page * numberOfItemsPerPage;
+ *   const to = Math.min((page + 1) * numberOfItemsPerPage, items.length);
  *
  *   React.useEffect(() => {
  *      setPage(0);
- *   }, [itemsPerPage]);
+ *   }, [numberOfItemsPerPage]);
  *
  *   return (
  *     <DataTable>
  *       <DataTable.Pagination
  *         page={page}
- *         numberOfPages={Math.ceil(items.length / itemsPerPage)}
+ *         numberOfPages={Math.ceil(items.length / numberOfItemsPerPage)}
  *         onPageChange={page => setPage(page)}
- *         label={`${from + 1}-${to} of ${items.length}`}
- *         showFastPagination
- *         optionsPerPage={optionsPerPage}
- *         itemsPerPage={itemsPerPage}
- *         setItemsPerPage={setItemsPerPage}
- *         optionsLabel={'Rows per page'}
+ *         currentPaginationlabel={`${from + 1}-${to} of ${items.length}`}
+ *         showFastPaginationControls
+ *         numberOfItemsPerPageList={numberOfItemsPerPageList}
+ *         numberOfItemsPerPage={numberOfItemsPerPage}
+ *         onItemsPerPageChange={onItemsPerPageChange}
+ *         selectPageDropdownLabel={'Rows per page'}
  *       />
  *     </DataTable>
  *   );
@@ -127,87 +126,91 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  */
 
 const DataTablePagination = ({
-  label,
+  currentPaginationlabel,
   page,
   numberOfPages,
   onPageChange,
   style,
   theme,
-  showFastPagination = false,
-  optionsPerPage,
-  itemsPerPage,
-  setItemsPerPage,
-  optionsLabel,
-  optionsAccessibilityLabel,
+  showFastPaginationControls = false,
+  numberOfItemsPerPageList,
+  numberOfItemsPerPage,
+  onItemsPerPageChange,
+  selectPageDropdownLabel,
+  selectPageDropdownAccessibilityLabel,
   ...rest
 }: Props) => {
   const [showSelect, toggleSelect] = React.useState(false);
   const labelColor = color(theme.colors.text).alpha(0.6).rgb().string();
-  const [layout, onLayout] = useLayout();
 
   return (
     <View
       {...rest}
       style={[styles.container, style]}
-      onLayout={onLayout}
       accessibilityLabel="pagination-container"
     >
-      {optionsPerPage &&
-      itemsPerPage &&
-      setItemsPerPage &&
-      layout.width > 480 ? (
-        <View
-          accessibilityLabel="Options Select"
-          style={styles.optionsContainer}
-        >
-          <Text
-            style={[styles.label, { color: labelColor }]}
-            numberOfLines={3}
-            accessibilityLabel={optionsAccessibilityLabel || 'optionsLabel'}
-          >
-            {optionsLabel}
-          </Text>
-          <Menu
-            visible={showSelect}
-            onDismiss={() => toggleSelect(!showSelect)}
-            anchor={
-              <Button
-                mode="outlined"
-                onPress={() => toggleSelect(true)}
-                style={styles.button}
-                icon={'menu-down'}
-                contentStyle={styles.contentStyle}
+      {numberOfItemsPerPageList &&
+        numberOfItemsPerPage &&
+        onItemsPerPageChange && (
+          <View style={styles.nonIconsContainer}>
+            <View
+              accessibilityLabel="Options Select"
+              style={styles.optionsContainer}
+            >
+              <Text
+                style={[styles.label, { color: labelColor }]}
+                numberOfLines={3}
+                accessibilityLabel={
+                  selectPageDropdownAccessibilityLabel ||
+                  'selectPageDropdownLabel'
+                }
               >
-                {`${itemsPerPage}`}
-              </Button>
-            }
-          >
-            {optionsPerPage.map((option) => (
-              <Menu.Item
-                key={option}
-                titleStyle={{
-                  color:
-                    option === itemsPerPage ? theme.colors.primary : undefined,
-                }}
-                onPress={() => {
-                  setItemsPerPage?.(option);
-                  toggleSelect(false);
-                }}
-                title={option}
-              />
-            ))}
-          </Menu>
-        </View>
-      ) : null}
-      <Text
-        style={[styles.label, { color: labelColor }]}
-        numberOfLines={3}
-        accessibilityLabel="label"
-      >
-        {label}
-      </Text>
-      <View style={styles.iconsConrainer}>
-        {showFastPagination ? (
+                {selectPageDropdownLabel}
+              </Text>
+              <Menu
+                visible={showSelect}
+                onDismiss={() => toggleSelect(!showSelect)}
+                anchor={
+                  <Button
+                    mode="outlined"
+                    onPress={() => toggleSelect(true)}
+                    style={styles.button}
+                    icon={'menu-down'}
+                    contentStyle={styles.contentStyle}
+                  >
+                    {`${numberOfItemsPerPage}`}
+                  </Button>
+                }
+              >
+                {numberOfItemsPerPageList.map((option) => (
+                  <Menu.Item
+                    key={option}
+                    titleStyle={
+                      option === numberOfItemsPerPage && {
+                        color: theme.colors.primary,
+                      }
+                    }
+                    onPress={() => {
+                      onItemsPerPageChange?.(option);
+                      toggleSelect(false);
+                    }}
+                    title={option}
+                  />
+                ))}
+              </Menu>
+            </View>
+            <Text
+              style={[styles.label, { color: labelColor }]}
+              numberOfLines={3}
+              accessibilityLabel="label"
+            >
+              {currentPaginationlabel}
+            </Text>
+          </View>
+        )}
+
+      <View style={styles.iconsContainer}>
+        {showFastPaginationControls ? (
           <IconButton
             icon={({ size, color }) => (
               <MaterialCommunityIcon
@@ -251,7 +254,7 @@ const DataTablePagination = ({
           onPress={() => onPageChange(page + 1)}
           accessibilityLabel="chevron-right"
         />
-        {showFastPagination ? (
+        {showFastPaginationControls ? (
           <IconButton
             icon={({ size, color }) => (
               <MaterialCommunityIcon
@@ -280,6 +283,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingLeft: 16,
+    flexWrap: 'wrap',
+  },
+  nonIconsContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 6,
   },
   optionsContainer: {
     flexDirection: 'row',
@@ -293,7 +302,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginRight: 16,
   },
-  iconsConrainer: {
+  iconsContainer: {
     flexDirection: 'row',
   },
   contentStyle: {
