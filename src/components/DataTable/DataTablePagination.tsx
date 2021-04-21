@@ -77,7 +77,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  *     <DataTable>
  *       <DataTable.Pagination
  *         page={page}
- *         numberOfPages={Math.floor(items.length / itemsPerPage)}
+ *         numberOfPages={Math.ceil(items.length / itemsPerPage)}
  *         onPageChange={page => setPage(page)}
  *         label={`${from + 1}-${to} of ${items.length}`}
  *       />
