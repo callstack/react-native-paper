@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     top: 6,
     left: 10,
     width: 8,
-    height: 2,
+    bottom: 2,
   },
   outlinedLabel: {
     position: 'absolute',
