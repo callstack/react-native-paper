@@ -60,6 +60,10 @@ type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    */
   iconColor?: string;
   /**
+   * Custom color for ripple, default will be derived from theme
+   */
+  rippleColor?: string;
+  /**
    * Custom icon for clear button, default will be icon close
    */
   clearIcon?: IconSource;
@@ -107,6 +111,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
       clearIcon,
       icon,
       iconColor: customIconColor,
+      rippleColor: customRippleColor,
       inputStyle,
       onIconPress,
       placeholder,
@@ -157,7 +162,8 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
     const iconColor =
       customIconColor ||
       (dark ? textColor : color(textColor).alpha(0.54).rgb().string());
-    const rippleColor = color(textColor).alpha(0.32).rgb().string();
+    const rippleColor =
+      customIconColor || color(textColor).alpha(0.32).rgb().string();
 
     return (
       <Surface
