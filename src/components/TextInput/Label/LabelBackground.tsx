@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 
 import AnimatedText from '../../Typography/AnimatedText';
+import { useTheme } from '../../../core/theming';
 
 import type { LabelBackgroundProps } from '../types';
 
@@ -22,6 +23,7 @@ const LabelBackground = ({
     inputRange: [0, 1],
     outputRange: [hasFocus ? 1 : 0, 0],
   });
+  const { roundness } = useTheme();
 
   const labelTranslationX = {
     transform: [
@@ -45,6 +47,7 @@ const LabelBackground = ({
             {
               backgroundColor,
               opacity,
+              bottom: Math.max(roundness, 2),
             },
             labelTranslationX,
           ]}
@@ -86,7 +89,6 @@ const styles = StyleSheet.create({
     top: 6,
     left: 10,
     width: 8,
-    height: 2,
   },
   outlinedLabel: {
     position: 'absolute',

@@ -29,6 +29,10 @@ type Props = {
    */
   left?: (props: { color: string }) => React.ReactNode;
   /**
+   * Callback which returns a React element to display on the right side.
+   */
+  right?: (props: { isExpanded: boolean }) => React.ReactNode;
+  /**
    * Whether the accordion is expanded
    * If this prop is provided, the accordion will behave as a "controlled component".
    * You'll need to update this prop when you want to toggle the component or on `onPress`.
@@ -127,6 +131,7 @@ type Props = {
  */
 const ListAccordion = ({
   left,
+  right,
   title,
   description,
   children,
@@ -185,6 +190,7 @@ const ListAccordion = ({
         accessibilityComponentType="button"
         accessibilityRole="button"
         testID={testID}
+        borderless
       >
         <View style={styles.row} pointerEvents="none">
           {left
@@ -225,12 +231,18 @@ const ListAccordion = ({
           <View
             style={[styles.item, description ? styles.multiline : undefined]}
           >
-            <MaterialCommunityIcon
-              name={isExpanded ? 'chevron-up' : 'chevron-down'}
-              color={titleColor}
-              size={24}
-              direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
-            />
+            {right ? (
+              right({
+                isExpanded: isExpanded,
+              })
+            ) : (
+              <MaterialCommunityIcon
+                name={isExpanded ? 'chevron-up' : 'chevron-down'}
+                color={titleColor}
+                size={24}
+                direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+              />
+            )}
           </View>
         </View>
       </TouchableRipple>
