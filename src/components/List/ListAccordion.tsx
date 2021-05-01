@@ -7,6 +7,7 @@ import {
   StyleProp,
   TextStyle,
   I18nManager,
+  GestureResponderEvent,
 } from 'react-native';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -45,7 +46,7 @@ type Props = {
   /**
    * Function to execute on long press.
    */
-  onLongPress?: () => void;
+  onLongPress?: (e: GestureResponderEvent) => void;
   /**
    * Content of the section.
    */
