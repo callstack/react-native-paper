@@ -62,7 +62,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
       selectionColor,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       underlineColor,
-      outlineColor,
+      outlineColor: customOutlineColor,
       dense,
       style,
       theme,
@@ -99,25 +99,22 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
     } = (StyleSheet.flatten(style) || {}) as TextStyle;
     const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
 
-    let inputTextColor,
-      activeColor,
-      customOutlineColor,
-      placeholderColor,
-      errorColor;
+    let inputTextColor, activeColor, outlineColor, placeholderColor, errorColor;
 
     if (disabled) {
+      const isTransparent = color(customOutlineColor).alpha() === 0;
+
       inputTextColor = activeColor = color(colors.text)
         .alpha(0.54)
         .rgb()
         .string();
       placeholderColor = colors.disabled;
-      customOutlineColor =
-        outlineColor === 'transparent' ? outlineColor : colors.disabled;
+      outlineColor = isTransparent ? customOutlineColor : colors.disabled;
     } else {
       inputTextColor = colors.text;
       activeColor = error ? colors.error : colors.primary;
       placeholderColor = colors.placeholder;
-      customOutlineColor = outlineColor || colors.placeholder;
+      outlineColor = customOutlineColor || colors.placeholder;
       errorColor = colors.error;
     }
 
@@ -295,7 +292,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
             theme={theme}
             hasActiveOutline={hasActiveOutline}
             activeColor={activeColor}
-            outlineColor={customOutlineColor}
+            outlineColor={outlineColor}
             backgroundColor={backgroundColor}
           />
           <View
