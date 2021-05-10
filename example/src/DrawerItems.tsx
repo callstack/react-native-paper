@@ -8,6 +8,7 @@ import {
   Colors,
   useTheme,
 } from 'react-native-paper';
+import * as Updates from 'expo-updates';
 
 type Props = {
   toggleTheme: () => void;
@@ -30,6 +31,11 @@ const DrawerItems = ({ toggleTheme, toggleRTL, isRTL, isDarkTheme }: Props) => {
   const _setDrawerItem = (index: number) => setDrawerItemIndex(index);
 
   const { colors } = useTheme();
+
+  const _handleToggleRTL = () => {
+    toggleRTL();
+    Updates.reloadAsync();
+  };
 
   return (
     <View style={[styles.drawerContent, { backgroundColor: colors.surface }]}>
@@ -58,7 +64,7 @@ const DrawerItems = ({ toggleTheme, toggleRTL, isRTL, isDarkTheme }: Props) => {
             </View>
           </View>
         </TouchableRipple>
-        <TouchableRipple onPress={toggleRTL}>
+        <TouchableRipple onPress={_handleToggleRTL}>
           <View style={styles.preference}>
             <Text>RTL</Text>
             <View pointerEvents="none">

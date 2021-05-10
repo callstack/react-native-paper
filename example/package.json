@@ -23,6 +23,7 @@
     "expo-keep-awake": "~8.4.0",
     "expo-splash-screen": "~0.8.1",
     "expo-status-bar": "~1.0.3",
+    "expo-updates": "^0.5.4",
     "file-loader": "^4.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
