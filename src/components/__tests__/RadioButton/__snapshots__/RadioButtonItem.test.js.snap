@@ -51,6 +51,7 @@ exports[`can render the Android radio button on different platforms 1`] = `
             },
             Object {
               "color": "#000000",
+              "textAlign": "left",
             },
             undefined,
           ],
@@ -156,6 +157,7 @@ exports[`can render the iOS radio button on different platforms 1`] = `
             },
             Object {
               "color": "#000000",
+              "textAlign": "left",
             },
             undefined,
           ],
@@ -294,6 +296,7 @@ exports[`renders unchecked 1`] = `
             },
             Object {
               "color": "#000000",
+              "textAlign": "left",
             },
             undefined,
           ],
