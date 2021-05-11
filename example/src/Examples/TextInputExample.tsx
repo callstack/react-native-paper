@@ -265,6 +265,7 @@ const TextInputExample = () => {
           onChangeText={(outlinedText) =>
             inputActionHandler('outlinedText', outlinedText)
           }
+          theme={{ colors: { primary: 'green' } }}
           left={
             <TextInput.Icon
               name="heart"
