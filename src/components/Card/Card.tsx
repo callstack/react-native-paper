@@ -136,8 +136,8 @@ const Card = ({
         disabled={!(onPress || onLongPress)}
         onLongPress={onLongPress}
         onPress={onPress}
-        onPressIn={onPress ? handlePressIn : undefined}
-        onPressOut={onPress ? handlePressOut : undefined}
+        onPressIn={onPress || onLongPress ? handlePressIn : undefined}
+        onPressOut={onPress || onLongPress ? handlePressOut : undefined}
         testID={testID}
         accessible={accessible}
       >
