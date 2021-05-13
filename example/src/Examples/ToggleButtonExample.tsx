@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View, StyleSheet, ImageBackground } from 'react-native';
-import { ToggleButton, List, useTheme } from 'react-native-paper';
+import { ToggleButton, List } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 type StatusState = 'checked' | 'unchecked';
 
@@ -9,12 +10,8 @@ const ToggleButtonExample = () => {
   const [fruit, setFruit] = React.useState<string>('watermelon');
   const [status, setStatus] = React.useState<StatusState>('checked');
 
-  const {
-    colors: { background },
-  } = useTheme();
-
   return (
-    <View style={[styles.container, { backgroundColor: background }]}>
+    <ScreenWrapper>
       <List.Section title="Single">
         <View style={styles.padding}>
           <ToggleButton
@@ -92,16 +89,13 @@ const ToggleButtonExample = () => {
           </ToggleButton.Group>
         </View>
       </List.Section>
-    </View>
+    </ScreenWrapper>
   );
 };
 
 ToggleButtonExample.title = 'Toggle Button';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   padding: {
     paddingHorizontal: 16,
   },

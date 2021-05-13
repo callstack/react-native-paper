@@ -1,20 +1,11 @@
 import * as React from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
-import {
-  Paragraph,
-  Switch,
-  Colors,
-  TouchableRipple,
-  useTheme,
-} from 'react-native-paper';
+import { Paragraph, Switch, Colors, TouchableRipple } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 const SwitchExample = () => {
   const [valueNormal, setNormalValue] = React.useState<boolean>(true);
   const [valueCustom, setCustomValue] = React.useState<boolean>(true);
-
-  const {
-    colors: { background },
-  } = useTheme();
 
   const switchValueNormalLabel = `switch ${
     valueNormal === true ? 'on' : 'off'
@@ -24,14 +15,7 @@ const SwitchExample = () => {
   }`;
 
   return Platform.OS === 'android' ? (
-    <View
-      style={[
-        styles.container,
-        {
-          backgroundColor: background,
-        },
-      ]}
-    >
+    <ScreenWrapper style={styles.container}>
       <TouchableRipple onPress={() => setNormalValue(!valueNormal)}>
         <View style={styles.row}>
           <Paragraph>Normal {switchValueNormalLabel}</Paragraph>
@@ -56,16 +40,9 @@ const SwitchExample = () => {
         <Paragraph>Switch off (disabled)</Paragraph>
         <Switch disabled />
       </View>
-    </View>
+    </ScreenWrapper>
   ) : (
-    <View
-      style={[
-        styles.container,
-        {
-          backgroundColor: background,
-        },
-      ]}
-    >
+    <ScreenWrapper style={styles.container}>
       <View style={styles.row}>
         <Paragraph>Normal {switchValueNormalLabel}</Paragraph>
         <Switch
@@ -89,7 +66,7 @@ const SwitchExample = () => {
         <Paragraph>Switch off (disabled)</Paragraph>
         <Switch value={false} disabled />
       </View>
-    </View>
+    </ScreenWrapper>
   );
 };
 
@@ -97,8 +74,6 @@ SwitchExample.title = 'Switch';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: Colors.white,
     paddingVertical: 8,
   },
   row: {

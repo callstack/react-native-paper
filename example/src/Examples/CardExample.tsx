@@ -1,24 +1,17 @@
 import * as React from 'react';
-import { Alert, ScrollView, StyleSheet } from 'react-native';
+import { Alert, StyleSheet } from 'react-native';
 import {
   Avatar,
   Paragraph,
   Card,
   Button,
   IconButton,
-  useTheme,
 } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 const CardExample = () => {
-  const {
-    colors: { background },
-  } = useTheme();
-
   return (
-    <ScrollView
-      style={[styles.container, { backgroundColor: background }]}
-      contentContainerStyle={styles.content}
-    >
+    <ScreenWrapper contentContainerStyle={styles.content}>
       <Card style={styles.card}>
         <Card.Cover source={require('../../assets/images/wrecked-ship.jpg')} />
         <Card.Title title="Abandoned Ship" />
@@ -98,16 +91,13 @@ const CardExample = () => {
           </Paragraph>
         </Card.Content>
       </Card>
-    </ScrollView>
+    </ScreenWrapper>
   );
 };
 
 CardExample.title = 'Card';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   content: {
     padding: 4,
   },

@@ -7,17 +7,14 @@ import {
   Paragraph,
   Switch,
   Colors,
-  useTheme,
 } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 const BadgeExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);
-  const {
-    colors: { background },
-  } = useTheme();
 
   return (
-    <View style={[styles.container, { backgroundColor: background }]}>
+    <ScreenWrapper>
       <View style={[styles.row, styles.item]}>
         <Paragraph style={styles.label}>Show badges</Paragraph>
         <Switch
@@ -56,16 +53,13 @@ const BadgeExample = () => {
           </View>
         </View>
       </List.Section>
-    </View>
+    </ScreenWrapper>
   );
 };
 
 BadgeExample.title = 'Badge';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   row: {
     flexDirection: 'row',
     flexWrap: 'wrap',

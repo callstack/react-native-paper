@@ -5,26 +5,16 @@ import {
   Checkbox,
   Colors,
   TouchableRipple,
-  useTheme,
 } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 const CheckboxExample = () => {
   const [checkedNormal, setCheckedNormal] = React.useState<boolean>(true);
   const [checkedCustom, setCheckedCustom] = React.useState<boolean>(true);
   const [indeterminate, setIndeterminate] = React.useState<boolean>(true);
-  const {
-    colors: { background },
-  } = useTheme();
 
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          backgroundColor: background,
-        },
-      ]}
-    >
+    <ScreenWrapper style={styles.container}>
       <TouchableRipple onPress={() => setCheckedNormal(!checkedNormal)}>
         <View style={styles.row}>
           <Paragraph>Normal</Paragraph>
@@ -67,7 +57,7 @@ const CheckboxExample = () => {
         <Paragraph>Indeterminate (Disabled)</Paragraph>
         <Checkbox status="indeterminate" disabled />
       </View>
-    </View>
+    </ScreenWrapper>
   );
 };
 
@@ -75,11 +65,8 @@ CheckboxExample.title = 'Checkbox';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: Colors.white,
     paddingVertical: 8,
   },
-
   row: {
     flexDirection: 'row',
     alignItems: 'center',

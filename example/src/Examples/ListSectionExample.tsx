@@ -1,14 +1,10 @@
 import * as React from 'react';
-import { ScrollView, StyleSheet, Image, View } from 'react-native';
-import { List, Text, Chip, Divider, useTheme } from 'react-native-paper';
-
+import { StyleSheet, Image, View } from 'react-native';
+import { List, Text, Chip, Divider } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 const ListSectionExample = () => {
-  const {
-    colors: { background },
-  } = useTheme();
-
   return (
-    <ScrollView style={[styles.container, { backgroundColor: background }]}>
+    <ScreenWrapper>
       <List.Section>
         <List.Subheader>Single line</List.Subheader>
         <List.Item
@@ -111,7 +107,7 @@ const ListSectionExample = () => {
           )}
         />
       </List.Section>
-    </ScrollView>
+    </ScreenWrapper>
   );
 };
 

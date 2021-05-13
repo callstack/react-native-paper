@@ -1,16 +1,13 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Snackbar, Colors, Button, useTheme } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
+import { Snackbar, Button } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 const SnackbarExample = () => {
   const [visible, setVisible] = React.useState<boolean>(false);
 
-  const {
-    colors: { background },
-  } = useTheme();
-
   return (
-    <View style={[styles.container, { backgroundColor: background }]}>
+    <ScreenWrapper contentContainerStyle={styles.container}>
       <Button mode="outlined" onPress={() => setVisible(!visible)}>
         {visible ? 'Hide' : 'Show'}
       </Button>
@@ -27,7 +24,7 @@ const SnackbarExample = () => {
       >
         Hey there! I&apos;m a Snackbar.
       </Snackbar>
-    </View>
+    </ScreenWrapper>
   );
 };
 
@@ -36,7 +33,6 @@ SnackbarExample.title = 'Snackbar';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.grey200,
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Colors, Button, useTheme } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
+import { Button } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 import {
   DialogWithCustomColors,
   DialogWithLoadingIndicator,
@@ -21,12 +22,8 @@ const DialogExample = () => {
 
   const _getVisible = (name: string) => !!visible[name];
 
-  const {
-    colors: { background },
-  } = useTheme();
-
   return (
-    <View style={[styles.container, { backgroundColor: background }]}>
+    <ScreenWrapper style={styles.container}>
       <Button
         mode="outlined"
         onPress={_toggleDialog('dialog1')}
@@ -82,7 +79,7 @@ const DialogExample = () => {
         visible={_getVisible('dialog5')}
         close={_toggleDialog('dialog5')}
       />
-    </View>
+    </ScreenWrapper>
   );
 };
 
@@ -90,8 +87,6 @@ DialogExample.title = 'Dialog';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: Colors.grey200,
     padding: 12,
   },
   button: {

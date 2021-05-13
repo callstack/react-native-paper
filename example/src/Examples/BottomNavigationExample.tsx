@@ -1,13 +1,7 @@
 import * as React from 'react';
-import {
-  ScrollView,
-  View,
-  Image,
-  Dimensions,
-  StyleSheet,
-  Platform,
-} from 'react-native';
+import { View, Image, Dimensions, StyleSheet, Platform } from 'react-native';
 import { BottomNavigation } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 type RoutesState = Array<{
   key: string;
@@ -27,13 +21,13 @@ const PhotoGallery = ({ route }: Route) => {
   );
 
   return (
-    <ScrollView contentContainerStyle={styles.content}>
+    <ScreenWrapper contentContainerStyle={styles.content}>
       {PHOTOS.map((uri) => (
         <View key={uri} style={styles.item}>
           <Image source={{ uri }} style={styles.photo} />
         </View>
       ))}
-    </ScrollView>
+    </ScreenWrapper>
   );
 };
 
