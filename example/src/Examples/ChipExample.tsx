@@ -224,9 +224,6 @@ const ChipExample = () => {
 ChipExample.title = 'Chip';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   row: {
     flexDirection: 'row',
     flexWrap: 'wrap',
