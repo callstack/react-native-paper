@@ -204,15 +204,16 @@ const DataTablePagination = ({
                 ))}
               </Menu>
             </View>
-            <Text
-              style={[styles.label, { color: labelColor }]}
-              numberOfLines={3}
-              accessibilityLabel={accessibilityLabel || 'label'}
-            >
-              {label}
-            </Text>
           </View>
         )}
+
+      <Text
+        style={[styles.label, { color: labelColor }]}
+        numberOfLines={3}
+        accessibilityLabel={accessibilityLabel || 'label'}
+      >
+        {label}
+      </Text>
 
       <View style={styles.iconsContainer}>
         {showFastPaginationControls ? (

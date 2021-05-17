@@ -189,6 +189,31 @@ exports[`renders data table pagination 1`] = `
     ]
   }
 >
+  <Text
+    accessibilityLabel="label"
+    numberOfLines={3}
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "System",
+          "fontWeight": "400",
+        },
+        Object {
+          "textAlign": "left",
+        },
+        Array [
+          Object {
+            "fontSize": 12,
+            "marginRight": 16,
+          },
+          Object {
+            "color": "rgba(0, 0, 0, 0.6)",
+          },
+        ],
+      ]
+    }
+  />
   <View
     style={
       Object {
@@ -390,6 +415,33 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
     ]
   }
 >
+  <Text
+    accessibilityLabel="label"
+    numberOfLines={3}
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "System",
+          "fontWeight": "400",
+        },
+        Object {
+          "textAlign": "left",
+        },
+        Array [
+          Object {
+            "fontSize": 12,
+            "marginRight": 16,
+          },
+          Object {
+            "color": "rgba(0, 0, 0, 0.6)",
+          },
+        ],
+      ]
+    }
+  >
+    11-20 of 150
+  </Text>
   <View
     style={
       Object {
@@ -765,6 +817,33 @@ exports[`renders data table pagination with label 1`] = `
     ]
   }
 >
+  <Text
+    accessibilityLabel="label"
+    numberOfLines={3}
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "System",
+          "fontWeight": "400",
+        },
+        Object {
+          "textAlign": "left",
+        },
+        Array [
+          Object {
+            "fontSize": 12,
+            "marginRight": 16,
+          },
+          Object {
+            "color": "rgba(0, 0, 0, 0.6)",
+          },
+        ],
+      ]
+    }
+  >
+    11-20 of 150
+  </Text>
   <View
     style={
       Object {
@@ -1160,34 +1239,34 @@ exports[`renders data table pagination with options select 1`] = `
         </View>
       </View>
     </View>
-    <Text
-      accessibilityLabel="label"
-      numberOfLines={3}
-      style={
+  </View>
+  <Text
+    accessibilityLabel="label"
+    numberOfLines={3}
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "System",
+          "fontWeight": "400",
+        },
+        Object {
+          "textAlign": "left",
+        },
         Array [
           Object {
-            "color": "#000000",
-            "fontFamily": "System",
-            "fontWeight": "400",
+            "fontSize": 12,
+            "marginRight": 16,
           },
           Object {
-            "textAlign": "left",
+            "color": "rgba(0, 0, 0, 0.6)",
           },
-          Array [
-            Object {
-              "fontSize": 12,
-              "marginRight": 16,
-            },
-            Object {
-              "color": "rgba(0, 0, 0, 0.6)",
-            },
-          ],
-        ]
-      }
-    >
-      11-20 of 150
-    </Text>
-  </View>
+        ],
+      ]
+    }
+  >
+    11-20 of 150
+  </Text>
   <View
     style={
       Object {
