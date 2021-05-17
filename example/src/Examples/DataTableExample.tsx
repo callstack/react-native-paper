@@ -102,9 +102,7 @@ const DataTableExample = () => {
             page={page}
             numberOfPages={Math.ceil(sortedItems.length / itemsPerPage)}
             onPageChange={(page) => setPage(page)}
-            currentPaginationlabel={`${from + 1}-${to} of ${
-              sortedItems.length
-            }`}
+            label={`${from + 1}-${to} of ${sortedItems.length}`}
             numberOfItemsPerPageList={numberOfItemsPerPageList}
             numberOfItemsPerPage={itemsPerPage}
             onItemsPerPageChange={onItemsPerPageChange}

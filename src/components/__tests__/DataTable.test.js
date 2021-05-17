@@ -76,14 +76,14 @@ it('renders data table pagination', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders data table pagination with currentPaginationlabel', () => {
+it('renders data table pagination with label', () => {
   const tree = renderer
     .create(
       <DataTable.Pagination
         page={3}
         numberOfPages={15}
         onPageChange={() => {}}
-        currentPaginationlabel="11-20 of 150"
+        label="11-20 of 150"
       />
     )
     .toJSON();
@@ -97,7 +97,7 @@ it('renders data table pagination with fast-forward buttons', () => {
       page={3}
       numberOfPages={15}
       onPageChange={() => {}}
-      currentPaginationlabel="11-20 of 150"
+      label="11-20 of 150"
       showFastPaginationControls
     />
   );
@@ -113,7 +113,7 @@ it('renders data table pagination without options select', () => {
       page={3}
       numberOfPages={15}
       onPageChange={() => {}}
-      currentPaginationlabel="11-20 of 150"
+      label="11-20 of 150"
       showFastPaginationControls
     />
   );
@@ -127,7 +127,7 @@ it('renders data table pagination with options select', () => {
       page={3}
       numberOfPages={15}
       onPageChange={() => {}}
-      currentPaginationlabel="11-20 of 150"
+      label="11-20 of 150"
       showFastPaginationControls
       numberOfItemsPerPageList={[2, 4, 6]}
       numberOfItemsPerPage={2}

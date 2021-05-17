@@ -50,7 +50,11 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Label text to display which indicates current pagination.
    */
-  currentPaginationlabel?: React.ReactNode;
+  label?: React.ReactNode;
+  /**
+   * AccessibilityLabel for `label`.
+   */
+  accessibilityLabel?: string;
   /**
    * Function to execute on page change.
    */
@@ -110,7 +114,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  *         page={page}
  *         numberOfPages={Math.ceil(items.length / numberOfItemsPerPage)}
  *         onPageChange={page => setPage(page)}
- *         currentPaginationlabel={`${from + 1}-${to} of ${items.length}`}
+ *         label={`${from + 1}-${to} of ${items.length}`}
  *         showFastPaginationControls
  *         numberOfItemsPerPageList={numberOfItemsPerPageList}
  *         numberOfItemsPerPage={numberOfItemsPerPage}
@@ -126,7 +130,8 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  */
 
 const DataTablePagination = ({
-  currentPaginationlabel,
+  label,
+  accessibilityLabel,
   page,
   numberOfPages,
   onPageChange,
@@ -202,9 +207,9 @@ const DataTablePagination = ({
             <Text
               style={[styles.label, { color: labelColor }]}
               numberOfLines={3}
-              accessibilityLabel="label"
+              accessibilityLabel={accessibilityLabel || 'label'}
             >
-              {currentPaginationlabel}
+              {label}
             </Text>
           </View>
         )}
