@@ -760,7 +760,7 @@ const BottomNavigation = ({
                   ? ['button', 'selected']
                   : 'button',
                 accessibilityComponentType: 'button',
-                accessibilityRole: 'tab',
+                accessibilityRole: Platform.OS === 'ios' ? 'button' : 'tab',
                 accessibilityState: { selected: true },
                 style: styles.item,
                 children: (

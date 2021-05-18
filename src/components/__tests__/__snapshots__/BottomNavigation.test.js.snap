@@ -104,7 +104,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         }
       >
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -294,7 +294,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -484,7 +484,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -803,7 +803,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           }
         />
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -993,7 +993,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -1183,7 +1183,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -1482,7 +1482,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         }
       >
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -1648,7 +1648,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -1814,7 +1814,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -2109,7 +2109,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           }
         />
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -2259,7 +2259,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -2409,7 +2409,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -2559,7 +2559,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -2709,7 +2709,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -2968,7 +2968,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         }
       >
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -3243,7 +3243,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           </View>
         </View>
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -3518,7 +3518,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           </View>
         </View>
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -3922,7 +3922,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           }
         />
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -4157,7 +4157,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           </View>
         </View>
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -4392,7 +4392,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           </View>
         </View>
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -4736,7 +4736,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
         }
       >
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -5011,7 +5011,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -5286,7 +5286,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -5690,7 +5690,7 @@ exports[`renders shifting bottom navigation 1`] = `
           }
         />
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -5925,7 +5925,7 @@ exports[`renders shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -6160,7 +6160,7 @@ exports[`renders shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -6395,7 +6395,7 @@ exports[`renders shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
@@ -6630,7 +6630,7 @@ exports[`renders shifting bottom navigation 1`] = `
           </View>
         </View>
         <View
-          accessibilityRole="tab"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "selected": true,
