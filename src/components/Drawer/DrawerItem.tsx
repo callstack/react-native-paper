@@ -73,7 +73,7 @@ const DrawerItem = ({
   onPress,
   accessibilityLabel,
   right,
-  iconRight=false
+  iconRight=false,
   ...rest
 }: Props) => {
   const { colors, roundness } = theme;
