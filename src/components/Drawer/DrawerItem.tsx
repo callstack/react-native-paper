@@ -73,7 +73,7 @@ const DrawerItem = ({
   onPress,
   accessibilityLabel,
   right,
-  iconRight=false,
+  iconRight = false,
   ...rest
 }: Props) => {
   const { colors, roundness } = theme;
@@ -84,9 +84,7 @@ const DrawerItem = ({
     ? colors.primary
     : color(colors.text).alpha(0.68).rgb().string();
   const font = theme.fonts.medium;
-  const labelMargin = icon  ? 32 : 0;
-  
-
+  const labelMargin = icon ? 32 : 0;
   return (
     <View
       {...rest}
@@ -121,8 +119,8 @@ const DrawerItem = ({
                 {
                   color: contentColor,
                   ...font,
-                  marginLeft:!iconRight? labelMargin:0,
-                  marginRight:iconRight?labelMargin:0,
+                  marginLeft: !iconRight ? labelMargin : 0,
+                  marginRight: iconRight ? labelMargin : 0,
                 },
               ]}
             >
