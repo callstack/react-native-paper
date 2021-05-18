@@ -3,6 +3,11 @@
 exports[`renders colored indicator 1`] = `
 <View
   accessibilityRole="progressbar"
+  accessibilityState={
+    Object {
+      "busy": true,
+    }
+  }
   accessible={true}
   style={
     Array [
@@ -188,6 +193,11 @@ exports[`renders colored indicator 1`] = `
 exports[`renders hidden indicator 1`] = `
 <View
   accessibilityRole="progressbar"
+  accessibilityState={
+    Object {
+      "busy": false,
+    }
+  }
   accessible={true}
   style={
     Array [
@@ -373,6 +383,11 @@ exports[`renders hidden indicator 1`] = `
 exports[`renders indicator 1`] = `
 <View
   accessibilityRole="progressbar"
+  accessibilityState={
+    Object {
+      "busy": true,
+    }
+  }
   accessible={true}
   style={
     Array [
@@ -558,6 +573,11 @@ exports[`renders indicator 1`] = `
 exports[`renders large indicator 1`] = `
 <View
   accessibilityRole="progressbar"
+  accessibilityState={
+    Object {
+      "busy": true,
+    }
+  }
   accessible={true}
   style={
     Array [

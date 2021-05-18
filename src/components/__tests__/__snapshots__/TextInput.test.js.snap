@@ -164,6 +164,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
             "textAlign": "left",
             "textAlignVertical": "center",
           },
+          false,
           Array [
             Object {},
           ],
@@ -340,6 +341,7 @@ exports[`correctly applies textAlign center 1`] = `
             "textAlign": "center",
             "textAlignVertical": "center",
           },
+          false,
           Array [
             Object {},
           ],
@@ -516,6 +518,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "textAlign": "left",
             "textAlignVertical": "center",
           },
+          false,
           Object {
             "marginLeft": 0,
             "marginRight": 36,
@@ -834,6 +837,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "textAlign": "left",
             "textAlignVertical": "center",
           },
+          false,
           Object {
             "marginLeft": 36,
             "marginRight": 0,

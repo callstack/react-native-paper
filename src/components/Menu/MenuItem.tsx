@@ -1,17 +1,17 @@
 import color from 'color';
 import * as React from 'react';
 import {
-  View,
+  StyleProp,
   StyleSheet,
   TextStyle,
+  View,
   ViewStyle,
-  StyleProp,
 } from 'react-native';
 import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import { withTheme } from '../../core/theming';
 import { black, white } from '../../styles/colors';
+import { useTheme } from '../../core/theming';
 
 type Props = {
   /**
@@ -33,7 +33,6 @@ type Props = {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
   style?: StyleProp<ViewStyle>;
   contentStyle?: StyleProp<ViewStyle>;
   titleStyle?: StyleProp<TextStyle>;
@@ -41,6 +40,10 @@ type Props = {
    * TestID used for testing purposes
    */
   testID?: string;
+  /**
+   * Accessibility label for the Touchable. This is read by the screen reader when the user taps the component.
+   */
+  accessibilityLabel?: string;
 };
 
 /**
@@ -71,73 +74,71 @@ type Props = {
  * export default MyComponent;
  * ```
  */
+function MenuItem({
+  icon,
+  title,
+  disabled,
+  onPress,
+  style,
+  contentStyle,
+  testID,
+  titleStyle,
+  accessibilityLabel,
+}: Props) {
+  const theme = useTheme();
 
-class MenuItem extends React.Component<Props> {
-  static displayName = 'Menu.Item';
+  const disabledColor = color(theme.dark ? white : black)
+    .alpha(0.32)
+    .rgb()
+    .string();
 
-  render() {
-    const {
-      icon,
-      title,
-      disabled,
-      onPress,
-      theme,
-      style,
-      contentStyle,
-      testID,
-      titleStyle,
-    } = this.props;
+  const titleColor = disabled
+    ? disabledColor
+    : color(theme.colors.text).alpha(0.87).rgb().string();
 
-    const disabledColor = color(theme.dark ? white : black)
-      .alpha(0.32)
-      .rgb()
-      .string();
+  const iconColor = disabled
+    ? disabledColor
+    : color(theme.colors.text).alpha(0.54).rgb().string();
 
-    const titleColor = disabled
-      ? disabledColor
-      : color(theme.colors.text).alpha(0.87).rgb().string();
-
-    const iconColor = disabled
-      ? disabledColor
-      : color(theme.colors.text).alpha(0.54).rgb().string();
-
-    return (
-      <TouchableRipple
-        style={[styles.container, style]}
-        onPress={onPress}
-        disabled={disabled}
-        testID={testID}
-        accessibilityRole="menuitem"
-        accessibilityState={{ disabled }}
-      >
-        <View style={styles.row}>
-          {icon ? (
-            <View style={[styles.item, styles.icon]} pointerEvents="box-none">
-              <Icon source={icon} size={24} color={iconColor} />
-            </View>
-          ) : null}
-          <View
-            style={[
-              styles.item,
-              styles.content,
-              icon ? styles.widthWithIcon : null,
-              contentStyle,
-            ]}
-            pointerEvents="none"
-          >
-            <Text
-              selectable={false}
-              numberOfLines={1}
-              style={[styles.title, { color: titleColor }, titleStyle]}
-            >
-              {title}
-            </Text>
+  return (
+    <TouchableRipple
+      style={[styles.container, style]}
+      onPress={onPress}
+      disabled={disabled}
+      testID={testID}
+      accessibilityLabel={accessibilityLabel}
+      accessibilityRole="menuitem"
+      accessibilityState={{ disabled }}
+    >
+      <View style={styles.row}>
+        {icon ? (
+          <View style={[styles.item, styles.icon]} pointerEvents="box-none">
+            <Icon source={icon} size={24} color={iconColor} />
           </View>
+        ) : null}
+        <View
+          style={[
+            styles.item,
+            styles.content,
+            icon ? styles.widthWithIcon : null,
+            contentStyle,
+          ]}
+          pointerEvents="none"
+        >
+          <Text
+            selectable={false}
+            numberOfLines={1}
+            style={[styles.title, { color: titleColor }, titleStyle]}
+          >
+            {title}
+          </Text>
         </View>
-      </TouchableRipple>
-    );
-  }
+      </View>
+    </TouchableRipple>
+  );
 }
+
+MenuItem.displayName = 'Menu.Item';
 
 const minWidth = 112;
 const maxWidth = 280;
@@ -173,7 +174,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(MenuItem);
+export default MenuItem;
 
 // @component-docs ignore-next-line
 export { MenuItem };
