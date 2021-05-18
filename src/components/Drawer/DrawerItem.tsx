@@ -31,6 +31,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    * Callback which returns a React element to display on the right side. For instance a Badge.
    */
   right?: (props: { color: string }) => React.ReactNode;
+  iconRight?: boolean;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -72,6 +73,7 @@ const DrawerItem = ({
   onPress,
   accessibilityLabel,
   right,
+  iconRight=false
   ...rest
 }: Props) => {
   const { colors, roundness } = theme;
@@ -82,7 +84,8 @@ const DrawerItem = ({
     ? colors.primary
     : color(colors.text).alpha(0.68).rgb().string();
   const font = theme.fonts.medium;
-  const labelMargin = icon ? 32 : 0;
+  const labelMargin = icon  ? 32 : 0;
+  
 
   return (
     <View
@@ -107,7 +110,7 @@ const DrawerItem = ({
       >
         <View style={styles.wrapper}>
           <View style={styles.content}>
-            {icon ? (
+            {!iconRight && icon ? (
               <Icon source={icon} size={24} color={contentColor} />
             ) : null}
             <Text
@@ -118,12 +121,16 @@ const DrawerItem = ({
                 {
                   color: contentColor,
                   ...font,
-                  marginLeft: labelMargin,
+                  marginLeft:!iconRight? labelMargin:0,
+                  marginRight:iconRight?labelMargin:0,
                 },
               ]}
             >
               {label}
             </Text>
+            {iconRight && icon ? (
+              <Icon source={icon} size={24} color={contentColor} />
+            ) : null}
           </View>
           {right?.({ color: contentColor })}
         </View>
