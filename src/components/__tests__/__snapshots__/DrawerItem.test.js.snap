@@ -118,6 +118,7 @@ exports[`renders DrawerItem with icon 1`] = `
                   "fontFamily": "System",
                   "fontWeight": "500",
                   "marginLeft": 32,
+                  "marginRight": 0,
                 },
               ],
             ]
@@ -249,6 +250,7 @@ exports[`renders active DrawerItem 1`] = `
                   "fontFamily": "System",
                   "fontWeight": "500",
                   "marginLeft": 32,
+                  "marginRight": 0,
                 },
               ],
             ]
@@ -344,6 +346,7 @@ exports[`renders basic DrawerItem 1`] = `
                   "fontFamily": "System",
                   "fontWeight": "500",
                   "marginLeft": 0,
+                  "marginRight": 0,
                 },
               ],
             ]
