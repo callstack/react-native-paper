@@ -143,8 +143,9 @@ const Button = ({
   ...rest
 }: Props) => {
   const { current: elevation } = React.useRef<Animated.Value>(
-    new Animated.Value(mode === 'contained' ? 2 : 0)
+    new Animated.Value(0)
   );
+  elevation.setValue(mode === 'contained' ? 2 : 0);
 
   const handlePressIn = () => {
     if (mode === 'contained') {
