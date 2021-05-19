@@ -57,7 +57,7 @@ type Props = {
    */
   testID?: string;
   /**
-   * Checkbox control position. Default is `leading`.
+   * Checkbox control position. Default is `trailing`.
    */
   position?: 'leading' | 'trailing';
   /**
