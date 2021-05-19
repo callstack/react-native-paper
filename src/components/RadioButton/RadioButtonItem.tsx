@@ -64,6 +64,8 @@ export type Props = {
    * testID to be used on tests.
    */
   testID?: string;
+  
+  labelRight?: boolean;
   /**
    * Whether `<RadioButton.Android />` or `<RadioButton.IOS />` should be used.
    * Left undefined `<RadioButton />` will be used.
@@ -114,6 +116,7 @@ const RadioButtonItem = ({
   accessibilityLabel,
   testID,
   mode,
+  labelRight = false,
 }: Props) => {
   const radioButtonProps = { value, disabled, status, color, uncheckedColor };
   let radioButton: any;
@@ -145,10 +148,11 @@ const RadioButtonItem = ({
             testID={testID}
           >
             <View style={[styles.container, style]} pointerEvents="none">
+              {labelRight && radioButton}
               <Text style={[styles.label, { color: colors.text }, labelStyle]}>
                 {label}
               </Text>
-              {radioButton}
+              {!labelRight && radioButton}
             </View>
           </TouchableRipple>
         );
