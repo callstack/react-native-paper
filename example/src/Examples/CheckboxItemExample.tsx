@@ -6,7 +6,9 @@ const CheckboxExample = () => {
   const [checkedDefault, setCheckedDefault] = React.useState<boolean>(true);
   const [checkedAndroid, setCheckedAndroid] = React.useState<boolean>(true);
   const [checkedIOS, setCheckedIOS] = React.useState<boolean>(true);
-  const [checkedLeadingControl, setCheckedLeadingControl] = React.useState<boolean>(true);
+  const [checkedLeadingControl, setCheckedLeadingControl] = React.useState<
+    boolean
+  >(true);
   const {
     colors: { background },
   } = useTheme();

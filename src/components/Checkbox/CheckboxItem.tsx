@@ -58,7 +58,7 @@ type Props = {
   testID?: string;
   /**
    * Checkbox control position. Default is `leading`.
-  */
+   */
   position?: 'leading' | 'trailing';
   /**
    * Whether `<Checkbox.Android />` or `<Checkbox.IOS />` should be used.

@@ -32,4 +32,3 @@ it('can render the Android checkbox on different platforms', () => {
 
   expect(tree).toMatchSnapshot();
 });
-
