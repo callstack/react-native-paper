@@ -41,6 +41,7 @@ it('can render leading checkbox with position control', () => {
         label="Default with leading control"
         status={'unchecked'}
         position="leading"
+        mode='ios'
       />
     )
     .toJSON();
