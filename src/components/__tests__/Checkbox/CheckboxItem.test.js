@@ -40,7 +40,6 @@ it('can render leading checkbox with position control', () => {
       <Checkbox.Item
         label="Default with leading control"
         status={'unchecked'}
-        value="iOS"
         position="leading"
       />
     )
