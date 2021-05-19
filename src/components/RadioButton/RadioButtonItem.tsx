@@ -64,7 +64,9 @@ export type Props = {
    * testID to be used on tests.
    */
   testID?: string;
-  
+  /**
+   * to make the label appear right
+   */
   labelRight?: boolean;
   /**
    * Whether `<RadioButton.Android />` or `<RadioButton.IOS />` should be used.
