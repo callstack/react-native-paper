@@ -45,6 +45,5 @@ it('can render leading checkbox control', () => {
       />
     )
     .toJSON();
-  console.log(tree);
   expect(tree).toMatchSnapshot();
 });
