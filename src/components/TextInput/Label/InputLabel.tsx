@@ -79,7 +79,7 @@ const InputLabel = (props: InputLabelProps) => {
         StyleSheet.absoluteFill,
         {
           opacity:
-            // Hide the label in minimized state until we measure it's width
+            // Hide the label in minimized state until we measure its width
             parentState.value || parentState.focused
               ? parentState.labelLayout.measured
                 ? 1

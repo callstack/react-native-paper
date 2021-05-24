@@ -402,7 +402,7 @@ const Underline = ({
         styles.underline,
         {
           backgroundColor,
-          // Underlines is thinner when input is not focused
+          // Underline is thinner when input is not focused
           transform: [{ scaleY: parentState.focused ? 1 : 0.5 }],
         },
       ]}

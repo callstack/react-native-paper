@@ -131,7 +131,7 @@ type Props = {
    * ```
    *
    * Specifying the components this way is easier and takes care of implementing a `shouldComponentUpdate` method.
-   * Each component will receive the current route and a `jumpTo` method as it's props.
+   * Each component will receive the current route and a `jumpTo` method as its props.
    * The `jumpTo` method can be used to navigate to other tabs programmatically:
    *
    * ```js
@@ -377,7 +377,7 @@ const BottomNavigation = ({
   const indexAnim = useAnimatedValue(navigationState.index);
 
   /**
-   * Animation for the background color ripple, used to determine it's scale and opacity.
+   * Animation for the background color ripple, used to determine its scale and opacity.
    */
   const rippleAnim = useAnimatedValue(MIN_RIPPLE_SCALE);
 
