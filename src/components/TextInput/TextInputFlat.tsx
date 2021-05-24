@@ -39,13 +39,20 @@ import {
 } from './Adornment/TextInputAdornment';
 import { AdornmentSide, AdornmentType, InputMode } from './Adornment/enums';
 
-const MINIMIZED_LABEL_Y_OFFSET = -18;
-
-const LABEL_PADDING_TOP = 30;
-const LABEL_PADDING_TOP_DENSE = 24;
 const MIN_HEIGHT = 64;
 const MIN_DENSE_HEIGHT_WL = 52;
 const MIN_DENSE_HEIGHT = 40;
+
+const MINIMIZED_LABEL_LOGICAL_MARGIN_TOP = 12;
+const MINIMIZED_LABEL_LOGICAL_MARGIN_BOTTOM = 6;
+
+const MINIMIZED_LABEL_RESERVED_HEIGHT_DENSE =
+  MINIMIZED_LABEL_LOGICAL_MARGIN_TOP + MINIMIZED_LABEL_FONT_SIZE;
+const MINIMIZED_LABEL_RESERVED_HEIGHT =
+  MINIMIZED_LABEL_RESERVED_HEIGHT_DENSE + MINIMIZED_LABEL_LOGICAL_MARGIN_BOTTOM;
+
+const MINIMIZED_LABEL_BASE_Y_OFFSET_FROM_TOP =
+  MINIMIZED_LABEL_LOGICAL_MARGIN_TOP + MINIMIZED_LABEL_FONT_SIZE / 2;
 
 class TextInputFlat extends React.Component<ChildTextInputProps> {
   static defaultProps = {
@@ -180,8 +187,8 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
 
     const minInputHeight = dense
       ? (label ? MIN_DENSE_HEIGHT_WL : MIN_DENSE_HEIGHT) -
-        LABEL_PADDING_TOP_DENSE
-      : MIN_HEIGHT - LABEL_PADDING_TOP;
+        MINIMIZED_LABEL_RESERVED_HEIGHT_DENSE
+      : MIN_HEIGHT - MINIMIZED_LABEL_RESERVED_HEIGHT;
 
     const inputHeight = calculateInputHeight(
       labelHeight,
@@ -224,7 +231,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
     });
 
     const baseLabelTranslateY =
-      -labelHalfHeight - (topPosition + MINIMIZED_LABEL_Y_OFFSET);
+      -topPosition - labelHalfHeight + MINIMIZED_LABEL_BASE_Y_OFFSET_FROM_TOP;
 
     const placeholderOpacity = hasActiveOutline
       ? interpolatePlaceholder(parentState.labeled, hasActiveOutline)
@@ -238,7 +245,11 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
 
     const flatHeight =
       inputHeight +
-      (!height ? (dense ? LABEL_PADDING_TOP_DENSE : LABEL_PADDING_TOP) : 0);
+      (height
+        ? 0
+        : dense
+        ? MINIMIZED_LABEL_RESERVED_HEIGHT_DENSE
+        : MINIMIZED_LABEL_RESERVED_HEIGHT);
 
     const iconTopPosition = (flatHeight - ADORNMENT_SIZE) / 2;
 
@@ -432,11 +443,11 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   inputFlat: {
-    paddingTop: 24,
+    paddingTop: 12 + MINIMIZED_LABEL_LOGICAL_MARGIN_TOP,
     paddingBottom: 4,
   },
   inputFlatDense: {
-    paddingTop: 22,
+    paddingTop: 10 + MINIMIZED_LABEL_LOGICAL_MARGIN_TOP,
     paddingBottom: 2,
   },
 });
