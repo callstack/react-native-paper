@@ -199,7 +199,13 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
     const topPosition = calculateLabelTopPosition(
       labelHeight,
       inputHeight,
-      multiline && height ? 0 : !height ? minInputHeight / 2 : 0
+      height
+        ? 0
+        : (dense
+            ? MINIMIZED_LABEL_RESERVED_HEIGHT_DENSE
+            : MINIMIZED_LABEL_RESERVED_HEIGHT) /
+            2 +
+            2
     );
 
     if (height && typeof height !== 'number') {
