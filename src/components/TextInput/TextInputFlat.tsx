@@ -28,7 +28,6 @@ import {
   calculateInputHeight,
   calculatePadding,
   adjustPaddingFlat,
-  Padding,
   interpolatePlaceholder,
   calculateFlatAffixTopPosition,
   calculateFlatInputHorizontalPadding,
@@ -43,16 +42,8 @@ const MIN_HEIGHT = 64;
 const MIN_DENSE_HEIGHT_WL = 52;
 const MIN_DENSE_HEIGHT = 40;
 
-const MINIMIZED_LABEL_LOGICAL_MARGIN_TOP = 12;
+const MINIMIZED_LABEL_DEFAULT_LOGICAL_MARGIN_BOTTOM = 12;
 const MINIMIZED_LABEL_LOGICAL_MARGIN_BOTTOM = 6;
-
-const MINIMIZED_LABEL_RESERVED_HEIGHT_DENSE =
-  MINIMIZED_LABEL_LOGICAL_MARGIN_TOP + MINIMIZED_LABEL_FONT_SIZE;
-const MINIMIZED_LABEL_RESERVED_HEIGHT =
-  MINIMIZED_LABEL_RESERVED_HEIGHT_DENSE + MINIMIZED_LABEL_LOGICAL_MARGIN_BOTTOM;
-
-const MINIMIZED_LABEL_BASE_Y_OFFSET_FROM_TOP =
-  MINIMIZED_LABEL_LOGICAL_MARGIN_TOP + MINIMIZED_LABEL_FONT_SIZE / 2;
 
 class TextInputFlat extends React.Component<ChildTextInputProps> {
   static defaultProps = {
@@ -99,11 +90,17 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
       fontSize: fontSizeStyle,
       fontWeight,
       height,
+      paddingTop: paddingTopStyle,
       paddingHorizontal,
       textAlign,
       ...viewStyle
     } = (StyleSheet.flatten(style) || {}) as TextStyle;
     const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
+
+    const minimizedLabelLogicalMarginTop =
+      typeof paddingTopStyle === 'number'
+        ? paddingTopStyle
+        : MINIMIZED_LABEL_DEFAULT_LOGICAL_MARGIN_BOTTOM;
 
     const isPaddingHorizontalPassed =
       paddingHorizontal !== undefined && typeof paddingHorizontal === 'number';
@@ -185,10 +182,14 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
         (labelHalfWidth - (labelScale * labelWidth) / 2) +
       (1 - labelScale) * (I18nManager.isRTL ? -1 : 1) * paddingLeft;
 
-    const minInputHeight = dense
-      ? (label ? MIN_DENSE_HEIGHT_WL : MIN_DENSE_HEIGHT) -
-        MINIMIZED_LABEL_RESERVED_HEIGHT_DENSE
-      : MIN_HEIGHT - MINIMIZED_LABEL_RESERVED_HEIGHT;
+    const minimizeLabelReservedHeight =
+      minimizedLabelLogicalMarginTop +
+      MINIMIZED_LABEL_FONT_SIZE +
+      (dense ? 0 : MINIMIZED_LABEL_LOGICAL_MARGIN_BOTTOM);
+
+    const minInputHeight =
+      (dense ? (label ? MIN_DENSE_HEIGHT_WL : MIN_DENSE_HEIGHT) : MIN_HEIGHT) -
+      minimizeLabelReservedHeight;
 
     const inputHeight = calculateInputHeight(
       labelHeight,
@@ -199,13 +200,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
     const topPosition = calculateLabelTopPosition(
       labelHeight,
       inputHeight,
-      height
-        ? 0
-        : (dense
-            ? MINIMIZED_LABEL_RESERVED_HEIGHT_DENSE
-            : MINIMIZED_LABEL_RESERVED_HEIGHT) /
-            2 +
-            2
+      height ? 0 : minimizeLabelReservedHeight / 2 + 2
     );
 
     if (height && typeof height !== 'number') {
@@ -224,9 +219,15 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
       label,
       scale: fontScale,
       isAndroid: Platform.OS === 'android',
-      styles: StyleSheet.flatten(
-        dense ? styles.inputFlatDense : styles.inputFlat
-      ) as Padding,
+      styles: dense
+        ? {
+            paddingTop: 10 + minimizedLabelLogicalMarginTop,
+            paddingBottom: 2,
+          }
+        : {
+            paddingTop: 12 + minimizedLabelLogicalMarginTop,
+            paddingBottom: 4,
+          },
     };
 
     const pad = calculatePadding(paddingSettings);
@@ -237,7 +238,10 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
     });
 
     const baseLabelTranslateY =
-      -topPosition - labelHalfHeight + MINIMIZED_LABEL_BASE_Y_OFFSET_FROM_TOP;
+      -topPosition -
+      labelHalfHeight +
+      minimizedLabelLogicalMarginTop +
+      MINIMIZED_LABEL_FONT_SIZE / 2;
 
     const placeholderOpacity = hasActiveOutline
       ? interpolatePlaceholder(parentState.labeled, hasActiveOutline)
@@ -249,13 +253,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
       height ||
       (dense ? (label ? MIN_DENSE_HEIGHT_WL : MIN_DENSE_HEIGHT) : MIN_HEIGHT);
 
-    const flatHeight =
-      inputHeight +
-      (height
-        ? 0
-        : dense
-        ? MINIMIZED_LABEL_RESERVED_HEIGHT_DENSE
-        : MINIMIZED_LABEL_RESERVED_HEIGHT);
+    const flatHeight = inputHeight + (height ? 0 : minimizeLabelReservedHeight);
 
     const iconTopPosition = (flatHeight - ADORNMENT_SIZE) / 2;
 
@@ -447,13 +445,5 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     margin: 0,
     zIndex: 1,
-  },
-  inputFlat: {
-    paddingTop: 12 + MINIMIZED_LABEL_LOGICAL_MARGIN_TOP,
-    paddingBottom: 4,
-  },
-  inputFlatDense: {
-    paddingTop: 10 + MINIMIZED_LABEL_LOGICAL_MARGIN_TOP,
-    paddingBottom: 2,
   },
 });

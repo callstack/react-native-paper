@@ -85,3 +85,21 @@ it('correctly applies textAlign center', () => {
 
   expect(toJSON()).toMatchSnapshot();
 });
+
+it('uses paddingTop to position minimized label', () => {
+  const { toJSON } = render(
+    <TextInput
+      label="Flat input"
+      placeholder="Type something"
+      value={'Some test value'}
+      dense
+      style={{
+        height: 40,
+        paddingTop: 4,
+        paddingHorizontal: 4,
+      }}
+    />
+  );
+
+  expect(toJSON()).toMatchSnapshot();
+});

@@ -440,6 +440,18 @@ const TextInputExample = () => {
             }}
           />
         </View>
+        <View style={styles.inputContainerStyle}>
+          <TextInput
+            mode="flat"
+            label="Very dense flat input"
+            dense
+            style={{
+              height: 40,
+              paddingTop: 4,
+              paddingHorizontal: 4,
+            }}
+          />
+        </View>
       </ScrollView>
     </TextInputAvoidingView>
   );
