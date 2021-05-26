@@ -29,7 +29,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  *
  * <div class="screenshots">
  *   <figure>
- *     <img src="screenshots/data-table.png" />
+ *     <img class="large" src="screenshots/data-table.png" />
  *     <figcaption>Data table</figcaption>
  *   </figure>
  * </div>
