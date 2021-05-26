@@ -9,7 +9,7 @@ import {
 import color from 'color';
 import IconButton from '../IconButton';
 import Text from '../Typography/Text';
-import { withTheme } from '../../core/theming';
+import { withTheme, useTheme } from '../../core/theming';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Menu from '../Menu/Menu';
 import Button from '../Button';
@@ -129,6 +129,135 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * ```
  */
 
+type PaginationControlsProps = {
+  showFastPaginationControls?: boolean;
+  onPageChange: (page: number) => void;
+  page: number;
+  numberOfPages: number;
+};
+
+const PaginationControls = ({
+  showFastPaginationControls,
+  onPageChange,
+  page,
+  numberOfPages,
+}: PaginationControlsProps) => {
+  const { colors } = useTheme();
+  return (
+    <>
+      {showFastPaginationControls ? (
+        <IconButton
+          icon={({ size, color }) => (
+            <MaterialCommunityIcon
+              name="page-first"
+              color={color}
+              size={size}
+              direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+            />
+          )}
+          color={colors.text}
+          disabled={page === 0}
+          onPress={() => onPageChange(0)}
+          accessibilityLabel="page-first"
+        />
+      ) : null}
+      <IconButton
+        icon={({ size, color }) => (
+          <MaterialCommunityIcon
+            name="chevron-left"
+            color={color}
+            size={size}
+            direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+          />
+        )}
+        color={colors.text}
+        disabled={page === 0}
+        onPress={() => onPageChange(page - 1)}
+        accessibilityLabel="chevron-left"
+      />
+      <IconButton
+        icon={({ size, color }) => (
+          <MaterialCommunityIcon
+            name="chevron-right"
+            color={color}
+            size={size}
+            direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+          />
+        )}
+        color={colors.text}
+        disabled={numberOfPages === 0 || page === numberOfPages - 1}
+        onPress={() => onPageChange(page + 1)}
+        accessibilityLabel="chevron-right"
+      />
+      {showFastPaginationControls ? (
+        <IconButton
+          icon={({ size, color }) => (
+            <MaterialCommunityIcon
+              name="page-last"
+              color={color}
+              size={size}
+              direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+            />
+          )}
+          color={colors.text}
+          disabled={numberOfPages === 0 || page === numberOfPages - 1}
+          onPress={() => onPageChange(numberOfPages - 1)}
+          accessibilityLabel="page-last"
+        />
+      ) : null}
+    </>
+  );
+};
+
+type PaginationDropdownProps = {
+  numberOfItemsPerPageList: Array<number>;
+  numberOfItemsPerPage: number;
+  onItemsPerPageChange: (numberOfItemsPerPage: number) => void;
+};
+
+const PaginationDropdown = ({
+  numberOfItemsPerPageList,
+  numberOfItemsPerPage,
+  onItemsPerPageChange,
+}: PaginationDropdownProps) => {
+  const { colors } = useTheme();
+  const [showSelect, toggleSelect] = React.useState<boolean>(false);
+
+  return (
+    <Menu
+      visible={showSelect}
+      onDismiss={() => toggleSelect(!showSelect)}
+      anchor={
+        <Button
+          mode="outlined"
+          onPress={() => toggleSelect(true)}
+          style={styles.button}
+          icon="menu-down"
+          contentStyle={styles.contentStyle}
+        >
+          {`${numberOfItemsPerPage}`}
+        </Button>
+      }
+    >
+      {numberOfItemsPerPageList.map((option) => (
+        <Menu.Item
+          key={option}
+          titleStyle={
+            option === numberOfItemsPerPage && {
+              color: colors.primary,
+            }
+          }
+          onPress={() => {
+            onItemsPerPageChange(option);
+            toggleSelect(false);
+          }}
+          title={option}
+        />
+      ))}
+    </Menu>
+  );
+};
+
 const DataTablePagination = ({
   label,
   accessibilityLabel,
@@ -145,7 +274,6 @@ const DataTablePagination = ({
   selectPageDropdownAccessibilityLabel,
   ...rest
 }: Props) => {
-  const [showSelect, toggleSelect] = React.useState(false);
   const labelColor = color(theme.colors.text).alpha(0.6).rgb().string();
 
   return (
@@ -157,56 +285,27 @@ const DataTablePagination = ({
       {numberOfItemsPerPageList &&
         numberOfItemsPerPage &&
         onItemsPerPageChange && (
-          <View style={styles.nonIconsContainer}>
-            <View
-              accessibilityLabel="Options Select"
-              style={styles.optionsContainer}
+          <View
+            accessibilityLabel="Options Select"
+            style={styles.optionsContainer}
+          >
+            <Text
+              style={[styles.label, { color: labelColor }]}
+              numberOfLines={3}
+              accessibilityLabel={
+                selectPageDropdownAccessibilityLabel ||
+                'selectPageDropdownLabel'
+              }
             >
-              <Text
-                style={[styles.label, { color: labelColor }]}
-                numberOfLines={3}
-                accessibilityLabel={
-                  selectPageDropdownAccessibilityLabel ||
-                  'selectPageDropdownLabel'
-                }
-              >
-                {selectPageDropdownLabel}
-              </Text>
-              <Menu
-                visible={showSelect}
-                onDismiss={() => toggleSelect(!showSelect)}
-                anchor={
-                  <Button
-                    mode="outlined"
-                    onPress={() => toggleSelect(true)}
-                    style={styles.button}
-                    icon={'menu-down'}
-                    contentStyle={styles.contentStyle}
-                  >
-                    {`${numberOfItemsPerPage}`}
-                  </Button>
-                }
-              >
-                {numberOfItemsPerPageList.map((option) => (
-                  <Menu.Item
-                    key={option}
-                    titleStyle={
-                      option === numberOfItemsPerPage && {
-                        color: theme.colors.primary,
-                      }
-                    }
-                    onPress={() => {
-                      onItemsPerPageChange?.(option);
-                      toggleSelect(false);
-                    }}
-                    title={option}
-                  />
-                ))}
-              </Menu>
-            </View>
+              {selectPageDropdownLabel}
+            </Text>
+            <PaginationDropdown
+              numberOfItemsPerPageList={numberOfItemsPerPageList}
+              numberOfItemsPerPage={numberOfItemsPerPage}
+              onItemsPerPageChange={onItemsPerPageChange}
+            />
           </View>
         )}
-
       <Text
         style={[styles.label, { color: labelColor }]}
         numberOfLines={3}
@@ -214,68 +313,13 @@ const DataTablePagination = ({
       >
         {label}
       </Text>
-
       <View style={styles.iconsContainer}>
-        {showFastPaginationControls ? (
-          <IconButton
-            icon={({ size, color }) => (
-              <MaterialCommunityIcon
-                name="page-first"
-                color={color}
-                size={size}
-                direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
-              />
-            )}
-            color={theme.colors.text}
-            disabled={page === 0}
-            onPress={() => onPageChange(0)}
-            accessibilityLabel="page-first"
-          />
-        ) : null}
-        <IconButton
-          icon={({ size, color }) => (
-            <MaterialCommunityIcon
-              name="chevron-left"
-              color={color}
-              size={size}
-              direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
-            />
-          )}
-          color={theme.colors.text}
-          disabled={page === 0}
-          onPress={() => onPageChange(page - 1)}
-          accessibilityLabel="chevron-left"
+        <PaginationControls
+          showFastPaginationControls={showFastPaginationControls}
+          onPageChange={onPageChange}
+          page={page}
+          numberOfPages={numberOfPages}
         />
-        <IconButton
-          icon={({ size, color }) => (
-            <MaterialCommunityIcon
-              name="chevron-right"
-              color={color}
-              size={size}
-              direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
-            />
-          )}
-          color={theme.colors.text}
-          disabled={numberOfPages === 0 || page === numberOfPages - 1}
-          onPress={() => onPageChange(page + 1)}
-          accessibilityLabel="chevron-right"
-        />
-        {showFastPaginationControls ? (
-          <IconButton
-            icon={({ size, color }) => (
-              <MaterialCommunityIcon
-                name="page-last"
-                color={color}
-                size={size}
-                direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
-              />
-            )}
-            color={theme.colors.text}
-            disabled={numberOfPages === 0 || page === numberOfPages - 1}
-            onPress={() => onPageChange(numberOfPages - 1)}
-            accessibilityLabel="page-last"
-          />
-        ) : null}
       </View>
     </View>
   );
@@ -291,14 +335,10 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     flexWrap: 'wrap',
   },
-  nonIconsContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 6,
-  },
   optionsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginVertical: 6,
   },
   label: {
     fontSize: 12,

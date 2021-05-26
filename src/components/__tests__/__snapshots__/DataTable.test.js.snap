@@ -1046,6 +1046,7 @@ exports[`renders data table pagination with options select 1`] = `
   }
 >
   <View
+    accessibilityLabel="Options Select"
     style={
       Object {
         "alignItems": "center",
@@ -1054,187 +1055,177 @@ exports[`renders data table pagination with options select 1`] = `
       }
     }
   >
-    <View
-      accessibilityLabel="Options Select"
+    <Text
+      accessibilityLabel="selectPageDropdownLabel"
+      numberOfLines={3}
       style={
-        Object {
-          "alignItems": "center",
-          "flexDirection": "row",
-        }
-      }
-    >
-      <Text
-        accessibilityLabel="selectPageDropdownLabel"
-        numberOfLines={3}
-        style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontFamily": "System",
+            "fontWeight": "400",
+          },
+          Object {
+            "textAlign": "left",
+          },
           Array [
             Object {
-              "color": "#000000",
-              "fontFamily": "System",
-              "fontWeight": "400",
+              "fontSize": 12,
+              "marginRight": 16,
             },
             Object {
-              "textAlign": "left",
+              "color": "rgba(0, 0, 0, 0.6)",
             },
-            Array [
-              Object {
-                "fontSize": 12,
-                "marginRight": 16,
-              },
-              Object {
-                "color": "rgba(0, 0, 0, 0.6)",
-              },
-            ],
-          ]
+          ],
+        ]
+      }
+    >
+      Rows per page
+    </Text>
+    <View
+      collapsable={false}
+    >
+      <View
+        style={
+          Object {
+            "backgroundColor": "transparent",
+            "borderColor": "rgba(0, 0, 0, 0.29)",
+            "borderRadius": 4,
+            "borderStyle": "solid",
+            "borderWidth": 0.5,
+            "elevation": 0,
+            "marginRight": 16,
+            "minWidth": 64,
+            "textAlign": "center",
+          }
         }
       >
-        Rows per page
-      </Text>
-      <View
-        collapsable={false}
-      >
         <View
-          style={
+          accessibilityRole="button"
+          accessibilityState={
             Object {
-              "backgroundColor": "transparent",
-              "borderColor": "rgba(0, 0, 0, 0.29)",
-              "borderRadius": 4,
-              "borderStyle": "solid",
-              "borderWidth": 0.5,
-              "elevation": 0,
-              "marginRight": 16,
-              "minWidth": 64,
-              "textAlign": "center",
+              "disabled": undefined,
             }
+          }
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Array [
+              Object {
+                "overflow": "hidden",
+              },
+              Object {
+                "borderRadius": 4,
+              },
+            ]
           }
         >
           <View
-            accessibilityRole="button"
-            accessibilityState={
-              Object {
-                "disabled": undefined,
-              }
-            }
-            accessible={true}
-            focusable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "overflow": "hidden",
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "center",
                 },
                 Object {
-                  "borderRadius": 4,
+                  "flexDirection": "row-reverse",
                 },
               ]
             }
           >
             <View
               style={
-                Array [
-                  Object {
-                    "alignItems": "center",
-                    "flexDirection": "row",
-                    "justifyContent": "center",
-                  },
-                  Object {
-                    "flexDirection": "row-reverse",
-                  },
-                ]
+                Object {
+                  "marginLeft": -4,
+                  "marginRight": 12,
+                }
               }
             >
-              <View
-                style={
-                  Object {
-                    "marginLeft": -4,
-                    "marginRight": 12,
-                  }
-                }
-              >
-                <Text
-                  accessibilityElementsHidden={true}
-                  allowFontScaling={false}
-                  importantForAccessibility="no-hide-descendants"
-                  pointerEvents="none"
-                  selectable={false}
-                  style={
-                    Array [
-                      Object {
-                        "color": "#6200ee",
-                        "fontSize": 16,
-                      },
-                      Array [
-                        Object {
-                          "lineHeight": 16,
-                          "transform": Array [
-                            Object {
-                              "scaleX": 1,
-                            },
-                          ],
-                        },
-                        Object {
-                          "backgroundColor": "transparent",
-                        },
-                      ],
-                      Object {
-                        "fontFamily": "Material Design Icons",
-                        "fontStyle": "normal",
-                        "fontWeight": "normal",
-                      },
-                      Object {},
-                    ]
-                  }
-                >
-                  
-                </Text>
-              </View>
               <Text
-                numberOfLines={1}
+                accessibilityElementsHidden={true}
+                allowFontScaling={false}
+                importantForAccessibility="no-hide-descendants"
+                pointerEvents="none"
                 selectable={false}
                 style={
                   Array [
                     Object {
-                      "color": "#000000",
-                      "fontFamily": "System",
-                      "fontWeight": "400",
-                    },
-                    Object {
-                      "textAlign": "left",
+                      "color": "#6200ee",
+                      "fontSize": 16,
                     },
                     Array [
                       Object {
-                        "letterSpacing": 1,
-                        "marginHorizontal": 16,
-                        "marginVertical": 9,
-                        "textAlign": "center",
-                      },
-                      undefined,
-                      Object {
-                        "textTransform": "uppercase",
+                        "lineHeight": 16,
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
                       },
                       Object {
-                        "color": "#6200ee",
-                        "fontFamily": "System",
-                        "fontWeight": "500",
+                        "backgroundColor": "transparent",
                       },
-                      Object {
-                        "fontFamily": "System",
-                        "fontWeight": "500",
-                      },
-                      undefined,
                     ],
+                    Object {
+                      "fontFamily": "Material Design Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                    Object {},
                   ]
                 }
               >
-                2
+                
               </Text>
             </View>
+            <Text
+              numberOfLines={1}
+              selectable={false}
+              style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "System",
+                    "fontWeight": "400",
+                  },
+                  Object {
+                    "textAlign": "left",
+                  },
+                  Array [
+                    Object {
+                      "letterSpacing": 1,
+                      "marginHorizontal": 16,
+                      "marginVertical": 9,
+                      "textAlign": "center",
+                    },
+                    undefined,
+                    Object {
+                      "textTransform": "uppercase",
+                    },
+                    Object {
+                      "color": "#6200ee",
+                      "fontFamily": "System",
+                      "fontWeight": "500",
+                    },
+                    Object {
+                      "fontFamily": "System",
+                      "fontWeight": "500",
+                    },
+                    undefined,
+                  ],
+                ]
+              }
+            >
+              2
+            </Text>
           </View>
         </View>
       </View>
