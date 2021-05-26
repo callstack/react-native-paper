@@ -7,12 +7,28 @@ import type { IconSource } from '../../Icon';
 
 type Props = $Omit<
   React.ComponentProps<typeof IconButton>,
-  'icon' | 'theme'
+  'icon' | 'theme' | 'color'
 > & {
+  /**
+   * Icon to show.
+   */
   name: IconSource;
+  /**
+   * Function to execute on press.
+   */
   onPress?: () => void;
+  /**
+   * Whether the TextInput will focus after onPress.
+   */
   forceTextInputFocus?: boolean;
+  /**
+   * Color of the icon or a function receiving a boolean indicating whether the TextInput is focused and returning the color.
+   */
+  color?: ((isTextInputFocused: boolean) => string | undefined) | string;
   style?: StyleProp<ViewStyle>;
+  /**
+   * @optional
+   */
   theme?: ReactNativePaper.Theme;
 };
 
@@ -50,10 +66,41 @@ const IconAdornment: React.FunctionComponent<
   );
 };
 
+/**
+ * A component to render a leading / trailing icon in the TextInput
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/textinput-flat.icon.png" />
+ *   </figure>
+ * </div>
+ *
+ * ## Usage
+ * ```js
+ * import * as React from 'react';
+ * import { TextInput } from 'react-native-paper';
+ *
+ * const MyComponent = () => {
+ *   const [text, setText] = React.useState('');
+ *
+ *   return (
+ *     <TextInput
+ *       label="Password"
+ *       secureTextEntry
+ *       right={<TextInput.Icon name="eye" />}
+ *     />
+ *   );
+ * };
+ *
+ * export default MyComponent;
+ * ```
+ */
+
 const TextInputIcon = ({
   name,
   onPress,
   forceTextInputFocus,
+  color,
   ...rest
 }: Props) => {
   const { style, isTextInputFocused, forceFocus } = React.useContext(
@@ -74,6 +121,7 @@ const TextInputIcon = ({
         style={styles.iconButton}
         size={ICON_SIZE}
         onPress={onPressWithFocusControl}
+        color={typeof color === 'function' ? color(isTextInputFocused) : color}
         {...rest}
       />
     </View>

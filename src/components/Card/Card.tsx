@@ -7,6 +7,8 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+import color from 'color';
+import { white, black } from '../../styles/colors';
 import CardContent from './CardContent';
 import CardActions from './CardActions';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -16,11 +18,21 @@ import CardTitle, { CardTitle as _CardTitle } from './CardTitle';
 import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 
+type OutlinedCardProps = {
+  mode: 'outlined';
+  elevation?: never;
+};
+
+type ElevatedCardProps = {
+  mode?: 'elevated';
+  elevation?: number;
+};
+
 type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Resting elevation of the card which controls the drop shadow.
    */
-  elevation?: number;
+  elevation?: never | number;
   /**
    * Function to execute on long press.
    */
@@ -29,6 +41,12 @@ type Props = React.ComponentProps<typeof Surface> & {
    * Function to execute on press.
    */
   onPress?: () => void;
+  /**
+   * Mode of the Card.
+   * - `elevated` - Card with elevation.
+   * - `outlined` - Card with an outline.
+   */
+  mode?: 'elevated' | 'outlined';
   /**
    * Content of the `Card`.
    */
@@ -85,16 +103,18 @@ const Card = ({
   elevation: cardElevation = 1,
   onLongPress,
   onPress,
+  mode: cardMode = 'elevated',
   children,
   style,
   theme,
   testID,
   accessible,
   ...rest
-}: Props) => {
+}: (OutlinedCardProps | ElevatedCardProps) & Props) => {
   const { current: elevation } = React.useRef<Animated.Value>(
     new Animated.Value(cardElevation)
   );
+  const { animation, dark, mode, roundness } = theme;
 
   const handlePressIn = () => {
     const {
@@ -110,34 +130,40 @@ const Card = ({
   };
 
   const handlePressOut = () => {
-    const {
-      dark,
-      mode,
-      animation: { scale },
-    } = theme;
     Animated.timing(elevation, {
       toValue: cardElevation,
-      duration: 150 * scale,
+      duration: 150 * animation.scale,
       useNativeDriver: !dark || mode === 'exact',
     }).start();
   };
 
-  const { roundness } = theme;
   const total = React.Children.count(children);
   const siblings = React.Children.map(children, (child) =>
     React.isValidElement(child) && child.type
       ? (child.type as any).displayName
       : null
   );
+  const borderColor = color(theme.dark ? white : black)
+    .alpha(0.12)
+    .rgb()
+    .string();
+
   return (
-    <Surface style={[{ borderRadius: roundness, elevation }, style]} {...rest}>
+    <Surface
+      style={[
+        { borderRadius: roundness, elevation, borderColor },
+        cardMode === 'outlined' ? styles.outlined : {},
+        style,
+      ]}
+      {...rest}
+    >
       <TouchableWithoutFeedback
         delayPressIn={0}
         disabled={!(onPress || onLongPress)}
         onLongPress={onLongPress}
         onPress={onPress}
-        onPressIn={onPress ? handlePressIn : undefined}
-        onPressOut={onPress ? handlePressOut : undefined}
+        onPressIn={onPress || onLongPress ? handlePressIn : undefined}
+        onPressOut={onPress || onLongPress ? handlePressOut : undefined}
         testID={testID}
         accessible={accessible}
       >
@@ -170,6 +196,10 @@ const styles = StyleSheet.create({
   innerContainer: {
     flexGrow: 1,
     flexShrink: 1,
+  },
+  outlined: {
+    elevation: 0,
+    borderWidth: 1,
   },
 });
 

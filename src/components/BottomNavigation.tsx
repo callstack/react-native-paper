@@ -610,10 +610,14 @@ const BottomNavigation = ({
             ? 1
             : 0;
 
-          const top = offsetsAnims[index].interpolate({
-            inputRange: [0, 1],
-            outputRange: [0, FAR_FAR_AWAY],
-          });
+          const top = sceneAnimationEnabled
+            ? offsetsAnims[index].interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, FAR_FAR_AWAY],
+              })
+            : focused
+            ? 0
+            : FAR_FAR_AWAY;
 
           return (
             <Animated.View
