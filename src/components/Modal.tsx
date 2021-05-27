@@ -215,6 +215,7 @@ class Modal extends React.Component<Props, State> {
           accessibilityRole="button"
           disabled={!dismissable}
           onPress={dismissable ? this.hideModal : undefined}
+          importantForAccessibility="no"
         >
           <Animated.View
             style={[
