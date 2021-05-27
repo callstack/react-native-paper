@@ -121,7 +121,8 @@ exports[`can render leading radio button control 1`] = `
           },
           Array [
             Object {
-              "flex": 1,
+              "flexGrow": 1,
+              "flexShrink": 1,
               "fontSize": 16,
             },
             Object {
