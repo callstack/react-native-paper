@@ -1,5 +1,6 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
+import { render } from 'react-native-testing-library';
 import DataTable from '../DataTable/DataTable.tsx';
 
 it('renders data table header', () => {
@@ -88,4 +89,55 @@ it('renders data table pagination with label', () => {
     .toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('renders data table pagination with fast-forward buttons', () => {
+  const { getByA11yLabel, toJSON } = render(
+    <DataTable.Pagination
+      page={3}
+      numberOfPages={15}
+      onPageChange={() => {}}
+      label="11-20 of 150"
+      showFastPaginationControls
+    />
+  );
+
+  expect(() => getByA11yLabel('page-first')).not.toThrow();
+  expect(() => getByA11yLabel('page-last')).not.toThrow();
+  expect(toJSON()).toMatchSnapshot();
+});
+
+it('renders data table pagination without options select', () => {
+  const { getByA11yLabel } = render(
+    <DataTable.Pagination
+      page={3}
+      numberOfPages={15}
+      onPageChange={() => {}}
+      label="11-20 of 150"
+      showFastPaginationControls
+    />
+  );
+
+  expect(() => getByA11yLabel('Options Select')).toThrow();
+});
+
+it('renders data table pagination with options select', () => {
+  const { getByA11yLabel, toJSON } = render(
+    <DataTable.Pagination
+      page={3}
+      numberOfPages={15}
+      onPageChange={() => {}}
+      label="11-20 of 150"
+      showFastPaginationControls
+      numberOfItemsPerPageList={[2, 4, 6]}
+      numberOfItemsPerPage={2}
+      onItemsPerPageChange={() => {}}
+      selectPageDropdownLabel={'Rows per page'}
+    />
+  );
+
+  expect(() => getByA11yLabel('Options Select')).not.toThrow();
+  expect(() => getByA11yLabel('selectPageDropdownLabel')).not.toThrow();
+
+  expect(toJSON()).toMatchSnapshot();
 });

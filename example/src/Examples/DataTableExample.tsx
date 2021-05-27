@@ -50,6 +50,10 @@ const DataTableExample = () => {
       fat: 0,
     },
   ]);
+  const [numberOfItemsPerPageList] = React.useState([2, 3, 4, 200]);
+  const [itemsPerPage, onItemsPerPageChange] = React.useState(
+    numberOfItemsPerPageList[0]
+  );
   const {
     colors: { background },
   } = useTheme();
@@ -60,9 +64,12 @@ const DataTableExample = () => {
         ? 1
         : -1
     );
-  const itemsPerPage = 2;
   const from = page * itemsPerPage;
-  const to = (page + 1) * itemsPerPage;
+  const to = Math.min((page + 1) * itemsPerPage, items.length);
+
+  React.useEffect(() => {
+    setPage(0);
+  }, [itemsPerPage]);
 
   return (
     <ScrollView
@@ -93,9 +100,14 @@ const DataTableExample = () => {
 
           <DataTable.Pagination
             page={page}
-            numberOfPages={Math.round(sortedItems.length / itemsPerPage)}
+            numberOfPages={Math.ceil(sortedItems.length / itemsPerPage)}
             onPageChange={(page) => setPage(page)}
             label={`${from + 1}-${to} of ${sortedItems.length}`}
+            numberOfItemsPerPageList={numberOfItemsPerPageList}
+            numberOfItemsPerPage={itemsPerPage}
+            onItemsPerPageChange={onItemsPerPageChange}
+            showFastPaginationControls
+            selectPageDropdownLabel={'Rows per page'}
           />
         </DataTable>
       </Card>
