@@ -114,7 +114,16 @@ const CheckboxItem = ({
     <TouchableRipple onPress={onPress} testID={testID}>
       <View style={[styles.container, style]} pointerEvents="none">
         {isLeading && checkbox}
-        <Text style={[styles.label, { color: theme.colors.text }, labelStyle]}>
+        <Text
+          style={[
+            styles.label,
+            {
+              color: theme.colors.text,
+              textAlign: isLeading ? 'right' : 'left',
+            },
+            labelStyle,
+          ]}
+        >
           {label}
         </Text>
         {!isLeading && checkbox}
