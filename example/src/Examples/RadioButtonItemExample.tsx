@@ -6,6 +6,10 @@ const RadioButtonItemExample = () => {
   const [checkedDefault, setCheckedDefault] = React.useState<boolean>(true);
   const [checkedAndroid, setCheckedAndroid] = React.useState<boolean>(true);
   const [checkedIOS, setCheckedIOS] = React.useState<boolean>(true);
+  const [checkedLeadingControl, setCheckedLeadingControl] = React.useState<
+    boolean
+  >(true);
+
   const {
     colors: { background },
   } = useTheme();
@@ -38,6 +42,13 @@ const RadioButtonItemExample = () => {
         status={checkedIOS ? 'checked' : 'unchecked'}
         onPress={() => setCheckedIOS(!checkedIOS)}
         value="iOS"
+      />
+      <RadioButton.Item
+        label="Default with leading control"
+        status={checkedLeadingControl ? 'checked' : 'unchecked'}
+        onPress={() => setCheckedLeadingControl(!checkedLeadingControl)}
+        value="iOS"
+        position="leading"
       />
     </View>
   );
