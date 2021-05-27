@@ -181,71 +181,75 @@ const ListAccordion = ({
       : handlePressAction;
   return (
     <View>
-      <TouchableRipple
-        style={[styles.container, style]}
-        onPress={handlePress}
-        onLongPress={onLongPress}
-        // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-        accessibilityTraits="button"
-        accessibilityComponentType="button"
-        accessibilityRole="button"
-        testID={testID}
-        borderless
-      >
-        <View style={styles.row} pointerEvents="none">
-          {left
-            ? left({
-                color: isExpanded ? theme.colors.primary : descriptionColor,
-              })
-            : null}
-          <View style={[styles.item, styles.content]}>
-            <Text
-              selectable={false}
-              numberOfLines={titleNumberOfLines}
-              style={[
-                styles.title,
-                {
-                  color: isExpanded ? theme.colors.primary : titleColor,
-                },
-                titleStyle,
-              ]}
-            >
-              {title}
-            </Text>
-            {description && (
+      <View style={{ backgroundColor: theme.colors.background }}>
+        <TouchableRipple
+          style={[styles.container, style]}
+          onPress={handlePress}
+          onLongPress={onLongPress}
+          // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
+          accessibilityTraits="button"
+          accessibilityComponentType="button"
+          accessibilityRole="button"
+          testID={testID}
+          delayPressIn={0}
+          borderless
+        >
+          <View style={styles.row} pointerEvents="none">
+            {left
+              ? left({
+                  color: isExpanded ? theme.colors.primary : descriptionColor,
+                })
+              : null}
+            <View style={[styles.item, styles.content]}>
               <Text
                 selectable={false}
-                numberOfLines={descriptionNumberOfLines}
+                numberOfLines={titleNumberOfLines}
                 style={[
-                  styles.description,
+                  styles.title,
                   {
-                    color: descriptionColor,
+                    color: isExpanded ? theme.colors.primary : titleColor,
                   },
-                  descriptionStyle,
+                  titleStyle,
                 ]}
               >
-                {description}
+                {title}
               </Text>
-            )}
+              {description && (
+                <Text
+                  selectable={false}
+                  numberOfLines={descriptionNumberOfLines}
+                  style={[
+                    styles.description,
+                    {
+                      color: descriptionColor,
+                    },
+                    descriptionStyle,
+                  ]}
+                >
+                  {description}
+                </Text>
+              )}
+            </View>
+            <View
+              style={[styles.item, description ? styles.multiline : undefined]}
+            >
+              {right ? (
+                right({
+                  isExpanded: isExpanded,
+                })
+              ) : (
+                <MaterialCommunityIcon
+                  name={isExpanded ? 'chevron-up' : 'chevron-down'}
+                  color={titleColor}
+                  size={24}
+                  direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+                />
+              )}
+            </View>
           </View>
-          <View
-            style={[styles.item, description ? styles.multiline : undefined]}
-          >
-            {right ? (
-              right({
-                isExpanded: isExpanded,
-              })
-            ) : (
-              <MaterialCommunityIcon
-                name={isExpanded ? 'chevron-up' : 'chevron-down'}
-                color={titleColor}
-                size={24}
-                direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
-              />
-            )}
-          </View>
-        </View>
-      </TouchableRipple>
+        </TouchableRipple>
+      </View>
+
       {isExpanded
         ? React.Children.map(children, (child) => {
             if (
