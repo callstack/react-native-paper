@@ -208,16 +208,20 @@ type Props = {
    */
   keyboardHidesNavigationBar?: boolean;
   /**
+   * Safe area insets for the tab bar. This can be used to avoid elements like the navigation bar on Android and bottom safe area on iOS.
+   * The bottom insets for iOS is added by default. You can override the behavior with this option.
+   */
+  safeAreaInsets?: {
+    top?: number;
+    right?: number;
+    bottom?: number;
+    left?: number;
+  };
+  /**
    * Style for the bottom navigation bar.  You can pass a custom background color here:
    *
    * ```js
    * barStyle={{ backgroundColor: '#694fad' }}
-   * ```
-   *
-   * If you have a translucent navigation bar on Android, you can also set a bottom padding here:
-   *
-   * ```js
-   * barStyle={{ paddingBottom: 48 }}
    * ```
    */
   barStyle?: StyleProp<ViewStyle>;
@@ -338,6 +342,7 @@ const BottomNavigation = ({
   onTabPress,
   onIndexChange,
   shifting = navigationState.routes.length > 3,
+  safeAreaInsets,
 }: Props) => {
   const { scale } = theme.animation;
 
@@ -593,6 +598,12 @@ const BottomNavigation = ({
 
   const rippleSize = layout.width / 4;
 
+  const insets = {
+    left: safeAreaInsets?.left ?? 0,
+    right: safeAreaInsets?.right ?? 0,
+    bottom: safeAreaInsets?.bottom ?? BOTTOM_INSET,
+  };
+
   return (
     <View style={[styles.container, style]}>
       <View style={[styles.content, { backgroundColor: colors.background }]}>
@@ -678,7 +689,11 @@ const BottomNavigation = ({
           <View
             style={[
               styles.items,
-              { marginBottom: BOTTOM_INSET, maxWidth: maxTabBarWidth },
+              {
+                marginBottom: insets.bottom,
+                marginHorizontal: Math.max(insets.left, insets.right),
+                maxWidth: maxTabBarWidth,
+              },
             ]}
           >
             {shifting ? (
@@ -948,7 +963,6 @@ const styles = StyleSheet.create({
   },
   items: {
     flexDirection: 'row',
-    width: '100%',
   },
   item: {
     flex: 1,
