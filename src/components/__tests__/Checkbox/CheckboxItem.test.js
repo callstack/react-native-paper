@@ -32,3 +32,18 @@ it('can render the Android checkbox on different platforms', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('can render leading checkbox control', () => {
+  Platform.OS = 'ios';
+  const tree = renderer
+    .create(
+      <Checkbox.Item
+        label="Default with leading control"
+        status={'unchecked'}
+        mode="ios"
+        position="leading"
+      />
+    )
+    .toJSON();
+  expect(tree).toMatchSnapshot();
+});
