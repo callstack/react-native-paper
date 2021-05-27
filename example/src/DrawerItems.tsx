@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import {
+  Badge,
   Drawer,
   Switch,
   TouchableRipple,
@@ -20,7 +21,18 @@ type Props = {
 
 const DrawerItemsData = [
   { label: 'Inbox', icon: 'inbox', key: 0 },
-  { label: 'Starred', icon: 'star', key: 1 },
+  {
+    label: 'Starred',
+    icon: 'star',
+    key: 1,
+    right: ({ color }: { color: string }) => (
+      <Badge
+        visible
+        size={8}
+        style={[styles.badge, { backgroundColor: color }]}
+      />
+    ),
+  },
   { label: 'Sent mail', icon: 'send', key: 2 },
   { label: 'Colored label', icon: 'palette', key: 3 },
   { label: 'A very long title that will be truncated', icon: 'delete', key: 4 },
@@ -90,6 +102,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 12,
     paddingHorizontal: 16,
+  },
+  badge: {
+    alignSelf: 'center',
   },
 });
 

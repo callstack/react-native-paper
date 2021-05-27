@@ -3,6 +3,18 @@
 exports[`renders colored progress bar 1`] = `
 <View
   accessibilityRole="progressbar"
+  accessibilityState={
+    Object {
+      "busy": true,
+    }
+  }
+  accessibilityValue={
+    Object {
+      "max": 100,
+      "min": 0,
+      "now": 20,
+    }
+  }
   accessible={true}
   onLayout={[Function]}
 >
@@ -40,6 +52,18 @@ exports[`renders colored progress bar 1`] = `
 exports[`renders hidden progress bar 1`] = `
 <View
   accessibilityRole="progressbar"
+  accessibilityState={
+    Object {
+      "busy": false,
+    }
+  }
+  accessibilityValue={
+    Object {
+      "max": 100,
+      "min": 0,
+      "now": 20,
+    }
+  }
   accessible={true}
   onLayout={[Function]}
 >
@@ -77,6 +101,12 @@ exports[`renders hidden progress bar 1`] = `
 exports[`renders indeterminate progress bar 1`] = `
 <View
   accessibilityRole="progressbar"
+  accessibilityState={
+    Object {
+      "busy": true,
+    }
+  }
+  accessibilityValue={Object {}}
   accessible={true}
   onLayout={[Function]}
 >
@@ -114,6 +144,18 @@ exports[`renders indeterminate progress bar 1`] = `
 exports[`renders progress bar with specific progress 1`] = `
 <View
   accessibilityRole="progressbar"
+  accessibilityState={
+    Object {
+      "busy": true,
+    }
+  }
+  accessibilityValue={
+    Object {
+      "max": 100,
+      "min": 0,
+      "now": 20,
+    }
+  }
   accessible={true}
   onLayout={[Function]}
 >
