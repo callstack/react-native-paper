@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { RadioButton, Colors, useTheme } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
+import { RadioButton } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 const RadioButtonItemExample = () => {
   const [checkedDefault, setCheckedDefault] = React.useState<boolean>(true);
@@ -10,19 +11,8 @@ const RadioButtonItemExample = () => {
     boolean
   >(true);
 
-  const {
-    colors: { background },
-  } = useTheme();
-
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          backgroundColor: background,
-        },
-      ]}
-    >
+    <ScreenWrapper style={styles.container}>
       <RadioButton.Item
         label="Default (will look like whatever system this is running on)"
         status={checkedDefault ? 'checked' : 'unchecked'}
@@ -50,7 +40,7 @@ const RadioButtonItemExample = () => {
         value="iOS"
         position="leading"
       />
-    </View>
+    </ScreenWrapper>
   );
 };
 
@@ -58,8 +48,6 @@ RadioButtonItemExample.title = 'Radio Button Item';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: Colors.white,
     paddingVertical: 8,
   },
 });

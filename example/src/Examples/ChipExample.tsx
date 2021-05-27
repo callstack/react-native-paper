@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { View, ScrollView, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import { Chip, List, useTheme, Snackbar } from 'react-native-paper';
 import color from 'color';
+import ScreenWrapper from '../ScreenWrapper';
 
 const ChipExample = () => {
   const [visible, setVisible] = React.useState<boolean>(false);
@@ -9,9 +10,7 @@ const ChipExample = () => {
 
   return (
     <>
-      <ScrollView
-        style={[styles.container, { backgroundColor: colors.surface }]}
-      >
+      <ScreenWrapper>
         <List.Section title="Flat chip">
           <View style={styles.row}>
             <Chip selected onPress={() => {}} style={styles.chip}>
@@ -210,7 +209,7 @@ const ChipExample = () => {
             </Chip>
           </View>
         </List.Section>
-      </ScrollView>
+      </ScreenWrapper>
       <Snackbar
         visible={visible}
         onDismiss={() => setVisible(false)}
@@ -225,9 +224,6 @@ const ChipExample = () => {
 ChipExample.title = 'Chip';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   row: {
     flexDirection: 'row',
     flexWrap: 'wrap',

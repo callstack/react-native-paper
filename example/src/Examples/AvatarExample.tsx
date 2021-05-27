@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
-import { Avatar, List, Colors, useTheme } from 'react-native-paper';
+import { View, StyleSheet } from 'react-native';
+import { Avatar, List, Colors } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 const AvatarExample = () => {
-  const { colors } = useTheme();
-
   return (
-    <ScrollView style={[styles.container, { backgroundColor: colors.surface }]}>
+    <ScreenWrapper>
       <List.Section title="Text">
         <View style={styles.row}>
           <Avatar.Text
@@ -42,16 +41,13 @@ const AvatarExample = () => {
           />
         </View>
       </List.Section>
-    </ScrollView>
+    </ScreenWrapper>
   );
 };
 
 AvatarExample.title = 'Avatar';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   row: {
     flexDirection: 'row',
     flexWrap: 'wrap',

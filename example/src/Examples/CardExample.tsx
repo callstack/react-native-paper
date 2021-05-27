@@ -10,6 +10,7 @@ import {
   Text,
   Switch,
 } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 const CardExample = () => {
   const {
@@ -19,7 +20,7 @@ const CardExample = () => {
   const mode = isOutlined ? 'outlined' : 'elevated';
 
   return (
-    <View style={[styles.container, { backgroundColor: background }]}>
+    <ScreenWrapper contentContainerStyle={styles.content}>
       <View style={styles.preference}>
         <Text>Outlined</Text>
         <Switch
@@ -120,7 +121,7 @@ const CardExample = () => {
           </Card.Content>
         </Card>
       </ScrollView>
-    </View>
+    </ScreenWrapper>
   );
 };
 
@@ -139,8 +140,9 @@ const styles = StyleSheet.create({
   preference: {
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     paddingVertical: 12,
+    paddingHorizontal: 8,
   },
 });
 

@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Checkbox, Colors, useTheme } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
+import { Checkbox } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 const CheckboxExample = () => {
   const [checkedDefault, setCheckedDefault] = React.useState<boolean>(true);
@@ -9,19 +10,8 @@ const CheckboxExample = () => {
   const [checkedLeadingControl, setCheckedLeadingControl] = React.useState<
     boolean
   >(true);
-  const {
-    colors: { background },
-  } = useTheme();
-
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          backgroundColor: background,
-        },
-      ]}
-    >
+    <ScreenWrapper style={styles.container}>
       <Checkbox.Item
         label="Default (will look like whatever system this is running on)"
         status={checkedDefault ? 'checked' : 'unchecked'}
@@ -46,7 +36,7 @@ const CheckboxExample = () => {
         mode="ios"
         position="leading"
       />
-    </View>
+    </ScreenWrapper>
   );
 };
 
@@ -54,8 +44,6 @@ CheckboxExample.title = 'Checkbox Item';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: Colors.white,
     paddingVertical: 8,
   },
 });

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { DrawerContentScrollView } from '@react-navigation/drawer';
 import {
   Badge,
   Drawer,
@@ -9,6 +10,7 @@ import {
   Colors,
   useTheme,
 } from 'react-native-paper';
+import * as Updates from 'expo-updates';
 
 type Props = {
   toggleTheme: () => void;
@@ -43,8 +45,16 @@ const DrawerItems = ({ toggleTheme, toggleRTL, isRTL, isDarkTheme }: Props) => {
 
   const { colors } = useTheme();
 
+  const _handleToggleRTL = () => {
+    toggleRTL();
+    Updates.reloadAsync();
+  };
+
   return (
-    <View style={[styles.drawerContent, { backgroundColor: colors.surface }]}>
+    <DrawerContentScrollView
+      alwaysBounceVertical={false}
+      style={[styles.drawerContent, { backgroundColor: colors.surface }]}
+    >
       <Drawer.Section title="Example items">
         {DrawerItemsData.map((props, index) => (
           <Drawer.Item
@@ -70,7 +80,7 @@ const DrawerItems = ({ toggleTheme, toggleRTL, isRTL, isDarkTheme }: Props) => {
             </View>
           </View>
         </TouchableRipple>
-        <TouchableRipple onPress={toggleRTL}>
+        <TouchableRipple onPress={_handleToggleRTL}>
           <View style={styles.preference}>
             <Text>RTL</Text>
             <View pointerEvents="none">
@@ -79,14 +89,13 @@ const DrawerItems = ({ toggleTheme, toggleRTL, isRTL, isDarkTheme }: Props) => {
           </View>
         </TouchableRipple>
       </Drawer.Section>
-    </View>
+    </DrawerContentScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   drawerContent: {
     flex: 1,
-    paddingTop: Platform.OS === 'android' ? 25 : 22,
   },
   preference: {
     flexDirection: 'row',

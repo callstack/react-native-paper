@@ -1,29 +1,17 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import {
-  Colors,
-  RadioButton,
-  Paragraph,
-  List,
-  useTheme,
-} from 'react-native-paper';
+import { RadioButton, Paragraph, List, useTheme } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 const RadioButtonGroupExample = () => {
   const [value, setValue] = React.useState<string>('first');
   const [value2, setValue2] = React.useState<string>('first');
 
   const {
-    colors: { background, primary },
+    colors: { primary },
   } = useTheme();
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          backgroundColor: background,
-        },
-      ]}
-    >
+    <ScreenWrapper>
       <List.Section title="With RadioButton">
         <RadioButton.Group
           value={value}
@@ -57,18 +45,13 @@ const RadioButtonGroupExample = () => {
           />
         </RadioButton.Group>
       </List.Section>
-    </View>
+    </ScreenWrapper>
   );
 };
 
 RadioButtonGroupExample.title = 'Radio Button Group';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.white,
-    padding: 8,
-  },
   row: {
     flexDirection: 'row',
     alignItems: 'center',

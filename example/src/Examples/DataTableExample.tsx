@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { DataTable, Card, useTheme } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
+import { DataTable, Card } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 type ItemsState = Array<{
   key: number;
@@ -54,9 +55,6 @@ const DataTableExample = () => {
   const [itemsPerPage, onItemsPerPageChange] = React.useState(
     numberOfItemsPerPageList[0]
   );
-  const {
-    colors: { background },
-  } = useTheme();
   const sortedItems = items
     .slice()
     .sort((item1, item2) =>
@@ -72,10 +70,7 @@ const DataTableExample = () => {
   }, [itemsPerPage]);
 
   return (
-    <ScrollView
-      style={[styles.container, { backgroundColor: background }]}
-      contentContainerStyle={styles.content}
-    >
+    <ScreenWrapper contentContainerStyle={styles.content}>
       <Card>
         <DataTable>
           <DataTable.Header>
@@ -111,21 +106,16 @@ const DataTableExample = () => {
           />
         </DataTable>
       </Card>
-    </ScrollView>
+    </ScreenWrapper>
   );
 };
 
 DataTableExample.title = 'Data Table';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-
   content: {
     padding: 8,
   },
-
   first: {
     flex: 2,
   },

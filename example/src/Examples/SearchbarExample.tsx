@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Colors, Caption, Searchbar, useTheme } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
+import { Caption, Searchbar } from 'react-native-paper';
 import type { StackNavigationProp } from '@react-navigation/stack';
+import ScreenWrapper from '../ScreenWrapper';
 
 type Props = {
   navigation: StackNavigationProp<{}>;
@@ -12,12 +13,8 @@ const SearchExample = ({ navigation }: Props) => {
   const [secondQuery, setSecondQuery] = React.useState<string>('');
   const [thirdQuery, setThirdQuery] = React.useState<string>('');
 
-  const {
-    colors: { background },
-  } = useTheme();
-
   return (
-    <View style={[styles.container, { backgroundColor: background }]}>
+    <ScreenWrapper>
       <Searchbar
         placeholder="Search"
         onChangeText={(query: string) => setFirstQuery(query)}
@@ -41,17 +38,13 @@ const SearchExample = ({ navigation }: Props) => {
         icon="menu"
         style={styles.searchbar}
       />
-    </View>
+    </ScreenWrapper>
   );
 };
 
 SearchExample.title = 'Searchbar';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.grey200,
-  },
   caption: {
     paddingHorizontal: 16,
     paddingVertical: 8,
