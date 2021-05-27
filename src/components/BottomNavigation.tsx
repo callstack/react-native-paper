@@ -695,6 +695,7 @@ const BottomNavigation = ({
                 maxWidth: maxTabBarWidth,
               },
             ]}
+            accessibilityRole={'tablist'}
           >
             {shifting ? (
               <Animated.View
@@ -778,7 +779,7 @@ const BottomNavigation = ({
                   ? ['button', 'selected']
                   : 'button',
                 accessibilityComponentType: 'button',
-                accessibilityRole: 'button',
+                accessibilityRole: Platform.OS === 'ios' ? 'button' : 'tab',
                 accessibilityState: { selected: focused },
                 style: styles.item,
                 children: (
