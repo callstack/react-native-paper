@@ -1,23 +1,14 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import {
-  Button,
-  ProgressBar,
-  Paragraph,
-  Colors,
-  useTheme,
-} from 'react-native-paper';
+import { Button, ProgressBar, Paragraph, Colors } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 const ProgressBarExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);
   const [progress, setProgress] = React.useState<number>(0.3);
 
-  const {
-    colors: { background },
-  } = useTheme();
-
   return (
-    <View style={[styles.container, { backgroundColor: background }]}>
+    <ScreenWrapper contentContainerStyle={styles.container}>
       <Button onPress={() => setVisible(!visible)}>Toggle visible</Button>
       <Button onPress={() => setProgress(Math.random())}>
         Random progress
@@ -60,7 +51,7 @@ const ProgressBarExample = () => {
           style={{ height: 20 }}
         />
       </View>
-    </View>
+    </ScreenWrapper>
   );
 };
 
@@ -68,10 +59,8 @@ ProgressBarExample.title = 'Progress Bar';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 16,
   },
-
   row: {
     marginVertical: 10,
   },

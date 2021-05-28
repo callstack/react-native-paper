@@ -16,8 +16,14 @@ import { AdornmentSide } from './enums';
 const AFFIX_OFFSET = 12;
 
 type Props = {
+  /**
+   * Text to show.
+   */
   text: string;
   onLayout?: (event: LayoutChangeEvent) => void;
+  /**
+   * Style that is passed to the Text element.
+   */
   textStyle?: StyleProp<TextStyle>;
   /**
    * @optional
@@ -69,6 +75,37 @@ const AffixAdornment: React.FunctionComponent<
     </AffixContext.Provider>
   );
 };
+
+/**
+ * A component to render a leading / trailing text in the TextInput
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/textinput-outline.affix.png" />
+ *   </figure>
+ * </div>
+ *
+ * ## Usage
+ * ```js
+ * import * as React from 'react';
+ * import { TextInput } from 'react-native-paper';
+ *
+ * const MyComponent = () => {
+ *   const [text, setText] = React.useState('');
+ *
+ *   return (
+ *     <TextInput
+ *       mode="outlined"
+ *       label="Outlined input"
+ *       placeholder="Type something"
+ *       right={<TextInput.Affix text="/100" />}
+ *     />
+ *   );
+ * };
+ *
+ * export default MyComponent;
+ * ```
+ */
 
 const TextInputAffix = ({ text, textStyle: labelStyle, theme }: Props) => {
   const {

@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { DataTable, Card, useTheme } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
+import { DataTable, Card } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 type ItemsState = Array<{
   key: number;
@@ -50,9 +51,10 @@ const DataTableExample = () => {
       fat: 0,
     },
   ]);
-  const {
-    colors: { background },
-  } = useTheme();
+  const [numberOfItemsPerPageList] = React.useState([2, 3, 4, 200]);
+  const [itemsPerPage, onItemsPerPageChange] = React.useState(
+    numberOfItemsPerPageList[0]
+  );
   const sortedItems = items
     .slice()
     .sort((item1, item2) =>
@@ -60,15 +62,15 @@ const DataTableExample = () => {
         ? 1
         : -1
     );
-  const itemsPerPage = 2;
   const from = page * itemsPerPage;
-  const to = (page + 1) * itemsPerPage;
+  const to = Math.min((page + 1) * itemsPerPage, items.length);
+
+  React.useEffect(() => {
+    setPage(0);
+  }, [itemsPerPage]);
 
   return (
-    <ScrollView
-      style={[styles.container, { backgroundColor: background }]}
-      contentContainerStyle={styles.content}
-    >
+    <ScreenWrapper contentContainerStyle={styles.content}>
       <Card>
         <DataTable>
           <DataTable.Header>
@@ -93,27 +95,27 @@ const DataTableExample = () => {
 
           <DataTable.Pagination
             page={page}
-            numberOfPages={Math.floor(sortedItems.length / itemsPerPage)}
+            numberOfPages={Math.ceil(sortedItems.length / itemsPerPage)}
             onPageChange={(page) => setPage(page)}
             label={`${from + 1}-${to} of ${sortedItems.length}`}
+            numberOfItemsPerPageList={numberOfItemsPerPageList}
+            numberOfItemsPerPage={itemsPerPage}
+            onItemsPerPageChange={onItemsPerPageChange}
+            showFastPaginationControls
+            selectPageDropdownLabel={'Rows per page'}
           />
         </DataTable>
       </Card>
-    </ScrollView>
+    </ScreenWrapper>
   );
 };
 
 DataTableExample.title = 'Data Table';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-
   content: {
     padding: 8,
   },
-
   first: {
     flex: 2,
   },

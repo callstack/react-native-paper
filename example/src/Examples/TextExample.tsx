@@ -1,27 +1,23 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import {
   Caption,
   Headline,
   Paragraph,
   Subheading,
   Title,
-  useTheme,
 } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 const TextExample = () => {
-  const {
-    colors: { background },
-  } = useTheme();
-
   return (
-    <View style={[styles.container, { backgroundColor: background }]}>
+    <ScreenWrapper style={styles.container}>
       <Caption style={styles.text}>Caption</Caption>
       <Paragraph style={styles.text}>Paragraph</Paragraph>
       <Subheading style={styles.text}>Subheading</Subheading>
       <Title style={styles.text}>Title</Title>
       <Headline style={styles.text}>Headline</Headline>
-    </View>
+    </ScreenWrapper>
   );
 };
 
@@ -30,7 +26,6 @@ TextExample.title = 'Typography';
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    flex: 1,
   },
   text: {
     marginVertical: 4,

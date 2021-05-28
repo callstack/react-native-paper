@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { DrawerContentScrollView } from '@react-navigation/drawer';
 import {
+  Badge,
   Drawer,
   Switch,
   TouchableRipple,
@@ -8,6 +10,7 @@ import {
   Colors,
   useTheme,
 } from 'react-native-paper';
+import * as Updates from 'expo-updates';
 
 type Props = {
   toggleTheme: () => void;
@@ -18,7 +21,18 @@ type Props = {
 
 const DrawerItemsData = [
   { label: 'Inbox', icon: 'inbox', key: 0 },
-  { label: 'Starred', icon: 'star', key: 1 },
+  {
+    label: 'Starred',
+    icon: 'star',
+    key: 1,
+    right: ({ color }: { color: string }) => (
+      <Badge
+        visible
+        size={8}
+        style={[styles.badge, { backgroundColor: color }]}
+      />
+    ),
+  },
   { label: 'Sent mail', icon: 'send', key: 2 },
   { label: 'Colored label', icon: 'palette', key: 3 },
   { label: 'A very long title that will be truncated', icon: 'delete', key: 4 },
@@ -31,8 +45,16 @@ const DrawerItems = ({ toggleTheme, toggleRTL, isRTL, isDarkTheme }: Props) => {
 
   const { colors } = useTheme();
 
+  const _handleToggleRTL = () => {
+    toggleRTL();
+    Updates.reloadAsync();
+  };
+
   return (
-    <View style={[styles.drawerContent, { backgroundColor: colors.surface }]}>
+    <DrawerContentScrollView
+      alwaysBounceVertical={false}
+      style={[styles.drawerContent, { backgroundColor: colors.surface }]}
+    >
       <Drawer.Section title="Example items">
         {DrawerItemsData.map((props, index) => (
           <Drawer.Item
@@ -58,7 +80,7 @@ const DrawerItems = ({ toggleTheme, toggleRTL, isRTL, isDarkTheme }: Props) => {
             </View>
           </View>
         </TouchableRipple>
-        <TouchableRipple onPress={toggleRTL}>
+        <TouchableRipple onPress={_handleToggleRTL}>
           <View style={styles.preference}>
             <Text>RTL</Text>
             <View pointerEvents="none">
@@ -67,20 +89,22 @@ const DrawerItems = ({ toggleTheme, toggleRTL, isRTL, isDarkTheme }: Props) => {
           </View>
         </TouchableRipple>
       </Drawer.Section>
-    </View>
+    </DrawerContentScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   drawerContent: {
     flex: 1,
-    paddingTop: Platform.OS === 'android' ? 25 : 22,
   },
   preference: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingVertical: 12,
     paddingHorizontal: 16,
+  },
+  badge: {
+    alignSelf: 'center',
   },
 });
 

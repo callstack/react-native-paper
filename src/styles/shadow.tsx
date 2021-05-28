@@ -17,7 +17,11 @@ export default function shadow(elevation: number | Animated.Value = 0) {
           outputRange: [0, 0.5, 0.75, 2, 7, 23],
         }),
       },
-      shadowOpacity: new Animated.Value(SHADOW_OPACITY),
+      shadowOpacity: elevation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, SHADOW_OPACITY],
+        extrapolate: 'clamp',
+      }),
       shadowRadius: elevation.interpolate({
         inputRange,
         outputRange: [0, 0.75, 1.5, 3, 8, 24],

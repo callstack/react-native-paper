@@ -360,6 +360,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
                   ? 'right'
                   : 'left',
               },
+              Platform.OS === 'web' && { outline: 'none' },
               adornmentStyleAdjustmentForNativeInput,
             ],
           })}

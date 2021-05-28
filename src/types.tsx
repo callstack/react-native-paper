@@ -37,7 +37,6 @@ export type Theme = {
     error: string;
     text: string;
     onSurface: string;
-    onBackground: string;
     disabled: string;
     placeholder: string;
     backdrop: string;
@@ -88,7 +87,6 @@ declare global {
       error: string;
       text: string;
       onSurface: string;
-      onBackground: string;
       disabled: string;
       placeholder: string;
       backdrop: string;

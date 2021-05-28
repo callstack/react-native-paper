@@ -29,7 +29,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  *
  * <div class="screenshots">
  *   <figure>
- *     <img src="screenshots/data-table.png" />
+ *     <img class="large" src="screenshots/data-table.png" />
  *     <figcaption>Data table</figcaption>
  *   </figure>
  * </div>
@@ -39,36 +39,50 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * import * as React from 'react';
  * import { DataTable } from 'react-native-paper';
  *
- * const MyComponent = () => (
- *   <DataTable>
- *     <DataTable.Header>
- *       <DataTable.Title>Dessert</DataTable.Title>
- *       <DataTable.Title numeric>Calories</DataTable.Title>
- *       <DataTable.Title numeric>Fat</DataTable.Title>
- *     </DataTable.Header>
+ * const optionsPerPage = [2, 3, 4];
  *
- *     <DataTable.Row>
- *       <DataTable.Cell>Frozen yogurt</DataTable.Cell>
- *       <DataTable.Cell numeric>159</DataTable.Cell>
- *       <DataTable.Cell numeric>6.0</DataTable.Cell>
- *     </DataTable.Row>
+ * const MyComponent = () => {
+ *   const [page, setPage] = React.useState<number>(0);
+ *   const [itemsPerPage, setItemsPerPage] = React.useState(optionsPerPage[0]);
  *
- *     <DataTable.Row>
- *       <DataTable.Cell>Ice cream sandwich</DataTable.Cell>
- *       <DataTable.Cell numeric>237</DataTable.Cell>
- *       <DataTable.Cell numeric>8.0</DataTable.Cell>
- *     </DataTable.Row>
+ *   React.useEffect(() => {
+ *     setPage(0);
+ *   }, [itemsPerPage]);
  *
- *     <DataTable.Pagination
- *       page={1}
- *       numberOfPages={3}
- *       onPageChange={page => {
- *         console.log(page);
- *       }}
- *       label="1-2 of 6"
- *     />
- *   </DataTable>
- * );
+ *   return (
+ *     <DataTable>
+ *       <DataTable.Header>
+ *         <DataTable.Title>Dessert</DataTable.Title>
+ *         <DataTable.Title numeric>Calories</DataTable.Title>
+ *         <DataTable.Title numeric>Fat</DataTable.Title>
+ *       </DataTable.Header>
+ *
+ *       <DataTable.Row>
+ *         <DataTable.Cell>Frozen yogurt</DataTable.Cell>
+ *         <DataTable.Cell numeric>159</DataTable.Cell>
+ *         <DataTable.Cell numeric>6.0</DataTable.Cell>
+ *       </DataTable.Row>
+ *
+ *       <DataTable.Row>
+ *         <DataTable.Cell>Ice cream sandwich</DataTable.Cell>
+ *         <DataTable.Cell numeric>237</DataTable.Cell>
+ *         <DataTable.Cell numeric>8.0</DataTable.Cell>
+ *       </DataTable.Row>
+ *
+ *       <DataTable.Pagination
+ *         page={page}
+ *         numberOfPages={3}
+ *         onPageChange={(page) => setPage(page)}
+ *         label="1-2 of 6"
+ *         optionsPerPage={optionsPerPage}
+ *         itemsPerPage={itemsPerPage}
+ *         setItemsPerPage={setItemsPerPage}
+ *         showFastPagination
+ *         optionsLabel={'Rows per page'}
+ *       />
+ *     </DataTable>
+ *   );
+ *}
  *
  * export default MyComponent;
  * ```
