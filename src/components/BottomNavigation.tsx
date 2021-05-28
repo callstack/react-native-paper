@@ -966,7 +966,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     ...(Platform.OS === 'web'
       ? {
-          width: '100%'
+          width: '100%',
         }
       : null),
   },
