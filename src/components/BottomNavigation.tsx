@@ -964,6 +964,11 @@ const styles = StyleSheet.create({
   },
   items: {
     flexDirection: 'row',
+    ...(Platform.OS === 'web'
+      ? {
+          width: '100%'
+        }
+      : null),
   },
   item: {
     flex: 1,
