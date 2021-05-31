@@ -18,6 +18,12 @@ it('renders chip with icon', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('renders chip without icon', () => {
+  const tree = renderer.create(<Chip icon={null}>Example Chip</Chip>).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
 it('renders chip with close button', () => {
   const tree = renderer
     .create(
