@@ -34,7 +34,7 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Icon to display for the `Chip`. Both icon and avatar cannot be specified.
    */
-  icon?: IconSource|null;
+  icon?: IconSource | null;
   /**
    * Avatar to display for the `Chip`. Both icon and avatar cannot be specified.
    */
