@@ -34,7 +34,7 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Icon to display for the `Chip`. Both icon and avatar cannot be specified.
    */
-  icon?: IconSource;
+  icon?: IconSource|null;
   /**
    * Avatar to display for the `Chip`. Both icon and avatar cannot be specified.
    */
@@ -267,14 +267,14 @@ const Chip = ({
                 : avatar}
             </View>
           ) : null}
-          {icon || selected ? (
+          {icon !== null ? (
             <View
               style={[
                 styles.icon,
                 avatar ? [styles.avatar, styles.avatarSelected] : null,
               ]}
             >
-              {icon ? (
+              {typeof icon === 'string' ? (
                 <Icon
                   source={icon}
                   color={avatar ? white : iconColor}
