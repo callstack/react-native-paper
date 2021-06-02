@@ -48,6 +48,16 @@ type Props = $RemoveChildren<typeof Surface> & {
    * @optional
    */
   theme: ReactNativePaper.Theme;
+  /**
+   * @optional
+   * Optional function that will be called after the open animation finished running normally
+   */
+  onAnimateShowFinish?: Animated.EndCallback;
+  /**
+   * @optional
+   * Optional function that will be called after the open animation finished running normally
+   */
+  onAnimateHideFinish?: Animated.EndCallback;
 };
 
 type NativeEvent = {
@@ -117,6 +127,8 @@ const Banner = ({
   contentStyle,
   style,
   theme,
+  onAnimateShowFinish = () => {},
+  onAnimateHideFinish = () => {},
   ...rest
 }: Props) => {
   const { current: position } = React.useRef<Animated.Value>(
@@ -139,14 +151,14 @@ const Banner = ({
         duration: 250 * scale,
         toValue: 1,
         useNativeDriver: false,
-      }).start();
+      }).start(onAnimateShowFinish);
     } else {
       // hide
       Animated.timing(position, {
         duration: 200 * scale,
         toValue: 0,
         useNativeDriver: false,
-      }).start();
+      }).start(onAnimateHideFinish);
     }
   }, [visible, position, scale]);
 
