@@ -56,6 +56,7 @@ export type LabelProps = {
   labelScale: number;
   fontSize: number;
   fontWeight: TextStyle['fontWeight'];
+  lineHeight: number,
   font: any;
   topPosition: number;
   paddingOffset?: { paddingLeft: number; paddingRight: number } | null;
