@@ -76,67 +76,63 @@ type Props = React.ComponentPropsWithRef<typeof NativeSwitch> & {
  * export default MyComponent;
  * ```
  */
-const Switch = ({
-  value,
-  disabled,
-  onValueChange,
-  color,
-  theme,
-  ...rest
-}: Props) => {
-  const checkedColor = color || theme.colors.accent;
+const Switch = React.forwardRef<NativeSwitch, Props>(
+  ({ value, disabled, onValueChange, color, theme, ...rest }: Props, ref) => {
+    const checkedColor = color || theme.colors.accent;
 
-  const onTintColor =
-    Platform.OS === 'ios'
-      ? checkedColor
-      : disabled
-      ? theme.dark
-        ? setColor(white).alpha(0.1).rgb().string()
-        : setColor(black).alpha(0.12).rgb().string()
-      : setColor(checkedColor).alpha(0.5).rgb().string();
+    const onTintColor =
+      Platform.OS === 'ios'
+        ? checkedColor
+        : disabled
+        ? theme.dark
+          ? setColor(white).alpha(0.1).rgb().string()
+          : setColor(black).alpha(0.12).rgb().string()
+        : setColor(checkedColor).alpha(0.5).rgb().string();
 
-  const thumbTintColor =
-    Platform.OS === 'ios'
-      ? undefined
-      : disabled
-      ? theme.dark
-        ? grey800
-        : grey400
-      : value
-      ? checkedColor
-      : theme.dark
-      ? grey400
-      : grey50;
+    const thumbTintColor =
+      Platform.OS === 'ios'
+        ? undefined
+        : disabled
+        ? theme.dark
+          ? grey800
+          : grey400
+        : value
+        ? checkedColor
+        : theme.dark
+        ? grey400
+        : grey50;
 
-  const props =
-    version && version.major === 0 && version.minor <= 56
-      ? {
-          onTintColor,
-          thumbTintColor,
-        }
-      : Platform.OS === 'web'
-      ? {
-          activeTrackColor: onTintColor,
-          thumbColor: thumbTintColor,
-          activeThumbColor: checkedColor,
-        }
-      : {
-          thumbColor: thumbTintColor,
-          trackColor: {
-            true: onTintColor,
-            false: '',
-          },
-        };
+    const props =
+      version && version.major === 0 && version.minor <= 56
+        ? {
+            onTintColor,
+            thumbTintColor,
+          }
+        : Platform.OS === 'web'
+        ? {
+            activeTrackColor: onTintColor,
+            thumbColor: thumbTintColor,
+            activeThumbColor: checkedColor,
+          }
+        : {
+            thumbColor: thumbTintColor,
+            trackColor: {
+              true: onTintColor,
+              false: '',
+            },
+          };
 
-  return (
-    <NativeSwitch
-      value={value}
-      disabled={disabled}
-      onValueChange={disabled ? undefined : onValueChange}
-      {...props}
-      {...rest}
-    />
-  );
-};
+    return (
+      <NativeSwitch
+        value={value}
+        disabled={disabled}
+        onValueChange={disabled ? undefined : onValueChange}
+        ref={ref}
+        {...props}
+        {...rest}
+      />
+    );
+  }
+);
 
 export default withTheme(Switch);
