@@ -29,6 +29,12 @@ const data: Data[] = [
     github: 'https://github.com/callstack/react-native-paper/tree/main/example',
   },
   {
+    color: '#696AC3',
+    name: 'YumMeals',
+    image: 'showcase/yummeals.png',
+    github: 'https://github.com/BernStrom/YumMeals',
+  },
+  {
     color: '#673AB7',
     name: 'Showman',
     image: 'showcase/showman.png',
