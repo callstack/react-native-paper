@@ -91,6 +91,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
     const {
       fontSize: fontSizeStyle,
       fontWeight,
+      lineHeight,
       height,
       paddingHorizontal,
       textAlign,
@@ -269,6 +270,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
       font,
       fontSize,
       fontWeight,
+      lineHeight,
       labelScale,
       wiggleOffsetX: LABEL_WIGGLE_X_OFFSET,
       topPosition,
