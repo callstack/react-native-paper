@@ -84,6 +84,10 @@ type Props = {
    * TestID used for testing purposes
    */
   testID?: string;
+  /**
+   * Accessibility label for the TouchableRipple. This is read by the screen reader when the user taps the touchable.
+   */
+  accessibilityLabel?: string;
 };
 
 /**
@@ -146,6 +150,7 @@ const ListAccordion = ({
   onPress,
   onLongPress,
   expanded: expandedProp,
+  accessibilityLabel,
 }: Props) => {
   const [expanded, setExpanded] = React.useState<boolean>(
     expandedProp || false
@@ -190,6 +195,8 @@ const ListAccordion = ({
           accessibilityTraits="button"
           accessibilityComponentType="button"
           accessibilityRole="button"
+          accessibilityState={{ expanded: isExpanded }}
+          accessibilityLabel={accessibilityLabel}
           testID={testID}
           delayPressIn={0}
           borderless
