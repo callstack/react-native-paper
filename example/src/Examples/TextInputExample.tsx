@@ -116,7 +116,7 @@ const TextInputExample = () => {
   return (
     <TextInputAvoidingView>
       <ScreenWrapper
-        style={styles.container}
+        contentContainerStyle={styles.container}
         keyboardShouldPersistTaps={'always'}
         removeClippedSubviews={false}
       >
@@ -433,6 +433,15 @@ const TextInputExample = () => {
             style={{
               textAlign: 'center',
             }}
+          />
+        </View>
+        <View style={styles.inputContainerStyle}>
+          <TextInput
+            mode="outlined"
+            theme={{
+              roundness: 25,
+            }}
+            label="Custom rounded input"
           />
         </View>
       </ScreenWrapper>

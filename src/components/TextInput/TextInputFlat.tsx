@@ -277,6 +277,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
       activeColor,
       placeholderColor,
       errorColor,
+      roundness: theme.roundness,
     };
     const affixTopPosition = {
       [AdornmentSide.Left]: leftAffixTopPosition,

@@ -68,6 +68,7 @@ export type LabelProps = {
   errorColor?: string;
   error?: boolean | null;
   onLayoutAnimatedText: (args: any) => void;
+  roundness: number;
 };
 export type InputLabelProps = {
   parentState: State;
