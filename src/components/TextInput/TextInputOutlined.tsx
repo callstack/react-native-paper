@@ -213,6 +213,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
       backgroundColor: backgroundColor as ColorValue,
       errorColor,
       labelTranslationXOffset,
+      roundness: theme.roundness,
     };
 
     const minHeight = (height ||
