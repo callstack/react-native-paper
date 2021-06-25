@@ -185,6 +185,10 @@ type Props = {
    */
   getColor?: (props: { route: Route }) => string | undefined;
   /**
+   * Get isVisibleInTabBar for the tab.
+   */
+  getIsVisibleInTabBar?: (props: { route: Route }) => boolean | undefined;
+  /**
    * Function to execute on tab press. It receives the route for the pressed tab, useful for things like scroll to top.
    */
   onTabPress?: (props: { route: Route } & TabPressEvent) => void;
@@ -328,6 +332,7 @@ const BottomNavigation = ({
   getLabelText = ({ route }: { route: Route }) => route.title,
   getBadge = ({ route }: { route: Route }) => route.badge,
   getColor = ({ route }: { route: Route }) => route.color,
+  getIsVisibleInTabBar,
   getAccessibilityLabel = ({ route }: { route: Route }) =>
     route.accessibilityLabel,
   getTestID = ({ route }: { route: Route }) => route.testID,
@@ -732,6 +737,11 @@ const BottomNavigation = ({
               />
             ) : null}
             {routes.map((route, index) => {
+              if (
+                getIsVisibleInTabBar &&
+                getIsVisibleInTabBar({ route }) === false
+              )
+                return null;
               const focused = navigationState.index === index;
               const active = tabsAnims[index];
 
