@@ -89,6 +89,7 @@ it('correctly applies textAlign center', () => {
 it('correctly applies heigh to mutline Outline TextInput', () => {
   const { toJSON } = render(
     <TextInput
+      mode="outlined"
       label="Outline Input"
       placeholder="Type Something"
       value={'Some test value'}
