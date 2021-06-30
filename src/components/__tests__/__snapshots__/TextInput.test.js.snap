@@ -177,7 +177,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
 </View>
 `;
 
-exports[`correctly applies heigh to mutline Outline TextInput 1`] = `
+exports[`correctly applies height to multiline Outline TextInput 1`] = `
 <View
   style={Object {}}
 >
