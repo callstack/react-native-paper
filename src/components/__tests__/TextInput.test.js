@@ -86,7 +86,7 @@ it('correctly applies textAlign center', () => {
   expect(toJSON()).toMatchSnapshot();
 });
 
-it('correctly applies heigh to mutline Outline TextInput', () => {
+it('correctly applies height to multiline Outline TextInput', () => {
   const { toJSON } = render(
     <TextInput
       mode="outlined"
