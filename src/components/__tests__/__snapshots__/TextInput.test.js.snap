@@ -177,6 +177,229 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
 </View>
 `;
 
+exports[`correctly applies height to multiline Outline TextInput 1`] = `
+<View
+  style={Object {}}
+>
+  <View>
+    <View
+      pointerEvents="none"
+      style={
+        Array [
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 6,
+          },
+          Object {
+            "backgroundColor": "#f6f6f6",
+            "borderColor": "rgba(0, 0, 0, 0.54)",
+            "borderRadius": 4,
+            "borderWidth": 1,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "paddingBottom": 0,
+          },
+          Object {
+            "minHeight": 100,
+            "paddingTop": 8,
+          },
+        ]
+      }
+    >
+      <View
+        pointerEvents="none"
+        style={
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "opacity": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+            "transform": Array [
+              Object {
+                "translateX": 3,
+              },
+            ],
+          }
+        }
+      >
+        <View
+          pointerEvents="none"
+          style={
+            Object {
+              "backgroundColor": "#f6f6f6",
+              "bottom": 4,
+              "left": 10,
+              "opacity": 1,
+              "position": "absolute",
+              "right": 0,
+              "top": 6,
+              "transform": Array [
+                Object {
+                  "translateX": -3,
+                },
+              ],
+              "width": 8,
+            }
+          }
+        />
+        <Text
+          numberOfLines={1}
+          style={
+            Object {
+              "backgroundColor": "#f6f6f6",
+              "color": "transparent",
+              "fontFamily": "System",
+              "fontSize": 16,
+              "fontWeight": undefined,
+              "left": 18,
+              "opacity": 1,
+              "paddingHorizontal": 0,
+              "position": "absolute",
+              "textAlign": "left",
+              "top": 59,
+              "transform": Array [
+                Object {
+                  "translateX": 0,
+                },
+                Object {
+                  "translateY": -52,
+                },
+                Object {
+                  "scale": 0.75,
+                },
+                Object {
+                  "scaleY": 0.2,
+                },
+              ],
+              "writingDirection": "ltr",
+            }
+          }
+        >
+          Outline Input
+        </Text>
+        <Text
+          numberOfLines={1}
+          onLayout={[Function]}
+          style={
+            Object {
+              "color": "#6200ee",
+              "fontFamily": "System",
+              "fontSize": 16,
+              "fontWeight": undefined,
+              "left": 0,
+              "opacity": 0,
+              "paddingHorizontal": 14,
+              "position": "absolute",
+              "textAlign": "left",
+              "top": 58,
+              "transform": Array [
+                Object {
+                  "translateX": 0,
+                },
+                Object {
+                  "translateY": -52,
+                },
+                Object {
+                  "scale": 0.75,
+                },
+              ],
+              "writingDirection": "ltr",
+            }
+          }
+        >
+          Outline Input
+        </Text>
+        <Text
+          numberOfLines={1}
+          style={
+            Object {
+              "color": "rgba(0, 0, 0, 0.54)",
+              "fontFamily": "System",
+              "fontSize": 16,
+              "fontWeight": undefined,
+              "left": 0,
+              "opacity": 0,
+              "paddingHorizontal": 14,
+              "position": "absolute",
+              "textAlign": "left",
+              "top": 58,
+              "transform": Array [
+                Object {
+                  "translateX": 0,
+                },
+                Object {
+                  "translateY": -52,
+                },
+                Object {
+                  "scale": 0.75,
+                },
+              ],
+              "writingDirection": "ltr",
+            }
+          }
+        >
+          Outline Input
+        </Text>
+      </View>
+      <TextInput
+        allowFontScaling={true}
+        editable={true}
+        multiline={true}
+        onBlur={[Function]}
+        onChangeText={[Function]}
+        onFocus={[Function]}
+        placeholder=""
+        placeholderTextColor="rgba(0, 0, 0, 0.54)"
+        rejectResponderTermination={true}
+        selectionColor="#6200ee"
+        style={
+          Array [
+            Object {
+              "flexGrow": 1,
+              "margin": 0,
+              "paddingHorizontal": 14,
+              "zIndex": 1,
+            },
+            Object {
+              "height": 100,
+            },
+            Object {
+              "paddingBottom": 24,
+              "paddingTop": 24,
+            },
+            Object {
+              "color": "#000000",
+              "fontFamily": "System",
+              "fontSize": 16,
+              "fontWeight": undefined,
+              "textAlign": "left",
+              "textAlignVertical": "top",
+            },
+            false,
+            Array [
+              Object {},
+            ],
+          ]
+        }
+        underlineColorAndroid="transparent"
+        value="Some test value"
+      />
+    </View>
+  </View>
+</View>
+`;
+
 exports[`correctly applies textAlign center 1`] = `
 <View
   style={
