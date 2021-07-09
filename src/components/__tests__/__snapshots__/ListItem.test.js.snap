@@ -93,7 +93,7 @@ exports[`renders list item with custom description 1`] = `
                 "borderStyle": "solid",
                 "borderWidth": 0.5,
                 "elevation": 0,
-                "flexDirection": "row",
+                "flexDirection": "column",
               }
             }
           >
@@ -119,9 +119,14 @@ exports[`renders list item with custom description 1`] = `
                   Object {
                     "overflow": "hidden",
                   },
-                  Object {
-                    "borderRadius": 16,
-                  },
+                  Array [
+                    Object {
+                      "borderRadius": 16,
+                    },
+                    Object {
+                      "flex": 1,
+                    },
+                  ],
                 ]
               }
             >
