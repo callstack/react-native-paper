@@ -47,7 +47,7 @@ const DIALOG_ELEVATION: number = 24;
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { View } from 'react-native';
+ * import { View, StyleSheet } from 'react-native';
  * import { Button, Paragraph, Dialog, Portal } from 'react-native-paper';
  *
  * const MyComponent = () => {
@@ -58,7 +58,7 @@ const DIALOG_ELEVATION: number = 24;
  *   const hideDialog = () => setVisible(false);
  *
  *   return (
- *     <View>
+ *     <View style={styles.container}>
  *       <Button onPress={showDialog}>Show Dialog</Button>
  *       <Portal>
  *         <Dialog visible={visible} onDismiss={hideDialog}>
@@ -76,6 +76,13 @@ const DIALOG_ELEVATION: number = 24;
  * };
  *
  * export default MyComponent;
+ * const styles = StyleSheet.create({
+ *  container: {
+ *    flex: 1,
+ *    alignItems: 'center',
+ *    justifyContent: 'center',
+ *  },
+ * })
  * ```
  */
 const Dialog = ({
