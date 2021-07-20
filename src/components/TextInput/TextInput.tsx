@@ -65,6 +65,10 @@ export type TextInputProps = React.ComponentPropsWithRef<
    */
   outlineColor?: string;
   /**
+   * Outline width of the input.
+   */
+  outlineWidth?: number;
+  /**
    * Sets min height with densed layout. For `TextInput` in `flat` mode
    * height is `64dp` or in dense layout - `52dp` with label or `40dp` without label.
    * For `TextInput` in `outlined` mode

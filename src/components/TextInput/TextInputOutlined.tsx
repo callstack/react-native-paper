@@ -63,6 +63,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       underlineColor,
       outlineColor: customOutlineColor,
+      outlineWidth,
       dense,
       style,
       theme,
@@ -293,6 +294,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
             hasActiveOutline={hasActiveOutline}
             activeColor={activeColor}
             outlineColor={outlineColor}
+            outlineWidth={outlineWidth}
             backgroundColor={backgroundColor}
           />
           <View
@@ -362,6 +364,7 @@ type OutlineProps = {
   activeColor: string;
   hasActiveOutline?: boolean;
   outlineColor?: string;
+  outlineWidth?: number;
   backgroundColor: ColorValue;
   theme: ReactNativePaper.Theme;
 };
@@ -372,6 +375,7 @@ const Outline = ({
   activeColor,
   outlineColor,
   backgroundColor,
+  outlineWidth,
 }: OutlineProps) => (
   <View
     pointerEvents="none"
@@ -381,7 +385,7 @@ const Outline = ({
       {
         backgroundColor,
         borderRadius: theme.roundness,
-        borderWidth: hasActiveOutline ? 2 : 1,
+        borderWidth: outlineWidth ? outlineWidth : hasActiveOutline ? 2 : 1,
         borderColor: hasActiveOutline ? activeColor : outlineColor,
       },
     ]}
