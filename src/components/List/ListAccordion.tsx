@@ -215,7 +215,7 @@ const ListAccordion = ({
               >
                 {title}
               </Text>
-              {description && (
+              {description ? (
                 <Text
                   selectable={false}
                   numberOfLines={descriptionNumberOfLines}
@@ -229,7 +229,7 @@ const ListAccordion = ({
                 >
                   {description}
                 </Text>
-              )}
+              ) : null}
             </View>
             <View
               style={[styles.item, description ? styles.multiline : undefined]}
