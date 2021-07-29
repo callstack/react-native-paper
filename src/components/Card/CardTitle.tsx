@@ -176,11 +176,13 @@ const styles = StyleSheet.create({
 
   title: {
     minHeight: 30,
+    paddingRight: 16,
   },
 
   subtitle: {
     minHeight: 20,
     marginVertical: 0,
+    paddingRight: 16,
   },
 });
 
