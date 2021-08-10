@@ -102,12 +102,6 @@ export default function Modal({
   contentContainerStyle,
   style,
 }: Props) {
-  const visibleRef = React.useRef(visible);
-
-  React.useEffect(() => {
-    visibleRef.current = visible;
-  });
-
   const { colors, animation } = useTheme();
 
   const opacity = useAnimatedValue(visible ? 1 : 0);
@@ -131,12 +125,17 @@ export default function Modal({
    * (due to a potential re-render of `visible` being set) being called, leaving the event in-tact and not removing properly
    */
   const backHandlerSub = React.useRef<NativeEventSubscription | null>(null);
+  const handleBackRef = React.useRef(handleBack);
+
+  React.useEffect(() => {
+    handleBackRef.current = handleBack;
+  });
 
   const showModal = () => {
     backHandlerSub.current?.remove();
     backHandlerSub.current = BackHandler.addEventListener(
       'hardwareBackPress',
-      handleBack
+      () => handleBackRef.current()
     );
 
     const { scale } = animation;
@@ -168,7 +167,7 @@ export default function Modal({
         onDismiss();
       }
 
-      if (visibleRef.current) {
+      if (visible) {
         showModal();
       } else {
         setRendered(false);
