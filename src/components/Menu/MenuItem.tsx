@@ -11,7 +11,7 @@ import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 import { black, white } from '../../styles/colors';
-import { useTheme } from '../../core/theming';
+import { withTheme } from '../../core/theming';
 
 type Props = {
   /**
@@ -36,6 +36,10 @@ type Props = {
   style?: StyleProp<ViewStyle>;
   contentStyle?: StyleProp<ViewStyle>;
   titleStyle?: StyleProp<TextStyle>;
+  /**
+   * @optional
+   */
+  theme: ReactNativePaper.Theme;
   /**
    * TestID used for testing purposes
    */
@@ -74,7 +78,7 @@ type Props = {
  * export default MyComponent;
  * ```
  */
-function MenuItem({
+const MenuItem = ({
   icon,
   title,
   disabled,
@@ -84,9 +88,8 @@ function MenuItem({
   testID,
   titleStyle,
   accessibilityLabel,
-}: Props) {
-  const theme = useTheme();
-
+  theme,
+}: Props) => {
   const disabledColor = color(theme.dark ? white : black)
     .alpha(0.32)
     .rgb()
@@ -136,7 +139,7 @@ function MenuItem({
       </View>
     </TouchableRipple>
   );
-}
+};
 
 MenuItem.displayName = 'Menu.Item';
 
@@ -174,7 +177,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MenuItem;
-
-// @component-docs ignore-next-line
-export { MenuItem };
+export default withTheme(MenuItem);
