@@ -27,6 +27,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
             "scaleY": 0.5,
           },
         ],
+        "zIndex": 1,
       }
     }
   />
@@ -143,7 +144,6 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
           Object {
             "flexGrow": 1,
             "margin": 0,
-            "zIndex": 1,
           },
           Object {
             "paddingLeft": 12,
@@ -427,6 +427,7 @@ exports[`correctly applies textAlign center 1`] = `
             "scaleY": 0.5,
           },
         ],
+        "zIndex": 1,
       }
     }
   />
@@ -543,7 +544,6 @@ exports[`correctly applies textAlign center 1`] = `
           Object {
             "flexGrow": 1,
             "margin": 0,
-            "zIndex": 1,
           },
           Object {
             "paddingLeft": 12,
@@ -604,6 +604,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "scaleY": 0.5,
           },
         ],
+        "zIndex": 1,
       }
     }
   />
@@ -720,7 +721,6 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           Object {
             "flexGrow": 1,
             "margin": 0,
-            "zIndex": 1,
           },
           Object {
             "paddingLeft": 12,
@@ -923,6 +923,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "scaleY": 0.5,
           },
         ],
+        "zIndex": 1,
       }
     }
   />
@@ -1039,7 +1040,6 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           Object {
             "flexGrow": 1,
             "margin": 0,
-            "zIndex": 1,
           },
           Object {
             "paddingLeft": 44,

@@ -422,6 +422,7 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     height: 2,
+    zIndex: 1,
   },
   labelContainer: {
     paddingTop: 0,
@@ -430,7 +431,6 @@ const styles = StyleSheet.create({
   input: {
     flexGrow: 1,
     margin: 0,
-    zIndex: 1,
   },
   inputFlat: {
     paddingTop: 24,
