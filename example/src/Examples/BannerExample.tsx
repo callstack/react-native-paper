@@ -26,8 +26,12 @@ const BannerExample = () => {
           ]}
           icon={require('../../assets/images/email-icon.png')}
           visible={visible}
-          onAnimateShowFinish={() => console.log('Completed opening animation')}
-          onAnimateHideFinish={() => console.log('Completed closing animation')}
+          onShowAnimationFinished={() =>
+            console.log('Completed opening animation')
+          }
+          onHideAnimationFinished={() =>
+            console.log('Completed closing animation')
+          }
         >
           Two line text string with two actions. One to two lines is preferable
           on mobile.

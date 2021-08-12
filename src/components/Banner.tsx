@@ -52,12 +52,12 @@ type Props = $RemoveChildren<typeof Surface> & {
    * @optional
    * Optional callback that will be called after the opening animation finished running normally
    */
-  onAnimateShowFinish?: Animated.EndCallback;
+  onShowAnimationFinished?: Animated.EndCallback;
   /**
    * @optional
    * Optional callback that will be called after the closing animation finished running normally
    */
-  onAnimateHideFinish?: Animated.EndCallback;
+  onHideAnimationFinished?: Animated.EndCallback;
 };
 
 type NativeEvent = {
@@ -127,8 +127,8 @@ const Banner = ({
   contentStyle,
   style,
   theme,
-  onAnimateShowFinish = () => {},
-  onAnimateHideFinish = () => {},
+  onShowAnimationFinished = () => {},
+  onHideAnimationFinished = () => {},
   ...rest
 }: Props) => {
   const { current: position } = React.useRef<Animated.Value>(
@@ -151,14 +151,14 @@ const Banner = ({
         duration: 250 * scale,
         toValue: 1,
         useNativeDriver: false,
-      }).start(onAnimateShowFinish);
+      }).start(onShowAnimationFinished);
     } else {
       // hide
       Animated.timing(position, {
         duration: 200 * scale,
         toValue: 0,
         useNativeDriver: false,
-      }).start(onAnimateHideFinish);
+      }).start(onHideAnimationFinished);
     }
   }, [visible, position, scale]);
 
