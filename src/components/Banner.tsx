@@ -50,7 +50,7 @@ type Props = $RemoveChildren<typeof Surface> & {
   theme: ReactNativePaper.Theme;
   /**
    * @optional
-   * Optional function that will be called after the open animation finished running normally
+   * Optional callback that will be called after the opening animation finished running normally
    */
   onAnimateShowFinish?: Animated.EndCallback;
   /**
