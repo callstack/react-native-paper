@@ -55,7 +55,7 @@ type Props = $RemoveChildren<typeof Surface> & {
   onAnimateShowFinish?: Animated.EndCallback;
   /**
    * @optional
-   * Optional function that will be called after the close animation finished running normally
+   * Optional callback that will be called after the closing animation finished running normally
    */
   onAnimateHideFinish?: Animated.EndCallback;
 };
