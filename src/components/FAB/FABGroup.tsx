@@ -23,7 +23,9 @@ type Props = {
    * - `label`: optional label text
    * - `accessibilityLabel`: accessibility label for the action, uses label by default if specified
    * - `color`: custom icon color of the action item
+   * - `labelTextColor`: custom label text color of the action item
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
+   * - `labelStyle`: pass additional styles for the fab item label, for example, `backgroundColor`
    * - `small`: boolean describing whether small or normal sized FAB is rendered. Defaults to `true`
    * - `onPress`: callback that is called when `FAB` is pressed (required)
    */
@@ -31,8 +33,10 @@ type Props = {
     icon: IconSource;
     label?: string;
     color?: string;
+    labelTextColor?: string;
     accessibilityLabel?: string;
     style?: StyleProp<ViewStyle>;
+    labelStyle?: StyleProp<ViewStyle>;
     small?: boolean;
     onPress: () => void;
     testID?: string;
@@ -292,6 +296,7 @@ const FABGroup = ({
                           transform: [{ scale: scales[i] }],
                           opacity: opacities[i],
                         },
+                        it.labelStyle,
                       ] as StyleProp<ViewStyle>
                     }
                     onPress={() => {
@@ -308,7 +313,9 @@ const FABGroup = ({
                     accessibilityComponentType="button"
                     accessibilityRole="button"
                   >
-                    <Text style={{ color: labelColor }}>{it.label}</Text>
+                    <Text style={{ color: it.labelTextColor ?? labelColor }}>
+                      {it.label}
+                    </Text>
                   </Card>
                 </View>
               )}
