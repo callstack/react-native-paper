@@ -70,7 +70,7 @@ export type Props = {
    */
   mode?: 'android' | 'ios';
   /**
-   * Radio button control position. Default is `leading`.
+   * Radio button control position.
    */
   position?: 'leading' | 'trailing';
 };
