@@ -67,6 +67,8 @@ const DataTableRow = ({ onPress, style, theme, children, ...rest }: Props) => {
   );
 };
 
+DataTableRow.displayName = 'DataTable.Row';
+
 const styles = StyleSheet.create({
   container: {
     borderStyle: 'solid',
