@@ -75,10 +75,8 @@ Snackbar by default uses <code>onSurface</code> color from theme.</p>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> MyComponent<span class="token punctuation">;</span></code></pre>
 </div><h2>Props</h2><div class="PropInfo_p1eats2g"><a name="visible" href="#visible" class="PropLabel_psi127e"><code>visible</code> (required)</a><div class="PropItem_pwdtv5j"><span>Type: </span><code>boolean</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Whether the Snackbar is currently visible.</p>
-</div></div><div class="PropInfo_p1eats2g"><a name="action" href="#action" class="PropLabel_psi127e"><code>action</code></a><div class="PropItem_pwdtv5j"><span>Type: </span><code>{
+</div></div><div class="PropInfo_p1eats2g"><a name="action" href="#action" class="PropLabel_psi127e"><code>action</code></a><div class="PropItem_pwdtv5j"><span>Type: </span><code>Omit&lt;React.ComponentProps&lt;typeof Button&gt;, &#x27;children&#x27;&gt; &amp; {
   label: string;
-  accessibilityLabel?: string;
-  onPress: () =&gt; void;
 }</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Label and press callback for the action button. It should contain the following properties:</p>
 <ul>
 <li><code>label</code> - Label of the action button</li>

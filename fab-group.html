@@ -69,6 +69,7 @@ To render the group above other components, you'll need to wrap it with the <a h
               icon<span class="token punctuation">:</span> <span class="token string">'bell'</span><span class="token punctuation">,</span>
               label<span class="token punctuation">:</span> <span class="token string">'Remind'</span><span class="token punctuation">,</span>
               <span class="token function-variable function">onPress</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Pressed notifications'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+              small<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">]</span><span class="token punctuation">}</span></span>
           <span class="token attr-name">onStateChange</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>onStateChange<span class="token punctuation">}</span></span>
@@ -90,6 +91,7 @@ To render the group above other components, you'll need to wrap it with the <a h
   color?: string;
   accessibilityLabel?: string;
   style?: StyleProp&lt;ViewStyle&gt;;
+  small?: boolean;
   onPress: () =&gt; void;
   testID?: string;
 }&gt;</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Action items to display in the form of a speed dial.
@@ -100,6 +102,7 @@ An action item should contain the following properties:</p>
 <li><code>accessibilityLabel</code>: accessibility label for the action, uses label by default if specified</li>
 <li><code>color</code>: custom icon color of the action item</li>
 <li><code>style</code>: pass additional styles for the fab item, for example, <code>backgroundColor</code></li>
+<li><code>small</code>: boolean describing whether small or normal sized FAB is rendered. Defaults to <code>true</code></li>
 <li><code>onPress</code>: callback that is called when <code>FAB</code> is pressed (required)</li>
 </ul>
 </div></div><div class="PropInfo_p1eats2g"><a name="icon" href="#icon" class="PropLabel_psi127e"><code>icon</code> (required)</a><div class="PropItem_pwdtv5j"><span>Type: </span><code>IconSource</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Icon to display for the <code>FAB</code>.
