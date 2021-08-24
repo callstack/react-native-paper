@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render, waitForElement } from 'react-native-testing-library';
+import { render, waitForElement, act } from 'react-native-testing-library';
 import { Text } from 'react-native';
 import Portal from '../Portal/Portal.tsx';
 
@@ -15,7 +15,7 @@ it('renders portal with siblings', async () => {
     </Portal.Host>
   );
 
-  await waitForElement(() => getByTestId('content'));
+  await act(async () => await waitForElement(() => getByTestId('content')));
 
   expect(toJSON()).toMatchSnapshot();
 });

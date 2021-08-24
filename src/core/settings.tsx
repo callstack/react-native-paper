@@ -7,6 +7,6 @@ export type Settings = {
   icon: ({ name, color, size, direction }: IconProps) => React.ReactNode;
 };
 
-export const { Provider, Consumer } = React.createContext<Settings>({
+export const SettingsContext = React.createContext<Settings>({
   icon: MaterialCommunityIcon,
 });

@@ -1,10 +1,7 @@
 import * as React from 'react';
 import PortalConsumer from './PortalConsumer';
 import PortalHost, { PortalContext, PortalMethods } from './PortalHost';
-import {
-  Provider as SettingsProvider,
-  Consumer as SettingsConsumer,
-} from '../../core/settings';
+import { SettingsContext } from '../../core/settings';
 import { ThemeProvider, withTheme } from '../../core/theming';
 
 type Props = {
@@ -37,29 +34,19 @@ type Props = {
  * export default MyComponent;
  * ```
  */
-class Portal extends React.Component<Props> {
-  // @component ./PortalHost.tsx
-  static Host = PortalHost;
+const Portal = ({ children, theme }: Props) => {
+  const settings = React.useContext(SettingsContext);
+  const manager = React.useContext(PortalContext);
+  return (
+    <PortalConsumer manager={manager as PortalMethods}>
+      <SettingsContext.Provider value={settings}>
+        <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      </SettingsContext.Provider>
+    </PortalConsumer>
+  );
+};
 
-  render() {
-    const { children, theme } = this.props;
-
-    return (
-      <SettingsConsumer>
-        {(settings) => (
-          <PortalContext.Consumer>
-            {(manager) => (
-              <PortalConsumer manager={manager as PortalMethods}>
-                <SettingsProvider value={settings}>
-                  <ThemeProvider theme={theme}>{children}</ThemeProvider>
-                </SettingsProvider>
-              </PortalConsumer>
-            )}
-          </PortalContext.Consumer>
-        )}
-      </SettingsConsumer>
-    );
-  }
-}
+// @component ./PortalHost.tsx
+Portal.Host = PortalHost;
 
 export default withTheme(Portal);
