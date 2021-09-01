@@ -5,6 +5,7 @@ import {
   Platform,
   StyleProp,
   StyleSheet,
+  TextStyle,
   TouchableWithoutFeedback,
   View,
   ViewStyle,
@@ -78,7 +79,7 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Style of chip's text
    */
-  textStyle?: any;
+  textStyle?: StyleProp<TextStyle>;
   style?: StyleProp<ViewStyle>;
 
   /**
