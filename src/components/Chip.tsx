@@ -40,6 +40,10 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   avatar?: React.ReactNode;
   /**
+   * Icon to display as the close button for the `Chip`. The icon appears only when the onClose prop is specified.
+   */
+  closeIcon?: IconSource;
+  /**
    * Whether chip is selected.
    */
   selected?: boolean;
@@ -129,6 +133,7 @@ const Chip = ({
   onPress,
   onLongPress,
   onClose,
+  closeIcon,
   textStyle,
   style,
   theme,
@@ -320,12 +325,16 @@ const Chip = ({
             accessibilityLabel={closeIconAccessibilityLabel}
           >
             <View style={[styles.icon, styles.closeIcon]}>
-              <MaterialCommunityIcon
-                name="close-circle"
-                size={16}
-                color={iconColor}
-                direction="ltr"
-              />
+              {closeIcon ? (
+                <Icon source={closeIcon} color={iconColor} size={16} />
+              ) : (
+                <MaterialCommunityIcon
+                  name="close-circle"
+                  size={16}
+                  color={iconColor}
+                  direction="ltr"
+                />
+              )}
             </View>
           </TouchableWithoutFeedback>
         </View>
