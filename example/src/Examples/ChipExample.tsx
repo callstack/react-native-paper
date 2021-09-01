@@ -25,6 +25,15 @@ const ChipExample = () => {
               Close button
             </Chip>
             <Chip
+              onPress={() => {}}
+              onClose={() => {}}
+              closeIcon="arrow-down"
+              style={styles.chip}
+              closeIconAccessibilityLabel="Custom Close icon accessibility label"
+            >
+              Custom Close button
+            </Chip>
+            <Chip
               icon="heart"
               onPress={() => {}}
               onClose={() => {}}
