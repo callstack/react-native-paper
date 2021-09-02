@@ -37,10 +37,10 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
  *
  * const MyComponent = () => (
  *      <DataTable.Row>
- *        <DataTable.Cell numeric>1</DataTable.Cell>
- *        <DataTable.Cell numeric>2</DataTable.Cell>
- *        <DataTable.Cell numeric>3</DataTable.Cell>
- *        <DataTable.Cell numeric>4</DataTable.Cell>
+ *        <DataTable.Cell numeric>y</DataTable.Cell>
+ *        <DataTable.Cell numeric>o</DataTable.Cell>
+ *        <DataTable.Cell numeric>s</DataTable.Cell>
+ *        <DataTable.Cell numeric>y</DataTable.Cell>
  *      </DataTable.Row>
  * );
  *
