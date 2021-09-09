@@ -16,6 +16,11 @@ type Props = {
    * @optional
    */
   theme: ReactNativePaper.Theme;
+  /**
+   * Whether the Portal content is currently focused. This hides everything outside the portal from accessibility tools.
+   * @optional
+   */
+  isFocused?: boolean;
 };
 
 /**
@@ -42,14 +47,17 @@ class Portal extends React.Component<Props> {
   static Host = PortalHost;
 
   render() {
-    const { children, theme } = this.props;
+    const { children, isFocused, theme } = this.props;
 
     return (
       <SettingsConsumer>
         {(settings) => (
           <PortalContext.Consumer>
             {(manager) => (
-              <PortalConsumer manager={manager as PortalMethods}>
+              <PortalConsumer
+                manager={manager as PortalMethods}
+                isFocused={isFocused ?? false}
+              >
                 <SettingsProvider value={settings}>
                   <ThemeProvider theme={theme}>{children}</ThemeProvider>
                 </SettingsProvider>

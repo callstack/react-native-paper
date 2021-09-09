@@ -5,19 +5,48 @@ import PortalManager from './PortalManager';
 type Props = {
   children: React.ReactNode;
 };
+type State = {
+  portalVisibility: { [key in number]: boolean };
+};
 
-type Operation =
-  | { type: 'mount'; key: number; children: React.ReactNode }
-  | { type: 'update'; key: number; children: React.ReactNode }
-  | { type: 'unmount'; key: number };
+type Operation = { isFocused?: boolean } & (
+  | {
+      type: 'mount';
+      key: number;
+      children: React.ReactNode;
+    }
+  | {
+      type: 'update';
+      key: number;
+      children: React.ReactNode;
+    }
+  | { type: 'unmount'; key: number }
+);
 
 export type PortalMethods = {
-  mount: (children: React.ReactNode) => number;
-  update: (key: number, children: React.ReactNode) => void;
+  mount: (children: React.ReactNode, isFocused: boolean) => number;
+  update: (key: number, children: React.ReactNode, isFocused: boolean) => void;
   unmount: (key: number) => void;
 };
 
 export const PortalContext = React.createContext<PortalMethods>(null as any);
+
+const updateVisibilityForKey = (key: number, isFocused: boolean) => ({
+  portalVisibility,
+}: Pick<State, 'portalVisibility'>): Pick<State, 'portalVisibility'> => ({
+  portalVisibility: isFocused
+    ? { ...portalVisibility, [key]: true } // If it's focused, set the key to true
+    : portalVisibility[key] === undefined //
+    ? { ...portalVisibility } // If not focused and key doesn't have a value, just return current object
+    : Object.keys(portalVisibility).reduce((acc, keyIterator) => {
+        const keyIndex = parseInt(keyIterator);
+        // If not focused but key already has a value, remove the key
+        if (keyIndex !== key) {
+          acc[keyIndex] = portalVisibility[keyIndex];
+        }
+        return acc;
+      }, {} as { [key in number]: boolean }),
+});
 
 /**
  * Portal host renders all of its children `Portal` elements.
@@ -41,8 +70,17 @@ export const PortalContext = React.createContext<PortalMethods>(null as any);
  *
  * Here any `Portal` elements under `<App />` are rendered alongside `<App />` and will appear above `<App />` like a `Modal`.
  */
-export default class PortalHost extends React.Component<Props> {
+export default class PortalHost extends React.Component<Props, State> {
   static displayName = 'Portal.Host';
+  state: State = { portalVisibility: {} };
+
+  shouldComponentUpdate(nextProps: Props, nextState: State) {
+    return (
+      this.props !== nextProps ||
+      Object.values(this.state.portalVisibility).some(Boolean) !==
+        Object.values(nextState.portalVisibility).some(Boolean)
+    );
+  }
 
   componentDidMount() {
     const manager = this.manager;
@@ -63,6 +101,9 @@ export default class PortalHost extends React.Component<Props> {
             manager.unmount(action.key);
             break;
         }
+        this.setState(
+          updateVisibilityForKey(action.key, action.isFocused ?? false)
+        );
       }
     }
   }
@@ -71,23 +112,29 @@ export default class PortalHost extends React.Component<Props> {
     this.manager = manager;
   };
 
-  private mount = (children: React.ReactNode) => {
+  private mount = (children: React.ReactNode, isFocused: boolean) => {
     const key = this.nextKey++;
 
     if (this.manager) {
       this.manager.mount(key, children);
+      this.setState(updateVisibilityForKey(key, isFocused));
     } else {
-      this.queue.push({ type: 'mount', key, children });
+      this.queue.push({ type: 'mount', key, children, isFocused });
     }
 
     return key;
   };
 
-  private update = (key: number, children: React.ReactNode) => {
+  private update = (
+    key: number,
+    children: React.ReactNode,
+    isFocused: boolean
+  ) => {
     if (this.manager) {
       this.manager.update(key, children);
+      this.setState(updateVisibilityForKey(key, isFocused));
     } else {
-      const op: Operation = { type: 'mount', key, children };
+      const op: Operation = { type: 'mount', key, children, isFocused };
       const index = this.queue.findIndex(
         (o) => o.type === 'mount' || (o.type === 'update' && o.key === key)
       );
@@ -103,6 +150,7 @@ export default class PortalHost extends React.Component<Props> {
   private unmount = (key: number) => {
     if (this.manager) {
       this.manager.unmount(key);
+      this.setState(updateVisibilityForKey(key, false));
     } else {
       this.queue.push({ type: 'unmount', key });
     }
@@ -113,6 +161,9 @@ export default class PortalHost extends React.Component<Props> {
   private manager: PortalManager | null | undefined;
 
   render() {
+    const isPortalInFocus = Object.values(this.state.portalVisibility).some(
+      Boolean
+    );
     return (
       <PortalContext.Provider
         value={{
@@ -123,6 +174,10 @@ export default class PortalHost extends React.Component<Props> {
       >
         {/* Need collapsable=false here to clip the elevations, otherwise they appear above Portal components */}
         <View
+          accessibilityElementsHidden={isPortalInFocus}
+          importantForAccessibility={
+            isPortalInFocus ? 'no-hide-descendants' : 'auto'
+          }
           style={styles.container}
           collapsable={false}
           pointerEvents="box-none"
