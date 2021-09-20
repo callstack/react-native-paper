@@ -25,15 +25,6 @@ const ChipExample = () => {
               Close button
             </Chip>
             <Chip
-              onPress={() => {}}
-              onClose={() => {}}
-              closeIcon="arrow-down"
-              style={styles.chip}
-              closeIconAccessibilityLabel="Custom Close icon accessibility label"
-            >
-              Custom Close button
-            </Chip>
-            <Chip
               icon="heart"
               onPress={() => {}}
               onClose={() => {}}
@@ -149,7 +140,6 @@ const ChipExample = () => {
             >
               With onLongPress
             </Chip>
-
             <Chip
               selected
               onPress={() => {}}
@@ -215,6 +205,15 @@ const ChipExample = () => {
               With a very big text: React Native Paper is a high-quality,
               standard-compliant Material Design library that has you covered in
               all major use-cases.
+            </Chip>
+            <Chip
+              onPress={() => {}}
+              onClose={() => {}}
+              closeIcon="arrow-down"
+              style={styles.chip}
+              closeIconAccessibilityLabel="Custom Close icon accessibility label"
+            >
+              With custom close icon
             </Chip>
           </View>
         </List.Section>
