@@ -201,8 +201,8 @@ const AnimatedFAB = ({
       };
     } else {
       return {
-        left: undefined,
-        right: distance,
+        left: distance,
+        right: undefined,
       };
     }
   };
@@ -253,8 +253,12 @@ const AnimatedFAB = ({
               {
                 width: extendedWidth,
                 opacity: animFAB.interpolate({
-                  inputRange: [distance, 0.9 * distance, 0],
-                  outputRange: [1, 0.15, 0],
+                  inputRange: isAnimatedFromRight
+                    ? [distance, 0.9 * distance, 0]
+                    : [0, 0.9 * distance, distance],
+                  outputRange: isAnimatedFromRight
+                    ? [1, 0.15, 0]
+                    : [0, 0.15, 1],
                 }),
               },
             ]}
@@ -266,25 +270,41 @@ const AnimatedFAB = ({
               styles.shadow,
               {
                 opacity: animFAB.interpolate({
-                  inputRange: [distance, 0.9 * distance, 0],
-                  outputRange: [0, 0.85, 1],
+                  inputRange: isAnimatedFromRight
+                    ? [distance, 0.9 * distance, 0]
+                    : [0, 0.9 * distance, distance],
+                  outputRange: isAnimatedFromRight
+                    ? [0, 0.85, 1]
+                    : [1, 0.85, 0],
                 }),
                 width: SIZE,
                 borderRadius: animFAB.interpolate({
-                  inputRange: [distance, 0],
-                  outputRange: [SIZE / (extendedWidth / SIZE), BORDER_RADIUS],
+                  inputRange: isAnimatedFromRight
+                    ? [distance, 0]
+                    : [0, distance],
+                  outputRange: isAnimatedFromRight
+                    ? [SIZE / (extendedWidth / SIZE), BORDER_RADIUS]
+                    : [BORDER_RADIUS, SIZE / (extendedWidth / SIZE)],
                 }),
                 transform: [
                   {
                     translateX: animFAB.interpolate({
-                      inputRange: [distance, 0],
-                      outputRange: [Math.abs(distance) / 2, Math.abs(distance)],
+                      inputRange: isAnimatedFromRight
+                        ? [distance, 0]
+                        : [0, distance],
+                      outputRange: isAnimatedFromRight
+                        ? [Math.abs(distance) / 2, Math.abs(distance)]
+                        : [Math.abs(distance), Math.abs(distance) / 2],
                     }),
                   },
                   {
                     scaleX: animFAB.interpolate({
-                      inputRange: [distance, 0],
-                      outputRange: [extendedWidth / SIZE, 1],
+                      inputRange: isAnimatedFromRight
+                        ? [distance, 0]
+                        : [0, distance],
+                      outputRange: isAnimatedFromRight
+                        ? [extendedWidth / SIZE, 1]
+                        : [1, extendedWidth / SIZE],
                     }),
                   },
                 ],
@@ -299,7 +319,14 @@ const AnimatedFAB = ({
               {
                 transform: [
                   {
-                    translateX: animFAB,
+                    translateX: animFAB.interpolate({
+                      inputRange: isAnimatedFromRight
+                        ? [distance, 0]
+                        : [0, distance],
+                      outputRange: isAnimatedFromRight
+                        ? [distance, 0]
+                        : [0, -distance],
+                    }),
                   },
                 ],
                 width: extendedWidth,
@@ -339,7 +366,7 @@ const AnimatedFAB = ({
         style={[
           styles.iconWrapper,
           {
-            transform: [{ translateX: animFAB }],
+            transform: [{ translateX: isAnimatedFromRight ? animFAB : 0 }],
           },
           getSidesPosition(),
         ]}
@@ -372,7 +399,7 @@ const AnimatedFAB = ({
                     inputRange: isAnimatedFromRight
                       ? [distance, 0]
                       : [0, distance],
-                    outputRange: isAnimatedFromRight ? [0, SIZE] : [-SIZE, 0],
+                    outputRange: isAnimatedFromRight ? [0, SIZE] : [SIZE, 0],
                   }),
                 },
               ],
