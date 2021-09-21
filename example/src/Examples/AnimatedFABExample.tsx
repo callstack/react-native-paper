@@ -36,9 +36,9 @@ const CustomFAB = ({ animatedValue, visible, extended }: CustomFABProps) => {
 
   React.useEffect(() => {
     if (!isIOS) {
-      animatedValue.addListener(({ value }: { value: number }) =>
-        setIsExtended(value > 0 ? true : false)
-      );
+      animatedValue.addListener(({ value }: { value: number }) => {
+        setIsExtended(value <= 0);
+      });
     } else setIsExtended(extended);
   }, [animatedValue, extended]);
 
@@ -124,7 +124,7 @@ const AnimatedFABExample = () => {
     nativeEvent,
   }: NativeSyntheticEvent<NativeScrollEvent>) => {
     if (!isIOS) {
-      return velocity.setValue(nativeEvent?.velocity?.y ?? 0);
+      return velocity.setValue(nativeEvent?.contentOffset?.y ?? 0);
     }
 
     const currentScrollPosition = Math.floor(nativeEvent.contentOffset.y);
