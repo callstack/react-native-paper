@@ -193,7 +193,7 @@ exports[`renders animated fab 1`] = `
       style={
         Array [
           Object {
-            "color": "#ffffff",
+            "color": "rgba(0, 0, 0, .54)",
             "fontSize": 24,
           },
           Array [
@@ -447,7 +447,7 @@ exports[`renders animated fab with label on the left 1`] = `
       style={
         Array [
           Object {
-            "color": "#ffffff",
+            "color": "rgba(0, 0, 0, .54)",
             "fontSize": 24,
           },
           Array [
@@ -703,7 +703,7 @@ exports[`renders animated fab with label on the right by default 1`] = `
       style={
         Array [
           Object {
-            "color": "#ffffff",
+            "color": "rgba(0, 0, 0, .54)",
             "fontSize": 24,
           },
           Array [

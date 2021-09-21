@@ -44,10 +44,10 @@ const CustomFAB = ({ animatedValue, visible, extended }: CustomFABProps) => {
 
   return (
     <AnimatedFAB
-      icon={'pencil'}
+      icon={'plus'}
       label={'Create'}
       extended={isExtended}
-      uppercase={false}
+      uppercase={true}
       onPress={() => console.log('Pressed')}
       visible={visible}
       animateFrom="right"
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
   },
   fabStyle: {
     right: 16,
-    bottom: 32,
+    bottom: 16,
     position: 'absolute',
   },
 });
