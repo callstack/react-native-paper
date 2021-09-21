@@ -62,7 +62,6 @@ const AnimatedFABExample = () => {
     colors: { background },
   } = useTheme();
 
-  const [scrollPosition, setScrollPosition] = React.useState<number>(0);
   const [extended, setExtended] = React.useState<boolean>(false);
   const [visible, setVisible] = React.useState<boolean>(true);
 
@@ -123,25 +122,14 @@ const AnimatedFABExample = () => {
   const onScroll = ({
     nativeEvent,
   }: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const currentScrollPosition =
+      Math.floor(nativeEvent?.contentOffset?.y) ?? 0;
+
     if (!isIOS) {
-      return velocity.setValue(nativeEvent?.contentOffset?.y ?? 0);
+      return velocity.setValue(currentScrollPosition);
     }
 
-    const currentScrollPosition = Math.floor(nativeEvent.contentOffset.y);
-
-    const scrollHeight =
-      nativeEvent.contentSize.height - nativeEvent.layoutMeasurement.height;
-
-    setScrollPosition(currentScrollPosition);
-
-    if (currentScrollPosition > scrollPosition && scrollPosition > 0) {
-      setExtended(false);
-    } else if (
-      currentScrollPosition < scrollPosition &&
-      scrollPosition < scrollHeight
-    ) {
-      setExtended(true);
-    }
+    setExtended(currentScrollPosition <= 0);
   };
 
   return (
