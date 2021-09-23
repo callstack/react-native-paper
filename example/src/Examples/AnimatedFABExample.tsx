@@ -80,7 +80,7 @@ const AnimatedFABExample = () => {
     colors: { background },
   } = useTheme();
 
-  const [extended, setExtended] = React.useState<boolean>(false);
+  const [extended, setExtended] = React.useState<boolean>(true);
   const [visible, setVisible] = React.useState<boolean>(true);
 
   const { current: velocity } = React.useRef<Animated.Value>(
