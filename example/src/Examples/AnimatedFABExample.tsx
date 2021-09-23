@@ -37,6 +37,7 @@ type CustomFABProps = {
   extended: boolean;
   label: string;
   animateFrom: 'left' | 'right';
+  iconMode?: 'static' | 'dynamic';
   style?: StyleProp<ViewStyle>;
 };
 
@@ -49,6 +50,7 @@ const CustomFAB = ({
   label,
   animateFrom,
   style,
+  iconMode,
 }: CustomFABProps) => {
   const [isExtended, setIsExtended] = React.useState(true);
 
@@ -69,7 +71,7 @@ const CustomFAB = ({
       onPress={() => console.log('Pressed')}
       visible={visible}
       animateFrom={animateFrom}
-      iconMode="dynamic"
+      iconMode={iconMode}
       style={[styles.fabStyle, style]}
     />
   );
@@ -170,9 +172,29 @@ const AnimatedFABExample = () => {
         visible={visible}
         animatedValue={velocity}
         extended={extended}
+        label={'Static Left'}
+        animateFrom="left"
+        iconMode="static"
+        style={{ bottom: 200, left: 16, right: undefined }}
+      />
+
+      <CustomFAB
+        visible={visible}
+        animatedValue={velocity}
+        extended={extended}
         label={'From Left'}
         animateFrom="left"
-        style={{ bottom: 76, left: 16, right: undefined }}
+        style={{ bottom: 140, left: 16, right: undefined }}
+      />
+
+      <CustomFAB
+        visible={visible}
+        animatedValue={velocity}
+        extended={extended}
+        label={'Static Right'}
+        animateFrom="right"
+        iconMode="static"
+        style={{ bottom: 76 }}
       />
 
       <CustomFAB
