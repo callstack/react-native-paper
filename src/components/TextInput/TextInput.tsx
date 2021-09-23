@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   Animated,
   TextInput as NativeTextInput,
-  Platform,
   LayoutChangeEvent,
   StyleProp,
   TextStyle,
@@ -301,11 +300,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     Animated.timing(this.state.error, {
       toValue: 1,
       duration: FOCUS_ANIMATION_DURATION * scale,
-      // To prevent this - https://github.com/callstack/react-native-paper/issues/941
-      useNativeDriver: Platform.select({
-        ios: false,
-        default: true,
-      }),
+      useNativeDriver: true,
     }).start();
   };
 
@@ -314,11 +309,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     Animated.timing(this.state.error, {
       toValue: 0,
       duration: BLUR_ANIMATION_DURATION * scale,
-      // To prevent this - https://github.com/callstack/react-native-paper/issues/941
-      useNativeDriver: Platform.select({
-        ios: false,
-        default: true,
-      }),
+      useNativeDriver: true,
     }).start();
   };
 
@@ -327,11 +318,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     Animated.timing(this.state.labeled, {
       toValue: 1,
       duration: FOCUS_ANIMATION_DURATION * scale,
-      // To prevent this - https://github.com/callstack/react-native-paper/issues/941
-      useNativeDriver: Platform.select({
-        ios: false,
-        default: true,
-      }),
+      useNativeDriver: true,
     }).start();
   };
 
@@ -340,11 +327,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     Animated.timing(this.state.labeled, {
       toValue: 0,
       duration: BLUR_ANIMATION_DURATION * scale,
-      // To prevent this - https://github.com/callstack/react-native-paper/issues/941
-      useNativeDriver: Platform.select({
-        ios: false,
-        default: true,
-      }),
+      useNativeDriver: true,
     }).start();
   };
 
