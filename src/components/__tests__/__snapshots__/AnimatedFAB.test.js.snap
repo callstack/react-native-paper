@@ -336,7 +336,7 @@ exports[`renders animated fab with label on the left 1`] = `
             "top": 0,
             "transform": Array [
               Object {
-                "translateX": 28,
+                "translateX": 0,
               },
               Object {
                 "scaleX": 1,
@@ -363,7 +363,7 @@ exports[`renders animated fab with label on the left 1`] = `
             "backgroundColor": "#03dac4",
             "borderRadius": 28,
             "height": 56,
-            "left": 28,
+            "left": -28,
             "right": undefined,
             "transform": Array [
               Object {
@@ -426,12 +426,12 @@ exports[`renders animated fab with label on the left 1`] = `
         "alignItems": "center",
         "height": 56,
         "justifyContent": "center",
-        "left": 28,
+        "left": -28,
         "position": "absolute",
         "right": undefined,
         "transform": Array [
           Object {
-            "translateX": 0,
+            "translateX": 28,
           },
         ],
         "width": 56,

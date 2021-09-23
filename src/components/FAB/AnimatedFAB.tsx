@@ -10,6 +10,7 @@ import {
   ScrollView,
   Text,
   Platform,
+  I18nManager,
 } from 'react-native';
 import Surface from '../Surface';
 import Icon from '../Icon';
@@ -24,7 +25,6 @@ import type {
 } from 'react-native';
 import { white, black } from '../../styles/colors';
 import AnimatedText from '../Typography/AnimatedText';
-import getContrastingColor from '../../utils/getContrastingColor';
 
 type Props = $RemoveChildren<typeof Surface> & {
   /**
@@ -114,6 +114,7 @@ const AnimatedFAB = ({
   const isIOS = Platform.OS === 'ios';
   const isAnimatedFromRight = animateFrom === 'right';
   const isIconStatic = iconMode === 'static';
+  const { isRTL } = I18nManager;
   const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
@@ -124,6 +125,8 @@ const AnimatedFAB = ({
 
   const [textWidth, setTextWidth] = React.useState<number>(0);
   const [textHeight, setTextHeight] = React.useState<number>(0);
+
+  console.table([{ isAnimatedFromRight, isRTL, isIconStatic }]);
 
   React.useEffect(() => {
     if (visible) {
@@ -147,7 +150,7 @@ const AnimatedFAB = ({
     .string();
 
   const { backgroundColor = disabled ? disabledColor : theme.colors.accent } =
-    StyleSheet.flatten(style) || {};
+    StyleSheet.flatten<ViewStyle>(style) || {};
 
   let foregroundColor;
 
@@ -159,7 +162,7 @@ const AnimatedFAB = ({
       .rgb()
       .string();
   } else {
-    foregroundColor = !color(backgroundColor).isLight()
+    foregroundColor = !color(backgroundColor as string).isLight()
       ? white
       : 'rgba(0, 0, 0, .54)';
   }
@@ -201,7 +204,7 @@ const AnimatedFAB = ({
       };
     } else {
       return {
-        left: distance,
+        left: -distance,
         right: undefined,
       };
     }
@@ -293,8 +296,12 @@ const AnimatedFAB = ({
                         ? [distance, 0]
                         : [0, distance],
                       outputRange: isAnimatedFromRight
-                        ? [Math.abs(distance) / 2, Math.abs(distance)]
-                        : [Math.abs(distance), Math.abs(distance) / 2],
+                        ? isRTL
+                          ? [0, distance]
+                          : [Math.abs(distance) / 2, Math.abs(distance)]
+                        : isRTL
+                        ? [0, -distance]
+                        : [0, Math.abs(distance) / 2],
                     }),
                   },
                   {
@@ -324,8 +331,12 @@ const AnimatedFAB = ({
                         ? [distance, 0]
                         : [0, distance],
                       outputRange: isAnimatedFromRight
-                        ? [distance, 0]
-                        : [0, -distance],
+                        ? isRTL
+                          ? [-distance, 0]
+                          : [distance, 0]
+                        : isRTL
+                        ? [0, -distance]
+                        : [0, distance],
                     }),
                   },
                 ],
@@ -342,6 +353,7 @@ const AnimatedFAB = ({
               rippleColor={rippleColor}
               disabled={disabled}
               accessibilityLabel={accessibilityLabel}
+              // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
               accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
               accessibilityComponentType="button"
               accessibilityRole="button"
@@ -366,7 +378,23 @@ const AnimatedFAB = ({
         style={[
           styles.iconWrapper,
           {
-            transform: [{ translateX: isAnimatedFromRight ? animFAB : 0 }],
+            transform: [
+              {
+                translateX: isAnimatedFromRight
+                  ? isRTL
+                    ? animFAB.interpolate({
+                        inputRange: [distance, 0],
+                        outputRange: [-distance, 0],
+                      })
+                    : animFAB
+                  : isRTL
+                  ? -distance
+                  : animFAB.interpolate({
+                      inputRange: [0, distance],
+                      outputRange: [distance, distance * 2],
+                    }),
+              },
+            ],
           },
           getSidesPosition(),
         ]}
@@ -381,9 +409,11 @@ const AnimatedFAB = ({
           onTextLayout={isIOS ? onTextLayout : undefined}
           ellipsizeMode={'tail'}
           style={[
-            isAnimatedFromRight
-              ? { right: isIconStatic ? SIZE : BORDER_RADIUS }
-              : { left: isIconStatic ? SIZE : BORDER_RADIUS },
+            {
+              [isAnimatedFromRight || isRTL ? 'right' : 'left']: isIconStatic
+                ? SIZE
+                : BORDER_RADIUS,
+            },
             {
               minWidth: textWidth,
               top: -BORDER_RADIUS - textHeight / 2,
