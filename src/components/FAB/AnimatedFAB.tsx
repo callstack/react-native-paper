@@ -126,8 +126,6 @@ const AnimatedFAB = ({
   const [textWidth, setTextWidth] = React.useState<number>(0);
   const [textHeight, setTextHeight] = React.useState<number>(0);
 
-  console.table([{ isAnimatedFromRight, isRTL, isIconStatic }]);
-
   React.useEffect(() => {
     if (visible) {
       Animated.timing(visibility, {
@@ -191,8 +189,13 @@ const AnimatedFAB = ({
     const currentHeight = Math.ceil(nativeEvent.lines[0].height);
 
     if (currentWidth !== textWidth || currentHeight !== textHeight) {
-      setTextWidth(currentWidth);
       setTextHeight(currentHeight);
+
+      if (isIOS) {
+        return setTextWidth(currentWidth - 12);
+      }
+
+      setTextWidth(currentWidth);
     }
   };
 
@@ -380,7 +383,16 @@ const AnimatedFAB = ({
           {
             transform: [
               {
-                translateX: isAnimatedFromRight
+                translateX: isIconStatic
+                  ? isAnimatedFromRight
+                    ? 0
+                    : isRTL
+                    ? animFAB.interpolate({
+                        inputRange: [0, distance],
+                        outputRange: [-distance, -distance * 2],
+                      })
+                    : distance
+                  : isAnimatedFromRight
                   ? isRTL
                     ? animFAB.interpolate({
                         inputRange: [distance, 0],
@@ -411,7 +423,9 @@ const AnimatedFAB = ({
           style={[
             {
               [isAnimatedFromRight || isRTL ? 'right' : 'left']: isIconStatic
-                ? SIZE
+                ? isIOS
+                  ? SIZE - 10
+                  : SIZE - 12
                 : BORDER_RADIUS,
             },
             {
