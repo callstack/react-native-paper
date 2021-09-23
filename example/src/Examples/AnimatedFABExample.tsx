@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { View, StyleSheet, FlatList, Animated, Platform } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  Animated,
+  Platform,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 import type { NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
 import {
   Colors,
@@ -27,11 +35,21 @@ type CustomFABProps = {
   animatedValue: Animated.Value;
   visible: boolean;
   extended: boolean;
+  label: string;
+  animateFrom: 'left' | 'right';
+  style?: StyleProp<ViewStyle>;
 };
 
 const isIOS = Platform.OS === 'ios';
 
-const CustomFAB = ({ animatedValue, visible, extended }: CustomFABProps) => {
+const CustomFAB = ({
+  animatedValue,
+  visible,
+  extended,
+  label,
+  animateFrom,
+  style,
+}: CustomFABProps) => {
   const [isExtended, setIsExtended] = React.useState(true);
 
   React.useEffect(() => {
@@ -45,14 +63,14 @@ const CustomFAB = ({ animatedValue, visible, extended }: CustomFABProps) => {
   return (
     <AnimatedFAB
       icon={'plus'}
-      label={'Create'}
+      label={label}
       extended={isExtended}
       uppercase={true}
       onPress={() => console.log('Pressed')}
       visible={visible}
-      animateFrom="right"
+      animateFrom={animateFrom}
       iconMode="dynamic"
-      style={styles.fabStyle}
+      style={[styles.fabStyle, style]}
     />
   );
 };
@@ -147,10 +165,22 @@ const AnimatedFABExample = () => {
         ]}
         onScroll={onScroll}
       />
+
       <CustomFAB
         visible={visible}
         animatedValue={velocity}
         extended={extended}
+        label={'From Left'}
+        animateFrom="left"
+        style={{ bottom: 76, left: 16, right: undefined }}
+      />
+
+      <CustomFAB
+        visible={visible}
+        animatedValue={velocity}
+        extended={extended}
+        label={'From Right'}
+        animateFrom="right"
       />
     </>
   );
