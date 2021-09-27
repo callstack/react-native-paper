@@ -271,10 +271,7 @@ const AnimatedFAB = ({
       ];
       combinedStyles.innerWrapper.transform = [
         {
-          translateX: animFAB.interpolate({
-            inputRange: [0, distance],
-            outputRange: [0, distance],
-          }),
+          translateX: animFAB,
         },
       ];
     }
@@ -305,6 +302,14 @@ const AnimatedFAB = ({
 
   const combinedStyles = getCombinedStyles();
 
+  const propForDirection = <T,>(right: T[]): T[] => {
+    if (isAnimatedFromRight) {
+      return right;
+    }
+
+    return right.reverse();
+  };
+
   return (
     <Surface
       {...rest}
@@ -331,10 +336,8 @@ const AnimatedFAB = ({
             transform: [
               {
                 scaleY: animFAB.interpolate({
-                  inputRange: isAnimatedFromRight
-                    ? [distance, 0]
-                    : [0, distance],
-                  outputRange: isAnimatedFromRight ? [SCALE, 1] : [1, SCALE],
+                  inputRange: propForDirection([distance, 0]),
+                  outputRange: propForDirection([SCALE, 1]),
                 }),
               },
             ],
@@ -351,12 +354,8 @@ const AnimatedFAB = ({
               {
                 width: extendedWidth,
                 opacity: animFAB.interpolate({
-                  inputRange: isAnimatedFromRight
-                    ? [distance, 0.9 * distance, 0]
-                    : [0, 0.9 * distance, distance],
-                  outputRange: isAnimatedFromRight
-                    ? [1, 0.15, 0]
-                    : [0, 0.15, 1],
+                  inputRange: propForDirection([distance, 0.9 * distance, 0]),
+                  outputRange: propForDirection([1, 0.15, 0]),
                 }),
               },
             ]}
@@ -368,21 +367,16 @@ const AnimatedFAB = ({
               styles.shadow,
               {
                 opacity: animFAB.interpolate({
-                  inputRange: isAnimatedFromRight
-                    ? [distance, 0.9 * distance, 0]
-                    : [0, 0.9 * distance, distance],
-                  outputRange: isAnimatedFromRight
-                    ? [0, 0.85, 1]
-                    : [1, 0.85, 0],
+                  inputRange: propForDirection([distance, 0.9 * distance, 0]),
+                  outputRange: propForDirection([0, 0.85, 1]),
                 }),
                 width: SIZE,
                 borderRadius: animFAB.interpolate({
-                  inputRange: isAnimatedFromRight
-                    ? [distance, 0]
-                    : [0, distance],
-                  outputRange: isAnimatedFromRight
-                    ? [SIZE / (extendedWidth / SIZE), BORDER_RADIUS]
-                    : [BORDER_RADIUS, SIZE / (extendedWidth / SIZE)],
+                  inputRange: propForDirection([distance, 0]),
+                  outputRange: propForDirection([
+                    SIZE / (extendedWidth / SIZE),
+                    BORDER_RADIUS,
+                  ]),
                 }),
                 transform: [
                   {
@@ -477,18 +471,14 @@ const AnimatedFAB = ({
               minWidth: textWidth,
               top: -BORDER_RADIUS - textHeight / 2,
               opacity: animFAB.interpolate({
-                inputRange: isAnimatedFromRight
-                  ? [distance, 0.7 * distance, 0]
-                  : [0, 0.7 * distance, distance],
-                outputRange: isAnimatedFromRight ? [1, 0, 0] : [0, 0, 1],
+                inputRange: propForDirection([distance, 0.7 * distance, 0]),
+                outputRange: propForDirection([1, 0, 0]),
               }),
               transform: [
                 {
                   translateX: animFAB.interpolate({
-                    inputRange: isAnimatedFromRight
-                      ? [distance, 0]
-                      : [0, distance],
-                    outputRange: isAnimatedFromRight ? [0, SIZE] : [SIZE, 0],
+                    inputRange: propForDirection([distance, 0]),
+                    outputRange: propForDirection([0, SIZE]),
                   }),
                 },
               ],
