@@ -15,9 +15,9 @@ import {
 import Surface from '../Surface';
 import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { withTheme } from '../../core/theming';
 import type { $RemoveChildren } from '../../types';
 import type { IconSource } from './../Icon';
+import { withTheme } from '../../core/theming';
 import type {
   AccessibilityState,
   NativeSyntheticEvent,
@@ -150,7 +150,7 @@ const AnimatedFAB = ({
   const { backgroundColor = disabled ? disabledColor : theme.colors.accent } =
     StyleSheet.flatten<ViewStyle>(style) || {};
 
-  let foregroundColor;
+  let foregroundColor: string;
 
   if (typeof customColor !== 'undefined') {
     foregroundColor = customColor;
@@ -212,6 +212,77 @@ const AnimatedFAB = ({
       };
     }
   };
+
+  type CombinedStyles = {
+    innerWrapper?: Animated.WithAnimatedValue<ViewStyle>;
+  };
+
+  const getCombinedStyles = (): CombinedStyles => {
+    const combinedStyles: CombinedStyles = {
+      innerWrapper: {},
+    };
+
+    const animatedFromRight = isAnimatedFromRight && !isRTL;
+    const animatedFromRightRTL = isAnimatedFromRight && isRTL;
+    const animatedFromLeft = !isAnimatedFromRight && !isRTL;
+    const animatedFromLeftRTL = !isAnimatedFromRight && isRTL;
+
+    if (animatedFromRight) {
+      combinedStyles.innerWrapper = {
+        transform: [
+          {
+            translateX: animFAB.interpolate({
+              inputRange: [distance, 0],
+              outputRange: [distance, 0],
+            }),
+          },
+        ],
+      };
+    }
+
+    if (animatedFromRightRTL) {
+      combinedStyles.innerWrapper = {
+        transform: [
+          {
+            translateX: animFAB.interpolate({
+              inputRange: [distance, 0],
+              outputRange: [-distance, 0],
+            }),
+          },
+        ],
+      };
+    }
+
+    if (animatedFromLeft) {
+      combinedStyles.innerWrapper = {
+        transform: [
+          {
+            translateX: animFAB.interpolate({
+              inputRange: [0, distance],
+              outputRange: [0, distance],
+            }),
+          },
+        ],
+      };
+    }
+
+    if (animatedFromLeftRTL) {
+      combinedStyles.innerWrapper = {
+        transform: [
+          {
+            translateX: animFAB.interpolate({
+              inputRange: [0, distance],
+              outputRange: [0, -distance],
+            }),
+          },
+        ],
+      };
+    }
+
+    return combinedStyles;
+  };
+
+  const combinedStyles = getCombinedStyles();
 
   return (
     <Surface
@@ -327,25 +398,10 @@ const AnimatedFAB = ({
             style={[
               styles.standard,
               {
-                transform: [
-                  {
-                    translateX: animFAB.interpolate({
-                      inputRange: isAnimatedFromRight
-                        ? [distance, 0]
-                        : [0, distance],
-                      outputRange: isAnimatedFromRight
-                        ? isRTL
-                          ? [-distance, 0]
-                          : [distance, 0]
-                        : isRTL
-                        ? [0, -distance]
-                        : [0, distance],
-                    }),
-                  },
-                ],
                 width: extendedWidth,
                 backgroundColor,
               },
+              combinedStyles.innerWrapper,
               getSidesPosition(),
             ]}
           >
