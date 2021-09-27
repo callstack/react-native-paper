@@ -412,16 +412,8 @@ const AnimatedFAB = ({
                     BORDER_RADIUS,
                   ]),
                 }),
-                transform: [
-                  ...(combinedStyles?.absoluteFill?.transform || []),
-                  {
-                    scaleX: animFAB.interpolate({
-                      inputRange: propForDirection([distance, 0]),
-                      outputRange: propForDirection([extendedWidth / SIZE, 1]),
-                    }),
-                  },
-                ],
               },
+              combinedStyles.absoluteFill,
             ]}
           />
         </View>

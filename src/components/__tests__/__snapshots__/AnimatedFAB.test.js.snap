@@ -85,9 +85,6 @@ exports[`renders animated fab 1`] = `
               Object {
                 "translateX": 28,
               },
-              Object {
-                "scaleX": 1,
-              },
             ],
             "width": 56,
           }
@@ -337,9 +334,6 @@ exports[`renders animated fab with label on the left 1`] = `
             "transform": Array [
               Object {
                 "translateX": 0,
-              },
-              Object {
-                "scaleX": 1,
               },
             ],
             "width": 56,
@@ -593,9 +587,6 @@ exports[`renders animated fab with label on the right by default 1`] = `
             "transform": Array [
               Object {
                 "translateX": 28,
-              },
-              Object {
-                "scaleX": 1,
               },
             ],
             "width": 56,
