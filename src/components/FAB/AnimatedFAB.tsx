@@ -199,9 +199,18 @@ const AnimatedFAB = ({
     }
   };
 
+  const propForDirection = <T,>(right: T[]): T[] => {
+    if (isAnimatedFromRight) {
+      return right;
+    }
+
+    return right.reverse();
+  };
+
   type CombinedStyles = {
     innerWrapper: Animated.WithAnimatedValue<ViewStyle>;
     iconWrapper: Animated.WithAnimatedValue<ViewStyle>;
+    absoluteFill: Animated.WithAnimatedValue<ViewStyle>;
   };
 
   const getCombinedStyles = (): CombinedStyles => {
@@ -214,6 +223,7 @@ const AnimatedFAB = ({
       iconWrapper: {
         ...defaultPositionStyles,
       },
+      absoluteFill: {},
     };
 
     const animatedFromRight = isAnimatedFromRight && !isRTL;
@@ -222,16 +232,24 @@ const AnimatedFAB = ({
     const animatedFromLeftRTL = !isAnimatedFromRight && isRTL;
 
     if (animatedFromRight) {
-      combinedStyles.iconWrapper.transform = [
-        {
-          translateX: isIconStatic ? 0 : animFAB,
-        },
-      ];
       combinedStyles.innerWrapper.transform = [
         {
           translateX: animFAB.interpolate({
             inputRange: [distance, 0],
             outputRange: [distance, 0],
+          }),
+        },
+      ];
+      combinedStyles.iconWrapper.transform = [
+        {
+          translateX: isIconStatic ? 0 : animFAB,
+        },
+      ];
+      combinedStyles.absoluteFill.transform = [
+        {
+          translateX: animFAB.interpolate({
+            inputRange: [distance, 0],
+            outputRange: [Math.abs(distance) / 2, Math.abs(distance)],
           }),
         },
       ];
@@ -256,6 +274,14 @@ const AnimatedFAB = ({
           }),
         },
       ];
+      combinedStyles.absoluteFill.transform = [
+        {
+          translateX: animFAB.interpolate({
+            inputRange: [distance, 0],
+            outputRange: [0, distance],
+          }),
+        },
+      ];
     }
 
     if (animatedFromLeft) {
@@ -272,6 +298,14 @@ const AnimatedFAB = ({
       combinedStyles.innerWrapper.transform = [
         {
           translateX: animFAB,
+        },
+      ];
+      combinedStyles.absoluteFill.transform = [
+        {
+          translateX: animFAB.interpolate({
+            inputRange: [0, distance],
+            outputRange: [0, Math.abs(distance) / 2],
+          }),
         },
       ];
     }
@@ -295,20 +329,20 @@ const AnimatedFAB = ({
           }),
         },
       ];
+      combinedStyles.absoluteFill.transform = [
+        {
+          translateX: animFAB.interpolate({
+            inputRange: [0, distance],
+            outputRange: [0, -distance],
+          }),
+        },
+      ];
     }
 
     return combinedStyles;
   };
 
   const combinedStyles = getCombinedStyles();
-
-  const propForDirection = <T,>(right: T[]): T[] => {
-    if (isAnimatedFromRight) {
-      return right;
-    }
-
-    return right.reverse();
-  };
 
   return (
     <Surface
@@ -379,28 +413,11 @@ const AnimatedFAB = ({
                   ]),
                 }),
                 transform: [
-                  {
-                    translateX: animFAB.interpolate({
-                      inputRange: isAnimatedFromRight
-                        ? [distance, 0]
-                        : [0, distance],
-                      outputRange: isAnimatedFromRight
-                        ? isRTL
-                          ? [0, distance]
-                          : [Math.abs(distance) / 2, Math.abs(distance)]
-                        : isRTL
-                        ? [0, -distance]
-                        : [0, Math.abs(distance) / 2],
-                    }),
-                  },
+                  ...(combinedStyles?.absoluteFill?.transform || []),
                   {
                     scaleX: animFAB.interpolate({
-                      inputRange: isAnimatedFromRight
-                        ? [distance, 0]
-                        : [0, distance],
-                      outputRange: isAnimatedFromRight
-                        ? [extendedWidth / SIZE, 1]
-                        : [1, extendedWidth / SIZE],
+                      inputRange: propForDirection([distance, 0]),
+                      outputRange: propForDirection([extendedWidth / SIZE, 1]),
                     }),
                   },
                 ],
