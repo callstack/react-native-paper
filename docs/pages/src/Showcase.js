@@ -119,7 +119,7 @@ const data: Data[] = [
     ios: 'https://apps.apple.com/us/app/groovy-set-your-goals/id1562352498',
     android:
       'https://play.google.com/store/apps/details?id=com.gabrieldierks.groovy',
-  },  
+  },
 ];
 
 export default class Showcase extends React.Component<{}> {
