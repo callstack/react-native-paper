@@ -168,55 +168,57 @@ const ProgressBar = ({
           style,
         ]}
       >
-        <Animated.View
-          style={[
-            styles.progressBar,
-            {
-              backgroundColor: tintColor,
-              width,
-              transform: [
-                {
-                  translateX: timer.interpolate(
-                    indeterminate
-                      ? {
-                          inputRange: [0, 0.5, 1],
-                          outputRange: [
-                            (isRTL ? 1 : -1) * 0.5 * width,
-                            (isRTL ? 1 : -1) *
-                              0.5 *
-                              INDETERMINATE_MAX_WIDTH *
-                              width,
-                            (isRTL ? -1 : 1) * 0.7 * width,
-                          ],
-                        }
-                      : {
-                          inputRange: [0, 1],
-                          outputRange: [(isRTL ? 1 : -1) * 0.5 * width, 0],
-                        }
-                  ),
-                },
-                {
-                  // Workaround for workaround for https://github.com/facebook/react-native/issues/6278
-                  scaleX: timer.interpolate(
-                    indeterminate
-                      ? {
-                          inputRange: [0, 0.5, 1],
-                          outputRange: [
-                            0.0001,
-                            INDETERMINATE_MAX_WIDTH,
-                            0.0001,
-                          ],
-                        }
-                      : {
-                          inputRange: [0, 1],
-                          outputRange: [0.0001, 1],
-                        }
-                  ),
-                },
-              ],
-            },
-          ]}
-        />
+        {width ? (
+          <Animated.View
+            style={[
+              styles.progressBar,
+              {
+                width,
+                backgroundColor: tintColor,
+                transform: [
+                  {
+                    translateX: timer.interpolate(
+                      indeterminate
+                        ? {
+                            inputRange: [0, 0.5, 1],
+                            outputRange: [
+                              (isRTL ? 1 : -1) * 0.5 * width,
+                              (isRTL ? 1 : -1) *
+                                0.5 *
+                                INDETERMINATE_MAX_WIDTH *
+                                width,
+                              (isRTL ? -1 : 1) * 0.7 * width,
+                            ],
+                          }
+                        : {
+                            inputRange: [0, 1],
+                            outputRange: [(isRTL ? 1 : -1) * 0.5 * width, 0],
+                          }
+                    ),
+                  },
+                  {
+                    // Workaround for workaround for https://github.com/facebook/react-native/issues/6278
+                    scaleX: timer.interpolate(
+                      indeterminate
+                        ? {
+                            inputRange: [0, 0.5, 1],
+                            outputRange: [
+                              0.0001,
+                              INDETERMINATE_MAX_WIDTH,
+                              0.0001,
+                            ],
+                          }
+                        : {
+                            inputRange: [0, 1],
+                            outputRange: [0.0001, 1],
+                          }
+                    ),
+                  },
+                ],
+              },
+            ]}
+          />
+        ) : null}
       </Animated.View>
     </View>
   );
