@@ -9,6 +9,7 @@ import {
   Platform,
   Keyboard,
   ViewStyle,
+  ViewProps,
 } from 'react-native';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 import color from 'color';
@@ -52,6 +53,20 @@ type TouchableProps = TouchableWithoutFeedbackProps & {
   centered?: boolean;
   rippleColor?: string;
 };
+
+type ScreenProps = ViewProps & {
+  visible?: boolean;
+};
+
+export class NativeScreen extends React.Component<ScreenProps> {
+  render() {
+    let { visible, ...rest } = this.props;
+
+    return <View style={{ display: visible ? 'flex' : 'none' }} {...rest} />;
+  }
+}
+
+const AnimatedNativeScreen = Animated.createAnimatedComponent(NativeScreen);
 
 type Props = {
   /**
@@ -631,13 +646,14 @@ const BottomNavigation = ({
             : FAR_FAR_AWAY;
 
           return (
-            <Animated.View
+            <AnimatedNativeScreen
               key={route.key}
               pointerEvents={focused ? 'auto' : 'none'}
               accessibilityElementsHidden={!focused}
               importantForAccessibility={
                 focused ? 'auto' : 'no-hide-descendants'
               }
+              visible={navigationState.index !== index}
               style={[StyleSheet.absoluteFill, { opacity }]}
               collapsable={false}
               removeClippedSubviews={
@@ -649,7 +665,7 @@ const BottomNavigation = ({
               <Animated.View style={[styles.content, { top }]}>
                 {renderScene({ route, jumpTo })}
               </Animated.View>
-            </Animated.View>
+            </AnimatedNativeScreen>
           );
         })}
       </View>
