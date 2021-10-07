@@ -34,7 +34,8 @@ type Props = {
   /**
    * Gradient colors for the list accordion.
    */
-  gradientColors: (props: { color: string[] }) => React.ReactNode;
+  gradientColorPrimary?: (string | number)[];
+  // gradientColorSecondary?: string;
 
   /**
    * Callback which returns a React element to display on the left side.
@@ -163,7 +164,9 @@ const ListAccordion = ({
   onLongPress,
   expanded: expandedProp,
   titleGradientComponent,
-  gradientColors,
+  // gradientColors,
+  gradientColorPrimary,
+  // gradientColorSecondary,
   gradientStyle,
 }: Props) => {
   const [expanded, setExpanded] = React.useState<boolean>(
@@ -183,6 +186,9 @@ const ListAccordion = ({
 
   const titleColor = color(theme.colors.text).alpha(0.87).rgb().string();
   const descriptionColor = color(theme.colors.text).alpha(0.54).rgb().string();
+
+  const linearPrimaryColor = '#FB6550';
+  const linearSecondaryColor = '#FA4850';
 
   const expandedInternal = expandedProp !== undefined ? expandedProp : expanded;
 
@@ -215,7 +221,7 @@ const ListAccordion = ({
           borderless
         >
           {titleGradientComponent ? (
-            <LinearGradient colors={gradientColors} style={[styles.gradientStyle, gradientStyle]}>
+            <LinearGradient colors={gradientColorPrimary ? gradientColorPrimary : [linearPrimaryColor, linearSecondaryColor]} style={[styles.gradientStyle, gradientStyle]}>
               <View style={styles.row} pointerEvents="none">
                 {left
                   ? left({
