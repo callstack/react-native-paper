@@ -7,7 +7,6 @@ import {
   StyleProp,
   TextStyle,
   I18nManager,
-  GestureResponderEvent,
 } from 'react-native';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -15,6 +14,7 @@ import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 
 import { ListAccordionGroupContext } from './ListAccordionGroup';
+import LinearGradient from 'react-native-linear-gradient';
 
 type Props = {
   /**
@@ -46,7 +46,7 @@ type Props = {
   /**
    * Function to execute on long press.
    */
-  onLongPress?: (e: GestureResponderEvent) => void;
+  onLongPress?: () => void;
   /**
    * Content of the section.
    */
@@ -85,10 +85,6 @@ type Props = {
    * TestID used for testing purposes
    */
   testID?: string;
-  /**
-   * Accessibility label for the TouchableRipple. This is read by the screen reader when the user taps the touchable.
-   */
-  accessibilityLabel?: string;
 };
 
 /**
@@ -151,7 +147,6 @@ const ListAccordion = ({
   onPress,
   onLongPress,
   expanded: expandedProp,
-  accessibilityLabel,
 }: Props) => {
   const [expanded, setExpanded] = React.useState<boolean>(
     expandedProp || false
@@ -196,83 +191,84 @@ const ListAccordion = ({
           accessibilityTraits="button"
           accessibilityComponentType="button"
           accessibilityRole="button"
-          accessibilityState={{ expanded: isExpanded }}
-          accessibilityLabel={accessibilityLabel}
           testID={testID}
           delayPressIn={0}
           borderless
         >
-          <View style={styles.row} pointerEvents="none">
-            {left
-              ? left({
+          <LinearGradient colors={['#FB6550', '#FA4850']} style={styles.gradientStyle}>
+            <View style={styles.row} pointerEvents="none">
+              {left
+                ? left({
                   color: isExpanded ? theme.colors.primary : descriptionColor,
                 })
-              : null}
-            <View style={[styles.item, styles.content]}>
-              <Text
-                selectable={false}
-                numberOfLines={titleNumberOfLines}
-                style={[
-                  styles.title,
-                  {
-                    color: isExpanded ? theme.colors.primary : titleColor,
-                  },
-                  titleStyle,
-                ]}
-              >
-                {title}
-              </Text>
-              {description ? (
+                : null}
+              <View style={[styles.item, styles.content]}>
                 <Text
                   selectable={false}
-                  numberOfLines={descriptionNumberOfLines}
+                  numberOfLines={titleNumberOfLines}
                   style={[
-                    styles.description,
+                    styles.title,
                     {
-                      color: descriptionColor,
+                      color: isExpanded ? theme.colors.primary : titleColor,
                     },
-                    descriptionStyle,
+                    titleStyle,
                   ]}
                 >
-                  {description}
+                  {title}
                 </Text>
-              ) : null}
+                {description && (
+                  <Text
+                    selectable={false}
+                    numberOfLines={descriptionNumberOfLines}
+                    style={[
+                      styles.description,
+                      {
+                        color: descriptionColor,
+                      },
+                      descriptionStyle,
+                    ]}
+                  >
+                    {description}
+                  </Text>
+                )}
+              </View>
+              <View
+                style={[styles.item, description ? styles.multiline : undefined]}
+              >
+                {right ? (
+                  right({
+                    isExpanded: isExpanded,
+                  })
+                ) : (
+                  <MaterialCommunityIcon
+                    name={isExpanded ? 'chevron-up' : 'chevron-down'}
+                    color={titleColor}
+                    size={24}
+                    direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+                  />
+                )}
+              </View>
             </View>
-            <View
-              style={[styles.item, description ? styles.multiline : undefined]}
-            >
-              {right ? (
-                right({
-                  isExpanded: isExpanded,
-                })
-              ) : (
-                <MaterialCommunityIcon
-                  name={isExpanded ? 'chevron-up' : 'chevron-down'}
-                  color={titleColor}
-                  size={24}
-                  direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
-                />
-              )}
-            </View>
-          </View>
+          </LinearGradient>
         </TouchableRipple>
+        {/* </LinearGradient> */}
       </View>
 
       {isExpanded
         ? React.Children.map(children, (child) => {
-            if (
-              left &&
-              React.isValidElement(child) &&
-              !child.props.left &&
-              !child.props.right
-            ) {
-              return React.cloneElement(child, {
-                style: [styles.child, child.props.style],
-              });
-            }
+          if (
+            left &&
+            React.isValidElement(child) &&
+            !child.props.left &&
+            !child.props.right
+          ) {
+            return React.cloneElement(child, {
+              style: [styles.child, child.props.style],
+            });
+          }
 
-            return child;
-          })
+          return child;
+        })
         : null}
     </View>
   );
@@ -282,11 +278,14 @@ ListAccordion.displayName = 'List.Accordion';
 
 const styles = StyleSheet.create({
   container: {
-    padding: 8,
+    // padding: 8,
+    borderRadius: 100,
   },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
+    padding: 8,
+    borderRadius: 100,
   },
   multiline: {
     height: 40,
@@ -308,6 +307,11 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     justifyContent: 'center',
+  },
+  gradientStyle: {
+    borderWidth: 1,
+    borderRadius: 100,
+    borderColor: '#FB6550',
   },
 });
 
