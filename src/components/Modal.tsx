@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   ViewStyle,
   View,
+  NativeEventSubscription,
 } from 'react-native';
 import {
   getStatusBarHeight,
@@ -132,6 +133,8 @@ class Modal extends React.Component<Props, State> {
     }
   }
 
+  private subscription: NativeEventSubscription | undefined;
+
   private handleBack = () => {
     if (this.props.dismissable) {
       this.hideModal();
@@ -140,8 +143,15 @@ class Modal extends React.Component<Props, State> {
   };
 
   private showModal = () => {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBack);
-    BackHandler.addEventListener('hardwareBackPress', this.handleBack);
+    if (this.subscription?.remove) {
+      this.subscription.remove();
+    } else {
+      BackHandler.removeEventListener('hardwareBackPress', this.handleBack);
+    }
+    this.subscription = BackHandler.addEventListener(
+      'hardwareBackPress',
+      this.handleBack
+    );
 
     const { opacity } = this.state;
     const { scale } = this.props.theme.animation;
@@ -155,7 +165,11 @@ class Modal extends React.Component<Props, State> {
   };
 
   private hideModal = () => {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBack);
+    if (this.subscription?.remove) {
+      this.subscription?.remove();
+    } else {
+      BackHandler.removeEventListener('hardwareBackPress', this.handleBack);
+    }
 
     const { opacity } = this.state;
     const { scale } = this.props.theme.animation;
@@ -185,7 +199,11 @@ class Modal extends React.Component<Props, State> {
   };
 
   componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBack);
+    if (this.subscription?.remove) {
+      this.subscription.remove();
+    } else {
+      BackHandler.removeEventListener('hardwareBackPress', this.handleBack);
+    }
   }
 
   render() {
