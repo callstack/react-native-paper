@@ -34,7 +34,7 @@ type Props = {
   /**
    * Gradient colors for the list accordion.
    */
-  gradientColors: React.ReactNode;
+  gradientColors: (props: { color: string[] }) => React.ReactNode;
 
   /**
    * Callback which returns a React element to display on the left side.
