@@ -21,10 +21,21 @@ type Props = {
    * Title text for the list accordion.
    */
   title: React.ReactNode;
+
+  /**
+  * Adding LInear Gradient to Title for the list accordion.
+  */
+  titleGradientComponent: React.ReactNode;
   /**
    * Description text for the list accordion.
    */
+
   description?: React.ReactNode;
+  /**
+   * Gradient colors for the list accordion.
+   */
+  gradientColors: React.ReactNode;
+
   /**
    * Callback which returns a React element to display on the left side.
    */
@@ -59,6 +70,10 @@ type Props = {
    * Style that is passed to the wrapping TouchableRipple element.
    */
   style?: StyleProp<ViewStyle>;
+  /**
+   * Style that is passed to the gradient TouchableRipple element.
+   */
+  gradientStyle?: StyleProp<ViewStyle>;
   /**
    * Style that is passed to Title element.
    */
@@ -147,10 +162,14 @@ const ListAccordion = ({
   onPress,
   onLongPress,
   expanded: expandedProp,
+  titleGradientComponent,
+  gradientColors,
+  gradientStyle,
 }: Props) => {
   const [expanded, setExpanded] = React.useState<boolean>(
     expandedProp || false
   );
+
 
   const handlePressAction = () => {
     onPress?.();
@@ -195,63 +214,116 @@ const ListAccordion = ({
           delayPressIn={0}
           borderless
         >
-          <LinearGradient colors={['#FB6550', '#FA4850']} style={styles.gradientStyle}>
-            <View style={styles.row} pointerEvents="none">
-              {left
-                ? left({
-                  color: isExpanded ? theme.colors.primary : descriptionColor,
-                })
-                : null}
-              <View style={[styles.item, styles.content]}>
-                <Text
-                  selectable={false}
-                  numberOfLines={titleNumberOfLines}
-                  style={[
-                    styles.title,
-                    {
-                      color: isExpanded ? theme.colors.primary : titleColor,
-                    },
-                    titleStyle,
-                  ]}
-                >
-                  {title}
-                </Text>
-                {description && (
+          {titleGradientComponent ? (
+            <LinearGradient colors={gradientColors} style={[styles.gradientStyle, gradientStyle]}>
+              <View style={styles.row} pointerEvents="none">
+                {left
+                  ? left({
+                    color: isExpanded ? theme.colors.primary : descriptionColor,
+                  })
+                  : null}
+                <View style={[styles.item, styles.content]}>
                   <Text
                     selectable={false}
-                    numberOfLines={descriptionNumberOfLines}
+                    numberOfLines={titleNumberOfLines}
                     style={[
-                      styles.description,
+                      styles.title,
                       {
-                        color: descriptionColor,
+                        color: isExpanded ? theme.colors.primary : titleColor,
                       },
-                      descriptionStyle,
+                      titleStyle,
                     ]}
                   >
-                    {description}
+                    {title}
                   </Text>
-                )}
+                  {description && (
+                    <Text
+                      selectable={false}
+                      numberOfLines={descriptionNumberOfLines}
+                      style={[
+                        styles.description,
+                        {
+                          color: descriptionColor,
+                        },
+                        descriptionStyle,
+                      ]}
+                    >
+                      {description}
+                    </Text>
+                  )}
+                </View>
+                <View
+                  style={[styles.item, description ? styles.multiline : undefined]}
+                >
+                  {right ? (
+                    right({
+                      isExpanded: isExpanded,
+                    })
+                  ) : (
+                    <MaterialCommunityIcon
+                      name={isExpanded ? 'chevron-up' : 'chevron-down'}
+                      color={titleColor}
+                      size={24}
+                      direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+                    />
+                  )}
+                </View>
               </View>
-              <View
-                style={[styles.item, description ? styles.multiline : undefined]}
+            </LinearGradient>
+          ) : (<View style={styles.row} pointerEvents="none">
+            {left
+              ? left({
+                color: isExpanded ? theme.colors.primary : descriptionColor,
+              })
+              : null}
+            <View style={[styles.item, styles.content]}>
+              <Text
+                selectable={false}
+                numberOfLines={titleNumberOfLines}
+                style={[
+                  styles.title,
+                  {
+                    color: isExpanded ? theme.colors.primary : titleColor,
+                  },
+                  titleStyle,
+                ]}
               >
-                {right ? (
-                  right({
-                    isExpanded: isExpanded,
-                  })
-                ) : (
-                  <MaterialCommunityIcon
-                    name={isExpanded ? 'chevron-up' : 'chevron-down'}
-                    color={titleColor}
-                    size={24}
-                    direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
-                  />
-                )}
-              </View>
+                {title}
+              </Text>
+              {description && (
+                <Text
+                  selectable={false}
+                  numberOfLines={descriptionNumberOfLines}
+                  style={[
+                    styles.description,
+                    {
+                      color: descriptionColor,
+                    },
+                    descriptionStyle,
+                  ]}
+                >
+                  {description}
+                </Text>
+              )}
             </View>
-          </LinearGradient>
+            <View
+              style={[styles.item, description ? styles.multiline : undefined]}
+            >
+              {right ? (
+                right({
+                  isExpanded: isExpanded,
+                })
+              ) : (
+                <MaterialCommunityIcon
+                  name={isExpanded ? 'chevron-up' : 'chevron-down'}
+                  color={titleColor}
+                  size={24}
+                  direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+                />
+              )}
+            </View>
+          </View>)}
         </TouchableRipple>
-        {/* </LinearGradient> */}
       </View>
 
       {isExpanded
