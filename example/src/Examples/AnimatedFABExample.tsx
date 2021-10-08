@@ -15,6 +15,7 @@ import {
   useTheme,
   Avatar,
   Paragraph,
+  RadioButton,
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { animatedFABExampleData } from '../../utils';
@@ -62,6 +63,8 @@ const CustomFAB = ({
     } else setIsExtended(extended);
   }, [animatedValue, extended]);
 
+  const fabStyle = { [animateFrom]: 16 };
+
   return (
     <AnimatedFAB
       icon={'plus'}
@@ -72,7 +75,7 @@ const CustomFAB = ({
       visible={visible}
       animateFrom={animateFrom}
       iconMode={iconMode}
-      style={[styles.fabStyle, style]}
+      style={[styles.fabStyle, style, fabStyle]}
     />
   );
 };
@@ -84,6 +87,13 @@ const AnimatedFABExample = () => {
 
   const [extended, setExtended] = React.useState<boolean>(true);
   const [visible, setVisible] = React.useState<boolean>(true);
+
+  const [animateFrom, setAnimateFrom] = React.useState<'left' | 'right'>(
+    'right'
+  );
+  const [iconMode, setIconMode] = React.useState<'static' | 'dynamic'>(
+    'static'
+  );
 
   const { current: velocity } = React.useRef<Animated.Value>(
     new Animated.Value(0)
@@ -168,41 +178,106 @@ const AnimatedFABExample = () => {
         onScroll={onScroll}
       />
 
-      <CustomFAB
-        visible={visible}
-        animatedValue={velocity}
-        extended={extended}
-        label={'Static Left'}
-        animateFrom="left"
-        iconMode="static"
-        style={{ bottom: 200, left: 16, right: undefined }}
-      />
+      <View style={styles.controlsWrapper}>
+        <View
+          style={{
+            flex: 1,
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+          }}
+        >
+          <Paragraph>iconMode</Paragraph>
+
+          <View
+            style={{
+              marginLeft: 'auto',
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+          >
+            <Paragraph>static</Paragraph>
+
+            <RadioButton
+              value="static"
+              status={iconMode === 'static' ? 'checked' : 'unchecked'}
+              onPress={() => setIconMode('static')}
+            />
+          </View>
+
+          <View
+            style={{
+              marginLeft: 16,
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+          >
+            <Paragraph>dynamic</Paragraph>
+
+            <RadioButton
+              value="dynamic"
+              status={iconMode === 'dynamic' ? 'checked' : 'unchecked'}
+              onPress={() => setIconMode('dynamic')}
+            />
+          </View>
+        </View>
+
+        <View
+          style={{
+            marginTop: 8,
+            flex: 1,
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+          }}
+        >
+          <Paragraph>animateFrom</Paragraph>
+
+          <View
+            style={{
+              marginLeft: 'auto',
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+          >
+            <Paragraph>left</Paragraph>
+
+            <RadioButton
+              value="left"
+              status={animateFrom === 'left' ? 'checked' : 'unchecked'}
+              onPress={() => setAnimateFrom('left')}
+            />
+          </View>
+
+          <View
+            style={{
+              marginLeft: 16,
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+          >
+            <Paragraph>right</Paragraph>
+
+            <RadioButton
+              value="right"
+              status={animateFrom === 'right' ? 'checked' : 'unchecked'}
+              onPress={() => setAnimateFrom('right')}
+            />
+          </View>
+        </View>
+      </View>
 
       <CustomFAB
         visible={visible}
         animatedValue={velocity}
         extended={extended}
-        label={'From Left'}
-        animateFrom="left"
-        style={{ bottom: 140, left: 16, right: undefined }}
-      />
-
-      <CustomFAB
-        visible={visible}
-        animatedValue={velocity}
-        extended={extended}
-        label={'Static Right'}
-        animateFrom="right"
-        iconMode="static"
-        style={{ bottom: 76 }}
-      />
-
-      <CustomFAB
-        visible={visible}
-        animatedValue={velocity}
-        extended={extended}
-        label={'From Right'}
-        animateFrom="right"
+        label={'New Message'}
+        animateFrom={animateFrom}
+        iconMode={iconMode}
       />
     </>
   );
@@ -254,9 +329,19 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   fabStyle: {
-    right: 16,
     bottom: 16,
     position: 'absolute',
+  },
+  controlsWrapper: {
+    flex: 1,
+    display: 'flex',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'white',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
   },
 });
 
