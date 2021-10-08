@@ -37,7 +37,7 @@ import ToggleButtonExample from './Examples/ToggleButtonExample';
 import TouchableRippleExample from './Examples/TouchableRippleExample';
 import ThemeExample from './Examples/ThemeExample';
 import RadioButtonItemExample from './Examples/RadioButtonItemExample';
-import AnimatedFABExample from './Examples/AnimatedFABExample';
+import AnimatedFABExample from './Examples/AnimatedFABExample/AnimatedFABExample';
 
 export const examples: Record<
   string,

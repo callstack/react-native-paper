@@ -1,24 +1,16 @@
 import * as React from 'react';
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  Animated,
-  Platform,
-  StyleProp,
-  ViewStyle,
-} from 'react-native';
+import { View, StyleSheet, FlatList, Animated, Platform } from 'react-native';
 import type { NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
 import {
   Colors,
-  AnimatedFAB,
   useTheme,
   Avatar,
   Paragraph,
   RadioButton,
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { animatedFABExampleData } from '../../utils';
+import { animatedFABExampleData } from '../../../utils';
+import CustomFAB from './CustomFAB';
 
 type Item = {
   id: string;
@@ -32,58 +24,12 @@ type Item = {
   bgColor: string;
 };
 
-type CustomFABProps = {
-  animatedValue: Animated.Value;
-  visible: boolean;
-  extended: boolean;
-  label: string;
-  animateFrom: 'left' | 'right';
-  iconMode?: 'static' | 'dynamic';
-  style?: StyleProp<ViewStyle>;
-};
-
-const isIOS = Platform.OS === 'ios';
-
-const CustomFAB = ({
-  animatedValue,
-  visible,
-  extended,
-  label,
-  animateFrom,
-  style,
-  iconMode,
-}: CustomFABProps) => {
-  const [isExtended, setIsExtended] = React.useState(true);
-
-  React.useEffect(() => {
-    if (!isIOS) {
-      animatedValue.addListener(({ value }: { value: number }) => {
-        setIsExtended(value <= 0);
-      });
-    } else setIsExtended(extended);
-  }, [animatedValue, extended]);
-
-  const fabStyle = { [animateFrom]: 16 };
-
-  return (
-    <AnimatedFAB
-      icon={'plus'}
-      label={label}
-      extended={isExtended}
-      uppercase={true}
-      onPress={() => console.log('Pressed')}
-      visible={visible}
-      animateFrom={animateFrom}
-      iconMode={iconMode}
-      style={[styles.fabStyle, style, fabStyle]}
-    />
-  );
-};
-
 const AnimatedFABExample = () => {
   const {
     colors: { background },
   } = useTheme();
+
+  const isIOS = Platform.OS === 'ios';
 
   const [extended, setExtended] = React.useState<boolean>(true);
   const [visible, setVisible] = React.useState<boolean>(true);
@@ -278,6 +224,7 @@ const AnimatedFABExample = () => {
         label={'New Message'}
         animateFrom={animateFrom}
         iconMode={iconMode}
+        isIOS={isIOS}
       />
     </>
   );
@@ -327,10 +274,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginRight: 8,
     flex: 1,
-  },
-  fabStyle: {
-    bottom: 16,
-    position: 'absolute',
   },
   controlsWrapper: {
     flex: 1,
