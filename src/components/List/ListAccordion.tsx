@@ -35,7 +35,6 @@ type Props = {
    * Gradient colors for the list accordion.
    */
   gradientColorPrimary?: (string | number)[];
-  // gradientColorSecondary?: string;
 
   /**
    * Callback which returns a React element to display on the left side.
@@ -164,15 +163,12 @@ const ListAccordion = ({
   onLongPress,
   expanded: expandedProp,
   titleGradientComponent,
-  // gradientColors,
   gradientColorPrimary,
-  // gradientColorSecondary,
   gradientStyle,
 }: Props) => {
   const [expanded, setExpanded] = React.useState<boolean>(
     expandedProp || false
   );
-
 
   const handlePressAction = () => {
     onPress?.();
@@ -187,8 +183,8 @@ const ListAccordion = ({
   const titleColor = color(theme.colors.text).alpha(0.87).rgb().string();
   const descriptionColor = color(theme.colors.text).alpha(0.54).rgb().string();
 
-  const linearPrimaryColor = '#FB6550';
-  const linearSecondaryColor = '#FA4850';
+  const linearPrimaryColor = '#ffffff';
+  const linearSecondaryColor = '#656566';
 
   const expandedInternal = expandedProp !== undefined ? expandedProp : expanded;
 
@@ -389,7 +385,7 @@ const styles = StyleSheet.create({
   gradientStyle: {
     borderWidth: 1,
     borderRadius: 100,
-    borderColor: '#FB6550',
+    borderColor: '#ffffff',
   },
 });
 
