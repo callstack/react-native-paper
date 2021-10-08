@@ -45,8 +45,8 @@ const AnimatedFABExample = () => {
     new Animated.Value(0)
   );
 
-  const renderItem = ({ item }: { item: Item }) => {
-    return (
+  const renderItem = React.useCallback(
+    ({ item }: { item: Item }) => (
       <View style={styles.itemContainer}>
         <Avatar.Text
           style={[styles.avatar, { backgroundColor: item.bgColor }]}
@@ -92,8 +92,9 @@ const AnimatedFABExample = () => {
           </View>
         </View>
       </View>
-    );
-  };
+    ),
+    []
+  );
 
   const onScroll = ({
     nativeEvent,
@@ -108,12 +109,17 @@ const AnimatedFABExample = () => {
     setExtended(currentScrollPosition <= 0);
   };
 
+  const _keyExtractor = React.useCallback(
+    (item: { id: string }) => item.id,
+    []
+  );
+
   return (
     <>
       <FlatList
         data={animatedFABExampleData}
         renderItem={renderItem}
-        keyExtractor={(item: { id: string }) => item.id}
+        keyExtractor={_keyExtractor}
         onEndReachedThreshold={0}
         scrollEventThrottle={16}
         style={[styles.flex, { backgroundColor: background }]}
