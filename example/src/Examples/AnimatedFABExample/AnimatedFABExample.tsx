@@ -1,16 +1,14 @@
 import * as React from 'react';
 import { View, StyleSheet, FlatList, Animated, Platform } from 'react-native';
 import type { NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
-import {
-  Colors,
-  useTheme,
-  Avatar,
-  Paragraph,
-  RadioButton,
-} from 'react-native-paper';
+import { Colors, useTheme, Avatar, Paragraph } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { animatedFABExampleData } from '../../../utils';
 import CustomFAB from './CustomFAB';
+import CustomFABControls, {
+  Controls,
+  initialControls,
+} from './CustomFABControls';
 
 type Item = {
   id: string;
@@ -34,12 +32,7 @@ const AnimatedFABExample = () => {
   const [extended, setExtended] = React.useState<boolean>(true);
   const [visible, setVisible] = React.useState<boolean>(true);
 
-  const [animateFrom, setAnimateFrom] = React.useState<'left' | 'right'>(
-    'right'
-  );
-  const [iconMode, setIconMode] = React.useState<'static' | 'dynamic'>(
-    'static'
-  );
+  const [controls, setControls] = React.useState<Controls>(initialControls);
 
   const { current: velocity } = React.useRef<Animated.Value>(
     new Animated.Value(0)
@@ -93,7 +86,7 @@ const AnimatedFABExample = () => {
         </View>
       </View>
     ),
-    []
+    [visible]
   );
 
   const onScroll = ({
@@ -114,6 +107,8 @@ const AnimatedFABExample = () => {
     []
   );
 
+  const { animateFrom, iconMode } = controls;
+
   return (
     <>
       <FlatList
@@ -130,98 +125,7 @@ const AnimatedFABExample = () => {
         onScroll={onScroll}
       />
 
-      <View style={styles.controlsWrapper}>
-        <View
-          style={{
-            flex: 1,
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'row',
-          }}
-        >
-          <Paragraph>iconMode</Paragraph>
-
-          <View
-            style={{
-              marginLeft: 'auto',
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}
-          >
-            <Paragraph>static</Paragraph>
-
-            <RadioButton
-              value="static"
-              status={iconMode === 'static' ? 'checked' : 'unchecked'}
-              onPress={() => setIconMode('static')}
-            />
-          </View>
-
-          <View
-            style={{
-              marginLeft: 16,
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}
-          >
-            <Paragraph>dynamic</Paragraph>
-
-            <RadioButton
-              value="dynamic"
-              status={iconMode === 'dynamic' ? 'checked' : 'unchecked'}
-              onPress={() => setIconMode('dynamic')}
-            />
-          </View>
-        </View>
-
-        <View
-          style={{
-            marginTop: 8,
-            flex: 1,
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'row',
-          }}
-        >
-          <Paragraph>animateFrom</Paragraph>
-
-          <View
-            style={{
-              marginLeft: 'auto',
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}
-          >
-            <Paragraph>left</Paragraph>
-
-            <RadioButton
-              value="left"
-              status={animateFrom === 'left' ? 'checked' : 'unchecked'}
-              onPress={() => setAnimateFrom('left')}
-            />
-          </View>
-
-          <View
-            style={{
-              marginLeft: 16,
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}
-          >
-            <Paragraph>right</Paragraph>
-
-            <RadioButton
-              value="right"
-              status={animateFrom === 'right' ? 'checked' : 'unchecked'}
-              onPress={() => setAnimateFrom('right')}
-            />
-          </View>
-        </View>
-      </View>
+      <CustomFABControls controls={controls} setControls={setControls} />
 
       <CustomFAB
         visible={visible}
@@ -280,17 +184,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginRight: 8,
     flex: 1,
-  },
-  controlsWrapper: {
-    flex: 1,
-    display: 'flex',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: 'white',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
   },
 });
 
