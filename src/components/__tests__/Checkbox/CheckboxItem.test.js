@@ -11,6 +11,14 @@ it('renders unchecked', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('renders checked', () => {
+  const tree = renderer
+    .create(<Checkbox.Item status="checked" label="Checked Button" />)
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
 it('can render the iOS checkbox on different platforms', () => {
   Platform.OS = 'android';
   const tree = renderer
