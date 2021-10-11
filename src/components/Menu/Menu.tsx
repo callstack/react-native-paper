@@ -14,6 +14,7 @@ import {
   ViewStyle,
   ScrollView,
   findNodeHandle,
+  NativeEventSubscription,
 } from 'react-native';
 
 import { withTheme } from '../../core/theming';
@@ -166,6 +167,8 @@ class Menu extends React.Component<Props, State> {
 
   private anchor?: View | null = null;
   private menu?: View | null = null;
+  private backHandlerSubscription: NativeEventSubscription | undefined;
+  private dimensionsSubscription: NativeEventSubscription | undefined;
 
   private isCoordinate = (anchor: any): anchor is { x: number; y: number } =>
     !React.isValidElement(anchor) &&
@@ -239,15 +242,30 @@ class Menu extends React.Component<Props, State> {
   };
 
   private attachListeners = () => {
-    BackHandler.addEventListener('hardwareBackPress', this.handleDismiss);
-    Dimensions.addEventListener('change', this.handleDismiss);
+    this.backHandlerSubscription = BackHandler.addEventListener(
+      'hardwareBackPress',
+      this.handleDismiss
+    );
+    this.dimensionsSubscription = Dimensions.addEventListener(
+      'change',
+      this.handleDismiss
+    );
 
     this.isBrowser() && document.addEventListener('keyup', this.handleKeypress);
   };
 
   private removeListeners = () => {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleDismiss);
-    Dimensions.removeEventListener('change', this.handleDismiss);
+    if (this.backHandlerSubscription?.remove) {
+      this.backHandlerSubscription.remove();
+    } else {
+      BackHandler.removeEventListener('hardwareBackPress', this.handleDismiss);
+    }
+
+    if (this.dimensionsSubscription?.remove) {
+      this.dimensionsSubscription.remove();
+    } else {
+      Dimensions.removeEventListener('change', this.handleDismiss);
+    }
 
     this.isBrowser() &&
       document.removeEventListener('keyup', this.handleKeypress);

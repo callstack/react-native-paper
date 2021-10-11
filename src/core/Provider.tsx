@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { AccessibilityInfo, Appearance, ColorSchemeName } from 'react-native';
+import {
+  AccessibilityInfo,
+  Appearance,
+  ColorSchemeName,
+  NativeEventSubscription,
+} from 'react-native';
 import { ThemeProvider } from './theming';
 import { Provider as SettingsProvider, Settings } from './settings';
 import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
@@ -32,18 +37,24 @@ const Provider = ({ ...props }: Props) => {
   };
 
   React.useEffect(() => {
+    let subscription: NativeEventSubscription | undefined;
+
     if (!props.theme) {
-      AccessibilityInfo.addEventListener(
+      subscription = AccessibilityInfo.addEventListener(
         'reduceMotionChanged',
         setReduceMotionEnabled
       );
     }
     return () => {
       if (!props.theme) {
-        AccessibilityInfo.removeEventListener(
-          'reduceMotionChanged',
-          setReduceMotionEnabled
-        );
+        if (subscription?.remove) {
+          subscription.remove();
+        } else {
+          AccessibilityInfo.removeEventListener(
+            'reduceMotionChanged',
+            setReduceMotionEnabled
+          );
+        }
       }
     };
   }, [props.theme]);
