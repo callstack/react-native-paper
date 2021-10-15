@@ -42,7 +42,7 @@ const fontConfig = {
       fontWeight: '100' as '100',
     },
     bold: {
-      fontFamily: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
+      fontFamily: 'System',
       fontWeight: '700' as '700',
     },
   },
@@ -64,8 +64,8 @@ const fontConfig = {
       fontWeight: 'normal' as 'normal',
     },
     bold: {
-      fontFamily: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
-      fontWeight: '700' as '700',
+      fontFamily: 'sans-serif-bold',
+      fontWeight: 'normal' as 'normal',
     },
   },
 };
