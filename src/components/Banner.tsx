@@ -172,6 +172,7 @@ const Banner = ({
     <Surface
       {...rest}
       style={[styles.container, shadow(ELEVATION) as ViewStyle, style]}
+      theme={theme}
     >
       <View style={[styles.wrapper, contentStyle]}>
         <Animated.View style={{ height }} />
@@ -197,7 +198,9 @@ const Banner = ({
                 <Icon source={icon} size={40} />
               </View>
             ) : null}
-            <Text style={styles.message}>{children}</Text>
+            <Text style={[styles.message, { color: theme.colors.text }]}>
+              {children}
+            </Text>
           </View>
           <View style={styles.actions}>
             {actions.map(({ label, ...others }, i) => (
@@ -206,6 +209,7 @@ const Banner = ({
                 compact
                 mode="text"
                 style={styles.button}
+                color={theme.colors.primary}
                 {...others}
               >
                 {label}

@@ -91,3 +91,25 @@ it('renders visible banner, with action buttons and with image', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('render visible banner, with custom theme', () => {
+  const tree = renderer
+    .create(
+      <Banner
+        visible
+        theme={{
+          colors: {
+            text: '#00f',
+            surface: '#ccc',
+            primary: '#043',
+          },
+        }}
+        actions={[{ label: 'first', onPress: () => {} }]}
+      >
+        Custom theme
+      </Banner>
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
