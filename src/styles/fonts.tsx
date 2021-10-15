@@ -19,6 +19,10 @@ const fontConfig = {
       fontFamily: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
       fontWeight: '100' as '100',
     },
+    bold: {
+      fontFamily: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
+      fontWeight: '700' as '700',
+    },
   },
   ios: {
     regular: {
@@ -37,6 +41,10 @@ const fontConfig = {
       fontFamily: 'System',
       fontWeight: '100' as '100',
     },
+    bold: {
+      fontFamily: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
+      fontWeight: '700' as '700',
+    },
   },
   default: {
     regular: {
@@ -54,6 +62,10 @@ const fontConfig = {
     thin: {
       fontFamily: 'sans-serif-thin',
       fontWeight: 'normal' as 'normal',
+    },
+    bold: {
+      fontFamily: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
+      fontWeight: '700' as '700',
     },
   },
 };
