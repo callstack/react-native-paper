@@ -125,7 +125,9 @@ export default function Modal({
     return true;
   };
 
-  const subscription = React.useRef<NativeEventSubscription | undefined>(undefined);
+  const subscription = React.useRef<NativeEventSubscription | undefined>(
+    undefined
+  );
 
   const showModal = () => {
     if (subscription.current?.remove) {
