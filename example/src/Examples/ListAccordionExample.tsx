@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { List, Divider, useTheme } from 'react-native-paper';
+import { List, Divider } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 const ListAccordionExample = () => {
   const [expanded, setExpanded] = React.useState<boolean>(true);
@@ -9,12 +9,8 @@ const ListAccordionExample = () => {
     setExpanded(!expanded);
   };
 
-  const {
-    colors: { background },
-  } = useTheme();
-
   return (
-    <ScrollView style={[styles.container, { backgroundColor: background }]}>
+    <ScreenWrapper>
       <List.Section title="Expandable list item">
         <List.Accordion
           left={(props) => <List.Icon {...props} icon="folder" />}
@@ -58,16 +54,10 @@ const ListAccordionExample = () => {
           />
         </List.Accordion>
       </List.Section>
-    </ScrollView>
+    </ScreenWrapper>
   );
 };
 
 ListAccordionExample.title = 'List.Accordion';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default ListAccordionExample;

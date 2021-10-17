@@ -155,6 +155,7 @@ const ActivityIndicator = ({
       {...rest}
       accessible
       accessibilityRole="progressbar"
+      accessibilityState={{ busy: animating }}
     >
       <Animated.View
         style={[{ width: size, height: size, opacity: fade }]}

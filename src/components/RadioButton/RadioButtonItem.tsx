@@ -69,6 +69,10 @@ export type Props = {
    * Left undefined `<RadioButton />` will be used.
    */
   mode?: 'android' | 'ios';
+  /**
+   * Radio button control position.
+   */
+  position?: 'leading' | 'trailing';
 };
 
 /**
@@ -114,8 +118,10 @@ const RadioButtonItem = ({
   accessibilityLabel,
   testID,
   mode,
+  position = 'trailing',
 }: Props) => {
   const radioButtonProps = { value, disabled, status, color, uncheckedColor };
+  const isLeading = position === 'leading';
   let radioButton: any;
 
   if (mode === 'android') {
@@ -145,10 +151,20 @@ const RadioButtonItem = ({
             testID={testID}
           >
             <View style={[styles.container, style]} pointerEvents="none">
-              <Text style={[styles.label, { color: colors.text }, labelStyle]}>
+              {isLeading && radioButton}
+              <Text
+                style={[
+                  styles.label,
+                  {
+                    color: colors.text,
+                    textAlign: isLeading ? 'right' : 'left',
+                  },
+                  labelStyle,
+                ]}
+              >
                 {label}
               </Text>
-              {radioButton}
+              {!isLeading && radioButton}
             </View>
           </TouchableRipple>
         );
@@ -176,6 +192,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    flex: 1,
+    flexShrink: 1,
+    flexGrow: 1,
   },
 });

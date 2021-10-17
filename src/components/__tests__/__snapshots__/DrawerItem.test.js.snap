@@ -52,71 +52,81 @@ exports[`renders DrawerItem with icon 1`] = `
         }
       }
     >
-      <Text
-        accessibilityElementsHidden={true}
-        allowFontScaling={false}
-        importantForAccessibility="no-hide-descendants"
-        pointerEvents="none"
-        selectable={false}
+      <View
         style={
-          Array [
-            Object {
-              "color": "rgba(0, 0, 0, 0.68)",
-              "fontSize": 24,
-            },
-            Array [
-              Object {
-                "lineHeight": 24,
-                "transform": Array [
-                  Object {
-                    "scaleX": 1,
-                  },
-                ],
-              },
-              Object {
-                "backgroundColor": "transparent",
-              },
-            ],
-            Object {
-              "fontFamily": "Material Design Icons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-            Object {},
-          ]
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "row",
+          }
         }
       >
-        
-      </Text>
-      <Text
-        numberOfLines={1}
-        selectable={false}
-        style={
-          Array [
-            Object {
-              "color": "#000000",
-              "fontFamily": "System",
-              "fontWeight": "400",
-            },
-            Object {
-              "textAlign": "left",
-            },
+        <Text
+          accessibilityElementsHidden={true}
+          allowFontScaling={false}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
             Array [
-              Object {
-                "marginRight": 32,
-              },
               Object {
                 "color": "rgba(0, 0, 0, 0.68)",
-                "fontFamily": "System",
-                "fontWeight": "500",
-                "marginLeft": 32,
+                "fontSize": 24,
               },
-            ],
-          ]
-        }
-      >
-        Example item
-      </Text>
+              Array [
+                Object {
+                  "lineHeight": 24,
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "System",
+                "fontWeight": "400",
+              },
+              Object {
+                "textAlign": "left",
+              },
+              Array [
+                Object {
+                  "marginRight": 32,
+                },
+                Object {
+                  "color": "rgba(0, 0, 0, 0.68)",
+                  "fontFamily": "System",
+                  "fontWeight": "500",
+                  "marginLeft": 32,
+                },
+              ],
+            ]
+          }
+        >
+          Example item
+        </Text>
+      </View>
     </View>
   </View>
 </View>
@@ -174,71 +184,81 @@ exports[`renders active DrawerItem 1`] = `
         }
       }
     >
-      <Text
-        accessibilityElementsHidden={true}
-        allowFontScaling={false}
-        importantForAccessibility="no-hide-descendants"
-        pointerEvents="none"
-        selectable={false}
+      <View
         style={
-          Array [
-            Object {
-              "color": "#6200ee",
-              "fontSize": 24,
-            },
-            Array [
-              Object {
-                "lineHeight": 24,
-                "transform": Array [
-                  Object {
-                    "scaleX": 1,
-                  },
-                ],
-              },
-              Object {
-                "backgroundColor": "transparent",
-              },
-            ],
-            Object {
-              "fontFamily": "Material Design Icons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-            Object {},
-          ]
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "row",
+          }
         }
       >
-        
-      </Text>
-      <Text
-        numberOfLines={1}
-        selectable={false}
-        style={
-          Array [
-            Object {
-              "color": "#000000",
-              "fontFamily": "System",
-              "fontWeight": "400",
-            },
-            Object {
-              "textAlign": "left",
-            },
+        <Text
+          accessibilityElementsHidden={true}
+          allowFontScaling={false}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
             Array [
-              Object {
-                "marginRight": 32,
-              },
               Object {
                 "color": "#6200ee",
-                "fontFamily": "System",
-                "fontWeight": "500",
-                "marginLeft": 32,
+                "fontSize": 24,
               },
-            ],
-          ]
-        }
-      >
-        Example item
-      </Text>
+              Array [
+                Object {
+                  "lineHeight": 24,
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "System",
+                "fontWeight": "400",
+              },
+              Object {
+                "textAlign": "left",
+              },
+              Array [
+                Object {
+                  "marginRight": 32,
+                },
+                Object {
+                  "color": "#6200ee",
+                  "fontFamily": "System",
+                  "fontWeight": "500",
+                  "marginLeft": 32,
+                },
+              ],
+            ]
+          }
+        >
+          Example item
+        </Text>
+      </View>
     </View>
   </View>
 </View>
@@ -296,35 +316,45 @@ exports[`renders basic DrawerItem 1`] = `
         }
       }
     >
-      <Text
-        numberOfLines={1}
-        selectable={false}
+      <View
         style={
-          Array [
-            Object {
-              "color": "#000000",
-              "fontFamily": "System",
-              "fontWeight": "400",
-            },
-            Object {
-              "textAlign": "left",
-            },
-            Array [
-              Object {
-                "marginRight": 32,
-              },
-              Object {
-                "color": "rgba(0, 0, 0, 0.68)",
-                "fontFamily": "System",
-                "fontWeight": "500",
-                "marginLeft": 0,
-              },
-            ],
-          ]
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "row",
+          }
         }
       >
-        Example item
-      </Text>
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "System",
+                "fontWeight": "400",
+              },
+              Object {
+                "textAlign": "left",
+              },
+              Array [
+                Object {
+                  "marginRight": 32,
+                },
+                Object {
+                  "color": "rgba(0, 0, 0, 0.68)",
+                  "fontFamily": "System",
+                  "fontWeight": "500",
+                  "marginLeft": 0,
+                },
+              ],
+            ]
+          }
+        >
+          Example item
+        </Text>
+      </View>
     </View>
   </View>
 </View>

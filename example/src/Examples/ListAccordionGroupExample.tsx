@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { List, useTheme } from 'react-native-paper';
+import { List } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 type State = string | number | undefined;
 
@@ -12,12 +12,8 @@ const ListAccordionGroupExample = () => {
       ? setExpandedId(undefined)
       : setExpandedId(newExpandedId);
 
-  const {
-    colors: { background },
-  } = useTheme();
-
   return (
-    <ScrollView style={[styles.container, { backgroundColor: background }]}>
+    <ScreenWrapper>
       <List.AccordionGroup>
         <List.Section title="Uncontrolled Accordion Group example">
           <List.Accordion
@@ -73,16 +69,10 @@ const ListAccordionGroupExample = () => {
           </List.Accordion>
         </List.Section>
       </List.AccordionGroup>
-    </ScrollView>
+    </ScreenWrapper>
   );
 };
 
 ListAccordionGroupExample.title = 'List.AccordionGroup';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default ListAccordionGroupExample;

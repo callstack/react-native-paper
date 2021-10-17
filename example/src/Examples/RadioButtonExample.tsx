@@ -5,26 +5,16 @@ import {
   RadioButton,
   Colors,
   TouchableRipple,
-  useTheme,
 } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 type State = 'normal' | 'normal-ios' | 'normal-item' | 'custom';
 
 const RadioButtonExample = () => {
   const [checked, setChecked] = React.useState<State>('normal');
 
-  const {
-    colors: { background },
-  } = useTheme();
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          backgroundColor: background,
-        },
-      ]}
-    >
+    <ScreenWrapper style={styles.container}>
       <TouchableRipple onPress={() => setChecked('normal')}>
         <View style={styles.row}>
           <Paragraph>Normal - Material Design</Paragraph>
@@ -85,7 +75,7 @@ const RadioButtonExample = () => {
         status="unchecked"
         disabled
       />
-    </View>
+    </ScreenWrapper>
   );
 };
 
@@ -93,11 +83,8 @@ RadioButtonExample.title = 'Radio Button';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: Colors.white,
     paddingVertical: 8,
   },
-
   row: {
     flexDirection: 'row',
     alignItems: 'center',

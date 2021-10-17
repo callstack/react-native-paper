@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { IconButton, Colors, useTheme } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
+import { IconButton, Colors } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 const ButtonExample = () => {
-  const { colors } = useTheme();
-
   return (
-    <View style={[styles.container, { backgroundColor: colors.background }]}>
+    <ScreenWrapper contentContainerStyle={styles.container}>
       <IconButton icon="camera" size={24} onPress={() => {}} />
       <IconButton
         icon="lock"
@@ -22,7 +21,7 @@ const ButtonExample = () => {
         style={{ backgroundColor: Colors.lightGreen200 }}
       />
       <IconButton icon="heart" size={60} onPress={() => {}} />
-    </View>
+    </ScreenWrapper>
   );
 };
 
@@ -30,7 +29,6 @@ ButtonExample.title = 'Icon Button';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'row',
     padding: 8,
   },

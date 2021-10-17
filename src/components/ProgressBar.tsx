@@ -156,6 +156,10 @@ const ProgressBar = ({
       {...rest}
       accessible
       accessibilityRole="progressbar"
+      accessibilityState={{ busy: visible }}
+      accessibilityValue={
+        indeterminate ? {} : { min: 0, max: 100, now: progress * 100 }
+      }
     >
       <Animated.View
         style={[

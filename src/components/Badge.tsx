@@ -10,7 +10,7 @@ type Props = React.ComponentProps<typeof Animated.Text> & {
   /**
    * Whether the badge is visible
    */
-  visible: boolean;
+  visible?: boolean;
   /**
    * Content of the `Badge`.
    */

@@ -1,6 +1,12 @@
 import * as React from 'react';
 import color from 'color';
-import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
+import {
+  StyleSheet,
+  StyleProp,
+  View,
+  ViewStyle,
+  ViewProps,
+} from 'react-native';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
@@ -20,6 +26,10 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    * @optional
    */
   theme: ReactNativePaper.Theme;
+  /**
+   * `pointerEvents` passed to the `View` container, which is wrapping children within `TouchableRipple`.
+   */
+  pointerEvents?: ViewProps['pointerEvents'];
 };
 
 /**
@@ -50,7 +60,14 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
  * ```
  */
 
-const DataTableRow = ({ onPress, style, theme, children, ...rest }: Props) => {
+const DataTableRow = ({
+  onPress,
+  style,
+  theme,
+  children,
+  pointerEvents,
+  ...rest
+}: Props) => {
   const borderBottomColor = color(theme.dark ? white : black)
     .alpha(0.12)
     .rgb()
@@ -62,10 +79,14 @@ const DataTableRow = ({ onPress, style, theme, children, ...rest }: Props) => {
       onPress={onPress}
       style={[styles.container, { borderBottomColor }, style]}
     >
-      <View style={styles.content}>{children}</View>
+      <View style={styles.content} pointerEvents={pointerEvents}>
+        {children}
+      </View>
     </TouchableRipple>
   );
 };
+
+DataTableRow.displayName = 'DataTable.Row';
 
 const styles = StyleSheet.create({
   container: {

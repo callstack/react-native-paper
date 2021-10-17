@@ -48,3 +48,19 @@ it('can render the Android radio button on different platforms', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('can render leading radio button control', () => {
+  Platform.OS = 'ios';
+  const tree = renderer
+    .create(
+      <RadioButton.Item
+        label="Default with leading control"
+        status={'unchecked'}
+        value="iOS"
+        position="leading"
+      />
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});

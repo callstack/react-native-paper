@@ -62,6 +62,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
       selectionColor,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       underlineColor,
+      outlineColor: customOutlineColor,
       dense,
       style,
       theme,
@@ -91,6 +92,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
     const {
       fontSize: fontSizeStyle,
       fontWeight,
+      lineHeight,
       height,
       backgroundColor = colors.background,
       textAlign,
@@ -101,15 +103,19 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
     let inputTextColor, activeColor, outlineColor, placeholderColor, errorColor;
 
     if (disabled) {
+      const isTransparent = color(customOutlineColor).alpha() === 0;
+
       inputTextColor = activeColor = color(colors.text)
         .alpha(0.54)
         .rgb()
         .string();
-      placeholderColor = outlineColor = colors.disabled;
+      placeholderColor = colors.disabled;
+      outlineColor = isTransparent ? customOutlineColor : colors.disabled;
     } else {
       inputTextColor = colors.text;
       activeColor = error ? colors.error : colors.primary;
-      placeholderColor = outlineColor = colors.placeholder;
+      placeholderColor = colors.placeholder;
+      outlineColor = customOutlineColor || colors.placeholder;
       errorColor = colors.error;
     }
 
@@ -165,6 +171,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
       dense: dense ? dense : null,
       topPosition,
       fontSize,
+      lineHeight,
       label,
       scale: fontScale,
       isAndroid: Platform.OS === 'android',
@@ -206,6 +213,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
       backgroundColor: backgroundColor as ColorValue,
       errorColor,
       labelTranslationXOffset,
+      roundness: theme.roundness,
     };
 
     const minHeight = (height ||
@@ -339,6 +347,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
                     ? 'right'
                     : 'left',
                 },
+                Platform.OS === 'web' && { outline: 'none' },
                 adornmentStyleAdjustmentForNativeInput,
               ],
             } as RenderProps)}

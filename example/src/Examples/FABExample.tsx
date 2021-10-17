@@ -1,17 +1,14 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Colors, FAB, Portal, useTheme } from 'react-native-paper';
+import { FAB, Portal } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 const ButtonExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);
   const [open, setOpen] = React.useState<boolean>(false);
 
-  const {
-    colors: { background },
-  } = useTheme();
-
   return (
-    <View style={[styles.container, { backgroundColor: background }]}>
+    <ScreenWrapper style={styles.container}>
       <View style={styles.row}>
         <FAB
           small
@@ -84,7 +81,7 @@ const ButtonExample = () => {
           />
         </Portal>
       </View>
-    </View>
+    </ScreenWrapper>
   );
 };
 
@@ -92,16 +89,12 @@ ButtonExample.title = 'Floating Action Button';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: Colors.grey200,
     padding: 4,
   },
-
   row: {
     justifyContent: 'center',
     alignItems: 'center',
   },
-
   fab: {
     margin: 8,
   },

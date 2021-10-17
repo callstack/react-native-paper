@@ -1,14 +1,12 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { useTheme, Paragraph } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
+import { Paragraph } from 'react-native-paper';
 import { Provider as PaperProvider } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 const Content = () => {
-  const theme = useTheme();
   return (
-    <View
-      style={[styles.container, { backgroundColor: theme.colors.background }]}
-    >
+    <ScreenWrapper contentContainerStyle={styles.container}>
       <Paragraph style={styles.paragraph}>
         React Native Paper automatically adapts theme based on system
         preferences
@@ -16,7 +14,7 @@ const Content = () => {
       <Paragraph style={styles.paragraph}>
         Please change system theme to dark/light to see the effect
       </Paragraph>
-    </View>
+    </ScreenWrapper>
   );
 };
 

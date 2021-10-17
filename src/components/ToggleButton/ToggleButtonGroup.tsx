@@ -4,11 +4,11 @@ type Props = {
   /**
    * Function to execute on selection change.
    */
-  onValueChange: (value: string) => void;
+  onValueChange: (value: string) => void | null;
   /**
    * Value of the currently selected toggle button.
    */
-  value: string;
+  value: string | null;
   /**
    * React elements containing toggle buttons.
    */
@@ -16,8 +16,8 @@ type Props = {
 };
 
 type ToggleButtonContextType = {
-  value: string;
-  onValueChange: (item: string) => void;
+  value: string | null;
+  onValueChange: (item: string) => void | null;
 };
 
 export const ToggleButtonGroupContext = React.createContext<

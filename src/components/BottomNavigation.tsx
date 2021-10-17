@@ -7,7 +7,6 @@ import {
   StyleSheet,
   StyleProp,
   Platform,
-  Keyboard,
   ViewStyle,
 } from 'react-native';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
@@ -23,6 +22,7 @@ import { withTheme } from '../core/theming';
 import useAnimatedValue from '../utils/useAnimatedValue';
 import useAnimatedValueArray from '../utils/useAnimatedValueArray';
 import useLayout from '../utils/useLayout';
+import useIsKeyboardShown from '../utils/useIsKeyboardShown';
 
 type Route = {
   key: string;
@@ -208,16 +208,20 @@ type Props = {
    */
   keyboardHidesNavigationBar?: boolean;
   /**
+   * Safe area insets for the tab bar. This can be used to avoid elements like the navigation bar on Android and bottom safe area on iOS.
+   * The bottom insets for iOS is added by default. You can override the behavior with this option.
+   */
+  safeAreaInsets?: {
+    top?: number;
+    right?: number;
+    bottom?: number;
+    left?: number;
+  };
+  /**
    * Style for the bottom navigation bar.  You can pass a custom background color here:
    *
    * ```js
    * barStyle={{ backgroundColor: '#694fad' }}
-   * ```
-   *
-   * If you have a translucent navigation bar on Android, you can also set a bottom padding here:
-   *
-   * ```js
-   * barStyle={{ paddingBottom: 48 }}
    * ```
    */
   barStyle?: StyleProp<ViewStyle>;
@@ -269,7 +273,7 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
  * Bottom navigation provides quick navigation between top-level views of an app with a bottom navigation bar.
  * It is primarily designed for use on mobile.
  *
- * For integration with React Navigation, you can use [react-navigation-material-bottom-tab-navigator](https://github.com/react-navigation/react-navigation-material-bottom-tab-navigator).
+ * For integration with React Navigation, you can use [react-navigation-material-bottom-tabs](https://github.com/react-navigation/react-navigation/tree/main/packages/material-bottom-tabs) and consult [createMaterialBottomTabNavigator](https://reactnavigation.org/docs/material-bottom-tab-navigator/) documentation.
  *
  * By default Bottom navigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
  * See [Dark Theme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more information.
@@ -338,6 +342,7 @@ const BottomNavigation = ({
   onTabPress,
   onIndexChange,
   shifting = navigationState.routes.length > 3,
+  safeAreaInsets,
 }: Props) => {
   const { scale } = theme.animation;
 
@@ -477,25 +482,10 @@ const BottomNavigation = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  React.useEffect(() => {
-    if (Platform.OS === 'ios') {
-      Keyboard.addListener('keyboardWillShow', handleKeyboardShow);
-      Keyboard.addListener('keyboardWillHide', handleKeyboardHide);
-    } else {
-      Keyboard.addListener('keyboardDidShow', handleKeyboardShow);
-      Keyboard.addListener('keyboardDidHide', handleKeyboardHide);
-    }
-
-    return () => {
-      if (Platform.OS === 'ios') {
-        Keyboard.removeListener('keyboardWillShow', handleKeyboardShow);
-        Keyboard.removeListener('keyboardWillHide', handleKeyboardHide);
-      } else {
-        Keyboard.removeListener('keyboardDidShow', handleKeyboardShow);
-        Keyboard.removeListener('keyboardDidHide', handleKeyboardHide);
-      }
-    };
-  }, [handleKeyboardHide, handleKeyboardShow]);
+  useIsKeyboardShown({
+    onShow: handleKeyboardShow,
+    onHide: handleKeyboardHide,
+  });
 
   const prevNavigationState = React.useRef<NavigationState>();
 
@@ -593,6 +583,12 @@ const BottomNavigation = ({
 
   const rippleSize = layout.width / 4;
 
+  const insets = {
+    left: safeAreaInsets?.left ?? 0,
+    right: safeAreaInsets?.right ?? 0,
+    bottom: safeAreaInsets?.bottom ?? BOTTOM_INSET,
+  };
+
   return (
     <View style={[styles.container, style]}>
       <View style={[styles.content, { backgroundColor: colors.background }]}>
@@ -610,10 +606,14 @@ const BottomNavigation = ({
             ? 1
             : 0;
 
-          const top = offsetsAnims[index].interpolate({
-            inputRange: [0, 1],
-            outputRange: [0, FAR_FAR_AWAY],
-          });
+          const top = sceneAnimationEnabled
+            ? offsetsAnims[index].interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, FAR_FAR_AWAY],
+              })
+            : focused
+            ? 0
+            : FAR_FAR_AWAY;
 
           return (
             <Animated.View
@@ -674,8 +674,13 @@ const BottomNavigation = ({
           <View
             style={[
               styles.items,
-              { marginBottom: BOTTOM_INSET, maxWidth: maxTabBarWidth },
+              {
+                marginBottom: insets.bottom,
+                marginHorizontal: Math.max(insets.left, insets.right),
+                maxWidth: maxTabBarWidth,
+              },
             ]}
+            accessibilityRole={'tablist'}
           >
             {shifting ? (
               <Animated.View
@@ -759,8 +764,8 @@ const BottomNavigation = ({
                   ? ['button', 'selected']
                   : 'button',
                 accessibilityComponentType: 'button',
-                accessibilityRole: 'button',
-                accessibilityState: { selected: true },
+                accessibilityRole: Platform.OS === 'ios' ? 'button' : 'tab',
+                accessibilityState: { selected: focused },
                 style: styles.item,
                 children: (
                   <View pointerEvents="none">
@@ -944,7 +949,11 @@ const styles = StyleSheet.create({
   },
   items: {
     flexDirection: 'row',
-    width: '100%',
+    ...(Platform.OS === 'web'
+      ? {
+          width: '100%',
+        }
+      : null),
   },
   item: {
     flex: 1,

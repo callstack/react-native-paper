@@ -86,7 +86,6 @@ const styles = StyleSheet.create({
     width: undefined,
     padding: 16,
     justifyContent: 'flex-end',
-    resizeMode: 'cover',
   },
 });
 

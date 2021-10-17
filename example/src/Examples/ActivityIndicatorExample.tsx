@@ -1,15 +1,13 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { ActivityIndicator, Colors, FAB, useTheme } from 'react-native-paper';
+import { ActivityIndicator, Colors, FAB } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 const ActivityIndicatorExample = () => {
   const [animating, setAnimating] = React.useState<boolean>(true);
-  const {
-    colors: { background },
-  } = useTheme();
 
   return (
-    <View style={[styles.container, { backgroundColor: background }]}>
+    <ScreenWrapper style={styles.container}>
       <View style={styles.row}>
         <FAB
           small
@@ -33,7 +31,7 @@ const ActivityIndicatorExample = () => {
       <View style={styles.row}>
         <ActivityIndicator animating={animating} color={Colors.red500} />
       </View>
-    </View>
+    </ScreenWrapper>
   );
 };
 
@@ -41,10 +39,8 @@ ActivityIndicatorExample.title = 'Activity Indicator';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 4,
   },
-
   row: {
     justifyContent: 'center',
     alignItems: 'center',

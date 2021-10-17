@@ -27,6 +27,10 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
   accessibilityLabel?: string;
+  /**
+   * Callback which returns a React element to display on the right side. For instance a Badge.
+   */
+  right?: (props: { color: string }) => React.ReactNode;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -67,6 +71,7 @@ const DrawerItem = ({
   style,
   onPress,
   accessibilityLabel,
+  right,
   ...rest
 }: Props) => {
   const { colors, roundness } = theme;
@@ -101,21 +106,26 @@ const DrawerItem = ({
         accessibilityLabel={accessibilityLabel}
       >
         <View style={styles.wrapper}>
-          {icon ? <Icon source={icon} size={24} color={contentColor} /> : null}
-          <Text
-            selectable={false}
-            numberOfLines={1}
-            style={[
-              styles.label,
-              {
-                color: contentColor,
-                ...font,
-                marginLeft: labelMargin,
-              },
-            ]}
-          >
-            {label}
-          </Text>
+          <View style={styles.content}>
+            {icon ? (
+              <Icon source={icon} size={24} color={contentColor} />
+            ) : null}
+            <Text
+              selectable={false}
+              numberOfLines={1}
+              style={[
+                styles.label,
+                {
+                  color: contentColor,
+                  ...font,
+                  marginLeft: labelMargin,
+                },
+              ]}
+            >
+              {label}
+            </Text>
+          </View>
+          {right?.({ color: contentColor })}
         </View>
       </TouchableRipple>
     </View>
@@ -133,6 +143,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 8,
+  },
+  content: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   label: {
     marginRight: 32,

@@ -63,7 +63,7 @@ const ListSection = ({
   ...rest
 }: Props) => (
   <View {...rest} style={[styles.container, style]}>
-    {title && <ListSubheader style={titleStyle}>{title}</ListSubheader>}
+    {title ? <ListSubheader style={titleStyle}>{title}</ListSubheader> : null}
     {children}
   </View>
 );

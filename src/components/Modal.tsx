@@ -125,16 +125,15 @@ export default function Modal({
     return true;
   };
 
-  /**
-   * If we don't use a "ref" to keep track of the exact version of the handleBack function we're removing from the event
-   * listener, what will happen is that `handleBack`'s reference in memory will change between `showModal` and `hideModal`
-   * (due to a potential re-render of `visible` being set) being called, leaving the event in-tact and not removing properly
-   */
-  const backHandlerSub = React.useRef<NativeEventSubscription | null>(null);
+  const subscription = React.useRef<NativeEventSubscription | undefined>(undefined);
 
   const showModal = () => {
-    backHandlerSub.current?.remove();
-    backHandlerSub.current = BackHandler.addEventListener(
+    if (subscription.current?.remove) {
+      subscription.current.remove();
+    } else {
+      BackHandler.removeEventListener('hardwareBackPress', handleBack);
+    }
+    subscription.current = BackHandler.addEventListener(
       'hardwareBackPress',
       handleBack
     );
@@ -150,7 +149,11 @@ export default function Modal({
   };
 
   const hideModal = () => {
-    backHandlerSub.current?.remove();
+    if (subscription.current?.remove) {
+      subscription.current?.remove();
+    } else {
+      BackHandler.removeEventListener('hardwareBackPress', handleBack);
+    }
 
     const { scale } = animation;
 
@@ -204,6 +207,7 @@ export default function Modal({
         accessibilityRole="button"
         disabled={!dismissable}
         onPress={dismissable ? hideModal : undefined}
+        importantForAccessibility="no"
       >
         <Animated.View
           style={[

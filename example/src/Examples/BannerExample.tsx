@@ -1,14 +1,7 @@
 import * as React from 'react';
-import {
-  View,
-  StyleSheet,
-  Image,
-  ScrollView,
-  SafeAreaView,
-  Dimensions,
-  Platform,
-} from 'react-native';
-import { Banner, FAB, useTheme } from 'react-native-paper';
+import { View, StyleSheet, Image, Dimensions, Platform } from 'react-native';
+import { Banner, FAB } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 const PHOTOS = Array.from({ length: 24 }).map(
   (_, i) => `https://unsplash.it/300/300/?random&__id=${i}`
@@ -16,13 +9,10 @@ const PHOTOS = Array.from({ length: 24 }).map(
 
 const BannerExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);
-  const {
-    colors: { background },
-  } = useTheme();
 
   return (
-    <View style={[styles.container, { backgroundColor: background }]}>
-      <ScrollView>
+    <>
+      <ScreenWrapper>
         <Banner
           actions={[
             {
@@ -47,18 +37,14 @@ const BannerExample = () => {
             </View>
           ))}
         </View>
-      </ScrollView>
-      <SafeAreaView>
-        <View>
-          <FAB
-            icon="eye"
-            label={visible ? 'Hide banner' : 'Show banner'}
-            style={styles.fab}
-            onPress={() => setVisible(!visible)}
-          />
-        </View>
-      </SafeAreaView>
-    </View>
+      </ScreenWrapper>
+      <FAB
+        icon="eye"
+        label={visible ? 'Hide banner' : 'Show banner'}
+        style={styles.fab}
+        onPress={() => setVisible(!visible)}
+      />
+    </>
   );
 };
 

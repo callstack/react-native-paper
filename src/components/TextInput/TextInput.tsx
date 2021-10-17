@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   Animated,
   TextInput as NativeTextInput,
-  Platform,
   LayoutChangeEvent,
   StyleProp,
   TextStyle,
@@ -61,11 +60,15 @@ export type TextInputProps = React.ComponentPropsWithRef<
    */
   underlineColor?: string;
   /**
+   * Outline color of the input.
+   */
+  outlineColor?: string;
+  /**
    * Sets min height with densed layout. For `TextInput` in `flat` mode
    * height is `64dp` or in dense layout - `52dp` with label or `40dp` without label.
    * For `TextInput` in `outlined` mode
    * height is `56dp` or in dense layout - `40dp` regardless of label.
-   * When you apply `heigh` prop in style the `dense` prop affects only `paddingVertical` inside `TextInput`
+   * When you apply `height` prop in style the `dense` prop affects only `paddingVertical` inside `TextInput`
    */
   dense?: boolean;
   /**
@@ -297,11 +300,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     Animated.timing(this.state.error, {
       toValue: 1,
       duration: FOCUS_ANIMATION_DURATION * scale,
-      // To prevent this - https://github.com/callstack/react-native-paper/issues/941
-      useNativeDriver: Platform.select({
-        ios: false,
-        default: true,
-      }),
+      useNativeDriver: true,
     }).start();
   };
 
@@ -310,11 +309,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     Animated.timing(this.state.error, {
       toValue: 0,
       duration: BLUR_ANIMATION_DURATION * scale,
-      // To prevent this - https://github.com/callstack/react-native-paper/issues/941
-      useNativeDriver: Platform.select({
-        ios: false,
-        default: true,
-      }),
+      useNativeDriver: true,
     }).start();
   };
 
@@ -323,11 +318,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     Animated.timing(this.state.labeled, {
       toValue: 1,
       duration: FOCUS_ANIMATION_DURATION * scale,
-      // To prevent this - https://github.com/callstack/react-native-paper/issues/941
-      useNativeDriver: Platform.select({
-        ios: false,
-        default: true,
-      }),
+      useNativeDriver: true,
     }).start();
   };
 
@@ -336,11 +327,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     Animated.timing(this.state.labeled, {
       toValue: 0,
       duration: BLUR_ANIMATION_DURATION * scale,
-      // To prevent this - https://github.com/callstack/react-native-paper/issues/941
-      useNativeDriver: Platform.select({
-        ios: false,
-        default: true,
-      }),
+      useNativeDriver: true,
     }).start();
   };
 

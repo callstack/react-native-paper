@@ -14,6 +14,7 @@ const LabelBackground = ({
     hasActiveOutline,
     label,
     backgroundColor,
+    roundness,
   },
   labelStyle,
 }: LabelBackgroundProps) => {
@@ -45,6 +46,7 @@ const LabelBackground = ({
             {
               backgroundColor,
               opacity,
+              bottom: Math.max(roundness, 2),
             },
             labelTranslationX,
           ]}
@@ -86,7 +88,6 @@ const styles = StyleSheet.create({
     top: 6,
     left: 10,
     width: 8,
-    height: 2,
   },
   outlinedLabel: {
     position: 'absolute',

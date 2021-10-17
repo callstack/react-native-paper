@@ -1,14 +1,11 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { TouchableRipple, Paragraph, useTheme } from 'react-native-paper';
+import { TouchableRipple, Paragraph } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 const RippleExample = () => {
-  const {
-    colors: { background },
-  } = useTheme();
-
   return (
-    <View style={[styles.container, { backgroundColor: background }]}>
+    <ScreenWrapper contentContainerStyle={styles.container}>
       <TouchableRipple
         style={styles.ripple}
         onPress={() => {}}
@@ -18,7 +15,7 @@ const RippleExample = () => {
           <Paragraph>Press anywhere</Paragraph>
         </View>
       </TouchableRipple>
-    </View>
+    </ScreenWrapper>
   );
 };
 
