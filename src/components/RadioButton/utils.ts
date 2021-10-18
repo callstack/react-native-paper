@@ -12,7 +12,7 @@ export const handlePress = ({
       `onPress in the scope of RadioButtonGroup will not be executed, use onValueChange instead`
     );
   }
-  
+
   onValueChange ? onValueChange(value) : onPress?.();
 };
 
