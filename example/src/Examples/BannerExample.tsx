@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, StyleSheet, Image, Dimensions, Platform } from 'react-native';
-import { Banner, FAB } from 'react-native-paper';
+import { Banner, FAB, useTheme } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
 const PHOTOS = Array.from({ length: 24 }).map(
@@ -9,6 +9,16 @@ const PHOTOS = Array.from({ length: 24 }).map(
 
 const BannerExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);
+  const [useCustomTheme, setUseCustomTheme] = React.useState<boolean>(false);
+  const defaultTheme = useTheme();
+  const customTheme = {
+    ...defaultTheme,
+    colors: {
+      text: '#fff',
+      surface: '#09c8e5',
+      primary: '#121330',
+    },
+  };
 
   return (
     <>
@@ -16,16 +26,17 @@ const BannerExample = () => {
         <Banner
           actions={[
             {
-              label: 'Fix it',
-              onPress: () => setVisible(false),
+              label: `Set ${useCustomTheme ? 'default' : 'custom'} theme`,
+              onPress: () => setUseCustomTheme(!useCustomTheme),
             },
             {
-              label: 'Learn more',
+              label: 'Fix it',
               onPress: () => setVisible(false),
             },
           ]}
           icon={require('../../assets/images/email-icon.png')}
           visible={visible}
+          theme={useCustomTheme ? customTheme : defaultTheme}
         >
           Two line text string with two actions. One to two lines is preferable
           on mobile.
