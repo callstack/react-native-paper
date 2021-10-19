@@ -1,8 +1,16 @@
 import * as React from 'react';
+import { StyleSheet } from 'react-native';
 import renderer from 'react-test-renderer';
 import ListAccordion from '../List/ListAccordion.tsx';
 import ListItem from '../List/ListItem.tsx';
 import ListIcon from '../List/ListIcon.tsx';
+import { red500 } from '../../styles/colors';
+
+const styles = StyleSheet.create({
+  coloring: {
+    color: red500,
+  },
+});
 
 it('renders list accordion with children', () => {
   const tree = renderer
@@ -70,8 +78,8 @@ it('renders list accordion with custom title and description styles', () => {
       <ListAccordion
         title="Accordion item 1"
         description="Describes the expandable list item"
-        titleStyle={{ color: 'red' }}
-        descriptionStyle={{ color: 'red' }}
+        titleStyle={styles.coloring}
+        descriptionStyle={styles.coloring}
       >
         <ListItem title="List item 1" />
       </ListAccordion>

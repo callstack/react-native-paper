@@ -1,6 +1,20 @@
 import * as React from 'react';
+import { StyleSheet } from 'react-native';
 import { render } from 'react-native-testing-library';
 import TextInput from '../TextInput/TextInput';
+import { red500 } from '../../styles/colors';
+
+const style = StyleSheet.create({
+  inputStyle: {
+    color: red500,
+  },
+  centered: {
+    textAlign: 'center',
+  },
+  height: {
+    height: 100,
+  },
+});
 
 const affixTextValue = '/100';
 it('correctly renders left-side icon adornment, and right-side affix adornment', () => {
@@ -19,10 +33,7 @@ it('correctly renders left-side icon adornment, and right-side affix adornment',
         />
       }
       right={
-        <TextInput.Affix
-          text={affixTextValue}
-          textStyle={{ color: '#FF0000' }}
-        />
+        <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
       }
     />
   );
@@ -40,10 +51,7 @@ it('correctly renders left-side icon adornment, and right-side affix adornment '
       value={'Some test value'}
       onChangeText={(text) => this.setState({ text })}
       left={
-        <TextInput.Affix
-          text={affixTextValue}
-          textStyle={{ color: '#FF0000' }}
-        />
+        <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
       }
       right={
         <TextInput.Icon
@@ -79,7 +87,7 @@ it('correctly applies textAlign center', () => {
       label="Flat input"
       placeholder="Type something"
       value={'Some test value'}
-      style={{ textAlign: 'center' }}
+      style={style.centered}
     />
   );
 
@@ -93,7 +101,7 @@ it('correctly applies height to multiline Outline TextInput', () => {
       label="Outline Input"
       placeholder="Type Something"
       value={'Some test value'}
-      style={{ height: 100 }}
+      style={style.height}
       multiline
     />
   );

@@ -62,7 +62,7 @@ exports[`renders avatar with icon and custom background color 1`] = `
   style={
     Array [
       Object {
-        "backgroundColor": "#FF0000",
+        "backgroundColor": "#f44336",
         "borderRadius": 32,
         "height": 64,
         "width": 64,
@@ -200,7 +200,7 @@ exports[`renders avatar with text and custom background color 1`] = `
   style={
     Array [
       Object {
-        "backgroundColor": "#FF0000",
+        "backgroundColor": "#f44336",
         "borderRadius": 32,
         "height": 64,
         "width": 64,
