@@ -80,6 +80,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
       left,
       right,
       placeholderTextColor,
+      allowFontScaling,
       ...rest
     } = this.props;
 
@@ -214,6 +215,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
       errorColor,
       labelTranslationXOffset,
       roundness: theme.roundness,
+      allowFontScaling: allowFontScaling,
     };
 
     const minHeight = (height ||
@@ -316,6 +318,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
               ...rest,
               ref: innerRef,
               onChangeText,
+              allowFontScaling,
               placeholder: label
                 ? parentState.placeholder
                 : this.props.placeholder,

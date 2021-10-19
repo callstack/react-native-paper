@@ -23,6 +23,7 @@ export type RenderProps = {
   numberOfLines?: number;
   value?: string;
   adjustsFontSizeToFit?: boolean;
+  allowFontScaling?: boolean;
 };
 type TextInputTypesWithoutMode = $Omit<TextInputProps, 'mode'>;
 export type State = {
@@ -45,6 +46,7 @@ export type ChildTextInputProps = {
   onLayoutAnimatedText: (args: any) => void;
   onLeftAffixLayoutChange: (event: LayoutChangeEvent) => void;
   onRightAffixLayoutChange: (event: LayoutChangeEvent) => void;
+  allowFontScaling?: boolean;
 } & TextInputTypesWithoutMode;
 export type LabelProps = {
   mode?: 'flat' | 'outlined';
@@ -69,6 +71,7 @@ export type LabelProps = {
   error?: boolean | null;
   onLayoutAnimatedText: (args: any) => void;
   roundness: number;
+  allowFontScaling?: boolean;
 };
 export type InputLabelProps = {
   parentState: State;
@@ -79,4 +82,5 @@ export type LabelBackgroundProps = {
   labelProps: LabelProps;
   labelStyle: any;
   parentState: State;
+  allowFontScaling?: boolean;
 };

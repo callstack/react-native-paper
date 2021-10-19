@@ -15,6 +15,7 @@ const LabelBackground = ({
     label,
     backgroundColor,
     roundness,
+    allowFontScaling,
   },
   labelStyle,
 }: LabelBackgroundProps) => {
@@ -73,6 +74,7 @@ const LabelBackground = ({
             },
           ]}
           numberOfLines={1}
+          allowFontScaling={allowFontScaling}
         >
           {label}
         </AnimatedText>,

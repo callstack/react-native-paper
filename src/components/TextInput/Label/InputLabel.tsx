@@ -27,6 +27,7 @@ const InputLabel = (props: InputLabelProps) => {
     placeholderColor,
     errorColor,
     labelTranslationXOffset,
+    allowFontScaling,
   } = props.labelProps;
 
   const labelTranslationX = {
@@ -112,6 +113,7 @@ const InputLabel = (props: InputLabelProps) => {
           },
         ]}
         numberOfLines={1}
+        allowFontScaling={allowFontScaling}
       >
         {label}
       </AnimatedText>
@@ -129,6 +131,7 @@ const InputLabel = (props: InputLabelProps) => {
           },
         ]}
         numberOfLines={1}
+        allowFontScaling={allowFontScaling}
       >
         {label}
       </AnimatedText>

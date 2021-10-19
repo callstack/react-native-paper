@@ -122,6 +122,10 @@ export type TextInputProps = React.ComponentPropsWithRef<
    * @optional
    */
   theme: ReactNativePaper.Theme;
+  /**
+   * @optional
+   */
+  allowFontScaling?: boolean;
 };
 
 /**
@@ -183,6 +187,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     error: false,
     multiline: false,
     editable: true,
+    allowFontScaling: true,
     render: (props: RenderProps) => <NativeTextInput {...props} />,
   };
 
@@ -448,6 +453,7 @@ class TextInput extends React.Component<TextInputProps, State> {
         onLayoutAnimatedText={this.handleLayoutAnimatedText}
         onLeftAffixLayoutChange={this.onLeftAffixLayoutChange}
         onRightAffixLayoutChange={this.onRightAffixLayoutChange}
+        allowFontScaling={this.props.allowFontScaling}
       />
     ) : (
       <TextInputFlat
@@ -464,6 +470,7 @@ class TextInput extends React.Component<TextInputProps, State> {
         onLayoutAnimatedText={this.handleLayoutAnimatedText}
         onLeftAffixLayoutChange={this.onLeftAffixLayoutChange}
         onRightAffixLayoutChange={this.onRightAffixLayoutChange}
+        allowFontScaling={!!this.props.allowFontScaling}
       />
     );
   }
