@@ -134,7 +134,6 @@ const AnimatedFABExample = () => {
         label={'New Message'}
         animateFrom={animateFrom}
         iconMode={iconMode}
-        isIOS={isIOS}
       />
     </>
   );

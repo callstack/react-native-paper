@@ -1,5 +1,11 @@
 import React from 'react';
-import { StyleProp, ViewStyle, Animated, StyleSheet } from 'react-native';
+import {
+  StyleProp,
+  ViewStyle,
+  Animated,
+  StyleSheet,
+  Platform,
+} from 'react-native';
 import { AnimatedFAB } from 'react-native-paper';
 
 type CustomFABProps = {
@@ -10,7 +16,6 @@ type CustomFABProps = {
   animateFrom: 'left' | 'right';
   iconMode?: 'static' | 'dynamic';
   style?: StyleProp<ViewStyle>;
-  isIOS: boolean;
 };
 
 const CustomFAB = ({
@@ -21,9 +26,10 @@ const CustomFAB = ({
   animateFrom,
   style,
   iconMode,
-  isIOS,
 }: CustomFABProps) => {
   const [isExtended, setIsExtended] = React.useState(true);
+
+  const isIOS = Platform.OS === 'ios';
 
   React.useEffect(() => {
     if (!isIOS) {

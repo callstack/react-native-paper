@@ -48,6 +48,8 @@ const CustomControl = ({
     [value, onChange]
   );
 
+  const _keyExtractor = React.useCallback(({ item }) => item, []);
+
   return (
     <View style={styles.controlWrapper}>
       <Paragraph>{name}</Paragraph>
@@ -56,6 +58,7 @@ const CustomControl = ({
         horizontal
         data={options}
         renderItem={_renderItem}
+        keyExtractor={_keyExtractor}
         contentContainerStyle={styles.controlItemsList}
       />
     </View>
