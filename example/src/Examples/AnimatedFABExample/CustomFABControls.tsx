@@ -1,13 +1,14 @@
 import React from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
 import { Colors, Paragraph, RadioButton } from 'react-native-paper';
-
-export type IconMode = 'static' | 'dynamic';
-export type AnimateFrom = 'left' | 'right';
+import type {
+  AnimatedFABAnimateFrom,
+  AnimatedFABIconMode,
+} from 'src/components/FAB/AnimatedFAB';
 
 export type Controls = {
-  iconMode: IconMode;
-  animateFrom: AnimateFrom;
+  iconMode: AnimatedFABIconMode;
+  animateFrom: AnimatedFABAnimateFrom;
 };
 
 export const initialControls: Controls = {
@@ -20,11 +21,13 @@ type Props = {
   setControls(controls: React.SetStateAction<Controls>): void;
 };
 
+type ControlValue = AnimatedFABIconMode | AnimatedFABAnimateFrom;
+
 type CustomControlProps = {
   name: string;
-  options: IconMode[] | AnimateFrom[];
-  value: IconMode | AnimateFrom;
-  onChange(newValue: IconMode | AnimateFrom): void;
+  options: ControlValue[];
+  value: ControlValue;
+  onChange(newValue: ControlValue): void;
 };
 
 const CustomControl = ({
@@ -48,7 +51,7 @@ const CustomControl = ({
     [value, onChange]
   );
 
-  const _keyExtractor = React.useCallback(({ item }) => item, []);
+  const _keyExtractor = React.useCallback((item) => item, []);
 
   return (
     <View style={styles.controlWrapper}>
@@ -69,10 +72,10 @@ const CustomFABControls = ({
   setControls,
   controls: { animateFrom, iconMode },
 }: Props) => {
-  const setIconMode = (newIconMode: IconMode) =>
+  const setIconMode = (newIconMode: AnimatedFABIconMode) =>
     setControls((state) => ({ ...state, iconMode: newIconMode }));
 
-  const setAnimateFrom = (newAnimateFrom: AnimateFrom) =>
+  const setAnimateFrom = (newAnimateFrom: AnimatedFABAnimateFrom) =>
     setControls((state) => ({ ...state, animateFrom: newAnimateFrom }));
 
   return (

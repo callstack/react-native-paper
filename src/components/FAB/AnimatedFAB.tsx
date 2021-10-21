@@ -25,6 +25,10 @@ import type {
 } from 'react-native';
 import { white, black } from '../../styles/colors';
 import AnimatedText from '../Typography/AnimatedText';
+import { getCombinedStyles } from './utils';
+
+export type AnimatedFABIconMode = 'static' | 'dynamic';
+export type AnimatedFABAnimateFrom = 'left' | 'right';
 
 type Props = $RemoveChildren<typeof Surface> & {
   /**
@@ -71,11 +75,11 @@ type Props = $RemoveChildren<typeof Surface> & {
   /**
    * Whether icon should be translated to the end of extended `FAB` or be static and stay in the same place. The default value is `dynamic`.
    */
-  iconMode?: 'static' | 'dynamic';
+  iconMode?: AnimatedFABIconMode;
   /**
    * Indicates from which direction animation should be performed. The default value is `right`.
    */
-  animateFrom?: 'right' | 'left';
+  animateFrom?: AnimatedFABAnimateFrom;
   /**
    * Whether `FAB` should start animation to extend.
    */
@@ -207,142 +211,12 @@ const AnimatedFAB = ({
     return right.reverse();
   };
 
-  type CombinedStyles = {
-    innerWrapper: Animated.WithAnimatedValue<ViewStyle>;
-    iconWrapper: Animated.WithAnimatedValue<ViewStyle>;
-    absoluteFill: Animated.WithAnimatedValue<ViewStyle>;
-  };
-
-  const getCombinedStyles = (): CombinedStyles => {
-    const defaultPositionStyles = { left: -distance, right: undefined };
-
-    const combinedStyles: CombinedStyles = {
-      innerWrapper: {
-        ...defaultPositionStyles,
-      },
-      iconWrapper: {
-        ...defaultPositionStyles,
-      },
-      absoluteFill: {},
-    };
-
-    const animatedFromRight = isAnimatedFromRight && !isRTL;
-    const animatedFromRightRTL = isAnimatedFromRight && isRTL;
-    const animatedFromLeft = !isAnimatedFromRight && !isRTL;
-    const animatedFromLeftRTL = !isAnimatedFromRight && isRTL;
-
-    if (animatedFromRight) {
-      combinedStyles.innerWrapper.transform = [
-        {
-          translateX: animFAB.interpolate({
-            inputRange: [distance, 0],
-            outputRange: [distance, 0],
-          }),
-        },
-      ];
-      combinedStyles.iconWrapper.transform = [
-        {
-          translateX: isIconStatic ? 0 : animFAB,
-        },
-      ];
-      combinedStyles.absoluteFill.transform = [
-        {
-          translateX: animFAB.interpolate({
-            inputRange: [distance, 0],
-            outputRange: [Math.abs(distance) / 2, Math.abs(distance)],
-          }),
-        },
-      ];
-    }
-
-    if (animatedFromRightRTL) {
-      combinedStyles.iconWrapper.transform = [
-        {
-          translateX: isIconStatic
-            ? 0
-            : animFAB.interpolate({
-                inputRange: [distance, 0],
-                outputRange: [-distance, 0],
-              }),
-        },
-      ];
-      combinedStyles.innerWrapper.transform = [
-        {
-          translateX: animFAB.interpolate({
-            inputRange: [distance, 0],
-            outputRange: [-distance, 0],
-          }),
-        },
-      ];
-      combinedStyles.absoluteFill.transform = [
-        {
-          translateX: animFAB.interpolate({
-            inputRange: [distance, 0],
-            outputRange: [0, distance],
-          }),
-        },
-      ];
-    }
-
-    if (animatedFromLeft) {
-      combinedStyles.iconWrapper.transform = [
-        {
-          translateX: isIconStatic
-            ? distance
-            : animFAB.interpolate({
-                inputRange: [0, distance],
-                outputRange: [distance, distance * 2],
-              }),
-        },
-      ];
-      combinedStyles.innerWrapper.transform = [
-        {
-          translateX: animFAB,
-        },
-      ];
-      combinedStyles.absoluteFill.transform = [
-        {
-          translateX: animFAB.interpolate({
-            inputRange: [0, distance],
-            outputRange: [0, Math.abs(distance) / 2],
-          }),
-        },
-      ];
-    }
-
-    if (animatedFromLeftRTL) {
-      combinedStyles.iconWrapper.transform = [
-        {
-          translateX: isIconStatic
-            ? animFAB.interpolate({
-                inputRange: [0, distance],
-                outputRange: [-distance, -distance * 2],
-              })
-            : -distance,
-        },
-      ];
-      combinedStyles.innerWrapper.transform = [
-        {
-          translateX: animFAB.interpolate({
-            inputRange: [0, distance],
-            outputRange: [0, -distance],
-          }),
-        },
-      ];
-      combinedStyles.absoluteFill.transform = [
-        {
-          translateX: animFAB.interpolate({
-            inputRange: [0, distance],
-            outputRange: [0, -distance],
-          }),
-        },
-      ];
-    }
-
-    return combinedStyles;
-  };
-
-  const combinedStyles = getCombinedStyles();
+  const combinedStyles = getCombinedStyles({
+    isAnimatedFromRight,
+    isIconStatic,
+    distance,
+    animFAB,
+  });
 
   return (
     <Surface
