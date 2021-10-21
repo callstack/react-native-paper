@@ -43,11 +43,7 @@ const ToggleButtonExample = () => {
             onValueChange={(value: string) => setFruit(value)}
           >
             <ImageBackground
-              style={{
-                width: 143,
-                height: 153,
-                margin: 2,
-              }}
+              style={styles.customImage}
               source={{
                 uri:
                   'https://images.pexels.com/photos/1068534/pexels-photo-1068534.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
@@ -56,20 +52,13 @@ const ToggleButtonExample = () => {
               <ToggleButton
                 value="watermelon"
                 size={24}
-                style={{
-                  position: 'absolute',
-                  right: 0,
-                }}
+                style={styles.customButton}
                 color="white"
                 icon={fruit === 'watermelon' ? 'heart' : 'heart-outline'}
               />
             </ImageBackground>
             <ImageBackground
-              style={{
-                width: 143,
-                height: 153,
-                margin: 2,
-              }}
+              style={styles.customImage}
               source={{
                 uri:
                   'https://images.pexels.com/photos/46174/strawberries-berries-fruit-freshness-46174.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
@@ -78,10 +67,7 @@ const ToggleButtonExample = () => {
               <ToggleButton
                 value="strawberries"
                 size={24}
-                style={{
-                  position: 'absolute',
-                  right: 0,
-                }}
+                style={styles.customButton}
                 color="white"
                 icon={fruit === 'strawberries' ? 'heart' : 'heart-outline'}
               />
@@ -101,6 +87,15 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
+  },
+  customImage: {
+    width: 143,
+    height: 153,
+    margin: 2,
+  },
+  customButton: {
+    position: 'absolute',
+    right: 0,
   },
 });
 

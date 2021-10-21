@@ -4,6 +4,7 @@ import { TextInput, HelperText, useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { inputReducer, State } from '../../utils';
 import ScreenWrapper from '../ScreenWrapper';
+import { transparent } from '../../../src/styles/colors';
 
 const MAX_LENGTH = 20;
 
@@ -402,7 +403,7 @@ const TextInputExample = () => {
         <View style={styles.inputContainerStyle}>
           <TextInput
             label="Input with no padding"
-            style={{ backgroundColor: 'transparent', paddingHorizontal: 0 }}
+            style={styles.noPaddingInput}
             placeholder="Enter username, only letters"
             value={nameNoPadding}
             error={!_isUsernameValid(nameNoPadding)}
@@ -421,18 +422,14 @@ const TextInputExample = () => {
         <View style={styles.inputContainerStyle}>
           <TextInput
             label="Input with text align center"
-            style={{
-              textAlign: 'center',
-            }}
+            style={styles.centeredText}
           />
         </View>
         <View style={styles.inputContainerStyle}>
           <TextInput
             mode="outlined"
             label="Outlined input with text align center"
-            style={{
-              textAlign: 'center',
-            }}
+            style={styles.centeredText}
           />
         </View>
         <View style={styles.inputContainerStyle}>
@@ -476,6 +473,13 @@ const styles = StyleSheet.create({
   },
   textArea: {
     height: 80,
+  },
+  noPaddingInput: {
+    backgroundColor: transparent,
+    paddingHorizontal: 0,
+  },
+  centeredText: {
+    textAlign: 'center',
   },
 });
 
