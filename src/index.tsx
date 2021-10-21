@@ -17,6 +17,8 @@ import * as Drawer from './components/Drawer/Drawer';
 
 export { Avatar, List, Drawer };
 
+export * from './components/FAB/AnimatedFAB';
+
 export { default as Badge } from './components/Badge';
 export { default as ActivityIndicator } from './components/ActivityIndicator';
 export { default as Banner } from './components/Banner';

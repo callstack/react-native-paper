@@ -4,7 +4,7 @@ import { Colors, Paragraph, RadioButton } from 'react-native-paper';
 import type {
   AnimatedFABAnimateFrom,
   AnimatedFABIconMode,
-} from 'src/components/FAB/AnimatedFAB';
+} from 'react-native-paper';
 
 export type Controls = {
   iconMode: AnimatedFABIconMode;
