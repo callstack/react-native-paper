@@ -1,5 +1,5 @@
-import color from 'color';
 import * as React from 'react';
+import color from 'color';
 import {
   Animated,
   View,

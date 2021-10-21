@@ -99,7 +99,6 @@ export default CustomFABControls;
 const styles = StyleSheet.create({
   controlsWrapper: {
     flex: 1,
-    display: 'flex',
     position: 'absolute',
     top: 0,
     left: 0,
@@ -109,18 +108,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   controlWrapper: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
   },
   controlItemsList: {
     flex: 1,
-    display: 'flex',
     justifyContent: 'flex-end',
   },
   controlItem: {
     marginLeft: 16,
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
   },
