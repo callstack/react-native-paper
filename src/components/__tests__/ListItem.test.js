@@ -1,9 +1,20 @@
 import * as React from 'react';
+import { StyleSheet } from 'react-native';
 import renderer from 'react-test-renderer';
 import { Text, View } from 'react-native';
 import ListItem from '../List/ListItem.tsx';
 import ListIcon from '../List/ListIcon.tsx';
 import Chip from '../Chip';
+import { red500 } from '../../styles/colors';
+
+const styles = StyleSheet.create({
+  title: {
+    fontSize: 20,
+  },
+  description: {
+    color: red500,
+  },
+});
 
 it('renders list item with title and description', () => {
   const tree = renderer
@@ -57,8 +68,8 @@ it('renders list item with custom title and description styles', () => {
       <ListItem
         title="First Item"
         description="Item description"
-        titleStyle={{ fontSize: 20 }}
-        descriptionStyle={{ color: 'red' }}
+        titleStyle={styles.title}
+        descriptionStyle={styles.description}
       />
     )
     .toJSON();
@@ -101,8 +112,8 @@ it('renders with a description with typeof number', () => {
       <ListItem
         title="First Item"
         description={123}
-        titleStyle={{ fontSize: 20 }}
-        descriptionStyle={{ color: 'red' }}
+        titleStyle={styles.title}
+        descriptionStyle={styles.description}
       />
     )
     .toJSON();

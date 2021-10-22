@@ -1,7 +1,15 @@
 import * as React from 'react';
+import { StyleSheet } from 'react-native';
 import renderer from 'react-test-renderer';
 import Menu from '../Menu/Menu.tsx';
 import Button from '../Button.tsx';
+
+const styles = StyleSheet.create({
+  contentStyle: {
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
+  },
+});
 
 it('renders visible menu', () => {
   const tree = renderer
@@ -44,7 +52,7 @@ it('renders menu with content styles', () => {
         visible
         onDismiss={jest.fn()}
         anchor={<Button mode="outlined">Open menu</Button>}
-        contentStyle={{ borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
+        contentStyle={styles.contentStyle}
       >
         <Menu.Item onPress={jest.fn()} title="Undo" />
         <Menu.Item onPress={jest.fn()} title="Redo" />

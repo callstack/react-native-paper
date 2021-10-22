@@ -30,7 +30,7 @@ exports[`renders caption applying style 1`] = `
             "marginVertical": 2,
           },
           Object {
-            "color": "red",
+            "color": "#f44336",
             "fontSize": 20,
           },
         ],

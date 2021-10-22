@@ -1,7 +1,14 @@
 import * as React from 'react';
+import { StyleSheet } from 'react-native';
 import renderer from 'react-test-renderer';
 import Button from '../Button.tsx';
 import { pink500 } from '../../styles/colors.tsx';
+
+const styles = StyleSheet.create({
+  flexing: {
+    flexDirection: 'row-reverse',
+  },
+});
 
 it('renders text button by default', () => {
   const tree = renderer.create(<Button>Text Button</Button>).toJSON();
@@ -44,10 +51,7 @@ it('renders button with icon', () => {
 it('renders button with icon in reverse order', () => {
   const tree = renderer
     .create(
-      <Button
-        icon="chevron-right"
-        contentStyle={{ flexDirection: 'row-reverse' }}
-      >
+      <Button icon="chevron-right" contentStyle={styles.flexing}>
         Right Icon
       </Button>
     )

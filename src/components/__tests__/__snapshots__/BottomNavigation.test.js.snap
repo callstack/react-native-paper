@@ -2922,8 +2922,9 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
     pointerEvents="none"
     style={
       Object {
-        "backgroundColor": "#E96A82",
+        "backgroundColor": "#ffffff",
         "bottom": 0,
+        "color": "#e57373",
         "elevation": 4,
         "left": 0,
         "position": null,
@@ -2947,7 +2948,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#E96A82",
+          "backgroundColor": "#6200ee",
           "overflow": "hidden",
         }
       }
@@ -3856,8 +3857,9 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
     pointerEvents="none"
     style={
       Object {
-        "backgroundColor": "#E96A82",
+        "backgroundColor": "#ffffff",
         "bottom": 0,
+        "color": "#e57373",
         "elevation": 4,
         "left": 0,
         "position": null,
@@ -3881,7 +3883,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "rgba(233, 106, 130, 1)",
+          "backgroundColor": "rgba(98, 0, 238, 1)",
           "overflow": "hidden",
         }
       }

@@ -779,7 +779,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "fontWeight": undefined,
           },
           Object {
-            "color": "#FF0000",
+            "color": "#f44336",
           },
         ]
       }
@@ -1204,7 +1204,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "fontWeight": undefined,
           },
           Object {
-            "color": "#FF0000",
+            "color": "#f44336",
           },
         ]
       }

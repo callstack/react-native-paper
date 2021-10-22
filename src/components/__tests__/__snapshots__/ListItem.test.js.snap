@@ -331,7 +331,7 @@ exports[`renders list item with custom title and description styles 1`] = `
                 "color": "rgba(0, 0, 0, 0.54)",
               },
               Object {
-                "color": "red",
+                "color": "#f44336",
               },
             ],
           ]
@@ -912,7 +912,7 @@ exports[`renders with a description with typeof number 1`] = `
                 "color": "rgba(0, 0, 0, 0.54)",
               },
               Object {
-                "color": "red",
+                "color": "#f44336",
               },
             ],
           ]
