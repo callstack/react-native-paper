@@ -155,6 +155,7 @@ const Card = ({
         cardMode === 'outlined' ? styles.outlined : {},
         style,
       ]}
+      theme={theme}
       {...rest}
     >
       <TouchableWithoutFeedback
