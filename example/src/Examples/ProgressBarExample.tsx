@@ -48,7 +48,7 @@ const ProgressBarExample = () => {
         <ProgressBar
           progress={progress}
           visible={visible}
-          style={{ height: 20 }}
+          style={styles.customHeight}
         />
       </View>
     </ScreenWrapper>
@@ -63,6 +63,9 @@ const styles = StyleSheet.create({
   },
   row: {
     marginVertical: 10,
+  },
+  customHeight: {
+    height: 20,
   },
 });
 
