@@ -10,7 +10,7 @@ exports[`renders chip with close button 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0.5,
       "elevation": 0,
-      "flexDirection": "row",
+      "flexDirection": "column",
     }
   }
 >
@@ -36,9 +36,14 @@ exports[`renders chip with close button 1`] = `
         Object {
           "overflow": "hidden",
         },
-        Object {
-          "borderRadius": 16,
-        },
+        Array [
+          Object {
+            "borderRadius": 16,
+          },
+          Object {
+            "flex": 1,
+          },
+        ],
       ]
     }
   >
@@ -227,7 +232,7 @@ exports[`renders chip with icon 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0.5,
       "elevation": 0,
-      "flexDirection": "row",
+      "flexDirection": "column",
     }
   }
 >
@@ -253,9 +258,14 @@ exports[`renders chip with icon 1`] = `
         Object {
           "overflow": "hidden",
         },
-        Object {
-          "borderRadius": 16,
-        },
+        Array [
+          Object {
+            "borderRadius": 16,
+          },
+          Object {
+            "flex": 1,
+          },
+        ],
       ]
     }
   >
@@ -371,7 +381,7 @@ exports[`renders chip with onPress 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0.5,
       "elevation": 0,
-      "flexDirection": "row",
+      "flexDirection": "column",
     }
   }
 >
@@ -397,9 +407,14 @@ exports[`renders chip with onPress 1`] = `
         Object {
           "overflow": "hidden",
         },
-        Object {
-          "borderRadius": 16,
-        },
+        Array [
+          Object {
+            "borderRadius": 16,
+          },
+          Object {
+            "flex": 1,
+          },
+        ],
       ]
     }
   >
@@ -467,7 +482,7 @@ exports[`renders outlined disabled chip 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0.5,
       "elevation": 0,
-      "flexDirection": "row",
+      "flexDirection": "column",
     }
   }
 >
@@ -493,9 +508,14 @@ exports[`renders outlined disabled chip 1`] = `
         Object {
           "overflow": "hidden",
         },
-        Object {
-          "borderRadius": 16,
-        },
+        Array [
+          Object {
+            "borderRadius": 16,
+          },
+          Object {
+            "flex": 1,
+          },
+        ],
       ]
     }
   >
@@ -563,7 +583,7 @@ exports[`renders selected chip 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0.5,
       "elevation": 0,
-      "flexDirection": "row",
+      "flexDirection": "column",
     }
   }
 >
@@ -589,9 +609,14 @@ exports[`renders selected chip 1`] = `
         Object {
           "overflow": "hidden",
         },
-        Object {
-          "borderRadius": 16,
-        },
+        Array [
+          Object {
+            "borderRadius": 16,
+          },
+          Object {
+            "flex": 1,
+          },
+        ],
       ]
     }
   >

@@ -15,6 +15,7 @@ type PaddingProps = {
   dense: boolean | null;
   topPosition: number;
   fontSize: number;
+  lineHeight?: number;
   label?: string | null;
   scale: number;
   offset: number;
@@ -101,23 +102,25 @@ export const adjustPaddingOut = ({
   scale,
   height,
   fontSize,
+  lineHeight,
   dense,
   offset,
   isAndroid,
 }: AdjProps): Padding => {
-  const refFontSize = scale * fontSize;
+  const fontHeight = lineHeight ?? fontSize;
+  const refFontHeight = scale * fontSize;
   let result = pad;
 
-  if (height) {
+  if (height && !multiline) {
     return {
-      paddingTop: Math.max(0, (height - fontSize) / 2),
-      paddingBottom: Math.max(0, (height - fontSize) / 2),
+      paddingTop: Math.max(0, (height - fontHeight) / 2),
+      paddingBottom: Math.max(0, (height - fontHeight) / 2),
     };
   }
   if (!isAndroid && multiline) {
     if (dense) {
       if (label) {
-        result += scale < 1 ? Math.min(offset, (refFontSize / 2) * scale) : 0;
+        result += scale < 1 ? Math.min(offset, (refFontHeight / 2) * scale) : 0;
       } else {
         result += 0;
       }
@@ -126,10 +129,10 @@ export const adjustPaddingOut = ({
       if (label) {
         result +=
           scale < 1
-            ? Math.min(offset, refFontSize * scale)
-            : Math.min(offset / 2, refFontSize * scale);
+            ? Math.min(offset, refFontHeight * scale)
+            : Math.min(offset / 2, refFontHeight * scale);
       } else {
-        result += scale < 1 ? Math.min(offset / 2, refFontSize * scale) : 0;
+        result += scale < 1 ? Math.min(offset / 2, refFontHeight * scale) : 0;
       }
     }
     result = Math.floor(result);

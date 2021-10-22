@@ -86,6 +86,8 @@ const DataTableRow = ({
   );
 };
 
+DataTableRow.displayName = 'DataTable.Row';
+
 const styles = StyleSheet.create({
   container: {
     borderStyle: 'solid',

@@ -92,6 +92,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
     const {
       fontSize: fontSizeStyle,
       fontWeight,
+      lineHeight,
       height,
       backgroundColor = colors.background,
       textAlign,
@@ -170,6 +171,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
       dense: dense ? dense : null,
       topPosition,
       fontSize,
+      lineHeight,
       label,
       scale: fontScale,
       isAndroid: Platform.OS === 'android',
@@ -211,6 +213,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
       backgroundColor: backgroundColor as ColorValue,
       errorColor,
       labelTranslationXOffset,
+      roundness: theme.roundness,
     };
 
     const minHeight = (height ||

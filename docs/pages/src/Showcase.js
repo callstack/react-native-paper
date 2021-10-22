@@ -29,6 +29,12 @@ const data: Data[] = [
     github: 'https://github.com/callstack/react-native-paper/tree/main/example',
   },
   {
+    color: '#696AC3',
+    name: 'YumMeals',
+    image: 'showcase/yummeals.png',
+    github: 'https://github.com/BernStrom/YumMeals',
+  },
+  {
     color: '#673AB7',
     name: 'Showman',
     image: 'showcase/showman.png',
@@ -105,6 +111,14 @@ const data: Data[] = [
     github: 'https://github.com/frederic11/Zoomapto',
     android:
       'https://play.google.com/store/apps/details?id=com.frederictech.zoomapto',
+  },
+  {
+    color: '#1DE9B6',
+    name: 'Groovy - Build Habits Together',
+    image: 'showcase/groovy.png',
+    ios: 'https://apps.apple.com/us/app/groovy-set-your-goals/id1562352498',
+    android:
+      'https://play.google.com/store/apps/details?id=com.gabrieldierks.groovy',
   },
 ];
 

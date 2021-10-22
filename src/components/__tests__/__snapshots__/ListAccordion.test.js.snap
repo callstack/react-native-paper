@@ -11,6 +11,11 @@ exports[`renders expanded accordion 1`] = `
   >
     <View
       accessibilityRole="button"
+      accessibilityState={
+        Object {
+          "expanded": true,
+        }
+      }
       accessible={true}
       focusable={true}
       onClick={[Function]}
@@ -221,6 +226,11 @@ exports[`renders list accordion with children 1`] = `
   >
     <View
       accessibilityRole="button"
+      accessibilityState={
+        Object {
+          "expanded": false,
+        }
+      }
       accessible={true}
       focusable={true}
       onClick={[Function]}
@@ -410,6 +420,11 @@ exports[`renders list accordion with custom title and description styles 1`] = `
   >
     <View
       accessibilityRole="button"
+      accessibilityState={
+        Object {
+          "expanded": false,
+        }
+      }
       accessible={true}
       focusable={true}
       onClick={[Function]}
@@ -582,6 +597,11 @@ exports[`renders list accordion with left items 1`] = `
   >
     <View
       accessibilityRole="button"
+      accessibilityState={
+        Object {
+          "expanded": false,
+        }
+      }
       accessible={true}
       focusable={true}
       onClick={[Function]}
@@ -771,6 +791,11 @@ exports[`renders multiline list accordion 1`] = `
   >
     <View
       accessibilityRole="button"
+      accessibilityState={
+        Object {
+          "expanded": false,
+        }
+      }
       accessible={true}
       focusable={true}
       onClick={[Function]}

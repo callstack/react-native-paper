@@ -7,6 +7,7 @@ import {
   StyleProp,
   TextStyle,
   I18nManager,
+  GestureResponderEvent,
 } from 'react-native';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -45,7 +46,7 @@ type Props = {
   /**
    * Function to execute on long press.
    */
-  onLongPress?: () => void;
+  onLongPress?: (e: GestureResponderEvent) => void;
   /**
    * Content of the section.
    */
@@ -84,6 +85,10 @@ type Props = {
    * TestID used for testing purposes
    */
   testID?: string;
+  /**
+   * Accessibility label for the TouchableRipple. This is read by the screen reader when the user taps the touchable.
+   */
+  accessibilityLabel?: string;
 };
 
 /**
@@ -146,6 +151,7 @@ const ListAccordion = ({
   onPress,
   onLongPress,
   expanded: expandedProp,
+  accessibilityLabel,
 }: Props) => {
   const [expanded, setExpanded] = React.useState<boolean>(
     expandedProp || false
@@ -190,6 +196,8 @@ const ListAccordion = ({
           accessibilityTraits="button"
           accessibilityComponentType="button"
           accessibilityRole="button"
+          accessibilityState={{ expanded: isExpanded }}
+          accessibilityLabel={accessibilityLabel}
           testID={testID}
           delayPressIn={0}
           borderless
@@ -214,7 +222,7 @@ const ListAccordion = ({
               >
                 {title}
               </Text>
-              {description && (
+              {description ? (
                 <Text
                   selectable={false}
                   numberOfLines={descriptionNumberOfLines}
@@ -228,7 +236,7 @@ const ListAccordion = ({
                 >
                   {description}
                 </Text>
-              )}
+              ) : null}
             </View>
             <View
               style={[styles.item, description ? styles.multiline : undefined]}

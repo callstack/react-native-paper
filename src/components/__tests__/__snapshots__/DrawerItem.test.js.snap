@@ -55,6 +55,7 @@ exports[`renders DrawerItem with icon 1`] = `
       <View
         style={
           Object {
+            "alignItems": "center",
             "flex": 1,
             "flexDirection": "row",
           }
@@ -186,6 +187,7 @@ exports[`renders active DrawerItem 1`] = `
       <View
         style={
           Object {
+            "alignItems": "center",
             "flex": 1,
             "flexDirection": "row",
           }
@@ -317,6 +319,7 @@ exports[`renders basic DrawerItem 1`] = `
       <View
         style={
           Object {
+            "alignItems": "center",
             "flex": 1,
             "flexDirection": "row",
           }

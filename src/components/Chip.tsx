@@ -242,7 +242,7 @@ const Chip = ({
       <TouchableRipple
         borderless
         delayPressIn={0}
-        style={{ borderRadius }}
+        style={[{ borderRadius }, styles.touchable]}
         onPress={onPress}
         onLongPress={onLongPress}
         onPressIn={handlePressIn}
@@ -338,7 +338,7 @@ const styles = StyleSheet.create({
   container: {
     borderWidth: StyleSheet.hairlineWidth,
     borderStyle: 'solid',
-    flexDirection: 'row',
+    flexDirection: Platform.select({ default: 'column', web: 'row' }),
   },
   content: {
     flexDirection: 'row',
@@ -379,6 +379,9 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  touchable: {
+    flex: 1,
   },
 });
 
