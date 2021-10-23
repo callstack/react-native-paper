@@ -210,7 +210,11 @@ const Banner = ({
                 <Icon source={icon} size={40} />
               </View>
             ) : null}
-            <Text style={[styles.message, { color: theme.colors.text }]}>
+            <Text
+              style={[styles.message, { color: theme.colors.text }]}
+              accessibilityLiveRegion={visible ? 'polite' : 'none'}
+              accessibilityRole="alert"
+            >
               {children}
             </Text>
           </View>
