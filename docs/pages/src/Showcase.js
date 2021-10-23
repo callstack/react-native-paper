@@ -112,6 +112,14 @@ const data: Data[] = [
     android:
       'https://play.google.com/store/apps/details?id=com.frederictech.zoomapto',
   },
+  {
+    color: '#1DE9B6',
+    name: 'Groovy - Build Habits Together',
+    image: 'showcase/groovy.png',
+    ios: 'https://apps.apple.com/us/app/groovy-set-your-goals/id1562352498',
+    android:
+      'https://play.google.com/store/apps/details?id=com.gabrieldierks.groovy',
+  },
 ];
 
 export default class Showcase extends React.Component<{}> {

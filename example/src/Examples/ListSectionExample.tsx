@@ -108,7 +108,9 @@ const ListSectionExample = () => {
                 Material Design library that has you covered in all major
                 use-cases.
               </Text>
-              <View style={[styles.container, styles.row, { paddingTop: 8 }]}>
+              <View
+                style={[styles.container, styles.row, styles.additionalPadding]}
+              >
                 <Chip icon="file-pdf" onPress={() => {}}>
                   DOCS.pdf
                 </Chip>
@@ -141,6 +143,9 @@ const styles = StyleSheet.create({
   customTitle: {
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  additionalPadding: {
+    paddingTop: 8,
   },
 });
 

@@ -7,7 +7,6 @@ import {
   StyleSheet,
   StyleProp,
   Platform,
-  Keyboard,
   ViewStyle,
 } from 'react-native';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
@@ -23,6 +22,7 @@ import { withTheme } from '../core/theming';
 import useAnimatedValue from '../utils/useAnimatedValue';
 import useAnimatedValueArray from '../utils/useAnimatedValueArray';
 import useLayout from '../utils/useLayout';
+import useIsKeyboardShown from '../utils/useIsKeyboardShown';
 
 type Route = {
   key: string;
@@ -482,25 +482,10 @@ const BottomNavigation = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  React.useEffect(() => {
-    if (Platform.OS === 'ios') {
-      Keyboard.addListener('keyboardWillShow', handleKeyboardShow);
-      Keyboard.addListener('keyboardWillHide', handleKeyboardHide);
-    } else {
-      Keyboard.addListener('keyboardDidShow', handleKeyboardShow);
-      Keyboard.addListener('keyboardDidHide', handleKeyboardHide);
-    }
-
-    return () => {
-      if (Platform.OS === 'ios') {
-        Keyboard.removeListener('keyboardWillShow', handleKeyboardShow);
-        Keyboard.removeListener('keyboardWillHide', handleKeyboardHide);
-      } else {
-        Keyboard.removeListener('keyboardDidShow', handleKeyboardShow);
-        Keyboard.removeListener('keyboardDidHide', handleKeyboardHide);
-      }
-    };
-  }, [handleKeyboardHide, handleKeyboardShow]);
+  useIsKeyboardShown({
+    onShow: handleKeyboardShow,
+    onHide: handleKeyboardHide,
+  });
 
   const prevNavigationState = React.useRef<NavigationState>();
 

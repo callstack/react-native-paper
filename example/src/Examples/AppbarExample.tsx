@@ -3,6 +3,7 @@ import { View, Platform, StyleSheet } from 'react-native';
 import type { StackNavigationProp } from '@react-navigation/stack';
 import { Appbar, FAB, Switch, Paragraph } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
+import { yellowA200 } from '../../../src/styles/colors';
 
 type Props = {
   navigation: StackNavigationProp<{}>;
@@ -22,7 +23,7 @@ const AppbarExample = ({ navigation }: Props) => {
     navigation.setOptions({
       header: () => (
         <Appbar.Header
-          style={showCustomColor ? { backgroundColor: '#ffff00' } : null}
+          style={showCustomColor ? styles.customColor : null}
           theme={{
             mode: showExactTheme ? 'exact' : 'adaptive',
           }}
@@ -126,5 +127,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 16,
     bottom: 28,
+  },
+  customColor: {
+    backgroundColor: yellowA200,
   },
 });

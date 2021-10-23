@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ActivityIndicator, Platform, View } from 'react-native';
+import { ActivityIndicator, Platform, View, StyleSheet } from 'react-native';
 import { Paragraph, Colors, Portal, Dialog } from 'react-native-paper';
 
 const isIOS = Platform.OS === 'ios';
@@ -15,11 +15,11 @@ const DialogWithLoadingIndicator = ({
     <Dialog onDismiss={close} visible={visible}>
       <Dialog.Title>Progress Dialog</Dialog.Title>
       <Dialog.Content>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <View style={styles.flexing}>
           <ActivityIndicator
             color={Colors.indigo500}
             size={isIOS ? 'large' : 48}
-            style={{ marginRight: 16 }}
+            style={styles.marginRight}
           />
           <Paragraph>Loading.....</Paragraph>
         </View>
@@ -27,5 +27,15 @@ const DialogWithLoadingIndicator = ({
     </Dialog>
   </Portal>
 );
+
+const styles = StyleSheet.create({
+  flexing: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  marginRight: {
+    marginRight: 16,
+  },
+});
 
 export default DialogWithLoadingIndicator;
