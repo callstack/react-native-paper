@@ -13,6 +13,15 @@ import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren, EllipsizeProp } from '../../types';
 
+type Title =
+  | React.ReactNode
+  | ((props: {
+      selectable: boolean;
+      ellipsizeMode: EllipsizeProp | undefined;
+      color: string;
+      fontSize: number;
+    }) => React.ReactNode);
+
 type Description =
   | React.ReactNode
   | ((props: {
@@ -26,11 +35,11 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Title text for the list item.
    */
-  title: React.ReactNode;
+  title: Title;
   /**
    * Description text for the list item or callback which returns a React element to display the description.
    */
-  description?: Description | null;
+  description?: Description;
   /**
    * Callback which returns a React element to display on the left side.
    */
@@ -166,7 +175,28 @@ const ListItem = ({
     );
   };
 
-  const titleColor = color(theme.colors.text).alpha(0.87).rgb().string();
+  const renderTitle = () => {
+    const titleColor = color(theme.colors.text).alpha(0.87).rgb().string();
+
+    return typeof title === 'function' ? (
+      title({
+        selectable: false,
+        ellipsizeMode: titleEllipsizeMode,
+        color: titleColor,
+        fontSize: styles.title.fontSize,
+      })
+    ) : (
+      <Text
+        selectable={false}
+        ellipsizeMode={titleEllipsizeMode}
+        numberOfLines={titleNumberOfLines}
+        style={[styles.title, { color: titleColor }, titleStyle]}
+      >
+        {title}
+      </Text>
+    );
+  };
+
   const descriptionColor = color(theme.colors.text).alpha(0.54).rgb().string();
 
   return (
@@ -188,14 +218,8 @@ const ListItem = ({
             })
           : null}
         <View style={[styles.item, styles.content]}>
-          <Text
-            selectable={false}
-            ellipsizeMode={titleEllipsizeMode}
-            numberOfLines={titleNumberOfLines}
-            style={[styles.title, { color: titleColor }, titleStyle]}
-          >
-            {title}
-          </Text>
+          {renderTitle()}
+
           {description
             ? renderDescription(descriptionColor, description)
             : null}
