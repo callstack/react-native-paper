@@ -50,8 +50,20 @@
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> MyComponent<span class="token punctuation">;</span></code></pre>
-</div><h2>Props</h2><div class="PropInfo_p1eats2g"><a name="title" href="#title" class="PropLabel_psi127e"><code>title</code> (required)</a><div class="PropItem_pwdtv5j"><span>Type: </span><code>React.ReactNode</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Title text for the list item.</p>
-</div></div><div class="PropInfo_p1eats2g"><a name="description" href="#description" class="PropLabel_psi127e"><code>description</code></a><div class="PropItem_pwdtv5j"><span>Type: </span><code>Description | null</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Description text for the list item or callback which returns a React element to display the description.</p>
+</div><h2>Props</h2><div class="PropInfo_p1eats2g"><a name="title" href="#title" class="PropLabel_psi127e"><code>title</code> (required)</a><div class="PropItem_pwdtv5j"><span>Type: </span><code>React.ReactNode
+| ((props: {
+    selectable: boolean;
+    ellipsizeMode: EllipsizeProp | undefined;
+    color: string;
+    fontSize: number;
+  }) =&gt; React.ReactNode)</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Title text for the list item.</p>
+</div></div><div class="PropInfo_p1eats2g"><a name="description" href="#description" class="PropLabel_psi127e"><code>description</code></a><div class="PropItem_pwdtv5j"><span>Type: </span><code>React.ReactNode
+| ((props: {
+    selectable: boolean;
+    ellipsizeMode: EllipsizeProp | undefined;
+    color: string;
+    fontSize: number;
+  }) =&gt; React.ReactNode)</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Description text for the list item or callback which returns a React element to display the description.</p>
 </div></div><div class="PropInfo_p1eats2g"><a name="left" href="#left" class="PropLabel_psi127e"><code>left</code></a><div class="PropItem_pwdtv5j"><span>Type: </span><code>(props: {
   color: string;
   style: {
