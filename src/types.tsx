@@ -16,11 +16,6 @@ export type Font = {
     | '900';
 };
 
-export type UnderlineColor = {
-  inactive?: string;
-  focused?: string;
-};
-
 export type Fonts = {
   regular: Font;
   medium: Font;
