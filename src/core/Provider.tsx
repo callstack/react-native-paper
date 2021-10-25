@@ -60,10 +60,20 @@ const Provider = ({ ...props }: Props) => {
   }, [props.theme]);
 
   React.useEffect(() => {
-    if (!props.theme) Appearance?.addChangeListener(handleAppearanceChange);
+    let appearanceSubscription: NativeEventSubscription | undefined;
+    if (!props.theme) {
+      appearanceSubscription = Appearance?.addChangeListener(
+        handleAppearanceChange
+      ) as NativeEventSubscription | undefined;
+    }
     return () => {
-      if (!props.theme)
-        Appearance?.removeChangeListener(handleAppearanceChange);
+      if (!props.theme) {
+        if (appearanceSubscription) {
+          appearanceSubscription.remove();
+        } else {
+          Appearance?.removeChangeListener(handleAppearanceChange);
+        }
+      }
     };
   }, [props.theme]);
 
