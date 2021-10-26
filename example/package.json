@@ -39,6 +39,6 @@
   "devDependencies": {
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-preset-expo": "8.5.1",
-    "expo-cli": "^4.1.6"
+    "expo-cli": "^4.12.10"
   }
 }
