@@ -14,12 +14,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: 12.x
+          node-version: 14.x
 
       - name: Setup Expo
         uses: expo/expo-github-action@v5
         with:
-          expo-version: 3.x
+          expo-version: 4.x
           expo-username: ${{ secrets.EXPO_CLI_USERNAME_PAPER }}
           expo-password: ${{ secrets.EXPO_CLI_PASSWORD_PAPER }}
           expo-cache: true
