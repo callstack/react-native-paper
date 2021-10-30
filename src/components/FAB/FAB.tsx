@@ -147,13 +147,13 @@ const FAB = ({
       Animated.timing(visibility, {
         toValue: 1,
         duration: 200 * scale,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }).start();
     } else {
       Animated.timing(visibility, {
         toValue: 0,
         duration: 150 * scale,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }).start();
     }
   }, [visible, scale, visibility]);
