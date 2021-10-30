@@ -136,7 +136,7 @@ const Snackbar = ({
       Animated.timing(opacity, {
         toValue: 1,
         duration: 200 * scale,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }).start(({ finished }) => {
         if (finished) {
           const isInfinity =
@@ -158,7 +158,7 @@ const Snackbar = ({
       Animated.timing(opacity, {
         toValue: 0,
         duration: 100 * scale,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }).start(({ finished }) => {
         if (finished) setHidden(true);
       });
