@@ -27,8 +27,10 @@ export type State = {
   outlinedDense: string;
   flatMultiline: string;
   flatTextArea: string;
+  flatUnderlineColors: string;
   outlinedMultiline: string;
   outlinedTextArea: string;
+  outlinedColors: string;
   maxLengthName: string;
   flatTextSecureEntry: boolean;
   outlineTextSecureEntry: boolean;

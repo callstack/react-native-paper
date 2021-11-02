@@ -56,13 +56,21 @@ export type TextInputProps = React.ComponentPropsWithRef<
    */
   selectionColor?: string;
   /**
-   * Underline color of the input.
+   * Inactive underline color of the input.
    */
   underlineColor?: string;
   /**
-   * Outline color of the input.
+   * Active underline color of the input.
+   */
+  activeUnderlineColor?: string;
+  /**
+   * Inactive outline color of the input.
    */
   outlineColor?: string;
+  /**
+   * Active outline color of the input.
+   */
+  activeOutlineColor?: string;
   /**
    * Sets min height with densed layout. For `TextInput` in `flat` mode
    * height is `64dp` or in dense layout - `52dp` with label or `40dp` without label.
