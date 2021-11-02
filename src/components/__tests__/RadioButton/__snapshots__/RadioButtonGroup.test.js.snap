@@ -3,7 +3,6 @@
 exports[`RadioButtonGroup renders properly 1`] = `
 <View
   accessibilityRole="radiogroup"
-  accessible={true}
 >
   <View
     accessibilityLiveRegion="polite"
