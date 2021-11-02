@@ -37,12 +37,6 @@
     "typeface-roboto": "^0.0.54"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.3.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.3.1",
-    "@babel/preset-env": "^7.3.1",
-    "@babel/preset-flow": "^7.0.0",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/preset-typescript": "^7.3.3",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-preset-expo": "8.3.0",
     "expo-cli": "^4.1.6"
