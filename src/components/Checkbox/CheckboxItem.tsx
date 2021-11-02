@@ -111,8 +111,20 @@ const CheckboxItem = ({
   }
 
   return (
-    <TouchableRipple onPress={onPress} testID={testID}>
-      <View style={[styles.container, style]} pointerEvents="none">
+    <TouchableRipple
+      accessibilityLabel={label}
+      accessibilityRole="checkbox"
+      accessibilityState={{
+        checked: status === 'checked',
+      }}
+      onPress={onPress}
+      testID={testID}
+    >
+      <View
+        style={[styles.container, style]}
+        pointerEvents="none"
+        importantForAccessibility="no-hide-descendants"
+      >
         {isLeading && checkbox}
         <Text
           style={[
