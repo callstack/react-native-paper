@@ -89,8 +89,10 @@ To render the group above other components, you'll need to wrap it with the <a h
   icon: IconSource;
   label?: string;
   color?: string;
+  labelTextColor?: string;
   accessibilityLabel?: string;
   style?: StyleProp&lt;ViewStyle&gt;;
+  labelStyle?: StyleProp&lt;ViewStyle&gt;;
   small?: boolean;
   onPress: () =&gt; void;
   testID?: string;
@@ -101,7 +103,9 @@ An action item should contain the following properties:</p>
 <li><code>label</code>: optional label text</li>
 <li><code>accessibilityLabel</code>: accessibility label for the action, uses label by default if specified</li>
 <li><code>color</code>: custom icon color of the action item</li>
+<li><code>labelTextColor</code>: custom label text color of the action item</li>
 <li><code>style</code>: pass additional styles for the fab item, for example, <code>backgroundColor</code></li>
+<li><code>labelStyle</code>: pass additional styles for the fab item label, for example, <code>backgroundColor</code></li>
 <li><code>small</code>: boolean describing whether small or normal sized FAB is rendered. Defaults to <code>true</code></li>
 <li><code>onPress</code>: callback that is called when <code>FAB</code> is pressed (required)</li>
 </ul>
