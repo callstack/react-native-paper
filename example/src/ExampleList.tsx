@@ -43,7 +43,7 @@ export const examples: Record<
   string,
   React.ComponentType<any> & { title: string }
 > = {
-  ...(__DEV__ && { animatedFab: AnimatedFABExample }),
+  animatedFab: AnimatedFABExample,
   activityIndicator: ActivityIndicatorExample,
   appbar: AppbarExample,
   avatar: AvatarExample,

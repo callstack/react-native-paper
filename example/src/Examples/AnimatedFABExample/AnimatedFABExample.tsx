@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { View, StyleSheet, FlatList, Animated, Platform } from 'react-native';
 import type { NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
-import {
-  Colors,
-  AnimatedFAB,
-  useTheme,
-  Avatar,
-  Paragraph,
-} from 'react-native-paper';
+import { Colors, useTheme, Avatar, Paragraph } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { animatedFABExampleData } from '../../utils';
+import { animatedFABExampleData } from '../../../utils';
+import CustomFAB from './CustomFAB';
+import CustomFABControls, {
+  Controls,
+  initialControls,
+} from './CustomFABControls';
 
 type Item = {
   id: string;
@@ -23,55 +22,24 @@ type Item = {
   bgColor: string;
 };
 
-type CustomFABProps = {
-  animatedValue: Animated.Value;
-  visible: boolean;
-  extended: boolean;
-};
-
-const isIOS = Platform.OS === 'ios';
-
-const CustomFAB = ({ animatedValue, visible, extended }: CustomFABProps) => {
-  const [isExtended, setIsExtended] = React.useState(true);
-
-  React.useEffect(() => {
-    if (!isIOS) {
-      animatedValue.addListener(({ value }: { value: number }) =>
-        setIsExtended(value > 0 ? true : false)
-      );
-    } else setIsExtended(extended);
-  }, [animatedValue, extended]);
-
-  return (
-    <AnimatedFAB
-      icon={'pencil'}
-      label={'Create'}
-      extended={isExtended}
-      uppercase={false}
-      onPress={() => console.log('Pressed')}
-      visible={visible}
-      animateFrom="right"
-      iconMode="dynamic"
-      style={styles.fabStyle}
-    />
-  );
-};
-
 const AnimatedFABExample = () => {
   const {
     colors: { background },
   } = useTheme();
 
-  const [scrollPosition, setScrollPosition] = React.useState<number>(0);
-  const [extended, setExtended] = React.useState<boolean>(false);
+  const isIOS = Platform.OS === 'ios';
+
+  const [extended, setExtended] = React.useState<boolean>(true);
   const [visible, setVisible] = React.useState<boolean>(true);
+
+  const [controls, setControls] = React.useState<Controls>(initialControls);
 
   const { current: velocity } = React.useRef<Animated.Value>(
     new Animated.Value(0)
   );
 
-  const renderItem = ({ item }: { item: Item }) => {
-    return (
+  const renderItem = React.useCallback(
+    ({ item }: { item: Item }) => (
       <View style={styles.itemContainer}>
         <Avatar.Text
           style={[styles.avatar, { backgroundColor: item.bgColor }]}
@@ -117,39 +85,36 @@ const AnimatedFABExample = () => {
           </View>
         </View>
       </View>
-    );
-  };
+    ),
+    [visible]
+  );
 
   const onScroll = ({
     nativeEvent,
   }: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const currentScrollPosition =
+      Math.floor(nativeEvent?.contentOffset?.y) ?? 0;
+
     if (!isIOS) {
-      return velocity.setValue(nativeEvent?.velocity?.y ?? 0);
+      return velocity.setValue(currentScrollPosition);
     }
 
-    const currentScrollPosition = Math.floor(nativeEvent.contentOffset.y);
-
-    const scrollHeight =
-      nativeEvent.contentSize.height - nativeEvent.layoutMeasurement.height;
-
-    setScrollPosition(currentScrollPosition);
-
-    if (currentScrollPosition > scrollPosition && scrollPosition > 0) {
-      setExtended(false);
-    } else if (
-      currentScrollPosition < scrollPosition &&
-      scrollPosition < scrollHeight
-    ) {
-      setExtended(true);
-    }
+    setExtended(currentScrollPosition <= 0);
   };
+
+  const _keyExtractor = React.useCallback(
+    (item: { id: string }) => item.id,
+    []
+  );
+
+  const { animateFrom, iconMode } = controls;
 
   return (
     <>
       <FlatList
         data={animatedFABExampleData}
         renderItem={renderItem}
-        keyExtractor={(item: { id: string }) => item.id}
+        keyExtractor={_keyExtractor}
         onEndReachedThreshold={0}
         scrollEventThrottle={16}
         style={[styles.flex, { backgroundColor: background }]}
@@ -159,10 +124,16 @@ const AnimatedFABExample = () => {
         ]}
         onScroll={onScroll}
       />
+
+      <CustomFABControls controls={controls} setControls={setControls} />
+
       <CustomFAB
         visible={visible}
         animatedValue={velocity}
         extended={extended}
+        label={'New Message'}
+        animateFrom={animateFrom}
+        iconMode={iconMode}
       />
     </>
   );
@@ -212,11 +183,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginRight: 8,
     flex: 1,
-  },
-  fabStyle: {
-    right: 16,
-    bottom: 32,
-    position: 'absolute',
   },
 });
 

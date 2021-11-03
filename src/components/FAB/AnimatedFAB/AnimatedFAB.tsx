@@ -1,5 +1,5 @@
-import color from 'color';
 import * as React from 'react';
+import color from 'color';
 import {
   Animated,
   View,
@@ -10,21 +10,25 @@ import {
   ScrollView,
   Text,
   Platform,
+  I18nManager,
 } from 'react-native';
-import Surface from '../Surface';
-import Icon from '../Icon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { withTheme } from '../../core/theming';
-import type { $RemoveChildren } from '../../types';
-import type { IconSource } from './../Icon';
+import Surface from '../../Surface';
+import Icon from '../../Icon';
+import TouchableRipple from '../../TouchableRipple/TouchableRipple';
+import type { $RemoveChildren } from '../../../types';
+import type { IconSource } from '../../Icon';
+import { withTheme } from '../../../core/theming';
 import type {
   AccessibilityState,
   NativeSyntheticEvent,
   TextLayoutEventData,
 } from 'react-native';
-import { white, black } from '../../styles/colors';
-import AnimatedText from '../Typography/AnimatedText';
-import getContrastingColor from '../../utils/getContrastingColor';
+import { white, black } from '../../../styles/colors';
+import AnimatedText from '../../Typography/AnimatedText';
+import { getCombinedStyles } from './utils';
+
+export type AnimatedFABIconMode = 'static' | 'dynamic';
+export type AnimatedFABAnimateFrom = 'left' | 'right';
 
 type Props = $RemoveChildren<typeof Surface> & {
   /**
@@ -71,11 +75,11 @@ type Props = $RemoveChildren<typeof Surface> & {
   /**
    * Whether icon should be translated to the end of extended `FAB` or be static and stay in the same place. The default value is `dynamic`.
    */
-  iconMode?: 'static' | 'dynamic';
+  iconMode?: AnimatedFABIconMode;
   /**
    * Indicates from which direction animation should be performed. The default value is `right`.
    */
-  animateFrom?: 'right' | 'left';
+  animateFrom?: AnimatedFABAnimateFrom;
   /**
    * Whether `FAB` should start animation to extend.
    */
@@ -114,6 +118,7 @@ const AnimatedFAB = ({
   const isIOS = Platform.OS === 'ios';
   const isAnimatedFromRight = animateFrom === 'right';
   const isIconStatic = iconMode === 'static';
+  const { isRTL } = I18nManager;
   const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
@@ -146,11 +151,10 @@ const AnimatedFAB = ({
     .rgb()
     .string();
 
-  const {
-    backgroundColor = disabled ? disabledColor : theme.colors.accent,
-  } = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const { backgroundColor = disabled ? disabledColor : theme.colors.accent } =
+    StyleSheet.flatten<ViewStyle>(style) || {};
 
-  let foregroundColor;
+  let foregroundColor: string;
 
   if (typeof customColor !== 'undefined') {
     foregroundColor = customColor;
@@ -160,11 +164,9 @@ const AnimatedFAB = ({
       .rgb()
       .string();
   } else {
-    foregroundColor = getContrastingColor(
-      backgroundColor,
-      white,
-      'rgba(0, 0, 0, .54)'
-    );
+    foregroundColor = !color(backgroundColor as string).isLight()
+      ? white
+      : 'rgba(0, 0, 0, .54)';
   }
 
   const rippleColor = color(foregroundColor).alpha(0.32).rgb().string();
@@ -191,24 +193,30 @@ const AnimatedFAB = ({
     const currentHeight = Math.ceil(nativeEvent.lines[0].height);
 
     if (currentWidth !== textWidth || currentHeight !== textHeight) {
-      setTextWidth(currentWidth);
       setTextHeight(currentHeight);
+
+      if (isIOS) {
+        return setTextWidth(currentWidth - 12);
+      }
+
+      setTextWidth(currentWidth);
     }
   };
 
-  const getSidesPosition = () => {
+  const propForDirection = <T,>(right: T[]): T[] => {
     if (isAnimatedFromRight) {
-      return {
-        left: -distance,
-        right: undefined,
-      };
-    } else {
-      return {
-        left: undefined,
-        right: distance,
-      };
+      return right;
     }
+
+    return right.reverse();
   };
+
+  const combinedStyles = getCombinedStyles({
+    isAnimatedFromRight,
+    isIconStatic,
+    distance,
+    animFAB,
+  });
 
   return (
     <Surface
@@ -236,10 +244,8 @@ const AnimatedFAB = ({
             transform: [
               {
                 scaleY: animFAB.interpolate({
-                  inputRange: isAnimatedFromRight
-                    ? [distance, 0]
-                    : [0, distance],
-                  outputRange: isAnimatedFromRight ? [SCALE, 1] : [1, SCALE],
+                  inputRange: propForDirection([distance, 0]),
+                  outputRange: propForDirection([SCALE, 1]),
                 }),
               },
             ],
@@ -256,8 +262,8 @@ const AnimatedFAB = ({
               {
                 width: extendedWidth,
                 opacity: animFAB.interpolate({
-                  inputRange: [distance, 0.9 * distance, 0],
-                  outputRange: [1, 0.15, 0],
+                  inputRange: propForDirection([distance, 0.9 * distance, 0]),
+                  outputRange: propForDirection([1, 0.15, 0]),
                 }),
               },
             ]}
@@ -269,29 +275,19 @@ const AnimatedFAB = ({
               styles.shadow,
               {
                 opacity: animFAB.interpolate({
-                  inputRange: [distance, 0.9 * distance, 0],
-                  outputRange: [0, 0.85, 1],
+                  inputRange: propForDirection([distance, 0.9 * distance, 0]),
+                  outputRange: propForDirection([0, 0.85, 1]),
                 }),
                 width: SIZE,
                 borderRadius: animFAB.interpolate({
-                  inputRange: [distance, 0],
-                  outputRange: [SIZE / (extendedWidth / SIZE), BORDER_RADIUS],
+                  inputRange: propForDirection([distance, 0]),
+                  outputRange: propForDirection([
+                    SIZE / (extendedWidth / SIZE),
+                    BORDER_RADIUS,
+                  ]),
                 }),
-                transform: [
-                  {
-                    translateX: animFAB.interpolate({
-                      inputRange: [distance, 0],
-                      outputRange: [Math.abs(distance) / 2, Math.abs(distance)],
-                    }),
-                  },
-                  {
-                    scaleX: animFAB.interpolate({
-                      inputRange: [distance, 0],
-                      outputRange: [extendedWidth / SIZE, 1],
-                    }),
-                  },
-                ],
               },
+              combinedStyles.absoluteFill,
             ]}
           />
         </View>
@@ -300,15 +296,10 @@ const AnimatedFAB = ({
             style={[
               styles.standard,
               {
-                transform: [
-                  {
-                    translateX: animFAB,
-                  },
-                ],
                 width: extendedWidth,
                 backgroundColor,
               },
-              getSidesPosition(),
+              combinedStyles.innerWrapper,
             ]}
           >
             <TouchableRipple
@@ -340,16 +331,10 @@ const AnimatedFAB = ({
       </Animated.View>
 
       <Animated.View
-        style={[
-          styles.iconWrapper,
-          {
-            transform: [{ translateX: animFAB }],
-          },
-          getSidesPosition(),
-        ]}
+        style={[styles.iconWrapper, combinedStyles.iconWrapper]}
         pointerEvents="none"
       >
-        <Icon source={icon} size={24} color={white} />
+        <Icon source={icon} size={24} color={foregroundColor} />
       </Animated.View>
 
       <View pointerEvents="none">
@@ -358,25 +343,25 @@ const AnimatedFAB = ({
           onTextLayout={isIOS ? onTextLayout : undefined}
           ellipsizeMode={'tail'}
           style={[
-            isAnimatedFromRight
-              ? { right: isIconStatic ? SIZE : BORDER_RADIUS }
-              : { left: isIconStatic ? SIZE : BORDER_RADIUS },
+            {
+              [isAnimatedFromRight || isRTL ? 'right' : 'left']: isIconStatic
+                ? isIOS
+                  ? SIZE - 10
+                  : SIZE - 12
+                : BORDER_RADIUS,
+            },
             {
               minWidth: textWidth,
               top: -BORDER_RADIUS - textHeight / 2,
               opacity: animFAB.interpolate({
-                inputRange: isAnimatedFromRight
-                  ? [distance, 0.7 * distance, 0]
-                  : [0, 0.7 * distance, distance],
-                outputRange: isAnimatedFromRight ? [1, 0, 0] : [0, 0, 1],
+                inputRange: propForDirection([distance, 0.7 * distance, 0]),
+                outputRange: propForDirection([1, 0, 0]),
               }),
               transform: [
                 {
                   translateX: animFAB.interpolate({
-                    inputRange: isAnimatedFromRight
-                      ? [distance, 0]
-                      : [0, distance],
-                    outputRange: isAnimatedFromRight ? [0, SIZE] : [-SIZE, 0],
+                    inputRange: propForDirection([distance, 0]),
+                    outputRange: propForDirection([0, SIZE]),
                   }),
                 },
               ],
