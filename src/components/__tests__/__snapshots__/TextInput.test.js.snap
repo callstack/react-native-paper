@@ -249,7 +249,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
                   "translateX": -3,
                 },
               ],
-              "width": 8,
+              "width": 12,
             }
           }
         />
@@ -263,6 +263,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               "fontSize": 16,
               "fontWeight": undefined,
               "left": 18,
+              "maxWidth": -28,
               "opacity": 1,
               "paddingHorizontal": 0,
               "position": "absolute",
