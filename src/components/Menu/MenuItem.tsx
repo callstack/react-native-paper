@@ -89,6 +89,7 @@ const MenuItem = ({
   titleStyle,
   accessibilityLabel,
   theme,
+  ...props
 }: Props) => {
   const disabledColor = color(theme.dark ? white : black)
     .alpha(0.32)
@@ -112,6 +113,7 @@ const MenuItem = ({
       accessibilityLabel={accessibilityLabel}
       accessibilityRole="menuitem"
       accessibilityState={{ disabled }}
+      {...props}
     >
       <View style={styles.row}>
         {icon ? (
