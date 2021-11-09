@@ -37,6 +37,7 @@ export type State = {
 };
 export type ChildTextInputProps = {
   parentState: State;
+  inputPadding: {padding?: number, paddingTop?: number, paddingRight?: number, paddingBottom?: number, paddingLeft?: number};
   innerRef: (ref?: NativeTextInput | null) => void;
   onFocus?: (args: any) => void;
   onBlur?: (args: any) => void;
