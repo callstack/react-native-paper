@@ -124,7 +124,7 @@ exports[`renders list item with custom description 1`] = `
                       "borderRadius": 16,
                     },
                     Object {
-                      "flex": 1,
+                      "flexGrow": 1,
                     },
                   ],
                 ]

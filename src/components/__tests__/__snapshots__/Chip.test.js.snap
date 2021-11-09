@@ -41,7 +41,7 @@ exports[`renders chip with close button 1`] = `
             "borderRadius": 16,
           },
           Object {
-            "flex": 1,
+            "flexGrow": 1,
           },
         ],
       ]
@@ -263,7 +263,7 @@ exports[`renders chip with custom close button 1`] = `
             "borderRadius": 16,
           },
           Object {
-            "flex": 1,
+            "flexGrow": 1,
           },
         ],
       ]
@@ -485,7 +485,7 @@ exports[`renders chip with icon 1`] = `
             "borderRadius": 16,
           },
           Object {
-            "flex": 1,
+            "flexGrow": 1,
           },
         ],
       ]
@@ -634,7 +634,7 @@ exports[`renders chip with onPress 1`] = `
             "borderRadius": 16,
           },
           Object {
-            "flex": 1,
+            "flexGrow": 1,
           },
         ],
       ]
@@ -735,7 +735,7 @@ exports[`renders outlined disabled chip 1`] = `
             "borderRadius": 16,
           },
           Object {
-            "flex": 1,
+            "flexGrow": 1,
           },
         ],
       ]
@@ -836,7 +836,7 @@ exports[`renders selected chip 1`] = `
             "borderRadius": 16,
           },
           Object {
-            "flex": 1,
+            "flexGrow": 1,
           },
         ],
       ]

@@ -391,7 +391,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   touchable: {
-    flex: 1,
+    flexGrow: 1,
   },
 });
 
