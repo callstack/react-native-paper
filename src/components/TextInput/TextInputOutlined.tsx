@@ -60,6 +60,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
       label,
       error,
       selectionColor,
+      inputPadding,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       underlineColor,
       outlineColor: customOutlineColor,
@@ -336,6 +337,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
                   ? { height: inputHeight }
                   : {},
                 paddingOut,
+                inputPadding,
                 {
                   ...font,
                   fontSize,
