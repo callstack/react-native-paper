@@ -295,6 +295,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
           <Outline
             theme={theme}
             hasActiveOutline={hasActiveOutline}
+            focused={parentState.focused}
             activeColor={activeColor}
             outlineColor={outlineColor}
             backgroundColor={backgroundColor}
@@ -365,6 +366,7 @@ export default TextInputOutlined;
 type OutlineProps = {
   activeColor: string;
   hasActiveOutline?: boolean;
+  focused?: boolean;
   outlineColor?: string;
   backgroundColor: ColorValue;
   theme: ReactNativePaper.Theme;
@@ -375,6 +377,7 @@ const Outline = ({
   hasActiveOutline,
   activeColor,
   outlineColor,
+  focused,
   backgroundColor,
 }: OutlineProps) => (
   <View
@@ -385,7 +388,7 @@ const Outline = ({
       {
         backgroundColor,
         borderRadius: theme.roundness,
-        borderWidth: hasActiveOutline ? 2 : 1,
+        borderWidth: focused ? 2 : 1,
         borderColor: hasActiveOutline ? activeColor : outlineColor,
       },
     ]}
