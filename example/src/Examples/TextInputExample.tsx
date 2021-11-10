@@ -468,6 +468,13 @@ const TextInputExample = () => {
             label="Custom rounded input"
           />
         </View>
+        <View style={styles.inputContainerStyle}>
+          <TextInput
+            mode="outlined"
+            label="Outlined text input with error"
+            error
+          />
+        </View>
       </ScreenWrapper>
     </TextInputAvoidingView>
   );
