@@ -134,6 +134,10 @@ export type TextInputProps = React.ComponentPropsWithRef<
     paddingLeft?: number;
   };
   /**
+   * margin inside textInput
+   */
+  inputPadding?: {padding?: number, paddingTop?: number, paddingRight?: number, paddingBottom?: number, paddingLeft?: number};
+  /**
    * @optional
    */
   theme: ReactNativePaper.Theme;
