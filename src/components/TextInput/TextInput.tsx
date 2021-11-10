@@ -126,7 +126,13 @@ export type TextInputProps = React.ComponentPropsWithRef<
    * This can be used to get MD Guidelines v1 TextInput look.
    */
   style?: StyleProp<TextStyle>;
-  inputPadding?: {padding?: number, paddingTop?: number, paddingRight?: number, paddingBottom?: number, paddingLeft?: number};
+  inputPadding?: {
+    padding?: number;
+    paddingTop?: number;
+    paddingRight?: number;
+    paddingBottom?: number;
+    paddingLeft?: number;
+  };
   /**
    * @optional
    */

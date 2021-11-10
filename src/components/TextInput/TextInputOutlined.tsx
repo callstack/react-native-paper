@@ -306,6 +306,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
               {
                 paddingTop: LABEL_PADDING_TOP,
                 minHeight,
+                ...inputPadding,
               },
             ]}
           >
@@ -337,7 +338,6 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
                   ? { height: inputHeight }
                   : {},
                 paddingOut,
-                inputPadding,
                 {
                   ...font,
                   fontSize,
