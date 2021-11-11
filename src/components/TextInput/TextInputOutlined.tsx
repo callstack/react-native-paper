@@ -381,6 +381,7 @@ const Outline = ({
   backgroundColor,
 }: OutlineProps) => (
   <View
+    testID="text-input-outline"
     pointerEvents="none"
     style={[
       styles.outline,

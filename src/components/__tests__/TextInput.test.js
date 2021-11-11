@@ -110,7 +110,7 @@ it('correctly applies height to multiline Outline TextInput', () => {
 });
 
 it('correctly applies error state Outline TextInput', () => {
-  const { toJSON } = render(
+  const { getByTestId } = render(
     <TextInput
       mode="outlined"
       label="Outline Input with error"
@@ -120,5 +120,8 @@ it('correctly applies error state Outline TextInput', () => {
     />
   );
 
-  expect(toJSON()).toMatchSnapshot();
+  const outline = getByTestId('text-input-outline');
+  expect(outline.props.style).toEqual(
+    expect.arrayContaining([expect.objectContaining({ borderWidth: 1 })])
+  );
 });
