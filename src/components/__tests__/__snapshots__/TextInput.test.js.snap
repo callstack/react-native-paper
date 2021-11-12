@@ -59,6 +59,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
               "translateX": 3,
             },
           ],
+          "zIndex": 3,
         }
       }
     >
@@ -230,6 +231,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
                 "translateX": 3,
               },
             ],
+            "zIndex": 3,
           }
         }
       >
@@ -459,6 +461,7 @@ exports[`correctly applies textAlign center 1`] = `
               "translateX": 3,
             },
           ],
+          "zIndex": 3,
         }
       }
     >
@@ -636,6 +639,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
               "translateX": 3,
             },
           ],
+          "zIndex": 3,
         }
       }
     >
@@ -955,6 +959,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
               "translateX": 11,
             },
           ],
+          "zIndex": 3,
         }
       }
     >

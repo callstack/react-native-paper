@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { render } from 'react-native-testing-library';
 import TextInput from '../TextInput/TextInput';
 import { red500 } from '../../styles/colors';
@@ -107,4 +107,18 @@ it('correctly applies height to multiline Outline TextInput', () => {
   );
 
   expect(toJSON()).toMatchSnapshot();
+});
+
+it('contains patch spacing for flat input when ios and multiline', () => {
+  Platform.OS = 'ios';
+  const { getByTestId } = render(
+    <TextInput
+      label="Flat input"
+      multiline
+      placeholder="Type something"
+      value={'Some test value'}
+      onChangeText={(text) => this.setState({ text })}
+    />
+  );
+  expect(() => getByTestId('patch-container')).not.toThrow();
 });
