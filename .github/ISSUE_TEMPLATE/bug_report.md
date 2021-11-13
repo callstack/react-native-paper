@@ -20,7 +20,7 @@ assignees: ''
 
 ### Code sample
 
-<!-- Provide a complete code sample that could be run to reproduce the issue, ideally on snack.expo.io or in a github repo. -->
+<!-- Provide a complete code sample that could be run to reproduce the issue, ideally on snack.expo.dev or in a github repo. -->
 
 ### Screenshots (if applicable)
 
