@@ -458,39 +458,22 @@ exports[`renders button with icon 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
           style={
             Array [
               Object {
+                "backgroundColor": "transparent",
+              },
+              Object {
                 "color": "#6200ee",
                 "fontSize": 16,
               },
-              Array [
-                Object {
-                  "lineHeight": 16,
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
             ]
           }
         >
-          
+          □
         </Text>
       </View>
       <Text
@@ -603,39 +586,22 @@ exports[`renders button with icon in reverse order 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
           style={
             Array [
               Object {
+                "backgroundColor": "transparent",
+              },
+              Object {
                 "color": "#6200ee",
                 "fontSize": 16,
               },
-              Array [
-                Object {
-                  "lineHeight": 16,
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
             ]
           }
         >
-          
+          □
         </Text>
       </View>
       <Text

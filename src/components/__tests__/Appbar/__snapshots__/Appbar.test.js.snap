@@ -89,39 +89,22 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
       <View>
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
           style={
             Array [
               Object {
+                "backgroundColor": "transparent",
+              },
+              Object {
                 "color": "rgba(0, 0, 0, 0.54)",
                 "fontSize": 24,
               },
-              Array [
-                Object {
-                  "lineHeight": 24,
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
             ]
           }
         >
-          
+          □
         </Text>
       </View>
     </View>
@@ -208,39 +191,22 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
       <View>
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
           style={
             Array [
               Object {
+                "backgroundColor": "transparent",
+              },
+              Object {
                 "color": "rgba(255, 255, 255, 0)",
                 "fontSize": 24,
               },
-              Array [
-                Object {
-                  "lineHeight": 24,
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
             ]
           }
         >
-          
+          □
         </Text>
       </View>
     </View>
@@ -532,39 +498,22 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
             style={
               Array [
                 Object {
+                  "backgroundColor": "transparent",
+                },
+                Object {
                   "color": "#ffffff",
                   "fontSize": 24,
                 },
-                Array [
-                  Object {
-                    "lineHeight": 24,
-                    "transform": Array [
-                      Object {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  Object {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-                Object {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                Object {},
               ]
             }
           >
-            
+            □
           </Text>
         </View>
       </View>

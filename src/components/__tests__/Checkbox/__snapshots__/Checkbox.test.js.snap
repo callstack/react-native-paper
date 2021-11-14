@@ -48,32 +48,16 @@ exports[`renders Checkbox with custom testID 1`] = `
       style={
         Array [
           Object {
+            "backgroundColor": "transparent",
+          },
+          Object {
             "color": "#03dac4",
             "fontSize": 24,
           },
-          Array [
-            Object {
-              "lineHeight": 24,
-              "transform": Array [
-                Object {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            Object {
-              "backgroundColor": "transparent",
-            },
-          ],
-          Object {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          Object {},
         ]
       }
     >
-      
+      □
     </Text>
   </View>
 </View>
@@ -126,32 +110,16 @@ exports[`renders checked Checkbox with color 1`] = `
       style={
         Array [
           Object {
+            "backgroundColor": "transparent",
+          },
+          Object {
             "color": "red",
             "fontSize": 24,
           },
-          Array [
-            Object {
-              "lineHeight": 24,
-              "transform": Array [
-                Object {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            Object {
-              "backgroundColor": "transparent",
-            },
-          ],
-          Object {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          Object {},
         ]
       }
     >
-      
+      □
     </Text>
   </View>
 </View>
@@ -204,32 +172,16 @@ exports[`renders checked Checkbox with onPress 1`] = `
       style={
         Array [
           Object {
+            "backgroundColor": "transparent",
+          },
+          Object {
             "color": "#03dac4",
             "fontSize": 24,
           },
-          Array [
-            Object {
-              "lineHeight": 24,
-              "transform": Array [
-                Object {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            Object {
-              "backgroundColor": "transparent",
-            },
-          ],
-          Object {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          Object {},
         ]
       }
     >
-      
+      □
     </Text>
   </View>
 </View>
@@ -282,32 +234,16 @@ exports[`renders indeterminate Checkbox 1`] = `
       style={
         Array [
           Object {
+            "backgroundColor": "transparent",
+          },
+          Object {
             "color": "#03dac4",
             "fontSize": 24,
           },
-          Array [
-            Object {
-              "lineHeight": 24,
-              "transform": Array [
-                Object {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            Object {
-              "backgroundColor": "transparent",
-            },
-          ],
-          Object {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          Object {},
         ]
       }
     >
-      
+      □
     </Text>
   </View>
 </View>
@@ -360,32 +296,16 @@ exports[`renders indeterminate Checkbox with color 1`] = `
       style={
         Array [
           Object {
+            "backgroundColor": "transparent",
+          },
+          Object {
             "color": "red",
             "fontSize": 24,
           },
-          Array [
-            Object {
-              "lineHeight": 24,
-              "transform": Array [
-                Object {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            Object {
-              "backgroundColor": "transparent",
-            },
-          ],
-          Object {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          Object {},
         ]
       }
     >
-      
+      □
     </Text>
   </View>
 </View>
@@ -438,32 +358,16 @@ exports[`renders unchecked Checkbox with color 1`] = `
       style={
         Array [
           Object {
+            "backgroundColor": "transparent",
+          },
+          Object {
             "color": "red",
             "fontSize": 24,
           },
-          Array [
-            Object {
-              "lineHeight": 24,
-              "transform": Array [
-                Object {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            Object {
-              "backgroundColor": "transparent",
-            },
-          ],
-          Object {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          Object {},
         ]
       }
     >
-      
+      □
     </Text>
   </View>
 </View>
@@ -516,32 +420,16 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
       style={
         Array [
           Object {
+            "backgroundColor": "transparent",
+          },
+          Object {
             "color": "#03dac4",
             "fontSize": 24,
           },
-          Array [
-            Object {
-              "lineHeight": 24,
-              "transform": Array [
-                Object {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            Object {
-              "backgroundColor": "transparent",
-            },
-          ],
-          Object {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          Object {},
         ]
       }
     >
-      
+      □
     </Text>
   </View>
 </View>

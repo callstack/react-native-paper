@@ -100,39 +100,22 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
             style={
               Array [
                 Object {
+                  "backgroundColor": "transparent",
+                },
+                Object {
                   "color": "#AA0114",
                   "fontSize": 24,
                 },
-                Array [
-                  Object {
-                    "lineHeight": 24,
-                    "transform": Array [
-                      Object {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  Object {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-                Object {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                Object {},
               ]
             }
           >
-            
+            □
           </Text>
         </View>
       </View>
@@ -234,39 +217,22 @@ exports[`renders disabled FAB 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
             style={
               Array [
                 Object {
+                  "backgroundColor": "transparent",
+                },
+                Object {
                   "color": "rgba(0, 0, 0, 0.32)",
                   "fontSize": 24,
                 },
-                Array [
-                  Object {
-                    "lineHeight": 24,
-                    "transform": Array [
-                      Object {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  Object {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-                Object {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                Object {},
               ]
             }
           >
-            
+            □
           </Text>
         </View>
       </View>
@@ -376,39 +342,22 @@ exports[`renders extended FAB 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
             style={
               Array [
                 Object {
+                  "backgroundColor": "transparent",
+                },
+                Object {
                   "color": "rgba(0, 0, 0, .54)",
                   "fontSize": 24,
                 },
-                Array [
-                  Object {
-                    "lineHeight": 24,
-                    "transform": Array [
-                      Object {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  Object {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-                Object {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                Object {},
               ]
             }
           >
-            
+            □
           </Text>
         </View>
       </View>
@@ -806,39 +755,22 @@ exports[`renders normal FAB 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
             style={
               Array [
                 Object {
+                  "backgroundColor": "transparent",
+                },
+                Object {
                   "color": "rgba(0, 0, 0, .54)",
                   "fontSize": 24,
                 },
-                Array [
-                  Object {
-                    "lineHeight": 24,
-                    "transform": Array [
-                      Object {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  Object {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-                Object {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                Object {},
               ]
             }
           >
-            
+            □
           </Text>
         </View>
       </View>
@@ -947,39 +879,22 @@ exports[`renders not visible FAB 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
             style={
               Array [
                 Object {
+                  "backgroundColor": "transparent",
+                },
+                Object {
                   "color": "rgba(0, 0, 0, .54)",
                   "fontSize": 24,
                 },
-                Array [
-                  Object {
-                    "lineHeight": 24,
-                    "transform": Array [
-                      Object {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  Object {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-                Object {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                Object {},
               ]
             }
           >
-            
+            □
           </Text>
         </View>
       </View>
@@ -1088,39 +1003,22 @@ exports[`renders small FAB 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
             style={
               Array [
                 Object {
+                  "backgroundColor": "transparent",
+                },
+                Object {
                   "color": "rgba(0, 0, 0, .54)",
                   "fontSize": 24,
                 },
-                Array [
-                  Object {
-                    "lineHeight": 24,
-                    "transform": Array [
-                      Object {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  Object {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-                Object {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                Object {},
               ]
             }
           >
-            
+            □
           </Text>
         </View>
       </View>
@@ -1229,39 +1127,22 @@ exports[`renders visible FAB 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
             style={
               Array [
                 Object {
+                  "backgroundColor": "transparent",
+                },
+                Object {
                   "color": "rgba(0, 0, 0, .54)",
                   "fontSize": 24,
                 },
-                Array [
-                  Object {
-                    "lineHeight": 24,
-                    "transform": Array [
-                      Object {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  Object {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-                Object {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                Object {},
               ]
             }
           >
-            
+            □
           </Text>
         </View>
       </View>

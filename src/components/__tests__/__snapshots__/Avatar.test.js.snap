@@ -20,39 +20,22 @@ exports[`renders avatar with icon 1`] = `
 >
   <Text
     accessibilityElementsHidden={true}
-    allowFontScaling={false}
     importantForAccessibility="no-hide-descendants"
     pointerEvents="none"
     selectable={false}
     style={
       Array [
         Object {
+          "backgroundColor": "transparent",
+        },
+        Object {
           "color": "#ffffff",
           "fontSize": 38.4,
         },
-        Array [
-          Object {
-            "lineHeight": 38.4,
-            "transform": Array [
-              Object {
-                "scaleX": 1,
-              },
-            ],
-          },
-          Object {
-            "backgroundColor": "transparent",
-          },
-        ],
-        Object {
-          "fontFamily": "Material Design Icons",
-          "fontStyle": "normal",
-          "fontWeight": "normal",
-        },
-        Object {},
       ]
     }
   >
-    
+    □
   </Text>
 </View>
 `;
@@ -77,39 +60,22 @@ exports[`renders avatar with icon and custom background color 1`] = `
 >
   <Text
     accessibilityElementsHidden={true}
-    allowFontScaling={false}
     importantForAccessibility="no-hide-descendants"
     pointerEvents="none"
     selectable={false}
     style={
       Array [
         Object {
+          "backgroundColor": "transparent",
+        },
+        Object {
           "color": "#ffffff",
           "fontSize": 38.4,
         },
-        Array [
-          Object {
-            "lineHeight": 38.4,
-            "transform": Array [
-              Object {
-                "scaleX": 1,
-              },
-            ],
-          },
-          Object {
-            "backgroundColor": "transparent",
-          },
-        ],
-        Object {
-          "fontFamily": "Material Design Icons",
-          "fontStyle": "normal",
-          "fontWeight": "normal",
-        },
-        Object {},
       ]
     }
   >
-    
+    □
   </Text>
 </View>
 `;

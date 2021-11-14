@@ -76,39 +76,22 @@ exports[`renders chip with close button 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
           style={
             Array [
               Object {
+                "backgroundColor": "transparent",
+              },
+              Object {
                 "color": "rgba(0, 0, 0, 0.54)",
                 "fontSize": 18,
               },
-              Array [
-                Object {
-                  "lineHeight": 18,
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
             ]
           }
         >
-          
+          □
         </Text>
       </View>
       <Text
@@ -184,39 +167,22 @@ exports[`renders chip with close button 1`] = `
     >
       <Text
         accessibilityElementsHidden={true}
-        allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         selectable={false}
         style={
           Array [
             Object {
+              "backgroundColor": "transparent",
+            },
+            Object {
               "color": "rgba(0, 0, 0, 0.54)",
               "fontSize": 16,
             },
-            Array [
-              Object {
-                "lineHeight": 16,
-                "transform": Array [
-                  Object {
-                    "scaleX": 1,
-                  },
-                ],
-              },
-              Object {
-                "backgroundColor": "transparent",
-              },
-            ],
-            Object {
-              "fontFamily": "Material Design Icons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-            Object {},
           ]
         }
       >
-        
+        □
       </Text>
     </View>
   </View>
@@ -522,39 +488,22 @@ exports[`renders chip with icon 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
           style={
             Array [
               Object {
+                "backgroundColor": "transparent",
+              },
+              Object {
                 "color": "rgba(0, 0, 0, 0.54)",
                 "fontSize": 18,
               },
-              Array [
-                Object {
-                  "lineHeight": 18,
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
             ]
           }
         >
-          
+          □
         </Text>
       </View>
       <Text
@@ -876,39 +825,22 @@ exports[`renders selected chip 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
           style={
             Array [
               Object {
+                "backgroundColor": "transparent",
+              },
+              Object {
                 "color": "rgba(0, 0, 0, 0.54)",
                 "fontSize": 18,
               },
-              Array [
-                Object {
-                  "lineHeight": 18,
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
             ]
           }
         >
-          
+          □
         </Text>
       </View>
       <Text

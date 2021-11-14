@@ -9,7 +9,6 @@ import {
   Platform,
   ViewStyle,
 } from 'react-native';
-import { getBottomSpace } from 'react-native-iphone-x-helper';
 import color from 'color';
 import overlay from '../../styles/overlay';
 import Icon, { IconSource } from '../Icon';
@@ -237,7 +236,6 @@ const MIN_RIPPLE_SCALE = 0.001; // Minimum scale is not 0 due to bug with animat
 const MIN_TAB_WIDTH = 96;
 const MAX_TAB_WIDTH = 168;
 const BAR_HEIGHT = 56;
-const BOTTOM_INSET = getBottomSpace();
 const FAR_FAR_AWAY = Platform.OS === 'web' ? 0 : 9999;
 
 const Touchable = ({
@@ -587,7 +585,7 @@ const BottomNavigation = ({
   const insets = {
     left: safeAreaInsets?.left ?? 0,
     right: safeAreaInsets?.right ?? 0,
-    bottom: safeAreaInsets?.bottom ?? BOTTOM_INSET,
+    bottom: safeAreaInsets?.bottom ?? 0,
   };
 
   return (
