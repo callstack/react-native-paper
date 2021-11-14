@@ -315,6 +315,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
               labelBackground={LabelBackground}
             />
             {render?.({
+              testID: 'text-input-outlined',
               ...rest,
               ref: innerRef,
               onChangeText,
