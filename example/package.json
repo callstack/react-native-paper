@@ -21,13 +21,13 @@
     "expo": "^43.0.0",
     "expo-font": "~10.0.3",
     "expo-keep-awake": "~10.0.0",
-    "expo-splash-screen": "~0.13.4",
+    "expo-splash-screen": "~0.13.5",
     "expo-status-bar": "~1.1.0",
-    "expo-updates": "~0.10.5",
+    "expo-updates": "~0.10.15",
     "file-loader": "^4.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-native": "0.64.2",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-43.tar.gz",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-reanimated": "~2.2.0",
     "react-native-safe-area-context": "3.3.2",
@@ -39,6 +39,6 @@
   "devDependencies": {
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-preset-expo": "8.5.1",
-    "expo-cli": "^4.12.10"
+    "expo-cli": "^4.13.0"
   }
 }
