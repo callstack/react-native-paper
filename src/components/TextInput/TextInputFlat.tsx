@@ -332,6 +332,8 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
           ]}
         >
           {!isAndroid && multiline && (
+            // Workaround for: https://github.com/callstack/react-native-paper/issues/2799
+            // Patch for a multiline TextInput with fixed height, which allow to avoid covering input label with its value.
             <View
               testID="patch-container"
               pointerEvents="none"
