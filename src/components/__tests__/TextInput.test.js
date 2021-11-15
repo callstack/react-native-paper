@@ -126,7 +126,7 @@ it('correctly applies error state Outline TextInput', () => {
   );
 });
 
-it('correctly applies focused state Outline TextInput22', () => {
+it('correctly applies focused state Outline TextInput', () => {
   const { getByTestId } = render(
     <TextInput
       mode="outlined"
