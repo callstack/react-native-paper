@@ -7,6 +7,12 @@ export const handlePress = ({
   value: string;
   onValueChange?: (value: string) => void;
 }) => {
+  if (onPress && onValueChange) {
+    console.warn(
+      `onPress in the scope of RadioButtonGroup will not be executed, use onValueChange instead`
+    );
+  }
+
   onValueChange ? onValueChange(value) : onPress?.();
 };
 

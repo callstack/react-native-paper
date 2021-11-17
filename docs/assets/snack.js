@@ -29,7 +29,7 @@ function appendSnackLink() {
 
       var heading = document.querySelector('h1');
       var href =
-        'https://snack.expo.io?name=' +
+        'https://snack.expo.dev?name=' +
         encodeURIComponent(
           heading ? heading.textContent : document.title + ' Example'
         ) +

@@ -2,6 +2,13 @@
 
 exports[`can render leading checkbox control 1`] = `
 <View
+  accessibilityLabel="Default with leading control"
+  accessibilityRole="checkbox"
+  accessibilityState={
+    Object {
+      "checked": false,
+    }
+  }
   accessible={true}
   focusable={false}
   onClick={[Function]}
@@ -19,6 +26,7 @@ exports[`can render leading checkbox control 1`] = `
   }
 >
   <View
+    importantForAccessibility="no-hide-descendants"
     pointerEvents="none"
     style={
       Array [
@@ -142,6 +150,13 @@ exports[`can render leading checkbox control 1`] = `
 
 exports[`can render the Android checkbox on different platforms 1`] = `
 <View
+  accessibilityLabel="iOS Checkbox"
+  accessibilityRole="checkbox"
+  accessibilityState={
+    Object {
+      "checked": false,
+    }
+  }
   accessible={true}
   focusable={false}
   onClick={[Function]}
@@ -159,6 +174,7 @@ exports[`can render the Android checkbox on different platforms 1`] = `
   }
 >
   <View
+    importantForAccessibility="no-hide-descendants"
     pointerEvents="none"
     style={
       Array [
@@ -316,6 +332,13 @@ exports[`can render the Android checkbox on different platforms 1`] = `
 
 exports[`can render the iOS checkbox on different platforms 1`] = `
 <View
+  accessibilityLabel="iOS Checkbox"
+  accessibilityRole="checkbox"
+  accessibilityState={
+    Object {
+      "checked": false,
+    }
+  }
   accessible={true}
   focusable={false}
   onClick={[Function]}
@@ -333,6 +356,7 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
   }
 >
   <View
+    importantForAccessibility="no-hide-descendants"
     pointerEvents="none"
     style={
       Array [
@@ -456,6 +480,13 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
 
 exports[`renders unchecked 1`] = `
 <View
+  accessibilityLabel="Unchecked Button"
+  accessibilityRole="checkbox"
+  accessibilityState={
+    Object {
+      "checked": false,
+    }
+  }
   accessible={true}
   focusable={false}
   onClick={[Function]}
@@ -473,6 +504,7 @@ exports[`renders unchecked 1`] = `
   }
 >
   <View
+    importantForAccessibility="no-hide-descendants"
     pointerEvents="none"
     style={
       Array [

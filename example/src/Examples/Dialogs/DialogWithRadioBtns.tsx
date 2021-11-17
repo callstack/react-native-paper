@@ -23,7 +23,7 @@ const DialogWithRadioBtns = ({ visible, close }: Props) => {
     <Portal>
       <Dialog onDismiss={close} visible={visible}>
         <Dialog.Title>Choose an option</Dialog.Title>
-        <Dialog.ScrollArea style={{ maxHeight: 170, paddingHorizontal: 0 }}>
+        <Dialog.ScrollArea style={styles.container}>
           <ScrollView>
             <View>
               <TouchableRipple onPress={() => setChecked('normal')}>
@@ -85,6 +85,10 @@ const DialogWithRadioBtns = ({ visible, close }: Props) => {
 export default DialogWithRadioBtns;
 
 const styles = StyleSheet.create({
+  container: {
+    maxHeight: 170,
+    paddingHorizontal: 0,
+  },
   row: {
     flexDirection: 'row',
     alignItems: 'center',

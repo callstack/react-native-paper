@@ -64,6 +64,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
       error,
       selectionColor,
       underlineColor,
+      activeUnderlineColor,
       dense,
       style,
       theme,
@@ -151,7 +152,9 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
       underlineColorCustom = 'transparent';
     } else {
       inputTextColor = colors.text;
-      activeColor = error ? colors.error : colors.primary;
+      activeColor = error
+        ? colors.error
+        : activeUnderlineColor || colors.primary;
       placeholderColor = colors.placeholder;
       errorColor = colors.error;
       underlineColorCustom = underlineColor || colors.disabled;
@@ -422,6 +425,7 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     height: 2,
+    zIndex: 1,
   },
   labelContainer: {
     paddingTop: 0,
@@ -430,7 +434,6 @@ const styles = StyleSheet.create({
   input: {
     flexGrow: 1,
     margin: 0,
-    zIndex: 1,
   },
   inputFlat: {
     paddingTop: 24,

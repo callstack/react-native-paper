@@ -1,21 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders DrawerItem with icon 1`] = `
-<View
-  style={
-    Array [
-      Object {
-        "marginHorizontal": 10,
-        "marginVertical": 4,
-      },
-      Object {
-        "backgroundColor": "transparent",
-        "borderRadius": 4,
-      },
-      undefined,
-    ]
-  }
->
+<View>
   <View
     accessibilityRole="button"
     accessibilityState={
@@ -37,9 +23,17 @@ exports[`renders DrawerItem with icon 1`] = `
         Object {
           "overflow": "hidden",
         },
-        Object {
-          "borderRadius": 4,
-        },
+        Array [
+          Object {
+            "marginHorizontal": 10,
+            "marginVertical": 4,
+          },
+          Object {
+            "backgroundColor": "transparent",
+            "borderRadius": 4,
+          },
+          undefined,
+        ],
       ]
     }
   >
@@ -133,21 +127,7 @@ exports[`renders DrawerItem with icon 1`] = `
 `;
 
 exports[`renders active DrawerItem 1`] = `
-<View
-  style={
-    Array [
-      Object {
-        "marginHorizontal": 10,
-        "marginVertical": 4,
-      },
-      Object {
-        "backgroundColor": "rgba(98, 0, 238, 0.12)",
-        "borderRadius": 4,
-      },
-      undefined,
-    ]
-  }
->
+<View>
   <View
     accessibilityRole="button"
     accessibilityState={
@@ -169,9 +149,17 @@ exports[`renders active DrawerItem 1`] = `
         Object {
           "overflow": "hidden",
         },
-        Object {
-          "borderRadius": 4,
-        },
+        Array [
+          Object {
+            "marginHorizontal": 10,
+            "marginVertical": 4,
+          },
+          Object {
+            "backgroundColor": "rgba(98, 0, 238, 0.12)",
+            "borderRadius": 4,
+          },
+          undefined,
+        ],
       ]
     }
   >
@@ -265,21 +253,7 @@ exports[`renders active DrawerItem 1`] = `
 `;
 
 exports[`renders basic DrawerItem 1`] = `
-<View
-  style={
-    Array [
-      Object {
-        "marginHorizontal": 10,
-        "marginVertical": 4,
-      },
-      Object {
-        "backgroundColor": "transparent",
-        "borderRadius": 4,
-      },
-      undefined,
-    ]
-  }
->
+<View>
   <View
     accessibilityRole="button"
     accessibilityState={
@@ -301,9 +275,17 @@ exports[`renders basic DrawerItem 1`] = `
         Object {
           "overflow": "hidden",
         },
-        Object {
-          "borderRadius": 4,
-        },
+        Array [
+          Object {
+            "marginHorizontal": 10,
+            "marginVertical": 4,
+          },
+          Object {
+            "backgroundColor": "transparent",
+            "borderRadius": 4,
+          },
+          undefined,
+        ],
       ]
     }
   >

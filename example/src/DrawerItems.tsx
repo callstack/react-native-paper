@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, I18nManager } from 'react-native';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import {
   Badge,
@@ -47,6 +47,7 @@ const DrawerItems = ({ toggleTheme, toggleRTL, isRTL, isDarkTheme }: Props) => {
 
   const _handleToggleRTL = () => {
     toggleRTL();
+    I18nManager.forceRTL(!isRTL);
     Updates.reloadAsync();
   };
 

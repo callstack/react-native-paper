@@ -30,6 +30,18 @@ it('renders chip with close button', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('renders chip with custom close button', () => {
+  const tree = renderer
+    .create(
+      <Chip icon="information" onClose={() => {}} closeIcon="arrow-down">
+        Example Chip
+      </Chip>
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
 it('renders outlined disabled chip', () => {
   const tree = renderer
     .create(

@@ -48,6 +48,16 @@ type Props = $RemoveChildren<typeof Surface> & {
    * @optional
    */
   theme: ReactNativePaper.Theme;
+  /**
+   * @optional
+   * Optional callback that will be called after the opening animation finished running normally
+   */
+  onShowAnimationFinished?: Animated.EndCallback;
+  /**
+   * @optional
+   * Optional callback that will be called after the closing animation finished running normally
+   */
+  onHideAnimationFinished?: Animated.EndCallback;
 };
 
 type NativeEvent = {
@@ -117,6 +127,8 @@ const Banner = ({
   contentStyle,
   style,
   theme,
+  onShowAnimationFinished = () => {},
+  onHideAnimationFinished = () => {},
   ...rest
 }: Props) => {
   const { current: position } = React.useRef<Animated.Value>(
@@ -139,14 +151,14 @@ const Banner = ({
         duration: 250 * scale,
         toValue: 1,
         useNativeDriver: false,
-      }).start();
+      }).start(onShowAnimationFinished);
     } else {
       // hide
       Animated.timing(position, {
         duration: 200 * scale,
         toValue: 0,
         useNativeDriver: false,
-      }).start();
+      }).start(onHideAnimationFinished);
     }
   }, [visible, position, scale]);
 
@@ -172,6 +184,7 @@ const Banner = ({
     <Surface
       {...rest}
       style={[styles.container, shadow(ELEVATION) as ViewStyle, style]}
+      theme={theme}
     >
       <View style={[styles.wrapper, contentStyle]}>
         <Animated.View style={{ height }} />
@@ -197,7 +210,13 @@ const Banner = ({
                 <Icon source={icon} size={40} />
               </View>
             ) : null}
-            <Text style={styles.message}>{children}</Text>
+            <Text
+              style={[styles.message, { color: theme.colors.text }]}
+              accessibilityLiveRegion={visible ? 'polite' : 'none'}
+              accessibilityRole="alert"
+            >
+              {children}
+            </Text>
           </View>
           <View style={styles.actions}>
             {actions.map(({ label, ...others }, i) => (
@@ -206,6 +225,7 @@ const Banner = ({
                 compact
                 mode="text"
                 style={styles.button}
+                color={theme.colors.primary}
                 {...others}
               >
                 {label}

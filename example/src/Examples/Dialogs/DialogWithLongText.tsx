@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Dimensions, ScrollView } from 'react-native';
+import { Dimensions, ScrollView, StyleSheet } from 'react-native';
 import { Paragraph, Button, Portal, Dialog } from 'react-native-paper';
 
 const DialogWithLongText = ({
@@ -16,8 +16,8 @@ const DialogWithLongText = ({
       style={{ maxHeight: 0.6 * Dimensions.get('window').height }}
     >
       <Dialog.Title>Alert</Dialog.Title>
-      <Dialog.ScrollArea style={{ paddingHorizontal: 0 }}>
-        <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>
+      <Dialog.ScrollArea style={styles.smallPadding}>
+        <ScrollView contentContainerStyle={styles.biggerPadding}>
           <Paragraph>
             Material is the metaphor
             {'\n'}
@@ -65,5 +65,14 @@ const DialogWithLongText = ({
     </Dialog>
   </Portal>
 );
+
+const styles = StyleSheet.create({
+  smallPadding: {
+    paddingHorizontal: 0,
+  },
+  biggerPadding: {
+    paddingHorizontal: 24,
+  },
+});
 
 export default DialogWithLongText;

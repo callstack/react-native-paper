@@ -140,7 +140,6 @@ const ChipExample = () => {
             >
               With onLongPress
             </Chip>
-
             <Chip
               selected
               onPress={() => {}}
@@ -199,13 +198,22 @@ const ChipExample = () => {
             <Chip
               onPress={() => {}}
               onClose={() => {}}
-              style={{ flex: 1 }}
-              textStyle={{ flex: -1 }}
+              style={styles.bigTextFlex}
+              textStyle={styles.bigTextStyle}
               ellipsizeMode="middle"
             >
               With a very big text: React Native Paper is a high-quality,
               standard-compliant Material Design library that has you covered in
               all major use-cases.
+            </Chip>
+            <Chip
+              onPress={() => {}}
+              onClose={() => {}}
+              closeIcon="arrow-down"
+              style={styles.chip}
+              closeIconAccessibilityLabel="Custom Close icon accessibility label"
+            >
+              With custom close icon
             </Chip>
           </View>
         </List.Section>
@@ -238,6 +246,12 @@ const styles = StyleSheet.create({
     marginLeft: 2,
     minHeight: 19,
     lineHeight: 19,
+  },
+  bigTextFlex: {
+    flex: 1,
+  },
+  bigTextStyle: {
+    flex: -1,
   },
 });
 

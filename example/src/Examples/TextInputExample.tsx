@@ -4,6 +4,7 @@ import { TextInput, HelperText, useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { inputReducer, State } from '../../utils';
 import ScreenWrapper from '../ScreenWrapper';
+import { amber900, pink400, transparent } from '../../../src/styles/colors';
 
 const MAX_LENGTH = 20;
 
@@ -23,8 +24,10 @@ const initialState: State = {
   outlinedDense: '',
   flatMultiline: '',
   flatTextArea: '',
+  flatUnderlineColors: '',
   outlinedMultiline: '',
   outlinedTextArea: '',
+  outlinedColors: '',
   maxLengthName: '',
   flatTextSecureEntry: true,
   outlineTextSecureEntry: true,
@@ -73,8 +76,10 @@ const TextInputExample = () => {
     outlinedDense,
     flatMultiline,
     flatTextArea,
+    flatUnderlineColors,
     outlinedMultiline,
     outlinedTextArea,
+    outlinedColors,
     maxLengthName,
     flatTextSecureEntry,
     outlineTextSecureEntry,
@@ -252,6 +257,17 @@ const TextInputExample = () => {
           label="Disabled flat input"
         />
         <TextInput
+          style={styles.inputContainerStyle}
+          label="Flat input with custom underline colors"
+          placeholder="Type something"
+          value={flatUnderlineColors}
+          onChangeText={(flatUnderlineColors) =>
+            inputActionHandler('flatUnderlineColors', flatUnderlineColors)
+          }
+          underlineColor={pink400}
+          activeUnderlineColor={amber900}
+        />
+        <TextInput
           mode="outlined"
           style={styles.inputContainerStyle}
           label="Outlined input"
@@ -363,6 +379,18 @@ const TextInputExample = () => {
           style={styles.inputContainerStyle}
           label="Disabled outlined input"
         />
+        <TextInput
+          mode="outlined"
+          style={styles.inputContainerStyle}
+          label="Outlined input with custom outline colors"
+          placeholder="Type something"
+          value={outlinedColors}
+          onChangeText={(outlinedColors) =>
+            inputActionHandler('outlinedColors', outlinedColors)
+          }
+          outlineColor={pink400}
+          activeOutlineColor={amber900}
+        />
         <View style={styles.inputContainerStyle}>
           <TextInput
             label="Input with helper text"
@@ -402,7 +430,7 @@ const TextInputExample = () => {
         <View style={styles.inputContainerStyle}>
           <TextInput
             label="Input with no padding"
-            style={{ backgroundColor: 'transparent', paddingHorizontal: 0 }}
+            style={styles.noPaddingInput}
             placeholder="Enter username, only letters"
             value={nameNoPadding}
             error={!_isUsernameValid(nameNoPadding)}
@@ -421,18 +449,14 @@ const TextInputExample = () => {
         <View style={styles.inputContainerStyle}>
           <TextInput
             label="Input with text align center"
-            style={{
-              textAlign: 'center',
-            }}
+            style={styles.centeredText}
           />
         </View>
         <View style={styles.inputContainerStyle}>
           <TextInput
             mode="outlined"
             label="Outlined input with text align center"
-            style={{
-              textAlign: 'center',
-            }}
+            style={styles.centeredText}
           />
         </View>
         <View style={styles.inputContainerStyle}>
@@ -476,6 +500,13 @@ const styles = StyleSheet.create({
   },
   textArea: {
     height: 80,
+  },
+  noPaddingInput: {
+    backgroundColor: transparent,
+    paddingHorizontal: 0,
+  },
+  centeredText: {
+    textAlign: 'center',
   },
 });
 

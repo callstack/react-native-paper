@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, Image, View } from 'react-native';
-import { List, Text, Chip, Divider } from 'react-native-paper';
+import { Caption, List, Text, Chip, Divider } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 const ListSectionExample = () => {
   return (
@@ -73,7 +73,7 @@ const ListSectionExample = () => {
       </List.Section>
       <Divider />
       <List.Section>
-        <List.Subheader>Custom description</List.Subheader>
+        <List.Subheader>Custom title and description</List.Subheader>
         <List.Item
           left={() => (
             <Image
@@ -82,7 +82,17 @@ const ListSectionExample = () => {
             />
           )}
           right={(props) => <List.Icon {...props} icon="star-outline" />}
-          title="List Item 1"
+          title={({ ellipsizeMode, color: titleColor, fontSize }) => (
+            <View style={[styles.container, styles.row, styles.customTitle]}>
+              <Text
+                ellipsizeMode={ellipsizeMode}
+                style={{ color: titleColor, fontSize }}
+              >
+                List Item
+              </Text>
+              <Caption>Yesterday</Caption>
+            </View>
+          )}
           description={({
             ellipsizeMode,
             color: descriptionColor,
@@ -98,7 +108,9 @@ const ListSectionExample = () => {
                 Material Design library that has you covered in all major
                 use-cases.
               </Text>
-              <View style={[styles.container, styles.row, { paddingTop: 8 }]}>
+              <View
+                style={[styles.container, styles.row, styles.additionalPadding]}
+              >
                 <Chip icon="file-pdf" onPress={() => {}}>
                   DOCS.pdf
                 </Chip>
@@ -127,6 +139,13 @@ const styles = StyleSheet.create({
   },
   column: {
     flexDirection: 'column',
+  },
+  customTitle: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  additionalPadding: {
+    paddingTop: 8,
   },
 });
 

@@ -17,6 +17,8 @@ import * as Drawer from './components/Drawer/Drawer';
 
 export { Avatar, List, Drawer };
 
+export * from './components/FAB/AnimatedFAB';
+
 export { default as Badge } from './components/Badge';
 export { default as ActivityIndicator } from './components/ActivityIndicator';
 export { default as Banner } from './components/Banner';
@@ -29,6 +31,7 @@ export { default as DataTable } from './components/DataTable/DataTable';
 export { default as Dialog } from './components/Dialog/Dialog';
 export { default as Divider } from './components/Divider';
 export { default as FAB } from './components/FAB';
+export { default as AnimatedFAB } from './components/FAB/AnimatedFAB';
 export { default as HelperText } from './components/HelperText';
 export { default as IconButton } from './components/IconButton';
 export { default as Menu } from './components/Menu/Menu';

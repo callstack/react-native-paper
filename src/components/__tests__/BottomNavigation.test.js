@@ -1,6 +1,14 @@
 import * as React from 'react';
+import { StyleSheet } from 'react-native';
 import renderer from 'react-test-renderer';
 import BottomNavigation from '../BottomNavigation.tsx';
+import { red300 } from '../../styles/colors';
+
+const styles = StyleSheet.create({
+  bgColor: {
+    color: red300,
+  },
+});
 
 // Make sure any animation finishes before checking the snapshot results
 jest.mock('react-native', () => {
@@ -109,7 +117,7 @@ it('renders custom icon and label with custom colors in shifting bottom navigati
         renderScene={({ route }) => route.title}
         activeColor="#FBF7DB"
         inactiveColor="#853D4B"
-        barStyle={{ backgroundColor: '#E96A82' }}
+        barStyle={styles.bgColor}
       />
     )
     .toJSON();
@@ -127,7 +135,7 @@ it('renders custom icon and label with custom colors in non-shifting bottom navi
         renderScene={({ route }) => route.title}
         activeColor="#FBF7DB"
         inactiveColor="#853D4B"
-        barStyle={{ backgroundColor: '#E96A82' }}
+        barStyle={styles.bgColor}
       />
     )
     .toJSON();
