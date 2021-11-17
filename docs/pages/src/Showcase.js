@@ -120,6 +120,14 @@ const data: Data[] = [
     android:
       'https://play.google.com/store/apps/details?id=com.gabrieldierks.groovy',
   },
+  {
+    color: '#673AB7',
+    name: 'Vibemap - Find Your Vibe',
+    image: 'showcase/vibemap.png',
+    ios: 'https://apps.apple.com/us/app/vibemap/id1496385897#?platform=iphone',
+    android:
+      'https://play.google.com/store/apps/details?id=com.vibemap.hotspots',
+  },
 ];
 
 export default class Showcase extends React.Component<{}> {
