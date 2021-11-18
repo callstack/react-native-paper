@@ -23,8 +23,8 @@ type Props = {
   title: React.ReactNode;
 
   /**
-  * Adding LInear Gradient to Title for the list accordion.
-  */
+   * Adding LInear Gradient to Title for the list accordion.
+   */
   titleGradientComponent: React.ReactNode;
   /**
    * Description text for the list accordion.
@@ -217,12 +217,21 @@ const ListAccordion = ({
           borderless
         >
           {titleGradientComponent ? (
-            <LinearGradient colors={gradientColorPrimary ? gradientColorPrimary : [linearPrimaryColor, linearSecondaryColor]} style={[styles.gradientStyle, gradientStyle]}>
+            <LinearGradient
+              colors={
+                gradientColorPrimary
+                  ? gradientColorPrimary
+                  : [linearPrimaryColor, linearSecondaryColor]
+              }
+              style={[styles.gradientStyle, gradientStyle]}
+            >
               <View style={styles.row} pointerEvents="none">
                 {left
                   ? left({
-                    color: isExpanded ? theme.colors.primary : descriptionColor,
-                  })
+                      color: isExpanded
+                        ? theme.colors.primary
+                        : descriptionColor,
+                    })
                   : null}
                 <View style={[styles.item, styles.content]}>
                   <Text
@@ -255,7 +264,10 @@ const ListAccordion = ({
                   )}
                 </View>
                 <View
-                  style={[styles.item, description ? styles.multiline : undefined]}
+                  style={[
+                    styles.item,
+                    description ? styles.multiline : undefined,
+                  ]}
                 >
                   {right ? (
                     right({
@@ -272,77 +284,82 @@ const ListAccordion = ({
                 </View>
               </View>
             </LinearGradient>
-          ) : (<View style={styles.row} pointerEvents="none">
-            {left
-              ? left({
-                color: isExpanded ? theme.colors.primary : descriptionColor,
-              })
-              : null}
-            <View style={[styles.item, styles.content]}>
-              <Text
-                selectable={false}
-                numberOfLines={titleNumberOfLines}
-                style={[
-                  styles.title,
-                  {
-                    color: isExpanded ? theme.colors.primary : titleColor,
-                  },
-                  titleStyle,
-                ]}
-              >
-                {title}
-              </Text>
-              {description && (
+          ) : (
+            <View style={styles.row} pointerEvents="none">
+              {left
+                ? left({
+                    color: isExpanded ? theme.colors.primary : descriptionColor,
+                  })
+                : null}
+              <View style={[styles.item, styles.content]}>
                 <Text
                   selectable={false}
-                  numberOfLines={descriptionNumberOfLines}
+                  numberOfLines={titleNumberOfLines}
                   style={[
-                    styles.description,
+                    styles.title,
                     {
-                      color: descriptionColor,
+                      color: isExpanded ? theme.colors.primary : titleColor,
                     },
-                    descriptionStyle,
+                    titleStyle,
                   ]}
                 >
-                  {description}
+                  {title}
                 </Text>
-              )}
+                {description && (
+                  <Text
+                    selectable={false}
+                    numberOfLines={descriptionNumberOfLines}
+                    style={[
+                      styles.description,
+                      {
+                        color: descriptionColor,
+                      },
+                      descriptionStyle,
+                    ]}
+                  >
+                    {description}
+                  </Text>
+                )}
+              </View>
+              <View
+                style={[
+                  styles.item,
+                  description ? styles.multiline : undefined,
+                ]}
+              >
+                {right ? (
+                  right({
+                    isExpanded: isExpanded,
+                  })
+                ) : (
+                  <MaterialCommunityIcon
+                    name={isExpanded ? 'chevron-up' : 'chevron-down'}
+                    color={titleColor}
+                    size={24}
+                    direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+                  />
+                )}
+              </View>
             </View>
-            <View
-              style={[styles.item, description ? styles.multiline : undefined]}
-            >
-              {right ? (
-                right({
-                  isExpanded: isExpanded,
-                })
-              ) : (
-                <MaterialCommunityIcon
-                  name={isExpanded ? 'chevron-up' : 'chevron-down'}
-                  color={titleColor}
-                  size={24}
-                  direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
-                />
-              )}
-            </View>
-          </View>)}
+          )}
         </TouchableRipple>
       </View>
 
       {isExpanded
         ? React.Children.map(children, (child) => {
-          if (
-            left &&
-            React.isValidElement(child) &&
-            !child.props.left &&
-            !child.props.right
-          ) {
-            return React.cloneElement(child, {
-              style: [styles.child, child.props.style],
-            });
-          }
+            if (
+              left &&
+              React.isValidElement(child) &&
+              !child.props.left &&
+              !child.props.right
+            ) {
+              return React.cloneElement(child, {
+                style: [styles.child, child.props.style],
+              });
+            }
 
-          return child;
-        })
+            return child;
+          })
         : null}
     </View>
   );
@@ -385,7 +402,7 @@ const styles = StyleSheet.create({
   gradientStyle: {
     borderWidth: 1,
     borderRadius: 100,
-    borderColor: '#ffffff',
+    // borderColor: '#ffffff',
   },
 });
 
