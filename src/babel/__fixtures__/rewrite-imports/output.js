@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Text } from 'react-native';
 import PaperProvider from "react-native-paper/lib/module/core/Provider";
-import BottomNavigation from "react-native-paper/lib/module/components/BottomNavigation";
+import BottomNavigation from "react-native-paper/lib/module/components/BottomNavigation/BottomNavigation";
 import Button from "react-native-paper/lib/module/components/Button";
 import FAB from "react-native-paper/lib/module/components/FAB";
 import Appbar from "react-native-paper/lib/module/components/Appbar";

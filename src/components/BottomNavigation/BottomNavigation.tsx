@@ -11,18 +11,19 @@ import {
 } from 'react-native';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 import color from 'color';
-import overlay from '../styles/overlay';
-import Icon, { IconSource } from './Icon';
-import Surface from './Surface';
-import Badge from './Badge';
-import TouchableRipple from './TouchableRipple/TouchableRipple';
-import Text from './Typography/Text';
-import { black, white } from '../styles/colors';
-import { withTheme } from '../core/theming';
-import useAnimatedValue from '../utils/useAnimatedValue';
-import useAnimatedValueArray from '../utils/useAnimatedValueArray';
-import useLayout from '../utils/useLayout';
-import useIsKeyboardShown from '../utils/useIsKeyboardShown';
+import overlay from '../../styles/overlay';
+import Icon, { IconSource } from '../Icon';
+import Surface from '../Surface';
+import Badge from '../Badge';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import Text from '../Typography/Text';
+import { black, white } from '../../styles/colors';
+import { withTheme } from '../../core/theming';
+import useAnimatedValue from '../../utils/useAnimatedValue';
+import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
+import useLayout from '../../utils/useLayout';
+import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
+import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
 
 type Route = {
   key: string;
@@ -616,13 +617,15 @@ const BottomNavigation = ({
             : FAR_FAR_AWAY;
 
           return (
-            <Animated.View
+            <BottomNavigationRouteScreen
               key={route.key}
               pointerEvents={focused ? 'auto' : 'none'}
               accessibilityElementsHidden={!focused}
               importantForAccessibility={
                 focused ? 'auto' : 'no-hide-descendants'
               }
+              index={index}
+              visibility={opacity}
               style={[StyleSheet.absoluteFill, { opacity }]}
               collapsable={false}
               removeClippedSubviews={
@@ -634,7 +637,7 @@ const BottomNavigation = ({
               <Animated.View style={[styles.content, { top }]}>
                 {renderScene({ route, jumpTo })}
               </Animated.View>
-            </Animated.View>
+            </BottomNavigationRouteScreen>
           );
         })}
       </View>
