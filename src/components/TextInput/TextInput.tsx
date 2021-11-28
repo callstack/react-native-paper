@@ -490,7 +490,7 @@ function areLabelsEqual(
   if (!label1 || !label2) {
     return false;
   }
-  
+
   // At this point, both of them has to be truthy.
   // So, return false if they are not of the same type.
   if (typeof label1 !== typeof label2) {
@@ -499,15 +499,17 @@ function areLabelsEqual(
 
   // At this point, both of them has to be of the same datatype.
   if (
-    typeof label1 === 'string' || label1 instanceof String ||
-    // (NB: Adding these last two OR checks is only for Typescript's sake.)
-    typeof label2 === 'string' || label2 instanceof String
+    typeof label1 === 'string' ||
+    label1 instanceof String ||
+    // These last two OR checks are only here for Typescript's sake.
+    typeof label2 === 'string' ||
+    label2 instanceof String
   ) {
-    // They're strings, so they won't be equal; otherwise 
+    // They're strings, so they won't be equal; otherwise
     //  we would have returned 'true' earlier.
     return false;
   }
-  
+
   // At this point, both of them has to be of the datatype: `ReactElement`.
   return label1.type == label2.type;
 }
