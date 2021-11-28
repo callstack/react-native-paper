@@ -109,7 +109,7 @@ it('correctly applies height to multiline Outline TextInput', () => {
   expect(toJSON()).toMatchSnapshot();
 });
 
-it('correctly applies a component as text label', () => {
+it('correctly applies a component as the text label', () => {
   const { toJSON } = render(
     <TextInput
       label={<Text style={style.inputStyle}>Flat input</Text>}

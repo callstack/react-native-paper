@@ -476,7 +476,10 @@ class TextInput extends React.Component<TextInputProps, State> {
   }
 }
 
-function areLabelsEqual(label1?: TextInputLabelProp, label2?: TextInputLabelProp): boolean {
+function areLabelsEqual(
+  label1?: TextInputLabelProp,
+  label2?: TextInputLabelProp
+): boolean {
   if (label1 === label2) {
     // will also take care of equality for `string` type, or if both are undefined.
     return true;
