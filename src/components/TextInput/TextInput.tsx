@@ -500,7 +500,9 @@ function areLabelsEqual(label1?: TextInputLabelProp, label2?: TextInputLabelProp
     // Adding the two OR checks below for Typescript's sake.
     || typeof label2 === 'string' || label2 instanceof String
   ) {
-    return label1 == label2;
+    // They're strings, so they won't be equal; otherwise 
+    //  we would have returned 'true' earlier.
+    return false;
   }
   
   // At this point, both of them has to be of the datatype: `ReactElement`.
