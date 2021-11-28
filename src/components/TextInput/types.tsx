@@ -8,6 +8,8 @@ import type {
 import type { TextInputProps } from './TextInput';
 import type { $Omit } from './../../types';
 
+export type TextInputLabelProp = string | React.ReactElement;
+
 export type RenderProps = {
   ref: (a?: NativeTextInput | null) => void;
   onChangeText?: (a: string) => void;
@@ -62,7 +64,7 @@ export type LabelProps = {
   labelTranslationXOffset?: number;
   placeholderColor: string | null;
   backgroundColor?: ColorValue;
-  label?: string | null;
+  label?: TextInputLabelProp | null;
   hasActiveOutline?: boolean | null;
   activeColor: string;
   errorColor?: string;

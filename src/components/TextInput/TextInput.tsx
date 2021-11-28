@@ -11,7 +11,7 @@ import TextInputFlat from './TextInputFlat';
 import TextInputIcon from './Adornment/TextInputIcon';
 import TextInputAffix from './Adornment/TextInputAffix';
 import { withTheme } from '../../core/theming';
-import type { RenderProps, State } from './types';
+import type { RenderProps, State, TextInputLabelProp } from './types';
 import type { $Omit } from '../../types';
 
 const BLUR_ANIMATION_DURATION = 180;
@@ -36,9 +36,9 @@ export type TextInputProps = React.ComponentPropsWithRef<
    */
   disabled?: boolean;
   /**
-   * The text to use for the floating label.
+   * The text or component to use for the floating label.
    */
-  label?: string;
+  label?: TextInputLabelProp;
   /**
    * Placeholder for the input.
    */
@@ -233,9 +233,8 @@ class TextInput extends React.Component<TextInputProps, State> {
     const isValueChanged = prevState.value !== this.state.value;
     const isLabelLayoutChanged =
       prevState.labelLayout !== this.state.labelLayout;
-    const isLabelChanged = prevProps.label !== this.props.label;
+    const isLabelChanged = !areLabelsEqual(prevProps.label, this.props.label);
     const isErrorChanged = prevProps.error !== this.props.error;
-
     if (
       isFocusChanged ||
       isValueChanged ||
@@ -475,6 +474,37 @@ class TextInput extends React.Component<TextInputProps, State> {
       />
     );
   }
+}
+
+function areLabelsEqual(label1?: TextInputLabelProp, label2?: TextInputLabelProp): boolean {
+  if (label1 === label2) {
+    // will also take care of equality for `string` type, or if both are undefined.
+    return true;
+  }
+
+  // At this point, both of them cannot be undefined.
+  // So, return false if any of them is falsy.
+  if (!label1 || !label2) {
+    return false;
+  }
+  
+  // At this point, both of them has to be truthy.
+  // So, return false if they are not of the same type.
+  if (typeof label1 !== typeof label2) {
+    return false;
+  }
+
+  // At this point, both of them has to be of the same datatype.
+  if (
+    typeof label1 === 'string' || label1 instanceof String
+    // Adding the two OR checks below for Typescript's sake.
+    || typeof label2 === 'string' || label2 instanceof String
+  ) {
+    return label1 == label2;
+  }
+  
+  // At this point, both of them has to be of the datatype: `ReactElement`.
+  return label1.type == label2.type;
 }
 
 export default withTheme(TextInput);

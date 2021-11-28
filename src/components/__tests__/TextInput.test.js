@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { render } from 'react-native-testing-library';
 import TextInput from '../TextInput/TextInput';
 import { red500 } from '../../styles/colors';
@@ -103,6 +103,18 @@ it('correctly applies height to multiline Outline TextInput', () => {
       value={'Some test value'}
       style={style.height}
       multiline
+    />
+  );
+
+  expect(toJSON()).toMatchSnapshot();
+});
+
+it('correctly applies a component as text label', () => {
+  const { toJSON } = render(
+    <TextInput
+      label={<Text style={{ color: 'red'}}>Flat input</Text>}
+      placeholder="Type something"
+      value={'Some test value'}
     />
   );
 
