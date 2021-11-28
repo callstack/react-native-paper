@@ -496,9 +496,9 @@ function areLabelsEqual(label1?: TextInputLabelProp, label2?: TextInputLabelProp
 
   // At this point, both of them has to be of the same datatype.
   if (
-    typeof label1 === 'string' || label1 instanceof String
-    // Adding the two OR checks below for Typescript's sake.
-    || typeof label2 === 'string' || label2 instanceof String
+    typeof label1 === 'string' || label1 instanceof String ||
+    // (NB: Adding these last two OR checks is only for Typescript's sake.)
+    typeof label2 === 'string' || label2 instanceof String
   ) {
     // They're strings, so they won't be equal; otherwise 
     //  we would have returned 'true' earlier.

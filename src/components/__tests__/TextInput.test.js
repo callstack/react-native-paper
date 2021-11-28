@@ -112,7 +112,7 @@ it('correctly applies height to multiline Outline TextInput', () => {
 it('correctly applies a component as text label', () => {
   const { toJSON } = render(
     <TextInput
-      label={<Text style={{ color: 'red'}}>Flat input</Text>}
+      label={<Text style={style.inputStyle}>Flat input</Text>}
       placeholder="Type something"
       value={'Some test value'}
     />
