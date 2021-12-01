@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { render } from 'react-native-testing-library';
-import TextInput from '../TextInput/TextInput';
+import TextInput, { areLabelsEqual } from '../TextInput/TextInput';
 import { red500 } from '../../styles/colors';
 
 const style = StyleSheet.create({
@@ -119,4 +119,42 @@ it('correctly applies a component as the text label', () => {
   );
 
   expect(toJSON()).toMatchSnapshot();
+});
+
+it('correctly compares labels when both are string', () => {
+  expect(areLabelsEqual('Comments', 'Comments')).toBe(true);
+  expect(areLabelsEqual('Comments', 'No Comment')).toBe(false);
+});
+
+it('correctly compares labels when one is string and one is a component', () => {
+  expect(areLabelsEqual(<Text>Comments</Text>, 'Comments')).toBe(false);
+});
+
+it('correctly compares labels when both labels are falsy', () => {
+  // We're treating all falsy values as equivalent
+  expect(areLabelsEqual()).toBe(true);
+  expect(areLabelsEqual(undefined, undefined)).toBe(true);
+  expect(areLabelsEqual(null, null)).toBe(true);
+  expect(areLabelsEqual(undefined, '')).toBe(true);
+  expect(areLabelsEqual(null, '')).toBe(true);
+  expect(areLabelsEqual(undefined, null)).toBe(true);
+});
+
+it('correctly compares labels when both labels are components', () => {
+  // Same component; same props, same children
+  const component1 = <Text>Comments</Text>;
+  let component2 = <Text>Comments</Text>;
+  expect(areLabelsEqual(component1, component2)).toBe(true);
+
+  // Same component; same props, different children
+  component2 = <Text>Another Comment</Text>;
+  expect(areLabelsEqual(component1, component2)).toBe(false);
+
+  // Different component; same props, same children
+  component2 = <View>Comments</View>;
+  expect(areLabelsEqual(component1, component2)).toBe(false);
+  
+  // Same component; different props, same children
+  component2 = <Text multiline style={{ color: 'red' }}>Comments</Text>;
+  expect(areLabelsEqual(component1, component2)).toBe(false);
 });

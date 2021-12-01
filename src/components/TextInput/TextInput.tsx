@@ -13,6 +13,7 @@ import TextInputAffix from './Adornment/TextInputAffix';
 import { withTheme } from '../../core/theming';
 import type { RenderProps, State, TextInputLabelProp } from './types';
 import type { $Omit } from '../../types';
+import { type } from 'os';
 
 const BLUR_ANIMATION_DURATION = 180;
 const FOCUS_ANIMATION_DURATION = 150;
@@ -476,7 +477,7 @@ class TextInput extends React.Component<TextInputProps, State> {
   }
 }
 
-function areLabelsEqual(
+export function areLabelsEqual(
   label1?: TextInputLabelProp,
   label2?: TextInputLabelProp
 ): boolean {
@@ -485,9 +486,16 @@ function areLabelsEqual(
     return true;
   }
 
-  // At this point, both of them cannot be undefined.
+  const label1Falsy = !label1;
+  const label2Falsy = !label2;
+  // Return true if both of them are falsy.
+  if (label1Falsy && label2Falsy) {
+    return true;
+  }
+
+  // At this point, both of them cannot be false.
   // So, return false if any of them is falsy.
-  if (!label1 || !label2) {
+  if (label1Falsy || label2Falsy) {
     return false;
   }
 
@@ -510,8 +518,18 @@ function areLabelsEqual(
     return false;
   }
 
-  // At this point, both of them has to be of the datatype: `ReactElement`.
-  return label1.type == label2.type;
+  // At this point, both of them has to be of the datatype: `React.ComponentType`.
+  if (label1.type !== label2.type) {
+    return false;
+  }
+
+  if (JSON.stringify(label1.props) !== JSON.stringify(label2.props)) {
+    return false;
+  }
+  
+  console.log('Recursing: label1: ', typeof label1.props, '->', label1.props);
+  console.log('Recursing: label2: ', typeof label2.props, '->', label2.props);
+  return true; // areLabelsEqual(label1.props, label2.props);
 }
 
 export default withTheme(TextInput);
