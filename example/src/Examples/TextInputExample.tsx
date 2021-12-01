@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, KeyboardAvoidingView, Platform } from 'react-native';
+import { StyleSheet, View, KeyboardAvoidingView, Platform, Text } from 'react-native';
 import { TextInput, HelperText, useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { inputReducer, State } from '../../utils';
@@ -18,6 +18,7 @@ const initialState: State = {
   outlinedLargeText: '',
   outlinedTextPassword: '',
   nameNoPadding: '',
+  nameRequired: '',
   flatDenseText: '',
   flatDense: '',
   outlinedDenseText: '',
@@ -70,6 +71,7 @@ const TextInputExample = () => {
     outlinedLargeText,
     outlinedTextPassword,
     nameNoPadding,
+    nameRequired,
     flatDenseText,
     flatDense,
     outlinedDenseText,
@@ -444,6 +446,25 @@ const TextInputExample = () => {
             visible={!_isUsernameValid(nameNoPadding)}
           >
             Error: Only letters are allowed
+          </HelperText>
+        </View>
+        <View style={styles.inputContainerStyle}>
+          <TextInput
+            label={<Text><Text style={{ color: 'red'}}>*</Text> Label as component</Text>}
+            style={styles.noPaddingInput}
+            placeholder="Enter username, required"
+            value={nameRequired}
+            error={!nameRequired}
+            onChangeText={(nameRequired) =>
+              inputActionHandler('nameRequired', nameRequired)
+            }
+          />
+          <HelperText
+            type="error"
+            padding="none"
+            visible={!nameRequired}
+          >
+            Error: Username is required
           </HelperText>
         </View>
         <View style={styles.inputContainerStyle}>
