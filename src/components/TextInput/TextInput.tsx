@@ -518,18 +518,57 @@ export function areLabelsEqual(
     return false;
   }
 
-  // At this point, both of them has to be of the datatype: `React.ComponentType`.
+  // At this point, both of them has to be of the datatype: `React.ReactElement`.
   if (label1.type !== label2.type) {
     return false;
   }
 
-  if (JSON.stringify(label1.props) !== JSON.stringify(label2.props)) {
+  // Preliminary equality check: do they stringify to the same string?
+  const label1Props = label1.props || {};
+  const label2Props = label2.props || {};
+  if (JSON.stringify(label1Props) !== JSON.stringify(label2Props)) {
     return false;
   }
   
-  console.log('Recursing: label1: ', typeof label1.props, '->', label1.props);
-  console.log('Recursing: label2: ', typeof label2.props, '->', label2.props);
-  return true; // areLabelsEqual(label1.props, label2.props);
+  // We now know they stringify to the same string.
+  // Return true if both of them DO NOT have children
+  if (!label1Props.children && !label2Props.children) {
+    return true; // since there's nothing else to check
+  }
+
+  // Return false if only one of them has children
+  if (!label1Props.children || !label2Props.children) {
+    return false;
+  }
+
+  // Both have children...
+  // Handle for when both the children are arrays
+  const label1IsArray = Array.isArray(label1Props.children);
+  const label2IsArray = Array.isArray(label2Props.children);
+  if (label1IsArray && label2IsArray) {
+    const children1 = label1Props.children as any[];
+    const children2 = label2Props.children as any[];
+    if (children1.length !== children2.length) {
+      return false; // no point proceeding
+    }
+
+    // all the children must also be equal
+    for (let i = 0; i < children1.length; i++) {
+      if (!areLabelsEqual(children1[i], children2[i])) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  // Only one of them can be an array at this point. If any is array, return false
+  if (label1IsArray || label2IsArray) {
+    return false;
+  }
+
+  // both children are not arrays, so recur.
+  return areLabelsEqual(label1Props.children, label2Props.children);
 }
 
 export default withTheme(TextInput);
