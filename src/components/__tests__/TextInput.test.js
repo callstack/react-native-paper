@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { render } from 'react-native-testing-library';
 import TextInput, { areLabelsEqual } from '../TextInput/TextInput';
-import { red500 } from '../../styles/colors';
+import { blue500, red500 } from '../../styles/colors';
 
 const style = StyleSheet.create({
   inputStyle: {
@@ -157,7 +157,7 @@ it('correctly compares labels when both labels are components', () => {
 
   // Same component; different props, same children
   component2 = (
-    <Text multiline style={{ color: 'red' }}>
+    <Text multiline style={{ color: red500 }}>
       Comments
     </Text>
   );
@@ -168,13 +168,13 @@ it('correctly compares labels for nested components', () => {
   // Same component; same props, same children
   const component1 = (
     <Text>
-      <Text style={{ color: 'red' }}>*</Text> Comments
+      <Text style={{ color: red500 }}>*</Text> Comments
     </Text>
   );
 
   let component2 = (
     <Text>
-      <Text style={{ color: 'red' }}>*</Text> Comments
+      <Text style={{ color: red500 }}>*</Text> Comments
     </Text>
   );
   expect(areLabelsEqual(component1, component2)).toBe(true);
@@ -182,7 +182,7 @@ it('correctly compares labels for nested components', () => {
   // Same component; same props, different children
   component2 = (
     <Text>
-      <Text style={{ color: 'red' }}>Comments</Text> continues
+      <Text style={{ color: red500 }}>Comments</Text> continues
     </Text>
   );
   expect(areLabelsEqual(component1, component2)).toBe(false);
@@ -190,7 +190,7 @@ it('correctly compares labels for nested components', () => {
   // Different component; same props, same children
   component2 = (
     <View>
-      <Text style={{ color: 'red' }}>*</Text> Comments
+      <Text style={{ color: red500 }}>*</Text> Comments
     </View>
   );
   expect(areLabelsEqual(component1, component2)).toBe(false);
@@ -198,7 +198,7 @@ it('correctly compares labels for nested components', () => {
   // Same component; different props, same children
   component2 = (
     <Text multiline>
-      <Text style={{ color: 'red' }}>*</Text> Comments
+      <Text style={{ color: red500 }}>*</Text> Comments
     </Text>
   );
   expect(areLabelsEqual(component1, component2)).toBe(false);
@@ -206,7 +206,7 @@ it('correctly compares labels for nested components', () => {
   // Same component; same props, different number of children
   component2 = (
     <Text>
-      <Text style={{ color: 'red' }}>*</Text>
+      <Text style={{ color: red500 }}>*</Text>
     </Text>
   );
   expect(areLabelsEqual(component1, component2)).toBe(false);
@@ -214,7 +214,7 @@ it('correctly compares labels for nested components', () => {
   // Same component; different props in inner component, same children
   component2 = (
     <Text>
-      <Text multiline style={{ color: 'blue' }}>
+      <Text multiline style={{ color: blue500 }}>
         *
       </Text>{' '}
       Comments
