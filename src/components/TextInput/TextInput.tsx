@@ -13,7 +13,6 @@ import TextInputAffix from './Adornment/TextInputAffix';
 import { withTheme } from '../../core/theming';
 import type { RenderProps, State, TextInputLabelProp } from './types';
 import type { $Omit } from '../../types';
-import { type } from 'os';
 
 const BLUR_ANIMATION_DURATION = 180;
 const FOCUS_ANIMATION_DURATION = 150;
@@ -486,16 +485,14 @@ export function areLabelsEqual(
     return true;
   }
 
-  const label1Falsy = !label1;
-  const label2Falsy = !label2;
   // Return true if both of them are falsy.
-  if (label1Falsy && label2Falsy) {
+  if (!(label1 || label2)) {
     return true;
   }
 
   // At this point, both of them cannot be false.
   // So, return false if any of them is falsy.
-  if (label1Falsy || label2Falsy) {
+  if (!(label1 && label2)) {
     return false;
   }
 
@@ -532,12 +529,12 @@ export function areLabelsEqual(
   
   // We now know they stringify to the same string.
   // Return true if both of them DO NOT have children
-  if (!label1Props.children && !label2Props.children) {
+  if (!(label1Props.children || label2Props.children)) {
     return true; // since there's nothing else to check
   }
 
   // Return false if only one of them has children
-  if (!label1Props.children || !label2Props.children) {
+  if (!(label1Props.children && label2Props.children)) {
     return false;
   }
 
