@@ -154,36 +154,71 @@ it('correctly compares labels when both labels are components', () => {
   // Different component; same props, same children
   component2 = <View>Comments</View>;
   expect(areLabelsEqual(component1, component2)).toBe(false);
-  
+
   // Same component; different props, same children
-  component2 = <Text multiline style={{ color: 'red' }}>Comments</Text>;
+  component2 = (
+    <Text multiline style={{ color: 'red' }}>
+      Comments
+    </Text>
+  );
   expect(areLabelsEqual(component1, component2)).toBe(false);
 });
 
 it('correctly compares labels for nested components', () => {
   // Same component; same props, same children
-  const component1 = <Text><Text style={{ color: 'red' }}>*</Text> Comments</Text>;
-  
-  let component2 = <Text><Text style={{ color: 'red'}}>*</Text> Comments</Text>;
+  const component1 = (
+    <Text>
+      <Text style={{ color: 'red' }}>*</Text> Comments
+    </Text>
+  );
+
+  let component2 = (
+    <Text>
+      <Text style={{ color: 'red' }}>*</Text> Comments
+    </Text>
+  );
   expect(areLabelsEqual(component1, component2)).toBe(true);
 
   // Same component; same props, different children
-  component2 = <Text><Text style={{ color: 'red'}}>Comments</Text> continues</Text>;
+  component2 = (
+    <Text>
+      <Text style={{ color: 'red' }}>Comments</Text> continues
+    </Text>
+  );
   expect(areLabelsEqual(component1, component2)).toBe(false);
 
   // Different component; same props, same children
-  component2 = <View><Text style={{ color: 'red'}}>*</Text> Comments</View>;
+  component2 = (
+    <View>
+      <Text style={{ color: 'red' }}>*</Text> Comments
+    </View>
+  );
   expect(areLabelsEqual(component1, component2)).toBe(false);
-  
+
   // Same component; different props, same children
-  component2 = <Text multiline><Text style={{ color: 'red'}}>*</Text> Comments</Text>;
+  component2 = (
+    <Text multiline>
+      <Text style={{ color: 'red' }}>*</Text> Comments
+    </Text>
+  );
   expect(areLabelsEqual(component1, component2)).toBe(false);
 
   // Same component; same props, different number of children
-  component2 = <Text><Text style={{ color: 'red'}}>*</Text></Text>;
+  component2 = (
+    <Text>
+      <Text style={{ color: 'red' }}>*</Text>
+    </Text>
+  );
   expect(areLabelsEqual(component1, component2)).toBe(false);
 
   // Same component; different props in inner component, same children
-  component2 = <Text><Text multiline style={{ color: 'blue'}}>*</Text> Comments</Text>;
+  component2 = (
+    <Text>
+      <Text multiline style={{ color: 'blue' }}>
+        *
+      </Text>{' '}
+      Comments
+    </Text>
+  );
   expect(areLabelsEqual(component1, component2)).toBe(false);
 });
