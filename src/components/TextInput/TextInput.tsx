@@ -526,7 +526,7 @@ export function areLabelsEqual(
   if (JSON.stringify(label1Props) !== JSON.stringify(label2Props)) {
     return false;
   }
-  
+
   // We now know they stringify to the same string.
   // Return true if both of them DO NOT have children
   if (!(label1Props.children || label2Props.children)) {
