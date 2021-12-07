@@ -376,28 +376,28 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
 <View
   style={Object {}}
 >
+  <View
+    pointerEvents="none"
+    style={
+      Array [
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 6,
+        },
+        Object {
+          "backgroundColor": "#f6f6f6",
+          "borderColor": "rgba(0, 0, 0, 0.54)",
+          "borderRadius": 4,
+          "borderWidth": 1,
+        },
+      ]
+    }
+    testID="text-input-outline"
+  />
   <View>
-    <View
-      pointerEvents="none"
-      style={
-        Array [
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 6,
-          },
-          Object {
-            "backgroundColor": "#f6f6f6",
-            "borderColor": "rgba(0, 0, 0, 0.54)",
-            "borderRadius": 4,
-            "borderWidth": 1,
-          },
-        ]
-      }
-      testID="text-input-outline"
-    />
     <View
       style={
         Array [
