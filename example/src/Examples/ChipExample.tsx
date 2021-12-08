@@ -216,6 +216,9 @@ const ChipExample = () => {
               With custom close icon
             </Chip>
           </View>
+          <Chip mode="outlined" onPress={() => {}} style={styles.fullWidthChip}>
+            Full width chip
+          </Chip>
         </List.Section>
       </ScreenWrapper>
       <Snackbar
@@ -252,6 +255,10 @@ const styles = StyleSheet.create({
   },
   bigTextStyle: {
     flex: -1,
+  },
+  fullWidthChip: {
+    marginVertical: 4,
+    marginHorizontal: 12,
   },
 });
 

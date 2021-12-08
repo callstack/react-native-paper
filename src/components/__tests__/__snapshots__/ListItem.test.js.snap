@@ -136,6 +136,7 @@ exports[`renders list item with custom description 1`] = `
                     Object {
                       "alignItems": "center",
                       "flexDirection": "row",
+                      "flexGrow": 1,
                       "paddingLeft": 4,
                       "position": "relative",
                     },

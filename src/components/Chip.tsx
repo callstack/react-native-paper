@@ -355,6 +355,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 4,
     position: 'relative',
+    flexGrow: 1,
   },
   icon: {
     padding: 4,
