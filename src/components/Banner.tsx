@@ -36,7 +36,6 @@ type Props = $RemoveChildren<typeof Surface> & {
   actions: Array<
     {
       label: string;
-      onPress: () => void;
     } & Omit<React.ComponentProps<typeof Button>, 'children'>
   >;
   /**
