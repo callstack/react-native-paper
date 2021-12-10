@@ -32,6 +32,7 @@ export type State = {
   outlinedMultiline: string;
   outlinedTextArea: string;
   outlinedColors: string;
+  outlinedLongLabel: string;
   maxLengthName: string;
   flatTextSecureEntry: boolean;
   outlineTextSecureEntry: boolean;

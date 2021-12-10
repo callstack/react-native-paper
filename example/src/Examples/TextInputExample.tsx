@@ -40,6 +40,7 @@ const initialState: State = {
   outlinedMultiline: '',
   outlinedTextArea: '',
   outlinedColors: '',
+  outlinedLongLabel: '',
   maxLengthName: '',
   flatTextSecureEntry: true,
   outlineTextSecureEntry: true,
@@ -404,6 +405,15 @@ const TextInputExample = () => {
           outlineColor={pink400}
           activeOutlineColor={amber900}
         />
+        <TextInput
+          mode="outlined"
+          style={styles.inputContainerStyle}
+          label="Outlined with super long label which is truncating at some point"
+          placeholder="Type something"
+          onChangeText={(outlinedLongLabel) =>
+            inputActionHandler('outlinedLongLabel', outlinedLongLabel)
+          }
+        />
         <View style={styles.inputContainerStyle}>
           <TextInput
             label="Input with helper text"
@@ -498,6 +508,13 @@ const TextInputExample = () => {
               roundness: 25,
             }}
             label="Custom rounded input"
+          />
+        </View>
+        <View style={styles.inputContainerStyle}>
+          <TextInput
+            mode="outlined"
+            label="Outlined text input with error"
+            error
           />
         </View>
       </ScreenWrapper>

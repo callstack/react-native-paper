@@ -128,6 +128,12 @@ const data: Data[] = [
     android:
       'https://play.google.com/store/apps/details?id=com.vibemap.hotspots',
   },
+  {
+    color: '#6200EE',
+    name: 'Clutch - Transmission Remote',
+    image: 'showcase/clutch.png',
+    android: 'https://play.google.com/store/apps/details?id=eu.tmdpw.clutch',
+  },
 ];
 
 export default class Showcase extends React.Component<{}> {
