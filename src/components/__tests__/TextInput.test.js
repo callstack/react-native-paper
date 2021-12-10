@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Platform } from 'react-native';
 import { fireEvent, render } from 'react-native-testing-library';
 import TextInput from '../TextInput/TextInput';
 import { areLabelsEqual } from '../TextInput/helpers';
@@ -148,6 +148,20 @@ it('correctly applies focused state Outline TextInput', () => {
   expect(outline.props.style).toEqual(
     expect.arrayContaining([expect.objectContaining({ borderWidth: 2 })])
   );
+});
+
+it('contains patch spacing for flat input when ios and multiline', () => {
+  Platform.OS = 'ios';
+  const { getByTestId } = render(
+    <TextInput
+      label="Flat input"
+      multiline
+      placeholder="Type something"
+      value={'Some test value'}
+      onChangeText={(text) => this.setState({ text })}
+    />
+  );
+  expect(() => getByTestId('patch-container')).not.toThrow();
 });
 
 it('correctly applies a component as the text label', () => {

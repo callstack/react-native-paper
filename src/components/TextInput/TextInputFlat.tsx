@@ -85,6 +85,8 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
       ...rest
     } = this.props;
 
+    const isAndroid = Platform.OS === 'android';
+
     const { colors, fonts } = theme;
     const font = fonts.regular;
     const hasActiveOutline = parentState.focused || error;
@@ -213,7 +215,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
       fontSize,
       label,
       scale: fontScale,
-      isAndroid: Platform.OS === 'android',
+      isAndroid,
       styles: StyleSheet.flatten(
         dense ? styles.inputFlatDense : styles.inputFlat
       ) as Padding,
@@ -329,6 +331,23 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
             },
           ]}
         >
+          {!isAndroid && multiline && (
+            // Workaround for: https://github.com/callstack/react-native-paper/issues/2799
+            // Patch for a multiline TextInput with fixed height, which allow to avoid covering input label with its value.
+            <View
+              testID="patch-container"
+              pointerEvents="none"
+              style={[
+                StyleSheet.absoluteFill,
+                dense ? styles.densePatchContainer : styles.patchContainer,
+                {
+                  backgroundColor: containerStyle.backgroundColor,
+                  left: paddingLeft,
+                  right: paddingRight,
+                },
+              ]}
+            />
+          )}
           <InputLabel parentState={parentState} labelProps={labelProps} />
           {render?.({
             ...rest,
@@ -442,5 +461,13 @@ const styles = StyleSheet.create({
   inputFlatDense: {
     paddingTop: 22,
     paddingBottom: 2,
+  },
+  patchContainer: {
+    height: 24,
+    zIndex: 2,
+  },
+  densePatchContainer: {
+    height: 22,
+    zIndex: 2,
   },
 });

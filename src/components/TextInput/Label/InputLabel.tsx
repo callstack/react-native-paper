@@ -77,6 +77,7 @@ const InputLabel = (props: InputLabelProps) => {
       pointerEvents="none"
       style={[
         StyleSheet.absoluteFill,
+        styles.labelContainer,
         {
           opacity:
             // Hide the label in minimized state until we measure it's width
@@ -135,5 +136,11 @@ const InputLabel = (props: InputLabelProps) => {
     </Animated.View>
   ) : null;
 };
+
+const styles = StyleSheet.create({
+  labelContainer: {
+    zIndex: 3,
+  },
+});
 
 export default InputLabel;
