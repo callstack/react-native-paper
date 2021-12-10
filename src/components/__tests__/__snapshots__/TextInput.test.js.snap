@@ -201,6 +201,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
           },
         ]
       }
+      testID="text-input-outline"
     />
     <View
       style={
@@ -392,6 +393,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
             ],
           ]
         }
+        testID="text-input-outlined"
         underlineColorAndroid="transparent"
         value="Some test value"
       />

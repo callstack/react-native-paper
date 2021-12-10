@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { render } from 'react-native-testing-library';
+import { fireEvent, render } from 'react-native-testing-library';
 import TextInput from '../TextInput/TextInput';
 import { red500 } from '../../styles/colors';
 
@@ -107,4 +107,44 @@ it('correctly applies height to multiline Outline TextInput', () => {
   );
 
   expect(toJSON()).toMatchSnapshot();
+});
+
+it('correctly applies error state Outline TextInput', () => {
+  const { getByTestId } = render(
+    <TextInput
+      mode="outlined"
+      label="Outline Input with error"
+      placeholder="Type Something"
+      value={'Some test value'}
+      error
+    />
+  );
+
+  const outline = getByTestId('text-input-outline');
+  expect(outline.props.style).toEqual(
+    expect.arrayContaining([expect.objectContaining({ borderWidth: 1 })])
+  );
+});
+
+it('correctly applies focused state Outline TextInput', () => {
+  const { getByTestId } = render(
+    <TextInput
+      mode="outlined"
+      label="Outline Input with error"
+      placeholder="Type Something"
+      value={'Some test value'}
+      error
+    />
+  );
+
+  const outline = getByTestId('text-input-outline');
+  expect(outline.props.style).toEqual(
+    expect.arrayContaining([expect.objectContaining({ borderWidth: 1 })])
+  );
+
+  fireEvent(getByTestId('text-input-outlined'), 'focus');
+
+  expect(outline.props.style).toEqual(
+    expect.arrayContaining([expect.objectContaining({ borderWidth: 2 })])
+  );
 });
