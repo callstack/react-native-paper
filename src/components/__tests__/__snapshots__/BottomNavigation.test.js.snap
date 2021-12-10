@@ -31,15 +31,21 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
       pointerEvents="auto"
       removeClippedSubviews={false}
       style={
-        Object {
-          "bottom": 0,
-          "left": 0,
-          "opacity": 1,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        }
+        Array [
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "opacity": 1,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Object {
+            "display": "flex",
+          },
+        ]
       }
+      testID="RouteScreen: 0"
     >
       <View
         style={
@@ -710,15 +716,21 @@ exports[`hides labels in shifting bottom navigation 1`] = `
       pointerEvents="auto"
       removeClippedSubviews={false}
       style={
-        Object {
-          "bottom": 0,
-          "left": 0,
-          "opacity": 1,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        }
+        Array [
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "opacity": 1,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Object {
+            "display": "flex",
+          },
+        ]
       }
+      testID="RouteScreen: 0"
     >
       <View
         style={
@@ -1409,15 +1421,21 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
       pointerEvents="auto"
       removeClippedSubviews={false}
       style={
-        Object {
-          "bottom": 0,
-          "left": 0,
-          "opacity": 1,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        }
+        Array [
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "opacity": 1,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Object {
+            "display": "flex",
+          },
+        ]
       }
+      testID="RouteScreen: 0"
     >
       <View
         style={
@@ -2016,15 +2034,21 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
       pointerEvents="auto"
       removeClippedSubviews={false}
       style={
-        Object {
-          "bottom": 0,
-          "left": 0,
-          "opacity": 1,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        }
+        Array [
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "opacity": 1,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Object {
+            "display": "flex",
+          },
+        ]
       }
+      testID="RouteScreen: 0"
     >
       <View
         style={
@@ -2895,15 +2919,21 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
       pointerEvents="auto"
       removeClippedSubviews={false}
       style={
-        Object {
-          "bottom": 0,
-          "left": 0,
-          "opacity": 1,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        }
+        Array [
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "opacity": 1,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Object {
+            "display": "flex",
+          },
+        ]
       }
+      testID="RouteScreen: 0"
     >
       <View
         style={
@@ -3830,15 +3860,21 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
       pointerEvents="auto"
       removeClippedSubviews={false}
       style={
-        Object {
-          "bottom": 0,
-          "left": 0,
-          "opacity": 1,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        }
+        Array [
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "opacity": 1,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Object {
+            "display": "flex",
+          },
+        ]
       }
+      testID="RouteScreen: 0"
     >
       <View
         style={
@@ -4665,15 +4701,21 @@ exports[`renders non-shifting bottom navigation 1`] = `
       pointerEvents="auto"
       removeClippedSubviews={false}
       style={
-        Object {
-          "bottom": 0,
-          "left": 0,
-          "opacity": 1,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        }
+        Array [
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "opacity": 1,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Object {
+            "display": "flex",
+          },
+        ]
       }
+      testID="RouteScreen: 0"
     >
       <View
         style={
@@ -5599,15 +5641,21 @@ exports[`renders shifting bottom navigation 1`] = `
       pointerEvents="auto"
       removeClippedSubviews={false}
       style={
-        Object {
-          "bottom": 0,
-          "left": 0,
-          "opacity": 1,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        }
+        Array [
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "opacity": 1,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Object {
+            "display": "flex",
+          },
+        ]
       }
+      testID="RouteScreen: 0"
     >
       <View
         style={

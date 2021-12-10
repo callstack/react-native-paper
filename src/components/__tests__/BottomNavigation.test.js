@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
+import { render } from 'react-native-testing-library';
 import renderer from 'react-test-renderer';
-import BottomNavigation from '../BottomNavigation.tsx';
+import BottomNavigation from '../BottomNavigation/BottomNavigation.tsx';
+import BottomNavigationRouteScreen from '../BottomNavigation/BottomNavigationRouteScreen.tsx';
 import { red300 } from '../../styles/colors';
 
 const styles = StyleSheet.create({
@@ -173,4 +175,22 @@ it('hides labels in non-shifting bottom navigation', () => {
     .toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('should have appropriate display style according to the visibility', () => {
+  const { getByTestId, rerender } = render(
+    <BottomNavigationRouteScreen visibility={1} index={0} />
+  );
+
+  const wrapper = getByTestId('RouteScreen: 0');
+
+  expect(wrapper.props.style).toEqual(
+    expect.arrayContaining([expect.objectContaining({ display: 'flex' })])
+  );
+
+  rerender(<BottomNavigationRouteScreen visibility={0} index={0} />);
+
+  expect(wrapper.props.style).toEqual(
+    expect.arrayContaining([expect.objectContaining({ display: 'none' })])
+  );
 });
