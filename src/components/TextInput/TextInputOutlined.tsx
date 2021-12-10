@@ -291,15 +291,15 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
           This is so that the label can overlap the outline
           Otherwise the border will cut off the label on Android
           */}
+        <Outline
+          theme={theme}
+          hasActiveOutline={hasActiveOutline}
+          focused={parentState.focused}
+          activeColor={activeColor}
+          outlineColor={outlineColor}
+          backgroundColor={backgroundColor}
+        />
         <View>
-          <Outline
-            theme={theme}
-            hasActiveOutline={hasActiveOutline}
-            focused={parentState.focused}
-            activeColor={activeColor}
-            outlineColor={outlineColor}
-            backgroundColor={backgroundColor}
-          />
           <View
             style={[
               styles.labelContainer,
