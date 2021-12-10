@@ -70,6 +70,9 @@ const LabelBackground = ({
                   }),
                 },
               ],
+              maxWidth:
+                parentState.labelLayout.width -
+                2 * placeholderStyle.paddingHorizontal,
             },
           ]}
           numberOfLines={1}
@@ -87,7 +90,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 6,
     left: 10,
-    width: 8,
+    width: 12,
   },
   outlinedLabel: {
     position: 'absolute',
