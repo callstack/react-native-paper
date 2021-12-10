@@ -76,10 +76,11 @@
 </div><h2>Props</h2><div class="PropInfo_p1eats2g"><a name="visible" href="#visible" class="PropLabel_psi127e"><code>visible</code> (required)</a><div class="PropItem_pwdtv5j"><span>Type: </span><code>boolean</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Whether banner is currently visible.</p>
 </div></div><div class="PropInfo_p1eats2g"><a name="children" href="#children" class="PropLabel_psi127e"><code>children</code> (required)</a><div class="PropItem_pwdtv5j"><span>Type: </span><code>string</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Content that will be displayed inside banner.</p>
 </div></div><div class="PropInfo_p1eats2g"><a name="icon" href="#icon" class="PropLabel_psi127e"><code>icon</code></a><div class="PropItem_pwdtv5j"><span>Type: </span><code>IconSource</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Icon to display for the <code>Banner</code>. Can be an image.</p>
-</div></div><div class="PropInfo_p1eats2g"><a name="actions" href="#actions" class="PropLabel_psi127e"><code>actions</code> (required)</a><div class="PropItem_pwdtv5j"><span>Type: </span><code>Array&lt;{
-  label: string;
-  onPress: () =&gt; void;
-}&gt;</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Action items to shown in the banner.
+</div></div><div class="PropInfo_p1eats2g"><a name="actions" href="#actions" class="PropLabel_psi127e"><code>actions</code> (required)</a><div class="PropItem_pwdtv5j"><span>Type: </span><code>Array&lt;
+  {
+    label: string;
+  } &amp; Omit&lt;React.ComponentProps&lt;typeof Button&gt;, &#x27;children&#x27;&gt;
+&gt;</code></div><div class="PropItem_pwdtv5j MarkdownContent_m3ctz2y"><p>Action items to shown in the banner.
 An action item should contain the following properties:</p>
 <ul>
 <li><code>label</code>: label of the action button (required)</li>
