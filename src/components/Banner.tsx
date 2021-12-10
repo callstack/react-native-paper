@@ -33,10 +33,11 @@ type Props = $RemoveChildren<typeof Surface> & {
    *
    * To customize button you can pass other props that button component takes.
    */
-  actions: Array<{
-    label: string;
-    onPress: () => void;
-  }>;
+  actions: Array<
+    {
+      label: string;
+    } & Omit<React.ComponentProps<typeof Button>, 'children'>
+  >;
   /**
    * Style of banner's inner content.
    * Use this prop to apply custom width for wide layouts.
