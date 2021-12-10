@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { render } from 'react-native-testing-library';
+import { fireEvent, render } from 'react-native-testing-library';
 import TextInput from '../TextInput/TextInput';
 import { areLabelsEqual } from '../TextInput/helpers';
 import { blue500, red500 } from '../../styles/colors';
