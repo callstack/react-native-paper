@@ -6,12 +6,13 @@ import {
   StyleProp,
   TextStyle,
 } from 'react-native';
+import { areLabelsEqual } from './helpers';
 import TextInputOutlined from './TextInputOutlined';
 import TextInputFlat from './TextInputFlat';
 import TextInputIcon from './Adornment/TextInputIcon';
 import TextInputAffix from './Adornment/TextInputAffix';
 import { withTheme } from '../../core/theming';
-import type { RenderProps, State } from './types';
+import type { RenderProps, State, TextInputLabelProp } from './types';
 import type { $Omit } from '../../types';
 
 const BLUR_ANIMATION_DURATION = 180;
@@ -36,9 +37,9 @@ export type TextInputProps = React.ComponentPropsWithRef<
    */
   disabled?: boolean;
   /**
-   * The text to use for the floating label.
+   * The text or component to use for the floating label.
    */
-  label?: string;
+  label?: TextInputLabelProp;
   /**
    * Placeholder for the input.
    */
@@ -233,9 +234,8 @@ class TextInput extends React.Component<TextInputProps, State> {
     const isValueChanged = prevState.value !== this.state.value;
     const isLabelLayoutChanged =
       prevState.labelLayout !== this.state.labelLayout;
-    const isLabelChanged = prevProps.label !== this.props.label;
+    const isLabelChanged = !areLabelsEqual(prevProps.label, this.props.label);
     const isErrorChanged = prevProps.error !== this.props.error;
-
     if (
       isFocusChanged ||
       isValueChanged ||
