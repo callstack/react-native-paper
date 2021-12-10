@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  Platform,
   StyleSheet,
   StyleProp,
   TextInput,
@@ -190,7 +191,15 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
           accessibilityLabel={searchAccessibilityLabel}
         />
         <TextInput
-          style={[styles.input, { color: textColor, ...font }, inputStyle]}
+          style={[
+            styles.input,
+            {
+              color: textColor,
+              ...font,
+              ...Platform.select({ web: { outline: 'none' } }),
+            },
+            inputStyle,
+          ]}
           placeholder={placeholder || ''}
           placeholderTextColor={colors.placeholder}
           selectionColor={colors.primary}

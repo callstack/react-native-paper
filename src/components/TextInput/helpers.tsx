@@ -7,6 +7,7 @@ import {
   FLAT_INPUT_OFFSET,
 } from './constants';
 import { AdornmentType, AdornmentSide } from './Adornment/enums';
+import type { TextInputLabelProp } from './types';
 
 type PaddingProps = {
   height: number | null;
@@ -16,7 +17,7 @@ type PaddingProps = {
   topPosition: number;
   fontSize: number;
   lineHeight?: number;
-  label?: string | null;
+  label?: TextInputLabelProp | null;
   scale: number;
   offset: number;
   isAndroid: boolean;
@@ -286,3 +287,95 @@ export const calculateFlatInputHorizontalPadding = ({
 
   return { paddingLeft, paddingRight };
 };
+
+export function areLabelsEqual(
+  label1?: TextInputLabelProp,
+  label2?: TextInputLabelProp
+): boolean {
+  if (label1 === label2) {
+    // will also take care of equality for `string` type, or if both are undefined.
+    return true;
+  }
+
+  // Return true if both of them are falsy.
+  if (!(label1 || label2)) {
+    return true;
+  }
+
+  // At this point, both of them cannot be false.
+  // So, return false if any of them is falsy.
+  if (!(label1 && label2)) {
+    return false;
+  }
+
+  // At this point, both of them has to be truthy.
+  // So, return false if they are not of the same type.
+  if (typeof label1 !== typeof label2) {
+    return false;
+  }
+
+  // At this point, both of them has to be of the same datatype.
+  if (
+    typeof label1 === 'string' ||
+    label1 instanceof String ||
+    // These last two OR checks are only here for Typescript's sake.
+    typeof label2 === 'string' ||
+    label2 instanceof String
+  ) {
+    // They're strings, so they won't be equal; otherwise
+    //  we would have returned 'true' earlier.
+    return false;
+  }
+
+  // At this point, both of them has to be of the datatype: `React.ReactElement`.
+  if (label1.type !== label2.type) {
+    return false;
+  }
+
+  // Preliminary equality check: do they stringify to the same string?
+  const label1Props = label1.props || {};
+  const label2Props = label2.props || {};
+  if (JSON.stringify(label1Props) !== JSON.stringify(label2Props)) {
+    return false;
+  }
+
+  // We now know they stringify to the same string.
+  // Return true if both of them DO NOT have children
+  if (!(label1Props.children || label2Props.children)) {
+    return true; // since there's nothing else to check
+  }
+
+  // Return false if only one of them has children
+  if (!(label1Props.children && label2Props.children)) {
+    return false;
+  }
+
+  // Both have children...
+  // Handle for when both the children are arrays
+  const label1IsArray = Array.isArray(label1Props.children);
+  const label2IsArray = Array.isArray(label2Props.children);
+  if (label1IsArray && label2IsArray) {
+    const children1 = label1Props.children as any[];
+    const children2 = label2Props.children as any[];
+    if (children1.length !== children2.length) {
+      return false; // no point proceeding
+    }
+
+    // all the children must also be equal
+    for (let i = 0; i < children1.length; i++) {
+      if (!areLabelsEqual(children1[i], children2[i])) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  // Only one of them can be an array at this point. If any is array, return false
+  if (label1IsArray || label2IsArray) {
+    return false;
+  }
+
+  // both children are not arrays, so recur.
+  return areLabelsEqual(label1Props.children, label2Props.children);
+}
