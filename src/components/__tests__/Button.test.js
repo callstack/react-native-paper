@@ -91,3 +91,25 @@ it('renders button with custom testID', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('renders button with an accessibility label', () => {
+  const tree = renderer
+    .create(
+      <Button accessibilityLabel={'label'}>
+        Button with accessibility label
+      </Button>
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders button with an accessibility hint', () => {
+  const tree = renderer
+    .create(
+      <Button accessibilityHint={'hint'}>Button with accessibility hint</Button>
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
