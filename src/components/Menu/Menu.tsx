@@ -258,13 +258,13 @@ class Menu extends React.Component<Props, State> {
     if (this.backHandlerSubscription?.remove) {
       this.backHandlerSubscription.remove();
     } else {
-      BackHandler.removeEventListener('hardwareBackPress', this.handleDismiss);
+      this.handleDismiss;
     }
 
     if (this.dimensionsSubscription?.remove) {
       this.dimensionsSubscription.remove();
     } else {
-      Dimensions.removeEventListener('change', this.handleDismiss);
+      this.handleDismiss;
     }
 
     this.isBrowser() &&
