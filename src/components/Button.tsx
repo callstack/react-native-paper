@@ -62,6 +62,10 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   accessibilityLabel?: string;
   /**
+   * Accessibility hint for the button. This is read by the screen reader when the user taps the button.
+   */
+  accessibilityHint?: string;
+  /**
    * Function to execute on press.
    */
   onPress?: () => void;
@@ -132,6 +136,7 @@ const Button = ({
   children,
   uppercase = true,
   accessibilityLabel,
+  accessibilityHint,
   onPress,
   onLongPress,
   style,
@@ -272,6 +277,7 @@ const Button = ({
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
         accessibilityLabel={accessibilityLabel}
+        accessibilityHint={accessibilityHint}
         // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
         accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
         accessibilityComponentType="button"
