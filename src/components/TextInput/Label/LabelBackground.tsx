@@ -45,6 +45,7 @@ const LabelBackground = ({
             styles.view,
             {
               backgroundColor,
+              maxHeight: Math.max(roundness / 3, 2),
               opacity,
               bottom: Math.max(roundness, 2),
             },

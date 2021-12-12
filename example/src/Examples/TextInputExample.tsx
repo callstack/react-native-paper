@@ -507,7 +507,14 @@ const TextInputExample = () => {
             theme={{
               roundness: 25,
             }}
-            label="Custom rounded input"
+            label="Outlined text input with custom roundness"
+          />
+        </View>
+        <View style={styles.inputContainerStyle}>
+          <TextInput
+            mode="outlined"
+            label="Outlined text input without roundness"
+            theme={{ roundness: 0 }}
           />
         </View>
         <View style={styles.inputContainerStyle}>
@@ -515,6 +522,22 @@ const TextInputExample = () => {
             mode="outlined"
             label="Outlined text input with error"
             error
+          />
+        </View>
+        <View style={styles.inputContainerStyle}>
+          <TextInput
+            mode="outlined"
+            label="Outlined multiline text input with fixed height"
+            multiline
+            style={styles.fixedHeight}
+          />
+        </View>
+        <View style={styles.inputContainerStyle}>
+          <TextInput
+            mode="flat"
+            label="Flat multiline text input with fixed height"
+            multiline
+            style={styles.fixedHeight}
           />
         </View>
       </ScreenWrapper>
@@ -556,6 +579,9 @@ const styles = StyleSheet.create({
   },
   centeredText: {
     textAlign: 'center',
+  },
+  fixedHeight: {
+    height: 100,
   },
 });
 
