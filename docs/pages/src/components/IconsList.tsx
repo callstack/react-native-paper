@@ -1,16 +1,15 @@
-/* @flow */
-
 import * as React from 'react';
 import { styled } from 'linaria/react';
 import icons from 'react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json';
 
 type State = {
-  query: string,
+  query: string;
 };
 
 export default class IconsList extends React.Component<{}, State> {
   state = { query: '' };
 
+  // @ts-ignore
   _getIconCharacter = (name: string) => String.fromCharCode(icons[name]);
 
   _getResults = () => {
@@ -29,15 +28,17 @@ export default class IconsList extends React.Component<{}, State> {
     return iconNames;
   };
 
-  _handleInputChange = (e: SyntheticInputEvent<HTMLInputElement>) =>
+  _handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     this.setState({ query: e.target.value });
 
-  _handleIconClick = (e: SyntheticEvent<HTMLButtonElement>) => {
+  _handleIconClick = (e: React.SyntheticEvent<HTMLButtonElement>) => {
     const range = document.createRange();
 
     range.selectNode(e.currentTarget.childNodes[1].childNodes[0]);
 
+    // @ts-ignore
     window.getSelection().removeAllRanges();
+    // @ts-ignore
     window.getSelection().addRange(range);
   };
 

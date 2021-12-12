@@ -1,12 +1,8 @@
-/* @flow */
-
 import * as React from 'react';
 import Home from './src/Home';
 
-export default class Index extends React.Component<{}> {
-  render() {
-    return <Home />;
-  }
+export default function Index() {
+  return <Home />;
 }
 
 export const meta = {

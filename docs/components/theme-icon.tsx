@@ -1,30 +1,11 @@
-/* @flow */
-
 import React from 'react';
 
 type Props = {
-  type: 'dark' | 'light',
+  type: 'dark' | 'light';
 };
 
 const ThemeIcon = ({ type = 'dark' }: Props) => {
-  if (type === 'dark') {
-    return (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="19"
-        height="20"
-        viewBox="0 0 50 50"
-      >
-        <path
-          fill="none"
-          stroke="#000"
-          strokeWidth="2"
-          strokeLinejoin="round"
-          d="M37,4a22,22 0 1,0 0,42a22,22 0 0,1 0-42z"
-        />
-      </svg>
-    );
-  } else if (type === 'light') {
+  if (type === 'light') {
     return (
       <svg
         version="1.1"
@@ -51,6 +32,23 @@ const ThemeIcon = ({ type = 'dark' }: Props) => {
       </svg>
     );
   }
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="19"
+      height="20"
+      viewBox="0 0 50 50"
+    >
+      <path
+        fill="none"
+        stroke="#000"
+        strokeWidth="2"
+        strokeLinejoin="round"
+        d="M37,4a22,22 0 1,0 0,42a22,22 0 0,1 0-42z"
+      />
+    </svg>
+  );
 };
 
 export default ThemeIcon;

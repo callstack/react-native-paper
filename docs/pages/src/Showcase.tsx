@@ -1,21 +1,21 @@
-/* @flow */
-
 import * as React from 'react';
 import { styled } from 'linaria/react';
 import color from 'color';
+// @ts-ignore
 import { Header } from 'component-docs/components';
 
 import GooglePlayIcon from '../../components/google-play-icon';
 import IphoneIcon from '../../components/iphone-icon';
-import Content from './components/Content';
 import GithubIcon from '../../components/github-icon';
+import Content from './components/Content';
 
 type Data = {
-  color: string,
-  name: string,
-  image: string,
-  android?: string,
-  ios?: string,
+  color: string;
+  name: string;
+  image: string;
+  android?: string;
+  ios?: string;
+  github?: string;
 };
 
 const data: Data[] = [
@@ -136,79 +136,77 @@ const data: Data[] = [
   },
 ];
 
-export default class Showcase extends React.Component<{}> {
-  render() {
-    return (
-      <Container>
-        <Header logo="images/sidebar-logo.svg" />
-        <Content>
-          <h1>Who&apos;s using Paper?</h1>
-          <p>
-            Check out these apps built using Paper. Send us a{' '}
-            <a
-              href="https://github.com/callstack/react-native-paper/pulls"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              pull request
-            </a>{' '}
-            to add your app to this list.
-          </p>
-          <Gallery>
-            {data.map((item) => {
-              const tintColor = color(item.color).isLight()
-                ? '#000000'
-                : '#FFFFFF';
-              return (
-                <div key={item.image}>
-                  <ImageContainer>
-                    <Image src={item.image} alt="" />
-                    <Info style={{ backgroundColor: item.color }}>
-                      <AppName
-                        style={{
-                          color: tintColor,
-                        }}
+export default function Showcase() {
+  return (
+    <Container>
+      <Header logo="images/sidebar-logo.svg" />
+      <Content>
+        <h1>Who&apos;s using Paper?</h1>
+        <p>
+          Check out these apps built using Paper. Send us a{' '}
+          <a
+            href="https://github.com/callstack/react-native-paper/pulls"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            pull request
+          </a>{' '}
+          to add your app to this list.
+        </p>
+        <Gallery>
+          {data.map((item) => {
+            const tintColor = color(item.color).isLight()
+              ? '#000000'
+              : '#FFFFFF';
+            return (
+              <div key={item.image}>
+                <ImageContainer>
+                  <Image src={item.image} alt="" />
+                  <Info style={{ backgroundColor: item.color }}>
+                    <AppName
+                      style={{
+                        color: tintColor,
+                      }}
+                    >
+                      {item.name}
+                    </AppName>
+                    <BadgeContainer>
+                      <a
+                        href={item?.android}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ opacity: item.android ? 1 : 0.4 }}
                       >
-                        {item.name}
-                      </AppName>
-                      <BadgeContainer>
-                        <a
-                          href={item.android || null}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{ opacity: item.android ? 1 : 0.4 }}
-                        >
-                          <GooglePlayIcon color={tintColor} />
-                        </a>
-                        <Separation />
-                        <a
-                          href={item.ios || null}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{ opacity: item.ios ? 1 : 0.4 }}
-                        >
-                          <IphoneIcon color={tintColor} />
-                        </a>
-                        <Separation />
-                        <a
-                          href={item.github || null}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{ opacity: item.github ? 1 : 0.4 }}
-                        >
-                          <GithubIcon color={tintColor} />
-                        </a>
-                      </BadgeContainer>
-                    </Info>
-                  </ImageContainer>
-                </div>
-              );
-            })}
-          </Gallery>
-        </Content>
-      </Container>
-    );
-  }
+                        <GooglePlayIcon color={tintColor} />
+                      </a>
+                      <Separation />
+                      <a
+                        href={item?.ios}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ opacity: item.ios ? 1 : 0.4 }}
+                      >
+                        <IphoneIcon color={tintColor} />
+                      </a>
+                      <Separation />
+                      <a
+                        href={item?.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ opacity: item.github ? 1 : 0.4 }}
+                      >
+                        <GithubIcon color={tintColor} />
+                      </a>
+                    </BadgeContainer>
+                  </Info>
+                </ImageContainer>
+              </div>
+            );
+          })}
+        </Gallery>
+      </Content>
+    </Container>
+  );
 }
 
 const Container = styled.div`

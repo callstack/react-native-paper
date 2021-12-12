@@ -1,9 +1,7 @@
-/* @flow */
-
 import React from 'react';
 
 type Props = {
-  color: string,
+  color: string;
 };
 
 const GooglePlayIcon = ({ color }: Props) => (

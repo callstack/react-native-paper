@@ -1,12 +1,8 @@
-/* @flow */
-
 import * as React from 'react';
 import Showcase from './src/Showcase';
 
-export default class ShowcasePage extends React.Component<{}> {
-  render() {
-    return <Showcase />;
-  }
+export default function ShowcasePage() {
+  return <Showcase />;
 }
 
 export const meta = {

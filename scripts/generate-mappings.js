@@ -1,5 +1,3 @@
-/* @flow */
-
 const path = require('path');
 const fs = require('fs');
 const types = require('babel-types');

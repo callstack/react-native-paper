@@ -1,5 +1,3 @@
-/* @flow */
-
 import path from 'path';
 import fs from 'fs';
 
@@ -25,7 +23,7 @@ if (!fs.existsSync(dist)) {
 require.extensions['.ts'] = require.extensions['.js'];
 require.extensions['.tsx'] = require.extensions['.js'];
 
-function getType(file: string) {
+function getType(file) {
   if (/\.(js|tsx?)$/.test(file)) {
     return 'custom';
   } else if (file.endsWith('.mdx')) {
