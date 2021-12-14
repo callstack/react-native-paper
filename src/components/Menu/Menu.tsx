@@ -23,6 +23,7 @@ import Portal from '../Portal/Portal';
 import Surface from '../Surface';
 import MenuItem from './MenuItem';
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
+import { addEventListener } from '../../utils/addEventListener';
 
 type Props = {
   /**
@@ -242,31 +243,22 @@ class Menu extends React.Component<Props, State> {
   };
 
   private attachListeners = () => {
-    this.backHandlerSubscription = BackHandler.addEventListener(
+    this.backHandlerSubscription = addEventListener(
+      BackHandler,
       'hardwareBackPress',
       this.handleDismiss
     );
-    this.dimensionsSubscription = Dimensions.addEventListener(
+    this.dimensionsSubscription = addEventListener(
+      Dimensions,
       'change',
       this.handleDismiss
     );
-
     this.isBrowser() && document.addEventListener('keyup', this.handleKeypress);
   };
 
   private removeListeners = () => {
-    if (this.backHandlerSubscription?.remove) {
-      this.backHandlerSubscription.remove();
-    } else {
-      BackHandler.removeEventListener('hardwareBackPress', this.handleDismiss);
-    }
-
-    if (this.dimensionsSubscription?.remove) {
-      this.dimensionsSubscription.remove();
-    } else {
-      Dimensions.removeEventListener('change', this.handleDismiss);
-    }
-
+    this.backHandlerSubscription?.remove();
+    this.dimensionsSubscription?.remove();
     this.isBrowser() &&
       document.removeEventListener('keyup', this.handleKeypress);
   };
