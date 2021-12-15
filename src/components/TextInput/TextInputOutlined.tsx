@@ -337,7 +337,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
                 !multiline || (multiline && height)
                   ? { height: inputHeight }
                   : {},
-                paddingOut,
+                 // paddingOut,
                 {
                   ...font,
                   fontSize,
