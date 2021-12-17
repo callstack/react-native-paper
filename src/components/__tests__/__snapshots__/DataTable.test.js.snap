@@ -107,7 +107,7 @@ exports[`renders data table header 1`] = `
               "lineHeight": 24,
             },
             Object {
-              "height": 24,
+              "maxHeight": 24,
             },
             Object {},
             Object {
@@ -164,7 +164,7 @@ exports[`renders data table header 1`] = `
               "lineHeight": 24,
             },
             Object {
-              "height": 24,
+              "maxHeight": 24,
             },
             Object {},
             Object {
@@ -1481,7 +1481,7 @@ exports[`renders data table title with press handler 1`] = `
             "lineHeight": 24,
           },
           Object {
-            "height": 24,
+            "maxHeight": 24,
           },
           Object {},
           Object {
@@ -1574,7 +1574,7 @@ exports[`renders data table title with sort icon 1`] = `
             "lineHeight": 24,
           },
           Object {
-            "height": 24,
+            "maxHeight": 24,
           },
           Object {},
           Object {
@@ -1685,7 +1685,7 @@ exports[`renders right aligned data table title 1`] = `
             "lineHeight": 24,
           },
           Object {
-            "height": 24,
+            "maxHeight": 24,
           },
           Object {},
           Object {

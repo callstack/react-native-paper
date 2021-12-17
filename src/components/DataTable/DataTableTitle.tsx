@@ -129,7 +129,7 @@ const DataTableTitle = ({
           style={[
             styles.cell,
             // height must scale with numberOfLines
-            { height: 24 * numberOfLines },
+            { maxHeight: 24 * numberOfLines },
             // if numberOfLines causes wrap, center is lost. Align directly, sensitive to numeric and RTL
             numberOfLines > 1
               ? numeric
