@@ -22,7 +22,7 @@ try {
   // Optionally require vector-icons
   MaterialCommunityIcons = require('react-native-vector-icons/MaterialCommunityIcons')
     .default;
-} catch (e) {
+} catch (e: any) {
   let isErrorLogged = false;
 
   // Fallback component for icons
