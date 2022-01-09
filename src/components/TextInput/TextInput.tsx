@@ -130,7 +130,7 @@ export type TextInputProps = React.ComponentPropsWithRef<
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme?: ReactNativePaper.Theme;
 };
 
 /**
