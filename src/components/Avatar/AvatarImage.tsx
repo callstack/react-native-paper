@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   Image,
   ImageSourcePropType,
+  ImageProps,
   StyleSheet,
   View,
   ViewStyle,
@@ -16,6 +17,18 @@ export type AvatarImageSource =
   | ((props: { size: number }) => React.ReactNode);
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
+  /**
+   * Event Listeners of standard React Native Image - `onError`, `onLayout`, `onLoad`, `onLoadEnd`, `onLoadStart`, `onProgress`
+   */
+  listeners?: Pick<
+    ImageProps,
+    | 'onError'
+    | 'onLayout'
+    | 'onLoad'
+    | 'onLoadEnd'
+    | 'onLoadStart'
+    | 'onProgress'
+  >;
   /**
    * Image to display for the `Avatar`.
    * It accepts a standard React Native Image `source` prop
@@ -54,6 +67,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * ```
  */
 const AvatarImage = ({
+  listeners,
   size = defaultSize,
   source,
   style,
@@ -82,6 +96,12 @@ const AvatarImage = ({
         <Image
           source={source}
           style={{ width: size, height: size, borderRadius: size / 2 }}
+          onError={listeners?.onError}
+          onLayout={listeners?.onLayout}
+          onLoad={listeners?.onLoad}
+          onLoadEnd={listeners?.onLoadEnd}
+          onLoadStart={listeners?.onLoadStart}
+          onProgress={listeners?.onProgress}
         />
       )}
     </View>
