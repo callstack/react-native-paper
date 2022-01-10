@@ -169,10 +169,8 @@ const Chip = ({
   const defaultBackgroundColor =
     mode === 'outlined' ? colors.surface : dark ? '#383838' : '#ebebeb';
 
-  const {
-    backgroundColor = defaultBackgroundColor,
-    borderRadius = 16,
-  } = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const { backgroundColor = defaultBackgroundColor, borderRadius = 16 } =
+    (StyleSheet.flatten(style) || {}) as ViewStyle;
 
   const borderColor =
     mode === 'outlined'
@@ -202,9 +200,10 @@ const Chip = ({
     typeof backgroundColor === 'string'
       ? backgroundColor
       : defaultBackgroundColor;
-  const selectedBackgroundColor = (dark
-    ? color(backgroundColorString).lighten(mode === 'outlined' ? 0.2 : 0.4)
-    : color(backgroundColorString).darken(mode === 'outlined' ? 0.08 : 0.2)
+  const selectedBackgroundColor = (
+    dark
+      ? color(backgroundColorString).lighten(mode === 'outlined' ? 0.2 : 0.4)
+      : color(backgroundColorString).darken(mode === 'outlined' ? 0.08 : 0.2)
   )
     .rgb()
     .string();

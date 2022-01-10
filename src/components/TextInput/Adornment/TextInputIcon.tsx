@@ -103,9 +103,8 @@ const TextInputIcon = ({
   color,
   ...rest
 }: Props) => {
-  const { style, isTextInputFocused, forceFocus } = React.useContext(
-    StyleContext
-  );
+  const { style, isTextInputFocused, forceFocus } =
+    React.useContext(StyleContext);
 
   const onPressWithFocusControl = React.useCallback(() => {
     if (forceTextInputFocus && !isTextInputFocused) {

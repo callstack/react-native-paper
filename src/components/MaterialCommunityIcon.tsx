@@ -20,8 +20,8 @@ let MaterialCommunityIcons: React.ComponentType<
 
 try {
   // Optionally require vector-icons
-  MaterialCommunityIcons = require('react-native-vector-icons/MaterialCommunityIcons')
-    .default;
+  MaterialCommunityIcons =
+    require('react-native-vector-icons/MaterialCommunityIcons').default;
 } catch (e) {
   let isErrorLogged = false;
 
@@ -31,7 +31,7 @@ try {
     if (!isErrorLogged) {
       if (
         !/(Cannot find module|Module not found|Cannot resolve module)/.test(
-          e.message
+          (e as any).message
         )
       ) {
         console.error(e);
@@ -67,7 +67,8 @@ export const accessibilityProps =
       }
     : {
         accessibilityElementsHidden: true,
-        importantForAccessibility: 'no-hide-descendants' as 'no-hide-descendants',
+        importantForAccessibility:
+          'no-hide-descendants' as 'no-hide-descendants',
       };
 
 const defaultIcon = ({

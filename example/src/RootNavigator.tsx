@@ -19,7 +19,7 @@ export default function Root() {
               <Appbar.Action
                 icon="menu"
                 onPress={() =>
-                  ((navigation as any) as DrawerNavigationProp<{}>).openDrawer()
+                  (navigation as any as DrawerNavigationProp<{}>).openDrawer()
                 }
               />
             ) : null}

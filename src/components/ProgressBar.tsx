@@ -75,9 +75,8 @@ const ProgressBar = ({
   const [width, setWidth] = React.useState<number>(0);
   const [prevWidth, setPrevWidth] = React.useState<number>(0);
 
-  const indeterminateAnimation = React.useRef<Animated.CompositeAnimation | null>(
-    null
-  );
+  const indeterminateAnimation =
+    React.useRef<Animated.CompositeAnimation | null>(null);
 
   const { scale } = theme.animation;
 

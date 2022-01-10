@@ -45,8 +45,7 @@ const ToggleButtonExample = () => {
             <ImageBackground
               style={styles.customImage}
               source={{
-                uri:
-                  'https://images.pexels.com/photos/1068534/pexels-photo-1068534.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+                uri: 'https://images.pexels.com/photos/1068534/pexels-photo-1068534.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
               }}
             >
               <ToggleButton
@@ -60,8 +59,7 @@ const ToggleButtonExample = () => {
             <ImageBackground
               style={styles.customImage}
               source={{
-                uri:
-                  'https://images.pexels.com/photos/46174/strawberries-berries-fruit-freshness-46174.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+                uri: 'https://images.pexels.com/photos/46174/strawberries-berries-fruit-freshness-46174.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
               }}
             >
               <ToggleButton

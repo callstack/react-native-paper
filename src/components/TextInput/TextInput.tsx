@@ -286,13 +286,13 @@ class TextInput extends React.Component<TextInputProps, State> {
 
     // Set the placeholder in a delay to offset the label animation
     // If we show it immediately, they'll overlap and look ugly
-    this.timer = (setTimeout(
+    this.timer = setTimeout(
       () =>
         this.setState({
           placeholder: this.props.placeholder,
         }),
       50
-    ) as unknown) as NodeJS.Timeout;
+    ) as unknown as NodeJS.Timeout;
   };
 
   private hidePlaceholder = () =>
@@ -387,7 +387,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     }
 
     this.setState({ value });
-    this.props.onChangeText && this.props.onChangeText(value);
+    this.props.onChangeText?.(value);
   };
 
   private handleLayoutAnimatedText = (e: LayoutChangeEvent) => {
@@ -408,35 +408,35 @@ class TextInput extends React.Component<TextInputProps, State> {
    * @internal
    */
   setNativeProps(args: Object) {
-    return this.root && this.root.setNativeProps(args);
+    return this.root?.setNativeProps(args);
   }
 
   /**
    * Returns `true` if the input is currently focused, `false` otherwise.
    */
   isFocused() {
-    return this.root && this.root.isFocused();
+    return this.root?.isFocused();
   }
 
   /**
    * Removes all text from the TextInput.
    */
   clear() {
-    return this.root && this.root.clear();
+    return this.root?.clear();
   }
 
   /**
    * Focuses the input.
    */
   focus() {
-    return this.root && this.root.focus();
+    return this.root?.focus();
   }
 
   /**
    * Removes focus from the input.
    */
   blur() {
-    return this.root && this.root.blur();
+    return this.root?.blur();
   }
   render() {
     const { mode, ...rest } = this.props as $Omit<TextInputProps, 'ref'>;

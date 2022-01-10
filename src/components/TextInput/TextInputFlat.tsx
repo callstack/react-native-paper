@@ -128,16 +128,15 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
       ? leftLayout.width || ADORNMENT_SIZE
       : ADORNMENT_SIZE;
 
-    const adornmentStyleAdjustmentForNativeInput = getAdornmentStyleAdjustmentForNativeInput(
-      {
+    const adornmentStyleAdjustmentForNativeInput =
+      getAdornmentStyleAdjustmentForNativeInput({
         adornmentConfig,
         rightAffixWidth,
         leftAffixWidth,
         paddingHorizontal,
         inputOffset: FLAT_INPUT_OFFSET,
         mode: InputMode.Flat,
-      }
-    );
+      });
 
     let inputTextColor,
       activeColor,

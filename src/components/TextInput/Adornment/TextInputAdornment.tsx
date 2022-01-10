@@ -85,15 +85,16 @@ export function getAdornmentStyleAdjustmentForNativeInput({
         };
       }
     );
-    const allStyleAdjustmentsMerged = adornmentStyleAdjustmentForNativeInput.reduce(
-      (mergedStyles, currentStyle) => {
-        return {
-          ...mergedStyles,
-          ...currentStyle,
-        };
-      },
-      {}
-    );
+    const allStyleAdjustmentsMerged =
+      adornmentStyleAdjustmentForNativeInput.reduce(
+        (mergedStyles, currentStyle) => {
+          return {
+            ...mergedStyles,
+            ...currentStyle,
+          };
+        },
+        {}
+      );
     return allStyleAdjustmentsMerged;
   } else {
     return [{}];
