@@ -1,5 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`renders avatar with event listeners 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#6200ee",
+        "borderRadius": 32,
+        "height": 64,
+        "width": 64,
+      },
+      undefined,
+    ]
+  }
+>
+  <Image
+    onError={[Function]}
+    onLayout={[Function]}
+    onLoad={[Function]}
+    onLoadEnd={[Function]}
+    onLoadStart={[Function]}
+    onProgress={[Function]}
+    source={
+      Object {
+        "src": "avatar.png",
+      }
+    }
+    style={
+      Object {
+        "borderRadius": 32,
+        "height": 64,
+        "width": 64,
+      }
+    }
+  />
+</View>
+`;
+
 exports[`renders avatar with icon 1`] = `
 <View
   style={

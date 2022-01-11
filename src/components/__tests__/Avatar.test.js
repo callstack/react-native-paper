@@ -59,3 +59,21 @@ it('renders avatar with image', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('renders avatar with event listeners', () => {
+  const tree = renderer
+    .create(
+      <Avatar.Image
+        source={{ src: 'avatar.png' }}
+        onError={() => {}}
+        onLayout={() => {}}
+        onLoad={() => {}}
+        onLoadEnd={() => {}}
+        onLoadStart={() => {}}
+        onProgress={() => {}}
+      />
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
