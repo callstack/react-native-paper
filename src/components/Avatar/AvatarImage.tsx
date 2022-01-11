@@ -18,18 +18,6 @@ export type AvatarImageSource =
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
-   * Event Listeners of standard React Native Image - `onError`, `onLayout`, `onLoad`, `onLoadEnd`, `onLoadStart`, `onProgress`
-   */
-  listeners?: Pick<
-    ImageProps,
-    | 'onError'
-    | 'onLayout'
-    | 'onLoad'
-    | 'onLoadEnd'
-    | 'onLoadStart'
-    | 'onProgress'
-  >;
-  /**
    * Image to display for the `Avatar`.
    * It accepts a standard React Native Image `source` prop
    * Or a function that returns an `Image`.
@@ -40,6 +28,30 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   size?: number;
   style?: StyleProp<ViewStyle>;
+  /**
+   * Invoked on load error.
+   */
+  onError?: ImageProps['onError'];
+  /**
+   * Invoked on mount and on layout changes.
+   */
+  onLayout?: ImageProps['onLayout'];
+  /**
+   * Invoked when load completes successfully.
+   */
+  onLoad?: ImageProps['onLoad'];
+  /**
+   * Invoked when load either succeeds or fails.
+   */
+  onLoadEnd?: ImageProps['onLoadEnd'];
+  /**
+   * Invoked on load start.
+   */
+  onLoadStart?: ImageProps['onLoadStart'];
+  /**
+   * Invoked on download progress.
+   */
+  onProgress?: ImageProps['onProgress'];
   /**
    * @optional
    */
@@ -67,10 +79,15 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * ```
  */
 const AvatarImage = ({
-  listeners,
   size = defaultSize,
   source,
   style,
+  onError,
+  onLayout,
+  onLoad,
+  onLoadEnd,
+  onLoadStart,
+  onProgress,
   theme,
   ...rest
 }: Props) => {
@@ -96,12 +113,12 @@ const AvatarImage = ({
         <Image
           source={source}
           style={{ width: size, height: size, borderRadius: size / 2 }}
-          onError={listeners?.onError}
-          onLayout={listeners?.onLayout}
-          onLoad={listeners?.onLoad}
-          onLoadEnd={listeners?.onLoadEnd}
-          onLoadStart={listeners?.onLoadStart}
-          onProgress={listeners?.onProgress}
+          onError={onError}
+          onLayout={onLayout}
+          onLoad={onLoad}
+          onLoadEnd={onLoadEnd}
+          onLoadStart={onLoadStart}
+          onProgress={onProgress}
         />
       )}
     </View>
