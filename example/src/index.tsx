@@ -70,7 +70,7 @@ const CustomDefaultTheme = {
   },
 };
 
-const PreferencesContext = React.createContext<any>(null);
+export const PreferencesContext = React.createContext<any>(null);
 
 const DrawerContent = () => {
   return (
