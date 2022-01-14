@@ -341,7 +341,8 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
                 StyleSheet.absoluteFill,
                 dense ? styles.densePatchContainer : styles.patchContainer,
                 {
-                  backgroundColor: viewStyle.backgroundColor || containerStyle.backgroundColor,
+                  backgroundColor:
+                    viewStyle.backgroundColor || containerStyle.backgroundColor,
                   left: paddingLeft,
                   right: paddingRight,
                 },
