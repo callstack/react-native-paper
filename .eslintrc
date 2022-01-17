@@ -11,6 +11,7 @@
     "one-var": "off",
     "no-multi-assign": "off",
     "no-nested-ternary": "off",
+    "no-undef": "off",
     "global-require": "off",
 
     "import/no-extraneous-dependencies": "off",

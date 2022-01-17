@@ -226,9 +226,11 @@ export default function Modal({
       >
         <Surface
           style={
-            [{ opacity }, styles.content, contentContainerStyle] as StyleProp<
-              ViewStyle
-            >
+            [
+              { opacity },
+              styles.content,
+              contentContainerStyle,
+            ] as StyleProp<ViewStyle>
           }
         >
           {children}

@@ -131,8 +131,7 @@ const ButtonExample = () => {
           <Button
             mode="outlined"
             icon={{
-              uri:
-                'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400',
+              uri: 'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400',
             }}
             onPress={() => {}}
             style={styles.button}

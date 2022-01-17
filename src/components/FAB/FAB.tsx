@@ -165,9 +165,8 @@ const FAB = ({
     .rgb()
     .string();
 
-  const {
-    backgroundColor = disabled ? disabledColor : theme.colors.accent,
-  } = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const { backgroundColor = disabled ? disabledColor : theme.colors.accent } =
+    (StyleSheet.flatten(style) || {}) as ViewStyle;
 
   let foregroundColor;
 

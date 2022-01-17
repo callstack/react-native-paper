@@ -30,9 +30,8 @@ const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
 const MenuExample = ({ navigation }: Props) => {
   const [visible, setVisible] = React.useState<MenuVisibility>({});
-  const [contextualMenuCoord, setContextualMenuCoor] = React.useState<
-    ContextualMenuCoord
-  >({ x: 0, y: 0 });
+  const [contextualMenuCoord, setContextualMenuCoor] =
+    React.useState<ContextualMenuCoord>({ x: 0, y: 0 });
 
   const _toggleMenu = (name: string) => () =>
     setVisible({ ...visible, [name]: !visible[name] });

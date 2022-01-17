@@ -62,8 +62,8 @@
     "@types/react-dom": "^16.8.4",
     "@types/react-native": "^0.66.1",
     "@types/react-native-vector-icons": "^6.4.1",
-    "@typescript-eslint/eslint-plugin": "^2.12.0",
-    "@typescript-eslint/parser": "^2.12.0",
+    "@typescript-eslint/eslint-plugin": "^5.9.0",
+    "@typescript-eslint/parser": "^5.9.0",
     "all-contributors-cli": "^6.1.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^7.0.0-bridge.0",
@@ -84,7 +84,7 @@
     "jest": "^26.1.0",
     "jest-file-snapshot": "^0.3.2",
     "metro-react-native-babel-preset": "^0.59.0",
-    "prettier": "^2.0.5",
+    "prettier": "^2.5.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "^0.63.0",
@@ -94,7 +94,7 @@
     "react-test-renderer": "16.13.1",
     "release-it": "^13.4.0",
     "rimraf": "^3.0.2",
-    "typescript": "^3.8.3"
+    "typescript": "^4.5.4"
   },
   "peerDependencies": {
     "react": "*",

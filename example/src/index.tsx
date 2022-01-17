@@ -97,9 +97,8 @@ export default function PaperExample() {
     InitialState | undefined
   >();
 
-  const [theme, setTheme] = React.useState<ReactNativePaper.Theme>(
-    CustomDefaultTheme
-  );
+  const [theme, setTheme] =
+    React.useState<ReactNativePaper.Theme>(CustomDefaultTheme);
   const [rtl, setRtl] = React.useState<boolean>(I18nManager.isRTL);
 
   React.useEffect(() => {
