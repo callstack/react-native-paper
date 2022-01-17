@@ -11,6 +11,7 @@ import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
 import PortalHost from '../components/Portal/PortalHost';
 import DefaultTheme from '../styles/DefaultTheme';
 import DarkTheme from '../styles/DarkTheme';
+import { addEventListener } from '../utils/addEventListener';
 
 type Props = {
   children: React.ReactNode;
@@ -40,21 +41,15 @@ const Provider = ({ ...props }: Props) => {
     let subscription: NativeEventSubscription | undefined;
 
     if (!props.theme) {
-      subscription = AccessibilityInfo.addEventListener(
+      subscription = addEventListener(
+        AccessibilityInfo,
         'reduceMotionChanged',
         setReduceMotionEnabled
       );
     }
     return () => {
       if (!props.theme) {
-        if (subscription?.remove) {
-          subscription.remove();
-        } else {
-          AccessibilityInfo.removeEventListener(
-            'reduceMotionChanged',
-            setReduceMotionEnabled
-          );
-        }
+        subscription?.remove();
       }
     };
   }, [props.theme]);

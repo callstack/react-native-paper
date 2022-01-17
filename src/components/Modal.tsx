@@ -17,6 +17,7 @@ import {
 import Surface from './Surface';
 import { useTheme } from '../core/theming';
 import useAnimatedValue from '../utils/useAnimatedValue';
+import { addEventListener } from '../utils/addEventListener';
 
 type Props = {
   /**
@@ -130,12 +131,9 @@ export default function Modal({
   );
 
   const showModal = () => {
-    if (subscription.current?.remove) {
-      subscription.current.remove();
-    } else {
-      BackHandler.removeEventListener('hardwareBackPress', handleBack);
-    }
-    subscription.current = BackHandler.addEventListener(
+    subscription.current?.remove();
+    subscription.current = addEventListener(
+      BackHandler,
       'hardwareBackPress',
       handleBack
     );
