@@ -15,7 +15,7 @@ import { AdornmentSide } from './enums';
 
 const AFFIX_OFFSET = 12;
 
-type Props = {
+export type Props = {
   /**
    * Text to show.
    */
