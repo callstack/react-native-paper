@@ -159,39 +159,22 @@ exports[`renders list item with custom description 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
                     style={
                       Array [
                         Object {
+                          "backgroundColor": "transparent",
+                        },
+                        Object {
                           "color": "rgba(0, 0, 0, 0.54)",
                           "fontSize": 18,
                         },
-                        Array [
-                          Object {
-                            "lineHeight": 18,
-                            "transform": Array [
-                              Object {
-                                "scaleX": 1,
-                              },
-                            ],
-                          },
-                          Object {
-                            "backgroundColor": "transparent",
-                          },
-                        ],
-                        Object {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        Object {},
                       ]
                     }
                   >
-                    
+                    □
                   </Text>
                 </View>
                 <Text
@@ -466,39 +449,22 @@ exports[`renders list item with left and right items 1`] = `
     >
       <Text
         accessibilityElementsHidden={true}
-        allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         selectable={false}
         style={
           Array [
             Object {
+              "backgroundColor": "transparent",
+            },
+            Object {
               "color": "rgba(0, 0, 0, 0.54)",
               "fontSize": 24,
             },
-            Array [
-              Object {
-                "lineHeight": 24,
-                "transform": Array [
-                  Object {
-                    "scaleX": 1,
-                  },
-                ],
-              },
-              Object {
-                "backgroundColor": "transparent",
-              },
-            ],
-            Object {
-              "fontFamily": "Material Design Icons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-            Object {},
           ]
         }
       >
-        
+        □
       </Text>
     </View>
   </View>
@@ -556,39 +522,22 @@ exports[`renders list item with left item 1`] = `
     >
       <Text
         accessibilityElementsHidden={true}
-        allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         selectable={false}
         style={
           Array [
             Object {
+              "backgroundColor": "transparent",
+            },
+            Object {
               "color": "rgba(0, 0, 0, 0.54)",
               "fontSize": 24,
             },
-            Array [
-              Object {
-                "lineHeight": 24,
-                "transform": Array [
-                  Object {
-                    "scaleX": 1,
-                  },
-                ],
-              },
-              Object {
-                "backgroundColor": "transparent",
-              },
-            ],
-            Object {
-              "fontFamily": "Material Design Icons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-            Object {},
           ]
         }
       >
-        
+        □
       </Text>
     </View>
     <View

@@ -64,39 +64,22 @@ exports[`renders disabled toggle button 1`] = `
   <View>
     <Text
       accessibilityElementsHidden={true}
-      allowFontScaling={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
       selectable={false}
       style={
         Array [
           Object {
+            "backgroundColor": "transparent",
+          },
+          Object {
             "color": "#000000",
             "fontSize": 24,
           },
-          Array [
-            Object {
-              "lineHeight": 24,
-              "transform": Array [
-                Object {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            Object {
-              "backgroundColor": "transparent",
-            },
-          ],
-          Object {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          Object {},
         ]
       }
     >
-      
+      □
     </Text>
   </View>
 </View>
@@ -164,39 +147,22 @@ exports[`renders toggle button 1`] = `
   <View>
     <Text
       accessibilityElementsHidden={true}
-      allowFontScaling={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
       selectable={false}
       style={
         Array [
           Object {
+            "backgroundColor": "transparent",
+          },
+          Object {
             "color": "#000000",
             "fontSize": 24,
           },
-          Array [
-            Object {
-              "lineHeight": 24,
-              "transform": Array [
-                Object {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            Object {
-              "backgroundColor": "transparent",
-            },
-          ],
-          Object {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          Object {},
         ]
       }
     >
-      
+      □
     </Text>
   </View>
 </View>
@@ -266,39 +232,22 @@ exports[`renders unchecked toggle button 1`] = `
   <View>
     <Text
       accessibilityElementsHidden={true}
-      allowFontScaling={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
       selectable={false}
       style={
         Array [
           Object {
+            "backgroundColor": "transparent",
+          },
+          Object {
             "color": "#000000",
             "fontSize": 24,
           },
-          Array [
-            Object {
-              "lineHeight": 24,
-              "transform": Array [
-                Object {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            Object {
-              "backgroundColor": "transparent",
-            },
-          ],
-          Object {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          Object {},
         ]
       }
     >
-      
+      □
     </Text>
   </View>
 </View>

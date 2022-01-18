@@ -85,9 +85,9 @@
     "jest-file-snapshot": "^0.3.2",
     "metro-react-native-babel-preset": "^0.59.0",
     "prettier": "^2.5.0",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-native": "^0.63.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-native": "^0.64.3",
     "react-native-builder-bob": "^0.17.1",
     "react-native-testing-library": "^1.5.0",
     "react-native-vector-icons": "~6.3.0",
@@ -119,6 +119,9 @@
     ],
     "watchPathIgnorePatterns": [
       "__fixtures__\\/[^/]+\\/(output|error)\\.js"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!(@react-native|react-native|react-native-iphone-x-helper)/)"
     ]
   },
   "greenkeeper": {

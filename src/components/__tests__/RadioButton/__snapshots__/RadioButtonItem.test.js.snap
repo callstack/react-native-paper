@@ -79,32 +79,16 @@ exports[`can render leading radio button control 1`] = `
           style={
             Array [
               Object {
+                "backgroundColor": "transparent",
+              },
+              Object {
                 "color": "#03dac4",
                 "fontSize": 24,
               },
-              Array [
-                Object {
-                  "lineHeight": 24,
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
             ]
           }
         >
-          
+          □
         </Text>
       </View>
     </View>
@@ -354,32 +338,16 @@ exports[`can render the iOS radio button on different platforms 1`] = `
           style={
             Array [
               Object {
+                "backgroundColor": "transparent",
+              },
+              Object {
                 "color": "#03dac4",
                 "fontSize": 24,
               },
-              Array [
-                Object {
-                  "lineHeight": 24,
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
             ]
           }
         >
-          
+          □
         </Text>
       </View>
     </View>
@@ -494,32 +462,16 @@ exports[`renders unchecked 1`] = `
           style={
             Array [
               Object {
+                "backgroundColor": "transparent",
+              },
+              Object {
                 "color": "#03dac4",
                 "fontSize": 24,
               },
-              Array [
-                Object {
-                  "lineHeight": 24,
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
             ]
           }
         >
-          
+          □
         </Text>
       </View>
     </View>

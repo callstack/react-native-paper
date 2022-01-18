@@ -48,32 +48,16 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
       style={
         Array [
           Object {
+            "backgroundColor": "transparent",
+          },
+          Object {
             "color": "#03dac4",
             "fontSize": 24,
           },
-          Array [
-            Object {
-              "lineHeight": 24,
-              "transform": Array [
-                Object {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            Object {
-              "backgroundColor": "transparent",
-            },
-          ],
-          Object {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          Object {},
         ]
       }
     >
-      
+      □
     </Text>
   </View>
 </View>
@@ -126,32 +110,16 @@ exports[`RadioButton on default platform renders properly 1`] = `
       style={
         Array [
           Object {
+            "backgroundColor": "transparent",
+          },
+          Object {
             "color": "#03dac4",
             "fontSize": 24,
           },
-          Array [
-            Object {
-              "lineHeight": 24,
-              "transform": Array [
-                Object {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            Object {
-              "backgroundColor": "transparent",
-            },
-          ],
-          Object {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          Object {},
         ]
       }
     >
-      
+      □
     </Text>
   </View>
 </View>
@@ -204,32 +172,16 @@ exports[`RadioButton on ios platform renders properly 1`] = `
       style={
         Array [
           Object {
+            "backgroundColor": "transparent",
+          },
+          Object {
             "color": "#03dac4",
             "fontSize": 24,
           },
-          Array [
-            Object {
-              "lineHeight": 24,
-              "transform": Array [
-                Object {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            Object {
-              "backgroundColor": "transparent",
-            },
-          ],
-          Object {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          Object {},
         ]
       }
     >
-      
+      □
     </Text>
   </View>
 </View>
@@ -282,32 +234,16 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
       style={
         Array [
           Object {
+            "backgroundColor": "transparent",
+          },
+          Object {
             "color": "#03dac4",
             "fontSize": 24,
           },
-          Array [
-            Object {
-              "lineHeight": 24,
-              "transform": Array [
-                Object {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            Object {
-              "backgroundColor": "transparent",
-            },
-          ],
-          Object {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          Object {},
         ]
       }
     >
-      
+      □
     </Text>
   </View>
 </View>

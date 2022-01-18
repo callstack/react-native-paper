@@ -183,39 +183,22 @@ exports[`renders animated fab 1`] = `
   >
     <Text
       accessibilityElementsHidden={true}
-      allowFontScaling={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
       selectable={false}
       style={
         Array [
           Object {
+            "backgroundColor": "transparent",
+          },
+          Object {
             "color": "rgba(0, 0, 0, .54)",
             "fontSize": 24,
           },
-          Array [
-            Object {
-              "lineHeight": 24,
-              "transform": Array [
-                Object {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            Object {
-              "backgroundColor": "transparent",
-            },
-          ],
-          Object {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          Object {},
         ]
       }
     >
-      
+      □
     </Text>
   </View>
   <View
@@ -434,39 +417,22 @@ exports[`renders animated fab with label on the left 1`] = `
   >
     <Text
       accessibilityElementsHidden={true}
-      allowFontScaling={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
       selectable={false}
       style={
         Array [
           Object {
+            "backgroundColor": "transparent",
+          },
+          Object {
             "color": "rgba(0, 0, 0, .54)",
             "fontSize": 24,
           },
-          Array [
-            Object {
-              "lineHeight": 24,
-              "transform": Array [
-                Object {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            Object {
-              "backgroundColor": "transparent",
-            },
-          ],
-          Object {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          Object {},
         ]
       }
     >
-      
+      □
     </Text>
   </View>
   <View
@@ -687,39 +653,22 @@ exports[`renders animated fab with label on the right by default 1`] = `
   >
     <Text
       accessibilityElementsHidden={true}
-      allowFontScaling={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
       selectable={false}
       style={
         Array [
           Object {
+            "backgroundColor": "transparent",
+          },
+          Object {
             "color": "rgba(0, 0, 0, .54)",
             "fontSize": 24,
           },
-          Array [
-            Object {
-              "lineHeight": 24,
-              "transform": Array [
-                Object {
-                  "scaleX": 1,
-                },
-              ],
-            },
-            Object {
-              "backgroundColor": "transparent",
-            },
-          ],
-          Object {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          Object {},
         ]
       }
     >
-      
+      □
     </Text>
   </View>
   <View
