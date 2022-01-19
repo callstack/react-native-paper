@@ -14,7 +14,6 @@ const scripts = [
   path.join(__dirname, 'assets', 'snack.js'),
   path.join(__dirname, 'assets', 'version.js'),
 ];
-const github = 'https://github.com/callstack/react-native-paper/edit/master/';
 
 if (!fs.existsSync(dist)) {
   fs.mkdirSync(dist);
@@ -116,6 +115,5 @@ module.exports = {
   scripts,
   pages: getPages,
   output: dist,
-  github,
   title: '[title] · React Native Paper',
 };
