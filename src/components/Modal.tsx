@@ -148,13 +148,16 @@ export default function Modal({
     }).start();
   };
 
-  const hideModal = () => {
+  const removeListeners = () => {
     if (subscription.current?.remove) {
       subscription.current?.remove();
     } else {
       BackHandler.removeEventListener('hardwareBackPress', handleBack);
     }
+  };
 
+  const hideModal = () => {
+    removeListeners();
     const { scale } = animation;
 
     Animated.timing(opacity, {
@@ -191,6 +194,10 @@ export default function Modal({
     }
     prevVisible.current = visible;
   });
+
+  React.useEffect(() => {
+    return removeListeners;
+  }, []);
 
   if (!rendered) return null;
 
