@@ -28,6 +28,8 @@ type ElevatedCardProps = {
   elevation?: number;
 };
 
+type HandlePressType = 'in' | 'out';
+
 type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Resting elevation of the card which controls the drop shadow.
@@ -151,38 +153,29 @@ const Card = ({
     elevationDarkAdaptive,
   ]);
 
-  const handlePressIn = () => {
+  const runElevationAnimation = (pressType: HandlePressType) => {
+    const isPressTypeIn = pressType === 'in';
     if (dark && isAdaptiveMode) {
       Animated.timing(elevationDarkAdaptive, {
-        toValue: 8,
+        toValue: isPressTypeIn ? 8 : cardElevation,
         duration: animationDuration,
         useNativeDriver: false,
       }).start();
     } else {
       Animated.timing(elevation, {
-        toValue: 8,
+        toValue: isPressTypeIn ? 8 : cardElevation,
         duration: animationDuration,
         useNativeDriver: true,
       }).start();
     }
   };
 
+  const handlePressIn = () => {
+    runElevationAnimation('in');
+  };
+
   const handlePressOut = () => {
-    if (dark && isAdaptiveMode) {
-      Animated.timing(elevationDarkAdaptive, {
-        // @ts-ignore
-        toValue: cardElevation,
-        duration: animationDuration,
-        useNativeDriver: false,
-      }).start();
-    } else {
-      Animated.timing(elevation, {
-        // @ts-ignore
-        toValue: cardElevation,
-        duration: animationDuration,
-        useNativeDriver: true,
-      }).start();
-    }
+    runElevationAnimation('out');
   };
 
   const total = React.Children.count(children);
