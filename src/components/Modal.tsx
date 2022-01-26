@@ -154,7 +154,7 @@ export default function Modal({
     } else {
       BackHandler.removeEventListener('hardwareBackPress', handleBack);
     }
-  }
+  };
 
   const hideModal = () => {
     removeListeners();
