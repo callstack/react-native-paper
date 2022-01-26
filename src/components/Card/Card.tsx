@@ -28,6 +28,8 @@ type ElevatedCardProps = {
   elevation?: number;
 };
 
+type HandlePressType = 'in' | 'out';
+
 type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Resting elevation of the card which controls the drop shadow.
@@ -111,30 +113,69 @@ const Card = ({
   accessible,
   ...rest
 }: (OutlinedCardProps | ElevatedCardProps) & Props) => {
+  // Default animated value
   const { current: elevation } = React.useRef<Animated.Value>(
+    new Animated.Value(cardElevation)
+  );
+  // Dark adaptive animated value, used in case of toggling the theme,
+  // it prevents animating the background with native drivers inside Surface
+  const { current: elevationDarkAdaptive } = React.useRef<Animated.Value>(
     new Animated.Value(cardElevation)
   );
   const { animation, dark, mode, roundness } = theme;
 
+  const prevDarkRef = React.useRef<boolean>(dark);
+  React.useEffect(() => {
+    prevDarkRef.current = dark;
+  });
+
+  const prevDark = prevDarkRef.current;
+  const isAdaptiveMode = mode === 'adaptive';
+  const animationDuration = 150 * animation.scale;
+
+  React.useEffect(() => {
+    /**
+     * Resets animations values if updating to dark adaptive mode,
+     * otherwise, any card that is in the middle of animation while
+     * toggling the theme will stay at that animated value until
+     * the next press-in
+     */
+    if (dark && isAdaptiveMode && !prevDark) {
+      elevation.setValue(cardElevation);
+      elevationDarkAdaptive.setValue(cardElevation);
+    }
+  }, [
+    prevDark,
+    dark,
+    isAdaptiveMode,
+    cardElevation,
+    elevation,
+    elevationDarkAdaptive,
+  ]);
+
+  const runElevationAnimation = (pressType: HandlePressType) => {
+    const isPressTypeIn = pressType === 'in';
+    if (dark && isAdaptiveMode) {
+      Animated.timing(elevationDarkAdaptive, {
+        toValue: isPressTypeIn ? 8 : cardElevation,
+        duration: animationDuration,
+        useNativeDriver: false,
+      }).start();
+    } else {
+      Animated.timing(elevation, {
+        toValue: isPressTypeIn ? 8 : cardElevation,
+        duration: animationDuration,
+        useNativeDriver: true,
+      }).start();
+    }
+  };
+
   const handlePressIn = () => {
-    const {
-      dark,
-      mode,
-      animation: { scale },
-    } = theme;
-    Animated.timing(elevation, {
-      toValue: 8,
-      duration: 150 * scale,
-      useNativeDriver: !dark || mode === 'exact',
-    }).start();
+    runElevationAnimation('in');
   };
 
   const handlePressOut = () => {
-    Animated.timing(elevation, {
-      toValue: cardElevation,
-      duration: 150 * animation.scale,
-      useNativeDriver: !dark || mode === 'exact',
-    }).start();
+    runElevationAnimation('out');
   };
 
   const total = React.Children.count(children);
@@ -143,15 +184,17 @@ const Card = ({
       ? (child.type as any).displayName
       : null
   );
-  const borderColor = color(theme.dark ? white : black)
+  const borderColor = color(dark ? white : black)
     .alpha(0.12)
     .rgb()
     .string();
+  const computedElevation =
+    dark && isAdaptiveMode ? elevationDarkAdaptive : elevation;
 
   return (
     <Surface
       style={[
-        { borderRadius: roundness, elevation, borderColor },
+        { borderRadius: roundness, elevation: computedElevation, borderColor },
         cardMode === 'outlined' ? styles.outlined : {},
         style,
       ]}

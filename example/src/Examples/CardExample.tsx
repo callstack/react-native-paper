@@ -10,6 +10,7 @@ import {
   Text,
   Switch,
 } from 'react-native-paper';
+import { PreferencesContext } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 const CardExample = () => {
@@ -18,6 +19,8 @@ const CardExample = () => {
   } = useTheme();
   const [isOutlined, setIsOutlined] = React.useState(false);
   const mode = isOutlined ? 'outlined' : 'elevated';
+
+  const preferences = React.useContext(PreferencesContext);
 
   return (
     <ScreenWrapper contentContainerStyle={styles.content}>
@@ -117,6 +120,23 @@ const CardExample = () => {
             <Paragraph>
               This is a long press only city. If you long press me, I will
               alert.
+            </Paragraph>
+          </Card.Content>
+        </Card>
+        <Card
+          style={styles.card}
+          onPress={() => {
+            preferences.toggleTheme();
+          }}
+          mode={mode}
+        >
+          <Card.Title
+            title="Pressable Theme Change"
+            left={(props) => <Avatar.Icon {...props} icon="format-paint" />}
+          />
+          <Card.Content>
+            <Paragraph>
+              This is pressable card. If you press me, I will switch the theme.
             </Paragraph>
           </Card.Content>
         </Card>
