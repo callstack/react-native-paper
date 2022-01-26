@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   Image,
   ImageSourcePropType,
+  ImageProps,
   StyleSheet,
   View,
   ViewStyle,
@@ -27,6 +28,30 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   size?: number;
   style?: StyleProp<ViewStyle>;
+  /**
+   * Invoked on load error.
+   */
+  onError?: ImageProps['onError'];
+  /**
+   * Invoked on mount and on layout changes.
+   */
+  onLayout?: ImageProps['onLayout'];
+  /**
+   * Invoked when load completes successfully.
+   */
+  onLoad?: ImageProps['onLoad'];
+  /**
+   * Invoked when load either succeeds or fails.
+   */
+  onLoadEnd?: ImageProps['onLoadEnd'];
+  /**
+   * Invoked on load start.
+   */
+  onLoadStart?: ImageProps['onLoadStart'];
+  /**
+   * Invoked on download progress.
+   */
+  onProgress?: ImageProps['onProgress'];
   /**
    * @optional
    */
@@ -57,6 +82,12 @@ const AvatarImage = ({
   size = defaultSize,
   source,
   style,
+  onError,
+  onLayout,
+  onLoad,
+  onLoadEnd,
+  onLoadStart,
+  onProgress,
   theme,
   ...rest
 }: Props) => {
@@ -82,6 +113,12 @@ const AvatarImage = ({
         <Image
           source={source}
           style={{ width: size, height: size, borderRadius: size / 2 }}
+          onError={onError}
+          onLayout={onLayout}
+          onLoad={onLoad}
+          onLoadEnd={onLoadEnd}
+          onLoadStart={onLoadStart}
+          onProgress={onProgress}
         />
       )}
     </View>
