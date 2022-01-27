@@ -9,9 +9,11 @@ import { ThemeProvider } from './theming';
 import { Provider as SettingsProvider, Settings } from './settings';
 import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
 import PortalHost from '../components/Portal/PortalHost';
-import DefaultTheme from '../styles/DefaultTheme';
-import DarkTheme from '../styles/DarkTheme';
+import DefaultTheme from '../styles/themes/v2/LightTheme';
+import DarkTheme from '../styles/themes/v2/DarkTheme';
 import { addEventListener } from '../utils/addEventListener';
+import { get } from 'lodash';
+import type { MD3Token } from '../types';
 
 type Props = {
   children: React.ReactNode;
@@ -73,24 +75,26 @@ const Provider = ({ ...props }: Props) => {
   const getTheme = () => {
     const { theme: providedTheme } = props;
 
-    if (providedTheme) {
-      return providedTheme;
-    } else {
-      const theme = (
-        colorScheme === 'dark' ? DarkTheme : DefaultTheme
-      ) as ReactNativePaper.Theme;
+    const theme = providedTheme
+      ? providedTheme
+      : ((colorScheme === 'dark'
+          ? DarkTheme
+          : DefaultTheme) as ReactNativePaper.Theme);
 
-      return {
-        ...theme,
-        animation: {
-          ...theme.animation,
-          scale: reduceMotionEnabled ? 0 : 1,
-        },
-      };
-    }
+    const md = (tokenKey: MD3Token) => get(theme.tokens, tokenKey);
+
+    return {
+      ...theme,
+      ...(theme.version === 3 && { md }),
+      animation: {
+        ...theme.animation,
+        scale: reduceMotionEnabled ? 0 : 1,
+      },
+    };
   };
 
   const { children, settings } = props;
+
   return (
     <PortalHost>
       <SettingsProvider value={settings || { icon: MaterialCommunityIcon }}>

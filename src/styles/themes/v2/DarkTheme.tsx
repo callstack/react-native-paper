@@ -1,14 +1,14 @@
 import color from 'color';
-import DefaultTheme from './DefaultTheme';
+import LightTheme from './LightTheme';
 import { black, white, pinkA100 } from './colors';
-import type { Theme } from '../types';
+import type { MD2Theme } from '../../../types';
 
-const DarkTheme: Theme = {
-  ...DefaultTheme,
+const DarkTheme: MD2Theme = {
+  ...LightTheme,
   dark: true,
   mode: 'adaptive',
   colors: {
-    ...DefaultTheme.colors,
+    ...LightTheme.colors,
     primary: '#BB86FC',
     accent: '#03dac6',
     background: '#121212',
