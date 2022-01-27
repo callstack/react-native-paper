@@ -14,7 +14,7 @@ import Icon, { IconSource } from './Icon';
 import Surface from './Surface';
 import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple/TouchableRipple';
-import { black, white } from '../styles/colors';
+import { black, white } from '../styles/themes/v2/colors';
 import { withTheme } from '../core/theming';
 
 type Props = React.ComponentProps<typeof Surface> & {

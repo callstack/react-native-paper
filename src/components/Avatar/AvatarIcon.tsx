@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 import Icon, { IconSource } from '../Icon';
 import { withTheme } from '../../core/theming';
-import { white } from '../../styles/colors';
+import { white } from '../../styles/themes/v2/colors';
 import getContrastingColor from '../../utils/getContrastingColor';
 
 const defaultSize = 64;

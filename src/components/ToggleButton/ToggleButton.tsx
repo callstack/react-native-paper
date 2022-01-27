@@ -9,7 +9,7 @@ import { withTheme } from '../../core/theming';
 import color from 'color';
 import IconButton from '../IconButton';
 import { ToggleButtonGroupContext } from './ToggleButtonGroup';
-import { black, white } from '../../styles/colors';
+import { black, white } from '../../styles/themes/v2/colors';
 import type { IconSource } from '../Icon';
 
 type Props = {

@@ -8,7 +8,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import color from 'color';
-import { white, black } from '../../styles/colors';
+import { white, black } from '../../styles/themes/v2/colors';
 import CardContent from './CardContent';
 import CardActions from './CardActions';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -5,7 +5,7 @@ import type {
   ViewStyle,
   TouchableWithoutFeedback,
 } from 'react-native';
-import { black } from '../../styles/colors';
+import { black } from '../../styles/themes/v2/colors';
 import IconButton from '../IconButton';
 import type { IconSource } from '../Icon';
 

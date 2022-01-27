@@ -10,7 +10,7 @@ import {
 import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import { black, white } from '../../styles/colors';
+import { black, white } from '../../styles/themes/v2/colors';
 import { withTheme } from '../../core/theming';
 
 type Props = {

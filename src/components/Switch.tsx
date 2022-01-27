@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { grey400, grey800, grey50, white, black } from '../styles/colors';
+import {
+  grey400,
+  grey800,
+  grey50,
+  white,
+  black,
+} from '../styles/themes/v2/colors';
 import {
   NativeModules,
   Platform,
