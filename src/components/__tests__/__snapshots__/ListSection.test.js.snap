@@ -48,6 +48,7 @@ exports[`renders list section with custom title style 1`] = `
         },
       },
       "roundness": 4,
+      "version": 2,
     }
   }
 >
@@ -357,6 +358,7 @@ exports[`renders list section with subheader 1`] = `
         },
       },
       "roundness": 4,
+      "version": 2,
     }
   }
 >
@@ -664,6 +666,7 @@ exports[`renders list section without subheader 1`] = `
         },
       },
       "roundness": 4,
+      "version": 2,
     }
   }
 >
