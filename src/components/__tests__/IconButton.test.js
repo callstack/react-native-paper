@@ -1,7 +1,7 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
 import IconButton from '../IconButton.tsx';
-import { pink500 } from '../../styles/colors.tsx';
+import { pink500 } from '../../styles/themes/v2/colors';
 
 it('renders icon button by default', () => {
   const tree = renderer.create(<IconButton icon="camera" />).toJSON();

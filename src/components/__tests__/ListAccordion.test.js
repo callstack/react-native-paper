@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import ListAccordion from '../List/ListAccordion.tsx';
 import ListItem from '../List/ListItem.tsx';
 import ListIcon from '../List/ListIcon.tsx';
-import { red500 } from '../../styles/colors';
+import { red500 } from '../../styles/themes/v2/colors';
 
 const styles = StyleSheet.create({
   coloring: {

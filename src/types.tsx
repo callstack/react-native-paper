@@ -75,7 +75,7 @@ type SharedTheme = {
   dark: boolean;
   mode?: Mode;
   roundness: number;
-  version: 3;
+  version?: 2 | 3;
   fonts: Fonts;
   animation: {
     scale: number;

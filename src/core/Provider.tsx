@@ -9,7 +9,7 @@ import { ThemeProvider } from './theming';
 import { Provider as SettingsProvider, Settings } from './settings';
 import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
 import PortalHost from '../components/Portal/PortalHost';
-import DefaultTheme from '../styles/themes/v2/LightTheme';
+import LightTheme from '../styles/themes/v2/LightTheme';
 import DarkTheme from '../styles/themes/v2/DarkTheme';
 import { addEventListener } from '../utils/addEventListener';
 import { get } from 'lodash';
@@ -79,7 +79,7 @@ const Provider = ({ ...props }: Props) => {
       ? providedTheme
       : ((colorScheme === 'dark'
           ? DarkTheme
-          : DefaultTheme) as ReactNativePaper.Theme);
+          : LightTheme) as ReactNativePaper.Theme);
 
     const md = (tokenKey: MD3Token) => get(theme.tokens, tokenKey);
 

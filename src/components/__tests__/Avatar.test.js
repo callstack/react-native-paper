@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import renderer from 'react-test-renderer';
 import * as Avatar from '../Avatar/Avatar.tsx';
-import { red500 } from '../../styles/colors';
+import { red500 } from '../../styles/themes/v2/colors';
 
 const styles = StyleSheet.create({
   bgColor: {
