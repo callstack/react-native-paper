@@ -15,7 +15,7 @@ import {
   pink400,
   red500,
   transparent,
-} from '../../../src/styles/colors';
+} from '../../../src/styles/themes/v2/colors';
 
 const MAX_LENGTH = 20;
 

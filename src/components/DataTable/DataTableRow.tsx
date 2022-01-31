@@ -8,7 +8,7 @@ import {
   ViewProps,
 } from 'react-native';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { black, white } from '../../styles/colors';
+import { black, white } from '../../styles/themes/v2/colors';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren } from '../../types';
 

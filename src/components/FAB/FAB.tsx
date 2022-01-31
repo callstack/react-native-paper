@@ -14,7 +14,7 @@ import CrossFadeIcon from '../CrossFadeIcon';
 import Icon, { IconSource } from '../Icon';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { black, white } from '../../styles/colors';
+import { black, white } from '../../styles/themes/v2/colors';
 import { withTheme } from '../../core/theming';
 import getContrastingColor from '../../utils/getContrastingColor';
 import type { $RemoveChildren } from '../../types';

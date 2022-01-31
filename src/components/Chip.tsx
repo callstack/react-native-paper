@@ -18,7 +18,7 @@ import Surface from './Surface';
 import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple/TouchableRipple';
 import { withTheme } from '../core/theming';
-import { black, white } from '../styles/colors';
+import { black, white } from '../styles/themes/v2/colors';
 import type { EllipsizeProp } from '../types';
 
 type Props = React.ComponentProps<typeof Surface> & {

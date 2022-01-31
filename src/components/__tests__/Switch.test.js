@@ -1,7 +1,7 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
 import Switch from '../Switch.tsx';
-import { pink500 } from '../../styles/colors.tsx';
+import { pink500 } from '../../styles/themes/v2/colors';
 
 it('renders on switch', () => {
   const tree = renderer.create(<Switch value />).toJSON();
