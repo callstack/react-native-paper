@@ -7,6 +7,7 @@ const LightTheme: MD2Theme = {
   dark: false,
   roundness: 4,
   version: 2,
+  isV3: false,
   colors: {
     primary: '#6200ee',
     accent: '#03dac4',
