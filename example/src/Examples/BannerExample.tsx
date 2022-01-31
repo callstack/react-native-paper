@@ -68,9 +68,6 @@ const BannerExample = () => {
 BannerExample.title = 'Banner';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   ...Platform.select({
     web: {
       grid: {
