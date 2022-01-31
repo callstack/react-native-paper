@@ -233,8 +233,8 @@ const FABGroup = ({
   const { colors } = theme;
 
   const labelColor = theme.dark
-    ? colors.text
-    : color(colors.text).fade(0.54).rgb().string();
+    ? colors?.text
+    : color(colors?.text).fade(0.54).rgb().string();
   const backdropOpacity = open
     ? backdrop.interpolate({
         inputRange: [0, 0.5, 1],
@@ -268,7 +268,7 @@ const FABGroup = ({
             styles.backdrop,
             {
               opacity: backdropOpacity,
-              backgroundColor: colors.backdrop,
+              backgroundColor: colors?.backdrop,
             },
           ]}
         />
@@ -329,7 +329,7 @@ const FABGroup = ({
                     {
                       transform: [{ scale: scales[i] }],
                       opacity: opacities[i],
-                      backgroundColor: theme.colors.surface,
+                      backgroundColor: theme.colors?.surface,
                     },
                     it.style,
                   ] as StyleProp<ViewStyle>

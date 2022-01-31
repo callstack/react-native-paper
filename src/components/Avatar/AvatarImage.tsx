@@ -94,7 +94,7 @@ const AvatarImage = ({
 }: Props) => {
   const { colors } = theme;
 
-  const { backgroundColor = colors.primary } = StyleSheet.flatten(style) || {};
+  const { backgroundColor = colors?.primary } = StyleSheet.flatten(style) || {};
 
   return (
     <View

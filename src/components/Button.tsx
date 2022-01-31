@@ -194,7 +194,7 @@ const Button = ({
     } else if (buttonColor) {
       backgroundColor = buttonColor;
     } else {
-      backgroundColor = colors.primary;
+      backgroundColor = colors?.primary || white;
     }
   } else {
     backgroundColor = 'transparent';
@@ -232,7 +232,7 @@ const Button = ({
   } else if (buttonColor) {
     textColor = buttonColor;
   } else {
-    textColor = colors.primary;
+    textColor = colors?.primary || black;
   }
 
   const rippleColor = color(textColor).alpha(0.32).rgb().string();

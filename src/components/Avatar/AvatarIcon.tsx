@@ -48,11 +48,11 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * ```
  */
 const Avatar = ({ icon, size = defaultSize, style, theme, ...rest }: Props) => {
-  const { backgroundColor = theme.colors.primary, ...restStyle } =
+  const { backgroundColor = theme.colors?.primary, ...restStyle } =
     StyleSheet.flatten(style) || {};
   const textColor =
     rest.color ??
-    getContrastingColor(backgroundColor, white, 'rgba(0, 0, 0, .54)');
+    getContrastingColor(backgroundColor || white, white, 'rgba(0, 0, 0, .54)');
 
   return (
     <View

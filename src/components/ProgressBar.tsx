@@ -147,7 +147,7 @@ const ProgressBar = ({
     setWidth(event.nativeEvent.layout.width);
   };
 
-  const tintColor = color || theme.colors.primary;
+  const tintColor = color || theme.colors?.primary;
   const trackTintColor = setColor(tintColor).alpha(0.38).rgb().string();
 
   return (

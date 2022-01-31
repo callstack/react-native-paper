@@ -32,7 +32,7 @@ function AnimatedText({ style, theme, ...rest }: Props) {
         styles.text,
         {
           ...theme.fonts.regular,
-          color: theme.colors.text,
+          color: theme.colors?.text,
           writingDirection,
         },
         style,

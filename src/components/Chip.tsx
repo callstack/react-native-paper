@@ -167,7 +167,7 @@ const Chip = ({
 
   const { dark, colors } = theme;
   const defaultBackgroundColor =
-    mode === 'outlined' ? colors.surface : dark ? '#383838' : '#ebebeb';
+    mode === 'outlined' ? colors?.surface : dark ? '#383838' : '#ebebeb';
 
   const { backgroundColor = defaultBackgroundColor, borderRadius = 16 } =
     (StyleSheet.flatten(style) || {}) as ViewStyle;
@@ -184,14 +184,14 @@ const Chip = ({
           .string()
       : backgroundColor;
   const textColor = disabled
-    ? colors.disabled
-    : color(selectedColor !== undefined ? selectedColor : colors.text)
+    ? colors?.disabled
+    : color(selectedColor !== undefined ? selectedColor : colors?.text)
         .alpha(0.87)
         .rgb()
         .string();
   const iconColor = disabled
-    ? colors.disabled
-    : color(selectedColor !== undefined ? selectedColor : colors.text)
+    ? colors?.disabled
+    : color(selectedColor !== undefined ? selectedColor : colors?.text)
         .alpha(0.54)
         .rgb()
         .string();

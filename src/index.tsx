@@ -55,4 +55,4 @@ export { default as Subheading } from './components/Typography/Subheading';
 export { default as Title } from './components/Typography/Title';
 export { default as Text } from './components/Typography/Text';
 
-export { Theme } from './types';
+export type { Theme } from './types';

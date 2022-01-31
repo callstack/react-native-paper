@@ -61,7 +61,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  */
 const DrawerSection = ({ children, title, theme, style, ...rest }: Props) => {
   const { colors, fonts } = theme;
-  const titleColor = color(colors.text).alpha(0.54).rgb().string();
+  const titleColor = color(colors?.text).alpha(0.54).rgb().string();
   const font = fonts.medium;
 
   return (

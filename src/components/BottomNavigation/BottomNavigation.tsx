@@ -379,7 +379,7 @@ const BottomNavigation = ({
 
   /**
    * Index of the currently active tab. Used for setting the background color.
-   * We don't use the color as an animated value directly, because `setValue` seems to be buggy with colors.
+   * We don't use the color as an animated value directly, because `setValue` seems to be buggy with colors?.
    */
   const indexAnim = useAnimatedValue(navigationState.index);
 
@@ -545,8 +545,8 @@ const BottomNavigation = ({
   const approxBackgroundColor = customBackground
     ? customBackground
     : isDarkTheme && mode === 'adaptive'
-    ? overlay(elevation, colors.surface)
-    : colors.primary;
+    ? overlay(elevation, colors?.surface)
+    : colors?.primary;
 
   const backgroundColor = shifting
     ? indexAnim.interpolate({
@@ -593,7 +593,7 @@ const BottomNavigation = ({
 
   return (
     <View style={[styles.container, style]}>
-      <View style={[styles.content, { backgroundColor: colors.background }]}>
+      <View style={[styles.content, { backgroundColor: colors?.background }]}>
         {routes.map((route, index) => {
           if (!loaded.includes(route.key)) {
             // Don't render a screen if we've never navigated to it
@@ -744,7 +744,7 @@ const BottomNavigation = ({
                 : 7;
 
               // We render the active icon and label on top of inactive ones and cross-fade them on change.
-              // This trick gives the illusion that we are animating between active and inactive colors.
+              // This trick gives the illusion that we are animating between active and inactive colors?.
               // This is to ensure that we can use native driver, as colors cannot be animated with native driver.
               const activeOpacity = active;
               const inactiveOpacity = active.interpolate({

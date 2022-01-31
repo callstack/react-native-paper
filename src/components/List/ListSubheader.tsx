@@ -32,7 +32,7 @@ type Props = React.ComponentProps<typeof Text> & {
 const ListSubheader = ({ style, theme, ...rest }: Props) => {
   const { colors, fonts } = theme;
   const font = fonts.medium;
-  const textColor = color(colors.text).alpha(0.54).rgb().string();
+  const textColor = color(colors?.text).alpha(0.54).rgb().string();
 
   return (
     <Text

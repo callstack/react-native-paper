@@ -70,8 +70,8 @@ const Surface = ({ style, theme, ...rest }: Props) => {
         {
           backgroundColor:
             isDarkTheme && mode === 'adaptive'
-              ? overlay(elevation, colors.surface)
-              : colors.surface,
+              ? overlay(elevation, colors?.surface)
+              : colors?.surface,
         },
         elevation ? shadow(elevation) : null,
         style,

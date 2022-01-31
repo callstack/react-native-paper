@@ -13,9 +13,8 @@ import TouchableRipple from './TouchableRipple/TouchableRipple';
 import Icon, { IconSource } from './Icon';
 import CrossFadeIcon from './CrossFadeIcon';
 import { withTheme } from '../core/theming';
-import type { Theme } from '../types';
-
-import type { $RemoveChildren } from '../types';
+import type { $RemoveChildren, Theme } from '../types';
+import { black } from '../styles/themes/v2/colors';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -101,7 +100,7 @@ const IconButton = ({
   ...rest
 }: Props) => {
   const iconColor =
-    typeof customColor !== 'undefined' ? customColor : theme.colors.text;
+    typeof customColor !== 'undefined' ? customColor : theme.colors?.text;
   const rippleColor = color(iconColor).alpha(0.32).rgb().string();
   const IconComponent = animated ? CrossFadeIcon : Icon;
   const buttonSize = size * 1.5;
@@ -132,7 +131,7 @@ const IconButton = ({
       {...rest}
     >
       <View>
-        <IconComponent color={iconColor} source={icon} size={size} />
+        <IconComponent color={iconColor || black} source={icon} size={size} />
       </View>
     </TouchableRipple>
   );

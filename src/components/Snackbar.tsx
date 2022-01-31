@@ -202,7 +202,7 @@ const Snackbar = ({
                 },
               ],
             },
-            { backgroundColor: colors.onSurface },
+            { backgroundColor: colors?.onSurface },
             style,
           ] as StyleProp<ViewStyle>
         }
@@ -211,7 +211,7 @@ const Snackbar = ({
         <Text
           style={[
             styles.content,
-            { marginRight: action ? 0 : 16, color: colors.surface },
+            { marginRight: action ? 0 : 16, color: colors?.surface },
           ]}
         >
           {children}
@@ -223,7 +223,7 @@ const Snackbar = ({
               onDismiss();
             }}
             style={[styles.button, actionStyle]}
-            color={colors.accent}
+            color={colors?.accent}
             compact
             mode="text"
             {...actionProps}

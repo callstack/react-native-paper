@@ -87,8 +87,8 @@ const Appbar = ({ children, dark, style, theme, ...rest }: Props) => {
   const backgroundColor = customBackground
     ? customBackground
     : isDarkTheme && mode === 'adaptive'
-    ? overlay(elevation, colors.surface)
-    : colors.primary;
+    ? overlay(elevation, colors?.surface)
+    : colors?.primary;
   if (typeof dark === 'boolean') {
     isDark = dark;
   } else {

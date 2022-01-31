@@ -96,8 +96,8 @@ const AppbarHeader = (props: Props) => {
   const backgroundColor = customBackground
     ? customBackground
     : isDarkTheme && mode === 'adaptive'
-    ? overlay(elevation, colors.surface)
-    : colors.primary;
+    ? overlay(elevation, colors?.surface)
+    : colors?.primary;
   // Let the user override the behaviour
   const Wrapper =
     typeof props.statusBarHeight === 'number' ? View : SafeAreaView;

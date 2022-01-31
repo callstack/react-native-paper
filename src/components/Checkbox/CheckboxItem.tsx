@@ -131,7 +131,7 @@ const CheckboxItem = ({
           style={[
             styles.label,
             {
-              color: theme.colors.text,
+              color: theme.colors?.text,
               textAlign: isLeading ? 'right' : 'left',
             },
             labelStyle,

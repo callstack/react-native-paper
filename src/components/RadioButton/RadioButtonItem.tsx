@@ -157,7 +157,7 @@ const RadioButtonItem = ({
                 style={[
                   styles.label,
                   {
-                    color: colors.text,
+                    color: colors?.text,
                     textAlign: isLeading ? 'right' : 'left',
                   },
                   labelStyle,

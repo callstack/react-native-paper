@@ -40,7 +40,7 @@ const Text: React.RefForwardingComponent<{}, Props> = (
       style={[
         {
           ...theme.fonts.regular,
-          color: theme.colors.text,
+          color: theme.colors?.text,
         },
         styles.text,
         style,

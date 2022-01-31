@@ -6,6 +6,7 @@ import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
+import { black } from '../../styles/themes/v2/colors';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -77,11 +78,11 @@ const DrawerItem = ({
 }: Props) => {
   const { colors, roundness } = theme;
   const backgroundColor = active
-    ? color(colors.primary).alpha(0.12).rgb().string()
+    ? color(colors?.primary).alpha(0.12).rgb().string()
     : 'transparent';
   const contentColor = active
-    ? colors.primary
-    : color(colors.text).alpha(0.68).rgb().string();
+    ? colors?.primary
+    : color(colors?.text).alpha(0.68).rgb().string();
   const font = theme.fonts.medium;
   const labelMargin = icon ? 32 : 0;
 
@@ -123,7 +124,8 @@ const DrawerItem = ({
               {label}
             </Text>
           </View>
-          {right?.({ color: contentColor })}
+
+          {right?.({ color: contentColor || black })}
         </View>
       </TouchableRipple>
     </View>

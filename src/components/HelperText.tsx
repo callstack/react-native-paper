@@ -121,8 +121,8 @@ const HelperText = ({
 
   const textColor =
     type === 'error'
-      ? colors.error
-      : color(colors.text)
+      ? colors?.error
+      : color(colors?.text)
           .alpha(dark ? 0.7 : 0.54)
           .rgb()
           .string();

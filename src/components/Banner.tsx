@@ -212,7 +212,7 @@ const Banner = ({
               </View>
             ) : null}
             <Text
-              style={[styles.message, { color: theme.colors.text }]}
+              style={[styles.message, { color: theme.colors?.text }]}
               accessibilityLiveRegion={visible ? 'polite' : 'none'}
               accessibilityRole="alert"
             >
@@ -226,7 +226,7 @@ const Banner = ({
                 compact
                 mode="text"
                 style={styles.button}
-                color={theme.colors.primary}
+                color={theme.colors?.primary}
                 {...others}
               >
                 {label}
