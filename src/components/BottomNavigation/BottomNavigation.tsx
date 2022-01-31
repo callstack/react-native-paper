@@ -24,6 +24,7 @@ import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import useLayout from '../../utils/useLayout';
 import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
 import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
+import type { Theme } from '../../types';
 
 type Route = {
   key: string;
@@ -230,7 +231,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 const MIN_RIPPLE_SCALE = 0.001; // Minimum scale is not 0 due to bug with animation

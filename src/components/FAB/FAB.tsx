@@ -17,9 +17,7 @@ import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { black, white } from '../../styles/themes/v2/colors';
 import { withTheme } from '../../core/theming';
 import getContrastingColor from '../../utils/getContrastingColor';
-import type { $RemoveChildren } from '../../types';
-
-getContrastingColor;
+import type { $RemoveChildren, Theme } from '../../types';
 
 type Props = $RemoveChildren<typeof Surface> & {
   /**
@@ -79,7 +77,7 @@ type Props = $RemoveChildren<typeof Surface> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   testID?: string;
 };
 

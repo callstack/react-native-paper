@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import ListSubheader from './ListSubheader';
 import { withTheme } from '../../core/theming';
+import type { Theme } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -21,7 +22,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * Style that is passed to Title element.
    */

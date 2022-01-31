@@ -3,6 +3,7 @@ import { Animated, StyleSheet, View, StyleProp, ViewStyle } from 'react-native';
 import shadow from '../styles/shadow';
 import { withTheme } from '../core/theming';
 import overlay from '../styles/overlay';
+import type { Theme } from '../types';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -13,7 +14,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 /**

@@ -19,7 +19,7 @@ import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple/TouchableRipple';
 import { withTheme } from '../core/theming';
 import { black, white } from '../styles/themes/v2/colors';
-import type { EllipsizeProp } from '../types';
+import type { EllipsizeProp, Theme } from '../types';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
@@ -85,7 +85,7 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * Pass down testID from chip props to touchable for Detox tests.
    */

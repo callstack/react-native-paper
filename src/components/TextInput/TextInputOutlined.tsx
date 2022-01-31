@@ -349,7 +349,7 @@ type OutlineProps = {
   focused?: boolean;
   outlineColor?: string;
   backgroundColor: ColorValue;
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 const Outline = ({

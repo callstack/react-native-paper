@@ -5,7 +5,7 @@ import Text from './Typography/Text';
 import Button from './Button';
 import Icon, { IconSource } from './Icon';
 import { withTheme } from '../core/theming';
-import type { $RemoveChildren } from '../types';
+import type { $RemoveChildren, Theme } from '../types';
 import shadow from '../styles/shadow';
 
 const ELEVATION = 1;
@@ -48,7 +48,7 @@ type Props = $RemoveChildren<typeof Surface> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * @optional
    * Optional callback that will be called after the opening animation finished running normally

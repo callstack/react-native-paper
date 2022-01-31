@@ -3,7 +3,7 @@ import color from 'color';
 import { StyleSheet, View, ViewStyle, StyleProp } from 'react-native';
 import { withTheme } from '../core/theming';
 import { black, white } from '../styles/themes/v2/colors';
-import type { $RemoveChildren } from '../types';
+import type { $RemoveChildren, Theme } from '../types';
 
 type Props = $RemoveChildren<typeof View> & {
   /**
@@ -14,7 +14,7 @@ type Props = $RemoveChildren<typeof View> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 /**

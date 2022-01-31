@@ -13,6 +13,7 @@ import TouchableRipple from './TouchableRipple/TouchableRipple';
 import Icon, { IconSource } from './Icon';
 import CrossFadeIcon from './CrossFadeIcon';
 import { withTheme } from '../core/theming';
+import type { Theme } from '../types';
 
 import type { $RemoveChildren } from '../types';
 
@@ -50,7 +51,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 /**

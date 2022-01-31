@@ -13,6 +13,7 @@ import { withTheme, useTheme } from '../../core/theming';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Menu from '../Menu/Menu';
 import Button from '../Button';
+import type { Theme } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof View> &
   PaginationControlsProps &
@@ -37,7 +38,7 @@ type Props = React.ComponentPropsWithRef<typeof View> &
     /**
      * @optional
      */
-    theme: ReactNativePaper.Theme;
+    theme: Theme;
   };
 
 type PaginationDropdownProps = {

@@ -15,7 +15,7 @@ import {
 import Surface from '../../Surface';
 import Icon from '../../Icon';
 import TouchableRipple from '../../TouchableRipple/TouchableRipple';
-import type { $RemoveChildren } from '../../../types';
+import type { $RemoveChildren, Theme } from '../../../types';
 import type { IconSource } from '../../Icon';
 import { withTheme } from '../../../core/theming';
 import type {
@@ -88,7 +88,7 @@ type Props = $RemoveChildren<typeof Surface> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   testID?: string;
 };
 

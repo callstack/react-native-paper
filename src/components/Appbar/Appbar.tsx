@@ -9,6 +9,7 @@ import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import { black, white } from '../../styles/themes/v2/colors';
 import overlay from '../../styles/overlay';
+import type { Theme } from '../../types';
 
 type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
   /**
@@ -22,7 +23,7 @@ type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   style?: StyleProp<ViewStyle>;
 };
 

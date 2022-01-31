@@ -12,6 +12,7 @@ import Button from './Button';
 import Surface from './Surface';
 import Text from './Typography/Text';
 import { withTheme } from '../core/theming';
+import type { Theme } from '../types';
 
 export type SnackbarProps = React.ComponentProps<typeof Surface> & {
   /**
@@ -47,7 +48,7 @@ export type SnackbarProps = React.ComponentProps<typeof Surface> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 const DURATION_SHORT = 4000;

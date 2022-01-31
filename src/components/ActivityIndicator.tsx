@@ -8,6 +8,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+import type { Theme } from '../types';
 import { withTheme } from '../core/theming';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
@@ -31,7 +32,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 const DURATION = 2400;

@@ -14,6 +14,7 @@ import Text from '../Typography/Text';
 import Card from '../Card/Card';
 import { withTheme } from '../../core/theming';
 import type { IconSource } from '../Icon';
+import type { Theme } from '../../types';
 
 type Props = {
   /**
@@ -83,7 +84,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * Pass down testID from Group props to FAB.
    */

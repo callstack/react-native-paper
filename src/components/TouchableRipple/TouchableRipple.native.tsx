@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import color from 'color';
 import { withTheme } from '../../core/theming';
+import type { Theme } from '../../types';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 const ANDROID_VERSION_PIE = 28;
@@ -25,7 +26,7 @@ type Props = React.ComponentProps<typeof TouchableWithoutFeedback> & {
   underlayColor?: string;
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 const TouchableRipple = ({

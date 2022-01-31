@@ -11,6 +11,7 @@ import IconButton from '../IconButton';
 import { ToggleButtonGroupContext } from './ToggleButtonGroup';
 import { black, white } from '../../styles/themes/v2/colors';
 import type { IconSource } from '../Icon';
+import type { Theme } from '../../types';
 
 type Props = {
   /**
@@ -49,7 +50,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 /**

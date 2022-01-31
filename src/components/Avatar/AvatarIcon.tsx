@@ -4,6 +4,7 @@ import Icon, { IconSource } from '../Icon';
 import { withTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
 import getContrastingColor from '../../utils/getContrastingColor';
+import type { Theme } from '../../types';
 
 const defaultSize = 64;
 
@@ -24,7 +25,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 /**

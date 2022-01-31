@@ -11,6 +11,7 @@ import { DEFAULT_APPBAR_HEIGHT, Appbar } from './Appbar';
 import shadow from '../../styles/shadow';
 import { withTheme } from '../../core/theming';
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
+import type { Theme } from '../../types';
 
 type Props = React.ComponentProps<typeof Appbar> & {
   /**
@@ -31,7 +32,7 @@ type Props = React.ComponentProps<typeof Appbar> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   style?: StyleProp<ViewStyle>;
 };
 
