@@ -13,11 +13,11 @@ import LightTheme from '../styles/themes/v2/LightTheme';
 import DarkTheme from '../styles/themes/v2/DarkTheme';
 import { addEventListener } from '../utils/addEventListener';
 import { get } from 'lodash';
-import type { MD3Token } from '../types';
+import type { MD3Token, Theme } from '../types';
 
 type Props = {
   children: React.ReactNode;
-  theme?: ReactNativePaper.Theme;
+  theme?: Theme;
   settings?: Settings;
 };
 
@@ -77,9 +77,7 @@ const Provider = ({ ...props }: Props) => {
 
     const theme = providedTheme
       ? providedTheme
-      : ((colorScheme === 'dark'
-          ? DarkTheme
-          : LightTheme) as ReactNativePaper.Theme);
+      : ((colorScheme === 'dark' ? DarkTheme : LightTheme) as Theme);
 
     const isV3 = theme?.version === 3;
 

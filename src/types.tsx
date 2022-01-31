@@ -76,7 +76,9 @@ type SharedTheme = {
   mode?: Mode;
   roundness: number;
   version?: 2 | 3;
+  isV3?: boolean;
   fonts: Fonts;
+  userDefinedThemeProperty: string;
   animation: {
     scale: number;
   };
@@ -107,6 +109,7 @@ export type MD3Theme = SharedTheme & {
       };
     };
   };
+  md?(tokenKey: MD3Token): string | number | object;
 };
 
 type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
@@ -180,17 +183,6 @@ declare global {
 
     interface ThemeAnimation {
       scale: number;
-    }
-
-    interface Theme {
-      dark: boolean;
-      mode?: Mode;
-      version?: 2 | 3;
-      tokens?: MD3Token;
-      roundness: number;
-      colors: ThemeColors;
-      fonts: ThemeFonts;
-      animation: ThemeAnimation;
     }
   }
 }
