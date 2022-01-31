@@ -1,7 +1,7 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
 import Badge from '../Badge.tsx';
-import { red500 } from '../../styles/colors.tsx';
+import { red500 } from '../../styles/themes/v2/colors';
 
 it('renders badge', () => {
   const tree = renderer.create(<Badge />).toJSON();

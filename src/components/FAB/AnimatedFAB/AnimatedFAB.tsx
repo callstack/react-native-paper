@@ -23,7 +23,7 @@ import type {
   NativeSyntheticEvent,
   TextLayoutEventData,
 } from 'react-native';
-import { white, black } from '../../../styles/colors';
+import { white, black } from '../../../styles/themes/v2/colors';
 import AnimatedText from '../../Typography/AnimatedText';
 import { getCombinedStyles } from './utils';
 

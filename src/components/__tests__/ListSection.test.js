@@ -5,7 +5,7 @@ import ListSection from '../List/ListSection.tsx';
 import ListItem from '../List/ListItem.tsx';
 import ListIcon from '../List/ListIcon.tsx';
 import ListSubheader from '../List/ListSubheader.tsx';
-import { red500 } from '../../styles/colors';
+import { red500 } from '../../styles/themes/v2/colors';
 
 const styles = StyleSheet.create({
   itemColor: {
