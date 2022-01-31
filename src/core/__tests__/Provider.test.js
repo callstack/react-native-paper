@@ -3,8 +3,8 @@ import { Appearance, AccessibilityInfo, View } from 'react-native';
 import { render, act } from 'react-native-testing-library';
 import Provider from '../Provider';
 import { useTheme } from '../theming';
-import DarkTheme from '../../styles/DarkTheme';
-import DefaultTheme from '../../styles/DefaultTheme';
+import DarkTheme from '../../styles/themes/v2/DarkTheme';
+import LightTheme from '../../styles/themes/v2/LightTheme';
 
 const mockAppearance = () => {
   jest.mock('react-native/Libraries/Utilities/Appearance', () => {
@@ -73,7 +73,7 @@ describe('Provider', () => {
     mockAppearance();
     const { getByTestId } = render(createProvider(null));
     expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
-      DefaultTheme
+      LightTheme
     );
     act(() => Appearance.__internalListeners[0]({ colorScheme: 'dark' }));
     expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
@@ -98,7 +98,7 @@ describe('Provider', () => {
       getByTestId('provider-child-view').props.theme.animation.scale
     ).toStrictEqual(0);
 
-    rerender(createProvider(DefaultTheme));
+    rerender(createProvider(LightTheme));
     expect(AccessibilityInfo.removeEventListener).toHaveBeenCalled();
   });
 
@@ -126,12 +126,12 @@ describe('Provider', () => {
 
   it('should not set Appearance listeners, if the theme is passed', async () => {
     mockAppearance();
-    const { getByTestId } = render(createProvider(DefaultTheme));
+    const { getByTestId } = render(createProvider(LightTheme));
 
     expect(Appearance.addChangeListener).not.toHaveBeenCalled();
     expect(Appearance.removeChangeListener).not.toHaveBeenCalled();
     expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
-      DefaultTheme
+      LightTheme
     );
   });
 
@@ -142,14 +142,14 @@ describe('Provider', () => {
     const { getByTestId } = render(createProvider(null));
     expect(Appearance).toEqual(null);
     expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
-      DefaultTheme
+      LightTheme
     );
   });
 
   it.each`
-    label              | theme           | colorScheme
-    ${'default theme'} | ${DefaultTheme} | ${'light'}
-    ${'dark theme'}    | ${DarkTheme}    | ${'dark'}
+    label              | theme         | colorScheme
+    ${'default theme'} | ${LightTheme} | ${'light'}
+    ${'dark theme'}    | ${DarkTheme}  | ${'dark'}
   `(
     'provides $label for $colorScheme color scheme',
     async ({ theme, colorScheme }) => {
@@ -165,9 +165,9 @@ describe('Provider', () => {
   it('uses provided custom theme', async () => {
     mockAppearance();
     const customTheme = {
-      ...DefaultTheme,
+      ...LightTheme,
       colors: {
-        ...DefaultTheme.colors,
+        ...LightTheme.colors,
         primary: 'tomato',
         accent: 'yellow',
       },

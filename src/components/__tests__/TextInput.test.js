@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleSheet, Text, Platform } from 'react-native';
 import { fireEvent, render } from 'react-native-testing-library';
 import TextInput from '../TextInput/TextInput';
-import { red500 } from '../../styles/colors';
+import { red500 } from '../../styles/themes/v2/colors';
 
 const style = StyleSheet.create({
   inputStyle: {

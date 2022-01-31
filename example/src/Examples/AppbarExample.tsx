@@ -3,7 +3,7 @@ import { View, Platform, StyleSheet } from 'react-native';
 import type { StackNavigationProp } from '@react-navigation/stack';
 import { Appbar, FAB, Switch, Paragraph } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
-import { yellowA200 } from '../../../src/styles/colors';
+import { yellowA200 } from '../../../src/styles/themes/v2/colors';
 
 type Props = {
   navigation: StackNavigationProp<{}>;

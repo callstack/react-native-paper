@@ -7,7 +7,7 @@ import AppbarAction from './AppbarAction';
 import AppbarBackAction from './AppbarBackAction';
 import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
-import { black, white } from '../../styles/colors';
+import { black, white } from '../../styles/themes/v2/colors';
 import overlay from '../../styles/overlay';
 
 type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {

@@ -1,11 +1,13 @@
 import color from 'color';
 import { black, white, pinkA400 } from './colors';
-import configureFonts from './fonts';
-import type { Theme } from '../types';
+import configureFonts from '../../fonts';
+import type { MD2Theme } from '../../../types';
 
-const DefaultTheme: Theme = {
+const LightTheme: MD2Theme = {
   dark: false,
   roundness: 4,
+  version: 2,
+  isV3: false,
   colors: {
     primary: '#6200ee',
     accent: '#03dac4',
@@ -25,4 +27,4 @@ const DefaultTheme: Theme = {
   },
 };
 
-export default DefaultTheme;
+export default LightTheme;

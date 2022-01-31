@@ -9,13 +9,15 @@ import { ThemeProvider } from './theming';
 import { Provider as SettingsProvider, Settings } from './settings';
 import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
 import PortalHost from '../components/Portal/PortalHost';
-import DefaultTheme from '../styles/DefaultTheme';
-import DarkTheme from '../styles/DarkTheme';
+import LightTheme from '../styles/themes/v2/LightTheme';
+import DarkTheme from '../styles/themes/v2/DarkTheme';
 import { addEventListener } from '../utils/addEventListener';
+import { get } from 'lodash';
+import type { MD3Token, Theme } from '../types';
 
 type Props = {
   children: React.ReactNode;
-  theme?: ReactNativePaper.Theme;
+  theme?: Theme;
   settings?: Settings;
 };
 
@@ -73,24 +75,36 @@ const Provider = ({ ...props }: Props) => {
   const getTheme = () => {
     const { theme: providedTheme } = props;
 
-    if (providedTheme) {
-      return providedTheme;
-    } else {
-      const theme = (
-        colorScheme === 'dark' ? DarkTheme : DefaultTheme
-      ) as ReactNativePaper.Theme;
+    const theme = providedTheme
+      ? providedTheme
+      : ((colorScheme === 'dark' ? DarkTheme : LightTheme) as Theme);
 
-      return {
-        ...theme,
-        animation: {
-          ...theme.animation,
-          scale: reduceMotionEnabled ? 0 : 1,
-        },
-      };
-    }
+    const isV3 = theme?.version === 3;
+
+    /**
+     * Function that allows to access theme values using Material 3 tokens
+     * @param {string} tokenKey - Material 3 token
+     *
+     * ## Usage
+     * md('md.sys.color.secondary')
+     */
+    const md = (tokenKey: MD3Token) => get(theme.tokens, tokenKey);
+
+    return {
+      ...theme,
+      isV3,
+      animation: {
+        ...theme.animation,
+        scale: reduceMotionEnabled ? 0 : 1,
+      },
+      ...(isV3 && {
+        md,
+      }),
+    };
   };
 
   const { children, settings } = props;
+
   return (
     <PortalHost>
       <SettingsProvider value={settings || { icon: MaterialCommunityIcon }}>

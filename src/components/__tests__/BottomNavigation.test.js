@@ -4,7 +4,7 @@ import { render } from 'react-native-testing-library';
 import renderer from 'react-test-renderer';
 import BottomNavigation from '../BottomNavigation/BottomNavigation.tsx';
 import BottomNavigationRouteScreen from '../BottomNavigation/BottomNavigationRouteScreen.tsx';
-import { red300 } from '../../styles/colors';
+import { red300 } from '../../styles/themes/v2/colors';
 
 const styles = StyleSheet.create({
   bgColor: {

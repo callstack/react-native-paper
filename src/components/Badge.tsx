@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Animated, StyleSheet, StyleProp, TextStyle } from 'react-native';
-import { white, black } from '../styles/colors';
+import { white, black } from '../styles/themes/v2/colors';
 import { withTheme } from '../core/theming';
 import getContrastingColor from '../utils/getContrastingColor';
 
