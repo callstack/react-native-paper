@@ -81,15 +81,27 @@ const Provider = ({ ...props }: Props) => {
           ? DarkTheme
           : LightTheme) as ReactNativePaper.Theme);
 
+    const isV3 = theme?.version === 3;
+
+    /**
+     * Function that allows to access theme values using Material 3 tokens
+     * @param {string} tokenKey - Material 3 token
+     *
+     * ## Usage
+     * md('md.sys.color.secondary')
+     */
     const md = (tokenKey: MD3Token) => get(theme.tokens, tokenKey);
 
     return {
       ...theme,
-      ...(theme.version === 3 && { md }),
+      isV3,
       animation: {
         ...theme.animation,
         scale: reduceMotionEnabled ? 0 : 1,
       },
+      ...(isV3 && {
+        md,
+      }),
     };
   };
 
