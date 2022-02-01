@@ -82,6 +82,7 @@ const PaginationControls = ({
   showFastPaginationControls,
 }: PaginationControlsProps) => {
   const { colors } = useTheme();
+
   return (
     <>
       {showFastPaginationControls ? (
@@ -269,7 +270,7 @@ const DataTablePagination = ({
   selectPageDropdownAccessibilityLabel,
   ...rest
 }: Props) => {
-  const labelColor = color(theme.colors?.text).alpha(0.6).rgb().string();
+  const labelColor = color(theme?.colors?.text).alpha(0.6).rgb().string();
 
   return (
     <View

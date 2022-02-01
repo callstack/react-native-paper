@@ -65,13 +65,13 @@ const RadioButtonIOS = ({
   ...rest
 }: Props) => {
   const checkedColor = disabled
-    ? theme.colors?.disabled
+    ? theme?.colors?.disabled
     : rest.color || theme.colors?.accent;
 
   let rippleColor: string;
 
   if (disabled) {
-    rippleColor = color(theme.colors?.text).alpha(0.16).rgb().string();
+    rippleColor = color(theme?.colors?.text).alpha(0.16).rgb().string();
   } else {
     rippleColor = color(checkedColor).fade(0.32).rgb().string();
   }

@@ -15,6 +15,7 @@ import {
 import App from './RootNavigator';
 import DrawerItems from './DrawerItems';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import LightTheme from '../../src/styles/themes/v3/LightTheme';
 
 // Add new typescript properties to the theme
 declare global {
@@ -181,7 +182,7 @@ export default function PaperExample() {
   }
 
   return (
-    <PaperProvider theme={theme}>
+    <PaperProvider theme={LightTheme}>
       <SafeAreaProvider>
         <PreferencesContext.Provider value={preferences}>
           <React.Fragment>

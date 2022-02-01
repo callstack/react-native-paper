@@ -29,14 +29,16 @@ type Props = React.ComponentProps<typeof Text> & {
  * export default MyComponent;
  * ```
  */
-const Headline = (props: Props) => (
-  <StyledText
-    {...props}
-    alpha={0.87}
-    family="regular"
-    style={[styles.text, props.style]}
-  />
-);
+const Headline = (props: Props) => {
+  return (
+    <StyledText
+      {...props}
+      alpha={0.87}
+      family="regular"
+      style={[styles.text, props.style]}
+    />
+  );
+};
 
 export default Headline;
 

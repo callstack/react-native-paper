@@ -77,26 +77,63 @@ type SharedTheme = {
   dark: boolean;
   mode?: Mode;
   roundness: number;
-  version?: 2 | 3;
-  isV3?: boolean;
   fonts: Fonts;
   animation: {
     scale: number;
   };
 };
 
-export type Theme = AllXOR<[MD2Theme, MD3ThemeBase]>;
+export type ThemeBase = AllXOR<[MD2ThemeBase, MD3ThemeBase]>;
 
-export type MD2Theme = SharedTheme & {
+export type Theme = AllXOR<[MD2ThemeExtended, MD3ThemeExtended]>;
+
+export type MD2ThemeBase = SharedTheme & {
+  version: 2;
   colors: Material2Colors;
 };
 
+export type ThemeExtended = AllXOR<[MD2ThemeExtended, MD3ThemeExtended]>;
+
+export enum MD3TypescaleKey {
+  'display-large' = 'display-large',
+  'display-medium' = 'display-medium',
+  'display-small' = 'display-small',
+
+  'headline-large' = 'headline-large',
+  'headline-medium' = 'headline-medium',
+  'headline-small' = 'headline-small',
+
+  'title-large' = 'title-large',
+  'title-medium' = 'title-medium',
+  'title-small' = 'title-small',
+
+  'label-large' = 'label-large',
+  'label-medium' = 'label-medium',
+  'label-small' = 'label-small',
+
+  'body-large' = 'body-large',
+  'body-medium' = 'body-medium',
+  'body-small' = 'body-small',
+}
+
+export type MD3Typescale = {
+  font: string;
+  tracking: number;
+  weight: Font['fontWeight'];
+  'line-height': number;
+  size: number;
+};
+
 export type MD3ThemeBase = SharedTheme & {
+  version: 3;
   tokens: {
     md: {
       sys: {
         color: MD3Color;
         elevation: string[];
+        typescale: {
+          [key in MD3TypescaleKey]: MD3Typescale;
+        };
       };
       ref: {
         palette: MD3Palette;
@@ -117,7 +154,13 @@ export type MD3ThemeBase = SharedTheme & {
   };
 };
 
+export type MD2ThemeExtended = MD2ThemeBase & {
+  isV3: false;
+  md(): void;
+};
+
 export type MD3ThemeExtended = MD3ThemeBase & {
+  isV3: true;
   md(tokenKey: MD3Token): string | number | object;
 };
 

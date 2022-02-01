@@ -48,11 +48,13 @@ export { default as TouchableRipple } from './components/TouchableRipple/Touchab
 export { default as TextInput } from './components/TextInput/TextInput';
 export { default as ToggleButton } from './components/ToggleButton';
 
-export { default as Caption } from './components/Typography/Caption';
-export { default as Headline } from './components/Typography/Headline';
-export { default as Paragraph } from './components/Typography/Paragraph';
-export { default as Subheading } from './components/Typography/Subheading';
-export { default as Title } from './components/Typography/Title';
+export {
+  Caption,
+  Headline,
+  Paragraph,
+  Subheading,
+  Title,
+} from './components/Typography/v2';
 export { default as Text } from './components/Typography/Text';
 
 export type { Theme } from './types';

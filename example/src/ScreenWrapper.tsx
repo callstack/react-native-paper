@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  SafeAreaView,
   ScrollView,
   ScrollViewProps,
   StyleProp,
