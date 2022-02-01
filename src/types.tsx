@@ -48,6 +48,7 @@ export type MD3Color = {
   'tertiary-container': string;
   surface: string;
   'surface-variant': string;
+  'surface-disabled': string;
   background: string;
   error: string;
   'error-container': string;
@@ -59,6 +60,7 @@ export type MD3Color = {
   'on-tertiary-container': string;
   'on-surface': string;
   'on-surface-variant': string;
+  'on-surface-disabled': string;
   'on-error': string;
   'on-error-container': string;
   'on-background': string;
@@ -104,7 +106,12 @@ export type MD3ThemeBase = SharedTheme & {
           'plain-medium': Font['fontFamily'];
           'weight-medium': Font['fontWeight'];
         };
-        opacity: number[];
+        opacity: {
+          level1: number;
+          level2: number;
+          level3: number;
+          level4: number;
+        };
       };
     };
   };
