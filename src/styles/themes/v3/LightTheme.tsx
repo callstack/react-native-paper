@@ -1,10 +1,10 @@
 import configureFonts from '../../fonts';
-import type { MD3Theme } from '../../../types';
+import type { MD3ThemeBase } from '../../../types';
 import { tokens } from './tokens';
 
 const { palette } = tokens.md.ref;
 
-const LightTheme: MD3Theme = {
+const LightTheme: MD3ThemeBase = {
   dark: false,
   roundness: 4,
   version: 3,

@@ -78,19 +78,18 @@ type SharedTheme = {
   version?: 2 | 3;
   isV3?: boolean;
   fonts: Fonts;
-  userDefinedThemeProperty: string;
   animation: {
     scale: number;
   };
 };
 
-export type Theme = AllXOR<[MD2Theme, MD3Theme]>;
+export type Theme = AllXOR<[MD2Theme, MD3ThemeBase]>;
 
 export type MD2Theme = SharedTheme & {
   colors: Material2Colors;
 };
 
-export type MD3Theme = SharedTheme & {
+export type MD3ThemeBase = SharedTheme & {
   tokens: {
     md: {
       sys: {
@@ -109,7 +108,10 @@ export type MD3Theme = SharedTheme & {
       };
     };
   };
-  md?(tokenKey: MD3Token): string | number | object;
+};
+
+export type MD3ThemeExtended = MD3ThemeBase & {
+  md(tokenKey: MD3Token): string | number | object;
 };
 
 type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
@@ -134,7 +136,7 @@ type PathImpl<T, K extends keyof T> = K extends string
 
 type Path<T> = PathImpl<T, keyof T> | keyof T;
 
-export type MD3Token = Path<MD3Theme['tokens']>;
+export type MD3Token = Path<MD3ThemeBase['tokens']>;
 
 export type $Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 export type $RemoveChildren<T extends React.ComponentType<any>> = $Omit<

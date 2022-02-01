@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import setColor from 'color';
 import { withTheme } from '../core/theming';
+import type { Theme } from '../types';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -33,7 +34,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 const INDETERMINATE_DURATION = 2000;
@@ -146,7 +147,7 @@ const ProgressBar = ({
     setWidth(event.nativeEvent.layout.width);
   };
 
-  const tintColor = color || theme.colors.primary;
+  const tintColor = color || theme.colors?.primary;
   const trackTintColor = setColor(tintColor).alpha(0.38).rgb().string();
 
   return (

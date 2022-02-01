@@ -23,9 +23,7 @@ type Item = {
 };
 
 const AnimatedFABExample = () => {
-  const {
-    colors: { background },
-  } = useTheme();
+  const { colors } = useTheme();
 
   const isIOS = Platform.OS === 'ios';
 
@@ -117,10 +115,10 @@ const AnimatedFABExample = () => {
         keyExtractor={_keyExtractor}
         onEndReachedThreshold={0}
         scrollEventThrottle={16}
-        style={[styles.flex, { backgroundColor: background }]}
+        style={[styles.flex, { backgroundColor: colors?.background || '#000' }]}
         contentContainerStyle={[
           styles.container,
-          { backgroundColor: background },
+          { backgroundColor: colors?.background || '#000' },
         ]}
         onScroll={onScroll}
       />

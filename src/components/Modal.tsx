@@ -219,7 +219,7 @@ export default function Modal({
         <Animated.View
           style={[
             styles.backdrop,
-            { backgroundColor: colors.backdrop, opacity },
+            { backgroundColor: colors?.backdrop, opacity },
           ]}
         />
       </TouchableWithoutFeedback>

@@ -16,6 +16,7 @@ import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple/TouchableRipple';
 import { black, white } from '../styles/themes/v2/colors';
 import { withTheme } from '../core/theming';
+import type { Theme } from '../types';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
@@ -86,7 +87,7 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * testID to be used on tests.
    */
@@ -193,7 +194,7 @@ const Button = ({
     } else if (buttonColor) {
       backgroundColor = buttonColor;
     } else {
-      backgroundColor = colors.primary;
+      backgroundColor = colors?.primary || white;
     }
   } else {
     backgroundColor = 'transparent';
@@ -231,7 +232,7 @@ const Button = ({
   } else if (buttonColor) {
     textColor = buttonColor;
   } else {
-    textColor = colors.primary;
+    textColor = colors?.primary || black;
   }
 
   const rippleColor = color(textColor).alpha(0.32).rgb().string();

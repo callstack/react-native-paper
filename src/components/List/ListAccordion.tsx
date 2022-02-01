@@ -13,8 +13,10 @@ import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
+import type { Theme } from '../../types';
 
 import { ListAccordionGroupContext } from './ListAccordionGroup';
+import { black } from '../../styles/themes/v2/colors';
 
 type Props = {
   /**
@@ -54,7 +56,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * Style that is passed to the wrapping TouchableRipple element.
    */
@@ -167,8 +169,8 @@ const ListAccordion = ({
     }
   };
 
-  const titleColor = color(theme.colors.text).alpha(0.87).rgb().string();
-  const descriptionColor = color(theme.colors.text).alpha(0.54).rgb().string();
+  const titleColor = color(theme.colors?.text).alpha(0.87).rgb().string();
+  const descriptionColor = color(theme.colors?.text).alpha(0.54).rgb().string();
 
   const expandedInternal = expandedProp !== undefined ? expandedProp : expanded;
 
@@ -187,7 +189,7 @@ const ListAccordion = ({
       : handlePressAction;
   return (
     <View>
-      <View style={{ backgroundColor: theme.colors.background }}>
+      <View style={{ backgroundColor: theme.colors?.background }}>
         <TouchableRipple
           style={[styles.container, style]}
           onPress={handlePress}
@@ -205,7 +207,9 @@ const ListAccordion = ({
           <View style={styles.row} pointerEvents="none">
             {left
               ? left({
-                  color: isExpanded ? theme.colors.primary : descriptionColor,
+                  color: isExpanded
+                    ? theme.colors?.primary || black
+                    : descriptionColor || black,
                 })
               : null}
             <View style={[styles.item, styles.content]}>
@@ -215,7 +219,7 @@ const ListAccordion = ({
                 style={[
                   styles.title,
                   {
-                    color: isExpanded ? theme.colors.primary : titleColor,
+                    color: isExpanded ? theme.colors?.primary : titleColor,
                   },
                   titleStyle,
                 ]}

@@ -6,7 +6,7 @@ import { handlePress, isChecked } from './utils';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
-import type { $RemoveChildren } from '../../types';
+import type { $RemoveChildren, Theme } from '../../types';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -32,7 +32,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * testID to be used on tests.
    */
@@ -65,13 +65,13 @@ const RadioButtonIOS = ({
   ...rest
 }: Props) => {
   const checkedColor = disabled
-    ? theme.colors.disabled
-    : rest.color || theme.colors.accent;
+    ? theme.colors?.disabled
+    : rest.color || theme.colors?.accent;
 
   let rippleColor: string;
 
   if (disabled) {
-    rippleColor = color(theme.colors.text).alpha(0.16).rgb().string();
+    rippleColor = color(theme.colors?.text).alpha(0.16).rgb().string();
   } else {
     rippleColor = color(checkedColor).fade(0.32).rgb().string();
   }

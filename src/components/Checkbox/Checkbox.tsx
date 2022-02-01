@@ -3,6 +3,7 @@ import { Platform } from 'react-native';
 import CheckboxIOS from './CheckboxIOS';
 import CheckboxAndroid from './CheckboxAndroid';
 import { withTheme } from '../../core/theming';
+import type { Theme } from '../../types';
 
 type Props = {
   /**
@@ -28,7 +29,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * testID to be used on tests.
    */

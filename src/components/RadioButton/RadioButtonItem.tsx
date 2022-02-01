@@ -14,6 +14,7 @@ import RadioButton from './RadioButton';
 import Text from '../Typography/Text';
 import RadioButtonAndroid from './RadioButtonAndroid';
 import RadioButtonIOS from './RadioButtonIOS';
+import type { Theme } from '../../types';
 
 export type Props = {
   /**
@@ -59,7 +60,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * testID to be used on tests.
    */
@@ -156,7 +157,7 @@ const RadioButtonItem = ({
                 style={[
                   styles.label,
                   {
-                    color: colors.text,
+                    color: colors?.text,
                     textAlign: isLeading ? 'right' : 'left',
                   },
                   labelStyle,

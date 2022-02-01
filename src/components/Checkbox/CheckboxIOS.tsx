@@ -4,7 +4,8 @@ import color from 'color';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
-import type { $RemoveChildren } from '../../types';
+import type { $RemoveChildren, Theme } from '../../types';
+import { black } from '../../styles/themes/v2/colors';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -26,7 +27,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * testID to be used on tests.
    */
@@ -61,13 +62,13 @@ const CheckboxIOS = ({
   const indeterminate = status === 'indeterminate';
 
   const checkedColor = disabled
-    ? theme.colors.disabled
-    : rest.color || theme.colors.accent;
+    ? theme.colors?.disabled
+    : rest.color || theme.colors?.accent;
 
   let rippleColor;
 
   if (disabled) {
-    rippleColor = color(theme.colors.text).alpha(0.16).rgb().string();
+    rippleColor = color(theme.colors?.text).alpha(0.16).rgb().string();
   } else {
     rippleColor = color(checkedColor).fade(0.32).rgb().string();
   }
@@ -95,7 +96,7 @@ const CheckboxIOS = ({
           allowFontScaling={false}
           name={icon}
           size={24}
-          color={checkedColor}
+          color={checkedColor || black}
           direction="ltr"
         />
       </View>

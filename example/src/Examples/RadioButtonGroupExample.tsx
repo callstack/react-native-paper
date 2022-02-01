@@ -7,9 +7,7 @@ const RadioButtonGroupExample = () => {
   const [value, setValue] = React.useState<string>('first');
   const [value2, setValue2] = React.useState<string>('first');
 
-  const {
-    colors: { primary },
-  } = useTheme();
+  const { colors } = useTheme();
   return (
     <ScreenWrapper>
       <List.Section title="With RadioButton">
@@ -41,7 +39,7 @@ const RadioButtonGroupExample = () => {
           <RadioButton.Item
             label="Third item"
             value="third"
-            labelStyle={{ color: primary }}
+            labelStyle={{ color: colors?.primary }}
           />
         </RadioButton.Group>
       </List.Section>

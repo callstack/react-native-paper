@@ -10,6 +10,7 @@ import {
   Provider as PaperProvider,
   DarkTheme,
   DefaultTheme,
+  Theme,
 } from 'react-native-paper';
 import App from './RootNavigator';
 import DrawerItems from './DrawerItems';
@@ -28,16 +29,13 @@ declare global {
     interface ThemeAnimation {
       customProperty: number;
     }
-    interface Theme {
-      userDefinedThemeProperty: string;
-    }
   }
 }
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
 
-const CustomDarkTheme: ReactNativePaper.Theme = {
+const CustomDarkTheme = {
   ...DarkTheme,
   colors: {
     ...DarkTheme.colors,
@@ -47,7 +45,6 @@ const CustomDarkTheme: ReactNativePaper.Theme = {
     ...DarkTheme.fonts,
     superLight: { ...DarkTheme.fonts['light'] },
   },
-  userDefinedThemeProperty: '',
   animation: {
     ...DarkTheme.animation,
     customProperty: 1,
@@ -98,8 +95,7 @@ export default function PaperExample() {
     InitialState | undefined
   >();
 
-  const [theme, setTheme] =
-    React.useState<ReactNativePaper.Theme>(CustomDefaultTheme);
+  const [theme, setTheme] = React.useState<Theme>(CustomDefaultTheme);
   const [rtl, setRtl] = React.useState<boolean>(I18nManager.isRTL);
 
   React.useEffect(() => {

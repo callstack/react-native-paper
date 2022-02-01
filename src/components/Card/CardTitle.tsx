@@ -10,6 +10,7 @@ import {
 import { withTheme } from '../../core/theming';
 import Caption from './../Typography/Caption';
 import Title from './../Typography/Title';
+import type { Theme } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -64,7 +65,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 const LEFT_SIZE = 40;

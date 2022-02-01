@@ -146,20 +146,20 @@ const ChipExample = () => {
               style={[
                 styles.chip,
                 {
-                  backgroundColor: color(colors.primary)
+                  backgroundColor: color(colors?.primary)
                     .alpha(0.2)
                     .rgb()
                     .string(),
                 },
               ]}
-              selectedColor={colors.primary}
+              selectedColor={colors?.primary}
             >
               Flat selected chip with custom color
             </Chip>
             <Chip
               onPress={() => {}}
               style={styles.chip}
-              selectedColor={colors.primary}
+              selectedColor={colors?.primary}
             >
               Flat unselected chip with custom color
             </Chip>
@@ -170,13 +170,13 @@ const ChipExample = () => {
               style={[
                 styles.chip,
                 {
-                  backgroundColor: color(colors.primary)
+                  backgroundColor: color(colors?.primary)
                     .alpha(0.2)
                     .rgb()
                     .string(),
                 },
               ]}
-              selectedColor={colors.primary}
+              selectedColor={colors?.primary}
             >
               Outlined selected chip with custom color
             </Chip>
@@ -184,7 +184,7 @@ const ChipExample = () => {
               mode="outlined"
               onPress={() => {}}
               style={styles.chip}
-              selectedColor={colors.primary}
+              selectedColor={colors?.primary}
             >
               Outlined unselected chip with custom color
             </Chip>

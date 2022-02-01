@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyleSheet, StyleProp, TextStyle } from 'react-native';
 import Title from '../Typography/Title';
 import { withTheme } from '../../core/theming';
+import type { Theme } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof Title> & {
   /**
@@ -12,7 +13,7 @@ type Props = React.ComponentPropsWithRef<typeof Title> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 /**
@@ -54,7 +55,7 @@ const DialogTitle = ({ children, theme, style, ...rest }: Props) => (
     // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
     accessibilityTraits="header"
     accessibilityRole="header"
-    style={[styles.text, { color: theme.colors.text }, style]}
+    style={[styles.text, { color: theme.colors?.text }, style]}
     {...rest}
   >
     {children}

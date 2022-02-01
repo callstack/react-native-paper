@@ -12,6 +12,7 @@ import Button from './Button';
 import Surface from './Surface';
 import Text from './Typography/Text';
 import { withTheme } from '../core/theming';
+import type { Theme } from '../types';
 
 export type SnackbarProps = React.ComponentProps<typeof Surface> & {
   /**
@@ -47,7 +48,7 @@ export type SnackbarProps = React.ComponentProps<typeof Surface> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 const DURATION_SHORT = 4000;
@@ -201,7 +202,7 @@ const Snackbar = ({
                 },
               ],
             },
-            { backgroundColor: colors.onSurface },
+            { backgroundColor: colors?.onSurface },
             style,
           ] as StyleProp<ViewStyle>
         }
@@ -210,7 +211,7 @@ const Snackbar = ({
         <Text
           style={[
             styles.content,
-            { marginRight: action ? 0 : 16, color: colors.surface },
+            { marginRight: action ? 0 : 16, color: colors?.surface },
           ]}
         >
           {children}
@@ -222,7 +223,7 @@ const Snackbar = ({
               onDismiss();
             }}
             style={[styles.button, actionStyle]}
-            color={colors.accent}
+            color={colors?.accent}
             compact
             mode="text"
             {...actionProps}

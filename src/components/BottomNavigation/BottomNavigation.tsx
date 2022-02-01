@@ -24,6 +24,7 @@ import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import useLayout from '../../utils/useLayout';
 import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
 import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
+import type { Theme } from '../../types';
 
 type Route = {
   key: string;
@@ -230,7 +231,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 const MIN_RIPPLE_SCALE = 0.001; // Minimum scale is not 0 due to bug with animation
@@ -378,7 +379,7 @@ const BottomNavigation = ({
 
   /**
    * Index of the currently active tab. Used for setting the background color.
-   * We don't use the color as an animated value directly, because `setValue` seems to be buggy with colors.
+   * We don't use the color as an animated value directly, because `setValue` seems to be buggy with colors?.
    */
   const indexAnim = useAnimatedValue(navigationState.index);
 
@@ -544,8 +545,8 @@ const BottomNavigation = ({
   const approxBackgroundColor = customBackground
     ? customBackground
     : isDarkTheme && mode === 'adaptive'
-    ? overlay(elevation, colors.surface)
-    : colors.primary;
+    ? overlay(elevation, colors?.surface)
+    : colors?.primary;
 
   const backgroundColor = shifting
     ? indexAnim.interpolate({
@@ -592,7 +593,7 @@ const BottomNavigation = ({
 
   return (
     <View style={[styles.container, style]}>
-      <View style={[styles.content, { backgroundColor: colors.background }]}>
+      <View style={[styles.content, { backgroundColor: colors?.background }]}>
         {routes.map((route, index) => {
           if (!loaded.includes(route.key)) {
             // Don't render a screen if we've never navigated to it

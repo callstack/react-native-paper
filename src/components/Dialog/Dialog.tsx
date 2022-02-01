@@ -8,6 +8,7 @@ import DialogTitle, { DialogTitle as _DialogTitle } from './DialogTitle';
 import DialogScrollArea from './DialogScrollArea';
 import { withTheme } from '../../core/theming';
 import overlay from '../../styles/overlay';
+import type { Theme } from '../../types';
 
 type Props = {
   /**
@@ -30,7 +31,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 const DIALOG_ELEVATION: number = 24;
@@ -97,8 +98,8 @@ const Dialog = ({
         borderRadius: theme.roundness,
         backgroundColor:
           theme.dark && theme.mode === 'adaptive'
-            ? overlay(DIALOG_ELEVATION, theme.colors.surface)
-            : theme.colors.surface,
+            ? overlay(DIALOG_ELEVATION, theme.colors?.surface)
+            : theme.colors?.surface,
       },
       styles.container,
       style,

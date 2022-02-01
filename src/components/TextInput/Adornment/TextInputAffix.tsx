@@ -12,6 +12,7 @@ import {
 
 import { withTheme } from '../../../core/theming';
 import { AdornmentSide } from './enums';
+import type { Theme } from '../../../types';
 
 const AFFIX_OFFSET = 12;
 
@@ -28,7 +29,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 type ContextState = {
@@ -110,7 +111,7 @@ const AffixAdornment: React.FunctionComponent<
 const TextInputAffix = ({ text, textStyle: labelStyle, theme }: Props) => {
   const { textStyle, onLayout, topPosition, side, visible, paddingHorizontal } =
     React.useContext(AffixContext);
-  const textColor = color(theme.colors.text)
+  const textColor = color(theme?.colors?.text)
     .alpha(theme.dark ? 0.7 : 0.54)
     .rgb()
     .string();

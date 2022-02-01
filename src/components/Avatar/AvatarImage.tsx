@@ -9,6 +9,7 @@ import {
   StyleProp,
 } from 'react-native';
 import { withTheme } from '../../core/theming';
+import type { Theme } from '../../types';
 
 const defaultSize = 64;
 
@@ -55,7 +56,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 /**
@@ -93,7 +94,7 @@ const AvatarImage = ({
 }: Props) => {
   const { colors } = theme;
 
-  const { backgroundColor = colors.primary } = StyleSheet.flatten(style) || {};
+  const { backgroundColor = colors?.primary } = StyleSheet.flatten(style) || {};
 
   return (
     <View
