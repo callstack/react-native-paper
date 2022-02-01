@@ -26,6 +26,7 @@ import type {
 import { white, black } from '../../../styles/themes/v2/colors';
 import AnimatedText from '../../Typography/AnimatedText';
 import { getCombinedStyles } from './utils';
+import getContrastingColor from '../../../utils/getContrastingColor';
 
 export type AnimatedFABIconMode = 'static' | 'dynamic';
 export type AnimatedFABAnimateFrom = 'left' | 'right';
@@ -93,7 +94,6 @@ type Props = $RemoveChildren<typeof Surface> & {
 };
 
 const SIZE = 56;
-const BORDER_RADIUS = SIZE / 2;
 const SCALE = 0.9;
 
 const AnimatedFAB = ({
@@ -108,7 +108,7 @@ const AnimatedFAB = ({
   theme,
   style,
   visible = true,
-  uppercase = true,
+  uppercase = !theme.isV3,
   testID,
   animateFrom = 'right',
   extended = false,
@@ -126,9 +126,12 @@ const AnimatedFAB = ({
     new Animated.Value(0)
   );
   const { scale } = theme.animation;
+  const { isV3, md } = theme;
 
   const [textWidth, setTextWidth] = React.useState<number>(0);
   const [textHeight, setTextHeight] = React.useState<number>(0);
+
+  const borderRadius = SIZE / (isV3 ? 3.5 : 2);
 
   React.useEffect(() => {
     if (visible) {
@@ -146,40 +149,49 @@ const AnimatedFAB = ({
     }
   }, [visible, scale, visibility]);
 
-  const disabledColor = color(theme.dark ? white : black)
-    .alpha(0.12)
-    .rgb()
-    .string();
+  const disabledColor = isV3
+    ? md('md.sys.color.surface-disabled')
+    : color(theme.dark ? white : black)
+        .alpha(0.12)
+        .rgb()
+        .string();
 
-  const buttonBackgroundColor = theme.isV3
-    ? theme.colors.primary
-    : theme?.colors?.accent;
-
-  const { backgroundColor = disabled ? disabledColor : buttonBackgroundColor } =
-    StyleSheet.flatten<ViewStyle>(style) || {};
+  const {
+    backgroundColor = disabled
+      ? disabledColor
+      : isV3
+      ? md('md.sys.color.primary-container')
+      : theme?.colors?.accent,
+  } = StyleSheet.flatten<ViewStyle>(style) || {};
 
   let foregroundColor: string;
 
   if (typeof customColor !== 'undefined') {
     foregroundColor = customColor;
   } else if (disabled) {
-    foregroundColor = color(theme.dark ? white : black)
-      .alpha(0.32)
-      .rgb()
-      .string();
+    foregroundColor = isV3
+      ? md('md.sys.color.on-surface-disabled')
+      : color(theme.dark ? white : black)
+          .alpha(0.32)
+          .rgb()
+          .string();
   } else {
-    foregroundColor = !color(backgroundColor as string).isLight()
-      ? white
-      : 'rgba(0, 0, 0, .54)';
+    foregroundColor = isV3
+      ? md('md.sys.color.on-primary-container')
+      : getContrastingColor(
+          backgroundColor || white,
+          white,
+          'rgba(0, 0, 0, .54)'
+        );
   }
 
   const rippleColor = color(foregroundColor).alpha(0.32).rgb().string();
 
-  const extendedWidth = textWidth + 1.5 * SIZE;
+  const extendedWidth = textWidth + SIZE + borderRadius;
 
   const distance = isAnimatedFromRight
-    ? -textWidth - BORDER_RADIUS
-    : textWidth + BORDER_RADIUS;
+    ? -textWidth - borderRadius
+    : textWidth + borderRadius;
 
   React.useEffect(() => {
     Animated.timing(animFAB, {
@@ -235,6 +247,7 @@ const AnimatedFAB = ({
               },
             ],
             elevation: isIOS ? 6 : 0,
+            borderRadius,
           },
           styles.container,
           disabled && styles.disabled,
@@ -255,6 +268,7 @@ const AnimatedFAB = ({
             ],
           },
           styles.standard,
+          { borderRadius },
         ]}
       >
         <View style={[StyleSheet.absoluteFill, styles.shadowWrapper]}>
@@ -269,6 +283,7 @@ const AnimatedFAB = ({
                   inputRange: propForDirection([distance, 0.9 * distance, 0]),
                   outputRange: propForDirection([1, 0.15, 0]),
                 }),
+                borderRadius,
               },
             ]}
           />
@@ -287,7 +302,7 @@ const AnimatedFAB = ({
                   inputRange: propForDirection([distance, 0]),
                   outputRange: propForDirection([
                     SIZE / (extendedWidth / SIZE),
-                    BORDER_RADIUS,
+                    borderRadius,
                   ]),
                 }),
               },
@@ -295,13 +310,17 @@ const AnimatedFAB = ({
             ]}
           />
         </View>
-        <Animated.View pointerEvents="box-none" style={[styles.innerWrapper]}>
+        <Animated.View
+          pointerEvents="box-none"
+          style={[styles.innerWrapper, { borderRadius }]}
+        >
           <Animated.View
             style={[
               styles.standard,
               {
                 width: extendedWidth,
                 backgroundColor,
+                borderRadius,
               },
               combinedStyles.innerWrapper,
             ]}
@@ -319,13 +338,14 @@ const AnimatedFAB = ({
               accessibilityRole="button"
               accessibilityState={{ ...accessibilityState, disabled }}
               testID={testID}
-              style={styles.touchable}
+              style={{ borderRadius }}
             >
               <View
                 style={[
                   styles.standard,
                   {
                     width: extendedWidth,
+                    borderRadius,
                   },
                 ]}
               />
@@ -349,14 +369,12 @@ const AnimatedFAB = ({
           style={[
             {
               [isAnimatedFromRight || isRTL ? 'right' : 'left']: isIconStatic
-                ? isIOS
-                  ? SIZE - 10
-                  : SIZE - 12
-                : BORDER_RADIUS,
+                ? textWidth - SIZE + borderRadius
+                : borderRadius,
             },
             {
               minWidth: textWidth,
-              top: -BORDER_RADIUS - textHeight / 2,
+              top: -SIZE / 2 - textHeight / 2,
               opacity: animFAB.interpolate({
                 inputRange: propForDirection([distance, 0.7 * distance, 0]),
                 outputRange: propForDirection([1, 0, 0]),
@@ -398,7 +416,6 @@ const AnimatedFAB = ({
 const styles = StyleSheet.create({
   standard: {
     height: SIZE,
-    borderRadius: BORDER_RADIUS,
   },
   disabled: {
     elevation: 0,
@@ -406,22 +423,16 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     backgroundColor: 'transparent',
-    borderRadius: BORDER_RADIUS,
   },
   innerWrapper: {
     flexDirection: 'row',
     overflow: 'hidden',
-    borderRadius: BORDER_RADIUS,
   },
   shadowWrapper: {
     elevation: 0,
   },
   shadow: {
     elevation: 6,
-    borderRadius: BORDER_RADIUS,
-  },
-  touchable: {
-    borderRadius: BORDER_RADIUS,
   },
   iconWrapper: {
     alignItems: 'center',

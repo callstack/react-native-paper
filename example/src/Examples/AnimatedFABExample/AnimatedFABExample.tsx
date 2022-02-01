@@ -23,7 +23,7 @@ type Item = {
 };
 
 const AnimatedFABExample = () => {
-  const { colors } = useTheme();
+  const { colors, isV3, md } = useTheme();
 
   const isIOS = Platform.OS === 'ios';
 
@@ -109,21 +109,31 @@ const AnimatedFABExample = () => {
 
   return (
     <>
+      <CustomFABControls controls={controls} setControls={setControls} />
       <FlatList
         data={animatedFABExampleData}
         renderItem={renderItem}
         keyExtractor={_keyExtractor}
         onEndReachedThreshold={0}
         scrollEventThrottle={16}
-        style={[styles.flex, { backgroundColor: colors?.background || '#000' }]}
+        style={[
+          styles.flex,
+          {
+            backgroundColor: isV3
+              ? md('md.sys.color.background')
+              : colors?.background,
+          },
+        ]}
         contentContainerStyle={[
           styles.container,
-          { backgroundColor: colors?.background || '#000' },
+          {
+            backgroundColor: isV3
+              ? md('md.sys.color.background')
+              : colors?.background,
+          },
         ]}
         onScroll={onScroll}
       />
-
-      <CustomFABControls controls={controls} setControls={setControls} />
 
       <CustomFAB
         visible={visible}

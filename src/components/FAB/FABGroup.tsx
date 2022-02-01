@@ -38,6 +38,9 @@ type Props = {
     accessibilityLabel?: string;
     style?: StyleProp<ViewStyle>;
     labelStyle?: StyleProp<ViewStyle>;
+    /**
+     * @deprecated
+     */
     small?: boolean;
     onPress: () => void;
     testID?: string;
@@ -196,7 +199,7 @@ const FABGroup = ({
           useNativeDriver: true,
         }),
         Animated.stagger(
-          50 * scale,
+          isV3 ? 15 : 50 * scale,
           animations.current
             .map((animation) =>
               Animated.timing(animation, {
@@ -230,11 +233,13 @@ const FABGroup = ({
 
   const toggle = () => onStateChange({ open: !open });
 
-  const textColor = theme.isV3 ? theme.colors.onSurface : theme?.colors?.text;
+  const { colors, md, isV3 } = theme;
 
-  const labelColor = theme.dark
-    ? textColor
-    : color(textColor).fade(0.54).rgb().string();
+  const labelColor = isV3
+    ? md('md.sys.color.on-surface')
+    : theme.dark
+    ? colors?.text
+    : color(colors?.text).fade(0.54).rgb().string();
   const backdropOpacity = open
     ? backdrop.interpolate({
         inputRange: [0, 0.5, 1],
@@ -247,9 +252,26 @@ const FABGroup = ({
     open
       ? opacity.interpolate({
           inputRange: [0, 1],
-          outputRange: [0.8, 1],
+          outputRange: [0.5, 1],
         })
       : 1
+  );
+
+  const translations = opacities.map((opacity) =>
+    open
+      ? opacity.interpolate({
+          inputRange: [0, 1],
+          outputRange: [24, -8],
+        })
+      : -8
+  );
+  const labelTranslations = opacities.map((opacity) =>
+    open
+      ? opacity.interpolate({
+          inputRange: [0, 1],
+          outputRange: [8, -8],
+        })
+      : -8
   );
 
   if (actions.length !== prevActions?.length) {
@@ -268,9 +290,9 @@ const FABGroup = ({
             styles.backdrop,
             {
               opacity: backdropOpacity,
-              backgroundColor: theme.isV3
-                ? theme.colors.onSurfaceVariant
-                : theme.colors?.backdrop,
+              backgroundColor: isV3
+                ? color(md('md.sys.color.background')).alpha(0.8).rgb().string()
+                : colors?.backdrop,
             },
           ]}
         />
@@ -296,9 +318,14 @@ const FABGroup = ({
                       [
                         styles.label,
                         {
-                          transform: [{ scale: scales[i] }],
+                          transform: [
+                            isV3
+                              ? { translateY: labelTranslations[i] }
+                              : { scale: scales[i] },
+                          ],
                           opacity: opacities[i],
                         },
+                        isV3 && styles.v3LabelStyle,
                         it.labelStyle,
                       ] as StyleProp<ViewStyle>
                     }
@@ -324,14 +351,20 @@ const FABGroup = ({
               )}
               <FAB
                 small={typeof it.small !== 'undefined' ? it.small : true}
+                size="small"
                 icon={it.icon}
                 color={it.color}
                 style={
                   [
                     {
-                      transform: [{ scale: scales[i] }],
+                      transform: [
+                        { scale: scales[i] },
+                        isV3 && { translateY: translations[i] },
+                      ],
                       opacity: opacities[i],
-                      backgroundColor: theme.colors?.surface,
+                      backgroundColor: isV3
+                        ? md('md.sys.color.surface')
+                        : theme.colors?.surface,
                     },
                     it.style,
                   ] as StyleProp<ViewStyle>
@@ -368,7 +401,12 @@ const FABGroup = ({
           accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityState={{ expanded: open }}
-          style={[styles.fab, fabStyle]}
+          style={[
+            styles.fab,
+            isV3 &&
+              open && { backgroundColor: md('md.sys.color.surface-variant') },
+            fabStyle,
+          ]}
           visible={visible}
           testID={testID}
         />
@@ -415,5 +453,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
+  },
+  v3LastItem: {
+    marginBottom: 24,
+  },
+  v3LabelStyle: {
+    backgroundColor: 'transparent',
+    elevation: 0,
   },
 });

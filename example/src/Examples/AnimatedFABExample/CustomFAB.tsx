@@ -46,7 +46,6 @@ const CustomFAB = ({
       icon={'plus'}
       label={label}
       extended={isExtended}
-      uppercase={true}
       onPress={() => console.log('Pressed')}
       visible={visible}
       animateFrom={animateFrom}

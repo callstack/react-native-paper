@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
-import { MD2Colors, Paragraph, RadioButton } from 'react-native-paper';
+import { Paragraph, RadioButton, useTheme } from 'react-native-paper';
 import type {
   AnimatedFABAnimateFrom,
   AnimatedFABIconMode,
@@ -72,6 +72,8 @@ const CustomFABControls = ({
   setControls,
   controls: { animateFrom, iconMode },
 }: Props) => {
+  const { md, isV3, colors } = useTheme();
+
   const setIconMode = (newIconMode: AnimatedFABIconMode) =>
     setControls((state) => ({ ...state, iconMode: newIconMode }));
 
@@ -79,7 +81,16 @@ const CustomFABControls = ({
     setControls((state) => ({ ...state, animateFrom: newAnimateFrom }));
 
   return (
-    <View style={styles.controlsWrapper}>
+    <View
+      style={[
+        styles.controlsWrapper,
+        {
+          backgroundColor: isV3
+            ? md('md.sys.color.background')
+            : colors?.background,
+        },
+      ]}
+    >
       <CustomControl
         name="iconMode"
         options={['static', 'dynamic']}
@@ -101,13 +112,6 @@ export default CustomFABControls;
 
 const styles = StyleSheet.create({
   controlsWrapper: {
-    flex: 1,
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: MD2Colors.white,
-    paddingVertical: 12,
     paddingHorizontal: 16,
   },
   controlWrapper: {

@@ -17,9 +17,13 @@ import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { black, white } from '../../styles/themes/v2/colors';
 import { withTheme } from '../../core/theming';
 import getContrastingColor from '../../utils/getContrastingColor';
-import type { $RemoveChildren, Theme } from '../../types';
+import type { $RemoveChildren, Theme, XOR } from '../../types';
 
-type Props = $RemoveChildren<typeof Surface> & {
+type FABSize = 'small' | 'medium' | 'large';
+
+type FABMode = 'flat' | 'elevated';
+
+type BaseProps = $RemoveChildren<typeof Surface> & {
   /**
    * Icon to display for the `FAB`.
    */
@@ -45,10 +49,6 @@ type Props = $RemoveChildren<typeof Surface> & {
    * Whether an icon change is animated.
    */
   animated?: boolean;
-  /**
-   *  Whether FAB is mini-sized, used to create visual continuity with other elements. This has no effect if `label` is specified.
-   */
-  small?: boolean;
   /**
    * Custom color for the icon and label of the `FAB`.
    */
@@ -79,6 +79,27 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   theme: Theme;
   testID?: string;
+};
+
+type MD2Props = BaseProps & {
+  /**
+   * @deprecated
+   *  Whether FAB is mini-sized, used to create visual continuity with other elements. This has no effect if `label` is specified.
+   */
+  small?: boolean;
+};
+
+type MD3Props = BaseProps & {
+  /**
+   * Size of the `FAB`.
+   */
+  size?: FABSize;
+  /**
+   * Mode of the `FAB`. You can change the mode to adjust the the shadow
+   * - `flat` - button without a shadow
+   * - `elevated` - button with a shadow
+   */
+  mode?: FABMode;
 };
 
 /**
@@ -130,15 +151,18 @@ const FAB = ({
   theme,
   style,
   visible = true,
-  uppercase = true,
+  uppercase = !theme.isV3,
   loading,
   testID,
+  size = 'medium',
+  mode = 'elevated',
   ...rest
-}: Props) => {
+}: XOR<MD2Props, MD3Props>) => {
   const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
   const { scale } = theme.animation;
+  const { isV3, md } = theme;
 
   React.useEffect(() => {
     if (visible) {
@@ -158,36 +182,74 @@ const FAB = ({
 
   const IconComponent = animated ? CrossFadeIcon : Icon;
 
-  const disabledColor = color(theme.dark ? white : black)
-    .alpha(0.12)
-    .rgb()
-    .string();
+  const disabledColor = isV3
+    ? md('md.sys.color.surface-disabled')
+    : color(theme.dark ? white : black)
+        .alpha(0.12)
+        .rgb()
+        .string();
 
-  const buttonBackgroundColor = theme.isV3
-    ? theme.colors.secondary
-    : theme.colors.accent;
-
-  const { backgroundColor = disabled ? disabledColor : buttonBackgroundColor } =
-    (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const {
+    backgroundColor = disabled
+      ? disabledColor
+      : isV3
+      ? md('md.sys.color.primary-container')
+      : theme?.colors?.accent,
+  } = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
   let foregroundColor;
 
   if (typeof customColor !== 'undefined') {
     foregroundColor = customColor;
   } else if (disabled) {
-    foregroundColor = color(theme.dark ? white : black)
-      .alpha(0.32)
-      .rgb()
-      .string();
+    foregroundColor = isV3
+      ? md('md.sys.color.on-surface-disabled')
+      : color(theme.dark ? white : black)
+          .alpha(0.32)
+          .rgb()
+          .string();
   } else {
-    foregroundColor = getContrastingColor(
-      backgroundColor || white,
-      white,
-      'rgba(0, 0, 0, .54)'
-    );
+    foregroundColor = isV3
+      ? md('md.sys.color.on-primary-container')
+      : getContrastingColor(
+          backgroundColor || white,
+          white,
+          'rgba(0, 0, 0, .54)'
+        );
   }
 
   const rippleColor = color(foregroundColor).alpha(0.32).rgb().string();
+
+  const isLargeSize = size === 'large';
+  const isFlatMode = mode === 'flat';
+  const iconSize = isLargeSize ? 36 : 24;
+  const loadingIndicatorSize = isLargeSize ? 24 : 18;
+
+  const fabStyle = () => {
+    if (!isV3) {
+      if (small) {
+        return styles.small;
+      }
+      return styles.standard;
+    } else {
+      switch (size) {
+        case 'small':
+          return styles.v3SmallSize;
+        case 'medium':
+          return styles.v3MediumSize;
+        case 'large':
+          return styles.v3LargeSize;
+      }
+    }
+  };
+
+  const shapeStyle = { borderRadius: fabStyle().borderRadius };
+  const containerStyles = [
+    styles.elevated,
+    shapeStyle,
+    isV3 && isFlatMode && styles.flat,
+  ];
+  const extendedStyle = isV3 ? styles.v3Extended : styles.extended;
 
   return (
     <Surface
@@ -203,7 +265,7 @@ const FAB = ({
               },
             ],
           },
-          styles.container,
+          containerStyles,
           disabled && styles.disabled,
           style,
         ] as StyleProp<ViewStyle>
@@ -222,21 +284,25 @@ const FAB = ({
         accessibilityComponentType="button"
         accessibilityRole="button"
         accessibilityState={{ ...accessibilityState, disabled }}
-        style={styles.touchable}
+        style={shapeStyle}
         testID={testID}
       >
         <View
-          style={[
-            styles.content,
-            label ? styles.extended : small ? styles.small : styles.standard,
-          ]}
+          style={[styles.content, label ? extendedStyle : fabStyle()]}
           pointerEvents="none"
         >
           {icon && loading !== true ? (
-            <IconComponent source={icon} size={24} color={foregroundColor} />
+            <IconComponent
+              source={icon}
+              size={iconSize}
+              color={foregroundColor}
+            />
           ) : null}
           {loading ? (
-            <ActivityIndicator size={18} color={foregroundColor} />
+            <ActivityIndicator
+              size={loadingIndicatorSize}
+              color={foregroundColor}
+            />
           ) : null}
           {label ? (
             <Text
@@ -257,20 +323,18 @@ const FAB = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    borderRadius: 28,
+  elevated: {
     elevation: 6,
-  },
-  touchable: {
-    borderRadius: 28,
   },
   standard: {
     height: 56,
     width: 56,
+    borderRadius: 28,
   },
   small: {
     height: 40,
     width: 40,
+    borderRadius: 28,
   },
   extended: {
     height: 48,
@@ -289,6 +353,29 @@ const styles = StyleSheet.create({
   },
   disabled: {
     elevation: 0,
+  },
+  flat: {
+    elevation: 0,
+  },
+  v3SmallSize: {
+    height: 40,
+    width: 40,
+    borderRadius: 12,
+  },
+  v3MediumSize: {
+    height: 56,
+    width: 56,
+    borderRadius: 16,
+  },
+  v3LargeSize: {
+    height: 96,
+    width: 96,
+    borderRadius: 28,
+  },
+  v3Extended: {
+    height: 56,
+    borderRadius: 16,
+    paddingHorizontal: 16,
   },
 });
 

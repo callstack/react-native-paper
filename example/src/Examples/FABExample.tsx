@@ -1,24 +1,36 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { FAB, Portal } from 'react-native-paper';
+import { FAB, Portal, useTheme } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
-const ButtonExample = () => {
+const FABExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);
   const [open, setOpen] = React.useState<boolean>(false);
+  const { isV3, md } = useTheme();
 
   return (
     <ScreenWrapper style={styles.container}>
       <View style={styles.row}>
         <FAB
-          small
+          size="small"
           icon={visible ? 'eye-off' : 'eye'}
           style={styles.fab}
           onPress={() => setVisible(!visible)}
         />
-      </View>
-
-      <View style={styles.row}>
+        <FAB
+          icon="heart"
+          style={styles.fab}
+          onPress={() => {}}
+          visible={visible}
+        />
+        <FAB
+          icon="heart"
+          style={styles.fab}
+          onPress={() => {}}
+          visible={visible}
+          size="large"
+          mode="flat"
+        />
         <FAB
           icon="heart"
           style={styles.fab}
@@ -46,7 +58,7 @@ const ButtonExample = () => {
           style={styles.fab}
           onPress={() => {}}
           visible={visible}
-          uppercase={false}
+          uppercase
         />
         <FAB
           icon="cancel"
@@ -68,7 +80,6 @@ const ButtonExample = () => {
                 icon: 'bell',
                 label: 'Remind',
                 onPress: () => {},
-                small: false,
               },
             ]}
             onStateChange={({ open }: { open: boolean }) => setOpen(open)}
@@ -85,7 +96,7 @@ const ButtonExample = () => {
   );
 };
 
-ButtonExample.title = 'Floating Action Button';
+FABExample.title = 'Floating Action Button';
 
 const styles = StyleSheet.create({
   container: {
@@ -100,4 +111,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ButtonExample;
+export default FABExample;
