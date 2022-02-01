@@ -25,7 +25,7 @@ const LightTheme: MD3ThemeBase = {
           surface: palette.neutral99,
           'surface-variant': palette['neutral-variant90'],
           'surface-disabled': color(palette.neutral10)
-            .alpha(tokens.md.ref.opacity.level4)
+            .alpha(tokens.md.ref.opacity.level2)
             .rgb()
             .string(),
           background: palette.neutral99,
@@ -40,7 +40,7 @@ const LightTheme: MD3ThemeBase = {
           'on-surface': palette.neutral10,
           'on-surface-variant': palette['neutral-variant30'],
           'on-surface-disabled': color(palette.neutral10)
-            .alpha(tokens.md.ref.opacity.level2)
+            .alpha(tokens.md.ref.opacity.level4)
             .rgb()
             .string(),
           'on-error': palette.error100,
