@@ -1,6 +1,7 @@
 import LightTheme from './LightTheme';
 import type { MD3ThemeBase } from '../../../types';
 import { tokens } from './tokens';
+import color from 'color';
 
 const { palette } = tokens.md.ref;
 
@@ -24,6 +25,7 @@ const DarkTheme: MD3ThemeBase = {
           'tertiary-container': palette.tertiary30,
           surface: palette.neutral10,
           'surface-variant': palette['neutral-variant30'],
+          'surface-disabled': palette.neutral90,
           background: palette.neutral10,
           error: palette.error80,
           'error-container': palette.error30,
@@ -35,6 +37,10 @@ const DarkTheme: MD3ThemeBase = {
           'on-tertiary-container': palette.tertiary90,
           'on-surface': palette.neutral90,
           'on-surface-variant': palette['neutral-variant80'],
+          'on-surface-disabled': color(palette.neutral90)
+            .alpha(tokens.md.ref.opacity.level2)
+            .rgb()
+            .string(),
           'on-error': palette.error20,
           'on-error-container': palette.error80,
           'on-background': palette.neutral90,
