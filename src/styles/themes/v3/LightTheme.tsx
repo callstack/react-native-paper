@@ -1,6 +1,7 @@
 import configureFonts from '../../fonts';
 import type { MD3ThemeBase } from '../../../types';
 import { tokens } from './tokens';
+import color from 'color';
 
 const { palette } = tokens.md.ref;
 
@@ -23,6 +24,10 @@ const LightTheme: MD3ThemeBase = {
           'tertiary-container': palette.tertiary90,
           surface: palette.neutral99,
           'surface-variant': palette['neutral-variant90'],
+          'surface-disabled': color(palette.neutral10)
+            .alpha(tokens.md.ref.opacity.level4)
+            .rgb()
+            .string(),
           background: palette.neutral99,
           error: palette.error40,
           'error-container': palette.error90,
@@ -34,6 +39,10 @@ const LightTheme: MD3ThemeBase = {
           'on-tertiary-container': palette.tertiary10,
           'on-surface': palette.neutral10,
           'on-surface-variant': palette['neutral-variant30'],
+          'on-surface-disabled': color(palette.neutral10)
+            .alpha(tokens.md.ref.opacity.level2)
+            .rgb()
+            .string(),
           'on-error': palette.error100,
           'on-error-container': palette.error10,
           'on-background': palette.neutral10,

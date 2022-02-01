@@ -90,7 +90,12 @@ const ref = {
     'weight-medium': '500' as Font['fontWeight'],
   },
 
-  opacity: [0.08, 0.12, 0.16],
+  opacity: {
+    level1: 0.08,
+    level2: 0.12,
+    level3: 0.16,
+    level4: 0.38,
+  },
 };
 
 const regularType = {
