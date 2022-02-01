@@ -17,9 +17,7 @@ import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { black, white } from '../../styles/themes/v2/colors';
 import { withTheme } from '../../core/theming';
 import getContrastingColor from '../../utils/getContrastingColor';
-import type { $RemoveChildren } from '../../types';
-
-getContrastingColor;
+import type { $RemoveChildren, Theme } from '../../types';
 
 type Props = $RemoveChildren<typeof Surface> & {
   /**
@@ -79,7 +77,7 @@ type Props = $RemoveChildren<typeof Surface> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   testID?: string;
 };
 
@@ -165,7 +163,7 @@ const FAB = ({
     .rgb()
     .string();
 
-  const { backgroundColor = disabled ? disabledColor : theme.colors.accent } =
+  const { backgroundColor = disabled ? disabledColor : theme.colors?.accent } =
     (StyleSheet.flatten(style) || {}) as ViewStyle;
 
   let foregroundColor;
@@ -179,7 +177,7 @@ const FAB = ({
       .string();
   } else {
     foregroundColor = getContrastingColor(
-      backgroundColor,
+      backgroundColor || white,
       white,
       'rgba(0, 0, 0, .54)'
     );

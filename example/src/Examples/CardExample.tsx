@@ -14,9 +14,7 @@ import { PreferencesContext } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 const CardExample = () => {
-  const {
-    colors: { background },
-  } = useTheme();
+  const { colors } = useTheme();
   const [isOutlined, setIsOutlined] = React.useState(false);
   const mode = isOutlined ? 'outlined' : 'elevated';
 
@@ -34,7 +32,7 @@ const CardExample = () => {
         />
       </View>
       <ScrollView
-        style={[styles.container, { backgroundColor: background }]}
+        style={[styles.container, { backgroundColor: colors?.background }]}
         contentContainerStyle={styles.content}
       >
         <Card style={styles.card} mode={mode}>

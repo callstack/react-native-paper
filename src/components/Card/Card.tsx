@@ -17,6 +17,7 @@ import CardCover, { CardCover as _CardCover } from './CardCover';
 import CardTitle, { CardTitle as _CardTitle } from './CardTitle';
 import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
+import type { Theme } from '../../types';
 
 type OutlinedCardProps = {
   mode: 'outlined';
@@ -57,7 +58,7 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * Pass down testID from card props to touchable
    */

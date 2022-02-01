@@ -14,7 +14,7 @@ const ButtonExample = () => {
             Default
           </Button>
           <Button
-            color={colors.accent}
+            color={colors?.accent}
             onPress={() => {}}
             style={styles.button}
           >
@@ -46,7 +46,7 @@ const ButtonExample = () => {
           </Button>
           <Button
             mode="outlined"
-            color={colors.accent}
+            color={colors?.accent}
             onPress={() => {}}
             style={styles.button}
           >
@@ -94,7 +94,7 @@ const ButtonExample = () => {
           </Button>
           <Button
             mode="contained"
-            color={colors.accent}
+            color={colors?.accent}
             onPress={() => {}}
             style={styles.button}
           >

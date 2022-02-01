@@ -14,6 +14,7 @@ import CheckboxIOS from './CheckboxIOS';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
+import type { Theme } from '../../types';
 
 type Props = {
   /**
@@ -51,7 +52,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * testID to be used on tests.
    */

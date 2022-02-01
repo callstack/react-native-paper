@@ -57,7 +57,7 @@ const DrawerItems = ({ toggleTheme, toggleRTL, isRTL, isDarkTheme }: Props) => {
   return (
     <DrawerContentScrollView
       alwaysBounceVertical={false}
-      style={[styles.drawerContent, { backgroundColor: colors.surface }]}
+      style={[styles.drawerContent, { backgroundColor: colors?.surface }]}
     >
       <Drawer.Section title="Example items">
         {DrawerItemsData.map((props, index) => (

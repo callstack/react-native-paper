@@ -15,6 +15,7 @@ import IconButton from './IconButton';
 import Surface from './Surface';
 import { withTheme } from '../core/theming';
 import type { IconSource } from './Icon';
+import type { Theme } from '../types';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 
 type Props = React.ComponentPropsWithRef<typeof TextInput> & {
@@ -55,7 +56,7 @@ type Props = React.ComponentPropsWithRef<typeof TextInput> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * Custom color for icon, default will be derived from theme
    */
@@ -153,7 +154,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
     };
 
     const { colors, roundness, dark, fonts } = theme;
-    const textColor = colors.text;
+    const textColor = colors?.text;
     const font = fonts.regular;
     const iconColor =
       customIconColor ||
@@ -201,8 +202,8 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
             inputStyle,
           ]}
           placeholder={placeholder || ''}
-          placeholderTextColor={colors.placeholder}
-          selectionColor={colors.primary}
+          placeholderTextColor={colors?.placeholder}
+          selectionColor={colors?.primary}
           underlineColorAndroid="transparent"
           returnKeyType="search"
           keyboardAppearance={dark ? 'dark' : 'light'}

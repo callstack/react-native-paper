@@ -12,6 +12,7 @@ import {
 
 import { withTheme } from '../../../core/theming';
 import { AdornmentSide } from './enums';
+import type { Theme } from '../../../types';
 
 const AFFIX_OFFSET = 12;
 
@@ -28,7 +29,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 type ContextState = {

@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import AnimatedText from './Typography/AnimatedText';
 import { withTheme } from '../core/theming';
-import type { $Omit } from '../types';
+import type { $Omit, Theme } from '../types';
 
 type Props = $Omit<
   $Omit<React.ComponentPropsWithRef<typeof AnimatedText>, 'padding'>,
@@ -35,7 +35,7 @@ type Props = $Omit<
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * TestID used for testing purposes
    */
@@ -123,8 +123,8 @@ const HelperText = ({
 
   const textColor =
     type === 'error'
-      ? colors.error
-      : color(colors.text)
+      ? colors?.error
+      : color(colors?.text)
           .alpha(dark ? 0.7 : 0.54)
           .rgb()
           .string();

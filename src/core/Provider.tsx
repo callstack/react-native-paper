@@ -13,7 +13,7 @@ import LightTheme from '../styles/themes/v2/LightTheme';
 import DarkTheme from '../styles/themes/v2/DarkTheme';
 import { addEventListener } from '../utils/addEventListener';
 import { get } from 'lodash';
-import type { MD3Token, Theme } from '../types';
+import type { MD2Theme, MD3ThemeExtended, MD3Token, Theme } from '../types';
 
 type Props = {
   children: React.ReactNode;
@@ -81,6 +81,19 @@ const Provider = ({ ...props }: Props) => {
 
     const isV3 = theme?.version === 3;
 
+    const extendedTheme = {
+      ...theme,
+      isV3,
+      animation: {
+        ...theme.animation,
+        scale: reduceMotionEnabled ? 0 : 1,
+      },
+    };
+
+    if (!isV3) {
+      return extendedTheme as MD2Theme;
+    }
+
     /**
      * Function that allows to access theme values using Material 3 tokens
      * @param {string} tokenKey - Material 3 token
@@ -90,17 +103,7 @@ const Provider = ({ ...props }: Props) => {
      */
     const md = (tokenKey: MD3Token) => get(theme.tokens, tokenKey);
 
-    return {
-      ...theme,
-      isV3,
-      animation: {
-        ...theme.animation,
-        scale: reduceMotionEnabled ? 0 : 1,
-      },
-      ...(isV3 && {
-        md,
-      }),
-    };
+    return { ...extendedTheme, md } as MD3ThemeExtended;
   };
 
   const { children, settings } = props;

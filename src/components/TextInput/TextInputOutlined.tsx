@@ -37,6 +37,8 @@ import {
   calculateOutlinedIconAndAffixTopPosition,
 } from './helpers';
 import { AdornmentType, AdornmentSide } from './Adornment/enums';
+import type { Theme } from '../../types';
+import { black } from '../../styles/themes/v2/colors';
 
 const OUTLINE_MINIMIZED_LABEL_Y_OFFSET = -6;
 const LABEL_PADDING_TOP = 8;
@@ -83,7 +85,7 @@ const TextInputOutlined = ({
     fontWeight,
     lineHeight,
     height,
-    backgroundColor = colors.background,
+    backgroundColor = colors?.background || black,
     textAlign,
     ...viewStyle
   } = (StyleSheet.flatten(style) || {}) as TextStyle;
@@ -93,18 +95,22 @@ const TextInputOutlined = ({
 
   if (disabled) {
     const isTransparent = color(customOutlineColor).alpha() === 0;
-    inputTextColor = activeColor = color(colors.text)
+    inputTextColor = activeColor = color(colors?.text)
       .alpha(0.54)
       .rgb()
       .string();
-    placeholderColor = colors.disabled;
-    outlineColor = isTransparent ? customOutlineColor : colors.disabled;
+    placeholderColor = colors?.disabled || black;
+    outlineColor = isTransparent
+      ? customOutlineColor
+      : colors?.disabled || black;
   } else {
-    inputTextColor = colors.text;
-    activeColor = error ? colors.error : activeOutlineColor || colors.primary;
-    placeholderColor = colors.placeholder;
-    outlineColor = customOutlineColor || colors.placeholder;
-    errorColor = colors.error;
+    inputTextColor = colors?.text || black;
+    activeColor = error
+      ? colors?.error || black
+      : activeOutlineColor || colors?.primary || black;
+    placeholderColor = colors?.placeholder || black;
+    outlineColor = customOutlineColor || colors?.placeholder || black;
+    errorColor = colors?.error || black;
   }
 
   const labelScale = MINIMIZED_LABEL_FONT_SIZE / fontSize;
@@ -352,7 +358,7 @@ type OutlineProps = {
   focused?: boolean;
   outlineColor?: string;
   backgroundColor: ColorValue;
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 const Outline = ({

@@ -9,6 +9,7 @@ import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import { black, white } from '../../styles/themes/v2/colors';
 import overlay from '../../styles/overlay';
+import type { Theme } from '../../types';
 
 type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
   /**
@@ -22,7 +23,7 @@ type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   style?: StyleProp<ViewStyle>;
 };
 
@@ -86,8 +87,8 @@ const Appbar = ({ children, dark, style, theme, ...rest }: Props) => {
   const backgroundColor = customBackground
     ? customBackground
     : isDarkTheme && mode === 'adaptive'
-    ? overlay(elevation, colors.surface)
-    : colors.primary;
+    ? overlay(elevation, colors?.surface)
+    : colors?.primary;
   if (typeof dark === 'boolean') {
     isDark = dark;
   } else {

@@ -16,6 +16,7 @@ import TextInputAffix, {
 } from './Adornment/TextInputAffix';
 import { withTheme } from '../../core/theming';
 import type { RenderProps, TextInputLabelProp } from './types';
+import type { Theme } from '../../types';
 
 const BLUR_ANIMATION_DURATION = 180;
 const FOCUS_ANIMATION_DURATION = 150;
@@ -28,7 +29,7 @@ export type TextInputProps = React.ComponentPropsWithRef<
    * - `flat` - flat input with an underline.
    * - `outlined` - input with an outline.
    *
-   * In `outlined` mode, the background color of the label is derived from `colors.background` in theme or the `backgroundColor` style.
+   * In `outlined` mode, the background color of the label is derived from `colors?.background` in theme or the `backgroundColor` style.
    * This component render TextInputOutlined or TextInputFlat based on that props
    */
   mode?: 'flat' | 'outlined';
@@ -132,7 +133,7 @@ export type TextInputProps = React.ComponentPropsWithRef<
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 interface CompoundedComponent

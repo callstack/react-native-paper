@@ -12,6 +12,7 @@ import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 import { black, white } from '../../styles/themes/v2/colors';
 import { withTheme } from '../../core/theming';
+import type { Theme } from '../../types';
 
 type Props = {
   /**
@@ -39,7 +40,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * TestID used for testing purposes
    */
@@ -97,11 +98,11 @@ const MenuItem = ({
 
   const titleColor = disabled
     ? disabledColor
-    : color(theme.colors.text).alpha(0.87).rgb().string();
+    : color(theme.colors?.text).alpha(0.87).rgb().string();
 
   const iconColor = disabled
     ? disabledColor
-    : color(theme.colors.text).alpha(0.54).rgb().string();
+    : color(theme.colors?.text).alpha(0.54).rgb().string();
 
   return (
     <TouchableRipple

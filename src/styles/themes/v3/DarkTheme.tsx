@@ -1,10 +1,10 @@
 import LightTheme from './LightTheme';
-import type { MD3Theme } from '../../../types';
+import type { MD3ThemeBase } from '../../../types';
 import { tokens } from './tokens';
 
 const { palette } = tokens.md.ref;
 
-const DarkTheme: MD3Theme = {
+const DarkTheme: MD3ThemeBase = {
   ...LightTheme,
   dark: true,
   mode: 'adaptive',

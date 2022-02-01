@@ -24,6 +24,7 @@ import Surface from '../Surface';
 import MenuItem from './MenuItem';
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
 import { addEventListener } from '../../utils/addEventListener';
+import type { Theme } from '../../types';
 
 type Props = {
   /**
@@ -61,7 +62,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 type Layout = $Omit<$Omit<LayoutRectangle, 'x'>, 'y'>;

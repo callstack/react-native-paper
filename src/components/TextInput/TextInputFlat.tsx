@@ -38,6 +38,7 @@ import {
   getAdornmentStyleAdjustmentForNativeInput,
 } from './Adornment/TextInputAdornment';
 import { AdornmentSide, AdornmentType, InputMode } from './Adornment/enums';
+import { black } from '../../styles/themes/v2/colors';
 
 const MINIMIZED_LABEL_Y_OFFSET = -18;
 
@@ -133,24 +134,26 @@ const TextInputFlat = ({
     errorColor;
 
   if (disabled) {
-    inputTextColor = activeColor = color(colors.text)
+    inputTextColor = activeColor = color(colors?.text || black)
       .alpha(0.54)
       .rgb()
       .string();
-    placeholderColor = colors.disabled;
+    placeholderColor = colors?.disabled || black;
     underlineColorCustom = 'transparent';
   } else {
-    inputTextColor = colors.text;
-    activeColor = error ? colors.error : activeUnderlineColor || colors.primary;
-    placeholderColor = colors.placeholder;
-    errorColor = colors.error;
-    underlineColorCustom = underlineColor || colors.disabled;
+    inputTextColor = colors?.text || black;
+    activeColor = error
+      ? colors?.error || black
+      : activeUnderlineColor || colors?.primary || black;
+    placeholderColor = colors?.placeholder || black;
+    errorColor = colors?.error || black;
+    underlineColorCustom = underlineColor || colors?.disabled || black;
   }
 
   const containerStyle = {
     backgroundColor: theme.dark
-      ? color(colors.background).lighten(0.24).rgb().string()
-      : color(colors.background).darken(0.06).rgb().string(),
+      ? color(colors?.background).lighten(0.24).rgb().string()
+      : color(colors?.background).darken(0.06).rgb().string(),
     borderTopLeftRadius: theme.roundness,
     borderTopRightRadius: theme.roundness,
   };
@@ -382,8 +385,8 @@ type UnderlineProps = {
     focused: boolean;
   };
   error?: boolean;
-  colors: {
-    error: string;
+  colors?: {
+    error?: string;
   };
   activeColor: string;
   underlineColorCustom?: string;
@@ -399,7 +402,9 @@ const Underline = ({
   let backgroundColor = parentState.focused
     ? activeColor
     : underlineColorCustom;
-  if (error) backgroundColor = colors.error;
+
+  if (error) backgroundColor = colors?.error || black;
+
   return (
     <Animated.View
       style={[
