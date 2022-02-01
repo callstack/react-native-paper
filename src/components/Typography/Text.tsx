@@ -40,6 +40,7 @@ const Text: React.ForwardRefRenderFunction<{}, Props> = (
           fontWeight: md(`md.sys.typescale.${key}.weight` as MD3Token),
           lineHeight: md(`md.sys.typescale.${key}.line-height` as MD3Token),
           letterSpacing: md(`md.sys.typescale.${key}.tracking` as MD3Token),
+          color: md('md.sys.color.on-surface'),
         },
       }),
       {} as {
