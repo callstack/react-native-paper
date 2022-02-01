@@ -5,7 +5,8 @@ import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
-import type { $RemoveChildren } from '../../types';
+import type { $RemoveChildren, Theme } from '../../types';
+import { black } from '../../styles/themes/v2/colors';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -35,7 +36,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * testID to be used on tests.
    */
@@ -107,10 +108,10 @@ const RadioButtonAndroid = ({
     }
   }, [status, borderAnim, radioAnim, scale]);
 
-  const checkedColor = rest.color || theme.colors.accent;
+  const checkedColor = rest.color || theme.colors?.accent;
   const uncheckedColor =
     rest.uncheckedColor ||
-    color(theme.colors.text)
+    color(theme.colors?.text)
       .alpha(theme.dark ? 0.7 : 0.54)
       .rgb()
       .string();
@@ -128,11 +129,13 @@ const RadioButtonAndroid = ({
           }) === 'checked';
 
         if (disabled) {
-          rippleColor = color(theme.colors.text).alpha(0.16).rgb().string();
-          radioColor = theme.colors.disabled;
+          rippleColor = color(theme.colors?.text).alpha(0.16).rgb().string();
+          radioColor = theme.colors?.disabled || black;
         } else {
           rippleColor = color(checkedColor).fade(0.32).rgb().string();
-          radioColor = checked ? checkedColor : uncheckedColor;
+          radioColor = checked
+            ? checkedColor || black
+            : uncheckedColor || black;
         }
 
         return (

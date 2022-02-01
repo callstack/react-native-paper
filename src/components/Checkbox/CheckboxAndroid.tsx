@@ -4,7 +4,8 @@ import color from 'color';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
-import type { $RemoveChildren } from '../../types';
+import type { $RemoveChildren, Theme } from '../../types';
+import { white } from '../../styles/themes/v2/colors';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -30,7 +31,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * testID to be used on tests.
    */
@@ -100,10 +101,10 @@ const CheckboxAndroid = ({
 
   const checked = status === 'checked';
   const indeterminate = status === 'indeterminate';
-  const checkedColor = rest.color || theme.colors.accent;
+  const checkedColor = rest.color || theme.colors?.accent;
   const uncheckedColor =
     rest.uncheckedColor ||
-    color(theme.colors.text)
+    color(theme.colors?.text)
       .alpha(theme.dark ? 0.7 : 0.54)
       .rgb()
       .string();
@@ -111,8 +112,8 @@ const CheckboxAndroid = ({
   let rippleColor, checkboxColor;
 
   if (disabled) {
-    rippleColor = color(theme.colors.text).alpha(0.16).rgb().string();
-    checkboxColor = theme.colors.disabled;
+    rippleColor = color(theme.colors?.text).alpha(0.16).rgb().string();
+    checkboxColor = theme.colors?.disabled;
   } else {
     rippleColor = color(checkedColor).fade(0.32).rgb().string();
     checkboxColor = checked ? checkedColor : uncheckedColor;
@@ -150,7 +151,7 @@ const CheckboxAndroid = ({
           allowFontScaling={false}
           name={icon}
           size={24}
-          color={checkboxColor}
+          color={checkboxColor || white}
           direction="ltr"
         />
         <View style={[StyleSheet.absoluteFill, styles.fillContainer]}>

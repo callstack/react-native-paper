@@ -19,7 +19,7 @@ import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple/TouchableRipple';
 import { withTheme } from '../core/theming';
 import { black, white } from '../styles/themes/v2/colors';
-import type { EllipsizeProp } from '../types';
+import type { EllipsizeProp, Theme } from '../types';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
@@ -85,7 +85,7 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * Pass down testID from chip props to touchable for Detox tests.
    */
@@ -167,7 +167,7 @@ const Chip = ({
 
   const { dark, colors } = theme;
   const defaultBackgroundColor =
-    mode === 'outlined' ? colors.surface : dark ? '#383838' : '#ebebeb';
+    mode === 'outlined' ? colors?.surface : dark ? '#383838' : '#ebebeb';
 
   const { backgroundColor = defaultBackgroundColor, borderRadius = 16 } =
     (StyleSheet.flatten(style) || {}) as ViewStyle;
@@ -184,14 +184,14 @@ const Chip = ({
           .string()
       : backgroundColor;
   const textColor = disabled
-    ? colors.disabled
-    : color(selectedColor !== undefined ? selectedColor : colors.text)
+    ? colors?.disabled
+    : color(selectedColor !== undefined ? selectedColor : colors?.text)
         .alpha(0.87)
         .rgb()
         .string();
   const iconColor = disabled
-    ? colors.disabled
-    : color(selectedColor !== undefined ? selectedColor : colors.text)
+    ? colors?.disabled
+    : color(selectedColor !== undefined ? selectedColor : colors?.text)
         .alpha(0.54)
         .rgb()
         .string();

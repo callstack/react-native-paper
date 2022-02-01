@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import color from 'color';
 import { withTheme } from '../../core/theming';
+import type { Theme } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
   /**
@@ -53,7 +54,7 @@ type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 /**
@@ -106,7 +107,7 @@ const TouchableRipple = ({
     const { dark, colors } = theme;
     const calculatedRippleColor =
       rippleColor ||
-      color(colors.text)
+      color(colors?.text)
         .alpha(dark ? 0.32 : 0.2)
         .rgb()
         .string();

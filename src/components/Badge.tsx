@@ -3,6 +3,7 @@ import { Animated, StyleSheet, StyleProp, TextStyle } from 'react-native';
 import { white, black } from '../styles/themes/v2/colors';
 import { withTheme } from '../core/theming';
 import getContrastingColor from '../utils/getContrastingColor';
+import type { Theme } from '../types';
 
 const defaultSize = 20;
 
@@ -24,7 +25,7 @@ type Props = React.ComponentProps<typeof Animated.Text> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 /**
@@ -85,10 +86,10 @@ const Badge = ({
     }).start();
   }, [visible, opacity, scale]);
 
-  const { backgroundColor = theme.colors.notification, ...restStyle } =
+  const { backgroundColor = theme.colors?.notification, ...restStyle } =
     (StyleSheet.flatten(style) || {}) as TextStyle;
 
-  const textColor = getContrastingColor(backgroundColor, white, black);
+  const textColor = getContrastingColor(backgroundColor || white, white, black);
 
   const borderRadius = size / 2;
 

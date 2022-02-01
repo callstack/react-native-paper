@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 
 import IconButton from '../../IconButton';
-import type { $Omit } from '../../../../src/types';
+import type { $Omit, Theme } from '../../../types';
 import type { IconSource } from '../../Icon';
 
 export type Props = $Omit<
@@ -29,7 +29,7 @@ export type Props = $Omit<
   /**
    * @optional
    */
-  theme?: ReactNativePaper.Theme;
+  theme?: Theme;
 };
 
 export const ICON_SIZE = 24;

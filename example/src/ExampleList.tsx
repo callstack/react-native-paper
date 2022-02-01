@@ -108,7 +108,7 @@ export default function ExampleList({ navigation }: Props) {
   return (
     <FlatList
       contentContainerStyle={{
-        backgroundColor: colors.background,
+        backgroundColor: colors?.background,
         paddingBottom: safeArea.bottom,
         paddingLeft: safeArea.left,
         paddingRight: safeArea.right,

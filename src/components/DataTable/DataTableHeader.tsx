@@ -3,6 +3,7 @@ import color from 'color';
 import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
 import { black, white } from '../../styles/themes/v2/colors';
 import { withTheme } from '../../core/theming';
+import type { Theme } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -13,7 +14,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 /**

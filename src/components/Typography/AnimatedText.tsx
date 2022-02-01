@@ -7,13 +7,14 @@ import {
   StyleSheet,
 } from 'react-native';
 import { withTheme } from '../../core/theming';
+import type { Theme } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof Animated.Text> & {
   style?: StyleProp<TextStyle>;
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 /**
@@ -31,7 +32,7 @@ function AnimatedText({ style, theme, ...rest }: Props) {
         styles.text,
         {
           ...theme.fonts.regular,
-          color: theme.colors.text,
+          color: theme.colors?.text,
           writingDirection,
         },
         style,

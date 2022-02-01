@@ -108,9 +108,7 @@ const TextInputExample = () => {
 
   const _isUsernameValid = (name: string) => /^[a-zA-Z]*$/.test(name);
 
-  const {
-    colors: { accent, primary },
-  } = useTheme();
+  const { colors } = useTheme();
 
   const inputActionHandler = (type: keyof State, payload: string) =>
     dispatch({
@@ -121,14 +119,14 @@ const TextInputExample = () => {
   const changeIconColor = (name: keyof State['iconsColor']) => {
     const color = state.iconsColor[name];
 
-    const colors = {
+    const newColors = {
       ...state.iconsColor,
-      [name]: !color ? accent : undefined,
+      [name]: !color ? colors?.accent : undefined,
     };
 
     dispatch({
       type: 'iconsColor',
-      payload: colors,
+      payload: newColors,
     });
   };
 
@@ -232,7 +230,7 @@ const TextInputExample = () => {
           right={
             <TextInput.Icon
               name="chevron-up"
-              color={(focused) => (focused ? primary : undefined)}
+              color={(focused) => (focused ? colors?.primary : undefined)}
             />
           }
         />

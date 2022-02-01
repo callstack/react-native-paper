@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, StyleSheet, Image, Dimensions, Platform } from 'react-native';
-import { Banner, FAB, useTheme } from 'react-native-paper';
+import { Banner, FAB, useTheme, Theme } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
 const PHOTOS = Array.from({ length: 24 }).map(
@@ -18,7 +18,7 @@ const BannerExample = () => {
       surface: '#09c8e5',
       primary: '#121330',
     },
-  };
+  } as Theme;
 
   return (
     <>

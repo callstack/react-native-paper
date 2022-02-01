@@ -11,6 +11,7 @@ import { DEFAULT_APPBAR_HEIGHT, Appbar } from './Appbar';
 import shadow from '../../styles/shadow';
 import { withTheme } from '../../core/theming';
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
+import type { Theme } from '../../types';
 
 type Props = React.ComponentProps<typeof Appbar> & {
   /**
@@ -31,7 +32,7 @@ type Props = React.ComponentProps<typeof Appbar> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   style?: StyleProp<ViewStyle>;
 };
 
@@ -95,8 +96,8 @@ const AppbarHeader = (props: Props) => {
   const backgroundColor = customBackground
     ? customBackground
     : isDarkTheme && mode === 'adaptive'
-    ? overlay(elevation, colors.surface)
-    : colors.primary;
+    ? overlay(elevation, colors?.surface)
+    : colors?.primary;
   // Let the user override the behaviour
   const Wrapper =
     typeof props.statusBarHeight === 'number' ? View : SafeAreaView;
