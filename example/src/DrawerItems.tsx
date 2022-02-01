@@ -43,7 +43,7 @@ const DrawerItems = ({ toggleTheme, toggleRTL, isRTL, isDarkTheme }: Props) => {
 
   const _setDrawerItem = (index: number) => setDrawerItemIndex(index);
 
-  const { colors } = useTheme() | { colors: {} };
+  const { colors } = useTheme();
 
   const _handleToggleRTL = () => {
     toggleRTL();

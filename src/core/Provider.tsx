@@ -17,13 +17,12 @@ import type {
   MD2ThemeExtended,
   MD3ThemeExtended,
   MD3Token,
-  Theme,
   ThemeBase,
 } from '../types';
 
 type Props = {
   children: React.ReactNode;
-  theme?: Theme;
+  theme?: ThemeBase;
   settings?: Settings;
 };
 
@@ -104,14 +103,13 @@ const Provider = ({ ...props }: Props) => {
         scale: reduceMotionEnabled ? 0 : 1,
       },
       isV3,
-      md,
     };
 
     if (!isV3) {
       return extendedTheme as MD2ThemeExtended;
     }
 
-    return extendedTheme as MD3ThemeExtended;
+    return { ...extendedTheme, md } as MD3ThemeExtended;
   };
 
   const { children, settings } = props;

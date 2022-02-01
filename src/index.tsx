@@ -57,4 +57,4 @@ export {
 } from './components/Typography/v2';
 export { default as Text } from './components/Typography/Text';
 
-export type { Theme } from './types';
+export type { Theme, ThemeBase } from './types';

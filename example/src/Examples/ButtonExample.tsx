@@ -4,7 +4,7 @@ import { Button, List, useTheme } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
 const ButtonExample = () => {
-  const { colors } = useTheme() | { colors: {} };
+  const { colors } = useTheme();
 
   return (
     <ScreenWrapper>
