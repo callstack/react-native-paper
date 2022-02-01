@@ -10,38 +10,78 @@ import {
 } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
+const Divider = ({ children }: React.PropsWithChildren<{}>) => {
+  return (
+    <Text variant="title-large" style={styles.divider}>
+      {children}
+    </Text>
+  );
+};
+
 const TextExample = () => {
   return (
-    <ScreenWrapper style={styles.container}>
-      <Headline style={styles.text}>Material 2 components:</Headline>
+    <ScreenWrapper>
+      <View style={styles.container}>
+        <Divider>Old text components:</Divider>
 
-      <Caption style={styles.text}>Caption</Caption>
-      <Paragraph style={styles.text}>Paragraph</Paragraph>
-      <Subheading style={styles.text}>Subheading</Subheading>
-      <Title style={styles.text}>Title</Title>
-      <Headline style={styles.text}>Headline</Headline>
+        <Caption style={styles.text}>Caption</Caption>
+        <Paragraph style={styles.text}>Paragraph</Paragraph>
+        <Subheading style={styles.text}>Subheading</Subheading>
+        <Title style={styles.text}>Title</Title>
+        <Headline style={styles.text}>Headline</Headline>
 
-      <Headline style={styles.text}>Material 3 components:</Headline>
+        <Divider>Text component:</Divider>
 
-      <Text variant="body-large">body-large variant</Text>
-      <Text variant="body-medium">body-medium variant</Text>
-      <Text variant="body-small">body-small variant</Text>
+        <Text style={styles.text} variant="display-large">
+          Display Large
+        </Text>
+        <Text style={styles.text} variant="display-medium">
+          Display Medium
+        </Text>
+        <Text style={styles.text} variant="display-small">
+          Display small
+        </Text>
 
-      <Text variant="display-large">display-large variant</Text>
-      <Text variant="display-medium">display-medium variant</Text>
-      <Text variant="display-small">display-small variant</Text>
+        <Text style={styles.text} variant="headline-large">
+          Headline Large
+        </Text>
+        <Text style={styles.text} variant="headline-medium">
+          Headline Medium
+        </Text>
+        <Text style={styles.text} variant="headline-small">
+          Headline Small
+        </Text>
 
-      <Text variant="headline-large">headline-large variant</Text>
-      <Text variant="headline-medium">headline-medium variant</Text>
-      <Text variant="headline-small">headline-small variant</Text>
+        <Text style={styles.text} variant="title-large">
+          Title Large
+        </Text>
+        <Text style={styles.text} variant="title-medium">
+          Title Medium
+        </Text>
+        <Text style={styles.text} variant="title-small">
+          Title Small
+        </Text>
 
-      <Text variant="title-large">title-large variant</Text>
-      <Text variant="title-medium">title-medium variant</Text>
-      <Text variant="title-small">title-small variant</Text>
+        <Text style={styles.text} variant="body-large">
+          Body Large
+        </Text>
+        <Text style={styles.text} variant="body-medium">
+          Body Medium
+        </Text>
+        <Text style={styles.text} variant="body-small">
+          Body Small
+        </Text>
 
-      <Text variant="label-large">label-large variant</Text>
-      <Text variant="label-medium">label-medium variant</Text>
-      <Text variant="label-small">label-small variant</Text>
+        <Text style={styles.text} variant="label-large">
+          Label Large
+        </Text>
+        <Text style={styles.text} variant="label-medium">
+          Label Medium
+        </Text>
+        <Text style={styles.text} variant="label-small">
+          Label Small
+        </Text>
+      </View>
     </ScreenWrapper>
   );
 };
@@ -49,6 +89,11 @@ const TextExample = () => {
 TextExample.title = 'Typography';
 
 const styles = StyleSheet.create({
+  divider: {
+    marginTop: 16,
+    marginBottom: 8,
+    opacity: 0.6,
+  },
   container: {
     padding: 16,
   },
