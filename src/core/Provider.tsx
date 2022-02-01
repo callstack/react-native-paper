@@ -86,16 +86,6 @@ const Provider = ({ ...props }: Props) => {
 
     const isV3 = theme?.version === 3;
 
-    /**
-     * Function that allows to access theme values using Material 3 tokens
-     * @param {string} tokenKey - Material 3 token
-     *
-     * ## Usage
-     * md('md.sys.color.secondary')
-     */
-    const md = (tokenKey: MD3Token) =>
-      isV3 ? get(theme.tokens, tokenKey) : undefined;
-
     const extendedTheme = {
       ...theme,
       animation: {
@@ -108,6 +98,15 @@ const Provider = ({ ...props }: Props) => {
     if (!isV3) {
       return extendedTheme as MD2ThemeExtended;
     }
+
+    /**
+     * Function that allows to access theme values using Material 3 tokens
+     * @param {string} tokenKey - Material 3 token
+     *
+     * ## Usage
+     * md('md.sys.color.secondary')
+     */
+    const md = (tokenKey: MD3Token) => get(theme.tokens, tokenKey);
 
     return { ...extendedTheme, md } as MD3ThemeExtended;
   };
