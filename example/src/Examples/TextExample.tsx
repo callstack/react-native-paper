@@ -10,9 +10,9 @@ import {
 } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
-const Divider = ({ children }: React.PropsWithChildren<{}>) => {
+const SectionHeader = ({ children }: React.PropsWithChildren<{}>) => {
   return (
-    <Text variant="title-large" style={styles.divider}>
+    <Text variant="title-large" style={styles.sectionHeader}>
       {children}
     </Text>
   );
@@ -22,7 +22,7 @@ const TextExample = () => {
   return (
     <ScreenWrapper>
       <View style={styles.container}>
-        <Divider>Old text components:</Divider>
+        <SectionHeader>Old text components:</SectionHeader>
 
         <Caption style={styles.text}>Caption</Caption>
         <Paragraph style={styles.text}>Paragraph</Paragraph>
@@ -30,7 +30,7 @@ const TextExample = () => {
         <Title style={styles.text}>Title</Title>
         <Headline style={styles.text}>Headline</Headline>
 
-        <Divider>Text component:</Divider>
+        <SectionHeader>Text component:</SectionHeader>
 
         <Text style={styles.text} variant="display-large">
           Display Large
@@ -89,7 +89,7 @@ const TextExample = () => {
 TextExample.title = 'Typography';
 
 const styles = StyleSheet.create({
-  divider: {
+  sectionHeader: {
     marginTop: 16,
     marginBottom: 8,
     opacity: 0.6,
