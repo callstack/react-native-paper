@@ -1,0 +1,261 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders every variant of Text with children as content 1`] = `
+Array [
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "System",
+          "fontWeight": "400",
+        },
+        Object {
+          "textAlign": "left",
+        },
+        undefined,
+      ]
+    }
+  >
+    Something rendered as a child content
+  </Text>,
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "System",
+          "fontWeight": "400",
+        },
+        Object {
+          "textAlign": "left",
+        },
+        undefined,
+      ]
+    }
+  >
+    Something rendered as a child content
+  </Text>,
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "System",
+          "fontWeight": "400",
+        },
+        Object {
+          "textAlign": "left",
+        },
+        undefined,
+      ]
+    }
+  >
+    Something rendered as a child content
+  </Text>,
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "System",
+          "fontWeight": "400",
+        },
+        Object {
+          "textAlign": "left",
+        },
+        undefined,
+      ]
+    }
+  >
+    Something rendered as a child content
+  </Text>,
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "System",
+          "fontWeight": "400",
+        },
+        Object {
+          "textAlign": "left",
+        },
+        undefined,
+      ]
+    }
+  >
+    Something rendered as a child content
+  </Text>,
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "System",
+          "fontWeight": "400",
+        },
+        Object {
+          "textAlign": "left",
+        },
+        undefined,
+      ]
+    }
+  >
+    Something rendered as a child content
+  </Text>,
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "System",
+          "fontWeight": "400",
+        },
+        Object {
+          "textAlign": "left",
+        },
+        undefined,
+      ]
+    }
+  >
+    Something rendered as a child content
+  </Text>,
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "System",
+          "fontWeight": "400",
+        },
+        Object {
+          "textAlign": "left",
+        },
+        undefined,
+      ]
+    }
+  >
+    Something rendered as a child content
+  </Text>,
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "System",
+          "fontWeight": "400",
+        },
+        Object {
+          "textAlign": "left",
+        },
+        undefined,
+      ]
+    }
+  >
+    Something rendered as a child content
+  </Text>,
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "System",
+          "fontWeight": "400",
+        },
+        Object {
+          "textAlign": "left",
+        },
+        undefined,
+      ]
+    }
+  >
+    Something rendered as a child content
+  </Text>,
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "System",
+          "fontWeight": "400",
+        },
+        Object {
+          "textAlign": "left",
+        },
+        undefined,
+      ]
+    }
+  >
+    Something rendered as a child content
+  </Text>,
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "System",
+          "fontWeight": "400",
+        },
+        Object {
+          "textAlign": "left",
+        },
+        undefined,
+      ]
+    }
+  >
+    Something rendered as a child content
+  </Text>,
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "System",
+          "fontWeight": "400",
+        },
+        Object {
+          "textAlign": "left",
+        },
+        undefined,
+      ]
+    }
+  >
+    Something rendered as a child content
+  </Text>,
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "System",
+          "fontWeight": "400",
+        },
+        Object {
+          "textAlign": "left",
+        },
+        undefined,
+      ]
+    }
+  >
+    Something rendered as a child content
+  </Text>,
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "System",
+          "fontWeight": "400",
+        },
+        Object {
+          "textAlign": "left",
+        },
+        undefined,
+      ]
+    }
+  >
+    Something rendered as a child content
+  </Text>,
+]
+`;

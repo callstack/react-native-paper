@@ -6,8 +6,8 @@ import {
   StyleProp,
   StyleSheet,
 } from 'react-native';
-import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { withTheme } from '../../../core/theming';
+import type { Theme } from '../../../types';
 
 type Props = React.ComponentPropsWithRef<typeof Animated.Text> & {
   style?: StyleProp<TextStyle>;

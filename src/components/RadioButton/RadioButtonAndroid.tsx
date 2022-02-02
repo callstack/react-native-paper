@@ -111,7 +111,7 @@ const RadioButtonAndroid = ({
   const checkedColor = rest.color || theme.colors?.accent;
   const uncheckedColor =
     rest.uncheckedColor ||
-    color(theme.colors?.text)
+    color(theme?.colors?.text)
       .alpha(theme.dark ? 0.7 : 0.54)
       .rgb()
       .string();
@@ -129,8 +129,8 @@ const RadioButtonAndroid = ({
           }) === 'checked';
 
         if (disabled) {
-          rippleColor = color(theme.colors?.text).alpha(0.16).rgb().string();
-          radioColor = theme.colors?.disabled || black;
+          rippleColor = color(theme?.colors?.text).alpha(0.16).rgb().string();
+          radioColor = theme?.colors?.disabled || black;
         } else {
           rippleColor = color(checkedColor).fade(0.32).rgb().string();
           radioColor = checked

@@ -113,8 +113,8 @@ const mediumType = {
 const typescale = {
   'display-large': {
     ...regularType,
-    'line-height': 57,
-    size: 64,
+    'line-height': 64,
+    size: 57,
   },
   'display-medium': {
     ...regularType,
@@ -155,6 +155,7 @@ const typescale = {
   },
   'title-small': {
     ...mediumType,
+    tracking: 0.1,
     'line-height': 20,
     size: 14,
   },
@@ -174,13 +175,12 @@ const typescale = {
   'label-small': {
     ...mediumType,
     tracking: 0.5,
-    'line-height': 6,
+    'line-height': 16,
     size: 11,
   },
 
   'body-large': {
     ...mediumType,
-    tracking: 0.15,
     'line-height': 24,
     size: 16,
   },

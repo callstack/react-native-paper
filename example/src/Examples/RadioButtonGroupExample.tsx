@@ -4,10 +4,11 @@ import { RadioButton, Paragraph, List, useTheme } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
 const RadioButtonGroupExample = () => {
-  const [value, setValue] = React.useState<string>('first');
-  const [value2, setValue2] = React.useState<string>('first');
+  const [value, setValue] = React.useState('first');
+  const [value2, setValue2] = React.useState('first');
 
   const { colors } = useTheme();
+
   return (
     <ScreenWrapper>
       <List.Section title="With RadioButton">
