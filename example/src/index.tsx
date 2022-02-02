@@ -8,9 +8,10 @@ import { InitialState, NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import {
   Provider as PaperProvider,
-  DarkTheme,
-  DefaultTheme as LightTheme,
-  ThemeBase,
+  MD3DarkTheme,
+  MD3LightTheme,
+  MD2DarkTheme,
+  MD2LightTheme,
 } from 'react-native-paper';
 import App from './RootNavigator';
 import DrawerItems from './DrawerItems';
@@ -44,6 +45,7 @@ const DrawerContent = () => {
         <DrawerItems
           toggleTheme={preferences.toggleTheme}
           toggleRTL={preferences.toggleRtl}
+          toggleThemeVersion={preferences.toggleThemeVersion}
           isRTL={preferences.rtl}
           isDarkTheme={preferences.theme.dark}
         />
@@ -62,8 +64,22 @@ export default function PaperExample() {
     InitialState | undefined
   >();
 
-  const [theme, setTheme] = React.useState<ThemeBase>(LightTheme);
+  const [isDarkMode, setIsDarkMode] = React.useState(false);
+  const [themeVersion, setThemeVersion] = React.useState<2 | 3>(3);
   const [rtl, setRtl] = React.useState<boolean>(I18nManager.isRTL);
+
+  const themeMode = isDarkMode ? 'dark' : 'light';
+
+  const theme = {
+    2: {
+      light: MD2LightTheme,
+      dark: MD2DarkTheme,
+    },
+    3: {
+      light: MD3LightTheme,
+      dark: MD3DarkTheme,
+    },
+  }[themeVersion][themeMode];
 
   React.useEffect(() => {
     const restoreState = async () => {
@@ -91,8 +107,7 @@ export default function PaperExample() {
         const preferences = JSON.parse(prefString || '');
 
         if (preferences) {
-          // eslint-disable-next-line react/no-did-mount-set-state
-          setTheme(preferences.theme === 'dark' ? DarkTheme : LightTheme);
+          setIsDarkMode(preferences.theme === 'dark');
 
           if (typeof preferences.rtl === 'boolean') {
             setRtl(preferences.rtl);
@@ -112,7 +127,7 @@ export default function PaperExample() {
         await AsyncStorage.setItem(
           PREFERENCES_KEY,
           JSON.stringify({
-            theme: theme === DarkTheme ? 'dark' : 'light',
+            theme: themeMode,
             rtl,
           })
         );
@@ -129,13 +144,14 @@ export default function PaperExample() {
     };
 
     savePrefs();
-  }, [rtl, theme]);
+  }, [rtl, themeMode]);
 
   const preferences = React.useMemo(
     () => ({
-      toggleTheme: () =>
-        setTheme((theme) => (theme === LightTheme ? DarkTheme : LightTheme)),
+      toggleTheme: () => setIsDarkMode((oldValue) => !oldValue),
       toggleRtl: () => setRtl((rtl) => !rtl),
+      toggleThemeVersion: () =>
+        setThemeVersion((oldThemeVersion) => (oldThemeVersion === 2 ? 3 : 2)),
       rtl,
       theme,
     }),
