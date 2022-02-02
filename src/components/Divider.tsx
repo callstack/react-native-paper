@@ -15,6 +15,8 @@ type Props = $RemoveChildren<typeof View> & {
    * @optional
    */
   theme: Theme;
+  bold?: boolean;
+  insets?: boolean;
 };
 
 /**
@@ -44,14 +46,24 @@ type Props = $RemoveChildren<typeof View> & {
  * export default MyComponent;
  * ```
  */
-const Divider = ({ inset, style, theme, ...rest }: Props) => {
+const Divider = ({
+  inset,
+  style,
+  theme,
+  bold = false,
+  insets = false,
+  ...rest
+}: Props) => {
   const { dark: isDarkTheme } = theme;
+
   return (
     <View
       {...rest}
       style={[
         isDarkTheme ? styles.dark : styles.light,
         inset && styles.inset,
+        insets && styles.insets,
+        bold && styles.bold,
         style,
       ]}
     />
@@ -69,6 +81,13 @@ const styles = StyleSheet.create({
   },
   inset: {
     marginLeft: 72,
+  },
+  insets: {
+    marginLeft: 28,
+    marginRight: 28,
+  },
+  bold: {
+    height: 1,
   },
 });
 
