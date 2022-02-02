@@ -5,17 +5,27 @@ import { withTheme } from '../core/theming';
 import { black, white } from '../styles/themes/v2/colors';
 import type { $RemoveChildren, Theme } from '../types';
 
-type Props = $RemoveChildren<typeof View> & {
+type Props = $RemoveChildren<typeof View> &
+  MD3Props & {
+    /**
+     *  Whether divider has a left inset.
+     */
+    inset?: boolean;
+    style?: StyleProp<ViewStyle>;
+    /**
+     * @optional
+     */
+    theme: Theme;
+  };
+
+type MD3Props = {
   /**
-   *  Whether divider has a left inset.
+   *  Whether divider should be bolded.
    */
-  inset?: boolean;
-  style?: StyleProp<ViewStyle>;
-  /**
-   * @optional
-   */
-  theme: Theme;
   bold?: boolean;
+  /**
+   *  Whether divider should have insets on both sides.
+   */
   insets?: boolean;
 };
 
@@ -54,16 +64,23 @@ const Divider = ({
   insets = false,
   ...rest
 }: Props) => {
-  const { dark: isDarkTheme } = theme;
+  const { dark: isDarkTheme, isV3, md } = theme;
+
+  const dividerColor = isV3
+    ? (md('md.sys.color.surface-variant') as string)
+    : color(isDarkTheme ? white : black)
+        .alpha(0.12)
+        .rgb()
+        .string();
 
   return (
     <View
       {...rest}
       style={[
-        isDarkTheme ? styles.dark : styles.light,
+        { height: StyleSheet.hairlineWidth, backgroundColor: dividerColor },
         inset && styles.inset,
-        insets && styles.insets,
-        bold && styles.bold,
+        isV3 && insets && styles.insets,
+        isV3 && bold && styles.bold,
         style,
       ]}
     />
@@ -71,14 +88,6 @@ const Divider = ({
 };
 
 const styles = StyleSheet.create({
-  light: {
-    backgroundColor: color(black).alpha(0.12).rgb().string(),
-    height: StyleSheet.hairlineWidth,
-  },
-  dark: {
-    backgroundColor: color(white).alpha(0.12).rgb().string(),
-    height: StyleSheet.hairlineWidth,
-  },
   inset: {
     marginLeft: 72,
   },

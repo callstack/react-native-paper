@@ -33,17 +33,21 @@ exports[`renders DrawerItem with icon 1`] = `
             "borderRadius": 4,
           },
           undefined,
+          undefined,
         ],
       ]
     }
   >
     <View
       style={
-        Object {
-          "alignItems": "center",
-          "flexDirection": "row",
-          "padding": 8,
-        }
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "padding": 8,
+          },
+          undefined,
+        ]
       }
     >
       <View
@@ -142,17 +146,21 @@ exports[`renders active DrawerItem 1`] = `
             "borderRadius": 4,
           },
           undefined,
+          undefined,
         ],
       ]
     }
   >
     <View
       style={
-        Object {
-          "alignItems": "center",
-          "flexDirection": "row",
-          "padding": 8,
-        }
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "padding": 8,
+          },
+          undefined,
+        ]
       }
     >
       <View
@@ -251,17 +259,21 @@ exports[`renders basic DrawerItem 1`] = `
             "borderRadius": 4,
           },
           undefined,
+          undefined,
         ],
       ]
     }
   >
     <View
       style={
-        Object {
-          "alignItems": "center",
-          "flexDirection": "row",
-          "padding": 8,
-        }
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "padding": 8,
+          },
+          undefined,
+        ]
       }
     >
       <View

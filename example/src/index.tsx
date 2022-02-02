@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { I18nManager, Platform } from 'react-native';
+import { I18nManager, Platform, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Updates from 'expo-updates';
 import { useKeepAwake } from 'expo-keep-awake';
@@ -45,6 +45,8 @@ const DrawerContent = () => {
           toggleTheme={preferences.toggleTheme}
           toggleRTL={preferences.toggleRtl}
           toggleThemeVersion={preferences.toggleThemeVersion}
+          toggleCollapsed={preferences.toggleCollapsed}
+          collapsed={preferences.collapsed}
           isRTL={preferences.rtl}
           isDarkTheme={preferences.theme.dark}
         />
@@ -66,6 +68,7 @@ export default function PaperExample() {
   const [isDarkMode, setIsDarkMode] = React.useState(false);
   const [themeVersion, setThemeVersion] = React.useState<2 | 3>(3);
   const [rtl, setRtl] = React.useState<boolean>(I18nManager.isRTL);
+  const [collapsed, setCollapsed] = React.useState<boolean>(false);
 
   const themeMode = isDarkMode ? 'dark' : 'light';
 
@@ -147,12 +150,14 @@ export default function PaperExample() {
     () => ({
       toggleTheme: () => setIsDarkMode((oldValue) => !oldValue),
       toggleRtl: () => setRtl((rtl) => !rtl),
+      toggleCollapsed: () => setCollapsed(!collapsed),
       toggleThemeVersion: () =>
         setThemeVersion((oldThemeVersion) => (oldThemeVersion === 2 ? 3 : 2)),
+      collapsed,
       rtl,
       theme,
     }),
-    [rtl, theme]
+    [rtl, theme, collapsed]
   );
 
   if (!isReady) {
@@ -173,7 +178,10 @@ export default function PaperExample() {
               {Platform.OS === 'web' ? (
                 <App />
               ) : (
-                <Drawer.Navigator drawerContent={() => <DrawerContent />}>
+                <Drawer.Navigator
+                  drawerStyle={collapsed && styles.collapsed}
+                  drawerContent={() => <DrawerContent />}
+                >
                   <Drawer.Screen name="Home" component={App} />
                 </Drawer.Navigator>
               )}
@@ -185,3 +193,9 @@ export default function PaperExample() {
     </PaperProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  collapsed: {
+    width: 80,
+  },
+});
