@@ -23,74 +23,79 @@ import type {
   NativeSyntheticEvent,
   TextLayoutEventData,
 } from 'react-native';
-import { white, black } from '../../../styles/themes/v2/colors';
 import AnimatedText from '../../Typography/AnimatedText';
 import { getCombinedStyles } from './utils';
-import getContrastingColor from '../../../utils/getContrastingColor';
+import { getFABColors } from './utils';
+import type { FABVariant } from '.';
 
 export type AnimatedFABIconMode = 'static' | 'dynamic';
 export type AnimatedFABAnimateFrom = 'left' | 'right';
 
-type Props = $RemoveChildren<typeof Surface> & {
-  /**
-   * Icon to display for the `FAB`.
-   */
-  icon: IconSource;
-  /**
-   * Label for extended `FAB`.
-   */
-  label: string;
-  /**
-   * Make the label text uppercased.
-   */
-  uppercase?: boolean;
-  /**
-   * Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.
-   * Uses `label` by default if specified.
-   */
-  accessibilityLabel?: string;
-  /**
-   * Accessibility state for the FAB. This is read by the screen reader when the user taps the FAB.
-   */
-  accessibilityState?: AccessibilityState;
-  /**
-   * Custom color for the icon and label of the `FAB`.
-   */
-  color?: string;
-  /**
-   * Whether `FAB` is disabled. A disabled button is greyed out and `onPress` is not called on touch.
-   */
-  disabled?: boolean;
-  /**
-   * Whether `FAB` is currently visible.
-   */
-  visible?: boolean;
-  /**
-   * Function to execute on press.
-   */
-  onPress?: () => void;
-  /**
-   * Function to execute on long press.
-   */
-  onLongPress?: () => void;
-  /**
-   * Whether icon should be translated to the end of extended `FAB` or be static and stay in the same place. The default value is `dynamic`.
-   */
-  iconMode?: AnimatedFABIconMode;
-  /**
-   * Indicates from which direction animation should be performed. The default value is `right`.
-   */
-  animateFrom?: AnimatedFABAnimateFrom;
-  /**
-   * Whether `FAB` should start animation to extend.
-   */
-  extended: boolean;
-  style?: StyleProp<ViewStyle>;
-  /**
-   * @optional
-   */
-  theme: Theme;
-  testID?: string;
+type Props = $RemoveChildren<typeof Surface> &
+  MD3Props & {
+    /**
+     * Icon to display for the `FAB`.
+     */
+    icon: IconSource;
+    /**
+     * Label for extended `FAB`.
+     */
+    label: string;
+    /**
+     * Make the label text uppercased.
+     */
+    uppercase?: boolean;
+    /**
+     * Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.
+     * Uses `label` by default if specified.
+     */
+    accessibilityLabel?: string;
+    /**
+     * Accessibility state for the FAB. This is read by the screen reader when the user taps the FAB.
+     */
+    accessibilityState?: AccessibilityState;
+    /**
+     * Custom color for the icon and label of the `FAB`.
+     */
+    color?: string;
+    /**
+     * Whether `FAB` is disabled. A disabled button is greyed out and `onPress` is not called on touch.
+     */
+    disabled?: boolean;
+    /**
+     * Whether `FAB` is currently visible.
+     */
+    visible?: boolean;
+    /**
+     * Function to execute on press.
+     */
+    onPress?: () => void;
+    /**
+     * Function to execute on long press.
+     */
+    onLongPress?: () => void;
+    /**
+     * Whether icon should be translated to the end of extended `FAB` or be static and stay in the same place. The default value is `dynamic`.
+     */
+    iconMode?: AnimatedFABIconMode;
+    /**
+     * Indicates from which direction animation should be performed. The default value is `right`.
+     */
+    animateFrom?: AnimatedFABAnimateFrom;
+    /**
+     * Whether `FAB` should start animation to extend.
+     */
+    extended: boolean;
+    style?: StyleProp<ViewStyle>;
+    /**
+     * @optional
+     */
+    theme: Theme;
+    testID?: string;
+  };
+
+type MD3Props = {
+  variant?: FABVariant;
 };
 
 const SIZE = 56;
@@ -113,6 +118,7 @@ const AnimatedFAB = ({
   animateFrom = 'right',
   extended = false,
   iconMode = 'dynamic',
+  variant = 'primary',
   ...rest
 }: Props) => {
   const isIOS = Platform.OS === 'ios';
@@ -126,7 +132,7 @@ const AnimatedFAB = ({
     new Animated.Value(0)
   );
   const { scale } = theme.animation;
-  const { isV3, md } = theme;
+  const { isV3 } = theme;
 
   const [textWidth, setTextWidth] = React.useState<number>(0);
   const [textHeight, setTextHeight] = React.useState<number>(0);
@@ -149,41 +155,13 @@ const AnimatedFAB = ({
     }
   }, [visible, scale, visibility]);
 
-  const disabledColor = isV3
-    ? md('md.sys.color.surface-disabled')
-    : color(theme.dark ? white : black)
-        .alpha(0.12)
-        .rgb()
-        .string();
-
-  const {
-    backgroundColor = disabled
-      ? disabledColor
-      : isV3
-      ? md('md.sys.color.primary-container')
-      : theme?.colors?.accent,
-  } = StyleSheet.flatten<ViewStyle>(style) || {};
-
-  let foregroundColor: string;
-
-  if (typeof customColor !== 'undefined') {
-    foregroundColor = customColor;
-  } else if (disabled) {
-    foregroundColor = isV3
-      ? md('md.sys.color.on-surface-disabled')
-      : color(theme.dark ? white : black)
-          .alpha(0.32)
-          .rgb()
-          .string();
-  } else {
-    foregroundColor = isV3
-      ? md('md.sys.color.on-primary-container')
-      : getContrastingColor(
-          backgroundColor || white,
-          white,
-          'rgba(0, 0, 0, .54)'
-        );
-  }
+  const { backgroundColor, foregroundColor } = getFABColors(
+    theme,
+    variant,
+    disabled,
+    customColor,
+    style
+  );
 
   const rippleColor = color(foregroundColor).alpha(0.32).rgb().string();
 
@@ -369,7 +347,7 @@ const AnimatedFAB = ({
           style={[
             {
               [isAnimatedFromRight || isRTL ? 'right' : 'left']: isIconStatic
-                ? textWidth - SIZE + borderRadius
+                ? textWidth - SIZE + borderRadius / (isV3 ? 1 : 2)
                 : borderRadius,
             },
             {

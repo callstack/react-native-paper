@@ -1,42 +1,94 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { FAB, Portal, useTheme } from 'react-native-paper';
+import { FAB, Portal, useTheme, Text } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
+
+type FABVariant = 'primary' | 'secondary' | 'tertiary' | 'surface';
+type FABSize = 'small' | 'medium' | 'large';
+type FABMode = 'flat' | 'elevated';
 
 const FABExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);
   const [open, setOpen] = React.useState<boolean>(false);
-  const { isV3, md } = useTheme();
+  const { isV3 } = useTheme();
+
+  const variants = ['primary', 'secondary', 'tertiary', 'surface'];
+  const sizes = ['small', 'medium', 'large'];
+  const modes = ['flat', 'elevated'];
 
   return (
     <ScreenWrapper style={styles.container}>
-      <View style={styles.row}>
+      <View style={styles.column}>
         <FAB
           size="small"
           icon={visible ? 'eye-off' : 'eye'}
           style={styles.fab}
           onPress={() => setVisible(!visible)}
         />
-        <FAB
-          icon="heart"
-          style={styles.fab}
-          onPress={() => {}}
-          visible={visible}
-        />
-        <FAB
-          icon="heart"
-          style={styles.fab}
-          onPress={() => {}}
-          visible={visible}
-          size="large"
-          mode="flat"
-        />
-        <FAB
-          icon="heart"
-          style={styles.fab}
-          onPress={() => {}}
-          visible={visible}
-        />
+      </View>
+      {isV3 && (
+        <>
+          <View style={styles.row}>
+            {variants.map((variant) => (
+              <View style={styles.fabVariant} key={variant}>
+                <FAB
+                  icon="pencil"
+                  style={styles.fab}
+                  onPress={() => {}}
+                  visible={visible}
+                  variant={variant as FABVariant}
+                />
+                {visible && <Text variant="body-medium">{variant}</Text>}
+              </View>
+            ))}
+          </View>
+          <View style={styles.row}>
+            {sizes.map((size) => (
+              <View style={styles.fabVariant} key={size}>
+                <FAB
+                  icon="pencil"
+                  style={styles.fab}
+                  onPress={() => {}}
+                  visible={visible}
+                  size={size as FABSize}
+                />
+                {visible && <Text variant="body-medium">{size}</Text>}
+              </View>
+            ))}
+          </View>
+          <View style={styles.row}>
+            {modes.map((mode) => (
+              <View style={styles.fabVariant} key={mode}>
+                <FAB
+                  icon="pencil"
+                  style={styles.fab}
+                  onPress={() => {}}
+                  visible={visible}
+                  mode={mode as FABMode}
+                />
+                {visible && <Text variant="body-medium">{mode}</Text>}
+              </View>
+            ))}
+          </View>
+        </>
+      )}
+      <View style={styles.column}>
+        {!isV3 && (
+          <>
+            <FAB
+              icon="heart"
+              style={styles.fab}
+              onPress={() => {}}
+              visible={visible}
+            />
+            <FAB
+              icon="heart"
+              style={styles.fab}
+              onPress={() => {}}
+              visible={visible}
+            />
+          </>
+        )}
         <FAB
           icon="check"
           label="Extended FAB"
@@ -103,11 +155,22 @@ const styles = StyleSheet.create({
     padding: 4,
   },
   row: {
+    marginBottom: 8,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  column: {
     justifyContent: 'center',
     alignItems: 'center',
   },
   fab: {
     margin: 8,
+  },
+  fabVariant: {
+    flex: 1,
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 });
 

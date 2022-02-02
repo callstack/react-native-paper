@@ -86,7 +86,7 @@ const CustomFABControls = ({
         styles.controlsWrapper,
         {
           backgroundColor: isV3
-            ? md('md.sys.color.background')
+            ? (md('md.sys.color.background') as string)
             : colors?.background,
         },
       ]}

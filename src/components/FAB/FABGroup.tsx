@@ -15,6 +15,7 @@ import Card from '../Card/Card';
 import { withTheme } from '../../core/theming';
 import type { IconSource } from '../Icon';
 import type { Theme } from '../../types';
+import type { FABVariant } from './AnimatedFAB';
 
 type Props = {
   /**
@@ -92,6 +93,10 @@ type Props = {
    * Pass down testID from Group props to FAB.
    */
   testID?: string;
+} & MD3Props;
+
+type MD3Props = {
+  variant?: FABVariant;
 };
 
 /**
@@ -167,6 +172,7 @@ const FABGroup = ({
   testID,
   onStateChange,
   color: colorProp,
+  variant = 'primary',
 }: Props) => {
   const { current: backdrop } = React.useRef<Animated.Value>(
     new Animated.Value(0)
@@ -189,6 +195,7 @@ const FABGroup = ({
   >(null);
 
   const { scale } = theme.animation;
+  const { colors, md, isV3 } = theme;
 
   React.useEffect(() => {
     if (open) {
@@ -227,16 +234,14 @@ const FABGroup = ({
         ),
       ]).start();
     }
-  }, [open, actions, backdrop, scale]);
+  }, [open, actions, backdrop, scale, isV3]);
 
   const close = () => onStateChange({ open: false });
 
   const toggle = () => onStateChange({ open: !open });
 
-  const { colors, md, isV3 } = theme;
-
   const labelColor = isV3
-    ? md('md.sys.color.on-surface')
+    ? (md('md.sys.color.on-surface') as string)
     : theme.dark
     ? colors?.text
     : color(colors?.text).fade(0.54).rgb().string();
@@ -291,7 +296,10 @@ const FABGroup = ({
             {
               opacity: backdropOpacity,
               backgroundColor: isV3
-                ? color(md('md.sys.color.background')).alpha(0.8).rgb().string()
+                ? color(md('md.sys.color.background') as string)
+                    .alpha(0.8)
+                    .rgb()
+                    .string()
                 : colors?.backdrop,
             },
           ]}
@@ -343,29 +351,37 @@ const FABGroup = ({
                     accessibilityComponentType="button"
                     accessibilityRole="button"
                   >
-                    <Text style={{ color: it.labelTextColor ?? labelColor }}>
+                    <Text
+                      {...(isV3 && {
+                        variant: 'body-large',
+                      })}
+                      style={{ color: it.labelTextColor ?? labelColor }}
+                    >
                       {it.label}
                     </Text>
                   </Card>
                 </View>
               )}
               <FAB
-                small={typeof it.small !== 'undefined' ? it.small : true}
-                size="small"
+                {...(isV3
+                  ? {
+                      size: 'small',
+                    }
+                  : {
+                      small: typeof it.small !== 'undefined' ? it.small : true,
+                    })}
                 icon={it.icon}
                 color={it.color}
                 style={
                   [
                     {
-                      transform: [
-                        { scale: scales[i] },
-                        isV3 && { translateY: translations[i] },
-                      ],
+                      transform: [{ scale: scales[i] }],
                       opacity: opacities[i],
                       backgroundColor: isV3
                         ? md('md.sys.color.surface')
                         : theme.colors?.surface,
                     },
+                    isV3 && { transform: [{ translateY: translations[i] }] },
                     it.style,
                   ] as StyleProp<ViewStyle>
                 }
@@ -404,11 +420,14 @@ const FABGroup = ({
           style={[
             styles.fab,
             isV3 &&
-              open && { backgroundColor: md('md.sys.color.surface-variant') },
+              open && {
+                backgroundColor: md('md.sys.color.surface-variant') as string,
+              },
             fabStyle,
           ]}
           visible={visible}
           testID={testID}
+          variant={variant}
         />
       </SafeAreaView>
     </View>
@@ -453,9 +472,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
-  },
-  v3LastItem: {
-    marginBottom: 24,
   },
   v3LabelStyle: {
     backgroundColor: 'transparent',

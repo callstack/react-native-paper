@@ -116,11 +116,12 @@ const AnimatedFABExample = () => {
         keyExtractor={_keyExtractor}
         onEndReachedThreshold={0}
         scrollEventThrottle={16}
+        showsVerticalScrollIndicator={false}
         style={[
           styles.flex,
           {
             backgroundColor: isV3
-              ? md('md.sys.color.background')
+              ? (md('md.sys.color.background') as string)
               : colors?.background,
           },
         ]}
@@ -128,7 +129,7 @@ const AnimatedFABExample = () => {
           styles.container,
           {
             backgroundColor: isV3
-              ? md('md.sys.color.background')
+              ? (md('md.sys.color.background') as string)
               : colors?.background,
           },
         ]}

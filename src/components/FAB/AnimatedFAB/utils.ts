@@ -1,4 +1,16 @@
-import { Animated, I18nManager, ViewStyle } from 'react-native';
+import color from 'color';
+import {
+  Animated,
+  I18nManager,
+  StyleProp,
+  ViewStyle,
+  StyleSheet,
+} from 'react-native';
+import type { Theme } from '../../../types';
+import { white, black } from '../../../styles/themes/v2/colors';
+import getContrastingColor from '../../../utils/getContrastingColor';
+
+export type FABVariant = 'primary' | 'secondary' | 'tertiary' | 'surface';
 
 type GetCombinedStylesProps = {
   isAnimatedFromRight: boolean;
@@ -141,4 +153,62 @@ export const getCombinedStyles = ({
   }
 
   return combinedStyles;
+};
+
+export const getFABColors = (
+  theme: Theme,
+  variant?: string,
+  disabled?: boolean,
+  customColor?: string,
+  style?: StyleProp<ViewStyle>
+) => {
+  const { isV3, md } = theme;
+  const isSurfaceVariant = variant === 'surface';
+
+  // FAB disabled color
+  const disabledColor = isV3
+    ? (md('md.sys.color.surface-disabled') as string)
+    : color(theme.dark ? white : black)
+        .alpha(0.12)
+        .rgb()
+        .string();
+
+  // FAB backgroundColor
+  const {
+    backgroundColor = disabled
+      ? disabledColor
+      : isV3
+      ? (md(
+          `md.sys.color.${variant}${isSurfaceVariant ? '' : '-container'}`
+        ) as string)
+      : theme.colors?.accent,
+  } = StyleSheet.flatten<ViewStyle>(style) || {};
+
+  // FAB foregroundColor
+  let foregroundColor: string;
+  if (typeof customColor !== 'undefined') {
+    foregroundColor = customColor;
+  } else if (disabled) {
+    foregroundColor = isV3
+      ? (md('md.sys.color.on-surface-disabled') as string)
+      : color(theme.dark ? white : black)
+          .alpha(0.32)
+          .rgb()
+          .string();
+  } else {
+    foregroundColor = isV3
+      ? (md(
+          `md.sys.color.on-${variant}${isSurfaceVariant ? '' : '-container'}`
+        ) as string)
+      : getContrastingColor(
+          backgroundColor || white,
+          white,
+          'rgba(0, 0, 0, .54)'
+        );
+  }
+
+  return {
+    backgroundColor,
+    foregroundColor,
+  };
 };

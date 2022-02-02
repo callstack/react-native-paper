@@ -14,9 +14,8 @@ import CrossFadeIcon from '../CrossFadeIcon';
 import Icon, { IconSource } from '../Icon';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { black, white } from '../../styles/themes/v2/colors';
 import { withTheme } from '../../core/theming';
-import getContrastingColor from '../../utils/getContrastingColor';
+import { getFABColors, FABVariant } from './AnimatedFAB/utils';
 import type { $RemoveChildren, Theme, XOR } from '../../types';
 
 type FABSize = 'small' | 'medium' | 'large';
@@ -100,6 +99,7 @@ type MD3Props = BaseProps & {
    * - `elevated` - button with a shadow
    */
   mode?: FABMode;
+  variant?: FABVariant;
 };
 
 /**
@@ -156,13 +156,14 @@ const FAB = ({
   testID,
   size = 'medium',
   mode = 'elevated',
+  variant = 'primary',
   ...rest
 }: XOR<MD2Props, MD3Props>) => {
   const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
   const { scale } = theme.animation;
-  const { isV3, md } = theme;
+  const { isV3 } = theme;
 
   React.useEffect(() => {
     if (visible) {
@@ -182,41 +183,13 @@ const FAB = ({
 
   const IconComponent = animated ? CrossFadeIcon : Icon;
 
-  const disabledColor = isV3
-    ? md('md.sys.color.surface-disabled')
-    : color(theme.dark ? white : black)
-        .alpha(0.12)
-        .rgb()
-        .string();
-
-  const {
-    backgroundColor = disabled
-      ? disabledColor
-      : isV3
-      ? md('md.sys.color.primary-container')
-      : theme?.colors?.accent,
-  } = (StyleSheet.flatten(style) || {}) as ViewStyle;
-
-  let foregroundColor;
-
-  if (typeof customColor !== 'undefined') {
-    foregroundColor = customColor;
-  } else if (disabled) {
-    foregroundColor = isV3
-      ? md('md.sys.color.on-surface-disabled')
-      : color(theme.dark ? white : black)
-          .alpha(0.32)
-          .rgb()
-          .string();
-  } else {
-    foregroundColor = isV3
-      ? md('md.sys.color.on-primary-container')
-      : getContrastingColor(
-          backgroundColor || white,
-          white,
-          'rgba(0, 0, 0, .54)'
-        );
-  }
+  const { backgroundColor, foregroundColor } = getFABColors(
+    theme,
+    variant,
+    disabled,
+    customColor,
+    style
+  );
 
   const rippleColor = color(foregroundColor).alpha(0.32).rgb().string();
 
@@ -306,6 +279,9 @@ const FAB = ({
           ) : null}
           {label ? (
             <Text
+              {...(isV3 && {
+                variant: 'label-large',
+              })}
               selectable={false}
               style={[
                 styles.label,
