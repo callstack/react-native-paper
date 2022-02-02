@@ -64,6 +64,9 @@ const createProvider = (theme) => {
   );
 };
 
+const ExtendedLightTheme = { ...LightTheme, isV3: false };
+const ExtendedDarkTheme = { ...DarkTheme, isV3: false };
+
 describe('Provider', () => {
   beforeEach(() => {
     jest.resetModules();
@@ -73,11 +76,11 @@ describe('Provider', () => {
     mockAppearance();
     const { getByTestId } = render(createProvider(null));
     expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
-      LightTheme
+      ExtendedLightTheme
     );
     act(() => Appearance.__internalListeners[0]({ colorScheme: 'dark' }));
     expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
-      DarkTheme
+      ExtendedDarkTheme
     );
   });
 
@@ -98,18 +101,18 @@ describe('Provider', () => {
       getByTestId('provider-child-view').props.theme.animation.scale
     ).toStrictEqual(0);
 
-    rerender(createProvider(LightTheme));
+    rerender(createProvider(ExtendedLightTheme));
     expect(AccessibilityInfo.removeEventListener).toHaveBeenCalled();
   });
 
   it('should not set AccessibilityInfo listeners, if there is a theme', async () => {
     mockAppearance();
-    const { getByTestId } = render(createProvider(DarkTheme));
+    const { getByTestId } = render(createProvider(ExtendedDarkTheme));
 
     expect(AccessibilityInfo.addEventListener).not.toHaveBeenCalled();
     expect(AccessibilityInfo.removeEventListener).not.toHaveBeenCalled();
     expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
-      DarkTheme
+      ExtendedDarkTheme
     );
   });
 
@@ -120,18 +123,18 @@ describe('Provider', () => {
     expect(Appearance.addChangeListener).toHaveBeenCalled();
     act(() => Appearance.__internalListeners[0]({ colorScheme: 'dark' }));
     expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
-      DarkTheme
+      ExtendedDarkTheme
     );
   });
 
   it('should not set Appearance listeners, if the theme is passed', async () => {
     mockAppearance();
-    const { getByTestId } = render(createProvider(LightTheme));
+    const { getByTestId } = render(createProvider(ExtendedLightTheme));
 
     expect(Appearance.addChangeListener).not.toHaveBeenCalled();
     expect(Appearance.removeChangeListener).not.toHaveBeenCalled();
     expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
-      LightTheme
+      ExtendedLightTheme
     );
   });
 
@@ -142,14 +145,14 @@ describe('Provider', () => {
     const { getByTestId } = render(createProvider(null));
     expect(Appearance).toEqual(null);
     expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
-      LightTheme
+      ExtendedLightTheme
     );
   });
 
   it.each`
-    label              | theme         | colorScheme
-    ${'default theme'} | ${LightTheme} | ${'light'}
-    ${'dark theme'}    | ${DarkTheme}  | ${'dark'}
+    label              | theme                 | colorScheme
+    ${'default theme'} | ${ExtendedLightTheme} | ${'light'}
+    ${'dark theme'}    | ${ExtendedDarkTheme}  | ${'dark'}
   `(
     'provides $label for $colorScheme color scheme',
     async ({ theme, colorScheme }) => {
@@ -165,9 +168,9 @@ describe('Provider', () => {
   it('uses provided custom theme', async () => {
     mockAppearance();
     const customTheme = {
-      ...LightTheme,
+      ...ExtendedLightTheme,
       colors: {
-        ...LightTheme.colors,
+        ...ExtendedLightTheme.colors,
         primary: 'tomato',
         accent: 'yellow',
       },

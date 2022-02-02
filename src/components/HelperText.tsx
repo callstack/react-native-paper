@@ -7,7 +7,7 @@ import {
   TextStyle,
   LayoutChangeEvent,
 } from 'react-native';
-import AnimatedText from './Typography/AnimatedText';
+import AnimatedText from './Typography/v2/AnimatedText';
 import { withTheme } from '../core/theming';
 import type { $Omit, Theme } from '../types';
 

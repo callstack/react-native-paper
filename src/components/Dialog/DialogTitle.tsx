@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, StyleProp, TextStyle } from 'react-native';
-import Title from '../Typography/Title';
+import Title from '../Typography/v2/Title';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 

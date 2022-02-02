@@ -8,9 +8,9 @@ import {
 } from 'react-native';
 
 import { withTheme } from '../../core/theming';
-import Caption from './../Typography/Caption';
-import Title from './../Typography/Title';
 import type { Theme } from '../../types';
+import Caption from '../Typography/v2/Caption';
+import Title from '../Typography/v2/Title';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**

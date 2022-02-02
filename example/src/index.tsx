@@ -9,8 +9,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import {
   Provider as PaperProvider,
   DarkTheme,
-  DefaultTheme,
-  Theme,
+  DefaultTheme as LightTheme,
+  ThemeBase,
 } from 'react-native-paper';
 import App from './RootNavigator';
 import DrawerItems from './DrawerItems';
@@ -34,39 +34,6 @@ declare global {
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
-
-const CustomDarkTheme = {
-  ...DarkTheme,
-  colors: {
-    ...DarkTheme.colors,
-    customColor: '#BADA55',
-  },
-  fonts: {
-    ...DarkTheme.fonts,
-    superLight: { ...DarkTheme.fonts['light'] },
-  },
-  animation: {
-    ...DarkTheme.animation,
-    customProperty: 1,
-  },
-};
-
-const CustomDefaultTheme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    customColor: '#BADA55',
-  },
-  fonts: {
-    ...DefaultTheme.fonts,
-    superLight: { ...DefaultTheme.fonts['light'] },
-  },
-  userDefinedThemeProperty: '',
-  animation: {
-    ...DefaultTheme.animation,
-    customProperty: 1,
-  },
-};
 
 export const PreferencesContext = React.createContext<any>(null);
 
@@ -95,7 +62,7 @@ export default function PaperExample() {
     InitialState | undefined
   >();
 
-  const [theme, setTheme] = React.useState<Theme>(CustomDefaultTheme);
+  const [theme, setTheme] = React.useState<ThemeBase>(LightTheme);
   const [rtl, setRtl] = React.useState<boolean>(I18nManager.isRTL);
 
   React.useEffect(() => {
@@ -125,9 +92,7 @@ export default function PaperExample() {
 
         if (preferences) {
           // eslint-disable-next-line react/no-did-mount-set-state
-          setTheme(
-            preferences.theme === 'dark' ? CustomDarkTheme : CustomDefaultTheme
-          );
+          setTheme(preferences.theme === 'dark' ? DarkTheme : LightTheme);
 
           if (typeof preferences.rtl === 'boolean') {
             setRtl(preferences.rtl);
@@ -169,9 +134,7 @@ export default function PaperExample() {
   const preferences = React.useMemo(
     () => ({
       toggleTheme: () =>
-        setTheme((theme) =>
-          theme === CustomDefaultTheme ? CustomDarkTheme : CustomDefaultTheme
-        ),
+        setTheme((theme) => (theme === LightTheme ? DarkTheme : LightTheme)),
       toggleRtl: () => setRtl((rtl) => !rtl),
       rtl,
       theme,

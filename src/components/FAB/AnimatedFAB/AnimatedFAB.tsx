@@ -24,7 +24,7 @@ import type {
   TextLayoutEventData,
 } from 'react-native';
 import { white, black } from '../../../styles/themes/v2/colors';
-import AnimatedText from '../../Typography/AnimatedText';
+import AnimatedText from '../../Typography/v2/AnimatedText';
 import { getCombinedStyles } from './utils';
 
 export type AnimatedFABIconMode = 'static' | 'dynamic';
@@ -151,7 +151,7 @@ const AnimatedFAB = ({
     .rgb()
     .string();
 
-  const { backgroundColor = disabled ? disabledColor : theme.colors?.accent } =
+  const { backgroundColor = disabled ? disabledColor : theme?.colors?.accent } =
     StyleSheet.flatten<ViewStyle>(style) || {};
 
   let foregroundColor: string;

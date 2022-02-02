@@ -13,11 +13,16 @@ import LightTheme from '../styles/themes/v2/LightTheme';
 import DarkTheme from '../styles/themes/v2/DarkTheme';
 import { addEventListener } from '../utils/addEventListener';
 import { get } from 'lodash';
-import type { MD2Theme, MD3ThemeExtended, MD3Token, Theme } from '../types';
+import type {
+  MD2ThemeExtended,
+  MD3ThemeExtended,
+  MD3Token,
+  ThemeBase,
+} from '../types';
 
 type Props = {
   children: React.ReactNode;
-  theme?: Theme;
+  theme?: ThemeBase;
   settings?: Settings;
 };
 
@@ -77,21 +82,21 @@ const Provider = ({ ...props }: Props) => {
 
     const theme = providedTheme
       ? providedTheme
-      : ((colorScheme === 'dark' ? DarkTheme : LightTheme) as Theme);
+      : ((colorScheme === 'dark' ? DarkTheme : LightTheme) as ThemeBase);
 
     const isV3 = theme?.version === 3;
 
     const extendedTheme = {
       ...theme,
-      isV3,
       animation: {
         ...theme.animation,
         scale: reduceMotionEnabled ? 0 : 1,
       },
+      isV3,
     };
 
     if (!isV3) {
-      return extendedTheme as MD2Theme;
+      return extendedTheme as MD2ThemeExtended;
     }
 
     /**

@@ -104,7 +104,7 @@ const DataTableTitle = ({
     }).start();
   }, [sortDirection, spinAnim]);
 
-  const textColor = color(theme.colors?.text).alpha(0.6).rgb().string();
+  const textColor = color(theme?.colors?.text).alpha(0.6).rgb().string();
 
   const spin = spinAnim.interpolate({
     inputRange: [0, 1],
@@ -116,7 +116,7 @@ const DataTableTitle = ({
       <MaterialCommunityIcon
         name="arrow-up"
         size={16}
-        color={theme.colors?.text || black}
+        color={theme?.colors?.text || black}
         direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
       />
     </Animated.View>

@@ -3,19 +3,19 @@ import * as React from 'react';
 import { I18nManager, StyleProp, TextStyle, StyleSheet } from 'react-native';
 
 import Text from './Text';
-import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { useTheme } from '../../../core/theming';
 
 type Props = React.ComponentProps<typeof Text> & {
-  alpha: number;
+  alpha?: number;
   family: 'regular' | 'medium' | 'light' | 'thin';
   style?: StyleProp<TextStyle>;
-  theme: Theme;
 };
 
-const StyledText = ({ theme, alpha, family, style, ...rest }: Props) => {
-  const textColor = color(theme?.colors?.text).alpha(alpha).rgb().string();
-  const font = theme.fonts[family];
+const StyledText = ({ alpha = 1, family, style, ...rest }: Props) => {
+  const { colors, fonts } = useTheme();
+
+  const textColor = color(colors?.text).alpha(alpha).rgb().string();
+  const font = fonts?.[family];
   const writingDirection = I18nManager.isRTL ? 'rtl' : 'ltr';
 
   return (
@@ -36,4 +36,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(StyledText);
+export default StyledText;
