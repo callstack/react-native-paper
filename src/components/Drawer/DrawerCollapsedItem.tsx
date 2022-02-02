@@ -1,20 +1,19 @@
 import color from 'color';
 import * as React from 'react';
-import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
+import { View, StyleSheet, StyleProp, ViewStyle, Animated } from 'react-native';
 import Text from '../Typography/Text';
 import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
-import { black } from '../../styles/themes/v2/colors';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * The label text of the item.
    */
-  label: string;
+  label?: string;
   /**
-   * Icon to display for the `DrawerItem`.
+   * Icon to display for the `DrawerCollapsedItem`.
    */
   icon?: IconSource;
   /**
@@ -40,32 +39,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   theme: Theme;
 };
 
-/**
- * A component used to show an action item with an icon and a label in a navigation drawer.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/drawer-item.png" />
- *   </figure>
- * </div>
- *
- * ## Usage
- * ```js
- * import * as React from 'react';
- * import { Drawer } from 'react-native-paper';
- *
- * const MyComponent = () => (
- *    <Drawer.Item
- *      style={{ backgroundColor: '#64ffda' }}
- *      icon="star"
- *      label="First Item"
- *    />
- * );
- *
- * export default MyComponent;
- * ```
- */
-const DrawerItem = ({
+const DrawerCollapsedItem = ({
   icon,
   label,
   active,
@@ -73,29 +47,43 @@ const DrawerItem = ({
   style,
   onPress,
   accessibilityLabel,
-  right,
   ...rest
 }: Props) => {
   const { colors } = theme;
+  const { scale } = theme.animation;
+
   const backgroundColor = active
     ? color(colors?.primary).alpha(0.12).rgb().string()
     : 'transparent';
   const contentColor = active
     ? colors?.primary
-    : color(theme.isV3 ? theme.colors.onSurface : theme?.colors?.text)
-        .alpha(0.68)
-        .rgb()
-        .string();
+    : color(colors?.text).alpha(0.68).rgb().string();
   const font = theme.fonts.medium;
-  const labelMargin = icon ? 12 : 0;
+
+  const { current: animScale } = React.useRef<Animated.Value>(
+    new Animated.Value(active ? 1 : 0.5)
+  );
+
+  React.useEffect(() => {
+    if (!active) {
+      animScale.setValue(0.5);
+    }
+  }, [animScale, active]);
+
+  const handlePressOut = () => {
+    Animated.timing(animScale, {
+      toValue: 1,
+      duration: 200 * scale,
+      useNativeDriver: true,
+    }).start();
+  };
 
   return (
     <View {...rest}>
       <TouchableRipple
-        borderless
-        delayPressIn={0}
         onPress={onPress}
-        style={[styles.container, { backgroundColor, borderRadius: 28 }, style]}
+        onPressOut={onPress ? handlePressOut : undefined}
+        style={[styles.container, style]}
         // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
         accessibilityTraits={active ? ['button', 'selected'] : 'button'}
         accessibilityComponentType="button"
@@ -104,61 +92,71 @@ const DrawerItem = ({
         accessibilityLabel={accessibilityLabel}
       >
         <View style={styles.wrapper}>
-          <View style={styles.content}>
-            {icon ? (
-              <Icon source={icon} size={24} color={contentColor} />
-            ) : null}
+          <View style={[styles.outline, !label && styles.roundedOutline]}>
+            <Animated.View
+              style={[
+                styles.outline,
+                !label && styles.roundedOutline,
+                {
+                  transform: [
+                    label
+                      ? {
+                          scaleX: animScale,
+                        }
+                      : { scale: animScale },
+                  ],
+                  backgroundColor,
+                },
+              ]}
+            />
+            <Icon source={icon} size={24} color={contentColor} />
+          </View>
+
+          {label ? (
             <Text
               selectable={false}
-              numberOfLines={1}
+              numberOfLines={2}
               style={[
-                styles.label,
                 {
                   color: contentColor,
                   ...font,
-                  marginLeft: labelMargin,
                 },
               ]}
             >
               {label}
             </Text>
-          </View>
-
-          <View style={styles.rightContent}>
-            {right?.({ color: contentColor || black })}
-          </View>
+          ) : null}
         </View>
       </TouchableRipple>
     </View>
   );
 };
 
-DrawerItem.displayName = 'Drawer.Item';
+DrawerCollapsedItem.displayName = 'Drawer.CollapsedItem';
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    height: 56,
-    marginLeft: 12,
-    marginRight: 12,
+    width: 80,
+    marginBottom: 12,
   },
   wrapper: {
-    flexDirection: 'row',
+    height: 56,
+    justifyContent: 'flex-end',
     alignItems: 'center',
-    marginLeft: 16,
-    marginRight: 24,
+    paddingBottom: 3,
   },
-  content: {
-    flex: 1,
-    flexDirection: 'row',
+  outline: {
+    top: 0,
+    justifyContent: 'center',
     alignItems: 'center',
+    height: 32,
+    width: 56,
+    borderRadius: 28,
+    position: 'absolute',
   },
-  label: {
-    marginRight: 32,
-  },
-  rightContent: {
-    // paddingLeft: 12,
+  roundedOutline: {
+    height: 56,
   },
 });
 
-export default withTheme(DrawerItem);
+export default withTheme(DrawerCollapsedItem);

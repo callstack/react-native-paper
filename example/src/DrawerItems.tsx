@@ -21,7 +21,12 @@ type Props = {
 };
 
 const DrawerItemsData = [
-  { label: 'Inbox', icon: 'inbox', key: 0 },
+  {
+    label: 'Inbox',
+    icon: 'inbox',
+    key: 0,
+    right: () => <Text>24</Text>,
+  },
   {
     label: 'Starred',
     icon: 'star',
@@ -36,7 +41,18 @@ const DrawerItemsData = [
   },
   { label: 'Sent mail', icon: 'send', key: 2 },
   { label: 'Colored label', icon: 'palette', key: 3 },
-  { label: 'A very long title that will be truncated', icon: 'delete', key: 4 },
+  {
+    label: 'A very long title that will be truncated',
+    icon: 'delete',
+    key: 4,
+    right: ({ color }: { color: string }) => (
+      <Badge
+        visible
+        size={8}
+        style={[styles.badge, { backgroundColor: color }]}
+      />
+    ),
+  },
 ];
 
 const DrawerItems = ({
@@ -119,8 +135,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
+    height: 56,
+    paddingHorizontal: 28,
   },
   badge: {
     alignSelf: 'center',

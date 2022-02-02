@@ -83,7 +83,7 @@ const DrawerSection = ({ children, title, theme, style, ...rest }: Props) => {
         </View>
       )}
       {children}
-      <Divider style={styles.divider} />
+      <Divider bold insets style={styles.divider} />
     </View>
   );
 };
@@ -95,14 +95,14 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   titleContainer: {
-    height: 40,
+    height: 56,
     justifyContent: 'center',
   },
   title: {
-    marginLeft: 16,
+    marginLeft: 28,
   },
   divider: {
-    marginTop: 4,
+    // marginTop: 4,
   },
 });
 
