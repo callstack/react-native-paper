@@ -98,11 +98,11 @@ const MenuItem = ({
 
   const titleColor = disabled
     ? disabledColor
-    : color(theme.colors?.text).alpha(0.87).rgb().string();
+    : color(theme?.colors?.text).alpha(0.87).rgb().string();
 
   const iconColor = disabled
     ? disabledColor
-    : color(theme.colors?.text).alpha(0.54).rgb().string();
+    : color(theme?.colors?.text).alpha(0.54).rgb().string();
 
   return (
     <TouchableRipple

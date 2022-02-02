@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import renderer from 'react-test-renderer';
-import Caption from '../../Typography/Caption.tsx';
+import Caption from '../../Typography/v2/Caption.tsx';
 import { red500 } from '../../../styles/themes/v2/colors';
 
 const style = StyleSheet.create({
