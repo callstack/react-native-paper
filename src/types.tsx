@@ -37,6 +37,8 @@ export type Material2Colors = {
   placeholder: string;
   backdrop: string;
   notification: string;
+
+  [key: string]: string;
 };
 
 export type MD3Color = {
@@ -83,17 +85,24 @@ type SharedTheme = {
   };
 };
 
+export type Theme = ThemeBase & ThemeExtended;
+
 export type ThemeBase = AllXOR<[MD2ThemeBase, MD3ThemeBase]>;
 
-export type Theme = AllXOR<[MD2ThemeExtended, MD3ThemeExtended]>;
+export type ThemeExtended = AllXOR<[MD2ThemeExtended, MD3ThemeExtended]>;
 
+// MD2 types
 export type MD2ThemeBase = SharedTheme & {
   version: 2;
   colors: Material2Colors;
 };
 
-export type ThemeExtended = AllXOR<[MD2ThemeExtended, MD3ThemeExtended]>;
+export type MD2ThemeExtended = MD2ThemeBase & {
+  isV3: false;
+  md(): void;
+};
 
+// MD3 types
 export enum MD3TypescaleKey {
   'display-large' = 'display-large',
   'display-medium' = 'display-medium',
@@ -154,15 +163,12 @@ export type MD3ThemeBase = SharedTheme & {
   };
 };
 
-export type MD2ThemeExtended = MD2ThemeBase & {
-  isV3: false;
-  md(): void;
-};
-
 export type MD3ThemeExtended = MD3ThemeBase & {
   isV3: true;
   md(tokenKey: MD3Token): string | number | object;
 };
+
+export type MD3Token = Path<MD3ThemeBase['tokens']>;
 
 type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
 
@@ -185,8 +191,6 @@ type PathImpl<T, K extends keyof T> = K extends string
   : never;
 
 type Path<T> = PathImpl<T, keyof T> | keyof T;
-
-export type MD3Token = Path<MD3ThemeBase['tokens']>;
 
 export type $Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 export type $RemoveChildren<T extends React.ComponentType<any>> = $Omit<
