@@ -16,6 +16,7 @@ import { isWeb } from '../utils';
 type Props = {
   toggleTheme: () => void;
   toggleRTL: () => void;
+  toggleThemeVersion: () => void;
   isRTL: boolean;
   isDarkTheme: boolean;
 };
@@ -39,12 +40,18 @@ const DrawerItemsData = [
   { label: 'A very long title that will be truncated', icon: 'delete', key: 4 },
 ];
 
-const DrawerItems = ({ toggleTheme, toggleRTL, isRTL, isDarkTheme }: Props) => {
+const DrawerItems = ({
+  toggleTheme,
+  toggleRTL,
+  toggleThemeVersion,
+  isRTL,
+  isDarkTheme,
+}: Props) => {
   const [drawerItemIndex, setDrawerItemIndex] = React.useState<number>(0);
 
   const _setDrawerItem = (index: number) => setDrawerItemIndex(index);
 
-  const { colors } = useTheme();
+  const { colors, isV3 } = useTheme();
 
   const _handleToggleRTL = () => {
     toggleRTL();
@@ -84,11 +91,21 @@ const DrawerItems = ({ toggleTheme, toggleRTL, isRTL, isDarkTheme }: Props) => {
             </View>
           </View>
         </TouchableRipple>
+
         <TouchableRipple onPress={_handleToggleRTL}>
           <View style={styles.preference}>
             <Text>RTL</Text>
             <View pointerEvents="none">
               <Switch value={isRTL} />
+            </View>
+          </View>
+        </TouchableRipple>
+
+        <TouchableRipple onPress={toggleThemeVersion}>
+          <View style={styles.preference}>
+            <Text>Switch back to Material 2</Text>
+            <View pointerEvents="none">
+              <Switch value={!isV3} />
             </View>
           </View>
         </TouchableRipple>
@@ -103,6 +120,7 @@ const styles = StyleSheet.create({
   },
   preference: {
     flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-between',
     paddingVertical: 12,
     paddingHorizontal: 16,
