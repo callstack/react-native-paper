@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { View, StyleSheet, FlatList, Animated, Platform } from 'react-native';
 import type { NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
+<<<<<<< HEAD
 import { MD2Colors, useTheme, Avatar, Paragraph } from 'react-native-paper';
+=======
+import { Colors, useTheme, Avatar, Paragraph, Text } from 'react-native-paper';
+>>>>>>> fbb58a8d (refactor: correct AnimatedFAB example)
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { animatedFABExampleData } from '../../../utils';
 import CustomFAB from './CustomFAB';
@@ -37,53 +41,66 @@ const AnimatedFABExample = () => {
   );
 
   const renderItem = React.useCallback(
-    ({ item }: { item: Item }) => (
-      <View style={styles.itemContainer}>
-        <Avatar.Text
-          style={[styles.avatar, { backgroundColor: item.bgColor }]}
-          label={item.initials}
-          color={MD2Colors.white}
-          size={40}
-        />
-        <View style={styles.itemTextContentContainer}>
-          <View style={styles.itemHeaderContainer}>
-            <Paragraph
-              style={[styles.header, !item.read && styles.read]}
-              ellipsizeMode="tail"
-              numberOfLines={1}
-            >
-              {item.sender}
-            </Paragraph>
-            <Paragraph style={[styles.date, !item.read && styles.read]}>
-              {item.date}
-            </Paragraph>
-          </View>
+    ({ item }: { item: Item }) => {
+      const TextComponent = isV3 ? Text : Paragraph;
 
-          <View style={styles.itemMessageContainer}>
-            <View style={styles.flex}>
-              <Paragraph
+      return (
+        <View style={styles.itemContainer}>
+          <Avatar.Text
+            style={[styles.avatar, { backgroundColor: item.bgColor }]}
+            label={item.initials}
+            color={Colors.white}
+            size={40}
+          />
+          <View style={styles.itemTextContentContainer}>
+            <View style={styles.itemHeaderContainer}>
+              <TextComponent
+                variant="label-large"
+                style={[styles.header, !item.read && styles.read]}
                 ellipsizeMode="tail"
                 numberOfLines={1}
-                style={!item.read && styles.read}
               >
-                {item.header}
-              </Paragraph>
-              <Paragraph numberOfLines={1} ellipsizeMode="tail">
-                {item.message}
-              </Paragraph>
+                {item.sender}
+              </TextComponent>
+              <TextComponent
+                variant="label-large"
+                style={[styles.date, !item.read && styles.read]}
+              >
+                {item.date}
+              </TextComponent>
             </View>
 
-            <Icon
-              name={item.favorite ? 'star' : 'star-outline'}
-              color={item.favorite ? MD2Colors.orange500 : MD2Colors.grey500}
-              size={20}
-              onPress={() => setVisible(!visible)}
-              style={styles.icon}
-            />
+            <View style={styles.itemMessageContainer}>
+              <View style={styles.flex}>
+                <TextComponent
+                  variant="label-large"
+                  ellipsizeMode="tail"
+                  numberOfLines={1}
+                  style={!item.read && styles.read}
+                >
+                  {item.header}
+                </TextComponent>
+                <TextComponent
+                  variant="label-large"
+                  numberOfLines={1}
+                  ellipsizeMode="tail"
+                >
+                  {item.message}
+                </TextComponent>
+              </View>
+
+              <Icon
+                name={item.favorite ? 'star' : 'star-outline'}
+                color={item.favorite ? Colors.orange500 : Colors.grey500}
+                size={20}
+                onPress={() => setVisible(!visible)}
+                style={styles.icon}
+              />
+            </View>
           </View>
         </View>
-      </View>
-    ),
+      );
+    },
     [visible]
   );
 

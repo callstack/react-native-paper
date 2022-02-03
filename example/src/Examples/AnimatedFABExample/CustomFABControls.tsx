@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
-import { Paragraph, RadioButton, useTheme } from 'react-native-paper';
+import { Paragraph, RadioButton, Text, useTheme } from 'react-native-paper';
 import type {
   AnimatedFABAnimateFrom,
   AnimatedFABIconMode,
@@ -36,26 +36,33 @@ const CustomControl = ({
   value,
   onChange,
 }: CustomControlProps) => {
-  const _renderItem = React.useCallback(
-    ({ item }) => (
-      <View style={styles.controlItem}>
-        <Paragraph>{item}</Paragraph>
+  const { isV3 } = useTheme();
 
-        <RadioButton
-          value="dynamic"
-          status={value === item ? 'checked' : 'unchecked'}
-          onPress={() => onChange(item)}
-        />
-      </View>
-    ),
-    [value, onChange]
+  const _renderItem = React.useCallback(
+    ({ item }) => {
+      const TextComponent = isV3 ? Text : Paragraph;
+
+      return (
+        <View style={styles.controlItem}>
+          <TextComponent variant="label-large">{item}</TextComponent>
+
+          <RadioButton
+            value="dynamic"
+            status={value === item ? 'checked' : 'unchecked'}
+            onPress={() => onChange(item)}
+          />
+        </View>
+      );
+    },
+    [value, onChange, isV3]
   );
 
   const _keyExtractor = React.useCallback((item) => item, []);
+  const TextComponent = isV3 ? Text : Paragraph;
 
   return (
     <View style={styles.controlWrapper}>
-      <Paragraph>{name}</Paragraph>
+      <TextComponent variant="label-large">{name}</TextComponent>
 
       <FlatList
         horizontal
