@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ActivityIndicator, Platform, View, StyleSheet } from 'react-native';
-import { Paragraph, Colors, Portal, Dialog } from 'react-native-paper';
+import { Paragraph, MD2Colors, Portal, Dialog } from 'react-native-paper';
 
 const isIOS = Platform.OS === 'ios';
 
@@ -17,7 +17,7 @@ const DialogWithLoadingIndicator = ({
       <Dialog.Content>
         <View style={styles.flexing}>
           <ActivityIndicator
-            color={Colors.indigo500}
+            color={MD2Colors.indigo500}
             size={isIOS ? 'large' : 48}
             style={styles.marginRight}
           />

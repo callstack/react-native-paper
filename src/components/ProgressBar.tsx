@@ -51,10 +51,10 @@ const { isRTL } = I18nManager;
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { ProgressBar, Colors } from 'react-native-paper';
+ * import { ProgressBar, MD2Colors } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <ProgressBar progress={0.5} color={Colors.red800} />
+ *   <ProgressBar progress={0.5} color={MD2Colors.red800} />
  * );
  *
  * export default MyComponent;

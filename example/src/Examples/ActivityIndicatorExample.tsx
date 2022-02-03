@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { ActivityIndicator, Colors, FAB } from 'react-native-paper';
+import { ActivityIndicator, MD2Colors, FAB } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
 const ActivityIndicatorExample = () => {
@@ -29,7 +29,7 @@ const ActivityIndicatorExample = () => {
       </View>
 
       <View style={styles.row}>
-        <ActivityIndicator animating={animating} color={Colors.red500} />
+        <ActivityIndicator animating={animating} color={MD2Colors.red500} />
       </View>
     </ScreenWrapper>
   );

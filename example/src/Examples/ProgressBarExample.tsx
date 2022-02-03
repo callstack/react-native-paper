@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Button, ProgressBar, Paragraph, Colors } from 'react-native-paper';
+import { Button, ProgressBar, Paragraph, MD2Colors } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
 const ProgressBarExample = () => {
@@ -29,7 +29,7 @@ const ProgressBarExample = () => {
         <ProgressBar
           progress={progress}
           visible={visible}
-          color={Colors.red800}
+          color={MD2Colors.red800}
         />
       </View>
 
@@ -38,8 +38,8 @@ const ProgressBarExample = () => {
         <ProgressBar
           progress={progress}
           visible={visible}
-          color={Colors.red800}
-          style={{ backgroundColor: Colors.teal500 }}
+          color={MD2Colors.red800}
+          style={{ backgroundColor: MD2Colors.teal500 }}
         />
       </View>
 

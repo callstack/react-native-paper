@@ -71,12 +71,12 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { IconButton, Colors } from 'react-native-paper';
+ * import { IconButton, MD2Colors } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <IconButton
  *     icon="camera"
- *     color={Colors.red500}
+ *     color={MD2Colors.red500}
  *     size={20}
  *     onPress={() => console.log('Pressed')}
  *   />
