@@ -118,7 +118,7 @@ const DrawerItem = ({
               <Icon source={icon} size={24} color={contentColor} />
             ) : null}
             <Text
-              {...(isV3 && { variant: 'labelLarge' })}
+              variant="labelLarge"
               selectable={false}
               numberOfLines={1}
               style={[

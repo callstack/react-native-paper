@@ -73,9 +73,7 @@ const DrawerSection = ({ children, title, theme, style, ...rest }: Props) => {
         <View style={[styles.titleContainer, isV3 && styles.v3TitleContainer]}>
           {title && (
             <Text
-              {...(isV3 && {
-                variant: 'titleSmall',
-              })}
+              variant="titleSmall"
               numberOfLines={1}
               style={[
                 { color: titleColor, ...font },

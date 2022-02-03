@@ -68,7 +68,7 @@ export default function PaperExample() {
   const [isDarkMode, setIsDarkMode] = React.useState(false);
   const [themeVersion, setThemeVersion] = React.useState<2 | 3>(3);
   const [rtl, setRtl] = React.useState<boolean>(I18nManager.isRTL);
-  const [collapsed, setCollapsed] = React.useState<boolean>(false);
+  const [collapsed, setCollapsed] = React.useState(false);
 
   const themeMode = isDarkMode ? 'dark' : 'light';
 
