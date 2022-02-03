@@ -3,7 +3,7 @@ import type { ThemeBase } from '../../../types';
 import { tokens } from './tokens';
 import color from 'color';
 
-const { palette } = tokens.md.ref;
+const { palette, opacity } = tokens.md.ref;
 
 const LightTheme: ThemeBase = {
   dark: false,
@@ -20,7 +20,7 @@ const LightTheme: ThemeBase = {
     surface: palette.neutral99,
     surfaceVariant: palette.neutralVariant90,
     surfaceDisabled: color(palette.neutral10)
-      .alpha(tokens.md.ref.opacity.level2)
+      .alpha(opacity.level2)
       .rgb()
       .string(),
     background: palette.neutral99,
@@ -35,7 +35,7 @@ const LightTheme: ThemeBase = {
     onSurface: palette.neutral10,
     onSurfaceVariant: palette.neutralVariant30,
     onSurfaceDisabled: color(palette.neutral10)
-      .alpha(tokens.md.ref.opacity.level4)
+      .alpha(opacity.level4)
       .rgb()
       .string(),
     onError: palette.error100,
