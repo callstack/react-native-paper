@@ -15,7 +15,7 @@ import Card from '../Card/Card';
 import { withTheme } from '../../core/theming';
 import type { IconSource } from '../Icon';
 import type { Theme } from '../../types';
-import type { FABVariant } from './AnimatedFAB';
+import type { FABVariant } from './utils';
 
 type Props = {
   /**
@@ -28,7 +28,6 @@ type Props = {
    * - `labelTextColor`: custom label text color of the action item
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
    * - `labelStyle`: pass additional styles for the fab item label, for example, `backgroundColor`
-   * - `small`: boolean describing whether small or normal sized FAB is rendered. Defaults to `true`
    * - `onPress`: callback that is called when `FAB` is pressed (required)
    */
   actions: Array<{

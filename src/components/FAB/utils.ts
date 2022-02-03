@@ -6,9 +6,9 @@ import {
   ViewStyle,
   StyleSheet,
 } from 'react-native';
-import type { Theme } from '../../../types';
-import { white, black } from '../../../styles/themes/v2/colors';
-import getContrastingColor from '../../../utils/getContrastingColor';
+import type { Theme } from '../../types';
+import { white, black } from '../../styles/themes/v2/colors';
+import getContrastingColor from '../../utils/getContrastingColor';
 
 export type FABVariant = 'primary' | 'secondary' | 'tertiary' | 'surface';
 

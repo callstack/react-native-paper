@@ -15,7 +15,7 @@ import Icon, { IconSource } from '../Icon';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
-import { getFABColors, FABVariant } from './AnimatedFAB/utils';
+import { getFABColors, FABVariant } from './utils';
 import type { $RemoveChildren, Theme, XOR } from '../../types';
 
 type FABSize = 'small' | 'medium' | 'large';

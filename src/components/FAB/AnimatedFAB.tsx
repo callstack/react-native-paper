@@ -12,21 +12,19 @@ import {
   Platform,
   I18nManager,
 } from 'react-native';
-import Surface from '../../Surface';
-import Icon from '../../Icon';
-import TouchableRipple from '../../TouchableRipple/TouchableRipple';
-import type { $RemoveChildren, Theme } from '../../../types';
-import type { IconSource } from '../../Icon';
-import { withTheme } from '../../../core/theming';
+import Surface from '../Surface';
+import Icon from '../Icon';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { $RemoveChildren, Theme } from '../../types';
+import type { IconSource } from '../Icon';
+import { withTheme } from '../../core/theming';
 import type {
   AccessibilityState,
   NativeSyntheticEvent,
   TextLayoutEventData,
 } from 'react-native';
 import AnimatedText from '../../Typography/AnimatedText';
-import { getCombinedStyles } from './utils';
-import { getFABColors } from './utils';
-import type { FABVariant } from '.';
+import { getCombinedStyles, getFABColors, FABVariant } from './utils';
 
 export type AnimatedFABIconMode = 'static' | 'dynamic';
 export type AnimatedFABAnimateFrom = 'left' | 'right';
