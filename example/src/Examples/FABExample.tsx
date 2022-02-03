@@ -20,7 +20,13 @@ const FABExample = () => {
     <ScreenWrapper style={styles.container}>
       <View style={styles.column}>
         <FAB
-          size="small"
+          {...(isV3
+            ? {
+                size: 'small',
+              }
+            : {
+                small: true,
+              })}
           icon={visible ? 'eye-off' : 'eye'}
           style={styles.fab}
           onPress={() => setVisible(!visible)}
