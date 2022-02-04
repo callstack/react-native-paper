@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ActivityIndicator, Platform, View, StyleSheet } from 'react-native';
-import { Paragraph, MD2Colors, Portal, Dialog } from 'react-native-paper';
+import { MD2Colors, Portal, Dialog } from 'react-native-paper';
+import { TextComponent } from './utils';
 
 const isIOS = Platform.OS === 'ios';
 
@@ -21,7 +22,7 @@ const DialogWithLoadingIndicator = ({
             size={isIOS ? 'large' : 48}
             style={styles.marginRight}
           />
-          <Paragraph>Loading.....</Paragraph>
+          <TextComponent>Loading.....</TextComponent>
         </View>
       </Dialog.Content>
     </Dialog>

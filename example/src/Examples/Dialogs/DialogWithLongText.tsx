@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Dimensions, ScrollView, StyleSheet } from 'react-native';
-import { Paragraph, Button, Portal, Dialog } from 'react-native-paper';
+import { Button, Portal, Dialog } from 'react-native-paper';
+import { TextComponent } from './utils';
 
 const DialogWithLongText = ({
   visible,
@@ -18,7 +19,7 @@ const DialogWithLongText = ({
       <Dialog.Title>Alert</Dialog.Title>
       <Dialog.ScrollArea style={styles.smallPadding}>
         <ScrollView contentContainerStyle={styles.biggerPadding}>
-          <Paragraph>
+          <TextComponent>
             Material is the metaphor
             {'\n'}
             {'\n'}A material metaphor is the unifying theory of a rationalized
@@ -56,7 +57,7 @@ const DialogWithLongText = ({
             conveying how objects move, interact, and exist in space and in
             relation to each other. Realistic lighting shows seams, divides
             space, and indicates moving parts.
-          </Paragraph>
+          </TextComponent>
         </ScrollView>
       </Dialog.ScrollArea>
       <Dialog.Actions>

@@ -18,6 +18,7 @@ import Surface from './Surface';
 import { useTheme } from '../core/theming';
 import useAnimatedValue from '../utils/useAnimatedValue';
 import { addEventListener } from '../utils/addEventListener';
+import color from 'color';
 
 type Props = {
   /**

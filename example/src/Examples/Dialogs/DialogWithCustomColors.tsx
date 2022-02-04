@@ -1,12 +1,6 @@
 import * as React from 'react';
-import {
-  Paragraph,
-  Button,
-  Portal,
-  Dialog,
-  MD2Colors,
-} from 'react-native-paper';
-
+import { Button, Portal, Dialog, MD2Colors } from 'react-native-paper';
+import { TextComponent } from './utils';
 const DialogWithCustomColors = ({
   visible,
   close,
@@ -22,9 +16,9 @@ const DialogWithCustomColors = ({
     >
       <Dialog.Title style={{ color: MD2Colors.white }}>Alert</Dialog.Title>
       <Dialog.Content>
-        <Paragraph style={{ color: MD2Colors.white }}>
+        <TextComponent style={{ color: MD2Colors.white }}>
           This is a dialog with custom colors
-        </Paragraph>
+        </TextComponent>
       </Dialog.Content>
       <Dialog.Actions>
         <Button color={MD2Colors.white} onPress={close}>

@@ -3,8 +3,8 @@ import { StyleSheet, Platform, StyleProp, ViewStyle } from 'react-native';
 import Modal from '../Modal';
 import DialogContent from './DialogContent';
 import DialogActions from './DialogActions';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import DialogTitle, { DialogTitle as _DialogTitle } from './DialogTitle';
+import DialogIcon from './DialogIcon';
+import DialogTitle from './DialogTitle';
 import DialogScrollArea from './DialogScrollArea';
 import { withTheme } from '../../core/theming';
 import overlay from '../../styles/overlay';
@@ -88,41 +88,57 @@ const Dialog = ({
   visible = false,
   style,
   theme,
-}: Props) => (
-  <Modal
-    dismissable={dismissable}
-    onDismiss={onDismiss}
-    visible={visible}
-    contentContainerStyle={[
-      {
-        borderRadius: theme.roundness,
-        backgroundColor:
-          theme.dark && theme.mode === 'adaptive'
-            ? overlay(DIALOG_ELEVATION, theme.colors?.surface)
-            : theme.colors?.surface,
-      },
-      styles.container,
-      style,
-    ]}
-  >
-    {React.Children.toArray(children)
-      .filter((child) => child != null && typeof child !== 'boolean')
-      .map((child, i) => {
-        if (
-          i === 0 &&
-          React.isValidElement(child) &&
-          child.type === DialogContent
-        ) {
-          // Dialog content is the first item, so we add a top padding
-          return React.cloneElement(child, {
-            style: [{ paddingTop: 24 }, child.props.style],
-          });
-        }
+}: Props) => {
+  const { isV3, md, dark, mode, colors, roundness } = theme;
+  return (
+    <Modal
+      dismissable={dismissable}
+      onDismiss={onDismiss}
+      visible={visible}
+      contentContainerStyle={[
+        {
+          borderRadius: isV3 ? 28 : roundness,
+          backgroundColor: isV3
+            ? (md('md.sys.color.surface') as string)
+            : dark && mode === 'adaptive'
+            ? overlay(DIALOG_ELEVATION, colors?.surface)
+            : colors?.surface,
+        },
+        styles.container,
+        style,
+      ]}
+    >
+      {React.Children.toArray(children)
+        .filter((child) => child != null && typeof child !== 'boolean')
+        .map((child, i) => {
+          if (
+            isV3 &&
+            i === 0 &&
+            React.isValidElement(child) &&
+            child.type === DialogTitle
+          ) {
+            // Dialog title is the first item, so we add a top padding
+            return React.cloneElement(child, {
+              style: [{ marginTop: 24 }, child.props.style],
+            });
+          }
 
-        return child;
-      })}
-  </Modal>
-);
+          if (
+            i === 0 &&
+            React.isValidElement(child) &&
+            child.type === DialogContent
+          ) {
+            // Dialog content is the first item, so we add a top padding
+            return React.cloneElement(child, {
+              style: [{ paddingTop: 24 }, child.props.style],
+            });
+          }
+
+          return child;
+        })}
+    </Modal>
+  );
+};
 
 // @component ./DialogContent.tsx
 Dialog.Content = DialogContent;
@@ -132,6 +148,8 @@ Dialog.Actions = DialogActions;
 Dialog.Title = DialogTitle;
 // @component ./DialogScrollArea.tsx
 Dialog.ScrollArea = DialogScrollArea;
+// @component ./DialogIcon.tsx
+Dialog.Icon = DialogIcon;
 
 const styles = StyleSheet.create({
   container: {
