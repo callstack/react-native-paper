@@ -1,9 +1,14 @@
-import color from 'color';
 import * as React from 'react';
-import { View, StyleSheet, StyleProp, ViewStyle, Animated } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+  Animated,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import Text from '../Typography/Text';
 import Icon, { IconSource } from '../Icon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 import Badge from '../Badge';
@@ -56,21 +61,18 @@ const DrawerCollapsedItem = ({
   badge = false,
   ...rest
 }: Props) => {
-  const { colors, isV3, md } = theme;
+  const { md } = theme;
   const { scale } = theme.animation;
 
   const backgroundColor = active
-    ? isV3
-      ? (md('md.sys.color.secondary-container') as string)
-      : color(colors?.primary).alpha(0.12).rgb().string()
+    ? (md('md.sys.color.secondary-container') as string)
     : 'transparent';
-  const contentColor = active
-    ? isV3
-      ? (md('md.sys.color.on-secondary-container') as string)
-      : colors?.primary
-    : isV3
-    ? (md('md.sys.color.on-surface-variant') as string)
-    : color(colors?.text).alpha(0.68).rgb().string();
+  const labelColor = active
+    ? (md('md.sys.color.on-surface') as string)
+    : (md('md.sys.color.on-surface-variant') as string);
+  const iconColor = active
+    ? (md('md.sys.color.on-secondary-container') as string)
+    : (md('md.sys.color.on-surface-variant') as string);
 
   const font = theme.fonts.medium;
 
@@ -87,7 +89,7 @@ const DrawerCollapsedItem = ({
   const handlePressOut = () => {
     Animated.timing(animScale, {
       toValue: 1,
-      duration: 200 * scale,
+      duration: 150 * scale,
       useNativeDriver: true,
     }).start();
   };
@@ -96,10 +98,9 @@ const DrawerCollapsedItem = ({
 
   return (
     <View {...rest}>
-      <TouchableRipple
+      <TouchableWithoutFeedback
         onPress={onPress}
         onPressOut={onPress ? handlePressOut : undefined}
-        style={styles.container}
         // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
         accessibilityTraits={active ? ['button', 'selected'] : 'button'}
         accessibilityComponentType="button"
@@ -138,17 +139,18 @@ const DrawerCollapsedItem = ({
                 )}
               </View>
             )}
-            <Icon source={icon} size={iconSize} color={contentColor} />
+            <Icon source={icon} size={iconSize} color={iconColor} />
           </View>
 
           {label ? (
             <Text
+              variant="label-medium"
               selectable={false}
               numberOfLines={2}
               style={[
                 styles.label,
                 {
-                  color: contentColor,
+                  color: labelColor,
                   ...font,
                 },
               ]}
@@ -157,7 +159,7 @@ const DrawerCollapsedItem = ({
             </Text>
           ) : null}
         </View>
-      </TouchableRipple>
+      </TouchableWithoutFeedback>
     </View>
   );
 };
@@ -165,11 +167,9 @@ const DrawerCollapsedItem = ({
 DrawerCollapsedItem.displayName = 'Drawer.CollapsedItem';
 
 const styles = StyleSheet.create({
-  container: {
+  wrapper: {
     width: 80,
     marginBottom: 12,
-  },
-  wrapper: {
     minHeight: itemSize,
     alignItems: 'center',
   },
