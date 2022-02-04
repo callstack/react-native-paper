@@ -105,10 +105,6 @@ type MD3Props = BaseProps & {
 /**
  * A floating action button represents the primary action in an application.
  *
- * <div class="screenshots">
- *   <img src="screenshots/fab-1.png" />
- *   <img src="screenshots/fab-2.png" />
- * </div>
  *
  * ## Usage
  * ```js
@@ -120,7 +116,6 @@ type MD3Props = BaseProps & {
  *   <FAB
  *     style={styles.fab}
  *     small
- *     icon="plus"
  *     onPress={() => console.log('Pressed')}
  *   />
  * );

@@ -102,9 +102,6 @@ type MD3Props = {
  * A component to display a stack of FABs with related actions in a speed dial.
  * To render the group above other components, you'll need to wrap it with the [`Portal`](portal.html) component.
  *
- * <div class="screenshots">
- *   <img src="screenshots/fab-group.png" />
- * </div>
  *
  * ## Usage
  * ```js
@@ -140,7 +137,6 @@ type MD3Props = {
  *               icon: 'bell',
  *               label: 'Remind',
  *               onPress: () => console.log('Pressed notifications'),
- *               small: false,
  *             },
  *           ]}
  *           onStateChange={onStateChange}
