@@ -14,9 +14,14 @@ import AppbarAction from './AppbarAction';
 import AppbarBackAction from './AppbarBackAction';
 import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
-import { black, white } from '../../styles/themes/v2/colors';
-import overlay from '../../styles/overlay';
 import type { MD3Elevation, Theme } from '../../types';
+import {
+  getAppbarColor,
+  renderAppbarContent,
+  DEFAULT_APPBAR_HEIGHT,
+  modeAppbarHeight,
+  AppbarModes,
+} from './utils';
 
 type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
   /**
@@ -28,14 +33,27 @@ type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
    */
   children: React.ReactNode;
   /**
+   * @supported Available in v3.x with theme version 3
+   *
+   * Mode of the Appbar.
+   * - `small` - Appbar with default height (56).
+   * - `medium` - Appbar with medium height (112).
+   * - `large` - Appbar with large height (152).
+   * - `center-aligned` - Appbar with default height and center-aligned title.
+   */
+  mode?: 'small' | 'medium' | 'large' | 'center-aligned';
+  /**
+   * @supported Available in v3.x with theme version 3
+   * Whether Appbar background should have the elevation along with primary color pigment.
+   */
+  elevated?: boolean;
+  /**
    * @optional
    */
   theme: Theme;
   style?: StyleProp<ViewStyle>;
   elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
 };
-
-export const DEFAULT_APPBAR_HEIGHT = 56;
 
 /**
  * A component to display action items in a bar. It can be placed at the top or bottom.
@@ -44,10 +62,6 @@ export const DEFAULT_APPBAR_HEIGHT = 56;
  *
  * By default Appbar uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
  * See [Dark Theme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more informations
- *
- * <div class="screenshots">
- *   <img class="medium" src="screenshots/appbar.png" />
- * </div>
  *
  * ## Usage
  * ```js
@@ -82,21 +96,31 @@ export const DEFAULT_APPBAR_HEIGHT = 56;
  * });
  * ```
  */
-const Appbar = ({ children, dark, style, theme, ...rest }: Props) => {
-  const { colors, dark: isDarkTheme, mode } = theme;
+const Appbar = ({
+  children,
+  dark,
+  style,
+  theme,
+  mode = 'small',
+  elevated,
+  ...rest
+}: Props) => {
+  const { isV3 } = theme;
   const {
     backgroundColor: customBackground,
-    elevation = rest.elevation || theme.isV3 ? 0 : 4,
+    elevation = rest.elevation || isV3 ? (elevated ? 2 : 0) : 4,
     ...restStyle
   }: ViewStyle = StyleSheet.flatten(style) || {};
 
   let isDark: boolean;
 
-  const backgroundColor = customBackground
-    ? customBackground
-    : isDarkTheme && mode === 'adaptive'
-    ? overlay(elevation, colors?.surface)
-    : colors?.primary;
+  const backgroundColor = getAppbarColor(
+    theme,
+    elevation,
+    customBackground,
+    elevated
+  );
+
   if (typeof dark === 'boolean') {
     isDark = dark;
   } else {
@@ -129,15 +153,33 @@ const Appbar = ({ children, dark, style, theme, ...rest }: Props) => {
     });
 
     shouldCenterContent =
-      hasAppbarContent && leftItemsCount < 2 && rightItemsCount < 2;
-    shouldAddLeftSpacing = shouldCenterContent && leftItemsCount === 0;
-    shouldAddRightSpacing = shouldCenterContent && rightItemsCount === 0;
+      !isV3 && hasAppbarContent && leftItemsCount < 2 && rightItemsCount < 2;
+    shouldAddLeftSpacing = !isV3 && shouldCenterContent && leftItemsCount === 0;
+    shouldAddRightSpacing =
+      !isV3 && shouldCenterContent && rightItemsCount === 0;
   }
+
+  const isMode = (modeToCompare: AppbarModes) => {
+    return isV3 && mode === modeToCompare;
+  };
+
+  const filterAppbarActions = React.useCallback(
+    (isLeading = false) =>
+      React.Children.toArray(children).filter((child) =>
+        // @ts-expect-error: TypeScript complains about the type of type but it doesn't matter
+        isLeading ? child.props.isLeading : !child.props.isLeading
+      ),
+    [children]
+  );
+
   return (
     <Surface
       style={[
         { backgroundColor },
         styles.appbar,
+        {
+          height: isV3 ? modeAppbarHeight[mode] : DEFAULT_APPBAR_HEIGHT,
+        },
         restStyle,
         !theme.isV3 && { elevation },
       ]}
@@ -145,38 +187,59 @@ const Appbar = ({ children, dark, style, theme, ...rest }: Props) => {
       {...rest}
     >
       {shouldAddLeftSpacing ? <View style={styles.spacing} /> : null}
-      {React.Children.toArray(children)
-        .filter((child) => child != null && typeof child !== 'boolean')
-        .map((child, i) => {
-          if (
-            !React.isValidElement(child) ||
-            ![AppbarContent, AppbarAction, AppbarBackAction].includes(
-              // @ts-expect-error: TypeScript complains about the type of type but it doesn't matter
-              child.type
-            )
-          ) {
-            return child;
-          }
-
-          const props: { color?: string; style?: StyleProp<ViewStyle> } = {
-            color:
-              typeof child.props.color !== 'undefined'
-                ? child.props.color
-                : isDark
-                ? white
-                : black,
-          };
-
-          if (child.type === AppbarContent) {
-            props.style = [
-              // Since content is not first item, add extra left margin
-              i !== 0 && { marginLeft: 8 },
-              shouldCenterContent && { alignItems: 'center' },
-              child.props.style,
-            ];
-          }
-          return React.cloneElement(child, props);
+      {(!isV3 || isMode('small')) &&
+        renderAppbarContent({
+          children,
+          isDark,
+          isV3,
+          shouldCenterContent,
         })}
+      {(isMode('medium') || isMode('large') || isMode('center-aligned')) && (
+        <View
+          style={[
+            styles.columnContainer,
+            isMode('center-aligned') && styles.centerAlignedContainer,
+          ]}
+        >
+          {/* Appbar top row with controls */}
+          <View style={styles.controlsRow}>
+            {/* Left side of row container, can contain AppbarBackAction or AppbarAction if it's leading icon  */}
+            {renderAppbarContent({
+              children,
+              isDark,
+              isV3,
+              renderOnly: [AppbarBackAction],
+              mode,
+            })}
+            {renderAppbarContent({
+              children: filterAppbarActions(true),
+              isDark,
+              isV3,
+              renderOnly: [AppbarAction],
+              mode,
+            })}
+            {/* Right side of row container, can contain other AppbarAction if they are not leading icons */}
+            <View style={styles.rightActionControls}>
+              {renderAppbarContent({
+                children: filterAppbarActions(false),
+                isDark,
+                isV3,
+                renderOnly: [AppbarAction],
+                mode,
+              })}
+            </View>
+          </View>
+          {/* Middle of the row, can contain only AppbarContent */}
+          {renderAppbarContent({
+            children,
+            isDark,
+            isV3,
+            shouldCenterContent: isMode('center-aligned'),
+            renderOnly: [AppbarContent],
+            mode,
+          })}
+        </View>
+      )}
       {shouldAddRightSpacing ? <View style={styles.spacing} /> : null}
     </Surface>
   );
@@ -184,13 +247,31 @@ const Appbar = ({ children, dark, style, theme, ...rest }: Props) => {
 
 const styles = StyleSheet.create({
   appbar: {
-    height: DEFAULT_APPBAR_HEIGHT,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 4,
   },
   spacing: {
     width: 48,
+  },
+  controlsRow: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  rightActionControls: {
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  columnContainer: {
+    flexDirection: 'column',
+    flex: 1,
+    paddingTop: 8,
+  },
+  centerAlignedContainer: {
+    paddingTop: 0,
   },
 });
 

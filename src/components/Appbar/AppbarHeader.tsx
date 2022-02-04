@@ -6,34 +6,39 @@ import {
   SafeAreaView,
   ViewStyle,
 } from 'react-native';
-import overlay from '../../styles/overlay';
 import { DEFAULT_APPBAR_HEIGHT, Appbar } from './Appbar';
 import shadow from '../../styles/shadow';
 import { withTheme } from '../../core/theming';
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
 import type { Theme } from '../../types';
+import { AppbarModes, getAppbarColor } from './utils';
 
-type Props = React.ComponentProps<typeof Appbar> & {
-  /**
-   * Whether the background color is a dark color. A dark header will render light text and vice-versa.
-   */
-  dark?: boolean;
-  /**
-   * Extra padding to add at the top of header to account for translucent status bar.
-   * This is automatically handled on iOS >= 11 including iPhone X using `SafeAreaView`.
-   * If you are using Expo, we assume translucent status bar and set a height for status bar automatically.
-   * Pass `0` or a custom value to disable the default behaviour, and customize the height.
-   */
-  statusBarHeight?: number;
-  /**
-   * Content of the header.
-   */
-  children: React.ReactNode;
-  /**
-   * @optional
-   */
-  theme: Theme;
-  style?: StyleProp<ViewStyle>;
+type Props = React.ComponentProps<typeof Appbar> &
+  MD3Props & {
+    /**
+     * Whether the background color is a dark color. A dark header will render light text and vice-versa.
+     */
+    dark?: boolean;
+    /**
+     * Extra padding to add at the top of header to account for translucent status bar.
+     * This is automatically handled on iOS >= 11 including iPhone X using `SafeAreaView`.
+     * If you are using Expo, we assume translucent status bar and set a height for status bar automatically.
+     * Pass `0` or a custom value to disable the default behaviour, and customize the height.
+     */
+    statusBarHeight?: number;
+    /**
+     * Content of the header.
+     */
+    children: React.ReactNode;
+    /**
+     * @optional
+     */
+    theme: Theme;
+    style?: StyleProp<ViewStyle>;
+  };
+
+type MD3Props = {
+  mode?: AppbarModes;
 };
 
 /**
@@ -82,22 +87,33 @@ const AppbarHeader = (props: Props) => {
     statusBarHeight = APPROX_STATUSBAR_HEIGHT,
     style,
     dark,
+    mode = 'small',
     ...rest
   } = props;
 
-  const { dark: isDarkTheme, colors, mode } = rest.theme;
+  const { isV3 } = rest.theme;
+
+  const appbarHeight = {
+    small: DEFAULT_APPBAR_HEIGHT,
+    medium: 112,
+    large: 152,
+    'center-aligned': DEFAULT_APPBAR_HEIGHT,
+  };
+
   const {
-    height = DEFAULT_APPBAR_HEIGHT,
-    elevation = 4,
+    height = isV3 ? appbarHeight[mode] : DEFAULT_APPBAR_HEIGHT,
+    elevation = isV3 ? 0 : 4,
     backgroundColor: customBackground,
     zIndex = 0,
     ...restStyle
   }: ViewStyle = StyleSheet.flatten(style) || {};
-  const backgroundColor = customBackground
-    ? customBackground
-    : isDarkTheme && mode === 'adaptive'
-    ? overlay(elevation, colors?.surface)
-    : colors?.primary;
+
+  const backgroundColor = getAppbarColor(
+    rest.theme,
+    elevation,
+    customBackground
+  );
+
   // Let the user override the behaviour
   const Wrapper =
     typeof props.statusBarHeight === 'number' ? View : SafeAreaView;
@@ -113,6 +129,9 @@ const AppbarHeader = (props: Props) => {
       <Appbar
         style={[{ height, backgroundColor }, styles.appbar, restStyle]}
         dark={dark}
+        {...(isV3 && {
+          mode,
+        })}
         {...rest}
       />
     </Wrapper>

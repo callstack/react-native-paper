@@ -1,13 +1,23 @@
 import * as React from 'react';
 import { View, Platform, StyleSheet } from 'react-native';
 import type { StackNavigationProp } from '@react-navigation/stack';
-import { Appbar, FAB, Switch, Paragraph } from 'react-native-paper';
+import {
+  Appbar,
+  FAB,
+  Switch,
+  Paragraph,
+  Text,
+  useTheme,
+  RadioButton,
+} from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 import { yellowA200 } from '../../../src/styles/themes/v2/colors';
 
 type Props = {
   navigation: StackNavigationProp<{}>;
 };
+
+type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
@@ -18,6 +28,10 @@ const AppbarExample = ({ navigation }: Props) => {
   const [showMoreIcon, setShowMoreIcon] = React.useState(true);
   const [showCustomColor, setShowCustomColor] = React.useState(false);
   const [showExactTheme, setShowExactTheme] = React.useState(false);
+  const [appbarMode, setAppbarMode] = React.useState<AppbarModes>('small');
+  const [showCalendarIcon, setShowCalendarIcon] = React.useState(false);
+
+  const { isV3 } = useTheme();
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -27,6 +41,7 @@ const AppbarExample = ({ navigation }: Props) => {
           theme={{
             mode: showExactTheme ? 'exact' : 'adaptive',
           }}
+          mode={appbarMode}
         >
           {showLeftIcon && (
             <Appbar.BackAction onPress={() => navigation.goBack()} />
@@ -35,6 +50,9 @@ const AppbarExample = ({ navigation }: Props) => {
             title="Title"
             subtitle={showSubtitle ? 'Subtitle' : null}
           />
+          {showCalendarIcon && (
+            <Appbar.Action icon="calendar" onPress={() => {}} />
+          )}
           {showSearchIcon && (
             <Appbar.Action icon="magnify" onPress={() => {}} />
           )}
@@ -52,7 +70,11 @@ const AppbarExample = ({ navigation }: Props) => {
     showMoreIcon,
     showCustomColor,
     showExactTheme,
+    appbarMode,
+    showCalendarIcon,
   ]);
+
+  const TextComponent = isV3 ? Text : Paragraph;
 
   return (
     <>
@@ -61,29 +83,71 @@ const AppbarExample = ({ navigation }: Props) => {
         contentContainerStyle={styles.contentContainer}
       >
         <View style={styles.row}>
-          <Paragraph>Left icon</Paragraph>
+          <TextComponent variant="label-large">Left icon</TextComponent>
           <Switch value={showLeftIcon} onValueChange={setShowLeftIcon} />
         </View>
+        {!isV3 && (
+          <View style={styles.row}>
+            <TextComponent variant="label-large">Subtitle</TextComponent>
+            <Switch value={showSubtitle} onValueChange={setShowSubtitle} />
+          </View>
+        )}
         <View style={styles.row}>
-          <Paragraph>Subtitle</Paragraph>
-          <Switch value={showSubtitle} onValueChange={setShowSubtitle} />
-        </View>
-        <View style={styles.row}>
-          <Paragraph>Search icon</Paragraph>
+          <TextComponent variant="label-large">Search icon</TextComponent>
           <Switch value={showSearchIcon} onValueChange={setShowSearchIcon} />
         </View>
         <View style={styles.row}>
-          <Paragraph>More icon</Paragraph>
+          <TextComponent variant="label-large">More icon</TextComponent>
           <Switch value={showMoreIcon} onValueChange={setShowMoreIcon} />
         </View>
+        {isV3 && (
+          <View style={styles.row}>
+            <TextComponent variant="label-large">Calendar icon</TextComponent>
+            <Switch
+              value={showCalendarIcon}
+              disabled={appbarMode === 'center-aligned'}
+              onValueChange={setShowCalendarIcon}
+            />
+          </View>
+        )}
         <View style={styles.row}>
-          <Paragraph>Custom Color</Paragraph>
+          <TextComponent variant="label-large">Custom Color</TextComponent>
           <Switch value={showCustomColor} onValueChange={setShowCustomColor} />
         </View>
         <View style={styles.row}>
-          <Paragraph>Exact Dark Theme</Paragraph>
+          <TextComponent variant="label-large">Exact Dark Theme</TextComponent>
           <Switch value={showExactTheme} onValueChange={setShowExactTheme} />
         </View>
+        {isV3 && (
+          <RadioButton.Group
+            value={appbarMode}
+            onValueChange={(value: string) =>
+              setAppbarMode(value as AppbarModes)
+            }
+          >
+            <TextComponent style={styles.appbarMode}>Appbar Mode</TextComponent>
+            <View style={styles.row}>
+              <TextComponent variant="label-large">
+                Small (default)
+              </TextComponent>
+              <RadioButton value="small" />
+            </View>
+            <View style={styles.row}>
+              <TextComponent variant="label-large">Medium</TextComponent>
+              <RadioButton value="medium" />
+            </View>
+            <View style={styles.row}>
+              <TextComponent variant="label-large">Large</TextComponent>
+              <RadioButton value="large" />
+            </View>
+            <View style={styles.row}>
+              <TextComponent variant="label-large">
+                Center-aligned
+              </TextComponent>
+              <RadioButton value="center-aligned" />
+            </View>
+          </RadioButton.Group>
+        )}
       </ScreenWrapper>
       <Appbar
         style={styles.bottom}
@@ -130,5 +194,8 @@ const styles = StyleSheet.create({
   },
   customColor: {
     backgroundColor: yellowA200,
+  },
+  appbarMode: {
+    textAlign: 'center',
   },
 });

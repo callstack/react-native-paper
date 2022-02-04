@@ -102,13 +102,15 @@ export default function ExampleList({ navigation }: Props) {
 
   const keyExtractor = (item: { id: string }) => item.id;
 
-  const { colors } = useTheme();
+  const { colors, isV3, md } = useTheme();
   const safeArea = useSafeArea();
 
   return (
     <FlatList
       contentContainerStyle={{
-        backgroundColor: colors?.background,
+        backgroundColor: isV3
+          ? (md('md.sys.color.background') as string)
+          : colors?.background,
         paddingBottom: safeArea.bottom,
         paddingLeft: safeArea.left,
         paddingRight: safeArea.right,
