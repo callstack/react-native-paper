@@ -6,7 +6,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { useTheme } from '../../core/theming';
-import { Font, MD3Token, MD3TypescaleKey } from '../../types';
+import { Font, MD3Token, MD3TypescaleKey, Theme } from '../../types';
 
 type Props = React.ComponentProps<typeof NativeText> & {
   style?: StyleProp<TextStyle>;
@@ -25,7 +25,7 @@ const Text: React.ForwardRefRenderFunction<{}, Props> = (
   ref
 ) => {
   const root = React.useRef<NativeText | null>(null);
-  const { isV3, colors, fonts, md } = useTheme();
+  const { isV3, colors, fonts, getToken } = useTheme();
 
   React.useImperativeHandle(ref, () => ({
     setNativeProps: (args: Object) => root.current?.setNativeProps(args),
@@ -36,11 +36,15 @@ const Text: React.ForwardRefRenderFunction<{}, Props> = (
       (acc, key) => ({
         ...acc,
         [key]: {
-          fontSize: md(`md.sys.typescale.${key}.size` as MD3Token),
-          fontWeight: md(`md.sys.typescale.${key}.weight` as MD3Token),
-          lineHeight: md(`md.sys.typescale.${key}.line-height` as MD3Token),
-          letterSpacing: md(`md.sys.typescale.${key}.tracking` as MD3Token),
-          color: md('md.sys.color.on-surface'),
+          fontSize: getToken?.(`md.sys.typescale.${key}.size` as MD3Token),
+          fontWeight: getToken?.(`md.sys.typescale.${key}.weight` as MD3Token),
+          lineHeight: getToken?.(
+            `md.sys.typescale.${key}.line-height` as MD3Token
+          ),
+          letterSpacing: getToken?.(
+            `md.sys.typescale.${key}.tracking` as MD3Token
+          ),
+          color: getToken?.('md.sys.color.on-surface'),
         },
       }),
       {} as {

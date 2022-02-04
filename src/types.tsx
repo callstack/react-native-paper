@@ -165,7 +165,7 @@ export type MD3ThemeBase = SharedTheme & {
 
 export type MD3ThemeExtended = MD3ThemeBase & {
   isV3: true;
-  md(tokenKey: MD3Token): string | number | object;
+  getToken(tokenKey: MD3Token): string | number | object;
 };
 
 export type MD3Token = Path<MD3ThemeBase['tokens']>;

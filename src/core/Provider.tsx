@@ -106,9 +106,9 @@ const Provider = ({ ...props }: Props) => {
      * ## Usage
      * md('md.sys.color.secondary')
      */
-    const md = (tokenKey: MD3Token) => get(theme.tokens, tokenKey);
+    const getToken = (tokenKey: MD3Token) => get(theme.tokens, tokenKey);
 
-    return { ...extendedTheme, md } as MD3ThemeExtended;
+    return { ...extendedTheme, getToken } as MD3ThemeExtended;
   };
 
   const { children, settings } = props;
