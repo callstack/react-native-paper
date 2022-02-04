@@ -152,6 +152,20 @@ export type MD3Tokens = {
   };
 };
 
+export type MD3Elevation =
+  | 0
+  | 1
+  | 2
+  | 3
+  | 4
+  | 5
+  | '0'
+  | '1'
+  | '2'
+  | '3'
+  | '4'
+  | '5';
+
 export type $Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 export type $RemoveChildren<T extends React.ComponentType<any>> = $Omit<
   React.ComponentPropsWithoutRef<T>,

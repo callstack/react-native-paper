@@ -1,11 +1,18 @@
 import * as React from 'react';
-import { Animated, StyleSheet, View, StyleProp, ViewStyle } from 'react-native';
+import {
+  Animated,
+  StyleSheet,
+  View,
+  StyleProp,
+  ViewStyle,
+  Platform,
+} from 'react-native';
 import shadow from '../styles/shadow';
-import { withTheme } from '../core/theming';
+import { useTheme } from '../core/theming';
 import overlay from '../styles/overlay';
-import type { Theme } from '../types';
+import type { MD3Elevation, Theme } from '../types';
 
-type Props = React.ComponentPropsWithRef<typeof View> & {
+type MD2Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Content of the `Surface`.
    */
@@ -14,7 +21,11 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme?: Theme;
+};
+
+type Props = MD2Props & {
+  elevation?: MD3Elevation;
 };
 
 /**
@@ -60,9 +71,11 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * });
  * ```
  */
-const Surface = ({ style, theme, ...rest }: Props) => {
+
+const MD2Surface = ({ style, ...rest }: MD2Props) => {
   const { elevation = 4 } = (StyleSheet.flatten(style) || {}) as ViewStyle;
-  const { dark: isDarkTheme, mode, colors } = theme;
+  const { dark: isDarkTheme, mode, colors } = useTheme();
+
   return (
     <Animated.View
       {...rest}
@@ -80,4 +93,81 @@ const Surface = ({ style, theme, ...rest }: Props) => {
   );
 };
 
-export default withTheme(Surface);
+const Surface = ({
+  elevation = 1,
+  children,
+  theme: overridenTheme,
+  ...props
+}: Props) => {
+  const theme = useTheme(overridenTheme);
+
+  const { isV3, md } = theme;
+
+  if (!isV3) return <MD2Surface {...props}>{children}</MD2Surface>;
+
+  const backgroundColor = md(
+    `md.sys.color.elevation.level${elevation || 0}`
+  ) as string;
+
+  const sharedStyle = [{ backgroundColor }, props.style];
+
+  if (!elevation) {
+    return (
+      <View {...props} style={sharedStyle}>
+        {children}
+      </View>
+    );
+  }
+
+  const elevationStyles = [
+    { elevation: 0 },
+    { elevation: 3 },
+    { elevation: 6 },
+    { elevation: 9 },
+    { elevation: 12 },
+    { elevation: 15 },
+  ];
+
+  if (Platform.OS === 'android') {
+    return (
+      <View style={[elevationStyles[elevation], ...sharedStyle]}>
+        {children}
+      </View>
+    );
+  }
+
+  const shadows = (md(`md.sys.elevation.level${elevation}`) as string[]).map(
+    (shadow) => shadow.split(' ')
+  );
+
+  const shadowStyles = shadows.map(
+    ([width, height, size, ...colorArr]: any) => {
+      const shadowWidth = parseInt(width?.replace('px', ''));
+      const shadowHeight = parseInt(height?.replace('px', ''));
+      const shadowRadius = parseInt(size.replace('px', ''));
+      const shadowColor = colorArr.join('');
+
+      return {
+        shadowColor,
+        shadowOffset: {
+          width: shadowWidth,
+          height: shadowHeight + 0.5,
+        },
+        shadowOpacity: 1,
+        shadowRadius: shadowRadius,
+      };
+    }
+  );
+
+  return (
+    <View style={shadowStyles[0]}>
+      <View style={shadowStyles[1]}>
+        <View {...props} style={sharedStyle}>
+          {children}
+        </View>
+      </View>
+    </View>
+  );
+};
+
+export default Surface;
