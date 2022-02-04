@@ -33,6 +33,8 @@ const AppbarExample = ({ navigation }: Props) => {
 
   const { isV3 } = useTheme();
 
+  const isCenterAlignedMode = appbarMode === 'center-aligned';
+
   React.useLayoutEffect(() => {
     navigation.setOptions({
       header: () => (
@@ -50,9 +52,11 @@ const AppbarExample = ({ navigation }: Props) => {
             title="Title"
             subtitle={showSubtitle ? 'Subtitle' : null}
           />
-          {showCalendarIcon && (
-            <Appbar.Action icon="calendar" onPress={() => {}} />
-          )}
+          {isCenterAlignedMode
+            ? false
+            : showCalendarIcon && (
+                <Appbar.Action icon="calendar" onPress={() => {}} />
+              )}
           {showSearchIcon && (
             <Appbar.Action icon="magnify" onPress={() => {}} />
           )}
@@ -72,6 +76,7 @@ const AppbarExample = ({ navigation }: Props) => {
     showExactTheme,
     appbarMode,
     showCalendarIcon,
+    isCenterAlignedMode,
   ]);
 
   const TextComponent = isV3 ? Text : Paragraph;
@@ -104,8 +109,8 @@ const AppbarExample = ({ navigation }: Props) => {
           <View style={styles.row}>
             <TextComponent variant="label-large">Calendar icon</TextComponent>
             <Switch
-              value={showCalendarIcon}
-              disabled={appbarMode === 'center-aligned'}
+              value={isCenterAlignedMode ? false : showCalendarIcon}
+              disabled={isCenterAlignedMode}
               onValueChange={setShowCalendarIcon}
             />
           </View>
@@ -125,7 +130,9 @@ const AppbarExample = ({ navigation }: Props) => {
               setAppbarMode(value as AppbarModes)
             }
           >
-            <TextComponent style={styles.appbarMode}>Appbar Mode</TextComponent>
+            <TextComponent variant="label-large" style={styles.appbarMode}>
+              Appbar Mode
+            </TextComponent>
             <View style={styles.row}>
               <TextComponent variant="label-large">
                 Small (default)

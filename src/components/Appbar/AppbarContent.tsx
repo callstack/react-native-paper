@@ -130,7 +130,8 @@ const AppbarContent = ({
       <View
         style={[
           styles.container,
-          isV3 && isHigherAppbar ? styles.v3Container : styles.v3SmallContainer,
+          isV3 &&
+            (isHigherAppbar ? styles.v3Container : styles.v3SmallContainer),
           style,
         ]}
         {...rest}
