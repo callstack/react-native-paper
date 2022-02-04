@@ -351,9 +351,7 @@ const FABGroup = ({
                     accessibilityRole="button"
                   >
                     <Text
-                      {...(isV3 && {
-                        variant: 'body-large',
-                      })}
+                      variant="body-large"
                       style={{ color: it.labelTextColor ?? labelColor }}
                     >
                       {it.label}

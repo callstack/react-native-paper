@@ -279,9 +279,7 @@ const FAB = ({
           ) : null}
           {label ? (
             <Text
-              {...(isV3 && {
-                variant: 'label-large',
-              })}
+              variant="label-large"
               selectable={false}
               style={[
                 styles.label,
