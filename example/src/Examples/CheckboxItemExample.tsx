@@ -9,6 +9,7 @@ const CheckboxExample = () => {
   const [checkedIOS, setCheckedIOS] = React.useState<boolean>(true);
   const [checkedLeadingControl, setCheckedLeadingControl] =
     React.useState<boolean>(true);
+  const [checkedDisabled, setCheckedDisabled] = React.useState<boolean>(true);
   return (
     <ScreenWrapper style={styles.container}>
       <Checkbox.Item
@@ -34,6 +35,12 @@ const CheckboxExample = () => {
         onPress={() => setCheckedLeadingControl(!checkedLeadingControl)}
         mode="ios"
         position="leading"
+      />
+      <Checkbox.Item
+        label="Disabled checkbox"
+        status={checkedDisabled ? 'checked' : 'unchecked'}
+        onPress={() => setCheckedDisabled(!checkedDisabled)}
+        disabled
       />
     </ScreenWrapper>
   );
