@@ -101,6 +101,8 @@ export default function PaperExample() {
     React.useState<ReactNativePaper.Theme>(CustomDefaultTheme);
   const [rtl, setRtl] = React.useState<boolean>(I18nManager.isRTL);
 
+  const isWeb = Platform.OS === 'web';
+
   React.useEffect(() => {
     const restoreState = async () => {
       try {
@@ -160,12 +162,14 @@ export default function PaperExample() {
 
       if (I18nManager.isRTL !== rtl) {
         I18nManager.forceRTL(rtl);
-        Updates.reloadAsync();
+        if (!isWeb) {
+          Updates.reloadAsync();
+        }
       }
     };
 
     savePrefs();
-  }, [rtl, theme]);
+  }, [rtl, theme, isWeb]);
 
   const preferences = React.useMemo(
     () => ({
@@ -195,7 +199,7 @@ export default function PaperExample() {
                 AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
               }
             >
-              {Platform.OS === 'web' ? (
+              {isWeb ? (
                 <App />
               ) : (
                 <Drawer.Navigator drawerContent={() => <DrawerContent />}>
