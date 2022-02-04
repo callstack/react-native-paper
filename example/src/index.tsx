@@ -177,7 +177,7 @@ export default function PaperExample() {
                   <Drawer.Screen name="Home" component={App} />
                 </Drawer.Navigator>
               )}
-              <StatusBar style="light" />
+              <StatusBar style={!theme.dark ? 'dark' : 'light'} />
             </NavigationContainer>
           </React.Fragment>
         </PreferencesContext.Provider>

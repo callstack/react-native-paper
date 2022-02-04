@@ -8,34 +8,40 @@ import type {
 import { black } from '../../styles/themes/v2/colors';
 import IconButton from '../IconButton';
 import type { IconSource } from '../Icon';
+import { useTheme } from '../../core/theming';
 
-type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
-  /**
-   *  Custom color for action icon.
-   */
-  color?: string;
-  /**
-   * Name of the icon to show.
-   */
-  icon: IconSource;
-  /**
-   * Optional icon size.
-   */
-  size?: number;
-  /**
-   * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
-   */
-  disabled?: boolean;
-  /**
-   * Accessibility label for the button. This is read by the screen reader when the user taps the button.
-   */
-  accessibilityLabel?: string;
-  /**
-   * Function to execute on press.
-   */
-  onPress?: () => void;
-  style?: StyleProp<ViewStyle>;
-  ref?: React.RefObject<TouchableWithoutFeedback>;
+type Props = React.ComponentPropsWithoutRef<typeof IconButton> &
+  MD3Props & {
+    /**
+     *  Custom color for action icon.
+     */
+    color?: string;
+    /**
+     * Name of the icon to show.
+     */
+    icon: IconSource;
+    /**
+     * Optional icon size.
+     */
+    size?: number;
+    /**
+     * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
+     */
+    disabled?: boolean;
+    /**
+     * Accessibility label for the button. This is read by the screen reader when the user taps the button.
+     */
+    accessibilityLabel?: string;
+    /**
+     * Function to execute on press.
+     */
+    onPress?: () => void;
+    style?: StyleProp<ViewStyle>;
+    ref?: React.RefObject<TouchableWithoutFeedback>;
+  };
+
+type MD3Props = {
+  isLeadingIcon?: boolean;
 };
 
 /**
@@ -75,24 +81,37 @@ type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
  */
 const AppbarAction = ({
   size = 24,
-  color: iconColor = color(black).alpha(0.54).rgb().string(),
+  color: iconColor,
   icon,
   disabled,
   onPress,
   accessibilityLabel,
+  isLeadingIcon,
   ...rest
-}: Props) => (
-  <IconButton
-    size={size}
-    onPress={onPress}
-    color={iconColor}
-    icon={icon}
-    disabled={disabled}
-    accessibilityLabel={accessibilityLabel}
-    animated
-    {...rest}
-  />
-);
+}: Props) => {
+  const { isV3, md } = useTheme();
+
+  const actionIconColor = iconColor
+    ? iconColor
+    : isV3
+    ? isLeadingIcon
+      ? (md('md.sys.color.on-surface') as string)
+      : (md('md.sys.color.on-surface-variant') as string)
+    : color(black).alpha(0.54).rgb().string();
+
+  return (
+    <IconButton
+      size={size}
+      onPress={onPress}
+      color={actionIconColor}
+      icon={icon}
+      disabled={disabled}
+      accessibilityLabel={accessibilityLabel}
+      animated
+      {...rest}
+    />
+  );
+};
 
 AppbarAction.displayName = 'Appbar.Action';
 

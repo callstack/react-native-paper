@@ -16,41 +16,49 @@ import { withTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
 
 import type { $RemoveChildren, Theme } from '../../types';
+import type { AppbarModes } from './utils';
 
-type Props = $RemoveChildren<typeof View> & {
-  /**
-   * Custom color for the text.
-   */
-  color?: string;
-  /**
-   * Text for the title.
-   */
-  title: React.ReactNode;
-  /**
-   * Style for the title.
-   */
-  titleStyle?: StyleProp<TextStyle>;
-  /**
-   * Reference for the title.
-   */
-  titleRef?: React.RefObject<Text>;
-  /**
-   * Text for the subtitle.
-   */
-  subtitle?: React.ReactNode;
-  /**
-   * Style for the subtitle.
-   */
-  subtitleStyle?: StyleProp<TextStyle>;
-  /**
-   * Function to execute on press.
-   */
-  onPress?: () => void;
-  style?: StyleProp<ViewStyle>;
-  /**
-   * @optional
-   */
-  theme: Theme;
+type Props = $RemoveChildren<typeof View> &
+  MD3Props & {
+    /**
+     * Custom color for the text.
+     */
+    color?: string;
+    /**
+     * Text for the title.
+     */
+    title: React.ReactNode;
+    /**
+     * Style for the title.
+     */
+    titleStyle?: StyleProp<TextStyle>;
+    /**
+     * Reference for the title.
+     */
+    titleRef?: React.RefObject<Text>;
+    /**
+     * @deprecated
+     * Text for the subtitle.
+     */
+    subtitle?: React.ReactNode;
+    /**
+     * @deprecated
+     * Style for the subtitle.
+     */
+    subtitleStyle?: StyleProp<TextStyle>;
+    /**
+     * Function to execute on press.
+     */
+    onPress?: () => void;
+    style?: StyleProp<ViewStyle>;
+    /**
+     * @optional
+     */
+    theme: Theme;
+  };
+
+type MD3Props = {
+  mode?: AppbarModes;
 };
 
 /**
@@ -77,7 +85,7 @@ type Props = $RemoveChildren<typeof View> & {
  * ```
  */
 const AppbarContent = ({
-  color: titleColor = white,
+  color: titleColor,
   subtitle,
   subtitleStyle,
   onPress,
@@ -86,23 +94,57 @@ const AppbarContent = ({
   titleStyle,
   theme,
   title,
+  mode = 'small',
   ...rest
 }: Props) => {
-  const { fonts } = theme;
+  const { fonts, isV3, md } = theme;
 
   const subtitleColor = color(titleColor).alpha(0.7).rgb().string();
 
+  const titleTextColor = titleColor
+    ? titleColor
+    : isV3
+    ? (md('md.sys.color.on-surface') as string)
+    : white;
+
+  const getTextVariant = () => {
+    if (isV3) {
+      switch (mode) {
+        case 'small':
+          return 'title-large';
+        case 'medium':
+          return 'headline-small';
+        case 'large':
+          return 'headline-medium';
+        case 'center-aligned':
+          return 'title-large';
+      }
+    }
+    return undefined;
+  };
+
+  const isHigherAppbar = mode === 'large' || mode === 'medium';
+
   return (
     <TouchableWithoutFeedback onPress={onPress} disabled={!onPress}>
-      <View style={[styles.container, style]} {...rest}>
+      <View
+        style={[
+          styles.container,
+          isV3 && isHigherAppbar ? styles.v3Container : styles.v3SmallContainer,
+          style,
+        ]}
+        {...rest}
+      >
         <Text
+          variant={getTextVariant()}
           ref={titleRef}
           style={[
             {
-              color: titleColor,
-              ...(Platform.OS === 'ios' ? fonts.regular : fonts.medium),
+              color: titleTextColor,
+              ...(!isV3 &&
+                (Platform.OS === 'ios' ? fonts.regular : fonts.medium)),
             },
-            styles.title,
+            !isV3 && styles.title,
             titleStyle,
           ]}
           numberOfLines={1}
@@ -113,7 +155,7 @@ const AppbarContent = ({
         >
           {title}
         </Text>
-        {subtitle ? (
+        {!isV3 && subtitle ? (
           <Text
             style={[styles.subtitle, { color: subtitleColor }, subtitleStyle]}
             numberOfLines={1}
@@ -132,6 +174,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 12,
+  },
+  v3SmallContainer: {
+    paddingHorizontal: 0,
+  },
+  v3Container: {
+    paddingHorizontal: 0,
+    justifyContent: 'flex-end',
+    paddingBottom: 24,
   },
   title: {
     fontSize: Platform.OS === 'ios' ? 17 : 20,
