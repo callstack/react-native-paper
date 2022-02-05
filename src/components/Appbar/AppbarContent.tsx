@@ -16,7 +16,7 @@ import { withTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
 
 import type { $RemoveChildren, Theme } from '../../types';
-import type { AppbarModes } from './utils';
+import { AppbarModes, modeTextVariant } from './utils';
 
 type Props = $RemoveChildren<typeof View> &
   MD3Props & {
@@ -58,6 +58,13 @@ type Props = $RemoveChildren<typeof View> &
   };
 
 type MD3Props = {
+  /**
+   * Mode of the Appbar.
+   * - `small` - Appbar with default height (56).
+   * - `medium` - Appbar with medium height (112).
+   * - `large` - Appbar with large height (152).
+   * - `center-aligned` - Appbar with default height and center-aligned title.
+   */
   mode?: AppbarModes;
 };
 
@@ -77,7 +84,7 @@ type MD3Props = {
  *
  * const MyComponent = () => (
  *     <Appbar.Header>
- *        <Appbar.Content title="Title" subtitle={'Subtitle'} />
+ *        <Appbar.Content title="Title" />
  *     </Appbar.Header>
  * );
  *
@@ -107,37 +114,21 @@ const AppbarContent = ({
     ? (md('md.sys.color.on-surface') as string)
     : white;
 
-  const getTextVariant = () => {
-    if (isV3) {
-      switch (mode) {
-        case 'small':
-          return 'title-large';
-        case 'medium':
-          return 'headline-small';
-        case 'large':
-          return 'headline-medium';
-        case 'center-aligned':
-          return 'title-large';
-      }
-    }
-    return undefined;
+  const modeContainerStyles = {
+    small: styles.v3DefaultContainer,
+    medium: styles.v3MediumContainer,
+    large: styles.v3LargeContainer,
+    'center-aligned': styles.v3DefaultContainer,
   };
-
-  const isHigherAppbar = mode === 'large' || mode === 'medium';
 
   return (
     <TouchableWithoutFeedback onPress={onPress} disabled={!onPress}>
       <View
-        style={[
-          styles.container,
-          isV3 &&
-            (isHigherAppbar ? styles.v3Container : styles.v3SmallContainer),
-          style,
-        ]}
+        style={[styles.container, isV3 && modeContainerStyles[mode], style]}
         {...rest}
       >
         <Text
-          variant={getTextVariant()}
+          {...(isV3 && { variant: modeTextVariant[mode] })}
           ref={titleRef}
           style={[
             {
@@ -176,13 +167,19 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 12,
   },
-  v3SmallContainer: {
+  v3DefaultContainer: {
     paddingHorizontal: 0,
   },
-  v3Container: {
+  v3MediumContainer: {
     paddingHorizontal: 0,
     justifyContent: 'flex-end',
     paddingBottom: 24,
+  },
+  v3LargeContainer: {
+    paddingHorizontal: 0,
+    paddingTop: 36,
+    justifyContent: 'flex-end',
+    paddingBottom: 28,
   },
   title: {
     fontSize: Platform.OS === 'ios' ? 17 : 20,

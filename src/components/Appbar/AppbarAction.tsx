@@ -41,7 +41,10 @@ type Props = React.ComponentPropsWithoutRef<typeof IconButton> &
   };
 
 type MD3Props = {
-  isLeadingIcon?: boolean;
+  /**
+   * Whether it's the leading button.
+   */
+  isLeading?: boolean;
 };
 
 /**
@@ -86,7 +89,7 @@ const AppbarAction = ({
   disabled,
   onPress,
   accessibilityLabel,
-  isLeadingIcon,
+  isLeading,
   ...rest
 }: Props) => {
   const { isV3, md } = useTheme();
@@ -94,7 +97,7 @@ const AppbarAction = ({
   const actionIconColor = iconColor
     ? iconColor
     : isV3
-    ? isLeadingIcon
+    ? isLeading
       ? (md('md.sys.color.on-surface') as string)
       : (md('md.sys.color.on-surface-variant') as string)
     : color(black).alpha(0.54).rgb().string();
