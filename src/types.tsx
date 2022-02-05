@@ -25,7 +25,7 @@ export type Fonts = {
 
 type Mode = 'adaptive' | 'exact';
 
-export type Material2Colors = {
+export type MD2Colors = {
   primary: string;
   background: string;
   surface: string;
@@ -41,7 +41,7 @@ export type Material2Colors = {
   [key: string]: string;
 };
 
-export type MD3Color = {
+export type MD3Colors = {
   primary: string;
   'primary-container': string;
   secondary: string;
@@ -75,31 +75,18 @@ export type MD3Color = {
 
 export type MD3Palette = {};
 
-type SharedTheme = {
+export type Theme = {
   dark: boolean;
   mode?: Mode;
   roundness: number;
+  version: 2 | 3;
+  colors: MD2Colors | MD3Colors;
   fonts: Fonts;
   animation: {
     scale: number;
   };
-};
-
-export type Theme = ThemeBase & ThemeExtended;
-
-export type ThemeBase = AllXOR<[MD2ThemeBase, MD3ThemeBase]>;
-
-export type ThemeExtended = AllXOR<[MD2ThemeExtended, MD3ThemeExtended]>;
-
-// MD2 types
-export type MD2ThemeBase = SharedTheme & {
-  version: 2;
-  colors: Material2Colors;
-};
-
-export type MD2ThemeExtended = MD2ThemeBase & {
-  isV3: false;
-  md(): void;
+  isV3?: boolean;
+  getToken(token: MD3Token): any;
 };
 
 // MD3 types
@@ -133,42 +120,33 @@ export type MD3Typescale = {
   size: number;
 };
 
-export type MD3ThemeBase = SharedTheme & {
-  version: 3;
-  tokens: {
-    md: {
-      sys: {
-        color: MD3Color;
-        elevation: string[];
-        typescale: {
-          [key in MD3TypescaleKey]: MD3Typescale;
-        };
+export type MD3Tokens = {
+  md: {
+    sys: {
+      color: MD3Colors;
+      typescale: {
+        [key in MD3TypescaleKey]: MD3Typescale;
       };
-      ref: {
-        palette: MD3Palette;
-        typeface: {
-          'brand-regular': Font['fontFamily'];
-          'weight-regular': Font['fontWeight'];
-          'plain-medium': Font['fontFamily'];
-          'weight-medium': Font['fontWeight'];
-        };
-        opacity: {
-          level1: number;
-          level2: number;
-          level3: number;
-          level4: number;
-        };
+    };
+    ref: {
+      palette: MD3Palette;
+      typeface: {
+        'brand-regular': Font['fontFamily'];
+        'weight-regular': Font['fontWeight'];
+        'plain-medium': Font['fontFamily'];
+        'weight-medium': Font['fontWeight'];
+      };
+      opacity: {
+        level1: number;
+        level2: number;
+        level3: number;
+        level4: number;
       };
     };
   };
 };
 
-export type MD3ThemeExtended = MD3ThemeBase & {
-  isV3: true;
-  getToken(tokenKey: MD3Token): string | number | object;
-};
-
-export type MD3Token = Path<MD3ThemeBase['tokens']>;
+export type MD3Token = Path<MD3Tokens>;
 
 type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
 

@@ -19,6 +19,7 @@ import type {
   MD3Token,
   ThemeBase,
 } from '../types';
+import { tokenify } from '../styles/themes/v3/useToken';
 
 type Props = {
   children: React.ReactNode;
@@ -104,9 +105,11 @@ const Provider = ({ ...props }: Props) => {
      * @param {string} tokenKey - Material 3 token
      *
      * ## Usage
-     * md('md.sys.color.secondary')
+     * getToken('md.sys.color.secondary')
      */
-    const getToken = (tokenKey: MD3Token) => get(theme.tokens, tokenKey);
+    const getToken = (tokenKey: MD3Token) =>
+      // Todo: resolve typescale problems
+      get(tokenify(extendedTheme as any), tokenKey);
 
     return { ...extendedTheme, getToken } as MD3ThemeExtended;
   };

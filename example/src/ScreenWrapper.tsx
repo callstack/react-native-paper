@@ -24,7 +24,7 @@ export default function ScreenWrapper({
   contentContainerStyle,
   ...rest
 }: Props) {
-  const { colors, md, isV3 } = useTheme();
+  const { colors, getToken, isV3 } = useTheme();
 
   const insets = useSafeAreaInsets();
 
@@ -32,7 +32,7 @@ export default function ScreenWrapper({
     styles.container,
     {
       backgroundColor: isV3
-        ? (md('md.sys.color.background') as string)
+        ? (getToken('md.sys.color.background') as string)
         : colors?.background,
       paddingBottom: insets.bottom,
       paddingLeft: insets.left,

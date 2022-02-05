@@ -32,7 +32,11 @@ const TextExample = () => {
 
         <SectionHeader>Text component:</SectionHeader>
 
-        <Text style={styles.text} variant="display-large">
+        <Text
+          style={styles.text}
+          variant="display-large"
+          theme={{ colors: { primary: '#fff' } }}
+        >
           Display Large
         </Text>
         <Text style={styles.text} variant="display-medium">
