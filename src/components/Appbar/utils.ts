@@ -42,6 +42,22 @@ type RenderAppbarContentProps = {
   mode?: AppbarModes;
 };
 
+export const DEFAULT_APPBAR_HEIGHT = 56;
+
+export const modeAppbarHeight = {
+  small: DEFAULT_APPBAR_HEIGHT,
+  medium: 112,
+  large: 152,
+  'center-aligned': DEFAULT_APPBAR_HEIGHT,
+};
+
+export const modeTextVariant = {
+  small: 'title-large',
+  medium: 'headline-small',
+  large: 'headline-medium',
+  'center-aligned': 'title-large',
+};
+
 export const renderAppbarContent = ({
   children,
   isDark,

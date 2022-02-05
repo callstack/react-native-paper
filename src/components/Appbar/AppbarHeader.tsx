@@ -6,12 +6,17 @@ import {
   SafeAreaView,
   ViewStyle,
 } from 'react-native';
-import { DEFAULT_APPBAR_HEIGHT, Appbar } from './Appbar';
+import { Appbar } from './Appbar';
 import shadow from '../../styles/shadow';
 import { withTheme } from '../../core/theming';
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
 import type { Theme } from '../../types';
-import { AppbarModes, getAppbarColor } from './utils';
+import {
+  AppbarModes,
+  DEFAULT_APPBAR_HEIGHT,
+  getAppbarColor,
+  modeAppbarHeight,
+} from './utils';
 
 type Props = React.ComponentProps<typeof Appbar> &
   MD3Props & {
@@ -38,6 +43,13 @@ type Props = React.ComponentProps<typeof Appbar> &
   };
 
 type MD3Props = {
+  /**
+   * Mode of the Appbar.
+   * - `small` - Appbar with default height (56).
+   * - `medium` - Appbar with medium height (112).
+   * - `large` - Appbar with large height (152).
+   * - `center-aligned` - Appbar with default height and center-aligned title.
+   */
   mode?: AppbarModes;
 };
 
@@ -71,7 +83,7 @@ type MD3Props = {
  *   return (
  *     <Appbar.Header>
  *       <Appbar.BackAction onPress={_goBack} />
- *       <Appbar.Content title="Title" subtitle="Subtitle" />
+ *       <Appbar.Content title="Title" />
  *       <Appbar.Action icon="magnify" onPress={_handleSearch} />
  *       <Appbar.Action icon="dots-vertical" onPress={_handleMore} />
  *     </Appbar.Header>
@@ -93,15 +105,8 @@ const AppbarHeader = (props: Props) => {
 
   const { isV3 } = rest.theme;
 
-  const appbarHeight = {
-    small: DEFAULT_APPBAR_HEIGHT,
-    medium: 112,
-    large: 152,
-    'center-aligned': DEFAULT_APPBAR_HEIGHT,
-  };
-
   const {
-    height = isV3 ? appbarHeight[mode] : DEFAULT_APPBAR_HEIGHT,
+    height = isV3 ? modeAppbarHeight[mode] : DEFAULT_APPBAR_HEIGHT,
     elevation = isV3 ? 0 : 4,
     backgroundColor: customBackground,
     zIndex = 0,
