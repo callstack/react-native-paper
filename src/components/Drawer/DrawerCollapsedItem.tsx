@@ -50,6 +50,24 @@ const iconSize = 24;
 const itemSize = 56;
 const outlineHeight = 32;
 
+/**
+ * Collapsed component used to show an action item with an icon and optionally label in a navigation drawer.
+ *
+ * ## Usage
+ * ```js
+ * import * as React from 'react';
+ * import { Drawer } from 'react-native-paper';
+ *
+ * const MyComponent = () => (
+ *    <Drawer.CollapsedItem
+ *      icon="inbox"
+ *      label="Inbox"
+ *    />
+ * );
+ *
+ * export default MyComponent;
+ * ```
+ */
 const DrawerCollapsedItem = ({
   icon,
   label,
