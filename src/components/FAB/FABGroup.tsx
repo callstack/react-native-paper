@@ -99,6 +99,7 @@ type Props = {
  *
  * const MyComponent = () => {
  *   const [state, setState] = React.useState({ open: false });
+ *   const [visible, setVisible] = React.useState(true);
  *
  *   const onStateChange = ({ open }) => setState({ open });
  *
@@ -109,6 +110,7 @@ type Props = {
  *       <Portal>
  *         <FAB.Group
  *           open={open}
+ *           visible={visible}
  *           icon={open ? 'calendar-today' : 'plus'}
  *           actions={[
  *             { icon: 'plus', onPress: () => console.log('Pressed add') },
