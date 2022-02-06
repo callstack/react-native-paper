@@ -19,6 +19,7 @@ import { useTheme } from '../core/theming';
 import useAnimatedValue from '../utils/useAnimatedValue';
 import { addEventListener } from '../utils/addEventListener';
 import color from 'color';
+import { tokens } from '../styles/themes/v3/tokens';
 
 type Props = {
   /**
