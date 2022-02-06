@@ -22,9 +22,11 @@ export const getAppbarColor = (
     backgroundColor = customBackground;
   } else if (isV3) {
     backgroundColor = md('md.sys.color.surface') as string;
-  } else if (isDarkTheme && isAdaptiveMode) {
-    backgroundColor = overlay(elevation, colors?.surface);
-  } else backgroundColor = colors?.primary;
+  } else if (!isV3) {
+    if (isDarkTheme && isAdaptiveMode) {
+      backgroundColor = overlay(elevation, colors?.surface);
+    } else backgroundColor = colors?.primary;
+  }
 
   return backgroundColor;
 };
@@ -33,12 +35,8 @@ type RenderAppbarContentProps = {
   children: React.ReactNode;
   isDark: boolean;
   shouldCenterContent?: boolean;
-  theme: Theme;
-  renderOnly?: (
-    | typeof AppbarContent
-    | typeof AppbarAction
-    | typeof AppbarBackAction
-  )[];
+  isV3: boolean;
+  renderOnly?: React.ReactNode[];
   mode?: AppbarModes;
 };
 
@@ -62,16 +60,15 @@ export const renderAppbarContent = ({
   children,
   isDark,
   shouldCenterContent = false,
-  theme,
-  renderOnly = [AppbarContent, AppbarAction, AppbarBackAction],
+  isV3,
+  renderOnly,
   mode = 'small',
 }: RenderAppbarContentProps) => {
-  const { isV3 } = theme;
   return (
     React.Children.toArray(children)
       .filter((child) => child != null && typeof child !== 'boolean')
       // @ts-expect-error: TypeScript complains about the type of type but it doesn't matter
-      .filter((child) => renderOnly.includes(child.type))
+      .filter((child) => (renderOnly ? renderOnly.includes(child.type) : child))
       .map((child, i) => {
         if (
           !React.isValidElement(child) ||
@@ -100,8 +97,10 @@ export const renderAppbarContent = ({
           props.mode = mode;
           props.style = [
             isV3 ? i === 0 && styles.v3Spacing : i !== 0 && styles.v2Spacing,
-            shouldCenterContent && isV3 && styles.v3CenterAlignedContent,
-            shouldCenterContent && !isV3 && styles.v2CenterAlignedContent,
+            shouldCenterContent &&
+              (isV3
+                ? styles.v3CenterAlignedContent
+                : styles.v2CenterAlignedContent),
             child.props.style,
           ];
         }
