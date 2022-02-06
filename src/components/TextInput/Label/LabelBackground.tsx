@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 
-import AnimatedText from '../../Typography/v2/AnimatedText';
+import AnimatedText from '../../Typography/AnimatedText';
 
 import type { LabelBackgroundProps } from '../types';
 
