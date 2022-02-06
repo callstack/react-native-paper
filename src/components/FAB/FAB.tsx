@@ -91,14 +91,20 @@ type MD2Props = BaseProps & {
 type MD3Props = BaseProps & {
   /**
    * Size of the `FAB`.
+   * - `small` - FAB with small height (40).
+   * - `medium` - Appbar with default medium height (56).
+   * - `large` - Appbar with large height (96).
    */
   size?: FABSize;
   /**
    * Mode of the `FAB`. You can change the mode to adjust the the shadow
-   * - `flat` - button without a shadow
-   * - `elevated` - button with a shadow
+   * - `flat` - button without a shadow.
+   * - `elevated` - button with a shadow.
    */
   mode?: FABMode;
+  /**
+   * Color mappings variant for combinations of container and icon colors.
+   */
   variant?: FABVariant;
 };
 

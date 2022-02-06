@@ -170,6 +170,9 @@ type Props = $RemoveChildren<typeof Surface> &
   };
 
 type MD3Props = {
+  /**
+   * Color mappings variant for combinations of container and icon colors.
+   */
   variant?: FABVariant;
 };
 

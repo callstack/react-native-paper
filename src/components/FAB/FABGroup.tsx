@@ -95,6 +95,9 @@ type Props = {
 } & MD3Props;
 
 type MD3Props = {
+  /**
+   * Color mappings variant for combinations of container and icon colors.
+   */
   variant?: FABVariant;
 };
 
