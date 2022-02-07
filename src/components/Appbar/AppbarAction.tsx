@@ -10,41 +10,39 @@ import IconButton from '../IconButton';
 import type { IconSource } from '../Icon';
 import { useTheme } from '../../core/theming';
 
-type Props = React.ComponentPropsWithoutRef<typeof IconButton> &
-  MD3Props & {
-    /**
-     *  Custom color for action icon.
-     */
-    color?: string;
-    /**
-     * Name of the icon to show.
-     */
-    icon: IconSource;
-    /**
-     * Optional icon size.
-     */
-    size?: number;
-    /**
-     * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
-     */
-    disabled?: boolean;
-    /**
-     * Accessibility label for the button. This is read by the screen reader when the user taps the button.
-     */
-    accessibilityLabel?: string;
-    /**
-     * Function to execute on press.
-     */
-    onPress?: () => void;
-    style?: StyleProp<ViewStyle>;
-    ref?: React.RefObject<TouchableWithoutFeedback>;
-  };
-
-type MD3Props = {
+type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
   /**
+   *  Custom color for action icon.
+   */
+  color?: string;
+  /**
+   * Name of the icon to show.
+   */
+  icon: IconSource;
+  /**
+   * Optional icon size.
+   */
+  size?: number;
+  /**
+   * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
+   */
+  disabled?: boolean;
+  /**
+   * Accessibility label for the button. This is read by the screen reader when the user taps the button.
+   */
+  accessibilityLabel?: string;
+  /**
+   * Function to execute on press.
+   */
+  onPress?: () => void;
+  /**
+   * `Available in v3.x`
+   *
    * Whether it's the leading button.
    */
   isLeading?: boolean;
+  style?: StyleProp<ViewStyle>;
+  ref?: React.RefObject<TouchableWithoutFeedback>;
 };
 
 /**
