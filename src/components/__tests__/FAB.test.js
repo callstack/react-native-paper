@@ -10,7 +10,7 @@ it('renders normal FAB', () => {
 
 it('renders small FAB', () => {
   const tree = renderer
-    .create(<FAB small onPress={() => {}} icon="plus" />)
+    .create(<FAB size="small" onPress={() => {}} icon="plus" />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

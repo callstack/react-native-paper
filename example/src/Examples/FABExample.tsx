@@ -20,14 +20,8 @@ const FABExample = () => {
     <ScreenWrapper style={styles.container}>
       <View style={styles.column}>
         <FAB
-          {...(isV3
-            ? {
-                size: 'small',
-              }
-            : {
-                small: true,
-              })}
           icon={visible ? 'eye-off' : 'eye'}
+          size="small"
           style={styles.fab}
           onPress={() => setVisible(!visible)}
         />
@@ -138,6 +132,7 @@ const FABExample = () => {
                 icon: 'bell',
                 label: 'Remind',
                 onPress: () => {},
+                size: isV3 ? 'small' : 'medium',
               },
             ]}
             onStateChange={({ open }: { open: boolean }) => setOpen(open)}

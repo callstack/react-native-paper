@@ -28,6 +28,7 @@ type Props = {
    * - `labelTextColor`: custom label text color of the action item
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
    * - `labelStyle`: pass additional styles for the fab item label, for example, `backgroundColor`
+   * - `size`: size of action item. Defaults to `small`. `Available in v3.x`
    * - `onPress`: callback that is called when `FAB` is pressed (required)
    */
   actions: Array<{
@@ -38,11 +39,8 @@ type Props = {
     accessibilityLabel?: string;
     style?: StyleProp<ViewStyle>;
     labelStyle?: StyleProp<ViewStyle>;
-    /**
-     * @deprecated
-     */
-    small?: boolean;
     onPress: () => void;
+    size?: 'small' | 'medium';
     testID?: string;
   }>;
   /**
@@ -85,6 +83,12 @@ type Props = {
    */
   fabStyle?: StyleProp<ViewStyle>;
   /**
+   * `Available in v3.x`.
+   *
+   * Color mappings variant for combinations of container and icon colors.
+   */
+  variant?: FABVariant;
+  /**
    * @optional
    */
   theme: Theme;
@@ -92,13 +96,6 @@ type Props = {
    * Pass down testID from Group props to FAB.
    */
   testID?: string;
-} & MD3Props;
-
-type MD3Props = {
-  /**
-   * Color mappings variant for combinations of container and icon colors.
-   */
-  variant?: FABVariant;
 };
 
 /**
@@ -312,7 +309,9 @@ const FABGroup = ({
                 styles.item,
                 {
                   marginHorizontal:
-                    typeof it.small === 'undefined' || it.small ? 24 : 16,
+                    typeof it.size === 'undefined' || it.size === 'small'
+                      ? 24
+                      : 16,
                 },
               ]}
               pointerEvents={open ? 'box-none' : 'none'}
@@ -359,13 +358,7 @@ const FABGroup = ({
                 </View>
               )}
               <FAB
-                {...(isV3
-                  ? {
-                      size: 'small',
-                    }
-                  : {
-                      small: typeof it.small !== 'undefined' ? it.small : true,
-                    })}
+                size={typeof it.size !== 'undefined' ? it.size : 'small'}
                 icon={it.icon}
                 color={it.color}
                 style={

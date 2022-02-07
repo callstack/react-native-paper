@@ -16,13 +16,13 @@ import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 import { getFABColors, FABVariant } from './utils';
-import type { $RemoveChildren, Theme, XOR } from '../../types';
+import type { $RemoveChildren, Theme } from '../../types';
 
 type FABSize = 'small' | 'medium' | 'large';
 
 type FABMode = 'flat' | 'elevated';
 
-type BaseProps = $RemoveChildren<typeof Surface> & {
+type Props = $RemoveChildren<typeof Surface> & {
   /**
    * Icon to display for the `FAB`.
    */
@@ -72,24 +72,9 @@ type BaseProps = $RemoveChildren<typeof Surface> & {
    * Function to execute on long press.
    */
   onLongPress?: () => void;
-  style?: StyleProp<ViewStyle>;
   /**
-   * @optional
-   */
-  theme: Theme;
-  testID?: string;
-};
-
-type MD2Props = BaseProps & {
-  /**
-   * @deprecated
-   *  Whether FAB is mini-sized, used to create visual continuity with other elements. This has no effect if `label` is specified.
-   */
-  small?: boolean;
-};
-
-type MD3Props = BaseProps & {
-  /**
+   * `Available in v3.x`
+   *
    * Size of the `FAB`.
    * - `small` - FAB with small height (40).
    * - `medium` - Appbar with default medium height (56).
@@ -97,15 +82,25 @@ type MD3Props = BaseProps & {
    */
   size?: FABSize;
   /**
-   * Mode of the `FAB`. You can change the mode to adjust the the shadow
+   * `Available in v3.x`.
+   *
+   * Mode of the `FAB`. You can change the mode to adjust the the shadow:
    * - `flat` - button without a shadow.
    * - `elevated` - button with a shadow.
    */
   mode?: FABMode;
   /**
+   * `Available in v3.x`.
+   *
    * Color mappings variant for combinations of container and icon colors.
    */
   variant?: FABVariant;
+  style?: StyleProp<ViewStyle>;
+  /**
+   * @optional
+   */
+  theme: Theme;
+  testID?: string;
 };
 
 /**
@@ -121,7 +116,6 @@ type MD3Props = BaseProps & {
  * const MyComponent = () => (
  *   <FAB
  *     style={styles.fab}
- *     small
  *     onPress={() => console.log('Pressed')}
  *   />
  * );
@@ -139,7 +133,6 @@ type MD3Props = BaseProps & {
  * ```
  */
 const FAB = ({
-  small,
   icon,
   label,
   accessibilityLabel = label,
@@ -159,7 +152,7 @@ const FAB = ({
   mode = 'elevated',
   variant = 'primary',
   ...rest
-}: XOR<MD2Props, MD3Props>) => {
+}: Props) => {
   const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
@@ -201,10 +194,7 @@ const FAB = ({
 
   const fabStyle = () => {
     if (!isV3) {
-      if (small) {
-        return styles.small;
-      }
-      return styles.standard;
+      return size === 'small' ? styles.small : styles.standard;
     } else {
       switch (size) {
         case 'small':
