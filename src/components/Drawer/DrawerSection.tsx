@@ -88,7 +88,7 @@ const DrawerSection = ({ children, title, theme, style, ...rest }: Props) => {
       )}
       {children}
       <Divider
-        {...(isV3 && { insets: true, bold: true })}
+        {...(isV3 && { horizontalInset: true, bold: true })}
         style={isV3 ? styles.v3Divider : styles.divider}
       />
     </View>
