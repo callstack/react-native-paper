@@ -29,7 +29,8 @@ import type { Theme } from '../../types';
 type Route = {
   key: string;
   title?: string;
-  icon?: IconSource;
+  focusedIcon: IconSource;
+  unfocusedIcon?: IconSource;
   badge?: string | number | boolean;
   color?: string;
   accessibilityLabel?: string;
@@ -77,7 +78,8 @@ type Props = {
    *
    * - `key`: a unique key to identify the route (required)
    * - `title`: title of the route to use as the tab label
-   * - `icon`: icon to use as the tab icon, can be a string, an image source or a react component
+   * - `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component
+   * - `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component
    * - `color`: color to use as background color for shifting bottom navigation
    * - `badge`: badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.
    * - `accessibilityLabel`: accessibility label for the tab button
@@ -89,10 +91,10 @@ type Props = {
    * {
    *   index: 1,
    *   routes: [
-   *     { key: 'music', title: 'Music', icon: 'queue-music', color: '#3F51B5' },
-   *     { key: 'albums', title: 'Albums', icon: 'album', color: '#009688' },
-   *     { key: 'recents', title: 'Recents', icon: 'history', color: '#795548' },
-   *     { key: 'purchased', title: 'Purchased', icon: 'shopping-cart', color: '#607D8B' },
+   *     { key: 'music', title: 'Favorites', focusedIcon: 'heart', unfocusedIcon: 'heart-outline'},
+   *     { key: 'albums', title: 'Albums', focusedIcon: 'album' },
+   *     { key: 'recents', title: 'Recents', focusedIcon: 'history' },
+   *     { key: 'notifications', title: 'Notifications', focusedIcon: 'bell', unfocusedIcon: 'bell-outline' },
    *   ]
    * }
    * ```
@@ -240,6 +242,7 @@ const MAX_TAB_WIDTH = 168;
 const BAR_HEIGHT = 56;
 const BOTTOM_INSET = getBottomSpace();
 const FAR_FAR_AWAY = Platform.OS === 'web' ? 0 : 9999;
+const OUTLINE_WIDTH = 64;
 
 const Touchable = ({
   route: _0,
@@ -298,9 +301,10 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
  * const MyComponent = () => {
  *   const [index, setIndex] = React.useState(0);
  *   const [routes] = React.useState([
- *     { key: 'music', title: 'Music', icon: 'queue-music' },
- *     { key: 'albums', title: 'Albums', icon: 'album' },
- *     { key: 'recents', title: 'Recents', icon: 'history' },
+ *     { key: 'music', title: 'Favorites', focusedIcon: 'heart', unfocusedIcon: 'heart-outline'},
+ *     { key: 'albums', title: 'Albums', focusedIcon: 'album' },
+ *     { key: 'recents', title: 'Recents', focusedIcon: 'history' },
+ *     { key: 'notifications', title: 'Notifications', focusedIcon: 'bell', unfocusedIcon: 'bell-outline' },
  *   ]);
  *
  *   const renderScene = BottomNavigation.SceneMap({
@@ -537,7 +541,7 @@ const BottomNavigation = ({
   );
 
   const { routes } = navigationState;
-  const { colors, dark: isDarkTheme, mode } = theme;
+  const { colors, dark: isDarkTheme, mode, md, isV3 } = theme;
 
   const { backgroundColor: customBackground, elevation = 4 }: ViewStyle =
     StyleSheet.flatten(barStyle) || {};
@@ -548,7 +552,9 @@ const BottomNavigation = ({
     ? overlay(elevation, colors?.surface)
     : colors?.primary;
 
-  const backgroundColor = shifting
+  const backgroundColor = isV3
+    ? (md('md.sys.color.surface') as string)
+    : shifting
     ? indexAnim.interpolate({
         inputRange: routes.map((_, i) => i),
         // FIXME: does outputRange support ColorValue or just strings?
@@ -566,10 +572,16 @@ const BottomNavigation = ({
 
   const textColor = isDark ? white : black;
   const activeTintColor =
-    typeof activeColor !== 'undefined' ? activeColor : textColor;
+    typeof activeColor !== 'undefined'
+      ? activeColor
+      : isV3
+      ? (md('md.sys.color.on-secondary-container') as string)
+      : textColor;
   const inactiveTintColor =
     typeof inactiveColor !== 'undefined'
       ? inactiveColor
+      : isV3
+      ? (md('md.sys.color.on-surface-variant') as string)
       : color(textColor).alpha(0.5).rgb().string();
 
   const touchColor = color(activeColor || activeTintColor)
@@ -688,7 +700,7 @@ const BottomNavigation = ({
             ]}
             accessibilityRole={'tablist'}
           >
-            {shifting ? (
+            {!isV3 && shifting ? (
               <Animated.View
                 pointerEvents="none"
                 style={[
@@ -749,10 +761,24 @@ const BottomNavigation = ({
               // This trick gives the illusion that we are animating between active and inactive colors.
               // This is to ensure that we can use native driver, as colors cannot be animated with native driver.
               const activeOpacity = active;
-              const inactiveOpacity = active.interpolate({
+              const inactiveOpacityInterpolation = active.interpolate({
                 inputRange: [0, 1],
                 outputRange: [1, 0],
               });
+
+              const inactiveOpacity = !isV3
+                ? inactiveOpacityInterpolation
+                : focused
+                ? inactiveOpacityInterpolation
+                : 1;
+
+              // Scale horizontally the outline pill
+              const outlineScale = focused
+                ? active.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0.5, 1],
+                  })
+                : 0;
 
               const badge = getBadge({ route });
 
@@ -772,17 +798,47 @@ const BottomNavigation = ({
                 accessibilityComponentType: 'button',
                 accessibilityRole: Platform.OS === 'ios' ? 'button' : 'tab',
                 accessibilityState: { selected: focused },
-                style: styles.item,
+                style: [styles.item, isV3 && styles.v3Item],
                 children: (
-                  <View pointerEvents="none">
+                  <View
+                    pointerEvents="none"
+                    style={
+                      isV3 &&
+                      (labeled
+                        ? styles.v3TouchableContainer
+                        : styles.v3NoLabelContainer)
+                    }
+                  >
                     <Animated.View
                       style={[
                         styles.iconContainer,
-                        { transform: [{ translateY }] },
+                        isV3 && styles.v3IconContainer,
+                        !isV3 && { transform: [{ translateY }] },
                       ]}
                     >
+                      {isV3 && (
+                        <Animated.View
+                          style={[
+                            styles.outline,
+                            {
+                              transform: [
+                                {
+                                  scaleX: outlineScale,
+                                },
+                              ],
+                              backgroundColor: md(
+                                'md.sys.color.secondary-container'
+                              ) as string,
+                            },
+                          ]}
+                        />
+                      )}
                       <Animated.View
-                        style={[styles.iconWrapper, { opacity: activeOpacity }]}
+                        style={[
+                          styles.iconWrapper,
+                          isV3 && styles.v3IconWrapper,
+                          { opacity: activeOpacity },
+                        ]}
                       >
                         {renderIcon ? (
                           renderIcon({
@@ -792,7 +848,7 @@ const BottomNavigation = ({
                           })
                         ) : (
                           <Icon
-                            source={route.icon as IconSource}
+                            source={route.focusedIcon as IconSource}
                             color={activeTintColor}
                             size={24}
                           />
@@ -801,6 +857,7 @@ const BottomNavigation = ({
                       <Animated.View
                         style={[
                           styles.iconWrapper,
+                          isV3 && styles.v3IconWrapper,
                           { opacity: inactiveOpacity },
                         ]}
                       >
@@ -812,7 +869,11 @@ const BottomNavigation = ({
                           })
                         ) : (
                           <Icon
-                            source={route.icon as IconSource}
+                            source={
+                              route.unfocusedIcon !== undefined
+                                ? route.unfocusedIcon
+                                : (route.focusedIcon as IconSource)
+                            }
                             color={inactiveTintColor}
                             size={24}
                           />
@@ -830,7 +891,7 @@ const BottomNavigation = ({
                         ]}
                       >
                         {typeof badge === 'boolean' ? (
-                          <Badge visible={badge} size={8} />
+                          <Badge visible={badge} size={isV3 ? 6 : 8} />
                         ) : (
                           <Badge visible={badge != null} size={16}>
                             {badge}
@@ -842,24 +903,42 @@ const BottomNavigation = ({
                       <Animated.View
                         style={[
                           styles.labelContainer,
-                          { transform: [{ scale }] },
+                          !isV3 && { transform: [{ scale }] },
                         ]}
                       >
                         <Animated.View
                           style={[
                             styles.labelWrapper,
-                            { opacity: activeOpacity },
+                            !isV3 && { opacity: activeOpacity },
                           ]}
                         >
                           {renderLabel ? (
                             renderLabel({
                               route,
                               focused: true,
-                              color: activeTintColor,
+                              color: !isV3
+                                ? activeTintColor
+                                : focused
+                                ? (md('md.sys.color.on-surface') as string)
+                                : (md(
+                                    'md.sys.color.on-surface-variant'
+                                  ) as string),
                             })
                           ) : (
                             <Text
-                              style={[styles.label, { color: activeTintColor }]}
+                              variant="label-medium"
+                              style={[
+                                styles.label,
+                                {
+                                  color: !isV3
+                                    ? activeTintColor
+                                    : focused
+                                    ? (md('md.sys.color.on-surface') as string)
+                                    : (md(
+                                        'md.sys.color.on-surface-variant'
+                                      ) as string),
+                                },
+                              ]}
                             >
                               {getLabelText({ route })}
                             </Text>
@@ -876,14 +955,31 @@ const BottomNavigation = ({
                               renderLabel({
                                 route,
                                 focused: false,
-                                color: inactiveTintColor,
+                                color: !isV3
+                                  ? activeTintColor
+                                  : focused
+                                  ? (md('md.sys.color.on-surface') as string)
+                                  : (md(
+                                      'md.sys.color.on-surface-variant'
+                                    ) as string),
                               })
                             ) : (
                               <Text
+                                variant="label-medium"
                                 selectable={false}
                                 style={[
                                   styles.label,
-                                  { color: inactiveTintColor },
+                                  {
+                                    color: !isV3
+                                      ? activeTintColor
+                                      : focused
+                                      ? (md(
+                                          'md.sys.color.on-surface'
+                                        ) as string)
+                                      : (md(
+                                          'md.sys.color.on-surface-variant'
+                                        ) as string),
+                                  },
                                 ]}
                               >
                                 {getLabelText({ route })}
@@ -893,7 +989,7 @@ const BottomNavigation = ({
                         )}
                       </Animated.View>
                     ) : (
-                      <View style={styles.labelContainer} />
+                      !isV3 && <View style={styles.labelContainer} />
                     )}
                   </View>
                 ),
@@ -966,6 +1062,9 @@ const styles = StyleSheet.create({
     // The extra 4dp bottom padding is offset by label's height
     paddingVertical: 6,
   },
+  v3Item: {
+    paddingVertical: 0,
+  },
   ripple: {
     position: 'absolute',
   },
@@ -976,9 +1075,19 @@ const styles = StyleSheet.create({
     marginHorizontal: 12,
     alignSelf: 'center',
   },
+  v3IconContainer: {
+    height: 32,
+    width: 32,
+    marginBottom: 4,
+    marginTop: 0,
+    justifyContent: 'center',
+  },
   iconWrapper: {
     ...StyleSheet.absoluteFillObject,
     alignItems: 'center',
+  },
+  v3IconWrapper: {
+    top: 4,
   },
   labelContainer: {
     height: 16,
@@ -1003,5 +1112,20 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     top: -2,
+  },
+  v3TouchableContainer: {
+    paddingTop: 12,
+    paddingBottom: 16,
+  },
+  v3NoLabelContainer: {
+    height: 80,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  outline: {
+    width: OUTLINE_WIDTH,
+    height: OUTLINE_WIDTH / 2,
+    borderRadius: OUTLINE_WIDTH / 4,
+    alignSelf: 'center',
   },
 });

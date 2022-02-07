@@ -126,10 +126,13 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -282,10 +285,13 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -438,10 +444,13 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -729,10 +738,13 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -885,10 +897,13 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -1041,10 +1056,13 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -1312,10 +1330,13 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -1352,9 +1373,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               >
                 <icon
                   color="#ffffff"
-                >
-                  magnify
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -1371,9 +1390,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               >
                 <icon
                   color="rgba(255, 255, 255, 0.5)"
-                >
-                  magnify
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -1455,7 +1472,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 }
               >
                 <text
-                  color="rgba(255, 255, 255, 0.5)"
+                  color="#ffffff"
                 />
               </View>
             </View>
@@ -1478,10 +1495,13 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -1518,9 +1538,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               >
                 <icon
                   color="#ffffff"
-                >
-                  camera
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -1537,9 +1555,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               >
                 <icon
                   color="rgba(255, 255, 255, 0.5)"
-                >
-                  camera
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -1621,7 +1637,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 }
               >
                 <text
-                  color="rgba(255, 255, 255, 0.5)"
+                  color="#ffffff"
                 />
               </View>
             </View>
@@ -1644,10 +1660,13 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -1684,9 +1703,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               >
                 <icon
                   color="#ffffff"
-                >
-                  inbox
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -1703,9 +1720,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               >
                 <icon
                   color="rgba(255, 255, 255, 0.5)"
-                >
-                  inbox
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -1787,7 +1802,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 }
               >
                 <text
-                  color="rgba(255, 255, 255, 0.5)"
+                  color="#ffffff"
                 />
               </View>
             </View>
@@ -1945,10 +1960,13 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -1985,9 +2003,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               >
                 <icon
                   color="#ffffff"
-                >
-                  magnify
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -2004,9 +2020,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               >
                 <icon
                   color="rgba(255, 255, 255, 0.5)"
-                >
-                  magnify
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -2095,10 +2109,13 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -2135,9 +2152,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               >
                 <icon
                   color="#ffffff"
-                >
-                  camera
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -2154,9 +2169,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               >
                 <icon
                   color="rgba(255, 255, 255, 0.5)"
-                >
-                  camera
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -2245,10 +2258,13 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -2285,9 +2301,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               >
                 <icon
                   color="#ffffff"
-                >
-                  inbox
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -2304,9 +2318,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               >
                 <icon
                   color="rgba(255, 255, 255, 0.5)"
-                >
-                  inbox
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -2395,10 +2407,13 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -2435,9 +2450,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               >
                 <icon
                   color="#ffffff"
-                >
-                  heart
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -2454,9 +2467,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               >
                 <icon
                   color="rgba(255, 255, 255, 0.5)"
-                >
-                  heart
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -2545,10 +2556,13 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -2585,9 +2599,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               >
                 <icon
                   color="#ffffff"
-                >
-                  shopping-music
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -2604,9 +2616,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               >
                 <icon
                   color="rgba(255, 255, 255, 0.5)"
-                >
-                  shopping-music
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -2811,10 +2821,13 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -3023,7 +3036,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                           "textAlign": "center",
                         },
                         Object {
-                          "color": "#853D4B",
+                          "color": "#FBF7DB",
                         },
                       ],
                     ]
@@ -3052,10 +3065,13 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -3264,7 +3280,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                           "textAlign": "center",
                         },
                         Object {
-                          "color": "#853D4B",
+                          "color": "#FBF7DB",
                         },
                       ],
                     ]
@@ -3293,10 +3309,13 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -3505,7 +3524,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                           "textAlign": "center",
                         },
                         Object {
-                          "color": "#853D4B",
+                          "color": "#FBF7DB",
                         },
                       ],
                     ]
@@ -3670,10 +3689,13 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -3871,10 +3893,13 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -4072,10 +4097,13 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -4388,10 +4416,13 @@ exports[`renders non-shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -4600,7 +4631,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                           "textAlign": "center",
                         },
                         Object {
-                          "color": "rgba(255, 255, 255, 0.5)",
+                          "color": "#ffffff",
                         },
                       ],
                     ]
@@ -4629,10 +4660,13 @@ exports[`renders non-shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -4841,7 +4875,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                           "textAlign": "center",
                         },
                         Object {
-                          "color": "rgba(255, 255, 255, 0.5)",
+                          "color": "#ffffff",
                         },
                       ],
                     ]
@@ -4870,10 +4904,13 @@ exports[`renders non-shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -5082,7 +5119,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                           "textAlign": "center",
                         },
                         Object {
-                          "color": "rgba(255, 255, 255, 0.5)",
+                          "color": "#ffffff",
                         },
                       ],
                     ]
@@ -5246,10 +5283,13 @@ exports[`renders shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -5447,10 +5487,13 @@ exports[`renders shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -5648,10 +5691,13 @@ exports[`renders shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -5849,10 +5895,13 @@ exports[`renders shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
@@ -6050,10 +6099,13 @@ exports[`renders shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              undefined,
+            ]
           }
         >
           <View
