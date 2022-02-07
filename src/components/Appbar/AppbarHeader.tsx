@@ -18,32 +18,25 @@ import {
   modeAppbarHeight,
 } from './utils';
 
-type Props = React.ComponentProps<typeof Appbar> &
-  MD3Props & {
-    /**
-     * Whether the background color is a dark color. A dark header will render light text and vice-versa.
-     */
-    dark?: boolean;
-    /**
-     * Extra padding to add at the top of header to account for translucent status bar.
-     * This is automatically handled on iOS >= 11 including iPhone X using `SafeAreaView`.
-     * If you are using Expo, we assume translucent status bar and set a height for status bar automatically.
-     * Pass `0` or a custom value to disable the default behaviour, and customize the height.
-     */
-    statusBarHeight?: number;
-    /**
-     * Content of the header.
-     */
-    children: React.ReactNode;
-    /**
-     * @optional
-     */
-    theme: Theme;
-    style?: StyleProp<ViewStyle>;
-  };
-
-type MD3Props = {
+type Props = React.ComponentProps<typeof Appbar> & {
   /**
+   * Whether the background color is a dark color. A dark header will render light text and vice-versa.
+   */
+  dark?: boolean;
+  /**
+   * Extra padding to add at the top of header to account for translucent status bar.
+   * This is automatically handled on iOS >= 11 including iPhone X using `SafeAreaView`.
+   * If you are using Expo, we assume translucent status bar and set a height for status bar automatically.
+   * Pass `0` or a custom value to disable the default behaviour, and customize the height.
+   */
+  statusBarHeight?: number;
+  /**
+   * Content of the header.
+   */
+  children: React.ReactNode;
+  /**
+   * `Available in v3.x`
+   *
    * Mode of the Appbar.
    * - `small` - Appbar with default height (56).
    * - `medium` - Appbar with medium height (112).
@@ -51,6 +44,11 @@ type MD3Props = {
    * - `center-aligned` - Appbar with default height and center-aligned title.
    */
   mode?: AppbarModes;
+  /**
+   * @optional
+   */
+  theme: Theme;
+  style?: StyleProp<ViewStyle>;
 };
 
 /**

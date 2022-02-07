@@ -18,47 +18,40 @@ import { white } from '../../styles/themes/v2/colors';
 import type { $RemoveChildren, Theme } from '../../types';
 import { AppbarModes, modeTextVariant } from './utils';
 
-type Props = $RemoveChildren<typeof View> &
-  MD3Props & {
-    /**
-     * Custom color for the text.
-     */
-    color?: string;
-    /**
-     * Text for the title.
-     */
-    title: React.ReactNode;
-    /**
-     * Style for the title.
-     */
-    titleStyle?: StyleProp<TextStyle>;
-    /**
-     * Reference for the title.
-     */
-    titleRef?: React.RefObject<Text>;
-    /**
-     * @deprecated
-     * Text for the subtitle.
-     */
-    subtitle?: React.ReactNode;
-    /**
-     * @deprecated
-     * Style for the subtitle.
-     */
-    subtitleStyle?: StyleProp<TextStyle>;
-    /**
-     * Function to execute on press.
-     */
-    onPress?: () => void;
-    style?: StyleProp<ViewStyle>;
-    /**
-     * @optional
-     */
-    theme: Theme;
-  };
-
-type MD3Props = {
+type Props = $RemoveChildren<typeof View> & {
   /**
+   * Custom color for the text.
+   */
+  color?: string;
+  /**
+   * Text for the title.
+   */
+  title: React.ReactNode;
+  /**
+   * Style for the title.
+   */
+  titleStyle?: StyleProp<TextStyle>;
+  /**
+   * Reference for the title.
+   */
+  titleRef?: React.RefObject<Text>;
+  /**
+   * @deprecated
+   * Text for the subtitle.
+   */
+  subtitle?: React.ReactNode;
+  /**
+   * @deprecated
+   * Style for the subtitle.
+   */
+  subtitleStyle?: StyleProp<TextStyle>;
+  /**
+   * Function to execute on press.
+   */
+  onPress?: () => void;
+  /**
+   * `Available in v3.x`
+   *
    * Mode of the Appbar.
    * - `small` - Appbar with default height (56).
    * - `medium` - Appbar with medium height (112).
@@ -66,6 +59,11 @@ type MD3Props = {
    * - `center-aligned` - Appbar with default height and center-aligned title.
    */
   mode?: AppbarModes;
+  style?: StyleProp<ViewStyle>;
+  /**
+   * @optional
+   */
+  theme: Theme;
 };
 
 /**
