@@ -11,10 +11,14 @@ type Props = $RemoveChildren<typeof View> & {
    */
   leftInset?: boolean;
   /**
+   * `Available in v3.x`
+   *
    *  Whether divider has a horizontal inset on both sides.
    */
   horizontalInset?: boolean;
   /**
+   * `Available in v3.x`
+   *
    *  Whether divider should be bolded.
    */
   bold?: boolean;
