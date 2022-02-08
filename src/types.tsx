@@ -1,3 +1,4 @@
+import type { $DeepPartial } from '@callstack/react-theme-provider';
 import type * as React from 'react';
 
 export type Font = {
@@ -37,104 +38,112 @@ export type MD2Colors = {
   placeholder: string;
   backdrop: string;
   notification: string;
-
-  [key: string]: string;
 };
 
 export type MD3Colors = {
   primary: string;
-  'primary-container': string;
+  primaryContainer: string;
   secondary: string;
-  'secondary-container': string;
+  secondaryContainer: string;
   tertiary: string;
-  'tertiary-container': string;
+  tertiaryContainer: string;
   surface: string;
-  'surface-variant': string;
-  'surface-disabled': string;
+  surfaceVariant: string;
+  surfaceDisabled: string;
   background: string;
   error: string;
-  'error-container': string;
-  'on-primary': string;
-  'on-primary-container': string;
-  'on-secondary': string;
-  'on-secondary-container': string;
-  'on-tertiary': string;
-  'on-tertiary-container': string;
-  'on-surface': string;
-  'on-surface-variant': string;
-  'on-surface-disabled': string;
-  'on-error': string;
-  'on-error-container': string;
-  'on-background': string;
+  errorContainer: string;
+  onPrimary: string;
+  onPrimaryContainer: string;
+  onSecondary: string;
+  onSecondaryContainer: string;
+  onTertiary: string;
+  onTertiaryContainer: string;
+  onSurface: string;
+  onSurfaceVariant: string;
+  onSurfaceDisabled: string;
+  onError: string;
+  onErrorContainer: string;
+  onBackground: string;
   outline: string;
   shadow: string;
-  'inverse-surface': string;
-  'inverse-on-surface': string;
-  'inverse-primary': string;
+  inverseSurface: string;
+  inverseOnSurface: string;
+  inversePrimary: string;
 };
 
 export type MD3Palette = {};
 
-export type Theme = {
+export type ThemeProp = $DeepPartial<Theme>;
+
+export type ThemeBase = {
   dark: boolean;
   mode?: Mode;
   roundness: number;
-  version: 2 | 3;
-  colors: MD2Colors | MD3Colors;
   fonts: Fonts;
   animation: {
     scale: number;
   };
-  isV3?: boolean;
-  getToken(token: MD3Token): any;
+} & (
+  | { version: 2; colors: MD2Colors; isV3: false }
+  | { version: 3; colors: MD3Colors; isV3: true }
+);
+
+export type ThemeUtils = {
+  getToken?(token: MD3Token): any;
+  typescale: MD3Typescale;
 };
+
+export type Theme = ThemeBase & ThemeUtils;
 
 // MD3 types
 export enum MD3TypescaleKey {
-  'display-large' = 'display-large',
-  'display-medium' = 'display-medium',
-  'display-small' = 'display-small',
+  displayLarge = 'displayLarge',
+  displayMedium = 'displayMedium',
+  displaySmall = 'displaySmall',
 
-  'headline-large' = 'headline-large',
-  'headline-medium' = 'headline-medium',
-  'headline-small' = 'headline-small',
+  headlineLarge = 'headlineLarge',
+  headlineMedium = 'headlineMedium',
+  headlineSmall = 'headlineSmall',
 
-  'title-large' = 'title-large',
-  'title-medium' = 'title-medium',
-  'title-small' = 'title-small',
+  titleLarge = 'titleLarge',
+  titleMedium = 'titleMedium',
+  titleSmall = 'titleSmall',
 
-  'label-large' = 'label-large',
-  'label-medium' = 'label-medium',
-  'label-small' = 'label-small',
+  labelLarge = 'labelLarge',
+  labelMedium = 'labelMedium',
+  labelSmall = 'labelSmall',
 
-  'body-large' = 'body-large',
-  'body-medium' = 'body-medium',
-  'body-small' = 'body-small',
+  bodyLarge = 'bodyLarge',
+  bodyMedium = 'bodyMedium',
+  bodySmall = 'bodySmall',
 }
 
-export type MD3Typescale = {
+export type MD3Type = {
   font: string;
   tracking: number;
   weight: Font['fontWeight'];
-  'line-height': number;
+  lineHeight: number;
   size: number;
+};
+
+export type MD3Typescale = {
+  [key in MD3TypescaleKey]: MD3Type;
 };
 
 export type MD3Tokens = {
   md: {
     sys: {
       color: MD3Colors;
-      typescale: {
-        [key in MD3TypescaleKey]: MD3Typescale;
-      };
+      typescale: MD3Typescale;
     };
     ref: {
       palette: MD3Palette;
       typeface: {
-        'brand-regular': Font['fontFamily'];
-        'weight-regular': Font['fontWeight'];
-        'plain-medium': Font['fontFamily'];
-        'weight-medium': Font['fontWeight'];
+        brandRegular: Font['fontFamily'];
+        weightRegular: Font['fontWeight'];
+        plainMedium: Font['fontFamily'];
+        weightMedium: Font['fontWeight'];
       };
       opacity: {
         level1: number;

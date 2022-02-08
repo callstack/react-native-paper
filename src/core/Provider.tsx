@@ -13,13 +13,9 @@ import LightTheme from '../styles/themes/v2/LightTheme';
 import DarkTheme from '../styles/themes/v2/DarkTheme';
 import { addEventListener } from '../utils/addEventListener';
 import { get } from 'lodash';
-import type {
-  MD2ThemeExtended,
-  MD3ThemeExtended,
-  MD3Token,
-  ThemeBase,
-} from '../types';
+import type { Theme, MD3Token, ThemeBase } from '../types';
 import { tokenify } from '../styles/themes/v3/useToken';
+import { typescale } from '../styles/themes/v3/tokens';
 
 type Props = {
   children: React.ReactNode;
@@ -82,22 +78,23 @@ const Provider = ({ ...props }: Props) => {
     const { theme: providedTheme } = props;
 
     const theme = providedTheme
-      ? providedTheme
+      ? (providedTheme as ThemeBase)
       : ((colorScheme === 'dark' ? DarkTheme : LightTheme) as ThemeBase);
 
-    const isV3 = theme?.version === 3;
+    const isV3 = theme.version === 3;
 
-    const extendedTheme = {
+    const extendedThemeBase = {
       ...theme,
+      version: theme.version || 3,
       animation: {
-        ...theme.animation,
         scale: reduceMotionEnabled ? 0 : 1,
       },
       isV3,
+      typescale,
     };
 
     if (!isV3) {
-      return extendedTheme as MD2ThemeExtended;
+      return extendedThemeBase as Theme;
     }
 
     /**
@@ -108,10 +105,9 @@ const Provider = ({ ...props }: Props) => {
      * getToken('md.sys.color.secondary')
      */
     const getToken = (tokenKey: MD3Token) =>
-      // Todo: resolve typescale problems
-      get(tokenify(extendedTheme as any), tokenKey);
+      get(tokenify(extendedThemeBase as Theme), tokenKey);
 
-    return { ...extendedTheme, getToken } as MD3ThemeExtended;
+    return { ...extendedThemeBase, getToken } as Theme;
   };
 
   const { children, settings } = props;
