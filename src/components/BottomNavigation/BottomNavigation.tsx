@@ -761,16 +761,13 @@ const BottomNavigation = ({
               // This trick gives the illusion that we are animating between active and inactive colors.
               // This is to ensure that we can use native driver, as colors cannot be animated with native driver.
               const activeOpacity = active;
-              const inactiveOpacityInterpolation = active.interpolate({
+              const inactiveOpacity = active.interpolate({
                 inputRange: [0, 1],
                 outputRange: [1, 0],
               });
 
-              const inactiveOpacity = !isV3
-                ? inactiveOpacityInterpolation
-                : focused
-                ? inactiveOpacityInterpolation
-                : 1;
+              const v3ActiveOpacity = focused ? 1 : 0;
+              const v3InactiveOpacity = focused ? 0 : 1;
 
               // Scale horizontally the outline pill
               const outlineScale = focused
@@ -787,7 +784,7 @@ const BottomNavigation = ({
                 route,
                 borderless: true,
                 centered: true,
-                rippleColor: touchColor,
+                rippleColor: isV3 ? 'transparent' : touchColor,
                 onPress: () => handleTabPress(index),
                 testID: getTestID({ route }),
                 accessibilityLabel: getAccessibilityLabel({ route }),
@@ -837,7 +834,7 @@ const BottomNavigation = ({
                         style={[
                           styles.iconWrapper,
                           isV3 && styles.v3IconWrapper,
-                          { opacity: activeOpacity },
+                          { opacity: isV3 ? v3ActiveOpacity : activeOpacity },
                         ]}
                       >
                         {renderIcon ? (
@@ -858,7 +855,9 @@ const BottomNavigation = ({
                         style={[
                           styles.iconWrapper,
                           isV3 && styles.v3IconWrapper,
-                          { opacity: inactiveOpacity },
+                          {
+                            opacity: isV3 ? v3InactiveOpacity : inactiveOpacity,
+                          },
                         ]}
                       >
                         {renderIcon ? (
