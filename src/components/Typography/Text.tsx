@@ -6,12 +6,12 @@ import {
   StyleSheet,
 } from 'react-native';
 import { useTheme } from '../../core/theming';
-import { Font, MD3Token, MD3TypescaleKey, Theme } from '../../types';
+import { Font, MD3TypescaleKey, ThemeProp } from '../../types';
 
 type Props = React.ComponentProps<typeof NativeText> & {
   style?: StyleProp<TextStyle>;
   variant?: keyof typeof MD3TypescaleKey;
-  theme: Theme;
+  theme?: ThemeProp;
 };
 
 // @component-group Typography
@@ -23,32 +23,34 @@ type Props = React.ComponentProps<typeof NativeText> & {
  */
 
 const Text: React.ForwardRefRenderFunction<{}, Props> = (
-  { style, variant, theme, ...rest },
+  { style, variant, theme: initialTheme, ...rest },
   ref
 ) => {
   const root = React.useRef<NativeText | null>(null);
-  const { isV3, colors, fonts, getToken } = useTheme(theme);
+  // FIXME: destructure it in TS 4.6+
+  const theme = useTheme(initialTheme);
 
   React.useImperativeHandle(ref, () => ({
     setNativeProps: (args: Object) => root.current?.setNativeProps(args),
   }));
 
-  if (isV3 && variant) {
+  if (theme.isV3 && variant) {
     const stylesByVariant = Object.keys(MD3TypescaleKey).reduce(
-      (acc, key) => ({
-        ...acc,
-        [key]: {
-          fontSize: getToken(`md.sys.typescale.${key}.size` as MD3Token),
-          fontWeight: getToken(`md.sys.typescale.${key}.weight` as MD3Token),
-          lineHeight: getToken(
-            `md.sys.typescale.${key}.line-height` as MD3Token
-          ),
-          letterSpacing: getToken(
-            `md.sys.typescale.${key}.tracking` as MD3Token
-          ),
-          color: getToken('md.sys.color.on-surface'),
-        },
-      }),
+      (acc, key) => {
+        const { size, weight, lineHeight, tracking } =
+          theme.typescale[key as keyof typeof MD3TypescaleKey];
+
+        return {
+          ...acc,
+          [key]: {
+            fontSize: size,
+            fontWeight: weight,
+            lineHeight: lineHeight,
+            letterSpacing: tracking,
+            color: theme.colors.onSurface,
+          },
+        };
+      },
       {} as {
         [key in MD3TypescaleKey]: {
           fontSize: number;
@@ -70,8 +72,9 @@ const Text: React.ForwardRefRenderFunction<{}, Props> = (
       ref={root}
       style={[
         {
-          ...fonts?.regular,
-          color: colors?.text,
+          ...theme.fonts?.regular,
+          color:
+            theme.version === 3 ? theme.colors?.onSurface : theme.colors.text,
         },
         styles.text,
         style,

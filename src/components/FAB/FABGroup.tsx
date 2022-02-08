@@ -230,11 +230,11 @@ const FABGroup = ({
 
   const toggle = () => onStateChange({ open: !open });
 
-  const { colors } = theme;
+  const textColor = theme.isV3 ? theme.colors.onSurface : theme?.colors?.text;
 
   const labelColor = theme.dark
-    ? colors?.text
-    : color(colors?.text).fade(0.54).rgb().string();
+    ? textColor
+    : color(textColor).fade(0.54).rgb().string();
   const backdropOpacity = open
     ? backdrop.interpolate({
         inputRange: [0, 0.5, 1],
@@ -268,7 +268,9 @@ const FABGroup = ({
             styles.backdrop,
             {
               opacity: backdropOpacity,
-              backgroundColor: colors?.backdrop,
+              backgroundColor: theme.isV3
+                ? theme.colors.onSurfaceVariant
+                : theme.colors?.backdrop,
             },
           ]}
         />

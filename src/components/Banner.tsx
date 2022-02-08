@@ -212,7 +212,14 @@ const Banner = ({
               </View>
             ) : null}
             <Text
-              style={[styles.message, { color: theme.colors?.text }]}
+              style={[
+                styles.message,
+                {
+                  color: theme.isV3
+                    ? theme.colors.onSurface
+                    : theme.colors.text,
+                },
+              ]}
               accessibilityLiveRegion={visible ? 'polite' : 'none'}
               accessibilityRole="alert"
             >

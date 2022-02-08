@@ -5,6 +5,7 @@ import {
   StyleProp,
   StyleSheet,
 } from 'react-native';
+import type { Theme } from '../../../types';
 import { useTheme } from '../../../core/theming';
 
 type Props = React.ComponentProps<typeof NativeText> & {
@@ -12,6 +13,7 @@ type Props = React.ComponentProps<typeof NativeText> & {
   /**
    * @optional
    */
+  theme?: Theme;
 };
 
 // @component-group Typography
@@ -22,11 +24,11 @@ type Props = React.ComponentProps<typeof NativeText> & {
  * @extends Text props https://reactnative.dev/docs/text#props
  */
 const Text: React.ForwardRefRenderFunction<{}, Props> = (
-  { style, ...rest }: Props,
+  { style, theme: overrideTheme, ...rest }: Props,
   ref
 ) => {
   const root = React.useRef<NativeText | null>(null);
-  const { fonts, colors } = useTheme();
+  const theme = useTheme(overrideTheme);
 
   React.useImperativeHandle(ref, () => ({
     setNativeProps: (args: Object) => root.current?.setNativeProps(args),
@@ -38,8 +40,8 @@ const Text: React.ForwardRefRenderFunction<{}, Props> = (
       ref={root}
       style={[
         {
-          ...fonts?.regular,
-          color: colors?.text,
+          ...theme.fonts?.regular,
+          color: theme.isV3 ? theme.colors?.onSurface : theme.colors.text,
         },
         styles.text,
         style,

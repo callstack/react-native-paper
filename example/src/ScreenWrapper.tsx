@@ -32,7 +32,7 @@ export default function ScreenWrapper({
     styles.container,
     {
       backgroundColor: isV3
-        ? (getToken('md.sys.color.background') as string)
+        ? (getToken?.('md.sys.color.background') as string)
         : colors?.background,
       paddingBottom: insets.bottom,
       paddingLeft: insets.left,

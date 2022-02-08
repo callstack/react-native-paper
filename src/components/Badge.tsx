@@ -86,8 +86,12 @@ const Badge = ({
     }).start();
   }, [visible, opacity, scale]);
 
-  const { backgroundColor = theme.colors?.notification, ...restStyle } =
-    (StyleSheet.flatten(style) || {}) as TextStyle;
+  const {
+    backgroundColor = theme.isV3
+      ? theme.colors.primary
+      : theme.colors?.notification,
+    ...restStyle
+  } = (StyleSheet.flatten(style) || {}) as TextStyle;
 
   const textColor = getContrastingColor(backgroundColor || white, white, black);
 
