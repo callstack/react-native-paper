@@ -143,7 +143,7 @@ const Snackbar = ({
             duration === Number.POSITIVE_INFINITY ||
             duration === Number.NEGATIVE_INFINITY;
 
-          if (finished && !isInfinity) {
+          if (!isInfinity) {
             hideTimeout.current = setTimeout(
               onDismiss,
               duration
