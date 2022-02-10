@@ -79,7 +79,8 @@ const Icon = ({ source, color, size, theme, ...rest }: Props) => {
     typeof source === 'object' && source.direction && source.source
       ? source.source
       : source;
-  const iconColor = color || theme.colors?.text;
+  const iconColor =
+    color || (theme.isV3 ? theme.colors.onSurface : theme.colors.text);
 
   if (isImageSource(s)) {
     return (

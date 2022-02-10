@@ -12,7 +12,7 @@ import ScreenWrapper from '../ScreenWrapper';
 
 const SectionHeader = ({ children }: React.PropsWithChildren<{}>) => {
   return (
-    <Text variant="title-large" style={styles.sectionHeader}>
+    <Text variant="titleLarge" style={styles.sectionHeader}>
       {children}
     </Text>
   );
@@ -32,53 +32,53 @@ const TextExample = () => {
 
         <SectionHeader>Text component:</SectionHeader>
 
-        <Text style={styles.text} variant="display-large">
+        <Text style={styles.text} variant="displayLarge">
           Display Large
         </Text>
-        <Text style={styles.text} variant="display-medium">
+        <Text style={styles.text} variant="displayMedium">
           Display Medium
         </Text>
-        <Text style={styles.text} variant="display-small">
+        <Text style={styles.text} variant="displaySmall">
           Display small
         </Text>
 
-        <Text style={styles.text} variant="headline-large">
+        <Text style={styles.text} variant="headlineLarge">
           Headline Large
         </Text>
-        <Text style={styles.text} variant="headline-medium">
+        <Text style={styles.text} variant="headlineMedium">
           Headline Medium
         </Text>
-        <Text style={styles.text} variant="headline-small">
+        <Text style={styles.text} variant="headlineSmall">
           Headline Small
         </Text>
 
-        <Text style={styles.text} variant="title-large">
+        <Text style={styles.text} variant="titleLarge">
           Title Large
         </Text>
-        <Text style={styles.text} variant="title-medium">
+        <Text style={styles.text} variant="titleMedium">
           Title Medium
         </Text>
-        <Text style={styles.text} variant="title-small">
+        <Text style={styles.text} variant="titleSmall">
           Title Small
         </Text>
 
-        <Text style={styles.text} variant="body-large">
+        <Text style={styles.text} variant="bodyLarge">
           Body Large
         </Text>
-        <Text style={styles.text} variant="body-medium">
+        <Text style={styles.text} variant="bodyMedium">
           Body Medium
         </Text>
-        <Text style={styles.text} variant="body-small">
+        <Text style={styles.text} variant="bodySmall">
           Body Small
         </Text>
 
-        <Text style={styles.text} variant="label-large">
+        <Text style={styles.text} variant="labelLarge">
           Label Large
         </Text>
-        <Text style={styles.text} variant="label-medium">
+        <Text style={styles.text} variant="labelMedium">
           Label Medium
         </Text>
-        <Text style={styles.text} variant="label-small">
+        <Text style={styles.text} variant="labelSmall">
           Label Small
         </Text>
       </View>

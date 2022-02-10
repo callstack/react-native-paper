@@ -12,10 +12,15 @@ type Props = React.ComponentProps<typeof Text> & {
 };
 
 const StyledText = ({ alpha = 1, family, style, ...rest }: Props) => {
-  const { colors, fonts } = useTheme();
+  const theme = useTheme();
 
-  const textColor = color(colors?.text).alpha(alpha).rgb().string();
-  const font = fonts?.[family];
+  const textColor = color(
+    theme.isV3 ? theme.colors.onSurface : theme.colors?.text
+  )
+    .alpha(alpha)
+    .rgb()
+    .string();
+  const font = theme.fonts?.[family];
   const writingDirection = I18nManager.isRTL ? 'rtl' : 'ltr';
 
   return (

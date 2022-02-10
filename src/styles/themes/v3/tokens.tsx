@@ -54,19 +54,19 @@ const ref = {
     neutral20: 'rgba(49, 48, 51, 1)',
     neutral10: 'rgba(28, 27, 31, 1)',
     neutral0: 'rgba(0, 0, 0, 1)',
-    'neutral-variant100': 'rgba(255, 255, 255, 1)',
-    'neutral-variant99': 'rgba(255, 251, 254, 1)',
-    'neutral-variant95': 'rgba(245, 238, 250, 1)',
-    'neutral-variant90': 'rgba(231, 224, 236, 1)',
-    'neutral-variant80': 'rgba(202, 196, 208, 1)',
-    'neutral-variant70': 'rgba(174, 169, 180, 1)',
-    'neutral-variant60': 'rgba(147, 143, 153, 1)',
-    'neutral-variant50': 'rgba(121, 116, 126, 1)',
-    'neutral-variant40': 'rgba(96, 93, 102, 1)',
-    'neutral-variant30': 'rgba(73, 69, 79, 1)',
-    'neutral-variant20': 'rgba(50, 47, 55, 1)',
-    'neutral-variant10': 'rgba(29, 26, 34, 1)',
-    'neutral-variant0': 'rgba(0, 0, 0, 1)',
+    neutralVariant100: 'rgba(255, 255, 255, 1)',
+    neutralVariant99: 'rgba(255, 251, 254, 1)',
+    neutralVariant95: 'rgba(245, 238, 250, 1)',
+    neutralVariant90: 'rgba(231, 224, 236, 1)',
+    neutralVariant80: 'rgba(202, 196, 208, 1)',
+    neutralVariant70: 'rgba(174, 169, 180, 1)',
+    neutralVariant60: 'rgba(147, 143, 153, 1)',
+    neutralVariant50: 'rgba(121, 116, 126, 1)',
+    neutralVariant40: 'rgba(96, 93, 102, 1)',
+    neutralVariant30: 'rgba(73, 69, 79, 1)',
+    neutralVariant20: 'rgba(50, 47, 55, 1)',
+    neutralVariant10: 'rgba(29, 26, 34, 1)',
+    neutralVariant0: 'rgba(0, 0, 0, 1)',
     error100: 'rgba(255, 255, 255, 1)',
     error99: 'rgba(255, 251, 249, 1)',
     error95: 'rgba(252, 238, 238, 1)',
@@ -83,11 +83,11 @@ const ref = {
   },
 
   typeface: {
-    'brand-regular': 'Roboto Regular',
-    'weight-regular': '400' as Font['fontWeight'],
+    brandRegular: 'Roboto Regular',
+    weightRegular: '400' as Font['fontWeight'],
 
-    'plain-medium': 'Roboto Medium',
-    'weight-medium': '500' as Font['fontWeight'],
+    plainMedium: 'Roboto Medium',
+    weightMedium: '500' as Font['fontWeight'],
   },
 
   opacity: {
@@ -99,101 +99,101 @@ const ref = {
 };
 
 const regularType = {
-  font: ref.typeface['brand-regular'],
+  font: ref.typeface.brandRegular,
   tracking: 0,
-  weight: ref.typeface['weight-regular'],
+  weight: ref.typeface.weightRegular,
 };
 
 const mediumType = {
-  font: ref.typeface['plain-medium'],
+  font: ref.typeface.plainMedium,
   tracking: 0.15,
-  weight: ref.typeface['weight-medium'],
+  weight: ref.typeface.weightMedium,
 };
 
-const typescale = {
-  'display-large': {
+export const typescale = {
+  displayLarge: {
     ...regularType,
-    'line-height': 64,
+    lineHeight: 64,
     size: 57,
   },
-  'display-medium': {
+  displayMedium: {
     ...regularType,
-    'line-height': 52,
+    lineHeight: 52,
     size: 45,
   },
-  'display-small': {
+  displaySmall: {
     ...regularType,
-    'line-height': 44,
+    lineHeight: 44,
     size: 36,
   },
 
-  'headline-large': {
+  headlineLarge: {
     ...regularType,
-    'line-height': 40,
+    lineHeight: 40,
     size: 32,
   },
-  'headline-medium': {
+  headlineMedium: {
     ...regularType,
-    'line-height': 36,
+    lineHeight: 36,
     size: 28,
   },
-  'headline-small': {
+  headlineSmall: {
     ...regularType,
-    'line-height': 32,
+    lineHeight: 32,
     size: 24,
   },
 
-  'title-large': {
+  titleLarge: {
     ...regularType,
-    'line-height': 28,
+    lineHeight: 28,
     size: 22,
   },
-  'title-medium': {
+  titleMedium: {
     ...mediumType,
-    'line-height': 24,
+    lineHeight: 24,
     size: 16,
   },
-  'title-small': {
+  titleSmall: {
     ...mediumType,
     tracking: 0.1,
-    'line-height': 20,
+    lineHeight: 20,
     size: 14,
   },
 
-  'label-large': {
+  labelLarge: {
     ...regularType,
     tracking: 0.1,
-    'line-height': 20,
+    lineHeight: 20,
     size: 14,
   },
-  'label-medium': {
+  labelMedium: {
     ...mediumType,
     tracking: 0.5,
-    'line-height': 16,
+    lineHeight: 16,
     size: 12,
   },
-  'label-small': {
+  labelSmall: {
     ...mediumType,
     tracking: 0.5,
-    'line-height': 16,
+    lineHeight: 16,
     size: 11,
   },
 
-  'body-large': {
+  bodyLarge: {
     ...mediumType,
-    'line-height': 24,
+    lineHeight: 24,
     size: 16,
   },
-  'body-medium': {
+  bodyMedium: {
     ...mediumType,
     tracking: 0.25,
-    'line-height': 20,
+    lineHeight: 20,
     size: 14,
   },
-  'body-small': {
+  bodySmall: {
     ...mediumType,
     tracking: 0.4,
-    'line-height': 16,
+    lineHeight: 16,
     size: 12,
   },
 };

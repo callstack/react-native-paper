@@ -169,11 +169,10 @@ const ListAccordion = ({
     }
   };
 
-  const titleColor = color(theme?.colors?.text).alpha(0.87).rgb().string();
-  const descriptionColor = color(theme?.colors?.text)
-    .alpha(0.54)
-    .rgb()
-    .string();
+  const textColor = theme.isV3 ? theme.colors.onSurface : theme?.colors?.text;
+
+  const titleColor = color(textColor).alpha(0.87).rgb().string();
+  const descriptionColor = color(textColor).alpha(0.54).rgb().string();
 
   const expandedInternal = expandedProp !== undefined ? expandedProp : expanded;
 

@@ -91,7 +91,8 @@ const Switch = ({
   theme,
   ...rest
 }: Props) => {
-  const checkedColor = color || theme?.colors?.accent;
+  const checkedColor =
+    color || (theme.isV3 ? theme.colors.primary : theme?.colors?.accent);
 
   const onTintColor =
     Platform.OS === 'ios'

@@ -1,3 +1,4 @@
+import type { $DeepPartial } from '@callstack/react-theme-provider';
 import type * as React from 'react';
 
 export type Font = {
@@ -25,7 +26,7 @@ export type Fonts = {
 
 type Mode = 'adaptive' | 'exact';
 
-export type Material2Colors = {
+export type MD2Colors = {
   primary: string;
   background: string;
   surface: string;
@@ -37,45 +38,45 @@ export type Material2Colors = {
   placeholder: string;
   backdrop: string;
   notification: string;
-
-  [key: string]: string;
 };
 
-export type MD3Color = {
+export type MD3Colors = {
   primary: string;
-  'primary-container': string;
+  primaryContainer: string;
   secondary: string;
-  'secondary-container': string;
+  secondaryContainer: string;
   tertiary: string;
-  'tertiary-container': string;
+  tertiaryContainer: string;
   surface: string;
-  'surface-variant': string;
-  'surface-disabled': string;
+  surfaceVariant: string;
+  surfaceDisabled: string;
   background: string;
   error: string;
-  'error-container': string;
-  'on-primary': string;
-  'on-primary-container': string;
-  'on-secondary': string;
-  'on-secondary-container': string;
-  'on-tertiary': string;
-  'on-tertiary-container': string;
-  'on-surface': string;
-  'on-surface-variant': string;
-  'on-surface-disabled': string;
-  'on-error': string;
-  'on-error-container': string;
-  'on-background': string;
+  errorContainer: string;
+  onPrimary: string;
+  onPrimaryContainer: string;
+  onSecondary: string;
+  onSecondaryContainer: string;
+  onTertiary: string;
+  onTertiaryContainer: string;
+  onSurface: string;
+  onSurfaceVariant: string;
+  onSurfaceDisabled: string;
+  onError: string;
+  onErrorContainer: string;
+  onBackground: string;
   outline: string;
   shadow: string;
-  'inverse-surface': string;
-  'inverse-on-surface': string;
-  'inverse-primary': string;
+  inverseSurface: string;
+  inverseOnSurface: string;
+  inversePrimary: string;
 };
 
 export type MD3Palette = {};
 
-type SharedTheme = {
+export type ThemeProp = $DeepPartial<Theme>;
+
+export type ThemeBase = {
   dark: boolean;
   mode?: Mode;
   roundness: number;
@@ -83,114 +84,73 @@ type SharedTheme = {
   animation: {
     scale: number;
   };
-};
+} & (
+  | { version: 2; colors: MD2Colors; isV3: false }
+  | { version: 3; colors: MD3Colors; isV3: true }
+);
 
-export type Theme = ThemeBase & ThemeExtended;
-
-export type ThemeBase = AllXOR<[MD2ThemeBase, MD3ThemeBase]>;
-
-export type ThemeExtended = AllXOR<[MD2ThemeExtended, MD3ThemeExtended]>;
-
-// MD2 types
-export type MD2ThemeBase = SharedTheme & {
-  version: 2;
-  colors: Material2Colors;
-};
-
-export type MD2ThemeExtended = MD2ThemeBase & {
-  isV3: false;
-  md(): void;
+export type Theme = ThemeBase & {
+  typescale: MD3Typescale;
 };
 
 // MD3 types
 export enum MD3TypescaleKey {
-  'display-large' = 'display-large',
-  'display-medium' = 'display-medium',
-  'display-small' = 'display-small',
+  displayLarge = 'displayLarge',
+  displayMedium = 'displayMedium',
+  displaySmall = 'displaySmall',
 
-  'headline-large' = 'headline-large',
-  'headline-medium' = 'headline-medium',
-  'headline-small' = 'headline-small',
+  headlineLarge = 'headlineLarge',
+  headlineMedium = 'headlineMedium',
+  headlineSmall = 'headlineSmall',
 
-  'title-large' = 'title-large',
-  'title-medium' = 'title-medium',
-  'title-small' = 'title-small',
+  titleLarge = 'titleLarge',
+  titleMedium = 'titleMedium',
+  titleSmall = 'titleSmall',
 
-  'label-large' = 'label-large',
-  'label-medium' = 'label-medium',
-  'label-small' = 'label-small',
+  labelLarge = 'labelLarge',
+  labelMedium = 'labelMedium',
+  labelSmall = 'labelSmall',
 
-  'body-large' = 'body-large',
-  'body-medium' = 'body-medium',
-  'body-small' = 'body-small',
+  bodyLarge = 'bodyLarge',
+  bodyMedium = 'bodyMedium',
+  bodySmall = 'bodySmall',
 }
 
-export type MD3Typescale = {
+export type MD3Type = {
   font: string;
   tracking: number;
   weight: Font['fontWeight'];
-  'line-height': number;
+  lineHeight: number;
   size: number;
 };
 
-export type MD3ThemeBase = SharedTheme & {
-  version: 3;
-  tokens: {
-    md: {
-      sys: {
-        color: MD3Color;
-        elevation: string[];
-        typescale: {
-          [key in MD3TypescaleKey]: MD3Typescale;
-        };
+export type MD3Typescale = {
+  [key in MD3TypescaleKey]: MD3Type;
+};
+
+export type MD3Tokens = {
+  md: {
+    sys: {
+      color: MD3Colors;
+      typescale: MD3Typescale;
+    };
+    ref: {
+      palette: MD3Palette;
+      typeface: {
+        brandRegular: Font['fontFamily'];
+        weightRegular: Font['fontWeight'];
+        plainMedium: Font['fontFamily'];
+        weightMedium: Font['fontWeight'];
       };
-      ref: {
-        palette: MD3Palette;
-        typeface: {
-          'brand-regular': Font['fontFamily'];
-          'weight-regular': Font['fontWeight'];
-          'plain-medium': Font['fontFamily'];
-          'weight-medium': Font['fontWeight'];
-        };
-        opacity: {
-          level1: number;
-          level2: number;
-          level3: number;
-          level4: number;
-        };
+      opacity: {
+        level1: number;
+        level2: number;
+        level3: number;
+        level4: number;
       };
     };
   };
 };
-
-export type MD3ThemeExtended = MD3ThemeBase & {
-  isV3: true;
-  md(tokenKey: MD3Token): string | number | object;
-};
-
-export type MD3Token = Path<MD3ThemeBase['tokens']>;
-
-type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
-
-export type XOR<T, U> = T | U extends object
-  ? (Without<T, U> & U) | (Without<U, T> & T)
-  : T | U;
-
-export type AllXOR<T extends any[]> = T extends [infer Only]
-  ? Only
-  : T extends [infer A, infer B, ...infer Rest]
-  ? AllXOR<[XOR<A, B>, ...Rest]>
-  : never;
-
-type PathImpl<T, K extends keyof T> = K extends string
-  ? T[K] extends Record<string, any>
-    ? T[K] extends ArrayLike<any>
-      ? K | `${K}.${PathImpl<T[K], Exclude<keyof T[K], keyof Array<any>>>}`
-      : K | `${K}.${PathImpl<T[K], keyof T[K]>}`
-    : K
-  : never;
-
-type Path<T> = PathImpl<T, keyof T> | keyof T;
 
 export type $Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 export type $RemoveChildren<T extends React.ComponentType<any>> = $Omit<

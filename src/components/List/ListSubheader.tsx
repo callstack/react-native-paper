@@ -30,9 +30,14 @@ type Props = React.ComponentProps<typeof Text> & {
  * ```
  */
 const ListSubheader = ({ style, theme, ...rest }: Props) => {
-  const { colors, fonts } = theme;
+  const { fonts } = theme;
   const font = fonts.medium;
-  const textColor = color(colors?.text).alpha(0.54).rgb().string();
+  const textColor = color(
+    theme.isV3 ? theme.colors.onSurface : theme.colors.text
+  )
+    .alpha(0.54)
+    .rgb()
+    .string();
 
   return (
     <Text

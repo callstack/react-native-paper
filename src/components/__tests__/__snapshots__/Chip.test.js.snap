@@ -697,7 +697,7 @@ exports[`renders outlined disabled chip 1`] = `
                 "textAlignVertical": "center",
               },
               Object {
-                "color": "rgba(0, 0, 0, 0.26)",
+                "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
                 "marginLeft": 8,

@@ -1,65 +1,49 @@
 import LightTheme from './LightTheme';
-import type { MD3ThemeBase } from '../../../types';
+import type { ThemeBase } from '../../../types';
 import { tokens } from './tokens';
 import color from 'color';
 
 const { palette } = tokens.md.ref;
 
-const DarkTheme: MD3ThemeBase = {
+const DarkTheme: ThemeBase = {
   ...LightTheme,
   dark: true,
   mode: 'adaptive',
   version: 3,
-  tokens: {
-    ...tokens,
-    md: {
-      ...tokens.md,
-      sys: {
-        ...tokens.md.sys,
-        color: {
-          primary: palette.primary80,
-          'primary-container': palette.primary30,
-          secondary: palette.secondary80,
-          'secondary-container': palette.secondary30,
-          tertiary: palette.tertiary80,
-          'tertiary-container': palette.tertiary30,
-          surface: palette.neutral10,
-          'surface-variant': palette['neutral-variant30'],
-          'surface-disabled': color(palette.neutral90)
-            .alpha(tokens.md.ref.opacity.level2)
-            .rgb()
-            .string(),
-          background: palette.neutral10,
-          error: palette.error80,
-          'error-container': palette.error30,
-          'on-primary': palette.primary20,
-          'on-primary-container': palette.primary90,
-          'on-secondary': palette.secondary20,
-          'on-secondary-container': palette.secondary90,
-          'on-tertiary': palette.tertiary20,
-          'on-tertiary-container': palette.tertiary90,
-          'on-surface': palette.neutral90,
-          'on-surface-variant': palette['neutral-variant80'],
-          'on-surface-disabled': palette.neutral90,
-          'on-error': palette.error20,
-          'on-error-container': palette.error80,
-          'on-background': palette.neutral90,
-          outline: palette['neutral-variant60'],
-          shadow: palette.neutral0,
-          'inverse-on-surface': palette.neutral90,
-          'inverse-surface': palette.neutral20,
-          'inverse-primary': palette.primary40,
-        },
-
-        elevation: [
-          '0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px rgba(0, 0, 0, 0.15)',
-          '0px 1px 2px rgba(0, 0, 0, 0.3), 0px 2px 6px rgba(0, 0, 0, 0.15)',
-          '0px 1px 3px rgba(0, 0, 0, 0.3), 0px 4px 8px rgba(0, 0, 0, 0.15)',
-          '0px 2px 3px rgba(0, 0, 0, 0.3), 0px 6px 10px rgba(0, 0, 0, 0.15)',
-          '0px 4px 4px rgba(0, 0, 0, 0.3), 0px 8px 12px rgba(0, 0, 0, 0.15)',
-        ],
-      },
-    },
+  isV3: true,
+  colors: {
+    primary: palette.primary80,
+    primaryContainer: palette.primary30,
+    secondary: palette.secondary80,
+    secondaryContainer: palette.secondary30,
+    tertiary: palette.tertiary80,
+    tertiaryContainer: palette.tertiary30,
+    surface: palette.neutral10,
+    surfaceVariant: palette.neutralVariant30,
+    surfaceDisabled: color(palette.neutral90)
+      .alpha(tokens.md.ref.opacity.level2)
+      .rgb()
+      .string(),
+    background: palette.neutral10,
+    error: palette.error80,
+    errorContainer: palette.error30,
+    onPrimary: palette.primary20,
+    onPrimaryContainer: palette.primary90,
+    onSecondary: palette.secondary20,
+    onSecondaryContainer: palette.secondary90,
+    onTertiary: palette.tertiary20,
+    onTertiaryContainer: palette.tertiary90,
+    onSurface: palette.neutral90,
+    onSurfaceVariant: palette.neutralVariant80,
+    onSurfaceDisabled: palette.neutral90,
+    onError: palette.error20,
+    onErrorContainer: palette.error80,
+    onBackground: palette.neutral90,
+    outline: palette.neutralVariant60,
+    shadow: palette.neutral0,
+    inverseOnSurface: palette.neutral90,
+    inverseSurface: palette.neutral20,
+    inversePrimary: palette.primary40,
   },
 };
 
