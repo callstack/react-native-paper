@@ -112,6 +112,11 @@ const CheckboxItem = ({
     checkbox = <Checkbox {...checkboxProps} />;
   }
 
+  const textColor = theme.isV3 ? theme.colors.onSurface : theme.colors.text;
+  const disabledTextColor = theme.isV3
+    ? theme.colors.onSurfaceDisabled
+    : theme.colors.disabled;
+
   return (
     <TouchableRipple
       accessibilityLabel={label}
@@ -134,7 +139,7 @@ const CheckboxItem = ({
           style={[
             styles.label,
             {
-              color: disabled ? theme.colors.disabled : theme.colors.text,
+              color: disabled ? disabledTextColor : textColor,
               textAlign: isLeading ? 'right' : 'left',
             },
             labelStyle,

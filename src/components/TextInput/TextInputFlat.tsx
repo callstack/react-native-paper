@@ -133,21 +133,29 @@ const TextInputFlat = ({
     placeholderColor,
     errorColor;
 
+  const textColor = theme.isV3 ? theme.colors?.onSurface : theme.colors?.text;
+  const disabledColor = theme.isV3
+    ? theme.colors?.onSurfaceDisabled
+    : theme.colors?.disabled;
+
   if (disabled) {
-    inputTextColor = activeColor = color(colors?.text || black)
+    inputTextColor = activeColor = color(textColor || black)
       .alpha(0.54)
       .rgb()
       .string();
-    placeholderColor = colors?.disabled || black;
+    placeholderColor = disabledColor || black;
     underlineColorCustom = 'transparent';
   } else {
-    inputTextColor = colors?.text || black;
+    inputTextColor = textColor || black;
     activeColor = error
       ? colors?.error || black
       : activeUnderlineColor || colors?.primary || black;
-    placeholderColor = colors?.placeholder || black;
+    placeholderColor =
+      (theme.isV3
+        ? theme.colors.onSurfaceDisabled
+        : theme.colors?.placeholder) || black;
     errorColor = colors?.error || black;
-    underlineColorCustom = underlineColor || colors?.disabled || black;
+    underlineColorCustom = underlineColor || disabledColor || black;
   }
 
   const containerStyle = {

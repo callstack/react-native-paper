@@ -82,7 +82,10 @@ const DrawerItem = ({
     : 'transparent';
   const contentColor = active
     ? colors?.primary
-    : color(colors?.text).alpha(0.68).rgb().string();
+    : color(theme.isV3 ? theme.colors.onSurface : theme?.colors?.text)
+        .alpha(0.68)
+        .rgb()
+        .string();
   const font = theme.fonts.medium;
   const labelMargin = icon ? 32 : 0;
 

@@ -5,6 +5,7 @@ import Provider from '../Provider';
 import { useTheme } from '../theming';
 import DarkTheme from '../../styles/themes/v2/DarkTheme';
 import LightTheme from '../../styles/themes/v2/LightTheme';
+import { typescale } from '../../styles/themes/v3/tokens';
 
 const mockAppearance = () => {
   jest.mock('react-native/Libraries/Utilities/Appearance', () => {
@@ -64,8 +65,8 @@ const createProvider = (theme) => {
   );
 };
 
-const ExtendedLightTheme = { ...LightTheme, isV3: false };
-const ExtendedDarkTheme = { ...DarkTheme, isV3: false };
+const ExtendedLightTheme = { ...LightTheme, typescale, isV3: false };
+const ExtendedDarkTheme = { ...DarkTheme, typescale, isV3: false };
 
 describe('Provider', () => {
   beforeEach(() => {

@@ -101,10 +101,19 @@ const CheckboxAndroid = ({
 
   const checked = status === 'checked';
   const indeterminate = status === 'indeterminate';
-  const checkedColor = rest.color || theme?.colors?.accent;
+
+  const themeTextColor = theme.isV3
+    ? theme.colors.onSurface
+    : theme.colors.text;
+  const themeDisabledColor = theme.isV3
+    ? theme.colors.onSurfaceDisabled
+    : theme.colors.text;
+
+  const checkedColor =
+    rest.color || theme.isV3 ? theme.colors.primary : theme?.colors?.accent;
   const uncheckedColor =
     rest.uncheckedColor ||
-    color(theme?.colors?.text)
+    color(themeTextColor)
       .alpha(theme.dark ? 0.7 : 0.54)
       .rgb()
       .string();
@@ -112,8 +121,8 @@ const CheckboxAndroid = ({
   let rippleColor, checkboxColor;
 
   if (disabled) {
-    rippleColor = color(theme?.colors?.text).alpha(0.16).rgb().string();
-    checkboxColor = theme?.colors?.disabled;
+    rippleColor = color(themeTextColor).alpha(0.16).rgb().string();
+    checkboxColor = themeDisabledColor;
   } else {
     rippleColor = color(checkedColor).fade(0.32).rgb().string();
     checkboxColor = checked ? checkedColor : uncheckedColor;

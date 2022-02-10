@@ -93,23 +93,26 @@ const TextInputOutlined = ({
 
   let inputTextColor, activeColor, outlineColor, placeholderColor, errorColor;
 
+  const textColor = theme.isV3 ? theme.colors.onSurface : theme.colors.text;
+  const disabledColor = theme.isV3
+    ? theme.colors.onSurfaceDisabled
+    : theme.colors.disabled;
+  const themePlaceholderColor = theme.isV3
+    ? theme.colors.onSurface
+    : theme.colors.placeholder;
+
   if (disabled) {
     const isTransparent = color(customOutlineColor).alpha() === 0;
-    inputTextColor = activeColor = color(colors?.text)
-      .alpha(0.54)
-      .rgb()
-      .string();
-    placeholderColor = colors?.disabled || black;
-    outlineColor = isTransparent
-      ? customOutlineColor
-      : colors?.disabled || black;
+    inputTextColor = activeColor = color(textColor).alpha(0.54).rgb().string();
+    placeholderColor = disabledColor || black;
+    outlineColor = isTransparent ? customOutlineColor : disabledColor || black;
   } else {
-    inputTextColor = colors?.text || black;
+    inputTextColor = textColor || black;
     activeColor = error
       ? colors?.error || black
       : activeOutlineColor || colors?.primary || black;
-    placeholderColor = colors?.placeholder || black;
-    outlineColor = customOutlineColor || colors?.placeholder || black;
+    placeholderColor = themePlaceholderColor || black;
+    outlineColor = customOutlineColor || themePlaceholderColor || black;
     errorColor = colors?.error || black;
   }
 

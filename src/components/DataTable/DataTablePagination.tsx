@@ -81,7 +81,9 @@ const PaginationControls = ({
   onPageChange,
   showFastPaginationControls,
 }: PaginationControlsProps) => {
-  const { colors } = useTheme();
+  const theme = useTheme();
+
+  const textColor = theme.isV3 ? theme.colors.onSurface : theme.colors.text;
 
   return (
     <>
@@ -95,7 +97,7 @@ const PaginationControls = ({
               direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
             />
           )}
-          color={colors?.text}
+          color={textColor}
           disabled={page === 0}
           onPress={() => onPageChange(0)}
           accessibilityLabel="page-first"
@@ -110,7 +112,7 @@ const PaginationControls = ({
             direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
           />
         )}
-        color={colors?.text}
+        color={textColor}
         disabled={page === 0}
         onPress={() => onPageChange(page - 1)}
         accessibilityLabel="chevron-left"
@@ -124,7 +126,7 @@ const PaginationControls = ({
             direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
           />
         )}
-        color={colors?.text}
+        color={textColor}
         disabled={numberOfPages === 0 || page === numberOfPages - 1}
         onPress={() => onPageChange(page + 1)}
         accessibilityLabel="chevron-right"
@@ -139,7 +141,7 @@ const PaginationControls = ({
               direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
             />
           )}
-          color={colors?.text}
+          color={textColor}
           disabled={numberOfPages === 0 || page === numberOfPages - 1}
           onPress={() => onPageChange(numberOfPages - 1)}
           accessibilityLabel="page-last"
@@ -270,7 +272,12 @@ const DataTablePagination = ({
   selectPageDropdownAccessibilityLabel,
   ...rest
 }: Props) => {
-  const labelColor = color(theme?.colors?.text).alpha(0.6).rgb().string();
+  const labelColor = color(
+    theme.isV3 ? theme.colors.onSurface : theme?.colors.text
+  )
+    .alpha(0.6)
+    .rgb()
+    .string();
 
   return (
     <View

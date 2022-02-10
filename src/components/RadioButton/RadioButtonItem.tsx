@@ -115,7 +115,7 @@ const RadioButtonItem = ({
   color,
   uncheckedColor,
   status,
-  theme: { colors },
+  theme,
   accessibilityLabel,
   testID,
   mode,
@@ -132,6 +132,11 @@ const RadioButtonItem = ({
   } else {
     radioButton = <RadioButton {...radioButtonProps} />;
   }
+
+  const computedStyle = {
+    color: theme.isV3 ? theme.colors.onSurface : theme.colors?.text,
+    textAlign: isLeading ? 'right' : 'left',
+  } as TextStyle;
 
   return (
     <RadioButtonContext.Consumer>
@@ -153,16 +158,7 @@ const RadioButtonItem = ({
           >
             <View style={[styles.container, style]} pointerEvents="none">
               {isLeading && radioButton}
-              <Text
-                style={[
-                  styles.label,
-                  {
-                    color: colors?.text,
-                    textAlign: isLeading ? 'right' : 'left',
-                  },
-                  labelStyle,
-                ]}
-              >
+              <Text style={[styles.label, computedStyle, labelStyle]}>
                 {label}
               </Text>
               {!isLeading && radioButton}

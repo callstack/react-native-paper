@@ -47,6 +47,7 @@ exports[`renders list section with custom title style 1`] = `
           "fontWeight": "100",
         },
       },
+      "isV3": false,
       "roundness": 4,
       "version": 2,
     }
@@ -357,6 +358,7 @@ exports[`renders list section with subheader 1`] = `
           "fontWeight": "100",
         },
       },
+      "isV3": false,
       "roundness": 4,
       "version": 2,
     }
@@ -665,6 +667,7 @@ exports[`renders list section without subheader 1`] = `
           "fontWeight": "100",
         },
       },
+      "isV3": false,
       "roundness": 4,
       "version": 2,
     }

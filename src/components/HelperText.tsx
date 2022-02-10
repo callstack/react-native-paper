@@ -124,7 +124,7 @@ const HelperText = ({
   const textColor =
     type === 'error'
       ? colors?.error
-      : color(colors?.text)
+      : color(theme.isV3 ? theme.colors.onSurface : theme?.colors?.text)
           .alpha(dark ? 0.7 : 0.54)
           .rgb()
           .string();

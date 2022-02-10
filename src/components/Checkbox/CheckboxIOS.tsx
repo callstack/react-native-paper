@@ -61,14 +61,25 @@ const CheckboxIOS = ({
   const checked = status === 'checked';
   const indeterminate = status === 'indeterminate';
 
-  const checkedColor = disabled
-    ? theme?.colors?.disabled
-    : rest.color || theme?.colors?.accent;
+  const disabledColor = theme.isV3
+    ? theme.colors.onSurfaceDisabled
+    : theme?.colors?.disabled;
+
+  const defaultColor = theme.isV3
+    ? theme.colors.primary
+    : theme?.colors?.accent;
+
+  const checkedColor = disabled ? disabledColor : rest.color || defaultColor;
 
   let rippleColor;
 
   if (disabled) {
-    rippleColor = color(theme?.colors?.text).alpha(0.16).rgb().string();
+    rippleColor = color(
+      theme.isV3 ? theme.colors.onSurface : theme?.colors?.text
+    )
+      .alpha(0.16)
+      .rgb()
+      .string();
   } else {
     rippleColor = color(checkedColor).fade(0.32).rgb().string();
   }
