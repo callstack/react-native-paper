@@ -169,10 +169,15 @@ export type AllXOR<T extends any[]> = T extends [infer Only]
   ? AllXOR<[XOR<A, B>, ...Rest]>
   : never;
 
+type PathImplArray<T, K extends keyof T> = PathImpl<
+  T[K],
+  Exclude<keyof T[K], keyof Array<any>>
+>;
+
 type PathImpl<T, K extends keyof T> = K extends string
   ? T[K] extends Record<string, any>
     ? T[K] extends ArrayLike<any>
-      ? K | `${K}.${PathImpl<T[K], Exclude<keyof T[K], keyof Array<any>>>}`
+      ? K | `${K}.${PathImplArray<T, K>}`
       : K | `${K}.${PathImpl<T[K], keyof T[K]>}`
     : K
   : never;
