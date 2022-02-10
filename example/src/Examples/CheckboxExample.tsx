@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import {
   Paragraph,
   Checkbox,
-  Colors,
+  MD2Colors,
   TouchableRipple,
 } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
@@ -29,7 +29,7 @@ const CheckboxExample = () => {
           <Paragraph>Custom</Paragraph>
           <View pointerEvents="none">
             <Checkbox
-              color={Colors.blue500}
+              color={MD2Colors.blue500}
               status={checkedCustom ? 'checked' : 'unchecked'}
             />
           </View>

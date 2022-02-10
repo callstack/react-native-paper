@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
-import { Paragraph, Switch, Colors, TouchableRipple } from 'react-native-paper';
+import {
+  Paragraph,
+  Switch,
+  MD2Colors,
+  TouchableRipple,
+} from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
 const SwitchExample = () => {
@@ -28,7 +33,7 @@ const SwitchExample = () => {
         <View style={styles.row}>
           <Paragraph>Custom {switchValueCustomlLabel}</Paragraph>
           <View pointerEvents="none">
-            <Switch value={valueCustom} color={Colors.blue500} />
+            <Switch value={valueCustom} color={MD2Colors.blue500} />
           </View>
         </View>
       </TouchableRipple>
@@ -55,7 +60,7 @@ const SwitchExample = () => {
         <Switch
           value={valueCustom}
           onValueChange={() => setCustomValue(!valueCustom)}
-          color={Colors.blue500}
+          color={MD2Colors.blue500}
         />
       </View>
       <View style={styles.row}>

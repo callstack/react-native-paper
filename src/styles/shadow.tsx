@@ -1,7 +1,7 @@
-import * as Colors from './themes/v2/colors';
+import * as MD2Colors from './themes/v2/colors';
 import { Animated } from 'react-native';
 
-const SHADOW_COLOR = Colors.black;
+const SHADOW_COLOR = MD2Colors.black;
 const SHADOW_OPACITY = 0.24;
 
 export default function shadow(elevation: number | Animated.Value = 0) {

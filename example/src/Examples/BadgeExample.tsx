@@ -6,7 +6,7 @@ import {
   List,
   Paragraph,
   Switch,
-  Colors,
+  MD2Colors,
 } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
@@ -34,7 +34,7 @@ const BadgeExample = () => {
             <IconButton icon="inbox" size={36} style={styles.button} />
             <Badge
               visible={visible}
-              style={[styles.badge, { backgroundColor: Colors.blue500 }]}
+              style={[styles.badge, { backgroundColor: MD2Colors.blue500 }]}
             >
               999+
             </Badge>

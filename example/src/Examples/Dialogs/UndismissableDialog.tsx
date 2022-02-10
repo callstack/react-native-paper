@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Paragraph, Button, Portal, Dialog, Colors } from 'react-native-paper';
+import {
+  Paragraph,
+  Button,
+  Portal,
+  Dialog,
+  MD2Colors,
+} from 'react-native-paper';
 
 const DialogWithLongText = ({
   visible,
@@ -15,7 +21,7 @@ const DialogWithLongText = ({
         <Paragraph>This is an undismissable dialog!!</Paragraph>
       </Dialog.Content>
       <Dialog.Actions>
-        <Button color={Colors.teal500} disabled>
+        <Button color={MD2Colors.teal500} disabled>
           Disagree
         </Button>
         <Button onPress={close}>Agree</Button>

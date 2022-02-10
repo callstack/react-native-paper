@@ -48,10 +48,10 @@ const DURATION = 2400;
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { ActivityIndicator, Colors } from 'react-native-paper';
+ * import { ActivityIndicator, MD2Colors } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <ActivityIndicator animating={true} color={Colors.red800} />
+ *   <ActivityIndicator animating={true} color={MD2Colors.red800} />
  * );
  *
  * export default MyComponent;

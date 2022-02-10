@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Paragraph, Button, Portal, Dialog, Colors } from 'react-native-paper';
+import {
+  Paragraph,
+  Button,
+  Portal,
+  Dialog,
+  MD2Colors,
+} from 'react-native-paper';
 
 const DialogWithCustomColors = ({
   visible,
@@ -11,17 +17,17 @@ const DialogWithCustomColors = ({
   <Portal>
     <Dialog
       onDismiss={close}
-      style={{ backgroundColor: Colors.purple900 }}
+      style={{ backgroundColor: MD2Colors.purple900 }}
       visible={visible}
     >
-      <Dialog.Title style={{ color: Colors.white }}>Alert</Dialog.Title>
+      <Dialog.Title style={{ color: MD2Colors.white }}>Alert</Dialog.Title>
       <Dialog.Content>
-        <Paragraph style={{ color: Colors.white }}>
+        <Paragraph style={{ color: MD2Colors.white }}>
           This is a dialog with custom colors
         </Paragraph>
       </Dialog.Content>
       <Dialog.Actions>
-        <Button color={Colors.white} onPress={close}>
+        <Button color={MD2Colors.white} onPress={close}>
           OK
         </Button>
       </Dialog.Actions>
