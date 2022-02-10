@@ -79,19 +79,8 @@ const DrawerCollapsedItem = ({
   badge = false,
   ...rest
 }: Props) => {
-  const { md } = theme;
+  const { isV3 } = theme;
   const { scale } = theme.animation;
-
-  const backgroundColor = active
-    ? (md('md.sys.color.secondary-container') as string)
-    : 'transparent';
-  const labelColor = active
-    ? (md('md.sys.color.on-surface') as string)
-    : (md('md.sys.color.on-surface-variant') as string);
-  const iconColor = active
-    ? (md('md.sys.color.on-secondary-container') as string)
-    : (md('md.sys.color.on-surface-variant') as string);
-
   const font = theme.fonts.medium;
 
   const { current: animScale } = React.useRef<Animated.Value>(
@@ -113,6 +102,20 @@ const DrawerCollapsedItem = ({
   };
 
   const iconPadding = ((!label ? itemSize : outlineHeight) - iconSize) / 2;
+
+  if (!isV3) {
+    return null;
+  }
+
+  const backgroundColor = active
+    ? theme.colors.secondaryContainer
+    : 'transparent';
+  const labelColor = active
+    ? theme.colors.onSurface
+    : theme.colors.onSurfaceVariant;
+  const iconColor = active
+    ? theme.colors.onSecondaryContainer
+    : theme.colors.onSurfaceVariant;
 
   return (
     <View {...rest}>
@@ -162,7 +165,7 @@ const DrawerCollapsedItem = ({
 
           {label ? (
             <Text
-              variant="label-medium"
+              variant="labelMedium"
               selectable={false}
               numberOfLines={2}
               style={[

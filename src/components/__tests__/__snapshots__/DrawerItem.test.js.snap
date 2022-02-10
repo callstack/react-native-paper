@@ -32,7 +32,7 @@ exports[`renders DrawerItem with icon 1`] = `
             "backgroundColor": "transparent",
             "borderRadius": 4,
           },
-          undefined,
+          false,
           undefined,
         ],
       ]
@@ -46,7 +46,7 @@ exports[`renders DrawerItem with icon 1`] = `
             "flexDirection": "row",
             "padding": 8,
           },
-          undefined,
+          false,
         ]
       }
     >
@@ -145,7 +145,7 @@ exports[`renders active DrawerItem 1`] = `
             "backgroundColor": "rgba(98, 0, 238, 0.12)",
             "borderRadius": 4,
           },
-          undefined,
+          false,
           undefined,
         ],
       ]
@@ -159,7 +159,7 @@ exports[`renders active DrawerItem 1`] = `
             "flexDirection": "row",
             "padding": 8,
           },
-          undefined,
+          false,
         ]
       }
     >
@@ -258,7 +258,7 @@ exports[`renders basic DrawerItem 1`] = `
             "backgroundColor": "transparent",
             "borderRadius": 4,
           },
-          undefined,
+          false,
           undefined,
         ],
       ]
@@ -272,7 +272,7 @@ exports[`renders basic DrawerItem 1`] = `
             "flexDirection": "row",
             "padding": 8,
           },
-          undefined,
+          false,
         ]
       }
     >

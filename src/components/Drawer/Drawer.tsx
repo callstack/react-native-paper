@@ -1,7 +1,7 @@
 // @component ./DrawerItem.tsx
 export { default as Item } from './DrawerItem';
 
-// @component ./DrawerItem.tsx
+// @component ./DrawerCollapsedItem.tsx
 export { default as CollapsedItem } from './DrawerCollapsedItem';
 
 // @component ./DrawerSection.tsx

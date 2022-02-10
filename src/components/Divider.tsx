@@ -64,10 +64,10 @@ const Divider = ({
   bold = false,
   ...rest
 }: Props) => {
-  const { dark: isDarkTheme, isV3, md } = theme;
+  const { dark: isDarkTheme, isV3 } = theme;
 
   const dividerColor = isV3
-    ? (md('md.sys.color.surface-variant') as string)
+    ? theme.colors.surfaceVariant
     : color(isDarkTheme ? white : black)
         .alpha(0.12)
         .rgb()
