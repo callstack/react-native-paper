@@ -89,12 +89,9 @@ export type ThemeBase = {
   | { version: 3; colors: MD3Colors; isV3: true }
 );
 
-export type ThemeUtils = {
-  getToken?(token: MD3Token): any;
+export type Theme = ThemeBase & {
   typescale: MD3Typescale;
 };
-
-export type Theme = ThemeBase & ThemeUtils;
 
 // MD3 types
 export enum MD3TypescaleKey {
@@ -154,35 +151,6 @@ export type MD3Tokens = {
     };
   };
 };
-
-export type MD3Token = Path<MD3Tokens>;
-
-type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
-
-export type XOR<T, U> = T | U extends object
-  ? (Without<T, U> & U) | (Without<U, T> & T)
-  : T | U;
-
-export type AllXOR<T extends any[]> = T extends [infer Only]
-  ? Only
-  : T extends [infer A, infer B, ...infer Rest]
-  ? AllXOR<[XOR<A, B>, ...Rest]>
-  : never;
-
-type PathImplArray<T, K extends keyof T> = PathImpl<
-  T[K],
-  Exclude<keyof T[K], keyof Array<any>>
->;
-
-type PathImpl<T, K extends keyof T> = K extends string
-  ? T[K] extends Record<string, any>
-    ? T[K] extends ArrayLike<any>
-      ? K | `${K}.${PathImplArray<T, K>}`
-      : K | `${K}.${PathImpl<T[K], keyof T[K]>}`
-    : K
-  : never;
-
-type Path<T> = PathImpl<T, keyof T> | keyof T;
 
 export type $Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 export type $RemoveChildren<T extends React.ComponentType<any>> = $Omit<

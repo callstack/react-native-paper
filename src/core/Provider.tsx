@@ -12,9 +12,7 @@ import PortalHost from '../components/Portal/PortalHost';
 import LightTheme from '../styles/themes/v2/LightTheme';
 import DarkTheme from '../styles/themes/v2/DarkTheme';
 import { addEventListener } from '../utils/addEventListener';
-import { get } from 'lodash';
-import type { Theme, MD3Token, ThemeBase } from '../types';
-import { tokenify } from '../styles/themes/v3/useToken';
+import type { Theme, ThemeBase } from '../types';
 import { typescale } from '../styles/themes/v3/tokens';
 
 type Props = {
@@ -93,21 +91,7 @@ const Provider = ({ ...props }: Props) => {
       typescale,
     };
 
-    if (!isV3) {
-      return extendedThemeBase as Theme;
-    }
-
-    /**
-     * Function that allows to access theme values using Material 3 tokens
-     * @param {string} tokenKey - Material 3 token
-     *
-     * ## Usage
-     * getToken('md.sys.color.secondary')
-     */
-    const getToken = (tokenKey: MD3Token) =>
-      get(tokenify(extendedThemeBase as Theme), tokenKey);
-
-    return { ...extendedThemeBase, getToken } as Theme;
+    return extendedThemeBase as Theme;
   };
 
   const { children, settings } = props;
