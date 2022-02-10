@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Avatar, List, Colors } from 'react-native-paper';
+import { Avatar, List, MD2Colors } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
 const AvatarExample = () => {
@@ -9,9 +9,9 @@ const AvatarExample = () => {
       <List.Section title="Text">
         <View style={styles.row}>
           <Avatar.Text
-            style={[styles.avatar, { backgroundColor: Colors.yellow500 }]}
+            style={[styles.avatar, { backgroundColor: MD2Colors.yellow500 }]}
             label="XD"
-            color={Colors.black}
+            color={MD2Colors.black}
           />
           <Avatar.Text style={styles.avatar} label="XD" />
           <Avatar.Text style={styles.avatar} label="XD" size={80} />
@@ -20,9 +20,9 @@ const AvatarExample = () => {
       <List.Section title="Icon">
         <View style={styles.row}>
           <Avatar.Icon
-            style={[styles.avatar, { backgroundColor: Colors.yellow500 }]}
+            style={[styles.avatar, { backgroundColor: MD2Colors.yellow500 }]}
             icon="folder"
-            color={Colors.black}
+            color={MD2Colors.black}
           />
           <Avatar.Icon style={styles.avatar} icon="folder" />
           <Avatar.Icon style={styles.avatar} icon="folder" size={80} />

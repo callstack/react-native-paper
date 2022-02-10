@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import {
   Paragraph,
   RadioButton,
-  Colors,
+  MD2Colors,
   TouchableRipple,
 } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
@@ -43,7 +43,7 @@ const RadioButtonExample = () => {
           <View pointerEvents="none">
             <RadioButton
               value="custom"
-              color={Colors.blue500}
+              color={MD2Colors.blue500}
               status={checked === 'custom' ? 'checked' : 'unchecked'}
             />
           </View>

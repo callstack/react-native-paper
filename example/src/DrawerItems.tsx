@@ -7,7 +7,7 @@ import {
   Switch,
   TouchableRipple,
   Text,
-  Colors,
+  MD2Colors,
   useTheme,
 } from 'react-native-paper';
 import * as Updates from 'expo-updates';
@@ -73,7 +73,7 @@ const DrawerItems = ({
             key={props.key}
             theme={
               props.key === 3
-                ? { colors: { primary: Colors.tealA200 } }
+                ? { colors: { primary: MD2Colors.tealA200 } }
                 : undefined
             }
             active={drawerItemIndex === index}
