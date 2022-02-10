@@ -15,17 +15,17 @@ export const getAppbarColor = (
   elevation: number,
   customBackground?: ColorValue
 ) => {
-  const { isV3, md, dark: isDarkTheme, mode, colors } = theme;
+  const { isV3, dark: isDarkTheme, mode, colors } = theme;
   const isAdaptiveMode = mode === 'adaptive';
   let backgroundColor;
   if (customBackground) {
     backgroundColor = customBackground;
   } else if (isV3) {
-    backgroundColor = md('md.sys.color.surface') as string;
+    backgroundColor = colors.surface;
   } else if (!isV3) {
     if (isDarkTheme && isAdaptiveMode) {
       backgroundColor = overlay(elevation, colors?.surface);
-    } else backgroundColor = colors?.primary;
+    } else backgroundColor = colors.primary;
   }
 
   return backgroundColor;
@@ -50,10 +50,10 @@ export const modeAppbarHeight = {
 };
 
 export const modeTextVariant = {
-  small: 'title-large',
-  medium: 'headline-small',
-  large: 'headline-medium',
-  'center-aligned': 'title-large',
+  small: 'titleLarge',
+  medium: 'headlineSmall',
+  large: 'headlineMedium',
+  'center-aligned': 'titleLarge',
 };
 
 export const renderAppbarContent = ({

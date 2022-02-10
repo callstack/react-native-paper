@@ -90,14 +90,14 @@ const AppbarAction = ({
   isLeading,
   ...rest
 }: Props) => {
-  const { isV3, md } = useTheme();
+  const theme = useTheme();
 
   const actionIconColor = iconColor
     ? iconColor
-    : isV3
+    : theme.isV3
     ? isLeading
-      ? (md('md.sys.color.on-surface') as string)
-      : (md('md.sys.color.on-surface-variant') as string)
+      ? theme.colors.onSurface
+      : theme.colors.onSurfaceVariant
     : color(black).alpha(0.54).rgb().string();
 
   return (

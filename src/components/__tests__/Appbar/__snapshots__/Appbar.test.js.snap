@@ -373,7 +373,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
           "flex": 1,
           "paddingHorizontal": 12,
         },
-        undefined,
+        false,
         Array [
           Object {
             "marginLeft": 8,
