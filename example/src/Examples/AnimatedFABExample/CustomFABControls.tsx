@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
-import { Colors, Paragraph, RadioButton } from 'react-native-paper';
+import { MD2Colors, Paragraph, RadioButton } from 'react-native-paper';
 import type {
   AnimatedFABAnimateFrom,
   AnimatedFABIconMode,
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    backgroundColor: Colors.white,
+    backgroundColor: MD2Colors.white,
     paddingVertical: 12,
     paddingHorizontal: 16,
   },

@@ -1,6 +1,7 @@
-import * as Colors from './styles/themes/v2/colors';
+import * as MD2Colors from './styles/themes/v2/colors';
 
-export { Colors };
+export { MD3Colors } from './styles/themes/v3/tokens';
+export { MD2Colors };
 
 export { useTheme, withTheme, ThemeProvider } from './core/theming';
 

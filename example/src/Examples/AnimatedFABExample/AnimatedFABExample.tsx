@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, StyleSheet, FlatList, Animated, Platform } from 'react-native';
 import type { NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
-import { Colors, useTheme, Avatar, Paragraph } from 'react-native-paper';
+import { MD2Colors, useTheme, Avatar, Paragraph } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { animatedFABExampleData } from '../../../utils';
 import CustomFAB from './CustomFAB';
@@ -42,7 +42,7 @@ const AnimatedFABExample = () => {
         <Avatar.Text
           style={[styles.avatar, { backgroundColor: item.bgColor }]}
           label={item.initials}
-          color={Colors.white}
+          color={MD2Colors.white}
           size={40}
         />
         <View style={styles.itemTextContentContainer}>
@@ -75,7 +75,7 @@ const AnimatedFABExample = () => {
 
             <Icon
               name={item.favorite ? 'star' : 'star-outline'}
-              color={item.favorite ? Colors.orange500 : Colors.grey500}
+              color={item.favorite ? MD2Colors.orange500 : MD2Colors.grey500}
               size={20}
               onPress={() => setVisible(!visible)}
               style={styles.icon}
