@@ -67,10 +67,14 @@ const RadioButtonIOS = ({
   const disabledColor = theme.isV3
     ? theme.colors.onSurfaceDisabled
     : theme.colors?.disabled;
-  const accentColor = theme.isV3 ? theme.colors.primary : theme.colors?.accent;
+  const checkedButtonColor = theme.isV3
+    ? theme.colors.primary
+    : theme.colors?.accent;
   const textColor = theme.isV3 ? theme.colors.onSurface : theme.colors.text;
 
-  const checkedColor = disabled ? disabledColor : rest.color || accentColor;
+  const checkedColor = disabled
+    ? disabledColor
+    : rest.color || checkedButtonColor;
 
   let rippleColor: string;
 

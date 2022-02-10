@@ -88,7 +88,7 @@ const Badge = ({
 
   const {
     backgroundColor = theme.isV3
-      ? theme.colors.primary
+      ? theme.colors.error
       : theme.colors?.notification,
     ...restStyle
   } = (StyleSheet.flatten(style) || {}) as TextStyle;

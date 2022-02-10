@@ -6,7 +6,7 @@ import ScreenWrapper from '../ScreenWrapper';
 const ButtonExample = () => {
   const theme = useTheme();
 
-  const accentColor = theme.isV3 ? theme.colors.primary : theme.colors.accent;
+  const color = theme.isV3 ? theme.colors.secondary : theme.colors.accent;
 
   return (
     <ScreenWrapper>
@@ -15,7 +15,7 @@ const ButtonExample = () => {
           <Button onPress={() => {}} style={styles.button}>
             Default
           </Button>
-          <Button color={accentColor} onPress={() => {}} style={styles.button}>
+          <Button color={color} onPress={() => {}} style={styles.button}>
             Custom
           </Button>
           <Button disabled onPress={() => {}} style={styles.button}>
@@ -44,7 +44,7 @@ const ButtonExample = () => {
           </Button>
           <Button
             mode="outlined"
-            color={accentColor}
+            color={color}
             onPress={() => {}}
             style={styles.button}
           >
@@ -92,7 +92,7 @@ const ButtonExample = () => {
           </Button>
           <Button
             mode="contained"
-            color={accentColor}
+            color={color}
             onPress={() => {}}
             style={styles.button}
           >

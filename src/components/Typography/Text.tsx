@@ -73,8 +73,7 @@ const Text: React.ForwardRefRenderFunction<{}, Props> = (
       style={[
         {
           ...theme.fonts?.regular,
-          color:
-            theme.version === 3 ? theme.colors?.onSurface : theme.colors.text,
+          color: theme.isV3 ? theme.colors?.onSurface : theme.colors.text,
         },
         styles.text,
         style,

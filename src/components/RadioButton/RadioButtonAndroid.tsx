@@ -111,10 +111,12 @@ const RadioButtonAndroid = ({
   const disabledColor = theme.isV3
     ? theme.colors.onSurfaceDisabled
     : theme.colors?.disabled;
-  const accentColor = theme.isV3 ? theme.colors.primary : theme.colors?.accent;
+  const checkedButtonColor = theme.isV3
+    ? theme.colors.primary
+    : theme.colors?.accent;
   const textColor = theme.isV3 ? theme.colors.onSurface : theme.colors.text;
 
-  const checkedColor = rest.color || accentColor;
+  const checkedColor = rest.color || checkedButtonColor;
   const uncheckedColor =
     rest.uncheckedColor ||
     color(textColor)
