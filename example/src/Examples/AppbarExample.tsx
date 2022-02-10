@@ -88,26 +88,26 @@ const AppbarExample = ({ navigation }: Props) => {
         contentContainerStyle={styles.contentContainer}
       >
         <View style={styles.row}>
-          <TextComponent variant="label-large">Left icon</TextComponent>
+          <TextComponent variant="labelLarge">Left icon</TextComponent>
           <Switch value={showLeftIcon} onValueChange={setShowLeftIcon} />
         </View>
         {!isV3 && (
           <View style={styles.row}>
-            <TextComponent variant="label-large">Subtitle</TextComponent>
+            <TextComponent variant="labelLarge">Subtitle</TextComponent>
             <Switch value={showSubtitle} onValueChange={setShowSubtitle} />
           </View>
         )}
         <View style={styles.row}>
-          <TextComponent variant="label-large">Search icon</TextComponent>
+          <TextComponent variant="labelLarge">Search icon</TextComponent>
           <Switch value={showSearchIcon} onValueChange={setShowSearchIcon} />
         </View>
         <View style={styles.row}>
-          <TextComponent variant="label-large">More icon</TextComponent>
+          <TextComponent variant="labelLarge">More icon</TextComponent>
           <Switch value={showMoreIcon} onValueChange={setShowMoreIcon} />
         </View>
         {isV3 && (
           <View style={styles.row}>
-            <TextComponent variant="label-large">Calendar icon</TextComponent>
+            <TextComponent variant="labelLarge">Calendar icon</TextComponent>
             <Switch
               value={isCenterAlignedMode ? false : showCalendarIcon}
               disabled={isCenterAlignedMode}
@@ -116,11 +116,11 @@ const AppbarExample = ({ navigation }: Props) => {
           </View>
         )}
         <View style={styles.row}>
-          <TextComponent variant="label-large">Custom Color</TextComponent>
+          <TextComponent variant="labelLarge">Custom Color</TextComponent>
           <Switch value={showCustomColor} onValueChange={setShowCustomColor} />
         </View>
         <View style={styles.row}>
-          <TextComponent variant="label-large">Exact Dark Theme</TextComponent>
+          <TextComponent variant="labelLarge">Exact Dark Theme</TextComponent>
           <Switch value={showExactTheme} onValueChange={setShowExactTheme} />
         </View>
         {isV3 && (
@@ -130,27 +130,25 @@ const AppbarExample = ({ navigation }: Props) => {
               setAppbarMode(value as AppbarModes)
             }
           >
-            <TextComponent variant="label-large" style={styles.appbarMode}>
+            <TextComponent variant="labelLarge" style={styles.appbarMode}>
               Appbar Mode
             </TextComponent>
             <View style={styles.row}>
-              <TextComponent variant="label-large">
+              <TextComponent variant="labelLarge">
                 Small (default)
               </TextComponent>
               <RadioButton value="small" />
             </View>
             <View style={styles.row}>
-              <TextComponent variant="label-large">Medium</TextComponent>
+              <TextComponent variant="labelLarge">Medium</TextComponent>
               <RadioButton value="medium" />
             </View>
             <View style={styles.row}>
-              <TextComponent variant="label-large">Large</TextComponent>
+              <TextComponent variant="labelLarge">Large</TextComponent>
               <RadioButton value="large" />
             </View>
             <View style={styles.row}>
-              <TextComponent variant="label-large">
-                Center-aligned
-              </TextComponent>
+              <TextComponent variant="labelLarge">Center-aligned</TextComponent>
               <RadioButton value="center-aligned" />
             </View>
           </RadioButton.Group>

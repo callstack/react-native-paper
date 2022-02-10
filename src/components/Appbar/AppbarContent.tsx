@@ -102,14 +102,14 @@ const AppbarContent = ({
   mode = 'small',
   ...rest
 }: Props) => {
-  const { fonts, isV3, md } = theme;
+  const { fonts, isV3, colors } = theme;
 
   const subtitleColor = color(titleColor).alpha(0.7).rgb().string();
 
   const titleTextColor = titleColor
     ? titleColor
     : isV3
-    ? (md('md.sys.color.on-surface') as string)
+    ? colors.onSurface
     : white;
 
   const modeContainerStyles = {
