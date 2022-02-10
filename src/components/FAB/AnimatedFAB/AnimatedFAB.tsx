@@ -151,7 +151,11 @@ const AnimatedFAB = ({
     .rgb()
     .string();
 
-  const { backgroundColor = disabled ? disabledColor : theme?.colors?.accent } =
+  const buttonBackgroundColor = theme.isV3
+    ? theme.colors.primary
+    : theme?.colors?.accent;
+
+  const { backgroundColor = disabled ? disabledColor : buttonBackgroundColor } =
     StyleSheet.flatten<ViewStyle>(style) || {};
 
   let foregroundColor: string;

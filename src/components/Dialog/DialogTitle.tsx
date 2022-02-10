@@ -55,7 +55,11 @@ const DialogTitle = ({ children, theme, style, ...rest }: Props) => (
     // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
     accessibilityTraits="header"
     accessibilityRole="header"
-    style={[styles.text, { color: theme.colors?.text }, style]}
+    style={[
+      styles.text,
+      { color: theme.isV3 ? theme.colors.onSurface : theme?.colors?.text },
+      style,
+    ]}
     {...rest}
   >
     {children}

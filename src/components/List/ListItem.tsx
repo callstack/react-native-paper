@@ -176,8 +176,10 @@ const ListItem = ({
     );
   };
 
+  const textColor = theme.isV3 ? theme.colors.onSurface : theme.colors.text;
+
   const renderTitle = () => {
-    const titleColor = color(theme?.colors?.text).alpha(0.87).rgb().string();
+    const titleColor = color(textColor).alpha(0.87).rgb().string();
 
     return typeof title === 'function' ? (
       title({
@@ -198,10 +200,7 @@ const ListItem = ({
     );
   };
 
-  const descriptionColor = color(theme?.colors?.text)
-    .alpha(0.54)
-    .rgb()
-    .string();
+  const descriptionColor = color(textColor).alpha(0.54).rgb().string();
 
   return (
     <TouchableRipple

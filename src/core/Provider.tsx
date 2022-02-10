@@ -12,13 +12,8 @@ import PortalHost from '../components/Portal/PortalHost';
 import LightTheme from '../styles/themes/v2/LightTheme';
 import DarkTheme from '../styles/themes/v2/DarkTheme';
 import { addEventListener } from '../utils/addEventListener';
-import { get } from 'lodash';
-import type {
-  MD2ThemeExtended,
-  MD3ThemeExtended,
-  MD3Token,
-  ThemeBase,
-} from '../types';
+import type { Theme, ThemeBase } from '../types';
+import { typescale } from '../styles/themes/v3/tokens';
 
 type Props = {
   children: React.ReactNode;
@@ -81,34 +76,22 @@ const Provider = ({ ...props }: Props) => {
     const { theme: providedTheme } = props;
 
     const theme = providedTheme
-      ? providedTheme
+      ? (providedTheme as ThemeBase)
       : ((colorScheme === 'dark' ? DarkTheme : LightTheme) as ThemeBase);
 
-    const isV3 = theme?.version === 3;
+    const isV3 = theme.version === 3;
 
-    const extendedTheme = {
+    const extendedThemeBase = {
       ...theme,
+      version: theme.version || 3,
       animation: {
-        ...theme.animation,
         scale: reduceMotionEnabled ? 0 : 1,
       },
       isV3,
+      typescale,
     };
 
-    if (!isV3) {
-      return extendedTheme as MD2ThemeExtended;
-    }
-
-    /**
-     * Function that allows to access theme values using Material 3 tokens
-     * @param {string} tokenKey - Material 3 token
-     *
-     * ## Usage
-     * md('md.sys.color.secondary')
-     */
-    const md = (tokenKey: MD3Token) => get(theme.tokens, tokenKey);
-
-    return { ...extendedTheme, md } as MD3ThemeExtended;
+    return extendedThemeBase as Theme;
   };
 
   const { children, settings } = props;

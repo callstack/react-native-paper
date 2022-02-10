@@ -111,7 +111,9 @@ const AffixAdornment: React.FunctionComponent<
 const TextInputAffix = ({ text, textStyle: labelStyle, theme }: Props) => {
   const { textStyle, onLayout, topPosition, side, visible, paddingHorizontal } =
     React.useContext(AffixContext);
-  const textColor = color(theme?.colors?.text)
+  const textColor = color(
+    theme.isV3 ? theme.colors.onSurface : theme.colors?.text
+  )
     .alpha(theme.dark ? 0.7 : 0.54)
     .rgb()
     .string();

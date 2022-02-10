@@ -104,10 +104,10 @@ const TouchableRipple = ({
 
     onPressIn?.(e);
 
-    const { dark, colors } = theme;
+    const { dark } = theme;
     const calculatedRippleColor =
       rippleColor ||
-      color(colors?.text)
+      color(theme.isV3 ? theme.colors.onSurface : theme.colors.text)
         .alpha(dark ? 0.32 : 0.2)
         .rgb()
         .string();

@@ -163,7 +163,11 @@ const FAB = ({
     .rgb()
     .string();
 
-  const { backgroundColor = disabled ? disabledColor : theme?.colors?.accent } =
+  const buttonBackgroundColor = theme.isV3
+    ? theme.colors.secondary
+    : theme.colors.accent;
+
+  const { backgroundColor = disabled ? disabledColor : buttonBackgroundColor } =
     (StyleSheet.flatten(style) || {}) as ViewStyle;
 
   let foregroundColor;

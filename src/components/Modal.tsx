@@ -109,7 +109,9 @@ export default function Modal({
     visibleRef.current = visible;
   });
 
-  const { colors, animation } = useTheme();
+  const theme = useTheme();
+
+  const { scale } = theme.animation;
 
   const opacity = useAnimatedValue(visible ? 1 : 0);
 
@@ -138,8 +140,6 @@ export default function Modal({
       handleBack
     );
 
-    const { scale } = animation;
-
     Animated.timing(opacity, {
       toValue: 1,
       duration: scale * DEFAULT_DURATION,
@@ -158,7 +158,6 @@ export default function Modal({
 
   const hideModal = () => {
     removeListeners();
-    const { scale } = animation;
 
     Animated.timing(opacity, {
       toValue: 0,
@@ -219,7 +218,12 @@ export default function Modal({
         <Animated.View
           style={[
             styles.backdrop,
-            { backgroundColor: colors?.backdrop, opacity },
+            {
+              backgroundColor: theme.isV3
+                ? theme.colors.onSurfaceVariant
+                : theme.colors?.backdrop,
+              opacity,
+            },
           ]}
         />
       </TouchableWithoutFeedback>

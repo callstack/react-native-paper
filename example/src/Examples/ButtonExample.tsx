@@ -4,7 +4,9 @@ import { Button, List, useTheme } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
 const ButtonExample = () => {
-  const { colors } = useTheme();
+  const theme = useTheme();
+
+  const color = theme.isV3 ? theme.colors.secondary : theme.colors.accent;
 
   return (
     <ScreenWrapper>
@@ -13,11 +15,7 @@ const ButtonExample = () => {
           <Button onPress={() => {}} style={styles.button}>
             Default
           </Button>
-          <Button
-            color={colors?.accent}
-            onPress={() => {}}
-            style={styles.button}
-          >
+          <Button color={color} onPress={() => {}} style={styles.button}>
             Custom
           </Button>
           <Button disabled onPress={() => {}} style={styles.button}>
@@ -46,7 +44,7 @@ const ButtonExample = () => {
           </Button>
           <Button
             mode="outlined"
-            color={colors?.accent}
+            color={color}
             onPress={() => {}}
             style={styles.button}
           >
@@ -94,7 +92,7 @@ const ButtonExample = () => {
           </Button>
           <Button
             mode="contained"
-            color={colors?.accent}
+            color={color}
             onPress={() => {}}
             style={styles.button}
           >
