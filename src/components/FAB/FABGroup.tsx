@@ -83,7 +83,7 @@ type Props = {
    */
   fabStyle?: StyleProp<ViewStyle>;
   /**
-   * `Available in v3.x`.
+   * `Available in v3.x with theme version 3`.
    *
    * Color mappings variant for combinations of container and icon colors.
    */
@@ -190,7 +190,7 @@ const FABGroup = ({
   >(null);
 
   const { scale } = theme.animation;
-  const { colors, md, isV3 } = theme;
+  const { isV3 } = theme;
 
   React.useEffect(() => {
     if (open) {
@@ -236,10 +236,10 @@ const FABGroup = ({
   const toggle = () => onStateChange({ open: !open });
 
   const labelColor = isV3
-    ? (md('md.sys.color.on-surface') as string)
+    ? theme.colors.onSurface
     : theme.dark
-    ? colors?.text
-    : color(colors?.text).fade(0.54).rgb().string();
+    ? theme.colors.text
+    : color(theme.colors.text).fade(0.54).rgb().string();
   const backdropOpacity = open
     ? backdrop.interpolate({
         inputRange: [0, 0.5, 1],
@@ -291,11 +291,8 @@ const FABGroup = ({
             {
               opacity: backdropOpacity,
               backgroundColor: isV3
-                ? color(md('md.sys.color.background') as string)
-                    .alpha(0.8)
-                    .rgb()
-                    .string()
-                : colors?.backdrop,
+                ? color(theme.colors.background).alpha(0.8).rgb().string()
+                : theme.colors?.backdrop,
             },
           ]}
         />
@@ -349,7 +346,7 @@ const FABGroup = ({
                     accessibilityRole="button"
                   >
                     <Text
-                      variant="body-large"
+                      variant="bodyLarge"
                       style={{ color: it.labelTextColor ?? labelColor }}
                     >
                       {it.label}
@@ -366,9 +363,7 @@ const FABGroup = ({
                     {
                       transform: [{ scale: scales[i] }],
                       opacity: opacities[i],
-                      backgroundColor: isV3
-                        ? md('md.sys.color.surface')
-                        : theme.colors?.surface,
+                      backgroundColor: theme.colors.surface,
                     },
                     isV3 && { transform: [{ translateY: translations[i] }] },
                     it.style,
@@ -410,7 +405,7 @@ const FABGroup = ({
             styles.fab,
             isV3 &&
               open && {
-                backgroundColor: md('md.sys.color.surface-variant') as string,
+                backgroundColor: theme.colors.surfaceVariant,
               },
             fabStyle,
           ]}

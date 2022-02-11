@@ -38,7 +38,7 @@ const FABExample = () => {
                   visible={visible}
                   variant={variant as FABVariant}
                 />
-                {visible && <Text variant="body-medium">{variant}</Text>}
+                {visible && <Text variant="bodyMedium">{variant}</Text>}
               </View>
             ))}
           </View>
@@ -52,7 +52,7 @@ const FABExample = () => {
                   visible={visible}
                   size={size as FABSize}
                 />
-                {visible && <Text variant="body-medium">{size}</Text>}
+                {visible && <Text variant="bodyMedium">{size}</Text>}
               </View>
             ))}
           </View>
@@ -66,7 +66,7 @@ const FABExample = () => {
                   visible={visible}
                   mode={mode as FABMode}
                 />
-                {visible && <Text variant="body-medium">{mode}</Text>}
+                {visible && <Text variant="bodyMedium">{mode}</Text>}
               </View>
             ))}
           </View>

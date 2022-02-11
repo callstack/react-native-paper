@@ -6,7 +6,7 @@ import {
   ViewStyle,
   StyleSheet,
 } from 'react-native';
-import type { Theme } from '../../types';
+import type { MD3Colors, Theme } from '../../types';
 import { white, black } from '../../styles/themes/v2/colors';
 import getContrastingColor from '../../utils/getContrastingColor';
 
@@ -157,30 +157,34 @@ export const getCombinedStyles = ({
 
 export const getFABColors = (
   theme: Theme,
-  variant?: string,
+  variant: string,
   disabled?: boolean,
   customColor?: string,
   style?: StyleProp<ViewStyle>
 ) => {
-  const { isV3, md } = theme;
+  const { isV3 } = theme;
   const isSurfaceVariant = variant === 'surface';
 
   // FAB disabled color
   const disabledColor = isV3
-    ? (md('md.sys.color.surface-disabled') as string)
+    ? theme.colors.surfaceDisabled
     : color(theme.dark ? white : black)
         .alpha(0.12)
         .rgb()
         .string();
 
   // FAB backgroundColor
+  const backgroundVariantColor = `${variant}${
+    isSurfaceVariant ? '' : 'Container'
+  }` as keyof MD3Colors;
+  const foregroundVariantColor = `on${
+    variant.charAt(0).toUpperCase() + variant.slice(1)
+  }${isSurfaceVariant ? '' : 'Container'}` as keyof MD3Colors;
   const {
     backgroundColor = disabled
       ? disabledColor
       : isV3
-      ? (md(
-          `md.sys.color.${variant}${isSurfaceVariant ? '' : '-container'}`
-        ) as string)
+      ? theme.colors[backgroundVariantColor]
       : theme.colors?.accent,
   } = StyleSheet.flatten<ViewStyle>(style) || {};
 
@@ -190,16 +194,14 @@ export const getFABColors = (
     foregroundColor = customColor;
   } else if (disabled) {
     foregroundColor = isV3
-      ? (md('md.sys.color.on-surface-disabled') as string)
+      ? theme.colors.onSurfaceDisabled
       : color(theme.dark ? white : black)
           .alpha(0.32)
           .rgb()
           .string();
   } else {
     foregroundColor = isV3
-      ? (md(
-          `md.sys.color.on-${variant}${isSurfaceVariant ? '' : '-container'}`
-        ) as string)
+      ? theme.colors[foregroundVariantColor]
       : getContrastingColor(
           backgroundColor || white,
           white,

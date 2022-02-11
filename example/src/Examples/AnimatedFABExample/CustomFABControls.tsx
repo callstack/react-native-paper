@@ -44,7 +44,7 @@ const CustomControl = ({
 
       return (
         <View style={styles.controlItem}>
-          <TextComponent variant="label-large">{item}</TextComponent>
+          <TextComponent variant="labelLarge">{item}</TextComponent>
 
           <RadioButton
             value="dynamic"
@@ -62,7 +62,7 @@ const CustomControl = ({
 
   return (
     <View style={styles.controlWrapper}>
-      <TextComponent variant="label-large">{name}</TextComponent>
+      <TextComponent variant="labelLarge">{name}</TextComponent>
 
       <FlatList
         horizontal
@@ -79,7 +79,7 @@ const CustomFABControls = ({
   setControls,
   controls: { animateFrom, iconMode },
 }: Props) => {
-  const { md, isV3, colors } = useTheme();
+  const { colors } = useTheme();
 
   const setIconMode = (newIconMode: AnimatedFABIconMode) =>
     setControls((state) => ({ ...state, iconMode: newIconMode }));
@@ -92,9 +92,7 @@ const CustomFABControls = ({
       style={[
         styles.controlsWrapper,
         {
-          backgroundColor: isV3
-            ? (md('md.sys.color.background') as string)
-            : colors?.background,
+          backgroundColor: colors.background,
         },
       ]}
     >

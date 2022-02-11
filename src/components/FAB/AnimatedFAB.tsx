@@ -106,74 +106,72 @@ export type AnimatedFABAnimateFrom = 'left' | 'right';
  * });
  * ```
  */
-type Props = $RemoveChildren<typeof Surface> &
-  MD3Props & {
-    /**
-     * Icon to display for the `FAB`.
-     */
-    icon: IconSource;
-    /**
-     * Label for extended `FAB`.
-     */
-    label: string;
-    /**
-     * Make the label text uppercased.
-     */
-    uppercase?: boolean;
-    /**
-     * Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.
-     * Uses `label` by default if specified.
-     */
-    accessibilityLabel?: string;
-    /**
-     * Accessibility state for the FAB. This is read by the screen reader when the user taps the FAB.
-     */
-    accessibilityState?: AccessibilityState;
-    /**
-     * Custom color for the icon and label of the `FAB`.
-     */
-    color?: string;
-    /**
-     * Whether `FAB` is disabled. A disabled button is greyed out and `onPress` is not called on touch.
-     */
-    disabled?: boolean;
-    /**
-     * Whether `FAB` is currently visible.
-     */
-    visible?: boolean;
-    /**
-     * Function to execute on press.
-     */
-    onPress?: () => void;
-    /**
-     * Function to execute on long press.
-     */
-    onLongPress?: () => void;
-    /**
-     * Whether icon should be translated to the end of extended `FAB` or be static and stay in the same place. The default value is `dynamic`.
-     */
-    iconMode?: AnimatedFABIconMode;
-    /**
-     * Indicates from which direction animation should be performed. The default value is `right`.
-     */
-    animateFrom?: AnimatedFABAnimateFrom;
-    /**
-     * Whether `FAB` should start animation to extend.
-     */
-    extended: boolean;
-    style?: StyleProp<ViewStyle>;
-    /**
-     * @optional
-     */
-    theme: Theme;
-    testID?: string;
-  };
-
-type MD3Props = {
+type Props = $RemoveChildren<typeof Surface> & {
   /**
+   * Icon to display for the `FAB`.
+   */
+  icon: IconSource;
+  /**
+   * Label for extended `FAB`.
+   */
+  label: string;
+  /**
+   * Make the label text uppercased.
+   */
+  uppercase?: boolean;
+  /**
+   * Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.
+   * Uses `label` by default if specified.
+   */
+  accessibilityLabel?: string;
+  /**
+   * Accessibility state for the FAB. This is read by the screen reader when the user taps the FAB.
+   */
+  accessibilityState?: AccessibilityState;
+  /**
+   * Custom color for the icon and label of the `FAB`.
+   */
+  color?: string;
+  /**
+   * Whether `FAB` is disabled. A disabled button is greyed out and `onPress` is not called on touch.
+   */
+  disabled?: boolean;
+  /**
+   * Whether `FAB` is currently visible.
+   */
+  visible?: boolean;
+  /**
+   * Function to execute on press.
+   */
+  onPress?: () => void;
+  /**
+   * Function to execute on long press.
+   */
+  onLongPress?: () => void;
+  /**
+   * Whether icon should be translated to the end of extended `FAB` or be static and stay in the same place. The default value is `dynamic`.
+   */
+  iconMode?: AnimatedFABIconMode;
+  /**
+   * Indicates from which direction animation should be performed. The default value is `right`.
+   */
+  animateFrom?: AnimatedFABAnimateFrom;
+  /**
+   * Whether `FAB` should start animation to extend.
+   */
+  extended: boolean;
+  /**
+   * `Available in v3.x with theme version 3`.
+   *
    * Color mappings variant for combinations of container and icon colors.
    */
   variant?: FABVariant;
+  style?: StyleProp<ViewStyle>;
+  /**
+   * @optional
+   */
+  theme: Theme;
+  testID?: string;
 };
 
 const SIZE = 56;

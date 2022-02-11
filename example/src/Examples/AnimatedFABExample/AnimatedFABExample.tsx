@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { View, StyleSheet, FlatList, Animated, Platform } from 'react-native';
 import type { NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
-<<<<<<< HEAD
-import { MD2Colors, useTheme, Avatar, Paragraph } from 'react-native-paper';
-=======
-import { Colors, useTheme, Avatar, Paragraph, Text } from 'react-native-paper';
->>>>>>> fbb58a8d (refactor: correct AnimatedFAB example)
+import {
+  MD2Colors,
+  useTheme,
+  Avatar,
+  Paragraph,
+  Text,
+} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { animatedFABExampleData } from '../../../utils';
 import CustomFAB from './CustomFAB';
@@ -27,7 +29,7 @@ type Item = {
 };
 
 const AnimatedFABExample = () => {
-  const { colors, isV3, md } = useTheme();
+  const { colors, isV3 } = useTheme();
 
   const isIOS = Platform.OS === 'ios';
 
@@ -49,13 +51,13 @@ const AnimatedFABExample = () => {
           <Avatar.Text
             style={[styles.avatar, { backgroundColor: item.bgColor }]}
             label={item.initials}
-            color={Colors.white}
+            color={MD2Colors.white}
             size={40}
           />
           <View style={styles.itemTextContentContainer}>
             <View style={styles.itemHeaderContainer}>
               <TextComponent
-                variant="label-large"
+                variant="labelLarge"
                 style={[styles.header, !item.read && styles.read]}
                 ellipsizeMode="tail"
                 numberOfLines={1}
@@ -63,7 +65,7 @@ const AnimatedFABExample = () => {
                 {item.sender}
               </TextComponent>
               <TextComponent
-                variant="label-large"
+                variant="labelLarge"
                 style={[styles.date, !item.read && styles.read]}
               >
                 {item.date}
@@ -73,7 +75,7 @@ const AnimatedFABExample = () => {
             <View style={styles.itemMessageContainer}>
               <View style={styles.flex}>
                 <TextComponent
-                  variant="label-large"
+                  variant="labelLarge"
                   ellipsizeMode="tail"
                   numberOfLines={1}
                   style={!item.read && styles.read}
@@ -81,7 +83,7 @@ const AnimatedFABExample = () => {
                   {item.header}
                 </TextComponent>
                 <TextComponent
-                  variant="label-large"
+                  variant="labelLarge"
                   numberOfLines={1}
                   ellipsizeMode="tail"
                 >
@@ -91,7 +93,7 @@ const AnimatedFABExample = () => {
 
               <Icon
                 name={item.favorite ? 'star' : 'star-outline'}
-                color={item.favorite ? Colors.orange500 : Colors.grey500}
+                color={item.favorite ? MD2Colors.orange500 : MD2Colors.grey500}
                 size={20}
                 onPress={() => setVisible(!visible)}
                 style={styles.icon}
@@ -137,9 +139,7 @@ const AnimatedFABExample = () => {
         style={[
           styles.flex,
           {
-            backgroundColor: isV3
-              ? (md('md.sys.color.background') as string)
-              : colors?.background,
+            backgroundColor: colors?.background,
           },
         ]}
         contentContainerStyle={styles.container}
