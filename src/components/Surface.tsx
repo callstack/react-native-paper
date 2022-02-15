@@ -72,9 +72,9 @@ type Props = MD2Props & {
  * ```
  */
 
-const MD2Surface = ({ style, ...rest }: MD2Props) => {
+const MD2Surface = ({ style, theme: overrideTheme, ...rest }: MD2Props) => {
   const { elevation = 4 } = (StyleSheet.flatten(style) || {}) as ViewStyle;
-  const { dark: isDarkTheme, mode, colors } = useTheme();
+  const { dark: isDarkTheme, mode, colors } = useTheme(overrideTheme);
 
   return (
     <Animated.View
@@ -101,13 +101,16 @@ const Surface = ({
 }: Props) => {
   const theme = useTheme(overridenTheme);
 
-  const { isV3, md } = theme;
+  if (!theme.isV3)
+    return (
+      <MD2Surface {...props} theme={theme}>
+        {children}
+      </MD2Surface>
+    );
 
-  if (!isV3) return <MD2Surface {...props}>{children}</MD2Surface>;
+  const { colors } = theme;
 
-  const backgroundColor = md(
-    `md.sys.color.elevation.level${elevation || 0}`
-  ) as string;
+  const backgroundColor = colors.elevation?.[`level${elevation}`];
 
   const sharedStyle = [{ backgroundColor }, props.style];
 
@@ -130,17 +133,17 @@ const Surface = ({
 
   if (Platform.OS === 'android') {
     return (
-      <View style={[elevationStyles[elevation], ...sharedStyle]}>
+      <View {...props} style={[elevationStyles[elevation], ...sharedStyle]}>
         {children}
       </View>
     );
   }
 
-  const shadows = (md(`md.sys.elevation.level${elevation}`) as string[]).map(
+  const shadows = colors.elevationShadows?.[`level${elevation}`]?.map(
     (shadow) => shadow.split(' ')
   );
 
-  const shadowStyles = shadows.map(
+  const shadowStyles = shadows?.map(
     ([width, height, size, ...colorArr]: any) => {
       const shadowWidth = parseInt(width?.replace('px', ''));
       const shadowHeight = parseInt(height?.replace('px', ''));
@@ -160,8 +163,8 @@ const Surface = ({
   );
 
   return (
-    <View style={shadowStyles[0]}>
-      <View style={shadowStyles[1]}>
+    <View style={shadowStyles?.[0]}>
+      <View style={shadowStyles?.[1]}>
         <View {...props} style={sharedStyle}>
           {children}
         </View>

@@ -70,6 +70,8 @@ export type MD3Colors = {
   inverseSurface: string;
   inverseOnSurface: string;
   inversePrimary: string;
+  elevation: MD3ElevationColors;
+  elevationShadows: MD3ElevationShadows;
 };
 
 export type MD3Palette = {};
@@ -86,7 +88,11 @@ export type ThemeBase = {
   };
 } & (
   | { version: 2; colors: MD2Colors; isV3: false }
-  | { version: 3; colors: MD3Colors; isV3: true }
+  | {
+      version: 3;
+      colors: MD3Colors;
+      isV3: true;
+    }
 );
 
 export type Theme = ThemeBase & {
@@ -165,6 +171,23 @@ export type MD3Elevation =
   | '3'
   | '4'
   | '5';
+
+export enum ElevationLevels {
+  'level0',
+  'level1',
+  'level2',
+  'level3',
+  'level4',
+  'level5',
+}
+
+export type MD3ElevationColors = {
+  [key in keyof typeof ElevationLevels]: string;
+};
+
+export type MD3ElevationShadows = {
+  [key in keyof typeof ElevationLevels]: [string, string];
+};
 
 export type $Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 export type $RemoveChildren<T extends React.ComponentType<any>> = $Omit<

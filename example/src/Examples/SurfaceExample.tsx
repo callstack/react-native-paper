@@ -19,7 +19,7 @@ const SurfaceExample = () => {
           ]}
           elevation={i as MD3Elevation}
         >
-          <Text variant="body-large">
+          <Text variant="bodyLarge">
             Elevation {i === 1 && '(default)'} {i}
           </Text>
         </Surface>
