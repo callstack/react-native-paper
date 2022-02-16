@@ -7,6 +7,7 @@ import {
   View,
   ViewStyle,
   I18nManager,
+  TextStyle,
 } from 'react-native';
 import color from 'color';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -35,6 +36,7 @@ type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
    */
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
+  textStyles?: StyleProp<TextStyle>
   /**
    * @optional
    */
@@ -81,6 +83,7 @@ const DataTableTitle = ({
   sortDirection,
   theme,
   style,
+  textStyles,
   numberOfLines = 1,
   ...rest
 }: Props) => {
@@ -121,6 +124,7 @@ const DataTableTitle = ({
 
         <Text
           style={[
+            textStyles,
             styles.cell,
             sortDirection ? styles.sorted : { color: textColor },
           ]}
