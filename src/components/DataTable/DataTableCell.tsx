@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, StyleProp, ViewStyle } from 'react-native';
+import { StyleSheet, StyleProp, ViewStyle, TextStyle } from 'react-native';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { $RemoveChildren } from '../../types';
@@ -18,6 +18,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
 };
 
 /**
@@ -51,12 +52,12 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
  * MD Guidelines (https://github.com/callstack/react-native-paper/issues/2381).
  */
 
-const DataTableCell = ({ children, style, numeric, ...rest }: Props) => (
+const DataTableCell = ({ children, style, textStyle, numeric, ...rest }: Props) => (
   <TouchableRipple
     {...rest}
     style={[styles.container, numeric && styles.right, style]}
   >
-    <Text numberOfLines={1}>{children}</Text>
+    <Text style={textStyle} numberOfLines={1}>{children}</Text>
   </TouchableRipple>
 );
 
