@@ -194,3 +194,21 @@ it('should have appropriate display style according to the visibility', () => {
     expect.arrayContaining([expect.objectContaining({ display: 'none' })])
   );
 });
+
+it('should have labelMaxFontSizeMultiplier passed to label', () => {
+  const labelMaxFontSizeMultiplier = 2;
+  const { getAllByText } = render(
+    <BottomNavigation
+      shifting={false}
+      labeled={true}
+      labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+      navigationState={createState(0, 3)}
+      onIndexChange={jest.fn()}
+      renderScene={({ route }) => route.title}
+    />
+  );
+
+  const label = getAllByText('Route: 0')[0];
+
+  expect(label.props.maxFontSizeMultiplier).toBe(labelMaxFontSizeMultiplier);
+});

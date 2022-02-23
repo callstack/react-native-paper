@@ -2980,6 +2980,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         Object {
                           "backgroundColor": "transparent",
                           "fontSize": 12,
+                          "height": 56,
                           "textAlign": "center",
                         },
                         Object {
@@ -3020,6 +3021,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         Object {
                           "backgroundColor": "transparent",
                           "fontSize": 12,
+                          "height": 56,
                           "textAlign": "center",
                         },
                         Object {
@@ -3221,6 +3223,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         Object {
                           "backgroundColor": "transparent",
                           "fontSize": 12,
+                          "height": 56,
                           "textAlign": "center",
                         },
                         Object {
@@ -3261,6 +3264,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         Object {
                           "backgroundColor": "transparent",
                           "fontSize": 12,
+                          "height": 56,
                           "textAlign": "center",
                         },
                         Object {
@@ -3462,6 +3466,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         Object {
                           "backgroundColor": "transparent",
                           "fontSize": 12,
+                          "height": 56,
                           "textAlign": "center",
                         },
                         Object {
@@ -3502,6 +3507,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         Object {
                           "backgroundColor": "transparent",
                           "fontSize": 12,
+                          "height": 56,
                           "textAlign": "center",
                         },
                         Object {
@@ -3839,6 +3845,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                         Object {
                           "backgroundColor": "transparent",
                           "fontSize": 12,
+                          "height": 56,
                           "textAlign": "center",
                         },
                         Object {
@@ -4040,6 +4047,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                         Object {
                           "backgroundColor": "transparent",
                           "fontSize": 12,
+                          "height": 56,
                           "textAlign": "center",
                         },
                         Object {
@@ -4241,6 +4249,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                         Object {
                           "backgroundColor": "transparent",
                           "fontSize": 12,
+                          "height": 56,
                           "textAlign": "center",
                         },
                         Object {
@@ -4557,6 +4566,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         Object {
                           "backgroundColor": "transparent",
                           "fontSize": 12,
+                          "height": 56,
                           "textAlign": "center",
                         },
                         Object {
@@ -4597,6 +4607,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         Object {
                           "backgroundColor": "transparent",
                           "fontSize": 12,
+                          "height": 56,
                           "textAlign": "center",
                         },
                         Object {
@@ -4798,6 +4809,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         Object {
                           "backgroundColor": "transparent",
                           "fontSize": 12,
+                          "height": 56,
                           "textAlign": "center",
                         },
                         Object {
@@ -4838,6 +4850,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         Object {
                           "backgroundColor": "transparent",
                           "fontSize": 12,
+                          "height": 56,
                           "textAlign": "center",
                         },
                         Object {
@@ -5039,6 +5052,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         Object {
                           "backgroundColor": "transparent",
                           "fontSize": 12,
+                          "height": 56,
                           "textAlign": "center",
                         },
                         Object {
@@ -5079,6 +5093,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         Object {
                           "backgroundColor": "transparent",
                           "fontSize": 12,
+                          "height": 56,
                           "textAlign": "center",
                         },
                         Object {
@@ -5415,6 +5430,7 @@ exports[`renders shifting bottom navigation 1`] = `
                         Object {
                           "backgroundColor": "transparent",
                           "fontSize": 12,
+                          "height": 56,
                           "textAlign": "center",
                         },
                         Object {
@@ -5616,6 +5632,7 @@ exports[`renders shifting bottom navigation 1`] = `
                         Object {
                           "backgroundColor": "transparent",
                           "fontSize": 12,
+                          "height": 56,
                           "textAlign": "center",
                         },
                         Object {
@@ -5817,6 +5834,7 @@ exports[`renders shifting bottom navigation 1`] = `
                         Object {
                           "backgroundColor": "transparent",
                           "fontSize": 12,
+                          "height": 56,
                           "textAlign": "center",
                         },
                         Object {
@@ -6018,6 +6036,7 @@ exports[`renders shifting bottom navigation 1`] = `
                         Object {
                           "backgroundColor": "transparent",
                           "fontSize": 12,
+                          "height": 56,
                           "textAlign": "center",
                         },
                         Object {
@@ -6219,6 +6238,7 @@ exports[`renders shifting bottom navigation 1`] = `
                         Object {
                           "backgroundColor": "transparent",
                           "fontSize": 12,
+                          "height": 56,
                           "textAlign": "center",
                         },
                         Object {
