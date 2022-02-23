@@ -348,7 +348,7 @@ const BottomNavigation = ({
   onIndexChange,
   shifting = navigationState.routes.length > 3,
   safeAreaInsets,
-  labelMaxFontSizeMultiplier,
+  labelMaxFontSizeMultiplier = 1,
 }: Props) => {
   const { scale } = theme.animation;
 
