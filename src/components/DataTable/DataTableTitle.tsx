@@ -13,7 +13,6 @@ import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
-import { black } from '../../styles/themes/v2/colors';
 
 type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
   /**
@@ -112,7 +111,7 @@ const DataTableTitle = ({
       <MaterialCommunityIcon
         name="arrow-up"
         size={16}
-        color={textColor || black}
+        color={textColor}
         direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
       />
     </Animated.View>

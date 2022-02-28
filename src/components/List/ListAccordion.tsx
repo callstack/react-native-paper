@@ -14,9 +14,7 @@ import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
-
 import { ListAccordionGroupContext } from './ListAccordionGroup';
-import { black } from '../../styles/themes/v2/colors';
 
 type Props = {
   /**
@@ -209,9 +207,7 @@ const ListAccordion = ({
           <View style={styles.row} pointerEvents="none">
             {left
               ? left({
-                  color: isExpanded
-                    ? theme.colors?.primary || black
-                    : descriptionColor || black,
+                  color: isExpanded ? theme.colors?.primary : descriptionColor,
                 })
               : null}
             <View style={[styles.item, styles.content]}>
