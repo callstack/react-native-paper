@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import shadow from '../styles/shadow';
 import { useTheme } from '../core/theming';
-import overlay from '../styles/overlay';
-import type { MD3Elevation, Theme } from '../types';
+import overlay, { isAnimatedValue } from '../styles/overlay';
+import type { MD3Colors, MD3Elevation, Theme } from '../types';
 
 type MD2Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -25,7 +25,7 @@ type MD2Props = React.ComponentPropsWithRef<typeof View> & {
 };
 
 type Props = MD2Props & {
-  elevation?: MD3Elevation;
+  elevation?: MD3Elevation | Animated.Value;
 };
 
 /**
@@ -93,6 +93,40 @@ const MD2Surface = ({ style, theme: overrideTheme, ...rest }: MD2Props) => {
   );
 };
 
+const getIOSShadows = (
+  elevation: MD3Elevation | Animated.Value,
+  colors: MD3Colors
+) => {
+  const shadows = (() => {
+    if (isAnimatedValue(elevation)) {
+      return colors.elevationShadows?.[
+        `level${elevation as unknown as MD3Elevation}`
+      ]?.map((shadow) => shadow.split(' '));
+    }
+
+    return colors.elevationShadows?.[`level${elevation}`]?.map((shadow) =>
+      shadow.split(' ')
+    );
+  })();
+
+  return shadows?.map(([width, height, size, ...colorArr]: any) => {
+    const shadowWidth = parseInt(width?.replace('px', ''));
+    const shadowHeight = parseInt(height?.replace('px', ''));
+    const shadowRadius = parseInt(size.replace('px', ''));
+    const shadowColor = colorArr.join('');
+
+    return {
+      shadowColor,
+      shadowOffset: {
+        width: shadowWidth,
+        height: shadowHeight + 0.5,
+      },
+      shadowOpacity: 1,
+      shadowRadius: shadowRadius,
+    };
+  });
+};
+
 const Surface = ({
   elevation = 1,
   children,
@@ -108,7 +142,61 @@ const Surface = ({
       </MD2Surface>
     );
 
+  if (elevation === 0) {
+    return <View {...props}>{children}</View>;
+  }
+
   const { colors } = theme;
+
+  const elevationStyles = [
+    { elevation: 0 },
+    { elevation: 3 },
+    { elevation: 6 },
+    { elevation: 9 },
+    { elevation: 12 },
+    { elevation: 15 },
+  ];
+
+  if (isAnimatedValue(elevation)) {
+    const inputRange = [0, 1, 2, 3, 4, 5];
+
+    const backgroundColor = elevation.interpolate({
+      inputRange,
+      outputRange: inputRange.map((elevation) => {
+        return colors.elevation?.[`level${elevation as MD3Elevation}`];
+      }),
+    });
+
+    const elevationAndroid = elevation.interpolate({
+      inputRange,
+      outputRange: elevationStyles.map(({ elevation }) => elevation),
+    });
+
+    const sharedStyle = [
+      { backgroundColor, elevation: elevationAndroid },
+      props.style,
+    ];
+
+    if (Platform.OS === 'android') {
+      return (
+        <Animated.View {...props} style={sharedStyle}>
+          {children}
+        </Animated.View>
+      );
+    }
+
+    const shadowStyles = getIOSShadows(elevation, colors);
+
+    return (
+      <Animated.View style={shadowStyles?.[0]}>
+        <Animated.View style={shadowStyles?.[1]}>
+          <Animated.View {...props} style={sharedStyle}>
+            {children}
+          </Animated.View>
+        </Animated.View>
+      </Animated.View>
+    );
+  }
 
   const backgroundColor = colors.elevation?.[`level${elevation}`];
 
@@ -122,52 +210,25 @@ const Surface = ({
     );
   }
 
-  const elevationStyles = [
-    { elevation: 0 },
-    { elevation: 3 },
-    { elevation: 6 },
-    { elevation: 9 },
-    { elevation: 12 },
-    { elevation: 15 },
-  ];
-
   if (Platform.OS === 'android') {
     return (
-      <View {...props} style={[elevationStyles[elevation], ...sharedStyle]}>
+      <Animated.View
+        {...props}
+        style={[elevationStyles[elevation], ...sharedStyle]}
+      >
         {children}
-      </View>
+      </Animated.View>
     );
   }
 
-  const shadows = colors.elevationShadows?.[`level${elevation}`]?.map(
-    (shadow) => shadow.split(' ')
-  );
-
-  const shadowStyles = shadows?.map(
-    ([width, height, size, ...colorArr]: any) => {
-      const shadowWidth = parseInt(width?.replace('px', ''));
-      const shadowHeight = parseInt(height?.replace('px', ''));
-      const shadowRadius = parseInt(size.replace('px', ''));
-      const shadowColor = colorArr.join('');
-
-      return {
-        shadowColor,
-        shadowOffset: {
-          width: shadowWidth,
-          height: shadowHeight + 0.5,
-        },
-        shadowOpacity: 1,
-        shadowRadius: shadowRadius,
-      };
-    }
-  );
+  const shadowStyles = getIOSShadows(elevation, colors);
 
   return (
     <View style={shadowStyles?.[0]}>
       <View style={shadowStyles?.[1]}>
-        <View {...props} style={sharedStyle}>
+        <Animated.View {...props} style={sharedStyle}>
           {children}
-        </View>
+        </Animated.View>
       </View>
     </View>
   );

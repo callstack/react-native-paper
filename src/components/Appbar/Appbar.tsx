@@ -9,7 +9,7 @@ import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import { black, white } from '../../styles/themes/v2/colors';
 import overlay from '../../styles/overlay';
-import type { Theme } from '../../types';
+import type { MD3Elevation, Theme } from '../../types';
 
 type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
   /**
@@ -127,7 +127,8 @@ const Appbar = ({ children, dark, style, theme, ...rest }: Props) => {
   }
   return (
     <Surface
-      style={[{ backgroundColor }, styles.appbar, { elevation }, restStyle]}
+      style={[{ backgroundColor }, styles.appbar, restStyle]}
+      elevation={elevation as MD3Elevation}
       {...rest}
     >
       {shouldAddLeftSpacing ? <View style={styles.spacing} /> : null}

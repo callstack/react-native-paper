@@ -2,8 +2,8 @@ import color from 'color';
 import { Animated } from 'react-native';
 import DarkTheme from './themes/v2/DarkTheme';
 
-const isAnimatedValue = (
-  it: number | Animated.AnimatedInterpolation
+export const isAnimatedValue = (
+  it: number | string | Animated.AnimatedInterpolation
 ): it is Animated.Value => it instanceof Animated.Value;
 
 export default function overlay<T extends Animated.Value | number>(
