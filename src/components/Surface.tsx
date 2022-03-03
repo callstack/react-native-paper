@@ -109,10 +109,16 @@ const getIOSShadows = (
     );
   })();
 
-  return shadows?.map(([width, height, size, ...colorArr]: any) => {
+  return shadows?.map((shadowProps: string[]) => {
+    if (shadowProps.length < 4) {
+      return;
+    }
+
+    const [width, height, size, ...colorArr] = shadowProps;
+
     const shadowWidth = parseInt(width?.replace('px', ''));
     const shadowHeight = parseInt(height?.replace('px', ''));
-    const shadowRadius = parseInt(size.replace('px', ''));
+    const shadowRadius = parseInt(size?.replace('px', ''));
     const shadowColor = colorArr.join('');
 
     return {
@@ -131,20 +137,17 @@ const Surface = ({
   elevation = 1,
   children,
   theme: overridenTheme,
+  style,
   ...props
 }: Props) => {
   const theme = useTheme(overridenTheme);
 
   if (!theme.isV3)
     return (
-      <MD2Surface {...props} theme={theme}>
+      <MD2Surface {...props} theme={theme} style={style}>
         {children}
       </MD2Surface>
     );
-
-  if (elevation === 0) {
-    return <View {...props}>{children}</View>;
-  }
 
   const { colors } = theme;
 
@@ -157,65 +160,33 @@ const Surface = ({
     { elevation: 15 },
   ];
 
-  if (isAnimatedValue(elevation)) {
-    const inputRange = [0, 1, 2, 3, 4, 5];
+  const sharedStyle = (() => {
+    if (isAnimatedValue(elevation)) {
+      const inputRange = [0, 1, 2, 3, 4, 5];
 
-    const backgroundColor = elevation.interpolate({
-      inputRange,
-      outputRange: inputRange.map((elevation) => {
-        return colors.elevation?.[`level${elevation as MD3Elevation}`];
-      }),
-    });
+      const backgroundColor = elevation.interpolate({
+        inputRange,
+        outputRange: inputRange.map((elevation) => {
+          return colors.elevation?.[`level${elevation as MD3Elevation}`];
+        }),
+      });
 
-    const elevationAndroid = elevation.interpolate({
-      inputRange,
-      outputRange: elevationStyles.map(({ elevation }) => elevation),
-    });
+      const elevationAndroid = elevation.interpolate({
+        inputRange,
+        outputRange: elevationStyles.map(({ elevation }) => elevation),
+      });
 
-    const sharedStyle = [
-      { backgroundColor, elevation: elevationAndroid },
-      props.style,
-    ];
-
-    if (Platform.OS === 'android') {
-      return (
-        <Animated.View {...props} style={sharedStyle}>
-          {children}
-        </Animated.View>
-      );
+      return [{ backgroundColor, elevation: elevationAndroid }, style];
     }
 
-    const shadowStyles = getIOSShadows(elevation, colors);
+    const backgroundColor = colors.elevation?.[`level${elevation}`];
 
-    return (
-      <Animated.View style={shadowStyles?.[0]}>
-        <Animated.View style={shadowStyles?.[1]}>
-          <Animated.View {...props} style={sharedStyle}>
-            {children}
-          </Animated.View>
-        </Animated.View>
-      </Animated.View>
-    );
-  }
-
-  const backgroundColor = colors.elevation?.[`level${elevation}`];
-
-  const sharedStyle = [{ backgroundColor }, props.style];
-
-  if (!elevation) {
-    return (
-      <View {...props} style={sharedStyle}>
-        {children}
-      </View>
-    );
-  }
+    return [{ backgroundColor }, style];
+  })();
 
   if (Platform.OS === 'android') {
     return (
-      <Animated.View
-        {...props}
-        style={[elevationStyles[elevation], ...sharedStyle]}
-      >
+      <Animated.View {...props} style={sharedStyle}>
         {children}
       </Animated.View>
     );
