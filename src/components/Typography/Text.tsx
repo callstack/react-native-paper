@@ -16,15 +16,15 @@ type Props = React.ComponentProps<typeof NativeText> & {
    * Variant defines appropriate text styles for type role and its size.
    * Available variants:
    *
-   *  Display: `display-large`, `display-small`, `display-small`
+   *  Display: `displayLarge`, `displayMedium`, `displaySmall`
    *
-   *  Headline: `headline-large`, `headline-medium`, `headline-small`
+   *  Headline: `headlineLarge`, `headlineMedium`, `headlineSmall`
    *
-   *  Title: `title-large`, `title-medium`, `title-small`
+   *  Title: `titleLarge`, `titleMedium`, `titleSmall`
    *
-   *  Label:  `label-large`, `label-medium`, `label-small`
+   *  Label:  `labelLarge`, `labelMedium`, `labelSmall`
    *
-   *  Body: `body-large`, `body-medium`, `body-small`
+   *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
    */
   variant?: keyof typeof MD3TypescaleKey;
   children: React.ReactNode;
@@ -45,25 +45,25 @@ type Props = React.ComponentProps<typeof NativeText> & {
  *
  * const MyComponent = () => (
  *   <>
- *     <Text variant="display-large">Display Large</Text>
- *     <Text variant="display-medium">Display Medium</Text>
- *     <Text variant="display-small">Display small</Text>
+ *     <Text variant="displayLarge">Display Large</Text>
+ *     <Text variant="displayMedium">Display Medium</Text>
+ *     <Text variant="displaySmall">Display small</Text>
  *
- *     <Text variant="headline-large">Headline Large</Text>
- *     <Text variant="headline-medium">Headline Medium</Text>
- *     <Text variant="headline-small">Headline Small</Text>
+ *     <Text variant="headlineLarge">Headline Large</Text>
+ *     <Text variant="headlineMedium">Headline Medium</Text>
+ *     <Text variant="headlineSmall">Headline Small</Text>
  *
- *     <Text variant="title-large">Title Large</Text>
- *     <Text variant="title-medium">Title Medium</Text>
- *     <Text variant="title-small">Title Small</Text>
+ *     <Text variant="titleLarge">Title Large</Text>
+ *     <Text variant="titleMedium">Title Medium</Text>
+ *     <Text variant="titleSmall">Title Small</Text>
  *
- *     <Text variant="body-large">Body Large</Text>
- *     <Text variant="body-medium">Body Medium</Text>
- *     <Text variant="body-small">Body Small</Text>
+ *     <Text variant="bodyLarge">Body Large</Text>
+ *     <Text variant="bodyMedium">Body Medium</Text>
+ *     <Text variant="bodySmall">Body Small</Text>
  *
- *     <Text variant="label-large">Label Large</Text>
- *     <Text variant="label-medium">Label Medium</Text>
- *     <Text variant="label-small">Label Small</Text>
+ *     <Text variant="labelLarge">Label Large</Text>
+ *     <Text variant="labelMedium">Label Medium</Text>
+ *     <Text variant="labelSmall">Label Small</Text>
  *  </>
  * );
  *

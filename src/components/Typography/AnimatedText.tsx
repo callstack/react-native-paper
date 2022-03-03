@@ -14,15 +14,15 @@ type Props = React.ComponentPropsWithRef<typeof Animated.Text> & {
    * Variant defines appropriate text styles for type role and its size.
    * Available variants:
    *
-   *  Display: `display-large`, `display-small`, `display-small`
+   *  Display: `displayLarge`, `displayMedium`, `displaySmall`
    *
-   *  Headline: `headline-large`, `headline-medium`, `headline-small`
+   *  Headline: `headlineLarge`, `headlineMedium`, `headlineSmall`
    *
-   *  Title: `title-large`, `title-medium`, `title-small`
+   *  Title: `titleLarge`, `titleMedium`, `titleSmall`
    *
-   *  Label:  `label-large`, `label-medium`, `label-small`
+   *  Label:  `labelLarge`, `labelMedium`, `labelSmall`
    *
-   *  Body: `body-large`, `body-medium`, `body-small`
+   *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
    */
   variant?: keyof typeof MD3TypescaleKey;
   style?: StyleProp<TextStyle>;
@@ -37,12 +37,7 @@ type Props = React.ComponentPropsWithRef<typeof Animated.Text> & {
  *
  * @extends Text props https://reactnative.dev/docs/text#props
  */
-function AnimatedText({
-  style,
-  theme,
-  variant = 'labelLarge',
-  ...rest
-}: Props) {
+function AnimatedText({ style, theme, variant, ...rest }: Props) {
   const writingDirection = I18nManager.isRTL ? 'rtl' : 'ltr';
 
   if (theme.isV3 && variant) {
