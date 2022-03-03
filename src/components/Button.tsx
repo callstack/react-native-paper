@@ -262,8 +262,14 @@ const Button = ({
   return (
     <Surface
       {...rest}
-      style={[styles.button, compact && styles.compact, buttonStyle, style]}
-      elevation={elevationRes}
+      style={[
+        styles.button,
+        compact && styles.compact,
+        buttonStyle,
+        style,
+        !theme.isV3 && ({ elevation: elevationRes } as ViewStyle),
+      ]}
+      {...(theme.isV3 && { elevation: elevationRes })}
     >
       <TouchableRipple
         borderless
