@@ -42,9 +42,11 @@ import MD3LightTheme from '../../styles/themes/v3/LightTheme';
 
 const MINIMIZED_LABEL_Y_OFFSET = -18;
 
-const LABEL_PADDING_TOP = 30;
+const MD2_LABEL_PADDING_TOP = 30;
+const MD3_LABEL_PADDING_TOP = 26;
 const LABEL_PADDING_TOP_DENSE = 24;
-const MIN_HEIGHT = 64;
+const MD2_MIN_HEIGHT = 64;
+const MD3_MIN_HEIGHT = 56;
 const MIN_DENSE_HEIGHT_WL = 52;
 const MIN_DENSE_HEIGHT = 40;
 
@@ -79,6 +81,11 @@ const TextInputFlat = ({
   const { colors, fonts } = theme;
   const font = fonts.regular;
   const hasActiveOutline = parentState.focused || error;
+
+  const MIN_HEIGHT = theme.isV3 ? MD3_MIN_HEIGHT : MD2_MIN_HEIGHT;
+  const LABEL_PADDING_TOP = theme.isV3
+    ? MD3_LABEL_PADDING_TOP
+    : MD2_LABEL_PADDING_TOP;
 
   const {
     fontSize: fontSizeStyle,

@@ -41,7 +41,8 @@ import type { Theme } from '../../types';
 
 const OUTLINE_MINIMIZED_LABEL_Y_OFFSET = -6;
 const LABEL_PADDING_TOP = 8;
-const MIN_HEIGHT = 64;
+const MD2_MIN_HEIGHT = 64;
+const MD3_MIN_HEIGHT = 56;
 const MIN_DENSE_HEIGHT = 48;
 const INPUT_PADDING_HORIZONTAL = 16;
 
@@ -78,6 +79,8 @@ const TextInputOutlined = ({
   const { colors, fonts } = theme;
   const font = fonts.regular;
   const hasActiveOutline = parentState.focused || error;
+
+  const MIN_HEIGHT = theme.isV3 ? MD3_MIN_HEIGHT : MD2_MIN_HEIGHT;
 
   const {
     fontSize: fontSizeStyle,
