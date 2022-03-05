@@ -25,7 +25,6 @@ import {
   LABEL_WIGGLE_X_OFFSET,
   ADORNMENT_SIZE,
   ADORNMENT_OFFSET,
-  MD3_ADORNMENT_SIZE,
 } from './constants';
 
 import {
@@ -132,8 +131,6 @@ const TextInputOutlined = ({
   const labelHalfWidth = labelWidth / 2;
   const labelHalfHeight = labelHeight / 2;
 
-  const THEME_ADORNMENT_SIZE = theme.isV3 ? MD3_ADORNMENT_SIZE : ADORNMENT_SIZE;
-
   const baseLabelTranslateX =
     (I18nManager.isRTL ? 1 : -1) *
     (labelHalfWidth -
@@ -148,7 +145,7 @@ const TextInputOutlined = ({
   if (isAdornmentLeftIcon) {
     labelTranslationXOffset =
       (I18nManager.isRTL ? -1 : 1) *
-      (THEME_ADORNMENT_SIZE + ADORNMENT_OFFSET - 8);
+      (ADORNMENT_SIZE + ADORNMENT_OFFSET - (theme.isV3 ? 0 : 8));
   }
 
   const minInputHeight =
@@ -238,17 +235,17 @@ const TextInputOutlined = ({
   });
   const iconTopPosition = calculateOutlinedIconAndAffixTopPosition({
     height: minHeight,
-    affixHeight: THEME_ADORNMENT_SIZE,
+    affixHeight: ADORNMENT_SIZE,
     labelYOffset: -OUTLINE_MINIMIZED_LABEL_Y_OFFSET,
   });
 
   const rightAffixWidth = right
-    ? rightLayout.width || THEME_ADORNMENT_SIZE
-    : THEME_ADORNMENT_SIZE;
+    ? rightLayout.width || ADORNMENT_SIZE
+    : ADORNMENT_SIZE;
 
   const leftAffixWidth = left
-    ? leftLayout.width || THEME_ADORNMENT_SIZE
-    : THEME_ADORNMENT_SIZE;
+    ? leftLayout.width || ADORNMENT_SIZE
+    : ADORNMENT_SIZE;
 
   const adornmentStyleAdjustmentForNativeInput =
     getAdornmentStyleAdjustmentForNativeInput({

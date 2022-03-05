@@ -20,7 +20,6 @@ import {
   MINIMIZED_LABEL_FONT_SIZE,
   LABEL_WIGGLE_X_OFFSET,
   ADORNMENT_SIZE,
-  MD3_ADORNMENT_SIZE,
   FLAT_INPUT_OFFSET,
 } from './constants';
 
@@ -91,8 +90,6 @@ const TextInputFlat = ({
   } = (StyleSheet.flatten(style) || {}) as TextStyle;
   const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
 
-  const THEME_ADORNMENT_SIZE = theme.isV3 ? MD3_ADORNMENT_SIZE : ADORNMENT_SIZE;
-
   const isPaddingHorizontalPassed =
     paddingHorizontal !== undefined && typeof paddingHorizontal === 'number';
 
@@ -103,7 +100,6 @@ const TextInputFlat = ({
 
   let { paddingLeft, paddingRight } = calculateFlatInputHorizontalPadding({
     adornmentConfig,
-    adornmentSize: THEME_ADORNMENT_SIZE,
   });
 
   if (isPaddingHorizontalPassed) {
@@ -114,12 +110,12 @@ const TextInputFlat = ({
   const { leftLayout, rightLayout } = parentState;
 
   const rightAffixWidth = right
-    ? rightLayout.width || THEME_ADORNMENT_SIZE
-    : THEME_ADORNMENT_SIZE;
+    ? rightLayout.width || ADORNMENT_SIZE
+    : ADORNMENT_SIZE;
 
   const leftAffixWidth = left
-    ? leftLayout.width || THEME_ADORNMENT_SIZE
-    : THEME_ADORNMENT_SIZE;
+    ? leftLayout.width || ADORNMENT_SIZE
+    : ADORNMENT_SIZE;
 
   const adornmentStyleAdjustmentForNativeInput =
     getAdornmentStyleAdjustmentForNativeInput({
@@ -252,7 +248,7 @@ const TextInputFlat = ({
     inputHeight +
     (!height ? (dense ? LABEL_PADDING_TOP_DENSE : LABEL_PADDING_TOP) : 0);
 
-  const iconTopPosition = (flatHeight - THEME_ADORNMENT_SIZE) / 2;
+  const iconTopPosition = (flatHeight - ADORNMENT_SIZE) / 2;
 
   const leftAffixTopPosition = leftLayout.height
     ? calculateFlatAffixTopPosition({

@@ -267,22 +267,20 @@ export function calculateOutlinedIconAndAffixTopPosition({
 
 export const calculateFlatInputHorizontalPadding = ({
   adornmentConfig,
-  adornmentSize,
 }: {
   adornmentConfig: AdornmentConfig[];
-  adornmentSize: number;
 }) => {
   let paddingLeft = LABEL_PADDING_HORIZONTAL;
   let paddingRight = LABEL_PADDING_HORIZONTAL;
 
   adornmentConfig.forEach(({ type, side }) => {
     if (type === AdornmentType.Icon && side === AdornmentSide.Left) {
-      paddingLeft = adornmentSize + ADORNMENT_OFFSET + FLAT_INPUT_OFFSET;
+      paddingLeft = ADORNMENT_SIZE + ADORNMENT_OFFSET + FLAT_INPUT_OFFSET;
     } else if (side === AdornmentSide.Right) {
       if (type === AdornmentType.Affix) {
-        paddingRight = adornmentSize + ADORNMENT_OFFSET + FLAT_INPUT_OFFSET;
+        paddingRight = ADORNMENT_SIZE + ADORNMENT_OFFSET + FLAT_INPUT_OFFSET;
       } else if (type === AdornmentType.Icon) {
-        paddingRight = adornmentSize + ADORNMENT_OFFSET + FLAT_INPUT_OFFSET;
+        paddingRight = ADORNMENT_SIZE + ADORNMENT_OFFSET + FLAT_INPUT_OFFSET;
       }
     }
   });

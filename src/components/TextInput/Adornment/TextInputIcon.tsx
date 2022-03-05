@@ -34,7 +34,6 @@ export type Props = $Omit<
 };
 
 export const ICON_SIZE = 24;
-export const MD3_ICON_SIZE = 20;
 const ICON_OFFSET = 16;
 
 type StyleContextType = {
@@ -125,11 +124,11 @@ const TextInputIcon = ({
       : theme.colors.text;
 
   return (
-    <View style={[styles.container, theme.isV3 && styles.md3Container, style]}>
+    <View style={[styles.container, style]}>
       <IconButton
         icon={name}
         style={styles.iconButton}
-        size={theme.isV3 ? MD3_ICON_SIZE : ICON_SIZE}
+        size={ICON_SIZE}
         onPress={onPressWithFocusControl}
         color={
           typeof color === 'function' ? color(isTextInputFocused) : iconColor
@@ -152,10 +151,6 @@ const styles = StyleSheet.create({
     height: ICON_SIZE,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  md3Container: {
-    width: MD3_ICON_SIZE,
-    height: MD3_ICON_SIZE,
   },
   iconButton: {
     margin: 0,

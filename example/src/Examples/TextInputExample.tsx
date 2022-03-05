@@ -142,6 +142,26 @@ const TextInputExample = () => {
         removeClippedSubviews={false}
       >
         <TextInput
+          mode="outlined"
+          style={styles.inputContainerStyle}
+          label="Outlined input"
+          placeholder="Type something"
+          value={outlinedText}
+          onChangeText={(outlinedText) =>
+            inputActionHandler('outlinedText', outlinedText)
+          }
+          left={
+            <TextInput.Icon
+              name="magnify"
+              color={outlineLeftIcon}
+              onPress={() => {
+                changeIconColor('outlineLeftIcon');
+              }}
+            />
+          }
+          right={<TextInput.Affix text="/100" />}
+        />
+        <TextInput
           style={styles.inputContainerStyle}
           label="Flat input"
           placeholder="Type something"
@@ -210,8 +230,8 @@ const TextInputExample = () => {
             <TextInput.Icon
               name={() => (
                 <Icon
-                  name="camera"
-                  size={theme.isV3 ? 20 : 24}
+                  name="home"
+                  size={24}
                   color={customIcon}
                   onPress={() => {
                     changeIconColor('customIcon');
@@ -291,26 +311,7 @@ const TextInputExample = () => {
             theme.isV3 ? MD3Colors.tertiary50 : MD2Colors.amber900
           }
         />
-        <TextInput
-          mode="outlined"
-          style={styles.inputContainerStyle}
-          label="Outlined input"
-          placeholder="Type something"
-          value={outlinedText}
-          onChangeText={(outlinedText) =>
-            inputActionHandler('outlinedText', outlinedText)
-          }
-          left={
-            <TextInput.Icon
-              name="magnify"
-              color={outlineLeftIcon}
-              onPress={() => {
-                changeIconColor('outlineLeftIcon');
-              }}
-            />
-          }
-          right={<TextInput.Affix text="/100" />}
-        />
+
         <TextInput
           mode="outlined"
           style={[styles.inputContainerStyle, styles.fontSize]}
