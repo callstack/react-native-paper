@@ -12,6 +12,8 @@ import {
   useTheme,
   MD2Colors,
   MD3Colors,
+  List,
+  Divider,
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { inputReducer, State } from '../../utils';
@@ -51,6 +53,7 @@ const initialState: State = {
     outlineRightIcon: undefined,
     customIcon: undefined,
   },
+  expanded: true,
 };
 
 type AvoidingViewProps = {
@@ -104,6 +107,7 @@ const TextInputExample = () => {
       outlineRightIcon,
       customIcon,
     },
+    expanded,
   } = state;
 
   const _isUsernameValid = (name: string) => /^[a-zA-Z]*$/.test(name);
@@ -134,447 +138,493 @@ const TextInputExample = () => {
     });
   };
 
+  const setExpanded = (expanded: boolean) =>
+    dispatch({
+      type: 'expanded',
+      payload: expanded,
+    });
+
   return (
     <TextInputAvoidingView>
       <ScreenWrapper
-        contentContainerStyle={styles.container}
         keyboardShouldPersistTaps={'always'}
         removeClippedSubviews={false}
       >
-        <TextInput
-          mode="outlined"
-          style={styles.inputContainerStyle}
-          label="Outlined input"
-          placeholder="Type something"
-          value={outlinedText}
-          onChangeText={(outlinedText) =>
-            inputActionHandler('outlinedText', outlinedText)
-          }
-          left={
-            <TextInput.Icon
-              name="magnify"
-              color={outlineLeftIcon}
-              onPress={() => {
-                changeIconColor('outlineLeftIcon');
-              }}
-            />
-          }
-          right={<TextInput.Affix text="/100" />}
-        />
-        <TextInput
-          style={styles.inputContainerStyle}
-          label="Flat input"
-          placeholder="Type something"
-          value={text}
-          onChangeText={(text) => inputActionHandler('text', text)}
-          left={
-            <TextInput.Icon
-              name="magnify"
-              color={flatLeftIcon}
-              onPress={() => {
-                changeIconColor('flatLeftIcon');
-              }}
-            />
-          }
-          right={<TextInput.Affix text="/100" />}
-        />
-        <TextInput
-          style={[styles.inputContainerStyle, styles.fontSize]}
-          label="Flat input large font"
-          placeholder="Type something"
-          value={largeText}
-          onChangeText={(largeText) =>
-            inputActionHandler('largeText', largeText)
-          }
-          left={<TextInput.Affix text="#" />}
-          right={
-            <TextInput.Icon
-              name="magnify"
-              color={flatRightIcon}
-              onPress={() => {
-                changeIconColor('flatRightIcon');
-              }}
-            />
-          }
-        />
-        <TextInput
-          style={[styles.inputContainerStyle, styles.fontSize]}
-          label="Flat input large font"
-          placeholder="Type something"
-          value={flatTextPassword}
-          onChangeText={(flatTextPassword) =>
-            inputActionHandler('flatTextPassword', flatTextPassword)
-          }
-          secureTextEntry={flatTextSecureEntry}
-          right={
-            <TextInput.Icon
-              name={flatTextSecureEntry ? 'eye' : 'eye-off'}
-              onPress={() =>
-                dispatch({
-                  type: 'flatTextSecureEntry',
-                  payload: !flatTextSecureEntry,
-                })
-              }
-              forceTextInputFocus={false}
-            />
-          }
-        />
-        <TextInput
-          style={styles.inputContainerStyle}
-          label="Flat input with custom icon"
-          placeholder="Type something"
-          value={customIconText}
-          onChangeText={(text) => inputActionHandler('customIconText', text)}
-          right={<TextInput.Affix text="/100" />}
-          left={
-            <TextInput.Icon
-              name={() => (
-                <Icon
-                  name="home"
-                  size={24}
-                  color={customIcon}
+        <List.Section>
+          <List.Accordion
+            title="Flat inputs"
+            expanded={expanded}
+            onPress={() => setExpanded(!expanded)}
+          >
+            <TextInput
+              style={styles.inputContainerStyle}
+              label="Flat input"
+              placeholder="Type something"
+              value={text}
+              onChangeText={(text) => inputActionHandler('text', text)}
+              left={
+                <TextInput.Icon
+                  name="magnify"
+                  color={flatLeftIcon}
                   onPress={() => {
-                    changeIconColor('customIcon');
+                    changeIconColor('flatLeftIcon');
                   }}
                 />
-              )}
+              }
+              right={<TextInput.Affix text="/100" />}
             />
-          }
-        />
-        <TextInput
-          style={styles.inputContainerStyle}
-          dense
-          label="Dense flat input"
-          placeholder="Type something"
-          value={flatDenseText}
-          onChangeText={(flatDenseText) =>
-            inputActionHandler('flatDenseText', flatDenseText)
-          }
-          left={<TextInput.Affix text="#" />}
-          right={
-            <TextInput.Icon
-              name="chevron-up"
-              color={(focused) => (focused ? theme.colors?.primary : undefined)}
-            />
-          }
-        />
-        <TextInput
-          style={styles.inputContainerStyle}
-          dense
-          placeholder="Dense flat input without label"
-          value={flatDense}
-          onChangeText={(flatDense) =>
-            inputActionHandler('flatDense', flatDense)
-          }
-        />
-        <TextInput
-          style={styles.inputContainerStyle}
-          label="Flat input multiline"
-          multiline
-          placeholder="Type something"
-          value={flatMultiline}
-          onChangeText={(flatMultiline) =>
-            inputActionHandler('flatMultiline', flatMultiline)
-          }
-        />
-        <TextInput
-          style={[styles.inputContainerStyle, styles.textArea]}
-          label="Flat input text area"
-          multiline
-          placeholder="Type something"
-          value={flatTextArea}
-          onChangeText={(flatTextArea) =>
-            inputActionHandler('flatTextArea', flatTextArea)
-          }
-        />
-        <TextInput
-          disabled
-          style={styles.inputContainerStyle}
-          label="Disabled flat input"
-        />
-        <TextInput
-          disabled
-          style={styles.inputContainerStyle}
-          label="Disabled flat input with value"
-          value="Disabled flat input value"
-        />
-        <TextInput
-          style={styles.inputContainerStyle}
-          label="Flat input with custom underline colors"
-          placeholder="Type something"
-          value={flatUnderlineColors}
-          onChangeText={(flatUnderlineColors) =>
-            inputActionHandler('flatUnderlineColors', flatUnderlineColors)
-          }
-          underlineColor={theme.isV3 ? MD3Colors.primary70 : MD2Colors.pink400}
-          activeUnderlineColor={
-            theme.isV3 ? MD3Colors.tertiary50 : MD2Colors.amber900
-          }
-        />
-
-        <TextInput
-          mode="outlined"
-          style={[styles.inputContainerStyle, styles.fontSize]}
-          label="Outlined large font"
-          placeholder="Type something"
-          value={outlinedLargeText}
-          onChangeText={(outlinedLargeText) =>
-            inputActionHandler('outlinedLargeText', outlinedLargeText)
-          }
-          left={<TextInput.Affix text="$" />}
-          right={
-            <TextInput.Icon
-              name="magnify"
-              color={outlineRightIcon}
-              onPress={() => {
-                changeIconColor('outlineRightIcon');
-              }}
-            />
-          }
-        />
-        <TextInput
-          mode="outlined"
-          style={[styles.inputContainerStyle, styles.fontSize]}
-          label="Outlined large font"
-          placeholder="Type something"
-          value={outlinedTextPassword}
-          onChangeText={(outlinedTextPassword) =>
-            inputActionHandler('outlinedTextPassword', outlinedTextPassword)
-          }
-          secureTextEntry={outlineTextSecureEntry}
-          right={
-            <TextInput.Icon
-              name={outlineTextSecureEntry ? 'eye' : 'eye-off'}
-              onPress={() =>
-                dispatch({
-                  type: 'outlineTextSecureEntry',
-                  payload: !outlineTextSecureEntry,
-                })
+            <TextInput
+              style={styles.inputContainerStyle}
+              label="Flat input with custom icon"
+              placeholder="Type something"
+              value={customIconText}
+              onChangeText={(text) =>
+                inputActionHandler('customIconText', text)
+              }
+              right={<TextInput.Affix text="/100" />}
+              left={
+                <TextInput.Icon
+                  name={() => (
+                    <Icon
+                      name="home"
+                      size={24}
+                      color={customIcon}
+                      onPress={() => {
+                        changeIconColor('customIcon');
+                      }}
+                    />
+                  )}
+                />
               }
             />
-          }
-        />
-        <TextInput
-          mode="outlined"
-          style={styles.inputContainerStyle}
-          dense
-          label="Dense outlined input"
-          placeholder="Type something"
-          value={outlinedDenseText}
-          onChangeText={(outlinedDenseText) =>
-            inputActionHandler('outlinedDenseText', outlinedDenseText)
-          }
-          left={<TextInput.Affix text="$" />}
-        />
-        <TextInput
-          mode="outlined"
-          style={styles.inputContainerStyle}
-          dense
-          placeholder="Dense outlined input without label"
-          value={outlinedDense}
-          onChangeText={(outlinedDense) =>
-            inputActionHandler('outlinedDense', outlinedDense)
-          }
-        />
-        <TextInput
-          mode="outlined"
-          style={styles.inputContainerStyle}
-          label="Outlined input multiline"
-          multiline
-          placeholder="Type something"
-          value={outlinedMultiline}
-          onChangeText={(outlinedMultiline) =>
-            inputActionHandler('outlinedMultiline', outlinedMultiline)
-          }
-        />
-        <TextInput
-          mode="outlined"
-          style={[styles.inputContainerStyle, styles.textArea]}
-          label="Outlined input text area"
-          multiline
-          placeholder="Type something"
-          value={outlinedTextArea}
-          onChangeText={(outlinedTextArea) =>
-            inputActionHandler('outlinedTextArea', outlinedTextArea)
-          }
-        />
-        <TextInput
-          mode="outlined"
-          disabled
-          style={styles.inputContainerStyle}
-          label="Disabled outlined input"
-        />
-        <TextInput
-          mode="outlined"
-          disabled
-          style={styles.inputContainerStyle}
-          label="Disabled outlined input"
-          value="Disabled outlined input with value"
-          left={<TextInput.Icon disabled name="magnify" />}
-        />
-        <TextInput
-          mode="outlined"
-          disabled
-          style={styles.inputContainerStyle}
-          label="Disabled outlined input with icon"
-          left={<TextInput.Icon disabled name="magnify" />}
-        />
-        <TextInput
-          mode="outlined"
-          style={styles.inputContainerStyle}
-          label="Outlined input with custom outline colors"
-          placeholder="Type something"
-          value={outlinedColors}
-          onChangeText={(outlinedColors) =>
-            inputActionHandler('outlinedColors', outlinedColors)
-          }
-          outlineColor={theme.isV3 ? MD3Colors.primary70 : MD2Colors.pink400}
-          activeOutlineColor={
-            theme.isV3 ? MD3Colors.tertiary50 : MD2Colors.amber900
-          }
-        />
-        <TextInput
-          mode="outlined"
-          style={styles.inputContainerStyle}
-          label="Outlined with super long label which is truncating at some point"
-          placeholder="Type something"
-          onChangeText={(outlinedLongLabel) =>
-            inputActionHandler('outlinedLongLabel', outlinedLongLabel)
-          }
-        />
-        <View style={styles.inputContainerStyle}>
-          <TextInput
-            label="Input with helper text"
-            placeholder="Enter username, only letters"
-            value={name}
-            error={!_isUsernameValid(name)}
-            onChangeText={(name) => inputActionHandler('name', name)}
-          />
-          <HelperText type="error" visible={!_isUsernameValid(name)}>
-            Error: Only letters are allowed
-          </HelperText>
-        </View>
-        <View style={styles.inputContainerStyle}>
-          <TextInput
-            label="Input with helper text and character counter"
-            placeholder="Enter username, only letters"
-            value={maxLengthName}
-            error={!_isUsernameValid(maxLengthName)}
-            onChangeText={(maxLengthName) =>
-              inputActionHandler('maxLengthName', maxLengthName)
-            }
-            maxLength={MAX_LENGTH}
-          />
-          <View style={styles.helpersWrapper}>
-            <HelperText
-              type="error"
-              visible={!_isUsernameValid(maxLengthName)}
-              style={styles.helper}
-            >
-              Error: Numbers and special characters are not allowed
-            </HelperText>
-            <HelperText type="info" visible style={styles.counterHelper}>
-              {maxLengthName.length} / {MAX_LENGTH}
-            </HelperText>
-          </View>
-        </View>
-        <View style={styles.inputContainerStyle}>
-          <TextInput
-            label="Input with no padding"
-            style={styles.noPaddingInput}
-            placeholder="Enter username, only letters"
-            value={nameNoPadding}
-            error={!_isUsernameValid(nameNoPadding)}
-            onChangeText={(nameNoPadding) =>
-              inputActionHandler('nameNoPadding', nameNoPadding)
-            }
-          />
-          <HelperText
-            type="error"
-            padding="none"
-            visible={!_isUsernameValid(nameNoPadding)}
-          >
-            Error: Only letters are allowed
-          </HelperText>
-        </View>
-        <View style={styles.inputContainerStyle}>
-          <TextInput
-            label={
-              <Text>
-                <Text
-                  style={{
-                    color: theme.isV3 ? MD3Colors.error50 : MD2Colors.red500,
+            <TextInput
+              style={[styles.inputContainerStyle, styles.fontSize]}
+              label="Flat input large font"
+              placeholder="Type something"
+              value={largeText}
+              onChangeText={(largeText) =>
+                inputActionHandler('largeText', largeText)
+              }
+              left={<TextInput.Affix text="#" />}
+              right={
+                <TextInput.Icon
+                  name="magnify"
+                  color={flatRightIcon}
+                  onPress={() => {
+                    changeIconColor('flatRightIcon');
                   }}
+                />
+              }
+            />
+            <TextInput
+              style={[styles.inputContainerStyle, styles.fontSize]}
+              label="Flat input large font"
+              placeholder="Type something"
+              value={flatTextPassword}
+              onChangeText={(flatTextPassword) =>
+                inputActionHandler('flatTextPassword', flatTextPassword)
+              }
+              secureTextEntry={flatTextSecureEntry}
+              right={
+                <TextInput.Icon
+                  name={flatTextSecureEntry ? 'eye' : 'eye-off'}
+                  onPress={() =>
+                    dispatch({
+                      type: 'flatTextSecureEntry',
+                      payload: !flatTextSecureEntry,
+                    })
+                  }
+                  forceTextInputFocus={false}
+                />
+              }
+            />
+          </List.Accordion>
+        </List.Section>
+        <Divider />
+        <List.Section>
+          <List.Accordion title="Outline inputs">
+            <TextInput
+              mode="outlined"
+              style={styles.inputContainerStyle}
+              label="Outlined input"
+              placeholder="Type something"
+              value={outlinedText}
+              onChangeText={(outlinedText) =>
+                inputActionHandler('outlinedText', outlinedText)
+              }
+              left={
+                <TextInput.Icon
+                  name="magnify"
+                  color={outlineLeftIcon}
+                  onPress={() => {
+                    changeIconColor('outlineLeftIcon');
+                  }}
+                />
+              }
+              right={<TextInput.Affix text="/100" />}
+            />
+            <TextInput
+              mode="outlined"
+              style={[styles.inputContainerStyle, styles.fontSize]}
+              label="Outlined large font"
+              placeholder="Type something"
+              value={outlinedLargeText}
+              onChangeText={(outlinedLargeText) =>
+                inputActionHandler('outlinedLargeText', outlinedLargeText)
+              }
+              left={<TextInput.Affix text="$" />}
+              right={
+                <TextInput.Icon
+                  name="magnify"
+                  color={outlineRightIcon}
+                  onPress={() => {
+                    changeIconColor('outlineRightIcon');
+                  }}
+                />
+              }
+            />
+            <TextInput
+              mode="outlined"
+              style={[styles.inputContainerStyle, styles.fontSize]}
+              label="Outlined large font"
+              placeholder="Type something"
+              value={outlinedTextPassword}
+              onChangeText={(outlinedTextPassword) =>
+                inputActionHandler('outlinedTextPassword', outlinedTextPassword)
+              }
+              secureTextEntry={outlineTextSecureEntry}
+              right={
+                <TextInput.Icon
+                  name={outlineTextSecureEntry ? 'eye' : 'eye-off'}
+                  onPress={() =>
+                    dispatch({
+                      type: 'outlineTextSecureEntry',
+                      payload: !outlineTextSecureEntry,
+                    })
+                  }
+                />
+              }
+            />
+          </List.Accordion>
+        </List.Section>
+        <Divider />
+        <List.Section>
+          <List.Accordion title="Disabled inputs">
+            <TextInput
+              disabled
+              style={styles.inputContainerStyle}
+              label="Disabled flat input"
+            />
+            <TextInput
+              disabled
+              style={styles.inputContainerStyle}
+              label="Disabled flat input with value"
+              value="Disabled flat input value"
+            />
+            <TextInput
+              mode="outlined"
+              disabled
+              style={styles.inputContainerStyle}
+              label="Disabled outlined input"
+            />
+            <TextInput
+              mode="outlined"
+              disabled
+              style={styles.inputContainerStyle}
+              label="Disabled outlined input"
+              value="Disabled outlined input with value"
+            />
+          </List.Accordion>
+        </List.Section>
+        <Divider />
+        <List.Section>
+          <List.Accordion title="Dense inputs">
+            <TextInput
+              style={styles.inputContainerStyle}
+              dense
+              label="Dense flat input"
+              placeholder="Type something"
+              value={flatDenseText}
+              onChangeText={(flatDenseText) =>
+                inputActionHandler('flatDenseText', flatDenseText)
+              }
+              left={<TextInput.Affix text="#" />}
+              right={
+                <TextInput.Icon
+                  name="chevron-up"
+                  color={(focused) =>
+                    focused ? theme.colors?.primary : undefined
+                  }
+                />
+              }
+            />
+            <TextInput
+              style={styles.inputContainerStyle}
+              dense
+              placeholder="Dense flat input without label"
+              value={flatDense}
+              onChangeText={(flatDense) =>
+                inputActionHandler('flatDense', flatDense)
+              }
+            />
+            <TextInput
+              mode="outlined"
+              style={styles.inputContainerStyle}
+              dense
+              label="Dense outlined input"
+              placeholder="Type something"
+              value={outlinedDenseText}
+              onChangeText={(outlinedDenseText) =>
+                inputActionHandler('outlinedDenseText', outlinedDenseText)
+              }
+              left={<TextInput.Affix text="$" />}
+            />
+            <TextInput
+              mode="outlined"
+              style={styles.inputContainerStyle}
+              dense
+              placeholder="Dense outlined input without label"
+              value={outlinedDense}
+              onChangeText={(outlinedDense) =>
+                inputActionHandler('outlinedDense', outlinedDense)
+              }
+            />
+          </List.Accordion>
+        </List.Section>
+        <Divider />
+        <List.Section>
+          <List.Accordion title="Multiline inputs">
+            <TextInput
+              style={styles.inputContainerStyle}
+              label="Flat input multiline"
+              multiline
+              placeholder="Type something"
+              value={flatMultiline}
+              onChangeText={(flatMultiline) =>
+                inputActionHandler('flatMultiline', flatMultiline)
+              }
+            />
+            <TextInput
+              style={[styles.inputContainerStyle, styles.textArea]}
+              label="Flat input text area"
+              multiline
+              placeholder="Type something"
+              value={flatTextArea}
+              onChangeText={(flatTextArea) =>
+                inputActionHandler('flatTextArea', flatTextArea)
+              }
+            />
+            <View style={styles.inputContainerStyle}>
+              <TextInput
+                mode="flat"
+                label="Flat multiline text input with fixed height"
+                multiline
+                style={styles.fixedHeight}
+              />
+            </View>
+            <TextInput
+              mode="outlined"
+              style={styles.inputContainerStyle}
+              label="Outlined input multiline"
+              multiline
+              placeholder="Type something"
+              value={outlinedMultiline}
+              onChangeText={(outlinedMultiline) =>
+                inputActionHandler('outlinedMultiline', outlinedMultiline)
+              }
+            />
+            <TextInput
+              mode="outlined"
+              style={[styles.inputContainerStyle, styles.textArea]}
+              label="Outlined input text area"
+              multiline
+              placeholder="Type something"
+              value={outlinedTextArea}
+              onChangeText={(outlinedTextArea) =>
+                inputActionHandler('outlinedTextArea', outlinedTextArea)
+              }
+            />
+            <View style={styles.inputContainerStyle}>
+              <TextInput
+                mode="outlined"
+                label="Outlined multiline text input with fixed height"
+                multiline
+                style={styles.fixedHeight}
+              />
+            </View>
+          </List.Accordion>
+        </List.Section>
+        <Divider />
+        <List.Section>
+          <List.Accordion title="Inputs with helpers">
+            <View style={styles.inputContainerStyle}>
+              <TextInput
+                label="Input with helper text"
+                placeholder="Enter username, only letters"
+                value={name}
+                error={!_isUsernameValid(name)}
+                onChangeText={(name) => inputActionHandler('name', name)}
+              />
+              <HelperText type="error" visible={!_isUsernameValid(name)}>
+                Error: Only letters are allowed
+              </HelperText>
+            </View>
+            <View style={styles.inputContainerStyle}>
+              <TextInput
+                label="Input with helper text and character counter"
+                placeholder="Enter username, only letters"
+                value={maxLengthName}
+                error={!_isUsernameValid(maxLengthName)}
+                onChangeText={(maxLengthName) =>
+                  inputActionHandler('maxLengthName', maxLengthName)
+                }
+                maxLength={MAX_LENGTH}
+              />
+              <View style={styles.helpersWrapper}>
+                <HelperText
+                  type="error"
+                  visible={!_isUsernameValid(maxLengthName)}
+                  style={styles.helper}
                 >
-                  *
-                </Text>{' '}
-                Label as component
-              </Text>
-            }
-            style={styles.noPaddingInput}
-            placeholder="Enter username, required"
-            value={nameRequired}
-            error={!nameRequired}
-            onChangeText={(nameRequired) =>
-              inputActionHandler('nameRequired', nameRequired)
-            }
-          />
-          <HelperText type="error" padding="none" visible={!nameRequired}>
-            Error: Username is required
-          </HelperText>
-        </View>
-        <View style={styles.inputContainerStyle}>
-          <TextInput
-            label="Input with text align center"
-            style={styles.centeredText}
-          />
-        </View>
-        <View style={styles.inputContainerStyle}>
-          <TextInput
-            mode="outlined"
-            label="Outlined input with text align center"
-            style={styles.centeredText}
-          />
-        </View>
-        <View style={styles.inputContainerStyle}>
-          <TextInput
-            mode="outlined"
-            theme={{
-              roundness: 25,
-            }}
-            label="Outlined text input with custom roundness"
-          />
-        </View>
-        <View style={styles.inputContainerStyle}>
-          <TextInput
-            mode="outlined"
-            label="Outlined text input without roundness"
-            theme={{ roundness: 0 }}
-          />
-        </View>
-        <View style={styles.inputContainerStyle}>
-          <TextInput
-            mode="outlined"
-            label="Outlined text input with error"
-            error
-          />
-        </View>
-        <View style={styles.inputContainerStyle}>
-          <TextInput
-            mode="outlined"
-            label="Outlined multiline text input with fixed height"
-            multiline
-            style={styles.fixedHeight}
-          />
-        </View>
-        <View style={styles.inputContainerStyle}>
-          <TextInput
-            mode="flat"
-            label="Flat multiline text input with fixed height"
-            multiline
-            style={styles.fixedHeight}
-          />
-        </View>
+                  Error: Numbers and special characters are not allowed
+                </HelperText>
+                <HelperText type="info" visible style={styles.counterHelper}>
+                  {maxLengthName.length} / {MAX_LENGTH}
+                </HelperText>
+              </View>
+            </View>
+            <View style={styles.inputContainerStyle}>
+              <TextInput
+                label={
+                  <Text>
+                    <Text
+                      style={{
+                        color: theme.isV3
+                          ? MD3Colors.error50
+                          : MD2Colors.red500,
+                      }}
+                    >
+                      *
+                    </Text>{' '}
+                    Label as component
+                  </Text>
+                }
+                style={styles.noPaddingInput}
+                placeholder="Enter username, required"
+                value={nameRequired}
+                error={!nameRequired}
+                onChangeText={(nameRequired) =>
+                  inputActionHandler('nameRequired', nameRequired)
+                }
+              />
+              <HelperText type="error" padding="none" visible={!nameRequired}>
+                Error: Username is required
+              </HelperText>
+            </View>
+          </List.Accordion>
+        </List.Section>
+        <Divider />
+        <List.Section>
+          <List.Accordion title="Custom inputs">
+            <TextInput
+              style={styles.inputContainerStyle}
+              label="Flat input with custom underline colors"
+              placeholder="Type something"
+              value={flatUnderlineColors}
+              onChangeText={(flatUnderlineColors) =>
+                inputActionHandler('flatUnderlineColors', flatUnderlineColors)
+              }
+              underlineColor={
+                theme.isV3 ? MD3Colors.primary70 : MD2Colors.pink400
+              }
+              activeUnderlineColor={
+                theme.isV3 ? MD3Colors.tertiary50 : MD2Colors.amber900
+              }
+            />
+            <TextInput
+              mode="outlined"
+              style={styles.inputContainerStyle}
+              label="Outlined input with custom outline colors"
+              placeholder="Type something"
+              value={outlinedColors}
+              onChangeText={(outlinedColors) =>
+                inputActionHandler('outlinedColors', outlinedColors)
+              }
+              outlineColor={
+                theme.isV3 ? MD3Colors.primary70 : MD2Colors.pink400
+              }
+              activeOutlineColor={
+                theme.isV3 ? MD3Colors.tertiary50 : MD2Colors.amber900
+              }
+            />
+            <TextInput
+              mode="outlined"
+              style={styles.inputContainerStyle}
+              label="Outlined with super long label which is truncating at some point"
+              placeholder="Type something"
+              onChangeText={(outlinedLongLabel) =>
+                inputActionHandler('outlinedLongLabel', outlinedLongLabel)
+              }
+            />
+
+            <View style={styles.inputContainerStyle}>
+              <TextInput
+                label="Input with no padding"
+                style={styles.noPaddingInput}
+                placeholder="Enter username, only letters"
+                value={nameNoPadding}
+                error={!_isUsernameValid(nameNoPadding)}
+                onChangeText={(nameNoPadding) =>
+                  inputActionHandler('nameNoPadding', nameNoPadding)
+                }
+              />
+              <HelperText
+                type="error"
+                padding="none"
+                visible={!_isUsernameValid(nameNoPadding)}
+              >
+                Error: Only letters are allowed
+              </HelperText>
+            </View>
+
+            <View style={styles.inputContainerStyle}>
+              <TextInput
+                label="Input with text align center"
+                style={styles.centeredText}
+              />
+            </View>
+            <View style={styles.inputContainerStyle}>
+              <TextInput
+                mode="outlined"
+                label="Outlined input with text align center"
+                style={styles.centeredText}
+              />
+            </View>
+            <View style={styles.inputContainerStyle}>
+              <TextInput
+                mode="outlined"
+                theme={{
+                  roundness: 25,
+                }}
+                label="Outlined text input with custom roundness"
+              />
+            </View>
+            <View style={styles.inputContainerStyle}>
+              <TextInput
+                mode="outlined"
+                label="Outlined text input without roundness"
+                theme={{ roundness: 0 }}
+              />
+            </View>
+            <View style={styles.inputContainerStyle}>
+              <TextInput
+                mode="outlined"
+                label="Outlined text input with error"
+                error
+              />
+            </View>
+          </List.Accordion>
+        </List.Section>
       </ScreenWrapper>
     </TextInputAvoidingView>
   );
@@ -583,9 +633,6 @@ const TextInputExample = () => {
 TextInputExample.title = 'TextInput';
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 8,
-  },
   helpersWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-between',

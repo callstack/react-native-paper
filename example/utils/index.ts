@@ -37,6 +37,7 @@ export type State = {
   flatTextSecureEntry: boolean;
   outlineTextSecureEntry: boolean;
   iconsColor: IconsColor;
+  expanded: boolean;
 };
 
 export function inputReducer<T extends keyof State>(
