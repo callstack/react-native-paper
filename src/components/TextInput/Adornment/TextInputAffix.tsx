@@ -14,7 +14,7 @@ import { withTheme } from '../../../core/theming';
 import { AdornmentSide } from './enums';
 import type { Theme } from '../../../types';
 
-const AFFIX_OFFSET = 12;
+const AFFIX_OFFSET = 16;
 
 export type Props = {
   /**

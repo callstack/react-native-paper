@@ -20,6 +20,7 @@ import {
   MINIMIZED_LABEL_FONT_SIZE,
   LABEL_WIGGLE_X_OFFSET,
   ADORNMENT_SIZE,
+  MD3_ADORNMENT_SIZE,
   FLAT_INPUT_OFFSET,
 } from './constants';
 
@@ -38,7 +39,7 @@ import {
   getAdornmentStyleAdjustmentForNativeInput,
 } from './Adornment/TextInputAdornment';
 import { AdornmentSide, AdornmentType, InputMode } from './Adornment/enums';
-import { black } from '../../styles/themes/v2/colors';
+import MD3LightTheme from '../../styles/themes/v3/LightTheme';
 
 const MINIMIZED_LABEL_Y_OFFSET = -18;
 
@@ -90,6 +91,8 @@ const TextInputFlat = ({
   } = (StyleSheet.flatten(style) || {}) as TextStyle;
   const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
 
+  const THEME_ADORNMENT_SIZE = theme.isV3 ? MD3_ADORNMENT_SIZE : ADORNMENT_SIZE;
+
   const isPaddingHorizontalPassed =
     paddingHorizontal !== undefined && typeof paddingHorizontal === 'number';
 
@@ -100,6 +103,7 @@ const TextInputFlat = ({
 
   let { paddingLeft, paddingRight } = calculateFlatInputHorizontalPadding({
     adornmentConfig,
+    adornmentSize: THEME_ADORNMENT_SIZE,
   });
 
   if (isPaddingHorizontalPassed) {
@@ -110,12 +114,12 @@ const TextInputFlat = ({
   const { leftLayout, rightLayout } = parentState;
 
   const rightAffixWidth = right
-    ? rightLayout.width || ADORNMENT_SIZE
-    : ADORNMENT_SIZE;
+    ? rightLayout.width || THEME_ADORNMENT_SIZE
+    : THEME_ADORNMENT_SIZE;
 
   const leftAffixWidth = left
-    ? leftLayout.width || ADORNMENT_SIZE
-    : ADORNMENT_SIZE;
+    ? leftLayout.width || THEME_ADORNMENT_SIZE
+    : THEME_ADORNMENT_SIZE;
 
   const adornmentStyleAdjustmentForNativeInput =
     getAdornmentStyleAdjustmentForNativeInput({
@@ -133,35 +137,47 @@ const TextInputFlat = ({
     placeholderColor,
     errorColor;
 
-  const textColor = theme.isV3 ? theme.colors?.onSurface : theme.colors?.text;
+  const textColor = theme.isV3
+    ? theme.colors?.onSurfaceVariant
+    : theme.colors?.text;
+  //placeholder color
   const disabledColor = theme.isV3
-    ? theme.colors?.onSurfaceDisabled
+    ? color(theme.colors?.onSurface).alpha(0.38).rgb().string()
     : theme.colors?.disabled;
 
   if (disabled) {
-    inputTextColor = activeColor = color(textColor || black)
-      .alpha(0.54)
-      .rgb()
-      .string();
-    placeholderColor = disabledColor || black;
-    underlineColorCustom = 'transparent';
+    inputTextColor = activeColor = theme.isV3
+      ? disabledColor
+      : color(textColor).alpha(0.54).rgb().string();
+    placeholderColor = disabledColor;
+    underlineColorCustom = theme.isV3
+      ? color(theme.colors.onSurface).alpha(0.38).rgb().string()
+      : 'transparent';
   } else {
-    inputTextColor = textColor || black;
+    inputTextColor = textColor;
     activeColor = error
-      ? colors?.error || black
-      : activeUnderlineColor || colors?.primary || black;
-    placeholderColor =
-      (theme.isV3
-        ? theme.colors.onSurfaceDisabled
-        : theme.colors?.placeholder) || black;
-    errorColor = colors?.error || black;
-    underlineColorCustom = underlineColor || disabledColor || black;
+      ? colors?.error
+      : activeUnderlineColor || colors?.primary;
+    placeholderColor = theme.isV3
+      ? theme.colors.onSurfaceVariant
+      : theme.colors?.placeholder;
+    errorColor = colors?.error;
+    underlineColorCustom =
+      underlineColor || (theme.isV3 ? theme.colors.onSurface : disabledColor);
   }
 
   const containerStyle = {
-    backgroundColor: theme.dark
-      ? color(colors?.background).lighten(0.24).rgb().string()
-      : color(colors?.background).darken(0.06).rgb().string(),
+    // backgroundColor: theme.dark
+    //   ? color(colors?.background).lighten(0.24).rgb().string()
+    //   : color(colors?.background).darken(0.06).rgb().string(),
+    backgroundColor:
+      theme.isV3 && disabled
+        ? // According to Figma for both themes the base color for disabled in `onSecondaryContainer`
+          color(MD3LightTheme.colors.onSecondaryContainer)
+            .alpha(0.08)
+            .rgb()
+            .string()
+        : theme.colors.surfaceVariant,
     borderTopLeftRadius: theme.roundness,
     borderTopRightRadius: theme.roundness,
   };
@@ -236,7 +252,7 @@ const TextInputFlat = ({
     inputHeight +
     (!height ? (dense ? LABEL_PADDING_TOP_DENSE : LABEL_PADDING_TOP) : 0);
 
-  const iconTopPosition = (flatHeight - ADORNMENT_SIZE) / 2;
+  const iconTopPosition = (flatHeight - THEME_ADORNMENT_SIZE) / 2;
 
   const leftAffixTopPosition = leftLayout.height
     ? calculateFlatAffixTopPosition({
@@ -308,6 +324,7 @@ const TextInputFlat = ({
   return (
     <View style={[containerStyle, viewStyle]}>
       <Underline
+        hasActiveOutline={hasActiveOutline}
         parentState={parentState}
         underlineColorCustom={underlineColorCustom}
         error={error}
@@ -395,6 +412,7 @@ type UnderlineProps = {
   };
   activeColor: string;
   underlineColorCustom?: string;
+  hasActiveOutline?: boolean;
 };
 
 const Underline = ({
@@ -403,12 +421,13 @@ const Underline = ({
   colors,
   activeColor,
   underlineColorCustom,
+  hasActiveOutline,
 }: UnderlineProps) => {
   let backgroundColor = parentState.focused
     ? activeColor
     : underlineColorCustom;
 
-  if (error) backgroundColor = colors?.error || black;
+  if (error) backgroundColor = colors?.error;
 
   return (
     <Animated.View
@@ -417,7 +436,7 @@ const Underline = ({
         {
           backgroundColor,
           // Underlines is thinner when input is not focused
-          transform: [{ scaleY: parentState.focused ? 1 : 0.5 }],
+          transform: [{ scaleY: hasActiveOutline ? 2 : 0.5 }],
         },
       ]}
     />
@@ -434,7 +453,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    height: 2,
+    height: 1,
     zIndex: 1,
   },
   labelContainer: {

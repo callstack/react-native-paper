@@ -6,16 +6,16 @@ import {
   Platform,
   Text,
 } from 'react-native';
-import { TextInput, HelperText, useTheme } from 'react-native-paper';
+import {
+  TextInput,
+  HelperText,
+  useTheme,
+  MD2Colors,
+  MD3Colors,
+} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { inputReducer, State } from '../../utils';
 import ScreenWrapper from '../ScreenWrapper';
-import {
-  amber900,
-  pink400,
-  red500,
-  transparent,
-} from '../../../src/styles/themes/v2/colors';
 
 const MAX_LENGTH = 20;
 
@@ -149,7 +149,7 @@ const TextInputExample = () => {
           onChangeText={(text) => inputActionHandler('text', text)}
           left={
             <TextInput.Icon
-              name="heart"
+              name="magnify"
               color={flatLeftIcon}
               onPress={() => {
                 changeIconColor('flatLeftIcon');
@@ -169,7 +169,7 @@ const TextInputExample = () => {
           left={<TextInput.Affix text="#" />}
           right={
             <TextInput.Icon
-              name="heart"
+              name="magnify"
               color={flatRightIcon}
               onPress={() => {
                 changeIconColor('flatRightIcon');
@@ -210,8 +210,8 @@ const TextInputExample = () => {
             <TextInput.Icon
               name={() => (
                 <Icon
-                  name="heart"
-                  size={24}
+                  name="camera"
+                  size={theme.isV3 ? 20 : 24}
                   color={customIcon}
                   onPress={() => {
                     changeIconColor('customIcon');
@@ -273,6 +273,12 @@ const TextInputExample = () => {
           label="Disabled flat input"
         />
         <TextInput
+          disabled
+          style={styles.inputContainerStyle}
+          label="Disabled flat input with value"
+          value="Disabled flat input value"
+        />
+        <TextInput
           style={styles.inputContainerStyle}
           label="Flat input with custom underline colors"
           placeholder="Type something"
@@ -280,8 +286,10 @@ const TextInputExample = () => {
           onChangeText={(flatUnderlineColors) =>
             inputActionHandler('flatUnderlineColors', flatUnderlineColors)
           }
-          underlineColor={pink400}
-          activeUnderlineColor={amber900}
+          underlineColor={theme.isV3 ? MD3Colors.primary70 : MD2Colors.pink400}
+          activeUnderlineColor={
+            theme.isV3 ? MD3Colors.tertiary50 : MD2Colors.amber900
+          }
         />
         <TextInput
           mode="outlined"
@@ -294,7 +302,7 @@ const TextInputExample = () => {
           }
           left={
             <TextInput.Icon
-              name="heart"
+              name="magnify"
               color={outlineLeftIcon}
               onPress={() => {
                 changeIconColor('outlineLeftIcon');
@@ -315,7 +323,7 @@ const TextInputExample = () => {
           left={<TextInput.Affix text="$" />}
           right={
             <TextInput.Icon
-              name="heart"
+              name="magnify"
               color={outlineRightIcon}
               onPress={() => {
                 changeIconColor('outlineRightIcon');
@@ -397,6 +405,21 @@ const TextInputExample = () => {
         />
         <TextInput
           mode="outlined"
+          disabled
+          style={styles.inputContainerStyle}
+          label="Disabled outlined input"
+          value="Disabled outlined input with value"
+          left={<TextInput.Icon disabled name="magnify" />}
+        />
+        <TextInput
+          mode="outlined"
+          disabled
+          style={styles.inputContainerStyle}
+          label="Disabled outlined input with icon"
+          left={<TextInput.Icon disabled name="magnify" />}
+        />
+        <TextInput
+          mode="outlined"
           style={styles.inputContainerStyle}
           label="Outlined input with custom outline colors"
           placeholder="Type something"
@@ -404,8 +427,10 @@ const TextInputExample = () => {
           onChangeText={(outlinedColors) =>
             inputActionHandler('outlinedColors', outlinedColors)
           }
-          outlineColor={pink400}
-          activeOutlineColor={amber900}
+          outlineColor={theme.isV3 ? MD3Colors.primary70 : MD2Colors.pink400}
+          activeOutlineColor={
+            theme.isV3 ? MD3Colors.tertiary50 : MD2Colors.amber900
+          }
         />
         <TextInput
           mode="outlined"
@@ -475,7 +500,14 @@ const TextInputExample = () => {
           <TextInput
             label={
               <Text>
-                <Text style={{ color: red500 }}>*</Text> Label as component
+                <Text
+                  style={{
+                    color: theme.isV3 ? MD3Colors.error50 : MD2Colors.red500,
+                  }}
+                >
+                  *
+                </Text>{' '}
+                Label as component
               </Text>
             }
             style={styles.noPaddingInput}
@@ -576,7 +608,7 @@ const styles = StyleSheet.create({
     height: 80,
   },
   noPaddingInput: {
-    backgroundColor: transparent,
+    backgroundColor: 'transparent',
     paddingHorizontal: 0,
   },
   centeredText: {

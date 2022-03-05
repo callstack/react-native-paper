@@ -25,6 +25,7 @@ import {
   LABEL_WIGGLE_X_OFFSET,
   ADORNMENT_SIZE,
   ADORNMENT_OFFSET,
+  MD3_ADORNMENT_SIZE,
 } from './constants';
 
 import {
@@ -38,13 +39,12 @@ import {
 } from './helpers';
 import { AdornmentType, AdornmentSide } from './Adornment/enums';
 import type { Theme } from '../../types';
-import { black } from '../../styles/themes/v2/colors';
 
 const OUTLINE_MINIMIZED_LABEL_Y_OFFSET = -6;
 const LABEL_PADDING_TOP = 8;
 const MIN_HEIGHT = 64;
 const MIN_DENSE_HEIGHT = 48;
-const INPUT_PADDING_HORIZONTAL = 14;
+const INPUT_PADDING_HORIZONTAL = 16;
 
 const TextInputOutlined = ({
   disabled = false,
@@ -85,7 +85,7 @@ const TextInputOutlined = ({
     fontWeight,
     lineHeight,
     height,
-    backgroundColor = colors?.background || black,
+    backgroundColor = colors?.background,
     textAlign,
     ...viewStyle
   } = (StyleSheet.flatten(style) || {}) as TextStyle;
@@ -95,25 +95,33 @@ const TextInputOutlined = ({
 
   const textColor = theme.isV3 ? theme.colors.onSurface : theme.colors.text;
   const disabledColor = theme.isV3
-    ? theme.colors.onSurfaceDisabled
-    : theme.colors.disabled;
-  const themePlaceholderColor = theme.isV3
-    ? theme.colors.onSurface
-    : theme.colors.placeholder;
+    ? color(theme.colors?.onSurface).alpha(0.38).rgb().string()
+    : theme.colors?.disabled;
 
   if (disabled) {
     const isTransparent = color(customOutlineColor).alpha() === 0;
-    inputTextColor = activeColor = color(textColor).alpha(0.54).rgb().string();
-    placeholderColor = disabledColor || black;
-    outlineColor = isTransparent ? customOutlineColor : disabledColor || black;
+    inputTextColor = activeColor = theme.isV3
+      ? disabledColor
+      : color(textColor).alpha(0.54).rgb().string();
+    placeholderColor = disabledColor;
+    outlineColor =
+      theme.isV3 && disabled
+        ? theme.dark
+          ? 'transparent'
+          : theme.colors.surfaceDisabled
+        : isTransparent
+        ? customOutlineColor
+        : disabledColor;
   } else {
-    inputTextColor = textColor || black;
-    activeColor = error
-      ? colors?.error || black
-      : activeOutlineColor || colors?.primary || black;
-    placeholderColor = themePlaceholderColor || black;
-    outlineColor = customOutlineColor || themePlaceholderColor || black;
-    errorColor = colors?.error || black;
+    inputTextColor = textColor;
+    activeColor = error ? colors?.error : activeOutlineColor || colors?.primary;
+    placeholderColor = theme.isV3
+      ? theme.colors.onSurfaceVariant
+      : theme.colors.placeholder;
+    outlineColor =
+      customOutlineColor ||
+      (theme.isV3 ? theme.colors.outline : theme.colors.placeholder);
+    errorColor = colors?.error;
   }
 
   const labelScale = MINIMIZED_LABEL_FONT_SIZE / fontSize;
@@ -123,6 +131,8 @@ const TextInputOutlined = ({
   const labelHeight = parentState.labelLayout.height;
   const labelHalfWidth = labelWidth / 2;
   const labelHalfHeight = labelHeight / 2;
+
+  const THEME_ADORNMENT_SIZE = theme.isV3 ? MD3_ADORNMENT_SIZE : ADORNMENT_SIZE;
 
   const baseLabelTranslateX =
     (I18nManager.isRTL ? 1 : -1) *
@@ -137,7 +147,8 @@ const TextInputOutlined = ({
   );
   if (isAdornmentLeftIcon) {
     labelTranslationXOffset =
-      (I18nManager.isRTL ? -1 : 1) * (ADORNMENT_SIZE + ADORNMENT_OFFSET - 8);
+      (I18nManager.isRTL ? -1 : 1) *
+      (THEME_ADORNMENT_SIZE + ADORNMENT_OFFSET - 8);
   }
 
   const minInputHeight =
@@ -227,17 +238,17 @@ const TextInputOutlined = ({
   });
   const iconTopPosition = calculateOutlinedIconAndAffixTopPosition({
     height: minHeight,
-    affixHeight: ADORNMENT_SIZE,
+    affixHeight: THEME_ADORNMENT_SIZE,
     labelYOffset: -OUTLINE_MINIMIZED_LABEL_Y_OFFSET,
   });
 
   const rightAffixWidth = right
-    ? rightLayout.width || ADORNMENT_SIZE
-    : ADORNMENT_SIZE;
+    ? rightLayout.width || THEME_ADORNMENT_SIZE
+    : THEME_ADORNMENT_SIZE;
 
   const leftAffixWidth = left
-    ? leftLayout.width || ADORNMENT_SIZE
-    : ADORNMENT_SIZE;
+    ? leftLayout.width || THEME_ADORNMENT_SIZE
+    : THEME_ADORNMENT_SIZE;
 
   const adornmentStyleAdjustmentForNativeInput =
     getAdornmentStyleAdjustmentForNativeInput({
@@ -301,6 +312,7 @@ const TextInputOutlined = ({
           ]}
         >
           <InputLabel
+            mode="outlined"
             parentState={parentState}
             labelProps={labelProps}
             labelBackground={LabelBackground}
@@ -378,7 +390,7 @@ const Outline = ({
       {
         backgroundColor,
         borderRadius: theme.roundness,
-        borderWidth: focused ? 2 : 1,
+        borderWidth: (theme.isV3 ? hasActiveOutline : focused) ? 2 : 1,
         borderColor: hasActiveOutline ? activeColor : outlineColor,
       },
     ]}

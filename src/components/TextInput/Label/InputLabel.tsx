@@ -5,8 +5,7 @@ import AnimatedText from '../../Typography/AnimatedText';
 import type { InputLabelProps } from '../types';
 
 const InputLabel = (props: InputLabelProps) => {
-  const { parentState, labelBackground } = props;
-
+  const { parentState, labelBackground, mode } = props;
   const {
     label,
     error,
@@ -125,7 +124,12 @@ const InputLabel = (props: InputLabelProps) => {
           labelStyle,
           paddingOffset,
           {
-            color: error && errorColor ? errorColor : placeholderColor,
+            color:
+              error && errorColor
+                ? errorColor
+                : parentState.value && mode !== 'outlined'
+                ? activeColor
+                : placeholderColor,
             opacity: placeholderOpacity,
           },
         ]}

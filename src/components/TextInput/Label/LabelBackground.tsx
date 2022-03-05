@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Animated, StyleSheet } from 'react-native';
+import { useTheme } from '../../../core/theming';
 
 import AnimatedText from '../../Typography/AnimatedText';
 
@@ -23,6 +24,8 @@ const LabelBackground = ({
     inputRange: [0, 1],
     outputRange: [hasFocus ? 1 : 0, 0],
   });
+
+  const theme = useTheme();
 
   const labelTranslationX = {
     transform: [
@@ -58,23 +61,34 @@ const LabelBackground = ({
             placeholderStyle,
             labelStyle,
             styles.outlinedLabel,
+            theme.isV3 && styles.md3OutlinedLabel,
             {
-              top: topPosition + 1,
-              backgroundColor,
+              top: topPosition,
+              backgroundColor: theme.colors.surface,
               opacity,
-              transform: [
-                ...labelStyle.transform,
-                {
-                  scaleY: parentState.labeled.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0.2, 1],
-                  }),
-                },
-              ],
-              maxWidth:
-                parentState.labelLayout.width -
-                2 * placeholderStyle.paddingHorizontal,
+              transform: theme.isV3
+                ? [...labelStyle.transform]
+                : [
+                    ...labelStyle.transform,
+                    {
+                      scaleY: parentState.labeled.interpolate({
+                        inputRange: [0, 100],
+                        outputRange: [0.2, 100],
+                      }),
+                    },
+                  ],
             },
+            theme.isV3
+              ? {
+                  width:
+                    parentState.labelLayout.width -
+                    placeholderStyle.paddingHorizontal,
+                }
+              : {
+                  maxWidth:
+                    parentState.labelLayout.width -
+                    2 * placeholderStyle.paddingHorizontal,
+                },
           ]}
           numberOfLines={1}
         >
@@ -98,5 +112,8 @@ const styles = StyleSheet.create({
     left: 18,
     paddingHorizontal: 0,
     color: 'transparent',
+  },
+  md3OutlinedLabel: {
+    left: 8,
   },
 });
