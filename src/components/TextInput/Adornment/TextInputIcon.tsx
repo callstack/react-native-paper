@@ -116,12 +116,16 @@ const TextInputIcon = ({
 
   const theme = useTheme();
 
-  const iconColor =
-    color || theme.isV3
-      ? rest.disabled
-        ? theme.colors.onSurface
-        : theme.colors.onSurfaceVariant
-      : theme.colors.text;
+  let iconColor = color;
+
+  if (theme.isV3) {
+    if (rest.disabled) {
+      iconColor = theme.colors.onSurface;
+    }
+    iconColor = theme.colors.onSurfaceVariant;
+  } else {
+    iconColor = theme.colors.text;
+  }
 
   return (
     <View style={[styles.container, style]}>

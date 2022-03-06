@@ -1,4 +1,5 @@
 import type { Animated } from 'react-native';
+import color from 'color';
 import type { AdornmentConfig } from './Adornment/types';
 import {
   LABEL_PADDING_HORIZONTAL,
@@ -8,6 +9,8 @@ import {
 } from './constants';
 import { AdornmentType, AdornmentSide } from './Adornment/enums';
 import type { TextInputLabelProp } from './types';
+import MD3LightTheme from '../../styles/themes/v3/LightTheme';
+import type { Theme } from '../../types';
 
 type PaddingProps = {
   height: number | null;
@@ -286,4 +289,124 @@ export const calculateFlatInputHorizontalPadding = ({
   });
 
   return { paddingLeft, paddingRight };
+};
+
+export const getFlatInputColors = ({
+  underlineColor,
+  activeUnderlineColor,
+  disabled,
+  error,
+  theme,
+}: {
+  underlineColor?: string;
+  activeUnderlineColor?: string;
+  disabled?: boolean;
+  error?: boolean;
+  theme: Theme;
+}) => {
+  let inputTextColor,
+    activeColor,
+    underlineColorCustom,
+    placeholderColor,
+    errorColor,
+    backgroundColor;
+
+  // The same for both themes
+  activeColor = error
+    ? theme.colors?.error
+    : activeUnderlineColor || theme.colors?.primary;
+  errorColor = theme.colors?.error;
+
+  if (theme.isV3) {
+    if (disabled) {
+      inputTextColor =
+        activeColor =
+        placeholderColor =
+        underlineColorCustom =
+          theme.colors.onSurfaceDisabled;
+      // @ts-ignore According to Figma for both themes the base color for disabled in `onSecondaryContainer`
+      backgroundColor = color(MD3LightTheme.colors.onSecondaryContainer);
+    }
+    inputTextColor = placeholderColor = theme.colors.onSurfaceVariant;
+    underlineColorCustom = underlineColor || theme.colors.onSurface;
+    backgroundColor = theme.colors.surfaceVariant;
+  } else {
+    if (disabled) {
+      inputTextColor = activeColor = color(theme.colors?.text)
+        .alpha(0.54)
+        .rgb()
+        .string();
+      placeholderColor = theme.colors.disabled;
+      underlineColorCustom = 'transparent';
+    } else {
+      inputTextColor = theme.colors?.text;
+      placeholderColor = theme.colors?.placeholder;
+      underlineColorCustom = underlineColor || theme.colors.disabled;
+      backgroundColor = theme.dark
+        ? color(theme.colors?.background).lighten(0.24).rgb().string()
+        : color(theme.colors?.background).darken(0.06).rgb().string();
+    }
+  }
+
+  return {
+    inputTextColor,
+    activeColor,
+    placeholderColor,
+    underlineColorCustom,
+    errorColor,
+    backgroundColor,
+  };
+};
+
+export const getOutlinedInputColors = ({
+  activeOutlineColor,
+  customOutlineColor,
+  disabled,
+  error,
+  theme,
+}: {
+  activeOutlineColor?: string;
+  customOutlineColor?: string;
+  disabled?: boolean;
+  error?: boolean;
+  theme: Theme;
+}) => {
+  let inputTextColor, activeColor, outlineColor, placeholderColor, errorColor;
+
+  const textColor = theme.isV3 ? theme.colors.onSurface : theme.colors.text;
+  const isTransparent = color(customOutlineColor).alpha() === 0;
+
+  // The same for both themes
+  activeColor = error
+    ? theme.colors?.error
+    : activeOutlineColor || theme.colors?.primary;
+  errorColor = theme.colors?.error;
+
+  if (theme.isV3) {
+    if (disabled) {
+      inputTextColor = activeColor = theme.colors.onSurfaceDisabled;
+      placeholderColor = theme.colors.onSurfaceDisabled;
+      outlineColor = theme.dark ? 'transparent' : theme.colors.surfaceDisabled;
+    }
+    inputTextColor = textColor;
+    placeholderColor = theme.colors.onSurfaceVariant;
+    outlineColor = customOutlineColor || theme.colors.outline;
+  } else {
+    if (disabled) {
+      inputTextColor = color(textColor).alpha(0.54).rgb().string();
+      placeholderColor = theme.colors?.disabled;
+      outlineColor = isTransparent ? customOutlineColor : theme.colors.disabled;
+    }
+    inputTextColor = textColor;
+    placeholderColor = theme.colors.placeholder;
+    outlineColor = customOutlineColor || theme.colors.placeholder;
+  }
+
+  return {
+    inputTextColor,
+    activeColor,
+    outlineColor,
+    placeholderColor,
+    errorColor,
+  };
 };

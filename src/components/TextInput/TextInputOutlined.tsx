@@ -8,7 +8,6 @@ import {
   TextStyle,
   ColorValue,
 } from 'react-native';
-import color from 'color';
 import TextInputAdornment, {
   getAdornmentConfig,
   getAdornmentStyleAdjustmentForNativeInput,
@@ -35,6 +34,7 @@ import {
   Padding,
   interpolatePlaceholder,
   calculateOutlinedIconAndAffixTopPosition,
+  getOutlinedInputColors,
 } from './helpers';
 import { AdornmentType, AdornmentSide } from './Adornment/enums';
 import type { Theme } from '../../types';
@@ -93,38 +93,19 @@ const TextInputOutlined = ({
   } = (StyleSheet.flatten(style) || {}) as TextStyle;
   const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
 
-  let inputTextColor, activeColor, outlineColor, placeholderColor, errorColor;
-
-  const textColor = theme.isV3 ? theme.colors.onSurface : theme.colors.text;
-  const disabledColor = theme.isV3
-    ? color(theme.colors?.onSurface).alpha(0.38).rgb().string()
-    : theme.colors?.disabled;
-
-  if (disabled) {
-    const isTransparent = color(customOutlineColor).alpha() === 0;
-    inputTextColor = activeColor = theme.isV3
-      ? disabledColor
-      : color(textColor).alpha(0.54).rgb().string();
-    placeholderColor = disabledColor;
-    outlineColor =
-      theme.isV3 && disabled
-        ? theme.dark
-          ? 'transparent'
-          : theme.colors.surfaceDisabled
-        : isTransparent
-        ? customOutlineColor
-        : disabledColor;
-  } else {
-    inputTextColor = textColor;
-    activeColor = error ? colors?.error : activeOutlineColor || colors?.primary;
-    placeholderColor = theme.isV3
-      ? theme.colors.onSurfaceVariant
-      : theme.colors.placeholder;
-    outlineColor =
-      customOutlineColor ||
-      (theme.isV3 ? theme.colors.outline : theme.colors.placeholder);
-    errorColor = colors?.error;
-  }
+  const {
+    inputTextColor,
+    activeColor,
+    outlineColor,
+    placeholderColor,
+    errorColor,
+  } = getOutlinedInputColors({
+    activeOutlineColor,
+    customOutlineColor,
+    disabled,
+    error,
+    theme,
+  });
 
   const labelScale = MINIMIZED_LABEL_FONT_SIZE / fontSize;
   const fontScale = MAXIMIZED_LABEL_FONT_SIZE / fontSize;

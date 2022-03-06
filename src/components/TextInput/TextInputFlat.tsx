@@ -8,7 +8,6 @@ import {
   Platform,
   TextStyle,
 } from 'react-native';
-import color from 'color';
 import InputLabel from './Label/InputLabel';
 import TextInputAdornment, {
   TextInputAdornmentProps,
@@ -32,13 +31,13 @@ import {
   interpolatePlaceholder,
   calculateFlatAffixTopPosition,
   calculateFlatInputHorizontalPadding,
+  getFlatInputColors,
 } from './helpers';
 import {
   getAdornmentConfig,
   getAdornmentStyleAdjustmentForNativeInput,
 } from './Adornment/TextInputAdornment';
 import { AdornmentSide, AdornmentType, InputMode } from './Adornment/enums';
-import MD3LightTheme from '../../styles/themes/v3/LightTheme';
 
 const MINIMIZED_LABEL_Y_OFFSET = -18;
 
@@ -134,53 +133,23 @@ const TextInputFlat = ({
       mode: InputMode.Flat,
     });
 
-  let inputTextColor,
+  const {
+    inputTextColor,
     activeColor,
     underlineColorCustom,
     placeholderColor,
-    errorColor;
-
-  const textColor = theme.isV3
-    ? theme.colors?.onSurfaceVariant
-    : theme.colors?.text;
-  //placeholder color
-  const disabledColor = theme.isV3
-    ? color(theme.colors?.onSurface).alpha(0.38).rgb().string()
-    : theme.colors?.disabled;
-
-  if (disabled) {
-    inputTextColor = activeColor = theme.isV3
-      ? disabledColor
-      : color(textColor).alpha(0.54).rgb().string();
-    placeholderColor = disabledColor;
-    underlineColorCustom = theme.isV3
-      ? color(theme.colors.onSurface).alpha(0.38).rgb().string()
-      : 'transparent';
-  } else {
-    inputTextColor = textColor;
-    activeColor = error
-      ? colors?.error
-      : activeUnderlineColor || colors?.primary;
-    placeholderColor = theme.isV3
-      ? theme.colors.onSurfaceVariant
-      : theme.colors?.placeholder;
-    errorColor = colors?.error;
-    underlineColorCustom =
-      underlineColor || (theme.isV3 ? theme.colors.onSurface : disabledColor);
-  }
+    errorColor,
+    backgroundColor,
+  } = getFlatInputColors({
+    underlineColor,
+    activeUnderlineColor,
+    disabled,
+    error,
+    theme,
+  });
 
   const containerStyle = {
-    // backgroundColor: theme.dark
-    //   ? color(colors?.background).lighten(0.24).rgb().string()
-    //   : color(colors?.background).darken(0.06).rgb().string(),
-    backgroundColor:
-      theme.isV3 && disabled
-        ? // According to Figma for both themes the base color for disabled in `onSecondaryContainer`
-          color(MD3LightTheme.colors.onSecondaryContainer)
-            .alpha(0.08)
-            .rgb()
-            .string()
-        : theme.colors.surfaceVariant,
+    backgroundColor,
     borderTopLeftRadius: theme.roundness,
     borderTopRightRadius: theme.roundness,
   };
