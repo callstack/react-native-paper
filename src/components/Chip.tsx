@@ -165,12 +165,14 @@ const Chip = ({
     }).start();
   };
 
-  const { dark, colors } = theme;
+  const { dark, colors, isV3 } = theme;
   const defaultBackgroundColor =
     mode === 'outlined' ? colors?.surface : dark ? '#383838' : '#ebebeb';
 
-  const { backgroundColor = defaultBackgroundColor, borderRadius = 16 } =
-    (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const {
+    backgroundColor = defaultBackgroundColor,
+    borderRadius = isV3 ? 8 : 16,
+  } = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
   const themeTextColor = theme.isV3
     ? theme.colors.onSurface
@@ -274,9 +276,27 @@ const Chip = ({
         accessibilityState={accessibilityState}
         testID={testID}
       >
-        <View style={[styles.content, { paddingRight: onClose ? 32 : 4 }]}>
+        <View
+          style={[
+            styles.content,
+            isV3 && styles.md3Content,
+            isV3
+              ? {
+                  paddingRight: onClose ? 34 : 0,
+                }
+              : {
+                  paddingRight: onClose ? 32 : 8,
+                },
+          ]}
+        >
           {avatar && !icon ? (
-            <View style={[styles.avatarWrapper, disabled && { opacity: 0.26 }]}>
+            <View
+              style={[
+                styles.avatarWrapper,
+                isV3 && styles.md3AvatarWrapper,
+                disabled && { opacity: 0.26 },
+              ]}
+            >
               {React.isValidElement(avatar)
                 ? React.cloneElement(avatar, {
                     style: [styles.avatar, avatar.props.style],
@@ -288,7 +308,14 @@ const Chip = ({
             <View
               style={[
                 styles.icon,
-                avatar ? [styles.avatar, styles.avatarSelected] : null,
+                isV3 && styles.md3Icon,
+                avatar
+                  ? [
+                      styles.avatar,
+                      styles.avatarSelected,
+                      isV3 && selected && styles.md3SelectedIcon,
+                    ]
+                  : null,
               ]}
             >
               {icon ? (
@@ -308,16 +335,22 @@ const Chip = ({
             </View>
           ) : null}
           <Text
+            variant="labelLarge"
             selectable={false}
             numberOfLines={1}
             style={[
               styles.text,
-              {
-                ...theme.fonts.regular,
-                color: textColor,
-                marginRight: onClose ? 0 : 8,
-                marginLeft: avatar || icon || selected ? 4 : 8,
-              },
+              isV3
+                ? {
+                    marginLeft: avatar || icon || selected ? 8 : 16,
+                    marginRight: onClose ? 0 : 16,
+                  }
+                : {
+                    ...theme.fonts.regular,
+                    color: textColor,
+                    marginRight: onClose ? 0 : 8,
+                    marginLeft: avatar || icon || selected ? 4 : 8,
+                  },
               textStyle,
             ]}
             ellipsizeMode={ellipsizeMode}
@@ -336,13 +369,23 @@ const Chip = ({
             accessibilityRole="button"
             accessibilityLabel={closeIconAccessibilityLabel}
           >
-            <View style={[styles.icon, styles.closeIcon]}>
+            <View
+              style={[
+                styles.icon,
+                styles.closeIcon,
+                isV3 && styles.md3CloseIcon,
+              ]}
+            >
               {closeIcon ? (
-                <Icon source={closeIcon} color={iconColor} size={16} />
+                <Icon
+                  source={closeIcon}
+                  color={iconColor}
+                  size={isV3 ? 18 : 16}
+                />
               ) : (
                 <MaterialCommunityIcon
-                  name="close-circle"
-                  size={16}
+                  name={isV3 ? 'close' : 'close-circle'}
+                  size={isV3 ? 18 : 16}
                   color={iconColor}
                   direction="ltr"
                 />
@@ -368,12 +411,23 @@ const styles = StyleSheet.create({
     position: 'relative',
     flexGrow: 1,
   },
+  md3Content: {
+    paddingLeft: 0,
+  },
   icon: {
     padding: 4,
     alignSelf: 'center',
   },
+  md3Icon: {
+    paddingLeft: 8,
+    paddingRight: 0,
+  },
   closeIcon: {
     marginRight: 4,
+  },
+  md3CloseIcon: {
+    marginRight: 8,
+    padding: 0,
   },
   text: {
     minHeight: 24,
@@ -388,6 +442,12 @@ const styles = StyleSheet.create({
   },
   avatarWrapper: {
     marginRight: 4,
+  },
+  md3AvatarWrapper: {
+    marginLeft: 4,
+  },
+  md3SelectedIcon: {
+    paddingLeft: 4,
   },
   avatarSelected: {
     position: 'absolute',
