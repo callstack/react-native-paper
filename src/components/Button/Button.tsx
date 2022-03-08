@@ -20,12 +20,16 @@ import { buttonMode, getButtonColors } from './helpers';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
+   * @supported Modes 'elevated' and 'contained-tonal' available in v3.x with theme version 3.
+   *
    * Mode of the button. You can change the mode to adjust the styling to give it desired emphasis.
-   * - `text` - flat button without background or outline (low emphasis)
-   * - `outlined` - button with an outline (medium emphasis)
-   * - `contained` - button with a background color and elevation shadow (high emphasis)
+   * - `text` - flat button without background or outline, used for the lowest priority actions, especially when presenting multiple options.
+   * - `outlined` - button with an outline without background, typically used for important, but not primary action – represents medium emphasis.
+   * - `contained` - button with a background color, used for important action, have the most visual impact and high emphasis.
+   * - `elevated` - button with a background color and elevation, used when absolutely necessary e.g. button requires visual separation from a patterned background.
+   * - `container-tonal` - button with a secondary background color, an alternative middle ground between filled and outlined buttons.
    */
-  mode?: buttonMode;
+  mode?: 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal';
   /**
    * Whether the color is a dark color. A dark button will render light text and vice-versa. Only applicable for `contained` mode.
    */
@@ -96,21 +100,6 @@ type Props = React.ComponentProps<typeof Surface> & {
 
 /**
  * A button is component that the user can press to trigger an action.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img src="screenshots/button-1.png" />
- *     <figcaption>Text button</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/button-2.png" />
- *     <figcaption>Outlined button</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/button-3.png" />
- *     <figcaption>Contained button</figcaption>
- *   </figure>
- * </div>
  *
  * ## Usage
  * ```js
