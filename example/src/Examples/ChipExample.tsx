@@ -6,7 +6,7 @@ import ScreenWrapper from '../ScreenWrapper';
 
 const ChipExample = () => {
   const [visible, setVisible] = React.useState<boolean>(false);
-  const { colors } = useTheme();
+  const { colors, isV3 } = useTheme();
 
   return (
     <>
@@ -64,6 +64,11 @@ const ChipExample = () => {
             >
               Avatar (disabled)
             </Chip>
+            {isV3 && (
+              <Chip dense style={styles.chip}>
+                Dense chip
+              </Chip>
+            )}
           </View>
         </List.Section>
         <List.Section title="Outlined chip">
@@ -128,10 +133,41 @@ const ChipExample = () => {
             >
               Avatar (disabled)
             </Chip>
+            {isV3 && (
+              <Chip mode="outlined" dense style={styles.chip}>
+                Dense chip
+              </Chip>
+            )}
           </View>
         </List.Section>
         <List.Section title="Custom chip">
           <View style={styles.row}>
+            {isV3 && (
+              <>
+                <Chip
+                  mode="outlined"
+                  onPress={() => {}}
+                  dense
+                  avatar={
+                    <Image source={require('../../assets/images/avatar.png')} />
+                  }
+                  style={[styles.chip, styles.customBorderRadius]}
+                >
+                  Dense with custom border radius
+                </Chip>
+                <Chip
+                  mode="flat"
+                  onPress={() => {}}
+                  dense
+                  avatar={
+                    <Image source={require('../../assets/images/avatar.png')} />
+                  }
+                  style={[styles.chip, styles.customBorderRadius]}
+                >
+                  Dense with custom border radius
+                </Chip>
+              </>
+            )}
             <Chip
               mode="outlined"
               onPress={() => {}}
@@ -259,6 +295,9 @@ const styles = StyleSheet.create({
   fullWidthChip: {
     marginVertical: 4,
     marginHorizontal: 12,
+  },
+  customBorderRadius: {
+    borderRadius: 16,
   },
 });
 

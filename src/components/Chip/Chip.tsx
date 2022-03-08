@@ -69,6 +69,11 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   onPress?: () => void;
   /**
+   * @supported Available in v3.x with theme version 3
+   * Sets smaller horizontal paddings `12dp` around label, when there is only label.
+   */
+  dense?: boolean;
+  /**
    * Function to execute on long press.
    */
   onLongPress?: () => void;
@@ -141,6 +146,7 @@ const Chip = ({
   testID,
   selectedColor,
   ellipsizeMode,
+  dense,
   ...rest
 }: Props) => {
   const { current: elevation } = React.useRef<Animated.Value>(
@@ -208,7 +214,7 @@ const Chip = ({
   }
 
   const elevationStyle = Platform.OS === 'android' ? elevation : 0;
-  const multiplier = isV3 ? 2 : 1;
+  const multiplier = isV3 ? (dense ? 1.5 : 2) : 1;
   const labelSpacings = {
     marginRight: onClose ? 0 : 8 * multiplier,
     marginLeft: avatar || icon || selected ? 4 * multiplier : 8 * multiplier,
@@ -421,6 +427,7 @@ const styles = StyleSheet.create({
   },
   md3AvatarWrapper: {
     marginLeft: 4,
+    marginRight: 0,
   },
   md3SelectedIcon: {
     paddingLeft: 4,
