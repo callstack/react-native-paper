@@ -25,7 +25,7 @@ const LabelBackground = ({
     outputRange: [hasFocus ? 1 : 0, 0],
   });
 
-  const theme = useTheme();
+  const { isV3, colors } = useTheme();
 
   const labelTranslationX = {
     transform: [
@@ -61,12 +61,12 @@ const LabelBackground = ({
             placeholderStyle,
             labelStyle,
             styles.outlinedLabel,
-            theme.isV3 && styles.md3OutlinedLabel,
+            isV3 && styles.md3OutlinedLabel,
             {
-              top: topPosition,
-              backgroundColor: theme.colors.surface,
+              top: topPosition + (isV3 ? 0 : 1),
+              backgroundColor: colors.surface,
               opacity,
-              transform: theme.isV3
+              transform: isV3
                 ? [...labelStyle.transform]
                 : [
                     ...labelStyle.transform,
@@ -78,7 +78,7 @@ const LabelBackground = ({
                     },
                   ],
             },
-            theme.isV3
+            isV3
               ? {
                   width:
                     parentState.labelLayout.width -
