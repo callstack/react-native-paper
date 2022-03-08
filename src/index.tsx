@@ -30,7 +30,7 @@ export { default as BottomNavigation } from './components/BottomNavigation/Botto
 export { default as Button } from './components/Button';
 export { default as Card } from './components/Card/Card';
 export { default as Checkbox } from './components/Checkbox';
-export { default as Chip } from './components/Chip';
+export { default as Chip } from './components/Chip/Chip';
 export { default as DataTable } from './components/DataTable/DataTable';
 export { default as Dialog } from './components/Dialog/Dialog';
 export { default as Divider } from './components/Divider';

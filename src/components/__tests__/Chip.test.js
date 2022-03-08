@@ -1,6 +1,6 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import Chip from '../Chip.tsx';
+import Chip from '../Chip/Chip.tsx';
 
 it('renders chip with onPress', () => {
   const tree = renderer

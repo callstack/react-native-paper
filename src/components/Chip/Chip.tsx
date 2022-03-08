@@ -10,16 +10,16 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import color from 'color';
-import type { IconSource } from './Icon';
-import Icon from './Icon';
-import MaterialCommunityIcon from './MaterialCommunityIcon';
-import Surface from './Surface';
-import Text from './Typography/Text';
-import TouchableRipple from './TouchableRipple/TouchableRipple';
-import { withTheme } from '../core/theming';
-import { black, white } from '../styles/themes/v2/colors';
-import type { EllipsizeProp, Theme } from '../types';
+import type { IconSource } from '../Icon';
+import Icon from '../Icon';
+import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import Surface from '../Surface';
+import Text from '../Typography/Text';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import { withTheme } from '../../core/theming';
+import { white } from '../../styles/themes/v2/colors';
+import type { EllipsizeProp, Theme } from '../../types';
+import { getChipColors } from './helpers';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
@@ -167,90 +167,31 @@ const Chip = ({
     }).start();
   };
 
-  const { dark, colors, isV3 } = theme;
-
-  let defaultBackgroundColor;
-
-  if (isV3) {
-    defaultBackgroundColor = isOutlined
-      ? theme.colors.surface
-      : theme.colors.secondaryContainer;
-  } else {
-    defaultBackgroundColor = isOutlined
-      ? colors?.surface
-      : dark
-      ? '#383838'
-      : '#ebebeb';
-  }
+  const { isV3 } = theme;
 
   const opacity = isV3 ? 0.38 : 0.26;
   const defaultBorderRadius = isV3 ? 8 : 16;
   const iconSize = isV3 ? 18 : 16;
 
   const {
-    backgroundColor: customBackgroundColor = defaultBackgroundColor,
+    backgroundColor: customBackgroundColor,
     borderRadius = defaultBorderRadius,
   } = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
-  let borderColor;
-  let textColor;
-  let iconColor;
-  let backgroundColor;
-  let underlayColor;
-
-  backgroundColor =
-    typeof customBackgroundColor === 'string'
-      ? customBackgroundColor
-      : defaultBackgroundColor;
-
-  const selectedBackgroundColor = (
-    dark
-      ? color(backgroundColor).lighten(mode === 'outlined' ? 0.2 : 0.4)
-      : color(backgroundColor).darken(mode === 'outlined' ? 0.08 : 0.2)
-  )
-    .rgb()
-    .string();
-
-  if (isV3) {
-    if (disabled) {
-      const customDisabledColor = color(theme.colors.onSurfaceVariant)
-        .alpha(0.12)
-        .rgb()
-        .string();
-      borderColor = customDisabledColor;
-      textColor = iconColor = theme.colors.onSurfaceDisabled;
-      backgroundColor = isOutlined ? 'transparent' : customDisabledColor;
-    } else {
-      borderColor = theme.colors.outline;
-      textColor = iconColor = isOutlined
-        ? theme.colors.onSurfaceVariant
-        : theme.colors.onSecondaryContainer;
-      underlayColor = color(textColor).alpha(0.12).rgb().string();
-    }
-  } else {
-    borderColor = isOutlined
-      ? color(
-          selectedColor !== undefined
-            ? selectedColor
-            : color(dark ? white : black)
-        )
-          .alpha(0.29)
-          .rgb()
-          .string()
-      : backgroundColor;
-    if (disabled) {
-      textColor = theme.colors.disabled;
-      iconColor = theme.colors.disabled;
-    } else {
-      const customTextColor =
-        selectedColor !== undefined ? selectedColor : theme.colors.text;
-      textColor = color(customTextColor).alpha(0.87).rgb().string();
-      iconColor = color(customTextColor).alpha(0.54).rgb().string();
-      underlayColor = selectedColor
-        ? color(selectedColor).fade(0.5).rgb().string()
-        : selectedBackgroundColor;
-    }
-  }
+  const {
+    borderColor,
+    textColor,
+    iconColor,
+    underlayColor,
+    selectedBackgroundColor,
+    backgroundColor,
+  } = getChipColors({
+    selectedColor,
+    customBackgroundColor,
+    theme,
+    isOutlined,
+    disabled,
+  });
 
   const accessibilityTraits = ['button'];
   const accessibilityState: AccessibilityState = {
@@ -273,7 +214,7 @@ const Chip = ({
     marginLeft: avatar || icon || selected ? 4 * multiplier : 8 * multiplier,
   };
   const contentSpacings = {
-    paddingRight: isV3 ? (onClose ? 34 : 0) : onClose ? 32 : 8,
+    paddingRight: isV3 ? (onClose ? 34 : 0) : onClose ? 32 : 4,
   };
 
   return (
@@ -377,13 +318,13 @@ const Chip = ({
             numberOfLines={1}
             style={[
               styles.text,
-              labelSpacings,
               {
                 color: textColor,
-                ...(isV3 && {
+                ...(!isV3 && {
                   ...theme.fonts.regular,
                 }),
               },
+              labelSpacings,
               textStyle,
             ]}
             ellipsizeMode={ellipsizeMode}
