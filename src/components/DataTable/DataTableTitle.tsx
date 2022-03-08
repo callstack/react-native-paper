@@ -7,6 +7,7 @@ import {
   View,
   ViewStyle,
   I18nManager,
+  TextStyle,
 } from 'react-native';
 import color from 'color';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -35,6 +36,7 @@ type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
    */
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
+  colorText?: StyleProp<TextStyle>;
   /**
    * @optional
    */
@@ -64,7 +66,7 @@ type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
  *           >
  *             Dessert
  *           </DataTable.Title>
- *           <DataTable.Title numeric>Calories</DataTable.Title>
+ *           <DataTable.Title colorText="#FFF" numeric>Calories</DataTable.Title>
  *           <DataTable.Title numeric>Fat (g)</DataTable.Title>
  *         </DataTable.Header>
  *       </DataTable>
@@ -80,6 +82,7 @@ const DataTableTitle = ({
   onPress,
   sortDirection,
   theme,
+  colorText,
   style,
   numberOfLines = 1,
   ...rest
@@ -122,7 +125,7 @@ const DataTableTitle = ({
         <Text
           style={[
             styles.cell,
-            sortDirection ? styles.sorted : { color: textColor },
+            sortDirection ? styles.sorted : { color: colorText ? colorText : textColor },
           ]}
           numberOfLines={numberOfLines}
         >
