@@ -24,7 +24,7 @@ import type {
   TextLayoutEventData,
 } from 'react-native';
 import { white, black } from '../../../styles/themes/v2/colors';
-import AnimatedText from '../../Typography/v2/AnimatedText';
+import AnimatedText from '../../Typography/AnimatedText';
 import { getCombinedStyles } from './utils';
 
 export type AnimatedFABIconMode = 'static' | 'dynamic';
