@@ -36,7 +36,7 @@ type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
    */
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
-  colorText?: StyleProp<TextStyle>;
+  textStyle?: StyleProp<TextStyle>;
   /**
    * @optional
    */
@@ -82,7 +82,7 @@ const DataTableTitle = ({
   onPress,
   sortDirection,
   theme,
-  colorText,
+  textStyle,
   style,
   numberOfLines = 1,
   ...rest
@@ -125,7 +125,8 @@ const DataTableTitle = ({
         <Text
           style={[
             styles.cell,
-            sortDirection ? styles.sorted : { color: colorText ? colorText : textColor },
+            sortDirection ? styles.sorted : { color: textColor },
+            textStyle,
           ]}
           numberOfLines={numberOfLines}
         >
