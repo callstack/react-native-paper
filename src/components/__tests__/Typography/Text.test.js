@@ -7,25 +7,25 @@ it('renders every variant of Text with children as content', () => {
 
   const variants = (
     <>
-      <Text variant="display-large">{content}</Text>
-      <Text variant="display-medium">{content}</Text>
-      <Text variant="display-small">{content}</Text>
+      <Text variant="displayLarge">{content}</Text>
+      <Text variant="displayMedium">{content}</Text>
+      <Text variant="displaySmall">{content}</Text>
 
-      <Text variant="headline-large">{content}</Text>
-      <Text variant="headline-medium">{content}</Text>
-      <Text variant="headline-small">{content}</Text>
+      <Text variant="headlineLarge">{content}</Text>
+      <Text variant="headlineMedium">{content}</Text>
+      <Text variant="headlineSmall">{content}</Text>
 
-      <Text variant="title-large">{content}</Text>
-      <Text variant="title-medium">{content}</Text>
-      <Text variant="title-small">{content}</Text>
+      <Text variant="titleLarge">{content}</Text>
+      <Text variant="titleMedium">{content}</Text>
+      <Text variant="titleSmall">{content}</Text>
 
-      <Text variant="body-large">{content}</Text>
-      <Text variant="body-medium">{content}</Text>
-      <Text variant="body-small">{content}</Text>
+      <Text variant="bodyLarge">{content}</Text>
+      <Text variant="bodyMedium">{content}</Text>
+      <Text variant="bodySmall">{content}</Text>
 
-      <Text variant="label-large">{content}</Text>
-      <Text variant="label-medium">{content}</Text>
-      <Text variant="label-small">{content}</Text>
+      <Text variant="labelLarge">{content}</Text>
+      <Text variant="labelMedium">{content}</Text>
+      <Text variant="labelSmall">{content}</Text>
     </>
   );
 

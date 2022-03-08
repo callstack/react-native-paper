@@ -4,31 +4,83 @@ import {
   TextStyle,
   StyleProp,
   StyleSheet,
+  I18nManager,
 } from 'react-native';
 import { useTheme } from '../../core/theming';
 import { Font, MD3TypescaleKey, ThemeProp } from '../../types';
 
 type Props = React.ComponentProps<typeof NativeText> & {
-  style?: StyleProp<TextStyle>;
+  /**
+   * @supported Available in v3.x with theme version 3
+   *
+   * Variant defines appropriate text styles for type role and its size.
+   * Available variants:
+   *
+   *  Display: `displayLarge`, `displayMedium`, `displaySmall`
+   *
+   *  Headline: `headlineLarge`, `headlineMedium`, `headlineSmall`
+   *
+   *  Title: `titleLarge`, `titleMedium`, `titleSmall`
+   *
+   *  Label:  `labelLarge`, `labelMedium`, `labelSmall`
+   *
+   *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
+   */
   variant?: keyof typeof MD3TypescaleKey;
+  children: React.ReactNode;
   theme?: ThemeProp;
+  style?: StyleProp<TextStyle>;
 };
 
 // @component-group Typography
 
 /**
- * Text component which follows styles from the theme.
+ * Typography component showing styles complied with passed `variant` prop and supported by the type system.
+ *
+ *
+ * ## Usage
+ * ```js
+ * import * as React from 'react';
+ * import { Text } from 'react-native-paper';
+ *
+ * const MyComponent = () => (
+ *   <>
+ *     <Text variant="displayLarge">Display Large</Text>
+ *     <Text variant="displayMedium">Display Medium</Text>
+ *     <Text variant="displaySmall">Display small</Text>
+ *
+ *     <Text variant="headlineLarge">Headline Large</Text>
+ *     <Text variant="headlineMedium">Headline Medium</Text>
+ *     <Text variant="headlineSmall">Headline Small</Text>
+ *
+ *     <Text variant="titleLarge">Title Large</Text>
+ *     <Text variant="titleMedium">Title Medium</Text>
+ *     <Text variant="titleSmall">Title Small</Text>
+ *
+ *     <Text variant="bodyLarge">Body Large</Text>
+ *     <Text variant="bodyMedium">Body Medium</Text>
+ *     <Text variant="bodySmall">Body Small</Text>
+ *
+ *     <Text variant="labelLarge">Label Large</Text>
+ *     <Text variant="labelMedium">Label Medium</Text>
+ *     <Text variant="labelSmall">Label Small</Text>
+ *  </>
+ * );
+ *
+ * export default MyComponent;
+ * ```
  *
  * @extends Text props https://reactnative.dev/docs/text#props
  */
 
 const Text: React.ForwardRefRenderFunction<{}, Props> = (
-  { style, variant, theme: initialTheme, ...rest },
+  { style, variant, theme: initialTheme, ...rest }: Props,
   ref
 ) => {
   const root = React.useRef<NativeText | null>(null);
   // FIXME: destructure it in TS 4.6+
   const theme = useTheme(initialTheme);
+  const writingDirection = I18nManager.isRTL ? 'rtl' : 'ltr';
 
   React.useImperativeHandle(ref, () => ({
     setNativeProps: (args: Object) => root.current?.setNativeProps(args),
@@ -63,23 +115,29 @@ const Text: React.ForwardRefRenderFunction<{}, Props> = (
 
     const styleForVariant = stylesByVariant[variant];
 
-    return <NativeText ref={root} style={[styleForVariant, style]} {...rest} />;
+    return (
+      <NativeText
+        ref={root}
+        style={[styleForVariant, styles.text, { writingDirection }, style]}
+        {...rest}
+      />
+    );
+  } else {
+    return (
+      <NativeText
+        {...rest}
+        ref={root}
+        style={[
+          {
+            ...theme.fonts?.regular,
+            color: theme.isV3 ? theme.colors?.onSurface : theme.colors.text,
+          },
+          styles.text,
+          style,
+        ]}
+      />
+    );
   }
-
-  return (
-    <NativeText
-      {...rest}
-      ref={root}
-      style={[
-        {
-          ...theme.fonts?.regular,
-          color: theme.isV3 ? theme.colors?.onSurface : theme.colors.text,
-        },
-        styles.text,
-        style,
-      ]}
-    />
-  );
 };
 
 const styles = StyleSheet.create({
