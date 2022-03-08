@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, ViewStyle, StyleSheet, StyleProp, Animated } from 'react-native';
 import Surface from './Surface';
 import Text from './Typography/Text';
-import Button from './Button';
+import Button from './Button/Button';
 import Icon, { IconSource } from './Icon';
 import { withTheme } from '../core/theming';
 import type { $RemoveChildren, Theme } from '../types';

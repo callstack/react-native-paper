@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import renderer from 'react-test-renderer';
-import Button from '../Button.tsx';
+import Button from '../Button/Button.tsx';
 import { pink500 } from '../../styles/themes/v2/colors';
 
 const styles = StyleSheet.create({

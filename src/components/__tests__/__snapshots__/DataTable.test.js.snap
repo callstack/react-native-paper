@@ -1007,10 +1007,14 @@ exports[`renders data table pagination with options select 1`] = `
           >
             <View
               style={
-                Object {
-                  "marginLeft": -4,
-                  "marginRight": 12,
-                }
+                Array [
+                  Object {
+                    "marginLeft": -4,
+                    "marginRight": 12,
+                  },
+                  false,
+                  false,
+                ]
               }
             >
               <Text
@@ -1048,11 +1052,14 @@ exports[`renders data table pagination with options select 1`] = `
                   },
                   Array [
                     Object {
-                      "letterSpacing": 1,
                       "marginHorizontal": 16,
                       "marginVertical": 9,
                       "textAlign": "center",
                     },
+                    Object {
+                      "letterSpacing": 1,
+                    },
+                    false,
                     undefined,
                     Object {
                       "textTransform": "uppercase",

@@ -9,14 +9,14 @@ import {
 } from 'react-native';
 import color from 'color';
 
-import ActivityIndicator from './ActivityIndicator';
-import Icon, { IconSource } from './Icon';
-import Surface from './Surface';
-import Text from './Typography/Text';
-import TouchableRipple from './TouchableRipple/TouchableRipple';
-import { black, white } from '../styles/themes/v2/colors';
-import { withTheme } from '../core/theming';
-import type { Theme } from '../types';
+import ActivityIndicator from '../ActivityIndicator';
+import Icon, { IconSource } from '../Icon';
+import Surface from '../Surface';
+import Text from '../Typography/Text';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import { withTheme } from '../../core/theming';
+import type { Theme } from '../../types';
+import { buttonMode, getButtonColors } from './helpers';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
@@ -25,7 +25,7 @@ type Props = React.ComponentProps<typeof Surface> & {
    * - `outlined` - button with an outline (medium emphasis)
    * - `contained` - button with a background color and elevation shadow (high emphasis)
    */
-  mode?: 'text' | 'outlined' | 'contained';
+  mode?: buttonMode;
   /**
    * Whether the color is a dark color. A dark button will render light text and vice-versa. Only applicable for `contained` mode.
    */
@@ -135,31 +135,41 @@ const Button = ({
   icon,
   color: buttonColor,
   children,
-  uppercase = true,
   accessibilityLabel,
   accessibilityHint,
   onPress,
   onLongPress,
   style,
   theme,
+  uppercase = !theme.isV3,
   contentStyle,
   labelStyle,
   testID,
   accessible,
   ...rest
 }: Props) => {
+  const isMode = React.useCallback(
+    (modeToCompare: buttonMode) => {
+      return mode === modeToCompare;
+    },
+    [mode]
+  );
+  const { roundness, isV3 } = theme;
+
+  const isElevationEntitled = isV3 ? isMode('elevated') : isMode('contained');
   const containedInitialElevation = theme.isV3 ? 1 : 2;
   const containedActiveElevation = theme.isV3 ? 2 : 8;
 
   const { current: elevation } = React.useRef<Animated.Value>(
-    new Animated.Value(mode === 'contained' ? containedInitialElevation : 0)
+    new Animated.Value(isElevationEntitled ? containedInitialElevation : 0)
   );
+
   React.useEffect(() => {
-    elevation.setValue(mode === 'contained' ? containedInitialElevation : 0);
-  }, [mode, elevation, containedInitialElevation]);
+    elevation.setValue(isElevationEntitled ? containedInitialElevation : 0);
+  }, [isElevationEntitled, elevation, containedInitialElevation]);
 
   const handlePressIn = () => {
-    if (mode === 'contained') {
+    if (isMode('contained')) {
       const { scale } = theme.animation;
       Animated.timing(elevation, {
         toValue: containedActiveElevation,
@@ -170,7 +180,7 @@ const Button = ({
   };
 
   const handlePressOut = () => {
-    if (mode === 'contained') {
+    if (isMode('contained')) {
       const { scale } = theme.animation;
       Animated.timing(elevation, {
         toValue: containedInitialElevation,
@@ -180,87 +190,52 @@ const Button = ({
     }
   };
 
-  const { colors, roundness } = theme;
   const font = theme.fonts.medium;
 
-  let backgroundColor: string,
-    borderColor: string,
-    textColor: string,
-    borderWidth: number;
+  const borderRadius = isV3 ? 20 : roundness;
+  const iconSize = isV3 ? 18 : 16;
 
-  if (mode === 'contained') {
-    if (disabled) {
-      backgroundColor = color(theme.dark ? white : black)
-        .alpha(0.12)
-        .rgb()
-        .string();
-    } else if (buttonColor) {
-      backgroundColor = buttonColor;
-    } else {
-      backgroundColor = colors?.primary || white;
-    }
-  } else {
-    backgroundColor = 'transparent';
-  }
+  const { backgroundColor, borderColor, textColor, borderWidth } =
+    getButtonColors({
+      buttonColor,
+      theme,
+      mode,
+      disabled,
+      dark,
+    });
 
-  if (mode === 'outlined') {
-    borderColor = color(theme.dark ? white : black)
-      .alpha(0.29)
-      .rgb()
-      .string();
-    borderWidth = StyleSheet.hairlineWidth;
-  } else {
-    borderColor = 'transparent';
-    borderWidth = 0;
-  }
+  const rippleColor = color(textColor).alpha(0.12).rgb().string();
 
-  if (disabled) {
-    textColor = color(theme.dark ? white : black)
-      .alpha(0.32)
-      .rgb()
-      .string();
-  } else if (mode === 'contained') {
-    let isDark;
-
-    if (typeof dark === 'boolean') {
-      isDark = dark;
-    } else {
-      isDark =
-        backgroundColor === 'transparent'
-          ? false
-          : !color(backgroundColor).isLight();
-    }
-
-    textColor = isDark ? white : black;
-  } else if (buttonColor) {
-    textColor = buttonColor;
-  } else {
-    textColor = colors?.primary || black;
-  }
-
-  const rippleColor = color(textColor).alpha(0.32).rgb().string();
   const buttonStyle = {
     backgroundColor,
     borderColor,
     borderWidth,
-    borderRadius: roundness,
+    borderRadius,
   };
   const touchableStyle = {
     borderRadius: style
       ? ((StyleSheet.flatten(style) || {}) as ViewStyle).borderRadius ||
-        roundness
-      : roundness,
+        borderRadius
+      : borderRadius,
   };
 
   const { color: customLabelColor, fontSize: customLabelSize } =
     StyleSheet.flatten(labelStyle) || {};
 
   const textStyle = { color: textColor, ...font };
-  const elevationRes = disabled || mode !== 'contained' ? 0 : elevation;
+  const elevationRes = disabled || !isElevationEntitled ? 0 : elevation;
   const iconStyle =
     StyleSheet.flatten(contentStyle)?.flexDirection === 'row-reverse'
-      ? styles.iconReverse
-      : styles.icon;
+      ? [
+          styles.iconReverse,
+          isV3 && styles.md3IconReverse,
+          isV3 && isMode('text') && styles.md3IconReverseTextMode,
+        ]
+      : [
+          styles.icon,
+          isV3 && styles.md3Icon,
+          isV3 && isMode('text') && styles.md3IconTextMode,
+        ];
 
   return (
     <Surface
@@ -299,7 +274,7 @@ const Button = ({
             <View style={iconStyle}>
               <Icon
                 source={icon}
-                size={customLabelSize ?? 16}
+                size={customLabelSize ?? iconSize}
                 color={
                   typeof customLabelColor === 'string'
                     ? customLabelColor
@@ -310,7 +285,7 @@ const Button = ({
           ) : null}
           {loading ? (
             <ActivityIndicator
-              size={customLabelSize ?? 16}
+              size={customLabelSize ?? iconSize}
               color={
                 typeof customLabelColor === 'string'
                   ? customLabelColor
@@ -320,14 +295,22 @@ const Button = ({
             />
           ) : null}
           <Text
+            variant="labelLarge"
             selectable={false}
             numberOfLines={1}
             style={[
               styles.label,
+              !isV3 && styles.md2Label,
+              isV3 &&
+                (isMode('text')
+                  ? icon || loading
+                    ? styles.md3LabelTextAddons
+                    : styles.md3LabelText
+                  : styles.md3Label),
               compact && styles.compactLabel,
               uppercase && styles.uppercaseLabel,
               textStyle,
-              font,
+              !isV3 && font,
               labelStyle,
             ]}
           >
@@ -360,17 +343,45 @@ const styles = StyleSheet.create({
     marginRight: 12,
     marginLeft: -4,
   },
+  md3Icon: {
+    marginLeft: 16,
+    marginRight: -16,
+  },
+  md3IconReverse: {
+    marginLeft: -16,
+    marginRight: 16,
+  },
+  md3IconTextMode: {
+    marginLeft: 12,
+    marginRight: -8,
+  },
+  md3IconReverseTextMode: {
+    marginLeft: -8,
+    marginRight: 12,
+  },
   label: {
     textAlign: 'center',
-    letterSpacing: 1,
     marginVertical: 9,
     marginHorizontal: 16,
+  },
+  md2Label: {
+    letterSpacing: 1,
   },
   compactLabel: {
     marginHorizontal: 8,
   },
   uppercaseLabel: {
     textTransform: 'uppercase',
+  },
+  md3Label: {
+    marginVertical: 10,
+    marginHorizontal: 24,
+  },
+  md3LabelText: {
+    marginHorizontal: 12,
+  },
+  md3LabelTextAddons: {
+    marginHorizontal: 16,
   },
 });
 

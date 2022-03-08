@@ -219,11 +219,14 @@ exports[`renders snackbar with action button 1`] = `
                 },
                 Array [
                   Object {
-                    "letterSpacing": 1,
                     "marginHorizontal": 16,
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
+                  Object {
+                    "letterSpacing": 1,
+                  },
+                  false,
                   Object {
                     "marginHorizontal": 8,
                   },
