@@ -147,6 +147,8 @@ const Chip = ({
     new Animated.Value(0)
   );
 
+  const isOutlined = mode === 'outlined';
+
   const handlePressIn = () => {
     const { scale } = theme.animation;
     Animated.timing(elevation, {
@@ -166,23 +168,67 @@ const Chip = ({
   };
 
   const { dark, colors, isV3 } = theme;
-  const defaultBackgroundColor =
-    mode === 'outlined' ? colors?.surface : dark ? '#383838' : '#ebebeb';
+
+  let defaultBackgroundColor;
+
+  if (isV3) {
+    defaultBackgroundColor = isOutlined
+      ? theme.colors.surface
+      : theme.colors.secondaryContainer;
+  } else {
+    defaultBackgroundColor = isOutlined
+      ? colors?.surface
+      : dark
+      ? '#383838'
+      : '#ebebeb';
+  }
+
+  const opacity = isV3 ? 0.38 : 0.26;
+  const defaultBorderRadius = isV3 ? 8 : 16;
+  const iconSize = isV3 ? 18 : 16;
 
   const {
-    backgroundColor = defaultBackgroundColor,
-    borderRadius = isV3 ? 8 : 16,
+    backgroundColor: customBackgroundColor = defaultBackgroundColor,
+    borderRadius = defaultBorderRadius,
   } = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
-  const themeTextColor = theme.isV3
-    ? theme.colors.onSurface
-    : theme.colors.text;
-  const themeDisabledColor = theme.isV3
-    ? theme.colors.onSurfaceDisabled
-    : theme.colors.text;
+  let borderColor;
+  let textColor;
+  let iconColor;
+  let backgroundColor;
+  let underlayColor;
 
-  const borderColor =
-    mode === 'outlined'
+  backgroundColor =
+    typeof customBackgroundColor === 'string'
+      ? customBackgroundColor
+      : defaultBackgroundColor;
+
+  const selectedBackgroundColor = (
+    dark
+      ? color(backgroundColor).lighten(mode === 'outlined' ? 0.2 : 0.4)
+      : color(backgroundColor).darken(mode === 'outlined' ? 0.08 : 0.2)
+  )
+    .rgb()
+    .string();
+
+  if (isV3) {
+    if (disabled) {
+      const customDisabledColor = color(theme.colors.onSurfaceVariant)
+        .alpha(0.12)
+        .rgb()
+        .string();
+      borderColor = customDisabledColor;
+      textColor = iconColor = theme.colors.onSurfaceDisabled;
+      backgroundColor = isOutlined ? 'transparent' : customDisabledColor;
+    } else {
+      borderColor = theme.colors.outline;
+      textColor = iconColor = isOutlined
+        ? theme.colors.onSurfaceVariant
+        : theme.colors.onSecondaryContainer;
+      underlayColor = color(textColor).alpha(0.12).rgb().string();
+    }
+  } else {
+    borderColor = isOutlined
       ? color(
           selectedColor !== undefined
             ? selectedColor
@@ -192,34 +238,19 @@ const Chip = ({
           .rgb()
           .string()
       : backgroundColor;
-  const textColor = disabled
-    ? themeDisabledColor
-    : color(selectedColor !== undefined ? selectedColor : themeTextColor)
-        .alpha(0.87)
-        .rgb()
-        .string();
-  const iconColor = disabled
-    ? themeDisabledColor
-    : color(selectedColor !== undefined ? selectedColor : themeTextColor)
-        .alpha(0.54)
-        .rgb()
-        .string();
-
-  const backgroundColorString =
-    typeof backgroundColor === 'string'
-      ? backgroundColor
-      : defaultBackgroundColor;
-  const selectedBackgroundColor = (
-    dark
-      ? color(backgroundColorString).lighten(mode === 'outlined' ? 0.2 : 0.4)
-      : color(backgroundColorString).darken(mode === 'outlined' ? 0.08 : 0.2)
-  )
-    .rgb()
-    .string();
-
-  const underlayColor = selectedColor
-    ? color(selectedColor).fade(0.5).rgb().string()
-    : selectedBackgroundColor;
+    if (disabled) {
+      textColor = theme.colors.disabled;
+      iconColor = theme.colors.disabled;
+    } else {
+      const customTextColor =
+        selectedColor !== undefined ? selectedColor : theme.colors.text;
+      textColor = color(customTextColor).alpha(0.87).rgb().string();
+      iconColor = color(customTextColor).alpha(0.54).rgb().string();
+      underlayColor = selectedColor
+        ? color(selectedColor).fade(0.5).rgb().string()
+        : selectedBackgroundColor;
+    }
+  }
 
   const accessibilityTraits = ['button'];
   const accessibilityState: AccessibilityState = {
@@ -236,12 +267,22 @@ const Chip = ({
   }
 
   const elevationStyle = Platform.OS === 'android' ? elevation : 0;
+  const multiplier = isV3 ? 2 : 1;
+  const labelSpacings = {
+    marginRight: onClose ? 0 : 8 * multiplier,
+    marginLeft: avatar || icon || selected ? 4 * multiplier : 8 * multiplier,
+  };
+  const contentSpacings = {
+    paddingRight: isV3 ? (onClose ? 34 : 0) : onClose ? 32 : 8,
+  };
 
   return (
     <Surface
       style={
         [
           styles.container,
+          isV3 &&
+            (isOutlined ? styles.md3OutlineContainer : styles.md3FlatContainer),
           !theme.isV3 && {
             elevation: elevationStyle,
           },
@@ -277,24 +318,14 @@ const Chip = ({
         testID={testID}
       >
         <View
-          style={[
-            styles.content,
-            isV3 && styles.md3Content,
-            isV3
-              ? {
-                  paddingRight: onClose ? 34 : 0,
-                }
-              : {
-                  paddingRight: onClose ? 32 : 8,
-                },
-          ]}
+          style={[styles.content, isV3 && styles.md3Content, contentSpacings]}
         >
           {avatar && !icon ? (
             <View
               style={[
                 styles.avatarWrapper,
                 isV3 && styles.md3AvatarWrapper,
-                disabled && { opacity: 0.26 },
+                disabled && { opacity },
               ]}
             >
               {React.isValidElement(avatar)
@@ -321,7 +352,13 @@ const Chip = ({
               {icon ? (
                 <Icon
                   source={icon}
-                  color={avatar ? white : iconColor}
+                  color={
+                    avatar
+                      ? white
+                      : !disabled && theme.isV3
+                      ? theme.colors.primary
+                      : iconColor
+                  }
                   size={18}
                 />
               ) : (
@@ -340,17 +377,13 @@ const Chip = ({
             numberOfLines={1}
             style={[
               styles.text,
-              isV3
-                ? {
-                    marginLeft: avatar || icon || selected ? 8 : 16,
-                    marginRight: onClose ? 0 : 16,
-                  }
-                : {
-                    ...theme.fonts.regular,
-                    color: textColor,
-                    marginRight: onClose ? 0 : 8,
-                    marginLeft: avatar || icon || selected ? 4 : 8,
-                  },
+              labelSpacings,
+              {
+                color: textColor,
+                ...(isV3 && {
+                  ...theme.fonts.regular,
+                }),
+              },
               textStyle,
             ]}
             ellipsizeMode={ellipsizeMode}
@@ -377,15 +410,11 @@ const Chip = ({
               ]}
             >
               {closeIcon ? (
-                <Icon
-                  source={closeIcon}
-                  color={iconColor}
-                  size={isV3 ? 18 : 16}
-                />
+                <Icon source={closeIcon} color={iconColor} size={iconSize} />
               ) : (
                 <MaterialCommunityIcon
                   name={isV3 ? 'close' : 'close-circle'}
-                  size={isV3 ? 18 : 16}
+                  size={iconSize}
                   color={iconColor}
                   direction="ltr"
                 />
@@ -403,6 +432,12 @@ const styles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
     borderStyle: 'solid',
     flexDirection: Platform.select({ default: 'column', web: 'row' }),
+  },
+  md3OutlineContainer: {
+    borderWidth: 1,
+  },
+  md3FlatContainer: {
+    borderWidth: 0,
   },
   content: {
     flexDirection: 'row',
