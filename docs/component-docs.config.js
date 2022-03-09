@@ -124,6 +124,7 @@ module.exports = {
     annotations: {
       supported: '#6200ee',
       deprecated: '#B00020',
+      renamed: '#006400',
     },
   },
 };
