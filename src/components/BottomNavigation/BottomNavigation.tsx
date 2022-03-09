@@ -283,10 +283,6 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
  * By default Bottom navigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
  * See [Dark Theme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more information.
  *
- * <div class="screenshots">
- *   <img class="medium" src="screenshots/bottom-navigation.gif" />
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -541,7 +537,7 @@ const BottomNavigation = ({
   );
 
   const { routes } = navigationState;
-  const { colors, dark: isDarkTheme, mode, md, isV3 } = theme;
+  const { colors, dark: isDarkTheme, mode, isV3 } = theme;
 
   const { backgroundColor: customBackground, elevation = 4 }: ViewStyle =
     StyleSheet.flatten(barStyle) || {};
@@ -553,7 +549,7 @@ const BottomNavigation = ({
     : colors?.primary;
 
   const backgroundColor = isV3
-    ? (md('md.sys.color.surface') as string)
+    ? theme.colors.surface
     : shifting
     ? indexAnim.interpolate({
         inputRange: routes.map((_, i) => i),
@@ -575,13 +571,13 @@ const BottomNavigation = ({
     typeof activeColor !== 'undefined'
       ? activeColor
       : isV3
-      ? (md('md.sys.color.on-secondary-container') as string)
+      ? theme.colors.onSecondaryContainer
       : textColor;
   const inactiveTintColor =
     typeof inactiveColor !== 'undefined'
       ? inactiveColor
       : isV3
-      ? (md('md.sys.color.on-surface-variant') as string)
+      ? theme.colors.onSurfaceVariant
       : color(textColor).alpha(0.5).rgb().string();
 
   const touchColor = color(activeColor || activeTintColor)
@@ -779,6 +775,20 @@ const BottomNavigation = ({
 
               const badge = getBadge({ route });
 
+              const labelColor = !isV3
+                ? activeTintColor
+                : focused
+                ? theme.colors.onSurface
+                : theme.colors.onSurfaceVariant;
+
+              const badgeStyle = {
+                top: !isV3 ? -2 : typeof badge === 'boolean' ? 4 : 2,
+                right:
+                  (badge != null && typeof badge !== 'boolean'
+                    ? String(badge).length * -2
+                    : 0) - (!isV3 ? 2 : 0),
+              };
+
               return renderTouchable({
                 key: route.key,
                 route,
@@ -823,9 +833,7 @@ const BottomNavigation = ({
                                   scaleX: outlineScale,
                                 },
                               ],
-                              backgroundColor: md(
-                                'md.sys.color.secondary-container'
-                              ) as string,
+                              backgroundColor: theme.colors.secondaryContainer,
                             },
                           ]}
                         />
@@ -878,17 +886,7 @@ const BottomNavigation = ({
                           />
                         )}
                       </Animated.View>
-                      <View
-                        style={[
-                          styles.badgeContainer,
-                          {
-                            right:
-                              (badge != null && typeof badge !== 'boolean'
-                                ? String(badge).length * -2
-                                : 0) - 2,
-                          },
-                        ]}
-                      >
+                      <View style={[styles.badgeContainer, badgeStyle]}>
                         {typeof badge === 'boolean' ? (
                           <Badge visible={badge} size={isV3 ? 6 : 8} />
                         ) : (
@@ -915,27 +913,15 @@ const BottomNavigation = ({
                             renderLabel({
                               route,
                               focused: true,
-                              color: !isV3
-                                ? activeTintColor
-                                : focused
-                                ? (md('md.sys.color.on-surface') as string)
-                                : (md(
-                                    'md.sys.color.on-surface-variant'
-                                  ) as string),
+                              color: labelColor,
                             })
                           ) : (
                             <Text
-                              variant="label-medium"
+                              variant="labelMedium"
                               style={[
                                 styles.label,
                                 {
-                                  color: !isV3
-                                    ? activeTintColor
-                                    : focused
-                                    ? (md('md.sys.color.on-surface') as string)
-                                    : (md(
-                                        'md.sys.color.on-surface-variant'
-                                      ) as string),
+                                  color: labelColor,
                                 },
                               ]}
                             >
@@ -954,30 +940,16 @@ const BottomNavigation = ({
                               renderLabel({
                                 route,
                                 focused: false,
-                                color: !isV3
-                                  ? activeTintColor
-                                  : focused
-                                  ? (md('md.sys.color.on-surface') as string)
-                                  : (md(
-                                      'md.sys.color.on-surface-variant'
-                                    ) as string),
+                                color: labelColor,
                               })
                             ) : (
                               <Text
-                                variant="label-medium"
+                                variant="labelMedium"
                                 selectable={false}
                                 style={[
                                   styles.label,
                                   {
-                                    color: !isV3
-                                      ? activeTintColor
-                                      : focused
-                                      ? (md(
-                                          'md.sys.color.on-surface'
-                                        ) as string)
-                                      : (md(
-                                          'md.sys.color.on-surface-variant'
-                                        ) as string),
+                                    color: labelColor,
                                   },
                                 ]}
                               >
@@ -1110,7 +1082,6 @@ const styles = StyleSheet.create({
   badgeContainer: {
     position: 'absolute',
     left: 0,
-    top: -2,
   },
   v3TouchableContainer: {
     paddingTop: 12,

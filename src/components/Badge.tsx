@@ -32,17 +32,6 @@ type Props = React.ComponentProps<typeof Animated.Text> & {
  * Badges are small status descriptors for UI elements.
  * A badge consists of a small circle, typically containing a number or other short set of characters, that appears in proximity to another object.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/badge-1.png" />
- *     <figcaption>Badge with content</figcaption>
- *   </figure>
- *   <figure>
- *     <img class="small" src="screenshots/badge-2.png" />
- *     <figcaption>Badge without content</figcaption>
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -93,9 +82,13 @@ const Badge = ({
     ...restStyle
   } = (StyleSheet.flatten(style) || {}) as TextStyle;
 
-  const textColor = getContrastingColor(backgroundColor || white, white, black);
+  const textColor = theme.isV3
+    ? theme.colors.onError
+    : getContrastingColor(backgroundColor, white, black);
 
   const borderRadius = size / 2;
+
+  const paddingHorizontal = theme.isV3 ? 3 : 4;
 
   return (
     <Animated.Text
@@ -111,6 +104,7 @@ const Badge = ({
           height: size,
           minWidth: size,
           borderRadius,
+          paddingHorizontal,
         },
         styles.container,
         restStyle,
@@ -129,7 +123,6 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     textAlign: 'center',
     textAlignVertical: 'center',
-    paddingHorizontal: 4,
     overflow: 'hidden',
   },
 });

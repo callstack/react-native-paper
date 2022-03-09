@@ -131,12 +131,13 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -226,10 +227,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -290,12 +291,13 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -385,10 +387,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -449,12 +451,13 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -544,10 +547,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -743,12 +746,13 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -838,10 +842,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -902,12 +906,13 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -997,10 +1002,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -1061,12 +1066,13 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -1156,10 +1162,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -1335,12 +1341,13 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -1398,10 +1405,10 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -1500,12 +1507,13 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -1563,10 +1571,10 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -1665,12 +1673,13 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -1728,10 +1737,10 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -1965,12 +1974,13 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -2028,10 +2038,10 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -2114,12 +2124,13 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -2177,10 +2188,10 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -2263,12 +2274,13 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -2326,10 +2338,10 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -2412,12 +2424,13 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -2475,10 +2488,10 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -2561,12 +2574,13 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -2624,10 +2638,10 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -2826,12 +2840,13 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -2921,10 +2936,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -3070,12 +3085,13 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -3165,10 +3181,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -3314,12 +3330,13 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -3409,10 +3426,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -3694,12 +3711,13 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -3789,10 +3807,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -3898,12 +3916,13 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -3993,10 +4012,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -4102,12 +4121,13 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -4197,10 +4217,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -4421,12 +4441,13 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -4516,10 +4537,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -4665,12 +4686,13 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -4760,10 +4782,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -4909,12 +4931,13 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -5004,10 +5027,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -5288,12 +5311,13 @@ exports[`renders shifting bottom navigation 1`] = `
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -5383,10 +5407,10 @@ exports[`renders shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -5492,12 +5516,13 @@ exports[`renders shifting bottom navigation 1`] = `
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -5587,10 +5612,10 @@ exports[`renders shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -5696,12 +5721,13 @@ exports[`renders shifting bottom navigation 1`] = `
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -5791,10 +5817,10 @@ exports[`renders shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -5900,12 +5926,13 @@ exports[`renders shifting bottom navigation 1`] = `
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -5995,10 +6022,10 @@ exports[`renders shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -6104,12 +6131,13 @@ exports[`renders shifting bottom navigation 1`] = `
                 "flex": 1,
                 "paddingVertical": 6,
               },
-              undefined,
+              false,
             ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -6199,10 +6227,10 @@ exports[`renders shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
