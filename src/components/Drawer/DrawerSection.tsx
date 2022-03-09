@@ -26,12 +26,6 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
 /**
  * A component to group content inside a navigation drawer.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/drawer-section.png" />
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -39,7 +33,6 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  *
  * const MyComponent = () => {
  *   const [active, setActive] = React.useState('');
- *
  *
  *   return (
  *     <Drawer.Section title="Some title">

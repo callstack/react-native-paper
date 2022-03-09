@@ -7,17 +7,18 @@ import type { $RemoveChildren, Theme } from '../types';
 
 type Props = $RemoveChildren<typeof View> & {
   /**
-   *  Whether divider has a left inset.
+   * @renamed Renamed from 'inset' to 'leftInset` in v3.x
+   * Whether divider has a left inset.
    */
   leftInset?: boolean;
   /**
-   * `Available in v3.x`
+   * @supported Available in v3.x with theme version 3
    *
    *  Whether divider has a horizontal inset on both sides.
    */
   horizontalInset?: boolean;
   /**
-   * `Available in v3.x`
+   * @supported Available in v3.x with theme version 3
    *
    *  Whether divider should be bolded.
    */
@@ -31,12 +32,6 @@ type Props = $RemoveChildren<typeof View> & {
 
 /**
  * A divider is a thin, lightweight separator that groups content in lists and page layouts.
- *
- * <div class="screenshots">
- *  <figure>
- *    <img class="medium" src="screenshots/divider.png" />
- *  </figure>
- * </div>
  *
  * ## Usage
  * ```js

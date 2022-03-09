@@ -42,12 +42,6 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
 /**
  * A component used to show an action item with an icon and a label in a navigation drawer.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/drawer-item.png" />
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
