@@ -22,6 +22,7 @@ export const getChipColors = ({
   let underlayColor;
   let backgroundColor;
   let defaultBackgroundColor;
+  let selectedBackgroundColor;
 
   const { isV3, dark } = theme;
 
@@ -42,14 +43,6 @@ export const getChipColors = ({
       ? customBackgroundColor
       : defaultBackgroundColor;
 
-  const selectedBackgroundColor = (
-    dark
-      ? color(backgroundColor).lighten(isOutlined ? 0.2 : 0.4)
-      : color(backgroundColor).darken(isOutlined ? 0.08 : 0.2)
-  )
-    .rgb()
-    .string();
-
   if (isV3) {
     if (disabled) {
       const customDisabledColor = color(theme.colors.onSurfaceVariant)
@@ -60,13 +53,42 @@ export const getChipColors = ({
       textColor = iconColor = theme.colors.onSurfaceDisabled;
       backgroundColor = isOutlined ? 'transparent' : customDisabledColor;
     } else {
-      borderColor = theme.colors.outline;
-      textColor = iconColor = isOutlined
-        ? theme.colors.onSurfaceVariant
-        : theme.colors.onSecondaryContainer;
-      underlayColor = color(textColor).alpha(0.12).rgb().string();
+      borderColor =
+        selectedColor !== undefined
+          ? color(selectedColor).alpha(0.29).rgb().string()
+          : theme.colors.outline;
+      textColor = iconColor =
+        selectedColor !== undefined
+          ? selectedColor
+          : isOutlined
+          ? theme.colors.onSurfaceVariant
+          : theme.colors.onSecondaryContainer;
+      underlayColor = color(
+        selectedColor !== undefined ? selectedColor : textColor
+      )
+        .alpha(0.12)
+        .rgb()
+        .string();
+      selectedBackgroundColor = color(backgroundColor)
+        .mix(
+          color(
+            isOutlined
+              ? theme.colors.onSurfaceVariant
+              : theme.colors.onSecondaryContainer
+          ),
+          0.12
+        )
+        .rgb()
+        .string();
     }
   } else {
+    selectedBackgroundColor = (
+      dark
+        ? color(backgroundColor).lighten(isOutlined ? 0.2 : 0.4)
+        : color(backgroundColor).darken(isOutlined ? 0.08 : 0.2)
+    )
+      .rgb()
+      .string();
     borderColor = isOutlined
       ? color(
           selectedColor !== undefined

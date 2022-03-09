@@ -65,7 +65,7 @@ const ChipExample = () => {
               Avatar (disabled)
             </Chip>
             {isV3 && (
-              <Chip dense style={styles.chip}>
+              <Chip dense style={styles.chip} onPress={() => {}}>
                 Dense chip
               </Chip>
             )}
@@ -134,7 +134,12 @@ const ChipExample = () => {
               Avatar (disabled)
             </Chip>
             {isV3 && (
-              <Chip mode="outlined" dense style={styles.chip}>
+              <Chip
+                mode="outlined"
+                dense
+                onPress={() => {}}
+                style={styles.chip}
+              >
                 Dense chip
               </Chip>
             )}
