@@ -51,6 +51,7 @@ const itemSize = 56;
 const outlineHeight = 32;
 
 /**
+ * @supported Available in v3.x with theme version 3
  * Collapsed component used to show an action item with an icon and optionally label in a navigation drawer.
  *
  * ## Usage
