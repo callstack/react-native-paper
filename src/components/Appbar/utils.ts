@@ -1,4 +1,5 @@
 import React from 'react';
+import color from 'color';
 import { StyleSheet } from 'react-native';
 import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 import AppbarContent from './AppbarContent';
@@ -13,7 +14,8 @@ export type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
 export const getAppbarColor = (
   theme: Theme,
   elevation: number,
-  customBackground?: ColorValue
+  customBackground?: ColorValue,
+  elevated?: boolean
 ) => {
   const { isV3, dark: isDarkTheme, mode, colors } = theme;
   const isAdaptiveMode = mode === 'adaptive';
@@ -21,7 +23,14 @@ export const getAppbarColor = (
   if (customBackground) {
     backgroundColor = customBackground;
   } else if (isV3) {
-    backgroundColor = colors.surface;
+    if (elevated) {
+      backgroundColor = color(colors.surface)
+        .mix(color(colors.primary), 0.08)
+        .rgb()
+        .string();
+    } else {
+      backgroundColor = colors.surface;
+    }
   } else if (!isV3) {
     if (isDarkTheme && isAdaptiveMode) {
       backgroundColor = overlay(elevation, colors?.surface);

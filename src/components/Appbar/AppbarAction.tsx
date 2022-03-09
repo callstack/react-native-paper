@@ -36,7 +36,7 @@ type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
    */
   onPress?: () => void;
   /**
-   * `Available in v3.x`
+   * @supported Available in v3.x with theme version 3
    *
    * Whether it's the leading button.
    */
@@ -47,19 +47,6 @@ type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
 
 /**
  * A component used to display an action item in the appbar.
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/appbar-action-android.png" />
- *       <figcaption>Android</figcaption>
- *   </figure>
- * </div>
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/appbar-action-ios.png" />
- *       <figcaption>iOS</figcaption>
- *   </figure>
- * </div>
  *
  * ## Usage
  * ```js

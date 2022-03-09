@@ -5,6 +5,7 @@ import {
   View,
   SafeAreaView,
   ViewStyle,
+  Platform,
 } from 'react-native';
 import { Appbar } from './Appbar';
 import shadow from '../../styles/shadow';
@@ -12,7 +13,6 @@ import { withTheme } from '../../core/theming';
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
 import type { Theme } from '../../types';
 import {
-  AppbarModes,
   DEFAULT_APPBAR_HEIGHT,
   getAppbarColor,
   modeAppbarHeight,
@@ -35,7 +35,7 @@ type Props = React.ComponentProps<typeof Appbar> & {
    */
   children: React.ReactNode;
   /**
-   * `Available in v3.x`
+   * @supported Available in v3.x with theme version 3
    *
    * Mode of the Appbar.
    * - `small` - Appbar with default height (56).
@@ -43,7 +43,12 @@ type Props = React.ComponentProps<typeof Appbar> & {
    * - `large` - Appbar with large height (152).
    * - `center-aligned` - Appbar with default height and center-aligned title.
    */
-  mode?: AppbarModes;
+  mode?: 'small' | 'medium' | 'large' | 'center-aligned';
+  /**
+   * @supported Available in v3.x with theme version 3
+   * Whether Appbar background should have the elevation along with primary color pigment.
+   */
+  elevated?: boolean;
   /**
    * @optional
    */
@@ -91,21 +96,20 @@ type Props = React.ComponentProps<typeof Appbar> & {
  * export default MyComponent;
  * ```
  */
-const AppbarHeader = (props: Props) => {
-  const {
-    // Don't use default props since we check it to know whether we should use SafeAreaView
-    statusBarHeight = APPROX_STATUSBAR_HEIGHT,
-    style,
-    dark,
-    mode = 'small',
-    ...rest
-  } = props;
-
+const AppbarHeader = ({
+  // Don't use default props since we check it to know whether we should use SafeAreaView
+  statusBarHeight,
+  style,
+  dark,
+  mode = Platform.OS === 'ios' ? 'center-aligned' : 'small',
+  elevated = false,
+  ...rest
+}: Props) => {
   const { isV3 } = rest.theme;
 
   const {
     height = isV3 ? modeAppbarHeight[mode] : DEFAULT_APPBAR_HEIGHT,
-    elevation = isV3 ? 0 : 4,
+    elevation = isV3 ? (elevated ? 2 : 0) : 4,
     backgroundColor: customBackground,
     zIndex = 0,
     ...restStyle
@@ -114,17 +118,22 @@ const AppbarHeader = (props: Props) => {
   const backgroundColor = getAppbarColor(
     rest.theme,
     elevation,
-    customBackground
+    customBackground,
+    elevated
   );
 
   // Let the user override the behaviour
-  const Wrapper =
-    typeof props.statusBarHeight === 'number' ? View : SafeAreaView;
+  const Wrapper = typeof statusBarHeight === 'number' ? View : SafeAreaView;
   return (
     <Wrapper
       style={
         [
-          { backgroundColor, zIndex, elevation, paddingTop: statusBarHeight },
+          {
+            backgroundColor,
+            zIndex,
+            elevation,
+            paddingTop: statusBarHeight || APPROX_STATUSBAR_HEIGHT,
+          },
           shadow(elevation),
         ] as StyleProp<ViewStyle>
       }
