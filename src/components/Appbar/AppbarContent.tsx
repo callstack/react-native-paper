@@ -16,7 +16,7 @@ import { withTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
 
 import type { $RemoveChildren, Theme } from '../../types';
-import { AppbarModes, modeTextVariant } from './utils';
+import { modeTextVariant } from './utils';
 
 type Props = $RemoveChildren<typeof View> & {
   /**
@@ -36,12 +36,12 @@ type Props = $RemoveChildren<typeof View> & {
    */
   titleRef?: React.RefObject<Text>;
   /**
-   * @deprecated
+   * @deprecated Deprecated in v3.x
    * Text for the subtitle.
    */
   subtitle?: React.ReactNode;
   /**
-   * @deprecated
+   * @deprecated Deprecated in v3.x
    * Style for the subtitle.
    */
   subtitleStyle?: StyleProp<TextStyle>;
@@ -50,7 +50,7 @@ type Props = $RemoveChildren<typeof View> & {
    */
   onPress?: () => void;
   /**
-   * `Available in v3.x`
+   * @supported Available in v3.x with theme version 3
    *
    * Mode of the Appbar.
    * - `small` - Appbar with default height (56).
@@ -58,7 +58,7 @@ type Props = $RemoveChildren<typeof View> & {
    * - `large` - Appbar with large height (152).
    * - `center-aligned` - Appbar with default height and center-aligned title.
    */
-  mode?: AppbarModes;
+  mode?: 'small' | 'medium' | 'large' | 'center-aligned';
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -68,12 +68,6 @@ type Props = $RemoveChildren<typeof View> & {
 
 /**
  * A component used to display a title and optional subtitle in an appbar.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/appbar-content.png" />
- *   </figure>
- * </div>
  *
  * ## Usage
  * ```js
@@ -122,6 +116,7 @@ const AppbarContent = ({
   return (
     <TouchableWithoutFeedback onPress={onPress} disabled={!onPress}>
       <View
+        pointerEvents="box-none"
         style={[styles.container, isV3 && modeContainerStyles[mode], style]}
         {...rest}
       >

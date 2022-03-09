@@ -12,12 +12,13 @@ export default function Root() {
       headerMode="screen"
       screenOptions={{
         header: ({ navigation, scene, previous }) => (
-          <Appbar.Header>
+          <Appbar.Header elevated>
             {previous ? (
               <Appbar.BackAction onPress={() => navigation.goBack()} />
             ) : (navigation as any).openDrawer ? (
               <Appbar.Action
                 icon="menu"
+                isLeading
                 onPress={() =>
                   (navigation as any as DrawerNavigationProp<{}>).openDrawer()
                 }
