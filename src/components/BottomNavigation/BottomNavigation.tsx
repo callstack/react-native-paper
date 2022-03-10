@@ -78,8 +78,8 @@ type Props = {
    *
    * - `key`: a unique key to identify the route (required)
    * - `title`: title of the route to use as the tab label
-   * - `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component
-   * - `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component
+   * - `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v3.x
+   * - `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component @supported Available in v3.x with theme version 3
    * - `color`: color to use as background color for shifting bottom navigation
    * - `badge`: badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.
    * - `accessibilityLabel`: accessibility label for the tab button
@@ -567,12 +567,14 @@ const BottomNavigation = ({
       : true;
 
   const textColor = isDark ? white : black;
+
   const activeTintColor =
     typeof activeColor !== 'undefined'
       ? activeColor
       : isV3
       ? theme.colors.onSecondaryContainer
       : textColor;
+
   const inactiveTintColor =
     typeof inactiveColor !== 'undefined'
       ? inactiveColor
@@ -775,8 +777,14 @@ const BottomNavigation = ({
 
               const badge = getBadge({ route });
 
-              const labelColor = !isV3
+              const activeLabelColor = !isV3
                 ? activeTintColor
+                : focused
+                ? theme.colors.onSurface
+                : theme.colors.onSurfaceVariant;
+
+              const inactiveLabelColor = !isV3
+                ? inactiveTintColor
                 : focused
                 ? theme.colors.onSurface
                 : theme.colors.onSurfaceVariant;
@@ -913,7 +921,7 @@ const BottomNavigation = ({
                             renderLabel({
                               route,
                               focused: true,
-                              color: labelColor,
+                              color: activeLabelColor,
                             })
                           ) : (
                             <Text
@@ -921,7 +929,7 @@ const BottomNavigation = ({
                               style={[
                                 styles.label,
                                 {
-                                  color: labelColor,
+                                  color: activeLabelColor,
                                 },
                               ]}
                             >
@@ -940,7 +948,7 @@ const BottomNavigation = ({
                               renderLabel({
                                 route,
                                 focused: false,
-                                color: labelColor,
+                                color: inactiveLabelColor,
                               })
                             ) : (
                               <Text
@@ -949,7 +957,7 @@ const BottomNavigation = ({
                                 style={[
                                   styles.label,
                                   {
-                                    color: labelColor,
+                                    color: inactiveLabelColor,
                                   },
                                 ]}
                               >

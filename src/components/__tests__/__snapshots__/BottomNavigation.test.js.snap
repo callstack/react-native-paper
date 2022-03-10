@@ -1479,7 +1479,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 }
               >
                 <text
-                  color="#ffffff"
+                  color="rgba(255, 255, 255, 0.5)"
                 />
               </View>
             </View>
@@ -1645,7 +1645,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 }
               >
                 <text
-                  color="#ffffff"
+                  color="rgba(255, 255, 255, 0.5)"
                 />
               </View>
             </View>
@@ -1811,7 +1811,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 }
               >
                 <text
-                  color="#ffffff"
+                  color="rgba(255, 255, 255, 0.5)"
                 />
               </View>
             </View>
@@ -3051,7 +3051,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                           "textAlign": "center",
                         },
                         Object {
-                          "color": "#FBF7DB",
+                          "color": "#853D4B",
                         },
                       ],
                     ]
@@ -3296,7 +3296,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                           "textAlign": "center",
                         },
                         Object {
-                          "color": "#FBF7DB",
+                          "color": "#853D4B",
                         },
                       ],
                     ]
@@ -3541,7 +3541,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                           "textAlign": "center",
                         },
                         Object {
-                          "color": "#FBF7DB",
+                          "color": "#853D4B",
                         },
                       ],
                     ]
@@ -4652,7 +4652,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                           "textAlign": "center",
                         },
                         Object {
-                          "color": "#ffffff",
+                          "color": "rgba(255, 255, 255, 0.5)",
                         },
                       ],
                     ]
@@ -4897,7 +4897,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                           "textAlign": "center",
                         },
                         Object {
-                          "color": "#ffffff",
+                          "color": "rgba(255, 255, 255, 0.5)",
                         },
                       ],
                     ]
@@ -5142,7 +5142,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                           "textAlign": "center",
                         },
                         Object {
-                          "color": "#ffffff",
+                          "color": "rgba(255, 255, 255, 0.5)",
                         },
                       ],
                     ]
