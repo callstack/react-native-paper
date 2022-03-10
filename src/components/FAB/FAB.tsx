@@ -15,7 +15,7 @@ import Icon, { IconSource } from '../Icon';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
-import { getFABColors, FABVariant } from './utils';
+import { getFABColors } from './utils';
 import type { $RemoveChildren, Theme } from '../../types';
 
 type FABSize = 'small' | 'medium' | 'large';
@@ -49,6 +49,12 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   animated?: boolean;
   /**
+   *  @deprecated Deprecated in v.3x - use prop size="small".
+   *
+   *  Whether FAB is mini-sized, used to create visual continuity with other elements. This has no effect if `label` is specified.
+   */
+  small?: boolean;
+  /**
    * Custom color for the icon and label of the `FAB`.
    */
   color?: string;
@@ -73,7 +79,7 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   onLongPress?: () => void;
   /**
-   * `Available in v3.x with theme version 3`.
+   * @supported Available in v3.x with theme version 3
    *
    * Size of the `FAB`.
    * - `small` - FAB with small height (40).
@@ -82,7 +88,7 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   size?: FABSize;
   /**
-   * `Available in v3.x with theme version 3`.
+   * @supported Available in v3.x with theme version 3
    *
    * Mode of the `FAB`. You can change the mode to adjust the the shadow:
    * - `flat` - button without a shadow.
@@ -90,11 +96,11 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   mode?: FABMode;
   /**
-   * `Available in v3.x with theme version 3`.
+   * @supported Available in v3.x with theme version 3
    *
    * Color mappings variant for combinations of container and icon colors.
    */
-  variant?: FABVariant;
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'surface';
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -115,6 +121,7 @@ type Props = $RemoveChildren<typeof Surface> & {
  *
  * const MyComponent = () => (
  *   <FAB
+ *     icon="plus"
  *     style={styles.fab}
  *     onPress={() => console.log('Pressed')}
  *   />

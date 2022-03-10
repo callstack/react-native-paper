@@ -15,7 +15,6 @@ import Card from '../Card/Card';
 import { withTheme } from '../../core/theming';
 import type { IconSource } from '../Icon';
 import type { Theme } from '../../types';
-import type { FABVariant } from './utils';
 
 type Props = {
   /**
@@ -28,7 +27,7 @@ type Props = {
    * - `labelTextColor`: custom label text color of the action item
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
    * - `labelStyle`: pass additional styles for the fab item label, for example, `backgroundColor`
-   * - `size`: size of action item. Defaults to `small`. `Available in v3.x`
+   * - `size`: size of action item. Defaults to `small`. `Available in v3.x` @supported Available in v3.x
    * - `onPress`: callback that is called when `FAB` is pressed (required)
    */
   actions: Array<{
@@ -83,11 +82,11 @@ type Props = {
    */
   fabStyle?: StyleProp<ViewStyle>;
   /**
-   * `Available in v3.x with theme version 3`.
+   * @supported Available in v3.x with theme version 3
    *
    * Color mappings variant for combinations of container and icon colors.
    */
-  variant?: FABVariant;
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'surface';
   /**
    * @optional
    */

@@ -3,6 +3,7 @@ import { View, StyleSheet, FlatList, Animated, Platform } from 'react-native';
 import type { NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
 import {
   MD2Colors,
+  MD3Colors,
   useTheme,
   Avatar,
   Paragraph,
@@ -51,7 +52,7 @@ const AnimatedFABExample = () => {
           <Avatar.Text
             style={[styles.avatar, { backgroundColor: item.bgColor }]}
             label={item.initials}
-            color={MD2Colors.white}
+            color={isV3 ? MD3Colors.primary100 : MD2Colors.white}
             size={40}
           />
           <View style={styles.itemTextContentContainer}>
@@ -93,7 +94,15 @@ const AnimatedFABExample = () => {
 
               <Icon
                 name={item.favorite ? 'star' : 'star-outline'}
-                color={item.favorite ? MD2Colors.orange500 : MD2Colors.grey500}
+                color={
+                  item.favorite
+                    ? isV3
+                      ? MD3Colors.error70
+                      : MD2Colors.orange500
+                    : isV3
+                    ? MD3Colors.neutralVariant70
+                    : MD2Colors.grey500
+                }
                 size={20}
                 onPress={() => setVisible(!visible)}
                 style={styles.icon}

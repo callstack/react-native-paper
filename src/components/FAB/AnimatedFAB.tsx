@@ -23,8 +23,8 @@ import type {
   NativeSyntheticEvent,
   TextLayoutEventData,
 } from 'react-native';
-import AnimatedText from '../../Typography/AnimatedText';
-import { getCombinedStyles, getFABColors, FABVariant } from './utils';
+import AnimatedText from '../Typography/AnimatedText';
+import { getCombinedStyles, getFABColors } from './utils';
 
 export type AnimatedFABIconMode = 'static' | 'dynamic';
 export type AnimatedFABAnimateFrom = 'left' | 'right';
@@ -161,11 +161,11 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   extended: boolean;
   /**
-   * `Available in v3.x with theme version 3`.
+   * @supported Available in v3.x with theme version 3
    *
    * Color mappings variant for combinations of container and icon colors.
    */
-  variant?: FABVariant;
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'surface';
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -417,6 +417,7 @@ const AnimatedFAB = ({
 
       <View pointerEvents="none">
         <AnimatedText
+          variant="labelLarge"
           numberOfLines={1}
           onTextLayout={isIOS ? onTextLayout : undefined}
           ellipsizeMode={'tail'}
