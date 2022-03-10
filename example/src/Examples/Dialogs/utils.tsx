@@ -17,13 +17,13 @@ type Props = React.ComponentProps<typeof NativeText> & {
 };
 
 export const TextComponent = ({ isSubheading = false, ...props }: Props) => {
-  const { isV3, md } = useTheme();
+  const theme = useTheme();
 
-  if (isV3) {
+  if (theme.isV3) {
     return (
       <Text
-        variant={isSubheading ? 'body-large' : 'body-medium'}
-        style={{ color: md('md.sys.color.on-surface-variant') as string }}
+        variant={isSubheading ? 'bodyLarge' : 'bodyMedium'}
+        style={{ color: theme.colors.onSurfaceVariant }}
         {...props}
       />
     );

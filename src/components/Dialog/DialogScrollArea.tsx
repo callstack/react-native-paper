@@ -14,12 +14,6 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * A component to show a scrollable content in a Dialog. The component only provides appropriate styling.
  * For the scrollable content you can use `ScrollView`, `FlatList` etc. depending on your requirement.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/dialog-scroll-area.gif" />
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -48,13 +42,13 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * ```
  */
 const DialogScrollArea = (props: Props) => {
-  const { isV3, md } = useTheme();
+  const theme = useTheme();
   const borderStyles = {
-    borderColor: isV3
-      ? (md('md.sys.color.surface-variant') as string)
+    borderColor: theme.isV3
+      ? theme.colors.surfaceVariant
       : 'rgba(0, 0, 0, .12)',
-    borderTopWidth: isV3 ? 1 : StyleSheet.hairlineWidth,
-    borderBottomWidth: isV3 ? 1 : StyleSheet.hairlineWidth,
+    borderTopWidth: theme.isV3 ? 1 : StyleSheet.hairlineWidth,
+    borderBottomWidth: theme.isV3 ? 1 : StyleSheet.hairlineWidth,
   };
   return (
     <View
@@ -62,7 +56,7 @@ const DialogScrollArea = (props: Props) => {
       style={[
         styles.container,
         borderStyles,
-        isV3 && styles.v3Container,
+        theme.isV3 && styles.v3Container,
         props.style,
       ]}
     >

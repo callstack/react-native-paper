@@ -13,12 +13,6 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
 /**
  * A component to show a list of actions in a Dialog.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/dialog-actions.png" />
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

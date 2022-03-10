@@ -1,6 +1,13 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { Button, Portal, Dialog, Colors } from 'react-native-paper';
+import {
+  Button,
+  Portal,
+  Dialog,
+  MD2Colors,
+  MD3Colors,
+  useTheme,
+} from 'react-native-paper';
 import { TextComponent } from './utils';
 
 const DialogWithIcon = ({
@@ -10,6 +17,8 @@ const DialogWithIcon = ({
   visible: boolean;
   close: () => void;
 }) => {
+  const theme = useTheme();
+
   return (
     <Portal>
       <Dialog onDismiss={close} visible={visible}>
@@ -22,7 +31,12 @@ const DialogWithIcon = ({
           </TextComponent>
         </Dialog.Content>
         <Dialog.Actions>
-          <Button color={Colors.teal500}>Disagree</Button>
+          <Button
+            onPress={close}
+            color={theme.isV3 ? MD3Colors.error50 : MD2Colors.teal500}
+          >
+            Disagree
+          </Button>
           <Button onPress={close}>Agree</Button>
         </Dialog.Actions>
       </Dialog>

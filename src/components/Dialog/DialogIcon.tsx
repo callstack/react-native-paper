@@ -19,6 +19,7 @@ type Props = {
 };
 
 /**
+ * @supported Available in v3.x with theme version 3
  * A component to show an icon in a Dialog.
  *
  * ## Usage
@@ -55,14 +56,18 @@ type Props = {
  * ```
  */
 const DialogIcon = ({ size = 24, color, icon }: Props) => {
-  const { md } = useTheme();
+  const theme = useTheme();
+
+  if (theme.isV3) {
+    return null;
+  }
+
+  //@ts-ignore
+  const iconColor = color || theme.colors.secondary;
+
   return (
     <View style={styles.wrapper}>
-      <Icon
-        source={icon}
-        color={color || (md('md.sys.color.secondary') as string)}
-        size={size}
-      />
+      <Icon source={icon} color={iconColor} size={size} />
     </View>
   );
 };

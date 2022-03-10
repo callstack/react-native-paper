@@ -10,6 +10,7 @@ import {
   View,
   NativeEventSubscription,
 } from 'react-native';
+import color from 'color';
 import {
   getStatusBarHeight,
   getBottomSpace,
@@ -18,8 +19,7 @@ import Surface from './Surface';
 import { useTheme } from '../core/theming';
 import useAnimatedValue from '../utils/useAnimatedValue';
 import { addEventListener } from '../utils/addEventListener';
-import color from 'color';
-import { tokens } from '../styles/themes/v3/tokens';
+import { MD3Colors } from '../styles/themes/v3/tokens';
 
 type Props = {
   /**
@@ -222,7 +222,7 @@ export default function Modal({
             styles.backdrop,
             {
               backgroundColor: theme.isV3
-                ? theme.colors.onSurfaceVariant
+                ? color(MD3Colors.neutralVariant20).alpha(0.4).rgb().string()
                 : theme.colors?.backdrop,
               opacity,
             },

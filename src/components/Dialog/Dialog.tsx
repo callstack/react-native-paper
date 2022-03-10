@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, Platform, StyleProp, ViewStyle } from 'react-native';
+import color from 'color';
 import Modal from '../Modal';
 import DialogContent from './DialogContent';
 import DialogActions from './DialogActions';
@@ -39,11 +40,6 @@ const DIALOG_ELEVATION: number = 24;
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
  * To render the `Dialog` above other components, you'll need to wrap it with the [`Portal`](portal.html) component.
- *
- *  <div class="screenshots">
- *   <img class="medium" src="screenshots/dialog-1.png" />
- *   <img class="medium" src="screenshots/dialog-2.png" />
- * </div>
  *
  * ## Usage
  * ```js
@@ -89,7 +85,8 @@ const Dialog = ({
   style,
   theme,
 }: Props) => {
-  const { isV3, md, dark, mode, colors, roundness } = theme;
+  const { isV3, dark, mode, colors, roundness } = theme;
+  const borderRadius = isV3 ? 28 : roundness;
   return (
     <Modal
       dismissable={dismissable}
@@ -97,9 +94,12 @@ const Dialog = ({
       visible={visible}
       contentContainerStyle={[
         {
-          borderRadius: isV3 ? 28 : roundness,
+          borderRadius,
           backgroundColor: isV3
-            ? (md('md.sys.color.surface') as string)
+            ? color(theme.colors.surface)
+                .mix(color(theme.colors.primary), 0.11)
+                .rgb()
+                .string()
             : dark && mode === 'adaptive'
             ? overlay(DIALOG_ELEVATION, colors?.surface)
             : colors?.surface,
