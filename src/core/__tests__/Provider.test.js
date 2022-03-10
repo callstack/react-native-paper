@@ -3,8 +3,8 @@ import { Appearance, AccessibilityInfo, View } from 'react-native';
 import { render, act } from 'react-native-testing-library';
 import Provider from '../Provider';
 import { useTheme } from '../theming';
-import DarkTheme from '../../styles/themes/v2/DarkTheme';
-import LightTheme from '../../styles/themes/v2/LightTheme';
+import DarkTheme from '../../styles/themes/v3/DarkTheme';
+import LightTheme from '../../styles/themes/v3/LightTheme';
 import { typescale } from '../../styles/themes/v3/tokens';
 
 const mockAppearance = () => {
@@ -65,8 +65,8 @@ const createProvider = (theme) => {
   );
 };
 
-const ExtendedLightTheme = { ...LightTheme, typescale, isV3: false };
-const ExtendedDarkTheme = { ...DarkTheme, typescale, isV3: false };
+const ExtendedLightTheme = { ...LightTheme, typescale, isV3: true };
+const ExtendedDarkTheme = { ...DarkTheme, typescale, isV3: true };
 
 describe('Provider', () => {
   beforeEach(() => {

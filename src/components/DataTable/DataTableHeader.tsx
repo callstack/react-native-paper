@@ -51,10 +51,12 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  */
 
 const DataTableHeader = ({ children, style, theme, ...rest }: Props) => {
-  const borderBottomColor = color(theme.dark ? white : black)
-    .alpha(0.12)
-    .rgb()
-    .string();
+  const borderBottomColor = theme.isV3
+    ? theme.colors.surfaceVariant
+    : color(theme.dark ? white : black)
+        .alpha(0.12)
+        .rgb()
+        .string();
 
   return (
     <View {...rest} style={[styles.header, { borderBottomColor }, style]}>

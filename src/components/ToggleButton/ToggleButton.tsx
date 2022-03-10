@@ -110,9 +110,16 @@ const ToggleButton = ({
           (context && context.value === value) || status === 'checked';
 
         if (checked) {
-          backgroundColor = theme.dark
-            ? 'rgba(255, 255, 255, .12)'
-            : 'rgba(0, 0, 0, .08)';
+          if (theme.isV3) {
+            backgroundColor = color(theme.colors.onSecondaryContainer)
+              .alpha(0.12)
+              .rgb()
+              .string();
+          } else {
+            backgroundColor = theme.dark
+              ? 'rgba(255, 255, 255, .12)'
+              : 'rgba(0, 0, 0, .08)';
+          }
         } else {
           backgroundColor = 'transparent';
         }
@@ -139,10 +146,12 @@ const ToggleButton = ({
               {
                 backgroundColor,
                 borderRadius,
-                borderColor: color(theme.dark ? white : black)
-                  .alpha(0.29)
-                  .rgb()
-                  .string(),
+                borderColor: theme.isV3
+                  ? theme.colors.outline
+                  : color(theme.dark ? white : black)
+                      .alpha(0.29)
+                      .rgb()
+                      .string(),
               },
               style,
             ]}
