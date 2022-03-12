@@ -6,7 +6,6 @@ import { handlePress, isChecked } from './utils';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren, Theme } from '../../types';
-import { black } from '../../styles/themes/v2/colors';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -119,10 +118,12 @@ const RadioButtonAndroid = ({
   const checkedColor = rest.color || checkedButtonColor;
   const uncheckedColor =
     rest.uncheckedColor ||
-    color(textColor)
-      .alpha(theme.dark ? 0.7 : 0.54)
-      .rgb()
-      .string();
+    (theme.isV3
+      ? theme.colors.onSurfaceVariant
+      : color(textColor)
+          .alpha(theme.dark ? 0.7 : 0.54)
+          .rgb()
+          .string());
 
   let rippleColor: string, radioColor: string;
 
@@ -138,12 +139,10 @@ const RadioButtonAndroid = ({
 
         if (disabled) {
           rippleColor = color(textColor).alpha(0.16).rgb().string();
-          radioColor = disabledColor || black;
+          radioColor = disabledColor;
         } else {
           rippleColor = color(checkedColor).fade(0.32).rgb().string();
-          radioColor = checked
-            ? checkedColor || black
-            : uncheckedColor || black;
+          radioColor = checked ? checkedColor : uncheckedColor;
         }
 
         return (

@@ -115,6 +115,8 @@ exports[`can render leading checkbox control 1`] = `
             Object {
               "flexGrow": 1,
               "flexShrink": 1,
+            },
+            Object {
               "fontSize": 16,
             },
             Object {
@@ -188,6 +190,8 @@ exports[`can render the Android checkbox on different platforms 1`] = `
             Object {
               "flexGrow": 1,
               "flexShrink": 1,
+            },
+            Object {
               "fontSize": 16,
             },
             Object {
@@ -354,6 +358,8 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
             Object {
               "flexGrow": 1,
               "flexShrink": 1,
+            },
+            Object {
               "fontSize": 16,
             },
             Object {
@@ -486,6 +492,8 @@ exports[`renders unchecked 1`] = `
             Object {
               "flexGrow": 1,
               "flexShrink": 1,
+            },
+            Object {
               "fontSize": 16,
             },
             Object {

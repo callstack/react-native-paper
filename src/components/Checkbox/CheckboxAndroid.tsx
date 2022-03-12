@@ -5,7 +5,6 @@ import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren, Theme } from '../../types';
-import { white } from '../../styles/themes/v2/colors';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -113,10 +112,12 @@ const CheckboxAndroid = ({
     rest.color || theme.isV3 ? theme.colors.primary : theme?.colors?.accent;
   const uncheckedColor =
     rest.uncheckedColor ||
-    color(themeTextColor)
-      .alpha(theme.dark ? 0.7 : 0.54)
-      .rgb()
-      .string();
+    (theme.isV3
+      ? theme.colors.onSurfaceVariant
+      : color(themeTextColor)
+          .alpha(theme.dark ? 0.7 : 0.54)
+          .rgb()
+          .string());
 
   let rippleColor, checkboxColor;
 
@@ -160,7 +161,7 @@ const CheckboxAndroid = ({
           allowFontScaling={false}
           name={icon}
           size={24}
-          color={checkboxColor || white}
+          color={checkboxColor}
           direction="ltr"
         />
         <View style={[StyleSheet.absoluteFill, styles.fillContainer]}>

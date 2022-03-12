@@ -5,7 +5,6 @@ import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren, Theme } from '../../types';
-import { black } from '../../styles/themes/v2/colors';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -107,7 +106,7 @@ const CheckboxIOS = ({
           allowFontScaling={false}
           name={icon}
           size={24}
-          color={checkedColor || black}
+          color={checkedColor}
           direction="ltr"
         />
       </View>

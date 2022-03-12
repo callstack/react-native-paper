@@ -128,8 +128,10 @@ const CheckboxItem = ({
       >
         {isLeading && checkbox}
         <Text
+          variant="bodyLarge"
           style={[
             styles.label,
+            !theme.isV3 && styles.font,
             {
               color: theme.isV3 ? theme.colors.onSurface : theme.colors.text,
               textAlign: isLeading ? 'right' : 'left',
@@ -163,8 +165,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   label: {
-    fontSize: 16,
     flexShrink: 1,
     flexGrow: 1,
+  },
+  font: {
+    fontSize: 16,
   },
 });

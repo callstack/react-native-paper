@@ -158,7 +158,15 @@ const RadioButtonItem = ({
           >
             <View style={[styles.container, style]} pointerEvents="none">
               {isLeading && radioButton}
-              <Text style={[styles.label, computedStyle, labelStyle]}>
+              <Text
+                variant="bodyLarge"
+                style={[
+                  styles.label,
+                  !theme.isV3 && styles.font,
+                  computedStyle,
+                  labelStyle,
+                ]}
+              >
                 {label}
               </Text>
               {!isLeading && radioButton}
@@ -188,8 +196,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   label: {
-    fontSize: 16,
     flexShrink: 1,
     flexGrow: 1,
+  },
+  font: {
+    fontSize: 16,
   },
 });
