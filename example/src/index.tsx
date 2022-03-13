@@ -202,7 +202,11 @@ export default function PaperExample() {
                 <App />
               ) : (
                 <Drawer.Navigator drawerContent={() => <DrawerContent />}>
-                  <Drawer.Screen name="Home" component={App} />
+                  <Drawer.Screen
+                    name="Home"
+                    component={App}
+                    options={{ headerShown: false }}
+                  />
                 </Drawer.Navigator>
               )}
               <StatusBar style="light" />

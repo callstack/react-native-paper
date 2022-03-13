@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Appbar } from 'react-native-paper';
 import type { DrawerNavigationProp } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
+import { getHeaderTitle } from '@react-navigation/elements';
 import ExampleList, { examples } from './ExampleList';
 
 const Stack = createStackNavigator();
@@ -9,27 +10,34 @@ const Stack = createStackNavigator();
 export default function Root() {
   return (
     <Stack.Navigator
-      headerMode="screen"
-      screenOptions={{
-        header: ({ navigation, scene, previous }) => (
-          <Appbar.Header>
-            {previous ? (
-              <Appbar.BackAction onPress={() => navigation.goBack()} />
-            ) : (navigation as any).openDrawer ? (
-              <Appbar.Action
-                icon="menu"
-                onPress={() =>
-                  (navigation as any as DrawerNavigationProp<{}>).openDrawer()
-                }
-              />
-            ) : null}
-            <Appbar.Content title={scene.descriptor.options.title} />
-          </Appbar.Header>
-        ),
+      screenOptions={({ navigation }) => {
+        return {
+          detachPreviousScreen: !navigation.isFocused(),
+          header: ({ navigation, route, options, back }) => {
+            const title = getHeaderTitle(options, route.name);
+            return (
+              <Appbar.Header>
+                {back ? (
+                  <Appbar.BackAction onPress={() => navigation.goBack()} />
+                ) : (navigation as any).openDrawer ? (
+                  <Appbar.Action
+                    icon="menu"
+                    onPress={() =>
+                      (
+                        navigation as any as DrawerNavigationProp<{}>
+                      ).openDrawer()
+                    }
+                  />
+                ) : null}
+                <Appbar.Content title={title} />
+              </Appbar.Header>
+            );
+          },
+        };
       }}
     >
       <Stack.Screen
-        name="Home"
+        name="ExampleList"
         component={ExampleList}
         options={{ title: 'Examples' }}
       />
