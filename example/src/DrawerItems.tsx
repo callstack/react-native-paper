@@ -11,6 +11,7 @@ import {
   useTheme,
 } from 'react-native-paper';
 import * as Updates from 'expo-updates';
+import { isWeb } from '../utils';
 
 type Props = {
   toggleTheme: () => void;
@@ -48,7 +49,9 @@ const DrawerItems = ({ toggleTheme, toggleRTL, isRTL, isDarkTheme }: Props) => {
   const _handleToggleRTL = () => {
     toggleRTL();
     I18nManager.forceRTL(!isRTL);
-    Updates.reloadAsync();
+    if (isWeb) {
+      Updates.reloadAsync();
+    }
   };
 
   return (

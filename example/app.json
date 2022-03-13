@@ -15,7 +15,8 @@
     },
     "platforms": [
       "android",
-      "ios"
+      "ios",
+      "web"
     ],
     "owner": "react-native-paper",
     "ios": {

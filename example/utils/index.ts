@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 type ReducerAction<T extends keyof State> = {
   payload: State[T];
   type: T;
@@ -51,6 +53,8 @@ export function inputReducer<T extends keyof State>(
       return { ...state };
   }
 }
+
+export const isWeb = Platform.OS === 'web';
 
 export const animatedFABExampleData = [
   {

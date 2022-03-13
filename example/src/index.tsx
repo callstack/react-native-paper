@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { I18nManager, Platform } from 'react-native';
+import { I18nManager } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Updates from 'expo-updates';
 import { useKeepAwake } from 'expo-keep-awake';
@@ -14,6 +14,7 @@ import {
 import App from './RootNavigator';
 import DrawerItems from './DrawerItems';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { isWeb } from '../utils';
 
 // Add new typescript properties to the theme
 declare global {
@@ -160,7 +161,9 @@ export default function PaperExample() {
 
       if (I18nManager.isRTL !== rtl) {
         I18nManager.forceRTL(rtl);
-        Updates.reloadAsync();
+        if (!isWeb) {
+          Updates.reloadAsync();
+        }
       }
     };
 
@@ -195,7 +198,7 @@ export default function PaperExample() {
                 AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
               }
             >
-              {Platform.OS === 'web' ? (
+              {isWeb ? (
                 <App />
               ) : (
                 <Drawer.Navigator drawerContent={() => <DrawerContent />}>
