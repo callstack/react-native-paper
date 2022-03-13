@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { I18nManager, Platform } from 'react-native';
+import { I18nManager } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Updates from 'expo-updates';
 import { useKeepAwake } from 'expo-keep-awake';
@@ -14,6 +14,7 @@ import {
 import App from './RootNavigator';
 import DrawerItems from './DrawerItems';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { isWeb } from '../utils';
 
 // Add new typescript properties to the theme
 declare global {
@@ -101,8 +102,6 @@ export default function PaperExample() {
     React.useState<ReactNativePaper.Theme>(CustomDefaultTheme);
   const [rtl, setRtl] = React.useState<boolean>(I18nManager.isRTL);
 
-  const isWeb = Platform.OS === 'web';
-
   React.useEffect(() => {
     const restoreState = async () => {
       try {
@@ -169,7 +168,7 @@ export default function PaperExample() {
     };
 
     savePrefs();
-  }, [rtl, theme, isWeb]);
+  }, [rtl, theme]);
 
   const preferences = React.useMemo(
     () => ({
