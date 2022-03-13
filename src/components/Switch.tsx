@@ -3,10 +3,10 @@ import {
   grey400,
   grey800,
   grey50,
+  grey700,
   white,
   black,
 } from '../styles/themes/v2/colors';
-import { MD3Colors } from '../styles/themes/v3/tokens';
 import {
   NativeModules,
   Platform,
@@ -97,43 +97,38 @@ const Switch = ({
   const checkedColor =
     color || (theme.isV3 ? theme.colors.primary : theme?.colors?.accent);
 
-  const androidDisabledOnTintColor = theme.dark
-    ? setColor(white)
-        .alpha(theme.isV3 ? 0.06 : 0.1)
-        .rgb()
-        .string()
-    : setColor(black).alpha(0.12).rgb().string();
+  const getSwitchColor = () => {
+    let thumbTintColor;
+    let onTintColor;
 
-  const androidDisabledThumbTintColor = theme.dark ? grey800 : grey400;
+    if (isIOS) {
+      thumbTintColor = undefined;
+      onTintColor = checkedColor;
+    } else {
+      if (disabled) {
+        thumbTintColor = theme.dark ? grey800 : grey400;
+        onTintColor = theme.dark
+          ? setColor(white)
+              .alpha(theme.isV3 ? 0.06 : 0.1)
+              .rgb()
+              .string()
+          : setColor(black).alpha(0.12).rgb().string();
+      } else if (value) {
+        thumbTintColor = checkedColor;
+        onTintColor = setColor(checkedColor).alpha(0.5).rgb().string();
+      } else {
+        thumbTintColor = theme.dark ? grey400 : grey50;
+        onTintColor = theme.dark ? grey700 : 'rgb(178, 175, 177)';
+      }
+    }
 
-  const md2AndroidCheckedThumbTintColor = theme.dark ? grey400 : grey50;
-  const md3AndroidCheckedThumbTintColor = theme.dark
-    ? MD3Colors.neutral80
-    : MD3Colors.neutral99;
+    return {
+      thumbTintColor,
+      onTintColor,
+    };
+  };
 
-  const androidCheckedThumbTintColor = theme.isV3
-    ? md3AndroidCheckedThumbTintColor
-    : md2AndroidCheckedThumbTintColor;
-
-  const md3AndroidOnTintColor = theme.dark
-    ? MD3Colors.neutral40
-    : MD3Colors.neutral70;
-
-  const onTintColor = isIOS
-    ? checkedColor
-    : disabled
-    ? androidDisabledOnTintColor
-    : theme.isV3 && !value
-    ? md3AndroidOnTintColor
-    : setColor(checkedColor).alpha(0.5).rgb().string();
-
-  const thumbTintColor = isIOS
-    ? undefined
-    : disabled
-    ? androidDisabledThumbTintColor
-    : value
-    ? checkedColor
-    : androidCheckedThumbTintColor;
+  const { thumbTintColor, onTintColor } = getSwitchColor();
 
   const props =
     version && version.major === 0 && version.minor <= 56
@@ -151,7 +146,7 @@ const Switch = ({
           thumbColor: thumbTintColor,
           trackColor: {
             true: onTintColor,
-            false: theme.isV3 && !isIOS ? onTintColor : '',
+            false: onTintColor,
           },
         };
 
