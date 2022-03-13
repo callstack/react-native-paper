@@ -6,6 +6,7 @@ import {
   white,
   black,
 } from '../styles/themes/v2/colors';
+import { MD3Colors } from '../styles/themes/v3/tokens';
 import {
   NativeModules,
   Platform,
@@ -91,30 +92,48 @@ const Switch = ({
   theme,
   ...rest
 }: Props) => {
+  const isIOS = Platform.OS === 'ios';
+
   const checkedColor =
     color || (theme.isV3 ? theme.colors.primary : theme?.colors?.accent);
 
-  const onTintColor =
-    Platform.OS === 'ios'
-      ? checkedColor
-      : disabled
-      ? theme.dark
-        ? setColor(white).alpha(0.1).rgb().string()
-        : setColor(black).alpha(0.12).rgb().string()
-      : setColor(checkedColor).alpha(0.5).rgb().string();
+  const androidDisabledOnTintColor = theme.dark
+    ? setColor(white)
+        .alpha(theme.isV3 ? 0.06 : 0.1)
+        .rgb()
+        .string()
+    : setColor(black).alpha(0.12).rgb().string();
 
-  const thumbTintColor =
-    Platform.OS === 'ios'
-      ? undefined
-      : disabled
-      ? theme.dark
-        ? grey800
-        : grey400
-      : value
-      ? checkedColor
-      : theme.dark
-      ? grey400
-      : grey50;
+  const androidDisabledThumbTintColor = theme.dark ? grey800 : grey400;
+
+  const md2AndroidCheckedThumbTintColor = theme.dark ? grey400 : grey50;
+  const md3AndroidCheckedThumbTintColor = theme.dark
+    ? MD3Colors.neutral80
+    : MD3Colors.neutral99;
+
+  const androidCheckedThumbTintColor = theme.isV3
+    ? md3AndroidCheckedThumbTintColor
+    : md2AndroidCheckedThumbTintColor;
+
+  const md3AndroidOnTintColor = theme.dark
+    ? MD3Colors.neutral40
+    : MD3Colors.neutral70;
+
+  const onTintColor = isIOS
+    ? checkedColor
+    : disabled
+    ? androidDisabledOnTintColor
+    : theme.isV3 && !value
+    ? md3AndroidOnTintColor
+    : setColor(checkedColor).alpha(0.5).rgb().string();
+
+  const thumbTintColor = isIOS
+    ? undefined
+    : disabled
+    ? androidDisabledThumbTintColor
+    : value
+    ? checkedColor
+    : androidCheckedThumbTintColor;
 
   const props =
     version && version.major === 0 && version.minor <= 56
@@ -132,7 +151,7 @@ const Switch = ({
           thumbColor: thumbTintColor,
           trackColor: {
             true: onTintColor,
-            false: '',
+            false: theme.isV3 && !isIOS ? onTintColor : '',
           },
         };
 
