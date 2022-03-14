@@ -178,12 +178,18 @@ const TextInputOutlined = ({
     ? 1
     : 0;
 
+  const placeholderStyle = {
+    position: 'absolute',
+    left: 0,
+    paddingHorizontal: INPUT_PADDING_HORIZONTAL,
+  };
+
   const labelProps = {
     label,
     onLayoutAnimatedText,
     placeholderOpacity,
     error,
-    placeholderStyle: styles.placeholder,
+    placeholderStyle,
     baseLabelTranslateY,
     baseLabelTranslateX,
     font,
@@ -379,11 +385,6 @@ const Outline = ({
 );
 
 const styles = StyleSheet.create({
-  placeholder: {
-    position: 'absolute',
-    left: 0,
-    paddingHorizontal: INPUT_PADDING_HORIZONTAL,
-  },
   outline: {
     position: 'absolute',
     left: 0,
