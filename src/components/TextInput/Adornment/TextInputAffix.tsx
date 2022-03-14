@@ -13,8 +13,7 @@ import {
 import { withTheme } from '../../../core/theming';
 import { AdornmentSide } from './enums';
 import type { Theme } from '../../../types';
-
-const AFFIX_OFFSET = 16;
+import { getConstants } from '../helpers';
 
 export type Props = {
   /**
@@ -109,6 +108,8 @@ const AffixAdornment: React.FunctionComponent<
  */
 
 const TextInputAffix = ({ text, textStyle: labelStyle, theme }: Props) => {
+  const { AFFIX_OFFSET } = getConstants(theme.isV3);
+
   const { textStyle, onLayout, topPosition, side, visible, paddingHorizontal } =
     React.useContext(AffixContext);
   const textColor = color(

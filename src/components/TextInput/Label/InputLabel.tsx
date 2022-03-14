@@ -71,6 +71,16 @@ const InputLabel = (props: InputLabelProps) => {
     ],
   };
 
+  let textColor;
+
+  if (error && errorColor) {
+    textColor = errorColor;
+  } else if (isV3 && parentState.value && mode !== 'outlined') {
+    textColor = activeColor;
+  } else {
+    textColor = placeholderColor;
+  }
+
   return label ? (
     // Position colored placeholder and gray placeholder on top of each other and crossfade them
     // This gives the effect of animating the color, but allows us to use native driver
@@ -129,12 +139,7 @@ const InputLabel = (props: InputLabelProps) => {
           labelStyle,
           paddingOffset,
           {
-            color:
-              error && errorColor
-                ? errorColor
-                : parentState.value && mode !== 'outlined'
-                ? activeColor
-                : placeholderColor,
+            color: textColor,
             opacity: placeholderOpacity,
           },
           isV3 && styles.md3TextLine,

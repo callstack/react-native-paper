@@ -1,7 +1,6 @@
 import React from 'react';
 import TextInputIcon, { IconAdornment } from './TextInputIcon';
 import TextInputAffix, { AffixAdornment } from './TextInputAffix';
-import { ADORNMENT_OFFSET, OUTLINED_INPUT_OFFSET } from '../constants';
 import type {
   LayoutChangeEvent,
   TextStyle,
@@ -13,6 +12,7 @@ import type {
   AdornmentStyleAdjustmentForNativeInput,
 } from './types';
 import { AdornmentSide, AdornmentType, InputMode } from './enums';
+import { getConstants } from '../helpers';
 
 export function getAdornmentConfig({
   left,
@@ -52,6 +52,7 @@ export function getAdornmentStyleAdjustmentForNativeInput({
   paddingHorizontal,
   inputOffset = 0,
   mode,
+  isV3,
 }: {
   inputOffset?: number;
   adornmentConfig: AdornmentConfig[];
@@ -59,7 +60,10 @@ export function getAdornmentStyleAdjustmentForNativeInput({
   rightAffixWidth: number;
   mode?: 'outlined' | 'flat';
   paddingHorizontal?: number | string;
+  isV3?: boolean;
 }): AdornmentStyleAdjustmentForNativeInput | {} {
+  const { OUTLINED_INPUT_OFFSET, ADORNMENT_OFFSET } = getConstants(isV3);
+
   if (adornmentConfig.length) {
     const adornmentStyleAdjustmentForNativeInput = adornmentConfig.map(
       ({ type, side }: AdornmentConfig) => {

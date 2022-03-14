@@ -18,7 +18,7 @@ exports[`correctly applies a component as the text label 1`] = `
       Object {
         "backgroundColor": "rgba(0, 0, 0, 0.26)",
         "bottom": 0,
-        "height": 1,
+        "height": 2,
         "left": 0,
         "position": "absolute",
         "right": 0,
@@ -56,7 +56,7 @@ exports[`correctly applies a component as the text label 1`] = `
           "top": 0,
           "transform": Array [
             Object {
-              "translateX": 4,
+              "translateX": 3,
             },
           ],
           "zIndex": 3,
@@ -74,8 +74,8 @@ exports[`correctly applies a component as the text label 1`] = `
             "fontWeight": undefined,
             "left": 0,
             "opacity": 0,
-            "paddingLeft": 16,
-            "paddingRight": 16,
+            "paddingLeft": 12,
+            "paddingRight": 12,
             "position": "absolute",
             "textAlign": "left",
             "top": 34,
@@ -108,14 +108,14 @@ exports[`correctly applies a component as the text label 1`] = `
         numberOfLines={1}
         style={
           Object {
-            "color": "#6200ee",
+            "color": "rgba(0, 0, 0, 0.54)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "left": 0,
             "opacity": 0,
-            "paddingLeft": 16,
-            "paddingRight": 16,
+            "paddingLeft": 12,
+            "paddingRight": 12,
             "position": "absolute",
             "textAlign": "left",
             "top": 34,
@@ -163,8 +163,8 @@ exports[`correctly applies a component as the text label 1`] = `
             "margin": 0,
           },
           Object {
-            "paddingLeft": 16,
-            "paddingRight": 16,
+            "paddingLeft": 12,
+            "paddingRight": 12,
           },
           Object {
             "height": 64,
@@ -212,7 +212,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
       Object {
         "backgroundColor": "rgba(0, 0, 0, 0.26)",
         "bottom": 0,
-        "height": 1,
+        "height": 2,
         "left": 0,
         "position": "absolute",
         "right": 0,
@@ -250,7 +250,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
           "top": 0,
           "transform": Array [
             Object {
-              "translateX": 4,
+              "translateX": 3,
             },
           ],
           "zIndex": 3,
@@ -268,8 +268,8 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
             "fontWeight": undefined,
             "left": 0,
             "opacity": 0,
-            "paddingLeft": 16,
-            "paddingRight": 16,
+            "paddingLeft": 12,
+            "paddingRight": 12,
             "position": "absolute",
             "textAlign": "left",
             "top": 34,
@@ -294,14 +294,14 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
         numberOfLines={1}
         style={
           Object {
-            "color": "#6200ee",
+            "color": "rgba(0, 0, 0, 0.54)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "left": 0,
             "opacity": 0,
-            "paddingLeft": 16,
-            "paddingRight": 16,
+            "paddingLeft": 12,
+            "paddingRight": 12,
             "position": "absolute",
             "textAlign": "left",
             "top": 34,
@@ -341,8 +341,8 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
             "margin": 0,
           },
           Object {
-            "paddingLeft": 16,
-            "paddingRight": 16,
+            "paddingLeft": 12,
+            "paddingRight": 12,
           },
           Object {
             "height": 64,
@@ -455,13 +455,13 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
           numberOfLines={1}
           style={
             Object {
-              "backgroundColor": "#ffffff",
+              "backgroundColor": "#f6f6f6",
               "color": "transparent",
               "fontFamily": "System",
               "fontSize": 16,
               "fontWeight": undefined,
               "left": 18,
-              "maxWidth": -32,
+              "maxWidth": -28,
               "opacity": 1,
               "paddingHorizontal": 0,
               "position": "absolute",
@@ -498,7 +498,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               "fontWeight": undefined,
               "left": 0,
               "opacity": 0,
-              "paddingHorizontal": 16,
+              "paddingHorizontal": 14,
               "position": "absolute",
               "textAlign": "left",
               "top": 58,
@@ -529,7 +529,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               "fontWeight": undefined,
               "left": 0,
               "opacity": 0,
-              "paddingHorizontal": 16,
+              "paddingHorizontal": 14,
               "position": "absolute",
               "textAlign": "left",
               "top": 58,
@@ -567,7 +567,6 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
             Object {
               "flexGrow": 1,
               "margin": 0,
-              "paddingHorizontal": 16,
               "zIndex": 1,
             },
             Object {
@@ -582,6 +581,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               "fontFamily": "System",
               "fontSize": 16,
               "fontWeight": undefined,
+              "paddingHorizontal": 14,
               "textAlign": "left",
               "textAlignVertical": "top",
             },
@@ -618,7 +618,7 @@ exports[`correctly applies textAlign center 1`] = `
       Object {
         "backgroundColor": "rgba(0, 0, 0, 0.26)",
         "bottom": 0,
-        "height": 1,
+        "height": 2,
         "left": 0,
         "position": "absolute",
         "right": 0,
@@ -656,7 +656,7 @@ exports[`correctly applies textAlign center 1`] = `
           "top": 0,
           "transform": Array [
             Object {
-              "translateX": 4,
+              "translateX": 3,
             },
           ],
           "zIndex": 3,
@@ -674,8 +674,8 @@ exports[`correctly applies textAlign center 1`] = `
             "fontWeight": undefined,
             "left": 0,
             "opacity": 0,
-            "paddingLeft": 16,
-            "paddingRight": 16,
+            "paddingLeft": 12,
+            "paddingRight": 12,
             "position": "absolute",
             "textAlign": "left",
             "top": 34,
@@ -700,14 +700,14 @@ exports[`correctly applies textAlign center 1`] = `
         numberOfLines={1}
         style={
           Object {
-            "color": "#6200ee",
+            "color": "rgba(0, 0, 0, 0.54)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "left": 0,
             "opacity": 0,
-            "paddingLeft": 16,
-            "paddingRight": 16,
+            "paddingLeft": 12,
+            "paddingRight": 12,
             "position": "absolute",
             "textAlign": "left",
             "top": 34,
@@ -747,8 +747,8 @@ exports[`correctly applies textAlign center 1`] = `
             "margin": 0,
           },
           Object {
-            "paddingLeft": 16,
-            "paddingRight": 16,
+            "paddingLeft": 12,
+            "paddingRight": 12,
           },
           Object {
             "height": 64,
@@ -796,7 +796,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       Object {
         "backgroundColor": "rgba(0, 0, 0, 0.26)",
         "bottom": 0,
-        "height": 1,
+        "height": 2,
         "left": 0,
         "position": "absolute",
         "right": 0,
@@ -834,7 +834,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           "top": 0,
           "transform": Array [
             Object {
-              "translateX": 4,
+              "translateX": 3,
             },
           ],
           "zIndex": 3,
@@ -852,8 +852,8 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "fontWeight": undefined,
             "left": 0,
             "opacity": 0,
-            "paddingLeft": 16,
-            "paddingRight": 56,
+            "paddingLeft": 12,
+            "paddingRight": 44,
             "position": "absolute",
             "textAlign": "left",
             "top": 34,
@@ -878,14 +878,14 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         numberOfLines={1}
         style={
           Object {
-            "color": "#6200ee",
+            "color": "rgba(0, 0, 0, 0.54)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "left": 0,
             "opacity": 0,
-            "paddingLeft": 16,
-            "paddingRight": 56,
+            "paddingLeft": 12,
+            "paddingRight": 44,
             "position": "absolute",
             "textAlign": "left",
             "top": 34,
@@ -925,8 +925,8 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "margin": 0,
           },
           Object {
-            "paddingLeft": 16,
-            "paddingRight": 56,
+            "paddingLeft": 12,
+            "paddingRight": 44,
           },
           Object {
             "height": 64,
@@ -946,9 +946,9 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           false,
           Object {
             "marginLeft": 0,
-            "marginRight": 40,
-            "paddingLeft": 40,
-            "paddingRight": 16,
+            "marginRight": 36,
+            "paddingLeft": 36,
+            "paddingRight": 8,
           },
         ]
       }
@@ -962,7 +962,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       Object {
         "alignItems": "center",
         "justifyContent": "center",
-        "left": 16,
+        "left": 12,
         "opacity": 1,
         "position": "absolute",
         "top": null,
@@ -1000,7 +1000,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           "width": 24,
         },
         Object {
-          "right": 16,
+          "right": 12,
           "top": 20,
         },
       ]
@@ -1099,7 +1099,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       Object {
         "backgroundColor": "rgba(0, 0, 0, 0.26)",
         "bottom": 0,
-        "height": 1,
+        "height": 2,
         "left": 0,
         "position": "absolute",
         "right": 0,
@@ -1137,7 +1137,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           "top": 0,
           "transform": Array [
             Object {
-              "translateX": 14,
+              "translateX": 11,
             },
           ],
           "zIndex": 3,
@@ -1155,8 +1155,8 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "fontWeight": undefined,
             "left": 0,
             "opacity": 0,
-            "paddingLeft": 56,
-            "paddingRight": 56,
+            "paddingLeft": 44,
+            "paddingRight": 44,
             "position": "absolute",
             "textAlign": "left",
             "top": 34,
@@ -1181,14 +1181,14 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         numberOfLines={1}
         style={
           Object {
-            "color": "#6200ee",
+            "color": "rgba(0, 0, 0, 0.54)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "left": 0,
             "opacity": 0,
-            "paddingLeft": 56,
-            "paddingRight": 56,
+            "paddingLeft": 44,
+            "paddingRight": 44,
             "position": "absolute",
             "textAlign": "left",
             "top": 34,
@@ -1228,8 +1228,8 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "margin": 0,
           },
           Object {
-            "paddingLeft": 56,
-            "paddingRight": 56,
+            "paddingLeft": 44,
+            "paddingRight": 44,
           },
           Object {
             "height": 64,
@@ -1248,10 +1248,10 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           },
           false,
           Object {
-            "marginLeft": 40,
+            "marginLeft": 36,
             "marginRight": 0,
-            "paddingLeft": 16,
-            "paddingRight": 40,
+            "paddingLeft": 8,
+            "paddingRight": 36,
           },
         ]
       }
@@ -1270,7 +1270,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           "width": 24,
         },
         Object {
-          "left": 16,
+          "left": 12,
           "top": 20,
         },
       ]
@@ -1356,7 +1356,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         "justifyContent": "center",
         "opacity": 1,
         "position": "absolute",
-        "right": 16,
+        "right": 12,
         "top": null,
       }
     }

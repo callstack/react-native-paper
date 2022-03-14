@@ -64,7 +64,7 @@ const LabelBackground = ({
             isV3 && styles.md3OutlinedLabel,
             {
               top: topPosition + (isV3 ? 0 : 1),
-              backgroundColor: colors.surface,
+              backgroundColor: isV3 ? colors.surface : backgroundColor,
               opacity,
               transform: isV3
                 ? [...labelStyle.transform]

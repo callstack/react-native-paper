@@ -13,13 +13,17 @@ import TextInputAdornment, {
   TextInputAdornmentProps,
 } from './Adornment/TextInputAdornment';
 import type { RenderProps, ChildTextInputProps } from './types';
+import { useTheme } from '../../core/theming';
 
 import {
   MAXIMIZED_LABEL_FONT_SIZE,
   MINIMIZED_LABEL_FONT_SIZE,
   LABEL_WIGGLE_X_OFFSET,
   ADORNMENT_SIZE,
-  FLAT_INPUT_OFFSET,
+  MINIMIZED_LABEL_Y_OFFSET,
+  LABEL_PADDING_TOP_DENSE,
+  MIN_DENSE_HEIGHT_WL,
+  MIN_DENSE_HEIGHT,
 } from './constants';
 
 import {
@@ -32,22 +36,13 @@ import {
   calculateFlatAffixTopPosition,
   calculateFlatInputHorizontalPadding,
   getFlatInputColors,
+  getConstants,
 } from './helpers';
 import {
   getAdornmentConfig,
   getAdornmentStyleAdjustmentForNativeInput,
 } from './Adornment/TextInputAdornment';
 import { AdornmentSide, AdornmentType, InputMode } from './Adornment/enums';
-
-const MINIMIZED_LABEL_Y_OFFSET = -18;
-
-const MD2_LABEL_PADDING_TOP = 30;
-const MD3_LABEL_PADDING_TOP = 26;
-const LABEL_PADDING_TOP_DENSE = 24;
-const MD2_MIN_HEIGHT = 64;
-const MD3_MIN_HEIGHT = 56;
-const MIN_DENSE_HEIGHT_WL = 52;
-const MIN_DENSE_HEIGHT = 40;
 
 const TextInputFlat = ({
   disabled = false,
@@ -81,10 +76,9 @@ const TextInputFlat = ({
   const font = fonts.regular;
   const hasActiveOutline = parentState.focused || error;
 
-  const MIN_HEIGHT = theme.isV3 ? MD3_MIN_HEIGHT : MD2_MIN_HEIGHT;
-  const LABEL_PADDING_TOP = theme.isV3
-    ? MD3_LABEL_PADDING_TOP
-    : MD2_LABEL_PADDING_TOP;
+  const { LABEL_PADDING_TOP, FLAT_INPUT_OFFSET, MIN_HEIGHT } = getConstants(
+    theme.isV3
+  );
 
   const {
     fontSize: fontSizeStyle,
@@ -106,6 +100,7 @@ const TextInputFlat = ({
 
   let { paddingLeft, paddingRight } = calculateFlatInputHorizontalPadding({
     adornmentConfig,
+    isV3: theme.isV3,
   });
 
   if (isPaddingHorizontalPassed) {
@@ -131,6 +126,7 @@ const TextInputFlat = ({
       paddingHorizontal,
       inputOffset: FLAT_INPUT_OFFSET,
       mode: InputMode.Flat,
+      isV3: theme.isV3,
     });
 
   const {
@@ -395,20 +391,31 @@ const Underline = ({
   underlineColorCustom,
   hasActiveOutline,
 }: UnderlineProps) => {
+  const { isV3 } = useTheme();
+
   let backgroundColor = parentState.focused
     ? activeColor
     : underlineColorCustom;
 
   if (error) backgroundColor = colors?.error;
 
+  const activeScale = isV3 ? 2 : 1;
+
   return (
     <Animated.View
       style={[
         styles.underline,
+        isV3 && styles.md3Underline,
         {
           backgroundColor,
           // Underlines is thinner when input is not focused
-          transform: [{ scaleY: hasActiveOutline ? 2 : 0.5 }],
+          transform: [
+            {
+              scaleY: (isV3 ? hasActiveOutline : parentState.focused)
+                ? activeScale
+                : 0.5,
+            },
+          ],
         },
       ]}
     />
@@ -425,8 +432,11 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    height: 1,
+    height: 2,
     zIndex: 1,
+  },
+  md3Underline: {
+    height: 1,
   },
   labelContainer: {
     paddingTop: 0,

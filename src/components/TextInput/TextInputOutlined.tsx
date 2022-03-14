@@ -23,7 +23,9 @@ import {
   MINIMIZED_LABEL_FONT_SIZE,
   LABEL_WIGGLE_X_OFFSET,
   ADORNMENT_SIZE,
-  ADORNMENT_OFFSET,
+  OUTLINE_MINIMIZED_LABEL_Y_OFFSET,
+  LABEL_PADDING_TOP,
+  MIN_DENSE_HEIGHT_OUTLINED,
 } from './constants';
 
 import {
@@ -35,16 +37,10 @@ import {
   interpolatePlaceholder,
   calculateOutlinedIconAndAffixTopPosition,
   getOutlinedInputColors,
+  getConstants,
 } from './helpers';
 import { AdornmentType, AdornmentSide } from './Adornment/enums';
 import type { Theme } from '../../types';
-
-const OUTLINE_MINIMIZED_LABEL_Y_OFFSET = -6;
-const LABEL_PADDING_TOP = 8;
-const MD2_MIN_HEIGHT = 64;
-const MD3_MIN_HEIGHT = 56;
-const MIN_DENSE_HEIGHT = 48;
-const INPUT_PADDING_HORIZONTAL = 16;
 
 const TextInputOutlined = ({
   disabled = false,
@@ -80,7 +76,8 @@ const TextInputOutlined = ({
   const font = fonts.regular;
   const hasActiveOutline = parentState.focused || error;
 
-  const MIN_HEIGHT = theme.isV3 ? MD3_MIN_HEIGHT : MD2_MIN_HEIGHT;
+  const { INPUT_PADDING_HORIZONTAL, MIN_HEIGHT, ADORNMENT_OFFSET } =
+    getConstants(theme.isV3);
 
   const {
     fontSize: fontSizeStyle,
@@ -133,7 +130,7 @@ const TextInputOutlined = ({
   }
 
   const minInputHeight =
-    (dense ? MIN_DENSE_HEIGHT : MIN_HEIGHT) - LABEL_PADDING_TOP;
+    (dense ? MIN_DENSE_HEIGHT_OUTLINED : MIN_HEIGHT) - LABEL_PADDING_TOP;
 
   const inputHeight = calculateInputHeight(labelHeight, height, minInputHeight);
 
@@ -208,7 +205,7 @@ const TextInputOutlined = ({
   };
 
   const minHeight = (height ||
-    (dense ? MIN_DENSE_HEIGHT : MIN_HEIGHT)) as number;
+    (dense ? MIN_DENSE_HEIGHT_OUTLINED : MIN_HEIGHT)) as number;
 
   const { leftLayout, rightLayout } = parentState;
 
@@ -243,6 +240,7 @@ const TextInputOutlined = ({
       rightAffixWidth,
       leftAffixWidth,
       mode: 'outlined',
+      isV3: theme.isV3,
     });
   const affixTopPosition = {
     [AdornmentSide.Left]: leftAffixTopPosition,
@@ -337,6 +335,7 @@ const TextInputOutlined = ({
                   : I18nManager.isRTL
                   ? 'right'
                   : 'left',
+                paddingHorizontal: INPUT_PADDING_HORIZONTAL,
               },
               Platform.OS === 'web' && { outline: 'none' },
               adornmentStyleAdjustmentForNativeInput,
@@ -397,7 +396,6 @@ const styles = StyleSheet.create({
   },
   input: {
     flexGrow: 1,
-    paddingHorizontal: INPUT_PADDING_HORIZONTAL,
     margin: 0,
     zIndex: 1,
   },

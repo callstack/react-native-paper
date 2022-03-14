@@ -2,10 +2,25 @@ import type { Animated } from 'react-native';
 import color from 'color';
 import type { AdornmentConfig } from './Adornment/types';
 import {
-  LABEL_PADDING_HORIZONTAL,
-  ADORNMENT_OFFSET,
   ADORNMENT_SIZE,
-  FLAT_INPUT_OFFSET,
+  MD3_LABEL_PADDING_HORIZONTAL,
+  MD2_LABEL_PADDING_HORIZONTAL,
+  MD3_ADORNMENT_OFFSET,
+  MD2_ADORNMENT_OFFSET,
+  MD3_FLAT_INPUT_OFFSET,
+  MD2_FLAT_INPUT_OFFSET,
+  MD3_AFFIX_OFFSET,
+  MD2_AFFIX_OFFSET,
+  MD3_ICON_OFFSET,
+  MD2_ICON_OFFSET,
+  MD3_LABEL_PADDING_TOP,
+  MD2_LABEL_PADDING_TOP,
+  MD3_MIN_HEIGHT,
+  MD2_MIN_HEIGHT,
+  MD3_INPUT_PADDING_HORIZONTAL,
+  MD2_INPUT_PADDING_HORIZONTAL,
+  MD3_OUTLINED_INPUT_OFFSET,
+  MD2_OUTLINED_INPUT_OFFSET,
 } from './constants';
 import { AdornmentType, AdornmentSide } from './Adornment/enums';
 import type { TextInputLabelProp } from './types';
@@ -270,9 +285,14 @@ export function calculateOutlinedIconAndAffixTopPosition({
 
 export const calculateFlatInputHorizontalPadding = ({
   adornmentConfig,
+  isV3,
 }: {
   adornmentConfig: AdornmentConfig[];
+  isV3?: boolean;
 }) => {
+  const { LABEL_PADDING_HORIZONTAL, ADORNMENT_OFFSET, FLAT_INPUT_OFFSET } =
+    getConstants(isV3);
+
   let paddingLeft = LABEL_PADDING_HORIZONTAL;
   let paddingRight = LABEL_PADDING_HORIZONTAL;
 
@@ -325,11 +345,15 @@ export const getFlatInputColors = ({
         underlineColorCustom =
           theme.colors.onSurfaceDisabled;
       // @ts-ignore According to Figma for both themes the base color for disabled in `onSecondaryContainer`
-      backgroundColor = color(MD3LightTheme.colors.onSecondaryContainer);
+      backgroundColor = color(MD3LightTheme.colors.onSecondaryContainer)
+        .alpha(0.08)
+        .rgb()
+        .string();
+    } else {
+      inputTextColor = placeholderColor = theme.colors.onSurfaceVariant;
+      underlineColorCustom = underlineColor || theme.colors.onSurface;
+      backgroundColor = theme.colors.surfaceVariant;
     }
-    inputTextColor = placeholderColor = theme.colors.onSurfaceVariant;
-    underlineColorCustom = underlineColor || theme.colors.onSurface;
-    backgroundColor = theme.colors.surfaceVariant;
   } else {
     if (disabled) {
       inputTextColor = activeColor = color(theme.colors?.text)
@@ -387,19 +411,21 @@ export const getOutlinedInputColors = ({
       inputTextColor = activeColor = theme.colors.onSurfaceDisabled;
       placeholderColor = theme.colors.onSurfaceDisabled;
       outlineColor = theme.dark ? 'transparent' : theme.colors.surfaceDisabled;
+    } else {
+      inputTextColor = textColor;
+      placeholderColor = theme.colors.onSurfaceVariant;
+      outlineColor = customOutlineColor || theme.colors.outline;
     }
-    inputTextColor = textColor;
-    placeholderColor = theme.colors.onSurfaceVariant;
-    outlineColor = customOutlineColor || theme.colors.outline;
   } else {
     if (disabled) {
       inputTextColor = color(textColor).alpha(0.54).rgb().string();
       placeholderColor = theme.colors?.disabled;
       outlineColor = isTransparent ? customOutlineColor : theme.colors.disabled;
+    } else {
+      inputTextColor = textColor;
+      placeholderColor = theme.colors.placeholder;
+      outlineColor = customOutlineColor || theme.colors.placeholder;
     }
-    inputTextColor = textColor;
-    placeholderColor = theme.colors.placeholder;
-    outlineColor = customOutlineColor || theme.colors.placeholder;
   }
 
   return {
@@ -408,5 +434,55 @@ export const getOutlinedInputColors = ({
     outlineColor,
     placeholderColor,
     errorColor,
+  };
+};
+
+export const getConstants = (isV3?: boolean) => {
+  // Text input affix
+  let AFFIX_OFFSET;
+  // Text input icon
+  let ICON_OFFSET;
+  //Text input flat
+  let LABEL_PADDING_TOP;
+  let LABEL_PADDING_HORIZONTAL;
+  let FLAT_INPUT_OFFSET;
+  let MIN_HEIGHT;
+  // Text input outlined;
+  let INPUT_PADDING_HORIZONTAL;
+  let ADORNMENT_OFFSET;
+  let OUTLINED_INPUT_OFFSET;
+
+  if (isV3) {
+    AFFIX_OFFSET = MD3_AFFIX_OFFSET;
+    ICON_OFFSET = MD3_ICON_OFFSET;
+    LABEL_PADDING_TOP = MD3_LABEL_PADDING_TOP;
+    LABEL_PADDING_HORIZONTAL = MD3_LABEL_PADDING_HORIZONTAL;
+    FLAT_INPUT_OFFSET = MD3_FLAT_INPUT_OFFSET;
+    MIN_HEIGHT = MD3_MIN_HEIGHT;
+    INPUT_PADDING_HORIZONTAL = MD3_INPUT_PADDING_HORIZONTAL;
+    ADORNMENT_OFFSET = MD3_ADORNMENT_OFFSET;
+    OUTLINED_INPUT_OFFSET = MD3_OUTLINED_INPUT_OFFSET;
+  } else {
+    AFFIX_OFFSET = MD2_AFFIX_OFFSET;
+    ICON_OFFSET = MD2_ICON_OFFSET;
+    LABEL_PADDING_TOP = MD2_LABEL_PADDING_TOP;
+    LABEL_PADDING_HORIZONTAL = MD2_LABEL_PADDING_HORIZONTAL;
+    FLAT_INPUT_OFFSET = MD2_FLAT_INPUT_OFFSET;
+    MIN_HEIGHT = MD2_MIN_HEIGHT;
+    INPUT_PADDING_HORIZONTAL = MD2_INPUT_PADDING_HORIZONTAL;
+    ADORNMENT_OFFSET = MD2_ADORNMENT_OFFSET;
+    OUTLINED_INPUT_OFFSET = MD2_OUTLINED_INPUT_OFFSET;
+  }
+
+  return {
+    AFFIX_OFFSET,
+    ICON_OFFSET,
+    LABEL_PADDING_TOP,
+    LABEL_PADDING_HORIZONTAL,
+    FLAT_INPUT_OFFSET,
+    MIN_HEIGHT,
+    INPUT_PADDING_HORIZONTAL,
+    ADORNMENT_OFFSET,
+    OUTLINED_INPUT_OFFSET,
   };
 };
