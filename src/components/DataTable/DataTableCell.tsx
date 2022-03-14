@@ -18,6 +18,9 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
+  /**
+   * text Content style of the `DataTableCell`.
+   */
   textStyle?: StyleProp<TextStyle>;
 };
 

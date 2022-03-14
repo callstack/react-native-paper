@@ -36,6 +36,9 @@ type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
    */
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
+  /**
+   * Text content style of the `DataTableTitle`.
+   */
   textStyle?: StyleProp<TextStyle>;
   /**
    * @optional
@@ -66,7 +69,7 @@ type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
  *           >
  *             Dessert
  *           </DataTable.Title>
- *           <DataTable.Title colorText="#FFF" numeric>Calories</DataTable.Title>
+ *           <DataTable.Title numeric>Calories</DataTable.Title>
  *           <DataTable.Title numeric>Fat (g)</DataTable.Title>
  *         </DataTable.Header>
  *       </DataTable>
