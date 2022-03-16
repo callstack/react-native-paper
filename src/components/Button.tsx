@@ -148,18 +148,21 @@ const Button = ({
   accessible,
   ...rest
 }: Props) => {
+  const containedInitialElevation = 0;
+  const containedActiveElevation = 2;
+
   const { current: elevation } = React.useRef<Animated.Value>(
-    new Animated.Value(mode === 'contained' ? 2 : 0)
+    new Animated.Value(mode === 'contained' ? containedInitialElevation : 0)
   );
   React.useEffect(() => {
-    elevation.setValue(mode === 'contained' ? 2 : 0);
+    elevation.setValue(mode === 'contained' ? containedInitialElevation : 0);
   }, [mode, elevation]);
 
   const handlePressIn = () => {
     if (mode === 'contained') {
       const { scale } = theme.animation;
       Animated.timing(elevation, {
-        toValue: 8,
+        toValue: containedActiveElevation,
         duration: 200 * scale,
         useNativeDriver: true,
       }).start();
@@ -170,7 +173,7 @@ const Button = ({
     if (mode === 'contained') {
       const { scale } = theme.animation;
       Animated.timing(elevation, {
-        toValue: 2,
+        toValue: containedInitialElevation,
         duration: 150 * scale,
         useNativeDriver: true,
       }).start();
