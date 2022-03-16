@@ -71,7 +71,6 @@ export type MD3Colors = {
   inverseOnSurface: string;
   inversePrimary: string;
   elevation: MD3ElevationColors;
-  elevationShadows: MD3ElevationShadows;
 };
 
 export type MD3Palette = {};
@@ -183,10 +182,6 @@ export enum ElevationLevels {
 
 export type MD3ElevationColors = {
   [key in keyof typeof ElevationLevels]: string;
-};
-
-export type MD3ElevationShadows = {
-  [key in keyof typeof ElevationLevels]: [string, string];
 };
 
 export type $Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
