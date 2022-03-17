@@ -166,7 +166,7 @@ const Card = ({
       Animated.timing(elevation, {
         toValue: isPressTypeIn ? 8 : cardElevation,
         duration: animationDuration,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }).start();
     }
   };
