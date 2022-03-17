@@ -12,19 +12,26 @@ import { useTheme } from '../core/theming';
 import overlay, { isAnimatedValue } from '../styles/overlay';
 import type { MD3Elevation, Theme } from '../types';
 
-type MD2Props = React.ComponentPropsWithRef<typeof View> & {
+type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Content of the `Surface`.
    */
   children: React.ReactNode;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+
   /**
    * @optional
    */
   theme?: Theme;
-};
 
-type Props = MD2Props & {
+  /**
+   * @supported Available in v3.x with theme version 3
+   * Changes shadows and background on iOS and Android.
+   * Used to create UI hierarchy between components.
+   *
+   * Note: In version 2 the `elevation` prop was accepted via `style` prop i.e. `style={{ elevation: 4 }}`.
+   * It's no longer supported in version 3 and you should use `elevation` property instead.
+   */
   elevation?: MD3Elevation | Animated.Value;
 };
 
@@ -52,7 +59,7 @@ type Props = MD2Props & {
  * import { StyleSheet } from 'react-native';
  *
  * const MyComponent = () => (
- *   <Surface style={styles.surface}>
+ *   <Surface style={styles.surface} elevation={4}>
  *      <Text>Surface</Text>
  *   </Surface>
  * );
@@ -66,13 +73,16 @@ type Props = MD2Props & {
  *     width: 80,
  *     alignItems: 'center',
  *     justifyContent: 'center',
- *     elevation: 4,
  *   },
  * });
  * ```
  */
 
-const MD2Surface = ({ style, theme: overrideTheme, ...rest }: MD2Props) => {
+const MD2Surface = ({
+  style,
+  theme: overrideTheme,
+  ...rest
+}: Omit<Props, 'elevation'>) => {
   const { elevation = 4 } = (StyleSheet.flatten(style) || {}) as ViewStyle;
   const { dark: isDarkTheme, mode, colors } = useTheme(overrideTheme);
 
