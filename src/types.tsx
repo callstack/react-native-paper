@@ -157,19 +157,7 @@ export type MD3Tokens = {
   };
 };
 
-export type MD3Elevation =
-  | 0
-  | 1
-  | 2
-  | 3
-  | 4
-  | 5
-  | '0'
-  | '1'
-  | '2'
-  | '3'
-  | '4'
-  | '5';
+export type MD3Elevation = 0 | 1 | 2 | 3 | 4 | 5;
 
 export enum ElevationLevels {
   'level0',

@@ -46,20 +46,14 @@ const DarkTheme: ThemeBase = {
     inversePrimary: palette.primary40,
     elevation: {
       level0: palette.primary0,
-      // Hard-coded values assuming palette.primary99 is used as background for colors with opacity
-      // Opaque rgba values cause RN to transfer shadows to children nodes
-      // instead of View component in Surface. Providing solid background fixes the issue
-      //
-      // level1: color(palette.primary80).alpha(0.05).rgb().string(),
-      // level2: color(palette.primary80).alpha(0.08).rgb().string(),
-      // level3: color(palette.primary80).alpha(0.11).rgb().string(),
-      // level4: color(palette.primary80).alpha(0.12).rgb().string(),
-      // level5: color(palette.primary80).alpha(0.14).rgb().string(),
-      level1: 'rgb(37, 35, 42)',
-      level2: 'rgb(44, 40, 49)',
-      level3: 'rgb(49, 44, 56)',
-      level4: 'rgb(51, 46, 58)',
-      level5: 'rgb(52, 49, 63)',
+      // Note: Color values with transparency cause RN to transfer shadows to children nodes
+      // instead of View component in Surface. Providing solid background fixes the issue.
+      // Opaque color values generated with `palette.primary80` used as background
+      level1: 'rgb(37, 35, 42)', // palette.primary80, alpha 0.05
+      level2: 'rgb(44, 40, 49)', // palette.primary80, alpha 0.08
+      level3: 'rgb(49, 44, 56)', // palette.primary80, alpha 0.11
+      level4: 'rgb(51, 46, 58)', // palette.primary80, alpha 0.12
+      level5: 'rgb(52, 49, 63)', // palette.primary80, alpha 0.14
     },
   },
 };

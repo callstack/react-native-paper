@@ -32,7 +32,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    * Note: In version 2 the `elevation` prop was accepted via `style` prop i.e. `style={{ elevation: 4 }}`.
    * It's no longer supported in version 3 and you should use `elevation` property instead.
    */
-  elevation?: MD3Elevation | Animated.Value;
+  elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
 };
 
 /**

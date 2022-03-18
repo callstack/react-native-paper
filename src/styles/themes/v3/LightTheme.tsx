@@ -48,20 +48,14 @@ const LightTheme: ThemeBase = {
     inversePrimary: palette.primary80,
     elevation: {
       level0: palette.primary99,
-      // Hard-coded values assuming palette.primary99 is used as background for colors with opacity
-      // Opaque rgba values cause RN to transfer shadows to children nodes
-      // instead of View component in Surface. Providing solid background fixes the issue
-      //
-      // level1: color(palette.primary40).alpha(0.05).rgb().string(),
-      // level2: color(palette.primary40).alpha(0.08).rgb().string(),
-      // level3: color(palette.primary40).alpha(0.11).rgb().string(),
-      // level4: color(palette.primary40).alpha(0.12).rgb().string(),
-      // level5: color(palette.primary40).alpha(0.14).rgb().string(),
-      level1: 'rgb(247, 243, 249)',
-      level2: 'rgb(243, 237, 246)',
-      level3: 'rgb(238, 232, 244)',
-      level4: 'rgb(236, 230, 243)',
-      level5: 'rgb(233, 227, 241)',
+      // Note: Color values with transparency cause RN to transfer shadows to children nodes
+      // instead of View component in Surface. Providing solid background fixes the issue.
+      // Opaque color values generated with `palette.primary99` used as background
+      level1: 'rgb(247, 243, 249)', // palette.primary40, alpha 0.05
+      level2: 'rgb(243, 237, 246)', // palette.primary40, alpha 0.08
+      level3: 'rgb(238, 232, 244)', // palette.primary40, alpha 0.11
+      level4: 'rgb(236, 230, 243)', // palette.primary40, alpha 0.12
+      level5: 'rgb(233, 227, 241)', // palette.primary40, alpha 0.14
     },
   },
   fonts: configureFonts(),
