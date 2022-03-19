@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { View, ViewStyle, Platform, StyleSheet, StyleProp } from 'react-native';
+import {
+  View,
+  ViewStyle,
+  Platform,
+  StyleSheet,
+  StyleProp,
+  Animated,
+} from 'react-native';
 import color from 'color';
 
 import AppbarContent from './AppbarContent';
@@ -25,6 +32,7 @@ type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
    */
   theme: Theme;
   style?: StyleProp<ViewStyle>;
+  elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
 };
 
 export const DEFAULT_APPBAR_HEIGHT = 56;
@@ -78,7 +86,7 @@ const Appbar = ({ children, dark, style, theme, ...rest }: Props) => {
   const { colors, dark: isDarkTheme, mode } = theme;
   const {
     backgroundColor: customBackground,
-    elevation = 4,
+    elevation = rest.elevation || theme.isV3 ? 0 : 4,
     ...restStyle
   }: ViewStyle = StyleSheet.flatten(style) || {};
 
@@ -127,7 +135,12 @@ const Appbar = ({ children, dark, style, theme, ...rest }: Props) => {
   }
   return (
     <Surface
-      style={[{ backgroundColor }, styles.appbar, restStyle]}
+      style={[
+        { backgroundColor },
+        styles.appbar,
+        restStyle,
+        !theme.isV3 && { elevation },
+      ]}
       elevation={elevation as MD3Elevation}
       {...rest}
     >
@@ -175,7 +188,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 4,
-    elevation: 4,
   },
   spacing: {
     width: 48,

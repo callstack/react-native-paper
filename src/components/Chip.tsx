@@ -233,13 +233,17 @@ const Chip = ({
     accessibilityTraits.push('disabled');
   }
 
+  const elevationStyle = Platform.OS === 'android' ? elevation : 0;
+
   return (
     <Surface
       style={
         [
           styles.container,
+          !theme.isV3 && {
+            elevation: elevationStyle,
+          },
           {
-            elevation: Platform.OS === 'android' ? elevation : 0,
             backgroundColor: selected
               ? selectedBackgroundColor
               : backgroundColor,
@@ -249,6 +253,7 @@ const Chip = ({
           style,
         ] as StyleProp<ViewStyle>
       }
+      {...(theme.isV3 && { elevation: elevationStyle })}
       {...rest}
     >
       <TouchableRipple
