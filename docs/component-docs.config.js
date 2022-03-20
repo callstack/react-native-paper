@@ -9,6 +9,7 @@ const assets = [
   path.join(__dirname, 'assets', 'gallery'),
   path.join(__dirname, 'assets', 'showcase'),
   path.join(__dirname, 'assets', 'screenshots'),
+  path.join(__dirname, 'assets', 'migration'),
   path.join(__dirname, 'assets', 'images'),
 ];
 const styles = [path.join(__dirname, 'assets', 'styles.css')];
