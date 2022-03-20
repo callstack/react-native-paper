@@ -45,7 +45,7 @@ const DarkTheme: ThemeBase = {
     inverseSurface: palette.neutral20,
     inversePrimary: palette.primary40,
     elevation: {
-      level0: palette.primary0,
+      level0: 'transparent',
       // Note: Color values with transparency cause RN to transfer shadows to children nodes
       // instead of View component in Surface. Providing solid background fixes the issue.
       // Opaque color values generated with `palette.primary80` used as background

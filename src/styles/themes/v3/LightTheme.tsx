@@ -47,7 +47,7 @@ const LightTheme: ThemeBase = {
     inverseSurface: palette.neutral95,
     inversePrimary: palette.primary80,
     elevation: {
-      level0: palette.primary99,
+      level0: 'transparent',
       // Note: Color values with transparency cause RN to transfer shadows to children nodes
       // instead of View component in Surface. Providing solid background fixes the issue.
       // Opaque color values generated with `palette.primary99` used as background

@@ -164,7 +164,7 @@ const Button = ({
       Animated.timing(elevation, {
         toValue: containedActiveElevation,
         duration: 200 * scale,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }).start();
     }
   };
@@ -175,7 +175,7 @@ const Button = ({
       Animated.timing(elevation, {
         toValue: containedInitialElevation,
         duration: 150 * scale,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }).start();
     }
   };
