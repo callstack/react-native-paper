@@ -50,13 +50,7 @@ type Props = $RemoveChildren<typeof View> & {
    */
   onPress?: () => void;
   /**
-   * @supported Available in v3.x with theme version 3
-   *
-   * Mode of the Appbar.
-   * - `small` - Appbar with default height (56).
-   * - `medium` - Appbar with medium height (112).
-   * - `large` - Appbar with large height (152).
-   * - `center-aligned` - Appbar with default height and center-aligned title.
+   * @internal
    */
   mode?: 'small' | 'medium' | 'large' | 'center-aligned';
   style?: StyleProp<ViewStyle>;
