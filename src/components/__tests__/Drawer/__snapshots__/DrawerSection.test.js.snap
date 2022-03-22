@@ -22,9 +22,12 @@ exports[`DrawerSection renders properly 1`] = `
         undefined,
         false,
         false,
-        Object {
-          "marginTop": 4,
-        },
+        Array [
+          Object {
+            "marginTop": 4,
+          },
+          false,
+        ],
       ]
     }
   />

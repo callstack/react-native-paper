@@ -26,6 +26,12 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
 /**
  * A component to group content inside a navigation drawer.
  *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/drawer-section.png" />
+ *   </figure>
+ * </div>
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -82,7 +88,7 @@ const DrawerSection = ({ children, title, theme, style, ...rest }: Props) => {
       {children}
       <Divider
         {...(isV3 && { horizontalInset: true, bold: true })}
-        style={isV3 ? styles.v3Divider : styles.divider}
+        style={[styles.divider, isV3 && styles.v3Divider]}
       />
     </View>
   );

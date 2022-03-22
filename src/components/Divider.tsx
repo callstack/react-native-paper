@@ -31,6 +31,12 @@ type Props = $RemoveChildren<typeof View> & {
 /**
  * A divider is a thin, lightweight separator that groups content in lists and page layouts.
  *
+ * <div class="screenshots">
+ *  <figure>
+ *    <img class="medium" src="screenshots/divider.png" />
+ *  </figure>
+ * </div>
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
