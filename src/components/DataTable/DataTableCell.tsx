@@ -55,12 +55,20 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
  * MD Guidelines (https://github.com/callstack/react-native-paper/issues/2381).
  */
 
-const DataTableCell = ({ children, textStyle, style, numeric, ...rest }: Props) => (
+const DataTableCell = ({
+  children,
+  textStyle,
+  style,
+  numeric,
+  ...rest
+}: Props) => (
   <TouchableRipple
     {...rest}
     style={[styles.container, numeric && styles.right, style]}
   >
-    <Text style={textStyle} numberOfLines={1}>{children}</Text>
+    <Text style={textStyle} numberOfLines={1}>
+      {children}
+    </Text>
   </TouchableRipple>
 );
 
