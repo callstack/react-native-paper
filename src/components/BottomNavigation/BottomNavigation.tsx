@@ -60,7 +60,7 @@ type Props = {
   /**
    * Whether the shifting style is used, the active tab icon shifts up to show the label and the inactive tabs won't have a label.
    *
-   * By default, this is `true` when you have more than 3 tabs.
+   * By default, this is `false` with theme version 3 and `true` when you have more than 3 tabs.
    * Pass `shifting={false}` to explicitly disable this animation, or `shifting={true}` to always use this animation.
    */
   shifting?: boolean;
@@ -80,7 +80,7 @@ type Props = {
    * - `title`: title of the route to use as the tab label
    * - `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v3.x
    * - `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component @supported Available in v3.x with theme version 3
-   * - `color`: color to use as background color for shifting bottom navigation
+   * - `color`: color to use as background color for shifting bottom navigation @deprecated Deprecated in v3.x
    * - `badge`: badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.
    * - `accessibilityLabel`: accessibility label for the tab button
    * - `testID`: test id for the tab button
@@ -283,6 +283,10 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
  * By default Bottom navigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
  * See [Dark Theme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more information.
  *
+ * <div class="screenshots">
+ *   <img class="medium" src="screenshots/bottom-navigation.gif" />
+ * </div>
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -343,7 +347,7 @@ const BottomNavigation = ({
   sceneAnimationEnabled = false,
   onTabPress,
   onIndexChange,
-  shifting = navigationState.routes.length > 3,
+  shifting = theme.isV3 ? false : navigationState.routes.length > 3,
   safeAreaInsets,
 }: Props) => {
   const { scale } = theme.animation;
@@ -435,13 +439,13 @@ const BottomNavigation = ({
       Animated.parallel([
         Animated.timing(rippleAnim, {
           toValue: 1,
-          duration: shifting ? 400 * scale : 0,
+          duration: theme.isV3 || shifting ? 400 * scale : 0,
           useNativeDriver: true,
         }),
         ...navigationState.routes.map((_, i) =>
           Animated.timing(tabsAnims[i], {
             toValue: i === index ? 1 : 0,
-            duration: shifting ? 150 * scale : 0,
+            duration: theme.isV3 || shifting ? 150 * scale : 0,
             useNativeDriver: true,
           })
         ),
@@ -474,6 +478,7 @@ const BottomNavigation = ({
       rippleAnim,
       scale,
       tabsAnims,
+      theme,
     ]
   );
 
@@ -698,7 +703,7 @@ const BottomNavigation = ({
             ]}
             accessibilityRole={'tablist'}
           >
-            {!isV3 && shifting ? (
+            {shifting ? (
               <Animated.View
                 pointerEvents="none"
                 style={[
@@ -765,7 +770,11 @@ const BottomNavigation = ({
               });
 
               const v3ActiveOpacity = focused ? 1 : 0;
-              const v3InactiveOpacity = focused ? 0 : 1;
+              const v3InactiveOpacity = shifting
+                ? inactiveOpacity
+                : focused
+                ? 0
+                : 1;
 
               // Scale horizontally the outline pill
               const outlineScale = focused
@@ -796,6 +805,8 @@ const BottomNavigation = ({
                     ? String(badge).length * -2
                     : 0) - (!isV3 ? 2 : 0),
               };
+
+              const isV3Shifting = isV3 && shifting && labeled;
 
               return renderTouchable({
                 key: route.key,
@@ -828,7 +839,9 @@ const BottomNavigation = ({
                       style={[
                         styles.iconContainer,
                         isV3 && styles.v3IconContainer,
-                        !isV3 && { transform: [{ translateY }] },
+                        (!isV3 || isV3Shifting) && {
+                          transform: [{ translateY }],
+                        },
                       ]}
                     >
                       {isV3 && (
@@ -885,7 +898,7 @@ const BottomNavigation = ({
                         ) : (
                           <Icon
                             source={
-                              route.unfocusedIcon !== undefined
+                              theme.isV3 && route.unfocusedIcon !== undefined
                                 ? route.unfocusedIcon
                                 : (route.focusedIcon as IconSource)
                             }
@@ -914,7 +927,9 @@ const BottomNavigation = ({
                         <Animated.View
                           style={[
                             styles.labelWrapper,
-                            !isV3 && { opacity: activeOpacity },
+                            (!isV3 || isV3Shifting) && {
+                              opacity: activeOpacity,
+                            },
                           ]}
                         >
                           {renderLabel ? (
