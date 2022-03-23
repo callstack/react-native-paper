@@ -63,6 +63,7 @@ const BottomNavigationExample = () => {
       safeAreaInsets={{ bottom: insets.bottom }}
       navigationState={{ index, routes }}
       onIndexChange={setIndex}
+      labelMaxFontSizeMultiplier={2}
       renderScene={BottomNavigation.SceneMap({
         album: PhotoGallery,
         library: PhotoGallery,

@@ -226,6 +226,10 @@ type Props = {
    * ```
    */
   barStyle?: StyleProp<ViewStyle>;
+  /**
+   * Specifies the largest possible scale a label font can reach.
+   */
+  labelMaxFontSizeMultiplier?: number;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -344,6 +348,7 @@ const BottomNavigation = ({
   onIndexChange,
   shifting = navigationState.routes.length > 3,
   safeAreaInsets,
+  labelMaxFontSizeMultiplier = 1,
 }: Props) => {
   const { scale } = theme.animation;
 
@@ -856,6 +861,7 @@ const BottomNavigation = ({
                             })
                           ) : (
                             <Text
+                              maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
                               style={[styles.label, { color: activeTintColor }]}
                             >
                               {getLabelText({ route })}
@@ -877,6 +883,9 @@ const BottomNavigation = ({
                               })
                             ) : (
                               <Text
+                                maxFontSizeMultiplier={
+                                  labelMaxFontSizeMultiplier
+                                }
                                 selectable={false}
                                 style={[
                                   styles.label,
@@ -988,6 +997,7 @@ const styles = StyleSheet.create({
   // eslint-disable-next-line react-native/no-color-literals
   label: {
     fontSize: 12,
+    height: BAR_HEIGHT,
     textAlign: 'center',
     backgroundColor: 'transparent',
     ...(Platform.OS === 'web'
