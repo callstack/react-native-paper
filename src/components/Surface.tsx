@@ -161,9 +161,10 @@ const Surface = ({
       style
     ) as ViewStyle;
 
-    const clearSpacing = {
+    const clearStyles = {
       margin: 0,
       padding: 0,
+      transform: undefined,
     };
 
     const outerLayerStyles = { margin, padding, transform, borderRadius };
@@ -174,15 +175,19 @@ const Surface = ({
           {
             elevation: getElevationAndroid(0),
             backgroundColor,
+            transform,
           },
           outerLayerStyles,
         ]}
       >
         <Animated.View
           style={[
-            { elevation: getElevationAndroid(1), borderRadius },
+            {
+              elevation: getElevationAndroid(1),
+              borderRadius,
+            },
             sharedStyle,
-            clearSpacing,
+            clearStyles,
           ]}
         >
           {children}
