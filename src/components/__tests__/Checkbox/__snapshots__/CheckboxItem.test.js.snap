@@ -7,6 +7,7 @@ exports[`can render leading checkbox control 1`] = `
   accessibilityState={
     Object {
       "checked": false,
+      "disabled": undefined,
     }
   }
   accessible={true}
@@ -139,6 +140,7 @@ exports[`can render the Android checkbox on different platforms 1`] = `
   accessibilityState={
     Object {
       "checked": false,
+      "disabled": undefined,
     }
   }
   accessible={true}
@@ -305,6 +307,7 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
   accessibilityState={
     Object {
       "checked": false,
+      "disabled": undefined,
     }
   }
   accessible={true}
@@ -437,6 +440,7 @@ exports[`renders unchecked 1`] = `
   accessibilityState={
     Object {
       "checked": false,
+      "disabled": undefined,
     }
   }
   accessible={true}

@@ -75,3 +75,15 @@ it('should have `accessibilityState={ checked: false }` when `status="indetermin
   const element = getByA11yState({ checked: false });
   expect(element).toBeTruthy();
 });
+
+it('disables the row when the prop disabled is true', () => {
+  const { getByA11yLabel } = render(
+    <Checkbox.Item accessibilityLabel="some checkbox" disabled />
+  );
+
+  const touchable = getByA11yLabel('some checkbox');
+
+  expect(touchable.props).toMatchObject({
+    accessibilityState: { disabled: true },
+  });
+});
