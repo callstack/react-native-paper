@@ -220,12 +220,19 @@ module<span class="token punctuation">.</span>exports <span class="token operato
             </svg>
           </a>
         3. Configure <code>file-loader</code></h3>
+<h4 id="webpack--50">webpack &lt; 5.0</h4>
 <p>To be able to import images and other assets using <code>require</code>, we need to configure <code>file-loader</code>. Let's install it:</p>
 <pre><code class="language-sh">yarn add --dev file-loader</code></pre>
 <p>To configure it, add the following in the <code>module.rules</code> array in your webpack config:</p>
 <pre><code class="language-js"><span class="token punctuation">{</span>
   test<span class="token punctuation">:</span> <span class="token regex">/\.(jpg|png|woff|woff2|eot|ttf|svg)$/</span><span class="token punctuation">,</span>
   loader<span class="token punctuation">:</span> <span class="token string">'file-loader'</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span></code></pre>
+<h5 id="webpack--50-1">webpack &gt;= 5.0</h5>
+<p>Use <code>asset/resource</code>, since <code>file-loader</code> was deprecated in webpack v5.</p>
+<pre><code class="language-js"><span class="token punctuation">{</span>
+  test<span class="token punctuation">:</span> <span class="token regex">/\.(jpg|png|woff|woff2|eot|ttf|svg)$/</span><span class="token punctuation">,</span>
+  type<span class="token punctuation">:</span> <span class="token string">'asset/resource'</span>
 <span class="token punctuation">}</span></code></pre>
 <h2 id="load-the-material-community-icons">
           <a class="anchor" href="#load-the-material-community-icons">
