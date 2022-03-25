@@ -166,7 +166,7 @@ const Card = ({
       Animated.timing(elevation, {
         toValue: isPressTypeIn ? 8 : cardElevation,
         duration: animationDuration,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }).start();
     }
   };
@@ -195,7 +195,11 @@ const Card = ({
   return (
     <Surface
       style={[
-        { borderRadius: roundness, elevation: computedElevation, borderColor },
+        {
+          borderRadius: roundness,
+          elevation: computedElevation as unknown as number,
+          borderColor,
+        },
         cardMode === 'outlined' ? styles.outlined : {},
         style,
       ]}

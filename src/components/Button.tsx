@@ -148,20 +148,23 @@ const Button = ({
   accessible,
   ...rest
 }: Props) => {
+  const containedInitialElevation = theme.isV3 ? 1 : 2;
+  const containedActiveElevation = theme.isV3 ? 2 : 8;
+
   const { current: elevation } = React.useRef<Animated.Value>(
-    new Animated.Value(mode === 'contained' ? 2 : 0)
+    new Animated.Value(mode === 'contained' ? containedInitialElevation : 0)
   );
   React.useEffect(() => {
-    elevation.setValue(mode === 'contained' ? 2 : 0);
-  }, [mode, elevation]);
+    elevation.setValue(mode === 'contained' ? containedInitialElevation : 0);
+  }, [mode, elevation, containedInitialElevation]);
 
   const handlePressIn = () => {
     if (mode === 'contained') {
       const { scale } = theme.animation;
       Animated.timing(elevation, {
-        toValue: 8,
+        toValue: containedActiveElevation,
         duration: 200 * scale,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }).start();
     }
   };
@@ -170,9 +173,9 @@ const Button = ({
     if (mode === 'contained') {
       const { scale } = theme.animation;
       Animated.timing(elevation, {
-        toValue: 2,
+        toValue: containedInitialElevation,
         duration: 150 * scale,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }).start();
     }
   };
@@ -265,10 +268,11 @@ const Button = ({
       style={[
         styles.button,
         compact && styles.compact,
-        { elevation: elevationRes } as ViewStyle,
         buttonStyle,
         style,
+        !theme.isV3 && ({ elevation: elevationRes } as ViewStyle),
       ]}
+      {...(theme.isV3 && { elevation: elevationRes })}
     >
       <TouchableRipple
         borderless

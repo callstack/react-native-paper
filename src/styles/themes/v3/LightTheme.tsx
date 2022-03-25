@@ -3,7 +3,7 @@ import type { ThemeBase } from '../../../types';
 import { tokens } from './tokens';
 import color from 'color';
 
-const { palette } = tokens.md.ref;
+const { palette, opacity } = tokens.md.ref;
 
 const LightTheme: ThemeBase = {
   dark: false,
@@ -20,7 +20,7 @@ const LightTheme: ThemeBase = {
     surface: palette.neutral99,
     surfaceVariant: palette.neutralVariant90,
     surfaceDisabled: color(palette.neutral10)
-      .alpha(tokens.md.ref.opacity.level2)
+      .alpha(opacity.level2)
       .rgb()
       .string(),
     background: palette.neutral99,
@@ -35,7 +35,7 @@ const LightTheme: ThemeBase = {
     onSurface: palette.neutral10,
     onSurfaceVariant: palette.neutralVariant30,
     onSurfaceDisabled: color(palette.neutral10)
-      .alpha(tokens.md.ref.opacity.level4)
+      .alpha(opacity.level4)
       .rgb()
       .string(),
     onError: palette.error100,
@@ -46,6 +46,17 @@ const LightTheme: ThemeBase = {
     inverseOnSurface: palette.neutral20,
     inverseSurface: palette.neutral95,
     inversePrimary: palette.primary80,
+    elevation: {
+      level0: 'transparent',
+      // Note: Color values with transparency cause RN to transfer shadows to children nodes
+      // instead of View component in Surface. Providing solid background fixes the issue.
+      // Opaque color values generated with `palette.primary99` used as background
+      level1: 'rgb(247, 243, 249)', // palette.primary40, alpha 0.05
+      level2: 'rgb(243, 237, 246)', // palette.primary40, alpha 0.08
+      level3: 'rgb(238, 232, 244)', // palette.primary40, alpha 0.11
+      level4: 'rgb(236, 230, 243)', // palette.primary40, alpha 0.12
+      level5: 'rgb(233, 227, 241)', // palette.primary40, alpha 0.14
+    },
   },
   fonts: configureFonts(),
   animation: {
