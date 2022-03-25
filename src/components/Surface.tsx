@@ -1,9 +1,16 @@
 import * as React from 'react';
-import { Animated, StyleSheet, View, StyleProp, ViewStyle } from 'react-native';
+import {
+  Animated,
+  StyleSheet,
+  View,
+  StyleProp,
+  ViewStyle,
+  Platform,
+} from 'react-native';
 import shadow from '../styles/shadow';
-import { withTheme } from '../core/theming';
-import overlay from '../styles/overlay';
-import type { Theme } from '../types';
+import { useTheme } from '../core/theming';
+import overlay, { isAnimatedValue } from '../styles/overlay';
+import type { MD3Elevation, Theme } from '../types';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -12,9 +19,18 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   children: React.ReactNode;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
+   * @supported Available in v3.x with theme version 3
+   * Changes shadows and background on iOS and Android.
+   * Used to create UI hierarchy between components.
+   *
+   * Note: In version 2 the `elevation` prop was accepted via `style` prop i.e. `style={{ elevation: 4 }}`.
+   * It's no longer supported with theme version 3 and you should use `elevation` property instead.
+   */
+  elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
+  /**
    * @optional
    */
-  theme: Theme;
+  theme?: Theme;
 };
 
 /**
@@ -41,7 +57,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * import { StyleSheet } from 'react-native';
  *
  * const MyComponent = () => (
- *   <Surface style={styles.surface}>
+ *   <Surface style={styles.surface} elevation={4}>
  *      <Text>Surface</Text>
  *   </Surface>
  * );
@@ -55,14 +71,19 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  *     width: 80,
  *     alignItems: 'center',
  *     justifyContent: 'center',
- *     elevation: 4,
  *   },
  * });
  * ```
  */
-const Surface = ({ style, theme, ...rest }: Props) => {
+
+const MD2Surface = ({
+  style,
+  theme: overrideTheme,
+  ...rest
+}: Omit<Props, 'elevation'>) => {
   const { elevation = 4 } = (StyleSheet.flatten(style) || {}) as ViewStyle;
-  const { dark: isDarkTheme, mode, colors } = theme;
+  const { dark: isDarkTheme, mode, colors } = useTheme(overrideTheme);
+
   return (
     <Animated.View
       {...rest}
@@ -80,4 +101,167 @@ const Surface = ({ style, theme, ...rest }: Props) => {
   );
 };
 
-export default withTheme(Surface);
+const Surface = ({
+  elevation = 1,
+  children,
+  theme: overridenTheme,
+  style,
+  ...props
+}: Props) => {
+  const theme = useTheme(overridenTheme);
+
+  if (!theme.isV3)
+    return (
+      <MD2Surface {...props} theme={theme} style={style}>
+        {children}
+      </MD2Surface>
+    );
+
+  const { colors } = theme;
+
+  const inputRange = [0, 1, 2, 3, 4, 5];
+
+  const backgroundColor = (() => {
+    if (isAnimatedValue(elevation)) {
+      return elevation.interpolate({
+        inputRange,
+        outputRange: inputRange.map((elevation) => {
+          return colors.elevation?.[`level${elevation as MD3Elevation}`];
+        }),
+      });
+    }
+
+    return colors.elevation?.[`level${elevation}`];
+  })();
+
+  const sharedStyle = [{ backgroundColor }, style];
+
+  if (Platform.OS === 'android') {
+    const elevationLevels = [
+      [0, 1, 2, 3, 3, 3],
+      [0, 3, 4, 6, 8, 10],
+    ];
+
+    const getElevationAndroid = (layer: 0 | 1) => {
+      const elevationLevel = elevationLevels[layer];
+
+      if (isAnimatedValue(elevation)) {
+        return elevation.interpolate({
+          inputRange,
+          outputRange: elevationLevel,
+        });
+      }
+
+      return elevationLevel[elevation];
+    };
+
+    const { margin, padding, transform, borderRadius } = StyleSheet.flatten(
+      style
+    ) as ViewStyle;
+
+    const clearStyles = {
+      margin: 0,
+      padding: 0,
+      transform: undefined,
+    };
+
+    const outerLayerStyles = { margin, padding, transform, borderRadius };
+
+    return (
+      <Animated.View
+        style={[
+          {
+            elevation: getElevationAndroid(0),
+            backgroundColor,
+            transform,
+          },
+          outerLayerStyles,
+        ]}
+      >
+        <Animated.View
+          style={[
+            {
+              elevation: getElevationAndroid(1),
+              borderRadius,
+            },
+            sharedStyle,
+            clearStyles,
+          ]}
+        >
+          {children}
+        </Animated.View>
+      </Animated.View>
+    );
+  }
+
+  const iOSShadowOutputRanges = [
+    {
+      shadowOpacity: 0.15,
+      height: [0, 1, 2, 4, 6, 8],
+      shadowRadius: [0, 3, 6, 8, 10, 12],
+    },
+    {
+      shadowOpacity: 0.3,
+      height: [0, 1, 1, 1, 2, 4],
+      shadowRadius: [0, 1, 2, 3, 3, 4],
+    },
+  ];
+
+  const shadowColor = '#000';
+
+  if (isAnimatedValue(elevation)) {
+    const inputRange = [0, 1, 2, 3, 4, 5];
+
+    const getStyleForAnimatedShadowLayer = (layer: 0 | 1) => {
+      return {
+        shadowColor,
+        shadowOpacity: iOSShadowOutputRanges[layer].shadowOpacity,
+        shadowOffset: {
+          width: 0,
+          height: elevation.interpolate({
+            inputRange,
+            outputRange: iOSShadowOutputRanges[layer].height,
+          }),
+        },
+        shadowRadius: elevation.interpolate({
+          inputRange,
+          outputRange: iOSShadowOutputRanges[layer].shadowRadius,
+        }),
+      };
+    };
+
+    return (
+      <Animated.View style={getStyleForAnimatedShadowLayer(0)}>
+        <Animated.View style={getStyleForAnimatedShadowLayer(1)}>
+          <Animated.View {...props} style={sharedStyle}>
+            {children}
+          </Animated.View>
+        </Animated.View>
+      </Animated.View>
+    );
+  }
+
+  const getStyleForShadowLayer = (layer: 0 | 1) => {
+    return {
+      shadowColor,
+      shadowOpacity: iOSShadowOutputRanges[layer].shadowOpacity,
+      shadowOffset: {
+        width: 0,
+        height: iOSShadowOutputRanges[layer].height[elevation],
+      },
+      shadowRadius: iOSShadowOutputRanges[layer].shadowRadius[elevation],
+    };
+  };
+
+  return (
+    <Animated.View style={getStyleForShadowLayer(0)}>
+      <Animated.View style={getStyleForShadowLayer(1)}>
+        <Animated.View {...props} style={sharedStyle}>
+          {children}
+        </Animated.View>
+      </Animated.View>
+    </Animated.View>
+  );
+};
+
+export default Surface;

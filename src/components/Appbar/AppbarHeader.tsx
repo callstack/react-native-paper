@@ -105,17 +105,13 @@ const AppbarHeader = (props: Props) => {
     <Wrapper
       style={
         [
-          { backgroundColor, zIndex, elevation },
+          { backgroundColor, zIndex, elevation, paddingTop: statusBarHeight },
           shadow(elevation),
         ] as StyleProp<ViewStyle>
       }
     >
       <Appbar
-        style={[
-          { height, backgroundColor, marginTop: statusBarHeight },
-          styles.appbar,
-          restStyle,
-        ]}
+        style={[{ height, backgroundColor }, styles.appbar, restStyle]}
         dark={dark}
         {...rest}
       />

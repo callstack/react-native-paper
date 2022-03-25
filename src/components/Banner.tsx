@@ -6,7 +6,6 @@ import Button from './Button';
 import Icon, { IconSource } from './Icon';
 import { withTheme } from '../core/theming';
 import type { $RemoveChildren, Theme } from '../types';
-import shadow from '../styles/shadow';
 
 const ELEVATION = 1;
 const DEFAULT_MAX_WIDTH = 960;
@@ -184,8 +183,14 @@ const Banner = ({
   return (
     <Surface
       {...rest}
-      style={[styles.container, shadow(ELEVATION) as ViewStyle, style]}
+      style={[
+        style,
+        !theme.isV3 && {
+          elevation: ELEVATION,
+        },
+      ]}
       theme={theme}
+      {...(theme.isV3 && { elevation: ELEVATION })}
     >
       <View style={[styles.wrapper, contentStyle]}>
         <Animated.View style={{ height }} />
@@ -247,9 +252,6 @@ const Banner = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    elevation: ELEVATION,
-  },
   wrapper: {
     overflow: 'hidden',
     alignSelf: 'center',

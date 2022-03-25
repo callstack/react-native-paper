@@ -648,8 +648,10 @@ const BottomNavigation = ({
         })}
       </View>
       <Surface
+        {...(theme.isV3 && { elevation: 2 })}
         style={
           [
+            !theme.isV3 && { elevation: 4 },
             styles.bar,
             keyboardHidesNavigationBar
               ? {
@@ -954,7 +956,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    elevation: 4,
   },
   barContent: {
     alignItems: 'center',
