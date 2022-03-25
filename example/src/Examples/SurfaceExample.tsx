@@ -3,24 +3,25 @@ import { StyleSheet } from 'react-native';
 import { Text, Surface, useTheme, MD3Elevation } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
-const v2Elevation = [undefined, 1, 2, 4, 8, 12];
-
 const SurfaceExample = () => {
   const { isV3 } = useTheme();
 
+  const v2Elevation = [1, 2, 4, 8, 12];
+  const baseElevation = isV3 ? Array.from({ length: 6 }) : v2Elevation;
+
   return (
     <ScreenWrapper contentContainerStyle={styles.content}>
-      {Array.from({ length: 6 }).map((_, i) => (
+      {baseElevation.map((e, i) => (
         <Surface
           key={i}
           style={[
             styles.surface,
             isV3 ? styles.v3Surface : { elevation: v2Elevation[i] },
           ]}
-          elevation={i as MD3Elevation}
+          {...(isV3 && { elevation: i as MD3Elevation })}
         >
           <Text variant="bodyLarge">
-            Elevation {i === 1 && '(default)'} {i}
+            {isV3 ? `Elevation ${i === 1 ? '(default)' : ''} ${i}` : `${e}`}
           </Text>
         </Surface>
       ))}
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
   surface: {
     margin: 24,
     height: 80,
-    width: 200,
+    width: 80,
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -148,15 +148,15 @@ const Button = ({
   accessible,
   ...rest
 }: Props) => {
-  const containedInitialElevation = 0;
-  const containedActiveElevation = 2;
+  const containedInitialElevation = theme.isV3 ? 1 : 2;
+  const containedActiveElevation = theme.isV3 ? 2 : 8;
 
   const { current: elevation } = React.useRef<Animated.Value>(
     new Animated.Value(mode === 'contained' ? containedInitialElevation : 0)
   );
   React.useEffect(() => {
     elevation.setValue(mode === 'contained' ? containedInitialElevation : 0);
-  }, [mode, elevation]);
+  }, [mode, elevation, containedInitialElevation]);
 
   const handlePressIn = () => {
     if (mode === 'contained') {

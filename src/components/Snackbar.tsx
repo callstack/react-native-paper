@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ViewStyle,
   View,
+  Easing,
 } from 'react-native';
 
 import Button from './Button';
@@ -137,6 +138,7 @@ const Snackbar = ({
       Animated.timing(opacity, {
         toValue: 1,
         duration: 200 * scale,
+        easing: Easing.out(Easing.ease),
         useNativeDriver: true,
       }).start(({ finished }) => {
         if (finished) {
@@ -187,7 +189,7 @@ const Snackbar = ({
         accessibilityLiveRegion="polite"
         style={
           [
-            !theme.isV3 && { elevation: 3 },
+            !theme.isV3 && { elevation: 6 },
             styles.container,
             {
               borderRadius: roundness,

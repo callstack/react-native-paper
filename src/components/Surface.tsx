@@ -18,21 +18,19 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   children: React.ReactNode;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
-
-  /**
-   * @optional
-   */
-  theme?: Theme;
-
   /**
    * @supported Available in v3.x with theme version 3
    * Changes shadows and background on iOS and Android.
    * Used to create UI hierarchy between components.
    *
    * Note: In version 2 the `elevation` prop was accepted via `style` prop i.e. `style={{ elevation: 4 }}`.
-   * It's no longer supported in version 3 and you should use `elevation` property instead.
+   * It's no longer supported with theme version 3 and you should use `elevation` property instead.
    */
   elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
+  /**
+   * @optional
+   */
+  theme?: Theme;
 };
 
 /**

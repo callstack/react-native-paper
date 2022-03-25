@@ -658,15 +658,15 @@ exports[`renders contained contained with mode 1`] = `
       "borderRadius": 4,
       "borderStyle": "solid",
       "borderWidth": 0,
-      "elevation": 0,
+      "elevation": 2,
       "minWidth": 64,
       "shadowColor": "#000000",
       "shadowOffset": Object {
-        "height": 0,
+        "height": 0.75,
         "width": 0,
       },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
+      "shadowOpacity": 0.24,
+      "shadowRadius": 1.5,
     }
   }
 >
