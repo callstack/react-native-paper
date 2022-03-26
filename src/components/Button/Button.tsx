@@ -27,7 +27,7 @@ type Props = React.ComponentProps<typeof Surface> & {
    * - `outlined` - button with an outline without background, typically used for important, but not primary action – represents medium emphasis.
    * - `contained` - button with a background color, used for important action, have the most visual impact and high emphasis.
    * - `elevated` - button with a background color and elevation, used when absolutely necessary e.g. button requires visual separation from a patterned background.
-   * - `container-tonal` - button with a secondary background color, an alternative middle ground between filled and outlined buttons.
+   * - `container-tonal` - button with a secondary background color, an alternative middle ground between contained and outlined buttons.
    */
   mode?: 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal';
   /**
@@ -101,6 +101,21 @@ type Props = React.ComponentProps<typeof Surface> & {
 /**
  * A button is component that the user can press to trigger an action.
  *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img src="screenshots/button-1.png" />
+ *     <figcaption>Text button</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/button-2.png" />
+ *     <figcaption>Outlined button</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/button-3.png" />
+ *     <figcaption>Contained button</figcaption>
+ *   </figure>
+ * </div>
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -146,22 +161,22 @@ const Button = ({
   const { roundness, isV3 } = theme;
 
   const isElevationEntitled = isV3 ? isMode('elevated') : isMode('contained');
-  const containedInitialElevation = theme.isV3 ? 1 : 2;
-  const containedActiveElevation = theme.isV3 ? 2 : 8;
+  const initialElevation = theme.isV3 ? 1 : 2;
+  const activeElevation = theme.isV3 ? 2 : 8;
 
   const { current: elevation } = React.useRef<Animated.Value>(
-    new Animated.Value(isElevationEntitled ? containedInitialElevation : 0)
+    new Animated.Value(isElevationEntitled ? initialElevation : 0)
   );
 
   React.useEffect(() => {
-    elevation.setValue(isElevationEntitled ? containedInitialElevation : 0);
-  }, [isElevationEntitled, elevation, containedInitialElevation]);
+    elevation.setValue(isElevationEntitled ? initialElevation : 0);
+  }, [isElevationEntitled, elevation, initialElevation]);
 
   const handlePressIn = () => {
     if (isMode('contained')) {
       const { scale } = theme.animation;
       Animated.timing(elevation, {
-        toValue: containedActiveElevation,
+        toValue: activeElevation,
         duration: 200 * scale,
         useNativeDriver: false,
       }).start();
@@ -172,7 +187,7 @@ const Button = ({
     if (isMode('contained')) {
       const { scale } = theme.animation;
       Animated.timing(elevation, {
-        toValue: containedInitialElevation,
+        toValue: initialElevation,
         duration: 150 * scale,
         useNativeDriver: false,
       }).start();
@@ -181,7 +196,7 @@ const Button = ({
 
   const font = theme.fonts.medium;
 
-  const borderRadius = isV3 ? 20 : roundness;
+  const borderRadius = (isV3 ? 5 : 1) * roundness;
   const iconSize = isV3 ? 18 : 16;
 
   const { backgroundColor, borderColor, textColor, borderWidth } =

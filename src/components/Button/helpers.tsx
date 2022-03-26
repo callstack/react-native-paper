@@ -53,7 +53,7 @@ export const getButtonColors = ({
         textColor = buttonColor || theme.colors.primary;
       } else if (isMode('elevated')) {
         textColor = theme.colors.primary;
-        backgroundColor = buttonColor || theme.colors.surface;
+        backgroundColor = buttonColor || theme.colors.elevation.level1;
       } else if (isMode('contained')) {
         textColor = theme.colors.onPrimary;
         backgroundColor = buttonColor || theme.colors.primary;
