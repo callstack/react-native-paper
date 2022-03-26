@@ -69,6 +69,11 @@ type Props = {
    */
   labeled?: boolean;
   /**
+   * @supported Available in v3.x
+   * Whether tabs should be spread across the entire width.
+   */
+  dense?: boolean;
+  /**
    * State for the bottom navigation. The state should contain the following properties:
    *
    * - `index`: a number representing the index of the active route in the `routes` array
@@ -349,6 +354,7 @@ const BottomNavigation = ({
   onIndexChange,
   shifting = theme.isV3 ? false : navigationState.routes.length > 3,
   safeAreaInsets,
+  dense = !theme.isV3,
 }: Props) => {
   const { scale } = theme.animation;
 
@@ -658,7 +664,7 @@ const BottomNavigation = ({
         })}
       </View>
       <Surface
-        {...(theme.isV3 && { elevation: 2 })}
+        {...(theme.isV3 && { elevation: 0 })}
         style={
           [
             !theme.isV3 && { elevation: 4 },
@@ -698,6 +704,8 @@ const BottomNavigation = ({
               {
                 marginBottom: insets.bottom,
                 marginHorizontal: Math.max(insets.left, insets.right),
+              },
+              dense && {
                 maxWidth: maxTabBarWidth,
               },
             ]}

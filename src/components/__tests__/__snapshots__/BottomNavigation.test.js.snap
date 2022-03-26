@@ -104,6 +104,8 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             Object {
               "marginBottom": 0,
               "marginHorizontal": 0,
+            },
+            Object {
               "maxWidth": 504,
             },
           ]
@@ -699,6 +701,8 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             Object {
               "marginBottom": 0,
               "marginHorizontal": 0,
+            },
+            Object {
               "maxWidth": 504,
             },
           ]
@@ -1314,6 +1318,8 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
             Object {
               "marginBottom": 0,
               "marginHorizontal": 0,
+            },
+            Object {
               "maxWidth": 504,
             },
           ]
@@ -1927,6 +1933,8 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             Object {
               "marginBottom": 0,
               "marginHorizontal": 0,
+            },
+            Object {
               "maxWidth": 480,
             },
           ]
@@ -2813,6 +2821,8 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             Object {
               "marginBottom": 0,
               "marginHorizontal": 0,
+            },
+            Object {
               "maxWidth": 504,
             },
           ]
@@ -3664,6 +3674,8 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             Object {
               "marginBottom": 0,
               "marginHorizontal": 0,
+            },
+            Object {
               "maxWidth": 504,
             },
           ]
@@ -4414,6 +4426,8 @@ exports[`renders non-shifting bottom navigation 1`] = `
             Object {
               "marginBottom": 0,
               "marginHorizontal": 0,
+            },
+            Object {
               "maxWidth": 504,
             },
           ]
@@ -5264,6 +5278,8 @@ exports[`renders shifting bottom navigation 1`] = `
             Object {
               "marginBottom": 0,
               "marginHorizontal": 0,
+            },
+            Object {
               "maxWidth": 480,
             },
           ]
