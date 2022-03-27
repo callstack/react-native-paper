@@ -41,6 +41,11 @@ const DIALOG_ELEVATION: number = 24;
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
  * To render the `Dialog` above other components, you'll need to wrap it with the [`Portal`](portal.html) component.
  *
+ *  <div class="screenshots">
+ *   <img class="medium" src="screenshots/dialog-1.png" />
+ *   <img class="medium" src="screenshots/dialog-2.png" />
+ * </div>
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -86,7 +91,19 @@ const Dialog = ({
   theme,
 }: Props) => {
   const { isV3, dark, mode, colors, roundness } = theme;
-  const borderRadius = isV3 ? 28 : roundness;
+
+  const borderRadius = (isV3 ? 7 : 1) * roundness;
+
+  const backgroundColorV3 = color(theme.colors.surface)
+    .mix(color(theme.colors.primary), 0.11)
+    .rgb()
+    .string();
+  const backgroundColorV2 =
+    dark && mode === 'adaptive'
+      ? overlay(DIALOG_ELEVATION, colors?.surface)
+      : colors?.surface;
+  const backgroundColor = isV3 ? backgroundColorV3 : backgroundColorV2;
+
   return (
     <Modal
       dismissable={dismissable}
@@ -95,14 +112,7 @@ const Dialog = ({
       contentContainerStyle={[
         {
           borderRadius,
-          backgroundColor: isV3
-            ? color(theme.colors.surface)
-                .mix(color(theme.colors.primary), 0.11)
-                .rgb()
-                .string()
-            : dark && mode === 'adaptive'
-            ? overlay(DIALOG_ELEVATION, colors?.surface)
-            : colors?.surface,
+          backgroundColor,
         },
         styles.container,
         style,

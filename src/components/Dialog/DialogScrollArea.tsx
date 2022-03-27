@@ -14,6 +14,12 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * A component to show a scrollable content in a Dialog. The component only provides appropriate styling.
  * For the scrollable content you can use `ScrollView`, `FlatList` etc. depending on your requirement.
  *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/dialog-scroll-area.gif" />
+ *   </figure>
+ * </div>
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
