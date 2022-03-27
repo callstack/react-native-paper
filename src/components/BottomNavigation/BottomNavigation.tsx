@@ -72,7 +72,7 @@ type Props = {
    * @supported Available in v3.x
    * Whether tabs should be spread across the entire width.
    */
-  dense?: boolean;
+  compact?: boolean;
   /**
    * State for the bottom navigation. The state should contain the following properties:
    *
@@ -354,7 +354,7 @@ const BottomNavigation = ({
   onIndexChange,
   shifting = theme.isV3 ? false : navigationState.routes.length > 3,
   safeAreaInsets,
-  dense = !theme.isV3,
+  compact = !theme.isV3,
 }: Props) => {
   const { scale } = theme.animation;
 
@@ -705,7 +705,7 @@ const BottomNavigation = ({
                 marginBottom: insets.bottom,
                 marginHorizontal: Math.max(insets.left, insets.right),
               },
-              dense && {
+              compact && {
                 maxWidth: maxTabBarWidth,
               },
             ]}
