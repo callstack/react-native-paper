@@ -6,7 +6,8 @@ import ScreenWrapper from '../ScreenWrapper';
 
 const ChipExample = () => {
   const [visible, setVisible] = React.useState<boolean>(false);
-  const { colors, isV3 } = useTheme();
+  const theme = useTheme();
+  const customColor = theme.isV3 ? theme.colors.error : theme.colors.primary;
 
   return (
     <>
@@ -16,6 +17,21 @@ const ChipExample = () => {
             <Chip selected onPress={() => {}} style={styles.chip}>
               Simple
             </Chip>
+            {theme.isV3 && (
+              <Chip
+                selected
+                showSelectedOverlay
+                onPress={() => {}}
+                style={styles.chip}
+              >
+                With selected overlay
+              </Chip>
+            )}
+            {theme.isV3 && (
+              <Chip elevated onPress={() => {}} style={styles.chip}>
+                Elevated
+              </Chip>
+            )}
             <Chip
               onPress={() => {}}
               onClose={() => {}}
@@ -64,9 +80,9 @@ const ChipExample = () => {
             >
               Avatar (disabled)
             </Chip>
-            {isV3 && (
-              <Chip dense style={styles.chip} onPress={() => {}}>
-                Dense chip
+            {theme.isV3 && (
+              <Chip compact style={styles.chip} onPress={() => {}}>
+                Compact chip
               </Chip>
             )}
           </View>
@@ -76,6 +92,27 @@ const ChipExample = () => {
             <Chip mode="outlined" onPress={() => {}} style={styles.chip}>
               Simple
             </Chip>
+            {theme.isV3 && (
+              <Chip
+                mode="outlined"
+                selected
+                showSelectedOverlay
+                onPress={() => {}}
+                style={styles.chip}
+              >
+                With selected overlay
+              </Chip>
+            )}
+            {theme.isV3 && (
+              <Chip
+                mode="outlined"
+                elevated
+                onPress={() => {}}
+                style={styles.chip}
+              >
+                Elevated
+              </Chip>
+            )}
             <Chip
               mode="outlined"
               onPress={() => {}}
@@ -133,43 +170,43 @@ const ChipExample = () => {
             >
               Avatar (disabled)
             </Chip>
-            {isV3 && (
+            {theme.isV3 && (
               <Chip
                 mode="outlined"
-                dense
+                compact
                 onPress={() => {}}
                 style={styles.chip}
               >
-                Dense chip
+                Compact chip
               </Chip>
             )}
           </View>
         </List.Section>
         <List.Section title="Custom chip">
           <View style={styles.row}>
-            {isV3 && (
+            {theme.isV3 && (
               <>
                 <Chip
                   mode="outlined"
                   onPress={() => {}}
-                  dense
+                  compact
                   avatar={
                     <Image source={require('../../assets/images/avatar.png')} />
                   }
                   style={[styles.chip, styles.customBorderRadius]}
                 >
-                  Dense with custom border radius
+                  Compact with custom border radius
                 </Chip>
                 <Chip
                   mode="flat"
                   onPress={() => {}}
-                  dense
+                  compact
                   avatar={
                     <Image source={require('../../assets/images/avatar.png')} />
                   }
                   style={[styles.chip, styles.customBorderRadius]}
                 >
-                  Dense with custom border radius
+                  Compact with custom border radius
                 </Chip>
               </>
             )}
@@ -187,20 +224,17 @@ const ChipExample = () => {
               style={[
                 styles.chip,
                 {
-                  backgroundColor: color(colors?.primary)
-                    .alpha(0.2)
-                    .rgb()
-                    .string(),
+                  backgroundColor: color(customColor).alpha(0.2).rgb().string(),
                 },
               ]}
-              selectedColor={colors?.primary}
+              selectedColor={customColor}
             >
               Flat selected chip with custom color
             </Chip>
             <Chip
               onPress={() => {}}
               style={styles.chip}
-              selectedColor={colors?.primary}
+              selectedColor={customColor}
             >
               Flat unselected chip with custom color
             </Chip>
@@ -211,13 +245,10 @@ const ChipExample = () => {
               style={[
                 styles.chip,
                 {
-                  backgroundColor: color(colors?.primary)
-                    .alpha(0.2)
-                    .rgb()
-                    .string(),
+                  backgroundColor: color(customColor).alpha(0.2).rgb().string(),
                 },
               ]}
-              selectedColor={colors?.primary}
+              selectedColor={customColor}
             >
               Outlined selected chip with custom color
             </Chip>
@@ -225,7 +256,7 @@ const ChipExample = () => {
               mode="outlined"
               onPress={() => {}}
               style={styles.chip}
-              selectedColor={colors?.primary}
+              selectedColor={customColor}
             >
               Outlined unselected chip with custom color
             </Chip>

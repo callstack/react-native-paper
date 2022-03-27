@@ -53,6 +53,11 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   selectedColor?: string;
   /**
+   * @supported Available in v3.x with theme version 3
+   * Whether to display overlay on selected chip
+   */
+  showSelectedOverlay?: boolean;
+  /**
    * Whether the chip is disabled. A disabled chip is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean;
@@ -72,7 +77,12 @@ type Props = React.ComponentProps<typeof Surface> & {
    * @supported Available in v3.x with theme version 3
    * Sets smaller horizontal paddings `12dp` around label, when there is only label.
    */
-  dense?: boolean;
+  compact?: boolean;
+  /**
+   * @supported Available in v3.x with theme version 3
+   * Whether chip should have the elevation.
+   */
+  elevated?: boolean;
   /**
    * Function to execute on long press.
    */
@@ -145,12 +155,16 @@ const Chip = ({
   theme,
   testID,
   selectedColor,
+  showSelectedOverlay = false,
   ellipsizeMode,
-  dense,
+  compact,
+  elevated = false,
   ...rest
 }: Props) => {
+  const { isV3 } = theme;
+
   const { current: elevation } = React.useRef<Animated.Value>(
-    new Animated.Value(0)
+    new Animated.Value(isV3 && elevated ? 1 : 0)
   );
 
   const isOutlined = mode === 'outlined';
@@ -158,7 +172,7 @@ const Chip = ({
   const handlePressIn = () => {
     const { scale } = theme.animation;
     Animated.timing(elevation, {
-      toValue: 4,
+      toValue: isV3 ? (elevated ? 2 : 0) : 4,
       duration: 200 * scale,
       useNativeDriver: false,
     }).start();
@@ -167,13 +181,11 @@ const Chip = ({
   const handlePressOut = () => {
     const { scale } = theme.animation;
     Animated.timing(elevation, {
-      toValue: 0,
+      toValue: isV3 && elevated ? 1 : 0,
       duration: 150 * scale,
       useNativeDriver: false,
     }).start();
   };
-
-  const { isV3 } = theme;
 
   const opacity = isV3 ? 0.38 : 0.26;
   const defaultBorderRadius = isV3 ? 8 : 16;
@@ -193,6 +205,7 @@ const Chip = ({
     backgroundColor,
   } = getChipColors({
     selectedColor,
+    showSelectedOverlay,
     customBackgroundColor,
     theme,
     isOutlined,
@@ -213,8 +226,8 @@ const Chip = ({
     accessibilityTraits.push('disabled');
   }
 
-  const elevationStyle = Platform.OS === 'android' ? elevation : 0;
-  const multiplier = isV3 ? (dense ? 1.5 : 2) : 1;
+  const elevationStyle = isV3 || Platform.OS === 'android' ? elevation : 0;
+  const multiplier = isV3 ? (compact ? 1.5 : 2) : 1;
   const labelSpacings = {
     marginRight: onClose ? 0 : 8 * multiplier,
     marginLeft: avatar || icon || selected ? 4 * multiplier : 8 * multiplier,

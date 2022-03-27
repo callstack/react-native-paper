@@ -5,12 +5,14 @@ import type { ColorValue } from 'react-native';
 
 export const getChipColors = ({
   selectedColor,
+  showSelectedOverlay,
   customBackgroundColor,
   theme,
   isOutlined,
   disabled,
 }: {
   selectedColor?: string;
+  showSelectedOverlay?: boolean;
   customBackgroundColor?: ColorValue;
   theme: Theme;
   isOutlined: boolean;
@@ -76,7 +78,7 @@ export const getChipColors = ({
               ? theme.colors.onSurfaceVariant
               : theme.colors.onSecondaryContainer
           ),
-          0.12
+          showSelectedOverlay ? 0.12 : 0
         )
         .rgb()
         .string();
