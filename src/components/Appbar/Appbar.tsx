@@ -1,12 +1,5 @@
 import * as React from 'react';
-import {
-  View,
-  ViewStyle,
-  Platform,
-  StyleSheet,
-  StyleProp,
-  Animated,
-} from 'react-native';
+import { View, ViewStyle, Platform, StyleSheet, StyleProp } from 'react-native';
 import color from 'color';
 
 import AppbarContent from './AppbarContent';
@@ -52,7 +45,6 @@ type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
    */
   theme: Theme;
   style?: StyleProp<ViewStyle>;
-  elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
 };
 
 /**
@@ -62,6 +54,10 @@ type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
  *
  * By default Appbar uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
  * See [Dark Theme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more informations
+ *
+ * <div class="screenshots">
+ *   <img class="medium" src="screenshots/appbar.png" />
+ * </div>
  *
  * ## Usage
  * ```js
@@ -108,7 +104,7 @@ const Appbar = ({
   const { isV3 } = theme;
   const {
     backgroundColor: customBackground,
-    elevation = rest.elevation || isV3 ? (elevated ? 2 : 0) : 4,
+    elevation = isV3 ? (elevated ? 2 : 0) : 4,
     ...restStyle
   }: ViewStyle = StyleSheet.flatten(style) || {};
 
