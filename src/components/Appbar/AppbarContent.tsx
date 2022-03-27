@@ -63,6 +63,12 @@ type Props = $RemoveChildren<typeof View> & {
 /**
  * A component used to display a title and optional subtitle in an appbar.
  *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/appbar-content.png" />
+ *   </figure>
+ * </div>
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
