@@ -124,6 +124,7 @@ export interface TextInputAdornmentProps {
   visible?: Animated.Value;
   isTextInputFocused: boolean;
   paddingHorizontal?: number | string;
+  maxFontSizeMultiplier?: number | undefined | null;
 }
 
 const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
@@ -137,6 +138,7 @@ const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
   isTextInputFocused,
   forceFocus,
   paddingHorizontal,
+  maxFontSizeMultiplier,
 }) => {
   if (adornmentConfig.length) {
     return (
@@ -174,6 +176,7 @@ const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
                 textStyle={textStyle}
                 onLayout={onAffixChange[side]}
                 visible={visible}
+                maxFontSizeMultiplier={maxFontSizeMultiplier}
               />
             );
           } else {

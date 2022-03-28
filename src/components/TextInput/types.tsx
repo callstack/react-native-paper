@@ -71,14 +71,18 @@ export type LabelProps = {
   error?: boolean | null;
   onLayoutAnimatedText: (args: any) => void;
   roundness: number;
+  maxFontSizeMultiplier?: number | undefined | null;
 };
 export type InputLabelProps = {
   parentState: State;
   labelProps: LabelProps;
   labelBackground?: any;
+  maxFontSizeMultiplier?: number | undefined | null;
 };
+
 export type LabelBackgroundProps = {
   labelProps: LabelProps;
   labelStyle: any;
   parentState: State;
+  maxFontSizeMultiplier?: number | undefined | null;
 };

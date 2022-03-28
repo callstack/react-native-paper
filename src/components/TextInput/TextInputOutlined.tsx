@@ -198,6 +198,7 @@ const TextInputOutlined = ({
     errorColor,
     labelTranslationXOffset,
     roundness: theme.roundness,
+    maxFontSizeMultiplier: rest.maxFontSizeMultiplier,
   };
 
   const minHeight = (height ||
@@ -255,6 +256,7 @@ const TextInputOutlined = ({
     },
     onAffixChange,
     isTextInputFocused: parentState.focused,
+    maxFontSizeMultiplier: rest.maxFontSizeMultiplier,
   };
   if (adornmentConfig.length) {
     adornmentProps = {
@@ -295,6 +297,7 @@ const TextInputOutlined = ({
             parentState={parentState}
             labelProps={labelProps}
             labelBackground={LabelBackground}
+            maxFontSizeMultiplier={rest.maxFontSizeMultiplier}
           />
           {render?.({
             testID: 'text-input-outlined',

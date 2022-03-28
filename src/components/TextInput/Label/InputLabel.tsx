@@ -27,6 +27,7 @@ const InputLabel = (props: InputLabelProps) => {
     placeholderColor,
     errorColor,
     labelTranslationXOffset,
+    maxFontSizeMultiplier,
   } = props.labelProps;
 
   const labelTranslationX = {
@@ -94,6 +95,7 @@ const InputLabel = (props: InputLabelProps) => {
         parentState,
         labelStyle,
         labelProps: props.labelProps,
+        maxFontSizeMultiplier: maxFontSizeMultiplier,
       })}
       <AnimatedText
         onLayout={onLayoutAnimatedText}
@@ -113,6 +115,7 @@ const InputLabel = (props: InputLabelProps) => {
           },
         ]}
         numberOfLines={1}
+        maxFontSizeMultiplier={maxFontSizeMultiplier}
       >
         {label}
       </AnimatedText>
@@ -130,6 +133,7 @@ const InputLabel = (props: InputLabelProps) => {
           },
         ]}
         numberOfLines={1}
+        maxFontSizeMultiplier={maxFontSizeMultiplier}
       >
         {label}
       </AnimatedText>
