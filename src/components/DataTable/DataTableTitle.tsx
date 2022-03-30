@@ -128,6 +128,16 @@ const DataTableTitle = ({
         <Text
           style={[
             styles.cell,
+            // height must scale with numberOfLines
+            { maxHeight: 24 * numberOfLines },
+            // if numberOfLines causes wrap, center is lost. Align directly, sensitive to numeric and RTL
+            numberOfLines > 1
+              ? numeric
+                ? I18nManager.isRTL
+                  ? styles.leftText
+                  : styles.rightText
+                : styles.centerText
+              : {},
             sortDirection ? styles.sorted : { color: textColor },
             textStyle,
           ]}
@@ -150,12 +160,23 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
 
+  rightText: {
+    textAlign: 'right',
+  },
+
+  leftText: {
+    textAlign: 'left',
+  },
+
+  centerText: {
+    textAlign: 'center',
+  },
+
   right: {
     justifyContent: 'flex-end',
   },
 
   cell: {
-    height: 24,
     lineHeight: 24,
     fontSize: 12,
     fontWeight: '500',

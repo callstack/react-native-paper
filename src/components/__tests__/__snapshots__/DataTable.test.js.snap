@@ -104,9 +104,12 @@ exports[`renders data table header 1`] = `
               "alignItems": "center",
               "fontSize": 12,
               "fontWeight": "500",
-              "height": 24,
               "lineHeight": 24,
             },
+            Object {
+              "maxHeight": 24,
+            },
+            Object {},
             Object {
               "color": "rgba(0, 0, 0, 0.6)",
             },
@@ -158,9 +161,12 @@ exports[`renders data table header 1`] = `
               "alignItems": "center",
               "fontSize": 12,
               "fontWeight": "500",
-              "height": 24,
               "lineHeight": 24,
             },
+            Object {
+              "maxHeight": 24,
+            },
+            Object {},
             Object {
               "color": "rgba(0, 0, 0, 0.6)",
             },
@@ -1472,9 +1478,12 @@ exports[`renders data table title with press handler 1`] = `
             "alignItems": "center",
             "fontSize": 12,
             "fontWeight": "500",
-            "height": 24,
             "lineHeight": 24,
           },
+          Object {
+            "maxHeight": 24,
+          },
+          Object {},
           Object {
             "marginLeft": 8,
           },
@@ -1562,9 +1571,12 @@ exports[`renders data table title with sort icon 1`] = `
             "alignItems": "center",
             "fontSize": 12,
             "fontWeight": "500",
-            "height": 24,
             "lineHeight": 24,
           },
+          Object {
+            "maxHeight": 24,
+          },
+          Object {},
           Object {
             "marginLeft": 8,
           },
@@ -1670,9 +1682,12 @@ exports[`renders right aligned data table title 1`] = `
             "alignItems": "center",
             "fontSize": 12,
             "fontWeight": "500",
-            "height": 24,
             "lineHeight": 24,
           },
+          Object {
+            "maxHeight": 24,
+          },
+          Object {},
           Object {
             "color": "rgba(0, 0, 0, 0.6)",
           },
