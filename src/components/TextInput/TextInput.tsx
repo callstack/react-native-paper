@@ -389,6 +389,8 @@ const TextInput = React.forwardRef<TextInputHandles, TextInputProps>(
     };
     const forceFocus = () => root.current?.focus();
 
+    const { maxFontSizeMultiplier = 1.5 } = rest;
+
     if (mode === 'outlined') {
       return (
         <TextInputOutlined
@@ -420,6 +422,7 @@ const TextInput = React.forwardRef<TextInputHandles, TextInputProps>(
           onLayoutAnimatedText={handleLayoutAnimatedText}
           onLeftAffixLayoutChange={onLeftAffixLayoutChange}
           onRightAffixLayoutChange={onRightAffixLayoutChange}
+          maxFontSizeMultiplier={maxFontSizeMultiplier}
         />
       );
     }
@@ -454,6 +457,7 @@ const TextInput = React.forwardRef<TextInputHandles, TextInputProps>(
         onLayoutAnimatedText={handleLayoutAnimatedText}
         onLeftAffixLayoutChange={onLeftAffixLayoutChange}
         onRightAffixLayoutChange={onRightAffixLayoutChange}
+        maxFontSizeMultiplier={maxFontSizeMultiplier}
       />
     );
   }

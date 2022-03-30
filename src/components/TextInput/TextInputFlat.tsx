@@ -263,6 +263,7 @@ const TextInputFlat = ({
     placeholderColor,
     errorColor,
     roundness: theme.roundness,
+    maxFontSizeMultiplier: rest.maxFontSizeMultiplier,
   };
   const affixTopPosition = {
     [AdornmentSide.Left]: leftAffixTopPosition,
@@ -283,6 +284,7 @@ const TextInputFlat = ({
     },
     onAffixChange,
     isTextInputFocused: parentState.focused,
+    maxFontSizeMultiplier: rest.maxFontSizeMultiplier,
   };
   if (adornmentConfig.length) {
     adornmentProps = {
@@ -331,6 +333,7 @@ const TextInputFlat = ({
         )}
         <InputLabel parentState={parentState} labelProps={labelProps} />
         {render?.({
+          testID: 'text-input-flat',
           ...rest,
           ref: innerRef,
           onChangeText,

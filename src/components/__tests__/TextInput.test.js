@@ -174,3 +174,57 @@ it('correctly applies a component as the text label', () => {
 
   expect(toJSON()).toMatchSnapshot();
 });
+
+describe('maxFontSizeMultiplier', () => {
+  const createInput = (type, maxFontSizeMultiplier) => {
+    return (
+      <TextInput mode={type} maxFontSizeMultiplier={maxFontSizeMultiplier} />
+    );
+  };
+
+  it('should have default value in flat input', () => {
+    const { getByTestId } = render(createInput('flat'));
+
+    expect(getByTestId('text-input-flat').props.maxFontSizeMultiplier).toBe(
+      1.5
+    );
+  });
+
+  it('should have default value in outlined input', () => {
+    const { getByTestId } = render(createInput('outlined'));
+
+    expect(getByTestId('text-input-outlined').props.maxFontSizeMultiplier).toBe(
+      1.5
+    );
+  });
+
+  it('should have correct passed value in flat input', () => {
+    const { getByTestId } = render(createInput('flat', 2));
+
+    expect(getByTestId('text-input-flat').props.maxFontSizeMultiplier).toBe(2);
+  });
+
+  it('should have correct passed value in outlined input', () => {
+    const { getByTestId } = render(createInput('outlined', 2));
+
+    expect(getByTestId('text-input-outlined').props.maxFontSizeMultiplier).toBe(
+      2
+    );
+  });
+
+  it('should have passed null value in flat input', () => {
+    const { getByTestId } = render(createInput('flat', null));
+
+    expect(getByTestId('text-input-flat').props.maxFontSizeMultiplier).toBe(
+      null
+    );
+  });
+
+  it('should have passed null value in outlined input', () => {
+    const { getByTestId } = render(createInput('outlined', null));
+
+    expect(getByTestId('text-input-outlined').props.maxFontSizeMultiplier).toBe(
+      null
+    );
+  });
+});

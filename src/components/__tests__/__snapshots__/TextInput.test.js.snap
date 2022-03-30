@@ -64,6 +64,7 @@ exports[`correctly applies a component as the text label 1`] = `
       }
     >
       <Text
+        maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         onLayout={[Function]}
         style={
@@ -105,6 +106,7 @@ exports[`correctly applies a component as the text label 1`] = `
         </Text>
       </Text>
       <Text
+        maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         style={
           Object {
@@ -148,6 +150,7 @@ exports[`correctly applies a component as the text label 1`] = `
     <TextInput
       allowFontScaling={true}
       editable={true}
+      maxFontSizeMultiplier={1.5}
       multiline={false}
       onBlur={[Function]}
       onChangeText={[Function]}
@@ -187,6 +190,7 @@ exports[`correctly applies a component as the text label 1`] = `
           ],
         ]
       }
+      testID="text-input-flat"
       underlineColorAndroid="transparent"
       value="Some test value"
     />
@@ -258,6 +262,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
       }
     >
       <Text
+        maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         onLayout={[Function]}
         style={
@@ -291,6 +296,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
         Flat input
       </Text>
       <Text
+        maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         style={
           Object {
@@ -326,6 +332,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
     <TextInput
       allowFontScaling={true}
       editable={true}
+      maxFontSizeMultiplier={1.5}
       multiline={false}
       onBlur={[Function]}
       onChangeText={[Function]}
@@ -365,6 +372,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
           ],
         ]
       }
+      testID="text-input-flat"
       underlineColorAndroid="transparent"
       value="Some test value"
     />
@@ -452,6 +460,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
           }
         />
         <Text
+          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           style={
             Object {
@@ -488,6 +497,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
           Outline Input
         </Text>
         <Text
+          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           onLayout={[Function]}
           style={
@@ -520,6 +530,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
           Outline Input
         </Text>
         <Text
+          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           style={
             Object {
@@ -554,6 +565,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
       <TextInput
         allowFontScaling={true}
         editable={true}
+        maxFontSizeMultiplier={1.5}
         multiline={true}
         onBlur={[Function]}
         onChangeText={[Function]}
@@ -664,6 +676,7 @@ exports[`correctly applies textAlign center 1`] = `
       }
     >
       <Text
+        maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         onLayout={[Function]}
         style={
@@ -697,6 +710,7 @@ exports[`correctly applies textAlign center 1`] = `
         Flat input
       </Text>
       <Text
+        maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         style={
           Object {
@@ -732,6 +746,7 @@ exports[`correctly applies textAlign center 1`] = `
     <TextInput
       allowFontScaling={true}
       editable={true}
+      maxFontSizeMultiplier={1.5}
       multiline={false}
       onBlur={[Function]}
       onChangeText={[Function]}
@@ -771,6 +786,7 @@ exports[`correctly applies textAlign center 1`] = `
           ],
         ]
       }
+      testID="text-input-flat"
       underlineColorAndroid="transparent"
       value="Some test value"
     />
@@ -842,6 +858,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       }
     >
       <Text
+        maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         onLayout={[Function]}
         style={
@@ -875,6 +892,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         Flat input
       </Text>
       <Text
+        maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         style={
           Object {
@@ -910,6 +928,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
     <TextInput
       allowFontScaling={true}
       editable={true}
+      maxFontSizeMultiplier={1.5}
       multiline={false}
       onBlur={[Function]}
       onChangeText={[Function]}
@@ -952,6 +971,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           },
         ]
       }
+      testID="text-input-flat"
       underlineColorAndroid="transparent"
       value="Some test value"
     />
@@ -970,6 +990,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
     }
   >
     <Text
+      maxFontSizeMultiplier={1.5}
       style={
         Array [
           Object {
@@ -1145,6 +1166,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       }
     >
       <Text
+        maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         onLayout={[Function]}
         style={
@@ -1178,6 +1200,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         Flat input
       </Text>
       <Text
+        maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         style={
           Object {
@@ -1213,6 +1236,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
     <TextInput
       allowFontScaling={true}
       editable={true}
+      maxFontSizeMultiplier={1.5}
       multiline={false}
       onBlur={[Function]}
       onChangeText={[Function]}
@@ -1255,6 +1279,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           },
         ]
       }
+      testID="text-input-flat"
       underlineColorAndroid="transparent"
       value="Some test value"
     />
@@ -1362,6 +1387,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
     }
   >
     <Text
+      maxFontSizeMultiplier={1.5}
       style={
         Array [
           Object {

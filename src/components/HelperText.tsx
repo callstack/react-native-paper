@@ -94,6 +94,8 @@ const HelperText = ({
 
   const { scale } = theme.animation;
 
+  const { maxFontSizeMultiplier = 1.5 } = rest;
+
   React.useEffect(() => {
     if (visible) {
       // show text
@@ -150,6 +152,7 @@ const HelperText = ({
         },
         style,
       ]}
+      maxFontSizeMultiplier={maxFontSizeMultiplier}
       {...rest}
     >
       {rest.children}

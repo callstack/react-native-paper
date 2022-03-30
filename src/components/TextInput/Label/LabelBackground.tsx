@@ -17,6 +17,7 @@ const LabelBackground = ({
     roundness,
   },
   labelStyle,
+  maxFontSizeMultiplier,
 }: LabelBackgroundProps) => {
   const hasFocus = hasActiveOutline || parentState.value;
   const opacity = parentState.labeled.interpolate({
@@ -77,6 +78,7 @@ const LabelBackground = ({
             },
           ]}
           numberOfLines={1}
+          maxFontSizeMultiplier={maxFontSizeMultiplier}
         >
           {label}
         </AnimatedText>,
