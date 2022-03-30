@@ -58,7 +58,7 @@ type Props = {
 const DialogIcon = ({ size = 24, color, icon }: Props) => {
   const theme = useTheme();
 
-  if (theme.isV3) {
+  if (!theme.isV3) {
     return null;
   }
 
