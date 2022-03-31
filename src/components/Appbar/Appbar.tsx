@@ -15,6 +15,7 @@ import {
   modeAppbarHeight,
   AppbarModes,
 } from './utils';
+import AppbarHeader from './AppbarHeader';
 
 type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
   /**
@@ -220,7 +221,12 @@ const Appbar = ({
                 children: filterAppbarActions(false),
                 isDark,
                 isV3,
-                renderOnly: [AppbarAction],
+                renderExcept: [
+                  Appbar,
+                  AppbarBackAction,
+                  AppbarContent,
+                  AppbarHeader,
+                ],
                 mode,
               })}
             </View>

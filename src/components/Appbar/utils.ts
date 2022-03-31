@@ -46,6 +46,7 @@ type RenderAppbarContentProps = {
   shouldCenterContent?: boolean;
   isV3: boolean;
   renderOnly?: React.ReactNode[];
+  renderExcept?: React.ReactNode[];
   mode?: AppbarModes;
 };
 
@@ -71,11 +72,16 @@ export const renderAppbarContent = ({
   shouldCenterContent = false,
   isV3,
   renderOnly,
+  renderExcept,
   mode = 'small',
 }: RenderAppbarContentProps) => {
   return (
     React.Children.toArray(children)
       .filter((child) => child != null && typeof child !== 'boolean')
+      .filter((child) =>
+        // @ts-expect-error: TypeScript complains about the type of type but it doesn't matter
+        renderExcept ? !renderExcept.includes(child.type) : child
+      )
       // @ts-expect-error: TypeScript complains about the type of type but it doesn't matter
       .filter((child) => (renderOnly ? renderOnly.includes(child.type) : child))
       .map((child, i) => {

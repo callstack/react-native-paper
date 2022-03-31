@@ -2,10 +2,12 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import renderer from 'react-test-renderer';
 import { get } from 'lodash';
+import Menu from '../../Menu/Menu';
 import Appbar from '../../Appbar';
 import AppbarAction from '../../Appbar/AppbarAction';
 import AppbarContent from '../../Appbar/AppbarContent';
 import AppbarBackAction from '../../Appbar/AppbarBackAction';
+import AppbarHeader from '../../Appbar/AppbarHeader';
 import { getAppbarColor, renderAppbarContent } from '../../Appbar/utils';
 import Searchbar from '../../Searchbar';
 import { tokens } from '../../../styles/themes/v3/tokens';
@@ -58,6 +60,22 @@ describe('renderAppbarContent', () => {
     });
 
     expect(result).toHaveLength(4);
+  });
+
+  it('should render all children types except specified in renderExcept', () => {
+    const result = renderAppbarContent({
+      children: [
+        ...children,
+        <Menu
+          key={4}
+          anchor={<Appbar.Action icon="menu" onPress={() => {}} />}
+        />,
+      ],
+      isDark: false,
+      renderExcept: [Appbar, AppbarHeader, AppbarBackAction, AppbarContent],
+    });
+
+    expect(result).toHaveLength(3);
   });
 
   it('should render only children types specifed in renderOnly', () => {
