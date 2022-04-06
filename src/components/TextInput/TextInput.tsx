@@ -207,8 +207,8 @@ const TextInput = React.forwardRef<TextInputHandles, TextInputProps>(
     }: TextInputProps,
     ref
   ) => {
-    const validInputValue =
-      rest.value !== undefined ? rest.value : rest.defaultValue;
+    const isControlled = rest.value !== undefined;
+    const validInputValue = isControlled ? rest.value : rest.defaultValue;
 
     const { current: labeled } = React.useRef<Animated.Value>(
       new Animated.Value(validInputValue ? 0 : 1)
@@ -261,10 +261,6 @@ const TextInput = React.forwardRef<TextInputHandles, TextInputProps>(
       blur: () => root.current?.blur(),
       forceFocus: () => root.current?.focus(),
     }));
-
-    React.useLayoutEffect(() => {
-      if (typeof rest.value !== 'undefined') setValue(rest.value);
-    }, [rest.value]);
 
     React.useEffect(() => {
       // When the input has an error, we wiggle the label and apply error styles
@@ -376,7 +372,9 @@ const TextInput = React.forwardRef<TextInputHandles, TextInputProps>(
         return;
       }
 
-      setValue(value);
+      if (!isControlled) {
+        setValue(value); 
+      }
       rest.onChangeText?.(value);
     };
 
@@ -401,7 +399,7 @@ const TextInput = React.forwardRef<TextInputHandles, TextInputProps>(
           editable={editable}
           render={render}
           {...rest}
-          value={value}
+          value={isControlled ? rest.value : value}
           parentState={{
             labeled,
             error,
@@ -436,7 +434,7 @@ const TextInput = React.forwardRef<TextInputHandles, TextInputProps>(
         editable={editable}
         render={render}
         {...rest}
-        value={value}
+        value={isControlled ? rest.value : value}
         parentState={{
           labeled,
           error,
