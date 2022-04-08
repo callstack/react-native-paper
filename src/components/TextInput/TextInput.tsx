@@ -260,6 +260,7 @@ const TextInput = React.forwardRef<TextInputHandles, TextInputProps>(
       isFocused: () => root.current?.isFocused() || false,
       blur: () => root.current?.blur(),
       forceFocus: () => root.current?.focus(),
+      setFocused: (focused: boolean) => root.current?.setFocused(focused)
     }));
 
     React.useLayoutEffect(() => {
