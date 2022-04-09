@@ -137,14 +137,9 @@ const Surface = ({
   const sharedStyle = [{ backgroundColor }, style];
 
   if (Platform.OS === 'android') {
-    const elevationLevels = [
-      [0, 1, 2, 3, 3, 3],
-      [0, 3, 4, 6, 8, 10],
-    ];
+    const elevationLevel = [0, 3, 6, 9, 12, 15];
 
-    const getElevationAndroid = (layer: 0 | 1) => {
-      const elevationLevel = elevationLevels[layer];
-
+    const getElevationAndroid = () => {
       if (isAnimatedValue(elevation)) {
         return elevation.interpolate({
           inputRange,
@@ -159,37 +154,21 @@ const Surface = ({
       style
     ) as ViewStyle;
 
-    const clearStyles = {
-      margin: 0,
-      padding: 0,
-      transform: undefined,
-    };
-
     const outerLayerStyles = { margin, padding, transform, borderRadius };
 
     return (
       <Animated.View
         style={[
           {
-            elevation: getElevationAndroid(0),
+            elevation: getElevationAndroid(),
             backgroundColor,
             transform,
           },
           outerLayerStyles,
+          sharedStyle,
         ]}
       >
-        <Animated.View
-          style={[
-            {
-              elevation: getElevationAndroid(1),
-              borderRadius,
-            },
-            sharedStyle,
-            clearStyles,
-          ]}
-        >
-          {children}
-        </Animated.View>
+        {children}
       </Animated.View>
     );
   }
