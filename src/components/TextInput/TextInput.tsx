@@ -222,7 +222,7 @@ const TextInput = React.forwardRef<TextInputHandles, TextInputProps>(
     );
     let [uncontrolledValue, setUncontrolledValue] = React.useState<string | undefined>(validInputValue);
     // Use value from props instead of local state when input is controlled
-    const value = isControlled ? rest.value : value;
+    const value = isControlled ? rest.value : uncontrolledValue;
 
     const [labelLayout, setLabelLayout] = React.useState<{
       measured: boolean;
