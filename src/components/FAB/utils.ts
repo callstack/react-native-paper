@@ -174,10 +174,13 @@ export const getFABColors = (
   // FAB backgroundColor
   const backgroundVariantColor = `${variant}${
     isSurfaceVariant ? '' : 'Container'
-  }` as keyof MD3Colors;
+  }` as keyof Omit<MD3Colors, 'elevation'>;
   const foregroundVariantColor = `on${
     variant.charAt(0).toUpperCase() + variant.slice(1)
-  }${isSurfaceVariant ? '' : 'Container'}` as keyof MD3Colors;
+  }${isSurfaceVariant ? '' : 'Container'}` as keyof Omit<
+    MD3Colors,
+    'elevation'
+  >;
   const {
     backgroundColor = disabled
       ? disabledColor
