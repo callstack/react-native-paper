@@ -311,7 +311,7 @@ const AnimatedFAB = ({
     >
       <Animated.View
         style={[
-          {
+          !isV3 && {
             transform: [
               {
                 scaleY: animFAB.interpolate({
