@@ -164,6 +164,7 @@ const styles = StyleSheet.create({
   column: {
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: 8,
   },
   fab: {
     margin: 8,

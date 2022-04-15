@@ -216,11 +216,12 @@ const FAB = ({
 
   const shapeStyle = { borderRadius: fabStyle().borderRadius };
   const containerStyles = [
-    styles.elevated,
+    !isV3 && styles.elevated,
+    !isV3 && disabled && styles.disabled,
     shapeStyle,
-    isV3 && isFlatMode && styles.flat,
   ];
   const extendedStyle = isV3 ? styles.v3Extended : styles.extended;
+  const md3Elevation = isFlatMode || disabled ? 0 : 3;
 
   return (
     <Surface
@@ -237,11 +238,11 @@ const FAB = ({
             ],
           },
           containerStyles,
-          disabled && styles.disabled,
           style,
         ] as StyleProp<ViewStyle>
       }
       pointerEvents={visible ? 'auto' : 'none'}
+      {...(theme.isV3 && { elevation: md3Elevation })}
     >
       <TouchableRipple
         borderless
@@ -324,9 +325,6 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
   disabled: {
-    elevation: 0,
-  },
-  flat: {
     elevation: 0,
   },
   v3SmallSize: {
