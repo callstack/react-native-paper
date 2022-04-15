@@ -160,12 +160,14 @@ const Surface = ({
       <Animated.View
         style={[
           {
-            elevation: getElevationAndroid(),
             backgroundColor,
             transform,
           },
           outerLayerStyles,
           sharedStyle,
+          {
+            elevation: getElevationAndroid(),
+          },
         ]}
       >
         {children}

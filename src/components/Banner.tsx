@@ -7,7 +7,6 @@ import Icon, { IconSource } from './Icon';
 import { withTheme } from '../core/theming';
 import type { $RemoveChildren, Theme } from '../types';
 
-const ELEVATION = 1;
 const DEFAULT_MAX_WIDTH = 960;
 
 type Props = $RemoveChildren<typeof Surface> & {
@@ -42,6 +41,11 @@ type Props = $RemoveChildren<typeof Surface> & {
    * Use this prop to apply custom width for wide layouts.
    */
   contentStyle?: StyleProp<ViewStyle>;
+  /**
+   * @supported Available in v3.x with theme version 3
+   * Changes Banner shadow and background on iOS and Android.
+   */
+  elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
   style?: StyleProp<ViewStyle>;
   ref?: React.RefObject<View>;
   /**
@@ -125,6 +129,7 @@ const Banner = ({
   children,
   actions,
   contentStyle,
+  elevation = 1,
   style,
   theme,
   onShowAnimationFinished = () => {},
@@ -183,14 +188,9 @@ const Banner = ({
   return (
     <Surface
       {...rest}
-      style={[
-        style,
-        !theme.isV3 && {
-          elevation: ELEVATION,
-        },
-      ]}
+      style={[!theme.isV3 && styles.elevation, style]}
       theme={theme}
-      {...(theme.isV3 && { elevation: ELEVATION })}
+      {...(theme.isV3 && { elevation })}
     >
       <View style={[styles.wrapper, contentStyle]}>
         <Animated.View style={{ height }} />
@@ -284,6 +284,9 @@ const styles = StyleSheet.create({
   },
   button: {
     margin: 4,
+  },
+  elevation: {
+    elevation: 1,
   },
 });
 
