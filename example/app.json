@@ -21,11 +21,11 @@
     "owner": "react-native-paper",
     "ios": {
       "bundleIdentifier": "com.callstack.reactnativepaperexample",
-      "buildNumber": "3.0.0"
+      "buildNumber": "3.1.0"
     },
     "android": {
       "package": "com.callstack.reactnativepaperexample",
-      "versionCode": 4,
+      "versionCode": 5,
       "permissions": [
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE"

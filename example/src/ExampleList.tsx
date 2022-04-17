@@ -38,6 +38,7 @@ import TouchableRippleExample from './Examples/TouchableRippleExample';
 import ThemeExample from './Examples/ThemeExample';
 import RadioButtonItemExample from './Examples/RadioButtonItemExample';
 import AnimatedFABExample from './Examples/AnimatedFABExample';
+import HeaderBarExample from './Examples/HeaderBarExample';
 
 export const examples: Record<
   string,
@@ -59,6 +60,7 @@ export const examples: Record<
   dialog: DialogExample,
   divider: DividerExample,
   fab: FABExample,
+  headerbar: HeaderBarExample,
   iconButton: IconButtonExample,
   listAccordion: ListAccordionExample,
   listAccordionGroup: ListAccordionExampleGroup,
