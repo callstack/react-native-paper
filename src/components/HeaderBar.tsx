@@ -9,6 +9,7 @@ type Props = React.ComponentPropsWithRef<typeof StatusBar> & {
   backgroundColor: string | ReactNativePaper.ThemeColors;
   /**
    * Set the color of the status bar text.
+   * Available color: 'default' | 'light-content' | 'dark-content';
    */
   textColor: StatusBarStyle;
   /**
