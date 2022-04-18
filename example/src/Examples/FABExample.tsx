@@ -97,6 +97,14 @@ const FABExample = () => {
           visible={visible}
         />
         <FAB
+          icon="map"
+          label="Extended FAB with size"
+          style={styles.fab}
+          size={70}
+          onPress={() => {}}
+          visible={visible}
+        />
+        <FAB
           icon="check"
           label="Extended FAB"
           style={styles.fab}

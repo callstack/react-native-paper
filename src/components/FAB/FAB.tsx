@@ -54,10 +54,6 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   small?: boolean;
   /**
-   *  Custom size for the `FAB`.
-   */
-  size?: number;
-  /**
    * Custom color for the icon and label of the `FAB`.
    */
   color?: string;
