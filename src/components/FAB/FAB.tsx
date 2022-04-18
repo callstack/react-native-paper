@@ -54,6 +54,10 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   small?: boolean;
   /**
+   *  Custom size for the `FAB`.
+   */
+  size?: number;
+  /**
    * Custom color for the icon and label of the `FAB`.
    */
   color?: string;
@@ -159,7 +163,7 @@ const FAB = ({
   uppercase = !theme.isV3,
   loading,
   testID,
-  size = 'medium',
+  size,
   mode = 'elevated',
   variant = 'primary',
   ...rest
