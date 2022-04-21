@@ -161,7 +161,7 @@ export const typescale = {
   },
 
   labelLarge: {
-    ...regularType,
+    ...mediumType,
     tracking: 0.1,
     lineHeight: 20,
     size: 14,
@@ -181,17 +181,20 @@ export const typescale = {
 
   bodyLarge: {
     ...mediumType,
+    weight: '400',
     lineHeight: 24,
     size: 16,
   },
   bodyMedium: {
     ...mediumType,
+    weight: '400',
     tracking: 0.25,
     lineHeight: 20,
     size: 14,
   },
   bodySmall: {
     ...mediumType,
+    weight: '400',
     tracking: 0.4,
     lineHeight: 16,
     size: 12,
