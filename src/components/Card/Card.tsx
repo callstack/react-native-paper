@@ -18,6 +18,7 @@ import CardTitle, { CardTitle as _CardTitle } from './CardTitle';
 import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
+import overlay from '../../styles/overlay';
 
 type OutlinedCardProps = {
   mode: 'outlined';
@@ -166,13 +167,13 @@ const Card = ({
     const isPressTypeIn = pressType === 'in';
     if (dark && isAdaptiveMode) {
       Animated.timing(elevationDarkAdaptive, {
-        toValue: isPressTypeIn ? (isV3 ? 2 : 8) : cardElevation,
+        toValue: isPressTypeIn ? (isV3 ? 1 : 8) : cardElevation,
         duration: animationDuration,
         useNativeDriver: false,
       }).start();
     } else {
       Animated.timing(elevation, {
-        toValue: isPressTypeIn ? (isV3 ? 2 : 8) : cardElevation,
+        toValue: isPressTypeIn ? (isV3 ? 1 : 8) : cardElevation,
         duration: animationDuration,
         useNativeDriver: false,
       }).start();
@@ -197,6 +198,17 @@ const Card = ({
     .alpha(0.12)
     .rgb()
     .string();
+
+  const darkModeBackgroundColor =
+    dark && isAdaptiveMode
+      ? overlay(elevation, theme.colors.surface)
+      : theme.colors.surface;
+
+  const backgroundColor =
+    isV3 && cardMode === 'filled'
+      ? theme.colors.surfaceVariant
+      : darkModeBackgroundColor;
+
   const computedElevation =
     dark && isAdaptiveMode ? elevationDarkAdaptive : elevation;
 
@@ -205,7 +217,11 @@ const Card = ({
       style={[
         {
           borderRadius: roundness,
-          borderColor,
+          borderColor:
+            isV3 && cardMode === 'outlined'
+              ? theme.colors.outline
+              : borderColor,
+          backgroundColor: backgroundColor as unknown as string,
         },
         !isV3 && {
           elevation: computedElevation as unknown as number,
