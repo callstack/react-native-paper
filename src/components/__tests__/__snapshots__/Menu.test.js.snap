@@ -88,10 +88,6 @@ exports[`renders menu with content styles 1`] = `
                   "fontFamily": "System",
                   "fontWeight": "500",
                 },
-                Object {
-                  "fontFamily": "System",
-                  "fontWeight": "500",
-                },
                 undefined,
               ],
             ]
@@ -193,10 +189,6 @@ exports[`renders not visible menu 1`] = `
                   "fontFamily": "System",
                   "fontWeight": "500",
                 },
-                Object {
-                  "fontFamily": "System",
-                  "fontWeight": "500",
-                },
                 undefined,
               ],
             ]
@@ -295,10 +287,6 @@ exports[`renders visible menu 1`] = `
                 },
                 Object {
                   "color": "#6200ee",
-                  "fontFamily": "System",
-                  "fontWeight": "500",
-                },
-                Object {
                   "fontFamily": "System",
                   "fontWeight": "500",
                 },

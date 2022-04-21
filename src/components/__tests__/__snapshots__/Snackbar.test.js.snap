@@ -238,10 +238,6 @@ exports[`renders snackbar with action button 1`] = `
                     "fontFamily": "System",
                     "fontWeight": "500",
                   },
-                  Object {
-                    "fontFamily": "System",
-                    "fontWeight": "500",
-                  },
                   undefined,
                 ],
               ]

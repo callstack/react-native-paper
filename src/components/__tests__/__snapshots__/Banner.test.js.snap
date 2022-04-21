@@ -175,10 +175,6 @@ exports[`render visible banner, with custom theme 1`] = `
                         "fontFamily": "System",
                         "fontWeight": "500",
                       },
-                      Object {
-                        "fontFamily": "System",
-                        "fontWeight": "500",
-                      },
                       undefined,
                     ],
                   ]
@@ -476,10 +472,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                         "fontFamily": "System",
                         "fontWeight": "500",
                       },
-                      Object {
-                        "fontFamily": "System",
-                        "fontWeight": "500",
-                      },
                       undefined,
                     ],
                   ]
@@ -671,10 +663,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                         "fontFamily": "System",
                         "fontWeight": "500",
                       },
-                      Object {
-                        "fontFamily": "System",
-                        "fontWeight": "500",
-                      },
                       undefined,
                     ],
                   ]
@@ -769,10 +757,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                       },
                       Object {
                         "color": "#6200ee",
-                        "fontFamily": "System",
-                        "fontWeight": "500",
-                      },
-                      Object {
                         "fontFamily": "System",
                         "fontWeight": "500",
                       },

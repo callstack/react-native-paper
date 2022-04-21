@@ -156,11 +156,11 @@ const Button = ({
     },
     [mode]
   );
-  const { roundness, isV3 } = theme;
+  const { roundness, isV3, animation, fonts } = theme;
 
   const isElevationEntitled = isV3 ? isMode('elevated') : isMode('contained');
-  const initialElevation = theme.isV3 ? 1 : 2;
-  const activeElevation = theme.isV3 ? 2 : 8;
+  const initialElevation = isV3 ? 1 : 2;
+  const activeElevation = isV3 ? 2 : 8;
 
   const { current: elevation } = React.useRef<Animated.Value>(
     new Animated.Value(isElevationEntitled ? initialElevation : 0)
@@ -172,7 +172,7 @@ const Button = ({
 
   const handlePressIn = () => {
     if (isMode('contained')) {
-      const { scale } = theme.animation;
+      const { scale } = animation;
       Animated.timing(elevation, {
         toValue: activeElevation,
         duration: 200 * scale,
@@ -183,7 +183,7 @@ const Button = ({
 
   const handlePressOut = () => {
     if (isMode('contained')) {
-      const { scale } = theme.animation;
+      const { scale } = animation;
       Animated.timing(elevation, {
         toValue: initialElevation,
         duration: 150 * scale,
@@ -191,8 +191,6 @@ const Button = ({
       }).start();
     }
   };
-
-  const font = theme.fonts.medium;
 
   const borderRadius = (isV3 ? 5 : 1) * roundness;
   const iconSize = isV3 ? 18 : 16;
@@ -224,7 +222,7 @@ const Button = ({
   const { color: customLabelColor, fontSize: customLabelSize } =
     StyleSheet.flatten(labelStyle) || {};
 
-  const textStyle = { color: textColor, ...font };
+  const textStyle = { color: textColor, ...(!isV3 && fonts.medium) };
   const elevationRes = disabled || !isElevationEntitled ? 0 : elevation;
   const iconStyle =
     StyleSheet.flatten(contentStyle)?.flexDirection === 'row-reverse'
@@ -247,9 +245,9 @@ const Button = ({
         compact && styles.compact,
         buttonStyle,
         style,
-        !theme.isV3 && ({ elevation: elevationRes } as ViewStyle),
+        !isV3 && ({ elevation: elevationRes } as ViewStyle),
       ]}
-      {...(theme.isV3 && { elevation: elevationRes })}
+      {...(isV3 && { elevation: elevationRes })}
     >
       <TouchableRipple
         borderless
@@ -312,7 +310,6 @@ const Button = ({
               compact && styles.compactLabel,
               uppercase && styles.uppercaseLabel,
               textStyle,
-              !isV3 && font,
               labelStyle,
             ]}
           >

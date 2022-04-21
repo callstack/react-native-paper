@@ -1069,10 +1069,6 @@ exports[`renders data table pagination with options select 1`] = `
                       "fontFamily": "System",
                       "fontWeight": "500",
                     },
-                    Object {
-                      "fontFamily": "System",
-                      "fontWeight": "500",
-                    },
                     undefined,
                   ],
                 ]
