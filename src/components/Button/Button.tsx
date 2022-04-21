@@ -20,14 +20,12 @@ import { buttonMode, getButtonColors } from './helpers';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
-   * @supported Modes 'elevated' and 'contained-tonal' available in v3.x with theme version 3.
-   *
    * Mode of the button. You can change the mode to adjust the styling to give it desired emphasis.
    * - `text` - flat button without background or outline, used for the lowest priority actions, especially when presenting multiple options.
    * - `outlined` - button with an outline without background, typically used for important, but not primary action – represents medium emphasis.
    * - `contained` - button with a background color, used for important action, have the most visual impact and high emphasis.
-   * - `elevated` - button with a background color and elevation, used when absolutely necessary e.g. button requires visual separation from a patterned background.
-   * - `container-tonal` - button with a secondary background color, an alternative middle ground between contained and outlined buttons.
+   * - `elevated` - button with a background color and elevation, used when absolutely necessary e.g. button requires visual separation from a patterned background. @supported Available in v3.x with theme version 3
+   * - `container-tonal` - button with a secondary background color, an alternative middle ground between contained and outlined buttons. @supported Available in v3.x with theme version 3
    */
   mode?: 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal';
   /**

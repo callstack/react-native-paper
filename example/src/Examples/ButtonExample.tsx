@@ -187,54 +187,56 @@ const ButtonExample = () => {
           </Button>
         </View>
       </List.Section>
-      <List.Section title={`Elevated button ${theme.isV3 ? '(elevated)' : ''}`}>
-        <View style={styles.row}>
-          <Button mode="elevated" onPress={() => {}} style={styles.button}>
-            Default
-          </Button>
-          <Button
-            mode="elevated"
-            color={color}
-            onPress={() => {}}
-            style={styles.button}
-          >
-            Custom
-          </Button>
-          <Button
-            mode="elevated"
-            disabled
-            onPress={() => {}}
-            style={styles.button}
-          >
-            Disabled
-          </Button>
-          <Button
-            mode="elevated"
-            icon="camera"
-            onPress={() => {}}
-            style={styles.button}
-          >
-            Icon
-          </Button>
-          <Button
-            mode="elevated"
-            loading
-            onPress={() => {}}
-            style={styles.button}
-          >
-            Loading
-          </Button>
-          <Button
-            mode="elevated"
-            icon="camera"
-            onPress={() => {}}
-            style={styles.button}
-            contentStyle={styles.flexReverse}
-          >
-            Icon right
-          </Button>
-        </View>
-      </List.Section>
+      {theme.isV3 && (
+        <List.Section title={'Elevated button (elevated)'}>
+          <View style={styles.row}>
+            <Button mode="elevated" onPress={() => {}} style={styles.button}>
+              Default
+            </Button>
+            <Button
+              mode="elevated"
+              color={color}
+              onPress={() => {}}
+              style={styles.button}
+            >
+              Custom
+            </Button>
+            <Button
+              mode="elevated"
+              disabled
+              onPress={() => {}}
+              style={styles.button}
+            >
+              Disabled
+            </Button>
+            <Button
+              mode="elevated"
+              icon="camera"
+              onPress={() => {}}
+              style={styles.button}
+            >
+              Icon
+            </Button>
+            <Button
+              mode="elevated"
+              loading
+              onPress={() => {}}
+              style={styles.button}
+            >
+              Loading
+            </Button>
+            <Button
+              mode="elevated"
+              icon="camera"
+              onPress={() => {}}
+              style={styles.button}
+              contentStyle={styles.flexReverse}
+            >
+              Icon right
+            </Button>
+          </View>
+        </List.Section>
+      )}
       <List.Section title="Custom">
         <View style={styles.row}>
           <Button
