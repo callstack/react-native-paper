@@ -14,22 +14,42 @@ import { PreferencesContext } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 const CardExample = () => {
-  const { colors } = useTheme();
+  const { colors, isV3 } = useTheme();
   const [isOutlined, setIsOutlined] = React.useState(false);
-  const mode = isOutlined ? 'outlined' : 'elevated';
-
+  const isV2mode = isOutlined ? 'outlined' : 'elevated';
+  const [isV3mode, setIsV3Mode] = React.useState('elevated') as any;
   const preferences = React.useContext(PreferencesContext);
+  const mode = isV3 ? isV3mode : isV2mode;
 
   return (
     <ScreenWrapper contentContainerStyle={styles.content}>
+      {isV3 && (
+        <Text style={styles.isV3modeText}>{isV3mode.toUpperCase()}</Text>
+      )}
       <View style={styles.preference}>
-        <Text>Outlined</Text>
-        <Switch
-          value={isOutlined}
-          onValueChange={() =>
-            setIsOutlined((prevIsOutlined) => !prevIsOutlined)
-          }
-        />
+        {isV3 ? (
+          <>
+            <Button mode="elevated" onPress={() => setIsV3Mode('elevated')}>
+              Elevated
+            </Button>
+            <Button mode="outlined" onPress={() => setIsV3Mode('outlined')}>
+              Outlined
+            </Button>
+            <Button mode="contained" onPress={() => setIsV3Mode('filled')}>
+              Filled
+            </Button>
+          </>
+        ) : (
+          <>
+            <Text>Outlined</Text>
+            <Switch
+              value={isOutlined}
+              onValueChange={() =>
+                setIsOutlined((prevIsOutlined) => !prevIsOutlined)
+              }
+            />
+          </>
+        )}
       </View>
       <ScrollView
         style={[styles.container, { backgroundColor: colors?.background }]}
@@ -154,6 +174,9 @@ const styles = StyleSheet.create({
   },
   card: {
     margin: 4,
+  },
+  isV3modeText: {
+    textAlign: 'center',
   },
   preference: {
     alignItems: 'center',

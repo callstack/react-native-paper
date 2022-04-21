@@ -29,7 +29,14 @@ type ElevatedCardProps = {
   elevation?: number;
 };
 
+type FilledCardProps = {
+  mode?: 'filled';
+  elevation?: never;
+};
+
 type HandlePressType = 'in' | 'out';
+
+type Mode = 'elevated' | 'outlined' | 'filled';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
@@ -47,9 +54,10 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Mode of the Card.
    * - `elevated` - Card with elevation.
+   * - `filled` - Card with without outline and elevation.
    * - `outlined` - Card with an outline.
    */
-  mode?: 'elevated' | 'outlined';
+  mode?: Mode;
   /**
    * Content of the `Card`.
    */
@@ -113,7 +121,7 @@ const Card = ({
   testID,
   accessible,
   ...rest
-}: (OutlinedCardProps | ElevatedCardProps) & Props) => {
+}: (OutlinedCardProps | ElevatedCardProps | FilledCardProps) & Props) => {
   // Default animated value
   const { current: elevation } = React.useRef<Animated.Value>(
     new Animated.Value(cardElevation)
@@ -206,7 +214,9 @@ const Card = ({
         style,
       ]}
       theme={theme}
-      {...(isV3 && { elevation: computedElevation })}
+      {...(isV3 && {
+        elevation: cardMode === 'elevated' ? computedElevation : 0,
+      })}
       {...rest}
     >
       <TouchableWithoutFeedback
@@ -226,6 +236,7 @@ const Card = ({
                   index,
                   total,
                   siblings,
+                  theme,
                 })
               : child
           )}

@@ -46,7 +46,7 @@ type Props = React.ComponentPropsWithRef<typeof Image> & {
  * @extends Image props https://reactnative.dev/docs/image#props
  */
 const CardCover = ({ index, total, style, theme, ...rest }: Props) => {
-  const { roundness } = theme;
+  const { roundness, isV3 } = theme;
 
   let coverStyle;
 
@@ -56,10 +56,16 @@ const CardCover = ({ index, total, style, theme, ...rest }: Props) => {
         borderRadius: roundness,
       };
     } else {
-      coverStyle = {
-        borderTopLeftRadius: roundness,
-        borderTopRightRadius: roundness,
-      };
+      if (isV3) {
+        coverStyle = {
+          borderRadius: roundness,
+        };
+      } else {
+        coverStyle = {
+          borderTopLeftRadius: roundness,
+          borderTopRightRadius: roundness,
+        };
+      }
     }
   } else if (typeof total === 'number' && index === total - 1) {
     coverStyle = {
