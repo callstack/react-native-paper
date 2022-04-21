@@ -8,6 +8,7 @@ import {
   TextInputProps,
   ViewStyle,
   TextStyle,
+  Animated,
 } from 'react-native';
 
 import color from 'color';
@@ -48,11 +49,15 @@ type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    */
   onIconPress?: () => void;
   /**
+   * @supported Available in v3.x with theme version 3
+   * Changes Searchbar shadow and background on iOS and Android.
+   */
+  elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
+  /**
    * Set style of the TextInput component inside the searchbar
    */
   inputStyle?: StyleProp<TextStyle>;
   style?: StyleProp<ViewStyle>;
-
   /**
    * @optional
    */
@@ -113,6 +118,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
       onIconPress,
       placeholder,
       searchAccessibilityLabel = 'search',
+      elevation = 1,
       style,
       theme,
       value,
@@ -153,8 +159,8 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
       rest.onChangeText?.('');
     };
 
-    const { colors, roundness, dark, fonts } = theme;
-    const textColor = theme.isV3 ? theme.colors.onSurface : theme.colors.text;
+    const { colors, roundness, dark, fonts, isV3 } = theme;
+    const textColor = isV3 ? theme.colors.onSurface : theme.colors.text;
     const font = fonts.regular;
     const iconColor =
       customIconColor ||
@@ -164,10 +170,12 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
     return (
       <Surface
         style={[
-          { borderRadius: roundness, elevation: 4 },
+          { borderRadius: roundness },
+          !isV3 && styles.elevation,
           styles.container,
           style,
         ]}
+        {...(theme.isV3 && { elevation })}
       >
         <IconButton
           // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
@@ -256,6 +264,9 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     textAlign: I18nManager.isRTL ? 'right' : 'left',
     minWidth: 0,
+  },
+  elevation: {
+    elevation: 4,
   },
 });
 

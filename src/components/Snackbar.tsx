@@ -43,6 +43,11 @@ export type SnackbarProps = React.ComponentProps<typeof Surface> & {
   /**
    * Style for the wrapper of the snackbar
    */
+  /**
+   * @supported Available in v3.x with theme version 3
+   * Changes Snackbar shadow and background on iOS and Android.
+   */
+  elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
   wrapperStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
   ref?: React.RefObject<View>;
@@ -110,6 +115,7 @@ const Snackbar = ({
   duration = DURATION_MEDIUM,
   onDismiss,
   children,
+  elevation = 2,
   wrapperStyle,
   style,
   theme,
@@ -168,7 +174,7 @@ const Snackbar = ({
     }
   }, [visible, duration, opacity, scale, onDismiss]);
 
-  const { colors, roundness } = theme;
+  const { colors, roundness, isV3 } = theme;
 
   if (hidden) return null;
 
@@ -189,7 +195,7 @@ const Snackbar = ({
         accessibilityLiveRegion="polite"
         style={
           [
-            !theme.isV3 && { elevation: 6 },
+            !isV3 && styles.elevation,
             styles.container,
             {
               borderRadius: roundness,
@@ -209,7 +215,7 @@ const Snackbar = ({
             style,
           ] as StyleProp<ViewStyle>
         }
-        {...(theme.isV3 && { elevation: 2 })}
+        {...(isV3 && { elevation })}
         {...rest}
       >
         <Text
@@ -277,6 +283,9 @@ const styles = StyleSheet.create({
   button: {
     marginHorizontal: 8,
     marginVertical: 6,
+  },
+  elevation: {
+    elevation: 6,
   },
 });
 
