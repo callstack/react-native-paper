@@ -33,9 +33,9 @@ type HandlePressType = 'in' | 'out';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
-   * Resting elevation of the card which controls the drop shadow.
+   * Changes Card shadow and background on iOS and Android.
    */
-  elevation?: never | number;
+  elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
   /**
    * Function to execute on long press.
    */
@@ -123,7 +123,7 @@ const Card = ({
   const { current: elevationDarkAdaptive } = React.useRef<Animated.Value>(
     new Animated.Value(cardElevation)
   );
-  const { animation, dark, mode, roundness } = theme;
+  const { animation, dark, mode, roundness, isV3 } = theme;
 
   const prevDarkRef = React.useRef<boolean>(dark);
   React.useEffect(() => {
@@ -158,13 +158,13 @@ const Card = ({
     const isPressTypeIn = pressType === 'in';
     if (dark && isAdaptiveMode) {
       Animated.timing(elevationDarkAdaptive, {
-        toValue: isPressTypeIn ? 8 : cardElevation,
+        toValue: isPressTypeIn ? (isV3 ? 2 : 8) : cardElevation,
         duration: animationDuration,
         useNativeDriver: false,
       }).start();
     } else {
       Animated.timing(elevation, {
-        toValue: isPressTypeIn ? 8 : cardElevation,
+        toValue: isPressTypeIn ? (isV3 ? 2 : 8) : cardElevation,
         duration: animationDuration,
         useNativeDriver: false,
       }).start();
@@ -197,13 +197,16 @@ const Card = ({
       style={[
         {
           borderRadius: roundness,
-          elevation: computedElevation as unknown as number,
           borderColor,
+        },
+        !isV3 && {
+          elevation: computedElevation as unknown as number,
         },
         cardMode === 'outlined' ? styles.outlined : {},
         style,
       ]}
       theme={theme}
+      {...(isV3 && { elevation: computedElevation })}
       {...rest}
     >
       <TouchableWithoutFeedback

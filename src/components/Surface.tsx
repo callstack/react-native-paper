@@ -160,12 +160,14 @@ const Surface = ({
       <Animated.View
         style={[
           {
-            elevation: getElevationAndroid(),
             backgroundColor,
             transform,
           },
           outerLayerStyles,
           sharedStyle,
+          {
+            elevation: getElevationAndroid(),
+          },
         ]}
       >
         {children}
@@ -194,7 +196,11 @@ const Surface = ({
     const getStyleForAnimatedShadowLayer = (layer: 0 | 1) => {
       return {
         shadowColor,
-        shadowOpacity: iOSShadowOutputRanges[layer].shadowOpacity,
+        shadowOpacity: elevation.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, iOSShadowOutputRanges[layer].shadowOpacity],
+          extrapolate: 'clamp',
+        }),
         shadowOffset: {
           width: 0,
           height: elevation.interpolate({
@@ -223,7 +229,7 @@ const Surface = ({
   const getStyleForShadowLayer = (layer: 0 | 1) => {
     return {
       shadowColor,
-      shadowOpacity: iOSShadowOutputRanges[layer].shadowOpacity,
+      shadowOpacity: elevation ? iOSShadowOutputRanges[layer].shadowOpacity : 0,
       shadowOffset: {
         width: 0,
         height: iOSShadowOutputRanges[layer].height[elevation],
