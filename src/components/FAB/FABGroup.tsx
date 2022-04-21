@@ -343,9 +343,10 @@ const FABGroup = ({
                     accessibilityTraits="button"
                     accessibilityComponentType="button"
                     accessibilityRole="button"
+                    {...(isV3 && { elevation: 0 })}
                   >
                     <Text
-                      variant="bodyLarge"
+                      variant="titleMedium"
                       style={{ color: it.labelTextColor ?? labelColor }}
                     >
                       {it.label}

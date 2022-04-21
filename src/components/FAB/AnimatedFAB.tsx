@@ -207,8 +207,8 @@ const AnimatedFAB = ({
   const { current: animFAB } = React.useRef<Animated.Value>(
     new Animated.Value(0)
   );
-  const { scale } = theme.animation;
-  const { isV3 } = theme;
+  const { isV3, animation, fonts } = theme;
+  const { scale } = animation;
 
   const [textWidth, setTextWidth] = React.useState<number>(0);
   const [textHeight, setTextHeight] = React.useState<number>(0);
@@ -287,6 +287,11 @@ const AnimatedFAB = ({
     distance,
     animFAB,
   });
+
+  const textStyle = {
+    color: foregroundColor,
+    ...(!isV3 && fonts.medium),
+  };
 
   return (
     <Surface
@@ -445,10 +450,7 @@ const AnimatedFAB = ({
             },
             styles.label,
             uppercase && styles.uppercaseLabel,
-            {
-              color: foregroundColor,
-              ...theme.fonts.medium,
-            },
+            textStyle,
           ]}
         >
           {label}

@@ -163,8 +163,8 @@ const FAB = ({
   const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
-  const { scale } = theme.animation;
-  const { isV3 } = theme;
+  const { isV3, animation, fonts } = theme;
+  const { scale } = animation;
 
   React.useEffect(() => {
     if (visible) {
@@ -215,6 +215,11 @@ const FAB = ({
   };
 
   const shapeStyle = { borderRadius: fabStyle().borderRadius };
+  const textStyle = {
+    color: foregroundColor,
+    ...(!isV3 && fonts.medium),
+  };
+
   const containerStyles = [
     !isV3 && styles.elevated,
     !isV3 && disabled && styles.disabled,
@@ -242,7 +247,7 @@ const FAB = ({
         ] as StyleProp<ViewStyle>
       }
       pointerEvents={visible ? 'auto' : 'none'}
-      {...(theme.isV3 && { elevation: md3Elevation })}
+      {...(isV3 && { elevation: md3Elevation })}
     >
       <TouchableRipple
         borderless
@@ -283,7 +288,7 @@ const FAB = ({
               style={[
                 styles.label,
                 uppercase && styles.uppercaseLabel,
-                { color: foregroundColor, ...theme.fonts.medium },
+                textStyle,
               ]}
             >
               {label}
