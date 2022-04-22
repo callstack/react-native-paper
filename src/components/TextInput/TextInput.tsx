@@ -220,7 +220,9 @@ const TextInput = React.forwardRef<TextInputHandles, TextInputProps>(
     const [placeholder, setPlaceholder] = React.useState<string | undefined>(
       ''
     );
-    let [uncontrolledValue, setUncontrolledValue] = React.useState<string | undefined>(validInputValue);
+    const [uncontrolledValue, setUncontrolledValue] = React.useState<
+      string | undefined
+    >(validInputValue);
     // Use value from props instead of local state when input is controlled
     const value = isControlled ? rest.value : uncontrolledValue;
 
