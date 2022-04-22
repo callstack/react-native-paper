@@ -7,8 +7,6 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import color from 'color';
-import { white, black } from '../../styles/themes/v2/colors';
 import CardContent from './CardContent';
 import CardActions from './CardActions';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -18,7 +16,7 @@ import CardTitle, { CardTitle as _CardTitle } from './CardTitle';
 import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
-import overlay from '../../styles/overlay';
+import { getCardColors } from './helpers';
 
 type OutlinedCardProps = {
   mode: 'outlined';
@@ -55,7 +53,7 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Mode of the Card.
    * - `elevated` - Card with elevation.
-   * - `filled` - Card with without outline and elevation.
+   * - `filled` - Card with without outline and elevation @supported Available in v3.x with theme version 3
    * - `outlined` - Card with an outline.
    */
   mode?: Mode;
@@ -194,34 +192,24 @@ const Card = ({
       ? (child.type as any).displayName
       : null
   );
-  const borderColor = color(dark ? white : black)
-    .alpha(0.12)
-    .rgb()
-    .string();
-
-  const darkModeBackgroundColor =
-    dark && isAdaptiveMode
-      ? overlay(elevation, theme.colors.surface)
-      : theme.colors.surface;
-
-  const backgroundColor =
-    isV3 && cardMode === 'filled'
-      ? theme.colors.surfaceVariant
-      : darkModeBackgroundColor;
-
   const computedElevation =
     dark && isAdaptiveMode ? elevationDarkAdaptive : elevation;
+
+  const { backgroundColor, borderColor } = getCardColors({
+    theme,
+    mode: cardMode,
+    dark,
+    isAdaptiveMode,
+    elevation,
+  });
 
   return (
     <Surface
       style={[
         {
           borderRadius: roundness,
-          borderColor:
-            isV3 && cardMode === 'outlined'
-              ? theme.colors.outline
-              : borderColor,
           backgroundColor: backgroundColor as unknown as string,
+          borderColor,
         },
         !isV3 && {
           elevation: computedElevation as unknown as number,
@@ -252,7 +240,6 @@ const Card = ({
                   index,
                   total,
                   siblings,
-                  theme,
                 })
               : child
           )}

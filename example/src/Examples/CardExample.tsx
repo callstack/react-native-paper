@@ -9,6 +9,7 @@ import {
   useTheme,
   Text,
   Switch,
+  Chip,
 } from 'react-native-paper';
 import { PreferencesContext } from '..';
 import ScreenWrapper from '../ScreenWrapper';
@@ -23,21 +24,21 @@ const CardExample = () => {
 
   return (
     <ScreenWrapper contentContainerStyle={styles.content}>
-      {isV3 && (
-        <Text style={styles.isV3modeText}>{isV3mode.toUpperCase()}</Text>
-      )}
       <View style={styles.preference}>
         {isV3 ? (
           <>
-            <Button mode="elevated" onPress={() => setIsV3Mode('elevated')}>
-              Elevated
-            </Button>
-            <Button mode="outlined" onPress={() => setIsV3Mode('outlined')}>
-              Outlined
-            </Button>
-            <Button mode="contained" onPress={() => setIsV3Mode('filled')}>
-              Filled
-            </Button>
+            {['elevated', 'outlined', 'filled'].map((mode) => (
+              <Chip
+                key={mode}
+                icon="heart"
+                selected={isV3mode === mode}
+                mode="outlined"
+                onPress={() => setIsV3Mode(mode)}
+                style={styles.chip}
+              >
+                {mode}
+              </Chip>
+            ))}
           </>
         ) : (
           <>
@@ -175,8 +176,9 @@ const styles = StyleSheet.create({
   card: {
     margin: 4,
   },
-  isV3modeText: {
-    textAlign: 'center',
+  chip: {
+    margin: 4,
+    width: 100,
   },
   preference: {
     alignItems: 'center',

@@ -11,6 +11,7 @@ import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 import Caption from '../Typography/v2/Caption';
 import Title from '../Typography/v2/Title';
+import Text from '../Typography/Text';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -106,7 +107,17 @@ const CardTitle = ({
   right,
   rightStyle,
   style,
+  theme,
 }: Props) => {
+  const titleComponent = (props: any) =>
+    theme.isV3 ? <Text {...props} /> : <Title {...props} />;
+
+  const subtitleComponent = (props: any) =>
+    theme.isV3 ? <Text {...props} /> : <Caption {...props} />;
+
+  const TextComponent = React.memo(({ component, ...rest }: any) =>
+    React.createElement(component, rest)
+  );
   return (
     <View
       style={[
@@ -124,29 +135,31 @@ const CardTitle = ({
       ) : null}
 
       <View style={[styles.titles]}>
-        {title ? (
-          <Title
+        {title && (
+          <TextComponent
+            component={titleComponent}
             style={[
               styles.title,
               { marginBottom: subtitle ? 0 : 2 },
               titleStyle,
             ]}
             numberOfLines={titleNumberOfLines}
+            variant="bodyLarge"
           >
             {title}
-          </Title>
-        ) : null}
-
-        {subtitle ? (
-          <Caption
+          </TextComponent>
+        )}
+        {subtitle && (
+          <TextComponent
+            component={subtitleComponent}
             style={[styles.subtitle, subtitleStyle]}
             numberOfLines={subtitleNumberOfLines}
+            variant="bodyMedium"
           >
             {subtitle}
-          </Caption>
-        ) : null}
+          </TextComponent>
+        )}
       </View>
-
       <View style={rightStyle}>{right ? right({ size: 24 }) : null}</View>
     </View>
   );
