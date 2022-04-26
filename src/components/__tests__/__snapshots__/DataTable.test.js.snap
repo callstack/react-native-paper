@@ -968,6 +968,13 @@ exports[`renders data table pagination with options select 1`] = `
             "elevation": 0,
             "marginRight": 16,
             "minWidth": 64,
+            "shadowColor": "#000000",
+            "shadowOffset": Object {
+              "height": 0,
+              "width": 0,
+            },
+            "shadowOpacity": 0,
+            "shadowRadius": 0,
             "textAlign": "center",
           }
         }
