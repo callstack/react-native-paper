@@ -83,10 +83,10 @@ const ref = {
   },
 
   typeface: {
-    brandRegular: 'Roboto Regular',
+    brandRegular: 'sans-serif',
     weightRegular: '400' as Font['fontWeight'],
 
-    plainMedium: 'Roboto Medium',
+    plainMedium: 'sans-serif-medium',
     weightMedium: '500' as Font['fontWeight'],
   },
 
