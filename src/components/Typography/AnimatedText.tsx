@@ -5,6 +5,7 @@ import {
   I18nManager,
   StyleProp,
   StyleSheet,
+  Platform,
 } from 'react-native';
 import { withTheme } from '../../core/theming';
 import { Font, MD3TypescaleKey, Theme } from '../../types';
@@ -49,7 +50,7 @@ function AnimatedText({ style, theme, variant, ...rest }: Props) {
         return {
           ...acc,
           [key]: {
-            fontFamily: font,
+            ...(Platform.OS === 'android' && { fontFamily: font }),
             fontSize: size,
             fontWeight: weight,
             lineHeight: lineHeight,
