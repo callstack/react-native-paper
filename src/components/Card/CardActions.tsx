@@ -48,7 +48,7 @@ const CardActions = (props: Props) => {
       {React.Children.map(props.children, (child, i) => {
         return React.isValidElement(child)
           ? React.cloneElement(child, {
-              compact: child.props.compact !== false,
+              compact: !isV3 && child.props.compact !== false,
               mode: isV3 && (i === 0 ? 'outlined' : 'contained'),
               style: isV3 && styles.button,
             })
@@ -67,7 +67,6 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   button: {
-    paddingHorizontal: 24,
     marginLeft: 8,
   },
 });

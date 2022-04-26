@@ -165,13 +165,13 @@ const Card = ({
     const isPressTypeIn = pressType === 'in';
     if (dark && isAdaptiveMode) {
       Animated.timing(elevationDarkAdaptive, {
-        toValue: isPressTypeIn ? (isV3 ? 1 : 8) : cardElevation,
+        toValue: isPressTypeIn ? (isV3 ? 2 : 8) : cardElevation,
         duration: animationDuration,
         useNativeDriver: false,
       }).start();
     } else {
       Animated.timing(elevation, {
-        toValue: isPressTypeIn ? (isV3 ? 1 : 8) : cardElevation,
+        toValue: isPressTypeIn ? (isV3 ? 2 : 8) : cardElevation,
         duration: animationDuration,
         useNativeDriver: false,
       }).start();
