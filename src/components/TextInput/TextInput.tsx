@@ -207,8 +207,8 @@ const TextInput = React.forwardRef<TextInputHandles, TextInputProps>(
     }: TextInputProps,
     ref
   ) => {
-    const validInputValue =
-      rest.value !== undefined ? rest.value : rest.defaultValue;
+    const isControlled = rest.value !== undefined;
+    const validInputValue = isControlled ? rest.value : rest.defaultValue;
 
     const { current: labeled } = React.useRef<Animated.Value>(
       new Animated.Value(validInputValue ? 0 : 1)
@@ -220,9 +220,12 @@ const TextInput = React.forwardRef<TextInputHandles, TextInputProps>(
     const [placeholder, setPlaceholder] = React.useState<string | undefined>(
       ''
     );
-    const [value, setValue] = React.useState<string | undefined>(
-      validInputValue
-    );
+    const [uncontrolledValue, setUncontrolledValue] = React.useState<
+      string | undefined
+    >(validInputValue);
+    // Use value from props instead of local state when input is controlled
+    const value = isControlled ? rest.value : uncontrolledValue;
+
     const [labelLayout, setLabelLayout] = React.useState<{
       measured: boolean;
       width: number;
@@ -261,10 +264,6 @@ const TextInput = React.forwardRef<TextInputHandles, TextInputProps>(
       blur: () => root.current?.blur(),
       forceFocus: () => root.current?.focus(),
     }));
-
-    React.useLayoutEffect(() => {
-      if (typeof rest.value !== 'undefined') setValue(rest.value);
-    }, [rest.value]);
 
     React.useEffect(() => {
       // When the input has an error, we wiggle the label and apply error styles
@@ -376,7 +375,10 @@ const TextInput = React.forwardRef<TextInputHandles, TextInputProps>(
         return;
       }
 
-      setValue(value);
+      if (!isControlled) {
+        // Keep track of value in local state when input is not controlled
+        setUncontrolledValue(value);
+      }
       rest.onChangeText?.(value);
     };
 
