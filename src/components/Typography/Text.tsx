@@ -5,6 +5,7 @@ import {
   StyleProp,
   StyleSheet,
   I18nManager,
+  Platform,
 } from 'react-native';
 import { useTheme } from '../../core/theming';
 import { Font, MD3TypescaleKey, ThemeProp } from '../../types';
@@ -89,12 +90,13 @@ const Text: React.ForwardRefRenderFunction<{}, Props> = (
   if (theme.isV3 && variant) {
     const stylesByVariant = Object.keys(MD3TypescaleKey).reduce(
       (acc, key) => {
-        const { size, weight, lineHeight, tracking } =
+        const { size, weight, lineHeight, tracking, font } =
           theme.typescale[key as keyof typeof MD3TypescaleKey];
 
         return {
           ...acc,
           [key]: {
+            ...(Platform.OS === 'android' && { fontFamily: font }),
             fontSize: size,
             fontWeight: weight,
             lineHeight: lineHeight,
