@@ -204,11 +204,11 @@ const Chip = ({
     selectedBackgroundColor,
     backgroundColor,
   } = getChipColors({
+    isOutlined,
+    theme,
     selectedColor,
     showSelectedOverlay,
     customBackgroundColor,
-    theme,
-    isOutlined,
     disabled,
   });
 

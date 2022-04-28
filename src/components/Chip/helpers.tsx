@@ -4,18 +4,18 @@ import { black, white } from '../../styles/themes/v2/colors';
 import type { ColorValue } from 'react-native';
 
 export const getChipColors = ({
+  isOutlined,
+  theme,
   selectedColor,
   showSelectedOverlay,
   customBackgroundColor,
-  theme,
-  isOutlined,
   disabled,
 }: {
+  isOutlined: boolean;
+  theme: Theme;
   selectedColor?: string;
   showSelectedOverlay?: boolean;
   customBackgroundColor?: ColorValue;
-  theme: Theme;
-  isOutlined: boolean;
   disabled?: boolean;
 }) => {
   let borderColor;
@@ -27,6 +27,7 @@ export const getChipColors = ({
   let selectedBackgroundColor;
 
   const { isV3, dark } = theme;
+  const isSelectedColor = selectedColor !== undefined;
 
   if (isV3) {
     defaultBackgroundColor = isOutlined
@@ -55,19 +56,15 @@ export const getChipColors = ({
       textColor = iconColor = theme.colors.onSurfaceDisabled;
       backgroundColor = isOutlined ? 'transparent' : customDisabledColor;
     } else {
-      borderColor =
-        selectedColor !== undefined
-          ? color(selectedColor).alpha(0.29).rgb().string()
-          : theme.colors.outline;
-      textColor = iconColor =
-        selectedColor !== undefined
-          ? selectedColor
-          : isOutlined
-          ? theme.colors.onSurfaceVariant
-          : theme.colors.onSecondaryContainer;
-      underlayColor = color(
-        selectedColor !== undefined ? selectedColor : textColor
-      )
+      borderColor = isSelectedColor
+        ? color(selectedColor).alpha(0.29).rgb().string()
+        : theme.colors.outline;
+      textColor = iconColor = isSelectedColor
+        ? selectedColor
+        : isOutlined
+        ? theme.colors.onSurfaceVariant
+        : theme.colors.onSecondaryContainer;
+      underlayColor = color(isSelectedColor ? selectedColor : textColor)
         .alpha(0.12)
         .rgb()
         .string();
@@ -92,11 +89,7 @@ export const getChipColors = ({
       .rgb()
       .string();
     borderColor = isOutlined
-      ? color(
-          selectedColor !== undefined
-            ? selectedColor
-            : color(dark ? white : black)
-        )
+      ? color(isSelectedColor ? selectedColor : color(dark ? white : black))
           .alpha(0.29)
           .rgb()
           .string()
@@ -105,8 +98,9 @@ export const getChipColors = ({
       textColor = theme.colors.disabled;
       iconColor = theme.colors.disabled;
     } else {
-      const customTextColor =
-        selectedColor !== undefined ? selectedColor : theme.colors.text;
+      const customTextColor = isSelectedColor
+        ? selectedColor
+        : theme.colors.text;
       textColor = color(customTextColor).alpha(0.87).rgb().string();
       iconColor = color(customTextColor).alpha(0.54).rgb().string();
       underlayColor = selectedColor

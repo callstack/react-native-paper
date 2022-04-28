@@ -1,13 +1,20 @@
 import * as React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
-import { Chip, List, useTheme, Snackbar } from 'react-native-paper';
+import {
+  Chip,
+  List,
+  useTheme,
+  Snackbar,
+  MD3Colors,
+  MD2Colors,
+} from 'react-native-paper';
 import color from 'color';
 import ScreenWrapper from '../ScreenWrapper';
 
 const ChipExample = () => {
   const [visible, setVisible] = React.useState<boolean>(false);
-  const theme = useTheme();
-  const customColor = theme.isV3 ? theme.colors.error : theme.colors.primary;
+  const { isV3 } = useTheme();
+  const customColor = isV3 ? MD3Colors.secondary20 : MD2Colors.purple900;
 
   return (
     <>
@@ -17,20 +24,23 @@ const ChipExample = () => {
             <Chip selected onPress={() => {}} style={styles.chip}>
               Simple
             </Chip>
-            {theme.isV3 && (
-              <Chip
-                selected
-                showSelectedOverlay
-                onPress={() => {}}
-                style={styles.chip}
-              >
-                With selected overlay
-              </Chip>
-            )}
-            {theme.isV3 && (
-              <Chip elevated onPress={() => {}} style={styles.chip}>
-                Elevated
-              </Chip>
+            {isV3 && (
+              <>
+                <Chip
+                  selected
+                  showSelectedOverlay
+                  onPress={() => {}}
+                  style={styles.chip}
+                >
+                  With selected overlay
+                </Chip>
+                <Chip elevated onPress={() => {}} style={styles.chip}>
+                  Elevated
+                </Chip>
+                <Chip compact style={styles.chip} onPress={() => {}}>
+                  Compact chip
+                </Chip>
+              </>
             )}
             <Chip
               onPress={() => {}}
@@ -80,11 +90,6 @@ const ChipExample = () => {
             >
               Avatar (disabled)
             </Chip>
-            {theme.isV3 && (
-              <Chip compact style={styles.chip} onPress={() => {}}>
-                Compact chip
-              </Chip>
-            )}
           </View>
         </List.Section>
         <List.Section title="Outlined chip">
@@ -92,26 +97,34 @@ const ChipExample = () => {
             <Chip mode="outlined" onPress={() => {}} style={styles.chip}>
               Simple
             </Chip>
-            {theme.isV3 && (
-              <Chip
-                mode="outlined"
-                selected
-                showSelectedOverlay
-                onPress={() => {}}
-                style={styles.chip}
-              >
-                With selected overlay
-              </Chip>
-            )}
-            {theme.isV3 && (
-              <Chip
-                mode="outlined"
-                elevated
-                onPress={() => {}}
-                style={styles.chip}
-              >
-                Elevated
-              </Chip>
+            {isV3 && (
+              <>
+                <Chip
+                  mode="outlined"
+                  selected
+                  showSelectedOverlay
+                  onPress={() => {}}
+                  style={styles.chip}
+                >
+                  With selected overlay
+                </Chip>
+                <Chip
+                  mode="outlined"
+                  elevated
+                  onPress={() => {}}
+                  style={styles.chip}
+                >
+                  Elevated
+                </Chip>
+                <Chip
+                  mode="outlined"
+                  compact
+                  onPress={() => {}}
+                  style={styles.chip}
+                >
+                  Compact chip
+                </Chip>
+              </>
             )}
             <Chip
               mode="outlined"
@@ -170,21 +183,11 @@ const ChipExample = () => {
             >
               Avatar (disabled)
             </Chip>
-            {theme.isV3 && (
-              <Chip
-                mode="outlined"
-                compact
-                onPress={() => {}}
-                style={styles.chip}
-              >
-                Compact chip
-              </Chip>
-            )}
           </View>
         </List.Section>
         <List.Section title="Custom chip">
           <View style={styles.row}>
-            {theme.isV3 && (
+            {isV3 && (
               <>
                 <Chip
                   mode="outlined"
