@@ -72,13 +72,12 @@ const TextInputFlat = ({
   ...rest
 }: ChildTextInputProps) => {
   const isAndroid = Platform.OS === 'android';
-  const { colors, fonts } = theme;
+  const { colors, fonts, isV3, roundness } = theme;
   const font = fonts.regular;
   const hasActiveOutline = parentState.focused || error;
 
-  const { LABEL_PADDING_TOP, FLAT_INPUT_OFFSET, MIN_HEIGHT } = getConstants(
-    theme.isV3
-  );
+  const { LABEL_PADDING_TOP, FLAT_INPUT_OFFSET, MIN_HEIGHT } =
+    getConstants(isV3);
 
   const {
     fontSize: fontSizeStyle,
@@ -100,7 +99,7 @@ const TextInputFlat = ({
 
   let { paddingLeft, paddingRight } = calculateFlatInputHorizontalPadding({
     adornmentConfig,
-    isV3: theme.isV3,
+    isV3,
   });
 
   if (isPaddingHorizontalPassed) {
@@ -126,7 +125,7 @@ const TextInputFlat = ({
       paddingHorizontal,
       inputOffset: FLAT_INPUT_OFFSET,
       mode: InputMode.Flat,
-      isV3: theme.isV3,
+      isV3,
     });
 
   const {
@@ -257,7 +256,7 @@ const TextInputFlat = ({
     activeColor,
     placeholderColor,
     errorColor,
-    roundness: theme.roundness,
+    roundness,
   };
   const affixTopPosition = {
     [AdornmentSide.Left]: leftAffixTopPosition,

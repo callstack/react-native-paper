@@ -71,14 +71,13 @@ const InputLabel = (props: InputLabelProps) => {
     ],
   };
 
-  let textColor;
+  let textColor = placeholderColor;
 
   if (error && errorColor) {
     textColor = errorColor;
-  } else if (isV3 && parentState.value && mode !== 'outlined') {
+  }
+  if (isV3 && parentState.value && mode !== 'outlined') {
     textColor = activeColor;
-  } else {
-    textColor = placeholderColor;
   }
 
   return label ? (

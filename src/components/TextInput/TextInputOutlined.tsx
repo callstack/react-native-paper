@@ -40,7 +40,6 @@ import {
   getConstants,
 } from './helpers';
 import { AdornmentType, AdornmentSide } from './Adornment/enums';
-import type { Theme } from '../../types';
 
 const TextInputOutlined = ({
   disabled = false,
@@ -72,12 +71,12 @@ const TextInputOutlined = ({
 }: ChildTextInputProps) => {
   const adornmentConfig = getAdornmentConfig({ left, right });
 
-  const { colors, fonts } = theme;
+  const { colors, fonts, isV3, roundness } = theme;
   const font = fonts.regular;
   const hasActiveOutline = parentState.focused || error;
 
   const { INPUT_PADDING_HORIZONTAL, MIN_HEIGHT, ADORNMENT_OFFSET } =
-    getConstants(theme.isV3);
+    getConstants(isV3);
 
   const {
     fontSize: fontSizeStyle,
@@ -126,7 +125,7 @@ const TextInputOutlined = ({
   if (isAdornmentLeftIcon) {
     labelTranslationXOffset =
       (I18nManager.isRTL ? -1 : 1) *
-      (ADORNMENT_SIZE + ADORNMENT_OFFSET - (theme.isV3 ? 0 : 8));
+      (ADORNMENT_SIZE + ADORNMENT_OFFSET - (isV3 ? 0 : 8));
   }
 
   const minInputHeight =
@@ -201,7 +200,7 @@ const TextInputOutlined = ({
     backgroundColor: backgroundColor as ColorValue,
     errorColor,
     labelTranslationXOffset,
-    roundness: theme.roundness,
+    roundness,
   };
 
   const minHeight = (height ||
@@ -240,7 +239,7 @@ const TextInputOutlined = ({
       rightAffixWidth,
       leftAffixWidth,
       mode: 'outlined',
-      isV3: theme.isV3,
+      isV3,
     });
   const affixTopPosition = {
     [AdornmentSide.Left]: leftAffixTopPosition,
@@ -279,7 +278,8 @@ const TextInputOutlined = ({
           Otherwise the border will cut off the label on Android
           */}
       <Outline
-        theme={theme}
+        isV3={isV3}
+        roundness={roundness}
         hasActiveOutline={hasActiveOutline}
         focused={parentState.focused}
         activeColor={activeColor}
@@ -351,21 +351,23 @@ const TextInputOutlined = ({
 export default TextInputOutlined;
 
 type OutlineProps = {
+  isV3: boolean;
   activeColor: string;
+  backgroundColor: ColorValue;
   hasActiveOutline?: boolean;
   focused?: boolean;
   outlineColor?: string;
-  backgroundColor: ColorValue;
-  theme: Theme;
+  roundness?: number;
 };
 
 const Outline = ({
-  theme,
-  hasActiveOutline,
+  isV3,
   activeColor,
-  outlineColor,
-  focused,
   backgroundColor,
+  hasActiveOutline,
+  focused,
+  outlineColor,
+  roundness,
 }: OutlineProps) => (
   <View
     testID="text-input-outline"
@@ -375,8 +377,8 @@ const Outline = ({
       // eslint-disable-next-line react-native/no-inline-styles
       {
         backgroundColor,
-        borderRadius: theme.roundness,
-        borderWidth: (theme.isV3 ? hasActiveOutline : focused) ? 2 : 1,
+        borderRadius: roundness,
+        borderWidth: (isV3 ? hasActiveOutline : focused) ? 2 : 1,
         borderColor: hasActiveOutline ? activeColor : outlineColor,
       },
     ]}
