@@ -7,7 +7,7 @@ import {
   RadioButton,
   TouchableRipple,
 } from 'react-native-paper';
-import { TextComponent } from './utils';
+import { TextComponent } from './DialogTextComponent';
 
 type Props = {
   visible: boolean;

@@ -10,10 +10,10 @@ import {
 import type { MD3TypescaleKey } from '../../../../src/types';
 
 type Props = React.ComponentProps<typeof NativeText> & {
+  isSubheading?: boolean;
+  children: React.ReactNode;
   style?: StyleProp<TextStyle>;
   variant?: keyof typeof MD3TypescaleKey;
-  children: React.ReactNode;
-  isSubheading?: boolean;
 };
 
 export const TextComponent = ({ isSubheading = false, ...props }: Props) => {

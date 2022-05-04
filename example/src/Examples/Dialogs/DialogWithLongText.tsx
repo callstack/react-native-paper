@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Dimensions, ScrollView, StyleSheet } from 'react-native';
 import { Button, Portal, Dialog } from 'react-native-paper';
-import { TextComponent } from './utils';
+import { TextComponent } from './DialogTextComponent';
 
 const DialogWithLongText = ({
   visible,

@@ -7,7 +7,7 @@ import {
   useTheme,
   MD3Colors,
 } from 'react-native-paper';
-import { TextComponent } from './utils';
+import { TextComponent } from './DialogTextComponent';
 
 const isIOS = Platform.OS === 'ios';
 
@@ -18,7 +18,7 @@ const DialogWithLoadingIndicator = ({
   visible: boolean;
   close: () => void;
 }) => {
-  const theme = useTheme();
+  const { isV3 } = useTheme();
   return (
     <Portal>
       <Dialog onDismiss={close} visible={visible}>
@@ -26,7 +26,7 @@ const DialogWithLoadingIndicator = ({
         <Dialog.Content>
           <View style={styles.flexing}>
             <ActivityIndicator
-              color={theme.isV3 ? MD3Colors.tertiary30 : MD2Colors.indigo500}
+              color={isV3 ? MD3Colors.tertiary30 : MD2Colors.indigo500}
               size={isIOS ? 'large' : 48}
               style={styles.marginRight}
             />
