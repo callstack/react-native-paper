@@ -75,7 +75,7 @@ const DrawerItem = ({
   right,
   ...rest
 }: Props) => {
-  const { roundness, isV3 } = theme;
+  const { roundness, fonts, isV3 } = theme;
 
   const backgroundColor = active
     ? isV3
@@ -90,8 +90,14 @@ const DrawerItem = ({
     ? theme.colors.onSurfaceVariant
     : color(theme.colors.text).alpha(0.68).rgb().string();
 
-  const font = theme.fonts.medium;
   const labelMargin = icon ? (isV3 ? 12 : 32) : 0;
+  const borderRadius = (isV3 ? 7 : 1) * roundness;
+  const underlayColor = isV3
+    ? color(backgroundColor)
+        .mix(color(theme.colors.onSecondaryContainer), 0.16)
+        .rgb()
+        .toString()
+    : undefined;
 
   return (
     <View {...rest}>
@@ -101,7 +107,7 @@ const DrawerItem = ({
         onPress={onPress}
         style={[
           styles.container,
-          { backgroundColor, borderRadius: isV3 ? 28 : roundness },
+          { backgroundColor, borderRadius },
           isV3 && styles.v3Container,
           style,
         ]}
@@ -111,6 +117,7 @@ const DrawerItem = ({
         accessibilityRole="button"
         accessibilityState={{ selected: active }}
         accessibilityLabel={accessibilityLabel}
+        underlayColor={underlayColor}
       >
         <View style={[styles.wrapper, isV3 && styles.v3Wrapper]}>
           <View style={styles.content}>
@@ -125,8 +132,10 @@ const DrawerItem = ({
                 styles.label,
                 {
                   color: contentColor,
-                  ...font,
                   marginLeft: labelMargin,
+                },
+                !isV3 && {
+                  ...fonts.medium,
                 },
               ]}
             >

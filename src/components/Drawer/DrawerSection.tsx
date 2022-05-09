@@ -64,8 +64,7 @@ const DrawerSection = ({ children, title, theme, style, ...rest }: Props) => {
   const titleColor = isV3
     ? theme.colors.onSurfaceVariant
     : color(theme.colors.text).alpha(0.54).rgb().string();
-  const font = fonts.medium;
-
+  const titleMargin = isV3 ? 28 : 16;
   return (
     <View style={[styles.container, style]} {...rest}>
       {title && (
@@ -75,9 +74,8 @@ const DrawerSection = ({ children, title, theme, style, ...rest }: Props) => {
               variant="titleSmall"
               numberOfLines={1}
               style={[
-                { color: titleColor, ...font },
-                styles.title,
-                isV3 && styles.v3Title,
+                { color: titleColor, marginLeft: titleMargin },
+                !isV3 && { ...fonts.medium },
               ]}
             >
               {title}
@@ -106,12 +104,6 @@ const styles = StyleSheet.create({
   },
   v3TitleContainer: {
     height: 56,
-  },
-  title: {
-    marginLeft: 16,
-  },
-  v3Title: {
-    marginLeft: 28,
   },
   divider: {
     marginTop: 4,
