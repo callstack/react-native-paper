@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
   View,
   ViewStyle,
+  TextStyle,
 } from 'react-native';
 import color from 'color';
 import FAB from './FAB';
@@ -25,7 +26,8 @@ type Props = {
    * - `color`: custom icon color of the action item
    * - `labelTextColor`: custom label text color of the action item
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
-   * - `labelStyle`: pass additional styles for the fab item label, for example, `backgroundColor`
+   * - `labelStyle`: pass additional styles for the fab item label card, for example, `backgroundColor`
+   * - `labelStyleText`: pass additional styles for the fab item label text, for example, `fontSize`
    * - `small`: boolean describing whether small or normal sized FAB is rendered. Defaults to `true`
    * - `onPress`: callback that is called when `FAB` is pressed (required)
    */
@@ -37,6 +39,7 @@ type Props = {
     accessibilityLabel?: string;
     style?: StyleProp<ViewStyle>;
     labelStyle?: StyleProp<ViewStyle>;
+    labelStyleText?: StyleProp<TextStyle>;
     small?: boolean;
     onPress: () => void;
     testID?: string;
@@ -313,7 +316,12 @@ const FABGroup = ({
                     accessibilityComponentType="button"
                     accessibilityRole="button"
                   >
-                    <Text style={{ color: it.labelTextColor ?? labelColor }}>
+                    <Text
+                      style={[
+                        { color: it.labelTextColor ?? labelColor },
+                        it.labelStyleText,
+                      ]}
+                    >
                       {it.label}
                     </Text>
                   </Card>
