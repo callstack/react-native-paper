@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { StyleSheet, Platform, StyleProp, ViewStyle } from 'react-native';
-import color from 'color';
 import Modal from '../Modal';
 import DialogContent from './DialogContent';
 import DialogActions from './DialogActions';
@@ -94,15 +93,13 @@ const Dialog = ({
 
   const borderRadius = (isV3 ? 7 : 1) * roundness;
 
-  const backgroundColorV3 = color(theme.colors.surface)
-    .mix(color(theme.colors.primary), 0.11)
-    .rgb()
-    .string();
   const backgroundColorV2 =
     dark && mode === 'adaptive'
       ? overlay(DIALOG_ELEVATION, colors?.surface)
       : colors?.surface;
-  const backgroundColor = isV3 ? backgroundColorV3 : backgroundColorV2;
+  const backgroundColor = isV3
+    ? theme.colors.elevation.level3
+    : backgroundColorV2;
 
   return (
     <Modal
