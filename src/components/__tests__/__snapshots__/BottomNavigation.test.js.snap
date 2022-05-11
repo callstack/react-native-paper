@@ -104,6 +104,8 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             Object {
               "marginBottom": 0,
               "marginHorizontal": 0,
+            },
+            Object {
               "maxWidth": 504,
             },
           ]
@@ -126,14 +128,18 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -223,10 +229,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -282,14 +288,18 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -379,10 +389,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -438,14 +448,18 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -535,10 +549,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -687,6 +701,8 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             Object {
               "marginBottom": 0,
               "marginHorizontal": 0,
+            },
+            Object {
               "maxWidth": 504,
             },
           ]
@@ -729,14 +745,18 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -826,10 +846,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -885,14 +905,18 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -982,10 +1006,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -1041,14 +1065,18 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -1138,10 +1166,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -1290,6 +1318,8 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
             Object {
               "marginBottom": 0,
               "marginHorizontal": 0,
+            },
+            Object {
               "maxWidth": 504,
             },
           ]
@@ -1312,14 +1342,18 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -1352,9 +1386,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               >
                 <icon
                   color="#ffffff"
-                >
-                  magnify
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -1371,9 +1403,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               >
                 <icon
                   color="rgba(255, 255, 255, 0.5)"
-                >
-                  magnify
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -1381,10 +1411,10 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -1478,14 +1508,18 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -1518,9 +1552,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               >
                 <icon
                   color="#ffffff"
-                >
-                  camera
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -1537,9 +1569,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               >
                 <icon
                   color="rgba(255, 255, 255, 0.5)"
-                >
-                  camera
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -1547,10 +1577,10 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -1644,14 +1674,18 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -1684,9 +1718,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               >
                 <icon
                   color="#ffffff"
-                >
-                  inbox
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -1703,9 +1735,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               >
                 <icon
                   color="rgba(255, 255, 255, 0.5)"
-                >
-                  inbox
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -1713,10 +1743,10 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -1903,6 +1933,8 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             Object {
               "marginBottom": 0,
               "marginHorizontal": 0,
+            },
+            Object {
               "maxWidth": 480,
             },
           ]
@@ -1945,14 +1977,18 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -1985,9 +2021,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               >
                 <icon
                   color="#ffffff"
-                >
-                  magnify
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -2004,9 +2038,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               >
                 <icon
                   color="rgba(255, 255, 255, 0.5)"
-                >
-                  magnify
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -2014,10 +2046,10 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -2095,14 +2127,18 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -2135,9 +2171,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               >
                 <icon
                   color="#ffffff"
-                >
-                  camera
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -2154,9 +2188,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               >
                 <icon
                   color="rgba(255, 255, 255, 0.5)"
-                >
-                  camera
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -2164,10 +2196,10 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -2245,14 +2277,18 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -2285,9 +2321,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               >
                 <icon
                   color="#ffffff"
-                >
-                  inbox
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -2304,9 +2338,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               >
                 <icon
                   color="rgba(255, 255, 255, 0.5)"
-                >
-                  inbox
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -2314,10 +2346,10 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -2395,14 +2427,18 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -2435,9 +2471,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               >
                 <icon
                   color="#ffffff"
-                >
-                  heart
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -2454,9 +2488,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               >
                 <icon
                   color="rgba(255, 255, 255, 0.5)"
-                >
-                  heart
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -2464,10 +2496,10 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -2545,14 +2577,18 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -2585,9 +2621,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               >
                 <icon
                   color="#ffffff"
-                >
-                  shopping-music
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -2604,9 +2638,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               >
                 <icon
                   color="rgba(255, 255, 255, 0.5)"
-                >
-                  shopping-music
-                </icon>
+                />
               </View>
               <View
                 style={
@@ -2614,10 +2646,10 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -2789,6 +2821,8 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             Object {
               "marginBottom": 0,
               "marginHorizontal": 0,
+            },
+            Object {
               "maxWidth": 504,
             },
           ]
@@ -2811,14 +2845,18 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -2908,10 +2946,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -3056,14 +3094,18 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -3153,10 +3195,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -3301,14 +3343,18 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -3398,10 +3444,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -3640,6 +3686,8 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             Object {
               "marginBottom": 0,
               "marginHorizontal": 0,
+            },
+            Object {
               "maxWidth": 504,
             },
           ]
@@ -3682,14 +3730,18 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -3779,10 +3831,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -3885,14 +3937,18 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -3982,10 +4038,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -4088,14 +4144,18 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -4185,10 +4245,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -4384,6 +4444,8 @@ exports[`renders non-shifting bottom navigation 1`] = `
             Object {
               "marginBottom": 0,
               "marginHorizontal": 0,
+            },
+            Object {
               "maxWidth": 504,
             },
           ]
@@ -4406,14 +4468,18 @@ exports[`renders non-shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -4503,10 +4569,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -4651,14 +4717,18 @@ exports[`renders non-shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -4748,10 +4818,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -4896,14 +4966,18 @@ exports[`renders non-shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -4993,10 +5067,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -5234,6 +5308,8 @@ exports[`renders shifting bottom navigation 1`] = `
             Object {
               "marginBottom": 0,
               "marginHorizontal": 0,
+            },
+            Object {
               "maxWidth": 480,
             },
           ]
@@ -5276,14 +5352,18 @@ exports[`renders shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -5373,10 +5453,10 @@ exports[`renders shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -5479,14 +5559,18 @@ exports[`renders shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -5576,10 +5660,10 @@ exports[`renders shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -5682,14 +5766,18 @@ exports[`renders shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -5779,10 +5867,10 @@ exports[`renders shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -5885,14 +5973,18 @@ exports[`renders shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -5982,10 +6074,10 @@ exports[`renders shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }
@@ -6088,14 +6180,18 @@ exports[`renders shifting bottom navigation 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
-              "flex": 1,
-              "paddingVertical": 6,
-            }
+            Array [
+              Object {
+                "flex": 1,
+                "paddingVertical": 6,
+              },
+              false,
+            ]
           }
         >
           <View
             pointerEvents="none"
+            style={false}
           >
             <View
               style={
@@ -6185,10 +6281,10 @@ exports[`renders shifting bottom navigation 1`] = `
                     Object {
                       "left": 0,
                       "position": "absolute",
-                      "top": -2,
                     },
                     Object {
                       "right": -2,
+                      "top": -2,
                     },
                   ]
                 }

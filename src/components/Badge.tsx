@@ -93,9 +93,13 @@ const Badge = ({
     ...restStyle
   } = (StyleSheet.flatten(style) || {}) as TextStyle;
 
-  const textColor = getContrastingColor(backgroundColor || white, white, black);
+  const textColor = theme.isV3
+    ? theme.colors.onError
+    : getContrastingColor(backgroundColor, white, black);
 
   const borderRadius = size / 2;
+
+  const paddingHorizontal = theme.isV3 ? 3 : 4;
 
   return (
     <Animated.Text
@@ -111,6 +115,7 @@ const Badge = ({
           height: size,
           minWidth: size,
           borderRadius,
+          paddingHorizontal,
         },
         styles.container,
         restStyle,
@@ -129,7 +134,6 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     textAlign: 'center',
     textAlignVertical: 'center',
-    paddingHorizontal: 4,
     overflow: 'hidden',
   },
 });

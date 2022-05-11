@@ -32,7 +32,7 @@ const createState = (index, length) => ({
   index,
   routes: Array.from({ length }, (_, i) => ({
     key: `key-${i}`,
-    icon: icons[i],
+    focusedIcon: icons[i],
     title: `Route: ${i}`,
   })),
 });
