@@ -19,25 +19,26 @@ export const getAppbarColor = (
 ) => {
   const { isV3, dark: isDarkTheme, mode, colors } = theme;
   const isAdaptiveMode = mode === 'adaptive';
-  let backgroundColor;
   if (customBackground) {
-    backgroundColor = customBackground;
-  } else if (isV3) {
-    if (elevated) {
-      backgroundColor = color(colors.surface)
-        .mix(color(colors.primary), 0.08)
-        .rgb()
-        .string();
-    } else {
-      backgroundColor = colors.surface;
-    }
-  } else if (!isV3) {
-    if (isDarkTheme && isAdaptiveMode) {
-      backgroundColor = overlay(elevation, colors?.surface);
-    } else backgroundColor = colors.primary;
+    return customBackground;
   }
 
-  return backgroundColor;
+  if (!isV3) {
+    if (isDarkTheme && isAdaptiveMode) {
+      return overlay(elevation, colors?.surface);
+    }
+
+    return colors.primary;
+  }
+
+  if (elevated) {
+    return color(colors.surface)
+      .mix(color(colors.primary), 0.08)
+      .rgb()
+      .string();
+  }
+
+  return colors.surface;
 };
 
 type RenderAppbarContentProps = {
