@@ -16,6 +16,7 @@ import { withTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
 
 import type { $RemoveChildren, Theme } from '../../types';
+import { modeTextVariant } from './utils';
 
 type Props = $RemoveChildren<typeof View> & {
   /**
@@ -35,10 +36,12 @@ type Props = $RemoveChildren<typeof View> & {
    */
   titleRef?: React.RefObject<Text>;
   /**
+   * @deprecated Deprecated in v3.x
    * Text for the subtitle.
    */
   subtitle?: React.ReactNode;
   /**
+   * @deprecated Deprecated in v3.x
    * Style for the subtitle.
    */
   subtitleStyle?: StyleProp<TextStyle>;
@@ -46,6 +49,10 @@ type Props = $RemoveChildren<typeof View> & {
    * Function to execute on press.
    */
   onPress?: () => void;
+  /**
+   * @internal
+   */
+  mode?: 'small' | 'medium' | 'large' | 'center-aligned';
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -69,7 +76,7 @@ type Props = $RemoveChildren<typeof View> & {
  *
  * const MyComponent = () => (
  *     <Appbar.Header>
- *        <Appbar.Content title="Title" subtitle={'Subtitle'} />
+ *        <Appbar.Content title="Title" />
  *     </Appbar.Header>
  * );
  *
@@ -77,7 +84,7 @@ type Props = $RemoveChildren<typeof View> & {
  * ```
  */
 const AppbarContent = ({
-  color: titleColor = white,
+  color: titleColor,
   subtitle,
   subtitleStyle,
   onPress,
@@ -86,23 +93,43 @@ const AppbarContent = ({
   titleStyle,
   theme,
   title,
+  mode = 'small',
   ...rest
 }: Props) => {
-  const { fonts } = theme;
+  const { fonts, isV3, colors } = theme;
 
   const subtitleColor = color(titleColor).alpha(0.7).rgb().string();
 
+  const titleTextColor = titleColor
+    ? titleColor
+    : isV3
+    ? colors.onSurface
+    : white;
+
+  const modeContainerStyles = {
+    small: styles.v3DefaultContainer,
+    medium: styles.v3MediumContainer,
+    large: styles.v3LargeContainer,
+    'center-aligned': styles.v3DefaultContainer,
+  };
+
   return (
     <TouchableWithoutFeedback onPress={onPress} disabled={!onPress}>
-      <View style={[styles.container, style]} {...rest}>
+      <View
+        pointerEvents="box-none"
+        style={[styles.container, isV3 && modeContainerStyles[mode], style]}
+        {...rest}
+      >
         <Text
+          {...(isV3 && { variant: modeTextVariant[mode] })}
           ref={titleRef}
           style={[
             {
-              color: titleColor,
-              ...(Platform.OS === 'ios' ? fonts.regular : fonts.medium),
+              color: titleTextColor,
+              ...(!isV3 &&
+                (Platform.OS === 'ios' ? fonts.regular : fonts.medium)),
             },
-            styles.title,
+            !isV3 && styles.title,
             titleStyle,
           ]}
           numberOfLines={1}
@@ -113,7 +140,7 @@ const AppbarContent = ({
         >
           {title}
         </Text>
-        {subtitle ? (
+        {!isV3 && subtitle ? (
           <Text
             style={[styles.subtitle, { color: subtitleColor }, subtitleStyle]}
             numberOfLines={1}
@@ -132,6 +159,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 12,
+  },
+  v3DefaultContainer: {
+    paddingHorizontal: 0,
+  },
+  v3MediumContainer: {
+    paddingHorizontal: 0,
+    justifyContent: 'flex-end',
+    paddingBottom: 24,
+  },
+  v3LargeContainer: {
+    paddingHorizontal: 0,
+    paddingTop: 36,
+    justifyContent: 'flex-end',
+    paddingBottom: 28,
   },
   title: {
     fontSize: Platform.OS === 'ios' ? 17 : 20,
