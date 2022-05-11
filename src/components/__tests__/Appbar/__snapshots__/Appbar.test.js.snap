@@ -367,12 +367,14 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    pointerEvents="box-none"
     style={
       Array [
         Object {
           "flex": 1,
           "paddingHorizontal": 12,
         },
+        false,
         Array [
           Object {
             "marginLeft": 8,

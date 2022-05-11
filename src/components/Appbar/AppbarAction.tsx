@@ -8,6 +8,7 @@ import type {
 import { black } from '../../styles/themes/v2/colors';
 import IconButton from '../IconButton';
 import type { IconSource } from '../Icon';
+import { useTheme } from '../../core/theming';
 
 type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
   /**
@@ -34,6 +35,12 @@ type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
    * Function to execute on press.
    */
   onPress?: () => void;
+  /**
+   * @supported Available in v3.x with theme version 3
+   *
+   * Whether it's the leading button.
+   */
+  isLeading?: boolean;
   style?: StyleProp<ViewStyle>;
   ref?: React.RefObject<TouchableWithoutFeedback>;
 };
@@ -75,24 +82,37 @@ type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
  */
 const AppbarAction = ({
   size = 24,
-  color: iconColor = color(black).alpha(0.54).rgb().string(),
+  color: iconColor,
   icon,
   disabled,
   onPress,
   accessibilityLabel,
+  isLeading,
   ...rest
-}: Props) => (
-  <IconButton
-    size={size}
-    onPress={onPress}
-    color={iconColor}
-    icon={icon}
-    disabled={disabled}
-    accessibilityLabel={accessibilityLabel}
-    animated
-    {...rest}
-  />
-);
+}: Props) => {
+  const theme = useTheme();
+
+  const actionIconColor = iconColor
+    ? iconColor
+    : theme.isV3
+    ? isLeading
+      ? theme.colors.onSurface
+      : theme.colors.onSurfaceVariant
+    : color(black).alpha(0.54).rgb().string();
+
+  return (
+    <IconButton
+      size={size}
+      onPress={onPress}
+      color={actionIconColor}
+      icon={icon}
+      disabled={disabled}
+      accessibilityLabel={accessibilityLabel}
+      animated
+      {...rest}
+    />
+  );
+};
 
 AppbarAction.displayName = 'Appbar.Action';
 

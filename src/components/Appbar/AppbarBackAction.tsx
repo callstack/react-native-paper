@@ -68,6 +68,7 @@ const AppbarBackAction = ({ accessibilityLabel = 'Back', ...rest }: Props) => (
     accessibilityLabel={accessibilityLabel}
     {...rest}
     icon={AppbarBackIcon}
+    isLeading
   />
 );
 
