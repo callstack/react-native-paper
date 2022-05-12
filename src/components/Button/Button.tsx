@@ -16,7 +16,7 @@ import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
-import { buttonMode, getButtonColors } from './helpers';
+import { ButtonMode, getButtonColors } from './utils';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
@@ -29,7 +29,9 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   mode?: 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal';
   /**
-   * Whether the color is a dark color. A dark button will render light text and vice-versa. Only applicable for `contained` mode.
+   * Whether the color is a dark color. A dark button will render light text and vice-versa. Only applicable for:
+   *  * `contained` mode for theme version 2
+   *  * `contained`, `contained-tonal` and `elevated` modes for theme version 3.
    */
   dark?: boolean;
   /**
@@ -37,9 +39,20 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   compact?: boolean;
   /**
+   * @deprecated Deprecated in v3.x - use `buttonColor` or `textColor` instead.
    * Custom text color for flat button, or background color for contained button.
    */
   color?: string;
+  /**
+   * @supported Available in v3.x
+   * Custom button's background color.
+   */
+  buttonColor?: string;
+  /**
+   * @supported Available in v3.x
+   * Custom button's text color.
+   */
+  textColor?: string;
   /**
    * Whether to show a loading indicator.
    */
@@ -135,7 +148,8 @@ const Button = ({
   dark,
   loading,
   icon,
-  color: buttonColor,
+  buttonColor: customButtonColor,
+  textColor: customTextColor,
   children,
   accessibilityLabel,
   accessibilityHint,
@@ -151,7 +165,7 @@ const Button = ({
   ...rest
 }: Props) => {
   const isMode = React.useCallback(
-    (modeToCompare: buttonMode) => {
+    (modeToCompare: ButtonMode) => {
       return mode === modeToCompare;
     },
     [mode]
@@ -197,7 +211,8 @@ const Button = ({
 
   const { backgroundColor, borderColor, textColor, borderWidth } =
     getButtonColors({
-      buttonColor,
+      customButtonColor,
+      customTextColor,
       theme,
       mode,
       disabled,

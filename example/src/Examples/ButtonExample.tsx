@@ -15,7 +15,7 @@ const ButtonExample = () => {
           <Button onPress={() => {}} style={styles.button}>
             Default
           </Button>
-          <Button color={color} onPress={() => {}} style={styles.button}>
+          <Button textColor={color} onPress={() => {}} style={styles.button}>
             Custom
           </Button>
           <Button disabled onPress={() => {}} style={styles.button}>
@@ -49,7 +49,7 @@ const ButtonExample = () => {
             </Button>
             <Button
               mode="contained-tonal"
-              color={color}
+              buttonColor={color}
               onPress={() => {}}
               style={styles.button}
             >
@@ -98,7 +98,7 @@ const ButtonExample = () => {
           </Button>
           <Button
             mode="outlined"
-            color={color}
+            textColor={color}
             onPress={() => {}}
             style={styles.button}
           >
@@ -146,7 +146,7 @@ const ButtonExample = () => {
           </Button>
           <Button
             mode="contained"
-            color={color}
+            buttonColor={color}
             onPress={() => {}}
             style={styles.button}
           >
@@ -195,7 +195,7 @@ const ButtonExample = () => {
             </Button>
             <Button
               mode="elevated"
-              color={color}
+              buttonColor={color}
               onPress={() => {}}
               style={styles.button}
             >

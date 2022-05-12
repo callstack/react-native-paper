@@ -238,7 +238,7 @@ const Banner = ({
                 compact
                 mode="text"
                 style={styles.button}
-                color={theme.colors?.primary}
+                textColor={theme.colors?.primary}
                 {...others}
               >
                 {label}
