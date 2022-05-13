@@ -185,7 +185,10 @@ const Snackbar = ({
     ...actionProps
   } = action || {};
 
-  const spacing = action ? 0 : 16;
+  const marginRight = action ? 0 : 16;
+  const textColor = theme.isV3
+    ? theme.colors.inversePrimary
+    : theme.colors?.accent;
 
   return (
     <SafeAreaView
@@ -220,12 +223,7 @@ const Snackbar = ({
         {...(isV3 && { elevation })}
         {...rest}
       >
-        <Text
-          style={[
-            styles.content,
-            { marginRight: spacing, color: colors?.surface },
-          ]}
-        >
+        <Text style={[styles.content, { marginRight, color: colors?.surface }]}>
           {children}
         </Text>
         {action ? (
@@ -235,9 +233,7 @@ const Snackbar = ({
               onDismiss();
             }}
             style={[styles.button, actionStyle]}
-            color={
-              theme.isV3 ? theme.colors.inversePrimary : theme.colors?.accent
-            }
+            color={textColor}
             compact
             mode="text"
             {...actionProps}

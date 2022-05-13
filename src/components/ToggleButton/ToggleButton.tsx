@@ -12,6 +12,7 @@ import { ToggleButtonGroupContext } from './ToggleButtonGroup';
 import { black, white } from '../../styles/themes/v2/colors';
 import type { IconSource } from '../Icon';
 import type { Theme } from '../../types';
+import { getToggleButtonColor } from './utils';
 
 type Props = {
   /**
@@ -104,25 +105,16 @@ const ToggleButton = ({
   return (
     <ToggleButtonGroupContext.Consumer>
       {(context: { value: string | null; onValueChange: Function } | null) => {
-        let backgroundColor;
-
         const checked: boolean | null =
           (context && context.value === value) || status === 'checked';
 
-        if (checked) {
-          if (theme.isV3) {
-            backgroundColor = color(theme.colors.onSecondaryContainer)
-              .alpha(0.12)
+        const backgroundColor = getToggleButtonColor({ theme, checked });
+        const borderColor = theme.isV3
+          ? theme.colors.outline
+          : color(theme.dark ? white : black)
+              .alpha(0.29)
               .rgb()
               .string();
-          } else {
-            backgroundColor = theme.dark
-              ? 'rgba(255, 255, 255, .12)'
-              : 'rgba(0, 0, 0, .08)';
-          }
-        } else {
-          backgroundColor = 'transparent';
-        }
 
         return (
           <IconButton
@@ -146,12 +138,7 @@ const ToggleButton = ({
               {
                 backgroundColor,
                 borderRadius,
-                borderColor: theme.isV3
-                  ? theme.colors.outline
-                  : color(theme.dark ? white : black)
-                      .alpha(0.29)
-                      .rgb()
-                      .string(),
+                borderColor,
               },
               style,
             ]}
