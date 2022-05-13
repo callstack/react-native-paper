@@ -134,6 +134,12 @@ const data: Data[] = [
     image: 'showcase/clutch.png',
     android: 'https://play.google.com/store/apps/details?id=eu.tmdpw.clutch',
   },
+  {
+    color: '#111827',
+    name: 'Quakemap',
+    image: 'showcase/quakemap.png',
+    android: 'https://play.google.com/store/apps/details?id=com.sal.quakemap',
+  },
 ];
 
 export default class Showcase extends React.Component<{}> {
