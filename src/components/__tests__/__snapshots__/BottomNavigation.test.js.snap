@@ -35,7 +35,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           Object {
             "bottom": 0,
             "left": 0,
-            "opacity": 1,
             "position": "absolute",
             "right": 0,
             "top": 0,
@@ -51,7 +50,15 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         style={
           Object {
             "flex": 1,
-            "top": 0,
+            "opacity": 1,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+              Object {
+                "translateY": 0,
+              },
+            ],
           }
         }
       >
@@ -618,7 +625,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           Object {
             "bottom": 0,
             "left": 0,
-            "opacity": 1,
             "position": "absolute",
             "right": 0,
             "top": 0,
@@ -634,7 +640,15 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         style={
           Object {
             "flex": 1,
-            "top": 0,
+            "opacity": 1,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+              Object {
+                "translateY": 0,
+              },
+            ],
           }
         }
       >
@@ -1221,7 +1235,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           Object {
             "bottom": 0,
             "left": 0,
-            "opacity": 1,
             "position": "absolute",
             "right": 0,
             "top": 0,
@@ -1237,7 +1250,15 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         style={
           Object {
             "flex": 1,
-            "top": 0,
+            "opacity": 1,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+              Object {
+                "translateY": 0,
+              },
+            ],
           }
         }
       >
@@ -1834,7 +1855,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           Object {
             "bottom": 0,
             "left": 0,
-            "opacity": 1,
             "position": "absolute",
             "right": 0,
             "top": 0,
@@ -1850,7 +1870,15 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         style={
           Object {
             "flex": 1,
-            "top": 0,
+            "opacity": 1,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+              Object {
+                "translateY": 0,
+              },
+            ],
           }
         }
       >
@@ -2719,7 +2747,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           Object {
             "bottom": 0,
             "left": 0,
-            "opacity": 1,
             "position": "absolute",
             "right": 0,
             "top": 0,
@@ -2735,7 +2762,15 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         style={
           Object {
             "flex": 1,
-            "top": 0,
+            "opacity": 1,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+              Object {
+                "translateY": 0,
+              },
+            ],
           }
         }
       >
@@ -3570,7 +3605,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           Object {
             "bottom": 0,
             "left": 0,
-            "opacity": 1,
             "position": "absolute",
             "right": 0,
             "top": 0,
@@ -3586,7 +3620,15 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         style={
           Object {
             "flex": 1,
-            "top": 0,
+            "opacity": 1,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+              Object {
+                "translateY": 0,
+              },
+            ],
           }
         }
       >
@@ -4315,7 +4357,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
           Object {
             "bottom": 0,
             "left": 0,
-            "opacity": 1,
             "position": "absolute",
             "right": 0,
             "top": 0,
@@ -4331,7 +4372,15 @@ exports[`renders non-shifting bottom navigation 1`] = `
         style={
           Object {
             "flex": 1,
-            "top": 0,
+            "opacity": 1,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+              Object {
+                "translateY": 0,
+              },
+            ],
           }
         }
       >
@@ -5165,7 +5214,6 @@ exports[`renders shifting bottom navigation 1`] = `
           Object {
             "bottom": 0,
             "left": 0,
-            "opacity": 1,
             "position": "absolute",
             "right": 0,
             "top": 0,
@@ -5181,7 +5229,15 @@ exports[`renders shifting bottom navigation 1`] = `
         style={
           Object {
             "flex": 1,
-            "top": 0,
+            "opacity": 1,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+              Object {
+                "translateY": 0,
+              },
+            ],
           }
         }
       >
