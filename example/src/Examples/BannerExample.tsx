@@ -1,6 +1,12 @@
 import * as React from 'react';
 import { View, StyleSheet, Image, Dimensions, Platform } from 'react-native';
-import { Banner, FAB, useTheme, Theme } from 'react-native-paper';
+import {
+  Banner,
+  FAB,
+  useTheme,
+  MD2Colors,
+  MD3Colors,
+} from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
 const PHOTOS = Array.from({ length: 24 }).map(
@@ -11,14 +17,23 @@ const BannerExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);
   const [useCustomTheme, setUseCustomTheme] = React.useState<boolean>(false);
   const defaultTheme = useTheme();
-  const customTheme = {
-    ...defaultTheme,
-    colors: {
-      text: '#fff',
-      surface: '#09c8e5',
-      primary: '#121330',
-    },
-  } as Theme;
+  const customTheme = !defaultTheme.isV3
+    ? {
+        ...defaultTheme,
+        colors: {
+          text: MD2Colors.white,
+          surface: MD2Colors.blue200,
+          primary: MD2Colors.purple900,
+        },
+      }
+    : {
+        ...defaultTheme,
+        colors: {
+          onSurface: MD3Colors.tertiary100,
+          surface: MD3Colors.tertiary50,
+          primary: MD3Colors.tertiary10,
+        },
+      };
 
   return (
     <>

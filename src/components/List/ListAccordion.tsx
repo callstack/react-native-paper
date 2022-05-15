@@ -14,9 +14,7 @@ import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
-
 import { ListAccordionGroupContext } from './ListAccordionGroup';
-import { black } from '../../styles/themes/v2/colors';
 
 type Props = {
   /**
@@ -169,10 +167,12 @@ const ListAccordion = ({
     }
   };
 
-  const textColor = theme.isV3 ? theme.colors.onSurface : theme?.colors?.text;
-
-  const titleColor = color(textColor).alpha(0.87).rgb().string();
-  const descriptionColor = color(textColor).alpha(0.54).rgb().string();
+  const titleColor = theme.isV3
+    ? theme.colors.onSurface
+    : color(theme.colors.text).alpha(0.87).rgb().string();
+  const descriptionColor = theme.isV3
+    ? theme.colors.onSurfaceVariant
+    : color(theme.colors.text).alpha(0.54).rgb().string();
 
   const expandedInternal = expandedProp !== undefined ? expandedProp : expanded;
 
@@ -209,9 +209,7 @@ const ListAccordion = ({
           <View style={styles.row} pointerEvents="none">
             {left
               ? left({
-                  color: isExpanded
-                    ? theme.colors?.primary || black
-                    : descriptionColor || black,
+                  color: isExpanded ? theme.colors?.primary : descriptionColor,
                 })
               : null}
             <View style={[styles.item, styles.content]}>
@@ -254,7 +252,7 @@ const ListAccordion = ({
               ) : (
                 <MaterialCommunityIcon
                   name={isExpanded ? 'chevron-up' : 'chevron-down'}
-                  color={titleColor}
+                  color={theme.isV3 ? descriptionColor : titleColor}
                   size={24}
                   direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
                 />

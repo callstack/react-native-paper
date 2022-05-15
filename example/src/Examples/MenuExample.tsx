@@ -13,6 +13,9 @@ import {
   Button,
   List,
   TouchableRipple,
+  useTheme,
+  MD2Colors,
+  MD3Colors,
 } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
@@ -32,6 +35,7 @@ const MenuExample = ({ navigation }: Props) => {
   const [visible, setVisible] = React.useState<MenuVisibility>({});
   const [contextualMenuCoord, setContextualMenuCoor] =
     React.useState<ContextualMenuCoord>({ x: 0, y: 0 });
+  const { isV3 } = useTheme();
 
   const _toggleMenu = (name: string) => () =>
     setVisible({ ...visible, [name]: !visible[name] });
@@ -64,7 +68,7 @@ const MenuExample = ({ navigation }: Props) => {
           anchor={
             <Appbar.Action
               icon={MORE_ICON}
-              color="white"
+              color={isV3 ? MD2Colors.white : MD3Colors.primary100}
               onPress={_toggleMenu('menu1')}
             />
           }

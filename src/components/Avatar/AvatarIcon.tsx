@@ -52,7 +52,7 @@ const Avatar = ({ icon, size = defaultSize, style, theme, ...rest }: Props) => {
     StyleSheet.flatten(style) || {};
   const textColor =
     rest.color ??
-    getContrastingColor(backgroundColor || white, white, 'rgba(0, 0, 0, .54)');
+    getContrastingColor(backgroundColor, white, 'rgba(0, 0, 0, .54)');
 
   return (
     <View
