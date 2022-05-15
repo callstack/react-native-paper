@@ -73,7 +73,7 @@ const AvatarText = ({
     StyleSheet.flatten(style) || {};
   const textColor =
     customColor ??
-    getContrastingColor(backgroundColor || white, white, 'rgba(0, 0, 0, .54)');
+    getContrastingColor(backgroundColor, white, 'rgba(0, 0, 0, .54)');
 
   return (
     <View

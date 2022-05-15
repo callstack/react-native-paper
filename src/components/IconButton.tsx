@@ -14,7 +14,6 @@ import Icon, { IconSource } from './Icon';
 import CrossFadeIcon from './CrossFadeIcon';
 import { withTheme } from '../core/theming';
 import type { $RemoveChildren, Theme } from '../types';
-import { black } from '../styles/themes/v2/colors';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -71,12 +70,12 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { IconButton, MD2Colors } from 'react-native-paper';
+ * import { IconButton, MD3Colors } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <IconButton
  *     icon="camera"
- *     color={MD2Colors.red500}
+ *     color={MD3Colors.error50}
  *     size={20}
  *     onPress={() => console.log('Pressed')}
  *   />
@@ -135,7 +134,7 @@ const IconButton = ({
       {...rest}
     >
       <View>
-        <IconComponent color={iconColor || black} source={icon} size={size} />
+        <IconComponent color={iconColor} source={icon} size={size} />
       </View>
     </TouchableRipple>
   );
