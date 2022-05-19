@@ -665,6 +665,8 @@ const BottomNavigation = ({
                 })
               : 0;
 
+          const zIndex = focused ? 1 : 0;
+
           return (
             <BottomNavigationRouteScreen
               key={route.key}
@@ -675,7 +677,7 @@ const BottomNavigation = ({
               }
               index={index}
               visibility={opacity}
-              style={StyleSheet.absoluteFill}
+              style={[StyleSheet.absoluteFill, { zIndex }]}
               collapsable={false}
               removeClippedSubviews={
                 // On iOS, set removeClippedSubviews to true only when not focused

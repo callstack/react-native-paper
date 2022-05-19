@@ -38,6 +38,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             "position": "absolute",
             "right": 0,
             "top": 0,
+            "zIndex": 1,
           },
           Object {
             "display": "flex",
@@ -628,6 +629,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             "position": "absolute",
             "right": 0,
             "top": 0,
+            "zIndex": 1,
           },
           Object {
             "display": "flex",
@@ -1238,6 +1240,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
             "position": "absolute",
             "right": 0,
             "top": 0,
+            "zIndex": 1,
           },
           Object {
             "display": "flex",
@@ -2395,6 +2398,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
             "position": "absolute",
             "right": 0,
             "top": 0,
+            "zIndex": 1,
           },
           Object {
             "display": "flex",
@@ -3015,6 +3019,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             "position": "absolute",
             "right": 0,
             "top": 0,
+            "zIndex": 1,
           },
           Object {
             "display": "flex",
@@ -3907,6 +3912,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             "position": "absolute",
             "right": 0,
             "top": 0,
+            "zIndex": 1,
           },
           Object {
             "display": "flex",
@@ -4765,6 +4771,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             "position": "absolute",
             "right": 0,
             "top": 0,
+            "zIndex": 1,
           },
           Object {
             "display": "flex",
@@ -5517,6 +5524,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
             "position": "absolute",
             "right": 0,
             "top": 0,
+            "zIndex": 1,
           },
           Object {
             "display": "flex",
@@ -6374,6 +6382,7 @@ exports[`renders shifting bottom navigation 1`] = `
             "position": "absolute",
             "right": 0,
             "top": 0,
+            "zIndex": 1,
           },
           Object {
             "display": "flex",
