@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Easing } from 'react-native';
 import { render } from 'react-native-testing-library';
 import renderer from 'react-test-renderer';
 import BottomNavigation from '../BottomNavigation/BottomNavigation.tsx';
@@ -42,6 +42,24 @@ it('renders shifting bottom navigation', () => {
     .create(
       <BottomNavigation
         shifting
+        navigationState={createState(0, 5)}
+        onIndexChange={jest.fn()}
+        renderScene={({ route }) => route.title}
+      />
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders bottom navigation with scene animation', () => {
+  const tree = renderer
+    .create(
+      <BottomNavigation
+        shifting
+        sceneAnimationEnabled
+        sceneAnimationType="shifting"
+        sceneAnimationEasing={Easing.ease}
         navigationState={createState(0, 5)}
         onIndexChange={jest.fn()}
         renderScene={({ route }) => route.title}
