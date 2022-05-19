@@ -464,22 +464,22 @@ const BottomNavigation = ({
           duration: shifting ? 400 * scale : 0,
           useNativeDriver: true,
         }),
-        ...navigationState.routes.flatMap((_, i) => {
-          return [
-            Animated.timing(tabsAnims[i], {
-              toValue: i === index ? 1 : 0,
-              duration: shifting ? 150 * scale : 0,
-              useNativeDriver: true,
-              easing: sceneAnimationEasing,
-            }),
-            Animated.timing(tabsPositionAnims[i], {
-              toValue: i === index ? 0 : i >= index ? 1 : -1,
-              duration: shifting ? 150 * scale : 0,
-              useNativeDriver: true,
-              easing: sceneAnimationEasing,
-            }),
-          ];
-        }),
+        ...navigationState.routes.map((_, i) =>
+          Animated.timing(tabsAnims[i], {
+            toValue: i === index ? 1 : 0,
+            duration: shifting ? 150 * scale : 0,
+            useNativeDriver: true,
+            easing: sceneAnimationEasing,
+          })
+        ),
+        ...navigationState.routes.map((_, i) =>
+          Animated.timing(tabsPositionAnims[i], {
+            toValue: i === index ? 0 : i >= index ? 1 : -1,
+            duration: shifting ? 150 * scale : 0,
+            useNativeDriver: true,
+            easing: sceneAnimationEasing,
+          })
+        ),
       ]).start(({ finished }) => {
         // Workaround a bug in native animations where this is reset after first animation
         tabsAnims.map((tab, i) => tab.setValue(i === index ? 1 : 0));
