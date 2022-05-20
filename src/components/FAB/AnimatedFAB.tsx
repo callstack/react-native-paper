@@ -293,6 +293,9 @@ const AnimatedFAB = ({
     ...(!isV3 && fonts.medium),
   };
 
+  const md2Elevation = disabled || !isIOS ? 0 : 6;
+  const md3Elevation = disabled || !isIOS ? 0 : 3;
+
   return (
     <Surface
       {...rest}
@@ -305,14 +308,16 @@ const AnimatedFAB = ({
                 scale: visibility,
               },
             ],
-            elevation: isIOS ? 6 : 0,
             borderRadius,
           },
+          !isV3 && {
+            elevation: md2Elevation,
+          },
           styles.container,
-          disabled && styles.disabled,
           style,
         ] as StyleProp<ViewStyle>
       }
+      {...(isV3 && { elevation: md3Elevation })}
     >
       <Animated.View
         style={[
@@ -335,7 +340,7 @@ const AnimatedFAB = ({
             pointerEvents="none"
             style={[
               StyleSheet.absoluteFill,
-              styles.shadow,
+              disabled ? styles.disabled : styles.shadow,
               {
                 width: extendedWidth,
                 opacity: animFAB.interpolate({
@@ -350,7 +355,7 @@ const AnimatedFAB = ({
             pointerEvents="none"
             style={[
               StyleSheet.absoluteFill,
-              styles.shadow,
+              disabled ? styles.disabled : styles.shadow,
               {
                 opacity: animFAB.interpolate({
                   inputRange: propForDirection([distance, 0.9 * distance, 0]),
