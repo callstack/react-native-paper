@@ -172,6 +172,7 @@ AnimatedFABExample.title = 'Animated Floating Action Button';
 const styles = StyleSheet.create({
   container: {
     padding: 16,
+    paddingBottom: 60,
   },
   avatar: {
     marginRight: 16,

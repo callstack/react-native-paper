@@ -5,6 +5,7 @@ import type {
   AnimatedFABAnimateFrom,
   AnimatedFABIconMode,
 } from 'react-native-paper';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export type Controls = {
   iconMode: AnimatedFABIconMode;
@@ -43,15 +44,17 @@ const CustomControl = ({
       const TextComponent = isV3 ? Text : Paragraph;
 
       return (
-        <View style={styles.controlItem}>
+        <TouchableOpacity
+          onPress={() => onChange(item)}
+          style={styles.controlItem}
+        >
           <TextComponent variant="labelLarge">{item}</TextComponent>
 
           <RadioButton
             value="dynamic"
             status={value === item ? 'checked' : 'unchecked'}
-            onPress={() => onChange(item)}
           />
-        </View>
+        </TouchableOpacity>
       );
     },
     [value, onChange, isV3]
@@ -66,6 +69,7 @@ const CustomControl = ({
 
       <FlatList
         horizontal
+        scrollEnabled={false}
         data={options}
         renderItem={_renderItem}
         keyExtractor={_keyExtractor}
