@@ -4,7 +4,7 @@
 
 function createUrlForVersion(version) {
   const url = window.location.pathname;
-  return url.replace(/react-native-paper\//, `react-native-paper/${version}/`);
+  return url.replace(/(\d+)(.\d+)/, `${version}`);
 }
 
 function appendVersionBanner() {
