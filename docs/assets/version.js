@@ -4,6 +4,11 @@
 
 function createUrlForVersion(version) {
   const url = window.location.pathname;
+  const versionRegex = /(\d+)(.\d+)/;
+
+  if (url.match(versionRegex)) {
+    return url.replace(/(\d+)(.\d+)/, `${version}`);
+  }
   return url.replace(/react-native-paper\//, `react-native-paper/${version}/`);
 }
 
