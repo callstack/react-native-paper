@@ -7,10 +7,7 @@ const HeaderBarExample = () => {
   const { colors } = useTheme();
   return (
     <ScreenWrapper contentContainerStyle={styles.content}>
-      <HeaderBar
-        textColor="light-content"
-        backgroundColor={colors.notification}
-      />
+      <HeaderBar textColor="light-content" backgroundColor={colors.accent} />
       <View style={styles.container}>
         <Title style={styles.title}>Status bar</Title>
       </View>

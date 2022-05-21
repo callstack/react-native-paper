@@ -1,17 +1,18 @@
 import * as React from 'react';
-import { StatusBar, StatusBarStyle, Platform } from 'react-native';
+import { StatusBar, Platform, OpaqueColorValue } from 'react-native';
 import { withTheme } from '../core/theming';
 
-type Props = React.ComponentPropsWithRef<typeof StatusBar> & {
+type Props = {
   /**
-   * Se the background color of status bar.
+   * Set the background color of status bar.
+   *  React Native Paper Theme Color or your custom Theme Color;
    */
-  backgroundColor: string | ReactNativePaper.ThemeColors;
+  backgroundColor: string | OpaqueColorValue;
   /**
    * Set the color of the status bar text.
    * Available color: 'default' | 'light-content' | 'dark-content';
    */
-  textColor: StatusBarStyle;
+  textColor: 'default' | 'light-content' | 'dark-content';
   /**
    * @optional
    */
@@ -25,10 +26,8 @@ type Props = React.ComponentPropsWithRef<typeof StatusBar> & {
 const HeaderBar = ({ textColor, backgroundColor }: Props) => {
   return (
     <StatusBar
-      animated={true}
       backgroundColor={Platform.OS === 'android' ? backgroundColor : undefined}
       barStyle={textColor}
-      networkActivityIndicatorVisible={true}
     />
   );
 };
