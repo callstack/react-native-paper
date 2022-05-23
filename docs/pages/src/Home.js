@@ -13,7 +13,7 @@ export default class Home extends React.Component<{}> {
       <Container>
         <Banner>
           Looking for the documentation for version 1.0? You can find it{' '}
-          <a href="1.0">here</a>.
+          <a href="https://callstack.github.io/react-native-paper/1.0">here</a>.
         </Banner>
         <Content>
           <h1>
