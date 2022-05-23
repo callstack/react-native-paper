@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
+import { useTheme } from '../../core/theming';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -46,22 +47,40 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * export default MyComponent;
  * ```
  */
-const DialogScrollArea = (props: Props) => (
-  <View {...props} style={[styles.container, props.style]}>
-    {props.children}
-  </View>
-);
+const DialogScrollArea = (props: Props) => {
+  const theme = useTheme();
+  const borderStyles = {
+    borderColor: theme.isV3
+      ? theme.colors.surfaceVariant
+      : 'rgba(0, 0, 0, .12)',
+    borderTopWidth: theme.isV3 ? 1 : StyleSheet.hairlineWidth,
+    borderBottomWidth: theme.isV3 ? 1 : StyleSheet.hairlineWidth,
+  };
+  return (
+    <View
+      {...props}
+      style={[
+        styles.container,
+        borderStyles,
+        theme.isV3 && styles.v3Container,
+        props.style,
+      ]}
+    >
+      {props.children}
+    </View>
+  );
+};
 
 DialogScrollArea.displayName = 'Dialog.ScrollArea';
 
 const styles = StyleSheet.create({
   container: {
-    borderColor: 'rgba(0, 0, 0, .12)',
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderBottomWidth: StyleSheet.hairlineWidth,
     paddingHorizontal: 24,
     flexGrow: 1,
     flexShrink: 1,
+  },
+  v3Container: {
+    marginBottom: 24,
   },
 });
 
