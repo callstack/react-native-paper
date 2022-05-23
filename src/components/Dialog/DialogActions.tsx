@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
+import { useTheme } from '../../core/theming';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -43,17 +44,29 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * export default MyComponent;
  * ```
  */
-const DialogActions = (props: Props) => (
-  <View {...props} style={[styles.container, props.style]}>
-    {React.Children.map(props.children, (child) =>
-      React.isValidElement(child)
-        ? React.cloneElement(child, {
-            compact: true,
-          })
-        : child
-    )}
-  </View>
-);
+const DialogActions = (props: Props) => {
+  const { isV3 } = useTheme();
+  const actionsLength = React.Children.toArray(props.children).length;
+
+  return (
+    <View
+      {...props}
+      style={[isV3 ? styles.v3Container : styles.container, props.style]}
+    >
+      {React.Children.map(props.children, (child, i) =>
+        React.isValidElement(child)
+          ? React.cloneElement(child, {
+              compact: true,
+              uppercase: !isV3,
+              style: isV3 && {
+                paddingRight: i + 1 === actionsLength ? 0 : 8,
+              },
+            })
+          : child
+      )}
+    </View>
+  );
+};
 
 DialogActions.displayName = 'Dialog.Actions';
 
@@ -63,6 +76,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: 8,
+  },
+  v3Container: {
+    flexDirection: 'row',
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    paddingBottom: 24,
+    paddingHorizontal: 24,
   },
 });
 

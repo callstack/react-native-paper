@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { Button } from 'react-native-paper';
+import { Button, useTheme } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 import {
   DialogWithCustomColors,
@@ -8,6 +8,7 @@ import {
   DialogWithLongText,
   DialogWithRadioBtns,
   UndismissableDialog,
+  DialogWithIcon,
 } from './Dialogs';
 
 type ButtonVisibility = {
@@ -16,6 +17,7 @@ type ButtonVisibility = {
 
 const DialogExample = () => {
   const [visible, setVisible] = React.useState<ButtonVisibility>({});
+  const { isV3 } = useTheme();
 
   const _toggleDialog = (name: string) => () =>
     setVisible({ ...visible, [name]: !visible[name] });
@@ -59,6 +61,15 @@ const DialogExample = () => {
       >
         Custom colors
       </Button>
+      {isV3 && (
+        <Button
+          mode="outlined"
+          onPress={_toggleDialog('dialog6')}
+          style={styles.button}
+        >
+          With icon
+        </Button>
+      )}
       <DialogWithLongText
         visible={_getVisible('dialog1')}
         close={_toggleDialog('dialog1')}
@@ -79,6 +90,12 @@ const DialogExample = () => {
         visible={_getVisible('dialog5')}
         close={_toggleDialog('dialog5')}
       />
+      {isV3 && (
+        <DialogWithIcon
+          visible={_getVisible('dialog6')}
+          close={_toggleDialog('dialog6')}
+        />
+      )}
     </ScreenWrapper>
   );
 };
