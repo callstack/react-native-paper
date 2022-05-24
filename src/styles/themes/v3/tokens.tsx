@@ -182,12 +182,14 @@ export const typescale = {
   bodyLarge: {
     ...mediumType,
     weight: '400',
+    font: ref.typeface.brandRegular,
     lineHeight: 24,
     size: 16,
   },
   bodyMedium: {
     ...mediumType,
     weight: '400',
+    font: ref.typeface.brandRegular,
     tracking: 0.25,
     lineHeight: 20,
     size: 14,
@@ -195,6 +197,7 @@ export const typescale = {
   bodySmall: {
     ...mediumType,
     weight: '400',
+    font: ref.typeface.brandRegular,
     tracking: 0.4,
     lineHeight: 16,
     size: 12,
