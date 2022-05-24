@@ -9,6 +9,7 @@ import {
   TouchableRipple,
   MD2Colors,
   useTheme,
+  MD3Colors,
 } from 'react-native-paper';
 import * as Updates from 'expo-updates';
 import { PreferencesContext } from './';
@@ -100,6 +101,17 @@ const DrawerItems = ({
     Updates.reloadAsync();
   };
 
+  const coloredLabelTheme = {
+    colors: isV3
+      ? {
+          secondaryContainer: MD3Colors.tertiary80,
+          onSecondaryContainer: MD3Colors.tertiary20,
+        }
+      : {
+          primary: MD2Colors.tealA200,
+        },
+  };
+
   return (
     <DrawerContentScrollView
       alwaysBounceVertical={false}
@@ -132,11 +144,7 @@ const DrawerItems = ({
               <Drawer.Item
                 {...props}
                 key={props.key}
-                theme={
-                  props.key === 3
-                    ? { colors: { primary: MD2Colors.tealA200 } }
-                    : undefined
-                }
+                theme={props.key === 3 ? coloredLabelTheme : undefined}
                 active={drawerItemIndex === index}
                 onPress={() => _setDrawerItem(index)}
               />
