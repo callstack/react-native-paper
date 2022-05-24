@@ -58,16 +58,6 @@ const TextExample = () => {
               Title Small
             </Text>
 
-            <Text style={styles.text} variant="bodyLarge">
-              Body Large
-            </Text>
-            <Text style={styles.text} variant="bodyMedium">
-              Body Medium
-            </Text>
-            <Text style={styles.text} variant="bodySmall">
-              Body Small
-            </Text>
-
             <Text style={styles.text} variant="labelLarge">
               Label Large
             </Text>
@@ -76,6 +66,16 @@ const TextExample = () => {
             </Text>
             <Text style={styles.text} variant="labelSmall">
               Label Small
+            </Text>
+
+            <Text style={styles.text} variant="bodyLarge">
+              Body Large
+            </Text>
+            <Text style={styles.text} variant="bodyMedium">
+              Body Medium
+            </Text>
+            <Text style={styles.text} variant="bodySmall">
+              Body Small
             </Text>
           </>
         )}
