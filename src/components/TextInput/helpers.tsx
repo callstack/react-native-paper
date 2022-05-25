@@ -311,6 +311,166 @@ export const calculateFlatInputHorizontalPadding = ({
   return { paddingLeft, paddingRight };
 };
 
+type BaseProps = {
+  theme: Theme;
+  disabled?: boolean;
+};
+
+type Mode = 'flat' | 'outlined';
+
+const getInputTextColor = ({
+  theme,
+  disabled,
+  mode,
+}: BaseProps & { mode: Mode }) => {
+  const isFlat = mode === 'flat';
+  if (theme.isV3) {
+    if (disabled) {
+      return theme.colors.onSurfaceDisabled;
+    }
+
+    if (isFlat) {
+      return theme.colors.onSurfaceVariant;
+    }
+
+    return theme.colors.onSurface;
+  }
+
+  if (disabled) {
+    return color(theme.colors.text).alpha(0.54).rgb().string();
+  }
+
+  return theme.colors.text;
+};
+
+const getActiveColor = ({
+  theme,
+  disabled,
+  error,
+  activeUnderlineColor,
+  activeOutlineColor,
+  mode,
+}: BaseProps & {
+  error?: boolean;
+  activeUnderlineColor?: string;
+  activeOutlineColor?: string;
+  mode?: Mode;
+}) => {
+  const isFlat = mode === 'flat';
+  const modeColor = isFlat ? activeUnderlineColor : activeOutlineColor;
+
+  if (error) {
+    return theme.colors.error;
+  }
+
+  if (modeColor) {
+    return modeColor;
+  }
+
+  if (disabled) {
+    if (theme.isV3) {
+      return theme.colors.onSurfaceDisabled;
+    }
+
+    return color(theme.colors.text).alpha(0.54).rgb().string();
+  }
+
+  return theme.colors.primary;
+};
+
+const getPlaceholderColor = ({ theme, disabled }: BaseProps) => {
+  if (theme.isV3) {
+    if (disabled) {
+      return theme.colors.onSurfaceDisabled;
+    }
+
+    return theme.colors.onSurfaceVariant;
+  }
+
+  if (disabled) {
+    return theme.colors.disabled;
+  }
+
+  return theme.colors.placeholder;
+};
+
+const getFlatBackgroundColor = ({ theme, disabled }: BaseProps) => {
+  if (theme.isV3) {
+    if (disabled) {
+      // @ts-ignore According to Figma for both themes the base color for disabled in `onSecondaryContainer`
+      return color(MD3LightTheme.colors.onSecondaryContainer)
+        .alpha(0.08)
+        .rgb()
+        .string();
+    } else {
+      return theme.colors.surfaceVariant;
+    }
+  }
+
+  if (disabled) {
+    return undefined;
+  }
+
+  return theme.dark
+    ? color(theme.colors?.background).lighten(0.24).rgb().string()
+    : color(theme.colors?.background).darken(0.06).rgb().string();
+};
+
+const getFlatUnderlineColor = ({
+  theme,
+  disabled,
+  underlineColor,
+}: BaseProps & { underlineColor?: string }) => {
+  if (!disabled && underlineColor) {
+    return underlineColor;
+  }
+
+  if (theme.isV3) {
+    if (disabled) {
+      return theme.colors.onSurfaceDisabled;
+    }
+
+    return theme.colors.onSurface;
+  }
+
+  if (disabled) {
+    return 'transparent';
+  }
+
+  return theme.colors.disabled;
+};
+
+const getOutlinedOutlineInputColor = ({
+  theme,
+  disabled,
+  customOutlineColor,
+}: BaseProps & { customOutlineColor?: string }) => {
+  const isTransparent = color(customOutlineColor).alpha() === 0;
+
+  if (!disabled && customOutlineColor) {
+    return customOutlineColor;
+  }
+
+  if (theme.isV3) {
+    if (disabled) {
+      if (theme.dark) {
+        return 'transparent';
+      }
+      return theme.colors.surfaceDisabled;
+    }
+
+    return theme.colors.outline;
+  }
+
+  if (disabled) {
+    if (isTransparent) {
+      return customOutlineColor;
+    }
+    return theme.colors.disabled;
+  }
+  return theme.colors.placeholder;
+};
+
 export const getFlatInputColors = ({
   underlineColor,
   activeUnderlineColor,
@@ -324,61 +484,22 @@ export const getFlatInputColors = ({
   error?: boolean;
   theme: Theme;
 }) => {
-  let inputTextColor,
-    activeColor,
-    underlineColorCustom,
-    placeholderColor,
-    errorColor,
-    backgroundColor;
-
-  // The same for both themes
-  activeColor = error
-    ? theme.colors?.error
-    : activeUnderlineColor || theme.colors?.primary;
-  errorColor = theme.colors?.error;
-
-  if (theme.isV3) {
-    if (disabled) {
-      inputTextColor =
-        activeColor =
-        placeholderColor =
-        underlineColorCustom =
-          theme.colors.onSurfaceDisabled;
-      // @ts-ignore According to Figma for both themes the base color for disabled in `onSecondaryContainer`
-      backgroundColor = color(MD3LightTheme.colors.onSecondaryContainer)
-        .alpha(0.08)
-        .rgb()
-        .string();
-    } else {
-      inputTextColor = placeholderColor = theme.colors.onSurfaceVariant;
-      underlineColorCustom = underlineColor || theme.colors.onSurface;
-      backgroundColor = theme.colors.surfaceVariant;
-    }
-  } else {
-    if (disabled) {
-      inputTextColor = activeColor = color(theme.colors?.text)
-        .alpha(0.54)
-        .rgb()
-        .string();
-      placeholderColor = theme.colors.disabled;
-      underlineColorCustom = 'transparent';
-    } else {
-      inputTextColor = theme.colors?.text;
-      placeholderColor = theme.colors?.placeholder;
-      underlineColorCustom = underlineColor || theme.colors.disabled;
-      backgroundColor = theme.dark
-        ? color(theme.colors?.background).lighten(0.24).rgb().string()
-        : color(theme.colors?.background).darken(0.06).rgb().string();
-    }
-  }
-
+  const baseFlatColorProps = { theme, disabled };
   return {
-    inputTextColor,
-    activeColor,
-    placeholderColor,
-    underlineColorCustom,
-    errorColor,
-    backgroundColor,
+    inputTextColor: getInputTextColor({ ...baseFlatColorProps, mode: 'flat' }),
+    activeColor: getActiveColor({
+      ...baseFlatColorProps,
+      error,
+      activeUnderlineColor,
+      mode: 'flat',
+    }),
+    underlineColorCustom: getFlatUnderlineColor({
+      ...baseFlatColorProps,
+      underlineColor,
+    }),
+    placeholderColor: getPlaceholderColor(baseFlatColorProps),
+    errorColor: theme.colors.error,
+    backgroundColor: getFlatBackgroundColor(baseFlatColorProps),
   };
 };
 
@@ -395,45 +516,25 @@ export const getOutlinedInputColors = ({
   error?: boolean;
   theme: Theme;
 }) => {
-  let inputTextColor, activeColor, outlineColor, placeholderColor, errorColor;
-
-  const textColor = theme.isV3 ? theme.colors.onSurface : theme.colors.text;
-  const isTransparent = color(customOutlineColor).alpha() === 0;
-
-  // The same for both themes
-  activeColor = error
-    ? theme.colors?.error
-    : activeOutlineColor || theme.colors?.primary;
-  errorColor = theme.colors?.error;
-
-  if (theme.isV3) {
-    if (disabled) {
-      inputTextColor = activeColor = theme.colors.onSurfaceDisabled;
-      placeholderColor = theme.colors.onSurfaceDisabled;
-      outlineColor = theme.dark ? 'transparent' : theme.colors.surfaceDisabled;
-    } else {
-      inputTextColor = textColor;
-      placeholderColor = theme.colors.onSurfaceVariant;
-      outlineColor = customOutlineColor || theme.colors.outline;
-    }
-  } else {
-    if (disabled) {
-      inputTextColor = color(textColor).alpha(0.54).rgb().string();
-      placeholderColor = theme.colors?.disabled;
-      outlineColor = isTransparent ? customOutlineColor : theme.colors.disabled;
-    } else {
-      inputTextColor = textColor;
-      placeholderColor = theme.colors.placeholder;
-      outlineColor = customOutlineColor || theme.colors.placeholder;
-    }
-  }
+  const baseOutlinedColorProps = { theme, disabled };
 
   return {
-    inputTextColor,
-    activeColor,
-    outlineColor,
-    placeholderColor,
-    errorColor,
+    inputTextColor: getInputTextColor({
+      ...baseOutlinedColorProps,
+      mode: 'outlined',
+    }),
+    activeColor: getActiveColor({
+      ...baseOutlinedColorProps,
+      error,
+      activeOutlineColor,
+      mode: 'outlined',
+    }),
+    outlineColor: getOutlinedOutlineInputColor({
+      ...baseOutlinedColorProps,
+      customOutlineColor,
+    }),
+    placeholderColor: getPlaceholderColor(baseOutlinedColorProps),
+    errorColor: theme.colors.error,
   };
 };
 
