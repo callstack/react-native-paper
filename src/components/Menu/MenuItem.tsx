@@ -1,4 +1,3 @@
-import color from 'color';
 import * as React from 'react';
 import {
   StyleProp,
@@ -10,12 +9,14 @@ import {
 import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import { black, white } from '../../styles/themes/v2/colors';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
-
-const MIN_WIDTH = 112;
-const MAX_WIDTH = 280;
+import {
+  getContentMaxWidth,
+  getMenuItemColor,
+  MAX_WIDTH,
+  MIN_WIDTH,
+} from './utils';
 
 type Props = {
   /**
@@ -110,62 +111,24 @@ const MenuItem = ({
   accessibilityLabel,
   theme,
 }: Props) => {
-  const disabledColor = theme.isV3
-    ? theme.colors.onSurfaceDisabled
-    : color(theme.dark ? white : black)
-        .alpha(0.32)
-        .rgb()
-        .string();
+  const { titleColor, iconColor, underlayColor } = getMenuItemColor({
+    theme,
+    disabled,
+  });
+  const { isV3 } = theme;
 
-  const titleColor = disabled
-    ? disabledColor
-    : theme.isV3
-    ? theme.colors.onSurface
-    : color(theme.colors.text).alpha(0.87).rgb().string();
+  const containerPadding = isV3 ? 12 : 8;
 
-  const iconColor = disabled
-    ? disabledColor
-    : theme.isV3
-    ? theme.colors.onSurfaceVariant
-    : color(theme.colors.text).alpha(0.54).rgb().string();
+  const iconWidth = isV3 ? 24 : 40;
 
-  const underlayColor = theme.isV3
-    ? color(theme.colors.primary).alpha(0.12).rgb().string()
-    : undefined;
+  const minWidth = MIN_WIDTH - (isV3 ? 12 : 16);
 
-  const iconWidth = theme.isV3 ? 24 : 40;
-
-  const getContentWidth = React.useMemo(() => {
-    let maxWidth = MAX_WIDTH;
-    let minWidth = MIN_WIDTH;
-
-    if (theme.isV3) {
-      minWidth = minWidth - 12;
-      if (leadingIcon || trailingIcon) {
-        maxWidth = maxWidth - (iconWidth + 24);
-      } else if (leadingIcon && trailingIcon) {
-        maxWidth = maxWidth - (2 * iconWidth + 24);
-      } else {
-        maxWidth = maxWidth - 12;
-      }
-    } else {
-      minWidth = minWidth - 16;
-      if (leadingIcon) {
-        maxWidth = maxWidth - (iconWidth + 48);
-      } else {
-        maxWidth = maxWidth - 16;
-      }
-    }
-
-    return {
-      minWidth,
-      maxWidth,
-    };
-  }, [theme.isV3, leadingIcon, trailingIcon]);
-
-  const { minWidth, maxWidth } = getContentWidth;
-
-  const containerPadding = theme.isV3 ? 12 : 8;
+  const maxWidth = getContentMaxWidth({
+    isV3,
+    iconWidth,
+    leadingIcon,
+    trailingIcon,
+  });
 
   return (
     <TouchableRipple
@@ -186,7 +149,7 @@ const MenuItem = ({
       <View style={styles.row}>
         {leadingIcon ? (
           <View
-            style={[!theme.isV3 && styles.item, { width: iconWidth }]}
+            style={[!isV3 && styles.item, { width: iconWidth }]}
             pointerEvents="box-none"
           >
             <Icon source={leadingIcon} size={24} color={iconColor} />
@@ -194,10 +157,10 @@ const MenuItem = ({
         ) : null}
         <View
           style={[
-            !theme.isV3 && styles.item,
+            !isV3 && styles.item,
             styles.content,
             { minWidth, maxWidth },
-            theme.isV3 &&
+            isV3 &&
               (leadingIcon
                 ? styles.md3LeadingIcon
                 : styles.md3WithoutLeadingIcon),
@@ -209,18 +172,14 @@ const MenuItem = ({
             variant="bodyLarge"
             selectable={false}
             numberOfLines={1}
-            style={[
-              !theme.isV3 && styles.title,
-              { color: titleColor },
-              titleStyle,
-            ]}
+            style={[!isV3 && styles.title, { color: titleColor }, titleStyle]}
           >
             {title}
           </Text>
         </View>
-        {theme.isV3 && trailingIcon ? (
+        {isV3 && trailingIcon ? (
           <View
-            style={[!theme.isV3 && styles.item, { width: iconWidth }]}
+            style={[!isV3 && styles.item, { width: iconWidth }]}
             pointerEvents="box-none"
           >
             <Icon source={trailingIcon} size={24} color={iconColor} />

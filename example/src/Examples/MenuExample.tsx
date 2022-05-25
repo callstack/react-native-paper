@@ -14,8 +14,6 @@ import {
   List,
   TouchableRipple,
   useTheme,
-  MD2Colors,
-  MD3Colors,
 } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
