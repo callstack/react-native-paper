@@ -14,8 +14,6 @@ import {
   List,
   TouchableRipple,
   useTheme,
-  MD2Colors,
-  MD3Colors,
 } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
@@ -68,14 +66,14 @@ const MenuExample = ({ navigation }: Props) => {
           anchor={
             <Appbar.Action
               icon={MORE_ICON}
-              color={isV3 ? MD2Colors.white : MD3Colors.primary100}
               onPress={_toggleMenu('menu1')}
+              {...(!isV3 && { color: 'white' })}
             />
           }
         >
           <Menu.Item onPress={() => {}} title="Undo" />
           <Menu.Item onPress={() => {}} title="Redo" />
-          <Divider />
+          <Divider style={isV3 && styles.md3Divider} />
           <Menu.Item onPress={() => {}} title="Cut" disabled />
           <Menu.Item onPress={() => {}} title="Copy" disabled />
           <Menu.Item onPress={() => {}} title="Paste" />
@@ -92,22 +90,35 @@ const MenuExample = ({ navigation }: Props) => {
               </Button>
             }
           >
-            <Menu.Item icon="undo" onPress={() => {}} title="Undo" />
-            <Menu.Item icon="redo" onPress={() => {}} title="Redo" />
-            <Divider />
+            <Menu.Item leadingIcon="undo" onPress={() => {}} title="Undo" />
+            <Menu.Item leadingIcon="redo" onPress={() => {}} title="Redo" />
+
+            <Divider style={isV3 && styles.md3Divider} />
+
             <Menu.Item
-              icon="content-cut"
+              leadingIcon="content-cut"
               onPress={() => {}}
               title="Cut"
               disabled
             />
             <Menu.Item
-              icon="content-copy"
+              leadingIcon="content-copy"
               onPress={() => {}}
               title="Copy"
               disabled
             />
-            <Menu.Item icon="content-paste" onPress={() => {}} title="Paste" />
+            <Menu.Item
+              leadingIcon="content-paste"
+              onPress={() => {}}
+              title="Paste"
+            />
+            {isV3 && (
+              <Menu.Item
+                trailingIcon="share-variant"
+                onPress={() => {}}
+                title="Share"
+              />
+            )}
           </Menu>
         </View>
         <Menu
@@ -117,7 +128,7 @@ const MenuExample = ({ navigation }: Props) => {
         >
           <Menu.Item onPress={() => {}} title="Item 1" />
           <Menu.Item onPress={() => {}} title="Item 2" />
-          <Divider />
+          <Divider style={isV3 && styles.md3Divider} />
           <Menu.Item onPress={() => {}} title="Item 3" disabled />
         </Menu>
         <List.Section style={styles.list} title="Contextual menu">
@@ -147,6 +158,9 @@ const styles = StyleSheet.create({
   },
   alignCenter: {
     alignItems: 'center',
+  },
+  md3Divider: {
+    marginVertical: 8,
   },
 });
 

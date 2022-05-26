@@ -1,0 +1,593 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders menu item 1`] = `
+Array [
+  <View
+    accessibilityRole="menuitem"
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        false,
+        Array [
+          Object {
+            "height": 48,
+            "justifyContent": "center",
+            "maxWidth": 280,
+            "minWidth": 112,
+          },
+          Object {
+            "paddingHorizontal": 8,
+          },
+          undefined,
+          undefined,
+        ],
+      ]
+    }
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        pointerEvents="box-none"
+        style={
+          Array [
+            Object {
+              "marginHorizontal": 8,
+            },
+            Object {
+              "width": 40,
+            },
+          ]
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+              },
+              Object {
+                "color": "rgba(0, 0, 0, 0.54)",
+                "fontSize": 24,
+              },
+            ]
+          }
+        >
+          □
+        </Text>
+      </View>
+      <View
+        pointerEvents="none"
+        style={
+          Array [
+            Object {
+              "marginHorizontal": 8,
+            },
+            Object {
+              "justifyContent": "center",
+            },
+            Object {
+              "maxWidth": 192,
+              "minWidth": 96,
+            },
+            false,
+            undefined,
+          ]
+        }
+      >
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "System",
+                "fontWeight": "400",
+              },
+              Object {
+                "textAlign": "left",
+              },
+              Array [
+                Object {
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "rgba(0, 0, 0, 0.87)",
+                },
+                undefined,
+              ],
+            ]
+          }
+        >
+          Redo
+        </Text>
+      </View>
+    </View>
+  </View>,
+  <View
+    accessibilityRole="menuitem"
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        false,
+        Array [
+          Object {
+            "height": 48,
+            "justifyContent": "center",
+            "maxWidth": 280,
+            "minWidth": 112,
+          },
+          Object {
+            "paddingHorizontal": 8,
+          },
+          undefined,
+          undefined,
+        ],
+      ]
+    }
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        pointerEvents="box-none"
+        style={
+          Array [
+            Object {
+              "marginHorizontal": 8,
+            },
+            Object {
+              "width": 40,
+            },
+          ]
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+              },
+              Object {
+                "color": "rgba(0, 0, 0, 0.54)",
+                "fontSize": 24,
+              },
+            ]
+          }
+        >
+          □
+        </Text>
+      </View>
+      <View
+        pointerEvents="none"
+        style={
+          Array [
+            Object {
+              "marginHorizontal": 8,
+            },
+            Object {
+              "justifyContent": "center",
+            },
+            Object {
+              "maxWidth": 192,
+              "minWidth": 96,
+            },
+            false,
+            undefined,
+          ]
+        }
+      >
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "System",
+                "fontWeight": "400",
+              },
+              Object {
+                "textAlign": "left",
+              },
+              Array [
+                Object {
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "rgba(0, 0, 0, 0.87)",
+                },
+                undefined,
+              ],
+            ]
+          }
+        >
+          Undo
+        </Text>
+      </View>
+    </View>
+  </View>,
+  <View
+    accessibilityRole="menuitem"
+    accessibilityState={
+      Object {
+        "disabled": true,
+      }
+    }
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        false,
+        Array [
+          Object {
+            "height": 48,
+            "justifyContent": "center",
+            "maxWidth": 280,
+            "minWidth": 112,
+          },
+          Object {
+            "paddingHorizontal": 8,
+          },
+          undefined,
+          undefined,
+        ],
+      ]
+    }
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        pointerEvents="box-none"
+        style={
+          Array [
+            Object {
+              "marginHorizontal": 8,
+            },
+            Object {
+              "width": 40,
+            },
+          ]
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+              },
+              Object {
+                "color": "rgba(0, 0, 0, 0.32)",
+                "fontSize": 24,
+              },
+            ]
+          }
+        >
+          □
+        </Text>
+      </View>
+      <View
+        pointerEvents="none"
+        style={
+          Array [
+            Object {
+              "marginHorizontal": 8,
+            },
+            Object {
+              "justifyContent": "center",
+            },
+            Object {
+              "maxWidth": 192,
+              "minWidth": 96,
+            },
+            false,
+            undefined,
+          ]
+        }
+      >
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "System",
+                "fontWeight": "400",
+              },
+              Object {
+                "textAlign": "left",
+              },
+              Array [
+                Object {
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "rgba(0, 0, 0, 0.32)",
+                },
+                undefined,
+              ],
+            ]
+          }
+        >
+          Cut
+        </Text>
+      </View>
+    </View>
+  </View>,
+  <View
+    accessibilityRole="menuitem"
+    accessibilityState={
+      Object {
+        "disabled": true,
+      }
+    }
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        false,
+        Array [
+          Object {
+            "height": 48,
+            "justifyContent": "center",
+            "maxWidth": 280,
+            "minWidth": 112,
+          },
+          Object {
+            "paddingHorizontal": 8,
+          },
+          undefined,
+          undefined,
+        ],
+      ]
+    }
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        pointerEvents="box-none"
+        style={
+          Array [
+            Object {
+              "marginHorizontal": 8,
+            },
+            Object {
+              "width": 40,
+            },
+          ]
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+              },
+              Object {
+                "color": "rgba(0, 0, 0, 0.32)",
+                "fontSize": 24,
+              },
+            ]
+          }
+        >
+          □
+        </Text>
+      </View>
+      <View
+        pointerEvents="none"
+        style={
+          Array [
+            Object {
+              "marginHorizontal": 8,
+            },
+            Object {
+              "justifyContent": "center",
+            },
+            Object {
+              "maxWidth": 192,
+              "minWidth": 96,
+            },
+            false,
+            undefined,
+          ]
+        }
+      >
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "System",
+                "fontWeight": "400",
+              },
+              Object {
+                "textAlign": "left",
+              },
+              Array [
+                Object {
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "rgba(0, 0, 0, 0.32)",
+                },
+                undefined,
+              ],
+            ]
+          }
+        >
+          Copy
+        </Text>
+      </View>
+    </View>
+  </View>,
+  <View
+    accessibilityRole="menuitem"
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        false,
+        Array [
+          Object {
+            "height": 48,
+            "justifyContent": "center",
+            "maxWidth": 280,
+            "minWidth": 112,
+          },
+          Object {
+            "paddingHorizontal": 8,
+          },
+          undefined,
+          undefined,
+        ],
+      ]
+    }
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        pointerEvents="none"
+        style={
+          Array [
+            Object {
+              "marginHorizontal": 8,
+            },
+            Object {
+              "justifyContent": "center",
+            },
+            Object {
+              "maxWidth": 264,
+              "minWidth": 96,
+            },
+            false,
+            undefined,
+          ]
+        }
+      >
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "System",
+                "fontWeight": "400",
+              },
+              Object {
+                "textAlign": "left",
+              },
+              Array [
+                Object {
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "rgba(0, 0, 0, 0.87)",
+                },
+                undefined,
+              ],
+            ]
+          }
+        >
+          Paste
+        </Text>
+      </View>
+    </View>
+  </View>,
+]
+`;
