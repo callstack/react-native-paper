@@ -12,24 +12,100 @@ import {
   Platform,
   I18nManager,
 } from 'react-native';
-import Surface from '../../Surface';
-import Icon from '../../Icon';
-import TouchableRipple from '../../TouchableRipple/TouchableRipple';
-import type { $RemoveChildren, Theme } from '../../../types';
-import type { IconSource } from '../../Icon';
-import { withTheme } from '../../../core/theming';
+import Surface from '../Surface';
+import Icon from '../Icon';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { $RemoveChildren, Theme } from '../../types';
+import type { IconSource } from '../Icon';
+import { withTheme } from '../../core/theming';
 import type {
   AccessibilityState,
   NativeSyntheticEvent,
   TextLayoutEventData,
 } from 'react-native';
-import { white, black } from '../../../styles/themes/v2/colors';
-import AnimatedText from '../../Typography/AnimatedText';
-import { getCombinedStyles } from './utils';
+import AnimatedText from '../Typography/AnimatedText';
+import { getCombinedStyles, getFABColors } from './utils';
 
 export type AnimatedFABIconMode = 'static' | 'dynamic';
 export type AnimatedFABAnimateFrom = 'left' | 'right';
 
+/**
+ * An animated, extending horizontally floating action button represents the primary action in an application.
+ *
+ *
+ * ## Usage
+ * ```js
+ * import React from 'react';
+ * import {
+ *   StyleProp,
+ *   ViewStyle,
+ *   Animated,
+ *   StyleSheet,
+ *   Platform,
+ *   ScrollView,
+ *   Text,
+ *   SafeAreaView,
+ *   I18nManager,
+ * } from 'react-native';
+ * import { AnimatedFAB } from 'react-native-paper';
+ *
+ * const MyComponent = ({
+ *   animatedValue,
+ *   visible,
+ *   extended,
+ *   label,
+ *   animateFrom,
+ *   style,
+ *   iconMode,
+ * }) => {
+ *   const [isExtended, setIsExtended] = React.useState(true);
+ *
+ *   const isIOS = Platform.OS === 'ios';
+ *
+ *   const onScroll = ({ nativeEvent }) => {
+ *     const currentScrollPosition =
+ *       Math.floor(nativeEvent?.contentOffset?.y) ?? 0;
+ *
+ *     setIsExtended(currentScrollPosition <= 0);
+ *   };
+ *
+ *   const fabStyle = { [animateFrom]: 16 };
+ *
+ *   return (
+ *     <SafeAreaView style={styles.container}>
+ *       <ScrollView onScroll={onScroll}>
+ *         {[...new Array(100).keys()].map((_, i) => (
+ *           <Text>{i}</Text>
+ *         ))}
+ *       </ScrollView>
+ *       <AnimatedFAB
+ *         icon={'plus'}
+ *         label={'Label'}
+ *         extended={isExtended}
+ *         onPress={() => console.log('Pressed')}
+ *         visible={visible}
+ *         animateFrom={'right'}
+ *         iconMode={'static'}
+ *         style={[styles.fabStyle, style, fabStyle]}
+ *       />
+ *     </SafeAreaView>
+ *   );
+ * };
+ *
+ * export default MyComponent;
+ *
+ * const styles = StyleSheet.create({
+ *   container: {
+ *     flexGrow: 1,
+ *   },
+ *   fabStyle: {
+ *     bottom: 16,
+ *     right: 16,
+ *     position: 'absolute',
+ *   },
+ * });
+ * ```
+ */
 type Props = $RemoveChildren<typeof Surface> & {
   /**
    * Icon to display for the `FAB`.
@@ -84,6 +160,12 @@ type Props = $RemoveChildren<typeof Surface> & {
    * Whether `FAB` should start animation to extend.
    */
   extended: boolean;
+  /**
+   * @supported Available in v3.x with theme version 3
+   *
+   * Color mappings variant for combinations of container and icon colors.
+   */
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'surface';
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -93,7 +175,6 @@ type Props = $RemoveChildren<typeof Surface> & {
 };
 
 const SIZE = 56;
-const BORDER_RADIUS = SIZE / 2;
 const SCALE = 0.9;
 
 const AnimatedFAB = ({
@@ -108,11 +189,12 @@ const AnimatedFAB = ({
   theme,
   style,
   visible = true,
-  uppercase = true,
+  uppercase = !theme.isV3,
   testID,
   animateFrom = 'right',
   extended = false,
   iconMode = 'dynamic',
+  variant = 'primary',
   ...rest
 }: Props) => {
   const isIOS = Platform.OS === 'ios';
@@ -125,10 +207,13 @@ const AnimatedFAB = ({
   const { current: animFAB } = React.useRef<Animated.Value>(
     new Animated.Value(0)
   );
-  const { scale } = theme.animation;
+  const { isV3, animation, fonts } = theme;
+  const { scale } = animation;
 
   const [textWidth, setTextWidth] = React.useState<number>(0);
   const [textHeight, setTextHeight] = React.useState<number>(0);
+
+  const borderRadius = SIZE / (isV3 ? 3.5 : 2);
 
   React.useEffect(() => {
     if (visible) {
@@ -146,40 +231,21 @@ const AnimatedFAB = ({
     }
   }, [visible, scale, visibility]);
 
-  const disabledColor = color(theme.dark ? white : black)
-    .alpha(0.12)
-    .rgb()
-    .string();
-
-  const buttonBackgroundColor = theme.isV3
-    ? theme.colors.primary
-    : theme?.colors?.accent;
-
-  const { backgroundColor = disabled ? disabledColor : buttonBackgroundColor } =
-    StyleSheet.flatten<ViewStyle>(style) || {};
-
-  let foregroundColor: string;
-
-  if (typeof customColor !== 'undefined') {
-    foregroundColor = customColor;
-  } else if (disabled) {
-    foregroundColor = color(theme.dark ? white : black)
-      .alpha(0.32)
-      .rgb()
-      .string();
-  } else {
-    foregroundColor = !color(backgroundColor as string).isLight()
-      ? white
-      : 'rgba(0, 0, 0, .54)';
-  }
+  const { backgroundColor, foregroundColor } = getFABColors(
+    theme,
+    variant,
+    disabled,
+    customColor,
+    style
+  );
 
   const rippleColor = color(foregroundColor).alpha(0.32).rgb().string();
 
-  const extendedWidth = textWidth + 1.5 * SIZE;
+  const extendedWidth = textWidth + SIZE + borderRadius;
 
   const distance = isAnimatedFromRight
-    ? -textWidth - BORDER_RADIUS
-    : textWidth + BORDER_RADIUS;
+    ? -textWidth - borderRadius
+    : textWidth + borderRadius;
 
   React.useEffect(() => {
     Animated.timing(animFAB, {
@@ -222,6 +288,14 @@ const AnimatedFAB = ({
     animFAB,
   });
 
+  const textStyle = {
+    color: foregroundColor,
+    ...(!isV3 && fonts.medium),
+  };
+
+  const md2Elevation = disabled || !isIOS ? 0 : 6;
+  const md3Elevation = disabled || !isIOS ? 0 : 3;
+
   return (
     <Surface
       {...rest}
@@ -234,17 +308,20 @@ const AnimatedFAB = ({
                 scale: visibility,
               },
             ],
-            elevation: isIOS ? 6 : 0,
+            borderRadius,
+          },
+          !isV3 && {
+            elevation: md2Elevation,
           },
           styles.container,
-          disabled && styles.disabled,
           style,
         ] as StyleProp<ViewStyle>
       }
+      {...(isV3 && { elevation: md3Elevation })}
     >
       <Animated.View
         style={[
-          {
+          !isV3 && {
             transform: [
               {
                 scaleY: animFAB.interpolate({
@@ -255,6 +332,7 @@ const AnimatedFAB = ({
             ],
           },
           styles.standard,
+          { borderRadius },
         ]}
       >
         <View style={[StyleSheet.absoluteFill, styles.shadowWrapper]}>
@@ -262,13 +340,14 @@ const AnimatedFAB = ({
             pointerEvents="none"
             style={[
               StyleSheet.absoluteFill,
-              styles.shadow,
+              disabled ? styles.disabled : styles.shadow,
               {
                 width: extendedWidth,
                 opacity: animFAB.interpolate({
                   inputRange: propForDirection([distance, 0.9 * distance, 0]),
                   outputRange: propForDirection([1, 0.15, 0]),
                 }),
+                borderRadius,
               },
             ]}
           />
@@ -276,7 +355,7 @@ const AnimatedFAB = ({
             pointerEvents="none"
             style={[
               StyleSheet.absoluteFill,
-              styles.shadow,
+              disabled ? styles.disabled : styles.shadow,
               {
                 opacity: animFAB.interpolate({
                   inputRange: propForDirection([distance, 0.9 * distance, 0]),
@@ -287,7 +366,7 @@ const AnimatedFAB = ({
                   inputRange: propForDirection([distance, 0]),
                   outputRange: propForDirection([
                     SIZE / (extendedWidth / SIZE),
-                    BORDER_RADIUS,
+                    borderRadius,
                   ]),
                 }),
               },
@@ -295,13 +374,17 @@ const AnimatedFAB = ({
             ]}
           />
         </View>
-        <Animated.View pointerEvents="box-none" style={[styles.innerWrapper]}>
+        <Animated.View
+          pointerEvents="box-none"
+          style={[styles.innerWrapper, { borderRadius }]}
+        >
           <Animated.View
             style={[
               styles.standard,
               {
                 width: extendedWidth,
                 backgroundColor,
+                borderRadius,
               },
               combinedStyles.innerWrapper,
             ]}
@@ -319,13 +402,14 @@ const AnimatedFAB = ({
               accessibilityRole="button"
               accessibilityState={{ ...accessibilityState, disabled }}
               testID={testID}
-              style={styles.touchable}
+              style={{ borderRadius }}
             >
               <View
                 style={[
                   styles.standard,
                   {
                     width: extendedWidth,
+                    borderRadius,
                   },
                 ]}
               />
@@ -343,20 +427,19 @@ const AnimatedFAB = ({
 
       <View pointerEvents="none">
         <AnimatedText
+          variant="labelLarge"
           numberOfLines={1}
           onTextLayout={isIOS ? onTextLayout : undefined}
           ellipsizeMode={'tail'}
           style={[
             {
               [isAnimatedFromRight || isRTL ? 'right' : 'left']: isIconStatic
-                ? isIOS
-                  ? SIZE - 10
-                  : SIZE - 12
-                : BORDER_RADIUS,
+                ? textWidth - SIZE + borderRadius / (isV3 ? 1 : 2)
+                : borderRadius,
             },
             {
               minWidth: textWidth,
-              top: -BORDER_RADIUS - textHeight / 2,
+              top: -SIZE / 2 - textHeight / 2,
               opacity: animFAB.interpolate({
                 inputRange: propForDirection([distance, 0.7 * distance, 0]),
                 outputRange: propForDirection([1, 0, 0]),
@@ -372,10 +455,7 @@ const AnimatedFAB = ({
             },
             styles.label,
             uppercase && styles.uppercaseLabel,
-            {
-              color: foregroundColor,
-              ...theme.fonts.medium,
-            },
+            textStyle,
           ]}
         >
           {label}
@@ -398,7 +478,6 @@ const AnimatedFAB = ({
 const styles = StyleSheet.create({
   standard: {
     height: SIZE,
-    borderRadius: BORDER_RADIUS,
   },
   disabled: {
     elevation: 0,
@@ -406,22 +485,16 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     backgroundColor: 'transparent',
-    borderRadius: BORDER_RADIUS,
   },
   innerWrapper: {
     flexDirection: 'row',
     overflow: 'hidden',
-    borderRadius: BORDER_RADIUS,
   },
   shadowWrapper: {
     elevation: 0,
   },
   shadow: {
     elevation: 6,
-    borderRadius: BORDER_RADIUS,
-  },
-  touchable: {
-    borderRadius: BORDER_RADIUS,
   },
   iconWrapper: {
     alignItems: 'center',

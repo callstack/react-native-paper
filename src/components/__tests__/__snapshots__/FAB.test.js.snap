@@ -61,6 +61,7 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
             "justifyContent": "center",
           },
           Object {
+            "borderRadius": 28,
             "height": 56,
             "width": 56,
           },
@@ -178,6 +179,7 @@ exports[`renders disabled FAB 1`] = `
             "justifyContent": "center",
           },
           Object {
+            "borderRadius": 28,
             "height": 56,
             "width": 56,
           },
@@ -457,6 +459,7 @@ exports[`renders loading FAB 1`] = `
             "justifyContent": "center",
           },
           Object {
+            "borderRadius": 28,
             "height": 56,
             "width": 56,
           },
@@ -716,6 +719,7 @@ exports[`renders normal FAB 1`] = `
             "justifyContent": "center",
           },
           Object {
+            "borderRadius": 28,
             "height": 56,
             "width": 56,
           },
@@ -840,6 +844,7 @@ exports[`renders not visible FAB 1`] = `
             "justifyContent": "center",
           },
           Object {
+            "borderRadius": 28,
             "height": 56,
             "width": 56,
           },
@@ -964,6 +969,7 @@ exports[`renders small FAB 1`] = `
             "justifyContent": "center",
           },
           Object {
+            "borderRadius": 28,
             "height": 40,
             "width": 40,
           },
@@ -1088,6 +1094,7 @@ exports[`renders visible FAB 1`] = `
             "justifyContent": "center",
           },
           Object {
+            "borderRadius": 28,
             "height": 56,
             "width": 56,
           },

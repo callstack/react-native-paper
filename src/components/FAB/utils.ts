@@ -1,4 +1,14 @@
-import { Animated, I18nManager, ViewStyle } from 'react-native';
+import color from 'color';
+import {
+  Animated,
+  I18nManager,
+  StyleProp,
+  ViewStyle,
+  StyleSheet,
+} from 'react-native';
+import type { MD3Colors, Theme } from '../../types';
+import { white, black } from '../../styles/themes/v2/colors';
+import getContrastingColor from '../../utils/getContrastingColor';
 
 type GetCombinedStylesProps = {
   isAnimatedFromRight: boolean;
@@ -141,4 +151,67 @@ export const getCombinedStyles = ({
   }
 
   return combinedStyles;
+};
+
+export const getFABColors = (
+  theme: Theme,
+  variant: string,
+  disabled?: boolean,
+  customColor?: string,
+  style?: StyleProp<ViewStyle>
+) => {
+  const { isV3 } = theme;
+  const isSurfaceVariant = variant === 'surface';
+
+  // FAB disabled color
+  const disabledColor = isV3
+    ? theme.colors.surfaceDisabled
+    : color(theme.dark ? white : black)
+        .alpha(0.12)
+        .rgb()
+        .string();
+
+  // FAB backgroundColor
+  const backgroundVariantColor = `${variant}${
+    isSurfaceVariant ? '' : 'Container'
+  }` as keyof Omit<MD3Colors, 'elevation'>;
+  const foregroundVariantColor = `on${
+    variant.charAt(0).toUpperCase() + variant.slice(1)
+  }${isSurfaceVariant ? '' : 'Container'}` as keyof Omit<
+    MD3Colors,
+    'elevation'
+  >;
+  const {
+    backgroundColor = disabled
+      ? disabledColor
+      : isV3
+      ? theme.colors[backgroundVariantColor]
+      : theme.colors?.accent,
+  } = StyleSheet.flatten<ViewStyle>(style) || {};
+
+  // FAB foregroundColor
+  let foregroundColor: string;
+  if (typeof customColor !== 'undefined') {
+    foregroundColor = customColor;
+  } else if (disabled) {
+    foregroundColor = isV3
+      ? theme.colors.onSurfaceDisabled
+      : color(theme.dark ? white : black)
+          .alpha(0.32)
+          .rgb()
+          .string();
+  } else {
+    foregroundColor = isV3
+      ? theme.colors[foregroundVariantColor]
+      : getContrastingColor(
+          backgroundColor || white,
+          white,
+          'rgba(0, 0, 0, .54)'
+        );
+  }
+
+  return {
+    backgroundColor,
+    foregroundColor,
+  };
 };
