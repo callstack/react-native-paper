@@ -57,6 +57,7 @@ exports[`renders chip with close button 1`] = `
             "paddingLeft": 4,
             "position": "relative",
           },
+          false,
           Object {
             "paddingRight": 32,
           },
@@ -70,6 +71,7 @@ exports[`renders chip with close button 1`] = `
               "alignSelf": "center",
               "padding": 4,
             },
+            false,
             null,
           ]
         }
@@ -118,6 +120,8 @@ exports[`renders chip with close button 1`] = `
                 "color": "rgba(0, 0, 0, 0.87)",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "marginLeft": 4,
                 "marginRight": 0,
               },
@@ -162,6 +166,7 @@ exports[`renders chip with close button 1`] = `
           Object {
             "marginRight": 4,
           },
+          false,
         ]
       }
     >
@@ -246,6 +251,7 @@ exports[`renders chip with custom close button 1`] = `
             "paddingLeft": 4,
             "position": "relative",
           },
+          false,
           Object {
             "paddingRight": 32,
           },
@@ -259,6 +265,7 @@ exports[`renders chip with custom close button 1`] = `
               "alignSelf": "center",
               "padding": 4,
             },
+            false,
             null,
           ]
         }
@@ -307,6 +314,8 @@ exports[`renders chip with custom close button 1`] = `
                 "color": "rgba(0, 0, 0, 0.87)",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "marginLeft": 4,
                 "marginRight": 0,
               },
@@ -351,6 +360,7 @@ exports[`renders chip with custom close button 1`] = `
           Object {
             "marginRight": 4,
           },
+          false,
         ]
       }
     >
@@ -435,6 +445,7 @@ exports[`renders chip with icon 1`] = `
             "paddingLeft": 4,
             "position": "relative",
           },
+          false,
           Object {
             "paddingRight": 4,
           },
@@ -448,6 +459,7 @@ exports[`renders chip with icon 1`] = `
               "alignSelf": "center",
               "padding": 4,
             },
+            false,
             null,
           ]
         }
@@ -496,6 +508,8 @@ exports[`renders chip with icon 1`] = `
                 "color": "rgba(0, 0, 0, 0.87)",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "marginLeft": 4,
                 "marginRight": 8,
               },
@@ -568,6 +582,7 @@ exports[`renders chip with onPress 1`] = `
             "paddingLeft": 4,
             "position": "relative",
           },
+          false,
           Object {
             "paddingRight": 4,
           },
@@ -598,6 +613,8 @@ exports[`renders chip with onPress 1`] = `
                 "color": "rgba(0, 0, 0, 0.87)",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "marginLeft": 8,
                 "marginRight": 8,
               },
@@ -670,6 +687,7 @@ exports[`renders outlined disabled chip 1`] = `
             "paddingLeft": 4,
             "position": "relative",
           },
+          false,
           Object {
             "paddingRight": 4,
           },
@@ -697,9 +715,11 @@ exports[`renders outlined disabled chip 1`] = `
                 "textAlignVertical": "center",
               },
               Object {
-                "color": "#000000",
+                "color": "rgba(0, 0, 0, 0.26)",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "marginLeft": 8,
                 "marginRight": 8,
               },
@@ -772,6 +792,7 @@ exports[`renders selected chip 1`] = `
             "paddingLeft": 4,
             "position": "relative",
           },
+          false,
           Object {
             "paddingRight": 4,
           },
@@ -785,6 +806,7 @@ exports[`renders selected chip 1`] = `
               "alignSelf": "center",
               "padding": 4,
             },
+            false,
             null,
           ]
         }
@@ -833,6 +855,8 @@ exports[`renders selected chip 1`] = `
                 "color": "rgba(0, 0, 0, 0.87)",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "marginLeft": 4,
                 "marginRight": 8,
               },

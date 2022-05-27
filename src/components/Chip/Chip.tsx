@@ -10,16 +10,16 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import color from 'color';
-import type { IconSource } from './Icon';
-import Icon from './Icon';
-import MaterialCommunityIcon from './MaterialCommunityIcon';
-import Surface from './Surface';
-import Text from './Typography/Text';
-import TouchableRipple from './TouchableRipple/TouchableRipple';
-import { withTheme } from '../core/theming';
-import { black, white } from '../styles/themes/v2/colors';
-import type { EllipsizeProp, Theme } from '../types';
+import type { IconSource } from '../Icon';
+import Icon from '../Icon';
+import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import Surface from '../Surface';
+import Text from '../Typography/Text';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import { withTheme } from '../../core/theming';
+import { white } from '../../styles/themes/v2/colors';
+import type { EllipsizeProp, Theme } from '../../types';
+import { getChipColors } from './helpers';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
@@ -53,6 +53,11 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   selectedColor?: string;
   /**
+   * @supported Available in v3.x with theme version 3
+   * Whether to display overlay on selected chip
+   */
+  showSelectedOverlay?: boolean;
+  /**
    * Whether the chip is disabled. A disabled chip is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean;
@@ -68,6 +73,16 @@ type Props = React.ComponentProps<typeof Surface> & {
    * Function to execute on press.
    */
   onPress?: () => void;
+  /**
+   * @supported Available in v3.x with theme version 3
+   * Sets smaller horizontal paddings `12dp` around label, when there is only label.
+   */
+  compact?: boolean;
+  /**
+   * @supported Available in v3.x with theme version 3
+   * Whether chip should have the elevation.
+   */
+  elevated?: boolean;
   /**
    * Function to execute on long press.
    */
@@ -140,84 +155,62 @@ const Chip = ({
   theme,
   testID,
   selectedColor,
+  showSelectedOverlay = false,
   ellipsizeMode,
+  compact,
+  elevated = false,
   ...rest
 }: Props) => {
+  const { isV3 } = theme;
+
   const { current: elevation } = React.useRef<Animated.Value>(
-    new Animated.Value(0)
+    new Animated.Value(isV3 && elevated ? 1 : 0)
   );
+
+  const isOutlined = mode === 'outlined';
 
   const handlePressIn = () => {
     const { scale } = theme.animation;
     Animated.timing(elevation, {
-      toValue: 4,
+      toValue: isV3 ? (elevated ? 2 : 0) : 4,
       duration: 200 * scale,
-      useNativeDriver: false,
+      useNativeDriver: true,
     }).start();
   };
 
   const handlePressOut = () => {
     const { scale } = theme.animation;
     Animated.timing(elevation, {
-      toValue: 0,
+      toValue: isV3 && elevated ? 1 : 0,
       duration: 150 * scale,
-      useNativeDriver: false,
+      useNativeDriver: true,
     }).start();
   };
 
-  const { dark, colors } = theme;
-  const defaultBackgroundColor =
-    mode === 'outlined' ? colors?.surface : dark ? '#383838' : '#ebebeb';
+  const opacity = isV3 ? 0.38 : 0.26;
+  const defaultBorderRadius = isV3 ? 8 : 16;
+  const iconSize = isV3 ? 18 : 16;
 
-  const { backgroundColor = defaultBackgroundColor, borderRadius = 16 } =
-    (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const {
+    backgroundColor: customBackgroundColor,
+    borderRadius = defaultBorderRadius,
+  } = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
-  const themeTextColor = theme.isV3
-    ? theme.colors.onSurface
-    : theme.colors.text;
-  const themeDisabledColor = theme.isV3
-    ? theme.colors.onSurfaceDisabled
-    : theme.colors.text;
-
-  const borderColor =
-    mode === 'outlined'
-      ? color(
-          selectedColor !== undefined
-            ? selectedColor
-            : color(dark ? white : black)
-        )
-          .alpha(0.29)
-          .rgb()
-          .string()
-      : backgroundColor;
-  const textColor = disabled
-    ? themeDisabledColor
-    : color(selectedColor !== undefined ? selectedColor : themeTextColor)
-        .alpha(0.87)
-        .rgb()
-        .string();
-  const iconColor = disabled
-    ? themeDisabledColor
-    : color(selectedColor !== undefined ? selectedColor : themeTextColor)
-        .alpha(0.54)
-        .rgb()
-        .string();
-
-  const backgroundColorString =
-    typeof backgroundColor === 'string'
-      ? backgroundColor
-      : defaultBackgroundColor;
-  const selectedBackgroundColor = (
-    dark
-      ? color(backgroundColorString).lighten(mode === 'outlined' ? 0.2 : 0.4)
-      : color(backgroundColorString).darken(mode === 'outlined' ? 0.08 : 0.2)
-  )
-    .rgb()
-    .string();
-
-  const underlayColor = selectedColor
-    ? color(selectedColor).fade(0.5).rgb().string()
-    : selectedBackgroundColor;
+  const {
+    borderColor,
+    textColor,
+    iconColor,
+    underlayColor,
+    selectedBackgroundColor,
+    backgroundColor,
+  } = getChipColors({
+    isOutlined,
+    theme,
+    selectedColor,
+    showSelectedOverlay,
+    customBackgroundColor,
+    disabled,
+  });
 
   const accessibilityTraits = ['button'];
   const accessibilityState: AccessibilityState = {
@@ -233,13 +226,23 @@ const Chip = ({
     accessibilityTraits.push('disabled');
   }
 
-  const elevationStyle = Platform.OS === 'android' ? elevation : 0;
+  const elevationStyle = isV3 || Platform.OS === 'android' ? elevation : 0;
+  const multiplier = isV3 ? (compact ? 1.5 : 2) : 1;
+  const labelSpacings = {
+    marginRight: onClose ? 0 : 8 * multiplier,
+    marginLeft: avatar || icon || selected ? 4 * multiplier : 8 * multiplier,
+  };
+  const contentSpacings = {
+    paddingRight: isV3 ? (onClose ? 34 : 0) : onClose ? 32 : 4,
+  };
 
   return (
     <Surface
       style={
         [
           styles.container,
+          isV3 &&
+            (isOutlined ? styles.md3OutlineContainer : styles.md3FlatContainer),
           !theme.isV3 && {
             elevation: elevationStyle,
           },
@@ -274,9 +277,17 @@ const Chip = ({
         accessibilityState={accessibilityState}
         testID={testID}
       >
-        <View style={[styles.content, { paddingRight: onClose ? 32 : 4 }]}>
+        <View
+          style={[styles.content, isV3 && styles.md3Content, contentSpacings]}
+        >
           {avatar && !icon ? (
-            <View style={[styles.avatarWrapper, disabled && { opacity: 0.26 }]}>
+            <View
+              style={[
+                styles.avatarWrapper,
+                isV3 && styles.md3AvatarWrapper,
+                disabled && { opacity },
+              ]}
+            >
               {React.isValidElement(avatar)
                 ? React.cloneElement(avatar, {
                     style: [styles.avatar, avatar.props.style],
@@ -288,13 +299,26 @@ const Chip = ({
             <View
               style={[
                 styles.icon,
-                avatar ? [styles.avatar, styles.avatarSelected] : null,
+                isV3 && styles.md3Icon,
+                avatar
+                  ? [
+                      styles.avatar,
+                      styles.avatarSelected,
+                      isV3 && selected && styles.md3SelectedIcon,
+                    ]
+                  : null,
               ]}
             >
               {icon ? (
                 <Icon
                   source={icon}
-                  color={avatar ? white : iconColor}
+                  color={
+                    avatar
+                      ? white
+                      : !disabled && theme.isV3
+                      ? theme.colors.primary
+                      : iconColor
+                  }
                   size={18}
                 />
               ) : (
@@ -308,16 +332,18 @@ const Chip = ({
             </View>
           ) : null}
           <Text
+            variant="labelLarge"
             selectable={false}
             numberOfLines={1}
             style={[
               styles.text,
               {
-                ...theme.fonts.regular,
                 color: textColor,
-                marginRight: onClose ? 0 : 8,
-                marginLeft: avatar || icon || selected ? 4 : 8,
+                ...(!isV3 && {
+                  ...theme.fonts.regular,
+                }),
               },
+              labelSpacings,
               textStyle,
             ]}
             ellipsizeMode={ellipsizeMode}
@@ -336,13 +362,19 @@ const Chip = ({
             accessibilityRole="button"
             accessibilityLabel={closeIconAccessibilityLabel}
           >
-            <View style={[styles.icon, styles.closeIcon]}>
+            <View
+              style={[
+                styles.icon,
+                styles.closeIcon,
+                isV3 && styles.md3CloseIcon,
+              ]}
+            >
               {closeIcon ? (
-                <Icon source={closeIcon} color={iconColor} size={16} />
+                <Icon source={closeIcon} color={iconColor} size={iconSize} />
               ) : (
                 <MaterialCommunityIcon
-                  name="close-circle"
-                  size={16}
+                  name={isV3 ? 'close' : 'close-circle'}
+                  size={iconSize}
                   color={iconColor}
                   direction="ltr"
                 />
@@ -361,6 +393,12 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     flexDirection: Platform.select({ default: 'column', web: 'row' }),
   },
+  md3OutlineContainer: {
+    borderWidth: 1,
+  },
+  md3FlatContainer: {
+    borderWidth: 0,
+  },
   content: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -368,12 +406,23 @@ const styles = StyleSheet.create({
     position: 'relative',
     flexGrow: 1,
   },
+  md3Content: {
+    paddingLeft: 0,
+  },
   icon: {
     padding: 4,
     alignSelf: 'center',
   },
+  md3Icon: {
+    paddingLeft: 8,
+    paddingRight: 0,
+  },
   closeIcon: {
     marginRight: 4,
+  },
+  md3CloseIcon: {
+    marginRight: 8,
+    padding: 0,
   },
   text: {
     minHeight: 24,
@@ -388,6 +437,13 @@ const styles = StyleSheet.create({
   },
   avatarWrapper: {
     marginRight: 4,
+  },
+  md3AvatarWrapper: {
+    marginLeft: 4,
+    marginRight: 0,
+  },
+  md3SelectedIcon: {
+    paddingLeft: 4,
   },
   avatarSelected: {
     position: 'absolute',
