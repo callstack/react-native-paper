@@ -27,7 +27,7 @@ type Props = {
    * - `labelTextColor`: custom label text color of the action item
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
    * - `labelStyle`: pass additional styles for the fab item label, for example, `backgroundColor`
-   * - `small`: boolean describing whether small or normal sized FAB is rendered. Defaults to `true`
+   * - `size`: size of action item. Defaults to `small`. `Available in v3.x` @supported Available in v3.x
    * - `onPress`: callback that is called when `FAB` is pressed (required)
    */
   actions: Array<{
@@ -38,8 +38,8 @@ type Props = {
     accessibilityLabel?: string;
     style?: StyleProp<ViewStyle>;
     labelStyle?: StyleProp<ViewStyle>;
-    small?: boolean;
     onPress: () => void;
+    size?: 'small' | 'medium';
     testID?: string;
   }>;
   /**
@@ -82,6 +82,12 @@ type Props = {
    */
   fabStyle?: StyleProp<ViewStyle>;
   /**
+   * @supported Available in v3.x with theme version 3
+   *
+   * Color mappings variant for combinations of container and icon colors.
+   */
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'surface';
+  /**
    * @optional
    */
   theme: Theme;
@@ -95,9 +101,6 @@ type Props = {
  * A component to display a stack of FABs with related actions in a speed dial.
  * To render the group above other components, you'll need to wrap it with the [`Portal`](portal.html) component.
  *
- * <div class="screenshots">
- *   <img src="screenshots/fab-group.png" />
- * </div>
  *
  * ## Usage
  * ```js
@@ -133,7 +136,6 @@ type Props = {
  *               icon: 'bell',
  *               label: 'Remind',
  *               onPress: () => console.log('Pressed notifications'),
- *               small: false,
  *             },
  *           ]}
  *           onStateChange={onStateChange}
@@ -164,6 +166,7 @@ const FABGroup = ({
   testID,
   onStateChange,
   color: colorProp,
+  variant = 'primary',
 }: Props) => {
   const { current: backdrop } = React.useRef<Animated.Value>(
     new Animated.Value(0)
@@ -186,6 +189,7 @@ const FABGroup = ({
   >(null);
 
   const { scale } = theme.animation;
+  const { isV3 } = theme;
 
   React.useEffect(() => {
     if (open) {
@@ -196,7 +200,7 @@ const FABGroup = ({
           useNativeDriver: true,
         }),
         Animated.stagger(
-          50 * scale,
+          isV3 ? 15 : 50 * scale,
           animations.current
             .map((animation) =>
               Animated.timing(animation, {
@@ -224,17 +228,17 @@ const FABGroup = ({
         ),
       ]).start();
     }
-  }, [open, actions, backdrop, scale]);
+  }, [open, actions, backdrop, scale, isV3]);
 
   const close = () => onStateChange({ open: false });
 
   const toggle = () => onStateChange({ open: !open });
 
-  const textColor = theme.isV3 ? theme.colors.onSurface : theme?.colors?.text;
-
-  const labelColor = theme.dark
-    ? textColor
-    : color(textColor).fade(0.54).rgb().string();
+  const labelColor = isV3
+    ? theme.colors.onSurface
+    : theme.dark
+    ? theme.colors.text
+    : color(theme.colors.text).fade(0.54).rgb().string();
   const backdropOpacity = open
     ? backdrop.interpolate({
         inputRange: [0, 0.5, 1],
@@ -247,9 +251,26 @@ const FABGroup = ({
     open
       ? opacity.interpolate({
           inputRange: [0, 1],
-          outputRange: [0.8, 1],
+          outputRange: [0.5, 1],
         })
       : 1
+  );
+
+  const translations = opacities.map((opacity) =>
+    open
+      ? opacity.interpolate({
+          inputRange: [0, 1],
+          outputRange: [24, -8],
+        })
+      : -8
+  );
+  const labelTranslations = opacities.map((opacity) =>
+    open
+      ? opacity.interpolate({
+          inputRange: [0, 1],
+          outputRange: [8, -8],
+        })
+      : -8
   );
 
   if (actions.length !== prevActions?.length) {
@@ -268,8 +289,8 @@ const FABGroup = ({
             styles.backdrop,
             {
               opacity: backdropOpacity,
-              backgroundColor: theme.isV3
-                ? theme.colors.onSurfaceVariant
+              backgroundColor: isV3
+                ? color(theme.colors.background).alpha(0.8).rgb().string()
                 : theme.colors?.backdrop,
             },
           ]}
@@ -284,7 +305,9 @@ const FABGroup = ({
                 styles.item,
                 {
                   marginHorizontal:
-                    typeof it.small === 'undefined' || it.small ? 24 : 16,
+                    typeof it.size === 'undefined' || it.size === 'small'
+                      ? 24
+                      : 16,
                 },
               ]}
               pointerEvents={open ? 'box-none' : 'none'}
@@ -296,9 +319,14 @@ const FABGroup = ({
                       [
                         styles.label,
                         {
-                          transform: [{ scale: scales[i] }],
+                          transform: [
+                            isV3
+                              ? { translateY: labelTranslations[i] }
+                              : { scale: scales[i] },
+                          ],
                           opacity: opacities[i],
                         },
+                        isV3 && styles.v3LabelStyle,
                         it.labelStyle,
                       ] as StyleProp<ViewStyle>
                     }
@@ -315,15 +343,19 @@ const FABGroup = ({
                     accessibilityTraits="button"
                     accessibilityComponentType="button"
                     accessibilityRole="button"
+                    {...(isV3 && { elevation: 0 })}
                   >
-                    <Text style={{ color: it.labelTextColor ?? labelColor }}>
+                    <Text
+                      variant="titleMedium"
+                      style={{ color: it.labelTextColor ?? labelColor }}
+                    >
                       {it.label}
                     </Text>
                   </Card>
                 </View>
               )}
               <FAB
-                small={typeof it.small !== 'undefined' ? it.small : true}
+                size={typeof it.size !== 'undefined' ? it.size : 'small'}
                 icon={it.icon}
                 color={it.color}
                 style={
@@ -331,8 +363,9 @@ const FABGroup = ({
                     {
                       transform: [{ scale: scales[i] }],
                       opacity: opacities[i],
-                      backgroundColor: theme.colors?.surface,
+                      backgroundColor: theme.colors.surface,
                     },
+                    isV3 && { transform: [{ translateY: translations[i] }] },
                     it.style,
                   ] as StyleProp<ViewStyle>
                 }
@@ -368,9 +401,17 @@ const FABGroup = ({
           accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityState={{ expanded: open }}
-          style={[styles.fab, fabStyle]}
+          style={[
+            styles.fab,
+            isV3 &&
+              open && {
+                backgroundColor: theme.colors.surfaceVariant,
+              },
+            fabStyle,
+          ]}
           visible={visible}
           testID={testID}
+          variant={variant}
         />
       </SafeAreaView>
     </View>
@@ -415,5 +456,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
+  },
+  v3LabelStyle: {
+    backgroundColor: 'transparent',
+    elevation: 0,
   },
 });

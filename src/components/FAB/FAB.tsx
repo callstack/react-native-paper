@@ -14,10 +14,13 @@ import CrossFadeIcon from '../CrossFadeIcon';
 import Icon, { IconSource } from '../Icon';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { black, white } from '../../styles/themes/v2/colors';
 import { withTheme } from '../../core/theming';
-import getContrastingColor from '../../utils/getContrastingColor';
+import { getFABColors } from './utils';
 import type { $RemoveChildren, Theme } from '../../types';
+
+type FABSize = 'small' | 'medium' | 'large';
+
+type FABMode = 'flat' | 'elevated';
 
 type Props = $RemoveChildren<typeof Surface> & {
   /**
@@ -46,6 +49,8 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   animated?: boolean;
   /**
+   *  @deprecated Deprecated in v.3x - use prop size="small".
+   *
    *  Whether FAB is mini-sized, used to create visual continuity with other elements. This has no effect if `label` is specified.
    */
   small?: boolean;
@@ -73,6 +78,29 @@ type Props = $RemoveChildren<typeof Surface> & {
    * Function to execute on long press.
    */
   onLongPress?: () => void;
+  /**
+   * @supported Available in v3.x with theme version 3
+   *
+   * Size of the `FAB`.
+   * - `small` - FAB with small height (40).
+   * - `medium` - Appbar with default medium height (56).
+   * - `large` - Appbar with large height (96).
+   */
+  size?: FABSize;
+  /**
+   * @supported Available in v3.x with theme version 3
+   *
+   * Mode of the `FAB`. You can change the mode to adjust the the shadow:
+   * - `flat` - button without a shadow.
+   * - `elevated` - button with a shadow.
+   */
+  mode?: FABMode;
+  /**
+   * @supported Available in v3.x with theme version 3
+   *
+   * Color mappings variant for combinations of container and icon colors.
+   */
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'surface';
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -84,10 +112,6 @@ type Props = $RemoveChildren<typeof Surface> & {
 /**
  * A floating action button represents the primary action in an application.
  *
- * <div class="screenshots">
- *   <img src="screenshots/fab-1.png" />
- *   <img src="screenshots/fab-2.png" />
- * </div>
  *
  * ## Usage
  * ```js
@@ -97,9 +121,8 @@ type Props = $RemoveChildren<typeof Surface> & {
  *
  * const MyComponent = () => (
  *   <FAB
- *     style={styles.fab}
- *     small
  *     icon="plus"
+ *     style={styles.fab}
  *     onPress={() => console.log('Pressed')}
  *   />
  * );
@@ -117,7 +140,6 @@ type Props = $RemoveChildren<typeof Surface> & {
  * ```
  */
 const FAB = ({
-  small,
   icon,
   label,
   accessibilityLabel = label,
@@ -130,15 +152,19 @@ const FAB = ({
   theme,
   style,
   visible = true,
-  uppercase = true,
+  uppercase = !theme.isV3,
   loading,
   testID,
+  size = 'medium',
+  mode = 'elevated',
+  variant = 'primary',
   ...rest
 }: Props) => {
   const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
-  const { scale } = theme.animation;
+  const { isV3, animation, fonts } = theme;
+  const { scale } = animation;
 
   React.useEffect(() => {
     if (visible) {
@@ -158,36 +184,49 @@ const FAB = ({
 
   const IconComponent = animated ? CrossFadeIcon : Icon;
 
-  const disabledColor = color(theme.dark ? white : black)
-    .alpha(0.12)
-    .rgb()
-    .string();
-
-  const buttonBackgroundColor = theme.isV3
-    ? theme.colors.secondary
-    : theme.colors.accent;
-
-  const { backgroundColor = disabled ? disabledColor : buttonBackgroundColor } =
-    (StyleSheet.flatten(style) || {}) as ViewStyle;
-
-  let foregroundColor;
-
-  if (typeof customColor !== 'undefined') {
-    foregroundColor = customColor;
-  } else if (disabled) {
-    foregroundColor = color(theme.dark ? white : black)
-      .alpha(0.32)
-      .rgb()
-      .string();
-  } else {
-    foregroundColor = getContrastingColor(
-      backgroundColor || white,
-      white,
-      'rgba(0, 0, 0, .54)'
-    );
-  }
+  const { backgroundColor, foregroundColor } = getFABColors(
+    theme,
+    variant,
+    disabled,
+    customColor,
+    style
+  );
 
   const rippleColor = color(foregroundColor).alpha(0.32).rgb().string();
+
+  const isLargeSize = size === 'large';
+  const isFlatMode = mode === 'flat';
+  const iconSize = isLargeSize ? 36 : 24;
+  const loadingIndicatorSize = isLargeSize ? 24 : 18;
+
+  const fabStyle = () => {
+    if (!isV3) {
+      return size === 'small' ? styles.small : styles.standard;
+    } else {
+      switch (size) {
+        case 'small':
+          return styles.v3SmallSize;
+        case 'medium':
+          return styles.v3MediumSize;
+        case 'large':
+          return styles.v3LargeSize;
+      }
+    }
+  };
+
+  const shapeStyle = { borderRadius: fabStyle().borderRadius };
+  const textStyle = {
+    color: foregroundColor,
+    ...(!isV3 && fonts.medium),
+  };
+
+  const containerStyles = [
+    !isV3 && styles.elevated,
+    !isV3 && disabled && styles.disabled,
+    shapeStyle,
+  ];
+  const extendedStyle = isV3 ? styles.v3Extended : styles.extended;
+  const md3Elevation = isFlatMode || disabled ? 0 : 3;
 
   return (
     <Surface
@@ -203,12 +242,12 @@ const FAB = ({
               },
             ],
           },
-          styles.container,
-          disabled && styles.disabled,
+          containerStyles,
           style,
         ] as StyleProp<ViewStyle>
       }
       pointerEvents={visible ? 'auto' : 'none'}
+      {...(isV3 && { elevation: md3Elevation })}
     >
       <TouchableRipple
         borderless
@@ -222,29 +261,34 @@ const FAB = ({
         accessibilityComponentType="button"
         accessibilityRole="button"
         accessibilityState={{ ...accessibilityState, disabled }}
-        style={styles.touchable}
+        style={shapeStyle}
         testID={testID}
       >
         <View
-          style={[
-            styles.content,
-            label ? styles.extended : small ? styles.small : styles.standard,
-          ]}
+          style={[styles.content, label ? extendedStyle : fabStyle()]}
           pointerEvents="none"
         >
           {icon && loading !== true ? (
-            <IconComponent source={icon} size={24} color={foregroundColor} />
+            <IconComponent
+              source={icon}
+              size={iconSize}
+              color={foregroundColor}
+            />
           ) : null}
           {loading ? (
-            <ActivityIndicator size={18} color={foregroundColor} />
+            <ActivityIndicator
+              size={loadingIndicatorSize}
+              color={foregroundColor}
+            />
           ) : null}
           {label ? (
             <Text
+              variant="labelLarge"
               selectable={false}
               style={[
                 styles.label,
                 uppercase && styles.uppercaseLabel,
-                { color: foregroundColor, ...theme.fonts.medium },
+                textStyle,
               ]}
             >
               {label}
@@ -257,20 +301,18 @@ const FAB = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    borderRadius: 28,
+  elevated: {
     elevation: 6,
-  },
-  touchable: {
-    borderRadius: 28,
   },
   standard: {
     height: 56,
     width: 56,
+    borderRadius: 28,
   },
   small: {
     height: 40,
     width: 40,
+    borderRadius: 28,
   },
   extended: {
     height: 48,
@@ -289,6 +331,26 @@ const styles = StyleSheet.create({
   },
   disabled: {
     elevation: 0,
+  },
+  v3SmallSize: {
+    height: 40,
+    width: 40,
+    borderRadius: 12,
+  },
+  v3MediumSize: {
+    height: 56,
+    width: 56,
+    borderRadius: 16,
+  },
+  v3LargeSize: {
+    height: 96,
+    width: 96,
+    borderRadius: 28,
+  },
+  v3Extended: {
+    height: 56,
+    borderRadius: 16,
+    paddingHorizontal: 16,
   },
 });
 

@@ -149,10 +149,10 @@ exports[`renders animated fab 1`] = `
             style={
               Array [
                 Object {
-                  "borderRadius": 28,
                   "height": 56,
                 },
                 Object {
+                  "borderRadius": 28,
                   "width": 84,
                 },
               ]
@@ -383,10 +383,10 @@ exports[`renders animated fab with label on the left 1`] = `
             style={
               Array [
                 Object {
-                  "borderRadius": 28,
                   "height": 56,
                 },
                 Object {
+                  "borderRadius": 28,
                   "width": 84,
                 },
               ]
@@ -619,10 +619,10 @@ exports[`renders animated fab with label on the right by default 1`] = `
             style={
               Array [
                 Object {
-                  "borderRadius": 28,
                   "height": 56,
                 },
                 Object {
+                  "borderRadius": 28,
                   "width": 84,
                 },
               ]
