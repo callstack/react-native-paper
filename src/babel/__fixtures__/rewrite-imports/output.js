@@ -2,7 +2,7 @@
 import { Text } from 'react-native';
 import PaperProvider from "react-native-paper/lib/module/core/Provider";
 import BottomNavigation from "react-native-paper/lib/module/components/BottomNavigation/BottomNavigation";
-import Button from "react-native-paper/lib/module/components/Button";
+import Button from "react-native-paper/lib/module/components/Button/Button";
 import FAB from "react-native-paper/lib/module/components/FAB";
 import Appbar from "react-native-paper/lib/module/components/Appbar";
 import * as MD2Colors from "react-native-paper/lib/module/styles/themes/v2/colors";

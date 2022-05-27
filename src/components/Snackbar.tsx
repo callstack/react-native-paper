@@ -9,7 +9,7 @@ import {
   Easing,
 } from 'react-native';
 
-import Button from './Button';
+import Button from './Button/Button';
 import Surface from './Surface';
 import Text from './Typography/Text';
 import { withTheme } from '../core/theming';
@@ -188,7 +188,7 @@ const Snackbar = ({
   const marginRight = action ? 0 : 16;
   const textColor = theme.isV3
     ? theme.colors.inversePrimary
-    : theme.colors?.accent;
+    : theme.colors.accent;
 
   return (
     <SafeAreaView
@@ -233,7 +233,7 @@ const Snackbar = ({
               onDismiss();
             }}
             style={[styles.button, actionStyle]}
-            color={textColor}
+            textColor={textColor}
             compact
             mode="text"
             {...actionProps}
