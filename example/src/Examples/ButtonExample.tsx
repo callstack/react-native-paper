@@ -1,186 +1,66 @@
 import * as React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
-import { Button, List, useTheme } from 'react-native-paper';
-import ScreenWrapper from '../ScreenWrapper';
+import { StyleSheet, View } from 'react-native';
+import { Button } from 'react-native-paper';
 
-const ButtonExample = () => {
-  const theme = useTheme();
+const MODES = {
+  WHEN_AND_WHERE: 'when and where',
+  WHEN: 'when',
+  WHERE: 'where',
+};
 
-  const color = theme.isV3 ? theme.colors.secondary : theme.colors.accent;
-
+const ModeButton = ({ isSelected, label, onPress }) => {
   return (
-    <ScreenWrapper>
-      <List.Section title="Text button">
-        <View style={styles.row}>
-          <Button onPress={() => {}} style={styles.button}>
-            Default
-          </Button>
-          <Button color={color} onPress={() => {}} style={styles.button}>
-            Custom
-          </Button>
-          <Button disabled onPress={() => {}} style={styles.button}>
-            Disabled
-          </Button>
-          <Button icon="camera" onPress={() => {}} style={styles.button}>
-            Icon
-          </Button>
-          <Button loading onPress={() => {}} style={styles.button}>
-            Loading
-          </Button>
-          <Button
-            icon="camera"
-            onPress={() => {}}
-            style={styles.button}
-            contentStyle={styles.flexReverse}
-          >
-            Icon right
-          </Button>
-        </View>
-      </List.Section>
-      <List.Section title="Outlined button">
-        <View style={styles.row}>
-          <Button mode="outlined" onPress={() => {}} style={styles.button}>
-            Default
-          </Button>
-          <Button
-            mode="outlined"
-            color={color}
-            onPress={() => {}}
-            style={styles.button}
-          >
-            Custom
-          </Button>
-          <Button
-            mode="outlined"
-            disabled
-            onPress={() => {}}
-            style={styles.button}
-          >
-            Disabled
-          </Button>
-          <Button
-            mode="outlined"
-            icon="camera"
-            onPress={() => {}}
-            style={styles.button}
-          >
-            Icon
-          </Button>
-          <Button
-            mode="outlined"
-            loading
-            onPress={() => {}}
-            style={styles.button}
-          >
-            Loading
-          </Button>
-          <Button
-            icon="heart"
-            mode="outlined"
-            onPress={() => {}}
-            style={styles.button}
-            labelStyle={styles.fontStyles}
-          >
-            Custom Font
-          </Button>
-        </View>
-      </List.Section>
-      <List.Section title="Contained button">
-        <View style={styles.row}>
-          <Button mode="contained" onPress={() => {}} style={styles.button}>
-            Default
-          </Button>
-          <Button
-            mode="contained"
-            color={color}
-            onPress={() => {}}
-            style={styles.button}
-          >
-            Custom
-          </Button>
-          <Button
-            mode="contained"
-            disabled
-            onPress={() => {}}
-            style={styles.button}
-          >
-            Disabled
-          </Button>
-          <Button
-            mode="contained"
-            icon="camera"
-            onPress={() => {}}
-            style={styles.button}
-          >
-            Icon
-          </Button>
-          <Button
-            mode="contained"
-            loading
-            onPress={() => {}}
-            style={styles.button}
-          >
-            Loading
-          </Button>
-        </View>
-      </List.Section>
-      <List.Section title="Custom icon">
-        <View style={styles.row}>
-          <Button
-            mode="outlined"
-            icon={{
-              uri: 'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400',
-            }}
-            onPress={() => {}}
-            style={styles.button}
-          >
-            Remote image
-          </Button>
-          <Button
-            mode="outlined"
-            icon={require('../../assets/images/favorite.png')}
-            onPress={() => {}}
-            style={styles.button}
-          >
-            Required asset
-          </Button>
-          <Button
-            mode="outlined"
-            icon={({ size }) => (
-              <Image
-                source={require('../../assets/images/chameleon.jpg')}
-                style={{ width: size, height: size, borderRadius: size / 2 }}
-              />
-            )}
-            onPress={() => {}}
-            style={styles.button}
-          >
-            Custom component
-          </Button>
-        </View>
-      </List.Section>
-    </ScreenWrapper>
+    <Button
+      compact
+      mode={isSelected ? 'elevated' : 'outlined'}
+      onPress={onPress}
+      style={{ borderRadius: 24, marginRight: 8 }}
+    >
+      {label}
+    </Button>
   );
 };
 
-ButtonExample.title = 'Button';
+const App = () => {
+  const [mode, setMode] = React.useState(MODES.WHEN_AND_WHERE);
+
+  return (
+    <View style={styles.root}>
+      <View style={styles.modesContainer}>
+        <ModeButton
+          isSelected={mode === MODES.WHEN_AND_WHERE}
+          label={MODES.WHEN_AND_WHERE}
+          onPress={() => setMode(MODES.WHEN_AND_WHERE)}
+        />
+        <ModeButton
+          isSelected={mode === MODES.WHEN}
+          label={MODES.WHEN}
+          onPress={() => setMode(MODES.WHEN)}
+        />
+        <ModeButton
+          isSelected={mode === MODES.WHERE}
+          label={MODES.WHERE}
+          onPress={() => setMode(MODES.WHERE)}
+        />
+      </View>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-  row: {
+  root: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  modesContainer: {
+    alignItems: 'center',
+    display: 'flex',
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    paddingHorizontal: 12,
-  },
-  button: {
-    margin: 4,
-  },
-  flexReverse: {
-    flexDirection: 'row-reverse',
-  },
-  fontStyles: {
-    fontWeight: '800',
-    fontSize: 24,
+    justifyContent: 'center',
+    marginTop: 16,
+    width: '100%',
   },
 });
 
-export default ButtonExample;
+export default App;

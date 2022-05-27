@@ -76,21 +76,20 @@ exports[`renders button with an accessibility hint 1`] = `
             },
             Array [
               Object {
-                "letterSpacing": 1,
                 "marginHorizontal": 16,
                 "marginVertical": 9,
                 "textAlign": "center",
               },
+              Object {
+                "letterSpacing": 1,
+              },
+              false,
               undefined,
               Object {
                 "textTransform": "uppercase",
               },
               Object {
                 "color": "#6200ee",
-                "fontFamily": "System",
-                "fontWeight": "500",
-              },
-              Object {
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
@@ -182,11 +181,14 @@ exports[`renders button with an accessibility label 1`] = `
             },
             Array [
               Object {
-                "letterSpacing": 1,
                 "marginHorizontal": 16,
                 "marginVertical": 9,
                 "textAlign": "center",
               },
+              Object {
+                "letterSpacing": 1,
+              },
+              false,
               undefined,
               Object {
                 "textTransform": "uppercase",
@@ -196,7 +198,100 @@ exports[`renders button with an accessibility label 1`] = `
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
+              undefined,
+            ],
+          ]
+        }
+      >
+        Button with accessibility label
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders button with button color 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#e91e63",
+      "borderColor": "transparent",
+      "borderRadius": 4,
+      "borderStyle": "solid",
+      "borderWidth": 0,
+      "elevation": 0,
+      "minWidth": 64,
+    }
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
+    accessible={true}
+    focusable={false}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 4,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        selectable={false}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "System",
+              "fontWeight": "400",
+            },
+            Object {
+              "textAlign": "left",
+            },
+            Array [
               Object {
+                "marginHorizontal": 16,
+                "marginVertical": 9,
+                "textAlign": "center",
+              },
+              Object {
+                "letterSpacing": 1,
+              },
+              false,
+              undefined,
+              Object {
+                "textTransform": "uppercase",
+              },
+              Object {
+                "color": "#6200ee",
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
@@ -205,7 +300,7 @@ exports[`renders button with an accessibility label 1`] = `
           ]
         }
       >
-        Button with accessibility label
+        Custom Button
       </Text>
     </View>
   </View>
@@ -287,21 +382,20 @@ exports[`renders button with color 1`] = `
             },
             Array [
               Object {
-                "letterSpacing": 1,
                 "marginHorizontal": 16,
                 "marginVertical": 9,
                 "textAlign": "center",
               },
+              Object {
+                "letterSpacing": 1,
+              },
+              false,
               undefined,
               Object {
                 "textTransform": "uppercase",
               },
               Object {
                 "color": "#e91e63",
-                "fontFamily": "System",
-                "fontWeight": "500",
-              },
-              Object {
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
@@ -393,21 +487,20 @@ exports[`renders button with custom testID 1`] = `
             },
             Array [
               Object {
-                "letterSpacing": 1,
                 "marginHorizontal": 16,
                 "marginVertical": 9,
                 "textAlign": "center",
               },
+              Object {
+                "letterSpacing": 1,
+              },
+              false,
               undefined,
               Object {
                 "textTransform": "uppercase",
               },
               Object {
                 "color": "#6200ee",
-                "fontFamily": "System",
-                "fontWeight": "500",
-              },
-              Object {
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
@@ -485,10 +578,14 @@ exports[`renders button with icon 1`] = `
     >
       <View
         style={
-          Object {
-            "marginLeft": 12,
-            "marginRight": -4,
-          }
+          Array [
+            Object {
+              "marginLeft": 12,
+              "marginRight": -4,
+            },
+            false,
+            false,
+          ]
         }
       >
         <Text
@@ -526,21 +623,20 @@ exports[`renders button with icon 1`] = `
             },
             Array [
               Object {
-                "letterSpacing": 1,
                 "marginHorizontal": 16,
                 "marginVertical": 9,
                 "textAlign": "center",
               },
+              Object {
+                "letterSpacing": 1,
+              },
+              false,
               undefined,
               Object {
                 "textTransform": "uppercase",
               },
               Object {
                 "color": "#6200ee",
-                "fontFamily": "System",
-                "fontWeight": "500",
-              },
-              Object {
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
@@ -620,10 +716,14 @@ exports[`renders button with icon in reverse order 1`] = `
     >
       <View
         style={
-          Object {
-            "marginLeft": -4,
-            "marginRight": 12,
-          }
+          Array [
+            Object {
+              "marginLeft": -4,
+              "marginRight": 12,
+            },
+            false,
+            false,
+          ]
         }
       >
         <Text
@@ -661,21 +761,20 @@ exports[`renders button with icon in reverse order 1`] = `
             },
             Array [
               Object {
-                "letterSpacing": 1,
                 "marginHorizontal": 16,
                 "marginVertical": 9,
                 "textAlign": "center",
               },
+              Object {
+                "letterSpacing": 1,
+              },
+              false,
               undefined,
               Object {
                 "textTransform": "uppercase",
               },
               Object {
                 "color": "#6200ee",
-                "fontFamily": "System",
-                "fontWeight": "500",
-              },
-              Object {
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
@@ -766,21 +865,20 @@ exports[`renders contained contained with mode 1`] = `
             },
             Array [
               Object {
-                "letterSpacing": 1,
                 "marginHorizontal": 16,
                 "marginVertical": 9,
                 "textAlign": "center",
               },
+              Object {
+                "letterSpacing": 1,
+              },
+              false,
               undefined,
               Object {
                 "textTransform": "uppercase",
               },
               Object {
                 "color": "#ffffff",
-                "fontFamily": "System",
-                "fontWeight": "500",
-              },
-              Object {
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
@@ -871,21 +969,20 @@ exports[`renders disabled button 1`] = `
             },
             Array [
               Object {
-                "letterSpacing": 1,
                 "marginHorizontal": 16,
                 "marginVertical": 9,
                 "textAlign": "center",
               },
+              Object {
+                "letterSpacing": 1,
+              },
+              false,
               undefined,
               Object {
                 "textTransform": "uppercase",
               },
               Object {
                 "color": "rgba(0, 0, 0, 0.32)",
-                "fontFamily": "System",
-                "fontWeight": "500",
-              },
-              Object {
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
@@ -975,10 +1072,14 @@ exports[`renders loading button 1`] = `
               "alignItems": "center",
               "justifyContent": "center",
             },
-            Object {
-              "marginLeft": 12,
-              "marginRight": -4,
-            },
+            Array [
+              Object {
+                "marginLeft": 12,
+                "marginRight": -4,
+              },
+              false,
+              false,
+            ],
           ]
         }
       >
@@ -1166,21 +1267,20 @@ exports[`renders loading button 1`] = `
             },
             Array [
               Object {
-                "letterSpacing": 1,
                 "marginHorizontal": 16,
                 "marginVertical": 9,
                 "textAlign": "center",
               },
+              Object {
+                "letterSpacing": 1,
+              },
+              false,
               undefined,
               Object {
                 "textTransform": "uppercase",
               },
               Object {
                 "color": "#6200ee",
-                "fontFamily": "System",
-                "fontWeight": "500",
-              },
-              Object {
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
@@ -1271,21 +1371,20 @@ exports[`renders outlined button with mode 1`] = `
             },
             Array [
               Object {
-                "letterSpacing": 1,
                 "marginHorizontal": 16,
                 "marginVertical": 9,
                 "textAlign": "center",
               },
+              Object {
+                "letterSpacing": 1,
+              },
+              false,
               undefined,
               Object {
                 "textTransform": "uppercase",
               },
               Object {
                 "color": "#6200ee",
-                "fontFamily": "System",
-                "fontWeight": "500",
-              },
-              Object {
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
@@ -1376,21 +1475,20 @@ exports[`renders text button by default 1`] = `
             },
             Array [
               Object {
-                "letterSpacing": 1,
                 "marginHorizontal": 16,
                 "marginVertical": 9,
                 "textAlign": "center",
               },
+              Object {
+                "letterSpacing": 1,
+              },
+              false,
               undefined,
               Object {
                 "textTransform": "uppercase",
               },
               Object {
                 "color": "#6200ee",
-                "fontFamily": "System",
-                "fontWeight": "500",
-              },
-              Object {
                 "fontFamily": "System",
                 "fontWeight": "500",
               },
@@ -1481,21 +1579,20 @@ exports[`renders text button with mode 1`] = `
             },
             Array [
               Object {
-                "letterSpacing": 1,
                 "marginHorizontal": 16,
                 "marginVertical": 9,
                 "textAlign": "center",
               },
+              Object {
+                "letterSpacing": 1,
+              },
+              false,
               undefined,
               Object {
                 "textTransform": "uppercase",
               },
               Object {
                 "color": "#6200ee",
-                "fontFamily": "System",
-                "fontWeight": "500",
-              },
-              Object {
                 "fontFamily": "System",
                 "fontWeight": "500",
               },

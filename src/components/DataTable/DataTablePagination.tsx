@@ -12,7 +12,7 @@ import Text from '../Typography/Text';
 import { withTheme, useTheme } from '../../core/theming';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Menu from '../Menu/Menu';
-import Button from '../Button';
+import Button from '../Button/Button';
 import type { Theme } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof View> &
