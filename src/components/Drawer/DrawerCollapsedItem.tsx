@@ -6,6 +6,8 @@ import {
   ViewStyle,
   Animated,
   TouchableWithoutFeedback,
+  NativeSyntheticEvent,
+  TextLayoutEventData,
 } from 'react-native';
 import Text from '../Typography/Text';
 import Icon, { IconSource } from '../Icon';
@@ -82,7 +84,8 @@ const DrawerCollapsedItem = ({
 }: Props) => {
   const { isV3 } = theme;
   const { scale } = theme.animation;
-  const font = theme.fonts.medium;
+
+  const [numOfLines, setNumOfLines] = React.useState(1);
 
   const { current: animScale } = React.useRef<Animated.Value>(
     new Animated.Value(active ? 1 : 0.5)
@@ -117,6 +120,12 @@ const DrawerCollapsedItem = ({
   const iconColor = active
     ? theme.colors.onSecondaryContainer
     : theme.colors.onSurfaceVariant;
+
+  const onTextLayout = ({
+    nativeEvent,
+  }: NativeSyntheticEvent<TextLayoutEventData>) => {
+    setNumOfLines(nativeEvent.lines.length);
+  };
 
   return (
     <View {...rest}>
@@ -169,11 +178,12 @@ const DrawerCollapsedItem = ({
               variant="labelMedium"
               selectable={false}
               numberOfLines={2}
+              onTextLayout={onTextLayout}
               style={[
                 styles.label,
+                numOfLines > 4 && styles.letterSpacing,
                 {
                   color: labelColor,
-                  ...font,
                 },
               ]}
             >
@@ -207,6 +217,10 @@ const styles = StyleSheet.create({
   },
   icon: {
     position: 'absolute',
+  },
+  letterSpacing: {
+    letterSpacing: 0.3,
+    alignSelf: 'stretch',
   },
   label: {
     marginHorizontal: 12,
