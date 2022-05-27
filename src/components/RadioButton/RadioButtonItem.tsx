@@ -14,7 +14,7 @@ import RadioButton from './RadioButton';
 import Text from '../Typography/Text';
 import RadioButtonAndroid from './RadioButtonAndroid';
 import RadioButtonIOS from './RadioButtonIOS';
-import type { Theme } from '../../types';
+import type { MD3TypescaleKey, Theme } from '../../types';
 
 export type Props = {
   /**
@@ -57,6 +57,23 @@ export type Props = {
    * Style that is passed to Label element.
    */
   labelStyle?: StyleProp<TextStyle>;
+  /**
+   * @supported Available in v3.x with theme version 3
+   *
+   * Label text variant defines appropriate text styles for type role and its size.
+   * Available variants:
+   *
+   *  Display: `displayLarge`, `displayMedium`, `displaySmall`
+   *
+   *  Headline: `headlineLarge`, `headlineMedium`, `headlineSmall`
+   *
+   *  Title: `titleLarge`, `titleMedium`, `titleSmall`
+   *
+   *  Label:  `labelLarge`, `labelMedium`, `labelSmall`
+   *
+   *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
+   */
+  labelVariant?: keyof typeof MD3TypescaleKey;
   /**
    * @optional
    */
@@ -120,6 +137,7 @@ const RadioButtonItem = ({
   testID,
   mode,
   position = 'trailing',
+  labelVariant = 'bodyLarge',
 }: Props) => {
   const radioButtonProps = { value, disabled, status, color, uncheckedColor };
   const isLeading = position === 'leading';
@@ -159,7 +177,7 @@ const RadioButtonItem = ({
             <View style={[styles.container, style]} pointerEvents="none">
               {isLeading && radioButton}
               <Text
-                variant="bodyLarge"
+                variant={labelVariant}
                 style={[
                   styles.label,
                   !theme.isV3 && styles.font,
