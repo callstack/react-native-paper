@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   NativeSyntheticEvent,
   TextLayoutEventData,
+  Platform,
 } from 'react-native';
 import Text from '../Typography/Text';
 import Icon, { IconSource } from '../Icon';
@@ -97,6 +98,10 @@ const DrawerCollapsedItem = ({
     }
   }, [animScale, active]);
 
+  if (!isV3) {
+    return null;
+  }
+
   const handlePressOut = () => {
     Animated.timing(animScale, {
       toValue: 1,
@@ -106,10 +111,6 @@ const DrawerCollapsedItem = ({
   };
 
   const iconPadding = ((!label ? itemSize : outlineHeight) - iconSize) / 2;
-
-  if (!isV3) {
-    return null;
-  }
 
   const backgroundColor = active
     ? theme.colors.secondaryContainer
@@ -126,6 +127,11 @@ const DrawerCollapsedItem = ({
   }: NativeSyntheticEvent<TextLayoutEventData>) => {
     setNumOfLines(nativeEvent.lines.length);
   };
+
+  // Label is cut off on Android, when centered "labelMedium" text
+  // has more than 4 lines, so there is a need to decrease the letter spacing.
+  const androidLetterSpacingStyle =
+    Platform.OS === 'android' && numOfLines > 4 && styles.letterSpacing;
 
   return (
     <View {...rest}>
@@ -181,7 +187,7 @@ const DrawerCollapsedItem = ({
               onTextLayout={onTextLayout}
               style={[
                 styles.label,
-                numOfLines > 4 && styles.letterSpacing,
+                androidLetterSpacingStyle,
                 {
                   color: labelColor,
                 },
