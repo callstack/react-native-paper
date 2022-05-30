@@ -1,8 +1,18 @@
 import * as React from 'react';
+import color from 'color';
 import { StyleSheet, Text, Platform } from 'react-native';
 import { fireEvent, render } from 'react-native-testing-library';
 import TextInput from '../TextInput/TextInput';
 import { red500 } from '../../styles/themes/v2/colors';
+import {
+  getFlatInputColors,
+  getOutlinedInputColors,
+} from '../TextInput/helpers';
+
+import MD3LightTheme from '../../styles/themes/v3/LightTheme';
+import MD2LightTheme from '../../styles/themes/v2/LightTheme';
+import MD3DarkTheme from '../../styles/themes/v3/DarkTheme';
+import MD2DarkTheme from '../../styles/themes/v2/DarkTheme';
 
 const style = StyleSheet.create({
   inputStyle: {
@@ -15,6 +25,20 @@ const style = StyleSheet.create({
     height: 100,
   },
 });
+
+const getTheme = (isDark = false, isV3 = true) => {
+  const theme = isDark
+    ? isV3
+      ? MD3DarkTheme
+      : MD2DarkTheme
+    : isV3
+    ? MD3LightTheme
+    : MD2LightTheme;
+  return {
+    ...theme,
+    isV3,
+  };
+};
 
 const affixTextValue = '/100';
 it('correctly renders left-side icon adornment, and right-side affix adornment', () => {
@@ -226,5 +250,630 @@ describe('maxFontSizeMultiplier', () => {
     expect(getByTestId('text-input-outlined').props.maxFontSizeMultiplier).toBe(
       null
     );
+  });
+});
+
+describe('getFlatInputColor - underline color', () => {
+  it('should return correct disabled color, for theme version 3', () => {
+    expect(
+      getFlatInputColors({
+        disabled: true,
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      underlineColorCustom: getTheme().colors.onSurfaceDisabled,
+    });
+  });
+
+  it('should return correct disabled color, for theme version 2', () => {
+    expect(
+      getFlatInputColors({
+        disabled: true,
+        theme: getTheme(false, false),
+      })
+    ).toMatchObject({
+      underlineColorCustom: 'transparent',
+    });
+  });
+
+  it('should return correct theme color, for theme version 3', () => {
+    expect(
+      getFlatInputColors({
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      underlineColorCustom: getTheme().colors.onSurface,
+    });
+  });
+
+  it('should return correct theme color, for theme version 2', () => {
+    expect(
+      getFlatInputColors({
+        theme: getTheme(false, false),
+      })
+    ).toMatchObject({
+      underlineColorCustom: getTheme(false, false).colors.disabled,
+    });
+  });
+
+  it('should return custom color, no matter what the theme is', () => {
+    expect(
+      getFlatInputColors({
+        underlineColor: 'beige',
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      underlineColorCustom: 'beige',
+    });
+
+    expect(
+      getFlatInputColors({
+        underlineColor: 'beige',
+        theme: getTheme(false, false),
+      })
+    ).toMatchObject({
+      underlineColorCustom: 'beige',
+    });
+  });
+});
+
+describe('getFlatInputColor - input text color', () => {
+  it('should return correct disabled color, for theme version 3', () => {
+    expect(
+      getFlatInputColors({
+        disabled: true,
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      inputTextColor: getTheme().colors.onSurfaceDisabled,
+    });
+  });
+
+  it('should return correct disabled color, for theme version 2', () => {
+    expect(
+      getFlatInputColors({
+        disabled: true,
+        theme: getTheme(false, false),
+      })
+    ).toMatchObject({
+      inputTextColor: color(getTheme(false, false).colors?.text)
+        .alpha(0.54)
+        .rgb()
+        .string(),
+    });
+  });
+
+  it('should return correct theme color, for theme version 3', () => {
+    expect(
+      getFlatInputColors({
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      inputTextColor: getTheme().colors.onSurfaceVariant,
+    });
+  });
+
+  it('should return correct theme color, for theme version 2', () => {
+    expect(
+      getFlatInputColors({
+        theme: getTheme(false, false),
+      })
+    ).toMatchObject({
+      inputTextColor: getTheme(false, false).colors.text,
+    });
+  });
+});
+
+describe('getFlatInputColor - placeholder color', () => {
+  it('should return correct disabled color, for theme version 3', () => {
+    expect(
+      getFlatInputColors({
+        disabled: true,
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      placeholderColor: getTheme().colors.onSurfaceDisabled,
+    });
+  });
+
+  it('should return correct disabled color, for theme version 2', () => {
+    expect(
+      getFlatInputColors({
+        disabled: true,
+        theme: getTheme(false, false),
+      })
+    ).toMatchObject({
+      placeholderColor: getTheme(false, false).colors.disabled,
+    });
+  });
+
+  it('should return correct theme color, for theme version 3', () => {
+    expect(
+      getFlatInputColors({
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      placeholderColor: getTheme().colors.onSurfaceVariant,
+    });
+  });
+
+  it('should return correct theme color, for theme version 2', () => {
+    expect(
+      getFlatInputColors({
+        theme: getTheme(false, false),
+      })
+    ).toMatchObject({
+      placeholderColor: getTheme(false, false).colors.placeholder,
+    });
+  });
+});
+
+describe('getFlatInputColor - background color', () => {
+  it('should return correct disabled color, for theme version 3', () => {
+    expect(
+      getFlatInputColors({
+        disabled: true,
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      backgroundColor: color(MD3LightTheme.colors.onSecondaryContainer)
+        .alpha(0.08)
+        .rgb()
+        .string(),
+    });
+    expect(
+      getFlatInputColors({
+        disabled: true,
+        theme: getTheme(true),
+      })
+    ).toMatchObject({
+      backgroundColor: color(MD3LightTheme.colors.onSecondaryContainer)
+        .alpha(0.08)
+        .rgb()
+        .string(),
+    });
+  });
+
+  it('should return undefined when disabled, for theme version 2', () => {
+    expect(
+      getFlatInputColors({
+        disabled: true,
+        theme: getTheme(false, false),
+      })
+    ).toMatchObject({
+      backgroundColor: undefined,
+    });
+  });
+
+  it('should return correct theme color, for theme version 3', () => {
+    expect(
+      getFlatInputColors({
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      backgroundColor: getTheme().colors.surfaceVariant,
+    });
+  });
+
+  it('should return correct theme color, for theme version 2, light mode', () => {
+    expect(
+      getFlatInputColors({
+        theme: getTheme(false, false),
+      })
+    ).toMatchObject({
+      backgroundColor: color(getTheme(false, false).colors?.background)
+        .darken(0.06)
+        .rgb()
+        .string(),
+    });
+  });
+
+  it('should return correct theme color, for theme version 2, dark mode', () => {
+    expect(
+      getFlatInputColors({
+        theme: getTheme(true, false),
+      })
+    ).toMatchObject({
+      backgroundColor: color(getTheme(true, false).colors?.background)
+        .lighten(0.24)
+        .rgb()
+        .string(),
+    });
+  });
+});
+
+describe('getFlatInputColor - error color', () => {
+  it('should return correct error color, no matter what the theme is', () => {
+    expect(
+      getFlatInputColors({
+        error: true,
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      errorColor: getTheme().colors.error,
+    });
+
+    expect(
+      getFlatInputColors({
+        error: true,
+        theme: getTheme(false, true),
+      })
+    ).toMatchObject({
+      errorColor: getTheme(false, true).colors.error,
+    });
+  });
+});
+
+describe('getFlatInputColor - active color', () => {
+  it('should return disabled color, for theme version 3', () => {
+    expect(
+      getFlatInputColors({
+        disabled: true,
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      activeColor: getTheme().colors.onSurfaceDisabled,
+    });
+  });
+
+  it('should return disabled color, for theme version 2', () => {
+    expect(
+      getFlatInputColors({
+        disabled: true,
+        theme: getTheme(false, false),
+      })
+    ).toMatchObject({
+      activeColor: color(getTheme(false, false).colors?.text)
+        .alpha(0.54)
+        .rgb()
+        .string(),
+    });
+  });
+
+  it('should return correct active color, if error, no matter what the theme is', () => {
+    expect(
+      getFlatInputColors({
+        error: true,
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      activeColor: getTheme().colors.error,
+    });
+
+    expect(
+      getFlatInputColors({
+        error: true,
+        theme: getTheme(false, true),
+      })
+    ).toMatchObject({
+      activeColor: getTheme(false, true).colors.error,
+    });
+  });
+
+  it('should return custom active color, no matter what the theme is', () => {
+    expect(
+      getFlatInputColors({
+        activeUnderlineColor: 'beige',
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      activeColor: 'beige',
+    });
+
+    expect(
+      getFlatInputColors({
+        activeUnderlineColor: 'beige',
+        theme: getTheme(false, true),
+      })
+    ).toMatchObject({
+      activeColor: 'beige',
+    });
+  });
+
+  it('should return theme active color, for theme version 3', () => {
+    expect(
+      getFlatInputColors({
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      activeColor: getTheme().colors.primary,
+    });
+  });
+
+  it('should return theme active color, for theme version 2', () => {
+    expect(
+      getFlatInputColors({
+        theme: getTheme(false, true),
+      })
+    ).toMatchObject({
+      activeColor: getTheme(false, true).colors.primary,
+    });
+  });
+});
+
+describe('getOutlinedInputColors - outline color', () => {
+  it('should return correct disabled color, for theme version 3, light theme', () => {
+    expect(
+      getOutlinedInputColors({
+        disabled: true,
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      outlineColor: getTheme().colors.surfaceDisabled,
+    });
+  });
+
+  it('should return correct disabled color, for theme version 3, dark theme', () => {
+    expect(
+      getOutlinedInputColors({
+        disabled: true,
+        theme: getTheme(true),
+      })
+    ).toMatchObject({
+      outlineColor: 'transparent',
+    });
+  });
+
+  it('should return correct disabled color, for theme version 2', () => {
+    expect(
+      getOutlinedInputColors({
+        disabled: true,
+        theme: getTheme(false, false),
+      })
+    ).toMatchObject({
+      outlineColor: getTheme(false, false).colors.disabled,
+    });
+  });
+
+  it('should return custom color as disabled, when it is transparent, for theme version 2', () => {
+    expect(
+      getOutlinedInputColors({
+        disabled: true,
+        customOutlineColor: 'transparent',
+        theme: getTheme(false, false),
+      })
+    ).toMatchObject({
+      outlineColor: 'transparent',
+    });
+  });
+
+  it('should return custom color, if not disabled, no matter what the theme is', () => {
+    expect(
+      getOutlinedInputColors({
+        customOutlineColor: 'beige',
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      outlineColor: 'beige',
+    });
+
+    expect(
+      getOutlinedInputColors({
+        customOutlineColor: 'beige',
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      outlineColor: 'beige',
+    });
+  });
+
+  it('should return theme color, for theme version 3', () => {
+    expect(
+      getOutlinedInputColors({
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      outlineColor: getTheme().colors.outline,
+    });
+  });
+
+  it('should return theme color, for theme version 2', () => {
+    expect(
+      getOutlinedInputColors({
+        theme: getTheme(false, false),
+      })
+    ).toMatchObject({
+      outlineColor: getTheme(false, false).colors.placeholder,
+    });
+  });
+});
+
+describe('getOutlinedInputColors - input text color', () => {
+  it('should return correct disabled color, for theme version 3', () => {
+    expect(
+      getOutlinedInputColors({
+        disabled: true,
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      inputTextColor: getTheme().colors.onSurfaceDisabled,
+    });
+  });
+
+  it('should return correct disabled color, for theme version 2', () => {
+    expect(
+      getOutlinedInputColors({
+        disabled: true,
+        theme: getTheme(false, false),
+      })
+    ).toMatchObject({
+      inputTextColor: color(getTheme(false, false).colors?.text)
+        .alpha(0.54)
+        .rgb()
+        .string(),
+    });
+  });
+
+  it('should return correct theme color, for theme version 3', () => {
+    expect(
+      getOutlinedInputColors({
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      inputTextColor: getTheme().colors.onSurface,
+    });
+  });
+
+  it('should return correct theme color, for theme version 2', () => {
+    expect(
+      getOutlinedInputColors({
+        theme: getTheme(false, false),
+      })
+    ).toMatchObject({
+      inputTextColor: getTheme(false, false).colors.text,
+    });
+  });
+});
+
+describe('getOutlinedInputColors - placeholder color', () => {
+  it('should return correct disabled color, for theme version 3', () => {
+    expect(
+      getOutlinedInputColors({
+        disabled: true,
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      placeholderColor: getTheme().colors.onSurfaceDisabled,
+    });
+  });
+
+  it('should return correct disabled color, for theme version 2', () => {
+    expect(
+      getOutlinedInputColors({
+        disabled: true,
+        theme: getTheme(false, false),
+      })
+    ).toMatchObject({
+      placeholderColor: getTheme(false, false).colors.disabled,
+    });
+  });
+
+  it('should return correct theme color, for theme version 3', () => {
+    expect(
+      getOutlinedInputColors({
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      placeholderColor: getTheme().colors.onSurfaceVariant,
+    });
+  });
+
+  it('should return correct theme color, for theme version 2', () => {
+    expect(
+      getOutlinedInputColors({
+        theme: getTheme(false, false),
+      })
+    ).toMatchObject({
+      placeholderColor: getTheme(false, false).colors.placeholder,
+    });
+  });
+});
+
+describe('getOutlinedInputColors - error color', () => {
+  it('should return correct error color, no matter what the theme is', () => {
+    expect(
+      getOutlinedInputColors({
+        error: true,
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      errorColor: getTheme().colors.error,
+    });
+
+    expect(
+      getOutlinedInputColors({
+        error: true,
+        theme: getTheme(false, true),
+      })
+    ).toMatchObject({
+      errorColor: getTheme(false, true).colors.error,
+    });
+  });
+});
+
+describe('getOutlinedInputColors - active color', () => {
+  it('should return disabled color, for theme version 3', () => {
+    expect(
+      getOutlinedInputColors({
+        disabled: true,
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      activeColor: getTheme().colors.onSurfaceDisabled,
+    });
+  });
+
+  it('should return disabled color, for theme version 2', () => {
+    expect(
+      getOutlinedInputColors({
+        disabled: true,
+        theme: getTheme(false, false),
+      })
+    ).toMatchObject({
+      activeColor: color(getTheme(false, false).colors?.text)
+        .alpha(0.54)
+        .rgb()
+        .string(),
+    });
+  });
+
+  it('should return correct active color, if error, no matter what the theme is', () => {
+    expect(
+      getOutlinedInputColors({
+        error: true,
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      activeColor: getTheme().colors.error,
+    });
+
+    expect(
+      getOutlinedInputColors({
+        error: true,
+        theme: getTheme(false, true),
+      })
+    ).toMatchObject({
+      activeColor: getTheme(false, true).colors.error,
+    });
+  });
+
+  it('should return custom active color, no matter what the theme is', () => {
+    expect(
+      getOutlinedInputColors({
+        activeOutlineColor: 'beige',
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      activeColor: 'beige',
+    });
+
+    expect(
+      getOutlinedInputColors({
+        activeOutlineColor: 'beige',
+        theme: getTheme(false, true),
+      })
+    ).toMatchObject({
+      activeColor: 'beige',
+    });
+  });
+
+  it('should return theme active color, for theme version 3', () => {
+    expect(
+      getOutlinedInputColors({
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      activeColor: getTheme().colors.primary,
+    });
+  });
+
+  it('should return theme active color, for theme version 2', () => {
+    expect(
+      getOutlinedInputColors({
+        theme: getTheme(false, true),
+      })
+    ).toMatchObject({
+      activeColor: getTheme(false, true).colors.primary,
+    });
   });
 });

@@ -579,7 +579,6 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
             Object {
               "flexGrow": 1,
               "margin": 0,
-              "paddingHorizontal": 14,
               "zIndex": 1,
             },
             Object {
@@ -594,6 +593,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               "fontFamily": "System",
               "fontSize": 16,
               "fontWeight": undefined,
+              "paddingHorizontal": 14,
               "textAlign": "left",
               "textAlignVertical": "top",
             },

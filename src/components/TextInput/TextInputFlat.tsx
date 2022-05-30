@@ -8,19 +8,22 @@ import {
   Platform,
   TextStyle,
 } from 'react-native';
-import color from 'color';
 import InputLabel from './Label/InputLabel';
 import TextInputAdornment, {
   TextInputAdornmentProps,
 } from './Adornment/TextInputAdornment';
 import type { RenderProps, ChildTextInputProps } from './types';
+import { useTheme } from '../../core/theming';
 
 import {
   MAXIMIZED_LABEL_FONT_SIZE,
   MINIMIZED_LABEL_FONT_SIZE,
   LABEL_WIGGLE_X_OFFSET,
   ADORNMENT_SIZE,
-  FLAT_INPUT_OFFSET,
+  MINIMIZED_LABEL_Y_OFFSET,
+  LABEL_PADDING_TOP_DENSE,
+  MIN_DENSE_HEIGHT_WL,
+  MIN_DENSE_HEIGHT,
 } from './constants';
 
 import {
@@ -32,21 +35,14 @@ import {
   interpolatePlaceholder,
   calculateFlatAffixTopPosition,
   calculateFlatInputHorizontalPadding,
+  getFlatInputColors,
+  getConstants,
 } from './helpers';
 import {
   getAdornmentConfig,
   getAdornmentStyleAdjustmentForNativeInput,
 } from './Adornment/TextInputAdornment';
 import { AdornmentSide, AdornmentType, InputMode } from './Adornment/enums';
-import { black } from '../../styles/themes/v2/colors';
-
-const MINIMIZED_LABEL_Y_OFFSET = -18;
-
-const LABEL_PADDING_TOP = 30;
-const LABEL_PADDING_TOP_DENSE = 24;
-const MIN_HEIGHT = 64;
-const MIN_DENSE_HEIGHT_WL = 52;
-const MIN_DENSE_HEIGHT = 40;
 
 const TextInputFlat = ({
   disabled = false,
@@ -76,9 +72,12 @@ const TextInputFlat = ({
   ...rest
 }: ChildTextInputProps) => {
   const isAndroid = Platform.OS === 'android';
-  const { colors, fonts } = theme;
+  const { colors, fonts, isV3, roundness } = theme;
   const font = fonts.regular;
   const hasActiveOutline = parentState.focused || error;
+
+  const { LABEL_PADDING_TOP, FLAT_INPUT_OFFSET, MIN_HEIGHT } =
+    getConstants(isV3);
 
   const {
     fontSize: fontSizeStyle,
@@ -100,6 +99,7 @@ const TextInputFlat = ({
 
   let { paddingLeft, paddingRight } = calculateFlatInputHorizontalPadding({
     adornmentConfig,
+    isV3,
   });
 
   if (isPaddingHorizontalPassed) {
@@ -125,43 +125,26 @@ const TextInputFlat = ({
       paddingHorizontal,
       inputOffset: FLAT_INPUT_OFFSET,
       mode: InputMode.Flat,
+      isV3,
     });
 
-  let inputTextColor,
+  const {
+    inputTextColor,
     activeColor,
     underlineColorCustom,
     placeholderColor,
-    errorColor;
-
-  const textColor = theme.isV3 ? theme.colors?.onSurface : theme.colors?.text;
-  const disabledColor = theme.isV3
-    ? theme.colors?.onSurfaceDisabled
-    : theme.colors?.disabled;
-
-  if (disabled) {
-    inputTextColor = activeColor = color(textColor || black)
-      .alpha(0.54)
-      .rgb()
-      .string();
-    placeholderColor = disabledColor || black;
-    underlineColorCustom = 'transparent';
-  } else {
-    inputTextColor = textColor || black;
-    activeColor = error
-      ? colors?.error || black
-      : activeUnderlineColor || colors?.primary || black;
-    placeholderColor =
-      (theme.isV3
-        ? theme.colors.onSurfaceDisabled
-        : theme.colors?.placeholder) || black;
-    errorColor = colors?.error || black;
-    underlineColorCustom = underlineColor || disabledColor || black;
-  }
+    errorColor,
+    backgroundColor,
+  } = getFlatInputColors({
+    underlineColor,
+    activeUnderlineColor,
+    disabled,
+    error,
+    theme,
+  });
 
   const containerStyle = {
-    backgroundColor: theme.dark
-      ? color(colors?.background).lighten(0.24).rgb().string()
-      : color(colors?.background).darken(0.06).rgb().string(),
+    backgroundColor,
     borderTopLeftRadius: theme.roundness,
     borderTopRightRadius: theme.roundness,
   };
@@ -273,7 +256,7 @@ const TextInputFlat = ({
     activeColor,
     placeholderColor,
     errorColor,
-    roundness: theme.roundness,
+    roundness,
     maxFontSizeMultiplier: rest.maxFontSizeMultiplier,
   };
   const affixTopPosition = {
@@ -310,6 +293,7 @@ const TextInputFlat = ({
   return (
     <View style={[containerStyle, viewStyle]}>
       <Underline
+        hasActiveOutline={hasActiveOutline}
         parentState={parentState}
         underlineColorCustom={underlineColorCustom}
         error={error}
@@ -398,6 +382,7 @@ type UnderlineProps = {
   };
   activeColor: string;
   underlineColorCustom?: string;
+  hasActiveOutline?: boolean;
 };
 
 const Underline = ({
@@ -406,21 +391,33 @@ const Underline = ({
   colors,
   activeColor,
   underlineColorCustom,
+  hasActiveOutline,
 }: UnderlineProps) => {
+  const { isV3 } = useTheme();
+
   let backgroundColor = parentState.focused
     ? activeColor
     : underlineColorCustom;
 
-  if (error) backgroundColor = colors?.error || black;
+  if (error) backgroundColor = colors?.error;
+
+  const activeScale = isV3 ? 2 : 1;
 
   return (
     <Animated.View
       style={[
         styles.underline,
+        isV3 && styles.md3Underline,
         {
           backgroundColor,
           // Underlines is thinner when input is not focused
-          transform: [{ scaleY: parentState.focused ? 1 : 0.5 }],
+          transform: [
+            {
+              scaleY: (isV3 ? hasActiveOutline : parentState.focused)
+                ? activeScale
+                : 0.5,
+            },
+          ],
         },
       ]}
     />
@@ -439,6 +436,9 @@ const styles = StyleSheet.create({
     bottom: 0,
     height: 2,
     zIndex: 1,
+  },
+  md3Underline: {
+    height: 1,
   },
   labelContainer: {
     paddingTop: 0,
