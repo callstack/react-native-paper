@@ -76,6 +76,7 @@ export type InputLabelProps = {
   parentState: State;
   labelProps: LabelProps;
   labelBackground?: any;
+  mode?: 'flat' | 'outlined';
 };
 export type LabelBackgroundProps = {
   labelProps: LabelProps;

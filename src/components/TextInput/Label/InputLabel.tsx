@@ -1,12 +1,13 @@
 import React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 import AnimatedText from '../../Typography/AnimatedText';
+import { useTheme } from '../../../core/theming';
 
 import type { InputLabelProps } from '../types';
 
 const InputLabel = (props: InputLabelProps) => {
-  const { parentState, labelBackground } = props;
-
+  const { isV3 } = useTheme();
+  const { parentState, labelBackground, mode } = props;
   const {
     label,
     error,
@@ -70,6 +71,15 @@ const InputLabel = (props: InputLabelProps) => {
     ],
   };
 
+  let textColor = placeholderColor;
+
+  if (error && errorColor) {
+    textColor = errorColor;
+  }
+  if (isV3 && parentState.value && mode !== 'outlined') {
+    textColor = activeColor;
+  }
+
   return label ? (
     // Position colored placeholder and gray placeholder on top of each other and crossfade them
     // This gives the effect of animating the color, but allows us to use native driver
@@ -96,6 +106,7 @@ const InputLabel = (props: InputLabelProps) => {
         labelProps: props.labelProps,
       })}
       <AnimatedText
+        variant="bodySmall"
         onLayout={onLayoutAnimatedText}
         style={[
           placeholderStyle,
@@ -111,12 +122,14 @@ const InputLabel = (props: InputLabelProps) => {
               outputRange: [hasActiveOutline ? 1 : 0, 0],
             }),
           },
+          isV3 && styles.md3TextLine,
         ]}
         numberOfLines={1}
       >
         {label}
       </AnimatedText>
       <AnimatedText
+        variant={parentState.focused ? 'bodyLarge' : 'bodySmall'}
         style={[
           placeholderStyle,
           {
@@ -125,9 +138,10 @@ const InputLabel = (props: InputLabelProps) => {
           labelStyle,
           paddingOffset,
           {
-            color: error && errorColor ? errorColor : placeholderColor,
+            color: textColor,
             opacity: placeholderOpacity,
           },
+          isV3 && styles.md3TextLine,
         ]}
         numberOfLines={1}
       >
@@ -140,6 +154,9 @@ const InputLabel = (props: InputLabelProps) => {
 const styles = StyleSheet.create({
   labelContainer: {
     zIndex: 3,
+  },
+  md3TextLine: {
+    lineHeight: undefined,
   },
 });
 
