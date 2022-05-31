@@ -57,9 +57,14 @@ exports[`renders with placeholder 1`] = `
             "overflow": "hidden",
           },
           Object {
-            "borderRadius": 18,
+            "backgroundColor": undefined,
             "height": 36,
             "width": 36,
+          },
+          Object {
+            "borderColor": undefined,
+            "borderRadius": 18,
+            "borderWidth": 0,
           },
           undefined,
           undefined,
@@ -157,9 +162,14 @@ exports[`renders with placeholder 1`] = `
             "overflow": "hidden",
           },
           Object {
-            "borderRadius": 18,
+            "backgroundColor": undefined,
             "height": 36,
             "width": 36,
+          },
+          Object {
+            "borderColor": undefined,
+            "borderRadius": 18,
+            "borderWidth": 0,
           },
           Object {
             "opacity": 0.32,
@@ -251,9 +261,14 @@ exports[`renders with text 1`] = `
             "overflow": "hidden",
           },
           Object {
-            "borderRadius": 18,
+            "backgroundColor": undefined,
             "height": 36,
             "width": 36,
+          },
+          Object {
+            "borderColor": undefined,
+            "borderRadius": 18,
+            "borderWidth": 0,
           },
           undefined,
           undefined,
@@ -352,9 +367,14 @@ exports[`renders with text 1`] = `
             "overflow": "hidden",
           },
           Object {
-            "borderRadius": 18,
+            "backgroundColor": undefined,
             "height": 36,
             "width": 36,
+          },
+          Object {
+            "borderColor": undefined,
+            "borderRadius": 18,
+            "borderWidth": 0,
           },
           false,
           undefined,

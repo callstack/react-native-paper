@@ -6,7 +6,7 @@ import type {
   TouchableWithoutFeedback,
 } from 'react-native';
 import { black } from '../../styles/themes/v2/colors';
-import IconButton from '../IconButton';
+import IconButton from '../IconButton/IconButton';
 import type { IconSource } from '../Icon';
 import { useTheme } from '../../core/theming';
 
@@ -104,7 +104,7 @@ const AppbarAction = ({
     <IconButton
       size={size}
       onPress={onPress}
-      color={actionIconColor}
+      iconColor={actionIconColor}
       icon={icon}
       disabled={disabled}
       accessibilityLabel={accessibilityLabel}

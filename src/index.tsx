@@ -37,7 +37,7 @@ export { default as Divider } from './components/Divider';
 export { default as FAB } from './components/FAB';
 export { default as AnimatedFAB } from './components/FAB/AnimatedFAB';
 export { default as HelperText } from './components/HelperText';
-export { default as IconButton } from './components/IconButton';
+export { default as IconButton } from './components/IconButton/IconButton';
 export { default as Menu } from './components/Menu/Menu';
 export { default as Modal } from './components/Modal';
 export { default as Portal } from './components/Portal/Portal';

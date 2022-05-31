@@ -37,9 +37,14 @@ exports[`renders disabled toggle button 1`] = `
           "overflow": "hidden",
         },
         Object {
-          "borderRadius": 18,
+          "backgroundColor": undefined,
           "height": 36,
           "width": 36,
+        },
+        Object {
+          "borderColor": undefined,
+          "borderRadius": 18,
+          "borderWidth": 0,
         },
         Object {
           "opacity": 0.32,
@@ -122,9 +127,14 @@ exports[`renders toggle button 1`] = `
           "overflow": "hidden",
         },
         Object {
-          "borderRadius": 18,
+          "backgroundColor": undefined,
           "height": 36,
           "width": 36,
+        },
+        Object {
+          "borderColor": undefined,
+          "borderRadius": 18,
+          "borderWidth": 0,
         },
         undefined,
         Array [
@@ -205,9 +215,14 @@ exports[`renders unchecked toggle button 1`] = `
           "overflow": "hidden",
         },
         Object {
-          "borderRadius": 18,
+          "backgroundColor": undefined,
           "height": 36,
           "width": 36,
+        },
+        Object {
+          "borderColor": undefined,
+          "borderRadius": 18,
+          "borderWidth": 0,
         },
         Object {
           "opacity": 0.32,

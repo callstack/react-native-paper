@@ -44,8 +44,8 @@ const DarkTheme: ThemeBase = {
     onBackground: palette.neutral90,
     outline: palette.neutralVariant60,
     shadow: palette.neutral0,
-    inverseOnSurface: palette.neutral90,
-    inverseSurface: palette.neutral20,
+    inverseSurface: palette.neutral90,
+    inverseOnSurface: palette.neutral20,
     inversePrimary: palette.primary40,
     elevation: {
       level0: 'transparent',

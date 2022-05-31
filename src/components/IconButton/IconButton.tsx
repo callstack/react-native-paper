@@ -7,13 +7,17 @@ import {
   GestureResponderEvent,
   TouchableWithoutFeedback,
 } from 'react-native';
-import color from 'color';
 
-import TouchableRipple from './TouchableRipple/TouchableRipple';
-import Icon, { IconSource } from './Icon';
-import CrossFadeIcon from './CrossFadeIcon';
-import { withTheme } from '../core/theming';
-import type { $RemoveChildren, Theme } from '../types';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import Icon, { IconSource } from '../Icon';
+import CrossFadeIcon from '../CrossFadeIcon';
+import { withTheme } from '../../core/theming';
+import type { $RemoveChildren, Theme } from '../../types';
+import { getIconButtonColor } from './utils';
+
+const PADDING = 8;
+
+type IconButtonMode = 'outlined' | 'contained' | 'contained-tonal';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -21,9 +25,25 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   icon: IconSource;
   /**
+   * @supported Available in v3.x
+   * Mode of the icon button. By default there is no specified mode - only pressable icon will be rendered.
+   */
+  mode?: IconButtonMode;
+  /**
+   * @renamed Renamed from 'color' to 'iconColor' in v3.x
    * Color of the icon.
    */
-  color?: string;
+  iconColor?: string;
+  /**
+   * @supported Available in v3.x
+   * Background color of the icon container.
+   */
+  containerColor?: string;
+  /**
+   * @supported Available in v3.x
+   * Whether icon button is selected.
+   */
+  selected?: boolean;
   /**
    * Size of the icon.
    */
@@ -54,7 +74,6 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
 
 /**
  * An icon button is a button which displays only an icon without a label.
- * By default button has 150% size of the icon.
  *
  * <div class="screenshots">
  *   <figure>
@@ -88,25 +107,40 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
  */
 const IconButton = ({
   icon,
-  color: customColor,
+  iconColor: customIconColor,
+  containerColor: customContainerColor,
   size = 24,
   accessibilityLabel,
   disabled,
   onPress,
+  selected = false,
   animated = false,
+  mode,
   theme,
   style,
   ...rest
 }: Props) => {
-  const themeTextColor = theme.isV3
-    ? theme.colors.onSurface
-    : theme.colors.text;
-
-  const iconColor =
-    typeof customColor !== 'undefined' ? customColor : themeTextColor;
-  const rippleColor = color(iconColor).alpha(0.32).rgb().string();
+  const { isV3 } = theme;
   const IconComponent = animated ? CrossFadeIcon : Icon;
-  const buttonSize = size * 1.5;
+
+  const { iconColor, rippleColor, backgroundColor, borderColor } =
+    getIconButtonColor({
+      theme,
+      disabled,
+      selected,
+      mode,
+      customIconColor,
+      customContainerColor,
+    });
+
+  const buttonSize = isV3 ? size + 2 * PADDING : size * 1.5;
+
+  const borderStyles = {
+    borderWidth: isV3 && mode === 'outlined' && !selected ? 1 : 0,
+    borderRadius: buttonSize / 2,
+    borderColor,
+  };
+
   return (
     <TouchableRipple
       borderless
@@ -115,7 +149,12 @@ const IconButton = ({
       rippleColor={rippleColor}
       style={[
         styles.container,
-        { width: buttonSize, height: buttonSize, borderRadius: buttonSize / 2 },
+        {
+          width: buttonSize,
+          height: buttonSize,
+          backgroundColor,
+        },
+        borderStyles,
         disabled && styles.disabled,
         style,
       ]}

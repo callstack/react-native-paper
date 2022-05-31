@@ -76,9 +76,14 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
               "overflow": "hidden",
             },
             Object {
-              "borderRadius": 18,
+              "backgroundColor": undefined,
               "height": 36,
               "width": 36,
+            },
+            Object {
+              "borderColor": undefined,
+              "borderRadius": 18,
+              "borderWidth": 0,
             },
             undefined,
             undefined,
@@ -176,9 +181,14 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
               "overflow": "hidden",
             },
             Object {
-              "borderRadius": 18,
+              "backgroundColor": undefined,
               "height": 36,
               "width": 36,
+            },
+            Object {
+              "borderColor": undefined,
+              "borderRadius": 18,
+              "borderWidth": 0,
             },
             Object {
               "opacity": 0.32,
@@ -272,9 +282,14 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             "overflow": "hidden",
           },
           Object {
-            "borderRadius": 18,
+            "backgroundColor": undefined,
             "height": 36,
             "width": 36,
+          },
+          Object {
+            "borderColor": undefined,
+            "borderRadius": 18,
+            "borderWidth": 0,
           },
           undefined,
           undefined,
@@ -456,9 +471,14 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             "overflow": "hidden",
           },
           Object {
-            "borderRadius": 18,
+            "backgroundColor": undefined,
             "height": 36,
             "width": 36,
+          },
+          Object {
+            "borderColor": undefined,
+            "borderRadius": 18,
+            "borderWidth": 0,
           },
           undefined,
           undefined,

@@ -7,7 +7,7 @@ import {
   I18nManager,
 } from 'react-native';
 import color from 'color';
-import IconButton from '../IconButton';
+import IconButton from '../IconButton/IconButton';
 import Text from '../Typography/Text';
 import { withTheme, useTheme } from '../../core/theming';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -97,7 +97,7 @@ const PaginationControls = ({
               direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
             />
           )}
-          color={textColor}
+          iconColor={textColor}
           disabled={page === 0}
           onPress={() => onPageChange(0)}
           accessibilityLabel="page-first"
@@ -112,7 +112,7 @@ const PaginationControls = ({
             direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
           />
         )}
-        color={textColor}
+        iconColor={textColor}
         disabled={page === 0}
         onPress={() => onPageChange(page - 1)}
         accessibilityLabel="chevron-left"
@@ -126,7 +126,7 @@ const PaginationControls = ({
             direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
           />
         )}
-        color={textColor}
+        iconColor={textColor}
         disabled={numberOfPages === 0 || page === numberOfPages - 1}
         onPress={() => onPageChange(page + 1)}
         accessibilityLabel="chevron-right"
@@ -141,7 +141,7 @@ const PaginationControls = ({
               direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
             />
           )}
-          color={textColor}
+          iconColor={textColor}
           disabled={numberOfPages === 0 || page === numberOfPages - 1}
           onPress={() => onPageChange(numberOfPages - 1)}
           accessibilityLabel="page-last"

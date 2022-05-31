@@ -1,6 +1,6 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import IconButton from '../IconButton.tsx';
+import IconButton from '../IconButton/IconButton.tsx';
 import { pink500 } from '../../styles/themes/v2/colors';
 
 it('renders icon button by default', () => {
@@ -11,7 +11,7 @@ it('renders icon button by default', () => {
 
 it('renders icon button with color', () => {
   const tree = renderer
-    .create(<IconButton icon="camera" color={pink500} />)
+    .create(<IconButton icon="camera" iconColor={pink500} />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

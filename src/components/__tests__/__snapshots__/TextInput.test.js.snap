@@ -1043,9 +1043,14 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
               "overflow": "hidden",
             },
             Object {
-              "borderRadius": 18,
+              "backgroundColor": undefined,
               "height": 36,
               "width": 36,
+            },
+            Object {
+              "borderColor": undefined,
+              "borderRadius": 18,
+              "borderWidth": 0,
             },
             undefined,
             Object {
@@ -1313,9 +1318,14 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
               "overflow": "hidden",
             },
             Object {
-              "borderRadius": 18,
+              "backgroundColor": undefined,
               "height": 36,
               "width": 36,
+            },
+            Object {
+              "borderColor": undefined,
+              "borderRadius": 18,
+              "borderWidth": 0,
             },
             undefined,
             Object {
