@@ -83,10 +83,7 @@ const getIconColor = ({
 
   if (theme.isV3) {
     if (disabled) {
-      if (isMode('contained') || isMode('contained-tonal')) {
-        return theme.colors.onSurfaceDisabled;
-      }
-      return theme.colors.onSurface;
+      return theme.colors.onSurfaceDisabled;
     }
 
     if (isMode('contained')) {

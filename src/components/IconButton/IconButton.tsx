@@ -155,7 +155,7 @@ const IconButton = ({
           backgroundColor,
         },
         borderStyles,
-        disabled && styles.disabled,
+        !isV3 && disabled && styles.disabled,
         style,
       ]}
       accessibilityLabel={accessibilityLabel}
