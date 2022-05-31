@@ -35,15 +35,15 @@ const getBackgroundColor = ({
   selected,
   customContainerColor,
 }: BaseProps & { customContainerColor?: string }) => {
-  if (typeof customContainerColor !== 'undefined') {
-    return customContainerColor;
-  }
-
   if (theme.isV3) {
     if (disabled) {
       if (isMode('contained') || isMode('contained-tonal')) {
         return theme.colors.surfaceDisabled;
       }
+    }
+
+    if (typeof customContainerColor !== 'undefined') {
+      return customContainerColor;
     }
 
     if (isMode('contained')) {
@@ -67,6 +67,10 @@ const getBackgroundColor = ({
     }
   }
 
+  if (typeof customContainerColor !== 'undefined') {
+    return customContainerColor;
+  }
+
   return undefined;
 };
 
@@ -77,13 +81,13 @@ const getIconColor = ({
   selected,
   customIconColor,
 }: BaseProps & { customIconColor?: string }) => {
-  if (typeof customIconColor !== 'undefined') {
-    return customIconColor;
-  }
-
   if (theme.isV3) {
     if (disabled) {
       return theme.colors.onSurfaceDisabled;
+    }
+
+    if (typeof customIconColor !== 'undefined') {
+      return customIconColor;
     }
 
     if (isMode('contained')) {
@@ -111,6 +115,10 @@ const getIconColor = ({
       return theme.colors.primary;
     }
     return theme.colors.onSurfaceVariant;
+  }
+
+  if (typeof customIconColor !== 'undefined') {
+    return customIconColor;
   }
 
   return theme.colors.text;

@@ -41,7 +41,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   containerColor?: string;
   /**
    * @supported Available in v3.x
-   * Whether icon button is selected.
+   * Whether icon button is selected. A selected button receives different combination of container and icon colors.
    */
   selected?: boolean;
   /**
