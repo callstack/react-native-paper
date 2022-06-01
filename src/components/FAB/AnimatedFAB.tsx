@@ -239,7 +239,7 @@ const AnimatedFAB = ({
     style
   );
 
-  const rippleColor = color(foregroundColor).alpha(0.32).rgb().string();
+  const rippleColor = color(foregroundColor).alpha(0.12).rgb().string();
 
   const extendedWidth = textWidth + SIZE + borderRadius;
 
