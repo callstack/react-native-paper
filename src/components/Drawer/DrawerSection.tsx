@@ -5,6 +5,7 @@ import Text from '../Typography/Text';
 import Divider from '../Divider';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
+import { MD3Colors } from '../../styles/themes/v3/tokens';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -39,7 +40,6 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * const MyComponent = () => {
  *   const [active, setActive] = React.useState('');
  *
- *
  *   return (
  *     <Drawer.Section title="Some title">
  *       <Drawer.Item
@@ -60,30 +60,34 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * ```
  */
 const DrawerSection = ({ children, title, theme, style, ...rest }: Props) => {
-  const { fonts } = theme;
-
-  const titleColor = color(
-    theme.isV3 ? theme.colors.onSurface : theme.colors.text
-  )
-    .alpha(0.54)
-    .rgb()
-    .string();
-  const font = fonts.medium;
-
+  const { fonts, isV3 } = theme;
+  const titleColor = isV3
+    ? theme.colors.onSurfaceVariant
+    : color(theme.colors.text).alpha(0.54).rgb().string();
+  const titleMargin = isV3 ? 28 : 16;
   return (
     <View style={[styles.container, style]} {...rest}>
       {title && (
-        <View style={styles.titleContainer}>
-          <Text
-            numberOfLines={1}
-            style={[{ color: titleColor, ...font }, styles.title]}
-          >
-            {title}
-          </Text>
+        <View style={[styles.titleContainer, isV3 && styles.v3TitleContainer]}>
+          {title && (
+            <Text
+              variant="titleSmall"
+              numberOfLines={1}
+              style={[
+                { color: titleColor, marginLeft: titleMargin },
+                !isV3 && { ...fonts.medium },
+              ]}
+            >
+              {title}
+            </Text>
+          )}
         </View>
       )}
       {children}
-      <Divider style={styles.divider} />
+      <Divider
+        {...(isV3 && { horizontalInset: true, bold: true })}
+        style={[styles.divider, isV3 && styles.v3Divider]}
+      />
     </View>
   );
 };
@@ -98,11 +102,14 @@ const styles = StyleSheet.create({
     height: 40,
     justifyContent: 'center',
   },
-  title: {
-    marginLeft: 16,
+  v3TitleContainer: {
+    height: 56,
   },
   divider: {
     marginTop: 4,
+  },
+  v3Divider: {
+    backgroundColor: MD3Colors.neutralVariant50,
   },
 });
 

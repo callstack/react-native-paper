@@ -6,7 +6,6 @@ import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
-import { black } from '../../styles/themes/v2/colors';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -76,18 +75,29 @@ const DrawerItem = ({
   right,
   ...rest
 }: Props) => {
-  const { colors, roundness } = theme;
+  const { roundness, fonts, isV3 } = theme;
+
   const backgroundColor = active
-    ? color(colors?.primary).alpha(0.12).rgb().string()
+    ? isV3
+      ? theme.colors.secondaryContainer
+      : color(theme.colors.primary).alpha(0.12).rgb().string()
     : 'transparent';
   const contentColor = active
-    ? colors?.primary
-    : color(theme.isV3 ? theme.colors.onSurface : theme?.colors?.text)
-        .alpha(0.68)
+    ? isV3
+      ? theme.colors.onSecondaryContainer
+      : theme.colors.primary
+    : isV3
+    ? theme.colors.onSurfaceVariant
+    : color(theme.colors.text).alpha(0.68).rgb().string();
+
+  const labelMargin = icon ? (isV3 ? 12 : 32) : 0;
+  const borderRadius = (isV3 ? 7 : 1) * roundness;
+  const underlayColor = isV3
+    ? color(backgroundColor)
+        .mix(color(theme.colors.onSecondaryContainer), 0.16)
         .rgb()
-        .string();
-  const font = theme.fonts.medium;
-  const labelMargin = icon ? 32 : 0;
+        .toString()
+    : undefined;
 
   return (
     <View {...rest}>
@@ -97,7 +107,8 @@ const DrawerItem = ({
         onPress={onPress}
         style={[
           styles.container,
-          { backgroundColor, borderRadius: roundness },
+          { backgroundColor, borderRadius },
+          isV3 && styles.v3Container,
           style,
         ]}
         // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
@@ -106,21 +117,25 @@ const DrawerItem = ({
         accessibilityRole="button"
         accessibilityState={{ selected: active }}
         accessibilityLabel={accessibilityLabel}
+        underlayColor={underlayColor}
       >
-        <View style={styles.wrapper}>
+        <View style={[styles.wrapper, isV3 && styles.v3Wrapper]}>
           <View style={styles.content}>
             {icon ? (
               <Icon source={icon} size={24} color={contentColor} />
             ) : null}
             <Text
+              variant="labelLarge"
               selectable={false}
               numberOfLines={1}
               style={[
                 styles.label,
                 {
                   color: contentColor,
-                  ...font,
                   marginLeft: labelMargin,
+                },
+                !isV3 && {
+                  ...fonts.medium,
                 },
               ]}
             >
@@ -128,7 +143,7 @@ const DrawerItem = ({
             </Text>
           </View>
 
-          {right?.({ color: contentColor || black })}
+          {right?.({ color: contentColor })}
         </View>
       </TouchableRipple>
     </View>
@@ -142,10 +157,22 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginVertical: 4,
   },
+  v3Container: {
+    justifyContent: 'center',
+    height: 56,
+    marginLeft: 12,
+    marginRight: 12,
+    marginVertical: 0,
+  },
   wrapper: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 8,
+  },
+  v3Wrapper: {
+    marginLeft: 16,
+    marginRight: 24,
+    padding: 0,
   },
   content: {
     flex: 1,
