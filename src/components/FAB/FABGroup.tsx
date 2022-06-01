@@ -290,7 +290,7 @@ const FABGroup = ({
             {
               opacity: backdropOpacity,
               backgroundColor: isV3
-                ? color(theme.colors.background).alpha(0.8).rgb().string()
+                ? color(theme.colors.background).alpha(0.95).rgb().string()
                 : theme.colors?.backdrop,
             },
           ]}
