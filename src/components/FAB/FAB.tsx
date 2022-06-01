@@ -192,7 +192,7 @@ const FAB = ({
     style
   );
 
-  const rippleColor = color(foregroundColor).alpha(0.32).rgb().string();
+  const rippleColor = color(foregroundColor).alpha(0.12).rgb().string();
 
   const isLargeSize = size === 'large';
   const isFlatMode = mode === 'flat';
