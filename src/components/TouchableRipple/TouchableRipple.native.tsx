@@ -10,9 +10,9 @@ import {
   ViewStyle,
   StyleSheet,
 } from 'react-native';
-import color from 'color';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
+import { getTouchableRippleColors } from './utils';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 const ANDROID_VERSION_PIE = 28;
@@ -40,14 +40,13 @@ const TouchableRipple = ({
   theme,
   ...rest
 }: Props) => {
-  const { dark } = theme;
   const disabled = disabledProp || !rest.onPress;
-  const calculatedRippleColor =
-    rippleColor ||
-    color(theme.isV3 ? theme.colors.onSurface : theme.colors.text)
-      .alpha(dark ? 0.32 : 0.2)
-      .rgb()
-      .string();
+  const { calculatedRippleColor, calculatedUnderlayColor } =
+    getTouchableRippleColors({
+      theme,
+      rippleColor,
+      underlayColor,
+    });
 
   // A workaround for ripple on Android P is to use useForeground + overflow: 'hidden'
   // https://github.com/facebook/react-native/issues/6480
@@ -80,11 +79,7 @@ const TouchableRipple = ({
       {...rest}
       disabled={disabled}
       style={[borderless && styles.overflowHidden, style]}
-      underlayColor={
-        underlayColor != null
-          ? underlayColor
-          : color(calculatedRippleColor).fade(0.5).rgb().string()
-      }
+      underlayColor={calculatedUnderlayColor}
     >
       {React.Children.only(children)}
     </TouchableHighlight>
