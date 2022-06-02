@@ -8,13 +8,13 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import color from 'color';
 import FAB from './FAB';
 import Text from '../Typography/Text';
 import Card from '../Card/Card';
 import { withTheme } from '../../core/theming';
 import type { IconSource } from '../Icon';
 import type { Theme } from '../../types';
+import { getFABGroupColors } from './utils';
 
 type Props = {
   /**
@@ -234,11 +234,9 @@ const FABGroup = ({
 
   const toggle = () => onStateChange({ open: !open });
 
-  const labelColor = isV3
-    ? theme.colors.onSurface
-    : theme.dark
-    ? theme.colors.text
-    : color(theme.colors.text).fade(0.54).rgb().string();
+  const { labelColor, backdropColor, stackedFABBackgroundColor } =
+    getFABGroupColors({ theme });
+
   const backdropOpacity = open
     ? backdrop.interpolate({
         inputRange: [0, 0.5, 1],
@@ -289,9 +287,7 @@ const FABGroup = ({
             styles.backdrop,
             {
               opacity: backdropOpacity,
-              backgroundColor: isV3
-                ? color(theme.colors.background).alpha(0.8).rgb().string()
-                : theme.colors?.backdrop,
+              backgroundColor: backdropColor,
             },
           ]}
         />
@@ -363,7 +359,7 @@ const FABGroup = ({
                     {
                       transform: [{ scale: scales[i] }],
                       opacity: opacities[i],
-                      backgroundColor: theme.colors.surface,
+                      backgroundColor: stackedFABBackgroundColor,
                     },
                     isV3 && { transform: [{ translateY: translations[i] }] },
                     it.style,
@@ -401,14 +397,7 @@ const FABGroup = ({
           accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityState={{ expanded: open }}
-          style={[
-            styles.fab,
-            isV3 &&
-              open && {
-                backgroundColor: theme.colors.surfaceVariant,
-              },
-            fabStyle,
-          ]}
+          style={[styles.fab, fabStyle]}
           visible={visible}
           testID={testID}
           variant={variant}
