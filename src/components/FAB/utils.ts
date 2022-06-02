@@ -292,3 +292,37 @@ export const getFABColors = ({
     rippleColor: color(foregroundColor).alpha(0.12).rgb().string(),
   };
 };
+
+const getLabelColor = ({ theme }: { theme: Theme }) => {
+  if (theme.isV3) {
+    return theme.colors.onSurface;
+  }
+
+  if (theme.dark) {
+    return theme.colors.text;
+  }
+
+  return color(theme.colors.text).fade(0.54).rgb().string();
+};
+
+const getBackdropColor = ({ theme }: { theme: Theme }) => {
+  if (theme.isV3) {
+    return color(theme.colors.background).alpha(0.95).rgb().string();
+  }
+  return theme.colors?.backdrop;
+};
+
+const getStackedFABBackgroundColor = ({ theme }: { theme: Theme }) => {
+  if (theme.isV3) {
+    return theme.colors.elevation.level3;
+  }
+  return theme.colors.surface;
+};
+
+export const getFABGroupColors = ({ theme }: { theme: Theme }) => {
+  return {
+    labelColor: getLabelColor({ theme }),
+    backdropColor: getBackdropColor({ theme }),
+    stackedFABBackgroundColor: getStackedFABBackgroundColor({ theme }),
+  };
+};
