@@ -231,13 +231,13 @@ const AnimatedFAB = ({
     }
   }, [visible, scale, visibility]);
 
-  const { backgroundColor, foregroundColor } = getFABColors(
+  const { backgroundColor, foregroundColor } = getFABColors({
     theme,
     variant,
     disabled,
     customColor,
-    style
-  );
+    style,
+  });
 
   const rippleColor = color(foregroundColor).alpha(0.12).rgb().string();
 

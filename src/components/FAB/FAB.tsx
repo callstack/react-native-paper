@@ -1,4 +1,3 @@
-import color from 'color';
 import * as React from 'react';
 import {
   Animated,
@@ -184,15 +183,13 @@ const FAB = ({
 
   const IconComponent = animated ? CrossFadeIcon : Icon;
 
-  const { backgroundColor, foregroundColor } = getFABColors(
+  const { backgroundColor, foregroundColor, rippleColor } = getFABColors({
     theme,
     variant,
     disabled,
     customColor,
-    style
-  );
-
-  const rippleColor = color(foregroundColor).alpha(0.12).rgb().string();
+    style,
+  });
 
   const isLargeSize = size === 'large';
   const isFlatMode = mode === 'flat';
