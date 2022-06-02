@@ -18,6 +18,7 @@ type Mode = 'elevated' | 'outlined' | 'filled';
 const CardExample = () => {
   const { colors, isV3 } = useTheme();
   const [selectedMode, setSelectedMode] = React.useState('elevated' as Mode);
+  const [isSelected, setIsSelected] = React.useState(false);
   const preferences = React.useContext(PreferencesContext);
 
   const modes = isV3
@@ -109,7 +110,11 @@ const CardExample = () => {
             title="Just Strawberries"
             subtitle="... and only Strawberries"
             right={(props: any) => (
-              <IconButton {...props} icon="chevron-down" onPress={() => {}} />
+              <IconButton
+                {...props}
+                icon={isSelected ? 'heart' : 'heart-outline'}
+                onPress={() => setIsSelected(!isSelected)}
+              />
             )}
           />
         </Card>

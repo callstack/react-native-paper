@@ -121,6 +121,13 @@ const Card = ({
   accessible,
   ...rest
 }: (OutlinedCardProps | ElevatedCardProps | FilledCardProps) & Props) => {
+  const isMode = React.useCallback(
+    (modeToCompare: Mode) => {
+      return cardMode === modeToCompare;
+    },
+    [cardMode]
+  );
+
   // Default animated value
   const { current: elevation } = React.useRef<Animated.Value>(
     new Animated.Value(cardElevation)
@@ -198,7 +205,6 @@ const Card = ({
   const { backgroundColor, borderColor } = getCardColors({
     theme,
     mode: cardMode,
-    dark,
     isAdaptiveMode,
     elevation,
   });
@@ -209,20 +215,31 @@ const Card = ({
         {
           borderRadius: roundness,
           backgroundColor: backgroundColor as unknown as string,
-          borderColor,
         },
-        !isV3 && {
-          elevation: computedElevation as unknown as number,
-        },
-        cardMode === 'outlined' ? styles.outlined : {},
+        !isV3 && isMode('outlined')
+          ? styles.resetElevation
+          : {
+              elevation: computedElevation as unknown as number,
+            },
         style,
       ]}
       theme={theme}
       {...(isV3 && {
-        elevation: cardMode === 'elevated' ? computedElevation : 0,
+        elevation: isMode('elevated') ? computedElevation : 0,
       })}
       {...rest}
     >
+      {isMode('outlined') && (
+        <View
+          style={[
+            {
+              borderRadius: roundness,
+              borderColor,
+            },
+            styles.outline,
+          ]}
+        />
+      )}
       <TouchableWithoutFeedback
         delayPressIn={0}
         disabled={!(onPress || onLongPress)}
@@ -263,9 +280,15 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 1,
   },
-  outlined: {
-    elevation: 0,
+  outline: {
     borderWidth: 1,
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    zIndex: 2,
+  },
+  resetElevation: {
+    elevation: 0,
   },
 });
 
