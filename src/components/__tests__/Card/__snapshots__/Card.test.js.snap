@@ -11,6 +11,7 @@ exports[`Card renders an outlined card 1`] = `
   }
 >
   <View
+    pointerEvents="none"
     style={
       Array [
         Object {

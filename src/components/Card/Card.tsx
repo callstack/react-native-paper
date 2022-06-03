@@ -231,6 +231,7 @@ const Card = ({
     >
       {isMode('outlined') && (
         <View
+          pointerEvents="none"
           style={[
             {
               borderRadius: roundness,
