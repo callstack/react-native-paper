@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Animated, View, StyleSheet } from 'react-native';
-import color from 'color';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren, Theme } from '../../types';
+import { getCheckboxAndroidColor } from './utils';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -101,33 +101,13 @@ const CheckboxAndroid = ({
   const checked = status === 'checked';
   const indeterminate = status === 'indeterminate';
 
-  const themeTextColor = theme.isV3
-    ? theme.colors.onSurface
-    : theme.colors.text;
-  const themeDisabledColor = theme.isV3
-    ? theme.colors.onSurfaceDisabled
-    : theme.colors.text;
-
-  const checkedColor =
-    rest.color || theme.isV3 ? theme.colors.primary : theme?.colors?.accent;
-  const uncheckedColor =
-    rest.uncheckedColor ||
-    (theme.isV3
-      ? theme.colors.onSurfaceVariant
-      : color(themeTextColor)
-          .alpha(theme.dark ? 0.7 : 0.54)
-          .rgb()
-          .string());
-
-  let rippleColor, checkboxColor;
-
-  if (disabled) {
-    rippleColor = color(themeTextColor).alpha(0.16).rgb().string();
-    checkboxColor = themeDisabledColor;
-  } else {
-    rippleColor = color(checkedColor).fade(0.32).rgb().string();
-    checkboxColor = checked ? checkedColor : uncheckedColor;
-  }
+  const { rippleColor, checkboxColor } = getCheckboxAndroidColor({
+    theme,
+    disabled,
+    checked,
+    customColor: rest.color,
+    customUncheckedColor: rest.uncheckedColor,
+  });
 
   const borderWidth = scaleAnim.interpolate({
     inputRange: [0.8, 1],
