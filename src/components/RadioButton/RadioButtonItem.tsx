@@ -151,9 +151,12 @@ const RadioButtonItem = ({
     radioButton = <RadioButton {...radioButtonProps} />;
   }
 
+  const textColor = theme.isV3 ? theme.colors.onSurface : theme.colors.text;
+  const textAlign = isLeading ? 'right' : 'left';
+
   const computedStyle = {
-    color: theme.isV3 ? theme.colors.onSurface : theme.colors?.text,
-    textAlign: isLeading ? 'right' : 'left',
+    color: textColor,
+    textAlign,
   } as TextStyle;
 
   return (
