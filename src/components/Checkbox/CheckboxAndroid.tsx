@@ -4,7 +4,7 @@ import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren, Theme } from '../../types';
-import { getCheckboxAndroidColor } from './utils';
+import { getAndroidSelectionControlColor } from './utils';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -101,13 +101,14 @@ const CheckboxAndroid = ({
   const checked = status === 'checked';
   const indeterminate = status === 'indeterminate';
 
-  const { rippleColor, checkboxColor } = getCheckboxAndroidColor({
-    theme,
-    disabled,
-    checked,
-    customColor: rest.color,
-    customUncheckedColor: rest.uncheckedColor,
-  });
+  const { rippleColor, selectionControlColor } =
+    getAndroidSelectionControlColor({
+      theme,
+      disabled,
+      checked,
+      customColor: rest.color,
+      customUncheckedColor: rest.uncheckedColor,
+    });
 
   const borderWidth = scaleAnim.interpolate({
     inputRange: [0.8, 1],
@@ -141,14 +142,14 @@ const CheckboxAndroid = ({
           allowFontScaling={false}
           name={icon}
           size={24}
-          color={checkboxColor}
+          color={selectionControlColor}
           direction="ltr"
         />
         <View style={[StyleSheet.absoluteFill, styles.fillContainer]}>
           <Animated.View
             style={[
               styles.fill,
-              { borderColor: checkboxColor },
+              { borderColor: selectionControlColor },
               { borderWidth },
             ]}
           />

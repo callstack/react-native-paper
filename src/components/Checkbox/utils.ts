@@ -34,11 +34,11 @@ const getAndroidUncheckedColor = ({
     return theme.colors.onSurfaceVariant;
   }
 
-  // @ts-ignore
-  return color(theme.colors.text)
-    .alpha(theme.dark ? 0.7 : 0.54)
-    .rgb()
-    .string();
+  if (theme.dark) {
+    return color(theme.colors.text).alpha(0.7).rgb().string();
+  }
+
+  return color(theme.colors.text).alpha(0.54).rgb().string();
 };
 
 const getAndroidRippleColor = ({
@@ -60,7 +60,7 @@ const getAndroidRippleColor = ({
   return color(checkedColor).fade(0.32).rgb().string();
 };
 
-const getCheckboxColor = ({
+const getAndroidControlColor = ({
   theme,
   checked,
   disabled,
@@ -86,7 +86,7 @@ const getCheckboxColor = ({
   return uncheckedColor;
 };
 
-export const getCheckboxAndroidColor = ({
+export const getAndroidSelectionControlColor = ({
   theme,
   disabled,
   checked,
@@ -106,7 +106,7 @@ export const getCheckboxAndroidColor = ({
   });
   return {
     rippleColor: getAndroidRippleColor({ theme, checkedColor, disabled }),
-    checkboxColor: getCheckboxColor({
+    selectionControlColor: getAndroidControlColor({
       theme,
       disabled,
       checked,
@@ -154,14 +154,14 @@ const getIOSRippleColor = ({
 }) => {
   if (disabled) {
     if (theme.isV3) {
-      return theme.colors.onSurface;
+      return color(theme.colors.onSurface).alpha(0.16).rgb().string();
     }
-    return theme.colors.text;
+    return color(theme.colors.text).alpha(0.16).rgb().string();
   }
   return color(checkedColor).fade(0.32).rgb().string();
 };
 
-export const getCheckboxIOSColor = ({
+export const getSelectionControlIOSColor = ({
   theme,
   disabled,
   customColor,

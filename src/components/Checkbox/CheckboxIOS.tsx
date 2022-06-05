@@ -4,7 +4,7 @@ import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren, Theme } from '../../types';
-import { getCheckboxIOSColor } from './utils';
+import { getSelectionControlIOSColor } from './utils';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -60,7 +60,7 @@ const CheckboxIOS = ({
   const checked = status === 'checked';
   const indeterminate = status === 'indeterminate';
 
-  const { checkedColor, rippleColor } = getCheckboxIOSColor({
+  const { checkedColor, rippleColor } = getSelectionControlIOSColor({
     theme,
     disabled,
     customColor: rest.color,
