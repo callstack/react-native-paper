@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { Animated, View, StyleSheet } from 'react-native';
-import color from 'color';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren, Theme } from '../../types';
-import { black } from '../../styles/themes/v2/colors';
+import { getAndroidSelectionControlColor } from '../Checkbox/utils';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -108,24 +107,6 @@ const RadioButtonAndroid = ({
     }
   }, [status, borderAnim, radioAnim, scale]);
 
-  const disabledColor = theme.isV3
-    ? theme.colors.onSurfaceDisabled
-    : theme.colors?.disabled;
-  const checkedButtonColor = theme.isV3
-    ? theme.colors.primary
-    : theme.colors?.accent;
-  const textColor = theme.isV3 ? theme.colors.onSurface : theme.colors.text;
-
-  const checkedColor = rest.color || checkedButtonColor;
-  const uncheckedColor =
-    rest.uncheckedColor ||
-    color(textColor)
-      .alpha(theme.dark ? 0.7 : 0.54)
-      .rgb()
-      .string();
-
-  let rippleColor: string, radioColor: string;
-
   return (
     <RadioButtonContext.Consumer>
       {(context?: RadioButtonContextType) => {
@@ -136,15 +117,14 @@ const RadioButtonAndroid = ({
             value,
           }) === 'checked';
 
-        if (disabled) {
-          rippleColor = color(textColor).alpha(0.16).rgb().string();
-          radioColor = disabledColor || black;
-        } else {
-          rippleColor = color(checkedColor).fade(0.32).rgb().string();
-          radioColor = checked
-            ? checkedColor || black
-            : uncheckedColor || black;
-        }
+        const { rippleColor, selectionControlColor } =
+          getAndroidSelectionControlColor({
+            theme,
+            disabled,
+            checked,
+            customColor: rest.color,
+            customUncheckedColor: rest.uncheckedColor,
+          });
 
         return (
           <TouchableRipple
@@ -177,7 +157,7 @@ const RadioButtonAndroid = ({
               style={[
                 styles.radio,
                 {
-                  borderColor: radioColor,
+                  borderColor: selectionControlColor,
                   borderWidth: borderAnim,
                 },
               ]}
@@ -188,7 +168,7 @@ const RadioButtonAndroid = ({
                     style={[
                       styles.dot,
                       {
-                        backgroundColor: radioColor,
+                        backgroundColor: selectionControlColor,
                         transform: [{ scale: radioAnim }],
                       },
                     ]}

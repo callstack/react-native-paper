@@ -14,7 +14,7 @@ import CheckboxIOS from './CheckboxIOS';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import type { MD3TypescaleKey, Theme } from '../../types';
 
 type Props = {
   /**
@@ -49,6 +49,23 @@ type Props = {
    * Style that is passed to Label element.
    */
   labelStyle?: StyleProp<TextStyle>;
+  /**
+   * @supported Available in v3.x with theme version 3
+   *
+   * Label text variant defines appropriate text styles for type role and its size.
+   * Available variants:
+   *
+   *  Display: `displayLarge`, `displayMedium`, `displaySmall`
+   *
+   *  Headline: `headlineLarge`, `headlineMedium`, `headlineSmall`
+   *
+   *  Title: `titleLarge`, `titleMedium`, `titleSmall`
+   *
+   *  Label:  `labelLarge`, `labelMedium`, `labelSmall`
+   *
+   *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
+   */
+  labelVariant?: keyof typeof MD3TypescaleKey;
   /**
    * @optional
    */
@@ -97,6 +114,7 @@ const CheckboxItem = ({
   testID,
   mode,
   position = 'trailing',
+  labelVariant = 'bodyLarge',
   ...props
 }: Props) => {
   const checkboxProps = { ...props, status, theme };
@@ -110,6 +128,14 @@ const CheckboxItem = ({
   } else {
     checkbox = <Checkbox {...checkboxProps} />;
   }
+
+  const textColor = theme.isV3 ? theme.colors.onSurface : theme.colors.text;
+  const textAlign = isLeading ? 'right' : 'left';
+
+  const computedStyle = {
+    color: textColor,
+    textAlign,
+  } as TextStyle;
 
   return (
     <TouchableRipple
@@ -128,12 +154,11 @@ const CheckboxItem = ({
       >
         {isLeading && checkbox}
         <Text
+          variant={labelVariant}
           style={[
             styles.label,
-            {
-              color: theme.isV3 ? theme.colors.onSurface : theme.colors.text,
-              textAlign: isLeading ? 'right' : 'left',
-            },
+            !theme.isV3 && styles.font,
+            computedStyle,
             labelStyle,
           ]}
         >
@@ -163,8 +188,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   label: {
-    fontSize: 16,
     flexShrink: 1,
     flexGrow: 1,
+  },
+  font: {
+    fontSize: 16,
   },
 });

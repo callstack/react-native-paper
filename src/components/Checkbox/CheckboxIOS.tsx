@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import color from 'color';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren, Theme } from '../../types';
-import { black } from '../../styles/themes/v2/colors';
+import { getSelectionControlIOSColor } from './utils';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -61,28 +60,11 @@ const CheckboxIOS = ({
   const checked = status === 'checked';
   const indeterminate = status === 'indeterminate';
 
-  const disabledColor = theme.isV3
-    ? theme.colors.onSurfaceDisabled
-    : theme?.colors?.disabled;
-
-  const defaultColor = theme.isV3
-    ? theme.colors.primary
-    : theme?.colors?.accent;
-
-  const checkedColor = disabled ? disabledColor : rest.color || defaultColor;
-
-  let rippleColor;
-
-  if (disabled) {
-    rippleColor = color(
-      theme.isV3 ? theme.colors.onSurface : theme?.colors?.text
-    )
-      .alpha(0.16)
-      .rgb()
-      .string();
-  } else {
-    rippleColor = color(checkedColor).fade(0.32).rgb().string();
-  }
+  const { checkedColor, rippleColor } = getSelectionControlIOSColor({
+    theme,
+    disabled,
+    customColor: rest.color,
+  });
 
   const icon = indeterminate ? 'minus' : 'check';
 
@@ -107,7 +89,7 @@ const CheckboxIOS = ({
           allowFontScaling={false}
           name={icon}
           size={24}
-          color={checkedColor || black}
+          color={checkedColor}
           direction="ltr"
         />
       </View>

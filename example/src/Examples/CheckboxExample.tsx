@@ -2,9 +2,12 @@ import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import {
   Paragraph,
+  Text,
   Checkbox,
   MD2Colors,
+  MD3Colors,
   TouchableRipple,
+  useTheme,
 } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
@@ -13,11 +16,14 @@ const CheckboxExample = () => {
   const [checkedCustom, setCheckedCustom] = React.useState<boolean>(true);
   const [indeterminate, setIndeterminate] = React.useState<boolean>(true);
 
+  const { isV3 } = useTheme();
+  const TextComponent = isV3 ? Text : Paragraph;
+
   return (
     <ScreenWrapper style={styles.container}>
       <TouchableRipple onPress={() => setCheckedNormal(!checkedNormal)}>
         <View style={styles.row}>
-          <Paragraph>Normal</Paragraph>
+          <TextComponent>Normal</TextComponent>
           <View pointerEvents="none">
             <Checkbox status={checkedNormal ? 'checked' : 'unchecked'} />
           </View>
@@ -26,10 +32,10 @@ const CheckboxExample = () => {
 
       <TouchableRipple onPress={() => setCheckedCustom(!checkedCustom)}>
         <View style={styles.row}>
-          <Paragraph>Custom</Paragraph>
+          <TextComponent>Custom</TextComponent>
           <View pointerEvents="none">
             <Checkbox
-              color={MD2Colors.blue500}
+              color={isV3 ? MD3Colors.error70 : MD2Colors.blue500}
               status={checkedCustom ? 'checked' : 'unchecked'}
             />
           </View>
@@ -38,7 +44,7 @@ const CheckboxExample = () => {
 
       <TouchableRipple onPress={() => setIndeterminate(!indeterminate)}>
         <View style={styles.row}>
-          <Paragraph>Indeterminate</Paragraph>
+          <TextComponent>Indeterminate</TextComponent>
           <View pointerEvents="none">
             <Checkbox status={indeterminate ? 'indeterminate' : 'unchecked'} />
           </View>
@@ -46,15 +52,15 @@ const CheckboxExample = () => {
       </TouchableRipple>
 
       <View style={styles.row}>
-        <Paragraph>Checked (Disabled)</Paragraph>
+        <TextComponent>Checked (Disabled)</TextComponent>
         <Checkbox status="checked" disabled />
       </View>
       <View style={styles.row}>
-        <Paragraph>Unchecked (Disabled)</Paragraph>
+        <TextComponent>Unchecked (Disabled)</TextComponent>
         <Checkbox status="unchecked" disabled />
       </View>
       <View style={styles.row}>
-        <Paragraph>Indeterminate (Disabled)</Paragraph>
+        <TextComponent>Indeterminate (Disabled)</TextComponent>
         <Checkbox status="indeterminate" disabled />
       </View>
     </ScreenWrapper>

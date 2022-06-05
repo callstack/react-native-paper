@@ -46,7 +46,7 @@ export { default as RadioButton } from './components/RadioButton';
 export { default as Searchbar } from './components/Searchbar';
 export { default as Snackbar } from './components/Snackbar';
 export { default as Surface } from './components/Surface';
-export { default as Switch } from './components/Switch';
+export { default as Switch } from './components/Switch/Switch';
 export { default as Appbar } from './components/Appbar';
 export { default as TouchableRipple } from './components/TouchableRipple/TouchableRipple';
 export { default as TextInput } from './components/TextInput/TextInput';
