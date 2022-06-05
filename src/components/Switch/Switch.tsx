@@ -1,21 +1,14 @@
 import * as React from 'react';
 import {
-  grey400,
-  grey800,
-  grey50,
-  white,
-  black,
-} from '../styles/themes/v2/colors';
-import {
   NativeModules,
   Platform,
   StyleProp,
   Switch as NativeSwitch,
   ViewStyle,
 } from 'react-native';
-import setColor from 'color';
-import { withTheme } from '../core/theming';
-import type { Theme } from '../types';
+import { withTheme } from '../../core/theming';
+import type { Theme } from '../../types';
+import { getSwitchColor } from './utils';
 
 const version = NativeModules.PlatformConstants
   ? NativeModules.PlatformConstants.reactNativeVersion
@@ -91,30 +84,12 @@ const Switch = ({
   theme,
   ...rest
 }: Props) => {
-  const checkedColor =
-    color || (theme.isV3 ? theme.colors.primary : theme?.colors?.accent);
-
-  const onTintColor =
-    Platform.OS === 'ios'
-      ? checkedColor
-      : disabled
-      ? theme.dark
-        ? setColor(white).alpha(0.1).rgb().string()
-        : setColor(black).alpha(0.12).rgb().string()
-      : setColor(checkedColor).alpha(0.5).rgb().string();
-
-  const thumbTintColor =
-    Platform.OS === 'ios'
-      ? undefined
-      : disabled
-      ? theme.dark
-        ? grey800
-        : grey400
-      : value
-      ? checkedColor
-      : theme.dark
-      ? grey400
-      : grey50;
+  const { checkedColor, onTintColor, thumbTintColor } = getSwitchColor({
+    theme,
+    disabled,
+    value,
+    color,
+  });
 
   const props =
     version && version.major === 0 && version.minor <= 56
@@ -132,7 +107,7 @@ const Switch = ({
           thumbColor: thumbTintColor,
           trackColor: {
             true: onTintColor,
-            false: '',
+            false: onTintColor,
           },
         };
 

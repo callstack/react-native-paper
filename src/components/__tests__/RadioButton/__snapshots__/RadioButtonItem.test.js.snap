@@ -107,6 +107,8 @@ exports[`can render leading radio button control 1`] = `
             Object {
               "flexGrow": 1,
               "flexShrink": 1,
+            },
+            Object {
               "fontSize": 16,
             },
             Object {
@@ -172,6 +174,8 @@ exports[`can render the Android radio button on different platforms 1`] = `
             Object {
               "flexGrow": 1,
               "flexShrink": 1,
+            },
+            Object {
               "fontSize": 16,
             },
             Object {
@@ -279,6 +283,8 @@ exports[`can render the iOS radio button on different platforms 1`] = `
             Object {
               "flexGrow": 1,
               "flexShrink": 1,
+            },
+            Object {
               "fontSize": 16,
             },
             Object {
@@ -403,6 +409,8 @@ exports[`renders unchecked 1`] = `
             Object {
               "flexGrow": 1,
               "flexShrink": 1,
+            },
+            Object {
               "fontSize": 16,
             },
             Object {

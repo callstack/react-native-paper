@@ -1,14 +1,17 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { RadioButton } from 'react-native-paper';
+import { RadioButton, useTheme } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
 const RadioButtonItemExample = () => {
-  const [checkedDefault, setCheckedDefault] = React.useState<boolean>(true);
-  const [checkedAndroid, setCheckedAndroid] = React.useState<boolean>(true);
-  const [checkedIOS, setCheckedIOS] = React.useState<boolean>(true);
+  const [checkedDefault, setCheckedDefault] = React.useState(true);
+  const [checkedAndroid, setCheckedAndroid] = React.useState(true);
+  const [checkedIOS, setCheckedIOS] = React.useState(true);
   const [checkedLeadingControl, setCheckedLeadingControl] =
-    React.useState<boolean>(true);
+    React.useState(true);
+  const [checkedLabelVariant, setCheckedLabelVariant] = React.useState(true);
+
+  const { isV3 } = useTheme();
 
   return (
     <ScreenWrapper style={styles.container}>
@@ -39,6 +42,15 @@ const RadioButtonItemExample = () => {
         value="iOS"
         position="leading"
       />
+      {isV3 && (
+        <RadioButton.Item
+          label="Default with titleLarge title variant"
+          labelVariant="titleLarge"
+          status={checkedLabelVariant ? 'checked' : 'unchecked'}
+          onPress={() => setCheckedLabelVariant(!checkedLabelVariant)}
+          value="default"
+        />
+      )}
     </ScreenWrapper>
   );
 };

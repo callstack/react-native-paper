@@ -14,7 +14,7 @@ exports[`renders disabled switch 1`] = `
       "width": 51,
     }
   }
-  tintColor=""
+  tintColor="#03dac4"
   value={true}
 />
 `;
@@ -32,7 +32,7 @@ exports[`renders off switch 1`] = `
       "width": 51,
     }
   }
-  tintColor=""
+  tintColor="#03dac4"
   value={false}
 />
 `;
@@ -50,7 +50,7 @@ exports[`renders on switch 1`] = `
       "width": 51,
     }
   }
-  tintColor=""
+  tintColor="#03dac4"
   value={true}
 />
 `;
@@ -68,7 +68,7 @@ exports[`renders switch with color 1`] = `
       "width": 51,
     }
   }
-  tintColor=""
+  tintColor="#e91e63"
   value={true}
 />
 `;

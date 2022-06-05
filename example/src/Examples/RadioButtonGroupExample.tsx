@@ -1,13 +1,20 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { RadioButton, Paragraph, List, useTheme } from 'react-native-paper';
+import {
+  RadioButton,
+  Paragraph,
+  List,
+  Text,
+  useTheme,
+} from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
 const RadioButtonGroupExample = () => {
   const [value, setValue] = React.useState('first');
   const [value2, setValue2] = React.useState('first');
 
-  const { colors } = useTheme();
+  const { colors, isV3 } = useTheme();
+  const TextComponent = isV3 ? Text : Paragraph;
 
   return (
     <ScreenWrapper>
@@ -17,15 +24,15 @@ const RadioButtonGroupExample = () => {
           onValueChange={(value: string) => setValue(value)}
         >
           <View style={styles.row}>
-            <Paragraph>First</Paragraph>
+            <TextComponent>First</TextComponent>
             <RadioButton value="first" />
           </View>
           <View style={styles.row}>
-            <Paragraph>Second</Paragraph>
+            <TextComponent>Second</TextComponent>
             <RadioButton.Android value="second" />
           </View>
           <View style={styles.row}>
-            <Paragraph>Third</Paragraph>
+            <TextComponent>Third</TextComponent>
             <RadioButton.IOS value="third" />
           </View>
         </RadioButton.Group>

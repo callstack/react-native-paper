@@ -4,13 +4,18 @@ import {
   Paragraph,
   Switch,
   MD2Colors,
+  MD3Colors,
   TouchableRipple,
+  useTheme,
+  Text,
 } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
 const SwitchExample = () => {
   const [valueNormal, setNormalValue] = React.useState<boolean>(true);
   const [valueCustom, setCustomValue] = React.useState<boolean>(true);
+
+  const { isV3 } = useTheme();
 
   const switchValueNormalLabel = `switch ${
     valueNormal === true ? 'on' : 'off'
@@ -19,11 +24,13 @@ const SwitchExample = () => {
     valueCustom === true ? 'on' : 'off'
   }`;
 
+  const TextComponent = isV3 ? Text : Paragraph;
+
   return Platform.OS === 'android' ? (
     <ScreenWrapper style={styles.container}>
       <TouchableRipple onPress={() => setNormalValue(!valueNormal)}>
         <View style={styles.row}>
-          <Paragraph>Normal {switchValueNormalLabel}</Paragraph>
+          <TextComponent>Normal {switchValueNormalLabel}</TextComponent>
           <View pointerEvents="none">
             <Switch value={valueNormal} />
           </View>
@@ -31,44 +38,47 @@ const SwitchExample = () => {
       </TouchableRipple>
       <TouchableRipple onPress={() => setCustomValue(!valueCustom)}>
         <View style={styles.row}>
-          <Paragraph>Custom {switchValueCustomlLabel}</Paragraph>
+          <TextComponent>Custom {switchValueCustomlLabel}</TextComponent>
           <View pointerEvents="none">
-            <Switch value={valueCustom} color={MD2Colors.blue500} />
+            <Switch
+              value={valueCustom}
+              color={isV3 ? MD3Colors.tertiary50 : MD2Colors.blue500}
+            />
           </View>
         </View>
       </TouchableRipple>
       <View style={styles.row}>
-        <Paragraph>Switch on (disabled)</Paragraph>
+        <TextComponent>Switch on (disabled)</TextComponent>
         <Switch disabled value />
       </View>
       <View style={styles.row}>
-        <Paragraph>Switch off (disabled)</Paragraph>
+        <TextComponent>Switch off (disabled)</TextComponent>
         <Switch disabled />
       </View>
     </ScreenWrapper>
   ) : (
     <ScreenWrapper style={styles.container}>
       <View style={styles.row}>
-        <Paragraph>Normal {switchValueNormalLabel}</Paragraph>
+        <TextComponent>Normal {switchValueNormalLabel}</TextComponent>
         <Switch
           value={valueNormal}
           onValueChange={() => setNormalValue(!valueNormal)}
         />
       </View>
       <View style={styles.row}>
-        <Paragraph>Custom {switchValueCustomlLabel}</Paragraph>
+        <TextComponent>Custom {switchValueCustomlLabel}</TextComponent>
         <Switch
           value={valueCustom}
           onValueChange={() => setCustomValue(!valueCustom)}
-          color={MD2Colors.blue500}
+          color={isV3 ? MD3Colors.tertiary50 : MD2Colors.blue500}
         />
       </View>
       <View style={styles.row}>
-        <Paragraph>Switch on (disabled)</Paragraph>
+        <TextComponent>Switch on (disabled)</TextComponent>
         <Switch value disabled />
       </View>
       <View style={styles.row}>
-        <Paragraph>Switch off (disabled)</Paragraph>
+        <TextComponent>Switch off (disabled)</TextComponent>
         <Switch value={false} disabled />
       </View>
     </ScreenWrapper>
