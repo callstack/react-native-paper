@@ -52,12 +52,13 @@ type RenderAppbarContentProps = {
 };
 
 export const DEFAULT_APPBAR_HEIGHT = 56;
+const MD3_DEFAULT_APPBAR_HEIGHT = 64;
 
 export const modeAppbarHeight = {
-  small: DEFAULT_APPBAR_HEIGHT,
+  small: MD3_DEFAULT_APPBAR_HEIGHT,
   medium: 112,
   large: 152,
-  'center-aligned': DEFAULT_APPBAR_HEIGHT,
+  'center-aligned': MD3_DEFAULT_APPBAR_HEIGHT,
 };
 
 export const modeTextVariant = {
@@ -101,12 +102,13 @@ export const renderAppbarContent = ({
           style?: StyleProp<ViewStyle>;
           mode?: AppbarModes;
         } = {
-          color:
-            typeof child.props.color !== 'undefined'
-              ? child.props.color
-              : isDark
-              ? white
-              : black,
+          color: isV3
+            ? undefined
+            : typeof child.props.color !== 'undefined'
+            ? child.props.color
+            : isDark
+            ? white
+            : black,
         };
 
         if (child.type === AppbarContent) {
