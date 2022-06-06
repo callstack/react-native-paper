@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 import color from 'color';
-import IconButton from './IconButton';
+import IconButton from './IconButton/IconButton';
 import Surface from './Surface';
 import { withTheme } from '../core/theming';
 import type { IconSource } from './Icon';
@@ -185,7 +185,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
           borderless
           rippleColor={rippleColor}
           onPress={onIconPress}
-          color={iconColor}
+          iconColor={iconColor}
           icon={
             icon ||
             (({ size, color }) => (
@@ -228,7 +228,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
           borderless
           disabled={!value}
           accessibilityLabel={clearAccessibilityLabel}
-          color={value ? iconColor : 'rgba(255, 255, 255, 0)'}
+          iconColor={value ? iconColor : 'rgba(255, 255, 255, 0)'}
           rippleColor={rippleColor}
           onPress={handleClearPress}
           icon={

@@ -2,55 +2,64 @@
 
 exports[`renders disabled icon button 1`] = `
 <View
-  accessibilityRole="button"
-  accessibilityState={
-    Object {
-      "disabled": true,
-    }
-  }
-  accessible={true}
-  focusable={false}
-  hitSlop={
-    Object {
-      "bottom": 6,
-      "left": 6,
-      "right": 6,
-      "top": 6,
-    }
-  }
-  onClick={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
   style={
-    Array [
-      Object {
-        "overflow": "hidden",
+    Object {
+      "backgroundColor": undefined,
+      "borderColor": undefined,
+      "borderRadius": 18,
+      "borderWidth": 0,
+      "height": 36,
+      "margin": 6,
+      "opacity": 0.32,
+      "overflow": "hidden",
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 3,
+        "width": 0,
       },
+      "shadowOpacity": 0.24,
+      "shadowRadius": 4,
+      "width": 36,
+    }
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessibilityState={
+      Object {
+        "disabled": true,
+      }
+    }
+    accessible={true}
+    focusable={false}
+    hitSlop={
+      Object {
+        "bottom": 6,
+        "left": 6,
+        "right": 6,
+        "top": 6,
+      }
+    }
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
       Array [
         Object {
-          "alignItems": "center",
-          "justifyContent": "center",
-          "margin": 6,
           "overflow": "hidden",
         },
         Object {
-          "borderRadius": 18,
-          "height": 36,
-          "width": 36,
+          "alignItems": "center",
+          "flexGrow": 1,
+          "justifyContent": "center",
         },
-        Object {
-          "opacity": 0.32,
-        },
-        undefined,
-      ],
-    ]
-  }
->
-  <View>
+      ]
+    }
+  >
     <Text
       accessibilityElementsHidden={true}
       importantForAccessibility="no-hide-descendants"
@@ -76,53 +85,63 @@ exports[`renders disabled icon button 1`] = `
 
 exports[`renders icon button by default 1`] = `
 <View
-  accessibilityRole="button"
-  accessibilityState={
-    Object {
-      "disabled": undefined,
-    }
-  }
-  accessible={true}
-  focusable={false}
-  hitSlop={
-    Object {
-      "bottom": 6,
-      "left": 6,
-      "right": 6,
-      "top": 6,
-    }
-  }
-  onClick={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
   style={
-    Array [
-      Object {
-        "overflow": "hidden",
+    Object {
+      "backgroundColor": undefined,
+      "borderColor": undefined,
+      "borderRadius": 18,
+      "borderWidth": 0,
+      "height": 36,
+      "margin": 6,
+      "overflow": "hidden",
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 3,
+        "width": 0,
       },
+      "shadowOpacity": 0.24,
+      "shadowRadius": 4,
+      "width": 36,
+    }
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
+    accessible={true}
+    focusable={false}
+    hitSlop={
+      Object {
+        "bottom": 6,
+        "left": 6,
+        "right": 6,
+        "top": 6,
+      }
+    }
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
       Array [
         Object {
-          "alignItems": "center",
-          "justifyContent": "center",
-          "margin": 6,
           "overflow": "hidden",
         },
         Object {
-          "borderRadius": 18,
-          "height": 36,
-          "width": 36,
+          "alignItems": "center",
+          "flexGrow": 1,
+          "justifyContent": "center",
         },
-        undefined,
-        undefined,
-      ],
-    ]
-  }
->
-  <View>
+      ]
+    }
+  >
     <Text
       accessibilityElementsHidden={true}
       importantForAccessibility="no-hide-descendants"
@@ -148,53 +167,63 @@ exports[`renders icon button by default 1`] = `
 
 exports[`renders icon button with color 1`] = `
 <View
-  accessibilityRole="button"
-  accessibilityState={
-    Object {
-      "disabled": undefined,
-    }
-  }
-  accessible={true}
-  focusable={false}
-  hitSlop={
-    Object {
-      "bottom": 6,
-      "left": 6,
-      "right": 6,
-      "top": 6,
-    }
-  }
-  onClick={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
   style={
-    Array [
-      Object {
-        "overflow": "hidden",
+    Object {
+      "backgroundColor": undefined,
+      "borderColor": undefined,
+      "borderRadius": 18,
+      "borderWidth": 0,
+      "height": 36,
+      "margin": 6,
+      "overflow": "hidden",
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 3,
+        "width": 0,
       },
+      "shadowOpacity": 0.24,
+      "shadowRadius": 4,
+      "width": 36,
+    }
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
+    accessible={true}
+    focusable={false}
+    hitSlop={
+      Object {
+        "bottom": 6,
+        "left": 6,
+        "right": 6,
+        "top": 6,
+      }
+    }
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
       Array [
         Object {
-          "alignItems": "center",
-          "justifyContent": "center",
-          "margin": 6,
           "overflow": "hidden",
         },
         Object {
-          "borderRadius": 18,
-          "height": 36,
-          "width": 36,
+          "alignItems": "center",
+          "flexGrow": 1,
+          "justifyContent": "center",
         },
-        undefined,
-        undefined,
-      ],
-    ]
-  }
->
-  <View>
+      ]
+    }
+  >
     <Text
       accessibilityElementsHidden={true}
       importantForAccessibility="no-hide-descendants"
@@ -220,53 +249,63 @@ exports[`renders icon button with color 1`] = `
 
 exports[`renders icon button with size 1`] = `
 <View
-  accessibilityRole="button"
-  accessibilityState={
-    Object {
-      "disabled": undefined,
-    }
-  }
-  accessible={true}
-  focusable={false}
-  hitSlop={
-    Object {
-      "bottom": 6,
-      "left": 6,
-      "right": 6,
-      "top": 6,
-    }
-  }
-  onClick={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
   style={
-    Array [
-      Object {
-        "overflow": "hidden",
+    Object {
+      "backgroundColor": undefined,
+      "borderColor": undefined,
+      "borderRadius": 22.5,
+      "borderWidth": 0,
+      "height": 45,
+      "margin": 6,
+      "overflow": "hidden",
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 3,
+        "width": 0,
       },
+      "shadowOpacity": 0.24,
+      "shadowRadius": 4,
+      "width": 45,
+    }
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
+    accessible={true}
+    focusable={false}
+    hitSlop={
+      Object {
+        "bottom": 6,
+        "left": 6,
+        "right": 6,
+        "top": 6,
+      }
+    }
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
       Array [
         Object {
-          "alignItems": "center",
-          "justifyContent": "center",
-          "margin": 6,
           "overflow": "hidden",
         },
         Object {
-          "borderRadius": 22.5,
-          "height": 45,
-          "width": 45,
+          "alignItems": "center",
+          "flexGrow": 1,
+          "justifyContent": "center",
         },
-        undefined,
-        undefined,
-      ],
-    ]
-  }
->
-  <View>
+      ]
+    }
+  >
     <Text
       accessibilityElementsHidden={true}
       importantForAccessibility="no-hide-descendants"
@@ -292,53 +331,63 @@ exports[`renders icon button with size 1`] = `
 
 exports[`renders icon change animated 1`] = `
 <View
-  accessibilityRole="button"
-  accessibilityState={
-    Object {
-      "disabled": undefined,
-    }
-  }
-  accessible={true}
-  focusable={false}
-  hitSlop={
-    Object {
-      "bottom": 6,
-      "left": 6,
-      "right": 6,
-      "top": 6,
-    }
-  }
-  onClick={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
   style={
-    Array [
-      Object {
-        "overflow": "hidden",
+    Object {
+      "backgroundColor": undefined,
+      "borderColor": undefined,
+      "borderRadius": 18,
+      "borderWidth": 0,
+      "height": 36,
+      "margin": 6,
+      "overflow": "hidden",
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 3,
+        "width": 0,
       },
+      "shadowOpacity": 0.24,
+      "shadowRadius": 4,
+      "width": 36,
+    }
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessibilityState={
+      Object {
+        "disabled": undefined,
+      }
+    }
+    accessible={true}
+    focusable={false}
+    hitSlop={
+      Object {
+        "bottom": 6,
+        "left": 6,
+        "right": 6,
+        "top": 6,
+      }
+    }
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
       Array [
         Object {
-          "alignItems": "center",
-          "justifyContent": "center",
-          "margin": 6,
           "overflow": "hidden",
         },
         Object {
-          "borderRadius": 18,
-          "height": 36,
-          "width": 36,
+          "alignItems": "center",
+          "flexGrow": 1,
+          "justifyContent": "center",
         },
-        undefined,
-        undefined,
-      ],
-    ]
-  }
->
-  <View>
+      ]
+    }
+  >
     <View
       style={
         Array [
