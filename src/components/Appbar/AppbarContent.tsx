@@ -98,13 +98,13 @@ const AppbarContent = ({
 }: Props) => {
   const { fonts, isV3, colors } = theme;
 
-  const subtitleColor = color(titleColor).alpha(0.7).rgb().string();
-
   const titleTextColor = titleColor
     ? titleColor
     : isV3
     ? colors.onSurface
     : white;
+
+  const subtitleColor = color(titleTextColor).alpha(0.7).rgb().string();
 
   const modeContainerStyles = {
     small: styles.v3DefaultContainer,
