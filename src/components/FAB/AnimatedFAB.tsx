@@ -396,9 +396,6 @@ const AnimatedFAB = ({
               rippleColor={rippleColor}
               disabled={disabled}
               accessibilityLabel={accessibilityLabel}
-              // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-              accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
-              accessibilityComponentType="button"
               accessibilityRole="button"
               accessibilityState={{ ...accessibilityState, disabled }}
               testID={testID}

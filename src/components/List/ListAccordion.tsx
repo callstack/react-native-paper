@@ -196,9 +196,6 @@ const ListAccordion = ({
           style={[styles.container, style]}
           onPress={handlePress}
           onLongPress={onLongPress}
-          // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-          accessibilityTraits="button"
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityState={{ expanded: isExpanded }}
           accessibilityLabel={accessibilityLabel}
