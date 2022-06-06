@@ -7,8 +7,6 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import color from 'color';
-import { white, black } from '../../styles/themes/v2/colors';
 import CardContent from './CardContent';
 import CardActions from './CardActions';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -18,6 +16,7 @@ import CardTitle, { CardTitle as _CardTitle } from './CardTitle';
 import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
+import { getCardColors } from './helpers';
 
 type OutlinedCardProps = {
   mode: 'outlined';
@@ -29,7 +28,14 @@ type ElevatedCardProps = {
   elevation?: number;
 };
 
+type FilledCardProps = {
+  mode?: 'filled';
+  elevation?: never;
+};
+
 type HandlePressType = 'in' | 'out';
+
+type Mode = 'elevated' | 'outlined' | 'filled';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
@@ -47,9 +53,10 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Mode of the Card.
    * - `elevated` - Card with elevation.
+   * - `filled` - Card with without outline and elevation @supported Available in v3.x with theme version 3
    * - `outlined` - Card with an outline.
    */
-  mode?: 'elevated' | 'outlined';
+  mode?: Mode;
   /**
    * Content of the `Card`.
    */
@@ -113,7 +120,14 @@ const Card = ({
   testID,
   accessible,
   ...rest
-}: (OutlinedCardProps | ElevatedCardProps) & Props) => {
+}: (OutlinedCardProps | ElevatedCardProps | FilledCardProps) & Props) => {
+  const isMode = React.useCallback(
+    (modeToCompare: Mode) => {
+      return cardMode === modeToCompare;
+    },
+    [cardMode]
+  );
+
   // Default animated value
   const { current: elevation } = React.useRef<Animated.Value>(
     new Animated.Value(cardElevation)
@@ -185,30 +199,48 @@ const Card = ({
       ? (child.type as any).displayName
       : null
   );
-  const borderColor = color(dark ? white : black)
-    .alpha(0.12)
-    .rgb()
-    .string();
   const computedElevation =
     dark && isAdaptiveMode ? elevationDarkAdaptive : elevation;
+
+  const { backgroundColor, borderColor } = getCardColors({
+    theme,
+    mode: cardMode,
+    isAdaptiveMode,
+    elevation,
+  });
 
   return (
     <Surface
       style={[
         {
           borderRadius: roundness,
-          borderColor,
+          backgroundColor: backgroundColor as unknown as string,
         },
-        !isV3 && {
-          elevation: computedElevation as unknown as number,
-        },
-        cardMode === 'outlined' ? styles.outlined : {},
+        !isV3 && isMode('outlined')
+          ? styles.resetElevation
+          : {
+              elevation: computedElevation as unknown as number,
+            },
         style,
       ]}
       theme={theme}
-      {...(isV3 && { elevation: computedElevation })}
+      {...(isV3 && {
+        elevation: isMode('elevated') ? computedElevation : 0,
+      })}
       {...rest}
     >
+      {isMode('outlined') && (
+        <View
+          pointerEvents="none"
+          style={[
+            {
+              borderRadius: roundness,
+              borderColor,
+            },
+            styles.outline,
+          ]}
+        />
+      )}
       <TouchableWithoutFeedback
         delayPressIn={0}
         disabled={!(onPress || onLongPress)}
@@ -249,9 +281,15 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 1,
   },
-  outlined: {
-    elevation: 0,
+  outline: {
     borderWidth: 1,
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    zIndex: 2,
+  },
+  resetElevation: {
+    elevation: 0,
   },
 });
 
