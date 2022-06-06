@@ -3,6 +3,7 @@ import { StyleSheet, View, ViewStyle, Image, StyleProp } from 'react-native';
 import { withTheme } from '../../core/theming';
 import { grey200 } from '../../styles/themes/v2/colors';
 import type { Theme } from '../../types';
+import { getCardCoverStyle } from './helpers';
 
 type Props = React.ComponentPropsWithRef<typeof Image> & {
   /**
@@ -46,26 +47,7 @@ type Props = React.ComponentPropsWithRef<typeof Image> & {
  * @extends Image props https://reactnative.dev/docs/image#props
  */
 const CardCover = ({ index, total, style, theme, ...rest }: Props) => {
-  const { roundness } = theme;
-
-  let coverStyle;
-
-  if (index === 0) {
-    if (total === 1) {
-      coverStyle = {
-        borderRadius: roundness,
-      };
-    } else {
-      coverStyle = {
-        borderTopLeftRadius: roundness,
-        borderTopRightRadius: roundness,
-      };
-    }
-  } else if (typeof total === 'number' && index === total - 1) {
-    coverStyle = {
-      borderBottomLeftRadius: roundness,
-    };
-  }
+  const coverStyle = getCardCoverStyle({ theme, index, total });
 
   return (
     <View style={[styles.container, coverStyle, style]}>
