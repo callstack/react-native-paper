@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 
-import IconButton from '../../IconButton';
+import IconButton from '../../IconButton/IconButton';
 import type { $Omit, Theme } from '../../../types';
 import type { IconSource } from '../../Icon';
 import { useTheme } from '../../../core/theming';
@@ -136,7 +136,7 @@ const TextInputIcon = ({
         style={styles.iconButton}
         size={ICON_SIZE}
         onPress={onPressWithFocusControl}
-        color={
+        iconColor={
           typeof color === 'function' ? color(isTextInputFocused) : iconColor
         }
         {...rest}

@@ -43,8 +43,8 @@ const LightTheme: ThemeBase = {
     onBackground: palette.neutral10,
     outline: palette.neutralVariant50,
     shadow: palette.neutral0,
-    inverseOnSurface: palette.neutral20,
-    inverseSurface: palette.neutral95,
+    inverseSurface: palette.neutral20,
+    inverseOnSurface: palette.neutral95,
     inversePrimary: palette.primary80,
     elevation: {
       level0: 'transparent',

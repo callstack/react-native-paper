@@ -230,54 +230,64 @@ exports[`renders data table pagination 1`] = `
     }
   >
     <View
-      accessibilityLabel="chevron-left"
-      accessibilityRole="button"
-      accessibilityState={
-        Object {
-          "disabled": false,
-        }
-      }
-      accessible={true}
-      focusable={true}
-      hitSlop={
-        Object {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
-            "overflow": "hidden",
+        Object {
+          "backgroundColor": undefined,
+          "borderColor": undefined,
+          "borderRadius": 18,
+          "borderWidth": 0,
+          "height": 36,
+          "margin": 6,
+          "overflow": "hidden",
+          "shadowColor": "#000000",
+          "shadowOffset": Object {
+            "height": 3,
+            "width": 0,
           },
+          "shadowOpacity": 0.24,
+          "shadowRadius": 4,
+          "width": 36,
+        }
+      }
+    >
+      <View
+        accessibilityLabel="chevron-left"
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": false,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        hitSlop={
+          Object {
+            "bottom": 6,
+            "left": 6,
+            "right": 6,
+            "top": 6,
+          }
+        }
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
           Array [
             Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-              "margin": 6,
               "overflow": "hidden",
             },
             Object {
-              "borderRadius": 18,
-              "height": 36,
-              "width": 36,
+              "alignItems": "center",
+              "flexGrow": 1,
+              "justifyContent": "center",
             },
-            false,
-            undefined,
-          ],
-        ]
-      }
-    >
-      <View>
+          ]
+        }
+      >
         <Text
           accessibilityElementsHidden={true}
           importantForAccessibility="no-hide-descendants"
@@ -300,54 +310,64 @@ exports[`renders data table pagination 1`] = `
       </View>
     </View>
     <View
-      accessibilityLabel="chevron-right"
-      accessibilityRole="button"
-      accessibilityState={
-        Object {
-          "disabled": false,
-        }
-      }
-      accessible={true}
-      focusable={true}
-      hitSlop={
-        Object {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
-            "overflow": "hidden",
+        Object {
+          "backgroundColor": undefined,
+          "borderColor": undefined,
+          "borderRadius": 18,
+          "borderWidth": 0,
+          "height": 36,
+          "margin": 6,
+          "overflow": "hidden",
+          "shadowColor": "#000000",
+          "shadowOffset": Object {
+            "height": 3,
+            "width": 0,
           },
+          "shadowOpacity": 0.24,
+          "shadowRadius": 4,
+          "width": 36,
+        }
+      }
+    >
+      <View
+        accessibilityLabel="chevron-right"
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": false,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        hitSlop={
+          Object {
+            "bottom": 6,
+            "left": 6,
+            "right": 6,
+            "top": 6,
+          }
+        }
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
           Array [
             Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-              "margin": 6,
               "overflow": "hidden",
             },
             Object {
-              "borderRadius": 18,
-              "height": 36,
-              "width": 36,
+              "alignItems": "center",
+              "flexGrow": 1,
+              "justifyContent": "center",
             },
-            false,
-            undefined,
-          ],
-        ]
-      }
-    >
-      <View>
+          ]
+        }
+      >
         <Text
           accessibilityElementsHidden={true}
           importantForAccessibility="no-hide-descendants"
@@ -424,54 +444,64 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
     }
   >
     <View
-      accessibilityLabel="page-first"
-      accessibilityRole="button"
-      accessibilityState={
-        Object {
-          "disabled": false,
-        }
-      }
-      accessible={true}
-      focusable={true}
-      hitSlop={
-        Object {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
-            "overflow": "hidden",
+        Object {
+          "backgroundColor": undefined,
+          "borderColor": undefined,
+          "borderRadius": 18,
+          "borderWidth": 0,
+          "height": 36,
+          "margin": 6,
+          "overflow": "hidden",
+          "shadowColor": "#000000",
+          "shadowOffset": Object {
+            "height": 3,
+            "width": 0,
           },
+          "shadowOpacity": 0.24,
+          "shadowRadius": 4,
+          "width": 36,
+        }
+      }
+    >
+      <View
+        accessibilityLabel="page-first"
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": false,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        hitSlop={
+          Object {
+            "bottom": 6,
+            "left": 6,
+            "right": 6,
+            "top": 6,
+          }
+        }
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
           Array [
             Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-              "margin": 6,
               "overflow": "hidden",
             },
             Object {
-              "borderRadius": 18,
-              "height": 36,
-              "width": 36,
+              "alignItems": "center",
+              "flexGrow": 1,
+              "justifyContent": "center",
             },
-            false,
-            undefined,
-          ],
-        ]
-      }
-    >
-      <View>
+          ]
+        }
+      >
         <Text
           accessibilityElementsHidden={true}
           importantForAccessibility="no-hide-descendants"
@@ -494,54 +524,64 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
       </View>
     </View>
     <View
-      accessibilityLabel="chevron-left"
-      accessibilityRole="button"
-      accessibilityState={
-        Object {
-          "disabled": false,
-        }
-      }
-      accessible={true}
-      focusable={true}
-      hitSlop={
-        Object {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
-            "overflow": "hidden",
+        Object {
+          "backgroundColor": undefined,
+          "borderColor": undefined,
+          "borderRadius": 18,
+          "borderWidth": 0,
+          "height": 36,
+          "margin": 6,
+          "overflow": "hidden",
+          "shadowColor": "#000000",
+          "shadowOffset": Object {
+            "height": 3,
+            "width": 0,
           },
+          "shadowOpacity": 0.24,
+          "shadowRadius": 4,
+          "width": 36,
+        }
+      }
+    >
+      <View
+        accessibilityLabel="chevron-left"
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": false,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        hitSlop={
+          Object {
+            "bottom": 6,
+            "left": 6,
+            "right": 6,
+            "top": 6,
+          }
+        }
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
           Array [
             Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-              "margin": 6,
               "overflow": "hidden",
             },
             Object {
-              "borderRadius": 18,
-              "height": 36,
-              "width": 36,
+              "alignItems": "center",
+              "flexGrow": 1,
+              "justifyContent": "center",
             },
-            false,
-            undefined,
-          ],
-        ]
-      }
-    >
-      <View>
+          ]
+        }
+      >
         <Text
           accessibilityElementsHidden={true}
           importantForAccessibility="no-hide-descendants"
@@ -564,54 +604,64 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
       </View>
     </View>
     <View
-      accessibilityLabel="chevron-right"
-      accessibilityRole="button"
-      accessibilityState={
-        Object {
-          "disabled": false,
-        }
-      }
-      accessible={true}
-      focusable={true}
-      hitSlop={
-        Object {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
-            "overflow": "hidden",
+        Object {
+          "backgroundColor": undefined,
+          "borderColor": undefined,
+          "borderRadius": 18,
+          "borderWidth": 0,
+          "height": 36,
+          "margin": 6,
+          "overflow": "hidden",
+          "shadowColor": "#000000",
+          "shadowOffset": Object {
+            "height": 3,
+            "width": 0,
           },
+          "shadowOpacity": 0.24,
+          "shadowRadius": 4,
+          "width": 36,
+        }
+      }
+    >
+      <View
+        accessibilityLabel="chevron-right"
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": false,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        hitSlop={
+          Object {
+            "bottom": 6,
+            "left": 6,
+            "right": 6,
+            "top": 6,
+          }
+        }
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
           Array [
             Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-              "margin": 6,
               "overflow": "hidden",
             },
             Object {
-              "borderRadius": 18,
-              "height": 36,
-              "width": 36,
+              "alignItems": "center",
+              "flexGrow": 1,
+              "justifyContent": "center",
             },
-            false,
-            undefined,
-          ],
-        ]
-      }
-    >
-      <View>
+          ]
+        }
+      >
         <Text
           accessibilityElementsHidden={true}
           importantForAccessibility="no-hide-descendants"
@@ -634,54 +684,64 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
       </View>
     </View>
     <View
-      accessibilityLabel="page-last"
-      accessibilityRole="button"
-      accessibilityState={
-        Object {
-          "disabled": false,
-        }
-      }
-      accessible={true}
-      focusable={true}
-      hitSlop={
-        Object {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
-            "overflow": "hidden",
+        Object {
+          "backgroundColor": undefined,
+          "borderColor": undefined,
+          "borderRadius": 18,
+          "borderWidth": 0,
+          "height": 36,
+          "margin": 6,
+          "overflow": "hidden",
+          "shadowColor": "#000000",
+          "shadowOffset": Object {
+            "height": 3,
+            "width": 0,
           },
+          "shadowOpacity": 0.24,
+          "shadowRadius": 4,
+          "width": 36,
+        }
+      }
+    >
+      <View
+        accessibilityLabel="page-last"
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": false,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        hitSlop={
+          Object {
+            "bottom": 6,
+            "left": 6,
+            "right": 6,
+            "top": 6,
+          }
+        }
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
           Array [
             Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-              "margin": 6,
               "overflow": "hidden",
             },
             Object {
-              "borderRadius": 18,
-              "height": 36,
-              "width": 36,
+              "alignItems": "center",
+              "flexGrow": 1,
+              "justifyContent": "center",
             },
-            false,
-            undefined,
-          ],
-        ]
-      }
-    >
-      <View>
+          ]
+        }
+      >
         <Text
           accessibilityElementsHidden={true}
           importantForAccessibility="no-hide-descendants"
@@ -758,54 +818,64 @@ exports[`renders data table pagination with label 1`] = `
     }
   >
     <View
-      accessibilityLabel="chevron-left"
-      accessibilityRole="button"
-      accessibilityState={
-        Object {
-          "disabled": false,
-        }
-      }
-      accessible={true}
-      focusable={true}
-      hitSlop={
-        Object {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
-            "overflow": "hidden",
+        Object {
+          "backgroundColor": undefined,
+          "borderColor": undefined,
+          "borderRadius": 18,
+          "borderWidth": 0,
+          "height": 36,
+          "margin": 6,
+          "overflow": "hidden",
+          "shadowColor": "#000000",
+          "shadowOffset": Object {
+            "height": 3,
+            "width": 0,
           },
+          "shadowOpacity": 0.24,
+          "shadowRadius": 4,
+          "width": 36,
+        }
+      }
+    >
+      <View
+        accessibilityLabel="chevron-left"
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": false,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        hitSlop={
+          Object {
+            "bottom": 6,
+            "left": 6,
+            "right": 6,
+            "top": 6,
+          }
+        }
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
           Array [
             Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-              "margin": 6,
               "overflow": "hidden",
             },
             Object {
-              "borderRadius": 18,
-              "height": 36,
-              "width": 36,
+              "alignItems": "center",
+              "flexGrow": 1,
+              "justifyContent": "center",
             },
-            false,
-            undefined,
-          ],
-        ]
-      }
-    >
-      <View>
+          ]
+        }
+      >
         <Text
           accessibilityElementsHidden={true}
           importantForAccessibility="no-hide-descendants"
@@ -828,54 +898,64 @@ exports[`renders data table pagination with label 1`] = `
       </View>
     </View>
     <View
-      accessibilityLabel="chevron-right"
-      accessibilityRole="button"
-      accessibilityState={
-        Object {
-          "disabled": false,
-        }
-      }
-      accessible={true}
-      focusable={true}
-      hitSlop={
-        Object {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
-            "overflow": "hidden",
+        Object {
+          "backgroundColor": undefined,
+          "borderColor": undefined,
+          "borderRadius": 18,
+          "borderWidth": 0,
+          "height": 36,
+          "margin": 6,
+          "overflow": "hidden",
+          "shadowColor": "#000000",
+          "shadowOffset": Object {
+            "height": 3,
+            "width": 0,
           },
+          "shadowOpacity": 0.24,
+          "shadowRadius": 4,
+          "width": 36,
+        }
+      }
+    >
+      <View
+        accessibilityLabel="chevron-right"
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": false,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        hitSlop={
+          Object {
+            "bottom": 6,
+            "left": 6,
+            "right": 6,
+            "top": 6,
+          }
+        }
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
           Array [
             Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-              "margin": 6,
               "overflow": "hidden",
             },
             Object {
-              "borderRadius": 18,
-              "height": 36,
-              "width": 36,
+              "alignItems": "center",
+              "flexGrow": 1,
+              "justifyContent": "center",
             },
-            false,
-            undefined,
-          ],
-        ]
-      }
-    >
-      <View>
+          ]
+        }
+      >
         <Text
           accessibilityElementsHidden={true}
           importantForAccessibility="no-hide-descendants"
@@ -1131,54 +1211,64 @@ exports[`renders data table pagination with options select 1`] = `
     }
   >
     <View
-      accessibilityLabel="page-first"
-      accessibilityRole="button"
-      accessibilityState={
-        Object {
-          "disabled": false,
-        }
-      }
-      accessible={true}
-      focusable={true}
-      hitSlop={
-        Object {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
-            "overflow": "hidden",
+        Object {
+          "backgroundColor": undefined,
+          "borderColor": undefined,
+          "borderRadius": 18,
+          "borderWidth": 0,
+          "height": 36,
+          "margin": 6,
+          "overflow": "hidden",
+          "shadowColor": "#000000",
+          "shadowOffset": Object {
+            "height": 3,
+            "width": 0,
           },
+          "shadowOpacity": 0.24,
+          "shadowRadius": 4,
+          "width": 36,
+        }
+      }
+    >
+      <View
+        accessibilityLabel="page-first"
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": false,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        hitSlop={
+          Object {
+            "bottom": 6,
+            "left": 6,
+            "right": 6,
+            "top": 6,
+          }
+        }
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
           Array [
             Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-              "margin": 6,
               "overflow": "hidden",
             },
             Object {
-              "borderRadius": 18,
-              "height": 36,
-              "width": 36,
+              "alignItems": "center",
+              "flexGrow": 1,
+              "justifyContent": "center",
             },
-            false,
-            undefined,
-          ],
-        ]
-      }
-    >
-      <View>
+          ]
+        }
+      >
         <Text
           accessibilityElementsHidden={true}
           importantForAccessibility="no-hide-descendants"
@@ -1201,54 +1291,64 @@ exports[`renders data table pagination with options select 1`] = `
       </View>
     </View>
     <View
-      accessibilityLabel="chevron-left"
-      accessibilityRole="button"
-      accessibilityState={
-        Object {
-          "disabled": false,
-        }
-      }
-      accessible={true}
-      focusable={true}
-      hitSlop={
-        Object {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
-            "overflow": "hidden",
+        Object {
+          "backgroundColor": undefined,
+          "borderColor": undefined,
+          "borderRadius": 18,
+          "borderWidth": 0,
+          "height": 36,
+          "margin": 6,
+          "overflow": "hidden",
+          "shadowColor": "#000000",
+          "shadowOffset": Object {
+            "height": 3,
+            "width": 0,
           },
+          "shadowOpacity": 0.24,
+          "shadowRadius": 4,
+          "width": 36,
+        }
+      }
+    >
+      <View
+        accessibilityLabel="chevron-left"
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": false,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        hitSlop={
+          Object {
+            "bottom": 6,
+            "left": 6,
+            "right": 6,
+            "top": 6,
+          }
+        }
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
           Array [
             Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-              "margin": 6,
               "overflow": "hidden",
             },
             Object {
-              "borderRadius": 18,
-              "height": 36,
-              "width": 36,
+              "alignItems": "center",
+              "flexGrow": 1,
+              "justifyContent": "center",
             },
-            false,
-            undefined,
-          ],
-        ]
-      }
-    >
-      <View>
+          ]
+        }
+      >
         <Text
           accessibilityElementsHidden={true}
           importantForAccessibility="no-hide-descendants"
@@ -1271,54 +1371,64 @@ exports[`renders data table pagination with options select 1`] = `
       </View>
     </View>
     <View
-      accessibilityLabel="chevron-right"
-      accessibilityRole="button"
-      accessibilityState={
-        Object {
-          "disabled": false,
-        }
-      }
-      accessible={true}
-      focusable={true}
-      hitSlop={
-        Object {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
-            "overflow": "hidden",
+        Object {
+          "backgroundColor": undefined,
+          "borderColor": undefined,
+          "borderRadius": 18,
+          "borderWidth": 0,
+          "height": 36,
+          "margin": 6,
+          "overflow": "hidden",
+          "shadowColor": "#000000",
+          "shadowOffset": Object {
+            "height": 3,
+            "width": 0,
           },
+          "shadowOpacity": 0.24,
+          "shadowRadius": 4,
+          "width": 36,
+        }
+      }
+    >
+      <View
+        accessibilityLabel="chevron-right"
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": false,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        hitSlop={
+          Object {
+            "bottom": 6,
+            "left": 6,
+            "right": 6,
+            "top": 6,
+          }
+        }
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
           Array [
             Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-              "margin": 6,
               "overflow": "hidden",
             },
             Object {
-              "borderRadius": 18,
-              "height": 36,
-              "width": 36,
+              "alignItems": "center",
+              "flexGrow": 1,
+              "justifyContent": "center",
             },
-            false,
-            undefined,
-          ],
-        ]
-      }
-    >
-      <View>
+          ]
+        }
+      >
         <Text
           accessibilityElementsHidden={true}
           importantForAccessibility="no-hide-descendants"
@@ -1341,54 +1451,64 @@ exports[`renders data table pagination with options select 1`] = `
       </View>
     </View>
     <View
-      accessibilityLabel="page-last"
-      accessibilityRole="button"
-      accessibilityState={
-        Object {
-          "disabled": false,
-        }
-      }
-      accessible={true}
-      focusable={true}
-      hitSlop={
-        Object {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
-            "overflow": "hidden",
+        Object {
+          "backgroundColor": undefined,
+          "borderColor": undefined,
+          "borderRadius": 18,
+          "borderWidth": 0,
+          "height": 36,
+          "margin": 6,
+          "overflow": "hidden",
+          "shadowColor": "#000000",
+          "shadowOffset": Object {
+            "height": 3,
+            "width": 0,
           },
+          "shadowOpacity": 0.24,
+          "shadowRadius": 4,
+          "width": 36,
+        }
+      }
+    >
+      <View
+        accessibilityLabel="page-last"
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": false,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        hitSlop={
+          Object {
+            "bottom": 6,
+            "left": 6,
+            "right": 6,
+            "top": 6,
+          }
+        }
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
           Array [
             Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-              "margin": 6,
               "overflow": "hidden",
             },
             Object {
-              "borderRadius": 18,
-              "height": 36,
-              "width": 36,
+              "alignItems": "center",
+              "flexGrow": 1,
+              "justifyContent": "center",
             },
-            false,
-            undefined,
-          ],
-        ]
-      }
-    >
-      <View>
+          ]
+        }
+      >
         <Text
           accessibilityElementsHidden={true}
           importantForAccessibility="no-hide-descendants"
