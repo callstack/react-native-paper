@@ -111,9 +111,6 @@ const DrawerItem = ({
           isV3 && styles.v3Container,
           style,
         ]}
-        // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-        accessibilityTraits={active ? ['button', 'selected'] : 'button'}
-        accessibilityComponentType="button"
         accessibilityRole="button"
         accessibilityState={{ selected: active }}
         accessibilityLabel={accessibilityLabel}
