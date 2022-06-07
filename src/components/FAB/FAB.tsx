@@ -78,7 +78,7 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   onLongPress?: () => void;
   /**
-   * @supported Available in v3.x with theme version 3
+   * @supported Available in v5.x with theme version 3
    *
    * Size of the `FAB`.
    * - `small` - FAB with small height (40).
@@ -87,7 +87,7 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   size?: FABSize;
   /**
-   * @supported Available in v3.x with theme version 3
+   * @supported Available in v5.x with theme version 3
    *
    * Mode of the `FAB`. You can change the mode to adjust the the shadow:
    * - `flat` - button without a shadow.
@@ -95,7 +95,7 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   mode?: FABMode;
   /**
-   * @supported Available in v3.x with theme version 3
+   * @supported Available in v5.x with theme version 3
    *
    * Color mappings variant for combinations of container and icon colors.
    */

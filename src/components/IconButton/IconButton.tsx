@@ -25,22 +25,22 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   icon: IconSource;
   /**
-   * @supported Available in v3.x
+   * @supported Available in v5.x
    * Mode of the icon button. By default there is no specified mode - only pressable icon will be rendered.
    */
   mode?: IconButtonMode;
   /**
-   * @renamed Renamed from 'color' to 'iconColor' in v3.x
+   * @renamed Renamed from 'color' to 'iconColor' in v5.x
    * Color of the icon.
    */
   iconColor?: string;
   /**
-   * @supported Available in v3.x
+   * @supported Available in v5.x
    * Background color of the icon container.
    */
   containerColor?: string;
   /**
-   * @supported Available in v3.x
+   * @supported Available in v5.x
    * Whether icon button is selected. A selected button receives alternative combination of icon and container colors.
    */
   selected?: boolean;

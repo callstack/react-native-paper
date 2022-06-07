@@ -7,17 +7,17 @@ import type { $RemoveChildren, Theme } from '../types';
 
 type Props = $RemoveChildren<typeof View> & {
   /**
-   * @renamed Renamed from 'inset' to 'leftInset` in v3.x
+   * @renamed Renamed from 'inset' to 'leftInset` in v5.x
    * Whether divider has a left inset.
    */
   leftInset?: boolean;
   /**
-   * @supported Available in v3.x with theme version 3
+   * @supported Available in v5.x with theme version 3
    *  Whether divider has a horizontal inset on both sides.
    */
   horizontalInset?: boolean;
   /**
-   * @supported Available in v3.x with theme version 3
+   * @supported Available in v5.x with theme version 3
    *  Whether divider should be bolded.
    */
   bold?: boolean;

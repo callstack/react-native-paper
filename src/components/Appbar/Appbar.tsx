@@ -27,7 +27,7 @@ type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
    */
   children: React.ReactNode;
   /**
-   * @supported Available in v3.x with theme version 3
+   * @supported Available in v5.x with theme version 3
    *
    * Mode of the Appbar.
    * - `small` - Appbar with default height (64).
@@ -37,7 +37,7 @@ type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
    */
   mode?: 'small' | 'medium' | 'large' | 'center-aligned';
   /**
-   * @supported Available in v3.x with theme version 3
+   * @supported Available in v5.x with theme version 3
    * Whether Appbar background should have the elevation along with primary color pigment.
    */
   elevated?: boolean;

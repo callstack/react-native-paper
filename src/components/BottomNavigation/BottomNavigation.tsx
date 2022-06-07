@@ -69,7 +69,7 @@ type Props = {
    */
   labeled?: boolean;
   /**
-   * @supported Available in v3.x
+   * @supported Available in v5.x
    * Whether tabs should be spread across the entire width.
    */
   compact?: boolean;
@@ -83,9 +83,9 @@ type Props = {
    *
    * - `key`: a unique key to identify the route (required)
    * - `title`: title of the route to use as the tab label
-   * - `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v3.x
-   * - `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component @supported Available in v3.x with theme version 3
-   * - `color`: color to use as background color for shifting bottom navigation @deprecated Deprecated in v3.x
+   * - `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v5.x
+   * - `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component @supported Available in v5.x with theme version 3
+   * - `color`: color to use as background color for shifting bottom navigation @deprecated Deprecated in v5.x
    * - `badge`: badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.
    * - `accessibilityLabel`: accessibility label for the tab button
    * - `testID`: test id for the tab button

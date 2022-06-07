@@ -19,7 +19,7 @@ type Props = {
 };
 
 /**
- * @supported Available in v3.x with theme version 3
+ * @supported Available in v5.x with theme version 3
  * A component to show an icon in a Dialog.
  *
  * ## Usage

@@ -49,7 +49,7 @@ type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    */
   onIconPress?: () => void;
   /**
-   * @supported Available in v3.x with theme version 3
+   * @supported Available in v5.x with theme version 3
    * Changes Searchbar shadow and background on iOS and Android.
    */
   elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;

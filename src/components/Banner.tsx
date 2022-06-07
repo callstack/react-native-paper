@@ -42,7 +42,7 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   contentStyle?: StyleProp<ViewStyle>;
   /**
-   * @supported Available in v3.x with theme version 3
+   * @supported Available in v5.x with theme version 3
    * Changes Banner shadow and background on iOS and Android.
    */
   elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;

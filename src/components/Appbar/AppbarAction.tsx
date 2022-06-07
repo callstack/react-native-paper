@@ -36,7 +36,7 @@ type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
    */
   onPress?: () => void;
   /**
-   * @supported Available in v3.x with theme version 3
+   * @supported Available in v5.x with theme version 3
    *
    * Whether it's the leading button.
    */

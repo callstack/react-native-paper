@@ -27,7 +27,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   titleNumberOfLines?: number;
   /**
-   * @supported Available in v3.x with theme version 3
+   * @supported Available in v5.x with theme version 3
    *
    * Title text variant defines appropriate text styles for type role and its size.
    * Available variants:
@@ -56,7 +56,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   subtitleNumberOfLines?: number;
   /**
-   * @supported Available in v3.x with theme version 3
+   * @supported Available in v5.x with theme version 3
    *
    * Subtitle text variant defines appropriate text styles for type role and its size.
    * Available variants:

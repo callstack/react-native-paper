@@ -27,7 +27,7 @@ type Props = {
    * - `labelTextColor`: custom label text color of the action item
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
    * - `labelStyle`: pass additional styles for the fab item label, for example, `backgroundColor`
-   * - `size`: size of action item. Defaults to `small`. `Available in v3.x` @supported Available in v3.x
+   * - `size`: size of action item. Defaults to `small`. @supported Available in v5.x
    * - `onPress`: callback that is called when `FAB` is pressed (required)
    */
   actions: Array<{
@@ -82,7 +82,7 @@ type Props = {
    */
   fabStyle?: StyleProp<ViewStyle>;
   /**
-   * @supported Available in v3.x with theme version 3
+   * @supported Available in v5.x with theme version 3
    *
    * Color mappings variant for combinations of container and icon colors.
    */

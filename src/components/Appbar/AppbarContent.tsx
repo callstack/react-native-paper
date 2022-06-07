@@ -36,12 +36,12 @@ type Props = $RemoveChildren<typeof View> & {
    */
   titleRef?: React.RefObject<Text>;
   /**
-   * @deprecated Deprecated in v3.x
+   * @deprecated Deprecated in v5.x
    * Text for the subtitle.
    */
   subtitle?: React.ReactNode;
   /**
-   * @deprecated Deprecated in v3.x
+   * @deprecated Deprecated in v5.x
    * Style for the subtitle.
    */
   subtitleStyle?: StyleProp<TextStyle>;
