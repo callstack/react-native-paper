@@ -28,14 +28,14 @@ type ElevatedCardProps = {
   elevation?: number;
 };
 
-type FilledCardProps = {
-  mode?: 'filled';
+type ContainedCardProps = {
+  mode?: 'contained';
   elevation?: never;
 };
 
 type HandlePressType = 'in' | 'out';
 
-type Mode = 'elevated' | 'outlined' | 'filled';
+type Mode = 'elevated' | 'outlined' | 'contained';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
@@ -53,7 +53,7 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Mode of the Card.
    * - `elevated` - Card with elevation.
-   * - `filled` - Card with without outline and elevation @supported Available in v5.x with theme version 3
+   * - `contained` - Card with without outline and elevation @supported Available in v5.x with theme version 3
    * - `outlined` - Card with an outline.
    */
   mode?: Mode;
@@ -120,7 +120,7 @@ const Card = ({
   testID,
   accessible,
   ...rest
-}: (OutlinedCardProps | ElevatedCardProps | FilledCardProps) & Props) => {
+}: (OutlinedCardProps | ElevatedCardProps | ContainedCardProps) & Props) => {
   const isMode = React.useCallback(
     (modeToCompare: Mode) => {
       return cardMode === modeToCompare;

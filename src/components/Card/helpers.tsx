@@ -4,7 +4,7 @@ import { black, white } from '../../styles/themes/v2/colors';
 import type { Theme } from '../../types';
 import overlay from '../../styles/overlay';
 
-type CardMode = 'elevated' | 'outlined' | 'filled';
+type CardMode = 'elevated' | 'outlined' | 'contained';
 type Elevation = 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
 
 export const getCardCoverStyle = ({
@@ -68,7 +68,7 @@ const getBackgroundColor = ({
   isAdaptiveMode?: boolean;
   elevation: Elevation;
 }) => {
-  if (theme.isV3 && isMode('filled')) {
+  if (theme.isV3 && isMode('contained')) {
     return theme.colors.surfaceVariant;
   }
 
