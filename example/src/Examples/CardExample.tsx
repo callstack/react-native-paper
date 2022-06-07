@@ -13,7 +13,7 @@ import {
 import { PreferencesContext } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
-type Mode = 'elevated' | 'outlined' | 'filled';
+type Mode = 'elevated' | 'outlined' | 'contained';
 
 const CardExample = () => {
   const { colors, isV3 } = useTheme();
@@ -22,7 +22,7 @@ const CardExample = () => {
   const preferences = React.useContext(PreferencesContext);
 
   const modes = isV3
-    ? ['elevated', 'outlined', 'filled']
+    ? ['elevated', 'outlined', 'contained']
     : ['elevated', 'outlined'];
 
   const TextComponent = isV3 ? Text : Paragraph;
