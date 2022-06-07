@@ -50,7 +50,7 @@ type Props = {
    */
   labelStyle?: StyleProp<TextStyle>;
   /**
-   * @supported Available in v3.x with theme version 3
+   * @supported Available in v5.x with theme version 3
    *
    * Label text variant defines appropriate text styles for type role and its size.
    * Available variants:

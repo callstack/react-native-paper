@@ -24,8 +24,8 @@ type Props = React.ComponentProps<typeof Surface> & {
    * - `text` - flat button without background or outline, used for the lowest priority actions, especially when presenting multiple options.
    * - `outlined` - button with an outline without background, typically used for important, but not primary action – represents medium emphasis.
    * - `contained` - button with a background color, used for important action, have the most visual impact and high emphasis.
-   * - `elevated` - button with a background color and elevation, used when absolutely necessary e.g. button requires visual separation from a patterned background. @supported Available in v3.x with theme version 3
-   * - `contained-tonal` - button with a secondary background color, an alternative middle ground between contained and outlined buttons. @supported Available in v3.x with theme version 3
+   * - `elevated` - button with a background color and elevation, used when absolutely necessary e.g. button requires visual separation from a patterned background. @supported Available in v5.x with theme version 3
+   * - `contained-tonal` - button with a secondary background color, an alternative middle ground between contained and outlined buttons. @supported Available in v5.x with theme version 3
    */
   mode?: 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal';
   /**
@@ -39,17 +39,17 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   compact?: boolean;
   /**
-   * @deprecated Deprecated in v3.x - use `buttonColor` or `textColor` instead.
+   * @deprecated Deprecated in v5.x - use `buttonColor` or `textColor` instead.
    * Custom text color for flat button, or background color for contained button.
    */
   color?: string;
   /**
-   * @supported Available in v3.x
+   * @supported Available in v5.x
    * Custom button's background color.
    */
   buttonColor?: string;
   /**
-   * @supported Available in v3.x
+   * @supported Available in v5.x
    * Custom button's text color.
    */
   textColor?: string;

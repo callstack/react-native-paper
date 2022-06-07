@@ -44,7 +44,7 @@ export type SnackbarProps = React.ComponentProps<typeof Surface> & {
    * Style for the wrapper of the snackbar
    */
   /**
-   * @supported Available in v3.x with theme version 3
+   * @supported Available in v5.x with theme version 3
    * Changes Snackbar shadow and background on iOS and Android.
    */
   elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;

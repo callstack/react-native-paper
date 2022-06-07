@@ -24,13 +24,13 @@ type Props = {
    */
   title: React.ReactNode;
   /**
-   * @renamed Renamed from 'icon' to 'leadingIcon' in v3.x
+   * @renamed Renamed from 'icon' to 'leadingIcon' in v5.x
    *
    * Leading icon to display for the `MenuItem`.
    */
   leadingIcon?: IconSource;
   /**
-   * @supported Available in v3.x with theme version 3
+   * @supported Available in v5.x with theme version 3
    *
    * Trailing icon to display for the `MenuItem`.
    */
@@ -40,7 +40,7 @@ type Props = {
    */
   disabled?: boolean;
   /**
-   * @supported Available in v3.x with theme version 3
+   * @supported Available in v5.x with theme version 3
    *
    * Sets min height with densed layout.
    */

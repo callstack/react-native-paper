@@ -12,7 +12,7 @@ import { Font, MD3TypescaleKey, ThemeProp } from '../../types';
 
 type Props = React.ComponentProps<typeof NativeText> & {
   /**
-   * @supported Available in v3.x with theme version 3
+   * @supported Available in v5.x with theme version 3
    *
    * Variant defines appropriate text styles for type role and its size.
    * Available variants:

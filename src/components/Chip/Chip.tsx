@@ -53,7 +53,7 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   selectedColor?: string;
   /**
-   * @supported Available in v3.x with theme version 3
+   * @supported Available in v5.x with theme version 3
    * Whether to display overlay on selected chip
    */
   showSelectedOverlay?: boolean;
@@ -74,12 +74,12 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   onPress?: () => void;
   /**
-   * @supported Available in v3.x with theme version 3
+   * @supported Available in v5.x with theme version 3
    * Sets smaller horizontal paddings `12dp` around label, when there is only label.
    */
   compact?: boolean;
   /**
-   * @supported Available in v3.x with theme version 3
+   * @supported Available in v5.x with theme version 3
    * Whether chip should have the elevation.
    */
   elevated?: boolean;

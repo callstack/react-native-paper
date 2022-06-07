@@ -53,7 +53,7 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Mode of the Card.
    * - `elevated` - Card with elevation.
-   * - `filled` - Card with without outline and elevation @supported Available in v3.x with theme version 3
+   * - `filled` - Card with without outline and elevation @supported Available in v5.x with theme version 3
    * - `outlined` - Card with an outline.
    */
   mode?: Mode;
