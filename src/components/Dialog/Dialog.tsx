@@ -118,16 +118,12 @@ const Dialog = ({
       {React.Children.toArray(children)
         .filter((child) => child != null && typeof child !== 'boolean')
         .map((child, i) => {
-          if (
-            isV3 &&
-            i === 0 &&
-            React.isValidElement(child) &&
-            child.type === DialogTitle
-          ) {
-            // Dialog title is the first item, so we add a top padding
-            return React.cloneElement(child, {
-              style: [{ marginTop: 24 }, child.props.style],
-            });
+          if (isV3) {
+            if (i === 0 && React.isValidElement(child)) {
+              return React.cloneElement(child, {
+                style: [{ marginTop: 24 }, child.props.style],
+              });
+            }
           }
 
           if (
