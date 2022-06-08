@@ -84,7 +84,7 @@ const AffixAdornment: React.FunctionComponent<
  *
  * <div class="screenshots">
  *   <figure>
- *     <img class="medium" src="screenshots/textinput-outline.affix.png" />
+ *     <img class="small" src="screenshots/textinput-outline.affix.png" />
  *   </figure>
  * </div>
  *

@@ -22,6 +22,10 @@ type Props = {
  * @supported Available in v5.x with theme version 3
  * A component to show an icon in a Dialog.
  *
+ *  <div class="screenshots">
+ *   <img class="small" src="screenshots/dialog-icon.png" />
+ * </div>
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';

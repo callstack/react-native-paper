@@ -15,7 +15,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  *
  * <div class="screenshots">
  *   <figure>
- *     <img class="medium" src="screenshots/card-actions.png" />
+ *     <img class="small" src="screenshots/card-actions.png" />
  *   </figure>
  * </div>
  *

@@ -80,8 +80,18 @@ type Props = React.ComponentProps<typeof Surface> & {
  * A card is a sheet of material that serves as an entry point to more detailed information.
  *
  * <div class="screenshots">
- *   <img class="medium" src="screenshots/card-1.png" />
- *   <img class="medium" src="screenshots/card-2.png" />
+ *   <figure>
+ *     <img src="screenshots/card-1.png" />
+ *     <figcaption>Elevated card</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/card-2.png" />
+ *     <figcaption>Outlined card</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/card-3.png" />
+ *     <figcaption>Contained card</figcaption>
+ *   </figure>
  * </div>
  *
  * ## Usage

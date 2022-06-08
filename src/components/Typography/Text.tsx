@@ -38,6 +38,9 @@ type Props = React.ComponentProps<typeof NativeText> & {
 /**
  * Typography component showing styles complied with passed `variant` prop and supported by the type system.
  *
+ * <div class="screenshots">
+ *   <img class="small" src="screenshots/typography.png" />
+ * </div>
  *
  * ## Usage
  * ```js

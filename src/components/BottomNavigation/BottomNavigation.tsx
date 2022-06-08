@@ -293,7 +293,7 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
  * See [Dark Theme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more information.
  *
  * <div class="screenshots">
- *   <img class="medium" src="screenshots/bottom-navigation.gif" />
+ *   <img class="small" src="screenshots/bottom-navigation.gif" />
  * </div>
  *
  * ## Usage

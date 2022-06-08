@@ -46,7 +46,7 @@ type Props = $Omit<
  * Helper text is used in conjuction with input elements to provide additional hints for the user.
  *
  * <div class="screenshots">
- *   <img class="medium" src="screenshots/helper-text.gif" />
+ *   <img class="small" src="screenshots/helper-text.gif" />
  * </div>
  *
  * ## Usage

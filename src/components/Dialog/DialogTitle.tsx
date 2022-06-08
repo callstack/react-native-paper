@@ -22,7 +22,7 @@ type Props = React.ComponentPropsWithRef<typeof Title> & {
  *
  * <div class="screenshots">
  *   <figure>
- *     <img class="medium" src="screenshots/dialog-title.png" />
+ *     <img class="small" src="screenshots/dialog-title.png" />
  *   </figure>
  * </div>
  *

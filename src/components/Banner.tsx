@@ -79,7 +79,7 @@ type NativeEvent = {
  * Banner displays a prominent message and related actions.
  *
  * <div class="screenshots">
- *   <img class="medium" src="screenshots/banner.gif" />
+ *   <img class="small" src="screenshots/banner.gif" />
  * </div>
  *
  * ## Usage

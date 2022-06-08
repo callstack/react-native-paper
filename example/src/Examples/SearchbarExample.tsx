@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { Caption, Searchbar } from 'react-native-paper';
+import { Caption, Searchbar, Text, useTheme } from 'react-native-paper';
 import type { StackNavigationProp } from '@react-navigation/stack';
 import ScreenWrapper from '../ScreenWrapper';
 
@@ -13,6 +13,10 @@ const SearchExample = ({ navigation }: Props) => {
   const [secondQuery, setSecondQuery] = React.useState<string>('');
   const [thirdQuery, setThirdQuery] = React.useState<string>('');
 
+  const { isV3 } = useTheme();
+
+  const TextComponent = isV3 ? Text : Caption;
+
   return (
     <ScreenWrapper>
       <Searchbar
@@ -21,7 +25,9 @@ const SearchExample = ({ navigation }: Props) => {
         value={firstQuery}
         style={styles.searchbar}
       />
-      <Caption style={styles.caption}>Clickable icon</Caption>
+      <TextComponent variant="bodySmall" style={styles.caption}>
+        Clickable icon
+      </TextComponent>
       <Searchbar
         placeholder="Search"
         onChangeText={(query: string) => setSecondQuery(query)}

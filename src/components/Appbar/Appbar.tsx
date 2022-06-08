@@ -57,7 +57,7 @@ type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
  * See [Dark Theme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more informations
  *
  * <div class="screenshots">
- *   <img class="medium" src="screenshots/appbar.png" />
+ *   <img class="small" src="screenshots/appbar.png" />
  * </div>
  *
  * ## Usage

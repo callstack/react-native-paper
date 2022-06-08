@@ -41,8 +41,8 @@ const DIALOG_ELEVATION: number = 24;
  * To render the `Dialog` above other components, you'll need to wrap it with the [`Portal`](portal.html) component.
  *
  *  <div class="screenshots">
- *   <img class="medium" src="screenshots/dialog-1.png" />
- *   <img class="medium" src="screenshots/dialog-2.png" />
+ *   <img class="small" src="screenshots/dialog-1.png" />
+ *   <img class="small" src="screenshots/dialog-2.png" />
  * </div>
  *
  * ## Usage
