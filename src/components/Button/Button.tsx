@@ -255,13 +255,15 @@ const Button = ({
   return (
     <Surface
       {...rest}
-      style={[
-        styles.button,
-        compact && styles.compact,
-        buttonStyle,
-        style,
-        !isV3 && { elevation },
-      ]}
+      style={
+        [
+          styles.button,
+          compact && styles.compact,
+          buttonStyle,
+          style,
+          !isV3 && { elevation },
+        ] as ViewStyle
+      }
       {...(isV3 && { elevation: elevation })}
     >
       <TouchableRipple
