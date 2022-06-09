@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { withTheme } from '../../core/theming';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
-import { handlePress } from './utils';
+import { handlePress, isChecked } from './utils';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import RadioButton from './RadioButton';
 import Text from '../Typography/Text';
@@ -133,7 +133,7 @@ const RadioButtonItem = ({
   uncheckedColor,
   status,
   theme,
-  accessibilityLabel,
+  accessibilityLabel = label,
   testID,
   mode,
   position = 'trailing',
@@ -152,30 +152,42 @@ const RadioButtonItem = ({
   }
 
   const textColor = theme.isV3 ? theme.colors.onSurface : theme.colors.text;
+  const disabledTextColor = theme.isV3
+    ? theme.colors.onSurfaceDisabled
+    : theme.colors.disabled;
   const textAlign = isLeading ? 'right' : 'left';
 
   const computedStyle = {
-    color: textColor,
+    color: disabled ? disabledTextColor : textColor,
     textAlign,
   } as TextStyle;
 
   return (
     <RadioButtonContext.Consumer>
       {(context?: RadioButtonContextType) => {
+        const checked =
+          isChecked({
+            contextValue: context?.value,
+            status,
+            value,
+          }) === 'checked';
         return (
           <TouchableRipple
-            onPress={
-              disabled
-                ? undefined
-                : () =>
-                    handlePress({
-                      onPress: onPress,
-                      onValueChange: context?.onValueChange,
-                      value,
-                    })
+            onPress={() =>
+              handlePress({
+                onPress: onPress,
+                onValueChange: context?.onValueChange,
+                value,
+              })
             }
             accessibilityLabel={accessibilityLabel}
+            accessibilityRole="radio"
+            accessibilityState={{
+              checked,
+              disabled,
+            }}
             testID={testID}
+            disabled={disabled}
           >
             <View style={[styles.container, style]} pointerEvents="none">
               {isLeading && radioButton}

@@ -9,6 +9,7 @@ const RadioButtonItemExample = () => {
   const [checkedIOS, setCheckedIOS] = React.useState(true);
   const [checkedLeadingControl, setCheckedLeadingControl] =
     React.useState(true);
+  const [checkedDisabled, setCheckedDisabled] = React.useState<boolean>(true);
   const [checkedLabelVariant, setCheckedLabelVariant] = React.useState(true);
 
   const { isV3 } = useTheme();
@@ -41,6 +42,13 @@ const RadioButtonItemExample = () => {
         onPress={() => setCheckedLeadingControl(!checkedLeadingControl)}
         value="iOS"
         position="leading"
+      />
+      <RadioButton.Item
+        label="Disabled checkbox"
+        status={checkedDisabled ? 'checked' : 'unchecked'}
+        onPress={() => setCheckedDisabled(!checkedDisabled)}
+        value="iOS"
+        disabled
       />
       {isV3 && (
         <RadioButton.Item

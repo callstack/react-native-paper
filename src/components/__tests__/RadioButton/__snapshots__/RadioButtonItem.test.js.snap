@@ -2,6 +2,14 @@
 
 exports[`can render leading radio button control 1`] = `
 <View
+  accessibilityLabel="Default with leading control"
+  accessibilityRole="radio"
+  accessibilityState={
+    Object {
+      "checked": false,
+      "disabled": undefined,
+    }
+  }
   accessible={true}
   focusable={true}
   onClick={[Function]}
@@ -128,6 +136,14 @@ exports[`can render leading radio button control 1`] = `
 
 exports[`can render the Android radio button on different platforms 1`] = `
 <View
+  accessibilityLabel="iOS Checkbox"
+  accessibilityRole="radio"
+  accessibilityState={
+    Object {
+      "checked": false,
+      "disabled": undefined,
+    }
+  }
   accessible={true}
   focusable={true}
   onClick={[Function]}
@@ -237,6 +253,14 @@ exports[`can render the Android radio button on different platforms 1`] = `
 
 exports[`can render the iOS radio button on different platforms 1`] = `
 <View
+  accessibilityLabel="iOS Radio button"
+  accessibilityRole="radio"
+  accessibilityState={
+    Object {
+      "checked": false,
+      "disabled": undefined,
+    }
+  }
   accessible={true}
   focusable={true}
   onClick={[Function]}
@@ -363,6 +387,14 @@ exports[`can render the iOS radio button on different platforms 1`] = `
 
 exports[`renders unchecked 1`] = `
 <View
+  accessibilityLabel="Unchecked Button"
+  accessibilityRole="radio"
+  accessibilityState={
+    Object {
+      "checked": false,
+      "disabled": undefined,
+    }
+  }
   accessible={true}
   focusable={true}
   onClick={[Function]}
