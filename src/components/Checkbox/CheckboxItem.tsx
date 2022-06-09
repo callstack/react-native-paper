@@ -34,6 +34,10 @@ type Props = {
    */
   onPress?: () => void;
   /**
+   * Accessibility label for the touchable. This is read by the screen reader when the user taps the touchable.
+   */
+  accessibilityLabel?: string;
+  /**
    * Custom color for unchecked checkbox.
    */
   uncheckedColor?: string;
@@ -114,6 +118,7 @@ const CheckboxItem = ({
   testID,
   mode,
   position = 'trailing',
+  accessibilityLabel = label,
   disabled,
   labelVariant = 'bodyLarge',
   ...props
@@ -143,7 +148,7 @@ const CheckboxItem = ({
 
   return (
     <TouchableRipple
-      accessibilityLabel={label}
+      accessibilityLabel={accessibilityLabel}
       accessibilityRole="checkbox"
       accessibilityState={{
         checked: status === 'checked',
