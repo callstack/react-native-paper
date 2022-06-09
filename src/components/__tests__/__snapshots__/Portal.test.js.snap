@@ -3,7 +3,9 @@
 exports[`renders portal with siblings 1`] = `
 Array [
   <View
+    accessibilityElementsHidden={false}
     collapsable={false}
+    importantForAccessibility="auto"
     pointerEvents="box-none"
     style={
       Object {
