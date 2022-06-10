@@ -8,17 +8,11 @@ exports[`renders disabled toggle button 1`] = `
       "borderColor": "rgba(0, 0, 0, 0.29)",
       "borderRadius": 4,
       "borderWidth": 0,
+      "elevation": 0,
       "height": 42,
       "margin": 0,
       "opacity": 0.32,
       "overflow": "hidden",
-      "shadowColor": "#000000",
-      "shadowOffset": Object {
-        "height": 3,
-        "width": 0,
-      },
-      "shadowOpacity": 0.24,
-      "shadowRadius": 4,
       "width": 42,
     }
   }
@@ -90,16 +84,10 @@ exports[`renders toggle button 1`] = `
       "borderColor": "rgba(0, 0, 0, 0.29)",
       "borderRadius": 4,
       "borderWidth": 0,
+      "elevation": 0,
       "height": 42,
       "margin": 0,
       "overflow": "hidden",
-      "shadowColor": "#000000",
-      "shadowOffset": Object {
-        "height": 3,
-        "width": 0,
-      },
-      "shadowOpacity": 0.24,
-      "shadowRadius": 4,
       "width": 42,
     }
   }
@@ -171,17 +159,11 @@ exports[`renders unchecked toggle button 1`] = `
       "borderColor": "rgba(0, 0, 0, 0.29)",
       "borderRadius": 4,
       "borderWidth": 0,
+      "elevation": 0,
       "height": 42,
       "margin": 0,
       "opacity": 0.32,
       "overflow": "hidden",
-      "shadowColor": "#000000",
-      "shadowOffset": Object {
-        "height": 3,
-        "width": 0,
-      },
-      "shadowOpacity": 0.24,
-      "shadowRadius": 4,
       "width": 42,
     }
   }

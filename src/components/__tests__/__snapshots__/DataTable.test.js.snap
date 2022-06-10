@@ -236,16 +236,10 @@ exports[`renders data table pagination 1`] = `
           "borderColor": undefined,
           "borderRadius": 18,
           "borderWidth": 0,
+          "elevation": 0,
           "height": 36,
           "margin": 6,
           "overflow": "hidden",
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 3,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 4,
           "width": 36,
         }
       }
@@ -316,16 +310,10 @@ exports[`renders data table pagination 1`] = `
           "borderColor": undefined,
           "borderRadius": 18,
           "borderWidth": 0,
+          "elevation": 0,
           "height": 36,
           "margin": 6,
           "overflow": "hidden",
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 3,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 4,
           "width": 36,
         }
       }
@@ -450,16 +438,10 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           "borderColor": undefined,
           "borderRadius": 18,
           "borderWidth": 0,
+          "elevation": 0,
           "height": 36,
           "margin": 6,
           "overflow": "hidden",
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 3,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 4,
           "width": 36,
         }
       }
@@ -530,16 +512,10 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           "borderColor": undefined,
           "borderRadius": 18,
           "borderWidth": 0,
+          "elevation": 0,
           "height": 36,
           "margin": 6,
           "overflow": "hidden",
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 3,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 4,
           "width": 36,
         }
       }
@@ -610,16 +586,10 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           "borderColor": undefined,
           "borderRadius": 18,
           "borderWidth": 0,
+          "elevation": 0,
           "height": 36,
           "margin": 6,
           "overflow": "hidden",
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 3,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 4,
           "width": 36,
         }
       }
@@ -690,16 +660,10 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           "borderColor": undefined,
           "borderRadius": 18,
           "borderWidth": 0,
+          "elevation": 0,
           "height": 36,
           "margin": 6,
           "overflow": "hidden",
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 3,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 4,
           "width": 36,
         }
       }
@@ -824,16 +788,10 @@ exports[`renders data table pagination with label 1`] = `
           "borderColor": undefined,
           "borderRadius": 18,
           "borderWidth": 0,
+          "elevation": 0,
           "height": 36,
           "margin": 6,
           "overflow": "hidden",
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 3,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 4,
           "width": 36,
         }
       }
@@ -904,16 +862,10 @@ exports[`renders data table pagination with label 1`] = `
           "borderColor": undefined,
           "borderRadius": 18,
           "borderWidth": 0,
+          "elevation": 0,
           "height": 36,
           "margin": 6,
           "overflow": "hidden",
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 3,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 4,
           "width": 36,
         }
       }
@@ -1217,16 +1169,10 @@ exports[`renders data table pagination with options select 1`] = `
           "borderColor": undefined,
           "borderRadius": 18,
           "borderWidth": 0,
+          "elevation": 0,
           "height": 36,
           "margin": 6,
           "overflow": "hidden",
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 3,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 4,
           "width": 36,
         }
       }
@@ -1297,16 +1243,10 @@ exports[`renders data table pagination with options select 1`] = `
           "borderColor": undefined,
           "borderRadius": 18,
           "borderWidth": 0,
+          "elevation": 0,
           "height": 36,
           "margin": 6,
           "overflow": "hidden",
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 3,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 4,
           "width": 36,
         }
       }
@@ -1377,16 +1317,10 @@ exports[`renders data table pagination with options select 1`] = `
           "borderColor": undefined,
           "borderRadius": 18,
           "borderWidth": 0,
+          "elevation": 0,
           "height": 36,
           "margin": 6,
           "overflow": "hidden",
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 3,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 4,
           "width": 36,
         }
       }
@@ -1457,16 +1391,10 @@ exports[`renders data table pagination with options select 1`] = `
           "borderColor": undefined,
           "borderRadius": 18,
           "borderWidth": 0,
+          "elevation": 0,
           "height": 36,
           "margin": 6,
           "overflow": "hidden",
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 3,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 4,
           "width": 36,
         }
       }

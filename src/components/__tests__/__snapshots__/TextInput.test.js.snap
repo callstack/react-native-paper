@@ -1034,16 +1034,10 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           "borderColor": undefined,
           "borderRadius": 18,
           "borderWidth": 0,
+          "elevation": 0,
           "height": 36,
           "margin": 0,
           "overflow": "hidden",
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 3,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 4,
           "width": 36,
         }
       }
@@ -1316,16 +1310,10 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           "borderColor": undefined,
           "borderRadius": 18,
           "borderWidth": 0,
+          "elevation": 0,
           "height": 36,
           "margin": 0,
           "overflow": "hidden",
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 3,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 4,
           "width": 36,
         }
       }
