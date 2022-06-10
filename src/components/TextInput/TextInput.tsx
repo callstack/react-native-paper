@@ -154,19 +154,19 @@ type TextInputHandles = Pick<
  *
  * <div class="screenshots">
  *   <figure>
- *     <img class="medium" src="screenshots/textinput-flat.focused.png" />
+ *     <img src="screenshots/textinput-flat.focused.png" />
  *     <figcaption>Flat (focused)</figcaption>
  *   </figure>
  *   <figure>
- *     <img class="medium" src="screenshots/textinput-flat.disabled.png" />
+ *     <img src="screenshots/textinput-flat.disabled.png" />
  *     <figcaption>Flat (disabled)</figcaption>
  *   </figure>
  *   <figure>
- *     <img class="medium" src="screenshots/textinput-outlined.focused.png" />
+ *     <img src="screenshots/textinput-outlined.focused.png" />
  *     <figcaption>Outlined (focused)</figcaption>
  *   </figure>
  *   <figure>
- *     <img class="medium" src="screenshots/textinput-outlined.disabled.png" />
+ *     <img src="screenshots/textinput-outlined.disabled.png" />
  *     <figcaption>Outlined (disabled)</figcaption>
  *   </figure>
  * </div>

@@ -30,7 +30,9 @@ const BannerExample = () => {
         ...defaultTheme,
         colors: {
           onSurface: MD3Colors.tertiary100,
-          surface: MD3Colors.tertiary50,
+          elevation: {
+            level1: MD3Colors.tertiary50,
+          },
           primary: MD3Colors.tertiary10,
         },
       };

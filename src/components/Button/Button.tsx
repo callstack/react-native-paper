@@ -125,6 +125,14 @@ type Props = React.ComponentProps<typeof Surface> & {
  *     <img src="screenshots/button-3.png" />
  *     <figcaption>Contained button</figcaption>
  *   </figure>
+ *   <figure>
+ *     <img src="screenshots/button-4.png" />
+ *     <figcaption>Elevated button</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/button-5.png" />
+ *     <figcaption>Contained-tonal button</figcaption>
+ *   </figure>
  * </div>
  *
  * ## Usage

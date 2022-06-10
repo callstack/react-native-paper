@@ -89,8 +89,8 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
  * Menus display a list of choices on temporary elevated surfaces. Their placement varies based on the element that opens them.
  *
  *  <div class="screenshots">
- *   <img class="medium" src="screenshots/menu-1.png" />
- *   <img class="medium" src="screenshots/menu-2.png" />
+ *   <img class="small" src="screenshots/menu-1.png" />
+ *   <img class="small" src="screenshots/menu-2.png" />
  * </div>
  *
  * ## Usage

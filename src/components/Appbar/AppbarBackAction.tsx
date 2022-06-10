@@ -35,17 +35,7 @@ type Props = $Omit<
  * A component used to display a back button in the appbar.
  *
  * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/appbar-backaction-android.png" />
- *     <figcaption>Android</figcaption>
- *   </figure>
- * </div>
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/appbar-backaction-ios.png" />
- *     <figcaption>iOS</figcaption>
- *   </figure>
+ *   <img class="small" src="screenshots/appbar-backaction-android.png" />
  * </div>
  *
  * ## Usage

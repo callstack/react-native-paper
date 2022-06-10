@@ -62,12 +62,20 @@ type Props = React.ComponentProps<typeof Appbar> & {
  *
  * <div class="screenshots">
  *   <figure>
- *     <img class="medium" src="screenshots/appbar-header.android.png" />
- *     <figcaption>Android</figcaption>
+ *     <img class="small" src="screenshots/appbar-small.png" />
+ *     <figcaption>small</figcaption>
  *   </figure>
  *   <figure>
- *     <img class="medium" src="screenshots/appbar-header.ios.png" />
- *     <figcaption>iOS</figcaption>
+ *     <img class="small" src="screenshots/appbar-medium.png" />
+ *     <figcaption>medium</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img class="small" src="screenshots/appbar-large.png" />
+ *     <figcaption>large</figcaption>
+ *   </figure>
+ *  <figure>
+ *     <img class="small" src="screenshots/appbar-center-aligned.png" />
+ *     <figcaption>center-aligned</figcaption>
  *   </figure>
  * </div>
  *

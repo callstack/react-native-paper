@@ -110,7 +110,12 @@ type Props = $RemoveChildren<typeof Surface> & {
 
 /**
  * A floating action button represents the primary action in an application.
- *
+ * <div class="screenshots">
+ *   <img class="small" src="screenshots/fab-1.png" />
+ *   <img class="small" src="screenshots/fab-2.png" />
+ *   <img class="small" src="screenshots/fab-3.png" />
+ *   <img class="small" src="screenshots/fab-4.png" />
+ * </div>
  *
  * ## Usage
  * ```js

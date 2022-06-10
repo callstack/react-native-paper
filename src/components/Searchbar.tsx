@@ -81,7 +81,7 @@ type TextInputHandles = Pick<
  * Searchbar is a simple input box where users can type search queries.
  *
  * <div class="screenshots">
- *   <img class="medium" src="screenshots/searchbar.png" />
+ *   <img class="small" src="screenshots/searchbar.png" />
  * </div>
  *
  * ## Usage

@@ -74,7 +74,7 @@ const IconAdornment: React.FunctionComponent<
  *
  * <div class="screenshots">
  *   <figure>
- *     <img class="medium" src="screenshots/textinput-flat.icon.png" />
+ *     <img class="small" src="screenshots/textinput-flat.icon.png" />
  *   </figure>
  * </div>
  *

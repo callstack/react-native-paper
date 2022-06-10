@@ -33,6 +33,31 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   theme?: Theme;
 };
 
+const MD2Surface = ({
+  style,
+  theme: overrideTheme,
+  ...rest
+}: Omit<Props, 'elevation'>) => {
+  const { elevation = 4 } = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const { dark: isDarkTheme, mode, colors } = useTheme(overrideTheme);
+
+  return (
+    <Animated.View
+      {...rest}
+      style={[
+        {
+          backgroundColor:
+            isDarkTheme && mode === 'adaptive'
+              ? overlay(elevation, colors?.surface)
+              : colors?.surface,
+        },
+        elevation ? shadow(elevation) : null,
+        style,
+      ]}
+    />
+  );
+};
+
 /**
  * Surface is a basic container that can give depth to an element with elevation shadow.
  * On dark theme with `adaptive` mode, surface is constructed by also placing a semi-transparent white overlay over a component surface.
@@ -40,14 +65,14 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * Overlay and shadow can be applied by specifying the `elevation` property both on Android and iOS.
  *
  * <div class="screenshots">
- *   <img src="screenshots/surface-1.png" />
- *   <img src="screenshots/surface-2.png" />
- *   <img src="screenshots/surface-3.png" />
- * </div>
- *
- * <div class="screenshots">
- *   <img src="screenshots/surface-dark-1.png" />
- *   <img src="screenshots/surface-dark-2.png" />
+ *   <figure>
+ *     <img class="medium" src="screenshots/surface-android.png" />
+ *     <figcaption>Surface on Android</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img class="medium" src="screenshots/surface-ios.png" />
+ *     <figcaption>Surface on iOS</figcaption>
+ *   </figure>
  * </div>
  *
  * ## Usage
@@ -75,32 +100,6 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * });
  * ```
  */
-
-const MD2Surface = ({
-  style,
-  theme: overrideTheme,
-  ...rest
-}: Omit<Props, 'elevation'>) => {
-  const { elevation = 4 } = (StyleSheet.flatten(style) || {}) as ViewStyle;
-  const { dark: isDarkTheme, mode, colors } = useTheme(overrideTheme);
-
-  return (
-    <Animated.View
-      {...rest}
-      style={[
-        {
-          backgroundColor:
-            isDarkTheme && mode === 'adaptive'
-              ? overlay(elevation, colors?.surface)
-              : colors?.surface,
-        },
-        elevation ? shadow(elevation) : null,
-        style,
-      ]}
-    />
-  );
-};
-
 const Surface = ({
   elevation = 1,
   children,

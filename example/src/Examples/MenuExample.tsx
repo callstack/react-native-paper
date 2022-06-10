@@ -57,7 +57,7 @@ const MenuExample = ({ navigation }: Props) => {
 
   return (
     <View style={styles.screen}>
-      <Appbar.Header>
+      <Appbar.Header elevated>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title="Menu" />
         <Menu

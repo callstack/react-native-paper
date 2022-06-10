@@ -64,7 +64,7 @@ type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
  *
  * <div class="screenshots">
  *   <figure>
- *     <img class="medium" src="screenshots/touchable-ripple.gif" />
+ *     <img class="small" src="screenshots/touchable-ripple.gif" />
  *   </figure>
  * </div>
  *

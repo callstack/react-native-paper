@@ -116,11 +116,11 @@ type Props = React.ComponentProps<typeof Surface> & {
  *
  * <div class="screenshots">
  *   <figure>
- *     <img class="medium" src="screenshots/chip-1.png" />
+ *     <img class="small" src="screenshots/chip-1.png" />
  *     <figcaption>Flat chip</figcaption>
  *   </figure>
  *   <figure>
- *     <img class="medium" src="screenshots/chip-2.png" />
+ *     <img class="small" src="screenshots/chip-2.png" />
  *     <figcaption>Outlined chip</figcaption>
  *   </figure>
  * </div>

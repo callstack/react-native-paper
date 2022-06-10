@@ -109,7 +109,7 @@ const LEFT_SIZE = 40;
  * A component to show a title, subtitle and an avatar inside a Card.
  *
  * <div class="screenshots">
- *   <img class="medium" src="screenshots/card-title-1.png" />
+ *   <img class="small" src="screenshots/card-title-1.png" />
  * </div>
  *
  * ## Usage
