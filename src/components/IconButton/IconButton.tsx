@@ -196,6 +196,7 @@ const styles = StyleSheet.create({
   container: {
     overflow: 'hidden',
     margin: 6,
+    elevation: 0,
   },
   touchable: {
     flexGrow: 1,

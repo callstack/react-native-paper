@@ -45,16 +45,10 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           "borderColor": undefined,
           "borderRadius": 18,
           "borderWidth": 0,
+          "elevation": 0,
           "height": 36,
           "margin": 6,
           "overflow": "hidden",
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 3,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 4,
           "width": 36,
         }
       }
@@ -154,17 +148,11 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           "borderColor": undefined,
           "borderRadius": 18,
           "borderWidth": 0,
+          "elevation": 0,
           "height": 36,
           "margin": 6,
           "opacity": 0.32,
           "overflow": "hidden",
-          "shadowColor": "#000000",
-          "shadowOffset": Object {
-            "height": 3,
-            "width": 0,
-          },
-          "shadowOpacity": 0.24,
-          "shadowRadius": 4,
           "width": 36,
         }
       }
@@ -259,16 +247,10 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         "borderColor": undefined,
         "borderRadius": 18,
         "borderWidth": 0,
+        "elevation": 0,
         "height": 36,
         "margin": 6,
         "overflow": "hidden",
-        "shadowColor": "#000000",
-        "shadowOffset": Object {
-          "height": 3,
-          "width": 0,
-        },
-        "shadowOpacity": 0.24,
-        "shadowRadius": 4,
         "width": 36,
       }
     }
@@ -453,16 +435,10 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         "borderColor": undefined,
         "borderRadius": 18,
         "borderWidth": 0,
+        "elevation": 0,
         "height": 36,
         "margin": 6,
         "overflow": "hidden",
-        "shadowColor": "#000000",
-        "shadowOffset": Object {
-          "height": 3,
-          "width": 0,
-        },
-        "shadowOpacity": 0.24,
-        "shadowRadius": 4,
         "width": 36,
       }
     }
