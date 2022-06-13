@@ -2,6 +2,11 @@
 
 exports[`renders data table cell 1`] = `
 <View
+  accessibilityState={
+    Object {
+      "disabled": true,
+    }
+  }
   accessible={true}
   focusable={false}
   onClick={[Function]}
@@ -63,6 +68,11 @@ exports[`renders data table header 1`] = `
   }
 >
   <View
+    accessibilityState={
+      Object {
+        "disabled": true,
+      }
+    }
     accessible={true}
     focusable={false}
     onClick={[Function]}
@@ -118,6 +128,11 @@ exports[`renders data table header 1`] = `
     </Text>
   </View>
   <View
+    accessibilityState={
+      Object {
+        "disabled": true,
+      }
+    }
     accessible={true}
     focusable={false}
     onClick={[Function]}
@@ -222,6 +237,7 @@ exports[`renders data table pagination 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -235,6 +251,7 @@ exports[`renders data table pagination 1`] = `
       }
     >
       <View
+        collapsable={false}
         style={
           Object {
             "shadowColor": "#000",
@@ -248,6 +265,7 @@ exports[`renders data table pagination 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
@@ -324,6 +342,7 @@ exports[`renders data table pagination 1`] = `
       </View>
     </View>
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -337,6 +356,7 @@ exports[`renders data table pagination 1`] = `
       }
     >
       <View
+        collapsable={false}
         style={
           Object {
             "shadowColor": "#000",
@@ -350,6 +370,7 @@ exports[`renders data table pagination 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
@@ -478,6 +499,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -491,6 +513,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
       }
     >
       <View
+        collapsable={false}
         style={
           Object {
             "shadowColor": "#000",
@@ -504,6 +527,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
@@ -580,6 +604,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
       </View>
     </View>
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -593,6 +618,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
       }
     >
       <View
+        collapsable={false}
         style={
           Object {
             "shadowColor": "#000",
@@ -606,6 +632,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
@@ -682,6 +709,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
       </View>
     </View>
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -695,6 +723,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
       }
     >
       <View
+        collapsable={false}
         style={
           Object {
             "shadowColor": "#000",
@@ -708,6 +737,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
@@ -784,6 +814,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
       </View>
     </View>
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -797,6 +828,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
       }
     >
       <View
+        collapsable={false}
         style={
           Object {
             "shadowColor": "#000",
@@ -810,6 +842,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
@@ -938,6 +971,7 @@ exports[`renders data table pagination with label 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -951,6 +985,7 @@ exports[`renders data table pagination with label 1`] = `
       }
     >
       <View
+        collapsable={false}
         style={
           Object {
             "shadowColor": "#000",
@@ -964,6 +999,7 @@ exports[`renders data table pagination with label 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
@@ -1040,6 +1076,7 @@ exports[`renders data table pagination with label 1`] = `
       </View>
     </View>
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -1053,6 +1090,7 @@ exports[`renders data table pagination with label 1`] = `
       }
     >
       <View
+        collapsable={false}
         style={
           Object {
             "shadowColor": "#000",
@@ -1066,6 +1104,7 @@ exports[`renders data table pagination with label 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
@@ -1200,6 +1239,7 @@ exports[`renders data table pagination with options select 1`] = `
       collapsable={false}
     >
       <View
+        collapsable={false}
         style={
           Object {
             "shadowColor": "#000",
@@ -1213,6 +1253,7 @@ exports[`renders data table pagination with options select 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "shadowColor": "#000",
@@ -1226,6 +1267,7 @@ exports[`renders data table pagination with options select 1`] = `
           }
         >
           <View
+            collapsable={false}
             style={
               Object {
                 "backgroundColor": "transparent",
@@ -1243,7 +1285,7 @@ exports[`renders data table pagination with options select 1`] = `
               accessibilityRole="button"
               accessibilityState={
                 Object {
-                  "disabled": undefined,
+                  "disabled": false,
                 }
               }
               accessible={true}
@@ -1401,6 +1443,7 @@ exports[`renders data table pagination with options select 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -1414,6 +1457,7 @@ exports[`renders data table pagination with options select 1`] = `
       }
     >
       <View
+        collapsable={false}
         style={
           Object {
             "shadowColor": "#000",
@@ -1427,6 +1471,7 @@ exports[`renders data table pagination with options select 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
@@ -1503,6 +1548,7 @@ exports[`renders data table pagination with options select 1`] = `
       </View>
     </View>
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -1516,6 +1562,7 @@ exports[`renders data table pagination with options select 1`] = `
       }
     >
       <View
+        collapsable={false}
         style={
           Object {
             "shadowColor": "#000",
@@ -1529,6 +1576,7 @@ exports[`renders data table pagination with options select 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
@@ -1605,6 +1653,7 @@ exports[`renders data table pagination with options select 1`] = `
       </View>
     </View>
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -1618,6 +1667,7 @@ exports[`renders data table pagination with options select 1`] = `
       }
     >
       <View
+        collapsable={false}
         style={
           Object {
             "shadowColor": "#000",
@@ -1631,6 +1681,7 @@ exports[`renders data table pagination with options select 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
@@ -1707,6 +1758,7 @@ exports[`renders data table pagination with options select 1`] = `
       </View>
     </View>
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -1720,6 +1772,7 @@ exports[`renders data table pagination with options select 1`] = `
       }
     >
       <View
+        collapsable={false}
         style={
           Object {
             "shadowColor": "#000",
@@ -1733,6 +1786,7 @@ exports[`renders data table pagination with options select 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
@@ -1814,6 +1868,11 @@ exports[`renders data table pagination with options select 1`] = `
 
 exports[`renders data table title with press handler 1`] = `
 <View
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
   accessible={true}
   focusable={true}
   onClick={[Function]}
@@ -1837,6 +1896,7 @@ exports[`renders data table title with press handler 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "height": 24,
@@ -1905,6 +1965,11 @@ exports[`renders data table title with press handler 1`] = `
 
 exports[`renders data table title with sort icon 1`] = `
 <View
+  accessibilityState={
+    Object {
+      "disabled": true,
+    }
+  }
   accessible={true}
   focusable={false}
   onClick={[Function]}
@@ -1928,6 +1993,7 @@ exports[`renders data table title with sort icon 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "height": 24,
@@ -1996,6 +2062,11 @@ exports[`renders data table title with sort icon 1`] = `
 
 exports[`renders right aligned data table cell 1`] = `
 <View
+  accessibilityState={
+    Object {
+      "disabled": true,
+    }
+  }
   accessible={true}
   focusable={false}
   onClick={[Function]}
@@ -2043,6 +2114,11 @@ exports[`renders right aligned data table cell 1`] = `
 
 exports[`renders right aligned data table title 1`] = `
 <View
+  accessibilityState={
+    Object {
+      "disabled": true,
+    }
+  }
   accessible={true}
   focusable={false}
   onClick={[Function]}

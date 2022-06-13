@@ -2,6 +2,7 @@
 
 exports[`renders badge 1`] = `
 <Text
+  collapsable={false}
   numberOfLines={1}
   style={
     Object {
@@ -25,6 +26,7 @@ exports[`renders badge 1`] = `
 
 exports[`renders badge as hidden 1`] = `
 <Text
+  collapsable={false}
   numberOfLines={1}
   style={
     Object {
@@ -50,6 +52,7 @@ exports[`renders badge as hidden 1`] = `
 
 exports[`renders badge in different color 1`] = `
 <Text
+  collapsable={false}
   numberOfLines={1}
   style={
     Object {
@@ -75,6 +78,7 @@ exports[`renders badge in different color 1`] = `
 
 exports[`renders badge in different size 1`] = `
 <Text
+  collapsable={false}
   numberOfLines={1}
   style={
     Object {
@@ -100,6 +104,7 @@ exports[`renders badge in different size 1`] = `
 
 exports[`renders badge with content 1`] = `
 <Text
+  collapsable={false}
   numberOfLines={1}
   style={
     Object {

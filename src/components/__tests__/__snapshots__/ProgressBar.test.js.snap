@@ -19,6 +19,7 @@ exports[`renders colored progress bar 1`] = `
   onLayout={[Function]}
 >
   <View
+    collapsable={false}
     style={
       Object {
         "backgroundColor": "rgba(255, 0, 0, 0.38)",
@@ -29,6 +30,7 @@ exports[`renders colored progress bar 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "red",
@@ -68,6 +70,7 @@ exports[`renders hidden progress bar 1`] = `
   onLayout={[Function]}
 >
   <View
+    collapsable={false}
     style={
       Object {
         "backgroundColor": "rgba(103, 80, 164, 0.38)",
@@ -78,6 +81,7 @@ exports[`renders hidden progress bar 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "rgba(103, 80, 164, 1)",
@@ -111,6 +115,7 @@ exports[`renders indeterminate progress bar 1`] = `
   onLayout={[Function]}
 >
   <View
+    collapsable={false}
     style={
       Object {
         "backgroundColor": "rgba(103, 80, 164, 0.38)",
@@ -121,6 +126,7 @@ exports[`renders indeterminate progress bar 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "rgba(103, 80, 164, 1)",
@@ -160,6 +166,7 @@ exports[`renders progress bar with specific progress 1`] = `
   onLayout={[Function]}
 >
   <View
+    collapsable={false}
     style={
       Object {
         "backgroundColor": "rgba(103, 80, 164, 0.38)",
@@ -170,6 +177,7 @@ exports[`renders progress bar with specific progress 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "rgba(103, 80, 164, 1)",

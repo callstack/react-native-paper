@@ -2,6 +2,11 @@
 
 exports[`renders list item with custom description 1`] = `
 <View
+  accessibilityState={
+    Object {
+      "disabled": true,
+    }
+  }
   accessible={true}
   focusable={false}
   onClick={[Function]}
@@ -83,6 +88,7 @@ exports[`renders list item with custom description 1`] = `
         </Text>
         <View>
           <View
+            collapsable={false}
             style={
               Object {
                 "shadowColor": "#000",
@@ -96,6 +102,7 @@ exports[`renders list item with custom description 1`] = `
             }
           >
             <View
+              collapsable={false}
               style={
                 Object {
                   "shadowColor": "#000",
@@ -109,6 +116,7 @@ exports[`renders list item with custom description 1`] = `
               }
             >
               <View
+                collapsable={false}
                 style={
                   Object {
                     "backgroundColor": "rgba(232, 222, 248, 1)",
@@ -260,6 +268,11 @@ exports[`renders list item with custom description 1`] = `
 
 exports[`renders list item with custom title and description styles 1`] = `
 <View
+  accessibilityState={
+    Object {
+      "disabled": true,
+    }
+  }
   accessible={true}
   focusable={false}
   onClick={[Function]}
@@ -363,6 +376,11 @@ exports[`renders list item with custom title and description styles 1`] = `
 
 exports[`renders list item with left and right items 1`] = `
 <View
+  accessibilityState={
+    Object {
+      "disabled": true,
+    }
+  }
   accessible={true}
   focusable={false}
   onClick={[Function]}
@@ -502,6 +520,11 @@ exports[`renders list item with left and right items 1`] = `
 
 exports[`renders list item with left item 1`] = `
 <View
+  accessibilityState={
+    Object {
+      "disabled": true,
+    }
+  }
   accessible={true}
   focusable={false}
   onClick={[Function]}
@@ -615,6 +638,11 @@ exports[`renders list item with left item 1`] = `
 
 exports[`renders list item with right item 1`] = `
 <View
+  accessibilityState={
+    Object {
+      "disabled": true,
+    }
+  }
   accessible={true}
   focusable={false}
   onClick={[Function]}
@@ -692,6 +720,11 @@ exports[`renders list item with right item 1`] = `
 
 exports[`renders list item with title and description 1`] = `
 <View
+  accessibilityState={
+    Object {
+      "disabled": true,
+    }
+  }
   accessible={true}
   focusable={false}
   onClick={[Function]}
@@ -791,6 +824,11 @@ exports[`renders list item with title and description 1`] = `
 
 exports[`renders with a description with typeof number 1`] = `
 <View
+  accessibilityState={
+    Object {
+      "disabled": true,
+    }
+  }
   accessible={true}
   focusable={false}
   onClick={[Function]}

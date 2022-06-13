@@ -7,7 +7,7 @@ exports[`renders Checkbox with custom testID 1`] = `
   accessibilityState={
     Object {
       "checked": true,
-      "disabled": undefined,
+      "disabled": true,
     }
   }
   accessible={true}
@@ -70,7 +70,7 @@ exports[`renders checked Checkbox with color 1`] = `
   accessibilityState={
     Object {
       "checked": true,
-      "disabled": undefined,
+      "disabled": true,
     }
   }
   accessible={true}
@@ -132,7 +132,7 @@ exports[`renders checked Checkbox with onPress 1`] = `
   accessibilityState={
     Object {
       "checked": true,
-      "disabled": undefined,
+      "disabled": false,
     }
   }
   accessible={true}
@@ -194,7 +194,7 @@ exports[`renders indeterminate Checkbox 1`] = `
   accessibilityState={
     Object {
       "checked": false,
-      "disabled": undefined,
+      "disabled": false,
     }
   }
   accessible={true}
@@ -256,7 +256,7 @@ exports[`renders indeterminate Checkbox with color 1`] = `
   accessibilityState={
     Object {
       "checked": false,
-      "disabled": undefined,
+      "disabled": true,
     }
   }
   accessible={true}
@@ -318,7 +318,7 @@ exports[`renders unchecked Checkbox with color 1`] = `
   accessibilityState={
     Object {
       "checked": true,
-      "disabled": undefined,
+      "disabled": true,
     }
   }
   accessible={true}
@@ -380,7 +380,7 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
   accessibilityState={
     Object {
       "checked": false,
-      "disabled": undefined,
+      "disabled": false,
     }
   }
   accessible={true}

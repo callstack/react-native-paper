@@ -2,6 +2,7 @@
 
 exports[`renders with placeholder 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "shadowColor": "#000",
@@ -15,6 +16,7 @@ exports[`renders with placeholder 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -28,6 +30,7 @@ exports[`renders with placeholder 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "alignItems": "center",
@@ -38,6 +41,7 @@ exports[`renders with placeholder 1`] = `
       }
     >
       <View
+        collapsable={false}
         style={
           Object {
             "shadowColor": "#000",
@@ -51,6 +55,7 @@ exports[`renders with placeholder 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "shadowColor": "#000",
@@ -64,6 +69,7 @@ exports[`renders with placeholder 1`] = `
           }
         >
           <View
+            collapsable={false}
             style={
               Object {
                 "backgroundColor": undefined,
@@ -83,7 +89,7 @@ exports[`renders with placeholder 1`] = `
               accessibilityRole="button"
               accessibilityState={
                 Object {
-                  "disabled": undefined,
+                  "disabled": true,
                 }
               }
               accessible={true}
@@ -141,11 +147,9 @@ exports[`renders with placeholder 1`] = `
       </View>
       <TextInput
         accessibilityRole="search"
-        allowFontScaling={true}
         keyboardAppearance="light"
         placeholder="Search"
         placeholderTextColor="rgba(28, 27, 31, 1)"
-        rejectResponderTermination={true}
         returnKeyType="search"
         selectionColor="rgba(103, 80, 164, 1)"
         style={
@@ -167,6 +171,7 @@ exports[`renders with placeholder 1`] = `
         underlineColorAndroid="transparent"
       />
       <View
+        collapsable={false}
         style={
           Object {
             "shadowColor": "#000",
@@ -180,6 +185,7 @@ exports[`renders with placeholder 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "shadowColor": "#000",
@@ -193,6 +199,7 @@ exports[`renders with placeholder 1`] = `
           }
         >
           <View
+            collapsable={false}
             style={
               Object {
                 "backgroundColor": undefined,
@@ -275,6 +282,7 @@ exports[`renders with placeholder 1`] = `
 
 exports[`renders with text 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "shadowColor": "#000",
@@ -288,6 +296,7 @@ exports[`renders with text 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -301,6 +310,7 @@ exports[`renders with text 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "alignItems": "center",
@@ -311,6 +321,7 @@ exports[`renders with text 1`] = `
       }
     >
       <View
+        collapsable={false}
         style={
           Object {
             "shadowColor": "#000",
@@ -324,6 +335,7 @@ exports[`renders with text 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "shadowColor": "#000",
@@ -337,6 +349,7 @@ exports[`renders with text 1`] = `
           }
         >
           <View
+            collapsable={false}
             style={
               Object {
                 "backgroundColor": undefined,
@@ -356,7 +369,7 @@ exports[`renders with text 1`] = `
               accessibilityRole="button"
               accessibilityState={
                 Object {
-                  "disabled": undefined,
+                  "disabled": true,
                 }
               }
               accessible={true}
@@ -414,11 +427,9 @@ exports[`renders with text 1`] = `
       </View>
       <TextInput
         accessibilityRole="search"
-        allowFontScaling={true}
         keyboardAppearance="light"
         placeholder="Search"
         placeholderTextColor="rgba(28, 27, 31, 1)"
-        rejectResponderTermination={true}
         returnKeyType="search"
         selectionColor="rgba(103, 80, 164, 1)"
         style={
@@ -441,6 +452,7 @@ exports[`renders with text 1`] = `
         value="query"
       />
       <View
+        collapsable={false}
         style={
           Object {
             "shadowColor": "#000",
@@ -454,6 +466,7 @@ exports[`renders with text 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "shadowColor": "#000",
@@ -467,6 +480,7 @@ exports[`renders with text 1`] = `
           }
         >
           <View
+            collapsable={false}
             style={
               Object {
                 "backgroundColor": undefined,
