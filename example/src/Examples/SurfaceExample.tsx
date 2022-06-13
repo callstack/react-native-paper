@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { Text, Surface, useTheme, MD3Elevation } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
+import { isWeb } from '../../utils';
 
 const SurfaceExample = () => {
   const { isV3 } = useTheme();
@@ -10,7 +11,9 @@ const SurfaceExample = () => {
   const baseElevation = isV3 ? Array.from({ length: 6 }) : v2Elevation;
 
   return (
-    <ScreenWrapper contentContainerStyle={styles.content}>
+    <ScreenWrapper
+      contentContainerStyle={[styles.content, isWeb && styles.webContent]}
+    >
       {baseElevation.map((e, i) => (
         <Surface
           key={i}
@@ -35,6 +38,11 @@ const styles = StyleSheet.create({
   content: {
     padding: 24,
     alignItems: 'center',
+  },
+  webContent: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    padding: 0,
   },
   surface: {
     margin: 24,

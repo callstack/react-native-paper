@@ -14,7 +14,7 @@ import Icon, { IconSource } from '../Icon';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
-import { getFABColors } from './utils';
+import { getFABColors, getFabStyle } from './utils';
 import type { $RemoveChildren, Theme } from '../../types';
 
 type FABSize = 'small' | 'medium' | 'large';
@@ -201,22 +201,9 @@ const FAB = ({
   const iconSize = isLargeSize ? 36 : 24;
   const loadingIndicatorSize = isLargeSize ? 24 : 18;
 
-  const fabStyle = () => {
-    if (!isV3) {
-      return size === 'small' ? styles.small : styles.standard;
-    } else {
-      switch (size) {
-        case 'small':
-          return styles.v3SmallSize;
-        case 'medium':
-          return styles.v3MediumSize;
-        case 'large':
-          return styles.v3LargeSize;
-      }
-    }
-  };
+  const fabStyle = getFabStyle({ size, theme });
 
-  const shapeStyle = { borderRadius: fabStyle().borderRadius };
+  const shapeStyle = { borderRadius: fabStyle.borderRadius };
   const textStyle = {
     color: foregroundColor,
     ...(!isV3 && fonts.medium),
@@ -264,7 +251,7 @@ const FAB = ({
         testID={testID}
       >
         <View
-          style={[styles.content, label ? extendedStyle : fabStyle()]}
+          style={[styles.content, label ? extendedStyle : fabStyle]}
           pointerEvents="none"
         >
           {icon && loading !== true ? (
@@ -303,16 +290,6 @@ const styles = StyleSheet.create({
   elevated: {
     elevation: 6,
   },
-  standard: {
-    height: 56,
-    width: 56,
-    borderRadius: 28,
-  },
-  small: {
-    height: 40,
-    width: 40,
-    borderRadius: 28,
-  },
   extended: {
     height: 48,
     paddingHorizontal: 16,
@@ -330,21 +307,6 @@ const styles = StyleSheet.create({
   },
   disabled: {
     elevation: 0,
-  },
-  v3SmallSize: {
-    height: 40,
-    width: 40,
-    borderRadius: 12,
-  },
-  v3MediumSize: {
-    height: 56,
-    width: 56,
-    borderRadius: 16,
-  },
-  v3LargeSize: {
-    height: 96,
-    width: 96,
-    borderRadius: 28,
   },
   v3Extended: {
     height: 56,

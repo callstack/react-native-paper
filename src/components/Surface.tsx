@@ -135,6 +135,21 @@ const Surface = ({
 
   const sharedStyle = [{ backgroundColor }, style];
 
+  if (Platform.OS === 'web') {
+    return (
+      <Animated.View
+        {...props}
+        style={[
+          { backgroundColor },
+          elevation ? shadow(elevation, theme.isV3) : null,
+          style,
+        ]}
+      >
+        {children}
+      </Animated.View>
+    );
+  }
+
   if (Platform.OS === 'android') {
     const elevationLevel = [0, 3, 6, 9, 12, 15];
 
