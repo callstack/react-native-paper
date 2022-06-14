@@ -1,0 +1,492 @@
+<html lang="en"><head><meta charSet="utf-8"/><link rel="shortcut icon" type="image/vnd.microsoft.icon" href="images/favicon.ico"/><meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="description" content=""/><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Introducing v5 with Material You · React Native Paper"/><meta name="twitter:description" content=""/><meta property="og:type" content="website"/><meta property="og:title" content="Introducing v5 with Material You · React Native Paper"/><meta property="og:description" content=""/><title>Introducing v5 with Material You · React Native Paper</title><link type="text/css" rel="stylesheet" href="app.css"/></head><body>
+    <script>
+      var theme;
+
+      try {
+        // Check if there is a preference saved
+        theme = localStorage.getItem('preference-theme');
+      } catch (e) {
+        // Ignore
+      }
+
+      if (theme === undefined) {
+        try {
+          // If no preferred theme is set, read OS preference
+          theme = window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light';
+        } catch (e) {
+          // Ignore
+        }
+      }
+
+      if (theme === 'dark') {
+        document.body.classList.add('dark-theme');
+      }
+    </script>
+  <div id='root'><div class="Layout_lugqar2"><aside class="SidebarContent_s9nrg4n"><input type="checkbox" id="slide-sidebar" role="button" class="MenuButton_mzfqg8l"/><label for="slide-sidebar" class="MenuIcon_m1mups47">☰</label><div class="MenuContent_mdzibsv"><input type="search" value="" placeholder="Filter…" class="Searchbar_s1nn5lbd"/><nav class="Navigation_nlggdah"><a data-selected="false" class="LinkItem_l1gpol2t" href="index.html">Home</a><a data-selected="false" class="LinkItem_l1gpol2t" href="getting-started.html">Getting Started</a><a data-selected="true" class="LinkItem_l1gpol2t" href="introducing-v5-with-material-you.html">Introducing v5 with Material You</a><a data-selected="false" class="LinkItem_l1gpol2t" href="theming.html">Theming</a><a data-selected="false" class="LinkItem_l1gpol2t" href="icons.html">Icons</a><a data-selected="false" class="LinkItem_l1gpol2t" href="fonts.html">Fonts</a><a data-selected="false" class="LinkItem_l1gpol2t" href="using-on-the-web.html">Using on the Web</a><a data-selected="false" class="LinkItem_l1gpol2t" href="recommended-libraries.html">Recommended Libraries</a><a data-selected="false" class="LinkItem_l1gpol2t" href="showcase.html">Showcase</a><a data-selected="false" class="LinkItem_l1gpol2t" href="contributing.html">Contributing</a><a data-selected="false" class="LinkItem_l1gpol2t" href="theming-with-react-navigation.html">Theming with React Navigation</a><a data-selected="false" class="LinkItem_l1gpol2t" href="integrate-app-bar-with-react-navigation.html">Integrate AppBar with react-navigation</a><hr class="SeparatorItem_slziuo3"/><a data-selected="false" class="LinkItem_l1gpol2t" href="activity-indicator.html">ActivityIndicator</a><a data-selected="false" class="LinkItem_l1gpol2t" href="animated-fab.html">AnimatedFAB</a><div><div class="Row_r5q2p2e"><a data-selected="false" class="LinkItem_l1gpol2t" href="appbar.html">Appbar</a><button data-expanded="true" style="opacity:0" class="ButtonIcon_b1ol5l8s"><svg width="16px" height="16px" viewBox="0 0 16 16"><polygon stroke="none" stroke-width="1" fill-rule="evenodd" fill="currentColor" points="8 4 2 10 3.4 11.4 8 6.8 12.6 11.4 14 10"></polygon></svg></button></div><div data-visible="true" class="GroupItems_gl210no"><a data-selected="false" class="LinkItem_l1gpol2t" href="appbar-action.html">Appbar.Action</a><a data-selected="false" class="LinkItem_l1gpol2t" href="appbar-back-action.html">Appbar.BackAction</a><a data-selected="false" class="LinkItem_l1gpol2t" href="appbar-content.html">Appbar.Content</a><a data-selected="false" class="LinkItem_l1gpol2t" href="appbar-header.html">Appbar.Header</a></div></div><div><div class="Row_r5q2p2e"><a data-selected="false" class="LinkItem_l1gpol2t" href="">Avatar</a><button data-expanded="true" style="opacity:0" class="ButtonIcon_b1ol5l8s"><svg width="16px" height="16px" viewBox="0 0 16 16"><polygon stroke="none" stroke-width="1" fill-rule="evenodd" fill="currentColor" points="8 4 2 10 3.4 11.4 8 6.8 12.6 11.4 14 10"></polygon></svg></button></div><div data-visible="true" class="GroupItems_gl210no"><a data-selected="false" class="LinkItem_l1gpol2t" href="avatar-icon.html">Avatar.Icon</a><a data-selected="false" class="LinkItem_l1gpol2t" href="avatar-image.html">Avatar.Image</a><a data-selected="false" class="LinkItem_l1gpol2t" href="avatar-text.html">Avatar.Text</a></div></div><a data-selected="false" class="LinkItem_l1gpol2t" href="badge.html">Badge</a><a data-selected="false" class="LinkItem_l1gpol2t" href="banner.html">Banner</a><a data-selected="false" class="LinkItem_l1gpol2t" href="bottom-navigation.html">BottomNavigation</a><a data-selected="false" class="LinkItem_l1gpol2t" href="button.html">Button</a><div><div class="Row_r5q2p2e"><a data-selected="false" class="LinkItem_l1gpol2t" href="card.html">Card</a><button data-expanded="true" style="opacity:0" class="ButtonIcon_b1ol5l8s"><svg width="16px" height="16px" viewBox="0 0 16 16"><polygon stroke="none" stroke-width="1" fill-rule="evenodd" fill="currentColor" points="8 4 2 10 3.4 11.4 8 6.8 12.6 11.4 14 10"></polygon></svg></button></div><div data-visible="true" class="GroupItems_gl210no"><a data-selected="false" class="LinkItem_l1gpol2t" href="card-actions.html">Card.Actions</a><a data-selected="false" class="LinkItem_l1gpol2t" href="card-content.html">Card.Content</a><a data-selected="false" class="LinkItem_l1gpol2t" href="card-cover.html">Card.Cover</a><a data-selected="false" class="LinkItem_l1gpol2t" href="card-title.html">Card.Title</a></div></div><div><div class="Row_r5q2p2e"><a data-selected="false" class="LinkItem_l1gpol2t" href="checkbox.html">Checkbox</a><button data-expanded="true" style="opacity:0" class="ButtonIcon_b1ol5l8s"><svg width="16px" height="16px" viewBox="0 0 16 16"><polygon stroke="none" stroke-width="1" fill-rule="evenodd" fill="currentColor" points="8 4 2 10 3.4 11.4 8 6.8 12.6 11.4 14 10"></polygon></svg></button></div><div data-visible="true" class="GroupItems_gl210no"><a data-selected="false" class="LinkItem_l1gpol2t" href="checkbox-android.html">Checkbox.Android</a><a data-selected="false" class="LinkItem_l1gpol2t" href="checkbox-ios.html">Checkbox.IOS</a><a data-selected="false" class="LinkItem_l1gpol2t" href="checkbox-item.html">Checkbox.Item</a></div></div><a data-selected="false" class="LinkItem_l1gpol2t" href="chip.html">Chip</a><div><div class="Row_r5q2p2e"><a data-selected="false" class="LinkItem_l1gpol2t" href="data-table.html">DataTable</a><button data-expanded="true" style="opacity:0" class="ButtonIcon_b1ol5l8s"><svg width="16px" height="16px" viewBox="0 0 16 16"><polygon stroke="none" stroke-width="1" fill-rule="evenodd" fill="currentColor" points="8 4 2 10 3.4 11.4 8 6.8 12.6 11.4 14 10"></polygon></svg></button></div><div data-visible="true" class="GroupItems_gl210no"><a data-selected="false" class="LinkItem_l1gpol2t" href="data-table-cell.html">DataTable.Cell</a><a data-selected="false" class="LinkItem_l1gpol2t" href="data-table-header.html">DataTable.Header</a><a data-selected="false" class="LinkItem_l1gpol2t" href="data-table-pagination.html">DataTable.Pagination</a><a data-selected="false" class="LinkItem_l1gpol2t" href="data-table-row.html">DataTable.Row</a><a data-selected="false" class="LinkItem_l1gpol2t" href="data-table-title.html">DataTable.Title</a></div></div><div><div class="Row_r5q2p2e"><a data-selected="false" class="LinkItem_l1gpol2t" href="dialog.html">Dialog</a><button data-expanded="true" style="opacity:0" class="ButtonIcon_b1ol5l8s"><svg width="16px" height="16px" viewBox="0 0 16 16"><polygon stroke="none" stroke-width="1" fill-rule="evenodd" fill="currentColor" points="8 4 2 10 3.4 11.4 8 6.8 12.6 11.4 14 10"></polygon></svg></button></div><div data-visible="true" class="GroupItems_gl210no"><a data-selected="false" class="LinkItem_l1gpol2t" href="dialog-actions.html">Dialog.Actions</a><a data-selected="false" class="LinkItem_l1gpol2t" href="dialog-content.html">Dialog.Content</a><a data-selected="false" class="LinkItem_l1gpol2t" href="dialog-icon.html">Dialog.Icon</a><a data-selected="false" class="LinkItem_l1gpol2t" href="dialog-scroll-area.html">Dialog.ScrollArea</a><a data-selected="false" class="LinkItem_l1gpol2t" href="dialog-title.html">Dialog.Title</a></div></div><a data-selected="false" class="LinkItem_l1gpol2t" href="divider.html">Divider</a><div><div class="Row_r5q2p2e"><a data-selected="false" class="LinkItem_l1gpol2t" href="">Drawer</a><button data-expanded="true" style="opacity:0" class="ButtonIcon_b1ol5l8s"><svg width="16px" height="16px" viewBox="0 0 16 16"><polygon stroke="none" stroke-width="1" fill-rule="evenodd" fill="currentColor" points="8 4 2 10 3.4 11.4 8 6.8 12.6 11.4 14 10"></polygon></svg></button></div><div data-visible="true" class="GroupItems_gl210no"><a data-selected="false" class="LinkItem_l1gpol2t" href="drawer-collapsed-item.html">Drawer.CollapsedItem</a><a data-selected="false" class="LinkItem_l1gpol2t" href="drawer-item.html">Drawer.Item</a><a data-selected="false" class="LinkItem_l1gpol2t" href="drawer-section.html">Drawer.Section</a></div></div><div><div class="Row_r5q2p2e"><a data-selected="false" class="LinkItem_l1gpol2t" href="fab.html">FAB</a><button data-expanded="true" style="opacity:0" class="ButtonIcon_b1ol5l8s"><svg width="16px" height="16px" viewBox="0 0 16 16"><polygon stroke="none" stroke-width="1" fill-rule="evenodd" fill="currentColor" points="8 4 2 10 3.4 11.4 8 6.8 12.6 11.4 14 10"></polygon></svg></button></div><div data-visible="true" class="GroupItems_gl210no"><a data-selected="false" class="LinkItem_l1gpol2t" href="fab-group.html">FAB.Group</a></div></div><a data-selected="false" class="LinkItem_l1gpol2t" href="helper-text.html">HelperText</a><a data-selected="false" class="LinkItem_l1gpol2t" href="icon-button.html">IconButton</a><div><div class="Row_r5q2p2e"><a data-selected="false" class="LinkItem_l1gpol2t" href="">List</a><button data-expanded="true" style="opacity:0" class="ButtonIcon_b1ol5l8s"><svg width="16px" height="16px" viewBox="0 0 16 16"><polygon stroke="none" stroke-width="1" fill-rule="evenodd" fill="currentColor" points="8 4 2 10 3.4 11.4 8 6.8 12.6 11.4 14 10"></polygon></svg></button></div><div data-visible="true" class="GroupItems_gl210no"><a data-selected="false" class="LinkItem_l1gpol2t" href="list-accordion.html">List.Accordion</a><a data-selected="false" class="LinkItem_l1gpol2t" href="list-accordion-group.html">List.AccordionGroup</a><a data-selected="false" class="LinkItem_l1gpol2t" href="list-icon.html">List.Icon</a><a data-selected="false" class="LinkItem_l1gpol2t" href="list-item.html">List.Item</a><a data-selected="false" class="LinkItem_l1gpol2t" href="list-section.html">List.Section</a><a data-selected="false" class="LinkItem_l1gpol2t" href="list-subheader.html">List.Subheader</a></div></div><div><div class="Row_r5q2p2e"><a data-selected="false" class="LinkItem_l1gpol2t" href="menu.html">Menu</a><button data-expanded="true" style="opacity:0" class="ButtonIcon_b1ol5l8s"><svg width="16px" height="16px" viewBox="0 0 16 16"><polygon stroke="none" stroke-width="1" fill-rule="evenodd" fill="currentColor" points="8 4 2 10 3.4 11.4 8 6.8 12.6 11.4 14 10"></polygon></svg></button></div><div data-visible="true" class="GroupItems_gl210no"><a data-selected="false" class="LinkItem_l1gpol2t" href="menu-item.html">Menu.Item</a></div></div><a data-selected="false" class="LinkItem_l1gpol2t" href="modal.html">Modal</a><div><div class="Row_r5q2p2e"><a data-selected="false" class="LinkItem_l1gpol2t" href="portal.html">Portal</a><button data-expanded="true" style="opacity:0" class="ButtonIcon_b1ol5l8s"><svg width="16px" height="16px" viewBox="0 0 16 16"><polygon stroke="none" stroke-width="1" fill-rule="evenodd" fill="currentColor" points="8 4 2 10 3.4 11.4 8 6.8 12.6 11.4 14 10"></polygon></svg></button></div><div data-visible="true" class="GroupItems_gl210no"><a data-selected="false" class="LinkItem_l1gpol2t" href="portal-host.html">Portal.Host</a></div></div><a data-selected="false" class="LinkItem_l1gpol2t" href="progress-bar.html">ProgressBar</a><div><div class="Row_r5q2p2e"><a data-selected="false" class="LinkItem_l1gpol2t" href="radio-button.html">RadioButton</a><button data-expanded="true" style="opacity:0" class="ButtonIcon_b1ol5l8s"><svg width="16px" height="16px" viewBox="0 0 16 16"><polygon stroke="none" stroke-width="1" fill-rule="evenodd" fill="currentColor" points="8 4 2 10 3.4 11.4 8 6.8 12.6 11.4 14 10"></polygon></svg></button></div><div data-visible="true" class="GroupItems_gl210no"><a data-selected="false" class="LinkItem_l1gpol2t" href="radio-button-android.html">RadioButton.Android</a><a data-selected="false" class="LinkItem_l1gpol2t" href="radio-button-group.html">RadioButton.Group</a><a data-selected="false" class="LinkItem_l1gpol2t" href="radio-button-ios.html">RadioButton.IOS</a><a data-selected="false" class="LinkItem_l1gpol2t" href="radio-button-item.html">RadioButton.Item</a></div></div><a data-selected="false" class="LinkItem_l1gpol2t" href="searchbar.html">Searchbar</a><a data-selected="false" class="LinkItem_l1gpol2t" href="snackbar.html">Snackbar</a><a data-selected="false" class="LinkItem_l1gpol2t" href="surface.html">Surface</a><a data-selected="false" class="LinkItem_l1gpol2t" href="switch.html">Switch</a><div><div class="Row_r5q2p2e"><a data-selected="false" class="LinkItem_l1gpol2t" href="text-input.html">TextInput</a><button data-expanded="true" style="opacity:0" class="ButtonIcon_b1ol5l8s"><svg width="16px" height="16px" viewBox="0 0 16 16"><polygon stroke="none" stroke-width="1" fill-rule="evenodd" fill="currentColor" points="8 4 2 10 3.4 11.4 8 6.8 12.6 11.4 14 10"></polygon></svg></button></div><div data-visible="true" class="GroupItems_gl210no"><a data-selected="false" class="LinkItem_l1gpol2t" href="text-input-affix.html">TextInput.Affix</a><a data-selected="false" class="LinkItem_l1gpol2t" href="text-input-icon.html">TextInput.Icon</a></div></div><div><div class="Row_r5q2p2e"><a data-selected="false" class="LinkItem_l1gpol2t" href="toggle-button.html">ToggleButton</a><button data-expanded="true" style="opacity:0" class="ButtonIcon_b1ol5l8s"><svg width="16px" height="16px" viewBox="0 0 16 16"><polygon stroke="none" stroke-width="1" fill-rule="evenodd" fill="currentColor" points="8 4 2 10 3.4 11.4 8 6.8 12.6 11.4 14 10"></polygon></svg></button></div><div data-visible="true" class="GroupItems_gl210no"><a data-selected="false" class="LinkItem_l1gpol2t" href="toggle-button-group.html">ToggleButton.Group</a><a data-selected="false" class="LinkItem_l1gpol2t" href="toggle-button-row.html">ToggleButton.Row</a></div></div><a data-selected="false" class="LinkItem_l1gpol2t" href="touchable-ripple.html">TouchableRipple</a><div><div class="Row_r5q2p2e"><a data-selected="false" class="LinkItem_l1gpol2t" href="">Typography</a><button data-expanded="true" style="opacity:0" class="ButtonIcon_b1ol5l8s"><svg width="16px" height="16px" viewBox="0 0 16 16"><polygon stroke="none" stroke-width="1" fill-rule="evenodd" fill="currentColor" points="8 4 2 10 3.4 11.4 8 6.8 12.6 11.4 14 10"></polygon></svg></button></div><div data-visible="true" class="GroupItems_gl210no"><a data-selected="false" class="LinkItem_l1gpol2t" href="text.html">Text</a></div></div></nav></div></aside><main class="Container_c119hgic"><div class="HeaderWrapper_h1b6fqjq"><div class="LogoContainer_lz0sul8"><img src="images/sidebar-logo.svg" alt="Logo" class="LogoImage_l1tdaxxn"/></div><div class="ThemeSwitchDiv_ti2lwtw"><label class="Label_lok00ln" style="--lok00ln-0:#000"><input type="checkbox" disabled="" class="Input_i1midrh5"/><div class="Switch_s120pijg"></div></label><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="23" height="22" fill="orange" viewBox="0 0 130 130" enable-background="new 0 0 129 129"><g><g><path d="m64.5,92.6c15.5,0 28-12.6 28-28s-12.6-28-28-28-28,12.6-28,28 12.5,28 28,28zm0-47.9c11,0 19.9,8.9 19.9,19.9 0,11-8.9,19.9-19.9,19.9s-19.9-8.9-19.9-19.9c0-11 8.9-19.9 19.9-19.9z"></path><path d="m68.6,23.6v-12.9c0-2.3-1.8-4.1-4.1-4.1s-4.1,1.8-4.1,4.1v12.9c0,2.3 1.8,4.1 4.1,4.1s4.1-1.8 4.1-4.1z"></path><path d="m60.4,105.6v12.9c0,2.3 1.8,4.1 4.1,4.1s4.1-1.8 4.1-4.1v-12.9c0-2.3-1.8-4.1-4.1-4.1s-4.1,1.8-4.1,4.1z"></path><path d="m96.4,38.5l9.1-9.1c1.6-1.6 1.6-4.2 0-5.8-1.6-1.6-4.2-1.6-5.8,0l-9.1,9.1c-1.6,1.6-1.6,4.2 0,5.8 0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2z"></path><path d="m23.5,105.6c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l9.1-9.1c1.6-1.6 1.6-4.2 0-5.8-1.6-1.6-4.2-1.6-5.8,0l-9.1,9.1c-1.6,1.6-1.6,4.2 0,5.8z"></path><path d="m122.5,64.6c0-2.3-1.8-4.1-4.1-4.1h-12.9c-2.3,0-4.1,1.8-4.1,4.1 0,2.3 1.8,4.1 4.1,4.1h12.9c2.2,1.42109e-14 4.1-1.8 4.1-4.1z"></path><path d="m10.6,68.7h12.9c2.3,0 4.1-1.8 4.1-4.1 0-2.3-1.8-4.1-4.1-4.1h-12.9c-2.3,0-4.1,1.8-4.1,4.1 0,2.3 1.9,4.1 4.1,4.1z"></path><path d="m102.6,106.8c1,0 2.1-0.4 2.9-1.2 1.6-1.6 1.6-4.2 0-5.8l-9.1-9.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l9.1,9.1c0.8,0.8 1.9,1.2 2.9,1.2z"></path><path d="m38.4,38.5c1.6-1.6 1.6-4.2 0-5.8l-9.1-9.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l9.1,9.1c0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2z"></path></g></g></svg></div></div><div class="Inner_ir6lat6"><div><p>React Native Paper v5 is all about adopting the new Material Design 3 <i>aka</i> Material You. It was released in October 2021 after intense work and effort to make Material You follow a more expressive approach to design.</p>
+<p>Paper now supports both Material Design 2 and 3 through the configuration described in <a href="http://localhost:3031/introducing-v-5-with-material-you.html#versioning">Versioning</a> and is compatible with a handful of API change. </p>
+<h1 id="migration-guide-to-material-you-50">
+          <a class="anchor" href="#migration-guide-to-material-you-5-0-">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Migration guide to Material You (5.0)</h1>
+<p>Version 5.0 brings support for the next Material Design iteration branded as Material You <i>(in fact being Material Design v3 or in short MD3)</i> into the <code>react-native-paper</code> library. All the components were refined according to the official <a href="https://www.figma.com/community/file/1035203688168086460">design kit on figma</a> and adjusted in terms of visuals by changes in colors, typography and animations. </p>
+<p>Below you can find the most important information about the components whose API may have changed  API has been changed due to supporting new props, renaming existing ones or some deprecations. Hopefully, based on the presented required changes, migration to the latest version should be smooth. Enjoy!</p>
+<h2 id="theming">
+          <a class="anchor" href="#theming">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Theming</h2>
+<h3 id="versioning">
+          <a class="anchor" href="#versioning">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Versioning</h3>
+<p>Introducing Material You <i>(MD3)</i> into <code>react-native-paper</code> doesn't mean dropping previous Material Design <i>(MD2)</i>! On the contrary, both of them will be supported, however, not simultaneously. To specify which design system components should follow in the app, there is a newly created property in the theme called <code>version</code> which can accept only one of two values:</p>
+<ul>
+<li><b>3</b> – new Material You <i>(MD3)</i>,</li>
+<li><b>2</b> - previous Material Design <i>(MD2)</i>.</li>
+</ul>
+<pre><code class="language-js">theme<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+  <span class="token comment">/* ... */</span>
+  version<span class="token punctuation">:</span> <span class="token number">3</span> <span class="token punctuation">(</span><span class="token keyword">default</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token number">2</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="colors">
+          <a class="anchor" href="#colors">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Colors</h3>
+<p>New theme introduces a new color palette along with new namings reflecting design color tokens, but written in camel case. Palette contains a set of five key colors, where primary, secondary and tertiary are classified into <i>accent colors</i>. The second group of colors is <i>neutral and neutral variant colors</i> used for defining surface or background roles as well as specifying high and medium emphasis text and icons. Additionally, the color system includes a semantic color role for error.</p>
+<p>Each accent and error colors has a group of related tones. The tones are mapped to roles that create contrast and visual interest when applied to elements in the UI.</p>
+<p>📍<i>Note: Dynamic colors are not supported yet.</i></p>
+<img class="medium" src="migration/color-palette.png" />
+
+<p>Colors theme structure should follow the default palette and contain the following properties:</p>
+<pre><code class="language-js">theme<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+  <span class="token comment">/* ... */</span>
+  colors<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    primary<span class="token punctuation">,</span>
+    primaryContainer<span class="token punctuation">,</span>
+    secondary<span class="token punctuation">,</span>
+    secondaryContainer<span class="token punctuation">,</span>
+    tertiary<span class="token punctuation">,</span>
+    tertiaryContainer<span class="token punctuation">,</span>
+    surface<span class="token punctuation">,</span>
+    surfaceVariant<span class="token punctuation">,</span>
+    surfaceDisabled<span class="token punctuation">,</span>
+    background<span class="token punctuation">,</span>
+    error<span class="token punctuation">,</span>
+    errorContainer<span class="token punctuation">,</span>
+    onPrimary<span class="token punctuation">,</span>
+    onPrimaryContainer<span class="token punctuation">,</span>
+    onSecondary<span class="token punctuation">,</span>
+    onSecondaryContainer<span class="token punctuation">,</span>
+    onTertiary<span class="token punctuation">,</span>
+    onTertiaryContainer<span class="token punctuation">,</span>
+    onSurface<span class="token punctuation">,</span>
+    onSurfaceVariant<span class="token punctuation">,</span>
+    onSurfaceDisabled<span class="token punctuation">,</span>
+    onError<span class="token punctuation">,</span>
+    onErrorContainer<span class="token punctuation">,</span>
+    onBackground<span class="token punctuation">,</span>
+    outline<span class="token punctuation">,</span>
+    shadow<span class="token punctuation">,</span>
+    inverseOnSurface<span class="token punctuation">,</span>
+    inverseSurface<span class="token punctuation">,</span>
+    inversePrimary<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>👉 You can find more about color on <a href="https://m3.material.io/styles/color/the-color-system/key-colors-tones">Material You website</a></p>
+<h2 id="typography">
+          <a class="anchor" href="#typography">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Typography</h2>
+<p>A new way of approaching typography introduces one component <code>&lt;Text&gt;</code> which accepts prop <code>variant</code>. Variant defines appropriate text styles for type role and its size. The updated type scale organizes styles into five roles that are named to describe their purposes: <b>Display</b>, <b>Headline</b>, <b>Title</b>, <b>Label</b> and <b>Body</b> along with three display styles <i>large</i>, <i>medium</i>, and <i>small</i>. In total, there are fifteen variants that are MD3 compliant and are reflecting design typography tokens written in camel case. </p>
+<pre><code class="language-js"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Text</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>displayLarge<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Display Large</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Text</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Text</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>displayMedium<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Display Medium</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Text</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Text</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>displaySmall<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Display small</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Text</span></span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Text</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>headlineLarge<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Headline Large</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Text</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Text</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>headlineMedium<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Headline Medium</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Text</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Text</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>headlineSmall<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Headline Small</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Text</span></span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Text</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>titleLarge<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Title Large</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Text</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Text</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>titleMedium<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Title Medium</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Text</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Text</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>titleSmall<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Title Small</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Text</span></span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Text</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>bodyLarge<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Body Large</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Text</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Text</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>bodyMedium<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Body Medium</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Text</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Text</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>bodySmall<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Body Small</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Text</span></span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Text</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>labelLarge<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Label Large</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Text</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Text</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>labelMedium<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Label Medium</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Text</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Text</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>labelSmall<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Label Small</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Text</span></span><span class="token punctuation">&gt;</span></span></code></pre>
+<p>Take a look at the suggested replacement diff:</p>
+<pre><code class="language-diff"><span class="token deleted-sign deleted">- &lt;Headline&gt;Headline&lt;/Headline&gt;
+</span><span class="token inserted-sign inserted">+ &lt;Text variant="headlineSmall"&gt;Headline&lt;/Text&gt;
+</span>
+<span class="token deleted-sign deleted">- &lt;Title&gt;Title&lt;/Title&gt;
+</span><span class="token inserted-sign inserted">+ &lt;Text variant="titleLarge"&gt;Title&lt;/Text&gt;
+</span>
+<span class="token deleted-sign deleted">- &lt;Subheading&gt;Subheading&lt;/Subheading&gt;
+</span><span class="token inserted-sign inserted">+ &lt;Text variant="titleMedium"&gt;Subheading&lt;/Text&gt;
+</span>
+<span class="token deleted-sign deleted">- &lt;Paragraph&gt;Paragraph&lt;/Paragraph&gt;
+</span><span class="token inserted-sign inserted">+ &lt;Text variant="bodyMedium"&gt;Paragraph&lt;/Text&gt;
+</span>
+<span class="token deleted-sign deleted">- &lt;Caption&gt;Caption&lt;/Caption&gt;
+</span><span class="token inserted-sign inserted">+ &lt;Text variant="bodySmall"&gt;Caption&lt;/Text&gt;</span></code></pre>
+<p>👉 You can find more about color on <a href="https://m3.material.io/styles/typography/overview">Material You website</a></p>
+<h2 id="surface">
+          <a class="anchor" href="#surface">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Surface</h2>
+<p><code>Surface</code> component received one new prop:</p>
+<ul>
+<li><code>elevation</code> - accepts values from <code>0</code> to <code>5</code> and applies background color and shadows to the <code>Surface</code> component. Supports both iOS and Android.</li>
+</ul>
+<p>Previously <code>elevation</code> was passed inside the <code>style</code> prop. Since it supported not only Android, but also iOS, we decided to extract it from <code>style</code> and create a separate <code>elevation</code> prop for that.</p>
+<pre><code class="language-diff"><span class="token deleted-sign deleted">- &lt;Surface style={{ elevation: 1 }} /&gt;
+</span><span class="token inserted-sign inserted">+ &lt;Surface elevation={1} /&gt;</span></code></pre>
+<h2 id="banner-searchbar-and-snackbar">
+          <a class="anchor" href="#banner-searchbar-and-snackbar">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Banner, Searchbar and Snackbar</h2>
+<p>According to the updates in <code>Surface</code> on the top of which <code>Banner</code>, <code>Searchbar</code> and <code>Snackbar</code> are implemented, all three component received <code>elevation</code> prop to adjust its value.</p>
+<pre><code class="language-diff"><span class="token deleted-sign deleted">- &lt;Snackbar style={{elevation: 1}}&gt;Hello&lt;/Snackbar&gt;
+</span><span class="token inserted-sign inserted">+ &lt;Snackbar elevation={1}&gt;Hello&lt;/Snackbar&gt;</span></code></pre>
+<h2 id="bottomnavigation-navigation-bar">
+          <a class="anchor" href="#bottomnavigation-navigation-bar-">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        BottomNavigation <i>(Navigation bar)</i></h2>
+<p>For the sake of new animation of pill shape, indicating active destination, and assisting icon change from outlined to filled, there are three changes within <code>navigationState.routes</code> property items:</p>
+<ul>
+<li><code>color</code> is deprecated since color is constant and the same for all routes,</li>
+<li><code>icon</code> is renamed to <code>focusedIcon</code>, as the name implies, with theme version 3 it's the outline icon used as focused tab icon and with theme version 2 it's a default icon,</li>
+<li><code>unfocusedIcon</code> <i>(optional)</i> is the filled icon used as the unfocused tab icon, compatible with theme version 3.</li>
+</ul>
+<p>📍<i>Note: <code>unfocusedIcon</code> is optional, if you can't find outline icon equivalent, omit that prop, so <code>focusedIcon</code> will be displayed in both active and inactive state</i></p>
+<pre><code class="language-diff">routes: [
+<span class="token deleted-sign deleted">- { key: "album", title: "Album", icon: "image-album", color: "#3F51B5" },
+</span><span class="token inserted-sign inserted">+ { key: "album", title: "Album", focusedIcon: "image-album" },
+</span><span class="token deleted-sign deleted">- { key: "library", title: "Library", icon: "inbox", color: "#009688" },
+</span><span class="token inserted-sign inserted">+ { key: "library", title: "Library", focusedIcon: "inbox", unfocusedIcon: "inbox-outline" },
+</span><span class="token deleted-sign deleted">- { key: "favorites", title: "Favorites", icon: "heart", color: "#795548" },
+</span><span class="token inserted-sign inserted">+ { key: "favorites", title: "Favorites", focusedIcon: "heart", unfocusedIcon: "heart-outline; },
+</span><span class="token deleted-sign deleted">- { key: "purchased", title: "Purchased", icon: "shopping-cart", color: "#607D8B" },
+</span><span class="token inserted-sign inserted">+ { key: "purchased", title: "Purchased", focusedIcon: "shopping-cart" },
+</span>]</code></pre>
+<p>The <code>compact</code> prop was also introduced, working with both themes. It indicates whether tabs should be spread across the entire width, especially in a <i>horizontal</i> mode. </p>
+<pre><code class="language-js"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">BottomNavigation</span></span> <span class="token attr-name">compact</span> <span class="token punctuation">/&gt;</span></span></code></pre>
+<p>It's worth to mention that default value of prop <code>shifting</code> depends on the theme version:</p>
+<ul>
+<li><b>3</b> - it's <code>false</code>,</li>
+<li><b>2</b> - it's <code>true</code> when there are more than 3 tabs.</li>
+</ul>
+<p>On a final note, please be aware that <code>BottomNavigation</code> with theme version 3 doesn't have a shadow.</p>
+<h2 id="divider">
+          <a class="anchor" href="#divider">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Divider</h2>
+<p><code>Divider</code> component received two new props:</p>
+<ul>
+<li><code>bold</code> - divider is bolded,</li>
+<li><code>horizontalInset</code> - divider has horizontal insets on both sides.</li>
+</ul>
+<p>Additionally prop <code>inset</code> was renamed to <code>leftInset</code>.</p>
+<pre><code class="language-diff"><span class="token deleted-sign deleted">- &lt;Divider inset /&gt;
+</span><span class="token inserted-sign inserted">+ &lt;Divider leftInset /&gt;</span></code></pre>
+<h2 id="drawercollapseditem-navigation-rail">
+          <a class="anchor" href="#drawer-collapseditem-navigation-rail-">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Drawer.CollapsedItem <i>(Navigation rail)</i></h2>
+<p><code>Drawer.CollapsedItem</code> is a newly created side navigation component that can be used within <code>Drawer</code>, representing a destination in the form of an action item with an icon and optionally label.</p>
+<p>📍<i>Note: It's working only with theme version 3.</i></p>
+<pre><code class="language-js"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Drawer.Section</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Drawer.CollapsedItem</span></span>
+    <span class="token attr-name">icon</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>inbox<span class="token punctuation">"</span></span>
+    <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Inbox<span class="token punctuation">"</span></span>
+  <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Drawer.CollapsedItem</span></span>
+    <span class="token attr-name">icon</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>star<span class="token punctuation">"</span></span>
+    <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Starred<span class="token punctuation">"</span></span>
+  <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Drawer.Section</span></span><span class="token punctuation">&gt;</span></span></code></pre>
+<h2 id="menuitem">
+          <a class="anchor" href="#menu-item">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Menu.Item</h2>
+<p><code>Menu.Item</code> received two new props:</p>
+<ul>
+<li><code>dense</code> sets smaller item height for more condensed layout,</li>
+<li><code>trailingIcon</code> which handles displaying an icon at the end of the item row. </li>
+</ul>
+<pre><code class="language-js"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Menu.Item</span></span> <span class="token attr-name">dense</span> <span class="token attr-name">trailingIcon</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>chevron-up<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span></code></pre>
+<p>At the same time, by analogy to the second new prop, the <code>icon</code> prop was renamed to <code>leadingIcon</code>.</p>
+<pre><code class="language-diff"><span class="token deleted-sign deleted">- &lt;Menu.Item icon="redo" onPress={() =&gt; {}} title="Redo" /&gt;
+</span><span class="token inserted-sign inserted">+ &lt;Menu.Item leadingIcon="redo" onPress={() =&gt; {}} title="Redo" /&gt;</span></code></pre>
+<h2 id="floating-action-buttons">
+          <a class="anchor" href="#floating-action-buttons">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Floating Action Buttons</h2>
+<p><code>FAB</code>, <code>AnimatedFAB</code> and <code>FAB.Group</code> in the latest version can be used with four variants and two modes, thanks to two new props:</p>
+<ul>
+<li><code>variant</code> defines color mappings variant for combinations of container and icon colors. Can be one of: <b>primary</b> <i>(default)</i>, <b>secondary</b>, <b>tertiary</b> or <b>surface</b>.</li>
+</ul>
+<pre><code class="language-js"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">FAB</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>tertiary<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span></code></pre>
+<ul>
+<li><code>mode</code> specifies whether a button should be <b>flat</b> or <b>elevated</b>:<ul>
+<li><code>flat</code> - button without a shadow,</li>
+<li><code>elevated</code> - button with a shadow.</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-js"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">FAB</span></span> <span class="token attr-name">mode</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>flat<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span></code></pre>
+<h3 id="fab">
+          <a class="anchor" href="#fab">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        FAB</h3>
+<p>Additionaly <code>FAB</code> may be applied in one of three available sizes, thanks to new prop <code>size</code>: </p>
+<ul>
+<li><code>small</code> - FAB with small height (40),</li>
+<li><code>medium</code> - Appbar with default medium height (56),</li>
+<li><code>large</code> - Appbar with large height (96).</li>
+</ul>
+<pre><code class="language-js"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">FAB</span></span> <span class="token attr-name">size</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>large<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span></code></pre>
+<p>Accordingly to introducing <code>size="small"</code>, prop <code>small</code> was deprecated.</p>
+<pre><code class="language-diff"><span class="token deleted-sign deleted">- &lt;FAB small /&gt;
+</span><span class="token inserted-sign inserted">+ &lt;FAB size="small" /&gt;</span></code></pre>
+<h3 id="fabgroup">
+          <a class="anchor" href="#fab-group">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        FAB.Group</h3>
+<p>There is also deprecation in one of the <code>actions</code> properties, namely <code>small</code> prop is deprecated and replaced in favour of the default <code>size="small"</code>.</p>
+<pre><code class="language-diff"><span class="token deleted-sign deleted">- &lt;FAB.Group actions={[{ icon: "plus", small }]} /&gt;
+</span><span class="token inserted-sign inserted">+ &lt;FAB.Group actions={[{ icon: "plus" }]}&gt;</span></code></pre>
+<h2 id="appbar-top-app-bar">
+          <a class="anchor" href="#appbar-top-app-bar-">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Appbar <i>(Top app bar)</i></h2>
+<p><code>Appbar</code> and <code>Appbar.Header</code> in the latest version can be used in four various modes due to new prop <code>mode</code>:</p>
+<ul>
+<li><code>small</code> - Appbar with default height <i>(56) (default)</i>,</li>
+<li><code>medium</code> - Appbar with medium height <i>(112)</i>,</li>
+<li><code>large</code> - Appbar with large height <i>(152)</i>,</li>
+<li><code>center-aligned</code> - Appbar with default height <i>(56)</i> and center-aligned title.</li>
+</ul>
+<pre><code class="language-js"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Appbar</span></span> <span class="token attr-name">mode</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>center-aligned<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+  /* ... */
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Appbar</span></span><span class="token punctuation">&gt;</span></span></code></pre>
+<p>It's worth noting that by default the theme version 3 <code>Appbar</code> and <code>Appbar.Header</code> don't have a shadow. However, it can be added by passing prop <code>elevated</code> into the component:</p>
+<pre><code class="language-js"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Appbar</span></span> <span class="token attr-name">elevated</span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+  /* ... */
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Appbar</span></span><span class="token punctuation">&gt;</span></span></code></pre>
+<h3 id="appbaraction">
+          <a class="anchor" href="#appbar-action">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Appbar.Action</h3>
+<p><code>Appbar.Action</code> received new prop <code>isLeading</code>, which defines whether it's the <b>leading</b> button and should be placed at the beginning of the <code>Appbar</code>.</p>
+<pre><code class="language-js"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Appbar.Action</span></span> <span class="token attr-name">isLeading</span> <span class="token attr-name">icon</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>magnify<span class="token punctuation">"</span></span> <span class="token attr-name">onPress</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">}</span></span> <span class="token punctuation">/&gt;</span></span></code></pre>
+<h3 id="appbarcontent">
+          <a class="anchor" href="#appbar-content">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Appbar.Content</h3>
+<p>New design guidelines indicate there is no <b>subtitle</b> in <code>Appbar.Content</code>, that's why there are two deprecations and the following props won't be supported anymore: <code>subtitle</code> and <code>subtitleStyle</code>.</p>
+<pre><code class="language-diff"><span class="token deleted-sign deleted">- &lt;Appbar.Content title="Title" subtitle="Subtitle" styles={styles.subtitle} /&gt;
+</span><span class="token inserted-sign inserted">+ &lt;Appbar.Content title="Title" /&gt;</span></code></pre>
+<h2 id="chip">
+          <a class="anchor" href="#chip">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Chip</h2>
+<p>To properly compose <code>Chip</code> component and adjust into required type, there are three new props that will come in handy:</p>
+<ul>
+<li><code>compact</code> - sets smaller horizontal paddings around the label, useful for <code>Chip</code> containing only the label,</li>
+<li><code>elevated</code> - indicating whether <code>Chip</code> should be elevated,</li>
+<li><code>showSelectedOverlay</code> - defining whether to display an overlay on a selected button.</li>
+</ul>
+<pre><code class="language-js"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Chip</span></span> <span class="token attr-name">compact</span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Compact Chip</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Chip</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Chip</span></span> <span class="token attr-name">icon</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>camera<span class="token punctuation">"</span></span> <span class="token attr-name">elevated</span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Elevated Chip</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Chip</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Chip</span></span> <span class="token attr-name">icon</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>camera<span class="token punctuation">"</span></span> <span class="token attr-name">selected</span> <span class="token attr-name">showSelectedOverlay</span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Chip with selected overlay</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Chip</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span></span><span class="token punctuation">&gt;</span></span></code></pre>
+<h2 id="button">
+          <a class="anchor" href="#button">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Button</h2>
+<p><code>Button</code>'s property <code>mode</code> has been expanded with two additional options:</p>
+<ul>
+<li><code>elevated</code> - button with a background color and elevation, used when absolutely necessary e.g. button requires visual separation from a patterned background,</li>
+<li><code>container-tonal</code> - button with a secondary background color, an alternative middle ground between contained and outlined buttons.</li>
+</ul>
+<pre><code class="language-js"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Button</span></span> <span class="token attr-name">icon</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>camera<span class="token punctuation">"</span></span> <span class="token attr-name">mode</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>elevated<span class="token punctuation">"</span></span> <span class="token attr-name">onPress</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>onPress<span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    Elevated
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Button</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Button</span></span> <span class="token attr-name">icon</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>camera<span class="token punctuation">"</span></span> <span class="token attr-name">mode</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>container-tonal<span class="token punctuation">"</span></span> <span class="token attr-name">onPress</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>onPress<span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    Container tonal
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Button</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span></span><span class="token punctuation">&gt;</span></span></code></pre>
+<p>The property <code>color</code> is deprecated, but in its place two new props called <code>buttonColor</code> and <code>textColor</code> are introduced:</p>
+<ul>
+<li><code>buttonColor</code> - custom button's background color,</li>
+<li><code>textColor</code> - custom button's text color.</li>
+</ul>
+<pre><code class="language-diff"><span class="token deleted-sign deleted">- &lt;Button mode="text" color="red" onPress={onPress}&gt;Custom text color&lt;/Button&gt;
+</span><span class="token inserted-sign inserted">+ &lt;Button mode="text" textColor="red" onPress={onPress}&gt;Custom text color&lt;/Button&gt;</span></code></pre>
+<pre><code class="language-diff"><span class="token deleted-sign deleted">- &lt;Button mode="contained" color="red" onPress={onPress}&gt;Custom text color&lt;/Button&gt;
+</span><span class="token inserted-sign inserted">+ &lt;Button mode="contained" buttonColor="red" onPress={onPress}&gt;Custom background color&lt;/Button&gt;</span></code></pre>
+<p>Please be aware that along with theme version 3, by default text in the <code>Button</code> component isn't uppercased and <code>contained</code> button doesn't have any shadow <i>(use then <code>elevated</code>)</i>.</p>
+<h2 id="iconbutton">
+          <a class="anchor" href="#iconbutton">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        IconButton</h2>
+<p><code>IconButton</code> received two new props:</p>
+<ul>
+<li><code>selected</code> sets alternative combination of icon and container color,</li>
+</ul>
+<pre><code class="language-js"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">IconButton</span></span> <span class="token attr-name">selected</span><span class="token punctuation">&gt;</span></span></code></pre>
+<ul>
+<li><code>containerColor</code> custom background color of the icon container. </li>
+</ul>
+<pre><code class="language-js"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">IconButton</span></span> <span class="token attr-name">containerColor</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>red<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span></code></pre>
+<p>At the same time, the <code>color</code> prop was renamed to <code>iconColor</code>.</p>
+<pre><code class="language-diff"><span class="token deleted-sign deleted">- &lt;IconButton color="red" /&gt;
+</span><span class="token inserted-sign inserted">+ &lt;IconButton iconColor="red" /&gt;</span></code></pre>
+<h2 id="dialogicon">
+          <a class="anchor" href="#dialog-icon">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Dialog.Icon</h2>
+<p><code>Dialog.Icon</code> is another freshly added component presenting an icon within a <code>Dialog</code>, placed at the top of the content.</p>
+<p>📍<i>Note: It's working only with theme version 3.</i></p>
+<pre><code class="language-js"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Portal</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Dialog</span></span> <span class="token attr-name">visible</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>visible<span class="token punctuation">}</span></span> <span class="token attr-name">onDismiss</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>hideDialog<span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Dialog.Icon</span></span> <span class="token attr-name">icon</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>alert<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Dialog</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Portal</span></span><span class="token punctuation">&gt;</span></span></code></pre>
+<h2 id="card">
+          <a class="anchor" href="#card">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Card</h2>
+<p>The <code>Card</code> component's property <code>mode</code> has been expanded with one additional option called <code>contained</code>, which applies to the card's specified background color without any elevation and border.</p>
+<pre><code class="language-js"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Card</span></span> <span class="token attr-name">mode</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>contained<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span></code></pre>
+<h2 id="cardtitle">
+          <a class="anchor" href="#card-title">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Card.Title</h2>
+<p>Since there is no one right way to make a card, there is also no one right way for specifying a title and subtitle variant. Therefore two new props come in handy:</p>
+<ul>
+<li><code>titleVariant</code> - title text variant defines appropriate text styles for type role and its size.</li>
+<li><code>subtitleVariant</code> - subtitle text variant defines appropriate text styles for type role and its size.</li>
+</ul>
+<pre><code class="language-js"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Card.Title</span></span>
+  <span class="token attr-name">titleVariant</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>headlineMedium<span class="token punctuation">"</span></span>
+  <span class="token attr-name">subtitleVariant</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>bodyLarge<span class="token punctuation">"</span></span>
+<span class="token punctuation">/&gt;</span></span></code></pre>
+<h2 id="radiobuttonitem">
+          <a class="anchor" href="#radiobutton-item">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        RadioButton.Item</h2>
+<p><code>RadioButton.Item</code> has been expanded with the prop called <code>labelVariant</code>, which defines appropriate text styles for type role and its size.</p>
+<pre><code class="language-js"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">RadioButton.Item</span></span> 
+  <span class="token attr-name">labelVariant</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>titleLarge<span class="token punctuation">"</span></span>
+<span class="token punctuation">&gt;</span></span></code></pre>
+<h2 id="checkboxitem">
+          <a class="anchor" href="#checkbox-item">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Checkbox.Item</h2>
+<p><code>Checkbox.Item</code> similarly to <code>RadioButton.Item</code> has been expanded with the prop called <code>labelVariant</code>, which defines appropriate text styles for type role and its size.</p>
+<pre><code class="language-js"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Checkbox.Item</span></span> 
+  <span class="token attr-name">labelVariant</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>titleLarge<span class="token punctuation">"</span></span>
+<span class="token punctuation">&gt;</span></span></code></pre>
+<p><i>With this, that’s a wrap.</i></p>
+<p>The update wouldn't happen without a group of great React Native experts I'm happy to work with. 
+From this place I would like to thank:</p>
+<ul>
+<li><a href="https://github.com/Drakeoon">Daniel Szczepanik</a> for his commitment, effort and collaborative work on adjusting components,</li>
+<li><a href="https://github.com/OlimpiaZurek">Olimpia Zurek</a> for her contribution and help,</li>
+<li><a href="https://github.com/p-syche">Aleksandra Desmurs-Linczewska</a>, <a href="https://github.com/jaworek">Jan Jaworek</a> and <a href="https://github.com/kwereszczynski">Kewin Wereszczyński</a> for checking and testing changes as well as providing valuable feedback,</li>
+</ul>
+<p>and, <i>last but not least</i>, <a href="https://github.com/satya164">Satya Sahoo</a> for his mentoring during the process.</p>
+</div></div></main></div></div>
+    <style type="text/css">
+      :root {
+        --theme-primary-color: #397AF9;
+      }
+    </style>
+  
+    <script>
+      window.__INITIAL_PATH__ = 'introducing-v5-with-material-you';
+    </script>
+  <script src="app.bundle.js"></script><script src="scripts/snack.js"></script><script src="scripts/version.js"></script></body></html>

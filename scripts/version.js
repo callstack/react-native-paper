@@ -136,6 +136,11 @@ function appendVersionBanner() {
               '3.0'
             )}" role="menuitem">v3.x</a>
           </li>
+          <li class="list-item">
+            <a class="link" href="${createUrlForVersion(
+              '4.0'
+            )}" role="menuitem">v4.x</a>
+          </li>
         </ul>
       </div>
     </div>
