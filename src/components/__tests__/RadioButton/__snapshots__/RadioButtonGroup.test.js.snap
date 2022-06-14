@@ -53,7 +53,7 @@ exports[`RadioButtonGroup renders properly 1`] = `
               "backgroundColor": "transparent",
             },
             Object {
-              "color": "#03dac4",
+              "color": "rgba(103, 80, 164, 1)",
               "fontSize": 24,
             },
           ]

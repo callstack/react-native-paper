@@ -70,7 +70,7 @@ exports[`renders hidden progress bar 1`] = `
   <View
     style={
       Object {
-        "backgroundColor": "rgba(98, 0, 238, 0.38)",
+        "backgroundColor": "rgba(103, 80, 164, 0.38)",
         "height": 4,
         "opacity": 0,
         "overflow": "hidden",
@@ -80,7 +80,7 @@ exports[`renders hidden progress bar 1`] = `
     <View
       style={
         Object {
-          "backgroundColor": "#6200ee",
+          "backgroundColor": "rgba(103, 80, 164, 1)",
           "flex": 1,
           "transform": Array [
             Object {
@@ -113,7 +113,7 @@ exports[`renders indeterminate progress bar 1`] = `
   <View
     style={
       Object {
-        "backgroundColor": "rgba(98, 0, 238, 0.38)",
+        "backgroundColor": "rgba(103, 80, 164, 0.38)",
         "height": 4,
         "opacity": 0,
         "overflow": "hidden",
@@ -123,7 +123,7 @@ exports[`renders indeterminate progress bar 1`] = `
     <View
       style={
         Object {
-          "backgroundColor": "#6200ee",
+          "backgroundColor": "rgba(103, 80, 164, 1)",
           "flex": 1,
           "transform": Array [
             Object {
@@ -162,7 +162,7 @@ exports[`renders progress bar with specific progress 1`] = `
   <View
     style={
       Object {
-        "backgroundColor": "rgba(98, 0, 238, 0.38)",
+        "backgroundColor": "rgba(103, 80, 164, 0.38)",
         "height": 4,
         "opacity": 0,
         "overflow": "hidden",
@@ -172,7 +172,7 @@ exports[`renders progress bar with specific progress 1`] = `
     <View
       style={
         Object {
-          "backgroundColor": "#6200ee",
+          "backgroundColor": "rgba(103, 80, 164, 1)",
           "flex": 1,
           "transform": Array [
             Object {

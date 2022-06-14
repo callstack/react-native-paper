@@ -146,7 +146,7 @@ it('correctly applies error state Outline TextInput', () => {
 
   const outline = getByTestId('text-input-outline');
   expect(outline.props.style).toEqual(
-    expect.arrayContaining([expect.objectContaining({ borderWidth: 1 })])
+    expect.arrayContaining([expect.objectContaining({ borderWidth: 2 })])
   );
 });
 
@@ -163,7 +163,7 @@ it('correctly applies focused state Outline TextInput', () => {
 
   const outline = getByTestId('text-input-outline');
   expect(outline.props.style).toEqual(
-    expect.arrayContaining([expect.objectContaining({ borderWidth: 1 })])
+    expect.arrayContaining([expect.objectContaining({ borderWidth: 2 })])
   );
 
   fireEvent(getByTestId('text-input-outlined'), 'focus');

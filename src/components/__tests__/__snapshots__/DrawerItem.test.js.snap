@@ -30,9 +30,15 @@ exports[`renders DrawerItem with icon 1`] = `
           },
           Object {
             "backgroundColor": "transparent",
-            "borderRadius": 4,
+            "borderRadius": 28,
           },
-          false,
+          Object {
+            "height": 56,
+            "justifyContent": "center",
+            "marginLeft": 12,
+            "marginRight": 12,
+            "marginVertical": 0,
+          },
           undefined,
         ],
       ]
@@ -46,7 +52,11 @@ exports[`renders DrawerItem with icon 1`] = `
             "flexDirection": "row",
             "padding": 8,
           },
-          false,
+          Object {
+            "marginLeft": 16,
+            "marginRight": 24,
+            "padding": 0,
+          },
         ]
       }
     >
@@ -70,7 +80,7 @@ exports[`renders DrawerItem with icon 1`] = `
                 "backgroundColor": "transparent",
               },
               Object {
-                "color": "rgba(0, 0, 0, 0.68)",
+                "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
             ]
@@ -84,22 +94,30 @@ exports[`renders DrawerItem with icon 1`] = `
           style={
             Array [
               Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
+                "color": "rgba(28, 27, 31, 1)",
+                "fontSize": 14,
+                "fontWeight": "500",
+                "letterSpacing": 0.1,
+                "lineHeight": 20,
               },
               Object {
                 "textAlign": "left",
+              },
+              Object {
+                "writingDirection": "ltr",
               },
               Array [
                 Object {
                   "marginRight": 32,
                 },
                 Object {
-                  "color": "rgba(0, 0, 0, 0.68)",
+                  "color": "rgba(73, 69, 79, 1)",
                   "fontFamily": "System",
+                  "fontSize": 14,
                   "fontWeight": "500",
-                  "marginLeft": 32,
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                  "marginLeft": 12,
                 },
               ],
             ]
@@ -142,10 +160,16 @@ exports[`renders active DrawerItem 1`] = `
             "marginVertical": 4,
           },
           Object {
-            "backgroundColor": "rgba(98, 0, 238, 0.12)",
-            "borderRadius": 4,
+            "backgroundColor": "rgba(232, 222, 248, 1)",
+            "borderRadius": 28,
           },
-          false,
+          Object {
+            "height": 56,
+            "justifyContent": "center",
+            "marginLeft": 12,
+            "marginRight": 12,
+            "marginVertical": 0,
+          },
           undefined,
         ],
       ]
@@ -159,7 +183,11 @@ exports[`renders active DrawerItem 1`] = `
             "flexDirection": "row",
             "padding": 8,
           },
-          false,
+          Object {
+            "marginLeft": 16,
+            "marginRight": 24,
+            "padding": 0,
+          },
         ]
       }
     >
@@ -183,7 +211,7 @@ exports[`renders active DrawerItem 1`] = `
                 "backgroundColor": "transparent",
               },
               Object {
-                "color": "#6200ee",
+                "color": "rgba(29, 25, 43, 1)",
                 "fontSize": 24,
               },
             ]
@@ -197,22 +225,30 @@ exports[`renders active DrawerItem 1`] = `
           style={
             Array [
               Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
+                "color": "rgba(28, 27, 31, 1)",
+                "fontSize": 14,
+                "fontWeight": "500",
+                "letterSpacing": 0.1,
+                "lineHeight": 20,
               },
               Object {
                 "textAlign": "left",
+              },
+              Object {
+                "writingDirection": "ltr",
               },
               Array [
                 Object {
                   "marginRight": 32,
                 },
                 Object {
-                  "color": "#6200ee",
+                  "color": "rgba(29, 25, 43, 1)",
                   "fontFamily": "System",
+                  "fontSize": 14,
                   "fontWeight": "500",
-                  "marginLeft": 32,
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                  "marginLeft": 12,
                 },
               ],
             ]
@@ -256,9 +292,15 @@ exports[`renders basic DrawerItem 1`] = `
           },
           Object {
             "backgroundColor": "transparent",
-            "borderRadius": 4,
+            "borderRadius": 28,
           },
-          false,
+          Object {
+            "height": 56,
+            "justifyContent": "center",
+            "marginLeft": 12,
+            "marginRight": 12,
+            "marginVertical": 0,
+          },
           undefined,
         ],
       ]
@@ -272,7 +314,11 @@ exports[`renders basic DrawerItem 1`] = `
             "flexDirection": "row",
             "padding": 8,
           },
-          false,
+          Object {
+            "marginLeft": 16,
+            "marginRight": 24,
+            "padding": 0,
+          },
         ]
       }
     >
@@ -291,21 +337,29 @@ exports[`renders basic DrawerItem 1`] = `
           style={
             Array [
               Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
+                "color": "rgba(28, 27, 31, 1)",
+                "fontSize": 14,
+                "fontWeight": "500",
+                "letterSpacing": 0.1,
+                "lineHeight": 20,
               },
               Object {
                 "textAlign": "left",
+              },
+              Object {
+                "writingDirection": "ltr",
               },
               Array [
                 Object {
                   "marginRight": 32,
                 },
                 Object {
-                  "color": "rgba(0, 0, 0, 0.68)",
+                  "color": "rgba(73, 69, 79, 1)",
                   "fontFamily": "System",
+                  "fontSize": 14,
                   "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
                   "marginLeft": 0,
                 },
               ],

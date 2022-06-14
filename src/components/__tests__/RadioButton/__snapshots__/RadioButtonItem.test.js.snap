@@ -90,7 +90,7 @@ exports[`can render leading radio button control 1`] = `
                 "backgroundColor": "transparent",
               },
               Object {
-                "color": "#03dac4",
+                "color": "rgba(103, 80, 164, 1)",
                 "fontSize": 24,
               },
             ]
@@ -104,23 +104,26 @@ exports[`can render leading radio button control 1`] = `
       style={
         Array [
           Object {
-            "color": "#000000",
-            "fontFamily": "System",
+            "color": "rgba(28, 27, 31, 1)",
+            "fontSize": 16,
             "fontWeight": "400",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
           },
           Object {
             "textAlign": "left",
+          },
+          Object {
+            "writingDirection": "ltr",
           },
           Array [
             Object {
               "flexGrow": 1,
               "flexShrink": 1,
             },
+            false,
             Object {
-              "fontSize": 16,
-            },
-            Object {
-              "color": "#000000",
+              "color": "rgba(28, 27, 31, 1)",
               "textAlign": "right",
             },
             undefined,
@@ -179,23 +182,26 @@ exports[`can render the Android radio button on different platforms 1`] = `
       style={
         Array [
           Object {
-            "color": "#000000",
-            "fontFamily": "System",
+            "color": "rgba(28, 27, 31, 1)",
+            "fontSize": 16,
             "fontWeight": "400",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
           },
           Object {
             "textAlign": "left",
+          },
+          Object {
+            "writingDirection": "ltr",
           },
           Array [
             Object {
               "flexGrow": 1,
               "flexShrink": 1,
             },
+            false,
             Object {
-              "fontSize": 16,
-            },
-            Object {
-              "color": "#000000",
+              "color": "rgba(28, 27, 31, 1)",
               "textAlign": "left",
             },
             undefined,
@@ -237,7 +243,7 @@ exports[`can render the Android radio button on different platforms 1`] = `
       <View
         style={
           Object {
-            "borderColor": "rgba(0, 0, 0, 0.54)",
+            "borderColor": "rgba(73, 69, 79, 1)",
             "borderRadius": 10,
             "borderWidth": 2,
             "height": 20,
@@ -296,23 +302,27 @@ exports[`can render the iOS radio button on different platforms 1`] = `
       style={
         Array [
           Object {
-            "color": "#000000",
+            "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
+            "fontSize": 16,
             "fontWeight": "400",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
           },
           Object {
             "textAlign": "left",
+          },
+          Object {
+            "writingDirection": "ltr",
           },
           Array [
             Object {
               "flexGrow": 1,
               "flexShrink": 1,
             },
+            false,
             Object {
-              "fontSize": 16,
-            },
-            Object {
-              "color": "#000000",
+              "color": "rgba(28, 27, 31, 1)",
               "textAlign": "left",
             },
             undefined,
@@ -371,7 +381,7 @@ exports[`can render the iOS radio button on different platforms 1`] = `
                 "backgroundColor": "transparent",
               },
               Object {
-                "color": "#03dac4",
+                "color": "rgba(103, 80, 164, 1)",
                 "fontSize": 24,
               },
             ]
@@ -430,23 +440,26 @@ exports[`renders unchecked 1`] = `
       style={
         Array [
           Object {
-            "color": "#000000",
-            "fontFamily": "System",
+            "color": "rgba(28, 27, 31, 1)",
+            "fontSize": 16,
             "fontWeight": "400",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
           },
           Object {
             "textAlign": "left",
+          },
+          Object {
+            "writingDirection": "ltr",
           },
           Array [
             Object {
               "flexGrow": 1,
               "flexShrink": 1,
             },
+            false,
             Object {
-              "fontSize": 16,
-            },
-            Object {
-              "color": "#000000",
+              "color": "rgba(28, 27, 31, 1)",
               "textAlign": "left",
             },
             undefined,
@@ -505,7 +518,7 @@ exports[`renders unchecked 1`] = `
                 "backgroundColor": "transparent",
               },
               Object {
-                "color": "#03dac4",
+                "color": "rgba(103, 80, 164, 1)",
                 "fontSize": 24,
               },
             ]
