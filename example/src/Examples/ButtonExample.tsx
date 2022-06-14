@@ -292,6 +292,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     paddingHorizontal: 12,
+    alignItems: 'center',
   },
   button: {
     margin: 4,

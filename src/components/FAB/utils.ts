@@ -326,3 +326,51 @@ export const getFABGroupColors = ({ theme }: { theme: Theme }) => {
     stackedFABBackgroundColor: getStackedFABBackgroundColor({ theme }),
   };
 };
+
+const standardSize = {
+  height: 56,
+  width: 56,
+  borderRadius: 28,
+};
+const smallSize = {
+  height: 40,
+  width: 40,
+  borderRadius: 28,
+};
+const v3SmallSize = {
+  height: 40,
+  width: 40,
+};
+const v3MediumSize = {
+  height: 56,
+  width: 56,
+};
+const v3LargeSize = {
+  height: 96,
+  width: 96,
+};
+
+export const getFabStyle = ({
+  size,
+  theme,
+}: {
+  size: 'small' | 'medium' | 'large';
+  theme: Theme;
+}) => {
+  const { isV3, roundness } = theme;
+  if (isV3) {
+    switch (size) {
+      case 'small':
+        return { ...v3SmallSize, borderRadius: 3 * roundness };
+      case 'medium':
+        return { ...v3MediumSize, borderRadius: 4 * roundness };
+      case 'large':
+        return { ...v3LargeSize, borderRadius: 7 * roundness };
+    }
+  }
+
+  if (size === 'small') {
+    return smallSize;
+  }
+  return standardSize;
+};
