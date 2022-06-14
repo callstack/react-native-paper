@@ -163,11 +163,14 @@ exports[`render visible banner, with custom theme 1`] = `
                     },
                     Array [
                       Object {
-                        "letterSpacing": 1,
                         "marginHorizontal": 16,
                         "marginVertical": 9,
                         "textAlign": "center",
                       },
+                      Object {
+                        "letterSpacing": 1,
+                      },
+                      false,
                       Object {
                         "marginHorizontal": 8,
                       },
@@ -176,10 +179,6 @@ exports[`render visible banner, with custom theme 1`] = `
                       },
                       Object {
                         "color": "#043",
-                        "fontFamily": "System",
-                        "fontWeight": "500",
-                      },
-                      Object {
                         "fontFamily": "System",
                         "fontWeight": "500",
                       },
@@ -468,11 +467,14 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                     },
                     Array [
                       Object {
-                        "letterSpacing": 1,
                         "marginHorizontal": 16,
                         "marginVertical": 9,
                         "textAlign": "center",
                       },
+                      Object {
+                        "letterSpacing": 1,
+                      },
+                      false,
                       Object {
                         "marginHorizontal": 8,
                       },
@@ -481,10 +483,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                       },
                       Object {
                         "color": "#6200ee",
-                        "fontFamily": "System",
-                        "fontWeight": "500",
-                      },
-                      Object {
                         "fontFamily": "System",
                         "fontWeight": "500",
                       },
@@ -667,11 +665,14 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                     },
                     Array [
                       Object {
-                        "letterSpacing": 1,
                         "marginHorizontal": 16,
                         "marginVertical": 9,
                         "textAlign": "center",
                       },
+                      Object {
+                        "letterSpacing": 1,
+                      },
+                      false,
                       Object {
                         "marginHorizontal": 8,
                       },
@@ -680,10 +681,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                       },
                       Object {
                         "color": "#6200ee",
-                        "fontFamily": "System",
-                        "fontWeight": "500",
-                      },
-                      Object {
                         "fontFamily": "System",
                         "fontWeight": "500",
                       },
@@ -772,11 +769,14 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                     },
                     Array [
                       Object {
-                        "letterSpacing": 1,
                         "marginHorizontal": 16,
                         "marginVertical": 9,
                         "textAlign": "center",
                       },
+                      Object {
+                        "letterSpacing": 1,
+                      },
+                      false,
                       Object {
                         "marginHorizontal": 8,
                       },
@@ -785,10 +785,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                       },
                       Object {
                         "color": "#6200ee",
-                        "fontFamily": "System",
-                        "fontWeight": "500",
-                      },
-                      Object {
                         "fontFamily": "System",
                         "fontWeight": "500",
                       },

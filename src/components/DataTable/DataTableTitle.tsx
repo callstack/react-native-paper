@@ -13,6 +13,7 @@ import color from 'color';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
+import type { Theme } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
   /**
@@ -43,7 +44,7 @@ type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 /**
@@ -102,7 +103,9 @@ const DataTableTitle = ({
     }).start();
   }, [sortDirection, spinAnim]);
 
-  const textColor = color(theme.colors.text).alpha(0.6).rgb().string();
+  const textColor = theme.isV3 ? theme.colors.onSurface : theme?.colors?.text;
+
+  const alphaTextColor = color(textColor).alpha(0.6).rgb().string();
 
   const spin = spinAnim.interpolate({
     inputRange: [0, 1],
@@ -114,7 +117,7 @@ const DataTableTitle = ({
       <MaterialCommunityIcon
         name="arrow-up"
         size={16}
-        color={theme.colors.text}
+        color={textColor}
         direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
       />
     </Animated.View>
@@ -138,7 +141,7 @@ const DataTableTitle = ({
                   : styles.rightText
                 : styles.centerText
               : {},
-            sortDirection ? styles.sorted : { color: textColor },
+            sortDirection ? styles.sorted : { color: alphaTextColor },
             textStyle,
           ]}
           numberOfLines={numberOfLines}

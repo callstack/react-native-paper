@@ -4,8 +4,8 @@ import renderer from 'react-test-renderer';
 import { Text, View } from 'react-native';
 import ListItem from '../List/ListItem.tsx';
 import ListIcon from '../List/ListIcon.tsx';
-import Chip from '../Chip';
-import { red500 } from '../../styles/colors';
+import Chip from '../Chip/Chip';
+import { red500 } from '../../styles/themes/v2/colors';
 
 const styles = StyleSheet.create({
   title: {

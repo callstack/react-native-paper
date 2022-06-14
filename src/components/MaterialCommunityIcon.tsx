@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { StyleSheet, Text, Platform, TextProps, ViewProps } from 'react-native';
+import { black } from '../styles/themes/v2/colors';
 
 export type IconProps = {
   name: string;
-  color: string;
+  color?: string;
   size: number;
   direction: 'rtl' | 'ltr';
   allowFontScaling?: boolean;
@@ -73,7 +74,7 @@ export const accessibilityProps =
 
 const defaultIcon = ({
   name,
-  color,
+  color = black,
   size,
   direction,
   allowFontScaling,

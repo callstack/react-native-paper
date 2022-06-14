@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Animated, View, StyleSheet } from 'react-native';
-import color from 'color';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
-import type { $RemoveChildren } from '../../types';
+import type { $RemoveChildren, Theme } from '../../types';
+import { getAndroidSelectionControlColor } from '../Checkbox/utils';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -35,7 +35,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * testID to be used on tests.
    */
@@ -107,16 +107,6 @@ const RadioButtonAndroid = ({
     }
   }, [status, borderAnim, radioAnim, scale]);
 
-  const checkedColor = rest.color || theme.colors.accent;
-  const uncheckedColor =
-    rest.uncheckedColor ||
-    color(theme.colors.text)
-      .alpha(theme.dark ? 0.7 : 0.54)
-      .rgb()
-      .string();
-
-  let rippleColor: string, radioColor: string;
-
   return (
     <RadioButtonContext.Consumer>
       {(context?: RadioButtonContextType) => {
@@ -127,13 +117,14 @@ const RadioButtonAndroid = ({
             value,
           }) === 'checked';
 
-        if (disabled) {
-          rippleColor = color(theme.colors.text).alpha(0.16).rgb().string();
-          radioColor = theme.colors.disabled;
-        } else {
-          rippleColor = color(checkedColor).fade(0.32).rgb().string();
-          radioColor = checked ? checkedColor : uncheckedColor;
-        }
+        const { rippleColor, selectionControlColor } =
+          getAndroidSelectionControlColor({
+            theme,
+            disabled,
+            checked,
+            customColor: rest.color,
+            customUncheckedColor: rest.uncheckedColor,
+          });
 
         return (
           <TouchableRipple
@@ -151,11 +142,6 @@ const RadioButtonAndroid = ({
                     });
                   }
             }
-            // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-            accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
-            accessibilityComponentType={
-              checked ? 'radiobutton_checked' : 'radiobutton_unchecked'
-            }
             accessibilityRole="radio"
             accessibilityState={{ disabled, checked }}
             accessibilityLiveRegion="polite"
@@ -166,7 +152,7 @@ const RadioButtonAndroid = ({
               style={[
                 styles.radio,
                 {
-                  borderColor: radioColor,
+                  borderColor: selectionControlColor,
                   borderWidth: borderAnim,
                 },
               ]}
@@ -177,7 +163,7 @@ const RadioButtonAndroid = ({
                     style={[
                       styles.dot,
                       {
-                        backgroundColor: radioColor,
+                        backgroundColor: selectionControlColor,
                         transform: [{ scale: radioAnim }],
                       },
                     ]}

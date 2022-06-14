@@ -3,6 +3,7 @@ import { Animated, StyleSheet, View } from 'react-native';
 import Icon, { isValidIcon, IconSource, isEqualIcon } from './Icon';
 
 import { withTheme } from '../core/theming';
+import type { Theme } from '../types';
 
 type Props = {
   /**
@@ -20,7 +21,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 const CrossFadeIcon = ({ color, size, source, theme }: Props) => {

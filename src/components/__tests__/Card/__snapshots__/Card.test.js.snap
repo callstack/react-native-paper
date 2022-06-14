@@ -5,13 +5,29 @@ exports[`Card renders an outlined card 1`] = `
   style={
     Object {
       "backgroundColor": "#ffffff",
-      "borderColor": "rgba(0, 0, 0, 0.12)",
       "borderRadius": 4,
-      "borderWidth": 1,
       "elevation": 0,
     }
   }
 >
+  <View
+    pointerEvents="none"
+    style={
+      Array [
+        Object {
+          "borderColor": "rgba(0, 0, 0, 0.12)",
+          "borderRadius": 4,
+        },
+        Object {
+          "borderWidth": 1,
+          "height": "100%",
+          "position": "absolute",
+          "width": "100%",
+          "zIndex": 2,
+        },
+      ]
+    }
+  />
   <View
     accessible={true}
     focusable={false}

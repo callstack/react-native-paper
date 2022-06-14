@@ -140,6 +140,7 @@ exports[`renders list item with custom description 1`] = `
                       "paddingLeft": 4,
                       "position": "relative",
                     },
+                    false,
                     Object {
                       "paddingRight": 4,
                     },
@@ -153,6 +154,7 @@ exports[`renders list item with custom description 1`] = `
                         "alignSelf": "center",
                         "padding": 4,
                       },
+                      false,
                       null,
                     ]
                   }
@@ -201,6 +203,8 @@ exports[`renders list item with custom description 1`] = `
                           "color": "rgba(0, 0, 0, 0.87)",
                           "fontFamily": "System",
                           "fontWeight": "400",
+                        },
+                        Object {
                           "marginLeft": 4,
                           "marginRight": 8,
                         },

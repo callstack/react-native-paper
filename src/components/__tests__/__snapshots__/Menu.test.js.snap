@@ -78,21 +78,20 @@ exports[`renders menu with content styles 1`] = `
               },
               Array [
                 Object {
-                  "letterSpacing": 1,
                   "marginHorizontal": 16,
                   "marginVertical": 9,
                   "textAlign": "center",
                 },
+                Object {
+                  "letterSpacing": 1,
+                },
+                false,
                 undefined,
                 Object {
                   "textTransform": "uppercase",
                 },
                 Object {
                   "color": "#6200ee",
-                  "fontFamily": "System",
-                  "fontWeight": "500",
-                },
-                Object {
                   "fontFamily": "System",
                   "fontWeight": "500",
                 },
@@ -187,21 +186,20 @@ exports[`renders not visible menu 1`] = `
               },
               Array [
                 Object {
-                  "letterSpacing": 1,
                   "marginHorizontal": 16,
                   "marginVertical": 9,
                   "textAlign": "center",
                 },
+                Object {
+                  "letterSpacing": 1,
+                },
+                false,
                 undefined,
                 Object {
                   "textTransform": "uppercase",
                 },
                 Object {
                   "color": "#6200ee",
-                  "fontFamily": "System",
-                  "fontWeight": "500",
-                },
-                Object {
                   "fontFamily": "System",
                   "fontWeight": "500",
                 },
@@ -296,21 +294,20 @@ exports[`renders visible menu 1`] = `
               },
               Array [
                 Object {
-                  "letterSpacing": 1,
                   "marginHorizontal": 16,
                   "marginVertical": 9,
                   "textAlign": "center",
                 },
+                Object {
+                  "letterSpacing": 1,
+                },
+                false,
                 undefined,
                 Object {
                   "textTransform": "uppercase",
                 },
                 Object {
                   "color": "#6200ee",
-                  "fontFamily": "System",
-                  "fontWeight": "500",
-                },
-                Object {
                   "fontFamily": "System",
                   "fontWeight": "500",
                 },

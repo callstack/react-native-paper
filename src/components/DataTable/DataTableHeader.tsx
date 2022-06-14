@@ -1,8 +1,9 @@
 import * as React from 'react';
 import color from 'color';
 import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
-import { black, white } from '../../styles/colors';
+import { black, white } from '../../styles/themes/v2/colors';
 import { withTheme } from '../../core/theming';
+import type { Theme } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -13,7 +14,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 /**
@@ -50,10 +51,12 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  */
 
 const DataTableHeader = ({ children, style, theme, ...rest }: Props) => {
-  const borderBottomColor = color(theme.dark ? white : black)
-    .alpha(0.12)
-    .rgb()
-    .string();
+  const borderBottomColor = theme.isV3
+    ? theme.colors.surfaceVariant
+    : color(theme.dark ? white : black)
+        .alpha(0.12)
+        .rgb()
+        .string();
 
   return (
     <View {...rest} style={[styles.header, { borderBottomColor }, style]}>

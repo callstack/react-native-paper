@@ -3,11 +3,12 @@ import { StyleSheet, Platform, StyleProp, ViewStyle } from 'react-native';
 import Modal from '../Modal';
 import DialogContent from './DialogContent';
 import DialogActions from './DialogActions';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import DialogTitle, { DialogTitle as _DialogTitle } from './DialogTitle';
+import DialogIcon from './DialogIcon';
+import DialogTitle from './DialogTitle';
 import DialogScrollArea from './DialogScrollArea';
 import { withTheme } from '../../core/theming';
 import overlay from '../../styles/overlay';
+import type { Theme } from '../../types';
 
 type Props = {
   /**
@@ -30,7 +31,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 const DIALOG_ELEVATION: number = 24;
@@ -40,8 +41,8 @@ const DIALOG_ELEVATION: number = 24;
  * To render the `Dialog` above other components, you'll need to wrap it with the [`Portal`](portal.html) component.
  *
  *  <div class="screenshots">
- *   <img class="medium" src="screenshots/dialog-1.png" />
- *   <img class="medium" src="screenshots/dialog-2.png" />
+ *   <img class="small" src="screenshots/dialog-1.png" />
+ *   <img class="small" src="screenshots/dialog-2.png" />
  * </div>
  *
  * ## Usage
@@ -87,41 +88,60 @@ const Dialog = ({
   visible = false,
   style,
   theme,
-}: Props) => (
-  <Modal
-    dismissable={dismissable}
-    onDismiss={onDismiss}
-    visible={visible}
-    contentContainerStyle={[
-      {
-        borderRadius: theme.roundness,
-        backgroundColor:
-          theme.dark && theme.mode === 'adaptive'
-            ? overlay(DIALOG_ELEVATION, theme.colors.surface)
-            : theme.colors.surface,
-      },
-      styles.container,
-      style,
-    ]}
-  >
-    {React.Children.toArray(children)
-      .filter((child) => child != null && typeof child !== 'boolean')
-      .map((child, i) => {
-        if (
-          i === 0 &&
-          React.isValidElement(child) &&
-          child.type === DialogContent
-        ) {
-          // Dialog content is the first item, so we add a top padding
-          return React.cloneElement(child, {
-            style: [{ paddingTop: 24 }, child.props.style],
-          });
-        }
+}: Props) => {
+  const { isV3, dark, mode, colors, roundness } = theme;
 
-        return child;
-      })}
-  </Modal>
-);
+  const borderRadius = (isV3 ? 7 : 1) * roundness;
+
+  const backgroundColorV2 =
+    dark && mode === 'adaptive'
+      ? overlay(DIALOG_ELEVATION, colors?.surface)
+      : colors?.surface;
+  const backgroundColor = isV3
+    ? theme.colors.elevation.level3
+    : backgroundColorV2;
+
+  return (
+    <Modal
+      dismissable={dismissable}
+      onDismiss={onDismiss}
+      visible={visible}
+      contentContainerStyle={[
+        {
+          borderRadius,
+          backgroundColor,
+        },
+        styles.container,
+        style,
+      ]}
+    >
+      {React.Children.toArray(children)
+        .filter((child) => child != null && typeof child !== 'boolean')
+        .map((child, i) => {
+          if (isV3) {
+            if (i === 0 && React.isValidElement(child)) {
+              return React.cloneElement(child, {
+                style: [{ marginTop: 24 }, child.props.style],
+              });
+            }
+          }
+
+          if (
+            i === 0 &&
+            React.isValidElement(child) &&
+            child.type === DialogContent
+          ) {
+            // Dialog content is the first item, so we add a top padding
+            return React.cloneElement(child, {
+              style: [{ paddingTop: 24 }, child.props.style],
+            });
+          }
+
+          return child;
+        })}
+    </Modal>
+  );
+};
 
 // @component ./DialogContent.tsx
 Dialog.Content = DialogContent;
@@ -131,6 +151,8 @@ Dialog.Actions = DialogActions;
 Dialog.Title = DialogTitle;
 // @component ./DialogScrollArea.tsx
 Dialog.ScrollArea = DialogScrollArea;
+// @component ./DialogIcon.tsx
+Dialog.Icon = DialogIcon;
 
 const styles = StyleSheet.create({
   container: {

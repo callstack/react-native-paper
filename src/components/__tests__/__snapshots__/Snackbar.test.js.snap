@@ -226,11 +226,14 @@ exports[`renders snackbar with action button 1`] = `
                 },
                 Array [
                   Object {
-                    "letterSpacing": 1,
                     "marginHorizontal": 16,
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
+                  Object {
+                    "letterSpacing": 1,
+                  },
+                  false,
                   Object {
                     "marginHorizontal": 8,
                   },
@@ -239,10 +242,6 @@ exports[`renders snackbar with action button 1`] = `
                   },
                   Object {
                     "color": "#03dac4",
-                    "fontFamily": "System",
-                    "fontWeight": "500",
-                  },
-                  Object {
                     "fontFamily": "System",
                     "fontWeight": "500",
                   },

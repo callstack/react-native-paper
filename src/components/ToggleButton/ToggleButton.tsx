@@ -7,10 +7,12 @@ import {
 } from 'react-native';
 import { withTheme } from '../../core/theming';
 import color from 'color';
-import IconButton from '../IconButton';
+import IconButton from '../IconButton/IconButton';
 import { ToggleButtonGroupContext } from './ToggleButtonGroup';
-import { black, white } from '../../styles/colors';
+import { black, white } from '../../styles/themes/v2/colors';
 import type { IconSource } from '../Icon';
+import type { Theme } from '../../types';
+import { getToggleButtonColor } from './utils';
 
 type Props = {
   /**
@@ -49,7 +51,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 /**
@@ -103,18 +105,16 @@ const ToggleButton = ({
   return (
     <ToggleButtonGroupContext.Consumer>
       {(context: { value: string | null; onValueChange: Function } | null) => {
-        let backgroundColor;
-
         const checked: boolean | null =
           (context && context.value === value) || status === 'checked';
 
-        if (checked) {
-          backgroundColor = theme.dark
-            ? 'rgba(255, 255, 255, .12)'
-            : 'rgba(0, 0, 0, .08)';
-        } else {
-          backgroundColor = 'transparent';
-        }
+        const backgroundColor = getToggleButtonColor({ theme, checked });
+        const borderColor = theme.isV3
+          ? theme.colors.outline
+          : color(theme.dark ? white : black)
+              .alpha(0.29)
+              .rgb()
+              .string();
 
         return (
           <IconButton
@@ -138,10 +138,7 @@ const ToggleButton = ({
               {
                 backgroundColor,
                 borderRadius,
-                borderColor: color(theme.dark ? white : black)
-                  .alpha(0.29)
-                  .rgb()
-                  .string(),
+                borderColor,
               },
               style,
             ]}

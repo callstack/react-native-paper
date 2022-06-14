@@ -7,8 +7,6 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import color from 'color';
-import { white, black } from '../../styles/colors';
 import CardContent from './CardContent';
 import CardActions from './CardActions';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -17,6 +15,8 @@ import CardCover, { CardCover as _CardCover } from './CardCover';
 import CardTitle, { CardTitle as _CardTitle } from './CardTitle';
 import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
+import type { Theme } from '../../types';
+import { getCardColors } from './helpers';
 
 type OutlinedCardProps = {
   mode: 'outlined';
@@ -28,13 +28,20 @@ type ElevatedCardProps = {
   elevation?: number;
 };
 
+type ContainedCardProps = {
+  mode?: 'contained';
+  elevation?: never;
+};
+
 type HandlePressType = 'in' | 'out';
+
+type Mode = 'elevated' | 'outlined' | 'contained';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
-   * Resting elevation of the card which controls the drop shadow.
+   * Changes Card shadow and background on iOS and Android.
    */
-  elevation?: never | number;
+  elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
   /**
    * Function to execute on long press.
    */
@@ -46,9 +53,10 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Mode of the Card.
    * - `elevated` - Card with elevation.
+   * - `contained` - Card with without outline and elevation @supported Available in v5.x with theme version 3
    * - `outlined` - Card with an outline.
    */
-  mode?: 'elevated' | 'outlined';
+  mode?: Mode;
   /**
    * Content of the `Card`.
    */
@@ -57,7 +65,7 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * Pass down testID from card props to touchable
    */
@@ -72,8 +80,18 @@ type Props = React.ComponentProps<typeof Surface> & {
  * A card is a sheet of material that serves as an entry point to more detailed information.
  *
  * <div class="screenshots">
- *   <img class="medium" src="screenshots/card-1.png" />
- *   <img class="medium" src="screenshots/card-2.png" />
+ *   <figure>
+ *     <img src="screenshots/card-1.png" />
+ *     <figcaption>Elevated card</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/card-2.png" />
+ *     <figcaption>Outlined card</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/card-3.png" />
+ *     <figcaption>Contained card</figcaption>
+ *   </figure>
  * </div>
  *
  * ## Usage
@@ -112,7 +130,14 @@ const Card = ({
   testID,
   accessible,
   ...rest
-}: (OutlinedCardProps | ElevatedCardProps) & Props) => {
+}: (OutlinedCardProps | ElevatedCardProps | ContainedCardProps) & Props) => {
+  const isMode = React.useCallback(
+    (modeToCompare: Mode) => {
+      return cardMode === modeToCompare;
+    },
+    [cardMode]
+  );
+
   // Default animated value
   const { current: elevation } = React.useRef<Animated.Value>(
     new Animated.Value(cardElevation)
@@ -122,7 +147,7 @@ const Card = ({
   const { current: elevationDarkAdaptive } = React.useRef<Animated.Value>(
     new Animated.Value(cardElevation)
   );
-  const { animation, dark, mode, roundness } = theme;
+  const { animation, dark, mode, roundness, isV3 } = theme;
 
   const prevDarkRef = React.useRef<boolean>(dark);
   React.useEffect(() => {
@@ -157,15 +182,15 @@ const Card = ({
     const isPressTypeIn = pressType === 'in';
     if (dark && isAdaptiveMode) {
       Animated.timing(elevationDarkAdaptive, {
-        toValue: isPressTypeIn ? 8 : cardElevation,
+        toValue: isPressTypeIn ? (isV3 ? 2 : 8) : cardElevation,
         duration: animationDuration,
         useNativeDriver: false,
       }).start();
     } else {
       Animated.timing(elevation, {
-        toValue: isPressTypeIn ? 8 : cardElevation,
+        toValue: isPressTypeIn ? (isV3 ? 2 : 8) : cardElevation,
         duration: animationDuration,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }).start();
     }
   };
@@ -184,23 +209,48 @@ const Card = ({
       ? (child.type as any).displayName
       : null
   );
-  const borderColor = color(dark ? white : black)
-    .alpha(0.12)
-    .rgb()
-    .string();
   const computedElevation =
     dark && isAdaptiveMode ? elevationDarkAdaptive : elevation;
+
+  const { backgroundColor, borderColor } = getCardColors({
+    theme,
+    mode: cardMode,
+    isAdaptiveMode,
+    elevation,
+  });
 
   return (
     <Surface
       style={[
-        { borderRadius: roundness, elevation: computedElevation, borderColor },
-        cardMode === 'outlined' ? styles.outlined : {},
+        {
+          borderRadius: roundness,
+          backgroundColor: backgroundColor as unknown as string,
+        },
+        !isV3 && isMode('outlined')
+          ? styles.resetElevation
+          : {
+              elevation: computedElevation as unknown as number,
+            },
         style,
       ]}
       theme={theme}
+      {...(isV3 && {
+        elevation: isMode('elevated') ? computedElevation : 0,
+      })}
       {...rest}
     >
+      {isMode('outlined') && (
+        <View
+          pointerEvents="none"
+          style={[
+            {
+              borderRadius: roundness,
+              borderColor,
+            },
+            styles.outline,
+          ]}
+        />
+      )}
       <TouchableWithoutFeedback
         delayPressIn={0}
         disabled={!(onPress || onLongPress)}
@@ -241,9 +291,15 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 1,
   },
-  outlined: {
-    elevation: 0,
+  outline: {
     borderWidth: 1,
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    zIndex: 2,
+  },
+  resetElevation: {
+    elevation: 0,
   },
 });
 

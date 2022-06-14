@@ -1,9 +1,12 @@
 import React from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 
-import IconButton from '../../IconButton';
-import type { $Omit } from '../../../../src/types';
+import IconButton from '../../IconButton/IconButton';
+import type { $Omit, Theme } from '../../../types';
 import type { IconSource } from '../../Icon';
+import { useTheme } from '../../../core/theming';
+import { getConstants } from '../helpers';
+import { ICON_SIZE } from '../constants';
 
 export type Props = $Omit<
   React.ComponentProps<typeof IconButton>,
@@ -29,11 +32,8 @@ export type Props = $Omit<
   /**
    * @optional
    */
-  theme?: ReactNativePaper.Theme;
+  theme?: Theme;
 };
-
-export const ICON_SIZE = 24;
-const ICON_OFFSET = 12;
 
 type StyleContextType = {
   style: StyleProp<ViewStyle>;
@@ -55,6 +55,9 @@ const IconAdornment: React.FunctionComponent<
     side: 'left' | 'right';
   } & Omit<StyleContextType, 'style'>
 > = ({ icon, topPosition, side, isTextInputFocused, forceFocus }) => {
+  const { isV3 } = useTheme();
+  const { ICON_OFFSET } = getConstants(isV3);
+
   const style = {
     top: topPosition,
     [side]: ICON_OFFSET,
@@ -71,7 +74,7 @@ const IconAdornment: React.FunctionComponent<
  *
  * <div class="screenshots">
  *   <figure>
- *     <img class="medium" src="screenshots/textinput-flat.icon.png" />
+ *     <img class="small" src="screenshots/textinput-flat.icon.png" />
  *   </figure>
  * </div>
  *
@@ -113,6 +116,19 @@ const TextInputIcon = ({
     onPress?.();
   }, [forceTextInputFocus, forceFocus, isTextInputFocused, onPress]);
 
+  const theme = useTheme();
+
+  let iconColor = color;
+
+  if (theme.isV3) {
+    if (rest.disabled) {
+      iconColor = theme.colors.onSurface;
+    }
+    iconColor = theme.colors.onSurfaceVariant;
+  } else {
+    iconColor = theme.colors.text;
+  }
+
   return (
     <View style={[styles.container, style]}>
       <IconButton
@@ -120,7 +136,9 @@ const TextInputIcon = ({
         style={styles.iconButton}
         size={ICON_SIZE}
         onPress={onPressWithFocusControl}
-        color={typeof color === 'function' ? color(isTextInputFocused) : color}
+        iconColor={
+          typeof color === 'function' ? color(isTextInputFocused) : iconColor
+        }
         {...rest}
       />
     </View>

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import renderer from 'react-test-renderer';
 import Menu from '../Menu/Menu.tsx';
-import Button from '../Button.tsx';
+import Button from '../Button/Button.tsx';
 
 const styles = StyleSheet.create({
   contentStyle: {

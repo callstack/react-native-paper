@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import color from 'color';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
-import type { $RemoveChildren } from '../../types';
+import type { $RemoveChildren, Theme } from '../../types';
+import { getSelectionControlIOSColor } from '../Checkbox/utils';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -32,7 +32,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * testID to be used on tests.
    */
@@ -64,18 +64,6 @@ const RadioButtonIOS = ({
   testID,
   ...rest
 }: Props) => {
-  const checkedColor = disabled
-    ? theme.colors.disabled
-    : rest.color || theme.colors.accent;
-
-  let rippleColor: string;
-
-  if (disabled) {
-    rippleColor = color(theme.colors.text).alpha(0.16).rgb().string();
-  } else {
-    rippleColor = color(checkedColor).fade(0.32).rgb().string();
-  }
-
   return (
     <RadioButtonContext.Consumer>
       {(context?: RadioButtonContextType) => {
@@ -85,6 +73,12 @@ const RadioButtonIOS = ({
             status,
             value,
           }) === 'checked';
+
+        const { checkedColor, rippleColor } = getSelectionControlIOSColor({
+          theme,
+          disabled,
+          customColor: rest.color,
+        });
 
         return (
           <TouchableRipple
@@ -101,11 +95,6 @@ const RadioButtonIOS = ({
                       onValueChange: context?.onValueChange,
                     });
                   }
-            }
-            // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-            accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
-            accessibilityComponentType={
-              checked ? 'radiobutton_checked' : 'radiobutton_unchecked'
             }
             accessibilityRole="radio"
             accessibilityState={{ disabled, checked }}

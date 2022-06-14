@@ -16,6 +16,7 @@ import {
   findNodeHandle,
   NativeEventSubscription,
 } from 'react-native';
+import color from 'color';
 
 import { withTheme } from '../../core/theming';
 import type { $Omit } from '../../types';
@@ -24,6 +25,7 @@ import Surface from '../Surface';
 import MenuItem from './MenuItem';
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
 import { addEventListener } from '../../utils/addEventListener';
+import type { Theme } from '../../types';
 
 type Props = {
   /**
@@ -61,7 +63,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 type Layout = $Omit<$Omit<LayoutRectangle, 'x'>, 'y'>;
@@ -87,8 +89,8 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
  * Menus display a list of choices on temporary elevated surfaces. Their placement varies based on the element that opens them.
  *
  *  <div class="screenshots">
- *   <img class="medium" src="screenshots/menu-1.png" />
- *   <img class="medium" src="screenshots/menu-2.png" />
+ *   <img class="small" src="screenshots/menu-1.png" />
+ *   <img class="small" src="screenshots/menu-2.png" />
  * </div>
  *
  * ## Usage
@@ -529,6 +531,7 @@ class Menu extends React.Component<Props, State> {
       opacity: opacityAnimation,
       transform: scaleTransforms,
       borderRadius: theme.roundness,
+      ...(!theme.isV3 && { elevation: 8 }),
       ...(scrollableMenuHeight ? { height: scrollableMenuHeight } : {}),
     };
 
@@ -570,9 +573,16 @@ class Menu extends React.Component<Props, State> {
                     [
                       styles.shadowMenuContainer,
                       shadowMenuContainerStyle,
+                      theme.isV3 && {
+                        backgroundColor: color(theme.colors.surface)
+                          .mix(color(theme.colors.primary), 0.08)
+                          .rgb()
+                          .string(),
+                      },
                       contentStyle,
                     ] as StyleProp<ViewStyle>
                   }
+                  {...(theme.isV3 && { elevation: 2 })}
                 >
                   {(scrollableMenuHeight && (
                     <ScrollView>{children}</ScrollView>
@@ -594,7 +604,6 @@ const styles = StyleSheet.create({
   shadowMenuContainer: {
     opacity: 0,
     paddingVertical: 8,
-    elevation: 8,
   },
 });
 

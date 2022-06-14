@@ -8,13 +8,15 @@ import {
   TextInputProps,
   ViewStyle,
   TextStyle,
+  Animated,
 } from 'react-native';
 
 import color from 'color';
-import IconButton from './IconButton';
+import IconButton from './IconButton/IconButton';
 import Surface from './Surface';
 import { withTheme } from '../core/theming';
 import type { IconSource } from './Icon';
+import type { Theme } from '../types';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 
 type Props = React.ComponentPropsWithRef<typeof TextInput> & {
@@ -47,15 +49,19 @@ type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    */
   onIconPress?: () => void;
   /**
+   * @supported Available in v5.x with theme version 3
+   * Changes Searchbar shadow and background on iOS and Android.
+   */
+  elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
+  /**
    * Set style of the TextInput component inside the searchbar
    */
   inputStyle?: StyleProp<TextStyle>;
   style?: StyleProp<ViewStyle>;
-
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * Custom color for icon, default will be derived from theme
    */
@@ -75,7 +81,7 @@ type TextInputHandles = Pick<
  * Searchbar is a simple input box where users can type search queries.
  *
  * <div class="screenshots">
- *   <img class="medium" src="screenshots/searchbar.png" />
+ *   <img class="small" src="screenshots/searchbar.png" />
  * </div>
  *
  * ## Usage
@@ -112,6 +118,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
       onIconPress,
       placeholder,
       searchAccessibilityLabel = 'search',
+      elevation = 1,
       style,
       theme,
       value,
@@ -152,8 +159,8 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
       rest.onChangeText?.('');
     };
 
-    const { colors, roundness, dark, fonts } = theme;
-    const textColor = colors.text;
+    const { colors, roundness, dark, fonts, isV3 } = theme;
+    const textColor = isV3 ? theme.colors.onSurface : theme.colors.text;
     const font = fonts.regular;
     const iconColor =
       customIconColor ||
@@ -163,20 +170,19 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
     return (
       <Surface
         style={[
-          { borderRadius: roundness, elevation: 4 },
+          { borderRadius: roundness },
+          !isV3 && styles.elevation,
           styles.container,
           style,
         ]}
+        {...(theme.isV3 && { elevation })}
       >
         <IconButton
-          // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-          accessibilityTraits="button"
-          accessibilityComponentType="button"
           accessibilityRole="button"
           borderless
           rippleColor={rippleColor}
           onPress={onIconPress}
-          color={iconColor}
+          iconColor={iconColor}
           icon={
             icon ||
             (({ size, color }) => (
@@ -201,13 +207,13 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
             inputStyle,
           ]}
           placeholder={placeholder || ''}
-          placeholderTextColor={colors.placeholder}
-          selectionColor={colors.primary}
+          placeholderTextColor={
+            theme.isV3 ? theme.colors.onSurface : theme.colors?.placeholder
+          }
+          selectionColor={colors?.primary}
           underlineColorAndroid="transparent"
           returnKeyType="search"
           keyboardAppearance={dark ? 'dark' : 'light'}
-          // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-          accessibilityTraits="search"
           accessibilityRole="search"
           ref={root}
           value={value}
@@ -217,7 +223,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
           borderless
           disabled={!value}
           accessibilityLabel={clearAccessibilityLabel}
-          color={value ? iconColor : 'rgba(255, 255, 255, 0)'}
+          iconColor={value ? iconColor : 'rgba(255, 255, 255, 0)'}
           rippleColor={rippleColor}
           onPress={handleClearPress}
           icon={
@@ -231,9 +237,6 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
               />
             ))
           }
-          // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-          accessibilityTraits="button"
-          accessibilityComponentType="button"
           accessibilityRole="button"
         />
       </Surface>
@@ -253,6 +256,9 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     textAlign: I18nManager.isRTL ? 'right' : 'left',
     minWidth: 0,
+  },
+  elevation: {
+    elevation: 4,
   },
 });
 
