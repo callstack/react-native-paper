@@ -51,7 +51,7 @@ exports[`renders Checkbox with custom testID 1`] = `
             "backgroundColor": "transparent",
           },
           Object {
-            "color": "#03dac4",
+            "color": "rgba(103, 80, 164, 1)",
             "fontSize": 24,
           },
         ]
@@ -175,7 +175,7 @@ exports[`renders checked Checkbox with onPress 1`] = `
             "backgroundColor": "transparent",
           },
           Object {
-            "color": "#03dac4",
+            "color": "rgba(103, 80, 164, 1)",
             "fontSize": 24,
           },
         ]
@@ -237,7 +237,7 @@ exports[`renders indeterminate Checkbox 1`] = `
             "backgroundColor": "transparent",
           },
           Object {
-            "color": "#03dac4",
+            "color": "rgba(103, 80, 164, 1)",
             "fontSize": 24,
           },
         ]
@@ -423,7 +423,7 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
             "backgroundColor": "transparent",
           },
           Object {
-            "color": "#03dac4",
+            "color": "rgba(103, 80, 164, 1)",
             "fontSize": 24,
           },
         ]

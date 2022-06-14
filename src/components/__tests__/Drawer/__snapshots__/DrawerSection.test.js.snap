@@ -16,17 +16,24 @@ exports[`DrawerSection renders properly 1`] = `
     style={
       Array [
         Object {
-          "backgroundColor": "rgba(0, 0, 0, 0.12)",
+          "backgroundColor": "rgba(231, 224, 236, 1)",
           "height": 0.5,
         },
         undefined,
-        false,
-        false,
+        Object {
+          "marginLeft": 28,
+          "marginRight": 28,
+        },
+        Object {
+          "height": 1,
+        },
         Array [
           Object {
             "marginTop": 4,
           },
-          false,
+          Object {
+            "backgroundColor": "rgba(121, 116, 126, 1)",
+          },
         ],
       ]
     }

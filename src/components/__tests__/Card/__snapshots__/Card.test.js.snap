@@ -4,46 +4,74 @@ exports[`Card renders an outlined card 1`] = `
 <View
   style={
     Object {
-      "backgroundColor": "#ffffff",
-      "borderRadius": 4,
-      "elevation": 0,
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0,
+      "shadowRadius": 0,
     }
   }
 >
   <View
-    pointerEvents="none"
-    style={
-      Array [
-        Object {
-          "borderColor": "rgba(0, 0, 0, 0.12)",
-          "borderRadius": 4,
-        },
-        Object {
-          "borderWidth": 1,
-          "height": "100%",
-          "position": "absolute",
-          "width": "100%",
-          "zIndex": 2,
-        },
-      ]
-    }
-  />
-  <View
-    accessible={true}
-    focusable={false}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "flexGrow": 1,
-        "flexShrink": 1,
+        "shadowColor": "#000",
+        "shadowOffset": Object {
+          "height": 0,
+          "width": 0,
+        },
+        "shadowOpacity": 0,
+        "shadowRadius": 0,
       }
     }
-  />
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "rgba(255, 251, 254, 1)",
+          "borderRadius": 4,
+          "elevation": 1,
+        }
+      }
+    >
+      <View
+        pointerEvents="none"
+        style={
+          Array [
+            Object {
+              "borderColor": "rgba(121, 116, 126, 1)",
+              "borderRadius": 4,
+            },
+            Object {
+              "borderWidth": 1,
+              "height": "100%",
+              "position": "absolute",
+              "width": "100%",
+              "zIndex": 2,
+            },
+          ]
+        }
+      />
+      <View
+        accessible={true}
+        focusable={false}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flexGrow": 1,
+            "flexShrink": 1,
+          }
+        }
+      />
+    </View>
+  </View>
 </View>
 `;
