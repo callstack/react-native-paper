@@ -71,8 +71,8 @@ const TextInputOutlined = ({
 }: ChildTextInputProps) => {
   const adornmentConfig = getAdornmentConfig({ left, right });
 
-  const { colors, fonts, isV3, roundness } = theme;
-  const font = fonts.regular;
+  const { colors, isV3, roundness } = theme;
+  const font = !isV3 ? theme.fonts.regular : {};
   const hasActiveOutline = parentState.focused || error;
 
   const { INPUT_PADDING_HORIZONTAL, MIN_HEIGHT, ADORNMENT_OFFSET } =

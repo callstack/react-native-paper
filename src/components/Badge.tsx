@@ -110,7 +110,7 @@ const Badge = ({
           backgroundColor,
           color: textColor,
           fontSize: size * 0.5,
-          ...theme.fonts.regular,
+          ...(!theme.isV3 && theme.fonts.regular),
           lineHeight: size,
           height: size,
           minWidth: size,

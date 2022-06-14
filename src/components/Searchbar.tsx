@@ -159,9 +159,8 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
       rest.onChangeText?.('');
     };
 
-    const { colors, roundness, dark, fonts, isV3 } = theme;
+    const { colors, roundness, dark, isV3 } = theme;
     const textColor = isV3 ? theme.colors.onSurface : theme.colors.text;
-    const font = fonts.regular;
     const iconColor =
       customIconColor ||
       (dark ? textColor : color(textColor).alpha(0.54).rgb().string());
@@ -201,7 +200,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
             styles.input,
             {
               color: textColor,
-              ...font,
+              ...(!isV3 && theme.fonts.regular),
               ...Platform.select({ web: { outline: 'none' } }),
             },
             inputStyle,

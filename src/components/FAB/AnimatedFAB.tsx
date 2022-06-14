@@ -210,7 +210,7 @@ const AnimatedFAB = ({
   const { current: animFAB } = React.useRef<Animated.Value>(
     new Animated.Value(0)
   );
-  const { isV3, animation, fonts } = theme;
+  const { isV3, animation } = theme;
   const { scale } = animation;
 
   const [textWidth, setTextWidth] = React.useState<number>(0);
@@ -293,7 +293,7 @@ const AnimatedFAB = ({
 
   const textStyle = {
     color: foregroundColor,
-    ...(!isV3 && fonts.medium),
+    ...(isV3 ? theme.typescale.labelLarge : theme.fonts.medium),
   };
 
   const md2Elevation = disabled || !isIOS ? 0 : 6;

@@ -20,7 +20,6 @@ const StyledText = ({ alpha = 1, family, style, ...rest }: Props) => {
     .alpha(alpha)
     .rgb()
     .string();
-  const font = theme.fonts?.[family];
   const writingDirection = I18nManager.isRTL ? 'rtl' : 'ltr';
 
   return (
@@ -28,7 +27,11 @@ const StyledText = ({ alpha = 1, family, style, ...rest }: Props) => {
       {...rest}
       style={[
         styles.text,
-        { color: textColor, ...font, writingDirection },
+        {
+          color: textColor,
+          ...(!theme.isV3 && theme.fonts?.[family]),
+          writingDirection,
+        },
         style,
       ]}
     />

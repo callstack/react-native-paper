@@ -93,17 +93,17 @@ const Text: React.ForwardRefRenderFunction<{}, Props> = (
   if (theme.isV3 && variant) {
     const stylesByVariant = Object.keys(MD3TypescaleKey).reduce(
       (acc, key) => {
-        const { size, weight, lineHeight, tracking, font } =
+        const { fontSize, fontWeight, lineHeight, letterSpacing, fontFamily } =
           theme.typescale[key as keyof typeof MD3TypescaleKey];
 
         return {
           ...acc,
           [key]: {
-            ...(Platform.OS === 'android' && { fontFamily: font }),
-            fontSize: size,
-            fontWeight: weight,
-            lineHeight: lineHeight,
-            letterSpacing: tracking,
+            ...(Platform.OS === 'android' && { fontFamily }),
+            fontSize,
+            fontWeight,
+            lineHeight,
+            letterSpacing,
             color: theme.colors.onSurface,
           },
         };
@@ -134,7 +134,7 @@ const Text: React.ForwardRefRenderFunction<{}, Props> = (
         ref={root}
         style={[
           {
-            ...theme.fonts?.regular,
+            ...(!theme.isV3 && theme.fonts?.regular),
             color: theme.isV3 ? theme.colors?.onSurface : theme.colors.text,
           },
           styles.text,

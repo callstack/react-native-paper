@@ -178,7 +178,7 @@ const Button = ({
     },
     [mode]
   );
-  const { roundness, isV3, animation, fonts } = theme;
+  const { roundness, isV3, animation } = theme;
 
   const isElevationEntitled =
     !disabled && (isV3 ? isMode('elevated') : isMode('contained'));
@@ -246,7 +246,10 @@ const Button = ({
   const { color: customLabelColor, fontSize: customLabelSize } =
     StyleSheet.flatten(labelStyle) || {};
 
-  const textStyle = { color: textColor, ...(!isV3 && fonts.medium) };
+  const textStyle = {
+    color: textColor,
+    ...(isV3 ? theme.typescale.labelLarge : theme.fonts.medium),
+  };
   const iconStyle =
     StyleSheet.flatten(contentStyle)?.flexDirection === 'row-reverse'
       ? [
