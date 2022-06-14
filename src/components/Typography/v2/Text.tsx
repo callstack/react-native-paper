@@ -40,7 +40,7 @@ const Text: React.ForwardRefRenderFunction<{}, Props> = (
       ref={root}
       style={[
         {
-          ...theme.fonts?.regular,
+          ...(!theme.isV3 && theme.fonts?.regular),
           color: theme.isV3 ? theme.colors?.onSurface : theme.colors.text,
         },
         styles.text,

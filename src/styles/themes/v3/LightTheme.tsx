@@ -1,6 +1,5 @@
-import configureFonts from '../../fonts';
 import type { ThemeBase } from '../../../types';
-import { tokens } from './tokens';
+import { tokens, typescale } from './tokens';
 import color from 'color';
 
 const { palette, opacity } = tokens.md.ref;
@@ -58,7 +57,7 @@ const LightTheme: ThemeBase = {
       level5: 'rgb(233, 227, 241)', // palette.primary40, alpha 0.14
     },
   },
-  fonts: configureFonts(),
+  typescale,
   animation: {
     scale: 1.0,
   },

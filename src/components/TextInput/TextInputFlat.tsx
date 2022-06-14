@@ -72,8 +72,8 @@ const TextInputFlat = ({
   ...rest
 }: ChildTextInputProps) => {
   const isAndroid = Platform.OS === 'android';
-  const { colors, fonts, isV3, roundness } = theme;
-  const font = fonts.regular;
+  const { colors, isV3, roundness } = theme;
+  const font = !isV3 ? theme.fonts.regular : {};
   const hasActiveOutline = parentState.focused || error;
 
   const { LABEL_PADDING_TOP, FLAT_INPUT_OFFSET, MIN_HEIGHT } =

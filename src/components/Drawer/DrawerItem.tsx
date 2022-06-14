@@ -75,7 +75,7 @@ const DrawerItem = ({
   right,
   ...rest
 }: Props) => {
-  const { roundness, fonts, isV3 } = theme;
+  const { roundness, isV3 } = theme;
 
   const backgroundColor = active
     ? isV3
@@ -130,9 +130,7 @@ const DrawerItem = ({
                 {
                   color: contentColor,
                   marginLeft: labelMargin,
-                },
-                !isV3 && {
-                  ...fonts.medium,
+                  ...(isV3 ? theme.typescale.labelLarge : theme.fonts.medium),
                 },
               ]}
             >

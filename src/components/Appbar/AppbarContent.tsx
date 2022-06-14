@@ -15,7 +15,7 @@ import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
 
-import type { $RemoveChildren, Theme } from '../../types';
+import type { $RemoveChildren, MD3TypescaleKey, Theme } from '../../types';
 import { modeTextVariant } from './utils';
 
 type Props = $RemoveChildren<typeof View> & {
@@ -94,7 +94,7 @@ const AppbarContent = ({
   mode = 'small',
   ...rest
 }: Props) => {
-  const { fonts, isV3, colors } = theme;
+  const { isV3, colors } = theme;
 
   const titleTextColor = titleColor
     ? titleColor
@@ -111,6 +111,8 @@ const AppbarContent = ({
     'center-aligned': styles.v3DefaultContainer,
   };
 
+  const variant = modeTextVariant[mode] as MD3TypescaleKey;
+
   return (
     <TouchableWithoutFeedback onPress={onPress} disabled={!onPress}>
       <View
@@ -119,13 +121,16 @@ const AppbarContent = ({
         {...rest}
       >
         <Text
-          {...(isV3 && { variant: modeTextVariant[mode] })}
+          {...(isV3 && { variant })}
           ref={titleRef}
           style={[
             {
               color: titleTextColor,
-              ...(!isV3 &&
-                (Platform.OS === 'ios' ? fonts.regular : fonts.medium)),
+              ...(isV3
+                ? theme.typescale[variant]
+                : Platform.OS === 'ios'
+                ? theme.fonts.regular
+                : theme.fonts.medium),
             },
             !isV3 && styles.title,
             titleStyle,

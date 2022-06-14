@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import type { Font } from '../../../types';
 
 const ref = {
@@ -83,10 +84,16 @@ const ref = {
   },
 
   typeface: {
-    brandRegular: 'sans-serif',
+    brandRegular: Platform.select({
+      ios: 'System',
+      default: 'sans-serif',
+    }),
     weightRegular: '400' as Font['fontWeight'],
 
-    plainMedium: 'sans-serif-medium',
+    plainMedium: Platform.select({
+      ios: 'System',
+      default: 'sans-serif-medium',
+    }),
     weightMedium: '500' as Font['fontWeight'],
   },
 
@@ -99,108 +106,108 @@ const ref = {
 };
 
 const regularType = {
-  font: ref.typeface.brandRegular,
-  tracking: 0,
-  weight: ref.typeface.weightRegular,
+  fontFamily: ref.typeface.brandRegular,
+  letterSpacing: 0,
+  fontWeight: ref.typeface.weightRegular,
 };
 
 const mediumType = {
-  font: ref.typeface.plainMedium,
-  tracking: 0.15,
-  weight: ref.typeface.weightMedium,
+  fontFamily: ref.typeface.plainMedium,
+  letterSpacing: 0.15,
+  fontWeight: ref.typeface.weightMedium,
 };
 
 export const typescale = {
   displayLarge: {
     ...regularType,
     lineHeight: 64,
-    size: 57,
+    fontSize: 57,
   },
   displayMedium: {
     ...regularType,
     lineHeight: 52,
-    size: 45,
+    fontSize: 45,
   },
   displaySmall: {
     ...regularType,
     lineHeight: 44,
-    size: 36,
+    fontSize: 36,
   },
 
   headlineLarge: {
     ...regularType,
     lineHeight: 40,
-    size: 32,
+    fontSize: 32,
   },
   headlineMedium: {
     ...regularType,
     lineHeight: 36,
-    size: 28,
+    fontSize: 28,
   },
   headlineSmall: {
     ...regularType,
     lineHeight: 32,
-    size: 24,
+    fontSize: 24,
   },
 
   titleLarge: {
     ...regularType,
     lineHeight: 28,
-    size: 22,
+    fontSize: 22,
   },
   titleMedium: {
     ...mediumType,
     lineHeight: 24,
-    size: 16,
+    fontSize: 16,
   },
   titleSmall: {
     ...mediumType,
-    tracking: 0.1,
+    letterSpacing: 0.1,
     lineHeight: 20,
-    size: 14,
+    fontSize: 14,
   },
 
   labelLarge: {
     ...mediumType,
-    tracking: 0.1,
+    letterSpacing: 0.1,
     lineHeight: 20,
-    size: 14,
+    fontSize: 14,
   },
   labelMedium: {
     ...mediumType,
-    tracking: 0.5,
+    letterSpacing: 0.5,
     lineHeight: 16,
-    size: 12,
+    fontSize: 12,
   },
   labelSmall: {
     ...mediumType,
-    tracking: 0.5,
+    letterSpacing: 0.5,
     lineHeight: 16,
-    size: 11,
+    fontSize: 11,
   },
 
   bodyLarge: {
     ...mediumType,
-    weight: '400',
-    font: ref.typeface.brandRegular,
+    fontWeight: ref.typeface.weightRegular,
+    fontFamily: ref.typeface.brandRegular,
     lineHeight: 24,
-    size: 16,
+    fontSize: 16,
   },
   bodyMedium: {
     ...mediumType,
-    weight: '400',
-    font: ref.typeface.brandRegular,
-    tracking: 0.25,
+    fontWeight: ref.typeface.weightRegular,
+    fontFamily: ref.typeface.brandRegular,
+    letterSpacing: 0.25,
     lineHeight: 20,
-    size: 14,
+    fontSize: 14,
   },
   bodySmall: {
     ...mediumType,
-    weight: '400',
-    font: ref.typeface.brandRegular,
-    tracking: 0.4,
+    fontWeight: ref.typeface.weightRegular,
+    fontFamily: ref.typeface.brandRegular,
+    letterSpacing: 0.4,
     lineHeight: 16,
-    size: 12,
+    fontSize: 12,
   },
 };
 

@@ -81,22 +81,20 @@ export type ThemeBase = {
   dark: boolean;
   mode?: Mode;
   roundness: number;
-  fonts: Fonts;
   animation: {
     scale: number;
   };
 } & (
-  | { version: 2; colors: MD2Colors; isV3: false }
+  | { version: 2; colors: MD2Colors; isV3: false; fonts: Fonts }
   | {
       version: 3;
       colors: MD3Colors;
       isV3: true;
+      typescale: MD3Typescale;
     }
 );
 
-export type Theme = ThemeBase & {
-  typescale: MD3Typescale;
-};
+export type Theme = ThemeBase;
 
 // MD3 types
 export enum MD3TypescaleKey {
@@ -122,11 +120,11 @@ export enum MD3TypescaleKey {
 }
 
 export type MD3Type = {
-  font: string;
-  tracking: number;
-  weight: Font['fontWeight'];
+  fontFamily: string;
+  letterSpacing: number;
+  fontWeight: Font['fontWeight'];
   lineHeight: number;
-  size: number;
+  fontSize: number;
 };
 
 export type MD3Typescale = {

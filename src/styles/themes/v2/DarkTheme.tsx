@@ -1,6 +1,7 @@
 import color from 'color';
 import LightTheme from './LightTheme';
 import { black, white, pinkA100 } from './colors';
+import configureFonts from '../../fonts';
 import type { ThemeBase } from '../../../types';
 
 const DarkTheme: ThemeBase = {
@@ -23,6 +24,7 @@ const DarkTheme: ThemeBase = {
     backdrop: color(black).alpha(0.5).rgb().string(),
     notification: pinkA100,
   },
+  fonts: configureFonts(),
 };
 
 export default DarkTheme;
