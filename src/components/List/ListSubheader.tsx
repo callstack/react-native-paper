@@ -30,17 +30,23 @@ type Props = React.ComponentProps<typeof Text> & {
  * ```
  */
 const ListSubheader = ({ style, theme, ...rest }: Props) => {
-  const { fonts } = theme;
-  const font = fonts.medium;
   const textColor = theme.isV3
     ? theme.colors.onSurfaceVariant
     : color(theme.colors.text).alpha(0.54).rgb().string();
 
   return (
     <Text
+      variant="bodyMedium"
       numberOfLines={1}
       {...rest}
-      style={[styles.container, { color: textColor, ...font }, style]}
+      style={[
+        styles.container,
+        {
+          color: textColor,
+          ...(theme.isV3 ? theme.typescale.bodyMedium : theme.fonts.medium),
+        },
+        style,
+      ]}
     />
   );
 };

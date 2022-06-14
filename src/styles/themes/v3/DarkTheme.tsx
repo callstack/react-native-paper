@@ -1,6 +1,6 @@
 import LightTheme from './LightTheme';
 import type { ThemeBase } from '../../../types';
-import { tokens } from './tokens';
+import { tokens, typescale } from './tokens';
 import color from 'color';
 
 const { palette, opacity } = tokens.md.ref;
@@ -59,6 +59,7 @@ const DarkTheme: ThemeBase = {
       level5: 'rgb(52, 49, 63)', // palette.primary80, alpha 0.14
     },
   },
+  typescale,
 };
 
 export default DarkTheme;

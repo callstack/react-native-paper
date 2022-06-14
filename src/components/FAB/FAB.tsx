@@ -167,7 +167,7 @@ const FAB = ({
   const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
-  const { isV3, animation, fonts } = theme;
+  const { isV3, animation } = theme;
   const { scale } = animation;
 
   React.useEffect(() => {
@@ -206,7 +206,7 @@ const FAB = ({
   const shapeStyle = { borderRadius: fabStyle.borderRadius };
   const textStyle = {
     color: foregroundColor,
-    ...(!isV3 && fonts.medium),
+    ...(isV3 ? theme.typescale.labelLarge : theme.fonts.medium),
   };
 
   const containerStyles = [

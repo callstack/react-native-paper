@@ -60,7 +60,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * ```
  */
 const DrawerSection = ({ children, title, theme, style, ...rest }: Props) => {
-  const { fonts, isV3 } = theme;
+  const { isV3 } = theme;
   const titleColor = isV3
     ? theme.colors.onSurfaceVariant
     : color(theme.colors.text).alpha(0.54).rgb().string();
@@ -74,8 +74,11 @@ const DrawerSection = ({ children, title, theme, style, ...rest }: Props) => {
               variant="titleSmall"
               numberOfLines={1}
               style={[
-                { color: titleColor, marginLeft: titleMargin },
-                !isV3 && { ...fonts.medium },
+                {
+                  color: titleColor,
+                  marginLeft: titleMargin,
+                  ...(isV3 ? theme.typescale.titleSmall : theme.fonts.medium),
+                },
               ]}
             >
               {title}
