@@ -52,16 +52,18 @@
 <span class="token punctuation">}</span></code></pre>
 <p>If no prop is specified, this will apply the <a href="https://github.com/callstack/react-native-paper/blob/main/src/styles/DefaultTheme.tsx">default theme</a> to the components. You can also provide a <code>theme</code> prop with a theme object with same properties as the default theme:</p>
 <pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> DefaultTheme<span class="token punctuation">,</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> MD3LightTheme <span class="token keyword">as</span> DefaultTheme<span class="token punctuation">,</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./src/App'</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> theme <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token operator">...</span>DefaultTheme<span class="token punctuation">,</span>
   roundness<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+  version<span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
   colors<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     <span class="token operator">...</span>DefaultTheme<span class="token punctuation">.</span>colors<span class="token punctuation">,</span>
     primary<span class="token punctuation">:</span> <span class="token string">'#3498db'</span><span class="token punctuation">,</span>
-    accent<span class="token punctuation">:</span> <span class="token string">'#f1c40f'</span><span class="token punctuation">,</span>
+    secondary<span class="token punctuation">:</span> <span class="token string">'#f1c40f'</span><span class="token punctuation">,</span>
+    tertiary<span class="token punctuation">:</span> <span class="token string">'#a1b2c3'</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
@@ -75,30 +77,120 @@
 <p>You can change the theme prop dynamically and all the components will automatically update to reflect the new theme.</p>
 <p>A theme usually contains the following properties:</p>
 <ul>
-<li><code>dark</code> (<code>boolean</code>): whether this is a dark theme or light theme.</li>
-<li><code>mode</code> (<code>'adaptive' | 'exact'</code>): color mode for dark theme (See <a href="#dark-theme">Dark Theme</a>).</li>
-<li><code>roundness</code> (<code>number</code>): roundness of common elements, such as buttons.</li>
-<li><code>colors</code> (<code>object</code>): various colors used throughout different elements.<ul>
-<li><code>primary</code> - primary color for your app, usually your brand color.</li>
-<li><code>accent</code> - secondary color for your app which complements the primary color.</li>
-<li><code>background</code> - background color for pages, such as lists.</li>
-<li><code>surface</code> - background color for elements containing content, such as cards.</li>
-<li><code>text</code> - text color for content.</li>
-<li><code>disabled</code> - color for disabled elements.</li>
-<li><code>placeholder</code> - color for placeholder text, such as input placeholder.</li>
-<li><code>backdrop</code> - color for backdrops of various components such as modals.</li>
-<li><code>onSurface</code> - background color for snackbars</li>
-<li><code>notification</code> - background color for badges</li>
+<li><p><code>dark</code> (<code>boolean</code>): whether this is a dark theme or light theme.</p>
+</li>
+<li><p><code>version</code>: specify which design system components should follow in the app</p>
+<ul>
+<li>3 - new Material You (MD3)</li>
+<li>2 - previous Material Design (MD2)</li>
 </ul>
 </li>
-<li><code>fonts</code> (<code>object</code>): various fonts used throughout different elements.<ul>
-<li><code>regular</code></li>
-<li><code>medium</code></li>
-<li><code>light</code></li>
-<li><code>thin</code></li>
+<li><p><code>mode</code> (<code>'adaptive' | 'exact'</code>): color mode for dark theme (See <a href="#dark-theme">Dark Theme</a>).</p>
+</li>
+<li><p><code>roundness</code> (<code>number</code>): roundness of common elements, such as buttons.</p>
+</li>
+<li><p><code>colors</code> (<code>object</code>): various colors used throughout different elements.</p>
+<blockquote>
+<p>The primary key color is used to derive roles for key components across the UI, such as the FAB, prominent buttons, active states, as well as the tint of elevated surfaces.</p>
+</blockquote>
+<ul>
+<li><code>primary</code></li>
+<li><code>onPrimary</code></li>
+<li><code>primaryContainer</code></li>
+<li><code>onPrimaryContainer</code></li>
+</ul>
+<blockquote>
+<p>The secondary key color is used for less prominent components in the UI such as filter chips, while expanding the opportunity for color expression.</p>
+</blockquote>
+<ul>
+<li><code>secondary</code></li>
+<li><code>onSecondary</code></li>
+<li><code>secondaryContainer</code></li>
+<li><code>onSecondaryContainer</code></li>
+</ul>
+<blockquote>
+<p>The tertiary key color is used to derive the roles of contrasting accents that can be used to balance primary and secondary colors or bring heightened attention to an element. </p>
+</blockquote>
+<blockquote>
+<p>The tertiary color role is left for teams to use at their discretion and is intended to support broader color expression in products.</p>
+</blockquote>
+<ul>
+<li><code>tertiary</code></li>
+<li><code>onTertiary</code></li>
+<li><code>tertiaryContainer</code></li>
+<li><code>onTertiaryContainer</code></li>
+</ul>
+<blockquote>
+<p>The neutral key color is used to derive the roles of surface and background, as well as high emphasis text and icons.</p>
+</blockquote>
+<ul>
+<li><code>background</code></li>
+<li><code>onBackground</code></li>
+<li><code>surface</code></li>
+<li><code>onSurface</code></li>
+</ul>
+<blockquote>
+<p>The neutral variant key color is used to derive medium emphasis text and icons, surface variants, and component outlines.</p>
+</blockquote>
+<ul>
+<li><code>surfaceVariant</code></li>
+<li><code>onSurfaceVariant</code></li>
+<li><code>outline</code></li>
+</ul>
+<blockquote>
+<p>In addition to the accent and neutral key color, the color system includes a semantic color role for error</p>
+</blockquote>
+<ul>
+<li><code>error</code></li>
+<li><code>onError</code></li>
+<li><code>errorContainer</code></li>
+<li><code>onErrorContainer</code></li>
+</ul>
+<blockquote>
+<p>Surfaces at elevation levels 0-5 are tinted via color overlays based on the primary color, such as app bars or menus. The addition of a grade from 0-5 introduces tonal variation to the surface baseline.</p>
+</blockquote>
+<ul>
+<li><code>elevation</code> (<code>object</code>)<ul>
+<li><code>level0</code> - transparent</li>
+<li><code>level1</code> - 5% opacity</li>
+<li><code>level2</code> - 8% opacity</li>
+<li><code>level3</code> - 11% opacity</li>
+<li><code>level4</code> - 12% opacity</li>
+<li><code>level5</code> - 14% opacity</li>
 </ul>
 </li>
-<li><code>animation</code> (<code>object</code>)<ul>
+</ul>
+<blockquote>
+<p>Colors for disabled state</p>
+</blockquote>
+<ul>
+<li><code>surfaceDisabled</code></li>
+<li><code>onSurfaceDisabled</code></li>
+</ul>
+<blockquote>
+<p>These additional role mappings exist in a scheme and are mapped to components where needed.</p>
+</blockquote>
+<ul>
+<li><code>shadow</code></li>
+<li><code>inverseOnSurface</code></li>
+<li><code>inverseSurface</code></li>
+<li><code>inversePrimary</code></li>
+</ul>
+</li>
+<li><p><code>typescale</code> (<code>object</code>): various fonts styling properties under the text variant key used in component.</p>
+<ul>
+<li>[<code>variant</code> e.g. <code>labelMedium</code>] (<code>object</code>):<ul>
+<li><code>fontFamily</code></li>
+<li><code>letterSpacing</code></li>
+<li><code>fontWeight</code></li>
+<li><code>lineHeight</code></li>
+<li><code>fontSize</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>animation</code> (<code>object</code>)</p>
+<ul>
 <li><code>scale</code> - scale for all animations</li>
 </ul>
 </li>
@@ -115,7 +207,7 @@
         Extending the theme</h2>
 <p>Keeping your own properties in the theme is fully supported by our library:</p>
 <pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> DefaultTheme<span class="token punctuation">,</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> MD3LightTheme <span class="token keyword">as</span> DefaultTheme<span class="token punctuation">,</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./src/App'</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> theme <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -144,7 +236,7 @@
         TypeScript</h3>
 <p>By default it won't work well with TypeScript, but we can take advantage of <code>global augmentations</code> and specify the new properties that we added to the theme:</p>
 <pre><code class="language-ts"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> DefaultTheme<span class="token punctuation">,</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> MD3LightTheme <span class="token keyword">as</span> DefaultTheme<span class="token punctuation">,</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./src/App'</span><span class="token punctuation">;</span>
 
 <span class="token keyword">declare</span> global <span class="token punctuation">{</span>
@@ -234,7 +326,7 @@
 <span class="token keyword">import</span> <span class="token punctuation">{</span> Button <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">FancyButton</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Button</span></span> <span class="token attr-name">theme</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> fonts<span class="token punctuation">:</span> <span class="token punctuation">{</span> medium<span class="token punctuation">:</span> <span class="token string">'Open Sans'</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">}</span></span> <span class="token spread"><span class="token punctuation">{</span><span class="token punctuation">...</span><span class="token attr-value">props</span><span class="token punctuation">}</span></span> <span class="token punctuation">/&gt;</span></span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token operator">&lt;</span>Button theme<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> typescale<span class="token punctuation">:</span> <span class="token punctuation">{</span> labelLarge<span class="token punctuation">:</span> <span class="token punctuation">{</span>letterSpacing<span class="token punctuation">:</span> <span class="token number">1</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token punctuation">{</span><span class="token operator">...</span>props<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
 <p>Now you can use your <code>FancyButton</code> component everywhere instead of using <code>Button</code> from Paper.</p>
 <h2 id="dark-theme">
